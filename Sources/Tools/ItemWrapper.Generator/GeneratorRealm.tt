@@ -1,0 +1,108 @@
+﻿<#@ template language="C#" inherits="Transformation" #>
+namespace <#=this.Store.Namespace#> {
+	using System;
+	using System.Collections.Generic;
+	using System.ComponentModel;
+	using System.Diagnostics;
+	using <#=this.StoreNameSpace#>;
+
+	partial class <#=this.Store.Name#> : StoreSnapshot, INotifyPropertyChanged {
+		public const string PersistenceNamespace = "<#=this.Store.PersistenceNamespace ?? string.Empty#>";
+		public const string PersistencePrefix = "<#=this.Store.PersistencePrefix ?? string.Empty#>";
+
+		public event PropertyChangedEventHandler PropertyChanged;
+
+<#if(this.UseDispatcher) {#>
+		public System.Windows.Threading.Dispatcher Dispatcher { get; set; }
+
+<#}#>
+<#foreach(Table table in this.Store) {#>
+		public <#=table.Name#>Set <#=table.Name#>Set { get; private set; }
+<#}#>
+
+		public bool UpdateInProgress { get; private set; }
+
+		public <#=this.Store.Name#>() : base() {
+			// Create all sets
+			this.CreateSets();
+
+			// Create foreign keys
+<#foreach(Table table in this.Store) {#>
+			<#=table.Name#>Data.CreateForeignKeys(this);
+<#}#>
+
+			this.FreezeShape();
+			this.Init();
+		}
+<#if(this.RealmType == RealmType.Multiverse) {#>
+
+		public <#=this.Store.Name#>(<#=this.Store.Name#> store) : base(store) {
+			// Create all sets
+			this.CreateSets();
+
+			// Register existing data
+<#foreach(Table table in this.Store) {#>
+			this.<#=table.Name#>Set.Register();
+<#}#>
+
+			this.Init();
+		}
+<#}#>
+
+		private void CreateSets() {
+<#foreach(Table table in this.Store) {#>
+			this.<#=table.Name#>Set = new <#=table.Name#>Set(this);
+<#}#>
+		}
+
+		private void Init() {
+			this.VersionChanged += new EventHandler<VersionChangeEventArgs>(this.StoreVersionChanged);
+			this.LatestVersionChanged += new EventHandler(this.StoreLatestVersionChanged);
+			this.RolledBack += new EventHandler<RolledBackEventArgs>(this.StoreRolledBack);
+		}
+
+		private void NotifyPropertyChanged(string name) {
+			PropertyChangedEventHandler handler = this.PropertyChanged;
+			if(handler != null) {
+<#if(this.UseDispatcher) {#>
+				System.Windows.Threading.Dispatcher dispatcher = this.Dispatcher;
+				if(dispatcher != null && dispatcher.Thread != System.Threading.Thread.CurrentThread) {
+					dispatcher.BeginInvoke(new Action<string>(this.NotifyPropertyChanged), name);
+					return;
+				}
+<#}#>
+				handler(this, new PropertyChangedEventArgs(name));
+			}
+		}
+
+		private void StoreVersionChanged(object sender, VersionChangeEventArgs e) {
+			try {
+				this.UpdateInProgress = true;
+				int oldVersion = e.OldVersion;
+				int newVersion = e.NewVersion;
+<#foreach(Table table in this.Store) {#>
+				List<<#=table.Name#>> deleted<#=table.Name#> = this.<#=table.Name#>Set.UpdateSet(oldVersion, newVersion);
+<#}#>
+
+<#foreach(Table table in this.Store) {#>
+				this.<#=table.Name#>Set.NotifyVersionChanged(oldVersion, newVersion, deleted<#=table.Name#>);
+<#}#>
+
+				this.NotifyPropertyChanged("Version");
+			} finally {
+				this.UpdateInProgress = false;
+			}
+		}
+
+		private void StoreLatestVersionChanged(object sender, EventArgs e) {
+			this.NotifyPropertyChanged("LatestAvailableVersion");
+		}
+
+		private void StoreRolledBack(object sender, RolledBackEventArgs e) {
+			int version = e.Version;
+<#foreach(Table table in this.Store) {#>
+			this.<#=table.Name#>Set.NotifyRolledBack(version);
+<#}#>
+		}
+	}
+}

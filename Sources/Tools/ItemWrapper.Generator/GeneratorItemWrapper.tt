@@ -1,0 +1,154 @@
+﻿<#@ template language="C#" inherits="Transformation" #>
+<#@ import namespace="System.Collections.Generic" #>
+	// Class wrapper for a record.
+<#
+	string itemClassModifier = string.Empty;
+	string itemCtorModifier = "public";
+	string itemCtorParamList = ", RowId " + this.Table.Name + "RowId";
+	string itemCtorBaseCall = string.Empty;
+	string inheritFrom = "INotifyPropertyChanged";
+	bool generateNotifyPropertyChanged = true;
+	switch(this.Table.ItemModifier) {
+	case ItemModifier.Abstract:
+		itemClassModifier = "abstract ";
+		itemCtorModifier = "protected";
+		break;
+	}
+	bool isSubclass = this.Table.IsSubclass();
+	if(isSubclass) {
+		foreach(Table parent in this.Table.Ancestors(false)) {
+			itemCtorParamList += ", RowId " + parent.Name + "RowId";
+			itemCtorBaseCall += ", " + parent.Name + "RowId";
+		}
+		itemCtorBaseCall = " : base(store" + itemCtorBaseCall + ")";
+		inheritFrom = this.Table.BaseName();
+		generateNotifyPropertyChanged = false;
+	}
+	if(this.Table.ItemBaseClass != null) {
+		inheritFrom = this.Table.ItemBaseClass;
+		generateNotifyPropertyChanged = false;
+	}
+#>
+	<#=itemClassModifier#>partial class <#=this.Table.Name#> : <#=inheritFrom#> {
+
+		// RowId of the wrapped record
+		internal RowId <#=this.Table.Name#>RowId { get; private set; }
+<#if(!isSubclass) {#>
+		// Store this wrapper belongs to
+		public <#=this.Store.Name#> <#=this.Store.Name#> { get; private set; }
+<#}#>
+
+		// Constructor
+		<#=itemCtorModifier#> <#=this.Table.Name#>(<#=this.Store.Name#> store<#=itemCtorParamList#>)<#=itemCtorBaseCall#> {
+			Debug.Assert(!<#=this.Table.Name#>RowId.IsEmpty);
+<#if(!isSubclass) {#>
+			this.<#=this.Store.Name#> = store;
+<#}#>
+			this.<#=this.Table.Name#>RowId = <#=this.Table.Name#>RowId;
+<#if(this.RealmType == RealmType.Universe) {#>
+			// Link back to record. Assuming that a transaction is started
+			this.Table.SetField(this.<#=this.Table.Name#>RowId, <#=this.Table.Name#>Data.<#=this.Table.Name#>Field.Field, this);
+<#}#>
+			this.Initialize<#=this.Table.Name#>();
+		}
+
+		partial void Initialize<#=this.Table.Name#>();
+
+		// Gets table storing this item.
+		private TableSnapshot<<#=this.Table.Name#>Data> Table { get { return this.<#=this.Store.Name#>.<#=this.Table.Name#>Set.Table; } }
+
+<#if(!isSubclass) {#>
+		// Deletes object
+		public virtual void Delete() {
+			this.Table.Delete(this.<#=this.Table.Name#>RowId);
+		}
+
+		// Checks if the item is deleted
+		public bool IsDeleted() {
+			return this.Table.IsDeleted(this.<#=this.Table.Name#>RowId);
+		}
+<#}#>
+
+		//Properties of <#=this.Table.Name#>
+
+<#
+foreach(Column column in this.Table.Columns) {
+	string access = column.AccessModifierName() + (column.PropertyOverrides ? " override" : string.Empty);
+	Key key = this.Table.ForeignKey(column);
+	if(key != null && !this.Table.IsPrimary(column)) {
+		Table parent = key.Parent();
+		Key primaryKey = parent.PrimaryKey();
+		string parentId = (primaryKey.KeyType == KeyType.Auto) ? parent.Name + "RowId" : primaryKey[0].Name;
+		string findSuffix = (primaryKey.KeyType == KeyType.Auto || !parent.IsSubclass()) ? string.Empty : "By" + parentId;
+		string returnType = parent.Name;
+		string cast = "";
+		if(!string.IsNullOrEmpty(key.PropertyType)) {
+			returnType = key.PropertyType;
+			cast = "(" + returnType + ")";
+		}
+#>
+		// Gets <#=column.ReadOnly ? "" : "or sets "#>the value reffered by the foreign key on field <#=column.Name#>
+		<#=access#> <#=returnType#> <#=column.PropertyNamePrefix#><#=key.RoleName()#> {
+			get { return <#=cast#>this.<#=this.Store.Name#>.<#=parent.Name#>Set.Find<#=findSuffix#>(this.Table.GetField(this.<#=this.Table.Name#>RowId, <#=this.Table.Name#>Data.<#=column.Name#>Field.Field)); }
+<#		if(!column.ReadOnly) {#>
+			set { this.Table.SetField(this.<#=this.Table.Name#>RowId, <#=this.Table.Name#>Data.<#=column.Name#>Field.Field, value.<#=parentId#>); }
+<#		}#>
+		}
+<#
+	} else {
+#>
+		// Gets <#=column.ReadOnly ? "" : "or sets "#>value of the <#=column.Name#> field.
+		<#=access#> <#=column.Type#> <#=column.PropertyNamePrefix#><#=column.Name#> {
+			get { return this.Table.GetField(this.<#=this.Table.Name#>RowId, <#=this.Table.Name#>Data.<#=column.Name#>Field.Field); }
+<#		if(!column.ReadOnly) {#>
+			set { this.Table.SetField(this.<#=this.Table.Name#>RowId, <#=this.Table.Name#>Data.<#=column.Name#>Field.Field, value); }
+<#		}#>
+		}
+<#
+	}
+#>
+
+<#}#>
+<#if(generateNotifyPropertyChanged) {#>
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		protected void NotifyPropertyChanged(string name) {
+			PropertyChangedEventHandler handler = this.PropertyChanged;
+			if(handler != null) {
+<#	if(this.UseDispatcher) {#>
+				System.Windows.Threading.Dispatcher dispatcher = this.<#=this.Store.Name#>.Dispatcher;
+				if(dispatcher != null && dispatcher.Thread != System.Threading.Thread.CurrentThread) {
+					dispatcher.Invoke(new Action<string>(this.NotifyPropertyChanged), name);
+					return;
+				}
+<#	}#>
+				handler(this, new PropertyChangedEventArgs(name));
+			}
+		}
+
+		protected bool HasListener { get { return this.PropertyChanged != null; } }
+<#}#>
+
+		internal void NotifyChanged(TableChange<<#=this.Table.Name#>Data> change) {
+			if(this.HasListener) {
+				<#=this.Table.Name#>Data oldData, newData;
+				change.GetOldData(out oldData);
+				change.GetNewData(out newData);
+<#
+foreach(Column column in this.Table.Columns) {
+	Key key = this.Table.ForeignKey(column);
+	string propertyName = column.Name;
+	if(key != null && !this.Table.IsPrimary(column)) {
+		propertyName = key.RoleName();
+	}
+#>
+				if(<#=this.Table.Name#>Data.<#=column.Name#>Field.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("<#=propertyName#>");
+				}
+<#}#>
+			}
+			this.On<#=this.Table.Name#>Changed();
+		}
+
+		partial void On<#=this.Table.Name#>Changed();
+	}

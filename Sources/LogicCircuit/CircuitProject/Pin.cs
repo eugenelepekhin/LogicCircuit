@@ -1,0 +1,127 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Xml;
+using LogicCircuit.DataPersistent;
+using System.Collections.Specialized;
+using System.Diagnostics;
+
+namespace LogicCircuit {
+	public partial class Pin {
+		public LogicalCircuit LogicalCircuit { get { return (LogicalCircuit)this.Circuit; } }
+		
+		public override bool IsSmallSymbol { get { return true; } }
+
+		public string PinNotation {
+			get {
+				switch(this.PinType) {
+				case LogicCircuit.PinType.Input: return Resources.TitlePinInput(this.Name);
+				case LogicCircuit.PinType.Output: return Resources.TitlePinOutput(this.Name);
+				default:
+					Tracer.Fail();
+					return string.Empty;
+				}
+			}
+		}
+
+		partial void OnPinChanged() {
+			Tracer.Assert(!this.LogicalCircuit.IsDeleted());
+			this.CircuitProject.PinSet.RegisterForRefresh(this.LogicalCircuit);
+			this.ResetPins();
+			this.NotifyPropertyChanged("PinNotation");
+		}
+
+		public override void Delete() {
+			this.OnPinChanged();
+			base.Delete();
+		}
+
+		public override void CopyTo(CircuitProject project) {
+			project.PinSet.Copy(this);
+		}
+
+		public void Rename(string name) {
+			if(PinData.NameField.Field.Compare(this.Name, name) != 0) {
+				this.Name = this.CircuitProject.PinSet.UniqueName(name, this.LogicalCircuit);
+			}
+		}
+	}
+
+	public partial class PinSet : NamedItemSet {
+		private HashSet<LogicalCircuit> toUpdate = new HashSet<LogicalCircuit>();
+
+		public void RegisterForRefresh(LogicalCircuit circuit) {
+			this.toUpdate.Add(circuit);
+		}
+
+		partial void NotifyPinSetChanged(TableChange<PinData> change) {
+			Debug.Assert(change.Action != SnapTableAction.Update || change.GetOldField(PinData.CircuitIdField.Field) == change.GetNewField(PinData.CircuitIdField.Field),
+				"Update should never reparent the pin"
+			);
+			LogicalCircuit circuit = this.CircuitProject.LogicalCircuitSet.FindByLogicalCircuitId(
+				(change.Action == SnapTableAction.Delete) ? change.GetOldField(PinData.CircuitIdField.Field) : change.GetNewField(PinData.CircuitIdField.Field)
+			);
+			if(circuit != null) {
+				this.toUpdate.Add(circuit);
+			}
+		}
+
+		partial void EndNotifyPinSetChanged() {
+			foreach(LogicalCircuit circuit in this.toUpdate) {
+				Debug.Assert(!circuit.IsDeleted());
+				circuit.ResetPins();
+			}
+			this.toUpdate.Clear();
+		}
+
+		public void Load(XmlNodeList list) {
+			PinData.Load(this.Table, list, rowId => this.Register(rowId));
+		}
+
+		private Pin Register(RowId rowId) {
+			CircuitData data = new CircuitData() {
+				CircuitId = this.Table.GetField(rowId, PinData.PinIdField.Field)
+			};
+			Pin pin = this.Create(rowId, this.CircuitProject.CircuitTable.Insert(ref data));
+			this.CreateDevicePin(pin);
+			return pin;
+		}
+
+		private void CreateDevicePin(Pin pin) {
+			PinType pinType = pin.PinType;
+			if(pinType != PinType.None) {
+				DevicePin devicePin = this.CircuitProject.DevicePinSet.Create(
+					pin, (pinType == PinType.Input) ? PinType.Output : PinType.Input, pin.BitWidth
+				);
+				devicePin.Inverted = pin.Inverted;
+			}
+		}
+
+		protected override bool Exists(string name) {
+			throw new NotSupportedException();
+		}
+
+		protected override bool Exists(string name, Circuit group) {
+			return this.FindByCircuitAndName(group, name) != null;
+		}
+
+		public Pin Create(LogicalCircuit logicalCircuit, PinType pinType, int bitWidth) {
+			Pin pin = this.CreateItem(Guid.NewGuid(), logicalCircuit, bitWidth, pinType,
+				BasePin.DefaultSide(pinType),
+				PinData.InvertedField.Field.DefaultValue,
+				this.UniqueName(BasePin.DefaultName(pinType), logicalCircuit),
+				PinData.NoteField.Field.DefaultValue,
+				PinData.NotationField.Field.DefaultValue
+			);
+			this.CreateDevicePin(pin);
+			return pin;
+		}
+
+		public Pin Copy(Pin other) {
+			PinData data;
+			other.CircuitProject.PinSet.Table.GetData(other.PinRowId, out data);
+			return this.Register(this.Table.Insert(ref data));
+		}
+	}
+}

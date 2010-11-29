@@ -1,0 +1,9 @@
+ToDo list:
+Move all string from main window to resources
+Continue on editing.
+implement mouse gesters
+check for tab stops in left column in run time
+check transparancy under or, xor and and shaped gates
+
+!Switching diagrams is slow! investigate. Looks like binding is slow.
+Changing position of pin does not update glith on the circuit list

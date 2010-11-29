@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ErrorEditOnWrongThread" xml:space="preserve">
+    <value>Attempt to edit on the thread that not started the transaction.</value>
+  </data>
+  <data name="ErrorEditOutsideTransaction" xml:space="preserve">
+    <value>Attempt to edit outside of transaction.</value>
+  </data>
+  <data name="ErrorEnumeratorPosition" xml:space="preserve">
+    <value>Enumeration has either not started or has already finished.</value>
+  </data>
+  <data name="ErrorEnumeratorVersion" xml:space="preserve">
+    <value>Version of store was changed; enumeration operation may not execute.</value>
+  </data>
+  <data name="ErrorForeignKeyExists" xml:space="preserve">
+    <value>Table "{0}" column "{1}" already defined foreign key. Column can define only one foreign key.</value>
+    <comment>{string tableName, string columnName}</comment>
+  </data>
+  <data name="ErrorForeignKeyNameExists" xml:space="preserve">
+    <value>Table "{0}" already contains foreign key "{1}".</value>
+    <comment>{string tableName, string constraintName}</comment>
+  </data>
+  <data name="ErrorHashExpandFailed" xml:space="preserve">
+    <value>Can not expand hash table it is too big.</value>
+  </data>
+  <data name="ErrorHashInsertFailed" xml:space="preserve">
+    <value>Hash table insert failed.</value>
+  </data>
+  <data name="ErrorHashPrimeFailed" xml:space="preserve">
+    <value>Cannot get next prime number.</value>
+  </data>
+  <data name="ErrorInvalidUpgrade" xml:space="preserve">
+    <value>The store is in active transaction and can not be set to any version.</value>
+  </data>
+  <data name="ErrorNoIndex" xml:space="preserve">
+    <value>Field "{0}.{1}" does not have any unique indexes defined on it.</value>
+    <comment>{string tableName, string fieldName}</comment>
+  </data>
+  <data name="ErrorNotUniqueIndex" xml:space="preserve">
+    <value>Index must be unique in order to perform FindUnique operation.</value>
+  </data>
+  <data name="ErrorPrimaryKeyMissing" xml:space="preserve">
+    <value>Table "{0}" does not contain primary key and therefore foreign key cannot be created.</value>
+    <comment>{string tableName}</comment>
+  </data>
+  <data name="ErrorPrimaryKeyRedefinition" xml:space="preserve">
+    <value>Table "{0}" already has primary key.</value>
+    <comment>{string tableName}</comment>
+  </data>
+  <data name="ErrorSnapTable" xml:space="preserve">
+    <value>Attempt to add SnapTable to SnapStore that it does not belong to.</value>
+  </data>
+  <data name="ErrorStoreIsEmpty" xml:space="preserve">
+    <value>Attempt to freeze store that does not contain any table.</value>
+  </data>
+  <data name="ErrorStoreIsFrozen" xml:space="preserve">
+    <value>The store must be not frozen to perform this operation.</value>
+  </data>
+  <data name="ErrorStoreNotFrozen" xml:space="preserve">
+    <value>The store must be frozen to perform this operation.</value>
+  </data>
+  <data name="ErrorTableTooBig" xml:space="preserve">
+    <value>Table "{0}" is to big to add more rows.</value>
+    <comment>{string tableName}</comment>
+  </data>
+  <data name="ErrorTooManyTransactions" xml:space="preserve">
+    <value>Transaction cannot be started as it is too many transactions was started already.</value>
+  </data>
+  <data name="ErrorValueListTooBig" xml:space="preserve">
+    <value>Cannot add any more values in the value list because it is too big already.</value>
+  </data>
+  <data name="ErrorWrongNewData" xml:space="preserve">
+    <value>Can not get data of just deleted row.</value>
+  </data>
+  <data name="ErrorWrongOldRow" xml:space="preserve">
+    <value>Can not get data of just inserted row.</value>
+  </data>
+  <data name="ForeignKeyViolation" xml:space="preserve">
+    <value>Foreign key "{0}" violation.</value>
+    <comment>{string constraintName}</comment>
+  </data>
+  <data name="UniqueConstraintViolation" xml:space="preserve">
+    <value>Unique constraint "{0}" violation.</value>
+    <comment>{string constraintName}</comment>
+  </data>
+  <data name="ErrorCompositeFields" xml:space="preserve">
+    <value>Composite index should contain different fields.</value>
+  </data>
+  <data name="ErrorNoIndex2" xml:space="preserve">
+    <value>Fields "{0}.{1}" and {0}.{2} do not have any unique indexes defined on them.</value>
+    <comment>{string tableName, string field1Name, string field2Name}</comment>
+  </data>
+  <data name="ErrorUndeleteRow" xml:space="preserve">
+    <value>The row is not deleted and so can not be undeleted.</value>
+  </data>
+  <data name="ErrorRollbackEnumeration" xml:space="preserve">
+    <value>Attempt to enumerate rolled back actions on transaction that was not rolled back.</value>
+  </data>
+</root>

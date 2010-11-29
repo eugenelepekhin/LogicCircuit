@@ -1,0 +1,7 @@
+# add pattern for files to ignore by add command here
+glob:*/obj/*
+glob:*/bin/*
+glob:*/TestResults/*
+glob:*.exe
+glob:*.suo
+glob:*.csproj.user

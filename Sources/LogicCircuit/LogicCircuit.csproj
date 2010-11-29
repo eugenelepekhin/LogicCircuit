@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{45ED9DDA-67B2-4AA9-BB4C-65A9684060AE}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LogicCircuit</RootNamespace>
+    <AssemblyName>LogicCircuit</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Properties\LogicCircuit.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="CircuitEditor\Plotter.cs" />
+    <Compile Include="CircuitException.cs" />
+    <Compile Include="CircuitProject\BasePin.cs" />
+    <Compile Include="CircuitProject\Circuit.cs" />
+    <Compile Include="CircuitProject\CircuitButton.cs" />
+    <Compile Include="CircuitProject\CircuitGlyph.cs" />
+    <Compile Include="CircuitProject\CircuitProject.cs" />
+    <Compile Include="CircuitProject\CircuitRotation.cs" />
+    <Compile Include="CircuitProject\CircuitSymbol.cs" />
+    <Compile Include="CircuitProject\Connection.cs" />
+    <Compile Include="CircuitProject\Constant.cs" />
+    <Compile Include="CircuitProject\DevicePin.cs" />
+    <Compile Include="CircuitProject\Gate.cs" />
+    <Compile Include="CircuitProject\GateType.cs" />
+    <Compile Include="CircuitProject\Jam.cs" />
+    <Compile Include="CircuitProject\LogicalCircuit.cs" />
+    <Compile Include="CircuitProject\Memory.cs" />
+    <Compile Include="CircuitProject\NamedItemSet.cs" />
+    <Compile Include="CircuitProject\Pin.cs" />
+    <Compile Include="CircuitProject\PinSide.cs" />
+    <Compile Include="CircuitProject\PinType.cs" />
+    <Compile Include="CircuitProject\Project.cs" />
+    <Compile Include="CircuitProject\Splitter.cs" />
+    <Compile Include="CircuitProject\Symbol.cs" />
+    <Compile Include="CircuitProject\Wire.cs" />
+    <Compile Include="CircuitProject\Wrappers\Circuit.cs" />
+    <Compile Include="CircuitProject\Wrappers\CircuitButton.cs" />
+    <Compile Include="CircuitProject\Wrappers\CircuitProject.cs" />
+    <Compile Include="CircuitProject\Wrappers\CircuitSymbol.cs" />
+    <Compile Include="CircuitProject\Wrappers\Constant.cs" />
+    <Compile Include="CircuitProject\Wrappers\DevicePin.cs" />
+    <Compile Include="CircuitProject\Wrappers\Gate.cs" />
+    <Compile Include="CircuitProject\Wrappers\LogicalCircuit.cs" />
+    <Compile Include="CircuitProject\Wrappers\Memory.cs" />
+    <Compile Include="CircuitProject\Wrappers\Pin.cs" />
+    <Compile Include="CircuitProject\Wrappers\Project.cs" />
+    <Compile Include="CircuitProject\Wrappers\Splitter.cs" />
+    <Compile Include="CircuitProject\Wrappers\Wire.cs" />
+    <Compile Include="DataPersistent\BTree.cs" />
+    <Compile Include="DataPersistent\CompositeField.cs" />
+    <Compile Include="DataPersistent\ForeignKey.cs" />
+    <Compile Include="DataPersistent\IField.cs" />
+    <Compile Include="DataPersistent\Index.cs" />
+    <Compile Include="DataPersistent\IntArray.cs" />
+    <Compile Include="DataPersistent\ISnapTable.cs" />
+    <Compile Include="DataPersistent\ISnapTableChange.cs" />
+    <Compile Include="DataPersistent\ITableChange.cs" />
+    <Compile Include="DataPersistent\ITableSnapshot.cs" />
+    <Compile Include="DataPersistent\LockFreeSync.cs" />
+    <Compile Include="DataPersistent\Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="DataPersistent\Realm\SetToListAdapter.cs" />
+    <Compile Include="DataPersistent\RolledBackEventArgs.cs" />
+    <Compile Include="DataPersistent\RowId.cs" />
+    <Compile Include="DataPersistent\RowIdField.cs" />
+    <Compile Include="DataPersistent\RowIdPseudoField.cs" />
+    <Compile Include="DataPersistent\SnapStore.cs" />
+    <Compile Include="DataPersistent\SnapStoreException.cs" />
+    <Compile Include="DataPersistent\SnapTable.cs" />
+    <Compile Include="DataPersistent\SnapTableAction.cs" />
+    <Compile Include="DataPersistent\SnapTableChange.cs" />
+    <Compile Include="DataPersistent\StoreSnapshot.cs" />
+    <Compile Include="DataPersistent\TableChange.cs" />
+    <Compile Include="DataPersistent\TableSnapshot.cs" />
+    <Compile Include="DataPersistent\Unique.cs" />
+    <Compile Include="DataPersistent\ValueList.cs" />
+    <Compile Include="DataPersistent\VersionChangeEventArgs.cs" />
+    <Compile Include="GridPoint.cs" />
+    <Compile Include="Schema\Schema.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Schema.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\Settings.cs" />
+    <Compile Include="Settings\SettingsBoolCache.cs" />
+    <Compile Include="Settings\SettingsDoubleCache.cs" />
+    <Compile Include="Settings\SettingsEnumCache.cs" />
+    <Compile Include="Settings\SettingsIntegerCache.cs" />
+    <Compile Include="Settings\SettingsStringCache.cs" />
+    <Compile Include="Settings\SettingsWindowLocationCache.cs" />
+    <Compile Include="Tracer.cs" />
+    <Compile Include="TracerMessage.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TracerMessage.resx</DependentUpon>
+    </Compile>
+    <Compile Include="XmlHelper.cs" />
+    <Page Include="MainFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainFrame.xaml.cs">
+      <DependentUpon>MainFrame.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="DataPersistent\Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>LogicCircuit</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Schema\Schema.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Schema.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>LogicCircuit</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TracerMessage.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TracerMessage.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Properties\error.png" />
+    <Resource Include="Properties\info.png" />
+    <Resource Include="Properties\LogicCircuit.ico" />
+    <Resource Include="Properties\LogicCircuit.png" />
+    <Resource Include="Properties\question.png" />
+    <Resource Include="Properties\warning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Schema\ConvertSettings.xslt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Schema\ConvertFrom.1.0.0.2.xslt" />
+    <Resource Include="Schema\ConvertFrom.1.0.0.3.xslt" />
+    <Resource Include="Schema\Empty.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema\CircuitProject.xml" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>$(SolutionDir)Tools\ResourceWrapper.Generator.exe ProjectPath=$(ProjectPath)
+$(SolutionDir)Tools\ItemWrapper.Generator.exe /RealmType:Universe /UseDispatcher:false /Schema:$(ProjectDir)Schema\CircuitProject.xml  /Target:$(ProjectDir)CircuitProject\Wrappers
+</PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
