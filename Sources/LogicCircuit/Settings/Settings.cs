@@ -79,7 +79,7 @@ namespace LogicCircuit {
 	public class UserSettings : Settings {
 		private SettingsIntegerCache maxRecentFileCount;
 		private SettingsBoolCache loadLastFileOnStartup;
-		//private SettingsEnumCache<GateShape> gateShape;
+		private SettingsEnumCache<GateShape> gateShape;
 
 		private Dictionary<string, DateTime> recentFile = new Dictionary<string, DateTime>(StringComparer.OrdinalIgnoreCase);
 		private FileSystemWatcher fileWatcher;
@@ -100,7 +100,7 @@ namespace LogicCircuit {
 			this.fileWatcher.EnableRaisingEvents = true;
 			this.maxRecentFileCount = new SettingsIntegerCache(this, "Settings.MaxRecentFileCount", 1, 32, 4);
 			this.loadLastFileOnStartup = new SettingsBoolCache(this, "Settings.LoadLastFileOnStartup", true);
-			//this.gateShape = new SettingsEnumCache<GateShape>(this, "Settings.GateShape", GateShape.Rectangular);
+			this.gateShape = new SettingsEnumCache<GateShape>(this, "Settings.GateShape", GateShape.Rectangular);
 			this.TruncateRecentFile();
 		}
 
@@ -167,10 +167,10 @@ namespace LogicCircuit {
 			set { this.loadLastFileOnStartup.Value = value; }
 		}
 
-		//public GateShape GateShape {
-		//    get { return this.gateShape.Value; }
-		//    set { this.gateShape.Value = value; }
-		//}
+		public GateShape GateShape {
+			get { return this.gateShape.Value; }
+			set { this.gateShape.Value = value; }
+		}
 
 		/// <summary>
 		/// Adds the file name to the list of recently opened files.
