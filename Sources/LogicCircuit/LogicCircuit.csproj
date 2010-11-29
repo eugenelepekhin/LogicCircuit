@@ -124,6 +124,7 @@
     <Compile Include="DataPersistent\Unique.cs" />
     <Compile Include="DataPersistent\ValueList.cs" />
     <Compile Include="DataPersistent\VersionChangeEventArgs.cs" />
+    <Compile Include="GateShape.cs" />
     <Compile Include="GridPoint.cs" />
     <Compile Include="Schema\Schema.Designer.cs">
       <AutoGen>True</AutoGen>
