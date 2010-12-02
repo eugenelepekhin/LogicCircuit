@@ -24,6 +24,10 @@ namespace LogicCircuit {
 			return (pinType == PinType.Input) ? Resources.PinInName : Resources.PinOutName;
 		}
 
+		/// <summary>
+		/// Gets or set precalculated position of jam of this pin on the circuit symbol.
+		/// This is an optimisation to get jams evaluated faster.
+		/// </summary>
 		public GridPoint GridPoint { get; set; }
 		
 		public abstract PinSide PinSide { get; set; }
