@@ -134,7 +134,7 @@ namespace LogicCircuit {
 			} finally {
 				if(this.IsEditor) {
 					if(success) {
-						if(commit) {
+						if(commit && this.Tables.Any(t => t.WasChanged(this.Version, this.Version))) {
 							this.Commit();
 						} else {
 							this.Omit();
