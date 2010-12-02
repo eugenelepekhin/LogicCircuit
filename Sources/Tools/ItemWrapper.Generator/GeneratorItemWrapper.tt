@@ -4,7 +4,7 @@
 <#
 	string itemClassModifier = string.Empty;
 	string itemCtorModifier = "public";
-	string itemCtorParamList = ", RowId " + this.Table.Name + "RowId";
+	string itemCtorParamList = ", RowId " + "rowId" + this.Table.Name;
 	string itemCtorBaseCall = string.Empty;
 	string inheritFrom = "INotifyPropertyChanged";
 	bool generateNotifyPropertyChanged = true;
@@ -17,8 +17,8 @@
 	bool isSubclass = this.Table.IsSubclass();
 	if(isSubclass) {
 		foreach(Table parent in this.Table.Ancestors(false)) {
-			itemCtorParamList += ", RowId " + parent.Name + "RowId";
-			itemCtorBaseCall += ", " + parent.Name + "RowId";
+			itemCtorParamList += ", RowId " + "rowId" + parent.Name;
+			itemCtorBaseCall += ", " + "rowId" + parent.Name;
 		}
 		itemCtorBaseCall = " : base(store" + itemCtorBaseCall + ")";
 		inheritFrom = this.Table.BaseName();
@@ -40,11 +40,11 @@
 
 		// Constructor
 		<#=itemCtorModifier#> <#=this.Table.Name#>(<#=this.Store.Name#> store<#=itemCtorParamList#>)<#=itemCtorBaseCall#> {
-			Debug.Assert(!<#=this.Table.Name#>RowId.IsEmpty);
+			Debug.Assert(!rowId<#=this.Table.Name#>.IsEmpty);
 <#if(!isSubclass) {#>
 			this.<#=this.Store.Name#> = store;
 <#}#>
-			this.<#=this.Table.Name#>RowId = <#=this.Table.Name#>RowId;
+			this.<#=this.Table.Name#>RowId = rowId<#=this.Table.Name#>;
 <#if(this.RealmType == RealmType.Universe) {#>
 			// Link back to record. Assuming that a transaction is started
 			this.Table.SetField(this.<#=this.Table.Name#>RowId, <#=this.Table.Name#>Data.<#=this.Table.Name#>Field.Field, this);

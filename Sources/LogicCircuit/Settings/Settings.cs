@@ -12,8 +12,11 @@ namespace LogicCircuit {
 		public const string NamespaceUri = "http://LogicCircuit.net/Settings/Data.xsd";
 		private const string OldNamespaceUri = "http://LogicCircuit.net/SettingsData.xsd";
 
-		public static UserSettings User = new UserSettings();
-		public static Settings Session = new Settings();
+		private static readonly UserSettings user = new UserSettings();
+		private static readonly Settings session = new Settings();
+
+		public static UserSettings User { get { return Settings.user; } }
+		public static Settings Session { get { return Settings.session; } }
 
 		private Dictionary<string, string> property = new Dictionary<string, string>();
 
@@ -47,8 +50,8 @@ namespace LogicCircuit {
 			}
 		}
 
-		protected virtual void Load(XmlDocument xml, XmlNamespaceManager nsmgr) {
-			foreach(XmlElement node in xml.SelectNodes(string.Format(CultureInfo.InvariantCulture, "/{0}:settings/{0}:property", Settings.Prefix), nsmgr)) {
+		protected virtual void Load(XmlDocument xml, XmlNamespaceManager namespaceManager) {
+			foreach(XmlElement node in xml.SelectNodes(string.Format(CultureInfo.InvariantCulture, "/{0}:settings/{0}:property", Settings.Prefix), namespaceManager)) {
 				string key = node.GetAttribute("name");
 				if(!string.IsNullOrEmpty(key)) {
 					this[key] = node.InnerText.Trim();
@@ -66,17 +69,17 @@ namespace LogicCircuit {
 		protected virtual void Save(XmlDocument xml) {
 			XmlElement root = xml.DocumentElement;
 			foreach(KeyValuePair<string, string> kv in this.property.OrderBy(kv => kv.Key)) {
-				XmlElement property = xml.CreateElement(Settings.Prefix, "property", Settings.NamespaceUri);
+				XmlElement element = xml.CreateElement(Settings.Prefix, "property", Settings.NamespaceUri);
 				XmlAttribute name = xml.CreateAttribute("name");
 				name.Value = kv.Key;
-				property.Attributes.Append(name);
-				property.AppendChild(xml.CreateTextNode(kv.Value));
-				root.AppendChild(property);
+				element.Attributes.Append(name);
+				element.AppendChild(xml.CreateTextNode(kv.Value));
+				root.AppendChild(element);
 			}
 		}
 	}
 
-	public class UserSettings : Settings {
+	public sealed class UserSettings : Settings, IDisposable {
 		private SettingsIntegerCache maxRecentFileCount;
 		private SettingsBoolCache loadLastFileOnStartup;
 		private SettingsEnumCache<GateShape> gateShape;
@@ -85,10 +88,11 @@ namespace LogicCircuit {
 		private FileSystemWatcher fileWatcher;
 		public bool IsFirstRun { get; private set; }
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands")]
 		public UserSettings() {
 			this.fileWatcher = new FileSystemWatcher();
 			this.fileWatcher.EnableRaisingEvents = false;
-			string file = this.FileName();
+			string file = UserSettings.FileName();
 			if(!File.Exists(file)) {
 				this.IsFirstRun = true;
 				this.Save();
@@ -110,26 +114,27 @@ namespace LogicCircuit {
 			}
 		}
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands")]
 		public void Save() {
 			bool enabled = this.fileWatcher.EnableRaisingEvents;
 			try {
 				this.fileWatcher.EnableRaisingEvents = false;
-				this.Save(this.FileName());
+				this.Save(UserSettings.FileName());
 			} finally {
 				this.fileWatcher.EnableRaisingEvents = enabled;
 			}
 		}
 
-		private string FileName() {
+		private static string FileName() {
 			return Path.Combine(
 				Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
 				@"LogicCircuit\Settings2.xml"
 			);
 		}
 
-		protected override void Load(XmlDocument xml, XmlNamespaceManager nsmgr) {
-			base.Load(xml, nsmgr);
-			foreach(XmlElement node in xml.SelectNodes(string.Format(CultureInfo.InvariantCulture, "/{0}:settings/{0}:file", Settings.Prefix), nsmgr)) {
+		protected override void Load(XmlDocument xml, XmlNamespaceManager namespaceManager) {
+			base.Load(xml, namespaceManager);
+			foreach(XmlElement node in xml.SelectNodes(string.Format(CultureInfo.InvariantCulture, "/{0}:settings/{0}:file", Settings.Prefix), namespaceManager)) {
 				string file = node.GetAttribute("name");
 				if(!string.IsNullOrEmpty(file)) {
 					string text = node.GetAttribute("date");
@@ -212,9 +217,10 @@ namespace LogicCircuit {
 		}
 
 		private void Merge() {
-			UserSettings other = new UserSettings();
-			this.recentFile.Union(other.recentFile);
-			this.TruncateRecentFile();
+			using(UserSettings other = new UserSettings()) {
+				this.recentFile.Union(other.recentFile);
+				this.TruncateRecentFile();
+			}
 		}
 
 		private void TruncateRecentFile() {
@@ -223,6 +229,13 @@ namespace LogicCircuit {
 				for(int i = this.MaxRecentFileCount; i < list.Count; i++) {
 					this.recentFile.Remove(list[i].Key);
 				}
+			}
+		}
+
+		public void Dispose() {
+			if(this.fileWatcher != null) {
+				this.fileWatcher.Dispose();
+				this.fileWatcher = null;
 			}
 		}
 	}

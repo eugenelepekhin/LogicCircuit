@@ -97,13 +97,13 @@ foreach(Column column in this.Table.Columns) {
 		case "string":
 			break;
 		case "int":
-			parse = "int.Parse(text)";
+			parse = "int.Parse(text, CultureInfo.InvariantCulture)";
 			break;
 		case "float":
-			parse = "float.Parse(text)";
+			parse = "float.Parse(text, CultureInfo.InvariantCulture)";
 			break;
 		case "double":
-			parse = "double.Parse(text)";
+			parse = "double.Parse(text, CultureInfo.InvariantCulture)";
 			break;
 		case "bool":
 			parse = "bool.Parse(text)";
@@ -112,7 +112,7 @@ foreach(Column column in this.Table.Columns) {
 			parse = "new Guid(text)";
 			break;
 		default:
-			parse = "(" + column.Type + ")Enum.Parse(typeof(" + column.Type + "), text)";
+			parse = "(" + column.Type + ")Enum.Parse(typeof(" + column.Type + "), text, true)";
 			break;
 		}
 #>

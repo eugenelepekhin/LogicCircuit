@@ -109,7 +109,7 @@ namespace LogicCircuit {
 			return old;
 		}
 
-		public byte[] ROMValue() {
+		public byte[] RomValue() {
 			Tracer.Assert(!this.Writable);
 			byte[] d = Convert.FromBase64String(this.Data);
 			if(d.Length != this.BytesPerCell * this.TotalCells) {
@@ -118,7 +118,7 @@ namespace LogicCircuit {
 			return d;
 		}
 
-		public void SetROMValue(byte[] value) {
+		public void SetRomValue(byte[] value) {
 			Tracer.Assert(!this.Writable);
 			Tracer.Assert(value != null && value.Length == this.BytesPerCell * this.TotalCells);
 			this.Data = Convert.ToBase64String(value, Base64FormattingOptions.InsertLineBreaks);

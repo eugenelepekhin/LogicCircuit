@@ -25,6 +25,7 @@ namespace LogicCircuit {
 		SqlError
 	}
 
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable")]
 	public class CircuitException : Exception {
 		private Cause cause;
 		public Cause Cause { get { return this.cause; } }
@@ -54,6 +55,7 @@ namespace LogicCircuit {
 	//-------------------------------------------------------------------------
 
 	//[Serializable]
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors")]
 	internal class AssertException : CircuitException {
 		public AssertException(string message) : base(Cause.AssertionFailed, message) {}
 		public AssertException() : base(Cause.AssertionFailed) {}

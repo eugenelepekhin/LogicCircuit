@@ -281,9 +281,9 @@ namespace LogicCircuit {
 		internal RowId DevicePinRowId { get; private set; }
 
 		// Constructor
-		public DevicePin(CircuitProject store, RowId DevicePinRowId, RowId CircuitRowId) : base(store, CircuitRowId) {
-			Debug.Assert(!DevicePinRowId.IsEmpty);
-			this.DevicePinRowId = DevicePinRowId;
+		public DevicePin(CircuitProject store, RowId rowIdDevicePin, RowId rowIdCircuit) : base(store, rowIdCircuit) {
+			Debug.Assert(!rowIdDevicePin.IsEmpty);
+			this.DevicePinRowId = rowIdDevicePin;
 			// Link back to record. Assuming that a transaction is started
 			this.Table.SetField(this.DevicePinRowId, DevicePinData.DevicePinField.Field, this);
 			this.InitializeDevicePin();
@@ -416,11 +416,11 @@ namespace LogicCircuit {
 
 		partial void InitializeDevicePinSet();
 
-		internal void Register() {
-			foreach(RowId rowId in this.Table.Rows) {
-				this.FindOrCreate(rowId);
-			}
-		}
+		//internal void Register() {
+		//	foreach(RowId rowId in this.Table.Rows) {
+		//		this.FindOrCreate(rowId);
+		//	}
+		//}
 
 
 		// gets items wrapper by RowId
@@ -449,6 +449,7 @@ namespace LogicCircuit {
 			return item;
 		}
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		internal DevicePin FindOrCreate(RowId rowId) {
 			Debug.Assert(!rowId.IsEmpty && !this.Table.IsDeleted(rowId), "Bad RowId");
 			DevicePin item;
@@ -501,23 +502,23 @@ namespace LogicCircuit {
 		// Search helpers
 
 		// Finds DevicePin by PinId
-		public DevicePin FindByPinId(Guid PinId) {
-			return this.Find(this.Table.Find(DevicePinData.PinIdField.Field, PinId));
+		public DevicePin FindByPinId(Guid pinId) {
+			return this.Find(this.Table.Find(DevicePinData.PinIdField.Field, pinId));
 		}
 
 		// Finds DevicePin by Circuit and Name
-		public DevicePin FindByCircuitAndName(Circuit Circuit, string Name) {
+		public DevicePin FindByCircuitAndName(Circuit circuit, string name) {
 			return this.Find(
 				this.Table.Find(
 					DevicePinData.CircuitIdField.Field, DevicePinData.NameField.Field,
-					Circuit.CircuitId, Name
+					circuit.CircuitId, name
 				)
 			);
 		}
 
 		// Selects DevicePin by Circuit
-		public IEnumerable<DevicePin> SelectByCircuit(Circuit Circuit) {
-			return this.Select(this.Table.Select(DevicePinData.CircuitIdField.Field, Circuit.CircuitId));
+		public IEnumerable<DevicePin> SelectByCircuit(Circuit circuit) {
+			return this.Select(this.Table.Select(DevicePinData.CircuitIdField.Field, circuit.CircuitId));
 		}
 
 		public IEnumerator<DevicePin> GetEnumerator() {
@@ -621,29 +622,6 @@ namespace LogicCircuit {
 					}
 					change.Dispose();
 				}
-			}
-		}
-
-		private class Enumerator : IEnumerator<DevicePin> {
-			private DevicePinSet set;
-			private IEnumerator<RowId> enumerator;
-			public Enumerator(DevicePinSet set, IEnumerator<RowId> enumerator) {
-				this.set = set;
-				this.enumerator = enumerator;
-			}
-
-			public bool MoveNext() {
-				return this.enumerator.MoveNext();
-			}
-
-			public DevicePin Current { get { return this.set.Find(this.enumerator.Current); } }
-			object System.Collections.IEnumerator.Current { get { return this.Current; } }
-
-			public void Dispose() {
-			}
-
-			public void Reset() {
-				throw new NotSupportedException();
 			}
 		}
 	}

@@ -71,7 +71,7 @@ namespace LogicCircuit {
 			throw new NotSupportedException();
 		}
 
-		public IEnumerable<LogicalCircuit> SelectByCateroy(string category) {
+		public IEnumerable<LogicalCircuit> SelectByCategory(string category) {
 			return this.Select(this.Table.Select(LogicalCircuitData.CategoryField.Field, category));
 		}
 

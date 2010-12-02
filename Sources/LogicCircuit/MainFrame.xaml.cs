@@ -25,5 +25,21 @@ namespace LogicCircuit {
 		public MainFrame() {
 			this.InitializeComponent();
 		}
+
+		public void NotifyPropertyChanged(PropertyChangedEventHandler handler, object sender, string propertyName) {
+			if(handler != null) {
+				if(this.Dispatcher.Thread != Thread.CurrentThread) {
+					this.Dispatcher.BeginInvoke(new Action<PropertyChangedEventHandler, object, string>(this.NotifyPropertyChanged),
+						DispatcherPriority.Normal, handler, sender, propertyName
+					);
+				} else {
+					handler(sender, new PropertyChangedEventArgs(propertyName));
+				}
+			}
+		}
+
+		private void NotifyPropertyChanged(string propertyName) {
+			this.NotifyPropertyChanged(this.PropertyChanged, this, propertyName);
+		}
 	}
 }

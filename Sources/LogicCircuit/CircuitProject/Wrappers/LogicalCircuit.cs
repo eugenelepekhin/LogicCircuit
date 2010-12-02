@@ -308,9 +308,9 @@ namespace LogicCircuit {
 		internal RowId LogicalCircuitRowId { get; private set; }
 
 		// Constructor
-		public LogicalCircuit(CircuitProject store, RowId LogicalCircuitRowId, RowId CircuitRowId) : base(store, CircuitRowId) {
-			Debug.Assert(!LogicalCircuitRowId.IsEmpty);
-			this.LogicalCircuitRowId = LogicalCircuitRowId;
+		public LogicalCircuit(CircuitProject store, RowId rowIdLogicalCircuit, RowId rowIdCircuit) : base(store, rowIdCircuit) {
+			Debug.Assert(!rowIdLogicalCircuit.IsEmpty);
+			this.LogicalCircuitRowId = rowIdLogicalCircuit;
 			// Link back to record. Assuming that a transaction is started
 			this.Table.SetField(this.LogicalCircuitRowId, LogicalCircuitData.LogicalCircuitField.Field, this);
 			this.InitializeLogicalCircuit();
@@ -407,11 +407,11 @@ namespace LogicCircuit {
 
 		partial void InitializeLogicalCircuitSet();
 
-		internal void Register() {
-			foreach(RowId rowId in this.Table.Rows) {
-				this.FindOrCreate(rowId);
-			}
-		}
+		//internal void Register() {
+		//	foreach(RowId rowId in this.Table.Rows) {
+		//		this.FindOrCreate(rowId);
+		//	}
+		//}
 
 
 		// gets items wrapper by RowId
@@ -440,6 +440,7 @@ namespace LogicCircuit {
 			return item;
 		}
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		internal LogicalCircuit FindOrCreate(RowId rowId) {
 			Debug.Assert(!rowId.IsEmpty && !this.Table.IsDeleted(rowId), "Bad RowId");
 			LogicalCircuit item;
@@ -484,13 +485,13 @@ namespace LogicCircuit {
 		// Search helpers
 
 		// Finds LogicalCircuit by LogicalCircuitId
-		public LogicalCircuit FindByLogicalCircuitId(Guid LogicalCircuitId) {
-			return this.Find(this.Table.Find(LogicalCircuitData.LogicalCircuitIdField.Field, LogicalCircuitId));
+		public LogicalCircuit FindByLogicalCircuitId(Guid logicalCircuitId) {
+			return this.Find(this.Table.Find(LogicalCircuitData.LogicalCircuitIdField.Field, logicalCircuitId));
 		}
 
 		// Finds LogicalCircuit by Name
-		public LogicalCircuit FindByName(string Name) {
-			return this.Find(this.Table.Find(LogicalCircuitData.NameField.Field, Name));
+		public LogicalCircuit FindByName(string name) {
+			return this.Find(this.Table.Find(LogicalCircuitData.NameField.Field, name));
 		}
 
 		public IEnumerator<LogicalCircuit> GetEnumerator() {
@@ -594,29 +595,6 @@ namespace LogicCircuit {
 					}
 					change.Dispose();
 				}
-			}
-		}
-
-		private class Enumerator : IEnumerator<LogicalCircuit> {
-			private LogicalCircuitSet set;
-			private IEnumerator<RowId> enumerator;
-			public Enumerator(LogicalCircuitSet set, IEnumerator<RowId> enumerator) {
-				this.set = set;
-				this.enumerator = enumerator;
-			}
-
-			public bool MoveNext() {
-				return this.enumerator.MoveNext();
-			}
-
-			public LogicalCircuit Current { get { return this.set.Find(this.enumerator.Current); } }
-			object System.Collections.IEnumerator.Current { get { return this.Current; } }
-
-			public void Dispose() {
-			}
-
-			public void Reset() {
-				throw new NotSupportedException();
 			}
 		}
 	}

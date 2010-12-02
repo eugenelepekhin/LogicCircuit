@@ -11,19 +11,19 @@ namespace LogicCircuit {
 			this.Y = y;
 		}
 
-		public static bool operator ==(GridPoint p1, GridPoint p2) {
-			return p1.X == p2.X && p1.Y == p2.Y;
+		public static bool operator ==(GridPoint point1, GridPoint point2) {
+			return point1.X == point2.X && point1.Y == point2.Y;
 		}
 
-		public static bool operator !=(GridPoint p1, GridPoint p2) {
-			return p1.X != p2.X || p1.Y != p2.Y;
+		public static bool operator !=(GridPoint point1, GridPoint point2) {
+			return point1.X != point2.X || point1.Y != point2.Y;
 		}
 
-		public override bool Equals(object o) {
-			if((o == null) || !(o is GridPoint)) {
+		public override bool Equals(object obj) {
+			if((obj == null) || !(obj is GridPoint)) {
 				return false;
 			}
-			GridPoint point = (GridPoint)o;
+			GridPoint point = (GridPoint)obj;
 			return this == point;
 		}
 
@@ -31,9 +31,11 @@ namespace LogicCircuit {
 			return this.X ^ this.Y;
 		}
 
-		public override string ToString() {
-			return string.Format("({0}, {1})", this.X, this.Y);
-		}
+		#if DEBUG
+			public override string ToString() {
+				return string.Format(System.Globalization.CultureInfo.InvariantCulture, "({0}, {1})", this.X, this.Y);
+			}
+		#endif
 
 		public GridPoint Offset(int x, int y) {
 			return new GridPoint(this.X + x, this.Y + y);

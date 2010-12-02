@@ -174,7 +174,7 @@ namespace LogicCircuit {
 				data.AddressBitWidth = this.DefaultValue;
 			}
 			void IFieldSerializer.SetTextValue(ref MemoryData data, string text) {
-				data.AddressBitWidth = int.Parse(text);
+				data.AddressBitWidth = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
@@ -209,7 +209,7 @@ namespace LogicCircuit {
 				data.DataBitWidth = this.DefaultValue;
 			}
 			void IFieldSerializer.SetTextValue(ref MemoryData data, string text) {
-				data.DataBitWidth = int.Parse(text);
+				data.DataBitWidth = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
@@ -352,9 +352,9 @@ namespace LogicCircuit {
 		internal RowId MemoryRowId { get; private set; }
 
 		// Constructor
-		public Memory(CircuitProject store, RowId MemoryRowId, RowId CircuitRowId) : base(store, CircuitRowId) {
-			Debug.Assert(!MemoryRowId.IsEmpty);
-			this.MemoryRowId = MemoryRowId;
+		public Memory(CircuitProject store, RowId rowIdMemory, RowId rowIdCircuit) : base(store, rowIdCircuit) {
+			Debug.Assert(!rowIdMemory.IsEmpty);
+			this.MemoryRowId = rowIdMemory;
 			// Link back to record. Assuming that a transaction is started
 			this.Table.SetField(this.MemoryRowId, MemoryData.MemoryField.Field, this);
 			this.InitializeMemory();
@@ -460,11 +460,11 @@ namespace LogicCircuit {
 
 		partial void InitializeMemorySet();
 
-		internal void Register() {
-			foreach(RowId rowId in this.Table.Rows) {
-				this.FindOrCreate(rowId);
-			}
-		}
+		//internal void Register() {
+		//	foreach(RowId rowId in this.Table.Rows) {
+		//		this.FindOrCreate(rowId);
+		//	}
+		//}
 
 
 		// gets items wrapper by RowId
@@ -493,6 +493,7 @@ namespace LogicCircuit {
 			return item;
 		}
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		internal Memory FindOrCreate(RowId rowId) {
 			Debug.Assert(!rowId.IsEmpty && !this.Table.IsDeleted(rowId), "Bad RowId");
 			Memory item;
@@ -539,8 +540,8 @@ namespace LogicCircuit {
 		// Search helpers
 
 		// Finds Memory by MemoryId
-		public Memory FindByMemoryId(Guid MemoryId) {
-			return this.Find(this.Table.Find(MemoryData.MemoryIdField.Field, MemoryId));
+		public Memory FindByMemoryId(Guid memoryId) {
+			return this.Find(this.Table.Find(MemoryData.MemoryIdField.Field, memoryId));
 		}
 
 		public IEnumerator<Memory> GetEnumerator() {
@@ -644,29 +645,6 @@ namespace LogicCircuit {
 					}
 					change.Dispose();
 				}
-			}
-		}
-
-		private class Enumerator : IEnumerator<Memory> {
-			private MemorySet set;
-			private IEnumerator<RowId> enumerator;
-			public Enumerator(MemorySet set, IEnumerator<RowId> enumerator) {
-				this.set = set;
-				this.enumerator = enumerator;
-			}
-
-			public bool MoveNext() {
-				return this.enumerator.MoveNext();
-			}
-
-			public Memory Current { get { return this.set.Find(this.enumerator.Current); } }
-			object System.Collections.IEnumerator.Current { get { return this.Current; } }
-
-			public void Dispose() {
-			}
-
-			public void Reset() {
-				throw new NotSupportedException();
 			}
 		}
 	}

@@ -46,7 +46,7 @@ namespace LogicCircuit {
 		private static bool IsValid(GateType gateType, int inputCount) {
 			Tracer.Assert(GateSet.IsValid(gateType));
 			switch(gateType) {
-			case GateType.NOP:
+			case GateType.Nop:
 			case GateType.Clock:
 				return inputCount == 0;
 			case GateType.Not:
@@ -70,7 +70,7 @@ namespace LogicCircuit {
 
 		private static bool HasOutput(GateType gateType) {
 			Tracer.Assert(GateSet.IsValid(gateType));
-			return gateType != GateType.NOP && gateType != GateType.Led && gateType != GateType.Probe;
+			return gateType != GateType.Nop && gateType != GateType.Led && gateType != GateType.Probe;
 		}
 
 		public Gate Gate(GateType gateType, int inputCount, bool invertedOutput) {
@@ -83,16 +83,16 @@ namespace LogicCircuit {
 			return this.FindByGateId(GateSet.GateGuid(gateType, inputCount, invertedOutput));
 		}
 
-		public static Guid GateGuid(GateType gateType, int inputCount, bool ivertedOutput) {
-			Tracer.Assert(gateType != GateType.NOP && GateSet.IsValid(gateType, inputCount));
+		public static Guid GateGuid(GateType gateType, int inputCount, bool invertedOutput) {
+			Tracer.Assert(gateType != GateType.Nop && GateSet.IsValid(gateType, inputCount));
 			return new Guid(0, 0, 0, 0, 0, 0, 0, 0,
 				(byte)(int)gateType,
 				(byte)inputCount,
-				(byte)(ivertedOutput ? 1 : 0)
+				(byte)(invertedOutput ? 1 : 0)
 			);
 		}
 
-		private static void SetStrings(Gate gate, int inputCount, bool invertedOutput) {
+		private static void SetStrings(Gate gate, bool invertedOutput) {
 			switch(gate.GateType) {
 			case GateType.Clock:
 				gate.Name = Resources.GateClockName;
@@ -165,7 +165,7 @@ namespace LogicCircuit {
 				pin.Inverted = invertedOutput;
 				pin.Name = Resources.PinOutName;
 			}
-			GateSet.SetStrings(gate, inputCount, invertedOutput);
+			GateSet.SetStrings(gate, invertedOutput);
 			return gate;
 		}
 
@@ -196,7 +196,7 @@ namespace LogicCircuit {
 			DevicePin pinDot = this.CircuitProject.DevicePinSet.Create(gate, PinType.Input, 1);
 			pinDot.Name = Resources.ResourceManager.GetString(prefix + name);
 			pinDot.PinSide = PinSide.Right;
-			GateSet.SetStrings(gate, 8, false);
+			GateSet.SetStrings(gate, false);
 			return gate;
 		}
 
@@ -210,7 +210,7 @@ namespace LogicCircuit {
 			DevicePin pin = this.CircuitProject.DevicePinSet.Create(gate, PinType.Output, 1);
 			pin.Inverted = invertedOutput;
 			pin.Name = Resources.PinOutName;
-			GateSet.SetStrings(gate, 2, false);
+			GateSet.SetStrings(gate, false);
 			return gate;
 		}
 

@@ -165,7 +165,7 @@ namespace LogicCircuit {
 				data.X = this.DefaultValue;
 			}
 			void IFieldSerializer.SetTextValue(ref CircuitSymbolData data, string text) {
-				data.X = int.Parse(text);
+				data.X = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
@@ -200,7 +200,7 @@ namespace LogicCircuit {
 				data.Y = this.DefaultValue;
 			}
 			void IFieldSerializer.SetTextValue(ref CircuitSymbolData data, string text) {
-				data.Y = int.Parse(text);
+				data.Y = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
@@ -310,10 +310,10 @@ namespace LogicCircuit {
 		public CircuitProject CircuitProject { get; private set; }
 
 		// Constructor
-		public CircuitSymbol(CircuitProject store, RowId CircuitSymbolRowId) {
-			Debug.Assert(!CircuitSymbolRowId.IsEmpty);
+		public CircuitSymbol(CircuitProject store, RowId rowIdCircuitSymbol) {
+			Debug.Assert(!rowIdCircuitSymbol.IsEmpty);
 			this.CircuitProject = store;
-			this.CircuitSymbolRowId = CircuitSymbolRowId;
+			this.CircuitSymbolRowId = rowIdCircuitSymbol;
 			// Link back to record. Assuming that a transaction is started
 			this.Table.SetField(this.CircuitSymbolRowId, CircuitSymbolData.CircuitSymbolField.Field, this);
 			this.InitializeCircuitSymbol();
@@ -419,11 +419,11 @@ namespace LogicCircuit {
 
 		partial void InitializeCircuitSymbolSet();
 
-		internal void Register() {
-			foreach(RowId rowId in this.Table.Rows) {
-				this.FindOrCreate(rowId);
-			}
-		}
+		//internal void Register() {
+		//	foreach(RowId rowId in this.Table.Rows) {
+		//		this.FindOrCreate(rowId);
+		//	}
+		//}
 
 
 		// gets items wrapper by RowId
@@ -452,6 +452,7 @@ namespace LogicCircuit {
 			return item;
 		}
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		internal CircuitSymbol FindOrCreate(RowId rowId) {
 			Debug.Assert(!rowId.IsEmpty && !this.Table.IsDeleted(rowId), "Bad RowId");
 			CircuitSymbol item;
@@ -485,18 +486,18 @@ namespace LogicCircuit {
 		// Search helpers
 
 		// Finds CircuitSymbol by CircuitSymbolId
-		public CircuitSymbol Find(Guid CircuitSymbolId) {
-			return this.Find(this.Table.Find(CircuitSymbolData.CircuitSymbolIdField.Field, CircuitSymbolId));
+		public CircuitSymbol Find(Guid circuitSymbolId) {
+			return this.Find(this.Table.Find(CircuitSymbolData.CircuitSymbolIdField.Field, circuitSymbolId));
 		}
 
 		// Selects CircuitSymbol by Circuit
-		public IEnumerable<CircuitSymbol> SelectByCircuit(Circuit Circuit) {
-			return this.Select(this.Table.Select(CircuitSymbolData.CircuitIdField.Field, Circuit.CircuitId));
+		public IEnumerable<CircuitSymbol> SelectByCircuit(Circuit circuit) {
+			return this.Select(this.Table.Select(CircuitSymbolData.CircuitIdField.Field, circuit.CircuitId));
 		}
 
 		// Selects CircuitSymbol by LogicalCircuit
-		public IEnumerable<CircuitSymbol> SelectByLogicalCircuit(LogicalCircuit LogicalCircuit) {
-			return this.Select(this.Table.Select(CircuitSymbolData.LogicalCircuitIdField.Field, LogicalCircuit.LogicalCircuitId));
+		public IEnumerable<CircuitSymbol> SelectByLogicalCircuit(LogicalCircuit logicalCircuit) {
+			return this.Select(this.Table.Select(CircuitSymbolData.LogicalCircuitIdField.Field, logicalCircuit.LogicalCircuitId));
 		}
 
 		public IEnumerator<CircuitSymbol> GetEnumerator() {
@@ -600,29 +601,6 @@ namespace LogicCircuit {
 					}
 					change.Dispose();
 				}
-			}
-		}
-
-		private class Enumerator : IEnumerator<CircuitSymbol> {
-			private CircuitSymbolSet set;
-			private IEnumerator<RowId> enumerator;
-			public Enumerator(CircuitSymbolSet set, IEnumerator<RowId> enumerator) {
-				this.set = set;
-				this.enumerator = enumerator;
-			}
-
-			public bool MoveNext() {
-				return this.enumerator.MoveNext();
-			}
-
-			public CircuitSymbol Current { get { return this.set.Find(this.enumerator.Current); } }
-			object System.Collections.IEnumerator.Current { get { return this.Current; } }
-
-			public void Dispose() {
-			}
-
-			public void Reset() {
-				throw new NotSupportedException();
 			}
 		}
 	}

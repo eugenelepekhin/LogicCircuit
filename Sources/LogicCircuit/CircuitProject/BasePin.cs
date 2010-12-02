@@ -9,7 +9,7 @@ namespace LogicCircuit {
 
 		public const int MaxBitWidth = 32;
 
-		public BasePin(CircuitProject store, RowId rowId) : base(store, rowId) {
+		protected BasePin(CircuitProject store, RowId rowId) : base(store, rowId) {
 		}
 
 		public static int CheckBitWidth(int value) {

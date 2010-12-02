@@ -26,6 +26,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <UseVSHostingProcess>false</UseVSHostingProcess>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>LogicCircuit.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -125,6 +127,7 @@
     <Compile Include="DataPersistent\ValueList.cs" />
     <Compile Include="DataPersistent\VersionChangeEventArgs.cs" />
     <Compile Include="GateShape.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="GridPoint.cs" />
     <Compile Include="Schema\Schema.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -205,9 +208,14 @@
     <Resource Include="Schema\Empty.xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="LogicCircuit.ruleset">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Schema\CircuitProject.xml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="CustomDictionary.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>$(SolutionDir)Tools\ResourceWrapper.Generator.exe ProjectPath=$(ProjectPath)

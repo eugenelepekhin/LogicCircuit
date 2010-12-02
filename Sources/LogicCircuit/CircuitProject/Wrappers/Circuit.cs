@@ -91,10 +91,10 @@ namespace LogicCircuit {
 		public CircuitProject CircuitProject { get; private set; }
 
 		// Constructor
-		protected Circuit(CircuitProject store, RowId CircuitRowId) {
-			Debug.Assert(!CircuitRowId.IsEmpty);
+		protected Circuit(CircuitProject store, RowId rowIdCircuit) {
+			Debug.Assert(!rowIdCircuit.IsEmpty);
 			this.CircuitProject = store;
-			this.CircuitRowId = CircuitRowId;
+			this.CircuitRowId = rowIdCircuit;
 			// Link back to record. Assuming that a transaction is started
 			this.Table.SetField(this.CircuitRowId, CircuitData.CircuitField.Field, this);
 			this.InitializeCircuit();
@@ -174,11 +174,11 @@ namespace LogicCircuit {
 
 		partial void InitializeCircuitSet();
 
-		internal void Register() {
-			foreach(RowId rowId in this.Table.Rows) {
-				this.FindOrCreate(rowId);
-			}
-		}
+		//internal void Register() {
+		//	foreach(RowId rowId in this.Table.Rows) {
+		//		this.FindOrCreate(rowId);
+		//	}
+		//}
 
 
 		// gets items wrapper by RowId
@@ -206,6 +206,7 @@ namespace LogicCircuit {
 			throw new InvalidOperationException();
 		}
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		internal Circuit FindOrCreate(RowId rowId) {
 			Debug.Assert(!rowId.IsEmpty && !this.Table.IsDeleted(rowId), "Bad RowId");
 			Circuit item;
@@ -272,8 +273,8 @@ namespace LogicCircuit {
 		// Search helpers
 
 		// Finds Circuit by CircuitId
-		public Circuit Find(Guid CircuitId) {
-			return this.Find(this.Table.Find(CircuitData.CircuitIdField.Field, CircuitId));
+		public Circuit Find(Guid circuitId) {
+			return this.Find(this.Table.Find(CircuitData.CircuitIdField.Field, circuitId));
 		}
 
 		public IEnumerator<Circuit> GetEnumerator() {
@@ -377,29 +378,6 @@ namespace LogicCircuit {
 					}
 					change.Dispose();
 				}
-			}
-		}
-
-		private class Enumerator : IEnumerator<Circuit> {
-			private CircuitSet set;
-			private IEnumerator<RowId> enumerator;
-			public Enumerator(CircuitSet set, IEnumerator<RowId> enumerator) {
-				this.set = set;
-				this.enumerator = enumerator;
-			}
-
-			public bool MoveNext() {
-				return this.enumerator.MoveNext();
-			}
-
-			public Circuit Current { get { return this.set.Find(this.enumerator.Current); } }
-			object System.Collections.IEnumerator.Current { get { return this.Current; } }
-
-			public void Dispose() {
-			}
-
-			public void Reset() {
-				throw new NotSupportedException();
 			}
 		}
 	}

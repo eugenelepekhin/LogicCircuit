@@ -40,19 +40,19 @@ namespace LogicCircuit {
 			set { this.height.Value = value; }
 		}
 
-		private WindowState Normalize(WindowState state) {
-			switch(state) {
+		private static WindowState Normalize(WindowState windowState) {
+			switch(windowState) {
 			case WindowState.Normal:
 			case WindowState.Maximized:
-				return state;
+				return windowState;
 			default:
 				return WindowState.Normal;
 			}
 		}
 
 		public WindowState WindowState {
-			get { return this.Normalize(this.state.Value); }
-			set { this.state.Value = this.Normalize(value); }
+			get { return SettingsWindowLocationCache.Normalize(this.state.Value); }
+			set { this.state.Value = SettingsWindowLocationCache.Normalize(value); }
 		}
 	}
 }

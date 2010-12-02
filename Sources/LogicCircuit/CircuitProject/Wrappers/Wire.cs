@@ -131,7 +131,7 @@ namespace LogicCircuit {
 				data.X1 = this.DefaultValue;
 			}
 			void IFieldSerializer.SetTextValue(ref WireData data, string text) {
-				data.X1 = int.Parse(text);
+				data.X1 = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
@@ -166,7 +166,7 @@ namespace LogicCircuit {
 				data.Y1 = this.DefaultValue;
 			}
 			void IFieldSerializer.SetTextValue(ref WireData data, string text) {
-				data.Y1 = int.Parse(text);
+				data.Y1 = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
@@ -201,7 +201,7 @@ namespace LogicCircuit {
 				data.X2 = this.DefaultValue;
 			}
 			void IFieldSerializer.SetTextValue(ref WireData data, string text) {
-				data.X2 = int.Parse(text);
+				data.X2 = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
@@ -236,7 +236,7 @@ namespace LogicCircuit {
 				data.Y2 = this.DefaultValue;
 			}
 			void IFieldSerializer.SetTextValue(ref WireData data, string text) {
-				data.Y2 = int.Parse(text);
+				data.Y2 = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
@@ -347,10 +347,10 @@ namespace LogicCircuit {
 		public CircuitProject CircuitProject { get; private set; }
 
 		// Constructor
-		public Wire(CircuitProject store, RowId WireRowId) {
-			Debug.Assert(!WireRowId.IsEmpty);
+		public Wire(CircuitProject store, RowId rowIdWire) {
+			Debug.Assert(!rowIdWire.IsEmpty);
 			this.CircuitProject = store;
-			this.WireRowId = WireRowId;
+			this.WireRowId = rowIdWire;
 			// Link back to record. Assuming that a transaction is started
 			this.Table.SetField(this.WireRowId, WireData.WireField.Field, this);
 			this.InitializeWire();
@@ -466,11 +466,11 @@ namespace LogicCircuit {
 
 		partial void InitializeWireSet();
 
-		internal void Register() {
-			foreach(RowId rowId in this.Table.Rows) {
-				this.FindOrCreate(rowId);
-			}
-		}
+		//internal void Register() {
+		//	foreach(RowId rowId in this.Table.Rows) {
+		//		this.FindOrCreate(rowId);
+		//	}
+		//}
 
 
 		// gets items wrapper by RowId
@@ -499,6 +499,7 @@ namespace LogicCircuit {
 			return item;
 		}
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		internal Wire FindOrCreate(RowId rowId) {
 			Debug.Assert(!rowId.IsEmpty && !this.Table.IsDeleted(rowId), "Bad RowId");
 			Wire item;
@@ -534,13 +535,13 @@ namespace LogicCircuit {
 		// Search helpers
 
 		// Finds Wire by WireId
-		public Wire Find(Guid WireId) {
-			return this.Find(this.Table.Find(WireData.WireIdField.Field, WireId));
+		public Wire Find(Guid wireId) {
+			return this.Find(this.Table.Find(WireData.WireIdField.Field, wireId));
 		}
 
 		// Selects Wire by LogicalCircuit
-		public IEnumerable<Wire> SelectByLogicalCircuit(LogicalCircuit LogicalCircuit) {
-			return this.Select(this.Table.Select(WireData.LogicalCircuitIdField.Field, LogicalCircuit.LogicalCircuitId));
+		public IEnumerable<Wire> SelectByLogicalCircuit(LogicalCircuit logicalCircuit) {
+			return this.Select(this.Table.Select(WireData.LogicalCircuitIdField.Field, logicalCircuit.LogicalCircuitId));
 		}
 
 		public IEnumerator<Wire> GetEnumerator() {
@@ -644,29 +645,6 @@ namespace LogicCircuit {
 					}
 					change.Dispose();
 				}
-			}
-		}
-
-		private class Enumerator : IEnumerator<Wire> {
-			private WireSet set;
-			private IEnumerator<RowId> enumerator;
-			public Enumerator(WireSet set, IEnumerator<RowId> enumerator) {
-				this.set = set;
-				this.enumerator = enumerator;
-			}
-
-			public bool MoveNext() {
-				return this.enumerator.MoveNext();
-			}
-
-			public Wire Current { get { return this.set.Find(this.enumerator.Current); } }
-			object System.Collections.IEnumerator.Current { get { return this.Current; } }
-
-			public void Dispose() {
-			}
-
-			public void Reset() {
-				throw new NotSupportedException();
 			}
 		}
 	}

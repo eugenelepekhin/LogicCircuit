@@ -705,7 +705,7 @@ namespace LogicCircuit.DataPersistent {
 		/// <param name="address"></param>
 		private static void ValidateModification(ref ValueList<Row>.Address address) {
 			if(address.Page[address.Index].IsDeleted) {
-				throw new ArgumentOutOfRangeException("rowId");
+				throw new ArgumentOutOfRangeException("address");
 			}
 		}
 

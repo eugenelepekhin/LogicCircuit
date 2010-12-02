@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="LogicCircuit rule set" Description="This rule set contains all rules considered to be used in LogicCircuit." ToolsVersion="10.0">
+  <IncludeAll Action="Warning" />
+  <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
+    <Rule Id="CA1025" Action="None" />
+    <Rule Id="CA1032" Action="None" />
+    <Rule Id="CA1062" Action="None" />
+  </Rules>
+</RuleSet>

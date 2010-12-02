@@ -9,12 +9,12 @@ namespace LogicCircuit {
 	/// Interaction logic for App.xaml
 	/// </summary>
 	public partial class App : Application {
-		public static string FileToOpen { get; private set; }
+		public string FileToOpen { get; private set; }
 
 		protected override void OnStartup(StartupEventArgs e) {
 			base.OnStartup(e);
-			if(e.Args != null && 0 < e.Args.Length && !string.IsNullOrEmpty(e.Args[0])) {
-				App.FileToOpen = e.Args[0];
+			if(e != null && e.Args != null && 0 < e.Args.Length && !string.IsNullOrEmpty(e.Args[0])) {
+				this.FileToOpen = e.Args[0];
 			}
 		}
 	}

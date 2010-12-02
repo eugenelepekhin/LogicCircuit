@@ -685,7 +685,7 @@ namespace LogicCircuit {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to http://www.LogicCircuit.org/.
+		/// Looks up a localized string similar to http://www.logiccircuit.org/.
 		/// </summary>
  		public static string WebSiteUri {
 			get { return ResourceManager.GetString("WebSiteUri", Culture); }

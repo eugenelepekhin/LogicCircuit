@@ -196,9 +196,9 @@ namespace LogicCircuit {
 		internal RowId CircuitButtonRowId { get; private set; }
 
 		// Constructor
-		public CircuitButton(CircuitProject store, RowId CircuitButtonRowId, RowId CircuitRowId) : base(store, CircuitRowId) {
-			Debug.Assert(!CircuitButtonRowId.IsEmpty);
-			this.CircuitButtonRowId = CircuitButtonRowId;
+		public CircuitButton(CircuitProject store, RowId rowIdCircuitButton, RowId rowIdCircuit) : base(store, rowIdCircuit) {
+			Debug.Assert(!rowIdCircuitButton.IsEmpty);
+			this.CircuitButtonRowId = rowIdCircuitButton;
 			// Link back to record. Assuming that a transaction is started
 			this.Table.SetField(this.CircuitButtonRowId, CircuitButtonData.CircuitButtonField.Field, this);
 			this.InitializeCircuitButton();
@@ -268,11 +268,11 @@ namespace LogicCircuit {
 
 		partial void InitializeCircuitButtonSet();
 
-		internal void Register() {
-			foreach(RowId rowId in this.Table.Rows) {
-				this.FindOrCreate(rowId);
-			}
-		}
+		//internal void Register() {
+		//	foreach(RowId rowId in this.Table.Rows) {
+		//		this.FindOrCreate(rowId);
+		//	}
+		//}
 
 
 		// gets items wrapper by RowId
@@ -301,6 +301,7 @@ namespace LogicCircuit {
 			return item;
 		}
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		internal CircuitButton FindOrCreate(RowId rowId) {
 			Debug.Assert(!rowId.IsEmpty && !this.Table.IsDeleted(rowId), "Bad RowId");
 			CircuitButton item;
@@ -339,8 +340,8 @@ namespace LogicCircuit {
 		// Search helpers
 
 		// Finds CircuitButton by CircuitButtonId
-		public CircuitButton FindByCircuitButtonId(Guid CircuitButtonId) {
-			return this.Find(this.Table.Find(CircuitButtonData.CircuitButtonIdField.Field, CircuitButtonId));
+		public CircuitButton FindByCircuitButtonId(Guid circuitButtonId) {
+			return this.Find(this.Table.Find(CircuitButtonData.CircuitButtonIdField.Field, circuitButtonId));
 		}
 
 		public IEnumerator<CircuitButton> GetEnumerator() {
@@ -444,29 +445,6 @@ namespace LogicCircuit {
 					}
 					change.Dispose();
 				}
-			}
-		}
-
-		private class Enumerator : IEnumerator<CircuitButton> {
-			private CircuitButtonSet set;
-			private IEnumerator<RowId> enumerator;
-			public Enumerator(CircuitButtonSet set, IEnumerator<RowId> enumerator) {
-				this.set = set;
-				this.enumerator = enumerator;
-			}
-
-			public bool MoveNext() {
-				return this.enumerator.MoveNext();
-			}
-
-			public CircuitButton Current { get { return this.set.Find(this.enumerator.Current); } }
-			object System.Collections.IEnumerator.Current { get { return this.Current; } }
-
-			public void Dispose() {
-			}
-
-			public void Reset() {
-				throw new NotSupportedException();
 			}
 		}
 	}

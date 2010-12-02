@@ -26,6 +26,13 @@ namespace ItemWrapper.Generator {
 			return "\"" + text + "\"";
 		}
 
+		public string Camelize(string text) {
+			if(!string.IsNullOrEmpty(text)) {
+				return string.Concat(char.ToLower(text[0], CultureInfo.InvariantCulture), text.Substring(1));
+			}
+			return text;
+		}
+
 		public abstract string TransformText();
 
 		/// <summary>

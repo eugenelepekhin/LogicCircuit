@@ -175,7 +175,7 @@ namespace LogicCircuit {
 				data.Zoom = this.DefaultValue;
 			}
 			void IFieldSerializer.SetTextValue(ref ProjectData data, string text) {
-				data.Zoom = double.Parse(text);
+				data.Zoom = double.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
@@ -210,7 +210,7 @@ namespace LogicCircuit {
 				data.Frequency = this.DefaultValue;
 			}
 			void IFieldSerializer.SetTextValue(ref ProjectData data, string text) {
-				data.Frequency = int.Parse(text);
+				data.Frequency = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
@@ -391,10 +391,10 @@ namespace LogicCircuit {
 		public CircuitProject CircuitProject { get; private set; }
 
 		// Constructor
-		public Project(CircuitProject store, RowId ProjectRowId) {
-			Debug.Assert(!ProjectRowId.IsEmpty);
+		public Project(CircuitProject store, RowId rowIdProject) {
+			Debug.Assert(!rowIdProject.IsEmpty);
 			this.CircuitProject = store;
-			this.ProjectRowId = ProjectRowId;
+			this.ProjectRowId = rowIdProject;
 			// Link back to record. Assuming that a transaction is started
 			this.Table.SetField(this.ProjectRowId, ProjectData.ProjectField.Field, this);
 			this.InitializeProject();
@@ -528,11 +528,11 @@ namespace LogicCircuit {
 
 		partial void InitializeProjectSet();
 
-		internal void Register() {
-			foreach(RowId rowId in this.Table.Rows) {
-				this.FindOrCreate(rowId);
-			}
-		}
+		//internal void Register() {
+		//	foreach(RowId rowId in this.Table.Rows) {
+		//		this.FindOrCreate(rowId);
+		//	}
+		//}
 
 
 		// gets items wrapper by RowId
@@ -561,6 +561,7 @@ namespace LogicCircuit {
 			return item;
 		}
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		internal Project FindOrCreate(RowId rowId) {
 			Debug.Assert(!rowId.IsEmpty && !this.Table.IsDeleted(rowId), "Bad RowId");
 			Project item;
@@ -598,13 +599,13 @@ namespace LogicCircuit {
 		// Search helpers
 
 		// Finds Project by ProjectId
-		public Project Find(Guid ProjectId) {
-			return this.Find(this.Table.Find(ProjectData.ProjectIdField.Field, ProjectId));
+		public Project Find(Guid projectId) {
+			return this.Find(this.Table.Find(ProjectData.ProjectIdField.Field, projectId));
 		}
 
 		// Selects Project by LogicalCircuit
-		public IEnumerable<Project> SelectByLogicalCircuit(LogicalCircuit LogicalCircuit) {
-			return this.Select(this.Table.Select(ProjectData.LogicalCircuitIdField.Field, LogicalCircuit.LogicalCircuitId));
+		public IEnumerable<Project> SelectByLogicalCircuit(LogicalCircuit logicalCircuit) {
+			return this.Select(this.Table.Select(ProjectData.LogicalCircuitIdField.Field, logicalCircuit.LogicalCircuitId));
 		}
 
 		public IEnumerator<Project> GetEnumerator() {
@@ -708,29 +709,6 @@ namespace LogicCircuit {
 					}
 					change.Dispose();
 				}
-			}
-		}
-
-		private class Enumerator : IEnumerator<Project> {
-			private ProjectSet set;
-			private IEnumerator<RowId> enumerator;
-			public Enumerator(ProjectSet set, IEnumerator<RowId> enumerator) {
-				this.set = set;
-				this.enumerator = enumerator;
-			}
-
-			public bool MoveNext() {
-				return this.enumerator.MoveNext();
-			}
-
-			public Project Current { get { return this.set.Find(this.enumerator.Current); } }
-			object System.Collections.IEnumerator.Current { get { return this.Current; } }
-
-			public void Dispose() {
-			}
-
-			public void Reset() {
-				throw new NotSupportedException();
 			}
 		}
 	}

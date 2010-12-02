@@ -138,7 +138,7 @@ namespace LogicCircuit {
 				data.BitWidth = this.DefaultValue;
 			}
 			void IFieldSerializer.SetTextValue(ref PinData data, string text) {
-				data.BitWidth = int.Parse(text);
+				data.BitWidth = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
@@ -173,7 +173,7 @@ namespace LogicCircuit {
 				data.PinType = this.DefaultValue;
 			}
 			void IFieldSerializer.SetTextValue(ref PinData data, string text) {
-				data.PinType = (PinType)Enum.Parse(typeof(PinType), text);
+				data.PinType = (PinType)Enum.Parse(typeof(PinType), text, true);
 			}
 		}
 
@@ -208,7 +208,7 @@ namespace LogicCircuit {
 				data.PinSide = this.DefaultValue;
 			}
 			void IFieldSerializer.SetTextValue(ref PinData data, string text) {
-				data.PinSide = (PinSide)Enum.Parse(typeof(PinSide), text);
+				data.PinSide = (PinSide)Enum.Parse(typeof(PinSide), text, true);
 			}
 		}
 
@@ -461,9 +461,9 @@ namespace LogicCircuit {
 		internal RowId PinRowId { get; private set; }
 
 		// Constructor
-		public Pin(CircuitProject store, RowId PinRowId, RowId CircuitRowId) : base(store, CircuitRowId) {
-			Debug.Assert(!PinRowId.IsEmpty);
-			this.PinRowId = PinRowId;
+		public Pin(CircuitProject store, RowId rowIdPin, RowId rowIdCircuit) : base(store, rowIdCircuit) {
+			Debug.Assert(!rowIdPin.IsEmpty);
+			this.PinRowId = rowIdPin;
 			// Link back to record. Assuming that a transaction is started
 			this.Table.SetField(this.PinRowId, PinData.PinField.Field, this);
 			this.InitializePin();
@@ -596,11 +596,11 @@ namespace LogicCircuit {
 
 		partial void InitializePinSet();
 
-		internal void Register() {
-			foreach(RowId rowId in this.Table.Rows) {
-				this.FindOrCreate(rowId);
-			}
-		}
+		//internal void Register() {
+		//	foreach(RowId rowId in this.Table.Rows) {
+		//		this.FindOrCreate(rowId);
+		//	}
+		//}
 
 
 		// gets items wrapper by RowId
@@ -629,6 +629,7 @@ namespace LogicCircuit {
 			return item;
 		}
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		internal Pin FindOrCreate(RowId rowId) {
 			Debug.Assert(!rowId.IsEmpty && !this.Table.IsDeleted(rowId), "Bad RowId");
 			Pin item;
@@ -681,23 +682,23 @@ namespace LogicCircuit {
 		// Search helpers
 
 		// Finds Pin by PinId
-		public Pin FindByPinId(Guid PinId) {
-			return this.Find(this.Table.Find(PinData.PinIdField.Field, PinId));
+		public Pin FindByPinId(Guid pinId) {
+			return this.Find(this.Table.Find(PinData.PinIdField.Field, pinId));
 		}
 
 		// Finds Pin by Circuit and Name
-		public Pin FindByCircuitAndName(Circuit Circuit, string Name) {
+		public Pin FindByCircuitAndName(Circuit circuit, string name) {
 			return this.Find(
 				this.Table.Find(
 					PinData.CircuitIdField.Field, PinData.NameField.Field,
-					Circuit.CircuitId, Name
+					circuit.CircuitId, name
 				)
 			);
 		}
 
 		// Selects Pin by Circuit
-		public IEnumerable<Pin> SelectByCircuit(Circuit Circuit) {
-			return this.Select(this.Table.Select(PinData.CircuitIdField.Field, Circuit.CircuitId));
+		public IEnumerable<Pin> SelectByCircuit(Circuit circuit) {
+			return this.Select(this.Table.Select(PinData.CircuitIdField.Field, circuit.CircuitId));
 		}
 
 		public IEnumerator<Pin> GetEnumerator() {
@@ -801,29 +802,6 @@ namespace LogicCircuit {
 					}
 					change.Dispose();
 				}
-			}
-		}
-
-		private class Enumerator : IEnumerator<Pin> {
-			private PinSet set;
-			private IEnumerator<RowId> enumerator;
-			public Enumerator(PinSet set, IEnumerator<RowId> enumerator) {
-				this.set = set;
-				this.enumerator = enumerator;
-			}
-
-			public bool MoveNext() {
-				return this.enumerator.MoveNext();
-			}
-
-			public Pin Current { get { return this.set.Find(this.enumerator.Current); } }
-			object System.Collections.IEnumerator.Current { get { return this.Current; } }
-
-			public void Dispose() {
-			}
-
-			public void Reset() {
-				throw new NotSupportedException();
 			}
 		}
 	}

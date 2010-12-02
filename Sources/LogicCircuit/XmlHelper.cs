@@ -8,6 +8,7 @@ using System.Xml.Xsl;
 
 namespace LogicCircuit {
 	internal static class XmlHelper {
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")]
 		public static XmlDocument Transform(XmlDocument xml, string xsltText) {
 			XslCompiledTransform xslt = new XslCompiledTransform();
 			using(StringReader stringReader = new StringReader(xsltText)) {
@@ -27,6 +28,7 @@ namespace LogicCircuit {
 			return result;
 		}
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")]
 		public static void Save(XmlDocument xml, string file) {
 			if(!File.Exists(file)) {
 				string dir = Path.GetDirectoryName(file);

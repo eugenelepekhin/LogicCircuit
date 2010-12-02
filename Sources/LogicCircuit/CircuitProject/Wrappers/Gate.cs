@@ -114,9 +114,9 @@ namespace LogicCircuit {
 		internal RowId GateRowId { get; private set; }
 
 		// Constructor
-		public Gate(CircuitProject store, RowId GateRowId, RowId CircuitRowId) : base(store, CircuitRowId) {
-			Debug.Assert(!GateRowId.IsEmpty);
-			this.GateRowId = GateRowId;
+		public Gate(CircuitProject store, RowId rowIdGate, RowId rowIdCircuit) : base(store, rowIdCircuit) {
+			Debug.Assert(!rowIdGate.IsEmpty);
+			this.GateRowId = rowIdGate;
 			// Link back to record. Assuming that a transaction is started
 			this.Table.SetField(this.GateRowId, GateData.GateField.Field, this);
 			this.InitializeGate();
@@ -185,11 +185,11 @@ namespace LogicCircuit {
 
 		partial void InitializeGateSet();
 
-		internal void Register() {
-			foreach(RowId rowId in this.Table.Rows) {
-				this.FindOrCreate(rowId);
-			}
-		}
+		//internal void Register() {
+		//	foreach(RowId rowId in this.Table.Rows) {
+		//		this.FindOrCreate(rowId);
+		//	}
+		//}
 
 
 		// gets items wrapper by RowId
@@ -218,6 +218,7 @@ namespace LogicCircuit {
 			return item;
 		}
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		internal Gate FindOrCreate(RowId rowId) {
 			Debug.Assert(!rowId.IsEmpty && !this.Table.IsDeleted(rowId), "Bad RowId");
 			Gate item;
@@ -256,8 +257,8 @@ namespace LogicCircuit {
 		// Search helpers
 
 		// Finds Gate by GateId
-		public Gate FindByGateId(Guid GateId) {
-			return this.Find(this.Table.Find(GateData.GateIdField.Field, GateId));
+		public Gate FindByGateId(Guid gateId) {
+			return this.Find(this.Table.Find(GateData.GateIdField.Field, gateId));
 		}
 
 		public IEnumerator<Gate> GetEnumerator() {
@@ -361,29 +362,6 @@ namespace LogicCircuit {
 					}
 					change.Dispose();
 				}
-			}
-		}
-
-		private class Enumerator : IEnumerator<Gate> {
-			private GateSet set;
-			private IEnumerator<RowId> enumerator;
-			public Enumerator(GateSet set, IEnumerator<RowId> enumerator) {
-				this.set = set;
-				this.enumerator = enumerator;
-			}
-
-			public bool MoveNext() {
-				return this.enumerator.MoveNext();
-			}
-
-			public Gate Current { get { return this.set.Find(this.enumerator.Current); } }
-			object System.Collections.IEnumerator.Current { get { return this.Current; } }
-
-			public void Dispose() {
-			}
-
-			public void Reset() {
-				throw new NotSupportedException();
 			}
 		}
 	}

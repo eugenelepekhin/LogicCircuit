@@ -105,11 +105,11 @@ namespace LogicCircuit {
 				throw new AssertException();
 			}
 		}
-		public static void Fail(string message) {
-			throw new AssertException(message);
+		public static void Fail(string reason) {
+			throw new AssertException(reason);
 		}
-		//public static void Fail(string message, params object[] args) {
-		//	Tracer.Fail(string.Format(CultureInfo.CurrentUICulture, message, args));
+		//public static void Fail(string reason, params object[] args) {
+		//	Tracer.Fail(string.Format(CultureInfo.CurrentUICulture, reason, args));
 		//}
 		public static void Fail() {
 			Tracer.Fail(TracerMessage.InternalError);

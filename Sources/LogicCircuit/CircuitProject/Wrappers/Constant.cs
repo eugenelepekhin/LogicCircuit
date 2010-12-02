@@ -97,7 +97,7 @@ namespace LogicCircuit {
 				data.BitWidth = this.DefaultValue;
 			}
 			void IFieldSerializer.SetTextValue(ref ConstantData data, string text) {
-				data.BitWidth = int.Parse(text);
+				data.BitWidth = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
@@ -132,7 +132,7 @@ namespace LogicCircuit {
 				data.Value = this.DefaultValue;
 			}
 			void IFieldSerializer.SetTextValue(ref ConstantData data, string text) {
-				data.Value = int.Parse(text);
+				data.Value = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
@@ -237,9 +237,9 @@ namespace LogicCircuit {
 		internal RowId ConstantRowId { get; private set; }
 
 		// Constructor
-		public Constant(CircuitProject store, RowId ConstantRowId, RowId CircuitRowId) : base(store, CircuitRowId) {
-			Debug.Assert(!ConstantRowId.IsEmpty);
-			this.ConstantRowId = ConstantRowId;
+		public Constant(CircuitProject store, RowId rowIdConstant, RowId rowIdCircuit) : base(store, rowIdCircuit) {
+			Debug.Assert(!rowIdConstant.IsEmpty);
+			this.ConstantRowId = rowIdConstant;
 			// Link back to record. Assuming that a transaction is started
 			this.Table.SetField(this.ConstantRowId, ConstantData.ConstantField.Field, this);
 			this.InitializeConstant();
@@ -318,11 +318,11 @@ namespace LogicCircuit {
 
 		partial void InitializeConstantSet();
 
-		internal void Register() {
-			foreach(RowId rowId in this.Table.Rows) {
-				this.FindOrCreate(rowId);
-			}
-		}
+		//internal void Register() {
+		//	foreach(RowId rowId in this.Table.Rows) {
+		//		this.FindOrCreate(rowId);
+		//	}
+		//}
 
 
 		// gets items wrapper by RowId
@@ -351,6 +351,7 @@ namespace LogicCircuit {
 			return item;
 		}
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		internal Constant FindOrCreate(RowId rowId) {
 			Debug.Assert(!rowId.IsEmpty && !this.Table.IsDeleted(rowId), "Bad RowId");
 			Constant item;
@@ -391,8 +392,8 @@ namespace LogicCircuit {
 		// Search helpers
 
 		// Finds Constant by ConstantId
-		public Constant FindByConstantId(Guid ConstantId) {
-			return this.Find(this.Table.Find(ConstantData.ConstantIdField.Field, ConstantId));
+		public Constant FindByConstantId(Guid constantId) {
+			return this.Find(this.Table.Find(ConstantData.ConstantIdField.Field, constantId));
 		}
 
 		public IEnumerator<Constant> GetEnumerator() {
@@ -496,29 +497,6 @@ namespace LogicCircuit {
 					}
 					change.Dispose();
 				}
-			}
-		}
-
-		private class Enumerator : IEnumerator<Constant> {
-			private ConstantSet set;
-			private IEnumerator<RowId> enumerator;
-			public Enumerator(ConstantSet set, IEnumerator<RowId> enumerator) {
-				this.set = set;
-				this.enumerator = enumerator;
-			}
-
-			public bool MoveNext() {
-				return this.enumerator.MoveNext();
-			}
-
-			public Constant Current { get { return this.set.Find(this.enumerator.Current); } }
-			object System.Collections.IEnumerator.Current { get { return this.Current; } }
-
-			public void Dispose() {
-			}
-
-			public void Reset() {
-				throw new NotSupportedException();
 			}
 		}
 	}

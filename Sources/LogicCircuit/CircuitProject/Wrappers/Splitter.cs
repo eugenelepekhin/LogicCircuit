@@ -102,7 +102,7 @@ namespace LogicCircuit {
 				data.BitWidth = this.DefaultValue;
 			}
 			void IFieldSerializer.SetTextValue(ref SplitterData data, string text) {
-				data.BitWidth = int.Parse(text);
+				data.BitWidth = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
@@ -137,7 +137,7 @@ namespace LogicCircuit {
 				data.PinCount = this.DefaultValue;
 			}
 			void IFieldSerializer.SetTextValue(ref SplitterData data, string text) {
-				data.PinCount = int.Parse(text);
+				data.PinCount = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
@@ -172,7 +172,7 @@ namespace LogicCircuit {
 				data.Rotation = this.DefaultValue;
 			}
 			void IFieldSerializer.SetTextValue(ref SplitterData data, string text) {
-				data.Rotation = (CircuitRotation)Enum.Parse(typeof(CircuitRotation), text);
+				data.Rotation = (CircuitRotation)Enum.Parse(typeof(CircuitRotation), text, true);
 			}
 		}
 
@@ -278,9 +278,9 @@ namespace LogicCircuit {
 		internal RowId SplitterRowId { get; private set; }
 
 		// Constructor
-		public Splitter(CircuitProject store, RowId SplitterRowId, RowId CircuitRowId) : base(store, CircuitRowId) {
-			Debug.Assert(!SplitterRowId.IsEmpty);
-			this.SplitterRowId = SplitterRowId;
+		public Splitter(CircuitProject store, RowId rowIdSplitter, RowId rowIdCircuit) : base(store, rowIdCircuit) {
+			Debug.Assert(!rowIdSplitter.IsEmpty);
+			this.SplitterRowId = rowIdSplitter;
 			// Link back to record. Assuming that a transaction is started
 			this.Table.SetField(this.SplitterRowId, SplitterData.SplitterField.Field, this);
 			this.InitializeSplitter();
@@ -368,11 +368,11 @@ namespace LogicCircuit {
 
 		partial void InitializeSplitterSet();
 
-		internal void Register() {
-			foreach(RowId rowId in this.Table.Rows) {
-				this.FindOrCreate(rowId);
-			}
-		}
+		//internal void Register() {
+		//	foreach(RowId rowId in this.Table.Rows) {
+		//		this.FindOrCreate(rowId);
+		//	}
+		//}
 
 
 		// gets items wrapper by RowId
@@ -401,6 +401,7 @@ namespace LogicCircuit {
 			return item;
 		}
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		internal Splitter FindOrCreate(RowId rowId) {
 			Debug.Assert(!rowId.IsEmpty && !this.Table.IsDeleted(rowId), "Bad RowId");
 			Splitter item;
@@ -443,8 +444,8 @@ namespace LogicCircuit {
 		// Search helpers
 
 		// Finds Splitter by SplitterId
-		public Splitter FindBySplitterId(Guid SplitterId) {
-			return this.Find(this.Table.Find(SplitterData.SplitterIdField.Field, SplitterId));
+		public Splitter FindBySplitterId(Guid splitterId) {
+			return this.Find(this.Table.Find(SplitterData.SplitterIdField.Field, splitterId));
 		}
 
 		public IEnumerator<Splitter> GetEnumerator() {
@@ -548,29 +549,6 @@ namespace LogicCircuit {
 					}
 					change.Dispose();
 				}
-			}
-		}
-
-		private class Enumerator : IEnumerator<Splitter> {
-			private SplitterSet set;
-			private IEnumerator<RowId> enumerator;
-			public Enumerator(SplitterSet set, IEnumerator<RowId> enumerator) {
-				this.set = set;
-				this.enumerator = enumerator;
-			}
-
-			public bool MoveNext() {
-				return this.enumerator.MoveNext();
-			}
-
-			public Splitter Current { get { return this.set.Find(this.enumerator.Current); } }
-			object System.Collections.IEnumerator.Current { get { return this.Current; } }
-
-			public void Dispose() {
-			}
-
-			public void Reset() {
-				throw new NotSupportedException();
 			}
 		}
 	}

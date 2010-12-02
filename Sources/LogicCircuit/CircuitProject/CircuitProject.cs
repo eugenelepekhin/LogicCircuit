@@ -81,13 +81,13 @@ namespace LogicCircuit {
 			return copy.Save();
 		}
 
-		public bool CanPaste(string text) {
+		public static bool CanPaste(string text) {
 			return (!string.IsNullOrEmpty(text) &&
 				Regex.IsMatch(text, Regex.Escape("<lc:CircuitProject xmlns:lc=\"" + CircuitProject.PersistenceNamespace + "\">"))
 			);
 		}
 
-		public List<Symbol> Paste(XmlDocument xml) {
+		public IEnumerable<Symbol> Paste(XmlDocument xml) {
 			CircuitProject paste = new CircuitProject();
 			bool started = paste.StartTransaction();
 			Tracer.Assert(started);
