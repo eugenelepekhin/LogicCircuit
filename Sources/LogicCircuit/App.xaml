@@ -3,7 +3,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:lc="clr-namespace:LogicCircuit"
 	xmlns:PresentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
-	StartupUri="MainFrame.xaml"
+	StartupUri="Mainframe.xaml"
 >
 	<Application.Resources>
 		<LinearGradientBrush x:Key="WindowBackground" StartPoint="0.25,0" EndPoint="0.75,1" PresentationOptions:Freeze="True">

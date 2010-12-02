@@ -1,4 +1,4 @@
-﻿<Window x:Class="LogicCircuit.MainFrame"
+﻿<Window x:Class="LogicCircuit.Mainframe"
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"

@@ -9,6 +9,10 @@ namespace LogicCircuit {
 	/// Interaction logic for App.xaml
 	/// </summary>
 	public partial class App : Application {
+
+		public static App CurrentApp { get { return (App)App.Current; } }
+		public static Mainframe Mainframe { get { return (Mainframe)App.Current.MainWindow; } }
+
 		public string FileToOpen { get; private set; }
 
 		protected override void OnStartup(StartupEventArgs e) {

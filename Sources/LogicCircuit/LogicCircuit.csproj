@@ -56,6 +56,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CircuitEditor\CircuitEditor.cs" />
+    <Compile Include="CircuitEditor\CircuitViewer.cs" />
     <Compile Include="CircuitEditor\Plotter.cs" />
     <Compile Include="CircuitException.cs" />
     <Compile Include="CircuitProject\BasePin.cs" />
@@ -126,9 +128,14 @@
     <Compile Include="DataPersistent\Unique.cs" />
     <Compile Include="DataPersistent\ValueList.cs" />
     <Compile Include="DataPersistent\VersionChangeEventArgs.cs" />
+    <Compile Include="Dialog\DialogMessage.xaml.cs">
+      <DependentUpon>DialogMessage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GateShape.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="GridPoint.cs" />
+    <Compile Include="Mainframe.File.cs" />
+    <Compile Include="ProjectManager.cs" />
     <Compile Include="Schema\Schema.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -148,7 +155,11 @@
       <DependentUpon>TracerMessage.resx</DependentUpon>
     </Compile>
     <Compile Include="XmlHelper.cs" />
-    <Page Include="MainFrame.xaml">
+    <Page Include="Dialog\DialogMessage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Mainframe.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -156,8 +167,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainFrame.xaml.cs">
-      <DependentUpon>MainFrame.xaml</DependentUpon>
+    <Compile Include="Mainframe.xaml.cs">
+      <DependentUpon>Mainframe.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
