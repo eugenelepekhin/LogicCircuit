@@ -12,7 +12,14 @@
 		<lcs:settings>
 			<xsl:for-each select="old:Settings">
 				<lcs:property>
-					<xsl:attribute name="name"><xsl:value-of select="old:Key"/></xsl:attribute>
+					<xsl:attribute name="name">
+						<xsl:choose>
+							<xsl:when test="old:Key = 'MainFrame.Width'">Mainframe.Width</xsl:when>
+							<xsl:when test="old:Key = 'MainFrame.Height'">Mainframe.Height</xsl:when>
+							<xsl:when test="old:Key = 'MainFrame.WindowState'">Mainframe.WindowState</xsl:when>
+							<xsl:otherwise><xsl:value-of select="old:Key"/></xsl:otherwise>
+						</xsl:choose>
+					</xsl:attribute>
 					<xsl:value-of select="old:Value"/>
 				</lcs:property>
 			</xsl:for-each>

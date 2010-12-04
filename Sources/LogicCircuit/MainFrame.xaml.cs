@@ -94,6 +94,20 @@ namespace LogicCircuit {
 			}
 		}
 
+		protected override void OnClosing(System.ComponentModel.CancelEventArgs e) {
+			base.OnClosing(e);
+			try {
+				if(!this.EnsureSaved()) {
+					e.Cancel = true;
+				} else {
+					Settings.User.Save();
+				}
+			} catch(Exception exception) {
+				Tracer.Report("Mainframe.OnClosing", exception);
+				this.ReportException(exception);
+			}
+		}
+
 		public void NotifyPropertyChanged(PropertyChangedEventHandler handler, object sender, string propertyName) {
 			if(handler != null) {
 				if(this.Dispatcher.Thread != Thread.CurrentThread) {
