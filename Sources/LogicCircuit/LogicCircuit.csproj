@@ -56,8 +56,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CircuitEditor\CircuitDescriptor.cs" />
+    <Compile Include="CircuitEditor\CircuitDescriptorList.cs" />
     <Compile Include="CircuitEditor\CircuitEditor.cs" />
-    <Compile Include="CircuitEditor\CircuitViewer.cs" />
     <Compile Include="CircuitEditor\Plotter.cs" />
     <Compile Include="CircuitException.cs" />
     <Compile Include="CircuitProject\BasePin.cs" />
@@ -133,9 +134,9 @@
     </Compile>
     <Compile Include="GateShape.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="GridLengthAnimation.cs" />
     <Compile Include="GridPoint.cs" />
     <Compile Include="Mainframe.File.cs" />
-    <Compile Include="ProjectManager.cs" />
     <Compile Include="Schema\Schema.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

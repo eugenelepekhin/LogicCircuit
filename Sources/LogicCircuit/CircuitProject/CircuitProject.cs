@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -18,7 +19,32 @@ namespace LogicCircuit {
 			}
 		}
 
-		public void Load(XmlDocument xml) {
+		public static CircuitProject Create() {
+			XmlDocument xml = new XmlDocument();
+			xml.LoadXml(CircuitProject.ChangeGuid(CircuitProject.ChangeGuid(Schema.Empty, "ProjectId"), "LogicalCircuitId"));
+			CircuitProject circuitProject = new CircuitProject();
+			circuitProject.InTransaction(() => circuitProject.LoadXml(xml));
+			return circuitProject;
+		}
+
+		public static CircuitProject Load(string file) {
+			XmlDocument xml = new XmlDocument();
+			xml.Load(file);
+			return CircuitProject.Load(xml);
+		}
+
+		public void Save(string file) {
+			XmlDocument xml = this.Save();
+			XmlHelper.Save(xml, file);
+		}
+
+		private static CircuitProject Load(XmlDocument xml) {
+			CircuitProject circuitProject = new CircuitProject();
+			circuitProject.InTransaction(() => circuitProject.LoadXml(xml));
+			return circuitProject;
+		}
+
+		private void LoadXml(XmlDocument xml) {
 			xml = CircuitProject.Transform(xml);
 
 			XmlNamespaceManager nsmgr = new XmlNamespaceManager(xml.NameTable);
@@ -53,7 +79,20 @@ namespace LogicCircuit {
 			this.ResetUndoRedo();
 		}
 
-		public XmlDocument Save() {
+		private static string ChangeGuid(string text, string nodeName) {
+			string s = Regex.Replace(text,
+				string.Format(CultureInfo.InvariantCulture,
+					@"<{0}:{1}>\{{?[0-9a-fA-F]{{8}}-([0-9a-fA-F]{{4}}-){{3}}[0-9a-fA-F]{{12}}\}}?</{0}:{1}>", CircuitProject.PersistencePrefix, nodeName
+				),
+				string.Format(CultureInfo.InvariantCulture,
+					@"<{0}:{1}>{2}</{0}:{1}>", CircuitProject.PersistencePrefix, nodeName, Guid.NewGuid()
+				),
+				RegexOptions.CultureInvariant | RegexOptions.Singleline
+			);
+			return s;
+		}
+
+		private XmlDocument Save() {
 			XmlDocument xml = new XmlDocument();
 			XmlElement root = xml.CreateElement(CircuitProject.PersistencePrefix, "CircuitProject", CircuitProject.PersistenceNamespace);
 			xml.AppendChild(root);
@@ -91,7 +130,7 @@ namespace LogicCircuit {
 			CircuitProject paste = new CircuitProject();
 			bool started = paste.StartTransaction();
 			Tracer.Assert(started);
-			paste.Load(xml);
+			paste.LoadXml(xml);
 
 			List<Symbol> result = new List<Symbol>();
 

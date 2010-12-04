@@ -13,6 +13,8 @@ namespace LogicCircuit {
 
 		public static int LogicalCircuitWidth { get { return 170; } }
 		public static int LogicalCircuitHeight { get { return 170; } }
+		public static double LogicalCircuitScreenWidth { get { return Plotter.ScreenPoint(Plotter.LogicalCircuitWidth); } }
+		public static double LogicalCircuitScreenHeight { get { return Plotter.ScreenPoint(Plotter.LogicalCircuitHeight); } }
 		public static Rect LogicalCircuitBackgroundTile { get { return new Rect(0, 0, Plotter.GridSize, Plotter.GridSize); } }
 
 		public static Brush WireStroke { get { return Brushes.Black; } }

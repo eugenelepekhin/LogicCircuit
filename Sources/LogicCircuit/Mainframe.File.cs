@@ -41,9 +41,9 @@ namespace LogicCircuit {
 		}
 
 		private bool EnsureSaved() {
-			if(this.CircuitEditor.ProjectManager.HasChanges) {
+			if(this.CircuitEditor.HasChanges) {
 				MessageBoxResult result = DialogMessage.Show(this, this.Title,
-					LogicCircuit.Resources.MessageSaveFile(this.CircuitEditor.ProjectManager.CircuitProject.ProjectSet.Project.Name), null,
+					LogicCircuit.Resources.MessageSaveFile(this.CircuitEditor.CircuitProject.ProjectSet.Project.Name), null,
 					MessageBoxImage.Question, MessageBoxButton.YesNoCancel
 				);
 				switch(result) {
@@ -65,7 +65,7 @@ namespace LogicCircuit {
 				this.CircuitEditor.Power = false;
 			}
 			if(this.CircuitEditor == null || this.EnsureSaved()) {
-				this.CircuitEditor = new CircuitEditor(this, new ProjectManager());
+				this.CircuitEditor = new CircuitEditor(this);
 				this.Status = LogicCircuit.Resources.Ready;
 			}
 		}
@@ -76,9 +76,7 @@ namespace LogicCircuit {
 			}
 			// Do not check for saved file here as it happened in open
 			if(Mainframe.IsFilePathValid(file) && File.Exists(file)) {
-				ProjectManager projectManager = new ProjectManager();
-				projectManager.LoadProject(file);
-				this.CircuitEditor = new CircuitEditor(this, projectManager);
+				this.CircuitEditor = new CircuitEditor(this, file);
 				Settings.User.AddRecentFile(file);
 				this.Status = LogicCircuit.Resources.Ready;
 			}
@@ -102,7 +100,7 @@ namespace LogicCircuit {
 		}
 
 		private void SaveAs() {
-			string file = this.CircuitEditor.ProjectManager.File;
+			string file = this.CircuitEditor.File;
 			if(!Mainframe.IsFilePathValid(file)) {
 				file = Settings.User.RecentFile();
 				string dir;
@@ -111,7 +109,7 @@ namespace LogicCircuit {
 				} else {
 					dir = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 				}
-				file = Path.Combine(dir, this.CircuitEditor.ProjectManager.CircuitProject.ProjectSet.Project.Name + Mainframe.FileExtention);
+				file = Path.Combine(dir, this.CircuitEditor.CircuitProject.ProjectSet.Project.Name + Mainframe.FileExtention);
 			}
 			SaveFileDialog dialog = new SaveFileDialog();
 			dialog.FileName = file;
@@ -120,17 +118,16 @@ namespace LogicCircuit {
 			bool? result = dialog.ShowDialog(this);
 			if(result.HasValue && result.Value) {
 				file = dialog.FileName;
-				this.CircuitEditor.ProjectManager.SaveProject(file);
+				this.CircuitEditor.Save(file);
 				Settings.User.AddRecentFile(file);
 				this.Status = LogicCircuit.Resources.FileSaved(file);
-				this.NotifyPropertyChanged("Caption");
 			}
 		}
 
 		private void Save() {
-			string file = this.CircuitEditor.ProjectManager.File;
+			string file = this.CircuitEditor.File;
 			if(Mainframe.IsFilePathValid(file)) {
-				this.CircuitEditor.ProjectManager.SaveProject(file);
+				this.CircuitEditor.Save(file);
 				Settings.User.AddRecentFile(file);
 				this.Status = LogicCircuit.Resources.FileSaved(file);
 			} else {

@@ -6,14 +6,683 @@
 	xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
 	MinWidth="550"
 	MinHeight="400"
+	Title="{Binding Path=CircuitEditor.Caption}"
 	Width="{Binding Path=WindowLocation.Width, Mode=TwoWay}"
 	Height="{Binding Path=WindowLocation.Height, Mode=TwoWay}"
 	WindowState="{Binding Path=WindowLocation.WindowState, Mode=TwoWay}"
-	Title="Binding Path=CircuitEditor.Caption"
 	Background="{StaticResource WindowBackground}"
 	ResizeMode="CanResizeWithGrip"
+
+	LostFocus="WindowLostFocus"
+	LostKeyboardFocus="WindowLostKeyboardFocus"
+	Keyboard.KeyDown="WindowKeyDown"
+	Keyboard.KeyUp="WindowKeyUp"
 >
+	<Window.Resources>
+		<Storyboard x:Key="initLayout">
+			<lc:GridLengthAnimation Duration="0:0:1"
+				Storyboard.TargetName="runningTree"
+				Storyboard.TargetProperty="Height"
+				From="{Binding ElementName=runningTree, Path=Height}"
+				To="0*"
+			/>
+			<lc:GridLengthAnimation Duration="0:0:1"
+				Storyboard.TargetName="projectBrowser"
+				Storyboard.TargetProperty="Height"
+				From="{Binding ElementName=projectBrowser, Path=Height}"
+				To="1*"
+			/>
+			<DoubleAnimation Duration="0:0:1"
+				Storyboard.TargetName="controlPanel"
+				Storyboard.TargetProperty="Height"
+				From="{Binding ElementName=controlPanelContent, Path=DesiredSize.Height}"
+				To="0"
+			/>
+		</Storyboard>
+
+		<Storyboard x:Key="openControlPanel" TargetName="controlPanel" TargetProperty="Height">
+			<DoubleAnimation Duration="0:0:0.5" To="{Binding ElementName=controlPanelContent, Path=ActualHeight}"/>
+		</Storyboard>
+
+		<Storyboard x:Key="closeControlPanel" TargetName="controlPanel" TargetProperty="Height">
+			<DoubleAnimation Duration="0:0:0.5" To="0"/>
+		</Storyboard>
+
+		<Storyboard x:Key="openRunningTree">
+			<lc:GridLengthAnimation Duration="0:0:0.5"
+				Storyboard.TargetName="runningTree"
+				Storyboard.TargetProperty="Height"
+				From="0*"
+				To="1*"
+			/>
+			<lc:GridLengthAnimation Duration="0:0:0.5"
+				Storyboard.TargetName="projectBrowser"
+				Storyboard.TargetProperty="Height"
+				From="1*"
+				To="0*"
+			/>
+		</Storyboard>
+
+		<Storyboard x:Key="openProjectBrowser">
+			<lc:GridLengthAnimation Duration="0:0:0.5"
+				Storyboard.TargetName="runningTree"
+				Storyboard.TargetProperty="Height"
+				From="1*"
+				To="0*"
+			/>
+			<lc:GridLengthAnimation Duration="0:0:0.5"
+				Storyboard.TargetName="projectBrowser"
+				Storyboard.TargetProperty="Height"
+				From="0*"
+				To="1*"
+			/>
+		</Storyboard>
+
+		<CollectionViewSource x:Key="circuitDescriptorList" Source="{Binding Path=CircuitEditor.CircuitDescriptorList.CircuitDescriptors}">
+			<CollectionViewSource.GroupDescriptions>
+				<PropertyGroupDescription PropertyName="Category"/>
+			</CollectionViewSource.GroupDescriptions>
+		</CollectionViewSource>
+	</Window.Resources>
+
+	<Window.Triggers>
+		<EventTrigger RoutedEvent="Window.Loaded">
+			<BeginStoryboard Storyboard="{StaticResource initLayout}"/>
+		</EventTrigger>
+	</Window.Triggers>
 
 	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/> <!-- Main Menu -->
+			<RowDefinition Height="*"/> <!-- Main content of the window -->
+			<RowDefinition Height="Auto"/> <!-- Status bar of the window -->
+		</Grid.RowDefinitions>
+
+		<!-- Main Menu -->
+		<Menu Grid.Row="0" Padding="3,1,3,1" Background="Transparent">
+			<MenuItem Header="_File">
+				<MenuItem Command="ApplicationCommands.New"/>
+				<MenuItem Command="ApplicationCommands.Open"/>
+				<Separator/>
+				<MenuItem Command="ApplicationCommands.Save"/>
+				<MenuItem Command="ApplicationCommands.SaveAs"/>
+				<Separator/>
+				<!--<MenuItem Command="lc:CustomCommands.FileExportImage"/>-->
+				<Separator/>
+				<MenuItem Command="ApplicationCommands.Close"/>
+			</MenuItem>
+			<MenuItem Header="_Edit">
+				<MenuItem Command="ApplicationCommands.Undo"/>
+				<MenuItem Command="ApplicationCommands.Redo"/>
+				<Separator />
+				<MenuItem Command="ApplicationCommands.Cut"/>
+				<MenuItem Command="ApplicationCommands.Copy"/>
+				<MenuItem Command="ApplicationCommands.Paste"/>
+				<MenuItem Command="ApplicationCommands.Delete"/>
+				<Separator />
+				<MenuItem Command="ApplicationCommands.SelectAll"/>
+				<!--<MenuItem Command="lc:CustomCommands.EditSelectAllWires"/>
+				<MenuItem Command="lc:CustomCommands.EditSelectFreeWires"/>
+				<MenuItem Command="lc:CustomCommands.EditSelectFloatingSymbols"/>
+				<MenuItem Command="lc:CustomCommands.EditSelectAllButWires"/>
+				<MenuItem Command="lc:CustomCommands.EditUnselectAllWires"/>
+				<MenuItem Command="lc:CustomCommands.EditUnselectAllButWires"/>
+				<Separator />
+				<MenuItem Command="lc:CustomCommands.EditSelectAllProbes"/>
+				<MenuItem Command="lc:CustomCommands.EditSelectAllProbesWithWire"/>-->
+			</MenuItem>
+            <MenuItem Header="_Circuit">
+				<!--<MenuItem Command="lc:CustomCommands.CircuitProject"/>
+				<MenuItem Command="lc:CustomCommands.CircuitCurrent"/>
+				<MenuItem Command="lc:CustomCommands.CircuitNew"/>
+				<MenuItem Command="lc:CustomCommands.CircuitDelete"/>-->
+            </MenuItem>
+            <MenuItem Header="_Tools">
+				<!--<MenuItem Command="lc:CustomCommands.ToolsReport"/>
+				<MenuItem Command="lc:CustomCommands.ToolsOscilloscope"/>
+				<MenuItem Command="lc:CustomCommands.ToolsOptions"/>-->
+			</MenuItem>
+			<MenuItem Header="_Help">
+				<MenuItem Command="ApplicationCommands.Help"/>
+				<Separator />
+				<!--<MenuItem Command="lc:CustomCommands.HelpAbout"/>-->
+			</MenuItem>
+		</Menu>
+
+		<!-- Main content of the window -->
+		<Grid Grid.Row="1" Margin="3">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="0.25*" MinWidth="100"/> <!-- Left column with List of circuits and properties -->
+				<ColumnDefinition Width="Auto"/> <!-- Column Splitter -->
+				<ColumnDefinition Width="*" MinWidth="100"/> <!-- Main Diagram and controls -->
+			</Grid.ColumnDefinitions>
+
+			<!-- Left column with List of circuits and properties and Running map tree -->
+			<Grid Grid.Column="0">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="1*" Name="runningTree"/>
+					<RowDefinition Height="0*" Name="projectBrowser"/>
+				</Grid.RowDefinitions>
+
+				<!-- Top row with Running map tree -->
+				<GroupBox Grid.Row="0" Header="Running Circuit">
+					<!--<TreeView BorderThickness="0"
+						ItemsSource="{Binding Path=CircuitEditor.CircuitRunner.RootMap}"
+						SelectedItemChanged="RunningMapTreeViewSelectedItemChanged"
+						MouseDoubleClick="RunningMapTreeViewMouseDoubleClick"
+					>
+						<TreeView.ItemContainerStyle>
+							<Style TargetType="TreeViewItem">
+								<Setter Property="BorderThickness" Value="2"/>
+								<Style.Triggers>
+									<DataTrigger Binding="{Binding Path=IsRoot}" Value="True">
+										<Setter Property="IsExpanded" Value="True"/>
+									</DataTrigger>
+									<DataTrigger Binding="{Binding Path=IsCurrent}" Value="True">
+										<Setter Property="IsSelected" Value="True"/>
+										<Setter Property="IsExpanded" Value="True"/>
+										<Setter Property="BorderBrush" Value="{StaticResource MarkerStroke}"/>
+									</DataTrigger>
+								</Style.Triggers>
+							</Style>
+						</TreeView.ItemContainerStyle>
+						<TreeView.Resources>
+							<HierarchicalDataTemplate DataType="{x:Type lc:CircuitMap}" ItemsSource="{Binding Path=Children}">
+								<StackPanel Orientation="Horizontal" ToolTip="{Binding Path=Circuit.ToolTip}" Margin="5,3,5,3">
+									<ContentControl Content="{Binding Path=CircuitGlyph}">
+										<ContentControl.LayoutTransform>
+											<ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
+										</ContentControl.LayoutTransform>
+									</ContentControl>
+									<TextBlock Text="{Binding Path=Circuit.Notation}" VerticalAlignment="Center" Margin="5,0,0,0"/>
+									<TextBlock Text="{Binding Path=CircuitSymbol.Point}" VerticalAlignment="Center" Margin="5,0,0,0"/>
+								</StackPanel>
+							</HierarchicalDataTemplate>
+						</TreeView.Resources>
+					</TreeView>-->
+				</GroupBox>
+
+				<!-- Bottom row with List of circuits and properties -->
+				<GroupBox Grid.Row="1" Header="Project" DataContext="{Binding Source={StaticResource circuitDescriptorList}}">
+					<!--<ListView ItemsSource="{Binding}" SelectionMode="Single" BorderThickness="0" HorizontalContentAlignment="Stretch">
+						<ListView.GroupStyle>
+							<GroupStyle>
+								<GroupStyle.HeaderTemplate>
+									<DataTemplate>
+										<Border BorderThickness="0,0,0,2" Margin="0,5,0,0">
+											<Border.BorderBrush>
+												<RadialGradientBrush>
+													<GradientStop Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" Offset="0"/>
+													<GradientStop Color="{DynamicResource {x:Static SystemColors.ControlDarkColorKey}}" Offset="0.2"/>
+													<GradientStop Color="{DynamicResource {x:Static SystemColors.ControlDarkColorKey}}" Offset="0.8"/>
+													<GradientStop Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" Offset="1"/>
+												</RadialGradientBrush>
+											</Border.BorderBrush>
+											<TextBlock Text="{Binding Path=Name}" FontWeight="Bold"
+												Foreground="{DynamicResource {x:Static SystemColors.AppWorkspaceBrushKey}}"
+											/>
+										</Border>
+									</DataTemplate>
+								</GroupStyle.HeaderTemplate>
+							</GroupStyle>
+						</ListView.GroupStyle>
+						<ListView.Resources>
+							<DataTemplate DataType="{x:Type lc:ButtonDescriptor}">
+								<StackPanel Orientation="Horizontal" Margin="8,0,0,0" Tag="{Binding}"
+									MouseDown="DescriptorMouseDown"
+									MouseUp="DescriptorMouseUp"
+									MouseMove="DescriptorMouseMove"
+								>
+									<ContentControl Content="{Binding Path=Glyph}" Margin="3,3,8,3">
+										<ContentControl.LayoutTransform>
+											<ScaleTransform ScaleX="0.75" ScaleY="0.75"/>
+										</ContentControl.LayoutTransform>
+									</ContentControl>
+									<TextBox Text="{Binding Path=Notation, Mode=TwoWay}" VerticalAlignment="Center" Width="20" ToolTip="Enter notation of the button"/>
+									<TextBlock Text="{Binding Path=Name}" VerticalAlignment="Center"/>
+								</StackPanel>
+							</DataTemplate>
+
+							<DataTemplate DataType="{x:Type lc:ConstantDescriptor}">
+								<StackPanel Orientation="Horizontal" Margin="8,0,0,0" Tag="{Binding}"
+									MouseDown="DescriptorMouseDown"
+									MouseUp="DescriptorMouseUp"
+									MouseMove="DescriptorMouseMove"
+								>
+									<ContentControl Content="{Binding Path=Glyph}" Margin="3,3,8,3">
+										<ContentControl.LayoutTransform>
+											<ScaleTransform ScaleX="0.75" ScaleY="0.75"/>
+										</ContentControl.LayoutTransform>
+									</ContentControl>
+									<Grid Margin="3,3,8,3" VerticalAlignment="Center">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="Auto" MinWidth="65"/>
+											<ColumnDefinition Width="Auto"/>
+										</Grid.ColumnDefinitions>
+										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto"/>
+											<RowDefinition Height="Auto"/>
+										</Grid.RowDefinitions>
+										<ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Path=BitWidthRange}" SelectedItem="{Binding Path=BitWidth}"
+											ToolTip="Choose bit width of the constant"
+										/>
+										<TextBlock Grid.Row="0" Grid.Column="1" Text="Bit Width" Margin="8,0,0,0"/>
+										<TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Path=Value, Mode=TwoWay}" VerticalAlignment="Center"
+											CharacterCasing="Upper" MaxLength="4" ToolTip="Enter initial value for the constant"
+											Margin="0"
+										/>
+										<TextBlock Grid.Row="1" Grid.Column="1" Text="Value" Margin="8,0,0,0"/>
+									</Grid>
+									<TextBlock Text="{Binding Path=Name}" VerticalAlignment="Center"/>
+								</StackPanel>
+							</DataTemplate>
+
+							<DataTemplate DataType="{x:Type lc:GateDescriptor}">
+								<DataTemplate.Resources>
+									<Style TargetType="ComboBox">
+										<Style.Triggers>
+											<DataTrigger Binding="{Binding Path=InputCountRangeLength}" Value="1">
+												<Setter Property="Width" Value="0"/>
+												<Setter Property="Margin" Value="0"/>
+												<Setter Property="Visibility" Value="Hidden"/>
+											</DataTrigger>
+										</Style.Triggers>
+									</Style>
+								</DataTemplate.Resources>
+								<StackPanel Orientation="Horizontal" Margin="8,0,0,0" Tag="{Binding}"
+									MouseDown="DescriptorMouseDown"
+									MouseUp="DescriptorMouseUp"
+									MouseMove="DescriptorMouseMove"
+								>
+									<ContentControl Content="{Binding Path=Glyph}" Margin="3,3,8,3">
+										<ContentControl.LayoutTransform>
+											<ScaleTransform ScaleX="0.75" ScaleY="0.75"/>
+										</ContentControl.LayoutTransform>
+									</ContentControl>
+									<ComboBox VerticalAlignment="Center" Margin="0,0,3,0" MinWidth="42"
+										SelectedItem="{Binding Path=InputCount, Mode=TwoWay}" ItemsSource="{Binding Path=InputCountRange}"
+										ToolTip="Choose number of inputs for the gate"
+									/>
+									<TextBlock Text="{Binding Path=Name}" VerticalAlignment="Center"/>
+								</StackPanel>
+							</DataTemplate>
+
+							<DataTemplate DataType="{x:Type lc:PinDescriptor}">
+								<StackPanel Orientation="Horizontal" Margin="8,0,0,0" Tag="{Binding}"
+									MouseDown="DescriptorMouseDown"
+									MouseUp="DescriptorMouseUp"
+									MouseMove="DescriptorMouseMove"
+								>
+									<ContentControl Content="{Binding Path=Glyph}" Margin="3,3,8,3">
+										<ContentControl.LayoutTransform>
+											<ScaleTransform ScaleX="0.75" ScaleY="0.75"/>
+										</ContentControl.LayoutTransform>
+									</ContentControl>
+									<Grid Margin="3,3,8,3" VerticalAlignment="Center">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="Auto" MinWidth="65"/>
+											<ColumnDefinition Width="Auto"/>
+										</Grid.ColumnDefinitions>
+										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto"/>
+											<RowDefinition Height="Auto"/>
+										</Grid.RowDefinitions>
+										<ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Path=BitWidthRange}" SelectedItem="{Binding Path=BitWidth}"
+											ToolTip="Choose bit width of the pin"
+										/>
+										<TextBlock Grid.Row="0" Grid.Column="1" Text="Bit Width" Margin="8,0,0,0"/>
+										<ComboBox Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0"
+											SelectedItem="{Binding Path=PinSide, Mode=TwoWay}" ItemsSource="{Binding Path=PinSideRange}"
+											ToolTip="Choose the side of the circuit's glyph the new pin will reside on"
+										/>
+										<TextBlock Grid.Row="1" Grid.Column="1" Text="Side" Margin="8,0,0,0"/>
+									</Grid>
+									<TextBlock Text="{Binding Path=Name}" VerticalAlignment="Center"/>
+								</StackPanel>
+							</DataTemplate>
+
+							<DataTemplate DataType="{x:Type lc:MemoryDescriptor}">
+								<StackPanel Orientation="Horizontal" Margin="8,0,0,0" Tag="{Binding}"
+									MouseDown="DescriptorMouseDown"
+									MouseUp="DescriptorMouseUp"
+									MouseMove="DescriptorMouseMove"
+								>
+									<ContentControl Content="{Binding Path=Glyph}" Margin="3,3,8,3">
+										<ContentControl.LayoutTransform>
+											<ScaleTransform ScaleX="0.75" ScaleY="0.75"/>
+										</ContentControl.LayoutTransform>
+									</ContentControl>
+									<Grid Margin="3,3,8,3" VerticalAlignment="Center">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="Auto" MinWidth="65"/>
+											<ColumnDefinition Width="Auto"/>
+										</Grid.ColumnDefinitions>
+										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto"/>
+											<RowDefinition Height="Auto"/>
+										</Grid.RowDefinitions>
+										<ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Path=AddressBitWidthRange}" SelectedItem="{Binding Path=AddressBitWidth}"
+											ToolTip="Choose bit width of the address pin"
+										/>
+										<TextBlock Grid.Row="0" Grid.Column="1" Text="Address Bits" Margin="8,0,0,0"/>
+										<ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=DataBitWidthRange}" SelectedItem="{Binding Path=DataBitWidth}"
+											ToolTip="Choose bit width of the data pin"
+										/>
+										<TextBlock Grid.Row="1" Grid.Column="1" Text="Data Bits" Margin="8,0,0,0"/>
+									</Grid>
+									<TextBlock Text="{Binding Path=Name}" VerticalAlignment="Center"/>
+								</StackPanel>
+							</DataTemplate>
+
+							<DataTemplate DataType="{x:Type lc:LogicalCircuitDescriptor}">
+								<DataTemplate.Resources>
+									<Style TargetType="Border">
+										<Style.Triggers>
+											<DataTrigger Binding="{Binding Path=IsCurrent}" Value="True">
+												<Setter Property="BorderBrush" Value="{DynamicResource MarkerStroke}"/>
+											</DataTrigger>
+										</Style.Triggers>
+									</Style>
+								</DataTemplate.Resources>
+								<Border BorderThickness="1" Margin="0,0,5,0">
+									<StackPanel Orientation="Horizontal" Margin="8,0,0,0" Tag="{Binding}"
+										MouseDown="DescriptorMouseDown"
+										MouseUp="DescriptorMouseUp"
+										MouseMove="DescriptorMouseMove"
+									>
+										<ContentControl Content="{Binding Path=Glyph}" Margin="3,3,8,3">
+											<ContentControl.LayoutTransform>
+												<ScaleTransform ScaleX="0.75" ScaleY="0.75"/>
+											</ContentControl.LayoutTransform>
+										</ContentControl>
+										<TextBlock Text="{Binding Path=Name}" VerticalAlignment="Center"/>
+									</StackPanel>
+								</Border>
+							</DataTemplate>
+
+							<DataTemplate DataType="{x:Type lc:SplitterDescriptor}">
+								<StackPanel Orientation="Horizontal" Margin="8,0,0,0" Tag="{Binding}"
+									MouseDown="DescriptorMouseDown"
+									MouseUp="DescriptorMouseUp"
+									MouseMove="DescriptorMouseMove"
+								>
+									<ContentControl Content="{Binding Path=Glyph}" Margin="8,5,8,5" VerticalAlignment="Center">
+										<ContentControl.LayoutTransform>
+											<ScaleTransform ScaleX="0.75" ScaleY="0.75"/>
+										</ContentControl.LayoutTransform>
+									</ContentControl>
+									<Grid Margin="8,3,8,3" VerticalAlignment="Center">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="Auto" MinWidth="65"/>
+											<ColumnDefinition Width="Auto"/>
+										</Grid.ColumnDefinitions>
+										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto"/>
+											<RowDefinition Height="Auto"/>
+											<RowDefinition Height="Auto"/>
+										</Grid.RowDefinitions>
+
+										<ComboBox Grid.Row="0" Grid.Column="0"
+											ItemsSource="{Binding Path=BitWidthRange}" SelectedItem="{Binding Path=BitWidth}"
+											ToolTip="Choose bit width of the wide connector of the splitter."
+										/>
+										<TextBlock Grid.Row="0" Grid.Column="1" Text="Bit Width" Margin="8,0,0,0" VerticalAlignment="Center"/>
+
+										<ComboBox Grid.Row="1" Grid.Column="0"
+											ItemsSource="{Binding Path=PinCountRange}" SelectedItem="{Binding Path=PinCount}"
+											ToolTip="Choose number of thin connectors of the splitter."
+										/>
+										<TextBlock Grid.Row="1" Grid.Column="1" Text="Pins" Margin="8,0,0,0" VerticalAlignment="Center"/>
+
+										<ComboBox Grid.Row="2" Grid.Column="0"
+											ItemsSource="{Binding Path=CircuitRotationRange}" SelectedItem="{Binding Path=CircuitRotation}"
+											ToolTip="Choose orientation of the splitter."
+										/>
+										<TextBlock Grid.Row="2" Grid.Column="1" Text="Rotation" Margin="8,0,0,0" VerticalAlignment="Center"/>
+									</Grid>
+									<TextBlock Text="Splitter" VerticalAlignment="Center"/>
+								</StackPanel>
+							</DataTemplate>
+						</ListView.Resources>
+					</ListView>-->
+				</GroupBox>
+			</Grid>
+
+			<!-- Column Splitter -->
+			<GridSplitter Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Stretch" Width="4" Background="Transparent"/>
+
+			<!-- Main Diagram and controls -->
+			<Grid Grid.Column="2">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+
+				<!-- Main Diagram -->
+				<GroupBox Grid.Row="0" Header="{Binding Path=CircuitEditor.Project.LogicalCircuit.Name}">
+					<ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+						<Canvas Name="Diagram" HorizontalAlignment="Left" VerticalAlignment="Top"
+							Width="{x:Static lc:Plotter.LogicalCircuitScreenWidth}"
+							Height="{x:Static lc:Plotter.LogicalCircuitScreenHeight}"
+							Style="{StaticResource LogicCircuitBackground}"
+							AllowDrop="True"
+							DragEnter="DiagramDragEnter"
+							DragLeave="DiagramDragLeave"
+							DragOver="DiagramDragOver"
+							Drop="DiagramDrop"
+							MouseDown="DiagramMouseDown"
+							MouseUp="DiagramMouseUp"
+							MouseMove="DiagramMouseMove"
+							LostFocus="DiagramLostFocus"
+							LostKeyboardFocus="DiagramLostKeyboardFocus"
+						>
+							<Canvas.LayoutTransform>
+								<ScaleTransform
+									ScaleX="{Binding ElementName=zoom, Path=Value}"
+									ScaleY="{Binding ElementName=zoom, Path=Value}"
+								/>
+							</Canvas.LayoutTransform>
+						</Canvas>
+					</ScrollViewer>
+				</GroupBox>
+
+				<!-- Controls -->
+				<Border Grid.Row="1" Margin="0,3,0,0" Padding="3"
+					BorderThickness="1"
+					CornerRadius="3"
+					Background="Transparent"
+					BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
+				>
+					<Border.Triggers>
+						<EventTrigger RoutedEvent="Mouse.MouseEnter">
+							<BeginStoryboard HandoffBehavior="SnapshotAndReplace" Storyboard="{StaticResource openControlPanel}"/>
+						</EventTrigger>
+						<EventTrigger RoutedEvent="Mouse.MouseLeave">
+							<BeginStoryboard HandoffBehavior="SnapshotAndReplace" Storyboard="{StaticResource closeControlPanel}"/>
+						</EventTrigger>
+					</Border.Triggers>
+					<Canvas Name="controlPanel" ClipToBounds="True">
+						<WrapPanel Name="controlPanelContent" Orientation="Horizontal" Width="{Binding ElementName=controlPanel, Path=ActualWidth}">
+							<WrapPanel.Resources>
+								<DrawingBrush x:Key="sliderBackground">
+									<DrawingBrush.Drawing>
+										<GeometryDrawing>
+											<GeometryDrawing.Brush>
+												<LinearGradientBrush StartPoint="0,1" EndPoint="1,1">
+													<GradientStop Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}" Offset="1"/>
+													<GradientStop Color="{DynamicResource {x:Static SystemColors.ControlLightLightColorKey}}" Offset="0"/>
+												</LinearGradientBrush>
+											</GeometryDrawing.Brush>
+											<GeometryDrawing.Geometry>
+												<PathGeometry>
+													<PathFigure IsClosed="True">
+														<PolyLineSegment Points="100,0 100,-50"/>
+													</PathFigure>
+												</PathGeometry>
+											</GeometryDrawing.Geometry>
+										</GeometryDrawing>
+									</DrawingBrush.Drawing>
+								</DrawingBrush>
+							</WrapPanel.Resources>
+							<CheckBox Content="Po_wer On" VerticalAlignment="Center" Name="PowerSwitch" IsChecked="{Binding Path=CircuitEditor.Power}"
+								ToolTip="Turn the power on or off."
+							>
+								<CheckBox.Triggers>
+									<EventTrigger RoutedEvent="CheckBox.GotFocus">
+										<BeginStoryboard HandoffBehavior="SnapshotAndReplace" Storyboard="{StaticResource openControlPanel}"/>
+									</EventTrigger>
+									<EventTrigger RoutedEvent="CheckBox.LostFocus">
+										<BeginStoryboard HandoffBehavior="SnapshotAndReplace" Storyboard="{StaticResource closeControlPanel}"/>
+									</EventTrigger>
+									<EventTrigger RoutedEvent="CheckBox.Checked">
+										<BeginStoryboard HandoffBehavior="SnapshotAndReplace" Storyboard="{StaticResource openRunningTree}"/>
+									</EventTrigger>
+									<EventTrigger RoutedEvent="CheckBox.Unchecked">
+										<BeginStoryboard HandoffBehavior="SnapshotAndReplace" Storyboard="{StaticResource openProjectBrowser}"/>
+									</EventTrigger>
+								</CheckBox.Triggers>
+							</CheckBox>
+							<Separator Margin="8"/>
+							<StackPanel Orientation="Horizontal">
+								<Label Content="_Zoom:" Target="{Binding ElementName=zoom}" VerticalAlignment="Center"/>
+								<Slider Width="100" x:Name="zoom" VerticalAlignment="Center" Background="{StaticResource sliderBackground}"
+									Minimum="0.1" Maximum="3" Value="{Binding Path=CircuitEditor.Zoom, Mode=TwoWay}"
+									AutoToolTipPlacement="TopLeft"
+									AutoToolTipPrecision="1"
+									IsMoveToPointEnabled="True"
+									TickPlacement="TopLeft"
+									Ticks="0, 0.5, 1, 1.5, 2, 2.5, 3"
+									ToolTip="Set diagram's zoom."
+								>
+									<Slider.Triggers>
+										<EventTrigger RoutedEvent="Slider.GotFocus">
+											<BeginStoryboard HandoffBehavior="SnapshotAndReplace" Storyboard="{StaticResource openControlPanel}"/>
+										</EventTrigger>
+										<EventTrigger RoutedEvent="Slider.GotKeyboardFocus">
+											<BeginStoryboard HandoffBehavior="SnapshotAndReplace" Storyboard="{StaticResource openControlPanel}"/>
+										</EventTrigger>
+										<EventTrigger RoutedEvent="Slider.LostFocus">
+											<BeginStoryboard HandoffBehavior="SnapshotAndReplace" Storyboard="{StaticResource closeControlPanel}"/>
+										</EventTrigger>
+										<EventTrigger RoutedEvent="Slider.LostKeyboardFocus">
+											<BeginStoryboard HandoffBehavior="SnapshotAndReplace" Storyboard="{StaticResource closeControlPanel}"/>
+										</EventTrigger>
+									</Slider.Triggers>
+								</Slider>
+							</StackPanel>
+							<Separator Margin="8"/>
+							<StackPanel Orientation="Horizontal">
+								<Label Content="Fre_quency:" Target="{Binding ElementName=frequency}" VerticalAlignment="Center"/>
+								<Slider Width="100" x:Name="frequency" VerticalAlignment="Center" Background="{StaticResource sliderBackground}"
+									Minimum="1" Maximum="50" Value="{Binding Path=CircuitEditor.Frequency, Mode=TwoWay}"
+									Ticks="1,10,20,30,40,50"
+									LargeChange="10"
+									SmallChange="1"
+									IsEnabled="{Binding ElementName=PowerSwitch, Path=IsChecked}"
+									AutoToolTipPlacement="TopLeft"
+									AutoToolTipPrecision="0"
+									IsMoveToPointEnabled="True"
+									TickPlacement="TopLeft"
+									ToolTip="Change the frequency of clock gates of the running circuit."
+								>
+									<Slider.Triggers>
+										<EventTrigger RoutedEvent="Slider.GotFocus">
+											<BeginStoryboard HandoffBehavior="SnapshotAndReplace" Storyboard="{StaticResource openControlPanel}"/>
+										</EventTrigger>
+										<EventTrigger RoutedEvent="Slider.GotKeyboardFocus">
+											<BeginStoryboard HandoffBehavior="SnapshotAndReplace" Storyboard="{StaticResource openControlPanel}"/>
+										</EventTrigger>
+										<EventTrigger RoutedEvent="Slider.LostFocus">
+											<BeginStoryboard HandoffBehavior="SnapshotAndReplace" Storyboard="{StaticResource closeControlPanel}"/>
+										</EventTrigger>
+										<EventTrigger RoutedEvent="Slider.LostKeyboardFocus">
+											<BeginStoryboard HandoffBehavior="SnapshotAndReplace" Storyboard="{StaticResource closeControlPanel}"/>
+										</EventTrigger>
+									</Slider.Triggers>
+								</Slider>
+							</StackPanel>
+							<Separator Margin="8"/>
+							<StackPanel Orientation="Horizontal">
+								<CheckBox Content="Run at ma_ximum speed" VerticalAlignment="Center"
+									IsChecked="{Binding Path=CircuitEditor.IsMaximumSpeed, Mode=TwoWay}"
+									IsEnabled="{Binding ElementName=PowerSwitch, Path=IsChecked}"
+									Name="atMaxSpeed"
+								>
+									<CheckBox.ToolTip>
+										<Span>Runs the circuit on maximum possible speed ignoring frequency set by the slider on the left.
+										<LineBreak/>
+										<Bold>Warning!</Bold> Checking this box may lead to unresponsive user interface on some computers.</Span>
+									</CheckBox.ToolTip>
+									<CheckBox.Triggers>
+										<EventTrigger RoutedEvent="CheckBox.GotFocus">
+											<BeginStoryboard HandoffBehavior="SnapshotAndReplace" Storyboard="{StaticResource openControlPanel}"/>
+										</EventTrigger>
+										<EventTrigger RoutedEvent="CheckBox.LostFocus">
+											<BeginStoryboard HandoffBehavior="SnapshotAndReplace" Storyboard="{StaticResource closeControlPanel}"/>
+										</EventTrigger>
+									</CheckBox.Triggers>
+								</CheckBox>
+								<TextBlock VerticalAlignment="Center"
+									Foreground="{Binding ElementName=atMaxSpeed, Path=Foreground}"
+									IsEnabled="{Binding ElementName=PowerSwitch, Path=IsChecked}"
+									ToolTip="{Binding ElementName=atMaxSpeed, Path=ToolTip, Mode=OneTime}"
+								>
+									<Span>(<Bold>Warning!</Bold> High CPU load)</Span>
+								</TextBlock>
+							</StackPanel>
+						</WrapPanel>
+					</Canvas>
+				</Border>
+			</Grid>
+		</Grid>
+
+		<!-- Status bar of the window -->
+		<Grid Grid.Row="2">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/> <!-- Status text -->
+				<ColumnDefinition Width="Auto"/> <!-- Power indicator -->
+				<ColumnDefinition Width="Auto" MinWidth="20"/> <!-- Empty space to make Resize Grip visible -->
+			</Grid.ColumnDefinitions>
+			<!--<TextBlock Grid.Column="0" Name="status" Margin="8,0,8,0"/>-->
+			<TextBlock Grid.Column="0" Margin="8,0,8,0" Text="{Binding Path=Status}" VerticalAlignment="Center"/>
+			<StackPanel Grid.Column="1" Orientation="Horizontal" >
+				<StackPanel.Resources>
+					<Style x:Key="powerColor" TargetType="{x:Type Canvas}">
+						<Style.Triggers>
+							<DataTrigger Binding="{Binding ElementName=PowerSwitch, Path=IsChecked}" Value="True">
+								<Setter Property="Background" Value="Red"/>
+								<Setter Property="ToolTip" Value="Power On"/>
+							</DataTrigger>
+							<DataTrigger Binding="{Binding ElementName=PowerSwitch, Path=IsChecked}" Value="False">
+								<Setter Property="Background" Value="Gray"/>
+								<Setter Property="ToolTip" Value="Power Off"/>
+							</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</StackPanel.Resources>
+				<!--<TextBlock Text="Performance Deprivation" Margin="3" Visibility="{Binding Path=PerformanceDeprivation}"/>-->
+				<!-- this hidden element is used to control color and tooltip of next visible one -->
+				<Canvas Name="powerMetter" Style="{DynamicResource powerColor}" Width="0" Height="0" Visibility="Hidden"/>
+				<Border MinWidth="20" MinHeight="20"
+					BorderThickness="2"
+					CornerRadius="3"
+					BorderBrush="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}"
+					Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+					ToolTip="{Binding ElementName=powerMetter, Path=ToolTip}"
+					MouseDown="PowerButtonMouseDown"
+					Margin="0, 0, 3, 2"
+				>
+					<Grid>
+						<Ellipse StrokeThickness="2" Width="15" Height="15" Margin="2"
+							Stroke="{Binding ElementName=powerMetter, Path=Background}"
+						/>
+						<Rectangle StrokeThickness="2" Width="6" Height="13" Margin="0, -6, 0, 0"
+							Fill="{Binding ElementName=powerMetter, Path=Background}"
+							Stroke="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+						/>
+					</Grid>
+				</Border>
+			</StackPanel>
+		</Grid>
 	</Grid>
 </Window>

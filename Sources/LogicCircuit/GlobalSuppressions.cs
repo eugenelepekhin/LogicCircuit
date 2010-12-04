@@ -84,3 +84,4 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "LogicCircuit.CircuitButtonSet.#Delete(LogicCircuit.DataPersistent.RowId)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "LogicCircuit.SplitterSet.#Delete(LogicCircuit.DataPersistent.RowId)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "LogicCircuit.WireSet.#Delete(LogicCircuit.DataPersistent.RowId)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Scope = "member", Target = "LogicCircuit.CircuitEditor.#Zoom")]

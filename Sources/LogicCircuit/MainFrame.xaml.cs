@@ -35,8 +35,10 @@ namespace LogicCircuit {
 		public CircuitEditor CircuitEditor {
 			get { return this.circuitEditor; }
 			set {
-				this.circuitEditor = value;
-				this.NotifyPropertyChanged("CircuitEditor");
+				if(this.circuitEditor != value) {
+					this.circuitEditor = value;
+					this.NotifyPropertyChanged("CircuitEditor");
+				}
 			}
 		}
 
@@ -143,6 +145,132 @@ namespace LogicCircuit {
 				this.ShowErrorMessage(exception.Message, null);
 			} else {
 				this.ShowErrorMessage(exception.Message, exception.ToString());
+			}
+		}
+
+		private void WindowLostFocus(object sender, RoutedEventArgs e) {
+			try {
+				//this.CircuitEditor.CanvasLostFocus(sender, e);
+			} catch(Exception exception) {
+				Tracer.Report("MainFrame.MainFrameLostFocus", exception);
+				this.ReportException(exception);
+			}
+		}
+
+		private void WindowLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e) {
+			try {
+				//this.CircuitEditor.CanvasLostFocus(sender, e);
+			} catch(Exception exception) {
+				Tracer.Report("MainFrame.MainFrameLostKeyboardFocus", exception);
+				this.ReportException(exception);
+			}
+		}
+
+		private void WindowKeyDown(object sender, KeyEventArgs e) {
+			try {
+				//this.CircuitEditor.CanvasKeyDown(sender, e);
+			} catch(Exception exception) {
+				Tracer.Report("MainFrame.MainFrameKeyDown", exception);
+				this.ReportException(exception);
+			}
+		}
+
+		private void WindowKeyUp(object sender, KeyEventArgs e) {
+			try {
+				//this.CircuitEditor.CanvasKeyUp(sender, e);
+			} catch(Exception exception) {
+				Tracer.Report("MainFrame.MainFrameKeyUp", exception);
+				this.ReportException(exception);
+			}
+		}
+
+		private void DiagramDragEnter(object sender, DragEventArgs e) {
+			try {
+				//this.CircuitEditor.CanvasDragOver(sender, e);
+			} catch(Exception exception) {
+				Tracer.Report("MainFrame.DiagramDragEnter", exception);
+				this.ReportException(exception);
+			}
+		}
+
+		private void DiagramDragOver(object sender, DragEventArgs e) {
+			try {
+				//this.CircuitEditor.CanvasDragOver(sender, e);
+			} catch(Exception exception) {
+				Tracer.Report("MainFrame.DiagramDragOver", exception);
+				this.ReportException(exception);
+			}
+		}
+
+		private void DiagramDragLeave(object sender, DragEventArgs e) {
+			try {
+				//this.CircuitEditor.CanvasDragLeave(sender, e);
+			} catch(Exception exception) {
+				Tracer.Report("MainFrame.DiagramDragLeave", exception);
+				this.ReportException(exception);
+			}
+		}
+
+		private void DiagramDrop(object sender, DragEventArgs e) {
+			try {
+				//this.CircuitEditor.CanvasDrop(sender, e);
+			} catch(Exception exception) {
+				Tracer.Report("MainFrame.DiagramDrop", exception);
+				this.ReportException(exception);
+			}
+		}
+
+		private void DiagramMouseDown(object sender, MouseButtonEventArgs e) {
+			try {
+				//this.CircuitEditor.CanvasMouseDown(sender, e);
+			} catch(Exception exception) {
+				Tracer.Report("MainFrame.DiagramMouseDown", exception);
+				this.ReportException(exception);
+			}
+		}
+
+		private void DiagramMouseUp(object sender, MouseButtonEventArgs e) {
+			try {
+				//this.CircuitEditor.CanvasMouseUp(sender, e);
+			} catch(Exception exception) {
+				Tracer.Report("MainFrame.DiagramMouseUp", exception);
+				this.ReportException(exception);
+			}
+		}
+
+		private void DiagramMouseMove(object sender, MouseEventArgs e) {
+			try {
+				//this.CircuitEditor.CanvasMouseMove(sender, e);
+			} catch(Exception exception) {
+				Tracer.Report("MainFrame.DiagramMouseMove", exception);
+				this.ReportException(exception);
+			}
+		}
+
+		private void DiagramLostFocus(object sender, RoutedEventArgs e) {
+			try {
+				//this.CircuitEditor.CanvasLostFocus(sender, e);
+			} catch(Exception exception) {
+				Tracer.Report("MainFrame.DiagramLostFocus", exception);
+				this.ReportException(exception);
+			}
+		}
+
+		private void DiagramLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e) {
+			try {
+				//this.CircuitEditor.CanvasLostFocus(sender, e);
+			} catch(Exception exception) {
+				Tracer.Report("MainFrame.DiagramLostKeyboardFocus", exception);
+				this.ReportException(exception);
+			}
+		}
+
+		private void PowerButtonMouseDown(object sender, MouseButtonEventArgs e) {
+			try {
+				this.CircuitEditor.Power = (this.PowerSwitch.IsChecked.Value == false);
+			} catch(Exception exception) {
+				Tracer.Report("MainFrame.PowerButtonMouseDown", exception);
+				this.ReportException(exception);
 			}
 		}
 	}
