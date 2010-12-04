@@ -7,5 +7,6 @@ namespace LogicCircuit.DataPersistent {
 		string Name { get; }
 		IEnumerable<RowId> Rows { get; }
 		bool WasChanged(int fromVersion, int toVersion);
+		bool WasAffected(int version);
 	}
 }
