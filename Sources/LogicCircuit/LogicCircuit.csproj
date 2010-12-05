@@ -149,6 +149,11 @@
     <Compile Include="Settings\SettingsIntegerCache.cs" />
     <Compile Include="Settings\SettingsStringCache.cs" />
     <Compile Include="Settings\SettingsWindowLocationCache.cs" />
+    <Compile Include="SymbolShapes\SymbolShape.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SymbolShape.resx</DependentUpon>
+    </Compile>
     <Compile Include="Tracer.cs" />
     <Compile Include="TracerMessage.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -172,6 +177,42 @@
       <DependentUpon>Mainframe.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="SymbolShapes\Clock.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SymbolShapes\Constant.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SymbolShapes\Led.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SymbolShapes\Pin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SymbolShapes\Probe.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SymbolShapes\Rectangular.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SymbolShapes\SevenSegment.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SymbolShapes\ShapedAnd.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SymbolShapes\ShapedNot.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SymbolShapes\ShapedOr.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SymbolShapes\ShapedTriState.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SymbolShapes\ShapedXor.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <AppDesigner Include="Properties\" />
@@ -196,6 +237,11 @@
     <EmbeddedResource Include="Schema\Schema.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Schema.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>LogicCircuit</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SymbolShapes\SymbolShape.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SymbolShape.Designer.cs</LastGenOutput>
       <CustomToolNamespace>LogicCircuit</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="TracerMessage.resx">
@@ -228,6 +274,7 @@
   <ItemGroup>
     <CodeAnalysisDictionary Include="CustomDictionary.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>$(SolutionDir)Tools\ResourceWrapper.Generator.exe ProjectPath=$(ProjectPath)
