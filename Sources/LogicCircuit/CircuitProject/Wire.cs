@@ -24,9 +24,11 @@ namespace LogicCircuit {
 
 		public override int Z { get { return 1; } }
 
-		public override FrameworkElement Glyph {
+		public Line WireGlyph {
 			get { return this.glyph ?? (this.glyph = Plotter.CreateGlyph(this)); }
 		}
+
+		public override FrameworkElement Glyph { get { return this.WireGlyph; } }
 
 		public override void Shift(int x, int y) {
 			this.X1 += x;

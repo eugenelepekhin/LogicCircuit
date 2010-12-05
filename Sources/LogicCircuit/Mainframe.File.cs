@@ -61,7 +61,7 @@ namespace LogicCircuit {
 		}
 
 		private void Edit(string file) {
-			CircuitEditor editor = (file != null) ? new CircuitEditor(this, file) : new CircuitEditor(this);
+			CircuitEditor editor = new CircuitEditor(this, file);
 			if(this.CircuitEditor != null) {
 				this.CircuitEditor.Power = false;
 			}
@@ -69,6 +69,7 @@ namespace LogicCircuit {
 				Settings.User.AddRecentFile(editor.File);
 			}
 			this.CircuitEditor = editor;
+			this.CircuitEditor.Refresh();
 			this.Status = LogicCircuit.Resources.Ready;
 		}
 
