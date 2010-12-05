@@ -69,31 +69,25 @@ namespace LogicCircuit {
 		public Mainframe() {
 			this.DataContext = this;
 			this.InitializeComponent();
-			this.Loaded += new RoutedEventHandler(this.MainFrameLoaded);
-		}
-
-		private void MainFrameLoaded(object sender, RoutedEventArgs e) {
-			this.Dispatcher.BeginInvoke(new Action(this.PostLoaded), DispatcherPriority.Normal);
-		}
-
-		private void PostLoaded() {
-			try {
-				string file = App.CurrentApp.FileToOpen;
-				if(string.IsNullOrEmpty(file) || !File.Exists(file)) {
-					if(Settings.User.LoadLastFileOnStartup) {
-						file = Settings.User.RecentFile();
+			ThreadPool.QueueUserWorkItem(o => {
+				try {
+					string file = App.CurrentApp.FileToOpen;
+					if(string.IsNullOrEmpty(file) || !File.Exists(file)) {
+						if(Settings.User.LoadLastFileOnStartup) {
+							file = Settings.User.RecentFile();
+						}
 					}
+					if(!string.IsNullOrEmpty(file) && File.Exists(file)) {
+						this.Edit(file);
+					} else {
+						this.Edit(null);
+					}
+				} catch(Exception exception) {
+					Tracer.Report("Mainframe.PostLoaded", exception);
+					this.ReportException(exception);
+					this.Edit(null);
 				}
-				if(!string.IsNullOrEmpty(file) && File.Exists(file)) {
-					this.Load(file);
-				} else {
-					this.New();
-				}
-			} catch(Exception exception) {
-				Tracer.Report("Mainframe.PostLoaded", exception);
-				this.ReportException(exception);
-				this.New();
-			}
+			});
 		}
 
 		protected override void OnClosing(System.ComponentModel.CancelEventArgs e) {

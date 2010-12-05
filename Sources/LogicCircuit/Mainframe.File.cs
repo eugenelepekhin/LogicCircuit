@@ -60,25 +60,21 @@ namespace LogicCircuit {
 			return true;
 		}
 
-		private void New() {
+		private void Edit(string file) {
+			CircuitEditor editor = (file != null) ? new CircuitEditor(this, file) : new CircuitEditor(this);
 			if(this.CircuitEditor != null) {
 				this.CircuitEditor.Power = false;
 			}
-			if(this.CircuitEditor == null || this.EnsureSaved()) {
-				this.CircuitEditor = new CircuitEditor(this);
-				this.Status = LogicCircuit.Resources.Ready;
+			if(editor.File != null) {
+				Settings.User.AddRecentFile(editor.File);
 			}
+			this.CircuitEditor = editor;
+			this.Status = LogicCircuit.Resources.Ready;
 		}
 
-		private void Load(string file) {
-			if(this.CircuitEditor != null) {
-				this.CircuitEditor.Power = false;
-			}
-			// Do not check for saved file here as it happened in open
-			if(Mainframe.IsFilePathValid(file) && File.Exists(file)) {
-				this.CircuitEditor = new CircuitEditor(this, file);
-				Settings.User.AddRecentFile(file);
-				this.Status = LogicCircuit.Resources.Ready;
+		private void New() {
+			if(this.CircuitEditor == null || this.EnsureSaved()) {
+				this.Edit(null);
 			}
 		}
 
@@ -94,7 +90,7 @@ namespace LogicCircuit {
 				bool? result = dialog.ShowDialog(this);
 				if(result.HasValue && result.Value) {
 					file = dialog.FileName;
-					this.Load(file);
+					this.Edit(file);
 				}
 			}
 		}
