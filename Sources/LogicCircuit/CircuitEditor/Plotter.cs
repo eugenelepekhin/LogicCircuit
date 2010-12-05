@@ -143,6 +143,9 @@ namespace LogicCircuit {
 					}
 				case GateType.Probe:
 					return Plotter.ProbeGlyph(gate, symbol);
+				case GateType.Odd:
+				case GateType.Even:
+					return Plotter.RectangularGlyph(gate, symbol);
 				default:
 					if(Settings.User.GateShape == GateShape.Rectangular) {
 						return Plotter.RectangularGlyph(gate, symbol);
@@ -203,6 +206,24 @@ namespace LogicCircuit {
 			canvas.Children.Add(shape);
 			Panel.SetZIndex(shape, 0);
 			return shape;
+		}
+
+		private static string GateSkin(GateType gateType) {
+			switch(gateType) {
+			case GateType.Not:
+				return SymbolShape.ShapedNot;
+			case GateType.Or:
+				return SymbolShape.ShapedOr;
+			case GateType.And:
+				return SymbolShape.ShapedAnd;
+			case GateType.Xor:
+				return SymbolShape.ShapedXor;
+			case GateType.TriState:
+				return SymbolShape.ShapedTriState;
+			default:
+				Tracer.Fail();
+				return null;
+			}
 		}
 
 		private static bool AddJam(Canvas canvas, IList<Jam> list, Action<Jam, TextBlock> position = null) {
@@ -268,15 +289,58 @@ namespace LogicCircuit {
 		}
 
 		private static FrameworkElement ClockGlyph(Gate gate, CircuitGlyph symbol) {
-			throw new NotImplementedException();
+			Tracer.Assert(gate != null && gate.GateType == GateType.Clock);
+			Canvas canvas = new Canvas();
+			canvas.DataContext = symbol;
+			canvas.Width = Plotter.ScreenPoint(gate.SymbolWidth);
+			canvas.Height = Plotter.ScreenPoint(gate.SymbolHeight);
+			Plotter.AddJam(canvas, symbol.Right);
+			Plotter.CircuitSkin(canvas, SymbolShape.Clock);
+			canvas.ToolTip = gate.ToolTip;
+			return canvas;
 		}
 
 		private static FrameworkElement LedGlyph(Gate gate, CircuitGlyph symbol) {
-			throw new NotImplementedException();
+			Tracer.Assert(gate != null && gate.GateType == GateType.Led && gate.InputCount == 1);
+			Canvas canvas = new Canvas();
+			canvas.DataContext = symbol;
+			canvas.Width = Plotter.ScreenPoint(gate.SymbolWidth);
+			canvas.Height = Plotter.ScreenPoint(gate.SymbolHeight);
+			Plotter.AddJam(canvas, symbol.Left);
+			FrameworkElement shape = Plotter.CircuitSkin(canvas, SymbolShape.Led);
+			if(symbol != null) {
+				FrameworkElement probeView = shape.FindName("ProbeView") as FrameworkElement;
+				if(probeView != null) {
+					symbol.ProbeView = probeView;
+				}
+			}
+			canvas.ToolTip = gate.Name;
+			return canvas;
 		}
 
 		private static FrameworkElement ShapedGateGlyph(Gate gate, CircuitGlyph symbol) {
-			throw new NotImplementedException();
+			Tracer.Assert(symbol != null && symbol.Circuit == gate);
+			Canvas canvas = new Canvas();
+			canvas.DataContext = symbol;
+			canvas.Width = Plotter.ScreenPoint(gate.SymbolWidth);
+			canvas.Height = Plotter.ScreenPoint(gate.SymbolHeight);
+			Plotter.AddJam(canvas, symbol.Left);
+			Plotter.AddJam(canvas, symbol.Top);
+			Plotter.AddJam(canvas, symbol.Right);
+			Plotter.AddJam(canvas, symbol.Bottom);
+			FrameworkElement shape = Plotter.CircuitSkin(canvas, Plotter.GateSkin(gate.GateType));
+			int top = Math.Max(0, gate.InputCount - 3) / 2;
+			int bottom = Math.Max(0, gate.InputCount - 3 - top);
+			Rectangle topLine = shape.FindName("topLine") as Rectangle;
+			if(topLine != null) {
+				topLine.Height = Plotter.ScreenPoint(top);
+			}
+			Rectangle bottomLine = shape.FindName("bottomLine") as Rectangle;
+			if(bottomLine != null) {
+				bottomLine.Height = Plotter.ScreenPoint(bottom);
+			}
+			canvas.ToolTip = gate.ToolTip;
+			return canvas;
 		}
 
 		private static FrameworkElement ProbeGlyph(Gate gate, CircuitGlyph symbol) {

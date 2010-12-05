@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows;
 
 namespace LogicCircuit {
 	public abstract class CircuitGlyph : Symbol {
@@ -9,6 +10,8 @@ namespace LogicCircuit {
 		private bool isUpdated;
 		public abstract Circuit Circuit { get; }
 		public abstract GridPoint Point { get; set; }
+
+		public FrameworkElement ProbeView { get; set; }
 
 		protected CircuitGlyph() : base() {
 		}
