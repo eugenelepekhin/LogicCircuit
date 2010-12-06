@@ -57,10 +57,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ButtonControl.cs" />
-    <Compile Include="CircuitEditor\CircuitDescriptor.cs" />
-    <Compile Include="CircuitEditor\CircuitDescriptorList.cs" />
-    <Compile Include="CircuitEditor\CircuitEditor.cs" />
-    <Compile Include="CircuitEditor\Plotter.cs" />
+    <Compile Include="Editor\CircuitDescriptor.cs" />
+    <Compile Include="Editor\CircuitDescriptorList.cs" />
+    <Compile Include="Editor\CircuitEditor.cs" />
+    <Compile Include="Editor\Plotter.cs" />
     <Compile Include="CircuitException.cs" />
     <Compile Include="CircuitProject\BasePin.cs" />
     <Compile Include="CircuitProject\Circuit.cs" />
