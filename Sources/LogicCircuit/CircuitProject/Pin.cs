@@ -11,7 +11,7 @@ namespace LogicCircuit {
 		
 		public override bool IsSmallSymbol { get { return true; } }
 
-		public string PinNotation {
+		public override string Notation {
 			get {
 				switch(this.PinType) {
 				case LogicCircuit.PinType.Input: return Resources.TitlePinInput(this.Name);
@@ -21,13 +21,14 @@ namespace LogicCircuit {
 					return string.Empty;
 				}
 			}
+			set { throw new InvalidOperationException(); }
 		}
 
 		partial void OnPinChanged() {
 			Tracer.Assert(!this.LogicalCircuit.IsDeleted());
 			this.CircuitProject.PinSet.RegisterForRefresh(this.LogicalCircuit);
 			this.ResetPins();
-			this.NotifyPropertyChanged("PinNotation");
+			this.NotifyPropertyChanged("Notation");
 		}
 
 		public override void Delete() {
@@ -114,7 +115,7 @@ namespace LogicCircuit {
 				PinData.InvertedField.Field.DefaultValue,
 				this.UniqueName(BasePin.DefaultName(pinType), logicalCircuit),
 				PinData.NoteField.Field.DefaultValue,
-				PinData.NotationField.Field.DefaultValue
+				PinData.JamNotationField.Field.DefaultValue
 			);
 			this.CreateDevicePin(pin);
 			return pin;

@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Store xmlns="clr-namespace:ItemWrapper.Generator;assembly=ItemWrapper.Generator"
 	Namespace="LogicCircuit" Name="CircuitProject"
-	PersistencePrefix="lc" PersistenceNamespace="http://LogicCircuit.net/1.0.0.4/CircuitProject.xsd"
+	PersistencePrefix="lc" PersistenceNamespace="http://LogicCircuit.net/2.0.0.1/CircuitProject.xsd"
 >
+
+	<!--
+		Change history
+		Version 1.0.0.2 - changing semantic of Wire. Now wire is line segment and conductor is set of wires and connection is child of conductor.
+		There is no transformation from version 1.0.0.1 to 1.0.0.2 so all existing files will be lost.
+
+		Version 1.0.0.3 - no schema changes. Introduction of the new version is just to prevent loading the new file with newly introduced tri state buffers
+		by old version of program that does not support such gates. A simple transofmation is requared to change namespace so no user data will be lost.
+
+		Version 2.0.0.1 - Moving to new store. Adding Frequency and IsMaximumSpeed to project. Adding JamNotation to Pin.
+	-->
+
 	<Table Name="Project">
 		<Table.Columns>
 			<Column Name="ProjectId" Type="Guid" ReadOnly="true"/>
@@ -108,7 +120,7 @@
 			<Column Name="Inverted" Type="bool" Default="false" PropertyOverrides="true"/>
 			<Column Name="Name" Type="string" PropertyOverrides="true"/>
 			<Column Name="Note" Type="string" Default="" PropertyOverrides="true"/>
-			<Column Name="Notation" Type="string" Default="" PropertyOverrides="true"/>
+			<Column Name="JamNotation" Type="string" Default=""/>
 		</Table.Columns>
 
 		<Table.Keys>

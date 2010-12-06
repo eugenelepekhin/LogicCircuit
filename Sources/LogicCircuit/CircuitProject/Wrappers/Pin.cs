@@ -25,7 +25,7 @@ namespace LogicCircuit {
 		public bool Inverted;
 		public string Name;
 		public string Note;
-		public string Notation;
+		public string JamNotation;
 		internal Pin Pin;
 
 		private interface IFieldSerializer {
@@ -317,21 +317,21 @@ namespace LogicCircuit {
 			}
 		}
 
-		// Accessor of the Notation field
-		public sealed class NotationField : IField<PinData, string>, IFieldSerializer {
-			public static readonly NotationField Field = new NotationField();
-			private NotationField() {}
-			public string Name { get { return "Notation"; } }
+		// Accessor of the JamNotation field
+		public sealed class JamNotationField : IField<PinData, string>, IFieldSerializer {
+			public static readonly JamNotationField Field = new JamNotationField();
+			private JamNotationField() {}
+			public string Name { get { return "JamNotation"; } }
 			public int Order { get; set; }
 			public string DefaultValue { get { return ""; } }
 			public string GetValue(ref PinData record) {
-				return record.Notation;
+				return record.JamNotation;
 			}
 			public void SetValue(ref PinData record, string value) {
-				record.Notation = value;
+				record.JamNotation = value;
 			}
 			public int Compare(ref PinData l, ref PinData r) {
-				return StringComparer.Ordinal.Compare(l.Notation, r.Notation);
+				return StringComparer.Ordinal.Compare(l.JamNotation, r.JamNotation);
 			}
 			public int Compare(string l, string r) {
 				return StringComparer.Ordinal.Compare(l, r);
@@ -339,16 +339,16 @@ namespace LogicCircuit {
 
 			// Implementation of interface IFieldSerializer
 			bool IFieldSerializer.NeedToSave(ref PinData data) {
-				return this.Compare(data.Notation, this.DefaultValue) != 0;
+				return this.Compare(data.JamNotation, this.DefaultValue) != 0;
 			}
 			string IFieldSerializer.GetTextValue(ref PinData data) {
-				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Notation);
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.JamNotation);
 			}
 			void IFieldSerializer.SetDefault(ref PinData data) {
-				data.Notation = this.DefaultValue;
+				data.JamNotation = this.DefaultValue;
 			}
 			void IFieldSerializer.SetTextValue(ref PinData data, string text) {
-				data.Notation = text;
+				data.JamNotation = text;
 			}
 		}
 
@@ -388,7 +388,7 @@ namespace LogicCircuit {
 				,InvertedField.Field
 				,NameField.Field
 				,NoteField.Field
-				,NotationField.Field
+				,JamNotationField.Field
 				,PinField.Field
 			);
 			// Create all but foreign keys of the table
@@ -524,10 +524,10 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.PinRowId, PinData.NoteField.Field, value); }
 		}
 
-		// Gets or sets value of the Notation field.
-		public override string Notation {
-			get { return this.Table.GetField(this.PinRowId, PinData.NotationField.Field); }
-			set { this.Table.SetField(this.PinRowId, PinData.NotationField.Field, value); }
+		// Gets or sets value of the JamNotation field.
+		public string JamNotation {
+			get { return this.Table.GetField(this.PinRowId, PinData.JamNotationField.Field); }
+			set { this.Table.SetField(this.PinRowId, PinData.JamNotationField.Field, value); }
 		}
 
 
@@ -560,8 +560,8 @@ namespace LogicCircuit {
 				if(PinData.NoteField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("Note");
 				}
-				if(PinData.NotationField.Field.Compare(ref oldData, ref newData) != 0) {
-					this.NotifyPropertyChanged("Notation");
+				if(PinData.JamNotationField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("JamNotation");
 				}
 			}
 			this.OnPinChanged();
@@ -655,7 +655,7 @@ namespace LogicCircuit {
 			bool Inverted,
 			string Name,
 			string Note,
-			string Notation
+			string JamNotation
 			// Fields of Circuit table
 
 		) {
@@ -674,7 +674,7 @@ namespace LogicCircuit {
 				Inverted = Inverted,
 				Name = Name,
 				Note = Note,
-				Notation = Notation,
+				JamNotation = JamNotation,
 			};
 			return this.Create(this.Table.Insert(ref dataPin), rowIdCircuit);
 		}
