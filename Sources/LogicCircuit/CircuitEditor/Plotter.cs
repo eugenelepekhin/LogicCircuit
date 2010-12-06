@@ -121,6 +121,7 @@ namespace LogicCircuit {
 			line.StrokeThickness = 1;
 			line.ToolTip = Resources.ToolTipWire;
 			line.Tag = wire;
+			Panel.SetZIndex(line, 0);
 			return line;
 		}
 
@@ -156,13 +157,7 @@ namespace LogicCircuit {
 			}
 			Pin pin = circuit as Pin;
 			if(pin != null) {
-				if(pin.PinType == PinType.Input) {
-					return Plotter.InputPinGlyph(pin, symbol);
-				} else if(pin.PinType == PinType.Output) {
-					return Plotter.OutputPinGlyph(pin, symbol);
-				} else {
-					Tracer.Fail();
-				}
+				return Plotter.PinGlyph(pin, symbol);
 			}
 			Constant constant = circuit as Constant;
 			if(constant != null) {
@@ -194,6 +189,7 @@ namespace LogicCircuit {
 
 		//---------------------------------------------------------------------
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")]
 		private static FrameworkElement CircuitSkin(Canvas canvas, string skin) {
 			FrameworkElement shape = null;
 			using(StringReader stringReader = new StringReader(skin)) {
@@ -266,6 +262,7 @@ namespace LogicCircuit {
 			Tracer.Assert(symbol != null && symbol.Circuit == circuit);
 			Tracer.Assert(circuit is Gate || circuit is LogicalCircuit || circuit is Memory);
 			Canvas canvas = new Canvas();
+			Panel.SetZIndex(canvas, 1);
 			canvas.Background = Brushes.White;
 			canvas.DataContext = symbol;
 			canvas.Tag = symbol;
@@ -282,15 +279,14 @@ namespace LogicCircuit {
 				text.Margin = new Thickness(ln ? 10 : 5, tn ? 10 : 5, rn ? 10 : 5, bn ? 10 : 5);
 				text.Text = circuit.Notation;
 			}
-
 			canvas.ToolTip = circuit.ToolTip;
-
 			return canvas;
 		}
 
 		private static FrameworkElement ClockGlyph(Gate gate, CircuitGlyph symbol) {
 			Tracer.Assert(gate != null && gate.GateType == GateType.Clock);
 			Canvas canvas = new Canvas();
+			Panel.SetZIndex(canvas, 1);
 			canvas.DataContext = symbol;
 			canvas.Width = Plotter.ScreenPoint(gate.SymbolWidth);
 			canvas.Height = Plotter.ScreenPoint(gate.SymbolHeight);
@@ -303,6 +299,7 @@ namespace LogicCircuit {
 		private static FrameworkElement LedGlyph(Gate gate, CircuitGlyph symbol) {
 			Tracer.Assert(gate != null && gate.GateType == GateType.Led && gate.InputCount == 1);
 			Canvas canvas = new Canvas();
+			Panel.SetZIndex(canvas, 1);
 			canvas.DataContext = symbol;
 			canvas.Width = Plotter.ScreenPoint(gate.SymbolWidth);
 			canvas.Height = Plotter.ScreenPoint(gate.SymbolHeight);
@@ -314,13 +311,14 @@ namespace LogicCircuit {
 					symbol.ProbeView = probeView;
 				}
 			}
-			canvas.ToolTip = gate.Name;
+			canvas.ToolTip = gate.ToolTip;
 			return canvas;
 		}
 
 		private static FrameworkElement ShapedGateGlyph(Gate gate, CircuitGlyph symbol) {
 			Tracer.Assert(symbol != null && symbol.Circuit == gate);
 			Canvas canvas = new Canvas();
+			Panel.SetZIndex(canvas, 1);
 			canvas.DataContext = symbol;
 			canvas.Width = Plotter.ScreenPoint(gate.SymbolWidth);
 			canvas.Height = Plotter.ScreenPoint(gate.SymbolHeight);
@@ -344,31 +342,117 @@ namespace LogicCircuit {
 		}
 
 		private static FrameworkElement ProbeGlyph(Gate gate, CircuitGlyph symbol) {
-			throw new NotImplementedException();
+			Tracer.Assert(gate != null && gate.GateType == GateType.Probe && gate.InputCount == 1);
+			Canvas canvas = new Canvas();
+			Panel.SetZIndex(canvas, 1);
+			canvas.DataContext = symbol;
+			canvas.Width = Plotter.ScreenPoint(gate.SymbolWidth);
+			canvas.Height = Plotter.ScreenPoint(gate.SymbolHeight);
+			Plotter.AddJam(canvas, symbol.Left);
+			FrameworkElement shape = Plotter.CircuitSkin(canvas, SymbolShape.Probe);
+			if(symbol != null) {
+				FrameworkElement probeView = shape.FindName("ProbeView") as FrameworkElement;
+				if(probeView != null) {
+					symbol.ProbeView = probeView;
+				}
+			}
+			canvas.ToolTip = gate.ToolTip;
+			return canvas;
 		}
 
 		private static FrameworkElement SevenSegmentGlyph(Gate gate, CircuitGlyph symbol) {
-			throw new NotImplementedException();
+			Tracer.Assert(gate != null && gate.GateType == GateType.Led && gate.InputCount == 8);
+			Canvas canvas = new Canvas();
+			Panel.SetZIndex(canvas, 1);
+			canvas.DataContext = symbol;
+			canvas.Width = Plotter.ScreenPoint(gate.SymbolWidth);
+			canvas.Height = Plotter.ScreenPoint(gate.SymbolHeight);
+			Plotter.AddJam(canvas, symbol.Left);
+			Plotter.AddJam(canvas, symbol.Right);
+			FrameworkElement shape = Plotter.CircuitSkin(canvas, SymbolShape.SevenSegment);
+			if(symbol != null) {
+				FrameworkElement probeView = shape.FindName("ProbeView") as FrameworkElement;
+				if(probeView != null) {
+					symbol.ProbeView = probeView;
+				}
+			}
+			canvas.ToolTip = gate.ToolTip;
+			return canvas;
 		}
 
 		private static FrameworkElement SplitterGlyph(Splitter splitter, CircuitGlyph symbol) {
-			throw new NotImplementedException();
+			Tracer.Assert(splitter != null);
+			Canvas canvas = new Canvas();
+			Panel.SetZIndex(canvas, 1);
+			canvas.DataContext = symbol;
+			canvas.Width = Plotter.ScreenPoint(splitter.SymbolWidth);
+			canvas.Height = Plotter.ScreenPoint(splitter.SymbolHeight);
+			Plotter.AddJam(canvas, symbol.Left);
+			Plotter.AddJam(canvas, symbol.Top);
+			Plotter.AddJam(canvas, symbol.Right);
+			Plotter.AddJam(canvas, symbol.Bottom);
+			Plotter.CircuitSkin(canvas, SymbolShape.Splitter);
+			canvas.ToolTip = splitter.ToolTip;
+			return canvas;
 		}
 
 		private static FrameworkElement ButtonGlyph(CircuitButton button, CircuitGlyph symbol) {
-			throw new NotImplementedException();
+			Tracer.Assert(button != null);
+			Canvas canvas = new Canvas();
+			Panel.SetZIndex(canvas, 1);
+			canvas.DataContext = symbol;
+			canvas.Width = Plotter.ScreenPoint(button.SymbolWidth);
+			canvas.Height = Plotter.ScreenPoint(button.SymbolHeight);
+			Plotter.AddJam(canvas, symbol.Right);
+			ButtonControl buttonControl = new ButtonControl();
+			buttonControl.Content = button.Notation;
+			buttonControl.Width = canvas.Width;
+			buttonControl.Height = canvas.Height;
+			canvas.Children.Add(buttonControl);
+			if(symbol != null) {
+				symbol.ProbeView = buttonControl;
+			}
+			canvas.ToolTip = button.ToolTip;
+			return canvas;
 		}
 
 		private static FrameworkElement ConstantGlyph(Constant constant, CircuitGlyph symbol) {
-			throw new NotImplementedException();
+			Tracer.Assert(constant != null);
+			Canvas canvas = new Canvas();
+			Panel.SetZIndex(canvas, 1);
+			canvas.DataContext = symbol;
+			canvas.Width = Plotter.ScreenPoint(constant.SymbolWidth);
+			canvas.Height = Plotter.ScreenPoint(constant.SymbolHeight);
+			Plotter.AddJam(canvas, symbol.Right);
+			FrameworkElement shape = Plotter.CircuitSkin(canvas, SymbolShape.Constant);
+			if(symbol != null) {
+				FrameworkElement probeView = shape.FindName("ProbeView") as FrameworkElement;
+				if(probeView != null) {
+					symbol.ProbeView = probeView;
+				}
+			}
+			canvas.ToolTip = constant.ToolTip;
+			return canvas;
 		}
 
-		private static FrameworkElement OutputPinGlyph(Pin pin, CircuitGlyph symbol) {
-			throw new NotImplementedException();
-		}
-
-		private static FrameworkElement InputPinGlyph(Pin pin, CircuitGlyph symbol) {
-			throw new NotImplementedException();
+		private static FrameworkElement PinGlyph(Pin pin, CircuitGlyph symbol) {
+			Tracer.Assert(pin != null);
+			Canvas canvas = new Canvas();
+			Panel.SetZIndex(canvas, 1);
+			canvas.DataContext = symbol;
+			canvas.Width = Plotter.ScreenPoint(pin.SymbolWidth);
+			canvas.Height = Plotter.ScreenPoint(pin.SymbolHeight);
+			Plotter.AddJam(canvas, symbol.Left);
+			Plotter.AddJam(canvas, symbol.Right);
+			FrameworkElement shape = Plotter.CircuitSkin(canvas, SymbolShape.Pin);
+			if(symbol != null) {
+				FrameworkElement probeView = shape.FindName("ProbeView") as FrameworkElement;
+				if(probeView != null) {
+					symbol.ProbeView = probeView;
+				}
+			}
+			canvas.ToolTip = pin.ToolTip;
+			return canvas;
 		}
 	}
 }

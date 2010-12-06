@@ -18,7 +18,7 @@ namespace LogicCircuit {
 		private int savedVersion;
 		public CircuitDescriptorList CircuitDescriptorList { get; private set; }
 
-		private readonly HashSet<GridPoint> solder = new HashSet<GridPoint>();
+		private readonly Dictionary<GridPoint, int> wirePoint = new Dictionary<GridPoint, int>();
 
 		private Dispatcher Dispatcher { get { return this.Mainframe.Dispatcher; } }
 		private Canvas Diagram { get { return this.Mainframe.Diagram; } }
@@ -94,7 +94,7 @@ namespace LogicCircuit {
 
 		private void RedrawDiagram() {
 			this.Diagram.Children.Clear();
-			this.solder.Clear();
+			this.wirePoint.Clear();
 			LogicalCircuit logicalCircuit = this.Project.LogicalCircuit;
 			foreach(Wire wire in logicalCircuit.Wires()) {
 				Line line = wire.WireGlyph;
@@ -105,8 +105,19 @@ namespace LogicCircuit {
 				line.X2 = p.X;
 				line.Y2 = p.Y;
 				this.Diagram.Children.Add(line);
-				this.DrawSolder(wire.Point1);
-				this.DrawSolder(wire.Point2);
+				this.AddWirePoint(wire.Point1);
+				this.AddWirePoint(wire.Point2);
+			}
+			foreach(KeyValuePair<GridPoint, int> solder in this.wirePoint) {
+				if(2 < solder.Value) {
+					Ellipse ellipse = new Ellipse();
+					Panel.SetZIndex(ellipse, 0);
+					ellipse.Width = ellipse.Height = 2 * Plotter.PinRadius;
+					Canvas.SetLeft(ellipse, Plotter.ScreenPoint(solder.Key.X));
+					Canvas.SetTop(ellipse, Plotter.ScreenPoint(solder.Key.Y));
+					ellipse.Fill = Plotter.JamDirectFill;
+					this.Diagram.Children.Add(ellipse);
+				}
 			}
 			foreach(CircuitSymbol symbol in logicalCircuit.CircuitSymbols()) {
 				Point point = Plotter.ScreenPoint(symbol.Point);
@@ -116,20 +127,12 @@ namespace LogicCircuit {
 			}
 		}
 
-		private void DrawSolder(GridPoint point) {
-			//if(!this.solder.Contains(point)) {
-			//    Wire wire = this.CircuitProject.WireSet .ProjectManager.WireStore.NeedSolder(this.LogicalCircuit, point);
-			//    if(wire != null) {
-			//        this.solder.Add(point);
-			//        Ellipse ellipse = new Ellipse();
-			//        ellipse.Tag = wire;
-			//        ellipse.Width = ellipse.Height = 2 * Plotter.PinRadius;
-			//        Canvas.SetLeft(ellipse, point.X * Plotter.GridSize);
-			//        Canvas.SetTop(ellipse, point.Y * Plotter.GridSize);
-			//        ellipse.Fill = Plotter.JamDirectFill;
-			//        this.Canvas.Children.Add(ellipse);
-			//    }
-			//}
+		private void AddWirePoint(GridPoint point) {
+			int count;
+			if(!this.wirePoint.TryGetValue(point, out count)) {
+				count = 0;
+			}
+			this.wirePoint[point] = count + 1;
 		}
 	}
 }

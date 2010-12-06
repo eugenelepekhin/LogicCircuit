@@ -125,5 +125,12 @@ namespace LogicCircuit {
  		public static string ShapedXor {
 			get { return ResourceManager.GetString("ShapedXor", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to content of the file: "splitter.xaml".
+		/// </summary>
+ 		public static string Splitter {
+			get { return ResourceManager.GetString("Splitter", Culture); }
+		}
 	}
 }
