@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Diagnostics;
+using System.Windows;
 using System.Xml;
 using LogicCircuit.DataPersistent;
-using System.Collections.Specialized;
-using System.Diagnostics;
 
 namespace LogicCircuit {
 	public partial class Pin {
@@ -45,6 +43,10 @@ namespace LogicCircuit {
 			if(PinData.NameField.Field.Compare(this.Name, name) != 0) {
 				this.Name = this.CircuitProject.PinSet.UniqueName(name, this.LogicalCircuit);
 			}
+		}
+
+		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
+			return symbol.CreateSimpleGlyph(SymbolShape.Pin);
 		}
 	}
 

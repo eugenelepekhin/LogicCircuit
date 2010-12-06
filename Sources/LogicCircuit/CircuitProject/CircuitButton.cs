@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Windows;
+using System.Windows.Controls;
 using System.Xml;
 using LogicCircuit.DataPersistent;
 
@@ -23,6 +22,18 @@ namespace LogicCircuit {
 
 		public override void CopyTo(CircuitProject project) {
 			project.CircuitButtonSet.Copy(this);
+		}
+
+		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
+			Canvas canvas = symbol.CreateGlyphCanvas();
+			CircuitGlyph.AddJam(canvas, symbol.Jams());
+			ButtonControl buttonControl = new ButtonControl();
+			buttonControl.Content = this.Notation;
+			buttonControl.Width = canvas.Width;
+			buttonControl.Height = canvas.Height;
+			canvas.Children.Add(buttonControl);
+			symbol.ProbeView = buttonControl;
+			return canvas;
 		}
 	}
 

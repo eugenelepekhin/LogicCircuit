@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Windows;
 
 namespace LogicCircuit {
 	public partial class Gate {
@@ -35,6 +34,56 @@ namespace LogicCircuit {
 		public int InputCount { get { return this.Pins.Count(p => p.PinType == PinType.Input); } }
 
 		public override void CopyTo(CircuitProject project) {
+		}
+
+		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
+			string skin;
+			switch(this.GateType) {
+			case GateType.Clock:
+				skin = SymbolShape.Clock;
+				break;
+			case GateType.Odd:
+			case GateType.Even:
+				return symbol.CreateRectangularGlyph();
+			case GateType.Led:
+				if(this.InputCount == 1) {
+					skin = SymbolShape.Led;
+				} else {
+					Tracer.Assert(this.InputCount == 8);
+					skin = SymbolShape.SevenSegment;
+				}
+				break;
+			case GateType.Probe:
+				skin = SymbolShape.Probe;
+				break;
+			default:
+				if(Settings.User.GateShape == GateShape.Rectangular) {
+					return symbol.CreateRectangularGlyph();
+				} else {
+					switch(this.GateType) {
+					case GateType.Not:
+						skin = SymbolShape.ShapedNot;
+						break;
+					case GateType.Or:
+						skin = SymbolShape.ShapedOr;
+						break;
+					case GateType.And:
+						skin = SymbolShape.ShapedAnd;
+						break;
+					case GateType.Xor:
+						skin = SymbolShape.ShapedXor;
+						break;
+					case GateType.TriState:
+						skin = SymbolShape.ShapedTriState;
+						break;
+					default:
+						Tracer.Fail();
+						return null;
+					}
+					return symbol.CreateShapedGlyph(skin);
+				}
+			}
+			return symbol.CreateSimpleGlyph(skin);
 		}
 	}
 

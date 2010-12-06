@@ -109,7 +109,7 @@
 				<DataTrigger Binding="{Binding Path=ShowGrid}" Value="True">
 					<Setter Property="Background">
 						<Setter.Value>
-							<DrawingBrush Viewport="{Binding Source={x:Static lc:Plotter.LogicalCircuitBackgroundTile}}" ViewportUnits="Absolute" TileMode="Tile">
+							<DrawingBrush Viewport="{Binding Source={x:Static lc:Editor.LogicalCircuitBackgroundTile}}" ViewportUnits="Absolute" TileMode="Tile">
 								<DrawingBrush.Drawing>
 									<DrawingGroup>
 										<GeometryDrawing Brush="White">

@@ -40,7 +40,7 @@ namespace LogicCircuit {
 			public override int Z { get { return 0; } }
 
 			public override FrameworkElement Glyph {
-				get { return this.glyph ?? (this.glyph = Plotter.CreateGlyph(this)); }
+				get { return this.glyph ?? (this.glyph = this.Circuit.CreateGlyph(this)); }
 			}
 
 			public override void CopyTo(CircuitProject project) {

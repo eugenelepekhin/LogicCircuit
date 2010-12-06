@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
+using System.Windows;
 using System.Xml;
 using LogicCircuit.DataPersistent;
-using System.Diagnostics;
 
 namespace LogicCircuit {
 	public partial class Constant {
@@ -49,6 +45,10 @@ namespace LogicCircuit {
 
 		public override void CopyTo(CircuitProject project) {
 			project.ConstantSet.Copy(this);
+		}
+
+		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
+			return symbol.CreateSimpleGlyph(SymbolShape.Constant);
 		}
 	}
 

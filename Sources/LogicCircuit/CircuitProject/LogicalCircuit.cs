@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Windows;
 using System.Xml;
 using LogicCircuit.DataPersistent;
-using System.Collections.Specialized;
 
 namespace LogicCircuit {
 	public partial class LogicalCircuit {
@@ -46,6 +45,10 @@ namespace LogicCircuit {
 			if(LogicalCircuitData.NameField.Field.Compare(this.Name, name) != 0) {
 				this.Name = this.CircuitProject.LogicalCircuitSet.UniqueName(name);
 			}
+		}
+
+		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
+			return symbol.CreateRectangularGlyph();
 		}
 	}
 

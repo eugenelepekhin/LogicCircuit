@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
+using System.Windows;
 
 namespace LogicCircuit {
 	public partial class DevicePin {
@@ -37,6 +34,10 @@ namespace LogicCircuit {
 		public int Order { get; set; }
 
 		public override void CopyTo(CircuitProject project) {
+			throw new InvalidOperationException();
+		}
+
+		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
 			throw new InvalidOperationException();
 		}
 	}

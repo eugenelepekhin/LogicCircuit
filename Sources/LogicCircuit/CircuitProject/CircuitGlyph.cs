@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Markup;
+using System.Windows.Shapes;
+using System.Xml;
 
 namespace LogicCircuit {
 	public abstract class CircuitGlyph : Symbol {
@@ -80,6 +84,119 @@ namespace LogicCircuit {
 				}
 				this.isUpdated = true;
 			}
+		}
+
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")]
+		public static FrameworkElement Skin(Canvas canvas, string skinText) {
+			FrameworkElement shape = null;
+			using(StringReader stringReader = new StringReader(skinText)) {
+				using(XmlTextReader xmlReader = new XmlTextReader(stringReader)) {
+					shape = (FrameworkElement)XamlReader.Load(xmlReader);
+				}
+			}
+			shape.Width = canvas.Width;
+			shape.Height = canvas.Height;
+			canvas.Children.Add(shape);
+			Panel.SetZIndex(shape, 0);
+			return shape;
+		}
+
+		public static bool AddJam(Canvas canvas, IEnumerable<Jam> list, Action<Jam, TextBlock> notationPosition) {
+			bool hasNotation = false;
+			foreach(Jam jam in list) {
+				Ellipse ellipse = new Ellipse();
+				ellipse.DataContext = jam;
+				ellipse.Width = ellipse.Height = Symbol.PinRadius * 2;
+				Canvas.SetLeft(ellipse, Symbol.ScreenPoint(jam.X) - Symbol.PinRadius);
+				Canvas.SetTop(ellipse, Symbol.ScreenPoint(jam.Y) - Symbol.PinRadius);
+				canvas.Children.Add(ellipse);
+				if(jam.Pin.Inverted) {
+					ellipse.Fill = Symbol.JamInvertedFill;
+					ellipse.Stroke = Symbol.JamStroke;
+					ellipse.StrokeThickness = 1;
+					Panel.SetZIndex(ellipse, 1);
+				} else {
+					ellipse.Fill = Symbol.JamDirectFill;
+					Panel.SetZIndex(ellipse, -1);
+				}
+				ellipse.ToolTip = jam.Pin.ToolTip;
+				if(!string.IsNullOrEmpty(jam.Pin.Notation)) {
+					Tracer.Assert(notationPosition != null); // If pin has notation then it should belong to rectangualry rendering circuit.
+					TextBlock text = new TextBlock();
+					text.Text = jam.Pin.Notation.Substring(0, Math.Min(2, jam.Pin.Notation.Length));
+					text.ToolTip = jam.Pin.ToolTip;
+					text.FontSize = 8;
+					Panel.SetZIndex(text, 1);
+					notationPosition(jam, text);
+					canvas.Children.Add(text);
+					hasNotation = true;
+				}
+			}
+			return hasNotation;
+		}
+
+		public static bool AddJam(Canvas canvas, IEnumerable<Jam> list) {
+			return CircuitGlyph.AddJam(canvas, list, null);
+		}
+
+		public Canvas CreateGlyphCanvas() {
+			Canvas canvas = new Canvas();
+			Panel.SetZIndex(canvas, 1);
+			canvas.DataContext = this;
+			canvas.Width = Symbol.ScreenPoint(this.Circuit.SymbolWidth);
+			canvas.Height = Symbol.ScreenPoint(this.Circuit.SymbolHeight);
+			canvas.ToolTip = this.Circuit.ToolTip;
+			return canvas;
+		}
+
+		public FrameworkElement CreateSimpleGlyph(string skin) {
+			Canvas canvas = this.CreateGlyphCanvas();
+			CircuitGlyph.AddJam(canvas, this.Jams());
+			FrameworkElement shape = CircuitGlyph.Skin(canvas, skin);
+			FrameworkElement probeView = shape.FindName("ProbeView") as FrameworkElement;
+			if(probeView != null) {
+				this.ProbeView = probeView;
+				TextBlock textBlock = probeView as TextBlock;
+				if(textBlock != null) {
+					textBlock.Text = this.Circuit.Notation;
+				}
+			}
+			return canvas;
+		}
+
+		public FrameworkElement CreateRectangularGlyph() {
+			Canvas canvas = this.CreateGlyphCanvas();
+			canvas.Background = Symbol.CircuitFill;
+			bool ln = CircuitGlyph.AddJam(canvas, this.Left, (j, t) => { Canvas.SetLeft(t, Symbol.PinRadius); Canvas.SetTop(t, Symbol.ScreenPoint(j.Y) - 2 * Symbol.PinRadius); });
+			bool tn = CircuitGlyph.AddJam(canvas, this.Top, (j, t) => { Canvas.SetLeft(t, Symbol.ScreenPoint(j.X) - Symbol.PinRadius); Canvas.SetTop(t, Symbol.PinRadius); });
+			bool rn = CircuitGlyph.AddJam(canvas, this.Right, (j, t) => { Canvas.SetRight(t, Symbol.PinRadius); Canvas.SetTop(t, Symbol.ScreenPoint(j.Y) - 2 * Symbol.PinRadius); });
+			bool bn = CircuitGlyph.AddJam(canvas, this.Bottom, (j, t) => { Canvas.SetLeft(t, Symbol.ScreenPoint(j.X) - Symbol.PinRadius); Canvas.SetBottom(t, Symbol.PinRadius); });
+			FrameworkElement shape = CircuitGlyph.Skin(canvas, SymbolShape.Rectangular);
+			TextBlock text = shape.FindName("Notation") as TextBlock;
+			if(text != null) {
+				text.Margin = new Thickness(ln ? 10 : 5, tn ? 10 : 5, rn ? 10 : 5, bn ? 10 : 5);
+				text.Text = this.Circuit.Notation;
+			}
+			return canvas;
+		}
+
+		public FrameworkElement CreateShapedGlyph(string skin) {
+			Gate gate = this.Circuit as Gate;
+			Tracer.Assert(gate != null);
+			Canvas canvas = this.CreateGlyphCanvas();
+			CircuitGlyph.AddJam(canvas, this.Jams());
+			FrameworkElement shape = CircuitGlyph.Skin(canvas, skin);
+			int top = Math.Max(0, gate.InputCount - 3) / 2;
+			int bottom = Math.Max(0, gate.InputCount - 3 - top);
+			Rectangle topLine = shape.FindName("topLine") as Rectangle;
+			if(topLine != null) {
+				topLine.Height = Symbol.ScreenPoint(top);
+			}
+			Rectangle bottomLine = shape.FindName("bottomLine") as Rectangle;
+			if(bottomLine != null) {
+				bottomLine.Height = Symbol.ScreenPoint(bottom);
+			}
+			return canvas;
 		}
 
 		private class JamItem : Jam {

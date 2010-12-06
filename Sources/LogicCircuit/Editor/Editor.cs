@@ -10,6 +10,12 @@ using System.Windows.Threading;
 namespace LogicCircuit {
 	public partial class Editor : INotifyPropertyChanged {
 
+		public static int LogicalCircuitWidth { get { return 170; } }
+		public static int LogicalCircuitHeight { get { return 170; } }
+		public static double LogicalCircuitScreenWidth { get { return Symbol.ScreenPoint(Editor.LogicalCircuitWidth); } }
+		public static double LogicalCircuitScreenHeight { get { return Symbol.ScreenPoint(Editor.LogicalCircuitHeight); } }
+		public static Rect LogicalCircuitBackgroundTile { get { return new Rect(0, 0, Symbol.GridSize, Symbol.GridSize); } }
+
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		public Mainframe Mainframe { get; private set; }
@@ -98,10 +104,10 @@ namespace LogicCircuit {
 			LogicalCircuit logicalCircuit = this.Project.LogicalCircuit;
 			foreach(Wire wire in logicalCircuit.Wires()) {
 				Line line = wire.WireGlyph;
-				Point p = Plotter.ScreenPoint(wire.Point1);
+				Point p = Symbol.ScreenPoint(wire.Point1);
 				line.X1 = p.X;
 				line.Y1 = p.Y;
-				p = Plotter.ScreenPoint(wire.Point2);
+				p = Symbol.ScreenPoint(wire.Point2);
 				line.X2 = p.X;
 				line.Y2 = p.Y;
 				this.Diagram.Children.Add(line);
@@ -113,14 +119,14 @@ namespace LogicCircuit {
 					Ellipse ellipse = new Ellipse();
 					Panel.SetZIndex(ellipse, 0);
 					ellipse.Width = ellipse.Height = 2 * Symbol.PinRadius;
-					Canvas.SetLeft(ellipse, Plotter.ScreenPoint(solder.Key.X));
-					Canvas.SetTop(ellipse, Plotter.ScreenPoint(solder.Key.Y));
-					ellipse.Fill = Plotter.JamDirectFill;
+					Canvas.SetLeft(ellipse, Symbol.ScreenPoint(solder.Key.X));
+					Canvas.SetTop(ellipse, Symbol.ScreenPoint(solder.Key.Y));
+					ellipse.Fill = Symbol.JamDirectFill;
 					this.Diagram.Children.Add(ellipse);
 				}
 			}
 			foreach(CircuitSymbol symbol in logicalCircuit.CircuitSymbols()) {
-				Point point = Plotter.ScreenPoint(symbol.Point);
+				Point point = Symbol.ScreenPoint(symbol.Point);
 				Canvas.SetLeft(symbol.Glyph, point.X);
 				Canvas.SetTop(symbol.Glyph, point.Y);
 				this.Diagram.Children.Add(symbol.Glyph);

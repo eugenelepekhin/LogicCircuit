@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Diagnostics;
+using System.Linq;
+using System.Windows;
 
 namespace LogicCircuit {
 	public partial class Circuit {
@@ -30,6 +30,8 @@ namespace LogicCircuit {
 		public abstract string Notation { get; set; }
 		public abstract string ToolTip { get; }
 		public abstract string Category { get; set; }
+
+		public abstract FrameworkElement CreateGlyph(CircuitGlyph symbol);
 
 		public virtual bool IsSmallSymbol { get { return false; } }
 

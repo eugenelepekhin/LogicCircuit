@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Windows;
 using System.Xml;
 using LogicCircuit.DataPersistent;
 
@@ -35,6 +34,10 @@ namespace LogicCircuit {
 
 		public override void CopyTo(CircuitProject project) {
 			project.SplitterSet.Copy(this);
+		}
+
+		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
+			return symbol.CreateSimpleGlyph(SymbolShape.Splitter);
 		}
 	}
 

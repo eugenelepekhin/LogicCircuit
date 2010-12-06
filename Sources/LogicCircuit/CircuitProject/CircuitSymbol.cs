@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Threading;
 using System.Xml;
-using LogicCircuit.DataPersistent;
 
 namespace LogicCircuit {
 
@@ -32,7 +27,7 @@ namespace LogicCircuit {
 		public override int Z { get { return 2; } }
 
 		public override FrameworkElement Glyph {
-			get { return this.glyph ?? (this.glyph = Plotter.CreateGlyph(this)); }
+			get { return this.glyph ?? (this.glyph = this.Circuit.CreateGlyph(this)); }
 		}
 
 		public override void CopyTo(CircuitProject project) {
