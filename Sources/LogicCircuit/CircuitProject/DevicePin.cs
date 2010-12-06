@@ -4,6 +4,11 @@ using System.Windows;
 namespace LogicCircuit {
 	public partial class DevicePin {
 
+		public override string Notation {
+			get { throw new InvalidOperationException(); }
+			set { throw new InvalidOperationException(); }
+		}
+
 		public override int BitWidth {
 			get {
 				Pin pin = this.Circuit as Pin;
@@ -56,7 +61,7 @@ namespace LogicCircuit {
 		public DevicePin Create(Circuit circuit, PinType pinType, int bitWidth) {
 			DevicePin pin = this.CreateItem(Guid.NewGuid(), circuit, bitWidth, pinType, BasePin.DefaultSide(pinType), false,
 				this.UniqueName(BasePin.DefaultName(pinType), circuit),
-				DevicePinData.NoteField.Field.DefaultValue, DevicePinData.NotationField.Field.DefaultValue
+				DevicePinData.NoteField.Field.DefaultValue, DevicePinData.JamNotationField.Field.DefaultValue
 			);
 			pin.Order = this.order++;
 			return pin;

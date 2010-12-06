@@ -58,7 +58,7 @@
 			<Column Name="Inverted" Type="bool" Default="false" PropertyOverrides="true"/>
 			<Column Name="Name" Type="string" PropertyOverrides="true"/>
 			<Column Name="Note" Type="string" Default="" PropertyOverrides="true"/>
-			<Column Name="Notation" Type="string" Default="" PropertyOverrides="true"/>
+			<Column Name="JamNotation" Type="string" Default="" PropertyOverrides="true"/>
 		</Table.Columns>
 
 		<Table.Keys>
@@ -120,7 +120,7 @@
 			<Column Name="Inverted" Type="bool" Default="false" PropertyOverrides="true"/>
 			<Column Name="Name" Type="string" PropertyOverrides="true"/>
 			<Column Name="Note" Type="string" Default="" PropertyOverrides="true"/>
-			<Column Name="JamNotation" Type="string" Default=""/>
+			<Column Name="JamNotation" Type="string" Default="" PropertyOverrides="true"/>
 		</Table.Columns>
 
 		<Table.Keys>

@@ -120,10 +120,12 @@ namespace LogicCircuit {
 					Panel.SetZIndex(ellipse, -1);
 				}
 				ellipse.ToolTip = jam.Pin.ToolTip;
-				if(!string.IsNullOrEmpty(jam.Pin.Notation)) {
+				string jamNotation = jam.Pin.JamNotation;
+				if(!string.IsNullOrEmpty(jamNotation)) {
 					Tracer.Assert(notationPosition != null); // If pin has notation then it should belong to rectangualry rendering circuit.
 					TextBlock text = new TextBlock();
-					text.Text = jam.Pin.Notation.Substring(0, Math.Min(2, jam.Pin.Notation.Length));
+					int len = (jam.Pin.PinSide == PinSide.Top || jam.Pin.PinSide == PinSide.Bottom) ? 4 : 2;
+					text.Text = jamNotation.Substring(0, Math.Min(len, jamNotation.Length));
 					text.ToolTip = jam.Pin.ToolTip;
 					text.FontSize = 8;
 					Panel.SetZIndex(text, 1);

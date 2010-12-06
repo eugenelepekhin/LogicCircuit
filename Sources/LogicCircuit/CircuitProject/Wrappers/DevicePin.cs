@@ -25,7 +25,7 @@ namespace LogicCircuit {
 		public bool Inverted;
 		public string Name;
 		public string Note;
-		public string Notation;
+		public string JamNotation;
 		internal DevicePin DevicePin;
 
 		// Field accessors
@@ -198,21 +198,21 @@ namespace LogicCircuit {
 			}
 		}
 
-		// Accessor of the Notation field
-		public sealed class NotationField : IField<DevicePinData, string> {
-			public static readonly NotationField Field = new NotationField();
-			private NotationField() {}
-			public string Name { get { return "Notation"; } }
+		// Accessor of the JamNotation field
+		public sealed class JamNotationField : IField<DevicePinData, string> {
+			public static readonly JamNotationField Field = new JamNotationField();
+			private JamNotationField() {}
+			public string Name { get { return "JamNotation"; } }
 			public int Order { get; set; }
 			public string DefaultValue { get { return ""; } }
 			public string GetValue(ref DevicePinData record) {
-				return record.Notation;
+				return record.JamNotation;
 			}
 			public void SetValue(ref DevicePinData record, string value) {
-				record.Notation = value;
+				record.JamNotation = value;
 			}
 			public int Compare(ref DevicePinData l, ref DevicePinData r) {
-				return StringComparer.Ordinal.Compare(l.Notation, r.Notation);
+				return StringComparer.Ordinal.Compare(l.JamNotation, r.JamNotation);
 			}
 			public int Compare(string l, string r) {
 				return StringComparer.Ordinal.Compare(l, r);
@@ -255,7 +255,7 @@ namespace LogicCircuit {
 				,InvertedField.Field
 				,NameField.Field
 				,NoteField.Field
-				,NotationField.Field
+				,JamNotationField.Field
 				,DevicePinField.Field
 			);
 			// Create all but foreign keys of the table
@@ -344,10 +344,10 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.DevicePinRowId, DevicePinData.NoteField.Field, value); }
 		}
 
-		// Gets or sets value of the Notation field.
-		public override string Notation {
-			get { return this.Table.GetField(this.DevicePinRowId, DevicePinData.NotationField.Field); }
-			set { this.Table.SetField(this.DevicePinRowId, DevicePinData.NotationField.Field, value); }
+		// Gets or sets value of the JamNotation field.
+		public override string JamNotation {
+			get { return this.Table.GetField(this.DevicePinRowId, DevicePinData.JamNotationField.Field); }
+			set { this.Table.SetField(this.DevicePinRowId, DevicePinData.JamNotationField.Field, value); }
 		}
 
 
@@ -380,8 +380,8 @@ namespace LogicCircuit {
 				if(DevicePinData.NoteField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("Note");
 				}
-				if(DevicePinData.NotationField.Field.Compare(ref oldData, ref newData) != 0) {
-					this.NotifyPropertyChanged("Notation");
+				if(DevicePinData.JamNotationField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("JamNotation");
 				}
 			}
 			this.OnDevicePinChanged();
@@ -475,7 +475,7 @@ namespace LogicCircuit {
 			bool Inverted,
 			string Name,
 			string Note,
-			string Notation
+			string JamNotation
 			// Fields of Circuit table
 
 		) {
@@ -494,7 +494,7 @@ namespace LogicCircuit {
 				Inverted = Inverted,
 				Name = Name,
 				Note = Note,
-				Notation = Notation,
+				JamNotation = JamNotation,
 			};
 			return this.Create(this.Table.Insert(ref dataDevicePin), rowIdCircuit);
 		}

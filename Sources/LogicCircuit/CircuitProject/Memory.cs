@@ -180,20 +180,20 @@ namespace LogicCircuit {
 			DevicePin address = this.CircuitProject.DevicePinSet.Create(memory, PinType.Input, memory.AddressBitWidth);
 			address.PinSide = PinSide.Left;
 			address.Name = Resources.MemoryAddressPinName;
-			address.Notation = Resources.MemoryAddressPinNotation;
+			address.JamNotation = Resources.MemoryAddressPinNotation;
 			DevicePin data = this.CircuitProject.DevicePinSet.Create(memory, PinType.Output, memory.DataBitWidth);
 			data.PinSide = PinSide.Right;
 			data.Name = Resources.MemoryDataPinName;
-			data.Notation = Resources.MemoryDataPinNotation;
+			data.JamNotation = Resources.MemoryDataPinNotation;
 			if(memory.Writable) {
 				DevicePin dataIn = this.CircuitProject.DevicePinSet.Create(memory, PinType.Input, memory.DataBitWidth);
 				dataIn.PinSide = PinSide.Left;
 				dataIn.Name = Resources.MemoryDataInPinName;
-				dataIn.Notation = Resources.MemoryDataPinNotation;
+				dataIn.JamNotation = Resources.MemoryDataPinNotation;
 				DevicePin write = this.CircuitProject.DevicePinSet.Create(memory, PinType.Input, 1);
 				write.PinSide = PinSide.Bottom;
 				write.Name = Resources.MemoryWritePinName(memory.WriteOn1 ? Resources.WriteOn1 : Resources.WriteOn0);
-				write.Notation = Resources.MemoryWritePinNotation;
+				write.JamNotation = Resources.MemoryWritePinNotation;
 				memory.SetPins(address, data, dataIn, write);
 				MemorySet.UpdateWritePinName(memory);
 			} else {

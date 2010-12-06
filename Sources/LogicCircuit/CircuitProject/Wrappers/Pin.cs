@@ -525,7 +525,7 @@ namespace LogicCircuit {
 		}
 
 		// Gets or sets value of the JamNotation field.
-		public string JamNotation {
+		public override string JamNotation {
 			get { return this.Table.GetField(this.PinRowId, PinData.JamNotationField.Field); }
 			set { this.Table.SetField(this.PinRowId, PinData.JamNotationField.Field, value); }
 		}

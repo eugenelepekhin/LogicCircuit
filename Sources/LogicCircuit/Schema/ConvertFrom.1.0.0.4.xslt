@@ -8,6 +8,10 @@
 >
 	<xsl:output method="xml" version="1.0" standalone="yes" indent="yes"/>
 
+	<xsl:template match="old:Pin/old:Notation">
+		<lc:JamNotation><xsl:value-of select="."/></lc:JamNotation>
+	</xsl:template>
+
 	<!-- This will just change namespace of the file, so no new files will be opened by old ProjectManager -->
 
 	<xsl:template match="*">
