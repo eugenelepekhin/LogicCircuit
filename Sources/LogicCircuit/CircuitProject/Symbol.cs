@@ -10,6 +10,9 @@ using System.Windows;
 namespace LogicCircuit {
 	public abstract class Symbol : INotifyPropertyChanged {
 
+		public const int PinRadius = 3;
+		public const int GridSize = Symbol.PinRadius * 6;
+
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		protected Symbol() {

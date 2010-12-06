@@ -112,7 +112,7 @@ namespace LogicCircuit {
 				if(2 < solder.Value) {
 					Ellipse ellipse = new Ellipse();
 					Panel.SetZIndex(ellipse, 0);
-					ellipse.Width = ellipse.Height = 2 * Plotter.PinRadius;
+					ellipse.Width = ellipse.Height = 2 * Symbol.PinRadius;
 					Canvas.SetLeft(ellipse, Plotter.ScreenPoint(solder.Key.X));
 					Canvas.SetTop(ellipse, Plotter.ScreenPoint(solder.Key.Y));
 					ellipse.Fill = Plotter.JamDirectFill;

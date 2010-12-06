@@ -12,14 +12,11 @@ using System.Windows.Markup;
 
 namespace LogicCircuit {
 	public static class Plotter {
-		public const int PinRadius = 3;
-		public const int GridSize = Plotter.PinRadius * 6;
-
 		public static int LogicalCircuitWidth { get { return 170; } }
 		public static int LogicalCircuitHeight { get { return 170; } }
 		public static double LogicalCircuitScreenWidth { get { return Plotter.ScreenPoint(Plotter.LogicalCircuitWidth); } }
 		public static double LogicalCircuitScreenHeight { get { return Plotter.ScreenPoint(Plotter.LogicalCircuitHeight); } }
-		public static Rect LogicalCircuitBackgroundTile { get { return new Rect(0, 0, Plotter.GridSize, Plotter.GridSize); } }
+		public static Rect LogicalCircuitBackgroundTile { get { return new Rect(0, 0, Symbol.GridSize, Symbol.GridSize); } }
 
 		public static Brush WireStroke { get { return Brushes.Black; } }
 		public static Brush JamDirectFill { get { return Brushes.Black; } }
@@ -27,11 +24,11 @@ namespace LogicCircuit {
 		public static Brush JamStroke { get { return Brushes.Black; } }
 
 		public static double ScreenPoint(int xGrid) {
-			return (double)xGrid * Plotter.GridSize;
+			return (double)xGrid * Symbol.GridSize;
 		}
 
 		public static Point ScreenPoint(int xGrid, int yGrid) {
-			return new Point((double)xGrid * Plotter.GridSize, (double)yGrid * Plotter.GridSize);
+			return new Point((double)xGrid * Symbol.GridSize, (double)yGrid * Symbol.GridSize);
 		}
 
 		public static Point ScreenPoint(GridPoint point) {
@@ -39,13 +36,13 @@ namespace LogicCircuit {
 		}
 
 		public static int GridPoint(double xScreen) {
-			return (int)Math.Round(xScreen / Plotter.GridSize);
+			return (int)Math.Round(xScreen / Symbol.GridSize);
 		}
 
 		public static GridPoint GridPoint(Point screenPoint) {
 			return new GridPoint(
-				(int)Math.Round(screenPoint.X / Plotter.GridSize),
-				(int)Math.Round(screenPoint.Y / Plotter.GridSize)
+				(int)Math.Round(screenPoint.X / Symbol.GridSize),
+				(int)Math.Round(screenPoint.Y / Symbol.GridSize)
 			);
 		}
 
@@ -228,9 +225,9 @@ namespace LogicCircuit {
 				foreach(Jam jam in list) {
 					Ellipse ellipse = new Ellipse();
 					ellipse.DataContext = jam;
-					ellipse.Width = ellipse.Height = Plotter.PinRadius * 2;
-					Canvas.SetLeft(ellipse, Plotter.ScreenPoint(jam.X) - Plotter.PinRadius);
-					Canvas.SetTop(ellipse, Plotter.ScreenPoint(jam.Y) - Plotter.PinRadius);
+					ellipse.Width = ellipse.Height = Symbol.PinRadius * 2;
+					Canvas.SetLeft(ellipse, Plotter.ScreenPoint(jam.X) - Symbol.PinRadius);
+					Canvas.SetTop(ellipse, Plotter.ScreenPoint(jam.Y) - Symbol.PinRadius);
 					canvas.Children.Add(ellipse);
 					if(jam.Pin.Inverted) {
 						ellipse.Fill = Plotter.JamInvertedFill;
@@ -268,10 +265,10 @@ namespace LogicCircuit {
 			canvas.Tag = symbol;
 			canvas.Width = Plotter.ScreenPoint(circuit.SymbolWidth);
 			canvas.Height = Plotter.ScreenPoint(circuit.SymbolHeight);
-			bool ln = Plotter.AddJam(canvas, symbol.Left, (j, t) => { Canvas.SetLeft(t, Plotter.PinRadius); Canvas.SetTop(t, Plotter.ScreenPoint(j.Y) - 2 * Plotter.PinRadius); });
-			bool tn = Plotter.AddJam(canvas, symbol.Top, (j, t) => { Canvas.SetLeft(t, Plotter.ScreenPoint(j.X) - Plotter.PinRadius); Canvas.SetTop(t, Plotter.PinRadius); });
-			bool rn = Plotter.AddJam(canvas, symbol.Right, (j, t) => { Canvas.SetRight(t, Plotter.PinRadius); Canvas.SetTop(t, Plotter.ScreenPoint(j.Y) - 2 * Plotter.PinRadius); });
-			bool bn = Plotter.AddJam(canvas, symbol.Bottom, (j, t) => { Canvas.SetLeft(t, Plotter.ScreenPoint(j.X) - Plotter.PinRadius); Canvas.SetBottom(t, Plotter.PinRadius); });
+			bool ln = Plotter.AddJam(canvas, symbol.Left, (j, t) => { Canvas.SetLeft(t, Symbol.PinRadius); Canvas.SetTop(t, Plotter.ScreenPoint(j.Y) - 2 * Symbol.PinRadius); });
+			bool tn = Plotter.AddJam(canvas, symbol.Top, (j, t) => { Canvas.SetLeft(t, Plotter.ScreenPoint(j.X) - Symbol.PinRadius); Canvas.SetTop(t, Symbol.PinRadius); });
+			bool rn = Plotter.AddJam(canvas, symbol.Right, (j, t) => { Canvas.SetRight(t, Symbol.PinRadius); Canvas.SetTop(t, Plotter.ScreenPoint(j.Y) - 2 * Symbol.PinRadius); });
+			bool bn = Plotter.AddJam(canvas, symbol.Bottom, (j, t) => { Canvas.SetLeft(t, Plotter.ScreenPoint(j.X) - Symbol.PinRadius); Canvas.SetBottom(t, Symbol.PinRadius); });
 
 			FrameworkElement shape = Plotter.CircuitSkin(canvas, SymbolShape.Rectangular);
 			TextBlock text = shape.FindName("Notation") as TextBlock;
