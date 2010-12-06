@@ -8,7 +8,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace LogicCircuit {
-	public partial class CircuitEditor : INotifyPropertyChanged {
+	public partial class Editor : INotifyPropertyChanged {
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
@@ -39,7 +39,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		public CircuitEditor(Mainframe mainframe, string file) {
+		public Editor(Mainframe mainframe, string file) {
 			this.Mainframe = mainframe;
 			this.File = file;
 			if(this.File == null) {

@@ -6,7 +6,7 @@
 	xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
 	MinWidth="550"
 	MinHeight="400"
-	Title="{Binding Path=CircuitEditor.Caption}"
+	Title="{Binding Path=Editor.Caption}"
 	Width="{Binding Path=WindowLocation.Width, Mode=TwoWay}"
 	Height="{Binding Path=WindowLocation.Height, Mode=TwoWay}"
 	WindowState="{Binding Path=WindowLocation.WindowState, Mode=TwoWay}"
@@ -78,7 +78,7 @@
 			/>
 		</Storyboard>
 
-		<CollectionViewSource x:Key="circuitDescriptorList" Source="{Binding Path=CircuitEditor.CircuitDescriptorList.CircuitDescriptors}">
+		<CollectionViewSource x:Key="circuitDescriptorList" Source="{Binding Path=Editor.CircuitDescriptorList.CircuitDescriptors}">
 			<CollectionViewSource.GroupDescriptions>
 				<PropertyGroupDescription PropertyName="Category"/>
 			</CollectionViewSource.GroupDescriptions>
@@ -167,7 +167,7 @@
 				<!-- Top row with Running map tree -->
 				<GroupBox Grid.Row="0" Header="Running Circuit">
 					<!--<TreeView BorderThickness="0"
-						ItemsSource="{Binding Path=CircuitEditor.CircuitRunner.RootMap}"
+						ItemsSource="{Binding Path=Editor.CircuitRunner.RootMap}"
 						SelectedItemChanged="RunningMapTreeViewSelectedItemChanged"
 						MouseDoubleClick="RunningMapTreeViewMouseDoubleClick"
 					>
@@ -459,7 +459,7 @@
 				</Grid.RowDefinitions>
 
 				<!-- Main Diagram -->
-				<GroupBox Grid.Row="0" Header="{Binding Path=CircuitEditor.Project.LogicalCircuit.Name}">
+				<GroupBox Grid.Row="0" Header="{Binding Path=Editor.Project.LogicalCircuit.Name}">
 					<ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
 						<Canvas Name="Diagram" HorizontalAlignment="Left" VerticalAlignment="Top"
 							Width="{x:Static lc:Plotter.LogicalCircuitScreenWidth}"
@@ -524,7 +524,7 @@
 									</DrawingBrush.Drawing>
 								</DrawingBrush>
 							</WrapPanel.Resources>
-							<CheckBox Content="Po_wer On" VerticalAlignment="Center" Name="PowerSwitch" IsChecked="{Binding Path=CircuitEditor.Power}"
+							<CheckBox Content="Po_wer On" VerticalAlignment="Center" Name="PowerSwitch" IsChecked="{Binding Path=Editor.Power}"
 								ToolTip="Turn the power on or off."
 							>
 								<CheckBox.Triggers>
@@ -546,7 +546,7 @@
 							<StackPanel Orientation="Horizontal">
 								<Label Content="_Zoom:" Target="{Binding ElementName=zoom}" VerticalAlignment="Center"/>
 								<Slider Width="100" x:Name="zoom" VerticalAlignment="Center" Background="{StaticResource sliderBackground}"
-									Minimum="0.1" Maximum="3" Value="{Binding Path=CircuitEditor.Zoom, Mode=TwoWay}"
+									Minimum="0.1" Maximum="3" Value="{Binding Path=Editor.Zoom, Mode=TwoWay}"
 									AutoToolTipPlacement="TopLeft"
 									AutoToolTipPrecision="1"
 									IsMoveToPointEnabled="True"
@@ -574,7 +574,7 @@
 							<StackPanel Orientation="Horizontal">
 								<Label Content="Fre_quency:" Target="{Binding ElementName=frequency}" VerticalAlignment="Center"/>
 								<Slider Width="100" x:Name="frequency" VerticalAlignment="Center" Background="{StaticResource sliderBackground}"
-									Minimum="1" Maximum="50" Value="{Binding Path=CircuitEditor.Frequency, Mode=TwoWay}"
+									Minimum="1" Maximum="50" Value="{Binding Path=Editor.Frequency, Mode=TwoWay}"
 									Ticks="1,10,20,30,40,50"
 									LargeChange="10"
 									SmallChange="1"
@@ -604,7 +604,7 @@
 							<Separator Margin="8"/>
 							<StackPanel Orientation="Horizontal">
 								<CheckBox Content="Run at ma_ximum speed" VerticalAlignment="Center"
-									IsChecked="{Binding Path=CircuitEditor.IsMaximumSpeed, Mode=TwoWay}"
+									IsChecked="{Binding Path=Editor.IsMaximumSpeed, Mode=TwoWay}"
 									IsEnabled="{Binding ElementName=PowerSwitch, Path=IsChecked}"
 									Name="atMaxSpeed"
 								>
