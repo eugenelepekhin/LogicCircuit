@@ -59,7 +59,7 @@
     <Compile Include="ButtonControl.cs" />
     <Compile Include="Editor\CircuitDescriptor.cs" />
     <Compile Include="Editor\CircuitDescriptorList.cs" />
-    <Compile Include="Editor\CircuitEditor.cs" />
+    <Compile Include="Editor\Editor.cs" />
     <Compile Include="Editor\Plotter.cs" />
     <Compile Include="CircuitException.cs" />
     <Compile Include="CircuitProject\BasePin.cs" />
