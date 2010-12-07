@@ -11,51 +11,60 @@ using System.Xml;
 
 namespace LogicCircuit {
 	public abstract class CircuitGlyph : Symbol {
+		
 		private List<Jam>[] jams;
 		private bool isUpdated;
+
 		public abstract Circuit Circuit { get; }
 		public abstract GridPoint Point { get; set; }
+
+		private FrameworkElement glyph = null;
+
+		public override FrameworkElement Glyph {
+			get { return this.glyph ?? (this.glyph = this.Circuit.CreateGlyph(this)); }
+		}
 
 		public FrameworkElement ProbeView { get; set; }
 
 		protected CircuitGlyph() : base() {
 		}
 
-		public IList<Jam> Left {
+		private IList<Jam> Left {
 			get {
 				this.Update();
 				return this.jams[(int)PinSide.Left];
 			}
 		}
-		public IList<Jam> Top {
+		private IList<Jam> Top {
 			get {
 				this.Update();
 				return this.jams[(int)PinSide.Top];
 			}
 		}
-		public IList<Jam> Right {
+		private IList<Jam> Right {
 			get {
 				this.Update();
 				return this.jams[(int)PinSide.Right];
 			}
 		}
-		public IList<Jam> Bottom {
+		private IList<Jam> Bottom {
 			get {
 				this.Update();
 				return this.jams[(int)PinSide.Bottom];
 			}
 		}
 
-		public IEnumerable<Jam> Jams() {
+		private IEnumerable<Jam> Jams() {
 			return this.Left.Concat(this.Top).Concat(this.Right).Concat(this.Bottom);
 		}
 
 		public void ResetJams() {
 			this.isUpdated = false;
-			this.NotifyPropertyChanged("Left");
-			this.NotifyPropertyChanged("Top");
-			this.NotifyPropertyChanged("Right");
-			this.NotifyPropertyChanged("Bottom");
+			//this.NotifyPropertyChanged("Left");
+			//this.NotifyPropertyChanged("Top");
+			//this.NotifyPropertyChanged("Right");
+			//this.NotifyPropertyChanged("Bottom");
+			this.NotifyPropertyChanged("Glyph");
 		}
 
 		private void Update() {
@@ -88,7 +97,7 @@ namespace LogicCircuit {
 		}
 
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")]
-		public static FrameworkElement Skin(Canvas canvas, string skinText) {
+		private static FrameworkElement Skin(Canvas canvas, string skinText) {
 			FrameworkElement shape = null;
 			using(StringReader stringReader = new StringReader(skinText)) {
 				using(XmlTextReader xmlReader = new XmlTextReader(stringReader)) {
@@ -102,7 +111,7 @@ namespace LogicCircuit {
 			return shape;
 		}
 
-		public static bool AddJam(Canvas canvas, IEnumerable<Jam> list, Action<Jam, TextBlock> notationPosition) {
+		private static bool AddJam(Canvas canvas, IEnumerable<Jam> list, Action<Jam, TextBlock> notationPosition) {
 			bool hasNotation = false;
 			foreach(Jam jam in list) {
 				Ellipse ellipse = new Ellipse();
@@ -139,11 +148,7 @@ namespace LogicCircuit {
 			return hasNotation;
 		}
 
-		public static bool AddJam(Canvas canvas, IEnumerable<Jam> list) {
-			return CircuitGlyph.AddJam(canvas, list, null);
-		}
-
-		public Canvas CreateGlyphCanvas() {
+		private Canvas CreateGlyphCanvas() {
 			Canvas canvas = new Canvas();
 			Panel.SetZIndex(canvas, 1);
 			canvas.DataContext = this;
@@ -153,9 +158,22 @@ namespace LogicCircuit {
 			return canvas;
 		}
 
+		public FrameworkElement CreateButtonGlyph() {
+			Tracer.Assert(this.Circuit is CircuitButton);
+			Canvas canvas = this.CreateGlyphCanvas();
+			CircuitGlyph.AddJam(canvas, this.Jams(), null);
+			ButtonControl buttonControl = new ButtonControl();
+			buttonControl.Content = this.Circuit.Notation;
+			buttonControl.Width = canvas.Width;
+			buttonControl.Height = canvas.Height;
+			canvas.Children.Add(buttonControl);
+			this.ProbeView = buttonControl;
+			return canvas;
+		}
+
 		public FrameworkElement CreateSimpleGlyph(string skin) {
 			Canvas canvas = this.CreateGlyphCanvas();
-			CircuitGlyph.AddJam(canvas, this.Jams());
+			CircuitGlyph.AddJam(canvas, this.Jams(), null);
 			FrameworkElement shape = CircuitGlyph.Skin(canvas, skin);
 			FrameworkElement probeView = shape.FindName("ProbeView") as FrameworkElement;
 			if(probeView != null) {
@@ -188,7 +206,7 @@ namespace LogicCircuit {
 			Gate gate = this.Circuit as Gate;
 			Tracer.Assert(gate != null);
 			Canvas canvas = this.CreateGlyphCanvas();
-			CircuitGlyph.AddJam(canvas, this.Jams());
+			CircuitGlyph.AddJam(canvas, this.Jams(), null);
 			FrameworkElement shape = CircuitGlyph.Skin(canvas, skin);
 			int top = Math.Max(0, gate.InputCount - 3) / 2;
 			int bottom = Math.Max(0, gate.InputCount - 3 - top);

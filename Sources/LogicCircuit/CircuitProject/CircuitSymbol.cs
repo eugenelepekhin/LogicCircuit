@@ -5,7 +5,6 @@ using System.Xml;
 namespace LogicCircuit {
 
 	public partial class CircuitSymbol {
-		private FrameworkElement glyph = null;
 
 		partial void OnCircuitSymbolChanged() {
 			Pin pin = this.Circuit as Pin;
@@ -25,10 +24,6 @@ namespace LogicCircuit {
 		}
 
 		public override int Z { get { return 2; } }
-
-		public override FrameworkElement Glyph {
-			get { return this.glyph ?? (this.glyph = this.Circuit.CreateGlyph(this)); }
-		}
 
 		public override void CopyTo(CircuitProject project) {
 			project.CircuitSymbolSet.Copy(this);

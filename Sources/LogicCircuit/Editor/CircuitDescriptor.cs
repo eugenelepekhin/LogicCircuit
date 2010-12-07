@@ -25,7 +25,6 @@ namespace LogicCircuit {
 
 		private class CircuitDescriptorGlyph : CircuitGlyph {
 			private readonly CircuitDescriptor<T> circuitDescriptor;
-			private FrameworkElement glyph = null;
 
 			public CircuitDescriptorGlyph(CircuitDescriptor<T> circuitDescriptor) {
 				this.circuitDescriptor = circuitDescriptor;
@@ -38,10 +37,6 @@ namespace LogicCircuit {
 				set { throw new InvalidOperationException(); }
 			}
 			public override int Z { get { return 0; } }
-
-			public override FrameworkElement Glyph {
-				get { return this.glyph ?? (this.glyph = this.Circuit.CreateGlyph(this)); }
-			}
 
 			public override void CopyTo(CircuitProject project) {
 				throw new InvalidOperationException();

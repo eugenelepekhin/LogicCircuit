@@ -25,15 +25,7 @@ namespace LogicCircuit {
 		}
 
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
-			Canvas canvas = symbol.CreateGlyphCanvas();
-			CircuitGlyph.AddJam(canvas, symbol.Jams());
-			ButtonControl buttonControl = new ButtonControl();
-			buttonControl.Content = this.Notation;
-			buttonControl.Width = canvas.Width;
-			buttonControl.Height = canvas.Height;
-			canvas.Children.Add(buttonControl);
-			symbol.ProbeView = buttonControl;
-			return canvas;
+			return symbol.CreateButtonGlyph();
 		}
 	}
 
