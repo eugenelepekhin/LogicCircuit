@@ -10,12 +10,6 @@ using System.Windows.Threading;
 namespace LogicCircuit {
 	public partial class Editor : INotifyPropertyChanged {
 
-		public static int LogicalCircuitWidth { get { return 170; } }
-		public static int LogicalCircuitHeight { get { return 170; } }
-		public static double LogicalCircuitScreenWidth { get { return Symbol.ScreenPoint(Editor.LogicalCircuitWidth); } }
-		public static double LogicalCircuitScreenHeight { get { return Symbol.ScreenPoint(Editor.LogicalCircuitHeight); } }
-		public static Rect LogicalCircuitBackgroundTile { get { return new Rect(0, 0, Symbol.GridSize, Symbol.GridSize); } }
-
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		public Mainframe Mainframe { get; private set; }

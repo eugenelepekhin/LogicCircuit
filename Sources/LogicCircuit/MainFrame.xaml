@@ -462,8 +462,8 @@
 				<GroupBox Grid.Row="0" Header="{Binding Path=Editor.Project.LogicalCircuit.Name}">
 					<ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
 						<Canvas Name="Diagram" HorizontalAlignment="Left" VerticalAlignment="Top"
-							Width="{x:Static lc:Editor.LogicalCircuitScreenWidth}"
-							Height="{x:Static lc:Editor.LogicalCircuitScreenHeight}"
+							Width="{x:Static lc:Symbol.LogicalCircuitWidth}"
+							Height="{x:Static lc:Symbol.LogicalCircuitHeight}"
 							Style="{StaticResource LogicCircuitBackground}"
 							AllowDrop="True"
 							DragEnter="DiagramDragEnter"
