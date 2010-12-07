@@ -203,8 +203,10 @@
 				</GroupBox>
 
 				<!-- Bottom row with List of circuits and properties -->
-				<GroupBox Grid.Row="1" Header="Project" DataContext="{Binding Source={StaticResource circuitDescriptorList}}">
-					<!--<ListView ItemsSource="{Binding}" SelectionMode="Single" BorderThickness="0" HorizontalContentAlignment="Stretch">
+				<GroupBox Grid.Row="1" Header="Project">
+					<ListView SelectionMode="Single" BorderThickness="0" HorizontalContentAlignment="Stretch"
+						ItemsSource="{Binding Source={StaticResource circuitDescriptorList}}"
+					>
 						<ListView.GroupStyle>
 							<GroupStyle>
 								<GroupStyle.HeaderTemplate>
@@ -212,14 +214,14 @@
 										<Border BorderThickness="0,0,0,2" Margin="0,5,0,0">
 											<Border.BorderBrush>
 												<RadialGradientBrush>
-													<GradientStop Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" Offset="0"/>
-													<GradientStop Color="{DynamicResource {x:Static SystemColors.ControlDarkColorKey}}" Offset="0.2"/>
-													<GradientStop Color="{DynamicResource {x:Static SystemColors.ControlDarkColorKey}}" Offset="0.8"/>
-													<GradientStop Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" Offset="1"/>
+													<GradientStop Color="{x:Static SystemColors.WindowColor}" Offset="0"/>
+													<GradientStop Color="{x:Static SystemColors.ControlDarkColor}" Offset="0.2"/>
+													<GradientStop Color="{x:Static SystemColors.ControlDarkColor}" Offset="0.8"/>
+													<GradientStop Color="{x:Static SystemColors.WindowColor}" Offset="1"/>
 												</RadialGradientBrush>
 											</Border.BorderBrush>
-											<TextBlock Text="{Binding Path=Name}" FontWeight="Bold"
-												Foreground="{DynamicResource {x:Static SystemColors.AppWorkspaceBrushKey}}"
+											<TextBlock Text="{Binding Path=Items[0].Category}" FontWeight="Bold"
+												Foreground="{x:Static SystemColors.AppWorkspaceBrush}"
 											/>
 										</Border>
 									</DataTemplate>
@@ -227,33 +229,68 @@
 							</GroupStyle>
 						</ListView.GroupStyle>
 						<ListView.Resources>
-							<DataTemplate DataType="{x:Type lc:ButtonDescriptor}">
-								<StackPanel Orientation="Horizontal" Margin="8,0,0,0" Tag="{Binding}"
+							<Style TargetType="ContentControl">
+								<Setter Property="IsTabStop" Value="False"/>
+								<Setter Property="VerticalAlignment" Value="Center"/>
+								<Setter Property="Margin" Value="3,3,8,3"/>
+								<Setter Property="Content" Value="{Binding Path=CircuitGlyph.Glyph}"/>
+								<Setter Property="LayoutTransform">
+									<Setter.Value>
+										<ScaleTransform ScaleX="0.75" ScaleY="0.75"/>
+									</Setter.Value>
+								</Setter>
+							</Style>
+
+							<Style x:Key="DescriptorPanel" TargetType="StackPanel">
+								<Setter Property="Orientation" Value="Horizontal"/>
+								<Setter Property="Margin" Value="8,0,0,0"/>
+							</Style>
+
+							<DataTemplate DataType="{x:Type lc:GateDescriptor}">
+								<DataTemplate.Resources>
+									<Style TargetType="ComboBox">
+										<Style.Triggers>
+											<DataTrigger Binding="{Binding Path=InputCountRangeLength}" Value="0">
+												<Setter Property="Width" Value="0"/>
+												<Setter Property="Margin" Value="0"/>
+												<Setter Property="Visibility" Value="Hidden"/>
+											</DataTrigger>
+										</Style.Triggers>
+									</Style>
+								</DataTemplate.Resources>
+								<StackPanel Style="{StaticResource DescriptorPanel}"
 									MouseDown="DescriptorMouseDown"
 									MouseUp="DescriptorMouseUp"
 									MouseMove="DescriptorMouseMove"
 								>
-									<ContentControl Content="{Binding Path=Glyph}" Margin="3,3,8,3">
-										<ContentControl.LayoutTransform>
-											<ScaleTransform ScaleX="0.75" ScaleY="0.75"/>
-										</ContentControl.LayoutTransform>
-									</ContentControl>
+									<ContentControl/>
+									<ComboBox VerticalAlignment="Center" Margin="0,0,3,0" MinWidth="42"
+										SelectedItem="{Binding Path=InputCount, Mode=TwoWay}" ItemsSource="{Binding Path=InputCountRange}"
+										ToolTip="Choose number of inputs for the gate"
+									/>
+									<TextBlock Text="{Binding Path=Circuit.Name}" VerticalAlignment="Center"/>
+								</StackPanel>
+							</DataTemplate>
+
+							<DataTemplate DataType="{x:Type lc:ButtonDescriptor}">
+								<StackPanel Style="{StaticResource DescriptorPanel}"
+									MouseDown="DescriptorMouseDown"
+									MouseUp="DescriptorMouseUp"
+									MouseMove="DescriptorMouseMove"
+								>
+									<ContentControl/>
 									<TextBox Text="{Binding Path=Notation, Mode=TwoWay}" VerticalAlignment="Center" Width="20" ToolTip="Enter notation of the button"/>
-									<TextBlock Text="{Binding Path=Name}" VerticalAlignment="Center"/>
+									<TextBlock Text="Button" VerticalAlignment="Center"/>
 								</StackPanel>
 							</DataTemplate>
 
 							<DataTemplate DataType="{x:Type lc:ConstantDescriptor}">
-								<StackPanel Orientation="Horizontal" Margin="8,0,0,0" Tag="{Binding}"
+								<StackPanel Style="{StaticResource DescriptorPanel}"
 									MouseDown="DescriptorMouseDown"
 									MouseUp="DescriptorMouseUp"
 									MouseMove="DescriptorMouseMove"
 								>
-									<ContentControl Content="{Binding Path=Glyph}" Margin="3,3,8,3">
-										<ContentControl.LayoutTransform>
-											<ScaleTransform ScaleX="0.75" ScaleY="0.75"/>
-										</ContentControl.LayoutTransform>
-									</ContentControl>
+									<ContentControl/>
 									<Grid Margin="3,3,8,3" VerticalAlignment="Center">
 										<Grid.ColumnDefinitions>
 											<ColumnDefinition Width="Auto" MinWidth="65"/>
@@ -273,51 +310,46 @@
 										/>
 										<TextBlock Grid.Row="1" Grid.Column="1" Text="Value" Margin="8,0,0,0"/>
 									</Grid>
-									<TextBlock Text="{Binding Path=Name}" VerticalAlignment="Center"/>
+									<TextBlock Text="Constant" VerticalAlignment="Center"/>
 								</StackPanel>
 							</DataTemplate>
 
-							<DataTemplate DataType="{x:Type lc:GateDescriptor}">
-								<DataTemplate.Resources>
-									<Style TargetType="ComboBox">
-										<Style.Triggers>
-											<DataTrigger Binding="{Binding Path=InputCountRangeLength}" Value="1">
-												<Setter Property="Width" Value="0"/>
-												<Setter Property="Margin" Value="0"/>
-												<Setter Property="Visibility" Value="Hidden"/>
-											</DataTrigger>
-										</Style.Triggers>
-									</Style>
-								</DataTemplate.Resources>
-								<StackPanel Orientation="Horizontal" Margin="8,0,0,0" Tag="{Binding}"
+							<DataTemplate DataType="{x:Type lc:MemoryDescriptor}">
+								<StackPanel Style="{StaticResource DescriptorPanel}"
 									MouseDown="DescriptorMouseDown"
 									MouseUp="DescriptorMouseUp"
 									MouseMove="DescriptorMouseMove"
 								>
-									<ContentControl Content="{Binding Path=Glyph}" Margin="3,3,8,3">
-										<ContentControl.LayoutTransform>
-											<ScaleTransform ScaleX="0.75" ScaleY="0.75"/>
-										</ContentControl.LayoutTransform>
-									</ContentControl>
-									<ComboBox VerticalAlignment="Center" Margin="0,0,3,0" MinWidth="42"
-										SelectedItem="{Binding Path=InputCount, Mode=TwoWay}" ItemsSource="{Binding Path=InputCountRange}"
-										ToolTip="Choose number of inputs for the gate"
-									/>
-									<TextBlock Text="{Binding Path=Name}" VerticalAlignment="Center"/>
+									<ContentControl/>
+									<Grid Margin="3,3,8,3" VerticalAlignment="Center">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="Auto" MinWidth="65"/>
+											<ColumnDefinition Width="Auto"/>
+										</Grid.ColumnDefinitions>
+										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto"/>
+											<RowDefinition Height="Auto"/>
+										</Grid.RowDefinitions>
+										<ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Path=AddressBitWidthRange}" SelectedItem="{Binding Path=AddressBitWidth}"
+											ToolTip="Choose bit width of the address pin"
+										/>
+										<TextBlock Grid.Row="0" Grid.Column="1" Text="Address Bits" Margin="8,0,0,0"/>
+										<ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=DataBitWidthRange}" SelectedItem="{Binding Path=DataBitWidth}"
+											ToolTip="Choose bit width of the data pin"
+										/>
+										<TextBlock Grid.Row="1" Grid.Column="1" Text="Data Bits" Margin="8,0,0,0"/>
+									</Grid>
+									<TextBlock Text="{Binding Path=Circuit.Notation}" VerticalAlignment="Center"/>
 								</StackPanel>
 							</DataTemplate>
 
 							<DataTemplate DataType="{x:Type lc:PinDescriptor}">
-								<StackPanel Orientation="Horizontal" Margin="8,0,0,0" Tag="{Binding}"
+								<StackPanel Style="{StaticResource DescriptorPanel}"
 									MouseDown="DescriptorMouseDown"
 									MouseUp="DescriptorMouseUp"
 									MouseMove="DescriptorMouseMove"
 								>
-									<ContentControl Content="{Binding Path=Glyph}" Margin="3,3,8,3">
-										<ContentControl.LayoutTransform>
-											<ScaleTransform ScaleX="0.75" ScaleY="0.75"/>
-										</ContentControl.LayoutTransform>
-									</ContentControl>
+									<ContentControl/>
 									<Grid Margin="3,3,8,3" VerticalAlignment="Center">
 										<Grid.ColumnDefinitions>
 											<ColumnDefinition Width="Auto" MinWidth="65"/>
@@ -337,80 +369,17 @@
 										/>
 										<TextBlock Grid.Row="1" Grid.Column="1" Text="Side" Margin="8,0,0,0"/>
 									</Grid>
-									<TextBlock Text="{Binding Path=Name}" VerticalAlignment="Center"/>
+									<TextBlock Text="Pin" VerticalAlignment="Center"/>
 								</StackPanel>
-							</DataTemplate>
-
-							<DataTemplate DataType="{x:Type lc:MemoryDescriptor}">
-								<StackPanel Orientation="Horizontal" Margin="8,0,0,0" Tag="{Binding}"
-									MouseDown="DescriptorMouseDown"
-									MouseUp="DescriptorMouseUp"
-									MouseMove="DescriptorMouseMove"
-								>
-									<ContentControl Content="{Binding Path=Glyph}" Margin="3,3,8,3">
-										<ContentControl.LayoutTransform>
-											<ScaleTransform ScaleX="0.75" ScaleY="0.75"/>
-										</ContentControl.LayoutTransform>
-									</ContentControl>
-									<Grid Margin="3,3,8,3" VerticalAlignment="Center">
-										<Grid.ColumnDefinitions>
-											<ColumnDefinition Width="Auto" MinWidth="65"/>
-											<ColumnDefinition Width="Auto"/>
-										</Grid.ColumnDefinitions>
-										<Grid.RowDefinitions>
-											<RowDefinition Height="Auto"/>
-											<RowDefinition Height="Auto"/>
-										</Grid.RowDefinitions>
-										<ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Path=AddressBitWidthRange}" SelectedItem="{Binding Path=AddressBitWidth}"
-											ToolTip="Choose bit width of the address pin"
-										/>
-										<TextBlock Grid.Row="0" Grid.Column="1" Text="Address Bits" Margin="8,0,0,0"/>
-										<ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=DataBitWidthRange}" SelectedItem="{Binding Path=DataBitWidth}"
-											ToolTip="Choose bit width of the data pin"
-										/>
-										<TextBlock Grid.Row="1" Grid.Column="1" Text="Data Bits" Margin="8,0,0,0"/>
-									</Grid>
-									<TextBlock Text="{Binding Path=Name}" VerticalAlignment="Center"/>
-								</StackPanel>
-							</DataTemplate>
-
-							<DataTemplate DataType="{x:Type lc:LogicalCircuitDescriptor}">
-								<DataTemplate.Resources>
-									<Style TargetType="Border">
-										<Style.Triggers>
-											<DataTrigger Binding="{Binding Path=IsCurrent}" Value="True">
-												<Setter Property="BorderBrush" Value="{DynamicResource MarkerStroke}"/>
-											</DataTrigger>
-										</Style.Triggers>
-									</Style>
-								</DataTemplate.Resources>
-								<Border BorderThickness="1" Margin="0,0,5,0">
-									<StackPanel Orientation="Horizontal" Margin="8,0,0,0" Tag="{Binding}"
-										MouseDown="DescriptorMouseDown"
-										MouseUp="DescriptorMouseUp"
-										MouseMove="DescriptorMouseMove"
-									>
-										<ContentControl Content="{Binding Path=Glyph}" Margin="3,3,8,3">
-											<ContentControl.LayoutTransform>
-												<ScaleTransform ScaleX="0.75" ScaleY="0.75"/>
-											</ContentControl.LayoutTransform>
-										</ContentControl>
-										<TextBlock Text="{Binding Path=Name}" VerticalAlignment="Center"/>
-									</StackPanel>
-								</Border>
 							</DataTemplate>
 
 							<DataTemplate DataType="{x:Type lc:SplitterDescriptor}">
-								<StackPanel Orientation="Horizontal" Margin="8,0,0,0" Tag="{Binding}"
+								<StackPanel Style="{StaticResource DescriptorPanel}"
 									MouseDown="DescriptorMouseDown"
 									MouseUp="DescriptorMouseUp"
 									MouseMove="DescriptorMouseMove"
 								>
-									<ContentControl Content="{Binding Path=Glyph}" Margin="8,5,8,5" VerticalAlignment="Center">
-										<ContentControl.LayoutTransform>
-											<ScaleTransform ScaleX="0.75" ScaleY="0.75"/>
-										</ContentControl.LayoutTransform>
-									</ContentControl>
+									<ContentControl/>
 									<Grid Margin="8,3,8,3" VerticalAlignment="Center">
 										<Grid.ColumnDefinitions>
 											<ColumnDefinition Width="Auto" MinWidth="65"/>
@@ -443,8 +412,30 @@
 									<TextBlock Text="Splitter" VerticalAlignment="Center"/>
 								</StackPanel>
 							</DataTemplate>
+
+							<DataTemplate DataType="{x:Type lc:LogicalCircuitDescriptor}">
+								<Border BorderThickness="1" Margin="0,0,5,0">
+									<Border.Style>
+										<Style TargetType="Border">
+											<Style.Triggers>
+												<DataTrigger Binding="{Binding Path=IsCurrent}" Value="True">
+													<Setter Property="BorderBrush" Value="{StaticResource MarkerStroke}"/>
+												</DataTrigger>
+											</Style.Triggers>
+										</Style>
+									</Border.Style>
+									<StackPanel Style="{StaticResource DescriptorPanel}"
+										MouseDown="DescriptorMouseDown"
+										MouseUp="DescriptorMouseUp"
+										MouseMove="DescriptorMouseMove"
+									>
+										<ContentControl/>
+										<TextBlock Text="{Binding Path=Circuit.Name}" VerticalAlignment="Center"/>
+									</StackPanel>
+								</Border>
+							</DataTemplate>
 						</ListView.Resources>
-					</ListView>-->
+					</ListView>
 				</GroupBox>
 			</Grid>
 

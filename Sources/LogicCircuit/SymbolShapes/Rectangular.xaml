@@ -3,5 +3,5 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	BorderBrush="Black" BorderThickness="1" Background="White" 
 >
-	<TextBlock Name="Notation" IsHyphenationEnabled="True" TextWrapping="Wrap"/>
+	<TextBlock Name="Notation" IsHyphenationEnabled="True" TextWrapping="Wrap" Foreground="Black"/>
 </Border>

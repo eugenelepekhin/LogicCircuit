@@ -178,6 +178,15 @@ namespace LogicCircuit {
 			}
 		}
 
+		private void DescriptorMouseDown(object sender, MouseButtonEventArgs e) {
+		}
+
+		private void DescriptorMouseUp(object sender, MouseButtonEventArgs e) {
+		}
+
+		private void DescriptorMouseMove(object sender, MouseEventArgs e) {
+		}
+
 		private void DiagramDragEnter(object sender, DragEventArgs e) {
 			try {
 				//this.Editor.CanvasDragOver(sender, e);

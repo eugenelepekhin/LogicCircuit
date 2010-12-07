@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
+using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Xml;
 
@@ -124,6 +125,7 @@ namespace LogicCircuit {
 				if(!string.IsNullOrEmpty(jamNotation)) {
 					Tracer.Assert(notationPosition != null); // If pin has notation then it should belong to rectangualry rendering circuit.
 					TextBlock text = new TextBlock();
+					text.Foreground = Brushes.Black;
 					int len = (jam.Pin.PinSide == PinSide.Top || jam.Pin.PinSide == PinSide.Bottom) ? 4 : 2;
 					text.Text = jamNotation.Substring(0, Math.Min(len, jamNotation.Length));
 					text.ToolTip = jam.Pin.ToolTip;
