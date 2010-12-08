@@ -5,3 +5,5 @@ glob:*/TestResults/*
 glob:*.exe
 glob:*.suo
 glob:*.csproj.user
+glob:*.vsp
+glob:*.psess
