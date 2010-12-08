@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,6 +20,7 @@ namespace LogicCircuit {
 		public CircuitDescriptorList CircuitDescriptorList { get; private set; }
 
 		private readonly Dictionary<GridPoint, int> wirePoint = new Dictionary<GridPoint, int>();
+		private Switcher switcher;
 
 		private Dispatcher Dispatcher { get { return this.Mainframe.Dispatcher; } }
 		private Canvas Diagram { get { return this.Mainframe.Diagram; } }
@@ -39,12 +41,16 @@ namespace LogicCircuit {
 			}
 		}
 
+		// TODO: implement it correctly
+		public bool InEditMode { get { return true; } }
+
 		public Editor(Mainframe mainframe, string file) {
 			this.Mainframe = mainframe;
 			this.File = file;
 			this.CircuitProject = CircuitProject.Create(this.File);
 			this.savedVersion = this.CircuitProject.Version;
 			this.CircuitDescriptorList = new CircuitDescriptorList(this.CircuitProject);
+			this.switcher = new Switcher(this);
 		}
 
 		public void Save(string file) {
@@ -79,6 +85,8 @@ namespace LogicCircuit {
 		public bool IsMaximumSpeed {
 			get; set;
 		}
+
+		//--- Drawing on Diagram --
 
 		public void Refresh() {
 			if(this.Dispatcher.Thread != Thread.CurrentThread) {
@@ -129,6 +137,203 @@ namespace LogicCircuit {
 				count = 0;
 			}
 			this.wirePoint[point] = count + 1;
+		}
+
+		//--- Edit Operation
+
+		public void Undo() {
+			if(this.CanUndo()) {
+				this.CancelMove();
+				this.ClearSelection();
+				this.CircuitProject.Undo();
+			}
+		}
+
+		public void Redo() {
+			if(this.CanRedo()) {
+				this.CancelMove();
+				this.ClearSelection();
+				this.CircuitProject.Redo();
+			}
+		}
+
+		public bool CanUndo() {
+			return this.InEditMode && this.CircuitProject.CanUndo;
+		}
+
+		public bool CanRedo() {
+			return this.InEditMode && this.CircuitProject.CanRedo;
+		}
+
+		public void OpenLogicalCircuit(LogicalCircuit logicalCircuit) {
+			this.CancelMove();
+			this.ClearSelection();
+			if(logicalCircuit != this.Project.LogicalCircuit) {
+				bool success = false;
+				bool started = false;
+				CircuitProject circuitProject = this.CircuitProject;
+				try {
+					if(!circuitProject.IsEditor) {
+						started = circuitProject.StartTransaction();
+					}
+					if(circuitProject.IsEditor) {
+						this.Project.LogicalCircuit = logicalCircuit;
+						if(started) {
+							circuitProject.PrepareCommit();
+						}
+						success = true;
+					}
+				} finally {
+					if(started) {
+						if(success) {
+							circuitProject.Commit();
+						} else {
+							circuitProject.Rollback();
+						}
+					}
+				}
+			}
+		}
+
+		public void DeleteLogicalCircuit() {
+			if(1 < this.CircuitProject.LogicalCircuitSet.Count()) {
+				this.CancelMove();
+				this.ClearSelection();
+				LogicalCircuit current = this.Project.LogicalCircuit;
+				LogicalCircuit other = this.switcher.SuggestNext();
+				Tracer.Assert(other != null && other != current);
+				this.CircuitProject.InTransaction(() => {
+					this.OpenLogicalCircuit(other);
+					current.Delete();
+				});
+			}
+		}
+
+		public void Copy() {
+			//this.CancelMove();
+			//if(0 < this.SelectionCount) {
+			//    XmlDocument xml = this.ProjectManager.CircuitProject.Copy(this.selection.Keys);
+			//    StringBuilder text = new StringBuilder();
+			//    using(StringWriter stringWriter = new StringWriter(text, CultureInfo.InvariantCulture)) {
+			//        using(XmlTextWriter writer = new XmlTextWriter(stringWriter)) {
+			//            writer.Formatting = Formatting.None;
+			//            xml.WriteTo(writer);
+			//        }
+			//    }
+			//    Clipboard.SetDataObject(text.ToString(), false);
+			//}
+		}
+
+		public bool CanPaste() {
+			return CircuitProject.CanPaste(Clipboard.GetText());
+		}
+
+		public void Paste() {
+			//this.CancelMove();
+			//this.ClearSelection();
+			//string text = Clipboard.GetText();
+			//if(this.CircuitProject.CanPaste(text)) {
+			//    XmlDocument xml = new XmlDocument();
+			//    xml.LoadXml(text);
+			//    List<Symbol> result = null;
+			//    this.CircuitProject.InTransaction(() => {
+			//        result = this.ProjectManager.CircuitProject.Paste(xml);
+			//    });
+			//    Tracer.Assert(result.All(symbol => symbol.LogicalCircuit == this.CircuitProject.ProjectSet.Project.LogicalCircuit));
+			//    this.Select(result);
+			//}
+		}
+
+		public void Delete() {
+			//this.CancelMove();
+			//if(0 < this.SelectionCount) {
+			//    IEnumerable<Symbol> selection = this.Selection();
+			//    this.ClearSelection();
+			//    this.CircuitProject.InTransaction(() => {
+			//        foreach(Symbol symbol in selection) {
+			//            CircuitSymbol circuitSymbol = symbol as CircuitSymbol;
+			//            if(circuitSymbol != null) {
+			//                if(circuitSymbol.Circuit is Gate || circuitSymbol.Circuit is LogicalCircuit) {
+			//                    circuitSymbol.Delete();
+			//                } else {
+			//                    circuitSymbol.Circuit.Delete();
+			//                }
+			//            } else {
+			//                Wire wire = symbol as Wire;
+			//                if(wire != null) {
+			//                    wire.Delete();
+			//                }
+			//            }
+			//        }
+			//    });
+			//}
+		}
+
+		public void Cut() {
+			//this.CancelMove();
+			//if(0 < this.SelectionCount) {
+			//    this.Copy();
+			//    this.Delete();
+			//}
+		}
+
+		public void Edit(Project project) {
+			//Tracer.Assert(project == this.Project);
+			//DialogProject dialog = new DialogProject(project);
+			//dialog.Owner = this.MainFrame;
+			//dialog.ShowDialog();
+		}
+
+		public void Edit(LogicalCircuit logicalCircuit) {
+			//DialogCircuit dialog = new DialogCircuit(logicalCircuit);
+			//dialog.Owner = this.MainFrame;
+			//dialog.ShowDialog();
+		}
+
+		private void Edit(CircuitButton button) {
+			//DialogButton dialog = new DialogButton(button);
+			//dialog.Owner = this.MainFrame;
+			//dialog.ShowDialog();
+		}
+
+		private void Edit(Constant constant) {
+			//DialogConstant dialog = new DialogConstant(constant);
+			//dialog.Owner = this.MainFrame;
+			//dialog.ShowDialog();
+		}
+
+		private void Edit(Memory memory) {
+			//Window dialog = memory.Writable ? (Window)new DialogRAM(memory) : (Window)new DialogROM(memory);
+			//dialog.Owner = this.MainFrame;
+			//dialog.ShowDialog();
+		}
+
+		private void Edit(Pin pin) {
+			//DialogPin dialog = new DialogPin(pin);
+			//dialog.Owner = this.MainFrame;
+			//dialog.ShowDialog();
+		}
+
+		//--- Selection ---
+
+		public int SelectionCount { get { return 0;/*this.selection.Count;*/ } }
+
+		public void ClearSelection() {
+			//foreach(Marker marker in this.selection.Values) {
+			//    this.SymbolList.Remove(marker);
+			//}
+			//this.selection.Clear();
+		}
+
+		private void CancelMove() {
+			//if(this.movingMarker != null) {
+			//    Mouse.Capture(null);
+			//    if(this.movingMarker is WirePledge) {
+			//        this.SymbolList.Remove(this.movingMarker);
+			//    }
+			//    this.movingMarker = null;
+			//    this.MovingVector = new Vector();
+			//}
 		}
 	}
 }

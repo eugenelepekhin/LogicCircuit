@@ -41,6 +41,7 @@ namespace LogicCircuit {
 				}
 			}
 		}
+		private LogicalCircuit LogicalCircuit() { return this.Editor.Project.LogicalCircuit; }
 
 		private string statusText = LogicCircuit.Resources.Loading;
 		private volatile bool statusChanged = false;

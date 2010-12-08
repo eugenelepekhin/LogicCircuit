@@ -43,7 +43,7 @@ namespace LogicCircuit {
 		private bool EnsureSaved() {
 			if(this.Editor.HasChanges) {
 				MessageBoxResult result = DialogMessage.Show(this, this.Title,
-					LogicCircuit.Resources.MessageSaveFile(this.Editor.CircuitProject.ProjectSet.Project.Name), null,
+					LogicCircuit.Resources.MessageSaveFile(this.Editor.Project.Name), null,
 					MessageBoxImage.Question, MessageBoxButton.YesNoCancel
 				);
 				switch(result) {
@@ -106,7 +106,7 @@ namespace LogicCircuit {
 				} else {
 					dir = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 				}
-				file = Path.Combine(dir, this.Editor.CircuitProject.ProjectSet.Project.Name + Mainframe.FileExtention);
+				file = Path.Combine(dir, this.Editor.Project.Name + Mainframe.FileExtention);
 			}
 			SaveFileDialog dialog = new SaveFileDialog();
 			dialog.FileName = file;

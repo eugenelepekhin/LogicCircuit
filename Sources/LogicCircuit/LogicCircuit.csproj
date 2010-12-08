@@ -57,6 +57,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ButtonControl.cs" />
+    <Compile Include="CustomCommands.cs" />
     <Compile Include="Editor\CircuitDescriptor.cs" />
     <Compile Include="Editor\CircuitDescriptorList.cs" />
     <Compile Include="Editor\Editor.cs" />
@@ -132,10 +133,12 @@
     <Compile Include="Dialog\DialogMessage.xaml.cs">
       <DependentUpon>DialogMessage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Editor\Switcher.cs" />
     <Compile Include="GateShape.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="GridLengthAnimation.cs" />
     <Compile Include="GridPoint.cs" />
+    <Compile Include="Mainframe.Commands.cs" />
     <Compile Include="Mainframe.File.cs" />
     <Compile Include="Schema\Schema.Designer.cs">
       <AutoGen>True</AutoGen>

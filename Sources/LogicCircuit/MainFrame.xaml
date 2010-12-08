@@ -91,6 +91,44 @@
 		</EventTrigger>
 	</Window.Triggers>
 
+	<Window.CommandBindings>
+		<CommandBinding Command="ApplicationCommands.New" Executed="FileNewCommandExecuted"/>
+		<CommandBinding Command="ApplicationCommands.Open" Executed="FileOpenCommandExecuted"/>
+		<CommandBinding Command="ApplicationCommands.Save" Executed="FileSaveCommandExecuted"/>
+		<CommandBinding Command="ApplicationCommands.SaveAs" Executed="FileSaveAsCommandExecuted"/>
+		<CommandBinding Command="{x:Static lc:CustomCommands.FileExportImage}" Executed="FileExportImageCommandExecuted" CanExecute="FileExportImageCommandCanExecute"/>
+		<CommandBinding Command="ApplicationCommands.Close" Executed="FileCloseCommandExecuted"/>
+
+		<CommandBinding Command="ApplicationCommands.Undo" Executed="EditUndoCommandExecuted" CanExecute="EditUndoCommandCanExecute"/>
+		<CommandBinding Command="ApplicationCommands.Redo" Executed="EditRedoCommandExecuted" CanExecute="EditRedoCommandCanExecute"/>
+		<CommandBinding Command="ApplicationCommands.Cut"  Executed="EditCutCommandExecuted" CanExecute="EditCutCommandCanExecute"/>
+		<CommandBinding Command="ApplicationCommands.Copy" Executed="EditCopyCommandExecuted" CanExecute="EditCopyCommandCanExecute"/>
+		<CommandBinding Command="ApplicationCommands.Paste" Executed="EditPasteCommandExecuted" CanExecute="EditPasteCommandCanExecute"/>
+		<CommandBinding Command="ApplicationCommands.Delete" Executed="EditDeleteCommandExecuted" CanExecute="EditDeleteCommandCanExecute"/>
+		<CommandBinding Command="ApplicationCommands.SelectAll" Executed="EditSelectAllCommandExecuted" CanExecute="EditSelectAllCommandCanExecute"/>
+
+		<CommandBinding Command="{x:Static lc:CustomCommands.EditSelectAllWires}" Executed="EditSelectAllWiresCommandExecuted" CanExecute="EditSelectAllWiresCommandCanExecute"/>
+		<CommandBinding Command="{x:Static lc:CustomCommands.EditSelectFreeWires}" Executed="EditSelectFreeWiresCommandExecuted" CanExecute="EditSelectFreeWiresCommandCanExecute"/>
+		<CommandBinding Command="{x:Static lc:CustomCommands.EditSelectFloatingSymbols}" Executed="EditSelectFloatingSymbolsCommandExecuted" CanExecute="EditSelectFloatingSymbolsCommandCanExecute"/>
+		<CommandBinding Command="{x:Static lc:CustomCommands.EditSelectAllButWires}" Executed="EditSelectAllButWiresCommandExecuted" CanExecute="EditSelectAllButWiresCommandCanExecute"/>
+		<CommandBinding Command="{x:Static lc:CustomCommands.EditUnselectAllWires}" Executed="EditUnselectAllWiresCommandExecuted" CanExecute="EditUnselectAllWiresCommandCanExecute"/>
+		<CommandBinding Command="{x:Static lc:CustomCommands.EditUnselectAllButWires}" Executed="EditUnselectAllButWiresCommandExecuted" CanExecute="EditUnselectAllButWiresCommandCanExecute"/>
+		<CommandBinding Command="{x:Static lc:CustomCommands.EditSelectAllProbes}" Executed="EditSelectAllProbesCommandExecuted" CanExecute="EditSelectAllProbesCommandCanExecute"/>
+		<CommandBinding Command="{x:Static lc:CustomCommands.EditSelectAllProbesWithWire}" Executed="EditSelectAllProbesWithWireCommandExecuted" CanExecute="EditSelectAllProbesWithWireCommandCanExecute"/>
+
+		<CommandBinding Command="{x:Static lc:CustomCommands.CircuitProject}" Executed="CircuitProjectCommandExecuted" CanExecute="CircuitProjectCommandCanExecuted"/>
+		<CommandBinding Command="{x:Static lc:CustomCommands.CircuitCurrent}" Executed="CircuitCurrentCommandExecuted" CanExecute="CircuitCurrentCommandCanExecuted"/>
+		<CommandBinding Command="{x:Static lc:CustomCommands.CircuitNew}" Executed="CircuitNewCommandExecuted" CanExecute="CircuitNewCommandCanExecuted"/>
+		<CommandBinding Command="{x:Static lc:CustomCommands.CircuitDelete}" Executed="CircuitDeleteCommandExecuted" CanExecute="CircuitDeleteCommandCanExecute"/>
+
+		<CommandBinding Command="{x:Static lc:CustomCommands.ToolsReport}" Executed="ToolsReportCommandExecuted"/>
+		<CommandBinding Command="{x:Static lc:CustomCommands.ToolsOscilloscope}" Executed="ToolsOscilloscopeCommandExecuted" CanExecute="ToolsOscilloscopeCommandCanExecute"/>
+		<CommandBinding Command="{x:Static lc:CustomCommands.ToolsOptions}" Executed="ToolsOptionsCommandExecuted"/>
+
+		<CommandBinding Command="ApplicationCommands.Help" Executed="HelpContentCommandExecuted"/>
+		<CommandBinding Command="{x:Static lc:CustomCommands.HelpAbout}" Executed="HelpAboutCommandExecuted"/>
+	</Window.CommandBindings>
+
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/> <!-- Main Menu -->
@@ -107,7 +145,7 @@
 				<MenuItem Command="ApplicationCommands.Save"/>
 				<MenuItem Command="ApplicationCommands.SaveAs"/>
 				<Separator/>
-				<!--<MenuItem Command="lc:CustomCommands.FileExportImage"/>-->
+				<MenuItem Command="lc:CustomCommands.FileExportImage"/>
 				<Separator/>
 				<MenuItem Command="ApplicationCommands.Close"/>
 			</MenuItem>
@@ -121,7 +159,7 @@
 				<MenuItem Command="ApplicationCommands.Delete"/>
 				<Separator />
 				<MenuItem Command="ApplicationCommands.SelectAll"/>
-				<!--<MenuItem Command="lc:CustomCommands.EditSelectAllWires"/>
+				<MenuItem Command="lc:CustomCommands.EditSelectAllWires"/>
 				<MenuItem Command="lc:CustomCommands.EditSelectFreeWires"/>
 				<MenuItem Command="lc:CustomCommands.EditSelectFloatingSymbols"/>
 				<MenuItem Command="lc:CustomCommands.EditSelectAllButWires"/>
@@ -129,23 +167,23 @@
 				<MenuItem Command="lc:CustomCommands.EditUnselectAllButWires"/>
 				<Separator />
 				<MenuItem Command="lc:CustomCommands.EditSelectAllProbes"/>
-				<MenuItem Command="lc:CustomCommands.EditSelectAllProbesWithWire"/>-->
+				<MenuItem Command="lc:CustomCommands.EditSelectAllProbesWithWire"/>
 			</MenuItem>
             <MenuItem Header="_Circuit">
-				<!--<MenuItem Command="lc:CustomCommands.CircuitProject"/>
+				<MenuItem Command="lc:CustomCommands.CircuitProject"/>
 				<MenuItem Command="lc:CustomCommands.CircuitCurrent"/>
 				<MenuItem Command="lc:CustomCommands.CircuitNew"/>
-				<MenuItem Command="lc:CustomCommands.CircuitDelete"/>-->
+				<MenuItem Command="lc:CustomCommands.CircuitDelete"/>
             </MenuItem>
             <MenuItem Header="_Tools">
-				<!--<MenuItem Command="lc:CustomCommands.ToolsReport"/>
+				<MenuItem Command="lc:CustomCommands.ToolsReport"/>
 				<MenuItem Command="lc:CustomCommands.ToolsOscilloscope"/>
-				<MenuItem Command="lc:CustomCommands.ToolsOptions"/>-->
+				<MenuItem Command="lc:CustomCommands.ToolsOptions"/>
 			</MenuItem>
 			<MenuItem Header="_Help">
 				<MenuItem Command="ApplicationCommands.Help"/>
 				<Separator />
-				<!--<MenuItem Command="lc:CustomCommands.HelpAbout"/>-->
+				<MenuItem Command="lc:CustomCommands.HelpAbout"/>
 			</MenuItem>
 		</Menu>
 
