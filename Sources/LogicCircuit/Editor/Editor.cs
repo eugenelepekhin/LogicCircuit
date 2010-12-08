@@ -42,11 +42,7 @@ namespace LogicCircuit {
 		public Editor(Mainframe mainframe, string file) {
 			this.Mainframe = mainframe;
 			this.File = file;
-			if(this.File == null) {
-				this.CircuitProject = CircuitProject.Create();
-			} else {
-				this.CircuitProject = CircuitProject.Load(this.File);
-			}
+			this.CircuitProject = CircuitProject.Create(this.File);
 			this.savedVersion = this.CircuitProject.Version;
 			this.CircuitDescriptorList = new CircuitDescriptorList(this.CircuitProject);
 		}

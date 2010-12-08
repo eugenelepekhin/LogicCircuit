@@ -19,18 +19,16 @@ namespace LogicCircuit {
 			}
 		}
 
-		public static CircuitProject Create() {
+		public static CircuitProject Create(string file) {
 			XmlDocument xml = new XmlDocument();
-			xml.LoadXml(CircuitProject.ChangeGuid(CircuitProject.ChangeGuid(Schema.Empty, "ProjectId"), "LogicalCircuitId"));
+			if(file != null) {
+				xml.Load(file);
+			} else {
+				xml.LoadXml(CircuitProject.ChangeGuid(CircuitProject.ChangeGuid(Schema.Empty, "ProjectId"), "LogicalCircuitId"));
+			}
 			CircuitProject circuitProject = new CircuitProject();
-			circuitProject.InTransaction(() => circuitProject.LoadXml(xml));
+			circuitProject.InTransaction(() => circuitProject.Load(xml));
 			return circuitProject;
-		}
-
-		public static CircuitProject Load(string file) {
-			XmlDocument xml = new XmlDocument();
-			xml.Load(file);
-			return CircuitProject.Load(xml);
 		}
 
 		public void Save(string file) {
@@ -38,13 +36,7 @@ namespace LogicCircuit {
 			XmlHelper.Save(xml, file);
 		}
 
-		private static CircuitProject Load(XmlDocument xml) {
-			CircuitProject circuitProject = new CircuitProject();
-			circuitProject.InTransaction(() => circuitProject.LoadXml(xml));
-			return circuitProject;
-		}
-
-		private void LoadXml(XmlDocument xml) {
+		private void Load(XmlDocument xml) {
 			xml = CircuitProject.Transform(xml);
 
 			XmlNamespaceManager nsmgr = new XmlNamespaceManager(xml.NameTable);
@@ -79,19 +71,6 @@ namespace LogicCircuit {
 			this.ResetUndoRedo();
 		}
 
-		private static string ChangeGuid(string text, string nodeName) {
-			string s = Regex.Replace(text,
-				string.Format(CultureInfo.InvariantCulture,
-					@"<{0}:{1}>\{{?[0-9a-fA-F]{{8}}-([0-9a-fA-F]{{4}}-){{3}}[0-9a-fA-F]{{12}}\}}?</{0}:{1}>", CircuitProject.PersistencePrefix, nodeName
-				),
-				string.Format(CultureInfo.InvariantCulture,
-					@"<{0}:{1}>{2}</{0}:{1}>", CircuitProject.PersistencePrefix, nodeName, Guid.NewGuid()
-				),
-				RegexOptions.CultureInvariant | RegexOptions.Singleline
-			);
-			return s;
-		}
-
 		private XmlDocument Save() {
 			XmlDocument xml = new XmlDocument();
 			XmlElement root = xml.CreateElement(CircuitProject.PersistencePrefix, "CircuitProject", CircuitProject.PersistenceNamespace);
@@ -106,6 +85,19 @@ namespace LogicCircuit {
 			CircuitSymbolData.Save(this.CircuitSymbolSet.Table, root);
 			WireData.Save(this.WireSet.Table, root);
 			return xml;
+		}
+
+		private static string ChangeGuid(string text, string nodeName) {
+			string s = Regex.Replace(text,
+				string.Format(CultureInfo.InvariantCulture,
+					@"<{0}:{1}>\{{?[0-9a-fA-F]{{8}}-([0-9a-fA-F]{{4}}-){{3}}[0-9a-fA-F]{{12}}\}}?</{0}:{1}>", CircuitProject.PersistencePrefix, nodeName
+				),
+				string.Format(CultureInfo.InvariantCulture,
+					@"<{0}:{1}>{2}</{0}:{1}>", CircuitProject.PersistencePrefix, nodeName, Guid.NewGuid()
+				),
+				RegexOptions.CultureInvariant | RegexOptions.Singleline
+			);
+			return s;
 		}
 
 		public XmlDocument Copy(IEnumerable<Symbol> symbol) {
@@ -130,7 +122,7 @@ namespace LogicCircuit {
 			CircuitProject paste = new CircuitProject();
 			bool started = paste.StartTransaction();
 			Tracer.Assert(started);
-			paste.LoadXml(xml);
+			paste.Load(xml);
 
 			List<Symbol> result = new List<Symbol>();
 

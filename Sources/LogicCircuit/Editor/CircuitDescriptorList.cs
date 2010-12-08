@@ -82,7 +82,7 @@ namespace LogicCircuit {
 		}
 
 		private static void InitPrimitive() {
-			CircuitProject project = CircuitProject.Create();
+			CircuitProject project = CircuitProject.Create(null);
 			
 			project.InTransaction(() => {
 				List<ICircuitDescriptor> list = new List<ICircuitDescriptor>();
