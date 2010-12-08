@@ -261,6 +261,7 @@ namespace LogicCircuit {
 			// Create all but foreign keys of the table
 			table.MakeUnique("PK_DevicePin", DevicePinData.PinIdField.Field , true);
 			table.MakeUnique("AK_DevicePinName", DevicePinData.CircuitIdField.Field, DevicePinData.NameField.Field);
+			table.CreateIndex("IX_Circuit_DevicePin", DevicePinData.CircuitIdField.Field );
 			// Return created table
 			return table;
 		}

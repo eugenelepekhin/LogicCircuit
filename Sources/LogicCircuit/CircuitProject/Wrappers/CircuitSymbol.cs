@@ -241,6 +241,8 @@ namespace LogicCircuit {
 			);
 			// Create all but foreign keys of the table
 			table.MakeUnique("PK_CircuitSymbol", CircuitSymbolData.CircuitSymbolIdField.Field , true);
+			table.CreateIndex("IX_Circuit_CircuitSymbol", CircuitSymbolData.CircuitIdField.Field );
+			table.CreateIndex("IX_LogicalCircuit_CircuitSymbol", CircuitSymbolData.LogicalCircuitIdField.Field );
 			// Return created table
 			return table;
 		}

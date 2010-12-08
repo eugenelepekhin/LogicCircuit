@@ -74,6 +74,10 @@
 			<Key Name="FK_Circuit_DevicePin" KeyType="Foreign" ParentName="Circuit" Action="Cascade">
 				<Column Name="CircuitId"/>
 			</Key>
+
+			<Key Name="IX_Circuit_DevicePin" KeyType="Index">
+				<Column Name="CircuitId"/>
+			</Key>
 		</Table.Keys>
 	</Table>
 
@@ -134,6 +138,10 @@
 			</Key>
 
 			<Key Name="FK_Circuit_Pin" KeyType="Foreign" ParentName="Circuit" Action="Cascade">
+				<Column Name="CircuitId"/>
+			</Key>
+
+			<Key Name="IX_Circuit_Pin" KeyType="Index">
 				<Column Name="CircuitId"/>
 			</Key>
 		</Table.Keys>
@@ -216,7 +224,15 @@
 				<Column Name="CircuitId"/>
 			</Key>
 
+			<Key Name="IX_Circuit_CircuitSymbol" KeyType="Index">
+				<Column Name="CircuitId"/>
+			</Key>
+
 			<Key Name="FK_LogicalCircuit_CircuitSymbol" KeyType="Foreign" ParentName="LogicalCircuit" Action="Cascade">
+				<Column Name="LogicalCircuitId"/>
+			</Key>
+
+			<Key Name="IX_LogicalCircuit_CircuitSymbol" KeyType="Index">
 				<Column Name="LogicalCircuitId"/>
 			</Key>
 		</Table.Keys>
