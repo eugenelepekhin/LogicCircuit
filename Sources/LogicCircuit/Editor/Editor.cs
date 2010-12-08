@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Windows.Input;
 
 namespace LogicCircuit {
 	public partial class Editor : INotifyPropertyChanged {
@@ -86,6 +87,35 @@ namespace LogicCircuit {
 			get; set;
 		}
 
+		public void DiagramLostFocus() {
+			this.CancelMove();
+		}
+
+		public void DiagramKeyDown(KeyEventArgs e) {
+			if(this.InEditMode) {
+				if(e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl) {
+					this.switcher.OnControlDown();
+					this.Mainframe.Status = Resources.TipOnCtrlDown;
+					e.Handled = true;
+				} else if(e.Key == Key.Tab) {
+					this.switcher.OnTabDown(
+						(Keyboard.Modifiers & ModifierKeys.Control) != ModifierKeys.None,
+						(Keyboard.Modifiers & ModifierKeys.Shift) != ModifierKeys.None
+					);
+					e.Handled = true;
+				} else if(e.Key == Key.Escape) {
+					this.CancelMove();
+				}
+			}
+		}
+
+		public void DiagramKeyUp(KeyEventArgs e) {
+			if(this.InEditMode && (e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl)) {
+				this.switcher.OnControlUp();
+				e.Handled = true;
+			}
+		}
+
 		//--- Drawing on Diagram --
 
 		public void Refresh() {
@@ -97,7 +127,8 @@ namespace LogicCircuit {
 		}
 
 		private void RedrawDiagram() {
-			this.Diagram.Children.Clear();
+			Canvas diagram = this.Diagram;
+			diagram.Children.Clear();
 			this.wirePoint.Clear();
 			LogicalCircuit logicalCircuit = this.Project.LogicalCircuit;
 			foreach(Wire wire in logicalCircuit.Wires()) {
@@ -108,7 +139,7 @@ namespace LogicCircuit {
 				p = Symbol.ScreenPoint(wire.Point2);
 				line.X2 = p.X;
 				line.Y2 = p.Y;
-				this.Diagram.Children.Add(line);
+				diagram.Children.Add(line);
 				this.AddWirePoint(wire.Point1);
 				this.AddWirePoint(wire.Point2);
 			}
@@ -117,17 +148,17 @@ namespace LogicCircuit {
 					Ellipse ellipse = new Ellipse();
 					Panel.SetZIndex(ellipse, 0);
 					ellipse.Width = ellipse.Height = 2 * Symbol.PinRadius;
-					Canvas.SetLeft(ellipse, Symbol.ScreenPoint(solder.Key.X));
-					Canvas.SetTop(ellipse, Symbol.ScreenPoint(solder.Key.Y));
+					Canvas.SetLeft(ellipse, Symbol.ScreenPoint(solder.Key.X) - Symbol.PinRadius);
+					Canvas.SetTop(ellipse, Symbol.ScreenPoint(solder.Key.Y) - Symbol.PinRadius);
 					ellipse.Fill = Symbol.JamDirectFill;
-					this.Diagram.Children.Add(ellipse);
+					diagram.Children.Add(ellipse);
 				}
 			}
 			foreach(CircuitSymbol symbol in logicalCircuit.CircuitSymbols()) {
 				Point point = Symbol.ScreenPoint(symbol.Point);
 				Canvas.SetLeft(symbol.Glyph, point.X);
 				Canvas.SetTop(symbol.Glyph, point.Y);
-				this.Diagram.Children.Add(symbol.Glyph);
+				diagram.Children.Add(symbol.Glyph);
 			}
 		}
 
@@ -169,6 +200,7 @@ namespace LogicCircuit {
 			this.CancelMove();
 			this.ClearSelection();
 			if(logicalCircuit != this.Project.LogicalCircuit) {
+				LogicalCircuit oldDiagram = this.Project.LogicalCircuit;
 				bool success = false;
 				bool started = false;
 				CircuitProject circuitProject = this.CircuitProject;
@@ -190,6 +222,15 @@ namespace LogicCircuit {
 						} else {
 							circuitProject.Rollback();
 						}
+					}
+					this.Refresh();
+					// TODO: this is not very good way to get scroll control as this assumes canvas is sitting on scroll viewer.
+					// What if this get changed? For now just do it in hackky way
+					ScrollViewer scrollViewer = this.Diagram.Parent as ScrollViewer;
+					if(scrollViewer != null) {
+						oldDiagram.ScrollOffset = new Point(scrollViewer.HorizontalOffset, scrollViewer.VerticalOffset);
+						scrollViewer.ScrollToHorizontalOffset(logicalCircuit.ScrollOffset.X);
+						scrollViewer.ScrollToVerticalOffset(logicalCircuit.ScrollOffset.Y);
 					}
 				}
 			}

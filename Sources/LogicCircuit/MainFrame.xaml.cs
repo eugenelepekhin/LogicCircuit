@@ -145,7 +145,7 @@ namespace LogicCircuit {
 
 		private void WindowLostFocus(object sender, RoutedEventArgs e) {
 			try {
-				//this.Editor.CanvasLostFocus(sender, e);
+				this.Editor.DiagramLostFocus();
 			} catch(Exception exception) {
 				Tracer.Report("MainFrame.MainFrameLostFocus", exception);
 				this.ReportException(exception);
@@ -154,7 +154,7 @@ namespace LogicCircuit {
 
 		private void WindowLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e) {
 			try {
-				//this.Editor.CanvasLostFocus(sender, e);
+				this.Editor.DiagramLostFocus();
 			} catch(Exception exception) {
 				Tracer.Report("MainFrame.MainFrameLostKeyboardFocus", exception);
 				this.ReportException(exception);
@@ -163,7 +163,7 @@ namespace LogicCircuit {
 
 		private void WindowKeyDown(object sender, KeyEventArgs e) {
 			try {
-				//this.Editor.CanvasKeyDown(sender, e);
+				this.Editor.DiagramKeyDown(e);
 			} catch(Exception exception) {
 				Tracer.Report("MainFrame.MainFrameKeyDown", exception);
 				this.ReportException(exception);
@@ -172,7 +172,7 @@ namespace LogicCircuit {
 
 		private void WindowKeyUp(object sender, KeyEventArgs e) {
 			try {
-				//this.Editor.CanvasKeyUp(sender, e);
+				this.Editor.DiagramKeyUp(e);
 			} catch(Exception exception) {
 				Tracer.Report("MainFrame.MainFrameKeyUp", exception);
 				this.ReportException(exception);

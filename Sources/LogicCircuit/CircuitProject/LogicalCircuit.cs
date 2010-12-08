@@ -7,6 +7,9 @@ using LogicCircuit.DataPersistent;
 
 namespace LogicCircuit {
 	public partial class LogicalCircuit {
+
+		public Point ScrollOffset { get; set; }
+
 		public IEnumerable<Pin> LogicalPins {
 			get { return this.CircuitProject.PinSet.SelectByCircuit(this); }
 		}
