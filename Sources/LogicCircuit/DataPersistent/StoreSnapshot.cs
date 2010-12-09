@@ -7,7 +7,7 @@ using System.Threading;
 namespace LogicCircuit.DataPersistent {
 	/// <summary>
 	/// Snapshot of relational database.
-	/// The store can be set to edit mode by opening transaction after this tables that belongs to the store will acept modifications.
+	/// The store can be set to edit mode by opening transaction after this tables that belongs to the store will accept modifications.
 	/// </summary>
 	public partial class StoreSnapshot {
 
@@ -22,7 +22,7 @@ namespace LogicCircuit.DataPersistent {
 		public event EventHandler LatestVersionChanged;
 
 		/// <summary>
-		/// Occured when transaction owned by this store rolled back.
+		/// Occurred when transaction owned by this store rolled back.
 		/// </summary>
 		public event EventHandler<RolledBackEventArgs> RolledBack;
 
@@ -73,7 +73,7 @@ namespace LogicCircuit.DataPersistent {
 
 		/// <summary>
 		/// Builds new store with unique actual store that holds the data.
-		/// This is the way to build new StoreSnapshot. Other shapshots of this store can be constructed with othe constructructor
+		/// This is the way to build new StoreSnapshot. Other snapshots of this store can be constructed with other constructor
 		/// </summary>
 		public StoreSnapshot() : this(new SnapStore()) {
 		}
@@ -141,7 +141,7 @@ namespace LogicCircuit.DataPersistent {
 		public bool IsFrozen { get { return this.SnapStore.IsFrozen; } }
 
 		/// <summary>
-		/// Upgrades this snapshot to lates available version
+		/// Upgrades this snapshot to latest available version
 		/// </summary>
 		public void Upgrade() {
 			this.Version = this.LatestAvailableVersion;
@@ -170,7 +170,7 @@ namespace LogicCircuit.DataPersistent {
 		public bool IsEditor { get { return this.SnapStore.Editor == this; } }
 
 		/// <summary>
-		/// Trys to starts transaction.
+		/// Tries to starts transaction.
 		/// The transaction will be started if no other store already started transaction.
 		/// </summary>
 		/// <returns>true if transaction has started</returns>
@@ -263,7 +263,7 @@ namespace LogicCircuit.DataPersistent {
 		public bool CanRedo { get { return this.SnapStore.CanRedo; } }
 
 		/// <summary>
-		/// Undos one transaction
+		/// Undoes one transaction
 		/// </summary>
 		/// <returns></returns>
 		public bool Undo() {
@@ -276,7 +276,7 @@ namespace LogicCircuit.DataPersistent {
 		}
 
 		/// <summary>
-		/// Redos previously undon transaction
+		/// Redoes previously undone transaction
 		/// </summary>
 		/// <returns></returns>
 		public bool Redo() {
@@ -309,7 +309,7 @@ namespace LogicCircuit.DataPersistent {
 		}
 
 		/// <summary>
-		/// Notifys version changes
+		/// Notifies version changes
 		/// </summary>
 		/// <param name="oldVersion"></param>
 		/// <param name="newVersion"></param>

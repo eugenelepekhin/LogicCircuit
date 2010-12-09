@@ -10,7 +10,7 @@ namespace LogicCircuit.DataPersistent {
 
 	/// <summary>
 	/// Internal class not for public consumption.
-	/// Table that allows transactional modifications and querying data versionally.
+	/// Table that allows transactional modifications and querying data at specific version.
 	/// </summary>
 	/// <typeparam name="TRecord">Type of record of the data</typeparam>
 	internal sealed partial class SnapTable<TRecord> : ISnapTable where TRecord:struct {
@@ -30,7 +30,7 @@ namespace LogicCircuit.DataPersistent {
 			private volatile int index;
 
 			/// <summary>
-			/// Index of previous vesion of the data in the log.
+			/// Index of previous version of the data in the log.
 			/// </summary>
 			public int LogIndex {
 				get {
@@ -98,8 +98,8 @@ namespace LogicCircuit.DataPersistent {
 			}
 			
 			/// <summary>
-			/// Index of previous vesion of the data in the log.
-			/// this logic should be similar to Row but no threading issues as this is imutable
+			/// Index of previous version of the data in the log.
+			/// this logic should be similar to Row but no threading issues as this is immutable
 			/// </summary>
 			public int LogIndex {
 				get {
@@ -213,7 +213,7 @@ namespace LogicCircuit.DataPersistent {
 				}
 			}
 
-			//set intial sizes of the lists
+			//set initial sizes of the lists
 			Snap point = new Snap() {
 				//Version = 0,
 				TableSize = initialSize,
@@ -282,7 +282,7 @@ namespace LogicCircuit.DataPersistent {
 					};
 					this.snap.FixedAdd(ref point);
 				} else {
-					// this transaction already alterd this table
+					// this transaction already altered this table
 					snapAddress.Page[snapAddress.Index].TableSize = this.table.Count;
 				}
 			}
@@ -304,7 +304,7 @@ namespace LogicCircuit.DataPersistent {
 		}
 
 		/// <summary>
-		/// Undeletes previously deleted row.
+		/// Undelete previously deleted row.
 		/// </summary>
 		/// <param name="rowId"></param>
 		public void UnDelete(RowId rowId) {
@@ -460,7 +460,7 @@ namespace LogicCircuit.DataPersistent {
 					return value;
 				}
 			}
-			// older version of the row requested. The data is in the log. Log is imutable so easy to read.
+			// older version of the row requested. The data is in the log. Log is immutable so easy to read.
 			ValueList<Log>.Address logAddress = this.log.ItemAddress(rowAddress.Page[rowAddress.Index].LogIndex);
 			while(logSize <= logAddress.Page[logAddress.Index].LogIndex) {
 				Debug.Assert(0 < logAddress.Page[logAddress.Index].LogIndex, "Log entry at 0 does not contain any real data and used as a stub");
@@ -521,7 +521,7 @@ namespace LogicCircuit.DataPersistent {
 					return;
 				}
 			}
-			// older version of the row requested. The data is in the log. Log is imutable so easy to read.
+			// older version of the row requested. The data is in the log. Log is immutable so easy to read.
 			ValueList<Log>.Address logAddress = this.log.ItemAddress(rowAddress.Page[rowAddress.Index].LogIndex);
 			while(logSize <= logAddress.Page[logAddress.Index].LogIndex) {
 				Debug.Assert(0 < logAddress.Page[logAddress.Index].LogIndex, "Log entry at 0 does not contain any real data and used as a stub");
@@ -576,7 +576,7 @@ namespace LogicCircuit.DataPersistent {
 			if(snapAddress.Page[snapAddress.Index].Version == this.SnapStore.Version) {
 				Debug.Assert(1 < this.snap.Count, "Only real transactions can be rolled back");
 				// this table was modified in this transaction
-				// it is impossible to completly rollback current changes, so just get old data back and delete new rows and undelte deleted ones.
+				// it is impossible to completly rollback current changes, so just get old data back and delete new rows and undelete deleted ones.
 				int tableEnd = snapAddress.Page[snapAddress.Index].TableSize;
 				int logEnd = snapAddress.Page[snapAddress.Index].LogSize;
 				if(tableEnd != this.table.Count || logEnd != this.log.Count) {
@@ -670,6 +670,7 @@ namespace LogicCircuit.DataPersistent {
 		/// <param name="version"></param>
 		/// <returns></returns>
 		public IEnumerator<SnapTableChange<TRecord>> GetChanges(int version) {
+			this.SnapStore.ValidateChangeEnumeration(version);
 			return this.GetChanges(version, false);
 		}
 
@@ -685,7 +686,6 @@ namespace LogicCircuit.DataPersistent {
 		}
 
 		private IEnumerator<SnapTableChange<TRecord>> GetChanges(int version, bool forRollback) {
-			this.SnapStore.ValidateChangeEnumeration(version);
 			if(version != 0) {
 				this.ValidateVersion(version);
 			}
@@ -722,7 +722,7 @@ namespace LogicCircuit.DataPersistent {
 		}
 
 		/// <summary>
-		/// Pushes row to log. Row can be logged only once in transaction, so only initial state (as it was at the beggining of transaction) will be saved
+		/// Pushes row to log. Row can be logged only once in transaction, so only initial state (as it was at the beginning of transaction) will be saved
 		/// </summary>
 		/// <param name="row">Reference to the data to be logged</param>
 		/// <param name="rowId">Id of this data. This should be the Id of row provided in the first param.</param>

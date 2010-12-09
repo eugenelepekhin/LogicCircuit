@@ -381,7 +381,7 @@ namespace LogicCircuit.DataPersistent {
 			RowId childId = this.childFields[child].GetValue(ref node);
 			Node oldChild;
 			this.table.GetLatestData(childId, out oldChild);
-			Debug.Assert(oldChild.Count == this.keyFields.Length, "The node should be full in order to be splitted");
+			Debug.Assert(oldChild.Count == this.keyFields.Length, "The node should be full in order to be split");
 
 			Node newChild = new Node() {
 				IsLeaf = oldChild.IsLeaf
@@ -473,7 +473,7 @@ namespace LogicCircuit.DataPersistent {
 		}
 
 		/// <summary>
-		/// Get maxinum value of the field. Throws if the tree is empty
+		/// Get maximum value of the field. Throws if the tree is empty
 		/// </summary>
 		/// <param name="version"></param>
 		/// <returns></returns>

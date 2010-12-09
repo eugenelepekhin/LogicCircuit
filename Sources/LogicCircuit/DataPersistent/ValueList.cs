@@ -53,7 +53,7 @@ namespace LogicCircuit.DataPersistent {
 		}
 
 		/// <summary>
-		/// Adds new element asuming enough memory for it already exist. This methid shoud be prepared by PrepareAdd call.
+		/// Adds new element assuming enough memory for it already exist. This method should be prepared by PrepareAdd call.
 		/// </summary>
 		/// <param name="row"></param>
 		/// <returns></returns>

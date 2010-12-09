@@ -13,7 +13,7 @@ namespace LogicCircuit.DataPersistent {
 	internal sealed partial class SnapStore {
 
 		/// <summary>
-		/// Occured when transaction is committed
+		/// Occurred when transaction is committed
 		/// </summary>
 		public event EventHandler Committed;
 
@@ -144,7 +144,7 @@ namespace LogicCircuit.DataPersistent {
 			this.CheckFrozen();
 
 			int transaction = 0;
-			// any walue of oldEditor other then null means this thread does not own the transaction
+			// any value of oldEditor other then null means this thread does not own the transaction
 			// null means this thread is exclusive owner of transaction
 			StoreSnapshot oldEditor = newEditor;
 			bool success = false;
@@ -190,7 +190,7 @@ namespace LogicCircuit.DataPersistent {
 		}
 
 		/// <summary>
-		/// Commits current transaction. Optionaly if <paramref name="withOmit"/> set to true eraises transaction from undo history
+		///Commits current transaction. Optionally if <paramref name="withOmit"/> set to true erases transaction from undo history
 		/// </summary>
 		/// <param name="withOmit"></param>
 		/// <returns></returns>
@@ -236,7 +236,7 @@ namespace LogicCircuit.DataPersistent {
 
 		/// <summary>
 		/// Starts new transaction, performs undo and commits.
-		/// If transaction was started succesfuly return new version of the store, otherwise return version of editor.
+		/// If transaction was started successfully return new version of the store, otherwise return version of editor.
 		/// </summary>
 		/// <param name="storeSnapshot"></param>
 		/// <returns></returns>
@@ -246,7 +246,7 @@ namespace LogicCircuit.DataPersistent {
 
 		/// <summary>
 		/// Starts new transaction, performs redo and commits.
-		/// If transaction was started succesfuly return new version of the store, otherwise return version of editor.
+		/// If transaction was started successfully return new version of the store, otherwise return version of editor.
 		/// </summary>
 		/// <param name="storeSnapshot"></param>
 		/// <returns></returns>
@@ -263,7 +263,7 @@ namespace LogicCircuit.DataPersistent {
 		}
 
 		/// <summary>
-		/// Evaluates version that will be Undone or Redone dpending on value of parameter.
+		/// Evaluates version that will be Undone or Redone depending on value of parameter.
 		/// </summary>
 		/// <param name="transactionType">Undo or Redo only</param>
 		/// <returns>If version for reverting is found returns version number, otherwise returns 0.</returns>
@@ -279,7 +279,7 @@ namespace LogicCircuit.DataPersistent {
 				switch(address.Page[address.Index]) {
 				case TransactionType.Edit:
 					if(transactionType == TransactionType.Redo) {
-						Debug.Assert(level == 0, "Number of Redos exceeded number of correspondent Undos.");
+						Debug.Assert(level == 0, "Number of Redo transactions exceeded number of correspondent Undo transactions.");
 						return 0;
 					}
 					goto case TransactionType.Redo;
@@ -338,11 +338,11 @@ namespace LogicCircuit.DataPersistent {
 		}
 
 		/// <summary>
-		/// Checks that uncommited changes are not enumerated from thread other then editorThread
+		/// Checks that uncommitted changes are not enumerated from thread other then editorThread
 		/// </summary>
 		/// <param name="enumeratedVersion"></param>
 		public void ValidateChangeEnumeration(int enumeratedVersion) {
-			if(enumeratedVersion == this.Version && this.editor != null && this.editorThread != Thread.CurrentThread) {
+			if(!(enumeratedVersion <= this.CommittedVersion || this.editor != null && this.editorThread == Thread.CurrentThread)) {
 				throw new InvalidOperationException(Properties.Resources.ErrorEditOnWrongThread);
 			}
 		}

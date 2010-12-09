@@ -93,7 +93,7 @@ namespace LogicCircuit.DataPersistent {
 		}
 
 		/// <summary>
-		/// Creates primary key for pseudo column of <seealso cref="RowId"/>. This illiminates nessecity of having other surrogate primary key.
+		/// Creates primary key for pseudo column of <seealso cref="RowId"/>. This eliminates the necessity of having other surrogate primary key.
 		/// </summary>
 		public void MakeAutoUnique() {
 			if(this.table.PrimaryKey != null) {
@@ -318,7 +318,7 @@ namespace LogicCircuit.DataPersistent {
 
 		/// <summary>
 		/// Checks if provided rowId is id of row that is exists in current snapshot.
-		/// It will be imposible to use IsDeleted if rowId comes from future snapshot and this snapshot is probbing.
+		/// It will be impossible to use IsDeleted if rowId comes from future snapshot and this snapshot is probing.
 		/// </summary>
 		/// <param name="rowId"></param>
 		/// <returns></returns>
@@ -341,7 +341,7 @@ namespace LogicCircuit.DataPersistent {
 				List<IIndex<TRecord>> list = this.table.Indexes[field.Order];
 				if(list != null) {
 					foreach(IIndex<TRecord> index in list) {
-						// no need to check for timestap as only one field updated
+						// no need to check for timestamp as only one field updated
 						index.Delete(rowId);
 					}
 				}
@@ -349,7 +349,7 @@ namespace LogicCircuit.DataPersistent {
 				Debug.Assert(updated);
 				if(list != null) {
 					foreach(IIndex<TRecord> index in list) {
-						// no need to check for timestap as only one field updated
+						// no need to check for timestamp as only one field updated
 						index.Insert(rowId);
 					}
 				}
@@ -403,7 +403,7 @@ namespace LogicCircuit.DataPersistent {
 		}
 
 		/// <summary>
-		/// Selects rows where value of profided field in range from min to max inclusively
+		/// Selects rows where value of provided field in range from min to max inclusively
 		/// </summary>
 		/// <typeparam name="TField"></typeparam>
 		/// <param name="field"></param>
