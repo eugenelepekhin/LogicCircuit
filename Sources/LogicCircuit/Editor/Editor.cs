@@ -22,6 +22,8 @@ namespace LogicCircuit {
 		private readonly Dictionary<GridPoint, int> wirePoint = new Dictionary<GridPoint, int>();
 		private Switcher switcher;
 		private LogicalCircuit currentLogicalCircuit;
+		private Dictionary<Symbol, Marker> selection = new Dictionary<Symbol, Marker>();
+		private Canvas selectionLayer;
 
 		private Dispatcher Dispatcher { get { return this.Mainframe.Dispatcher; } }
 		private Canvas Diagram { get { return this.Mainframe.Diagram; } }
@@ -64,7 +66,14 @@ namespace LogicCircuit {
 
 		private void ProjectPropertyChanged(object sender, PropertyChangedEventArgs e) {
 			switch(e.PropertyName) {
+			case "Zoom":
+			case "Frequency":
+			case "IsMaximumSpeed":
+				this.NotifyPropertyChanged(e.PropertyName);
+				break;
 			case "LogicalCircuit":
+				this.CancelMove();
+				this.ClearSelection();
 				if(this.currentLogicalCircuit != this.Project.LogicalCircuit) {
 					// TODO: this is not very good way to get scroll control as this assumes canvas is sitting on scroll viewer.
 					// What if this get changed? For now just do it in hackky way
@@ -87,12 +96,11 @@ namespace LogicCircuit {
 		}
 
 		public double Zoom {
-			get { return this.CircuitProject.ProjectSet.Project.Zoom; }
+			get { return this.Project.Zoom; }
 			set {
 				if(this.Zoom != value) {
 					try {
-						this.CircuitProject.InTransaction(() => this.CircuitProject.ProjectSet.Project.Zoom = value);
-						this.NotifyPropertyChanged("Zoom");
+						this.CircuitProject.InTransaction(() => this.Project.Zoom = value);
 					} catch(Exception exception) {
 						this.Mainframe.ReportException(exception);
 					}
@@ -101,11 +109,29 @@ namespace LogicCircuit {
 		}
 
 		public int Frequency {
-			get; set;
+			get { return this.Project.Frequency; }
+			set {
+				if(this.Frequency != value) {
+					try {
+						this.CircuitProject.InTransaction(() => this.Project.Frequency = value);
+					} catch(Exception exception) {
+						this.Mainframe.ReportException(exception);
+					}
+				}
+			}
 		}
 
 		public bool IsMaximumSpeed {
-			get; set;
+			get { return this.Project.IsMaximumSpeed; }
+			set {
+				if(this.IsMaximumSpeed != value) {
+					try {
+						this.CircuitProject.InTransaction(() => this.Project.IsMaximumSpeed = value);
+					} catch(Exception exception) {
+						this.Mainframe.ReportException(exception);
+					}
+				}
+			}
 		}
 
 		public void DiagramLostFocus() {
@@ -372,13 +398,68 @@ namespace LogicCircuit {
 
 		//--- Selection ---
 
-		public int SelectionCount { get { return 0;/*this.selection.Count;*/ } }
+		public int SelectionCount { get { return this.selection.Count; } }
+
+		public IEnumerable<Symbol> Selection() {
+			return new List<Symbol>(this.selection.Keys);
+		}
 
 		public void ClearSelection() {
-			//foreach(Marker marker in this.selection.Values) {
-			//    this.SymbolList.Remove(marker);
-			//}
-			//this.selection.Clear();
+			this.selection.Clear();
+			if(this.selectionLayer != null) {
+				this.selectionLayer.Children.Clear();
+			}
+		}
+
+		private Marker SelectSymbol(Symbol symbol) {
+			Tracer.Assert(symbol.LogicalCircuit == this.Project.LogicalCircuit);
+			Marker marker;
+			if(!this.selection.TryGetValue(symbol, out marker)) {
+				CircuitSymbol circuitSymbol = symbol as CircuitSymbol;
+				if(circuitSymbol != null) {
+					marker = new CircuitSymbolMarker(circuitSymbol);
+				} else {
+					Wire wire = symbol as Wire;
+					if(wire != null) {
+						//marker = new WireMarker(wire);
+					}
+				}
+				if(marker != null) {
+					this.selection.Add(symbol, marker);
+					if(this.selectionLayer == null) {
+						this.selectionLayer = new Canvas();
+					}
+					if(this.selectionLayer.Parent != this.Diagram) {
+						this.Diagram.Children.Add(this.selectionLayer);
+					}
+					this.selectionLayer.Children.Add(marker.Glyph);
+				}
+			}
+			return marker;
+		}
+
+		private Marker FindMarker(Symbol symbol) {
+			Marker marker = null;
+			this.selection.TryGetValue(symbol, out marker);
+			return marker;
+		}
+
+		public void Select(Symbol symbol) {
+			this.SelectSymbol(symbol);
+		}
+
+		public void Unselect(Symbol symbol) {
+			Marker marker = this.FindMarker(symbol);
+			if(marker != null) {
+				this.selection.Remove(symbol);
+				this.selectionLayer.Children.Remove(marker.Glyph);
+			}
+		}
+
+		public void Select(IEnumerable<Symbol> symbol) {
+			foreach(Symbol s in symbol) {
+				this.Select(s);
+			}
 		}
 
 		private void CancelMove() {

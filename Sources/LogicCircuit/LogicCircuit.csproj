@@ -61,6 +61,7 @@
     <Compile Include="CustomCommands.cs" />
     <Compile Include="Editor\CircuitDescriptor.cs" />
     <Compile Include="Editor\CircuitDescriptorList.cs" />
+    <Compile Include="Editor\CircuitSymbolMarker.cs" />
     <Compile Include="Editor\Editor.cs" />
     <Compile Include="CircuitException.cs" />
     <Compile Include="CircuitProject\BasePin.cs" />
@@ -134,6 +135,7 @@
     <Compile Include="Dialog\DialogMessage.xaml.cs">
       <DependentUpon>DialogMessage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Editor\Marker.cs" />
     <Compile Include="Editor\Switcher.cs" />
     <Compile Include="GateShape.cs" />
     <Compile Include="GlobalSuppressions.cs" />
