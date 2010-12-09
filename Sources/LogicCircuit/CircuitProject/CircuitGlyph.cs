@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using System.Xml;
 
 namespace LogicCircuit {
 	public abstract class CircuitGlyph : Symbol {
@@ -96,14 +93,8 @@ namespace LogicCircuit {
 			}
 		}
 
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")]
 		private static FrameworkElement Skin(Canvas canvas, string skinText) {
-			FrameworkElement shape = null;
-			using(StringReader stringReader = new StringReader(skinText)) {
-				using(XmlTextReader xmlReader = new XmlTextReader(stringReader)) {
-					shape = (FrameworkElement)XamlReader.Load(xmlReader);
-				}
-			}
+			FrameworkElement shape = Symbol.Skin(skinText);
 			shape.Width = canvas.Width;
 			shape.Height = canvas.Height;
 			canvas.Children.Add(shape);
