@@ -19,9 +19,9 @@ namespace LogicCircuit {
 		public CircuitProject CircuitProject { get; private set; }
 		private int savedVersion;
 		public CircuitDescriptorList CircuitDescriptorList { get; private set; }
-
 		private readonly Dictionary<GridPoint, int> wirePoint = new Dictionary<GridPoint, int>();
 		private Switcher switcher;
+		private LogicalCircuit currentLogicalCircuit;
 
 		private Dispatcher Dispatcher { get { return this.Mainframe.Dispatcher; } }
 		private Canvas Diagram { get { return this.Mainframe.Diagram; } }
@@ -52,6 +52,7 @@ namespace LogicCircuit {
 			this.savedVersion = this.CircuitProject.Version;
 			this.CircuitDescriptorList = new CircuitDescriptorList(this.CircuitProject);
 			this.switcher = new Switcher(this);
+			this.Project.PropertyChanged += new PropertyChangedEventHandler(this.ProjectPropertyChanged);
 		}
 
 		public void Save(string file) {
@@ -59,6 +60,26 @@ namespace LogicCircuit {
 			this.File = file;
 			this.savedVersion = this.CircuitProject.Version;
 			this.NotifyPropertyChanged("File");
+		}
+
+		private void ProjectPropertyChanged(object sender, PropertyChangedEventArgs e) {
+			switch(e.PropertyName) {
+			case "LogicalCircuit":
+				if(this.currentLogicalCircuit != this.Project.LogicalCircuit) {
+					// TODO: this is not very good way to get scroll control as this assumes canvas is sitting on scroll viewer.
+					// What if this get changed? For now just do it in hackky way
+					ScrollViewer scrollViewer = this.Diagram.Parent as ScrollViewer;
+					if(scrollViewer != null) {
+						if(this.currentLogicalCircuit != null && !this.currentLogicalCircuit.IsDeleted()) {
+							this.currentLogicalCircuit.ScrollOffset = new Point(scrollViewer.HorizontalOffset, scrollViewer.VerticalOffset);
+						}
+						this.currentLogicalCircuit = this.Project.LogicalCircuit;
+						scrollViewer.ScrollToHorizontalOffset(this.currentLogicalCircuit.ScrollOffset.X);
+						scrollViewer.ScrollToVerticalOffset(this.currentLogicalCircuit.ScrollOffset.Y);
+					}
+				}
+				break;
+			}
 		}
 
 		private void NotifyPropertyChanged(string propertyName) {
@@ -177,6 +198,7 @@ namespace LogicCircuit {
 				this.CancelMove();
 				this.ClearSelection();
 				this.CircuitProject.Undo();
+				this.Refresh();
 			}
 		}
 
@@ -185,6 +207,7 @@ namespace LogicCircuit {
 				this.CancelMove();
 				this.ClearSelection();
 				this.CircuitProject.Redo();
+				this.Refresh();
 			}
 		}
 
@@ -224,14 +247,6 @@ namespace LogicCircuit {
 						}
 					}
 					this.Refresh();
-					// TODO: this is not very good way to get scroll control as this assumes canvas is sitting on scroll viewer.
-					// What if this get changed? For now just do it in hackky way
-					ScrollViewer scrollViewer = this.Diagram.Parent as ScrollViewer;
-					if(scrollViewer != null) {
-						oldDiagram.ScrollOffset = new Point(scrollViewer.HorizontalOffset, scrollViewer.VerticalOffset);
-						scrollViewer.ScrollToHorizontalOffset(logicalCircuit.ScrollOffset.X);
-						scrollViewer.ScrollToVerticalOffset(logicalCircuit.ScrollOffset.Y);
-					}
 				}
 			}
 		}
