@@ -58,6 +58,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ButtonControl.cs" />
+    <Compile Include="Conductor.cs" />
+    <Compile Include="ConductorMap.cs" />
     <Compile Include="CustomCommands.cs" />
     <Compile Include="Editor\CircuitDescriptor.cs" />
     <Compile Include="Editor\CircuitDescriptorList.cs" />
@@ -136,7 +138,9 @@
       <DependentUpon>DialogMessage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Editor\Marker.cs" />
+    <Compile Include="Editor\MarkerPoint.cs" />
     <Compile Include="Editor\Switcher.cs" />
+    <Compile Include="Editor\WireMarker.cs" />
     <Compile Include="GateShape.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="GridLengthAnimation.cs" />
@@ -183,6 +187,10 @@
       <DependentUpon>Mainframe.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="SymbolShapes\MarkerRectangle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SymbolShapes\Clock.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -221,6 +229,10 @@
     </Page>
     <Page Include="SymbolShapes\Splitter.xaml">
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SymbolShapes\MarkerLine.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

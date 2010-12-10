@@ -192,7 +192,7 @@ namespace LogicCircuit {
 		private void EditSelectAllCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
 				if(this.Editor.InEditMode) {
-					//this.Editor.SelectAll();
+					this.Editor.SelectAll();
 				}
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.EditSelectAllCommandExecuted", exception);
@@ -212,7 +212,7 @@ namespace LogicCircuit {
 		private void EditSelectAllWiresCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
 				if(this.Editor.InEditMode) {
-					//this.Editor.SelectAllWires();
+					this.Editor.SelectAllWires();
 				}
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.EditSelectAllWiresCommandExecuted", exception);
@@ -232,10 +232,10 @@ namespace LogicCircuit {
 		private void EditSelectFreeWiresCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
 				if(this.Editor.InEditMode) {
-					//int count = this.Editor.SelectFreeWires();
-					//if(0 < count) {
-					//    this.Status = LogicCircuit.Resources.MessageFreeWireCount(count);
-					//}
+					int count = this.Editor.SelectFreeWires();
+					if(0 < count) {
+						this.Status = LogicCircuit.Resources.MessageFreeWireCount(count);
+					}
 				}
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.EditSelectFreeWiresCommandExecuted", exception);
@@ -255,10 +255,10 @@ namespace LogicCircuit {
 		private void EditSelectFloatingSymbolsCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
 				if(this.Editor.InEditMode) {
-					//int count = this.Editor.SelectFloatingSymbols();
-					//if(0 < count) {
-					//    this.Status = LogicCircuit.Resources.MessageFloatingSymbolCount(count);
-					//}
+					int count = this.Editor.SelectFloatingSymbols();
+					if(0 < count) {
+						this.Status = LogicCircuit.Resources.MessageFloatingSymbolCount(count);
+					}
 				}
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.EditSelectFloatingSymbolsCommandExecuted", exception);
@@ -278,7 +278,7 @@ namespace LogicCircuit {
 		private void EditSelectAllButWiresCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
 				if(this.Editor.InEditMode) {
-					//this.Editor.SelectAllButWires();
+					this.Editor.SelectAllButWires();
 				}
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.EditSelectAllButWiresCommandExecuted", exception);
@@ -298,7 +298,7 @@ namespace LogicCircuit {
 		private void EditUnselectAllWiresCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
 				if(this.Editor.InEditMode && 0 < this.Editor.SelectionCount) {
-					//this.Editor.UnselectAllWires();
+					this.Editor.UnselectAllWires();
 				}
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.EditUnselectAllWiresCommandExecuted", exception);
@@ -318,7 +318,7 @@ namespace LogicCircuit {
 		private void EditUnselectAllButWiresCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
 				if(this.Editor.InEditMode && 0 < this.Editor.SelectionCount) {
-					//this.Editor.UnselectAllButWires();
+					this.Editor.UnselectAllButWires();
 				}
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.EditUnselectAllButWiresCommandExecuted", exception);
@@ -338,7 +338,7 @@ namespace LogicCircuit {
 		private void EditSelectAllProbesCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
 				if(this.Editor.InEditMode) {
-					//this.Editor.SelectAllProbes(false);
+					this.Editor.SelectAllProbes(false);
 				}
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.EditSelectAllProbesCommandExecuted", exception);
@@ -358,7 +358,7 @@ namespace LogicCircuit {
 		private void EditSelectAllProbesWithWireCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
 				if(this.Editor.InEditMode) {
-					//this.Editor.SelectAllProbes(true);
+					this.Editor.SelectAllProbes(true);
 				}
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.EditSelectAllProbesWithWireCommandExecuted", exception);

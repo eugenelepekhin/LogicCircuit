@@ -64,6 +64,20 @@ namespace LogicCircuit {
 		}
 
 		/// <summary>
+		/// Looks up a localized string similar to content of the file: "markerline.xaml".
+		/// </summary>
+ 		public static string MarkerLine {
+			get { return ResourceManager.GetString("MarkerLine", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to content of the file: "markerrectangle.xaml".
+		/// </summary>
+ 		public static string MarkerRectangle {
+			get { return ResourceManager.GetString("MarkerRectangle", Culture); }
+		}
+
+		/// <summary>
 		/// Looks up a localized string similar to content of the file: "pin.xaml".
 		/// </summary>
  		public static string Pin {

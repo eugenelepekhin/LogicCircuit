@@ -51,7 +51,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private IEnumerable<Jam> Jams() {
+		public IEnumerable<Jam> Jams() {
 			return this.Left.Concat(this.Top).Concat(this.Right).Concat(this.Bottom);
 		}
 

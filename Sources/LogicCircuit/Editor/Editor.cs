@@ -411,36 +411,41 @@ namespace LogicCircuit {
 			}
 		}
 
-		private Marker SelectSymbol(Symbol symbol) {
-			Tracer.Assert(symbol.LogicalCircuit == this.Project.LogicalCircuit);
-			Marker marker;
-			if(!this.selection.TryGetValue(symbol, out marker)) {
-				CircuitSymbol circuitSymbol = symbol as CircuitSymbol;
-				if(circuitSymbol != null) {
-					marker = new CircuitSymbolMarker(circuitSymbol);
-				} else {
-					Wire wire = symbol as Wire;
-					if(wire != null) {
-						//marker = new WireMarker(wire);
-					}
-				}
-				if(marker != null) {
-					this.selection.Add(symbol, marker);
-					if(this.selectionLayer == null) {
-						this.selectionLayer = new Canvas();
-					}
-					if(this.selectionLayer.Parent != this.Diagram) {
-						this.Diagram.Children.Add(this.selectionLayer);
-					}
-					this.selectionLayer.Children.Add(marker.Glyph);
-				}
+		private Marker CreateMarker(Symbol symbol) {
+			CircuitSymbol circuitSymbol = symbol as CircuitSymbol;
+			if(circuitSymbol != null) {
+				return new CircuitSymbolMarker(circuitSymbol);
 			}
-			return marker;
+			Wire wire = symbol as Wire;
+			if(wire != null) {
+				return new WireMarker(wire);
+			}
+			throw new InvalidOperationException();
 		}
 
 		private Marker FindMarker(Symbol symbol) {
-			Marker marker = null;
-			this.selection.TryGetValue(symbol, out marker);
+			Marker marker;
+			if(this.selection.TryGetValue(symbol, out marker)) {
+				return marker;
+			}
+			return null;
+		}
+
+		private Marker SelectSymbol(Symbol symbol) {
+			Tracer.Assert(symbol.LogicalCircuit == this.Project.LogicalCircuit);
+			Marker marker = this.FindMarker(symbol);
+			if(marker == null) {
+				marker = this.CreateMarker(symbol);
+				this.selection.Add(symbol, marker);
+				if(this.selectionLayer == null) {
+					this.selectionLayer = new Canvas();
+					Panel.SetZIndex(this.selectionLayer, int.MaxValue);
+				}
+				if(this.selectionLayer.Parent != this.Diagram) {
+					this.Diagram.Children.Add(this.selectionLayer);
+				}
+				this.selectionLayer.Children.Add(marker.Glyph);
+			}
 			return marker;
 		}
 
@@ -448,17 +453,191 @@ namespace LogicCircuit {
 			this.SelectSymbol(symbol);
 		}
 
+		private void Unselect(Marker marker) {
+			this.selection.Remove(marker.Symbol);
+			this.selectionLayer.Children.Remove(marker.Glyph);
+		}
+
 		public void Unselect(Symbol symbol) {
 			Marker marker = this.FindMarker(symbol);
 			if(marker != null) {
-				this.selection.Remove(symbol);
-				this.selectionLayer.Children.Remove(marker.Glyph);
+				this.Unselect(marker);
 			}
 		}
 
 		public void Select(IEnumerable<Symbol> symbol) {
 			foreach(Symbol s in symbol) {
 				this.Select(s);
+			}
+		}
+
+		private void Select(Rect area) {
+			LogicalCircuit logicalCircuit = this.Project.LogicalCircuit;
+			foreach(CircuitSymbol symbol in logicalCircuit.CircuitSymbols()) {
+				Rect item = new Rect(Symbol.ScreenPoint(symbol.Point),
+					new Size(Symbol.ScreenPoint(symbol.Circuit.SymbolWidth), Symbol.ScreenPoint(symbol.Circuit.SymbolHeight))
+				);
+				if(area.Contains(item)) {
+					this.Select(symbol);
+				}
+			}
+			foreach(Wire wire in logicalCircuit.Wires()) {
+				if(area.Contains(Symbol.ScreenPoint(wire.Point1)) && area.Contains(Symbol.ScreenPoint(wire.Point2))) {
+					this.Select(wire);
+				}
+			}
+		}
+
+		public void SelectAll() {
+			if(this.InEditMode) {
+				LogicalCircuit logicalCircuit = this.Project.LogicalCircuit;
+				foreach(CircuitSymbol symbol in logicalCircuit.CircuitSymbols()) {
+					this.Select(symbol);
+				}
+				foreach(Wire wire in logicalCircuit.Wires()) {
+					this.Select(wire);
+				}
+			}
+		}
+
+		public void SelectAllWires() {
+			if(this.InEditMode) {
+				foreach(Wire wire in this.Project.LogicalCircuit.Wires()) {
+					this.Select(wire);
+				}
+			}
+		}
+
+		public int SelectFreeWires() {
+			if(this.InEditMode) {
+				LogicalCircuit logicalCircuit = this.Project.LogicalCircuit;
+				Dictionary<GridPoint, int> pointCount = new Dictionary<GridPoint, int>();
+				Dictionary<GridPoint, Wire> firstWire = new Dictionary<GridPoint, Wire>();
+				foreach(Wire wire in logicalCircuit.Wires()) {
+					Tracer.Assert(wire.Point1 != wire.Point2);
+					int count;
+					if(pointCount.TryGetValue(wire.Point1, out count)) {
+						if(count < 2) {
+							pointCount[wire.Point1] = count + 1;
+						}
+					} else {
+						pointCount.Add(wire.Point1, 1);
+						firstWire.Add(wire.Point1, wire);
+					}
+					if(pointCount.TryGetValue(wire.Point2, out count)) {
+						if(count < 2) {
+							pointCount[wire.Point2] = count + 1;
+						}
+					} else {
+						pointCount.Add(wire.Point2, 1);
+						firstWire.Add(wire.Point2, wire);
+					}
+				}
+				foreach(CircuitSymbol symbol in logicalCircuit.CircuitSymbols()) {
+					foreach(Jam jam in symbol.Jams()) {
+						int count;
+						if(pointCount.TryGetValue(jam.AbsolutePoint, out count) && count < 2) {
+							pointCount[jam.AbsolutePoint] = count + 1;
+						}
+					}
+				}
+				int freeWireCount = 0;
+				foreach(KeyValuePair<GridPoint, int> pair in pointCount) {
+					if(pair.Value < 2) {
+						this.Select(firstWire[pair.Key]);
+						freeWireCount++;
+					}
+				}
+				return freeWireCount;
+			}
+			return 0;
+		}
+
+		public int SelectFloatingSymbols() {
+			if(this.InEditMode) {
+				LogicalCircuit logicalCircuit = this.Project.LogicalCircuit;
+				HashSet<GridPoint> wirePoint = new HashSet<GridPoint>();
+				foreach(Wire wire in logicalCircuit.Wires()) {
+					wirePoint.Add(wire.Point1);
+					wirePoint.Add(wire.Point2);
+				}
+				int count = 0;
+				foreach(CircuitSymbol symbol in logicalCircuit.CircuitSymbols()) {
+					foreach(Jam jam in symbol.Jams()) {
+						if(!wirePoint.Contains(jam.AbsolutePoint)) {
+							this.Select(symbol);
+							count++;
+							break;
+						}
+					}
+				}
+				return count;
+			}
+			return 0;
+		}
+
+		public void SelectAllButWires() {
+			if(this.InEditMode) {
+				foreach(CircuitSymbol symbol in this.Project.LogicalCircuit.CircuitSymbols()) {
+					this.Select(symbol);
+				}
+			}
+		}
+
+		public void UnselectAllWires() {
+			if(this.InEditMode) {
+				foreach(Wire wire in this.Project.LogicalCircuit.Wires()) {
+					this.Unselect(wire);
+				}
+			}
+		}
+
+		public void UnselectAllButWires() {
+			if(this.InEditMode) {
+				foreach(CircuitSymbol symbol in this.Project.LogicalCircuit.CircuitSymbols()) {
+					this.Unselect(symbol);
+				}
+			}
+		}
+
+		public void SelectAllProbes(bool withWire) {
+			if(this.InEditMode) {
+				LogicalCircuit logicalCircuit = this.Project.LogicalCircuit;
+				foreach(CircuitSymbol symbol in logicalCircuit.CircuitSymbols()) {
+					Gate gate = symbol.Circuit as Gate;
+					if(gate != null && gate.GateType == GateType.Probe) {
+						this.Select(symbol);
+						if(withWire) {
+							Tracer.Assert(symbol.Jams().Count() == 1);
+							GridPoint point = symbol.Jams().First().AbsolutePoint;
+							foreach(Wire wire in logicalCircuit.Wires()) {
+								if(wire.Point1 == point || wire.Point2 == point) {
+									this.Select(wire);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		private void SelectConductor(Wire wire) {
+			Tracer.Assert(wire.LogicalCircuit == this.Project.LogicalCircuit);
+			ConductorMap map = new ConductorMap(this.Project.LogicalCircuit);
+			Conductor conductor;
+			if(map.TryGetValue(wire.Point1, out conductor)) {
+				this.Select(conductor.Wires);
+			}
+		}
+
+		private void UnselectConductor(Wire wire) {
+			Tracer.Assert(wire.LogicalCircuit == this.Project.LogicalCircuit);
+			ConductorMap map = new ConductorMap(this.Project.LogicalCircuit);
+			Conductor conductor;
+			if(map.TryGetValue(wire.Point1, out conductor)) {
+				foreach(Wire w in conductor.Wires) {
+					this.Unselect(w);
+				}
 			}
 		}
 
