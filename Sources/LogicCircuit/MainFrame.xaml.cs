@@ -130,7 +130,9 @@ namespace LogicCircuit {
 				DialogMessage.Show(this,
 					LogicCircuit.Resources.MainFrameCaption(null), message, details, MessageBoxImage.Error, MessageBoxButton.OK
 				);
-				this.Editor.Power = false;
+				if(this.Editor != null) {
+					this.Editor.Power = false;
+				}
 			}
 		}
 
@@ -145,7 +147,9 @@ namespace LogicCircuit {
 
 		private void WindowLostFocus(object sender, RoutedEventArgs e) {
 			try {
-				this.Editor.DiagramLostFocus();
+				if(this.Editor != null) {
+					this.Editor.DiagramLostFocus();
+				}
 			} catch(Exception exception) {
 				Tracer.Report("MainFrame.MainFrameLostFocus", exception);
 				this.ReportException(exception);
@@ -154,7 +158,9 @@ namespace LogicCircuit {
 
 		private void WindowLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e) {
 			try {
-				this.Editor.DiagramLostFocus();
+				if(this.Editor != null) {
+					this.Editor.DiagramLostFocus();
+				}
 			} catch(Exception exception) {
 				Tracer.Report("MainFrame.MainFrameLostKeyboardFocus", exception);
 				this.ReportException(exception);
@@ -163,7 +169,9 @@ namespace LogicCircuit {
 
 		private void WindowKeyDown(object sender, KeyEventArgs e) {
 			try {
-				this.Editor.DiagramKeyDown(e);
+				if(this.Editor != null) {
+					this.Editor.DiagramKeyDown(e);
+				}
 			} catch(Exception exception) {
 				Tracer.Report("MainFrame.MainFrameKeyDown", exception);
 				this.ReportException(exception);
@@ -172,7 +180,9 @@ namespace LogicCircuit {
 
 		private void WindowKeyUp(object sender, KeyEventArgs e) {
 			try {
-				this.Editor.DiagramKeyUp(e);
+				if(this.Editor != null) {
+					this.Editor.DiagramKeyUp(e);
+				}
 			} catch(Exception exception) {
 				Tracer.Report("MainFrame.MainFrameKeyUp", exception);
 				this.ReportException(exception);
@@ -190,7 +200,9 @@ namespace LogicCircuit {
 
 		private void DiagramDragEnter(object sender, DragEventArgs e) {
 			try {
-				//this.Editor.CanvasDragOver(sender, e);
+				if(this.Editor != null) {
+					//this.Editor.CanvasDragOver(sender, e);
+				}
 			} catch(Exception exception) {
 				Tracer.Report("MainFrame.DiagramDragEnter", exception);
 				this.ReportException(exception);
@@ -199,7 +211,9 @@ namespace LogicCircuit {
 
 		private void DiagramDragOver(object sender, DragEventArgs e) {
 			try {
-				//this.Editor.CanvasDragOver(sender, e);
+				if(this.Editor != null) {
+					//this.Editor.CanvasDragOver(sender, e);
+				}
 			} catch(Exception exception) {
 				Tracer.Report("MainFrame.DiagramDragOver", exception);
 				this.ReportException(exception);
@@ -208,7 +222,9 @@ namespace LogicCircuit {
 
 		private void DiagramDragLeave(object sender, DragEventArgs e) {
 			try {
-				//this.Editor.CanvasDragLeave(sender, e);
+				if(this.Editor != null) {
+					//this.Editor.CanvasDragLeave(sender, e);
+				}
 			} catch(Exception exception) {
 				Tracer.Report("MainFrame.DiagramDragLeave", exception);
 				this.ReportException(exception);
@@ -217,7 +233,9 @@ namespace LogicCircuit {
 
 		private void DiagramDrop(object sender, DragEventArgs e) {
 			try {
-				//this.Editor.CanvasDrop(sender, e);
+				if(this.Editor != null) {
+					//this.Editor.CanvasDrop(sender, e);
+				}
 			} catch(Exception exception) {
 				Tracer.Report("MainFrame.DiagramDrop", exception);
 				this.ReportException(exception);
@@ -226,7 +244,9 @@ namespace LogicCircuit {
 
 		private void DiagramMouseDown(object sender, MouseButtonEventArgs e) {
 			try {
-				//this.Editor.CanvasMouseDown(sender, e);
+				if(this.Editor != null) {
+					this.Editor.DiagramMouseDown((Canvas)sender, e);
+				}
 			} catch(Exception exception) {
 				Tracer.Report("MainFrame.DiagramMouseDown", exception);
 				this.ReportException(exception);
@@ -235,7 +255,9 @@ namespace LogicCircuit {
 
 		private void DiagramMouseUp(object sender, MouseButtonEventArgs e) {
 			try {
-				//this.Editor.CanvasMouseUp(sender, e);
+				if(this.Editor != null) {
+					this.Editor.DiagramMouseUp((Canvas)sender, e);
+				}
 			} catch(Exception exception) {
 				Tracer.Report("MainFrame.DiagramMouseUp", exception);
 				this.ReportException(exception);
@@ -244,7 +266,9 @@ namespace LogicCircuit {
 
 		private void DiagramMouseMove(object sender, MouseEventArgs e) {
 			try {
-				//this.Editor.CanvasMouseMove(sender, e);
+				if(this.Editor != null) {
+					this.Editor.DiagramMouseMove((Canvas)sender, e);
+				}
 			} catch(Exception exception) {
 				Tracer.Report("MainFrame.DiagramMouseMove", exception);
 				this.ReportException(exception);
@@ -253,7 +277,9 @@ namespace LogicCircuit {
 
 		private void DiagramLostFocus(object sender, RoutedEventArgs e) {
 			try {
-				//this.Editor.CanvasLostFocus(sender, e);
+				if(this.Editor != null) {
+					this.Editor.DiagramLostFocus();
+				}
 			} catch(Exception exception) {
 				Tracer.Report("MainFrame.DiagramLostFocus", exception);
 				this.ReportException(exception);
@@ -262,7 +288,9 @@ namespace LogicCircuit {
 
 		private void DiagramLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e) {
 			try {
-				//this.Editor.CanvasLostFocus(sender, e);
+				if(this.Editor != null) {
+					this.Editor.DiagramLostFocus();
+				}
 			} catch(Exception exception) {
 				Tracer.Report("MainFrame.DiagramLostKeyboardFocus", exception);
 				this.ReportException(exception);
@@ -271,7 +299,9 @@ namespace LogicCircuit {
 
 		private void PowerButtonMouseDown(object sender, MouseButtonEventArgs e) {
 			try {
-				this.Editor.Power = (this.PowerSwitch.IsChecked.Value == false);
+				if(this.Editor != null) {
+					this.Editor.Power = (this.PowerSwitch.IsChecked.Value == false);
+				}
 			} catch(Exception exception) {
 				Tracer.Report("MainFrame.PowerButtonMouseDown", exception);
 				this.ReportException(exception);

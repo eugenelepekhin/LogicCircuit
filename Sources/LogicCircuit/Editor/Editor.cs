@@ -5,12 +5,14 @@ using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-using System.Windows.Input;
 
 namespace LogicCircuit {
 	public partial class Editor : INotifyPropertyChanged {
+		private const int ClickProximity = 2 * Symbol.PinRadius;
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
@@ -18,12 +20,18 @@ namespace LogicCircuit {
 		public string File { get; private set; }
 		public CircuitProject CircuitProject { get; private set; }
 		private int savedVersion;
+
 		public CircuitDescriptorList CircuitDescriptorList { get; private set; }
-		private readonly Dictionary<GridPoint, int> wirePoint = new Dictionary<GridPoint, int>();
 		private Switcher switcher;
 		private LogicalCircuit currentLogicalCircuit;
+		private readonly Dictionary<GridPoint, int> wirePoint = new Dictionary<GridPoint, int>();
+
 		private Dictionary<Symbol, Marker> selection = new Dictionary<Symbol, Marker>();
 		private Canvas selectionLayer;
+
+		private Marker movingMarker;
+		private Point moveStart;
+		private TranslateTransform moveVector;
 
 		private Dispatcher Dispatcher { get { return this.Mainframe.Dispatcher; } }
 		private Canvas Diagram { get { return this.Mainframe.Diagram; } }
@@ -131,35 +139,6 @@ namespace LogicCircuit {
 						this.Mainframe.ReportException(exception);
 					}
 				}
-			}
-		}
-
-		public void DiagramLostFocus() {
-			this.CancelMove();
-		}
-
-		public void DiagramKeyDown(KeyEventArgs e) {
-			if(this.InEditMode) {
-				if(e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl) {
-					this.switcher.OnControlDown();
-					this.Mainframe.Status = Resources.TipOnCtrlDown;
-					e.Handled = true;
-				} else if(e.Key == Key.Tab) {
-					this.switcher.OnTabDown(
-						(Keyboard.Modifiers & ModifierKeys.Control) != ModifierKeys.None,
-						(Keyboard.Modifiers & ModifierKeys.Shift) != ModifierKeys.None
-					);
-					e.Handled = true;
-				} else if(e.Key == Key.Escape) {
-					this.CancelMove();
-				}
-			}
-		}
-
-		public void DiagramKeyUp(KeyEventArgs e) {
-			if(this.InEditMode && (e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl)) {
-				this.switcher.OnControlUp();
-				e.Handled = true;
 			}
 		}
 
@@ -431,20 +410,26 @@ namespace LogicCircuit {
 			return null;
 		}
 
+		private void AddMarkerGlyph(Marker marker) {
+			if(this.selectionLayer == null) {
+				this.selectionLayer = new Canvas() {
+					RenderTransform = this.moveVector = new TranslateTransform()
+				};
+				Panel.SetZIndex(this.selectionLayer, int.MaxValue);
+			}
+			if(this.selectionLayer.Parent != this.Diagram) {
+				this.Diagram.Children.Add(this.selectionLayer);
+			}
+			this.selectionLayer.Children.Add(marker.Glyph);
+		}
+
 		private Marker SelectSymbol(Symbol symbol) {
 			Tracer.Assert(symbol.LogicalCircuit == this.Project.LogicalCircuit);
 			Marker marker = this.FindMarker(symbol);
 			if(marker == null) {
 				marker = this.CreateMarker(symbol);
 				this.selection.Add(symbol, marker);
-				if(this.selectionLayer == null) {
-					this.selectionLayer = new Canvas();
-					Panel.SetZIndex(this.selectionLayer, int.MaxValue);
-				}
-				if(this.selectionLayer.Parent != this.Diagram) {
-					this.Diagram.Children.Add(this.selectionLayer);
-				}
-				this.selectionLayer.Children.Add(marker.Glyph);
+				this.AddMarkerGlyph(marker);
 			}
 			return marker;
 		}
@@ -641,15 +626,330 @@ namespace LogicCircuit {
 			}
 		}
 
+		//--- Moving markers ---
+
+		private void StartMove(Canvas diagram, Marker marker, Point startPoint) {
+			Tracer.Assert(this.movingMarker == null);
+			Mouse.Capture(diagram, CaptureMode.Element);
+			this.movingMarker = marker;
+			this.moveStart = startPoint;
+			this.Mainframe.Status = Resources.TipOnStartMove;
+		}
+
+		private void MoveSelection(Point point) {
+			this.moveVector.X = point.X - this.moveStart.X;
+			this.moveVector.Y = point.Y - this.moveStart.Y;
+		}
+
 		private void CancelMove() {
-			//if(this.movingMarker != null) {
-			//    Mouse.Capture(null);
-			//    if(this.movingMarker is WirePledge) {
-			//        this.SymbolList.Remove(this.movingMarker);
-			//    }
-			//    this.movingMarker = null;
-			//    this.MovingVector = new Vector();
-			//}
+			if(this.movingMarker != null) {
+				Mouse.Capture(null);
+				if(this.movingMarker is WirePledge) {
+					this.selectionLayer.Children.Remove(this.movingMarker.Glyph);
+				}
+				this.movingMarker = null;
+				this.moveVector.X = this.moveVector.Y = 0;
+			}
+		}
+
+		private void StartWire(Canvas diagram, Point point) {
+			this.ClearSelection();
+			this.CancelMove();
+			WirePledge wirePledge = new WirePledge(point);
+			this.AddMarkerGlyph(wirePledge);
+			this.StartMove(diagram, wirePledge, point);
+			this.Mainframe.Status = Resources.TipOnStartWire;
+		}
+
+		private void FinishMove(Point position, bool withWires) {
+			this.CancelMove();
+		}
+
+		private static bool IsPinClose(Point p1, Point p2) {
+			return Point.Subtract(p1, p2).LengthSquared <= Symbol.PinRadius * Symbol.PinRadius * 5;
+		}
+
+		private Wire FindWireNear(Point point) {
+			Rect rect = new Rect(
+				point.X - Editor.ClickProximity, point.Y - Editor.ClickProximity,
+				2 * Editor.ClickProximity, 2 * Editor.ClickProximity
+			);
+			foreach(Wire wire in this.Project.LogicalCircuit.Wires()) {
+				Point p1 = Symbol.ScreenPoint(wire.Point1);
+				Point p2 = Symbol.ScreenPoint(wire.Point2);
+				if(Symbol.Intersected(p1, p2, rect)) {
+					return wire;
+				}
+			}
+			return null;
+		}
+
+		private bool JamExistsNear(GridPoint point) {
+			foreach(CircuitSymbol symbol in this.Project.LogicalCircuit.CircuitSymbols()) {
+				if(symbol.X <= point.X && point.X <= symbol.X + symbol.Circuit.SymbolWidth && symbol.Y <= point.Y && point.Y <= symbol.Y + symbol.Circuit.SymbolHeight) {
+					foreach(Jam jam in symbol.Jams()) {
+						if(jam.AbsolutePoint == point) {
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+		}
+
+		private bool JamExistsNear(Point point) {
+			GridPoint gridPoint = Symbol.GridPoint(point);
+			return Editor.IsPinClose(point, Symbol.ScreenPoint(gridPoint)) && this.JamExistsNear(gridPoint);
+		}
+
+		private bool Split(Wire wire, GridPoint point) {
+			LogicalCircuit logicalCircuit = this.Project.LogicalCircuit;
+			Tracer.Assert(wire.LogicalCircuit == logicalCircuit);
+			if(wire.Point1 != point && wire.Point2 != point) {
+				Wire wire2 = null;
+				this.ClearSelection();
+				this.CircuitProject.InTransaction(() => {
+					wire2 = this.CircuitProject.WireSet.Create(logicalCircuit, point, wire.Point2);
+					wire.Point2 = point;
+				});
+				this.Select(wire);
+				this.Select(wire2);
+				return true;
+			}
+			return false;
+		}
+
+		private bool Merge(Wire wire1, Wire wire2) {
+			LogicalCircuit logicalCircuit = this.Project.LogicalCircuit;
+			Tracer.Assert(wire1.LogicalCircuit == logicalCircuit && wire2.LogicalCircuit == logicalCircuit);
+			GridPoint point1, point2;
+			if(wire1.Point1 == wire2.Point1) {
+				point1 = wire1.Point2;
+				point2 = wire2.Point2;
+			} else if(wire1.Point1 == wire2.Point2) {
+				point1 = wire1.Point2;
+				point2 = wire2.Point1;
+			} else if(wire1.Point2 == wire2.Point1) {
+				point1 = wire1.Point1;
+				point2 = wire2.Point2;
+			} else if(wire1.Point2 == wire2.Point2) {
+				point1 = wire1.Point1;
+				point2 = wire2.Point1;
+			} else {
+				return false;
+			}
+			this.ClearSelection();
+			this.CircuitProject.InTransaction(() => {
+				wire2.Delete();
+				wire1.Point1 = point1;
+				wire1.Point2 = point2;
+			});
+			this.Select(wire1);
+			return true;
+		}
+
+		//--- Event Handling ---
+
+		public void DiagramLostFocus() {
+			this.CancelMove();
+		}
+
+		public void DiagramKeyDown(KeyEventArgs e) {
+			if(this.InEditMode) {
+				if(e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl) {
+					this.switcher.OnControlDown();
+					this.Mainframe.Status = Resources.TipOnCtrlDown;
+					e.Handled = true;
+				} else if(e.Key == Key.Tab) {
+					this.switcher.OnTabDown(
+						(Keyboard.Modifiers & ModifierKeys.Control) != ModifierKeys.None,
+						(Keyboard.Modifiers & ModifierKeys.Shift) != ModifierKeys.None
+					);
+					e.Handled = true;
+				} else if(e.Key == Key.Escape) {
+					this.CancelMove();
+				}
+			}
+		}
+
+		public void DiagramKeyUp(KeyEventArgs e) {
+			if(this.InEditMode && (e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl)) {
+				this.switcher.OnControlUp();
+				e.Handled = true;
+			}
+		}
+
+		public void DiagramMouseDown(Canvas diagram, MouseButtonEventArgs e) {
+			FrameworkElement element = e.OriginalSource as FrameworkElement;
+			if(element != null) {
+				if(element != diagram) { // something on the diagram was clicked
+					Symbol symbol = element.DataContext as Symbol;
+					Jam jam = element.DataContext as Jam;
+					if(jam != null && !(element is Ellipse)) {
+						symbol = jam.CircuitSymbol;
+						jam = null;
+					}
+					if(symbol != null) {
+						if(e.ClickCount < 2) {
+							this.SymbolMouseDown(symbol, diagram, e);
+						} else if(e.ChangedButton == MouseButton.Left) {
+							this.SymbolDoubleClick(symbol);
+						}
+					} else if(jam != null) {
+						this.JamMouseDown(jam, diagram, e);
+					} else {
+						Marker marker = element.DataContext as Marker;
+						if(marker != null) {
+							this.MarkerMouseDown(marker, diagram, e);
+						}
+					}
+				} else if(this.InEditMode) { // click on the white space of the diagram
+					// search for near by wire and jam
+					Point point = e.GetPosition(diagram);
+					Wire wire = this.FindWireNear(point);
+					if(wire != null) {
+						Marker marker = this.FindMarker(wire);
+						if(marker != null) {
+							this.MarkerMouseDown(marker, diagram, e);
+						} else if(this.JamExistsNear(point)) {
+							this.StartWire(diagram, point);
+						} else {
+							this.SymbolMouseDown(wire, diagram, e);
+						}
+					}
+				}
+			}
+		}
+
+		public void DiagramMouseUp(Canvas diagram, MouseButtonEventArgs e) {
+			if(e.ChangedButton == MouseButton.Left && this.InEditMode) {
+				if(this.movingMarker != null) {
+					this.FinishMove(e.GetPosition(diagram), (Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.None);
+				}
+			}
+		}
+
+		public void DiagramMouseMove(Canvas diagram, MouseEventArgs e) {
+			if(e.LeftButton == MouseButtonState.Pressed && this.InEditMode && this.movingMarker != null) {
+				this.movingMarker.Move(this, e.GetPosition(diagram));
+			}
+		}
+
+		private void SymbolMouseDown(Symbol symbol, Canvas diagram, MouseButtonEventArgs e) {
+			if(this.InEditMode && e.ChangedButton == MouseButton.Left) {
+				/*Marker marker = symbol as Marker;
+				if(marker != null) {
+					if(Keyboard.Modifiers == ModifierKeys.Shift && marker is WireMarker) {
+						Wire w = ((WireMarker)marker).Wire;
+						this.ClearSelection();
+						this.SelectConductor(w);
+						this.StartMove(diagram, this.Marker(w), e.GetPosition(diagram));
+					} else if(Keyboard.Modifiers == ModifierKeys.Shift && marker is WirePointMarker) {
+						Wire w = ((WirePointMarker)marker).WireMarker.Wire;
+						this.ClearSelection();
+						this.SelectConductor(w);
+						this.StartMove(diagram, this.Marker(w), e.GetPosition(diagram));
+					} else if(Keyboard.Modifiers == (ModifierKeys.Shift | ModifierKeys.Control) && marker is WireMarker) {
+						this.UnselectConductor(((WireMarker)marker).Wire);
+					} else if(Keyboard.Modifiers == (ModifierKeys.Shift | ModifierKeys.Control) && marker is WirePointMarker) {
+						this.UnselectConductor(((WirePointMarker)marker).WireMarker.Wire);
+					} else if((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control) {
+						this.Unselect(marker);
+					} else if(Keyboard.Modifiers == ModifierKeys.Alt && marker is WireMarker) {
+						this.Split(((WireMarker)marker).Wire, Plotter.GridPoint(e.GetPosition(diagram)));
+					} else if(Keyboard.Modifiers == ModifierKeys.Alt && marker is WirePointMarker && this.SelectionCount == 2) {
+						WirePointMarker pointMarker = (WirePointMarker)marker;
+						Wire wire1 = pointMarker.WireMarker.Wire;
+						GridPoint point = Plotter.GridPoint(pointMarker.ScreenPoint);
+						foreach(Symbol s in this.selection.Keys) {
+							Wire wire2 = s as Wire;
+							if(wire2 != null && wire2 != wire1 && (wire2.Point1 == point || wire2.Point2 == point)) {
+								this.Merge(wire1, wire2);
+								break;
+							}
+						}
+					} else {
+						this.StartMove(diagram, marker, e.GetPosition(diagram));
+					}
+					return;
+				}*/
+
+				Wire wire = symbol as Wire;
+				if(wire != null) {
+					if(Keyboard.Modifiers == ModifierKeys.Control) {
+						this.Select(wire);
+					} else if(Keyboard.Modifiers == ModifierKeys.Shift) {
+						this.ClearSelection();
+						this.SelectConductor(wire);
+					} else if(Keyboard.Modifiers == (ModifierKeys.Shift | ModifierKeys.Control)) {
+						this.SelectConductor(wire);
+					//} else if(CircuitEditor.IsPinClose(CircuitEditor.WireEndPoint(Plotter.ScreenPoint(wire.Point1)), point)) {
+					//	this.StartWire(Plotter.ScreenPoint(wire.Point1));
+					//} else if(CircuitEditor.IsPinClose(CircuitEditor.WireEndPoint(Plotter.ScreenPoint(wire.Point2)), point)) {
+					//	this.StartWire(Plotter.ScreenPoint(wire.Point2));
+					} else {
+						this.ClearSelection();
+						this.StartMove(diagram, this.SelectSymbol(wire), e.GetPosition(diagram));
+					}
+					return;
+				}
+
+				CircuitSymbol circuitSymbol = symbol as CircuitSymbol;
+				if(circuitSymbol != null) {
+					if((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control) {
+						this.Select(symbol);
+					} else {
+						this.ClearSelection();
+						this.StartMove(diagram, this.SelectSymbol(symbol), e.GetPosition(diagram));
+					}
+					//this.ShowStatus(circuitSymbol);
+					return;
+				}
+			}
+		}
+
+		private void MarkerMouseDown(Marker marker, Canvas diagram, MouseButtonEventArgs e) {
+		}
+
+		private void JamMouseDown(Jam jam, Canvas diagram, MouseButtonEventArgs e) {
+		}
+
+		private void SymbolDoubleClick(Symbol symbol) {
+			if(this.InEditMode) {
+				/*Marker marker = symbol as Marker;
+				if(marker != null) {
+					CircuitSymbolMarker circuitSymbolMarker = marker as CircuitSymbolMarker;
+					if(circuitSymbolMarker != null) {
+						LogicalCircuit lc = circuitSymbolMarker.CircuitSymbol.Circuit as LogicalCircuit;
+						if(lc != null) {
+							this.OpenLogicalCircuit(lc);
+							return;
+						}
+						CircuitButton cb = circuitSymbolMarker.CircuitSymbol.Circuit as CircuitButton;
+						if(cb != null) {
+							this.Edit(cb);
+							return;
+						}
+						Constant ct = circuitSymbolMarker.CircuitSymbol.Circuit as Constant;
+						if(ct != null) {
+							this.Edit(ct);
+							return;
+						}
+						Memory m = circuitSymbolMarker.CircuitSymbol.Circuit as Memory;
+						if(m != null) {
+							this.Edit(m);
+							return;
+						}
+						Pin pin = circuitSymbolMarker.CircuitSymbol.Circuit as Pin;
+						if(pin != null) {
+							this.Edit(pin);
+							return;
+						}
+					}
+				}*/
+			} else {
+				
+			}
 		}
 	}
 }

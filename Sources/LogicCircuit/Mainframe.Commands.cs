@@ -7,6 +7,10 @@ using System.Diagnostics;
 
 namespace LogicCircuit {
 	partial class Mainframe {
+		private bool IsEditorInEditMode() {
+			return this.Editor != null && this.Editor.InEditMode;
+		}
+
 		private void FileNewCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
 				this.New();
@@ -45,7 +49,7 @@ namespace LogicCircuit {
 
 		private void FileExportImageCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
-				if(!this.LogicalCircuit().IsEmpty()) {
+				if(this.Editor != null && !this.LogicalCircuit().IsEmpty()) {
 					//DialogExportImage dialog = new DialogExportImage(this.Editor);
 					//dialog.Owner = this;
 					//dialog.ShowDialog();
@@ -58,7 +62,7 @@ namespace LogicCircuit {
 
 		private void FileExportImageCommandCanExecute(object target, CanExecuteRoutedEventArgs e) {
 			try {
-				e.CanExecute = !this.LogicalCircuit().IsEmpty();
+				e.CanExecute = (this.Editor != null && !this.LogicalCircuit().IsEmpty());
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.FileExportImageCommandCanExecute", exception);
 				this.ReportException(exception);
@@ -71,7 +75,7 @@ namespace LogicCircuit {
 
 		private void EditUndoCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
-				if(this.Editor.CanUndo()) {
+				if(this.Editor != null && this.Editor.CanUndo()) {
 					this.Editor.Undo();
 				}
 			} catch(Exception exception) {
@@ -82,7 +86,7 @@ namespace LogicCircuit {
 
 		private void EditUndoCommandCanExecute(object target, CanExecuteRoutedEventArgs e) {
 			try {
-				e.CanExecute = this.Editor.CanUndo();
+				e.CanExecute = (this.Editor != null && this.Editor.CanUndo());
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.EditUndoCommandCanExecut", exception);
 				this.ReportException(exception);
@@ -91,7 +95,7 @@ namespace LogicCircuit {
 
 		private void EditRedoCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
-				if(this.Editor.CanRedo()) {
+				if(this.Editor != null && this.Editor.CanRedo()) {
 					this.Editor.Redo();
 				}
 			} catch(Exception exception) {
@@ -102,7 +106,9 @@ namespace LogicCircuit {
 
 		private void EditRedoCommandCanExecute(object target, CanExecuteRoutedEventArgs e) {
 			try {
-				e.CanExecute = this.Editor.CanRedo();
+				if(this.Editor != null) {
+					e.CanExecute = this.Editor.CanRedo();
+				}
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.EditRedoCommandCanExecut", exception);
 				this.ReportException(exception);
@@ -111,7 +117,7 @@ namespace LogicCircuit {
 
 		private void EditCutCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
-				if(this.Editor.InEditMode) {
+				if(this.IsEditorInEditMode()) {
 					this.Editor.Cut();
 				}
 			} catch(Exception exception) {
@@ -122,7 +128,7 @@ namespace LogicCircuit {
 
 		private void EditCutCommandCanExecute(object target, CanExecuteRoutedEventArgs e) {
 			try {
-				e.CanExecute = this.Editor.InEditMode && 0 < this.Editor.SelectionCount;
+				e.CanExecute = (this.IsEditorInEditMode() && 0 < this.Editor.SelectionCount);
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.EditCutCommandCanExecute", exception);
 				this.ReportException(exception);
@@ -131,7 +137,7 @@ namespace LogicCircuit {
 
 		private void EditCopyCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
-				if(this.Editor.InEditMode) {
+				if(this.IsEditorInEditMode()) {
 					this.Editor.Copy();
 				}
 			} catch(Exception exception) {
@@ -142,7 +148,7 @@ namespace LogicCircuit {
 
 		private void EditCopyCommandCanExecute(object target, CanExecuteRoutedEventArgs e) {
 			try {
-				e.CanExecute = this.Editor.InEditMode && 0 < this.Editor.SelectionCount;
+				e.CanExecute = (this.IsEditorInEditMode() && 0 < this.Editor.SelectionCount);
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.EditCopyCommandCanExecute", exception);
 				this.ReportException(exception);
@@ -151,7 +157,7 @@ namespace LogicCircuit {
 
 		private void EditPasteCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
-				if(this.Editor.InEditMode) {
+				if(this.IsEditorInEditMode()) {
 					this.Editor.Paste();
 				}
 			} catch(Exception exception) {
@@ -162,7 +168,7 @@ namespace LogicCircuit {
 
 		private void EditPasteCommandCanExecute(object target, CanExecuteRoutedEventArgs e) {
 			try {
-				e.CanExecute = this.Editor.InEditMode && this.Editor.CanPaste();
+				e.CanExecute = (this.IsEditorInEditMode() && this.Editor.CanPaste());
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.EditPasteCommandCanExecute", exception);
 				this.ReportException(exception);
@@ -171,7 +177,7 @@ namespace LogicCircuit {
 
 		private void EditDeleteCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
-				if(this.Editor.InEditMode) {
+				if(this.IsEditorInEditMode()) {
 					this.Editor.Delete();
 				}
 			} catch(Exception exception) {
@@ -182,7 +188,7 @@ namespace LogicCircuit {
 
 		private void EditDeleteCommandCanExecute(object target, CanExecuteRoutedEventArgs e) {
 			try {
-				e.CanExecute = this.Editor.InEditMode && 0 < this.Editor.SelectionCount;
+				e.CanExecute = (this.IsEditorInEditMode() && 0 < this.Editor.SelectionCount);
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.EditDeleteCommandCanExecute", exception);
 				this.ReportException(exception);
@@ -191,7 +197,7 @@ namespace LogicCircuit {
 
 		private void EditSelectAllCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
-				if(this.Editor.InEditMode) {
+				if(this.IsEditorInEditMode()) {
 					this.Editor.SelectAll();
 				}
 			} catch(Exception exception) {
@@ -202,7 +208,7 @@ namespace LogicCircuit {
 
 		private void EditSelectAllCommandCanExecute(object target, CanExecuteRoutedEventArgs e) {
 			try {
-				e.CanExecute = this.Editor.InEditMode;
+				e.CanExecute = this.IsEditorInEditMode();
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.EditSelectAllCommandCanExecute", exception);
 				this.ReportException(exception);
@@ -211,7 +217,7 @@ namespace LogicCircuit {
 
 		private void EditSelectAllWiresCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
-				if(this.Editor.InEditMode) {
+				if(this.IsEditorInEditMode()) {
 					this.Editor.SelectAllWires();
 				}
 			} catch(Exception exception) {
@@ -222,7 +228,7 @@ namespace LogicCircuit {
 
 		private void EditSelectAllWiresCommandCanExecute(object target, CanExecuteRoutedEventArgs e) {
 			try {
-				e.CanExecute = this.Editor.InEditMode;
+				e.CanExecute = this.IsEditorInEditMode();
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.EditSelectAllWiresCommandCanExecute", exception);
 				this.ReportException(exception);
@@ -231,7 +237,7 @@ namespace LogicCircuit {
 
 		private void EditSelectFreeWiresCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
-				if(this.Editor.InEditMode) {
+				if(this.IsEditorInEditMode()) {
 					int count = this.Editor.SelectFreeWires();
 					if(0 < count) {
 						this.Status = LogicCircuit.Resources.MessageFreeWireCount(count);
@@ -245,7 +251,7 @@ namespace LogicCircuit {
 
 		private void EditSelectFreeWiresCommandCanExecute(object target, CanExecuteRoutedEventArgs e) {
 			try {
-				e.CanExecute = this.Editor.InEditMode;
+				e.CanExecute = this.IsEditorInEditMode();
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.EditSelectFreeWiresCommandCanExecute", exception);
 				this.ReportException(exception);
@@ -254,7 +260,7 @@ namespace LogicCircuit {
 
 		private void EditSelectFloatingSymbolsCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
-				if(this.Editor.InEditMode) {
+				if(this.IsEditorInEditMode()) {
 					int count = this.Editor.SelectFloatingSymbols();
 					if(0 < count) {
 						this.Status = LogicCircuit.Resources.MessageFloatingSymbolCount(count);
@@ -268,7 +274,7 @@ namespace LogicCircuit {
 
 		private void EditSelectFloatingSymbolsCommandCanExecute(object target, CanExecuteRoutedEventArgs e) {
 			try {
-				e.CanExecute = this.Editor.InEditMode;
+				e.CanExecute = this.IsEditorInEditMode();
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.EditSelectFloatingSymbolsCommandCanExecute", exception);
 				this.ReportException(exception);
@@ -277,7 +283,7 @@ namespace LogicCircuit {
 
 		private void EditSelectAllButWiresCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
-				if(this.Editor.InEditMode) {
+				if(this.IsEditorInEditMode()) {
 					this.Editor.SelectAllButWires();
 				}
 			} catch(Exception exception) {
@@ -288,7 +294,7 @@ namespace LogicCircuit {
 
 		private void EditSelectAllButWiresCommandCanExecute(object target, CanExecuteRoutedEventArgs e) {
 			try {
-				e.CanExecute = this.Editor.InEditMode;
+				e.CanExecute = this.IsEditorInEditMode();
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.EditSelectAllButWiresCommandCanExecute", exception);
 				this.ReportException(exception);
@@ -297,7 +303,7 @@ namespace LogicCircuit {
 
 		private void EditUnselectAllWiresCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
-				if(this.Editor.InEditMode && 0 < this.Editor.SelectionCount) {
+				if(this.IsEditorInEditMode() && 0 < this.Editor.SelectionCount) {
 					this.Editor.UnselectAllWires();
 				}
 			} catch(Exception exception) {
@@ -308,7 +314,7 @@ namespace LogicCircuit {
 
 		private void EditUnselectAllWiresCommandCanExecute(object target, CanExecuteRoutedEventArgs e) {
 			try {
-				e.CanExecute = this.Editor.InEditMode && 0 < this.Editor.SelectionCount;
+				e.CanExecute = (this.IsEditorInEditMode() && 0 < this.Editor.SelectionCount);
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.EditUnselectAllWiresCommandCanExecute", exception);
 				this.ReportException(exception);
@@ -317,7 +323,7 @@ namespace LogicCircuit {
 
 		private void EditUnselectAllButWiresCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
-				if(this.Editor.InEditMode && 0 < this.Editor.SelectionCount) {
+				if(this.IsEditorInEditMode() && 0 < this.Editor.SelectionCount) {
 					this.Editor.UnselectAllButWires();
 				}
 			} catch(Exception exception) {
@@ -328,7 +334,7 @@ namespace LogicCircuit {
 
 		private void EditUnselectAllButWiresCommandCanExecute(object target, CanExecuteRoutedEventArgs e) {
 			try {
-				e.CanExecute = this.Editor.InEditMode && 0 < this.Editor.SelectionCount;
+				e.CanExecute = (this.IsEditorInEditMode() && 0 < this.Editor.SelectionCount);
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.EditUnselectAllButWiresCommandCanExecute", exception);
 				this.ReportException(exception);
@@ -337,7 +343,7 @@ namespace LogicCircuit {
 
 		private void EditSelectAllProbesCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
-				if(this.Editor.InEditMode) {
+				if(this.IsEditorInEditMode()) {
 					this.Editor.SelectAllProbes(false);
 				}
 			} catch(Exception exception) {
@@ -348,7 +354,7 @@ namespace LogicCircuit {
 
 		private void EditSelectAllProbesCommandCanExecute(object target, CanExecuteRoutedEventArgs e) {
 			try {
-				e.CanExecute = this.Editor.InEditMode;
+				e.CanExecute = this.IsEditorInEditMode();
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.EditSelectAllProbesCommandCanExecute", exception);
 				this.ReportException(exception);
@@ -357,7 +363,7 @@ namespace LogicCircuit {
 
 		private void EditSelectAllProbesWithWireCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
-				if(this.Editor.InEditMode) {
+				if(this.IsEditorInEditMode()) {
 					this.Editor.SelectAllProbes(true);
 				}
 			} catch(Exception exception) {
@@ -368,7 +374,7 @@ namespace LogicCircuit {
 
 		private void EditSelectAllProbesWithWireCommandCanExecute(object target, CanExecuteRoutedEventArgs e) {
 			try {
-				e.CanExecute = this.Editor.InEditMode;
+				e.CanExecute = this.IsEditorInEditMode();
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.EditSelectAllProbesWithWireCommandCanExecute", exception);
 				this.ReportException(exception);
@@ -377,7 +383,7 @@ namespace LogicCircuit {
 
 		private void CircuitProjectCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
-				if(this.Editor.InEditMode) {
+				if(this.IsEditorInEditMode()) {
 					this.Editor.Edit(this.Editor.CircuitProject.ProjectSet.Project);
 				}
 			} catch(Exception exception) {
@@ -388,7 +394,7 @@ namespace LogicCircuit {
 
 		private void CircuitProjectCommandCanExecuted(object target, CanExecuteRoutedEventArgs e) {
 			try {
-				e.CanExecute = this.Editor.InEditMode;
+				e.CanExecute = this.IsEditorInEditMode();
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.CircuitProjectCommandCanExecuted", exception);
 				this.ReportException(exception);
@@ -397,7 +403,7 @@ namespace LogicCircuit {
 
 		private void CircuitCurrentCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
-				if(this.Editor.InEditMode) {
+				if(this.IsEditorInEditMode()) {
 					this.Editor.Edit(this.LogicalCircuit());
 				}
 			} catch(Exception exception) {
@@ -408,7 +414,7 @@ namespace LogicCircuit {
 
 		private void CircuitCurrentCommandCanExecuted(object target, CanExecuteRoutedEventArgs e) {
 			try {
-				e.CanExecute = this.Editor.InEditMode;
+				e.CanExecute = this.IsEditorInEditMode();
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.CircuitCurrentCommandCanExecuted", exception);
 				this.ReportException(exception);
@@ -417,7 +423,7 @@ namespace LogicCircuit {
 
 		private void CircuitNewCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
-				if(this.Editor.InEditMode) {
+				if(this.IsEditorInEditMode()) {
 					CircuitProject circuitProject = this.Editor.CircuitProject;
 					circuitProject.InTransaction(() => this.Editor.OpenLogicalCircuit(circuitProject.LogicalCircuitSet.Create()));
 				}
@@ -429,7 +435,7 @@ namespace LogicCircuit {
 
 		private void CircuitNewCommandCanExecuted(object target, CanExecuteRoutedEventArgs e) {
 			try {
-				e.CanExecute = this.Editor.InEditMode;
+				e.CanExecute = this.IsEditorInEditMode();
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.CircuitNewCommandCanExecuted", exception);
 				this.ReportException(exception);
@@ -438,7 +444,7 @@ namespace LogicCircuit {
 
 		private void CircuitDeleteCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
-				if(this.Editor.InEditMode && 1 < this.Editor.CircuitProject.LogicalCircuitSet.Count()) {
+				if(this.IsEditorInEditMode() && 1 < this.Editor.CircuitProject.LogicalCircuitSet.Count()) {
 					this.Editor.DeleteLogicalCircuit();
 				}
 			} catch(Exception exception) {
@@ -449,7 +455,7 @@ namespace LogicCircuit {
 
 		private void CircuitDeleteCommandCanExecute(object target, CanExecuteRoutedEventArgs e) {
 			try {
-				e.CanExecute = (this.Editor.InEditMode && 1 < this.Editor.CircuitProject.LogicalCircuitSet.Count());
+				e.CanExecute = (this.IsEditorInEditMode() && 1 < this.Editor.CircuitProject.LogicalCircuitSet.Count());
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.CircuitDeleteCommandCanExecute", exception);
 				this.ReportException(exception);
@@ -458,15 +464,17 @@ namespace LogicCircuit {
 
 		private void ToolsReportCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
-				//LogicalCircuit root = this.Editor.LogicalCircuit;
-				//CircuitMap map = this.Editor.CircuitRunner.VisibleMap;
-				//if(map != null && !this.Editor.InEditMode) {
-				//    map = map.Root;
-				//    root = map.Circuit;
-				//}
-				//DialogReport dialog = new DialogReport(root);
-				//dialog.Owner = this;
-				//dialog.ShowDialog();
+				if(this.Editor != null) {
+					//LogicalCircuit root = this.Editor.LogicalCircuit;
+					//CircuitMap map = this.Editor.CircuitRunner.VisibleMap;
+					//if(map != null && !this.Editor.InEditMode) {
+					//    map = map.Root;
+					//    root = map.Circuit;
+					//}
+					//DialogReport dialog = new DialogReport(root);
+					//dialog.Owner = this;
+					//dialog.ShowDialog();
+				}
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.ToolsReportCommandExecuted", exception);
 				this.ReportException(exception);
@@ -475,7 +483,7 @@ namespace LogicCircuit {
 
 		private void ToolsOscilloscopeCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
-				//if(this.Editor.CircuitRunner.IsTurnedOn &&
+				//if(this.Editor != null && this.Editor.CircuitRunner.IsTurnedOn &&
 				//    this.Editor.CircuitRunner.CircuitState.HasProbes &&
 				//    this.Editor.CircuitRunner.DialogOscilloscope == null
 				//) {
@@ -491,7 +499,7 @@ namespace LogicCircuit {
 
 		private void ToolsOscilloscopeCommandCanExecute(object target, CanExecuteRoutedEventArgs e) {
 			try {
-				//e.CanExecute = (
+				//e.CanExecute = (this.Editor != null &&
 				//    this.Editor.CircuitRunner.IsTurnedOn &&
 				//    this.Editor.CircuitRunner.CircuitState.HasProbes &&
 				//    this.Editor.CircuitRunner.DialogOscilloscope == null
@@ -504,17 +512,19 @@ namespace LogicCircuit {
 
 		private void ToolsOptionsCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
-				//DialogOptions dialog = new DialogOptions(this);
-				//dialog.Owner = this;
-				//bool? result = dialog.ShowDialog();
-				//if(result.HasValue && result.Value) {
-				//    //this.OnPropertyChanged("CircuitDescriptorList");
-				//    //this.OnPropertyChanged("GridBrush");
-				//    //this.Editor.Refresh();
-				//    //if(this.Editor.CircuitRunner.IsTurnedOn) {
-				//    //    this.Editor.CircuitRunner.VisibleMap.Redraw();
-				//    //}
-				//}
+				if(this.Editor != null) {
+					//DialogOptions dialog = new DialogOptions(this);
+					//dialog.Owner = this;
+					//bool? result = dialog.ShowDialog();
+					//if(result.HasValue && result.Value) {
+					//    //this.OnPropertyChanged("CircuitDescriptorList");
+					//    //this.OnPropertyChanged("GridBrush");
+					//    //this.Editor.Refresh();
+					//    //if(this.Editor.CircuitRunner.IsTurnedOn) {
+					//    //    this.Editor.CircuitRunner.VisibleMap.Redraw();
+					//    //}
+					//}
+				}
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.ToolsOptionsCommandExecuted", exception);
 				this.ReportException(exception);

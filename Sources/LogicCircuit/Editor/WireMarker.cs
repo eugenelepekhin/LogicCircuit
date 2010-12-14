@@ -36,11 +36,10 @@ namespace LogicCircuit {
 			}
 
 			public override void Move(Editor editor, Point point) {
-				throw new NotImplementedException();
+				editor.MoveSelection(point);
 			}
 
 			public override void Commit(Editor editor, Point point) {
-				throw new NotImplementedException();
 			}
 		}
 	}

@@ -215,7 +215,7 @@ namespace LogicCircuit {
 		private class JamItem : Jam {
 			public JamItem(BasePin pin, CircuitGlyph symbol) {
 				this.Pin = pin;
-				this.CircuitGlyph = symbol;
+				this.CircuitSymbol = symbol;
 			}
 		}
 	}
