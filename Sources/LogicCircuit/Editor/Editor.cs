@@ -837,43 +837,6 @@ namespace LogicCircuit {
 
 		private void SymbolMouseDown(Symbol symbol, Canvas diagram, MouseButtonEventArgs e) {
 			if(this.InEditMode && e.ChangedButton == MouseButton.Left) {
-				/*Marker marker = symbol as Marker;
-				if(marker != null) {
-					if(Keyboard.Modifiers == ModifierKeys.Shift && marker is WireMarker) {
-						Wire w = ((WireMarker)marker).Wire;
-						this.ClearSelection();
-						this.SelectConductor(w);
-						this.StartMove(diagram, this.Marker(w), e.GetPosition(diagram));
-					} else if(Keyboard.Modifiers == ModifierKeys.Shift && marker is WirePointMarker) {
-						Wire w = ((WirePointMarker)marker).WireMarker.Wire;
-						this.ClearSelection();
-						this.SelectConductor(w);
-						this.StartMove(diagram, this.Marker(w), e.GetPosition(diagram));
-					} else if(Keyboard.Modifiers == (ModifierKeys.Shift | ModifierKeys.Control) && marker is WireMarker) {
-						this.UnselectConductor(((WireMarker)marker).Wire);
-					} else if(Keyboard.Modifiers == (ModifierKeys.Shift | ModifierKeys.Control) && marker is WirePointMarker) {
-						this.UnselectConductor(((WirePointMarker)marker).WireMarker.Wire);
-					} else if((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control) {
-						this.Unselect(marker);
-					} else if(Keyboard.Modifiers == ModifierKeys.Alt && marker is WireMarker) {
-						this.Split(((WireMarker)marker).Wire, Plotter.GridPoint(e.GetPosition(diagram)));
-					} else if(Keyboard.Modifiers == ModifierKeys.Alt && marker is WirePointMarker && this.SelectionCount == 2) {
-						WirePointMarker pointMarker = (WirePointMarker)marker;
-						Wire wire1 = pointMarker.WireMarker.Wire;
-						GridPoint point = Plotter.GridPoint(pointMarker.ScreenPoint);
-						foreach(Symbol s in this.selection.Keys) {
-							Wire wire2 = s as Wire;
-							if(wire2 != null && wire2 != wire1 && (wire2.Point1 == point || wire2.Point2 == point)) {
-								this.Merge(wire1, wire2);
-								break;
-							}
-						}
-					} else {
-						this.StartMove(diagram, marker, e.GetPosition(diagram));
-					}
-					return;
-				}*/
-
 				Wire wire = symbol as Wire;
 				if(wire != null) {
 					if(Keyboard.Modifiers == ModifierKeys.Control) {
@@ -909,6 +872,46 @@ namespace LogicCircuit {
 		}
 
 		private void MarkerMouseDown(Marker marker, Canvas diagram, MouseButtonEventArgs e) {
+			if((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control) {
+				this.Unselect(marker);
+				return;
+			}
+			WireMarker wireMarker = marker as WireMarker;
+			if(wireMarker != null) {
+				Wire wire = wireMarker.Wire;
+				if(Keyboard.Modifiers == ModifierKeys.Shift) {
+					this.ClearSelection();
+					this.SelectConductor(wire);
+					this.StartMove(diagram, this.FindMarker(wire), e.GetPosition(diagram));
+					return;
+				} else if(Keyboard.Modifiers == (ModifierKeys.Shift | ModifierKeys.Control)) {
+					this.UnselectConductor(wire);
+					return;
+				} else if(Keyboard.Modifiers == ModifierKeys.Alt) {
+					this.Split(wire, Symbol.GridPoint(e.GetPosition(diagram)));
+					return;
+				}
+			}
+			this.StartMove(diagram, marker, e.GetPosition(diagram));
+			
+			//} else if(Keyboard.Modifiers == ModifierKeys.Shift && marker is WirePointMarker) {
+			//    Wire w = ((WirePointMarker)marker).WireMarker.Wire;
+			//    this.ClearSelection();
+			//    this.SelectConductor(w);
+			//    this.StartMove(diagram, this.Marker(w), e.GetPosition(diagram));
+			//} else if(Keyboard.Modifiers == (ModifierKeys.Shift | ModifierKeys.Control) && marker is WirePointMarker) {
+			//    this.UnselectConductor(((WirePointMarker)marker).WireMarker.Wire);
+			//} else if(Keyboard.Modifiers == ModifierKeys.Alt && marker is WirePointMarker && this.SelectionCount == 2) {
+			//    WirePointMarker pointMarker = (WirePointMarker)marker;
+			//    Wire wire1 = pointMarker.WireMarker.Wire;
+			//    GridPoint point = Plotter.GridPoint(pointMarker.ScreenPoint);
+			//    foreach(Symbol s in this.selection.Keys) {
+			//        Wire wire2 = s as Wire;
+			//        if(wire2 != null && wire2 != wire1 && (wire2.Point1 == point || wire2.Point2 == point)) {
+			//            this.Merge(wire1, wire2);
+			//            break;
+			//        }
+			//    }
 		}
 
 		private void JamMouseDown(Jam jam, Canvas diagram, MouseButtonEventArgs e) {
