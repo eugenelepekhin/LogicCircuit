@@ -64,6 +64,30 @@
     <Compile Include="Dialog\DialogAbout.xaml.cs">
       <DependentUpon>DialogAbout.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialog\DialogButton.xaml.cs">
+      <DependentUpon>DialogButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\DialogCircuit.xaml.cs">
+      <DependentUpon>DialogCircuit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\DialogConstant.xaml.cs">
+      <DependentUpon>DialogConstant.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\DialogOptions.xaml.cs">
+      <DependentUpon>DialogOptions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\DialogPin.xaml.cs">
+      <DependentUpon>DialogPin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\DialogProject.xaml.cs">
+      <DependentUpon>DialogProject.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\DialogRAM.xaml.cs">
+      <DependentUpon>DialogRAM.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\DialogROM.xaml.cs">
+      <DependentUpon>DialogROM.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Editor\CircuitDescriptor.cs" />
     <Compile Include="Editor\CircuitDescriptorList.cs" />
     <Compile Include="Editor\CircuitSymbolMarker.cs" />
@@ -179,7 +203,39 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Dialog\DialogButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialog\DialogCircuit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialog\DialogConstant.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Dialog\DialogMessage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialog\DialogOptions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialog\DialogPin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialog\DialogProject.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialog\DialogRAM.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialog\DialogROM.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

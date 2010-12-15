@@ -513,17 +513,17 @@ namespace LogicCircuit {
 		private void ToolsOptionsCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
 				if(this.Editor != null) {
-					//DialogOptions dialog = new DialogOptions(this);
-					//dialog.Owner = this;
-					//bool? result = dialog.ShowDialog();
-					//if(result.HasValue && result.Value) {
-					//    //this.OnPropertyChanged("CircuitDescriptorList");
-					//    //this.OnPropertyChanged("GridBrush");
-					//    //this.Editor.Refresh();
-					//    //if(this.Editor.CircuitRunner.IsTurnedOn) {
-					//    //    this.Editor.CircuitRunner.VisibleMap.Redraw();
-					//    //}
-					//}
+					DialogOptions dialog = new DialogOptions(this);
+					dialog.Owner = this;
+					bool? result = dialog.ShowDialog();
+					if(result.HasValue && result.Value) {
+						//TODO: refresh shape type in the editor
+						this.NotifyPropertyChanged("Editor");
+						this.Editor.Refresh();
+						//if(this.Editor.CircuitRunner.IsTurnedOn) {
+						//    this.Editor.CircuitRunner.VisibleMap.Redraw();
+						//}
+					}
 				}
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.ToolsOptionsCommandExecuted", exception);

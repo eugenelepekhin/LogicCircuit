@@ -339,40 +339,40 @@ namespace LogicCircuit {
 		}
 
 		public void Edit(Project project) {
-			//Tracer.Assert(project == this.Project);
-			//DialogProject dialog = new DialogProject(project);
-			//dialog.Owner = this.MainFrame;
-			//dialog.ShowDialog();
+			Tracer.Assert(project == this.Project);
+			DialogProject dialog = new DialogProject(project);
+			dialog.Owner = this.Mainframe;
+			dialog.ShowDialog();
 		}
 
 		public void Edit(LogicalCircuit logicalCircuit) {
-			//DialogCircuit dialog = new DialogCircuit(logicalCircuit);
-			//dialog.Owner = this.MainFrame;
-			//dialog.ShowDialog();
+			DialogCircuit dialog = new DialogCircuit(logicalCircuit);
+			dialog.Owner = this.Mainframe;
+			dialog.ShowDialog();
 		}
 
 		private void Edit(CircuitButton button) {
-			//DialogButton dialog = new DialogButton(button);
-			//dialog.Owner = this.MainFrame;
-			//dialog.ShowDialog();
+			DialogButton dialog = new DialogButton(button);
+			dialog.Owner = this.Mainframe;
+			dialog.ShowDialog();
 		}
 
 		private void Edit(Constant constant) {
-			//DialogConstant dialog = new DialogConstant(constant);
-			//dialog.Owner = this.MainFrame;
-			//dialog.ShowDialog();
+			DialogConstant dialog = new DialogConstant(constant);
+			dialog.Owner = this.Mainframe;
+			dialog.ShowDialog();
 		}
 
 		private void Edit(Memory memory) {
-			//Window dialog = memory.Writable ? (Window)new DialogRAM(memory) : (Window)new DialogROM(memory);
-			//dialog.Owner = this.MainFrame;
-			//dialog.ShowDialog();
+			Window dialog = memory.Writable ? (Window)new DialogRAM(memory) : (Window)new DialogROM(memory);
+			dialog.Owner = this.Mainframe;
+			dialog.ShowDialog();
 		}
 
 		private void Edit(Pin pin) {
-			//DialogPin dialog = new DialogPin(pin);
-			//dialog.Owner = this.MainFrame;
-			//dialog.ShowDialog();
+			DialogPin dialog = new DialogPin(pin);
+			dialog.Owner = this.Mainframe;
+			dialog.ShowDialog();
 		}
 
 		//--- Selection ---
@@ -800,7 +800,11 @@ namespace LogicCircuit {
 					} else {
 						Marker marker = element.DataContext as Marker;
 						if(marker != null) {
-							this.MarkerMouseDown(marker, diagram, e);
+							if(e.ClickCount < 2) {
+								this.MarkerMouseDown(marker, diagram, e);
+							} else {
+								this.MarkerDoubleClick(marker);
+							}
 						}
 					}
 				} else if(this.InEditMode) { // click on the white space of the diagram
@@ -918,8 +922,8 @@ namespace LogicCircuit {
 		}
 
 		private void SymbolDoubleClick(Symbol symbol) {
-			if(this.InEditMode) {
-				/*Marker marker = symbol as Marker;
+			/*if(this.InEditMode) {
+				Marker marker = symbol as Marker;
 				if(marker != null) {
 					CircuitSymbolMarker circuitSymbolMarker = marker as CircuitSymbolMarker;
 					if(circuitSymbolMarker != null) {
@@ -949,9 +953,41 @@ namespace LogicCircuit {
 							return;
 						}
 					}
-				}*/
+				}
 			} else {
 				
+			}*/
+		}
+		private void MarkerDoubleClick(Marker marker) {
+			if(this.InEditMode) {
+				CircuitSymbolMarker circuitSymbolMarker = marker as CircuitSymbolMarker;
+				if(circuitSymbolMarker != null) {
+					LogicalCircuit lc = circuitSymbolMarker.CircuitSymbol.Circuit as LogicalCircuit;
+					if(lc != null) {
+						this.OpenLogicalCircuit(lc);
+						return;
+					}
+					CircuitButton cb = circuitSymbolMarker.CircuitSymbol.Circuit as CircuitButton;
+					if(cb != null) {
+						this.Edit(cb);
+						return;
+					}
+					Constant ct = circuitSymbolMarker.CircuitSymbol.Circuit as Constant;
+					if(ct != null) {
+						this.Edit(ct);
+						return;
+					}
+					Memory m = circuitSymbolMarker.CircuitSymbol.Circuit as Memory;
+					if(m != null) {
+						this.Edit(m);
+						return;
+					}
+					Pin pin = circuitSymbolMarker.CircuitSymbol.Circuit as Pin;
+					if(pin != null) {
+						this.Edit(pin);
+						return;
+					}
+				}
 			}
 		}
 	}

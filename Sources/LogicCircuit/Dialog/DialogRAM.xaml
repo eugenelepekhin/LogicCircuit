@@ -1,0 +1,60 @@
+﻿<Window x:Class="LogicCircuit.DialogRAM"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:lc="clr-namespace:LogicCircuit"
+	FlowDirection="{Binding Source={x:Static lc:Resources.FlowDirection}, Mode=OneTime}"
+	Title="{Binding Source={x:Static lc:Resources.RAMNotation}, Mode=OneTime}"
+	MinWidth="320" MinHeight="240"
+	Width="{Binding Path=WindowLocation.Width, Mode=TwoWay}"
+	Height="{Binding Path=WindowLocation.Height, Mode=TwoWay}"
+	WindowState="{Binding Path=WindowLocation.WindowState, Mode=TwoWay}"
+	Style="{DynamicResource DialogWindow}"
+	ResizeMode="CanResizeWithGrip"
+	WindowStartupLocation="CenterOwner"
+	SizeToContent="Manual"
+	FocusManager.FocusedElement="{Binding ElementName=addressBitWidth}"
+>
+	<Window.Resources>
+		<Style TargetType="{x:Type TextBox}">
+			<Setter Property="Margin" Value="3,3,8,3"/>
+		</Style>
+
+		<Style TargetType="{x:Type Label}">
+			<Setter Property="Margin" Value="3"/>
+			<Setter Property="HorizontalContentAlignment" Value="Right"/>
+		</Style>
+
+		<Style TargetType="{x:Type ComboBox}">
+			<Setter Property="Margin" Value="3"/>
+			<Setter Property="MinWidth" Value="65"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+		</Style>
+	</Window.Resources>
+
+	<Grid Margin="3">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<Label Grid.Row="0" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleAddressBitWidth}, Mode=OneTime}" Target="{Binding ElementName=addressBitWidth}"/>
+		<ComboBox Grid.Row="0" Grid.Column="1" Name="addressBitWidth"/>
+
+		<Label Grid.Row="1" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleDataBitWidth}, Mode=OneTime}" Target="{Binding ElementName=dataBitWidth}"/>
+		<ComboBox Grid.Row="1" Grid.Column="1" Name="dataBitWidth"/>
+
+		<Label Grid.Row="2" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleWriteOn}, Mode=OneTime}" Target="{Binding ElementName=writeOn}"/>
+		<ComboBox Grid.Row="2" Grid.Column="1" Name="writeOn" MinWidth="150"/>
+
+		<StackPanel Grid.Row="3" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+			<Button Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="ButtonOkClick"/>
+			<Button Content="{Binding Source={x:Static lc:Resources.TitleCancel}, Mode=OneTime}" IsCancel="True"/>
+		</StackPanel>
+	</Grid>
+</Window>
