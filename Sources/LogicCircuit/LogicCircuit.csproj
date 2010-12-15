@@ -61,6 +61,9 @@
     <Compile Include="Conductor.cs" />
     <Compile Include="ConductorMap.cs" />
     <Compile Include="CustomCommands.cs" />
+    <Compile Include="Dialog\DialogAbout.xaml.cs">
+      <DependentUpon>DialogAbout.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Editor\CircuitDescriptor.cs" />
     <Compile Include="Editor\CircuitDescriptorList.cs" />
     <Compile Include="Editor\CircuitSymbolMarker.cs" />
@@ -172,6 +175,10 @@
       <DependentUpon>TracerMessage.resx</DependentUpon>
     </Compile>
     <Compile Include="XmlHelper.cs" />
+    <Page Include="Dialog\DialogAbout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Dialog\DialogMessage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

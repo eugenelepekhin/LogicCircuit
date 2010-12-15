@@ -1,0 +1,53 @@
+﻿<Window
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	x:Class="LogicCircuit.DialogAbout"
+	xmlns:lc="clr-namespace:LogicCircuit"
+	FlowDirection="{Binding Source={x:Static lc:Resources.FlowDirection}, Mode=OneTime}"
+	Title="{Binding Source={x:Static lc:Resources.TitleAbout}, Mode=OneTime}"
+	Style="{DynamicResource DialogWindow}"
+	WindowStartupLocation="CenterOwner"
+	SizeToContent="WidthAndHeight"
+>
+	<Window.Resources>
+		<Style TargetType="{x:Type TextBlock}">
+			<Setter Property="Foreground" Value="#FFE5A48E"/>
+			<Setter Property="FontSize" Value="16"/>
+			<Setter Property="Margin" Value="5"/>
+		</Style>
+	</Window.Resources>
+
+	<Grid Background="#FF36884A">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+		<StackPanel Grid.Row="0" Orientation="Horizontal">
+			<!--<Image Width="256" Height="256" Margin="32,16,16,16" Source="Properties\LogicCircuit.png"/>-->
+			<Image Width="256" Height="256" Margin="32,16,16,16" Source="pack://application:,,,/Properties/LogicCircuit.png"/>
+			<TextBlock
+				Text="{Binding Source={x:Static lc:Resources.TitleApplication}, Mode=OneTime}" VerticalAlignment="Center" HorizontalAlignment="Center"
+				FontSize="36" FontWeight="Bold" Margin="16,16,64,16"
+			/>
+		</StackPanel>
+
+		<StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+			<TextBlock Text="{Binding Source={x:Static lc:Resources.TitleVersion}, Mode=OneTime}"/>
+			<TextBlock Text="{Binding Path=Version}"/>
+		</StackPanel>
+
+		<StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,16">
+			<TextBlock Text="{Binding Source={x:Static lc:Resources.TitleWeb}, Mode=OneTime}"/>
+			<TextBlock>
+				<Hyperlink RequestNavigate="WebRequestNavigate" Foreground="#FFE5A48E"
+					NavigateUri="{Binding Source={x:Static lc:Resources.WebSiteUri}, Mode=OneTime}"
+				>http://www.LogicCircuit.org/</Hyperlink>
+			</TextBlock>
+		</StackPanel>
+
+		<Button Grid.Row="3" Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" IsCancel="True" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+	</Grid>
+</Window>

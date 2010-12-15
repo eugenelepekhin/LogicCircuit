@@ -542,16 +542,9 @@ namespace LogicCircuit {
 
 		private void HelpAboutCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
-				//DialogAbout dialog = new DialogAbout();
-				//dialog.Owner = this;
-				//dialog.ShowDialog();
-				//for(int i = 0; i < 100; i++) {
-				//    this.EditUndoCommandExecuted(null, null);
-				//    this.EditRedoCommandExecuted(null, null);
-				//}
-				//dialog = new DialogAbout();
-				//dialog.Owner = this;
-				//dialog.ShowDialog();
+				DialogAbout dialog = new DialogAbout();
+				dialog.Owner = this;
+				dialog.ShowDialog();
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.HelpAboutCommandExecuted", exception);
 				this.ReportException(exception);
