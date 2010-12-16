@@ -26,8 +26,7 @@
 		</Grid.RowDefinitions>
 
 		<StackPanel Grid.Row="0" Orientation="Horizontal">
-			<!--<Image Width="256" Height="256" Margin="32,16,16,16" Source="Properties\LogicCircuit.png"/>-->
-			<Image Width="256" Height="256" Margin="32,16,16,16" Source="pack://application:,,,/Properties/LogicCircuit.png"/>
+			<Image Width="256" Height="256" Margin="32,16,16,16" Source="..\Properties\LogicCircuit.png"/>
 			<TextBlock
 				Text="{Binding Source={x:Static lc:Resources.TitleApplication}, Mode=OneTime}" VerticalAlignment="Center" HorizontalAlignment="Center"
 				FontSize="36" FontWeight="Bold" Margin="16,16,64,16"
