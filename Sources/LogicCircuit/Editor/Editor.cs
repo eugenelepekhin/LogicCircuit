@@ -661,6 +661,9 @@ namespace LogicCircuit {
 			this.Mainframe.Status = Resources.TipOnStartWire;
 		}
 
+		private void StartAreaSelection(Canvas diagram, Point point) {
+		}
+
 		private void FinishMove(Point position, bool withWires) {
 			this.CancelMove();
 		}
@@ -684,22 +687,22 @@ namespace LogicCircuit {
 			return null;
 		}
 
-		private bool JamExistsNear(GridPoint point) {
+		private Jam JamAt(GridPoint point) {
 			foreach(CircuitSymbol symbol in this.Project.LogicalCircuit.CircuitSymbols()) {
 				if(symbol.X <= point.X && point.X <= symbol.X + symbol.Circuit.SymbolWidth && symbol.Y <= point.Y && point.Y <= symbol.Y + symbol.Circuit.SymbolHeight) {
 					foreach(Jam jam in symbol.Jams()) {
 						if(jam.AbsolutePoint == point) {
-							return true;
+							return jam;
 						}
 					}
 				}
 			}
-			return false;
+			return null;
 		}
 
-		private bool JamExistsNear(Point point) {
+		private Jam JamNear(Point point) {
 			GridPoint gridPoint = Symbol.GridPoint(point);
-			return Editor.IsPinClose(point, Symbol.ScreenPoint(gridPoint)) && this.JamExistsNear(gridPoint);
+			return Editor.IsPinClose(point, Symbol.ScreenPoint(gridPoint)) ? this.JamAt(gridPoint) : null;
 		}
 
 		private bool Split(Wire wire, GridPoint point) {
@@ -781,46 +784,62 @@ namespace LogicCircuit {
 
 		public void DiagramMouseDown(Canvas diagram, MouseButtonEventArgs e) {
 			FrameworkElement element = e.OriginalSource as FrameworkElement;
-			if(element != null) {
-				if(element != diagram) { // something on the diagram was clicked
-					Symbol symbol = element.DataContext as Symbol;
-					Jam jam = element.DataContext as Jam;
-					if(jam != null && !(element is Ellipse)) {
-						symbol = jam.CircuitSymbol;
-						jam = null;
-					}
-					if(symbol != null) {
-						if(e.ClickCount < 2) {
-							this.SymbolMouseDown(symbol, diagram, e);
-						} else if(e.ChangedButton == MouseButton.Left) {
-							this.SymbolDoubleClick(symbol);
-						}
-					} else if(jam != null) {
-						this.JamMouseDown(jam, diagram, e);
+			Tracer.Assert(element != null);
+			Marker marker = null;
+			Symbol symbol = null;
+			Jam jam = null;
+			if(element != diagram) { // something on the diagram was clicked
+				marker = element.DataContext as Marker;
+				if(marker == null) {
+					jam = element.DataContext as Jam;
+					if(jam == null) {
+						symbol = element.DataContext as Symbol;
+						Tracer.Assert(symbol != null);
 					} else {
-						Marker marker = element.DataContext as Marker;
-						if(marker != null) {
-							if(e.ClickCount < 2) {
-								this.MarkerMouseDown(marker, diagram, e);
-							} else {
-								this.MarkerDoubleClick(marker);
-							}
+						if(!(element is Ellipse)) { // Jam's notations - text on circuit symbol was clicked. Treat this as symbol click
+							symbol = jam.CircuitSymbol;
 						}
 					}
-				} else if(this.InEditMode) { // click on the white space of the diagram
-					// search for near by wire and jam
-					Point point = e.GetPosition(diagram);
-					Wire wire = this.FindWireNear(point);
-					if(wire != null) {
-						Marker marker = this.FindMarker(wire);
-						if(marker != null) {
-							this.MarkerMouseDown(marker, diagram, e);
-						} else if(this.JamExistsNear(point)) {
-							this.StartWire(diagram, point);
-						} else {
-							this.SymbolMouseDown(wire, diagram, e);
-						}
+				}
+			} else { // click on the empty space of the diagram
+				Point point = e.GetPosition(diagram);
+				Wire wire = this.FindWireNear(point);
+				if(wire != null) {
+					marker = this.FindMarker(wire);
+					if(marker == null) {
+						symbol = wire;
 					}
+				} else {
+					jam = this.JamNear(point);
+				}
+			}
+			if(marker != null) {
+				if(e.ClickCount < 2) {
+					this.MarkerMouseDown(marker, diagram, e);
+				} else {
+					this.MarkerDoubleClick(marker);
+				}
+			} else if(symbol != null) {
+				if(e.ClickCount < 2) {
+					this.SymbolMouseDown(symbol, diagram, e);
+				} else {
+					this.SymbolDoubleClick(symbol);
+				}
+			} else if(jam != null) {
+				if(e.ClickCount < 2) {
+					this.JamMouseDown(jam, diagram, e);
+				} else {
+					this.SymbolDoubleClick(jam.CircuitSymbol);
+				}
+			} else if(this.InEditMode) { // Nothing was clicked on the diagram
+				if(e.ClickCount < 2) {
+					if(Keyboard.Modifiers != ModifierKeys.Shift) {
+						this.ClearSelection();
+					}
+					this.StartAreaSelection(diagram, e.GetPosition(diagram));
+				} else {
+					this.ClearSelection();
+					this.Edit(this.Project.LogicalCircuit);
 				}
 			}
 		}
@@ -850,10 +869,6 @@ namespace LogicCircuit {
 						this.SelectConductor(wire);
 					} else if(Keyboard.Modifiers == (ModifierKeys.Shift | ModifierKeys.Control)) {
 						this.SelectConductor(wire);
-					//} else if(CircuitEditor.IsPinClose(CircuitEditor.WireEndPoint(Plotter.ScreenPoint(wire.Point1)), point)) {
-					//	this.StartWire(Plotter.ScreenPoint(wire.Point1));
-					//} else if(CircuitEditor.IsPinClose(CircuitEditor.WireEndPoint(Plotter.ScreenPoint(wire.Point2)), point)) {
-					//	this.StartWire(Plotter.ScreenPoint(wire.Point2));
 					} else {
 						this.ClearSelection();
 						this.StartMove(diagram, this.SelectSymbol(wire), e.GetPosition(diagram));
@@ -919,6 +934,9 @@ namespace LogicCircuit {
 		}
 
 		private void JamMouseDown(Jam jam, Canvas diagram, MouseButtonEventArgs e) {
+			if(this.InEditMode && e.ChangedButton == MouseButton.Left) {
+				this.StartWire(diagram, e.GetPosition(diagram));
+			}
 		}
 
 		private void SymbolDoubleClick(Symbol symbol) {
