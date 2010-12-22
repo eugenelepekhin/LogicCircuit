@@ -27,11 +27,20 @@ namespace LogicCircuit {
 			public override FrameworkElement Glyph { get { return this.MarkerLine; } }
 
 			public override void Move(Editor editor, Point point) {
-				this.MarkerLine.X2 = point.X;
-				this.MarkerLine.Y2 = point.Y;
+				Point end = Symbol.ScreenPoint(Symbol.GridPoint(point));
+				this.MarkerLine.X2 = end.X;
+				this.MarkerLine.Y2 = end.Y;
 			}
 
-			public override void Commit(Editor editor, Point point) {
+			public override void Commit(Editor editor, Point point, bool withWires) {
+				this.Move(editor, point);
+				Wire wire = editor.CreateWire(this.Point1, this.Point2);
+				if(wire == null) {
+					wire = editor.FindWireNear(point);
+					if(wire != null) {
+						editor.Select(wire);
+					}
+				}
 			}
 		}
 	}

@@ -18,6 +18,7 @@ namespace LogicCircuit {
 			public WireMarker(Wire wire) {
 				this.Wire = wire;
 				Line line = Symbol.Skin<Line>(SymbolShape.MarkerLine);
+				line.DataContext = this;
 				line.X1 = Symbol.ScreenPoint(this.Wire.X1);
 				line.Y1 = Symbol.ScreenPoint(this.Wire.Y1);
 				line.X2 = Symbol.ScreenPoint(this.Wire.X2);
@@ -39,7 +40,7 @@ namespace LogicCircuit {
 				editor.MoveSelection(point);
 			}
 
-			public override void Commit(Editor editor, Point point) {
+			public override void Commit(Editor editor, Point point, bool withWires) {
 			}
 		}
 	}

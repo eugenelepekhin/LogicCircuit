@@ -1012,5 +1012,12 @@ namespace LogicCircuit {
  		public static string TipOnCtrlDown {
 			get { return ResourceManager.GetString("TipOnCtrlDown", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Shift+{Ctrl}+Click on wire to select/unselect entire conductor, Alt+Click on selected wire to split, on common point of two to merge..
+		/// </summary>
+ 		public static string TipOnWireSelect {
+			get { return ResourceManager.GetString("TipOnWireSelect", Culture); }
+		}
 	}
 }

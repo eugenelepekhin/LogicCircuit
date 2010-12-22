@@ -27,7 +27,7 @@ namespace LogicCircuit {
 				throw new NotImplementedException();
 			}
 
-			public override void Commit(Editor editor, Point point) {
+			public override void Commit(Editor editor, Point point, bool withWires) {
 				throw new NotImplementedException();
 			}
 		}

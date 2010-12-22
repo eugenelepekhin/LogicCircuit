@@ -31,11 +31,9 @@ namespace LogicCircuit {
 			return this.X ^ this.Y;
 		}
 
-		#if DEBUG
-			public override string ToString() {
-				return string.Format(System.Globalization.CultureInfo.InvariantCulture, "({0}, {1})", this.X, this.Y);
-			}
-		#endif
+		public override string ToString() {
+			return string.Format(System.Globalization.CultureInfo.InvariantCulture, "({0}, {1})", this.X, this.Y);
+		}
 
 		public GridPoint Offset(int x, int y) {
 			return new GridPoint(this.X + x, this.Y + y);

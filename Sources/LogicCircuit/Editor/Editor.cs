@@ -152,20 +152,24 @@ namespace LogicCircuit {
 			}
 		}
 
+		private void Add(Canvas diagram, Wire wire) {
+			Line line = wire.WireGlyph;
+			Point p = Symbol.ScreenPoint(wire.Point1);
+			line.X1 = p.X;
+			line.Y1 = p.Y;
+			p = Symbol.ScreenPoint(wire.Point2);
+			line.X2 = p.X;
+			line.Y2 = p.Y;
+			diagram.Children.Add(line);
+		}
+
 		private void RedrawDiagram() {
 			Canvas diagram = this.Diagram;
 			diagram.Children.Clear();
 			this.wirePoint.Clear();
 			LogicalCircuit logicalCircuit = this.Project.LogicalCircuit;
 			foreach(Wire wire in logicalCircuit.Wires()) {
-				Line line = wire.WireGlyph;
-				Point p = Symbol.ScreenPoint(wire.Point1);
-				line.X1 = p.X;
-				line.Y1 = p.Y;
-				p = Symbol.ScreenPoint(wire.Point2);
-				line.X2 = p.X;
-				line.Y2 = p.Y;
-				diagram.Children.Add(line);
+				this.Add(diagram, wire);
 				this.AddWirePoint(wire.Point1);
 				this.AddWirePoint(wire.Point2);
 			}
@@ -197,6 +201,15 @@ namespace LogicCircuit {
 		}
 
 		//--- Edit Operation
+
+		private Wire CreateWire(GridPoint point1, GridPoint point2) {
+			Wire wire = null;
+			if(point1 != point2) {
+				this.CircuitProject.InTransaction(() => wire = this.CircuitProject.WireSet.Create(this.Project.LogicalCircuit, point1, point2));
+				this.Add(this.Diagram, wire);
+			}
+			return wire;
+		}
 
 		public void Undo() {
 			if(this.CanUndo()) {
@@ -665,6 +678,7 @@ namespace LogicCircuit {
 		}
 
 		private void FinishMove(Point position, bool withWires) {
+			this.movingMarker.Commit(this, position, withWires);
 			this.CancelMove();
 		}
 
@@ -749,6 +763,10 @@ namespace LogicCircuit {
 			});
 			this.Select(wire1);
 			return true;
+		}
+
+		private void ShowStatus(CircuitSymbol symbol) {
+			this.Mainframe.Status = symbol.Circuit.Notation + symbol.Point.ToString();
 		}
 
 		//--- Event Handling ---
@@ -859,32 +877,43 @@ namespace LogicCircuit {
 		}
 
 		private void SymbolMouseDown(Symbol symbol, Canvas diagram, MouseButtonEventArgs e) {
-			if(this.InEditMode && e.ChangedButton == MouseButton.Left) {
-				Wire wire = symbol as Wire;
-				if(wire != null) {
-					if(Keyboard.Modifiers == ModifierKeys.Control) {
-						this.Select(wire);
-					} else if(Keyboard.Modifiers == ModifierKeys.Shift) {
-						this.ClearSelection();
-						this.SelectConductor(wire);
-					} else if(Keyboard.Modifiers == (ModifierKeys.Shift | ModifierKeys.Control)) {
-						this.SelectConductor(wire);
-					} else {
-						this.ClearSelection();
-						this.StartMove(diagram, this.SelectSymbol(wire), e.GetPosition(diagram));
+			if(this.InEditMode) {
+				if(e.ChangedButton == MouseButton.Left) {
+					Wire wire = symbol as Wire;
+					if(wire != null) {
+						if(Keyboard.Modifiers == ModifierKeys.Control) {
+							this.StartMove(diagram, this.SelectSymbol(wire), e.GetPosition(diagram));
+						} else if(Keyboard.Modifiers == ModifierKeys.Shift) {
+							this.ClearSelection();
+							this.SelectConductor(wire);
+							this.StartMove(diagram, this.FindMarker(wire), e.GetPosition(diagram));
+						} else if(Keyboard.Modifiers == (ModifierKeys.Shift | ModifierKeys.Control)) {
+							this.SelectConductor(wire);
+							this.StartMove(diagram, this.FindMarker(wire), e.GetPosition(diagram));
+						} else {
+							this.ClearSelection();
+							this.StartMove(diagram, this.SelectSymbol(wire), e.GetPosition(diagram));
+						}
+						this.Mainframe.Status = Resources.TipOnWireSelect;
+						return;
 					}
-					return;
-				}
 
+					CircuitSymbol circuitSymbol = symbol as CircuitSymbol;
+					if(circuitSymbol != null) {
+						if((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control) {
+							this.Select(symbol);
+						} else {
+							this.ClearSelection();
+							this.StartMove(diagram, this.SelectSymbol(symbol), e.GetPosition(diagram));
+						}
+						this.ShowStatus(circuitSymbol);
+						return;
+					}
+				}
+			} else {
 				CircuitSymbol circuitSymbol = symbol as CircuitSymbol;
 				if(circuitSymbol != null) {
-					if((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control) {
-						this.Select(symbol);
-					} else {
-						this.ClearSelection();
-						this.StartMove(diagram, this.SelectSymbol(symbol), e.GetPosition(diagram));
-					}
-					//this.ShowStatus(circuitSymbol);
+					this.ShowStatus(circuitSymbol);
 					return;
 				}
 			}

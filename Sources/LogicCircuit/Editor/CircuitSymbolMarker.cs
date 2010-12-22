@@ -29,7 +29,7 @@ namespace LogicCircuit {
 				editor.MoveSelection(point);
 			}
 
-			public override void Commit(Editor editor, Point point) {
+			public override void Commit(Editor editor, Point point, bool withWires) {
 			}
 		}
 	}
