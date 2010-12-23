@@ -41,6 +41,12 @@ namespace LogicCircuit {
 			}
 
 			public override void Commit(Editor editor, Point point, bool withWires) {
+				editor.CommitMove(point, withWires);
+			}
+
+			public override void Shift(int dx, int dy) {
+				this.Wire.Shift(dx, dy);
+				Tracer.Fail();
 			}
 		}
 	}

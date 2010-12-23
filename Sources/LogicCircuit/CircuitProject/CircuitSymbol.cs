@@ -13,9 +13,9 @@ namespace LogicCircuit {
 			}
 		}
 
-		public override void Shift(int x, int y) {
-			this.X += x;
-			this.Y += y;
+		public override void Shift(int dx, int dy) {
+			this.X += dx;
+			this.Y += dy;
 		}
 
 		public override GridPoint Point {

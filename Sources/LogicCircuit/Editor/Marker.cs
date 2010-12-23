@@ -11,6 +11,7 @@ namespace LogicCircuit {
 			public abstract FrameworkElement Glyph { get; }
 			public abstract void Move(Editor editor, Point point);
 			public abstract void Commit(Editor editor, Point point, bool withWires);
+			public abstract void Shift(int dx, int dy);
 		}
 	}
 }

@@ -31,7 +31,7 @@ namespace LogicCircuit {
 			}
 			public override Circuit Circuit { get { return this.circuitDescriptor.Circuit; } }
 			public override LogicalCircuit LogicalCircuit { get { throw new InvalidOperationException(); } set { throw new InvalidOperationException(); } }
-			public override void Shift(int x, int y) { throw new InvalidOperationException(); }
+			public override void Shift(int dx, int dy) { throw new InvalidOperationException(); }
 			public override GridPoint Point {
 				get { return new GridPoint(0, 0); }
 				set { throw new InvalidOperationException(); }

@@ -21,8 +21,7 @@ namespace LogicCircuit {
 				this.MarkerGlyph.DataContext = this;
 				this.MarkerGlyph.Width = Symbol.ScreenPoint(this.CircuitSymbol.Circuit.SymbolWidth) + 2 * Symbol.PinRadius;
 				this.MarkerGlyph.Height = Symbol.ScreenPoint(this.CircuitSymbol.Circuit.SymbolHeight) + 2 * Symbol.PinRadius;
-				Canvas.SetLeft(this.MarkerGlyph, Symbol.ScreenPoint(this.CircuitSymbol.X) - Symbol.PinRadius);
-				Canvas.SetTop(this.MarkerGlyph, Symbol.ScreenPoint(this.CircuitSymbol.Y) - Symbol.PinRadius);
+				this.PositionGlyph();
 			}
 
 			public override void Move(Editor editor, Point point) {
@@ -30,6 +29,19 @@ namespace LogicCircuit {
 			}
 
 			public override void Commit(Editor editor, Point point, bool withWires) {
+				editor.CommitMove(point, withWires);
+			}
+
+			public override void Shift(int dx, int dy) {
+				this.CircuitSymbol.Shift(dx, dy);
+				Canvas.SetLeft(this.CircuitSymbol.Glyph, Symbol.ScreenPoint(this.CircuitSymbol.X));
+				Canvas.SetTop(this.CircuitSymbol.Glyph, Symbol.ScreenPoint(this.CircuitSymbol.Y));
+				this.PositionGlyph();
+			}
+
+			private void PositionGlyph() {
+				Canvas.SetLeft(this.MarkerGlyph, Symbol.ScreenPoint(this.CircuitSymbol.X) - Symbol.PinRadius);
+				Canvas.SetTop(this.MarkerGlyph, Symbol.ScreenPoint(this.CircuitSymbol.Y) - Symbol.PinRadius);
 			}
 		}
 	}

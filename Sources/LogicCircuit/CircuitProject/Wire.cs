@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
@@ -36,11 +38,11 @@ namespace LogicCircuit {
 			return line;
 		}
 
-		public override void Shift(int x, int y) {
-			this.X1 += x;
-			this.Y1 += y;
-			this.X2 += x;
-			this.Y2 += y;
+		public override void Shift(int dx, int dy) {
+			this.X1 += dx;
+			this.Y1 += dy;
+			this.X2 += dx;
+			this.Y2 += dy;
 		}
 
 		public override void CopyTo(CircuitProject project) {

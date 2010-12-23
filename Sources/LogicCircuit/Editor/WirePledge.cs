@@ -42,6 +42,10 @@ namespace LogicCircuit {
 					}
 				}
 			}
+
+			public override void Shift(int dx, int dy) {
+				throw new InvalidOperationException();
+			}
 		}
 	}
 }

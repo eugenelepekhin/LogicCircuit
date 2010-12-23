@@ -30,6 +30,10 @@ namespace LogicCircuit {
 			public override void Commit(Editor editor, Point point, bool withWires) {
 				throw new NotImplementedException();
 			}
+
+			public override void Shift(int dx, int dy) {
+				throw new InvalidOperationException();
+			}
 		}
 	}
 }

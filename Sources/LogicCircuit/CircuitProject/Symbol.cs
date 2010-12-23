@@ -132,7 +132,7 @@ namespace LogicCircuit {
 		}
 
 		public abstract LogicalCircuit LogicalCircuit { get; set; }
-		public abstract void Shift(int x, int y);
+		public abstract void Shift(int dx, int dy);
 		public abstract int Z { get; }
 
 		public abstract FrameworkElement Glyph { get; }

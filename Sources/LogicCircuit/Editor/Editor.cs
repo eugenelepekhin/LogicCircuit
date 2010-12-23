@@ -202,6 +202,13 @@ namespace LogicCircuit {
 
 		//--- Edit Operation
 
+		private void DeleteEmptyWires() {
+			foreach(Wire wire in this.Project.LogicalCircuit.Wires().Where(wire => wire.Point1 == wire.Point2).ToList()) {
+				this.Unselect(wire);
+				wire.Delete();
+			}
+		}
+
 		private Wire CreateWire(GridPoint point1, GridPoint point2) {
 			Wire wire = null;
 			if(point1 != point2) {
@@ -209,6 +216,55 @@ namespace LogicCircuit {
 				this.Add(this.Diagram, wire);
 			}
 			return wire;
+		}
+
+		private void CommitMove(Point point, bool withWires) {
+			int dx = Symbol.GridPoint(point.X - this.moveStart.X);
+			int dy = Symbol.GridPoint(point.Y - this.moveStart.Y);
+			HashSet<GridPoint> movedPoints = null;
+			if(withWires) {
+				movedPoints = new HashSet<GridPoint>();
+				foreach(Marker marker in this.selection.Values) {
+					CircuitSymbol symbol = marker.Symbol as CircuitSymbol;
+					if(symbol != null) {
+						foreach(Jam jam in symbol.Jams()) {
+							movedPoints.Add(jam.AbsolutePoint);
+						}
+					} else {
+						Wire wire = marker.Symbol as Wire;
+						if(wire != null) {
+							movedPoints.Add(wire.Point1);
+							movedPoints.Add(wire.Point2);
+						}
+					}
+				}
+			}
+			this.CircuitProject.InTransaction(() => {
+				foreach(Marker marker in this.selection.Values) {
+					marker.Shift(dx, dy);
+				}
+				if(withWires) {
+					foreach(Wire wire in this.Project.LogicalCircuit.Wires()) {
+						if(!this.selection.ContainsKey(wire)) {
+							if(movedPoints.Contains(wire.Point1)) {
+								wire.X1 += dx;
+								wire.Y1 += dy;
+								Line line = wire.WireGlyph;
+								line.X1 = Symbol.ScreenPoint(wire.X1);
+								line.Y1 = Symbol.ScreenPoint(wire.Y1);
+							}
+							if(movedPoints.Contains(wire.Point2)) {
+								wire.X2 += dx;
+								wire.Y2 += dy;
+								Line line = wire.WireGlyph;
+								line.X2 = Symbol.ScreenPoint(wire.X2);
+								line.Y2 = Symbol.ScreenPoint(wire.Y2);
+							}
+						}
+					}
+				}
+				this.DeleteEmptyWires();
+			});
 		}
 
 		public void Undo() {
