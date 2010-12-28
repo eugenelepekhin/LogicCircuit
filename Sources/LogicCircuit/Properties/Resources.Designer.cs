@@ -1019,5 +1019,12 @@ namespace LogicCircuit {
  		public static string TipOnWireSelect {
 			get { return ResourceManager.GetString("TipOnWireSelect", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to {0} {1}. Surround multiple symbols to select them, hold Shift to keep current selection..
+		/// </summary>
+ 		public static string TipOnAwaitingArea(string logicCircuit, LogicCircuit.GridPoint point) {
+			return string.Format(Culture, ResourceManager.GetString("TipOnAwaitingArea", Culture), logicCircuit, point);
+		}
 	}
 }

@@ -733,7 +733,7 @@ namespace LogicCircuit {
 		private void CancelMove() {
 			if(this.movingMarker != null) {
 				Mouse.Capture(null);
-				if(this.movingMarker is WirePledge) {
+				if(this.movingMarker is WirePledge || this.movingMarker is AreaMarker) {
 					this.selectionLayer.Children.Remove(this.movingMarker.Glyph);
 				}
 				this.movingMarker = null;
@@ -751,6 +751,11 @@ namespace LogicCircuit {
 		}
 
 		private void StartAreaSelection(Canvas diagram, Point point) {
+			this.CancelMove();
+			AreaMarker marker = new AreaMarker(point);
+			this.AddMarkerGlyph(marker);
+			this.StartMove(diagram, marker, point);
+			this.Mainframe.Status = Resources.TipOnAwaitingArea(this.Project.LogicalCircuit.Name, Symbol.GridPoint(point));
 		}
 
 		private void FinishMove(Point position, bool withWires) {

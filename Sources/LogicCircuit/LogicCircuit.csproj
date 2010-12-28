@@ -88,6 +88,7 @@
     <Compile Include="Dialog\DialogROM.xaml.cs">
       <DependentUpon>DialogROM.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Editor\AreaMarker.cs" />
     <Compile Include="Editor\CircuitDescriptor.cs" />
     <Compile Include="Editor\CircuitDescriptorList.cs" />
     <Compile Include="Editor\CircuitSymbolMarker.cs" />
