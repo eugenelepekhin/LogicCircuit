@@ -153,14 +153,10 @@ namespace LogicCircuit {
 		}
 
 		private void Add(Canvas diagram, Wire wire) {
-			Line line = wire.WireGlyph;
-			Point p = Symbol.ScreenPoint(wire.Point1);
-			line.X1 = p.X;
-			line.Y1 = p.Y;
-			p = Symbol.ScreenPoint(wire.Point2);
-			line.X2 = p.X;
-			line.Y2 = p.Y;
-			diagram.Children.Add(line);
+			wire.PositionGlyph();
+			diagram.Children.Add(wire.WireGlyph);
+			this.AddWirePoint(wire.Point1);
+			this.AddWirePoint(wire.Point2);
 		}
 
 		private void RedrawDiagram() {
@@ -170,8 +166,6 @@ namespace LogicCircuit {
 			LogicalCircuit logicalCircuit = this.Project.LogicalCircuit;
 			foreach(Wire wire in logicalCircuit.Wires()) {
 				this.Add(diagram, wire);
-				this.AddWirePoint(wire.Point1);
-				this.AddWirePoint(wire.Point2);
 			}
 			foreach(KeyValuePair<GridPoint, int> solder in this.wirePoint) {
 				if(2 < solder.Value) {
@@ -221,50 +215,76 @@ namespace LogicCircuit {
 		private void CommitMove(Point point, bool withWires) {
 			int dx = Symbol.GridPoint(point.X - this.moveStart.X);
 			int dy = Symbol.GridPoint(point.Y - this.moveStart.Y);
-			HashSet<GridPoint> movedPoints = null;
-			if(withWires) {
-				movedPoints = new HashSet<GridPoint>();
-				foreach(Marker marker in this.selection.Values) {
-					CircuitSymbol symbol = marker.Symbol as CircuitSymbol;
-					if(symbol != null) {
-						foreach(Jam jam in symbol.Jams()) {
-							movedPoints.Add(jam.AbsolutePoint);
-						}
-					} else {
-						Wire wire = marker.Symbol as Wire;
-						if(wire != null) {
-							movedPoints.Add(wire.Point1);
-							movedPoints.Add(wire.Point2);
-						}
-					}
-				}
-			}
-			this.CircuitProject.InTransaction(() => {
-				foreach(Marker marker in this.selection.Values) {
-					marker.Shift(dx, dy);
-				}
+			if(dx != 0 || dy != 0) {
+				HashSet<GridPoint> movedPoints = null;
 				if(withWires) {
-					foreach(Wire wire in this.Project.LogicalCircuit.Wires()) {
-						if(!this.selection.ContainsKey(wire)) {
-							if(movedPoints.Contains(wire.Point1)) {
-								wire.X1 += dx;
-								wire.Y1 += dy;
-								Line line = wire.WireGlyph;
-								line.X1 = Symbol.ScreenPoint(wire.X1);
-								line.Y1 = Symbol.ScreenPoint(wire.Y1);
+					movedPoints = new HashSet<GridPoint>();
+					foreach(Marker marker in this.selection.Values) {
+						CircuitSymbol symbol = marker.Symbol as CircuitSymbol;
+						if(symbol != null) {
+							foreach(Jam jam in symbol.Jams()) {
+								movedPoints.Add(jam.AbsolutePoint);
 							}
-							if(movedPoints.Contains(wire.Point2)) {
-								wire.X2 += dx;
-								wire.Y2 += dy;
-								Line line = wire.WireGlyph;
-								line.X2 = Symbol.ScreenPoint(wire.X2);
-								line.Y2 = Symbol.ScreenPoint(wire.Y2);
+						} else {
+							Wire wire = marker.Symbol as Wire;
+							if(wire != null) {
+								movedPoints.Add(wire.Point1);
+								movedPoints.Add(wire.Point2);
 							}
 						}
 					}
 				}
-				this.DeleteEmptyWires();
-			});
+				this.CircuitProject.InTransaction(() => {
+					foreach(Marker marker in this.selection.Values) {
+						marker.Shift(dx, dy);
+					}
+					if(withWires) {
+						foreach(Wire wire in this.Project.LogicalCircuit.Wires()) {
+							if(!this.selection.ContainsKey(wire)) {
+								if(movedPoints.Contains(wire.Point1)) {
+									wire.X1 += dx;
+									wire.Y1 += dy;
+									wire.PositionGlyph();
+								}
+								if(movedPoints.Contains(wire.Point2)) {
+									wire.X2 += dx;
+									wire.Y2 += dy;
+									wire.PositionGlyph();
+								}
+							}
+						}
+					}
+					this.DeleteEmptyWires();
+				});
+			}
+		}
+
+		private void CommitMove(Point point, bool withWires, WirePointMarker marker) {
+			int dx = Symbol.GridPoint(point.X - this.moveStart.X);
+			int dy = Symbol.GridPoint(point.Y - this.moveStart.Y);
+			if(dx != 0 || dy != 0) {
+				this.CircuitProject.InTransaction(() => {
+					GridPoint originalPoint = marker.WirePoint();
+					marker.Shift(dx, dy);
+					if(withWires && this.JamAt(originalPoint) == null) {
+						foreach(Wire wire in this.Project.LogicalCircuit.Wires()) {
+							if(!this.selection.ContainsKey(wire)) {
+								if(originalPoint == wire.Point1) {
+									wire.X1 += dx;
+									wire.Y1 += dy;
+									wire.PositionGlyph();
+								}
+								if(originalPoint == wire.Point2) {
+									wire.X2 += dx;
+									wire.Y2 += dy;
+									wire.PositionGlyph();
+								}
+							}
+						}
+					}
+					this.DeleteEmptyWires();
+				});
+			}
 		}
 
 		public void Undo() {
@@ -785,6 +805,8 @@ namespace LogicCircuit {
 					wire2 = this.CircuitProject.WireSet.Create(logicalCircuit, point, wire.Point2);
 					wire.Point2 = point;
 				});
+				wire.PositionGlyph();
+				this.Add(this.Diagram, wire2);
 				this.Select(wire);
 				this.Select(wire2);
 				return true;

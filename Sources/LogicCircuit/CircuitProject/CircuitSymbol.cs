@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Xml;
 
 namespace LogicCircuit {
@@ -24,6 +25,12 @@ namespace LogicCircuit {
 		}
 
 		public override int Z { get { return 2; } }
+
+		public override void PositionGlyph() {
+			FrameworkElement glyph = this.Glyph;
+			Canvas.SetLeft(glyph, Symbol.ScreenPoint(this.X));
+			Canvas.SetTop(glyph, Symbol.ScreenPoint(this.Y));
+		}
 
 		public override void CopyTo(CircuitProject project) {
 			project.CircuitSymbolSet.Copy(this);

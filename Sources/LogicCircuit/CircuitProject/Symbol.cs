@@ -136,6 +136,7 @@ namespace LogicCircuit {
 		public abstract int Z { get; }
 
 		public abstract FrameworkElement Glyph { get; }
+		public abstract void PositionGlyph();
 
 		protected void NotifyPropertyChanged(string name) {
 			PropertyChangedEventHandler handler = this.PropertyChanged;

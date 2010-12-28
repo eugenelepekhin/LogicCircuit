@@ -165,10 +165,10 @@
       <DependentUpon>DialogMessage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Editor\Marker.cs" />
-    <Compile Include="Editor\MarkerPoint.cs" />
     <Compile Include="Editor\Switcher.cs" />
     <Compile Include="Editor\WireMarker.cs" />
     <Compile Include="Editor\WirePledge.cs" />
+    <Compile Include="Editor\WirePointMarker.cs" />
     <Compile Include="GateShape.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="GridLengthAnimation.cs" />

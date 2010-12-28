@@ -38,6 +38,10 @@ namespace LogicCircuit {
 			}
 			public override int Z { get { return 0; } }
 
+			public override void PositionGlyph() {
+				throw new InvalidOperationException();
+			}
+
 			public override void CopyTo(CircuitProject project) {
 				throw new InvalidOperationException();
 			}

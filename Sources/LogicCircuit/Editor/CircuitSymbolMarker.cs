@@ -34,8 +34,7 @@ namespace LogicCircuit {
 
 			public override void Shift(int dx, int dy) {
 				this.CircuitSymbol.Shift(dx, dy);
-				Canvas.SetLeft(this.CircuitSymbol.Glyph, Symbol.ScreenPoint(this.CircuitSymbol.X));
-				Canvas.SetTop(this.CircuitSymbol.Glyph, Symbol.ScreenPoint(this.CircuitSymbol.Y));
+				this.CircuitSymbol.PositionGlyph();
 				this.PositionGlyph();
 			}
 

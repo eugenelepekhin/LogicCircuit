@@ -14,26 +14,40 @@ namespace LogicCircuit {
 
 			public Canvas MarkerGlyph { get; private set; }
 			public override FrameworkElement Glyph { get { return this.MarkerGlyph; } }
+
+			private Line Line { get; set; }
+
+			private WirePointMarker Point1 { get; set; }
+			private WirePointMarker Point2 { get; set; }
 			
 			public WireMarker(Wire wire) {
 				this.Wire = wire;
-				Line line = Symbol.Skin<Line>(SymbolShape.MarkerLine);
-				line.DataContext = this;
-				line.X1 = Symbol.ScreenPoint(this.Wire.X1);
-				line.Y1 = Symbol.ScreenPoint(this.Wire.Y1);
-				line.X2 = Symbol.ScreenPoint(this.Wire.X2);
-				line.Y2 = Symbol.ScreenPoint(this.Wire.Y2);
-				Rectangle p1 = Symbol.Skin<Rectangle>(SymbolShape.MarkerRectangle);
-				Rectangle p2 = Symbol.Skin<Rectangle>(SymbolShape.MarkerRectangle);
 				this.MarkerGlyph = new Canvas();
-				this.MarkerGlyph.Children.Add(line);
-				this.MarkerGlyph.Children.Add(p1);
-				this.MarkerGlyph.Children.Add(p2);
-				p1.Width = p2.Width = p1.Height = p2.Height = 2 * Symbol.PinRadius;
-				Canvas.SetLeft(p1, Symbol.ScreenPoint(this.Wire.X1) - Symbol.PinRadius);
-				Canvas.SetTop(p1, Symbol.ScreenPoint(this.Wire.Y1) - Symbol.PinRadius);
-				Canvas.SetLeft(p2, Symbol.ScreenPoint(this.Wire.X2) - Symbol.PinRadius);
-				Canvas.SetTop(p2, Symbol.ScreenPoint(this.Wire.Y2) - Symbol.PinRadius);
+				this.MarkerGlyph.DataContext = this;
+
+				this.Line = Symbol.Skin<Line>(SymbolShape.MarkerLine);
+				this.Point1 = new WirePointMarker(this,
+					getPoint: () => new Point(this.Line.X1, this.Line.Y1),
+					setPoint: p => { this.Line.X1 = p.X; this.Line.Y1 = p.Y; },
+					shift:    (dx, dy) => { this.Wire.X1 += dx; this.Wire.Y1 += dy; this.PositionWireGlyph(); },
+					wirePoint:() => this.Wire.Point1
+				);
+				this.Point2 = new WirePointMarker(this,
+					getPoint: () => new Point(this.Line.X2, this.Line.Y2),
+					setPoint: p => { this.Line.X2 = p.X; this.Line.Y2 = p.Y; },
+					shift:    (dx, dy) => { this.Wire.X2 += dx; this.Wire.Y2 += dy; this.PositionWireGlyph(); },
+					wirePoint:() => this.Wire.Point2
+				);
+
+				Panel.SetZIndex(this.Line, 0);
+				Panel.SetZIndex(this.Point1.MarkerGlyph, 1);
+				Panel.SetZIndex(this.Point2.MarkerGlyph, 1);
+				
+				this.MarkerGlyph.Children.Add(this.Line);
+				this.MarkerGlyph.Children.Add(this.Point1.MarkerGlyph);
+				this.MarkerGlyph.Children.Add(this.Point2.MarkerGlyph);
+
+				this.PositionGlyph();
 			}
 
 			public override void Move(Editor editor, Point point) {
@@ -46,7 +60,21 @@ namespace LogicCircuit {
 
 			public override void Shift(int dx, int dy) {
 				this.Wire.Shift(dx, dy);
-				Tracer.Fail();
+				this.PositionWireGlyph();
+			}
+
+			public void PositionGlyph() {
+				this.Line.X1 = Symbol.ScreenPoint(this.Wire.X1);
+				this.Line.Y1 = Symbol.ScreenPoint(this.Wire.Y1);
+				this.Line.X2 = Symbol.ScreenPoint(this.Wire.X2);
+				this.Line.Y2 = Symbol.ScreenPoint(this.Wire.Y2);
+				this.Point1.PositionGlyph();
+				this.Point2.PositionGlyph();
+			}
+
+			private void PositionWireGlyph() {
+				this.Wire.PositionGlyph();
+				this.PositionGlyph();
 			}
 		}
 	}
