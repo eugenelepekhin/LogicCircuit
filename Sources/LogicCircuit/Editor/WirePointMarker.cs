@@ -43,7 +43,11 @@ namespace LogicCircuit {
 					editor.CommitMove(point, withWires);
 				} else {
 					editor.CommitMove(point, withWires, this);
-					this.Parent.PositionGlyph();
+					if(this.Parent.Wire.IsDeleted()) {
+						editor.Unselect(this.Parent.Wire);
+					} else {
+						this.Parent.PositionGlyph();
+					}
 				}
 			}
 
