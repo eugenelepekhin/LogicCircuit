@@ -717,12 +717,16 @@ namespace LogicCircuit {
 
 		//--- Moving markers ---
 
-		private void StartMove(Canvas diagram, Marker marker, Point startPoint) {
+		private void StartMove(Canvas diagram, Marker marker, Point startPoint, string tip) {
 			Tracer.Assert(this.movingMarker == null);
 			Mouse.Capture(diagram, CaptureMode.Element);
 			this.movingMarker = marker;
 			this.moveStart = startPoint;
-			this.Mainframe.Status = Resources.TipOnStartMove;
+			this.Mainframe.Status = tip;
+		}
+
+		private void StartMove(Canvas diagram, Marker marker, Point startPoint) {
+			this.StartMove(diagram, marker, startPoint, Resources.TipOnStartMove);
 		}
 
 		private void MoveSelection(Point point) {
@@ -746,16 +750,14 @@ namespace LogicCircuit {
 			this.CancelMove();
 			WirePledge wirePledge = new WirePledge(point);
 			this.AddMarkerGlyph(wirePledge);
-			this.StartMove(diagram, wirePledge, point);
-			this.Mainframe.Status = Resources.TipOnStartWire;
+			this.StartMove(diagram, wirePledge, point, Resources.TipOnStartWire);
 		}
 
 		private void StartAreaSelection(Canvas diagram, Point point) {
 			this.CancelMove();
 			AreaMarker marker = new AreaMarker(point);
 			this.AddMarkerGlyph(marker);
-			this.StartMove(diagram, marker, point);
-			this.Mainframe.Status = Resources.TipOnAwaitingArea(this.Project.LogicalCircuit.Name, Symbol.GridPoint(point));
+			this.StartMove(diagram, marker, point, Resources.TipOnAwaitingArea(this.Project.LogicalCircuit.Name, Symbol.GridPoint(point)));
 		}
 
 		private void FinishMove(Point position, bool withWires) {
