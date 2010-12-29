@@ -395,28 +395,29 @@ namespace LogicCircuit {
 		}
 
 		public void Delete() {
-			//this.CancelMove();
-			//if(0 < this.SelectionCount) {
-			//    IEnumerable<Symbol> selection = this.Selection();
-			//    this.ClearSelection();
-			//    this.CircuitProject.InTransaction(() => {
-			//        foreach(Symbol symbol in selection) {
-			//            CircuitSymbol circuitSymbol = symbol as CircuitSymbol;
-			//            if(circuitSymbol != null) {
-			//                if(circuitSymbol.Circuit is Gate || circuitSymbol.Circuit is LogicalCircuit) {
-			//                    circuitSymbol.Delete();
-			//                } else {
-			//                    circuitSymbol.Circuit.Delete();
-			//                }
-			//            } else {
-			//                Wire wire = symbol as Wire;
-			//                if(wire != null) {
-			//                    wire.Delete();
-			//                }
-			//            }
-			//        }
-			//    });
-			//}
+			this.CancelMove();
+			if(0 < this.SelectionCount) {
+				IEnumerable<Symbol> selection = this.Selection();
+				this.ClearSelection();
+				this.CircuitProject.InTransaction(() => {
+					foreach(Symbol symbol in selection) {
+						CircuitSymbol circuitSymbol = symbol as CircuitSymbol;
+						if(circuitSymbol != null) {
+							if(circuitSymbol.Circuit is Gate || circuitSymbol.Circuit is LogicalCircuit) {
+								circuitSymbol.Delete();
+							} else {
+								circuitSymbol.Circuit.Delete();
+							}
+						} else {
+							Wire wire = symbol as Wire;
+							if(wire != null) {
+								wire.Delete();
+							}
+						}
+					}
+				});
+				this.Refresh();
+			}
 		}
 
 		public void Cut() {
