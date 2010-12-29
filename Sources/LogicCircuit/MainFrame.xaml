@@ -13,8 +13,6 @@
 	Background="{StaticResource WindowBackground}"
 	ResizeMode="CanResizeWithGrip"
 
-	LostFocus="WindowLostFocus"
-	LostKeyboardFocus="WindowLostKeyboardFocus"
 	Keyboard.KeyDown="WindowKeyDown"
 	Keyboard.KeyUp="WindowKeyUp"
 >
@@ -489,7 +487,7 @@
 
 				<!-- Main Diagram -->
 				<GroupBox Grid.Row="0" Header="{Binding Path=Editor.Project.LogicalCircuit.Name}">
-					<ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+					<ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" LostFocus="DiagramLostFocus" LostKeyboardFocus="DiagramLostKeyboardFocus">
 						<Canvas Name="Diagram" HorizontalAlignment="Left" VerticalAlignment="Top"
 							Width="{x:Static lc:Symbol.LogicalCircuitWidth}"
 							Height="{x:Static lc:Symbol.LogicalCircuitHeight}"

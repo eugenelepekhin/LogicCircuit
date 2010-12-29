@@ -145,28 +145,6 @@ namespace LogicCircuit {
 			}
 		}
 
-		private void WindowLostFocus(object sender, RoutedEventArgs e) {
-			try {
-				if(this.Editor != null) {
-					this.Editor.DiagramLostFocus();
-				}
-			} catch(Exception exception) {
-				Tracer.Report("MainFrame.MainFrameLostFocus", exception);
-				this.ReportException(exception);
-			}
-		}
-
-		private void WindowLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e) {
-			try {
-				if(this.Editor != null) {
-					this.Editor.DiagramLostFocus();
-				}
-			} catch(Exception exception) {
-				Tracer.Report("MainFrame.MainFrameLostKeyboardFocus", exception);
-				this.ReportException(exception);
-			}
-		}
-
 		private void WindowKeyDown(object sender, KeyEventArgs e) {
 			try {
 				if(this.Editor != null) {

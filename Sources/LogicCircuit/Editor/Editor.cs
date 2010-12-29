@@ -719,6 +719,7 @@ namespace LogicCircuit {
 
 		private void StartMove(Canvas diagram, Marker marker, Point startPoint, string tip) {
 			Tracer.Assert(this.movingMarker == null);
+			Tracer.Assert(marker != null);
 			Mouse.Capture(diagram, CaptureMode.Element);
 			this.movingMarker = marker;
 			this.moveStart = startPoint;
