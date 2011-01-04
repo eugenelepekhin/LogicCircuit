@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 
 namespace LogicCircuit {
@@ -65,6 +66,10 @@ namespace LogicCircuit {
 			);
 			pin.Order = this.order++;
 			return pin;
+		}
+
+		public void DeleteAllPins(Circuit circuit) {
+			this.SelectByCircuit(circuit).ToList().ForEach(pin => pin.Delete());
 		}
 	}
 }

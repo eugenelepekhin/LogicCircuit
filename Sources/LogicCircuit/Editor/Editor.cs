@@ -403,11 +403,7 @@ namespace LogicCircuit {
 					foreach(Symbol symbol in selection) {
 						CircuitSymbol circuitSymbol = symbol as CircuitSymbol;
 						if(circuitSymbol != null) {
-							if(circuitSymbol.Circuit is Gate || circuitSymbol.Circuit is LogicalCircuit) {
-								circuitSymbol.Delete();
-							} else {
-								circuitSymbol.Circuit.Delete();
-							}
+							circuitSymbol.DeleteSymbol();
 						} else {
 							Wire wire = symbol as Wire;
 							if(wire != null) {

@@ -7,6 +7,14 @@ namespace LogicCircuit {
 
 	public partial class CircuitSymbol {
 
+		public void DeleteSymbol() {
+			if(this.Circuit is Gate || this.Circuit is LogicalCircuit) {
+				this.Delete();
+			} else {
+				this.Circuit.Delete();
+			}
+		}
+
 		partial void OnCircuitSymbolChanged() {
 			Pin pin = this.Circuit as Pin;
 			if(pin != null) {

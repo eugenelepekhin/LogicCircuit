@@ -403,7 +403,7 @@ namespace LogicCircuit {
 		public static void CreateForeignKeys(StoreSnapshot store) {
 			TableSnapshot<PinData> table = (TableSnapshot<PinData>)store.Table("Pin");
 			table.CreateForeignKey("PK_Pin", store.Table("Circuit"), PinData.PinIdField.Field, ForeignKeyAction.Cascade, false);
-			table.CreateForeignKey("FK_Circuit_Pin", store.Table("Circuit"), PinData.CircuitIdField.Field, ForeignKeyAction.Cascade, false);
+			table.CreateForeignKey("FK_Circuit_Pin", store.Table("Circuit"), PinData.CircuitIdField.Field, ForeignKeyAction.Restrict, false);
 		}
 
 		// Serializer of the table

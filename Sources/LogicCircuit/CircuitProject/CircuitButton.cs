@@ -6,6 +6,11 @@ using LogicCircuit.DataPersistent;
 
 namespace LogicCircuit {
 	public partial class CircuitButton {
+		public override void Delete() {
+			this.CircuitProject.DevicePinSet.DeleteAllPins(this);
+			base.Delete();
+		}
+
 		public override bool IsSmallSymbol { get { return true; } }
 
 		public override string Name {

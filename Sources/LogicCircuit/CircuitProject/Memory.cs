@@ -17,6 +17,11 @@ namespace LogicCircuit {
 			this.ResetPins();
 		}
 
+		public override void Delete() {
+			this.CircuitProject.DevicePinSet.DeleteAllPins(this);
+			base.Delete();
+		}
+
 		public override string Name {
 			get { return this.Notation; }
 			set { throw new NotSupportedException(); }

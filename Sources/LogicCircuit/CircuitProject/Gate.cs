@@ -10,6 +10,10 @@ namespace LogicCircuit {
 		public override string ToolTip { get { return this.Name; } }
 		public override string Notation { get; set; }
 		public override string Category { get; set; }
+
+		public override void Delete() {
+			throw new InvalidOperationException();
+		}
 		
 		public override bool IsSmallSymbol {
 			get {

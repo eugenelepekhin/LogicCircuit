@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 using LogicCircuit.DataPersistent;
+using System.Diagnostics;
 
 namespace LogicCircuit {
 	public partial class CircuitProject {
@@ -57,18 +58,25 @@ namespace LogicCircuit {
 
 			this.GateSet.Generate();
 
-			List<Wire> list = new List<Wire>();
-			foreach(Wire wire in this.WireSet) {
-				if(wire.Point1 == wire.Point2) {
-					list.Add(wire);
-				}
-			}
-			if(0 < list.Count) {
-				foreach(Wire wire in list) {
-					wire.Delete();
-				}
-			}
+			this.DistinctSymbol(this.CircuitButtonSet);
+			this.DistinctSymbol(this.ConstantSet);
+			this.DistinctSymbol(this.MemorySet);
+			this.DistinctSymbol(this.PinSet);
+			this.DistinctSymbol(this.SplitterSet);
+
+			this.WireSet.Where(wire => wire.Point1 == wire.Point2).ToList().ForEach(wire => wire.Delete());
+
 			this.ResetUndoRedo();
+		}
+
+		private void DistinctSymbol(IEnumerable<Circuit> set) {
+			set.Where(circuit => !this.CircuitSymbolSet.SelectByCircuit(circuit).Any()).ToList().ForEach(circuit => circuit.Delete());
+			foreach(Circuit circuit in set) {
+				List<CircuitSymbol> list = this.CircuitSymbolSet.SelectByCircuit(circuit).ToList();
+				for(int i = 1; i < list.Count; i++) {
+					list[i].Delete();
+				}
+			}
 		}
 
 		private XmlDocument Save() {
@@ -88,7 +96,7 @@ namespace LogicCircuit {
 		}
 
 		private static string ChangeGuid(string text, string nodeName) {
-			string s = Regex.Replace(text,
+			return Regex.Replace(text,
 				string.Format(CultureInfo.InvariantCulture,
 					@"<{0}:{1}>\{{?[0-9a-fA-F]{{8}}-([0-9a-fA-F]{{4}}-){{3}}[0-9a-fA-F]{{12}}\}}?</{0}:{1}>", CircuitProject.PersistencePrefix, nodeName
 				),
@@ -97,7 +105,6 @@ namespace LogicCircuit {
 				),
 				RegexOptions.CultureInvariant | RegexOptions.Singleline
 			);
-			return s;
 		}
 
 		public XmlDocument Copy(IEnumerable<Symbol> symbol) {
@@ -160,6 +167,7 @@ namespace LogicCircuit {
 				if(this.StartTransaction()) {
 					action();
 					this.PrepareCommit();
+					this.ValidateCircuitProject();
 					success = true;
 				}
 			} finally {
@@ -175,6 +183,39 @@ namespace LogicCircuit {
 					}
 				}
 			}
+		}
+
+		[Conditional("DEBUG")]
+		private void ValidateCircuitProject() {
+			foreach(Circuit circuit in this.CircuitSet) {
+				if(circuit is LogicalCircuit) {
+					Tracer.Assert(this.LogicalCircuitSet.Table.Exists(LogicalCircuitData.LogicalCircuitIdField.Field, circuit.CircuitId));
+				} else if(circuit is CircuitButton) {
+					Tracer.Assert(this.CircuitButtonSet.Table.Exists(CircuitButtonData.CircuitButtonIdField.Field, circuit.CircuitId));
+					Tracer.Assert(this.CircuitSymbolSet.SelectByCircuit(circuit).Count() == 1);
+				} else if(circuit is Constant) {
+					Tracer.Assert(this.ConstantSet.Table.Exists(ConstantData.ConstantIdField.Field, circuit.CircuitId));
+					Tracer.Assert(this.CircuitSymbolSet.SelectByCircuit(circuit).Count() == 1);
+				} else if(circuit is DevicePin) {
+					Tracer.Assert(this.DevicePinSet.Table.Exists(DevicePinData.PinIdField.Field, circuit.CircuitId));
+					Tracer.Assert(this.CircuitSymbolSet.SelectByCircuit(circuit).Count() == 0);
+				} else if(circuit is Gate) {
+					Tracer.Assert(this.GateSet.Table.Exists(GateData.GateIdField.Field, circuit.CircuitId));
+				} else if(circuit is Memory) {
+					Tracer.Assert(this.MemorySet.Table.Exists(MemoryData.MemoryIdField.Field, circuit.CircuitId));
+					Tracer.Assert(this.CircuitSymbolSet.SelectByCircuit(circuit).Count() == 1);
+				} else if(circuit is Pin) {
+					Tracer.Assert(this.PinSet.Table.Exists(PinData.PinIdField.Field, circuit.CircuitId));
+					Tracer.Assert(this.CircuitSymbolSet.SelectByCircuit(circuit).Count() == 1);
+				} else if(circuit is Splitter) {
+					Tracer.Assert(this.SplitterSet.Table.Exists(SplitterData.SplitterIdField.Field, circuit.CircuitId));
+					Tracer.Assert(this.CircuitSymbolSet.SelectByCircuit(circuit).Count() == 1);
+				}
+			}
+			foreach(Wire wire in this.WireSet) {
+				Tracer.Assert(wire.Point1 != wire.Point2);
+			}
+			//TODO: Add check of many wires hidden by eachother.
 		}
 
 		public void InTransaction(Action action) {

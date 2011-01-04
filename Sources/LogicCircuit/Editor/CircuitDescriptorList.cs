@@ -62,15 +62,16 @@ namespace LogicCircuit {
 		}
 
 		private void ProjectPropertyChanged(object sender, PropertyChangedEventArgs e) {
-			if(e.PropertyName == "Name") {
-				foreach(LogicalCircuit circuit in this.circuitProject.LogicalCircuitSet.SelectByCategory(string.Empty)) {
-					this.logicalCircuitDescriptors[circuit].NotifyCategoryChanged();
+			if(e.PropertyName == "LogicalCircuit") {
+				if(this.current != null) {
+					this.current.NotifyCurrentChanged();
 				}
-			} else if(e.PropertyName == "LogicalCircuit") {
-				Tracer.Assert(this.current != null);
-				this.current.NotifyCurrentChanged();
-				this.current = this.logicalCircuitDescriptors[this.circuitProject.ProjectSet.Project.LogicalCircuit];
-				this.current.NotifyCurrentChanged();
+				if(!this.logicalCircuitDescriptors.TryGetValue(this.circuitProject.ProjectSet.Project.LogicalCircuit, out this.current)) {
+					this.current = null;
+				}
+				if(this.current != null) {
+					this.current.NotifyCurrentChanged();
+				}
 			}
 		}
 
@@ -83,39 +84,38 @@ namespace LogicCircuit {
 
 		private static void InitPrimitive() {
 			CircuitProject project = CircuitProject.Create(null);
-			
-			project.InTransaction(() => {
-				List<ICircuitDescriptor> list = new List<ICircuitDescriptor>();
-				list.Add(new PinDescriptor(project, PinType.Input));
-				list.Add(new PinDescriptor(project, PinType.Output));
-				list.Add(new ButtonDescriptor(project));
-				list.Add(new ConstantDescriptor(project));
-				list.Add(new SplitterDescriptor(project));
-				list.Add(new GateDescriptor(project.GateSet.FindByGateId(GateSet.GateGuid(GateType.Clock, 0, false))));
-				list.Add(new GateDescriptor(project.GateSet.FindByGateId(GateSet.GateGuid(GateType.Led, 1, false))));
-				list.Add(new GateDescriptor(project.GateSet.FindByGateId(GateSet.GateGuid(GateType.Led, 8, false))));
-				list.Add(new GateDescriptor(project.GateSet.FindByGateId(GateSet.GateGuid(GateType.Probe, 1, false))));
+			project.StartTransaction();
+			List<ICircuitDescriptor> list = new List<ICircuitDescriptor>();
 
-				list.Add(new GateDescriptor(project.GateSet.FindByGateId(GateSet.GateGuid(GateType.Not, 1, true))));
-				list.Add(new GateDescriptor(project.GateSet.FindByGateId(GateSet.GateGuid(GateType.TriState, 2, false))));
+			list.Add(new PinDescriptor(project, PinType.Input));
+			list.Add(new PinDescriptor(project, PinType.Output));
+			list.Add(new ButtonDescriptor(project));
+			list.Add(new ConstantDescriptor(project));
+			list.Add(new SplitterDescriptor(project));
+			list.Add(new GateDescriptor(project.GateSet.FindByGateId(GateSet.GateGuid(GateType.Clock, 0, false))));
+			list.Add(new GateDescriptor(project.GateSet.FindByGateId(GateSet.GateGuid(GateType.Led, 1, false))));
+			list.Add(new GateDescriptor(project.GateSet.FindByGateId(GateSet.GateGuid(GateType.Led, 8, false))));
+			list.Add(new GateDescriptor(project.GateSet.FindByGateId(GateSet.GateGuid(GateType.Probe, 1, false))));
 
-				list.Add(new GateDescriptor(project.GateSet.FindByGateId(GateSet.GateGuid(GateType.And, 2, false))));
-				list.Add(new GateDescriptor(project.GateSet.FindByGateId(GateSet.GateGuid(GateType.And, 2, true))));
+			list.Add(new GateDescriptor(project.GateSet.FindByGateId(GateSet.GateGuid(GateType.Not, 1, true))));
+			list.Add(new GateDescriptor(project.GateSet.FindByGateId(GateSet.GateGuid(GateType.TriState, 2, false))));
 
-				list.Add(new GateDescriptor(project.GateSet.FindByGateId(GateSet.GateGuid(GateType.Or, 2, false))));
-				list.Add(new GateDescriptor(project.GateSet.FindByGateId(GateSet.GateGuid(GateType.Or, 2, true))));
+			list.Add(new GateDescriptor(project.GateSet.FindByGateId(GateSet.GateGuid(GateType.And, 2, false))));
+			list.Add(new GateDescriptor(project.GateSet.FindByGateId(GateSet.GateGuid(GateType.And, 2, true))));
 
-				list.Add(new GateDescriptor(project.GateSet.FindByGateId(GateSet.GateGuid(GateType.Xor, 2, false))));
-				list.Add(new GateDescriptor(project.GateSet.FindByGateId(GateSet.GateGuid(GateType.Xor, 2, true))));
+			list.Add(new GateDescriptor(project.GateSet.FindByGateId(GateSet.GateGuid(GateType.Or, 2, false))));
+			list.Add(new GateDescriptor(project.GateSet.FindByGateId(GateSet.GateGuid(GateType.Or, 2, true))));
 
-				list.Add(new GateDescriptor(project.GateSet.FindByGateId(GateSet.GateGuid(GateType.Even, 2, false))));
-				list.Add(new GateDescriptor(project.GateSet.FindByGateId(GateSet.GateGuid(GateType.Odd, 2, false))));
+			list.Add(new GateDescriptor(project.GateSet.FindByGateId(GateSet.GateGuid(GateType.Xor, 2, false))));
+			list.Add(new GateDescriptor(project.GateSet.FindByGateId(GateSet.GateGuid(GateType.Xor, 2, true))));
 
-				list.Add(new MemoryDescriptor(project, false));
-				list.Add(new MemoryDescriptor(project, true));
+			list.Add(new GateDescriptor(project.GateSet.FindByGateId(GateSet.GateGuid(GateType.Even, 2, false))));
+			list.Add(new GateDescriptor(project.GateSet.FindByGateId(GateSet.GateGuid(GateType.Odd, 2, false))));
 
-				CircuitDescriptorList.primitiveList = list;
-			});
+			list.Add(new MemoryDescriptor(project, false));
+			list.Add(new MemoryDescriptor(project, true));
+
+			CircuitDescriptorList.primitiveList = list;
 		}
 	}
 }

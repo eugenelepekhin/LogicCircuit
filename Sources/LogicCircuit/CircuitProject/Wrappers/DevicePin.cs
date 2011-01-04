@@ -270,7 +270,7 @@ namespace LogicCircuit {
 		public static void CreateForeignKeys(StoreSnapshot store) {
 			TableSnapshot<DevicePinData> table = (TableSnapshot<DevicePinData>)store.Table("DevicePin");
 			table.CreateForeignKey("PK_DevicePin", store.Table("Circuit"), DevicePinData.PinIdField.Field, ForeignKeyAction.Cascade, false);
-			table.CreateForeignKey("FK_Circuit_DevicePin", store.Table("Circuit"), DevicePinData.CircuitIdField.Field, ForeignKeyAction.Cascade, false);
+			table.CreateForeignKey("FK_Circuit_DevicePin", store.Table("Circuit"), DevicePinData.CircuitIdField.Field, ForeignKeyAction.Restrict, false);
 		}
 	}
 

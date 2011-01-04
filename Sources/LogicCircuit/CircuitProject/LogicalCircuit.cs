@@ -10,6 +10,12 @@ namespace LogicCircuit {
 
 		public Point ScrollOffset { get; set; }
 
+		public override void Delete() {
+			this.CircuitProject.PinSet.SelectByCircuit(this).ToList().ForEach(pin => pin.Delete());
+			this.CircuitSymbols().ToList().ForEach(symbol => symbol.DeleteSymbol());
+			base.Delete();
+		}
+
 		public IEnumerable<Pin> LogicalPins {
 			get { return this.CircuitProject.PinSet.SelectByCircuit(this); }
 		}

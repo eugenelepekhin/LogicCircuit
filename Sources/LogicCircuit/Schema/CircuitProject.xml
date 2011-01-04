@@ -71,7 +71,7 @@
 				<Column Name="Name"/>
 			</Key>
 
-			<Key Name="FK_Circuit_DevicePin" KeyType="Foreign" ParentName="Circuit" Action="Cascade">
+			<Key Name="FK_Circuit_DevicePin" KeyType="Foreign" ParentName="Circuit" Action="Restrict">
 				<Column Name="CircuitId"/>
 			</Key>
 
@@ -137,7 +137,7 @@
 				<Column Name="Name"/>
 			</Key>
 
-			<Key Name="FK_Circuit_Pin" KeyType="Foreign" ParentName="Circuit" Action="Cascade">
+			<Key Name="FK_Circuit_Pin" KeyType="Foreign" ParentName="Circuit" Action="Restrict">
 				<Column Name="CircuitId"/>
 			</Key>
 
@@ -228,7 +228,7 @@
 				<Column Name="CircuitId"/>
 			</Key>
 
-			<Key Name="FK_LogicalCircuit_CircuitSymbol" KeyType="Foreign" ParentName="LogicalCircuit" Action="Cascade">
+			<Key Name="FK_LogicalCircuit_CircuitSymbol" KeyType="Foreign" ParentName="LogicalCircuit" Action="Restrict">
 				<Column Name="LogicalCircuitId"/>
 			</Key>
 

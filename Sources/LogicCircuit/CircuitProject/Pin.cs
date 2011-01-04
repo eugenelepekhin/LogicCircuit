@@ -33,6 +33,7 @@ namespace LogicCircuit {
 
 		public override void Delete() {
 			this.OnPinChanged();
+			this.CircuitProject.DevicePinSet.DeleteAllPins(this);
 			base.Delete();
 		}
 
@@ -72,8 +73,9 @@ namespace LogicCircuit {
 
 		partial void EndNotifyPinSetChanged() {
 			foreach(LogicalCircuit circuit in this.toUpdate) {
-				Debug.Assert(!circuit.IsDeleted());
-				circuit.ResetPins();
+				if(!circuit.IsDeleted()) {
+					circuit.ResetPins();
+				}
 			}
 			this.toUpdate.Clear();
 		}

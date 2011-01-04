@@ -78,7 +78,7 @@
 
 		<CollectionViewSource x:Key="circuitDescriptorList" Source="{Binding Path=Editor.CircuitDescriptorList.CircuitDescriptors}">
 			<CollectionViewSource.GroupDescriptions>
-				<PropertyGroupDescription PropertyName="Category"/>
+				<PropertyGroupDescription PropertyName="Circuit.Category"/>
 			</CollectionViewSource.GroupDescriptions>
 		</CollectionViewSource>
 	</Window.Resources>
@@ -256,9 +256,18 @@
 													<GradientStop Color="{x:Static SystemColors.WindowColor}" Offset="1"/>
 												</RadialGradientBrush>
 											</Border.BorderBrush>
-											<TextBlock Text="{Binding Path=Items[0].Category}" FontWeight="Bold"
-												Foreground="{x:Static SystemColors.AppWorkspaceBrush}"
-											/>
+											<TextBlock FontWeight="Bold" Foreground="{x:Static SystemColors.AppWorkspaceBrush}">
+												<TextBlock.Style>
+													<Style TargetType="TextBlock">
+														<Setter Property="Text" Value="{Binding Path=Items[0].Circuit.Category}"/>
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding Path=Items[0].Circuit.Category}" Value="">
+																<Setter Property="Text" Value="{Binding Path=Items[0].Circuit.CircuitProject.ProjectSet.Project.Name}"/>
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</TextBlock.Style>
+											</TextBlock>
 										</Border>
 									</DataTemplate>
 								</GroupStyle.HeaderTemplate>

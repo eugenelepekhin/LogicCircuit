@@ -251,7 +251,7 @@ namespace LogicCircuit {
 		public static void CreateForeignKeys(StoreSnapshot store) {
 			TableSnapshot<CircuitSymbolData> table = (TableSnapshot<CircuitSymbolData>)store.Table("CircuitSymbol");
 			table.CreateForeignKey("FK_Circuit_CircuitSymbol", store.Table("Circuit"), CircuitSymbolData.CircuitIdField.Field, ForeignKeyAction.Cascade, false);
-			table.CreateForeignKey("FK_LogicalCircuit_CircuitSymbol", store.Table("LogicalCircuit"), CircuitSymbolData.LogicalCircuitIdField.Field, ForeignKeyAction.Cascade, false);
+			table.CreateForeignKey("FK_LogicalCircuit_CircuitSymbol", store.Table("LogicalCircuit"), CircuitSymbolData.LogicalCircuitIdField.Field, ForeignKeyAction.Restrict, false);
 		}
 
 		// Serializer of the table

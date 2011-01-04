@@ -10,6 +10,11 @@ namespace LogicCircuit {
 			this.ResetPins();
 		}
 
+		public override void Delete() {
+			this.CircuitProject.DevicePinSet.DeleteAllPins(this);
+			base.Delete();
+		}
+
 		public override bool IsSmallSymbol { get { return true; } }
 
 		public override string Name {

@@ -16,7 +16,6 @@ namespace LogicCircuit {
 		Circuit ICircuitDescriptor.Circuit { get { return this.Circuit; } }
 		public CircuitGlyph CircuitGlyph { get; private set; }
 		public abstract T GetCircuitToDrop(CircuitProject circuitProject);
-		public virtual string Category { get { return this.Circuit.Category; } }
 
 		protected CircuitDescriptor(T circuit) {
 			this.Circuit = circuit;
@@ -227,17 +226,6 @@ namespace LogicCircuit {
 
 		public bool IsCurrent { get { return this.Circuit == this.Circuit.CircuitProject.ProjectSet.Project.LogicalCircuit; } }
 
-		public override string Category {
-			get {
-				string text = this.Circuit.Category;
-				if(!string.IsNullOrEmpty(text)) {
-					return text;
-				} else {
-					return this.Circuit.CircuitProject.ProjectSet.Project.Name;
-				}
-			}
-		}
-
 		public override LogicalCircuit GetCircuitToDrop(CircuitProject circuitProject) {
 			return this.Circuit;
 		}
@@ -246,13 +234,6 @@ namespace LogicCircuit {
 			PropertyChangedEventHandler handler = this.PropertyChanged;
 			if(handler != null) {
 				handler(this, new PropertyChangedEventArgs("IsCurrent"));
-			}
-		}
-
-		public void NotifyCategoryChanged() {
-			PropertyChangedEventHandler handler = this.PropertyChanged;
-			if(handler != null) {
-				handler(this, new PropertyChangedEventArgs("Category"));
 			}
 		}
 	}
