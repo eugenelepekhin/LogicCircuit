@@ -317,27 +317,25 @@ namespace LogicCircuit {
 			this.CancelMove();
 			this.ClearSelection();
 			if(logicalCircuit != this.Project.LogicalCircuit) {
-				LogicalCircuit oldDiagram = this.Project.LogicalCircuit;
 				bool success = false;
 				bool started = false;
-				CircuitProject circuitProject = this.CircuitProject;
 				try {
-					if(!circuitProject.IsEditor) {
-						started = circuitProject.StartTransaction();
+					if(!this.CircuitProject.IsEditor) {
+						started = this.CircuitProject.StartTransaction();
 					}
-					if(circuitProject.IsEditor) {
+					if(this.CircuitProject.IsEditor) {
 						this.Project.LogicalCircuit = logicalCircuit;
 						if(started) {
-							circuitProject.PrepareCommit();
+							this.CircuitProject.PrepareCommit();
 						}
 						success = true;
 					}
 				} finally {
 					if(started) {
 						if(success) {
-							circuitProject.Commit();
+							this.CircuitProject.Commit();
 						} else {
-							circuitProject.Rollback();
+							this.CircuitProject.Rollback();
 						}
 					}
 					this.Refresh();
@@ -353,9 +351,10 @@ namespace LogicCircuit {
 				LogicalCircuit other = this.switcher.SuggestNext();
 				Tracer.Assert(other != null && other != current);
 				this.CircuitProject.InTransaction(() => {
-					this.OpenLogicalCircuit(other);
+					this.Project.LogicalCircuit = other;
 					current.Delete();
 				});
+				this.Refresh();
 			}
 		}
 
