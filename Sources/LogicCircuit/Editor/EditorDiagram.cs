@@ -107,7 +107,25 @@ namespace LogicCircuit {
 			symbol.PositionGlyph();
 			this.Diagram.Children.Add(symbol.Glyph);
 		}
-		private void AddWirePoint(GridPoint point) {			Connect connect;			if(!this.wirePoint.TryGetValue(point, out connect)) {				connect = new Connect();			}			connect.Count++;			if(2 < connect.Count && connect.Solder == null) {				connect.Solder = new Ellipse();				Panel.SetZIndex(connect.Solder, 0);				connect.Solder.Width = connect.Solder.Height = 2 * Symbol.PinRadius;				Canvas.SetLeft(connect.Solder, Symbol.ScreenPoint(point.X) - Symbol.PinRadius);				Canvas.SetTop(connect.Solder, Symbol.ScreenPoint(point.Y) - Symbol.PinRadius);				connect.Solder.Fill = Symbol.JamDirectFill;				this.Diagram.Children.Add(connect.Solder);			}			this.wirePoint[point] = connect;		}
+
+		private void AddWirePoint(GridPoint point) {
+			Connect connect;
+			if(!this.wirePoint.TryGetValue(point, out connect)) {
+				connect = new Connect();
+			}
+			connect.Count++;
+			if(2 < connect.Count && connect.Solder == null) {
+				connect.Solder = new Ellipse();
+				Panel.SetZIndex(connect.Solder, 0);
+				connect.Solder.Width = connect.Solder.Height = 2 * Symbol.PinRadius;
+				Canvas.SetLeft(connect.Solder, Symbol.ScreenPoint(point.X) - Symbol.PinRadius);
+				Canvas.SetTop(connect.Solder, Symbol.ScreenPoint(point.Y) - Symbol.PinRadius);
+				connect.Solder.Fill = Symbol.JamDirectFill;
+				this.Diagram.Children.Add(connect.Solder);
+			}
+			this.wirePoint[point] = connect;
+		}
+
 		private void UpdateSolders() {
 			foreach(Connect connect in this.wirePoint.Values) {
 				if(connect.Solder != null) {
