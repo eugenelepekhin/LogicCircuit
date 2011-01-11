@@ -20,6 +20,7 @@ namespace LogicCircuit {
 			if(pin != null) {
 				pin.LogicalCircuit.ResetPins();
 			}
+			this.PositionGlyph();
 		}
 
 		public override void Shift(int dx, int dy) {

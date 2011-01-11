@@ -56,9 +56,15 @@ namespace LogicCircuit {
 		public override void CopyTo(CircuitProject project) {
 			project.WireSet.Copy(this);
 		}
+
+		partial void OnWireChanged() {
+			this.PositionGlyph();
+		}
 	}
 
 	public partial class WireSet {
+		public event EventHandler WireSetChanged;
+
 		public void Load(XmlNodeList list) {
 			WireData.Load(this.Table, list, rowId => this.Create(rowId));
 		}
@@ -71,6 +77,13 @@ namespace LogicCircuit {
 			WireData data;
 			other.CircuitProject.WireSet.Table.GetData(other.WireRowId, out data);
 			return this.Create(this.Table.Insert(ref data));
+		}
+
+		partial void EndNotifyWireSetChanged() {
+			EventHandler handler = this.WireSetChanged;
+			if(handler != null) {
+				handler(this, EventArgs.Empty);
+			}
 		}
 	}
 }

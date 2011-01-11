@@ -69,7 +69,6 @@ namespace LogicCircuit {
 				Settings.User.AddRecentFile(editor.File);
 			}
 			this.Editor = editor;
-			this.Editor.Refresh();
 			this.Status = LogicCircuit.Resources.Ready;
 		}
 

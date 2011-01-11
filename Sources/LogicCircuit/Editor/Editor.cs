@@ -133,7 +133,6 @@ namespace LogicCircuit {
 			Wire wire = null;
 			if(point1 != point2) {
 				this.CircuitProject.InTransaction(() => wire = this.CircuitProject.WireSet.Create(this.Project.LogicalCircuit, point1, point2));
-				this.Add(wire);
 			}
 			return wire;
 		}
@@ -218,7 +217,6 @@ namespace LogicCircuit {
 				this.CancelMove();
 				this.ClearSelection();
 				this.CircuitProject.Undo();
-				this.Refresh();
 			}
 		}
 
@@ -227,7 +225,6 @@ namespace LogicCircuit {
 				this.CancelMove();
 				this.ClearSelection();
 				this.CircuitProject.Redo();
-				this.Refresh();
 			}
 		}
 
@@ -264,7 +261,6 @@ namespace LogicCircuit {
 							this.CircuitProject.Rollback();
 						}
 					}
-					this.Refresh();
 				}
 			}
 		}
@@ -280,7 +276,6 @@ namespace LogicCircuit {
 					this.Project.LogicalCircuit = other;
 					current.Delete();
 				});
-				this.Refresh();
 			}
 		}
 
@@ -337,7 +332,6 @@ namespace LogicCircuit {
 						}
 					}
 				});
-				this.Refresh();
 			}
 		}
 
@@ -735,8 +729,6 @@ namespace LogicCircuit {
 					wire2 = this.CircuitProject.WireSet.Create(logicalCircuit, point, wire.Point2);
 					wire.Point2 = point;
 				});
-				wire.PositionGlyph();
-				this.Add(wire2);
 				this.Select(wire);
 				this.Select(wire2);
 				return true;

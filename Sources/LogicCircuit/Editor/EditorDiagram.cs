@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-using System.Threading;
 
 namespace LogicCircuit {
 	public abstract class EditorDiagram {
@@ -30,10 +31,44 @@ namespace LogicCircuit {
 			this.Mainframe = mainframe;
 			this.CircuitProject = circuitProject;
 			this.Project.PropertyChanged += new PropertyChangedEventHandler(this.ProjectPropertyChanged);
+			this.CircuitProject.WireSet.CollectionChanged += new NotifyCollectionChangedEventHandler(this.WireSetCollectionChanged);
+			this.CircuitProject.WireSet.WireSetChanged += new EventHandler(this.WireSetChanged);
+			this.CircuitProject.CircuitSymbolSet.CollectionChanged += new NotifyCollectionChangedEventHandler(this.CircuitSymbolSetCollectionChanged);
+			this.Refresh();
 		}
 
 		private void ProjectPropertyChanged(object sender, PropertyChangedEventArgs e) {
 			this.OnProjectPropertyChanged(e.PropertyName);
+		}
+
+		private void WireSetCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
+			if(e.OldItems != null && 0 < e.OldItems.Count) {
+				foreach(Wire wire in e.OldItems) {
+					this.Diagram.Children.Remove(wire.WireGlyph);
+				}
+			}
+			if(e.NewItems != null && 0 < e.NewItems.Count) {
+				foreach(Wire wire in e.NewItems) {
+					this.Add(wire);
+				}
+			}
+		}
+
+		private void WireSetChanged(object sender, EventArgs e) {
+			this.UpdateSolders();
+		}
+
+		private void CircuitSymbolSetCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
+			if(e.OldItems != null && 0 < e.OldItems.Count) {
+				foreach(CircuitSymbol symbol in e.OldItems) {
+					this.Diagram.Children.Remove(symbol.Glyph);
+				}
+			}
+			if(e.NewItems != null && 0 < e.NewItems.Count) {
+				foreach(CircuitSymbol symbol in e.NewItems) {
+					this.Add(symbol);
+				}
+			}
 		}
 
 		protected virtual void OnProjectPropertyChanged(string propertyName) {
@@ -50,6 +85,7 @@ namespace LogicCircuit {
 						scrollViewer.ScrollToHorizontalOffset(this.currentLogicalCircuit.ScrollOffset.X);
 						scrollViewer.ScrollToVerticalOffset(this.currentLogicalCircuit.ScrollOffset.Y);
 					}
+					this.RedrawDiagram();
 				}
 			}
 		}
@@ -62,46 +98,40 @@ namespace LogicCircuit {
 			}
 		}
 
-		private void AddWirePoint(GridPoint point) {
-			Connect connect;
-			if(!this.wirePoint.TryGetValue(point, out connect)) {
-				connect = new Connect();
-			}
-			connect.Count++;
-			if(2 < connect.Count && connect.Solder == null) {
-				connect.Solder = new Ellipse();
-				Panel.SetZIndex(connect.Solder, 0);
-				connect.Solder.Width = connect.Solder.Height = 2 * Symbol.PinRadius;
-				Canvas.SetLeft(connect.Solder, Symbol.ScreenPoint(point.X) - Symbol.PinRadius);
-				Canvas.SetTop(connect.Solder, Symbol.ScreenPoint(point.Y) - Symbol.PinRadius);
-				connect.Solder.Fill = Symbol.JamDirectFill;
-				this.Diagram.Children.Add(connect.Solder);
-			}
-			this.wirePoint[point] = connect;
-		}
-
-		// TODO: make it private
-		protected void Add(Wire wire) {
+		private void Add(Wire wire) {
 			wire.PositionGlyph();
 			this.Diagram.Children.Add(wire.WireGlyph);
-			this.AddWirePoint(wire.Point1);
-			this.AddWirePoint(wire.Point2);
+		}
+
+		private void Add(CircuitSymbol symbol) {
+			symbol.PositionGlyph();
+			this.Diagram.Children.Add(symbol.Glyph);
+		}
+		private void AddWirePoint(GridPoint point) {			Connect connect;			if(!this.wirePoint.TryGetValue(point, out connect)) {				connect = new Connect();			}			connect.Count++;			if(2 < connect.Count && connect.Solder == null) {				connect.Solder = new Ellipse();				Panel.SetZIndex(connect.Solder, 0);				connect.Solder.Width = connect.Solder.Height = 2 * Symbol.PinRadius;				Canvas.SetLeft(connect.Solder, Symbol.ScreenPoint(point.X) - Symbol.PinRadius);				Canvas.SetTop(connect.Solder, Symbol.ScreenPoint(point.Y) - Symbol.PinRadius);				connect.Solder.Fill = Symbol.JamDirectFill;				this.Diagram.Children.Add(connect.Solder);			}			this.wirePoint[point] = connect;		}
+		private void UpdateSolders() {
+			foreach(Connect connect in this.wirePoint.Values) {
+				if(connect.Solder != null) {
+					this.Diagram.Children.Remove(connect.Solder);
+				}
+			}
+			this.wirePoint.Clear();
+			foreach(Wire wire in this.Project.LogicalCircuit.Wires()) {
+				this.AddWirePoint(wire.Point1);
+				this.AddWirePoint(wire.Point2);
+			}
 		}
 
 		private void RedrawDiagram() {
-			Canvas diagram = this.Diagram;
-			diagram.Children.Clear();
+			this.Diagram.Children.Clear();
 			this.wirePoint.Clear();
 			LogicalCircuit logicalCircuit = this.Project.LogicalCircuit;
 			foreach(Wire wire in logicalCircuit.Wires()) {
 				this.Add(wire);
 			}
 			foreach(CircuitSymbol symbol in logicalCircuit.CircuitSymbols()) {
-				Point point = Symbol.ScreenPoint(symbol.Point);
-				Canvas.SetLeft(symbol.Glyph, point.X);
-				Canvas.SetTop(symbol.Glyph, point.Y);
-				diagram.Children.Add(symbol.Glyph);
+				this.Add(symbol);
 			}
+			this.UpdateSolders();
 		}
 	}
 }
