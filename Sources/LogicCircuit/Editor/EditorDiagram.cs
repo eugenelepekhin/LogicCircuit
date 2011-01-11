@@ -41,36 +41,6 @@ namespace LogicCircuit {
 			this.OnProjectPropertyChanged(e.PropertyName);
 		}
 
-		private void WireSetCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
-			if(e.OldItems != null && 0 < e.OldItems.Count) {
-				foreach(Wire wire in e.OldItems) {
-					this.Diagram.Children.Remove(wire.WireGlyph);
-				}
-			}
-			if(e.NewItems != null && 0 < e.NewItems.Count) {
-				foreach(Wire wire in e.NewItems) {
-					this.Add(wire);
-				}
-			}
-		}
-
-		private void WireSetChanged(object sender, EventArgs e) {
-			this.UpdateSolders();
-		}
-
-		private void CircuitSymbolSetCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
-			if(e.OldItems != null && 0 < e.OldItems.Count) {
-				foreach(CircuitSymbol symbol in e.OldItems) {
-					this.Diagram.Children.Remove(symbol.Glyph);
-				}
-			}
-			if(e.NewItems != null && 0 < e.NewItems.Count) {
-				foreach(CircuitSymbol symbol in e.NewItems) {
-					this.Add(symbol);
-				}
-			}
-		}
-
 		protected virtual void OnProjectPropertyChanged(string propertyName) {
 			if(propertyName == "LogicalCircuit") {
 				if(this.currentLogicalCircuit != this.Project.LogicalCircuit) {
@@ -90,9 +60,53 @@ namespace LogicCircuit {
 			}
 		}
 
+		private void WireSetCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
+			if(e.OldItems != null && 0 < e.OldItems.Count) {
+				foreach(Wire wire in e.OldItems) {
+					Line line = wire.WireGlyph;
+					if(line.Parent == this.Diagram) {
+						this.Diagram.Children.Remove(line);
+					}
+					Tracer.Assert(line.Parent == null);
+				}
+			}
+			if(e.NewItems != null && 0 < e.NewItems.Count) {
+				LogicalCircuit current = this.Project.LogicalCircuit;
+				foreach(Wire wire in e.NewItems) {
+					if(wire.LogicalCircuit == current) {
+						this.Add(wire);
+					}
+				}
+			}
+		}
+
+		private void WireSetChanged(object sender, EventArgs e) {
+			this.UpdateSolders();
+		}
+
+		private void CircuitSymbolSetCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
+			if(e.OldItems != null && 0 < e.OldItems.Count) {
+				foreach(CircuitSymbol symbol in e.OldItems) {
+					FrameworkElement glyph = symbol.Glyph;
+					if(glyph.Parent == this.Diagram) {
+						this.Diagram.Children.Remove(glyph);
+					}
+					Tracer.Assert(glyph.Parent == null);
+				}
+			}
+			if(e.NewItems != null && 0 < e.NewItems.Count) {
+				LogicalCircuit current = this.Project.LogicalCircuit;
+				foreach(CircuitSymbol symbol in e.NewItems) {
+					if(symbol.LogicalCircuit == current) {
+						this.Add(symbol);
+					}
+				}
+			}
+		}
+
 		public void Refresh() {
 			if(this.Dispatcher.Thread != Thread.CurrentThread) {
-				this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(this.RedrawDiagram));
+				this.Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new Action(this.RedrawDiagram));
 			} else {
 				this.RedrawDiagram();
 			}
