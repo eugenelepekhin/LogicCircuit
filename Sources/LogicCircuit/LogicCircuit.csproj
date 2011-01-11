@@ -92,6 +92,7 @@
     <Compile Include="Editor\CircuitDescriptor.cs" />
     <Compile Include="Editor\CircuitDescriptorList.cs" />
     <Compile Include="Editor\CircuitSymbolMarker.cs" />
+    <Compile Include="Editor\EditorDiagram.cs" />
     <Compile Include="Editor\Editor.cs" />
     <Compile Include="CircuitException.cs" />
     <Compile Include="CircuitProject\BasePin.cs" />

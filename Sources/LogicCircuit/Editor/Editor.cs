@@ -11,20 +11,17 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace LogicCircuit {
-	public partial class Editor : INotifyPropertyChanged {
+	public partial class Editor : EditorDiagram, INotifyPropertyChanged {
+
 		private const int ClickProximity = 2 * Symbol.PinRadius;
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		public Mainframe Mainframe { get; private set; }
 		public string File { get; private set; }
-		public CircuitProject CircuitProject { get; private set; }
 		private int savedVersion;
 
 		public CircuitDescriptorList CircuitDescriptorList { get; private set; }
 		private Switcher switcher;
-		private LogicalCircuit currentLogicalCircuit;
-		private readonly Dictionary<GridPoint, int> wirePoint = new Dictionary<GridPoint, int>();
 
 		private Dictionary<Symbol, Marker> selection = new Dictionary<Symbol, Marker>();
 		private Canvas selectionLayer;
@@ -33,11 +30,7 @@ namespace LogicCircuit {
 		private Point moveStart;
 		private TranslateTransform moveVector;
 
-		private Dispatcher Dispatcher { get { return this.Mainframe.Dispatcher; } }
-		private Canvas Diagram { get { return this.Mainframe.Diagram; } }
-
 		public bool HasChanges { get { return this.savedVersion != this.CircuitProject.Version; } }
-		public Project Project { get { return this.CircuitProject.ProjectSet.Project; } }
 		public string Caption { get { return Resources.MainFrameCaption(this.File); } }
 
 		// TODO: implement it correctly
@@ -55,14 +48,11 @@ namespace LogicCircuit {
 		// TODO: implement it correctly
 		public bool InEditMode { get { return true; } }
 
-		public Editor(Mainframe mainframe, string file) {
-			this.Mainframe = mainframe;
+		public Editor(Mainframe mainframe, string file) : base(mainframe, CircuitProject.Create(file)) {
 			this.File = file;
-			this.CircuitProject = CircuitProject.Create(this.File);
 			this.savedVersion = this.CircuitProject.Version;
 			this.CircuitDescriptorList = new CircuitDescriptorList(this.CircuitProject);
 			this.switcher = new Switcher(this);
-			this.Project.PropertyChanged += new PropertyChangedEventHandler(this.ProjectPropertyChanged);
 		}
 
 		public void Save(string file) {
@@ -72,29 +62,17 @@ namespace LogicCircuit {
 			this.NotifyPropertyChanged("File");
 		}
 
-		private void ProjectPropertyChanged(object sender, PropertyChangedEventArgs e) {
-			switch(e.PropertyName) {
+		protected override void OnProjectPropertyChanged(string propertyName) {
+			switch(propertyName) {
 			case "Zoom":
 			case "Frequency":
 			case "IsMaximumSpeed":
-				this.NotifyPropertyChanged(e.PropertyName);
+				this.NotifyPropertyChanged(propertyName);
 				break;
 			case "LogicalCircuit":
 				this.CancelMove();
 				this.ClearSelection();
-				if(this.currentLogicalCircuit != this.Project.LogicalCircuit) {
-					// TODO: this is not very good way to get scroll control as this assumes canvas is sitting on scroll viewer.
-					// What if this get changed? For now just do it in hackky way
-					ScrollViewer scrollViewer = this.Diagram.Parent as ScrollViewer;
-					if(scrollViewer != null) {
-						if(this.currentLogicalCircuit != null && !this.currentLogicalCircuit.IsDeleted()) {
-							this.currentLogicalCircuit.ScrollOffset = new Point(scrollViewer.HorizontalOffset, scrollViewer.VerticalOffset);
-						}
-						this.currentLogicalCircuit = this.Project.LogicalCircuit;
-						scrollViewer.ScrollToHorizontalOffset(this.currentLogicalCircuit.ScrollOffset.X);
-						scrollViewer.ScrollToVerticalOffset(this.currentLogicalCircuit.ScrollOffset.Y);
-					}
-				}
+				base.OnProjectPropertyChanged(propertyName);
 				break;
 			}
 		}
@@ -142,58 +120,6 @@ namespace LogicCircuit {
 			}
 		}
 
-		//--- Drawing on Diagram --
-
-		public void Refresh() {
-			if(this.Dispatcher.Thread != Thread.CurrentThread) {
-				this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(this.RedrawDiagram));
-			} else {
-				this.RedrawDiagram();
-			}
-		}
-
-		private void Add(Canvas diagram, Wire wire) {
-			wire.PositionGlyph();
-			diagram.Children.Add(wire.WireGlyph);
-			this.AddWirePoint(wire.Point1);
-			this.AddWirePoint(wire.Point2);
-		}
-
-		private void RedrawDiagram() {
-			Canvas diagram = this.Diagram;
-			diagram.Children.Clear();
-			this.wirePoint.Clear();
-			LogicalCircuit logicalCircuit = this.Project.LogicalCircuit;
-			foreach(Wire wire in logicalCircuit.Wires()) {
-				this.Add(diagram, wire);
-			}
-			foreach(KeyValuePair<GridPoint, int> solder in this.wirePoint) {
-				if(2 < solder.Value) {
-					Ellipse ellipse = new Ellipse();
-					Panel.SetZIndex(ellipse, 0);
-					ellipse.Width = ellipse.Height = 2 * Symbol.PinRadius;
-					Canvas.SetLeft(ellipse, Symbol.ScreenPoint(solder.Key.X) - Symbol.PinRadius);
-					Canvas.SetTop(ellipse, Symbol.ScreenPoint(solder.Key.Y) - Symbol.PinRadius);
-					ellipse.Fill = Symbol.JamDirectFill;
-					diagram.Children.Add(ellipse);
-				}
-			}
-			foreach(CircuitSymbol symbol in logicalCircuit.CircuitSymbols()) {
-				Point point = Symbol.ScreenPoint(symbol.Point);
-				Canvas.SetLeft(symbol.Glyph, point.X);
-				Canvas.SetTop(symbol.Glyph, point.Y);
-				diagram.Children.Add(symbol.Glyph);
-			}
-		}
-
-		private void AddWirePoint(GridPoint point) {
-			int count;
-			if(!this.wirePoint.TryGetValue(point, out count)) {
-				count = 0;
-			}
-			this.wirePoint[point] = count + 1;
-		}
-
 		//--- Edit Operation
 
 		private void DeleteEmptyWires() {
@@ -207,7 +133,7 @@ namespace LogicCircuit {
 			Wire wire = null;
 			if(point1 != point2) {
 				this.CircuitProject.InTransaction(() => wire = this.CircuitProject.WireSet.Create(this.Project.LogicalCircuit, point1, point2));
-				this.Add(this.Diagram, wire);
+				this.Add(wire);
 			}
 			return wire;
 		}
@@ -810,7 +736,7 @@ namespace LogicCircuit {
 					wire.Point2 = point;
 				});
 				wire.PositionGlyph();
-				this.Add(this.Diagram, wire2);
+				this.Add(wire2);
 				this.Select(wire);
 				this.Select(wire2);
 				return true;
