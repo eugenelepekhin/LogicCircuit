@@ -9,13 +9,18 @@ using System.Windows;
 namespace LogicCircuit {
 	public interface ICircuitDescriptor {
 		Circuit Circuit { get; }
+		Circuit GetCircuitToDrop(CircuitProject circuitProject);
 	}
 	
 	public abstract class CircuitDescriptor<T> : ICircuitDescriptor where T:Circuit {
 		public T Circuit { get; private set; }
 		Circuit ICircuitDescriptor.Circuit { get { return this.Circuit; } }
 		public CircuitGlyph CircuitGlyph { get; private set; }
+
 		public abstract T GetCircuitToDrop(CircuitProject circuitProject);
+		Circuit ICircuitDescriptor.GetCircuitToDrop(CircuitProject circuitProject) {
+			return this.GetCircuitToDrop(circuitProject);
+		}
 
 		protected CircuitDescriptor(T circuit) {
 			this.Circuit = circuit;
@@ -68,12 +73,12 @@ namespace LogicCircuit {
 			case GateType.Even:
 				this.InputCountRange = GateDescriptor.PinRange(2, Gate.MaxInputCount);
 				this.InputCountRangeLength = this.InputCountRange.Count();
-				this.InputCount = 2;
 				break;
 			default:
 				Tracer.Fail();
 				break;
 			}
+			this.InputCount = gate.InputCount;
 		}
 
 		public override Gate GetCircuitToDrop(CircuitProject circuitProject) {

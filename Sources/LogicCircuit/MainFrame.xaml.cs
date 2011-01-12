@@ -168,18 +168,42 @@ namespace LogicCircuit {
 		}
 
 		private void DescriptorMouseDown(object sender, MouseButtonEventArgs e) {
+			try {
+				if(this.Editor != null) {
+					this.Editor.DescriptorMouseDown((FrameworkElement)sender, e);
+				}
+			} catch(Exception exception) {
+				Tracer.Report("MainFrame.DescriptorMouseDown", exception);
+				this.ReportException(exception);
+			}
 		}
 
 		private void DescriptorMouseUp(object sender, MouseButtonEventArgs e) {
+			try {
+				if(this.Editor != null) {
+					this.Editor.DescriptorMouseUp((FrameworkElement)sender, e);
+				}
+			} catch(Exception exception) {
+				Tracer.Report("MainFrame.DescriptorMouseUp", exception);
+				this.ReportException(exception);
+			}
 		}
 
 		private void DescriptorMouseMove(object sender, MouseEventArgs e) {
+			try {
+				if(this.Editor != null) {
+					this.Editor.DescriptorMouseMove((FrameworkElement)sender, e);
+				}
+			} catch(Exception exception) {
+				Tracer.Report("MainFrame.DescriptorMouseMove", exception);
+				this.ReportException(exception);
+			}
 		}
 
 		private void DiagramDragEnter(object sender, DragEventArgs e) {
 			try {
 				if(this.Editor != null) {
-					//this.Editor.CanvasDragOver(sender, e);
+					this.Editor.DiagramDragOver(e);
 				}
 			} catch(Exception exception) {
 				Tracer.Report("MainFrame.DiagramDragEnter", exception);
@@ -190,7 +214,7 @@ namespace LogicCircuit {
 		private void DiagramDragOver(object sender, DragEventArgs e) {
 			try {
 				if(this.Editor != null) {
-					//this.Editor.CanvasDragOver(sender, e);
+					this.Editor.DiagramDragOver(e);
 				}
 			} catch(Exception exception) {
 				Tracer.Report("MainFrame.DiagramDragOver", exception);
@@ -201,7 +225,7 @@ namespace LogicCircuit {
 		private void DiagramDragLeave(object sender, DragEventArgs e) {
 			try {
 				if(this.Editor != null) {
-					//this.Editor.CanvasDragLeave(sender, e);
+					this.Editor.DiagramDragLeave(e);
 				}
 			} catch(Exception exception) {
 				Tracer.Report("MainFrame.DiagramDragLeave", exception);
@@ -212,7 +236,7 @@ namespace LogicCircuit {
 		private void DiagramDrop(object sender, DragEventArgs e) {
 			try {
 				if(this.Editor != null) {
-					//this.Editor.CanvasDrop(sender, e);
+					this.Editor.DiagramDrop(e);
 				}
 			} catch(Exception exception) {
 				Tracer.Report("MainFrame.DiagramDrop", exception);

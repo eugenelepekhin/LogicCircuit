@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Windows;
@@ -23,6 +24,11 @@ namespace LogicCircuit {
 
 		public bool HasChanges { get { return this.savedVersion != this.CircuitProject.Version; } }
 		public string Caption { get { return Resources.MainFrameCaption(this.File); } }
+
+		// use process specific id in order to prevent dragging and dropping between processes.
+		private const double DragStartProximity = 3;
+		private Point dragStart;
+		private FrameworkElement dragSource;
 
 		// TODO: implement it correctly
 		private bool power = false;
@@ -471,6 +477,42 @@ namespace LogicCircuit {
 			if(this.InEditMode && (e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl)) {
 				this.switcher.OnControlUp();
 				e.Handled = true;
+			}
+		}
+
+		public void DescriptorMouseDown(FrameworkElement sender, MouseButtonEventArgs e) {
+			if(e.ChangedButton == MouseButton.Left && this.InEditMode) {
+				ICircuitDescriptor descriptor = sender.DataContext as ICircuitDescriptor;
+				if(descriptor != null) {
+					if(1 < e.ClickCount) {
+						LogicalCircuitDescriptor logicalCircuitDescriptor = descriptor as LogicalCircuitDescriptor;
+						if(logicalCircuitDescriptor != null && !logicalCircuitDescriptor.IsCurrent) {
+							this.OpenLogicalCircuit(logicalCircuitDescriptor.Circuit);
+						}
+					} else {
+						this.dragStart = e.GetPosition(sender);
+						this.dragSource = sender;
+					}
+				}
+			}
+		}
+
+		public void DescriptorMouseUp(FrameworkElement sender, MouseButtonEventArgs e) {
+			this.dragSource = null;
+		}
+
+		public void DescriptorMouseMove(FrameworkElement sender, MouseEventArgs e) {
+			if(this.InEditMode && this.dragSource != null) {
+				Point point = e.GetPosition(this.dragSource);
+				double x = point.X - this.dragStart.X;
+				double y = point.Y - this.dragStart.Y;
+				if(Editor.DragStartProximity < x * x + y * y) {
+					this.dragSource = null;
+					DragDrop.DoDragDrop(sender,
+						new DataObject(this.CircuitDescriptorDataFormat, sender.DataContext),
+						DragDropEffects.Copy | DragDropEffects.Scroll
+					);
+				}
 			}
 		}
 	}

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Windows;
@@ -15,6 +16,7 @@ namespace LogicCircuit {
 	public abstract partial class EditorDiagram {
 
 		private const int ClickProximity = 2 * Symbol.PinRadius;
+		protected readonly string CircuitDescriptorDataFormat = "LogicCircuit.CircuitDescriptor." + Process.GetCurrentProcess().Id;
 
 		private struct Connect {
 			public int Count;
@@ -532,6 +534,33 @@ namespace LogicCircuit {
 		}
 
 		//--- Event Handling ---
+
+		public void DiagramDragOver(DragEventArgs e) {
+			if(this.InEditMode && e.Data.GetDataPresent(this.CircuitDescriptorDataFormat, false)) {
+				e.Effects = DragDropEffects.Copy | DragDropEffects.Scroll;
+			} else {
+				e.Effects = DragDropEffects.None;
+			}
+			e.Handled = true;
+		}
+
+		public void DiagramDragLeave(DragEventArgs e) {
+			e.Effects = DragDropEffects.None;
+			e.Handled = true;
+		}
+
+		public void DiagramDrop(DragEventArgs e) {
+			if(this.InEditMode) {
+				ICircuitDescriptor descriptor = e.Data.GetData(this.CircuitDescriptorDataFormat, false) as ICircuitDescriptor;
+				if(descriptor != null) {
+					GridPoint point = Symbol.GridPoint(e.GetPosition(this.Diagram));
+					this.CircuitProject.InTransaction(() => {
+						this.CircuitProject.CircuitSymbolSet.Create(descriptor.GetCircuitToDrop(this.CircuitProject), this.Project.LogicalCircuit, point.X, point.Y);
+					});
+				}
+			}
+			e.Handled = true;
+		}
 
 		public void DiagramMouseDown(MouseButtonEventArgs e) {
 			FrameworkElement element = e.OriginalSource as FrameworkElement;
