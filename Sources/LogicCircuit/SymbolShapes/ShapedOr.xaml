@@ -5,24 +5,28 @@
 	<Grid.RowDefinitions>
 		<RowDefinition Height="Auto"/>
 		<RowDefinition Height="Auto"/>
-		<RowDefinition Height="Auto"/>
+		<RowDefinition Height="*"/>
 	</Grid.RowDefinitions>
 
-	<Rectangle Grid.Row="0" Name="topLine" Width="1" VerticalAlignment="Stretch" HorizontalAlignment="Left" Fill="Black" Margin="0,10,0,0"/>
+	<Rectangle Grid.Row="0" Name="topLine" Width="1" VerticalAlignment="Stretch" HorizontalAlignment="Left" Fill="Black" Margin="1,10,0,0">
+		<Rectangle.RenderTransform>
+			<TranslateTransform X="0" Y="3"/>
+		</Rectangle.RenderTransform>
+	</Rectangle>
 
-	<Path Grid.Column="1" Stroke="Black" StrokeThickness="1" Fill="White" VerticalAlignment="Top" HorizontalAlignment="Left">
+	<Path Grid.Row="1" Stroke="Black" StrokeThickness="1" Fill="White" VerticalAlignment="Top" HorizontalAlignment="Left">
 		<Path.Data>
 			<PathGeometry>
-				<PathFigure StartPoint="54,36" IsClosed="True">
+				<PathFigure StartPoint="54,26" IsClosed="True">
 					<PathFigure.Segments>
-						<ArcSegment Size="60,60" Point="1,60" SweepDirection="Clockwise" IsLargeArc="False" RotationAngle="0"/>
-						<ArcSegment Size="60,60" Point="1,13" SweepDirection="Counterclockwise" IsLargeArc="False" RotationAngle="0"/>
-						<ArcSegment Size="60,60" Point="54,36" SweepDirection="Clockwise" IsLargeArc="False" RotationAngle="0"/>
+						<ArcSegment Size="60,60" Point="1,50" SweepDirection="Clockwise" IsLargeArc="False" RotationAngle="0"/>
+						<ArcSegment Size="60,60" Point="1,3" SweepDirection="Counterclockwise" IsLargeArc="False" RotationAngle="0"/>
+						<ArcSegment Size="60,60" Point="54,26" SweepDirection="Clockwise" IsLargeArc="False" RotationAngle="0"/>
 					</PathFigure.Segments>
 				</PathFigure>
 			</PathGeometry>
 		</Path.Data>
 	</Path>
 
-	<Rectangle Grid.Row="2" Name="bottomLine" Width="1" VerticalAlignment="Stretch" HorizontalAlignment="Left" Fill="Black" Margin="0,0,0,10"/>
+	<Rectangle Grid.Row="2" Name="bottomLine" Width="1" VerticalAlignment="Top" HorizontalAlignment="Left" Fill="Black" Margin="1,0,0,13"/>
 </Grid>
