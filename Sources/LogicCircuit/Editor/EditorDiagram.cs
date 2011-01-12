@@ -354,15 +354,11 @@ namespace LogicCircuit {
 			this.SelectSymbol(symbol);
 		}
 
-		private void Unselect(Marker marker) {
-			this.selection.Remove(marker.Symbol);
-			this.selectionLayer.Children.Remove(marker.Glyph);
-		}
-
 		public void Unselect(Symbol symbol) {
 			Marker marker = this.FindMarker(symbol);
 			if(marker != null) {
-				this.Unselect(marker);
+				this.selection.Remove(marker.Symbol);
+				this.selectionLayer.Children.Remove(marker.Glyph);
 			}
 		}
 
@@ -658,7 +654,7 @@ namespace LogicCircuit {
 
 		private void MarkerMouseDown(Marker marker, MouseButtonEventArgs e) {
 			if((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control) {
-				this.Unselect(marker);
+				this.Unselect(marker.Symbol);
 				return;
 			}
 
