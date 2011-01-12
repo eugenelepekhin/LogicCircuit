@@ -222,8 +222,9 @@ namespace LogicCircuit {
 
 		private void DiagramMouseDown(object sender, MouseButtonEventArgs e) {
 			try {
+				Tracer.Assert(sender == this.Diagram);
 				if(this.Editor != null) {
-					this.Editor.DiagramMouseDown((Canvas)sender, e);
+					this.Editor.DiagramMouseDown(e);
 				}
 			} catch(Exception exception) {
 				Tracer.Report("MainFrame.DiagramMouseDown", exception);
@@ -233,8 +234,9 @@ namespace LogicCircuit {
 
 		private void DiagramMouseUp(object sender, MouseButtonEventArgs e) {
 			try {
+				Tracer.Assert(sender == this.Diagram);
 				if(this.Editor != null) {
-					this.Editor.DiagramMouseUp((Canvas)sender, e);
+					this.Editor.DiagramMouseUp(e);
 				}
 			} catch(Exception exception) {
 				Tracer.Report("MainFrame.DiagramMouseUp", exception);
@@ -244,8 +246,9 @@ namespace LogicCircuit {
 
 		private void DiagramMouseMove(object sender, MouseEventArgs e) {
 			try {
+				Tracer.Assert(sender == this.Diagram);
 				if(this.Editor != null) {
-					this.Editor.DiagramMouseMove((Canvas)sender, e);
+					this.Editor.DiagramMouseMove(e);
 				}
 			} catch(Exception exception) {
 				Tracer.Report("MainFrame.DiagramMouseMove", exception);

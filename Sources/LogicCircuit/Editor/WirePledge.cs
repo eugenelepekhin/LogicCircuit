@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Shapes;
 
 namespace LogicCircuit {
-	partial class Editor {
+	partial class EditorDiagram {
 		private class WirePledge : Marker {
 			public Line MarkerLine { get; private set; }
 			public GridPoint Point1 { get { return Symbol.GridPoint(new Point(this.MarkerLine.X1, this.MarkerLine.Y1)); } }
@@ -26,13 +26,13 @@ namespace LogicCircuit {
 
 			public override FrameworkElement Glyph { get { return this.MarkerLine; } }
 
-			public override void Move(Editor editor, Point point) {
+			public override void Move(EditorDiagram editor, Point point) {
 				Point end = Symbol.ScreenPoint(Symbol.GridPoint(point));
 				this.MarkerLine.X2 = end.X;
 				this.MarkerLine.Y2 = end.Y;
 			}
 
-			public override void Commit(Editor editor, Point point, bool withWires) {
+			public override void Commit(EditorDiagram editor, Point point, bool withWires) {
 				this.Move(editor, point);
 				Wire wire = editor.CreateWire(this.Point1, this.Point2);
 				if(wire == null) {

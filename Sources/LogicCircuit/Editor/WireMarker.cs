@@ -7,7 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Shapes;
 
 namespace LogicCircuit {
-	partial class Editor {
+	partial class EditorDiagram {
 		private class WireMarker : Marker {
 			public Wire Wire { get; private set; }
 			public override Symbol Symbol { get { return this.Wire; } }
@@ -50,11 +50,11 @@ namespace LogicCircuit {
 				this.PositionGlyph();
 			}
 
-			public override void Move(Editor editor, Point point) {
+			public override void Move(EditorDiagram editor, Point point) {
 				editor.MoveSelection(point);
 			}
 
-			public override void Commit(Editor editor, Point point, bool withWires) {
+			public override void Commit(EditorDiagram editor, Point point, bool withWires) {
 				editor.CommitMove(point, withWires);
 			}
 

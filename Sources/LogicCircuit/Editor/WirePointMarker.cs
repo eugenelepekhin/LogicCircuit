@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Shapes;
 
 namespace LogicCircuit {
-	partial class Editor {
+	partial class EditorDiagram {
 		private class WirePointMarker : Marker {
 			public WireMarker Parent { get; private set; }
 			private readonly Func<Point> getPoint;
@@ -29,7 +29,7 @@ namespace LogicCircuit {
 				this.MarkerGlyph.Width = this.MarkerGlyph.Height = 2 * Symbol.PinRadius;
 			}
 
-			public override void Move(Editor editor, Point point) {
+			public override void Move(EditorDiagram editor, Point point) {
 				if(editor.SelectionCount > 1) {
 					editor.MoveSelection(point);
 				} else {
@@ -38,7 +38,7 @@ namespace LogicCircuit {
 				}
 			}
 
-			public override void Commit(Editor editor, Point point, bool withWires) {
+			public override void Commit(EditorDiagram editor, Point point, bool withWires) {
 				if(editor.SelectionCount > 1) {
 					editor.CommitMove(point, withWires);
 				} else {

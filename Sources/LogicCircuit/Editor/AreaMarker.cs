@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Shapes;
 
 namespace LogicCircuit {
-	partial class Editor {
+	partial class EditorDiagram {
 		private class AreaMarker : Marker {
 
 			public override Symbol Symbol { get { throw new InvalidOperationException(); } }
@@ -19,11 +19,11 @@ namespace LogicCircuit {
 				this.PositionGlyph(point);
 			}
 
-			public override void Move(Editor editor, Point point) {
+			public override void Move(EditorDiagram editor, Point point) {
 				this.PositionGlyph(point);
 			}
 
-			public override void Commit(Editor editor, Point point, bool withWires) {
+			public override void Commit(EditorDiagram editor, Point point, bool withWires) {
 				editor.Select(new Rect(this.Point0, point));
 			}
 
