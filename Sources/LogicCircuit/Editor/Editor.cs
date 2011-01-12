@@ -277,6 +277,39 @@ namespace LogicCircuit {
 			dialog.ShowDialog();
 		}
 
+		protected override void Edit(Symbol symbol) {
+			if(this.InEditMode) {
+				CircuitSymbol circuitSymbol = symbol as CircuitSymbol;
+				if(circuitSymbol != null) {
+					LogicalCircuit lc = circuitSymbol.Circuit as LogicalCircuit;
+					if(lc != null) {
+						this.OpenLogicalCircuit(lc);
+						return;
+					}
+					CircuitButton cb = circuitSymbol.Circuit as CircuitButton;
+					if(cb != null) {
+						this.Edit(cb);
+						return;
+					}
+					Constant ct = circuitSymbol.Circuit as Constant;
+					if(ct != null) {
+						this.Edit(ct);
+						return;
+					}
+					Memory m = circuitSymbol.Circuit as Memory;
+					if(m != null) {
+						this.Edit(m);
+						return;
+					}
+					Pin pin = circuitSymbol.Circuit as Pin;
+					if(pin != null) {
+						this.Edit(pin);
+						return;
+					}
+				}
+			}
+		}
+
 		public void SelectAll() {
 			if(this.InEditMode) {
 				LogicalCircuit logicalCircuit = this.Project.LogicalCircuit;
@@ -438,39 +471,6 @@ namespace LogicCircuit {
 			if(this.InEditMode && (e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl)) {
 				this.switcher.OnControlUp();
 				e.Handled = true;
-			}
-		}
-
-		protected override void Edit(Symbol symbol) {
-			if(this.InEditMode) {
-				CircuitSymbol circuitSymbol = symbol as CircuitSymbol;
-				if(circuitSymbol != null) {
-					LogicalCircuit lc = circuitSymbol.Circuit as LogicalCircuit;
-					if(lc != null) {
-						this.OpenLogicalCircuit(lc);
-						return;
-					}
-					CircuitButton cb = circuitSymbol.Circuit as CircuitButton;
-					if(cb != null) {
-						this.Edit(cb);
-						return;
-					}
-					Constant ct = circuitSymbol.Circuit as Constant;
-					if(ct != null) {
-						this.Edit(ct);
-						return;
-					}
-					Memory m = circuitSymbol.Circuit as Memory;
-					if(m != null) {
-						this.Edit(m);
-						return;
-					}
-					Pin pin = circuitSymbol.Circuit as Pin;
-					if(pin != null) {
-						this.Edit(pin);
-						return;
-					}
-				}
 			}
 		}
 	}
