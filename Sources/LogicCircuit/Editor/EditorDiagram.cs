@@ -661,6 +661,7 @@ namespace LogicCircuit {
 				this.Unselect(marker);
 				return;
 			}
+
 			WireMarker wireMarker = marker as WireMarker;
 			if(wireMarker != null) {
 				Wire wire = wireMarker.Wire;
@@ -677,26 +678,32 @@ namespace LogicCircuit {
 					return;
 				}
 			}
+
+			WirePointMarker wirePointMarker = marker as WirePointMarker;
+			if(wirePointMarker != null) {
+				Wire wire = wirePointMarker.Parent.Wire;
+				if(Keyboard.Modifiers == ModifierKeys.Shift) {
+					this.ClearSelection();
+					this.SelectConductor(wire);
+					this.StartMove(this.FindMarker(wire), e.GetPosition(this.Diagram));
+					return;
+				} else if(Keyboard.Modifiers == (ModifierKeys.Shift | ModifierKeys.Control)) {
+					this.UnselectConductor(wire);
+					return;
+				} else if(Keyboard.Modifiers == ModifierKeys.Alt && this.SelectionCount == 2) {
+					GridPoint point = wirePointMarker.WirePoint();
+					foreach(Symbol symbol in this.selection.Keys) {
+						Wire wire2 = symbol as Wire;
+						if(wire2 != null && wire2 != wire && (wire2.Point1 == point || wire2.Point2 == point)) {
+							this.Merge(wire, wire2);
+							break;
+						}
+					}
+					return;
+				}
+			}
+
 			this.StartMove(marker, e.GetPosition(this.Diagram));
-			
-			//} else if(Keyboard.Modifiers == ModifierKeys.Shift && marker is WirePointMarker) {
-			//    Wire w = ((WirePointMarker)marker).WireMarker.Wire;
-			//    this.ClearSelection();
-			//    this.SelectConductor(w);
-			//    this.StartMove(diagram, this.Marker(w), e.GetPosition(diagram));
-			//} else if(Keyboard.Modifiers == (ModifierKeys.Shift | ModifierKeys.Control) && marker is WirePointMarker) {
-			//    this.UnselectConductor(((WirePointMarker)marker).WireMarker.Wire);
-			//} else if(Keyboard.Modifiers == ModifierKeys.Alt && marker is WirePointMarker && this.SelectionCount == 2) {
-			//    WirePointMarker pointMarker = (WirePointMarker)marker;
-			//    Wire wire1 = pointMarker.WireMarker.Wire;
-			//    GridPoint point = Plotter.GridPoint(pointMarker.ScreenPoint);
-			//    foreach(Symbol s in this.selection.Keys) {
-			//        Wire wire2 = s as Wire;
-			//        if(wire2 != null && wire2 != wire1 && (wire2.Point1 == point || wire2.Point2 == point)) {
-			//            this.Merge(wire1, wire2);
-			//            break;
-			//        }
-			//    }
 		}
 
 		private void MarkerDoubleClick(Marker marker) {
