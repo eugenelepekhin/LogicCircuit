@@ -574,6 +574,15 @@ namespace LogicCircuit {
 					jam = element.DataContext as Jam;
 					if(jam == null) {
 						symbol = element.DataContext as Symbol;
+						if(symbol == null) {
+							FrameworkElement root = element;
+							while(root != null && !(root.DataContext is Symbol)) {
+								root = (root.Parent ?? root.TemplatedParent) as FrameworkElement;
+							}
+							if(root != null) {
+								symbol = root.DataContext as Symbol;
+							}
+						}
 						Tracer.Assert(symbol != null);
 					} else {
 						if(!(element is Ellipse)) { // Jam's notations - text on circuit symbol was clicked. Treat this as symbol click
