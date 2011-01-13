@@ -168,7 +168,7 @@ namespace LogicCircuit {
 
 		private void EditPasteCommandCanExecute(object target, CanExecuteRoutedEventArgs e) {
 			try {
-				e.CanExecute = (this.IsEditorInEditMode() && this.Editor.CanPaste());
+				e.CanExecute = (this.IsEditorInEditMode() && Editor.CanPaste());
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.EditPasteCommandCanExecute", exception);
 				this.ReportException(exception);

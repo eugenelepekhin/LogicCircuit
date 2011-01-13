@@ -16,7 +16,7 @@ namespace LogicCircuit {
 	public abstract partial class EditorDiagram {
 
 		private const int ClickProximity = 2 * Symbol.PinRadius;
-		protected readonly string CircuitDescriptorDataFormat = "LogicCircuit.CircuitDescriptor." + Process.GetCurrentProcess().Id;
+		protected static readonly string CircuitDescriptorDataFormat = "LogicCircuit.CircuitDescriptor." + Process.GetCurrentProcess().Id;
 
 		private struct Connect {
 			public int Count;
@@ -308,7 +308,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private Marker CreateMarker(Symbol symbol) {
+		private static Marker CreateMarker(Symbol symbol) {
 			CircuitSymbol circuitSymbol = symbol as CircuitSymbol;
 			if(circuitSymbol != null) {
 				return new CircuitSymbolMarker(circuitSymbol);
@@ -345,7 +345,7 @@ namespace LogicCircuit {
 			Tracer.Assert(symbol.LogicalCircuit == this.Project.LogicalCircuit);
 			Marker marker = this.FindMarker(symbol);
 			if(marker == null) {
-				marker = this.CreateMarker(symbol);
+				marker = EditorDiagram.CreateMarker(symbol);
 				this.selection.Add(symbol, marker);
 				this.AddMarkerGlyph(marker);
 			}
@@ -536,7 +536,7 @@ namespace LogicCircuit {
 		//--- Event Handling ---
 
 		public void DiagramDragOver(DragEventArgs e) {
-			if(this.InEditMode && e.Data.GetDataPresent(this.CircuitDescriptorDataFormat, false)) {
+			if(this.InEditMode && e.Data.GetDataPresent(EditorDiagram.CircuitDescriptorDataFormat, false)) {
 				e.Effects = DragDropEffects.Copy | DragDropEffects.Scroll;
 			} else {
 				e.Effects = DragDropEffects.None;
@@ -544,14 +544,9 @@ namespace LogicCircuit {
 			e.Handled = true;
 		}
 
-		public void DiagramDragLeave(DragEventArgs e) {
-			e.Effects = DragDropEffects.None;
-			e.Handled = true;
-		}
-
 		public void DiagramDrop(DragEventArgs e) {
 			if(this.InEditMode) {
-				ICircuitDescriptor descriptor = e.Data.GetData(this.CircuitDescriptorDataFormat, false) as ICircuitDescriptor;
+				ICircuitDescriptor descriptor = e.Data.GetData(EditorDiagram.CircuitDescriptorDataFormat, false) as ICircuitDescriptor;
 				if(descriptor != null) {
 					GridPoint point = Symbol.GridPoint(e.GetPosition(this.Diagram));
 					this.CircuitProject.InTransaction(() => {
@@ -616,7 +611,7 @@ namespace LogicCircuit {
 				}
 			} else if(jam != null) {
 				if(e.ClickCount < 2) {
-					this.JamMouseDown(jam, e);
+					this.JamMouseDown(e);
 				} else {
 					this.Edit(jam.CircuitSymbol);
 				}
@@ -647,6 +642,7 @@ namespace LogicCircuit {
 			}
 		}
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
 		private void SymbolMouseDown(Symbol symbol, MouseButtonEventArgs e) {
 			if(this.InEditMode) {
 				if(e.ChangedButton == MouseButton.Left) {
@@ -749,7 +745,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private void JamMouseDown(Jam jam, MouseButtonEventArgs e) {
+		private void JamMouseDown(MouseButtonEventArgs e) {
 			if(this.InEditMode && e.ChangedButton == MouseButton.Left) {
 				this.StartWire(e.GetPosition(this.Diagram));
 			}

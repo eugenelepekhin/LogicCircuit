@@ -6,6 +6,8 @@
             <Word>X</Word>
             <Word>Y</Word>
             <Word>Z</Word>
+            <Word>dx</Word>
+            <Word>dy</Word>
         </Recognized>
     </Words>
 </Dictionary>

@@ -181,7 +181,7 @@ namespace LogicCircuit {
 		private void DescriptorMouseUp(object sender, MouseButtonEventArgs e) {
 			try {
 				if(this.Editor != null) {
-					this.Editor.DescriptorMouseUp((FrameworkElement)sender, e);
+					this.Editor.DescriptorMouseUp();
 				}
 			} catch(Exception exception) {
 				Tracer.Report("MainFrame.DescriptorMouseUp", exception);
@@ -200,17 +200,6 @@ namespace LogicCircuit {
 			}
 		}
 
-		private void DiagramDragEnter(object sender, DragEventArgs e) {
-			try {
-				if(this.Editor != null) {
-					this.Editor.DiagramDragOver(e);
-				}
-			} catch(Exception exception) {
-				Tracer.Report("MainFrame.DiagramDragEnter", exception);
-				this.ReportException(exception);
-			}
-		}
-
 		private void DiagramDragOver(object sender, DragEventArgs e) {
 			try {
 				if(this.Editor != null) {
@@ -218,17 +207,6 @@ namespace LogicCircuit {
 				}
 			} catch(Exception exception) {
 				Tracer.Report("MainFrame.DiagramDragOver", exception);
-				this.ReportException(exception);
-			}
-		}
-
-		private void DiagramDragLeave(object sender, DragEventArgs e) {
-			try {
-				if(this.Editor != null) {
-					this.Editor.DiagramDragLeave(e);
-				}
-			} catch(Exception exception) {
-				Tracer.Report("MainFrame.DiagramDragLeave", exception);
 				this.ReportException(exception);
 			}
 		}

@@ -197,7 +197,7 @@ namespace LogicCircuit {
 			//}
 		}
 
-		public bool CanPaste() {
+		public static bool CanPaste() {
 			return CircuitProject.CanPaste(Clipboard.GetText());
 		}
 
@@ -497,7 +497,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		public void DescriptorMouseUp(FrameworkElement sender, MouseButtonEventArgs e) {
+		public void DescriptorMouseUp() {
 			this.dragSource = null;
 		}
 
@@ -509,7 +509,7 @@ namespace LogicCircuit {
 				if(Editor.DragStartProximity < x * x + y * y) {
 					this.dragSource = null;
 					DragDrop.DoDragDrop(sender,
-						new DataObject(this.CircuitDescriptorDataFormat, sender.DataContext),
+						new DataObject(EditorDiagram.CircuitDescriptorDataFormat, sender.DataContext),
 						DragDropEffects.Copy | DragDropEffects.Scroll
 					);
 				}

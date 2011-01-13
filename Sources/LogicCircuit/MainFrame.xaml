@@ -502,8 +502,6 @@
 							Height="{x:Static lc:Symbol.LogicalCircuitHeight}"
 							Style="{StaticResource LogicCircuitBackground}"
 							AllowDrop="True"
-							DragEnter="DiagramDragEnter"
-							DragLeave="DiagramDragLeave"
 							DragOver="DiagramDragOver"
 							Drop="DiagramDrop"
 							MouseDown="DiagramMouseDown"
