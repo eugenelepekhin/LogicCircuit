@@ -297,6 +297,8 @@ namespace LogicCircuit {
 
 		public int SelectionCount { get { return this.selection.Count; } }
 
+		public IEnumerable<Symbol> SelectedSymbols { get { return this.selection.Keys; } }
+
 		public IEnumerable<Symbol> Selection() {
 			return new List<Symbol>(this.selection.Keys);
 		}

@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
+using System.Globalization;
+using System.IO;
 using System.Linq;
-using System.Threading;
+using System.Text;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Shapes;
-using System.Windows.Threading;
+using System.Xml;
 
 namespace LogicCircuit {
 	public partial class Editor : EditorDiagram, INotifyPropertyChanged {
@@ -182,19 +180,20 @@ namespace LogicCircuit {
 			}
 		}
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")]
 		public void Copy() {
-			//this.CancelMove();
-			//if(0 < this.SelectionCount) {
-			//    XmlDocument xml = this.ProjectManager.CircuitProject.Copy(this.selection.Keys);
-			//    StringBuilder text = new StringBuilder();
-			//    using(StringWriter stringWriter = new StringWriter(text, CultureInfo.InvariantCulture)) {
-			//        using(XmlTextWriter writer = new XmlTextWriter(stringWriter)) {
-			//            writer.Formatting = Formatting.None;
-			//            xml.WriteTo(writer);
-			//        }
-			//    }
-			//    Clipboard.SetDataObject(text.ToString(), false);
-			//}
+			this.CancelMove();
+			if(0 < this.SelectionCount) {
+				XmlDocument xml = this.CircuitProject.Copy(this.SelectedSymbols);
+				StringBuilder text = new StringBuilder();
+				using(StringWriter stringWriter = new StringWriter(text, CultureInfo.InvariantCulture)) {
+					using(XmlTextWriter writer = new XmlTextWriter(stringWriter)) {
+						writer.Formatting = Formatting.None;
+						xml.WriteTo(writer);
+					}
+				}
+				Clipboard.SetDataObject(text.ToString(), false);
+			}
 		}
 
 		public static bool CanPaste() {
@@ -202,19 +201,19 @@ namespace LogicCircuit {
 		}
 
 		public void Paste() {
-			//this.CancelMove();
-			//this.ClearSelection();
-			//string text = Clipboard.GetText();
-			//if(this.CircuitProject.CanPaste(text)) {
-			//    XmlDocument xml = new XmlDocument();
-			//    xml.LoadXml(text);
-			//    List<Symbol> result = null;
-			//    this.CircuitProject.InTransaction(() => {
-			//        result = this.ProjectManager.CircuitProject.Paste(xml);
-			//    });
-			//    Tracer.Assert(result.All(symbol => symbol.LogicalCircuit == this.CircuitProject.ProjectSet.Project.LogicalCircuit));
-			//    this.Select(result);
-			//}
+			this.CancelMove();
+			this.ClearSelection();
+			string text = Clipboard.GetText();
+			if(CircuitProject.CanPaste(text)) {
+				XmlDocument xml = new XmlDocument();
+				xml.LoadXml(text);
+				IEnumerable<Symbol> result = null;
+				this.CircuitProject.InTransaction(() => {
+					result = this.CircuitProject.Paste(xml);
+				});
+				Tracer.Assert(result.All(symbol => symbol.LogicalCircuit == this.Project.LogicalCircuit));
+				this.Select(result);
+			}
 		}
 
 		public void Delete() {
@@ -239,11 +238,11 @@ namespace LogicCircuit {
 		}
 
 		public void Cut() {
-			//this.CancelMove();
-			//if(0 < this.SelectionCount) {
-			//    this.Copy();
-			//    this.Delete();
-			//}
+			this.CancelMove();
+			if(0 < this.SelectionCount) {
+				this.Copy();
+				this.Delete();
+			}
 		}
 
 		public void Edit(Project project) {
