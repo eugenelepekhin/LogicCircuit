@@ -43,7 +43,7 @@ namespace LogicCircuit.DataPersistent {
 					throw new InvalidOperationException(Properties.Resources.ErrorInvalidUpgrade);
 				}
 				this.SnapStore.CheckFrozen();
-				if(value < 0 || this.SnapStore.CommittedVersion < value) {
+				if(value < 0 || this.SnapStore.CompletedVersion < value) {
 					throw new ArgumentOutOfRangeException("value");
 				}
 				if(this.snapshotVersion != value) {
@@ -55,7 +55,7 @@ namespace LogicCircuit.DataPersistent {
 		/// <summary>
 		/// Gets latest available version this store can be upgrated to
 		/// </summary>
-		public int LatestAvailableVersion { get { return this.SnapStore.CommittedVersion; } }
+		public int LatestAvailableVersion { get { return this.SnapStore.CompletedVersion; } }
 
 		/// <summary>
 		/// True if PrepareCommit is successful
@@ -67,7 +67,7 @@ namespace LogicCircuit.DataPersistent {
 
 		private StoreSnapshot(SnapStore storeData) {
 			this.SnapStore = storeData;
-			this.snapshotVersion = this.SnapStore.CommittedVersion;
+			this.snapshotVersion = this.SnapStore.CompletedVersion;
 			this.SnapStore.Committed += new EventHandler(this.StoreDataCommitted);
 		}
 
@@ -154,11 +154,11 @@ namespace LogicCircuit.DataPersistent {
 		/// <param name="toVersion"></param>
 		/// <returns></returns>
 		public IEnumerator<string> AffectedTables(int fromVersion, int toVersion) {
-			int committed = this.SnapStore.CommittedVersion;
-			if(!(0 <= fromVersion && fromVersion <= committed)) {
+			int completed = this.SnapStore.CompletedVersion;
+			if(!(0 <= fromVersion && fromVersion <= completed)) {
 				throw new ArgumentOutOfRangeException("fromVersion");
 			}
-			if(!(fromVersion <= toVersion && toVersion <= committed)) {
+			if(!(fromVersion <= toVersion && toVersion <= completed)) {
 				throw new ArgumentOutOfRangeException("toVersion");
 			}
 			return new ChangeEnumerator(this, fromVersion, toVersion);
@@ -326,7 +326,7 @@ namespace LogicCircuit.DataPersistent {
 		/// <param name="newVersion"></param>
 		private void Upgrade(int newVersion) {
 			this.SnapStore.CheckFrozen();
-			Debug.Assert(0 <= newVersion && newVersion <= this.SnapStore.CommittedVersion, "Incorrect version");
+			Debug.Assert(0 <= newVersion && newVersion <= this.SnapStore.CompletedVersion, "Incorrect version");
 			int oldVersion = this.Version;
 			this.snapshotVersion = newVersion;
 			this.NotifyVersion(oldVersion, newVersion);
@@ -344,7 +344,7 @@ namespace LogicCircuit.DataPersistent {
 			private int newVersion;
 
 			public ChangeEnumerator(StoreSnapshot store, int oldVersion, int newVersion) {
-				Debug.Assert(0 < oldVersion && oldVersion <= newVersion && newVersion <= store.SnapStore.CommittedVersion);
+				Debug.Assert(0 < oldVersion && oldVersion <= newVersion && newVersion <= store.SnapStore.CompletedVersion);
 				this.enumerator = store.Tables.GetEnumerator();
 				this.oldVersion = oldVersion;
 				this.newVersion = newVersion;

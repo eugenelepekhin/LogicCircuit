@@ -44,6 +44,11 @@ namespace LogicCircuit.DataPersistent {
 		public int CommittedVersion { get; private set; }
 
 		/// <summary>
+		/// Gets last completed version. It is either a committed or rolled back one.
+		/// </summary>
+		public int CompletedVersion { get; private set; }
+
+		/// <summary>
 		/// Gets current latest version of the store.
 		/// </summary>
 		public int Version { get { return this.version.Count; } }
@@ -204,7 +209,7 @@ namespace LogicCircuit.DataPersistent {
 					Debug.Assert(address.Page[address.Index] == TransactionType.Edit, "Only edit transactions can be omitted");
 					address.Page[address.Index] = TransactionType.Omit;
 				}
-				this.CommittedVersion = v;
+				this.CommittedVersion = this.CompletedVersion = v;
 				this.editorThread = null;
 				this.editor = null;
 				LockFreeSync.WriteBarrier();
@@ -228,6 +233,7 @@ namespace LogicCircuit.DataPersistent {
 				}
 				ValueList<TransactionType>.Address address = this.version.ItemAddress(this.version.Count - 1);
 				address.Page[address.Index] = TransactionType.Omit;
+				this.CompletedVersion = this.Version;
 				this.editorThread = null;
 				this.editor = null;
 				LockFreeSync.WriteBarrier();
@@ -342,7 +348,7 @@ namespace LogicCircuit.DataPersistent {
 		/// </summary>
 		/// <param name="enumeratedVersion"></param>
 		public void ValidateChangeEnumeration(int enumeratedVersion) {
-			if(!(enumeratedVersion <= this.CommittedVersion || this.editor != null && this.editorThread == Thread.CurrentThread)) {
+			if(!(enumeratedVersion <= this.CompletedVersion || this.editor != null && this.editorThread == Thread.CurrentThread)) {
 				throw new InvalidOperationException(Properties.Resources.ErrorEditOnWrongThread);
 			}
 		}

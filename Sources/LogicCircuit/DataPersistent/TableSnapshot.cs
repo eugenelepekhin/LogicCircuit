@@ -600,11 +600,11 @@ namespace LogicCircuit.DataPersistent {
 		/// <param name="toVersion"></param>
 		/// <returns></returns>
 		public bool WasChanged(int fromVersion, int toVersion) {
-			int committed = this.StoreSnapshot.SnapStore.CommittedVersion;
-			if(!(0 <= fromVersion && fromVersion <= committed)) {
+			int completed = this.StoreSnapshot.SnapStore.CompletedVersion;
+			if(!(0 <= fromVersion && fromVersion <= completed)) {
 				throw new ArgumentOutOfRangeException("fromVersion");
 			}
-			if(!(fromVersion <= toVersion && toVersion <= committed)) {
+			if(!(fromVersion <= toVersion && toVersion <= completed)) {
 				throw new ArgumentOutOfRangeException("toVersion");
 			}
 			for(int i = fromVersion; i <= toVersion; i++) {
