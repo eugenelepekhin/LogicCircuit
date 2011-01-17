@@ -45,8 +45,8 @@ namespace LogicCircuit {
 			return !this.CircuitSymbols().Any() && !this.Wires().Any();
 		}
 
-		public override void CopyTo(CircuitProject project) {
-			project.LogicalCircuitSet.Copy(this, true);
+		public override Circuit CopyTo(CircuitProject project) {
+			return project.LogicalCircuitSet.Copy(this, true);
 		}
 
 		public void Rename(string name) {

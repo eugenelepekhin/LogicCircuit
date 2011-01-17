@@ -37,8 +37,8 @@ namespace LogicCircuit {
 			base.Delete();
 		}
 
-		public override void CopyTo(CircuitProject project) {
-			project.PinSet.Copy(this);
+		public override Circuit CopyTo(CircuitProject project) {
+			return project.PinSet.Copy(this);
 		}
 
 		public void Rename(string name) {
@@ -126,6 +126,10 @@ namespace LogicCircuit {
 		public Pin Copy(Pin other) {
 			PinData data;
 			other.CircuitProject.PinSet.Table.GetData(other.PinRowId, out data);
+			if(this.FindByPinId(data.PinId) != null) {
+				data.PinId = Guid.NewGuid();
+			}
+			data.Name = this.UniqueName(data.Name, this.CircuitProject.LogicalCircuitSet.FindByLogicalCircuitId(data.CircuitId));
 			return this.Register(this.Table.Insert(ref data));
 		}
 	}

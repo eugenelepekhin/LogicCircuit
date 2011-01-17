@@ -155,8 +155,8 @@ namespace LogicCircuit {
 			Tracer.Assert(writePin.BitWidth == 1);
 		}
 
-		public override void CopyTo(CircuitProject project) {
-			project.MemorySet.Copy(this);
+		public override Circuit CopyTo(CircuitProject project) {
+			return project.MemorySet.Copy(this);
 		}
 
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
@@ -222,6 +222,9 @@ namespace LogicCircuit {
 		public Memory Copy(Memory other) {
 			MemoryData data;
 			other.CircuitProject.MemorySet.Table.GetData(other.MemoryRowId, out data);
+			if(this.FindByMemoryId(data.MemoryId) != null) {
+				data.MemoryId = Guid.NewGuid();
+			}
 			return this.Register(this.Table.Insert(ref data));
 		}
 	}

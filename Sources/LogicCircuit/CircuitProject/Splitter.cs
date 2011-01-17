@@ -37,8 +37,8 @@ namespace LogicCircuit {
 			set { throw new InvalidOperationException(); }
 		}
 
-		public override void CopyTo(CircuitProject project) {
-			project.SplitterSet.Copy(this);
+		public override Circuit CopyTo(CircuitProject project) {
+			return project.SplitterSet.Copy(this);
 		}
 
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
@@ -123,6 +123,9 @@ namespace LogicCircuit {
 		public Splitter Copy(Splitter other) {
 			SplitterData data;
 			other.CircuitProject.SplitterSet.Table.GetData(other.SplitterRowId, out data);
+			if(this.FindBySplitterId(data.SplitterId) != null) {
+				data.SplitterId = Guid.NewGuid();
+			}
 			return this.Register(this.Table.Insert(ref data));
 		}
 	}

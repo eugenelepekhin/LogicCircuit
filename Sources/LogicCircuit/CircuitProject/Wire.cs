@@ -76,6 +76,9 @@ namespace LogicCircuit {
 		public Wire Copy(Wire other) {
 			WireData data;
 			other.CircuitProject.WireSet.Table.GetData(other.WireRowId, out data);
+			if(this.Find(data.WireId) != null) {
+				data.WireId = Guid.NewGuid();
+			}
 			return this.Create(this.Table.Insert(ref data));
 		}
 

@@ -140,7 +140,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		public abstract void CopyTo(CircuitProject project);
+		public abstract Circuit CopyTo(CircuitProject project);
 
 		private class PinComparer : IComparer<BasePin> {
 			public static readonly PinComparer Comparer = new PinComparer();

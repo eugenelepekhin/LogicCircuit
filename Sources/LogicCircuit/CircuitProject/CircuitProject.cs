@@ -111,6 +111,7 @@ namespace LogicCircuit {
 			CircuitProject copy = new CircuitProject();
 			bool started = copy.StartTransaction();
 			Tracer.Assert(started);
+			copy.GateSet.Generate();
 			copy.ProjectSet.Copy(this.ProjectSet.Project);
 			copy.LogicalCircuitSet.Copy(this.ProjectSet.Project.LogicalCircuit, false);
 			foreach(Symbol s in symbol) {

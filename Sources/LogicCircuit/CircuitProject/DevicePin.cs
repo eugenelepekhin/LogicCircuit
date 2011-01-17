@@ -39,7 +39,7 @@ namespace LogicCircuit {
 
 		public int Order { get; set; }
 
-		public override void CopyTo(CircuitProject project) {
+		public override Circuit CopyTo(CircuitProject project) {
 			throw new InvalidOperationException();
 		}
 
