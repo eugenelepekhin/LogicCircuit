@@ -39,11 +39,6 @@ namespace LogicCircuit.DataPersistent {
 		public bool IsFrozen { get; private set; }
 
 		/// <summary>
-		/// Gets last committed version
-		/// </summary>
-		public int CommittedVersion { get; private set; }
-
-		/// <summary>
 		/// Gets last completed version. It is either a committed or rolled back one.
 		/// </summary>
 		public int CompletedVersion { get; private set; }
@@ -209,7 +204,7 @@ namespace LogicCircuit.DataPersistent {
 					Debug.Assert(address.Page[address.Index] == TransactionType.Edit, "Only edit transactions can be omitted");
 					address.Page[address.Index] = TransactionType.Omit;
 				}
-				this.CommittedVersion = this.CompletedVersion = v;
+				this.CompletedVersion = v;
 				this.editorThread = null;
 				this.editor = null;
 				LockFreeSync.WriteBarrier();
@@ -275,7 +270,7 @@ namespace LogicCircuit.DataPersistent {
 		/// <returns>If version for reverting is found returns version number, otherwise returns 0.</returns>
 		private int RevertVersion(TransactionType transactionType) {
 			Debug.Assert(transactionType == TransactionType.Undo || transactionType == TransactionType.Redo);
-			int max = this.CommittedVersion - 1;
+			int max = this.CompletedVersion - 1;
 			int min = this.minUndo;
 			int level = 0;
 			int threshold = (transactionType == TransactionType.Undo) ? 1 : -1;
