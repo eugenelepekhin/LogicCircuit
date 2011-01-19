@@ -6,10 +6,6 @@ using LogicCircuit.DataPersistent;
 
 namespace LogicCircuit {
 	public partial class Splitter {
-		partial void OnSplitterChanged() {
-			this.ResetPins();
-		}
-
 		public override void Delete() {
 			this.CircuitProject.DevicePinSet.DeleteAllPins(this);
 			base.Delete();

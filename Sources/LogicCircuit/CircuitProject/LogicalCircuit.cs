@@ -117,6 +117,7 @@ namespace LogicCircuit {
 		}
 
 		partial void EndNotifyLogicalCircuitSetChanged() {
+			//TODO: this is only used for updatelist of descriptors. Consider removing it.
 			EventHandler handler = this.LogicalCircuitSetChanged;
 			if(handler != null) {
 				handler(this, EventArgs.Empty);

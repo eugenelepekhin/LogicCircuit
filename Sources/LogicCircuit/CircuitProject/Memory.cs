@@ -13,10 +13,6 @@ namespace LogicCircuit {
 			return Math.Max(1, Math.Min(value, Memory.MaxAddressBitWidth));
 		}
 
-		partial void OnMemoryChanged() {
-			this.ResetPins();
-		}
-
 		public override void Delete() {
 			this.CircuitProject.DevicePinSet.DeleteAllPins(this);
 			base.Delete();

@@ -12,12 +12,6 @@ namespace LogicCircuit {
 
 		public override bool IsSmallSymbol { get { return true; } }
 
-		partial void OnConstantChanged() {
-			this.ResetPins();
-			//this.NotifyPropertyChanged("Notation");
-			//this.NotifyPropertyChanged("ToolTip");
-		}
-
 		public static int Normalize(int value, int bitWidth) {
 			bitWidth = BasePin.CheckBitWidth(bitWidth);
 			if(bitWidth < 32) {

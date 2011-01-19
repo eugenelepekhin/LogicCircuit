@@ -24,13 +24,6 @@ namespace LogicCircuit {
 			set { throw new InvalidOperationException(); }
 		}
 
-		partial void OnPinChanged() {
-			Tracer.Assert(!this.LogicalCircuit.IsDeleted());
-			this.CircuitProject.PinSet.RegisterForRefresh(this.LogicalCircuit);
-			this.ResetPins();
-			//this.NotifyPropertyChanged("Notation");
-		}
-
 		public override void Delete() {
 			this.OnPinChanged();
 			this.CircuitProject.DevicePinSet.DeleteAllPins(this);
@@ -53,33 +46,6 @@ namespace LogicCircuit {
 	}
 
 	public partial class PinSet : NamedItemSet {
-		private HashSet<LogicalCircuit> toUpdate = new HashSet<LogicalCircuit>();
-
-		public void RegisterForRefresh(LogicalCircuit circuit) {
-			this.toUpdate.Add(circuit);
-		}
-
-		partial void NotifyPinSetChanged(TableChange<PinData> change) {
-			Debug.Assert(change.Action != SnapTableAction.Update || change.GetOldField(PinData.CircuitIdField.Field) == change.GetNewField(PinData.CircuitIdField.Field),
-				"Update should never reparent the pin"
-			);
-			LogicalCircuit circuit = this.CircuitProject.LogicalCircuitSet.FindByLogicalCircuitId(
-				(change.Action == SnapTableAction.Delete) ? change.GetOldField(PinData.CircuitIdField.Field) : change.GetNewField(PinData.CircuitIdField.Field)
-			);
-			if(circuit != null) {
-				this.toUpdate.Add(circuit);
-			}
-		}
-
-		partial void EndNotifyPinSetChanged() {
-			foreach(LogicalCircuit circuit in this.toUpdate) {
-				if(!circuit.IsDeleted()) {
-					circuit.ResetPins();
-				}
-			}
-			this.toUpdate.Clear();
-		}
-
 		public void Load(XmlNodeList list) {
 			PinData.Load(this.Table, list, rowId => this.Register(rowId));
 		}
