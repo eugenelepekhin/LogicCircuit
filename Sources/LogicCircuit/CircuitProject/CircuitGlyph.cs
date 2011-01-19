@@ -61,7 +61,7 @@ namespace LogicCircuit {
 			//this.NotifyPropertyChanged("Top");
 			//this.NotifyPropertyChanged("Right");
 			//this.NotifyPropertyChanged("Bottom");
-			this.NotifyPropertyChanged("Glyph");
+			//this.NotifyPropertyChanged("Glyph");
 		}
 
 		private void Update() {
