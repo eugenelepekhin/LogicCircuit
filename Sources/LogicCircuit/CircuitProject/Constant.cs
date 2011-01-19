@@ -14,8 +14,8 @@ namespace LogicCircuit {
 
 		partial void OnConstantChanged() {
 			this.ResetPins();
-			this.NotifyPropertyChanged("Notation");
-			this.NotifyPropertyChanged("ToolTip");
+			//this.NotifyPropertyChanged("Notation");
+			//this.NotifyPropertyChanged("ToolTip");
 		}
 
 		public static int Normalize(int value, int bitWidth) {

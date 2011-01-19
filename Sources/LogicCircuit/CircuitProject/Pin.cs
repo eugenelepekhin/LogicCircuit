@@ -28,7 +28,7 @@ namespace LogicCircuit {
 			Tracer.Assert(!this.LogicalCircuit.IsDeleted());
 			this.CircuitProject.PinSet.RegisterForRefresh(this.LogicalCircuit);
 			this.ResetPins();
-			this.NotifyPropertyChanged("Notation");
+			//this.NotifyPropertyChanged("Notation");
 		}
 
 		public override void Delete() {
