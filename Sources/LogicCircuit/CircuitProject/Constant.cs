@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Xml;
 using LogicCircuit.DataPersistent;
 
@@ -48,6 +49,16 @@ namespace LogicCircuit {
 
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
 			return symbol.CreateSimpleGlyph(SymbolShape.Constant);
+		}
+
+		partial void OnConstantChanged() {
+			int count = 0;
+			foreach(CircuitSymbol symbol in this.CircuitProject.CircuitSymbolSet.SelectByCircuit(this)) {
+				Tracer.Assert(count++ == 0, "Only one symbol expected");
+				TextBlock text = (TextBlock)symbol.ProbeView;
+				text.Text = this.Notation;
+				symbol.Glyph.ToolTip = this.ToolTip;
+			}
 		}
 	}
 

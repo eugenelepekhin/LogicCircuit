@@ -32,6 +32,16 @@ namespace LogicCircuit {
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
 			return symbol.CreateButtonGlyph();
 		}
+
+		partial void OnCircuitButtonChanged() {
+			int count = 0;
+			foreach(CircuitSymbol symbol in this.CircuitProject.CircuitSymbolSet.SelectByCircuit(this)) {
+				Tracer.Assert(count++ == 0, "Only one symbol expected");
+				ButtonControl button = (ButtonControl)symbol.ProbeView;
+				button.Content = this.Notation;
+				symbol.Glyph.ToolTip = this.ToolTip;
+			}
+		}
 	}
 
 	public partial class CircuitButtonSet {

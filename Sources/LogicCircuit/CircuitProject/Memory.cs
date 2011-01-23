@@ -158,6 +158,10 @@ namespace LogicCircuit {
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
 			return symbol.CreateRectangularGlyph();
 		}
+
+		partial void OnMemoryChanged() {
+			this.InvalidateDistinctSymbol();
+		}
 	}
 
 	public partial class MemorySet {
