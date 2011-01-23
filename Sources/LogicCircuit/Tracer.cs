@@ -95,9 +95,9 @@ namespace LogicCircuit {
 
 		//---------------------------------------------------------------------
 
-		public static void Assert(bool condition, string message) {
+		public static void Assert(bool condition, string description) {
 			if(!condition) {
-				throw new AssertException(message);
+				throw new AssertException(description);
 			}
 		}
 		public static void Assert(bool condition) {
