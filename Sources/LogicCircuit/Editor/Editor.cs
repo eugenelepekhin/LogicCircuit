@@ -111,6 +111,10 @@ namespace LogicCircuit {
 			}
 		}
 
+		protected override void UpdateGlyph(LogicalCircuit logicalCircuit) {
+			this.CircuitDescriptorList.UpdateGlyph(logicalCircuit);
+		}
+
 		//--- Edit Operation
 
 		public void Undo() {

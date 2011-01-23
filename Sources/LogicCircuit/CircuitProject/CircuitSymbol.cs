@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Xml;
@@ -44,9 +45,25 @@ namespace LogicCircuit {
 		public override void CopyTo(CircuitProject project) {
 			project.CircuitSymbolSet.Copy(this);
 		}
+
+		public override void Invalidate() {
+			this.CircuitProject.CircuitSymbolSet.Invalidate(this);
+		}
 	}
 
 	public partial class CircuitSymbolSet {
+		private HashSet<CircuitSymbol> invalid = new HashSet<CircuitSymbol>();
+
+		public IEnumerable<CircuitSymbol> Invalid { get { return this.invalid; } }
+		
+		public void Invalidate(CircuitSymbol symbol) {
+			this.invalid.Add(symbol);
+		}
+
+		public void ValidateAll() {
+			this.invalid.Clear();
+		}
+
 		public void Load(XmlNodeList list) {
 			CircuitSymbolData.Load(this.Table, list, rowId => this.Create(rowId));
 		}

@@ -19,9 +19,7 @@ namespace LogicCircuit {
 				this.CircuitSymbol = symbol;
 				this.MarkerGlyph = Symbol.Skin<Rectangle>(SymbolShape.MarkerRectangle);
 				this.MarkerGlyph.DataContext = this;
-				this.MarkerGlyph.Width = Symbol.ScreenPoint(this.CircuitSymbol.Circuit.SymbolWidth) + 2 * Symbol.PinRadius;
-				this.MarkerGlyph.Height = Symbol.ScreenPoint(this.CircuitSymbol.Circuit.SymbolHeight) + 2 * Symbol.PinRadius;
-				this.PositionGlyph();
+				this.Invalidate();
 			}
 
 			public override void Move(EditorDiagram editor, Point point) {
@@ -35,6 +33,12 @@ namespace LogicCircuit {
 			public override void Shift(int dx, int dy) {
 				this.CircuitSymbol.Shift(dx, dy);
 				this.CircuitSymbol.PositionGlyph();
+				this.PositionGlyph();
+			}
+
+			public void Invalidate() {
+				this.MarkerGlyph.Width = Symbol.ScreenPoint(this.CircuitSymbol.Circuit.SymbolWidth) + 2 * Symbol.PinRadius;
+				this.MarkerGlyph.Height = Symbol.ScreenPoint(this.CircuitSymbol.Circuit.SymbolHeight) + 2 * Symbol.PinRadius;
 				this.PositionGlyph();
 			}
 

@@ -328,7 +328,7 @@ namespace LogicCircuit {
 		}
 
 		// Gets or sets value of the Inverted field.
-		public override bool Inverted {
+		private bool PinInverted {
 			get { return this.Table.GetField(this.DevicePinRowId, DevicePinData.InvertedField.Field); }
 			set { this.Table.SetField(this.DevicePinRowId, DevicePinData.InvertedField.Field, value); }
 		}

@@ -55,7 +55,7 @@
 			<Column Name="BitWidth" Type="int" Default="1" Check="BasePin.CheckBitWidth" AccessModifier="Private" PropertyNamePrefix="Pin"/>
 			<Column Name="PinType" Type="PinType" Default="PinType.Input" PropertyOverrides="true"/>
 			<Column Name="PinSide" Type="PinSide" Default="PinSide.Left" PropertyOverrides="true"/>
-			<Column Name="Inverted" Type="bool" Default="false" PropertyOverrides="true"/>
+			<Column Name="Inverted" Type="bool" Default="false" AccessModifier="Private" PropertyNamePrefix="Pin"/>
 			<Column Name="Name" Type="string" PropertyOverrides="true"/>
 			<Column Name="Note" Type="string" Default="" PropertyOverrides="true"/>
 			<Column Name="JamNotation" Type="string" Default="" PropertyOverrides="true"/>

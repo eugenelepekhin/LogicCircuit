@@ -7,6 +7,7 @@ using LogicCircuit.DataPersistent;
 
 namespace LogicCircuit {
 	public partial class LogicalCircuit {
+		public int PinVersion { get; private set; }
 
 		public Point ScrollOffset { get; set; }
 
@@ -57,6 +58,17 @@ namespace LogicCircuit {
 
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
 			return symbol.CreateRectangularGlyph();
+		}
+
+		public override void ResetPins() {
+			base.ResetPins();
+			this.PinVersion = this.CircuitProject.Version;
+		}
+
+		partial void OnLogicalCircuitChanged() {
+			foreach(CircuitSymbol symbol in this.CircuitProject.CircuitSymbolSet.SelectByCircuit(this)) {
+				symbol.Invalidate();
+			}
 		}
 	}
 

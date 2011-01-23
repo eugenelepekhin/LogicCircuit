@@ -57,6 +57,13 @@ namespace LogicCircuit {
 			}
 		}
 
+		public void UpdateGlyph(LogicalCircuit logicalCircuit) {
+			LogicalCircuitDescriptor descriptor;
+			if(this.logicalCircuitDescriptors.TryGetValue(logicalCircuit, out descriptor)) {
+				descriptor.ResetGlyph();
+			}
+		}
+
 		private void LogicalCircuitSetChanged(object sender, EventArgs e) {
 			this.NotifyPropertyChanged();
 		}

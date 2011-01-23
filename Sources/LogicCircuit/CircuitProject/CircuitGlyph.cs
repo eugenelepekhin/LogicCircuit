@@ -21,6 +21,12 @@ namespace LogicCircuit {
 			get { return this.glyph ?? (this.glyph = this.Circuit.CreateGlyph(this)); }
 		}
 
+		public void Reset() {
+			this.glyph = null;
+		}
+
+		public abstract void Invalidate();
+
 		public FrameworkElement ProbeView { get; set; }
 
 		protected CircuitGlyph() : base() {
@@ -62,6 +68,7 @@ namespace LogicCircuit {
 			//this.NotifyPropertyChanged("Right");
 			//this.NotifyPropertyChanged("Bottom");
 			//this.NotifyPropertyChanged("Glyph");
+			this.Invalidate();
 		}
 
 		private void Update() {

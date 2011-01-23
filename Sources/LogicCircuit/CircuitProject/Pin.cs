@@ -25,7 +25,6 @@ namespace LogicCircuit {
 		}
 
 		public override void Delete() {
-			this.OnPinChanged();
 			this.CircuitProject.DevicePinSet.DeleteAllPins(this);
 			base.Delete();
 		}
@@ -42,6 +41,10 @@ namespace LogicCircuit {
 
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
 			return symbol.CreateSimpleGlyph(SymbolShape.Pin);
+		}
+
+		partial void OnPinChanged() {
+			this.InvalidateDistinctSymbol();
 		}
 	}
 
@@ -97,6 +100,18 @@ namespace LogicCircuit {
 			}
 			data.Name = this.UniqueName(data.Name, this.CircuitProject.LogicalCircuitSet.FindByLogicalCircuitId(data.CircuitId));
 			return this.Register(this.Table.Insert(ref data));
+		}
+
+		partial void NotifyPinSetChanged(TableChange<PinData> change) {
+			PinData.CircuitIdField field = PinData.CircuitIdField.Field;
+			LogicalCircuit logicalCircuit = this.CircuitProject.LogicalCircuitSet.FindByLogicalCircuitId(
+				(change.Action == SnapTableAction.Delete) ? change.GetOldField(field) : change.GetNewField(field)
+			);
+			Tracer.Assert(change.Action == SnapTableAction.Delete || logicalCircuit != null);
+			if(logicalCircuit != null) {
+				Tracer.Assert(this.CircuitProject.ProjectSet.Project.LogicalCircuit == logicalCircuit, "Edit happened not on the current dialgram");
+				logicalCircuit.ResetPins();
+			}
 		}
 	}
 }

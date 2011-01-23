@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using LogicCircuit.DataPersistent;
 
 namespace LogicCircuit {
 	public abstract partial class EditorDiagram {
@@ -25,11 +26,12 @@ namespace LogicCircuit {
 
 		public Mainframe Mainframe { get; private set; }
 		private Dispatcher Dispatcher { get { return this.Mainframe.Dispatcher; } }
-		// TODO: make it private
-		protected Canvas Diagram { get { return this.Mainframe.Diagram; } }
+		private Canvas Diagram { get { return this.Mainframe.Diagram; } }
 
 		public CircuitProject CircuitProject { get; private set; }
 		public Project Project { get { return this.CircuitProject.ProjectSet.Project; } }
+
+		private bool refreshPending;
 
 		public abstract bool InEditMode { get; }
 
@@ -47,10 +49,40 @@ namespace LogicCircuit {
 			this.Mainframe = mainframe;
 			this.CircuitProject = circuitProject;
 			this.Project.PropertyChanged += new PropertyChangedEventHandler(this.ProjectPropertyChanged);
+			this.CircuitProject.CircuitSymbolSet.CollectionChanged += new NotifyCollectionChangedEventHandler(this.CircuitSymbolSetCollectionChanged);
 			this.CircuitProject.WireSet.CollectionChanged += new NotifyCollectionChangedEventHandler(this.WireSetCollectionChanged);
 			this.CircuitProject.WireSet.WireSetChanged += new EventHandler(this.WireSetChanged);
-			this.CircuitProject.CircuitSymbolSet.CollectionChanged += new NotifyCollectionChangedEventHandler(this.CircuitSymbolSetCollectionChanged);
+			this.CircuitProject.VersionChanged += new EventHandler<DataPersistent.VersionChangeEventArgs>(this.CircuitProjectVersionChanged);
 			this.Refresh();
+		}
+
+		//--- Handling model (CircuitProject) changes ---
+
+		protected abstract void UpdateGlyph(LogicalCircuit logicalCircuit);
+
+		private void CircuitProjectVersionChanged(object sender, VersionChangeEventArgs e) {
+			if(this.refreshPending) {
+				this.refreshPending = false;
+				this.Refresh();
+			} else {
+				foreach(CircuitSymbol symbol in this.CircuitProject.CircuitSymbolSet.Invalid) {
+					if(symbol.LogicalCircuit == this.Project.LogicalCircuit) {
+						this.Diagram.Children.Remove(symbol.Glyph);
+						symbol.Reset();
+						this.Add(symbol);
+						CircuitSymbolMarker marker = (CircuitSymbolMarker)this.FindMarker(symbol);
+						if(marker != null) {
+							marker.Invalidate();
+						}
+					} else {
+						symbol.Reset();
+					}
+				}
+			}
+			this.CircuitProject.CircuitSymbolSet.ValidateAll();
+			if(this.CircuitProject.Version == this.Project.LogicalCircuit.PinVersion) {
+				this.UpdateGlyph(this.Project.LogicalCircuit);
+			}
 		}
 
 		private void ProjectPropertyChanged(object sender, PropertyChangedEventArgs e) {
@@ -73,54 +105,64 @@ namespace LogicCircuit {
 						scrollViewer.ScrollToHorizontalOffset(this.currentLogicalCircuit.ScrollOffset.X);
 						scrollViewer.ScrollToVerticalOffset(this.currentLogicalCircuit.ScrollOffset.Y);
 					}
-					this.RedrawDiagram();
+					this.refreshPending = true;
+				}
+			}
+		}
+
+		private void CircuitSymbolSetCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
+			if(!this.refreshPending) {
+				if(e.OldItems != null && 0 < e.OldItems.Count) {
+					foreach(CircuitSymbol symbol in e.OldItems) {
+						this.Unselect(symbol);
+						FrameworkElement glyph = symbol.Glyph;
+						if(glyph.Parent == this.Diagram) {
+							this.Diagram.Children.Remove(glyph);
+						}
+						Tracer.Assert(glyph.Parent == null);
+					}
+				}
+				if(e.NewItems != null && 0 < e.NewItems.Count) {
+					LogicalCircuit current = this.Project.LogicalCircuit;
+					foreach(CircuitSymbol symbol in e.NewItems) {
+						if(symbol.LogicalCircuit == current) {
+							this.Add(symbol);
+						}
+					}
 				}
 			}
 		}
 
 		private void WireSetCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
-			if(e.OldItems != null && 0 < e.OldItems.Count) {
-				foreach(Wire wire in e.OldItems) {
-					Line line = wire.WireGlyph;
-					if(line.Parent == this.Diagram) {
-						this.Diagram.Children.Remove(line);
+			if(!this.refreshPending) {
+				if(e.OldItems != null && 0 < e.OldItems.Count) {
+					foreach(Wire wire in e.OldItems) {
+						this.Unselect(wire);
+						Line line = wire.WireGlyph;
+						if(line.Parent == this.Diagram) {
+							this.Diagram.Children.Remove(line);
+						}
+						Tracer.Assert(line.Parent == null);
 					}
-					Tracer.Assert(line.Parent == null);
 				}
-			}
-			if(e.NewItems != null && 0 < e.NewItems.Count) {
-				LogicalCircuit current = this.Project.LogicalCircuit;
-				foreach(Wire wire in e.NewItems) {
-					if(wire.LogicalCircuit == current) {
-						this.Add(wire);
+				if(e.NewItems != null && 0 < e.NewItems.Count) {
+					LogicalCircuit current = this.Project.LogicalCircuit;
+					foreach(Wire wire in e.NewItems) {
+						if(wire.LogicalCircuit == current) {
+							this.Add(wire);
+						}
 					}
 				}
 			}
 		}
 
 		private void WireSetChanged(object sender, EventArgs e) {
-			this.UpdateSolders();
+			if(!this.refreshPending) {
+				this.UpdateSolders();
+			}
 		}
 
-		private void CircuitSymbolSetCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
-			if(e.OldItems != null && 0 < e.OldItems.Count) {
-				foreach(CircuitSymbol symbol in e.OldItems) {
-					FrameworkElement glyph = symbol.Glyph;
-					if(glyph.Parent == this.Diagram) {
-						this.Diagram.Children.Remove(glyph);
-					}
-					Tracer.Assert(glyph.Parent == null);
-				}
-			}
-			if(e.NewItems != null && 0 < e.NewItems.Count) {
-				LogicalCircuit current = this.Project.LogicalCircuit;
-				foreach(CircuitSymbol symbol in e.NewItems) {
-					if(symbol.LogicalCircuit == current) {
-						this.Add(symbol);
-					}
-				}
-			}
-		}
+		//--- Utils ---
 
 		private void ShowStatus(CircuitSymbol symbol) {
 			this.Mainframe.Status = symbol.Circuit.Notation + symbol.Point.ToString();
@@ -535,7 +577,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		//--- Event Handling ---
+		//--- User Input Event Handling ---
 
 		public void DiagramDragOver(DragEventArgs e) {
 			if(this.InEditMode && e.Data.GetDataPresent(EditorDiagram.CircuitDescriptorDataFormat, false)) {

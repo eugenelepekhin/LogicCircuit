@@ -27,6 +27,11 @@ namespace LogicCircuit {
 			this.CircuitGlyph = new CircuitDescriptorGlyph(this);
 		}
 
+		public void ResetGlyph() {
+			this.CircuitGlyph.ResetJams();
+			this.CircuitGlyph.Invalidate();
+		}
+
 		private class CircuitDescriptorGlyph : CircuitGlyph {
 			private readonly CircuitDescriptor<T> circuitDescriptor;
 
@@ -48,6 +53,11 @@ namespace LogicCircuit {
 
 			public override void CopyTo(CircuitProject project) {
 				throw new InvalidOperationException();
+			}
+
+			public override void Invalidate() {
+				this.Reset();
+				this.NotifyPropertyChanged("Glyph");
 			}
 		}
 	}

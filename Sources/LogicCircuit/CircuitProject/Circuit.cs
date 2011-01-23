@@ -67,7 +67,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		public void ResetPins() {
+		public virtual void ResetPins() {
 			this.isUpdated = false;
 			foreach(CircuitSymbol symbol in this.CircuitProject.CircuitSymbolSet.SelectByCircuit(this)) {
 				symbol.ResetJams();
@@ -141,6 +141,14 @@ namespace LogicCircuit {
 		}
 
 		public abstract Circuit CopyTo(CircuitProject project);
+
+		protected void InvalidateDistinctSymbol() {
+			int count = 0;
+			foreach(CircuitSymbol symbol in this.CircuitProject.CircuitSymbolSet.SelectByCircuit(this)) {
+				Tracer.Assert(count++ == 0, "Only one symbol is expected");
+				symbol.Invalidate();
+			}
+		}
 
 		private class PinComparer : IComparer<BasePin> {
 			public static readonly PinComparer Comparer = new PinComparer();

@@ -37,6 +37,17 @@ namespace LogicCircuit {
 			set { this.PinBitWidth = value; }
 		}
 
+		public override bool Inverted {
+			get {
+				Pin pin = this.Circuit as Pin;
+				if(pin != null) {
+					return pin.Inverted;
+				}
+				return this.PinInverted;
+			}
+			set { this.PinInverted = value; }
+		}
+
 		public int Order { get; set; }
 
 		public override Circuit CopyTo(CircuitProject project) {
