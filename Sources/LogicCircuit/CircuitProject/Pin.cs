@@ -109,7 +109,7 @@ namespace LogicCircuit {
 			);
 			Tracer.Assert(change.Action == SnapTableAction.Delete || logicalCircuit != null);
 			if(logicalCircuit != null) {
-				Tracer.Assert(this.CircuitProject.ProjectSet.Project.LogicalCircuit == logicalCircuit, "Edit happened not on the current dialgram");
+				Tracer.Assert(this.CircuitProject.ProjectSet.Project.LogicalCircuit == logicalCircuit, "Edit happened not on the current diagram");
 				logicalCircuit.ResetPins();
 			}
 		}
