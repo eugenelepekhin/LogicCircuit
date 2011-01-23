@@ -40,6 +40,7 @@ namespace LogicCircuit {
 				this.MarkerGlyph.Width = Symbol.ScreenPoint(this.CircuitSymbol.Circuit.SymbolWidth) + 2 * Symbol.PinRadius;
 				this.MarkerGlyph.Height = Symbol.ScreenPoint(this.CircuitSymbol.Circuit.SymbolHeight) + 2 * Symbol.PinRadius;
 				this.PositionGlyph();
+				this.MarkerGlyph.ToolTip = this.CircuitSymbol.Circuit.ToolTip;
 			}
 
 			private void PositionGlyph() {
