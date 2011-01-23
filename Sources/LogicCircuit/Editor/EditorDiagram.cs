@@ -702,6 +702,11 @@ namespace LogicCircuit {
 							this.SelectConductor(wire);
 							this.StartMove(this.FindMarker(wire), e.GetPosition(this.Diagram));
 						} else {
+							Point point = e.GetPosition(this.Diagram);
+							if(Editor.IsPinClose(point, Symbol.ScreenPoint(wire.Point1)) || Editor.IsPinClose(point, Symbol.ScreenPoint(wire.Point2))) {
+								this.StartWire(point);
+								return;
+							}
 							this.ClearSelection();
 							this.StartMove(this.SelectSymbol(wire), e.GetPosition(this.Diagram));
 						}
