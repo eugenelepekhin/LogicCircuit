@@ -54,7 +54,7 @@ namespace LogicCircuit {
 			this.CircuitProject.Save(file);
 			this.File = file;
 			this.savedVersion = this.CircuitProject.Version;
-			this.NotifyPropertyChanged("File");
+			this.NotifyPropertyChanged("Caption");
 		}
 
 		protected override void OnProjectPropertyChanged(string propertyName) {
