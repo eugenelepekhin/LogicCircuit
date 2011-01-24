@@ -186,6 +186,7 @@ namespace LogicCircuit {
 			}
 		}
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
 		[Conditional("DEBUG")]
 		private void ValidateCircuitProject() {
 			foreach(Circuit circuit in this.CircuitSet) {
@@ -208,6 +209,8 @@ namespace LogicCircuit {
 				} else if(circuit is Pin) {
 					Tracer.Assert(this.PinSet.Table.Exists(PinData.PinIdField.Field, circuit.CircuitId));
 					Tracer.Assert(this.CircuitSymbolSet.SelectByCircuit(circuit).Count() == 1);
+					Pin pin = (Pin)circuit;
+					Tracer.Assert(pin.LogicalCircuit == this.CircuitSymbolSet.SelectByCircuit(circuit).First().LogicalCircuit);
 				} else if(circuit is Splitter) {
 					Tracer.Assert(this.SplitterSet.Table.Exists(SplitterData.SplitterIdField.Field, circuit.CircuitId));
 					Tracer.Assert(this.CircuitSymbolSet.SelectByCircuit(circuit).Count() == 1);

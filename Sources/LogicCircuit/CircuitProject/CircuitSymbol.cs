@@ -73,13 +73,17 @@ namespace LogicCircuit {
 		}
 
 		public CircuitSymbol Copy(CircuitSymbol other) {
-			Circuit circuit = other.Circuit.CopyTo(this.CircuitProject);
 			CircuitSymbolData data;
 			other.CircuitProject.CircuitSymbolSet.Table.GetData(other.CircuitSymbolRowId, out data);
 			if(this.Find(data.CircuitSymbolId) != null) {
 				data.CircuitSymbolId = Guid.NewGuid();
 			}
+			Circuit circuit = other.Circuit.CopyTo(this.CircuitProject);
 			data.CircuitId = circuit.CircuitId;
+			Pin pin = circuit as Pin;
+			if(pin != null) {
+				pin.Circuit = this.CircuitProject.LogicalCircuitSet.FindByLogicalCircuitId(data.LogicalCircuitId);
+			}
 			return this.Create(this.Table.Insert(ref data));
 		}
 	}
