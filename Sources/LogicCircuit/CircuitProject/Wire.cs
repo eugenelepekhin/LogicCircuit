@@ -28,6 +28,10 @@ namespace LogicCircuit {
 			get { return this.glyph ?? (this.glyph = this.CreateGlyph()); }
 		}
 
+		public void Reset() {
+			this.glyph = null;
+		}
+
 		public override void PositionGlyph() {
 			Line line = this.WireGlyph;
 			line.X1 = Symbol.ScreenPoint(this.X1);

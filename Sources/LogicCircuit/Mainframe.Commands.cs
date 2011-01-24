@@ -513,7 +513,7 @@ namespace LogicCircuit {
 					if(result.HasValue && result.Value) {
 						//TODO: refresh shape type in the editor
 						this.NotifyPropertyChanged("Editor");
-						this.Editor.Refresh();
+						this.Editor.FullRefresh();
 						//if(this.Editor.CircuitRunner.IsTurnedOn) {
 						//    this.Editor.CircuitRunner.VisibleMap.Redraw();
 						//}

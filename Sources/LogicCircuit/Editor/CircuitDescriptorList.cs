@@ -26,6 +26,11 @@ namespace LogicCircuit {
 			}
 		}
 
+		public void Refresh() {
+			CircuitDescriptorList.InitPrimitive();
+			this.NotifyPropertyChanged();
+		}
+
 		public IEnumerable<ICircuitDescriptor> CircuitDescriptors {
 			get {
 				this.current = null;

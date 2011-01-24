@@ -115,6 +115,17 @@ namespace LogicCircuit {
 			this.CircuitDescriptorList.UpdateGlyph(logicalCircuit);
 		}
 
+		public void FullRefresh() {
+			foreach(CircuitSymbol symbol in this.CircuitProject.CircuitSymbolSet) {
+				symbol.Reset();
+			}
+			foreach(Wire wire in this.CircuitProject.WireSet) {
+				wire.Reset();
+			}
+			this.Refresh();
+			this.CircuitDescriptorList.Refresh();
+		}
+
 		//--- Edit Operation
 
 		public void Undo() {
