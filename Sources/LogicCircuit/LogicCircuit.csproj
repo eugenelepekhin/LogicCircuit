@@ -171,6 +171,33 @@
     <Compile Include="Editor\WireMarker.cs" />
     <Compile Include="Editor\WirePledge.cs" />
     <Compile Include="Editor\WirePointMarker.cs" />
+    <Compile Include="Function\FunctionAnd.cs" />
+    <Compile Include="Function\FunctionAndNot.cs" />
+    <Compile Include="Function\CircuitState.cs" />
+    <Compile Include="Function\FunctionClock.cs" />
+    <Compile Include="Function\FunctionEven.cs" />
+    <Compile Include="Function\CircuitFunction.cs" />
+    <Compile Include="Function\Function7Segment.cs" />
+    <Compile Include="Function\FunctionButton.cs" />
+    <Compile Include="Function\FunctionConstant.cs" />
+    <Compile Include="Function\FunctionLed.cs" />
+    <Compile Include="Function\FunctionMemory.cs" />
+    <Compile Include="Function\FunctionProbe.cs" />
+    <Compile Include="Function\FunctionRam.cs" />
+    <Compile Include="Function\FunctionRom.cs" />
+    <Compile Include="Function\IFunctionInteractive.cs" />
+    <Compile Include="Function\IFunctionVisual.cs" />
+    <Compile Include="Function\FunctionNot.cs" />
+    <Compile Include="Function\FunctionOdd.cs" />
+    <Compile Include="Function\OneBitConst.cs" />
+    <Compile Include="Function\FunctionOr.cs" />
+    <Compile Include="Function\FunctionOrNot.cs" />
+    <Compile Include="Function\Probe.cs" />
+    <Compile Include="Function\State.cs" />
+    <Compile Include="Function\FunctionTriState.cs" />
+    <Compile Include="Function\FunctionTriStateGroup.cs" />
+    <Compile Include="Function\FunctionXor.cs" />
+    <Compile Include="Function\FunctionXorNot.cs" />
     <Compile Include="GateShape.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="GridLengthAnimation.cs" />
@@ -364,6 +391,7 @@
   <ItemGroup>
     <Resource Include="Schema\ConvertFrom.1.0.0.4.xslt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>$(SolutionDir)Tools\ResourceWrapper.Generator.exe ProjectPath=$(ProjectPath)

@@ -1026,5 +1026,26 @@ namespace LogicCircuit {
  		public static string TipOnAwaitingArea(string logicCircuit, LogicCircuit.GridPoint point) {
 			return string.Format(Culture, ResourceManager.GetString("TipOnAwaitingArea", Culture), logicCircuit, point);
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Function {0} required at least {1} parameters.
+		/// </summary>
+ 		public static string FunctionParameter(string function, int parameterCount) {
+			return string.Format(Culture, ResourceManager.GetString("FunctionParameter", Culture), function, parameterCount);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to State {0} is unknown.
+		/// </summary>
+ 		public static string UnknownState(LogicCircuit.State state) {
+			return string.Format(Culture, ResourceManager.GetString("UnknownState", Culture), state);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Attempt to get function from an empty dirty list..
+		/// </summary>
+ 		public static string ErrorDirtyListIsEmpty {
+			get { return ResourceManager.GetString("ErrorDirtyListIsEmpty", Culture); }
+		}
 	}
 }

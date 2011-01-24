@@ -83,14 +83,14 @@ namespace LogicCircuit {
 		public static void Report(string category, Exception exception) {
 			Tracer.Write(Level.ApplicationError, category, "{0}", exception);
 		}
-		public static void Fatal(string category, string message) {
-			Tracer.Write(Level.Fatal, category, message);
+		public static void Fatal(string category, string description) {
+			Tracer.Write(Level.Fatal, category, description);
 		}
 		//public static void Info(string category, string message, params object[] args) {
 		//	Tracer.Write(Level.Info, category, message, args);
 		//}
-		public static void FullInfo(string category, string message, params object[] args) {
-			Tracer.Write(Level.FullInfo, category, message, args);
+		public static void FullInfo(string category, string description, params object[] args) {
+			Tracer.Write(Level.FullInfo, category, description, args);
 		}
 
 		//---------------------------------------------------------------------
@@ -117,7 +117,7 @@ namespace LogicCircuit {
 
 		//---------------------------------------------------------------------
 
-		private static void WriteToFile(string message, string category) {
+		private static void WriteToFile(string description, string category) {
 			if(!File.Exists(Tracer.LogPath)) {
 				string dir = Path.GetDirectoryName(Tracer.LogPath);
 				if(!Directory.Exists(dir)) {
@@ -130,7 +130,7 @@ namespace LogicCircuit {
 			try {
 				writer = File.AppendText(Tracer.LogPath);
 				writer.Write(category + ": ");
-				writer.WriteLine(message);
+				writer.WriteLine(description);
 			} catch(Exception exception) {
 				Tracer.writeToLogFile = false;
 				Tracer.Write(exception.ToString(), "Tracer.WriteToFile");
@@ -139,13 +139,13 @@ namespace LogicCircuit {
 			}
 		}
 
-		private static void Write(string message, string category) {
-			Trace.WriteLine(message, category);
+		private static void Write(string description, string category) {
+			Trace.WriteLine(description, category);
 			#if UnitTest
-				Log.Write("{0}: {1}", category, message);
+				Log.Write("{0}: {1}", category, description);
 			#else
 				if(Tracer.writeToLogFile) {
-					Tracer.WriteToFile(message, category);
+					Tracer.WriteToFile(description, category);
 				}
 			#endif
 		}

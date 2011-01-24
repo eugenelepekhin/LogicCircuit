@@ -565,4 +565,15 @@ Out</value>
     <value>{0} {1}. Surround multiple symbols to select them, hold Shift to keep current selection.</value>
     <comment>{string logicCircuit, LogicCircuit.GridPoint point}</comment>
   </data>
+  <data name="FunctionParameter" xml:space="preserve">
+    <value>Function {0} required at least {1} parameters</value>
+    <comment>{string function, int parameterCount}</comment>
+  </data>
+  <data name="UnknownState" xml:space="preserve">
+    <value>State {0} is unknown</value>
+    <comment>{LogicCircuit.State state}</comment>
+  </data>
+  <data name="ErrorDirtyListIsEmpty" xml:space="preserve">
+    <value>Attempt to get function from an empty dirty list.</value>
+  </data>
 </root>
