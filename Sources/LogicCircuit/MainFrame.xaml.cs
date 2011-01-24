@@ -145,6 +145,11 @@ namespace LogicCircuit {
 			}
 		}
 
+		public bool? ShowDialog(Window window) {
+			window.Owner = this;
+			return window.ShowDialog();
+		}
+
 		private void WindowKeyDown(object sender, KeyEventArgs e) {
 			try {
 				if(this.Editor != null) {

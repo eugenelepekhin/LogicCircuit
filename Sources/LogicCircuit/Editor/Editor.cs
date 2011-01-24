@@ -251,39 +251,27 @@ namespace LogicCircuit {
 
 		public void Edit(Project project) {
 			Tracer.Assert(project == this.Project);
-			DialogProject dialog = new DialogProject(project);
-			dialog.Owner = this.Mainframe;
-			dialog.ShowDialog();
+			this.Mainframe.ShowDialog(new DialogProject(project));
 		}
 
 		public override void Edit(LogicalCircuit logicalCircuit) {
-			DialogCircuit dialog = new DialogCircuit(logicalCircuit);
-			dialog.Owner = this.Mainframe;
-			dialog.ShowDialog();
+			this.Mainframe.ShowDialog(new DialogCircuit(logicalCircuit));
 		}
 
 		private void Edit(CircuitButton button) {
-			DialogButton dialog = new DialogButton(button);
-			dialog.Owner = this.Mainframe;
-			dialog.ShowDialog();
+			this.Mainframe.ShowDialog(new DialogButton(button));
 		}
 
 		private void Edit(Constant constant) {
-			DialogConstant dialog = new DialogConstant(constant);
-			dialog.Owner = this.Mainframe;
-			dialog.ShowDialog();
+			this.Mainframe.ShowDialog(new DialogConstant(constant));
 		}
 
 		private void Edit(Memory memory) {
-			Window dialog = memory.Writable ? (Window)new DialogRAM(memory) : (Window)new DialogROM(memory);
-			dialog.Owner = this.Mainframe;
-			dialog.ShowDialog();
+			this.Mainframe.ShowDialog(memory.Writable ? (Window)new DialogRAM(memory) : (Window)new DialogROM(memory));
 		}
 
 		private void Edit(Pin pin) {
-			DialogPin dialog = new DialogPin(pin);
-			dialog.Owner = this.Mainframe;
-			dialog.ShowDialog();
+			this.Mainframe.ShowDialog(new DialogPin(pin));
 		}
 
 		protected override void Edit(Symbol symbol) {

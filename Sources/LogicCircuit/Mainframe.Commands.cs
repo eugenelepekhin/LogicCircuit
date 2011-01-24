@@ -50,9 +50,7 @@ namespace LogicCircuit {
 		private void FileExportImageCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
 				if(this.Editor != null && !this.LogicalCircuit().IsEmpty()) {
-					//DialogExportImage dialog = new DialogExportImage(this.Editor);
-					//dialog.Owner = this;
-					//dialog.ShowDialog();
+					//this.ShowDialog(new DialogExportImage(this.Editor));
 				}
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.FileExportImageCommandExecuted", exception);
@@ -471,9 +469,7 @@ namespace LogicCircuit {
 					//    map = map.Root;
 					//    root = map.Circuit;
 					//}
-					//DialogReport dialog = new DialogReport(root);
-					//dialog.Owner = this;
-					//dialog.ShowDialog();
+					//this.ShowDialog(new DialogReport(root));
 				}
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.ToolsReportCommandExecuted", exception);
@@ -513,9 +509,7 @@ namespace LogicCircuit {
 		private void ToolsOptionsCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
 				if(this.Editor != null) {
-					DialogOptions dialog = new DialogOptions(this);
-					dialog.Owner = this;
-					bool? result = dialog.ShowDialog();
+					bool? result = this.ShowDialog(new DialogOptions(this));
 					if(result.HasValue && result.Value) {
 						//TODO: refresh shape type in the editor
 						this.NotifyPropertyChanged("Editor");
@@ -542,9 +536,7 @@ namespace LogicCircuit {
 
 		private void HelpAboutCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
-				DialogAbout dialog = new DialogAbout();
-				dialog.Owner = this;
-				dialog.ShowDialog();
+				this.ShowDialog(new DialogAbout());
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.HelpAboutCommandExecuted", exception);
 				this.ReportException(exception);
