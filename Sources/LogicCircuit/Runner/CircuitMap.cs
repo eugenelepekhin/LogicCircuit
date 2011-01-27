@@ -63,8 +63,7 @@ namespace LogicCircuit {
 			return text.ToString();
 		}
 
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-		private void Expand(ConnectionSet connectionSet) {
+		private void Expand() {
 			foreach(CircuitSymbol symbol in this.Circuit.CircuitSymbols()) {
 				LogicalCircuit lc = symbol.Circuit as LogicalCircuit;
 				if(lc != null) {
@@ -75,49 +74,61 @@ namespace LogicCircuit {
 					}
 					CircuitMap child = new CircuitMap(this, symbol);
 					this.children.Add(symbol, child);
-					child.Expand(connectionSet);
+					child.Expand();
 				}
 			}
+		}
+
+		private void ConnectMap(ConnectionSet connectionSet) {
 			if(!connectionSet.IsConnected(this.Circuit)) {
-				ConductorMap conductorMap = new ConductorMap(this.Circuit);
-				Dictionary<GridPoint, List<Jam>> inJamMap = new Dictionary<GridPoint, List<Jam>>();
-				foreach(CircuitSymbol symbol in this.Circuit.CircuitSymbols()) {
-					foreach(Jam jam in symbol.Jams()) {
-						if(jam.Pin.PinType != PinType.Output) {
-							GridPoint p = jam.AbsolutePoint;
-							List<Jam> list;
-							if(!inJamMap.TryGetValue(p, out list)) {
-								list = new List<Jam>();
-								inJamMap.Add(p, list);
-							}
-							list.Add(jam);
+				foreach(CircuitMap child in this.children.Values) {
+					child.ConnectMap(connectionSet);
+				}
+				this.Connect(connectionSet);
+				connectionSet.MarkConnected(this.Circuit);
+			}
+		}
+
+		private void Connect(ConnectionSet connectionSet) {
+			Tracer.Assert(!connectionSet.IsConnected(this.Circuit));
+			Dictionary<GridPoint, List<Jam>> inJamMap = new Dictionary<GridPoint, List<Jam>>();
+			foreach(CircuitSymbol symbol in this.Circuit.CircuitSymbols()) {
+				foreach(Jam jam in symbol.Jams()) {
+					if(jam.Pin.PinType != PinType.Output) {
+						GridPoint p = jam.AbsolutePoint;
+						List<Jam> list;
+						if(!inJamMap.TryGetValue(p, out list)) {
+							list = new List<Jam>();
+							inJamMap.Add(p, list);
 						}
+						list.Add(jam);
 					}
 				}
-				foreach(CircuitSymbol symbol in this.Circuit.CircuitSymbols()) {
-					foreach(Jam outJam in symbol.Jams()) {
-						if(outJam.Pin.PinType != PinType.Input) {
-							Conductor conductor;
-							if(conductorMap.TryGetValue(outJam.AbsolutePoint, out conductor)) {
-								foreach(GridPoint point in conductor.Points) {
-									List<Jam> list;
-									if(inJamMap.TryGetValue(point, out list)) {
-										foreach(Jam inJam in list) {
-											if(inJam != outJam) {
-												if(inJam.Pin.BitWidth != outJam.Pin.BitWidth) {
-													Gate gate = inJam.CircuitSymbol.Circuit as Gate;
-													if(gate == null || gate.GateType != GateType.Probe) {
-														throw new CircuitException(Cause.UserError,
-															Resources.ErrorJamBitWidthDifferent(
-																inJam.CircuitSymbol.Circuit.Name, inJam.CircuitSymbol.Point,
-																outJam.CircuitSymbol.Circuit.Name, outJam.CircuitSymbol.Point,
-																this.Circuit.Name
-															)
-														);
-													}
+			}
+			ConductorMap conductorMap = new ConductorMap(this.Circuit);
+			foreach(CircuitSymbol symbol in this.Circuit.CircuitSymbols()) {
+				foreach(Jam outJam in symbol.Jams()) {
+					if(outJam.Pin.PinType != PinType.Input) {
+						Conductor conductor;
+						if(conductorMap.TryGetValue(outJam.AbsolutePoint, out conductor)) {
+							foreach(GridPoint point in conductor.Points) {
+								List<Jam> list;
+								if(inJamMap.TryGetValue(point, out list)) {
+									foreach(Jam inJam in list) {
+										if(inJam != outJam) {
+											if(inJam.Pin.BitWidth != outJam.Pin.BitWidth) {
+												Gate gate = inJam.CircuitSymbol.Circuit as Gate;
+												if(gate == null || gate.GateType != GateType.Probe) {
+													throw new CircuitException(Cause.UserError,
+														Resources.ErrorJamBitWidthDifferent(
+															inJam.CircuitSymbol.Circuit.Name, inJam.CircuitSymbol.Point,
+															outJam.CircuitSymbol.Circuit.Name, outJam.CircuitSymbol.Point,
+															this.Circuit.Name
+														)
+													);
 												}
-												connectionSet.Connect(inJam, outJam);
 											}
+											connectionSet.Connect(inJam, outJam);
 										}
 									}
 								}
@@ -125,16 +136,17 @@ namespace LogicCircuit {
 						}
 					}
 				}
-				connectionSet.MarkConnected(this.Circuit);
 			}
 		}
 
 		public CircuitState Apply(int probeCapacity) {
 			Tracer.Assert(this.Circuit != null && this.CircuitSymbol == null && this.Parent == null, "This method should be called on root only");
-			ConnectionSet connectionSet = new ConnectionSet();
 
 			//Build a tree
-			this.Expand(connectionSet);
+			this.Expand();
+
+			ConnectionSet connectionSet = new ConnectionSet();
+			this.ConnectMap(connectionSet);
 			
 			// Flatten the circuit
 			SymbolMapList list = new SymbolMapList();
@@ -144,7 +156,7 @@ namespace LogicCircuit {
 			// Remove not used results
 			CircuitMap.CleanUp(list);
 
-			//TODO: optimize the list
+			//TODO: optimize the list. What if sort it in such way that state will be allocated with a better locality, so it will be less cache misses?
 
 			CircuitState circuitState = new CircuitState();
 			circuitState.ReserveState(3);
@@ -191,18 +203,18 @@ namespace LogicCircuit {
 			}
 		}
 
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
 		private void Connect(ConnectionSet connectionSet, SymbolMapList list, Result result, Jam jam, int bitNumber) {
 			Tracer.Assert(bitNumber < jam.Pin.BitWidth);
 			foreach(Connection con in connectionSet.SelectByOutput(jam)) {
 				Tracer.Assert(con.InJam.CircuitSymbol.LogicalCircuit == this.Circuit);
 				Tracer.Assert(con.OutJam.CircuitSymbol.LogicalCircuit == this.Circuit);
 				Circuit circuit = con.InJam.CircuitSymbol.Circuit;
+				Pin pin;
 				if(CircuitMap.IsPrimitive(circuit)) {
 					list.AddParameter(result, this, con.InJam, bitNumber);
-				} else if(circuit is Pin) {
+				} else if((pin = (circuit as Pin)) != null) {
 					if(this.Parent != null) {
-						this.Parent.Connect(connectionSet, list, result, this.Jam((Pin)circuit), bitNumber);
+						this.Parent.Connect(connectionSet, list, result, this.Jam(pin), bitNumber);
 					}
 				} else if(circuit is LogicalCircuit) {
 					IEnumerable<CircuitSymbol> pinSymbol = this.Circuit.CircuitProject.CircuitSymbolSet.SelectByCircuit(con.InJam.Pin);
@@ -288,7 +300,7 @@ namespace LogicCircuit {
 			return null;
 		}
 
-		// This is not very effition algorithm
+		// This is not very effitive algorithm
 		public FunctionProbe FunctionProbe(CircuitSymbol symbol) {
 			if(this.displays != null) {
 				foreach(IFunctionVisual visual in this.displays) {
@@ -389,6 +401,7 @@ namespace LogicCircuit {
 			get { return this.Parent == null; }
 		}
 
+		// TODO: is it possible to remove this?
 		/*// this property sets only for the root node. so can't be symply converted to auto property
 		private CircuitRunner circuitRunner;
 		public CircuitRunner CircuitRunner {
@@ -471,9 +484,9 @@ namespace LogicCircuit {
 			} else if(symbolMap.CircuitSymbol.Circuit is Memory) {
 				Memory memory = (Memory)symbolMap.CircuitSymbol.Circuit;
 				if(memory.Writable) {
-					CircuitMap.DefineRAM(circuitState, symbolMap);
+					CircuitMap.DefineRam(circuitState, symbolMap);
 				} else {
-					CircuitMap.DefineROM(circuitState, symbolMap);
+					CircuitMap.DefineRom(circuitState, symbolMap);
 				}
 			} else {
 				Tracer.Fail();
@@ -714,7 +727,7 @@ namespace LogicCircuit {
 			symbolMap.CircuitMap.inputs.Add(symbolMap.CircuitSymbol, constant);
 		}
 
-		private static void DefineROM(CircuitState circuitState, SymbolMap symbolMap) {
+		private static void DefineRom(CircuitState circuitState, SymbolMap symbolMap) {
 			Memory memory = (Memory)symbolMap.CircuitSymbol.Circuit;
 			Tracer.Assert(!memory.Writable && symbolMap.CircuitSymbol.Jams().Count() == 2);
 			List<Result> results = new List<Result>(symbolMap.Results);
@@ -736,7 +749,7 @@ namespace LogicCircuit {
 			symbolMap.CircuitMap.memories.Add(symbolMap.CircuitSymbol, rom);
 		}
 
-		private static void DefineRAM(CircuitState circuitState, SymbolMap symbolMap) {
+		private static void DefineRam(CircuitState circuitState, SymbolMap symbolMap) {
 			Memory memory = (Memory)symbolMap.CircuitSymbol.Circuit;
 			Tracer.Assert(memory.Writable && symbolMap.CircuitSymbol.Jams().Count() == 4);
 			List<Result> dataOut = new List<Result>(symbolMap.Results);
