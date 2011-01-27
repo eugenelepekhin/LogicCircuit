@@ -1047,5 +1047,54 @@ namespace LogicCircuit {
  		public static string ErrorDirtyListIsEmpty {
 			get { return ResourceManager.GetString("ErrorDirtyListIsEmpty", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to /.
+		/// </summary>
+ 		public static string CircuitMapPathSeparator {
+			get { return ResourceManager.GetString("CircuitMapPathSeparator", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to on.
+		/// </summary>
+ 		public static string CircuitMapLabelSeparator {
+			get { return ResourceManager.GetString("CircuitMapLabelSeparator", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Not all address bits connected on memory {0}.
+		/// </summary>
+ 		public static string ErrorAddressNotConnected(string memoryPath) {
+			return string.Format(Culture, ResourceManager.GetString("ErrorAddressNotConnected", Culture), memoryPath);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Not all input data bits connected on memory {0}.
+		/// </summary>
+ 		public static string ErrorDataInNotConnected(string memoryPath) {
+			return string.Format(Culture, ResourceManager.GetString("ErrorDataInNotConnected", Culture), memoryPath);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Input pin of {0} ({1}) and output pin of {2} ({3}) on {4} have different bit width and cannot be connected. Please resolve the issue..
+		/// </summary>
+ 		public static string ErrorJamBitWidthDifferent(string symbol1, GridPoint point1, string symbol2, GridPoint point2, string logicCircuit) {
+			return string.Format(Culture, ResourceManager.GetString("ErrorJamBitWidthDifferent", Culture), symbol1, point1, symbol2, point2, logicCircuit);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Symbol of circuit "{0}" on logical circuit "{1}" forms infinite loop. Please resolve the loop..
+		/// </summary>
+ 		public static string ErrorLoopInCircuit(string symbol, string logicCircuit) {
+			return string.Format(Culture, ResourceManager.GetString("ErrorLoopInCircuit", Culture), symbol, logicCircuit);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Input pin {0} of {1} connected to more than one output pin that are not tri state capable..
+		/// </summary>
+ 		public static string ErrorManyResults(string pinName, string symbol) {
+			return string.Format(Culture, ResourceManager.GetString("ErrorManyResults", Culture), pinName, symbol);
+		}
 	}
 }

@@ -304,7 +304,7 @@ namespace LogicCircuit {
 		}
 
 		// Gets or sets the value reffered by the foreign key on field CircuitId
-		public Circuit Circuit {
+		public override Circuit Circuit {
 			get { return this.CircuitProject.CircuitSet.Find(this.Table.GetField(this.DevicePinRowId, DevicePinData.CircuitIdField.Field)); }
 			set { this.Table.SetField(this.DevicePinRowId, DevicePinData.CircuitIdField.Field, value.CircuitId); }
 		}

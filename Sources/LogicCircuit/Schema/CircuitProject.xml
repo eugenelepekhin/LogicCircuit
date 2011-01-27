@@ -51,7 +51,7 @@
 	<Table Name="DevicePin" Persistent="False" ItemBaseClass="BasePin">
 		<Table.Columns>
 			<Column Name="PinId" Type="Guid" ReadOnly="true"/>
-			<Column Name="CircuitId" Type="Guid"/>
+			<Column Name="CircuitId" Type="Guid" PropertyOverrides="true"/>
 			<Column Name="BitWidth" Type="int" Default="1" Check="BasePin.CheckBitWidth" AccessModifier="Private" PropertyNamePrefix="Pin"/>
 			<Column Name="PinType" Type="PinType" Default="PinType.Input" PropertyOverrides="true"/>
 			<Column Name="PinSide" Type="PinSide" Default="PinSide.Left" PropertyOverrides="true"/>
@@ -117,7 +117,7 @@
 	<Table Name="Pin" ItemBaseClass="BasePin">
 		<Table.Columns>
 			<Column Name="PinId" Type="Guid" ReadOnly="true"/>
-			<Column Name="CircuitId" Type="Guid"/>
+			<Column Name="CircuitId" Type="Guid" PropertyOverrides="true"/>
 			<Column Name="BitWidth" Type="int" Default="1" Check="BasePin.CheckBitWidth" PropertyOverrides="true"/>
 			<Column Name="PinType" Type="PinType" Default="PinType.Input" PropertyOverrides="true"/>
 			<Column Name="PinSide" Type="PinSide" Default="PinSide.Left" PropertyOverrides="true"/>

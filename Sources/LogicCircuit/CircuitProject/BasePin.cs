@@ -30,6 +30,7 @@ namespace LogicCircuit {
 		/// </summary>
 		public GridPoint GridPoint { get; set; }
 		
+		public abstract Circuit Circuit { get; set; }
 		public abstract PinSide PinSide { get; set; }
 		public abstract PinType PinType { get; set; }
 		public abstract int BitWidth { get; set; }

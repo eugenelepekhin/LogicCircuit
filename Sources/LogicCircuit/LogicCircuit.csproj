@@ -58,6 +58,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ButtonControl.cs" />
+    <Compile Include="CircuitProject\CircuitSymbolComparer.cs" />
+    <Compile Include="CircuitProject\PinComparer.cs" />
     <Compile Include="Conductor.cs" />
     <Compile Include="ConductorMap.cs" />
     <Compile Include="CustomCommands.cs" />
@@ -102,7 +104,6 @@
     <Compile Include="CircuitProject\CircuitProject.cs" />
     <Compile Include="CircuitProject\CircuitRotation.cs" />
     <Compile Include="CircuitProject\CircuitSymbol.cs" />
-    <Compile Include="CircuitProject\Connection.cs" />
     <Compile Include="CircuitProject\Constant.cs" />
     <Compile Include="CircuitProject\DevicePin.cs" />
     <Compile Include="CircuitProject\Gate.cs" />
@@ -204,6 +205,10 @@
     <Compile Include="GridPoint.cs" />
     <Compile Include="Mainframe.Commands.cs" />
     <Compile Include="Mainframe.File.cs" />
+    <Compile Include="Runner\CircuitMap.cs" />
+    <Compile Include="Runner\CircuitMap.SymbolMap.cs" />
+    <Compile Include="Runner\CircuitMap.Connection.cs" />
+    <Compile Include="CircuitProject\JamComparer.cs" />
     <Compile Include="Schema\Schema.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -383,7 +388,9 @@
     <None Include="LogicCircuit.ruleset">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Schema\CircuitProject.xml" />
+    <None Include="Schema\CircuitProject.xml">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="CustomDictionary.xml" />

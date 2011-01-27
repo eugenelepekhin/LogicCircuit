@@ -576,4 +576,30 @@ Out</value>
   <data name="ErrorDirtyListIsEmpty" xml:space="preserve">
     <value>Attempt to get function from an empty dirty list.</value>
   </data>
+  <data name="CircuitMapPathSeparator" xml:space="preserve">
+    <value>/</value>
+  </data>
+  <data name="CircuitMapLabelSeparator" xml:space="preserve">
+    <value> on </value>
+  </data>
+  <data name="ErrorAddressNotConnected" xml:space="preserve">
+    <value>Not all address bits connected on memory {0}</value>
+    <comment>{string memoryPath}</comment>
+  </data>
+  <data name="ErrorDataInNotConnected" xml:space="preserve">
+    <value>Not all input data bits connected on memory {0}</value>
+    <comment>{string memoryPath}</comment>
+  </data>
+  <data name="ErrorJamBitWidthDifferent" xml:space="preserve">
+    <value>Input pin of {0} ({1}) and output pin of {2} ({3}) on {4} have different bit width and cannot be connected. Please resolve the issue.</value>
+    <comment>{string symbol1, GridPoint point1, string symbol2, GridPoint point2, string logicCircuit}</comment>
+  </data>
+  <data name="ErrorLoopInCircuit" xml:space="preserve">
+    <value>Symbol of circuit "{0}" on logical circuit "{1}" forms infinite loop. Please resolve the loop.</value>
+    <comment>{string symbol, string logicCircuit}</comment>
+  </data>
+  <data name="ErrorManyResults" xml:space="preserve">
+    <value>Input pin {0} of {1} connected to more than one output pin that are not tri state capable.</value>
+    <comment>{string pinName, string symbol}</comment>
+  </data>
 </root>
