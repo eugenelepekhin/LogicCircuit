@@ -608,4 +608,17 @@ Out</value>
   <data name="PowerOn" xml:space="preserve">
     <value>Power On</value>
   </data>
+  <data name="ProbeHistoryHex" xml:space="preserve">
+    <value>0x{0:X}</value>
+    <comment>{int value}</comment>
+  </data>
+  <data name="ProbeHistoryMark" xml:space="preserve">
+    <value>&lt;&lt;&lt;&lt;&lt;&lt; Mark &gt;&gt;&gt;&gt;&gt;&gt;</value>
+  </data>
+  <data name="TitleMark" xml:space="preserve">
+    <value>_Mark</value>
+  </data>
+  <data name="TitleProbeHistory" xml:space="preserve">
+    <value>Probe History</value>
+  </data>
 </root>

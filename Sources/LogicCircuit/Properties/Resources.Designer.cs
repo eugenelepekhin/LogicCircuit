@@ -1110,5 +1110,33 @@ namespace LogicCircuit {
  		public static string PowerOn {
 			get { return ResourceManager.GetString("PowerOn", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to 0x{0:X}.
+		/// </summary>
+ 		public static string ProbeHistoryHex(int value) {
+			return string.Format(Culture, ResourceManager.GetString("ProbeHistoryHex", Culture), value);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to <<<<<< Mark >>>>>>.
+		/// </summary>
+ 		public static string ProbeHistoryMark {
+			get { return ResourceManager.GetString("ProbeHistoryMark", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Mark.
+		/// </summary>
+ 		public static string TitleMark {
+			get { return ResourceManager.GetString("TitleMark", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Probe History.
+		/// </summary>
+ 		public static string TitleProbeHistory {
+			get { return ResourceManager.GetString("TitleProbeHistory", Culture); }
+		}
 	}
 }

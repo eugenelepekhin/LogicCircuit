@@ -1,0 +1,105 @@
+﻿<Window x:Class="LogicCircuit.DialogMemory"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:lc="clr-namespace:LogicCircuit"
+	FlowDirection="{Binding Source={x:Static lc:Resources.FlowDirection}, Mode=OneTime}"
+	Title="{Binding Source={x:Static lc:Resources.CategoryMemory}, Mode=OneTime}"
+	MinWidth="480" MinHeight="240"
+	Width="{Binding Path=WindowLocation.Width, Mode=TwoWay}"
+	Height="{Binding Path=WindowLocation.Height, Mode=TwoWay}"
+	WindowState="{Binding Path=WindowLocation.WindowState, Mode=TwoWay}"
+	Style="{DynamicResource DialogWindow}"
+	ResizeMode="CanResizeWithGrip"
+	WindowStartupLocation="CenterOwner"
+	SizeToContent="Manual"
+>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+		<StackPanel Grid.Row="0" Orientation="Horizontal" Margin="3">
+			<StackPanel.Resources>
+				<Style TargetType="TextBlock">
+					<Setter Property="VerticalAlignment" Value="Center"/>
+				</Style>
+			</StackPanel.Resources>
+
+			<Label Content="{Binding Source={x:Static lc:Resources.TitleAddressBitWidth}, Mode=OneTime}"/>
+			<TextBlock Text="{Binding Path=AddressBitWidth}"/>
+			<Label Content="{Binding Source={x:Static lc:Resources.TitleDataBitWidth}, Mode=OneTime}"/>
+			<TextBlock Text="{Binding Path=DataBitWidth}"/>
+		</StackPanel>
+
+		<GroupBox Grid.Row="1" Header="{Binding Source={x:Static lc:Resources.TitleData}, Mode=OneTime}" Margin="3">
+			<ListView ItemsSource="{Binding Path=Rows}">
+				<ListView.View>
+					<GridView AllowsColumnReorder="False">
+						<GridViewColumn>
+							<GridViewColumn.CellTemplate>
+								<DataTemplate>
+									<TextBlock Text="{Binding Path=RowNumber}"
+										Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}"
+										Margin="-6,0,-6,0" Padding="8,0,8,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+									/>
+								</DataTemplate>
+							</GridViewColumn.CellTemplate>
+						</GridViewColumn>
+						<GridViewColumn Header="0">
+							<GridViewColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Path=[0]}"/></DataTemplate></GridViewColumn.CellTemplate>
+						</GridViewColumn>
+						<GridViewColumn Header="1">
+							<GridViewColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Path=[1]}"/></DataTemplate></GridViewColumn.CellTemplate>
+						</GridViewColumn>
+						<GridViewColumn Header="2">
+							<GridViewColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Path=[2]}"/></DataTemplate></GridViewColumn.CellTemplate>
+						</GridViewColumn>
+						<GridViewColumn Header="3">
+							<GridViewColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Path=[3]}"/></DataTemplate></GridViewColumn.CellTemplate>
+						</GridViewColumn>
+						<GridViewColumn Header="4">
+							<GridViewColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Path=[4]}"/></DataTemplate></GridViewColumn.CellTemplate>
+						</GridViewColumn>
+						<GridViewColumn Header="5">
+							<GridViewColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Path=[5]}"/></DataTemplate></GridViewColumn.CellTemplate>
+						</GridViewColumn>
+						<GridViewColumn Header="6">
+							<GridViewColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Path=[6]}"/></DataTemplate></GridViewColumn.CellTemplate>
+						</GridViewColumn>
+						<GridViewColumn Header="7">
+							<GridViewColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Path=[7]}"/></DataTemplate></GridViewColumn.CellTemplate>
+						</GridViewColumn>
+						<GridViewColumn Header="8">
+							<GridViewColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Path=[8]}"/></DataTemplate></GridViewColumn.CellTemplate>
+						</GridViewColumn>
+						<GridViewColumn Header="9">
+							<GridViewColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Path=[9]}"/></DataTemplate></GridViewColumn.CellTemplate>
+						</GridViewColumn>
+						<GridViewColumn Header="A">
+							<GridViewColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Path=[10]}"/></DataTemplate></GridViewColumn.CellTemplate>
+						</GridViewColumn>
+						<GridViewColumn Header="B">
+							<GridViewColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Path=[11]}"/></DataTemplate></GridViewColumn.CellTemplate>
+						</GridViewColumn>
+						<GridViewColumn Header="C">
+							<GridViewColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Path=[12]}"/></DataTemplate></GridViewColumn.CellTemplate>
+						</GridViewColumn>
+						<GridViewColumn Header="D">
+							<GridViewColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Path=[13]}"/></DataTemplate></GridViewColumn.CellTemplate>
+						</GridViewColumn>
+						<GridViewColumn Header="E">
+							<GridViewColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Path=[14]}"/></DataTemplate></GridViewColumn.CellTemplate>
+						</GridViewColumn>
+						<GridViewColumn Header="F">
+							<GridViewColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Path=[15]}"/></DataTemplate></GridViewColumn.CellTemplate>
+						</GridViewColumn>
+					</GridView>
+				</ListView.View>
+			</ListView>
+		</GroupBox>
+
+		<Button Grid.Row="2" Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" IsCancel="True" HorizontalAlignment="Right"/>
+	</Grid>
+</Window>

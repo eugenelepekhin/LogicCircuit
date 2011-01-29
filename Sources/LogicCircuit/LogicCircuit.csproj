@@ -75,11 +75,17 @@
     <Compile Include="Dialog\DialogConstant.xaml.cs">
       <DependentUpon>DialogConstant.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialog\DialogMemory.xaml.cs">
+      <DependentUpon>DialogMemory.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialog\DialogOptions.xaml.cs">
       <DependentUpon>DialogOptions.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialog\DialogPin.xaml.cs">
       <DependentUpon>DialogPin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\DialogProbeHistory.xaml.cs">
+      <DependentUpon>DialogProbeHistory.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialog\DialogProject.xaml.cs">
       <DependentUpon>DialogProject.xaml</DependentUpon>
@@ -251,6 +257,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Dialog\DialogMemory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Dialog\DialogMessage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -260,6 +270,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Dialog\DialogPin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialog\DialogProbeHistory.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

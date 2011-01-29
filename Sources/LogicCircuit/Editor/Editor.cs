@@ -336,27 +336,21 @@ namespace LogicCircuit {
 					}
 					Gate gate = circuitSymbol.Circuit as Gate;
 					if(gate != null && gate.GateType == GateType.Probe) {
-						this.ShowFunctionProbe(this.circuitRunner.VisibleMap.FunctionProbe(circuitSymbol));
+						FunctionProbe functionProbe = this.circuitRunner.VisibleMap.FunctionProbe(circuitSymbol);
+						if(functionProbe != null) {
+							this.Mainframe.ShowDialog(new DialogProbeHistory(functionProbe));
+						}
 						return;
 					}
 					Memory memory = circuitSymbol.Circuit as Memory;
 					if(memory != null) {
-						this.ShowFunctionMemory(this.circuitRunner.VisibleMap.FunctionMemory(circuitSymbol));
+						FunctionMemory functionMemory = this.circuitRunner.VisibleMap.FunctionMemory(circuitSymbol);
+						if(functionMemory != null) {
+							this.Mainframe.ShowDialog(new DialogMemory(functionMemory));
+						}
 						return;
 					}
 				}
-			}
-		}
-
-		public void ShowFunctionProbe(FunctionProbe functionProbe) {
-			if(functionProbe != null) {
-				//this.Mainframe.ShowDialog(new DialogProbeHistory(functionProbe));
-			}
-		}
-
-		public void ShowFunctionMemory(FunctionMemory functionMemory) {
-			if(functionMemory != null) {
-				//this.Mainframe.ShowDialog(new DialogMemory(functionMemory));
 			}
 		}
 
