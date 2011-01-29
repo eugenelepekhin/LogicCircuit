@@ -29,19 +29,28 @@ namespace LogicCircuit {
 		private FrameworkElement dragSource;
 
 		private CircuitRunner circuitRunner;
+		public CircuitRunner CircuitRunner {
+			get { return this.circuitRunner; }
+			private set {
+				if(this.circuitRunner != value) {
+					this.circuitRunner = value;
+					this.NotifyPropertyChanged("CircuitRunner");
+				}
+			}
+		}
 
 		public bool Power {
-			get { return this.circuitRunner != null; }
+			get { return this.CircuitRunner != null; }
 			set {
 				if(this.Power != value) {
 					if(value) {
 						this.CancelMove();
 						this.ClearSelection();
-						this.circuitRunner = new CircuitRunner(this);
-						this.circuitRunner.Start();
+						this.CircuitRunner = new CircuitRunner(this);
+						this.CircuitRunner.Start();
 					} else {
-						this.circuitRunner.Stop();
-						this.circuitRunner = null;
+						this.CircuitRunner.Stop();
+						this.CircuitRunner = null;
 					}
 					this.NotifyPropertyChanged("Power");
 				}
@@ -121,7 +130,7 @@ namespace LogicCircuit {
 		public void OpenLogicalCircuit(CircuitMap map) {
 			Tracer.Assert(this.Power);
 			this.OpenLogicalCircuit(map.Circuit);
-			this.circuitRunner.VisibleMap = map;
+			this.CircuitRunner.VisibleMap = map;
 			this.Mainframe.Status = map.Path();
 		}
 
@@ -329,14 +338,14 @@ namespace LogicCircuit {
 						return;
 					}
 				} else {
-					CircuitMap map = this.circuitRunner.VisibleMap.Child(circuitSymbol);
+					CircuitMap map = this.CircuitRunner.VisibleMap.Child(circuitSymbol);
 					if(map != null) {
 						this.OpenLogicalCircuit(map);
 						return;
 					}
 					Gate gate = circuitSymbol.Circuit as Gate;
 					if(gate != null && gate.GateType == GateType.Probe) {
-						FunctionProbe functionProbe = this.circuitRunner.VisibleMap.FunctionProbe(circuitSymbol);
+						FunctionProbe functionProbe = this.CircuitRunner.VisibleMap.FunctionProbe(circuitSymbol);
 						if(functionProbe != null) {
 							this.Mainframe.ShowDialog(new DialogProbeHistory(functionProbe));
 						}
@@ -344,7 +353,7 @@ namespace LogicCircuit {
 					}
 					Memory memory = circuitSymbol.Circuit as Memory;
 					if(memory != null) {
-						FunctionMemory functionMemory = this.circuitRunner.VisibleMap.FunctionMemory(circuitSymbol);
+						FunctionMemory functionMemory = this.CircuitRunner.VisibleMap.FunctionMemory(circuitSymbol);
 						if(functionMemory != null) {
 							this.Mainframe.ShowDialog(new DialogMemory(functionMemory));
 						}
@@ -556,7 +565,7 @@ namespace LogicCircuit {
 
 		protected override void ButtonIsPressedChanged(CircuitSymbol symbol, bool isPressed) {
 			 if(this.Power) {
-				IFunctionInteractive function = this.circuitRunner.VisibleMap.Input(symbol);
+				IFunctionInteractive function = this.CircuitRunner.VisibleMap.Input(symbol);
 				if(function != null) {
 					if(isPressed) {
 						function.OnSymbolPress();

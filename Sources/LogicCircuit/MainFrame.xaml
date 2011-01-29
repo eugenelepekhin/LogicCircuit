@@ -202,11 +202,11 @@
 
 				<!-- Top row with Running map tree -->
 				<GroupBox Grid.Row="0" Header="Running Circuit">
-					<!--<TreeView BorderThickness="0"
-						ItemsSource="{Binding Path=Editor.CircuitRunner.RootMap}"
-						SelectedItemChanged="RunningMapTreeViewSelectedItemChanged"
-						MouseDoubleClick="RunningMapTreeViewMouseDoubleClick"
+					<TreeView BorderThickness="0"
+						ItemsSource="{Binding Path=Editor.CircuitRunner.Root}"
+						MouseDoubleClick="RunningMapDoubleClick"
 					>
+						<!--SelectedItemChanged="RunningMapTreeViewSelectedItemChanged"-->
 						<TreeView.ItemContainerStyle>
 							<Style TargetType="TreeViewItem">
 								<Setter Property="BorderThickness" Value="2"/>
@@ -235,7 +235,7 @@
 								</StackPanel>
 							</HierarchicalDataTemplate>
 						</TreeView.Resources>
-					</TreeView>-->
+					</TreeView>
 				</GroupBox>
 
 				<!-- Bottom row with List of circuits and properties -->

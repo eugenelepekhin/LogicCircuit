@@ -14,7 +14,9 @@ namespace LogicCircuit {
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		public Editor Editor { get; private set; }
-		public CircuitMap RootMap { get; private set; }
+		private CircuitMap RootMap { get; set; }
+		public IEnumerable<CircuitMap> Root { get { yield return this.RootMap; } }
+
 		private CircuitMap visibleMap;
 		public CircuitMap VisibleMap {
 			get { return this.visibleMap; }

@@ -295,5 +295,27 @@ namespace LogicCircuit {
 				this.ReportException(exception);
 			}
 		}
+
+		private void RunningMapDoubleClick(object sender, MouseButtonEventArgs e) {
+			try {
+				if(this.Editor != null && this.Editor.Power && e.ChangedButton == MouseButton.Left) {
+					TreeView treeView = sender as TreeView;
+					if(treeView != null && treeView.SelectedItem != null) {
+						CircuitMap map = treeView.SelectedItem as CircuitMap;
+						if(map != null) {
+							this.Editor.OpenLogicalCircuit(map);
+							/*TreeViewItem item = this.Container(treeView, map);
+							if(item != null) {
+								item.IsExpanded = true;
+							}*/
+							e.Handled = true;
+						}
+					}
+				}
+			} catch(Exception exception) {
+				Tracer.Report("MainFrame.RunningMapDoubleClick", exception);
+				this.ReportException(exception);
+			}
+		}
 	}
 }
