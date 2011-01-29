@@ -1096,5 +1096,19 @@ namespace LogicCircuit {
  		public static string ErrorManyResults(string pinName, string symbol) {
 			return string.Format(Culture, ResourceManager.GetString("ErrorManyResults", Culture), pinName, symbol);
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Power Off.
+		/// </summary>
+ 		public static string PowerOff {
+			get { return ResourceManager.GetString("PowerOff", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Power On.
+		/// </summary>
+ 		public static string PowerOn {
+			get { return ResourceManager.GetString("PowerOn", Culture); }
+		}
 	}
 }

@@ -28,20 +28,27 @@ namespace LogicCircuit {
 		private Point dragStart;
 		private FrameworkElement dragSource;
 
-		// TODO: implement it correctly
-		private bool power = false;
+		private CircuitRunner circuitRunner;
+
 		public bool Power {
-			get { return this.power; }
+			get { return this.circuitRunner != null; }
 			set {
-				if(this.power != value) {
-					this.power = value;
+				if(this.Power != value) {
+					if(value) {
+						this.CancelMove();
+						this.ClearSelection();
+						this.circuitRunner = new CircuitRunner(this);
+						this.circuitRunner.Start();
+					} else {
+						this.circuitRunner.Stop();
+						this.circuitRunner = null;
+					}
 					this.NotifyPropertyChanged("Power");
 				}
 			}
 		}
 
-		// TODO: implement it correctly
-		public override bool InEditMode { get { return true; } }
+		public override bool InEditMode { get { return !this.Power; } }
 
 		public Editor(Mainframe mainframe, string file) : base(mainframe, CircuitProject.Create(file)) {
 			this.File = file;
@@ -109,6 +116,13 @@ namespace LogicCircuit {
 					}
 				}
 			}
+		}
+
+		public void OpenLogicalCircuit(CircuitMap map) {
+			Tracer.Assert(this.Power);
+			this.OpenLogicalCircuit(map.Circuit);
+			this.circuitRunner.VisibleMap = map;
+			this.Mainframe.Status = map.Path();
 		}
 
 		protected override void UpdateGlyph(LogicalCircuit logicalCircuit) {
@@ -286,9 +300,9 @@ namespace LogicCircuit {
 		}
 
 		protected override void Edit(Symbol symbol) {
-			if(this.InEditMode) {
-				CircuitSymbol circuitSymbol = symbol as CircuitSymbol;
-				if(circuitSymbol != null) {
+			CircuitSymbol circuitSymbol = symbol as CircuitSymbol;
+			if(circuitSymbol != null) {
+				if(this.InEditMode) {
 					LogicalCircuit lc = circuitSymbol.Circuit as LogicalCircuit;
 					if(lc != null) {
 						this.OpenLogicalCircuit(lc);
@@ -314,7 +328,35 @@ namespace LogicCircuit {
 						this.Edit(pin);
 						return;
 					}
+				} else {
+					CircuitMap map = this.circuitRunner.VisibleMap.Child(circuitSymbol);
+					if(map != null) {
+						this.OpenLogicalCircuit(map);
+						return;
+					}
+					Gate gate = circuitSymbol.Circuit as Gate;
+					if(gate != null && gate.GateType == GateType.Probe) {
+						this.ShowFunctionProbe(this.circuitRunner.VisibleMap.FunctionProbe(circuitSymbol));
+						return;
+					}
+					Memory memory = circuitSymbol.Circuit as Memory;
+					if(memory != null) {
+						this.ShowFunctionMemory(this.circuitRunner.VisibleMap.FunctionMemory(circuitSymbol));
+						return;
+					}
 				}
+			}
+		}
+
+		public void ShowFunctionProbe(FunctionProbe functionProbe) {
+			if(functionProbe != null) {
+				//this.Mainframe.ShowDialog(new DialogProbeHistory(functionProbe));
+			}
+		}
+
+		public void ShowFunctionMemory(FunctionMemory functionMemory) {
+			if(functionMemory != null) {
+				//this.Mainframe.ShowDialog(new DialogMemory(functionMemory));
 			}
 		}
 
@@ -514,6 +556,19 @@ namespace LogicCircuit {
 						new DataObject(EditorDiagram.CircuitDescriptorDataFormat, sender.DataContext),
 						DragDropEffects.Copy | DragDropEffects.Scroll
 					);
+				}
+			}
+		}
+
+		protected override void ButtonIsPressedChanged(CircuitSymbol symbol, bool isPressed) {
+			 if(this.Power) {
+				IFunctionInteractive function = this.circuitRunner.VisibleMap.Input(symbol);
+				if(function != null) {
+					if(isPressed) {
+						function.OnSymbolPress();
+					} else {
+						function.OnSymbolRelease();
+					}
 				}
 			}
 		}

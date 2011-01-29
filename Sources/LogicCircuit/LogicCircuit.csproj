@@ -209,6 +209,8 @@
     <Compile Include="Runner\CircuitMap.SymbolMap.cs" />
     <Compile Include="Runner\CircuitMap.Connection.cs" />
     <Compile Include="CircuitProject\JamComparer.cs" />
+    <Compile Include="Runner\CircuitRunner.cs" />
+    <Compile Include="Runner\PreciseTimer.cs" />
     <Compile Include="Schema\Schema.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

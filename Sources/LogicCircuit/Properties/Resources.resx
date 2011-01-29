@@ -602,4 +602,10 @@ Out</value>
     <value>Input pin {0} of {1} connected to more than one output pin that are not tri state capable.</value>
     <comment>{string pinName, string symbol}</comment>
   </data>
+  <data name="PowerOff" xml:space="preserve">
+    <value>Power Off</value>
+  </data>
+  <data name="PowerOn" xml:space="preserve">
+    <value>Power On</value>
+  </data>
 </root>
