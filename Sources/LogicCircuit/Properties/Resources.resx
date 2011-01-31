@@ -621,4 +621,8 @@ Out</value>
   <data name="TitleProbeHistory" xml:space="preserve">
     <value>Probe History</value>
   </data>
+  <data name="MessageNotRootConstant" xml:space="preserve">
+    <value>Only constants resided on the root circuit ({0}) can be changed when the power is on.</value>
+    <comment>{string circuitName}</comment>
+  </data>
 </root>

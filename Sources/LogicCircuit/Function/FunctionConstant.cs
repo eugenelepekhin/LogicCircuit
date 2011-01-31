@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Controls;
 
 namespace LogicCircuit {
-	public class FunctionConstant : CircuitFunction, IFunctionInteractive {
+	public class FunctionConstant : CircuitFunction {
 
 		public CircuitSymbol CircuitSymbol { get; private set; }
 
@@ -26,16 +26,6 @@ namespace LogicCircuit {
 					this.CircuitState.MarkUpdated(this);
 				}
 			}
-		}
-
-		public void OnSymbolPress() {
-		}
-
-		public void OnSymbolRelease() {
-		}
-
-		public void OnSymbolDoubleClick() {
-			this.Constant.CircuitProject.InTransaction(() => this.Value++);
 		}
 
 		public override bool Evaluate() {

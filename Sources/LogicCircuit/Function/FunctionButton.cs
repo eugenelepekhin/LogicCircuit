@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Controls;
 
 namespace LogicCircuit {
-	public class FunctionButton : OneBitConst, IFunctionInteractive, IFunctionVisual {
+	public class FunctionButton : OneBitConst, IFunctionVisual {
 
 		public CircuitSymbol CircuitSymbol { get; private set; }
 
@@ -12,15 +12,12 @@ namespace LogicCircuit {
 			this.CircuitSymbol = symbol;
 		}
 
-		public void OnSymbolPress() {
+		public void SymbolPress() {
 			this.SetState(State.On1);
 		}
 
-		public void OnSymbolRelease() {
+		public void SymbolRelease() {
 			this.SetState(State.On0);
-		}
-
-		public void OnSymbolDoubleClick() {
 		}
 
 		public void TurnOn() {

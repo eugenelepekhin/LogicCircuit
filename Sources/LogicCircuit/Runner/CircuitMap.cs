@@ -17,7 +17,7 @@ namespace LogicCircuit {
 
 		private Dictionary<CircuitSymbol, CircuitMap> children = new Dictionary<CircuitSymbol, CircuitMap>();
 		private HashSet<IFunctionVisual> displays;
-		private Dictionary<CircuitSymbol, IFunctionInteractive> inputs;
+		private Dictionary<CircuitSymbol, CircuitFunction> inputs;
 		private Dictionary<CircuitSymbol, FunctionMemory> memories;
 
 		public CircuitMap(LogicalCircuit circuit) {
@@ -334,7 +334,7 @@ namespace LogicCircuit {
 				}
 			}
 			if(this.inputs != null) {
-				foreach(IFunctionInteractive func in this.inputs.Values) {
+				foreach(CircuitFunction func in this.inputs.Values) {
 					IFunctionVisual visual = func as IFunctionVisual;
 					if(visual != null) {
 						visual.TurnOn();
@@ -353,7 +353,7 @@ namespace LogicCircuit {
 				}
 			}
 			if(this.inputs != null) {
-				foreach(IFunctionInteractive func in this.inputs.Values) {
+				foreach(CircuitFunction func in this.inputs.Values) {
 					IFunctionVisual visual = func as IFunctionVisual;
 					if(visual != null) {
 						visual.TurnOff();
@@ -373,9 +373,9 @@ namespace LogicCircuit {
 			}
 		}
 
-		public IFunctionInteractive Input(CircuitSymbol symbol) {
+		public CircuitFunction Input(CircuitSymbol symbol) {
 			if(this.inputs != null) {
-				IFunctionInteractive function;
+				CircuitFunction function;
 				if(this.inputs.TryGetValue(symbol,  out function)) {
 					return function;
 				}
@@ -708,7 +708,7 @@ namespace LogicCircuit {
 			FunctionButton button = new FunctionButton(circuitState, symbolMap.CircuitSymbol, index);
 			button.Label = CircuitMap.FunctionLabel(symbolMap);
 			if(symbolMap.CircuitMap.inputs == null) {
-				symbolMap.CircuitMap.inputs = new Dictionary<CircuitSymbol, IFunctionInteractive>();
+				symbolMap.CircuitMap.inputs = new Dictionary<CircuitSymbol, CircuitFunction>();
 			}
 			symbolMap.CircuitMap.inputs.Add(symbolMap.CircuitSymbol, button);
 		}
@@ -722,7 +722,7 @@ namespace LogicCircuit {
 			FunctionConstant constant = new FunctionConstant(circuitState, symbolMap.CircuitSymbol, map);
 			constant.Label = CircuitMap.FunctionLabel(symbolMap);
 			if(symbolMap.CircuitMap.inputs == null) {
-				symbolMap.CircuitMap.inputs = new Dictionary<CircuitSymbol, IFunctionInteractive>();
+				symbolMap.CircuitMap.inputs = new Dictionary<CircuitSymbol, CircuitFunction>();
 			}
 			symbolMap.CircuitMap.inputs.Add(symbolMap.CircuitSymbol, constant);
 		}

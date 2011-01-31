@@ -359,6 +359,30 @@ namespace LogicCircuit {
 						}
 						return;
 					}
+					Constant constant = circuitSymbol.Circuit as Constant;
+					if(constant != null) {
+						if(this.CircuitRunner.Root.First() == this.CircuitRunner.VisibleMap) {
+							FunctionConstant functionConstant = (FunctionConstant)this.CircuitRunner.VisibleMap.Input(circuitSymbol);
+							if(functionConstant != null) {
+								this.CircuitProject.InOmitTransaction(() => functionConstant.Value++);
+							}
+						} else {
+							this.Mainframe.Status = Resources.MessageNotRootConstant(this.CircuitRunner.Root.First().Circuit.Name);
+						}
+					}
+				}
+			}
+		}
+
+		protected override void ButtonIsPressedChanged(CircuitSymbol symbol, bool isPressed) {
+			if(this.Power) {
+				FunctionButton function = (FunctionButton)this.CircuitRunner.VisibleMap.Input(symbol);
+				if(function != null) {
+					if(isPressed) {
+						function.SymbolPress();
+					} else {
+						function.SymbolRelease();
+					}
 				}
 			}
 		}
@@ -559,19 +583,6 @@ namespace LogicCircuit {
 						new DataObject(EditorDiagram.CircuitDescriptorDataFormat, sender.DataContext),
 						DragDropEffects.Copy | DragDropEffects.Scroll
 					);
-				}
-			}
-		}
-
-		protected override void ButtonIsPressedChanged(CircuitSymbol symbol, bool isPressed) {
-			 if(this.Power) {
-				IFunctionInteractive function = this.CircuitRunner.VisibleMap.Input(symbol);
-				if(function != null) {
-					if(isPressed) {
-						function.OnSymbolPress();
-					} else {
-						function.OnSymbolRelease();
-					}
 				}
 			}
 		}
