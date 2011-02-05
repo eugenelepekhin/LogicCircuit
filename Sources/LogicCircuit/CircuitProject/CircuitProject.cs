@@ -22,13 +22,23 @@ namespace LogicCircuit {
 
 		public static CircuitProject Create(string file) {
 			XmlDocument xml = new XmlDocument();
+			bool rename = false;
 			if(file != null) {
 				xml.Load(file);
 			} else {
 				xml.LoadXml(CircuitProject.ChangeGuid(CircuitProject.ChangeGuid(Schema.Empty, "ProjectId"), "LogicalCircuitId"));
+				rename = true;
 			}
 			CircuitProject circuitProject = new CircuitProject();
-			circuitProject.InTransaction(() => circuitProject.Load(xml));
+			circuitProject.InTransaction(() => {
+				circuitProject.Load(xml);
+				if(rename) {
+					Project project = circuitProject.ProjectSet.Project;
+					project.Name = Resources.CircuitProjectName;
+					LogicalCircuit logicalCircuit = project.LogicalCircuit;
+					logicalCircuit.Name = logicalCircuit.Notation = Resources.LogicalCircuitMainName;
+				}
+			});
 			circuitProject.CircuitSymbolSet.ValidateAll();
 			return circuitProject;
 		}

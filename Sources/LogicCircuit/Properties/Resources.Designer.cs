@@ -1145,5 +1145,19 @@ namespace LogicCircuit {
  		public static string MessageNotRootConstant(string circuitName) {
 			return string.Format(Culture, ResourceManager.GetString("MessageNotRootConstant", Culture), circuitName);
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Main.
+		/// </summary>
+ 		public static string LogicalCircuitMainName {
+			get { return ResourceManager.GetString("LogicalCircuitMainName", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Circuit Project.
+		/// </summary>
+ 		public static string CircuitProjectName {
+			get { return ResourceManager.GetString("CircuitProjectName", Culture); }
+		}
 	}
 }

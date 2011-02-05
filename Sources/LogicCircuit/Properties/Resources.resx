@@ -625,4 +625,10 @@ Out</value>
     <value>Only constants resided on the root circuit ({0}) can be changed when the power is on.</value>
     <comment>{string circuitName}</comment>
   </data>
+  <data name="LogicalCircuitMainName" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="CircuitProjectName" xml:space="preserve">
+    <value>Circuit Project</value>
+  </data>
 </root>
