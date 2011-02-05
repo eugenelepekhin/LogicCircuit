@@ -18,7 +18,6 @@ namespace LogicCircuit {
 				FunctionLed.stateBrush[(int)State.On0] = (Brush)App.CurrentApp.FindResource("LedOn0");
 				FunctionLed.stateBrush[(int)State.On1] = (Brush)App.CurrentApp.FindResource("LedOn1");
 			}
-			Tracer.Assert(symbol.ProbeView != null);
 			this.CircuitSymbol = symbol;
 		}
 
@@ -37,6 +36,7 @@ namespace LogicCircuit {
 		}
 
 		public void TurnOn() {
+			this.CircuitSymbol.GuaranteeGlyph();
 		}
 
 		public void TurnOff() {

@@ -42,18 +42,22 @@ namespace LogicCircuit {
 		public bool Power {
 			get { return this.CircuitRunner != null; }
 			set {
-				if(this.Power != value) {
-					if(value) {
-						this.CancelMove();
-						this.ClearSelection();
-						this.CircuitRunner = new CircuitRunner(this);
-						this.CircuitRunner.Start();
-					} else {
-						this.CircuitRunner.Stop();
-						this.CircuitRunner = null;
+				try {
+					if(this.Power != value) {
+						if(value) {
+							this.CancelMove();
+							this.ClearSelection();
+							this.CircuitRunner = new CircuitRunner(this);
+							this.CircuitRunner.Start();
+						} else {
+							this.CircuitRunner.Stop();
+							this.CircuitRunner = null;
+						}
 					}
-					this.NotifyPropertyChanged("Power");
+				} catch(Exception exception) {
+					this.Mainframe.ReportException(exception);
 				}
+				this.NotifyPropertyChanged("Power");
 			}
 		}
 
@@ -337,7 +341,7 @@ namespace LogicCircuit {
 						this.Edit(pin);
 						return;
 					}
-				} else {
+				} else if(this.CircuitRunner != null && this.CircuitRunner.VisibleMap != null) {
 					CircuitMap map = this.CircuitRunner.VisibleMap.Child(circuitSymbol);
 					if(map != null) {
 						this.OpenLogicalCircuit(map);
@@ -375,7 +379,7 @@ namespace LogicCircuit {
 		}
 
 		protected override void ButtonIsPressedChanged(CircuitSymbol symbol, bool isPressed) {
-			if(this.Power) {
+			if(this.Power && this.CircuitRunner.VisibleMap != null) {
 				FunctionButton function = (FunctionButton)this.CircuitRunner.VisibleMap.Input(symbol);
 				if(function != null) {
 					if(isPressed) {

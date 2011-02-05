@@ -70,6 +70,7 @@ namespace LogicCircuit {
 		}
 
 		public void TurnOn() {
+			this.CircuitSymbol.GuaranteeGlyph();
 		}
 
 		public void TurnOff() {

@@ -29,6 +29,7 @@ namespace LogicCircuit {
 			}
 			CircuitProject circuitProject = new CircuitProject();
 			circuitProject.InTransaction(() => circuitProject.Load(xml));
+			circuitProject.CircuitSymbolSet.ValidateAll();
 			return circuitProject;
 		}
 

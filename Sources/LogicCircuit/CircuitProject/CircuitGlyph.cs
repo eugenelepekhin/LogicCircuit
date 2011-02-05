@@ -25,6 +25,12 @@ namespace LogicCircuit {
 			this.glyph = null;
 		}
 
+		public void GuaranteeGlyph() {
+			if(this.glyph == null) {
+				this.glyph = this.Circuit.CreateGlyph(this);
+			}
+		}
+
 		public abstract void Invalidate();
 
 		public FrameworkElement ProbeView { get; set; }

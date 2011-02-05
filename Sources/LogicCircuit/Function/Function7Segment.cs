@@ -21,7 +21,6 @@ namespace LogicCircuit {
 				Function7Segment.stateBrush[(int)State.On0] = (Brush)App.CurrentApp.FindResource("Led7SegmentOn0");
 				Function7Segment.stateBrush[(int)State.On1] = (Brush)App.CurrentApp.FindResource("Led7SegmentOn1");
 			}
-			Tracer.Assert(symbol.ProbeView != null);
 			this.CircuitSymbol = symbol;
 			this.stateCopy = new State[this.BitWidth];
 		}
@@ -67,6 +66,7 @@ namespace LogicCircuit {
 
 		public void TurnOn() {
 			this.evaluating = false;
+			this.CircuitSymbol.GuaranteeGlyph();
 		}
 
 		public void TurnOff() {

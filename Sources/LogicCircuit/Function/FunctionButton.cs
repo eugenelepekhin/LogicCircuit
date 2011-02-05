@@ -21,6 +21,7 @@ namespace LogicCircuit {
 		}
 
 		public void TurnOn() {
+			this.CircuitSymbol.GuaranteeGlyph();
 			ButtonControl button = this.CircuitSymbol.ProbeView as ButtonControl;
 			if(button != null) {
 				button.Clickable = true;

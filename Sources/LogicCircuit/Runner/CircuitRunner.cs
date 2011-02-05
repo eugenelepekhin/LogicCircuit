@@ -17,16 +17,7 @@ namespace LogicCircuit {
 		private CircuitMap RootMap { get; set; }
 		public IEnumerable<CircuitMap> Root { get { yield return this.RootMap; } }
 
-		private CircuitMap visibleMap;
-		public CircuitMap VisibleMap {
-			get { return this.visibleMap; }
-			set {
-				if(this.visibleMap != value) {
-					this.visibleMap = value;
-					this.Editor.Mainframe.NotifyPropertyChanged(this.PropertyChanged, this, "VisibleMap");
-				}
-			}
-		}
+		public CircuitMap VisibleMap { get; set; }
 
 		public bool HasProbes { get; private set; }
 
@@ -43,7 +34,6 @@ namespace LogicCircuit {
 
 		public CircuitRunner(Editor editor) {
 			this.Editor = editor;
-			this.RootMap = this.visibleMap = new CircuitMap(editor.Project.LogicalCircuit);
 		}
 
 		public void Start() {
@@ -70,32 +60,38 @@ namespace LogicCircuit {
 			PropertyChangedEventHandler editorPropertyChanged = null;
 			try {
 				this.Editor.Mainframe.Status = Resources.PowerOn;
-				this.CircuitState = this.RootMap.Apply(CircuitRunner.HistorySize);
+
+				CircuitMap root = new CircuitMap(this.Editor.Project.LogicalCircuit);
+				this.CircuitState = root.Apply(CircuitRunner.HistorySize);
+				this.RootMap = this.VisibleMap = root;
 				this.CircuitState.FunctionUpdated += new EventHandler(this.OnFunctionUpdated);
 				this.HasProbes = this.CircuitState.HasProbes;
 
-				this.Editor.Mainframe.Dispatcher.Invoke(new Action(() => this.RootMap.TurnOn()));
+				this.Editor.Mainframe.Dispatcher.Invoke(new Action(() => {
+					this.RootMap.TurnOn();
+					this.Editor.Mainframe.NotifyPropertyChanged(this.PropertyChanged, this, "Root");
+				}));
 
 				this.refreshingThread = new Thread(new ThreadStart(this.MonitorUI));
 				this.refreshingThread.IsBackground = true;
 				this.refreshingThread.Name = "RefreshingThread";
 				this.refreshingThread.Priority = ThreadPriority.BelowNormal;
 
-				using (PreciseTimer timer = new PreciseTimer(this.TimerTick, CircuitRunner.HalfPeriod(this.Editor.Project.Frequency))) {
-					editorPropertyChanged = new PropertyChangedEventHandler((s, e) => {
-						switch(e.PropertyName) {
-						case "Frequency":
-							timer.Period = CircuitRunner.HalfPeriod(this.Editor.Project.Frequency);
-							break;
-						case "IsMaximumSpeed":
-							this.isMaxSpeed = this.Editor.Project.IsMaximumSpeed;
-							break;
-						}
-					});
-					this.Editor.PropertyChanged += editorPropertyChanged;
 
-					using(this.evaluationGate = new AutoResetEvent(false)) {
-						using(this.refreshingGate = new AutoResetEvent(false)) {
+				using(this.evaluationGate = new AutoResetEvent(false)) {
+					using(this.refreshingGate = new AutoResetEvent(false)) {
+						using (PreciseTimer timer = new PreciseTimer(this.TimerTick, CircuitRunner.HalfPeriod(this.Editor.Project.Frequency))) {
+							editorPropertyChanged = new PropertyChangedEventHandler((s, e) => {
+								switch(e.PropertyName) {
+								case "Frequency":
+									timer.Period = CircuitRunner.HalfPeriod(this.Editor.Project.Frequency);
+									break;
+								case "IsMaximumSpeed":
+									this.isMaxSpeed = this.Editor.Project.IsMaximumSpeed;
+									break;
+								}
+							});
+							this.Editor.PropertyChanged += editorPropertyChanged;
 							this.refreshingThread.Start();
 							this.flipCount = 1;
 							timer.Start();
