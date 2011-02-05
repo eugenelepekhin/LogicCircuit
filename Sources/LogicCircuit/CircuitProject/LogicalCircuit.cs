@@ -99,9 +99,10 @@ namespace LogicCircuit {
 		}
 
 		public LogicalCircuit Create() {
+			string name = this.UniqueName(Resources.LogicalCircuitName);
 			return this.CreateItem(Guid.NewGuid(),
-				this.UniqueName(Resources.LogicalCircuitName),
-				LogicalCircuitData.NotationField.Field.DefaultValue,
+				name,
+				name,
 				LogicalCircuitData.DescriptionField.Field.DefaultValue,
 				LogicalCircuitData.CategoryField.Field.DefaultValue
 			);
