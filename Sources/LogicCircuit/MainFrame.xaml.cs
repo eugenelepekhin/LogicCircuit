@@ -296,6 +296,21 @@ namespace LogicCircuit {
 			}
 		}
 
+		private TreeViewItem Container(TreeView treeView, CircuitMap map) {
+			Tracer.Assert(map != null);
+			if(map.Parent == null) {
+				return (TreeViewItem)treeView.ItemContainerGenerator.ContainerFromItem(map);
+			} else {
+				TreeViewItem parent = this.Container(treeView, map.Parent);
+				if(parent != null) {
+					parent.IsExpanded = true;
+					return (TreeViewItem)parent.ItemContainerGenerator.ContainerFromItem(map);
+				} else {
+					return null;
+				}
+			}
+		}
+
 		private void RunningMapDoubleClick(object sender, MouseButtonEventArgs e) {
 			try {
 				if(this.Editor != null && this.Editor.Power && e.ChangedButton == MouseButton.Left) {
@@ -304,10 +319,10 @@ namespace LogicCircuit {
 						CircuitMap map = treeView.SelectedItem as CircuitMap;
 						if(map != null) {
 							this.Editor.OpenLogicalCircuit(map);
-							/*TreeViewItem item = this.Container(treeView, map);
+							TreeViewItem item = this.Container(treeView, map);
 							if(item != null) {
 								item.IsExpanded = true;
-							}*/
+							}
 							e.Handled = true;
 						}
 					}
