@@ -31,12 +31,10 @@ namespace LogicCircuit {
 				while(this.evaluating);
 				this.CopyTo(this.stateCopy);
 			} while(this.evaluating && 0 <= --count);
-			Canvas back = this.CircuitSymbol.ProbeView as Canvas;
+			Canvas back = (Canvas)this.CircuitSymbol.ProbeView;
 			Tracer.Assert(back.Children.Count == this.stateCopy.Length);
-			if(back != null) {
-				for(int i = 0; i < this.stateCopy.Length; i++) {
-					Function7Segment.SetVisual((Shape)back.Children[i], this.stateCopy[i]);
-				}
+			for(int i = 0; i < this.stateCopy.Length; i++) {
+				Function7Segment.SetVisual((Shape)back.Children[i], this.stateCopy[i]);
 			}
 		}
 
@@ -70,11 +68,9 @@ namespace LogicCircuit {
 		}
 
 		public void TurnOff() {
-			Canvas back = this.CircuitSymbol.ProbeView as Canvas;
-			if(back != null) {
-				for(int i = 0; i < 8; i++) {
-					Function7Segment.SetVisual((Shape)back.Children[i], State.Off);
-				}
+			Canvas back = (Canvas)this.CircuitSymbol.ProbeView;
+			for(int i = 0; i < 8; i++) {
+				Function7Segment.SetVisual((Shape)back.Children[i], State.Off);
 			}
 		}
 	}

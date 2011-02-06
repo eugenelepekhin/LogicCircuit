@@ -11,7 +11,6 @@ namespace LogicCircuit {
 
 		public FunctionProbe(CircuitSymbol symbol, CircuitState circuitState, int[] parameter, int capacity) : base(circuitState, parameter) {
 			Tracer.Assert(0 < this.BitWidth && this.BitWidth <= BasePin.MaxBitWidth);
-			Tracer.Assert(symbol.ProbeView != null);
 			this.CircuitSymbol = symbol;
 			this.tickHistory = new History<State>[this.BitWidth];
 			for(int i = 0; i < this.tickHistory.Length; i++) {

@@ -8,7 +8,6 @@ namespace LogicCircuit {
 		public CircuitSymbol CircuitSymbol { get; private set; }
 
 		public FunctionButton(CircuitState circuitState, CircuitSymbol symbol, int result) : base(circuitState, State.On0, result) {
-			Tracer.Assert(symbol.ProbeView != null);
 			this.CircuitSymbol = symbol;
 		}
 
@@ -22,17 +21,13 @@ namespace LogicCircuit {
 
 		public void TurnOn() {
 			this.CircuitSymbol.GuaranteeGlyph();
-			ButtonControl button = this.CircuitSymbol.ProbeView as ButtonControl;
-			if(button != null) {
-				button.Clickable = true;
-			}
+			ButtonControl button = (ButtonControl)this.CircuitSymbol.ProbeView;
+			button.Clickable = true;
 		}
 
 		public void TurnOff() {
-			ButtonControl button = this.CircuitSymbol.ProbeView as ButtonControl;
-			if(button != null) {
-				button.Clickable = false;
-			}
+			ButtonControl button = (ButtonControl)this.CircuitSymbol.ProbeView;
+			button.Clickable = false;
 		}
 
 		public void Redraw() {

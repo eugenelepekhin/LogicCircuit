@@ -22,10 +22,8 @@ namespace LogicCircuit {
 		}
 
 		public void Redraw() {
-			Shape shape = this.CircuitSymbol.ProbeView as Shape;
-			if(shape != null) {
-				shape.Fill = FunctionLed.stateBrush[(int)this[0]];
-			}
+			Shape shape = (Shape)this.CircuitSymbol.ProbeView;
+			shape.Fill = FunctionLed.stateBrush[(int)this[0]];
 		}
 
 		public override bool Evaluate() {
@@ -40,10 +38,8 @@ namespace LogicCircuit {
 		}
 
 		public void TurnOff() {
-			Shape shape = this.CircuitSymbol.ProbeView as Shape;
-			if(shape != null) {
-				shape.Fill = FunctionLed.stateBrush[(int)State.Off];
-			}
+			Shape shape = (Shape)this.CircuitSymbol.ProbeView;
+			shape.Fill = FunctionLed.stateBrush[(int)State.Off];
 		}
 	}
 }

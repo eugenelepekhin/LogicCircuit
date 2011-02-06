@@ -8,7 +8,6 @@ namespace LogicCircuit {
 		public CircuitSymbol CircuitSymbol { get; private set; }
 
 		public FunctionConstant(CircuitState circuitState, CircuitSymbol symbol, int[] result) : base(circuitState, null, result) {
-			Tracer.Assert(symbol.ProbeView != null);
 			this.CircuitSymbol = symbol;
 			Tracer.Assert(this.BitWidth == result.Length);
 		}
