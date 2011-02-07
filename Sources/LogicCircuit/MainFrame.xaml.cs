@@ -332,5 +332,20 @@ namespace LogicCircuit {
 				this.ReportException(exception);
 			}
 		}
+
+		private void RunningMapTreeViewSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e) {
+			try {
+				if(sender == e.OriginalSource && e.NewValue != null && !object.ReferenceEquals(e.OldValue, e.NewValue)) {
+					TreeViewItem item = this.Container((TreeView)sender, (CircuitMap)e.NewValue);
+					if(item != null) {
+						item.IsExpanded = true;
+						item.BringIntoView();
+					}
+				}
+			} catch(Exception exception) {
+				Tracer.Report("MainFrame.RunningMapTreeViewSelectedItemChanged", exception);
+				this.ReportException(exception);
+			}
+		}
 	}
 }

@@ -205,8 +205,8 @@
 					<TreeView BorderThickness="0"
 						ItemsSource="{Binding Path=Editor.CircuitRunner.Root}"
 						MouseDoubleClick="RunningMapDoubleClick"
+						SelectedItemChanged="RunningMapTreeViewSelectedItemChanged"
 					>
-						<!--SelectedItemChanged="RunningMapTreeViewSelectedItemChanged"-->
 						<TreeView.ItemContainerStyle>
 							<Style TargetType="TreeViewItem">
 								<Setter Property="BorderThickness" Value="2"/>
