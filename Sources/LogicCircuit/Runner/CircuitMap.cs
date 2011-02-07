@@ -15,7 +15,7 @@ namespace LogicCircuit {
 		public CircuitSymbol CircuitSymbol { get; private set; }
 		public CircuitMap Parent { get; private set; }
 
-		private Dictionary<CircuitSymbol, CircuitMap> children = new Dictionary<CircuitSymbol, CircuitMap>();
+		private Dictionary<CircuitSymbol, CircuitMap> children;
 		private HashSet<IFunctionVisual> displays;
 		private Dictionary<CircuitSymbol, CircuitFunction> inputs;
 		private Dictionary<CircuitSymbol, FunctionMemory> memories;
@@ -103,6 +103,9 @@ namespace LogicCircuit {
 						);
 					}
 					CircuitMap child = new CircuitMap(this, symbol);
+					if(this.children == null) {
+						this.children = new Dictionary<CircuitSymbol, CircuitMap>();
+					}
 					this.children.Add(symbol, child);
 					child.Expand();
 				}
@@ -111,8 +114,10 @@ namespace LogicCircuit {
 
 		private void ConnectMap(ConnectionSet connectionSet) {
 			if(!connectionSet.IsConnected(this.Circuit)) {
-				foreach(CircuitMap child in this.children.Values) {
-					child.ConnectMap(connectionSet);
+				if(this.children != null) {
+					foreach(CircuitMap child in this.children.Values) {
+						child.ConnectMap(connectionSet);
+					}
 				}
 				this.Connect(connectionSet);
 				connectionSet.MarkConnected(this.Circuit);
@@ -324,7 +329,7 @@ namespace LogicCircuit {
 
 		public CircuitMap Child(CircuitSymbol symbol) {
 			CircuitMap map;
-			if(this.children.TryGetValue(symbol, out map)) {
+			if(this.children != null && this.children.TryGetValue(symbol, out map)) {
 				return map;
 			}
 			return null;
@@ -414,7 +419,12 @@ namespace LogicCircuit {
 		}
 
 		public IEnumerable<CircuitMap> Children {
-			get { return this.children.Values.OrderBy(map => map.CircuitSymbol.Y * Symbol.LogicalCircuitGridWidth + map.CircuitSymbol.X); }
+			get {
+				if(this.children == null) {
+					return Enumerable.Empty<CircuitMap>();
+				}
+				return this.children.Values.OrderBy(map => map.CircuitSymbol.Y * Symbol.LogicalCircuitGridWidth + map.CircuitSymbol.X);
+			}
 		}
 
 		public CircuitMap Root {
