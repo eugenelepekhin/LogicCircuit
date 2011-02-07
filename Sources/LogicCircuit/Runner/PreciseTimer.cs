@@ -43,11 +43,11 @@ namespace LogicCircuit {
 			}
 		}
 
-		public void Stop() {
-			if(this.timer.Enabled) {
-				this.timer.Stop();
-			}
-		}
+		//public void Stop() {
+		//    if(this.timer.Enabled) {
+		//        this.timer.Stop();
+		//    }
+		//}
 
 		private void TimerElapsed(object sender, ElapsedEventArgs e) {
 			TimerState s = this.state;

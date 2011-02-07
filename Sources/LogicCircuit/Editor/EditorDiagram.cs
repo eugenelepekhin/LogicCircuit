@@ -14,6 +14,7 @@ using System.Windows.Threading;
 using LogicCircuit.DataPersistent;
 
 namespace LogicCircuit {
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 	public abstract partial class EditorDiagram {
 
 		private const int ClickProximity = 2 * Symbol.PinRadius;
