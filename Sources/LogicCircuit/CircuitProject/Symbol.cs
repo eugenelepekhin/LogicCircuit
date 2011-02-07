@@ -12,8 +12,8 @@ namespace LogicCircuit {
 		public const int PinRadius = 3;
 		public const int GridSize = Symbol.PinRadius * 6;
 
-		private const int LogicalCircuitGridWidth = 170;
-		private const int LogicalCircuitGridHeight = 170;
+		public const int LogicalCircuitGridWidth = 170;
+		public const int LogicalCircuitGridHeight = 170;
 		public static double LogicalCircuitWidth { get { return Symbol.ScreenPoint(Symbol.LogicalCircuitGridWidth); } }
 		public static double LogicalCircuitHeight { get { return Symbol.ScreenPoint(Symbol.LogicalCircuitGridHeight); } }
 		public static Rect LogicalCircuitBackgroundTile { get { return new Rect(0, 0, Symbol.GridSize, Symbol.GridSize); } }

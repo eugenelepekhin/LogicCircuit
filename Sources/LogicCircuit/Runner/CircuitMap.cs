@@ -414,7 +414,7 @@ namespace LogicCircuit {
 		}
 
 		public IEnumerable<CircuitMap> Children {
-			get { return this.children.Values; }
+			get { return this.children.Values.OrderBy(map => map.CircuitSymbol.Y * Symbol.LogicalCircuitGridWidth + map.CircuitSymbol.X); }
 		}
 
 		public CircuitMap Root {
