@@ -121,7 +121,9 @@ namespace LogicCircuit {
 				if(this.refreshingThread != null) {
 					this.refreshingThread.Abort();
 				}
-				this.Editor.Mainframe.Dispatcher.Invoke(new Action(() => this.RootMap.TurnOff()));
+				if(this.RootMap != null) {
+					this.Editor.Mainframe.Dispatcher.Invoke(new Action(() => this.RootMap.TurnOff()));
+				}
 				this.Editor.Mainframe.Status = Resources.PowerOff;
 			}
 		}
