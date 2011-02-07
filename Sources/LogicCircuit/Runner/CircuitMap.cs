@@ -7,9 +7,9 @@ using System.Windows;
 using System.Windows.Threading;
 
 namespace LogicCircuit {
-	public partial class CircuitMap /*: INotifyPropertyChanged*/ {
+	public partial class CircuitMap : INotifyPropertyChanged {
 
-		//public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler PropertyChanged;
 
 		public LogicalCircuit Circuit { get; private set; }
 		public CircuitSymbol CircuitSymbol { get; private set; }
@@ -19,6 +19,25 @@ namespace LogicCircuit {
 		private HashSet<IFunctionVisual> displays;
 		private Dictionary<CircuitSymbol, CircuitFunction> inputs;
 		private Dictionary<CircuitSymbol, FunctionMemory> memories;
+
+		private CircuitMap visible;
+		public CircuitMap Visible {
+			get {
+				CircuitMap root = this.Root;
+				return root.visible ?? root;
+			}
+			set {
+				Tracer.Assert(value != null);
+				CircuitMap old = this.Visible;
+				if(old != value) {
+					this.Root.visible = value;
+					old.NotifyIsCurrentChanged();
+					value.NotifyIsCurrentChanged();
+				}
+			}
+		}
+
+		public bool IsCurrent { get { return this == this.Visible; } }
 
 		public CircuitMap(LogicalCircuit circuit) {
 			this.Circuit = circuit;
@@ -30,6 +49,17 @@ namespace LogicCircuit {
 			this.Circuit = (LogicalCircuit)circuitSymbol.Circuit;
 			this.CircuitSymbol = circuitSymbol;
 			this.Parent = parent;
+		}
+
+		private void NotifyPropertyChanged(string propertyName) {
+			PropertyChangedEventHandler handler = this.PropertyChanged;
+			if(handler != null) {
+				handler(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+
+		private void NotifyIsCurrentChanged() {
+			this.NotifyPropertyChanged("IsCurrent");
 		}
 
 		private void Path(StringBuilder text) {
@@ -400,24 +430,6 @@ namespace LogicCircuit {
 		public bool IsRoot {
 			get { return this.Parent == null; }
 		}
-
-		// TODO: is it possible to remove this?
-		/*// this property sets only for the root node. so can't be symply converted to auto property
-		private CircuitRunner circuitRunner;
-		public CircuitRunner CircuitRunner {
-			get { return this.Root.circuitRunner; }
-			set { this.Root.circuitRunner = value; }
-		}
-
-		public bool IsCurrent {
-			get { return this.CircuitRunner != null && this.CircuitRunner.VisibleMap == this; }
-		}
-
-		public void NotifyIsCurrentChanged() {
-			if(this.CircuitRunner != null) {
-				this.CircuitRunner.MainFrame.NotifyPropertyChanged(this.PropertyChanged, this, "IsCurrent");
-			}
-		}*/
 
 		private static bool IsPrimitive(Circuit circuit) {
 			return circuit is Gate || circuit is CircuitButton || circuit is Constant || circuit is Memory;

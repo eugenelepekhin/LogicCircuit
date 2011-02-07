@@ -17,7 +17,18 @@ namespace LogicCircuit {
 		private CircuitMap RootMap { get; set; }
 		public IEnumerable<CircuitMap> Root { get { yield return this.RootMap; } }
 
-		public CircuitMap VisibleMap { get; set; }
+		public CircuitMap VisibleMap {
+			get {
+				if(this.RootMap != null) {
+					return this.RootMap.Visible;
+				}
+				return null;
+			}
+			set {
+				Tracer.Assert(this.RootMap != null);
+				this.RootMap.Visible = value;
+			}
+		}
 
 		public bool HasProbes { get; private set; }
 
@@ -63,7 +74,7 @@ namespace LogicCircuit {
 
 				CircuitMap root = new CircuitMap(this.Editor.Project.LogicalCircuit);
 				this.CircuitState = root.Apply(CircuitRunner.HistorySize);
-				this.RootMap = this.VisibleMap = root;
+				this.RootMap = root;
 				this.CircuitState.FunctionUpdated += new EventHandler(this.OnFunctionUpdated);
 				this.HasProbes = this.CircuitState.HasProbes;
 
