@@ -631,4 +631,16 @@ Out</value>
   <data name="CircuitProjectName" xml:space="preserve">
     <value>Circuit Project</value>
   </data>
+  <data name="Oscillation" xml:space="preserve">
+    <value>Oscillation</value>
+  </data>
+  <data name="TitleOscillogram" xml:space="preserve">
+    <value>Oscillogram</value>
+  </data>
+  <data name="TitleOscilloscope" xml:space="preserve">
+    <value>Logic Circuit Oscilloscope</value>
+  </data>
+  <data name="TitleOscilloscoping" xml:space="preserve">
+    <value>_Oscilloscoping</value>
+  </data>
 </root>

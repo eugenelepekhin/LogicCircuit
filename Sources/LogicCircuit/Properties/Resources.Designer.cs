@@ -1159,5 +1159,33 @@ namespace LogicCircuit {
  		public static string CircuitProjectName {
 			get { return ResourceManager.GetString("CircuitProjectName", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Oscillation.
+		/// </summary>
+ 		public static string Oscillation {
+			get { return ResourceManager.GetString("Oscillation", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Oscillogram.
+		/// </summary>
+ 		public static string TitleOscillogram {
+			get { return ResourceManager.GetString("TitleOscillogram", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Logic Circuit Oscilloscope.
+		/// </summary>
+ 		public static string TitleOscilloscope {
+			get { return ResourceManager.GetString("TitleOscilloscope", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Oscilloscoping.
+		/// </summary>
+ 		public static string TitleOscilloscoping {
+			get { return ResourceManager.GetString("TitleOscilloscoping", Culture); }
+		}
 	}
 }

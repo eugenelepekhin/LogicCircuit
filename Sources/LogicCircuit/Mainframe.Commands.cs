@@ -479,14 +479,9 @@ namespace LogicCircuit {
 
 		private void ToolsOscilloscopeCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
-				//if(this.Editor != null && this.Editor.CircuitRunner.IsTurnedOn &&
-				//    this.Editor.CircuitRunner.CircuitState.HasProbes &&
-				//    this.Editor.CircuitRunner.DialogOscilloscope == null
-				//) {
-				//    DialogOscilloscope dialog = new DialogOscilloscope(this.Editor.CircuitRunner);
-				//    dialog.Owner = this;
-				//    dialog.Show();
-				//}
+				if(this.Editor != null && this.Editor.Power && this.Editor.CircuitRunner.CircuitState.HasProbes) {
+					this.Editor.CircuitRunner.ShowOscilloscope();
+				}
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.ToolsOscilloscopeCommandExecuted", exception);
 				this.ReportException(exception);
@@ -495,11 +490,11 @@ namespace LogicCircuit {
 
 		private void ToolsOscilloscopeCommandCanExecute(object target, CanExecuteRoutedEventArgs e) {
 			try {
-				//e.CanExecute = (this.Editor != null &&
-				//    this.Editor.CircuitRunner.IsTurnedOn &&
-				//    this.Editor.CircuitRunner.CircuitState.HasProbes &&
-				//    this.Editor.CircuitRunner.DialogOscilloscope == null
-				//);
+				e.CanExecute = (this.Editor != null &&
+					this.Editor.Power &&
+					this.Editor.CircuitRunner.CircuitState.HasProbes &&
+					this.Editor.CircuitRunner.DialogOscilloscope == null
+				);
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.ToolsOscilloscopeCommandCanExecute", exception);
 				this.ReportException(exception);

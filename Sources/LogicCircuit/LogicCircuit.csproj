@@ -81,6 +81,9 @@
     <Compile Include="Dialog\DialogOptions.xaml.cs">
       <DependentUpon>DialogOptions.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialog\DialogOscilloscope.xaml.cs">
+      <DependentUpon>DialogOscilloscope.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialog\DialogPin.xaml.cs">
       <DependentUpon>DialogPin.xaml</DependentUpon>
     </Compile>
@@ -215,6 +218,7 @@
     <Compile Include="Runner\CircuitMap.Connection.cs" />
     <Compile Include="CircuitProject\JamComparer.cs" />
     <Compile Include="Runner\CircuitRunner.cs" />
+    <Compile Include="Runner\Oscilloscope.cs" />
     <Compile Include="Runner\PreciseTimer.cs" />
     <Compile Include="Schema\Schema.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -265,6 +269,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Dialog\DialogOptions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialog\DialogOscilloscope.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

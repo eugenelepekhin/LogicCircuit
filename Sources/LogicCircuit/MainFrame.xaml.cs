@@ -136,6 +136,10 @@ namespace LogicCircuit {
 			}
 		}
 
+		public void ErrorMessage(string message) {
+			this.ShowErrorMessage(message, null);
+		}
+
 		public void ReportException(Exception exception) {
 			CircuitException circuitException = exception as CircuitException;
 			if(circuitException != null && circuitException.Cause == Cause.UserError) {

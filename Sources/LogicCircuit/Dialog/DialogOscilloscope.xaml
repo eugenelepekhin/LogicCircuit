@@ -1,0 +1,120 @@
+﻿<Window x:Class="LogicCircuit.DialogOscilloscope"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:lc="clr-namespace:LogicCircuit"
+	FlowDirection="{Binding Source={x:Static lc:Resources.FlowDirection}, Mode=OneTime}"
+	Title="{Binding Source={x:Static lc:Resources.TitleOscilloscope}, Mode=OneTime}"
+	Name="dialog"
+	WindowStyle="ToolWindow"
+	MinWidth="320" MinHeight="240"
+	ResizeMode="CanResizeWithGrip"
+	WindowStartupLocation="Manual"
+	SizeToContent="WidthAndHeight"
+	Style="{DynamicResource DialogWindow}"
+	Left="{Binding Path=WindowLocation.X, Mode=TwoWay}"
+	Top="{Binding Path=WindowLocation.Y, Mode=TwoWay}"
+>
+	<Window.Resources>
+		<DrawingBrush x:Key="OscillogramBackground" TileMode="Tile" Stretch="None" Viewport="{Binding ElementName=dialog, Path=GraphGrid}" ViewportUnits="Absolute">
+			<DrawingBrush.Drawing>
+				<DrawingGroup>
+					<GeometryDrawing Brush="{StaticResource OscilloscopeBackground}">
+						<GeometryDrawing.Geometry>
+							<RectangleGeometry Rect="{Binding ElementName=dialog, Path=GraphGrid}"/>
+						</GeometryDrawing.Geometry>
+					</GeometryDrawing>
+					<GeometryDrawing>
+						<GeometryDrawing.Pen>
+							<Pen Brush="#017F7F7F" Thickness="1"/>
+						</GeometryDrawing.Pen>
+						<GeometryDrawing.Geometry>
+							<LineGeometry StartPoint="0,0" EndPoint="{Binding ElementName=dialog, Path=GridEndPoint}"/>
+						</GeometryDrawing.Geometry>
+					</GeometryDrawing>
+				</DrawingGroup>
+			</DrawingBrush.Drawing>
+		</DrawingBrush>
+
+		<Style x:Key="OscillogramStyle" TargetType="Grid">
+			<Setter Property="Background" Value="{StaticResource OscillogramBackground}"/>
+			<Setter Property="MinHeight" Value="{Binding ElementName=dialog, Path=GraphHeight}"/>
+		</Style>
+
+		<Style x:Key="ScaleStyle" TargetType="Grid">
+			<Setter Property="Background" Value="{StaticResource OscilloscopeBackground}"/>
+			<Setter Property="Margin" Value="5,0,5,0"/>
+		</Style>
+
+		<Style TargetType="Polyline">
+			<Setter Property="Stroke" Value="{StaticResource OscilloscopeLine}"/>
+			<Setter Property="StrokeThickness" Value="2"/>
+		</Style>
+	</Window.Resources>
+
+	<Grid Margin="3">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+		<ListView Grid.Row="0" ItemsSource="{Binding Path=Oscillograms}" SelectionMode="Single" SelectionChanged="OscillogramListSelectionChanged">
+			<ListView.View>
+				<GridView>
+					<GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Width="Auto"
+						Header="{Binding Source={x:Static lc:Resources.GateProbeName}, Mode=OneTime}"
+					/>
+					<GridViewColumn Header="{Binding Source={x:Static lc:Resources.TitleOscillogram}, Mode=OneTime}">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<Grid Style="{StaticResource OscillogramStyle}">
+									<Grid.Resources>
+										<Style TargetType="TextBlock">
+											<Setter Property="Foreground" Value="{StaticResource OscilloscopeText}"/>
+											<Setter Property="VerticalAlignment" Value="Center"/>
+											<Setter Property="Margin" Value="0"/>
+											<Setter Property="Padding" Value="0"/>
+										</Style>
+									</Grid.Resources>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"/>
+										<ColumnDefinition Width="Auto"/>
+										<ColumnDefinition Width="Auto"/>
+									</Grid.ColumnDefinitions>
+									<Grid Grid.Column="0" Style="{StaticResource ScaleStyle}">
+										<Grid.RowDefinitions>
+											<RowDefinition Height="*"/>
+											<RowDefinition Height="*"/>
+											<RowDefinition Height="*"/>
+										</Grid.RowDefinitions>
+										<TextBlock Grid.Row="0" Text="1" HorizontalAlignment="Right"/>
+										<TextBlock Grid.Row="1" Text="0" HorizontalAlignment="Right"/>
+										<TextBlock Grid.Row="2" Text="Off" HorizontalAlignment="Right"/>
+									</Grid>
+									<ContentControl Grid.Column="1" Content="{Binding Path=Line}" Margin="0,8,0,8"
+										HorizontalAlignment="Stretch" VerticalAlignment="Top"
+										MinWidth="{Binding ElementName=dialog, Path=GraphWidth}"
+									/>
+									<Grid Grid.Column="2" Style="{StaticResource ScaleStyle}">
+										<Grid.RowDefinitions>
+											<RowDefinition Height="*"/>
+											<RowDefinition Height="*"/>
+											<RowDefinition Height="*"/>
+										</Grid.RowDefinitions>
+										<TextBlock Grid.Row="0" Text="1"/>
+										<TextBlock Grid.Row="1" Text="0"/>
+										<TextBlock Grid.Row="2" Text="Off"/>
+									</Grid>
+								</Grid>
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+				</GridView>
+			</ListView.View>
+		</ListView>
+
+		<CheckBox Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center"
+			IsChecked="{Binding Path=CircuitRunner.Oscilloscoping, Mode=TwoWay}"
+			Content="{Binding Source={x:Static lc:Resources.TitleOscilloscoping}, Mode=OneTime}"
+		/>
+	</Grid>
+</Window>

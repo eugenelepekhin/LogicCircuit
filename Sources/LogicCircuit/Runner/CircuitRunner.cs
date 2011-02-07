@@ -32,7 +32,7 @@ namespace LogicCircuit {
 
 		public bool HasProbes { get; private set; }
 
-		private CircuitState CircuitState { get; set; }
+		public CircuitState CircuitState { get; private set; }
 		private bool isMaxSpeed = false;
 		private int flipCount = 0;
 
@@ -42,6 +42,14 @@ namespace LogicCircuit {
 		private AutoResetEvent refreshingGate;
 
 		private volatile bool refreshing = false;
+
+		private SettingsBoolCache oscilloscoping = new SettingsBoolCache(Settings.Session, "Oscilloscoping", false);
+		public bool Oscilloscoping {
+			get { return this.oscilloscoping.Value; }
+			set { this.oscilloscoping.Value = value; }
+		}
+		public DialogOscilloscope DialogOscilloscope { get; set; }
+		public Oscilloscope Oscilloscope { get; set; }
 
 		public CircuitRunner(Editor editor) {
 			this.Editor = editor;
@@ -67,6 +75,14 @@ namespace LogicCircuit {
 			return 500 / frequency;
 		}
 
+		public void ShowOscilloscope() {
+			if(this.DialogOscilloscope == null) {
+				this.DialogOscilloscope = new DialogOscilloscope(this);
+				this.DialogOscilloscope.Owner = this.Editor.Mainframe;
+				this.DialogOscilloscope.Show();
+			}
+		}
+
 		private void Run() {
 			PropertyChangedEventHandler editorPropertyChanged = null;
 			try {
@@ -82,6 +98,13 @@ namespace LogicCircuit {
 					this.RootMap.TurnOn();
 					this.Editor.Mainframe.NotifyPropertyChanged(this.PropertyChanged, this, "Root");
 				}));
+
+				if(this.Oscilloscoping && this.CircuitState.HasProbes) {
+					Tracer.Assert(this.DialogOscilloscope == null);
+					this.Editor.Mainframe.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(this.ShowOscilloscope));
+				} else {
+					this.Oscilloscoping = false;
+				}
 
 				this.refreshingThread = new Thread(new ThreadStart(this.MonitorUI));
 				this.refreshingThread.IsBackground = true;
@@ -124,6 +147,11 @@ namespace LogicCircuit {
 				if(this.RootMap != null) {
 					this.Editor.Mainframe.Dispatcher.Invoke(new Action(() => this.RootMap.TurnOff()));
 				}
+				if(this.DialogOscilloscope != null) {
+					this.DialogOscilloscope.Dispatcher.BeginInvoke(DispatcherPriority.SystemIdle,
+						new Action(this.DialogOscilloscope.Close)
+					);
+				}
 				this.Editor.Mainframe.Status = Resources.PowerOff;
 			}
 		}
@@ -132,6 +160,7 @@ namespace LogicCircuit {
 			int slownesCount = 0;
 			int slownesMax = 2;
 			bool notifyPerf = false;
+			bool hasProbes = this.CircuitState.HasProbes;
 			Stopwatch stopwatch = new Stopwatch();
 			for(;;) {
 				bool flipClock = (0 < this.flipCount);
@@ -166,7 +195,7 @@ namespace LogicCircuit {
 						}
 					}
 				}
-				/*if(this.Oscilloscoping) {
+				if(this.Oscilloscoping) {
 					if(flipClock && hasProbes) {
 						foreach(FunctionProbe probe in this.CircuitState.Probes) {
 							probe.Tick();
@@ -178,7 +207,7 @@ namespace LogicCircuit {
 						}
 						this.Oscilloscope = null;
 					}
-				}*/
+				}
 				if(!maxSpeed && Interlocked.Decrement(ref this.flipCount) <= 0) {
 					if(this.flipCount < 0) {
 						this.flipCount = 0;
@@ -186,7 +215,7 @@ namespace LogicCircuit {
 					this.evaluationGate.WaitOne();
 				}
 			}
-			//this.Editor.Mainframe.ErrorMessage(Resources.Oscillation);
+			this.Editor.Mainframe.ErrorMessage(Resources.Oscillation);
 		}
 
 		private void TimerTick() {
