@@ -43,7 +43,7 @@ namespace LogicCircuit {
 
 		private volatile bool refreshing = false;
 
-		private SettingsBoolCache oscilloscoping = new SettingsBoolCache(Settings.Session, "Oscilloscoping", false);
+		private SettingsBoolCache oscilloscoping;
 		public bool Oscilloscoping {
 			get { return this.oscilloscoping.Value; }
 			set { this.oscilloscoping.Value = value; }
@@ -53,6 +53,7 @@ namespace LogicCircuit {
 
 		public CircuitRunner(Editor editor) {
 			this.Editor = editor;
+			this.oscilloscoping = new SettingsBoolCache(Settings.Session, "Oscilloscoping" + this.Editor.Project.ProjectId.ToString(), false);
 		}
 
 		public void Start() {
