@@ -503,19 +503,24 @@ namespace LogicCircuit {
 
 		private void ToolsOptionsCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
-				if(this.Editor != null) {
+				if(this.Editor != null && this.Editor.InEditMode) {
 					bool? result = this.ShowDialog(new DialogOptions(this));
 					if(result.HasValue && result.Value) {
-						//TODO: refresh shape type in the editor
 						this.NotifyPropertyChanged("Editor");
 						this.Editor.FullRefresh();
-						//if(this.Editor.CircuitRunner.IsTurnedOn) {
-						//    this.Editor.CircuitRunner.VisibleMap.Redraw();
-						//}
 					}
 				}
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.ToolsOptionsCommandExecuted", exception);
+				this.ReportException(exception);
+			}
+		}
+
+		private void ToolsOptionsCommandCanExecuted(object target, CanExecuteRoutedEventArgs e) {
+			try {
+				e.CanExecute = (this.Editor != null && this.Editor.InEditMode);
+			} catch(Exception exception) {
+				Tracer.Report("Mainframe.ToolsOscilloscopeCommandCanExecute", exception);
 				this.ReportException(exception);
 			}
 		}

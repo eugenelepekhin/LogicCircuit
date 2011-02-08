@@ -121,7 +121,7 @@
 
 		<CommandBinding Command="{x:Static lc:CustomCommands.ToolsReport}" Executed="ToolsReportCommandExecuted"/>
 		<CommandBinding Command="{x:Static lc:CustomCommands.ToolsOscilloscope}" Executed="ToolsOscilloscopeCommandExecuted" CanExecute="ToolsOscilloscopeCommandCanExecute"/>
-		<CommandBinding Command="{x:Static lc:CustomCommands.ToolsOptions}" Executed="ToolsOptionsCommandExecuted"/>
+		<CommandBinding Command="{x:Static lc:CustomCommands.ToolsOptions}" Executed="ToolsOptionsCommandExecuted" CanExecute="ToolsOptionsCommandCanExecuted"/>
 
 		<CommandBinding Command="ApplicationCommands.Help" Executed="HelpContentCommandExecuted"/>
 		<CommandBinding Command="{x:Static lc:CustomCommands.HelpAbout}" Executed="HelpAboutCommandExecuted"/>
