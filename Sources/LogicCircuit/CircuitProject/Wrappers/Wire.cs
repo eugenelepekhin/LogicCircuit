@@ -380,7 +380,7 @@ namespace LogicCircuit {
 		}
 
 		// Gets or sets the value reffered by the foreign key on field LogicalCircuitId
-		public override LogicalCircuit LogicalCircuit {
+		protected override LogicalCircuit SymbolLogicalCircuit {
 			get { return this.CircuitProject.LogicalCircuitSet.FindByLogicalCircuitId(this.Table.GetField(this.WireRowId, WireData.LogicalCircuitIdField.Field)); }
 			set { this.Table.SetField(this.WireRowId, WireData.LogicalCircuitIdField.Field, value.LogicalCircuitId); }
 		}

@@ -253,27 +253,28 @@ namespace LogicCircuit {
 					}
 				} else if(circuit is LogicalCircuit) {
 					IEnumerable<CircuitSymbol> pinSymbol = this.Circuit.CircuitProject.CircuitSymbolSet.SelectByCircuit(con.InJam.Pin);
-					Tracer.Assert(pinSymbol != null && pinSymbol.Count() == 1);
 					IEnumerable<Jam> pinJam = pinSymbol.First().Jams();
 					Tracer.Assert(pinJam != null && pinJam.Count() == 1);
 					this.children[(CircuitSymbol)con.InJam.CircuitSymbol].Connect(connectionSet, list, result, pinJam.First(), bitNumber);
 				} else {
 					Splitter splitter = circuit as Splitter;
 					if(splitter != null) {
+						int splitterPinCount = splitter.PinCount;
+						int splitterBitWidth = splitter.BitWidth;
 						List<Jam> jams = con.InJam.CircuitSymbol.Jams().ToList();
 						// Sort jams in order of their device pins. Assuming first one will be the wide pin and the rest are thin ones,
 						// starting from lower bits to higher. This implys that creating of the pins should happened in that order.
 						jams.Sort(JamComparer.Comparer);
 
-						Tracer.Assert(1 < splitter.PinCount && splitter.PinCount <= splitter.BitWidth);
-						Tracer.Assert(jams.Count == splitter.PinCount + 1 && jams[0].Pin.BitWidth == splitter.BitWidth);
+						Tracer.Assert(1 < splitterPinCount && splitterPinCount <= splitterBitWidth);
+						Tracer.Assert(jams.Count == splitterPinCount + 1 && jams[0].Pin.BitWidth == splitterBitWidth);
 						{	int sum = 0;
 							for(int i = 1; i < jams.Count; sum += jams[i++].Pin.BitWidth);
 							Tracer.Assert(jams[0].Pin.BitWidth == sum);
 						}
 
 						if(con.InJam == jams[0]) { //wide jam. so find thin one, this bit will be redirected to
-							Tracer.Assert(0 <= bitNumber && bitNumber < splitter.BitWidth);
+							Tracer.Assert(0 <= bitNumber && bitNumber < splitterBitWidth);
 							int width = 0;
 							for(int i = 1; i < jams.Count; i++) {
 								if(bitNumber < width + jams[i].Pin.BitWidth) {
@@ -282,7 +283,7 @@ namespace LogicCircuit {
 								}
 								width += jams[i].Pin.BitWidth;
 							}
-							Tracer.Assert(width < splitter.BitWidth); // check if the thin pin was found
+							Tracer.Assert(width < splitterBitWidth); // check if the thin pin was found
 						} else { // thin jam. find position of this bit in wide pin
 							int width = 0;
 							for(int i = 1; i < jams.Count; i++) {
@@ -292,7 +293,7 @@ namespace LogicCircuit {
 								}
 								width += jams[i].Pin.BitWidth;
 							}
-							Tracer.Assert(width < splitter.BitWidth); // check if the thin pin was found
+							Tracer.Assert(width < splitterBitWidth); // check if the thin pin was found
 						}
 					} else {
 						Tracer.Fail();

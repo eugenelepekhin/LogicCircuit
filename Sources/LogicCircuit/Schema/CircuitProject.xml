@@ -51,9 +51,9 @@
 	<Table Name="DevicePin" Persistent="False" ItemBaseClass="BasePin">
 		<Table.Columns>
 			<Column Name="PinId" Type="Guid" ReadOnly="true"/>
-			<Column Name="CircuitId" Type="Guid" PropertyOverrides="true"/>
-			<Column Name="BitWidth" Type="int" Default="1" Check="BasePin.CheckBitWidth" AccessModifier="Private" PropertyNamePrefix="Pin"/>
-			<Column Name="PinType" Type="PinType" Default="PinType.Input" PropertyOverrides="true"/>
+			<Column Name="CircuitId" Type="Guid" PropertyOverrides="true" AccessModifier="Protected" PropertyNamePrefix="Pin"/>
+			<Column Name="BitWidth" Type="int" Default="1" Check="BasePin.CheckBitWidth" ReadOnly="true" AccessModifier="Private" PropertyNamePrefix="Pin"/>
+			<Column Name="PinType" Type="PinType" Default="PinType.Input" PropertyOverrides="true" ReadOnly="true" AccessModifier="Protected" PropertyNamePrefix="Pin"/>
 			<Column Name="PinSide" Type="PinSide" Default="PinSide.Left" PropertyOverrides="true"/>
 			<Column Name="Inverted" Type="bool" Default="false" AccessModifier="Private" PropertyNamePrefix="Pin"/>
 			<Column Name="Name" Type="string" PropertyOverrides="true"/>
@@ -117,9 +117,9 @@
 	<Table Name="Pin" ItemBaseClass="BasePin">
 		<Table.Columns>
 			<Column Name="PinId" Type="Guid" ReadOnly="true"/>
-			<Column Name="CircuitId" Type="Guid" PropertyOverrides="true"/>
+			<Column Name="CircuitId" Type="Guid" PropertyOverrides="true" AccessModifier="Protected" PropertyNamePrefix="Pin"/>
 			<Column Name="BitWidth" Type="int" Default="1" Check="BasePin.CheckBitWidth" PropertyOverrides="true"/>
-			<Column Name="PinType" Type="PinType" Default="PinType.Input" PropertyOverrides="true"/>
+			<Column Name="PinType" Type="PinType" Default="PinType.Input" PropertyOverrides="true" ReadOnly="true" AccessModifier="Protected" PropertyNamePrefix="Pin"/>
 			<Column Name="PinSide" Type="PinSide" Default="PinSide.Left" PropertyOverrides="true"/>
 			<Column Name="Inverted" Type="bool" Default="false" PropertyOverrides="true"/>
 			<Column Name="Name" Type="string" PropertyOverrides="true"/>
@@ -209,8 +209,8 @@
 	<Table Name="CircuitSymbol" ItemBaseClass="CircuitGlyph">
 		<Table.Columns>
 			<Column Name="CircuitSymbolId" Type="Guid"/>
-			<Column Name="CircuitId" Type="Guid" ReadOnly="true" PropertyOverrides="true"/>
-			<Column Name="LogicalCircuitId" Type="Guid" PropertyOverrides="true"/>
+			<Column Name="CircuitId" Type="Guid" ReadOnly="true" PropertyOverrides="true" AccessModifier="Protected" PropertyNamePrefix="Symbol"/>
+			<Column Name="LogicalCircuitId" Type="Guid" PropertyOverrides="true" AccessModifier="Protected" PropertyNamePrefix="Symbol"/>
 			<Column Name="X" Type="int"/>
 			<Column Name="Y" Type="int"/>
 		</Table.Columns>
@@ -241,7 +241,7 @@
 	<Table Name="Wire" ItemBaseClass="Symbol">
 		<Table.Columns>
 			<Column Name="WireId" Type="Guid"/>
-			<Column Name="LogicalCircuitId" Type="Guid" PropertyOverrides="true"/>
+			<Column Name="LogicalCircuitId" Type="Guid" PropertyOverrides="true" AccessModifier="Protected" PropertyNamePrefix="Symbol"/>
 			<Column Name="X1" Type="int"/>
 			<Column Name="Y1" Type="int"/>
 			<Column Name="X2" Type="int"/>

@@ -10,31 +10,39 @@ namespace LogicCircuit {
 			set { throw new InvalidOperationException(); }
 		}
 
+		private int bitWidth;
 		public override int BitWidth {
 			get {
-				Pin pin = this.Circuit as Pin;
-				if(pin != null) {
-					return pin.BitWidth;
-				}
-				Constant constant = this.Circuit as Constant;
-				if(constant != null) {
-					return constant.BitWidth;
-				}
-				Memory memory = this.Circuit as Memory;
-				if(memory != null) {
-					if(this == memory.AddressPin) {
-						return memory.AddressBitWidth;
-					} else if(this == memory.DataInPin || this == memory.DataOutPin) {
-						return memory.DataBitWidth;
-					} else if(this == memory.WritePin) {
-						return 1;
-					} else {
-						Tracer.Fail("Unknown pin");
+				if(this.bitWidth < 1) {
+					Circuit circuit = this.Circuit;
+					Pin pin = circuit as Pin;
+					if(pin != null) {
+						return pin.BitWidth;
 					}
+					Constant constant = circuit as Constant;
+					if(constant != null) {
+						return constant.BitWidth;
+					}
+					Memory memory = circuit as Memory;
+					if(memory != null) {
+						if(this == memory.AddressPin) {
+							return memory.AddressBitWidth;
+						} else if(this == memory.DataInPin || this == memory.DataOutPin) {
+							return memory.DataBitWidth;
+						} else if(this == memory.WritePin) {
+							return 1;
+						} else {
+							Tracer.Fail("Unknown pin");
+						}
+					}
+					this.bitWidth = this.PinBitWidth;
 				}
-				return this.PinBitWidth;
+				return this.bitWidth;
 			}
-			set { this.PinBitWidth = value; }
+			set {
+				Tracer.Fail();
+				//this.PinBitWidth = value;
+			}
 		}
 
 		public override bool Inverted {

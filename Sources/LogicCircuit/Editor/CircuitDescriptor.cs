@@ -38,8 +38,8 @@ namespace LogicCircuit {
 			public CircuitDescriptorGlyph(CircuitDescriptor<T> circuitDescriptor) {
 				this.circuitDescriptor = circuitDescriptor;
 			}
-			public override Circuit Circuit { get { return this.circuitDescriptor.Circuit; } }
-			public override LogicalCircuit LogicalCircuit { get { throw new InvalidOperationException(); } set { throw new InvalidOperationException(); } }
+			protected override Circuit SymbolCircuit { get { return this.circuitDescriptor.Circuit; } }
+			protected override LogicalCircuit SymbolLogicalCircuit { get { throw new InvalidOperationException(); } set { throw new InvalidOperationException(); } }
 			public override void Shift(int dx, int dy) { throw new InvalidOperationException(); }
 			public override GridPoint Point {
 				get { return new GridPoint(0, 0); }

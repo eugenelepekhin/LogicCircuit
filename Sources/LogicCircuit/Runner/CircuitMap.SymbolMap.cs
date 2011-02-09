@@ -80,11 +80,7 @@ namespace LogicCircuit {
 				public int BitNumber { get { return this.bitNumber; } }
 
 				public JamKey(Jam jam, int bitNumber) {
-					Tracer.Assert(0 <= bitNumber &&
-						(bitNumber < jam.Pin.BitWidth ||
-							(jam.CircuitSymbol.Circuit is Gate && ((Gate)jam.CircuitSymbol.Circuit).GateType == GateType.Probe)
-						)
-					);
+					Tracer.Assert(jam.IsValid(bitNumber));
 					this.jam = jam;
 					this.bitNumber = bitNumber;
 				}
@@ -199,12 +195,7 @@ namespace LogicCircuit {
 
 			protected StateIndex(CircuitMap circuitMap, Jam jam, int bitNumber) {
 				Tracer.Assert(circuitMap.Circuit == jam.CircuitSymbol.LogicalCircuit);
-				Tracer.Assert(jam.Pin.Circuit == jam.CircuitSymbol.Circuit);
-				Tracer.Assert(0 <= bitNumber &&
-					(bitNumber < jam.Pin.BitWidth ||
-						(jam.CircuitSymbol.Circuit is Gate && ((Gate)jam.CircuitSymbol.Circuit).GateType == GateType.Probe)
-					)
-				);
+				Tracer.Assert(jam.IsValid(bitNumber));
 				this.CircuitMap = circuitMap;
 				this.Jam = jam;
 				this.BitNumber = bitNumber;

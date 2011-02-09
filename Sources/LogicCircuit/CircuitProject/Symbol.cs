@@ -131,7 +131,21 @@ namespace LogicCircuit {
 		protected Symbol() {
 		}
 
-		public abstract LogicalCircuit LogicalCircuit { get; set; }
+		protected abstract LogicalCircuit SymbolLogicalCircuit { get; set; }
+		private LogicalCircuit logicalCircuit;
+		public LogicalCircuit  LogicalCircuit {
+			get {
+				if(this.logicalCircuit == null) {
+					this.logicalCircuit = SymbolLogicalCircuit;
+				}
+				return this.logicalCircuit;
+			}
+			set {
+				Tracer.Assert(this.logicalCircuit == null);
+				this.SymbolLogicalCircuit = value;
+			}
+		}
+
 		public abstract void Shift(int dx, int dy);
 		public abstract int Z { get; }
 

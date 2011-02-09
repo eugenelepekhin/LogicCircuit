@@ -16,5 +16,16 @@ namespace LogicCircuit {
 		public GridPoint AbsolutePoint {
 			get { return this.CircuitSymbol.Point.Offset(this.X, this.Y); }
 		}
+
+		public bool IsValid(int bitNumber) {
+			if(0 <= bitNumber) {
+				if(bitNumber < this.Pin.BitWidth) {
+					return true;
+				}
+				Gate gate = this.CircuitSymbol.Circuit as Gate;
+				return gate != null && gate.GateType == GateType.Probe;
+			}
+			return false;
+		}
 	}
 }

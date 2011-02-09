@@ -82,7 +82,7 @@ namespace LogicCircuit {
 			data.CircuitId = circuit.CircuitId;
 			Pin pin = circuit as Pin;
 			if(pin != null) {
-				pin.Circuit = this.CircuitProject.LogicalCircuitSet.FindByLogicalCircuitId(data.LogicalCircuitId);
+				pin.Rebase(this.CircuitProject.LogicalCircuitSet.FindByLogicalCircuitId(data.LogicalCircuitId));
 			}
 			return this.Create(this.Table.Insert(ref data));
 		}

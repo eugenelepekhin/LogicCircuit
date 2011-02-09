@@ -484,7 +484,7 @@ namespace LogicCircuit {
 		}
 
 		// Gets or sets the value reffered by the foreign key on field CircuitId
-		public override Circuit Circuit {
+		protected override Circuit PinCircuit {
 			get { return this.CircuitProject.CircuitSet.Find(this.Table.GetField(this.PinRowId, PinData.CircuitIdField.Field)); }
 			set { this.Table.SetField(this.PinRowId, PinData.CircuitIdField.Field, value.CircuitId); }
 		}
@@ -495,10 +495,9 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.PinRowId, PinData.BitWidthField.Field, value); }
 		}
 
-		// Gets or sets value of the PinType field.
-		public override PinType PinType {
+		// Gets value of the PinType field.
+		protected override PinType PinPinType {
 			get { return this.Table.GetField(this.PinRowId, PinData.PinTypeField.Field); }
-			set { this.Table.SetField(this.PinRowId, PinData.PinTypeField.Field, value); }
 		}
 
 		// Gets or sets value of the PinSide field.

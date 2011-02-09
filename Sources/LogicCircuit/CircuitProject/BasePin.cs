@@ -30,9 +30,34 @@ namespace LogicCircuit {
 		/// </summary>
 		public GridPoint GridPoint { get; set; }
 		
-		public abstract Circuit Circuit { get; set; }
+		protected abstract Circuit PinCircuit { get; set; }
+		private Circuit circuit;
+		public Circuit Circuit {
+			get {
+				if(this.circuit == null) {
+					this.circuit = this.PinCircuit;
+				}
+				return this.circuit;
+			}
+		}
+
+		internal void Rebase(LogicalCircuit logicalCircuit) {
+			Tracer.Assert(this is Pin);
+			this.circuit = this.PinCircuit = logicalCircuit;
+		}
+
 		public abstract PinSide PinSide { get; set; }
-		public abstract PinType PinType { get; set; }
+
+		protected abstract PinType PinPinType { get; }
+		private int pinType = -1;
+		public PinType PinType {
+			get {
+				if(this.pinType < 0) {
+					this.pinType = (int)this.PinPinType;
+				}
+				return (PinType)this.pinType;
+			}
+		}
 		public abstract int BitWidth { get; set; }
 		//public abstract string Name { get; set; }
 		public abstract string Note { get; set; }

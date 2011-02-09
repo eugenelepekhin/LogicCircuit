@@ -12,7 +12,17 @@ namespace LogicCircuit {
 		private List<Jam>[] jams;
 		private bool isUpdated;
 
-		public abstract Circuit Circuit { get; }
+		protected abstract Circuit SymbolCircuit { get; }
+		private Circuit circuit;
+		public Circuit Circuit {
+			get {
+				if(this.circuit == null) {
+					this.circuit = this.SymbolCircuit;
+				}
+				return this.circuit;
+			}
+		}
+
 		public abstract GridPoint Point { get; set; }
 
 		private FrameworkElement glyph = null;
@@ -227,6 +237,7 @@ namespace LogicCircuit {
 
 		private class JamItem : Jam {
 			public JamItem(BasePin pin, CircuitGlyph symbol) {
+				Tracer.Assert(pin.Circuit == symbol.Circuit);
 				this.Pin = pin;
 				this.CircuitSymbol = symbol;
 			}
