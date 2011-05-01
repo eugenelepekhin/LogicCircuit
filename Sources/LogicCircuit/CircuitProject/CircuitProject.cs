@@ -124,9 +124,9 @@ namespace LogicCircuit {
 			Tracer.Assert(started);
 			copy.GateSet.Generate();
 			copy.ProjectSet.Copy(this.ProjectSet.Project);
-			copy.LogicalCircuitSet.Copy(this.ProjectSet.Project.LogicalCircuit, false);
+			LogicalCircuit target = copy.LogicalCircuitSet.Copy(this.ProjectSet.Project.LogicalCircuit, false);
 			foreach(Symbol s in symbol) {
-				s.CopyTo(copy);
+				s.CopyTo(target);
 			}
 			return copy.Save();
 		}
@@ -145,27 +145,15 @@ namespace LogicCircuit {
 
 			List<Symbol> result = new List<Symbol>();
 
-			LogicalCircuit logicalCircuit = this.ProjectSet.Project.LogicalCircuit;
+			LogicalCircuit target = this.ProjectSet.Project.LogicalCircuit;
 			foreach(CircuitSymbol symbol in paste.ProjectSet.Project.LogicalCircuit.CircuitSymbols()) {
-				symbol.CircuitSymbolId = Guid.NewGuid();
-				symbol.LogicalCircuit = logicalCircuit;
-				Tracer.Assert(this.CircuitSymbolSet.Find(symbol.CircuitSymbolId) == null);
-				symbol.CopyTo(this);
-				CircuitSymbol copy = this.CircuitSymbolSet.Find(symbol.CircuitSymbolId);
-				Tracer.Assert(copy != null);
-				result.Add(copy);
+				result.Add(symbol.CopyTo(target));
 			}
 			foreach(Wire wire in paste.ProjectSet.Project.LogicalCircuit.Wires()) {
-				wire.WireId = Guid.NewGuid();
-				wire.LogicalCircuit = logicalCircuit;
-				Tracer.Assert(this.WireSet.Find(wire.WireId) == null);
-				wire.CopyTo(this);
-				Wire copy = this.WireSet.Find(wire.WireId);
-				Tracer.Assert(copy != null);
-				result.Add(copy);
+				result.Add(wire.CopyTo(target));
 			}
 
-			if(0 < result.Count && paste.ProjectSet.Project.LogicalCircuit.LogicalCircuitId == logicalCircuit.LogicalCircuitId) {
+			if(0 < result.Count && paste.ProjectSet.Project.LogicalCircuit.LogicalCircuitId == target.LogicalCircuitId) {
 				foreach(Symbol symbol in result) {
 					symbol.Shift(2, 2);
 				}

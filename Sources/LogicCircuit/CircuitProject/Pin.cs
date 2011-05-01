@@ -29,8 +29,8 @@ namespace LogicCircuit {
 			base.Delete();
 		}
 
-		public override Circuit CopyTo(CircuitProject project) {
-			return project.PinSet.Copy(this);
+		public override Circuit CopyTo(LogicalCircuit target) {
+			return target.CircuitProject.PinSet.Copy(this, target);
 		}
 
 		public void Rename(string name) {
@@ -92,13 +92,15 @@ namespace LogicCircuit {
 			return pin;
 		}
 
-		public Pin Copy(Pin other) {
+		public Pin Copy(Pin other, Circuit target) {
 			PinData data;
 			other.CircuitProject.PinSet.Table.GetData(other.PinRowId, out data);
 			if(this.FindByPinId(data.PinId) != null) {
 				data.PinId = Guid.NewGuid();
 			}
+			data.CircuitId = target.CircuitId;
 			data.Name = this.UniqueName(data.Name, this.CircuitProject.LogicalCircuitSet.FindByLogicalCircuitId(data.CircuitId));
+			data.Pin = null;
 			return this.Register(this.Table.Insert(ref data));
 		}
 

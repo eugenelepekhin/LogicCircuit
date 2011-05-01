@@ -33,8 +33,8 @@ namespace LogicCircuit {
 			set { throw new InvalidOperationException(); }
 		}
 
-		public override Circuit CopyTo(CircuitProject project) {
-			return project.SplitterSet.Copy(this);
+		public override Circuit CopyTo(LogicalCircuit target) {
+			return target.CircuitProject.SplitterSet.Copy(this);
 		}
 
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
@@ -122,6 +122,7 @@ namespace LogicCircuit {
 			if(this.FindBySplitterId(data.SplitterId) != null) {
 				data.SplitterId = Guid.NewGuid();
 			}
+			data.Splitter = null;
 			return this.Register(this.Table.Insert(ref data));
 		}
 	}

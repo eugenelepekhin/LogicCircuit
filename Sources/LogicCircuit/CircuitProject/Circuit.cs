@@ -140,7 +140,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		public abstract Circuit CopyTo(CircuitProject project);
+		public abstract Circuit CopyTo(LogicalCircuit target);
 
 		protected void InvalidateDistinctSymbol() {
 			int count = 0;

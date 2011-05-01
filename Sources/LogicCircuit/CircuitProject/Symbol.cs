@@ -161,6 +161,6 @@ namespace LogicCircuit {
 
 		protected bool HasListener { get { return this.PropertyChanged != null; } }
 
-		public abstract void CopyTo(CircuitProject project);
+		public abstract Symbol CopyTo(LogicalCircuit target);
 	}
 }

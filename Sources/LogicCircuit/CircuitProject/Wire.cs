@@ -57,8 +57,8 @@ namespace LogicCircuit {
 			this.Y2 += dy;
 		}
 
-		public override void CopyTo(CircuitProject project) {
-			project.WireSet.Copy(this);
+		public override Symbol CopyTo(LogicalCircuit target) {
+			return target.CircuitProject.WireSet.Copy(this, target);
 		}
 
 		partial void OnWireChanged() {
@@ -77,12 +77,14 @@ namespace LogicCircuit {
 			return this.CreateItem(Guid.NewGuid(), logicalCircuit, point1.X, point1.Y, point2.X, point2.Y);
 		}
 
-		public Wire Copy(Wire other) {
+		public Wire Copy(Wire other, LogicalCircuit target) {
 			WireData data;
 			other.CircuitProject.WireSet.Table.GetData(other.WireRowId, out data);
 			if(this.Find(data.WireId) != null) {
 				data.WireId = Guid.NewGuid();
 			}
+			data.LogicalCircuitId = target.LogicalCircuitId;
+			data.Wire = null;
 			return this.Create(this.Table.Insert(ref data));
 		}
 

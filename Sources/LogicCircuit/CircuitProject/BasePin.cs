@@ -41,11 +41,6 @@ namespace LogicCircuit {
 			}
 		}
 
-		internal void Rebase(LogicalCircuit logicalCircuit) {
-			Tracer.Assert(this is Pin);
-			this.circuit = this.PinCircuit = logicalCircuit;
-		}
-
 		public abstract PinSide PinSide { get; set; }
 
 		protected abstract PinType PinPinType { get; }
