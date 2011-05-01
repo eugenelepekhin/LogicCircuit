@@ -37,8 +37,8 @@ namespace LogicCircuit {
 
 		public int InputCount { get { return this.Pins.Count(p => p.PinType == PinType.Input); } }
 
-		public override Circuit CopyTo(CircuitProject project) {
-			return project.GateSet.FindByGateId(this.GateId);
+		public override Circuit CopyTo(LogicalCircuit target) {
+			return target.CircuitProject.GateSet.FindByGateId(this.GateId);
 		}
 
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {

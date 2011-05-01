@@ -42,8 +42,8 @@ namespace LogicCircuit {
 			Canvas.SetTop(glyph, Symbol.ScreenPoint(this.Y));
 		}
 
-		public override void CopyTo(CircuitProject project) {
-			project.CircuitSymbolSet.Copy(this);
+		public override Symbol CopyTo(LogicalCircuit target) {
+			return target.CircuitProject.CircuitSymbolSet.Copy(this, target);
 		}
 
 		public override void Invalidate() {
@@ -72,18 +72,16 @@ namespace LogicCircuit {
 			return this.CreateItem(Guid.NewGuid(), circuit, logicalCircuit, x, y);
 		}
 
-		public CircuitSymbol Copy(CircuitSymbol other) {
+		public CircuitSymbol Copy(CircuitSymbol other, LogicalCircuit target) {
 			CircuitSymbolData data;
 			other.CircuitProject.CircuitSymbolSet.Table.GetData(other.CircuitSymbolRowId, out data);
 			if(this.Find(data.CircuitSymbolId) != null) {
 				data.CircuitSymbolId = Guid.NewGuid();
 			}
-			Circuit circuit = other.Circuit.CopyTo(this.CircuitProject);
+			data.LogicalCircuitId = target.LogicalCircuitId;
+			Circuit circuit = other.Circuit.CopyTo(target);
 			data.CircuitId = circuit.CircuitId;
-			Pin pin = circuit as Pin;
-			if(pin != null) {
-				pin.Rebase(this.CircuitProject.LogicalCircuitSet.FindByLogicalCircuitId(data.LogicalCircuitId));
-			}
+			data.CircuitSymbol = null;
 			return this.Create(this.Table.Insert(ref data));
 		}
 	}

@@ -37,6 +37,7 @@ namespace LogicCircuit {
 			Tracer.Assert(this.Count() == 0);
 			ProjectData data;
 			other.CircuitProject.ProjectSet.Table.GetData(other.ProjectRowId, out data);
+			data.Project = null;
 			return this.Create(this.Table.Insert(ref data));
 		}
 	}

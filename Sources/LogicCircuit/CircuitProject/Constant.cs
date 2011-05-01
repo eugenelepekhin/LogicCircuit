@@ -43,8 +43,8 @@ namespace LogicCircuit {
 			set { throw new InvalidOperationException(); }
 		}
 
-		public override Circuit CopyTo(CircuitProject project) {
-			return project.ConstantSet.Copy(this);
+		public override Circuit CopyTo(LogicalCircuit target) {
+			return target.CircuitProject.ConstantSet.Copy(this);
 		}
 
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
@@ -88,6 +88,7 @@ namespace LogicCircuit {
 			if(this.FindByConstantId(data.ConstantId) != null) {
 				data.ConstantId = Guid.NewGuid();
 			}
+			data.Constant = null;
 			return this.Register(this.Table.Insert(ref data));
 		}
 	}

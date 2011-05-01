@@ -51,7 +51,7 @@ namespace LogicCircuit {
 				throw new InvalidOperationException();
 			}
 
-			public override void CopyTo(CircuitProject project) {
+			public override Symbol CopyTo(LogicalCircuit target) {
 				throw new InvalidOperationException();
 			}
 

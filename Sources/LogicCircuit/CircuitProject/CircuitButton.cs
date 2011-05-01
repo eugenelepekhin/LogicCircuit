@@ -25,8 +25,8 @@ namespace LogicCircuit {
 			set { throw new InvalidOperationException(); }
 		}
 
-		public override Circuit CopyTo(CircuitProject project) {
-			return project.CircuitButtonSet.Copy(this);
+		public override Circuit CopyTo(LogicalCircuit target) {
+			return target.CircuitProject.CircuitButtonSet.Copy(this);
 		}
 
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
@@ -70,6 +70,7 @@ namespace LogicCircuit {
 			if(this.FindByCircuitButtonId(data.CircuitButtonId) != null) {
 				data.CircuitButtonId = Guid.NewGuid();
 			}
+			data.CircuitButton = null;
 			return this.Register(this.Table.Insert(ref data));
 		}
 	}

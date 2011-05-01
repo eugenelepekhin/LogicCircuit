@@ -46,8 +46,8 @@ namespace LogicCircuit {
 			return !this.CircuitSymbols().Any() && !this.Wires().Any();
 		}
 
-		public override Circuit CopyTo(CircuitProject project) {
-			return project.LogicalCircuitSet.Copy(this, true);
+		public override Circuit CopyTo(LogicalCircuit target) {
+			return target.CircuitProject.LogicalCircuitSet.Copy(this, true);
 		}
 
 		public void Rename(string name) {
@@ -115,14 +115,14 @@ namespace LogicCircuit {
 				LogicalCircuitData data;
 				other.CircuitProject.LogicalCircuitSet.Table.GetData(other.LogicalCircuitRowId, out data);
 				data.Name = this.UniqueName(data.Name);
+				data.LogicalCircuit = null;
 				logicalCircuit = this.Register(this.Table.Insert(ref data));
 				if(deepCopy) {
-					CircuitProject circuitProject = this.CircuitProject;
 					foreach(CircuitSymbol symbol in other.CircuitSymbols()) {
-						symbol.CopyTo(circuitProject);
+						symbol.CopyTo(logicalCircuit);
 					}
 					foreach(Wire wire in other.Wires()) {
-						wire.CopyTo(circuitProject);
+						wire.CopyTo(logicalCircuit);
 					}
 				}
 			}
