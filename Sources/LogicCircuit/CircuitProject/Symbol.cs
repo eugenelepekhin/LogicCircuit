@@ -136,13 +136,13 @@ namespace LogicCircuit {
 		public LogicalCircuit  LogicalCircuit {
 			get {
 				if(this.logicalCircuit == null) {
-					this.logicalCircuit = SymbolLogicalCircuit;
+					this.logicalCircuit = this.SymbolLogicalCircuit;
 				}
 				return this.logicalCircuit;
 			}
 			set {
 				Tracer.Assert(this.logicalCircuit == null);
-				this.SymbolLogicalCircuit = value;
+				this.logicalCircuit = this.SymbolLogicalCircuit = value;
 			}
 		}
 
