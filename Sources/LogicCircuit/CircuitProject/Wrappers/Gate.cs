@@ -14,7 +14,6 @@ namespace LogicCircuit {
 	// Defines the shape of the table Gate
 	internal partial struct GateData {
 		public Guid GateId;
-		public GateType GateType;
 		internal Gate Gate;
 
 		// Field accessors
@@ -36,27 +35,6 @@ namespace LogicCircuit {
 				return l.GateId.CompareTo(r.GateId);
 			}
 			public int Compare(Guid l, Guid r) {
-				return l.CompareTo(r);
-			}
-		}
-
-		// Accessor of the GateType field
-		public sealed class GateTypeField : IField<GateData, GateType> {
-			public static readonly GateTypeField Field = new GateTypeField();
-			private GateTypeField() {}
-			public string Name { get { return "GateType"; } }
-			public int Order { get; set; }
-			public GateType DefaultValue { get { return default(GateType); } }
-			public GateType GetValue(ref GateData record) {
-				return record.GateType;
-			}
-			public void SetValue(ref GateData record, GateType value) {
-				record.GateType = value;
-			}
-			public int Compare(ref GateData l, ref GateData r) {
-				return l.GateType.CompareTo(r.GateType);
-			}
-			public int Compare(GateType l, GateType r) {
 				return l.CompareTo(r);
 			}
 		}
@@ -90,7 +68,6 @@ namespace LogicCircuit {
 		public static TableSnapshot<GateData> CreateTable(StoreSnapshot store) {
 			TableSnapshot<GateData> table = new TableSnapshot<GateData>(store, "Gate"
 				,GateIdField.Field
-				,GateTypeField.Field
 				,GateField.Field
 			);
 			// Create all but foreign keys of the table
@@ -135,11 +112,6 @@ namespace LogicCircuit {
 			get { return this.Table.GetField(this.GateRowId, GateData.GateIdField.Field); }
 		}
 
-		// Gets value of the GateType field.
-		public GateType GateType {
-			get { return this.Table.GetField(this.GateRowId, GateData.GateTypeField.Field); }
-		}
-
 
 		internal void NotifyChanged(TableChange<GateData> change) {
 			if(this.HasListener) {
@@ -148,9 +120,6 @@ namespace LogicCircuit {
 				change.GetNewData(out newData);
 				if(GateData.GateIdField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("GateId");
-				}
-				if(GateData.GateTypeField.Field.Compare(ref oldData, ref newData) != 0) {
-					this.NotifyPropertyChanged("GateType");
 				}
 			}
 			this.OnGateChanged();
@@ -236,8 +205,7 @@ namespace LogicCircuit {
 		// Creates Gate wrapper
 		private Gate CreateItem(
 			// Fields of Gate table
-			Guid GateId,
-			GateType GateType
+			Guid GateId
 			// Fields of Circuit table
 
 		) {
@@ -249,7 +217,6 @@ namespace LogicCircuit {
 
 			GateData dataGate = new GateData() {
 				GateId = GateId,
-				GateType = GateType,
 			};
 			return this.Create(this.Table.Insert(ref dataGate), rowIdCircuit);
 		}

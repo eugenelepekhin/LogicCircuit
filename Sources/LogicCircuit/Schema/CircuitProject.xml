@@ -84,7 +84,6 @@
 	<Table Name="Gate" Persistent="False">
 		<Table.Columns>
 			<Column Name="GateId" Type="Guid" ReadOnly="true"/>
-			<Column Name="GateType" Type="GateType" ReadOnly="true"/>
 		</Table.Columns>
 
 		<Table.Keys>
