@@ -5,7 +5,6 @@ using System.Windows.Controls;
 using System.Xml;
 
 namespace LogicCircuit {
-
 	public partial class CircuitSymbol {
 
 		public void DeleteSymbol() {

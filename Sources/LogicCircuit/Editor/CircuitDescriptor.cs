@@ -92,7 +92,7 @@ namespace LogicCircuit {
 		}
 
 		public override Gate GetCircuitToDrop(CircuitProject circuitProject) {
-			return circuitProject.GateSet.FindByGateId(GateSet.GateGuid(this.Circuit.GateType, this.InputCount, this.Circuit.InvertedOutput));
+			return circuitProject.GateSet.Gate(this.Circuit.GateType, this.InputCount, this.Circuit.InvertedOutput);
 		}
 
 		private static List<int> PinRange(int min, int max) {

@@ -10,6 +10,7 @@ namespace LogicCircuit {
 		public override string ToolTip { get { return this.Name; } }
 		public override string Notation { get; set; }
 		public override string Category { get; set; }
+		public GateType GateType { get; internal set; }
 
 		public override void Delete() {
 			throw new InvalidOperationException();
@@ -134,10 +135,29 @@ namespace LogicCircuit {
 			if(!GateSet.IsValid(gateType, inputCount)) {
 				throw new ArgumentOutOfRangeException("inputCount");
 			}
-			return this.FindByGateId(GateSet.GateGuid(gateType, inputCount, invertedOutput));
+			Gate gate = this.FindByGateId(GateSet.GateGuid(gateType, inputCount, invertedOutput));
+			if(gate == null) {
+				return this.Create(gateType, inputCount, invertedOutput);
+			}
+			return gate;
 		}
 
-		public static Guid GateGuid(GateType gateType, int inputCount, bool invertedOutput) {
+		public Gate Gate(Guid gateId) {
+			Gate gate = this.FindByGateId(gateId);
+			if(gate != null) {
+				return gate;
+			}
+			byte[] id = gateId.ToByteArray();
+			GateType gateType = (GateType)(int)id[13];
+			int inputCount = (int)id[14];
+			bool invertedOutput = (id[15] == 0) ? false : true;
+			if(GateSet.IsValid(gateType) && GateSet.IsValid(gateType, inputCount) && GateSet.GateGuid(gateType, inputCount, invertedOutput) == gateId) {
+				return this.Create(gateType, inputCount, invertedOutput);
+			}
+			return null;
+		}
+
+		private static Guid GateGuid(GateType gateType, int inputCount, bool invertedOutput) {
 			Tracer.Assert(gateType != GateType.Nop && GateSet.IsValid(gateType, inputCount));
 			return new Guid(0, 0, 0, 0, 0, 0, 0, 0,
 				(byte)(int)gateType,
@@ -146,7 +166,9 @@ namespace LogicCircuit {
 			);
 		}
 
-		private static void SetStrings(Gate gate, bool invertedOutput) {
+		private Gate Create(GateType gateType, int inputCount, bool invertedOutput) {
+			Gate gate = this.CreateItem(GateSet.GateGuid(gateType, inputCount, invertedOutput));
+			gate.GateType = gateType;
 			switch(gate.GateType) {
 			case GateType.Clock:
 				gate.Name = Resources.GateClockName;
@@ -202,38 +224,29 @@ namespace LogicCircuit {
 				Tracer.Fail();
 				break;
 			}
+			if(gate.GateType == GateType.TriState) {
+				this.GenerateTriStatePins(gate);
+			} else if(gate.GateType == GateType.Led && inputCount == 8) {
+				this.GenerateSevenSegmentIndicatorPins(gate);
+			} else {
+				this.GeneratePins(gate, inputCount, invertedOutput);
+			}
+			return gate;
 		}
 
-		private Gate Create(GateType gateType, int inputCount, bool invertedOutput) {
-			return this.CreateItem(GateSet.GateGuid(gateType, inputCount, invertedOutput), gateType);
-		}
-
-		private Gate Generate(GateType gateType, int inputCount, bool invertedOutput) {
-			Gate gate = this.Create(gateType, inputCount, invertedOutput);
+		private void GeneratePins(Gate gate, int inputCount, bool invertedOutput) {
 			for(int i = 0; i < inputCount; i++) {
 				DevicePin pin = this.CircuitProject.DevicePinSet.Create(gate, PinType.Input, 1);
 				pin.Name = Resources.PinName(Resources.PinInName, i + 1);
 			}
-			if(GateSet.HasOutput(gateType)) {
+			if(GateSet.HasOutput(gate.GateType)) {
 				DevicePin pin = this.CircuitProject.DevicePinSet.Create(gate, PinType.Output, 1);
 				pin.Inverted = invertedOutput;
 				pin.Name = Resources.PinOutName;
 			}
-			GateSet.SetStrings(gate, invertedOutput);
-			return gate;
 		}
 
-		private void Generate(GateType gateType) {
-			for(int i = 2; i <= LogicCircuit.Gate.MaxInputCount; i++) {
-				this.Generate(gateType, i, false);
-				if(gateType != GateType.Even && gateType != GateType.Odd) {
-					this.Generate(gateType, i, true);
-				}
-			}
-		}
-
-		private Gate GenerateSevenSegmentIndicator() {
-			Gate gate = this.Create(GateType.Led, 8, false);
+		private void GenerateSevenSegmentIndicatorPins(Gate gate) {
 			string prefix = "Led7Pin";
 			int name = 1;
 			for(int i = 0; i < 4; i++) {
@@ -250,37 +263,17 @@ namespace LogicCircuit {
 			DevicePin pinDot = this.CircuitProject.DevicePinSet.Create(gate, PinType.Input, 1);
 			pinDot.Name = Resources.ResourceManager.GetString(prefix + name);
 			pinDot.PinSide = PinSide.Right;
-			GateSet.SetStrings(gate, false);
-			return gate;
 		}
 
-		private Gate GenerateTriState(bool invertedOutput) {
-			Gate gate = this.Create(GateType.TriState, 2, invertedOutput);
+		private void GenerateTriStatePins(Gate gate) {
 			DevicePin pinX = this.CircuitProject.DevicePinSet.Create(gate, PinType.Input, 1);
 			pinX.Name = Resources.PinInName;
 			DevicePin pinE = this.CircuitProject.DevicePinSet.Create(gate, PinType.Input, 1);
 			pinE.Name = Resources.PinEnableName;
 			pinE.PinSide = PinSide.Bottom;
 			DevicePin pin = this.CircuitProject.DevicePinSet.Create(gate, PinType.Output, 1);
-			pin.Inverted = invertedOutput;
+			pin.Inverted = false;
 			pin.Name = Resources.PinOutName;
-			GateSet.SetStrings(gate, false);
-			return gate;
-		}
-
-		public void Generate() {
-			Tracer.Assert(!this.Table.Any());
-			this.Generate(GateType.Clock, 0, false);
-			this.Generate(GateType.Not, 1, true);
-			this.Generate(GateType.Or);
-			this.Generate(GateType.And);
-			this.Generate(GateType.Xor);
-			this.Generate(GateType.Odd);
-			this.Generate(GateType.Even);
-			this.Generate(GateType.Led, 1, false);
-			this.GenerateSevenSegmentIndicator();
-			this.Generate(GateType.Probe, 1, false);
-			this.GenerateTriState(false);
 		}
 	}
 }

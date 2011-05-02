@@ -67,7 +67,12 @@ namespace LogicCircuit {
 				this.WireSet.Load(root.SelectNodes("lc:Wire", nsmgr));
 			}
 
-			this.GateSet.Generate();
+			foreach(CircuitSymbol symbol in this.CircuitSymbolSet) {
+				Guid circuitId = this.CircuitSymbolSet.Table.GetField(symbol.CircuitSymbolRowId, CircuitSymbolData.CircuitIdField.Field);
+				if(this.CircuitSet.Find(circuitId) == null) {
+					this.GateSet.Gate(circuitId);
+				}
+			}
 
 			this.DistinctSymbol(this.CircuitButtonSet);
 			this.DistinctSymbol(this.ConstantSet);
@@ -122,7 +127,6 @@ namespace LogicCircuit {
 			CircuitProject copy = new CircuitProject();
 			bool started = copy.StartTransaction();
 			Tracer.Assert(started);
-			copy.GateSet.Generate();
 			copy.ProjectSet.Copy(this.ProjectSet.Project);
 			LogicalCircuit target = copy.LogicalCircuitSet.Copy(this.ProjectSet.Project.LogicalCircuit, false);
 			foreach(Symbol s in symbol) {
