@@ -47,6 +47,26 @@ namespace LogicCircuit {
 			}
 		}
 
+		private void FileImportCommandExecuted(object target, ExecutedRoutedEventArgs e) {
+			try {
+				if(this.Editor != null && this.Editor.InEditMode) {
+					this.Import();
+				}
+			} catch(Exception exception) {
+				Tracer.Report("Mainframe.FileImportCommandExecuted", exception);
+				this.ReportException(exception);
+			}
+		}
+
+		private void FileImportCommandCanExecute(object target, CanExecuteRoutedEventArgs e) {
+			try {
+				e.CanExecute = (this.Editor != null && this.Editor.InEditMode);
+			} catch(Exception exception) {
+				Tracer.Report("Mainframe.FileImportCommandCanExecute", exception);
+				this.ReportException(exception);
+			}
+		}
+
 		private void FileExportImageCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
 				if(this.Editor != null && !this.LogicalCircuit().IsEmpty()) {

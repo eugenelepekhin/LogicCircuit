@@ -150,6 +150,7 @@ namespace LogicCircuit {
 		public abstract int Z { get; }
 
 		public abstract FrameworkElement Glyph { get; }
+		public abstract bool HasCreatedGlyph { get; }
 		public abstract void PositionGlyph();
 
 		protected void NotifyPropertyChanged(string name) {

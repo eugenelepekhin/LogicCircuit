@@ -75,6 +75,9 @@
     <Compile Include="Dialog\DialogConstant.xaml.cs">
       <DependentUpon>DialogConstant.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialog\DialogImport.xaml.cs">
+      <DependentUpon>DialogImport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialog\DialogMemory.xaml.cs">
       <DependentUpon>DialogMemory.xaml</DependentUpon>
     </Compile>
@@ -101,6 +104,7 @@
     </Compile>
     <Compile Include="Editor\AreaMarker.cs" />
     <Compile Include="Editor\CircuitDescriptor.cs" />
+    <Compile Include="Editor\CircuitDescriptorComparer.cs" />
     <Compile Include="Editor\CircuitDescriptorList.cs" />
     <Compile Include="Editor\CircuitSymbolMarker.cs" />
     <Compile Include="Editor\EditorDiagram.cs" />
@@ -259,6 +263,10 @@
     <Page Include="Dialog\DialogConstant.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialog\DialogImport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialog\DialogMemory.xaml">
       <Generator>MSBuild:Compile</Generator>

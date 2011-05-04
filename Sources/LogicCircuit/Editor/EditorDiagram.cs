@@ -115,12 +115,14 @@ namespace LogicCircuit {
 			if(!this.refreshPending) {
 				if(e.OldItems != null && 0 < e.OldItems.Count) {
 					foreach(CircuitSymbol symbol in e.OldItems) {
-						this.Unselect(symbol);
-						FrameworkElement glyph = symbol.Glyph;
-						if(glyph.Parent == this.Diagram) {
-							this.Diagram.Children.Remove(glyph);
+						if(symbol.HasCreatedGlyph) {
+							this.Unselect(symbol);
+							FrameworkElement glyph = symbol.Glyph;
+							if(glyph.Parent == this.Diagram) {
+								this.Diagram.Children.Remove(glyph);
+							}
+							Tracer.Assert(glyph.Parent == null);
 						}
-						Tracer.Assert(glyph.Parent == null);
 					}
 				}
 				if(e.NewItems != null && 0 < e.NewItems.Count) {
@@ -138,12 +140,14 @@ namespace LogicCircuit {
 			if(!this.refreshPending) {
 				if(e.OldItems != null && 0 < e.OldItems.Count) {
 					foreach(Wire wire in e.OldItems) {
-						this.Unselect(wire);
-						Line line = wire.WireGlyph;
-						if(line.Parent == this.Diagram) {
-							this.Diagram.Children.Remove(line);
+						if(wire.HasCreatedGlyph) {
+							this.Unselect(wire);
+							Line line = wire.WireGlyph;
+							if(line.Parent == this.Diagram) {
+								this.Diagram.Children.Remove(line);
+							}
+							Tracer.Assert(line.Parent == null);
 						}
-						Tracer.Assert(line.Parent == null);
 					}
 				}
 				if(e.NewItems != null && 0 < e.NewItems.Count) {

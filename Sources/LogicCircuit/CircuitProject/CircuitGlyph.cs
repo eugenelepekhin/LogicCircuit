@@ -31,6 +31,8 @@ namespace LogicCircuit {
 			get { return this.glyph ?? (this.glyph = this.Circuit.CreateGlyph(this)); }
 		}
 
+		public override bool HasCreatedGlyph { get { return this.glyph != null; } }
+
 		public void Reset() {
 			this.glyph = null;
 		}

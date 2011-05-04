@@ -44,15 +44,7 @@ namespace LogicCircuit {
 					this.logicalCircuitDescriptors.Add(circuit, descriptor);
 				}
 				List<ICircuitDescriptor> list = new List<ICircuitDescriptor>(this.logicalCircuitDescriptors.Values);
-				list.Sort(
-					(x, y) => {
-						int r = StringComparer.Ordinal.Compare(x.Circuit.Category, y.Circuit.Category);
-						if(r == 0) {
-							return StringComparer.Ordinal.Compare(x.Circuit.Name, y.Circuit.Name);
-						}
-						return r;
-					}
-				);
+				list.Sort(CircuitDescriptorComparer.Comparer);
 				foreach(ICircuitDescriptor d in list) {
 					yield return d;
 				}

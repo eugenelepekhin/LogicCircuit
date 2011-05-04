@@ -1187,5 +1187,54 @@ namespace LogicCircuit {
  		public static string TitleOscilloscoping {
 			get { return ResourceManager.GetString("TitleOscilloscoping", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Import....
+		/// </summary>
+ 		public static string CommandFileFileImport {
+			get { return ResourceManager.GetString("CommandFileFileImport", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Import.
+		/// </summary>
+ 		public static string ImportTitle {
+			get { return ResourceManager.GetString("ImportTitle", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Circuit.
+		/// </summary>
+ 		public static string TitleCircuitDescriptor {
+			get { return ResourceManager.GetString("TitleCircuitDescriptor", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to File:.
+		/// </summary>
+ 		public static string TitleFileName {
+			get { return ResourceManager.GetString("TitleFileName", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Import.
+		/// </summary>
+ 		public static string TitleImportCircuit {
+			get { return ResourceManager.GetString("TitleImportCircuit", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Check All.
+		/// </summary>
+ 		public static string TitleCheckAll {
+			get { return ResourceManager.GetString("TitleCheckAll", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Uncheck All.
+		/// </summary>
+ 		public static string TitleUncheckAll {
+			get { return ResourceManager.GetString("TitleUncheckAll", Culture); }
+		}
 	}
 }

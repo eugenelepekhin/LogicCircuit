@@ -130,5 +130,26 @@ namespace LogicCircuit {
 				this.SaveAs();
 			}
 		}
+
+		private void Import() {
+			if(this.Editor != null && this.Editor.InEditMode) {
+				string dir = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+				string recent = Settings.User.RecentFile();
+				if(Mainframe.IsFilePathValid(recent)) {
+					dir = Path.GetDirectoryName(recent);
+				}
+				SettingsStringCache location = new SettingsStringCache(Settings.User, "ImportFile.Folder", dir);
+				OpenFileDialog dialog = new OpenFileDialog();
+				dialog.Filter = Mainframe.FileFilter;
+				dialog.DefaultExt = Mainframe.FileExtention;
+				dialog.InitialDirectory = location.Value;
+				bool? result = dialog.ShowDialog(this);
+				if(result.HasValue && result.Value) {
+					string file = dialog.FileName;
+					location.Value = Path.GetDirectoryName(file);
+					this.Editor.Import(file);
+				}
+			}
+		}
 	}
 }

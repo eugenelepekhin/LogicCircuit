@@ -245,11 +245,15 @@ namespace LogicCircuit {
 			return this.Circuit;
 		}
 
-		public void NotifyCurrentChanged() {
+		public void NotifyPropertyChanged(string propertyName) {
 			PropertyChangedEventHandler handler = this.PropertyChanged;
 			if(handler != null) {
-				handler(this, new PropertyChangedEventArgs("IsCurrent"));
+				handler(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+
+		public void NotifyCurrentChanged() {
+			this.NotifyPropertyChanged("IsCurrent");
 		}
 	}
 }

@@ -643,4 +643,25 @@ Out</value>
   <data name="TitleOscilloscoping" xml:space="preserve">
     <value>_Oscilloscoping</value>
   </data>
+  <data name="CommandFileFileImport" xml:space="preserve">
+    <value>_Import...</value>
+  </data>
+  <data name="ImportTitle" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="TitleCircuitDescriptor" xml:space="preserve">
+    <value>Circuit</value>
+  </data>
+  <data name="TitleFileName" xml:space="preserve">
+    <value>File:</value>
+  </data>
+  <data name="TitleImportCircuit" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="TitleCheckAll" xml:space="preserve">
+    <value>_Check All</value>
+  </data>
+  <data name="TitleUncheckAll" xml:space="preserve">
+    <value>_Uncheck All</value>
+  </data>
 </root>

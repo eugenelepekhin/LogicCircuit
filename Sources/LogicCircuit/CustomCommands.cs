@@ -16,6 +16,7 @@ namespace LogicCircuit {
 			);
 		}
 
+		public static readonly RoutedUICommand FileImport = Create("CommandFileFileImport");
 		public static readonly RoutedUICommand FileExportImage = Create("CommandFileExportImage");
 
 		public static readonly RoutedUICommand EditSelectAllWires = Create("CommandEditSelectAllWires");

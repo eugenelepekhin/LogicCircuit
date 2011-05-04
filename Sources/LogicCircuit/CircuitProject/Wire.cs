@@ -23,6 +23,7 @@ namespace LogicCircuit {
 		public override int Z { get { return 1; } }
 
 		public override FrameworkElement Glyph { get { return this.WireGlyph; } }
+		public override bool HasCreatedGlyph { get { return this.glyph != null; } }
 
 		public Line WireGlyph {
 			get { return this.glyph ?? (this.glyph = this.CreateGlyph()); }

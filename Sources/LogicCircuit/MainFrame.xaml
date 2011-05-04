@@ -94,6 +94,7 @@
 		<CommandBinding Command="ApplicationCommands.Open" Executed="FileOpenCommandExecuted"/>
 		<CommandBinding Command="ApplicationCommands.Save" Executed="FileSaveCommandExecuted"/>
 		<CommandBinding Command="ApplicationCommands.SaveAs" Executed="FileSaveAsCommandExecuted"/>
+		<CommandBinding Command="{x:Static lc:CustomCommands.FileImport}" Executed="FileImportCommandExecuted" CanExecute="FileImportCommandCanExecute"/>
 		<CommandBinding Command="{x:Static lc:CustomCommands.FileExportImage}" Executed="FileExportImageCommandExecuted" CanExecute="FileExportImageCommandCanExecute"/>
 		<CommandBinding Command="ApplicationCommands.Close" Executed="FileCloseCommandExecuted"/>
 
@@ -143,6 +144,7 @@
 				<MenuItem Command="ApplicationCommands.Save"/>
 				<MenuItem Command="ApplicationCommands.SaveAs"/>
 				<Separator/>
+				<MenuItem Command="lc:CustomCommands.FileImport"/>
 				<MenuItem Command="lc:CustomCommands.FileExportImage"/>
 				<Separator/>
 				<MenuItem Command="ApplicationCommands.Close"/>
@@ -244,35 +246,9 @@
 						ItemsSource="{Binding Source={StaticResource circuitDescriptorList}}"
 					>
 						<ListView.GroupStyle>
-							<GroupStyle>
-								<GroupStyle.HeaderTemplate>
-									<DataTemplate>
-										<Border BorderThickness="0,0,0,2" Margin="0,5,0,0">
-											<Border.BorderBrush>
-												<RadialGradientBrush>
-													<GradientStop Color="{x:Static SystemColors.WindowColor}" Offset="0"/>
-													<GradientStop Color="{x:Static SystemColors.ControlDarkColor}" Offset="0.2"/>
-													<GradientStop Color="{x:Static SystemColors.ControlDarkColor}" Offset="0.8"/>
-													<GradientStop Color="{x:Static SystemColors.WindowColor}" Offset="1"/>
-												</RadialGradientBrush>
-											</Border.BorderBrush>
-											<TextBlock FontWeight="Bold" Foreground="{x:Static SystemColors.AppWorkspaceBrush}">
-												<TextBlock.Style>
-													<Style TargetType="TextBlock">
-														<Setter Property="Text" Value="{Binding Path=Items[0].Circuit.Category}"/>
-														<Style.Triggers>
-															<DataTrigger Binding="{Binding Path=Items[0].Circuit.Category}" Value="">
-																<Setter Property="Text" Value="{Binding Path=Items[0].Circuit.CircuitProject.ProjectSet.Project.Name}"/>
-															</DataTrigger>
-														</Style.Triggers>
-													</Style>
-												</TextBlock.Style>
-											</TextBlock>
-										</Border>
-									</DataTemplate>
-								</GroupStyle.HeaderTemplate>
-							</GroupStyle>
+							<GroupStyle HeaderTemplate="{StaticResource CircuitDescriptorGroup}"/>
 						</ListView.GroupStyle>
+
 						<ListView.Resources>
 							<Style TargetType="ContentControl">
 								<Setter Property="IsTabStop" Value="False"/>

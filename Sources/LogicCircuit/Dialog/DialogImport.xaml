@@ -1,0 +1,93 @@
+﻿<Window
+	x:Class="LogicCircuit.DialogImport"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:lc="clr-namespace:LogicCircuit"
+	FlowDirection="{Binding Source={x:Static lc:Resources.FlowDirection}, Mode=OneTime}"
+	Title="{Binding Source={x:Static lc:Resources.ImportTitle}, Mode=OneTime}"
+	MinWidth="480" MinHeight="240"
+	Width="{Binding Path=WindowLocation.Width, Mode=TwoWay}"
+	Height="{Binding Path=WindowLocation.Height, Mode=TwoWay}"
+	WindowState="{Binding Path=WindowLocation.WindowState, Mode=TwoWay}"
+	Style="{DynamicResource DialogWindow}"
+	ResizeMode="CanResizeWithGrip"
+	WindowStartupLocation="CenterOwner"
+	SizeToContent="Manual"
+	FocusManager.FocusedElement="{Binding ElementName=listView}"
+>
+	<Window.Resources>
+		<CollectionViewSource x:Key="circuitInfoList" Source="{Binding Path=List}">
+			<CollectionViewSource.GroupDescriptions>
+				<PropertyGroupDescription PropertyName="Circuit.Category"/>
+			</CollectionViewSource.GroupDescriptions>
+		</CollectionViewSource>
+	</Window.Resources>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+		<StackPanel Grid.Row="0" Orientation="Horizontal">
+			<StackPanel.Resources>
+				<Style TargetType="TextBlock">
+					<Setter Property="Margin" Value="5"/>
+					<Setter Property="VerticalAlignment" Value="Top"/>
+				</Style>
+			</StackPanel.Resources>
+			<TextBlock Text="{Binding Source={x:Static lc:Resources.TitleFileName}, Mode=OneTime}"/>
+			<TextBlock Text="{Binding Path=FileName, Mode=OneTime}" TextWrapping="Wrap"/>
+		</StackPanel>
+
+		<ListView Grid.Row="1" Name="listView" ItemsSource="{Binding Source={StaticResource circuitInfoList}}" Margin="3">
+			<ListView.GroupStyle>
+				<GroupStyle HeaderTemplate="{StaticResource CircuitDescriptorGroup}"/>
+			</ListView.GroupStyle>
+
+			<ListView.View>
+				<GridView AllowsColumnReorder="False">
+					<GridViewColumn Header="{Binding Source={x:Static lc:Resources.TitleImportCircuit}, Mode=OneTime}">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<CheckBox IsChecked="{Binding Path=Import}" IsEnabled="{Binding Path=CanImport}"/>
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+
+					<GridViewColumn Header="{Binding Source={x:Static lc:Resources.TitleCircuitDescriptor}, Mode=OneTime}">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<StackPanel Orientation="Horizontal" ToolTip="{Binding Path=Circuit.ToolTip}">
+									<ContentControl Content="{Binding Path=CircuitGlyph.Glyph}" Margin="5">
+										<ContentControl.LayoutTransform>
+											<ScaleTransform ScaleX="0.75" ScaleY="0.75"/>
+										</ContentControl.LayoutTransform>
+									</ContentControl>
+									<TextBlock Text="{Binding Path=Circuit.Name}" Margin="5" VerticalAlignment="Center"/>
+								</StackPanel>
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+				</GridView>
+			</ListView.View>
+		</ListView>
+
+		<Grid Grid.Row="2">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+
+			<StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+				<Button Content="{Binding Source={x:Static lc:Resources.TitleCheckAll}, Mode=OneTime}" Click="ButtonCheckAllClick"/>
+				<Button Content="{Binding Source={x:Static lc:Resources.TitleUncheckAll}, Mode=OneTime}" Click="ButtonUncheckAllClick"/>
+			</StackPanel>
+
+			<StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+				<Button Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="ButtonOkClick"/>
+				<Button Content="{Binding Source={x:Static lc:Resources.TitleCancel}, Mode=OneTime}" IsCancel="True"/>
+			</StackPanel>
+		</Grid>
+	</Grid>
+</Window>

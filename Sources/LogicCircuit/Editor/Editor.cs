@@ -156,6 +156,21 @@ namespace LogicCircuit {
 
 		//--- Edit Operation
 
+		public void Import(string file) {
+			this.CancelMove();
+			this.ClearSelection();
+			DialogImport dialog = new DialogImport(file, this.CircuitProject);
+			bool? result = this.Mainframe.ShowDialog(dialog);
+			if(result.HasValue && result.Value) {
+				LogicalCircuit target = this.Project.LogicalCircuit;
+				this.CircuitProject.InTransaction(() => {
+					foreach(LogicalCircuit circuit in dialog.ImportList) {
+						circuit.CopyTo(target);
+					}
+				});
+			}
+		}
+
 		public void Undo() {
 			if(this.CanUndo()) {
 				this.CancelMove();
