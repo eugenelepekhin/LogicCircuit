@@ -71,6 +71,16 @@
 					</GridViewColumn>
 				</GridView>
 			</ListView.View>
+
+			<ListView.Style>
+				<Style TargetType="ListView">
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding Path=List}" Value="{x:Null}">
+							<Setter Property="IsEnabled" Value="False"/>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</ListView.Style>
 		</ListView>
 
 		<Grid Grid.Row="2">
@@ -85,7 +95,17 @@
 			</StackPanel>
 
 			<StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-				<Button Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="ButtonOkClick"/>
+				<Button Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="ButtonOkClick">
+					<Button.Style>
+						<Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+							<Style.Triggers>
+								<DataTrigger Binding="{Binding Path=List}" Value="{x:Null}">
+									<Setter Property="IsEnabled" Value="False"/>
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</Button.Style>
+				</Button>
 				<Button Content="{Binding Source={x:Static lc:Resources.TitleCancel}, Mode=OneTime}" IsCancel="True"/>
 			</StackPanel>
 		</Grid>
