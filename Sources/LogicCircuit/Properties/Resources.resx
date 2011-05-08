@@ -687,4 +687,70 @@ Do you want to replace it?</value>
   <data name="TitleFileOpen" xml:space="preserve">
     <value>...</value>
   </data>
+  <data name="FailUnknownFunction" xml:space="preserve">
+    <value>Unknown Function {0}</value>
+    <comment>{string functionName}</comment>
+  </data>
+  <data name="Gate7SegName" xml:space="preserve">
+    <value>7-seg</value>
+  </data>
+  <data name="ReportFunction0" xml:space="preserve">
+    <value>&lt;Paragraph FontSize="20" FontWeight="Bold"&gt;Can not report functions due to the following error: {0}&lt;/Paragraph&gt;
+&lt;Paragraph FontSize="8" FontWeight="Bold"&gt;Error details&lt;/Paragraph&gt;
+&lt;Paragraph FontSize="8"&gt;{1}&lt;/Paragraph&gt;</value>
+    <comment>-{ignore}</comment>
+  </data>
+  <data name="ReportFunction1" xml:space="preserve">
+    <value>&lt;Paragraph FontSize="20" FontWeight="Bold"&gt;Functions of the circuit "{0}"&lt;/Paragraph&gt;
+&lt;Table CellSpacing="5"&gt;
+	&lt;Table.Columns&gt;
+		&lt;TableColumn/&gt;
+		&lt;TableColumn/&gt;
+	&lt;/Table.Columns&gt;
+	&lt;TableRowGroup&gt;
+		&lt;TableRow Background="Gray"&gt;
+			&lt;TableCell TextAlignment="Center"&gt;
+				&lt;Paragraph FontSize="15" FontWeight="Bold"&gt;Function&lt;/Paragraph&gt;
+			&lt;/TableCell&gt;
+			&lt;TableCell TextAlignment="Center"&gt;
+				&lt;Paragraph FontSize="15" FontWeight="Bold"&gt;Count&lt;/Paragraph&gt;
+			&lt;/TableCell&gt;
+		&lt;/TableRow&gt;</value>
+    <comment>-{ignore}</comment>
+  </data>
+  <data name="ReportFunction2" xml:space="preserve">
+    <value>&lt;TableRow Background="{0}"&gt;
+			&lt;TableCell&gt;&lt;Paragraph&gt;{1}&lt;/Paragraph&gt;&lt;/TableCell&gt;
+			&lt;TableCell&gt;&lt;Paragraph&gt;{2:N0}&lt;/Paragraph&gt;&lt;/TableCell&gt;
+		&lt;/TableRow&gt;</value>
+    <comment>-{ignore}</comment>
+  </data>
+  <data name="ReportFunction3" xml:space="preserve">
+    <value>&lt;TableRow Background="Gray"&gt;
+			&lt;TableCell TextAlignment="Right"&gt;&lt;Paragraph FontWeight="Bold"&gt;Total:&lt;/Paragraph&gt;&lt;/TableCell&gt;
+			&lt;TableCell&gt;&lt;Paragraph&gt;{0:N0}&lt;/Paragraph&gt;&lt;/TableCell&gt;
+		&lt;/TableRow&gt;
+	&lt;/TableRowGroup&gt;
+&lt;/Table&gt;</value>
+    <comment>-{ignore}</comment>
+  </data>
+  <data name="ReportGateName" xml:space="preserve">
+    <value>{0} ({1})</value>
+    <comment>{string gate, int inputCount}</comment>
+  </data>
+  <data name="ReportMemoryName" xml:space="preserve">
+    <value>{0}: {1} bit address, {2} bit data</value>
+    <comment>{string memoryName, int address, int data}</comment>
+  </data>
+  <data name="ReportProject1" xml:space="preserve">
+    <value>&lt;Paragraph FontSize="20" FontWeight="Bold"&gt;Project "{0}"&lt;/Paragraph&gt;
+&lt;Paragraph&gt;&lt;Bold&gt;Description:&lt;/Bold&gt; {1}&lt;/Paragraph&gt;
+&lt;Paragraph&gt;&lt;Bold&gt;Summary:&lt;/Bold&gt;
+	{2:N0} logical circuits, in {3:N0} categories are using {4:N0} symbols and {5:N0} wires
+&lt;/Paragraph&gt;</value>
+    <comment>-{ignore}</comment>
+  </data>
+  <data name="TriStateGroupName" xml:space="preserve">
+    <value>Tri-state group</value>
+  </data>
 </root>

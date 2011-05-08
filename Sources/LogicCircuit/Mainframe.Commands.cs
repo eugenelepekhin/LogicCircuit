@@ -483,13 +483,15 @@ namespace LogicCircuit {
 		private void ToolsReportCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
 				if(this.Editor != null) {
-					//LogicalCircuit root = this.Editor.LogicalCircuit;
-					//CircuitMap map = this.Editor.CircuitRunner.VisibleMap;
-					//if(map != null && !this.Editor.InEditMode) {
-					//    map = map.Root;
-					//    root = map.Circuit;
-					//}
-					//this.ShowDialog(new DialogReport(root));
+					LogicalCircuit root = this.Editor.Project.LogicalCircuit;
+					if(this.Editor.CircuitRunner != null) {
+						CircuitMap map = this.Editor.CircuitRunner.VisibleMap;
+						if(map != null && !this.Editor.InEditMode) {
+							map = map.Root;
+							root = map.Circuit;
+						}
+					}
+					this.ShowDialog(new DialogReport(root));
 				}
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.ToolsReportCommandExecuted", exception);

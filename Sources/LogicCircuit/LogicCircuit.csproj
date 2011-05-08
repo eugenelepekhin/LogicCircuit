@@ -102,6 +102,9 @@
     <Compile Include="Dialog\DialogRAM.xaml.cs">
       <DependentUpon>DialogRAM.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialog\DialogReport.xaml.cs">
+      <DependentUpon>DialogReport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialog\DialogROM.xaml.cs">
       <DependentUpon>DialogROM.xaml</DependentUpon>
     </Compile>
@@ -306,6 +309,10 @@
     <Page Include="Dialog\DialogRAM.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialog\DialogReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialog\DialogROM.xaml">
       <Generator>MSBuild:Compile</Generator>
