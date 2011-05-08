@@ -75,6 +75,9 @@
     <Compile Include="Dialog\DialogConstant.xaml.cs">
       <DependentUpon>DialogConstant.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialog\DialogExportImage.xaml.cs">
+      <DependentUpon>DialogExportImage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialog\DialogImport.xaml.cs">
       <DependentUpon>DialogImport.xaml</DependentUpon>
     </Compile>
@@ -263,6 +266,10 @@
     <Page Include="Dialog\DialogConstant.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialog\DialogExportImage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialog\DialogImport.xaml">
       <SubType>Designer</SubType>

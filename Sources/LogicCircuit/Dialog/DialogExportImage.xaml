@@ -1,0 +1,67 @@
+﻿<Window x:Class="LogicCircuit.DialogExportImage"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:lc="clr-namespace:LogicCircuit"
+	FlowDirection="{Binding Source={x:Static lc:Resources.FlowDirection}, Mode=OneTime}"
+	Title="{Binding Source={x:Static lc:Resources.TitleExportImage}, Mode=OneTime}"
+	Style="{DynamicResource DialogWindow}"
+	ResizeMode="NoResize"
+	SizeToContent="WidthAndHeight"
+	WindowStartupLocation="CenterOwner"
+	FocusManager.FocusedElement="{Binding ElementName=imageType}"
+>
+	<Window.Resources>
+		<Style TargetType="{x:Type TextBox}">
+			<Setter Property="Margin" Value="3"/>
+		</Style>
+
+		<Style TargetType="{x:Type Label}">
+			<Setter Property="Margin" Value="3"/>
+			<Setter Property="HorizontalContentAlignment" Value="Right"/>
+		</Style>
+
+		<Style TargetType="{x:Type ComboBox}">
+			<Setter Property="Margin" Value="3"/>
+			<Setter Property="MinWidth" Value="65"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+		</Style>
+	</Window.Resources>
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+
+		<TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="8"
+			Text="{Binding Source={x:Static lc:Resources.MessageExportImageDialog}, Mode=OneTime}"
+		/>
+
+		<Label Grid.Row="1" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleType}, Mode=OneTime}" Target="{Binding ElementName=imageType}"/>
+		<ComboBox Grid.Row="1" Grid.Column="1" Name="imageType"
+			ItemsSource="{Binding Path=Encoders}" SelectedItem="{Binding Path=Encoder, Mode=TwoWay}"
+			SelectionChanged="ImageTypeSelectionChanged"
+		/>
+
+		<Label Grid.Row="2" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleFile}, Mode=OneTime}" Target="{Binding ElementName=fileName}"/>
+		<StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Stretch">
+			<TextBox Name="fileName" HorizontalAlignment="Stretch" MinWidth="420" VerticalAlignment="Center"
+				Text="{Binding Path=FilePath, Mode=TwoWay}"
+			/>
+			<Button Click="ButtonFileClick" Padding="3,0,3,0" MinWidth="10" HorizontalAlignment="Right" VerticalAlignment="Center"
+				Content="{Binding Source={x:Static lc:Resources.TitleFileOpen}, Mode=OneTime}"
+			/>
+		</StackPanel>
+
+		<StackPanel Grid.Row="3" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+			<Button Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="ButtonOkClick"/>
+			<Button Content="{Binding Source={x:Static lc:Resources.TitleCancel}, Mode=OneTime}" IsCancel="True"/>
+		</StackPanel>
+	</Grid>
+</Window>

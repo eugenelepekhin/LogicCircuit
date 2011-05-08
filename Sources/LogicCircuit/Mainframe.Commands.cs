@@ -70,7 +70,7 @@ namespace LogicCircuit {
 		private void FileExportImageCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
 				if(this.Editor != null && !this.LogicalCircuit().IsEmpty()) {
-					//this.ShowDialog(new DialogExportImage(this.Editor));
+					this.ShowDialog(new DialogExportImage(this.Editor));
 				}
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.FileExportImageCommandExecuted", exception);

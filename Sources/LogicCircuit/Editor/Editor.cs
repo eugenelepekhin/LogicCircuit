@@ -6,7 +6,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Xml;
 
 namespace LogicCircuit {
@@ -169,6 +172,69 @@ namespace LogicCircuit {
 					}
 				});
 			}
+		}
+
+		public RenderTargetBitmap ExportImage() {
+			Rect rect = new Rect();
+			bool isEmpty = true;
+			LogicalCircuit logicalCircuit = this.Project.LogicalCircuit;
+			foreach(Wire wire in logicalCircuit.Wires()) {
+				Rect wireRect = new Rect(Symbol.ScreenPoint(wire.Point1), Symbol.ScreenPoint(wire.Point2));
+				if(isEmpty) {
+					rect = wireRect;
+					isEmpty = false;
+				} else {
+					rect.Union(wireRect);
+				}
+			}
+			foreach(CircuitSymbol symbol in logicalCircuit.CircuitSymbols()) {
+				Rect symbolRect = new Rect(Symbol.ScreenPoint(symbol.Point), new Size(symbol.Glyph.Width, symbol.Glyph.Height));
+				if(isEmpty) {
+					rect = symbolRect;
+					isEmpty = false;
+				} else {
+					rect.Union(symbolRect);
+				}
+			}
+			if(!isEmpty) {
+				Canvas diagram = this.Diagram;
+				Brush oldBackground = diagram.Background;
+				Transform oldRenderTransform = diagram.RenderTransform;
+				Transform oldLayoutTransform = diagram.LayoutTransform;
+				double horizontalOffset = 0;
+				double verticalOffset = 0;
+				ScrollViewer scrollViewer = diagram.Parent as ScrollViewer;
+				try {
+					if(scrollViewer != null) {
+						horizontalOffset = scrollViewer.HorizontalOffset;
+						verticalOffset = scrollViewer.VerticalOffset;
+						scrollViewer.ScrollToHorizontalOffset(0);
+						scrollViewer.ScrollToVerticalOffset(0);
+						scrollViewer.UpdateLayout();
+					}
+					diagram.Background = Brushes.White;
+					rect.Inflate(Symbol.GridSize, Symbol.GridSize);
+					rect.Intersect(new Rect(0, 0, Symbol.LogicalCircuitWidth, Symbol.LogicalCircuitHeight));
+					diagram.RenderTransform = new TranslateTransform(-rect.X, -rect.Y);
+					diagram.UpdateLayout();
+					RenderTargetBitmap bitmap = new RenderTargetBitmap(
+						(int)Math.Round(rect.Width), (int)Math.Round(rect.Height), 96, 96, PixelFormats.Pbgra32
+					);
+					bitmap.Render(diagram);
+					return bitmap;
+				} finally {
+					diagram.Background = oldBackground;
+					diagram.RenderTransform = oldRenderTransform;
+					diagram.LayoutTransform = oldLayoutTransform;
+					diagram.UpdateLayout();
+					if(scrollViewer != null) {
+						scrollViewer.ScrollToHorizontalOffset(horizontalOffset);
+						scrollViewer.ScrollToVerticalOffset(verticalOffset);
+						scrollViewer.UpdateLayout();
+					}
+				}
+			}
+			return null;
 		}
 
 		public void Undo() {

@@ -27,7 +27,7 @@ namespace LogicCircuit {
 
 		public Mainframe Mainframe { get; private set; }
 		private Dispatcher Dispatcher { get { return this.Mainframe.Dispatcher; } }
-		private Canvas Diagram { get { return this.Mainframe.Diagram; } }
+		protected Canvas Diagram { get { return this.Mainframe.Diagram; } }
 
 		public CircuitProject CircuitProject { get; private set; }
 		public Project Project { get { return this.CircuitProject.ProjectSet.Project; } }

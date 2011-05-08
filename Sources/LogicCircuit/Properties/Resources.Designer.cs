@@ -1236,5 +1236,55 @@ namespace LogicCircuit {
  		public static string TitleUncheckAll {
 			get { return ResourceManager.GetString("TitleUncheckAll", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Image File (*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif)|*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif|All Files (*.*)|*.*.
+		/// </summary>
+ 		public static string ImageFileFilter {
+			get { return ResourceManager.GetString("ImageFileFilter", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to The provided file name is not valid. Please check that parent folder exists and file name is a valid one..
+		/// </summary>
+ 		public static string ImagePathInvalid {
+			get { return ResourceManager.GetString("ImagePathInvalid", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Select type of image and file name to export current diagram to..
+		/// </summary>
+ 		public static string MessageExportImageDialog {
+			get { return ResourceManager.GetString("MessageExportImageDialog", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to File "{0}" already exists.
+		/// Do you want to replace it?.
+		/// </summary>
+ 		public static string MessageImageFileExists(string fileName) {
+			return string.Format(Culture, ResourceManager.GetString("MessageImageFileExists", Culture), fileName);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Export Image.
+		/// </summary>
+ 		public static string TitleExportImage {
+			get { return ResourceManager.GetString("TitleExportImage", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _File:.
+		/// </summary>
+ 		public static string TitleFile {
+			get { return ResourceManager.GetString("TitleFile", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to ....
+		/// </summary>
+ 		public static string TitleFileOpen {
+			get { return ResourceManager.GetString("TitleFileOpen", Culture); }
+		}
 	}
 }

@@ -664,4 +664,27 @@ Out</value>
   <data name="TitleUncheckAll" xml:space="preserve">
     <value>_Uncheck All</value>
   </data>
+  <data name="ImageFileFilter" xml:space="preserve">
+    <value>Image File (*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif)|*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif|All Files (*.*)|*.*</value>
+  </data>
+  <data name="ImagePathInvalid" xml:space="preserve">
+    <value>The provided file name is not valid. Please check that parent folder exists and file name is a valid one.</value>
+  </data>
+  <data name="MessageExportImageDialog" xml:space="preserve">
+    <value>Select type of image and file name to export current diagram to.</value>
+  </data>
+  <data name="MessageImageFileExists" xml:space="preserve">
+    <value>File "{0}" already exists.
+Do you want to replace it?</value>
+    <comment>{string fileName}</comment>
+  </data>
+  <data name="TitleExportImage" xml:space="preserve">
+    <value>Export Image</value>
+  </data>
+  <data name="TitleFile" xml:space="preserve">
+    <value>_File:</value>
+  </data>
+  <data name="TitleFileOpen" xml:space="preserve">
+    <value>...</value>
+  </data>
 </root>
