@@ -338,10 +338,9 @@ namespace LogicCircuit {
 
 		//Properties of CircuitSymbol
 
-		// Gets or sets value of the CircuitSymbolId field.
+		// Gets value of the CircuitSymbolId field.
 		public Guid CircuitSymbolId {
 			get { return this.Table.GetField(this.CircuitSymbolRowId, CircuitSymbolData.CircuitSymbolIdField.Field); }
-			set { this.Table.SetField(this.CircuitSymbolRowId, CircuitSymbolData.CircuitSymbolIdField.Field, value); }
 		}
 
 		// Gets the value reffered by the foreign key on field CircuitId

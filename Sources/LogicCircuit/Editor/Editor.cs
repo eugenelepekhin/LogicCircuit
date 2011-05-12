@@ -394,13 +394,12 @@ namespace LogicCircuit {
 			this.Mainframe.ShowDialog(new DialogPin(pin));
 		}
 
-		private void Edit(string text) {
-			bool? result = this.Mainframe.ShowDialog(new DialogText(text));
+		private void Edit(TextNote textNote) {
+			DialogText dialog = new DialogText(textNote.Note);
+			bool? result = this.Mainframe.ShowDialog(dialog);
 			if(result.HasValue && result.Value) {
-				//this.text = dialog.Document;
-				//this.MyDocument = XamlReader.Parse(this.text) as FlowDocument;
-				//this.MyDocument.Cursor = Cursors.Arrow;
-				//this.MyDocument.PagePadding = new Thickness(3);
+				textNote.Note = dialog.Document;
+				textNote.UpdateGlyph();
 			}
 		}
 
@@ -466,6 +465,11 @@ namespace LogicCircuit {
 							this.Mainframe.Status = Resources.MessageNotRootConstant(this.CircuitRunner.Root.First().Circuit.Name);
 						}
 					}
+				}
+			} else {
+				TextNote textNote = symbol as TextNote;
+				if(textNote != null) {
+					this.Edit(textNote);
 				}
 			}
 		}

@@ -65,6 +65,7 @@ namespace LogicCircuit {
 				this.SplitterSet.Load(root.SelectNodes("lc:Splitter", nsmgr));
 				this.CircuitSymbolSet.Load(root.SelectNodes("lc:CircuitSymbol", nsmgr));
 				this.WireSet.Load(root.SelectNodes("lc:Wire", nsmgr));
+				this.TextNoteSet.Load(root.SelectNodes("lc:TextNote", nsmgr));
 			}
 
 			foreach(CircuitSymbol symbol in this.CircuitSymbolSet) {
@@ -81,6 +82,7 @@ namespace LogicCircuit {
 			this.DistinctSymbol(this.SplitterSet);
 
 			this.WireSet.Where(wire => wire.Point1 == wire.Point2).ToList().ForEach(wire => wire.Delete());
+			this.TextNoteSet.Where(textNote => !textNote.IsValid).ToList().ForEach(textNote => textNote.Delete());
 
 			this.ResetUndoRedo();
 		}
@@ -108,6 +110,7 @@ namespace LogicCircuit {
 			SplitterData.Save(this.SplitterSet.Table, root);
 			CircuitSymbolData.Save(this.CircuitSymbolSet.Table, root);
 			WireData.Save(this.WireSet.Table, root);
+			TextNoteData.Save(this.TextNoteSet.Table, root);
 			return xml;
 		}
 

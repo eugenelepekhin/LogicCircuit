@@ -23,6 +23,7 @@
 		public SplitterSet SplitterSet { get; private set; }
 		public CircuitSymbolSet CircuitSymbolSet { get; private set; }
 		public WireSet WireSet { get; private set; }
+		public TextNoteSet TextNoteSet { get; private set; }
 
 		public bool UpdateInProgress { get; private set; }
 
@@ -43,6 +44,7 @@
 			SplitterData.CreateForeignKeys(this);
 			CircuitSymbolData.CreateForeignKeys(this);
 			WireData.CreateForeignKeys(this);
+			TextNoteData.CreateForeignKeys(this);
 
 			this.FreezeShape();
 			this.Init();
@@ -61,6 +63,7 @@
 			this.SplitterSet = new SplitterSet(this);
 			this.CircuitSymbolSet = new CircuitSymbolSet(this);
 			this.WireSet = new WireSet(this);
+			this.TextNoteSet = new TextNoteSet(this);
 		}
 
 		private void Init() {
@@ -93,6 +96,7 @@
 				List<Splitter> deletedSplitter = this.SplitterSet.UpdateSet(oldVersion, newVersion);
 				List<CircuitSymbol> deletedCircuitSymbol = this.CircuitSymbolSet.UpdateSet(oldVersion, newVersion);
 				List<Wire> deletedWire = this.WireSet.UpdateSet(oldVersion, newVersion);
+				List<TextNote> deletedTextNote = this.TextNoteSet.UpdateSet(oldVersion, newVersion);
 
 				this.ProjectSet.NotifyVersionChanged(oldVersion, newVersion, deletedProject);
 				this.CircuitSet.NotifyVersionChanged(oldVersion, newVersion, deletedCircuit);
@@ -106,6 +110,7 @@
 				this.SplitterSet.NotifyVersionChanged(oldVersion, newVersion, deletedSplitter);
 				this.CircuitSymbolSet.NotifyVersionChanged(oldVersion, newVersion, deletedCircuitSymbol);
 				this.WireSet.NotifyVersionChanged(oldVersion, newVersion, deletedWire);
+				this.TextNoteSet.NotifyVersionChanged(oldVersion, newVersion, deletedTextNote);
 
 				this.NotifyPropertyChanged("Version");
 			} finally {
@@ -131,6 +136,7 @@
 			this.SplitterSet.NotifyRolledBack(version);
 			this.CircuitSymbolSet.NotifyRolledBack(version);
 			this.WireSet.NotifyRolledBack(version);
+			this.TextNoteSet.NotifyRolledBack(version);
 		}
 	}
 }

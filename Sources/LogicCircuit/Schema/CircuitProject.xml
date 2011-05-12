@@ -12,7 +12,7 @@
 		Version 1.0.0.3 - no schema changes. Introduction of the new version is just to prevent loading the new file with newly introduced tri state buffers
 		by old version of program that does not support such gates. A simple transofmation is requared to change namespace so no user data will be lost.
 
-		Version 2.0.0.1 - Moving to new store. Adding Frequency and IsMaximumSpeed to project. Adding JamNotation to Pin.
+		Version 2.0.0.1 - Moving to new store. Adding Frequency and IsMaximumSpeed to project. Adding JamNotation to Pin. Adding TextNote.
 	-->
 
 	<Table Name="Project">
@@ -207,7 +207,7 @@
 
 	<Table Name="CircuitSymbol" ItemBaseClass="CircuitGlyph">
 		<Table.Columns>
-			<Column Name="CircuitSymbolId" Type="Guid"/>
+			<Column Name="CircuitSymbolId" Type="Guid" ReadOnly="true"/>
 			<Column Name="CircuitId" Type="Guid" ReadOnly="true" PropertyOverrides="true" AccessModifier="Protected" PropertyNamePrefix="Symbol"/>
 			<Column Name="LogicalCircuitId" Type="Guid" PropertyOverrides="true" AccessModifier="Protected" PropertyNamePrefix="Symbol"/>
 			<Column Name="X" Type="int"/>
@@ -239,7 +239,7 @@
 
 	<Table Name="Wire" ItemBaseClass="Symbol">
 		<Table.Columns>
-			<Column Name="WireId" Type="Guid"/>
+			<Column Name="WireId" Type="Guid" ReadOnly="true"/>
 			<Column Name="LogicalCircuitId" Type="Guid" PropertyOverrides="true" AccessModifier="Protected" PropertyNamePrefix="Symbol"/>
 			<Column Name="X1" Type="int"/>
 			<Column Name="Y1" Type="int"/>
@@ -257,6 +257,32 @@
 			</Key>
 
 			<Key Name="IX_LogicalCircuit_Wire" KeyType="Index">
+				<Column Name="LogicalCircuitId"/>
+			</Key>
+		</Table.Keys>
+	</Table>
+
+	<Table Name="TextNote" ItemBaseClass="Symbol">
+		<Table.Columns>
+			<Column Name="TextNoteId" Type="Guid" ReadOnly="true"/>
+			<Column Name="LogicalCircuitId" Type="Guid" PropertyOverrides="true" AccessModifier="Protected" PropertyNamePrefix="Symbol"/>
+			<Column Name="X" Type="int"/>
+			<Column Name="Y" Type="int"/>
+			<Column Name="Width" Type="int" Default="10"/>
+			<Column Name="Height" Type="int" Default="10"/>
+			<Column Name="Note" Type="string" Default=""/>
+		</Table.Columns>
+
+		<Table.Keys>
+			<Key Name="PK_TextNote" KeyType="Primary">
+				<Column Name="TextNoteId"/>
+			</Key>
+
+			<Key Name="FK_LogicalCircuit_TextNote" KeyType="Foreign" ParentName="LogicalCircuit" Action="Cascade">
+				<Column Name="LogicalCircuitId"/>
+			</Key>
+
+			<Key Name="IX_LogicalCircuit_TextNote" KeyType="Index">
 				<Column Name="LogicalCircuitId"/>
 			</Key>
 		</Table.Keys>

@@ -42,8 +42,12 @@ namespace LogicCircuit {
 			return this.CircuitProject.WireSet.SelectByLogicalCircuit(this);
 		}
 
+		public IEnumerable<TextNote> TextNotes() {
+			return this.CircuitProject.TextNoteSet.SelectByLogicalCircuit(this);
+		}
+
 		public bool IsEmpty() {
-			return !this.CircuitSymbols().Any() && !this.Wires().Any();
+			return !this.CircuitSymbols().Any() && !this.Wires().Any() && !this.TextNotes().Any();
 		}
 
 		public override Circuit CopyTo(LogicalCircuit target) {
@@ -123,6 +127,9 @@ namespace LogicCircuit {
 					}
 					foreach(Wire wire in other.Wires()) {
 						wire.CopyTo(logicalCircuit);
+					}
+					foreach(TextNote symbol in other.TextNotes()) {
+						symbol.CopyTo(logicalCircuit);
 					}
 				}
 			}

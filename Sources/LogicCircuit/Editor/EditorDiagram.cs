@@ -53,6 +53,7 @@ namespace LogicCircuit {
 			this.CircuitProject.CircuitSymbolSet.CollectionChanged += new NotifyCollectionChangedEventHandler(this.CircuitSymbolSetCollectionChanged);
 			this.CircuitProject.WireSet.CollectionChanged += new NotifyCollectionChangedEventHandler(this.WireSetCollectionChanged);
 			this.CircuitProject.WireSet.WireSetChanged += new EventHandler(this.WireSetChanged);
+			this.CircuitProject.TextNoteSet.CollectionChanged += new NotifyCollectionChangedEventHandler(this.TextNoteSetCollectionChanged);
 			this.CircuitProject.VersionChanged += new EventHandler<DataPersistent.VersionChangeEventArgs>(this.CircuitProjectVersionChanged);
 			this.Refresh();
 		}
@@ -167,6 +168,31 @@ namespace LogicCircuit {
 			}
 		}
 
+		private void TextNoteSetCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
+			if(!this.refreshPending) {
+				if(e.OldItems != null && 0 < e.OldItems.Count) {
+					foreach(TextNote symbol in e.OldItems) {
+						if(symbol.HasCreatedGlyph) {
+							this.Unselect(symbol);
+							FrameworkElement glyph = symbol.Glyph;
+							if(glyph.Parent == this.Diagram) {
+								this.Diagram.Children.Remove(glyph);
+							}
+							Tracer.Assert(glyph.Parent == null);
+						}
+					}
+				}
+				if(e.NewItems != null && 0 < e.NewItems.Count) {
+					LogicalCircuit current = this.Project.LogicalCircuit;
+					foreach(TextNote symbol in e.NewItems) {
+						if(symbol.LogicalCircuit == current) {
+							this.Add(symbol);
+						}
+					}
+				}
+			}
+		}
+
 		//--- Utils ---
 
 		private void ShowStatus(CircuitSymbol symbol) {
@@ -183,6 +209,11 @@ namespace LogicCircuit {
 			} else {
 				this.RedrawDiagram();
 			}
+		}
+
+		private void Add(TextNote textNote) {
+			textNote.PositionGlyph();
+			this.Diagram.Children.Add(textNote.TextNoteGlyph);
 		}
 
 		private void Add(Wire wire) {
@@ -234,6 +265,9 @@ namespace LogicCircuit {
 			this.Diagram.Children.Clear();
 			this.wirePoint.Clear();
 			LogicalCircuit logicalCircuit = this.Project.LogicalCircuit;
+			foreach(TextNote symbol in logicalCircuit.TextNotes()) {
+				this.Add(symbol);
+			}
 			foreach(Wire wire in logicalCircuit.Wires()) {
 				this.Add(wire);
 			}

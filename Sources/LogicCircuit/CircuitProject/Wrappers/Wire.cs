@@ -373,10 +373,9 @@ namespace LogicCircuit {
 
 		//Properties of Wire
 
-		// Gets or sets value of the WireId field.
+		// Gets value of the WireId field.
 		public Guid WireId {
 			get { return this.Table.GetField(this.WireRowId, WireData.WireIdField.Field); }
-			set { this.Table.SetField(this.WireRowId, WireData.WireIdField.Field, value); }
 		}
 
 		// Gets or sets the value reffered by the foreign key on field LogicalCircuitId
