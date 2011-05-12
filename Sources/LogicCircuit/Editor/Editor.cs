@@ -394,6 +394,16 @@ namespace LogicCircuit {
 			this.Mainframe.ShowDialog(new DialogPin(pin));
 		}
 
+		private void Edit(string text) {
+			bool? result = this.Mainframe.ShowDialog(new DialogText(text));
+			if(result.HasValue && result.Value) {
+				//this.text = dialog.Document;
+				//this.MyDocument = XamlReader.Parse(this.text) as FlowDocument;
+				//this.MyDocument.Cursor = Cursors.Arrow;
+				//this.MyDocument.PagePadding = new Thickness(3);
+			}
+		}
+
 		protected override void Edit(Symbol symbol) {
 			CircuitSymbol circuitSymbol = symbol as CircuitSymbol;
 			if(circuitSymbol != null) {

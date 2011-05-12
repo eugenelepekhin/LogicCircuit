@@ -1,0 +1,117 @@
+﻿<Window x:Class="LogicCircuit.DialogText"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:lc="clr-namespace:LogicCircuit"
+	FlowDirection="{Binding Source={x:Static lc:Resources.FlowDirection}, Mode=OneTime}"
+	Title="{Binding Source={x:Static lc:Resources.TextNotation}, Mode=OneTime}"
+	MinWidth="480" MinHeight="240"
+	Width="{Binding Path=WindowLocation.Width, Mode=TwoWay}"
+	Height="{Binding Path=WindowLocation.Height, Mode=TwoWay}"
+	WindowState="{Binding Path=WindowLocation.WindowState, Mode=TwoWay}"
+	Style="{DynamicResource DialogWindow}"
+	ResizeMode="CanResizeWithGrip"
+	WindowStartupLocation="CenterOwner"
+	SizeToContent="Manual"
+	FocusManager.FocusedElement="{Binding ElementName=editor}"
+>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+		<ToolBar Grid.Row="0">
+			<ToolBar.Resources>
+				<Style TargetType="ToggleButton" x:Key="toolToggleButton">
+					<Setter Property="CommandTarget" Value="{Binding ElementName=editor}"/>
+					<Setter Property="VerticalAlignment" Value="Stretch"/>
+					<Setter Property="Width" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=ActualHeight}"/>
+					<Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Command.Text}"/>
+					<Style.Triggers>
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter Property="Opacity" Value="0.5"/>
+						</Trigger>
+					</Style.Triggers>
+				</Style>
+			</ToolBar.Resources>
+
+			<ToggleButton Style="{StaticResource toolToggleButton}" Command="ApplicationCommands.Cut">
+				<Image Source="..\Properties\EditCut.png" Height="24"/>
+			</ToggleButton>
+			<ToggleButton Style="{StaticResource toolToggleButton}" Command="ApplicationCommands.Copy">
+				<Image Source="..\Properties\EditCopy.png"/>
+			</ToggleButton>
+			<ToggleButton Style="{StaticResource toolToggleButton}" Command="ApplicationCommands.Paste">
+				<Image Source="..\Properties\EditPaste.png"/>
+			</ToggleButton>
+
+			<Separator />
+
+			<ToggleButton Style="{StaticResource toolToggleButton}" Command="ApplicationCommands.Undo">
+				<Image Source="..\Properties\EditUndo.png"/>
+			</ToggleButton>
+			<ToggleButton Style="{StaticResource toolToggleButton}" Command="ApplicationCommands.Redo">
+				<Image Source="..\Properties\EditRedo.png"/>
+			</ToggleButton>
+
+			<Separator />
+
+			<ToggleButton Name="boldButton" Style="{StaticResource toolToggleButton}" Command="EditingCommands.ToggleBold" IsChecked="{Binding Path=IsBoldFont, Mode=OneWay}">
+				<TextBlock FontSize="18" FontWeight="Bold">B</TextBlock>
+			</ToggleButton>
+			<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.ToggleItalic" IsChecked="{Binding Path=IsItalicFont, Mode=OneWay}">
+				<TextBlock FontSize="18" FontWeight="Bold" FontStyle="Italic">I</TextBlock>
+			</ToggleButton>
+			<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.ToggleUnderline" IsChecked="{Binding Path=IsUnderlineFont, Mode=OneWay}">
+				<TextBlock FontSize="18" FontWeight="Bold" TextDecorations="Underline">U</TextBlock>
+			</ToggleButton>
+			<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.IncreaseFontSize">
+				<Image Source="..\Properties\CharacterGrowFont.png"></Image>
+			</ToggleButton>
+			<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.DecreaseFontSize">
+				<Image Source="..\Properties\CharacterShrinkFont.png"></Image>
+			</ToggleButton>
+
+			<Separator />
+
+			<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.ToggleBullets" IsChecked="{Binding Path=IsBulletted, Mode=OneWay}">
+				<Image Source="..\Properties\ListBullets.png"/>
+			</ToggleButton>
+			<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.ToggleNumbering" IsChecked="{Binding Path=IsNumbered, Mode=OneWay}">
+				<Image Source="..\Properties\ListNumbering.png"/>
+			</ToggleButton>
+
+			<Separator />
+
+			<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.AlignLeft" IsChecked="{Binding Path=IsLeftAlignment, Mode=OneWay}">
+				<Image Source="..\Properties\ParagraphLeftJustify.png"/>
+			</ToggleButton>
+			<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.AlignCenter" IsChecked="{Binding Path=IsCenterAlignment, Mode=OneWay}">
+				<Image Source="..\Properties\ParagraphCenterJustify.png"/>
+			</ToggleButton>
+			<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.AlignRight" IsChecked="{Binding Path=IsRightAlignment, Mode=OneWay}">
+				<Image Source="..\Properties\ParagraphRightJustify.png"/>
+			</ToggleButton>
+			<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.AlignJustify" IsChecked="{Binding Path=IsJustifyAlignment, Mode=OneWay}">
+				<Image Source="..\Properties\ParagraphFullJustify.png"/>
+			</ToggleButton>
+
+			<Separator />
+
+			<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.IncreaseIndentation" IsChecked="False">
+				<Image Source="..\Properties\ParagraphIncreaseIndentation.png"></Image>
+			</ToggleButton>
+			<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.DecreaseIndentation" IsChecked="False">
+				<Image Source="..\Properties\ParagraphDecreaseIndentation.png"></Image>
+			</ToggleButton>
+		</ToolBar>
+
+		<RichTextBox Grid.Row="1" Name="editor" AcceptsReturn="True" AcceptsTab="True" SpellCheck.IsEnabled="True" TextChanged="editorTextChanged" SelectionChanged="editorSelectionChanged"/>
+
+		<StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+			<Button Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="ButtonOkClick"/>
+			<Button Content="{Binding Source={x:Static lc:Resources.TitleCancel}, Mode=OneTime}" IsCancel="True"/>
+		</StackPanel>
+	</Grid>
+</Window>

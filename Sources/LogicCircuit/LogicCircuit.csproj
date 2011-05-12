@@ -108,6 +108,9 @@
     <Compile Include="Dialog\DialogROM.xaml.cs">
       <DependentUpon>DialogROM.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialog\DialogText.xaml.cs">
+      <DependentUpon>DialogText.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Editor\AreaMarker.cs" />
     <Compile Include="Editor\CircuitDescriptor.cs" />
     <Compile Include="Editor\CircuitDescriptorComparer.cs" />
@@ -318,6 +321,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Dialog\DialogText.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Mainframe.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -420,30 +427,38 @@
     <Resource Include="Properties\LogicCircuit.png" />
     <Resource Include="Properties\question.png" />
     <Resource Include="Properties\warning.png" />
+    <Resource Include="Properties\CharacterGrowFont.png" />
+    <Resource Include="Properties\CharacterShrinkFont.png" />
+    <Resource Include="Properties\EditCopy.png" />
+    <Resource Include="Properties\EditCut.png" />
+    <Resource Include="Properties\EditPaste.png" />
+    <Resource Include="Properties\EditRedo.png" />
+    <Resource Include="Properties\EditUndo.png" />
+    <Resource Include="Properties\ListBullets.png" />
+    <Resource Include="Properties\ListNumbering.png" />
+    <Resource Include="Properties\ParagraphCenterJustify.png" />
+    <Resource Include="Properties\ParagraphDecreaseIndentation.png" />
+    <Resource Include="Properties\ParagraphFullJustify.png" />
+    <Resource Include="Properties\ParagraphIncreaseIndentation.png" />
+    <Resource Include="Properties\ParagraphLeftJustify.png" />
+    <Resource Include="Properties\ParagraphRightJustify.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Schema\ConvertSettings.xslt" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Schema\ConvertFrom.1.0.0.2.xslt" />
     <Resource Include="Schema\ConvertFrom.1.0.0.3.xslt" />
+    <Resource Include="Schema\ConvertFrom.1.0.0.4.xslt" />
     <Resource Include="Schema\Empty.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="LogicCircuit.ruleset">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Schema\CircuitProject.xml">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="LogicCircuit.ruleset">
+      <SubType>Designer</SubType>
+    </None>
     <CodeAnalysisDictionary Include="CustomDictionary.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Schema\ConvertFrom.1.0.0.4.xslt" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>$(SolutionDir)Tools\ResourceWrapper.Generator.exe ProjectPath=$(ProjectPath)

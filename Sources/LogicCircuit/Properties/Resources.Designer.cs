@@ -1370,5 +1370,12 @@ namespace LogicCircuit {
  		public static string TriStateGroupName {
 			get { return ResourceManager.GetString("TriStateGroupName", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Text block.
+		/// </summary>
+ 		public static string TextNotation {
+			get { return ResourceManager.GetString("TextNotation", Culture); }
+		}
 	}
 }
