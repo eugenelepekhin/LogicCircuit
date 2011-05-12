@@ -166,7 +166,7 @@ namespace LogicCircuit {
 
 		private Canvas CreateGlyphCanvas() {
 			Canvas canvas = new Canvas();
-			Panel.SetZIndex(canvas, 1);
+			Panel.SetZIndex(canvas, this.Z);
 			canvas.DataContext = this;
 			canvas.Width = Symbol.ScreenPoint(this.Circuit.SymbolWidth);
 			canvas.Height = Symbol.ScreenPoint(this.Circuit.SymbolHeight);
