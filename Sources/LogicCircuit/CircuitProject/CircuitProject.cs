@@ -159,6 +159,11 @@ namespace LogicCircuit {
 			foreach(Wire wire in paste.ProjectSet.Project.LogicalCircuit.Wires()) {
 				result.Add(wire.CopyTo(target));
 			}
+			foreach(TextNote symbol in paste.ProjectSet.Project.LogicalCircuit.TextNotes()) {
+				if(symbol.IsValid) {
+					result.Add(symbol.CopyTo(target));
+				}
+			}
 
 			if(0 < result.Count && paste.ProjectSet.Project.LogicalCircuit.LogicalCircuitId == target.LogicalCircuitId) {
 				foreach(Symbol symbol in result) {
