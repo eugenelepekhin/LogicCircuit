@@ -406,6 +406,10 @@ namespace LogicCircuit {
 			if(wire != null) {
 				return new WireMarker(wire);
 			}
+			TextNote textNote = symbol as TextNote;
+			if(textNote != null) {
+				return new TextNoteMarker(textNote);
+			}
 			throw new InvalidOperationException();
 		}
 
@@ -472,6 +476,14 @@ namespace LogicCircuit {
 			foreach(Wire wire in logicalCircuit.Wires()) {
 				if(area.Contains(Symbol.ScreenPoint(wire.Point1)) && area.Contains(Symbol.ScreenPoint(wire.Point2))) {
 					this.Select(wire);
+				}
+			}
+			foreach(TextNote symbol in logicalCircuit.TextNotes()) {
+				Rect item = new Rect(Symbol.ScreenPoint(symbol.Point),
+					new Size(Symbol.ScreenPoint(symbol.Width), Symbol.ScreenPoint(symbol.Height))
+				);
+				if(area.Contains(item)) {
+					this.Select(symbol);
 				}
 			}
 		}
@@ -635,12 +647,9 @@ namespace LogicCircuit {
 
 		public void DiagramDrop(DragEventArgs e) {
 			if(this.InEditMode) {
-				ICircuitDescriptor descriptor = e.Data.GetData(EditorDiagram.CircuitDescriptorDataFormat, false) as ICircuitDescriptor;
+				IDescriptor descriptor = e.Data.GetData(EditorDiagram.CircuitDescriptorDataFormat, false) as IDescriptor;
 				if(descriptor != null) {
-					GridPoint point = Symbol.GridPoint(e.GetPosition(this.Diagram));
-					this.CircuitProject.InTransaction(() => {
-						this.CircuitProject.CircuitSymbolSet.Create(descriptor.GetCircuitToDrop(this.CircuitProject), this.Project.LogicalCircuit, point.X, point.Y);
-					});
+					descriptor.CreateSymbol(this, Symbol.GridPoint(e.GetPosition(this.Diagram)));
 				}
 			}
 			e.Handled = true;
@@ -648,6 +657,14 @@ namespace LogicCircuit {
 
 		public void DiagramMouseDown(MouseButtonEventArgs e) {
 			FrameworkElement element = e.OriginalSource as FrameworkElement;
+			if(element == null) {
+				FrameworkContentElement content = e.OriginalSource as FrameworkContentElement;
+				Tracer.Assert(content != null);
+				while(element == null && content != null) {
+					element = content.Parent as FrameworkElement;
+					content = content.Parent as FrameworkContentElement;
+				}
+			}
 			Tracer.Assert(element != null);
 			Marker marker = null;
 			Symbol symbol = null;
@@ -759,16 +776,16 @@ namespace LogicCircuit {
 						return;
 					}
 
+					if((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control) {
+						this.Select(symbol);
+					} else {
+						this.ClearSelection();
+						this.StartMove(this.SelectSymbol(symbol), e.GetPosition(this.Diagram));
+					}
+
 					CircuitSymbol circuitSymbol = symbol as CircuitSymbol;
 					if(circuitSymbol != null) {
-						if((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control) {
-							this.Select(symbol);
-						} else {
-							this.ClearSelection();
-							this.StartMove(this.SelectSymbol(symbol), e.GetPosition(this.Diagram));
-						}
 						this.ShowStatus(circuitSymbol);
-						return;
 					}
 				}
 			} else {
@@ -832,10 +849,7 @@ namespace LogicCircuit {
 
 		private void MarkerDoubleClick(Marker marker) {
 			if(this.InEditMode) {
-				CircuitSymbolMarker circuitSymbolMarker = marker as CircuitSymbolMarker;
-				if(circuitSymbolMarker != null) {
-					this.Edit(circuitSymbolMarker.CircuitSymbol);
-				}
+				this.Edit(marker.Symbol);
 			}
 		}
 

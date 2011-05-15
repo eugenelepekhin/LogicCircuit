@@ -455,6 +455,17 @@
 									</StackPanel>
 								</Border>
 							</DataTemplate>
+
+							<DataTemplate DataType="{x:Type lc:TextNoteDescriptor}">
+								<StackPanel Style="{StaticResource DescriptorPanel}"
+									MouseDown="DescriptorMouseDown"
+									MouseUp="DescriptorMouseUp"
+									MouseMove="DescriptorMouseMove"
+								>
+									<TextBlock Text="{Binding Path=Circuit.Name}" FontSize="14" VerticalAlignment="Center"/>
+									<TextBlock Text="{Binding Path=Circuit.Name}" VerticalAlignment="Center"/>
+								</StackPanel>
+							</DataTemplate>
 						</ListView.Resources>
 					</ListView>
 				</GroupBox>

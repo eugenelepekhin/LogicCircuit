@@ -7,19 +7,21 @@ using System.Text;
 using System.Windows;
 
 namespace LogicCircuit {
-	public interface ICircuitDescriptor {
+	public interface IDescriptor {
 		Circuit Circuit { get; }
-		Circuit GetCircuitToDrop(CircuitProject circuitProject);
+		void CreateSymbol(EditorDiagram editor, GridPoint point);
 	}
 	
-	public abstract class CircuitDescriptor<T> : ICircuitDescriptor where T:Circuit {
+	public abstract class CircuitDescriptor<T> : IDescriptor where T:Circuit {
 		public T Circuit { get; private set; }
-		Circuit ICircuitDescriptor.Circuit { get { return this.Circuit; } }
+		Circuit IDescriptor.Circuit { get { return this.Circuit; } }
 		public CircuitGlyph CircuitGlyph { get; private set; }
 
-		public abstract T GetCircuitToDrop(CircuitProject circuitProject);
-		Circuit ICircuitDescriptor.GetCircuitToDrop(CircuitProject circuitProject) {
-			return this.GetCircuitToDrop(circuitProject);
+		protected abstract T GetCircuitToDrop(CircuitProject circuitProject);
+
+		public void CreateSymbol(EditorDiagram editor, GridPoint point) {
+			CircuitProject project = editor.CircuitProject;
+			project.InTransaction(() => project.CircuitSymbolSet.Create(this.GetCircuitToDrop(project), editor.Project.LogicalCircuit, point.X, point.Y));
 		}
 
 		protected CircuitDescriptor(T circuit) {
@@ -91,7 +93,7 @@ namespace LogicCircuit {
 			this.InputCount = gate.InputCount;
 		}
 
-		public override Gate GetCircuitToDrop(CircuitProject circuitProject) {
+		protected override Gate GetCircuitToDrop(CircuitProject circuitProject) {
 			return circuitProject.GateSet.Gate(this.Circuit.GateType, this.InputCount, this.Circuit.InvertedOutput);
 		}
 
@@ -115,7 +117,7 @@ namespace LogicCircuit {
 			this.Notation = string.Empty;
 		}
 
-		public override CircuitButton GetCircuitToDrop(CircuitProject circuitProject) {
+		protected override CircuitButton GetCircuitToDrop(CircuitProject circuitProject) {
 			return circuitProject.CircuitButtonSet.Create(this.Notation);
 		}
 	}
@@ -132,7 +134,7 @@ namespace LogicCircuit {
 			this.BitWidthRange = PinDescriptor.BitRange(1);
 		}
 
-		public override Constant GetCircuitToDrop(CircuitProject circuitProject) {
+		protected override Constant GetCircuitToDrop(CircuitProject circuitProject) {
 			int value;
 			if(!int.TryParse(this.Value, NumberStyles.HexNumber, Resources.Culture, out value)) {
 				value = 0;
@@ -155,7 +157,7 @@ namespace LogicCircuit {
 			this.DataBitWidthRange = PinDescriptor.BitRange(1);
 		}
 
-		public override Memory GetCircuitToDrop(CircuitProject circuitProject) {
+		protected override Memory GetCircuitToDrop(CircuitProject circuitProject) {
 			return circuitProject.MemorySet.Create(this.Circuit.Writable, this.AddressBitWidth, this.DataBitWidth);
 		}
 	}
@@ -176,7 +178,7 @@ namespace LogicCircuit {
 			this.PinSideRange = (PinSide[])Enum.GetValues(typeof(PinSide));
 		}
 
-		public override Pin GetCircuitToDrop(CircuitProject circuitProject) {
+		protected override Pin GetCircuitToDrop(CircuitProject circuitProject) {
 			Pin pin = circuitProject.PinSet.Create(circuitProject.ProjectSet.Project.LogicalCircuit, this.Circuit.PinType, this.BitWidth);
 			pin.PinSide = this.PinSide;
 			return pin;
@@ -224,7 +226,7 @@ namespace LogicCircuit {
 			this.CircuitRotationRange = (CircuitRotation[])Enum.GetValues(typeof(CircuitRotation));
 		}
 
-		public override Splitter GetCircuitToDrop(CircuitProject circuitProject) {
+		protected override Splitter GetCircuitToDrop(CircuitProject circuitProject) {
 			if(this.BitWidth < this.PinCount) {
 				throw new CircuitException(Cause.UserError, Resources.ErrorWrongSplitter);
 			}
@@ -241,7 +243,7 @@ namespace LogicCircuit {
 
 		public bool IsCurrent { get { return this.Circuit == this.Circuit.CircuitProject.ProjectSet.Project.LogicalCircuit; } }
 
-		public override LogicalCircuit GetCircuitToDrop(CircuitProject circuitProject) {
+		protected override LogicalCircuit GetCircuitToDrop(CircuitProject circuitProject) {
 			return this.Circuit;
 		}
 
@@ -254,6 +256,28 @@ namespace LogicCircuit {
 
 		public void NotifyCurrentChanged() {
 			this.NotifyPropertyChanged("IsCurrent");
+		}
+	}
+
+	public class TextNoteDescriptor : IDescriptor {
+
+		public Circuit Circuit { get; private set; }
+
+		public TextNoteDescriptor(CircuitProject circuitProject) {
+			// create dummy circuit to provide category and name for sorting and displaying in list of circuits descriptors
+			LogicalCircuit circuit = circuitProject.LogicalCircuitSet.Create();
+			circuit.Category = "Text Note";
+			circuit.Name = "Text Note";
+			this.Circuit = circuit;
+		}
+
+		public void CreateSymbol(EditorDiagram editor, GridPoint point) {
+			CircuitProject project = editor.CircuitProject;
+			DialogText dialog = new DialogText(null);
+			bool? result = editor.Mainframe.ShowDialog(dialog);
+			if(result.HasValue && result.Value && TextNote.IsValidText(dialog.Document)) {
+				project.InTransaction(() => project.TextNoteSet.Create(editor.Project.LogicalCircuit, point, dialog.Document));
+			}
 		}
 	}
 }

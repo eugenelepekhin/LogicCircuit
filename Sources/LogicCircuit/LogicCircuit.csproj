@@ -193,6 +193,7 @@
     </Compile>
     <Compile Include="Editor\Marker.cs" />
     <Compile Include="Editor\Switcher.cs" />
+    <Compile Include="Editor\TextNoteMarker.cs" />
     <Compile Include="Editor\WireMarker.cs" />
     <Compile Include="Editor\WirePledge.cs" />
     <Compile Include="Editor\WirePointMarker.cs" />

@@ -398,8 +398,13 @@ namespace LogicCircuit {
 			DialogText dialog = new DialogText(textNote.Note);
 			bool? result = this.Mainframe.ShowDialog(dialog);
 			if(result.HasValue && result.Value) {
-				textNote.Note = dialog.Document;
-				textNote.UpdateGlyph();
+				string text = dialog.Document;
+				if(TextNote.IsValidText(text)) {
+					this.CircuitProject.InTransaction(() => { textNote.Note = dialog.Document; });
+					textNote.UpdateGlyph();
+				} else {
+					this.CircuitProject.InTransaction(() => textNote.Delete());
+				}
 			}
 		}
 
@@ -496,6 +501,9 @@ namespace LogicCircuit {
 				foreach(Wire wire in logicalCircuit.Wires()) {
 					this.Select(wire);
 				}
+				foreach(TextNote symbol in logicalCircuit.TextNotes()) {
+					this.Select(symbol);
+				}
 			}
 		}
 
@@ -577,7 +585,10 @@ namespace LogicCircuit {
 
 		public void SelectAllButWires() {
 			if(this.InEditMode) {
-				foreach(CircuitSymbol symbol in this.Project.LogicalCircuit.CircuitSymbols()) {
+				foreach(Symbol symbol in this.Project.LogicalCircuit.CircuitSymbols()) {
+					this.Select(symbol);
+				}
+				foreach(Symbol symbol in this.Project.LogicalCircuit.TextNotes()) {
 					this.Select(symbol);
 				}
 			}
@@ -593,7 +604,10 @@ namespace LogicCircuit {
 
 		public void UnselectAllButWires() {
 			if(this.InEditMode) {
-				foreach(CircuitSymbol symbol in this.Project.LogicalCircuit.CircuitSymbols()) {
+				foreach(Symbol symbol in this.Project.LogicalCircuit.CircuitSymbols()) {
+					this.Unselect(symbol);
+				}
+				foreach(Symbol symbol in this.Project.LogicalCircuit.TextNotes()) {
 					this.Unselect(symbol);
 				}
 			}
@@ -653,7 +667,7 @@ namespace LogicCircuit {
 
 		public void DescriptorMouseDown(FrameworkElement sender, MouseButtonEventArgs e) {
 			if(e.ChangedButton == MouseButton.Left && this.InEditMode) {
-				ICircuitDescriptor descriptor = sender.DataContext as ICircuitDescriptor;
+				IDescriptor descriptor = sender.DataContext as IDescriptor;
 				if(descriptor != null) {
 					if(1 < e.ClickCount) {
 						LogicalCircuitDescriptor logicalCircuitDescriptor = descriptor as LogicalCircuitDescriptor;

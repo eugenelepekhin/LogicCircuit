@@ -70,7 +70,8 @@ namespace LogicCircuit {
 		public Mainframe() {
 			this.DataContext = this;
 			this.InitializeComponent();
-			ThreadPool.QueueUserWorkItem(o => {
+
+			Thread thread = new Thread(new ThreadStart(() => {
 				try {
 					string file = App.CurrentApp.FileToOpen;
 					if(string.IsNullOrEmpty(file) || !File.Exists(file)) {
@@ -88,7 +89,13 @@ namespace LogicCircuit {
 					this.ReportException(exception);
 					this.Edit(null);
 				}
-			});
+			}));
+			//TextNote validator will instantiate FlowDocument that in some cases required to happened only on STA.
+			thread.SetApartmentState(ApartmentState.STA);
+			thread.IsBackground = true;
+			thread.Name = "ProjectLoader";
+			thread.Priority = ThreadPriority.AboveNormal;
+			thread.Start();
 		}
 
 		protected override void OnClosing(System.ComponentModel.CancelEventArgs e) {

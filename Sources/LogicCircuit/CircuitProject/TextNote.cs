@@ -27,13 +27,20 @@ namespace LogicCircuit {
 			doc.Focusable = false;
 			doc.DataContext = this;
 			doc.Cursor = Cursors.Arrow;
+			doc.IsSelectionEnabled = false;
+			doc.IsTabStop = false;
+			doc.IsToolBarVisible = false;
 			Panel.SetZIndex(doc, this.Z);
-			this.UpdateGlyph();
+			doc.Document = this.Load();
 			return doc;
 		}
 
+		private static FlowDocument Load(string text) {
+			return XamlReader.Parse(text) as FlowDocument;
+		}
+
 		private FlowDocument Load() {
-			return XamlReader.Parse(this.Note) as FlowDocument;
+			return TextNote.Load(this.Note);
 		}
 
 		public void UpdateGlyph() {
@@ -51,6 +58,11 @@ namespace LogicCircuit {
 
 		public override int Z { get { return 0; } }
 
+		public GridPoint Point {
+			get { return new GridPoint(this.X, this.Y); }
+			set { this.X = value.X; this.Y = value.Y; }
+		}
+
 		public override void Shift(int dx, int dy) {
 			this.X += dx;
 			this.Y += dy;
@@ -61,18 +73,18 @@ namespace LogicCircuit {
 		}
 
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-		public bool IsValid {
-			get {
-				if(!string.IsNullOrEmpty(this.Note)) {
-					try {
-						FlowDocument doc = this.Load();
-						return doc != null && 0 < (new TextRange(doc.ContentStart, doc.ContentEnd).Text.Trim().Length);
-					} catch {
-					}
+		public static bool IsValidText(string text) {
+			if(!string.IsNullOrEmpty(text)) {
+				try {
+					FlowDocument doc = TextNote.Load(text);
+					return doc != null && 0 < (new TextRange(doc.ContentStart, doc.ContentEnd).Text.Trim().Length);
+				} catch {
 				}
-				return false;
 			}
+			return false;
 		}
+
+		public bool IsValid { get { return TextNote.IsValidText(this.Note); } }
 	}
 
 	public partial class TextNoteSet {

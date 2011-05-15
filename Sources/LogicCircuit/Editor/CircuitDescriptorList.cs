@@ -11,7 +11,7 @@ namespace LogicCircuit {
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		private static List<ICircuitDescriptor> primitiveList;
+		private static List<IDescriptor> primitiveList;
 
 		private readonly CircuitProject circuitProject;
 		private readonly Dictionary<LogicalCircuit, LogicalCircuitDescriptor> logicalCircuitDescriptors = new Dictionary<LogicalCircuit, LogicalCircuitDescriptor>();
@@ -31,7 +31,7 @@ namespace LogicCircuit {
 			this.NotifyPropertyChanged();
 		}
 
-		public IEnumerable<ICircuitDescriptor> CircuitDescriptors {
+		public IEnumerable<IDescriptor> CircuitDescriptors {
 			get {
 				this.current = null;
 				this.logicalCircuitDescriptors.Clear();
@@ -43,12 +43,12 @@ namespace LogicCircuit {
 					}
 					this.logicalCircuitDescriptors.Add(circuit, descriptor);
 				}
-				List<ICircuitDescriptor> list = new List<ICircuitDescriptor>(this.logicalCircuitDescriptors.Values);
+				List<IDescriptor> list = new List<IDescriptor>(this.logicalCircuitDescriptors.Values);
 				list.Sort(CircuitDescriptorComparer.Comparer);
-				foreach(ICircuitDescriptor d in list) {
+				foreach(IDescriptor d in list) {
 					yield return d;
 				}
-				foreach(ICircuitDescriptor d in CircuitDescriptorList.primitiveList) {
+				foreach(IDescriptor d in CircuitDescriptorList.primitiveList) {
 					yield return d;
 				}
 			}
@@ -89,7 +89,9 @@ namespace LogicCircuit {
 		private static void InitPrimitive() {
 			CircuitProject project = CircuitProject.Create(null);
 			project.StartTransaction();
-			List<ICircuitDescriptor> list = new List<ICircuitDescriptor>();
+			List<IDescriptor> list = new List<IDescriptor>();
+
+			list.Add(new TextNoteDescriptor(project));
 
 			list.Add(new PinDescriptor(project, PinType.Input));
 			list.Add(new PinDescriptor(project, PinType.Output));
