@@ -53,6 +53,10 @@ namespace LogicCircuit {
 				throw new InvalidOperationException();
 			}
 
+			public override void DeleteSymbol() {
+				throw new InvalidOperationException();
+			}
+
 			public override Symbol CopyTo(LogicalCircuit target) {
 				throw new InvalidOperationException();
 			}

@@ -58,6 +58,10 @@ namespace LogicCircuit {
 			this.Y2 += dy;
 		}
 
+		public override void DeleteSymbol() {
+			this.Delete();
+		}
+
 		public override Symbol CopyTo(LogicalCircuit target) {
 			return target.CircuitProject.WireSet.Copy(this, target);
 		}

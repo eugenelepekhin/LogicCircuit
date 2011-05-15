@@ -7,7 +7,7 @@ using System.Xml;
 namespace LogicCircuit {
 	public partial class CircuitSymbol {
 
-		public void DeleteSymbol() {
+		public override void DeleteSymbol() {
 			if(this.Circuit is Gate || this.Circuit is LogicalCircuit) {
 				this.Delete();
 			} else {

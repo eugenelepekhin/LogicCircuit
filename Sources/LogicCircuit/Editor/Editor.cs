@@ -347,15 +347,7 @@ namespace LogicCircuit {
 				this.ClearSelection();
 				this.CircuitProject.InTransaction(() => {
 					foreach(Symbol symbol in selection) {
-						CircuitSymbol circuitSymbol = symbol as CircuitSymbol;
-						if(circuitSymbol != null) {
-							circuitSymbol.DeleteSymbol();
-						} else {
-							Wire wire = symbol as Wire;
-							if(wire != null) {
-								wire.Delete();
-							}
-						}
+						symbol.DeleteSymbol();
 					}
 				});
 			}

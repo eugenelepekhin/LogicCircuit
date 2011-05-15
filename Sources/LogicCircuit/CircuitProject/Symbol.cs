@@ -153,6 +153,8 @@ namespace LogicCircuit {
 		public abstract bool HasCreatedGlyph { get; }
 		public abstract void PositionGlyph();
 
+		public abstract void DeleteSymbol();
+
 		protected void NotifyPropertyChanged(string name) {
 			PropertyChangedEventHandler handler = this.PropertyChanged;
 			if(handler != null) {
