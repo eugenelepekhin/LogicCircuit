@@ -634,6 +634,24 @@ namespace LogicCircuit {
 			}
 		}
 
+		private void CommitMove(TextNoteMarker marker) {
+			TextNote textNote = marker.TextNote;
+			Rect rect = marker.ResizedRect();
+			int x = Symbol.GridPoint(rect.X);
+			int y = Symbol.GridPoint(rect.Y);
+			int w = Math.Max(Symbol.GridPoint(rect.Width), 1);
+			int h = Math.Max(Symbol.GridPoint(rect.Height), 1);
+			if(x != textNote.X || y != textNote.Y || w != textNote.Width || h != textNote.Height) {
+				this.CircuitProject.InTransaction(() => {
+					textNote.X = x;
+					textNote.Y = y;
+					textNote.Width = w;
+					textNote.Height = h;
+				});
+				marker.PositionGlyph();
+			}
+		}
+
 		//--- User Input Event Handling ---
 
 		public void DiagramDragOver(DragEventArgs e) {

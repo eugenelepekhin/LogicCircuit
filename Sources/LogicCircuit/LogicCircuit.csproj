@@ -227,6 +227,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="GridLengthAnimation.cs" />
     <Compile Include="GridPoint.cs" />
+    <Compile Include="HyperlinkNavigationCommand.cs" />
     <Compile Include="Mainframe.Commands.cs" />
     <Compile Include="Mainframe.File.cs" />
     <Compile Include="Runner\CircuitMap.cs" />
@@ -384,6 +385,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="SymbolShapes\MarkerLine.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SymbolShapes\TextNote.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

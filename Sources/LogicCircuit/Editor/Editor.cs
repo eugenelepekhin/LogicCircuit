@@ -463,7 +463,7 @@ namespace LogicCircuit {
 						}
 					}
 				}
-			} else {
+			} else if(this.InEditMode) {
 				TextNote textNote = symbol as TextNote;
 				if(textNote != null) {
 					this.Edit(textNote);

@@ -146,5 +146,12 @@ namespace LogicCircuit {
  		public static string Splitter {
 			get { return ResourceManager.GetString("Splitter", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to content of the file: "textnote.xaml".
+		/// </summary>
+ 		public static string TextNote {
+			get { return ResourceManager.GetString("TextNote", Culture); }
+		}
 	}
 }

@@ -6,6 +6,8 @@
 	StartupUri="Mainframe.xaml"
 >
 	<Application.Resources>
+		<lc:HyperlinkNavigationCommand x:Key="HyperlinkNavigationCommand"/>
+
 		<LinearGradientBrush x:Key="WindowBackground" StartPoint="0.25,0" EndPoint="0.75,1" PresentationOptions:Freeze="True">
 			<GradientStop Color="{x:Static SystemColors.ControlLightLightColor}" Offset="0"/>
 			<GradientStop Color="{x:Static SystemColors.ControlColor}" Offset="1"/>

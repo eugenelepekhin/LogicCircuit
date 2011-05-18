@@ -21,17 +21,10 @@ namespace LogicCircuit {
 		public override bool HasCreatedGlyph { get { return this.glyph != null; } }
 
 		private FlowDocumentScrollViewer CreateGlyph() {
-			FlowDocumentScrollViewer doc = new FlowDocumentScrollViewer();
-			doc.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
-			doc.Zoom = 1;
-			doc.Focusable = false;
+			FlowDocumentScrollViewer doc = Symbol.Skin<FlowDocumentScrollViewer>(SymbolShape.TextNote);
 			doc.DataContext = this;
-			doc.Cursor = Cursors.Arrow;
-			doc.IsSelectionEnabled = false;
-			doc.IsTabStop = false;
-			doc.IsToolBarVisible = false;
-			Panel.SetZIndex(doc, this.Z);
 			doc.Document = this.Load();
+			Panel.SetZIndex(doc, this.Z);
 			return doc;
 		}
 
@@ -89,6 +82,10 @@ namespace LogicCircuit {
 		}
 
 		public bool IsValid { get { return TextNote.IsValidText(this.Note); } }
+
+		partial void OnTextNoteChanged() {
+			this.PositionGlyph();
+		}
 	}
 
 	public partial class TextNoteSet {
