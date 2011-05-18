@@ -196,6 +196,15 @@ namespace LogicCircuit {
 					rect.Union(symbolRect);
 				}
 			}
+			foreach(TextNote symbol in logicalCircuit.TextNotes()) {
+				Rect symbolRect = new Rect(Symbol.ScreenPoint(symbol.Point), new Size(symbol.Glyph.Width, symbol.Glyph.Height));
+				if(isEmpty) {
+					rect = symbolRect;
+					isEmpty = false;
+				} else {
+					rect.Union(symbolRect);
+				}
+			}
 			if(!isEmpty) {
 				Canvas diagram = this.Diagram;
 				Brush oldBackground = diagram.Background;
