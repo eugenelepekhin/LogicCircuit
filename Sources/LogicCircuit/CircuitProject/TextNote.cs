@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using System.Windows.Markup;
 using System.Xml;
-using System.Windows.Input;
 
 namespace LogicCircuit {
 	public partial class TextNote {
@@ -23,22 +19,14 @@ namespace LogicCircuit {
 		private FlowDocumentScrollViewer CreateGlyph() {
 			FlowDocumentScrollViewer doc = Symbol.Skin<FlowDocumentScrollViewer>(SymbolShape.TextNote);
 			doc.DataContext = this;
-			doc.Document = this.Load();
+			doc.Document = TextNote.Load(this.Note);
 			Panel.SetZIndex(doc, this.Z);
 			return doc;
 		}
 
-		private static FlowDocument Load(string text) {
-			return XamlReader.Parse(text) as FlowDocument;
-		}
-
-		private FlowDocument Load() {
-			return TextNote.Load(this.Note);
-		}
-
 		public void UpdateGlyph() {
 			FlowDocumentScrollViewer doc = this.TextNoteGlyph;
-			doc.Document = this.Load();
+			doc.Document = TextNote.Load(this.Note);
 		}
 
 		public override void PositionGlyph() {
@@ -69,22 +57,41 @@ namespace LogicCircuit {
 			return target.CircuitProject.TextNoteSet.Copy(this, target);
 		}
 
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
 		public static bool IsValidText(string text) {
-			if(!string.IsNullOrEmpty(text)) {
-				try {
-					FlowDocument doc = TextNote.Load(text);
-					return doc != null && 0 < (new TextRange(doc.ContentStart, doc.ContentEnd).Text.Trim().Length);
-				} catch {
-				}
-			}
-			return false;
+			FlowDocument doc = TextNote.Load(text);
+			return doc != null && 0 < (new TextRange(doc.ContentStart, doc.ContentEnd).Text.Trim().Length);
 		}
 
 		public bool IsValid { get { return TextNote.IsValidText(this.Note); } }
 
 		partial void OnTextNoteChanged() {
 			this.PositionGlyph();
+		}
+
+		public static string Save(FlowDocument document) {
+			using(MemoryStream stream = new MemoryStream()) {
+				TextRange range = new TextRange(document.ContentStart, document.ContentEnd);
+				range.Save(stream, DataFormats.XamlPackage);
+				stream.Flush();
+				return Convert.ToBase64String(stream.ToArray(), Base64FormattingOptions.InsertLineBreaks);
+			}
+		}
+
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
+		public static FlowDocument Load(string text) {
+			if(!string.IsNullOrEmpty(text)) {
+				try {
+					using(MemoryStream stream = new MemoryStream(Convert.FromBase64String(text))) {
+						FlowDocument document = new FlowDocument();
+						TextRange range = new TextRange(document.ContentStart, document.ContentEnd);
+						range.Load(stream, DataFormats.XamlPackage);
+						return document;
+					}
+				} catch(Exception exception) {
+					Tracer.Report("TextNote.Load", exception);
+				}
+			}
+			return null;
 		}
 	}
 

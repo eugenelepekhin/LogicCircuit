@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using System.Windows.Markup;
 
 namespace LogicCircuit {
 	/// <summary>
@@ -35,7 +34,7 @@ namespace LogicCircuit {
 			this.DataContext = this;
 			this.InitializeComponent();
 			if(!string.IsNullOrEmpty(this.Document)) {
-				FlowDocument flowDoc = XamlReader.Parse(this.Document) as FlowDocument;
+				FlowDocument flowDoc = TextNote.Load(this.Document);
 				if(flowDoc != null) {
 					this.editor.Document = flowDoc;
 				}
@@ -89,7 +88,7 @@ namespace LogicCircuit {
 
 		private void ButtonOkClick(object sender, RoutedEventArgs e) {
 			try {
-				this.Document = XamlWriter.Save(this.editor.Document);
+				this.Document = TextNote.Save(this.editor.Document);
 				this.DialogResult = true;
 			} catch(Exception exception) {
 				App.Mainframe.ReportException(exception);
