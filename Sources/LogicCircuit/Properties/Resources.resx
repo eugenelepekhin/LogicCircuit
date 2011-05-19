@@ -754,6 +754,6 @@ Do you want to replace it?</value>
     <value>Tri-state group</value>
   </data>
   <data name="TextNotation" xml:space="preserve">
-    <value>Text block</value>
+    <value>Text Note</value>
   </data>
 </root>

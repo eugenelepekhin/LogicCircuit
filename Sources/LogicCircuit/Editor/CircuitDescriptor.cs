@@ -270,8 +270,8 @@ namespace LogicCircuit {
 		public TextNoteDescriptor(CircuitProject circuitProject) {
 			// create dummy circuit to provide category and name for sorting and displaying in list of circuits descriptors
 			LogicalCircuit circuit = circuitProject.LogicalCircuitSet.Create();
-			circuit.Category = "Text Note";
-			circuit.Name = "Text Note";
+			circuit.Category = Resources.TextNotation;
+			circuit.Name = Resources.TextNotation;
 			this.Circuit = circuit;
 		}
 

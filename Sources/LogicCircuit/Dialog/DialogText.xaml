@@ -107,7 +107,9 @@
 			</ToggleButton>
 		</ToolBar>
 
-		<RichTextBox Grid.Row="1" Name="editor" AcceptsReturn="True" AcceptsTab="True" SpellCheck.IsEnabled="True" TextChanged="editorTextChanged" SelectionChanged="editorSelectionChanged"/>
+		<RichTextBox Grid.Row="1" Name="editor" AcceptsReturn="True" AcceptsTab="True" SpellCheck.IsEnabled="True" TextChanged="editorTextChanged" SelectionChanged="editorSelectionChanged"
+			FontFamily="Georgia"
+		/>
 
 		<StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
 			<Button Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="ButtonOkClick"/>

@@ -1372,7 +1372,7 @@ namespace LogicCircuit {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Text block.
+		/// Looks up a localized string similar to Text Note.
 		/// </summary>
  		public static string TextNotation {
 			get { return ResourceManager.GetString("TextNotation", Culture); }

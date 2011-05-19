@@ -462,7 +462,25 @@
 									MouseUp="DescriptorMouseUp"
 									MouseMove="DescriptorMouseMove"
 								>
-									<TextBlock Text="{Binding Path=Circuit.Name}" FontSize="14" VerticalAlignment="Center"/>
+									<FlowDocumentScrollViewer VerticalAlignment="Center"
+										VerticalScrollBarVisibility="Hidden"
+										HorizontalScrollBarVisibility="Hidden"
+										Zoom="0.7"
+										Focusable="False"
+										Cursor="Arrow"
+										IsSelectionEnabled="False"
+										IsTabStop="False"
+										IsToolBarVisible="False"
+										MaxWidth="72"
+										Padding="0"
+										Margin="0"
+									>
+										<FlowDocument>
+											<Paragraph>Text</Paragraph>
+											<Paragraph>Note</Paragraph>
+										</FlowDocument>
+									</FlowDocumentScrollViewer>
+
 									<TextBlock Text="{Binding Path=Circuit.Name}" VerticalAlignment="Center"/>
 								</StackPanel>
 							</DataTemplate>
