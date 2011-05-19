@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Markup;
 using System.Xml;
 
 namespace LogicCircuit {
@@ -68,17 +71,17 @@ namespace LogicCircuit {
 			this.PositionGlyph();
 		}
 
-		public static string Save(FlowDocument document) {
+		private static string SavePackage(FlowDocument document) {
 			using(MemoryStream stream = new MemoryStream()) {
 				TextRange range = new TextRange(document.ContentStart, document.ContentEnd);
-				range.Save(stream, DataFormats.XamlPackage);
+				range.Save(stream, DataFormats.XamlPackage, true);
 				stream.Flush();
 				return Convert.ToBase64String(stream.ToArray(), Base64FormattingOptions.InsertLineBreaks);
 			}
 		}
 
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-		public static FlowDocument Load(string text) {
+		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
+		private static FlowDocument LoadPackage(string text) {
 			if(!string.IsNullOrEmpty(text)) {
 				try {
 					using(MemoryStream stream = new MemoryStream(Convert.FromBase64String(text))) {
@@ -88,10 +91,44 @@ namespace LogicCircuit {
 						return document;
 					}
 				} catch(Exception exception) {
-					Tracer.Report("TextNote.Load", exception);
+					Tracer.Report("TextNote.LoadPackage", exception);
 				}
 			}
 			return null;
+		}
+
+		private static string SaveXaml(FlowDocument document) {
+			return XamlWriter.Save(document);
+		}
+
+		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
+		private static FlowDocument LoadXaml(string text) {
+			try {
+				return XamlReader.Parse(text) as FlowDocument;
+			} catch(Exception exception) {
+				Tracer.Report("TextNote.SaveXaml", exception);
+			}
+			return null;
+		}
+
+		private static bool ContainsAny(string text, params string[] sample) {
+			return sample.Any(s => 0 <= text.IndexOf(s, StringComparison.OrdinalIgnoreCase));
+		}
+
+		public static string Save(FlowDocument document) {
+			string text = TextNote.SaveXaml(document);
+			if(!TextNote.ContainsAny(text, "<Image", "<BitmapImage")) {
+				return text;
+			}
+			return TextNote.SavePackage(document);
+		}
+
+		public static FlowDocument Load(string text) {
+			FlowDocument document = TextNote.LoadPackage(text);
+			if(document != null) {
+				return document;
+			}
+			return TextNote.LoadXaml(text);
 		}
 	}
 
