@@ -26,7 +26,7 @@ namespace LogicCircuit {
 			this.FileName = file;
 			this.DataContext = this;
 			this.InitializeComponent();
-			ThreadPool.QueueUserWorkItem(o => {
+			Thread thread = new Thread(new ThreadStart(() => {
 				try {
 					CircuitProject import = CircuitProject.Create(file);
 					List<CircuitInfo> list = new List<CircuitInfo>();
@@ -41,7 +41,13 @@ namespace LogicCircuit {
 					App.Mainframe.ReportException(exception);
 					this.Dispatcher.BeginInvoke(new Action(() => { this.Close(); }));
 				}
-			});
+			}));
+			//TextNote validator will instantiate FlowDocument that in some cases required to happened only on STA.
+			thread.SetApartmentState(ApartmentState.STA);
+			thread.IsBackground = true;
+			thread.Name = "ImportLoader";
+			thread.Priority = ThreadPriority.AboveNormal;
+			thread.Start();
 		}
 
 		private void NotifyPropertyChanged(string propertyName) {
