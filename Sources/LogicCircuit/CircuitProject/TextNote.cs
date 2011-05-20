@@ -124,11 +124,14 @@ namespace LogicCircuit {
 		}
 
 		public static FlowDocument Load(string text) {
-			FlowDocument document = TextNote.LoadPackage(text);
-			if(document != null) {
-				return document;
+			if(text.StartsWith("<FlowDocument", StringComparison.OrdinalIgnoreCase)) {
+				FlowDocument document = TextNote.LoadXaml(text);
+				if(document != null) {
+					return document;
+				}
 			}
-			return TextNote.LoadXaml(text);
+
+			return TextNote.LoadPackage(text);
 		}
 	}
 
