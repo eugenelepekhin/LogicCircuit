@@ -471,13 +471,13 @@
 										IsSelectionEnabled="False"
 										IsTabStop="False"
 										IsToolBarVisible="False"
-										MaxWidth="72"
+										MaxWidth="54"
 										Padding="0"
 										Margin="0"
 									>
-										<FlowDocument>
-											<Paragraph>Text</Paragraph>
-											<Paragraph>Note</Paragraph>
+										<FlowDocument PagePadding="5">
+											<Paragraph FontWeight="Bold">Text</Paragraph>
+											<Paragraph FontStyle="Italic">Note</Paragraph>
 										</FlowDocument>
 									</FlowDocumentScrollViewer>
 
