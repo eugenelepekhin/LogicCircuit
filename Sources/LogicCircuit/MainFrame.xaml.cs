@@ -298,8 +298,9 @@ namespace LogicCircuit {
 
 		private void PowerButtonMouseDown(object sender, MouseButtonEventArgs e) {
 			try {
-				if(this.Editor != null) {
-					this.Editor.Power = (this.PowerSwitch.IsChecked.Value == false);
+				Editor current = this.Editor;
+				if(current != null) {
+					current.Power = !current.Power;
 				}
 			} catch(Exception exception) {
 				Tracer.Report("MainFrame.PowerButtonMouseDown", exception);
