@@ -1,5 +1,6 @@
 ToDo list:
 
+Binding errors in the runing tree
 Move all string from main window to resources
 
 Move controls from autohiding panel
