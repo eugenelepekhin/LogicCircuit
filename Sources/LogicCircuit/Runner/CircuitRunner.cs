@@ -123,6 +123,12 @@ namespace LogicCircuit {
 									break;
 								case "IsMaximumSpeed":
 									this.isMaxSpeed = this.Editor.Project.IsMaximumSpeed;
+									if(this.isMaxSpeed) {
+										AutoResetEvent resetEvent = this.evaluationGate;
+										if(resetEvent != null) {
+											resetEvent.Set();
+										}
+									}
 									break;
 								}
 							});
@@ -165,7 +171,7 @@ namespace LogicCircuit {
 			Stopwatch stopwatch = new Stopwatch();
 			for(;;) {
 				bool flipClock = (0 < this.flipCount);
-				bool maxSpeed = this.Editor.Project.IsMaximumSpeed;
+				bool maxSpeed = this.isMaxSpeed;
 				if(!maxSpeed) {
 					stopwatch.Reset();
 					stopwatch.Start();
