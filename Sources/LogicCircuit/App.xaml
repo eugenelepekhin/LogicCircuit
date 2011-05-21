@@ -13,7 +13,6 @@
 			<GradientStop Color="{x:Static SystemColors.ControlColor}" Offset="1"/>
 		</LinearGradientBrush>
 
-
 		<SolidColorBrush x:Key="MarkerStroke" Color="#FFF505F5" PresentationOptions:Freeze="True"/>
 
 		<LinearGradientBrush x:Key="MarkerFill" StartPoint="0,0" EndPoint="1,1" PresentationOptions:Freeze="True">
