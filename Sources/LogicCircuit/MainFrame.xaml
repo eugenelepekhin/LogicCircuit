@@ -243,12 +243,11 @@
 								LargeChange="10"
 								SmallChange="1"
 								IsEnabled="{Binding Path=Editor.Power}"
-								AutoToolTipPlacement="TopLeft"
-								AutoToolTipPrecision="0"
 								IsMoveToPointEnabled="True"
 								TickPlacement="TopLeft"
 								ToolTip="Change the frequency of clock gates of the running circuit."
 							/>
+							<TextBlock Text="{Binding Path=Editor.Frequency}" VerticalAlignment="Center" Margin="3,0" ToolTip="Current Frequency"/>
 						</StackPanel>
 
 						<CheckBox Grid.Row="3"
@@ -557,8 +556,6 @@
 					<Label Content="_Zoom:" Target="{Binding ElementName=zoom}" VerticalAlignment="Center"/>
 					<Slider Width="100" x:Name="zoom" VerticalAlignment="Center" Background="{StaticResource SliderBackground}"
 						Minimum="0.1" Maximum="3" Value="{Binding Path=Editor.Zoom, Mode=TwoWay}"
-						AutoToolTipPlacement="TopLeft"
-						AutoToolTipPrecision="1"
 						IsMoveToPointEnabled="True"
 						TickPlacement="TopLeft"
 						Ticks="0, 0.5, 1, 1.5, 2, 2.5, 3"
@@ -568,6 +565,7 @@
 							<ScaleTransform ScaleX="1" ScaleY="0.8"/>
 						</Slider.LayoutTransform>
 					</Slider>
+					<TextBlock Text="{Binding Path=Editor.Zoom, StringFormat={}{0:P0}}" VerticalAlignment="Center" MinWidth="50" Margin="3,0" ToolTip="Current Zoom"/>
 
 					<!-- This check box is invisible and only used for controling animation in left column when power switches on and off. -->
 					<CheckBox IsChecked="{Binding Path=Editor.Power}" Visibility="Collapsed" IsTabStop="False">
