@@ -123,7 +123,7 @@
 
 		<!-- Main Menu -->
 		<Menu Grid.Row="0" Padding="3,1,3,1" Background="Transparent">
-			<MenuItem Header="_File">
+			<MenuItem Header="{x:Static lc:Resources.MenuHeaderFile}">
 				<MenuItem Command="ApplicationCommands.New"/>
 				<MenuItem Command="ApplicationCommands.Open"/>
 				<Separator/>
@@ -135,7 +135,7 @@
 				<Separator/>
 				<MenuItem Command="ApplicationCommands.Close"/>
 			</MenuItem>
-			<MenuItem Header="_Edit">
+			<MenuItem Header="{x:Static lc:Resources.MenuHeaderEdit}">
 				<MenuItem Command="ApplicationCommands.Undo"/>
 				<MenuItem Command="ApplicationCommands.Redo"/>
 				<Separator />
@@ -155,18 +155,18 @@
 				<MenuItem Command="lc:CustomCommands.EditSelectAllProbes"/>
 				<MenuItem Command="lc:CustomCommands.EditSelectAllProbesWithWire"/>
 			</MenuItem>
-            <MenuItem Header="_Circuit">
+            <MenuItem Header="{x:Static lc:Resources.MenuHeaderCircuit}">
 				<MenuItem Command="lc:CustomCommands.CircuitProject"/>
 				<MenuItem Command="lc:CustomCommands.CircuitCurrent"/>
 				<MenuItem Command="lc:CustomCommands.CircuitNew"/>
 				<MenuItem Command="lc:CustomCommands.CircuitDelete"/>
             </MenuItem>
-            <MenuItem Header="_Tools">
+            <MenuItem Header="{x:Static lc:Resources.MenuHeaderTools}">
 				<MenuItem Command="lc:CustomCommands.ToolsReport"/>
 				<MenuItem Command="lc:CustomCommands.ToolsOscilloscope"/>
 				<MenuItem Command="lc:CustomCommands.ToolsOptions"/>
 			</MenuItem>
-			<MenuItem Header="_Help">
+			<MenuItem Header="{x:Static lc:Resources.MenuHeaderHelp}">
 				<MenuItem Command="ApplicationCommands.Help"/>
 				<Separator />
 				<MenuItem Command="lc:CustomCommands.HelpAbout"/>
@@ -189,7 +189,7 @@
 				</Grid.RowDefinitions>
 
 				<!-- Top row with Running map tree -->
-				<GroupBox Grid.Row="0" Header="Running Circuit">
+				<GroupBox Grid.Row="0" Header="{x:Static lc:Resources.TitleRunningCircuit}">
 					<Grid>
 						<Grid.RowDefinitions>
 							<RowDefinition Height="*"/>
@@ -236,7 +236,7 @@
 						<Separator Grid.Row="1" HorizontalAlignment="Stretch"/>
 
 						<StackPanel Grid.Row="2" Orientation="Horizontal">
-							<Label Content="Fre_quency:" Target="{Binding ElementName=frequency}" VerticalAlignment="Center"/>
+							<Label Content="{x:Static lc:Resources.TitleFrequency}" Target="{Binding ElementName=frequency}" VerticalAlignment="Center"/>
 							<Slider Width="100" x:Name="frequency" VerticalAlignment="Center" Background="{StaticResource SliderBackground}"
 								Minimum="1" Maximum="50" Value="{Binding Path=Editor.Frequency, Mode=TwoWay}"
 								Ticks="1,10,20,30,40,50"
@@ -245,9 +245,9 @@
 								IsEnabled="{Binding Path=Editor.Power}"
 								IsMoveToPointEnabled="True"
 								TickPlacement="TopLeft"
-								ToolTip="Change the frequency of clock gates of the running circuit."
+								ToolTip="{x:Static lc:Resources.ToolTipFrequency}"
 							/>
-							<TextBlock Text="{Binding Path=Editor.Frequency}" VerticalAlignment="Center" Margin="3,0" ToolTip="Current Frequency"/>
+							<TextBlock Text="{Binding Path=Editor.Frequency}" VerticalAlignment="Center" Margin="3,0" ToolTip="{x:Static lc:Resources.ToolTipCurrentFrequency}"/>
 						</StackPanel>
 
 						<CheckBox Grid.Row="3"
@@ -255,19 +255,28 @@
 							IsEnabled="{Binding Path=Editor.Power}"
 						>
 							<CheckBox.ToolTip>
-								<Span>Runs the circuit on maximum possible speed ignoring frequency set by the slider on the left.
-								<LineBreak/>
-								<Bold>Warning!</Bold> Checking this box may lead to unresponsive user interface on some computers.</Span>
+								<!-- This can cause problems on some cultures as the structure of the markup is non-localaizable -->
+								<Span>
+									<Run Text="{x:Static lc:Resources.ToolTipIsMaximumSpeed1}"/>
+									<LineBreak/>
+									<Bold><Run Text="{x:Static lc:Resources.MessageWarning}"/></Bold>
+									<Run Text="{x:Static lc:Resources.ToolTipIsMaximumSpeed2}"/>
+								</Span>
 							</CheckBox.ToolTip>
 							<CheckBox.Content>
-								<Span>Run at maximum speed<LineBreak/>(<Bold>Warning!</Bold> High CPU load)</Span>
+								<Span>
+									<Run Text="{x:Static lc:Resources.TitleIsMaximumSpeed1}"/>
+									<LineBreak/>
+									<Bold><Run Text="{x:Static lc:Resources.MessageWarning}"/></Bold>
+									<Run Text="{x:Static lc:Resources.TitleIsMaximumSpeed2}"/>
+								</Span>
 							</CheckBox.Content>
 						</CheckBox>
 					</Grid>
 				</GroupBox>
 
 				<!-- Bottom row with List of circuit descriptors -->
-				<GroupBox Grid.Row="1" Header="Project">
+				<GroupBox Grid.Row="1" Header="{x:Static lc:Resources.TitleProject}">
 					<ListView SelectionMode="Single" BorderThickness="0" HorizontalContentAlignment="Stretch"
 						ItemsSource="{Binding Source={StaticResource circuitDescriptorList}}"
 					>
@@ -293,6 +302,11 @@
 								<Setter Property="Margin" Value="8,0,0,0"/>
 							</Style>
 
+							<Style x:Key="CircuitName" TargetType="TextBlock">
+								<Setter Property="Text" Value="{Binding Path=Circuit.Name}"/>
+								<Setter Property="VerticalAlignment" Value="Center"/>
+							</Style>
+
 							<DataTemplate DataType="{x:Type lc:GateDescriptor}">
 								<DataTemplate.Resources>
 									<Style TargetType="ComboBox">
@@ -313,9 +327,9 @@
 									<ContentControl/>
 									<ComboBox VerticalAlignment="Center" Margin="0,0,3,0" MinWidth="42"
 										SelectedItem="{Binding Path=InputCount, Mode=TwoWay}" ItemsSource="{Binding Path=InputCountRange}"
-										ToolTip="Choose number of inputs for the gate"
+										ToolTip="{x:Static lc:Resources.ToolTipGateInputCount}"
 									/>
-									<TextBlock Text="{Binding Path=Circuit.Name}" VerticalAlignment="Center"/>
+									<TextBlock Style="{StaticResource CircuitName}"/>
 								</StackPanel>
 							</DataTemplate>
 
@@ -326,8 +340,8 @@
 									MouseMove="DescriptorMouseMove"
 								>
 									<ContentControl/>
-									<TextBox Text="{Binding Path=Notation, Mode=TwoWay}" VerticalAlignment="Center" Width="20" ToolTip="Enter notation of the button"/>
-									<TextBlock Text="Button" VerticalAlignment="Center"/>
+									<TextBox Text="{Binding Path=Notation, Mode=TwoWay}" VerticalAlignment="Center" Width="20" ToolTip="{x:Static lc:Resources.ToolTipButtonNotation}"/>
+									<TextBlock Style="{StaticResource CircuitName}"/>
 								</StackPanel>
 							</DataTemplate>
 
@@ -348,16 +362,16 @@
 											<RowDefinition Height="Auto"/>
 										</Grid.RowDefinitions>
 										<ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Path=BitWidthRange}" SelectedItem="{Binding Path=BitWidth}"
-											ToolTip="Choose bit width of the constant"
+											ToolTip="{x:Static lc:Resources.ToolTipConstantBitWidth}"
 										/>
-										<TextBlock Grid.Row="0" Grid.Column="1" Text="Bit Width" Margin="8,0,0,0"/>
+										<TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Static lc:Resources.CaptionBitWidth}" Margin="8,0,0,0"/>
 										<TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Path=Value, Mode=TwoWay}" VerticalAlignment="Center"
-											CharacterCasing="Upper" MaxLength="4" ToolTip="Enter initial value for the constant"
+											CharacterCasing="Upper" MaxLength="4" ToolTip="{x:Static lc:Resources.ToolTipConstantValue}"
 											Margin="0"
 										/>
-										<TextBlock Grid.Row="1" Grid.Column="1" Text="Value" Margin="8,0,0,0"/>
+										<TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Static lc:Resources.CaptionValue}" Margin="8,0,0,0"/>
 									</Grid>
-									<TextBlock Text="Constant" VerticalAlignment="Center"/>
+									<TextBlock Style="{StaticResource CircuitName}"/>
 								</StackPanel>
 							</DataTemplate>
 
@@ -378,13 +392,13 @@
 											<RowDefinition Height="Auto"/>
 										</Grid.RowDefinitions>
 										<ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Path=AddressBitWidthRange}" SelectedItem="{Binding Path=AddressBitWidth}"
-											ToolTip="Choose bit width of the address pin"
+											ToolTip="{x:Static lc:Resources.ToolTipAddressBitWidth}"
 										/>
-										<TextBlock Grid.Row="0" Grid.Column="1" Text="Address Bits" Margin="8,0,0,0"/>
+										<TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Static lc:Resources.CaptionAddressBitWidth}" Margin="8,0,0,0"/>
 										<ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=DataBitWidthRange}" SelectedItem="{Binding Path=DataBitWidth}"
-											ToolTip="Choose bit width of the data pin"
+											ToolTip="{x:Static lc:Resources.ToolTipDataBitWidth}"
 										/>
-										<TextBlock Grid.Row="1" Grid.Column="1" Text="Data Bits" Margin="8,0,0,0"/>
+										<TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Static lc:Resources.CaptionDataBitWidth}" Margin="8,0,0,0"/>
 									</Grid>
 									<TextBlock Text="{Binding Path=Circuit.Notation}" VerticalAlignment="Center"/>
 								</StackPanel>
@@ -407,16 +421,16 @@
 											<RowDefinition Height="Auto"/>
 										</Grid.RowDefinitions>
 										<ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Path=BitWidthRange}" SelectedItem="{Binding Path=BitWidth}"
-											ToolTip="Choose bit width of the pin"
+											ToolTip="{x:Static lc:Resources.ToolTipPinBitWidth}"
 										/>
-										<TextBlock Grid.Row="0" Grid.Column="1" Text="Bit Width" Margin="8,0,0,0"/>
+										<TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Static lc:Resources.CaptionBitWidth}" Margin="8,0,0,0"/>
 										<ComboBox Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0"
 											SelectedItem="{Binding Path=PinSide, Mode=TwoWay}" ItemsSource="{Binding Path=PinSideRange}"
-											ToolTip="Choose the side of the circuit's glyph the new pin will reside on"
+											ToolTip="{x:Static lc:Resources.ToolTipPinSide}"
 										/>
-										<TextBlock Grid.Row="1" Grid.Column="1" Text="Side" Margin="8,0,0,0"/>
+										<TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Static lc:Resources.CaptionSide}" Margin="8,0,0,0"/>
 									</Grid>
-									<TextBlock Text="Pin" VerticalAlignment="Center"/>
+									<TextBlock Text="{x:Static lc:Resources.NamePin}" VerticalAlignment="Center"/>
 								</StackPanel>
 							</DataTemplate>
 
@@ -440,23 +454,23 @@
 
 										<ComboBox Grid.Row="0" Grid.Column="0"
 											ItemsSource="{Binding Path=BitWidthRange}" SelectedItem="{Binding Path=BitWidth}"
-											ToolTip="Choose bit width of the wide connector of the splitter."
+											ToolTip="{x:Static lc:Resources.ToolTipSplitterBitWidth}"
 										/>
-										<TextBlock Grid.Row="0" Grid.Column="1" Text="Bit Width" Margin="8,0,0,0" VerticalAlignment="Center"/>
+										<TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Static lc:Resources.CaptionBitWidth}" Margin="8,0,0,0" VerticalAlignment="Center"/>
 
 										<ComboBox Grid.Row="1" Grid.Column="0"
 											ItemsSource="{Binding Path=PinCountRange}" SelectedItem="{Binding Path=PinCount}"
-											ToolTip="Choose number of thin connectors of the splitter."
+											ToolTip="{x:Static lc:Resources.ToolTipSplitterPinNumber}"
 										/>
-										<TextBlock Grid.Row="1" Grid.Column="1" Text="Pins" Margin="8,0,0,0" VerticalAlignment="Center"/>
+										<TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Static lc:Resources.CaptionPinNumber}" Margin="8,0,0,0" VerticalAlignment="Center"/>
 
 										<ComboBox Grid.Row="2" Grid.Column="0"
 											ItemsSource="{Binding Path=CircuitRotationRange}" SelectedItem="{Binding Path=CircuitRotation}"
-											ToolTip="Choose orientation of the splitter."
+											ToolTip="{x:Static lc:Resources.ToolTipSplitterRotation}"
 										/>
-										<TextBlock Grid.Row="2" Grid.Column="1" Text="Rotation" Margin="8,0,0,0" VerticalAlignment="Center"/>
+										<TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Static lc:Resources.CaptionRotation}" Margin="8,0,0,0" VerticalAlignment="Center"/>
 									</Grid>
-									<TextBlock Text="Splitter" VerticalAlignment="Center"/>
+									<TextBlock Style="{StaticResource CircuitName}"/>
 								</StackPanel>
 							</DataTemplate>
 
@@ -477,7 +491,7 @@
 										MouseMove="DescriptorMouseMove"
 									>
 										<ContentControl/>
-										<TextBlock Text="{Binding Path=Circuit.Name}" VerticalAlignment="Center"/>
+										<TextBlock Style="{StaticResource CircuitName}"/>
 									</StackPanel>
 								</Border>
 							</DataTemplate>
@@ -502,12 +516,11 @@
 										Margin="0"
 									>
 										<FlowDocument PagePadding="5">
-											<Paragraph FontWeight="Bold">Text</Paragraph>
-											<Paragraph FontStyle="Italic">Note</Paragraph>
+											<Paragraph FontWeight="Bold"><Run Text="{x:Static lc:Resources.CaptionTextNote1}"/></Paragraph>
+											<Paragraph FontStyle="Italic"><Run Text="{x:Static lc:Resources.CaptionTextNote2}"/></Paragraph>
 										</FlowDocument>
 									</FlowDocumentScrollViewer>
-
-									<TextBlock Text="{Binding Path=Circuit.Name}" VerticalAlignment="Center"/>
+									<TextBlock Style="{StaticResource CircuitName}"/>
 								</StackPanel>
 							</DataTemplate>
 						</ListView.Resources>
@@ -553,19 +566,19 @@
 
 			<StatusBarItem HorizontalAlignment="Right">
 				<StackPanel Orientation="Horizontal">
-					<Label Content="_Zoom:" Target="{Binding ElementName=zoom}" VerticalAlignment="Center"/>
+					<Label Content="{x:Static lc:Resources.TitleZoom}" Target="{Binding ElementName=zoom}" VerticalAlignment="Center"/>
 					<Slider Width="100" x:Name="zoom" VerticalAlignment="Center" Background="{StaticResource SliderBackground}"
 						Minimum="0.1" Maximum="3" Value="{Binding Path=Editor.Zoom, Mode=TwoWay}"
 						IsMoveToPointEnabled="True"
 						TickPlacement="TopLeft"
 						Ticks="0, 0.5, 1, 1.5, 2, 2.5, 3"
-						ToolTip="Set diagram's zoom."
+						ToolTip="{x:Static lc:Resources.ToolTipZoom}"
 					>
 						<Slider.LayoutTransform>
 							<ScaleTransform ScaleX="1" ScaleY="0.8"/>
 						</Slider.LayoutTransform>
 					</Slider>
-					<TextBlock Text="{Binding Path=Editor.Zoom, StringFormat={}{0:P0}}" VerticalAlignment="Center" MinWidth="50" Margin="3,0" ToolTip="Current Zoom"/>
+					<TextBlock Text="{Binding Path=Editor.Zoom, StringFormat={}{0:P0}}" VerticalAlignment="Center" MinWidth="50" Margin="3,0" ToolTip="{x:Static lc:Resources.ToolTipCurrentZoom}"/>
 
 					<!-- This check box is invisible and only used for controling animation in left column when power switches on and off. -->
 					<CheckBox IsChecked="{Binding Path=Editor.Power}" Visibility="Collapsed" IsTabStop="False">
@@ -584,11 +597,11 @@
 						<Canvas.Style>
 							<Style TargetType="Canvas">
 								<Setter Property="Background" Value="Gray"/>
-								<Setter Property="ToolTip" Value="Power Off"/>
+								<Setter Property="ToolTip" Value="{x:Static lc:Resources.PowerOff}"/>
 								<Style.Triggers>
 									<DataTrigger Binding="{Binding Path=Editor.Power}" Value="True">
 										<Setter Property="Background" Value="Red"/>
-										<Setter Property="ToolTip" Value="Power On"/>
+										<Setter Property="ToolTip" Value="{x:Static lc:Resources.PowerOn}"/>
 									</DataTrigger>
 								</Style.Triggers>
 							</Style>

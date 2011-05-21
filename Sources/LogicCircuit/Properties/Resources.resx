@@ -756,4 +756,118 @@ Do you want to replace it?</value>
   <data name="TextNotation" xml:space="preserve">
     <value>Text Note</value>
   </data>
+  <data name="CaptionAddressBitWidth" xml:space="preserve">
+    <value>Address Bits</value>
+  </data>
+  <data name="CaptionBitWidth" xml:space="preserve">
+    <value>Bit Width</value>
+  </data>
+  <data name="CaptionDataBitWidth" xml:space="preserve">
+    <value>Data Bits</value>
+  </data>
+  <data name="CaptionPinNumber" xml:space="preserve">
+    <value>Pins</value>
+  </data>
+  <data name="CaptionRotation" xml:space="preserve">
+    <value>Rotation</value>
+  </data>
+  <data name="CaptionSide" xml:space="preserve">
+    <value>Side</value>
+  </data>
+  <data name="CaptionTextNote1" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="CaptionTextNote2" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="CaptionValue" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="MenuHeaderCircuit" xml:space="preserve">
+    <value>_Circuit</value>
+  </data>
+  <data name="MenuHeaderEdit" xml:space="preserve">
+    <value>_Edit</value>
+  </data>
+  <data name="MenuHeaderFile" xml:space="preserve">
+    <value>_File</value>
+  </data>
+  <data name="MenuHeaderHelp" xml:space="preserve">
+    <value>_Help</value>
+  </data>
+  <data name="MenuHeaderTools" xml:space="preserve">
+    <value>_Tools</value>
+  </data>
+  <data name="MessageWarning" xml:space="preserve">
+    <value>Warning!</value>
+  </data>
+  <data name="TitleFrequency" xml:space="preserve">
+    <value>Fre_quency:</value>
+  </data>
+  <data name="TitleIsMaximumSpeed1" xml:space="preserve">
+    <value>Run at maximum speed</value>
+  </data>
+  <data name="TitleIsMaximumSpeed2" xml:space="preserve">
+    <value>High CPU load</value>
+  </data>
+  <data name="TitleProject" xml:space="preserve">
+    <value>Project</value>
+  </data>
+  <data name="TitleRunningCircuit" xml:space="preserve">
+    <value>Running Circuit</value>
+  </data>
+  <data name="TitleZoom" xml:space="preserve">
+    <value>_Zoom:</value>
+  </data>
+  <data name="ToolTipAddressBitWidth" xml:space="preserve">
+    <value>Choose bit width of the address pin</value>
+  </data>
+  <data name="ToolTipButtonNotation" xml:space="preserve">
+    <value>Enter notation of the button</value>
+  </data>
+  <data name="ToolTipConstantBitWidth" xml:space="preserve">
+    <value>Choose bit width of the constant</value>
+  </data>
+  <data name="ToolTipConstantValue" xml:space="preserve">
+    <value>Enter initial value for the constant</value>
+  </data>
+  <data name="ToolTipCurrentFrequency" xml:space="preserve">
+    <value>Current Frequency</value>
+  </data>
+  <data name="ToolTipCurrentZoom" xml:space="preserve">
+    <value>Current Zoom</value>
+  </data>
+  <data name="ToolTipDataBitWidth" xml:space="preserve">
+    <value>Choose bit width of the data pin</value>
+  </data>
+  <data name="ToolTipFrequency" xml:space="preserve">
+    <value>Change the frequency of clock gates of the running circuit.</value>
+  </data>
+  <data name="ToolTipGateInputCount" xml:space="preserve">
+    <value>Choose number of inputs for the gate</value>
+  </data>
+  <data name="ToolTipIsMaximumSpeed1" xml:space="preserve">
+    <value>Runs the circuit on maximum possible speed ignoring frequency set by the slider above.</value>
+  </data>
+  <data name="ToolTipIsMaximumSpeed2" xml:space="preserve">
+    <value>Checking this box may lead to unresponsive user interface on some computers.</value>
+  </data>
+  <data name="ToolTipPinBitWidth" xml:space="preserve">
+    <value>Choose bit width of the pin</value>
+  </data>
+  <data name="ToolTipPinSide" xml:space="preserve">
+    <value>Choose the side of the circuit's glyph the new pin will reside on</value>
+  </data>
+  <data name="ToolTipSplitterBitWidth" xml:space="preserve">
+    <value>Choose bit width of the wide connector of the splitter.</value>
+  </data>
+  <data name="ToolTipSplitterPinNumber" xml:space="preserve">
+    <value>Choose number of thin connectors of the splitter.</value>
+  </data>
+  <data name="ToolTipSplitterRotation" xml:space="preserve">
+    <value>Choose orientation of the wide connector of the splitter.</value>
+  </data>
+  <data name="ToolTipZoom" xml:space="preserve">
+    <value>Set diagram's zoom.</value>
+  </data>
 </root>

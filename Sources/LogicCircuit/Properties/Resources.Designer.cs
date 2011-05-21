@@ -1377,5 +1377,271 @@ namespace LogicCircuit {
  		public static string TextNotation {
 			get { return ResourceManager.GetString("TextNotation", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Address Bits.
+		/// </summary>
+ 		public static string CaptionAddressBitWidth {
+			get { return ResourceManager.GetString("CaptionAddressBitWidth", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Bit Width.
+		/// </summary>
+ 		public static string CaptionBitWidth {
+			get { return ResourceManager.GetString("CaptionBitWidth", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Data Bits.
+		/// </summary>
+ 		public static string CaptionDataBitWidth {
+			get { return ResourceManager.GetString("CaptionDataBitWidth", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Pins.
+		/// </summary>
+ 		public static string CaptionPinNumber {
+			get { return ResourceManager.GetString("CaptionPinNumber", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Rotation.
+		/// </summary>
+ 		public static string CaptionRotation {
+			get { return ResourceManager.GetString("CaptionRotation", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Side.
+		/// </summary>
+ 		public static string CaptionSide {
+			get { return ResourceManager.GetString("CaptionSide", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Text.
+		/// </summary>
+ 		public static string CaptionTextNote1 {
+			get { return ResourceManager.GetString("CaptionTextNote1", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Note.
+		/// </summary>
+ 		public static string CaptionTextNote2 {
+			get { return ResourceManager.GetString("CaptionTextNote2", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Value.
+		/// </summary>
+ 		public static string CaptionValue {
+			get { return ResourceManager.GetString("CaptionValue", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Circuit.
+		/// </summary>
+ 		public static string MenuHeaderCircuit {
+			get { return ResourceManager.GetString("MenuHeaderCircuit", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Edit.
+		/// </summary>
+ 		public static string MenuHeaderEdit {
+			get { return ResourceManager.GetString("MenuHeaderEdit", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _File.
+		/// </summary>
+ 		public static string MenuHeaderFile {
+			get { return ResourceManager.GetString("MenuHeaderFile", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Help.
+		/// </summary>
+ 		public static string MenuHeaderHelp {
+			get { return ResourceManager.GetString("MenuHeaderHelp", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Tools.
+		/// </summary>
+ 		public static string MenuHeaderTools {
+			get { return ResourceManager.GetString("MenuHeaderTools", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Warning!.
+		/// </summary>
+ 		public static string MessageWarning {
+			get { return ResourceManager.GetString("MessageWarning", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Fre_quency:.
+		/// </summary>
+ 		public static string TitleFrequency {
+			get { return ResourceManager.GetString("TitleFrequency", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Run at maximum speed.
+		/// </summary>
+ 		public static string TitleIsMaximumSpeed1 {
+			get { return ResourceManager.GetString("TitleIsMaximumSpeed1", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to High CPU load.
+		/// </summary>
+ 		public static string TitleIsMaximumSpeed2 {
+			get { return ResourceManager.GetString("TitleIsMaximumSpeed2", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Project.
+		/// </summary>
+ 		public static string TitleProject {
+			get { return ResourceManager.GetString("TitleProject", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Running Circuit.
+		/// </summary>
+ 		public static string TitleRunningCircuit {
+			get { return ResourceManager.GetString("TitleRunningCircuit", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Zoom:.
+		/// </summary>
+ 		public static string TitleZoom {
+			get { return ResourceManager.GetString("TitleZoom", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Choose bit width of the address pin.
+		/// </summary>
+ 		public static string ToolTipAddressBitWidth {
+			get { return ResourceManager.GetString("ToolTipAddressBitWidth", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Enter notation of the button.
+		/// </summary>
+ 		public static string ToolTipButtonNotation {
+			get { return ResourceManager.GetString("ToolTipButtonNotation", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Choose bit width of the constant.
+		/// </summary>
+ 		public static string ToolTipConstantBitWidth {
+			get { return ResourceManager.GetString("ToolTipConstantBitWidth", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Enter initial value for the constant.
+		/// </summary>
+ 		public static string ToolTipConstantValue {
+			get { return ResourceManager.GetString("ToolTipConstantValue", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Current Frequency.
+		/// </summary>
+ 		public static string ToolTipCurrentFrequency {
+			get { return ResourceManager.GetString("ToolTipCurrentFrequency", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Current Zoom.
+		/// </summary>
+ 		public static string ToolTipCurrentZoom {
+			get { return ResourceManager.GetString("ToolTipCurrentZoom", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Choose bit width of the data pin.
+		/// </summary>
+ 		public static string ToolTipDataBitWidth {
+			get { return ResourceManager.GetString("ToolTipDataBitWidth", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Change the frequency of clock gates of the running circuit..
+		/// </summary>
+ 		public static string ToolTipFrequency {
+			get { return ResourceManager.GetString("ToolTipFrequency", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Choose number of inputs for the gate.
+		/// </summary>
+ 		public static string ToolTipGateInputCount {
+			get { return ResourceManager.GetString("ToolTipGateInputCount", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Runs the circuit on maximum possible speed ignoring frequency set by the slider above..
+		/// </summary>
+ 		public static string ToolTipIsMaximumSpeed1 {
+			get { return ResourceManager.GetString("ToolTipIsMaximumSpeed1", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Checking this box may lead to unresponsive user interface on some computers..
+		/// </summary>
+ 		public static string ToolTipIsMaximumSpeed2 {
+			get { return ResourceManager.GetString("ToolTipIsMaximumSpeed2", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Choose bit width of the pin.
+		/// </summary>
+ 		public static string ToolTipPinBitWidth {
+			get { return ResourceManager.GetString("ToolTipPinBitWidth", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Choose the side of the circuit's glyph the new pin will reside on.
+		/// </summary>
+ 		public static string ToolTipPinSide {
+			get { return ResourceManager.GetString("ToolTipPinSide", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Choose bit width of the wide connector of the splitter..
+		/// </summary>
+ 		public static string ToolTipSplitterBitWidth {
+			get { return ResourceManager.GetString("ToolTipSplitterBitWidth", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Choose number of thin connectors of the splitter..
+		/// </summary>
+ 		public static string ToolTipSplitterPinNumber {
+			get { return ResourceManager.GetString("ToolTipSplitterPinNumber", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Choose orientation of the wide connector of the splitter..
+		/// </summary>
+ 		public static string ToolTipSplitterRotation {
+			get { return ResourceManager.GetString("ToolTipSplitterRotation", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Set diagram's zoom..
+		/// </summary>
+ 		public static string ToolTipZoom {
+			get { return ResourceManager.GetString("ToolTipZoom", Culture); }
+		}
 	}
 }

@@ -1,7 +1,6 @@
 ToDo list:
 
 Binding errors in the runing tree
-Move all string from main window to resources
 
 smarter wires
 Rotation of symbols
