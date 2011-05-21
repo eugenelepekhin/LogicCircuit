@@ -33,13 +33,13 @@
 		</Storyboard>
 
 		<Storyboard x:Key="openRunningTree">
-			<lc:GridLengthAnimation Duration="0:0:0.5"
+			<lc:GridLengthAnimation Duration="0:0:0.2"
 				Storyboard.TargetName="runningTree"
 				Storyboard.TargetProperty="Height"
 				From="0*"
 				To="1*"
 			/>
-			<lc:GridLengthAnimation Duration="0:0:0.5"
+			<lc:GridLengthAnimation Duration="0:0:0.2"
 				Storyboard.TargetName="projectBrowser"
 				Storyboard.TargetProperty="Height"
 				From="1*"
