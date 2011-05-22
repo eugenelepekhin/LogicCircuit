@@ -54,13 +54,13 @@
 		<TextBox Grid.Row="1" Grid.Column="1" Name="name"/>
 
 		<Label Grid.Row="2" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleNotation}, Mode=OneTime}" Target="{Binding ElementName=notation}"/>
-		<TextBox Grid.Row="2" Grid.Column="1" Name="notation"/>
+		<TextBox Grid.Row="2" Grid.Column="1" Name="notation" ToolTip="{x:Static lc:Resources.ToolTipPinNotation}"/>
 
 		<Label Grid.Row="3" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleSide}, Mode=OneTime}" Target="{Binding ElementName=side}"/>
-		<ComboBox Grid.Row="3" Grid.Column="1" Name="side"/>
+		<ComboBox Grid.Row="3" Grid.Column="1" Name="side" ToolTip="{x:Static lc:Resources.ToolTipPinSide}"/>
 
 		<Label Grid.Row="4" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleBitWidth}, Mode=OneTime}" Target="{Binding ElementName=bitWidth}"/>
-		<ComboBox Grid.Row="4" Grid.Column="1" Name="bitWidth"/>
+		<ComboBox Grid.Row="4" Grid.Column="1" Name="bitWidth" ToolTip="{x:Static lc:Resources.ToolTipPinBitWidth}"/>
 
 		<CheckBox Grid.Row="5" Grid.Column="1" Name="inverted" Content="{Binding Source={x:Static lc:Resources.TitleInverted}, Mode=OneTime}" IsThreeState="False"/>
 

@@ -36,7 +36,7 @@
 		</Grid.ColumnDefinitions>
 
 		<Label Grid.Row="0" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleName}, Mode=OneTime}" Target="{Binding ElementName=name}"/>
-		<TextBox Grid.Row="0" Grid.Column="1" Name="name"/>
+		<TextBox Grid.Row="0" Grid.Column="1" Name="name" ToolTip="{x:Static lc:Resources.ToolTipButtonNotation}"/>
 
 		<StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
 			<Button Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="ButtonOkClick"/>

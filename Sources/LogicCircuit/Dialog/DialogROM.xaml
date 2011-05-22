@@ -40,10 +40,10 @@
 		</Grid.RowDefinitions>
 
 		<Label Grid.Row="0" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleAddressBitWidth}, Mode=OneTime}" Target="{Binding ElementName=addressBitWidth}"/>
-		<ComboBox Grid.Row="0" Grid.Column="1" Name="addressBitWidth" SelectionChanged="MemorySizeChanged"/>
+		<ComboBox Grid.Row="0" Grid.Column="1" Name="addressBitWidth" SelectionChanged="MemorySizeChanged" ToolTip="{x:Static lc:Resources.ToolTipAddressBitWidth}"/>
 
 		<Label Grid.Row="1" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleDataBitWidth}, Mode=OneTime}" Target="{Binding ElementName=dataBitWidth}"/>
-		<ComboBox Grid.Row="1" Grid.Column="1" Name="dataBitWidth" SelectionChanged="MemorySizeChanged"/>
+		<ComboBox Grid.Row="1" Grid.Column="1" Name="dataBitWidth" SelectionChanged="MemorySizeChanged" ToolTip="{x:Static lc:Resources.ToolTipDataBitWidth}"/>
 
 		<GroupBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Header="{Binding Source={x:Static lc:Resources.TitleData}, Mode=OneTime}" Margin="3">
 			<GroupBox.Resources>

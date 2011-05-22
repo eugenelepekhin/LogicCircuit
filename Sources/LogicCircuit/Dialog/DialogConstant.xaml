@@ -45,12 +45,12 @@
 		<Label Grid.Row="0" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleBitWidth}, Mode=OneTime}"
 			Target="{Binding ElementName=bitWidth}"
 		/>
-		<ComboBox Grid.Row="0" Grid.Column="1" Name="bitWidth"/>
+		<ComboBox Grid.Row="0" Grid.Column="1" Name="bitWidth" ToolTip="{x:Static lc:Resources.ToolTipConstantBitWidth}"/>
 
 		<Label Grid.Row="1" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleValue}, Mode=OneTime}"
 			Target="{Binding ElementName=value}"
 		/>
-		<TextBox Grid.Row="1" Grid.Column="1" Name="value"/>
+		<TextBox Grid.Row="1" Grid.Column="1" Name="value" ToolTip="{x:Static lc:Resources.ToolTipConstantValue}"/>
 
 		<StackPanel Grid.Row="2" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
 			<Button Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="ButtonOkClick"/>

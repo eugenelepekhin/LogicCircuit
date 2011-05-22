@@ -870,4 +870,10 @@ Do you want to replace it?</value>
   <data name="ToolTipZoom" xml:space="preserve">
     <value>Set diagram's zoom.</value>
   </data>
+  <data name="ToolTipRamWriteOn" xml:space="preserve">
+    <value>Choose write memory time</value>
+  </data>
+  <data name="ToolTipPinNotation" xml:space="preserve">
+    <value>Enter very short text that will be displayed on the symbol of the circuit next to the pin</value>
+  </data>
 </root>

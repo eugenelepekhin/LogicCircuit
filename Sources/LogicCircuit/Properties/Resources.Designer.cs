@@ -1643,5 +1643,19 @@ namespace LogicCircuit {
  		public static string ToolTipZoom {
 			get { return ResourceManager.GetString("ToolTipZoom", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Choose write memory time.
+		/// </summary>
+ 		public static string ToolTipRamWriteOn {
+			get { return ResourceManager.GetString("ToolTipRamWriteOn", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Enter very short text that will be displayed on the symbol of the circuit next to the pin.
+		/// </summary>
+ 		public static string ToolTipPinNotation {
+			get { return ResourceManager.GetString("ToolTipPinNotation", Culture); }
+		}
 	}
 }
