@@ -233,7 +233,7 @@
 							</TreeView.Resources>
 						</TreeView>
 
-						<Separator Grid.Row="1" HorizontalAlignment="Stretch"/>
+						<Separator Grid.Row="1" HorizontalAlignment="Stretch" Margin="5,3"/>
 
 						<StackPanel Grid.Row="2" Orientation="Horizontal">
 							<Label Content="{x:Static lc:Resources.TitleFrequency}" Target="{Binding ElementName=frequency}" VerticalAlignment="Center"/>
