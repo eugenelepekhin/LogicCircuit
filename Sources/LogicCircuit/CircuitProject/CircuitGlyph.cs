@@ -179,12 +179,31 @@ namespace LogicCircuit {
 			Canvas canvas = this.CreateGlyphCanvas();
 			CircuitGlyph.AddJam(canvas, this.Jams(), null);
 			ButtonControl buttonControl = new ButtonControl();
+			Panel.SetZIndex(buttonControl, 0);
 			buttonControl.Content = this.Circuit.Notation;
 			buttonControl.Width = canvas.Width;
 			buttonControl.Height = canvas.Height;
 			canvas.Children.Add(buttonControl);
 			this.ProbeView = buttonControl;
+			this.UpdateButtonGlyph(canvas);
 			return canvas;
+		}
+
+		public void UpdateButtonGlyph(Panel panel) {
+			Tracer.Assert(panel != null);
+			CircuitButton button = this.Circuit as CircuitButton;
+			Tracer.Assert(button != null);
+			if(button.IsToggle) {
+				if(panel.Children.Count < 3) {
+					panel.Children.Add(CircuitGlyph.Skin<Border>(SymbolShape.ToggleLed));
+				}
+			} else {
+				if(2 < panel.Children.Count) {
+					UIElement rect = panel.Children[2];
+					Tracer.Assert(rect is Border);
+					panel.Children.Remove(rect);
+				}
+			}
 		}
 
 		public FrameworkElement CreateSimpleGlyph(string skin) {

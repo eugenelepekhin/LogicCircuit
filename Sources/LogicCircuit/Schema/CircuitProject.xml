@@ -164,6 +164,7 @@
 		<Table.Columns>
 			<Column Name="CircuitButtonId" Type="Guid" ReadOnly="true"/>
 			<Column Name="Notation" Type="string" Default="" PropertyOverrides="true"/>
+			<Column Name="IsToggle" Type="bool" Default="false"/>
 		</Table.Columns>
 
 		<Table.Keys>

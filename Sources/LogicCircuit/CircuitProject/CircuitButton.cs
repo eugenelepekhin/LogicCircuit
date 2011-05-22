@@ -40,6 +40,7 @@ namespace LogicCircuit {
 				ButtonControl button = (ButtonControl)symbol.ProbeView;
 				button.Content = this.Notation;
 				symbol.Glyph.ToolTip = this.ToolTip;
+				symbol.UpdateButtonGlyph((Canvas)symbol.Glyph);
 			}
 		}
 	}
@@ -58,8 +59,8 @@ namespace LogicCircuit {
 			return button;
 		}
 
-		public CircuitButton Create(string notation) {
-			CircuitButton button = this.CreateItem(Guid.NewGuid(), notation);
+		public CircuitButton Create(string notation, bool isToggle) {
+			CircuitButton button = this.CreateItem(Guid.NewGuid(), notation, isToggle);
 			this.CircuitProject.DevicePinSet.Create(button, PinType.Output, 1);
 			return button;
 		}

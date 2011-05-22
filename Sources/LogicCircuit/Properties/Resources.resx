@@ -876,4 +876,13 @@ Do you want to replace it?</value>
   <data name="ToolTipPinNotation" xml:space="preserve">
     <value>Enter very short text that will be displayed on the symbol of the circuit next to the pin</value>
   </data>
+  <data name="CaptionNotation" xml:space="preserve">
+    <value>Notation</value>
+  </data>
+  <data name="TitleIsToggle" xml:space="preserve">
+    <value>Is _Toggle</value>
+  </data>
+  <data name="ToolTipIsToggle" xml:space="preserve">
+    <value>If the button is toggle it will change is state on every click, if not toggle, then when pressed or depressed</value>
+  </data>
 </root>

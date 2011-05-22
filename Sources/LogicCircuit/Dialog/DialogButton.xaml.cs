@@ -19,13 +19,17 @@ namespace LogicCircuit {
 			this.InitializeComponent();
 
 			this.name.Text = this.button.Notation;
+			this.isToggle.IsChecked = this.button.IsToggle;
 		}
 
 		private void ButtonOkClick(object sender, RoutedEventArgs e) {
 			try {
 				string name = this.name.Text.Trim();
-				if(this.button.Notation != name) {
-					this.button.CircuitProject.InTransaction(() => this.button.Notation = name);
+				if(this.button.Notation != name || this.button.IsToggle != this.isToggle.IsChecked) {
+					this.button.CircuitProject.InTransaction(() => {
+						this.button.Notation = name;
+						this.button.IsToggle = this.isToggle.IsChecked.Value;
+					});
 				}
 				this.Close();
 			} catch(Exception exception) {

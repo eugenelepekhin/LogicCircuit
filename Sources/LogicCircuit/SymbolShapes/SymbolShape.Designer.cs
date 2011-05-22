@@ -153,5 +153,12 @@ namespace LogicCircuit {
  		public static string TextNote {
 			get { return ResourceManager.GetString("TextNote", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to content of the file: "toggleled.xaml".
+		/// </summary>
+ 		public static string ToggleLed {
+			get { return ResourceManager.GetString("ToggleLed", Culture); }
+		}
 	}
 }

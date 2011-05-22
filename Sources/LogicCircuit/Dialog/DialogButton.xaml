@@ -28,6 +28,7 @@
 	<Grid Margin="3">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
@@ -37,8 +38,11 @@
 
 		<Label Grid.Row="0" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleName}, Mode=OneTime}" Target="{Binding ElementName=name}"/>
 		<TextBox Grid.Row="0" Grid.Column="1" Name="name" ToolTip="{x:Static lc:Resources.ToolTipButtonNotation}"/>
+		<CheckBox Grid.Row="1" Grid.Column="1" Name="isToggle"
+			Content="{x:Static lc:Resources.TitleIsToggle}" ToolTip="{x:Static lc:Resources.ToolTipIsToggle}"
+		/>
 
-		<StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+		<StackPanel Grid.Row="2" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
 			<Button Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="ButtonOkClick"/>
 			<Button Content="{Binding Source={x:Static lc:Resources.TitleCancel}, Mode=OneTime}" IsCancel="True"/>
 		</StackPanel>

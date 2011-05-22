@@ -15,6 +15,7 @@ namespace LogicCircuit {
 	internal partial struct CircuitButtonData {
 		public Guid CircuitButtonId;
 		public string Notation;
+		public bool IsToggle;
 		internal CircuitButton CircuitButton;
 
 		private interface IFieldSerializer {
@@ -96,6 +97,41 @@ namespace LogicCircuit {
 			}
 		}
 
+		// Accessor of the IsToggle field
+		public sealed class IsToggleField : IField<CircuitButtonData, bool>, IFieldSerializer {
+			public static readonly IsToggleField Field = new IsToggleField();
+			private IsToggleField() {}
+			public string Name { get { return "IsToggle"; } }
+			public int Order { get; set; }
+			public bool DefaultValue { get { return false; } }
+			public bool GetValue(ref CircuitButtonData record) {
+				return record.IsToggle;
+			}
+			public void SetValue(ref CircuitButtonData record, bool value) {
+				record.IsToggle = value;
+			}
+			public int Compare(ref CircuitButtonData l, ref CircuitButtonData r) {
+				return l.IsToggle.CompareTo(r.IsToggle);
+			}
+			public int Compare(bool l, bool r) {
+				return l.CompareTo(r);
+			}
+
+			// Implementation of interface IFieldSerializer
+			bool IFieldSerializer.NeedToSave(ref CircuitButtonData data) {
+				return this.Compare(data.IsToggle, this.DefaultValue) != 0;
+			}
+			string IFieldSerializer.GetTextValue(ref CircuitButtonData data) {
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.IsToggle);
+			}
+			void IFieldSerializer.SetDefault(ref CircuitButtonData data) {
+				data.IsToggle = this.DefaultValue;
+			}
+			void IFieldSerializer.SetTextValue(ref CircuitButtonData data, string text) {
+				data.IsToggle = bool.Parse(text);
+			}
+		}
+
 		// Special field used to access items wrapper of this record from record.
 		// This is used when no other universes is used
 		internal sealed class CircuitButtonField : IField<CircuitButtonData, CircuitButton> {
@@ -126,6 +162,7 @@ namespace LogicCircuit {
 			TableSnapshot<CircuitButtonData> table = new TableSnapshot<CircuitButtonData>(store, "CircuitButton"
 				,CircuitButtonIdField.Field
 				,NotationField.Field
+				,IsToggleField.Field
 				,CircuitButtonField.Field
 			);
 			// Create all but foreign keys of the table
@@ -223,6 +260,12 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.CircuitButtonRowId, CircuitButtonData.NotationField.Field, value); }
 		}
 
+		// Gets or sets value of the IsToggle field.
+		public bool IsToggle {
+			get { return this.Table.GetField(this.CircuitButtonRowId, CircuitButtonData.IsToggleField.Field); }
+			set { this.Table.SetField(this.CircuitButtonRowId, CircuitButtonData.IsToggleField.Field, value); }
+		}
+
 
 		internal void NotifyChanged(TableChange<CircuitButtonData> change) {
 			if(this.HasListener) {
@@ -234,6 +277,9 @@ namespace LogicCircuit {
 				}
 				if(CircuitButtonData.NotationField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("Notation");
+				}
+				if(CircuitButtonData.IsToggleField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("IsToggle");
 				}
 			}
 			this.OnCircuitButtonChanged();
@@ -320,7 +366,8 @@ namespace LogicCircuit {
 		private CircuitButton CreateItem(
 			// Fields of CircuitButton table
 			Guid CircuitButtonId,
-			string Notation
+			string Notation,
+			bool IsToggle
 			// Fields of Circuit table
 
 		) {
@@ -333,6 +380,7 @@ namespace LogicCircuit {
 			CircuitButtonData dataCircuitButton = new CircuitButtonData() {
 				CircuitButtonId = CircuitButtonId,
 				Notation = Notation,
+				IsToggle = IsToggle,
 			};
 			return this.Create(this.Table.Insert(ref dataCircuitButton), rowIdCircuit);
 		}

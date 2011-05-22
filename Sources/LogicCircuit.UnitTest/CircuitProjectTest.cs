@@ -88,7 +88,7 @@ namespace LogicCircuit.UnitTest {
 			Assert.AreEqual(1, project.ConstantSet.Count());
 			Assert.AreEqual(3, project.DevicePinSet.Count());
 
-			CircuitButton button = project.CircuitButtonSet.Create("a");
+			CircuitButton button = project.CircuitButtonSet.Create("a", false);
 			Assert.AreEqual(1, project.CircuitButtonSet.Count());
 			Assert.AreEqual(4, project.DevicePinSet.Count());
 

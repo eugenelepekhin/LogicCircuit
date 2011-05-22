@@ -1657,5 +1657,26 @@ namespace LogicCircuit {
  		public static string ToolTipPinNotation {
 			get { return ResourceManager.GetString("ToolTipPinNotation", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Notation.
+		/// </summary>
+ 		public static string CaptionNotation {
+			get { return ResourceManager.GetString("CaptionNotation", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Is _Toggle.
+		/// </summary>
+ 		public static string TitleIsToggle {
+			get { return ResourceManager.GetString("TitleIsToggle", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to If the button is toggle it will change is state on every click, if not toggle, then when pressed or depressed.
+		/// </summary>
+ 		public static string ToolTipIsToggle {
+			get { return ResourceManager.GetString("ToolTipIsToggle", Culture); }
+		}
 	}
 }

@@ -734,6 +734,12 @@ namespace LogicCircuit {
 				symbolMap.CircuitMap.inputs = new Dictionary<CircuitSymbol, CircuitFunction>();
 			}
 			symbolMap.CircuitMap.inputs.Add(symbolMap.CircuitSymbol, button);
+			if(button.IsToggle) {
+				if(symbolMap.CircuitMap.displays == null) {
+					symbolMap.CircuitMap.displays = new HashSet<IFunctionVisual>();
+				}
+				symbolMap.CircuitMap.displays.Add(button);
+			}
 		}
 
 		private static void DefineConstant(CircuitState circuitState, SymbolMap symbolMap) {

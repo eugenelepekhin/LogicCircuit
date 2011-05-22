@@ -116,13 +116,14 @@ namespace LogicCircuit {
 
 	public class ButtonDescriptor : CircuitDescriptor<CircuitButton> {
 		public string Notation { get; set; }
+		public bool IsToggle { get; set; }
 
-		public ButtonDescriptor(CircuitProject circuitProject) : base(circuitProject.CircuitButtonSet.Create(string.Empty)) {
+		public ButtonDescriptor(CircuitProject circuitProject) : base(circuitProject.CircuitButtonSet.Create(string.Empty, false)) {
 			this.Notation = string.Empty;
 		}
 
 		protected override CircuitButton GetCircuitToDrop(CircuitProject circuitProject) {
-			return circuitProject.CircuitButtonSet.Create(this.Notation);
+			return circuitProject.CircuitButtonSet.Create(this.Notation, this.IsToggle);
 		}
 	}
 
