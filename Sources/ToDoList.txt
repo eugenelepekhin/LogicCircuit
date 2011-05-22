@@ -5,7 +5,6 @@ Binding errors in the runing tree
 smarter wires
 Rotation of symbols
 
-Toggle switch or DIP switch inputs
 Keyboard device
 Display device
 "hard drive" device
