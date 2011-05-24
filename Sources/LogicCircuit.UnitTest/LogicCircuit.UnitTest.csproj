@@ -55,12 +55,14 @@
     <Compile Include="CircuitProjectTest.cs" />
     <Compile Include="ProjectLoader.cs" />
     <Compile Include="ProjectManagerTest.cs" />
+    <Compile Include="ProjectTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="VisualElementLoadTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LogicCircuit\LogicCircuit.csproj">
@@ -70,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\IntegerCalculator.CircuitProject" />
+    <None Include="Properties\VisualElementLoadTest.CircuitProject" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
