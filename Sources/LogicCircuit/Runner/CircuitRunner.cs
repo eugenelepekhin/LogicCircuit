@@ -41,7 +41,9 @@ namespace LogicCircuit {
 		private AutoResetEvent evaluationGate;
 		private AutoResetEvent refreshingGate;
 
+		private volatile bool running = false;
 		private volatile bool refreshing = false;
+		private volatile bool updatingUI = false;
 
 		private SettingsBoolCache oscilloscoping;
 		public bool Oscilloscoping {
@@ -53,6 +55,7 @@ namespace LogicCircuit {
 
 		public CircuitRunner(Editor editor) {
 			this.Editor = editor;
+			this.isMaxSpeed = this.Editor.IsMaximumSpeed;
 			this.oscilloscoping = new SettingsBoolCache(Settings.Session, "Oscilloscoping" + this.Editor.Project.ProjectId.ToString(), false);
 		}
 
@@ -70,7 +73,7 @@ namespace LogicCircuit {
 			this.evaluationThread.Abort();
 		}
 
-		public bool IsRunning { get { return this.evaluationThread != null && this.evaluationThread.IsAlive; } }
+		public bool IsRunning { get { return this.evaluationThread != null && this.evaluationThread.IsAlive && this.running; } }
 
 		private static int HalfPeriod(int frequency) {
 			return 500 / frequency;
@@ -87,6 +90,7 @@ namespace LogicCircuit {
 		private void Run() {
 			PropertyChangedEventHandler editorPropertyChanged = null;
 			try {
+				this.running = true;
 				this.Editor.Mainframe.Status = Resources.PowerOn;
 
 				CircuitMap root = new CircuitMap(this.Editor.Project.LogicalCircuit);
@@ -145,19 +149,21 @@ namespace LogicCircuit {
 			} catch(Exception exception) {
 				this.Editor.Mainframe.ReportException(exception);
 			} finally {
-				if(editorPropertyChanged != null) {
-					this.Editor.PropertyChanged -= editorPropertyChanged;
-				}
+				this.running = false;
 				if(this.refreshingThread != null) {
 					this.refreshingThread.Abort();
 				}
-				if(this.RootMap != null) {
-					this.Editor.Mainframe.Dispatcher.Invoke(new Action(() => this.RootMap.TurnOff()));
+				if(editorPropertyChanged != null) {
+					this.Editor.PropertyChanged -= editorPropertyChanged;
 				}
 				if(this.DialogOscilloscope != null) {
 					this.DialogOscilloscope.Dispatcher.BeginInvoke(DispatcherPriority.SystemIdle,
 						new Action(this.DialogOscilloscope.Close)
 					);
+				}
+				if(this.RootMap != null) {
+					while(this.updatingUI);
+					this.Editor.Mainframe.Dispatcher.BeginInvoke(new Action(() => this.RootMap.TurnOff()));
 				}
 				this.Editor.Mainframe.Status = Resources.PowerOff;
 			}
@@ -246,9 +252,9 @@ namespace LogicCircuit {
 
 		private void MonitorUI() {
 			try {
-				while(this.refreshingGate != null && this.refreshingThread != null && this.evaluationThread != null) {
+				while(this.running && this.refreshingGate != null && this.refreshingThread != null && this.evaluationThread != null) {
 					this.refreshingGate.WaitOne();
-					if(this.refreshingThread != null && this.evaluationThread != null && !this.refreshing) {
+					if(this.running && this.refreshingThread != null && this.evaluationThread != null && !this.refreshing) {
 						this.refreshing = true;
 						Thread.MemoryBarrier();
 						this.Editor.Mainframe.Dispatcher.BeginInvoke(DispatcherPriority.SystemIdle, new Action(this.RefreshUI));
@@ -263,10 +269,15 @@ namespace LogicCircuit {
 
 		private void RefreshUI() {
 			try {
+				this.updatingUI = true;
+				Thread.MemoryBarrier();
 				if(this.CircuitState != null) {
 					IEnumerable<IFunctionVisual> invalidVisuals = this.CircuitState.InvalidVisuals();
 					if(invalidVisuals != null) {
 						foreach(IFunctionVisual function in invalidVisuals) {
+							if(!this.running) {
+								break;
+							}
 							if(this.VisibleMap.IsVisible(function)) {
 								function.Redraw();
 							}
@@ -278,6 +289,7 @@ namespace LogicCircuit {
 				this.Editor.Mainframe.ReportException(exception);
 			} finally {
 				this.refreshing = false;
+				this.updatingUI = false;
 				Thread.MemoryBarrier();
 			}
 		}
