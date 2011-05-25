@@ -52,9 +52,7 @@ namespace LogicCircuit.UnitTest {
 		///</summary>
 		[TestMethod()]
 		public void CircuitMapApplyPerfTest() {
-			CircuitProject project = ProjectLoader.Load(this.TestContext, Properties.Resources.IntegerCalculator);
-			CircuitMap map = new CircuitMap(project.ProjectSet.Project.LogicalCircuit);
-			CircuitState state = map.Apply(CircuitRunner.HistorySize);
+			ProjectTester tester = new ProjectTester(this.TestContext, Properties.Resources.IntegerCalculator, null);
 
 			//Assert.Inconclusive("Verify the correctness of this test method.");
 		}
