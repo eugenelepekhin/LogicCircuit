@@ -64,6 +64,26 @@ namespace LogicCircuit.UnitTest.Properties {
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;lc:CircuitProject xmlns:lc=&quot;http://LogicCircuit.net/2.0.0.1/CircuitProject.xsd&quot;&gt;
         ///	&lt;lc:Project&gt;
+        ///		&lt;lc:ProjectId&gt;3872cdce-31e2-4929-b592-f4ec6c4d1f6f&lt;/lc:ProjectId&gt;
+        ///		&lt;lc:Name&gt;Digital Clock&lt;/lc:Name&gt;
+        ///		&lt;lc:Description&gt;Sample Circuit.
+        ///To run the clock set frequency to 2 Hz.
+        ///Press H and M buttons to adjust hours and minutes.
+        ///Press and hold H or M to auto increment.
+        ///Press s0 to reset seconds.&lt;/lc:Description&gt;
+        ///		&lt;lc:Frequency&gt;2&lt;/lc:Frequency&gt;
+        ///		&lt;lc:LogicalCircuit [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Digital_Clock {
+            get {
+                return ResourceManager.GetString("Digital_Clock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;lc:CircuitProject xmlns:lc=&quot;http://LogicCircuit.net/2.0.0.1/CircuitProject.xsd&quot;&gt;
+        ///	&lt;lc:Project&gt;
         ///		&lt;lc:ProjectId&gt;1085779a-fb30-44b8-84e5-65212e8c9046&lt;/lc:ProjectId&gt;
         ///		&lt;lc:Name&gt;Integer Calculator&lt;/lc:Name&gt;
         ///		&lt;lc:LogicalCircuitId&gt;25544e3c-6ce3-45c6-9370-fb45cc8ab700&lt;/lc:LogicalCircuitId&gt;

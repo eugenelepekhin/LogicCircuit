@@ -1,11 +1,11 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using LogicCircuit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Windows;
 
 namespace LogicCircuit.UnitTest {
 	/// <summary>
@@ -38,6 +38,10 @@ namespace LogicCircuit.UnitTest {
 					app.InitializeComponent();
 				}
 			}
+			foreach(CircuitSymbol symbol in this.CircuitProject.CircuitSymbolSet) {
+				symbol.GuaranteeGlyph();
+			}
+
 			// Create map and state
 			this.CircuitMap = new CircuitMap(this.CircuitProject.ProjectSet.Project.LogicalCircuit);
 			this.CircuitState = this.CircuitMap.Apply(CircuitRunner.HistorySize);
@@ -62,6 +66,8 @@ namespace LogicCircuit.UnitTest {
 			}
 			outputSymbol.Sort(circuitSymbolComparer);
 			this.Output = outputSymbol.Select(s => this.CircuitMap.FunctionProbe(s)).ToArray();
+
+			this.CircuitMap.TurnOn();
 		}
 	}
 }
