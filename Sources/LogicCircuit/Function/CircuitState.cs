@@ -165,9 +165,9 @@ namespace LogicCircuit {
 			return true;
 		}
 
-		public bool Evaluate() {
+		/*public bool Evaluate() {
 			return this.Evaluate(true);
-		}
+		}*/
 
 		/*private string ShowParam(Function f) {
 			StringBuilder text = new StringBuilder();
