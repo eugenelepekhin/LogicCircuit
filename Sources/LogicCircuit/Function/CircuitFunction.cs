@@ -14,6 +14,8 @@ namespace LogicCircuit {
 
 		public string Label { get; set; }
 
+		public long Iteration { get; set; }
+
 		protected CircuitFunction(CircuitState circuitState, int[] parameter, int[] result) {
 			this.CircuitState = circuitState;
 			this.parameter = (parameter == null) ? new int[0] : parameter;
@@ -39,6 +41,15 @@ namespace LogicCircuit {
 
 		public int ParameterCount { get { return this.parameter.Length; } }
 		public int ResultCount { get { return this.result.Length; } }
+
+		public int SingleResult {
+			get {
+				if(this.result.Length != 1) {
+					Tracer.Fail();
+				}
+				return this.result[0];
+			}
+		}
 
 		public static State FromBool(bool value) {
 			return value ? State.On1 : State.On0;

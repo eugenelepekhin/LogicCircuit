@@ -5,13 +5,13 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using System.Threading;
+using System.Runtime.CompilerServices;
 
 namespace LogicCircuit {
 	public class CircuitState {
 
 		public event EventHandler FunctionUpdated;
 
-		private int randomSeed;
 		private DirtyList dirty;
 		private List<State> state = new List<State>();
 		private List<CircuitFunction> terminal = new List<CircuitFunction>();
@@ -23,11 +23,14 @@ namespace LogicCircuit {
 		private volatile HashSet<IFunctionVisual> invalid = new HashSet<IFunctionVisual>();
 		private HashSet<IFunctionVisual> invalidEmpty = new HashSet<IFunctionVisual>();
 
+		public Random Random { get; private set; }
+
 		public CircuitState() {
-			this.randomSeed = (int)DateTime.UtcNow.Ticks;
-			//this.randomSeed = 196081105;
-			Tracer.FullInfo("CircuitState", "CircuitState.randomSeed=" + this.randomSeed.ToString(CultureInfo.InvariantCulture));
-			this.dirty = new DirtyList(this.randomSeed);
+			int seed = (int)DateTime.UtcNow.Ticks;
+			//seed = -945068621;
+			Tracer.FullInfo("CircuitState", "CircuitState.seed={0}", seed);
+			this.dirty = new DirtyList(seed);
+			this.Random = new Random(seed);
 		}
 
 		public int Count { get { return this.state.Count; } }
@@ -78,9 +81,10 @@ namespace LogicCircuit {
 		}
 
 		public void Invalidate(IFunctionVisual function) {
-			this.invalidating = true;
-			Thread.MemoryBarrier();
+			RuntimeHelpers.PrepareConstrainedRegions();
 			try {
+				this.invalidating = true;
+				Thread.MemoryBarrier();
 				this.invalid.Add(function);
 			} finally {
 				this.invalidating = false;
@@ -146,8 +150,12 @@ namespace LogicCircuit {
 			while(!this.dirty.IsEmpty) {
 				CircuitFunction function = this.dirty.Get();
 				if(function.Evaluate()) {
-					foreach(int result in function.Result) {
-						this.dirty.Add(this.dependant[result]);
+					if(function.ResultCount == 1) {
+						this.dirty.Add(this.dependant[function.SingleResult]);
+					} else {
+						foreach(int result in function.Result) {
+							this.dirty.Add(this.dependant[result]);
+						}
 					}
 					if(oscilation-- < 0) {
 						if(maxRetry <= attempt) {
@@ -165,23 +173,19 @@ namespace LogicCircuit {
 			return true;
 		}
 
-		/*public bool Evaluate() {
-			return this.Evaluate(true);
-		}*/
-
-		/*private string ShowParam(Function f) {
-			StringBuilder text = new StringBuilder();
-			text.Append(' ', this.Count);
-			foreach(int p in f.Parameter) {
-				text[p] = '^';
+		#if DUMP_STATE
+			private string ShowParam(CircuitFunction f) {
+				StringBuilder text = new StringBuilder();
+				text.Append(' ', this.Count);
+				foreach(int p in f.Parameter) {
+					text[p] = '^';
+				}
+				foreach(int r in f.Result) {
+					text[r] = 'v';
+				}
+				return text.ToString();
 			}
-			foreach(int r in f.Result) {
-				text[r] = 'v';
-			}
-			return text.ToString();
-		}*/
-
-		public Random Random { get { return this.dirty.Random; } }
+		#endif
 
 		public override string ToString() {
 			StringBuilder text = new StringBuilder();
@@ -192,59 +196,100 @@ namespace LogicCircuit {
 		}
 
 		private class DirtyList {
-			private List<CircuitFunction> current = new List<CircuitFunction>();
-			private int head = 0;
-			private HashSet<CircuitFunction> next = new HashSet<CircuitFunction>();
-			private Random random;
+			private FunctionList current = new FunctionList(1024);
+			private FunctionList next = new FunctionList(1024);
+			private int seed;
 			public int Delay { get; set; }
+			private long iteration = 1;
+
+			private int offset = 0;
+			private int index = 0;
 
 			public DirtyList(int seed) {
-				this.random = new Random(seed);
+				this.seed = seed;
 				this.Delay = 0;
 			}
 
 			public void Add(CircuitFunction function) {
-				this.next.Add(function);
+				if(function.Iteration < this.iteration) {
+					function.Iteration = this.iteration;
+					this.next.Add(function);
+				}
 			}
 
 			public void Add(IEnumerable<CircuitFunction> function) {
-				this.next.UnionWith(function);
+				foreach(CircuitFunction f in function) {
+					this.Add(f);
+				}
+			}
+
+			public void Add(List<CircuitFunction> function) {
+				for(int i = 0; i < function.Count; i++) {
+					this.Add(function[i]);
+				}
 			}
 
 			public CircuitFunction Get() {
-				if(this.current.Count <= this.head) {
+				if(this.current.Count <= this.index) {
 					if(this.next.Count <= 0) {
 						throw new InvalidOperationException(Resources.ErrorDirtyListIsEmpty);
 					}
+
+					this.iteration++;
 					this.current.Clear();
-					this.head = 0;
-					for(int i = 0; i < this.next.Count; i++) {
-						this.current.Add(null);
-					}
-					foreach(CircuitFunction f in this.next) {
-						int index = this.random.Next(this.current.Count);
-						while(this.current[index] != null) {
-							index++;
-							if(this.current.Count <= index) {
-								index = 0;
-							}
-						}
-						this.current[index] = f;
-					}
-					this.next.Clear();
+					FunctionList temp = this.next;
+					this.next = this.current;
+					this.current = temp;
+
+					this.index = 0;
+					this.seed = 214013 * this.seed + 2531011;
+					this.offset = (int.MaxValue & this.seed) % this.current.Count;
+
 					if(0 < this.Delay && 1 < this.current.Count) {
 						int max = Math.Min(this.Delay, this.current.Count - 1);
 						for(int i = 0; i < max; i++) {
-							this.next.Add(this.Get());
+							this.Add(this.Get());
 						}
 					}
 				}
-				return this.current[this.head++];
+				// This expression will iterate for this.index from 0 to this.current.Count - 1 and walk through each element
+				// of this.current exactly once.
+				// The constant should be a primary number in order to walk through entire current list
+				// The expression inside parentesis may overflow int and become negative, so it will only work for
+				// not big prime numbers and not big list of dirty functions.
+				return this.current[(521 * (this.index++) + this.offset) % this.current.Count];
 			}
 
-			public bool IsEmpty { get { return this.current.Count - this.head + this.next.Count <= 0; } }
+			public bool IsEmpty { get { return this.current.Count <= this.index && this.next.Count <= 0; } }
 
-			public Random Random { get { return this.random; } }
+			private struct FunctionList {
+				private CircuitFunction[] list;
+				private int size;
+				public int Count { get; private set; }
+
+				public FunctionList(int size) : this() {
+					this.size = size;
+					this.list = new CircuitFunction[this.size];
+				}
+
+				public CircuitFunction this[int index] {
+					get { return this.list[index]; }
+					set { this.list[index] = value; }
+				}
+
+				public void Add(CircuitFunction f) {
+					if(this.size <= this.Count) {
+						this.size *= 2;
+						Tracer.Assert(this.Count < this.size, "size overflowed");
+						Array.Resize(ref this.list, this.size);
+					}
+					this.list[this.Count++] = f;
+				}
+
+				public void Clear() {
+					this.Count = 0;
+				}
+			}
 		}
 	}
 }
