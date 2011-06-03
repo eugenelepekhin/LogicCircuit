@@ -13,9 +13,13 @@ namespace LogicCircuit {
 		public event EventHandler FunctionUpdated;
 
 		private DirtyList dirty;
-		private List<State> state = new List<State>();
+		private State[] state = null;
+		public int Count { get; private set; }
+
+		private List<CircuitFunction>[] dependant = null;
+
+
 		private List<CircuitFunction> terminal = new List<CircuitFunction>();
-		private List<List<CircuitFunction>> dependant = new List<List<CircuitFunction>>();
 		private HashSet<CircuitFunction> updated = new HashSet<CircuitFunction>();
 		private List<FunctionClock> clockList = new List<FunctionClock>();
 		private List<FunctionProbe> probeList = new List<FunctionProbe>();
@@ -25,31 +29,32 @@ namespace LogicCircuit {
 
 		public Random Random { get; private set; }
 
-		public CircuitState() {
+		public CircuitState(int reserveState) {
 			int seed = (int)DateTime.UtcNow.Ticks;
 			//seed = -945068621;
 			Tracer.FullInfo("CircuitState", "CircuitState.seed={0}", seed);
 			this.dirty = new DirtyList(seed);
 			this.Random = new Random(seed);
+			this.Count = reserveState;
 		}
-
-		public int Count { get { return this.state.Count; } }
 
 		public State this[int index] {
 			get { return this.state[index]; }
 			set { this.state[index] = value; }
 		}
 
-		public int ReserveState(int count) {
-			int min = this.state.Count;
-			for(int i = 0; i < count; i++) {
-				this.state.Add(State.Off);
-				this.dependant.Add(new List<CircuitFunction>());
-			}
-			return min;
+		public int ReserveState() {
+			return this.Count++;
 		}
 
 		public void DefineFunction(CircuitFunction function) {
+			if(this.state == null) {
+				this.state = new State[this.Count];
+				this.dependant = new List<CircuitFunction>[this.Count];
+				for(int i = 0; i < this.dependant.Length; i++) {
+					this.dependant[i] = new List<CircuitFunction>();
+				}
+			}
 			int count = 0;
 			foreach(int parameter in function.Parameter) {
 				this.dependant[parameter].Add(function);
@@ -146,7 +151,7 @@ namespace LogicCircuit {
 			int maxRetry = 3;
 			int attempt = 0;
 			this.dirty.Delay = attempt;
-			int oscilation = this.state.Count * this.state.Count;
+			int oscilation = this.state.Length * this.state.Length;
 			while(!this.dirty.IsEmpty) {
 				CircuitFunction function = this.dirty.Get();
 				if(function.Evaluate()) {
@@ -161,7 +166,7 @@ namespace LogicCircuit {
 						if(maxRetry <= attempt) {
 							return false;
 						}
-						oscilation = this.state.Count * this.state.Count;
+						oscilation = this.state.Length * this.state.Length;
 						this.dirty.Delay = ++attempt;
 					}
 				}

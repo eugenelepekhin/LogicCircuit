@@ -193,8 +193,7 @@ namespace LogicCircuit {
 
 			//TODO: optimize the list. What if sort it in such way that state will be allocated with a better locality, so it will be less cache misses?
 
-			CircuitState circuitState = new CircuitState();
-			circuitState.ReserveState(3);
+			CircuitState circuitState = new CircuitState(3);
 			// Allocate states for each result
 			foreach(SymbolMap symbolMap in list.SymbolMaps) {
 				foreach(Result result in symbolMap.Results) {

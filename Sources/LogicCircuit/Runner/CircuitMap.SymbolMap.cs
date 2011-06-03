@@ -255,17 +255,17 @@ namespace LogicCircuit {
 				Tracer.Assert(this.PrivateIndex == 0);
 				if(this.TriStateGroup != null && 0 < this.TriStateGroup.Count) {
 					if(this.StateIndex == 0) {
-						this.StateIndex = circuitState.ReserveState(1);
+						this.StateIndex = circuitState.ReserveState();
 						foreach(Result r in this.TriStateGroup) {
 							Tracer.Assert(r == this || r.StateIndex == 0);
 							r.StateIndex = this.StateIndex;
 						}
 					}
-					this.PrivateIndex = circuitState.ReserveState(1);
+					this.PrivateIndex = circuitState.ReserveState();
 					Tracer.Assert(0 < this.PrivateIndex);
 				} else {
 					Tracer.Assert(this.StateIndex == 0);
-					this.StateIndex = circuitState.ReserveState(1);
+					this.StateIndex = circuitState.ReserveState();
 				}
 				Tracer.Assert(0 < this.StateIndex);
 			}
