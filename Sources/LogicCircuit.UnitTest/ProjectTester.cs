@@ -21,7 +21,7 @@ namespace LogicCircuit.UnitTest {
 
 		public ProjectTester(TestContext testContext, string projectText, string initialCircuit) {
 			// First save project text to test directory
-			string path = Path.Combine(testContext.TestRunDirectory, "ProjectTester.xml");
+			string path = Path.Combine(testContext.TestRunDirectory, string.Format("{0}.{1}.{2}.xml", testContext.FullyQualifiedTestClassName, testContext.TestName, DateTime.UtcNow.Ticks));
 			File.WriteAllText(path, projectText, Encoding.UTF8);
 			// Load if from test directory
 			this.CircuitProject = CircuitProject.Create(path);
