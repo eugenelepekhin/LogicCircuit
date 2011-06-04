@@ -23,13 +23,6 @@ namespace LogicCircuit {
 					this.CircuitState.MarkUpdated(this);
 					this.CircuitState.Invalidate(this);
 				}
-				//int old = this.Value;
-				//this.Constant.ConstantValue = value;
-				//if(old != this.Value) {
-				//    ((TextBlock)this.CircuitSymbol.ProbeView).Text =  this.Constant.Notation;
-				//    this.CircuitSymbol.Glyph.ToolTip = this.Constant.ToolTip;
-				//    this.CircuitState.MarkUpdated(this);
-				//}
 			}
 		}
 

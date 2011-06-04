@@ -43,15 +43,6 @@ namespace LogicCircuit {
 		public int ParameterCount { get { return this.parameter.Length; } }
 		public int ResultCount { get { return this.result.Length; } }
 
-		public int SingleResult {
-			get {
-				if(this.result.Length != 1) {
-					Tracer.Fail();
-				}
-				return this.result[0];
-			}
-		}
-
 		public static State FromBool(bool value) {
 			return value ? State.On1 : State.On0;
 		}
@@ -105,7 +96,7 @@ namespace LogicCircuit {
 			return changed;
 		}
 
-		public static Exception BadState(State state) {
+		protected static Exception BadState(State state) {
 			return new AssertException(Resources.UnknownState(state));
 		}
 

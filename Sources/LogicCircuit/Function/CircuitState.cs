@@ -21,7 +21,6 @@ namespace LogicCircuit {
 		private List<CircuitFunction> functions = new List<CircuitFunction>();
 		public IEnumerable<CircuitFunction> Functions { get { return this.functions; } }
 
-		private List<CircuitFunction> terminal = new List<CircuitFunction>();
 		private HashSet<CircuitFunction> updated = new HashSet<CircuitFunction>();
 		private List<FunctionClock> clockList = new List<FunctionClock>();
 		private List<FunctionProbe> probeList = new List<FunctionProbe>();
@@ -64,7 +63,6 @@ namespace LogicCircuit {
 				count++;
 			}
 			if(count <= 0) {
-				this.terminal.Add(function);
 				this.dirty.Add(function);
 				FunctionClock clock = function as FunctionClock;
 				if(clock != null) {
@@ -277,7 +275,6 @@ namespace LogicCircuit {
 
 				public CircuitFunction this[int index] {
 					get { return this.list[index]; }
-					//set { this.list[index] = value; }
 				}
 
 				public void Add(CircuitFunction f) {
