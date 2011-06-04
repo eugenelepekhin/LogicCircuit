@@ -205,6 +205,8 @@ namespace LogicCircuit {
 			foreach(SymbolMap symbolMap in list.SymbolMaps) {
 				this.Apply(circuitState, symbolMap, probeCapacity);
 			}
+			circuitState.EndDefinition();
+
 			return circuitState;
 		}
 

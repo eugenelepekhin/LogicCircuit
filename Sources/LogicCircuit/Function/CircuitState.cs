@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Runtime.CompilerServices;
@@ -17,7 +18,8 @@ namespace LogicCircuit {
 		public int Count { get; private set; }
 
 		private List<CircuitFunction>[] dependant = null;
-
+		private List<CircuitFunction> functions = new List<CircuitFunction>();
+		public IEnumerable<CircuitFunction> Functions { get { return this.functions; } }
 
 		private List<CircuitFunction> terminal = new List<CircuitFunction>();
 		private HashSet<CircuitFunction> updated = new HashSet<CircuitFunction>();
@@ -31,7 +33,7 @@ namespace LogicCircuit {
 
 		public CircuitState(int reserveState) {
 			int seed = (int)DateTime.UtcNow.Ticks;
-			//seed = -945068621;
+			//seed = 2087553645;
 			Tracer.FullInfo("CircuitState", "CircuitState.seed={0}", seed);
 			this.dirty = new DirtyList(seed);
 			this.Random = new Random(seed);
@@ -55,6 +57,7 @@ namespace LogicCircuit {
 					this.dependant[i] = new List<CircuitFunction>();
 				}
 			}
+			this.functions.Add(function);
 			int count = 0;
 			foreach(int parameter in function.Parameter) {
 				this.dependant[parameter].Add(function);
@@ -71,6 +74,14 @@ namespace LogicCircuit {
 				FunctionProbe probe = function as FunctionProbe;
 				if(probe != null) {
 					this.probeList.Add(probe);
+				}
+			}
+		}
+
+		public void EndDefinition() {
+			foreach(CircuitFunction function in this.functions) {
+				if(function.Result.Any()) {
+					function.Dependant = function.Result.Select(r => (IEnumerable<CircuitFunction>)this.dependant[r]).Aggregate((x, y) => x.Union(y)).ToArray();
 				}
 			}
 		}
@@ -124,17 +135,6 @@ namespace LogicCircuit {
 			}
 		}
 
-		public IEnumerable<CircuitFunction> Functions {
-			get {
-				HashSet<CircuitFunction> list = new HashSet<CircuitFunction>();
-				list.UnionWith(this.terminal);
-				foreach(List<CircuitFunction> d in this.dependant) {
-					list.UnionWith(d);
-				}
-				return list;
-			}
-		}
-
 		public bool Evaluate(bool flipClock) {
 			if(0 < this.updated.Count) {
 				lock(this.updated) {
@@ -155,12 +155,8 @@ namespace LogicCircuit {
 			while(!this.dirty.IsEmpty) {
 				CircuitFunction function = this.dirty.Get();
 				if(function.Evaluate()) {
-					if(function.ResultCount == 1) {
-						this.dirty.Add(this.dependant[function.SingleResult]);
-					} else {
-						foreach(int result in function.Result) {
-							this.dirty.Add(this.dependant[result]);
-						}
+					if(function.Dependant != null) {
+						this.dirty.Add(function.Dependant);
 					}
 					if(oscilation-- < 0) {
 						if(maxRetry <= attempt) {
@@ -228,8 +224,8 @@ namespace LogicCircuit {
 				}
 			}
 
-			public void Add(List<CircuitFunction> function) {
-				for(int i = 0; i < function.Count; i++) {
+			public void Add(CircuitFunction[] function) {
+				for(int i = 0; i < function.Length; i++) {
 					this.Add(function[i]);
 				}
 			}
@@ -269,12 +265,10 @@ namespace LogicCircuit {
 
 			private struct FunctionList {
 				private CircuitFunction[] list;
-				private int size;
 				public int Count { get; private set; }
 
 				public FunctionList(int size) : this() {
-					this.size = size;
-					this.list = new CircuitFunction[this.size];
+					this.list = new CircuitFunction[size];
 				}
 
 				public CircuitFunction this[int index] {
@@ -283,10 +277,9 @@ namespace LogicCircuit {
 				}
 
 				public void Add(CircuitFunction f) {
-					if(this.size <= this.Count) {
-						this.size *= 2;
-						Tracer.Assert(this.Count < this.size, "size overflowed");
-						Array.Resize(ref this.list, this.size);
+					if(this.list.Length <= this.Count) {
+						Tracer.Assert(this.Count < this.list.Length * 2, "size overflowed");
+						Array.Resize(ref this.list, this.list.Length * 2);
 					}
 					this.list[this.Count++] = f;
 				}

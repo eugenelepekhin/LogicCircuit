@@ -8,7 +8,7 @@ namespace LogicCircuit {
 		public FunctionTriStateGroup(CircuitState circuitState, int[] parameter, int result) : base(circuitState, parameter, result) {
 		}
 		public override bool Evaluate() {
-			return this.SetResult(this.And(State.Off));
+			return this.SetResult(this.TriStateGroup());
 		}
 	}
 }

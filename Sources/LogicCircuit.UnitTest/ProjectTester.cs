@@ -25,19 +25,13 @@ namespace LogicCircuit.UnitTest {
 			File.WriteAllText(path, projectText, Encoding.UTF8);
 			// Load if from test directory
 			this.CircuitProject = CircuitProject.Create(path);
+			File.Delete(path);
 			if(initialCircuit != null) {
 				LogicalCircuit circuit = this.CircuitProject.LogicalCircuitSet.FindByName(initialCircuit);
 				Assert.IsNotNull(circuit, "initial circuit not found in the project");
 				this.CircuitProject.InOmitTransaction(() => this.CircuitProject.ProjectSet.Project.LogicalCircuit = circuit);
 			}
-			// Init App resources so all the visual elements will be able to find them
-			if(App.CurrentApp == null) {
-				App app = new App();
-				if(Application.ResourceAssembly == null) {
-					Application.ResourceAssembly = typeof(App).Assembly;
-					app.InitializeComponent();
-				}
-			}
+			ProjectTester.InitResources();
 			foreach(CircuitSymbol symbol in this.CircuitProject.CircuitSymbolSet) {
 				symbol.GuaranteeGlyph();
 			}
@@ -68,6 +62,17 @@ namespace LogicCircuit.UnitTest {
 			this.Output = outputSymbol.Select(s => this.CircuitMap.FunctionProbe(s)).ToArray();
 
 			this.CircuitMap.TurnOn();
+		}
+
+		public static void InitResources() {
+			// Init App resources so all the visual elements will be able to find them
+			if(App.CurrentApp == null) {
+				App app = new App();
+				if(Application.ResourceAssembly == null) {
+					Application.ResourceAssembly = typeof(App).Assembly;
+					app.InitializeComponent();
+				}
+			}
 		}
 	}
 }

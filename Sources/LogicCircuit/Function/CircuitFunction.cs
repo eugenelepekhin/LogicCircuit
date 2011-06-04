@@ -15,6 +15,7 @@ namespace LogicCircuit {
 		public string Label { get; set; }
 
 		public long Iteration { get; set; }
+		public CircuitFunction[] Dependant { get; set; }
 
 		protected CircuitFunction(CircuitState circuitState, int[] parameter, int[] result) {
 			this.CircuitState = circuitState;
@@ -104,12 +105,12 @@ namespace LogicCircuit {
 			return changed;
 		}
 
-		protected static Exception BadState(State state) {
+		public static Exception BadState(State state) {
 			return new AssertException(Resources.UnknownState(state));
 		}
 
-		protected State And(State allOff) {
-			State state = allOff;
+		protected State TriStateGroup() {
+			State state = State.Off;
 			foreach(int index in this.parameter) {
 				switch(this.CircuitState[index]) {
 				case State.On0:
@@ -126,22 +127,22 @@ namespace LogicCircuit {
 			return state;
 		}
 
-		protected State Or(State allOff) {
-			State state = allOff;
-			foreach(int index in this.parameter) {
-				switch(this.CircuitState[index]) {
-				case State.On0:
-					state = State.On0;
-					break;
-				case State.On1:
-					return State.On1;
-				case State.Off:
-					break;
-				default:
-					throw CircuitFunction.BadState(this.CircuitState[index]);
+		protected State And() {
+			for(int i = 0; i < this.parameter.Length; i++) {
+				if(this.CircuitState[this.parameter[i]] == State.On0) {
+					return State.On0;
 				}
 			}
-			return state;
+			return State.On1;
+		}
+
+		protected State Or() {
+			for(int i = 0; i < this.parameter.Length; i++) {
+				if(this.CircuitState[this.parameter[i]] == State.On1) {
+					return State.On1;
+				}
+			}
+			return State.On0;
 		}
 
 		protected static State Not(State state) {
@@ -152,9 +153,8 @@ namespace LogicCircuit {
 				return State.On1;
 			case State.On1:
 				return State.On0;
-			default:
-				throw CircuitFunction.BadState(state);
 			}
+			throw CircuitFunction.BadState(state);
 		}
 
 		protected State Not() {

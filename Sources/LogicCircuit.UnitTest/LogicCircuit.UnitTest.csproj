@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="CircuitMapTest.cs" />
     <Compile Include="CircuitProjectTest.cs" />
+    <Compile Include="CircuitStateTest.cs" />
     <Compile Include="CircuitTest.cs" />
     <Compile Include="ProjectManagerTest.cs" />
     <Compile Include="ProjectTester.cs" />
