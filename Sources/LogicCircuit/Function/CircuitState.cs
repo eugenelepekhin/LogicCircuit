@@ -79,6 +79,10 @@ namespace LogicCircuit {
 		}
 
 		public void EndDefinition() {
+			if(this.state == null) {
+				this.state = new State[this.Count];
+				Tracer.Assert(this.functions.Count == 0);
+			}
 			foreach(CircuitFunction function in this.functions) {
 				if(function.Result.Any()) {
 					function.Dependant = function.Result.Select(r => (IEnumerable<CircuitFunction>)this.dependant[r]).Aggregate((x, y) => x.Union(y)).ToArray();
@@ -273,7 +277,7 @@ namespace LogicCircuit {
 
 				public CircuitFunction this[int index] {
 					get { return this.list[index]; }
-					set { this.list[index] = value; }
+					//set { this.list[index] = value; }
 				}
 
 				public void Add(CircuitFunction f) {

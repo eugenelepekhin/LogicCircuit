@@ -127,3 +127,4 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "rowId", Scope = "member", Target = "LogicCircuit.TextNoteSet.#Delete(LogicCircuit.DataPersistent.RowId)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "LogicCircuit.TextNoteSet.#Delete(LogicCircuit.DataPersistent.RowId)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Scope = "type", Target = "LogicCircuit.HyperlinkNavigationCommand")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays", Scope = "member", Target = "LogicCircuit.CircuitFunction.#Dependant")]

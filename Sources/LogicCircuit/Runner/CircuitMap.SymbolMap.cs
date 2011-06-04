@@ -133,8 +133,9 @@ namespace LogicCircuit {
 				Parameter parameter;
 				if(this.parameters.TryGetValue(jamKey, out parameter)) {
 					if(!SymbolMap.IsTriState(parameter.Result) || !SymbolMap.IsTriState(result)) {
+						CircuitGlyph symbol = jam.CircuitSymbol;
 						throw new CircuitException(Cause.UserError,
-							Resources.ErrorManyResults(jam.Pin.Name, jam.CircuitSymbol.ToString())
+							Resources.ErrorManyResults(jam.Pin.Name, symbol.Circuit.Notation + symbol.Point.ToString())
 						);
 					}
 					parameter.Result.Link(result);
