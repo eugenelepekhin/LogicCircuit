@@ -480,6 +480,26 @@ namespace LogicCircuit {
 			}
 		}
 
+		private void CircuitPowerCommandExecuted(object target, ExecutedRoutedEventArgs e) {
+			try {
+				if(this.Editor != null) {
+					this.Editor.Power = !this.Editor.Power;
+				}
+			} catch(Exception exception) {
+				Tracer.Report("Mainframe.CircuitDeleteCommandExecuted", exception);
+				this.ReportException(exception);
+			}
+		}
+
+		private void CircuitPowerCommandCanExecute(object target, CanExecuteRoutedEventArgs e) {
+			try {
+				e.CanExecute = (this.Editor != null);
+			} catch(Exception exception) {
+				Tracer.Report("Mainframe.CircuitDeleteCommandCanExecute", exception);
+				this.ReportException(exception);
+			}
+		}
+
 		private void ToolsReportCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
 				if(this.Editor != null) {

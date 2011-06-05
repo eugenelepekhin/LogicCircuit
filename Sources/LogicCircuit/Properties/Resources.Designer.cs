@@ -1678,5 +1678,12 @@ namespace LogicCircuit {
  		public static string ToolTipIsToggle {
 			get { return ResourceManager.GetString("ToolTipIsToggle", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Switch Power.
+		/// </summary>
+ 		public static string CommandCircuitPower {
+			get { return ResourceManager.GetString("CommandCircuitPower", Culture); }
+		}
 	}
 }

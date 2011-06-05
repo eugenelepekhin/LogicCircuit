@@ -885,4 +885,7 @@ Do you want to replace it?</value>
   <data name="ToolTipIsToggle" xml:space="preserve">
     <value>If the button is toggle it will change is state on every click, if not toggle, then when pressed or depressed</value>
   </data>
+  <data name="CommandCircuitPower" xml:space="preserve">
+    <value>Switch Power</value>
+  </data>
 </root>
