@@ -210,16 +210,16 @@ namespace LogicCircuit {
 	public class SplitterDescriptor : CircuitDescriptor<Splitter> {
 		public int BitWidth { get; set; }
 		public int PinCount { get; set; }
-		public CircuitRotation CircuitRotation { get; set; }
+		public Rotation CircuitRotation { get; set; }
 
 		public IEnumerable<int> BitWidthRange { get; private set; }
 		public IEnumerable<int> PinCountRange { get; private set; }
-		public IEnumerable<CircuitRotation> CircuitRotationRange { get; private set; }
+		public IEnumerable<Rotation> CircuitRotationRange { get; private set; }
 
-		public SplitterDescriptor(CircuitProject circuitProject) : base(circuitProject.SplitterSet.Create(3, 3, CircuitRotation.Left)) {
+		public SplitterDescriptor(CircuitProject circuitProject) : base(circuitProject.SplitterSet.Create(3, 3, Rotation.Left)) {
 			this.BitWidth = 3;
 			this.PinCount = 3;
-			this.CircuitRotation = LogicCircuit.CircuitRotation.Left;
+			this.CircuitRotation = LogicCircuit.Rotation.Left;
 			this.BitWidthRange = PinDescriptor.BitRange(2);
 
 			int[] pinRange = new int[Gate.MaxInputCount - 2];
@@ -228,7 +228,7 @@ namespace LogicCircuit {
 			}
 			this.PinCountRange = pinRange;
 
-			this.CircuitRotationRange = (CircuitRotation[])Enum.GetValues(typeof(CircuitRotation));
+			this.CircuitRotationRange = (Rotation[])Enum.GetValues(typeof(Rotation));
 		}
 
 		protected override Splitter GetCircuitToDrop(CircuitProject circuitProject) {

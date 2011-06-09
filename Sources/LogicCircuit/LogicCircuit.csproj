@@ -127,7 +127,7 @@
     <Compile Include="CircuitProject\CircuitButton.cs" />
     <Compile Include="CircuitProject\CircuitGlyph.cs" />
     <Compile Include="CircuitProject\CircuitProject.cs" />
-    <Compile Include="CircuitProject\CircuitRotation.cs" />
+    <Compile Include="CircuitProject\Rotation.cs" />
     <Compile Include="CircuitProject\CircuitSymbol.cs" />
     <Compile Include="CircuitProject\Constant.cs" />
     <Compile Include="CircuitProject\DevicePin.cs" />

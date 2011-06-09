@@ -637,10 +637,12 @@ namespace LogicCircuit {
 		private void CommitMove(TextNoteMarker marker) {
 			TextNote textNote = marker.TextNote;
 			Rect rect = marker.ResizedRect();
+
 			int x = Symbol.GridPoint(rect.X);
 			int y = Symbol.GridPoint(rect.Y);
 			int w = Math.Max(Symbol.GridPoint(rect.Width), 1);
 			int h = Math.Max(Symbol.GridPoint(rect.Height), 1);
+
 			if(x != textNote.X || y != textNote.Y || w != textNote.Width || h != textNote.Height) {
 				this.CircuitProject.InTransaction(() => {
 					textNote.X = x;
@@ -648,7 +650,86 @@ namespace LogicCircuit {
 					textNote.Width = w;
 					textNote.Height = h;
 				});
-				marker.PositionGlyph();
+			}
+			marker.Refresh();
+		}
+
+		public void RotateLeft(IRotatable symbol, bool withWires) {
+			Tracer.Assert(((Symbol)symbol).LogicalCircuit == this.Project.LogicalCircuit);
+			this.ClearSelection();
+			CircuitSymbol circuitSymbol = symbol as CircuitSymbol;
+			if(circuitSymbol == null) {
+				withWires = false;
+			}
+			List<Jam> jams = null;
+			if(withWires) {
+				jams = new List<Jam>(circuitSymbol.Jams());
+			}
+			this.CircuitProject.InTransaction(() => {
+				EditorDiagram.RotateLeft(symbol);
+				if(withWires) {
+					circuitSymbol.Reset();
+					circuitSymbol.GuaranteeGlyph();
+
+				}
+			});
+			this.Select((Symbol)symbol);
+		}
+
+		public void RotateRight(IRotatable symbol, bool withWires) {
+			Tracer.Assert(((Symbol)symbol).LogicalCircuit == this.Project.LogicalCircuit);
+			this.ClearSelection();
+			CircuitSymbol circuitSymbol = symbol as CircuitSymbol;
+			if(circuitSymbol == null) {
+				withWires = false;
+			}
+			List<Jam> jams = null;
+			if(withWires) {
+				jams = new List<Jam>(circuitSymbol.Jams());
+			}
+			this.CircuitProject.InTransaction(() => {
+				EditorDiagram.RotateRight(symbol);
+			});
+			this.Select((Symbol)symbol);
+		}
+
+		private static void RotateLeft(IRotatable symbol) {
+			switch(symbol.Rotation) {
+			case Rotation.Up:
+				symbol.Rotation = Rotation.Left;
+				break;
+			case Rotation.Right:
+				symbol.Rotation = Rotation.Up;
+				break;
+			case Rotation.Down:
+				symbol.Rotation = Rotation.Right;
+				break;
+			case Rotation.Left:
+				symbol.Rotation = Rotation.Down;
+				break;
+			default:
+				Tracer.Fail();
+				break;
+			}
+		}
+
+		private static void RotateRight(IRotatable symbol) {
+			switch(symbol.Rotation) {
+			case Rotation.Up:
+				symbol.Rotation = Rotation.Right;
+				break;
+			case Rotation.Right:
+				symbol.Rotation = Rotation.Down;
+				break;
+			case Rotation.Down:
+				symbol.Rotation = Rotation.Left;
+				break;
+			case Rotation.Left:
+				symbol.Rotation = Rotation.Up;
+				break;
+			default:
+				Tracer.Fail();
+				break;
 			}
 		}
 

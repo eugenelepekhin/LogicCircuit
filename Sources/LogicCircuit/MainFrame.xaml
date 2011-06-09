@@ -101,6 +101,9 @@
 		<CommandBinding Command="{x:Static lc:CustomCommands.EditSelectAllProbes}" Executed="EditSelectAllProbesCommandExecuted" CanExecute="EditSelectAllProbesCommandCanExecute"/>
 		<CommandBinding Command="{x:Static lc:CustomCommands.EditSelectAllProbesWithWire}" Executed="EditSelectAllProbesWithWireCommandExecuted" CanExecute="EditSelectAllProbesWithWireCommandCanExecute"/>
 
+		<CommandBinding Command="{x:Static lc:CustomCommands.EditRotateLeft}" Executed="EditRotateLeftCommandExecuted" CanExecute="EditRotateLeftCommandCanExecute"/>
+		<CommandBinding Command="{x:Static lc:CustomCommands.EditRotateRight}" Executed="EditRotateRightCommandExecuted" CanExecute="EditRotateRightCommandCanExecute"/>
+
 		<CommandBinding Command="{x:Static lc:CustomCommands.CircuitProject}" Executed="CircuitProjectCommandExecuted" CanExecute="CircuitProjectCommandCanExecuted"/>
 		<CommandBinding Command="{x:Static lc:CustomCommands.CircuitCurrent}" Executed="CircuitCurrentCommandExecuted" CanExecute="CircuitCurrentCommandCanExecuted"/>
 		<CommandBinding Command="{x:Static lc:CustomCommands.CircuitNew}" Executed="CircuitNewCommandExecuted" CanExecute="CircuitNewCommandCanExecuted"/>
@@ -155,6 +158,9 @@
 				<Separator />
 				<MenuItem Command="lc:CustomCommands.EditSelectAllProbes"/>
 				<MenuItem Command="lc:CustomCommands.EditSelectAllProbesWithWire"/>
+				<Separator />
+				<MenuItem Command="lc:CustomCommands.EditRotateLeft"/>
+				<MenuItem Command="lc:CustomCommands.EditRotateRight"/>
 			</MenuItem>
             <MenuItem Header="{x:Static lc:Resources.MenuHeaderCircuit}">
 				<MenuItem Command="lc:CustomCommands.CircuitProject"/>

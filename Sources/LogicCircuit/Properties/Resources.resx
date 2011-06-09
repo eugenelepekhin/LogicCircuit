@@ -888,4 +888,10 @@ Do you want to replace it?</value>
   <data name="CommandCircuitPower" xml:space="preserve">
     <value>Switch Power</value>
   </data>
+  <data name="CommandEditRotateLeft" xml:space="preserve">
+    <value>Rotate Left</value>
+  </data>
+  <data name="CommandEditRotateRight" xml:space="preserve">
+    <value>Rotate Right</value>
+  </data>
 </root>

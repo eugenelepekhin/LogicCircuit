@@ -70,19 +70,19 @@ namespace LogicCircuit {
 			pin.Name = Resources.SplitterWidePinName;
 			PinSide pinSide;
 			switch(splitter.Rotation) {
-			case CircuitRotation.Up:
+			case Rotation.Up:
 				pinSide = PinSide.Bottom;
 				pin.PinSide = PinSide.Top;
 				break;
-			case CircuitRotation.Right:
+			case Rotation.Right:
 				pinSide = PinSide.Left;
 				pin.PinSide = PinSide.Right;
 				break;
-			case CircuitRotation.Down:
+			case Rotation.Down:
 				pinSide = PinSide.Top;
 				pin.PinSide = PinSide.Bottom;
 				break;
-			case CircuitRotation.Left:
+			case Rotation.Left:
 				pinSide = PinSide.Right;
 				pin.PinSide = PinSide.Left;
 				break;
@@ -110,7 +110,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		public Splitter Create(int bitWidth, int pinCount, CircuitRotation rotation) {
+		public Splitter Create(int bitWidth, int pinCount, Rotation rotation) {
 			Splitter splitter = this.CreateItem(Guid.NewGuid(), bitWidth, pinCount, rotation);
 			this.CreatePins(splitter);
 			return splitter;

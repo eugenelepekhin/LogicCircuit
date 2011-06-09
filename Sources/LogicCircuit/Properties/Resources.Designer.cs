@@ -1685,5 +1685,19 @@ namespace LogicCircuit {
  		public static string CommandCircuitPower {
 			get { return ResourceManager.GetString("CommandCircuitPower", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Rotate Left.
+		/// </summary>
+ 		public static string CommandEditRotateLeft {
+			get { return ResourceManager.GetString("CommandEditRotateLeft", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Rotate Right.
+		/// </summary>
+ 		public static string CommandEditRotateRight {
+			get { return ResourceManager.GetString("CommandEditRotateRight", Culture); }
+		}
 	}
 }

@@ -1,5 +1,6 @@
 ToDo list:
 
+Editor.ExportImage shoud consider rotation when evaluating bounding rectangle of the image
 Binding errors in the runing tree
 
 smarter wires

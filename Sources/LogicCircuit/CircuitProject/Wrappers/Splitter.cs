@@ -24,7 +24,7 @@ namespace LogicCircuit {
 			get { return this.fieldPinCount; }
 			set { this.fieldPinCount = BasePin.CheckBitWidth(value); }
 		}
-		public CircuitRotation Rotation;
+		public Rotation Rotation;
 		internal Splitter Splitter;
 
 		private interface IFieldSerializer {
@@ -142,22 +142,22 @@ namespace LogicCircuit {
 		}
 
 		// Accessor of the Rotation field
-		public sealed class RotationField : IField<SplitterData, CircuitRotation>, IFieldSerializer {
+		public sealed class RotationField : IField<SplitterData, Rotation>, IFieldSerializer {
 			public static readonly RotationField Field = new RotationField();
 			private RotationField() {}
 			public string Name { get { return "Rotation"; } }
 			public int Order { get; set; }
-			public CircuitRotation DefaultValue { get { return default(CircuitRotation); } }
-			public CircuitRotation GetValue(ref SplitterData record) {
+			public Rotation DefaultValue { get { return default(Rotation); } }
+			public Rotation GetValue(ref SplitterData record) {
 				return record.Rotation;
 			}
-			public void SetValue(ref SplitterData record, CircuitRotation value) {
+			public void SetValue(ref SplitterData record, Rotation value) {
 				record.Rotation = value;
 			}
 			public int Compare(ref SplitterData l, ref SplitterData r) {
 				return l.Rotation.CompareTo(r.Rotation);
 			}
-			public int Compare(CircuitRotation l, CircuitRotation r) {
+			public int Compare(Rotation l, Rotation r) {
 				return l.CompareTo(r);
 			}
 
@@ -172,7 +172,7 @@ namespace LogicCircuit {
 				data.Rotation = this.DefaultValue;
 			}
 			void IFieldSerializer.SetTextValue(ref SplitterData data, string text) {
-				data.Rotation = (CircuitRotation)Enum.Parse(typeof(CircuitRotation), text, true);
+				data.Rotation = (Rotation)Enum.Parse(typeof(Rotation), text, true);
 			}
 		}
 
@@ -312,7 +312,7 @@ namespace LogicCircuit {
 		}
 
 		// Gets or sets value of the Rotation field.
-		public CircuitRotation Rotation {
+		public Rotation Rotation {
 			get { return this.Table.GetField(this.SplitterRowId, SplitterData.RotationField.Field); }
 			set { this.Table.SetField(this.SplitterRowId, SplitterData.RotationField.Field, value); }
 		}
@@ -422,7 +422,7 @@ namespace LogicCircuit {
 			Guid SplitterId,
 			int BitWidth,
 			int PinCount,
-			CircuitRotation Rotation
+			Rotation Rotation
 			// Fields of Circuit table
 
 		) {

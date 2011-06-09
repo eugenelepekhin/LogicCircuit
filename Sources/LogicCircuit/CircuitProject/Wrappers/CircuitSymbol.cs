@@ -18,6 +18,7 @@ namespace LogicCircuit {
 		public Guid LogicalCircuitId;
 		public int X;
 		public int Y;
+		public Rotation Rotation;
 		internal CircuitSymbol CircuitSymbol;
 
 		private interface IFieldSerializer {
@@ -204,6 +205,41 @@ namespace LogicCircuit {
 			}
 		}
 
+		// Accessor of the Rotation field
+		public sealed class RotationField : IField<CircuitSymbolData, Rotation>, IFieldSerializer {
+			public static readonly RotationField Field = new RotationField();
+			private RotationField() {}
+			public string Name { get { return "Rotation"; } }
+			public int Order { get; set; }
+			public Rotation DefaultValue { get { return Rotation.Up; } }
+			public Rotation GetValue(ref CircuitSymbolData record) {
+				return record.Rotation;
+			}
+			public void SetValue(ref CircuitSymbolData record, Rotation value) {
+				record.Rotation = value;
+			}
+			public int Compare(ref CircuitSymbolData l, ref CircuitSymbolData r) {
+				return l.Rotation.CompareTo(r.Rotation);
+			}
+			public int Compare(Rotation l, Rotation r) {
+				return l.CompareTo(r);
+			}
+
+			// Implementation of interface IFieldSerializer
+			bool IFieldSerializer.NeedToSave(ref CircuitSymbolData data) {
+				return this.Compare(data.Rotation, this.DefaultValue) != 0;
+			}
+			string IFieldSerializer.GetTextValue(ref CircuitSymbolData data) {
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Rotation);
+			}
+			void IFieldSerializer.SetDefault(ref CircuitSymbolData data) {
+				data.Rotation = this.DefaultValue;
+			}
+			void IFieldSerializer.SetTextValue(ref CircuitSymbolData data, string text) {
+				data.Rotation = (Rotation)Enum.Parse(typeof(Rotation), text, true);
+			}
+		}
+
 		// Special field used to access items wrapper of this record from record.
 		// This is used when no other universes is used
 		internal sealed class CircuitSymbolField : IField<CircuitSymbolData, CircuitSymbol> {
@@ -237,6 +273,7 @@ namespace LogicCircuit {
 				,LogicalCircuitIdField.Field
 				,XField.Field
 				,YField.Field
+				,RotationField.Field
 				,CircuitSymbolField.Field
 			);
 			// Create all but foreign keys of the table
@@ -366,6 +403,12 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.CircuitSymbolRowId, CircuitSymbolData.YField.Field, value); }
 		}
 
+		// Gets or sets value of the Rotation field.
+		public Rotation Rotation {
+			get { return this.Table.GetField(this.CircuitSymbolRowId, CircuitSymbolData.RotationField.Field); }
+			set { this.Table.SetField(this.CircuitSymbolRowId, CircuitSymbolData.RotationField.Field, value); }
+		}
+
 
 		internal void NotifyChanged(TableChange<CircuitSymbolData> change) {
 			if(this.HasListener) {
@@ -386,6 +429,9 @@ namespace LogicCircuit {
 				}
 				if(CircuitSymbolData.YField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("Y");
+				}
+				if(CircuitSymbolData.RotationField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("Rotation");
 				}
 			}
 			this.OnCircuitSymbolChanged();
@@ -472,7 +518,8 @@ namespace LogicCircuit {
 			Circuit Circuit,
 			LogicalCircuit LogicalCircuit,
 			int X,
-			int Y
+			int Y,
+			Rotation Rotation
 		) {
 			CircuitSymbolData dataCircuitSymbol = new CircuitSymbolData() {
 				CircuitSymbolId = CircuitSymbolId,
@@ -480,6 +527,7 @@ namespace LogicCircuit {
 				LogicalCircuitId = (LogicalCircuit != null) ? LogicalCircuit.LogicalCircuitId : CircuitSymbolData.LogicalCircuitIdField.Field.DefaultValue,
 				X = X,
 				Y = Y,
+				Rotation = Rotation,
 			};
 			return this.Create(this.Table.Insert(ref dataCircuitSymbol));
 		}

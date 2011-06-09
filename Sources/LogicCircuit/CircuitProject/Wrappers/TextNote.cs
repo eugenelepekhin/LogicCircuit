@@ -20,6 +20,7 @@ namespace LogicCircuit {
 		public int Width;
 		public int Height;
 		public string Note;
+		public Rotation Rotation;
 		internal TextNote TextNote;
 
 		private interface IFieldSerializer {
@@ -276,6 +277,41 @@ namespace LogicCircuit {
 			}
 		}
 
+		// Accessor of the Rotation field
+		public sealed class RotationField : IField<TextNoteData, Rotation>, IFieldSerializer {
+			public static readonly RotationField Field = new RotationField();
+			private RotationField() {}
+			public string Name { get { return "Rotation"; } }
+			public int Order { get; set; }
+			public Rotation DefaultValue { get { return Rotation.Up; } }
+			public Rotation GetValue(ref TextNoteData record) {
+				return record.Rotation;
+			}
+			public void SetValue(ref TextNoteData record, Rotation value) {
+				record.Rotation = value;
+			}
+			public int Compare(ref TextNoteData l, ref TextNoteData r) {
+				return l.Rotation.CompareTo(r.Rotation);
+			}
+			public int Compare(Rotation l, Rotation r) {
+				return l.CompareTo(r);
+			}
+
+			// Implementation of interface IFieldSerializer
+			bool IFieldSerializer.NeedToSave(ref TextNoteData data) {
+				return this.Compare(data.Rotation, this.DefaultValue) != 0;
+			}
+			string IFieldSerializer.GetTextValue(ref TextNoteData data) {
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Rotation);
+			}
+			void IFieldSerializer.SetDefault(ref TextNoteData data) {
+				data.Rotation = this.DefaultValue;
+			}
+			void IFieldSerializer.SetTextValue(ref TextNoteData data, string text) {
+				data.Rotation = (Rotation)Enum.Parse(typeof(Rotation), text, true);
+			}
+		}
+
 		// Special field used to access items wrapper of this record from record.
 		// This is used when no other universes is used
 		internal sealed class TextNoteField : IField<TextNoteData, TextNote> {
@@ -311,6 +347,7 @@ namespace LogicCircuit {
 				,WidthField.Field
 				,HeightField.Field
 				,NoteField.Field
+				,RotationField.Field
 				,TextNoteField.Field
 			);
 			// Create all but foreign keys of the table
@@ -451,6 +488,12 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.TextNoteRowId, TextNoteData.NoteField.Field, value); }
 		}
 
+		// Gets or sets value of the Rotation field.
+		public Rotation Rotation {
+			get { return this.Table.GetField(this.TextNoteRowId, TextNoteData.RotationField.Field); }
+			set { this.Table.SetField(this.TextNoteRowId, TextNoteData.RotationField.Field, value); }
+		}
+
 
 		internal void NotifyChanged(TableChange<TextNoteData> change) {
 			if(this.HasListener) {
@@ -477,6 +520,9 @@ namespace LogicCircuit {
 				}
 				if(TextNoteData.NoteField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("Note");
+				}
+				if(TextNoteData.RotationField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("Rotation");
 				}
 			}
 			this.OnTextNoteChanged();
@@ -565,7 +611,8 @@ namespace LogicCircuit {
 			int Y,
 			int Width,
 			int Height,
-			string Note
+			string Note,
+			Rotation Rotation
 		) {
 			TextNoteData dataTextNote = new TextNoteData() {
 				TextNoteId = TextNoteId,
@@ -575,6 +622,7 @@ namespace LogicCircuit {
 				Width = Width,
 				Height = Height,
 				Note = Note,
+				Rotation = Rotation,
 			};
 			return this.Create(this.Table.Insert(ref dataTextNote));
 		}

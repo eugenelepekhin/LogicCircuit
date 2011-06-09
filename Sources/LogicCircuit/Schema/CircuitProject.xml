@@ -196,7 +196,7 @@
 			<Column Name="SplitterId" Type="Guid" ReadOnly="true"/>
 			<Column Name="BitWidth" Type="int" Check="BasePin.CheckBitWidth"/>
 			<Column Name="PinCount" Type="int" Check="BasePin.CheckBitWidth"/>
-			<Column Name="Rotation" Type="CircuitRotation"/>
+			<Column Name="Rotation" Type="Rotation"/>
 		</Table.Columns>
 
 		<Table.Keys>
@@ -213,6 +213,7 @@
 			<Column Name="LogicalCircuitId" Type="Guid" PropertyOverrides="true" AccessModifier="Protected" PropertyNamePrefix="Symbol"/>
 			<Column Name="X" Type="int"/>
 			<Column Name="Y" Type="int"/>
+			<Column Name="Rotation" Type="Rotation" Default="Rotation.Up"/>
 		</Table.Columns>
 
 		<Table.Keys>
@@ -272,6 +273,7 @@
 			<Column Name="Width" Type="int" Default="10"/>
 			<Column Name="Height" Type="int" Default="10"/>
 			<Column Name="Note" Type="string" Default=""/>
+			<Column Name="Rotation" Type="Rotation" Default="Rotation.Up"/>
 		</Table.Columns>
 
 		<Table.Keys>

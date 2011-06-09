@@ -27,6 +27,8 @@ namespace LogicCircuit {
 		public static readonly RoutedUICommand EditUnselectAllButWires = Create("CommandEditUnselectAllButWires");
 		public static readonly RoutedUICommand EditSelectAllProbes = Create("CommandEditSelectAllProbes");
 		public static readonly RoutedUICommand EditSelectAllProbesWithWire = Create("CommandEditSelectAllProbesWithWire");
+		public static readonly RoutedUICommand EditRotateLeft = Create("CommandEditRotateLeft", new KeyGesture(Key.L, ModifierKeys.Control));
+		public static readonly RoutedUICommand EditRotateRight = Create("CommandEditRotateRight", new KeyGesture(Key.R, ModifierKeys.Control));
 
 		public static readonly RoutedUICommand CircuitProject = Create("CommandCircuitProject");
 		public static readonly RoutedUICommand CircuitCurrent = Create("CommandCircuitCurrent");

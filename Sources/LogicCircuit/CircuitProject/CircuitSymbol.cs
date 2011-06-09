@@ -5,7 +5,7 @@ using System.Windows.Controls;
 using System.Xml;
 
 namespace LogicCircuit {
-	public partial class CircuitSymbol {
+	public partial class CircuitSymbol : IRotatable {
 
 		public override void DeleteSymbol() {
 			if(this.Circuit is Gate || this.Circuit is LogicalCircuit) {
@@ -68,7 +68,7 @@ namespace LogicCircuit {
 		}
 
 		public CircuitSymbol Create(Circuit circuit, LogicalCircuit logicalCircuit, int x, int y) {
-			return this.CreateItem(Guid.NewGuid(), circuit, logicalCircuit, x, y);
+			return this.CreateItem(Guid.NewGuid(), circuit, logicalCircuit, x, y, CircuitSymbolData.RotationField.Field.DefaultValue);
 		}
 
 		public CircuitSymbol Copy(CircuitSymbol other, LogicalCircuit target) {

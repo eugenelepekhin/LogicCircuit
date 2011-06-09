@@ -6,27 +6,29 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace LogicCircuit {
 	partial class EditorDiagram {
 		private class TextNoteMarker : Marker {
 
 			private static readonly Action<TextNoteMarker, Point>[] move = new Action<TextNoteMarker, Point>[] {
-				(marker, point) => { marker.x = point.X - Symbol.ScreenPoint(marker.TextNote.X); marker.y = point.Y - Symbol.ScreenPoint(marker.TextNote.Y); },
-				(marker, point) => { marker.y = point.Y - Symbol.ScreenPoint(marker.TextNote.Y); },
-				(marker, point) => { marker.w = point.X - Symbol.ScreenPoint(marker.TextNote.X + marker.TextNote.Width); marker.y = point.Y - Symbol.ScreenPoint(marker.TextNote.Y); },
+				(marker, point) => { marker.x = point.X - marker.textNoteRect.X; marker.y = point.Y - marker.textNoteRect.Y; },
+				(marker, point) => { marker.y = point.Y - marker.textNoteRect.Y; },
+				(marker, point) => { marker.w = point.X - marker.textNoteRect.Right; marker.y = point.Y - marker.textNoteRect.Y; },
 
-				(marker, point) => { marker.x = point.X - Symbol.ScreenPoint(marker.TextNote.X); },
+				(marker, point) => { marker.x = point.X - marker.textNoteRect.X; },
 				null,
-				(marker, point) => { marker.w = point.X - Symbol.ScreenPoint(marker.TextNote.X + marker.TextNote.Width); },
+				(marker, point) => { marker.w = point.X - marker.textNoteRect.Right; },
 
-				(marker, point) => { marker.x = point.X - Symbol.ScreenPoint(marker.TextNote.X); marker.h = point.Y - Symbol.ScreenPoint(marker.TextNote.Y + marker.TextNote.Height); },
-				(marker, point) => { marker.h = point.Y - Symbol.ScreenPoint(marker.TextNote.Y + marker.TextNote.Height); },
-				(marker, point) => { marker.w = point.X - Symbol.ScreenPoint(marker.TextNote.X + marker.TextNote.Width); marker.h = point.Y - Symbol.ScreenPoint(marker.TextNote.Y + marker.TextNote.Height); }
+				(marker, point) => { marker.x = point.X - marker.textNoteRect.X; marker.h = point.Y - marker.textNoteRect.Bottom; },
+				(marker, point) => { marker.h = point.Y - marker.textNoteRect.Bottom; },
+				(marker, point) => { marker.w = point.X - marker.textNoteRect.Right; marker.h = point.Y - marker.textNoteRect.Bottom; }
 			};
 
 			public TextNote TextNote { get; private set; }
 			public override Symbol Symbol { get { return this.TextNote; } }
+			private Rect textNoteRect;
 
 			public Canvas MarkerGlyph { get; private set; }
 			public override FrameworkElement Glyph { get { return this.MarkerGlyph; } }
@@ -44,7 +46,7 @@ namespace LogicCircuit {
 				this.TextNote = textNote;
 				this.MarkerGlyph = new Canvas();
 				this.MarkerGlyph.DataContext = this;
-				this.MarkerGlyph.ToolTip = "text note";
+				this.MarkerGlyph.ToolTip = Resources.TextNotation;
 				Panel.SetZIndex(this.rectangle, 0);
 				this.MarkerGlyph.Children.Add(this.rectangle);
 				this.resizeMarker = new ResizeMarker[] {
@@ -55,7 +57,38 @@ namespace LogicCircuit {
 				foreach(ResizeMarker marker in this.resizeMarker) {
 					this.MarkerGlyph.Children.Add(marker.Glyph);
 				}
+				this.SnapToTextNote();
 				this.PositionGlyph();
+			}
+
+			private void SnapToTextNote() {
+				Rect rect = new Rect(
+					Symbol.ScreenPoint(this.TextNote.X),
+					Symbol.ScreenPoint(this.TextNote.Y),
+					Symbol.ScreenPoint(this.TextNote.Width),
+					Symbol.ScreenPoint(this.TextNote.Height)
+				);
+				if(this.TextNote.Rotation != Rotation.Up) {
+					Point point = Symbol.RotationCenter(this.TextNote.Width, this.TextNote.Height);
+					RotateTransform transform = new RotateTransform(Symbol.Angle(this.TextNote), rect.X + rect.Width * point.X, rect.Y + rect.Height * point.Y);
+					rect = transform.TransformBounds(rect);
+				}
+				this.textNoteRect = rect;
+			}
+
+			public Rect ResizedRect() {
+				this.x = 0;
+				this.y = 0;
+				this.w = 0;
+				this.h = 0;
+				
+				Rect rect = new Rect(Canvas.GetLeft(this.MarkerGlyph), Canvas.GetTop(this.MarkerGlyph), this.rectangle.Width, this.rectangle.Height);
+				if(this.TextNote.Rotation != Rotation.Up) {
+					Point point = Symbol.RotationCenter(Symbol.GridPoint(rect.Width), Symbol.GridPoint(rect.Height));
+					RotateTransform transform = new RotateTransform(-Symbol.Angle(this.TextNote), rect.X + rect.Width * point.X, rect.Y + rect.Height * point.Y);
+					rect = transform.TransformBounds(rect);
+				}
+				return rect;
 			}
 
 			public override void Move(EditorDiagram editor, Point point) {
@@ -64,10 +97,12 @@ namespace LogicCircuit {
 
 			public override void Commit(EditorDiagram editor, Point point, bool withWires) {
 				editor.CommitMove(point, withWires);
+				this.SnapToTextNote();
 			}
 
 			public override void Shift(int dx, int dy) {
 				this.TextNote.Shift(dx, dy);
+				this.SnapToTextNote();
 				this.PositionTextNoteGliph();
 
 			}
@@ -78,10 +113,10 @@ namespace LogicCircuit {
 			}
 
 			public void PositionGlyph() {
-				double sx = Symbol.ScreenPoint(this.TextNote.X) + this.x;
-				double sy = Symbol.ScreenPoint(this.TextNote.Y) + this.y;
-				double sw = Symbol.ScreenPoint(this.TextNote.Width) - this.x + this.w;
-				double sh = Symbol.ScreenPoint(this.TextNote.Height) - this.y + this.h;
+				double sx = this.textNoteRect.X + this.x;
+				double sy = this.textNoteRect.Y + this.y;
+				double sw = this.textNoteRect.Width - this.x + this.w;
+				double sh = this.textNoteRect.Height - this.y + this.h;
 				Rect rect = new Rect(new Point(sx, sy), new Point(sx + sw, sy + sh));
 
 				Canvas.SetLeft(this.MarkerGlyph, rect.X);
@@ -94,13 +129,14 @@ namespace LogicCircuit {
 				}
 			}
 
-			public Rect ResizedRect() {
+			public void Refresh() {
 				this.x = 0;
 				this.y = 0;
 				this.w = 0;
 				this.h = 0;
-				
-				return new Rect(Canvas.GetLeft(this.MarkerGlyph), Canvas.GetTop(this.MarkerGlyph), this.rectangle.Width, this.rectangle.Height);
+
+				this.SnapToTextNote();
+				this.PositionGlyph();
 			}
 		
 			private class ResizeMarker : Marker {
@@ -155,7 +191,6 @@ namespace LogicCircuit {
 						editor.CommitMove(point, withWires);
 					} else {
 						editor.CommitMove(this.parent);
-						this.PositionGlyph();
 					}
 				}
 

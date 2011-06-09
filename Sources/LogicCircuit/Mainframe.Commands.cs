@@ -399,6 +399,52 @@ namespace LogicCircuit {
 			}
 		}
 
+		private void EditRotateLeftCommandExecuted(object target, ExecutedRoutedEventArgs e) {
+			try {
+				if(this.IsEditorInEditMode() && this.Editor.SelectionCount == 1) {
+					IRotatable symbol = this.Editor.SelectedSymbols.FirstOrDefault() as IRotatable;
+					if(symbol != null) {
+						this.Editor.RotateLeft(symbol, (Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.None);
+					}
+				}
+			} catch(Exception exception) {
+				Tracer.Report("Mainframe.EditRotateLeftCommandExecuted", exception);
+				this.ReportException(exception);
+			}
+		}
+
+		private void EditRotateLeftCommandCanExecute(object target, CanExecuteRoutedEventArgs e) {
+			try {
+				e.CanExecute = (this.IsEditorInEditMode() && this.Editor.SelectionCount == 1 && this.Editor.SelectedSymbols.FirstOrDefault() is IRotatable);
+			} catch(Exception exception) {
+				Tracer.Report("Mainframe.EditRotateLeftCommandCanExecute", exception);
+				this.ReportException(exception);
+			}
+		}
+
+		private void EditRotateRightCommandExecuted(object target, ExecutedRoutedEventArgs e) {
+			try {
+				if(this.IsEditorInEditMode() && this.Editor.SelectionCount == 1) {
+					IRotatable symbol = this.Editor.SelectedSymbols.FirstOrDefault() as IRotatable;
+					if(symbol != null) {
+						this.Editor.RotateRight(symbol, (Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.None);
+					}
+				}
+			} catch(Exception exception) {
+				Tracer.Report("Mainframe.EditRotateRightCommandExecuted", exception);
+				this.ReportException(exception);
+			}
+		}
+
+		private void EditRotateRightCommandCanExecute(object target, CanExecuteRoutedEventArgs e) {
+			try {
+				e.CanExecute = (this.IsEditorInEditMode() && this.Editor.SelectionCount == 1 && this.Editor.SelectedSymbols.FirstOrDefault() is IRotatable);
+			} catch(Exception exception) {
+				Tracer.Report("Mainframe.EditRotateRightCommandCanExecute", exception);
+				this.ReportException(exception);
+			}
+		}
+
 		private void CircuitProjectCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
 				if(this.IsEditorInEditMode()) {
@@ -486,7 +532,7 @@ namespace LogicCircuit {
 					this.Editor.Power = !this.Editor.Power;
 				}
 			} catch(Exception exception) {
-				Tracer.Report("Mainframe.CircuitDeleteCommandExecuted", exception);
+				Tracer.Report("Mainframe.CircuitPowerCommandExecuted", exception);
 				this.ReportException(exception);
 			}
 		}
@@ -495,7 +541,7 @@ namespace LogicCircuit {
 			try {
 				e.CanExecute = (this.Editor != null);
 			} catch(Exception exception) {
-				Tracer.Report("Mainframe.CircuitDeleteCommandCanExecute", exception);
+				Tracer.Report("Mainframe.CircuitPowerCommandCanExecute", exception);
 				this.ReportException(exception);
 			}
 		}

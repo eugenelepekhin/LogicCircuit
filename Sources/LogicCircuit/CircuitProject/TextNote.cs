@@ -7,9 +7,10 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Markup;
 using System.Xml;
+using System.Windows.Media;
 
 namespace LogicCircuit {
-	public partial class TextNote {
+	public partial class TextNote : IRotatable {
 		private FlowDocumentScrollViewer glyph = null;
 
 		public FlowDocumentScrollViewer TextNoteGlyph {
@@ -38,6 +39,9 @@ namespace LogicCircuit {
 			Canvas.SetTop(doc, Symbol.ScreenPoint(this.Y));
 			doc.Width = Symbol.ScreenPoint(this.Width);
 			doc.Height = Symbol.ScreenPoint(this.Height);
+
+			doc.RenderTransformOrigin = Symbol.RotationCenter(this.Width, this.Height);
+			doc.RenderTransform = new RotateTransform(Symbol.Angle(this));
 		}
 
 		public override int Z { get { return 0; } }
@@ -141,7 +145,9 @@ namespace LogicCircuit {
 		}
 
 		public TextNote Create(LogicalCircuit logicalCircuit, GridPoint point, string note) {
-			return this.CreateItem(Guid.NewGuid(), logicalCircuit, point.X, point.Y, TextNoteData.WidthField.Field.DefaultValue, TextNoteData.HeightField.Field.DefaultValue, note);
+			return this.CreateItem(Guid.NewGuid(), logicalCircuit, point.X, point.Y,
+				TextNoteData.WidthField.Field.DefaultValue, TextNoteData.HeightField.Field.DefaultValue, note, TextNoteData.RotationField.Field.DefaultValue
+			);
 		}
 
 		public TextNote Copy(TextNote other, LogicalCircuit target) {

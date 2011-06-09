@@ -124,6 +124,32 @@ namespace LogicCircuit {
 			);
 		}
 
+		public static bool IsHorizontal(IRotatable symbol) {
+			Rotation rotation = symbol.Rotation;
+			return rotation == Rotation.Right || rotation == Rotation.Left;
+		}
+
+		public static double Angle(IRotatable symbol) {
+			switch(symbol.Rotation) {
+			case Rotation.Up:	return 0;
+			case Rotation.Right:return 90;
+			case Rotation.Down:	return 180;
+			case Rotation.Left:	return -90;
+			}
+			Tracer.Fail("Invalid Rotation");
+			return 0;
+		}
+
+		public static Point RotationCenter(int width, int height) {
+			if((width & 1) == (height & 1)) {
+				return new Point(0.5, 0.5);
+			}
+			return new Point(
+				(double)(width / 2) / (double)width,
+				(double)(height / 2) / (double)height
+			);
+		}
+
 		//---------------------------------------------------------------------
 
 		public event PropertyChangedEventHandler PropertyChanged;

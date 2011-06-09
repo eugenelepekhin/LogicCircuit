@@ -100,7 +100,7 @@ namespace LogicCircuit.UnitTest {
 			Assert.AreEqual(2, project.MemorySet.Count());
 			Assert.AreEqual(10, project.DevicePinSet.Count());
 
-			Splitter splitter = project.SplitterSet.Create(8, 4, CircuitRotation.Down);
+			Splitter splitter = project.SplitterSet.Create(8, 4, Rotation.Down);
 			Assert.AreEqual(1, project.SplitterSet.Count());
 			Assert.AreEqual(15, project.DevicePinSet.Count());
 
