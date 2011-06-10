@@ -25,6 +25,7 @@ namespace LogicCircuit {
 			doc.DataContext = this;
 			doc.Document = TextNote.Load(this.Note);
 			Panel.SetZIndex(doc, this.Z);
+			doc.RenderTransform = new RotateTransform();
 			return doc;
 		}
 
@@ -41,7 +42,8 @@ namespace LogicCircuit {
 			doc.Height = Symbol.ScreenPoint(this.Height);
 
 			doc.RenderTransformOrigin = Symbol.RotationCenter(this.Width, this.Height);
-			doc.RenderTransform = new RotateTransform(Symbol.Angle(this));
+			RotateTransform rotation = (RotateTransform)doc.RenderTransform;
+			rotation.Angle = Symbol.Angle(this);
 		}
 
 		public override int Z { get { return 0; } }

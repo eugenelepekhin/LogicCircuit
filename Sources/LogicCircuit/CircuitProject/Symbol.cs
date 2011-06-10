@@ -150,6 +150,23 @@ namespace LogicCircuit {
 			);
 		}
 
+		public static Point MarkerRotationCenter(int width, int height) {
+			if((width & 1) == (height & 1)) {
+				return new Point(0.5, 0.5);
+			}
+			if((width & 1) == 0) {
+				return new Point(
+					0.5,
+					(Symbol.ScreenPoint(height / 2) + Symbol.PinRadius) / (Symbol.ScreenPoint(height) + 2 * Symbol.PinRadius)
+				);
+			} else {
+				return new Point(
+					(Symbol.ScreenPoint(width / 2) + Symbol.PinRadius) / (Symbol.ScreenPoint(width) + 2 * Symbol.PinRadius),
+					0.5
+				);
+			}
+		}
+
 		//---------------------------------------------------------------------
 
 		public event PropertyChangedEventHandler PropertyChanged;

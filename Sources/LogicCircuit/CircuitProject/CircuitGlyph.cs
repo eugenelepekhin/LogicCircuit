@@ -171,6 +171,7 @@ namespace LogicCircuit {
 			canvas.Width = Symbol.ScreenPoint(this.Circuit.SymbolWidth);
 			canvas.Height = Symbol.ScreenPoint(this.Circuit.SymbolHeight);
 			canvas.ToolTip = this.Circuit.ToolTip;
+			canvas.RenderTransform = new RotateTransform();
 			return canvas;
 		}
 

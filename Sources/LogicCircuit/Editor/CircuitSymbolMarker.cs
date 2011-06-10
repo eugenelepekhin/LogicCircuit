@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
+using System.Windows.Media;
 
 namespace LogicCircuit {
 	partial class EditorDiagram {
@@ -19,6 +20,7 @@ namespace LogicCircuit {
 				this.CircuitSymbol = symbol;
 				this.MarkerGlyph = Symbol.Skin<Rectangle>(SymbolShape.MarkerRectangle);
 				this.MarkerGlyph.DataContext = this;
+				this.MarkerGlyph.RenderTransform = this.CircuitSymbol.Glyph.RenderTransform;
 				this.Invalidate();
 			}
 
@@ -46,6 +48,7 @@ namespace LogicCircuit {
 			private void PositionGlyph() {
 				Canvas.SetLeft(this.MarkerGlyph, Symbol.ScreenPoint(this.CircuitSymbol.X) - Symbol.PinRadius);
 				Canvas.SetTop(this.MarkerGlyph, Symbol.ScreenPoint(this.CircuitSymbol.Y) - Symbol.PinRadius);
+				this.MarkerGlyph.RenderTransformOrigin = Symbol.MarkerRotationCenter(this.CircuitSymbol.Circuit.SymbolWidth, this.CircuitSymbol.Circuit.SymbolHeight);
 			}
 		}
 	}

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Xml;
 
 namespace LogicCircuit {
@@ -39,6 +40,9 @@ namespace LogicCircuit {
 			FrameworkElement glyph = this.Glyph;
 			Canvas.SetLeft(glyph, Symbol.ScreenPoint(this.X));
 			Canvas.SetTop(glyph, Symbol.ScreenPoint(this.Y));
+			glyph.RenderTransformOrigin = Symbol.RotationCenter(this.Circuit.SymbolWidth, this.Circuit.SymbolHeight);
+			RotateTransform rotation = (RotateTransform)glyph.RenderTransform;
+			rotation.Angle = Symbol.Angle(this);
 		}
 
 		public override Symbol CopyTo(LogicalCircuit target) {

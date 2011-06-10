@@ -655,28 +655,14 @@ namespace LogicCircuit {
 		}
 
 		public void RotateLeft(IRotatable symbol, bool withWires) {
-			Tracer.Assert(((Symbol)symbol).LogicalCircuit == this.Project.LogicalCircuit);
-			this.ClearSelection();
-			CircuitSymbol circuitSymbol = symbol as CircuitSymbol;
-			if(circuitSymbol == null) {
-				withWires = false;
-			}
-			List<Jam> jams = null;
-			if(withWires) {
-				jams = new List<Jam>(circuitSymbol.Jams());
-			}
-			this.CircuitProject.InTransaction(() => {
-				EditorDiagram.RotateLeft(symbol);
-				if(withWires) {
-					circuitSymbol.Reset();
-					circuitSymbol.GuaranteeGlyph();
-
-				}
-			});
-			this.Select((Symbol)symbol);
+			this.Rotate(symbol, withWires, EditorDiagram.RotateLeft);
 		}
 
 		public void RotateRight(IRotatable symbol, bool withWires) {
+			this.Rotate(symbol, withWires, EditorDiagram.RotateRight);
+		}
+
+		private void Rotate(IRotatable symbol, bool withWires, Action<IRotatable> rotation) {
 			Tracer.Assert(((Symbol)symbol).LogicalCircuit == this.Project.LogicalCircuit);
 			this.ClearSelection();
 			CircuitSymbol circuitSymbol = symbol as CircuitSymbol;
@@ -688,7 +674,7 @@ namespace LogicCircuit {
 				jams = new List<Jam>(circuitSymbol.Jams());
 			}
 			this.CircuitProject.InTransaction(() => {
-				EditorDiagram.RotateRight(symbol);
+				rotation(symbol);
 			});
 			this.Select((Symbol)symbol);
 		}
