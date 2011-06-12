@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel;
+using System.Windows;
+using System.Windows.Media;
 
 namespace LogicCircuit {
 	public abstract class Jam {
@@ -14,7 +12,21 @@ namespace LogicCircuit {
 		public int Z { get { return this.Pin.Inverted ? 2 : 0; } }
 
 		public GridPoint AbsolutePoint {
-			get { return this.CircuitSymbol.Point.Offset(this.X, this.Y); }
+			get {
+				CircuitSymbol symbol = this.CircuitSymbol as CircuitSymbol;
+				if(symbol != null && symbol.Rotation != Rotation.Up) {
+					Point origin = Symbol.RotationCenter(symbol.Circuit.SymbolWidth, symbol.Circuit.SymbolHeight);
+					Matrix matrix = new Matrix();
+					matrix.RotateAt(Symbol.Angle(symbol),
+						Symbol.ScreenPoint(symbol.X) + Symbol.ScreenPoint(symbol.Circuit.SymbolWidth) * origin.X,
+						Symbol.ScreenPoint(symbol.Y) + Symbol.ScreenPoint(symbol.Circuit.SymbolHeight) * origin.Y
+					);
+					return Symbol.GridPoint(matrix.Transform(Symbol.ScreenPoint(symbol.Point.Offset(this.X, this.Y))));
+				} else {
+					return this.CircuitSymbol.Point.Offset(this.X, this.Y);
+				}
+			}
+			
 		}
 
 		public bool IsValid(int bitNumber) {

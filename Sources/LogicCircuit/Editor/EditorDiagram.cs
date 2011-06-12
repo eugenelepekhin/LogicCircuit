@@ -669,12 +669,31 @@ namespace LogicCircuit {
 			if(circuitSymbol == null) {
 				withWires = false;
 			}
-			List<Jam> jams = null;
+			Dictionary<GridPoint, int> oldPoints = null;
 			if(withWires) {
-				jams = new List<Jam>(circuitSymbol.Jams());
+				oldPoints = new Dictionary<GridPoint, int>();
+				int i = 0;
+				foreach(Jam jam in circuitSymbol.Jams()) {
+					oldPoints.Add(jam.AbsolutePoint, i++);
+				}
 			}
 			this.CircuitProject.InTransaction(() => {
 				rotation(symbol);
+				if(withWires) {
+					List<GridPoint> newPoints = new List<GridPoint>(circuitSymbol.Jams().Select(j => j.AbsolutePoint));
+					foreach(Wire wire in this.Project.LogicalCircuit.Wires()) {
+						int index;
+						if(oldPoints.TryGetValue(wire.Point1, out index)) {
+							wire.Point1 = newPoints[index];
+							wire.PositionGlyph();
+						}
+						if(oldPoints.TryGetValue(wire.Point2, out index)) {
+							wire.Point2 = newPoints[index];
+							wire.PositionGlyph();
+						}
+					}
+				}
+				this.DeleteEmptyWires();
 			});
 			this.Select((Symbol)symbol);
 		}
