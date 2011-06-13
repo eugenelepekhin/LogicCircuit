@@ -189,6 +189,10 @@ namespace LogicCircuit {
 			}
 			foreach(CircuitSymbol symbol in logicalCircuit.CircuitSymbols()) {
 				Rect symbolRect = new Rect(Symbol.ScreenPoint(symbol.Point), new Size(symbol.Glyph.Width, symbol.Glyph.Height));
+				if(symbol.Rotation != Rotation.Up) {
+					Matrix matrix = Symbol.RotationTransform(symbol.Rotation, symbol.X, symbol.Y, symbol.Circuit.SymbolWidth, symbol.Circuit.SymbolHeight);
+					symbolRect = Symbol.Transform(symbolRect, ref matrix);
+				}
 				if(isEmpty) {
 					rect = symbolRect;
 					isEmpty = false;
@@ -198,6 +202,10 @@ namespace LogicCircuit {
 			}
 			foreach(TextNote symbol in logicalCircuit.TextNotes()) {
 				Rect symbolRect = new Rect(Symbol.ScreenPoint(symbol.Point), new Size(symbol.Glyph.Width, symbol.Glyph.Height));
+				if(symbol.Rotation != Rotation.Up) {
+					Matrix matrix = Symbol.RotationTransform(symbol.Rotation, symbol.X, symbol.Y, symbol.Width, symbol.Height);
+					symbolRect = Symbol.Transform(symbolRect, ref matrix);
+				}
 				if(isEmpty) {
 					rect = symbolRect;
 					isEmpty = false;
@@ -206,6 +214,7 @@ namespace LogicCircuit {
 				}
 			}
 			if(!isEmpty) {
+				this.ClearSelection();
 				Canvas diagram = this.Diagram;
 				Brush oldBackground = diagram.Background;
 				Transform oldRenderTransform = diagram.RenderTransform;
