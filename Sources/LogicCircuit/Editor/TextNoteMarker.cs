@@ -69,9 +69,8 @@ namespace LogicCircuit {
 					Symbol.ScreenPoint(this.TextNote.Height)
 				);
 				if(this.TextNote.Rotation != Rotation.Up) {
-					Point point = Symbol.RotationCenter(this.TextNote.Width, this.TextNote.Height);
-					RotateTransform transform = new RotateTransform(Symbol.Angle(this.TextNote), rect.X + rect.Width * point.X, rect.Y + rect.Height * point.Y);
-					rect = transform.TransformBounds(rect);
+					Matrix matrix = Symbol.RotationTransform(this.TextNote.Rotation, this.TextNote.X, this.TextNote.Y, this.TextNote.Width, this.TextNote.Height);
+					rect = Symbol.Transform(rect, ref matrix);
 				}
 				this.textNoteRect = rect;
 			}
@@ -84,9 +83,8 @@ namespace LogicCircuit {
 				
 				Rect rect = new Rect(Canvas.GetLeft(this.MarkerGlyph), Canvas.GetTop(this.MarkerGlyph), this.rectangle.Width, this.rectangle.Height);
 				if(this.TextNote.Rotation != Rotation.Up) {
-					Point point = Symbol.RotationCenter(Symbol.GridPoint(rect.Width), Symbol.GridPoint(rect.Height));
-					RotateTransform transform = new RotateTransform(-Symbol.Angle(this.TextNote), rect.X + rect.Width * point.X, rect.Y + rect.Height * point.Y);
-					rect = transform.TransformBounds(rect);
+					Matrix matrix = Symbol.RotationTransform(-Symbol.Angle(this.TextNote.Rotation), this.TextNote.X, this.TextNote.Y, this.TextNote.Width, this.TextNote.Height);
+					rect = Symbol.Transform(rect, ref matrix);
 				}
 				return rect;
 			}

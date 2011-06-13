@@ -42,7 +42,7 @@ namespace LogicCircuit {
 			Canvas.SetTop(glyph, Symbol.ScreenPoint(this.Y));
 			glyph.RenderTransformOrigin = Symbol.RotationCenter(this.Circuit.SymbolWidth, this.Circuit.SymbolHeight);
 			RotateTransform rotation = (RotateTransform)glyph.RenderTransform;
-			rotation.Angle = Symbol.Angle(this);
+			rotation.Angle = Symbol.Angle(this.Rotation);
 		}
 
 		public override Symbol CopyTo(LogicalCircuit target) {

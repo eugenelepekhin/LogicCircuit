@@ -129,8 +129,8 @@ namespace LogicCircuit {
 			return rotation == Rotation.Right || rotation == Rotation.Left;
 		}
 
-		public static double Angle(IRotatable symbol) {
-			switch(symbol.Rotation) {
+		public static double Angle(Rotation rotation) {
+			switch(rotation) {
 			case Rotation.Up:	return 0;
 			case Rotation.Right:return 90;
 			case Rotation.Down:	return 180;
@@ -165,6 +165,24 @@ namespace LogicCircuit {
 					0.5
 				);
 			}
+		}
+
+		public static Matrix RotationTransform(double rotation, int x, int y, int width, int height) {
+			Point origin = Symbol.RotationCenter(width, height);
+			Matrix matrix = new Matrix();
+			matrix.RotateAt(rotation,
+				Symbol.ScreenPoint(x) + Symbol.ScreenPoint(width) * origin.X,
+				Symbol.ScreenPoint(y) + Symbol.ScreenPoint(height) * origin.Y
+			);
+			return matrix;
+		}
+
+		public static Matrix RotationTransform(Rotation rotation, int x, int y, int width, int height) {
+			return Symbol.RotationTransform(Symbol.Angle(rotation), x, y, width, height);
+		}
+
+		public static Rect Transform(Rect rect, ref Matrix matrix) {
+			return new Rect(matrix.Transform(rect.TopLeft), matrix.Transform(rect.BottomRight));
 		}
 
 		//---------------------------------------------------------------------

@@ -43,7 +43,7 @@ namespace LogicCircuit {
 
 			doc.RenderTransformOrigin = Symbol.RotationCenter(this.Width, this.Height);
 			RotateTransform rotation = (RotateTransform)doc.RenderTransform;
-			rotation.Angle = Symbol.Angle(this);
+			rotation.Angle = Symbol.Angle(this.Rotation);
 		}
 
 		public override int Z { get { return 0; } }
