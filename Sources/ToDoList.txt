@@ -1,7 +1,6 @@
 ToDo list:
 
 Rotation of symbols
-Editor.ExportImage shoud consider rotation when evaluating bounding rectangle of the image
 Splitter transform in xslt
 
 Binding errors in the runing tree
