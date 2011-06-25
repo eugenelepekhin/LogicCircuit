@@ -181,7 +181,7 @@ namespace LogicCircuit {
 			return Symbol.RotationTransform(Symbol.Angle(rotation), x, y, width, height);
 		}
 
-		public static Rect Transform(Rect rect, ref Matrix matrix) {
+		public static Rect Transform(Rect rect, Matrix matrix) {
 			return new Rect(matrix.Transform(rect.TopLeft), matrix.Transform(rect.BottomRight));
 		}
 

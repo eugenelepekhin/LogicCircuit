@@ -190,8 +190,7 @@ namespace LogicCircuit {
 			foreach(CircuitSymbol symbol in logicalCircuit.CircuitSymbols()) {
 				Rect symbolRect = new Rect(Symbol.ScreenPoint(symbol.Point), new Size(symbol.Glyph.Width, symbol.Glyph.Height));
 				if(symbol.Rotation != Rotation.Up) {
-					Matrix matrix = Symbol.RotationTransform(symbol.Rotation, symbol.X, symbol.Y, symbol.Circuit.SymbolWidth, symbol.Circuit.SymbolHeight);
-					symbolRect = Symbol.Transform(symbolRect, ref matrix);
+					symbolRect = Symbol.Transform(symbolRect, Symbol.RotationTransform(symbol.Rotation, symbol.X, symbol.Y, symbol.Circuit.SymbolWidth, symbol.Circuit.SymbolHeight));
 				}
 				if(isEmpty) {
 					rect = symbolRect;
@@ -203,8 +202,7 @@ namespace LogicCircuit {
 			foreach(TextNote symbol in logicalCircuit.TextNotes()) {
 				Rect symbolRect = new Rect(Symbol.ScreenPoint(symbol.Point), new Size(symbol.Glyph.Width, symbol.Glyph.Height));
 				if(symbol.Rotation != Rotation.Up) {
-					Matrix matrix = Symbol.RotationTransform(symbol.Rotation, symbol.X, symbol.Y, symbol.Width, symbol.Height);
-					symbolRect = Symbol.Transform(symbolRect, ref matrix);
+					symbolRect = Symbol.Transform(symbolRect, Symbol.RotationTransform(symbol.Rotation, symbol.X, symbol.Y, symbol.Width, symbol.Height));
 				}
 				if(isEmpty) {
 					rect = symbolRect;
