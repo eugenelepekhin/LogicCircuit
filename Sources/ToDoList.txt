@@ -13,3 +13,5 @@ Display device
 
 Colors of symbols
 Collapsable/expandable categories
+
+Localize Enum names used in UI: Enum.GetNames, Enum.GetValues
