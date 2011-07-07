@@ -489,11 +489,12 @@
 										/>
 										<TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Static lc:Resources.CaptionPinNumber}" Margin="8,0,0,0" VerticalAlignment="Center"/>
 
-										<ComboBox Grid.Row="2" Grid.Column="0"
-											ItemsSource="{Binding Path=CircuitRotationRange}" SelectedItem="{Binding Path=CircuitRotation}"
+										<ComboBox Grid.Row="2" Grid.Column="0" MinWidth="{Binding ElementName=comboRuler, Path=ActualWidth}"
+											ItemsSource="{Binding Path=DirectionRange}" SelectedIndex="{Binding Path=Direction}"
 											ToolTip="{x:Static lc:Resources.ToolTipSplitterRotation}"
 										/>
-										<TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Static lc:Resources.CaptionRotation}" Margin="8,0,0,0" VerticalAlignment="Center"/>
+										<TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Static lc:Resources.CaptionSplitterDirection}" Margin="8,0,0,0" VerticalAlignment="Center"/>
+										<ListBox Name="comboRuler" Height="0" Visibility="Hidden" ItemsSource="{Binding Path=DirectionRange}" Padding="5"/>
 									</Grid>
 									<TextBlock Style="{StaticResource CircuitName}"/>
 								</StackPanel>

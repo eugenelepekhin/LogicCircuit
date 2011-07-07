@@ -3,4 +3,17 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 >
 	<Rectangle Fill="Black" Margin="3"/>
+	<Path Fill="White" Margin="0,15,0,0" VerticalAlignment="Top" HorizontalAlignment="Center">
+		<Path.Data>
+			<PathGeometry>
+				<PathFigure StartPoint="3,0" IsClosed="True">
+					<PathFigure.Segments>
+						<LineSegment Point="0,5"/>
+						<LineSegment Point="6,5"/>
+						<LineSegment Point="3,0"/>
+					</PathFigure.Segments>
+				</PathFigure>
+			</PathGeometry>
+		</Path.Data>
+	</Path>
 </Grid>

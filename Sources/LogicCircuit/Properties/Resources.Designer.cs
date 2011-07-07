@@ -1407,10 +1407,10 @@ namespace LogicCircuit {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Rotation.
+		/// Looks up a localized string similar to Combined Pin.
 		/// </summary>
- 		public static string CaptionRotation {
-			get { return ResourceManager.GetString("CaptionRotation", Culture); }
+ 		public static string CaptionSplitterDirection {
+			get { return ResourceManager.GetString("CaptionSplitterDirection", Culture); }
 		}
 
 		/// <summary>
@@ -1698,6 +1698,20 @@ namespace LogicCircuit {
 		/// </summary>
  		public static string CommandEditRotateRight {
 			get { return ResourceManager.GetString("CommandEditRotateRight", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Left.
+		/// </summary>
+ 		public static string SplitterDirectionClockwise {
+			get { return ResourceManager.GetString("SplitterDirectionClockwise", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Right.
+		/// </summary>
+ 		public static string SplitterDirectionCounterclockwise {
+			get { return ResourceManager.GetString("SplitterDirectionCounterclockwise", Culture); }
 		}
 	}
 }

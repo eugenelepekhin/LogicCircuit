@@ -69,49 +69,37 @@ namespace LogicCircuit {
 			DevicePin pin = this.CircuitProject.DevicePinSet.Create(splitter, PinType.None, splitter.BitWidth);
 			pin.Name = Resources.SplitterWidePinName;
 			PinSide pinSide;
-			switch(splitter.Rotation) {
-			case Rotation.Up:
-				pinSide = PinSide.Bottom;
-				pin.PinSide = PinSide.Top;
-				break;
-			case Rotation.Right:
-				pinSide = PinSide.Left;
-				pin.PinSide = PinSide.Right;
-				break;
-			case Rotation.Down:
-				pinSide = PinSide.Top;
-				pin.PinSide = PinSide.Bottom;
-				break;
-			case Rotation.Left:
+			if(splitter.Clockwise) {
 				pinSide = PinSide.Right;
 				pin.PinSide = PinSide.Left;
-				break;
-			default:
-				Tracer.Fail();
-				return;
+			} else {
+				pinSide = PinSide.Left;
+				pin.PinSide = PinSide.Right;
 			}
-			int pinWidth = splitter.BitWidth / splitter.PinCount + Math.Sign(splitter.BitWidth % splitter.PinCount);
-			int width = 0;
-			for(int i = 0; i < splitter.PinCount; i++) {
-				pinWidth = Math.Min(pinWidth, splitter.BitWidth - width);
-				if(pinWidth < 1) {
-					splitter.PinCount = i;
-					Tracer.Assert(1 < i);
-					break;
-				}
+			int pinWidth = splitter.BitWidth / splitter.PinCount;
+			int rem = splitter.BitWidth % splitter.PinCount;
+			for(int i = 0; i < rem; i++) {
+				pin = this.CircuitProject.DevicePinSet.Create(splitter, PinType.None, pinWidth + 1);
+				pin.PinSide = pinSide;
+				SplitterSet.SetName(pin, i * (pinWidth + 1), pinWidth + 1);
+			}
+			for(int i = rem; i < splitter.PinCount; i++) {
 				pin = this.CircuitProject.DevicePinSet.Create(splitter, PinType.None, pinWidth);
 				pin.PinSide = pinSide;
-				if(pinWidth == 1) {
-					pin.Name = Resources.SplitterThin1PinName(width);
-				} else {
-					pin.Name = Resources.SplitterThin2PinName(width, width + pinWidth - 1);
-				}
-				width += pinWidth;
+				SplitterSet.SetName(pin, i * pinWidth + rem, pinWidth);
 			}
 		}
 
-		public Splitter Create(int bitWidth, int pinCount, Rotation rotation) {
-			Splitter splitter = this.CreateItem(Guid.NewGuid(), bitWidth, pinCount, rotation);
+		private static void SetName(DevicePin pin, int firstBit, int pinWidth) {
+			if(pinWidth == 1) {
+				pin.Name = Resources.SplitterThin1PinName(firstBit);
+			} else {
+				pin.Name = Resources.SplitterThin2PinName(firstBit, firstBit + pinWidth - 1);
+			}
+		}
+
+		public Splitter Create(int bitWidth, int pinCount, bool clockwise) {
+			Splitter splitter = this.CreateItem(Guid.NewGuid(), bitWidth, pinCount, clockwise);
 			this.CreatePins(splitter);
 			return splitter;
 		}

@@ -196,7 +196,7 @@
 			<Column Name="SplitterId" Type="Guid" ReadOnly="true"/>
 			<Column Name="BitWidth" Type="int" Check="BasePin.CheckBitWidth"/>
 			<Column Name="PinCount" Type="int" Check="BasePin.CheckBitWidth"/>
-			<Column Name="Rotation" Type="Rotation"/>
+			<Column Name="Clockwise" Type="bool"/>
 		</Table.Columns>
 
 		<Table.Keys>

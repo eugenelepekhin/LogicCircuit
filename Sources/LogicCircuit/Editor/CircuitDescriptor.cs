@@ -210,16 +210,16 @@ namespace LogicCircuit {
 	public class SplitterDescriptor : CircuitDescriptor<Splitter> {
 		public int BitWidth { get; set; }
 		public int PinCount { get; set; }
-		public Rotation CircuitRotation { get; set; }
+		public int Direction { get; set; }
 
 		public IEnumerable<int> BitWidthRange { get; private set; }
 		public IEnumerable<int> PinCountRange { get; private set; }
-		public IEnumerable<Rotation> CircuitRotationRange { get; private set; }
+		public IEnumerable<string> DirectionRange { get; private set; }
 
-		public SplitterDescriptor(CircuitProject circuitProject) : base(circuitProject.SplitterSet.Create(3, 3, Rotation.Left)) {
+		public SplitterDescriptor(CircuitProject circuitProject) : base(circuitProject.SplitterSet.Create(3, 3, true)) {
 			this.BitWidth = 3;
 			this.PinCount = 3;
-			this.CircuitRotation = LogicCircuit.Rotation.Left;
+			this.Direction = 0;
 			this.BitWidthRange = PinDescriptor.BitRange(2);
 
 			int[] pinRange = new int[Gate.MaxInputCount - 2];
@@ -228,14 +228,14 @@ namespace LogicCircuit {
 			}
 			this.PinCountRange = pinRange;
 
-			this.CircuitRotationRange = (Rotation[])Enum.GetValues(typeof(Rotation));
+			this.DirectionRange = new string[] { Resources.SplitterDirectionClockwise, Resources.SplitterDirectionCounterclockwise };
 		}
 
 		protected override Splitter GetCircuitToDrop(CircuitProject circuitProject) {
 			if(this.BitWidth < this.PinCount) {
 				throw new CircuitException(Cause.UserError, Resources.ErrorWrongSplitter);
 			}
-			return circuitProject.SplitterSet.Create(this.BitWidth, this.PinCount, this.CircuitRotation);
+			return circuitProject.SplitterSet.Create(Math.Max(this.BitWidth, this.PinCount), this.PinCount, this.Direction == 0);
 		}
 	}
 

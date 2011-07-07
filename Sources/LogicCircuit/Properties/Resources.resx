@@ -768,8 +768,8 @@ Do you want to replace it?</value>
   <data name="CaptionPinNumber" xml:space="preserve">
     <value>Pins</value>
   </data>
-  <data name="CaptionRotation" xml:space="preserve">
-    <value>Rotation</value>
+  <data name="CaptionSplitterDirection" xml:space="preserve">
+    <value>Combined Pin</value>
   </data>
   <data name="CaptionSide" xml:space="preserve">
     <value>Side</value>
@@ -893,5 +893,11 @@ Do you want to replace it?</value>
   </data>
   <data name="CommandEditRotateRight" xml:space="preserve">
     <value>Rotate Right</value>
+  </data>
+  <data name="SplitterDirectionClockwise" xml:space="preserve">
+    <value>Left</value>
+  </data>
+  <data name="SplitterDirectionCounterclockwise" xml:space="preserve">
+    <value>Right</value>
   </data>
 </root>

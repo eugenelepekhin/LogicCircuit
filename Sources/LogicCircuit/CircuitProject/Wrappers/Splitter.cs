@@ -24,7 +24,7 @@ namespace LogicCircuit {
 			get { return this.fieldPinCount; }
 			set { this.fieldPinCount = BasePin.CheckBitWidth(value); }
 		}
-		public Rotation Rotation;
+		public bool Clockwise;
 		internal Splitter Splitter;
 
 		private interface IFieldSerializer {
@@ -141,38 +141,38 @@ namespace LogicCircuit {
 			}
 		}
 
-		// Accessor of the Rotation field
-		public sealed class RotationField : IField<SplitterData, Rotation>, IFieldSerializer {
-			public static readonly RotationField Field = new RotationField();
-			private RotationField() {}
-			public string Name { get { return "Rotation"; } }
+		// Accessor of the Clockwise field
+		public sealed class ClockwiseField : IField<SplitterData, bool>, IFieldSerializer {
+			public static readonly ClockwiseField Field = new ClockwiseField();
+			private ClockwiseField() {}
+			public string Name { get { return "Clockwise"; } }
 			public int Order { get; set; }
-			public Rotation DefaultValue { get { return default(Rotation); } }
-			public Rotation GetValue(ref SplitterData record) {
-				return record.Rotation;
+			public bool DefaultValue { get { return default(bool); } }
+			public bool GetValue(ref SplitterData record) {
+				return record.Clockwise;
 			}
-			public void SetValue(ref SplitterData record, Rotation value) {
-				record.Rotation = value;
+			public void SetValue(ref SplitterData record, bool value) {
+				record.Clockwise = value;
 			}
 			public int Compare(ref SplitterData l, ref SplitterData r) {
-				return l.Rotation.CompareTo(r.Rotation);
+				return l.Clockwise.CompareTo(r.Clockwise);
 			}
-			public int Compare(Rotation l, Rotation r) {
+			public int Compare(bool l, bool r) {
 				return l.CompareTo(r);
 			}
 
 			// Implementation of interface IFieldSerializer
 			bool IFieldSerializer.NeedToSave(ref SplitterData data) {
-				return this.Compare(data.Rotation, this.DefaultValue) != 0;
+				return this.Compare(data.Clockwise, this.DefaultValue) != 0;
 			}
 			string IFieldSerializer.GetTextValue(ref SplitterData data) {
-				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Rotation);
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Clockwise);
 			}
 			void IFieldSerializer.SetDefault(ref SplitterData data) {
-				data.Rotation = this.DefaultValue;
+				data.Clockwise = this.DefaultValue;
 			}
 			void IFieldSerializer.SetTextValue(ref SplitterData data, string text) {
-				data.Rotation = (Rotation)Enum.Parse(typeof(Rotation), text, true);
+				data.Clockwise = bool.Parse(text);
 			}
 		}
 
@@ -207,7 +207,7 @@ namespace LogicCircuit {
 				,SplitterIdField.Field
 				,BitWidthField.Field
 				,PinCountField.Field
-				,RotationField.Field
+				,ClockwiseField.Field
 				,SplitterField.Field
 			);
 			// Create all but foreign keys of the table
@@ -311,10 +311,10 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.SplitterRowId, SplitterData.PinCountField.Field, value); }
 		}
 
-		// Gets or sets value of the Rotation field.
-		public Rotation Rotation {
-			get { return this.Table.GetField(this.SplitterRowId, SplitterData.RotationField.Field); }
-			set { this.Table.SetField(this.SplitterRowId, SplitterData.RotationField.Field, value); }
+		// Gets or sets value of the Clockwise field.
+		public bool Clockwise {
+			get { return this.Table.GetField(this.SplitterRowId, SplitterData.ClockwiseField.Field); }
+			set { this.Table.SetField(this.SplitterRowId, SplitterData.ClockwiseField.Field, value); }
 		}
 
 
@@ -332,8 +332,8 @@ namespace LogicCircuit {
 				if(SplitterData.PinCountField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("PinCount");
 				}
-				if(SplitterData.RotationField.Field.Compare(ref oldData, ref newData) != 0) {
-					this.NotifyPropertyChanged("Rotation");
+				if(SplitterData.ClockwiseField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("Clockwise");
 				}
 			}
 			this.OnSplitterChanged();
@@ -422,7 +422,7 @@ namespace LogicCircuit {
 			Guid SplitterId,
 			int BitWidth,
 			int PinCount,
-			Rotation Rotation
+			bool Clockwise
 			// Fields of Circuit table
 
 		) {
@@ -436,7 +436,7 @@ namespace LogicCircuit {
 				SplitterId = SplitterId,
 				BitWidth = BitWidth,
 				PinCount = PinCount,
-				Rotation = Rotation,
+				Clockwise = Clockwise,
 			};
 			return this.Create(this.Table.Insert(ref dataSplitter), rowIdCircuit);
 		}
