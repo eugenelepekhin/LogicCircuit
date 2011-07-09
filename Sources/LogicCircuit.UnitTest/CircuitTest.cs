@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using LogicCircuit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Diagnostics;
 
 namespace LogicCircuit.UnitTest {
 	/// <summary>

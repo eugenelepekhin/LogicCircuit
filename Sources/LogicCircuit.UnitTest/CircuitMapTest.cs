@@ -46,7 +46,6 @@ namespace LogicCircuit.UnitTest {
 		//
 		#endregion
 
-
 		/// <summary>
 		///A test for Apply
 		///</summary>
