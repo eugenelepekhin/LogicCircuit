@@ -64,7 +64,7 @@
 
 		<CollectionViewSource x:Key="circuitDescriptorList" Source="{Binding Path=Editor.CircuitDescriptorList.CircuitDescriptors}">
 			<CollectionViewSource.GroupDescriptions>
-				<PropertyGroupDescription PropertyName="Circuit.Category"/>
+				<PropertyGroupDescription PropertyName="Category"/>
 			</CollectionViewSource.GroupDescriptions>
 		</CollectionViewSource>
 	</Window.Resources>

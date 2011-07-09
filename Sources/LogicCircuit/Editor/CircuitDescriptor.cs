@@ -9,6 +9,7 @@ using System.Windows;
 namespace LogicCircuit {
 	public interface IDescriptor {
 		Circuit Circuit { get; }
+		string Category { get; }
 		void CreateSymbol(EditorDiagram editor, GridPoint point);
 	}
 	
@@ -16,6 +17,8 @@ namespace LogicCircuit {
 		public T Circuit { get; private set; }
 		Circuit IDescriptor.Circuit { get { return this.Circuit; } }
 		public CircuitGlyph CircuitGlyph { get; private set; }
+
+		public string Category { get; set; }
 
 		protected abstract T GetCircuitToDrop(CircuitProject circuitProject);
 
@@ -26,6 +29,7 @@ namespace LogicCircuit {
 
 		protected CircuitDescriptor(T circuit) {
 			this.Circuit = circuit;
+			this.Category = circuit.Category;
 			this.CircuitGlyph = new CircuitDescriptorGlyph(this);
 		}
 
@@ -243,7 +247,10 @@ namespace LogicCircuit {
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		public LogicalCircuitDescriptor(LogicalCircuit logicalCircuit) : base(logicalCircuit) {
+		public LogicalCircuitDescriptor(LogicalCircuit logicalCircuit, Predicate<string> isReserved) : base(logicalCircuit) {
+			if(isReserved(logicalCircuit.Category)) {
+				this.Category = Resources.CategoryDuplicate(logicalCircuit.Category);
+			}
 		}
 
 		public bool IsCurrent { get { return this.Circuit == this.Circuit.CircuitProject.ProjectSet.Project.LogicalCircuit; } }
@@ -267,6 +274,7 @@ namespace LogicCircuit {
 	public class TextNoteDescriptor : IDescriptor {
 
 		public Circuit Circuit { get; private set; }
+		public string Category { get { return this.Circuit.Category; } }
 
 		public TextNoteDescriptor(CircuitProject circuitProject) {
 			// create dummy circuit to provide category and name for sorting and displaying in list of circuits descriptors

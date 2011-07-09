@@ -469,7 +469,7 @@ namespace LogicCircuit {
 		}
 
 		public FrameworkElement CircuitGlyph {
-			get { return new LogicalCircuitDescriptor(this.Circuit).CircuitGlyph.Glyph; }
+			get { return new LogicalCircuitDescriptor(this.Circuit, s => false).CircuitGlyph.Glyph; }
 		}
 
 		private void Apply(CircuitState circuitState, SymbolMap symbolMap, int probeCapacity) {
