@@ -291,6 +291,7 @@
 							<Style TargetType="ContentControl">
 								<Setter Property="IsTabStop" Value="False"/>
 								<Setter Property="VerticalAlignment" Value="Center"/>
+								<Setter Property="MinWidth" Value="50"/>
 								<Setter Property="Margin" Value="3,3,8,3"/>
 								<Setter Property="Content" Value="{Binding Path=CircuitGlyph.Glyph}"/>
 								<Setter Property="LayoutTransform">
