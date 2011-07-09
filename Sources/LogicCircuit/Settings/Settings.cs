@@ -128,7 +128,7 @@ namespace LogicCircuit {
 		private static string FileName() {
 			return Path.Combine(
 				Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-				@"LogicCircuit\Settings2.xml"
+				@"LogicCircuit\Settings.xml"
 			);
 		}
 
