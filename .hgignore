@@ -8,3 +8,4 @@ glob:*.csproj.user
 glob:*.vsp
 glob:*.psess
 glob:*.msi
+glob:*.orig
