@@ -64,7 +64,7 @@
 
 		<CollectionViewSource x:Key="circuitDescriptorList" Source="{Binding Path=Editor.CircuitDescriptorList.CircuitDescriptors}">
 			<CollectionViewSource.GroupDescriptions>
-				<PropertyGroupDescription PropertyName="Circuit.Category"/>
+				<PropertyGroupDescription PropertyName="Category"/>
 			</CollectionViewSource.GroupDescriptions>
 		</CollectionViewSource>
 	</Window.Resources>
@@ -297,6 +297,7 @@
 							<Style TargetType="ContentControl">
 								<Setter Property="IsTabStop" Value="False"/>
 								<Setter Property="VerticalAlignment" Value="Center"/>
+								<Setter Property="MinWidth" Value="50"/>
 								<Setter Property="Margin" Value="3,3,8,3"/>
 								<Setter Property="Content" Value="{Binding Path=CircuitGlyph.Glyph}"/>
 								<Setter Property="LayoutTransform">

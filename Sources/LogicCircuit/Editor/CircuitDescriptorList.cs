@@ -36,7 +36,9 @@ namespace LogicCircuit {
 				this.current = null;
 				this.logicalCircuitDescriptors.Clear();
 				foreach(LogicalCircuit circuit in this.circuitProject.LogicalCircuitSet) {
-					LogicalCircuitDescriptor descriptor = new LogicalCircuitDescriptor(circuit);
+					LogicalCircuitDescriptor descriptor = new LogicalCircuitDescriptor(circuit,
+						s => primitiveList.Any(d => StringComparer.OrdinalIgnoreCase.Equals(d.Category, s))
+					);
 					if(descriptor.IsCurrent) {
 						Tracer.Assert(this.current == null);
 						this.current = descriptor;

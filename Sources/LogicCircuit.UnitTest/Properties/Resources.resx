@@ -121,6 +121,9 @@
   <data name="Digital_Clock" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>digital clock.circuitproject;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="FunctionTest" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>functiontest.circuitproject;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="IntegerCalculator" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>integercalculator.circuitproject;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>

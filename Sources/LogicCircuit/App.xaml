@@ -167,9 +167,9 @@
 				<TextBlock FontWeight="Bold" Foreground="{x:Static SystemColors.AppWorkspaceBrush}">
 					<TextBlock.Style>
 						<Style TargetType="TextBlock">
-							<Setter Property="Text" Value="{Binding Path=Items[0].Circuit.Category}"/>
+							<Setter Property="Text" Value="{Binding Path=Items[0].Category}"/>
 							<Style.Triggers>
-								<DataTrigger Binding="{Binding Path=Items[0].Circuit.Category}" Value="">
+								<DataTrigger Binding="{Binding Path=Items[0].Category}" Value="">
 									<Setter Property="Text" Value="{Binding Path=Items[0].Circuit.CircuitProject.ProjectSet.Project.Name}"/>
 								</DataTrigger>
 							</Style.Triggers>

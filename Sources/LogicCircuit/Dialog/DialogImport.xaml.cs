@@ -96,7 +96,7 @@ namespace LogicCircuit {
 			public bool Import { get; set; }
 			public bool CanImport { get; private set; }
 
-			public CircuitInfo(LogicalCircuit circuit, bool canImport) : base(circuit) {
+			public CircuitInfo(LogicalCircuit circuit, bool canImport) : base(circuit, s => false) {
 				this.CanImport = canImport;
 			}
 

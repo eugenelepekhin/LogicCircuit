@@ -19,8 +19,7 @@ namespace LogicCircuit {
 		}
 
 		public override string Notation {
-			//TODO: revert to throwing
-			get { return string.Empty; /*throw new InvalidOperationException();*/ }
+			get { return this.Name; }
 			set { throw new InvalidOperationException(); }
 		}
 

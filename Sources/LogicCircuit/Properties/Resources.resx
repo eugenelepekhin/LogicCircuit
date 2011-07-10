@@ -900,4 +900,8 @@ Do you want to replace it?</value>
   <data name="SplitterDirectionCounterclockwise" xml:space="preserve">
     <value>Right</value>
   </data>
+  <data name="CategoryDuplicate" xml:space="preserve">
+    <value>{0} 2</value>
+    <comment>{string reservedCategoryName}</comment>
+  </data>
 </root>

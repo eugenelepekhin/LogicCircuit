@@ -1713,5 +1713,12 @@ namespace LogicCircuit {
  		public static string SplitterDirectionCounterclockwise {
 			get { return ResourceManager.GetString("SplitterDirectionCounterclockwise", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to {0} 2.
+		/// </summary>
+ 		public static string CategoryDuplicate(string reservedCategoryName) {
+			return string.Format(Culture, ResourceManager.GetString("CategoryDuplicate", Culture), reservedCategoryName);
+		}
 	}
 }
