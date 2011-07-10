@@ -904,4 +904,16 @@ Do you want to replace it?</value>
     <value>{0} 2</value>
     <comment>{string reservedCategoryName}</comment>
   </data>
+  <data name="PinSideBottom" xml:space="preserve">
+    <value>Bottom</value>
+  </data>
+  <data name="PinSideLeft" xml:space="preserve">
+    <value>Left</value>
+  </data>
+  <data name="PinSideRight" xml:space="preserve">
+    <value>Right</value>
+  </data>
+  <data name="PinSideTop" xml:space="preserve">
+    <value>Top</value>
+  </data>
 </root>

@@ -172,24 +172,28 @@ namespace LogicCircuit {
 	}
 
 	public class PinDescriptor : CircuitDescriptor<Pin> {
+		public static IEnumerable<string> PinSideNames {
+			get { return new string[] { Resources.PinSideLeft, Resources.PinSideTop, Resources.PinSideRight, Resources.PinSideBottom }; }
+		}
+
 		public int BitWidth { get; set; }
-		public PinSide PinSide { get; set; }
+		public int PinSide { get; set; }
 
 		public IEnumerable<int> BitWidthRange { get; private set; }
-		public IEnumerable<PinSide> PinSideRange { get; set; }
+		public IEnumerable<string> PinSideRange { get; private set; }
 
 		public PinDescriptor(CircuitProject circuitProject, PinType pinType) : base(
 			circuitProject.PinSet.Create(circuitProject.ProjectSet.Project.LogicalCircuit, pinType, 1)
 		) {
 			this.BitWidth = 1;
-			this.PinSide = (pinType == PinType.Input) ? PinSide.Left : PinSide.Right;
+			this.PinSide = (int)((pinType == PinType.Input) ? LogicCircuit.PinSide.Left : LogicCircuit.PinSide.Right);
 			this.BitWidthRange = PinDescriptor.BitRange(1);
-			this.PinSideRange = (PinSide[])Enum.GetValues(typeof(PinSide));
+			this.PinSideRange = PinDescriptor.PinSideNames;
 		}
 
 		protected override Pin GetCircuitToDrop(CircuitProject circuitProject) {
 			Pin pin = circuitProject.PinSet.Create(circuitProject.ProjectSet.Project.LogicalCircuit, this.Circuit.PinType, this.BitWidth);
-			pin.PinSide = this.PinSide;
+			pin.PinSide = (PinSide)this.PinSide;
 			return pin;
 		}
 

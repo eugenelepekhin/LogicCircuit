@@ -22,8 +22,8 @@ namespace LogicCircuit {
 			this.name.Text = this.pin.Name;
 			this.notation.Text = this.pin.JamNotation;
 			this.note.Text = this.pin.Note;
-			this.side.ItemsSource = Enum.GetNames(typeof(PinSide));
-			this.side.SelectedItem = this.pin.PinSide.ToString();
+			this.side.ItemsSource = PinDescriptor.PinSideNames;
+			this.side.SelectedIndex = (int)this.pin.PinSide;
 			this.inverted.IsChecked = this.pin.Inverted;
 			this.bitWidth.ItemsSource = PinDescriptor.BitRange(1);
 			this.bitWidth.SelectedItem = this.pin.BitWidth;
@@ -34,7 +34,7 @@ namespace LogicCircuit {
 				string name = this.name.Text.Trim();
 				string notation = this.notation.Text.Trim();
 				string note = this.note.Text.Trim();
-				PinSide pinSide = (PinSide)Enum.Parse(typeof(PinSide), this.side.SelectedItem.ToString());
+				PinSide pinSide = (PinSide)this.side.SelectedIndex;
 				bool inverted = this.inverted.IsChecked.Value;
 				int bitWidth = (int)this.bitWidth.SelectedItem;
 

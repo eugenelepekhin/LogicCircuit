@@ -1720,5 +1720,33 @@ namespace LogicCircuit {
  		public static string CategoryDuplicate(string reservedCategoryName) {
 			return string.Format(Culture, ResourceManager.GetString("CategoryDuplicate", Culture), reservedCategoryName);
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Bottom.
+		/// </summary>
+ 		public static string PinSideBottom {
+			get { return ResourceManager.GetString("PinSideBottom", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Left.
+		/// </summary>
+ 		public static string PinSideLeft {
+			get { return ResourceManager.GetString("PinSideLeft", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Right.
+		/// </summary>
+ 		public static string PinSideRight {
+			get { return ResourceManager.GetString("PinSideRight", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Top.
+		/// </summary>
+ 		public static string PinSideTop {
+			get { return ResourceManager.GetString("PinSideTop", Culture); }
+		}
 	}
 }
