@@ -310,6 +310,7 @@
 							<Style x:Key="DescriptorPanel" TargetType="StackPanel">
 								<Setter Property="Orientation" Value="Horizontal"/>
 								<Setter Property="Margin" Value="8,0,0,0"/>
+								<Setter Property="Background" Value="Transparent"/>
 							</Style>
 
 							<Style x:Key="CircuitName" TargetType="TextBlock">
@@ -529,24 +530,10 @@
 									MouseUp="DescriptorMouseUp"
 									MouseMove="DescriptorMouseMove"
 								>
-									<FlowDocumentScrollViewer VerticalAlignment="Center"
-										VerticalScrollBarVisibility="Hidden"
-										HorizontalScrollBarVisibility="Hidden"
-										Zoom="0.7"
-										Focusable="False"
-										Cursor="Arrow"
-										IsSelectionEnabled="False"
-										IsTabStop="False"
-										IsToolBarVisible="False"
-										MaxWidth="54"
-										Padding="0"
-										Margin="0"
-									>
-										<FlowDocument PagePadding="5">
-											<Paragraph FontWeight="Bold"><Run Text="{x:Static lc:Resources.CaptionTextNote1}"/></Paragraph>
-											<Paragraph FontStyle="Italic"><Run Text="{x:Static lc:Resources.CaptionTextNote2}"/></Paragraph>
-										</FlowDocument>
-									</FlowDocumentScrollViewer>
+									<StackPanel Orientation="Vertical" MinWidth="50" Margin="3">
+										<TextBlock FontFamily="Georgia" FontSize="16" FontWeight="Bold" Margin="5" Text="{x:Static lc:Resources.CaptionTextNote1}"/>
+										<TextBlock FontFamily="Georgia" FontSize="14" FontStyle="Italic" Margin="5" Text="{x:Static lc:Resources.CaptionTextNote2}"/>
+									</StackPanel>
 									<TextBlock Style="{StaticResource CircuitName}"/>
 								</StackPanel>
 							</DataTemplate>
