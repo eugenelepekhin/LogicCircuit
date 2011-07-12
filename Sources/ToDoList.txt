@@ -1,8 +1,5 @@
 ToDo list:
 
-Rotation of symbols
-Splitter transform in xslt
-
 Binding errors in the runing tree
 
 smarter wires
