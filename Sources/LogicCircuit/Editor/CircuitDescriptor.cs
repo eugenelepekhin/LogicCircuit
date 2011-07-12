@@ -91,7 +91,7 @@ namespace LogicCircuit {
 			case GateType.Xor:
 			case GateType.Odd:
 			case GateType.Even:
-				this.InputCountRange = GateDescriptor.PinRange(2, Gate.MaxInputCount);
+				this.InputCountRange = PinDescriptor.NumberRange(2, Gate.MaxInputCount);
 				this.InputCountRangeLength = this.InputCountRange.Count();
 				break;
 			default:
@@ -103,18 +103,6 @@ namespace LogicCircuit {
 
 		protected override Gate GetCircuitToDrop(CircuitProject circuitProject) {
 			return circuitProject.GateSet.Gate(this.Circuit.GateType, this.InputCount, this.Circuit.InvertedOutput);
-		}
-
-		private static List<int> PinRange(int min, int max) {
-			List<int> range = new List<int>();
-			if(min < max) {
-				for(int i = min; i <= max; i++) {
-					range.Add(i);
-				}
-			} else {
-				range.Add(min);
-			}
-			return range;
 		}
 	}
 
@@ -140,7 +128,7 @@ namespace LogicCircuit {
 		public ConstantDescriptor(CircuitProject circuitProject) : base(circuitProject.ConstantSet.Create(1, 0)) {
 			this.BitWidth = 1;
 			this.Value = "0";
-			this.BitWidthRange = PinDescriptor.BitRange(1);
+			this.BitWidthRange = PinDescriptor.NumberRange(1);
 		}
 
 		protected override Constant GetCircuitToDrop(CircuitProject circuitProject) {
@@ -163,7 +151,7 @@ namespace LogicCircuit {
 			this.AddressBitWidth = 1;
 			this.DataBitWidth = 1;
 			this.AddressBitWidthRange = PinDescriptor.AddressBitRange();
-			this.DataBitWidthRange = PinDescriptor.BitRange(1);
+			this.DataBitWidthRange = PinDescriptor.NumberRange(1);
 		}
 
 		protected override Memory GetCircuitToDrop(CircuitProject circuitProject) {
@@ -187,7 +175,7 @@ namespace LogicCircuit {
 		) {
 			this.BitWidth = 1;
 			this.PinSide = (int)((pinType == PinType.Input) ? LogicCircuit.PinSide.Left : LogicCircuit.PinSide.Right);
-			this.BitWidthRange = PinDescriptor.BitRange(1);
+			this.BitWidthRange = PinDescriptor.NumberRange(1);
 			this.PinSideRange = PinDescriptor.PinSideNames;
 		}
 
@@ -197,21 +185,21 @@ namespace LogicCircuit {
 			return pin;
 		}
 
-		public static int[] BitRange(int minBitWidth) {
-			Tracer.Assert(0 < minBitWidth && minBitWidth < BasePin.MaxBitWidth);
-			int[] range = new int[BasePin.MaxBitWidth - minBitWidth + 1];
+		public static int[] NumberRange(int minBitWidth, int maxBitWidth) {
+			Tracer.Assert(0 < minBitWidth && minBitWidth < maxBitWidth);
+			int[] range = new int[maxBitWidth - minBitWidth + 1];
 			for(int i = 0; i < range.Length; i++) {
 				range[i] = i + minBitWidth;
 			}
 			return range;
 		}
 
+		public static int[] NumberRange(int minBitWidth) {
+			return PinDescriptor.NumberRange(minBitWidth, BasePin.MaxBitWidth);
+		}
+
 		public static int[] AddressBitRange() {
-			int[] range = new int[Memory.MaxAddressBitWidth];
-			for(int i = 0; i < range.Length; i++) {
-				range[i] = i + 1;
-			}
-			return range;
+			return PinDescriptor.NumberRange(1, Memory.MaxAddressBitWidth);
 		}
 	}
 
@@ -228,14 +216,8 @@ namespace LogicCircuit {
 			this.BitWidth = 3;
 			this.PinCount = 3;
 			this.Direction = 0;
-			this.BitWidthRange = PinDescriptor.BitRange(2);
-
-			int[] pinRange = new int[Gate.MaxInputCount - 2];
-			for(int i = 0; i < pinRange.Length; i++) {
-				pinRange[i] = i + 2;
-			}
-			this.PinCountRange = pinRange;
-
+			this.BitWidthRange = PinDescriptor.NumberRange(2);
+			this.PinCountRange = PinDescriptor.NumberRange(2, Gate.MaxInputCount);
 			this.DirectionRange = new string[] { Resources.SplitterDirectionClockwise, Resources.SplitterDirectionCounterclockwise };
 		}
 

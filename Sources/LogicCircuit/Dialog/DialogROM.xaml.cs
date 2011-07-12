@@ -39,7 +39,7 @@ namespace LogicCircuit {
 			this.InitializeComponent();
 
 			this.addressBitWidth.ItemsSource = PinDescriptor.AddressBitRange();
-			this.dataBitWidth.ItemsSource = PinDescriptor.BitRange(1);
+			this.dataBitWidth.ItemsSource = PinDescriptor.NumberRange(1);
 			this.addressBitWidth.SelectedItem = this.memory.AddressBitWidth;
 			this.dataBitWidth.SelectedItem = this.memory.DataBitWidth;
 			this.Loaded += new RoutedEventHandler(this.DialogLoaded);

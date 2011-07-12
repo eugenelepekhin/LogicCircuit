@@ -25,7 +25,7 @@ namespace LogicCircuit {
 			this.side.ItemsSource = PinDescriptor.PinSideNames;
 			this.side.SelectedIndex = (int)this.pin.PinSide;
 			this.inverted.IsChecked = this.pin.Inverted;
-			this.bitWidth.ItemsSource = PinDescriptor.BitRange(1);
+			this.bitWidth.ItemsSource = PinDescriptor.NumberRange(1);
 			this.bitWidth.SelectedItem = this.pin.BitWidth;
 		}
 
