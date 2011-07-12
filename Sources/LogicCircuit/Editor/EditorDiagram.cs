@@ -243,6 +243,7 @@ namespace LogicCircuit {
 				Canvas.SetLeft(connect.Solder, Symbol.ScreenPoint(point.X) - Symbol.PinRadius);
 				Canvas.SetTop(connect.Solder, Symbol.ScreenPoint(point.Y) - Symbol.PinRadius);
 				connect.Solder.Fill = Symbol.JamDirectFill;
+				connect.Solder.DataContext = this.wirePoint;
 				this.Diagram.Children.Add(connect.Solder);
 			}
 			this.wirePoint[point] = connect;
@@ -759,6 +760,7 @@ namespace LogicCircuit {
 			e.Handled = true;
 		}
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
 		public void DiagramMouseDown(MouseButtonEventArgs e) {
 			FrameworkElement element = e.OriginalSource as FrameworkElement;
 			if(element == null) {
@@ -787,6 +789,9 @@ namespace LogicCircuit {
 							if(root != null) {
 								symbol = root.DataContext as Symbol;
 							}
+						}
+						if(symbol == null && element.DataContext == this.wirePoint) {
+							symbol = this.FindWireNear(e.GetPosition(this.Diagram));
 						}
 						Tracer.Assert(symbol != null);
 					} else {
