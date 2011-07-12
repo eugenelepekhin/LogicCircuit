@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<lc:CircuitProject xmlns:lc="http://LogicCircuit.net/2.0.0.1/CircuitProject.xsd">
+<lc:CircuitProject xmlns:lc="http://LogicCircuit.net/1.0.0.3/CircuitProject.xsd">
 	<lc:Project>
 		<lc:ProjectId>1085779a-fb30-44b8-84e5-65212e8c9046</lc:ProjectId>
 		<lc:Name>Integer Calculator</lc:Name>

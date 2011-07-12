@@ -9,7 +9,7 @@ Press H and M buttons to adjust hours and minutes.
 Press and hold H or M to auto increment.
 Press s0 to reset seconds.</lc:Description>
 		<lc:Frequency>2</lc:Frequency>
-		<lc:LogicalCircuitId>9ad1764e-6c7c-4efa-9e61-b2e328541433</lc:LogicalCircuitId>
+		<lc:LogicalCircuitId>93e9d69c-5762-4dc0-9120-dbd441f2b7b5</lc:LogicalCircuitId>
 	</lc:Project>
 	<lc:LogicalCircuit>
 		<lc:LogicalCircuitId>93e9d69c-5762-4dc0-9120-dbd441f2b7b5</lc:LogicalCircuitId>
@@ -806,73 +806,69 @@ to signals of 7 segment display.</lc:Description>
 		<lc:SplitterId>4aa071de-20a6-4dc5-96cc-ec4b9d19d3f4</lc:SplitterId>
 		<lc:BitWidth>4</lc:BitWidth>
 		<lc:PinCount>4</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>78660dda-6242-4813-991f-c695e38dd943</lc:SplitterId>
 		<lc:BitWidth>4</lc:BitWidth>
 		<lc:PinCount>4</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>1f299f8d-1be4-4733-b43c-44de8be4b0ae</lc:SplitterId>
 		<lc:BitWidth>4</lc:BitWidth>
 		<lc:PinCount>4</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>1ad69f36-8b28-47a6-afa2-5b63421bf84d</lc:SplitterId>
 		<lc:BitWidth>4</lc:BitWidth>
 		<lc:PinCount>4</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>f1daed8e-a87b-4c3c-92c7-8fd4c02d38fc</lc:SplitterId>
 		<lc:BitWidth>4</lc:BitWidth>
 		<lc:PinCount>4</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>16f5c5fb-48f3-4618-bda7-65ae5f670487</lc:SplitterId>
 		<lc:BitWidth>4</lc:BitWidth>
 		<lc:PinCount>4</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>be9cfe0c-84a0-4092-9892-8b26da43db68</lc:SplitterId>
 		<lc:BitWidth>4</lc:BitWidth>
 		<lc:PinCount>4</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>eef33fcc-7a5b-41df-9689-3d578b9a3fa8</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>d9cff15a-21d6-40d2-a1a0-a47f2511f934</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>28d3cef5-e5ff-4e98-b7c0-afdbb1f642e3</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>0c879093-8311-4858-9495-516db7cbb352</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>47e330a3-c678-4193-9d3e-db50ae826247</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:CircuitSymbol>
 		<lc:CircuitSymbolId>8a42fe45-cad4-4673-b85a-0e961b0f45cf</lc:CircuitSymbolId>
