@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 using System.Windows;
@@ -14,7 +15,7 @@ using System.Windows.Threading;
 using LogicCircuit.DataPersistent;
 
 namespace LogicCircuit {
-	[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
+	[SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 	public abstract partial class EditorDiagram {
 
 		private const int ClickProximity = 2 * Symbol.PinRadius;
@@ -760,7 +761,7 @@ namespace LogicCircuit {
 			e.Handled = true;
 		}
 
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+		[SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
 		public void DiagramMouseDown(MouseButtonEventArgs e) {
 			FrameworkElement element = e.OriginalSource as FrameworkElement;
 			if(element == null) {
@@ -857,7 +858,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
+		[SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
 		private void SymbolMouseDown(Symbol symbol, MouseButtonEventArgs e) {
 			if(this.InEditMode) {
 				if(e.ChangedButton == MouseButton.Left) {
