@@ -1400,10 +1400,10 @@ namespace LogicCircuit {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Pins.
+		/// Looks up a localized string similar to Split Pins.
 		/// </summary>
- 		public static string CaptionPinNumber {
-			get { return ResourceManager.GetString("CaptionPinNumber", Culture); }
+ 		public static string CaptionSplitterPinNumber {
+			get { return ResourceManager.GetString("CaptionSplitterPinNumber", Culture); }
 		}
 
 		/// <summary>
@@ -1617,21 +1617,21 @@ namespace LogicCircuit {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Choose bit width of the wide connector of the splitter..
+		/// Looks up a localized string similar to Choose bit width of split connector of the splitter..
 		/// </summary>
  		public static string ToolTipSplitterBitWidth {
 			get { return ResourceManager.GetString("ToolTipSplitterBitWidth", Culture); }
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Choose number of thin connectors of the splitter..
+		/// Looks up a localized string similar to Choose number of split connectors of the splitter..
 		/// </summary>
  		public static string ToolTipSplitterPinNumber {
 			get { return ResourceManager.GetString("ToolTipSplitterPinNumber", Culture); }
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Choose orientation of the wide connector of the splitter..
+		/// Looks up a localized string similar to Choose orientation of the combined connector of the splitter..
 		/// </summary>
  		public static string ToolTipSplitterRotation {
 			get { return ResourceManager.GetString("ToolTipSplitterRotation", Culture); }
@@ -1747,6 +1747,13 @@ namespace LogicCircuit {
 		/// </summary>
  		public static string PinSideTop {
 			get { return ResourceManager.GetString("PinSideTop", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Split pin bit width.
+		/// </summary>
+ 		public static string CaptionSplitterBitWidth {
+			get { return ResourceManager.GetString("CaptionSplitterBitWidth", Culture); }
 		}
 	}
 }

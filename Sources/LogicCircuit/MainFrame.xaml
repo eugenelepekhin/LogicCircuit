@@ -467,7 +467,11 @@
 									MouseUp="DescriptorMouseUp"
 									MouseMove="DescriptorMouseMove"
 								>
-									<ContentControl/>
+									<ContentControl RenderTransformOrigin="0.4,0">
+										<ContentControl.RenderTransform>
+											<ScaleTransform ScaleX="{Binding Path=Flip}"/>
+										</ContentControl.RenderTransform>
+									</ContentControl>
 									<Grid Margin="8,3,8,3" VerticalAlignment="Center">
 										<Grid.ColumnDefinitions>
 											<ColumnDefinition Width="Auto" MinWidth="65"/>
@@ -480,16 +484,16 @@
 										</Grid.RowDefinitions>
 
 										<ComboBox Grid.Row="0" Grid.Column="0"
-											ItemsSource="{Binding Path=BitWidthRange}" SelectedItem="{Binding Path=BitWidth}"
-											ToolTip="{x:Static lc:Resources.ToolTipSplitterBitWidth}"
-										/>
-										<TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Static lc:Resources.CaptionBitWidth}" Margin="8,0,0,0" VerticalAlignment="Center"/>
-
-										<ComboBox Grid.Row="1" Grid.Column="0"
 											ItemsSource="{Binding Path=PinCountRange}" SelectedItem="{Binding Path=PinCount}"
 											ToolTip="{x:Static lc:Resources.ToolTipSplitterPinNumber}"
 										/>
-										<TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Static lc:Resources.CaptionPinNumber}" Margin="8,0,0,0" VerticalAlignment="Center"/>
+										<TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Static lc:Resources.CaptionSplitterPinNumber}" Margin="8,0,0,0" VerticalAlignment="Center"/>
+
+										<ComboBox Grid.Row="1" Grid.Column="0"
+											ItemsSource="{Binding Path=BitWidthRange}" SelectedItem="{Binding Path=BitWidth}"
+											ToolTip="{x:Static lc:Resources.ToolTipSplitterBitWidth}"
+										/>
+										<TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Static lc:Resources.CaptionSplitterBitWidth}" Margin="8,0,0,0" VerticalAlignment="Center"/>
 
 										<ComboBox Grid.Row="2" Grid.Column="0" MinWidth="{Binding ElementName=comboRuler, Path=ActualWidth}"
 											ItemsSource="{Binding Path=DirectionRange}" SelectedIndex="{Binding Path=Direction}"

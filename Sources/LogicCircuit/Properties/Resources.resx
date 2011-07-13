@@ -765,8 +765,8 @@ Do you want to replace it?</value>
   <data name="CaptionDataBitWidth" xml:space="preserve">
     <value>Data Bits</value>
   </data>
-  <data name="CaptionPinNumber" xml:space="preserve">
-    <value>Pins</value>
+  <data name="CaptionSplitterPinNumber" xml:space="preserve">
+    <value>Split Pins</value>
   </data>
   <data name="CaptionSplitterDirection" xml:space="preserve">
     <value>Combined Pin</value>
@@ -859,13 +859,13 @@ Do you want to replace it?</value>
     <value>Choose the side of the circuit's glyph the new pin will reside on</value>
   </data>
   <data name="ToolTipSplitterBitWidth" xml:space="preserve">
-    <value>Choose bit width of the wide connector of the splitter.</value>
+    <value>Choose bit width of split connector of the splitter.</value>
   </data>
   <data name="ToolTipSplitterPinNumber" xml:space="preserve">
-    <value>Choose number of thin connectors of the splitter.</value>
+    <value>Choose number of split connectors of the splitter.</value>
   </data>
   <data name="ToolTipSplitterRotation" xml:space="preserve">
-    <value>Choose orientation of the wide connector of the splitter.</value>
+    <value>Choose orientation of the combined connector of the splitter.</value>
   </data>
   <data name="ToolTipZoom" xml:space="preserve">
     <value>Set diagram's zoom.</value>
@@ -915,5 +915,8 @@ Do you want to replace it?</value>
   </data>
   <data name="PinSideTop" xml:space="preserve">
     <value>Top</value>
+  </data>
+  <data name="CaptionSplitterBitWidth" xml:space="preserve">
+    <value>Split pin bit width</value>
   </data>
 </root>

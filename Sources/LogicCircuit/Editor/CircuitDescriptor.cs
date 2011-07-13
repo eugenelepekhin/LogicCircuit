@@ -203,29 +203,41 @@ namespace LogicCircuit {
 		}
 	}
 
-	public class SplitterDescriptor : CircuitDescriptor<Splitter> {
+	public class SplitterDescriptor : CircuitDescriptor<Splitter>, INotifyPropertyChanged {
+
+		public event PropertyChangedEventHandler  PropertyChanged;
+
 		public int BitWidth { get; set; }
 		public int PinCount { get; set; }
-		public int Direction { get; set; }
+		private int direction;
+		public int Direction {
+			get { return this.direction; }
+			set {
+				this.direction = value;
+				PropertyChangedEventHandler handler = this.PropertyChanged;
+				if(handler != null) {
+					handler(this, new PropertyChangedEventArgs("Flip"));
+				}
+			}
+		}
+
+		public double Flip { get { return this.Direction == 0 ? 1 : -1; } }
 
 		public IEnumerable<int> BitWidthRange { get; private set; }
 		public IEnumerable<int> PinCountRange { get; private set; }
 		public IEnumerable<string> DirectionRange { get; private set; }
 
 		public SplitterDescriptor(CircuitProject circuitProject) : base(circuitProject.SplitterSet.Create(3, 3, true)) {
-			this.BitWidth = 3;
 			this.PinCount = 3;
+			this.BitWidth = 1;
 			this.Direction = 0;
-			this.BitWidthRange = PinDescriptor.NumberRange(2);
 			this.PinCountRange = PinDescriptor.NumberRange(2, Gate.MaxInputCount);
+			this.BitWidthRange = PinDescriptor.NumberRange(1, BasePin.MaxBitWidth / 2);
 			this.DirectionRange = new string[] { Resources.SplitterDirectionClockwise, Resources.SplitterDirectionCounterclockwise };
 		}
 
 		protected override Splitter GetCircuitToDrop(CircuitProject circuitProject) {
-			if(this.BitWidth < this.PinCount) {
-				throw new CircuitException(Cause.UserError, Resources.ErrorWrongSplitter);
-			}
-			return circuitProject.SplitterSet.Create(Math.Max(this.BitWidth, this.PinCount), this.PinCount, this.Direction == 0);
+			return circuitProject.SplitterSet.Create(this.BitWidth * this.PinCount, this.PinCount, this.Direction == 0);
 		}
 	}
 
