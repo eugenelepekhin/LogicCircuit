@@ -245,10 +245,7 @@ namespace LogicCircuit {
 			StringComparer comparer = StringComparer.OrdinalIgnoreCase;
 			while(comparer.Compare(CircuitProject.PersistenceNamespace, xml.DocumentElement.NamespaceURI) != 0) {
 				string xslt;
-				//TODO: 1.0.0.4 - is just a transition version used only in the development. Remove this after 2.0.0.1 catch up with old version before ship.
-				if(       comparer.Compare("http://LogicCircuit.net/1.0.0.4/CircuitProject.xsd", xml.DocumentElement.NamespaceURI) == 0) {
-					xslt = Schema.ConvertFrom_1_0_0_4;
-				} else if(comparer.Compare("http://LogicCircuit.net/1.0.0.3/CircuitProject.xsd", xml.DocumentElement.NamespaceURI) == 0) {
+				if(       comparer.Compare("http://LogicCircuit.net/1.0.0.3/CircuitProject.xsd", xml.DocumentElement.NamespaceURI) == 0) {
 					xslt = Schema.ConvertFrom_1_0_0_3;
 				} else if(comparer.Compare("http://LogicCircuit.net/1.0.0.2/CircuitProject.xsd", xml.DocumentElement.NamespaceURI) == 0) {
 					xslt = Schema.ConvertFrom_1_0_0_2;

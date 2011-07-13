@@ -461,7 +461,6 @@
     <Resource Include="Schema\ConvertSettings.xslt" />
     <Resource Include="Schema\ConvertFrom.1.0.0.2.xslt" />
     <Resource Include="Schema\ConvertFrom.1.0.0.3.xslt" />
-    <Resource Include="Schema\ConvertFrom.1.0.0.4.xslt" />
     <Resource Include="Schema\Empty.xml" />
     <None Include="Schema\CircuitProject.xml">
       <SubType>Designer</SubType>
