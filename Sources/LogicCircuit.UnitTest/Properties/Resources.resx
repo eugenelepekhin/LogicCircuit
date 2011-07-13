@@ -127,6 +127,9 @@
   <data name="IntegerCalculator" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>integercalculator.circuitproject;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="SplitterConversion" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>splitter conversion.circuitproject;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="VisualElementLoadTest" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>VisualElementLoadTest.CircuitProject;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>

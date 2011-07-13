@@ -86,13 +86,12 @@ namespace LogicCircuit.UnitTest.Properties {
         ///	&lt;lc:Project&gt;
         ///		&lt;lc:ProjectId&gt;272db380-618e-434d-952e-6ff115083f9b&lt;/lc:ProjectId&gt;
         ///		&lt;lc:Name&gt;Function Unit Test&lt;/lc:Name&gt;
-        ///		&lt;lc:LogicalCircuitId&gt;79932048-bc93-4603-bb50-740cfbefc1c7&lt;/lc:LogicalCircuitId&gt;
+        ///		&lt;lc:LogicalCircuitId&gt;19065284-c178-4cb4-8627-457fdb3a63ff&lt;/lc:LogicalCircuitId&gt;
         ///	&lt;/lc:Project&gt;
         ///	&lt;lc:LogicalCircuit&gt;
-        ///		&lt;lc:LogicalCircuitId&gt;13d266f9-f859-492c-a03d-8124182077ef&lt;/lc:LogicalCircuitId&gt;
-        ///		&lt;lc:Notation&gt;Main&lt;/lc:Notation&gt;
-        ///	&lt;/lc:LogicalCircuit&gt;
-        ///	&lt; [rest of string was truncated]&quot;;.
+        ///		&lt;lc:LogicalCircuitId&gt;79932048-bc93-4603-bb50-740cfbefc1c7&lt;/lc:LogicalCircuitId&gt;
+        ///		&lt;lc:Name&gt;NotTest&lt;/lc:Name&gt;
+        ///		&lt;lc:Notation&gt;NotTest&lt;/lc:Not [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string FunctionTest {
             get {
@@ -102,7 +101,7 @@ namespace LogicCircuit.UnitTest.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-        ///&lt;lc:CircuitProject xmlns:lc=&quot;http://LogicCircuit.net/2.0.0.1/CircuitProject.xsd&quot;&gt;
+        ///&lt;lc:CircuitProject xmlns:lc=&quot;http://LogicCircuit.net/1.0.0.3/CircuitProject.xsd&quot;&gt;
         ///	&lt;lc:Project&gt;
         ///		&lt;lc:ProjectId&gt;1085779a-fb30-44b8-84e5-65212e8c9046&lt;/lc:ProjectId&gt;
         ///		&lt;lc:Name&gt;Integer Calculator&lt;/lc:Name&gt;
@@ -117,6 +116,24 @@ namespace LogicCircuit.UnitTest.Properties {
         internal static string IntegerCalculator {
             get {
                 return ResourceManager.GetString("IntegerCalculator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; standalone=&quot;yes&quot;?&gt;
+        ///&lt;lc:CircuitProject xmlns:lc=&quot;http://LogicCircuit.net/1.0.0.3/CircuitProject.xsd&quot;&gt;
+        ///	&lt;lc:Project&gt;
+        ///		&lt;lc:ProjectId&gt;ec6ce3ac-3506-4d61-b90d-6ce2138f051c&lt;/lc:ProjectId&gt;
+        ///		&lt;lc:Name&gt;Splitter Conversion&lt;/lc:Name&gt;
+        ///		&lt;lc:Description&gt;Unit test of conversion of splitters from old version (1.0.0.3) to new (2.0.0.1).&lt;/lc:Description&gt;
+        ///		&lt;lc:LogicalCircuitId&gt;6aa554c0-414f-4444-8900-41e2154c3d1f&lt;/lc:LogicalCircuitId&gt;
+        ///	&lt;/lc:Project&gt;
+        ///	&lt;lc:LogicalCircuit&gt;
+        ///		&lt;lc:L [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string SplitterConversion {
+            get {
+                return ResourceManager.GetString("SplitterConversion", resourceCulture);
             }
         }
         
