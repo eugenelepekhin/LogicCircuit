@@ -106,7 +106,9 @@ namespace LogicCircuit {
 		}
 	}
 
-	public class ButtonDescriptor : CircuitDescriptor<CircuitButton> {
+	public class ButtonDescriptor : CircuitDescriptor<CircuitButton>, INotifyPropertyChanged {
+		public event PropertyChangedEventHandler PropertyChanged;
+
 		public string Notation { get; set; }
 		public bool IsToggle { get; set; }
 
@@ -115,7 +117,15 @@ namespace LogicCircuit {
 		}
 
 		protected override CircuitButton GetCircuitToDrop(CircuitProject circuitProject) {
-			return circuitProject.CircuitButtonSet.Create(this.Notation, this.IsToggle);
+			string notation = (this.Notation ?? string.Empty).Trim();
+			if(!string.IsNullOrEmpty(notation)) {
+				this.Notation = string.Empty;
+				PropertyChangedEventHandler handler = this.PropertyChanged;
+				if(handler != null) {
+					handler(this, new PropertyChangedEventArgs("Notation"));
+				}
+			}
+			return circuitProject.CircuitButtonSet.Create(notation, this.IsToggle);
 		}
 	}
 

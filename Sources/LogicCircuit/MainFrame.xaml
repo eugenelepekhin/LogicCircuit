@@ -360,8 +360,8 @@
 											<RowDefinition Height="Auto"/>
 											<RowDefinition Height="Auto"/>
 										</Grid.RowDefinitions>
-										<TextBox Grid.Row="0" Grid.Column="0" Text="{Binding Path=Notation, Mode=TwoWay}" VerticalAlignment="Center" Width="20"
-											ToolTip="{x:Static lc:Resources.ToolTipButtonNotation}" HorizontalAlignment="Left"
+										<TextBox Grid.Row="0" Grid.Column="0" Text="{Binding Path=Notation, Mode=TwoWay}" VerticalAlignment="Center" Width="65"
+											ToolTip="{x:Static lc:Resources.ToolTipButtonNotation}" HorizontalAlignment="Left" MaxLength="4"
 										/>
 										<TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Static lc:Resources.CaptionNotation}" Margin="3,0,8,0" VerticalAlignment="Center"/>
 										<CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" IsChecked="{Binding Path=IsToggle}" Margin="6,0,8,5"
