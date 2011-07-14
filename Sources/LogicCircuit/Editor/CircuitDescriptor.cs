@@ -13,7 +13,9 @@ namespace LogicCircuit {
 		void CreateSymbol(EditorDiagram editor, GridPoint point);
 	}
 	
-	public abstract class CircuitDescriptor<T> : IDescriptor where T:Circuit {
+	public abstract class CircuitDescriptor<T> : IDescriptor, INotifyPropertyChanged where T:Circuit {
+		public event PropertyChangedEventHandler PropertyChanged;
+
 		public T Circuit { get; private set; }
 		Circuit IDescriptor.Circuit { get { return this.Circuit; } }
 		public CircuitGlyph CircuitGlyph { get; private set; }
@@ -36,6 +38,13 @@ namespace LogicCircuit {
 		public void ResetGlyph() {
 			this.CircuitGlyph.ResetJams();
 			this.CircuitGlyph.Invalidate();
+		}
+
+		protected void NotifyPropertyChanged(string propertyName) {
+			PropertyChangedEventHandler handler = this.PropertyChanged;
+			if(handler != null) {
+				handler(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 
 		private class CircuitDescriptorGlyph : CircuitGlyph {
@@ -106,9 +115,7 @@ namespace LogicCircuit {
 		}
 	}
 
-	public class ButtonDescriptor : CircuitDescriptor<CircuitButton>, INotifyPropertyChanged {
-		public event PropertyChangedEventHandler PropertyChanged;
-
+	public class ButtonDescriptor : CircuitDescriptor<CircuitButton> {
 		public string Notation { get; set; }
 		public bool IsToggle { get; set; }
 
@@ -120,10 +127,7 @@ namespace LogicCircuit {
 			string notation = (this.Notation ?? string.Empty).Trim();
 			if(!string.IsNullOrEmpty(notation)) {
 				this.Notation = string.Empty;
-				PropertyChangedEventHandler handler = this.PropertyChanged;
-				if(handler != null) {
-					handler(this, new PropertyChangedEventArgs("Notation"));
-				}
+				this.NotifyPropertyChanged("Notation");
 			}
 			return circuitProject.CircuitButtonSet.Create(notation, this.IsToggle);
 		}
@@ -213,10 +217,7 @@ namespace LogicCircuit {
 		}
 	}
 
-	public class SplitterDescriptor : CircuitDescriptor<Splitter>, INotifyPropertyChanged {
-
-		public event PropertyChangedEventHandler  PropertyChanged;
-
+	public class SplitterDescriptor : CircuitDescriptor<Splitter> {
 		public int BitWidth { get; set; }
 		public int PinCount { get; set; }
 		private int direction;
@@ -224,10 +225,7 @@ namespace LogicCircuit {
 			get { return this.direction; }
 			set {
 				this.direction = value;
-				PropertyChangedEventHandler handler = this.PropertyChanged;
-				if(handler != null) {
-					handler(this, new PropertyChangedEventArgs("Flip"));
-				}
+				this.NotifyPropertyChanged("Flip");
 			}
 		}
 
@@ -251,10 +249,7 @@ namespace LogicCircuit {
 		}
 	}
 
-	public class LogicalCircuitDescriptor : CircuitDescriptor<LogicalCircuit>, INotifyPropertyChanged {
-
-		public event PropertyChangedEventHandler PropertyChanged;
-
+	public class LogicalCircuitDescriptor : CircuitDescriptor<LogicalCircuit> {
 		public LogicalCircuitDescriptor(LogicalCircuit logicalCircuit, Predicate<string> isReserved) : base(logicalCircuit) {
 			if(isReserved(logicalCircuit.Category)) {
 				this.Category = Resources.CategoryDuplicate(logicalCircuit.Category);
@@ -265,13 +260,6 @@ namespace LogicCircuit {
 
 		protected override LogicalCircuit GetCircuitToDrop(CircuitProject circuitProject) {
 			return this.Circuit;
-		}
-
-		public void NotifyPropertyChanged(string propertyName) {
-			PropertyChangedEventHandler handler = this.PropertyChanged;
-			if(handler != null) {
-				handler(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 
 		public void NotifyCurrentChanged() {
