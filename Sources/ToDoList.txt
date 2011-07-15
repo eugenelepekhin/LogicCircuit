@@ -1,5 +1,8 @@
 ToDo list:
 
+BUG: Rotated symbol incorrectly selected by araea marker. Use long splitters to repro.
+
+
 Binding errors in the runing tree
 
 smarter wires
