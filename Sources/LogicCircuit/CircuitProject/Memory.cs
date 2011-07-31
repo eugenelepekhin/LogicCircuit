@@ -180,7 +180,7 @@ namespace LogicCircuit {
 
 		private void CreatePins(Memory memory) {
 			Tracer.Assert(!this.CircuitProject.DevicePinSet.SelectByCircuit(memory).Any());
-			// The order of creation of the pins is essential for expantion algorithm.
+			// The order of creation of the pins is essential for expansion algorithm.
 
 			DevicePin address = this.CircuitProject.DevicePinSet.Create(memory, PinType.Input, memory.AddressBitWidth);
 			address.PinSide = PinSide.Left;

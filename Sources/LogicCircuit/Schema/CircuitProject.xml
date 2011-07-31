@@ -10,7 +10,7 @@
 		There is no transformation from version 1.0.0.1 to 1.0.0.2 so all existing files will be lost.
 
 		Version 1.0.0.3 - no schema changes. Introduction of the new version is just to prevent loading the new file with newly introduced tri state buffers
-		by old version of program that does not support such gates. A simple transofmation is requared to change namespace so no user data will be lost.
+		by old version of program that does not support such gates. A simple transformation is required to change namespace so no user data will be lost.
 
 		Version 2.0.0.1 - Moving to new store. Adding Frequency and IsMaximumSpeed to project. Adding JamNotation to Pin. Adding TextNote.
 	-->

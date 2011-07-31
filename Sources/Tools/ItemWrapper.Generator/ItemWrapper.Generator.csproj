@@ -97,6 +97,7 @@
     <EmbeddedResource Include="TextMessage.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>TextMessage.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

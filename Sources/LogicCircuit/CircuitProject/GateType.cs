@@ -2,7 +2,7 @@
 
 namespace LogicCircuit {
 	public enum GateType {
-		// Future extentions should add new types, not insert in the middle, unless old file conversion defined.
+		// Future extensions should add new types, not insert in the middle, unless old file conversion defined.
 		Nop,
 		Clock,
 		Not,

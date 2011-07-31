@@ -102,7 +102,7 @@ namespace LogicCircuit {
 		}
 
 		/// <summary>
-		/// Checks if line segment (p1, p2) intersets with rectangle r
+		/// Checks if line segment (p1, p2) intersects with rectangle r
 		/// </summary>
 		/// <param name="point1">First vertex of the line segment</param>
 		/// <param name="point2">Second vertex of the line segment</param>

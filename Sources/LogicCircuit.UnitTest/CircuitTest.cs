@@ -117,7 +117,7 @@ namespace LogicCircuit.UnitTest {
 			}
 
 			public void Evaluate() {
-				Assert.IsTrue(this.Tester.CircuitState.Evaluate(true), "evaluation falied");
+				Assert.IsTrue(this.Tester.CircuitState.Evaluate(true), "evaluation failed");
 			}
 
 			public void Start() {

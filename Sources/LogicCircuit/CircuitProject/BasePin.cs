@@ -26,7 +26,7 @@ namespace LogicCircuit {
 
 		/// <summary>
 		/// Gets or set precalculated position of jam of this pin on the circuit symbol.
-		/// This is an optimisation to get jams evaluated faster.
+		/// This is an optimization to get jams evaluated faster.
 		/// </summary>
 		public GridPoint GridPoint { get; set; }
 		

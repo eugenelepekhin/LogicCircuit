@@ -167,7 +167,7 @@ namespace LogicCircuit.DataPersistent {
 			);
 			// allocate 3 int values:
 			// [0] - is the count of items inserted
-			// [1] - is known size of the bucket store which is different from table size, as rollbacks or undos will delete inserted rows
+			// [1] - is known size of the bucket store which is different from table size, as rollbacks or undo's will delete inserted rows
 			// [2] - is occupancy - total number of collision bits set
 			this.variables = new IntArray(store, name + "~Variables~", 3);
 			this.loadFactor = loadFactor;

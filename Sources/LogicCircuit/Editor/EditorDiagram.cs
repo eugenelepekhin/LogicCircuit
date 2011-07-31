@@ -98,7 +98,7 @@ namespace LogicCircuit {
 				this.ClearSelection();
 				if(this.currentLogicalCircuit != this.Project.LogicalCircuit) {
 					// TODO: this is not very good way to get scroll control as this assumes canvas is sitting on scroll viewer.
-					// What if this get changed? For now just do it in hackky way
+					// What if this get changed? For now just do it in hacky way
 					ScrollViewer scrollViewer = this.Diagram.Parent as ScrollViewer;
 					if(scrollViewer != null) {
 						if(this.currentLogicalCircuit != null && !this.currentLogicalCircuit.IsDeleted()) {
@@ -194,7 +194,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		//--- Utils ---
+		//--- Utilities ---
 
 		private void ShowStatus(CircuitSymbol symbol) {
 			this.Mainframe.Status = symbol.Circuit.Notation + symbol.Point.ToString();

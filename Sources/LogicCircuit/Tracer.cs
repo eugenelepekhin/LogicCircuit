@@ -65,7 +65,7 @@ namespace LogicCircuit {
 			#endif
 		);
 		/// <summary>
-		/// Gets or Sets flag if writing in log file is requared
+		/// Gets or Sets flag if writing in log file is required
 		/// </summary>
 		public static bool WriteToLogFile {
 			//get { return Tracer.writeToLogFile; }

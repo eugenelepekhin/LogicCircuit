@@ -264,7 +264,7 @@ namespace LogicCircuit {
 						int splitterBitWidth = splitter.BitWidth;
 						List<Jam> jams = con.InJam.CircuitSymbol.Jams().ToList();
 						// Sort jams in order of their device pins. Assuming first one will be the wide pin and the rest are thin ones,
-						// starting from lower bits to higher. This implys that creating of the pins should happened in that order.
+						// starting from lower bits to higher. This implies that creating of the pins should happened in that order.
 						jams.Sort(JamComparer.Comparer);
 
 						Tracer.Assert(1 < splitterPinCount && splitterPinCount <= splitterBitWidth);
@@ -337,7 +337,7 @@ namespace LogicCircuit {
 			return null;
 		}
 
-		// This is not very effitive algorithm
+		// This is not very effective algorithm
 		public FunctionProbe FunctionProbe(CircuitSymbol symbol) {
 			if(this.displays != null) {
 				foreach(IFunctionVisual visual in this.displays) {

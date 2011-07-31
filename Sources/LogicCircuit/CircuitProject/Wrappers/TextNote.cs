@@ -452,7 +452,7 @@ namespace LogicCircuit {
 			get { return this.Table.GetField(this.TextNoteRowId, TextNoteData.TextNoteIdField.Field); }
 		}
 
-		// Gets or sets the value reffered by the foreign key on field LogicalCircuitId
+		// Gets or sets the value referred by the foreign key on field LogicalCircuitId
 		protected override LogicalCircuit SymbolLogicalCircuit {
 			get { return this.CircuitProject.LogicalCircuitSet.FindByLogicalCircuitId(this.Table.GetField(this.TextNoteRowId, TextNoteData.LogicalCircuitIdField.Field)); }
 			set { this.Table.SetField(this.TextNoteRowId, TextNoteData.LogicalCircuitIdField.Field, value.LogicalCircuitId); }

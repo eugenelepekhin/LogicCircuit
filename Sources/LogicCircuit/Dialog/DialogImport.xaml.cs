@@ -42,7 +42,7 @@ namespace LogicCircuit {
 					this.Dispatcher.BeginInvoke(new Action(() => { this.Close(); }));
 				}
 			}));
-			//TextNote validator will instantiate FlowDocument that in some cases required to happened only on STA.
+			//TextNote validation will instantiate FlowDocument that in some cases required to happened only on STA.
 			thread.SetApartmentState(ApartmentState.STA);
 			thread.IsBackground = true;
 			thread.Name = "ImportLoader";

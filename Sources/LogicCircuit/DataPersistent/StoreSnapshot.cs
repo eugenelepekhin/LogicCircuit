@@ -53,7 +53,7 @@ namespace LogicCircuit.DataPersistent {
 		}
 
 		/// <summary>
-		/// Gets latest available version this store can be upgrated to
+		/// Gets latest available version this store can be upgraded to
 		/// </summary>
 		public int LatestAvailableVersion { get { return this.SnapStore.CompletedVersion; } }
 

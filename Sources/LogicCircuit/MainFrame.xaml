@@ -264,7 +264,7 @@
 							IsEnabled="{Binding Path=Editor.Power}"
 						>
 							<CheckBox.ToolTip>
-								<!-- This can cause problems on some cultures as the structure of the markup is non-localaizable -->
+								<!-- This can cause problems on some cultures as the structure of the markup is non-localizable -->
 								<Span>
 									<Run Text="{x:Static lc:Resources.ToolTipIsMaximumSpeed1}"/>
 									<LineBreak/>
@@ -598,7 +598,7 @@
 					</Slider>
 					<TextBlock Text="{Binding Path=Editor.Zoom, StringFormat={}{0:P0}}" VerticalAlignment="Center" MinWidth="50" Margin="3,0" ToolTip="{x:Static lc:Resources.ToolTipCurrentZoom}"/>
 
-					<!-- This check box is invisible and only used for controling animation in left column when power switches on and off. -->
+					<!-- This check box is invisible and only used for controlling animation in left column when power switches on and off. -->
 					<CheckBox IsChecked="{Binding Path=Editor.Power}" Visibility="Collapsed" IsTabStop="False">
 						<CheckBox.Triggers>
 							<EventTrigger RoutedEvent="CheckBox.Checked">

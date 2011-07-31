@@ -258,7 +258,7 @@ namespace LogicCircuit {
 				// This expression will iterate for this.index from 0 to this.current.Count - 1 and walk through each element
 				// of this.current exactly once.
 				// The constant should be a primary number in order to walk through entire current list
-				// The expression inside parentesis may overflow int and become negative, so it will only work for
+				// The expression inside parenthesis may overflow int and become negative, so it will only work for
 				// not big prime numbers and not big list of dirty functions.
 				return this.current[(521 * (this.index++) + this.offset) % this.current.Count];
 			}

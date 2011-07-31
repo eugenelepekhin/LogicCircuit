@@ -230,7 +230,7 @@ namespace LogicCircuit {
 			foreach(Wire wire in this.WireSet) {
 				Tracer.Assert(wire.Point1 != wire.Point2);
 			}
-			//TODO: Add check of many wires hidden by eachother.
+			//TODO: Add check of many wires hidden by each other.
 		}
 
 		public void InTransaction(Action action) {

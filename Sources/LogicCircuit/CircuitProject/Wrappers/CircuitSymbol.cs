@@ -380,12 +380,12 @@ namespace LogicCircuit {
 			get { return this.Table.GetField(this.CircuitSymbolRowId, CircuitSymbolData.CircuitSymbolIdField.Field); }
 		}
 
-		// Gets the value reffered by the foreign key on field CircuitId
+		// Gets the value referred by the foreign key on field CircuitId
 		protected override Circuit SymbolCircuit {
 			get { return this.CircuitProject.CircuitSet.Find(this.Table.GetField(this.CircuitSymbolRowId, CircuitSymbolData.CircuitIdField.Field)); }
 		}
 
-		// Gets or sets the value reffered by the foreign key on field LogicalCircuitId
+		// Gets or sets the value referred by the foreign key on field LogicalCircuitId
 		protected override LogicalCircuit SymbolLogicalCircuit {
 			get { return this.CircuitProject.LogicalCircuitSet.FindByLogicalCircuitId(this.Table.GetField(this.CircuitSymbolRowId, CircuitSymbolData.LogicalCircuitIdField.Field)); }
 			set { this.Table.SetField(this.CircuitSymbolRowId, CircuitSymbolData.LogicalCircuitIdField.Field, value.LogicalCircuitId); }

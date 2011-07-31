@@ -32,7 +32,7 @@ namespace LogicCircuit.DataPersistent {
 		public int Count { get; private set; }
 
 		/// <summary>
-		/// Ensures memory is allocated to acomodate for one more element
+		/// Ensures memory is allocated to accommodate for one more element
 		/// </summary>
 		public void PrepareAdd() {
 			int index = this.Count;

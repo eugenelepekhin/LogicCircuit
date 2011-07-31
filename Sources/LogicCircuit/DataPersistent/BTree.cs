@@ -368,8 +368,8 @@ namespace LogicCircuit.DataPersistent {
 		private void SplitChild(RowId rowId, int child) {
 			Node node;
 			this.table.GetLatestData(rowId, out node);
-			Debug.Assert(node.Count < this.keyFields.Length, "The node shoud be none full");
-			// make a room for a new key that will buble up from child node
+			Debug.Assert(node.Count < this.keyFields.Length, "The node should be none full");
+			// make a room for a new key that will bubble up from child node
 			for(int i = node.Count - 1; child <= i; i--) {
 				this.keyFields[i + 1].SetValue(ref node, this.keyFields[i].GetValue(ref node));
 			}

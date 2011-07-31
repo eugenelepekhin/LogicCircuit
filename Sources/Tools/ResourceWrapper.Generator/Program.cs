@@ -31,7 +31,7 @@ namespace ResourceWrapper.Generator {
 		}
 
 		private static bool ParseArguments(string[] args, out string projectPath, out string projectRoot) {
-			//parsing for the following param syntax:
+			//parsing for the following parameter syntax:
 			//ResourceWrapper.Generator.exe ProjectPath=$(ProjectPath) [ProjectDir=$(ProjectDir)]
 			string path = projectPath = null;
 			string root = projectRoot = null;

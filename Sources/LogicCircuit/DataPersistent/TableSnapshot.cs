@@ -616,7 +616,7 @@ namespace LogicCircuit.DataPersistent {
 		}
 
 		/// <summary>
-		/// Checks if the table was afected by transaction even if the transaction was rolled back.
+		/// Checks if the table was affected by transaction even if the transaction was rolled back.
 		/// </summary>
 		/// <param name="version"></param>
 		/// <returns></returns>
@@ -834,7 +834,7 @@ namespace LogicCircuit.DataPersistent {
 			private readonly int newVersion;
 			private readonly int oldVersion;
 			private readonly Dictionary<RowId, SnapTableAction> action = new Dictionary<RowId, SnapTableAction>();
-			// Enumerator is a struct so I can't make it readonly
+			// Enumerator is a struct so I can't make it read-only
 			private Dictionary<RowId, SnapTableAction>.Enumerator enumerator;
 
 			public ChangeEnumerator(TableSnapshot<TRecord> table, List<int> version) {
@@ -958,7 +958,7 @@ namespace LogicCircuit.DataPersistent {
 				case SnapTableAction.Delete: return SnapTableAction.Insert;
 				case SnapTableAction.Update: return SnapTableAction.Update;
 				default:
-					Debug.Fail("Unknown actin");
+					Debug.Fail("Unknown action");
 					throw new InvalidOperationException();
 				}
 			}

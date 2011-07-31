@@ -303,7 +303,7 @@ namespace LogicCircuit {
 			get { return this.Table.GetField(this.DevicePinRowId, DevicePinData.PinIdField.Field); }
 		}
 
-		// Gets or sets the value reffered by the foreign key on field CircuitId
+		// Gets or sets the value referred by the foreign key on field CircuitId
 		protected override Circuit PinCircuit {
 			get { return this.CircuitProject.CircuitSet.Find(this.Table.GetField(this.DevicePinRowId, DevicePinData.CircuitIdField.Field)); }
 			set { this.Table.SetField(this.DevicePinRowId, DevicePinData.CircuitIdField.Field, value.CircuitId); }

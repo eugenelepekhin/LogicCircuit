@@ -84,7 +84,7 @@ namespace LogicCircuit {
 			return this.SetResult(0, state);
 		}
 		/// <summary>
-		/// Sets multibit result from the 32 bit parameter
+		/// Sets multi-bit result from the 32 bit parameter
 		/// </summary>
 		/// <param name="state"></param>
 		/// <returns></returns>

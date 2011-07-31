@@ -452,7 +452,7 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.ProjectRowId, ProjectData.IsMaximumSpeedField.Field, value); }
 		}
 
-		// Gets or sets the value reffered by the foreign key on field LogicalCircuitId
+		// Gets or sets the value referred by the foreign key on field LogicalCircuitId
 		public LogicalCircuit LogicalCircuit {
 			get { return this.CircuitProject.LogicalCircuitSet.FindByLogicalCircuitId(this.Table.GetField(this.ProjectRowId, ProjectData.LogicalCircuitIdField.Field)); }
 			set { this.Table.SetField(this.ProjectRowId, ProjectData.LogicalCircuitIdField.Field, value.LogicalCircuitId); }

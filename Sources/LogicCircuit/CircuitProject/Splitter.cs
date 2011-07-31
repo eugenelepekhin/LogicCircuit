@@ -56,7 +56,7 @@ namespace LogicCircuit {
 		}
 
 		private void CreatePins(Splitter splitter) {
-			// The order of creation of the pins is essential for expantion algorithm (CircuitMap.Connect).
+			// The order of creation of the pins is essential for expansion algorithm (CircuitMap.Connect).
 			// The wide pin should go first and then thin pins starting from lower bits to higher
 			Tracer.Assert(!this.CircuitProject.DevicePinSet.SelectByCircuit(splitter).Any());
 			if(splitter.PinCount < 2) {

@@ -352,7 +352,7 @@ namespace LogicCircuit.DataPersistent {
 					return isDeleted;
 				}
 			}
-			// older version of the row requested. The data is in the log. Log is imutable so easy to read.
+			// older version of the row requested. The data is in the log. Log is immutable so easy to read.
 			ValueList<Log>.Address logAddress = this.log.ItemAddress(rowAddress.Page[rowAddress.Index].LogIndex);
 			while(logSize <= logAddress.Page[logAddress.Index].LogIndex) {
 				Debug.Assert(0 < logAddress.Page[logAddress.Index].LogIndex, "Log entry at 0 does not contain any real data and used as a stub");
@@ -576,7 +576,7 @@ namespace LogicCircuit.DataPersistent {
 			if(snapAddress.Page[snapAddress.Index].Version == this.SnapStore.Version) {
 				Debug.Assert(1 < this.snap.Count, "Only real transactions can be rolled back");
 				// this table was modified in this transaction
-				// it is impossible to completly rollback current changes, so just get old data back and delete new rows and undelete deleted ones.
+				// it is impossible to completely rollback current changes, so just get old data back and delete new rows and undelete deleted ones.
 				int tableEnd = snapAddress.Page[snapAddress.Index].TableSize;
 				int logEnd = snapAddress.Page[snapAddress.Index].LogSize;
 				if(tableEnd != this.table.Count || logEnd != this.log.Count) {
@@ -922,7 +922,7 @@ namespace LogicCircuit.DataPersistent {
 			}
 		}
 
-		// Debugging visualizer
+		// Debugging visualize
 		#if DEBUG
 			public string DebuggingVisualization {
 				get {

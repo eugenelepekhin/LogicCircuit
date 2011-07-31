@@ -87,7 +87,7 @@ foreach(Column column in this.Table.Columns) {
 			cast = "(" + returnType + ")";
 		}
 #>
-		// Gets <#=column.ReadOnly ? "" : "or sets "#>the value reffered by the foreign key on field <#=column.Name#>
+		// Gets <#=column.ReadOnly ? "" : "or sets "#>the value referred by the foreign key on field <#=column.Name#>
 		<#=access#> <#=returnType#> <#=column.PropertyNamePrefix#><#=key.RoleName()#> {
 			get { return <#=cast#>this.<#=this.Store.Name#>.<#=parent.Name#>Set.Find<#=findSuffix#>(this.Table.GetField(this.<#=this.Table.Name#>RowId, <#=this.Table.Name#>Data.<#=column.Name#>Field.Field)); }
 <#		if(!column.ReadOnly) {#>

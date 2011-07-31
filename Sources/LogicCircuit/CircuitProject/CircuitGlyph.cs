@@ -148,7 +148,7 @@ namespace LogicCircuit {
 				ellipse.ToolTip = jam.Pin.ToolTip;
 				string jamNotation = jam.Pin.JamNotation;
 				if(!string.IsNullOrEmpty(jamNotation)) {
-					Tracer.Assert(notationPosition != null); // If pin has notation then it should belong to rectangualry rendering circuit.
+					Tracer.Assert(notationPosition != null); // If pin has notation then it should belong to rectangular rendering circuit.
 					TextBlock text = new TextBlock();
 					text.Foreground = Brushes.Black;
 					int len = (jam.Pin.PinSide == PinSide.Top || jam.Pin.PinSide == PinSide.Bottom) ? 4 : 2;

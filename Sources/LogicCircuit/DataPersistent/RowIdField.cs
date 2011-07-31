@@ -15,7 +15,7 @@ namespace LogicCircuit.DataPersistent {
 		}
 
 		/// <summary>
-		/// Gets default value of the field. This default value does not correspond to any real record in the parent table and so can be treted as NULL.
+		/// Gets default value of the field. This default value does not correspond to any real record in the parent table and so can be treated as NULL.
 		/// </summary>
 		public RowId DefaultValue { get { return RowId.Empty; } }
 
@@ -27,7 +27,7 @@ namespace LogicCircuit.DataPersistent {
 		public int Order { get; set; }
 
 		/// <summary>
-		/// Proveds a base definition of the comparison.
+		/// Provides a base definition of the comparison.
 		/// </summary>
 		/// <param name="data1"></param>
 		/// <param name="data2"></param>
