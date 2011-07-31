@@ -471,6 +471,9 @@ namespace LogicCircuit {
 				Rect item = new Rect(Symbol.ScreenPoint(symbol.Point),
 					new Size(Symbol.ScreenPoint(symbol.Circuit.SymbolWidth), Symbol.ScreenPoint(symbol.Circuit.SymbolHeight))
 				);
+				if(symbol.Rotation != Rotation.Up) {
+					item = Symbol.Transform(item, Symbol.RotationTransform(symbol.Rotation, symbol.X, symbol.Y, symbol.Circuit.SymbolWidth, symbol.Circuit.SymbolHeight));
+				}
 				if(area.Contains(item)) {
 					this.Select(symbol);
 				}
@@ -484,6 +487,9 @@ namespace LogicCircuit {
 				Rect item = new Rect(Symbol.ScreenPoint(symbol.Point),
 					new Size(Symbol.ScreenPoint(symbol.Width), Symbol.ScreenPoint(symbol.Height))
 				);
+				if(symbol.Rotation != Rotation.Up) {
+					item = Symbol.Transform(item, Symbol.RotationTransform(symbol.Rotation, symbol.X, symbol.Y, symbol.Width, symbol.Height));
+				}
 				if(area.Contains(item)) {
 					this.Select(symbol);
 				}

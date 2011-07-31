@@ -1,8 +1,5 @@
 ToDo list:
 
-BUG: Rotated symbol incorrectly selected by area marker. Use long splitters to repro.
-
-
 Binding errors in the running tree
 
 smarter wires
