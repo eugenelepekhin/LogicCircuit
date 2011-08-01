@@ -1755,5 +1755,33 @@ namespace LogicCircuit {
  		public static string CaptionSplitterBitWidth {
 			get { return ResourceManager.GetString("CaptionSplitterBitWidth", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Used By....
+		/// </summary>
+ 		public static string CommandCircuitUsage {
+			get { return ResourceManager.GetString("CommandCircuitUsage", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to This logical circuit does not used anywhere..
+		/// </summary>
+ 		public static string MessageNotUsed {
+			get { return ResourceManager.GetString("MessageNotUsed", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Select circuit where the current one is used and double-click it to navigate there and select symbols of current one..
+		/// </summary>
+ 		public static string MessageUsageNote {
+			get { return ResourceManager.GetString("MessageUsageNote", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Logical Circuit Usage.
+		/// </summary>
+ 		public static string TitleCircuitUsage {
+			get { return ResourceManager.GetString("TitleCircuitUsage", Culture); }
+		}
 	}
 }

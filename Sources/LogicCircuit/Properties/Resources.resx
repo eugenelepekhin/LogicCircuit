@@ -919,4 +919,16 @@ Do you want to replace it?</value>
   <data name="CaptionSplitterBitWidth" xml:space="preserve">
     <value>Split pin bit width</value>
   </data>
+  <data name="CommandCircuitUsage" xml:space="preserve">
+    <value>Used By...</value>
+  </data>
+  <data name="MessageNotUsed" xml:space="preserve">
+    <value>This logical circuit does not used anywhere.</value>
+  </data>
+  <data name="MessageUsageNote" xml:space="preserve">
+    <value>Select circuit where the current one is used and double-click it to navigate there and select symbols of current one.</value>
+  </data>
+  <data name="TitleCircuitUsage" xml:space="preserve">
+    <value>Logical Circuit Usage</value>
+  </data>
 </root>

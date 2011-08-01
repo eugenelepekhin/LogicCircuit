@@ -108,6 +108,7 @@
 		<CommandBinding Command="{x:Static lc:CustomCommands.CircuitCurrent}" Executed="CircuitCurrentCommandExecuted" CanExecute="CircuitCurrentCommandCanExecuted"/>
 		<CommandBinding Command="{x:Static lc:CustomCommands.CircuitNew}" Executed="CircuitNewCommandExecuted" CanExecute="CircuitNewCommandCanExecuted"/>
 		<CommandBinding Command="{x:Static lc:CustomCommands.CircuitDelete}" Executed="CircuitDeleteCommandExecuted" CanExecute="CircuitDeleteCommandCanExecute"/>
+		<CommandBinding Command="{x:Static lc:CustomCommands.CircuitUsage}" Executed="CircuitUsageCommandExecuted" CanExecute="CircuitUsageCommandCanExecute"/>
 		<CommandBinding Command="{x:Static lc:CustomCommands.CircuitPower}" Executed="CircuitPowerCommandExecuted" CanExecute="CircuitPowerCommandCanExecute"/>
 
 		<CommandBinding Command="{x:Static lc:CustomCommands.ToolsReport}" Executed="ToolsReportCommandExecuted"/>
@@ -167,6 +168,7 @@
 				<MenuItem Command="lc:CustomCommands.CircuitCurrent"/>
 				<MenuItem Command="lc:CustomCommands.CircuitNew"/>
 				<MenuItem Command="lc:CustomCommands.CircuitDelete"/>
+				<MenuItem Command="lc:CustomCommands.CircuitUsage"/>
 				<Separator />
 				<MenuItem Command="lc:CustomCommands.CircuitPower"/>
             </MenuItem>

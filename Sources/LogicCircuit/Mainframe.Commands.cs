@@ -526,6 +526,26 @@ namespace LogicCircuit {
 			}
 		}
 
+		private void CircuitUsageCommandExecuted(object target, ExecutedRoutedEventArgs e) {
+			try {
+				if(this.IsEditorInEditMode()) {
+					this.Editor.LogicalCircuitUsage(this.LogicalCircuit());
+				}
+			} catch(Exception exception) {
+				Tracer.Report("Mainframe.CircuitUsageCommandExecuted", exception);
+				this.ReportException(exception);
+			}
+		}
+
+		private void CircuitUsageCommandCanExecute(object target, CanExecuteRoutedEventArgs e) {
+			try {
+				e.CanExecute = this.IsEditorInEditMode();
+			} catch(Exception exception) {
+				Tracer.Report("Mainframe.CircuitUsageCommandCanExecute", exception);
+				this.ReportException(exception);
+			}
+		}
+
 		private void CircuitPowerCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
 				if(this.Editor != null) {

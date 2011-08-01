@@ -386,6 +386,10 @@ namespace LogicCircuit {
 			this.Mainframe.ShowDialog(new DialogCircuit(logicalCircuit));
 		}
 
+		public void LogicalCircuitUsage(LogicalCircuit logicalCircuit) {
+			this.Mainframe.ShowDialog(new DialogUsage(logicalCircuit));
+		}
+
 		private void Edit(CircuitButton button) {
 			this.Mainframe.ShowDialog(new DialogButton(button));
 		}
