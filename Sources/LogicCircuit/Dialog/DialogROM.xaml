@@ -4,7 +4,7 @@
 	xmlns:lc="clr-namespace:LogicCircuit"
 	FlowDirection="{Binding Source={x:Static lc:Resources.FlowDirection}, Mode=OneTime}"
 	Title="{Binding Source={x:Static lc:Resources.ROMNotation}, Mode=OneTime}"
-	MinWidth="480" MinHeight="240"
+	MinWidth="480" MinHeight="280"
 	Width="{Binding Path=WindowLocation.Width, Mode=TwoWay}"
 	Height="{Binding Path=WindowLocation.Height, Mode=TwoWay}"
 	WindowState="{Binding Path=WindowLocation.WindowState, Mode=TwoWay}"
@@ -35,7 +35,9 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="*"/>
+			<RowDefinition Height="*" MinHeight="75"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*" MinHeight="50"/>
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 
@@ -45,7 +47,7 @@
 		<Label Grid.Row="1" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleDataBitWidth}, Mode=OneTime}" Target="{Binding ElementName=dataBitWidth}"/>
 		<ComboBox Grid.Row="1" Grid.Column="1" Name="dataBitWidth" SelectionChanged="MemorySizeChanged" ToolTip="{x:Static lc:Resources.ToolTipDataBitWidth}"/>
 
-		<GroupBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Header="{Binding Source={x:Static lc:Resources.TitleData}, Mode=OneTime}" Margin="3">
+		<GroupBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Header="{Binding Source={x:Static lc:Resources.TitleData}, Mode=OneTime}" Margin="3,3,3,0">
 			<GroupBox.Resources>
 				<Style x:Key="memoryCell" TargetType="TextBlock">
 					<Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -186,11 +188,19 @@
 			</ListView>
 		</GroupBox>
 
-		<StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Bottom">
+		<GridSplitter Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="3" Background="Transparent"/>
+
+		<GroupBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="3,0,3,3" Header="{Binding Source={x:Static lc:Resources.CaptionNote}, Mode=OneTime}">
+			<TextBox Name="note" Margin="0" BorderThickness="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+				AcceptsReturn="True" SpellCheck.IsEnabled="True"
+			/>
+		</GroupBox>
+
+		<StackPanel Grid.Row="5" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Bottom">
 			<Button Content="{Binding Source={x:Static lc:Resources.TitleLoad}, Mode=OneTime}" Click="ButtonLoadClick"/>
 		</StackPanel>
 
-		<StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+		<StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
 			<Button Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="ButtonOkClick"/>
 			<Button Content="{Binding Source={x:Static lc:Resources.TitleCancel}, Mode=OneTime}" IsCancel="True"/>
 		</StackPanel>

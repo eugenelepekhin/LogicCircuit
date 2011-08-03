@@ -27,6 +27,7 @@ namespace LogicCircuit {
 			set { this.fieldDataBitWidth = BasePin.CheckBitWidth(value); }
 		}
 		public string Data;
+		public string Note;
 		internal Memory Memory;
 
 		private interface IFieldSerializer {
@@ -248,6 +249,41 @@ namespace LogicCircuit {
 			}
 		}
 
+		// Accessor of the Note field
+		public sealed class NoteField : IField<MemoryData, string>, IFieldSerializer {
+			public static readonly NoteField Field = new NoteField();
+			private NoteField() {}
+			public string Name { get { return "Note"; } }
+			public int Order { get; set; }
+			public string DefaultValue { get { return ""; } }
+			public string GetValue(ref MemoryData record) {
+				return record.Note;
+			}
+			public void SetValue(ref MemoryData record, string value) {
+				record.Note = value;
+			}
+			public int Compare(ref MemoryData l, ref MemoryData r) {
+				return StringComparer.Ordinal.Compare(l.Note, r.Note);
+			}
+			public int Compare(string l, string r) {
+				return StringComparer.Ordinal.Compare(l, r);
+			}
+
+			// Implementation of interface IFieldSerializer
+			bool IFieldSerializer.NeedToSave(ref MemoryData data) {
+				return this.Compare(data.Note, this.DefaultValue) != 0;
+			}
+			string IFieldSerializer.GetTextValue(ref MemoryData data) {
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Note);
+			}
+			void IFieldSerializer.SetDefault(ref MemoryData data) {
+				data.Note = this.DefaultValue;
+			}
+			void IFieldSerializer.SetTextValue(ref MemoryData data, string text) {
+				data.Note = text;
+			}
+		}
+
 		// Special field used to access items wrapper of this record from record.
 		// This is used when no other universes is used
 		internal sealed class MemoryField : IField<MemoryData, Memory> {
@@ -282,6 +318,7 @@ namespace LogicCircuit {
 				,AddressBitWidthField.Field
 				,DataBitWidthField.Field
 				,DataField.Field
+				,NoteField.Field
 				,MemoryField.Field
 			);
 			// Create all but foreign keys of the table
@@ -403,6 +440,12 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.MemoryRowId, MemoryData.DataField.Field, value); }
 		}
 
+		// Gets or sets value of the Note field.
+		public string Note {
+			get { return this.Table.GetField(this.MemoryRowId, MemoryData.NoteField.Field); }
+			set { this.Table.SetField(this.MemoryRowId, MemoryData.NoteField.Field, value); }
+		}
+
 
 		internal void NotifyChanged(TableChange<MemoryData> change) {
 			if(this.HasListener) {
@@ -426,6 +469,9 @@ namespace LogicCircuit {
 				}
 				if(MemoryData.DataField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("Data");
+				}
+				if(MemoryData.NoteField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("Note");
 				}
 			}
 			this.OnMemoryChanged();
@@ -516,7 +562,8 @@ namespace LogicCircuit {
 			bool WriteOn1,
 			int AddressBitWidth,
 			int DataBitWidth,
-			string Data
+			string Data,
+			string Note
 			// Fields of Circuit table
 
 		) {
@@ -533,6 +580,7 @@ namespace LogicCircuit {
 				AddressBitWidth = AddressBitWidth,
 				DataBitWidth = DataBitWidth,
 				Data = Data,
+				Note = Note,
 			};
 			return this.Create(this.Table.Insert(ref dataMemory), rowIdCircuit);
 		}

@@ -42,6 +42,7 @@ namespace LogicCircuit {
 			this.dataBitWidth.ItemsSource = PinDescriptor.NumberRange(1);
 			this.addressBitWidth.SelectedItem = this.memory.AddressBitWidth;
 			this.dataBitWidth.SelectedItem = this.memory.DataBitWidth;
+			this.note.Text = this.memory.Note;
 			this.Loaded += new RoutedEventHandler(this.DialogLoaded);
 		}
 
@@ -80,6 +81,7 @@ namespace LogicCircuit {
 				int addressBitWidth = this.AddressBitWidth;
 				int dataBitWidth = this.DataBitWidth;
 				byte[] originalData = this.memory.RomValue();
+				string text = this.note.Text.Trim();
 				Func<byte[], byte[], bool> equal = (a, b) => {
 					if(a.Length == b.Length) {
 						for(int i = 0; i < a.Length; i++) {
@@ -92,11 +94,12 @@ namespace LogicCircuit {
 					return false;
 				};
 
-				if(this.memory.AddressBitWidth != addressBitWidth || this.memory.DataBitWidth != dataBitWidth || !equal(originalData, this.data)) {
+				if(this.memory.AddressBitWidth != addressBitWidth || this.memory.DataBitWidth != dataBitWidth || this.memory.Note != text || !equal(originalData, this.data)) {
 					this.memory.CircuitProject.InTransaction(() => {
 						this.memory.AddressBitWidth = addressBitWidth;
 						this.memory.DataBitWidth = dataBitWidth;
 						this.memory.SetRomValue(this.data);
+						this.memory.Note = text;
 					});
 				}
 				this.Close();

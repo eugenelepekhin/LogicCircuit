@@ -41,6 +41,7 @@
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 
 		<Label Grid.Row="0" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleAddressBitWidth}, Mode=OneTime}" Target="{Binding ElementName=addressBitWidth}"/>
@@ -52,7 +53,12 @@
 		<Label Grid.Row="2" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleWriteOn}, Mode=OneTime}" Target="{Binding ElementName=writeOn}"/>
 		<ComboBox Grid.Row="2" Grid.Column="1" Name="writeOn" MinWidth="150" ToolTip="{x:Static lc:Resources.ToolTipRamWriteOn}"/>
 
-		<StackPanel Grid.Row="3" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+		<Label Grid.Row="3" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleNote}, Mode=OneTime}" Target="{Binding ElementName=note}"/>
+		<TextBox Grid.Row="3" Grid.Column="1" Name="note"  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+			AcceptsReturn="True" SpellCheck.IsEnabled="True"
+		/>
+
+		<StackPanel Grid.Row="4" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
 			<Button Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="ButtonOkClick"/>
 			<Button Content="{Binding Source={x:Static lc:Resources.TitleCancel}, Mode=OneTime}" IsCancel="True"/>
 		</StackPanel>

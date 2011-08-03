@@ -526,7 +526,7 @@ Out</value>
     <value>_Address bit width:</value>
   </data>
   <data name="TitleData" xml:space="preserve">
-    <value>Data</value>
+    <value>Da_ta</value>
   </data>
   <data name="TitleDataBitWidth" xml:space="preserve">
     <value>_Data bit width:</value>
@@ -930,5 +930,11 @@ Do you want to replace it?</value>
   </data>
   <data name="TitleCircuitUsage" xml:space="preserve">
     <value>Logical Circuit Usage</value>
+  </data>
+  <data name="TitleNote" xml:space="preserve">
+    <value>_Note:</value>
+  </data>
+  <data name="CaptionNote" xml:space="preserve">
+    <value>_Note</value>
   </data>
 </root>

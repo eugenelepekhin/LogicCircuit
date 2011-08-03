@@ -29,7 +29,7 @@ namespace LogicCircuit {
 		}
 
 		public override string ToolTip {
-			get { return this.Writable ? Resources.ToolTipRAM(this.AddressBitWidth, this.DataBitWidth) : Resources.ToolTipROM(this.AddressBitWidth, this.DataBitWidth); }
+			get { return this.AppendNote(this.Writable ? Resources.ToolTipRAM(this.AddressBitWidth, this.DataBitWidth) : Resources.ToolTipROM(this.AddressBitWidth, this.DataBitWidth)); }
 		}
 
 		public override string Category {
@@ -162,6 +162,14 @@ namespace LogicCircuit {
 		partial void OnMemoryChanged() {
 			this.InvalidateDistinctSymbol();
 		}
+
+		private string AppendNote(string toolTip) {
+			string n = this.Note;
+			if(!string.IsNullOrEmpty(n)) {
+				return toolTip + "\n" + n;
+			}
+			return toolTip;
+		}
 	}
 
 	public partial class MemorySet {
@@ -213,7 +221,7 @@ namespace LogicCircuit {
 
 		public Memory Create(bool writable, int addressBitWidth, int dataBitWidth) {
 			Memory memory = this.CreateItem(Guid.NewGuid(), writable, MemoryData.WriteOn1Field.Field.DefaultValue, addressBitWidth, dataBitWidth,
-				MemoryData.DataField.Field.DefaultValue
+				MemoryData.DataField.Field.DefaultValue, MemoryData.NoteField.Field.DefaultValue
 			);
 			this.CreatePins(memory);
 			return memory;

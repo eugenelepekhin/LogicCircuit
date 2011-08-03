@@ -10,7 +10,7 @@
 		<xsl:output method="xml" version="1.0" standalone="yes" indent="yes"/>
 	<xsl:key name="splitters" match="old:Splitter" use="old:SplitterId/text()"/>
 
-	<!-- This will just change namespace of the file, so no new files will be opened by old ProjectManager -->
+	<!-- This will just change namespace of the file, so no new files will be opened by old CircuitProject -->
 
 	<xsl:template match="*">
 		<xsl:element name="{name(.)}">

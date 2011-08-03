@@ -26,6 +26,7 @@ namespace LogicCircuit {
 			this.addressBitWidth.SelectedItem = this.memory.AddressBitWidth;
 			this.dataBitWidth.SelectedItem = this.memory.DataBitWidth;
 			this.writeOn.SelectedIndex = this.memory.WriteOn1 ? 1 : 0;
+			this.note.Text = this.memory.Note;
 		}
 
 		private void ButtonOkClick(object sender, RoutedEventArgs e) {
@@ -33,12 +34,14 @@ namespace LogicCircuit {
 				int addressBitWidth = (int)this.addressBitWidth.SelectedItem;
 				int dataBitWidth = (int)this.dataBitWidth.SelectedItem;
 				bool writeOn1 = (this.writeOn.SelectedIndex == 0) ? false : true;
+				string text = this.note.Text.Trim();
 
-				if(this.memory.AddressBitWidth != addressBitWidth || this.memory.DataBitWidth != dataBitWidth || this.memory.WriteOn1 != writeOn1) {
+				if(this.memory.AddressBitWidth != addressBitWidth || this.memory.DataBitWidth != dataBitWidth || this.memory.WriteOn1 != writeOn1 || this.memory.Note != text) {
 					this.memory.CircuitProject.InTransaction(() => {
 						this.memory.AddressBitWidth = addressBitWidth;
 						this.memory.DataBitWidth = dataBitWidth;
 						this.memory.WriteOn1 = writeOn1;
+						this.memory.Note = text;
 					});
 				}
 				this.Close();

@@ -937,7 +937,7 @@ namespace LogicCircuit {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Data.
+		/// Looks up a localized string similar to Da_ta.
 		/// </summary>
  		public static string TitleData {
 			get { return ResourceManager.GetString("TitleData", Culture); }
@@ -1782,6 +1782,20 @@ namespace LogicCircuit {
 		/// </summary>
  		public static string TitleCircuitUsage {
 			get { return ResourceManager.GetString("TitleCircuitUsage", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Note:.
+		/// </summary>
+ 		public static string TitleNote {
+			get { return ResourceManager.GetString("TitleNote", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Note.
+		/// </summary>
+ 		public static string CaptionNote {
+			get { return ResourceManager.GetString("CaptionNote", Culture); }
 		}
 	}
 }

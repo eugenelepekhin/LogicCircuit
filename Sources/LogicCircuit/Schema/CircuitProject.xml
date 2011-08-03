@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Store xmlns="clr-namespace:ItemWrapper.Generator;assembly=ItemWrapper.Generator"
 	Namespace="LogicCircuit" Name="CircuitProject"
-	PersistencePrefix="lc" PersistenceNamespace="http://LogicCircuit.net/2.0.0.1/CircuitProject.xsd"
+	PersistencePrefix="lc" PersistenceNamespace="http://LogicCircuit.net/2.0.0.2/CircuitProject.xsd"
 >
 
 	<!--
@@ -13,6 +13,7 @@
 		by old version of program that does not support such gates. A simple transformation is required to change namespace so no user data will be lost.
 
 		Version 2.0.0.1 - Moving to new store. Adding Frequency and IsMaximumSpeed to project. Adding JamNotation to Pin. Adding TextNote.
+		Version 2.0.0.2 - Adding Note to memory modules
 	-->
 
 	<Table Name="Project">
@@ -182,6 +183,7 @@
 			<Column Name="AddressBitWidth" Type="int" Check="Memory.CheckAddressBitWidth"/>
 			<Column Name="DataBitWidth" Type="int" Check="BasePin.CheckBitWidth"/>
 			<Column Name="Data" Type="string" Default="" AccessModifier="Private"/>
+			<Column Name="Note" Type="string" Default=""/>
 		</Table.Columns>
 
 		<Table.Keys>
