@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("ResourceWrapper.Generator")]
 [assembly: AssemblyDescription("Utility ResourceWrapper Generator")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("LogicCircuit")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("ResourceWrapper.Generator")]
-[assembly: AssemblyCopyright("Copyright © LogicCircuit 2008")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
