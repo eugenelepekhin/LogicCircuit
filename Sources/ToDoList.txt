@@ -9,4 +9,3 @@ Display device
 "hard drive" device
 
 Colors of symbols
-Collapsible/expandable categories
