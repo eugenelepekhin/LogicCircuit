@@ -13,7 +13,7 @@
 		by old version of program that does not support such gates. A simple transformation is required to change namespace so no user data will be lost.
 
 		Version 2.0.0.1 - Moving to new store. Adding Frequency and IsMaximumSpeed to project. Adding JamNotation to Pin. Adding TextNote.
-		Version 2.0.0.2 - Adding Note to memory modules
+		Version 2.0.0.2 - Adding Note to memory modules, collapse state to categories.
 	-->
 
 	<Table Name="Project">
@@ -25,6 +25,9 @@
 			<Column Name="Frequency" Type="int" Default="10" Check="Project.CheckFrequency"/>
 			<Column Name="IsMaximumSpeed" Type="bool" Default="false"/>
 			<Column Name="LogicalCircuitId" Type="Guid"/>
+			<Column Name="CategoryTextNoteCollapsed" Type="bool" Default="false"/>
+			<Column Name="CategoryInputOutputCollapsed" Type="bool" Default="false"/>
+			<Column Name="CategoryPrimitivesCollapsed" Type="bool" Default="false"/>
 		</Table.Columns>
 		<Table.Keys>
 			<Key Name="PK_Project" KeyType="Primary">
@@ -33,6 +36,17 @@
 
 			<Key Name="FK_LogicalCircuit_Project" KeyType="Foreign" ParentName="LogicalCircuit" Action="Restrict">
 				<Column Name="LogicalCircuitId"/>
+			</Key>
+		</Table.Keys>
+	</Table>
+
+	<Table Name="CollapsedCategory">
+		<Table.Columns>
+			<Column Name="Name" Type="string"/>
+		</Table.Columns>
+		<Table.Keys>
+			<Key Name="PK_CollapsedCategory" KeyType="Primary">
+				<Column Name="Name"/>
 			</Key>
 		</Table.Keys>
 	</Table>

@@ -57,6 +57,7 @@ namespace LogicCircuit {
 			XmlElement root = xml.SelectSingleNode("/lc:CircuitProject", nsmgr) as XmlElement;
 			if(root != null) {
 				this.ProjectSet.Load(root.SelectNodes("lc:Project", nsmgr));
+				this.CollapsedCategorySet.Load(root.SelectNodes("lc:CollapsedCategory", nsmgr));
 				this.LogicalCircuitSet.Load(root.SelectNodes("lc:LogicalCircuit", nsmgr));
 				this.PinSet.Load(root.SelectNodes("lc:Pin", nsmgr));
 				this.ConstantSet.Load(root.SelectNodes("lc:Constant", nsmgr));
@@ -67,6 +68,8 @@ namespace LogicCircuit {
 				this.WireSet.Load(root.SelectNodes("lc:Wire", nsmgr));
 				this.TextNoteSet.Load(root.SelectNodes("lc:TextNote", nsmgr));
 			}
+
+			this.CollapsedCategorySet.Purge();
 
 			foreach(CircuitSymbol symbol in this.CircuitSymbolSet) {
 				Guid circuitId = this.CircuitSymbolSet.Table.GetField(symbol.CircuitSymbolRowId, CircuitSymbolData.CircuitIdField.Field);
@@ -102,6 +105,7 @@ namespace LogicCircuit {
 			XmlElement root = xml.CreateElement(CircuitProject.PersistencePrefix, "CircuitProject", CircuitProject.PersistenceNamespace);
 			xml.AppendChild(root);
 			ProjectData.Save(this.ProjectSet.Table, root);
+			CollapsedCategoryData.Save(this.CollapsedCategorySet.Table, root);
 			LogicalCircuitData.Save(this.LogicalCircuitSet.Table, root);
 			PinData.Save(this.PinSet.Table, root);
 			ConstantData.Save(this.ConstantSet.Table, root);

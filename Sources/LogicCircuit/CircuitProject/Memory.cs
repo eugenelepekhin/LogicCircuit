@@ -33,7 +33,7 @@ namespace LogicCircuit {
 		}
 
 		public override string Category {
-			get { return Resources.CategoryMemory; }
+			get { return Resources.CategoryPrimitives; }
 			set { throw new InvalidOperationException(); }
 		}
 

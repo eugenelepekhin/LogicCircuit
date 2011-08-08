@@ -154,29 +154,32 @@
 			</DrawingBrush.Drawing>
 		</DrawingBrush>
 
-		<DataTemplate x:Key="CircuitDescriptorGroup">
-			<Border BorderThickness="0,0,0,2" Margin="0,5,0,0">
-				<Border.BorderBrush>
-					<RadialGradientBrush>
-						<GradientStop Color="{x:Static SystemColors.WindowColor}" Offset="0"/>
-						<GradientStop Color="{x:Static SystemColors.ControlDarkColor}" Offset="0.2"/>
-						<GradientStop Color="{x:Static SystemColors.ControlDarkColor}" Offset="0.8"/>
-						<GradientStop Color="{x:Static SystemColors.WindowColor}" Offset="1"/>
-					</RadialGradientBrush>
-				</Border.BorderBrush>
-				<TextBlock FontWeight="Bold" Foreground="{x:Static SystemColors.AppWorkspaceBrush}">
-					<TextBlock.Style>
-						<Style TargetType="TextBlock">
-							<Setter Property="Text" Value="{Binding Path=Items[0].Category}"/>
-							<Style.Triggers>
-								<DataTrigger Binding="{Binding Path=Items[0].Category}" Value="">
-									<Setter Property="Text" Value="{Binding Path=Items[0].Circuit.CircuitProject.ProjectSet.Project.Name}"/>
-								</DataTrigger>
-							</Style.Triggers>
-						</Style>
-					</TextBlock.Style>
-				</TextBlock>
-			</Border>
-		</DataTemplate>
+		<Style x:Key="CircuitDescriptorGroup" TargetType="GroupItem">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="GroupItem">
+						<Expander IsExpanded="{Binding Path=Items[0].CategoryExpanded}">
+							<Expander.Header>
+								<TextBlock FontWeight="Bold" Foreground="{x:Static SystemColors.AppWorkspaceBrush}">
+									<TextBlock.Style>
+										<Style TargetType="TextBlock">
+											<Setter Property="Text" Value="{Binding Path=Name}"/>
+											<Style.Triggers>
+												<DataTrigger Binding="{Binding Path=Name}" Value="">
+													<Setter Property="Text" Value="{Binding Path=Items[0].Circuit.CircuitProject.ProjectSet.Project.Name}"/>
+												</DataTrigger>
+											</Style.Triggers>
+										</Style>
+									</TextBlock.Style>
+								</TextBlock>
+							</Expander.Header>
+							<Expander.Content>
+								<ItemsPresenter/>
+							</Expander.Content>
+						</Expander>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
 	</Application.Resources>
 </Application>

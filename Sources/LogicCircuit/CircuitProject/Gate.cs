@@ -178,32 +178,32 @@ namespace LogicCircuit {
 			case GateType.Not:
 				gate.Name = Resources.GateNotName;
 				gate.Notation = Resources.GateNotNotation;
-				gate.Category = Resources.CategoryBuffer;
+				gate.Category = Resources.CategoryPrimitives;
 				break;
 			case GateType.Or:
 				gate.Name = invertedOutput ? Resources.GateOrNotName : Resources.GateOrName;
 				gate.Notation = Resources.GateOrNotation;
-				gate.Category = Resources.GateOrName;
+				gate.Category = Resources.CategoryPrimitives;
 				break;
 			case GateType.And:
 				gate.Name = invertedOutput ? Resources.GateAndNotName : Resources.GateAndName;
 				gate.Notation = Resources.GateAndNotation;
-				gate.Category = Resources.GateAndName;
+				gate.Category = Resources.CategoryPrimitives;
 				break;
 			case GateType.Xor:
 				gate.Name = invertedOutput ? Resources.GateXorNotName : Resources.GateXorName;
 				gate.Notation = Resources.GateXorNotation;
-				gate.Category = Resources.GateXorName;
+				gate.Category = Resources.CategoryPrimitives;
 				break;
 			case GateType.Odd:
 				gate.Name = Resources.GateOddName;
 				gate.Notation = Resources.GateOddNotation;
-				gate.Category = Resources.CategoryParity;
+				gate.Category = Resources.CategoryPrimitives;
 				break;
 			case GateType.Even:
 				gate.Name = Resources.GateEvenName;
 				gate.Notation = Resources.GateEvenNotation;
-				gate.Category = Resources.CategoryParity;
+				gate.Category = Resources.CategoryPrimitives;
 				break;
 			case GateType.Led:
 				gate.Name = Resources.GateLedName;
@@ -218,7 +218,7 @@ namespace LogicCircuit {
 			case GateType.TriState:
 				gate.Name = Resources.GateTriStateName;
 				gate.Notation = Resources.GateTriStateNotation;
-				gate.Category = Resources.CategoryBuffer;
+				gate.Category = Resources.CategoryPrimitives;
 				break;
 			default:
 				Tracer.Fail();

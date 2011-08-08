@@ -12,6 +12,7 @@
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		public ProjectSet ProjectSet { get; private set; }
+		public CollapsedCategorySet CollapsedCategorySet { get; private set; }
 		public CircuitSet CircuitSet { get; private set; }
 		public DevicePinSet DevicePinSet { get; private set; }
 		public GateSet GateSet { get; private set; }
@@ -33,6 +34,7 @@
 
 			// Create foreign keys
 			ProjectData.CreateForeignKeys(this);
+			CollapsedCategoryData.CreateForeignKeys(this);
 			CircuitData.CreateForeignKeys(this);
 			DevicePinData.CreateForeignKeys(this);
 			GateData.CreateForeignKeys(this);
@@ -52,6 +54,7 @@
 
 		private void CreateSets() {
 			this.ProjectSet = new ProjectSet(this);
+			this.CollapsedCategorySet = new CollapsedCategorySet(this);
 			this.CircuitSet = new CircuitSet(this);
 			this.DevicePinSet = new DevicePinSet(this);
 			this.GateSet = new GateSet(this);
@@ -85,6 +88,7 @@
 				int oldVersion = e.OldVersion;
 				int newVersion = e.NewVersion;
 				List<Project> deletedProject = this.ProjectSet.UpdateSet(oldVersion, newVersion);
+				List<CollapsedCategory> deletedCollapsedCategory = this.CollapsedCategorySet.UpdateSet(oldVersion, newVersion);
 				List<Circuit> deletedCircuit = this.CircuitSet.UpdateSet(oldVersion, newVersion);
 				List<DevicePin> deletedDevicePin = this.DevicePinSet.UpdateSet(oldVersion, newVersion);
 				List<Gate> deletedGate = this.GateSet.UpdateSet(oldVersion, newVersion);
@@ -99,6 +103,7 @@
 				List<TextNote> deletedTextNote = this.TextNoteSet.UpdateSet(oldVersion, newVersion);
 
 				this.ProjectSet.NotifyVersionChanged(oldVersion, newVersion, deletedProject);
+				this.CollapsedCategorySet.NotifyVersionChanged(oldVersion, newVersion, deletedCollapsedCategory);
 				this.CircuitSet.NotifyVersionChanged(oldVersion, newVersion, deletedCircuit);
 				this.DevicePinSet.NotifyVersionChanged(oldVersion, newVersion, deletedDevicePin);
 				this.GateSet.NotifyVersionChanged(oldVersion, newVersion, deletedGate);
@@ -125,6 +130,7 @@
 		private void StoreRolledBack(object sender, RolledBackEventArgs e) {
 			int version = e.Version;
 			this.ProjectSet.NotifyRolledBack(version);
+			this.CollapsedCategorySet.NotifyRolledBack(version);
 			this.CircuitSet.NotifyRolledBack(version);
 			this.DevicePinSet.NotifyRolledBack(version);
 			this.GateSet.NotifyRolledBack(version);

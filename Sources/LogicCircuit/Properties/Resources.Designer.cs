@@ -578,31 +578,10 @@ namespace LogicCircuit {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Buffer.
-		/// </summary>
- 		public static string CategoryBuffer {
-			get { return ResourceManager.GetString("CategoryBuffer", Culture); }
-		}
-
-		/// <summary>
 		/// Looks up a localized string similar to Input - Output.
 		/// </summary>
  		public static string CategoryInputOutput {
 			get { return ResourceManager.GetString("CategoryInputOutput", Culture); }
-		}
-
-		/// <summary>
-		/// Looks up a localized string similar to Memory.
-		/// </summary>
- 		public static string CategoryMemory {
-			get { return ResourceManager.GetString("CategoryMemory", Culture); }
-		}
-
-		/// <summary>
-		/// Looks up a localized string similar to Parity.
-		/// </summary>
- 		public static string CategoryParity {
-			get { return ResourceManager.GetString("CategoryParity", Culture); }
 		}
 
 		/// <summary>
@@ -1796,6 +1775,20 @@ namespace LogicCircuit {
 		/// </summary>
  		public static string CaptionNote {
 			get { return ResourceManager.GetString("CaptionNote", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Primitives.
+		/// </summary>
+ 		public static string CategoryPrimitives {
+			get { return ResourceManager.GetString("CategoryPrimitives", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Memory.
+		/// </summary>
+ 		public static string TitleMemory {
+			get { return ResourceManager.GetString("TitleMemory", Culture); }
 		}
 	}
 }

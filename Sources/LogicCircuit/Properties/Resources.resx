@@ -366,17 +366,8 @@ Do you want to save it?</value>
   <data name="ToolTipWire" xml:space="preserve">
     <value>Wire</value>
   </data>
-  <data name="CategoryBuffer" xml:space="preserve">
-    <value>Buffer</value>
-  </data>
   <data name="CategoryInputOutput" xml:space="preserve">
     <value>Input - Output</value>
-  </data>
-  <data name="CategoryMemory" xml:space="preserve">
-    <value>Memory</value>
-  </data>
-  <data name="CategoryParity" xml:space="preserve">
-    <value>Parity</value>
   </data>
   <data name="ErrorWrongSplitter" xml:space="preserve">
     <value>Number of pins on the splitter should be less or equal to its bit width.</value>
@@ -936,5 +927,11 @@ Do you want to replace it?</value>
   </data>
   <data name="CaptionNote" xml:space="preserve">
     <value>_Note</value>
+  </data>
+  <data name="CategoryPrimitives" xml:space="preserve">
+    <value>Primitives</value>
+  </data>
+  <data name="TitleMemory" xml:space="preserve">
+    <value>Memory</value>
   </data>
 </root>

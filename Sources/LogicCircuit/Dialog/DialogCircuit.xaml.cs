@@ -62,6 +62,7 @@ namespace LogicCircuit {
 						this.logicalCircuit.Notation = notation;
 						this.logicalCircuit.Category = category;
 						this.logicalCircuit.Description = description;
+						this.logicalCircuit.CircuitProject.CollapsedCategorySet.Purge();
 					});
 				}
 				this.Close();

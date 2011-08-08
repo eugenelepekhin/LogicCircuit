@@ -42,7 +42,7 @@
 
 		<ListView Grid.Row="1" Name="listView" ItemsSource="{Binding Source={StaticResource circuitInfoList}}" Margin="3">
 			<ListView.GroupStyle>
-				<GroupStyle HeaderTemplate="{StaticResource CircuitDescriptorGroup}"/>
+				<GroupStyle ContainerStyle="{StaticResource CircuitDescriptorGroup}"/>
 			</ListView.GroupStyle>
 
 			<ListView.View>

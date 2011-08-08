@@ -13,7 +13,24 @@ namespace LogicCircuit {
 		void CreateSymbol(EditorDiagram editor, GridPoint point);
 	}
 	
-	public abstract class CircuitDescriptor<T> : IDescriptor, INotifyPropertyChanged where T:Circuit {
+	public abstract class Descriptor {
+		public abstract bool CategoryExpanded { get; set; }
+
+		protected static CircuitProject CircuitProject {
+			get {
+				Mainframe mainframe = App.Mainframe;
+				if(mainframe != null) {
+					Editor editor = mainframe.Editor;
+					if(editor != null) {
+						return editor.CircuitProject;
+					}
+				}
+				return null;
+			}
+		}
+	}
+
+	public abstract class CircuitDescriptor<T> : Descriptor, IDescriptor, INotifyPropertyChanged where T:Circuit {
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		public T Circuit { get; private set; }
@@ -81,7 +98,55 @@ namespace LogicCircuit {
 		}
 	}
 
-	public class GateDescriptor : CircuitDescriptor<Gate> {
+	public abstract class PrimitiveCircuitDescriptor<T> : CircuitDescriptor<T> where T:Circuit {
+		protected  PrimitiveCircuitDescriptor(T circuit) : base(circuit) {
+		}
+
+		public override bool CategoryExpanded {
+			get {
+				CircuitProject circuitProject = Descriptor.CircuitProject;
+				if(circuitProject != null) {
+					return !circuitProject.ProjectSet.Project.CategoryPrimitivesCollapsed;
+				}
+				return true;
+			}
+			set {
+				CircuitProject circuitProject = Descriptor.CircuitProject;
+				if(circuitProject != null) {
+					Project project = circuitProject.ProjectSet.Project;
+					if(value != (!project.CategoryPrimitivesCollapsed)) {
+						circuitProject.InOmitTransaction(() => project.CategoryPrimitivesCollapsed = !value);
+					}
+				}
+			}
+		}
+	}
+
+	public abstract class IOCircuitDescriptor<T> : CircuitDescriptor<T> where T:Circuit {
+		protected  IOCircuitDescriptor(T circuit) : base(circuit) {
+		}
+
+		public override bool CategoryExpanded {
+			get {
+				CircuitProject circuitProject = Descriptor.CircuitProject;
+				if(circuitProject != null) {
+					return !circuitProject.ProjectSet.Project.CategoryInputOutputCollapsed;
+				}
+				return true;
+			}
+			set {
+				CircuitProject circuitProject = Descriptor.CircuitProject;
+				if(circuitProject != null) {
+					Project project = circuitProject.ProjectSet.Project;
+					if(value != (!project.CategoryInputOutputCollapsed)) {
+						circuitProject.InOmitTransaction(() => project.CategoryInputOutputCollapsed = !value);
+					}
+				}
+			}
+		}
+	}
+
+	public class GateDescriptor : PrimitiveCircuitDescriptor<Gate> {
 		public int InputCount { get; set; }
 		public IEnumerable<int> InputCountRange { get; private set; }
 		public int InputCountRangeLength { get; private set; }
@@ -115,7 +180,7 @@ namespace LogicCircuit {
 		}
 	}
 
-	public class ButtonDescriptor : CircuitDescriptor<CircuitButton> {
+	public class ButtonDescriptor : IOCircuitDescriptor<CircuitButton> {
 		public string Notation { get; set; }
 		public bool IsToggle { get; set; }
 
@@ -133,7 +198,7 @@ namespace LogicCircuit {
 		}
 	}
 
-	public class ConstantDescriptor : CircuitDescriptor<Constant> {
+	public class ConstantDescriptor : IOCircuitDescriptor<Constant> {
 		public int BitWidth { get; set; }
 		public string Value { get; set; }
 
@@ -154,7 +219,7 @@ namespace LogicCircuit {
 		}
 	}
 
-	public class MemoryDescriptor : CircuitDescriptor<Memory> {
+	public class MemoryDescriptor : PrimitiveCircuitDescriptor<Memory> {
 		public int AddressBitWidth { get; set; }
 		public int DataBitWidth { get; set; }
 
@@ -173,7 +238,7 @@ namespace LogicCircuit {
 		}
 	}
 
-	public class PinDescriptor : CircuitDescriptor<Pin> {
+	public class PinDescriptor : IOCircuitDescriptor<Pin> {
 		public static IEnumerable<string> PinSideNames {
 			get { return new string[] { Resources.PinSideLeft, Resources.PinSideTop, Resources.PinSideRight, Resources.PinSideBottom }; }
 		}
@@ -217,7 +282,7 @@ namespace LogicCircuit {
 		}
 	}
 
-	public class SplitterDescriptor : CircuitDescriptor<Splitter> {
+	public class SplitterDescriptor : IOCircuitDescriptor<Splitter> {
 		public int BitWidth { get; set; }
 		public int PinCount { get; set; }
 		private int direction;
@@ -265,12 +330,46 @@ namespace LogicCircuit {
 		public void NotifyCurrentChanged() {
 			this.NotifyPropertyChanged("IsCurrent");
 		}
+
+		public override bool CategoryExpanded {
+			get {
+				CircuitProject circuitProject = this.Circuit.CircuitProject;
+				if(circuitProject != null) {
+					return !circuitProject.CollapsedCategorySet.IsCollapsed(this.Circuit.Category);
+				}
+				return true;
+			}
+			set {
+				CircuitProject circuitProject = this.Circuit.CircuitProject;
+				if(circuitProject != null) {
+					circuitProject.CollapsedCategorySet.SetCollapsed(this.Circuit.Category, !value);
+				}
+			}
+		}
 	}
 
-	public class TextNoteDescriptor : IDescriptor {
+	public class TextNoteDescriptor : Descriptor, IDescriptor {
 
 		public Circuit Circuit { get; private set; }
 		public string Category { get { return this.Circuit.Category; } }
+		public override bool CategoryExpanded {
+			get {
+				CircuitProject circuitProject = Descriptor.CircuitProject;
+				if(circuitProject != null) {
+					return !circuitProject.ProjectSet.Project.CategoryTextNoteCollapsed;
+				}
+				return true;
+			}
+			set {
+				CircuitProject circuitProject = Descriptor.CircuitProject;
+				if(circuitProject != null) {
+					Project project = circuitProject.ProjectSet.Project;
+					if(value != (!project.CategoryTextNoteCollapsed)) {
+						circuitProject.InOmitTransaction(() => project.CategoryTextNoteCollapsed = !value);
+					}
+				}
+			}
+		}
 
 		public TextNoteDescriptor(CircuitProject circuitProject) {
 			// create dummy circuit to provide category and name for sorting and displaying in list of circuits descriptors

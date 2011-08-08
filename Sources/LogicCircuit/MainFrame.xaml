@@ -292,7 +292,7 @@
 						ItemsSource="{Binding Source={StaticResource circuitDescriptorList}}"
 					>
 						<ListView.GroupStyle>
-							<GroupStyle HeaderTemplate="{StaticResource CircuitDescriptorGroup}"/>
+							<GroupStyle ContainerStyle="{StaticResource CircuitDescriptorGroup}"/>
 						</ListView.GroupStyle>
 
 						<ListView.Resources>

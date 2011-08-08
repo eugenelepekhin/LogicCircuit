@@ -3,7 +3,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:lc="clr-namespace:LogicCircuit"
 	FlowDirection="{Binding Source={x:Static lc:Resources.FlowDirection}, Mode=OneTime}"
-	Title="{Binding Source={x:Static lc:Resources.CategoryMemory}, Mode=OneTime}"
+	Title="{Binding Source={x:Static lc:Resources.TitleMemory}, Mode=OneTime}"
 	MinWidth="480" MinHeight="240"
 	Width="{Binding Path=WindowLocation.Width, Mode=TwoWay}"
 	Height="{Binding Path=WindowLocation.Height, Mode=TwoWay}"

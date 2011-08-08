@@ -28,6 +28,9 @@ namespace LogicCircuit {
 		}
 		public bool IsMaximumSpeed;
 		public Guid LogicalCircuitId;
+		public bool CategoryTextNoteCollapsed;
+		public bool CategoryInputOutputCollapsed;
+		public bool CategoryPrimitivesCollapsed;
 		internal Project Project;
 
 		private interface IFieldSerializer {
@@ -284,6 +287,111 @@ namespace LogicCircuit {
 			}
 		}
 
+		// Accessor of the CategoryTextNoteCollapsed field
+		public sealed class CategoryTextNoteCollapsedField : IField<ProjectData, bool>, IFieldSerializer {
+			public static readonly CategoryTextNoteCollapsedField Field = new CategoryTextNoteCollapsedField();
+			private CategoryTextNoteCollapsedField() {}
+			public string Name { get { return "CategoryTextNoteCollapsed"; } }
+			public int Order { get; set; }
+			public bool DefaultValue { get { return false; } }
+			public bool GetValue(ref ProjectData record) {
+				return record.CategoryTextNoteCollapsed;
+			}
+			public void SetValue(ref ProjectData record, bool value) {
+				record.CategoryTextNoteCollapsed = value;
+			}
+			public int Compare(ref ProjectData l, ref ProjectData r) {
+				return l.CategoryTextNoteCollapsed.CompareTo(r.CategoryTextNoteCollapsed);
+			}
+			public int Compare(bool l, bool r) {
+				return l.CompareTo(r);
+			}
+
+			// Implementation of interface IFieldSerializer
+			bool IFieldSerializer.NeedToSave(ref ProjectData data) {
+				return this.Compare(data.CategoryTextNoteCollapsed, this.DefaultValue) != 0;
+			}
+			string IFieldSerializer.GetTextValue(ref ProjectData data) {
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.CategoryTextNoteCollapsed);
+			}
+			void IFieldSerializer.SetDefault(ref ProjectData data) {
+				data.CategoryTextNoteCollapsed = this.DefaultValue;
+			}
+			void IFieldSerializer.SetTextValue(ref ProjectData data, string text) {
+				data.CategoryTextNoteCollapsed = bool.Parse(text);
+			}
+		}
+
+		// Accessor of the CategoryInputOutputCollapsed field
+		public sealed class CategoryInputOutputCollapsedField : IField<ProjectData, bool>, IFieldSerializer {
+			public static readonly CategoryInputOutputCollapsedField Field = new CategoryInputOutputCollapsedField();
+			private CategoryInputOutputCollapsedField() {}
+			public string Name { get { return "CategoryInputOutputCollapsed"; } }
+			public int Order { get; set; }
+			public bool DefaultValue { get { return false; } }
+			public bool GetValue(ref ProjectData record) {
+				return record.CategoryInputOutputCollapsed;
+			}
+			public void SetValue(ref ProjectData record, bool value) {
+				record.CategoryInputOutputCollapsed = value;
+			}
+			public int Compare(ref ProjectData l, ref ProjectData r) {
+				return l.CategoryInputOutputCollapsed.CompareTo(r.CategoryInputOutputCollapsed);
+			}
+			public int Compare(bool l, bool r) {
+				return l.CompareTo(r);
+			}
+
+			// Implementation of interface IFieldSerializer
+			bool IFieldSerializer.NeedToSave(ref ProjectData data) {
+				return this.Compare(data.CategoryInputOutputCollapsed, this.DefaultValue) != 0;
+			}
+			string IFieldSerializer.GetTextValue(ref ProjectData data) {
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.CategoryInputOutputCollapsed);
+			}
+			void IFieldSerializer.SetDefault(ref ProjectData data) {
+				data.CategoryInputOutputCollapsed = this.DefaultValue;
+			}
+			void IFieldSerializer.SetTextValue(ref ProjectData data, string text) {
+				data.CategoryInputOutputCollapsed = bool.Parse(text);
+			}
+		}
+
+		// Accessor of the CategoryPrimitivesCollapsed field
+		public sealed class CategoryPrimitivesCollapsedField : IField<ProjectData, bool>, IFieldSerializer {
+			public static readonly CategoryPrimitivesCollapsedField Field = new CategoryPrimitivesCollapsedField();
+			private CategoryPrimitivesCollapsedField() {}
+			public string Name { get { return "CategoryPrimitivesCollapsed"; } }
+			public int Order { get; set; }
+			public bool DefaultValue { get { return false; } }
+			public bool GetValue(ref ProjectData record) {
+				return record.CategoryPrimitivesCollapsed;
+			}
+			public void SetValue(ref ProjectData record, bool value) {
+				record.CategoryPrimitivesCollapsed = value;
+			}
+			public int Compare(ref ProjectData l, ref ProjectData r) {
+				return l.CategoryPrimitivesCollapsed.CompareTo(r.CategoryPrimitivesCollapsed);
+			}
+			public int Compare(bool l, bool r) {
+				return l.CompareTo(r);
+			}
+
+			// Implementation of interface IFieldSerializer
+			bool IFieldSerializer.NeedToSave(ref ProjectData data) {
+				return this.Compare(data.CategoryPrimitivesCollapsed, this.DefaultValue) != 0;
+			}
+			string IFieldSerializer.GetTextValue(ref ProjectData data) {
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.CategoryPrimitivesCollapsed);
+			}
+			void IFieldSerializer.SetDefault(ref ProjectData data) {
+				data.CategoryPrimitivesCollapsed = this.DefaultValue;
+			}
+			void IFieldSerializer.SetTextValue(ref ProjectData data, string text) {
+				data.CategoryPrimitivesCollapsed = bool.Parse(text);
+			}
+		}
+
 		// Special field used to access items wrapper of this record from record.
 		// This is used when no other universes is used
 		internal sealed class ProjectField : IField<ProjectData, Project> {
@@ -319,6 +427,9 @@ namespace LogicCircuit {
 				,FrequencyField.Field
 				,IsMaximumSpeedField.Field
 				,LogicalCircuitIdField.Field
+				,CategoryTextNoteCollapsedField.Field
+				,CategoryInputOutputCollapsedField.Field
+				,CategoryPrimitivesCollapsedField.Field
 				,ProjectField.Field
 			);
 			// Create all but foreign keys of the table
@@ -458,6 +569,24 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.ProjectRowId, ProjectData.LogicalCircuitIdField.Field, value.LogicalCircuitId); }
 		}
 
+		// Gets or sets value of the CategoryTextNoteCollapsed field.
+		public bool CategoryTextNoteCollapsed {
+			get { return this.Table.GetField(this.ProjectRowId, ProjectData.CategoryTextNoteCollapsedField.Field); }
+			set { this.Table.SetField(this.ProjectRowId, ProjectData.CategoryTextNoteCollapsedField.Field, value); }
+		}
+
+		// Gets or sets value of the CategoryInputOutputCollapsed field.
+		public bool CategoryInputOutputCollapsed {
+			get { return this.Table.GetField(this.ProjectRowId, ProjectData.CategoryInputOutputCollapsedField.Field); }
+			set { this.Table.SetField(this.ProjectRowId, ProjectData.CategoryInputOutputCollapsedField.Field, value); }
+		}
+
+		// Gets or sets value of the CategoryPrimitivesCollapsed field.
+		public bool CategoryPrimitivesCollapsed {
+			get { return this.Table.GetField(this.ProjectRowId, ProjectData.CategoryPrimitivesCollapsedField.Field); }
+			set { this.Table.SetField(this.ProjectRowId, ProjectData.CategoryPrimitivesCollapsedField.Field, value); }
+		}
+
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		protected void NotifyPropertyChanged(string name) {
@@ -494,6 +623,15 @@ namespace LogicCircuit {
 				}
 				if(ProjectData.LogicalCircuitIdField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("LogicalCircuit");
+				}
+				if(ProjectData.CategoryTextNoteCollapsedField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("CategoryTextNoteCollapsed");
+				}
+				if(ProjectData.CategoryInputOutputCollapsedField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("CategoryInputOutputCollapsed");
+				}
+				if(ProjectData.CategoryPrimitivesCollapsedField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("CategoryPrimitivesCollapsed");
 				}
 			}
 			this.OnProjectChanged();
@@ -582,7 +720,10 @@ namespace LogicCircuit {
 			double Zoom,
 			int Frequency,
 			bool IsMaximumSpeed,
-			LogicalCircuit LogicalCircuit
+			LogicalCircuit LogicalCircuit,
+			bool CategoryTextNoteCollapsed,
+			bool CategoryInputOutputCollapsed,
+			bool CategoryPrimitivesCollapsed
 		) {
 			ProjectData dataProject = new ProjectData() {
 				ProjectId = ProjectId,
@@ -592,6 +733,9 @@ namespace LogicCircuit {
 				Frequency = Frequency,
 				IsMaximumSpeed = IsMaximumSpeed,
 				LogicalCircuitId = (LogicalCircuit != null) ? LogicalCircuit.LogicalCircuitId : ProjectData.LogicalCircuitIdField.Field.DefaultValue,
+				CategoryTextNoteCollapsed = CategoryTextNoteCollapsed,
+				CategoryInputOutputCollapsed = CategoryInputOutputCollapsed,
+				CategoryPrimitivesCollapsed = CategoryPrimitivesCollapsed,
 			};
 			return this.Create(this.Table.Insert(ref dataProject));
 		}

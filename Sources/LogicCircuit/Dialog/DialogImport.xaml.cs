@@ -98,12 +98,17 @@ namespace LogicCircuit {
 
 			public CircuitInfo(LogicalCircuit circuit, bool canImport) : base(circuit, s => false) {
 				this.CanImport = canImport;
+				// Expand all categories for a better UX
+				this.CategoryExpanded = true;
 			}
 
 			public void SetImport(bool value) {
 				this.Import = value;
 				this.NotifyPropertyChanged("Import");
 			}
+
+			// There is no need to persist this to the project so override the property.
+			public override bool CategoryExpanded { get; set; }
 		}
 	}
 }
