@@ -288,11 +288,15 @@ namespace LogicCircuit {
 			return Point.Subtract(p1, p2).LengthSquared <= Symbol.PinRadius * Symbol.PinRadius * 5;
 		}
 
-		private Wire FindWireNear(Point point) {
-			Rect rect = new Rect(
+		private static Rect ClickArea(Point point) {
+			return new Rect(
 				point.X - EditorDiagram.ClickProximity, point.Y - EditorDiagram.ClickProximity,
 				2 * EditorDiagram.ClickProximity, 2 * EditorDiagram.ClickProximity
 			);
+		}
+
+		private Wire FindWireNear(Point point) {
+			Rect rect = EditorDiagram.ClickArea(point);
 			foreach(Wire wire in this.Project.LogicalCircuit.Wires()) {
 				Point p1 = Symbol.ScreenPoint(wire.Point1);
 				Point p2 = Symbol.ScreenPoint(wire.Point2);
@@ -784,6 +788,16 @@ namespace LogicCircuit {
 			Jam jam = null;
 			if(element != this.Diagram) { // something on the diagram was clicked
 				marker = element.DataContext as Marker;
+				if(marker == null && this.SelectionCount == 1 && Keyboard.Modifiers == ModifierKeys.Alt) {
+					// Support a special case when user splitting wire and Alt-clicking its marker and missing just a bit pointing to other nearby wire
+					// ignore this click and assume user meant to click to marker
+					Wire wire = this.Selection().FirstOrDefault() as Wire;
+					if(wire != null) {
+						if(Symbol.Intersected(Symbol.ScreenPoint(wire.Point1), Symbol.ScreenPoint(wire.Point2), EditorDiagram.ClickArea(e.GetPosition(this.Diagram)))) {
+							marker = this.FindMarker(wire);
+						}
+					}
+				}
 				if(marker == null) {
 					jam = element.DataContext as Jam;
 					if(jam == null) {
@@ -809,7 +823,16 @@ namespace LogicCircuit {
 				}
 			} else { // click on the empty space of the diagram
 				Point point = e.GetPosition(this.Diagram);
-				Wire wire = this.FindWireNear(point);
+				Wire wire = null;
+				if(this.SelectionCount == 1 && Keyboard.Modifiers == ModifierKeys.Alt) {
+					wire = this.Selection().FirstOrDefault() as Wire;
+					if(wire != null && !Symbol.Intersected(Symbol.ScreenPoint(wire.Point1), Symbol.ScreenPoint(wire.Point2), EditorDiagram.ClickArea(point))) {
+						wire = null;
+					}
+				}
+				if(wire == null) {
+					wire = this.FindWireNear(point);
+				}
 				if(wire != null) {
 					marker = this.FindMarker(wire);
 					if(marker == null) {
