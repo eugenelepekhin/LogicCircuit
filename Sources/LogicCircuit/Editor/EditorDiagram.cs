@@ -298,9 +298,7 @@ namespace LogicCircuit {
 		private Wire FindWireNear(Point point) {
 			Rect rect = EditorDiagram.ClickArea(point);
 			foreach(Wire wire in this.Project.LogicalCircuit.Wires()) {
-				Point p1 = Symbol.ScreenPoint(wire.Point1);
-				Point p2 = Symbol.ScreenPoint(wire.Point2);
-				if(Symbol.Intersected(p1, p2, rect)) {
+				if(Symbol.Intersected(Symbol.ScreenPoint(wire.Point1), Symbol.ScreenPoint(wire.Point2), rect)) {
 					return wire;
 				}
 			}
@@ -812,6 +810,7 @@ namespace LogicCircuit {
 							}
 						}
 						if(symbol == null && element.DataContext == this.wirePoint) {
+							// User clicked solder
 							symbol = this.FindWireNear(e.GetPosition(this.Diagram));
 						}
 						Tracer.Assert(symbol != null);
