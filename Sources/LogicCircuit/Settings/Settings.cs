@@ -108,9 +108,15 @@ namespace LogicCircuit {
 			this.TruncateRecentFile();
 		}
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
 		private void fileChanged(object sender, FileSystemEventArgs e) {
-			if(e.ChangeType == WatcherChangeTypes.Changed) {
-				this.Merge();
+			try {
+				if(e.ChangeType == WatcherChangeTypes.Changed) {
+					this.Merge();
+				}
+			} catch(Exception exception) {
+				Tracer.Report("UserSettings.fileChanged", exception);
+				//swallow all exceptions here
 			}
 		}
 
