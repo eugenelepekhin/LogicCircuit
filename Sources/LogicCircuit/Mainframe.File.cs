@@ -95,6 +95,22 @@ namespace LogicCircuit {
 			}
 		}
 
+		private void OpenRecent(string file) {
+			if(Mainframe.IsFilePathValid(file) && File.Exists(file)) {
+				if(this.Editor == null || this.EnsureSaved()) {
+					this.Edit(file);
+				}
+			} else if(file != null) {
+				MessageBoxResult result = DialogMessage.Show(this, this.Title,
+					LogicCircuit.Resources.MessageInvalidRecentFile(file), null,
+					MessageBoxImage.Question, MessageBoxButton.YesNo
+				);
+				if(result == MessageBoxResult.Yes) {
+					Settings.User.DeleteRecentFile(file);
+				}
+			}
+		}
+
 		private void SaveAs() {
 			string file = this.Editor.File;
 			if(!Mainframe.IsFilePathValid(file)) {

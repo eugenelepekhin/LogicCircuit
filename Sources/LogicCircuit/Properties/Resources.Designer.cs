@@ -1790,5 +1790,27 @@ namespace LogicCircuit {
  		public static string TitleMemory {
 			get { return ResourceManager.GetString("TitleMemory", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Open _Recent.
+		/// </summary>
+ 		public static string CommandFileOpenRecent {
+			get { return ResourceManager.GetString("CommandFileOpenRecent", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to The file "{0}" cannot be opened.
+		/// Do you want to remove the reference to it from the Recent Files list?.
+		/// </summary>
+ 		public static string MessageInvalidRecentFile(string file) {
+			return string.Format(Culture, ResourceManager.GetString("MessageInvalidRecentFile", Culture), file);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Maximum number of recent files:.
+		/// </summary>
+ 		public static string TitleMaxRecentFiles {
+			get { return ResourceManager.GetString("TitleMaxRecentFiles", Culture); }
+		}
 	}
 }

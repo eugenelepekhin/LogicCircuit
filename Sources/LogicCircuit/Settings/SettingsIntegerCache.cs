@@ -29,9 +29,11 @@ namespace LogicCircuit {
 			this.minimum = minimum;
 			this.maximum = maximum;
 			string text = this.settings[this.key];
-			if(string.IsNullOrEmpty(text) || !int.TryParse(text, out this.cache)) {
-				this.cache = Math.Max(this.minimum, Math.Min(defaultValue, this.maximum));
+			int value;
+			if(string.IsNullOrEmpty(text) || !int.TryParse(text, out value)) {
+				value = defaultValue;
 			}
+			this.cache = Math.Max(this.minimum, Math.Min(value, this.maximum));
 		}
 	}
 }

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
-using System.Diagnostics;
 
 namespace LogicCircuit {
 	partial class Mainframe {
@@ -25,6 +25,17 @@ namespace LogicCircuit {
 				this.Open();
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.FileOpenCommandExecuted", exception);
+				this.ReportException(exception);
+			}
+		}
+
+		private void FileOpenRecentCommandExecuted(object target, ExecutedRoutedEventArgs e) {
+			try {
+				if(e.Parameter != null) {
+					this.OpenRecent(e.Parameter.ToString());
+				}
+			} catch(Exception exception) {
+				Tracer.Report("Mainframe.FileOpenRecentCommandExecuted", exception);
 				this.ReportException(exception);
 			}
 		}

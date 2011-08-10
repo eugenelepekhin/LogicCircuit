@@ -78,6 +78,7 @@
 	<Window.CommandBindings>
 		<CommandBinding Command="ApplicationCommands.New" Executed="FileNewCommandExecuted"/>
 		<CommandBinding Command="ApplicationCommands.Open" Executed="FileOpenCommandExecuted"/>
+		<CommandBinding Command="{x:Static lc:CustomCommands.FileOpenRecent}" Executed="FileOpenRecentCommandExecuted"/>
 		<CommandBinding Command="ApplicationCommands.Save" Executed="FileSaveCommandExecuted"/>
 		<CommandBinding Command="ApplicationCommands.SaveAs" Executed="FileSaveAsCommandExecuted"/>
 		<CommandBinding Command="{x:Static lc:CustomCommands.FileImport}" Executed="FileImportCommandExecuted" CanExecute="FileImportCommandCanExecute"/>
@@ -131,6 +132,23 @@
 			<MenuItem Header="{x:Static lc:Resources.MenuHeaderFile}">
 				<MenuItem Command="ApplicationCommands.New"/>
 				<MenuItem Command="ApplicationCommands.Open"/>
+				<MenuItem Header="{x:Static lc:Resources.CommandFileOpenRecent}" ItemsSource="{Binding Source={x:Static lc:Settings.User}, Path=RecentFiles}">
+					<MenuItem.Style>
+						<Style TargetType="MenuItem">
+							<Style.Triggers>
+								<DataTrigger Binding="{Binding Source={x:Static lc:Settings.User}, Path=RecentFilesCount}" Value="0">
+									<Setter Property="IsEnabled" Value="False"/>
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</MenuItem.Style>
+					<MenuItem.Resources>
+						<Style TargetType="MenuItem">
+							<Setter Property="Command" Value="{x:Static lc:CustomCommands.FileOpenRecent}"/>
+							<Setter Property="CommandParameter" Value="{Binding}"/>
+						</Style>
+					</MenuItem.Resources>
+				</MenuItem>
 				<Separator/>
 				<MenuItem Command="ApplicationCommands.Save"/>
 				<MenuItem Command="ApplicationCommands.SaveAs"/>

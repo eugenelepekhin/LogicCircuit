@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -79,7 +80,10 @@ namespace LogicCircuit {
 		}
 	}
 
-	public sealed class UserSettings : Settings, IDisposable {
+	public sealed class UserSettings : Settings, IDisposable, INotifyPropertyChanged {
+
+		public event PropertyChangedEventHandler PropertyChanged;
+
 		private SettingsIntegerCache maxRecentFileCount;
 		private SettingsBoolCache loadLastFileOnStartup;
 		private SettingsEnumCache<GateShape> gateShape;
@@ -102,7 +106,7 @@ namespace LogicCircuit {
 			this.fileWatcher.Filter = Path.GetFileName(file);
 			this.fileWatcher.Changed += new FileSystemEventHandler(this.fileChanged);
 			this.fileWatcher.EnableRaisingEvents = true;
-			this.maxRecentFileCount = new SettingsIntegerCache(this, "Settings.MaxRecentFileCount", 1, 32, 4);
+			this.maxRecentFileCount = new SettingsIntegerCache(this, "Settings.MaxRecentFileCount", 1, 24, 4);
 			this.loadLastFileOnStartup = new SettingsBoolCache(this, "Settings.LoadLastFileOnStartup", true);
 			this.gateShape = new SettingsEnumCache<GateShape>(this, "Settings.GateShape", GateShape.Rectangular);
 			this.TruncateRecentFile();
@@ -114,9 +118,17 @@ namespace LogicCircuit {
 				if(e.ChangeType == WatcherChangeTypes.Changed) {
 					this.Merge();
 				}
+				this.NotifyRecentFilesChanged();
 			} catch(Exception exception) {
 				Tracer.Report("UserSettings.fileChanged", exception);
 				//swallow all exceptions here
+			}
+		}
+
+		private void NotifyPropertyChanged(string propertyName) {
+			PropertyChangedEventHandler handler = this.PropertyChanged;
+			if(handler != null) {
+				handler(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 
@@ -170,7 +182,11 @@ namespace LogicCircuit {
 
 		public int MaxRecentFileCount {
 			get { return this.maxRecentFileCount.Value; }
-			set { this.maxRecentFileCount.Value = value; }
+			set {
+				this.maxRecentFileCount.Value = value;
+				this.TruncateRecentFile();
+				this.NotifyRecentFilesChanged();
+			}
 		}
 
 		public bool LoadLastFileOnStartup {
@@ -190,6 +206,7 @@ namespace LogicCircuit {
 		public void AddRecentFile(string file) {
 			this.recentFile[file.Trim()] = DateTime.UtcNow;
 			this.TruncateRecentFile();
+			this.NotifyRecentFilesChanged();
 		}
 
 		/// <summary>
@@ -198,8 +215,24 @@ namespace LogicCircuit {
 		/// <param name="file"></param>
 		public void DeleteRecentFile(string file) {
 			this.recentFile.Remove(file);
+			this.NotifyRecentFilesChanged();
 		}
 
+		/// <summary>
+		/// Gets list of recent files ordered by descendent date
+		/// </summary>
+		public IEnumerable<string> RecentFiles { get { return this.AllRecentFiles().Select(p => p.Key); } }
+
+		/// <summary>
+		/// Get number of recently opened files currently known.
+		/// </summary>
+		public int RecentFilesCount { get { return this.recentFile.Count; } }
+
+		private void NotifyRecentFilesChanged() {
+			this.NotifyPropertyChanged("RecentFilesCount");
+			this.NotifyPropertyChanged("RecentFiles");
+		}
+		
 		/// <summary>
 		/// 
 		/// </summary>
@@ -224,7 +257,13 @@ namespace LogicCircuit {
 
 		private void Merge() {
 			using(UserSettings other = new UserSettings()) {
-				this.recentFile.Union(other.recentFile);
+				foreach(KeyValuePair<string, DateTime> kv in other.recentFile) {
+					DateTime dateTime;
+					if(!this.recentFile.TryGetValue(kv.Key, out dateTime)) {
+						dateTime = kv.Value;
+					}
+					this.recentFile[kv.Key] = (dateTime < kv.Value) ? kv.Value : dateTime;
+				}
 				this.TruncateRecentFile();
 			}
 		}

@@ -19,35 +19,37 @@
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 
-		<ScrollViewer VerticalScrollBarVisibility="Auto" Margin="8,0,8,0" MaxHeight="400">
-			<StackPanel>
-				<GroupBox HorizontalAlignment="Stretch" VerticalAlignment="Top"
-					Header="{Binding Source={x:Static lc:Resources.TitleFileOptions}, Mode=OneTime}"
-				>
-					<StackPanel>
-						<CheckBox Name="loadLastFile" IsThreeState="False"
-							Content="{Binding Source={x:Static lc:Resources.TitleLoadLastFile}, Mode=OneTime}"
-						/>
+		<StackPanel Margin="8,0,8,0">
+			<GroupBox HorizontalAlignment="Stretch" VerticalAlignment="Top"
+				Header="{Binding Source={x:Static lc:Resources.TitleFileOptions}, Mode=OneTime}"
+			>
+				<StackPanel>
+					<CheckBox Name="loadLastFile" IsThreeState="False"
+						Content="{Binding Source={x:Static lc:Resources.TitleLoadLastFile}, Mode=OneTime}"
+					/>
+					<StackPanel Orientation="Horizontal">
+						<Label Content="{Binding Source={x:Static lc:Resources.TitleMaxRecentFiles}, Mode=OneTime}" Target="{Binding ElementName=maxRecentFiles}"/>
+						<ComboBox Name="maxRecentFiles" ItemsSource="{Binding RecentFileRange}" MinWidth="50"/>
 					</StackPanel>
-				</GroupBox>
+				</StackPanel>
+			</GroupBox>
 
-				<GroupBox HorizontalAlignment="Stretch" VerticalAlignment="Top"
-					Header="{Binding Source={x:Static lc:Resources.TitleDisplayOptions}, Mode=OneTime}"
-				>
-					<StackPanel>
-						<CheckBox Name="showGrid" IsThreeState="False"
-							Content="{Binding Source={x:Static lc:Resources.TitleShowGrid}, Mode=OneTime}"
+			<GroupBox HorizontalAlignment="Stretch" VerticalAlignment="Top"
+				Header="{Binding Source={x:Static lc:Resources.TitleDisplayOptions}, Mode=OneTime}"
+			>
+				<StackPanel>
+					<CheckBox Name="showGrid" IsThreeState="False"
+						Content="{Binding Source={x:Static lc:Resources.TitleShowGrid}, Mode=OneTime}"
+					/>
+					<StackPanel Orientation="Horizontal">
+						<Label Target="{Binding ElementName=gateShape}"
+							Content="{Binding Source={x:Static lc:Resources.TitleGateShape}, Mode=OneTime}"
 						/>
-						<StackPanel Orientation="Horizontal">
-							<Label Target="{Binding ElementName=gateShape}"
-								Content="{Binding Source={x:Static lc:Resources.TitleGateShape}, Mode=OneTime}"
-							/>
-							<ComboBox Name="gateShape" ItemsSource="{Binding Path=GateShapeList}" IsEditable="False" MinWidth="115"/>
-						</StackPanel>
+						<ComboBox Name="gateShape" ItemsSource="{Binding Path=GateShapeList}" IsEditable="False" MinWidth="115"/>
 					</StackPanel>
-				</GroupBox>
-			</StackPanel>
-		</ScrollViewer>
+				</StackPanel>
+			</GroupBox>
+		</StackPanel>
 
 		<StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
 			<Button Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="OkButtonClick"/>

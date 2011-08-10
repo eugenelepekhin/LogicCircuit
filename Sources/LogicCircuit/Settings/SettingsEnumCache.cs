@@ -27,13 +27,11 @@ namespace LogicCircuit {
 			}
 			this.defaultValue = defaultValue;
 			string text = this.settings[this.key];
-			if(!string.IsNullOrEmpty(text)) {
-				if(!Enum.TryParse<T>(text, out this.cache)) {
-					this.cache = defaultValue;
-				}
-			} else {
-				this.cache = this.defaultValue;
+			T value;
+			if(string.IsNullOrEmpty(text) || !Enum.TryParse<T>(text, out value)) {
+				value = defaultValue;
 			}
+			this.cache = Enum.IsDefined(typeof(T), value) ? value : this.defaultValue;
 		}
 	}
 }
