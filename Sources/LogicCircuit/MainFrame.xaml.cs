@@ -67,6 +67,18 @@ namespace LogicCircuit {
 			}
 		}
 
+		public Point ScrollOffset {
+			get {
+				ScrollViewer scrollViewer = this.DiagramScroll;
+				return new Point(scrollViewer.HorizontalOffset, scrollViewer.VerticalOffset);
+			}
+			set {
+				ScrollViewer scrollViewer = this.DiagramScroll;
+				scrollViewer.ScrollToHorizontalOffset(value.X);
+				scrollViewer.ScrollToVerticalOffset(value.Y);
+			}
+		}
+
 		public Mainframe() {
 			this.DataContext = this;
 			this.InitializeComponent();

@@ -68,6 +68,7 @@ namespace LogicCircuit {
 			if(editor.File != null) {
 				Settings.User.AddRecentFile(editor.File);
 			}
+			this.Dispatcher.BeginInvoke(new Action(() => this.ScrollOffset = new Point(0, 0)), System.Windows.Threading.DispatcherPriority.Normal);
 			this.Editor = editor;
 			this.Status = LogicCircuit.Resources.Ready;
 		}

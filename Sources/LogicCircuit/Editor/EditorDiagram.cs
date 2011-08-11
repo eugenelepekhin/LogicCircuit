@@ -97,17 +97,11 @@ namespace LogicCircuit {
 				this.CancelMove();
 				this.ClearSelection();
 				if(this.currentLogicalCircuit != this.Project.LogicalCircuit) {
-					// TODO: this is not very good way to get scroll control as this assumes canvas is sitting on scroll viewer.
-					// What if this get changed? For now just do it in hacky way
-					ScrollViewer scrollViewer = this.Diagram.Parent as ScrollViewer;
-					if(scrollViewer != null) {
-						if(this.currentLogicalCircuit != null && !this.currentLogicalCircuit.IsDeleted()) {
-							this.currentLogicalCircuit.ScrollOffset = new Point(scrollViewer.HorizontalOffset, scrollViewer.VerticalOffset);
-						}
-						this.currentLogicalCircuit = this.Project.LogicalCircuit;
-						scrollViewer.ScrollToHorizontalOffset(this.currentLogicalCircuit.ScrollOffset.X);
-						scrollViewer.ScrollToVerticalOffset(this.currentLogicalCircuit.ScrollOffset.Y);
+					if(this.currentLogicalCircuit != null && !this.currentLogicalCircuit.IsDeleted()) {
+						this.currentLogicalCircuit.ScrollOffset = this.Mainframe.ScrollOffset;
 					}
+					this.currentLogicalCircuit = this.Project.LogicalCircuit;
+					this.Mainframe.ScrollOffset = this.currentLogicalCircuit.ScrollOffset;
 					this.refreshPending = true;
 				}
 			}
