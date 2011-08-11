@@ -1,7 +1,5 @@
 ToDo list:
 
-Binding errors in the running tree
-
 smarter wires
 
 Keyboard device
