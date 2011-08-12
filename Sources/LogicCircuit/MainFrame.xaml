@@ -4,6 +4,7 @@
 	xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
 	xmlns:lc="clr-namespace:LogicCircuit"
 	xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+	FlowDirection="{Binding Source={x:Static lc:Resources.FlowDirection}, Mode=OneTime}"
 	MinWidth="550"
 	MinHeight="400"
 	Title="{Binding Path=Editor.Caption}"

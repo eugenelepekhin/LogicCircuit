@@ -369,9 +369,6 @@ Do you want to save it?</value>
   <data name="CategoryInputOutput" xml:space="preserve">
     <value>Input - Output</value>
   </data>
-  <data name="ErrorWrongSplitter" xml:space="preserve">
-    <value>Number of pins on the splitter should be less or equal to its bit width.</value>
-  </data>
   <data name="TitlePinInput" xml:space="preserve">
     <value>{0}
 In</value>
@@ -411,12 +408,6 @@ Out</value>
   </data>
   <data name="CommandToolsOptions" xml:space="preserve">
     <value>_Options</value>
-  </data>
-  <data name="GateShapeRectangular1" xml:space="preserve">
-    <value>Rectangular</value>
-  </data>
-  <data name="GateShapeShaped1" xml:space="preserve">
-    <value>Shaped</value>
   </data>
   <data name="TitleDisplayOptions" xml:space="preserve">
     <value>Display</value>
@@ -733,7 +724,7 @@ Do you want to replace it?</value>
     <value>{0}: {1} bit address, {2} bit data</value>
     <comment>{string memoryName, int address, int data}</comment>
   </data>
-  <data name="ReportProject1" xml:space="preserve">
+  <data name="ReportProject" xml:space="preserve">
     <value>&lt;Paragraph FontSize="20" FontWeight="Bold"&gt;Project "{0}"&lt;/Paragraph&gt;
 &lt;Paragraph&gt;&lt;Bold&gt;Description:&lt;/Bold&gt; {1}&lt;/Paragraph&gt;
 &lt;Paragraph&gt;&lt;Bold&gt;Summary:&lt;/Bold&gt;

@@ -56,7 +56,7 @@ namespace LogicCircuit {
 					category.Add(circuit.Category);
 				}
 			}
-			text.AppendFormat(LogicCircuit.Resources.ReportProject1,
+			text.AppendFormat(LogicCircuit.Resources.ReportProject,
 				project.Name, project.Description,
 				project.CircuitProject.LogicalCircuitSet.Count(), category.Count,
 				project.CircuitProject.CircuitSymbolSet.Count(), project.CircuitProject.WireSet.Count()

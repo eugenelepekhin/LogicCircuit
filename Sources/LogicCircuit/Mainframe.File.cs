@@ -112,6 +112,12 @@ namespace LogicCircuit {
 			}
 		}
 
+		private void Save(string file) {
+			this.Editor.Save(file);
+			Settings.User.AddRecentFile(file);
+			this.Status = LogicCircuit.Resources.FileSaved(file);
+		}
+
 		private void SaveAs() {
 			string file = this.Editor.File;
 			if(!Mainframe.IsFilePathValid(file)) {
@@ -130,19 +136,14 @@ namespace LogicCircuit {
 			dialog.DefaultExt = Mainframe.FileExtention;
 			bool? result = dialog.ShowDialog(this);
 			if(result.HasValue && result.Value) {
-				file = dialog.FileName;
-				this.Editor.Save(file);
-				Settings.User.AddRecentFile(file);
-				this.Status = LogicCircuit.Resources.FileSaved(file);
+				this.Save(dialog.FileName);
 			}
 		}
 
 		private void Save() {
 			string file = this.Editor.File;
 			if(Mainframe.IsFilePathValid(file)) {
-				this.Editor.Save(file);
-				Settings.User.AddRecentFile(file);
-				this.Status = LogicCircuit.Resources.FileSaved(file);
+				this.Save(file);
 			} else {
 				this.SaveAs();
 			}

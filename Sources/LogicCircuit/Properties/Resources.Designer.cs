@@ -585,13 +585,6 @@ namespace LogicCircuit {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Number of pins on the splitter should be less or equal to its bit width..
-		/// </summary>
- 		public static string ErrorWrongSplitter {
-			get { return ResourceManager.GetString("ErrorWrongSplitter", Culture); }
-		}
-
-		/// <summary>
 		/// Looks up a localized string similar to {0}
 		/// In.
 		/// </summary>
@@ -675,20 +668,6 @@ namespace LogicCircuit {
 		/// </summary>
  		public static string CommandToolsOptions {
 			get { return ResourceManager.GetString("CommandToolsOptions", Culture); }
-		}
-
-		/// <summary>
-		/// Looks up a localized string similar to Rectangular.
-		/// </summary>
- 		public static string GateShapeRectangular1 {
-			get { return ResourceManager.GetString("GateShapeRectangular1", Culture); }
-		}
-
-		/// <summary>
-		/// Looks up a localized string similar to Shaped.
-		/// </summary>
- 		public static string GateShapeShaped1 {
-			get { return ResourceManager.GetString("GateShapeShaped1", Culture); }
 		}
 
 		/// <summary>
@@ -1339,8 +1318,8 @@ namespace LogicCircuit {
 		/// <Paragraph><Bold>Summary:</Bold>
 		/// {2:N0} logical circuits, in {3:N0} categories are using {4:N0} symbols and {5:N0} wires.
 		/// </summary>
- 		public static string ReportProject1 {
-			get { return ResourceManager.GetString("ReportProject1", Culture); }
+ 		public static string ReportProject {
+			get { return ResourceManager.GetString("ReportProject", Culture); }
 		}
 
 		/// <summary>
