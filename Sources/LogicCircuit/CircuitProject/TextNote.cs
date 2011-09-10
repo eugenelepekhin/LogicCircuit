@@ -74,6 +74,7 @@ namespace LogicCircuit {
 		public bool IsValid { get { return TextNote.IsValidText(this.Note); } }
 
 		partial void OnTextNoteChanged() {
+			this.UpdateGlyph();
 			this.PositionGlyph();
 		}
 
