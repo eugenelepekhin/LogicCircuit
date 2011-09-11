@@ -412,7 +412,6 @@ namespace LogicCircuit {
 			if(result.HasValue && result.Value) {
 				if(TextNote.IsValidText(dialog.Document)) {
 					this.CircuitProject.InTransaction(() => { textNote.Note = dialog.Document; });
-					textNote.UpdateGlyph();
 				} else {
 					this.CircuitProject.InTransaction(() => textNote.Delete());
 				}
