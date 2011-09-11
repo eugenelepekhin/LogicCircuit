@@ -410,8 +410,7 @@ namespace LogicCircuit {
 			DialogText dialog = new DialogText(textNote.Note);
 			bool? result = this.Mainframe.ShowDialog(dialog);
 			if(result.HasValue && result.Value) {
-				string text = dialog.Document;
-				if(TextNote.IsValidText(text)) {
+				if(TextNote.IsValidText(dialog.Document)) {
 					this.CircuitProject.InTransaction(() => { textNote.Note = dialog.Document; });
 					textNote.UpdateGlyph();
 				} else {
