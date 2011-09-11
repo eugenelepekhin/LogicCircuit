@@ -409,7 +409,7 @@ namespace LogicCircuit {
 		private void Edit(TextNote textNote) {
 			DialogText dialog = new DialogText(textNote.Note);
 			bool? result = this.Mainframe.ShowDialog(dialog);
-			if(result.HasValue && result.Value) {
+			if(result.HasValue && result.Value && !StringComparer.Ordinal.Equals(textNote.Note, dialog.Document)) {
 				if(TextNote.IsValidText(dialog.Document)) {
 					this.CircuitProject.InTransaction(() => { textNote.Note = dialog.Document; });
 				} else {
