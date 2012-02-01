@@ -134,7 +134,7 @@ The file you are trying to open either corrupted or it was created by newer vers
   </data>
   <data name="FlowDirection" xml:space="preserve">
     <value>LeftToRight</value>
-    <comment>LeftToRight or RightToLeft - choose layout direction for your culture.</comment>
+    <comment>!(LeftToRight, RightToLeft) - choose layout direction for your culture.</comment>
   </data>
   <data name="GateAndName" xml:space="preserve">
     <value>And</value>
