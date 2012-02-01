@@ -1,20 +1,21 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ResourceWrapper.Generator {
 	internal static class Message {
 		private static StringBuilder text = new StringBuilder();
 
-		public static void Error(string code, params object[] args) {
+		public static void Error(string text, params object[] args) {
 			Message.Flush();
-			Console.Error.WriteLine(TextMessage.ResourceManager.GetString(code, TextMessage.Culture), args);
+			Console.Error.WriteLine(text, args);
 		}
 
-		public static void Write(string code, params object[] args) {
-			Message.text.AppendFormat(TextMessage.ResourceManager.GetString(code, TextMessage.Culture), args);
+		public static void Write(string text, params object[] args) {
+			Message.text.AppendFormat(text, args);
 			Message.text.AppendLine();
-			//Console.Out.WriteLine(TextMessage.ResourceManager.GetString(code, TextMessage.Culture), args);
+			//Console.Out.WriteLine(text, args);
 		}
 
 		public static void Flush() {

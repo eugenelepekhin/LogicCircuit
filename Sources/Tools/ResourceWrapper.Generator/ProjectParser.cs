@@ -1,40 +1,30 @@
-using System;
-using System.IO;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.IO;
+using System.Linq;
 using System.Xml;
 
 namespace ResourceWrapper.Generator {
 	internal struct ProjectParser {
 
-		//ProjectPath=C:\Projects\TestApp\TestApp\TestApp.csproj ProjectDir=C:\Projects\TestApp\TestApp\
-
-		private const string Prefix = "prj";
-		private const string RootNamespaceXPath = "/prj:Project/prj:PropertyGroup/prj:RootNamespace";
-		private const string ResourceXPath = "/prj:Project/prj:ItemGroup/prj:EmbeddedResource[prj:Generator='ResXFileCodeGenerator' or prj:Generator='PublicResXFileCodeGenerator']";
-		private const string ResourceFileXPath = "Include"; //attribute names come without prefix
-		private const string GeneratorXPath = "prj:Generator";
-		private const string WrapperFileXPath = "prj:LastGenOutput";
-		private const string NamespaceXPath = "prj:CustomToolNamespace";
-
-		public bool Generate(string projectPath, string projectRoot) {
+		public bool Generate(string projectPath, IEnumerable<string> pseudo) {
 			XmlDocument project = new XmlDocument();
 			project.Load(projectPath);
 			XmlNamespaceManager nsmgr = new XmlNamespaceManager(project.NameTable);
 			nsmgr.AddNamespace(project.DocumentElement.Prefix, project.DocumentElement.NamespaceURI);
-			nsmgr.AddNamespace(ProjectParser.Prefix, project.DocumentElement.NamespaceURI);
+			nsmgr.AddNamespace("prj", project.DocumentElement.NamespaceURI);
 
-			XmlNode node = project.SelectSingleNode(ProjectParser.RootNamespaceXPath, nsmgr);
+			XmlNode node = project.SelectSingleNode("/prj:Project/prj:PropertyGroup/prj:RootNamespace", nsmgr);
 			if(node == null) {
 				return this.BadProject(projectPath);
 			}
 			string rootNamespace = node.InnerText;
 
 			List<Resource> list = new List<Resource>();
-			XmlNodeList nodeList = project.SelectNodes(ProjectParser.ResourceXPath, nsmgr);
+			XmlNodeList nodeList = project.SelectNodes("/prj:Project/prj:ItemGroup/prj:EmbeddedResource[prj:Generator='ResXFileCodeGenerator' or prj:Generator='PublicResXFileCodeGenerator']", nsmgr);
 			if(nodeList != null && nodeList.Count > 0) {
 				foreach(XmlNode resourceNode in nodeList) {
-					XmlAttribute attribute = resourceNode.Attributes[ProjectParser.ResourceFileXPath];
+					XmlAttribute attribute = resourceNode.Attributes["Include"];
 					if(attribute == null) {
 						return this.BadProject(projectPath);
 					}
@@ -45,18 +35,18 @@ namespace ResourceWrapper.Generator {
 						? string.Format("{0}.{1}.{2}", rootNamespace, root.Replace('\\', '.') , file)
 						: string.Format("{0}.{1}", rootNamespace, file)
 					);
-					node = resourceNode.SelectSingleNode(ProjectParser.GeneratorXPath, nsmgr);
+					node = resourceNode.SelectSingleNode("prj:Generator", nsmgr);
 					if(node == null) {
 						return this.BadProject(projectPath);
 					}
 					string generator = node.InnerText;
 					bool isPublic = StringComparer.OrdinalIgnoreCase.Compare(generator.Trim(), "PublicResXFileCodeGenerator") == 0;
-					node = resourceNode.SelectSingleNode(ProjectParser.WrapperFileXPath, nsmgr);
+					node = resourceNode.SelectSingleNode("prj:LastGenOutput", nsmgr);
 					if(node == null) {
 						return this.BadProject(projectPath);
 					}
 					string code = node.InnerText;
-					node = resourceNode.SelectSingleNode(ProjectParser.NamespaceXPath, nsmgr);
+					node = resourceNode.SelectSingleNode("prj:CustomToolNamespace", nsmgr);
 					string nameSpace = string.Empty;
 					if(node != null) {
 						nameSpace = node.InnerText;
@@ -70,18 +60,25 @@ namespace ResourceWrapper.Generator {
 					list.Add(new Resource(root, file, code, name, nameSpace, isPublic));
 				}
 			}
+			string projectRoot = Path.GetDirectoryName(projectPath);
 			foreach(Resource resource in list) {
-				if(!this.Generate(projectRoot, resource)) {
+				if(!this.Generate(projectRoot, resource, pseudo)) {
 					return false;
 				}
 			}
 			return true;
 		}
 
-		private bool Generate(string projectRoot, Resource resource) {
-			string file = this.Combine(projectRoot, resource.root, resource.file, "resx");
-			string code = this.Combine(projectRoot, resource.root, resource.code);
-			return new ResourceParser().Generate(file, code, resource.nameSpace, resource.file, resource.name, resource.isPublic);
+		private bool Generate(string projectRoot, Resource resource, IEnumerable<string> pseudo) {
+			return new ResourcesWrapper() {
+				File = this.Combine(projectRoot, resource.root, resource.file, "resx"),
+				Code = this.Combine(projectRoot, resource.root, resource.code),
+				NameSpace = resource.nameSpace,
+				ClassName = resource.file,
+				ResourceName = resource.name,
+				IsPublic = resource.isPublic,
+				Pseudo = pseudo.Contains(resource.name, StringComparer.OrdinalIgnoreCase)
+			}.Generate();
 		}
 
 		private string Combine(string project, string folder, string file) {
@@ -92,7 +89,7 @@ namespace ResourceWrapper.Generator {
 		}
 
 		private bool BadProject(string file) {
-			Message.Error("BadProject", file);
+			Message.Error("Project file \"{0}\" is corrupted", file);
 			return false;
 		}
 		private struct Resource {

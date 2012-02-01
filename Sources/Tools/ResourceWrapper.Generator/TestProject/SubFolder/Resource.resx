@@ -112,154 +112,52 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BadArgument" xml:space="preserve">
-    <value>Bad arguments provided</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="BinFile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\binfile.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="BadParameter" xml:space="preserve">
-    <value>bad parameter declaration for parameter {0}</value>
+  <data name="Cursor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\cursor.cur;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <comment>Cursor explanation</comment>
   </data>
-  <data name="BadParameterName" xml:space="preserve">
-    <value>bad name provided for parameter {0}</value>
+  <data name="Database" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\database.sdf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <comment>Database notes</comment>
   </data>
-  <data name="BadParameterType" xml:space="preserve">
-    <value>bad type provided for parameter {0}</value>
+  <data name="FlowDirection" xml:space="preserve">
+    <value>LeftToRight</value>
+    <comment>!(LeftToRight, RightToLeft) - choose layout direction for your culture.</comment>
   </data>
-  <data name="BadProject" xml:space="preserve">
-    <value>Project file "{0}" is corruped</value>
+  <data name="Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="BadTypeDeclaration" xml:space="preserve">
-    <value>number of parameters expected by value of the string {0} do not match to provided parameter list in comment</value>
+  <data name="JustProperty" xml:space="preserve">
+    <value>Hello, World!</value>
   </data>
-  <data name="ClassFooter" xml:space="preserve">
-    <value>
-	}
-}
-</value>
+  <data name="NotLocalizeFunction" xml:space="preserve">
+    <value>This string with argument {0} should be non localizable</value>
+    <comment>{int arg} ! do not localize</comment>
   </data>
-  <data name="ClassHeader" xml:space="preserve">
-    <value>namespace {0} {{
-	using System;
-
-	/// &lt;summary&gt;
-	/// A strongly-typed resource class, for looking up localized strings, etc.
-	/// &lt;/summary&gt;
-	// This class was auto-generated.
-	// To add or remove a member, edit your .ResX file then rerun MsBuild,
-	// or rebuild your VS project.
-	[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-	[global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-	{3} static class {1} {{
-
-		private static global::System.Resources.ResourceManager resourceManager;
-
-		/// &lt;summary&gt;
-		/// Returns the cached ResourceManager instance used by this class.
-		/// &lt;/summary&gt;
-		[global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-		internal static global::System.Resources.ResourceManager ResourceManager {{
-			get {{
-				if(resourceManager == null) {{
-					resourceManager = new global::System.Resources.ResourceManager("{2}", typeof({1}).Assembly);
-				}}
-				return resourceManager;
-			}}
-		}}
-
-		/// &lt;summary&gt;
-		/// Overrides the current thread's CurrentUICulture property for all
-		/// resource lookups using this strongly typed resource class.
-		/// &lt;/summary&gt;
-		[global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-		internal static global::System.Globalization.CultureInfo Culture {{ get; set; }}</value>
+  <data name="NotLocalizeProperty" xml:space="preserve">
+    <value>This string without arguments should be non localizable</value>
+    <comment>! do not localize</comment>
   </data>
-  <data name="DirMissing" xml:space="preserve">
-    <value>Folder "{0}" does not exist</value>
+  <data name="PngImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PngImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ErrorMessage" xml:space="preserve">
-    <value>{0}({1},{2}): error URW001: {3}: {4}</value>
+  <data name="TextFile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\textfile.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="FileLabel" xml:space="preserve">
-    <value>content of the file: "{0}"</value>
+  <data name="TwoArguments" xml:space="preserve">
+    <value>This is int {0}, and this is string {1}</value>
+    <comment>{int justInt, string justString}</comment>
   </data>
-  <data name="FileMissing" xml:space="preserve">
-    <value>File "{0}" does not exist</value>
-  </data>
-  <data name="Generating" xml:space="preserve">
-    <value>Generating file "{0}"</value>
-  </data>
-  <data name="NameMissing" xml:space="preserve">
-    <value>Resource name is missing</value>
-  </data>
-  <data name="ParameterNumberMissing" xml:space="preserve">
-    <value>parameter number {0} is missing in the string</value>
-  </data>
-  <data name="ReportException" xml:space="preserve">
-    <value>Error executing ResourceWrapper.Generator: {0}</value>
-  </data>
-  <data name="ResourceHeader" xml:space="preserve">
-    <value>//-----------------------------------------------------------------------------
-//
-//	This code was generated by a {0}.
-//
-//	Changes to this file may cause incorrect behavior and will be lost if
-//	the code is regenerated.
-//
-//-----------------------------------------------------------------------------
-
-</value>
-  </data>
-  <data name="ResourceObjectProperty" xml:space="preserve">
-    <value>
-
-		/// &lt;summary&gt;
-		/// Looks up a localized {0} similar to one in file: "{2}".
-		/// &lt;/summary&gt;
- 		public static {0} {1} {{
-			get {{ return ({0})ResourceManager.GetObject("{1}", Culture); }}
-		}}</value>
-  </data>
-  <data name="ResourceStringMethod" xml:space="preserve">
-    <value>
-
-		/// &lt;summary&gt;
-		/// Looks up a localized string similar to {3}.
-		/// &lt;/summary&gt;
- 		public static string {0}({1}) {{
-			return string.Format(Culture, ResourceManager.GetString("{0}", Culture), {2});
-		}}</value>
-  </data>
-  <data name="ResourceStringProperty" xml:space="preserve">
-    <value>
-
-		/// &lt;summary&gt;
-		/// Looks up a localized string similar to {1}.
-		/// &lt;/summary&gt;
- 		public static string {0} {{
-			get {{ return ResourceManager.GetString("{0}", Culture); }}
-		}}</value>
-  </data>
-  <data name="StringComment" xml:space="preserve">
-    <value>
-		/// {0}</value>
-  </data>
-  <data name="Success" xml:space="preserve">
-    <value>Generation complete without errors</value>
-  </data>
-  <data name="TypeListMissing" xml:space="preserve">
-    <value>Type list missing for string {0}. Please provide it in the comment field of the string resource in the form: {{type0, type1, ...}}</value>
-  </data>
-  <data name="UnrecognizedStructure" xml:space="preserve">
-    <value>Structure of the value node is currupted</value>
-  </data>
-  <data name="Usage" xml:space="preserve">
-    <value>ResourceWrapper.Generator.exe ProjectPath=$(ProjectPath) [ProjectDir=$(ProjectDir)]</value>
-  </data>
-  <data name="ValueMissing" xml:space="preserve">
-    <value>Value missing</value>
+  <data name="XMLFile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\xmlfile.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
 </root>
