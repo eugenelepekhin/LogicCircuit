@@ -132,6 +132,7 @@ namespace <#=this.NameSpace#> {
 				if(!this.resources.TryGetValue(name, out text)) {
 					Random random = new Random();
 					this.resources[name] = text = values[random.Next(values.Length)];
+					Debug.WriteLine("Pseudo Localizing {0} to value {1}", name, text);
 				}
 				return text;
 			}
