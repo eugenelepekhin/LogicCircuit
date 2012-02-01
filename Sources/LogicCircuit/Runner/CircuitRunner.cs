@@ -245,6 +245,7 @@ namespace LogicCircuit {
 			try {
 				this.evaluationGate.Set();
 			} catch(ThreadAbortException) {
+			} catch(ObjectDisposedException) {
 			} catch(Exception exception) {
 				this.Editor.Mainframe.ReportException(exception);
 			}
