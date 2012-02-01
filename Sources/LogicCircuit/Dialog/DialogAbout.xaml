@@ -41,7 +41,7 @@
 		<StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,16">
 			<TextBlock Text="{Binding Source={x:Static lc:Resources.TitleWeb}, Mode=OneTime}"/>
 			<TextBlock>
-				<Hyperlink RequestNavigate="WebRequestNavigate" Foreground="#FFE5A48E"
+				<Hyperlink Foreground="#FFE5A48E"
 					NavigateUri="{Binding Source={x:Static lc:Resources.WebSiteUri}, Mode=OneTime}"
 				>http://www.LogicCircuit.org/</Hyperlink>
 			</TextBlock>

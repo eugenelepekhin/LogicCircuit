@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Windows.Input;
 
 namespace LogicCircuit {
+	[SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses")]
 	internal sealed class HyperlinkNavigationCommand : ICommand {
 
 		#pragma warning disable 0067

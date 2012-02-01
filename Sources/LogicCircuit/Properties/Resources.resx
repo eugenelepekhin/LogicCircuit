@@ -936,4 +936,13 @@ Do you want to remove the reference to it from the Recent Files list?</value>
   <data name="TitleMaxRecentFiles" xml:space="preserve">
     <value>_Maximum number of recent files:</value>
   </data>
+  <data name="Bit0" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Bit1" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="BitOff" xml:space="preserve">
+    <value>Off</value>
+  </data>
 </root>

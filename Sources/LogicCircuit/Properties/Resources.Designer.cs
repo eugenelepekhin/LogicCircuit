@@ -1798,5 +1798,26 @@ namespace LogicCircuit {
  		public static string TitleMaxRecentFiles {
 			get { return ResourceManager.GetString("TitleMaxRecentFiles", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to 0.
+		/// </summary>
+ 		public static string Bit0 {
+			get { return ResourceManager.GetString("Bit0", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to 1.
+		/// </summary>
+ 		public static string Bit1 {
+			get { return ResourceManager.GetString("Bit1", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Off.
+		/// </summary>
+ 		public static string BitOff {
+			get { return ResourceManager.GetString("BitOff", Culture); }
+		}
 	}
 }

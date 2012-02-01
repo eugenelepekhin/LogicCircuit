@@ -8,6 +8,12 @@
 	<Application.Resources>
 		<lc:HyperlinkNavigationCommand x:Key="HyperlinkNavigationCommand"/>
 
+		<Style TargetType="Hyperlink">
+			<Setter Property="Command" Value="{StaticResource HyperlinkNavigationCommand}"/>
+			<Setter Property="CommandParameter" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=NavigateUri}"/>
+			<Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=NavigateUri}"/>
+		</Style>
+
 		<LinearGradientBrush x:Key="WindowBackground" StartPoint="0.25,0" EndPoint="0.75,1" PresentationOptions:Freeze="True">
 			<GradientStop Color="{x:Static SystemColors.ControlLightLightColor}" Offset="0"/>
 			<GradientStop Color="{x:Static SystemColors.ControlColor}" Offset="1"/>

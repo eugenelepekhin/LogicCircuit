@@ -9,12 +9,4 @@
 	IsSelectionEnabled="False"
 	IsTabStop="False"
 	IsToolBarVisible="False"
->
-	<FlowDocumentScrollViewer.Resources>
-		<Style TargetType="Hyperlink">
-			<Setter Property="Command" Value="{StaticResource HyperlinkNavigationCommand}"/>
-			<Setter Property="CommandParameter" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=NavigateUri}"/>
-			<Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=NavigateUri}"/>
-		</Style>
-	</FlowDocumentScrollViewer.Resources>
-</FlowDocumentScrollViewer>
+/>
