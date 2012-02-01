@@ -22,10 +22,11 @@ namespace ResourceWrapper.Generator {
 						StringBuilder comment = new StringBuilder();
 						comment.Append(line[0].Trim());
 						int max = Math.Min(3, line.Length);
-						string format = "\n\t\t/// {0}";
+						string format = "\t\t/// {0}";
 						for(int i = 1; i < line.Length && max > 0; i++) {
 							string s = line[i].Trim();
 							if(s.Length > 0) {
+								comment.AppendLine();
 								comment.AppendFormat(CultureInfo.InvariantCulture, format, s);
 								max--;
 							}
