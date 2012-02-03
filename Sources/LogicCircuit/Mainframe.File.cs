@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using Microsoft.Win32;
+using LogicCircuit.DataPersistent;
 
 namespace LogicCircuit {
 	partial class Mainframe {
@@ -61,7 +62,13 @@ namespace LogicCircuit {
 		}
 
 		private void Edit(string file) {
-			Editor editor = new Editor(this, file);
+			Editor editor;
+			try {
+				editor = new Editor(this, file);
+			} catch(SnapStoreException snapStoreException) {
+				Tracer.Report("DialogImport.Load", snapStoreException);
+				throw new CircuitException(Cause.CorruptedFile, snapStoreException, LogicCircuit.Resources.ErrorFileCorrupted(file));
+			}
 			if(this.Editor != null) {
 				this.Editor.Power = false;
 			}
