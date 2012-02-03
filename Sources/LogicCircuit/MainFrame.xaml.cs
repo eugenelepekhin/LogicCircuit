@@ -155,6 +155,10 @@ namespace LogicCircuit {
 			}
 		}
 
+		public void ErrorMessage(string message, Exception exception) {
+			this.ShowErrorMessage(message, exception.ToString());
+		}
+
 		public void ErrorMessage(string message) {
 			this.ShowErrorMessage(message, null);
 		}
