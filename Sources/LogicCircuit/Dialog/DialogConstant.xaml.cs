@@ -18,7 +18,7 @@ namespace LogicCircuit {
 			this.DataContext = this;
 			this.constant = constant;
 			this.InitializeComponent();
-			this.value.Text = constant.Notation;
+			this.value.Text = constant.ConstantValue.ToString("X", CultureInfo.InvariantCulture);
 			this.bitWidth.ItemsSource = PinDescriptor.NumberRange(1);
 			this.bitWidth.SelectedItem = this.constant.BitWidth;
 		}
@@ -26,7 +26,7 @@ namespace LogicCircuit {
 		private void ButtonOkClick(object sender, RoutedEventArgs e) {
 			try {
 				int bitWidth = (int)this.bitWidth.SelectedItem;
-				int value = int.Parse(this.value.Text.Trim(), NumberStyles.HexNumber);
+				int value = int.Parse(this.value.Text.Trim(), NumberStyles.HexNumber, CultureInfo.InvariantCulture);
 
 				if(this.constant.BitWidth != bitWidth || this.constant.ConstantValue != value) {
 					this.constant.CircuitProject.InTransaction(() => {
