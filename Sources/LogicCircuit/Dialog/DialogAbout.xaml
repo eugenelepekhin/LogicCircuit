@@ -1,13 +1,10 @@
-﻿<Window
+﻿<Window x:Class="LogicCircuit.DialogAbout"
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	x:Class="LogicCircuit.DialogAbout"
 	xmlns:lc="clr-namespace:LogicCircuit"
-	FlowDirection="{Binding Source={x:Static lc:Resources.FlowDirection}, Mode=OneTime}"
-	Title="{Binding Source={x:Static lc:Resources.TitleAbout}, Mode=OneTime}"
-	Style="{DynamicResource DialogWindow}"
 	WindowStartupLocation="CenterOwner"
-	SizeToContent="WidthAndHeight"
+	Title="{Binding Source={x:Static lc:Resources.TitleAbout}, Mode=OneTime}"
+	Style="{DynamicResource DialogFixedWindow}"
 >
 	<Window.Resources>
 		<Style TargetType="{x:Type TextBlock}">

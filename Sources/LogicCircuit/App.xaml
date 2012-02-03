@@ -77,14 +77,27 @@
 			<GradientStop Color="{x:Static SystemColors.ControlColor}" Offset="1"/>
 		</LinearGradientBrush>
 
-		<Style x:Key="DialogWindow" TargetType="{x:Type Window}">
+		<Style x:Key="DialogFixedWindow" TargetType="{x:Type Window}">
+			<Setter Property="FlowDirection" Value="{Binding Source={x:Static lc:Resources.FlowDirection}, Mode=OneTime}"/>
 			<Setter Property="Background" Value="{StaticResource WindowBackground}"/>
 			<Setter Property="ResizeMode" Value="NoResize"/>
 			<Setter Property="WindowStyle" Value="SingleBorderWindow"/>
 			<Setter Property="ShowInTaskbar" Value="False"/>
 			<Setter Property="SizeToContent" Value="WidthAndHeight"/>
-			<Setter Property="MinWidth" Value="300"/>
-			<Setter Property="MinHeight" Value="200"/>
+		</Style>
+
+		<Style x:Key="DialogWindow" TargetType="{x:Type Window}">
+			<Setter Property="FlowDirection" Value="{Binding Source={x:Static lc:Resources.FlowDirection}, Mode=OneTime}"/>
+			<Setter Property="Background" Value="{StaticResource WindowBackground}"/>
+			<Setter Property="ResizeMode" Value="CanResizeWithGrip"/>
+			<Setter Property="WindowStyle" Value="SingleBorderWindow"/>
+			<Setter Property="ShowInTaskbar" Value="False"/>
+			<Setter Property="SizeToContent" Value="Manual"/>
+			<Setter Property="MinWidth" Value="320"/>
+			<Setter Property="MinHeight" Value="240"/>
+			<Setter Property="Width" Value="{Binding Path=WindowLocation.Width, Mode=TwoWay}"/>
+			<Setter Property="Height" Value="{Binding Path=WindowLocation.Height, Mode=TwoWay}"/>
+			<Setter Property="WindowState" Value="{Binding Path=WindowLocation.WindowState, Mode=TwoWay}"/>
 		</Style>
 
 		<Style TargetType="{x:Type Button}">
