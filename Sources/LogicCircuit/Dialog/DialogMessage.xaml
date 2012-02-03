@@ -2,13 +2,10 @@
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:lc="clr-namespace:LogicCircuit"
-	FlowDirection="{Binding Source={x:Static lc:Resources.FlowDirection}, Mode=OneTime}"
-	Title="{Binding Path=Caption, Mode=OneTime}"
-	MinWidth="340" MinHeight="100"
-	Style="{DynamicResource DialogWindow}"
-	ResizeMode="NoResize"
 	WindowStartupLocation="CenterOwner"
-	SizeToContent="WidthAndHeight"
+	Title="{Binding Path=Caption, Mode=OneTime}"
+	Style="{StaticResource DialogFixedWindow}"
+	MinWidth="340" MinHeight="100"
 >
 	<Grid>
 		<Grid.RowDefinitions>
