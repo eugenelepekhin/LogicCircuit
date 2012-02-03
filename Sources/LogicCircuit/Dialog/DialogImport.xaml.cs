@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Windows;
+using LogicCircuit.DataPersistent;
 
 namespace LogicCircuit {
 	/// <summary>
@@ -26,6 +27,7 @@ namespace LogicCircuit {
 			this.FileName = file;
 			this.DataContext = this;
 			this.InitializeComponent();
+			Mainframe mainframe = App.Mainframe;
 			Thread thread = new Thread(new ThreadStart(() => {
 				try {
 					CircuitProject import = CircuitProject.Create(file);
@@ -36,10 +38,14 @@ namespace LogicCircuit {
 					list.Sort(CircuitDescriptorComparer.Comparer);
 					this.List = list;
 					this.NotifyPropertyChanged("List");
+				} catch(SnapStoreException snapStoreException) {
+					Tracer.Report("DialogImport.Load", snapStoreException);
+					mainframe.ErrorMessage(LogicCircuit.Resources.ErrorFileCorrupted(file), snapStoreException);
+					mainframe.Dispatcher.BeginInvoke(new Action(() => { this.Close(); }));
 				} catch(Exception exception) {
 					Tracer.Report("DialogImport.Load", exception);
-					App.Mainframe.ReportException(exception);
-					this.Dispatcher.BeginInvoke(new Action(() => { this.Close(); }));
+					mainframe.ReportException(exception);
+					mainframe.Dispatcher.BeginInvoke(new Action(() => { this.Close(); }));
 				}
 			}));
 			//TextNote validation will instantiate FlowDocument that in some cases required to happened only on STA.
