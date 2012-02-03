@@ -945,4 +945,8 @@ Do you want to remove the reference to it from the Recent Files list?</value>
   <data name="BitOff" xml:space="preserve">
     <value>Off</value>
   </data>
+  <data name="ErrorFileCorrupted" xml:space="preserve">
+    <value>File "{0}" is corrupted and cannot be loaded.</value>
+    <comment>{string fileName}</comment>
+  </data>
 </root>

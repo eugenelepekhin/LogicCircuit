@@ -1819,5 +1819,12 @@ namespace LogicCircuit {
  		public static string BitOff {
 			get { return ResourceManager.GetString("BitOff", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to File "{0}" is corrupted and cannot be loaded..
+		/// </summary>
+ 		public static string ErrorFileCorrupted(string fileName) {
+			return string.Format(Culture, ResourceManager.GetString("ErrorFileCorrupted", Culture), fileName);
+		}
 	}
 }
