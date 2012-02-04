@@ -4,6 +4,7 @@
 	xmlns:lc="clr-namespace:LogicCircuit"
 	WindowStartupLocation="CenterOwner"
 	Title="{Binding Source={x:Static lc:Resources.RAMNotation}, Mode=OneTime}"
+	MinWidth="385" MinHeight="240"
 	Style="{DynamicResource DialogWindow}"
 	FocusManager.FocusedElement="{Binding ElementName=addressBitWidth}"
 >

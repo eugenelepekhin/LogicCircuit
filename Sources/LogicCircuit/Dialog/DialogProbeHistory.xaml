@@ -2,37 +2,27 @@
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:lc="clr-namespace:LogicCircuit"
-	FlowDirection="{Binding Source={x:Static lc:Resources.FlowDirection}, Mode=OneTime}"
-	Title="{Binding Source={x:Static lc:Resources.TitleProbeHistory}, Mode=OneTime}"
-	MinWidth="320" MinHeight="240"
-	Width="{Binding Path=WindowLocation.Width, Mode=TwoWay}"
-	Height="{Binding Path=WindowLocation.Height, Mode=TwoWay}"
-	WindowState="{Binding Path=WindowLocation.WindowState, Mode=TwoWay}"
-	Style="{DynamicResource DialogWindow}"
-	ResizeMode="CanResizeWithGrip"
 	WindowStartupLocation="CenterOwner"
-	SizeToContent="Manual"
+	Title="{Binding Source={x:Static lc:Resources.TitleProbeHistory}, Mode=OneTime}"
+	Style="{DynamicResource DialogWindow}"
 >
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
 
-		<ListBox Grid.Row="0" ItemsSource="{Binding Path=History}" Margin="8" SelectionMode="Extended"/>
+		<ListBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Path=History}" Margin="8" SelectionMode="Extended"/>
 
-		<Grid Grid.Row="1">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="*"/>
-			</Grid.ColumnDefinitions>
-
-			<Button Grid.Column="0" HorizontalAlignment="Left" Click="ButtonMarkClick" IsEnabled="{Binding Path=MarkAllowed}"
-				Content="{Binding Source={x:Static lc:Resources.TitleMark}, Mode=OneTime}"
-			/>
-			<Button Grid.Column="1" HorizontalAlignment="Right" IsDefault="True" IsCancel="True"
-				Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}"
-			/>
-		</Grid>
+		<Button Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Click="ButtonMarkClick" IsEnabled="{Binding Path=MarkAllowed}"
+			Content="{Binding Source={x:Static lc:Resources.TitleMark}, Mode=OneTime}"
+		/>
+		<Button Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" IsDefault="True" IsCancel="True"
+			Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}"
+		/>
 	</Grid>
 </Window>

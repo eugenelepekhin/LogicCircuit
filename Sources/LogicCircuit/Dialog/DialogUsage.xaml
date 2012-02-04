@@ -2,16 +2,9 @@
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:lc="clr-namespace:LogicCircuit"
-	FlowDirection="{Binding Source={x:Static lc:Resources.FlowDirection}, Mode=OneTime}"
-	Title="{Binding Source={x:Static lc:Resources.TitleCircuitUsage}, Mode=OneTime}"
-	MinWidth="320" MinHeight="240"
-	Width="{Binding Path=WindowLocation.Width, Mode=TwoWay}"
-	Height="{Binding Path=WindowLocation.Height, Mode=TwoWay}"
-	WindowState="{Binding Path=WindowLocation.WindowState, Mode=TwoWay}"
-	Style="{DynamicResource DialogWindow}"
-	ResizeMode="CanResizeWithGrip"
 	WindowStartupLocation="CenterOwner"
-	SizeToContent="Manual"
+	Title="{Binding Source={x:Static lc:Resources.TitleCircuitUsage}, Mode=OneTime}"
+	Style="{DynamicResource DialogWindow}"
 >
 	<Grid>
 		<Grid.RowDefinitions>
