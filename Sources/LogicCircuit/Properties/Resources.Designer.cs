@@ -1267,45 +1267,6 @@ namespace LogicCircuit {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to <Paragraph FontSize="20" FontWeight="Bold">Can not report functions due to the following error: {0}</Paragraph>
-		/// <Paragraph FontSize="8" FontWeight="Bold">Error details</Paragraph>
-		/// <Paragraph FontSize="8">{1}</Paragraph>.
-		/// </summary>
- 		public static string ReportFunction0 {
-			get { return ResourceManager.GetString("ReportFunction0", Culture); }
-		}
-
-		/// <summary>
-		/// Looks up a localized string similar to <Paragraph FontSize="20" FontWeight="Bold">Functions of the circuit "{0}"</Paragraph>
-		/// <Table CellSpacing="5">
-		/// <Table.Columns>
-		/// <TableColumn/>.
-		/// </summary>
- 		public static string ReportFunction1 {
-			get { return ResourceManager.GetString("ReportFunction1", Culture); }
-		}
-
-		/// <summary>
-		/// Looks up a localized string similar to <TableRow Background="{0}">
-		/// <TableCell><Paragraph>{1}</Paragraph></TableCell>
-		/// <TableCell><Paragraph>{2:N0}</Paragraph></TableCell>
-		/// </TableRow>.
-		/// </summary>
- 		public static string ReportFunction2 {
-			get { return ResourceManager.GetString("ReportFunction2", Culture); }
-		}
-
-		/// <summary>
-		/// Looks up a localized string similar to <TableRow Background="Gray">
-		/// <TableCell TextAlignment="Right"><Paragraph FontWeight="Bold">Total:</Paragraph></TableCell>
-		/// <TableCell><Paragraph>{0:N0}</Paragraph></TableCell>
-		/// </TableRow>.
-		/// </summary>
- 		public static string ReportFunction3 {
-			get { return ResourceManager.GetString("ReportFunction3", Culture); }
-		}
-
-		/// <summary>
 		/// Looks up a localized string similar to {0} ({1}).
 		/// </summary>
  		public static string ReportGateName(string gate, int inputCount) {
@@ -1317,16 +1278,6 @@ namespace LogicCircuit {
 		/// </summary>
  		public static string ReportMemoryName(string memoryName, int address, int data) {
 			return string.Format(Culture, ResourceManager.GetString("ReportMemoryName", Culture), memoryName, address, data);
-		}
-
-		/// <summary>
-		/// Looks up a localized string similar to <Paragraph FontSize="20" FontWeight="Bold">Project "{0}"</Paragraph>
-		/// <Paragraph><Bold>Description:</Bold> {1}</Paragraph>
-		/// <Paragraph><Bold>Summary:</Bold>
-		/// {2:N0} logical circuits, in {3:N0} categories are using {4:N0} symbols and {5:N0} wires.
-		/// </summary>
- 		public static string ReportProject {
-			get { return ResourceManager.GetString("ReportProject", Culture); }
 		}
 
 		/// <summary>
@@ -1825,6 +1776,69 @@ namespace LogicCircuit {
 		/// </summary>
  		public static string ErrorFileCorrupted(string fileName) {
 			return string.Format(Culture, ResourceManager.GetString("ErrorFileCorrupted", Culture), fileName);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to {0} logical circuits, in {1} categories are using {2} symbols and {3} wires.
+		/// </summary>
+ 		public static string ProjectSummary(int logicalCircuits, int categories, int symbols, int wires) {
+			return string.Format(Culture, ResourceManager.GetString("ProjectSummary", Culture), logicalCircuits, categories, symbols, wires);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Can not report functions due to the following error: {0}.
+		/// </summary>
+ 		public static string ReportError(string message) {
+			return string.Format(Culture, ResourceManager.GetString("ReportError", Culture), message);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Functions of the circuit "{0}".
+		/// </summary>
+ 		public static string ReportFunctions(string name) {
+			return string.Format(Culture, ResourceManager.GetString("ReportFunctions", Culture), name);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Count.
+		/// </summary>
+ 		public static string TitleCount {
+			get { return ResourceManager.GetString("TitleCount", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Function.
+		/// </summary>
+ 		public static string TitleFunction {
+			get { return ResourceManager.GetString("TitleFunction", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Description.
+		/// </summary>
+ 		public static string TitleProjectDescription {
+			get { return ResourceManager.GetString("TitleProjectDescription", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Error details.
+		/// </summary>
+ 		public static string TitleReportErrorDetails {
+			get { return ResourceManager.GetString("TitleReportErrorDetails", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Summary:.
+		/// </summary>
+ 		public static string TitleSummary {
+			get { return ResourceManager.GetString("TitleSummary", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Total:.
+		/// </summary>
+ 		public static string TitleTotal {
+			get { return ResourceManager.GetString("TitleTotal", Culture); }
 		}
 	}
 }

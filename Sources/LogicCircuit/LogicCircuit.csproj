@@ -120,6 +120,12 @@
     <Compile Include="Dialog\DialogUsage.xaml.cs">
       <DependentUpon>DialogUsage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialog\ReportBuilder.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportBuilder.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\ReportBuilder.Properties.cs" />
     <Compile Include="Editor\AreaMarker.cs" />
     <Compile Include="Editor\CircuitDescriptor.cs" />
     <Compile Include="Editor\CircuitDescriptorComparer.cs" />
@@ -261,6 +267,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SymbolShape.resx</DependentUpon>
     </Compile>
+    <Compile Include="T4ToStringHelper.cs" />
+    <Compile Include="T4Transformation.cs" />
     <Compile Include="Tracer.cs" />
     <Compile Include="TracerMessage.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -471,6 +479,11 @@
     <Resource Include="Schema\ConvertFrom.1.0.0.2.xslt" />
     <Resource Include="Schema\ConvertFrom.1.0.0.3.xslt" />
     <Resource Include="Schema\Empty.xml" />
+    <None Include="Dialog\ReportBuilder.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ReportBuilder.cs</LastGenOutput>
+      <CustomToolNamespace>LogicCircuit</CustomToolNamespace>
+    </None>
     <None Include="Schema\CircuitProject.xml">
       <SubType>Designer</SubType>
     </None>
@@ -483,6 +496,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Schema\ConvertFrom.2.0.0.1.xslt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
