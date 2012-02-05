@@ -38,7 +38,7 @@
 			SpellCheck.IsEnabled="True"
 		/>
 
-		<StackPanel Grid.Row="2" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+		<StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
 			<Button Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="ButtonOkClick"/>
 			<Button Content="{Binding Source={x:Static lc:Resources.TitleCancel}, Mode=OneTime}" IsCancel="True"/>
 		</StackPanel>

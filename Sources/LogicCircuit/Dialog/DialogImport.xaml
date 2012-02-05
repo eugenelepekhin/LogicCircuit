@@ -5,7 +5,7 @@
 	WindowStartupLocation="CenterOwner"
 	Title="{Binding Source={x:Static lc:Resources.ImportTitle}, Mode=OneTime}"
 	Style="{DynamicResource DialogWindow}"
-	MinWidth="480" MinHeight="240"
+	MinWidth="555" MinHeight="240"
 	FocusManager.FocusedElement="{Binding ElementName=listView}"
 >
 	<Window.Resources>
@@ -78,8 +78,9 @@
 
 		<Grid Grid.Row="2">
 			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
 				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="Auto"/>
 			</Grid.ColumnDefinitions>
 
 			<StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom">
@@ -87,7 +88,7 @@
 				<Button Content="{Binding Source={x:Static lc:Resources.TitleUncheckAll}, Mode=OneTime}" Click="ButtonUncheckAllClick"/>
 			</StackPanel>
 
-			<StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+			<StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
 				<Button Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="ButtonOkClick">
 					<Button.Style>
 						<Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
