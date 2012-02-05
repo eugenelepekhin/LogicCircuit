@@ -232,6 +232,7 @@ namespace LogicCircuit {
 					rect.Inflate(Symbol.GridSize, Symbol.GridSize);
 					rect.Intersect(new Rect(0, 0, Symbol.LogicalCircuitWidth, Symbol.LogicalCircuitHeight));
 					diagram.RenderTransform = new TranslateTransform(-rect.X, -rect.Y);
+					diagram.LayoutTransform = Transform.Identity;
 					diagram.UpdateLayout();
 					RenderTargetBitmap bitmap = new RenderTargetBitmap(
 						(int)Math.Round(rect.Width), (int)Math.Round(rect.Height), 96, 96, PixelFormats.Pbgra32
