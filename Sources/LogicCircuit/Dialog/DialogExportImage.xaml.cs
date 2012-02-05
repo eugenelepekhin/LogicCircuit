@@ -17,17 +17,18 @@ namespace LogicCircuit {
 
 		public class ImageEncoder {
 			public string Name { get; private set; }
-			public BitmapEncoder BitmapEncoder { get; private set; }
+			private Func<BitmapEncoder> bitmapEncoder;
+			public BitmapEncoder BitmapEncoder { get { return this.bitmapEncoder(); } }
 
 			private string[] extensions;
 
-			public ImageEncoder(string name, BitmapEncoder bitmapEncoder, params string[] extensions) {
+			public ImageEncoder(string name, Func<BitmapEncoder> bitmapEncoder, params string[] extensions) {
 				this.Name = name;
-				this.BitmapEncoder = bitmapEncoder;
+				this.bitmapEncoder = bitmapEncoder;
 				this.extensions = extensions;
 			}
 
-			public ImageEncoder(string name, BitmapEncoder bitmapEncoder) : this(name, bitmapEncoder, name) {
+			public ImageEncoder(string name, Func<BitmapEncoder> bitmapEncoder) : this(name, bitmapEncoder, name) {
 			}
 
 			public bool IsKnownExtension(string extension) {
@@ -63,11 +64,11 @@ namespace LogicCircuit {
 		public DialogExportImage(Editor editor) {
 			this.editor = editor;
 			List<ImageEncoder> list = new List<ImageEncoder>();
-			list.Add(new ImageEncoder("Bmp", new BmpBitmapEncoder(), "dib"));
-			list.Add(new ImageEncoder("Gif", new GifBitmapEncoder()));
-			list.Add(new ImageEncoder("Jpeg", new JpegBitmapEncoder(), "jpg", "jpe"));
-			list.Add(new ImageEncoder("Png", new PngBitmapEncoder()));
-			list.Add(new ImageEncoder("Tiff", new TiffBitmapEncoder(), "tif"));
+			list.Add(new ImageEncoder("Bmp", () => new BmpBitmapEncoder(), "dib"));
+			list.Add(new ImageEncoder("Gif", () => new GifBitmapEncoder()));
+			list.Add(new ImageEncoder("Jpeg", () => new JpegBitmapEncoder(), "jpg", "jpe"));
+			list.Add(new ImageEncoder("Png", () => new PngBitmapEncoder()));
+			list.Add(new ImageEncoder("Tiff", () => new TiffBitmapEncoder(), "tif"));
 			this.Encoders = list;
 			this.SetEncoder(this.imageExportType.Value);
 			this.FilePath = this.DefaultFileName();
