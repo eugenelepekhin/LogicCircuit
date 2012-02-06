@@ -259,6 +259,7 @@
     <Compile Include="Settings\SettingsBoolCache.cs" />
     <Compile Include="Settings\SettingsDoubleCache.cs" />
     <Compile Include="Settings\SettingsEnumCache.cs" />
+    <Compile Include="Settings\SettingsGridLengthCache.cs" />
     <Compile Include="Settings\SettingsIntegerCache.cs" />
     <Compile Include="Settings\SettingsStringCache.cs" />
     <Compile Include="Settings\SettingsWindowLocationCache.cs" />

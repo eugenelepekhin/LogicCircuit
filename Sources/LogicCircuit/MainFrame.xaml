@@ -208,9 +208,9 @@
 		<!-- Main content of the window -->
 		<Grid Grid.Row="1" Margin="3">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="0.25*" MinWidth="100"/> <!-- Left column with List of circuit descriptors and runtime tree -->
+				<ColumnDefinition Width="{Binding Path=ProjectWidth.Value, Mode=TwoWay}" MinWidth="100"/> <!-- Left column with List of circuit descriptors and runtime tree -->
 				<ColumnDefinition Width="Auto"/> <!-- Column Splitter -->
-				<ColumnDefinition Width="*" MinWidth="100"/> <!-- Main Diagram -->
+				<ColumnDefinition Width="{Binding Path=DiagramWidth.Value, Mode=TwoWay}" MinWidth="100"/> <!-- Main Diagram -->
 			</Grid.ColumnDefinitions>
 
 			<!-- Left column with List of circuits and properties and Running map tree -->

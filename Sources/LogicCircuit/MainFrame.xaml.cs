@@ -22,6 +22,9 @@ namespace LogicCircuit {
 		private SettingsWindowLocationCache windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 
+		public SettingsGridLengthCache ProjectWidth { get; private set; }
+		public SettingsGridLengthCache DiagramWidth { get; private set; }
+
 		private SettingsBoolCache showGrid = new SettingsBoolCache(Settings.User, "Settings.ShowGrid", true);
 		public bool ShowGrid {
 			get { return this.showGrid.Value; }
@@ -80,6 +83,9 @@ namespace LogicCircuit {
 		}
 
 		public Mainframe() {
+			this.ProjectWidth = new SettingsGridLengthCache(Settings.User, "Mainframe.ProjectWidth", "0.25*");
+			this.DiagramWidth = new SettingsGridLengthCache(Settings.User, "Mainframe.DiagramWidth", "0.75*");
+
 			this.DataContext = this;
 			this.InitializeComponent();
 
