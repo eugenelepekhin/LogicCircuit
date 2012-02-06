@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Xml;
 
@@ -92,7 +94,7 @@ namespace LogicCircuit {
 		private FileSystemWatcher fileWatcher;
 		public bool IsFirstRun { get; private set; }
 
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands")]
+		[SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands")]
 		public UserSettings() {
 			this.fileWatcher = new FileSystemWatcher();
 			this.fileWatcher.EnableRaisingEvents = false;
@@ -112,7 +114,7 @@ namespace LogicCircuit {
 			this.TruncateRecentFile();
 		}
 
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
+		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
 		private void fileChanged(object sender, FileSystemEventArgs e) {
 			try {
 				if(e.ChangeType == WatcherChangeTypes.Changed) {
@@ -132,7 +134,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands")]
+		[SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands")]
 		public void Save() {
 			bool enabled = this.fileWatcher.EnableRaisingEvents;
 			try {
@@ -146,7 +148,8 @@ namespace LogicCircuit {
 		private static string FileName() {
 			return Path.Combine(
 				Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-				@"LogicCircuit\Settings.xml"
+				Assembly.GetEntryAssembly().GetName().Name,
+				"Settings.xml"
 			);
 		}
 

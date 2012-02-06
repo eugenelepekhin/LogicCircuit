@@ -8,6 +8,8 @@
 	MinWidth="550"
 	MinHeight="400"
 	Title="{Binding Path=Editor.Caption}"
+	Left="{Binding Path=WindowLocation.X, Mode=TwoWay}"
+	Top="{Binding Path=WindowLocation.Y, Mode=TwoWay}"
 	Width="{Binding Path=WindowLocation.Width, Mode=TwoWay}"
 	Height="{Binding Path=WindowLocation.Height, Mode=TwoWay}"
 	WindowState="{Binding Path=WindowLocation.WindowState, Mode=TwoWay}"

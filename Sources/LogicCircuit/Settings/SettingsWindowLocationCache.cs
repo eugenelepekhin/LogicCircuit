@@ -9,15 +9,13 @@ namespace LogicCircuit {
 		private SettingsDoubleCache height;
 		private SettingsWindowStateCache state;
 
-		public SettingsWindowLocationCache(Settings settings, string windowName) {
-			this.x = new SettingsDoubleCache(settings, windowName + ".X", 0, SystemParameters.VirtualScreenWidth - 30, 0);
-			this.y = new SettingsDoubleCache(settings, windowName + ".Y", 0, SystemParameters.VirtualScreenHeight - 30, 0);
-			this.width = new SettingsDoubleCache(settings, windowName + ".Width", 0, SystemParameters.VirtualScreenWidth, 0);
-			this.height = new SettingsDoubleCache(settings, windowName + ".Height", 0, SystemParameters.VirtualScreenHeight, 0);
+		public SettingsWindowLocationCache(Settings settings, Window window) {
+			string windowName = window.GetType().Name;
+			this.x = new SettingsDoubleCache(settings, windowName + ".X", 0, SystemParameters.VirtualScreenWidth - 30, window.Left);
+			this.y = new SettingsDoubleCache(settings, windowName + ".Y", 0, SystemParameters.VirtualScreenHeight - 30, window.Top);
+			this.width = new SettingsDoubleCache(settings, windowName + ".Width", window.MinWidth, window.MaxWidth, window.Width);
+			this.height = new SettingsDoubleCache(settings, windowName + ".Height", window.MinHeight, window.MaxHeight, window.Height);
 			this.state = new SettingsWindowStateCache(settings, windowName + ".WindowState");
-		}
-
-		public SettingsWindowLocationCache(Settings settings, Window window) : this(settings, window.GetType().Name) {
 		}
 
 		public double X {
