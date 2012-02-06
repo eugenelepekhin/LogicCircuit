@@ -146,9 +146,10 @@ namespace LogicCircuit {
 		}
 
 		private static string FileName() {
+			Assembly assembly = Assembly.GetEntryAssembly() ?? typeof(Settings).Assembly;
 			return Path.Combine(
 				Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-				Assembly.GetEntryAssembly().GetName().Name,
+				assembly.GetName().Name,
 				"Settings.xml"
 			);
 		}
