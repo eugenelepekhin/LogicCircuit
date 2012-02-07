@@ -20,6 +20,7 @@ namespace LogicCircuit {
 			set { this.fieldBitWidth = BasePin.CheckBitWidth(value); }
 		}
 		public int Value;
+		public string Note;
 		internal Constant Constant;
 
 		private interface IFieldSerializer {
@@ -136,6 +137,41 @@ namespace LogicCircuit {
 			}
 		}
 
+		// Accessor of the Note field
+		public sealed class NoteField : IField<ConstantData, string>, IFieldSerializer {
+			public static readonly NoteField Field = new NoteField();
+			private NoteField() {}
+			public string Name { get { return "Note"; } }
+			public int Order { get; set; }
+			public string DefaultValue { get { return ""; } }
+			public string GetValue(ref ConstantData record) {
+				return record.Note;
+			}
+			public void SetValue(ref ConstantData record, string value) {
+				record.Note = value;
+			}
+			public int Compare(ref ConstantData l, ref ConstantData r) {
+				return StringComparer.Ordinal.Compare(l.Note, r.Note);
+			}
+			public int Compare(string l, string r) {
+				return StringComparer.Ordinal.Compare(l, r);
+			}
+
+			// Implementation of interface IFieldSerializer
+			bool IFieldSerializer.NeedToSave(ref ConstantData data) {
+				return this.Compare(data.Note, this.DefaultValue) != 0;
+			}
+			string IFieldSerializer.GetTextValue(ref ConstantData data) {
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Note);
+			}
+			void IFieldSerializer.SetDefault(ref ConstantData data) {
+				data.Note = this.DefaultValue;
+			}
+			void IFieldSerializer.SetTextValue(ref ConstantData data, string text) {
+				data.Note = text;
+			}
+		}
+
 		// Special field used to access items wrapper of this record from record.
 		// This is used when no other universes is used
 		internal sealed class ConstantField : IField<ConstantData, Constant> {
@@ -167,6 +203,7 @@ namespace LogicCircuit {
 				,ConstantIdField.Field
 				,BitWidthField.Field
 				,ValueField.Field
+				,NoteField.Field
 				,ConstantField.Field
 			);
 			// Create all but foreign keys of the table
@@ -270,6 +307,12 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.ConstantRowId, ConstantData.ValueField.Field, value); }
 		}
 
+		// Gets or sets value of the Note field.
+		public string Note {
+			get { return this.Table.GetField(this.ConstantRowId, ConstantData.NoteField.Field); }
+			set { this.Table.SetField(this.ConstantRowId, ConstantData.NoteField.Field, value); }
+		}
+
 
 		internal void NotifyChanged(TableChange<ConstantData> change) {
 			if(this.HasListener) {
@@ -284,6 +327,9 @@ namespace LogicCircuit {
 				}
 				if(ConstantData.ValueField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("Value");
+				}
+				if(ConstantData.NoteField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("Note");
 				}
 			}
 			this.OnConstantChanged();
@@ -371,7 +417,8 @@ namespace LogicCircuit {
 			// Fields of Constant table
 			Guid ConstantId,
 			int BitWidth,
-			int Value
+			int Value,
+			string Note
 			// Fields of Circuit table
 
 		) {
@@ -385,6 +432,7 @@ namespace LogicCircuit {
 				ConstantId = ConstantId,
 				BitWidth = BitWidth,
 				Value = Value,
+				Note = Note,
 			};
 			return this.Create(this.Table.Insert(ref dataConstant), rowIdCircuit);
 		}

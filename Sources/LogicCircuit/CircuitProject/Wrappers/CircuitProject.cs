@@ -6,7 +6,7 @@
 	using LogicCircuit.DataPersistent;
 
 	partial class CircuitProject : StoreSnapshot, INotifyPropertyChanged {
-		public const string PersistenceNamespace = "http://LogicCircuit.net/2.0.0.2/CircuitProject.xsd";
+		public const string PersistenceNamespace = "http://LogicCircuit.net/2.0.0.3/CircuitProject.xsd";
 		public const string PersistencePrefix = "lc";
 
 		public event PropertyChangedEventHandler PropertyChanged;

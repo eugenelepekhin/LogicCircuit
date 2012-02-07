@@ -36,7 +36,7 @@ namespace LogicCircuit {
 			set { throw new InvalidOperationException(); }
 		}
 
-		public override string ToolTip { get { return Resources.ToolTipConstant(this.BitWidth, this.Value); } }
+		public override string ToolTip { get { return Circuit.BuildToolTip(Resources.ToolTipConstant(this.BitWidth, this.Value), this.Note); } }
 
 		public override string Category {
 			get { return Resources.CategoryInputOutput; }
@@ -52,13 +52,7 @@ namespace LogicCircuit {
 		}
 
 		partial void OnConstantChanged() {
-			int count = 0;
-			foreach(CircuitSymbol symbol in this.CircuitProject.CircuitSymbolSet.SelectByCircuit(this)) {
-				Tracer.Assert(count++ == 0, "Only one symbol expected");
-				TextBlock text = (TextBlock)symbol.ProbeView;
-				text.Text = this.Notation;
-				symbol.Glyph.ToolTip = this.ToolTip;
-			}
+			this.InvalidateDistinctSymbol();
 		}
 	}
 
@@ -77,7 +71,7 @@ namespace LogicCircuit {
 		}
 
 		public Constant Create(int bitWidth, int value) {
-			Constant constant = this.CreateItem(Guid.NewGuid(), bitWidth, value);
+			Constant constant = this.CreateItem(Guid.NewGuid(), bitWidth, value, ConstantData.NoteField.Field.DefaultValue);
 			this.CircuitProject.DevicePinSet.Create(constant, PinType.Output, constant.BitWidth);
 			return constant;
 		}

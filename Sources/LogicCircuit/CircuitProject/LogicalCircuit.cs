@@ -24,15 +24,7 @@ namespace LogicCircuit {
 			get { return (IEnumerable<BasePin>)this.LogicalPins; }
 		}
 
-		public override string ToolTip {
-			get {
-				string d = this.Description;
-				if(!string.IsNullOrEmpty(d)) {
-					return this.Name + "\n" + d;
-				}
-				return this.Name;
-			}
-		}
+		public override string ToolTip { get { return Circuit.BuildToolTip(this.Name, this.Description); } }
 
 		public IEnumerable<CircuitSymbol> CircuitSymbols() {
 			return this.CircuitProject.CircuitSymbolSet.SelectByLogicalCircuit(this);

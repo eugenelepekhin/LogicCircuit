@@ -149,6 +149,13 @@ namespace LogicCircuit {
 				symbol.Invalidate();
 			}
 		}
+
+		protected static string BuildToolTip(string mandatoryPart, string optionalPart) {
+			if(!string.IsNullOrWhiteSpace(optionalPart)) {
+				return mandatoryPart + "\n" + optionalPart;
+			}
+			return mandatoryPart;
+		}
 	}
 
 	public partial class CircuitSet {

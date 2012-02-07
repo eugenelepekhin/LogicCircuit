@@ -18,7 +18,7 @@ namespace LogicCircuit {
 			set { throw new NotSupportedException(); }
 		}
 
-		public override string ToolTip { get { return Resources.ToolTipButton(this.Notation); } }
+		public override string ToolTip { get { return Circuit.BuildToolTip(Resources.ToolTipButton(this.Notation), this.Note); } }
 
 		public override string Category {
 			get { return Resources.CategoryInputOutput; }
@@ -34,14 +34,7 @@ namespace LogicCircuit {
 		}
 
 		partial void OnCircuitButtonChanged() {
-			int count = 0;
-			foreach(CircuitSymbol symbol in this.CircuitProject.CircuitSymbolSet.SelectByCircuit(this)) {
-				Tracer.Assert(count++ == 0, "Only one symbol expected");
-				ButtonControl button = (ButtonControl)symbol.ProbeView;
-				button.Content = this.Notation;
-				symbol.Glyph.ToolTip = this.ToolTip;
-				symbol.UpdateButtonGlyph((Canvas)symbol.Glyph);
-			}
+			this.InvalidateDistinctSymbol();
 		}
 	}
 
@@ -60,7 +53,7 @@ namespace LogicCircuit {
 		}
 
 		public CircuitButton Create(string notation, bool isToggle) {
-			CircuitButton button = this.CreateItem(Guid.NewGuid(), notation, isToggle);
+			CircuitButton button = this.CreateItem(Guid.NewGuid(), notation, isToggle, CircuitButtonData.NoteField.Field.DefaultValue);
 			this.CircuitProject.DevicePinSet.Create(button, PinType.Output, 1);
 			return button;
 		}

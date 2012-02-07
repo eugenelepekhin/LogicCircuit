@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Store xmlns="clr-namespace:ItemWrapper.Generator;assembly=ItemWrapper.Generator"
 	Namespace="LogicCircuit" Name="CircuitProject"
-	PersistencePrefix="lc" PersistenceNamespace="http://LogicCircuit.net/2.0.0.2/CircuitProject.xsd"
+	PersistencePrefix="lc" PersistenceNamespace="http://LogicCircuit.net/2.0.0.3/CircuitProject.xsd"
 >
 
 	<!--
@@ -14,6 +14,7 @@
 
 		Version 2.0.0.1 - Moving to new store. Adding Frequency and IsMaximumSpeed to project. Adding JamNotation to Pin. Adding TextNote.
 		Version 2.0.0.2 - Adding Note to memory modules, collapse state to categories.
+		Version 2.0.0.3 - Adding note field to button and constant
 	-->
 
 	<Table Name="Project">
@@ -166,6 +167,7 @@
 			<Column Name="ConstantId" Type="Guid" ReadOnly="true"/>
 			<Column Name="BitWidth" Type="int" Default="1" Check="BasePin.CheckBitWidth"/>
 			<Column Name="Value" Type="int" Default="0" AccessModifier="Private"/>
+			<Column Name="Note" Type="string" Default=""/>
 		</Table.Columns>
 
 		<Table.Keys>
@@ -180,6 +182,7 @@
 			<Column Name="CircuitButtonId" Type="Guid" ReadOnly="true"/>
 			<Column Name="Notation" Type="string" Default="" PropertyOverrides="true"/>
 			<Column Name="IsToggle" Type="bool" Default="false"/>
+			<Column Name="Note" Type="string" Default=""/>
 		</Table.Columns>
 
 		<Table.Keys>

@@ -21,17 +21,20 @@ namespace LogicCircuit {
 			this.value.Text = constant.ConstantValue.ToString("X", CultureInfo.InvariantCulture);
 			this.bitWidth.ItemsSource = PinDescriptor.NumberRange(1);
 			this.bitWidth.SelectedItem = this.constant.BitWidth;
+			this.note.Text = constant.Note;
 		}
 
 		private void ButtonOkClick(object sender, RoutedEventArgs e) {
 			try {
 				int bitWidth = (int)this.bitWidth.SelectedItem;
 				int value = int.Parse(this.value.Text.Trim(), NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+				string note = this.note.Text.Trim();
 
-				if(this.constant.BitWidth != bitWidth || this.constant.ConstantValue != value) {
+				if(this.constant.BitWidth != bitWidth || this.constant.ConstantValue != value || this.constant.Note != note) {
 					this.constant.CircuitProject.InTransaction(() => {
 						this.constant.BitWidth = bitWidth;
 						this.constant.ConstantValue = value;
+						this.constant.Note = note;
 					});
 				}
 				this.Close();

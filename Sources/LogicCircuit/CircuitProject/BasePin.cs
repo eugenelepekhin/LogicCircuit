@@ -77,11 +77,7 @@ namespace LogicCircuit {
 		}
 
 		private string AppendNote(string toolTip) {
-			string n = this.Note;
-			if(!string.IsNullOrEmpty(n)) {
-				return toolTip + "\n" + n;
-			}
-			return toolTip;
+			return Circuit.BuildToolTip(toolTip, this.Note);
 		}
 	}
 }
