@@ -361,61 +361,61 @@
       <DependentUpon>Mainframe.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="SymbolShapes\MarkerRectangle.xaml">
+    <None Include="SymbolShapes\MarkerRectangle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="SymbolShapes\Clock.xaml">
+    </None>
+    <None Include="SymbolShapes\Clock.xaml">
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SymbolShapes\Constant.xaml">
+    </None>
+    <None Include="SymbolShapes\Constant.xaml">
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SymbolShapes\Led.xaml">
+    </None>
+    <None Include="SymbolShapes\Led.xaml">
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SymbolShapes\Pin.xaml">
+    </None>
+    <None Include="SymbolShapes\Pin.xaml">
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SymbolShapes\Probe.xaml">
+    </None>
+    <None Include="SymbolShapes\Probe.xaml">
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SymbolShapes\Rectangular.xaml">
+    </None>
+    <None Include="SymbolShapes\Rectangular.xaml">
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SymbolShapes\SevenSegment.xaml">
+    </None>
+    <None Include="SymbolShapes\SevenSegment.xaml">
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SymbolShapes\ShapedAnd.xaml">
+    </None>
+    <None Include="SymbolShapes\ShapedAnd.xaml">
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SymbolShapes\ShapedNot.xaml">
+    </None>
+    <None Include="SymbolShapes\ShapedNot.xaml">
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SymbolShapes\ShapedOr.xaml">
+    </None>
+    <None Include="SymbolShapes\ShapedOr.xaml">
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SymbolShapes\ShapedTriState.xaml">
+    </None>
+    <None Include="SymbolShapes\ShapedTriState.xaml">
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SymbolShapes\ShapedXor.xaml">
+    </None>
+    <None Include="SymbolShapes\ShapedXor.xaml">
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SymbolShapes\Splitter.xaml">
+    </None>
+    <None Include="SymbolShapes\Splitter.xaml">
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SymbolShapes\MarkerLine.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="SymbolShapes\TextNote.xaml">
+    </None>
+    <None Include="SymbolShapes\MarkerLine.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="SymbolShapes\ToggleLed.xaml">
+    </None>
+    <None Include="SymbolShapes\TextNote.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
+    </None>
+    <None Include="SymbolShapes\ToggleLed.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <AppDesigner Include="Properties\" />
@@ -476,10 +476,10 @@
     <Resource Include="Properties\ParagraphRightJustify.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Schema\ConvertSettings.xslt" />
-    <Resource Include="Schema\ConvertFrom.1.0.0.2.xslt" />
-    <Resource Include="Schema\ConvertFrom.1.0.0.3.xslt" />
-    <Resource Include="Schema\Empty.xml" />
+    <None Include="Schema\ConvertSettings.xslt" />
+    <None Include="Schema\ConvertFrom.1.0.0.2.xslt" />
+    <None Include="Schema\ConvertFrom.1.0.0.3.xslt" />
+    <None Include="Schema\Empty.xml" />
     <None Include="Dialog\ReportBuilder.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ReportBuilder.cs</LastGenOutput>
@@ -496,13 +496,13 @@
     <CodeAnalysisDictionary Include="CustomDictionary.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Schema\ConvertFrom.2.0.0.1.xslt" />
+    <None Include="Schema\ConvertFrom.2.0.0.1.xslt" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Schema\ConvertFrom.2.0.0.2.xslt" />
+    <None Include="Schema\ConvertFrom.2.0.0.2.xslt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
