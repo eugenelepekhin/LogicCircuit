@@ -20,21 +20,7 @@ namespace LogicCircuit.UnitTest {
 		public FunctionProbe[] Output { get; private set; }
 
 		public ProjectTester(TestContext testContext, string projectText, string initialCircuit) {
-			// First save project text to test directory
-			string path = Path.Combine(testContext.TestRunDirectory, string.Format("{0}.{1}.{2}.xml", testContext.FullyQualifiedTestClassName, testContext.TestName, DateTime.UtcNow.Ticks));
-			File.WriteAllText(path, projectText, Encoding.UTF8);
-			// Load if from test directory
-			this.CircuitProject = CircuitProject.Create(path);
-			File.Delete(path);
-			if(initialCircuit != null) {
-				LogicalCircuit circuit = this.CircuitProject.LogicalCircuitSet.FindByName(initialCircuit);
-				Assert.IsNotNull(circuit, "initial circuit not found in the project");
-				this.CircuitProject.InOmitTransaction(() => this.CircuitProject.ProjectSet.Project.LogicalCircuit = circuit);
-			}
-			ProjectTester.InitResources();
-			foreach(CircuitSymbol symbol in this.CircuitProject.CircuitSymbolSet) {
-				symbol.GuaranteeGlyph();
-			}
+			this.CircuitProject = ProjectTester.Load(testContext, projectText, initialCircuit);
 
 			// Create map and state
 			this.CircuitMap = new CircuitMap(this.CircuitProject.ProjectSet.Project.LogicalCircuit);
@@ -62,6 +48,27 @@ namespace LogicCircuit.UnitTest {
 			this.Output = outputSymbol.Select(s => this.CircuitMap.FunctionProbe(s)).ToArray();
 
 			this.CircuitMap.TurnOn();
+		}
+
+		public static CircuitProject Load(TestContext testContext, string projectText, string initialCircuit) {
+			// First save project text to test directory
+			string path = Path.Combine(testContext.TestRunDirectory, string.Format("{0}.{1}.{2}.xml", testContext.FullyQualifiedTestClassName, testContext.TestName, DateTime.UtcNow.Ticks));
+			File.WriteAllText(path, projectText, Encoding.UTF8);
+			// Load if from test directory
+			CircuitProject circuitProject = CircuitProject.Create(path);
+			File.Delete(path);
+			if(initialCircuit != null) {
+				LogicalCircuit circuit = circuitProject.LogicalCircuitSet.FindByName(initialCircuit);
+				Assert.IsNotNull(circuit, "initial circuit not found in the project");
+				if(circuitProject.ProjectSet.Project.LogicalCircuit != circuit) {
+					circuitProject.InOmitTransaction(() => circuitProject.ProjectSet.Project.LogicalCircuit = circuit);
+				}
+			}
+			ProjectTester.InitResources();
+			foreach(CircuitSymbol symbol in circuitProject.CircuitSymbolSet) {
+				symbol.GuaranteeGlyph();
+			}
+			return circuitProject;
 		}
 
 		public static void InitResources() {

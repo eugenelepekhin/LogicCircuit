@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using LogicCircuit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -51,9 +52,20 @@ namespace LogicCircuit.UnitTest {
 		///</summary>
 		[TestMethod()]
 		public void CircuitMapApplyPerfTest() {
-			ProjectTester tester = new ProjectTester(this.TestContext, Properties.Resources.IntegerCalculator, null);
-
-			//Assert.Inconclusive("Verify the correctness of this test method.");
+			CircuitProject circuitProject = ProjectTester.Load(this.TestContext, Properties.Resources.IntegerCalculator, "Test Computer");
+			Stopwatch stopwatch = new Stopwatch();
+			stopwatch.Start();
+			int max = 50;
+			for(int i = 0; i < max; i++) {
+				CircuitMap circuitMap = new CircuitMap(circuitProject.ProjectSet.Project.LogicalCircuit);
+				Assert.IsNotNull(circuitMap);
+				CircuitState circuitState = circuitMap.Apply(CircuitRunner.HistorySize);
+				Assert.IsNotNull(circuitState);
+				circuitMap.TurnOn();
+			}
+			stopwatch.Stop();
+			this.TestContext.WriteLine("{0} CircuitMap(s) created applied in {1} - {2:N2} sec per each map", max, stopwatch.Elapsed, stopwatch.Elapsed.TotalSeconds / max);
+			Assert.IsTrue(stopwatch.Elapsed < new TimeSpan(0, 0, 15), "CircuitMap was created and applied too slow");
 		}
 	}
 }

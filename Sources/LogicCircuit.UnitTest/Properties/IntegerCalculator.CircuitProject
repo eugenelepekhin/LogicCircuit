@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<lc:CircuitProject xmlns:lc="http://LogicCircuit.net/1.0.0.3/CircuitProject.xsd">
+<lc:CircuitProject xmlns:lc="http://LogicCircuit.net/2.0.0.3/CircuitProject.xsd">
 	<lc:Project>
 		<lc:ProjectId>1085779a-fb30-44b8-84e5-65212e8c9046</lc:ProjectId>
 		<lc:Name>Integer Calculator</lc:Name>
@@ -1581,553 +1581,518 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</lc:Data>
 		<lc:SplitterId>eb6b7371-c694-462b-adf6-37a597a71946</lc:SplitterId>
 		<lc:BitWidth>7</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Down</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>f2aa1eaf-09b8-4e35-bc8b-8a3d32f18f7b</lc:SplitterId>
 		<lc:BitWidth>4</lc:BitWidth>
 		<lc:PinCount>4</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>17d6b7b2-8e74-4b15-90b5-7ce1619560fa</lc:SplitterId>
 		<lc:BitWidth>3</lc:BitWidth>
 		<lc:PinCount>3</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>e7d8122a-bc15-4ab1-a3a6-07685238d390</lc:SplitterId>
 		<lc:BitWidth>2</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>a454e166-d809-426f-9c8d-36333233cef3</lc:SplitterId>
 		<lc:BitWidth>2</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>863e3fda-752f-4fd3-bddc-7ff29114c719</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>06c6e4a9-4a2e-4412-ba51-4622cebbbb12</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>24f58626-b8b1-4f86-908b-1135622d1487</lc:SplitterId>
 		<lc:BitWidth>4</lc:BitWidth>
 		<lc:PinCount>4</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>71c535be-f840-405f-a5b7-e934c1ed0ab3</lc:SplitterId>
 		<lc:BitWidth>4</lc:BitWidth>
 		<lc:PinCount>4</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>f0907290-4cfd-4435-806a-143ae955797e</lc:SplitterId>
 		<lc:BitWidth>4</lc:BitWidth>
 		<lc:PinCount>4</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>7941c172-30e7-41c1-9b0e-1c8ee13571a0</lc:SplitterId>
 		<lc:BitWidth>4</lc:BitWidth>
 		<lc:PinCount>4</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>cb6ee017-9f97-4911-8902-3144bb6c0557</lc:SplitterId>
 		<lc:BitWidth>4</lc:BitWidth>
 		<lc:PinCount>4</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>b39e3cb5-6678-4e3e-bbc2-0c8e6314b7dc</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>17f18dc8-0c96-4005-b0c6-d0c43968279c</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>ae1f4894-f9a9-4a24-8da9-0998f238610b</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>b190b748-fc49-434c-9ff8-b83728a5a5bb</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>5314c0aa-6ea3-4ca8-abc3-aff3ef11dab5</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>cf0fd11e-219e-43b4-98a7-f9b1c3857d12</lc:SplitterId>
 		<lc:BitWidth>3</lc:BitWidth>
 		<lc:PinCount>3</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>bbe51ad2-b256-49d5-8360-c614de033ab5</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>78798eb5-0706-4f1f-9bb0-82d6edcc1132</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>d0c4026e-a8a2-49fd-b453-7308a83b29f4</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>1a09dda7-151c-413f-a747-5f19070dd515</lc:SplitterId>
 		<lc:BitWidth>3</lc:BitWidth>
 		<lc:PinCount>3</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>76e2eb99-a28f-4a62-b07a-6911e38fd3b9</lc:SplitterId>
 		<lc:BitWidth>2</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>bd3b145b-7427-4b3a-9524-44cb99737e2f</lc:SplitterId>
 		<lc:BitWidth>16</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>90a47f08-e51a-495e-b071-f021c72af5aa</lc:SplitterId>
 		<lc:BitWidth>16</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>888112e9-37eb-44c9-b833-b8d12812f7d1</lc:SplitterId>
 		<lc:BitWidth>16</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>3466e277-5e07-49c7-bf82-954d4bac5c17</lc:SplitterId>
 		<lc:BitWidth>16</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>da94b536-b9fc-4aee-a959-ccae62cd3639</lc:SplitterId>
 		<lc:BitWidth>3</lc:BitWidth>
 		<lc:PinCount>3</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>a3c539cf-ab90-4148-a77f-0611ecf644f0</lc:SplitterId>
 		<lc:BitWidth>2</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>80be9f94-10a6-4f8d-9650-ef8bc56deaec</lc:SplitterId>
 		<lc:BitWidth>16</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>f14bb679-774d-472a-ba8b-f3180e4fac7b</lc:SplitterId>
 		<lc:BitWidth>16</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>aff90e40-8e65-4d7b-85f8-1d840b199b10</lc:SplitterId>
 		<lc:BitWidth>16</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>5b9e9f06-3879-4948-bc78-ba1dfd91e2f8</lc:SplitterId>
 		<lc:BitWidth>16</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>1232cf30-cc91-4e18-8544-1a9239a19eb3</lc:SplitterId>
 		<lc:BitWidth>16</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>1a66dcb5-43f8-48ad-83ed-7c28734c44ea</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>bbec97cd-ca0a-4a15-8a3f-cd4e6497a3dd</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>366efdd6-f709-4f5d-b853-a89864bc56f1</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>2a2a237f-8308-4839-945e-76af7569149a</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>a11acfea-c817-4941-8cf0-4da77f87478f</lc:SplitterId>
 		<lc:BitWidth>16</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>b268175e-33eb-4dae-9e18-1d34621866a3</lc:SplitterId>
 		<lc:BitWidth>16</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>839374f9-b8f6-4d80-8664-a323da2c2e20</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>a0437e42-3b1c-46c4-9921-e32c7b849d9a</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>ad6bc901-6a72-414d-8c26-eaacecd530fb</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>df5ac911-1400-4e02-b0f4-059aca56697d</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>de913e7d-cbbd-46ed-bcc9-7a8231840919</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>b898f030-0014-42d5-acb5-00b900e3cf95</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>19137b76-0692-4044-83a6-8cafa44d80d9</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>3cb03a45-992e-4b38-9f83-2103685b74fd</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>92b1807f-be24-4ada-aee0-f4f20f2b9617</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>d5c65c2f-afa4-4649-9bf4-805c26f460ac</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>7a885c00-086a-4eb2-b578-b69f6836c69e</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>7757a73b-53cc-45ab-8378-047ae18774a1</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>9868501f-2f97-478a-9607-c037895177e3</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>b838d001-0cbe-4839-9419-7f9c3dc84847</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>924e469a-98a7-4498-ac97-f9e40f35f1de</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>710de33a-3e90-49b7-bbc6-13db6879c237</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>08579993-66d3-4923-865c-831d7a4b22d6</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>072028c3-ba02-4846-9241-5694889afadf</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>c892af1c-1bc0-46c1-9324-dac014ec7744</lc:SplitterId>
 		<lc:BitWidth>3</lc:BitWidth>
 		<lc:PinCount>3</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>9ae44738-e167-4f63-9c09-2c92291086af</lc:SplitterId>
 		<lc:BitWidth>3</lc:BitWidth>
 		<lc:PinCount>3</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>1d547944-d486-4183-a3e4-53093007cc2a</lc:SplitterId>
 		<lc:BitWidth>2</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>1e57073f-dcdb-4adb-93a9-3d7918af1cbf</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>d60bff89-71ef-48d7-886d-9ec17c82c2a4</lc:SplitterId>
 		<lc:BitWidth>4</lc:BitWidth>
 		<lc:PinCount>4</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>77ef9a55-12f8-498b-80ad-812b95469b69</lc:SplitterId>
 		<lc:BitWidth>16</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>d0ca5753-8719-4c10-84cd-1a96064fffa0</lc:SplitterId>
 		<lc:BitWidth>16</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>cd3cddf3-9733-4581-bcad-77e78c1ebfd6</lc:SplitterId>
 		<lc:BitWidth>16</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>54ee6589-7e5e-4660-82cf-aa5122f6a691</lc:SplitterId>
 		<lc:BitWidth>2</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>b47996a8-c76a-4f11-9f0e-cec79e7713f2</lc:SplitterId>
 		<lc:BitWidth>2</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>20cb7a97-37d7-4221-a6f7-5a0ef7011609</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>48ba6c0d-be1a-437a-aa9a-5e9ad683818c</lc:SplitterId>
 		<lc:BitWidth>4</lc:BitWidth>
 		<lc:PinCount>4</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>1e4ce32a-606b-490c-bf0c-b9723b5b93b5</lc:SplitterId>
 		<lc:BitWidth>3</lc:BitWidth>
 		<lc:PinCount>3</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>dbac1505-1185-4379-bc02-8bc35c8a22e2</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>f4b4b93b-4748-4994-819b-5368f3b462d8</lc:SplitterId>
 		<lc:BitWidth>5</lc:BitWidth>
 		<lc:PinCount>5</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>4afd5476-3258-444e-8767-6a22718f546a</lc:SplitterId>
 		<lc:BitWidth>3</lc:BitWidth>
 		<lc:PinCount>3</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>fbdf11c9-105c-4753-996c-58b36a6001c6</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>381efe49-cdaf-4d12-8fc4-143112d8a56a</lc:SplitterId>
 		<lc:BitWidth>4</lc:BitWidth>
 		<lc:PinCount>4</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>3e4050a8-9fbe-4965-a37d-2a90132ebde1</lc:SplitterId>
 		<lc:BitWidth>2</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>c2c634cb-7969-4bc2-94bd-aa1e595b5e4d</lc:SplitterId>
 		<lc:BitWidth>16</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>07af51c4-d824-4223-830a-b3df35e54531</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>921e5e92-6724-4800-b436-784682372afd</lc:SplitterId>
 		<lc:BitWidth>3</lc:BitWidth>
 		<lc:PinCount>3</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>406e7cc0-1fd9-45b1-94ee-3eead32b5e1c</lc:SplitterId>
 		<lc:BitWidth>2</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>7662d070-19c1-46c3-9345-87e69db4f0bf</lc:SplitterId>
 		<lc:BitWidth>3</lc:BitWidth>
 		<lc:PinCount>3</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>8397933c-2c8e-4f9d-9a58-660a17cd8175</lc:SplitterId>
 		<lc:BitWidth>7</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>058d6112-08f4-4d92-9261-9be4e2d2b3b4</lc:SplitterId>
 		<lc:BitWidth>4</lc:BitWidth>
 		<lc:PinCount>4</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>82702817-bdf4-47d2-b0b9-62ae239d1317</lc:SplitterId>
 		<lc:BitWidth>2</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>4f399cf4-9734-4b3e-a464-d4905dc32763</lc:SplitterId>
 		<lc:BitWidth>7</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>1a664853-4e6a-4087-9c06-6d9ccb0f262c</lc:SplitterId>
 		<lc:BitWidth>4</lc:BitWidth>
 		<lc:PinCount>4</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>53eda081-9848-4f94-99a3-0ad78a59443c</lc:SplitterId>
 		<lc:BitWidth>2</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Down</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>f1e421ad-6aae-4013-84c4-797a523aa8dc</lc:SplitterId>
 		<lc:BitWidth>2</lc:BitWidth>
 		<lc:PinCount>2</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>2df98c9b-185e-48c6-b1f6-818044de957a</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Right</lc:Rotation>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>0b5f5fd7-413e-41dd-b2dc-eccce1a5e823</lc:SplitterId>
 		<lc:BitWidth>8</lc:BitWidth>
 		<lc:PinCount>8</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:Splitter>
 		<lc:SplitterId>6a7b0d40-d6b3-4904-bc11-acac51bcf8b7</lc:SplitterId>
 		<lc:BitWidth>16</lc:BitWidth>
 		<lc:PinCount>16</lc:PinCount>
-		<lc:Rotation>Left</lc:Rotation>
+		<lc:Clockwise>True</lc:Clockwise>
 	</lc:Splitter>
 	<lc:CircuitSymbol>
 		<lc:CircuitSymbolId>c4c720ae-63b2-4277-958d-241d57e2cb21</lc:CircuitSymbolId>
@@ -2147,8 +2112,9 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</lc:Data>
 		<lc:CircuitSymbolId>cccf0fd8-437c-4cf3-9c90-788110fbb55c</lc:CircuitSymbolId>
 		<lc:CircuitId>eb6b7371-c694-462b-adf6-37a597a71946</lc:CircuitId>
 		<lc:LogicalCircuitId>3d7d5d47-cbc5-48b4-9f35-dcb591e39382</lc:LogicalCircuitId>
-		<lc:X>13</lc:X>
-		<lc:Y>12</lc:Y>
+		<lc:X>14</lc:X>
+		<lc:Y>11</lc:Y>
+		<lc:Rotation>Left</lc:Rotation>
 	</lc:CircuitSymbol>
 	<lc:CircuitSymbol>
 		<lc:CircuitSymbolId>4da14dc6-426a-454d-9612-007552c1bad3</lc:CircuitSymbolId>
@@ -5717,8 +5683,9 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</lc:Data>
 		<lc:CircuitSymbolId>c7dbd463-3183-4ad7-848a-5310b6132555</lc:CircuitSymbolId>
 		<lc:CircuitId>53eda081-9848-4f94-99a3-0ad78a59443c</lc:CircuitId>
 		<lc:LogicalCircuitId>9e7aa8dd-2f51-43e8-912d-e438348998b3</lc:LogicalCircuitId>
-		<lc:X>32</lc:X>
-		<lc:Y>26</lc:Y>
+		<lc:X>33</lc:X>
+		<lc:Y>25</lc:Y>
+		<lc:Rotation>Left</lc:Rotation>
 	</lc:CircuitSymbol>
 	<lc:CircuitSymbol>
 		<lc:CircuitSymbolId>012f2b0f-aa34-4f02-a5ca-951a71010950</lc:CircuitSymbolId>
