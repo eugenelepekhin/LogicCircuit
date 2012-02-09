@@ -598,7 +598,7 @@ namespace LogicCircuit {
 
 		private void ToolsOscilloscopeCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
-				if(this.Editor != null && this.Editor.Power && this.Editor.CircuitRunner.CircuitState.HasProbes) {
+				if(this.Editor != null && this.Editor.Power && this.Editor.CircuitRunner.HasProbes) {
 					this.Editor.CircuitRunner.ShowOscilloscope();
 				}
 			} catch(Exception exception) {
@@ -611,7 +611,7 @@ namespace LogicCircuit {
 			try {
 				e.CanExecute = (this.Editor != null &&
 					this.Editor.Power &&
-					this.Editor.CircuitRunner.CircuitState.HasProbes &&
+					this.Editor.CircuitRunner.HasProbes &&
 					this.Editor.CircuitRunner.DialogOscilloscope == null
 				);
 			} catch(Exception exception) {
