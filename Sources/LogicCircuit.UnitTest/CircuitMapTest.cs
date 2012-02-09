@@ -47,25 +47,35 @@ namespace LogicCircuit.UnitTest {
 		//
 		#endregion
 
-		/// <summary>
-		///A test for Apply
-		///</summary>
-		[TestMethod()]
-		public void CircuitMapApplyPerfTest() {
-			CircuitProject circuitProject = ProjectTester.Load(this.TestContext, Properties.Resources.IntegerCalculator, "Test Computer");
+		private void CircuitMapPerfTest(string project, string initialCircuit, int maxCount, int maxSeconds) {
+			CircuitProject circuitProject = ProjectTester.Load(this.TestContext, project, initialCircuit);
 			Stopwatch stopwatch = new Stopwatch();
 			stopwatch.Start();
-			int max = 50;
-			for(int i = 0; i < max; i++) {
+			for(int i = 0; i < maxCount; i++) {
 				CircuitMap circuitMap = new CircuitMap(circuitProject.ProjectSet.Project.LogicalCircuit);
-				Assert.IsNotNull(circuitMap);
 				CircuitState circuitState = circuitMap.Apply(CircuitRunner.HistorySize);
 				Assert.IsNotNull(circuitState);
 				circuitMap.TurnOn();
 			}
 			stopwatch.Stop();
-			this.TestContext.WriteLine("{0} CircuitMap(s) created applied in {1} - {2:N2} sec per each map", max, stopwatch.Elapsed, stopwatch.Elapsed.TotalSeconds / max);
-			Assert.IsTrue(stopwatch.Elapsed < new TimeSpan(0, 0, 15), "CircuitMap was created and applied too slow");
+			this.TestContext.WriteLine("{0} CircuitMap(s) created and applied in {1} - {2:N2} sec per each map", maxCount, stopwatch.Elapsed, stopwatch.Elapsed.TotalSeconds / maxCount);
+			Assert.IsTrue(stopwatch.Elapsed < new TimeSpan(0, 0, maxSeconds), "CircuitMap was created and applied successfully but too slow");
+		}
+
+		/// <summary>
+		///A test for Apply
+		///</summary>
+		[TestMethod()]
+		public void CircuitMapApplyPerfTest1() {
+			this.CircuitMapPerfTest(Properties.Resources.IntegerCalculator, "Test Computer", 50, 15);
+		}
+
+		/// <summary>
+		///A test for Apply
+		///</summary>
+		[TestMethod()]
+		public void CircuitMapApplyPerfTest2() {
+			this.CircuitMapPerfTest(Properties.Resources.ExternalCalculator, "Main", 10, 25);
 		}
 	}
 }

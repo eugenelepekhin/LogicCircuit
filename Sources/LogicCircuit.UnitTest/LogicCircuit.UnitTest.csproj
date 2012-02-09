@@ -87,6 +87,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\ExternalCalculator.CircuitProject" />
     <Content Include="Properties\Splitter Conversion.CircuitProject" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
