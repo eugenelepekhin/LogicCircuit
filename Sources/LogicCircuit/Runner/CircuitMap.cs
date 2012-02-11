@@ -304,9 +304,9 @@ namespace LogicCircuit {
 		}
 
 		private static void CleanUp(SymbolMapList list) {
-			bool changed;
+			HashSet<SymbolMap> unconnected = new HashSet<SymbolMap>();
 			do {
-				changed = false;
+				unconnected.Clear();
 				foreach(SymbolMap symbolMap in list.SymbolMaps) {
 					if(symbolMap.HasResults) {
 						bool connected = false;
@@ -317,16 +317,17 @@ namespace LogicCircuit {
 							}
 						}
 						if(!connected) {
-							changed = true;
 							foreach(Parameter parameter in symbolMap.Parameters) {
 								parameter.Result.Parameters.Remove(parameter);
 							}
-							list.Remove(symbolMap);
-							break;
+							unconnected.Add(symbolMap);
 						}
 					}
 				}
-			} while(changed);
+				foreach(SymbolMap map in unconnected) {
+					list.Remove(map);
+				}
+			} while(0 < unconnected.Count);
 		}
 
 		public CircuitMap Child(CircuitSymbol symbol) {
