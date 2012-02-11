@@ -58,17 +58,23 @@ namespace LogicCircuit.UnitTest {
 			CircuitProject circuitProject = CircuitProject.Create(path);
 			File.Delete(path);
 			if(initialCircuit != null) {
-				LogicalCircuit circuit = circuitProject.LogicalCircuitSet.FindByName(initialCircuit);
-				Assert.IsNotNull(circuit, "initial circuit not found in the project");
-				if(circuitProject.ProjectSet.Project.LogicalCircuit != circuit) {
-					circuitProject.InOmitTransaction(() => circuitProject.ProjectSet.Project.LogicalCircuit = circuit);
-				}
+				ProjectTester.SwitchTo(circuitProject, initialCircuit);
 			}
 			ProjectTester.InitResources();
 			foreach(CircuitSymbol symbol in circuitProject.CircuitSymbolSet) {
 				symbol.GuaranteeGlyph();
 			}
 			return circuitProject;
+		}
+
+		public static LogicalCircuit SwitchTo(CircuitProject circuitProject, string logicalCircuitName) {
+			Assert.IsNotNull(logicalCircuitName);
+			LogicalCircuit circuit = circuitProject.LogicalCircuitSet.FindByName(logicalCircuitName);
+			Assert.IsNotNull(circuit, "Circuit {0} not found in the project", logicalCircuitName);
+			if(circuitProject.ProjectSet.Project.LogicalCircuit != circuit) {
+				circuitProject.InOmitTransaction(() => circuitProject.ProjectSet.Project.LogicalCircuit = circuit);
+			}
+			return circuit;
 		}
 
 		public static void InitResources() {

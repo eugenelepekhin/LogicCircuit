@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using LogicCircuit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -76,6 +77,35 @@ namespace LogicCircuit.UnitTest {
 		[TestMethod()]
 		public void CircuitMapApplyPerfTest2() {
 			this.CircuitMapPerfTest(Properties.Resources.ExternalCalculator, "Main", 10, 25);
+		}
+
+		private void CircuitMapCleanUpTest(CircuitProject circuitProject, string logicalCircuitName, int expectedFunctions) {
+			ProjectTester.SwitchTo(circuitProject, logicalCircuitName);
+
+			CircuitMap map = new CircuitMap(circuitProject.ProjectSet.Project.LogicalCircuit);
+			CircuitState state = map.Apply(CircuitRunner.HistorySize);
+
+			Assert.AreEqual(expectedFunctions, state.Functions.Count(), "wrong number of functions");
+		}
+
+		/// <summary>
+		///A test for Correctness of clean up of gates with all output disconnected.
+		///</summary>
+		[TestMethod()]
+		public void CircuitMapCleanUpTest() {
+			CircuitProject circuitProject = ProjectTester.Load(this.TestContext, Properties.Resources.CircuitMapCleanUpTest, null);
+
+			this.CircuitMapCleanUpTest(circuitProject, "1. Empty 1", 0);
+			Assert.AreEqual(0, circuitProject.ProjectSet.Project.LogicalCircuit.CircuitSymbols().Count());
+
+			this.CircuitMapCleanUpTest(circuitProject, "2. Empty 2", 0);
+			Assert.AreEqual(7, circuitProject.ProjectSet.Project.LogicalCircuit.CircuitSymbols().Count());
+
+			this.CircuitMapCleanUpTest(circuitProject, "3. Single Out", 3);
+			Assert.AreEqual(4, circuitProject.ProjectSet.Project.LogicalCircuit.CircuitSymbols().Count());
+
+			this.CircuitMapCleanUpTest(circuitProject, "4. Chain Out", 8);
+			Assert.AreEqual(11, circuitProject.ProjectSet.Project.LogicalCircuit.CircuitSymbols().Count());
 		}
 	}
 }

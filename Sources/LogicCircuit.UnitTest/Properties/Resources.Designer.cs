@@ -62,6 +62,24 @@ namespace LogicCircuit.UnitTest.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;lc:CircuitProject xmlns:lc=&quot;http://LogicCircuit.net/2.0.0.3/CircuitProject.xsd&quot;&gt;
+        ///	&lt;lc:Project&gt;
+        ///		&lt;lc:ProjectId&gt;868c354e-0dbc-47c0-baa0-04c6baaf7ca2&lt;/lc:ProjectId&gt;
+        ///		&lt;lc:Name&gt;CircuitMapCleanUpTest&lt;/lc:Name&gt;
+        ///		&lt;lc:Description&gt;Unit test CircuitMapCleanUpTest&lt;/lc:Description&gt;
+        ///		&lt;lc:LogicalCircuitId&gt;d688483a-2f30-4472-ba71-5c3193c2cd10&lt;/lc:LogicalCircuitId&gt;
+        ///	&lt;/lc:Project&gt;
+        ///	&lt;lc:LogicalCircuit&gt;
+        ///		&lt;lc:LogicalCircuitId&gt;d688483a-2f30-4472-ba71-5c3193c2cd10&lt;/lc:LogicalC [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string CircuitMapCleanUpTest {
+            get {
+                return ResourceManager.GetString("CircuitMapCleanUpTest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;lc:CircuitProject xmlns:lc=&quot;http://LogicCircuit.net/2.0.0.1/CircuitProject.xsd&quot;&gt;
         ///	&lt;lc:Project&gt;
         ///		&lt;lc:ProjectId&gt;3872cdce-31e2-4929-b592-f4ec6c4d1f6f&lt;/lc:ProjectId&gt;
