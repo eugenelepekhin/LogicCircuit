@@ -253,10 +253,7 @@ namespace LogicCircuit {
 						this.Parent.Connect(connectionSet, list, result, this.Jam(pin), bitNumber);
 					}
 				} else if(circuit is LogicalCircuit) {
-					IEnumerable<CircuitSymbol> pinSymbol = this.Circuit.CircuitProject.CircuitSymbolSet.SelectByCircuit(con.InJam.Pin);
-					IEnumerable<Jam> pinJam = pinSymbol.First().Jams();
-					Tracer.Assert(pinJam != null && pinJam.Count() == 1);
-					this.children[(CircuitSymbol)con.InJam.CircuitSymbol].Connect(connectionSet, list, result, pinJam.First(), bitNumber);
+					this.children[(CircuitSymbol)con.InJam.CircuitSymbol].Connect(connectionSet, list, result, con.InJam.InnerJam, bitNumber);
 				} else {
 					Splitter splitter = circuit as Splitter;
 					if(splitter != null) {

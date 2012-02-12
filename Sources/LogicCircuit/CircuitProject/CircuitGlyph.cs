@@ -100,22 +100,32 @@ namespace LogicCircuit {
 				}
 				IList<Jam> list = this.jams[(int)PinSide.Left];
 				foreach(BasePin pin in this.Circuit.Left) {
-					list.Add(new JamItem(pin, this));
+					list.Add(this.CreateJam(pin));
 				}
 				list = this.jams[(int)PinSide.Top];
 				foreach(BasePin pin in this.Circuit.Top) {
-					list.Add(new JamItem(pin, this));
+					list.Add(this.CreateJam(pin));
 				}
 				list = this.jams[(int)PinSide.Right];
 				foreach(BasePin pin in this.Circuit.Right) {
-					list.Add(new JamItem(pin, this));
+					list.Add(this.CreateJam(pin));
 				}
 				list = this.jams[(int)PinSide.Bottom];
 				foreach(BasePin pin in this.Circuit.Bottom) {
-					list.Add(new JamItem(pin, this));
+					list.Add(this.CreateJam(pin));
 				}
 				this.isUpdated = true;
 			}
+		}
+
+		private Jam CreateJam(BasePin pin) {
+			if(pin is Pin) {
+				LogicalCircuit logicalCircuit = (LogicalCircuit)this.Circuit;
+				CircuitSymbol pinSymbol = logicalCircuit.CircuitProject.CircuitSymbolSet.SelectByCircuit(pin).First();
+				Jam innerJam = pinSymbol.Jams().First();
+				return new LogicalJamItem(pin, this, innerJam);
+			}
+			return new JamItem(pin, this);
 		}
 
 		private static FrameworkElement Skin(Canvas canvas, string skinText) {
@@ -262,6 +272,16 @@ namespace LogicCircuit {
 				Tracer.Assert(pin.Circuit == symbol.Circuit);
 				this.Pin = pin;
 				this.CircuitSymbol = symbol;
+			}
+		}
+
+		private class LogicalJamItem : JamItem {
+			private readonly Jam innerJam;
+			public override Jam InnerJam { get { return this.innerJam; } }
+
+			public LogicalJamItem(BasePin pin, CircuitGlyph symbol, Jam innerJam) : base(pin, symbol) {
+				Tracer.Assert(innerJam != null && innerJam.CircuitSymbol.LogicalCircuit == symbol.Circuit);
+				this.innerJam = innerJam;
 			}
 		}
 	}
