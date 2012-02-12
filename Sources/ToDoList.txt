@@ -9,3 +9,9 @@ Display device
 Colors of symbols
 
 Bug: DialogPin.ctor uses this.type.Text = this.pin.PinType.ToString(); - localize
+Bug: GridPoint.ToString - check usage and localize
+Bug: CircuitFunction.ToChar - check usage
+Verify usage of CircuitState.ToString and make in debug only
+Bug: HyperlinkNavigationCommand.Execute uses parameter.ToString() change it to cast???
+Bug: Mainframe.FileOpenRecentCommandExecuted should e.Parameter.ToString() be a cast???
+Bug: SymbolMap, JamKey, Result, Parameter, SymbolMapKey ToString is it debug only?
