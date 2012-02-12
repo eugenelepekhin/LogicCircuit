@@ -8,6 +8,7 @@ namespace LogicCircuit {
 		public CircuitSymbol CircuitSymbol { get; private set; }
 		private History<State>[] tickHistory;
 		private History<long> valueHistory;
+		public string Label { get; set; }
 
 		public FunctionProbe(CircuitSymbol symbol, CircuitState circuitState, int[] parameter, int capacity) : base(circuitState, parameter) {
 			Tracer.Assert(0 < this.BitWidth && this.BitWidth <= BasePin.MaxBitWidth);

@@ -556,8 +556,7 @@ namespace LogicCircuit {
 		private static void DefineClock(CircuitState circuitState, SymbolMap symbolMap) {
 			int index = CircuitMap.SingleResult(symbolMap);
 			Tracer.Assert(0 < index);
-			FunctionClock clock = new FunctionClock(circuitState, index);
-			clock.Label = CircuitMap.FunctionLabel(symbolMap);
+			new FunctionClock(circuitState, index);
 		}
 
 		private static void DefineGate(Gate gate, CircuitState circuitState, SymbolMap symbolMap) {
@@ -616,7 +615,6 @@ namespace LogicCircuit {
 						break;
 					}
 				}
-				function.Label = CircuitMap.FunctionLabel(symbolMap);
 			}
 		}
 
@@ -657,7 +655,6 @@ namespace LogicCircuit {
 				}
 			}
 			if(function != null) {
-				function.Label = CircuitMap.FunctionLabel(symbolMap);
 				if(symbolMap.CircuitMap.displays == null) {
 					symbolMap.CircuitMap.displays = new HashSet<IFunctionVisual>();
 				}
@@ -674,7 +671,7 @@ namespace LogicCircuit {
 			}
 			if(parameters != null && 0 < parameters.Length) {
 				FunctionProbe probe = new FunctionProbe(symbolMap.CircuitSymbol, circuitState, parameters, capacity);
-				probe.Label = CircuitMap.FunctionLabel(symbolMap);
+				probe.Label = symbolMap.CircuitMap.Path(symbolMap.CircuitSymbol);
 
 				if(symbolMap.CircuitMap.displays == null) {
 					symbolMap.CircuitMap.displays = new HashSet<IFunctionVisual>();
@@ -699,7 +696,6 @@ namespace LogicCircuit {
 					group[index++] = r.PrivateIndex;
 				}
 				CircuitFunction groupFunction = new FunctionTriStateGroup(circuitState, group, result.StateIndex);
-				groupFunction.Label = string.Empty;
 				result.TriStateGroup.Clear();
 			}
 			Parameter parameter = symbolMap.Parameter(jam[0], 0);
@@ -723,7 +719,6 @@ namespace LogicCircuit {
 					(enable != null) ? enable.Result.StateIndex : 0,
 					result.PrivateIndex
 				);
-				function.Label = CircuitMap.FunctionLabel(symbolMap);
 			}
 		}
 
@@ -731,7 +726,6 @@ namespace LogicCircuit {
 			int index = CircuitMap.SingleResult(symbolMap);
 			Tracer.Assert(0 < index);
 			FunctionButton button = new FunctionButton(circuitState, symbolMap.CircuitSymbol, index);
-			button.Label = CircuitMap.FunctionLabel(symbolMap);
 			if(symbolMap.CircuitMap.inputs == null) {
 				symbolMap.CircuitMap.inputs = new Dictionary<CircuitSymbol, CircuitFunction>();
 			}
@@ -751,7 +745,6 @@ namespace LogicCircuit {
 			Constant c = (Constant)symbolMap.CircuitSymbol.Circuit;
 			Tracer.Assert(map.Length == c.BitWidth);
 			FunctionConstant constant = new FunctionConstant(circuitState, symbolMap.CircuitSymbol, map);
-			constant.Label = CircuitMap.FunctionLabel(symbolMap);
 			if(symbolMap.CircuitMap.inputs == null) {
 				symbolMap.CircuitMap.inputs = new Dictionary<CircuitSymbol, CircuitFunction>();
 			}
@@ -773,7 +766,6 @@ namespace LogicCircuit {
 			results.Sort(ResultComparer.BitOrderComparer);
 			parameters.Sort(ParameterComparer.BitOrderComparer);
 			FunctionRom rom = new FunctionRom(circuitState, CircuitMap.Parameters(parameters), CircuitMap.Results(results), memory.RomValue());
-			rom.Label = CircuitMap.FunctionLabel(symbolMap);
 			if(symbolMap.CircuitMap.memories == null) {
 				symbolMap.CircuitMap.memories = new Dictionary<CircuitSymbol, FunctionMemory>();
 			}
@@ -815,38 +807,16 @@ namespace LogicCircuit {
 				CircuitMap.Parameters(address), CircuitMap.Parameters(dataIn), CircuitMap.Results(dataOut),
 				(write != null) ? write.Result.StateIndex : 0, memory.WriteOn1
 			);
-			ram.Label = CircuitMap.FunctionLabel(symbolMap);
 			if(symbolMap.CircuitMap.memories == null) {
 				symbolMap.CircuitMap.memories = new Dictionary<CircuitSymbol, FunctionMemory>();
 			}
 			symbolMap.CircuitMap.memories.Add(symbolMap.CircuitSymbol, ram);
 		}
 
-		private static string FunctionLabel(SymbolMap symbolMap) {
-			StringBuilder text = new StringBuilder();
-			text.Append(symbolMap.CircuitSymbol.Circuit.Name);
-			text.Append(symbolMap.CircuitSymbol.Point);
-			CircuitMap map = symbolMap.CircuitMap;
-			while(map != null) {
-				string name = map.Circuit.Notation;
-				if(string.IsNullOrEmpty(name)) {
-					name = map.Circuit.Name;
-				}
-				text.Append(name);
-				if(map.CircuitSymbol != null) {
-					text.Append(map.CircuitSymbol.Point);
-					text.Append(Resources.CircuitMapLabelSeparator);
-				}
-				map = map.Parent;
+		#if DEBUG
+			public override string ToString() {
+				return string.Format(Resources.Culture, "CircuitMap of {0}", this.Circuit.Notation);
 			}
-			if(0 < text.Length) {
-				return text.ToString();
-			}
-			return null;
-		}
-
-		public override string ToString() {
-			return string.Format(Resources.Culture, "CircuitMap of {0}", this.Circuit.Notation);
-		}
+		#endif
 	}
 }
