@@ -79,6 +79,18 @@ namespace LogicCircuit {
 			return this.Left.Concat(this.Top).Concat(this.Right).Concat(this.Bottom);
 		}
 
+		public Jam Jam(BasePin pin) {
+			this.Update();
+			foreach(List<Jam> list in this.jams) {
+				foreach(Jam jam in list) {
+					if(jam.Pin == pin) {
+						return jam;
+					}
+				}
+			}
+			return null;
+		}
+
 		public void ResetJams() {
 			this.isUpdated = false;
 			//this.NotifyPropertyChanged("Left");

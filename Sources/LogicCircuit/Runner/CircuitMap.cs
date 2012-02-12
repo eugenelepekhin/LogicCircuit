@@ -250,7 +250,7 @@ namespace LogicCircuit {
 					list.AddParameter(result, this, con.InJam, bitNumber);
 				} else if((pin = (circuit as Pin)) != null) {
 					if(this.Parent != null) {
-						this.Parent.Connect(connectionSet, list, result, this.Jam(pin), bitNumber);
+						this.Parent.Connect(connectionSet, list, result, this.CircuitSymbol.Jam(pin), bitNumber);
 					}
 				} else if(circuit is LogicalCircuit) {
 					this.children[(CircuitSymbol)con.InJam.CircuitSymbol].Connect(connectionSet, list, result, con.InJam.InnerJam, bitNumber);
@@ -456,16 +456,6 @@ namespace LogicCircuit {
 			return false;
 		}
 
-		private Jam Jam(Pin pin) {
-			foreach(Jam jam in this.CircuitSymbol.Jams()) {
-				if(jam.Pin == pin) {
-					return jam;
-				}
-			}
-			Tracer.Fail();
-			return null;
-		}
-
 		public FrameworkElement CircuitGlyph {
 			get { return new LogicalCircuitDescriptor(this.Circuit, s => false).CircuitGlyph.Glyph; }
 		}
@@ -572,7 +562,7 @@ namespace LogicCircuit {
 			}
 			if(parameter != null) {
 				CircuitFunction function = null;
-				if(gate.Pins.Where(p => p.PinType == PinType.Output).First().Inverted) {
+				if(gate.InvertedOutput) {
 					switch(gate.GateType) {
 					case GateType.Not:
 						function = new FunctionNot(circuitState, parameter[0], result);
