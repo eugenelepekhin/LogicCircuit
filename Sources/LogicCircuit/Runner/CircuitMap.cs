@@ -140,7 +140,7 @@ namespace LogicCircuit {
 					}
 				}
 			}
-			ConductorMap conductorMap = new ConductorMap(this.Circuit);
+			ConductorMap conductorMap = this.Circuit.ConductorMap();
 			foreach(CircuitSymbol symbol in this.Circuit.CircuitSymbols()) {
 				foreach(Jam outJam in symbol.Jams()) {
 					if(outJam.Pin.PinType != PinType.Input) {

@@ -11,6 +11,19 @@ namespace LogicCircuit {
 
 		public Point ScrollOffset { get; set; }
 
+		private ConductorMap conductorMap;
+
+		public void UpdateConductorMap() {
+			this.conductorMap = new ConductorMap(this);
+		}
+
+		public ConductorMap ConductorMap() {
+			if(this.conductorMap == null) {
+				this.UpdateConductorMap();
+			}
+			return this.conductorMap;
+		}
+
 		public override void Delete() {
 			this.CircuitSymbols().ToList().ForEach(symbol => symbol.DeleteSymbol());
 			base.Delete();
@@ -133,6 +146,12 @@ namespace LogicCircuit {
 			EventHandler handler = this.LogicalCircuitSetChanged;
 			if(handler != null) {
 				handler(this, EventArgs.Empty);
+			}
+		}
+
+		public void UpdateConductorMaps() {
+			foreach(LogicalCircuit circuit in this) {
+				circuit.UpdateConductorMap();
 			}
 		}
 	}
