@@ -76,7 +76,12 @@ namespace LogicCircuit {
 		}
 
 		public IEnumerable<Jam> Jams() {
-			return this.Left.Concat(this.Top).Concat(this.Right).Concat(this.Bottom);
+			this.Update();
+			for(int i = 0; i < this.jams.Length; i++) {
+				foreach(Jam jam in this.jams[i]) {
+					yield return jam;
+				}
+			}
 		}
 
 		public Jam Jam(BasePin pin) {
