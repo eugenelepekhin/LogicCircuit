@@ -76,7 +76,7 @@ namespace LogicCircuit.UnitTest {
 		///</summary>
 		[TestMethod()]
 		public void CircuitMapApplyPerfTest2() {
-			this.CircuitMapPerfTest(Properties.Resources.ExternalCalculator, "Main", 50, 75);
+			this.CircuitMapPerfTest(Properties.Resources.ExternalCalculator, "Main", 50, 20);
 		}
 
 		private void CircuitMapCleanUpTest(CircuitProject circuitProject, string logicalCircuitName, int expectedFunctions) {
