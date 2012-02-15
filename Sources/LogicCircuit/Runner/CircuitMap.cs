@@ -482,7 +482,7 @@ namespace LogicCircuit {
 					CircuitMap.DefineProbe(circuitState, symbolMap, probeCapacity);
 					break;
 				case GateType.TriState:
-					this.DefineTriState(circuitState, symbolMap);
+					CircuitMap.DefineTriState(circuitState, symbolMap);
 					break;
 				case GateType.Nop:
 				default:
@@ -540,13 +540,13 @@ namespace LogicCircuit {
 			return map;
 		}
 
-		private static void DefineClock(CircuitState circuitState, SymbolMap symbolMap) {
+		private static CircuitFunction DefineClock(CircuitState circuitState, SymbolMap symbolMap) {
 			int index = CircuitMap.SingleResult(symbolMap);
 			Tracer.Assert(0 < index);
-			new FunctionClock(circuitState, index);
+			return new FunctionClock(circuitState, index);
 		}
 
-		private static void DefineGate(Gate gate, CircuitState circuitState, SymbolMap symbolMap) {
+		private static CircuitFunction DefineGate(Gate gate, CircuitState circuitState, SymbolMap symbolMap) {
 			int result = CircuitMap.SingleResult(symbolMap);
 			int[] parameter = null;
 			List<int> mapList = new List<int>();
@@ -561,51 +561,28 @@ namespace LogicCircuit {
 				parameter = mapList.ToArray();
 			}
 			if(parameter != null) {
-				CircuitFunction function = null;
 				if(gate.InvertedOutput) {
 					switch(gate.GateType) {
-					case GateType.Not:
-						function = new FunctionNot(circuitState, parameter[0], result);
-						break;
-					case GateType.Or:
-						function = new FunctionOrNot(circuitState, parameter, result);
-						break;
-					case GateType.And:
-						function = new FunctionAndNot(circuitState, parameter, result);
-						break;
-					case GateType.Xor:
-						function = new FunctionXorNot(circuitState, parameter, result);
-						break;
-					default:
-						Tracer.Fail();
-						break;
+					case GateType.Not:	return new FunctionNot(circuitState, parameter[0], result);
+					case GateType.Or:	return new FunctionOrNot(circuitState, parameter, result);
+					case GateType.And:	return new FunctionAndNot(circuitState, parameter, result);
+					case GateType.Xor:	return new FunctionXorNot(circuitState, parameter, result);
 					}
 				} else {
 					switch(gate.GateType) {
-					case GateType.Or:
-						function = new FunctionOr(circuitState, parameter, result);
-						break;
-					case GateType.And:
-						function = new FunctionAnd(circuitState, parameter, result);
-						break;
-					case GateType.Xor:
-						function = new FunctionXor(circuitState, parameter, result);
-						break;
-					case GateType.Odd:
-						function = new FunctionOdd(circuitState, parameter, result);
-						break;
-					case GateType.Even:
-						function = new FunctionEven(circuitState, parameter, result);
-						break;
-					default:
-						Tracer.Fail();
-						break;
+					case GateType.Or:	return new FunctionOr(circuitState, parameter, result);
+					case GateType.And:	return new FunctionAnd(circuitState, parameter, result);
+					case GateType.Xor:	return new FunctionXor(circuitState, parameter, result);
+					case GateType.Odd:	return new FunctionOdd(circuitState, parameter, result);
+					case GateType.Even:	return new FunctionEven(circuitState, parameter, result);
 					}
 				}
+				Tracer.Fail();
 			}
+			return null;
 		}
 
-		private void DefineLed(CircuitState circuitState, SymbolMap symbolMap) {
+		private CircuitFunction DefineLed(CircuitState circuitState, SymbolMap symbolMap) {
 			//The jams have special meaning here, so lets go from them
 			List<Jam> jam = symbolMap.CircuitSymbol.Jams().ToList();
 			Tracer.Assert(jam != null && (jam.Count == 1 || jam.Count == 8) &&
@@ -647,9 +624,10 @@ namespace LogicCircuit {
 				}
 				symbolMap.CircuitMap.displays.Add((IFunctionVisual)function);
 			}
+			return function;
 		}
 
-		private static void DefineProbe(CircuitState circuitState, SymbolMap symbolMap, int capacity) {
+		private static CircuitFunction DefineProbe(CircuitState circuitState, SymbolMap symbolMap, int capacity) {
 			List<Parameter> list = new List<Parameter>(symbolMap.Parameters);
 			list.Sort(ParameterComparer.BitOrderComparer);
 			int[] parameters = new int[list.Count];
@@ -664,10 +642,12 @@ namespace LogicCircuit {
 					symbolMap.CircuitMap.displays = new HashSet<IFunctionVisual>();
 				}
 				symbolMap.CircuitMap.displays.Add(probe);
+				return probe;
 			}
+			return null;
 		}
 
-		private void DefineTriState(CircuitState circuitState, SymbolMap symbolMap) {
+		private static CircuitFunction DefineTriState(CircuitState circuitState, SymbolMap symbolMap) {
 			//The jams have special meaning here, so lets go from them
 			List<Jam> jam = symbolMap.CircuitSymbol.Jams().ToList();
 			Tracer.Assert(jam != null && jam.Count == 3);
@@ -682,34 +662,39 @@ namespace LogicCircuit {
 					Tracer.Assert(0 < r.PrivateIndex);
 					group[index++] = r.PrivateIndex;
 				}
-				CircuitFunction groupFunction = new FunctionTriStateGroup(circuitState, group, result.StateIndex);
+				CircuitMap.DefineTriStateGroup(circuitState, group, result.StateIndex);
 				result.TriStateGroup.Clear();
 			}
 			Parameter parameter = symbolMap.Parameter(jam[0], 0);
 			Parameter enable = symbolMap.Parameter(jam[1], 0);
 			bool build = true;
 			if(enable == null) {
-				Tracer.FullInfo(this.GetType().Name, "Enable bit of {0} on {1}{2} is not connected",
+				Tracer.FullInfo("DefineTriState", "Enable bit of {0} on {1}{2} is not connected",
 					symbolMap.CircuitSymbol.Circuit, symbolMap.CircuitSymbol.LogicalCircuit, symbolMap.CircuitSymbol.Point
 				);
 				build = false;
 			}
 			if(parameter == null) {
-				Tracer.FullInfo(this.GetType().Name, "Data bit of {0} on {1}{2} is not connected",
+				Tracer.FullInfo("DefineTriState", "Data bit of {0} on {1}{2} is not connected",
 					symbolMap.CircuitSymbol.Circuit, symbolMap.CircuitSymbol.LogicalCircuit, symbolMap.CircuitSymbol.Point
 				);
 				build = false;
 			}
 			if(build) {
-				CircuitFunction function = new FunctionTriState(circuitState,
+				return new FunctionTriState(circuitState,
 					(parameter != null) ? parameter.Result.StateIndex : 0,
 					(enable != null) ? enable.Result.StateIndex : 0,
 					result.PrivateIndex
 				);
 			}
+			return null;
 		}
 
-		private static void DefineButton(CircuitState circuitState, SymbolMap symbolMap) {
+		private static CircuitFunction DefineTriStateGroup(CircuitState circuitState, int[] group, int stateIndex) {
+			return new FunctionTriStateGroup(circuitState, group, stateIndex);
+		}
+
+		private static CircuitFunction DefineButton(CircuitState circuitState, SymbolMap symbolMap) {
 			int index = CircuitMap.SingleResult(symbolMap);
 			Tracer.Assert(0 < index);
 			FunctionButton button = new FunctionButton(circuitState, symbolMap.CircuitSymbol, index);
@@ -723,9 +708,10 @@ namespace LogicCircuit {
 				}
 				symbolMap.CircuitMap.displays.Add(button);
 			}
+			return button;
 		}
 
-		private static void DefineConstant(CircuitState circuitState, SymbolMap symbolMap) {
+		private static CircuitFunction DefineConstant(CircuitState circuitState, SymbolMap symbolMap) {
 			List<Result> results = new List<Result>(symbolMap.Results);
 			results.Sort(ResultComparer.BitOrderComparer);
 			int[] map = CircuitMap.Results(results);
@@ -736,9 +722,10 @@ namespace LogicCircuit {
 				symbolMap.CircuitMap.inputs = new Dictionary<CircuitSymbol, CircuitFunction>();
 			}
 			symbolMap.CircuitMap.inputs.Add(symbolMap.CircuitSymbol, constant);
+			return constant;
 		}
 
-		private static void DefineRom(CircuitState circuitState, SymbolMap symbolMap) {
+		private static CircuitFunction DefineRom(CircuitState circuitState, SymbolMap symbolMap) {
 			Memory memory = (Memory)symbolMap.CircuitSymbol.Circuit;
 			Tracer.Assert(!memory.Writable && symbolMap.CircuitSymbol.Jams().Count() == 2);
 			List<Result> results = new List<Result>(symbolMap.Results);
@@ -757,9 +744,10 @@ namespace LogicCircuit {
 				symbolMap.CircuitMap.memories = new Dictionary<CircuitSymbol, FunctionMemory>();
 			}
 			symbolMap.CircuitMap.memories.Add(symbolMap.CircuitSymbol, rom);
+			return rom;
 		}
 
-		private static void DefineRam(CircuitState circuitState, SymbolMap symbolMap) {
+		private static CircuitFunction DefineRam(CircuitState circuitState, SymbolMap symbolMap) {
 			Memory memory = (Memory)symbolMap.CircuitSymbol.Circuit;
 			Tracer.Assert(memory.Writable && symbolMap.CircuitSymbol.Jams().Count() == 4);
 			List<Result> dataOut = new List<Result>(symbolMap.Results);
@@ -798,6 +786,7 @@ namespace LogicCircuit {
 				symbolMap.CircuitMap.memories = new Dictionary<CircuitSymbol, FunctionMemory>();
 			}
 			symbolMap.CircuitMap.memories.Add(symbolMap.CircuitSymbol, ram);
+			return ram;
 		}
 
 		#if DEBUG
