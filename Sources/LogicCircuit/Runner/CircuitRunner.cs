@@ -7,11 +7,9 @@ using System.Windows.Threading;
 using System.Diagnostics;
 
 namespace LogicCircuit {
-	public class CircuitRunner : INotifyPropertyChanged {
+	public class CircuitRunner {
 
 		public const int HistorySize = 100;
-
-		public event PropertyChangedEventHandler PropertyChanged;
 
 		public Editor Editor { get; private set; }
 		private CircuitMap RootMap { get; set; }
@@ -57,6 +55,7 @@ namespace LogicCircuit {
 			this.Editor = editor;
 			this.isMaxSpeed = this.Editor.IsMaximumSpeed;
 			this.oscilloscoping = new SettingsBoolCache(Settings.Session, "Oscilloscoping" + this.Editor.Project.ProjectId.ToString(), false);
+			this.RootMap = new CircuitMap(this.Editor.Project.LogicalCircuit);
 		}
 
 		public void Start() {
@@ -93,16 +92,11 @@ namespace LogicCircuit {
 				this.running = true;
 				this.Editor.Mainframe.Status = Resources.PowerOn;
 
-				CircuitMap root = new CircuitMap(this.Editor.Project.LogicalCircuit);
-				this.CircuitState = root.Apply(CircuitRunner.HistorySize);
-				this.RootMap = root;
+				this.CircuitState = this.RootMap.Apply(CircuitRunner.HistorySize);
 				this.CircuitState.FunctionUpdated += new EventHandler(this.OnFunctionUpdated);
 				this.HasProbes = this.CircuitState.HasProbes;
 
-				this.Editor.Mainframe.Dispatcher.Invoke(new Action(() => {
-					this.RootMap.TurnOn();
-					this.Editor.Mainframe.NotifyPropertyChanged(this.PropertyChanged, this, "Root");
-				}));
+				this.Editor.Mainframe.Dispatcher.Invoke(new Action(() => this.RootMap.TurnOn()));
 
 				if(this.Oscilloscoping && this.CircuitState.HasProbes) {
 					Tracer.Assert(this.DialogOscilloscope == null);

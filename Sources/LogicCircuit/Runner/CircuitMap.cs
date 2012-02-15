@@ -43,6 +43,7 @@ namespace LogicCircuit {
 			this.Circuit = circuit;
 			this.CircuitSymbol = null;
 			this.Parent = null;
+			this.Expand();
 		}
 
 		private CircuitMap(CircuitMap parent, CircuitSymbol circuitSymbol) {
@@ -176,9 +177,6 @@ namespace LogicCircuit {
 
 		public CircuitState Apply(int probeCapacity) {
 			Tracer.Assert(this.Circuit != null && this.CircuitSymbol == null && this.Parent == null, "This method should be called on root only");
-
-			//Build a tree
-			this.Expand();
 
 			ConnectionSet connectionSet = new ConnectionSet();
 			this.ConnectMap(connectionSet);
