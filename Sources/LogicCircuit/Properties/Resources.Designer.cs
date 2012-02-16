@@ -1840,5 +1840,12 @@ namespace LogicCircuit {
  		public static string TitleTotal {
 			get { return ResourceManager.GetString("TitleTotal", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Main.
+		/// </summary>
+ 		public static string LogicalCircuitMainNotation {
+			get { return ResourceManager.GetString("LogicalCircuitMainNotation", Culture); }
+		}
 	}
 }
