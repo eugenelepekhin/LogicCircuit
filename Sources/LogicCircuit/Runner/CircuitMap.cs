@@ -201,7 +201,7 @@ namespace LogicCircuit {
 
 			// Generate functions
 			foreach(SymbolMap symbolMap in list.SymbolMaps) {
-				this.Apply(circuitState, symbolMap, probeCapacity);
+				CircuitMap.Apply(circuitState, symbolMap, probeCapacity);
 			}
 			circuitState.EndDefinition();
 
@@ -458,7 +458,7 @@ namespace LogicCircuit {
 			get { return new LogicalCircuitDescriptor(this.Circuit, s => false).CircuitGlyph.Glyph; }
 		}
 
-		private void Apply(CircuitState circuitState, SymbolMap symbolMap, int probeCapacity) {
+		private static void Apply(CircuitState circuitState, SymbolMap symbolMap, int probeCapacity) {
 			if(symbolMap.CircuitSymbol.Circuit is Gate) {
 				Gate gate = (Gate)symbolMap.CircuitSymbol.Circuit;
 				switch(gate.GateType) {
@@ -474,7 +474,7 @@ namespace LogicCircuit {
 					CircuitMap.DefineGate(gate, circuitState, symbolMap);
 					break;
 				case GateType.Led:
-					this.DefineLed(circuitState, symbolMap);
+					CircuitMap.DefineLed(circuitState, symbolMap);
 					break;
 				case GateType.Probe:
 					CircuitMap.DefineProbe(circuitState, symbolMap, probeCapacity);
@@ -580,7 +580,7 @@ namespace LogicCircuit {
 			return null;
 		}
 
-		private CircuitFunction DefineLed(CircuitState circuitState, SymbolMap symbolMap) {
+		private static CircuitFunction DefineLed(CircuitState circuitState, SymbolMap symbolMap) {
 			//The jams have special meaning here, so lets go from them
 			List<Jam> jam = symbolMap.CircuitSymbol.Jams().ToList();
 			Tracer.Assert(jam != null && (jam.Count == 1 || jam.Count == 8) &&
@@ -592,7 +592,7 @@ namespace LogicCircuit {
 				if(parameter != null) {
 					function = new FunctionLed(circuitState, symbolMap.CircuitSymbol, parameter.Result.StateIndex);
 				} else {
-					Tracer.FullInfo(this.GetType().Name, "{0} on {1}{2} is not connected",
+					Tracer.FullInfo("DefineLed", "{0} on {1}{2} is not connected",
 						symbolMap.CircuitSymbol.Circuit, symbolMap.CircuitSymbol.LogicalCircuit, symbolMap.CircuitSymbol.Point
 					);
 				}
@@ -607,7 +607,7 @@ namespace LogicCircuit {
 						connected = true;
 					} else {
 						param[i] = 0;
-						Tracer.FullInfo(this.GetType().Name, "{0} on {1}{2} is not connected",
+						Tracer.FullInfo("DefineLed", "{0} on {1}{2} is not connected",
 							symbolMap.CircuitSymbol.Circuit, symbolMap.CircuitSymbol.LogicalCircuit, symbolMap.CircuitSymbol.Point
 						);
 					}
