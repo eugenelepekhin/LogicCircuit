@@ -7,3 +7,5 @@ Display device
 "hard drive" device
 
 Colors of symbols
+
+Running tree not always open the item when it clicked on the diagram
