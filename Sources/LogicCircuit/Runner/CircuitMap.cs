@@ -115,6 +115,39 @@ namespace LogicCircuit {
 			}
 		}
 
+		public CircuitState Apply(int probeCapacity) {
+			Tracer.Assert(this.Circuit != null && this.CircuitSymbol == null && this.Parent == null, "This method should be called on root only");
+
+			ConnectionSet connectionSet = new ConnectionSet();
+			this.ConnectMap(connectionSet);
+			
+			// Flatten the circuit
+			SymbolMapList list = new SymbolMapList();
+			this.Collect(list);
+			CircuitMap.Connect(connectionSet, list);
+
+			// Remove not used results
+			CircuitMap.CleanUp(list);
+
+			//TODO: optimize the list. What if sort it in such way that state will be allocated with a better locality, so it will be less cache misses?
+
+			CircuitState circuitState = new CircuitState(3);
+			// Allocate states for each result
+			foreach(SymbolMap symbolMap in list.SymbolMaps) {
+				foreach(Result result in symbolMap.Results) {
+					result.Allocate(circuitState);
+				}
+			}
+
+			// Generate functions
+			foreach(SymbolMap symbolMap in list.SymbolMaps) {
+				CircuitMap.Apply(circuitState, symbolMap, probeCapacity);
+			}
+			circuitState.EndDefinition();
+
+			return circuitState;
+		}
+
 		private void ConnectMap(ConnectionSet connectionSet) {
 			if(!connectionSet.IsConnected(this.Circuit)) {
 				if(this.children != null) {
@@ -175,39 +208,6 @@ namespace LogicCircuit {
 					}
 				}
 			}
-		}
-
-		public CircuitState Apply(int probeCapacity) {
-			Tracer.Assert(this.Circuit != null && this.CircuitSymbol == null && this.Parent == null, "This method should be called on root only");
-
-			ConnectionSet connectionSet = new ConnectionSet();
-			this.ConnectMap(connectionSet);
-			
-			// Flatten the circuit
-			SymbolMapList list = new SymbolMapList();
-			this.Collect(list);
-			CircuitMap.Connect(connectionSet, list);
-
-			// Remove not used results
-			CircuitMap.CleanUp(list);
-
-			//TODO: optimize the list. What if sort it in such way that state will be allocated with a better locality, so it will be less cache misses?
-
-			CircuitState circuitState = new CircuitState(3);
-			// Allocate states for each result
-			foreach(SymbolMap symbolMap in list.SymbolMaps) {
-				foreach(Result result in symbolMap.Results) {
-					result.Allocate(circuitState);
-				}
-			}
-
-			// Generate functions
-			foreach(SymbolMap symbolMap in list.SymbolMaps) {
-				CircuitMap.Apply(circuitState, symbolMap, probeCapacity);
-			}
-			circuitState.EndDefinition();
-
-			return circuitState;
 		}
 
 		private void Collect(SymbolMapList list) {
