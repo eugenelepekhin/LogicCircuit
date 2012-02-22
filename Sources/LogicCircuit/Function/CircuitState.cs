@@ -24,9 +24,6 @@ namespace LogicCircuit {
 		private HashSet<CircuitFunction> updated = new HashSet<CircuitFunction>();
 		private List<FunctionClock> clockList = new List<FunctionClock>();
 		private List<FunctionProbe> probeList = new List<FunctionProbe>();
-		private volatile bool invalidating = false;
-		private volatile HashSet<IFunctionVisual> invalid = new HashSet<IFunctionVisual>();
-		private HashSet<IFunctionVisual> invalidEmpty = new HashSet<IFunctionVisual>();
 
 		public Random Random { get; private set; }
 
@@ -95,34 +92,6 @@ namespace LogicCircuit {
 			}
 			if(wasUpdated && this.FunctionUpdated != null) {
 				this.FunctionUpdated(this, EventArgs.Empty);
-			}
-		}
-
-		public void Invalidate(IFunctionVisual function) {
-			RuntimeHelpers.PrepareConstrainedRegions();
-			try {
-				this.invalidating = true;
-				Thread.MemoryBarrier();
-				this.invalid.Add(function);
-			} finally {
-				this.invalidating = false;
-				Thread.MemoryBarrier();
-			}
-		}
-
-		public IEnumerable<IFunctionVisual> InvalidVisuals() {
-			if(0 < this.invalid.Count) {
-				HashSet<IFunctionVisual> current = this.invalid;
-				this.invalid = this.invalidEmpty;
-				Thread.MemoryBarrier();
-				while(this.invalidating);
-				Tracer.Assert(current != this.invalid);
-				List<IFunctionVisual> list = new List<IFunctionVisual>(current);
-				current.Clear();
-				this.invalidEmpty = current;
-				return list;
-			} else {
-				return null;
 			}
 		}
 

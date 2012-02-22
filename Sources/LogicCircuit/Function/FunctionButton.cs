@@ -22,10 +22,12 @@ namespace LogicCircuit {
 			}
 		}
 
+		public bool Invalid { get; set; }
+
 		public void SymbolPress() {
 			if(this.IsToggle) {
 				this.SetState(CircuitFunction.Not(this.State));
-				this.CircuitState.Invalidate(this);
+				this.Invalid = true;
 			} else {
 				this.SetState(State.On1);
 			}
@@ -38,15 +40,16 @@ namespace LogicCircuit {
 		}
 
 		public void TurnOn() {
-			this.CircuitSymbol.GuaranteeGlyph();
 			ButtonControl button = (ButtonControl)this.CircuitSymbol.ProbeView;
 			button.Clickable = true;
 		}
 
 		public void TurnOff() {
-			ButtonControl button = (ButtonControl)this.CircuitSymbol.ProbeView;
-			button.Clickable = false;
-			this.DrawState(State.Off);
+			if(this.CircuitSymbol.HasCreatedGlyph) {
+				ButtonControl button = (ButtonControl)this.CircuitSymbol.ProbeView;
+				button.Clickable = false;
+				this.DrawState(State.Off);
+			}
 		}
 
 		public void Redraw() {

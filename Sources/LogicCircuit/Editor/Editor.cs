@@ -138,7 +138,8 @@ namespace LogicCircuit {
 			Tracer.Assert(this.Power);
 			this.OpenLogicalCircuit(map.Circuit);
 			this.CircuitRunner.VisibleMap = map;
-			map.Redraw();
+			map.TurnOn();
+			map.Redraw(true);
 			this.Mainframe.Status = map.Path();
 		}
 

@@ -6,5 +6,6 @@ namespace LogicCircuit {
 		void TurnOn();
 		void TurnOff();
 		void Redraw();
+		bool Invalid { get; set; }
 	}
 }

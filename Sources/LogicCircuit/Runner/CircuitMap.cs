@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Threading;
+using System.Threading;
 
 namespace LogicCircuit {
 	public partial class CircuitMap : INotifyPropertyChanged {
@@ -19,6 +20,7 @@ namespace LogicCircuit {
 		private HashSet<IFunctionVisual> displays;
 		private Dictionary<CircuitSymbol, CircuitFunction> inputs;
 		private Dictionary<CircuitSymbol, FunctionMemory> memories;
+		private bool turnedOn = false;
 
 		private CircuitMap visible;
 		public CircuitMap Visible {
@@ -361,47 +363,54 @@ namespace LogicCircuit {
 		}
 
 		public void TurnOn() {
-			if(this.displays != null) {
-				foreach(IFunctionVisual func in this.displays) {
-					func.TurnOn();
-				}
-			}
-			if(this.inputs != null) {
-				foreach(CircuitFunction func in this.inputs.Values) {
-					IFunctionVisual visual = func as IFunctionVisual;
-					if(visual != null) {
-						visual.TurnOn();
+			if(!this.turnedOn) {
+				if(this.displays != null) {
+					foreach(IFunctionVisual func in this.displays) {
+						func.TurnOn();
 					}
 				}
-			}
-			foreach(CircuitMap map in this.Children) {
-				map.TurnOn();
+				if(this.inputs != null) {
+					foreach(CircuitFunction func in this.inputs.Values) {
+						IFunctionVisual visual = func as IFunctionVisual;
+						if(visual != null) {
+							visual.TurnOn();
+						}
+					}
+				}
+				this.turnedOn = true;
 			}
 		}
 
 		public void TurnOff() {
-			if(this.displays != null) {
-				foreach(IFunctionVisual func in this.displays) {
-					func.TurnOff();
-				}
-			}
-			if(this.inputs != null) {
-				foreach(CircuitFunction func in this.inputs.Values) {
-					IFunctionVisual visual = func as IFunctionVisual;
-					if(visual != null) {
-						visual.TurnOff();
+			if(this.turnedOn) {
+				if(this.displays != null) {
+					foreach(IFunctionVisual func in this.displays) {
+						func.TurnOff();
 					}
 				}
+				if(this.inputs != null) {
+					foreach(CircuitFunction func in this.inputs.Values) {
+						IFunctionVisual visual = func as IFunctionVisual;
+						if(visual != null) {
+							visual.TurnOff();
+						}
+					}
+				}
+				this.turnedOn = false;
 			}
 			foreach(CircuitMap map in this.Children) {
 				map.TurnOff();
 			}
 		}
 
-		public void Redraw() {
+		public void Redraw(bool force) {
 			if(this.displays != null) {
 				foreach(IFunctionVisual func in this.displays) {
-					func.Redraw();
+					if(force || func.Invalid) {
+						func.Invalid = false;
+						Thread.MemoryBarrier();
+						func.Redraw();
+					}
 				}
 			}
 		}

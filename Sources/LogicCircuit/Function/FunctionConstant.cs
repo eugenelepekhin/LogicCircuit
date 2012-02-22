@@ -21,10 +21,12 @@ namespace LogicCircuit {
 				if(newValue != this.Constant.ConstantValue) {
 					this.Constant.ConstantValue = newValue;
 					this.CircuitState.MarkUpdated(this);
-					this.CircuitState.Invalidate(this);
+					this.Invalid = true;
 				}
 			}
 		}
+
+		public bool Invalid { get; set; }
 
 		public override bool Evaluate() {
 			return this.SetResult(this.Value);
@@ -35,7 +37,9 @@ namespace LogicCircuit {
 		}
 
 		public void TurnOff() {
-			this.Redraw();
+			if(this.CircuitSymbol.HasCreatedGlyph) {
+				this.Redraw();
+			}
 		}
 
 		public void Redraw() {

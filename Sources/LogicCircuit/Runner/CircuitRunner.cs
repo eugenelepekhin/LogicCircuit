@@ -266,19 +266,7 @@ namespace LogicCircuit {
 			try {
 				this.updatingUI = true;
 				Thread.MemoryBarrier();
-				if(this.CircuitState != null) {
-					IEnumerable<IFunctionVisual> invalidVisuals = this.CircuitState.InvalidVisuals();
-					if(invalidVisuals != null) {
-						foreach(IFunctionVisual function in invalidVisuals) {
-							if(!this.running) {
-								break;
-							}
-							if(this.VisibleMap.IsVisible(function)) {
-								function.Redraw();
-							}
-						}
-					}
-				}
+				this.VisibleMap.Redraw(false);
 			} catch(ThreadAbortException) {
 			} catch(Exception exception) {
 				this.Editor.Mainframe.ReportException(exception);
