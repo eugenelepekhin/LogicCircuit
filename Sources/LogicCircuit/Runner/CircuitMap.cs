@@ -16,6 +16,7 @@ namespace LogicCircuit {
 		public CircuitSymbol CircuitSymbol { get; private set; }
 		public CircuitMap Parent { get; private set; }
 
+		private List<CircuitSymbol> symbols;
 		private Dictionary<CircuitSymbol, CircuitMap> children;
 		private HashSet<IFunctionVisual> displays;
 		private Dictionary<CircuitSymbol, CircuitFunction> inputs;
@@ -97,7 +98,9 @@ namespace LogicCircuit {
 		}
 
 		private void Expand() {
+			this.symbols = new List<CircuitSymbol>();
 			foreach(CircuitSymbol symbol in this.Circuit.CircuitSymbols()) {
+				this.symbols.Add(symbol);
 				LogicalCircuit lc = symbol.Circuit as LogicalCircuit;
 				if(lc != null) {
 					if(this.HasLoop(lc)) {
@@ -163,7 +166,7 @@ namespace LogicCircuit {
 		private void Connect(ConnectionSet connectionSet) {
 			Tracer.Assert(!connectionSet.IsConnected(this.Circuit));
 			Dictionary<GridPoint, List<Jam>> inJamMap = new Dictionary<GridPoint, List<Jam>>();
-			foreach(CircuitSymbol symbol in this.Circuit.CircuitSymbols()) {
+			foreach(CircuitSymbol symbol in this.symbols) {
 				foreach(Jam jam in symbol.Jams()) {
 					if(jam.Pin.PinType != PinType.Output) {
 						GridPoint p = jam.AbsolutePoint;
@@ -177,7 +180,7 @@ namespace LogicCircuit {
 				}
 			}
 			ConductorMap conductorMap = this.Circuit.ConductorMap();
-			foreach(CircuitSymbol symbol in this.Circuit.CircuitSymbols()) {
+			foreach(CircuitSymbol symbol in this.symbols) {
 				foreach(Jam outJam in symbol.Jams()) {
 					if(outJam.Pin.PinType != PinType.Input) {
 						Conductor conductor;
@@ -211,7 +214,7 @@ namespace LogicCircuit {
 		}
 
 		private void Collect(SymbolMapList list) {
-			foreach(CircuitSymbol symbol in this.Circuit.CircuitSymbols()) {
+			foreach(CircuitSymbol symbol in this.symbols) {
 				if(CircuitMap.IsPrimitive(symbol.Circuit)) {
 					list.AddSymbol(this, symbol);
 					foreach(Jam jam in symbol.Jams()) {
