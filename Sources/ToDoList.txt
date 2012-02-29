@@ -9,4 +9,3 @@ Display device
 Colors of symbols
 
 Running tree not always open the item when it clicked on the diagram
-On big project (many displays?) turn on and fast turn off will leave displays on

@@ -157,7 +157,7 @@ namespace LogicCircuit {
 				}
 				if(this.RootMap != null) {
 					while(this.updatingUI);
-					this.Editor.Mainframe.Dispatcher.BeginInvoke(new Action(() => this.RootMap.TurnOff()));
+					this.Editor.Mainframe.Dispatcher.BeginInvoke(new Action(() => this.RootMap.TurnOff()), DispatcherPriority.ApplicationIdle);
 				}
 				this.Editor.Mainframe.Status = Resources.PowerOff;
 			}
@@ -264,9 +264,11 @@ namespace LogicCircuit {
 
 		private void RefreshUI() {
 			try {
-				this.updatingUI = true;
-				Thread.MemoryBarrier();
-				this.VisibleMap.Redraw(false);
+				if(this.running) {
+					this.updatingUI = true;
+					Thread.MemoryBarrier();
+					this.VisibleMap.Redraw(false);
+				}
 			} catch(ThreadAbortException) {
 			} catch(Exception exception) {
 				this.Editor.Mainframe.ReportException(exception);
