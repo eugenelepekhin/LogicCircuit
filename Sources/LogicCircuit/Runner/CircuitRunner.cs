@@ -164,6 +164,7 @@ namespace LogicCircuit {
 		}
 
 		private void Run(PreciseTimer timer) {
+			bool singleCPU = (Environment.ProcessorCount < 2);
 			int slownesCount = 0;
 			int slownesMax = 2;
 			bool notifyPerf = false;
@@ -220,6 +221,9 @@ namespace LogicCircuit {
 						this.flipCount = 0;
 					}
 					this.evaluationGate.WaitOne();
+				} else if(maxSpeed && singleCPU) {
+					// On single CPU machine when circuit is running on max speed lets yield for UI thread to refresh displays.
+					Thread.Yield();
 				}
 			}
 			this.Editor.Mainframe.ErrorMessage(Resources.Oscillation);
