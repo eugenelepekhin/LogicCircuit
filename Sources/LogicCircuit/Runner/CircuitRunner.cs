@@ -247,12 +247,13 @@ namespace LogicCircuit {
 
 		private void MonitorUI() {
 			try {
+				Action refresh = new Action(this.RefreshUI);
 				while(this.running && this.refreshingGate != null && this.refreshingThread != null && this.evaluationThread != null) {
 					this.refreshingGate.WaitOne();
 					if(this.running && this.refreshingThread != null && this.evaluationThread != null && !this.refreshing) {
 						this.refreshing = true;
 						Thread.MemoryBarrier();
-						this.Editor.Mainframe.Dispatcher.BeginInvoke(DispatcherPriority.SystemIdle, new Action(this.RefreshUI));
+						this.Editor.Mainframe.Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, refresh);
 					}
 				}
 			} catch(ThreadAbortException) {
