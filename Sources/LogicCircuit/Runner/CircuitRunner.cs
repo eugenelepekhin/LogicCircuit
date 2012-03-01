@@ -100,7 +100,7 @@ namespace LogicCircuit {
 
 				if(this.Oscilloscoping && this.CircuitState.HasProbes) {
 					Tracer.Assert(this.DialogOscilloscope == null);
-					this.Editor.Mainframe.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(this.ShowOscilloscope));
+					this.Editor.Mainframe.Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new Action(this.ShowOscilloscope));
 				} else {
 					this.Oscilloscoping = false;
 				}
@@ -151,7 +151,7 @@ namespace LogicCircuit {
 					this.Editor.PropertyChanged -= editorPropertyChanged;
 				}
 				if(this.DialogOscilloscope != null) {
-					this.DialogOscilloscope.Dispatcher.BeginInvoke(DispatcherPriority.SystemIdle,
+					this.DialogOscilloscope.Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle,
 						new Action(this.DialogOscilloscope.Close)
 					);
 				}
