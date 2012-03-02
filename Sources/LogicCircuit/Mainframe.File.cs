@@ -66,7 +66,7 @@ namespace LogicCircuit {
 			try {
 				editor = new Editor(this, file);
 			} catch(SnapStoreException snapStoreException) {
-				Tracer.Report("DialogImport.Load", snapStoreException);
+				Tracer.Report("Mainframe.Edit", snapStoreException);
 				throw new CircuitException(Cause.CorruptedFile, snapStoreException, LogicCircuit.Resources.ErrorFileCorrupted(file));
 			}
 			if(this.Editor != null) {

@@ -9,21 +9,23 @@ namespace LogicCircuit {
 
 		public ConductorMap(LogicalCircuit logicalCircuit) {
 			foreach(Wire wire in logicalCircuit.Wires()) {
-				Tracer.Assert(wire.Point1 != wire.Point2);
+				GridPoint p1 = wire.Point1;
+				GridPoint p2 = wire.Point2;
+				Tracer.Assert(p1 != p2);
 				Conductor conductor;
-				if(this.TryGetValue(wire.Point1, out conductor)) {
+				if(this.TryGetValue(p1, out conductor)) {
 					Conductor other;
-					if(!this.TryGetValue(wire.Point2, out other)) {
-						this.map.Add(wire.Point2, conductor);
+					if(!this.TryGetValue(p2, out other)) {
+						this.map.Add(p2, conductor);
 					} else if(conductor != other) {
 						conductor = this.Join(conductor, other);
 					}
-				} else if(this.TryGetValue(wire.Point2, out conductor)) {
-					this.map.Add(wire.Point1, conductor);
+				} else if(this.TryGetValue(p2, out conductor)) {
+					this.map.Add(p1, conductor);
 				} else {
 					conductor = new Conductor();
-					this.map.Add(wire.Point1, conductor);
-					this.map.Add(wire.Point2, conductor);
+					this.map.Add(p1, conductor);
+					this.map.Add(p2, conductor);
 					this.list.Add(conductor);
 				}
 				conductor.Add(wire);

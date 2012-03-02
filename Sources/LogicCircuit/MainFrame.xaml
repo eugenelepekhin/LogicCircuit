@@ -234,6 +234,7 @@
 							ItemsSource="{Binding Path=Editor.CircuitRunner.Root}"
 							MouseDoubleClick="RunningMapDoubleClick"
 							SelectedItemChanged="RunningMapTreeViewSelectedItemChanged"
+							VirtualizingStackPanel.IsVirtualizing="True"
 						>
 							<TreeView.ItemContainerStyle>
 								<Style TargetType="TreeViewItem">

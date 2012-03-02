@@ -34,5 +34,9 @@ namespace LogicCircuit {
 			}
 			return false;
 		}
+
+		public virtual Jam InnerJam {
+			get { throw new InvalidOperationException("Should not be called. Only override call is allowed."); }
+		}
 	}
 }

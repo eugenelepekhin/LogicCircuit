@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
 using System.Xml;
+using LogicCircuit.DataPersistent;
 
 namespace LogicCircuit {
 	public partial class Wire {
@@ -74,6 +75,9 @@ namespace LogicCircuit {
 	public partial class WireSet {
 		public event EventHandler WireSetChanged;
 
+		//Holds logical circuits that holds wires that was changed in latest transaction
+		private HashSet<LogicalCircuit> invalidLogicalCircuit = null;
+
 		public void Load(XmlNodeList list) {
 			WireData.Load(this.Table, list, rowId => this.Create(rowId));
 		}
@@ -93,10 +97,31 @@ namespace LogicCircuit {
 			return this.Create(this.Table.Insert(ref data));
 		}
 
+		partial void NotifyWireSetChanged(TableChange<WireData> change) {
+			if(this.invalidLogicalCircuit != null) {
+				LogicalCircuit circuit = this.CircuitProject.LogicalCircuitSet.FindByLogicalCircuitId(
+					(change.Action == SnapTableAction.Delete) ? change.GetOldField(WireData.LogicalCircuitIdField.Field) : change.GetNewField(WireData.LogicalCircuitIdField.Field)
+				);
+				if(circuit != null) {
+					this.invalidLogicalCircuit.Add(circuit);
+				}
+			}
+		}
+
 		partial void EndNotifyWireSetChanged() {
 			EventHandler handler = this.WireSetChanged;
 			if(handler != null) {
 				handler(this, EventArgs.Empty);
+			}
+			if(this.invalidLogicalCircuit != null) {
+				foreach(LogicalCircuit circuit in this.invalidLogicalCircuit) {
+					circuit.UpdateConductorMap();
+				}
+				this.invalidLogicalCircuit.Clear();
+			} else {
+				// This is optimization to avoid the very first transaction that is loading of project. So in loading just update all the logical circuits.
+				this.invalidLogicalCircuit = new HashSet<LogicalCircuit>();
+				this.CircuitProject.LogicalCircuitSet.UpdateConductorMaps();
 			}
 		}
 	}

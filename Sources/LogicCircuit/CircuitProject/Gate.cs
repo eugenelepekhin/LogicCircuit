@@ -29,12 +29,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		public bool InvertedOutput {
-			get {
-				BasePin pin = this.Pins.FirstOrDefault(p => p.PinType == PinType.Output);
-				return pin != null && pin.Inverted;
-			}
-		}
+		public bool InvertedOutput { get; internal set; }
 
 		public int InputCount { get { return this.Pins.Count(p => p.PinType == PinType.Input); } }
 
@@ -135,6 +130,9 @@ namespace LogicCircuit {
 			if(!GateSet.IsValid(gateType, inputCount)) {
 				throw new ArgumentOutOfRangeException("inputCount");
 			}
+			if(invertedOutput && !GateSet.HasOutput(gateType)) {
+				throw new ArgumentOutOfRangeException("invertedOutput");
+			}
 			Gate gate = this.FindByGateId(GateSet.GateGuid(gateType, inputCount, invertedOutput));
 			if(gate == null) {
 				return this.Create(gateType, inputCount, invertedOutput);
@@ -151,14 +149,14 @@ namespace LogicCircuit {
 			GateType gateType = (GateType)(int)id[13];
 			int inputCount = (int)id[14];
 			bool invertedOutput = (id[15] == 0) ? false : true;
-			if(GateSet.IsValid(gateType) && GateSet.IsValid(gateType, inputCount) && GateSet.GateGuid(gateType, inputCount, invertedOutput) == gateId) {
+			if(GateSet.IsValid(gateType) && GateSet.IsValid(gateType, inputCount) && (!invertedOutput || GateSet.HasOutput(gateType)) && GateSet.GateGuid(gateType, inputCount, invertedOutput) == gateId) {
 				return this.Create(gateType, inputCount, invertedOutput);
 			}
 			return null;
 		}
 
 		private static Guid GateGuid(GateType gateType, int inputCount, bool invertedOutput) {
-			Tracer.Assert(gateType != GateType.Nop && GateSet.IsValid(gateType, inputCount));
+			Tracer.Assert(gateType != GateType.Nop && GateSet.IsValid(gateType, inputCount) && (!invertedOutput || GateSet.HasOutput(gateType)));
 			return new Guid(0, 0, 0, 0, 0, 0, 0, 0,
 				(byte)(int)gateType,
 				(byte)inputCount,
@@ -169,6 +167,7 @@ namespace LogicCircuit {
 		private Gate Create(GateType gateType, int inputCount, bool invertedOutput) {
 			Gate gate = this.CreateItem(GateSet.GateGuid(gateType, inputCount, invertedOutput));
 			gate.GateType = gateType;
+			gate.InvertedOutput = invertedOutput;
 			switch(gate.GateType) {
 			case GateType.Clock:
 				gate.Name = Resources.GateClockName;

@@ -12,8 +12,6 @@ namespace LogicCircuit {
 		public IEnumerable<int> Parameter { get { return this.parameter; } }
 		public IEnumerable<int> Result { get { return this.result; } }
 
-		public string Label { get; set; }
-
 		public long Iteration { get; set; }
 		public CircuitFunction[] Dependant { get; set; }
 
@@ -60,18 +58,20 @@ namespace LogicCircuit {
 			}
 		}
 
-		/*public static State FromChar(char c) {
-			switch(c) {
-			case '-':
-				return State.Off;
-			case '0':
-				return State.On0;
-			case '1':
-				return State.On1;
-			default:
-				throw new Exception(Resources.UnknownStateCharacter(c));
+		#if false
+			public static State FromChar(char c) {
+				switch(c) {
+				case '-':
+					return State.Off;
+				case '0':
+					return State.On0;
+				case '1':
+					return State.On1;
+				default:
+					throw new Exception(Resources.UnknownStateCharacter(c));
+				}
 			}
-		}*/
+		#endif
 
 		protected bool SetResult(int index, State state) {
 			if(this.CircuitState[this.result[index]] != state) {
@@ -166,36 +166,41 @@ namespace LogicCircuit {
 			return count;
 		}
 
-		public override string ToString() {
-			StringBuilder text = new StringBuilder();
-			text.Append(this.Name);
-			if(!string.IsNullOrEmpty(this.Label)) {
-				text.Append('<');
-				text.Append(this.Label);
-				text.Append('>');
-			}
-			text.Append("(");
-			bool comma = false;
-			foreach(int p in this.parameter) {
-				if(comma) {
-					text.Append(", ");
-				} else {
-					comma = true;
+		#if DEBUG
+			public override string ToString() {
+				StringBuilder text = new StringBuilder();
+				text.Append(this.Name);
+				#if false
+					//replace this block with some other representation of path in the running tree
+					if(!string.IsNullOrEmpty(this.Label)) {
+						text.Append('<');
+						text.Append(this.Label);
+						text.Append('>');
+					}
+				#endif
+				text.Append("(");
+				bool comma = false;
+				foreach(int p in this.parameter) {
+					if(comma) {
+						text.Append(", ");
+					} else {
+						comma = true;
+					}
+					text.Append(p);
 				}
-				text.Append(p);
-			}
-			text.Append(") -> [");
-			comma = false;
-			foreach(int r in this.result) {
-				if(comma) {
-					text.Append(", ");
-				} else {
-					comma = true;
+				text.Append(") -> [");
+				comma = false;
+				foreach(int r in this.result) {
+					if(comma) {
+						text.Append(", ");
+					} else {
+						comma = true;
+					}
+					text.Append(r);
 				}
-				text.Append(r);
+				text.Append("]");
+				return text.ToString();
 			}
-			text.Append("]");
-			return text.ToString();
-		}
+		#endif
 	}
 }

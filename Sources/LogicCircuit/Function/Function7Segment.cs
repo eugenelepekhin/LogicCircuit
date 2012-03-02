@@ -11,8 +11,6 @@ namespace LogicCircuit {
 		private static Brush[] stateBrush = null;
 
 		public CircuitSymbol CircuitSymbol { get; private set; }
-		private volatile bool evaluating;
-		private State[] stateCopy;
 
 		public Function7Segment(CircuitState circuitState, CircuitSymbol symbol, int[] parameter) : base(circuitState, parameter) {
 			if(Function7Segment.stateBrush == null) {
@@ -22,19 +20,15 @@ namespace LogicCircuit {
 				Function7Segment.stateBrush[(int)State.On1] = (Brush)App.CurrentApp.FindResource("Led7SegmentOn1");
 			}
 			this.CircuitSymbol = symbol;
-			this.stateCopy = new State[this.BitWidth];
 		}
 
+		public bool Invalid { get; set; }
+
 		public void Redraw() {
-			int count = 5;
-			do {
-				while(this.evaluating);
-				this.CopyTo(this.stateCopy);
-			} while(this.evaluating && 0 <= --count);
 			Canvas back = (Canvas)this.CircuitSymbol.ProbeView;
-			Tracer.Assert(back.Children.Count == this.stateCopy.Length);
-			for(int i = 0; i < this.stateCopy.Length; i++) {
-				Function7Segment.SetVisual((Shape)back.Children[i], this.stateCopy[i]);
+			Tracer.Assert(back.Children.Count == this.BitWidth);
+			for(int i = 0; i < this.BitWidth; i++) {
+				Function7Segment.SetVisual((Shape)back.Children[i], this[i]);
 			}
 		}
 
@@ -49,28 +43,21 @@ namespace LogicCircuit {
 		}
 
 		public override bool Evaluate() {
-			this.evaluating = true;
-			bool changed = false;
-			try {
-				changed = this.GetState();
-			} finally {
-				this.evaluating = false;
-			}
-			if(changed) {
-				this.CircuitState.Invalidate(this);
+			if(this.GetState()) {
+				this.Invalid = true;
 			}
 			return false;
 		}
 
 		public void TurnOn() {
-			this.evaluating = false;
-			this.CircuitSymbol.GuaranteeGlyph();
 		}
 
 		public void TurnOff() {
-			Canvas back = (Canvas)this.CircuitSymbol.ProbeView;
-			for(int i = 0; i < 8; i++) {
-				Function7Segment.SetVisual((Shape)back.Children[i], State.Off);
+			if(this.CircuitSymbol.HasCreatedGlyph) {
+				Canvas back = (Canvas)this.CircuitSymbol.ProbeView;
+				for(int i = 0; i < 8; i++) {
+					Function7Segment.SetVisual((Shape)back.Children[i], State.Off);
+				}
 			}
 		}
 	}

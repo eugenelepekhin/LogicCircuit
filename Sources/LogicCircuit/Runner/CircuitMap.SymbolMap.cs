@@ -221,13 +221,13 @@ namespace LogicCircuit {
 		private class Result : StateIndex {
 
 			public HashSet<Result> TriStateGroup { get; private set; }
-			public HashSet<Parameter> Parameters { get; private set; }
+			public List<Parameter> Parameters { get; private set; }
 			public int StateIndex { get; private set; }
 			public int PrivateIndex { get; private set; }
 
 			public Result(CircuitMap circuitMap, Jam jam, int bitNumber) : base(circuitMap, jam, bitNumber) {
 				Tracer.Assert(jam.Pin.PinType == PinType.Output);
-				this.Parameters = new HashSet<Parameter>();
+				this.Parameters = new List<Parameter>();
 				Gate gate = jam.Pin.Circuit as Gate;
 				if(gate != null && gate.GateType == GateType.TriState) {
 					this.TriStateGroup = new HashSet<Result>();
@@ -236,14 +236,13 @@ namespace LogicCircuit {
 			}
 
 			public void Add(Parameter parameter) {
-				bool added = this.Parameters.Add(parameter);
-				Tracer.Assert(added);
+				this.Parameters.Add(parameter);
 			}
 
 			public void Link(Result other) {
 				Tracer.Assert(this.TriStateGroup != null);
 				if(this.TriStateGroup != other.TriStateGroup) {
-					this.Parameters.UnionWith(other.Parameters);
+					this.Parameters.AddRange(other.Parameters);
 					this.TriStateGroup.UnionWith(other.TriStateGroup);
 					foreach(Result r in other.TriStateGroup) {
 						r.TriStateGroup = this.TriStateGroup;

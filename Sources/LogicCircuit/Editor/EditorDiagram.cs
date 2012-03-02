@@ -494,7 +494,7 @@ namespace LogicCircuit {
 
 		private void SelectConductor(Wire wire) {
 			Tracer.Assert(wire.LogicalCircuit == this.Project.LogicalCircuit);
-			ConductorMap map = new ConductorMap(this.Project.LogicalCircuit);
+			ConductorMap map = this.Project.LogicalCircuit.ConductorMap();
 			Conductor conductor;
 			if(map.TryGetValue(wire.Point1, out conductor)) {
 				this.Select(conductor.Wires);
@@ -503,7 +503,7 @@ namespace LogicCircuit {
 
 		private void UnselectConductor(Wire wire) {
 			Tracer.Assert(wire.LogicalCircuit == this.Project.LogicalCircuit);
-			ConductorMap map = new ConductorMap(this.Project.LogicalCircuit);
+			ConductorMap map = this.Project.LogicalCircuit.ConductorMap();
 			Conductor conductor;
 			if(map.TryGetValue(wire.Point1, out conductor)) {
 				foreach(Wire w in conductor.Wires) {

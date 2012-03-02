@@ -21,6 +21,8 @@ namespace LogicCircuit {
 			this.CircuitSymbol = symbol;
 		}
 
+		public bool Invalid { get; set; }
+
 		public void Redraw() {
 			Shape shape = (Shape)this.CircuitSymbol.ProbeView;
 			shape.Fill = FunctionLed.stateBrush[(int)this[0]];
@@ -28,18 +30,19 @@ namespace LogicCircuit {
 
 		public override bool Evaluate() {
 			if(this.GetState()) {
-				this.CircuitState.Invalidate(this);
+				this.Invalid = true;
 			}
 			return false;
 		}
 
 		public void TurnOn() {
-			this.CircuitSymbol.GuaranteeGlyph();
 		}
 
 		public void TurnOff() {
-			Shape shape = (Shape)this.CircuitSymbol.ProbeView;
-			shape.Fill = FunctionLed.stateBrush[(int)State.Off];
+			if(this.CircuitSymbol.HasCreatedGlyph) {
+				Shape shape = (Shape)this.CircuitSymbol.ProbeView;
+				shape.Fill = FunctionLed.stateBrush[(int)State.Off];
+			}
 		}
 	}
 }
