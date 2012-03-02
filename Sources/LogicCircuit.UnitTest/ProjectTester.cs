@@ -54,16 +54,14 @@ namespace LogicCircuit.UnitTest {
 			// First save project text to test directory
 			string path = Path.Combine(testContext.TestRunDirectory, string.Format("{0}.{1}.{2}.xml", testContext.FullyQualifiedTestClassName, testContext.TestName, DateTime.UtcNow.Ticks));
 			File.WriteAllText(path, projectText, Encoding.UTF8);
-			// Load if from test directory
+			// Load it from test directory
 			CircuitProject circuitProject = CircuitProject.Create(path);
 			File.Delete(path);
 			if(initialCircuit != null) {
 				ProjectTester.SwitchTo(circuitProject, initialCircuit);
 			}
 			ProjectTester.InitResources();
-			foreach(CircuitSymbol symbol in circuitProject.CircuitSymbolSet) {
-				symbol.GuaranteeGlyph();
-			}
+			ProjectTester.GuaranteeGlyph(circuitProject);
 			return circuitProject;
 		}
 
@@ -74,7 +72,14 @@ namespace LogicCircuit.UnitTest {
 			if(circuitProject.ProjectSet.Project.LogicalCircuit != circuit) {
 				circuitProject.InOmitTransaction(() => circuitProject.ProjectSet.Project.LogicalCircuit = circuit);
 			}
+			ProjectTester.GuaranteeGlyph(circuitProject);
 			return circuit;
+		}
+
+		private static void GuaranteeGlyph(CircuitProject circuitProject) {
+			foreach(CircuitSymbol symbol in circuitProject.ProjectSet.Project.LogicalCircuit.CircuitSymbols()) {
+				symbol.GuaranteeGlyph();
+			}
 		}
 
 		public static void InitResources() {
