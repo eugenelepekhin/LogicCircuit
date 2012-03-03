@@ -9,7 +9,6 @@ Display device
 Colors of symbols
 
 Running tree not always open the item when it clicked on the diagram
-Bug: GridPoint.ToString - check usage and localize
 Bug: CircuitFunction.ToChar - check usage
 Verify usage of CircuitState.ToString and make in debug only
 Bug: HyperlinkNavigationCommand.Execute uses parameter.ToString() change it to cast???
