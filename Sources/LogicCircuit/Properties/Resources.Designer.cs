@@ -1870,6 +1870,13 @@ namespace LogicCircuit {
 		}
 
 		/// <summary>
+		/// Looks up a localized string similar to Navigation to this address is not supported..
+		/// </summary>
+ 		public static string ErrorUnsupportedUri {
+			get { return ResourceManager.GetString("ErrorUnsupportedUri", Culture); }
+		}
+
+		/// <summary>
 		/// Looks up a localized string similar to ({0}, {1}).
 		/// </summary>
  		public static string GridPoint(int x, int y) {

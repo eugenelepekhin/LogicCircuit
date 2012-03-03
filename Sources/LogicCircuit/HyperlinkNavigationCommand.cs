@@ -17,17 +17,15 @@ namespace LogicCircuit {
 
 		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
 		public void Execute(object parameter) {
-			if(parameter != null) {
-				try {
-					Uri uri = new Uri(parameter.ToString());
-					if(!uri.IsFile && !uri.IsUnc &&
-						(StringComparer.OrdinalIgnoreCase.Equals(uri.Scheme, Uri.UriSchemeHttp) || StringComparer.OrdinalIgnoreCase.Equals(uri.Scheme, Uri.UriSchemeHttps))
-					) {
-						Process.Start(uri.AbsoluteUri);
-					}
-				} catch(Exception exception) {
-					App.Mainframe.ReportException(exception);
+			try {
+				Uri uri = parameter as Uri;
+				if(uri != null && !uri.IsFile && !uri.IsUnc &&
+					(StringComparer.OrdinalIgnoreCase.Equals(uri.Scheme, Uri.UriSchemeHttp) || StringComparer.OrdinalIgnoreCase.Equals(uri.Scheme, Uri.UriSchemeHttps))
+				) {
+					Process.Start(uri.AbsoluteUri);
 				}
+			} catch(Exception exception) {
+				App.Mainframe.ErrorMessage(LogicCircuit.Resources.ErrorUnsupportedUri, exception);
 			}
 		}
 	}
