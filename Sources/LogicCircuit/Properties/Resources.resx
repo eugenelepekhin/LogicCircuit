@@ -934,4 +934,13 @@ Do you want to remove the reference to it from the Recent Files list?</value>
   <data name="LogicalCircuitMainNotation" xml:space="preserve">
     <value>Main</value>
   </data>
+  <data name="PinTypeNameInput" xml:space="preserve">
+    <value>Input</value>
+  </data>
+  <data name="PinTypeNameNone" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="PinTypeNameOutput" xml:space="preserve">
+    <value>Output</value>
+  </data>
 </root>
