@@ -91,6 +91,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GeneratorItem.tt</DependentUpon>
     </Compile>
+    <Compile Include="ToStringHelper.cs" />
     <Compile Include="Transformation.cs" />
   </ItemGroup>
   <ItemGroup>
