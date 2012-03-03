@@ -10,7 +10,6 @@ Colors of symbols
 
 Running tree not always open the item when it clicked on the diagram
 
-Verify usage of CircuitState.ToString and make in debug only
 Bug: HyperlinkNavigationCommand.Execute uses parameter.ToString() change it to cast???
 Bug: Mainframe.FileOpenRecentCommandExecuted should e.Parameter.ToString() be a cast???
 Bug: SymbolMap, JamKey, Result, Parameter, SymbolMapKey ToString is it debug only?
