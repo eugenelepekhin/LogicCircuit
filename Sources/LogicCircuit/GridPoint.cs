@@ -32,7 +32,7 @@ namespace LogicCircuit {
 		}
 
 		public override string ToString() {
-			return string.Format(System.Globalization.CultureInfo.InvariantCulture, "({0}, {1})", this.X, this.Y);
+			return Resources.GridPoint(this.X, this.Y);
 		}
 
 		public GridPoint Offset(int x, int y) {

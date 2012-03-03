@@ -1868,5 +1868,12 @@ namespace LogicCircuit {
  		public static string PinTypeNameOutput {
 			get { return ResourceManager.GetString("PinTypeNameOutput", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to ({0}, {1}).
+		/// </summary>
+ 		public static string GridPoint(int x, int y) {
+			return string.Format(Culture, ResourceManager.GetString("GridPoint", Culture), x, y);
+		}
 	}
 }
