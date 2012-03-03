@@ -31,9 +31,7 @@ namespace LogicCircuit {
 
 		private void FileOpenRecentCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
-				if(e.Parameter != null) {
-					this.OpenRecent(e.Parameter.ToString());
-				}
+				this.OpenRecent(e.Parameter as string);
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.FileOpenRecentCommandExecuted", exception);
 				this.ReportException(exception);
