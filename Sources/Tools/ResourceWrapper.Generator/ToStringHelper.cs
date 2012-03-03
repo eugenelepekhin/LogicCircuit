@@ -26,11 +26,9 @@ namespace ResourceWrapper.Generator {
 		/// <param name="objectToConvert"></param>
 		/// <returns></returns>
 		public string ToStringWithCulture(object objectToConvert) {
-			#if false
 			if(objectToConvert == null) {
 				throw new ArgumentNullException("objectToConvert");
 			}
-
 			Type type = objectToConvert.GetType();
 			MethodInfo method = type.GetMethod("ToString", new Type[] { typeof(IFormatProvider) });
 			if(method != null) {
@@ -38,8 +36,6 @@ namespace ResourceWrapper.Generator {
 			} else {
 				return objectToConvert.ToString();
 			}
-			#endif
-			return objectToConvert.ToString();
 		}
 
 		public string ToStringWithCulture(string text) {
