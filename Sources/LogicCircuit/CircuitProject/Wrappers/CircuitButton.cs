@@ -193,15 +193,17 @@ namespace LogicCircuit {
 			}
 		}
 
+		private static IField<CircuitButtonData>[] fields = {
+			CircuitButtonIdField.Field,
+			NotationField.Field,
+			IsToggleField.Field,
+			NoteField.Field,
+			CircuitButtonField.Field
+		};
+
 		// Creates table.
 		public static TableSnapshot<CircuitButtonData> CreateTable(StoreSnapshot store) {
-			TableSnapshot<CircuitButtonData> table = new TableSnapshot<CircuitButtonData>(store, "CircuitButton"
-				,CircuitButtonIdField.Field
-				,NotationField.Field
-				,IsToggleField.Field
-				,NoteField.Field
-				,CircuitButtonField.Field
-			);
+			TableSnapshot<CircuitButtonData> table = new TableSnapshot<CircuitButtonData>(store, "CircuitButton", CircuitButtonData.fields);
 			// Create all but foreign keys of the table
 			table.MakeUnique("PK_CircuitButton", CircuitButtonData.CircuitButtonIdField.Field , true);
 			// Return created table
@@ -234,31 +236,55 @@ namespace LogicCircuit {
 		}
 
 		public static void Load(TableSnapshot<CircuitButtonData> table, XmlNodeList list, Action<RowId> register) {
-			Dictionary<string, IFieldSerializer> field = new Dictionary<string, IFieldSerializer>();
-			foreach(IField<CircuitButtonData> f in table.Fields) {
-				IFieldSerializer serializer = f as IFieldSerializer;
-				if(serializer != null) {
-					field.Add(f.Name, serializer);
-				}
-			}
 			foreach(XmlElement node in list) {
 				Debug.Assert(node.LocalName == table.Name);
 				CircuitButtonData data = new CircuitButtonData();
-				foreach(IFieldSerializer serializer in field.Values) {
-					serializer.SetDefault(ref data);
-				}
-				foreach(XmlNode child in node.ChildNodes) {
-					XmlElement c = child as XmlElement;
-					IFieldSerializer serializer;
-					if(c != null && c.NamespaceURI == node.NamespaceURI && field.TryGetValue(c.LocalName, out serializer)) {
-						serializer.SetTextValue(ref data, c.InnerText);
+				// Initialize 'data' with default values: 
+				for (int i = 0; i < CircuitButtonData.fields.Length; i ++) {
+					IFieldSerializer serializer = CircuitButtonData.fields[i] as IFieldSerializer;
+					if (serializer != null) {
+						serializer.SetDefault(ref data);
 					}
 				}
+				// For each child of 'node' deserialize the field of the 'data' record
+				int hintIndex = 0;
+				foreach(XmlNode child in node.ChildNodes) {
+					XmlElement c = child as XmlElement;
+					if(c != null && c.NamespaceURI == node.NamespaceURI) {
+						IFieldSerializer serializer = FindField(c.LocalName, ref hintIndex);
+						if (serializer != null) {
+							serializer.SetTextValue(ref data, c.InnerText);
+						}
+					}
+				}
+				// insert 'data' into the table
 				RowId rowId = table.Insert(ref data);
+				// 'register' it (create realm object)
 				if(register != null) {
 					register(rowId);
 				}
 			}
+		}
+
+		private static IFieldSerializer FindField(string name, ref int hint) {
+			// We serialize/deserialize fields in the same order so result would always be at hint position or after it if hint is skipped during the serialization
+			Debug.Assert(0 <= hint && hint <= CircuitButtonData.fields.Length);
+			for (int i = hint; i < CircuitButtonData.fields.Length; i ++) {
+				if (CircuitButtonData.fields[i].Name == name) {
+					hint = i + 1;
+					return CircuitButtonData.fields[i] as IFieldSerializer;
+				}
+			}
+
+			// We don't find the field in expected place. Lets look the beginning of the list in case it is out of order
+			for (int i = 0; i < hint; i ++) {
+				if (CircuitButtonData.fields[i].Name == name) {
+					return CircuitButtonData.fields[i] as IFieldSerializer;
+				}
+			}
+
+			// Ups. Still don't find. 
+			return null;
 		}
 	}
 

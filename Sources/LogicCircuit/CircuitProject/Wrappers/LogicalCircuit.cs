@@ -229,16 +229,18 @@ namespace LogicCircuit {
 			}
 		}
 
+		private static IField<LogicalCircuitData>[] fields = {
+			LogicalCircuitIdField.Field,
+			NameField.Field,
+			NotationField.Field,
+			DescriptionField.Field,
+			CategoryField.Field,
+			LogicalCircuitField.Field
+		};
+
 		// Creates table.
 		public static TableSnapshot<LogicalCircuitData> CreateTable(StoreSnapshot store) {
-			TableSnapshot<LogicalCircuitData> table = new TableSnapshot<LogicalCircuitData>(store, "LogicalCircuit"
-				,LogicalCircuitIdField.Field
-				,NameField.Field
-				,NotationField.Field
-				,DescriptionField.Field
-				,CategoryField.Field
-				,LogicalCircuitField.Field
-			);
+			TableSnapshot<LogicalCircuitData> table = new TableSnapshot<LogicalCircuitData>(store, "LogicalCircuit", LogicalCircuitData.fields);
 			// Create all but foreign keys of the table
 			table.MakeUnique("PK_LogicalCircuit", LogicalCircuitData.LogicalCircuitIdField.Field , true);
 			table.MakeUnique("AK_LogicalCircuit_Name", LogicalCircuitData.NameField.Field , false);
@@ -272,31 +274,55 @@ namespace LogicCircuit {
 		}
 
 		public static void Load(TableSnapshot<LogicalCircuitData> table, XmlNodeList list, Action<RowId> register) {
-			Dictionary<string, IFieldSerializer> field = new Dictionary<string, IFieldSerializer>();
-			foreach(IField<LogicalCircuitData> f in table.Fields) {
-				IFieldSerializer serializer = f as IFieldSerializer;
-				if(serializer != null) {
-					field.Add(f.Name, serializer);
-				}
-			}
 			foreach(XmlElement node in list) {
 				Debug.Assert(node.LocalName == table.Name);
 				LogicalCircuitData data = new LogicalCircuitData();
-				foreach(IFieldSerializer serializer in field.Values) {
-					serializer.SetDefault(ref data);
-				}
-				foreach(XmlNode child in node.ChildNodes) {
-					XmlElement c = child as XmlElement;
-					IFieldSerializer serializer;
-					if(c != null && c.NamespaceURI == node.NamespaceURI && field.TryGetValue(c.LocalName, out serializer)) {
-						serializer.SetTextValue(ref data, c.InnerText);
+				// Initialize 'data' with default values: 
+				for (int i = 0; i < LogicalCircuitData.fields.Length; i ++) {
+					IFieldSerializer serializer = LogicalCircuitData.fields[i] as IFieldSerializer;
+					if (serializer != null) {
+						serializer.SetDefault(ref data);
 					}
 				}
+				// For each child of 'node' deserialize the field of the 'data' record
+				int hintIndex = 0;
+				foreach(XmlNode child in node.ChildNodes) {
+					XmlElement c = child as XmlElement;
+					if(c != null && c.NamespaceURI == node.NamespaceURI) {
+						IFieldSerializer serializer = FindField(c.LocalName, ref hintIndex);
+						if (serializer != null) {
+							serializer.SetTextValue(ref data, c.InnerText);
+						}
+					}
+				}
+				// insert 'data' into the table
 				RowId rowId = table.Insert(ref data);
+				// 'register' it (create realm object)
 				if(register != null) {
 					register(rowId);
 				}
 			}
+		}
+
+		private static IFieldSerializer FindField(string name, ref int hint) {
+			// We serialize/deserialize fields in the same order so result would always be at hint position or after it if hint is skipped during the serialization
+			Debug.Assert(0 <= hint && hint <= LogicalCircuitData.fields.Length);
+			for (int i = hint; i < LogicalCircuitData.fields.Length; i ++) {
+				if (LogicalCircuitData.fields[i].Name == name) {
+					hint = i + 1;
+					return LogicalCircuitData.fields[i] as IFieldSerializer;
+				}
+			}
+
+			// We don't find the field in expected place. Lets look the beginning of the list in case it is out of order
+			for (int i = 0; i < hint; i ++) {
+				if (LogicalCircuitData.fields[i].Name == name) {
+					return LogicalCircuitData.fields[i] as IFieldSerializer;
+				}
+			}
+
+			// Ups. Still don't find. 
+			return null;
 		}
 	}
 

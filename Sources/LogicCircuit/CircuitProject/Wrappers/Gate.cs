@@ -64,12 +64,14 @@ namespace LogicCircuit {
 			}
 		}
 
+		private static IField<GateData>[] fields = {
+			GateIdField.Field,
+			GateField.Field
+		};
+
 		// Creates table.
 		public static TableSnapshot<GateData> CreateTable(StoreSnapshot store) {
-			TableSnapshot<GateData> table = new TableSnapshot<GateData>(store, "Gate"
-				,GateIdField.Field
-				,GateField.Field
-			);
+			TableSnapshot<GateData> table = new TableSnapshot<GateData>(store, "Gate", GateData.fields);
 			// Create all but foreign keys of the table
 			table.MakeUnique("PK_Gate", GateData.GateIdField.Field , true);
 			// Return created table

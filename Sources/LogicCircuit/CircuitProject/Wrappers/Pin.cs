@@ -377,20 +377,22 @@ namespace LogicCircuit {
 			}
 		}
 
+		private static IField<PinData>[] fields = {
+			PinIdField.Field,
+			CircuitIdField.Field,
+			BitWidthField.Field,
+			PinTypeField.Field,
+			PinSideField.Field,
+			InvertedField.Field,
+			NameField.Field,
+			NoteField.Field,
+			JamNotationField.Field,
+			PinField.Field
+		};
+
 		// Creates table.
 		public static TableSnapshot<PinData> CreateTable(StoreSnapshot store) {
-			TableSnapshot<PinData> table = new TableSnapshot<PinData>(store, "Pin"
-				,PinIdField.Field
-				,CircuitIdField.Field
-				,BitWidthField.Field
-				,PinTypeField.Field
-				,PinSideField.Field
-				,InvertedField.Field
-				,NameField.Field
-				,NoteField.Field
-				,JamNotationField.Field
-				,PinField.Field
-			);
+			TableSnapshot<PinData> table = new TableSnapshot<PinData>(store, "Pin", PinData.fields);
 			// Create all but foreign keys of the table
 			table.MakeUnique("PK_Pin", PinData.PinIdField.Field , true);
 			table.MakeUnique("AK_Pin_Name", PinData.CircuitIdField.Field, PinData.NameField.Field);
@@ -426,31 +428,55 @@ namespace LogicCircuit {
 		}
 
 		public static void Load(TableSnapshot<PinData> table, XmlNodeList list, Action<RowId> register) {
-			Dictionary<string, IFieldSerializer> field = new Dictionary<string, IFieldSerializer>();
-			foreach(IField<PinData> f in table.Fields) {
-				IFieldSerializer serializer = f as IFieldSerializer;
-				if(serializer != null) {
-					field.Add(f.Name, serializer);
-				}
-			}
 			foreach(XmlElement node in list) {
 				Debug.Assert(node.LocalName == table.Name);
 				PinData data = new PinData();
-				foreach(IFieldSerializer serializer in field.Values) {
-					serializer.SetDefault(ref data);
-				}
-				foreach(XmlNode child in node.ChildNodes) {
-					XmlElement c = child as XmlElement;
-					IFieldSerializer serializer;
-					if(c != null && c.NamespaceURI == node.NamespaceURI && field.TryGetValue(c.LocalName, out serializer)) {
-						serializer.SetTextValue(ref data, c.InnerText);
+				// Initialize 'data' with default values: 
+				for (int i = 0; i < PinData.fields.Length; i ++) {
+					IFieldSerializer serializer = PinData.fields[i] as IFieldSerializer;
+					if (serializer != null) {
+						serializer.SetDefault(ref data);
 					}
 				}
+				// For each child of 'node' deserialize the field of the 'data' record
+				int hintIndex = 0;
+				foreach(XmlNode child in node.ChildNodes) {
+					XmlElement c = child as XmlElement;
+					if(c != null && c.NamespaceURI == node.NamespaceURI) {
+						IFieldSerializer serializer = FindField(c.LocalName, ref hintIndex);
+						if (serializer != null) {
+							serializer.SetTextValue(ref data, c.InnerText);
+						}
+					}
+				}
+				// insert 'data' into the table
 				RowId rowId = table.Insert(ref data);
+				// 'register' it (create realm object)
 				if(register != null) {
 					register(rowId);
 				}
 			}
+		}
+
+		private static IFieldSerializer FindField(string name, ref int hint) {
+			// We serialize/deserialize fields in the same order so result would always be at hint position or after it if hint is skipped during the serialization
+			Debug.Assert(0 <= hint && hint <= PinData.fields.Length);
+			for (int i = hint; i < PinData.fields.Length; i ++) {
+				if (PinData.fields[i].Name == name) {
+					hint = i + 1;
+					return PinData.fields[i] as IFieldSerializer;
+				}
+			}
+
+			// We don't find the field in expected place. Lets look the beginning of the list in case it is out of order
+			for (int i = 0; i < hint; i ++) {
+				if (PinData.fields[i].Name == name) {
+					return PinData.fields[i] as IFieldSerializer;
+				}
+			}
+
+			// Ups. Still don't find. 
+			return null;
 		}
 	}
 

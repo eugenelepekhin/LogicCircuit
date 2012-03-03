@@ -64,12 +64,14 @@ namespace LogicCircuit {
 			}
 		}
 
+		private static IField<CircuitData>[] fields = {
+			CircuitIdField.Field,
+			CircuitField.Field
+		};
+
 		// Creates table.
 		public static TableSnapshot<CircuitData> CreateTable(StoreSnapshot store) {
-			TableSnapshot<CircuitData> table = new TableSnapshot<CircuitData>(store, "Circuit"
-				,CircuitIdField.Field
-				,CircuitField.Field
-			);
+			TableSnapshot<CircuitData> table = new TableSnapshot<CircuitData>(store, "Circuit", CircuitData.fields);
 			// Create all but foreign keys of the table
 			table.MakeUnique("PK_Circuit", CircuitData.CircuitIdField.Field , true);
 			// Return created table

@@ -244,20 +244,22 @@ namespace LogicCircuit {
 			}
 		}
 
+		private static IField<DevicePinData>[] fields = {
+			PinIdField.Field,
+			CircuitIdField.Field,
+			BitWidthField.Field,
+			PinTypeField.Field,
+			PinSideField.Field,
+			InvertedField.Field,
+			NameField.Field,
+			NoteField.Field,
+			JamNotationField.Field,
+			DevicePinField.Field
+		};
+
 		// Creates table.
 		public static TableSnapshot<DevicePinData> CreateTable(StoreSnapshot store) {
-			TableSnapshot<DevicePinData> table = new TableSnapshot<DevicePinData>(store, "DevicePin"
-				,PinIdField.Field
-				,CircuitIdField.Field
-				,BitWidthField.Field
-				,PinTypeField.Field
-				,PinSideField.Field
-				,InvertedField.Field
-				,NameField.Field
-				,NoteField.Field
-				,JamNotationField.Field
-				,DevicePinField.Field
-			);
+			TableSnapshot<DevicePinData> table = new TableSnapshot<DevicePinData>(store, "DevicePin", DevicePinData.fields);
 			// Create all but foreign keys of the table
 			table.MakeUnique("PK_DevicePin", DevicePinData.PinIdField.Field , true);
 			table.MakeUnique("AK_DevicePinName", DevicePinData.CircuitIdField.Field, DevicePinData.NameField.Field);
