@@ -31,6 +31,7 @@ namespace LogicCircuit {
 			return this.X ^ this.Y;
 		}
 
+		// This is used to display coordinates to user. Do not make it debug only.
 		public override string ToString() {
 			return Resources.GridPoint(this.X, this.Y);
 		}

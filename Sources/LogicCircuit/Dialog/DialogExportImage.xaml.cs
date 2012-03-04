@@ -43,6 +43,7 @@ namespace LogicCircuit {
 				return false;
 			}
 
+			// This is used in dialog to display encoding names. Do not make it debug only
 			public override string ToString() {
 				return this.Name;
 			}
