@@ -159,13 +159,15 @@ namespace LogicCircuit {
 			}
 		#endif
 
-		public override string ToString() {
-			StringBuilder text = new StringBuilder();
-			foreach(State s in this.state) {
-				text.Append(CircuitFunction.ToChar(s));
+		#if DEBUG
+			public override string ToString() {
+				StringBuilder text = new StringBuilder();
+				foreach(State s in this.state) {
+					text.Append(CircuitFunction.ToChar(s));
+				}
+				return text.ToString();
 			}
-			return text.ToString();
-		}
+		#endif
 
 		private class DirtyList {
 			private FunctionList current = new FunctionList(1024);

@@ -65,9 +65,11 @@ namespace LogicCircuit {
 				return this.CircuitMap.GetHashCode() ^ this.CircuitSymbol.GetHashCode();
 			}
 
-			public override string ToString() {
-				return string.Format(CultureInfo.InvariantCulture, "SymbolMapKey of {0}", this.CircuitMap.Path(this.CircuitSymbol));
-			}
+			#if DEBUG
+				public override string ToString() {
+					return string.Format(CultureInfo.InvariantCulture, "SymbolMapKey of {0}", this.CircuitMap.Path(this.CircuitSymbol));
+				}
+			#endif
 		}
 
 		private class SymbolMap {
@@ -100,11 +102,13 @@ namespace LogicCircuit {
 					return this.Jam.GetHashCode() ^ this.BitNumber;
 				}
 
-				public override string ToString() {
-					return string.Format(CultureInfo.InvariantCulture, "JamKey of jam{0} bit #{1}",
-						this.Jam.AbsolutePoint.ToString(), this.BitNumber
-					);
-				}
+				#if DEBUG
+					public override string ToString() {
+						return string.Format(CultureInfo.InvariantCulture, "JamKey of jam{0} bit #{1}",
+							this.Jam.AbsolutePoint.ToString(), this.BitNumber
+						);
+					}
+				#endif
 			}
 
 			private Dictionary<JamKey, Result> results = new Dictionary<JamKey, Result>();
@@ -183,9 +187,11 @@ namespace LogicCircuit {
 				return null;
 			}
 
-			public override string ToString() {
-				return string.Format(CultureInfo.InvariantCulture, "SymbolMap of {0}", this.CircuitMap.Path(this.CircuitSymbol));
-			}
+			#if DEBUG
+				public override string ToString() {
+					return string.Format(CultureInfo.InvariantCulture, "SymbolMap of {0}", this.CircuitMap.Path(this.CircuitSymbol));
+				}
+			#endif
 		}
 
 		private abstract class StateIndex {
@@ -270,11 +276,13 @@ namespace LogicCircuit {
 				Tracer.Assert(0 < this.StateIndex);
 			}
 
-			public override string ToString() {
-				return string.Format(CultureInfo.InvariantCulture, "Result: jam{0}, bit#{1} of {2}",
-					this.Jam.AbsolutePoint.ToString(), this.BitNumber, this.CircuitMap.Path((CircuitSymbol)this.Jam.CircuitSymbol)
-				);
-			}
+			#if DEBUG
+				public override string ToString() {
+					return string.Format(CultureInfo.InvariantCulture, "Result: jam{0}, bit#{1} of {2}",
+						this.Jam.AbsolutePoint.ToString(), this.BitNumber, this.CircuitMap.Path((CircuitSymbol)this.Jam.CircuitSymbol)
+					);
+				}
+			#endif
 		}
 
 		private class Parameter : StateIndex {
@@ -286,11 +294,13 @@ namespace LogicCircuit {
 				this.Result = result;
 			}
 
-			public override string ToString() {
-				return string.Format(CultureInfo.InvariantCulture, "Parameter: jam{0}, bit#{1} of {2}",
-					this.Jam.AbsolutePoint.ToString(), this.BitNumber, this.CircuitMap.Path((CircuitSymbol)this.Jam.CircuitSymbol)
-				);
-			}
+			#if DEBUG
+				public override string ToString() {
+					return string.Format(CultureInfo.InvariantCulture, "Parameter: jam{0}, bit#{1} of {2}",
+						this.Jam.AbsolutePoint.ToString(), this.BitNumber, this.CircuitMap.Path((CircuitSymbol)this.Jam.CircuitSymbol)
+					);
+				}
+			#endif
 		}
 
 		private class ResultComparer : IComparer<Result> {

@@ -18,7 +18,20 @@ namespace LogicCircuit {
 			this.DataContext = this;
 			this.pin = pin;
 			this.InitializeComponent();
-			this.type.Text = this.pin.PinType.ToString();
+			switch(this.pin.PinType) {
+			case PinType.None:
+				this.type.Text = LogicCircuit.Resources.PinTypeNameNone;
+				break;
+			case PinType.Input:
+				this.type.Text = LogicCircuit.Resources.PinTypeNameInput;
+				break;
+			case PinType.Output:
+				this.type.Text = LogicCircuit.Resources.PinTypeNameOutput;
+				break;
+			default:
+				Tracer.Fail("Unknown pin type");
+				break;
+			}
 			this.name.Text = this.pin.Name;
 			this.notation.Text = this.pin.JamNotation;
 			this.note.Text = this.pin.Note;

@@ -46,6 +46,7 @@ namespace LogicCircuit {
 		}
 
 		public static char ToChar(State state) {
+			// The chars are hardcoded if needed must be localized.
 			switch(state) {
 			case State.Off:
 				return '-';

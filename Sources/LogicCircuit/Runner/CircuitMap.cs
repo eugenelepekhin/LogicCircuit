@@ -604,9 +604,11 @@ namespace LogicCircuit {
 				if(parameter != null) {
 					function = new FunctionLed(circuitState, symbolMap.CircuitSymbol, parameter.Result.StateIndex);
 				} else {
-					Tracer.FullInfo("DefineLed", "{0} on {1}{2} is not connected",
-						symbolMap.CircuitSymbol.Circuit, symbolMap.CircuitSymbol.LogicalCircuit, symbolMap.CircuitSymbol.Point
-					);
+					#if DEBUG
+						Tracer.FullInfo("DefineLed", "{0} on {1}{2} is not connected",
+							symbolMap.CircuitSymbol.Circuit, symbolMap.CircuitSymbol.LogicalCircuit, symbolMap.CircuitSymbol.Point
+						);
+					#endif
 				}
 			} else {
 				jam.Sort(JamComparer.Comparer);
@@ -619,9 +621,11 @@ namespace LogicCircuit {
 						connected = true;
 					} else {
 						param[i] = 0;
-						Tracer.FullInfo("DefineLed", "{0} on {1}{2} is not connected",
-							symbolMap.CircuitSymbol.Circuit, symbolMap.CircuitSymbol.LogicalCircuit, symbolMap.CircuitSymbol.Point
-						);
+						#if DEBUG
+							Tracer.FullInfo("DefineLed", "{0} on {1}{2} is not connected",
+								symbolMap.CircuitSymbol.Circuit, symbolMap.CircuitSymbol.LogicalCircuit, symbolMap.CircuitSymbol.Point
+							);
+						#endif
 					}
 				}
 				if(connected) {
@@ -679,15 +683,19 @@ namespace LogicCircuit {
 			Parameter enable = symbolMap.Parameter(jam[1], 0);
 			bool build = true;
 			if(enable == null) {
-				Tracer.FullInfo("DefineTriState", "Enable bit of {0} on {1}{2} is not connected",
-					symbolMap.CircuitSymbol.Circuit, symbolMap.CircuitSymbol.LogicalCircuit, symbolMap.CircuitSymbol.Point
-				);
+				#if DEBUG
+					Tracer.FullInfo("DefineTriState", "Enable bit of {0} on {1}{2} is not connected",
+						symbolMap.CircuitSymbol.Circuit, symbolMap.CircuitSymbol.LogicalCircuit, symbolMap.CircuitSymbol.Point
+					);
+				#endif
 				build = false;
 			}
 			if(parameter == null) {
-				Tracer.FullInfo("DefineTriState", "Data bit of {0} on {1}{2} is not connected",
-					symbolMap.CircuitSymbol.Circuit, symbolMap.CircuitSymbol.LogicalCircuit, symbolMap.CircuitSymbol.Point
-				);
+				#if DEBUG
+					Tracer.FullInfo("DefineTriState", "Data bit of {0} on {1}{2} is not connected",
+						symbolMap.CircuitSymbol.Circuit, symbolMap.CircuitSymbol.LogicalCircuit, symbolMap.CircuitSymbol.Point
+					);
+				#endif
 				build = false;
 			}
 			if(build) {

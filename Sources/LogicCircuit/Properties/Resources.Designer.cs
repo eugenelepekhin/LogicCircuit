@@ -1847,5 +1847,40 @@ namespace LogicCircuit {
  		public static string LogicalCircuitMainNotation {
 			get { return ResourceManager.GetString("LogicalCircuitMainNotation", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Input.
+		/// </summary>
+ 		public static string PinTypeNameInput {
+			get { return ResourceManager.GetString("PinTypeNameInput", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to None.
+		/// </summary>
+ 		public static string PinTypeNameNone {
+			get { return ResourceManager.GetString("PinTypeNameNone", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Output.
+		/// </summary>
+ 		public static string PinTypeNameOutput {
+			get { return ResourceManager.GetString("PinTypeNameOutput", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Navigation to this address is not supported..
+		/// </summary>
+ 		public static string ErrorUnsupportedUri {
+			get { return ResourceManager.GetString("ErrorUnsupportedUri", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to ({0}, {1}).
+		/// </summary>
+ 		public static string GridPoint(int x, int y) {
+			return string.Format(Culture, ResourceManager.GetString("GridPoint", Culture), x, y);
+		}
 	}
 }
