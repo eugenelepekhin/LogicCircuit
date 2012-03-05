@@ -165,8 +165,7 @@ if(this.RealmType == RealmType.Universe) {#>
 <#}#>
 		private static IField<<#=this.Table.Name#>Data>[] fields = {
 <#foreach(Column column in this.Table.Columns) {#>
-			<#=column.Name#>Field.Field<#if(!column.IsLast() || (this.RealmType == RealmType.Universe)) {#>,
-<#}#>
+			<#=column.Name#>Field.Field,
 <#}#>
 <#if(this.RealmType == RealmType.Universe) {#>
 			<#=this.Table.Name#>Field.Field
@@ -261,7 +260,7 @@ foreach(Key key in this.Table.Keys) {
 				foreach(XmlNode child in node.ChildNodes) {
 					XmlElement c = child as XmlElement;
 					if(c != null && c.NamespaceURI == node.NamespaceURI) {
-						IFieldSerializer serializer = FindField(c.LocalName, ref hintIndex);
+						IFieldSerializer serializer = <#=this.Table.Name#>Data.FindField(c.LocalName, ref hintIndex);
 						if (serializer != null) {
 							serializer.SetTextValue(ref data, c.InnerText);
 						}

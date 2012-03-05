@@ -255,7 +255,7 @@ namespace LogicCircuit {
 				foreach(XmlNode child in node.ChildNodes) {
 					XmlElement c = child as XmlElement;
 					if(c != null && c.NamespaceURI == node.NamespaceURI) {
-						IFieldSerializer serializer = FindField(c.LocalName, ref hintIndex);
+						IFieldSerializer serializer = ConstantData.FindField(c.LocalName, ref hintIndex);
 						if (serializer != null) {
 							serializer.SetTextValue(ref data, c.InnerText);
 						}
