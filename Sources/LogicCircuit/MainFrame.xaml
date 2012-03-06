@@ -335,6 +335,9 @@
 								<Setter Property="Orientation" Value="Horizontal"/>
 								<Setter Property="Margin" Value="8,0,0,0"/>
 								<Setter Property="Background" Value="Transparent"/>
+								<EventSetter Event="MouseDown" Handler="DescriptorMouseDown"/>
+								<EventSetter Event="MouseUp" Handler="DescriptorMouseUp"/>
+								<EventSetter Event="MouseMove" Handler="DescriptorMouseMove"/>
 							</Style>
 
 							<Style x:Key="CircuitName" TargetType="TextBlock">
@@ -354,11 +357,7 @@
 										</Style.Triggers>
 									</Style>
 								</DataTemplate.Resources>
-								<StackPanel Style="{StaticResource DescriptorPanel}"
-									MouseDown="DescriptorMouseDown"
-									MouseUp="DescriptorMouseUp"
-									MouseMove="DescriptorMouseMove"
-								>
+								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl/>
 									<ComboBox VerticalAlignment="Center" Margin="0,0,3,0" MinWidth="42"
 										SelectedItem="{Binding Path=InputCount, Mode=TwoWay}" ItemsSource="{Binding Path=InputCountRange}"
@@ -369,11 +368,7 @@
 							</DataTemplate>
 
 							<DataTemplate DataType="{x:Type lc:ButtonDescriptor}">
-								<StackPanel Style="{StaticResource DescriptorPanel}"
-									MouseDown="DescriptorMouseDown"
-									MouseUp="DescriptorMouseUp"
-									MouseMove="DescriptorMouseMove"
-								>
+								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl/>
 									<Grid>
 										<Grid.ColumnDefinitions>
@@ -397,11 +392,7 @@
 							</DataTemplate>
 
 							<DataTemplate DataType="{x:Type lc:ConstantDescriptor}">
-								<StackPanel Style="{StaticResource DescriptorPanel}"
-									MouseDown="DescriptorMouseDown"
-									MouseUp="DescriptorMouseUp"
-									MouseMove="DescriptorMouseMove"
-								>
+								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl/>
 									<Grid Margin="3,3,8,3" VerticalAlignment="Center">
 										<Grid.ColumnDefinitions>
@@ -427,11 +418,7 @@
 							</DataTemplate>
 
 							<DataTemplate DataType="{x:Type lc:MemoryDescriptor}">
-								<StackPanel Style="{StaticResource DescriptorPanel}"
-									MouseDown="DescriptorMouseDown"
-									MouseUp="DescriptorMouseUp"
-									MouseMove="DescriptorMouseMove"
-								>
+								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl/>
 									<Grid Margin="3,3,8,3" VerticalAlignment="Center">
 										<Grid.ColumnDefinitions>
@@ -456,11 +443,7 @@
 							</DataTemplate>
 
 							<DataTemplate DataType="{x:Type lc:PinDescriptor}">
-								<StackPanel Style="{StaticResource DescriptorPanel}"
-									MouseDown="DescriptorMouseDown"
-									MouseUp="DescriptorMouseUp"
-									MouseMove="DescriptorMouseMove"
-								>
+								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl/>
 									<Grid Margin="3,3,8,3" VerticalAlignment="Center">
 										<Grid.ColumnDefinitions>
@@ -486,11 +469,7 @@
 							</DataTemplate>
 
 							<DataTemplate DataType="{x:Type lc:SplitterDescriptor}">
-								<StackPanel Style="{StaticResource DescriptorPanel}"
-									MouseDown="DescriptorMouseDown"
-									MouseUp="DescriptorMouseUp"
-									MouseMove="DescriptorMouseMove"
-								>
+								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl RenderTransformOrigin="0.4,0">
 										<ContentControl.RenderTransform>
 											<ScaleTransform ScaleX="{Binding Path=Flip}"/>
@@ -541,11 +520,7 @@
 											</Style.Triggers>
 										</Style>
 									</Border.Style>
-									<StackPanel Style="{StaticResource DescriptorPanel}"
-										MouseDown="DescriptorMouseDown"
-										MouseUp="DescriptorMouseUp"
-										MouseMove="DescriptorMouseMove"
-									>
+									<StackPanel Style="{StaticResource DescriptorPanel}">
 										<ContentControl/>
 										<TextBlock Style="{StaticResource CircuitName}"/>
 									</StackPanel>
@@ -553,11 +528,7 @@
 							</DataTemplate>
 
 							<DataTemplate DataType="{x:Type lc:TextNoteDescriptor}">
-								<StackPanel Style="{StaticResource DescriptorPanel}"
-									MouseDown="DescriptorMouseDown"
-									MouseUp="DescriptorMouseUp"
-									MouseMove="DescriptorMouseMove"
-								>
+								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<StackPanel Orientation="Vertical" MinWidth="50" Margin="3">
 										<TextBlock FontFamily="Georgia" FontSize="16" FontWeight="Bold" Margin="5" Text="{x:Static lc:Resources.CaptionTextNote1}"/>
 										<TextBlock FontFamily="Georgia" FontSize="14" FontStyle="Italic" Margin="5" Text="{x:Static lc:Resources.CaptionTextNote2}"/>
