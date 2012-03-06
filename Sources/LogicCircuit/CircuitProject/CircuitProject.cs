@@ -59,6 +59,7 @@ namespace LogicCircuit {
 				this.ConstantSet.Load(root.SelectNodes("lc:Constant", nsmgr));
 				this.CircuitButtonSet.Load(root.SelectNodes("lc:CircuitButton", nsmgr));
 				this.MemorySet.Load(root.SelectNodes("lc:Memory", nsmgr));
+				this.LedMatrixSet.Load(root.SelectNodes("lc:LedMatrix", nsmgr));
 				this.SplitterSet.Load(root.SelectNodes("lc:Splitter", nsmgr));
 				this.CircuitSymbolSet.Load(root.SelectNodes("lc:CircuitSymbol", nsmgr));
 				this.WireSet.Load(root.SelectNodes("lc:Wire", nsmgr));
@@ -77,6 +78,7 @@ namespace LogicCircuit {
 			this.DistinctSymbol(this.CircuitButtonSet);
 			this.DistinctSymbol(this.ConstantSet);
 			this.DistinctSymbol(this.MemorySet);
+			this.DistinctSymbol(this.LedMatrixSet);
 			this.DistinctSymbol(this.PinSet);
 			this.DistinctSymbol(this.SplitterSet);
 
@@ -107,6 +109,7 @@ namespace LogicCircuit {
 			ConstantData.Save(this.ConstantSet.Table, root);
 			CircuitButtonData.Save(this.CircuitButtonSet.Table, root);
 			MemoryData.Save(this.MemorySet.Table, root);
+			LedMatrixData.Save(this.LedMatrixSet.Table, root);
 			SplitterData.Save(this.SplitterSet.Table, root);
 			CircuitSymbolData.Save(this.CircuitSymbolSet.Table, root);
 			WireData.Save(this.WireSet.Table, root);
@@ -204,6 +207,9 @@ namespace LogicCircuit {
 					Tracer.Assert(this.GateSet.Table.Exists(GateData.GateIdField.Field, circuit.CircuitId));
 				} else if(circuit is Memory) {
 					Tracer.Assert(this.MemorySet.Table.Exists(MemoryData.MemoryIdField.Field, circuit.CircuitId));
+					Tracer.Assert(this.CircuitSymbolSet.SelectByCircuit(circuit).Count() == 1);
+				} else if(circuit is LedMatrix) {
+					Tracer.Assert(this.LedMatrixSet.Table.Exists(LedMatrixData.LedMatrixIdField.Field, circuit.CircuitId));
 					Tracer.Assert(this.CircuitSymbolSet.SelectByCircuit(circuit).Count() == 1);
 				} else if(circuit is Pin) {
 					Tracer.Assert(this.PinSet.Table.Exists(PinData.PinIdField.Field, circuit.CircuitId));
