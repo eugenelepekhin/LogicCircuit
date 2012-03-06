@@ -442,6 +442,31 @@
 								</StackPanel>
 							</DataTemplate>
 
+							<DataTemplate DataType="{x:Type lc:LedMatrixDescriptor}">
+								<StackPanel Style="{StaticResource DescriptorPanel}">
+									<ContentControl/>
+									<Grid Margin="3,3,8,3" VerticalAlignment="Center">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="Auto" MinWidth="65"/>
+											<ColumnDefinition Width="Auto"/>
+										</Grid.ColumnDefinitions>
+										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto"/>
+											<RowDefinition Height="Auto"/>
+										</Grid.RowDefinitions>
+										<ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Path=RowsRange}" SelectedItem="{Binding Path=Rows}"
+											ToolTip="{x:Static lc:Resources.ToolTipRows}"
+										/>
+										<TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Static lc:Resources.CaptionRows}" Margin="8,0,0,0"/>
+										<ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=ColumnsRange}" SelectedItem="{Binding Path=Columns}"
+											ToolTip="{x:Static lc:Resources.ToolTipColumns}"
+										/>
+										<TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Static lc:Resources.CaptionColumns}" Margin="8,0,0,0"/>
+									</Grid>
+									<TextBlock Text="{Binding Path=Circuit.Notation}" VerticalAlignment="Center"/>
+								</StackPanel>
+							</DataTemplate>
+
 							<DataTemplate DataType="{x:Type lc:PinDescriptor}">
 								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl/>

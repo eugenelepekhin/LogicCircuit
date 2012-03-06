@@ -957,4 +957,16 @@ Do you want to remove the reference to it from the Recent Files list?</value>
     <value>LED Matrix {0}x{1}</value>
     <comment>{int rows, int columns}</comment>
   </data>
+  <data name="CaptionColumns" xml:space="preserve">
+    <value>Columns</value>
+  </data>
+  <data name="CaptionRows" xml:space="preserve">
+    <value>Rows</value>
+  </data>
+  <data name="ToolTipColumns" xml:space="preserve">
+    <value>Choose number of columns of LEDs in the matrix</value>
+  </data>
+  <data name="ToolTipRows" xml:space="preserve">
+    <value>Choose number of rows of LEDs in the matrix</value>
+  </data>
 </root>

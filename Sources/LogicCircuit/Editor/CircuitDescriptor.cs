@@ -238,6 +238,25 @@ namespace LogicCircuit {
 		}
 	}
 
+	public class LedMatrixDescriptor : IOCircuitDescriptor<LedMatrix> {
+		public int Rows { get; set; }
+		public int Columns { get; set; }
+
+		public IEnumerable<int> RowsRange { get; private set; }
+		public IEnumerable<int> ColumnsRange { get; private set; }
+
+		public LedMatrixDescriptor(CircuitProject circuitProject) : base(circuitProject.LedMatrixSet.Create(8, 8)) {
+			this.Rows = 4;
+			this.Columns = 4;
+			this.RowsRange = PinDescriptor.NumberRange(LedMatrix.MinLedCount, LedMatrix.MaxLedCount);
+			this.ColumnsRange = PinDescriptor.NumberRange(LedMatrix.MinLedCount, LedMatrix.MaxLedCount);
+		}
+
+		protected override LedMatrix GetCircuitToDrop(CircuitProject circuitProject) {
+			return circuitProject.LedMatrixSet.Create(this.Rows, this.Columns);
+		}
+	}
+
 	public class PinDescriptor : IOCircuitDescriptor<Pin> {
 		public static IEnumerable<string> PinSideNames {
 			get { return new string[] { Resources.PinSideLeft, Resources.PinSideTop, Resources.PinSideRight, Resources.PinSideBottom }; }

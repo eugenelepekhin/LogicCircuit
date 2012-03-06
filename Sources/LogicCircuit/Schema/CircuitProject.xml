@@ -14,7 +14,7 @@
 
 		Version 2.0.0.1 - Moving to new store. Adding Frequency and IsMaximumSpeed to project. Adding JamNotation to Pin. Adding TextNote.
 		Version 2.0.0.2 - Adding Note to memory modules, collapse state to categories.
-		Version 2.0.0.3 - Adding note field to button and constant
+		Version 2.0.0.3 - Adding note field to button and constant. Adding LedMatrix circuits.
 	-->
 
 	<Table Name="Project">

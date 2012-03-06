@@ -123,6 +123,8 @@ namespace LogicCircuit {
 			list.Add(new MemoryDescriptor(project, false));
 			list.Add(new MemoryDescriptor(project, true));
 
+			list.Add(new LedMatrixDescriptor(project));
+
 			CircuitDescriptorList.primitiveList = list;
 		}
 	}

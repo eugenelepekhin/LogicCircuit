@@ -1896,5 +1896,33 @@ namespace LogicCircuit {
  		public static string ToolTipLedMatrix(int rows, int columns) {
 			return string.Format(Culture, ResourceManager.GetString("ToolTipLedMatrix", Culture), rows, columns);
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Columns.
+		/// </summary>
+ 		public static string CaptionColumns {
+			get { return ResourceManager.GetString("CaptionColumns", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Rows.
+		/// </summary>
+ 		public static string CaptionRows {
+			get { return ResourceManager.GetString("CaptionRows", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Choose number of columns of LEDs in the matrix.
+		/// </summary>
+ 		public static string ToolTipColumns {
+			get { return ResourceManager.GetString("ToolTipColumns", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Choose number of rows of LEDs in the matrix.
+		/// </summary>
+ 		public static string ToolTipRows {
+			get { return ResourceManager.GetString("ToolTipRows", Culture); }
+		}
 	}
 }
