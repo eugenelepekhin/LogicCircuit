@@ -43,6 +43,9 @@ namespace LogicCircuit {
 			return target.CircuitProject.LedMatrixSet.Copy(this);
 		}
 
+		public override int SymbolWidth { get { return this.Columns + 1; } }
+		public override int SymbolHeight { get { return this.Rows + 1; } }
+
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
 			FrameworkElement glyph = symbol.CreateSimpleGlyph(SymbolShape.LedMatrix);
 			this.UpdateGlyph(symbol);

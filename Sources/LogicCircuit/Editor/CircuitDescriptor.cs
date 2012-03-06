@@ -245,7 +245,7 @@ namespace LogicCircuit {
 		public IEnumerable<int> RowsRange { get; private set; }
 		public IEnumerable<int> ColumnsRange { get; private set; }
 
-		public LedMatrixDescriptor(CircuitProject circuitProject) : base(circuitProject.LedMatrixSet.Create(8, 8)) {
+		public LedMatrixDescriptor(CircuitProject circuitProject) : base(circuitProject.LedMatrixSet.Create(4, 4)) {
 			this.Rows = 4;
 			this.Columns = 4;
 			this.RowsRange = PinDescriptor.NumberRange(LedMatrix.MinLedCount, LedMatrix.MaxLedCount);

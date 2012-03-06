@@ -12,14 +12,14 @@ namespace LogicCircuit {
 		private int symbolWidth;
 		private int symbolHeight;
 
-		public int SymbolWidth {
+		public virtual int SymbolWidth {
 			get {
 				this.Update();
 				return this.symbolWidth;
 			}
 		}
 
-		public int SymbolHeight {
+		public virtual int SymbolHeight {
 			get{
 				this.Update();
 				return this.symbolHeight;
