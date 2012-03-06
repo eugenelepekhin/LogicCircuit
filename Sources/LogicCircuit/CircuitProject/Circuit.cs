@@ -113,7 +113,7 @@ namespace LogicCircuit {
 						height = Math.Max(left.Count, right.Count) + 1;
 						Debug.Assert(width == 1 && 2 < height || height == 1 && 2 < width);
 					} else {
-						Debug.Assert(this.Pins.Count() == 1);
+						Debug.Assert(this is LedMatrix || this.Pins.Count() == 1);
 						height = width = 2;
 					}
 				} else {

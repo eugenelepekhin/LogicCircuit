@@ -43,6 +43,7 @@ namespace LogicCircuit {
 			return target.CircuitProject.LedMatrixSet.Copy(this);
 		}
 
+		public override bool IsSmallSymbol { get { return true; } }
 		public override int SymbolWidth { get { return this.Columns + 1; } }
 		public override int SymbolHeight { get { return this.Rows + 1; } }
 
