@@ -210,6 +210,20 @@
 		</Table.Keys>
 	</Table>
 
+	<Table Name="LedMatrix">
+		<Table.Columns>
+			<Column Name="LedMatrixId" Type="Guid" ReadOnly="true"/>
+			<Column Name="Rows" Type="int" Check="LedMatrix.Check"/>
+			<Column Name="Columns" Type="int" Check="LedMatrix.Check"/>
+		</Table.Columns>
+
+		<Table.Keys>
+			<Key Name="PK_LedMatrix" KeyType="Subclass" ParentName="Circuit" Action="Cascade">
+				<Column Name="LedMatrixId"/>
+			</Key>
+		</Table.Keys>
+	</Table>
+
 	<Table Name="Splitter">
 		<Table.Columns>
 			<Column Name="SplitterId" Type="Guid" ReadOnly="true"/>

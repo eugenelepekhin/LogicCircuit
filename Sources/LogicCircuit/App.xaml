@@ -50,6 +50,15 @@
 		<SolidColorBrush x:Key="Led7SegmentOn0" Color="#FF7F7F7F" PresentationOptions:Freeze="True"/>
 		<SolidColorBrush x:Key="Led7SegmentOn1" Color="#FF02FD02" PresentationOptions:Freeze="True"/>
 
+		<LinearGradientBrush x:Key="LedMatrixBackground" StartPoint="0.5,0" EndPoint="0.5,1" PresentationOptions:Freeze="True">
+			<GradientStop Color="{x:Static SystemColors.ControlColor}" Offset="0"/>
+			<GradientStop Color="{x:Static SystemColors.ControlDarkColor}" Offset="1"/>
+		</LinearGradientBrush>
+
+		<SolidColorBrush x:Key="LedMatrixOff" Color="#FF445644" PresentationOptions:Freeze="True"/>
+		<SolidColorBrush x:Key="LedMatrixOn0" Color="#FF7F7F7F" PresentationOptions:Freeze="True"/>
+		<SolidColorBrush x:Key="LedMatrixOn1" Color="#FF02FD02" PresentationOptions:Freeze="True"/>
+
 		<SolidColorBrush x:Key="OscilloscopeBackground" Color="Black" PresentationOptions:Freeze="True"/>
 		<SolidColorBrush x:Key="OscilloscopeText" Color="#FF7F7F7F" PresentationOptions:Freeze="True"/>
 		<SolidColorBrush x:Key="OscilloscopeLine" Color="#FF02FD02" PresentationOptions:Freeze="True"/>

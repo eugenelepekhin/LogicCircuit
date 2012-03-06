@@ -253,6 +253,11 @@ namespace LogicCircuit {
 				return this.CircuitProject.MemorySet.FindOrCreate(rowIdMemory);
 			}
 
+			RowId rowIdLedMatrix = this.CircuitProject.LedMatrixSet.Table.Find(LedMatrixData.LedMatrixIdField.Field, primaryKeyValue);
+			if(!rowIdLedMatrix.IsEmpty) {
+				return this.CircuitProject.LedMatrixSet.FindOrCreate(rowIdLedMatrix);
+			}
+
 			RowId rowIdSplitter = this.CircuitProject.SplitterSet.Table.Find(SplitterData.SplitterIdField.Field, primaryKeyValue);
 			if(!rowIdSplitter.IsEmpty) {
 				return this.CircuitProject.SplitterSet.FindOrCreate(rowIdSplitter);

@@ -127,6 +127,12 @@
   <data name="Led" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>led.xaml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="LedMatrix" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>ledmatrix.xaml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="LedMatrixRoundCell" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>ledmatrixroundcell.xaml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="MarkerLine" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>markerline.xaml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>

@@ -1882,5 +1882,19 @@ namespace LogicCircuit {
  		public static string GridPoint(int x, int y) {
 			return string.Format(Culture, ResourceManager.GetString("GridPoint", Culture), x, y);
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to LED Matrix.
+		/// </summary>
+ 		public static string NameLedMatrix {
+			get { return ResourceManager.GetString("NameLedMatrix", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to LED Matrix {0}x{1}.
+		/// </summary>
+ 		public static string ToolTipLedMatrix(int rows, int columns) {
+			return string.Format(Culture, ResourceManager.GetString("ToolTipLedMatrix", Culture), rows, columns);
+		}
 	}
 }

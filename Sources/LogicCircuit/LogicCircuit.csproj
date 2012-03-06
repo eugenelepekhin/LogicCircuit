@@ -55,9 +55,11 @@
     <Compile Include="ButtonControl.cs" />
     <Compile Include="CircuitProject\CircuitSymbolComparer.cs" />
     <Compile Include="CircuitProject\CollapsedCategory.cs" />
+    <Compile Include="CircuitProject\LedMatrix.cs" />
     <Compile Include="CircuitProject\PinComparer.cs" />
     <Compile Include="CircuitProject\TextNote.cs" />
     <Compile Include="CircuitProject\Wrappers\CollapsedCategory.cs" />
+    <Compile Include="CircuitProject\Wrappers\LedMatrix.cs" />
     <Compile Include="CircuitProject\Wrappers\TextNote.cs" />
     <Compile Include="Conductor.cs" />
     <Compile Include="ConductorMap.cs" />
@@ -354,6 +356,14 @@
       <DependentUpon>Mainframe.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="SymbolShapes\LedMatrix.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SymbolShapes\LedMatrixRoundCell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <AppDesigner Include="Properties\" />
