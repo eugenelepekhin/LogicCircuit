@@ -103,6 +103,7 @@ namespace LogicCircuit {
 			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.Clock, 0, false)));
 			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.Led, 1, false)));
 			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.Led, 8, false)));
+			list.Add(new LedMatrixDescriptor(project));
 			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.Probe, 1, false)));
 
 			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.Not, 1, true)));
@@ -122,8 +123,6 @@ namespace LogicCircuit {
 
 			list.Add(new MemoryDescriptor(project, false));
 			list.Add(new MemoryDescriptor(project, true));
-
-			list.Add(new LedMatrixDescriptor(project));
 
 			CircuitDescriptorList.primitiveList = list;
 		}

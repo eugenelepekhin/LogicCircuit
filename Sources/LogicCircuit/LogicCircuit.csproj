@@ -356,14 +356,12 @@
       <DependentUpon>Mainframe.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="SymbolShapes\LedMatrix.xaml">
+    <None Include="SymbolShapes\LedMatrix.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="SymbolShapes\LedMatrixRoundCell.xaml">
+    </None>
+    <None Include="SymbolShapes\LedMatrixRoundCell.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <AppDesigner Include="Properties\" />
