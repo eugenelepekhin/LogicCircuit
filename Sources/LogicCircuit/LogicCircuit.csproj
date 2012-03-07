@@ -356,12 +356,6 @@
       <DependentUpon>Mainframe.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <None Include="SymbolShapes\LedMatrix.xaml">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="SymbolShapes\LedMatrixRoundCell.xaml">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <AppDesigner Include="Properties\" />
@@ -442,6 +436,12 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="SymbolShapes\Led.xaml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SymbolShapes\LedMatrix.xaml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SymbolShapes\LedMatrixRoundCell.xaml">
       <SubType>Designer</SubType>
     </None>
     <None Include="SymbolShapes\Pin.xaml">
