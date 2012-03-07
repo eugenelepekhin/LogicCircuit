@@ -78,6 +78,13 @@ namespace LogicCircuit {
 		}
 
 		/// <summary>
+		/// Looks up a localized string similar to content of the file: "ledmatrixrectcell.xaml".
+		/// </summary>
+ 		public static string LedMatrixRectCell {
+			get { return ResourceManager.GetString("LedMatrixRectCell", Culture); }
+		}
+
+		/// <summary>
 		/// Looks up a localized string similar to content of the file: "ledmatrixroundcell.xaml".
 		/// </summary>
  		public static string LedMatrixRoundCell {

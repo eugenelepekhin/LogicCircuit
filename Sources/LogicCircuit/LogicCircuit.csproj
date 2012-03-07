@@ -49,13 +49,14 @@
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ButtonControl.cs" />
     <Compile Include="CircuitProject\CircuitSymbolComparer.cs" />
     <Compile Include="CircuitProject\CollapsedCategory.cs" />
     <Compile Include="CircuitProject\LedMatrix.cs" />
+    <Compile Include="CircuitProject\LedMatrixCellType.cs" />
+    <Compile Include="CircuitProject\LedMatrixType.cs" />
     <Compile Include="CircuitProject\PinComparer.cs" />
     <Compile Include="CircuitProject\TextNote.cs" />
     <Compile Include="CircuitProject\Wrappers\CollapsedCategory.cs" />
@@ -427,7 +428,6 @@
     </None>
     <None Include="SymbolShapes\MarkerRectangle.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </None>
     <None Include="SymbolShapes\Clock.xaml">
       <SubType>Designer</SubType>
@@ -439,6 +439,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="SymbolShapes\LedMatrix.xaml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SymbolShapes\LedMatrixRectCell.xaml">
       <SubType>Designer</SubType>
     </None>
     <None Include="SymbolShapes\LedMatrixRoundCell.xaml">
@@ -476,15 +479,12 @@
     </None>
     <None Include="SymbolShapes\MarkerLine.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </None>
     <None Include="SymbolShapes\TextNote.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </None>
     <None Include="SymbolShapes\ToggleLed.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </None>
   </ItemGroup>
   <ItemGroup>

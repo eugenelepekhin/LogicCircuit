@@ -14,6 +14,8 @@ namespace LogicCircuit {
 	// Defines the shape of the table LedMatrix
 	internal partial struct LedMatrixData {
 		public Guid LedMatrixId;
+		public LedMatrixType MatrixType;
+		public LedMatrixCellType CellType;
 		private int fieldRows;
 		public int Rows {
 			get { return this.fieldRows; }
@@ -24,6 +26,14 @@ namespace LogicCircuit {
 			get { return this.fieldColumns; }
 			set { this.fieldColumns = LedMatrix.Check(value); }
 		}
+		private int fieldColors;
+		public int Colors {
+			get { return this.fieldColors; }
+			set { this.fieldColors = LedMatrix.CheckColors(value); }
+		}
+		public uint Color1;
+		public uint Color2;
+		public uint Color3;
 		internal LedMatrix LedMatrix;
 
 		private interface IFieldSerializer {
@@ -67,6 +77,76 @@ namespace LogicCircuit {
 			}
 			void IFieldSerializer.SetTextValue(ref LedMatrixData data, string text) {
 				data.LedMatrixId = new Guid(text);
+			}
+		}
+
+		// Accessor of the MatrixType field
+		public sealed class MatrixTypeField : IField<LedMatrixData, LedMatrixType>, IFieldSerializer {
+			public static readonly MatrixTypeField Field = new MatrixTypeField();
+			private MatrixTypeField() {}
+			public string Name { get { return "MatrixType"; } }
+			public int Order { get; set; }
+			public LedMatrixType DefaultValue { get { return LedMatrixType.Individual; } }
+			public LedMatrixType GetValue(ref LedMatrixData record) {
+				return record.MatrixType;
+			}
+			public void SetValue(ref LedMatrixData record, LedMatrixType value) {
+				record.MatrixType = value;
+			}
+			public int Compare(ref LedMatrixData l, ref LedMatrixData r) {
+				return l.MatrixType.CompareTo(r.MatrixType);
+			}
+			public int Compare(LedMatrixType l, LedMatrixType r) {
+				return l.CompareTo(r);
+			}
+
+			// Implementation of interface IFieldSerializer
+			bool IFieldSerializer.NeedToSave(ref LedMatrixData data) {
+				return this.Compare(data.MatrixType, this.DefaultValue) != 0;
+			}
+			string IFieldSerializer.GetTextValue(ref LedMatrixData data) {
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.MatrixType);
+			}
+			void IFieldSerializer.SetDefault(ref LedMatrixData data) {
+				data.MatrixType = this.DefaultValue;
+			}
+			void IFieldSerializer.SetTextValue(ref LedMatrixData data, string text) {
+				data.MatrixType = (LedMatrixType)Enum.Parse(typeof(LedMatrixType), text, true);
+			}
+		}
+
+		// Accessor of the CellType field
+		public sealed class CellTypeField : IField<LedMatrixData, LedMatrixCellType>, IFieldSerializer {
+			public static readonly CellTypeField Field = new CellTypeField();
+			private CellTypeField() {}
+			public string Name { get { return "CellType"; } }
+			public int Order { get; set; }
+			public LedMatrixCellType DefaultValue { get { return LedMatrixCellType.Round; } }
+			public LedMatrixCellType GetValue(ref LedMatrixData record) {
+				return record.CellType;
+			}
+			public void SetValue(ref LedMatrixData record, LedMatrixCellType value) {
+				record.CellType = value;
+			}
+			public int Compare(ref LedMatrixData l, ref LedMatrixData r) {
+				return l.CellType.CompareTo(r.CellType);
+			}
+			public int Compare(LedMatrixCellType l, LedMatrixCellType r) {
+				return l.CompareTo(r);
+			}
+
+			// Implementation of interface IFieldSerializer
+			bool IFieldSerializer.NeedToSave(ref LedMatrixData data) {
+				return this.Compare(data.CellType, this.DefaultValue) != 0;
+			}
+			string IFieldSerializer.GetTextValue(ref LedMatrixData data) {
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.CellType);
+			}
+			void IFieldSerializer.SetDefault(ref LedMatrixData data) {
+				data.CellType = this.DefaultValue;
+			}
+			void IFieldSerializer.SetTextValue(ref LedMatrixData data, string text) {
+				data.CellType = (LedMatrixCellType)Enum.Parse(typeof(LedMatrixCellType), text, true);
 			}
 		}
 
@@ -140,6 +220,146 @@ namespace LogicCircuit {
 			}
 		}
 
+		// Accessor of the Colors field
+		public sealed class ColorsField : IField<LedMatrixData, int>, IFieldSerializer {
+			public static readonly ColorsField Field = new ColorsField();
+			private ColorsField() {}
+			public string Name { get { return "Colors"; } }
+			public int Order { get; set; }
+			public int DefaultValue { get { return 1; } }
+			public int GetValue(ref LedMatrixData record) {
+				return record.Colors;
+			}
+			public void SetValue(ref LedMatrixData record, int value) {
+				record.Colors = value;
+			}
+			public int Compare(ref LedMatrixData l, ref LedMatrixData r) {
+				return Math.Sign((long)l.Colors - (long)r.Colors);
+			}
+			public int Compare(int l, int r) {
+				return Math.Sign((long)l - (long)r);
+			}
+
+			// Implementation of interface IFieldSerializer
+			bool IFieldSerializer.NeedToSave(ref LedMatrixData data) {
+				return this.Compare(data.Colors, this.DefaultValue) != 0;
+			}
+			string IFieldSerializer.GetTextValue(ref LedMatrixData data) {
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Colors);
+			}
+			void IFieldSerializer.SetDefault(ref LedMatrixData data) {
+				data.Colors = this.DefaultValue;
+			}
+			void IFieldSerializer.SetTextValue(ref LedMatrixData data, string text) {
+				data.Colors = int.Parse(text, CultureInfo.InvariantCulture);
+			}
+		}
+
+		// Accessor of the Color1 field
+		public sealed class Color1Field : IField<LedMatrixData, uint>, IFieldSerializer {
+			public static readonly Color1Field Field = new Color1Field();
+			private Color1Field() {}
+			public string Name { get { return "Color1"; } }
+			public int Order { get; set; }
+			public uint DefaultValue { get { return 0xFFFF0000; } }
+			public uint GetValue(ref LedMatrixData record) {
+				return record.Color1;
+			}
+			public void SetValue(ref LedMatrixData record, uint value) {
+				record.Color1 = value;
+			}
+			public int Compare(ref LedMatrixData l, ref LedMatrixData r) {
+				return l.Color1.CompareTo(r.Color1);
+			}
+			public int Compare(uint l, uint r) {
+				return l.CompareTo(r);
+			}
+
+			// Implementation of interface IFieldSerializer
+			bool IFieldSerializer.NeedToSave(ref LedMatrixData data) {
+				return this.Compare(data.Color1, this.DefaultValue) != 0;
+			}
+			string IFieldSerializer.GetTextValue(ref LedMatrixData data) {
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Color1);
+			}
+			void IFieldSerializer.SetDefault(ref LedMatrixData data) {
+				data.Color1 = this.DefaultValue;
+			}
+			void IFieldSerializer.SetTextValue(ref LedMatrixData data, string text) {
+				data.Color1 = (uint)Enum.Parse(typeof(uint), text, true);
+			}
+		}
+
+		// Accessor of the Color2 field
+		public sealed class Color2Field : IField<LedMatrixData, uint>, IFieldSerializer {
+			public static readonly Color2Field Field = new Color2Field();
+			private Color2Field() {}
+			public string Name { get { return "Color2"; } }
+			public int Order { get; set; }
+			public uint DefaultValue { get { return 0xFF00FF00; } }
+			public uint GetValue(ref LedMatrixData record) {
+				return record.Color2;
+			}
+			public void SetValue(ref LedMatrixData record, uint value) {
+				record.Color2 = value;
+			}
+			public int Compare(ref LedMatrixData l, ref LedMatrixData r) {
+				return l.Color2.CompareTo(r.Color2);
+			}
+			public int Compare(uint l, uint r) {
+				return l.CompareTo(r);
+			}
+
+			// Implementation of interface IFieldSerializer
+			bool IFieldSerializer.NeedToSave(ref LedMatrixData data) {
+				return this.Compare(data.Color2, this.DefaultValue) != 0;
+			}
+			string IFieldSerializer.GetTextValue(ref LedMatrixData data) {
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Color2);
+			}
+			void IFieldSerializer.SetDefault(ref LedMatrixData data) {
+				data.Color2 = this.DefaultValue;
+			}
+			void IFieldSerializer.SetTextValue(ref LedMatrixData data, string text) {
+				data.Color2 = (uint)Enum.Parse(typeof(uint), text, true);
+			}
+		}
+
+		// Accessor of the Color3 field
+		public sealed class Color3Field : IField<LedMatrixData, uint>, IFieldSerializer {
+			public static readonly Color3Field Field = new Color3Field();
+			private Color3Field() {}
+			public string Name { get { return "Color3"; } }
+			public int Order { get; set; }
+			public uint DefaultValue { get { return 0xFF0000FF; } }
+			public uint GetValue(ref LedMatrixData record) {
+				return record.Color3;
+			}
+			public void SetValue(ref LedMatrixData record, uint value) {
+				record.Color3 = value;
+			}
+			public int Compare(ref LedMatrixData l, ref LedMatrixData r) {
+				return l.Color3.CompareTo(r.Color3);
+			}
+			public int Compare(uint l, uint r) {
+				return l.CompareTo(r);
+			}
+
+			// Implementation of interface IFieldSerializer
+			bool IFieldSerializer.NeedToSave(ref LedMatrixData data) {
+				return this.Compare(data.Color3, this.DefaultValue) != 0;
+			}
+			string IFieldSerializer.GetTextValue(ref LedMatrixData data) {
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Color3);
+			}
+			void IFieldSerializer.SetDefault(ref LedMatrixData data) {
+				data.Color3 = this.DefaultValue;
+			}
+			void IFieldSerializer.SetTextValue(ref LedMatrixData data, string text) {
+				data.Color3 = (uint)Enum.Parse(typeof(uint), text, true);
+			}
+		}
+
 		// Special field used to access items wrapper of this record from record.
 		// This is used when no other universes is used
 		internal sealed class LedMatrixField : IField<LedMatrixData, LedMatrix> {
@@ -167,8 +387,14 @@ namespace LogicCircuit {
 
 		private static IField<LedMatrixData>[] fields = {
 			LedMatrixIdField.Field,
+			MatrixTypeField.Field,
+			CellTypeField.Field,
 			RowsField.Field,
 			ColumnsField.Field,
+			ColorsField.Field,
+			Color1Field.Field,
+			Color2Field.Field,
+			Color3Field.Field,
 			LedMatrixField.Field
 		};
 
@@ -288,6 +514,18 @@ namespace LogicCircuit {
 			get { return this.Table.GetField(this.LedMatrixRowId, LedMatrixData.LedMatrixIdField.Field); }
 		}
 
+		// Gets or sets value of the MatrixType field.
+		public LedMatrixType MatrixType {
+			get { return this.Table.GetField(this.LedMatrixRowId, LedMatrixData.MatrixTypeField.Field); }
+			set { this.Table.SetField(this.LedMatrixRowId, LedMatrixData.MatrixTypeField.Field, value); }
+		}
+
+		// Gets or sets value of the CellType field.
+		public LedMatrixCellType CellType {
+			get { return this.Table.GetField(this.LedMatrixRowId, LedMatrixData.CellTypeField.Field); }
+			set { this.Table.SetField(this.LedMatrixRowId, LedMatrixData.CellTypeField.Field, value); }
+		}
+
 		// Gets or sets value of the Rows field.
 		public int Rows {
 			get { return this.Table.GetField(this.LedMatrixRowId, LedMatrixData.RowsField.Field); }
@@ -300,6 +538,30 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.LedMatrixRowId, LedMatrixData.ColumnsField.Field, value); }
 		}
 
+		// Gets or sets value of the Colors field.
+		public int Colors {
+			get { return this.Table.GetField(this.LedMatrixRowId, LedMatrixData.ColorsField.Field); }
+			set { this.Table.SetField(this.LedMatrixRowId, LedMatrixData.ColorsField.Field, value); }
+		}
+
+		// Gets or sets value of the Color1 field.
+		public uint Color1 {
+			get { return this.Table.GetField(this.LedMatrixRowId, LedMatrixData.Color1Field.Field); }
+			set { this.Table.SetField(this.LedMatrixRowId, LedMatrixData.Color1Field.Field, value); }
+		}
+
+		// Gets or sets value of the Color2 field.
+		public uint Color2 {
+			get { return this.Table.GetField(this.LedMatrixRowId, LedMatrixData.Color2Field.Field); }
+			set { this.Table.SetField(this.LedMatrixRowId, LedMatrixData.Color2Field.Field, value); }
+		}
+
+		// Gets or sets value of the Color3 field.
+		public uint Color3 {
+			get { return this.Table.GetField(this.LedMatrixRowId, LedMatrixData.Color3Field.Field); }
+			set { this.Table.SetField(this.LedMatrixRowId, LedMatrixData.Color3Field.Field, value); }
+		}
+
 
 		internal void NotifyChanged(TableChange<LedMatrixData> change) {
 			if(this.HasListener) {
@@ -309,11 +571,29 @@ namespace LogicCircuit {
 				if(LedMatrixData.LedMatrixIdField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("LedMatrixId");
 				}
+				if(LedMatrixData.MatrixTypeField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("MatrixType");
+				}
+				if(LedMatrixData.CellTypeField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("CellType");
+				}
 				if(LedMatrixData.RowsField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("Rows");
 				}
 				if(LedMatrixData.ColumnsField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("Columns");
+				}
+				if(LedMatrixData.ColorsField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("Colors");
+				}
+				if(LedMatrixData.Color1Field.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("Color1");
+				}
+				if(LedMatrixData.Color2Field.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("Color2");
+				}
+				if(LedMatrixData.Color3Field.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("Color3");
 				}
 			}
 			this.OnLedMatrixChanged();
@@ -400,8 +680,14 @@ namespace LogicCircuit {
 		private LedMatrix CreateItem(
 			// Fields of LedMatrix table
 			Guid LedMatrixId,
+			LedMatrixType MatrixType,
+			LedMatrixCellType CellType,
 			int Rows,
-			int Columns
+			int Columns,
+			int Colors,
+			uint Color1,
+			uint Color2,
+			uint Color3
 			// Fields of Circuit table
 
 		) {
@@ -413,8 +699,14 @@ namespace LogicCircuit {
 
 			LedMatrixData dataLedMatrix = new LedMatrixData() {
 				LedMatrixId = LedMatrixId,
+				MatrixType = MatrixType,
+				CellType = CellType,
 				Rows = Rows,
 				Columns = Columns,
+				Colors = Colors,
+				Color1 = Color1,
+				Color2 = Color2,
+				Color3 = Color3,
 			};
 			return this.Create(this.Table.Insert(ref dataLedMatrix), rowIdCircuit);
 		}

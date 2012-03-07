@@ -213,8 +213,14 @@
 	<Table Name="LedMatrix">
 		<Table.Columns>
 			<Column Name="LedMatrixId" Type="Guid" ReadOnly="true"/>
+			<Column Name="MatrixType" Type="LedMatrixType" Default="LedMatrixType.Individual"/>
+			<Column Name="CellType" Type="LedMatrixCellType" Default="LedMatrixCellType.Round"/>
 			<Column Name="Rows" Type="int" Check="LedMatrix.Check"/>
 			<Column Name="Columns" Type="int" Check="LedMatrix.Check"/>
+			<Column Name="Colors" Type="int" Check="LedMatrix.CheckColors" Default="1"/>
+			<Column Name="Color1" Type="uint" Default="0xFFFF0000"/>
+			<Column Name="Color2" Type="uint" Default="0xFF00FF00"/>
+			<Column Name="Color3" Type="uint" Default="0xFF0000FF"/>
 		</Table.Columns>
 
 		<Table.Keys>

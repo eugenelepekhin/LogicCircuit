@@ -9,12 +9,17 @@ using System.Windows.Controls.Primitives;
 
 namespace LogicCircuit {
 	public partial class LedMatrix {
-		private const int MaxBitsPerLed = 3;
+		public const int MinBitsPerLed = 1;
+		public const int MaxBitsPerLed = 3;
 		public const int MinLedCount = 1;
 		public const int MaxLedCount = BasePin.MaxBitWidth / LedMatrix.MaxBitsPerLed;
 
 		public static int Check(int value) {
 			return Math.Max(LedMatrix.MinLedCount, Math.Min(value, LedMatrix.MaxLedCount));
+		}
+
+		public static int CheckColors(int value) {
+			return Math.Max(LedMatrix.MinBitsPerLed, Math.Min(value, LedMatrix.MaxBitsPerLed));
 		}
 
 		public override void Delete() {
@@ -102,7 +107,16 @@ namespace LogicCircuit {
 		}
 
 		public LedMatrix Create(int rows, int columns) {
-			LedMatrix ledMatrix = this.CreateItem(Guid.NewGuid(), rows, columns);
+			LedMatrix ledMatrix = this.CreateItem(Guid.NewGuid(),
+				LedMatrixData.MatrixTypeField.Field.DefaultValue,
+				LedMatrixData.CellTypeField.Field.DefaultValue,
+				rows,
+				columns,
+				LedMatrixData.ColorsField.Field.DefaultValue,
+				LedMatrixData.Color1Field.Field.DefaultValue,
+				LedMatrixData.Color2Field.Field.DefaultValue,
+				LedMatrixData.Color3Field.Field.DefaultValue
+			);
 			this.CreatePins(ledMatrix);
 			return ledMatrix;
 		}
