@@ -31,9 +31,9 @@ namespace LogicCircuit {
 			get { return this.fieldColors; }
 			set { this.fieldColors = LedMatrix.CheckColors(value); }
 		}
-		public uint Color1;
-		public uint Color2;
-		public uint Color3;
+		public System.Windows.Media.Color Color1;
+		public System.Windows.Media.Color Color2;
+		public System.Windows.Media.Color Color3;
 		internal LedMatrix LedMatrix;
 
 		private interface IFieldSerializer {
@@ -256,22 +256,22 @@ namespace LogicCircuit {
 		}
 
 		// Accessor of the Color1 field
-		public sealed class Color1Field : IField<LedMatrixData, uint>, IFieldSerializer {
+		public sealed class Color1Field : IField<LedMatrixData, System.Windows.Media.Color>, IFieldSerializer {
 			public static readonly Color1Field Field = new Color1Field();
 			private Color1Field() {}
 			public string Name { get { return "Color1"; } }
 			public int Order { get; set; }
-			public uint DefaultValue { get { return 0xFFFF0000; } }
-			public uint GetValue(ref LedMatrixData record) {
+			public System.Windows.Media.Color DefaultValue { get { return System.Windows.Media.Colors.Red; } }
+			public System.Windows.Media.Color GetValue(ref LedMatrixData record) {
 				return record.Color1;
 			}
-			public void SetValue(ref LedMatrixData record, uint value) {
+			public void SetValue(ref LedMatrixData record, System.Windows.Media.Color value) {
 				record.Color1 = value;
 			}
 			public int Compare(ref LedMatrixData l, ref LedMatrixData r) {
 				return l.Color1.CompareTo(r.Color1);
 			}
-			public int Compare(uint l, uint r) {
+			public int Compare(System.Windows.Media.Color l, System.Windows.Media.Color r) {
 				return l.CompareTo(r);
 			}
 
@@ -286,27 +286,27 @@ namespace LogicCircuit {
 				data.Color1 = this.DefaultValue;
 			}
 			void IFieldSerializer.SetTextValue(ref LedMatrixData data, string text) {
-				data.Color1 = (uint)Enum.Parse(typeof(uint), text, true);
+				data.Color1 = (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(text);
 			}
 		}
 
 		// Accessor of the Color2 field
-		public sealed class Color2Field : IField<LedMatrixData, uint>, IFieldSerializer {
+		public sealed class Color2Field : IField<LedMatrixData, System.Windows.Media.Color>, IFieldSerializer {
 			public static readonly Color2Field Field = new Color2Field();
 			private Color2Field() {}
 			public string Name { get { return "Color2"; } }
 			public int Order { get; set; }
-			public uint DefaultValue { get { return 0xFF00FF00; } }
-			public uint GetValue(ref LedMatrixData record) {
+			public System.Windows.Media.Color DefaultValue { get { return System.Windows.Media.Colors.Green; } }
+			public System.Windows.Media.Color GetValue(ref LedMatrixData record) {
 				return record.Color2;
 			}
-			public void SetValue(ref LedMatrixData record, uint value) {
+			public void SetValue(ref LedMatrixData record, System.Windows.Media.Color value) {
 				record.Color2 = value;
 			}
 			public int Compare(ref LedMatrixData l, ref LedMatrixData r) {
 				return l.Color2.CompareTo(r.Color2);
 			}
-			public int Compare(uint l, uint r) {
+			public int Compare(System.Windows.Media.Color l, System.Windows.Media.Color r) {
 				return l.CompareTo(r);
 			}
 
@@ -321,27 +321,27 @@ namespace LogicCircuit {
 				data.Color2 = this.DefaultValue;
 			}
 			void IFieldSerializer.SetTextValue(ref LedMatrixData data, string text) {
-				data.Color2 = (uint)Enum.Parse(typeof(uint), text, true);
+				data.Color2 = (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(text);
 			}
 		}
 
 		// Accessor of the Color3 field
-		public sealed class Color3Field : IField<LedMatrixData, uint>, IFieldSerializer {
+		public sealed class Color3Field : IField<LedMatrixData, System.Windows.Media.Color>, IFieldSerializer {
 			public static readonly Color3Field Field = new Color3Field();
 			private Color3Field() {}
 			public string Name { get { return "Color3"; } }
 			public int Order { get; set; }
-			public uint DefaultValue { get { return 0xFF0000FF; } }
-			public uint GetValue(ref LedMatrixData record) {
+			public System.Windows.Media.Color DefaultValue { get { return System.Windows.Media.Colors.Blue; } }
+			public System.Windows.Media.Color GetValue(ref LedMatrixData record) {
 				return record.Color3;
 			}
-			public void SetValue(ref LedMatrixData record, uint value) {
+			public void SetValue(ref LedMatrixData record, System.Windows.Media.Color value) {
 				record.Color3 = value;
 			}
 			public int Compare(ref LedMatrixData l, ref LedMatrixData r) {
 				return l.Color3.CompareTo(r.Color3);
 			}
-			public int Compare(uint l, uint r) {
+			public int Compare(System.Windows.Media.Color l, System.Windows.Media.Color r) {
 				return l.CompareTo(r);
 			}
 
@@ -356,7 +356,7 @@ namespace LogicCircuit {
 				data.Color3 = this.DefaultValue;
 			}
 			void IFieldSerializer.SetTextValue(ref LedMatrixData data, string text) {
-				data.Color3 = (uint)Enum.Parse(typeof(uint), text, true);
+				data.Color3 = (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(text);
 			}
 		}
 
@@ -545,19 +545,19 @@ namespace LogicCircuit {
 		}
 
 		// Gets or sets value of the Color1 field.
-		public uint Color1 {
+		public System.Windows.Media.Color Color1 {
 			get { return this.Table.GetField(this.LedMatrixRowId, LedMatrixData.Color1Field.Field); }
 			set { this.Table.SetField(this.LedMatrixRowId, LedMatrixData.Color1Field.Field, value); }
 		}
 
 		// Gets or sets value of the Color2 field.
-		public uint Color2 {
+		public System.Windows.Media.Color Color2 {
 			get { return this.Table.GetField(this.LedMatrixRowId, LedMatrixData.Color2Field.Field); }
 			set { this.Table.SetField(this.LedMatrixRowId, LedMatrixData.Color2Field.Field, value); }
 		}
 
 		// Gets or sets value of the Color3 field.
-		public uint Color3 {
+		public System.Windows.Media.Color Color3 {
 			get { return this.Table.GetField(this.LedMatrixRowId, LedMatrixData.Color3Field.Field); }
 			set { this.Table.SetField(this.LedMatrixRowId, LedMatrixData.Color3Field.Field, value); }
 		}
@@ -685,9 +685,9 @@ namespace LogicCircuit {
 			int Rows,
 			int Columns,
 			int Colors,
-			uint Color1,
-			uint Color2,
-			uint Color3
+			System.Windows.Media.Color Color1,
+			System.Windows.Media.Color Color2,
+			System.Windows.Media.Color Color3
 			// Fields of Circuit table
 
 		) {

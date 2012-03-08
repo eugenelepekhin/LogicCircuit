@@ -62,6 +62,7 @@
     <Compile Include="CircuitProject\Wrappers\CollapsedCategory.cs" />
     <Compile Include="CircuitProject\Wrappers\LedMatrix.cs" />
     <Compile Include="CircuitProject\Wrappers\TextNote.cs" />
+    <Compile Include="ColorMethods.cs" />
     <Compile Include="Conductor.cs" />
     <Compile Include="ConductorMap.cs" />
     <Compile Include="CustomCommands.cs" />

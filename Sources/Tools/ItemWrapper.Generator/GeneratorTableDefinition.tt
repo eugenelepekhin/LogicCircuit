@@ -111,6 +111,9 @@ foreach(Column column in this.Table.Columns) {
 		case "Guid":
 			parse = "new Guid(text)";
 			break;
+		case "System.Windows.Media.Color":
+			parse = "(System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(text)";
+			break;
 		default:
 			parse = "(" + column.Type + ")Enum.Parse(typeof(" + column.Type + "), text, true)";
 			break;
