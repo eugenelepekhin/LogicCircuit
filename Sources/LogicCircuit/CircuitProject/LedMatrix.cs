@@ -59,24 +59,43 @@ namespace LogicCircuit {
 		}
 
 		private void UpdateGlyph(CircuitGlyph symbol) {
-			int cellCount = this.Rows * this.Columns;
 			UniformGrid grid = (UniformGrid)symbol.ProbeView;
-			if(cellCount < grid.Children.Count) {
-				grid.Children.RemoveRange(cellCount, grid.Children.Count - cellCount);
-			}
+			grid.Children.Clear();
 			grid.Columns = this.Columns;
 			grid.Rows = this.Rows;
-			for(int i = grid.Children.Count; i < cellCount; i++) {
-				grid.Children.Add(Symbol.Skin(SymbolShape.LedMatrixRoundCell));
+			string skin = (this.CellType == LedMatrixCellType.Round) ? SymbolShape.LedMatrixRoundCell : SymbolShape.LedMatrixRectCell;
+			int cellCount = this.Rows * this.Columns;
+			for(int i = 0; i < cellCount; i++) {
+				grid.Children.Add(Symbol.Skin(skin));
+			}
+		}
+
+		public void UpdatePins() {
+			this.CircuitProject.DevicePinSet.SelectByCircuit(this).ToList().ForEach(p => p.Delete());
+			int rows = this.Rows;
+			int columns = this.Columns;
+			if(this.MatrixType == LedMatrixType.Individual) {
+				for(int i = 0; i < rows; i++) {
+					DevicePin pin = this.CircuitProject.DevicePinSet.Create(this, PinType.Input, columns);
+					pin.Name = "Individual " + i.ToString();
+				}
+			} else { //this.MatrixType == LedMatrixType.Selector
+				Tracer.Assert(this.MatrixType == LedMatrixType.Selector);
+				int colors = this.Colors;
+				for(int i = 0; i < rows; i++) {
+					DevicePin pin = this.CircuitProject.DevicePinSet.Create(this, PinType.Input, colors);
+					pin.Name = "Column Selector " + i.ToString();
+				}
+				for(int i = 0; i < rows; i++) {
+					DevicePin pin = this.CircuitProject.DevicePinSet.Create(this, PinType.Input, colors);
+					pin.Name = "Row Selector " + i.ToString();
+					pin.PinSide = PinSide.Bottom;
+				}
 			}
 		}
 
 		partial void OnLedMatrixChanged() {
-			int symbolCount = 0;
-			foreach(CircuitSymbol symbol in this.CircuitProject.CircuitSymbolSet.SelectByCircuit(this)) {
-				Tracer.Assert(symbolCount++ == 0, "Only one symbol expected");
-				this.UpdateGlyph(symbol);
-			}
+			this.ResetPins();
 		}
 	}
 
@@ -85,24 +104,12 @@ namespace LogicCircuit {
 			LedMatrixData.Load(this.Table, list, rowId => this.Register(rowId));
 		}
 
-		private void CreatePins(LedMatrix ledMatrix) {
-			Tracer.Assert(!this.CircuitProject.DevicePinSet.SelectByCircuit(ledMatrix).Any());
-
-			DevicePin rows = this.CircuitProject.DevicePinSet.Create(ledMatrix, PinType.Input, ledMatrix.Rows);
-			rows.PinSide = PinSide.Left;
-			//rows.Name = Resources.LedMatrixRowsPinName;
-
-			DevicePin columns = this.CircuitProject.DevicePinSet.Create(ledMatrix, PinType.Input, ledMatrix.Columns);
-			columns.PinSide = PinSide.Top;
-			//columns.Name = Resources.LedMatrixColumnsPinName;
-		}
-
 		private LedMatrix Register(RowId rowId) {
 			CircuitData data = new CircuitData() {
 				CircuitId = this.Table.GetField(rowId, LedMatrixData.LedMatrixIdField.Field)
 			};
 			LedMatrix ledMatrix = this.Create(rowId, this.CircuitProject.CircuitTable.Insert(ref data));
-			this.CreatePins(ledMatrix);
+			ledMatrix.UpdatePins();
 			return ledMatrix;
 		}
 
@@ -117,7 +124,7 @@ namespace LogicCircuit {
 				LedMatrixData.Color2Field.Field.DefaultValue,
 				LedMatrixData.Color3Field.Field.DefaultValue
 			);
-			this.CreatePins(ledMatrix);
+			ledMatrix.UpdatePins();
 			return ledMatrix;
 		}
 
