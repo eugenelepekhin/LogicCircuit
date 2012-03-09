@@ -20,7 +20,7 @@ namespace LogicCircuit {
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		private SettingsWindowLocationCache windowLocation;
-		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
+		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this, double.NaN, double.NaN)); } }
 
 		public SettingsGridLengthCache ProjectWidth { get; private set; }
 		public SettingsGridLengthCache DiagramWidth { get; private set; }
