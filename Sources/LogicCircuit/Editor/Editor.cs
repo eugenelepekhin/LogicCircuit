@@ -408,6 +408,10 @@ namespace LogicCircuit {
 			this.Mainframe.ShowDialog(new DialogPin(pin));
 		}
 
+		private void Edit(LedMatrix ledMatrix) {
+			this.Mainframe.ShowDialog(new DialogLedMatrix(ledMatrix));
+		}
+
 		private void Edit(TextNote textNote) {
 			DialogText dialog = new DialogText(textNote.Note);
 			bool? result = this.Mainframe.ShowDialog(dialog);
@@ -447,6 +451,11 @@ namespace LogicCircuit {
 					Pin pin = circuitSymbol.Circuit as Pin;
 					if(pin != null) {
 						this.Edit(pin);
+						return;
+					}
+					LedMatrix ledMatrix = circuitSymbol.Circuit as LedMatrix;
+					if(ledMatrix != null) {
+						this.Edit(ledMatrix);
 						return;
 					}
 				} else if(this.CircuitRunner != null && this.CircuitRunner.VisibleMap != null) {

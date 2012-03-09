@@ -1968,6 +1968,20 @@ namespace LogicCircuit {
 		}
 
 		/// <summary>
+		/// Looks up a localized string similar to _Columns:.
+		/// </summary>
+ 		public static string TitleColumns {
+			get { return ResourceManager.GetString("TitleColumns", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Rows:.
+		/// </summary>
+ 		public static string TitleRows {
+			get { return ResourceManager.GetString("TitleRows", Culture); }
+		}
+
+		/// <summary>
 		/// Looks up a localized string similar to Choose the way of controlling the matrix.
 		/// </summary>
  		public static string ToolTipLedMatrixType {

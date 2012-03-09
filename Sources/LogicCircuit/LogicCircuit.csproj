@@ -84,6 +84,9 @@
     <Compile Include="Dialog\DialogImport.xaml.cs">
       <DependentUpon>DialogImport.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialog\DialogLedMatrix.xaml.cs">
+      <DependentUpon>DialogLedMatrix.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialog\DialogMemory.xaml.cs">
       <DependentUpon>DialogMemory.xaml</DependentUpon>
     </Compile>
@@ -295,6 +298,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialog\DialogImport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialog\DialogLedMatrix.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

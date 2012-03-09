@@ -990,6 +990,12 @@ Do you want to remove the reference to it from the Recent Files list?</value>
   <data name="LedMatrixTypeSelector" xml:space="preserve">
     <value>Selector</value>
   </data>
+  <data name="TitleColumns" xml:space="preserve">
+    <value>_Columns:</value>
+  </data>
+  <data name="TitleRows" xml:space="preserve">
+    <value>_Rows:</value>
+  </data>
   <data name="ToolTipLedMatrixType" xml:space="preserve">
     <value>Choose the way of controlling the matrix</value>
   </data>

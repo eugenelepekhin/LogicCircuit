@@ -239,21 +239,20 @@ namespace LogicCircuit {
 	}
 
 	public class LedMatrixDescriptor : IOCircuitDescriptor<LedMatrix> {
-		public static IEnumerable<string> MatrixTypeNames {
-			get { return new string[] { Resources.LedMatrixTypeIndividual, Resources.LedMatrixTypeSelector }; }
-		}
+		private static readonly IEnumerable<string> matrixTypeNames = new string[] { Resources.LedMatrixTypeIndividual, Resources.LedMatrixTypeSelector };
+		public static IEnumerable<string> MatrixTypeNames { get { return LedMatrixDescriptor.matrixTypeNames; } }
+
+		private static readonly IEnumerable<int> ledRange = PinDescriptor.NumberRange(LedMatrix.MinLedCount, LedMatrix.MaxLedCount);
+		public static IEnumerable<int> RowsRange { get { return LedMatrixDescriptor.ledRange; } }
+		public static IEnumerable<int> ColumnsRange { get { return LedMatrixDescriptor.ledRange; } }
+
 		public int Rows { get; set; }
 		public int Columns { get; set; }
 		public int MatrixType { get; set; }
 
-		public IEnumerable<int> RowsRange { get; private set; }
-		public IEnumerable<int> ColumnsRange { get; private set; }
-
 		public LedMatrixDescriptor(CircuitProject circuitProject) : base(circuitProject.LedMatrixSet.Create(LedMatrixType.Individual, 4, 4)) {
 			this.Rows = 4;
 			this.Columns = 4;
-			this.RowsRange = PinDescriptor.NumberRange(LedMatrix.MinLedCount, LedMatrix.MaxLedCount);
-			this.ColumnsRange = PinDescriptor.NumberRange(LedMatrix.MinLedCount, LedMatrix.MaxLedCount);
 		}
 
 		protected override LedMatrix GetCircuitToDrop(CircuitProject circuitProject) {

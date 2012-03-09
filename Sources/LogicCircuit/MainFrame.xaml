@@ -460,11 +460,11 @@
 											MinWidth="{Binding ElementName=comboRuler, Path=ActualWidth}"
 										/>
 										<TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Static lc:Resources.CaptionLedMatrixType}" Margin="8,0,0,0"/>
-										<ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=RowsRange}" SelectedItem="{Binding Path=Rows}"
+										<ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{x:Static lc:LedMatrixDescriptor.RowsRange}" SelectedItem="{Binding Path=Rows}"
 											ToolTip="{x:Static lc:Resources.ToolTipRows}"
 										/>
 										<TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Static lc:Resources.CaptionRows}" Margin="8,0,0,0"/>
-										<ComboBox Grid.Row="2" Grid.Column="0" ItemsSource="{Binding Path=ColumnsRange}" SelectedItem="{Binding Path=Columns}"
+										<ComboBox Grid.Row="2" Grid.Column="0" ItemsSource="{x:Static lc:LedMatrixDescriptor.ColumnsRange}" SelectedItem="{Binding Path=Columns}"
 											ToolTip="{x:Static lc:Resources.ToolTipColumns}"
 										/>
 										<TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Static lc:Resources.CaptionColumns}" Margin="8,0,0,0"/>
