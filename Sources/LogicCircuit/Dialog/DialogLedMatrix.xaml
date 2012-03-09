@@ -5,7 +5,7 @@
 	WindowStartupLocation="CenterOwner"
 	Title="{Binding Source={x:Static lc:Resources.NameLedMatrix}, Mode=OneTime}"
 	Style="{DynamicResource DialogWindow}"
-	MinWidth="320" MinHeight="240"
+	MinWidth="320" MinHeight="320"
 	FocusManager.FocusedElement="{Binding ElementName=type}"
 >
 	<Window.Resources>

@@ -86,8 +86,8 @@ namespace LogicCircuit {
 					DevicePin pin = this.CircuitProject.DevicePinSet.Create(this, PinType.Input, colors);
 					pin.Name = Resources.LedMatrixRowSelector(i + 1);
 				}
-				for(int i = 0; i < rows; i++) {
-					DevicePin pin = this.CircuitProject.DevicePinSet.Create(this, PinType.Input, colors);
+				for(int i = 0; i < columns; i++) {
+					DevicePin pin = this.CircuitProject.DevicePinSet.Create(this, PinType.Input, 1);
 					pin.Name = Resources.LedMatrixColumnSelector(i + 1);
 					pin.PinSide = PinSide.Bottom;
 				}
