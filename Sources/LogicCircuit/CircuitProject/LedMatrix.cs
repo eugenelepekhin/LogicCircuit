@@ -77,18 +77,18 @@ namespace LogicCircuit {
 			if(this.MatrixType == LedMatrixType.Individual) {
 				for(int i = 0; i < rows; i++) {
 					DevicePin pin = this.CircuitProject.DevicePinSet.Create(this, PinType.Input, columns);
-					pin.Name = "Individual " + i.ToString();
+					pin.Name = Resources.LedMatrixRowIndividual(i + 1);
 				}
 			} else { //this.MatrixType == LedMatrixType.Selector
 				Tracer.Assert(this.MatrixType == LedMatrixType.Selector);
 				int colors = this.Colors;
 				for(int i = 0; i < rows; i++) {
 					DevicePin pin = this.CircuitProject.DevicePinSet.Create(this, PinType.Input, colors);
-					pin.Name = "Column Selector " + i.ToString();
+					pin.Name = Resources.LedMatrixRowSelector(i + 1);
 				}
 				for(int i = 0; i < rows; i++) {
 					DevicePin pin = this.CircuitProject.DevicePinSet.Create(this, PinType.Input, colors);
-					pin.Name = "Row Selector " + i.ToString();
+					pin.Name = Resources.LedMatrixColumnSelector(i + 1);
 					pin.PinSide = PinSide.Bottom;
 				}
 			}
@@ -113,9 +113,9 @@ namespace LogicCircuit {
 			return ledMatrix;
 		}
 
-		public LedMatrix Create(int rows, int columns) {
+		public LedMatrix Create(LedMatrixType ledMatrixType, int rows, int columns) {
 			LedMatrix ledMatrix = this.CreateItem(Guid.NewGuid(),
-				LedMatrixData.MatrixTypeField.Field.DefaultValue,
+				ledMatrixType,
 				LedMatrixData.CellTypeField.Field.DefaultValue,
 				rows,
 				columns,

@@ -1924,5 +1924,54 @@ namespace LogicCircuit {
  		public static string ToolTipRows {
 			get { return ResourceManager.GetString("ToolTipRows", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Type.
+		/// </summary>
+ 		public static string CaptionLedMatrixType {
+			get { return ResourceManager.GetString("CaptionLedMatrixType", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to for selecting Column #{0}.
+		/// </summary>
+ 		public static string LedMatrixColumnSelector(int column) {
+			return string.Format(Culture, ResourceManager.GetString("LedMatrixColumnSelector", Culture), column);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to for each LED in Row #{0}.
+		/// </summary>
+ 		public static string LedMatrixRowIndividual(int row) {
+			return string.Format(Culture, ResourceManager.GetString("LedMatrixRowIndividual", Culture), row);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to for selecting Row #{0}.
+		/// </summary>
+ 		public static string LedMatrixRowSelector(int row) {
+			return string.Format(Culture, ResourceManager.GetString("LedMatrixRowSelector", Culture), row);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Individual.
+		/// </summary>
+ 		public static string LedMatrixTypeIndividual {
+			get { return ResourceManager.GetString("LedMatrixTypeIndividual", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Selector.
+		/// </summary>
+ 		public static string LedMatrixTypeSelector {
+			get { return ResourceManager.GetString("LedMatrixTypeSelector", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Choose the way of controlling the matrix.
+		/// </summary>
+ 		public static string ToolTipLedMatrixType {
+			get { return ResourceManager.GetString("ToolTipLedMatrixType", Culture); }
+		}
 	}
 }

@@ -453,15 +453,23 @@
 										<Grid.RowDefinitions>
 											<RowDefinition Height="Auto"/>
 											<RowDefinition Height="Auto"/>
+											<RowDefinition Height="Auto"/>
 										</Grid.RowDefinitions>
-										<ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Path=RowsRange}" SelectedItem="{Binding Path=Rows}"
+										<ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{x:Static lc:LedMatrixDescriptor.MatrixTypeNames}" SelectedIndex="{Binding Path=MatrixType}"
+											ToolTip="{x:Static lc:Resources.ToolTipLedMatrixType}"
+											MinWidth="{Binding ElementName=comboRuler, Path=ActualWidth}"
+										/>
+										<TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Static lc:Resources.CaptionLedMatrixType}" Margin="8,0,0,0"/>
+										<ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=RowsRange}" SelectedItem="{Binding Path=Rows}"
 											ToolTip="{x:Static lc:Resources.ToolTipRows}"
 										/>
-										<TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Static lc:Resources.CaptionRows}" Margin="8,0,0,0"/>
-										<ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=ColumnsRange}" SelectedItem="{Binding Path=Columns}"
+										<TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Static lc:Resources.CaptionRows}" Margin="8,0,0,0"/>
+										<ComboBox Grid.Row="2" Grid.Column="0" ItemsSource="{Binding Path=ColumnsRange}" SelectedItem="{Binding Path=Columns}"
 											ToolTip="{x:Static lc:Resources.ToolTipColumns}"
 										/>
-										<TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Static lc:Resources.CaptionColumns}" Margin="8,0,0,0"/>
+										<TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Static lc:Resources.CaptionColumns}" Margin="8,0,0,0"/>
+
+										<ListBox Name="comboRuler" Height="0" Visibility="Hidden" ItemsSource="{x:Static lc:LedMatrixDescriptor.MatrixTypeNames}" Padding="5"/>
 									</Grid>
 									<TextBlock Text="{Binding Path=Circuit.Notation}" VerticalAlignment="Center"/>
 								</StackPanel>
