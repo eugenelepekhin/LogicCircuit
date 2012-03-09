@@ -42,7 +42,7 @@ namespace LogicCircuit {
 			set { throw new InvalidOperationException(); }
 		}
 
-		public override string ToolTip { get { return Resources.ToolTipLedMatrix(this.Rows, this.Columns); } }
+		public override string ToolTip { get { return Circuit.BuildToolTip(Resources.ToolTipLedMatrix(this.Rows, this.Columns), this.Note); } }
 
 		public override Circuit CopyTo(LogicalCircuit target) {
 			return target.CircuitProject.LedMatrixSet.Copy(this);
@@ -96,6 +96,7 @@ namespace LogicCircuit {
 
 		partial void OnLedMatrixChanged() {
 			this.ResetPins();
+			this.InvalidateDistinctSymbol();
 		}
 	}
 
@@ -122,7 +123,8 @@ namespace LogicCircuit {
 				LedMatrixData.ColorsField.Field.DefaultValue,
 				LedMatrixData.Color1Field.Field.DefaultValue,
 				LedMatrixData.Color2Field.Field.DefaultValue,
-				LedMatrixData.Color3Field.Field.DefaultValue
+				LedMatrixData.Color3Field.Field.DefaultValue,
+				LedMatrixData.NoteField.Field.DefaultValue
 			);
 			ledMatrix.UpdatePins();
 			return ledMatrix;

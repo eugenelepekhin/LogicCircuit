@@ -34,6 +34,7 @@ namespace LogicCircuit {
 		public System.Windows.Media.Color Color1;
 		public System.Windows.Media.Color Color2;
 		public System.Windows.Media.Color Color3;
+		public string Note;
 		internal LedMatrix LedMatrix;
 
 		private interface IFieldSerializer {
@@ -360,6 +361,41 @@ namespace LogicCircuit {
 			}
 		}
 
+		// Accessor of the Note field
+		public sealed class NoteField : IField<LedMatrixData, string>, IFieldSerializer {
+			public static readonly NoteField Field = new NoteField();
+			private NoteField() {}
+			public string Name { get { return "Note"; } }
+			public int Order { get; set; }
+			public string DefaultValue { get { return ""; } }
+			public string GetValue(ref LedMatrixData record) {
+				return record.Note;
+			}
+			public void SetValue(ref LedMatrixData record, string value) {
+				record.Note = value;
+			}
+			public int Compare(ref LedMatrixData l, ref LedMatrixData r) {
+				return StringComparer.Ordinal.Compare(l.Note, r.Note);
+			}
+			public int Compare(string l, string r) {
+				return StringComparer.Ordinal.Compare(l, r);
+			}
+
+			// Implementation of interface IFieldSerializer
+			bool IFieldSerializer.NeedToSave(ref LedMatrixData data) {
+				return this.Compare(data.Note, this.DefaultValue) != 0;
+			}
+			string IFieldSerializer.GetTextValue(ref LedMatrixData data) {
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Note);
+			}
+			void IFieldSerializer.SetDefault(ref LedMatrixData data) {
+				data.Note = this.DefaultValue;
+			}
+			void IFieldSerializer.SetTextValue(ref LedMatrixData data, string text) {
+				data.Note = text;
+			}
+		}
+
 		// Special field used to access items wrapper of this record from record.
 		// This is used when no other universes is used
 		internal sealed class LedMatrixField : IField<LedMatrixData, LedMatrix> {
@@ -395,6 +431,7 @@ namespace LogicCircuit {
 			Color1Field.Field,
 			Color2Field.Field,
 			Color3Field.Field,
+			NoteField.Field,
 			LedMatrixField.Field
 		};
 
@@ -562,6 +599,12 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.LedMatrixRowId, LedMatrixData.Color3Field.Field, value); }
 		}
 
+		// Gets or sets value of the Note field.
+		public string Note {
+			get { return this.Table.GetField(this.LedMatrixRowId, LedMatrixData.NoteField.Field); }
+			set { this.Table.SetField(this.LedMatrixRowId, LedMatrixData.NoteField.Field, value); }
+		}
+
 
 		internal void NotifyChanged(TableChange<LedMatrixData> change) {
 			if(this.HasListener) {
@@ -594,6 +637,9 @@ namespace LogicCircuit {
 				}
 				if(LedMatrixData.Color3Field.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("Color3");
+				}
+				if(LedMatrixData.NoteField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("Note");
 				}
 			}
 			this.OnLedMatrixChanged();
@@ -687,7 +733,8 @@ namespace LogicCircuit {
 			int Colors,
 			System.Windows.Media.Color Color1,
 			System.Windows.Media.Color Color2,
-			System.Windows.Media.Color Color3
+			System.Windows.Media.Color Color3,
+			string Note
 			// Fields of Circuit table
 
 		) {
@@ -707,6 +754,7 @@ namespace LogicCircuit {
 				Color1 = Color1,
 				Color2 = Color2,
 				Color3 = Color3,
+				Note = Note,
 			};
 			return this.Create(this.Table.Insert(ref dataLedMatrix), rowIdCircuit);
 		}
