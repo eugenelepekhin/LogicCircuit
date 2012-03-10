@@ -221,6 +221,14 @@ namespace LogicCircuit {
 					Tracer.Assert(this.CircuitSymbolSet.SelectByCircuit(circuit).Count() == 1);
 				}
 			}
+			foreach(LedMatrix ledMatrix in this.LedMatrixSet) {
+				int count = this.DevicePinSet.SelectByCircuit(ledMatrix).Count();
+				if(ledMatrix.MatrixType == LedMatrixType.Individual) {
+					Tracer.Assert(ledMatrix.Rows == count);
+				} else {
+					Tracer.Assert((ledMatrix.Rows + ledMatrix.Columns) == count);
+				}
+			}
 			foreach(Wire wire in this.WireSet) {
 				Tracer.Assert(wire.Point1 != wire.Point2);
 			}
