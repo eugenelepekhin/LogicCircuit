@@ -297,7 +297,7 @@ namespace LogicCircuit {
 			private Color2Field() {}
 			public string Name { get { return "Color2"; } }
 			public int Order { get; set; }
-			public System.Windows.Media.Color DefaultValue { get { return System.Windows.Media.Colors.Green; } }
+			public System.Windows.Media.Color DefaultValue { get { return System.Windows.Media.Colors.Lime; } }
 			public System.Windows.Media.Color GetValue(ref LedMatrixData record) {
 				return record.Color2;
 			}

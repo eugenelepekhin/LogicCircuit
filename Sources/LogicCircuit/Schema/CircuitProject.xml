@@ -219,7 +219,7 @@
 			<Column Name="Columns" Type="int" Check="LedMatrix.Check"/>
 			<Column Name="Colors" Type="int" Check="LedMatrix.CheckColors" Default="1"/>
 			<Column Name="Color1" Type="System.Windows.Media.Color" Default="System.Windows.Media.Colors.Red"/>
-			<Column Name="Color2" Type="System.Windows.Media.Color" Default="System.Windows.Media.Colors.Green"/>
+			<Column Name="Color2" Type="System.Windows.Media.Color" Default="System.Windows.Media.Colors.Lime"/>
 			<Column Name="Color3" Type="System.Windows.Media.Color" Default="System.Windows.Media.Colors.Blue"/>
 			<Column Name="Note" Type="string" Default=""/>
 		</Table.Columns>
