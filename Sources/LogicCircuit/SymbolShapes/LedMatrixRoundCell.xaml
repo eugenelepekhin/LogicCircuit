@@ -4,6 +4,6 @@
 	Fill="{StaticResource LedMatrixOff}"
 	Stroke="Black"
 	StrokeThickness="1"
-	Width="16"
-	Height="16"
+	Width="17"
+	Height="17"
 />
