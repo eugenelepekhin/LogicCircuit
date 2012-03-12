@@ -73,11 +73,13 @@ namespace LogicCircuit {
 		}
 
 		protected void Save(string file) {
-			using (XmlWriter writer = XmlHelper.WriteToFile(file)) {
-				writer.WriteStartDocument();
-				writer.WriteStartElement("lcs", "settings", Settings.NamespaceUri);
-				this.Save(writer);
-				writer.WriteEndElement();
+			using (TextWriter textWriter = new StreamWriter(file)) {
+				using (XmlWriter writer = XmlHelper.CreateWriter(textWriter)) {
+					writer.WriteStartDocument();
+					writer.WriteStartElement("lcs", "settings", Settings.NamespaceUri);
+					this.Save(writer);
+					writer.WriteEndElement();
+				}
 			}
 		}
 

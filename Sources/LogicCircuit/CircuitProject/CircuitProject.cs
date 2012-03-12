@@ -48,9 +48,23 @@ namespace LogicCircuit {
 			}
 		}
 
-		public void Save(string file) {
-			XmlDocument xml = this.Save();
-			XmlHelper.Save(xml, file);
+		public void Save(TextWriter textWriter) {
+			using(XmlWriter writer = XmlHelper.CreateWriter(textWriter)) {
+				writer.WriteStartDocument();
+				writer.WriteStartElement(CircuitProject.PersistencePrefix, "CircuitProject", CircuitProject.PersistenceNamespace);
+				ProjectData.Save(this.ProjectSet.Table, writer, CircuitProject.PersistenceNamespace);
+				CollapsedCategoryData.Save(this.CollapsedCategorySet.Table, writer, CircuitProject.PersistenceNamespace);
+				LogicalCircuitData.Save(this.LogicalCircuitSet.Table, writer, CircuitProject.PersistenceNamespace);
+				PinData.Save(this.PinSet.Table, writer, CircuitProject.PersistenceNamespace);
+				ConstantData.Save(this.ConstantSet.Table, writer, CircuitProject.PersistenceNamespace);
+				CircuitButtonData.Save(this.CircuitButtonSet.Table, writer, CircuitProject.PersistenceNamespace);
+				MemoryData.Save(this.MemorySet.Table, writer, CircuitProject.PersistenceNamespace);
+				SplitterData.Save(this.SplitterSet.Table, writer, CircuitProject.PersistenceNamespace);
+				CircuitSymbolData.Save(this.CircuitSymbolSet.Table, writer, CircuitProject.PersistenceNamespace);
+				WireData.Save(this.WireSet.Table, writer, CircuitProject.PersistenceNamespace);
+				TextNoteData.Save(this.TextNoteSet.Table, writer, CircuitProject.PersistenceNamespace);
+				writer.WriteEndElement();
+			}
 		}
 
 		private class AtomizedComparator : IEqualityComparer<string> {
@@ -135,34 +149,20 @@ namespace LogicCircuit {
 			}
 		}
 
-		private XmlDocument Save() {
-			XmlDocument xml = new XmlDocument();
-			XmlElement root = xml.CreateElement(CircuitProject.PersistencePrefix, "CircuitProject", CircuitProject.PersistenceNamespace);
-			xml.AppendChild(root);
-			ProjectData.Save(this.ProjectSet.Table, root);
-			CollapsedCategoryData.Save(this.CollapsedCategorySet.Table, root);
-			LogicalCircuitData.Save(this.LogicalCircuitSet.Table, root);
-			PinData.Save(this.PinSet.Table, root);
-			ConstantData.Save(this.ConstantSet.Table, root);
-			CircuitButtonData.Save(this.CircuitButtonSet.Table, root);
-			MemoryData.Save(this.MemorySet.Table, root);
-			SplitterData.Save(this.SplitterSet.Table, root);
-			CircuitSymbolData.Save(this.CircuitSymbolSet.Table, root);
-			WireData.Save(this.WireSet.Table, root);
-			TextNoteData.Save(this.TextNoteSet.Table, root);
-			return xml;
-		}
-
-		public XmlDocument Copy(IEnumerable<Symbol> symbol) {
-			CircuitProject copy = new CircuitProject();
-			bool started = copy.StartTransaction();
-			Tracer.Assert(started);
-			copy.ProjectSet.Copy(this.ProjectSet.Project);
-			LogicalCircuit target = copy.LogicalCircuitSet.Copy(this.ProjectSet.Project.LogicalCircuit, false);
-			foreach(Symbol s in symbol) {
-				s.CopyTo(target);
+		public string WriteToString(IEnumerable<Symbol> symbol) {
+			StringBuilder sb = new StringBuilder();
+			using (TextWriter textWriter = new StringWriter(sb)) {
+				CircuitProject copy = new CircuitProject();
+				bool started = copy.StartTransaction();
+				Tracer.Assert(started);
+				copy.ProjectSet.Copy(this.ProjectSet.Project);
+				LogicalCircuit target = copy.LogicalCircuitSet.Copy(this.ProjectSet.Project.LogicalCircuit, false);
+				foreach(Symbol s in symbol) {
+					s.CopyTo(target);
+				}
+				copy.Save(textWriter);
 			}
-			return copy.Save();
+			return sb.ToString();
 		}
 
 		public static bool CanPaste(string text) {

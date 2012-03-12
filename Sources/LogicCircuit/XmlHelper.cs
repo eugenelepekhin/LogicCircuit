@@ -31,8 +31,8 @@ namespace LogicCircuit {
 			return XmlReader.Create(fileName, xmlReaderSettings);
 		}
 
-		public static XmlWriter WriteToFile(string fileName) {
-			return XmlWriter.Create(fileName, xmlWriterSettings);
+		public static XmlWriter CreateWriter(TextWriter textWriter) {
+			return XmlWriter.Create(textWriter, xmlWriterSettings);
 		}
 
 		public static void Transform(string xsltText, ref XmlReader inputXml) {
@@ -93,6 +93,10 @@ namespace LogicCircuit {
 				"Atomization problem. You forgot to atomize string: '" + x + "'"
 			);
 			return object.ReferenceEquals(x, y);
+		}
+
+		internal static XmlWriter WriteToString(StringBuilder sb) {
+			throw new NotImplementedException();
 		}
 	}
 }

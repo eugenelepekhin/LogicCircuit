@@ -1062,19 +1062,18 @@ if(this.Table.Persistent) {
             
             #line default
             #line hidden
-            this.Write("Data> table, XmlElement root) {\r\n\t\t\tXmlDocument xml = root.OwnerDocument;\r\n\t\t\tfor" +
-                    "each(RowId rowId in table.Rows) {\r\n\t\t\t\t");
+            this.Write("Data> table, XmlWriter writer, string ns) {\r\n\t\t\tforeach(RowId rowId in table.Rows" +
+                    ") {\r\n\t\t\t\t");
             
-            #line 232 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 231 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
-            this.Write("Data data;\r\n\t\t\t\ttable.GetData(rowId, out data);\r\n\t\t\t\tXmlElement node = xml.Create" +
-                    "Element(root.Prefix, table.Name, root.NamespaceURI);\r\n\t\t\t\troot.AppendChild(node)" +
-                    ";\r\n\t\t\t\tforeach(IField<");
+            this.Write("Data data;\r\n\t\t\t\ttable.GetData(rowId, out data);\r\n\t\t\t\twriter.WriteStartElement(tab" +
+                    "le.Name, ns);\r\n\t\t\t\tforeach(IField<");
             
-            #line 236 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 234 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
@@ -1082,17 +1081,18 @@ if(this.Table.Persistent) {
             this.Write(@"Data> field in table.Fields) {
 					IFieldSerializer serializer = field as IFieldSerializer;
 					if(serializer != null && serializer.NeedToSave(ref data)) {
-						XmlElement e = xml.CreateElement(root.Prefix, field.Name, root.NamespaceURI);
-						node.AppendChild(e);
-						e.AppendChild(xml.CreateTextNode(serializer.GetTextValue(ref data)));
+						writer.WriteStartElement(field.Name, ns);
+						writer.WriteString(serializer.GetTextValue(ref data));
+						writer.WriteEndElement();
 					}
 				}
+				writer.WriteEndElement();
 			}
 		}
 
 		public static RowId Load(TableSnapshot<");
             
-            #line 247 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 246 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
@@ -1101,28 +1101,28 @@ if(this.Table.Persistent) {
                     "Element);\r\n\t\t\tDebug.Assert(reader.LocalName == table.Name);\r\n\t\t\tDebug.Assert(!re" +
                     "ader.IsEmptyElement);\r\n\r\n\t\t\t");
             
-            #line 252 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 251 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data data = new ");
             
-            #line 252 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 251 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data();\r\n\t\t\t// Initialize \'data\' with default values: \r\n\t\t\tfor (int i = 0; i < ");
             
-            #line 254 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 253 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data.fields.Length; i ++) {\r\n\t\t\t\tIFieldSerializer serializer = ");
             
-            #line 255 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 254 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
@@ -1146,7 +1146,7 @@ if(this.Table.Persistent) {
 					string fieldValue = ReadElementText(reader);     // reads the text and moved the reader to pass this element
 					IFieldSerializer serializer = ");
             
-            #line 272 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 271 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
@@ -1194,28 +1194,28 @@ if(this.Table.Persistent) {
 			// We serialize/deserialize fields in the same order so result would always be at hint position or after it if hint is skipped during the serialization
 			Debug.Assert(0 <= hint && hint <= ");
             
-            #line 313 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 312 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data.fields.Length);\r\n\t\t\tfor (int i = hint; i < ");
             
-            #line 314 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 313 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data.fields.Length; i ++) {\r\n\t\t\t\tif (");
             
-            #line 315 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 314 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data.fields[i].Name == name) {\r\n\t\t\t\t\thint = i + 1;\r\n\t\t\t\t\treturn ");
             
-            #line 317 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 316 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
@@ -1224,14 +1224,14 @@ if(this.Table.Persistent) {
                     " in expected place. Lets look the beginning of the list in case it is out of ord" +
                     "er\r\n\t\t\tfor (int i = 0; i < hint; i ++) {\r\n\t\t\t\tif (");
             
-            #line 323 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 322 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data.fields[i].Name == name) {\r\n\t\t\t\t\treturn ");
             
-            #line 324 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 323 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
@@ -1239,7 +1239,7 @@ if(this.Table.Persistent) {
             this.Write("Data.fields[i] as IFieldSerializer;\r\n\t\t\t\t}\r\n\t\t\t}\r\n\r\n\t\t\t// Ups. Still don\'t find. " +
                     "\r\n\t\t\treturn null;\r\n\t\t}\r\n");
             
-            #line 331 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 330 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
 }
             
             #line default

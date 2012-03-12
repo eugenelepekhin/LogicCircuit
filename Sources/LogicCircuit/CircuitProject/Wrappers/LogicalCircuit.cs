@@ -255,21 +255,20 @@ namespace LogicCircuit {
 		}
 
 		// Serializer of the table
-		public static void Save(TableSnapshot<LogicalCircuitData> table, XmlElement root) {
-			XmlDocument xml = root.OwnerDocument;
+		public static void Save(TableSnapshot<LogicalCircuitData> table, XmlWriter writer, string ns) {
 			foreach(RowId rowId in table.Rows) {
 				LogicalCircuitData data;
 				table.GetData(rowId, out data);
-				XmlElement node = xml.CreateElement(root.Prefix, table.Name, root.NamespaceURI);
-				root.AppendChild(node);
+				writer.WriteStartElement(table.Name, ns);
 				foreach(IField<LogicalCircuitData> field in table.Fields) {
 					IFieldSerializer serializer = field as IFieldSerializer;
 					if(serializer != null && serializer.NeedToSave(ref data)) {
-						XmlElement e = xml.CreateElement(root.Prefix, field.Name, root.NamespaceURI);
-						node.AppendChild(e);
-						e.AppendChild(xml.CreateTextNode(serializer.GetTextValue(ref data)));
+						writer.WriteStartElement(field.Name, ns);
+						writer.WriteString(serializer.GetTextValue(ref data));
+						writer.WriteEndElement();
 					}
 				}
+				writer.WriteEndElement();
 			}
 		}
 

@@ -74,7 +74,9 @@ namespace LogicCircuit {
 		}
 
 		public void Save(string file) {
-			this.CircuitProject.Save(file);
+			using (TextWriter textWriter = new StreamWriter(file)) {
+				this.CircuitProject.Save(textWriter);
+			}
 			this.File = file;
 			this.savedVersion = this.CircuitProject.Version;
 			this.NotifyPropertyChanged("Caption");
@@ -326,15 +328,7 @@ namespace LogicCircuit {
 		public void Copy() {
 			this.CancelMove();
 			if(0 < this.SelectionCount) {
-				XmlDocument xml = this.CircuitProject.Copy(this.SelectedSymbols);
-				StringBuilder text = new StringBuilder();
-				using(StringWriter stringWriter = new StringWriter(text, CultureInfo.InvariantCulture)) {
-					using(XmlTextWriter writer = new XmlTextWriter(stringWriter)) {
-						writer.Formatting = Formatting.None;
-						xml.WriteTo(writer);
-					}
-				}
-				Clipboard.SetDataObject(text.ToString(), false);
+				Clipboard.SetDataObject(this.CircuitProject.WriteToString(this.SelectedSymbols), false);
 			}
 		}
 
