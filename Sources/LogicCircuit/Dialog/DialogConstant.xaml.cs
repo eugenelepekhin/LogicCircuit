@@ -27,7 +27,7 @@ namespace LogicCircuit {
 		private void ButtonOkClick(object sender, RoutedEventArgs e) {
 			try {
 				int bitWidth = (int)this.bitWidth.SelectedItem;
-				int value = int.Parse(this.value.Text.Trim(), NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+				int value = Constant.Normalize(int.Parse(this.value.Text.Trim(), NumberStyles.HexNumber, CultureInfo.InvariantCulture), bitWidth);
 				string note = this.note.Text.Trim();
 
 				if(this.constant.BitWidth != bitWidth || this.constant.ConstantValue != value || this.constant.Note != note) {
