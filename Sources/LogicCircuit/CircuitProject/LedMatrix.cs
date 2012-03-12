@@ -74,14 +74,14 @@ namespace LogicCircuit {
 			this.CircuitProject.DevicePinSet.SelectByCircuit(this).ToList().ForEach(p => p.Delete());
 			int rows = this.Rows;
 			int columns = this.Columns;
+			int colors = this.Colors;
 			if(this.MatrixType == LedMatrixType.Individual) {
 				for(int i = 0; i < rows; i++) {
-					DevicePin pin = this.CircuitProject.DevicePinSet.Create(this, PinType.Input, columns);
+					DevicePin pin = this.CircuitProject.DevicePinSet.Create(this, PinType.Input, columns * colors);
 					pin.Name = Resources.LedMatrixRowIndividual(i + 1);
 				}
 			} else { //this.MatrixType == LedMatrixType.Selector
 				Tracer.Assert(this.MatrixType == LedMatrixType.Selector);
-				int colors = this.Colors;
 				for(int i = 0; i < rows; i++) {
 					DevicePin pin = this.CircuitProject.DevicePinSet.Create(this, PinType.Input, colors);
 					pin.Name = Resources.LedMatrixRowSelector(i + 1);
