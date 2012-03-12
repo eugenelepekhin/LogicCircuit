@@ -341,7 +341,7 @@ namespace LogicCircuit {
 			this.ClearSelection();
 			string text = Clipboard.GetText();
 			if(CircuitProject.CanPaste(text)) {
-				using (XmlReader reader = XmlHelper.ReadFromString(text)) {
+				using (XmlReader reader = XmlHelper.CreateReader(new StringReader(text))) {
 					IEnumerable<Symbol> result = null;
 					this.CircuitProject.InTransaction(() => {
 						result = this.CircuitProject.Paste(reader);

@@ -22,28 +22,27 @@ namespace LogicCircuit {
 		}
 
 		public static CircuitProject Create(string file) {
-			XmlReader xmlReader;
-			if(file != null) {
-				xmlReader = XmlHelper.ReadFromFile(file);
-			} else {
-				string newEmptyProject = string.Format(CultureInfo.InvariantCulture, Schema.Empty,
-					Guid.NewGuid(), //ProjectId
-					Resources.CircuitProjectName,
-					Guid.NewGuid(), //LogicalCircuitId
-					Resources.LogicalCircuitMainName,
-					Resources.LogicalCircuitMainNotation
-				);
-				xmlReader = XmlHelper.ReadFromString(newEmptyProject);
-			}
-
+			XmlReader xmlReader = XmlHelper.CreateReader((file != null ?
+				(TextReader) new StreamReader(file) :
+				(TextReader) new StringReader(
+					string.Format(CultureInfo.InvariantCulture, Schema.Empty,
+						Guid.NewGuid(), //ProjectId
+						Resources.CircuitProjectName,
+						Guid.NewGuid(), //LogicalCircuitId
+						Resources.LogicalCircuitMainName,
+						Resources.LogicalCircuitMainNotation
+					)
+				)
+			));
 			try {
-				xmlReader = CircuitProject.Transform(xmlReader);
+				CircuitProject.Transform(ref xmlReader);
 
 				CircuitProject circuitProject = new CircuitProject();
 				circuitProject.InTransaction(() => circuitProject.Load(xmlReader));
 				circuitProject.CircuitSymbolSet.ValidateAll();
 				return circuitProject;
 			} finally {
+				// Don't use using here. Transform may close original XmlReader and open new one.
 				xmlReader.Close();
 			}
 		}
@@ -151,7 +150,7 @@ namespace LogicCircuit {
 
 		public string WriteToString(IEnumerable<Symbol> symbol) {
 			StringBuilder sb = new StringBuilder();
-			using (TextWriter textWriter = new StringWriter(sb)) {
+			using (TextWriter textWriter = new StringWriter(sb, CultureInfo.InvariantCulture)) {
 				CircuitProject copy = new CircuitProject();
 				bool started = copy.StartTransaction();
 				Tracer.Assert(started);
@@ -170,7 +169,7 @@ namespace LogicCircuit {
 				return true;
 			}
 			try {
-				using (XmlReader xmlReader = XmlHelper.ReadFromString(text)) {
+				using (XmlReader xmlReader = XmlHelper.CreateReader(new StringReader(text))) {
 					string rootName = xmlReader.NameTable.Add("CircuitProject");
 					string ns       = xmlReader.NameTable.Add(CircuitProject.PersistenceNamespace);
 					while (xmlReader.NodeType != XmlNodeType.Element && xmlReader.Read()) ;        // skip to the first element
@@ -277,14 +276,16 @@ namespace LogicCircuit {
 			this.InTransaction(action, false);
 		}
 
-		private static XmlReader Transform(XmlReader xmlReader) {
+		// Transform may close input reader and replace it with new one.
+		// To emphasize this we pass xmlReader by ref.s
+		private static void Transform(ref XmlReader xmlReader) {
 			StringComparer cmp = StringComparer.OrdinalIgnoreCase;
 			do {				
 				while (xmlReader.NodeType != XmlNodeType.Element && xmlReader.Read()) ;        // skip to the first element
 				string ns = xmlReader.NamespaceURI;
 
 				string xslt;
-				if (cmp.Compare(ns, CircuitProject.PersistenceNamespace                 ) == 0) { return xmlReader;                  } else 
+				if (cmp.Compare(ns, CircuitProject.PersistenceNamespace                 ) == 0) { return;                            } else 
 				if (cmp.Compare(ns, "http://LogicCircuit.net/2.0.0.2/CircuitProject.xsd") == 0) { xslt = Schema.ConvertFrom_2_0_0_2; } else 
 				if (cmp.Compare(ns, "http://LogicCircuit.net/2.0.0.1/CircuitProject.xsd") == 0) { xslt = Schema.ConvertFrom_2_0_0_1; } else 
 				if (cmp.Compare(ns, "http://LogicCircuit.net/1.0.0.3/CircuitProject.xsd") == 0) { xslt = Schema.ConvertFrom_1_0_0_3; } else 

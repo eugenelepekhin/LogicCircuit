@@ -23,18 +23,16 @@ namespace LogicCircuit {
 			Indent = true
 		};
 
-		public static XmlReader ReadFromString(string xmlText) {			
-			return XmlReader.Create(new StringReader(xmlText), xmlReaderSettings);
-		}
-
-		public static XmlReader ReadFromFile(string fileName) {
-			return XmlReader.Create(fileName, xmlReaderSettings);
+		public static XmlReader CreateReader(TextReader textReader) {			
+			return XmlReader.Create(textReader, xmlReaderSettings);
 		}
 
 		public static XmlWriter CreateWriter(TextWriter textWriter) {
 			return XmlWriter.Create(textWriter, xmlWriterSettings);
 		}
 
+		// Transform may close input reader and replace it with new one.
+		// To emphasize this we pass xmlReader by ref.
 		public static void Transform(string xsltText, ref XmlReader inputXml) {
 			XslCompiledTransform xslt = new XslCompiledTransform();
 			using(StringReader stringReader = new StringReader(xsltText)) {
@@ -45,31 +43,13 @@ namespace LogicCircuit {
 
 			// To get the results if XSLT transformation in form of XmlReader we are writing the output to string 
 			// and them creating XmlReader to parse this string.
-			using(StringWriter stringWriter = new StringWriter(CultureInfo.InvariantCulture)) {
-				using(XmlTextWriter writer = new XmlTextWriter(stringWriter)) {
-					xslt.Transform(inputXml, writer);
-				}
-				// closing this reader and create another one to use instead
-				inputXml.Close();                   
-				inputXml = ReadFromString(stringWriter.ToString());
+			StringBuilder sb = new StringBuilder();
+			using(XmlTextWriter writer = new XmlTextWriter(new StringWriter(sb, CultureInfo.InvariantCulture))) {
+				xslt.Transform(inputXml, writer);
 			}
-		}
-
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")]
-		public static void Save(XmlDocument xml, string file) {
-			if(!File.Exists(file)) {
-				string dir = Path.GetDirectoryName(file);
-				if(!Directory.Exists(dir)) {
-					Directory.CreateDirectory(dir);
-				}
-			}
-			using(XmlTextWriter writer = new XmlTextWriter(file, Encoding.UTF8)) {
-				writer.Formatting = Formatting.Indented;
-				writer.Indentation = 1;
-				writer.IndentChar = '\t';
-				xml.Save(writer);
-				writer.Close();
-			}
+			// closing this reader and create another one to use instead
+			inputXml.Close();                   
+			inputXml = XmlHelper.CreateReader(new StringReader(sb.ToString()));
 		}
 
 		public static bool IsElement(this XmlReader xmlReader, string ns, string localName = null) {
@@ -93,10 +73,6 @@ namespace LogicCircuit {
 				"Atomization problem. You forgot to atomize string: '" + x + "'"
 			);
 			return object.ReferenceEquals(x, y);
-		}
-
-		internal static XmlWriter WriteToString(StringBuilder sb) {
-			throw new NotImplementedException();
 		}
 	}
 }

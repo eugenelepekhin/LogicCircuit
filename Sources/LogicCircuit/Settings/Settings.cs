@@ -42,7 +42,7 @@ namespace LogicCircuit {
 
 		protected void Load(string file) {
 			if(File.Exists(file)) {
-				XmlReader xmlReader = XmlHelper.ReadFromFile(file);
+				XmlReader xmlReader = XmlHelper.CreateReader(new StreamReader(file));
 
 				try {
 					// skip to the first element
@@ -54,6 +54,7 @@ namespace LogicCircuit {
 
 					this.Load(new XPathDocument(xmlReader).CreateNavigator());
 				} finally {
+					// Don't use using here. Transform may close original XmlReader and open new one.
 					xmlReader.Close();
 				}
 			}
@@ -73,13 +74,11 @@ namespace LogicCircuit {
 		}
 
 		protected void Save(string file) {
-			using (TextWriter textWriter = new StreamWriter(file)) {
-				using (XmlWriter writer = XmlHelper.CreateWriter(textWriter)) {
-					writer.WriteStartDocument();
-					writer.WriteStartElement("lcs", "settings", Settings.NamespaceUri);
-					this.Save(writer);
-					writer.WriteEndElement();
-				}
+			using (XmlWriter writer = XmlHelper.CreateWriter(new StreamWriter(file))) {
+				writer.WriteStartDocument();
+				writer.WriteStartElement("lcs", "settings", Settings.NamespaceUri);
+				this.Save(writer);
+				writer.WriteEndElement();
 			}
 		}
 
