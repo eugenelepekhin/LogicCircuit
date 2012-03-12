@@ -347,14 +347,14 @@ namespace LogicCircuit {
 			this.ClearSelection();
 			string text = Clipboard.GetText();
 			if(CircuitProject.CanPaste(text)) {
-				XmlDocument xml = new XmlDocument();
-				xml.LoadXml(text);
-				IEnumerable<Symbol> result = null;
-				this.CircuitProject.InTransaction(() => {
-					result = this.CircuitProject.Paste(xml);
-				});
-				Tracer.Assert(result.All(symbol => symbol.LogicalCircuit == this.Project.LogicalCircuit));
-				this.Select(result);
+				using (XmlReader reader = XmlHelper.ReadFromString(text)) {
+					IEnumerable<Symbol> result = null;
+					this.CircuitProject.InTransaction(() => {
+						result = this.CircuitProject.Paste(reader);
+					});
+					Tracer.Assert(result.All(symbol => symbol.LogicalCircuit == this.Project.LogicalCircuit));
+					this.Select(result);
+				}
 			}
 		}
 

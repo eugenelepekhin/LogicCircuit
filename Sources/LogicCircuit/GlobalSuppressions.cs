@@ -136,3 +136,4 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "rowId", Scope = "member", Target = "LogicCircuit.CollapsedCategorySet.#Delete(LogicCircuit.DataPersistent.RowId)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "store", Scope = "member", Target = "LogicCircuit.CollapsedCategoryData.#CreateForeignKeys(LogicCircuit.DataPersistent.StoreSnapshot)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "LogicCircuit.CollapsedCategorySet.#Delete(LogicCircuit.DataPersistent.RowId)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times", Scope = "member", Target = "LogicCircuit.XmlHelper.#Transform(System.Xml.XmlReader,System.String)")]

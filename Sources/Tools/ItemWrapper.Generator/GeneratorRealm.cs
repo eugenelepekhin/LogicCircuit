@@ -40,15 +40,15 @@ namespace ItemWrapper.Generator
             
             #line default
             #line hidden
-            this.Write(" : StoreSnapshot, INotifyPropertyChanged {\r\n\t\tpublic const string PersistenceName" +
-                    "space = \"");
+            this.Write(" : StoreSnapshot, INotifyPropertyChanged {\r\n\t\tprivate const string PersistenceNam" +
+                    "espace = \"");
             
             #line 10 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorRealm.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Store.PersistenceNamespace ?? string.Empty));
             
             #line default
             #line hidden
-            this.Write("\";\r\n\t\tpublic const string PersistencePrefix = \"");
+            this.Write("\";\r\n\t\tprivate const string PersistencePrefix = \"");
             
             #line 11 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorRealm.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Store.PersistencePrefix ?? string.Empty));

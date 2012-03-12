@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Xml;
+using System.Xml.XPath;
 
 namespace LogicCircuit {
 	public class Settings {
@@ -42,22 +43,32 @@ namespace LogicCircuit {
 
 		protected void Load(string file) {
 			if(File.Exists(file)) {
-				XmlDocument xml = new XmlDocument();
-				xml.Load(file);
-				if(StringComparer.OrdinalIgnoreCase.Compare(xml.DocumentElement.NamespaceURI, Settings.OldNamespaceUri) == 0) {
-					xml = XmlHelper.Transform(xml, Schema.ConvertSettings);
+				XmlReader xmlReader = XmlHelper.ReadFromFile(file);
+
+				try {
+					// skip to the first element
+					while (xmlReader.NodeType != XmlNodeType.Element && xmlReader.Read()) ;
+
+					if(StringComparer.OrdinalIgnoreCase.Compare(xmlReader.NamespaceURI, Settings.OldNamespaceUri) == 0) {
+						XmlHelper.Transform(Schema.ConvertSettings, ref xmlReader);
+					}
+
+					this.Load(new XPathDocument(xmlReader).CreateNavigator());
+				} finally {
+					xmlReader.Close();
 				}
-				XmlNamespaceManager nsmgr = new XmlNamespaceManager(xml.NameTable);
-				nsmgr.AddNamespace(Settings.Prefix, Settings.NamespaceUri);
-				this.Load(xml, nsmgr);
 			}
 		}
 
-		protected virtual void Load(XmlDocument xml, XmlNamespaceManager namespaceManager) {
-			foreach(XmlElement node in xml.SelectNodes(string.Format(CultureInfo.InvariantCulture, "/{0}:settings/{0}:property", Settings.Prefix), namespaceManager)) {
-				string key = node.GetAttribute("name");
+		protected virtual void Load(XPathNavigator navigator) {
+			XmlNamespaceManager nsManager = new XmlNamespaceManager(navigator.NameTable);
+			nsManager.AddNamespace("p", Settings.NamespaceUri);
+			XPathExpression exp = XPathExpression.Compile("/p:settings/p:property", nsManager);
+			
+			foreach(XPathNavigator node in navigator.Select(exp)) {
+				string key = node.GetAttribute("name", string.Empty);
 				if(!string.IsNullOrEmpty(key)) {
-					this[key] = node.InnerText.Trim();
+					this[key] = node.Value.Trim();
 				}
 			}
 		}
@@ -154,12 +165,16 @@ namespace LogicCircuit {
 			);
 		}
 
-		protected override void Load(XmlDocument xml, XmlNamespaceManager namespaceManager) {
-			base.Load(xml, namespaceManager);
-			foreach(XmlElement node in xml.SelectNodes(string.Format(CultureInfo.InvariantCulture, "/{0}:settings/{0}:file", Settings.Prefix), namespaceManager)) {
-				string file = node.GetAttribute("name");
+		protected override void Load(XPathNavigator navigator) {
+			base.Load(navigator);
+			XmlNamespaceManager nsManager = new XmlNamespaceManager(navigator.NameTable);
+			nsManager.AddNamespace("p", Settings.NamespaceUri);
+			XPathExpression exp = XPathExpression.Compile("/p:settings/p:file", nsManager);
+
+			foreach(XPathNavigator node in navigator.Select(exp)) {
+				string file = node.GetAttribute("name", "");
 				if(!string.IsNullOrEmpty(file)) {
-					string text = node.GetAttribute("date");
+					string text = node.GetAttribute("date", "");
 					DateTime date;
 					if(!string.IsNullOrEmpty(text) && DateTime.TryParse(text, out date)) {
 						this.recentFile[file] = date;

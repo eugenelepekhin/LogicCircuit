@@ -168,9 +168,9 @@ namespace LogicCircuit {
 		}
 	}
 
-	public partial class MemorySet {
-		public void Load(XmlNodeList list) {
-			MemoryData.Load(this.Table, list, rowId => this.Register(rowId));
+	public sealed partial class MemorySet : IRecordLoader {
+		void IRecordLoader.Load(XmlReader reader) {
+			this.Register(MemoryData.Load(this.Table, reader));
 		}
 
 		private Memory Register(RowId rowId) {

@@ -7,8 +7,8 @@ namespace <#=this.Store.Namespace#> {
 	using <#=this.StoreNameSpace#>;
 
 	partial class <#=this.Store.Name#> : StoreSnapshot, INotifyPropertyChanged {
-		public const string PersistenceNamespace = "<#=this.Store.PersistenceNamespace ?? string.Empty#>";
-		public const string PersistencePrefix = "<#=this.Store.PersistencePrefix ?? string.Empty#>";
+		private const string PersistenceNamespace = "<#=this.Store.PersistenceNamespace ?? string.Empty#>";
+		private const string PersistencePrefix = "<#=this.Store.PersistencePrefix ?? string.Empty#>";
 
 		public event PropertyChangedEventHandler PropertyChanged;
 

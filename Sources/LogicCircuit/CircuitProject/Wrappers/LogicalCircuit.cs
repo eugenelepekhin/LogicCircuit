@@ -273,35 +273,68 @@ namespace LogicCircuit {
 			}
 		}
 
-		public static void Load(TableSnapshot<LogicalCircuitData> table, XmlNodeList list, Action<RowId> register) {
-			foreach(XmlElement node in list) {
-				Debug.Assert(node.LocalName == table.Name);
-				LogicalCircuitData data = new LogicalCircuitData();
-				// Initialize 'data' with default values: 
-				for (int i = 0; i < LogicalCircuitData.fields.Length; i ++) {
-					IFieldSerializer serializer = LogicalCircuitData.fields[i] as IFieldSerializer;
-					if (serializer != null) {
-						serializer.SetDefault(ref data);
-					}
-				}
-				// For each child of 'node' deserialize the field of the 'data' record
-				int hintIndex = 0;
-				foreach(XmlNode child in node.ChildNodes) {
-					XmlElement c = child as XmlElement;
-					if(c != null && c.NamespaceURI == node.NamespaceURI) {
-						IFieldSerializer serializer = LogicalCircuitData.FindField(c.LocalName, ref hintIndex);
-						if (serializer != null) {
-							serializer.SetTextValue(ref data, c.InnerText);
-						}
-					}
-				}
-				// insert 'data' into the table
-				RowId rowId = table.Insert(ref data);
-				// 'register' it (create realm object)
-				if(register != null) {
-					register(rowId);
+		public static RowId Load(TableSnapshot<LogicalCircuitData> table, XmlReader reader) {
+			Debug.Assert(reader.NodeType == XmlNodeType.Element);
+			Debug.Assert(reader.LocalName == table.Name);
+			Debug.Assert(!reader.IsEmptyElement);
+
+			LogicalCircuitData data = new LogicalCircuitData();
+			// Initialize 'data' with default values: 
+			for (int i = 0; i < LogicalCircuitData.fields.Length; i ++) {
+				IFieldSerializer serializer = LogicalCircuitData.fields[i] as IFieldSerializer;
+				if (serializer != null) {
+					serializer.SetDefault(ref data);
 				}
 			}
+
+			reader.Read();
+			int fieldDepth = reader.Depth;
+			object ns = reader.NamespaceURI;
+
+			// Read through all fields of this record
+			int hintIndex = 0;
+			while (reader.Depth == fieldDepth) {
+				if (reader.NodeType == XmlNodeType.Element && (object) reader.NamespaceURI == ns) {
+					// We are position on field element
+					string fieldName  = reader.LocalName;
+					string fieldValue = ReadElementText(reader);     // reads the text and moved the reader to pass this element
+					IFieldSerializer serializer = LogicalCircuitData.FindField(fieldName, ref hintIndex);
+					if (serializer != null) {
+						serializer.SetTextValue(ref data, fieldValue);
+					}
+				}else {
+					reader.Skip();     // skip everything else
+				}
+				Debug.Assert(reader.Depth == fieldDepth || reader.Depth == fieldDepth - 1, 
+					"after reading the field we should be on fieldDepth or on fieldDepth - 1 if reach EndElement tag"
+				);
+			}
+			// insert 'data' into the table
+			return table.Insert(ref data);
+		}
+
+		private static string ReadElementText(XmlReader reader) {
+			Debug.Assert(reader.NodeType == XmlNodeType.Element);
+			string result;
+			if (reader.IsEmptyElement) {
+				result = string.Empty;
+			} else {
+				int fieldDepth = reader.Depth;
+				reader.Read();                        // descend to the first child
+				result = reader.ReadContentAsString();
+
+				// Skip what ever we can meet here.
+				while (fieldDepth < reader.Depth) {
+					reader.Skip();
+				}
+				// Find ourselves on the EndElement tag.
+				Debug.Assert(reader.Depth == fieldDepth);
+				Debug.Assert(reader.NodeType == XmlNodeType.EndElement); 
+			}
+			
+			// Skip EndElement or empty element.
+			reader.Read();
+			return result;
 		}
 
 		private static IFieldSerializer FindField(string name, ref int hint) {

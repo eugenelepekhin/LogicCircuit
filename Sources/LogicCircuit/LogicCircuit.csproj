@@ -55,6 +55,7 @@
     <Compile Include="ButtonControl.cs" />
     <Compile Include="CircuitProject\CircuitSymbolComparer.cs" />
     <Compile Include="CircuitProject\CollapsedCategory.cs" />
+    <Compile Include="CircuitProject\IRecordLoader.cs" />
     <Compile Include="CircuitProject\PinComparer.cs" />
     <Compile Include="CircuitProject\TextNote.cs" />
     <Compile Include="CircuitProject\Wrappers\CollapsedCategory.cs" />

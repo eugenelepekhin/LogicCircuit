@@ -56,9 +56,9 @@ namespace LogicCircuit {
 		}
 	}
 
-	public partial class ConstantSet {
-		public void Load(XmlNodeList list) {
-			ConstantData.Load(this.Table, list, rowId => this.Register(rowId));
+	public sealed partial class ConstantSet : IRecordLoader {
+		void IRecordLoader.Load(XmlReader reader) {
+			this.Register(ConstantData.Load(this.Table, reader));
 		}
 
 		private Constant Register(RowId rowId) {
