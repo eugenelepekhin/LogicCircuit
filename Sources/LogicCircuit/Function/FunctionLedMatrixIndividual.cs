@@ -8,29 +8,28 @@ using System.Windows.Shapes;
 
 namespace LogicCircuit {
 	public class FunctionLedMatrixIndividual : Probe, IFunctionVisual {
-		public CircuitSymbol CircuitSymbol { get; private set; }
-		private LedMatrix LedMatrix { get; set; }
-		private readonly int[] state;
+		private readonly CircuitSymbol circuitSymbol;
 		private readonly int leds;
 		private readonly int colors;
 		private readonly Color[] color;
-		private Brush[] brush;
+		private readonly Brush[] brush;
+		private readonly int[] state;
 		
 		public FunctionLedMatrixIndividual(CircuitState circuitState, CircuitSymbol symbol, int[] parameter) : base(circuitState, parameter) {
-			this.CircuitSymbol = symbol;
-			this.LedMatrix = (LedMatrix)symbol.Circuit;
-			this.colors = this.LedMatrix.Colors;
-			this.leds = this.LedMatrix.Rows * this.LedMatrix.Columns;
-			this.state = new int[this.leds];
-			Color[] color = new Color[] { this.LedMatrix.Color1, this.LedMatrix.Color2, this.LedMatrix.Color3 };
-			this.brush = new Brush[1 << this.colors];
+			this.circuitSymbol = symbol;
+			LedMatrix matrix = (LedMatrix)symbol.Circuit;
+			this.leds = matrix.Rows * matrix.Columns;
+			this.colors = matrix.Colors;
 			this.color = new Color[1 << this.colors];
+			this.brush = new Brush[1 << this.colors];
 			this.brush[0] = (Brush)App.Current.FindResource("LedMatrixOff");
-			for(int i = 1; i < this.brush.Length; i++) {
+			this.state = new int[this.leds];
+			Color[] bitColor = new Color[] { matrix.Color1, matrix.Color2, matrix.Color3 };
+			for(int i = 1; i < this.color.Length; i++) {
 				Color c = Colors.Black;
 				for(int j = 0; j < this.colors; j++) {
 					if((i & (1 << j)) != 0) {
-						c += color[j];
+						c += bitColor[j];
 					}
 				}
 				this.color[i] = c;
@@ -47,7 +46,7 @@ namespace LogicCircuit {
 		}
 
 		public void Redraw() {
-			UniformGrid back = (UniformGrid)this.CircuitSymbol.ProbeView;
+			UniformGrid back = (UniformGrid)this.circuitSymbol.ProbeView;
 			for(int i = 0; i < this.leds; i++) {
 				int value = 0;
 				for(int j = 0; j < this.colors; j++) {
@@ -70,7 +69,7 @@ namespace LogicCircuit {
 		}
 
 		public void TurnOff() {
-			UniformGrid back = (UniformGrid)this.CircuitSymbol.ProbeView;
+			UniformGrid back = (UniformGrid)this.circuitSymbol.ProbeView;
 			foreach(Shape shape in back.Children) {
 				shape.Fill = this.brush[0];
 			}
