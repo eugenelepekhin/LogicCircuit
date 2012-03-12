@@ -1891,10 +1891,10 @@ namespace LogicCircuit {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to LED Matrix {0}x{1}.
+		/// Looks up a localized string similar to LED Matrix {0}x{1} with {2} bit(s) per LED ({3} colors).
 		/// </summary>
- 		public static string ToolTipLedMatrix(int rows, int columns) {
-			return string.Format(Culture, ResourceManager.GetString("ToolTipLedMatrix", Culture), rows, columns);
+ 		public static string ToolTipLedMatrix(int rows, int columns, int bitsPerLed, int colors) {
+			return string.Format(Culture, ResourceManager.GetString("ToolTipLedMatrix", Culture), rows, columns, bitsPerLed, colors);
 		}
 
 		/// <summary>

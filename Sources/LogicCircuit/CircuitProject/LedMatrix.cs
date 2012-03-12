@@ -42,7 +42,7 @@ namespace LogicCircuit {
 			set { throw new InvalidOperationException(); }
 		}
 
-		public override string ToolTip { get { return Circuit.BuildToolTip(Resources.ToolTipLedMatrix(this.Rows, this.Columns), this.Note); } }
+		public override string ToolTip { get { return Circuit.BuildToolTip(Resources.ToolTipLedMatrix(this.Rows, this.Columns, this.Colors, 1 << this.Colors), this.Note); } }
 
 		public override Circuit CopyTo(LogicalCircuit target) {
 			return target.CircuitProject.LedMatrixSet.Copy(this);
