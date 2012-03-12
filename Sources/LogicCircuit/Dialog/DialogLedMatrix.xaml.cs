@@ -18,6 +18,8 @@ namespace LogicCircuit {
 		public int CellType { get; set; }
 		public int Rows { get; set; }
 		public int Columns { get; set; }
+		public IEnumerable<int> ColorRange { get; private set; }
+		public int Colors { get; set; }
 		public string Note { get; set; }
 
 		public DialogLedMatrix(LedMatrix ledMatrix) {
@@ -26,6 +28,8 @@ namespace LogicCircuit {
 			this.CellType = (int)this.LedMatrix.CellType;
 			this.Rows = this.LedMatrix.Rows;
 			this.Columns =this.LedMatrix.Columns;
+			this.ColorRange = PinDescriptor.NumberRange(LedMatrix.MinBitsPerLed, LedMatrix.MaxBitsPerLed);
+			this.Colors = ledMatrix.Colors;
 			this.Note = this.LedMatrix.Note;
 
 			this.DataContext = this;
@@ -42,6 +46,7 @@ namespace LogicCircuit {
 					ledMatrixCellType != this.LedMatrix.CellType ||
 					this.Rows != this.LedMatrix.Rows ||
 					this.Columns != this.LedMatrix.Columns ||
+					this.Colors != this.LedMatrix.Colors ||
 					note != this.LedMatrix.Note
 				) {
 					this.LedMatrix.CircuitProject.InTransaction(() => {
@@ -49,6 +54,7 @@ namespace LogicCircuit {
 						this.LedMatrix.CellType = ledMatrixCellType;
 						this.LedMatrix.Rows = this.Rows;
 						this.LedMatrix.Columns = this.Columns;
+						this.LedMatrix.Colors = this.Colors;
 						this.LedMatrix.Note = note;
 						this.LedMatrix.UpdatePins();
 					});

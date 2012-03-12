@@ -220,6 +220,7 @@
     <Compile Include="Function\FunctionButton.cs" />
     <Compile Include="Function\FunctionConstant.cs" />
     <Compile Include="Function\FunctionLed.cs" />
+    <Compile Include="Function\FunctionLedMatrixIndividual.cs" />
     <Compile Include="Function\FunctionMemory.cs" />
     <Compile Include="Function\FunctionProbe.cs" />
     <Compile Include="Function\FunctionRam.cs" />

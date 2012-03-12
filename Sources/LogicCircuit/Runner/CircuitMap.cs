@@ -452,7 +452,7 @@ namespace LogicCircuit {
 		}
 
 		private static bool IsPrimitive(Circuit circuit) {
-			return circuit is Gate || circuit is CircuitButton || circuit is Constant || circuit is Memory;
+			return circuit is Gate || circuit is CircuitButton || circuit is Constant || circuit is Memory || circuit is LedMatrix;
 		}
 
 		private bool HasLoop(LogicalCircuit circuit) {
@@ -510,6 +510,8 @@ namespace LogicCircuit {
 				} else {
 					CircuitMap.DefineRom(circuitState, symbolMap);
 				}
+			} else if(symbolMap.CircuitSymbol.Circuit is LedMatrix) {
+				CircuitMap.DefineLedMatrix(circuitState, symbolMap);
 			} else {
 				Tracer.Fail();
 			}
@@ -631,6 +633,49 @@ namespace LogicCircuit {
 				if(connected) {
 					function = new Function7Segment(circuitState, symbolMap.CircuitSymbol, param);
 				}
+			}
+			if(function != null) {
+				if(symbolMap.CircuitMap.displays == null) {
+					symbolMap.CircuitMap.displays = new HashSet<IFunctionVisual>();
+				}
+				symbolMap.CircuitMap.displays.Add((IFunctionVisual)function);
+			}
+			return function;
+		}
+
+		private static CircuitFunction DefineLedMatrix(CircuitState circuitState, SymbolMap symbolMap) {
+			CircuitFunction function = null;
+			LedMatrix matrix = (LedMatrix)symbolMap.CircuitSymbol.Circuit;
+			List<Jam> jam = symbolMap.CircuitSymbol.Jams().ToList();
+			jam.Sort(JamComparer.Comparer);
+			if(matrix.MatrixType == LedMatrixType.Individual) {
+				bool connected = false;
+				int colors = matrix.Colors;
+				int columns = matrix.Columns;
+				Tracer.Assert(jam.Count == matrix.Rows);
+				int[] param = new int[matrix.Rows * columns * colors];
+				for(int i = 0; i < jam.Count; i++) {
+					for(int j = 0; j < columns; j++) {
+						for(int k = 0; k < colors; k++) {
+							Parameter parameter = symbolMap.Parameter(jam[i], j * colors + k);
+							if(parameter != null) {
+								param[i * columns * colors + j * colors + k] = parameter.Result.StateIndex;
+								connected = true;
+							} else {
+								#if DEBUG
+									Tracer.FullInfo("DefineLedMatrix", "{0} on {1}{2} is not connected",
+										symbolMap.CircuitSymbol.Circuit, symbolMap.CircuitSymbol.LogicalCircuit, symbolMap.CircuitSymbol.Point
+									);
+								#endif
+							}
+						}
+					}
+				}
+				if(connected) {
+					function = new FunctionLedMatrixIndividual(circuitState, symbolMap.CircuitSymbol, param);
+				}
+			} else { //matrix.MatrixType == LedMatrixType.Selector
+
 			}
 			if(function != null) {
 				if(symbolMap.CircuitMap.displays == null) {
