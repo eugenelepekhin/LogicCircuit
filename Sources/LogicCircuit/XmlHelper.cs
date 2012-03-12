@@ -18,12 +18,21 @@ namespace LogicCircuit {
 			DtdProcessing = DtdProcessing.Prohibit,       // we don't use DTD. Let's prohibit it for better security
 		};
 
+		private static XmlWriterSettings xmlWriterSettings = new XmlWriterSettings() {
+			CloseOutput = true,
+			Indent = true
+		};
+
 		public static XmlReader ReadFromString(string xmlText) {			
 			return XmlReader.Create(new StringReader(xmlText), xmlReaderSettings);
 		}
 
 		public static XmlReader ReadFromFile(string fileName) {
 			return XmlReader.Create(fileName, xmlReaderSettings);
+		}
+
+		public static XmlWriter WriteToFile(string fileName) {
+			return XmlWriter.Create(fileName, xmlWriterSettings);
 		}
 
 		public static void Transform(string xsltText, ref XmlReader inputXml) {

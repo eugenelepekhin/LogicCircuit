@@ -12,7 +12,6 @@ using System.Xml.XPath;
 
 namespace LogicCircuit {
 	public class Settings {
-		public const string Prefix = "lcs";
 		public const string NamespaceUri = "http://LogicCircuit.net/Settings/Data.xsd";
 		private const string OldNamespaceUri = "http://LogicCircuit.net/SettingsData.xsd";
 
@@ -74,21 +73,20 @@ namespace LogicCircuit {
 		}
 
 		protected void Save(string file) {
-			XmlDocument xml = new XmlDocument();
-			xml.LoadXml(string.Format(CultureInfo.InvariantCulture, "<{0}:settings xmlns:{0}=\"{1}\"/>", Settings.Prefix, Settings.NamespaceUri));
-			this.Save(xml);
-			XmlHelper.Save(xml, file);
+			using (XmlWriter writer = XmlHelper.WriteToFile(file)) {
+				writer.WriteStartDocument();
+				writer.WriteStartElement("lcs", "settings", Settings.NamespaceUri);
+				this.Save(writer);
+				writer.WriteEndElement();
+			}
 		}
 
-		protected virtual void Save(XmlDocument xml) {
-			XmlElement root = xml.DocumentElement;
+		protected virtual void Save(XmlWriter writer) {
 			foreach(KeyValuePair<string, string> kv in this.property.OrderBy(kv => kv.Key)) {
-				XmlElement element = xml.CreateElement(Settings.Prefix, "property", Settings.NamespaceUri);
-				XmlAttribute name = xml.CreateAttribute("name");
-				name.Value = kv.Key;
-				element.Attributes.Append(name);
-				element.AppendChild(xml.CreateTextNode(kv.Value));
-				root.AppendChild(element);
+				writer.WriteStartElement("property", Settings.NamespaceUri);
+				writer.WriteAttributeString("name", kv.Key);
+				writer.WriteValue(kv.Value);
+				writer.WriteEndElement();
 			}
 		}
 	}
@@ -184,18 +182,13 @@ namespace LogicCircuit {
 			this.IsFirstRun = false;
 		}
 
-		protected override void Save(XmlDocument xml) {
-			base.Save(xml);
-			XmlElement root = xml.DocumentElement;
+		protected override void Save(XmlWriter writer) {
+			base.Save(writer);
 			foreach(KeyValuePair<string, DateTime> kv in this.recentFile.OrderByDescending(kv => kv.Value)) {
-				XmlElement file = xml.CreateElement(Settings.Prefix, "file", Settings.NamespaceUri);
-				XmlAttribute name = xml.CreateAttribute("name");
-				name.Value = kv.Key;
-				file.Attributes.Append(name);
-				XmlAttribute date = xml.CreateAttribute("date");
-				date.Value = kv.Value.ToString("s", DateTimeFormatInfo.InvariantInfo);
-				file.Attributes.Append(date);
-				root.AppendChild(file);
+				writer.WriteStartElement("file", Settings.NamespaceUri);
+				writer.WriteAttributeString("name", kv.Key);
+				writer.WriteAttributeString("date", kv.Value.ToString("s", DateTimeFormatInfo.InvariantInfo));
+				writer.WriteEndElement();
 			}
 		}
 
