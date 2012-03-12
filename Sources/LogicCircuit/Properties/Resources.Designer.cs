@@ -1970,8 +1970,8 @@ namespace LogicCircuit {
 		/// <summary>
 		/// Looks up a localized string similar to Cell _Shape:.
 		/// </summary>
- 		public static string TitleCellType {
-			get { return ResourceManager.GetString("TitleCellType", Culture); }
+ 		public static string TitleCellShape {
+			get { return ResourceManager.GetString("TitleCellShape", Culture); }
 		}
 
 		/// <summary>

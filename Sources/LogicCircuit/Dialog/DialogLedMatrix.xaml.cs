@@ -15,7 +15,7 @@ namespace LogicCircuit {
 
 		public LedMatrix LedMatrix { get; private set; }
 		public int MatrixType { get; set; }
-		public int CellType { get; set; }
+		public int CellShape { get; set; }
 		public int Rows { get; set; }
 		public int Columns { get; set; }
 		public IEnumerable<int> ColorRange { get; private set; }
@@ -25,7 +25,7 @@ namespace LogicCircuit {
 		public DialogLedMatrix(LedMatrix ledMatrix) {
 			this.LedMatrix = ledMatrix;
 			this.MatrixType = (int)this.LedMatrix.MatrixType;
-			this.CellType = (int)this.LedMatrix.CellType;
+			this.CellShape = (int)this.LedMatrix.CellShape;
 			this.Rows = this.LedMatrix.Rows;
 			this.Columns =this.LedMatrix.Columns;
 			this.ColorRange = PinDescriptor.NumberRange(LedMatrix.MinBitsPerLed, LedMatrix.MaxBitsPerLed);
@@ -39,11 +39,11 @@ namespace LogicCircuit {
 		private void ButtonOkClick(object sender, RoutedEventArgs e) {
 			try {
 				LedMatrixType ledMatrixType = (LedMatrixType)this.MatrixType;
-				LedMatrixCellType ledMatrixCellType = (LedMatrixCellType)this.CellType;
+				LedMatrixCellShape ledMatrixCellShape = (LedMatrixCellShape)this.CellShape;
 				string note = this.Note.Trim();
 
 				if(	ledMatrixType != this.LedMatrix.MatrixType ||
-					ledMatrixCellType != this.LedMatrix.CellType ||
+					ledMatrixCellShape != this.LedMatrix.CellShape ||
 					this.Rows != this.LedMatrix.Rows ||
 					this.Columns != this.LedMatrix.Columns ||
 					this.Colors != this.LedMatrix.Colors ||
@@ -51,7 +51,7 @@ namespace LogicCircuit {
 				) {
 					this.LedMatrix.CircuitProject.InTransaction(() => {
 						this.LedMatrix.MatrixType = ledMatrixType;
-						this.LedMatrix.CellType = ledMatrixCellType;
+						this.LedMatrix.CellShape = ledMatrixCellShape;
 						this.LedMatrix.Rows = this.Rows;
 						this.LedMatrix.Columns = this.Columns;
 						this.LedMatrix.Colors = this.Colors;

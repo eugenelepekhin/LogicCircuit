@@ -990,7 +990,7 @@ Do you want to remove the reference to it from the Recent Files list?</value>
   <data name="LedMatrixTypeSelector" xml:space="preserve">
     <value>Selector</value>
   </data>
-  <data name="TitleCellType" xml:space="preserve">
+  <data name="TitleCellShape" xml:space="preserve">
     <value>Cell _Shape:</value>
   </data>
   <data name="TitleColumns" xml:space="preserve">

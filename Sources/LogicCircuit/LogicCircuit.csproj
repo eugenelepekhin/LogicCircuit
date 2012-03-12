@@ -55,7 +55,7 @@
     <Compile Include="CircuitProject\CircuitSymbolComparer.cs" />
     <Compile Include="CircuitProject\CollapsedCategory.cs" />
     <Compile Include="CircuitProject\LedMatrix.cs" />
-    <Compile Include="CircuitProject\LedMatrixCellType.cs" />
+    <Compile Include="CircuitProject\LedMatrixCellShape.cs" />
     <Compile Include="CircuitProject\LedMatrixType.cs" />
     <Compile Include="CircuitProject\PinComparer.cs" />
     <Compile Include="CircuitProject\TextNote.cs" />

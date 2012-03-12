@@ -56,8 +56,8 @@
 		/>
 		<ListBox Name="comboRuler" Height="0" Visibility="Hidden" ItemsSource="{x:Static lc:LedMatrixDescriptor.MatrixTypeNames}" Padding="5"/>
 
-		<Label Grid.Row="1" Grid.Column="0" Content="{x:Static lc:Resources.TitleCellType}" Target="{Binding ElementName=cellType}"/>
-		<ComboBox Grid.Row="1" Grid.Column="1" Name="cellType" SelectedIndex="{Binding Path=CellType}">
+		<Label Grid.Row="1" Grid.Column="0" Content="{x:Static lc:Resources.TitleCellShape}" Target="{Binding ElementName=cellShape}"/>
+		<ComboBox Grid.Row="1" Grid.Column="1" Name="cellShape" SelectedIndex="{Binding Path=CellShape}">
 			<ComboBoxItem Style="{StaticResource ShapeContainerStyle}"><Ellipse   Style="{StaticResource ShapeStyle}"/></ComboBoxItem>
 			<ComboBoxItem Style="{StaticResource ShapeContainerStyle}"><Rectangle Style="{StaticResource ShapeStyle}"/></ComboBoxItem>
 		</ComboBox>

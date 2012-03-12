@@ -214,7 +214,7 @@
 		<Table.Columns>
 			<Column Name="LedMatrixId" Type="Guid" ReadOnly="true"/>
 			<Column Name="MatrixType" Type="LedMatrixType" Default="LedMatrixType.Individual"/>
-			<Column Name="CellType" Type="LedMatrixCellType" Default="LedMatrixCellType.Round"/>
+			<Column Name="CellShape" Type="LedMatrixCellShape" Default="LedMatrixCellShape.Round"/>
 			<Column Name="Rows" Type="int" Check="LedMatrix.Check"/>
 			<Column Name="Columns" Type="int" Check="LedMatrix.Check"/>
 			<Column Name="Colors" Type="int" Check="LedMatrix.CheckColors" Default="1"/>

@@ -63,7 +63,7 @@ namespace LogicCircuit {
 			grid.Children.Clear();
 			grid.Columns = this.Columns;
 			grid.Rows = this.Rows;
-			string skin = (this.CellType == LedMatrixCellType.Round) ? SymbolShape.LedMatrixRoundCell : SymbolShape.LedMatrixRectCell;
+			string skin = (this.CellShape == LedMatrixCellShape.Round) ? SymbolShape.LedMatrixRoundCell : SymbolShape.LedMatrixRectCell;
 			int cellCount = this.Rows * this.Columns;
 			for(int i = 0; i < cellCount; i++) {
 				grid.Children.Add(Symbol.Skin(skin));
@@ -117,7 +117,7 @@ namespace LogicCircuit {
 		public LedMatrix Create(LedMatrixType ledMatrixType, int rows, int columns) {
 			LedMatrix ledMatrix = this.CreateItem(Guid.NewGuid(),
 				ledMatrixType,
-				LedMatrixData.CellTypeField.Field.DefaultValue,
+				LedMatrixData.CellShapeField.Field.DefaultValue,
 				rows,
 				columns,
 				LedMatrixData.ColorsField.Field.DefaultValue,

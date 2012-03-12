@@ -15,7 +15,7 @@ namespace LogicCircuit {
 	internal partial struct LedMatrixData {
 		public Guid LedMatrixId;
 		public LedMatrixType MatrixType;
-		public LedMatrixCellType CellType;
+		public LedMatrixCellShape CellShape;
 		private int fieldRows;
 		public int Rows {
 			get { return this.fieldRows; }
@@ -116,38 +116,38 @@ namespace LogicCircuit {
 			}
 		}
 
-		// Accessor of the CellType field
-		public sealed class CellTypeField : IField<LedMatrixData, LedMatrixCellType>, IFieldSerializer {
-			public static readonly CellTypeField Field = new CellTypeField();
-			private CellTypeField() {}
-			public string Name { get { return "CellType"; } }
+		// Accessor of the CellShape field
+		public sealed class CellShapeField : IField<LedMatrixData, LedMatrixCellShape>, IFieldSerializer {
+			public static readonly CellShapeField Field = new CellShapeField();
+			private CellShapeField() {}
+			public string Name { get { return "CellShape"; } }
 			public int Order { get; set; }
-			public LedMatrixCellType DefaultValue { get { return LedMatrixCellType.Round; } }
-			public LedMatrixCellType GetValue(ref LedMatrixData record) {
-				return record.CellType;
+			public LedMatrixCellShape DefaultValue { get { return LedMatrixCellShape.Round; } }
+			public LedMatrixCellShape GetValue(ref LedMatrixData record) {
+				return record.CellShape;
 			}
-			public void SetValue(ref LedMatrixData record, LedMatrixCellType value) {
-				record.CellType = value;
+			public void SetValue(ref LedMatrixData record, LedMatrixCellShape value) {
+				record.CellShape = value;
 			}
 			public int Compare(ref LedMatrixData l, ref LedMatrixData r) {
-				return l.CellType.CompareTo(r.CellType);
+				return l.CellShape.CompareTo(r.CellShape);
 			}
-			public int Compare(LedMatrixCellType l, LedMatrixCellType r) {
+			public int Compare(LedMatrixCellShape l, LedMatrixCellShape r) {
 				return l.CompareTo(r);
 			}
 
 			// Implementation of interface IFieldSerializer
 			bool IFieldSerializer.NeedToSave(ref LedMatrixData data) {
-				return this.Compare(data.CellType, this.DefaultValue) != 0;
+				return this.Compare(data.CellShape, this.DefaultValue) != 0;
 			}
 			string IFieldSerializer.GetTextValue(ref LedMatrixData data) {
-				return string.Format(CultureInfo.InvariantCulture, "{0}", data.CellType);
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.CellShape);
 			}
 			void IFieldSerializer.SetDefault(ref LedMatrixData data) {
-				data.CellType = this.DefaultValue;
+				data.CellShape = this.DefaultValue;
 			}
 			void IFieldSerializer.SetTextValue(ref LedMatrixData data, string text) {
-				data.CellType = (LedMatrixCellType)Enum.Parse(typeof(LedMatrixCellType), text, true);
+				data.CellShape = (LedMatrixCellShape)Enum.Parse(typeof(LedMatrixCellShape), text, true);
 			}
 		}
 
@@ -424,7 +424,7 @@ namespace LogicCircuit {
 		private static IField<LedMatrixData>[] fields = {
 			LedMatrixIdField.Field,
 			MatrixTypeField.Field,
-			CellTypeField.Field,
+			CellShapeField.Field,
 			RowsField.Field,
 			ColumnsField.Field,
 			ColorsField.Field,
@@ -557,10 +557,10 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.LedMatrixRowId, LedMatrixData.MatrixTypeField.Field, value); }
 		}
 
-		// Gets or sets value of the CellType field.
-		public LedMatrixCellType CellType {
-			get { return this.Table.GetField(this.LedMatrixRowId, LedMatrixData.CellTypeField.Field); }
-			set { this.Table.SetField(this.LedMatrixRowId, LedMatrixData.CellTypeField.Field, value); }
+		// Gets or sets value of the CellShape field.
+		public LedMatrixCellShape CellShape {
+			get { return this.Table.GetField(this.LedMatrixRowId, LedMatrixData.CellShapeField.Field); }
+			set { this.Table.SetField(this.LedMatrixRowId, LedMatrixData.CellShapeField.Field, value); }
 		}
 
 		// Gets or sets value of the Rows field.
@@ -617,8 +617,8 @@ namespace LogicCircuit {
 				if(LedMatrixData.MatrixTypeField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("MatrixType");
 				}
-				if(LedMatrixData.CellTypeField.Field.Compare(ref oldData, ref newData) != 0) {
-					this.NotifyPropertyChanged("CellType");
+				if(LedMatrixData.CellShapeField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("CellShape");
 				}
 				if(LedMatrixData.RowsField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("Rows");
@@ -727,7 +727,7 @@ namespace LogicCircuit {
 			// Fields of LedMatrix table
 			Guid LedMatrixId,
 			LedMatrixType MatrixType,
-			LedMatrixCellType CellType,
+			LedMatrixCellShape CellShape,
 			int Rows,
 			int Columns,
 			int Colors,
@@ -747,7 +747,7 @@ namespace LogicCircuit {
 			LedMatrixData dataLedMatrix = new LedMatrixData() {
 				LedMatrixId = LedMatrixId,
 				MatrixType = MatrixType,
-				CellType = CellType,
+				CellShape = CellShape,
 				Rows = Rows,
 				Columns = Columns,
 				Colors = Colors,

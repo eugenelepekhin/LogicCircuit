@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace LogicCircuit {
-	public enum LedMatrixCellType {
+	public enum LedMatrixCellShape {
 		Round,
 		Rectangle
 	}
