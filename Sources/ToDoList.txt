@@ -13,3 +13,4 @@ Running tree not always open the item when it clicked on the diagram
 Ensure ranges in descriptors are static (see led matrix descriptor)
 Make ComboBox VerticalAllginment Center on all dialogs. Review this. for descriptors.
 Review Delete method on all circuits
+ReportBuilder.ReportFunctions consider to add name property to function and use it here instead of big if chain
