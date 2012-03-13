@@ -71,7 +71,7 @@ namespace LogicCircuit {
 		}
 
 		public void UpdatePins() {
-			this.CircuitProject.DevicePinSet.SelectByCircuit(this).ToList().ForEach(p => p.Delete());
+			this.CircuitProject.DevicePinSet.DeleteAllPins(this);
 			int rows = this.Rows;
 			int columns = this.Columns;
 			int colors = this.Colors;
