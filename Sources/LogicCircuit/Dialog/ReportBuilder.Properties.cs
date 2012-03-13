@@ -87,7 +87,7 @@ namespace LogicCircuit {
 						name = LogicCircuit.Resources.ReportMemoryName(LogicCircuit.Resources.ROMNotation, memory.AddressBitWidth, memory.DataBitWidth);
 					} else if(f is FunctionProbe) {
 						name = LogicCircuit.Resources.GateProbeName;
-					} else if(f is FunctionLedMatrixIndividual) {
+					} else if(f is FunctionLedMatrix) {
 						name = LogicCircuit.Resources.NameLedMatrix;
 					} else {
 						Tracer.Fail(LogicCircuit.Resources.FailUnknownFunction(f.Name));

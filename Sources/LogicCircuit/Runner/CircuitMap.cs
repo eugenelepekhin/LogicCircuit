@@ -645,15 +645,16 @@ namespace LogicCircuit {
 
 		private static CircuitFunction DefineLedMatrix(CircuitState circuitState, SymbolMap symbolMap) {
 			CircuitFunction function = null;
-			LedMatrix matrix = (LedMatrix)symbolMap.CircuitSymbol.Circuit;
 			List<Jam> jam = symbolMap.CircuitSymbol.Jams().ToList();
 			jam.Sort(JamComparer.Comparer);
+			LedMatrix matrix = (LedMatrix)symbolMap.CircuitSymbol.Circuit;
+			int colors = matrix.Colors;
+			int columns = matrix.Columns;
+			int rows = matrix.Rows;
 			if(matrix.MatrixType == LedMatrixType.Individual) {
+				Tracer.Assert(jam.Count == rows);
 				bool connected = false;
-				int colors = matrix.Colors;
-				int columns = matrix.Columns;
-				Tracer.Assert(jam.Count == matrix.Rows);
-				int[] param = new int[matrix.Rows * columns * colors];
+				int[] param = new int[rows * columns * colors];
 				for(int i = 0; i < jam.Count; i++) {
 					for(int j = 0; j < columns; j++) {
 						for(int k = 0; k < colors; k++) {
@@ -675,7 +676,42 @@ namespace LogicCircuit {
 					function = new FunctionLedMatrixIndividual(circuitState, symbolMap.CircuitSymbol, param);
 				}
 			} else { //matrix.MatrixType == LedMatrixType.Selector
-
+				Tracer.Assert(matrix.MatrixType == LedMatrixType.Selector);
+				Tracer.Assert(jam.Count == (rows + columns));
+				bool rowConnected = false;
+				int[] param = new int[rows * colors + columns];
+				for(int i = 0; i < rows; i++) {
+					for(int j = 0; j < colors; j++) {
+						Parameter parameter = symbolMap.Parameter(jam[i], j);
+						if(parameter != null) {
+							param[i * colors + j] = parameter.Result.StateIndex;
+							rowConnected = true;
+						} else {
+							#if DEBUG
+								Tracer.FullInfo("DefineLedMatrix", "{0} on {1}{2} is not connected",
+									symbolMap.CircuitSymbol.Circuit, symbolMap.CircuitSymbol.LogicalCircuit, symbolMap.CircuitSymbol.Point
+								);
+							#endif
+						}
+					}
+				}
+				bool columnConnected = false;
+				for(int i = 0; i < columns; i++) {
+					Parameter parameter = symbolMap.Parameter(jam[rows + i], 0);
+					if(parameter != null) {
+						param[rows * colors + i] = parameter.Result.StateIndex;
+						columnConnected = true;
+					} else {
+						#if DEBUG
+							Tracer.FullInfo("DefineLedMatrix", "{0} on {1}{2} is not connected",
+								symbolMap.CircuitSymbol.Circuit, symbolMap.CircuitSymbol.LogicalCircuit, symbolMap.CircuitSymbol.Point
+							);
+						#endif
+					}
+				}
+				if(rowConnected && columnConnected) {
+					function = new FunctionLedMatrixSelector(circuitState, symbolMap.CircuitSymbol, param);
+				}
 			}
 			if(function != null) {
 				if(symbolMap.CircuitMap.displays == null) {
