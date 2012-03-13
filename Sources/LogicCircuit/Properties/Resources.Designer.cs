@@ -1912,14 +1912,14 @@ namespace LogicCircuit {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Choose number of columns of LEDs in the matrix.
+		/// Looks up a localized string similar to Choose number of columns of the LED matrix.
 		/// </summary>
  		public static string ToolTipColumns {
 			get { return ResourceManager.GetString("ToolTipColumns", Culture); }
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Choose number of rows of LEDs in the matrix.
+		/// Looks up a localized string similar to Choose number of rows of the LED matrix.
 		/// </summary>
  		public static string ToolTipRows {
 			get { return ResourceManager.GetString("ToolTipRows", Culture); }
