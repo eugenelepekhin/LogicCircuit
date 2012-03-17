@@ -20,7 +20,8 @@ namespace LogicCircuit {
 
 		private static XmlWriterSettings xmlWriterSettings = new XmlWriterSettings() {
 			CloseOutput = true,
-			Indent = true
+			Indent = true,
+			IndentChars = "\t"
 		};
 
 		public static XmlReader CreateReader(TextReader textReader) {			
