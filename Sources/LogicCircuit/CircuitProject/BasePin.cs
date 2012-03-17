@@ -29,7 +29,7 @@ namespace LogicCircuit {
 		/// This is an optimization to get jams evaluated faster.
 		/// </summary>
 		public GridPoint GridPoint { get; set; }
-		
+
 		protected abstract Circuit PinCircuit { get; set; }
 		private Circuit circuit;
 		public Circuit Circuit {

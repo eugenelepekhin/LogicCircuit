@@ -6,7 +6,7 @@ using System.Collections.Specialized;
 
 namespace LogicCircuit.DataPersistent {
 	public class SetToListAdapter<T> : IList<T>, IList, INotifyCollectionChanged where T:class {
-		
+
 		private event NotifyCollectionChangedEventHandler collectionChanged;
 		public event NotifyCollectionChangedEventHandler CollectionChanged {
 			add {

@@ -18,7 +18,7 @@ namespace LogicCircuit.UnitTest {
 		///</summary>
 		public TestContext TestContext { get; set; }
 
-		// 
+		//
 		//You can use the following additional attributes as you write your tests:
 		//
 		//Use ClassInitialize to run code before running the first test in the class
@@ -133,14 +133,14 @@ namespace LogicCircuit.UnitTest {
 				int h = this.H;
 				int m = this.M;
 				int s = this.S;
-			
+
 				this.Clock = 1;
 				this.Evaluate();
 
 				Assert.AreEqual(h, this.H);
 				Assert.AreEqual(m, this.M);
 				Assert.AreEqual(s, this.S);
-			
+
 				this.Clock = 0;
 				this.Evaluate();
 

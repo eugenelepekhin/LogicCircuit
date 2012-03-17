@@ -67,7 +67,7 @@ namespace LogicCircuit.UnitTest.Properties {
         ///		&lt;lc:ProjectId&gt;868c354e-0dbc-47c0-baa0-04c6baaf7ca2&lt;/lc:ProjectId&gt;
         ///		&lt;lc:Name&gt;CircuitMapCleanUpTest&lt;/lc:Name&gt;
         ///		&lt;lc:Description&gt;Unit test CircuitMapCleanUpTest&lt;/lc:Description&gt;
-        ///		&lt;lc:LogicalCircuitId&gt;d688483a-2f30-4472-ba71-5c3193c2cd10&lt;/lc:LogicalCircuitId&gt;
+        ///		&lt;lc:LogicalCircuitId&gt;751c3b59-3389-4716-9fb1-6ba8e8202afd&lt;/lc:LogicalCircuitId&gt;
         ///	&lt;/lc:Project&gt;
         ///	&lt;lc:LogicalCircuit&gt;
         ///		&lt;lc:LogicalCircuitId&gt;d688483a-2f30-4472-ba71-5c3193c2cd10&lt;/lc:LogicalC [rest of string was truncated]&quot;;.

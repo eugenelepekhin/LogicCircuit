@@ -19,7 +19,7 @@ namespace LogicCircuit {
 
 			private WirePointMarker Point1 { get; set; }
 			private WirePointMarker Point2 { get; set; }
-			
+
 			public WireMarker(Wire wire) {
 				this.Wire = wire;
 				this.MarkerGlyph = new Canvas();
@@ -42,7 +42,7 @@ namespace LogicCircuit {
 				Panel.SetZIndex(this.Line, 0);
 				Panel.SetZIndex(this.Point1.MarkerGlyph, 1);
 				Panel.SetZIndex(this.Point2.MarkerGlyph, 1);
-				
+
 				this.MarkerGlyph.Children.Add(this.Line);
 				this.MarkerGlyph.Children.Add(this.Point1.MarkerGlyph);
 				this.MarkerGlyph.Children.Add(this.Point2.MarkerGlyph);

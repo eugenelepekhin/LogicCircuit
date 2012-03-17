@@ -21,7 +21,7 @@ namespace LogicCircuit {
 					StrokeThickness = 1,
 				};
 			}
-			
+
 			public override Symbol Symbol { get { throw new InvalidOperationException(); } }
 
 			public override FrameworkElement Glyph { get { return this.MarkerLine; } }

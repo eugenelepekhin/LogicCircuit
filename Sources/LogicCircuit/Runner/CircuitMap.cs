@@ -123,7 +123,7 @@ namespace LogicCircuit {
 
 			ConnectionSet connectionSet = new ConnectionSet();
 			this.ConnectMap(connectionSet);
-			
+
 			// Flatten the circuit
 			SymbolMapList list = new SymbolMapList();
 			this.Collect(list);

@@ -24,7 +24,7 @@ namespace LogicCircuit {
 			IndentChars = "\t"
 		};
 
-		public static XmlReader CreateReader(TextReader textReader) {			
+		public static XmlReader CreateReader(TextReader textReader) {
 			return XmlReader.Create(textReader, xmlReaderSettings);
 		}
 
@@ -42,21 +42,21 @@ namespace LogicCircuit {
 				}
 			}
 
-			// To get the results if XSLT transformation in form of XmlReader we are writing the output to string 
+			// To get the results if XSLT transformation in form of XmlReader we are writing the output to string
 			// and them creating XmlReader to parse this string.
 			StringBuilder sb = new StringBuilder();
 			using(XmlTextWriter writer = new XmlTextWriter(new StringWriter(sb, CultureInfo.InvariantCulture))) {
 				xslt.Transform(inputXml, writer);
 			}
 			// closing this reader and create another one to use instead
-			inputXml.Close();                   
+			inputXml.Close();
 			inputXml = XmlHelper.CreateReader(new StringReader(sb.ToString()));
 		}
 
 		public static bool IsElement(this XmlReader xmlReader, string ns, string localName = null) {
 			return (
-				xmlReader.NodeType == XmlNodeType.Element && 
-				AreEqualAtoms(xmlReader.NamespaceURI, ns) && 
+				xmlReader.NodeType == XmlNodeType.Element &&
+				AreEqualAtoms(xmlReader.NamespaceURI, ns) &&
 				(localName == null || AreEqualAtoms(xmlReader.LocalName, localName))
 			);
 		}
@@ -64,8 +64,8 @@ namespace LogicCircuit {
 		#if DEBUG
 			public static bool IsEndElement(this XmlReader xmlReader, string ns, string localName = null) {
 				return (
-					xmlReader.NodeType == XmlNodeType.EndElement && 
-					AreEqualAtoms(xmlReader.NamespaceURI, ns) && 
+					xmlReader.NodeType == XmlNodeType.EndElement &&
+					AreEqualAtoms(xmlReader.NamespaceURI, ns) &&
 					(localName == null || AreEqualAtoms(xmlReader.LocalName, localName))
 				);
 			}

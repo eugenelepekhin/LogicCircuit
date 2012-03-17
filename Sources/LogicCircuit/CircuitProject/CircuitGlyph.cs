@@ -8,7 +8,7 @@ using System.Windows.Shapes;
 
 namespace LogicCircuit {
 	public abstract class CircuitGlyph : Symbol {
-		
+
 		private List<Jam>[] jams;
 		private bool isUpdated;
 

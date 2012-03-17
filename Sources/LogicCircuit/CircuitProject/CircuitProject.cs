@@ -108,8 +108,8 @@ namespace LogicCircuit {
 						if (xmlReader.IsElement(ns) && ! xmlReader.IsEmptyElement) {
 							IRecordLoader loader;
 							if (loaders.TryGetValue(xmlReader.LocalName, out loader)) {
-								loader.Load(xmlReader); 
-								continue; 
+								loader.Load(xmlReader);
+								continue;
 							}
 						}
 						xmlReader.Skip();
@@ -296,18 +296,18 @@ namespace LogicCircuit {
 		// To emphasize this we pass xmlReader by ref.s
 		private static void Transform(ref XmlReader xmlReader) {
 			StringComparer cmp = StringComparer.OrdinalIgnoreCase;
-			do {				
+			do {
 				while (xmlReader.NodeType != XmlNodeType.Element && xmlReader.Read()) ;        // skip to the first element
 				string ns = xmlReader.NamespaceURI;
 
 				string xslt;
-				if (cmp.Compare(ns, CircuitProject.PersistenceNamespace                 ) == 0) { return;                            } else 
-				if (cmp.Compare(ns, "http://LogicCircuit.net/2.0.0.2/CircuitProject.xsd") == 0) { xslt = Schema.ConvertFrom_2_0_0_2; } else 
-				if (cmp.Compare(ns, "http://LogicCircuit.net/2.0.0.1/CircuitProject.xsd") == 0) { xslt = Schema.ConvertFrom_2_0_0_1; } else 
-				if (cmp.Compare(ns, "http://LogicCircuit.net/1.0.0.3/CircuitProject.xsd") == 0) { xslt = Schema.ConvertFrom_1_0_0_3; } else 
-				if (cmp.Compare(ns, "http://LogicCircuit.net/1.0.0.2/CircuitProject.xsd") == 0) { xslt = Schema.ConvertFrom_1_0_0_2; } else 
-				{ 
-					throw new CircuitException(Cause.UnknownVersion, Resources.ErrorUnknownVersion); 
+				if (cmp.Compare(ns, CircuitProject.PersistenceNamespace                 ) == 0) { return;                            } else
+				if (cmp.Compare(ns, "http://LogicCircuit.net/2.0.0.2/CircuitProject.xsd") == 0) { xslt = Schema.ConvertFrom_2_0_0_2; } else
+				if (cmp.Compare(ns, "http://LogicCircuit.net/2.0.0.1/CircuitProject.xsd") == 0) { xslt = Schema.ConvertFrom_2_0_0_1; } else
+				if (cmp.Compare(ns, "http://LogicCircuit.net/1.0.0.3/CircuitProject.xsd") == 0) { xslt = Schema.ConvertFrom_1_0_0_3; } else
+				if (cmp.Compare(ns, "http://LogicCircuit.net/1.0.0.2/CircuitProject.xsd") == 0) { xslt = Schema.ConvertFrom_1_0_0_2; } else
+				{
+					throw new CircuitException(Cause.UnknownVersion, Resources.ErrorUnknownVersion);
 				}
 				XmlHelper.Transform(xslt, ref xmlReader);
 			} while (true);

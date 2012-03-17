@@ -363,7 +363,7 @@ namespace LogicCircuit {
 			Debug.Assert(!reader.IsEmptyElement);
 
 			LedMatrixData data = new LedMatrixData();
-			// Initialize 'data' with default values: 
+			// Initialize 'data' with default values:
 			for (int i = 0; i < LedMatrixData.fields.Length; i ++) {
 				IFieldSerializer serializer = LedMatrixData.fields[i] as IFieldSerializer;
 				if (serializer != null) {
@@ -389,7 +389,7 @@ namespace LogicCircuit {
 				}else {
 					reader.Skip();     // skip everything else
 				}
-				Debug.Assert(reader.Depth == fieldDepth || reader.Depth == fieldDepth - 1, 
+				Debug.Assert(reader.Depth == fieldDepth || reader.Depth == fieldDepth - 1,
 					"after reading the field we should be on fieldDepth or on fieldDepth - 1 if reach EndElement tag"
 				);
 			}
@@ -413,9 +413,9 @@ namespace LogicCircuit {
 				}
 				// Find ourselves on the EndElement tag.
 				Debug.Assert(reader.Depth == fieldDepth);
-				Debug.Assert(reader.NodeType == XmlNodeType.EndElement); 
+				Debug.Assert(reader.NodeType == XmlNodeType.EndElement);
 			}
-			
+
 			// Skip EndElement or empty element.
 			reader.Read();
 			return result;
@@ -438,7 +438,7 @@ namespace LogicCircuit {
 				}
 			}
 
-			// Ups. Still don't find. 
+			// Ups. Still don't find.
 			return null;
 		}
 	}

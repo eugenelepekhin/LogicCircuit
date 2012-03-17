@@ -21,7 +21,7 @@ namespace LogicCircuit {
 					return this.CircuitSymbol.Point.Offset(this.X, this.Y);
 				}
 			}
-			
+
 		}
 
 		public bool IsValid(int bitNumber) {

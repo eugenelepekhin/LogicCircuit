@@ -58,7 +58,7 @@ namespace LogicCircuit {
 						this.LedMatrix.Note = note;
 						this.LedMatrix.UpdatePins();
 					});
-				} 
+				}
 				this.Close();
 			} catch(Exception exception) {
 				App.Mainframe.ReportException(exception);

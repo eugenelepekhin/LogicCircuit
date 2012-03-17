@@ -20,7 +20,7 @@ namespace LogicCircuit.DataPersistent {
 		public RowId RowId {
 			get { return this.rowId; }
 		}
-		
+
 		/// <summary>
 		/// Gets change action
 		/// </summary>

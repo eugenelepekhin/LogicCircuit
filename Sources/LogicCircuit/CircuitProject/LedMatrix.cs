@@ -136,6 +136,6 @@ namespace LogicCircuit {
 			data.LedMatrix = null;
 			return this.Register(this.Table.Insert(ref data));
 		}
-		
+
 	}
 }

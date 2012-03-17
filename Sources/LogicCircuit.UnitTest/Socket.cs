@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace LogicCircuit.UnitTest {
 	public struct InputSocket {
 		private FunctionConstant input;
-		
+
 		public InputSocket(FunctionConstant input) {
 			this.input = input;
 			int width = this.BitWidth;

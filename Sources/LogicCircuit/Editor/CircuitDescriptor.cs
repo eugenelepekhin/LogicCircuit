@@ -12,7 +12,7 @@ namespace LogicCircuit {
 		string Category { get; }
 		void CreateSymbol(EditorDiagram editor, GridPoint point);
 	}
-	
+
 	public abstract class Descriptor {
 		public abstract bool CategoryExpanded { get; set; }
 

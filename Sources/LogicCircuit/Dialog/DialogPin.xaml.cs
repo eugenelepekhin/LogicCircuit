@@ -62,7 +62,7 @@ namespace LogicCircuit {
 						this.pin.Inverted = inverted;
 						this.pin.BitWidth = bitWidth;
 					});
-				} 
+				}
 				this.Close();
 			} catch(Exception exception) {
 				App.Mainframe.ReportException(exception);

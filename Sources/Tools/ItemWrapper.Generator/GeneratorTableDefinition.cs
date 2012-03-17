@@ -1116,7 +1116,7 @@ if(this.Table.Persistent) {
             
             #line default
             #line hidden
-            this.Write("Data();\r\n\t\t\t// Initialize \'data\' with default values: \r\n\t\t\tfor (int i = 0; i < ");
+            this.Write("Data();\r\n\t\t\t// Initialize \'data\' with default values:\r\n\t\t\tfor (int i = 0; i < ");
             
             #line 256 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
@@ -1161,7 +1161,7 @@ if(this.Table.Persistent) {
 				}else {
 					reader.Skip();     // skip everything else
 				}
-				Debug.Assert(reader.Depth == fieldDepth || reader.Depth == fieldDepth - 1, 
+				Debug.Assert(reader.Depth == fieldDepth || reader.Depth == fieldDepth - 1,
 					""after reading the field we should be on fieldDepth or on fieldDepth - 1 if reach EndElement tag""
 				);
 			}
@@ -1185,9 +1185,9 @@ if(this.Table.Persistent) {
 				}
 				// Find ourselves on the EndElement tag.
 				Debug.Assert(reader.Depth == fieldDepth);
-				Debug.Assert(reader.NodeType == XmlNodeType.EndElement); 
+				Debug.Assert(reader.NodeType == XmlNodeType.EndElement);
 			}
-			
+
 			// Skip EndElement or empty element.
 			reader.Read();
 			return result;
@@ -1239,8 +1239,8 @@ if(this.Table.Persistent) {
             
             #line default
             #line hidden
-            this.Write("Data.fields[i] as IFieldSerializer;\r\n\t\t\t\t}\r\n\t\t\t}\r\n\r\n\t\t\t// Ups. Still don\'t find. " +
-                    "\r\n\t\t\treturn null;\r\n\t\t}\r\n");
+            this.Write("Data.fields[i] as IFieldSerializer;\r\n\t\t\t\t}\r\n\t\t\t}\r\n\r\n\t\t\t// Ups. Still don\'t find.\r" +
+                    "\n\t\t\treturn null;\r\n\t\t}\r\n");
             
             #line 333 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
 }
