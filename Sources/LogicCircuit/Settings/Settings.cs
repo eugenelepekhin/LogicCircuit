@@ -8,10 +8,10 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Xml;
+using System.Xml.XPath;
 
 namespace LogicCircuit {
 	public class Settings {
-		public const string Prefix = "lcs";
 		public const string NamespaceUri = "http://LogicCircuit.net/Settings/Data.xsd";
 		private const string OldNamespaceUri = "http://LogicCircuit.net/SettingsData.xsd";
 
@@ -42,42 +42,52 @@ namespace LogicCircuit {
 
 		protected void Load(string file) {
 			if(File.Exists(file)) {
-				XmlDocument xml = new XmlDocument();
-				xml.Load(file);
-				if(StringComparer.OrdinalIgnoreCase.Compare(xml.DocumentElement.NamespaceURI, Settings.OldNamespaceUri) == 0) {
-					xml = XmlHelper.Transform(xml, Schema.ConvertSettings);
+				XmlReader xmlReader = XmlHelper.CreateReader(new StreamReader(file));
+
+				try {
+					// skip to the first element
+					while (xmlReader.NodeType != XmlNodeType.Element && xmlReader.Read()) ;
+
+					if(StringComparer.OrdinalIgnoreCase.Compare(xmlReader.NamespaceURI, Settings.OldNamespaceUri) == 0) {
+						XmlHelper.Transform(Schema.ConvertSettings, ref xmlReader);
+					}
+
+					this.Load(new XPathDocument(xmlReader).CreateNavigator());
+				} finally {
+					// Don't use using here. Transform may close original XmlReader and open new one.
+					xmlReader.Close();
 				}
-				XmlNamespaceManager nsmgr = new XmlNamespaceManager(xml.NameTable);
-				nsmgr.AddNamespace(Settings.Prefix, Settings.NamespaceUri);
-				this.Load(xml, nsmgr);
 			}
 		}
 
-		protected virtual void Load(XmlDocument xml, XmlNamespaceManager namespaceManager) {
-			foreach(XmlElement node in xml.SelectNodes(string.Format(CultureInfo.InvariantCulture, "/{0}:settings/{0}:property", Settings.Prefix), namespaceManager)) {
-				string key = node.GetAttribute("name");
+		protected virtual void Load(XPathNavigator navigator) {
+			XmlNamespaceManager nsManager = new XmlNamespaceManager(navigator.NameTable);
+			nsManager.AddNamespace("p", Settings.NamespaceUri);
+			XPathExpression exp = XPathExpression.Compile("/p:settings/p:property", nsManager);
+			
+			foreach(XPathNavigator node in navigator.Select(exp)) {
+				string key = node.GetAttribute("name", string.Empty);
 				if(!string.IsNullOrEmpty(key)) {
-					this[key] = node.InnerText.Trim();
+					this[key] = node.Value.Trim();
 				}
 			}
 		}
 
 		protected void Save(string file) {
-			XmlDocument xml = new XmlDocument();
-			xml.LoadXml(string.Format(CultureInfo.InvariantCulture, "<{0}:settings xmlns:{0}=\"{1}\"/>", Settings.Prefix, Settings.NamespaceUri));
-			this.Save(xml);
-			XmlHelper.Save(xml, file);
+			using (XmlWriter writer = XmlHelper.CreateWriter(new StreamWriter(file))) {
+				writer.WriteStartDocument();
+				writer.WriteStartElement("lcs", "settings", Settings.NamespaceUri);
+				this.Save(writer);
+				writer.WriteEndElement();
+			}
 		}
 
-		protected virtual void Save(XmlDocument xml) {
-			XmlElement root = xml.DocumentElement;
+		protected virtual void Save(XmlWriter writer) {
 			foreach(KeyValuePair<string, string> kv in this.property.OrderBy(kv => kv.Key)) {
-				XmlElement element = xml.CreateElement(Settings.Prefix, "property", Settings.NamespaceUri);
-				XmlAttribute name = xml.CreateAttribute("name");
-				name.Value = kv.Key;
-				element.Attributes.Append(name);
-				element.AppendChild(xml.CreateTextNode(kv.Value));
-				root.AppendChild(element);
+				writer.WriteStartElement("property", Settings.NamespaceUri);
+				writer.WriteAttributeString("name", kv.Key);
+				writer.WriteValue(kv.Value);
+				writer.WriteEndElement();
 			}
 		}
 	}
@@ -154,12 +164,16 @@ namespace LogicCircuit {
 			);
 		}
 
-		protected override void Load(XmlDocument xml, XmlNamespaceManager namespaceManager) {
-			base.Load(xml, namespaceManager);
-			foreach(XmlElement node in xml.SelectNodes(string.Format(CultureInfo.InvariantCulture, "/{0}:settings/{0}:file", Settings.Prefix), namespaceManager)) {
-				string file = node.GetAttribute("name");
+		protected override void Load(XPathNavigator navigator) {
+			base.Load(navigator);
+			XmlNamespaceManager nsManager = new XmlNamespaceManager(navigator.NameTable);
+			nsManager.AddNamespace("p", Settings.NamespaceUri);
+			XPathExpression exp = XPathExpression.Compile("/p:settings/p:file", nsManager);
+
+			foreach(XPathNavigator node in navigator.Select(exp)) {
+				string file = node.GetAttribute("name", "");
 				if(!string.IsNullOrEmpty(file)) {
-					string text = node.GetAttribute("date");
+					string text = node.GetAttribute("date", "");
 					DateTime date;
 					if(!string.IsNullOrEmpty(text) && DateTime.TryParse(text, out date)) {
 						this.recentFile[file] = date;
@@ -169,18 +183,13 @@ namespace LogicCircuit {
 			this.IsFirstRun = false;
 		}
 
-		protected override void Save(XmlDocument xml) {
-			base.Save(xml);
-			XmlElement root = xml.DocumentElement;
+		protected override void Save(XmlWriter writer) {
+			base.Save(writer);
 			foreach(KeyValuePair<string, DateTime> kv in this.recentFile.OrderByDescending(kv => kv.Value)) {
-				XmlElement file = xml.CreateElement(Settings.Prefix, "file", Settings.NamespaceUri);
-				XmlAttribute name = xml.CreateAttribute("name");
-				name.Value = kv.Key;
-				file.Attributes.Append(name);
-				XmlAttribute date = xml.CreateAttribute("date");
-				date.Value = kv.Value.ToString("s", DateTimeFormatInfo.InvariantInfo);
-				file.Attributes.Append(date);
-				root.AppendChild(file);
+				writer.WriteStartElement("file", Settings.NamespaceUri);
+				writer.WriteAttributeString("name", kv.Key);
+				writer.WriteAttributeString("date", kv.Value.ToString("s", DateTimeFormatInfo.InvariantInfo));
+				writer.WriteEndElement();
 			}
 		}
 

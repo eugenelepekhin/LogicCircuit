@@ -142,9 +142,9 @@ namespace LogicCircuit {
 		}
 	}
 
-	public partial class TextNoteSet {
-		public void Load(XmlNodeList list) {
-			TextNoteData.Load(this.Table, list, rowId => this.Create(rowId));
+	public sealed partial class TextNoteSet : IRecordLoader {
+		void IRecordLoader.Load(XmlReader reader) {
+			this.Create(TextNoteData.Load(this.Table, reader));
 		}
 
 		public TextNote Create(LogicalCircuit logicalCircuit, GridPoint point, string note) {

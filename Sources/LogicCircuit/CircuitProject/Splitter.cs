@@ -41,9 +41,9 @@ namespace LogicCircuit {
 		}
 	}
 
-	public partial class SplitterSet {
-		public void Load(XmlNodeList list) {
-			SplitterData.Load(this.Table, list, rowId => this.Register(rowId));
+	public sealed partial class SplitterSet : IRecordLoader {
+		void IRecordLoader.Load(XmlReader reader) {
+			this.Register(SplitterData.Load(this.Table, reader));
 		}
 
 		private Splitter Register(RowId rowId) {

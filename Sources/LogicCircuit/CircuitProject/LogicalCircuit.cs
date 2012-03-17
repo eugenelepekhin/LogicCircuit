@@ -81,11 +81,11 @@ namespace LogicCircuit {
 		}
 	}
 
-	public partial class LogicalCircuitSet : NamedItemSet {
+	public sealed partial class LogicalCircuitSet : NamedItemSet, IRecordLoader {
 		public event EventHandler LogicalCircuitSetChanged;
 
-		public void Load(XmlNodeList list) {
-			LogicalCircuitData.Load(this.Table, list, rowId => this.Register(rowId));
+		void IRecordLoader.Load(XmlReader reader) {
+			this.Register(LogicalCircuitData.Load(this.Table, reader));
 		}
 
 		private LogicalCircuit Register(RowId rowId) {

@@ -8,9 +8,9 @@ namespace LogicCircuit {
 	public partial class CollapsedCategory {
 	}
 
-	public partial class CollapsedCategorySet {
-		public void Load(XmlNodeList list) {
-			CollapsedCategoryData.Load(this.Table, list, rowId => this.Create(rowId));
+	public sealed partial class CollapsedCategorySet : IRecordLoader {
+		void IRecordLoader.Load(XmlReader reader) {
+			this.Create(CollapsedCategoryData.Load(this.Table, reader));
 		}
 
 		public bool IsCollapsed(string name) {

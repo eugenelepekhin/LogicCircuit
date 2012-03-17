@@ -72,14 +72,14 @@ namespace LogicCircuit {
 		}
 	}
 
-	public partial class WireSet {
+	public sealed partial class WireSet : IRecordLoader {
 		public event EventHandler WireSetChanged;
 
 		//Holds logical circuits that holds wires that was changed in latest transaction
 		private HashSet<LogicalCircuit> invalidLogicalCircuit = null;
 
-		public void Load(XmlNodeList list) {
-			WireData.Load(this.Table, list, rowId => this.Create(rowId));
+		void IRecordLoader.Load(XmlReader reader) {
+			this.Create(WireData.Load(this.Table, reader));
 		}
 
 		public Wire Create(LogicalCircuit logicalCircuit, GridPoint point1, GridPoint point2) {

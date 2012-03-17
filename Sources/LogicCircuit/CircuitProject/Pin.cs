@@ -48,9 +48,9 @@ namespace LogicCircuit {
 		}
 	}
 
-	public partial class PinSet : NamedItemSet {
-		public void Load(XmlNodeList list) {
-			PinData.Load(this.Table, list, rowId => this.Register(rowId));
+	public sealed partial class PinSet : NamedItemSet, IRecordLoader {
+		void IRecordLoader.Load(XmlReader reader) {
+			this.Register(PinData.Load(this.Table, reader));
 		}
 
 		private Pin Register(RowId rowId) {

@@ -22,15 +22,15 @@ namespace LogicCircuit {
 		}
 	}
 
-	public partial class ProjectSet {
+	public sealed partial class ProjectSet : IRecordLoader {
 		public Project Project { get; private set; }
 
-		public void Load(XmlNodeList list) {
-			ProjectData.Load(this.Table, list, rowId => this.Create(rowId));
-			if(this.Count() != 1) {
+		void IRecordLoader.Load(XmlReader reader) {
+			if(this.Project != null) {
 				throw new CircuitException(Cause.CorruptedFile, Resources.ErrorProjectCount);
 			}
-			this.Project = this.First();
+			
+			this.Project = this.Create(ProjectData.Load(this.Table, reader));
 		}
 
 		public Project Copy(Project other) {
