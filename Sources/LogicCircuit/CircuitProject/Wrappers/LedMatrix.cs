@@ -31,9 +31,6 @@ namespace LogicCircuit {
 			get { return this.fieldColors; }
 			set { this.fieldColors = LedMatrix.CheckColors(value); }
 		}
-		public System.Windows.Media.Color Color1;
-		public System.Windows.Media.Color Color2;
-		public System.Windows.Media.Color Color3;
 		public string Note;
 		internal LedMatrix LedMatrix;
 
@@ -256,111 +253,6 @@ namespace LogicCircuit {
 			}
 		}
 
-		// Accessor of the Color1 field
-		public sealed class Color1Field : IField<LedMatrixData, System.Windows.Media.Color>, IFieldSerializer {
-			public static readonly Color1Field Field = new Color1Field();
-			private Color1Field() {}
-			public string Name { get { return "Color1"; } }
-			public int Order { get; set; }
-			public System.Windows.Media.Color DefaultValue { get { return System.Windows.Media.Colors.Red; } }
-			public System.Windows.Media.Color GetValue(ref LedMatrixData record) {
-				return record.Color1;
-			}
-			public void SetValue(ref LedMatrixData record, System.Windows.Media.Color value) {
-				record.Color1 = value;
-			}
-			public int Compare(ref LedMatrixData l, ref LedMatrixData r) {
-				return l.Color1.CompareTo(r.Color1);
-			}
-			public int Compare(System.Windows.Media.Color l, System.Windows.Media.Color r) {
-				return l.CompareTo(r);
-			}
-
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref LedMatrixData data) {
-				return this.Compare(data.Color1, this.DefaultValue) != 0;
-			}
-			string IFieldSerializer.GetTextValue(ref LedMatrixData data) {
-				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Color1);
-			}
-			void IFieldSerializer.SetDefault(ref LedMatrixData data) {
-				data.Color1 = this.DefaultValue;
-			}
-			void IFieldSerializer.SetTextValue(ref LedMatrixData data, string text) {
-				data.Color1 = (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(text);
-			}
-		}
-
-		// Accessor of the Color2 field
-		public sealed class Color2Field : IField<LedMatrixData, System.Windows.Media.Color>, IFieldSerializer {
-			public static readonly Color2Field Field = new Color2Field();
-			private Color2Field() {}
-			public string Name { get { return "Color2"; } }
-			public int Order { get; set; }
-			public System.Windows.Media.Color DefaultValue { get { return System.Windows.Media.Colors.Lime; } }
-			public System.Windows.Media.Color GetValue(ref LedMatrixData record) {
-				return record.Color2;
-			}
-			public void SetValue(ref LedMatrixData record, System.Windows.Media.Color value) {
-				record.Color2 = value;
-			}
-			public int Compare(ref LedMatrixData l, ref LedMatrixData r) {
-				return l.Color2.CompareTo(r.Color2);
-			}
-			public int Compare(System.Windows.Media.Color l, System.Windows.Media.Color r) {
-				return l.CompareTo(r);
-			}
-
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref LedMatrixData data) {
-				return this.Compare(data.Color2, this.DefaultValue) != 0;
-			}
-			string IFieldSerializer.GetTextValue(ref LedMatrixData data) {
-				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Color2);
-			}
-			void IFieldSerializer.SetDefault(ref LedMatrixData data) {
-				data.Color2 = this.DefaultValue;
-			}
-			void IFieldSerializer.SetTextValue(ref LedMatrixData data, string text) {
-				data.Color2 = (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(text);
-			}
-		}
-
-		// Accessor of the Color3 field
-		public sealed class Color3Field : IField<LedMatrixData, System.Windows.Media.Color>, IFieldSerializer {
-			public static readonly Color3Field Field = new Color3Field();
-			private Color3Field() {}
-			public string Name { get { return "Color3"; } }
-			public int Order { get; set; }
-			public System.Windows.Media.Color DefaultValue { get { return System.Windows.Media.Colors.Blue; } }
-			public System.Windows.Media.Color GetValue(ref LedMatrixData record) {
-				return record.Color3;
-			}
-			public void SetValue(ref LedMatrixData record, System.Windows.Media.Color value) {
-				record.Color3 = value;
-			}
-			public int Compare(ref LedMatrixData l, ref LedMatrixData r) {
-				return l.Color3.CompareTo(r.Color3);
-			}
-			public int Compare(System.Windows.Media.Color l, System.Windows.Media.Color r) {
-				return l.CompareTo(r);
-			}
-
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref LedMatrixData data) {
-				return this.Compare(data.Color3, this.DefaultValue) != 0;
-			}
-			string IFieldSerializer.GetTextValue(ref LedMatrixData data) {
-				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Color3);
-			}
-			void IFieldSerializer.SetDefault(ref LedMatrixData data) {
-				data.Color3 = this.DefaultValue;
-			}
-			void IFieldSerializer.SetTextValue(ref LedMatrixData data, string text) {
-				data.Color3 = (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(text);
-			}
-		}
-
 		// Accessor of the Note field
 		public sealed class NoteField : IField<LedMatrixData, string>, IFieldSerializer {
 			public static readonly NoteField Field = new NoteField();
@@ -428,9 +320,6 @@ namespace LogicCircuit {
 			RowsField.Field,
 			ColumnsField.Field,
 			ColorsField.Field,
-			Color1Field.Field,
-			Color2Field.Field,
-			Color3Field.Field,
 			NoteField.Field,
 			LedMatrixField.Field
 		};
@@ -581,24 +470,6 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.LedMatrixRowId, LedMatrixData.ColorsField.Field, value); }
 		}
 
-		// Gets or sets value of the Color1 field.
-		public System.Windows.Media.Color Color1 {
-			get { return this.Table.GetField(this.LedMatrixRowId, LedMatrixData.Color1Field.Field); }
-			set { this.Table.SetField(this.LedMatrixRowId, LedMatrixData.Color1Field.Field, value); }
-		}
-
-		// Gets or sets value of the Color2 field.
-		public System.Windows.Media.Color Color2 {
-			get { return this.Table.GetField(this.LedMatrixRowId, LedMatrixData.Color2Field.Field); }
-			set { this.Table.SetField(this.LedMatrixRowId, LedMatrixData.Color2Field.Field, value); }
-		}
-
-		// Gets or sets value of the Color3 field.
-		public System.Windows.Media.Color Color3 {
-			get { return this.Table.GetField(this.LedMatrixRowId, LedMatrixData.Color3Field.Field); }
-			set { this.Table.SetField(this.LedMatrixRowId, LedMatrixData.Color3Field.Field, value); }
-		}
-
 		// Gets or sets value of the Note field.
 		public string Note {
 			get { return this.Table.GetField(this.LedMatrixRowId, LedMatrixData.NoteField.Field); }
@@ -628,15 +499,6 @@ namespace LogicCircuit {
 				}
 				if(LedMatrixData.ColorsField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("Colors");
-				}
-				if(LedMatrixData.Color1Field.Field.Compare(ref oldData, ref newData) != 0) {
-					this.NotifyPropertyChanged("Color1");
-				}
-				if(LedMatrixData.Color2Field.Field.Compare(ref oldData, ref newData) != 0) {
-					this.NotifyPropertyChanged("Color2");
-				}
-				if(LedMatrixData.Color3Field.Field.Compare(ref oldData, ref newData) != 0) {
-					this.NotifyPropertyChanged("Color3");
 				}
 				if(LedMatrixData.NoteField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("Note");
@@ -731,9 +593,6 @@ namespace LogicCircuit {
 			int Rows,
 			int Columns,
 			int Colors,
-			System.Windows.Media.Color Color1,
-			System.Windows.Media.Color Color2,
-			System.Windows.Media.Color Color3,
 			string Note
 			// Fields of Circuit table
 
@@ -751,9 +610,6 @@ namespace LogicCircuit {
 				Rows = Rows,
 				Columns = Columns,
 				Colors = Colors,
-				Color1 = Color1,
-				Color2 = Color2,
-				Color3 = Color3,
 				Note = Note,
 			};
 			return this.Create(this.Table.Insert(ref dataLedMatrix), rowIdCircuit);

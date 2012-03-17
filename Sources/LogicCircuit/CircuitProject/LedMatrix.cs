@@ -121,9 +121,6 @@ namespace LogicCircuit {
 				rows,
 				columns,
 				LedMatrixData.ColorsField.Field.DefaultValue,
-				LedMatrixData.Color1Field.Field.DefaultValue,
-				LedMatrixData.Color2Field.Field.DefaultValue,
-				LedMatrixData.Color3Field.Field.DefaultValue,
 				LedMatrixData.NoteField.Field.DefaultValue
 			);
 			ledMatrix.UpdatePins();

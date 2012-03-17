@@ -7,10 +7,9 @@ using System.Windows.Shapes;
 
 namespace LogicCircuit {
 	public abstract class FunctionLedMatrix : Probe, IFunctionVisual {
-		private readonly UniformGrid grid;
-		private readonly Color[] color;
-		private readonly Brush[] brush;
+		private static Brush[] brush;
 
+		private readonly UniformGrid grid;
 		protected int BitPerLed { get; private set; }
 		public bool Invalid { get; set; }
 
@@ -18,19 +17,6 @@ namespace LogicCircuit {
 			this.grid = (UniformGrid)symbol.ProbeView;
 			LedMatrix matrix = (LedMatrix)symbol.Circuit;
 			this.BitPerLed = matrix.Colors;
-			this.color = new Color[1 << this.BitPerLed];
-			this.brush = new Brush[1 << this.BitPerLed];
-			this.brush[0] = (Brush)App.Current.FindResource("LedMatrixOff");
-			Color[] bitColor = new Color[] { matrix.Color1, matrix.Color2, matrix.Color3 };
-			for(int i = 1; i < this.color.Length; i++) {
-				Color c = Colors.Black;
-				for(int j = 0; j < this.BitPerLed; j++) {
-					if((i & (1 << j)) != 0) {
-						c += bitColor[j];
-					}
-				}
-				this.color[i] = c;
-			}
 		}
 
 		public override bool Evaluate() {
@@ -41,20 +27,33 @@ namespace LogicCircuit {
 		}
 
 		protected void Fill(int index, int value) {
-			if(this.brush[value] == null) {
-				this.brush[value] = new SolidColorBrush(this.color[value]);
-			}
-			((Shape)this.grid.Children[index]).Fill = this.brush[value];
+			((Shape)this.grid.Children[index]).Fill = FunctionLedMatrix.brush[value];
 		}
 
 		public abstract void Redraw();
 
 		public void TurnOn() {
+			if(FunctionLedMatrix.brush == null) {
+				Color[] color = new Color[] { Colors.Red, Colors.Lime, Colors.Blue };
+				FunctionLedMatrix.brush = new Brush[1 << LedMatrix.MaxBitsPerLed];
+				FunctionLedMatrix.brush[0] = (Brush)App.Current.FindResource("LedMatrixOff");
+				for(int i = 1; i < FunctionLedMatrix.brush.Length; i++) {
+					Color c = Colors.Black;
+					for(int j = 0; j < LedMatrix.MaxBitsPerLed; j++) {
+						if((i & (1 << j)) != 0) {
+							c += color[j];
+						}
+					}
+					FunctionLedMatrix.brush[i] = new SolidColorBrush(c);
+				}
+			}
 		}
 
 		public void TurnOff() {
-			foreach(Shape shape in this.grid.Children) {
-				shape.Fill = this.brush[0];
+			if(FunctionLedMatrix.brush == null) {
+				foreach(Shape shape in this.grid.Children) {
+					shape.Fill = FunctionLedMatrix.brush[0];
+				}
 			}
 		}
 	}
