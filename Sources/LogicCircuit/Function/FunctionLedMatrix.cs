@@ -50,7 +50,7 @@ namespace LogicCircuit {
 		}
 
 		public void TurnOff() {
-			if(FunctionLedMatrix.brush == null) {
+			if(FunctionLedMatrix.brush != null) {
 				foreach(Shape shape in this.grid.Children) {
 					shape.Fill = FunctionLedMatrix.brush[0];
 				}
