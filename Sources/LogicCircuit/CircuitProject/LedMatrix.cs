@@ -100,9 +100,9 @@ namespace LogicCircuit {
 		}
 	}
 
-	public partial class LedMatrixSet {
-		public void Load(XmlNodeList list) {
-			LedMatrixData.Load(this.Table, list, rowId => this.Register(rowId));
+	public sealed partial class LedMatrixSet : IRecordLoader {
+		void IRecordLoader.Load(XmlReader reader) {
+			this.Register(LedMatrixData.Load(this.Table, reader));
 		}
 
 		private LedMatrix Register(RowId rowId) {

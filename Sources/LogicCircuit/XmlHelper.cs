@@ -60,13 +60,15 @@ namespace LogicCircuit {
 			);
 		}
 
-		public static bool IsEndElement(this XmlReader xmlReader, string ns, string localName = null) {
-			return (
-				xmlReader.NodeType == XmlNodeType.EndElement && 
-				AreEqualAtoms(xmlReader.NamespaceURI, ns) && 
-				(localName == null || AreEqualAtoms(xmlReader.LocalName, localName))
-			);
-		}
+		#if DEBUG
+			public static bool IsEndElement(this XmlReader xmlReader, string ns, string localName = null) {
+				return (
+					xmlReader.NodeType == XmlNodeType.EndElement && 
+					AreEqualAtoms(xmlReader.NamespaceURI, ns) && 
+					(localName == null || AreEqualAtoms(xmlReader.LocalName, localName))
+				);
+			}
+		#endif
 
 		public static bool AreEqualAtoms(string x, string y) {
 			Debug.Assert(x != y || object.ReferenceEquals(x, y),

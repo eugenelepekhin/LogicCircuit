@@ -58,6 +58,7 @@ namespace LogicCircuit {
 				ConstantData.Save(this.ConstantSet.Table, writer, CircuitProject.PersistenceNamespace);
 				CircuitButtonData.Save(this.CircuitButtonSet.Table, writer, CircuitProject.PersistenceNamespace);
 				MemoryData.Save(this.MemorySet.Table, writer, CircuitProject.PersistenceNamespace);
+				LedMatrixData.Save(this.LedMatrixSet.Table, writer, CircuitProject.PersistenceNamespace);
 				SplitterData.Save(this.SplitterSet.Table, writer, CircuitProject.PersistenceNamespace);
 				CircuitSymbolData.Save(this.CircuitSymbolSet.Table, writer, CircuitProject.PersistenceNamespace);
 				WireData.Save(this.WireSet.Table, writer, CircuitProject.PersistenceNamespace);
@@ -114,7 +115,9 @@ namespace LogicCircuit {
 						xmlReader.Skip();
 					}
 					Debug.Assert(xmlReader.Depth == 0);
-					Debug.Assert(xmlReader.IsEndElement(ns, rootName));
+					#if DEBUG
+						Debug.Assert(xmlReader.IsEndElement(ns, rootName));
+					#endif
 				}
 			}
 
@@ -153,7 +156,6 @@ namespace LogicCircuit {
 		public string WriteToString(IEnumerable<Symbol> symbol) {
 			StringBuilder sb = new StringBuilder();
 			using (TextWriter textWriter = new StringWriter(sb, CultureInfo.InvariantCulture)) {
-			LedMatrixData.Save(this.LedMatrixSet.Table, root);
 				CircuitProject copy = new CircuitProject();
 				bool started = copy.StartTransaction();
 				Tracer.Assert(started);
