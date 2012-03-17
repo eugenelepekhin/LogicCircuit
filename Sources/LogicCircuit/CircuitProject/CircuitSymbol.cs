@@ -54,7 +54,7 @@ namespace LogicCircuit {
 		}
 	}
 
-	public partial class CircuitSymbolSet {
+	public sealed partial class CircuitSymbolSet : IRecordLoader {
 		private HashSet<CircuitSymbol> invalid = new HashSet<CircuitSymbol>();
 
 		public IEnumerable<CircuitSymbol> Invalid { get { return this.invalid; } }
@@ -67,8 +67,8 @@ namespace LogicCircuit {
 			this.invalid.Clear();
 		}
 
-		public void Load(XmlNodeList list) {
-			CircuitSymbolData.Load(this.Table, list, rowId => this.Create(rowId));
+		void IRecordLoader.Load(XmlReader reader) {
+			this.Create(CircuitSymbolData.Load(this.Table, reader));
 		}
 
 		public CircuitSymbol Create(Circuit circuit, LogicalCircuit logicalCircuit, int x, int y) {

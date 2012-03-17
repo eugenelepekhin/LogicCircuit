@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Xml;
 using LogicCircuit.DataPersistent;
 using System.Diagnostics;
+using System.IO;
 
 namespace LogicCircuit {
 	public partial class CircuitProject {
@@ -21,48 +22,99 @@ namespace LogicCircuit {
 		}
 
 		public static CircuitProject Create(string file) {
-			XmlDocument xml = new XmlDocument();
-			if(file != null) {
-				xml.Load(file);
-			} else {
-				xml.LoadXml(string.Format(CultureInfo.InvariantCulture, Schema.Empty,
-					Guid.NewGuid(), //ProjectId
-					Resources.CircuitProjectName,
-					Guid.NewGuid(), //LogicalCircuitId
-					Resources.LogicalCircuitMainName,
-					Resources.LogicalCircuitMainNotation
-				));
+			XmlReader xmlReader = XmlHelper.CreateReader((file != null ?
+				(TextReader) new StreamReader(file) :
+				(TextReader) new StringReader(
+					string.Format(CultureInfo.InvariantCulture, Schema.Empty,
+						Guid.NewGuid(), //ProjectId
+						Resources.CircuitProjectName,
+						Guid.NewGuid(), //LogicalCircuitId
+						Resources.LogicalCircuitMainName,
+						Resources.LogicalCircuitMainNotation
+					)
+				)
+			));
+			try {
+				CircuitProject.Transform(ref xmlReader);
+
+				CircuitProject circuitProject = new CircuitProject();
+				circuitProject.InTransaction(() => circuitProject.Load(xmlReader));
+				circuitProject.CircuitSymbolSet.ValidateAll();
+				return circuitProject;
+			} finally {
+				// Don't use using here. Transform may close original XmlReader and open new one.
+				xmlReader.Close();
 			}
-			CircuitProject circuitProject = new CircuitProject();
-			circuitProject.InTransaction(() => circuitProject.Load(xml));
-			circuitProject.CircuitSymbolSet.ValidateAll();
-			return circuitProject;
 		}
 
-		public void Save(string file) {
-			XmlDocument xml = this.Save();
-			XmlHelper.Save(xml, file);
+		public void Save(TextWriter textWriter) {
+			using(XmlWriter writer = XmlHelper.CreateWriter(textWriter)) {
+				writer.WriteStartDocument();
+				writer.WriteStartElement(CircuitProject.PersistencePrefix, "CircuitProject", CircuitProject.PersistenceNamespace);
+				ProjectData.Save(this.ProjectSet.Table, writer, CircuitProject.PersistenceNamespace);
+				CollapsedCategoryData.Save(this.CollapsedCategorySet.Table, writer, CircuitProject.PersistenceNamespace);
+				LogicalCircuitData.Save(this.LogicalCircuitSet.Table, writer, CircuitProject.PersistenceNamespace);
+				PinData.Save(this.PinSet.Table, writer, CircuitProject.PersistenceNamespace);
+				ConstantData.Save(this.ConstantSet.Table, writer, CircuitProject.PersistenceNamespace);
+				CircuitButtonData.Save(this.CircuitButtonSet.Table, writer, CircuitProject.PersistenceNamespace);
+				MemoryData.Save(this.MemorySet.Table, writer, CircuitProject.PersistenceNamespace);
+				SplitterData.Save(this.SplitterSet.Table, writer, CircuitProject.PersistenceNamespace);
+				CircuitSymbolData.Save(this.CircuitSymbolSet.Table, writer, CircuitProject.PersistenceNamespace);
+				WireData.Save(this.WireSet.Table, writer, CircuitProject.PersistenceNamespace);
+				TextNoteData.Save(this.TextNoteSet.Table, writer, CircuitProject.PersistenceNamespace);
+				writer.WriteEndElement();
+			}
 		}
 
-		private void Load(XmlDocument xml) {
-			xml = CircuitProject.Transform(xml);
+		private class AtomizedComparator : IEqualityComparer<string> {
+			public bool Equals(string x, string y) {
+				return XmlHelper.AreEqualAtoms(x, y);
+			}
 
-			XmlNamespaceManager nsmgr = new XmlNamespaceManager(xml.NameTable);
-			nsmgr.AddNamespace("lc", CircuitProject.PersistenceNamespace);
+			public int GetHashCode(string obj) {
+				return obj.GetHashCode();
+			}
+		}
 
-			XmlElement root = xml.SelectSingleNode("/lc:CircuitProject", nsmgr) as XmlElement;
-			if(root != null) {
-				this.ProjectSet.Load(root.SelectNodes("lc:Project", nsmgr));
-				this.CollapsedCategorySet.Load(root.SelectNodes("lc:CollapsedCategory", nsmgr));
-				this.LogicalCircuitSet.Load(root.SelectNodes("lc:LogicalCircuit", nsmgr));
-				this.PinSet.Load(root.SelectNodes("lc:Pin", nsmgr));
-				this.ConstantSet.Load(root.SelectNodes("lc:Constant", nsmgr));
-				this.CircuitButtonSet.Load(root.SelectNodes("lc:CircuitButton", nsmgr));
-				this.MemorySet.Load(root.SelectNodes("lc:Memory", nsmgr));
-				this.SplitterSet.Load(root.SelectNodes("lc:Splitter", nsmgr));
-				this.CircuitSymbolSet.Load(root.SelectNodes("lc:CircuitSymbol", nsmgr));
-				this.WireSet.Load(root.SelectNodes("lc:Wire", nsmgr));
-				this.TextNoteSet.Load(root.SelectNodes("lc:TextNote", nsmgr));
+		private void Load(XmlReader xmlReader) {
+			XmlNameTable nameTable = xmlReader.NameTable;
+			string ns = nameTable.Add(CircuitProject.PersistenceNamespace);
+			string rootName = nameTable.Add("CircuitProject");
+
+			Dictionary<string, IRecordLoader> loaders = new Dictionary<string, IRecordLoader>(12, new AtomizedComparator());
+			loaders.Add(nameTable.Add(this.ProjectSet          .Table.Name), (IRecordLoader) this.ProjectSet          );
+			loaders.Add(nameTable.Add(this.CollapsedCategorySet.Table.Name), (IRecordLoader) this.CollapsedCategorySet);
+			loaders.Add(nameTable.Add(this.LogicalCircuitSet   .Table.Name), (IRecordLoader) this.LogicalCircuitSet   );
+			loaders.Add(nameTable.Add(this.PinSet              .Table.Name), (IRecordLoader) this.PinSet              );
+			loaders.Add(nameTable.Add(this.ConstantSet         .Table.Name), (IRecordLoader) this.ConstantSet         );
+			loaders.Add(nameTable.Add(this.CircuitButtonSet    .Table.Name), (IRecordLoader) this.CircuitButtonSet    );
+			loaders.Add(nameTable.Add(this.MemorySet           .Table.Name), (IRecordLoader) this.MemorySet           );
+			loaders.Add(nameTable.Add(this.SplitterSet         .Table.Name), (IRecordLoader) this.SplitterSet         );
+			loaders.Add(nameTable.Add(this.CircuitSymbolSet    .Table.Name), (IRecordLoader) this.CircuitSymbolSet    );
+			loaders.Add(nameTable.Add(this.WireSet             .Table.Name), (IRecordLoader) this.WireSet             );
+			loaders.Add(nameTable.Add(this.TextNoteSet         .Table.Name), (IRecordLoader) this.TextNoteSet         );
+
+			// skip to the first element
+			while (xmlReader.NodeType != XmlNodeType.Element && xmlReader.Read()) ;
+			Debug.Assert(xmlReader.Depth == 0);
+			if (xmlReader.IsElement(ns, rootName)) {
+				bool isEmpty = xmlReader.IsEmptyElement;
+				xmlReader.Read();
+				if (! isEmpty) {
+					Debug.Assert(xmlReader.Depth == 1);
+					while (xmlReader.Depth == 1) {
+						if (xmlReader.IsElement(ns) && ! xmlReader.IsEmptyElement) {
+							IRecordLoader loader;
+							if (loaders.TryGetValue(xmlReader.LocalName, out loader)) {
+								loader.Load(xmlReader); 
+								continue; 
+							}
+						}
+						xmlReader.Skip();
+					}
+					Debug.Assert(xmlReader.Depth == 0);
+					Debug.Assert(xmlReader.IsEndElement(ns, rootName));
+				}
 			}
 
 			this.CollapsedCategorySet.Purge();
@@ -96,47 +148,42 @@ namespace LogicCircuit {
 			}
 		}
 
-		private XmlDocument Save() {
-			XmlDocument xml = new XmlDocument();
-			XmlElement root = xml.CreateElement(CircuitProject.PersistencePrefix, "CircuitProject", CircuitProject.PersistenceNamespace);
-			xml.AppendChild(root);
-			ProjectData.Save(this.ProjectSet.Table, root);
-			CollapsedCategoryData.Save(this.CollapsedCategorySet.Table, root);
-			LogicalCircuitData.Save(this.LogicalCircuitSet.Table, root);
-			PinData.Save(this.PinSet.Table, root);
-			ConstantData.Save(this.ConstantSet.Table, root);
-			CircuitButtonData.Save(this.CircuitButtonSet.Table, root);
-			MemoryData.Save(this.MemorySet.Table, root);
-			SplitterData.Save(this.SplitterSet.Table, root);
-			CircuitSymbolData.Save(this.CircuitSymbolSet.Table, root);
-			WireData.Save(this.WireSet.Table, root);
-			TextNoteData.Save(this.TextNoteSet.Table, root);
-			return xml;
-		}
-
-		public XmlDocument Copy(IEnumerable<Symbol> symbol) {
-			CircuitProject copy = new CircuitProject();
-			bool started = copy.StartTransaction();
-			Tracer.Assert(started);
-			copy.ProjectSet.Copy(this.ProjectSet.Project);
-			LogicalCircuit target = copy.LogicalCircuitSet.Copy(this.ProjectSet.Project.LogicalCircuit, false);
-			foreach(Symbol s in symbol) {
-				s.CopyTo(target);
+		public string WriteToString(IEnumerable<Symbol> symbol) {
+			StringBuilder sb = new StringBuilder();
+			using (TextWriter textWriter = new StringWriter(sb, CultureInfo.InvariantCulture)) {
+				CircuitProject copy = new CircuitProject();
+				bool started = copy.StartTransaction();
+				Tracer.Assert(started);
+				copy.ProjectSet.Copy(this.ProjectSet.Project);
+				LogicalCircuit target = copy.LogicalCircuitSet.Copy(this.ProjectSet.Project.LogicalCircuit, false);
+				foreach(Symbol s in symbol) {
+					s.CopyTo(target);
+				}
+				copy.Save(textWriter);
 			}
-			return copy.Save();
+			return sb.ToString();
 		}
 
 		public static bool CanPaste(string text) {
-			return (!string.IsNullOrEmpty(text) &&
-				Regex.IsMatch(text, Regex.Escape("<lc:CircuitProject xmlns:lc=\"" + CircuitProject.PersistenceNamespace + "\">"))
-			);
+			if (string.IsNullOrEmpty(text)) {
+				return true;
+			}
+			try {
+				using (XmlReader xmlReader = XmlHelper.CreateReader(new StringReader(text))) {
+					string rootName = xmlReader.NameTable.Add("CircuitProject");
+					string ns       = xmlReader.NameTable.Add(CircuitProject.PersistenceNamespace);
+					while (xmlReader.NodeType != XmlNodeType.Element && xmlReader.Read()) ;        // skip to the first element
+					return xmlReader.IsElement(ns, rootName);
+				}
+			} catch {}
+			return false;
 		}
 
-		public IEnumerable<Symbol> Paste(XmlDocument xml) {
+		public IEnumerable<Symbol> Paste(XmlReader xmlReader) {
 			CircuitProject paste = new CircuitProject();
 			bool started = paste.StartTransaction();
 			Tracer.Assert(started);
-			paste.Load(xml);
+			paste.Load(xmlReader);
 
 			List<Symbol> result = new List<Symbol>();
 
@@ -229,24 +276,25 @@ namespace LogicCircuit {
 			this.InTransaction(action, false);
 		}
 
-		private static XmlDocument Transform(XmlDocument xml) {
-			StringComparer comparer = StringComparer.OrdinalIgnoreCase;
-			while(comparer.Compare(CircuitProject.PersistenceNamespace, xml.DocumentElement.NamespaceURI) != 0) {
+		// Transform may close input reader and replace it with new one.
+		// To emphasize this we pass xmlReader by ref.s
+		private static void Transform(ref XmlReader xmlReader) {
+			StringComparer cmp = StringComparer.OrdinalIgnoreCase;
+			do {				
+				while (xmlReader.NodeType != XmlNodeType.Element && xmlReader.Read()) ;        // skip to the first element
+				string ns = xmlReader.NamespaceURI;
+
 				string xslt;
-				if(       comparer.Compare("http://LogicCircuit.net/2.0.0.2/CircuitProject.xsd", xml.DocumentElement.NamespaceURI) == 0) {
-					xslt = Schema.ConvertFrom_2_0_0_2;
-				} else if(comparer.Compare("http://LogicCircuit.net/2.0.0.1/CircuitProject.xsd", xml.DocumentElement.NamespaceURI) == 0) {
-					xslt = Schema.ConvertFrom_2_0_0_1;
-				} else if(comparer.Compare("http://LogicCircuit.net/1.0.0.3/CircuitProject.xsd", xml.DocumentElement.NamespaceURI) == 0) {
-					xslt = Schema.ConvertFrom_1_0_0_3;
-				} else if(comparer.Compare("http://LogicCircuit.net/1.0.0.2/CircuitProject.xsd", xml.DocumentElement.NamespaceURI) == 0) {
-					xslt = Schema.ConvertFrom_1_0_0_2;
-				} else {
-					throw new CircuitException(Cause.UnknownVersion, Resources.ErrorUnknownVersion);
+				if (cmp.Compare(ns, CircuitProject.PersistenceNamespace                 ) == 0) { return;                            } else 
+				if (cmp.Compare(ns, "http://LogicCircuit.net/2.0.0.2/CircuitProject.xsd") == 0) { xslt = Schema.ConvertFrom_2_0_0_2; } else 
+				if (cmp.Compare(ns, "http://LogicCircuit.net/2.0.0.1/CircuitProject.xsd") == 0) { xslt = Schema.ConvertFrom_2_0_0_1; } else 
+				if (cmp.Compare(ns, "http://LogicCircuit.net/1.0.0.3/CircuitProject.xsd") == 0) { xslt = Schema.ConvertFrom_1_0_0_3; } else 
+				if (cmp.Compare(ns, "http://LogicCircuit.net/1.0.0.2/CircuitProject.xsd") == 0) { xslt = Schema.ConvertFrom_1_0_0_2; } else 
+				{ 
+					throw new CircuitException(Cause.UnknownVersion, Resources.ErrorUnknownVersion); 
 				}
-				xml = XmlHelper.Transform(xml, xslt);
-			}
-			return xml;
+				XmlHelper.Transform(xslt, ref xmlReader);
+			} while (true);
 		}
 	}
 }

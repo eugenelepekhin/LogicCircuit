@@ -38,9 +38,9 @@ namespace LogicCircuit {
 		}
 	}
 
-	public partial class CircuitButtonSet {
-		public void Load(XmlNodeList list) {
-			CircuitButtonData.Load(this.Table, list, rowId => this.Register(rowId));
+	public sealed partial class CircuitButtonSet : IRecordLoader {
+		void IRecordLoader.Load(XmlReader reader) {
+			this.Register(CircuitButtonData.Load(this.Table, reader));
 		}
 
 		private CircuitButton Register(RowId rowId) {

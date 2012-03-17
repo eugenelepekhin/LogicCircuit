@@ -104,53 +104,85 @@ namespace LogicCircuit {
 		}
 
 		// Serializer of the table
-		public static void Save(TableSnapshot<CollapsedCategoryData> table, XmlElement root) {
-			XmlDocument xml = root.OwnerDocument;
+		public static void Save(TableSnapshot<CollapsedCategoryData> table, XmlWriter writer, string ns) {
 			foreach(RowId rowId in table.Rows) {
 				CollapsedCategoryData data;
 				table.GetData(rowId, out data);
-				XmlElement node = xml.CreateElement(root.Prefix, table.Name, root.NamespaceURI);
-				root.AppendChild(node);
+				writer.WriteStartElement(table.Name, ns);
 				foreach(IField<CollapsedCategoryData> field in table.Fields) {
 					IFieldSerializer serializer = field as IFieldSerializer;
 					if(serializer != null && serializer.NeedToSave(ref data)) {
-						XmlElement e = xml.CreateElement(root.Prefix, field.Name, root.NamespaceURI);
-						node.AppendChild(e);
-						e.AppendChild(xml.CreateTextNode(serializer.GetTextValue(ref data)));
+						writer.WriteStartElement(field.Name, ns);
+						writer.WriteString(serializer.GetTextValue(ref data));
+						writer.WriteEndElement();
 					}
 				}
+				writer.WriteEndElement();
 			}
 		}
 
-		public static void Load(TableSnapshot<CollapsedCategoryData> table, XmlNodeList list, Action<RowId> register) {
-			foreach(XmlElement node in list) {
-				Debug.Assert(node.LocalName == table.Name);
-				CollapsedCategoryData data = new CollapsedCategoryData();
-				// Initialize 'data' with default values: 
-				for (int i = 0; i < CollapsedCategoryData.fields.Length; i ++) {
-					IFieldSerializer serializer = CollapsedCategoryData.fields[i] as IFieldSerializer;
-					if (serializer != null) {
-						serializer.SetDefault(ref data);
-					}
-				}
-				// For each child of 'node' deserialize the field of the 'data' record
-				int hintIndex = 0;
-				foreach(XmlNode child in node.ChildNodes) {
-					XmlElement c = child as XmlElement;
-					if(c != null && c.NamespaceURI == node.NamespaceURI) {
-						IFieldSerializer serializer = CollapsedCategoryData.FindField(c.LocalName, ref hintIndex);
-						if (serializer != null) {
-							serializer.SetTextValue(ref data, c.InnerText);
-						}
-					}
-				}
-				// insert 'data' into the table
-				RowId rowId = table.Insert(ref data);
-				// 'register' it (create realm object)
-				if(register != null) {
-					register(rowId);
+		public static RowId Load(TableSnapshot<CollapsedCategoryData> table, XmlReader reader) {
+			Debug.Assert(reader.NodeType == XmlNodeType.Element);
+			Debug.Assert(reader.LocalName == table.Name);
+			Debug.Assert(!reader.IsEmptyElement);
+
+			CollapsedCategoryData data = new CollapsedCategoryData();
+			// Initialize 'data' with default values: 
+			for (int i = 0; i < CollapsedCategoryData.fields.Length; i ++) {
+				IFieldSerializer serializer = CollapsedCategoryData.fields[i] as IFieldSerializer;
+				if (serializer != null) {
+					serializer.SetDefault(ref data);
 				}
 			}
+
+			reader.Read();
+			int fieldDepth = reader.Depth;
+			object ns = reader.NamespaceURI;
+
+			// Read through all fields of this record
+			int hintIndex = 0;
+			while (reader.Depth == fieldDepth) {
+				if (reader.NodeType == XmlNodeType.Element && (object) reader.NamespaceURI == ns) {
+					// We are position on field element
+					string fieldName  = reader.LocalName;
+					string fieldValue = ReadElementText(reader);     // reads the text and moved the reader to pass this element
+					IFieldSerializer serializer = CollapsedCategoryData.FindField(fieldName, ref hintIndex);
+					if (serializer != null) {
+						serializer.SetTextValue(ref data, fieldValue);
+					}
+				}else {
+					reader.Skip();     // skip everything else
+				}
+				Debug.Assert(reader.Depth == fieldDepth || reader.Depth == fieldDepth - 1, 
+					"after reading the field we should be on fieldDepth or on fieldDepth - 1 if reach EndElement tag"
+				);
+			}
+			// insert 'data' into the table
+			return table.Insert(ref data);
+		}
+
+		private static string ReadElementText(XmlReader reader) {
+			Debug.Assert(reader.NodeType == XmlNodeType.Element);
+			string result;
+			if (reader.IsEmptyElement) {
+				result = string.Empty;
+			} else {
+				int fieldDepth = reader.Depth;
+				reader.Read();                        // descend to the first child
+				result = reader.ReadContentAsString();
+
+				// Skip what ever we can meet here.
+				while (fieldDepth < reader.Depth) {
+					reader.Skip();
+				}
+				// Find ourselves on the EndElement tag.
+				Debug.Assert(reader.Depth == fieldDepth);
+				Debug.Assert(reader.NodeType == XmlNodeType.EndElement); 
+			}
+			
+			// Skip EndElement or empty element.
+			reader.Read();
+			return result;
 		}
 
 		private static IFieldSerializer FindField(string name, ref int hint) {
