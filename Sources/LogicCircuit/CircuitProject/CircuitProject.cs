@@ -82,7 +82,7 @@ namespace LogicCircuit {
 			string ns = nameTable.Add(CircuitProject.PersistenceNamespace);
 			string rootName = nameTable.Add("CircuitProject");
 
-			Dictionary<string, IRecordLoader> loaders = new Dictionary<string, IRecordLoader>(12, new AtomizedComparator());
+			Dictionary<string, IRecordLoader> loaders = new Dictionary<string, IRecordLoader>(16, new AtomizedComparator());
 			loaders.Add(nameTable.Add(this.ProjectSet          .Table.Name), (IRecordLoader) this.ProjectSet          );
 			loaders.Add(nameTable.Add(this.CollapsedCategorySet.Table.Name), (IRecordLoader) this.CollapsedCategorySet);
 			loaders.Add(nameTable.Add(this.LogicalCircuitSet   .Table.Name), (IRecordLoader) this.LogicalCircuitSet   );
