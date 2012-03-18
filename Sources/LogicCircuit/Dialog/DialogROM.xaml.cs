@@ -38,8 +38,8 @@ namespace LogicCircuit {
 			this.DataContext = this;
 			this.InitializeComponent();
 
-			this.addressBitWidth.ItemsSource = PinDescriptor.AddressBitRange();
-			this.dataBitWidth.ItemsSource = PinDescriptor.NumberRange(1);
+			this.addressBitWidth.ItemsSource = MemoryDescriptor.AddressBitWidthRange;
+			this.dataBitWidth.ItemsSource = PinDescriptor.BitWidthRange;
 			this.addressBitWidth.SelectedItem = this.memory.AddressBitWidth;
 			this.dataBitWidth.SelectedItem = this.memory.DataBitWidth;
 			this.note.Text = this.memory.Note;

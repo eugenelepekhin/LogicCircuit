@@ -35,10 +35,10 @@ namespace LogicCircuit {
 			this.name.Text = this.pin.Name;
 			this.notation.Text = this.pin.JamNotation;
 			this.note.Text = this.pin.Note;
-			this.side.ItemsSource = PinDescriptor.PinSideNames;
+			this.side.ItemsSource = PinDescriptor.PinSideRange;
 			this.side.SelectedIndex = (int)this.pin.PinSide;
 			this.inverted.IsChecked = this.pin.Inverted;
-			this.bitWidth.ItemsSource = PinDescriptor.NumberRange(1);
+			this.bitWidth.ItemsSource = PinDescriptor.BitWidthRange;
 			this.bitWidth.SelectedItem = this.pin.BitWidth;
 		}
 
