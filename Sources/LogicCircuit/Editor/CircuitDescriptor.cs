@@ -147,6 +147,8 @@ namespace LogicCircuit {
 	}
 
 	public class GateDescriptor : PrimitiveCircuitDescriptor<Gate> {
+		private static readonly int[] inputCountRange = PinDescriptor.NumberRange(2, Gate.MaxInputCount);
+		
 		public int InputCount { get; set; }
 		public IEnumerable<int> InputCountRange { get; private set; }
 		public int InputCountRangeLength { get; private set; }
@@ -165,8 +167,8 @@ namespace LogicCircuit {
 			case GateType.Xor:
 			case GateType.Odd:
 			case GateType.Even:
-				this.InputCountRange = PinDescriptor.NumberRange(2, Gate.MaxInputCount);
-				this.InputCountRangeLength = this.InputCountRange.Count();
+				this.InputCountRange = GateDescriptor.inputCountRange;
+				this.InputCountRangeLength = GateDescriptor.inputCountRange.Length;
 				break;
 			default:
 				Tracer.Fail();
