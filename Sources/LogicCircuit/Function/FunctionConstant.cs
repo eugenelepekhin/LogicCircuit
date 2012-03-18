@@ -28,6 +28,8 @@ namespace LogicCircuit {
 
 		public bool Invalid { get; set; }
 
+		public override string ReportName { get { return Resources.NameConstant; } }
+
 		public override bool Evaluate() {
 			return this.SetResult(this.Value);
 		}

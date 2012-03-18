@@ -37,6 +37,7 @@ namespace LogicCircuit {
 		public abstract bool Evaluate();
 
 		public string Name { get { return this.GetType().Name; } }
+		public abstract string ReportName { get; }
 
 		public int ParameterCount { get { return this.parameter.Length; } }
 		public int ResultCount { get { return this.result.Length; } }

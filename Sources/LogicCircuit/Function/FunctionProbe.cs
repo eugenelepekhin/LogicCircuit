@@ -23,6 +23,8 @@ namespace LogicCircuit {
 
 		public bool Invalid { get; set; }
 
+		public override string ReportName { get { return Resources.GateProbeName; } }
+
 		public override bool Evaluate() {
 			if(this.GetState()) {
 				this.valueHistory.Add(this.Pack());

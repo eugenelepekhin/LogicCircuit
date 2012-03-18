@@ -20,5 +20,7 @@ namespace LogicCircuit {
 		public override bool Evaluate() {
 			return this.SetResult(this.state);
 		}
+
+		public override string ReportName { get { throw new InvalidOperationException(); } }
 	}
 }
