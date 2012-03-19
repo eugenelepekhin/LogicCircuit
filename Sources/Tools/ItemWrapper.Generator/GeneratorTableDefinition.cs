@@ -1144,10 +1144,17 @@ if(this.Table.Persistent) {
 			int hintIndex = 0;
 			while (reader.Depth == fieldDepth) {
 				if (reader.NodeType == XmlNodeType.Element && (object) reader.NamespaceURI == ns) {
-					// We are position on field element
+					// The reader is positioned on a field element
 					string fieldName  = reader.LocalName;
-					string fieldValue = ReadElementText(reader);     // reads the text and moved the reader to pass this element
-					IFieldSerializer serializer = ");
+					string fieldValue = ");
+            
+            #line 273 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
+            
+            #line default
+            #line hidden
+            this.Write("Data.ReadElementText(reader);  // reads the text and moves the reader beyond this" +
+                    " element\r\n\t\t\t\t\tIFieldSerializer serializer = ");
             
             #line 274 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
@@ -1158,11 +1165,11 @@ if(this.Table.Persistent) {
 					if (serializer != null) {
 						serializer.SetTextValue(ref data, fieldValue);
 					}
-				}else {
-					reader.Skip();     // skip everything else
+				} else {
+					reader.Skip();  // skip everything else
 				}
 				Debug.Assert(reader.Depth == fieldDepth || reader.Depth == fieldDepth - 1,
-					""after reading the field we should be on fieldDepth or on fieldDepth - 1 if reach EndElement tag""
+					""After reading the field the reader should be on fieldDepth or on fieldDepth - 1 if it reached EndElement tag""
 				);
 			}
 			// insert 'data' into the table
@@ -1194,7 +1201,7 @@ if(this.Table.Persistent) {
 		}
 
 		private static IFieldSerializer FindField(string name, ref int hint) {
-			// We serialize/deserialize fields in the same order so result would always be at hint position or after it if hint is skipped during the serialization
+			// We serialize/de-serialize fields in the same order so result would always be at hint position or after it if hint is skipped during the serialization
 			Debug.Assert(0 <= hint && hint <= ");
             
             #line 315 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"

@@ -260,18 +260,18 @@ namespace LogicCircuit {
 			int hintIndex = 0;
 			while (reader.Depth == fieldDepth) {
 				if (reader.NodeType == XmlNodeType.Element && (object) reader.NamespaceURI == ns) {
-					// We are position on field element
+					// The reader is positioned on a field element
 					string fieldName  = reader.LocalName;
-					string fieldValue = ReadElementText(reader);     // reads the text and moved the reader to pass this element
+					string fieldValue = ConstantData.ReadElementText(reader);  // reads the text and moves the reader beyond this element
 					IFieldSerializer serializer = ConstantData.FindField(fieldName, ref hintIndex);
 					if (serializer != null) {
 						serializer.SetTextValue(ref data, fieldValue);
 					}
-				}else {
-					reader.Skip();     // skip everything else
+				} else {
+					reader.Skip();  // skip everything else
 				}
 				Debug.Assert(reader.Depth == fieldDepth || reader.Depth == fieldDepth - 1,
-					"after reading the field we should be on fieldDepth or on fieldDepth - 1 if reach EndElement tag"
+					"After reading the field the reader should be on fieldDepth or on fieldDepth - 1 if it reached EndElement tag"
 				);
 			}
 			// insert 'data' into the table
@@ -303,7 +303,7 @@ namespace LogicCircuit {
 		}
 
 		private static IFieldSerializer FindField(string name, ref int hint) {
-			// We serialize/deserialize fields in the same order so result would always be at hint position or after it if hint is skipped during the serialization
+			// We serialize/de-serialize fields in the same order so result would always be at hint position or after it if hint is skipped during the serialization
 			Debug.Assert(0 <= hint && hint <= ConstantData.fields.Length);
 			for (int i = hint; i < ConstantData.fields.Length; i ++) {
 				if (ConstantData.fields[i].Name == name) {
