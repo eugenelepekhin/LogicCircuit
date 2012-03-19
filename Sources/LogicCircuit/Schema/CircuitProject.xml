@@ -87,6 +87,11 @@
 				<Column Name="Name"/>
 			</Key>
 
+			<!--
+				This foreign key is set to restrict because deleting of parent circuit should clear both this record and circuit record referenced by subclass key,
+				but it is impossible to delete this super class just following referential integrity rules. So deletion of all circuits that are using device pins
+				should first delete all the pins associated with it and them delete itself. To enforce this set action on this key to restrict.
+			-->
 			<Key Name="FK_Circuit_DevicePin" KeyType="Foreign" ParentName="Circuit" Action="Restrict">
 				<Column Name="CircuitId"/>
 			</Key>
@@ -266,6 +271,11 @@
 				<Column Name="CircuitId"/>
 			</Key>
 
+			<!--
+				Deletion of the LogicalCircuit should first delete all the symbols associated with it and then delete itself.
+				Otherwise it impossible to cascade delete circuits that can have only one circuit symbol like buttons, constants etc.
+				So set action to restrict here to enforce this.
+			-->
 			<Key Name="FK_LogicalCircuit_CircuitSymbol" KeyType="Foreign" ParentName="LogicalCircuit" Action="Restrict">
 				<Column Name="LogicalCircuitId"/>
 			</Key>
