@@ -10,7 +10,7 @@ using System.Diagnostics;
 
 namespace LogicCircuit {
 	internal static class XmlHelper {
-		private static XmlReaderSettings xmlReaderSettings = new XmlReaderSettings() {
+		private static readonly XmlReaderSettings xmlReaderSettings = new XmlReaderSettings() {
 			CloseInput = true,
 			IgnoreComments = true,
 			IgnoreProcessingInstructions = true,
@@ -18,21 +18,21 @@ namespace LogicCircuit {
 			DtdProcessing = DtdProcessing.Prohibit,       // we don't use DTD. Let's prohibit it for better security
 		};
 
-		private static XmlWriterSettings xmlWriterSettings = new XmlWriterSettings() {
+		private static readonly XmlWriterSettings xmlWriterSettings = new XmlWriterSettings() {
 			CloseOutput = true,
 			Indent = true,
 			IndentChars = "\t"
 		};
 
 		public static XmlReader CreateReader(TextReader textReader) {
-			return XmlReader.Create(textReader, xmlReaderSettings);
+			return XmlReader.Create(textReader, XmlHelper.xmlReaderSettings);
 		}
 
 		public static XmlWriter CreateWriter(TextWriter textWriter) {
-			return XmlWriter.Create(textWriter, xmlWriterSettings);
+			return XmlWriter.Create(textWriter, XmlHelper.xmlWriterSettings);
 		}
 
-		// Transform may close input reader and replace it with new one.
+		// Transform will close input reader and replace it with new one.
 		// To emphasize this we pass xmlReader by ref.
 		public static void Transform(string xsltText, ref XmlReader inputXml) {
 			XslCompiledTransform xslt = new XslCompiledTransform();
@@ -42,8 +42,8 @@ namespace LogicCircuit {
 				}
 			}
 
-			// To get the results if XSLT transformation in form of XmlReader we are writing the output to string
-			// and them creating XmlReader to parse this string.
+			// To get the results of XSLT transformation in form of XmlReader we are writing the output to string
+			// and then creating XmlReader to parse this string.
 			StringBuilder sb = new StringBuilder();
 			using(XmlTextWriter writer = new XmlTextWriter(new StringWriter(sb, CultureInfo.InvariantCulture))) {
 				xslt.Transform(inputXml, writer);
@@ -56,8 +56,8 @@ namespace LogicCircuit {
 		public static bool IsElement(this XmlReader xmlReader, string ns, string localName = null) {
 			return (
 				xmlReader.NodeType == XmlNodeType.Element &&
-				AreEqualAtoms(xmlReader.NamespaceURI, ns) &&
-				(localName == null || AreEqualAtoms(xmlReader.LocalName, localName))
+				XmlHelper.AreEqualAtoms(xmlReader.NamespaceURI, ns) &&
+				(localName == null || XmlHelper.AreEqualAtoms(xmlReader.LocalName, localName))
 			);
 		}
 
@@ -65,8 +65,8 @@ namespace LogicCircuit {
 			public static bool IsEndElement(this XmlReader xmlReader, string ns, string localName = null) {
 				return (
 					xmlReader.NodeType == XmlNodeType.EndElement &&
-					AreEqualAtoms(xmlReader.NamespaceURI, ns) &&
-					(localName == null || AreEqualAtoms(xmlReader.LocalName, localName))
+					XmlHelper.AreEqualAtoms(xmlReader.NamespaceURI, ns) &&
+					(localName == null || XmlHelper.AreEqualAtoms(xmlReader.LocalName, localName))
 				);
 			}
 		#endif

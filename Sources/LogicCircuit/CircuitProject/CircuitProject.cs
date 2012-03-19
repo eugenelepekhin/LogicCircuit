@@ -292,7 +292,7 @@ namespace LogicCircuit {
 			this.InTransaction(action, false);
 		}
 
-		// Transform may close input reader and replace it with new one.
+		// Transform may close input reader and replace it with a new one.
 		// To emphasize this we pass xmlReader by ref.s
 		private static void Transform(ref XmlReader xmlReader) {
 			StringComparer cmp = StringComparer.OrdinalIgnoreCase;
@@ -301,11 +301,11 @@ namespace LogicCircuit {
 				string ns = xmlReader.NamespaceURI;
 
 				string xslt;
-				if (cmp.Compare(ns, CircuitProject.PersistenceNamespace                 ) == 0) { return;                            } else
-				if (cmp.Compare(ns, "http://LogicCircuit.net/2.0.0.2/CircuitProject.xsd") == 0) { xslt = Schema.ConvertFrom_2_0_0_2; } else
-				if (cmp.Compare(ns, "http://LogicCircuit.net/2.0.0.1/CircuitProject.xsd") == 0) { xslt = Schema.ConvertFrom_2_0_0_1; } else
-				if (cmp.Compare(ns, "http://LogicCircuit.net/1.0.0.3/CircuitProject.xsd") == 0) { xslt = Schema.ConvertFrom_1_0_0_3; } else
-				if (cmp.Compare(ns, "http://LogicCircuit.net/1.0.0.2/CircuitProject.xsd") == 0) { xslt = Schema.ConvertFrom_1_0_0_2; } else
+				if (cmp.Equals(ns, CircuitProject.PersistenceNamespace                 )) { return;                            } else
+				if (cmp.Equals(ns, "http://LogicCircuit.net/2.0.0.2/CircuitProject.xsd")) { xslt = Schema.ConvertFrom_2_0_0_2; } else
+				if (cmp.Equals(ns, "http://LogicCircuit.net/2.0.0.1/CircuitProject.xsd")) { xslt = Schema.ConvertFrom_2_0_0_1; } else
+				if (cmp.Equals(ns, "http://LogicCircuit.net/1.0.0.3/CircuitProject.xsd")) { xslt = Schema.ConvertFrom_1_0_0_3; } else
+				if (cmp.Equals(ns, "http://LogicCircuit.net/1.0.0.2/CircuitProject.xsd")) { xslt = Schema.ConvertFrom_1_0_0_2; } else
 				{
 					throw new CircuitException(Cause.UnknownVersion, Resources.ErrorUnknownVersion);
 				}
