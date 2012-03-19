@@ -69,7 +69,7 @@ namespace LogicCircuit.UnitTest {
 					for(int value = 0; value < (1 << bitWidth); value++) {
 						test.Tester.Input[i].Value = value;
 						Assert.AreEqual(value, test.Tester.Input[i].Value, "Value set incorrectly");
-						Assert.IsTrue(test.Tester.CircuitState.Evaluate(true), "Evaluation should be succesful");
+						Assert.IsTrue(test.Tester.CircuitState.Evaluate(true), "Evaluation should be successful");
 						Assert.AreEqual(value, test.Value(i, bitWidth), "Incorrect result");
 					}
 					test.Tester.Input[i].Value = 1 << bitWidth;
