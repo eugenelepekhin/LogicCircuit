@@ -20,6 +20,7 @@
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 
 		<StackPanel Grid.Row="0" Orientation="Horizontal">
@@ -44,6 +45,25 @@
 			</TextBlock>
 		</StackPanel>
 
-		<Button Grid.Row="3" Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" IsCancel="True" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+		<Grid Grid.Row="3">
+			<Grid.Resources>
+				<Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
+					<Setter Property="HorizontalAlignment" Value="Center"/>
+				</Style>
+			</Grid.Resources>
+			<TextBlock Name="latestVersion" Text="{x:Static lc:Resources.MessageVersionLatest}" Visibility="Hidden"/>
+			<StackPanel Name="outdatedVersion" Orientation="Vertical" Visibility="Hidden">
+				<TextBlock Text="{x:Static lc:Resources.MessageVersionOutdated}"/>
+				<TextBlock>
+					<Hyperlink Foreground="#FFE5A48E"
+						NavigateUri="{Binding Source={x:Static lc:Resources.WebSiteDownloadUri}, Mode=OneTime}"
+					>http://www.LogicCircuit.org/Download.html</Hyperlink>
+				</TextBlock>
+			</StackPanel>
+			<TextBlock Name="previewVersion" Text="{x:Static lc:Resources.MessageVersionPreview}" Visibility="Hidden"/>
+			<Button Name="checkVersion" Content="{Binding Source={x:Static lc:Resources.TitleCheckVersion}, Mode=OneTime}" Click="CheckVersionButtonClick" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+		</Grid>
+
+		<Button Grid.Row="4" Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" IsCancel="True" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
 	</Grid>
 </Window>

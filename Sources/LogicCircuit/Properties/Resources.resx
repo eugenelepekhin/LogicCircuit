@@ -1005,4 +1005,19 @@ Do you want to remove the reference to it from the Recent Files list?</value>
   <data name="TitleColors" xml:space="preserve">
     <value>C_olors:</value>
   </data>
+  <data name="MessageVersionLatest" xml:space="preserve">
+    <value>You already have latest version.</value>
+  </data>
+  <data name="MessageVersionOutdated" xml:space="preserve">
+    <value>You have older version. Click on the link below to download latest one.</value>
+  </data>
+  <data name="MessageVersionPreview" xml:space="preserve">
+    <value>You have unreleased developer’s version.</value>
+  </data>
+  <data name="TitleCheckVersion" xml:space="preserve">
+    <value>Check for updates</value>
+  </data>
+  <data name="WebSiteDownloadUri" xml:space="preserve">
+    <value>http://www.logiccircuit.org/download.html</value>
+  </data>
 </root>

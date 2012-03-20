@@ -2001,5 +2001,40 @@ namespace LogicCircuit {
  		public static string TitleColors {
 			get { return ResourceManager.GetString("TitleColors", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to You already have latest version..
+		/// </summary>
+ 		public static string MessageVersionLatest {
+			get { return ResourceManager.GetString("MessageVersionLatest", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to You have older version. Click on the link below to download latest one..
+		/// </summary>
+ 		public static string MessageVersionOutdated {
+			get { return ResourceManager.GetString("MessageVersionOutdated", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to You have unreleased developer’s version..
+		/// </summary>
+ 		public static string MessageVersionPreview {
+			get { return ResourceManager.GetString("MessageVersionPreview", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Check for updates.
+		/// </summary>
+ 		public static string TitleCheckVersion {
+			get { return ResourceManager.GetString("TitleCheckVersion", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to http://www.logiccircuit.org/download.html.
+		/// </summary>
+ 		public static string WebSiteDownloadUri {
+			get { return ResourceManager.GetString("WebSiteDownloadUri", Culture); }
+		}
 	}
 }
