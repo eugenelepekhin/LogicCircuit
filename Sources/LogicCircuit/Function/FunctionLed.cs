@@ -23,6 +23,8 @@ namespace LogicCircuit {
 
 		public bool Invalid { get; set; }
 
+		public override string ReportName { get { return Resources.GateLedName; } }
+
 		public void Redraw() {
 			Shape shape = (Shape)this.CircuitSymbol.ProbeView;
 			shape.Fill = FunctionLed.stateBrush[(int)this[0]];

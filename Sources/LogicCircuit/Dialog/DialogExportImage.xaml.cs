@@ -170,7 +170,7 @@ namespace LogicCircuit {
 					)) {
 						return;
 					}
-						
+
 				}
 				if(!Mainframe.IsFilePathValid(this.FilePath)) {
 					DialogMessage.Show(this, this.Title,

@@ -9,5 +9,7 @@ namespace LogicCircuit {
 		public override bool Evaluate() {
 			return this.SetResult(CircuitFunction.FromBool(((this.Count(State.On1) & 1) == 0)));
 		}
+
+		public override string ReportName { get { return Resources.ReportGateName(Resources.GateEvenName, this.ParameterCount); } }
 	}
 }

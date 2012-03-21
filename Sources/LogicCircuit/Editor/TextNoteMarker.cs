@@ -79,7 +79,7 @@ namespace LogicCircuit {
 				this.y = 0;
 				this.w = 0;
 				this.h = 0;
-				
+
 				Rect rect = new Rect(Canvas.GetLeft(this.MarkerGlyph), Canvas.GetTop(this.MarkerGlyph), this.rectangle.Width, this.rectangle.Height);
 				if(this.TextNote.Rotation != Rotation.Up) {
 					rect = Symbol.Transform(rect, Symbol.RotationTransform(-Symbol.Angle(this.TextNote.Rotation), this.TextNote.X, this.TextNote.Y, this.TextNote.Width, this.TextNote.Height));
@@ -134,7 +134,7 @@ namespace LogicCircuit {
 				this.SnapToTextNote();
 				this.PositionGlyph();
 			}
-		
+
 			private class ResizeMarker : Marker {
 				private static readonly Cursor[]  cursors = new Cursor[] {
 					Cursors.SizeNWSE, Cursors.SizeNS, Cursors.SizeNESW,

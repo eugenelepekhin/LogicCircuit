@@ -58,7 +58,7 @@ namespace LogicCircuit {
 		private HashSet<CircuitSymbol> invalid = new HashSet<CircuitSymbol>();
 
 		public IEnumerable<CircuitSymbol> Invalid { get { return this.invalid; } }
-		
+
 		public void Invalidate(CircuitSymbol symbol) {
 			this.invalid.Add(symbol);
 		}

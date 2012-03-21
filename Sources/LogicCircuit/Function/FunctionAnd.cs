@@ -9,5 +9,7 @@ namespace LogicCircuit {
 		public override bool Evaluate() {
 			return this.SetResult(this.And());
 		}
+
+		public override string ReportName { get { return Resources.ReportGateName(Resources.GateAndName, this.ParameterCount); } }
 	}
 }

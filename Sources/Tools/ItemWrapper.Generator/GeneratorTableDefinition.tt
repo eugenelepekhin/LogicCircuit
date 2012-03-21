@@ -111,6 +111,9 @@ foreach(Column column in this.Table.Columns) {
 		case "Guid":
 			parse = "new Guid(text)";
 			break;
+		case "System.Windows.Media.Color":
+			parse = "(System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(text)";
+			break;
 		default:
 			parse = "(" + column.Type + ")Enum.Parse(typeof(" + column.Type + "), text, true)";
 			break;
@@ -249,7 +252,7 @@ foreach(Key key in this.Table.Keys) {
 			Debug.Assert(!reader.IsEmptyElement);
 
 			<#=this.Table.Name#>Data data = new <#=this.Table.Name#>Data();
-			// Initialize 'data' with default values: 
+			// Initialize 'data' with default values:
 			for (int i = 0; i < <#=this.Table.Name#>Data.fields.Length; i ++) {
 				IFieldSerializer serializer = <#=this.Table.Name#>Data.fields[i] as IFieldSerializer;
 				if (serializer != null) {
@@ -265,18 +268,18 @@ foreach(Key key in this.Table.Keys) {
 			int hintIndex = 0;
 			while (reader.Depth == fieldDepth) {
 				if (reader.NodeType == XmlNodeType.Element && (object) reader.NamespaceURI == ns) {
-					// We are position on field element
+					// The reader is positioned on a field element
 					string fieldName  = reader.LocalName;
-					string fieldValue = ReadElementText(reader);     // reads the text and moved the reader to pass this element
+					string fieldValue = <#=this.Table.Name#>Data.ReadElementText(reader);  // reads the text and moves the reader beyond this element
 					IFieldSerializer serializer = <#=this.Table.Name#>Data.FindField(fieldName, ref hintIndex);
 					if (serializer != null) {
 						serializer.SetTextValue(ref data, fieldValue);
 					}
-				}else {
-					reader.Skip();     // skip everything else
+				} else {
+					reader.Skip();  // skip everything else
 				}
-				Debug.Assert(reader.Depth == fieldDepth || reader.Depth == fieldDepth - 1, 
-					"after reading the field we should be on fieldDepth or on fieldDepth - 1 if reach EndElement tag"
+				Debug.Assert(reader.Depth == fieldDepth || reader.Depth == fieldDepth - 1,
+					"After reading the field the reader should be on fieldDepth or on fieldDepth - 1 if it reached EndElement tag"
 				);
 			}
 			// insert 'data' into the table
@@ -299,16 +302,16 @@ foreach(Key key in this.Table.Keys) {
 				}
 				// Find ourselves on the EndElement tag.
 				Debug.Assert(reader.Depth == fieldDepth);
-				Debug.Assert(reader.NodeType == XmlNodeType.EndElement); 
+				Debug.Assert(reader.NodeType == XmlNodeType.EndElement);
 			}
-			
+
 			// Skip EndElement or empty element.
 			reader.Read();
 			return result;
 		}
 
 		private static IFieldSerializer FindField(string name, ref int hint) {
-			// We serialize/deserialize fields in the same order so result would always be at hint position or after it if hint is skipped during the serialization
+			// We serialize/de-serialize fields in the same order so result would always be at hint position or after it if hint is skipped during the serialization
 			Debug.Assert(0 <= hint && hint <= <#=this.Table.Name#>Data.fields.Length);
 			for (int i = hint; i < <#=this.Table.Name#>Data.fields.Length; i ++) {
 				if (<#=this.Table.Name#>Data.fields[i].Name == name) {
@@ -324,7 +327,7 @@ foreach(Key key in this.Table.Keys) {
 				}
 			}
 
-			// Ups. Still don't find. 
+			// Ups. Still don't find.
 			return null;
 		}
 <#}#>

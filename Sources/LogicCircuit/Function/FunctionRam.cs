@@ -16,5 +16,7 @@ namespace LogicCircuit {
 			}
 			return this.Read();
 		}
+
+		public override string ReportName { get { return Resources.ReportMemoryName(Resources.RAMNotation, this.AddressBitWidth, this.DataBitWidth); } }
 	}
 }

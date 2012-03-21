@@ -313,7 +313,7 @@ namespace LogicCircuit {
 		}
 
 		private class ParameterComparer : IComparer<Parameter> {
-			public static readonly ParameterComparer BitOrderComparer = new ParameterComparer(); 
+			public static readonly ParameterComparer BitOrderComparer = new ParameterComparer();
 
 			public int Compare(Parameter x, Parameter y) {
 				return x.BitNumber - y.BitNumber;

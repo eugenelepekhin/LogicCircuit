@@ -621,7 +621,7 @@ namespace LogicCircuit.DataPersistent {
 						}
 					} else { // child and both siblings has MinDegree keys
 						// we cannot descend to a child node with only MinDegree keys so
-						// merge child with sibling and 
+						// merge child with sibling and
 						// make the appropriate key of node the middle key of the new node, child.
 						// Note: This may cause the root to collapse, thus making child the new root.
 						if(siblingIndex < i) {

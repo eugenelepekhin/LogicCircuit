@@ -15,7 +15,7 @@ namespace LogicCircuit {
 		public override void Delete() {
 			throw new InvalidOperationException();
 		}
-		
+
 		public override bool IsSmallSymbol {
 			get {
 				switch(this.GateType) {

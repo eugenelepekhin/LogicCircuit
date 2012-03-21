@@ -950,4 +950,74 @@ Do you want to remove the reference to it from the Recent Files list?</value>
     <value>({0}, {1})</value>
     <comment>{int x, int y}</comment>
   </data>
+  <data name="NameLedMatrix" xml:space="preserve">
+    <value>LED Matrix</value>
+  </data>
+  <data name="ToolTipLedMatrix" xml:space="preserve">
+    <value>LED Matrix {0}x{1} with {2} bit(s) per LED ({3} colors)</value>
+    <comment>{int rows, int columns, int bitsPerLed, int colors}</comment>
+  </data>
+  <data name="CaptionColumns" xml:space="preserve">
+    <value>Columns</value>
+  </data>
+  <data name="CaptionRows" xml:space="preserve">
+    <value>Rows</value>
+  </data>
+  <data name="ToolTipColumns" xml:space="preserve">
+    <value>Choose number of columns of the LED matrix</value>
+  </data>
+  <data name="ToolTipRows" xml:space="preserve">
+    <value>Choose number of rows of the LED matrix</value>
+  </data>
+  <data name="CaptionLedMatrixType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="LedMatrixColumnSelector" xml:space="preserve">
+    <value>for selecting Column #{0}</value>
+    <comment>{int column}</comment>
+  </data>
+  <data name="LedMatrixRowIndividual" xml:space="preserve">
+    <value>for each LED in Row #{0}</value>
+    <comment>{int row}</comment>
+  </data>
+  <data name="LedMatrixRowSelector" xml:space="preserve">
+    <value>for selecting Row #{0}</value>
+    <comment>{int row}</comment>
+  </data>
+  <data name="LedMatrixTypeIndividual" xml:space="preserve">
+    <value>Individual</value>
+  </data>
+  <data name="LedMatrixTypeSelector" xml:space="preserve">
+    <value>Selector</value>
+  </data>
+  <data name="TitleCellShape" xml:space="preserve">
+    <value>Cell _Shape:</value>
+  </data>
+  <data name="TitleColumns" xml:space="preserve">
+    <value>_Columns:</value>
+  </data>
+  <data name="TitleRows" xml:space="preserve">
+    <value>_Rows:</value>
+  </data>
+  <data name="ToolTipLedMatrixType" xml:space="preserve">
+    <value>Choose the way of controlling the matrix</value>
+  </data>
+  <data name="TitleColors" xml:space="preserve">
+    <value>C_olors:</value>
+  </data>
+  <data name="MessageVersionLatest" xml:space="preserve">
+    <value>You already have latest version.</value>
+  </data>
+  <data name="MessageVersionOutdated" xml:space="preserve">
+    <value>You have older version. Click on the link below to download latest one.</value>
+  </data>
+  <data name="MessageVersionPreview" xml:space="preserve">
+    <value>You have unreleased developer’s version.</value>
+  </data>
+  <data name="TitleCheckVersion" xml:space="preserve">
+    <value>Check for updates</value>
+  </data>
+  <data name="WebSiteDownloadUri" xml:space="preserve">
+    <value>http://www.logiccircuit.org/download.html</value>
+  </data>
 </root>

@@ -131,7 +131,7 @@ namespace LogicCircuit.DataPersistent {
 		}
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		/// <typeparam name="TField1"></typeparam>
 		/// <typeparam name="TField2"></typeparam>
@@ -167,7 +167,7 @@ namespace LogicCircuit.DataPersistent {
 		}
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		/// <typeparam name="TField1"></typeparam>
 		/// <typeparam name="TField2"></typeparam>
@@ -179,7 +179,7 @@ namespace LogicCircuit.DataPersistent {
 		}
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		/// <typeparam name="TField1"></typeparam>
 		/// <typeparam name="TField2"></typeparam>

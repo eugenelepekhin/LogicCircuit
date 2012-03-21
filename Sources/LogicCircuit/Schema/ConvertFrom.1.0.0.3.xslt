@@ -42,12 +42,12 @@
 
 	<xsl:template name="TranslateSplitterSymbol">
 		<xsl:param name="circuit" />
-	
+
 		<!-- output unchanging nodes -->
 		<xsl:apply-templates select="old:CircuitSymbolId" />
 		<xsl:apply-templates select="old:CircuitId" />
 		<xsl:apply-templates select="old:LogicalCircuitId" />
-	
+
 		<!-- query and output Rotation node -->
 		<xsl:variable name="rotation" select="$circuit/old:Rotation"/>
 

@@ -46,50 +46,7 @@ namespace LogicCircuit {
 				CircuitState state = map.Apply(1);
 				Dictionary<string, int> func = new Dictionary<string, int>();
 				foreach(CircuitFunction f in state.Functions) {
-					string name = null;
-					if(f is FunctionClock) {
-						name = LogicCircuit.Resources.GateClockName;
-					} else if(f is FunctionNot) {
-						name = LogicCircuit.Resources.GateNotName;
-					} else if(f is FunctionTriState) {
-						name = LogicCircuit.Resources.GateTriStateName;
-					} else if(f is FunctionTriStateGroup) {
-						name = LogicCircuit.Resources.TriStateGroupName;
-					} else if(f is FunctionAnd) {
-						name = LogicCircuit.Resources.ReportGateName(LogicCircuit.Resources.GateAndName, f.ParameterCount);
-					} else if(f is FunctionAndNot) {
-						name = LogicCircuit.Resources.ReportGateName(LogicCircuit.Resources.GateAndNotName, f.ParameterCount);
-					} else if(f is FunctionOr) {
-						name = LogicCircuit.Resources.ReportGateName(LogicCircuit.Resources.GateOrName, f.ParameterCount);
-					} else if(f is FunctionOrNot) {
-						name = LogicCircuit.Resources.ReportGateName(LogicCircuit.Resources.GateOrNotName, f.ParameterCount);
-					} else if(f is FunctionXor) {
-						name = LogicCircuit.Resources.ReportGateName(LogicCircuit.Resources.GateXorName, f.ParameterCount);
-					} else if(f is FunctionXorNot) {
-						name = LogicCircuit.Resources.ReportGateName(LogicCircuit.Resources.GateXorNotName, f.ParameterCount);
-					} else if(f is FunctionOdd) {
-						name = LogicCircuit.Resources.ReportGateName(LogicCircuit.Resources.GateOddName, f.ParameterCount);
-					} else if(f is FunctionEven) {
-						name = LogicCircuit.Resources.ReportGateName(LogicCircuit.Resources.GateEvenName, f.ParameterCount);
-					} else if(f is Function7Segment) {
-						name = LogicCircuit.Resources.Gate7SegName;
-					} else if(f is FunctionButton) {
-						name = LogicCircuit.Resources.NameButton;
-					} else if(f is FunctionConstant) {
-						name = LogicCircuit.Resources.NameConstant;
-					} else if(f is FunctionLed) {
-						name = LogicCircuit.Resources.GateLedName;
-					} else if(f is FunctionRam) {
-						FunctionMemory memory = (FunctionMemory)f;
-						name = LogicCircuit.Resources.ReportMemoryName(LogicCircuit.Resources.RAMNotation, memory.AddressBitWidth, memory.DataBitWidth);
-					} else if(f is FunctionRom) {
-						FunctionMemory memory = (FunctionMemory)f;
-						name = LogicCircuit.Resources.ReportMemoryName(LogicCircuit.Resources.ROMNotation, memory.AddressBitWidth, memory.DataBitWidth);
-					} else if(f is FunctionProbe) {
-						name = LogicCircuit.Resources.GateProbeName;
-					} else {
-						Tracer.Fail(LogicCircuit.Resources.FailUnknownFunction(f.Name));
-					}
+					string name = f.ReportName;
 					if(func.ContainsKey(name)) {
 						func[name]++;
 					} else {

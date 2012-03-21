@@ -19,7 +19,7 @@ namespace LogicCircuit.UnitTest {
 		///</summary>
 		public TestContext TestContext { get; set; }
 
-		// 
+		//
 		//You can use the following additional attributes as you write your tests:
 		//
 		//Use ClassInitialize to run code before running the first test in the class

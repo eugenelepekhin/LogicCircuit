@@ -403,7 +403,7 @@
 											<RowDefinition Height="Auto"/>
 											<RowDefinition Height="Auto"/>
 										</Grid.RowDefinitions>
-										<ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Path=BitWidthRange}" SelectedItem="{Binding Path=BitWidth}"
+										<ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{x:Static lc:PinDescriptor.BitWidthRange}" SelectedItem="{Binding Path=BitWidth}"
 											ToolTip="{x:Static lc:Resources.ToolTipConstantBitWidth}"
 										/>
 										<TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Static lc:Resources.CaptionBitWidth}" Margin="8,0,0,0"/>
@@ -429,14 +429,47 @@
 											<RowDefinition Height="Auto"/>
 											<RowDefinition Height="Auto"/>
 										</Grid.RowDefinitions>
-										<ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Path=AddressBitWidthRange}" SelectedItem="{Binding Path=AddressBitWidth}"
+										<ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{x:Static lc:MemoryDescriptor.AddressBitWidthRange}" SelectedItem="{Binding Path=AddressBitWidth}"
 											ToolTip="{x:Static lc:Resources.ToolTipAddressBitWidth}"
 										/>
 										<TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Static lc:Resources.CaptionAddressBitWidth}" Margin="8,0,0,0"/>
-										<ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=DataBitWidthRange}" SelectedItem="{Binding Path=DataBitWidth}"
+										<ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{x:Static lc:PinDescriptor.BitWidthRange}" SelectedItem="{Binding Path=DataBitWidth}"
 											ToolTip="{x:Static lc:Resources.ToolTipDataBitWidth}"
 										/>
 										<TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Static lc:Resources.CaptionDataBitWidth}" Margin="8,0,0,0"/>
+									</Grid>
+									<TextBlock Text="{Binding Path=Circuit.Notation}" VerticalAlignment="Center"/>
+								</StackPanel>
+							</DataTemplate>
+
+							<DataTemplate DataType="{x:Type lc:LedMatrixDescriptor}">
+								<StackPanel Style="{StaticResource DescriptorPanel}">
+									<ContentControl/>
+									<Grid Margin="3,3,8,3" VerticalAlignment="Center">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="Auto" MinWidth="65"/>
+											<ColumnDefinition Width="Auto"/>
+										</Grid.ColumnDefinitions>
+										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto"/>
+											<RowDefinition Height="Auto"/>
+											<RowDefinition Height="Auto"/>
+										</Grid.RowDefinitions>
+										<ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{x:Static lc:LedMatrixDescriptor.MatrixTypeNames}" SelectedIndex="{Binding Path=MatrixType}"
+											ToolTip="{x:Static lc:Resources.ToolTipLedMatrixType}"
+											MinWidth="{Binding ElementName=comboRuler, Path=ActualWidth}"
+										/>
+										<TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Static lc:Resources.CaptionLedMatrixType}" Margin="8,0,0,0"/>
+										<ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{x:Static lc:LedMatrixDescriptor.RowsRange}" SelectedItem="{Binding Path=Rows}"
+											ToolTip="{x:Static lc:Resources.ToolTipRows}"
+										/>
+										<TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Static lc:Resources.CaptionRows}" Margin="8,0,0,0"/>
+										<ComboBox Grid.Row="2" Grid.Column="0" ItemsSource="{x:Static lc:LedMatrixDescriptor.ColumnsRange}" SelectedItem="{Binding Path=Columns}"
+											ToolTip="{x:Static lc:Resources.ToolTipColumns}"
+										/>
+										<TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Static lc:Resources.CaptionColumns}" Margin="8,0,0,0"/>
+
+										<ListBox Name="comboRuler" Height="0" Visibility="Hidden" ItemsSource="{x:Static lc:LedMatrixDescriptor.MatrixTypeNames}" Padding="5"/>
 									</Grid>
 									<TextBlock Text="{Binding Path=Circuit.Notation}" VerticalAlignment="Center"/>
 								</StackPanel>
@@ -454,12 +487,12 @@
 											<RowDefinition Height="Auto"/>
 											<RowDefinition Height="Auto"/>
 										</Grid.RowDefinitions>
-										<ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Path=BitWidthRange}" SelectedItem="{Binding Path=BitWidth}"
+										<ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{x:Static lc:PinDescriptor.BitWidthRange}" SelectedItem="{Binding Path=BitWidth}"
 											ToolTip="{x:Static lc:Resources.ToolTipPinBitWidth}"
 										/>
 										<TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Static lc:Resources.CaptionBitWidth}" Margin="8,0,0,0"/>
 										<ComboBox Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0"
-											SelectedIndex="{Binding Path=PinSide, Mode=TwoWay}" ItemsSource="{Binding Path=PinSideRange}"
+											SelectedIndex="{Binding Path=PinSide, Mode=TwoWay}" ItemsSource="{x:Static lc:PinDescriptor.PinSideRange}"
 											ToolTip="{x:Static lc:Resources.ToolTipPinSide}"
 										/>
 										<TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Static lc:Resources.CaptionSide}" Margin="8,0,0,0"/>

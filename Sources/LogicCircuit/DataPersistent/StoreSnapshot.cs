@@ -36,7 +36,7 @@ namespace LogicCircuit.DataPersistent {
 		/// <summary>
 		/// Gets or sets version of the snapshot.
 		/// </summary>
-		public int Version { 
+		public int Version {
 			get { return this.snapshotVersion; }
 			set {
 				if(this.SnapStore.Editor == this) {

@@ -58,6 +58,7 @@ namespace LogicCircuit {
 				ConstantData.Save(this.ConstantSet.Table, writer, CircuitProject.PersistenceNamespace);
 				CircuitButtonData.Save(this.CircuitButtonSet.Table, writer, CircuitProject.PersistenceNamespace);
 				MemoryData.Save(this.MemorySet.Table, writer, CircuitProject.PersistenceNamespace);
+				LedMatrixData.Save(this.LedMatrixSet.Table, writer, CircuitProject.PersistenceNamespace);
 				SplitterData.Save(this.SplitterSet.Table, writer, CircuitProject.PersistenceNamespace);
 				CircuitSymbolData.Save(this.CircuitSymbolSet.Table, writer, CircuitProject.PersistenceNamespace);
 				WireData.Save(this.WireSet.Table, writer, CircuitProject.PersistenceNamespace);
@@ -81,7 +82,7 @@ namespace LogicCircuit {
 			string ns = nameTable.Add(CircuitProject.PersistenceNamespace);
 			string rootName = nameTable.Add("CircuitProject");
 
-			Dictionary<string, IRecordLoader> loaders = new Dictionary<string, IRecordLoader>(12, new AtomizedComparator());
+			Dictionary<string, IRecordLoader> loaders = new Dictionary<string, IRecordLoader>(16, new AtomizedComparator());
 			loaders.Add(nameTable.Add(this.ProjectSet          .Table.Name), (IRecordLoader) this.ProjectSet          );
 			loaders.Add(nameTable.Add(this.CollapsedCategorySet.Table.Name), (IRecordLoader) this.CollapsedCategorySet);
 			loaders.Add(nameTable.Add(this.LogicalCircuitSet   .Table.Name), (IRecordLoader) this.LogicalCircuitSet   );
@@ -89,6 +90,7 @@ namespace LogicCircuit {
 			loaders.Add(nameTable.Add(this.ConstantSet         .Table.Name), (IRecordLoader) this.ConstantSet         );
 			loaders.Add(nameTable.Add(this.CircuitButtonSet    .Table.Name), (IRecordLoader) this.CircuitButtonSet    );
 			loaders.Add(nameTable.Add(this.MemorySet           .Table.Name), (IRecordLoader) this.MemorySet           );
+			loaders.Add(nameTable.Add(this.LedMatrixSet        .Table.Name), (IRecordLoader) this.LedMatrixSet        );
 			loaders.Add(nameTable.Add(this.SplitterSet         .Table.Name), (IRecordLoader) this.SplitterSet         );
 			loaders.Add(nameTable.Add(this.CircuitSymbolSet    .Table.Name), (IRecordLoader) this.CircuitSymbolSet    );
 			loaders.Add(nameTable.Add(this.WireSet             .Table.Name), (IRecordLoader) this.WireSet             );
@@ -106,14 +108,16 @@ namespace LogicCircuit {
 						if (xmlReader.IsElement(ns) && ! xmlReader.IsEmptyElement) {
 							IRecordLoader loader;
 							if (loaders.TryGetValue(xmlReader.LocalName, out loader)) {
-								loader.Load(xmlReader); 
-								continue; 
+								loader.Load(xmlReader);
+								continue;
 							}
 						}
 						xmlReader.Skip();
 					}
 					Debug.Assert(xmlReader.Depth == 0);
-					Debug.Assert(xmlReader.IsEndElement(ns, rootName));
+					#if DEBUG
+						Debug.Assert(xmlReader.IsEndElement(ns, rootName));
+					#endif
 				}
 			}
 
@@ -129,6 +133,7 @@ namespace LogicCircuit {
 			this.DistinctSymbol(this.CircuitButtonSet);
 			this.DistinctSymbol(this.ConstantSet);
 			this.DistinctSymbol(this.MemorySet);
+			this.DistinctSymbol(this.LedMatrixSet);
 			this.DistinctSymbol(this.PinSet);
 			this.DistinctSymbol(this.SplitterSet);
 
@@ -252,6 +257,9 @@ namespace LogicCircuit {
 				} else if(circuit is Memory) {
 					Tracer.Assert(this.MemorySet.Table.Exists(MemoryData.MemoryIdField.Field, circuit.CircuitId));
 					Tracer.Assert(this.CircuitSymbolSet.SelectByCircuit(circuit).Count() == 1);
+				} else if(circuit is LedMatrix) {
+					Tracer.Assert(this.LedMatrixSet.Table.Exists(LedMatrixData.LedMatrixIdField.Field, circuit.CircuitId));
+					Tracer.Assert(this.CircuitSymbolSet.SelectByCircuit(circuit).Count() == 1);
 				} else if(circuit is Pin) {
 					Tracer.Assert(this.PinSet.Table.Exists(PinData.PinIdField.Field, circuit.CircuitId));
 					Tracer.Assert(this.CircuitSymbolSet.SelectByCircuit(circuit).Count() == 1);
@@ -260,6 +268,14 @@ namespace LogicCircuit {
 				} else if(circuit is Splitter) {
 					Tracer.Assert(this.SplitterSet.Table.Exists(SplitterData.SplitterIdField.Field, circuit.CircuitId));
 					Tracer.Assert(this.CircuitSymbolSet.SelectByCircuit(circuit).Count() == 1);
+				}
+			}
+			foreach(LedMatrix ledMatrix in this.LedMatrixSet) {
+				int count = this.DevicePinSet.SelectByCircuit(ledMatrix).Count();
+				if(ledMatrix.MatrixType == LedMatrixType.Individual) {
+					Tracer.Assert(ledMatrix.Rows == count);
+				} else {
+					Tracer.Assert((ledMatrix.Rows + ledMatrix.Columns) == count);
 				}
 			}
 			foreach(Wire wire in this.WireSet) {
@@ -276,22 +292,22 @@ namespace LogicCircuit {
 			this.InTransaction(action, false);
 		}
 
-		// Transform may close input reader and replace it with new one.
+		// Transform may close input reader and replace it with a new one.
 		// To emphasize this we pass xmlReader by ref.s
 		private static void Transform(ref XmlReader xmlReader) {
 			StringComparer cmp = StringComparer.OrdinalIgnoreCase;
-			do {				
+			do {
 				while (xmlReader.NodeType != XmlNodeType.Element && xmlReader.Read()) ;        // skip to the first element
 				string ns = xmlReader.NamespaceURI;
 
 				string xslt;
-				if (cmp.Compare(ns, CircuitProject.PersistenceNamespace                 ) == 0) { return;                            } else 
-				if (cmp.Compare(ns, "http://LogicCircuit.net/2.0.0.2/CircuitProject.xsd") == 0) { xslt = Schema.ConvertFrom_2_0_0_2; } else 
-				if (cmp.Compare(ns, "http://LogicCircuit.net/2.0.0.1/CircuitProject.xsd") == 0) { xslt = Schema.ConvertFrom_2_0_0_1; } else 
-				if (cmp.Compare(ns, "http://LogicCircuit.net/1.0.0.3/CircuitProject.xsd") == 0) { xslt = Schema.ConvertFrom_1_0_0_3; } else 
-				if (cmp.Compare(ns, "http://LogicCircuit.net/1.0.0.2/CircuitProject.xsd") == 0) { xslt = Schema.ConvertFrom_1_0_0_2; } else 
-				{ 
-					throw new CircuitException(Cause.UnknownVersion, Resources.ErrorUnknownVersion); 
+				if (cmp.Equals(ns, CircuitProject.PersistenceNamespace                 )) { return;                            } else
+				if (cmp.Equals(ns, "http://LogicCircuit.net/2.0.0.2/CircuitProject.xsd")) { xslt = Schema.ConvertFrom_2_0_0_2; } else
+				if (cmp.Equals(ns, "http://LogicCircuit.net/2.0.0.1/CircuitProject.xsd")) { xslt = Schema.ConvertFrom_2_0_0_1; } else
+				if (cmp.Equals(ns, "http://LogicCircuit.net/1.0.0.3/CircuitProject.xsd")) { xslt = Schema.ConvertFrom_1_0_0_3; } else
+				if (cmp.Equals(ns, "http://LogicCircuit.net/1.0.0.2/CircuitProject.xsd")) { xslt = Schema.ConvertFrom_1_0_0_2; } else
+				{
+					throw new CircuitException(Cause.UnknownVersion, Resources.ErrorUnknownVersion);
 				}
 				XmlHelper.Transform(xslt, ref xmlReader);
 			} while (true);

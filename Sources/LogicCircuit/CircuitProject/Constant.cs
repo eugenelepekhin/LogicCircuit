@@ -32,11 +32,11 @@ namespace LogicCircuit {
 		}
 
 		public override string Notation {
-			get { return Resources.ConstantNotation(this.Value); }
+			get { return Resources.ConstantNotation(this.ConstantValue); }
 			set { throw new InvalidOperationException(); }
 		}
 
-		public override string ToolTip { get { return Circuit.BuildToolTip(Resources.ToolTipConstant(this.BitWidth, this.Value), this.Note); } }
+		public override string ToolTip { get { return Circuit.BuildToolTip(Resources.ToolTipConstant(this.BitWidth, this.ConstantValue), this.Note); } }
 
 		public override string Category {
 			get { return Resources.CategoryInputOutput; }
@@ -71,7 +71,7 @@ namespace LogicCircuit {
 		}
 
 		public Constant Create(int bitWidth, int value) {
-			Constant constant = this.CreateItem(Guid.NewGuid(), bitWidth, value, ConstantData.NoteField.Field.DefaultValue);
+			Constant constant = this.CreateItem(Guid.NewGuid(), bitWidth, Constant.Normalize(value, bitWidth), ConstantData.NoteField.Field.DefaultValue);
 			this.CircuitProject.DevicePinSet.Create(constant, PinType.Output, constant.BitWidth);
 			return constant;
 		}

@@ -27,7 +27,7 @@ namespace LogicCircuit {
 			this.showGrid.IsChecked = mainFrame.ShowGrid;
 			this.gateShape.SelectedIndex = (int)Settings.User.GateShape;
 			this.maxRecentFiles.SelectedItem = Settings.User.MaxRecentFileCount;
-			
+
 		}
 
 		private void OkButtonClick(object sender, RoutedEventArgs e) {

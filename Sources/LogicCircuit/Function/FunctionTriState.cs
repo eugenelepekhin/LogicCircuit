@@ -12,5 +12,7 @@ namespace LogicCircuit {
 		public override bool Evaluate() {
 			return this.SetResult(this.ControlledState(State.On1));
 		}
+
+		public override string ReportName { get { return Resources.GateTriStateName; } }
 	}
 }

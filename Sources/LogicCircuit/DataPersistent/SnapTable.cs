@@ -96,7 +96,7 @@ namespace LogicCircuit.DataPersistent {
 					get { return this.index; }
 				#endif
 			}
-			
+
 			/// <summary>
 			/// Index of previous version of the data in the log.
 			/// this logic should be similar to Row but no threading issues as this is immutable
@@ -901,7 +901,7 @@ namespace LogicCircuit.DataPersistent {
 			private int InsertCount() {
 				return this.newVersion.TableSize - this.oldVersion.TableSize;
 			}
-			
+
 			private int ChangeCount() {
 				return this.InsertCount() + this.newVersion.LogSize - this.oldVersion.LogSize;
 			}

@@ -1,10 +1,10 @@
-﻿// This file is used by Code Analysis to maintain SuppressMessage 
+﻿// This file is used by Code Analysis to maintain SuppressMessage
 // attributes that are applied to this project.
-// Project-level suppressions either have no target or are given 
+// Project-level suppressions either have no target or are given
 // a specific target and scoped to a namespace, type, member, etc.
 //
-// To add a suppression to this file, right-click the message in the 
-// Error List, point to "Suppress Message(s)", and click 
+// To add a suppression to this file, right-click the message in the
+// Error List, point to "Suppress Message(s)", and click
 // "In Project Suppression File".
 // You do not need to add suppressions to this file manually.
 
@@ -37,6 +37,7 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Scope = "type", Target = "LogicCircuit.ConstantSet")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Scope = "type", Target = "LogicCircuit.DevicePinSet")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Scope = "type", Target = "LogicCircuit.GateSet")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Scope = "type", Target = "LogicCircuit.LedMatrixSet")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Scope = "type", Target = "LogicCircuit.DataPersistent.ITableSnapshot")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Scope = "type", Target = "LogicCircuit.LogicalCircuitSet")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Scope = "type", Target = "LogicCircuit.MemorySet")]
@@ -53,6 +54,7 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "rowId", Scope = "member", Target = "LogicCircuit.ConstantSet.#Delete(LogicCircuit.DataPersistent.RowId)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "rowId", Scope = "member", Target = "LogicCircuit.DevicePinSet.#Delete(LogicCircuit.DataPersistent.RowId)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "rowId", Scope = "member", Target = "LogicCircuit.GateSet.#Delete(LogicCircuit.DataPersistent.RowId)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "rowId", Scope = "member", Target = "LogicCircuit.LedMatrixSet.#Delete(LogicCircuit.DataPersistent.RowId)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "rowId", Scope = "member", Target = "LogicCircuit.LogicalCircuitSet.#Delete(LogicCircuit.DataPersistent.RowId)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "rowId", Scope = "member", Target = "LogicCircuit.PinSet.#Delete(LogicCircuit.DataPersistent.RowId)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "rowId", Scope = "member", Target = "LogicCircuit.ProjectSet.#Delete(LogicCircuit.DataPersistent.RowId)")]
@@ -75,6 +77,7 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "LogicCircuit.MemorySet.#Delete(LogicCircuit.DataPersistent.RowId)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "LogicCircuit.LogicalCircuitSet.#Delete(LogicCircuit.DataPersistent.RowId)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "LogicCircuit.GateSet.#Delete(LogicCircuit.DataPersistent.RowId)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "LogicCircuit.LedMatrixSet.#Delete(LogicCircuit.DataPersistent.RowId)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "LogicCircuit.DevicePinSet.#Delete(LogicCircuit.DataPersistent.RowId)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "LogicCircuit.ConstantSet.#Delete(LogicCircuit.DataPersistent.RowId)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "LogicCircuit.CircuitSymbolSet.#Delete(LogicCircuit.DataPersistent.RowId)")]
@@ -138,6 +141,8 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "LogicCircuit.CollapsedCategorySet.#Delete(LogicCircuit.DataPersistent.RowId)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times", Scope = "member", Target = "LogicCircuit.XmlHelper.#Transform(System.Xml.XmlReader,System.String)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Scope = "member", Target = "LogicCircuit.CircuitProject.#CanPaste(System.String)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "IdLed", Scope = "member", Target = "LogicCircuit.LedMatrix.#.ctor(LogicCircuit.CircuitProject,LogicCircuit.DataPersistent.RowId,LogicCircuit.DataPersistent.RowId)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Scope = "member", Target = "LogicCircuit.CircuitProject.#StoreVersionChanged(System.Object,LogicCircuit.DataPersistent.VersionChangeEventArgs)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Scope = "member", Target = "LogicCircuit.CircuitProject.#Create(System.String)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Scope = "member", Target = "LogicCircuit.CircuitProject.#Load(System.Xml.XmlReader)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Scope = "member", Target = "LogicCircuit.CircuitProject.#CanPaste(System.String)")]

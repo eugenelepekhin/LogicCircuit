@@ -36,7 +36,7 @@ namespace LogicCircuit {
 		protected override void OnIsPressedChanged(DependencyPropertyChangedEventArgs e) {
 			if(this.Clickable) {
 				base.OnIsPressedChanged(e);
-				
+
 				Action<CircuitSymbol, bool> action = this.ButtonPressed;
 				if(action != null) {
 					action((CircuitSymbol)this.DataContext, this.IsPressed);

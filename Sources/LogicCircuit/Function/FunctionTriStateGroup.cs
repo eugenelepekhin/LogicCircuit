@@ -10,5 +10,7 @@ namespace LogicCircuit {
 		public override bool Evaluate() {
 			return this.SetResult(this.TriStateGroup());
 		}
+
+		public override string ReportName { get { return Resources.TriStateGroupName; } }
 	}
 }

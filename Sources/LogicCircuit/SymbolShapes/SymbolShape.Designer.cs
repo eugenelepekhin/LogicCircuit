@@ -71,6 +71,27 @@ namespace LogicCircuit {
 		}
 
 		/// <summary>
+		/// Looks up a localized string similar to content of the file: "ledmatrix.xaml".
+		/// </summary>
+ 		public static string LedMatrix {
+			get { return ResourceManager.GetString("LedMatrix", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to content of the file: "ledmatrixrectcell.xaml".
+		/// </summary>
+ 		public static string LedMatrixRectCell {
+			get { return ResourceManager.GetString("LedMatrixRectCell", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to content of the file: "ledmatrixroundcell.xaml".
+		/// </summary>
+ 		public static string LedMatrixRoundCell {
+			get { return ResourceManager.GetString("LedMatrixRoundCell", Culture); }
+		}
+
+		/// <summary>
 		/// Looks up a localized string similar to content of the file: "markerline.xaml".
 		/// </summary>
  		public static string MarkerLine {

@@ -14,7 +14,7 @@
 
 		Version 2.0.0.1 - Moving to new store. Adding Frequency and IsMaximumSpeed to project. Adding JamNotation to Pin. Adding TextNote.
 		Version 2.0.0.2 - Adding Note to memory modules, collapse state to categories.
-		Version 2.0.0.3 - Adding note field to button and constant
+		Version 2.0.0.3 - Adding note field to button and constant. Adding LedMatrix circuits.
 	-->
 
 	<Table Name="Project">
@@ -87,6 +87,11 @@
 				<Column Name="Name"/>
 			</Key>
 
+			<!--
+				This foreign key is set to restrict because deleting of parent circuit should clear both this record and circuit record referenced by subclass key,
+				but it is impossible to delete this super class just following referential integrity rules. So deletion of all circuits that are using device pins
+				should first delete all the pins associated with it and them delete itself. To enforce this set action on this key to restrict.
+			-->
 			<Key Name="FK_Circuit_DevicePin" KeyType="Foreign" ParentName="Circuit" Action="Restrict">
 				<Column Name="CircuitId"/>
 			</Key>
@@ -210,6 +215,24 @@
 		</Table.Keys>
 	</Table>
 
+	<Table Name="LedMatrix">
+		<Table.Columns>
+			<Column Name="LedMatrixId" Type="Guid" ReadOnly="true"/>
+			<Column Name="MatrixType" Type="LedMatrixType" Default="LedMatrixType.Individual"/>
+			<Column Name="CellShape" Type="LedMatrixCellShape" Default="LedMatrixCellShape.Round"/>
+			<Column Name="Rows" Type="int" Check="LedMatrix.Check"/>
+			<Column Name="Columns" Type="int" Check="LedMatrix.Check"/>
+			<Column Name="Colors" Type="int" Check="LedMatrix.CheckColors" Default="1"/>
+			<Column Name="Note" Type="string" Default=""/>
+		</Table.Columns>
+
+		<Table.Keys>
+			<Key Name="PK_LedMatrix" KeyType="Subclass" ParentName="Circuit" Action="Cascade">
+				<Column Name="LedMatrixId"/>
+			</Key>
+		</Table.Keys>
+	</Table>
+
 	<Table Name="Splitter">
 		<Table.Columns>
 			<Column Name="SplitterId" Type="Guid" ReadOnly="true"/>
@@ -248,6 +271,11 @@
 				<Column Name="CircuitId"/>
 			</Key>
 
+			<!--
+				Deletion of the LogicalCircuit should first delete all the symbols associated with it and then delete itself.
+				Otherwise it impossible to cascade delete circuits that can have only one circuit symbol like buttons, constants etc.
+				So set action to restrict here to enforce this.
+			-->
 			<Key Name="FK_LogicalCircuit_CircuitSymbol" KeyType="Foreign" ParentName="LogicalCircuit" Action="Restrict">
 				<Column Name="LogicalCircuitId"/>
 			</Key>

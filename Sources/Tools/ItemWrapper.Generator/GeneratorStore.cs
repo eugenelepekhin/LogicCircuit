@@ -12,7 +12,7 @@ namespace ItemWrapper.Generator
     using System;
     
     
-    #line 1 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorStore.tt"
+    #line 1 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ItemWrapper.Generator\GeneratorStore.tt"
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "10.0.0.0")]
     public partial class GeneratorStore : Transformation
     {
@@ -20,7 +20,7 @@ namespace ItemWrapper.Generator
         {
             this.Write("namespace ");
             
-            #line 2 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorStore.tt"
+            #line 2 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ItemWrapper.Generator\GeneratorStore.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Store.Namespace));
             
             #line default
@@ -28,98 +28,98 @@ namespace ItemWrapper.Generator
             this.Write(" {\r\n\tusing System;\r\n\tusing System.Collections.Generic;\r\n\tusing System.ComponentMo" +
                     "del;\r\n\tusing System.Diagnostics;\r\n\tusing ");
             
-            #line 7 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorStore.tt"
+            #line 7 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ItemWrapper.Generator\GeneratorStore.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.StoreNameSpace));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\n\tpartial class ");
             
-            #line 9 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorStore.tt"
+            #line 9 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ItemWrapper.Generator\GeneratorStore.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Store.Name));
             
             #line default
             #line hidden
             this.Write(" : StoreSnapshot {\r\n\r\n");
             
-            #line 11 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorStore.tt"
+            #line 11 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ItemWrapper.Generator\GeneratorStore.tt"
 foreach(Table table in this.Store) {
             
             #line default
             #line hidden
             this.Write("\t\tprivate TableSnapshot<");
             
-            #line 12 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorStore.tt"
+            #line 12 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ItemWrapper.Generator\GeneratorStore.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(table.Name));
             
             #line default
             #line hidden
             this.Write("Data> table");
             
-            #line 12 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorStore.tt"
+            #line 12 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ItemWrapper.Generator\GeneratorStore.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(table.Name));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 13 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorStore.tt"
+            #line 13 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ItemWrapper.Generator\GeneratorStore.tt"
 }
             
             #line default
             #line hidden
             this.Write("\r\n\t\tpublic ");
             
-            #line 15 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorStore.tt"
+            #line 15 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ItemWrapper.Generator\GeneratorStore.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Store.Name));
             
             #line default
             #line hidden
             this.Write("() : base() {\r\n\t\t\t// Create all tables\r\n");
             
-            #line 17 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorStore.tt"
+            #line 17 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ItemWrapper.Generator\GeneratorStore.tt"
 foreach(Table table in this.Store) {
             
             #line default
             #line hidden
             this.Write("\t\t\tthis.table");
             
-            #line 18 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorStore.tt"
+            #line 18 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ItemWrapper.Generator\GeneratorStore.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(table.Name));
             
             #line default
             #line hidden
             this.Write(" = ");
             
-            #line 18 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorStore.tt"
+            #line 18 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ItemWrapper.Generator\GeneratorStore.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(table.Name));
             
             #line default
             #line hidden
             this.Write("Data.CreateTable(this);\r\n");
             
-            #line 19 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorStore.tt"
+            #line 19 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ItemWrapper.Generator\GeneratorStore.tt"
 }
             
             #line default
             #line hidden
             this.Write("\r\n\t\t\t// Create foreign keys\r\n");
             
-            #line 22 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorStore.tt"
+            #line 22 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ItemWrapper.Generator\GeneratorStore.tt"
 foreach(Table table in this.Store) {
             
             #line default
             #line hidden
             this.Write("\t\t\t");
             
-            #line 23 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorStore.tt"
+            #line 23 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ItemWrapper.Generator\GeneratorStore.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(table.Name));
             
             #line default
             #line hidden
             this.Write("Data.CreateForeignKeys(this);\r\n");
             
-            #line 24 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorStore.tt"
+            #line 24 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ItemWrapper.Generator\GeneratorStore.tt"
 }
             
             #line default

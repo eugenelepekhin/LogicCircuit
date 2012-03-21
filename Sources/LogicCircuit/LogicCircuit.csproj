@@ -49,17 +49,21 @@
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ButtonControl.cs" />
     <Compile Include="CircuitProject\CircuitSymbolComparer.cs" />
     <Compile Include="CircuitProject\CollapsedCategory.cs" />
     <Compile Include="CircuitProject\IRecordLoader.cs" />
+    <Compile Include="CircuitProject\LedMatrix.cs" />
+    <Compile Include="CircuitProject\LedMatrixCellShape.cs" />
+    <Compile Include="CircuitProject\LedMatrixType.cs" />
     <Compile Include="CircuitProject\PinComparer.cs" />
     <Compile Include="CircuitProject\TextNote.cs" />
     <Compile Include="CircuitProject\Wrappers\CollapsedCategory.cs" />
+    <Compile Include="CircuitProject\Wrappers\LedMatrix.cs" />
     <Compile Include="CircuitProject\Wrappers\TextNote.cs" />
+    <Compile Include="ColorMethods.cs" />
     <Compile Include="Conductor.cs" />
     <Compile Include="ConductorMap.cs" />
     <Compile Include="CustomCommands.cs" />
@@ -80,6 +84,9 @@
     </Compile>
     <Compile Include="Dialog\DialogImport.xaml.cs">
       <DependentUpon>DialogImport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\DialogLedMatrix.xaml.cs">
+      <DependentUpon>DialogLedMatrix.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialog\DialogMemory.xaml.cs">
       <DependentUpon>DialogMemory.xaml</DependentUpon>
@@ -214,6 +221,9 @@
     <Compile Include="Function\FunctionButton.cs" />
     <Compile Include="Function\FunctionConstant.cs" />
     <Compile Include="Function\FunctionLed.cs" />
+    <Compile Include="Function\FunctionLedMatrix.cs" />
+    <Compile Include="Function\FunctionLedMatrixIndividual.cs" />
+    <Compile Include="Function\FunctionLedMatrixSelector.cs" />
     <Compile Include="Function\FunctionMemory.cs" />
     <Compile Include="Function\FunctionProbe.cs" />
     <Compile Include="Function\FunctionRam.cs" />
@@ -292,6 +302,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialog\DialogImport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialog\DialogLedMatrix.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -426,7 +440,6 @@
     </None>
     <None Include="SymbolShapes\MarkerRectangle.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </None>
     <None Include="SymbolShapes\Clock.xaml">
       <SubType>Designer</SubType>
@@ -435,6 +448,15 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="SymbolShapes\Led.xaml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SymbolShapes\LedMatrix.xaml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SymbolShapes\LedMatrixRectCell.xaml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SymbolShapes\LedMatrixRoundCell.xaml">
       <SubType>Designer</SubType>
     </None>
     <None Include="SymbolShapes\Pin.xaml">
@@ -469,15 +491,12 @@
     </None>
     <None Include="SymbolShapes\MarkerLine.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </None>
     <None Include="SymbolShapes\TextNote.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </None>
     <None Include="SymbolShapes\ToggleLed.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </None>
   </ItemGroup>
   <ItemGroup>

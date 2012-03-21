@@ -54,7 +54,7 @@ namespace LogicCircuit.DataPersistent {
 					yield return rowId;
 				}
 			}
-			
+
 			public bool Exists(TField value, int version) {
 				RowId rowId = this.FindUnique(value, version);
 				return !rowId.IsEmpty;

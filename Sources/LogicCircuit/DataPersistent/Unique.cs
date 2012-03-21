@@ -9,7 +9,7 @@ namespace LogicCircuit.DataPersistent {
 			public static readonly RowId Deleted = new RowId(-2);
 
 			public TField Value;
-			
+
 			private int hash;
 			public int Hash {
 				get { return this.hash & int.MaxValue; }

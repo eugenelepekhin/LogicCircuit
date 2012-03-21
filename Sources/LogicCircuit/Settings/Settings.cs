@@ -64,7 +64,7 @@ namespace LogicCircuit {
 			XmlNamespaceManager nsManager = new XmlNamespaceManager(navigator.NameTable);
 			nsManager.AddNamespace("p", Settings.NamespaceUri);
 			XPathExpression exp = XPathExpression.Compile("/p:settings/p:property", nsManager);
-			
+
 			foreach(XPathNavigator node in navigator.Select(exp)) {
 				string key = node.GetAttribute("name", string.Empty);
 				if(!string.IsNullOrEmpty(key)) {
@@ -223,7 +223,7 @@ namespace LogicCircuit {
 		}
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		/// <param name="file"></param>
 		public void DeleteRecentFile(string file) {
@@ -245,9 +245,9 @@ namespace LogicCircuit {
 			this.NotifyPropertyChanged("RecentFilesCount");
 			this.NotifyPropertyChanged("RecentFiles");
 		}
-		
+
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		/// <returns></returns>
 		private List<KeyValuePair<string, DateTime>> AllRecentFiles() {
@@ -257,7 +257,7 @@ namespace LogicCircuit {
 		}
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		/// <returns></returns>
 		public string RecentFile() {

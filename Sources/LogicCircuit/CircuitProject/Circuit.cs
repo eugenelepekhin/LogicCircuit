@@ -12,14 +12,14 @@ namespace LogicCircuit {
 		private int symbolWidth;
 		private int symbolHeight;
 
-		public int SymbolWidth {
+		public virtual int SymbolWidth {
 			get {
 				this.Update();
 				return this.symbolWidth;
 			}
 		}
 
-		public int SymbolHeight {
+		public virtual int SymbolHeight {
 			get{
 				this.Update();
 				return this.symbolHeight;
@@ -113,8 +113,14 @@ namespace LogicCircuit {
 						height = Math.Max(left.Count, right.Count) + 1;
 						Debug.Assert(width == 1 && 2 < height || height == 1 && 2 < width);
 					} else {
-						Debug.Assert(this.Pins.Count() == 1);
-						height = width = 2;
+						LedMatrix ledMatrix = this as LedMatrix;
+						if(ledMatrix != null) {
+							width = ledMatrix.SymbolWidth;
+							height = ledMatrix.SymbolHeight;
+						} else {
+							Debug.Assert(this.Pins.Count() == 1);
+							height = width = 2;
+						}
 					}
 				} else {
 					width = Math.Max(2, Math.Max(top.Count, bottom.Count)) + 1;

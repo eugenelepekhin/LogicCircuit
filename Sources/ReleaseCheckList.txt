@@ -1,0 +1,9 @@
+1. Set version in LogicCircuit\Properties\AssemblyInfo.cs
+2. Set version in Setup project
+3. Build and test Setup project
+4. Add tag to repo
+5. Prepare website - add what is new.
+6. Create a release on http://www.codeplex.com/
+7. Push repo to http://www.codeplex.com/
+8. Set version on http://www.logiccircuit.org/LatestVersion.txt file
+???

@@ -9,5 +9,7 @@ namespace LogicCircuit {
 		public override bool Evaluate() {
 			return this.SetResult(this.Not());
 		}
+
+		public override string ReportName { get { return Resources.GateNotName; } }
 	}
 }

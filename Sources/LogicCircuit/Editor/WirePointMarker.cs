@@ -15,7 +15,7 @@ namespace LogicCircuit {
 			public override Symbol Symbol { get { return this.Parent.Symbol; } }
 
 			public Rectangle MarkerGlyph { get; private set; }
-			
+
 			public override FrameworkElement Glyph { get { return this.MarkerGlyph; } }
 
 			public WirePointMarker(WireMarker parent, Func<Point> getPoint, Action<Point> setPoint, Action<int, int> shift, Func<GridPoint> wirePoint) {

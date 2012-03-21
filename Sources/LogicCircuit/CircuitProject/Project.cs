@@ -29,7 +29,7 @@ namespace LogicCircuit {
 			if(this.Project != null) {
 				throw new CircuitException(Cause.CorruptedFile, Resources.ErrorProjectCount);
 			}
-			
+
 			this.Project = this.Create(ProjectData.Load(this.Table, reader));
 		}
 

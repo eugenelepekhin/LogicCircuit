@@ -24,6 +24,8 @@ namespace LogicCircuit {
 
 		public bool Invalid { get; set; }
 
+		public override string ReportName { get { return Resources.Gate7SegName; } }
+
 		public void Redraw() {
 			Canvas back = (Canvas)this.CircuitSymbol.ProbeView;
 			Tracer.Assert(back.Children.Count == this.BitWidth);

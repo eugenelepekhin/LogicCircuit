@@ -278,7 +278,7 @@ namespace LogicCircuit {
 			Debug.Assert(!reader.IsEmptyElement);
 
 			LogicalCircuitData data = new LogicalCircuitData();
-			// Initialize 'data' with default values: 
+			// Initialize 'data' with default values:
 			for (int i = 0; i < LogicalCircuitData.fields.Length; i ++) {
 				IFieldSerializer serializer = LogicalCircuitData.fields[i] as IFieldSerializer;
 				if (serializer != null) {
@@ -294,18 +294,18 @@ namespace LogicCircuit {
 			int hintIndex = 0;
 			while (reader.Depth == fieldDepth) {
 				if (reader.NodeType == XmlNodeType.Element && (object) reader.NamespaceURI == ns) {
-					// We are position on field element
+					// The reader is positioned on a field element
 					string fieldName  = reader.LocalName;
-					string fieldValue = ReadElementText(reader);     // reads the text and moved the reader to pass this element
+					string fieldValue = LogicalCircuitData.ReadElementText(reader);  // reads the text and moves the reader beyond this element
 					IFieldSerializer serializer = LogicalCircuitData.FindField(fieldName, ref hintIndex);
 					if (serializer != null) {
 						serializer.SetTextValue(ref data, fieldValue);
 					}
-				}else {
-					reader.Skip();     // skip everything else
+				} else {
+					reader.Skip();  // skip everything else
 				}
-				Debug.Assert(reader.Depth == fieldDepth || reader.Depth == fieldDepth - 1, 
-					"after reading the field we should be on fieldDepth or on fieldDepth - 1 if reach EndElement tag"
+				Debug.Assert(reader.Depth == fieldDepth || reader.Depth == fieldDepth - 1,
+					"After reading the field the reader should be on fieldDepth or on fieldDepth - 1 if it reached EndElement tag"
 				);
 			}
 			// insert 'data' into the table
@@ -328,16 +328,16 @@ namespace LogicCircuit {
 				}
 				// Find ourselves on the EndElement tag.
 				Debug.Assert(reader.Depth == fieldDepth);
-				Debug.Assert(reader.NodeType == XmlNodeType.EndElement); 
+				Debug.Assert(reader.NodeType == XmlNodeType.EndElement);
 			}
-			
+
 			// Skip EndElement or empty element.
 			reader.Read();
 			return result;
 		}
 
 		private static IFieldSerializer FindField(string name, ref int hint) {
-			// We serialize/deserialize fields in the same order so result would always be at hint position or after it if hint is skipped during the serialization
+			// We serialize/de-serialize fields in the same order so result would always be at hint position or after it if hint is skipped during the serialization
 			Debug.Assert(0 <= hint && hint <= LogicalCircuitData.fields.Length);
 			for (int i = hint; i < LogicalCircuitData.fields.Length; i ++) {
 				if (LogicalCircuitData.fields[i].Name == name) {
@@ -353,7 +353,7 @@ namespace LogicCircuit {
 				}
 			}
 
-			// Ups. Still don't find. 
+			// Ups. Still don't find.
 			return null;
 		}
 	}
