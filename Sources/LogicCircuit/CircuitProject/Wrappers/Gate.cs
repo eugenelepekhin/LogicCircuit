@@ -85,7 +85,6 @@ namespace LogicCircuit {
 		}
 	}
 
-
 	// Class wrapper for a record.
 	partial class Gate : Circuit {
 

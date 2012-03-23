@@ -360,7 +360,7 @@ namespace LogicCircuit {
 		public static RowId Load(TableSnapshot<LedMatrixData> table, XmlReader reader) {
 			Debug.Assert(reader.NodeType == XmlNodeType.Element);
 			Debug.Assert(reader.LocalName == table.Name);
-			Debug.Assert(!reader.IsEmptyElement);
+			Debug.Assert(!reader.IsEmptyElement, "It is expected that caller skips empty element and don't bother us.");
 
 			LedMatrixData data = new LedMatrixData();
 			// Initialize 'data' with default values:
@@ -373,15 +373,15 @@ namespace LogicCircuit {
 
 			reader.Read();
 			int fieldDepth = reader.Depth;
-			object ns = reader.NamespaceURI;
+			string ns = reader.NamespaceURI;
 
 			// Read through all fields of this record
 			int hintIndex = 0;
 			while (reader.Depth == fieldDepth) {
-				if (reader.NodeType == XmlNodeType.Element && (object) reader.NamespaceURI == ns) {
+				if (reader.IsElement(ns)) {
 					// The reader is positioned on a field element
 					string fieldName  = reader.LocalName;
-					string fieldValue = LedMatrixData.ReadElementText(reader);  // reads the text and moves the reader beyond this element
+					string fieldValue = reader.ReadElementText();  // reads the text and moves the reader beyond this element
 					IFieldSerializer serializer = LedMatrixData.FindField(fieldName, ref hintIndex);
 					if (serializer != null) {
 						serializer.SetTextValue(ref data, fieldValue);
@@ -395,30 +395,6 @@ namespace LogicCircuit {
 			}
 			// insert 'data' into the table
 			return table.Insert(ref data);
-		}
-
-		private static string ReadElementText(XmlReader reader) {
-			Debug.Assert(reader.NodeType == XmlNodeType.Element);
-			string result;
-			if (reader.IsEmptyElement) {
-				result = string.Empty;
-			} else {
-				int fieldDepth = reader.Depth;
-				reader.Read();                        // descend to the first child
-				result = reader.ReadContentAsString();
-
-				// Skip what ever we can meet here.
-				while (fieldDepth < reader.Depth) {
-					reader.Skip();
-				}
-				// Find ourselves on the EndElement tag.
-				Debug.Assert(reader.Depth == fieldDepth);
-				Debug.Assert(reader.NodeType == XmlNodeType.EndElement);
-			}
-
-			// Skip EndElement or empty element.
-			reader.Read();
-			return result;
 		}
 
 		private static IFieldSerializer FindField(string name, ref int hint) {
@@ -442,7 +418,6 @@ namespace LogicCircuit {
 			return null;
 		}
 	}
-
 
 	// Class wrapper for a record.
 	partial class LedMatrix : Circuit {
