@@ -295,14 +295,6 @@ namespace LogicCircuit {
 			this.InTransaction(action, false);
 		}
 
-		private static KeyValuePair<string, string>[] previousVersions = new KeyValuePair<string, string>[] {
-			new KeyValuePair<string, string>(CircuitProject.PersistenceNamespace                 , ""                        ),
-			new KeyValuePair<string, string>("http://LogicCircuit.net/2.0.0.2/CircuitProject.xsd", Schema.ConvertFrom_2_0_0_2),
-			new KeyValuePair<string, string>("http://LogicCircuit.net/2.0.0.1/CircuitProject.xsd", Schema.ConvertFrom_2_0_0_1),
-			new KeyValuePair<string, string>("http://LogicCircuit.net/1.0.0.3/CircuitProject.xsd", Schema.ConvertFrom_1_0_0_3),
-			new KeyValuePair<string, string>("http://LogicCircuit.net/1.0.0.2/CircuitProject.xsd", Schema.ConvertFrom_1_0_0_2),
-		};
-
 		/// <summary>
 		/// By giving XML namespace finds the XSLT that transforms LogicCurcuit of given version to the next version
 		/// </summary>
@@ -314,11 +306,14 @@ namespace LogicCircuit {
 		/// </returns>
 		private static string FindTransformation(string ns) {
 			StringComparer cmp = StringComparer.OrdinalIgnoreCase;
-			foreach(KeyValuePair<string, string> pair in previousVersions) {
-				if (cmp.Equals(ns, pair.Key)) {
-					return pair.Value;
-				}
-			}
+
+			if(cmp.Equals(ns, CircuitProject.PersistenceNamespace)) return string.Empty;
+
+			if(cmp.Equals(ns, "http://LogicCircuit.net/2.0.0.2/CircuitProject.xsd")) return Schema.ConvertFrom_2_0_0_2;
+			if(cmp.Equals(ns, "http://LogicCircuit.net/2.0.0.1/CircuitProject.xsd")) return Schema.ConvertFrom_2_0_0_1;
+			if(cmp.Equals(ns, "http://LogicCircuit.net/1.0.0.3/CircuitProject.xsd")) return Schema.ConvertFrom_1_0_0_3;
+			if(cmp.Equals(ns, "http://LogicCircuit.net/1.0.0.2/CircuitProject.xsd")) return Schema.ConvertFrom_1_0_0_2;
+
 			return null;
 		}
 
