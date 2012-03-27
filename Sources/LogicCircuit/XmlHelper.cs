@@ -61,6 +61,33 @@ namespace LogicCircuit {
 			);
 		}
 
+		public static string ReadElementText(this XmlReader reader) {
+			Debug.Assert(reader.NodeType == XmlNodeType.Element);
+			string result;
+			if (reader.IsEmptyElement) {
+				result = string.Empty;
+			} else {
+				int fieldDepth = reader.Depth;
+				reader.Read();                        // descend to the first child
+				result = "";
+
+				// Read and concatenate all text nodes. Skip inner elements and there ends.
+				while (fieldDepth < reader.Depth) {
+					if (reader.NodeType == XmlNodeType.Element || reader.NodeType == XmlNodeType.EndElement) {
+						reader.Read();
+					}
+					result += reader.ReadContentAsString();
+				}
+				// Find ourselves on the EndElement tag.
+				Debug.Assert(reader.Depth == fieldDepth);
+				Debug.Assert(reader.NodeType == XmlNodeType.EndElement);
+			}
+
+			// Skip EndElement or empty element.
+			reader.Read();
+			return result;
+		}
+
 		#if DEBUG
 			public static bool IsEndElement(this XmlReader xmlReader, string ns, string localName = null) {
 				return (

@@ -339,17 +339,9 @@ namespace LogicCircuit {
 		public void Paste() {
 			this.CancelMove();
 			this.ClearSelection();
-			string text = Clipboard.GetText();
-			if(CircuitProject.CanPaste(text)) {
-				using (XmlReader reader = XmlHelper.CreateReader(new StringReader(text))) {
-					IEnumerable<Symbol> result = null;
-					this.CircuitProject.InTransaction(() => {
-						result = this.CircuitProject.Paste(reader);
-					});
-					Tracer.Assert(result.All(symbol => symbol.LogicalCircuit == this.Project.LogicalCircuit));
-					this.Select(result);
-				}
-			}
+			IEnumerable<Symbol> result = CircuitProject.Paste(Clipboard.GetText());
+			Tracer.Assert(result.All(symbol => symbol.LogicalCircuit == this.Project.LogicalCircuit));
+			this.Select(result);
 		}
 
 		public void Delete() {

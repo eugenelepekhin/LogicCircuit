@@ -83,7 +83,6 @@ namespace LogicCircuit {
 		}
 	}
 
-
 	// Class wrapper for a record.
 	abstract partial class Circuit : INotifyPropertyChanged {
 
