@@ -34,7 +34,7 @@ namespace LogicCircuit {
 					)
 				)
 			));
-			return CreateAndClose(xmlReader);
+			return CircuitProject.CreateAndClose(xmlReader);
 		}
 
 		private static CircuitProject CreateAndClose(XmlReader xmlReader) {
@@ -101,7 +101,7 @@ namespace LogicCircuit {
 			loaders.Add(nameTable.Add(this.TextNoteSet         .Table.Name), (IRecordLoader) this.TextNoteSet         );
 
 			// skip to the first element
-			while (xmlReader.NodeType != XmlNodeType.Element && xmlReader.Read()) ;
+			while (xmlReader.NodeType != XmlNodeType.Element && xmlReader.Read());
 			Debug.Assert(xmlReader.Depth == 0);
 			if (xmlReader.IsElement(ns, rootName)) {
 				bool isEmpty = xmlReader.IsEmptyElement;
@@ -174,24 +174,23 @@ namespace LogicCircuit {
 		}
 
 		public static bool CanPaste(string text) {
-			if (string.IsNullOrEmpty(text)) {
-				return false;
+			if (!string.IsNullOrEmpty(text)) {
+				try {
+					using (XmlReader xmlReader = XmlHelper.CreateReader(new StringReader(text))) {
+						string rootName = xmlReader.NameTable.Add("CircuitProject");
+						while (xmlReader.NodeType != XmlNodeType.Element && xmlReader.Read()); // skip to the first element
+						return (
+							XmlHelper.AreEqualAtoms(rootName, xmlReader.LocalName) &&          // We are at CircuitProject element
+							CircuitProject.FindTransformation(xmlReader.NamespaceURI) != null  // and it is in known namespace
+						);
+					}
+				} catch {}
 			}
-			try {
-				using (XmlReader xmlReader = XmlHelper.CreateReader(new StringReader(text))) {
-					string rootName = xmlReader.NameTable.Add("CircuitProject");
-					while (xmlReader.NodeType != XmlNodeType.Element && xmlReader.Read()) ;        // skip to the first element
-					return (
-						XmlHelper.AreEqualAtoms(rootName, xmlReader.LocalName) &&                  // We are at CircuitProject element
-						FindTransformation(xmlReader.NamespaceURI) != null                         // and it is in know namespace
-					);
-				}
-			} catch {}
 			return false;
 		}
 
 		public IEnumerable<Symbol> Paste(string text) {
-			CircuitProject paste = CreateAndClose(XmlHelper.CreateReader(new StringReader(text)));
+			CircuitProject paste = CircuitProject.CreateAndClose(XmlHelper.CreateReader(new StringReader(text)));
 
 			List<Symbol> result = new List<Symbol>();
 			this.InTransaction(() => {
@@ -297,15 +296,15 @@ namespace LogicCircuit {
 		}
 
 		private static KeyValuePair<string, string>[] previousVersions = new KeyValuePair<string, string>[] {
-			new KeyValuePair<string, string>(CircuitProject.PersistenceNamespace                 , ""                        ), 
-			new KeyValuePair<string, string>("http://LogicCircuit.net/2.0.0.2/CircuitProject.xsd", Schema.ConvertFrom_2_0_0_2), 
-			new KeyValuePair<string, string>("http://LogicCircuit.net/2.0.0.1/CircuitProject.xsd", Schema.ConvertFrom_2_0_0_1), 
-			new KeyValuePair<string, string>("http://LogicCircuit.net/1.0.0.3/CircuitProject.xsd", Schema.ConvertFrom_1_0_0_3), 
-			new KeyValuePair<string, string>("http://LogicCircuit.net/1.0.0.2/CircuitProject.xsd", Schema.ConvertFrom_1_0_0_2), 
+			new KeyValuePair<string, string>(CircuitProject.PersistenceNamespace                 , ""                        ),
+			new KeyValuePair<string, string>("http://LogicCircuit.net/2.0.0.2/CircuitProject.xsd", Schema.ConvertFrom_2_0_0_2),
+			new KeyValuePair<string, string>("http://LogicCircuit.net/2.0.0.1/CircuitProject.xsd", Schema.ConvertFrom_2_0_0_1),
+			new KeyValuePair<string, string>("http://LogicCircuit.net/1.0.0.3/CircuitProject.xsd", Schema.ConvertFrom_1_0_0_3),
+			new KeyValuePair<string, string>("http://LogicCircuit.net/1.0.0.2/CircuitProject.xsd", Schema.ConvertFrom_1_0_0_2),
 		};
 
 		/// <summary>
-		/// By giving XML namespace finds the XSLT that transforms LogicCurcuit of give version to next version
+		/// By giving XML namespace finds the XSLT that transforms LogicCurcuit of given version to the next version
 		/// </summary>
 		/// <param name="ns">XML namespace that defines the project version</param>
 		/// <returns>
@@ -326,20 +325,20 @@ namespace LogicCircuit {
 		// Transform may close input reader and replace it with a new one.
 		// To emphasize this we pass xmlReader by ref.s
 		private static void Transform(ref XmlReader xmlReader) {
-			do {
-				while (xmlReader.NodeType != XmlNodeType.Element && xmlReader.Read()) ;        // skip to the first element
+			for(;;) {
+				while (xmlReader.NodeType != XmlNodeType.Element && xmlReader.Read()); // skip to the first element
 
 				string xslt = CircuitProject.FindTransformation(xmlReader.NamespaceURI);
-
-				if (xslt.Length == 0) { 
-					return;				// No transform needed. We are at current version.
-				} 
 				if (xslt == null) {
 					throw new CircuitException(Cause.UnknownVersion, Resources.ErrorUnknownVersion);
 				}
+				if (xslt.Length == 0) {
+					// No transform needed. We are at the current version.
+					return;
+				}
 
 				XmlHelper.Transform(xslt, ref xmlReader);
-			} while (true);
+			}
 		}
 	}
 }

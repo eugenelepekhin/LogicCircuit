@@ -68,10 +68,10 @@ namespace LogicCircuit {
 				result = string.Empty;
 			} else {
 				int fieldDepth = reader.Depth;
-				reader.Read();                        // descend to the first child
-				result = "";
+				reader.Read(); // descend to the first child
+				result = string.Empty;
 
-				// Read and concatenate all text nodes. Skip inner elements and there ends.
+				// Read and concatenate all text nodes. Skip inner elements and their ends.
 				while (fieldDepth < reader.Depth) {
 					if (reader.NodeType == XmlNodeType.Element || reader.NodeType == XmlNodeType.EndElement) {
 						reader.Read();
