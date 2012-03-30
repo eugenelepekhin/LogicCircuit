@@ -80,7 +80,12 @@ namespace LogicCircuit {
 				textBox.Selection.Select(link.ElementStart, link.ElementEnd);
 			} else {
 				this.HyperlinkText = this.textBox.Selection.Text;
-				this.HyperlinkUrl = string.Empty;
+				string text = this.HyperlinkText.Trim();
+				if(DialogHyperlink.IsValidUrl(text)) {
+					this.HyperlinkUrl = text;
+				} else {
+					this.HyperlinkUrl = string.Empty;
+				}
 			}
 			this.DataContext = this;
 			this.InitializeComponent();
