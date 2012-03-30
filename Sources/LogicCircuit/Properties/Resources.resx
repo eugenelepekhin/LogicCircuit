@@ -1020,4 +1020,19 @@ Do you want to remove the reference to it from the Recent Files list?</value>
   <data name="WebSiteDownloadUri" xml:space="preserve">
     <value>http://www.logiccircuit.org/download.html</value>
   </data>
+  <data name="CommandHyperlink" xml:space="preserve">
+    <value>Hyperlink</value>
+  </data>
+  <data name="ErrorHyperlinkText" xml:space="preserve">
+    <value>Hyperlink text is empty</value>
+  </data>
+  <data name="ErrorHyperlinkUrl" xml:space="preserve">
+    <value>Hyperlink address is invalid</value>
+  </data>
+  <data name="TitleHyperlink" xml:space="preserve">
+    <value>_Link to:</value>
+  </data>
+  <data name="TitleText" xml:space="preserve">
+    <value>_Text:</value>
+  </data>
 </root>

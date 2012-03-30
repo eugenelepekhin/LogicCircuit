@@ -1,0 +1,56 @@
+﻿<Window x:Class="LogicCircuit.DialogHyperlink"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:lc="clr-namespace:LogicCircuit"
+	WindowStartupLocation="CenterOwner"
+	Title="{Binding Source={x:Static lc:Resources.CommandHyperlink}, Mode=OneTime}"
+	Style="{DynamicResource DialogWindow}"
+	MinWidth="320"
+	MinHeight="200"
+	FocusManager.FocusedElement="{Binding ElementName=hyperlinkText}"
+>
+	<Window.Resources>
+		<Style TargetType="{x:Type TextBox}">
+			<Setter Property="Margin" Value="7,3,8,3"/>
+		</Style>
+
+		<Style TargetType="{x:Type Label}">
+			<Setter Property="Margin" Value="3"/>
+			<Setter Property="HorizontalContentAlignment" Value="Right"/>
+		</Style>
+	</Window.Resources>
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+
+		<Label Grid.Row="0" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleText}, Mode=OneTime}" Target="{Binding ElementName=hyperlinkText}"/>
+		<TextBox Grid.Row="0" Grid.Column="1" Name="hyperlinkText"
+			Text="{Binding Path=HyperlinkText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+		/>
+
+		<Label Grid.Row="1" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleHyperlink}, Mode=OneTime}" Target="{Binding ElementName=hyperlinkUrl}"/>
+		<TextBox Grid.Row="1" Grid.Column="1" Name="hyperlinkUrl"
+			Text="{Binding Path=HyperlinkUrl, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+		/>
+
+		<TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Path=Error}" HorizontalAlignment="Center" VerticalAlignment="Center"
+			FontSize="12" FontWeight="Bold"
+		/>
+
+		<StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+			<Button Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="ButtonOkClick"
+				IsEnabled="{Binding Path=IsValidHyperlink}"
+			/>
+			<Button Content="{Binding Source={x:Static lc:Resources.TitleCancel}, Mode=OneTime}" IsCancel="True"/>
+		</StackPanel>
+	</Grid>
+</Window>

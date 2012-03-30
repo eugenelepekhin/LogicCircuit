@@ -2036,5 +2036,40 @@ namespace LogicCircuit {
  		public static string WebSiteDownloadUri {
 			get { return ResourceManager.GetString("WebSiteDownloadUri", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Hyperlink.
+		/// </summary>
+ 		public static string CommandHyperlink {
+			get { return ResourceManager.GetString("CommandHyperlink", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Hyperlink text is empty.
+		/// </summary>
+ 		public static string ErrorHyperlinkText {
+			get { return ResourceManager.GetString("ErrorHyperlinkText", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Hyperlink address is invalid.
+		/// </summary>
+ 		public static string ErrorHyperlinkUrl {
+			get { return ResourceManager.GetString("ErrorHyperlinkUrl", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Link to:.
+		/// </summary>
+ 		public static string TitleHyperlink {
+			get { return ResourceManager.GetString("TitleHyperlink", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Text:.
+		/// </summary>
+ 		public static string TitleText {
+			get { return ResourceManager.GetString("TitleText", Culture); }
+		}
 	}
 }

@@ -99,6 +99,12 @@
 			<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.DecreaseIndentation" IsChecked="False">
 				<Image Source="..\Properties\ParagraphDecreaseIndentation.png"></Image>
 			</ToggleButton>
+
+			<Separator />
+
+			<ToggleButton Style="{StaticResource toolToggleButton}" Command="{Binding Path=HyperlinkCommand}">
+				<Image Source="..\Properties\Hyperlink.png"/>
+			</ToggleButton>
 		</ToolBar>
 
 		<RichTextBox Grid.Row="1" Name="editor" AcceptsReturn="True" AcceptsTab="True" SpellCheck.IsEnabled="True" TextChanged="editorTextChanged" SelectionChanged="editorSelectionChanged"

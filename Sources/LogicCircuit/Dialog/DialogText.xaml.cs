@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Input;
 
 namespace LogicCircuit {
 	/// <summary>
@@ -14,7 +15,7 @@ namespace LogicCircuit {
 
 		private SettingsWindowLocationCache windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
-
+		
 		public string Document { get; set; }
 
 		public bool IsBoldFont { get { return this.IsSelected(FontWeights.Bold, TextElement.FontWeightProperty); } }
@@ -29,7 +30,20 @@ namespace LogicCircuit {
 		public bool IsBulletted { get { return this.IsSelected(TextMarkerStyle.Disc); } }
 		public bool IsNumbered { get { return this.IsSelected(TextMarkerStyle.Decimal); } }
 
+		public LambdaUICommand HyperlinkCommand { get; private set; }
+
 		public DialogText(string document) {
+			this.HyperlinkCommand = new LambdaUICommand(LogicCircuit.Resources.CommandHyperlink,
+				o => {
+					try {
+						DialogHyperlink dialog = new DialogHyperlink(this.editor);
+						dialog.Owner = this;
+						dialog.ShowDialog();
+					} catch(Exception exception) {
+						App.Mainframe.ReportException(exception);
+					}
+				}
+			);
 			this.Document = document;
 			this.DataContext = this;
 			this.InitializeComponent();
