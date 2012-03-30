@@ -526,6 +526,9 @@
   <ItemGroup>
     <Resource Include="Properties\Hyperlink.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Properties\Image.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>$(SolutionDir)Tools\ResourceWrapper.Generator.exe ProjectPath=$(ProjectPath)

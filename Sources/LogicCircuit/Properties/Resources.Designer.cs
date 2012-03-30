@@ -2071,5 +2071,19 @@ namespace LogicCircuit {
  		public static string TitleText {
 			get { return ResourceManager.GetString("TitleText", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Picture.
+		/// </summary>
+ 		public static string CommandInsertImage {
+			get { return ResourceManager.GetString("CommandInsertImage", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to All Pictures ({0})|{0}|All files (*.*)|*.*.
+		/// </summary>
+ 		public static string ImageFilter(string supportedExtensions) {
+			return string.Format(Culture, ResourceManager.GetString("ImageFilter", Culture), supportedExtensions);
+		}
 	}
 }
