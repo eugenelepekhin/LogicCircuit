@@ -81,7 +81,7 @@ namespace LogicCircuit {
 			} else {
 				this.HyperlinkText = this.textBox.Selection.Text;
 				string text = this.HyperlinkText.Trim();
-				if(DialogHyperlink.IsValidUrl(text)) {
+				if(DialogHyperlink.IsUrl(text)) {
 					this.HyperlinkUrl = text;
 				} else {
 					this.HyperlinkUrl = string.Empty;
@@ -176,6 +176,16 @@ namespace LogicCircuit {
 			try {
 				UriBuilder builder = new UriBuilder(url);
 				return StringComparer.OrdinalIgnoreCase.Equals(builder.Scheme, Uri.UriSchemeHttp);
+			} catch {}
+			return false;
+		}
+
+		private static bool IsUrl(string url) {
+			try {
+				Uri uri;
+				if(Uri.TryCreate(url, UriKind.Absolute, out uri)) {
+					return StringComparer.OrdinalIgnoreCase.Equals(uri.Scheme, Uri.UriSchemeHttp);
+				}
 			} catch {}
 			return false;
 		}
