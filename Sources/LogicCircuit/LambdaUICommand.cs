@@ -10,7 +10,7 @@ namespace LogicCircuit {
 		public Predicate<object> CanExecutePredicate { get; private set; }
 		public Action<object> ExecuteAction { get; private set; }
 
-		public LambdaUICommand(string text, Action<object> execute, Predicate<object> canExecute = null) {
+		public LambdaUICommand(string text, Action<object> execute, Predicate<object> canExecute) {
 			if(string.IsNullOrEmpty(text)) {
 				throw new ArgumentNullException("text");
 			}
@@ -20,6 +20,9 @@ namespace LogicCircuit {
 			this.Text = text;
 			this.CanExecutePredicate = canExecute;
 			this.ExecuteAction = execute;
+		}
+
+		public LambdaUICommand(string text, Action<object> execute) : this(text, execute, null) {
 		}
 
 		public bool CanExecute(object parameter) {
