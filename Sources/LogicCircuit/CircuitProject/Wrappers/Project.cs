@@ -8,7 +8,6 @@ namespace LogicCircuit {
 	using System.Globalization;
 	using System.Linq;
 	using System.Text;
-	using System.Xml;
 	using LogicCircuit.DataPersistent;
 
 	// Defines the shape of the table Project
@@ -435,24 +434,6 @@ namespace LogicCircuit {
 		public static void CreateForeignKeys(StoreSnapshot store) {
 			TableSnapshot<ProjectData> table = (TableSnapshot<ProjectData>)store.Table("Project");
 			table.CreateForeignKey("FK_LogicalCircuit_Project", store.Table("LogicalCircuit"), ProjectData.LogicalCircuitIdField.Field, ForeignKeyAction.Restrict, false);
-		}
-
-		// Serializer of the table
-		public static void Save(TableSnapshot<ProjectData> table, XmlWriter writer, string ns) {
-			foreach(RowId rowId in table.Rows) {
-				ProjectData data;
-				table.GetData(rowId, out data);
-				writer.WriteStartElement(table.Name, ns);
-				foreach(IField<ProjectData> field in table.Fields) {
-					IFieldSerializer<ProjectData> serializer = field as IFieldSerializer<ProjectData>;
-					if(serializer != null && serializer.NeedToSave(ref data)) {
-						writer.WriteStartElement(field.Name, ns);
-						writer.WriteString(serializer.GetTextValue(ref data));
-						writer.WriteEndElement();
-					}
-				}
-				writer.WriteEndElement();
-			}
 		}
 	}
 

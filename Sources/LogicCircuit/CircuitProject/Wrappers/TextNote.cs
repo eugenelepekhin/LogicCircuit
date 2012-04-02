@@ -8,7 +8,6 @@ namespace LogicCircuit {
 	using System.Globalization;
 	using System.Linq;
 	using System.Text;
-	using System.Xml;
 	using LogicCircuit.DataPersistent;
 
 	// Defines the shape of the table TextNote
@@ -354,24 +353,6 @@ namespace LogicCircuit {
 		public static void CreateForeignKeys(StoreSnapshot store) {
 			TableSnapshot<TextNoteData> table = (TableSnapshot<TextNoteData>)store.Table("TextNote");
 			table.CreateForeignKey("FK_LogicalCircuit_TextNote", store.Table("LogicalCircuit"), TextNoteData.LogicalCircuitIdField.Field, ForeignKeyAction.Cascade, false);
-		}
-
-		// Serializer of the table
-		public static void Save(TableSnapshot<TextNoteData> table, XmlWriter writer, string ns) {
-			foreach(RowId rowId in table.Rows) {
-				TextNoteData data;
-				table.GetData(rowId, out data);
-				writer.WriteStartElement(table.Name, ns);
-				foreach(IField<TextNoteData> field in table.Fields) {
-					IFieldSerializer<TextNoteData> serializer = field as IFieldSerializer<TextNoteData>;
-					if(serializer != null && serializer.NeedToSave(ref data)) {
-						writer.WriteStartElement(field.Name, ns);
-						writer.WriteString(serializer.GetTextValue(ref data));
-						writer.WriteEndElement();
-					}
-				}
-				writer.WriteEndElement();
-			}
 		}
 	}
 

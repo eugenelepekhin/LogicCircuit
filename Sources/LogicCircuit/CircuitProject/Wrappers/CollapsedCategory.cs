@@ -8,7 +8,6 @@ namespace LogicCircuit {
 	using System.Globalization;
 	using System.Linq;
 	using System.Text;
-	using System.Xml;
 	using LogicCircuit.DataPersistent;
 
 	// Defines the shape of the table CollapsedCategory
@@ -92,24 +91,6 @@ namespace LogicCircuit {
 
 		// Creates all foreign keys of the table
 		public static void CreateForeignKeys(StoreSnapshot store) {
-		}
-
-		// Serializer of the table
-		public static void Save(TableSnapshot<CollapsedCategoryData> table, XmlWriter writer, string ns) {
-			foreach(RowId rowId in table.Rows) {
-				CollapsedCategoryData data;
-				table.GetData(rowId, out data);
-				writer.WriteStartElement(table.Name, ns);
-				foreach(IField<CollapsedCategoryData> field in table.Fields) {
-					IFieldSerializer<CollapsedCategoryData> serializer = field as IFieldSerializer<CollapsedCategoryData>;
-					if(serializer != null && serializer.NeedToSave(ref data)) {
-						writer.WriteStartElement(field.Name, ns);
-						writer.WriteString(serializer.GetTextValue(ref data));
-						writer.WriteEndElement();
-					}
-				}
-				writer.WriteEndElement();
-			}
 		}
 	}
 

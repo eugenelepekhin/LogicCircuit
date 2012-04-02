@@ -215,24 +215,4 @@ foreach(Key key in this.Table.Keys) {
 }
 #>
 		}
-<#if(this.Table.Persistent) {#>
-
-		// Serializer of the table
-		public static void Save(TableSnapshot<<#=this.Table.Name#>Data> table, XmlWriter writer, string ns) {
-			foreach(RowId rowId in table.Rows) {
-				<#=this.Table.Name#>Data data;
-				table.GetData(rowId, out data);
-				writer.WriteStartElement(table.Name, ns);
-				foreach(IField<<#=this.Table.Name#>Data> field in table.Fields) {
-					IFieldSerializer<<#=this.Table.Name#>Data> serializer = field as IFieldSerializer<<#=this.Table.Name#>Data>;
-					if(serializer != null && serializer.NeedToSave(ref data)) {
-						writer.WriteStartElement(field.Name, ns);
-						writer.WriteString(serializer.GetTextValue(ref data));
-						writer.WriteEndElement();
-					}
-				}
-				writer.WriteEndElement();
-			}
-		}
-<#}#>
 	}

@@ -118,5 +118,41 @@ namespace LogicCircuit {
 				}
 			}
 		}
+
+		private void SaveRecords(XmlWriter xmlWriter) {
+			xmlWriter.WriteStartDocument();
+			xmlWriter.WriteStartElement(CircuitProject.PersistencePrefix, "CircuitProject", CircuitProject.PersistenceNamespace);
+			CircuitProject.SaveTableRecords(xmlWriter, this.ProjectSet.Table          );
+			CircuitProject.SaveTableRecords(xmlWriter, this.CollapsedCategorySet.Table);
+			CircuitProject.SaveTableRecords(xmlWriter, this.LogicalCircuitSet.Table   );
+			CircuitProject.SaveTableRecords(xmlWriter, this.PinSet.Table              );
+			CircuitProject.SaveTableRecords(xmlWriter, this.ConstantSet.Table         );
+			CircuitProject.SaveTableRecords(xmlWriter, this.CircuitButtonSet.Table    );
+			CircuitProject.SaveTableRecords(xmlWriter, this.MemorySet.Table           );
+			CircuitProject.SaveTableRecords(xmlWriter, this.LedMatrixSet.Table        );
+			CircuitProject.SaveTableRecords(xmlWriter, this.SplitterSet.Table         );
+			CircuitProject.SaveTableRecords(xmlWriter, this.CircuitSymbolSet.Table    );
+			CircuitProject.SaveTableRecords(xmlWriter, this.WireSet.Table             );
+			CircuitProject.SaveTableRecords(xmlWriter, this.TextNoteSet.Table         );
+			xmlWriter.WriteEndElement();
+		}
+
+		// Serializer of the table
+		public static void SaveTableRecords<TRecord>(XmlWriter writer, TableSnapshot<TRecord> table) where TRecord:struct {
+			foreach(RowId rowId in table.Rows) {
+				TRecord data;
+				table.GetData(rowId, out data);
+				writer.WriteStartElement(table.Name, CircuitProject.PersistenceNamespace);
+				foreach(IField<TRecord> field in table.Fields) {
+					IFieldSerializer<TRecord> serializer = field as IFieldSerializer<TRecord>;
+					if(serializer != null && serializer.NeedToSave(ref data)) {
+						writer.WriteStartElement(field.Name, CircuitProject.PersistenceNamespace);
+						writer.WriteString(serializer.GetTextValue(ref data));
+						writer.WriteEndElement();
+					}
+				}
+				writer.WriteEndElement();
+			}
+		}
 	}
 }

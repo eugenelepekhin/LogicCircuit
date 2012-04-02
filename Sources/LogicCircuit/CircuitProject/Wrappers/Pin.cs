@@ -8,7 +8,6 @@ namespace LogicCircuit {
 	using System.Globalization;
 	using System.Linq;
 	using System.Text;
-	using System.Xml;
 	using LogicCircuit.DataPersistent;
 
 	// Defines the shape of the table Pin
@@ -397,24 +396,6 @@ namespace LogicCircuit {
 			TableSnapshot<PinData> table = (TableSnapshot<PinData>)store.Table("Pin");
 			table.CreateForeignKey("PK_Pin", store.Table("Circuit"), PinData.PinIdField.Field, ForeignKeyAction.Cascade, false);
 			table.CreateForeignKey("FK_Circuit_Pin", store.Table("Circuit"), PinData.CircuitIdField.Field, ForeignKeyAction.Restrict, false);
-		}
-
-		// Serializer of the table
-		public static void Save(TableSnapshot<PinData> table, XmlWriter writer, string ns) {
-			foreach(RowId rowId in table.Rows) {
-				PinData data;
-				table.GetData(rowId, out data);
-				writer.WriteStartElement(table.Name, ns);
-				foreach(IField<PinData> field in table.Fields) {
-					IFieldSerializer<PinData> serializer = field as IFieldSerializer<PinData>;
-					if(serializer != null && serializer.NeedToSave(ref data)) {
-						writer.WriteStartElement(field.Name, ns);
-						writer.WriteString(serializer.GetTextValue(ref data));
-						writer.WriteEndElement();
-					}
-				}
-				writer.WriteEndElement();
-			}
 		}
 	}
 

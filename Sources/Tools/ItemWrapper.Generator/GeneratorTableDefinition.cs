@@ -1058,68 +1058,7 @@ foreach(Key key in this.Table.Keys) {
             
             #line default
             #line hidden
-            this.Write("\t\t}\r\n");
-            
-            #line 218 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
-if(this.Table.Persistent) {
-            
-            #line default
-            #line hidden
-            this.Write("\r\n\t\t// Serializer of the table\r\n\t\tpublic static void Save(TableSnapshot<");
-            
-            #line 221 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
-            
-            #line default
-            #line hidden
-            this.Write("Data> table, XmlWriter writer, string ns) {\r\n\t\t\tforeach(RowId rowId in table.Rows" +
-                    ") {\r\n\t\t\t\t");
-            
-            #line 223 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
-            
-            #line default
-            #line hidden
-            this.Write("Data data;\r\n\t\t\t\ttable.GetData(rowId, out data);\r\n\t\t\t\twriter.WriteStartElement(tab" +
-                    "le.Name, ns);\r\n\t\t\t\tforeach(IField<");
-            
-            #line 226 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
-            
-            #line default
-            #line hidden
-            this.Write("Data> field in table.Fields) {\r\n\t\t\t\t\tIFieldSerializer<");
-            
-            #line 227 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
-            
-            #line default
-            #line hidden
-            this.Write("Data> serializer = field as IFieldSerializer<");
-            
-            #line 227 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
-            
-            #line default
-            #line hidden
-            this.Write(@"Data>;
-					if(serializer != null && serializer.NeedToSave(ref data)) {
-						writer.WriteStartElement(field.Name, ns);
-						writer.WriteString(serializer.GetTextValue(ref data));
-						writer.WriteEndElement();
-					}
-				}
-				writer.WriteEndElement();
-			}
-		}
-");
-            
-            #line 237 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
-}
-            
-            #line default
-            #line hidden
-            this.Write("\t}");
+            this.Write("\t\t}\r\n\t}");
             return this.GenerationEnvironment.ToString();
         }
     }

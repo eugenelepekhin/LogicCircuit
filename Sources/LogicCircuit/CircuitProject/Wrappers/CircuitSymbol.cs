@@ -8,7 +8,6 @@ namespace LogicCircuit {
 	using System.Globalization;
 	using System.Linq;
 	using System.Text;
-	using System.Xml;
 	using LogicCircuit.DataPersistent;
 
 	// Defines the shape of the table CircuitSymbol
@@ -282,24 +281,6 @@ namespace LogicCircuit {
 			TableSnapshot<CircuitSymbolData> table = (TableSnapshot<CircuitSymbolData>)store.Table("CircuitSymbol");
 			table.CreateForeignKey("FK_Circuit_CircuitSymbol", store.Table("Circuit"), CircuitSymbolData.CircuitIdField.Field, ForeignKeyAction.Cascade, false);
 			table.CreateForeignKey("FK_LogicalCircuit_CircuitSymbol", store.Table("LogicalCircuit"), CircuitSymbolData.LogicalCircuitIdField.Field, ForeignKeyAction.Restrict, false);
-		}
-
-		// Serializer of the table
-		public static void Save(TableSnapshot<CircuitSymbolData> table, XmlWriter writer, string ns) {
-			foreach(RowId rowId in table.Rows) {
-				CircuitSymbolData data;
-				table.GetData(rowId, out data);
-				writer.WriteStartElement(table.Name, ns);
-				foreach(IField<CircuitSymbolData> field in table.Fields) {
-					IFieldSerializer<CircuitSymbolData> serializer = field as IFieldSerializer<CircuitSymbolData>;
-					if(serializer != null && serializer.NeedToSave(ref data)) {
-						writer.WriteStartElement(field.Name, ns);
-						writer.WriteString(serializer.GetTextValue(ref data));
-						writer.WriteEndElement();
-					}
-				}
-				writer.WriteEndElement();
-			}
 		}
 	}
 

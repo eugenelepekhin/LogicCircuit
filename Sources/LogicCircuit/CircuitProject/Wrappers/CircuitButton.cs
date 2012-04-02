@@ -8,7 +8,6 @@ namespace LogicCircuit {
 	using System.Globalization;
 	using System.Linq;
 	using System.Text;
-	using System.Xml;
 	using LogicCircuit.DataPersistent;
 
 	// Defines the shape of the table CircuitButton
@@ -205,24 +204,6 @@ namespace LogicCircuit {
 		public static void CreateForeignKeys(StoreSnapshot store) {
 			TableSnapshot<CircuitButtonData> table = (TableSnapshot<CircuitButtonData>)store.Table("CircuitButton");
 			table.CreateForeignKey("PK_CircuitButton", store.Table("Circuit"), CircuitButtonData.CircuitButtonIdField.Field, ForeignKeyAction.Cascade, false);
-		}
-
-		// Serializer of the table
-		public static void Save(TableSnapshot<CircuitButtonData> table, XmlWriter writer, string ns) {
-			foreach(RowId rowId in table.Rows) {
-				CircuitButtonData data;
-				table.GetData(rowId, out data);
-				writer.WriteStartElement(table.Name, ns);
-				foreach(IField<CircuitButtonData> field in table.Fields) {
-					IFieldSerializer<CircuitButtonData> serializer = field as IFieldSerializer<CircuitButtonData>;
-					if(serializer != null && serializer.NeedToSave(ref data)) {
-						writer.WriteStartElement(field.Name, ns);
-						writer.WriteString(serializer.GetTextValue(ref data));
-						writer.WriteEndElement();
-					}
-				}
-				writer.WriteEndElement();
-			}
 		}
 	}
 
