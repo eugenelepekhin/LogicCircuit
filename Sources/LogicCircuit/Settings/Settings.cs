@@ -46,7 +46,7 @@ namespace LogicCircuit {
 
 				try {
 					// skip to the first element
-					while (xmlReader.NodeType != XmlNodeType.Element && xmlReader.Read()) ;
+					while (xmlReader.NodeType != XmlNodeType.Element && xmlReader.Read());
 
 					if(StringComparer.OrdinalIgnoreCase.Compare(xmlReader.NamespaceURI, Settings.OldNamespaceUri) == 0) {
 						XmlHelper.Transform(Schema.ConvertSettings, ref xmlReader);

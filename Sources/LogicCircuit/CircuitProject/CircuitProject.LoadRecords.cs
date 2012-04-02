@@ -93,7 +93,7 @@ namespace LogicCircuit {
 			loaders.Add(nameTable.Add(this.TextNoteSet         .Table.Name), this.TextNoteSet         .CreateRecordLoader(nameTable));
 
 			// skip to the first element
-			while (xmlReader.NodeType != XmlNodeType.Element && xmlReader.Read()) ;
+			while (xmlReader.NodeType != XmlNodeType.Element && xmlReader.Read());
 			Debug.Assert(xmlReader.Depth == 0);
 			if (xmlReader.IsElement(ns, rootName)) {
 				bool isEmpty = xmlReader.IsEmptyElement;
