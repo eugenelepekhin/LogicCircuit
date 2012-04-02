@@ -20,18 +20,9 @@ namespace LogicCircuit {
 		public int Y;
 		public Rotation Rotation;
 		internal CircuitSymbol CircuitSymbol;
-
-		private interface IFieldSerializer {
-			bool NeedToSave(ref CircuitSymbolData data);
-			string GetTextValue(ref CircuitSymbolData data);
-			void SetDefault(ref CircuitSymbolData data);
-			void SetTextValue(ref CircuitSymbolData data, string text);
-		}
-
 		// Field accessors
-
 		// Accessor of the CircuitSymbolId field
-		public sealed class CircuitSymbolIdField : IField<CircuitSymbolData, Guid>, IFieldSerializer {
+		public sealed class CircuitSymbolIdField : IField<CircuitSymbolData, Guid>, IFieldSerializer<CircuitSymbolData> {
 			public static readonly CircuitSymbolIdField Field = new CircuitSymbolIdField();
 			private CircuitSymbolIdField() {}
 			public string Name { get { return "CircuitSymbolId"; } }
@@ -50,23 +41,23 @@ namespace LogicCircuit {
 				return l.CompareTo(r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref CircuitSymbolData data) {
+			// Implementation of interface IFieldSerializer<CircuitSymbolData>
+			bool IFieldSerializer<CircuitSymbolData>.NeedToSave(ref CircuitSymbolData data) {
 				return this.Compare(data.CircuitSymbolId, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref CircuitSymbolData data) {
+			string IFieldSerializer<CircuitSymbolData>.GetTextValue(ref CircuitSymbolData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.CircuitSymbolId);
 			}
-			void IFieldSerializer.SetDefault(ref CircuitSymbolData data) {
+			void IFieldSerializer<CircuitSymbolData>.SetDefault(ref CircuitSymbolData data) {
 				data.CircuitSymbolId = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref CircuitSymbolData data, string text) {
+			void IFieldSerializer<CircuitSymbolData>.SetTextValue(ref CircuitSymbolData data, string text) {
 				data.CircuitSymbolId = new Guid(text);
 			}
 		}
 
 		// Accessor of the CircuitId field
-		public sealed class CircuitIdField : IField<CircuitSymbolData, Guid>, IFieldSerializer {
+		public sealed class CircuitIdField : IField<CircuitSymbolData, Guid>, IFieldSerializer<CircuitSymbolData> {
 			public static readonly CircuitIdField Field = new CircuitIdField();
 			private CircuitIdField() {}
 			public string Name { get { return "CircuitId"; } }
@@ -85,23 +76,23 @@ namespace LogicCircuit {
 				return l.CompareTo(r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref CircuitSymbolData data) {
+			// Implementation of interface IFieldSerializer<CircuitSymbolData>
+			bool IFieldSerializer<CircuitSymbolData>.NeedToSave(ref CircuitSymbolData data) {
 				return this.Compare(data.CircuitId, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref CircuitSymbolData data) {
+			string IFieldSerializer<CircuitSymbolData>.GetTextValue(ref CircuitSymbolData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.CircuitId);
 			}
-			void IFieldSerializer.SetDefault(ref CircuitSymbolData data) {
+			void IFieldSerializer<CircuitSymbolData>.SetDefault(ref CircuitSymbolData data) {
 				data.CircuitId = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref CircuitSymbolData data, string text) {
+			void IFieldSerializer<CircuitSymbolData>.SetTextValue(ref CircuitSymbolData data, string text) {
 				data.CircuitId = new Guid(text);
 			}
 		}
 
 		// Accessor of the LogicalCircuitId field
-		public sealed class LogicalCircuitIdField : IField<CircuitSymbolData, Guid>, IFieldSerializer {
+		public sealed class LogicalCircuitIdField : IField<CircuitSymbolData, Guid>, IFieldSerializer<CircuitSymbolData> {
 			public static readonly LogicalCircuitIdField Field = new LogicalCircuitIdField();
 			private LogicalCircuitIdField() {}
 			public string Name { get { return "LogicalCircuitId"; } }
@@ -120,23 +111,23 @@ namespace LogicCircuit {
 				return l.CompareTo(r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref CircuitSymbolData data) {
+			// Implementation of interface IFieldSerializer<CircuitSymbolData>
+			bool IFieldSerializer<CircuitSymbolData>.NeedToSave(ref CircuitSymbolData data) {
 				return this.Compare(data.LogicalCircuitId, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref CircuitSymbolData data) {
+			string IFieldSerializer<CircuitSymbolData>.GetTextValue(ref CircuitSymbolData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.LogicalCircuitId);
 			}
-			void IFieldSerializer.SetDefault(ref CircuitSymbolData data) {
+			void IFieldSerializer<CircuitSymbolData>.SetDefault(ref CircuitSymbolData data) {
 				data.LogicalCircuitId = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref CircuitSymbolData data, string text) {
+			void IFieldSerializer<CircuitSymbolData>.SetTextValue(ref CircuitSymbolData data, string text) {
 				data.LogicalCircuitId = new Guid(text);
 			}
 		}
 
 		// Accessor of the X field
-		public sealed class XField : IField<CircuitSymbolData, int>, IFieldSerializer {
+		public sealed class XField : IField<CircuitSymbolData, int>, IFieldSerializer<CircuitSymbolData> {
 			public static readonly XField Field = new XField();
 			private XField() {}
 			public string Name { get { return "X"; } }
@@ -155,23 +146,23 @@ namespace LogicCircuit {
 				return Math.Sign((long)l - (long)r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref CircuitSymbolData data) {
+			// Implementation of interface IFieldSerializer<CircuitSymbolData>
+			bool IFieldSerializer<CircuitSymbolData>.NeedToSave(ref CircuitSymbolData data) {
 				return this.Compare(data.X, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref CircuitSymbolData data) {
+			string IFieldSerializer<CircuitSymbolData>.GetTextValue(ref CircuitSymbolData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.X);
 			}
-			void IFieldSerializer.SetDefault(ref CircuitSymbolData data) {
+			void IFieldSerializer<CircuitSymbolData>.SetDefault(ref CircuitSymbolData data) {
 				data.X = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref CircuitSymbolData data, string text) {
+			void IFieldSerializer<CircuitSymbolData>.SetTextValue(ref CircuitSymbolData data, string text) {
 				data.X = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
 		// Accessor of the Y field
-		public sealed class YField : IField<CircuitSymbolData, int>, IFieldSerializer {
+		public sealed class YField : IField<CircuitSymbolData, int>, IFieldSerializer<CircuitSymbolData> {
 			public static readonly YField Field = new YField();
 			private YField() {}
 			public string Name { get { return "Y"; } }
@@ -190,23 +181,23 @@ namespace LogicCircuit {
 				return Math.Sign((long)l - (long)r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref CircuitSymbolData data) {
+			// Implementation of interface IFieldSerializer<CircuitSymbolData>
+			bool IFieldSerializer<CircuitSymbolData>.NeedToSave(ref CircuitSymbolData data) {
 				return this.Compare(data.Y, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref CircuitSymbolData data) {
+			string IFieldSerializer<CircuitSymbolData>.GetTextValue(ref CircuitSymbolData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Y);
 			}
-			void IFieldSerializer.SetDefault(ref CircuitSymbolData data) {
+			void IFieldSerializer<CircuitSymbolData>.SetDefault(ref CircuitSymbolData data) {
 				data.Y = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref CircuitSymbolData data, string text) {
+			void IFieldSerializer<CircuitSymbolData>.SetTextValue(ref CircuitSymbolData data, string text) {
 				data.Y = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
 		// Accessor of the Rotation field
-		public sealed class RotationField : IField<CircuitSymbolData, Rotation>, IFieldSerializer {
+		public sealed class RotationField : IField<CircuitSymbolData, Rotation>, IFieldSerializer<CircuitSymbolData> {
 			public static readonly RotationField Field = new RotationField();
 			private RotationField() {}
 			public string Name { get { return "Rotation"; } }
@@ -225,17 +216,17 @@ namespace LogicCircuit {
 				return l.CompareTo(r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref CircuitSymbolData data) {
+			// Implementation of interface IFieldSerializer<CircuitSymbolData>
+			bool IFieldSerializer<CircuitSymbolData>.NeedToSave(ref CircuitSymbolData data) {
 				return this.Compare(data.Rotation, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref CircuitSymbolData data) {
+			string IFieldSerializer<CircuitSymbolData>.GetTextValue(ref CircuitSymbolData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Rotation);
 			}
-			void IFieldSerializer.SetDefault(ref CircuitSymbolData data) {
+			void IFieldSerializer<CircuitSymbolData>.SetDefault(ref CircuitSymbolData data) {
 				data.Rotation = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref CircuitSymbolData data, string text) {
+			void IFieldSerializer<CircuitSymbolData>.SetTextValue(ref CircuitSymbolData data, string text) {
 				data.Rotation = (Rotation)Enum.Parse(typeof(Rotation), text, true);
 			}
 		}
@@ -300,7 +291,7 @@ namespace LogicCircuit {
 				table.GetData(rowId, out data);
 				writer.WriteStartElement(table.Name, ns);
 				foreach(IField<CircuitSymbolData> field in table.Fields) {
-					IFieldSerializer serializer = field as IFieldSerializer;
+					IFieldSerializer<CircuitSymbolData> serializer = field as IFieldSerializer<CircuitSymbolData>;
 					if(serializer != null && serializer.NeedToSave(ref data)) {
 						writer.WriteStartElement(field.Name, ns);
 						writer.WriteString(serializer.GetTextValue(ref data));
@@ -309,67 +300,6 @@ namespace LogicCircuit {
 				}
 				writer.WriteEndElement();
 			}
-		}
-
-		public static RowId Load(TableSnapshot<CircuitSymbolData> table, XmlReader reader) {
-			Debug.Assert(reader.NodeType == XmlNodeType.Element);
-			Debug.Assert(reader.LocalName == table.Name);
-			Debug.Assert(!reader.IsEmptyElement, "It is expected that caller skips empty element and don't bother us.");
-
-			CircuitSymbolData data = new CircuitSymbolData();
-			// Initialize 'data' with default values:
-			for (int i = 0; i < CircuitSymbolData.fields.Length; i ++) {
-				IFieldSerializer serializer = CircuitSymbolData.fields[i] as IFieldSerializer;
-				if (serializer != null) {
-					serializer.SetDefault(ref data);
-				}
-			}
-
-			reader.Read();
-			int fieldDepth = reader.Depth;
-			string ns = reader.NamespaceURI;
-
-			// Read through all fields of this record
-			int hintIndex = 0;
-			while (reader.Depth == fieldDepth) {
-				if (reader.IsElement(ns)) {
-					// The reader is positioned on a field element
-					string fieldName  = reader.LocalName;
-					string fieldValue = reader.ReadElementText();  // reads the text and moves the reader beyond this element
-					IFieldSerializer serializer = CircuitSymbolData.FindField(fieldName, ref hintIndex);
-					if (serializer != null) {
-						serializer.SetTextValue(ref data, fieldValue);
-					}
-				} else {
-					reader.Skip();  // skip everything else
-				}
-				Debug.Assert(reader.Depth == fieldDepth || reader.Depth == fieldDepth - 1,
-					"After reading the field the reader should be on fieldDepth or on fieldDepth - 1 if it reached EndElement tag"
-				);
-			}
-			// insert 'data' into the table
-			return table.Insert(ref data);
-		}
-
-		private static IFieldSerializer FindField(string name, ref int hint) {
-			// We serialize/de-serialize fields in the same order so result would always be at hint position or after it if hint is skipped during the serialization
-			Debug.Assert(0 <= hint && hint <= CircuitSymbolData.fields.Length);
-			for (int i = hint; i < CircuitSymbolData.fields.Length; i ++) {
-				if (CircuitSymbolData.fields[i].Name == name) {
-					hint = i + 1;
-					return CircuitSymbolData.fields[i] as IFieldSerializer;
-				}
-			}
-
-			// We don't find the field in expected place. Lets look the beginning of the list in case it is out of order
-			for (int i = 0; i < hint; i ++) {
-				if (CircuitSymbolData.fields[i].Name == name) {
-					return CircuitSymbolData.fields[i] as IFieldSerializer;
-				}
-			}
-
-			// Ups. Still don't find.
-			return null;
 		}
 	}
 

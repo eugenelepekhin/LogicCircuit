@@ -72,15 +72,11 @@ namespace LogicCircuit {
 		}
 	}
 
-	public sealed partial class WireSet : IRecordLoader {
+	public sealed partial class WireSet {
 		public event EventHandler WireSetChanged;
 
 		//Holds logical circuits that holds wires that was changed in latest transaction
 		private HashSet<LogicalCircuit> invalidLogicalCircuit = null;
-
-		void IRecordLoader.Load(XmlReader reader) {
-			this.Create(WireData.Load(this.Table, reader));
-		}
 
 		public Wire Create(LogicalCircuit logicalCircuit, GridPoint point1, GridPoint point2) {
 			return this.CreateItem(Guid.NewGuid(), logicalCircuit, point1.X, point1.Y, point2.X, point2.Y);
@@ -123,6 +119,10 @@ namespace LogicCircuit {
 				this.invalidLogicalCircuit = new HashSet<LogicalCircuit>();
 				this.CircuitProject.LogicalCircuitSet.UpdateConductorMaps();
 			}
+		}
+
+		public ARecordLoader CreateRecordLoader(XmlNameTable nameTable) {
+			return new RecordLoader<WireData>(nameTable, this.Table, this.Table.Fields, rowId => this.Create(rowId));
 		}
 	}
 }

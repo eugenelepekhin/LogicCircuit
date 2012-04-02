@@ -25,6 +25,13 @@ namespace LogicCircuit.DataPersistent {
 		int Compare(ref TRecord data1, ref TRecord data2);
 	}
 
+	public interface IFieldSerializer<TRecord> where TRecord:struct {
+		bool NeedToSave(ref TRecord data);
+		string GetTextValue(ref TRecord data);
+		void SetDefault(ref TRecord data);
+		void SetTextValue(ref TRecord data, string text);
+	}
+
 	/// <summary>
 	/// Defines operations on one field of the table.
 	/// </summary>

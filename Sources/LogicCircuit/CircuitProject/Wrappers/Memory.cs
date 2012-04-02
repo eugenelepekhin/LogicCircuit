@@ -29,18 +29,9 @@ namespace LogicCircuit {
 		public string Data;
 		public string Note;
 		internal Memory Memory;
-
-		private interface IFieldSerializer {
-			bool NeedToSave(ref MemoryData data);
-			string GetTextValue(ref MemoryData data);
-			void SetDefault(ref MemoryData data);
-			void SetTextValue(ref MemoryData data, string text);
-		}
-
 		// Field accessors
-
 		// Accessor of the MemoryId field
-		public sealed class MemoryIdField : IField<MemoryData, Guid>, IFieldSerializer {
+		public sealed class MemoryIdField : IField<MemoryData, Guid>, IFieldSerializer<MemoryData> {
 			public static readonly MemoryIdField Field = new MemoryIdField();
 			private MemoryIdField() {}
 			public string Name { get { return "MemoryId"; } }
@@ -59,23 +50,23 @@ namespace LogicCircuit {
 				return l.CompareTo(r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref MemoryData data) {
+			// Implementation of interface IFieldSerializer<MemoryData>
+			bool IFieldSerializer<MemoryData>.NeedToSave(ref MemoryData data) {
 				return this.Compare(data.MemoryId, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref MemoryData data) {
+			string IFieldSerializer<MemoryData>.GetTextValue(ref MemoryData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.MemoryId);
 			}
-			void IFieldSerializer.SetDefault(ref MemoryData data) {
+			void IFieldSerializer<MemoryData>.SetDefault(ref MemoryData data) {
 				data.MemoryId = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref MemoryData data, string text) {
+			void IFieldSerializer<MemoryData>.SetTextValue(ref MemoryData data, string text) {
 				data.MemoryId = new Guid(text);
 			}
 		}
 
 		// Accessor of the Writable field
-		public sealed class WritableField : IField<MemoryData, bool>, IFieldSerializer {
+		public sealed class WritableField : IField<MemoryData, bool>, IFieldSerializer<MemoryData> {
 			public static readonly WritableField Field = new WritableField();
 			private WritableField() {}
 			public string Name { get { return "Writable"; } }
@@ -94,23 +85,23 @@ namespace LogicCircuit {
 				return l.CompareTo(r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref MemoryData data) {
+			// Implementation of interface IFieldSerializer<MemoryData>
+			bool IFieldSerializer<MemoryData>.NeedToSave(ref MemoryData data) {
 				return this.Compare(data.Writable, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref MemoryData data) {
+			string IFieldSerializer<MemoryData>.GetTextValue(ref MemoryData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Writable);
 			}
-			void IFieldSerializer.SetDefault(ref MemoryData data) {
+			void IFieldSerializer<MemoryData>.SetDefault(ref MemoryData data) {
 				data.Writable = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref MemoryData data, string text) {
+			void IFieldSerializer<MemoryData>.SetTextValue(ref MemoryData data, string text) {
 				data.Writable = bool.Parse(text);
 			}
 		}
 
 		// Accessor of the WriteOn1 field
-		public sealed class WriteOn1Field : IField<MemoryData, bool>, IFieldSerializer {
+		public sealed class WriteOn1Field : IField<MemoryData, bool>, IFieldSerializer<MemoryData> {
 			public static readonly WriteOn1Field Field = new WriteOn1Field();
 			private WriteOn1Field() {}
 			public string Name { get { return "WriteOn1"; } }
@@ -129,23 +120,23 @@ namespace LogicCircuit {
 				return l.CompareTo(r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref MemoryData data) {
+			// Implementation of interface IFieldSerializer<MemoryData>
+			bool IFieldSerializer<MemoryData>.NeedToSave(ref MemoryData data) {
 				return this.Compare(data.WriteOn1, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref MemoryData data) {
+			string IFieldSerializer<MemoryData>.GetTextValue(ref MemoryData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.WriteOn1);
 			}
-			void IFieldSerializer.SetDefault(ref MemoryData data) {
+			void IFieldSerializer<MemoryData>.SetDefault(ref MemoryData data) {
 				data.WriteOn1 = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref MemoryData data, string text) {
+			void IFieldSerializer<MemoryData>.SetTextValue(ref MemoryData data, string text) {
 				data.WriteOn1 = bool.Parse(text);
 			}
 		}
 
 		// Accessor of the AddressBitWidth field
-		public sealed class AddressBitWidthField : IField<MemoryData, int>, IFieldSerializer {
+		public sealed class AddressBitWidthField : IField<MemoryData, int>, IFieldSerializer<MemoryData> {
 			public static readonly AddressBitWidthField Field = new AddressBitWidthField();
 			private AddressBitWidthField() {}
 			public string Name { get { return "AddressBitWidth"; } }
@@ -164,23 +155,23 @@ namespace LogicCircuit {
 				return Math.Sign((long)l - (long)r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref MemoryData data) {
+			// Implementation of interface IFieldSerializer<MemoryData>
+			bool IFieldSerializer<MemoryData>.NeedToSave(ref MemoryData data) {
 				return this.Compare(data.AddressBitWidth, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref MemoryData data) {
+			string IFieldSerializer<MemoryData>.GetTextValue(ref MemoryData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.AddressBitWidth);
 			}
-			void IFieldSerializer.SetDefault(ref MemoryData data) {
+			void IFieldSerializer<MemoryData>.SetDefault(ref MemoryData data) {
 				data.AddressBitWidth = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref MemoryData data, string text) {
+			void IFieldSerializer<MemoryData>.SetTextValue(ref MemoryData data, string text) {
 				data.AddressBitWidth = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
 		// Accessor of the DataBitWidth field
-		public sealed class DataBitWidthField : IField<MemoryData, int>, IFieldSerializer {
+		public sealed class DataBitWidthField : IField<MemoryData, int>, IFieldSerializer<MemoryData> {
 			public static readonly DataBitWidthField Field = new DataBitWidthField();
 			private DataBitWidthField() {}
 			public string Name { get { return "DataBitWidth"; } }
@@ -199,23 +190,23 @@ namespace LogicCircuit {
 				return Math.Sign((long)l - (long)r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref MemoryData data) {
+			// Implementation of interface IFieldSerializer<MemoryData>
+			bool IFieldSerializer<MemoryData>.NeedToSave(ref MemoryData data) {
 				return this.Compare(data.DataBitWidth, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref MemoryData data) {
+			string IFieldSerializer<MemoryData>.GetTextValue(ref MemoryData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.DataBitWidth);
 			}
-			void IFieldSerializer.SetDefault(ref MemoryData data) {
+			void IFieldSerializer<MemoryData>.SetDefault(ref MemoryData data) {
 				data.DataBitWidth = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref MemoryData data, string text) {
+			void IFieldSerializer<MemoryData>.SetTextValue(ref MemoryData data, string text) {
 				data.DataBitWidth = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
 		// Accessor of the Data field
-		public sealed class DataField : IField<MemoryData, string>, IFieldSerializer {
+		public sealed class DataField : IField<MemoryData, string>, IFieldSerializer<MemoryData> {
 			public static readonly DataField Field = new DataField();
 			private DataField() {}
 			public string Name { get { return "Data"; } }
@@ -234,23 +225,23 @@ namespace LogicCircuit {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref MemoryData data) {
+			// Implementation of interface IFieldSerializer<MemoryData>
+			bool IFieldSerializer<MemoryData>.NeedToSave(ref MemoryData data) {
 				return this.Compare(data.Data, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref MemoryData data) {
+			string IFieldSerializer<MemoryData>.GetTextValue(ref MemoryData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Data);
 			}
-			void IFieldSerializer.SetDefault(ref MemoryData data) {
+			void IFieldSerializer<MemoryData>.SetDefault(ref MemoryData data) {
 				data.Data = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref MemoryData data, string text) {
+			void IFieldSerializer<MemoryData>.SetTextValue(ref MemoryData data, string text) {
 				data.Data = text;
 			}
 		}
 
 		// Accessor of the Note field
-		public sealed class NoteField : IField<MemoryData, string>, IFieldSerializer {
+		public sealed class NoteField : IField<MemoryData, string>, IFieldSerializer<MemoryData> {
 			public static readonly NoteField Field = new NoteField();
 			private NoteField() {}
 			public string Name { get { return "Note"; } }
@@ -269,17 +260,17 @@ namespace LogicCircuit {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref MemoryData data) {
+			// Implementation of interface IFieldSerializer<MemoryData>
+			bool IFieldSerializer<MemoryData>.NeedToSave(ref MemoryData data) {
 				return this.Compare(data.Note, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref MemoryData data) {
+			string IFieldSerializer<MemoryData>.GetTextValue(ref MemoryData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Note);
 			}
-			void IFieldSerializer.SetDefault(ref MemoryData data) {
+			void IFieldSerializer<MemoryData>.SetDefault(ref MemoryData data) {
 				data.Note = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref MemoryData data, string text) {
+			void IFieldSerializer<MemoryData>.SetTextValue(ref MemoryData data, string text) {
 				data.Note = text;
 			}
 		}
@@ -342,7 +333,7 @@ namespace LogicCircuit {
 				table.GetData(rowId, out data);
 				writer.WriteStartElement(table.Name, ns);
 				foreach(IField<MemoryData> field in table.Fields) {
-					IFieldSerializer serializer = field as IFieldSerializer;
+					IFieldSerializer<MemoryData> serializer = field as IFieldSerializer<MemoryData>;
 					if(serializer != null && serializer.NeedToSave(ref data)) {
 						writer.WriteStartElement(field.Name, ns);
 						writer.WriteString(serializer.GetTextValue(ref data));
@@ -351,67 +342,6 @@ namespace LogicCircuit {
 				}
 				writer.WriteEndElement();
 			}
-		}
-
-		public static RowId Load(TableSnapshot<MemoryData> table, XmlReader reader) {
-			Debug.Assert(reader.NodeType == XmlNodeType.Element);
-			Debug.Assert(reader.LocalName == table.Name);
-			Debug.Assert(!reader.IsEmptyElement, "It is expected that caller skips empty element and don't bother us.");
-
-			MemoryData data = new MemoryData();
-			// Initialize 'data' with default values:
-			for (int i = 0; i < MemoryData.fields.Length; i ++) {
-				IFieldSerializer serializer = MemoryData.fields[i] as IFieldSerializer;
-				if (serializer != null) {
-					serializer.SetDefault(ref data);
-				}
-			}
-
-			reader.Read();
-			int fieldDepth = reader.Depth;
-			string ns = reader.NamespaceURI;
-
-			// Read through all fields of this record
-			int hintIndex = 0;
-			while (reader.Depth == fieldDepth) {
-				if (reader.IsElement(ns)) {
-					// The reader is positioned on a field element
-					string fieldName  = reader.LocalName;
-					string fieldValue = reader.ReadElementText();  // reads the text and moves the reader beyond this element
-					IFieldSerializer serializer = MemoryData.FindField(fieldName, ref hintIndex);
-					if (serializer != null) {
-						serializer.SetTextValue(ref data, fieldValue);
-					}
-				} else {
-					reader.Skip();  // skip everything else
-				}
-				Debug.Assert(reader.Depth == fieldDepth || reader.Depth == fieldDepth - 1,
-					"After reading the field the reader should be on fieldDepth or on fieldDepth - 1 if it reached EndElement tag"
-				);
-			}
-			// insert 'data' into the table
-			return table.Insert(ref data);
-		}
-
-		private static IFieldSerializer FindField(string name, ref int hint) {
-			// We serialize/de-serialize fields in the same order so result would always be at hint position or after it if hint is skipped during the serialization
-			Debug.Assert(0 <= hint && hint <= MemoryData.fields.Length);
-			for (int i = hint; i < MemoryData.fields.Length; i ++) {
-				if (MemoryData.fields[i].Name == name) {
-					hint = i + 1;
-					return MemoryData.fields[i] as IFieldSerializer;
-				}
-			}
-
-			// We don't find the field in expected place. Lets look the beginning of the list in case it is out of order
-			for (int i = 0; i < hint; i ++) {
-				if (MemoryData.fields[i].Name == name) {
-					return MemoryData.fields[i] as IFieldSerializer;
-				}
-			}
-
-			// Ups. Still don't find.
-			return null;
 		}
 	}
 

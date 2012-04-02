@@ -100,11 +100,7 @@ namespace LogicCircuit {
 		}
 	}
 
-	public sealed partial class LedMatrixSet : IRecordLoader {
-		void IRecordLoader.Load(XmlReader reader) {
-			this.Register(LedMatrixData.Load(this.Table, reader));
-		}
-
+	public sealed partial class LedMatrixSet {
 		private LedMatrix Register(RowId rowId) {
 			CircuitData data = new CircuitData() {
 				CircuitId = this.Table.GetField(rowId, LedMatrixData.LedMatrixIdField.Field)
@@ -137,5 +133,8 @@ namespace LogicCircuit {
 			return this.Register(this.Table.Insert(ref data));
 		}
 
+		public ARecordLoader CreateRecordLoader(XmlNameTable nameTable) {
+			return new RecordLoader<LedMatrixData>(nameTable, this.Table, this.Table.Fields, rowId => this.Register(rowId));
+		}
 	}
 }

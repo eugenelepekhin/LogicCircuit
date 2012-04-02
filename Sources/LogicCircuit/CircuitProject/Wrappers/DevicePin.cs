@@ -27,9 +27,7 @@ namespace LogicCircuit {
 		public string Note;
 		public string JamNotation;
 		internal DevicePin DevicePin;
-
 		// Field accessors
-
 		// Accessor of the PinId field
 		public sealed class PinIdField : IField<DevicePinData, Guid> {
 			public static readonly PinIdField Field = new PinIdField();

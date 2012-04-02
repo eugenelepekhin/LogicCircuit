@@ -27,18 +27,9 @@ namespace LogicCircuit {
 		public string Note;
 		public string JamNotation;
 		internal Pin Pin;
-
-		private interface IFieldSerializer {
-			bool NeedToSave(ref PinData data);
-			string GetTextValue(ref PinData data);
-			void SetDefault(ref PinData data);
-			void SetTextValue(ref PinData data, string text);
-		}
-
 		// Field accessors
-
 		// Accessor of the PinId field
-		public sealed class PinIdField : IField<PinData, Guid>, IFieldSerializer {
+		public sealed class PinIdField : IField<PinData, Guid>, IFieldSerializer<PinData> {
 			public static readonly PinIdField Field = new PinIdField();
 			private PinIdField() {}
 			public string Name { get { return "PinId"; } }
@@ -57,23 +48,23 @@ namespace LogicCircuit {
 				return l.CompareTo(r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref PinData data) {
+			// Implementation of interface IFieldSerializer<PinData>
+			bool IFieldSerializer<PinData>.NeedToSave(ref PinData data) {
 				return this.Compare(data.PinId, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref PinData data) {
+			string IFieldSerializer<PinData>.GetTextValue(ref PinData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.PinId);
 			}
-			void IFieldSerializer.SetDefault(ref PinData data) {
+			void IFieldSerializer<PinData>.SetDefault(ref PinData data) {
 				data.PinId = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref PinData data, string text) {
+			void IFieldSerializer<PinData>.SetTextValue(ref PinData data, string text) {
 				data.PinId = new Guid(text);
 			}
 		}
 
 		// Accessor of the CircuitId field
-		public sealed class CircuitIdField : IField<PinData, Guid>, IFieldSerializer {
+		public sealed class CircuitIdField : IField<PinData, Guid>, IFieldSerializer<PinData> {
 			public static readonly CircuitIdField Field = new CircuitIdField();
 			private CircuitIdField() {}
 			public string Name { get { return "CircuitId"; } }
@@ -92,23 +83,23 @@ namespace LogicCircuit {
 				return l.CompareTo(r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref PinData data) {
+			// Implementation of interface IFieldSerializer<PinData>
+			bool IFieldSerializer<PinData>.NeedToSave(ref PinData data) {
 				return this.Compare(data.CircuitId, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref PinData data) {
+			string IFieldSerializer<PinData>.GetTextValue(ref PinData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.CircuitId);
 			}
-			void IFieldSerializer.SetDefault(ref PinData data) {
+			void IFieldSerializer<PinData>.SetDefault(ref PinData data) {
 				data.CircuitId = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref PinData data, string text) {
+			void IFieldSerializer<PinData>.SetTextValue(ref PinData data, string text) {
 				data.CircuitId = new Guid(text);
 			}
 		}
 
 		// Accessor of the BitWidth field
-		public sealed class BitWidthField : IField<PinData, int>, IFieldSerializer {
+		public sealed class BitWidthField : IField<PinData, int>, IFieldSerializer<PinData> {
 			public static readonly BitWidthField Field = new BitWidthField();
 			private BitWidthField() {}
 			public string Name { get { return "BitWidth"; } }
@@ -127,23 +118,23 @@ namespace LogicCircuit {
 				return Math.Sign((long)l - (long)r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref PinData data) {
+			// Implementation of interface IFieldSerializer<PinData>
+			bool IFieldSerializer<PinData>.NeedToSave(ref PinData data) {
 				return this.Compare(data.BitWidth, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref PinData data) {
+			string IFieldSerializer<PinData>.GetTextValue(ref PinData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.BitWidth);
 			}
-			void IFieldSerializer.SetDefault(ref PinData data) {
+			void IFieldSerializer<PinData>.SetDefault(ref PinData data) {
 				data.BitWidth = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref PinData data, string text) {
+			void IFieldSerializer<PinData>.SetTextValue(ref PinData data, string text) {
 				data.BitWidth = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
 		// Accessor of the PinType field
-		public sealed class PinTypeField : IField<PinData, PinType>, IFieldSerializer {
+		public sealed class PinTypeField : IField<PinData, PinType>, IFieldSerializer<PinData> {
 			public static readonly PinTypeField Field = new PinTypeField();
 			private PinTypeField() {}
 			public string Name { get { return "PinType"; } }
@@ -162,23 +153,23 @@ namespace LogicCircuit {
 				return l.CompareTo(r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref PinData data) {
+			// Implementation of interface IFieldSerializer<PinData>
+			bool IFieldSerializer<PinData>.NeedToSave(ref PinData data) {
 				return this.Compare(data.PinType, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref PinData data) {
+			string IFieldSerializer<PinData>.GetTextValue(ref PinData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.PinType);
 			}
-			void IFieldSerializer.SetDefault(ref PinData data) {
+			void IFieldSerializer<PinData>.SetDefault(ref PinData data) {
 				data.PinType = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref PinData data, string text) {
+			void IFieldSerializer<PinData>.SetTextValue(ref PinData data, string text) {
 				data.PinType = (PinType)Enum.Parse(typeof(PinType), text, true);
 			}
 		}
 
 		// Accessor of the PinSide field
-		public sealed class PinSideField : IField<PinData, PinSide>, IFieldSerializer {
+		public sealed class PinSideField : IField<PinData, PinSide>, IFieldSerializer<PinData> {
 			public static readonly PinSideField Field = new PinSideField();
 			private PinSideField() {}
 			public string Name { get { return "PinSide"; } }
@@ -197,23 +188,23 @@ namespace LogicCircuit {
 				return l.CompareTo(r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref PinData data) {
+			// Implementation of interface IFieldSerializer<PinData>
+			bool IFieldSerializer<PinData>.NeedToSave(ref PinData data) {
 				return this.Compare(data.PinSide, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref PinData data) {
+			string IFieldSerializer<PinData>.GetTextValue(ref PinData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.PinSide);
 			}
-			void IFieldSerializer.SetDefault(ref PinData data) {
+			void IFieldSerializer<PinData>.SetDefault(ref PinData data) {
 				data.PinSide = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref PinData data, string text) {
+			void IFieldSerializer<PinData>.SetTextValue(ref PinData data, string text) {
 				data.PinSide = (PinSide)Enum.Parse(typeof(PinSide), text, true);
 			}
 		}
 
 		// Accessor of the Inverted field
-		public sealed class InvertedField : IField<PinData, bool>, IFieldSerializer {
+		public sealed class InvertedField : IField<PinData, bool>, IFieldSerializer<PinData> {
 			public static readonly InvertedField Field = new InvertedField();
 			private InvertedField() {}
 			public string Name { get { return "Inverted"; } }
@@ -232,23 +223,23 @@ namespace LogicCircuit {
 				return l.CompareTo(r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref PinData data) {
+			// Implementation of interface IFieldSerializer<PinData>
+			bool IFieldSerializer<PinData>.NeedToSave(ref PinData data) {
 				return this.Compare(data.Inverted, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref PinData data) {
+			string IFieldSerializer<PinData>.GetTextValue(ref PinData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Inverted);
 			}
-			void IFieldSerializer.SetDefault(ref PinData data) {
+			void IFieldSerializer<PinData>.SetDefault(ref PinData data) {
 				data.Inverted = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref PinData data, string text) {
+			void IFieldSerializer<PinData>.SetTextValue(ref PinData data, string text) {
 				data.Inverted = bool.Parse(text);
 			}
 		}
 
 		// Accessor of the Name field
-		public sealed class NameField : IField<PinData, string>, IFieldSerializer {
+		public sealed class NameField : IField<PinData, string>, IFieldSerializer<PinData> {
 			public static readonly NameField Field = new NameField();
 			private NameField() {}
 			public string Name { get { return "Name"; } }
@@ -267,23 +258,23 @@ namespace LogicCircuit {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref PinData data) {
+			// Implementation of interface IFieldSerializer<PinData>
+			bool IFieldSerializer<PinData>.NeedToSave(ref PinData data) {
 				return this.Compare(data.Name, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref PinData data) {
+			string IFieldSerializer<PinData>.GetTextValue(ref PinData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Name);
 			}
-			void IFieldSerializer.SetDefault(ref PinData data) {
+			void IFieldSerializer<PinData>.SetDefault(ref PinData data) {
 				data.Name = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref PinData data, string text) {
+			void IFieldSerializer<PinData>.SetTextValue(ref PinData data, string text) {
 				data.Name = text;
 			}
 		}
 
 		// Accessor of the Note field
-		public sealed class NoteField : IField<PinData, string>, IFieldSerializer {
+		public sealed class NoteField : IField<PinData, string>, IFieldSerializer<PinData> {
 			public static readonly NoteField Field = new NoteField();
 			private NoteField() {}
 			public string Name { get { return "Note"; } }
@@ -302,23 +293,23 @@ namespace LogicCircuit {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref PinData data) {
+			// Implementation of interface IFieldSerializer<PinData>
+			bool IFieldSerializer<PinData>.NeedToSave(ref PinData data) {
 				return this.Compare(data.Note, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref PinData data) {
+			string IFieldSerializer<PinData>.GetTextValue(ref PinData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Note);
 			}
-			void IFieldSerializer.SetDefault(ref PinData data) {
+			void IFieldSerializer<PinData>.SetDefault(ref PinData data) {
 				data.Note = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref PinData data, string text) {
+			void IFieldSerializer<PinData>.SetTextValue(ref PinData data, string text) {
 				data.Note = text;
 			}
 		}
 
 		// Accessor of the JamNotation field
-		public sealed class JamNotationField : IField<PinData, string>, IFieldSerializer {
+		public sealed class JamNotationField : IField<PinData, string>, IFieldSerializer<PinData> {
 			public static readonly JamNotationField Field = new JamNotationField();
 			private JamNotationField() {}
 			public string Name { get { return "JamNotation"; } }
@@ -337,17 +328,17 @@ namespace LogicCircuit {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref PinData data) {
+			// Implementation of interface IFieldSerializer<PinData>
+			bool IFieldSerializer<PinData>.NeedToSave(ref PinData data) {
 				return this.Compare(data.JamNotation, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref PinData data) {
+			string IFieldSerializer<PinData>.GetTextValue(ref PinData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.JamNotation);
 			}
-			void IFieldSerializer.SetDefault(ref PinData data) {
+			void IFieldSerializer<PinData>.SetDefault(ref PinData data) {
 				data.JamNotation = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref PinData data, string text) {
+			void IFieldSerializer<PinData>.SetTextValue(ref PinData data, string text) {
 				data.JamNotation = text;
 			}
 		}
@@ -415,7 +406,7 @@ namespace LogicCircuit {
 				table.GetData(rowId, out data);
 				writer.WriteStartElement(table.Name, ns);
 				foreach(IField<PinData> field in table.Fields) {
-					IFieldSerializer serializer = field as IFieldSerializer;
+					IFieldSerializer<PinData> serializer = field as IFieldSerializer<PinData>;
 					if(serializer != null && serializer.NeedToSave(ref data)) {
 						writer.WriteStartElement(field.Name, ns);
 						writer.WriteString(serializer.GetTextValue(ref data));
@@ -424,67 +415,6 @@ namespace LogicCircuit {
 				}
 				writer.WriteEndElement();
 			}
-		}
-
-		public static RowId Load(TableSnapshot<PinData> table, XmlReader reader) {
-			Debug.Assert(reader.NodeType == XmlNodeType.Element);
-			Debug.Assert(reader.LocalName == table.Name);
-			Debug.Assert(!reader.IsEmptyElement, "It is expected that caller skips empty element and don't bother us.");
-
-			PinData data = new PinData();
-			// Initialize 'data' with default values:
-			for (int i = 0; i < PinData.fields.Length; i ++) {
-				IFieldSerializer serializer = PinData.fields[i] as IFieldSerializer;
-				if (serializer != null) {
-					serializer.SetDefault(ref data);
-				}
-			}
-
-			reader.Read();
-			int fieldDepth = reader.Depth;
-			string ns = reader.NamespaceURI;
-
-			// Read through all fields of this record
-			int hintIndex = 0;
-			while (reader.Depth == fieldDepth) {
-				if (reader.IsElement(ns)) {
-					// The reader is positioned on a field element
-					string fieldName  = reader.LocalName;
-					string fieldValue = reader.ReadElementText();  // reads the text and moves the reader beyond this element
-					IFieldSerializer serializer = PinData.FindField(fieldName, ref hintIndex);
-					if (serializer != null) {
-						serializer.SetTextValue(ref data, fieldValue);
-					}
-				} else {
-					reader.Skip();  // skip everything else
-				}
-				Debug.Assert(reader.Depth == fieldDepth || reader.Depth == fieldDepth - 1,
-					"After reading the field the reader should be on fieldDepth or on fieldDepth - 1 if it reached EndElement tag"
-				);
-			}
-			// insert 'data' into the table
-			return table.Insert(ref data);
-		}
-
-		private static IFieldSerializer FindField(string name, ref int hint) {
-			// We serialize/de-serialize fields in the same order so result would always be at hint position or after it if hint is skipped during the serialization
-			Debug.Assert(0 <= hint && hint <= PinData.fields.Length);
-			for (int i = hint; i < PinData.fields.Length; i ++) {
-				if (PinData.fields[i].Name == name) {
-					hint = i + 1;
-					return PinData.fields[i] as IFieldSerializer;
-				}
-			}
-
-			// We don't find the field in expected place. Lets look the beginning of the list in case it is out of order
-			for (int i = 0; i < hint; i ++) {
-				if (PinData.fields[i].Name == name) {
-					return PinData.fields[i] as IFieldSerializer;
-				}
-			}
-
-			// Ups. Still don't find.
-			return null;
 		}
 	}
 

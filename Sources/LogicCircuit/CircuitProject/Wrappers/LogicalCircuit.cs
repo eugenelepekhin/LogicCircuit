@@ -19,18 +19,9 @@ namespace LogicCircuit {
 		public string Description;
 		public string Category;
 		internal LogicalCircuit LogicalCircuit;
-
-		private interface IFieldSerializer {
-			bool NeedToSave(ref LogicalCircuitData data);
-			string GetTextValue(ref LogicalCircuitData data);
-			void SetDefault(ref LogicalCircuitData data);
-			void SetTextValue(ref LogicalCircuitData data, string text);
-		}
-
 		// Field accessors
-
 		// Accessor of the LogicalCircuitId field
-		public sealed class LogicalCircuitIdField : IField<LogicalCircuitData, Guid>, IFieldSerializer {
+		public sealed class LogicalCircuitIdField : IField<LogicalCircuitData, Guid>, IFieldSerializer<LogicalCircuitData> {
 			public static readonly LogicalCircuitIdField Field = new LogicalCircuitIdField();
 			private LogicalCircuitIdField() {}
 			public string Name { get { return "LogicalCircuitId"; } }
@@ -49,23 +40,23 @@ namespace LogicCircuit {
 				return l.CompareTo(r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref LogicalCircuitData data) {
+			// Implementation of interface IFieldSerializer<LogicalCircuitData>
+			bool IFieldSerializer<LogicalCircuitData>.NeedToSave(ref LogicalCircuitData data) {
 				return this.Compare(data.LogicalCircuitId, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref LogicalCircuitData data) {
+			string IFieldSerializer<LogicalCircuitData>.GetTextValue(ref LogicalCircuitData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.LogicalCircuitId);
 			}
-			void IFieldSerializer.SetDefault(ref LogicalCircuitData data) {
+			void IFieldSerializer<LogicalCircuitData>.SetDefault(ref LogicalCircuitData data) {
 				data.LogicalCircuitId = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref LogicalCircuitData data, string text) {
+			void IFieldSerializer<LogicalCircuitData>.SetTextValue(ref LogicalCircuitData data, string text) {
 				data.LogicalCircuitId = new Guid(text);
 			}
 		}
 
 		// Accessor of the Name field
-		public sealed class NameField : IField<LogicalCircuitData, string>, IFieldSerializer {
+		public sealed class NameField : IField<LogicalCircuitData, string>, IFieldSerializer<LogicalCircuitData> {
 			public static readonly NameField Field = new NameField();
 			private NameField() {}
 			public string Name { get { return "Name"; } }
@@ -84,23 +75,23 @@ namespace LogicCircuit {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref LogicalCircuitData data) {
+			// Implementation of interface IFieldSerializer<LogicalCircuitData>
+			bool IFieldSerializer<LogicalCircuitData>.NeedToSave(ref LogicalCircuitData data) {
 				return this.Compare(data.Name, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref LogicalCircuitData data) {
+			string IFieldSerializer<LogicalCircuitData>.GetTextValue(ref LogicalCircuitData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Name);
 			}
-			void IFieldSerializer.SetDefault(ref LogicalCircuitData data) {
+			void IFieldSerializer<LogicalCircuitData>.SetDefault(ref LogicalCircuitData data) {
 				data.Name = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref LogicalCircuitData data, string text) {
+			void IFieldSerializer<LogicalCircuitData>.SetTextValue(ref LogicalCircuitData data, string text) {
 				data.Name = text;
 			}
 		}
 
 		// Accessor of the Notation field
-		public sealed class NotationField : IField<LogicalCircuitData, string>, IFieldSerializer {
+		public sealed class NotationField : IField<LogicalCircuitData, string>, IFieldSerializer<LogicalCircuitData> {
 			public static readonly NotationField Field = new NotationField();
 			private NotationField() {}
 			public string Name { get { return "Notation"; } }
@@ -119,23 +110,23 @@ namespace LogicCircuit {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref LogicalCircuitData data) {
+			// Implementation of interface IFieldSerializer<LogicalCircuitData>
+			bool IFieldSerializer<LogicalCircuitData>.NeedToSave(ref LogicalCircuitData data) {
 				return this.Compare(data.Notation, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref LogicalCircuitData data) {
+			string IFieldSerializer<LogicalCircuitData>.GetTextValue(ref LogicalCircuitData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Notation);
 			}
-			void IFieldSerializer.SetDefault(ref LogicalCircuitData data) {
+			void IFieldSerializer<LogicalCircuitData>.SetDefault(ref LogicalCircuitData data) {
 				data.Notation = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref LogicalCircuitData data, string text) {
+			void IFieldSerializer<LogicalCircuitData>.SetTextValue(ref LogicalCircuitData data, string text) {
 				data.Notation = text;
 			}
 		}
 
 		// Accessor of the Description field
-		public sealed class DescriptionField : IField<LogicalCircuitData, string>, IFieldSerializer {
+		public sealed class DescriptionField : IField<LogicalCircuitData, string>, IFieldSerializer<LogicalCircuitData> {
 			public static readonly DescriptionField Field = new DescriptionField();
 			private DescriptionField() {}
 			public string Name { get { return "Description"; } }
@@ -154,23 +145,23 @@ namespace LogicCircuit {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref LogicalCircuitData data) {
+			// Implementation of interface IFieldSerializer<LogicalCircuitData>
+			bool IFieldSerializer<LogicalCircuitData>.NeedToSave(ref LogicalCircuitData data) {
 				return this.Compare(data.Description, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref LogicalCircuitData data) {
+			string IFieldSerializer<LogicalCircuitData>.GetTextValue(ref LogicalCircuitData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Description);
 			}
-			void IFieldSerializer.SetDefault(ref LogicalCircuitData data) {
+			void IFieldSerializer<LogicalCircuitData>.SetDefault(ref LogicalCircuitData data) {
 				data.Description = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref LogicalCircuitData data, string text) {
+			void IFieldSerializer<LogicalCircuitData>.SetTextValue(ref LogicalCircuitData data, string text) {
 				data.Description = text;
 			}
 		}
 
 		// Accessor of the Category field
-		public sealed class CategoryField : IField<LogicalCircuitData, string>, IFieldSerializer {
+		public sealed class CategoryField : IField<LogicalCircuitData, string>, IFieldSerializer<LogicalCircuitData> {
 			public static readonly CategoryField Field = new CategoryField();
 			private CategoryField() {}
 			public string Name { get { return "Category"; } }
@@ -189,17 +180,17 @@ namespace LogicCircuit {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref LogicalCircuitData data) {
+			// Implementation of interface IFieldSerializer<LogicalCircuitData>
+			bool IFieldSerializer<LogicalCircuitData>.NeedToSave(ref LogicalCircuitData data) {
 				return this.Compare(data.Category, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref LogicalCircuitData data) {
+			string IFieldSerializer<LogicalCircuitData>.GetTextValue(ref LogicalCircuitData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Category);
 			}
-			void IFieldSerializer.SetDefault(ref LogicalCircuitData data) {
+			void IFieldSerializer<LogicalCircuitData>.SetDefault(ref LogicalCircuitData data) {
 				data.Category = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref LogicalCircuitData data, string text) {
+			void IFieldSerializer<LogicalCircuitData>.SetTextValue(ref LogicalCircuitData data, string text) {
 				data.Category = text;
 			}
 		}
@@ -261,7 +252,7 @@ namespace LogicCircuit {
 				table.GetData(rowId, out data);
 				writer.WriteStartElement(table.Name, ns);
 				foreach(IField<LogicalCircuitData> field in table.Fields) {
-					IFieldSerializer serializer = field as IFieldSerializer;
+					IFieldSerializer<LogicalCircuitData> serializer = field as IFieldSerializer<LogicalCircuitData>;
 					if(serializer != null && serializer.NeedToSave(ref data)) {
 						writer.WriteStartElement(field.Name, ns);
 						writer.WriteString(serializer.GetTextValue(ref data));
@@ -270,67 +261,6 @@ namespace LogicCircuit {
 				}
 				writer.WriteEndElement();
 			}
-		}
-
-		public static RowId Load(TableSnapshot<LogicalCircuitData> table, XmlReader reader) {
-			Debug.Assert(reader.NodeType == XmlNodeType.Element);
-			Debug.Assert(reader.LocalName == table.Name);
-			Debug.Assert(!reader.IsEmptyElement, "It is expected that caller skips empty element and don't bother us.");
-
-			LogicalCircuitData data = new LogicalCircuitData();
-			// Initialize 'data' with default values:
-			for (int i = 0; i < LogicalCircuitData.fields.Length; i ++) {
-				IFieldSerializer serializer = LogicalCircuitData.fields[i] as IFieldSerializer;
-				if (serializer != null) {
-					serializer.SetDefault(ref data);
-				}
-			}
-
-			reader.Read();
-			int fieldDepth = reader.Depth;
-			string ns = reader.NamespaceURI;
-
-			// Read through all fields of this record
-			int hintIndex = 0;
-			while (reader.Depth == fieldDepth) {
-				if (reader.IsElement(ns)) {
-					// The reader is positioned on a field element
-					string fieldName  = reader.LocalName;
-					string fieldValue = reader.ReadElementText();  // reads the text and moves the reader beyond this element
-					IFieldSerializer serializer = LogicalCircuitData.FindField(fieldName, ref hintIndex);
-					if (serializer != null) {
-						serializer.SetTextValue(ref data, fieldValue);
-					}
-				} else {
-					reader.Skip();  // skip everything else
-				}
-				Debug.Assert(reader.Depth == fieldDepth || reader.Depth == fieldDepth - 1,
-					"After reading the field the reader should be on fieldDepth or on fieldDepth - 1 if it reached EndElement tag"
-				);
-			}
-			// insert 'data' into the table
-			return table.Insert(ref data);
-		}
-
-		private static IFieldSerializer FindField(string name, ref int hint) {
-			// We serialize/de-serialize fields in the same order so result would always be at hint position or after it if hint is skipped during the serialization
-			Debug.Assert(0 <= hint && hint <= LogicalCircuitData.fields.Length);
-			for (int i = hint; i < LogicalCircuitData.fields.Length; i ++) {
-				if (LogicalCircuitData.fields[i].Name == name) {
-					hint = i + 1;
-					return LogicalCircuitData.fields[i] as IFieldSerializer;
-				}
-			}
-
-			// We don't find the field in expected place. Lets look the beginning of the list in case it is out of order
-			for (int i = 0; i < hint; i ++) {
-				if (LogicalCircuitData.fields[i].Name == name) {
-					return LogicalCircuitData.fields[i] as IFieldSerializer;
-				}
-			}
-
-			// Ups. Still don't find.
-			return null;
 		}
 	}
 

@@ -22,16 +22,8 @@ namespace LogicCircuit {
 		}
 	}
 
-	public sealed partial class ProjectSet : IRecordLoader {
+	public sealed partial class ProjectSet {
 		public Project Project { get; private set; }
-
-		void IRecordLoader.Load(XmlReader reader) {
-			if(this.Project != null) {
-				throw new CircuitException(Cause.CorruptedFile, Resources.ErrorProjectCount);
-			}
-
-			this.Project = this.Create(ProjectData.Load(this.Table, reader));
-		}
 
 		public Project Copy(Project other) {
 			Tracer.Assert(this.Count() == 0);
@@ -39,6 +31,16 @@ namespace LogicCircuit {
 			other.CircuitProject.ProjectSet.Table.GetData(other.ProjectRowId, out data);
 			data.Project = null;
 			return this.Create(this.Table.Insert(ref data));
+		}
+
+		public ARecordLoader CreateRecordLoader(XmlNameTable nameTable) {
+			return new RecordLoader<ProjectData>(nameTable, this.Table, this.Table.Fields, rowId => {
+				if(this.Project != null) {
+					throw new CircuitException(Cause.CorruptedFile, Resources.ErrorProjectCount);
+				}
+
+				this.Project = this.Create(rowId);
+			});
 		}
 	}
 }

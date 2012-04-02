@@ -15,9 +15,7 @@ namespace LogicCircuit {
 	internal partial struct CircuitData {
 		public Guid CircuitId;
 		internal Circuit Circuit;
-
 		// Field accessors
-
 		// Accessor of the CircuitId field
 		public sealed class CircuitIdField : IField<CircuitData, Guid> {
 			public static readonly CircuitIdField Field = new CircuitIdField();

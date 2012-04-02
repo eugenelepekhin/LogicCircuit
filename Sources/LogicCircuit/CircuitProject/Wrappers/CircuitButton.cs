@@ -18,18 +18,9 @@ namespace LogicCircuit {
 		public bool IsToggle;
 		public string Note;
 		internal CircuitButton CircuitButton;
-
-		private interface IFieldSerializer {
-			bool NeedToSave(ref CircuitButtonData data);
-			string GetTextValue(ref CircuitButtonData data);
-			void SetDefault(ref CircuitButtonData data);
-			void SetTextValue(ref CircuitButtonData data, string text);
-		}
-
 		// Field accessors
-
 		// Accessor of the CircuitButtonId field
-		public sealed class CircuitButtonIdField : IField<CircuitButtonData, Guid>, IFieldSerializer {
+		public sealed class CircuitButtonIdField : IField<CircuitButtonData, Guid>, IFieldSerializer<CircuitButtonData> {
 			public static readonly CircuitButtonIdField Field = new CircuitButtonIdField();
 			private CircuitButtonIdField() {}
 			public string Name { get { return "CircuitButtonId"; } }
@@ -48,23 +39,23 @@ namespace LogicCircuit {
 				return l.CompareTo(r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref CircuitButtonData data) {
+			// Implementation of interface IFieldSerializer<CircuitButtonData>
+			bool IFieldSerializer<CircuitButtonData>.NeedToSave(ref CircuitButtonData data) {
 				return this.Compare(data.CircuitButtonId, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref CircuitButtonData data) {
+			string IFieldSerializer<CircuitButtonData>.GetTextValue(ref CircuitButtonData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.CircuitButtonId);
 			}
-			void IFieldSerializer.SetDefault(ref CircuitButtonData data) {
+			void IFieldSerializer<CircuitButtonData>.SetDefault(ref CircuitButtonData data) {
 				data.CircuitButtonId = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref CircuitButtonData data, string text) {
+			void IFieldSerializer<CircuitButtonData>.SetTextValue(ref CircuitButtonData data, string text) {
 				data.CircuitButtonId = new Guid(text);
 			}
 		}
 
 		// Accessor of the Notation field
-		public sealed class NotationField : IField<CircuitButtonData, string>, IFieldSerializer {
+		public sealed class NotationField : IField<CircuitButtonData, string>, IFieldSerializer<CircuitButtonData> {
 			public static readonly NotationField Field = new NotationField();
 			private NotationField() {}
 			public string Name { get { return "Notation"; } }
@@ -83,23 +74,23 @@ namespace LogicCircuit {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref CircuitButtonData data) {
+			// Implementation of interface IFieldSerializer<CircuitButtonData>
+			bool IFieldSerializer<CircuitButtonData>.NeedToSave(ref CircuitButtonData data) {
 				return this.Compare(data.Notation, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref CircuitButtonData data) {
+			string IFieldSerializer<CircuitButtonData>.GetTextValue(ref CircuitButtonData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Notation);
 			}
-			void IFieldSerializer.SetDefault(ref CircuitButtonData data) {
+			void IFieldSerializer<CircuitButtonData>.SetDefault(ref CircuitButtonData data) {
 				data.Notation = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref CircuitButtonData data, string text) {
+			void IFieldSerializer<CircuitButtonData>.SetTextValue(ref CircuitButtonData data, string text) {
 				data.Notation = text;
 			}
 		}
 
 		// Accessor of the IsToggle field
-		public sealed class IsToggleField : IField<CircuitButtonData, bool>, IFieldSerializer {
+		public sealed class IsToggleField : IField<CircuitButtonData, bool>, IFieldSerializer<CircuitButtonData> {
 			public static readonly IsToggleField Field = new IsToggleField();
 			private IsToggleField() {}
 			public string Name { get { return "IsToggle"; } }
@@ -118,23 +109,23 @@ namespace LogicCircuit {
 				return l.CompareTo(r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref CircuitButtonData data) {
+			// Implementation of interface IFieldSerializer<CircuitButtonData>
+			bool IFieldSerializer<CircuitButtonData>.NeedToSave(ref CircuitButtonData data) {
 				return this.Compare(data.IsToggle, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref CircuitButtonData data) {
+			string IFieldSerializer<CircuitButtonData>.GetTextValue(ref CircuitButtonData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.IsToggle);
 			}
-			void IFieldSerializer.SetDefault(ref CircuitButtonData data) {
+			void IFieldSerializer<CircuitButtonData>.SetDefault(ref CircuitButtonData data) {
 				data.IsToggle = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref CircuitButtonData data, string text) {
+			void IFieldSerializer<CircuitButtonData>.SetTextValue(ref CircuitButtonData data, string text) {
 				data.IsToggle = bool.Parse(text);
 			}
 		}
 
 		// Accessor of the Note field
-		public sealed class NoteField : IField<CircuitButtonData, string>, IFieldSerializer {
+		public sealed class NoteField : IField<CircuitButtonData, string>, IFieldSerializer<CircuitButtonData> {
 			public static readonly NoteField Field = new NoteField();
 			private NoteField() {}
 			public string Name { get { return "Note"; } }
@@ -153,17 +144,17 @@ namespace LogicCircuit {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref CircuitButtonData data) {
+			// Implementation of interface IFieldSerializer<CircuitButtonData>
+			bool IFieldSerializer<CircuitButtonData>.NeedToSave(ref CircuitButtonData data) {
 				return this.Compare(data.Note, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref CircuitButtonData data) {
+			string IFieldSerializer<CircuitButtonData>.GetTextValue(ref CircuitButtonData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Note);
 			}
-			void IFieldSerializer.SetDefault(ref CircuitButtonData data) {
+			void IFieldSerializer<CircuitButtonData>.SetDefault(ref CircuitButtonData data) {
 				data.Note = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref CircuitButtonData data, string text) {
+			void IFieldSerializer<CircuitButtonData>.SetTextValue(ref CircuitButtonData data, string text) {
 				data.Note = text;
 			}
 		}
@@ -223,7 +214,7 @@ namespace LogicCircuit {
 				table.GetData(rowId, out data);
 				writer.WriteStartElement(table.Name, ns);
 				foreach(IField<CircuitButtonData> field in table.Fields) {
-					IFieldSerializer serializer = field as IFieldSerializer;
+					IFieldSerializer<CircuitButtonData> serializer = field as IFieldSerializer<CircuitButtonData>;
 					if(serializer != null && serializer.NeedToSave(ref data)) {
 						writer.WriteStartElement(field.Name, ns);
 						writer.WriteString(serializer.GetTextValue(ref data));
@@ -232,67 +223,6 @@ namespace LogicCircuit {
 				}
 				writer.WriteEndElement();
 			}
-		}
-
-		public static RowId Load(TableSnapshot<CircuitButtonData> table, XmlReader reader) {
-			Debug.Assert(reader.NodeType == XmlNodeType.Element);
-			Debug.Assert(reader.LocalName == table.Name);
-			Debug.Assert(!reader.IsEmptyElement, "It is expected that caller skips empty element and don't bother us.");
-
-			CircuitButtonData data = new CircuitButtonData();
-			// Initialize 'data' with default values:
-			for (int i = 0; i < CircuitButtonData.fields.Length; i ++) {
-				IFieldSerializer serializer = CircuitButtonData.fields[i] as IFieldSerializer;
-				if (serializer != null) {
-					serializer.SetDefault(ref data);
-				}
-			}
-
-			reader.Read();
-			int fieldDepth = reader.Depth;
-			string ns = reader.NamespaceURI;
-
-			// Read through all fields of this record
-			int hintIndex = 0;
-			while (reader.Depth == fieldDepth) {
-				if (reader.IsElement(ns)) {
-					// The reader is positioned on a field element
-					string fieldName  = reader.LocalName;
-					string fieldValue = reader.ReadElementText();  // reads the text and moves the reader beyond this element
-					IFieldSerializer serializer = CircuitButtonData.FindField(fieldName, ref hintIndex);
-					if (serializer != null) {
-						serializer.SetTextValue(ref data, fieldValue);
-					}
-				} else {
-					reader.Skip();  // skip everything else
-				}
-				Debug.Assert(reader.Depth == fieldDepth || reader.Depth == fieldDepth - 1,
-					"After reading the field the reader should be on fieldDepth or on fieldDepth - 1 if it reached EndElement tag"
-				);
-			}
-			// insert 'data' into the table
-			return table.Insert(ref data);
-		}
-
-		private static IFieldSerializer FindField(string name, ref int hint) {
-			// We serialize/de-serialize fields in the same order so result would always be at hint position or after it if hint is skipped during the serialization
-			Debug.Assert(0 <= hint && hint <= CircuitButtonData.fields.Length);
-			for (int i = hint; i < CircuitButtonData.fields.Length; i ++) {
-				if (CircuitButtonData.fields[i].Name == name) {
-					hint = i + 1;
-					return CircuitButtonData.fields[i] as IFieldSerializer;
-				}
-			}
-
-			// We don't find the field in expected place. Lets look the beginning of the list in case it is out of order
-			for (int i = 0; i < hint; i ++) {
-				if (CircuitButtonData.fields[i].Name == name) {
-					return CircuitButtonData.fields[i] as IFieldSerializer;
-				}
-			}
-
-			// Ups. Still don't find.
-			return null;
 		}
 	}
 

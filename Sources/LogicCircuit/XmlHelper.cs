@@ -104,5 +104,17 @@ namespace LogicCircuit {
 			);
 			return object.ReferenceEquals(x, y);
 		}
+
+		private class AtomComparierImpl : IEqualityComparer<string> {
+			public bool Equals(string x, string y) {
+				return XmlHelper.AreEqualAtoms(x, y);
+			}
+
+			public int GetHashCode(string obj) {
+				return obj.GetHashCode();
+			}
+		}
+
+		public static IEqualityComparer<string> AtomComparier = new AtomComparierImpl();
 	}
 }

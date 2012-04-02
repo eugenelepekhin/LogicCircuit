@@ -22,18 +22,9 @@ namespace LogicCircuit {
 		public string Note;
 		public Rotation Rotation;
 		internal TextNote TextNote;
-
-		private interface IFieldSerializer {
-			bool NeedToSave(ref TextNoteData data);
-			string GetTextValue(ref TextNoteData data);
-			void SetDefault(ref TextNoteData data);
-			void SetTextValue(ref TextNoteData data, string text);
-		}
-
 		// Field accessors
-
 		// Accessor of the TextNoteId field
-		public sealed class TextNoteIdField : IField<TextNoteData, Guid>, IFieldSerializer {
+		public sealed class TextNoteIdField : IField<TextNoteData, Guid>, IFieldSerializer<TextNoteData> {
 			public static readonly TextNoteIdField Field = new TextNoteIdField();
 			private TextNoteIdField() {}
 			public string Name { get { return "TextNoteId"; } }
@@ -52,23 +43,23 @@ namespace LogicCircuit {
 				return l.CompareTo(r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref TextNoteData data) {
+			// Implementation of interface IFieldSerializer<TextNoteData>
+			bool IFieldSerializer<TextNoteData>.NeedToSave(ref TextNoteData data) {
 				return this.Compare(data.TextNoteId, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref TextNoteData data) {
+			string IFieldSerializer<TextNoteData>.GetTextValue(ref TextNoteData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.TextNoteId);
 			}
-			void IFieldSerializer.SetDefault(ref TextNoteData data) {
+			void IFieldSerializer<TextNoteData>.SetDefault(ref TextNoteData data) {
 				data.TextNoteId = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref TextNoteData data, string text) {
+			void IFieldSerializer<TextNoteData>.SetTextValue(ref TextNoteData data, string text) {
 				data.TextNoteId = new Guid(text);
 			}
 		}
 
 		// Accessor of the LogicalCircuitId field
-		public sealed class LogicalCircuitIdField : IField<TextNoteData, Guid>, IFieldSerializer {
+		public sealed class LogicalCircuitIdField : IField<TextNoteData, Guid>, IFieldSerializer<TextNoteData> {
 			public static readonly LogicalCircuitIdField Field = new LogicalCircuitIdField();
 			private LogicalCircuitIdField() {}
 			public string Name { get { return "LogicalCircuitId"; } }
@@ -87,23 +78,23 @@ namespace LogicCircuit {
 				return l.CompareTo(r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref TextNoteData data) {
+			// Implementation of interface IFieldSerializer<TextNoteData>
+			bool IFieldSerializer<TextNoteData>.NeedToSave(ref TextNoteData data) {
 				return this.Compare(data.LogicalCircuitId, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref TextNoteData data) {
+			string IFieldSerializer<TextNoteData>.GetTextValue(ref TextNoteData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.LogicalCircuitId);
 			}
-			void IFieldSerializer.SetDefault(ref TextNoteData data) {
+			void IFieldSerializer<TextNoteData>.SetDefault(ref TextNoteData data) {
 				data.LogicalCircuitId = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref TextNoteData data, string text) {
+			void IFieldSerializer<TextNoteData>.SetTextValue(ref TextNoteData data, string text) {
 				data.LogicalCircuitId = new Guid(text);
 			}
 		}
 
 		// Accessor of the X field
-		public sealed class XField : IField<TextNoteData, int>, IFieldSerializer {
+		public sealed class XField : IField<TextNoteData, int>, IFieldSerializer<TextNoteData> {
 			public static readonly XField Field = new XField();
 			private XField() {}
 			public string Name { get { return "X"; } }
@@ -122,23 +113,23 @@ namespace LogicCircuit {
 				return Math.Sign((long)l - (long)r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref TextNoteData data) {
+			// Implementation of interface IFieldSerializer<TextNoteData>
+			bool IFieldSerializer<TextNoteData>.NeedToSave(ref TextNoteData data) {
 				return this.Compare(data.X, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref TextNoteData data) {
+			string IFieldSerializer<TextNoteData>.GetTextValue(ref TextNoteData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.X);
 			}
-			void IFieldSerializer.SetDefault(ref TextNoteData data) {
+			void IFieldSerializer<TextNoteData>.SetDefault(ref TextNoteData data) {
 				data.X = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref TextNoteData data, string text) {
+			void IFieldSerializer<TextNoteData>.SetTextValue(ref TextNoteData data, string text) {
 				data.X = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
 		// Accessor of the Y field
-		public sealed class YField : IField<TextNoteData, int>, IFieldSerializer {
+		public sealed class YField : IField<TextNoteData, int>, IFieldSerializer<TextNoteData> {
 			public static readonly YField Field = new YField();
 			private YField() {}
 			public string Name { get { return "Y"; } }
@@ -157,23 +148,23 @@ namespace LogicCircuit {
 				return Math.Sign((long)l - (long)r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref TextNoteData data) {
+			// Implementation of interface IFieldSerializer<TextNoteData>
+			bool IFieldSerializer<TextNoteData>.NeedToSave(ref TextNoteData data) {
 				return this.Compare(data.Y, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref TextNoteData data) {
+			string IFieldSerializer<TextNoteData>.GetTextValue(ref TextNoteData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Y);
 			}
-			void IFieldSerializer.SetDefault(ref TextNoteData data) {
+			void IFieldSerializer<TextNoteData>.SetDefault(ref TextNoteData data) {
 				data.Y = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref TextNoteData data, string text) {
+			void IFieldSerializer<TextNoteData>.SetTextValue(ref TextNoteData data, string text) {
 				data.Y = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
 		// Accessor of the Width field
-		public sealed class WidthField : IField<TextNoteData, int>, IFieldSerializer {
+		public sealed class WidthField : IField<TextNoteData, int>, IFieldSerializer<TextNoteData> {
 			public static readonly WidthField Field = new WidthField();
 			private WidthField() {}
 			public string Name { get { return "Width"; } }
@@ -192,23 +183,23 @@ namespace LogicCircuit {
 				return Math.Sign((long)l - (long)r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref TextNoteData data) {
+			// Implementation of interface IFieldSerializer<TextNoteData>
+			bool IFieldSerializer<TextNoteData>.NeedToSave(ref TextNoteData data) {
 				return this.Compare(data.Width, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref TextNoteData data) {
+			string IFieldSerializer<TextNoteData>.GetTextValue(ref TextNoteData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Width);
 			}
-			void IFieldSerializer.SetDefault(ref TextNoteData data) {
+			void IFieldSerializer<TextNoteData>.SetDefault(ref TextNoteData data) {
 				data.Width = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref TextNoteData data, string text) {
+			void IFieldSerializer<TextNoteData>.SetTextValue(ref TextNoteData data, string text) {
 				data.Width = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
 		// Accessor of the Height field
-		public sealed class HeightField : IField<TextNoteData, int>, IFieldSerializer {
+		public sealed class HeightField : IField<TextNoteData, int>, IFieldSerializer<TextNoteData> {
 			public static readonly HeightField Field = new HeightField();
 			private HeightField() {}
 			public string Name { get { return "Height"; } }
@@ -227,23 +218,23 @@ namespace LogicCircuit {
 				return Math.Sign((long)l - (long)r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref TextNoteData data) {
+			// Implementation of interface IFieldSerializer<TextNoteData>
+			bool IFieldSerializer<TextNoteData>.NeedToSave(ref TextNoteData data) {
 				return this.Compare(data.Height, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref TextNoteData data) {
+			string IFieldSerializer<TextNoteData>.GetTextValue(ref TextNoteData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Height);
 			}
-			void IFieldSerializer.SetDefault(ref TextNoteData data) {
+			void IFieldSerializer<TextNoteData>.SetDefault(ref TextNoteData data) {
 				data.Height = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref TextNoteData data, string text) {
+			void IFieldSerializer<TextNoteData>.SetTextValue(ref TextNoteData data, string text) {
 				data.Height = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
 		// Accessor of the Note field
-		public sealed class NoteField : IField<TextNoteData, string>, IFieldSerializer {
+		public sealed class NoteField : IField<TextNoteData, string>, IFieldSerializer<TextNoteData> {
 			public static readonly NoteField Field = new NoteField();
 			private NoteField() {}
 			public string Name { get { return "Note"; } }
@@ -262,23 +253,23 @@ namespace LogicCircuit {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref TextNoteData data) {
+			// Implementation of interface IFieldSerializer<TextNoteData>
+			bool IFieldSerializer<TextNoteData>.NeedToSave(ref TextNoteData data) {
 				return this.Compare(data.Note, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref TextNoteData data) {
+			string IFieldSerializer<TextNoteData>.GetTextValue(ref TextNoteData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Note);
 			}
-			void IFieldSerializer.SetDefault(ref TextNoteData data) {
+			void IFieldSerializer<TextNoteData>.SetDefault(ref TextNoteData data) {
 				data.Note = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref TextNoteData data, string text) {
+			void IFieldSerializer<TextNoteData>.SetTextValue(ref TextNoteData data, string text) {
 				data.Note = text;
 			}
 		}
 
 		// Accessor of the Rotation field
-		public sealed class RotationField : IField<TextNoteData, Rotation>, IFieldSerializer {
+		public sealed class RotationField : IField<TextNoteData, Rotation>, IFieldSerializer<TextNoteData> {
 			public static readonly RotationField Field = new RotationField();
 			private RotationField() {}
 			public string Name { get { return "Rotation"; } }
@@ -297,17 +288,17 @@ namespace LogicCircuit {
 				return l.CompareTo(r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref TextNoteData data) {
+			// Implementation of interface IFieldSerializer<TextNoteData>
+			bool IFieldSerializer<TextNoteData>.NeedToSave(ref TextNoteData data) {
 				return this.Compare(data.Rotation, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref TextNoteData data) {
+			string IFieldSerializer<TextNoteData>.GetTextValue(ref TextNoteData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Rotation);
 			}
-			void IFieldSerializer.SetDefault(ref TextNoteData data) {
+			void IFieldSerializer<TextNoteData>.SetDefault(ref TextNoteData data) {
 				data.Rotation = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref TextNoteData data, string text) {
+			void IFieldSerializer<TextNoteData>.SetTextValue(ref TextNoteData data, string text) {
 				data.Rotation = (Rotation)Enum.Parse(typeof(Rotation), text, true);
 			}
 		}
@@ -372,7 +363,7 @@ namespace LogicCircuit {
 				table.GetData(rowId, out data);
 				writer.WriteStartElement(table.Name, ns);
 				foreach(IField<TextNoteData> field in table.Fields) {
-					IFieldSerializer serializer = field as IFieldSerializer;
+					IFieldSerializer<TextNoteData> serializer = field as IFieldSerializer<TextNoteData>;
 					if(serializer != null && serializer.NeedToSave(ref data)) {
 						writer.WriteStartElement(field.Name, ns);
 						writer.WriteString(serializer.GetTextValue(ref data));
@@ -381,67 +372,6 @@ namespace LogicCircuit {
 				}
 				writer.WriteEndElement();
 			}
-		}
-
-		public static RowId Load(TableSnapshot<TextNoteData> table, XmlReader reader) {
-			Debug.Assert(reader.NodeType == XmlNodeType.Element);
-			Debug.Assert(reader.LocalName == table.Name);
-			Debug.Assert(!reader.IsEmptyElement, "It is expected that caller skips empty element and don't bother us.");
-
-			TextNoteData data = new TextNoteData();
-			// Initialize 'data' with default values:
-			for (int i = 0; i < TextNoteData.fields.Length; i ++) {
-				IFieldSerializer serializer = TextNoteData.fields[i] as IFieldSerializer;
-				if (serializer != null) {
-					serializer.SetDefault(ref data);
-				}
-			}
-
-			reader.Read();
-			int fieldDepth = reader.Depth;
-			string ns = reader.NamespaceURI;
-
-			// Read through all fields of this record
-			int hintIndex = 0;
-			while (reader.Depth == fieldDepth) {
-				if (reader.IsElement(ns)) {
-					// The reader is positioned on a field element
-					string fieldName  = reader.LocalName;
-					string fieldValue = reader.ReadElementText();  // reads the text and moves the reader beyond this element
-					IFieldSerializer serializer = TextNoteData.FindField(fieldName, ref hintIndex);
-					if (serializer != null) {
-						serializer.SetTextValue(ref data, fieldValue);
-					}
-				} else {
-					reader.Skip();  // skip everything else
-				}
-				Debug.Assert(reader.Depth == fieldDepth || reader.Depth == fieldDepth - 1,
-					"After reading the field the reader should be on fieldDepth or on fieldDepth - 1 if it reached EndElement tag"
-				);
-			}
-			// insert 'data' into the table
-			return table.Insert(ref data);
-		}
-
-		private static IFieldSerializer FindField(string name, ref int hint) {
-			// We serialize/de-serialize fields in the same order so result would always be at hint position or after it if hint is skipped during the serialization
-			Debug.Assert(0 <= hint && hint <= TextNoteData.fields.Length);
-			for (int i = hint; i < TextNoteData.fields.Length; i ++) {
-				if (TextNoteData.fields[i].Name == name) {
-					hint = i + 1;
-					return TextNoteData.fields[i] as IFieldSerializer;
-				}
-			}
-
-			// We don't find the field in expected place. Lets look the beginning of the list in case it is out of order
-			for (int i = 0; i < hint; i ++) {
-				if (TextNoteData.fields[i].Name == name) {
-					return TextNoteData.fields[i] as IFieldSerializer;
-				}
-			}
-
-			// Ups. Still don't find.
-			return null;
 		}
 	}
 

@@ -15,18 +15,9 @@ namespace LogicCircuit {
 	internal partial struct CollapsedCategoryData {
 		public string Name;
 		internal CollapsedCategory CollapsedCategory;
-
-		private interface IFieldSerializer {
-			bool NeedToSave(ref CollapsedCategoryData data);
-			string GetTextValue(ref CollapsedCategoryData data);
-			void SetDefault(ref CollapsedCategoryData data);
-			void SetTextValue(ref CollapsedCategoryData data, string text);
-		}
-
 		// Field accessors
-
 		// Accessor of the Name field
-		public sealed class NameField : IField<CollapsedCategoryData, string>, IFieldSerializer {
+		public sealed class NameField : IField<CollapsedCategoryData, string>, IFieldSerializer<CollapsedCategoryData> {
 			public static readonly NameField Field = new NameField();
 			private NameField() {}
 			public string Name { get { return "Name"; } }
@@ -45,17 +36,17 @@ namespace LogicCircuit {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref CollapsedCategoryData data) {
+			// Implementation of interface IFieldSerializer<CollapsedCategoryData>
+			bool IFieldSerializer<CollapsedCategoryData>.NeedToSave(ref CollapsedCategoryData data) {
 				return this.Compare(data.Name, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref CollapsedCategoryData data) {
+			string IFieldSerializer<CollapsedCategoryData>.GetTextValue(ref CollapsedCategoryData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Name);
 			}
-			void IFieldSerializer.SetDefault(ref CollapsedCategoryData data) {
+			void IFieldSerializer<CollapsedCategoryData>.SetDefault(ref CollapsedCategoryData data) {
 				data.Name = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref CollapsedCategoryData data, string text) {
+			void IFieldSerializer<CollapsedCategoryData>.SetTextValue(ref CollapsedCategoryData data, string text) {
 				data.Name = text;
 			}
 		}
@@ -110,7 +101,7 @@ namespace LogicCircuit {
 				table.GetData(rowId, out data);
 				writer.WriteStartElement(table.Name, ns);
 				foreach(IField<CollapsedCategoryData> field in table.Fields) {
-					IFieldSerializer serializer = field as IFieldSerializer;
+					IFieldSerializer<CollapsedCategoryData> serializer = field as IFieldSerializer<CollapsedCategoryData>;
 					if(serializer != null && serializer.NeedToSave(ref data)) {
 						writer.WriteStartElement(field.Name, ns);
 						writer.WriteString(serializer.GetTextValue(ref data));
@@ -119,67 +110,6 @@ namespace LogicCircuit {
 				}
 				writer.WriteEndElement();
 			}
-		}
-
-		public static RowId Load(TableSnapshot<CollapsedCategoryData> table, XmlReader reader) {
-			Debug.Assert(reader.NodeType == XmlNodeType.Element);
-			Debug.Assert(reader.LocalName == table.Name);
-			Debug.Assert(!reader.IsEmptyElement, "It is expected that caller skips empty element and don't bother us.");
-
-			CollapsedCategoryData data = new CollapsedCategoryData();
-			// Initialize 'data' with default values:
-			for (int i = 0; i < CollapsedCategoryData.fields.Length; i ++) {
-				IFieldSerializer serializer = CollapsedCategoryData.fields[i] as IFieldSerializer;
-				if (serializer != null) {
-					serializer.SetDefault(ref data);
-				}
-			}
-
-			reader.Read();
-			int fieldDepth = reader.Depth;
-			string ns = reader.NamespaceURI;
-
-			// Read through all fields of this record
-			int hintIndex = 0;
-			while (reader.Depth == fieldDepth) {
-				if (reader.IsElement(ns)) {
-					// The reader is positioned on a field element
-					string fieldName  = reader.LocalName;
-					string fieldValue = reader.ReadElementText();  // reads the text and moves the reader beyond this element
-					IFieldSerializer serializer = CollapsedCategoryData.FindField(fieldName, ref hintIndex);
-					if (serializer != null) {
-						serializer.SetTextValue(ref data, fieldValue);
-					}
-				} else {
-					reader.Skip();  // skip everything else
-				}
-				Debug.Assert(reader.Depth == fieldDepth || reader.Depth == fieldDepth - 1,
-					"After reading the field the reader should be on fieldDepth or on fieldDepth - 1 if it reached EndElement tag"
-				);
-			}
-			// insert 'data' into the table
-			return table.Insert(ref data);
-		}
-
-		private static IFieldSerializer FindField(string name, ref int hint) {
-			// We serialize/de-serialize fields in the same order so result would always be at hint position or after it if hint is skipped during the serialization
-			Debug.Assert(0 <= hint && hint <= CollapsedCategoryData.fields.Length);
-			for (int i = hint; i < CollapsedCategoryData.fields.Length; i ++) {
-				if (CollapsedCategoryData.fields[i].Name == name) {
-					hint = i + 1;
-					return CollapsedCategoryData.fields[i] as IFieldSerializer;
-				}
-			}
-
-			// We don't find the field in expected place. Lets look the beginning of the list in case it is out of order
-			for (int i = 0; i < hint; i ++) {
-				if (CollapsedCategoryData.fields[i].Name == name) {
-					return CollapsedCategoryData.fields[i] as IFieldSerializer;
-				}
-			}
-
-			// Ups. Still don't find.
-			return null;
 		}
 	}
 
