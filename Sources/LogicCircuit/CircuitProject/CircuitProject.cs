@@ -53,7 +53,7 @@ namespace LogicCircuit {
 
 		public void Save(TextWriter textWriter) {
 			using(XmlWriter writer = XmlHelper.CreateWriter(textWriter)) {
-				SaveRecords(writer);
+				this.SaveRecords(writer);
 			}
 		}
 

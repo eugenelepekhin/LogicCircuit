@@ -12,7 +12,7 @@ namespace LogicCircuit {
 	public class RecordLoader<TRecord> : ARecordLoader where TRecord:struct {
 		private readonly TableSnapshot<TRecord> table;
 		private readonly Action<RowId> register;
-		private Dictionary<string, IFieldSerializer<TRecord>> serializers = new Dictionary<string, IFieldSerializer<TRecord>>(XmlHelper.AtomComparier);
+		private Dictionary<string, IFieldSerializer<TRecord>> serializers;
 
 		public RecordLoader(XmlNameTable nameTable, TableSnapshot<TRecord> table, IEnumerable<IField<TRecord>> fields, Action<RowId> register) {
 			Debug.Assert(nameTable != null);
@@ -21,11 +21,12 @@ namespace LogicCircuit {
 
 			this.table = table;
 			this.register = register;
+			this.serializers = new Dictionary<string, IFieldSerializer<TRecord>>(XmlHelper.AtomComparier);
 			foreach (IField<TRecord> field in fields) {
 				IFieldSerializer<TRecord> serializer = field as IFieldSerializer<TRecord>;
 				if (serializer != null) {
 					string fieldName = nameTable.Add(field.Name);
-					serializers.Add(fieldName, serializer);
+					this.serializers.Add(fieldName, serializer);
 				}
 			}
 		}
@@ -35,7 +36,7 @@ namespace LogicCircuit {
 
 			TRecord data = new TRecord();
 			// Initialize 'data' with default values:
-			foreach(IFieldSerializer<TRecord> serializer in serializers.Values) {
+			foreach(IFieldSerializer<TRecord> serializer in this.serializers.Values) {
 				Debug.Assert(serializer != null);
 				serializer.SetDefault(ref data);
 			}
@@ -53,7 +54,7 @@ namespace LogicCircuit {
 						string fieldName  = reader.LocalName;
 						string fieldValue = reader.ReadElementText();  // reads the text and moves the reader beyond this element
 						IFieldSerializer<TRecord> serializer;
-						if (serializers.TryGetValue(fieldName, out serializer)) {
+						if (this.serializers.TryGetValue(fieldName, out serializer)) {
 							Debug.Assert(serializer != null);
 							serializer.SetTextValue(ref data, fieldValue);
 						}
@@ -66,9 +67,9 @@ namespace LogicCircuit {
 			}
 
 			// insert 'data' into the table
-			RowId rowId = table.Insert(ref data);
+			RowId rowId = this.table.Insert(ref data);
 
-			register(rowId);
+			this.register(rowId);
 		}
 	}
 
