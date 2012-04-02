@@ -82,6 +82,9 @@
     <Compile Include="Dialog\DialogExportImage.xaml.cs">
       <DependentUpon>DialogExportImage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialog\DialogHyperlink.xaml.cs">
+      <DependentUpon>DialogHyperlink.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialog\DialogImport.xaml.cs">
       <DependentUpon>DialogImport.xaml</DependentUpon>
     </Compile>
@@ -245,6 +248,7 @@
     <Compile Include="GridLengthAnimation.cs" />
     <Compile Include="GridPoint.cs" />
     <Compile Include="HyperlinkNavigationCommand.cs" />
+    <Compile Include="LambdaUICommand.cs" />
     <Compile Include="Mainframe.Commands.cs" />
     <Compile Include="Mainframe.File.cs" />
     <Compile Include="Runner\CircuitMap.cs" />
@@ -298,6 +302,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Dialog\DialogExportImage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialog\DialogHyperlink.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -514,6 +522,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Properties\Hyperlink.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Properties\Image.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
