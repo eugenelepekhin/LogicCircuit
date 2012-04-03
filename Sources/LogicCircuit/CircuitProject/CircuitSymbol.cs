@@ -54,7 +54,7 @@ namespace LogicCircuit {
 		}
 	}
 
-	public sealed partial class CircuitSymbolSet : IRecordLoader {
+	public sealed partial class CircuitSymbolSet {
 		private HashSet<CircuitSymbol> invalid = new HashSet<CircuitSymbol>();
 
 		public IEnumerable<CircuitSymbol> Invalid { get { return this.invalid; } }
@@ -65,10 +65,6 @@ namespace LogicCircuit {
 
 		public void ValidateAll() {
 			this.invalid.Clear();
-		}
-
-		void IRecordLoader.Load(XmlReader reader) {
-			this.Create(CircuitSymbolData.Load(this.Table, reader));
 		}
 
 		public CircuitSymbol Create(Circuit circuit, LogicalCircuit logicalCircuit, int x, int y) {
@@ -86,6 +82,10 @@ namespace LogicCircuit {
 			data.CircuitId = circuit.CircuitId;
 			data.CircuitSymbol = null;
 			return this.Create(this.Table.Insert(ref data));
+		}
+
+		public ARecordLoader CreateRecordLoader(XmlNameTable nameTable) {
+			return new RecordLoader<CircuitSymbolData>(nameTable, this.Table, this.Table.Fields, rowId => this.Create(rowId));
 		}
 	}
 }

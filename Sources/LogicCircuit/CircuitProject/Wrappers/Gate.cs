@@ -8,16 +8,13 @@ namespace LogicCircuit {
 	using System.Globalization;
 	using System.Linq;
 	using System.Text;
-	using System.Xml;
 	using LogicCircuit.DataPersistent;
 
 	// Defines the shape of the table Gate
 	internal partial struct GateData {
 		public Guid GateId;
 		internal Gate Gate;
-
 		// Field accessors
-
 		// Accessor of the GateId field
 		public sealed class GateIdField : IField<GateData, Guid> {
 			public static readonly GateIdField Field = new GateIdField();

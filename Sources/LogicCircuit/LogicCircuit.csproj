@@ -54,7 +54,7 @@
     <Compile Include="ButtonControl.cs" />
     <Compile Include="CircuitProject\CircuitSymbolComparer.cs" />
     <Compile Include="CircuitProject\CollapsedCategory.cs" />
-    <Compile Include="CircuitProject\IRecordLoader.cs" />
+    <Compile Include="CircuitProject\CircuitProject.LoadRecords.cs" />
     <Compile Include="CircuitProject\LedMatrix.cs" />
     <Compile Include="CircuitProject\LedMatrixCellShape.cs" />
     <Compile Include="CircuitProject\LedMatrixType.cs" />

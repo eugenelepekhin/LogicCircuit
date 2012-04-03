@@ -8,7 +8,6 @@ namespace LogicCircuit {
 	using System.Globalization;
 	using System.Linq;
 	using System.Text;
-	using System.Xml;
 	using LogicCircuit.DataPersistent;
 
 	// Defines the shape of the table Constant
@@ -22,18 +21,9 @@ namespace LogicCircuit {
 		public int Value;
 		public string Note;
 		internal Constant Constant;
-
-		private interface IFieldSerializer {
-			bool NeedToSave(ref ConstantData data);
-			string GetTextValue(ref ConstantData data);
-			void SetDefault(ref ConstantData data);
-			void SetTextValue(ref ConstantData data, string text);
-		}
-
 		// Field accessors
-
 		// Accessor of the ConstantId field
-		public sealed class ConstantIdField : IField<ConstantData, Guid>, IFieldSerializer {
+		public sealed class ConstantIdField : IField<ConstantData, Guid>, IFieldSerializer<ConstantData> {
 			public static readonly ConstantIdField Field = new ConstantIdField();
 			private ConstantIdField() {}
 			public string Name { get { return "ConstantId"; } }
@@ -52,23 +42,23 @@ namespace LogicCircuit {
 				return l.CompareTo(r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref ConstantData data) {
+			// Implementation of interface IFieldSerializer<ConstantData>
+			bool IFieldSerializer<ConstantData>.NeedToSave(ref ConstantData data) {
 				return this.Compare(data.ConstantId, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref ConstantData data) {
+			string IFieldSerializer<ConstantData>.GetTextValue(ref ConstantData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.ConstantId);
 			}
-			void IFieldSerializer.SetDefault(ref ConstantData data) {
+			void IFieldSerializer<ConstantData>.SetDefault(ref ConstantData data) {
 				data.ConstantId = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref ConstantData data, string text) {
+			void IFieldSerializer<ConstantData>.SetTextValue(ref ConstantData data, string text) {
 				data.ConstantId = new Guid(text);
 			}
 		}
 
 		// Accessor of the BitWidth field
-		public sealed class BitWidthField : IField<ConstantData, int>, IFieldSerializer {
+		public sealed class BitWidthField : IField<ConstantData, int>, IFieldSerializer<ConstantData> {
 			public static readonly BitWidthField Field = new BitWidthField();
 			private BitWidthField() {}
 			public string Name { get { return "BitWidth"; } }
@@ -87,23 +77,23 @@ namespace LogicCircuit {
 				return Math.Sign((long)l - (long)r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref ConstantData data) {
+			// Implementation of interface IFieldSerializer<ConstantData>
+			bool IFieldSerializer<ConstantData>.NeedToSave(ref ConstantData data) {
 				return this.Compare(data.BitWidth, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref ConstantData data) {
+			string IFieldSerializer<ConstantData>.GetTextValue(ref ConstantData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.BitWidth);
 			}
-			void IFieldSerializer.SetDefault(ref ConstantData data) {
+			void IFieldSerializer<ConstantData>.SetDefault(ref ConstantData data) {
 				data.BitWidth = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref ConstantData data, string text) {
+			void IFieldSerializer<ConstantData>.SetTextValue(ref ConstantData data, string text) {
 				data.BitWidth = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
 		// Accessor of the Value field
-		public sealed class ValueField : IField<ConstantData, int>, IFieldSerializer {
+		public sealed class ValueField : IField<ConstantData, int>, IFieldSerializer<ConstantData> {
 			public static readonly ValueField Field = new ValueField();
 			private ValueField() {}
 			public string Name { get { return "Value"; } }
@@ -122,23 +112,23 @@ namespace LogicCircuit {
 				return Math.Sign((long)l - (long)r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref ConstantData data) {
+			// Implementation of interface IFieldSerializer<ConstantData>
+			bool IFieldSerializer<ConstantData>.NeedToSave(ref ConstantData data) {
 				return this.Compare(data.Value, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref ConstantData data) {
+			string IFieldSerializer<ConstantData>.GetTextValue(ref ConstantData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Value);
 			}
-			void IFieldSerializer.SetDefault(ref ConstantData data) {
+			void IFieldSerializer<ConstantData>.SetDefault(ref ConstantData data) {
 				data.Value = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref ConstantData data, string text) {
+			void IFieldSerializer<ConstantData>.SetTextValue(ref ConstantData data, string text) {
 				data.Value = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
 		// Accessor of the Note field
-		public sealed class NoteField : IField<ConstantData, string>, IFieldSerializer {
+		public sealed class NoteField : IField<ConstantData, string>, IFieldSerializer<ConstantData> {
 			public static readonly NoteField Field = new NoteField();
 			private NoteField() {}
 			public string Name { get { return "Note"; } }
@@ -157,17 +147,17 @@ namespace LogicCircuit {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref ConstantData data) {
+			// Implementation of interface IFieldSerializer<ConstantData>
+			bool IFieldSerializer<ConstantData>.NeedToSave(ref ConstantData data) {
 				return this.Compare(data.Note, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref ConstantData data) {
+			string IFieldSerializer<ConstantData>.GetTextValue(ref ConstantData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Note);
 			}
-			void IFieldSerializer.SetDefault(ref ConstantData data) {
+			void IFieldSerializer<ConstantData>.SetDefault(ref ConstantData data) {
 				data.Note = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref ConstantData data, string text) {
+			void IFieldSerializer<ConstantData>.SetTextValue(ref ConstantData data, string text) {
 				data.Note = text;
 			}
 		}
@@ -218,85 +208,6 @@ namespace LogicCircuit {
 		public static void CreateForeignKeys(StoreSnapshot store) {
 			TableSnapshot<ConstantData> table = (TableSnapshot<ConstantData>)store.Table("Constant");
 			table.CreateForeignKey("PK_Constant", store.Table("Circuit"), ConstantData.ConstantIdField.Field, ForeignKeyAction.Cascade, false);
-		}
-
-		// Serializer of the table
-		public static void Save(TableSnapshot<ConstantData> table, XmlWriter writer, string ns) {
-			foreach(RowId rowId in table.Rows) {
-				ConstantData data;
-				table.GetData(rowId, out data);
-				writer.WriteStartElement(table.Name, ns);
-				foreach(IField<ConstantData> field in table.Fields) {
-					IFieldSerializer serializer = field as IFieldSerializer;
-					if(serializer != null && serializer.NeedToSave(ref data)) {
-						writer.WriteStartElement(field.Name, ns);
-						writer.WriteString(serializer.GetTextValue(ref data));
-						writer.WriteEndElement();
-					}
-				}
-				writer.WriteEndElement();
-			}
-		}
-
-		public static RowId Load(TableSnapshot<ConstantData> table, XmlReader reader) {
-			Debug.Assert(reader.NodeType == XmlNodeType.Element);
-			Debug.Assert(reader.LocalName == table.Name);
-			Debug.Assert(!reader.IsEmptyElement, "It is expected that caller skips empty element and don't bother us.");
-
-			ConstantData data = new ConstantData();
-			// Initialize 'data' with default values:
-			for (int i = 0; i < ConstantData.fields.Length; i ++) {
-				IFieldSerializer serializer = ConstantData.fields[i] as IFieldSerializer;
-				if (serializer != null) {
-					serializer.SetDefault(ref data);
-				}
-			}
-
-			reader.Read();
-			int fieldDepth = reader.Depth;
-			string ns = reader.NamespaceURI;
-
-			// Read through all fields of this record
-			int hintIndex = 0;
-			while (reader.Depth == fieldDepth) {
-				if (reader.IsElement(ns)) {
-					// The reader is positioned on a field element
-					string fieldName  = reader.LocalName;
-					string fieldValue = reader.ReadElementText();  // reads the text and moves the reader beyond this element
-					IFieldSerializer serializer = ConstantData.FindField(fieldName, ref hintIndex);
-					if (serializer != null) {
-						serializer.SetTextValue(ref data, fieldValue);
-					}
-				} else {
-					reader.Skip();  // skip everything else
-				}
-				Debug.Assert(reader.Depth == fieldDepth || reader.Depth == fieldDepth - 1,
-					"After reading the field the reader should be on fieldDepth or on fieldDepth - 1 if it reached EndElement tag"
-				);
-			}
-			// insert 'data' into the table
-			return table.Insert(ref data);
-		}
-
-		private static IFieldSerializer FindField(string name, ref int hint) {
-			// We serialize/de-serialize fields in the same order so result would always be at hint position or after it if hint is skipped during the serialization
-			Debug.Assert(0 <= hint && hint <= ConstantData.fields.Length);
-			for (int i = hint; i < ConstantData.fields.Length; i ++) {
-				if (ConstantData.fields[i].Name == name) {
-					hint = i + 1;
-					return ConstantData.fields[i] as IFieldSerializer;
-				}
-			}
-
-			// We don't find the field in expected place. Lets look the beginning of the list in case it is out of order
-			for (int i = 0; i < hint; i ++) {
-				if (ConstantData.fields[i].Name == name) {
-					return ConstantData.fields[i] as IFieldSerializer;
-				}
-			}
-
-			// Ups. Still don't find.
-			return null;
 		}
 	}
 

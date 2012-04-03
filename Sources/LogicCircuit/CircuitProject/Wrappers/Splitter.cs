@@ -8,7 +8,6 @@ namespace LogicCircuit {
 	using System.Globalization;
 	using System.Linq;
 	using System.Text;
-	using System.Xml;
 	using LogicCircuit.DataPersistent;
 
 	// Defines the shape of the table Splitter
@@ -26,18 +25,9 @@ namespace LogicCircuit {
 		}
 		public bool Clockwise;
 		internal Splitter Splitter;
-
-		private interface IFieldSerializer {
-			bool NeedToSave(ref SplitterData data);
-			string GetTextValue(ref SplitterData data);
-			void SetDefault(ref SplitterData data);
-			void SetTextValue(ref SplitterData data, string text);
-		}
-
 		// Field accessors
-
 		// Accessor of the SplitterId field
-		public sealed class SplitterIdField : IField<SplitterData, Guid>, IFieldSerializer {
+		public sealed class SplitterIdField : IField<SplitterData, Guid>, IFieldSerializer<SplitterData> {
 			public static readonly SplitterIdField Field = new SplitterIdField();
 			private SplitterIdField() {}
 			public string Name { get { return "SplitterId"; } }
@@ -56,23 +46,23 @@ namespace LogicCircuit {
 				return l.CompareTo(r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref SplitterData data) {
+			// Implementation of interface IFieldSerializer<SplitterData>
+			bool IFieldSerializer<SplitterData>.NeedToSave(ref SplitterData data) {
 				return this.Compare(data.SplitterId, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref SplitterData data) {
+			string IFieldSerializer<SplitterData>.GetTextValue(ref SplitterData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.SplitterId);
 			}
-			void IFieldSerializer.SetDefault(ref SplitterData data) {
+			void IFieldSerializer<SplitterData>.SetDefault(ref SplitterData data) {
 				data.SplitterId = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref SplitterData data, string text) {
+			void IFieldSerializer<SplitterData>.SetTextValue(ref SplitterData data, string text) {
 				data.SplitterId = new Guid(text);
 			}
 		}
 
 		// Accessor of the BitWidth field
-		public sealed class BitWidthField : IField<SplitterData, int>, IFieldSerializer {
+		public sealed class BitWidthField : IField<SplitterData, int>, IFieldSerializer<SplitterData> {
 			public static readonly BitWidthField Field = new BitWidthField();
 			private BitWidthField() {}
 			public string Name { get { return "BitWidth"; } }
@@ -91,23 +81,23 @@ namespace LogicCircuit {
 				return Math.Sign((long)l - (long)r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref SplitterData data) {
+			// Implementation of interface IFieldSerializer<SplitterData>
+			bool IFieldSerializer<SplitterData>.NeedToSave(ref SplitterData data) {
 				return this.Compare(data.BitWidth, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref SplitterData data) {
+			string IFieldSerializer<SplitterData>.GetTextValue(ref SplitterData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.BitWidth);
 			}
-			void IFieldSerializer.SetDefault(ref SplitterData data) {
+			void IFieldSerializer<SplitterData>.SetDefault(ref SplitterData data) {
 				data.BitWidth = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref SplitterData data, string text) {
+			void IFieldSerializer<SplitterData>.SetTextValue(ref SplitterData data, string text) {
 				data.BitWidth = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
 		// Accessor of the PinCount field
-		public sealed class PinCountField : IField<SplitterData, int>, IFieldSerializer {
+		public sealed class PinCountField : IField<SplitterData, int>, IFieldSerializer<SplitterData> {
 			public static readonly PinCountField Field = new PinCountField();
 			private PinCountField() {}
 			public string Name { get { return "PinCount"; } }
@@ -126,23 +116,23 @@ namespace LogicCircuit {
 				return Math.Sign((long)l - (long)r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref SplitterData data) {
+			// Implementation of interface IFieldSerializer<SplitterData>
+			bool IFieldSerializer<SplitterData>.NeedToSave(ref SplitterData data) {
 				return this.Compare(data.PinCount, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref SplitterData data) {
+			string IFieldSerializer<SplitterData>.GetTextValue(ref SplitterData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.PinCount);
 			}
-			void IFieldSerializer.SetDefault(ref SplitterData data) {
+			void IFieldSerializer<SplitterData>.SetDefault(ref SplitterData data) {
 				data.PinCount = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref SplitterData data, string text) {
+			void IFieldSerializer<SplitterData>.SetTextValue(ref SplitterData data, string text) {
 				data.PinCount = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
 		// Accessor of the Clockwise field
-		public sealed class ClockwiseField : IField<SplitterData, bool>, IFieldSerializer {
+		public sealed class ClockwiseField : IField<SplitterData, bool>, IFieldSerializer<SplitterData> {
 			public static readonly ClockwiseField Field = new ClockwiseField();
 			private ClockwiseField() {}
 			public string Name { get { return "Clockwise"; } }
@@ -161,17 +151,17 @@ namespace LogicCircuit {
 				return l.CompareTo(r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref SplitterData data) {
+			// Implementation of interface IFieldSerializer<SplitterData>
+			bool IFieldSerializer<SplitterData>.NeedToSave(ref SplitterData data) {
 				return this.Compare(data.Clockwise, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref SplitterData data) {
+			string IFieldSerializer<SplitterData>.GetTextValue(ref SplitterData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Clockwise);
 			}
-			void IFieldSerializer.SetDefault(ref SplitterData data) {
+			void IFieldSerializer<SplitterData>.SetDefault(ref SplitterData data) {
 				data.Clockwise = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref SplitterData data, string text) {
+			void IFieldSerializer<SplitterData>.SetTextValue(ref SplitterData data, string text) {
 				data.Clockwise = bool.Parse(text);
 			}
 		}
@@ -222,85 +212,6 @@ namespace LogicCircuit {
 		public static void CreateForeignKeys(StoreSnapshot store) {
 			TableSnapshot<SplitterData> table = (TableSnapshot<SplitterData>)store.Table("Splitter");
 			table.CreateForeignKey("PK_Splitter", store.Table("Circuit"), SplitterData.SplitterIdField.Field, ForeignKeyAction.Cascade, false);
-		}
-
-		// Serializer of the table
-		public static void Save(TableSnapshot<SplitterData> table, XmlWriter writer, string ns) {
-			foreach(RowId rowId in table.Rows) {
-				SplitterData data;
-				table.GetData(rowId, out data);
-				writer.WriteStartElement(table.Name, ns);
-				foreach(IField<SplitterData> field in table.Fields) {
-					IFieldSerializer serializer = field as IFieldSerializer;
-					if(serializer != null && serializer.NeedToSave(ref data)) {
-						writer.WriteStartElement(field.Name, ns);
-						writer.WriteString(serializer.GetTextValue(ref data));
-						writer.WriteEndElement();
-					}
-				}
-				writer.WriteEndElement();
-			}
-		}
-
-		public static RowId Load(TableSnapshot<SplitterData> table, XmlReader reader) {
-			Debug.Assert(reader.NodeType == XmlNodeType.Element);
-			Debug.Assert(reader.LocalName == table.Name);
-			Debug.Assert(!reader.IsEmptyElement, "It is expected that caller skips empty element and don't bother us.");
-
-			SplitterData data = new SplitterData();
-			// Initialize 'data' with default values:
-			for (int i = 0; i < SplitterData.fields.Length; i ++) {
-				IFieldSerializer serializer = SplitterData.fields[i] as IFieldSerializer;
-				if (serializer != null) {
-					serializer.SetDefault(ref data);
-				}
-			}
-
-			reader.Read();
-			int fieldDepth = reader.Depth;
-			string ns = reader.NamespaceURI;
-
-			// Read through all fields of this record
-			int hintIndex = 0;
-			while (reader.Depth == fieldDepth) {
-				if (reader.IsElement(ns)) {
-					// The reader is positioned on a field element
-					string fieldName  = reader.LocalName;
-					string fieldValue = reader.ReadElementText();  // reads the text and moves the reader beyond this element
-					IFieldSerializer serializer = SplitterData.FindField(fieldName, ref hintIndex);
-					if (serializer != null) {
-						serializer.SetTextValue(ref data, fieldValue);
-					}
-				} else {
-					reader.Skip();  // skip everything else
-				}
-				Debug.Assert(reader.Depth == fieldDepth || reader.Depth == fieldDepth - 1,
-					"After reading the field the reader should be on fieldDepth or on fieldDepth - 1 if it reached EndElement tag"
-				);
-			}
-			// insert 'data' into the table
-			return table.Insert(ref data);
-		}
-
-		private static IFieldSerializer FindField(string name, ref int hint) {
-			// We serialize/de-serialize fields in the same order so result would always be at hint position or after it if hint is skipped during the serialization
-			Debug.Assert(0 <= hint && hint <= SplitterData.fields.Length);
-			for (int i = hint; i < SplitterData.fields.Length; i ++) {
-				if (SplitterData.fields[i].Name == name) {
-					hint = i + 1;
-					return SplitterData.fields[i] as IFieldSerializer;
-				}
-			}
-
-			// We don't find the field in expected place. Lets look the beginning of the list in case it is out of order
-			for (int i = 0; i < hint; i ++) {
-				if (SplitterData.fields[i].Name == name) {
-					return SplitterData.fields[i] as IFieldSerializer;
-				}
-			}
-
-			// Ups. Still don't find.
-			return null;
 		}
 	}
 

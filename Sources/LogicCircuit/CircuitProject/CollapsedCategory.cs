@@ -8,11 +8,7 @@ namespace LogicCircuit {
 	public partial class CollapsedCategory {
 	}
 
-	public sealed partial class CollapsedCategorySet : IRecordLoader {
-		void IRecordLoader.Load(XmlReader reader) {
-			this.Create(CollapsedCategoryData.Load(this.Table, reader));
-		}
-
+	public sealed partial class CollapsedCategorySet {
 		public bool IsCollapsed(string name) {
 			return this.Find(name) != null;
 		}
@@ -32,6 +28,10 @@ namespace LogicCircuit {
 			foreach(CollapsedCategory collapsed in list) {
 				collapsed.Delete();
 			}
+		}
+
+		public ARecordLoader CreateRecordLoader(XmlNameTable nameTable) {
+			return new RecordLoader<CollapsedCategoryData>(nameTable, this.Table, this.Table.Fields, rowId => this.Create(rowId));
 		}
 	}
 }

@@ -8,7 +8,6 @@ namespace LogicCircuit {
 	using System.Globalization;
 	using System.Linq;
 	using System.Text;
-	using System.Xml;
 	using LogicCircuit.DataPersistent;
 
 	// Defines the shape of the table LedMatrix
@@ -33,18 +32,9 @@ namespace LogicCircuit {
 		}
 		public string Note;
 		internal LedMatrix LedMatrix;
-
-		private interface IFieldSerializer {
-			bool NeedToSave(ref LedMatrixData data);
-			string GetTextValue(ref LedMatrixData data);
-			void SetDefault(ref LedMatrixData data);
-			void SetTextValue(ref LedMatrixData data, string text);
-		}
-
 		// Field accessors
-
 		// Accessor of the LedMatrixId field
-		public sealed class LedMatrixIdField : IField<LedMatrixData, Guid>, IFieldSerializer {
+		public sealed class LedMatrixIdField : IField<LedMatrixData, Guid>, IFieldSerializer<LedMatrixData> {
 			public static readonly LedMatrixIdField Field = new LedMatrixIdField();
 			private LedMatrixIdField() {}
 			public string Name { get { return "LedMatrixId"; } }
@@ -63,23 +53,23 @@ namespace LogicCircuit {
 				return l.CompareTo(r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref LedMatrixData data) {
+			// Implementation of interface IFieldSerializer<LedMatrixData>
+			bool IFieldSerializer<LedMatrixData>.NeedToSave(ref LedMatrixData data) {
 				return this.Compare(data.LedMatrixId, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref LedMatrixData data) {
+			string IFieldSerializer<LedMatrixData>.GetTextValue(ref LedMatrixData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.LedMatrixId);
 			}
-			void IFieldSerializer.SetDefault(ref LedMatrixData data) {
+			void IFieldSerializer<LedMatrixData>.SetDefault(ref LedMatrixData data) {
 				data.LedMatrixId = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref LedMatrixData data, string text) {
+			void IFieldSerializer<LedMatrixData>.SetTextValue(ref LedMatrixData data, string text) {
 				data.LedMatrixId = new Guid(text);
 			}
 		}
 
 		// Accessor of the MatrixType field
-		public sealed class MatrixTypeField : IField<LedMatrixData, LedMatrixType>, IFieldSerializer {
+		public sealed class MatrixTypeField : IField<LedMatrixData, LedMatrixType>, IFieldSerializer<LedMatrixData> {
 			public static readonly MatrixTypeField Field = new MatrixTypeField();
 			private MatrixTypeField() {}
 			public string Name { get { return "MatrixType"; } }
@@ -98,23 +88,23 @@ namespace LogicCircuit {
 				return l.CompareTo(r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref LedMatrixData data) {
+			// Implementation of interface IFieldSerializer<LedMatrixData>
+			bool IFieldSerializer<LedMatrixData>.NeedToSave(ref LedMatrixData data) {
 				return this.Compare(data.MatrixType, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref LedMatrixData data) {
+			string IFieldSerializer<LedMatrixData>.GetTextValue(ref LedMatrixData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.MatrixType);
 			}
-			void IFieldSerializer.SetDefault(ref LedMatrixData data) {
+			void IFieldSerializer<LedMatrixData>.SetDefault(ref LedMatrixData data) {
 				data.MatrixType = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref LedMatrixData data, string text) {
+			void IFieldSerializer<LedMatrixData>.SetTextValue(ref LedMatrixData data, string text) {
 				data.MatrixType = (LedMatrixType)Enum.Parse(typeof(LedMatrixType), text, true);
 			}
 		}
 
 		// Accessor of the CellShape field
-		public sealed class CellShapeField : IField<LedMatrixData, LedMatrixCellShape>, IFieldSerializer {
+		public sealed class CellShapeField : IField<LedMatrixData, LedMatrixCellShape>, IFieldSerializer<LedMatrixData> {
 			public static readonly CellShapeField Field = new CellShapeField();
 			private CellShapeField() {}
 			public string Name { get { return "CellShape"; } }
@@ -133,23 +123,23 @@ namespace LogicCircuit {
 				return l.CompareTo(r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref LedMatrixData data) {
+			// Implementation of interface IFieldSerializer<LedMatrixData>
+			bool IFieldSerializer<LedMatrixData>.NeedToSave(ref LedMatrixData data) {
 				return this.Compare(data.CellShape, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref LedMatrixData data) {
+			string IFieldSerializer<LedMatrixData>.GetTextValue(ref LedMatrixData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.CellShape);
 			}
-			void IFieldSerializer.SetDefault(ref LedMatrixData data) {
+			void IFieldSerializer<LedMatrixData>.SetDefault(ref LedMatrixData data) {
 				data.CellShape = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref LedMatrixData data, string text) {
+			void IFieldSerializer<LedMatrixData>.SetTextValue(ref LedMatrixData data, string text) {
 				data.CellShape = (LedMatrixCellShape)Enum.Parse(typeof(LedMatrixCellShape), text, true);
 			}
 		}
 
 		// Accessor of the Rows field
-		public sealed class RowsField : IField<LedMatrixData, int>, IFieldSerializer {
+		public sealed class RowsField : IField<LedMatrixData, int>, IFieldSerializer<LedMatrixData> {
 			public static readonly RowsField Field = new RowsField();
 			private RowsField() {}
 			public string Name { get { return "Rows"; } }
@@ -168,23 +158,23 @@ namespace LogicCircuit {
 				return Math.Sign((long)l - (long)r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref LedMatrixData data) {
+			// Implementation of interface IFieldSerializer<LedMatrixData>
+			bool IFieldSerializer<LedMatrixData>.NeedToSave(ref LedMatrixData data) {
 				return this.Compare(data.Rows, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref LedMatrixData data) {
+			string IFieldSerializer<LedMatrixData>.GetTextValue(ref LedMatrixData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Rows);
 			}
-			void IFieldSerializer.SetDefault(ref LedMatrixData data) {
+			void IFieldSerializer<LedMatrixData>.SetDefault(ref LedMatrixData data) {
 				data.Rows = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref LedMatrixData data, string text) {
+			void IFieldSerializer<LedMatrixData>.SetTextValue(ref LedMatrixData data, string text) {
 				data.Rows = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
 		// Accessor of the Columns field
-		public sealed class ColumnsField : IField<LedMatrixData, int>, IFieldSerializer {
+		public sealed class ColumnsField : IField<LedMatrixData, int>, IFieldSerializer<LedMatrixData> {
 			public static readonly ColumnsField Field = new ColumnsField();
 			private ColumnsField() {}
 			public string Name { get { return "Columns"; } }
@@ -203,23 +193,23 @@ namespace LogicCircuit {
 				return Math.Sign((long)l - (long)r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref LedMatrixData data) {
+			// Implementation of interface IFieldSerializer<LedMatrixData>
+			bool IFieldSerializer<LedMatrixData>.NeedToSave(ref LedMatrixData data) {
 				return this.Compare(data.Columns, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref LedMatrixData data) {
+			string IFieldSerializer<LedMatrixData>.GetTextValue(ref LedMatrixData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Columns);
 			}
-			void IFieldSerializer.SetDefault(ref LedMatrixData data) {
+			void IFieldSerializer<LedMatrixData>.SetDefault(ref LedMatrixData data) {
 				data.Columns = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref LedMatrixData data, string text) {
+			void IFieldSerializer<LedMatrixData>.SetTextValue(ref LedMatrixData data, string text) {
 				data.Columns = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
 		// Accessor of the Colors field
-		public sealed class ColorsField : IField<LedMatrixData, int>, IFieldSerializer {
+		public sealed class ColorsField : IField<LedMatrixData, int>, IFieldSerializer<LedMatrixData> {
 			public static readonly ColorsField Field = new ColorsField();
 			private ColorsField() {}
 			public string Name { get { return "Colors"; } }
@@ -238,23 +228,23 @@ namespace LogicCircuit {
 				return Math.Sign((long)l - (long)r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref LedMatrixData data) {
+			// Implementation of interface IFieldSerializer<LedMatrixData>
+			bool IFieldSerializer<LedMatrixData>.NeedToSave(ref LedMatrixData data) {
 				return this.Compare(data.Colors, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref LedMatrixData data) {
+			string IFieldSerializer<LedMatrixData>.GetTextValue(ref LedMatrixData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Colors);
 			}
-			void IFieldSerializer.SetDefault(ref LedMatrixData data) {
+			void IFieldSerializer<LedMatrixData>.SetDefault(ref LedMatrixData data) {
 				data.Colors = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref LedMatrixData data, string text) {
+			void IFieldSerializer<LedMatrixData>.SetTextValue(ref LedMatrixData data, string text) {
 				data.Colors = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
 		// Accessor of the Note field
-		public sealed class NoteField : IField<LedMatrixData, string>, IFieldSerializer {
+		public sealed class NoteField : IField<LedMatrixData, string>, IFieldSerializer<LedMatrixData> {
 			public static readonly NoteField Field = new NoteField();
 			private NoteField() {}
 			public string Name { get { return "Note"; } }
@@ -273,17 +263,17 @@ namespace LogicCircuit {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref LedMatrixData data) {
+			// Implementation of interface IFieldSerializer<LedMatrixData>
+			bool IFieldSerializer<LedMatrixData>.NeedToSave(ref LedMatrixData data) {
 				return this.Compare(data.Note, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref LedMatrixData data) {
+			string IFieldSerializer<LedMatrixData>.GetTextValue(ref LedMatrixData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Note);
 			}
-			void IFieldSerializer.SetDefault(ref LedMatrixData data) {
+			void IFieldSerializer<LedMatrixData>.SetDefault(ref LedMatrixData data) {
 				data.Note = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref LedMatrixData data, string text) {
+			void IFieldSerializer<LedMatrixData>.SetTextValue(ref LedMatrixData data, string text) {
 				data.Note = text;
 			}
 		}
@@ -337,85 +327,6 @@ namespace LogicCircuit {
 		public static void CreateForeignKeys(StoreSnapshot store) {
 			TableSnapshot<LedMatrixData> table = (TableSnapshot<LedMatrixData>)store.Table("LedMatrix");
 			table.CreateForeignKey("PK_LedMatrix", store.Table("Circuit"), LedMatrixData.LedMatrixIdField.Field, ForeignKeyAction.Cascade, false);
-		}
-
-		// Serializer of the table
-		public static void Save(TableSnapshot<LedMatrixData> table, XmlWriter writer, string ns) {
-			foreach(RowId rowId in table.Rows) {
-				LedMatrixData data;
-				table.GetData(rowId, out data);
-				writer.WriteStartElement(table.Name, ns);
-				foreach(IField<LedMatrixData> field in table.Fields) {
-					IFieldSerializer serializer = field as IFieldSerializer;
-					if(serializer != null && serializer.NeedToSave(ref data)) {
-						writer.WriteStartElement(field.Name, ns);
-						writer.WriteString(serializer.GetTextValue(ref data));
-						writer.WriteEndElement();
-					}
-				}
-				writer.WriteEndElement();
-			}
-		}
-
-		public static RowId Load(TableSnapshot<LedMatrixData> table, XmlReader reader) {
-			Debug.Assert(reader.NodeType == XmlNodeType.Element);
-			Debug.Assert(reader.LocalName == table.Name);
-			Debug.Assert(!reader.IsEmptyElement, "It is expected that caller skips empty element and don't bother us.");
-
-			LedMatrixData data = new LedMatrixData();
-			// Initialize 'data' with default values:
-			for (int i = 0; i < LedMatrixData.fields.Length; i ++) {
-				IFieldSerializer serializer = LedMatrixData.fields[i] as IFieldSerializer;
-				if (serializer != null) {
-					serializer.SetDefault(ref data);
-				}
-			}
-
-			reader.Read();
-			int fieldDepth = reader.Depth;
-			string ns = reader.NamespaceURI;
-
-			// Read through all fields of this record
-			int hintIndex = 0;
-			while (reader.Depth == fieldDepth) {
-				if (reader.IsElement(ns)) {
-					// The reader is positioned on a field element
-					string fieldName  = reader.LocalName;
-					string fieldValue = reader.ReadElementText();  // reads the text and moves the reader beyond this element
-					IFieldSerializer serializer = LedMatrixData.FindField(fieldName, ref hintIndex);
-					if (serializer != null) {
-						serializer.SetTextValue(ref data, fieldValue);
-					}
-				} else {
-					reader.Skip();  // skip everything else
-				}
-				Debug.Assert(reader.Depth == fieldDepth || reader.Depth == fieldDepth - 1,
-					"After reading the field the reader should be on fieldDepth or on fieldDepth - 1 if it reached EndElement tag"
-				);
-			}
-			// insert 'data' into the table
-			return table.Insert(ref data);
-		}
-
-		private static IFieldSerializer FindField(string name, ref int hint) {
-			// We serialize/de-serialize fields in the same order so result would always be at hint position or after it if hint is skipped during the serialization
-			Debug.Assert(0 <= hint && hint <= LedMatrixData.fields.Length);
-			for (int i = hint; i < LedMatrixData.fields.Length; i ++) {
-				if (LedMatrixData.fields[i].Name == name) {
-					hint = i + 1;
-					return LedMatrixData.fields[i] as IFieldSerializer;
-				}
-			}
-
-			// We don't find the field in expected place. Lets look the beginning of the list in case it is out of order
-			for (int i = 0; i < hint; i ++) {
-				if (LedMatrixData.fields[i].Name == name) {
-					return LedMatrixData.fields[i] as IFieldSerializer;
-				}
-			}
-
-			// Ups. Still don't find.
-			return null;
 		}
 	}
 

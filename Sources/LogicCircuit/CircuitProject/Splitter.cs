@@ -41,11 +41,7 @@ namespace LogicCircuit {
 		}
 	}
 
-	public sealed partial class SplitterSet : IRecordLoader {
-		void IRecordLoader.Load(XmlReader reader) {
-			this.Register(SplitterData.Load(this.Table, reader));
-		}
-
+	public sealed partial class SplitterSet {
 		private Splitter Register(RowId rowId) {
 			CircuitData data = new CircuitData() {
 				CircuitId = this.Table.GetField(rowId, SplitterData.SplitterIdField.Field)
@@ -111,6 +107,10 @@ namespace LogicCircuit {
 			}
 			data.Splitter = null;
 			return this.Register(this.Table.Insert(ref data));
+		}
+
+		public ARecordLoader CreateRecordLoader(XmlNameTable nameTable) {
+			return new RecordLoader<SplitterData>(nameTable, this.Table, this.Table.Fields, rowId => this.Register(rowId));
 		}
 	}
 }
