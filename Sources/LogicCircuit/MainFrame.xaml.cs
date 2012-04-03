@@ -114,6 +114,13 @@ namespace LogicCircuit {
 			thread.Name = "ProjectLoader";
 			thread.Priority = ThreadPriority.AboveNormal;
 			thread.Start();
+
+			// Check for new available version
+			Thread versionThread = new Thread(new ThreadStart(() => DialogAbout.CheckVersion(this.Dispatcher)));
+			versionThread.IsBackground = true;
+			versionThread.Name = "CheckVersion";
+			versionThread.Priority = ThreadPriority.BelowNormal;
+			versionThread.Start();
 		}
 
 		protected override void OnClosing(System.ComponentModel.CancelEventArgs e) {

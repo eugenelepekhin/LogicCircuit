@@ -2024,7 +2024,7 @@ namespace LogicCircuit {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Check for updates.
+		/// Looks up a localized string similar to Check now.
 		/// </summary>
  		public static string TitleCheckVersion {
 			get { return ResourceManager.GetString("TitleCheckVersion", Culture); }
@@ -2084,6 +2084,13 @@ namespace LogicCircuit {
 		/// </summary>
  		public static string ImageFilter(string supportedExtensions) {
 			return string.Format(Culture, ResourceManager.GetString("ImageFilter", Culture), supportedExtensions);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Check periodically for new versions.
+		/// </summary>
+ 		public static string TitleCheckVersionPeriodically {
+			get { return ResourceManager.GetString("TitleCheckVersionPeriodically", Culture); }
 		}
 	}
 }

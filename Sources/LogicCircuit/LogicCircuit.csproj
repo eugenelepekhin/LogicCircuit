@@ -265,6 +265,7 @@
     </Compile>
     <Compile Include="Settings\Settings.cs" />
     <Compile Include="Settings\SettingsBoolCache.cs" />
+    <Compile Include="Settings\SettingsDateTimeCache.cs" />
     <Compile Include="Settings\SettingsDoubleCache.cs" />
     <Compile Include="Settings\SettingsEnumCache.cs" />
     <Compile Include="Settings\SettingsGridLengthCache.cs" />
