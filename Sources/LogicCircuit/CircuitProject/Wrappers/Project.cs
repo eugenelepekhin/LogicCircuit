@@ -8,7 +8,6 @@ namespace LogicCircuit {
 	using System.Globalization;
 	using System.Linq;
 	using System.Text;
-	using System.Xml;
 	using LogicCircuit.DataPersistent;
 
 	// Defines the shape of the table Project
@@ -32,18 +31,9 @@ namespace LogicCircuit {
 		public bool CategoryInputOutputCollapsed;
 		public bool CategoryPrimitivesCollapsed;
 		internal Project Project;
-
-		private interface IFieldSerializer {
-			bool NeedToSave(ref ProjectData data);
-			string GetTextValue(ref ProjectData data);
-			void SetDefault(ref ProjectData data);
-			void SetTextValue(ref ProjectData data, string text);
-		}
-
 		// Field accessors
-
 		// Accessor of the ProjectId field
-		public sealed class ProjectIdField : IField<ProjectData, Guid>, IFieldSerializer {
+		public sealed class ProjectIdField : IField<ProjectData, Guid>, IFieldSerializer<ProjectData> {
 			public static readonly ProjectIdField Field = new ProjectIdField();
 			private ProjectIdField() {}
 			public string Name { get { return "ProjectId"; } }
@@ -62,23 +52,23 @@ namespace LogicCircuit {
 				return l.CompareTo(r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref ProjectData data) {
+			// Implementation of interface IFieldSerializer<ProjectData>
+			bool IFieldSerializer<ProjectData>.NeedToSave(ref ProjectData data) {
 				return this.Compare(data.ProjectId, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref ProjectData data) {
+			string IFieldSerializer<ProjectData>.GetTextValue(ref ProjectData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.ProjectId);
 			}
-			void IFieldSerializer.SetDefault(ref ProjectData data) {
+			void IFieldSerializer<ProjectData>.SetDefault(ref ProjectData data) {
 				data.ProjectId = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref ProjectData data, string text) {
+			void IFieldSerializer<ProjectData>.SetTextValue(ref ProjectData data, string text) {
 				data.ProjectId = new Guid(text);
 			}
 		}
 
 		// Accessor of the Name field
-		public sealed class NameField : IField<ProjectData, string>, IFieldSerializer {
+		public sealed class NameField : IField<ProjectData, string>, IFieldSerializer<ProjectData> {
 			public static readonly NameField Field = new NameField();
 			private NameField() {}
 			public string Name { get { return "Name"; } }
@@ -97,23 +87,23 @@ namespace LogicCircuit {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref ProjectData data) {
+			// Implementation of interface IFieldSerializer<ProjectData>
+			bool IFieldSerializer<ProjectData>.NeedToSave(ref ProjectData data) {
 				return this.Compare(data.Name, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref ProjectData data) {
+			string IFieldSerializer<ProjectData>.GetTextValue(ref ProjectData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Name);
 			}
-			void IFieldSerializer.SetDefault(ref ProjectData data) {
+			void IFieldSerializer<ProjectData>.SetDefault(ref ProjectData data) {
 				data.Name = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref ProjectData data, string text) {
+			void IFieldSerializer<ProjectData>.SetTextValue(ref ProjectData data, string text) {
 				data.Name = text;
 			}
 		}
 
 		// Accessor of the Description field
-		public sealed class DescriptionField : IField<ProjectData, string>, IFieldSerializer {
+		public sealed class DescriptionField : IField<ProjectData, string>, IFieldSerializer<ProjectData> {
 			public static readonly DescriptionField Field = new DescriptionField();
 			private DescriptionField() {}
 			public string Name { get { return "Description"; } }
@@ -132,23 +122,23 @@ namespace LogicCircuit {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref ProjectData data) {
+			// Implementation of interface IFieldSerializer<ProjectData>
+			bool IFieldSerializer<ProjectData>.NeedToSave(ref ProjectData data) {
 				return this.Compare(data.Description, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref ProjectData data) {
+			string IFieldSerializer<ProjectData>.GetTextValue(ref ProjectData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Description);
 			}
-			void IFieldSerializer.SetDefault(ref ProjectData data) {
+			void IFieldSerializer<ProjectData>.SetDefault(ref ProjectData data) {
 				data.Description = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref ProjectData data, string text) {
+			void IFieldSerializer<ProjectData>.SetTextValue(ref ProjectData data, string text) {
 				data.Description = text;
 			}
 		}
 
 		// Accessor of the Zoom field
-		public sealed class ZoomField : IField<ProjectData, double>, IFieldSerializer {
+		public sealed class ZoomField : IField<ProjectData, double>, IFieldSerializer<ProjectData> {
 			public static readonly ZoomField Field = new ZoomField();
 			private ZoomField() {}
 			public string Name { get { return "Zoom"; } }
@@ -167,23 +157,23 @@ namespace LogicCircuit {
 				return Math.Sign(l - r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref ProjectData data) {
+			// Implementation of interface IFieldSerializer<ProjectData>
+			bool IFieldSerializer<ProjectData>.NeedToSave(ref ProjectData data) {
 				return this.Compare(data.Zoom, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref ProjectData data) {
+			string IFieldSerializer<ProjectData>.GetTextValue(ref ProjectData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Zoom);
 			}
-			void IFieldSerializer.SetDefault(ref ProjectData data) {
+			void IFieldSerializer<ProjectData>.SetDefault(ref ProjectData data) {
 				data.Zoom = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref ProjectData data, string text) {
+			void IFieldSerializer<ProjectData>.SetTextValue(ref ProjectData data, string text) {
 				data.Zoom = double.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
 		// Accessor of the Frequency field
-		public sealed class FrequencyField : IField<ProjectData, int>, IFieldSerializer {
+		public sealed class FrequencyField : IField<ProjectData, int>, IFieldSerializer<ProjectData> {
 			public static readonly FrequencyField Field = new FrequencyField();
 			private FrequencyField() {}
 			public string Name { get { return "Frequency"; } }
@@ -202,23 +192,23 @@ namespace LogicCircuit {
 				return Math.Sign((long)l - (long)r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref ProjectData data) {
+			// Implementation of interface IFieldSerializer<ProjectData>
+			bool IFieldSerializer<ProjectData>.NeedToSave(ref ProjectData data) {
 				return this.Compare(data.Frequency, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref ProjectData data) {
+			string IFieldSerializer<ProjectData>.GetTextValue(ref ProjectData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Frequency);
 			}
-			void IFieldSerializer.SetDefault(ref ProjectData data) {
+			void IFieldSerializer<ProjectData>.SetDefault(ref ProjectData data) {
 				data.Frequency = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref ProjectData data, string text) {
+			void IFieldSerializer<ProjectData>.SetTextValue(ref ProjectData data, string text) {
 				data.Frequency = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
 		// Accessor of the IsMaximumSpeed field
-		public sealed class IsMaximumSpeedField : IField<ProjectData, bool>, IFieldSerializer {
+		public sealed class IsMaximumSpeedField : IField<ProjectData, bool>, IFieldSerializer<ProjectData> {
 			public static readonly IsMaximumSpeedField Field = new IsMaximumSpeedField();
 			private IsMaximumSpeedField() {}
 			public string Name { get { return "IsMaximumSpeed"; } }
@@ -237,23 +227,23 @@ namespace LogicCircuit {
 				return l.CompareTo(r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref ProjectData data) {
+			// Implementation of interface IFieldSerializer<ProjectData>
+			bool IFieldSerializer<ProjectData>.NeedToSave(ref ProjectData data) {
 				return this.Compare(data.IsMaximumSpeed, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref ProjectData data) {
+			string IFieldSerializer<ProjectData>.GetTextValue(ref ProjectData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.IsMaximumSpeed);
 			}
-			void IFieldSerializer.SetDefault(ref ProjectData data) {
+			void IFieldSerializer<ProjectData>.SetDefault(ref ProjectData data) {
 				data.IsMaximumSpeed = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref ProjectData data, string text) {
+			void IFieldSerializer<ProjectData>.SetTextValue(ref ProjectData data, string text) {
 				data.IsMaximumSpeed = bool.Parse(text);
 			}
 		}
 
 		// Accessor of the LogicalCircuitId field
-		public sealed class LogicalCircuitIdField : IField<ProjectData, Guid>, IFieldSerializer {
+		public sealed class LogicalCircuitIdField : IField<ProjectData, Guid>, IFieldSerializer<ProjectData> {
 			public static readonly LogicalCircuitIdField Field = new LogicalCircuitIdField();
 			private LogicalCircuitIdField() {}
 			public string Name { get { return "LogicalCircuitId"; } }
@@ -272,23 +262,23 @@ namespace LogicCircuit {
 				return l.CompareTo(r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref ProjectData data) {
+			// Implementation of interface IFieldSerializer<ProjectData>
+			bool IFieldSerializer<ProjectData>.NeedToSave(ref ProjectData data) {
 				return this.Compare(data.LogicalCircuitId, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref ProjectData data) {
+			string IFieldSerializer<ProjectData>.GetTextValue(ref ProjectData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.LogicalCircuitId);
 			}
-			void IFieldSerializer.SetDefault(ref ProjectData data) {
+			void IFieldSerializer<ProjectData>.SetDefault(ref ProjectData data) {
 				data.LogicalCircuitId = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref ProjectData data, string text) {
+			void IFieldSerializer<ProjectData>.SetTextValue(ref ProjectData data, string text) {
 				data.LogicalCircuitId = new Guid(text);
 			}
 		}
 
 		// Accessor of the CategoryTextNoteCollapsed field
-		public sealed class CategoryTextNoteCollapsedField : IField<ProjectData, bool>, IFieldSerializer {
+		public sealed class CategoryTextNoteCollapsedField : IField<ProjectData, bool>, IFieldSerializer<ProjectData> {
 			public static readonly CategoryTextNoteCollapsedField Field = new CategoryTextNoteCollapsedField();
 			private CategoryTextNoteCollapsedField() {}
 			public string Name { get { return "CategoryTextNoteCollapsed"; } }
@@ -307,23 +297,23 @@ namespace LogicCircuit {
 				return l.CompareTo(r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref ProjectData data) {
+			// Implementation of interface IFieldSerializer<ProjectData>
+			bool IFieldSerializer<ProjectData>.NeedToSave(ref ProjectData data) {
 				return this.Compare(data.CategoryTextNoteCollapsed, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref ProjectData data) {
+			string IFieldSerializer<ProjectData>.GetTextValue(ref ProjectData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.CategoryTextNoteCollapsed);
 			}
-			void IFieldSerializer.SetDefault(ref ProjectData data) {
+			void IFieldSerializer<ProjectData>.SetDefault(ref ProjectData data) {
 				data.CategoryTextNoteCollapsed = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref ProjectData data, string text) {
+			void IFieldSerializer<ProjectData>.SetTextValue(ref ProjectData data, string text) {
 				data.CategoryTextNoteCollapsed = bool.Parse(text);
 			}
 		}
 
 		// Accessor of the CategoryInputOutputCollapsed field
-		public sealed class CategoryInputOutputCollapsedField : IField<ProjectData, bool>, IFieldSerializer {
+		public sealed class CategoryInputOutputCollapsedField : IField<ProjectData, bool>, IFieldSerializer<ProjectData> {
 			public static readonly CategoryInputOutputCollapsedField Field = new CategoryInputOutputCollapsedField();
 			private CategoryInputOutputCollapsedField() {}
 			public string Name { get { return "CategoryInputOutputCollapsed"; } }
@@ -342,23 +332,23 @@ namespace LogicCircuit {
 				return l.CompareTo(r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref ProjectData data) {
+			// Implementation of interface IFieldSerializer<ProjectData>
+			bool IFieldSerializer<ProjectData>.NeedToSave(ref ProjectData data) {
 				return this.Compare(data.CategoryInputOutputCollapsed, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref ProjectData data) {
+			string IFieldSerializer<ProjectData>.GetTextValue(ref ProjectData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.CategoryInputOutputCollapsed);
 			}
-			void IFieldSerializer.SetDefault(ref ProjectData data) {
+			void IFieldSerializer<ProjectData>.SetDefault(ref ProjectData data) {
 				data.CategoryInputOutputCollapsed = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref ProjectData data, string text) {
+			void IFieldSerializer<ProjectData>.SetTextValue(ref ProjectData data, string text) {
 				data.CategoryInputOutputCollapsed = bool.Parse(text);
 			}
 		}
 
 		// Accessor of the CategoryPrimitivesCollapsed field
-		public sealed class CategoryPrimitivesCollapsedField : IField<ProjectData, bool>, IFieldSerializer {
+		public sealed class CategoryPrimitivesCollapsedField : IField<ProjectData, bool>, IFieldSerializer<ProjectData> {
 			public static readonly CategoryPrimitivesCollapsedField Field = new CategoryPrimitivesCollapsedField();
 			private CategoryPrimitivesCollapsedField() {}
 			public string Name { get { return "CategoryPrimitivesCollapsed"; } }
@@ -377,17 +367,17 @@ namespace LogicCircuit {
 				return l.CompareTo(r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref ProjectData data) {
+			// Implementation of interface IFieldSerializer<ProjectData>
+			bool IFieldSerializer<ProjectData>.NeedToSave(ref ProjectData data) {
 				return this.Compare(data.CategoryPrimitivesCollapsed, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref ProjectData data) {
+			string IFieldSerializer<ProjectData>.GetTextValue(ref ProjectData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.CategoryPrimitivesCollapsed);
 			}
-			void IFieldSerializer.SetDefault(ref ProjectData data) {
+			void IFieldSerializer<ProjectData>.SetDefault(ref ProjectData data) {
 				data.CategoryPrimitivesCollapsed = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref ProjectData data, string text) {
+			void IFieldSerializer<ProjectData>.SetTextValue(ref ProjectData data, string text) {
 				data.CategoryPrimitivesCollapsed = bool.Parse(text);
 			}
 		}
@@ -444,85 +434,6 @@ namespace LogicCircuit {
 		public static void CreateForeignKeys(StoreSnapshot store) {
 			TableSnapshot<ProjectData> table = (TableSnapshot<ProjectData>)store.Table("Project");
 			table.CreateForeignKey("FK_LogicalCircuit_Project", store.Table("LogicalCircuit"), ProjectData.LogicalCircuitIdField.Field, ForeignKeyAction.Restrict, false);
-		}
-
-		// Serializer of the table
-		public static void Save(TableSnapshot<ProjectData> table, XmlWriter writer, string ns) {
-			foreach(RowId rowId in table.Rows) {
-				ProjectData data;
-				table.GetData(rowId, out data);
-				writer.WriteStartElement(table.Name, ns);
-				foreach(IField<ProjectData> field in table.Fields) {
-					IFieldSerializer serializer = field as IFieldSerializer;
-					if(serializer != null && serializer.NeedToSave(ref data)) {
-						writer.WriteStartElement(field.Name, ns);
-						writer.WriteString(serializer.GetTextValue(ref data));
-						writer.WriteEndElement();
-					}
-				}
-				writer.WriteEndElement();
-			}
-		}
-
-		public static RowId Load(TableSnapshot<ProjectData> table, XmlReader reader) {
-			Debug.Assert(reader.NodeType == XmlNodeType.Element);
-			Debug.Assert(reader.LocalName == table.Name);
-			Debug.Assert(!reader.IsEmptyElement, "It is expected that caller skips empty element and don't bother us.");
-
-			ProjectData data = new ProjectData();
-			// Initialize 'data' with default values:
-			for (int i = 0; i < ProjectData.fields.Length; i ++) {
-				IFieldSerializer serializer = ProjectData.fields[i] as IFieldSerializer;
-				if (serializer != null) {
-					serializer.SetDefault(ref data);
-				}
-			}
-
-			reader.Read();
-			int fieldDepth = reader.Depth;
-			string ns = reader.NamespaceURI;
-
-			// Read through all fields of this record
-			int hintIndex = 0;
-			while (reader.Depth == fieldDepth) {
-				if (reader.IsElement(ns)) {
-					// The reader is positioned on a field element
-					string fieldName  = reader.LocalName;
-					string fieldValue = reader.ReadElementText();  // reads the text and moves the reader beyond this element
-					IFieldSerializer serializer = ProjectData.FindField(fieldName, ref hintIndex);
-					if (serializer != null) {
-						serializer.SetTextValue(ref data, fieldValue);
-					}
-				} else {
-					reader.Skip();  // skip everything else
-				}
-				Debug.Assert(reader.Depth == fieldDepth || reader.Depth == fieldDepth - 1,
-					"After reading the field the reader should be on fieldDepth or on fieldDepth - 1 if it reached EndElement tag"
-				);
-			}
-			// insert 'data' into the table
-			return table.Insert(ref data);
-		}
-
-		private static IFieldSerializer FindField(string name, ref int hint) {
-			// We serialize/de-serialize fields in the same order so result would always be at hint position or after it if hint is skipped during the serialization
-			Debug.Assert(0 <= hint && hint <= ProjectData.fields.Length);
-			for (int i = hint; i < ProjectData.fields.Length; i ++) {
-				if (ProjectData.fields[i].Name == name) {
-					hint = i + 1;
-					return ProjectData.fields[i] as IFieldSerializer;
-				}
-			}
-
-			// We don't find the field in expected place. Lets look the beginning of the list in case it is out of order
-			for (int i = 0; i < hint; i ++) {
-				if (ProjectData.fields[i].Name == name) {
-					return ProjectData.fields[i] as IFieldSerializer;
-				}
-			}
-
-			// Ups. Still don't find.
-			return null;
 		}
 	}
 

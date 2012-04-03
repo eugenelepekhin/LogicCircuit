@@ -142,11 +142,7 @@ namespace LogicCircuit {
 		}
 	}
 
-	public sealed partial class TextNoteSet : IRecordLoader {
-		void IRecordLoader.Load(XmlReader reader) {
-			this.Create(TextNoteData.Load(this.Table, reader));
-		}
-
+	public sealed partial class TextNoteSet {
 		public TextNote Create(LogicalCircuit logicalCircuit, GridPoint point, string note) {
 			return this.CreateItem(Guid.NewGuid(), logicalCircuit, point.X, point.Y,
 				TextNoteData.WidthField.Field.DefaultValue, TextNoteData.HeightField.Field.DefaultValue, note, TextNoteData.RotationField.Field.DefaultValue
@@ -162,6 +158,10 @@ namespace LogicCircuit {
 			data.LogicalCircuitId = target.LogicalCircuitId;
 			data.TextNote = null;
 			return this.Create(this.Table.Insert(ref data));
+		}
+
+		public ARecordLoader CreateRecordLoader(XmlNameTable nameTable) {
+			return new RecordLoader<TextNoteData>(nameTable, this.Table, this.Table.Fields, rowId => this.Create(rowId));
 		}
 	}
 }

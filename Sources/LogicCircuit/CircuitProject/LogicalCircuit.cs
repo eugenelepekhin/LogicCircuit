@@ -81,12 +81,8 @@ namespace LogicCircuit {
 		}
 	}
 
-	public sealed partial class LogicalCircuitSet : NamedItemSet, IRecordLoader {
+	public sealed partial class LogicalCircuitSet : NamedItemSet {
 		public event EventHandler LogicalCircuitSetChanged;
-
-		void IRecordLoader.Load(XmlReader reader) {
-			this.Register(LogicalCircuitData.Load(this.Table, reader));
-		}
 
 		private LogicalCircuit Register(RowId rowId) {
 			CircuitData data = new CircuitData() {
@@ -153,6 +149,10 @@ namespace LogicCircuit {
 			foreach(LogicalCircuit circuit in this) {
 				circuit.UpdateConductorMap();
 			}
+		}
+
+		public ARecordLoader CreateRecordLoader(XmlNameTable nameTable) {
+			return new RecordLoader<LogicalCircuitData>(nameTable, this.Table, this.Table.Fields, rowId => this.Register(rowId));
 		}
 	}
 }

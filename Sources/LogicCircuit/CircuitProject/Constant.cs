@@ -56,11 +56,7 @@ namespace LogicCircuit {
 		}
 	}
 
-	public sealed partial class ConstantSet : IRecordLoader {
-		void IRecordLoader.Load(XmlReader reader) {
-			this.Register(ConstantData.Load(this.Table, reader));
-		}
-
+	public sealed partial class ConstantSet {
 		private Constant Register(RowId rowId) {
 			CircuitData data = new CircuitData() {
 				CircuitId = this.Table.GetField(rowId, ConstantData.ConstantIdField.Field)
@@ -84,6 +80,10 @@ namespace LogicCircuit {
 			}
 			data.Constant = null;
 			return this.Register(this.Table.Insert(ref data));
+		}
+
+		public ARecordLoader CreateRecordLoader(XmlNameTable nameTable) {
+			return new RecordLoader<ConstantData>(nameTable, this.Table, this.Table.Fields, rowId => this.Register(rowId));
 		}
 	}
 }

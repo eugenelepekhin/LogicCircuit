@@ -48,11 +48,7 @@ namespace LogicCircuit {
 		}
 	}
 
-	public sealed partial class PinSet : NamedItemSet, IRecordLoader {
-		void IRecordLoader.Load(XmlReader reader) {
-			this.Register(PinData.Load(this.Table, reader));
-		}
-
+	public sealed partial class PinSet : NamedItemSet {
 		private Pin Register(RowId rowId) {
 			CircuitData data = new CircuitData() {
 				CircuitId = this.Table.GetField(rowId, PinData.PinIdField.Field)
@@ -113,6 +109,10 @@ namespace LogicCircuit {
 			if(logicalCircuit != null) {
 				logicalCircuit.ResetPins();
 			}
+		}
+
+		public ARecordLoader CreateRecordLoader(XmlNameTable nameTable) {
+			return new RecordLoader<PinData>(nameTable, this.Table, this.Table.Fields, rowId => this.Register(rowId));
 		}
 	}
 }

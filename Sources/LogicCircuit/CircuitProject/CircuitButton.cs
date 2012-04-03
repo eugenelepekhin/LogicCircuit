@@ -38,11 +38,7 @@ namespace LogicCircuit {
 		}
 	}
 
-	public sealed partial class CircuitButtonSet : IRecordLoader {
-		void IRecordLoader.Load(XmlReader reader) {
-			this.Register(CircuitButtonData.Load(this.Table, reader));
-		}
-
+	public sealed partial class CircuitButtonSet {
 		private CircuitButton Register(RowId rowId) {
 			CircuitData data = new CircuitData() {
 				CircuitId = this.Table.GetField(rowId, CircuitButtonData.CircuitButtonIdField.Field)
@@ -66,6 +62,10 @@ namespace LogicCircuit {
 			}
 			data.CircuitButton = null;
 			return this.Register(this.Table.Insert(ref data));
+		}
+
+		public ARecordLoader CreateRecordLoader(XmlNameTable nameTable) {
+			return new RecordLoader<CircuitButtonData>(nameTable, this.Table, this.Table.Fields, rowId => Register(rowId));
 		}
 	}
 }

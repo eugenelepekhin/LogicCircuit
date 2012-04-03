@@ -168,11 +168,7 @@ namespace LogicCircuit {
 		}
 	}
 
-	public sealed partial class MemorySet : IRecordLoader {
-		void IRecordLoader.Load(XmlReader reader) {
-			this.Register(MemoryData.Load(this.Table, reader));
-		}
-
+	public sealed partial class MemorySet {
 		private Memory Register(RowId rowId) {
 			CircuitData data = new CircuitData() {
 				CircuitId = this.Table.GetField(rowId, MemoryData.MemoryIdField.Field)
@@ -231,6 +227,10 @@ namespace LogicCircuit {
 			}
 			data.Memory = null;
 			return this.Register(this.Table.Insert(ref data));
+		}
+
+		public ARecordLoader CreateRecordLoader(XmlNameTable nameTable) {
+			return new RecordLoader<MemoryData>(nameTable, this.Table, this.Table.Fields, rowId => this.Register(rowId));
 		}
 	}
 }

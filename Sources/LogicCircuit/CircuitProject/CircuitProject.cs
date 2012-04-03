@@ -53,78 +53,15 @@ namespace LogicCircuit {
 
 		public void Save(TextWriter textWriter) {
 			using(XmlWriter writer = XmlHelper.CreateWriter(textWriter)) {
-				writer.WriteStartDocument();
-				writer.WriteStartElement(CircuitProject.PersistencePrefix, "CircuitProject", CircuitProject.PersistenceNamespace);
-				ProjectData.Save(this.ProjectSet.Table, writer, CircuitProject.PersistenceNamespace);
-				CollapsedCategoryData.Save(this.CollapsedCategorySet.Table, writer, CircuitProject.PersistenceNamespace);
-				LogicalCircuitData.Save(this.LogicalCircuitSet.Table, writer, CircuitProject.PersistenceNamespace);
-				PinData.Save(this.PinSet.Table, writer, CircuitProject.PersistenceNamespace);
-				ConstantData.Save(this.ConstantSet.Table, writer, CircuitProject.PersistenceNamespace);
-				CircuitButtonData.Save(this.CircuitButtonSet.Table, writer, CircuitProject.PersistenceNamespace);
-				MemoryData.Save(this.MemorySet.Table, writer, CircuitProject.PersistenceNamespace);
-				LedMatrixData.Save(this.LedMatrixSet.Table, writer, CircuitProject.PersistenceNamespace);
-				SplitterData.Save(this.SplitterSet.Table, writer, CircuitProject.PersistenceNamespace);
-				CircuitSymbolData.Save(this.CircuitSymbolSet.Table, writer, CircuitProject.PersistenceNamespace);
-				WireData.Save(this.WireSet.Table, writer, CircuitProject.PersistenceNamespace);
-				TextNoteData.Save(this.TextNoteSet.Table, writer, CircuitProject.PersistenceNamespace);
-				writer.WriteEndElement();
-			}
-		}
-
-		private class AtomizedComparator : IEqualityComparer<string> {
-			public bool Equals(string x, string y) {
-				return XmlHelper.AreEqualAtoms(x, y);
-			}
-
-			public int GetHashCode(string obj) {
-				return obj.GetHashCode();
+				this.SaveRecords(writer);
 			}
 		}
 
 		private void Load(XmlReader xmlReader) {
-			XmlNameTable nameTable = xmlReader.NameTable;
-			string ns = nameTable.Add(CircuitProject.PersistenceNamespace);
-			string rootName = nameTable.Add("CircuitProject");
+			// Load all records from the XML file
+			this.LoadRecords(xmlReader);
 
-			Dictionary<string, IRecordLoader> loaders = new Dictionary<string, IRecordLoader>(16, new AtomizedComparator());
-			loaders.Add(nameTable.Add(this.ProjectSet          .Table.Name), (IRecordLoader) this.ProjectSet          );
-			loaders.Add(nameTable.Add(this.CollapsedCategorySet.Table.Name), (IRecordLoader) this.CollapsedCategorySet);
-			loaders.Add(nameTable.Add(this.LogicalCircuitSet   .Table.Name), (IRecordLoader) this.LogicalCircuitSet   );
-			loaders.Add(nameTable.Add(this.PinSet              .Table.Name), (IRecordLoader) this.PinSet              );
-			loaders.Add(nameTable.Add(this.ConstantSet         .Table.Name), (IRecordLoader) this.ConstantSet         );
-			loaders.Add(nameTable.Add(this.CircuitButtonSet    .Table.Name), (IRecordLoader) this.CircuitButtonSet    );
-			loaders.Add(nameTable.Add(this.MemorySet           .Table.Name), (IRecordLoader) this.MemorySet           );
-			loaders.Add(nameTable.Add(this.LedMatrixSet        .Table.Name), (IRecordLoader) this.LedMatrixSet        );
-			loaders.Add(nameTable.Add(this.SplitterSet         .Table.Name), (IRecordLoader) this.SplitterSet         );
-			loaders.Add(nameTable.Add(this.CircuitSymbolSet    .Table.Name), (IRecordLoader) this.CircuitSymbolSet    );
-			loaders.Add(nameTable.Add(this.WireSet             .Table.Name), (IRecordLoader) this.WireSet             );
-			loaders.Add(nameTable.Add(this.TextNoteSet         .Table.Name), (IRecordLoader) this.TextNoteSet         );
-
-			// skip to the first element
-			while (xmlReader.NodeType != XmlNodeType.Element && xmlReader.Read());
-			Debug.Assert(xmlReader.Depth == 0);
-			if (xmlReader.IsElement(ns, rootName)) {
-				bool isEmpty = xmlReader.IsEmptyElement;
-				xmlReader.Read();
-				if (! isEmpty) {
-					Debug.Assert(xmlReader.Depth == 1);
-					while (xmlReader.Depth == 1) {
-						if (xmlReader.IsElement(ns) && ! xmlReader.IsEmptyElement) {
-							IRecordLoader loader;
-							if (loaders.TryGetValue(xmlReader.LocalName, out loader)) {
-								loader.Load(xmlReader);
-								continue;
-							}
-						}
-						xmlReader.Skip();
-					}
-					Debug.Assert(xmlReader.Depth == 0);
-					#if DEBUG
-						Debug.Assert(xmlReader.IsEndElement(ns, rootName));
-					#endif
-				}
-			}
-
+			// Post process loaded records
 			this.CollapsedCategorySet.Purge();
 
 			foreach(CircuitSymbol symbol in this.CircuitSymbolSet) {

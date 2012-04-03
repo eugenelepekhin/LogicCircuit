@@ -8,7 +8,6 @@ namespace LogicCircuit {
 	using System.Globalization;
 	using System.Linq;
 	using System.Text;
-	using System.Xml;
 	using LogicCircuit.DataPersistent;
 
 	// Defines the shape of the table Wire
@@ -20,18 +19,9 @@ namespace LogicCircuit {
 		public int X2;
 		public int Y2;
 		internal Wire Wire;
-
-		private interface IFieldSerializer {
-			bool NeedToSave(ref WireData data);
-			string GetTextValue(ref WireData data);
-			void SetDefault(ref WireData data);
-			void SetTextValue(ref WireData data, string text);
-		}
-
 		// Field accessors
-
 		// Accessor of the WireId field
-		public sealed class WireIdField : IField<WireData, Guid>, IFieldSerializer {
+		public sealed class WireIdField : IField<WireData, Guid>, IFieldSerializer<WireData> {
 			public static readonly WireIdField Field = new WireIdField();
 			private WireIdField() {}
 			public string Name { get { return "WireId"; } }
@@ -50,23 +40,23 @@ namespace LogicCircuit {
 				return l.CompareTo(r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref WireData data) {
+			// Implementation of interface IFieldSerializer<WireData>
+			bool IFieldSerializer<WireData>.NeedToSave(ref WireData data) {
 				return this.Compare(data.WireId, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref WireData data) {
+			string IFieldSerializer<WireData>.GetTextValue(ref WireData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.WireId);
 			}
-			void IFieldSerializer.SetDefault(ref WireData data) {
+			void IFieldSerializer<WireData>.SetDefault(ref WireData data) {
 				data.WireId = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref WireData data, string text) {
+			void IFieldSerializer<WireData>.SetTextValue(ref WireData data, string text) {
 				data.WireId = new Guid(text);
 			}
 		}
 
 		// Accessor of the LogicalCircuitId field
-		public sealed class LogicalCircuitIdField : IField<WireData, Guid>, IFieldSerializer {
+		public sealed class LogicalCircuitIdField : IField<WireData, Guid>, IFieldSerializer<WireData> {
 			public static readonly LogicalCircuitIdField Field = new LogicalCircuitIdField();
 			private LogicalCircuitIdField() {}
 			public string Name { get { return "LogicalCircuitId"; } }
@@ -85,23 +75,23 @@ namespace LogicCircuit {
 				return l.CompareTo(r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref WireData data) {
+			// Implementation of interface IFieldSerializer<WireData>
+			bool IFieldSerializer<WireData>.NeedToSave(ref WireData data) {
 				return this.Compare(data.LogicalCircuitId, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref WireData data) {
+			string IFieldSerializer<WireData>.GetTextValue(ref WireData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.LogicalCircuitId);
 			}
-			void IFieldSerializer.SetDefault(ref WireData data) {
+			void IFieldSerializer<WireData>.SetDefault(ref WireData data) {
 				data.LogicalCircuitId = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref WireData data, string text) {
+			void IFieldSerializer<WireData>.SetTextValue(ref WireData data, string text) {
 				data.LogicalCircuitId = new Guid(text);
 			}
 		}
 
 		// Accessor of the X1 field
-		public sealed class X1Field : IField<WireData, int>, IFieldSerializer {
+		public sealed class X1Field : IField<WireData, int>, IFieldSerializer<WireData> {
 			public static readonly X1Field Field = new X1Field();
 			private X1Field() {}
 			public string Name { get { return "X1"; } }
@@ -120,23 +110,23 @@ namespace LogicCircuit {
 				return Math.Sign((long)l - (long)r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref WireData data) {
+			// Implementation of interface IFieldSerializer<WireData>
+			bool IFieldSerializer<WireData>.NeedToSave(ref WireData data) {
 				return this.Compare(data.X1, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref WireData data) {
+			string IFieldSerializer<WireData>.GetTextValue(ref WireData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.X1);
 			}
-			void IFieldSerializer.SetDefault(ref WireData data) {
+			void IFieldSerializer<WireData>.SetDefault(ref WireData data) {
 				data.X1 = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref WireData data, string text) {
+			void IFieldSerializer<WireData>.SetTextValue(ref WireData data, string text) {
 				data.X1 = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
 		// Accessor of the Y1 field
-		public sealed class Y1Field : IField<WireData, int>, IFieldSerializer {
+		public sealed class Y1Field : IField<WireData, int>, IFieldSerializer<WireData> {
 			public static readonly Y1Field Field = new Y1Field();
 			private Y1Field() {}
 			public string Name { get { return "Y1"; } }
@@ -155,23 +145,23 @@ namespace LogicCircuit {
 				return Math.Sign((long)l - (long)r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref WireData data) {
+			// Implementation of interface IFieldSerializer<WireData>
+			bool IFieldSerializer<WireData>.NeedToSave(ref WireData data) {
 				return this.Compare(data.Y1, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref WireData data) {
+			string IFieldSerializer<WireData>.GetTextValue(ref WireData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Y1);
 			}
-			void IFieldSerializer.SetDefault(ref WireData data) {
+			void IFieldSerializer<WireData>.SetDefault(ref WireData data) {
 				data.Y1 = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref WireData data, string text) {
+			void IFieldSerializer<WireData>.SetTextValue(ref WireData data, string text) {
 				data.Y1 = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
 		// Accessor of the X2 field
-		public sealed class X2Field : IField<WireData, int>, IFieldSerializer {
+		public sealed class X2Field : IField<WireData, int>, IFieldSerializer<WireData> {
 			public static readonly X2Field Field = new X2Field();
 			private X2Field() {}
 			public string Name { get { return "X2"; } }
@@ -190,23 +180,23 @@ namespace LogicCircuit {
 				return Math.Sign((long)l - (long)r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref WireData data) {
+			// Implementation of interface IFieldSerializer<WireData>
+			bool IFieldSerializer<WireData>.NeedToSave(ref WireData data) {
 				return this.Compare(data.X2, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref WireData data) {
+			string IFieldSerializer<WireData>.GetTextValue(ref WireData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.X2);
 			}
-			void IFieldSerializer.SetDefault(ref WireData data) {
+			void IFieldSerializer<WireData>.SetDefault(ref WireData data) {
 				data.X2 = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref WireData data, string text) {
+			void IFieldSerializer<WireData>.SetTextValue(ref WireData data, string text) {
 				data.X2 = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
 		// Accessor of the Y2 field
-		public sealed class Y2Field : IField<WireData, int>, IFieldSerializer {
+		public sealed class Y2Field : IField<WireData, int>, IFieldSerializer<WireData> {
 			public static readonly Y2Field Field = new Y2Field();
 			private Y2Field() {}
 			public string Name { get { return "Y2"; } }
@@ -225,17 +215,17 @@ namespace LogicCircuit {
 				return Math.Sign((long)l - (long)r);
 			}
 
-			// Implementation of interface IFieldSerializer
-			bool IFieldSerializer.NeedToSave(ref WireData data) {
+			// Implementation of interface IFieldSerializer<WireData>
+			bool IFieldSerializer<WireData>.NeedToSave(ref WireData data) {
 				return this.Compare(data.Y2, this.DefaultValue) != 0;
 			}
-			string IFieldSerializer.GetTextValue(ref WireData data) {
+			string IFieldSerializer<WireData>.GetTextValue(ref WireData data) {
 				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Y2);
 			}
-			void IFieldSerializer.SetDefault(ref WireData data) {
+			void IFieldSerializer<WireData>.SetDefault(ref WireData data) {
 				data.Y2 = this.DefaultValue;
 			}
-			void IFieldSerializer.SetTextValue(ref WireData data, string text) {
+			void IFieldSerializer<WireData>.SetTextValue(ref WireData data, string text) {
 				data.Y2 = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
@@ -289,85 +279,6 @@ namespace LogicCircuit {
 		public static void CreateForeignKeys(StoreSnapshot store) {
 			TableSnapshot<WireData> table = (TableSnapshot<WireData>)store.Table("Wire");
 			table.CreateForeignKey("FK_LogicalCircuit_Wire", store.Table("LogicalCircuit"), WireData.LogicalCircuitIdField.Field, ForeignKeyAction.Cascade, false);
-		}
-
-		// Serializer of the table
-		public static void Save(TableSnapshot<WireData> table, XmlWriter writer, string ns) {
-			foreach(RowId rowId in table.Rows) {
-				WireData data;
-				table.GetData(rowId, out data);
-				writer.WriteStartElement(table.Name, ns);
-				foreach(IField<WireData> field in table.Fields) {
-					IFieldSerializer serializer = field as IFieldSerializer;
-					if(serializer != null && serializer.NeedToSave(ref data)) {
-						writer.WriteStartElement(field.Name, ns);
-						writer.WriteString(serializer.GetTextValue(ref data));
-						writer.WriteEndElement();
-					}
-				}
-				writer.WriteEndElement();
-			}
-		}
-
-		public static RowId Load(TableSnapshot<WireData> table, XmlReader reader) {
-			Debug.Assert(reader.NodeType == XmlNodeType.Element);
-			Debug.Assert(reader.LocalName == table.Name);
-			Debug.Assert(!reader.IsEmptyElement, "It is expected that caller skips empty element and don't bother us.");
-
-			WireData data = new WireData();
-			// Initialize 'data' with default values:
-			for (int i = 0; i < WireData.fields.Length; i ++) {
-				IFieldSerializer serializer = WireData.fields[i] as IFieldSerializer;
-				if (serializer != null) {
-					serializer.SetDefault(ref data);
-				}
-			}
-
-			reader.Read();
-			int fieldDepth = reader.Depth;
-			string ns = reader.NamespaceURI;
-
-			// Read through all fields of this record
-			int hintIndex = 0;
-			while (reader.Depth == fieldDepth) {
-				if (reader.IsElement(ns)) {
-					// The reader is positioned on a field element
-					string fieldName  = reader.LocalName;
-					string fieldValue = reader.ReadElementText();  // reads the text and moves the reader beyond this element
-					IFieldSerializer serializer = WireData.FindField(fieldName, ref hintIndex);
-					if (serializer != null) {
-						serializer.SetTextValue(ref data, fieldValue);
-					}
-				} else {
-					reader.Skip();  // skip everything else
-				}
-				Debug.Assert(reader.Depth == fieldDepth || reader.Depth == fieldDepth - 1,
-					"After reading the field the reader should be on fieldDepth or on fieldDepth - 1 if it reached EndElement tag"
-				);
-			}
-			// insert 'data' into the table
-			return table.Insert(ref data);
-		}
-
-		private static IFieldSerializer FindField(string name, ref int hint) {
-			// We serialize/de-serialize fields in the same order so result would always be at hint position or after it if hint is skipped during the serialization
-			Debug.Assert(0 <= hint && hint <= WireData.fields.Length);
-			for (int i = hint; i < WireData.fields.Length; i ++) {
-				if (WireData.fields[i].Name == name) {
-					hint = i + 1;
-					return WireData.fields[i] as IFieldSerializer;
-				}
-			}
-
-			// We don't find the field in expected place. Lets look the beginning of the list in case it is out of order
-			for (int i = 0; i < hint; i ++) {
-				if (WireData.fields[i].Name == name) {
-					return WireData.fields[i] as IFieldSerializer;
-				}
-			}
-
-			// Ups. Still don't find.
-			return null;
 		}
 	}
 
