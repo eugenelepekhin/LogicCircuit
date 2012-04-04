@@ -105,7 +105,7 @@ namespace LogicCircuit {
 			return object.ReferenceEquals(x, y);
 		}
 
-		private class AtomComparierImpl : IEqualityComparer<string> {
+		private class AtomEqualityComparer : IEqualityComparer<string> {
 			public bool Equals(string x, string y) {
 				return XmlHelper.AreEqualAtoms(x, y);
 			}
@@ -115,6 +115,6 @@ namespace LogicCircuit {
 			}
 		}
 
-		public static IEqualityComparer<string> AtomComparier = new AtomComparierImpl();
+		public static readonly IEqualityComparer<string> AtomComparer = new AtomEqualityComparer();
 	}
 }

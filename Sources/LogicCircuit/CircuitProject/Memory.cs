@@ -229,7 +229,7 @@ namespace LogicCircuit {
 			return this.Register(this.Table.Insert(ref data));
 		}
 
-		public ARecordLoader CreateRecordLoader(XmlNameTable nameTable) {
+		public RecordLoader CreateRecordLoader(XmlNameTable nameTable) {
 			return new RecordLoader<MemoryData>(nameTable, this.Table, this.Table.Fields, rowId => this.Register(rowId));
 		}
 	}

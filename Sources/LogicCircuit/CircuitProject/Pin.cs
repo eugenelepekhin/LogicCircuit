@@ -111,7 +111,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		public ARecordLoader CreateRecordLoader(XmlNameTable nameTable) {
+		public RecordLoader CreateRecordLoader(XmlNameTable nameTable) {
 			return new RecordLoader<PinData>(nameTable, this.Table, this.Table.Fields, rowId => this.Register(rowId));
 		}
 	}

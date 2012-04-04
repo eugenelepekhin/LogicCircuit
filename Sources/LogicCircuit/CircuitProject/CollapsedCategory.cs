@@ -30,7 +30,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		public ARecordLoader CreateRecordLoader(XmlNameTable nameTable) {
+		public RecordLoader CreateRecordLoader(XmlNameTable nameTable) {
 			return new RecordLoader<CollapsedCategoryData>(nameTable, this.Table, this.Table.Fields, rowId => this.Create(rowId));
 		}
 	}

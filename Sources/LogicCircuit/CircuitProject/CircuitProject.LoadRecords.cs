@@ -5,11 +5,11 @@ using LogicCircuit.DataPersistent;
 using System;
 
 namespace LogicCircuit {
-	public abstract class ARecordLoader {
+	public abstract class RecordLoader {
 		public abstract void LoadOneRecord(XmlReader reader);
 	}
 
-	public class RecordLoader<TRecord> : ARecordLoader where TRecord:struct {
+	public class RecordLoader<TRecord> : RecordLoader where TRecord:struct {
 		private readonly TableSnapshot<TRecord> table;
 		private readonly Action<RowId> register;
 		private Dictionary<string, IFieldSerializer<TRecord>> serializers;
@@ -21,7 +21,7 @@ namespace LogicCircuit {
 
 			this.table = table;
 			this.register = register;
-			this.serializers = new Dictionary<string, IFieldSerializer<TRecord>>(XmlHelper.AtomComparier);
+			this.serializers = new Dictionary<string, IFieldSerializer<TRecord>>(XmlHelper.AtomComparer);
 			foreach (IField<TRecord> field in fields) {
 				IFieldSerializer<TRecord> serializer = field as IFieldSerializer<TRecord>;
 				if (serializer != null) {
@@ -32,7 +32,7 @@ namespace LogicCircuit {
 		}
 
 		public override void LoadOneRecord(XmlReader reader) {
-			Debug.Assert(reader.NodeType == XmlNodeType.Element);
+			Debug.Assert(reader.IsElement(reader.NamespaceURI, this.table.Name));
 
 			TRecord data = new TRecord();
 			// Initialize 'data' with default values:
@@ -42,8 +42,6 @@ namespace LogicCircuit {
 			}
 
 			if (! reader.IsEmptyElement) {
-				string elementName = reader.LocalName;
-
 				reader.Read();
 				int fieldDepth = reader.Depth;
 				string ns = reader.NamespaceURI;
@@ -62,7 +60,7 @@ namespace LogicCircuit {
 						reader.Skip();  // skip everything else
 					}
 				}
-				Debug.Assert(reader.IsEndElement(ns, elementName));
+				Debug.Assert(reader.IsEndElement(ns, this.table.Name));
 				Debug.Assert(reader.Depth == fieldDepth - 1);
 			}
 
@@ -79,7 +77,7 @@ namespace LogicCircuit {
 			string ns = nameTable.Add(CircuitProject.PersistenceNamespace);
 			string rootName = nameTable.Add("CircuitProject");
 
-			Dictionary<string, ARecordLoader> loaders = new Dictionary<string, ARecordLoader>(16, XmlHelper.AtomComparier);
+			Dictionary<string, RecordLoader> loaders = new Dictionary<string, RecordLoader>(16, XmlHelper.AtomComparer);
 			loaders.Add(nameTable.Add(this.ProjectSet          .Table.Name), this.ProjectSet          .CreateRecordLoader(nameTable));
 			loaders.Add(nameTable.Add(this.CollapsedCategorySet.Table.Name), this.CollapsedCategorySet.CreateRecordLoader(nameTable));
 			loaders.Add(nameTable.Add(this.LogicalCircuitSet   .Table.Name), this.LogicalCircuitSet   .CreateRecordLoader(nameTable));
@@ -103,7 +101,7 @@ namespace LogicCircuit {
 					Debug.Assert(xmlReader.Depth == 1);
 					while (xmlReader.Depth == 1) {
 						if (xmlReader.IsElement(ns)) {
-							ARecordLoader loader;
+							RecordLoader loader;
 							if (loaders.TryGetValue(xmlReader.LocalName, out loader)) {
 								Debug.Assert(loader != null);
 								loader.LoadOneRecord(xmlReader);

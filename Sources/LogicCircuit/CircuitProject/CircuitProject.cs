@@ -95,16 +95,16 @@ namespace LogicCircuit {
 		}
 
 		public string WriteToString(IEnumerable<Symbol> symbol) {
+			CircuitProject copy = new CircuitProject();
+			bool started = copy.StartTransaction();
+			Tracer.Assert(started);
+			copy.ProjectSet.Copy(this.ProjectSet.Project);
+			LogicalCircuit target = copy.LogicalCircuitSet.Copy(this.ProjectSet.Project.LogicalCircuit, false);
+			foreach(Symbol s in symbol) {
+				s.CopyTo(target);
+			}
 			StringBuilder sb = new StringBuilder();
 			using (TextWriter textWriter = new StringWriter(sb, CultureInfo.InvariantCulture)) {
-				CircuitProject copy = new CircuitProject();
-				bool started = copy.StartTransaction();
-				Tracer.Assert(started);
-				copy.ProjectSet.Copy(this.ProjectSet.Project);
-				LogicalCircuit target = copy.LogicalCircuitSet.Copy(this.ProjectSet.Project.LogicalCircuit, false);
-				foreach(Symbol s in symbol) {
-					s.CopyTo(target);
-				}
 				copy.Save(textWriter);
 			}
 			return sb.ToString();
