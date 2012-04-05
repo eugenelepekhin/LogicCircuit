@@ -14,15 +14,14 @@ namespace LogicCircuit {
 		private readonly Action<RowId> register;
 		private Dictionary<string, IFieldSerializer<TRecord>> serializers;
 
-		public RecordLoader(XmlNameTable nameTable, TableSnapshot<TRecord> table, IEnumerable<IField<TRecord>> fields, Action<RowId> register) {
+		public RecordLoader(XmlNameTable nameTable, TableSnapshot<TRecord> table, Action<RowId> register) {
 			Debug.Assert(nameTable != null);
-			Debug.Assert(fields != null);
 			Debug.Assert(register != null);
 
 			this.table = table;
 			this.register = register;
 			this.serializers = new Dictionary<string, IFieldSerializer<TRecord>>(XmlHelper.AtomComparer);
-			foreach (IField<TRecord> field in fields) {
+			foreach (IField<TRecord> field in this.table.Fields) {
 				IFieldSerializer<TRecord> serializer = field as IFieldSerializer<TRecord>;
 				if (serializer != null) {
 					string fieldName = nameTable.Add(field.Name);

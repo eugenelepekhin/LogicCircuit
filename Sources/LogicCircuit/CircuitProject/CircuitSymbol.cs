@@ -85,7 +85,7 @@ namespace LogicCircuit {
 		}
 
 		public RecordLoader CreateRecordLoader(XmlNameTable nameTable) {
-			return new RecordLoader<CircuitSymbolData>(nameTable, this.Table, this.Table.Fields, rowId => this.Create(rowId));
+			return new RecordLoader<CircuitSymbolData>(nameTable, this.Table, rowId => this.Create(rowId));
 		}
 	}
 }

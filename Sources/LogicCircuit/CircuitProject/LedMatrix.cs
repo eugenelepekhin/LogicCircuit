@@ -134,7 +134,7 @@ namespace LogicCircuit {
 		}
 
 		public RecordLoader CreateRecordLoader(XmlNameTable nameTable) {
-			return new RecordLoader<LedMatrixData>(nameTable, this.Table, this.Table.Fields, rowId => this.Register(rowId));
+			return new RecordLoader<LedMatrixData>(nameTable, this.Table, rowId => this.Register(rowId));
 		}
 	}
 }

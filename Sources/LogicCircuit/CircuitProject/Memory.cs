@@ -230,7 +230,7 @@ namespace LogicCircuit {
 		}
 
 		public RecordLoader CreateRecordLoader(XmlNameTable nameTable) {
-			return new RecordLoader<MemoryData>(nameTable, this.Table, this.Table.Fields, rowId => this.Register(rowId));
+			return new RecordLoader<MemoryData>(nameTable, this.Table, rowId => this.Register(rowId));
 		}
 	}
 }
