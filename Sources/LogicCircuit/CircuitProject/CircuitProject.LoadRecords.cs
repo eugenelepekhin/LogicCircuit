@@ -6,7 +6,7 @@ using System;
 
 namespace LogicCircuit {
 	public abstract class RecordLoader {
-		public abstract void LoadOneRecord(XmlReader reader);
+		public abstract void LoadRecord(XmlReader reader);
 	}
 
 	public class RecordLoader<TRecord> : RecordLoader where TRecord:struct {
@@ -31,7 +31,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		public override void LoadOneRecord(XmlReader reader) {
+		public override void LoadRecord(XmlReader reader) {
 			Debug.Assert(reader.IsElement(reader.NamespaceURI, this.table.Name));
 
 			TRecord data = new TRecord();
@@ -104,7 +104,7 @@ namespace LogicCircuit {
 							RecordLoader loader;
 							if (loaders.TryGetValue(xmlReader.LocalName, out loader)) {
 								Debug.Assert(loader != null);
-								loader.LoadOneRecord(xmlReader);
+								loader.LoadRecord(xmlReader);
 								continue;
 							}
 						}
@@ -121,23 +121,23 @@ namespace LogicCircuit {
 		private void SaveRecords(XmlWriter xmlWriter) {
 			xmlWriter.WriteStartDocument();
 			xmlWriter.WriteStartElement(CircuitProject.PersistencePrefix, "CircuitProject", CircuitProject.PersistenceNamespace);
-			CircuitProject.SaveTableRecords(xmlWriter, this.ProjectSet.Table          );
-			CircuitProject.SaveTableRecords(xmlWriter, this.CollapsedCategorySet.Table);
-			CircuitProject.SaveTableRecords(xmlWriter, this.LogicalCircuitSet.Table   );
-			CircuitProject.SaveTableRecords(xmlWriter, this.PinSet.Table              );
-			CircuitProject.SaveTableRecords(xmlWriter, this.ConstantSet.Table         );
-			CircuitProject.SaveTableRecords(xmlWriter, this.CircuitButtonSet.Table    );
-			CircuitProject.SaveTableRecords(xmlWriter, this.MemorySet.Table           );
-			CircuitProject.SaveTableRecords(xmlWriter, this.LedMatrixSet.Table        );
-			CircuitProject.SaveTableRecords(xmlWriter, this.SplitterSet.Table         );
-			CircuitProject.SaveTableRecords(xmlWriter, this.CircuitSymbolSet.Table    );
-			CircuitProject.SaveTableRecords(xmlWriter, this.WireSet.Table             );
-			CircuitProject.SaveTableRecords(xmlWriter, this.TextNoteSet.Table         );
+			CircuitProject.SaveRecords(xmlWriter, this.ProjectSet.Table          );
+			CircuitProject.SaveRecords(xmlWriter, this.CollapsedCategorySet.Table);
+			CircuitProject.SaveRecords(xmlWriter, this.LogicalCircuitSet.Table   );
+			CircuitProject.SaveRecords(xmlWriter, this.PinSet.Table              );
+			CircuitProject.SaveRecords(xmlWriter, this.ConstantSet.Table         );
+			CircuitProject.SaveRecords(xmlWriter, this.CircuitButtonSet.Table    );
+			CircuitProject.SaveRecords(xmlWriter, this.MemorySet.Table           );
+			CircuitProject.SaveRecords(xmlWriter, this.LedMatrixSet.Table        );
+			CircuitProject.SaveRecords(xmlWriter, this.SplitterSet.Table         );
+			CircuitProject.SaveRecords(xmlWriter, this.CircuitSymbolSet.Table    );
+			CircuitProject.SaveRecords(xmlWriter, this.WireSet.Table             );
+			CircuitProject.SaveRecords(xmlWriter, this.TextNoteSet.Table         );
 			xmlWriter.WriteEndElement();
 		}
 
-		// Serializer of the table
-		public static void SaveTableRecords<TRecord>(XmlWriter writer, TableSnapshot<TRecord> table) where TRecord:struct {
+		// Saves the table
+		private static void SaveRecords<TRecord>(XmlWriter writer, TableSnapshot<TRecord> table) where TRecord:struct {
 			foreach(RowId rowId in table.Rows) {
 				TRecord data;
 				table.GetData(rowId, out data);
