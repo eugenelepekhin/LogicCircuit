@@ -22,19 +22,23 @@ namespace LogicCircuit {
 		}
 
 		public static CircuitProject Create(string file) {
-			XmlReader xmlReader = XmlHelper.CreateReader((file != null ?
-				(TextReader) new StreamReader(file) :
-				(TextReader) new StringReader(
-					string.Format(CultureInfo.InvariantCulture, Schema.Empty,
-						Guid.NewGuid(), //ProjectId
-						Resources.CircuitProjectName,
-						Guid.NewGuid(), //LogicalCircuitId
-						Resources.LogicalCircuitMainName,
-						Resources.LogicalCircuitMainNotation
+			try {
+				XmlReader xmlReader = XmlHelper.CreateReader((file != null ?
+					(TextReader) new StreamReader(file) :
+					(TextReader) new StringReader(
+						string.Format(CultureInfo.InvariantCulture, Schema.Empty,
+							Guid.NewGuid(), //ProjectId
+							Resources.CircuitProjectName,
+							Guid.NewGuid(), //LogicalCircuitId
+							Resources.LogicalCircuitMainName,
+							Resources.LogicalCircuitMainNotation
+						)
 					)
-				)
-			));
-			return CircuitProject.CreateAndClose(xmlReader);
+				));
+				return CircuitProject.CreateAndClose(xmlReader);
+			} catch(XmlException xmlException) {
+				throw new CircuitException(Cause.CorruptedFile, xmlException, Resources.ErrorFileCorrupted(file));
+			}
 		}
 
 		private static CircuitProject CreateAndClose(XmlReader xmlReader) {
@@ -127,7 +131,12 @@ namespace LogicCircuit {
 		}
 
 		public IEnumerable<Symbol> Paste(string text) {
-			CircuitProject paste = CircuitProject.CreateAndClose(XmlHelper.CreateReader(new StringReader(text)));
+			CircuitProject paste = null;
+			try {
+				paste = CircuitProject.CreateAndClose(XmlHelper.CreateReader(new StringReader(text)));
+			} catch(XmlException xmlException) {
+				throw new CircuitException(Cause.CorruptedFile, xmlException, Resources.ErrorClipboardCorrupted);
+			}
 
 			List<Symbol> result = new List<Symbol>();
 			this.InTransaction(() => {

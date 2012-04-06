@@ -2092,5 +2092,12 @@ namespace LogicCircuit {
  		public static string TitleCheckVersionPeriodically {
 			get { return ResourceManager.GetString("TitleCheckVersionPeriodically", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Data in clipboard is corrupted and cannot be pasted..
+		/// </summary>
+ 		public static string ErrorClipboardCorrupted {
+			get { return ResourceManager.GetString("ErrorClipboardCorrupted", Culture); }
+		}
 	}
 }
