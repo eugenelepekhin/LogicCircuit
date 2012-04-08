@@ -33,7 +33,7 @@ namespace LogicCircuit {
 			return this.Create(this.Table.Insert(ref data));
 		}
 
-		public RecordLoader CreateRecordLoader(XmlNameTable nameTable) {
+		public IRecordLoader CreateRecordLoader(XmlNameTable nameTable) {
 			return new RecordLoader<ProjectData>(nameTable, this.Table, rowId => {
 				if(this.Project != null) {
 					throw new CircuitException(Cause.CorruptedFile, Resources.ErrorProjectCount);

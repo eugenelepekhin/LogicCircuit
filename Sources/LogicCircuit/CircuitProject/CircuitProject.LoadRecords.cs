@@ -5,11 +5,11 @@ using LogicCircuit.DataPersistent;
 using System;
 
 namespace LogicCircuit {
-	public abstract class RecordLoader {
-		public abstract void LoadRecord(XmlReader reader);
+	public interface IRecordLoader {
+		void LoadRecord(XmlReader reader);
 	}
 
-	public class RecordLoader<TRecord> : RecordLoader where TRecord:struct {
+	public class RecordLoader<TRecord> : IRecordLoader where TRecord:struct {
 		private readonly TableSnapshot<TRecord> table;
 		private readonly Action<RowId> register;
 		private Dictionary<string, IFieldSerializer<TRecord>> serializers;
@@ -30,7 +30,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		public override void LoadRecord(XmlReader reader) {
+		public void LoadRecord(XmlReader reader) {
 			Debug.Assert(reader.IsElement(reader.NamespaceURI, this.table.Name));
 
 			TRecord data = new TRecord();
@@ -76,7 +76,7 @@ namespace LogicCircuit {
 			string ns = nameTable.Add(CircuitProject.PersistenceNamespace);
 			string rootName = nameTable.Add("CircuitProject");
 
-			Dictionary<string, RecordLoader> loaders = new Dictionary<string, RecordLoader>(16, XmlHelper.AtomComparer);
+			Dictionary<string, IRecordLoader> loaders = new Dictionary<string, IRecordLoader>(16, XmlHelper.AtomComparer);
 			loaders.Add(nameTable.Add(this.ProjectSet          .Table.Name), this.ProjectSet          .CreateRecordLoader(nameTable));
 			loaders.Add(nameTable.Add(this.CollapsedCategorySet.Table.Name), this.CollapsedCategorySet.CreateRecordLoader(nameTable));
 			loaders.Add(nameTable.Add(this.LogicalCircuitSet   .Table.Name), this.LogicalCircuitSet   .CreateRecordLoader(nameTable));
@@ -100,7 +100,7 @@ namespace LogicCircuit {
 					Debug.Assert(xmlReader.Depth == 1);
 					while (xmlReader.Depth == 1) {
 						if (xmlReader.IsElement(ns)) {
-							RecordLoader loader;
+							IRecordLoader loader;
 							if (loaders.TryGetValue(xmlReader.LocalName, out loader)) {
 								Debug.Assert(loader != null);
 								loader.LoadRecord(xmlReader);

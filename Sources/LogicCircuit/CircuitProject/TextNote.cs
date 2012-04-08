@@ -160,7 +160,7 @@ namespace LogicCircuit {
 			return this.Create(this.Table.Insert(ref data));
 		}
 
-		public RecordLoader CreateRecordLoader(XmlNameTable nameTable) {
+		public IRecordLoader CreateRecordLoader(XmlNameTable nameTable) {
 			return new RecordLoader<TextNoteData>(nameTable, this.Table, rowId => this.Create(rowId));
 		}
 	}

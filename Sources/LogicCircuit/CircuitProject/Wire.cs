@@ -121,7 +121,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		public RecordLoader CreateRecordLoader(XmlNameTable nameTable) {
+		public IRecordLoader CreateRecordLoader(XmlNameTable nameTable) {
 			return new RecordLoader<WireData>(nameTable, this.Table, rowId => this.Create(rowId));
 		}
 	}

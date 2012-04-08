@@ -109,7 +109,7 @@ namespace LogicCircuit {
 			return this.Register(this.Table.Insert(ref data));
 		}
 
-		public RecordLoader CreateRecordLoader(XmlNameTable nameTable) {
+		public IRecordLoader CreateRecordLoader(XmlNameTable nameTable) {
 			return new RecordLoader<SplitterData>(nameTable, this.Table, rowId => this.Register(rowId));
 		}
 	}
