@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A comment to ignore -->
+<lc:CircuitProject xmlns:lc="http://LogicCircuit.net/1.0.0.2/CircuitProject.xsd">
+	<!-- A comment to ignore -->
+	<lc:CircuitButton>
+		<lc:CircuitButtonId>38b6daa0-a162-43a0-9dc2-954ec9e60216</lc:CircuitButtonId>
+		<!-- A comment to ignore -->
+		<lc:Notation><!-- Hello, World! -->&lt;a&gt;<!-- Hello, World! --></lc:Notation>
+		<lc:Note>&lt;a&gt;b<!-- Comments inside should be ignored too -->&lt;/a&gt;</lc:Note>
+	</lc:CircuitButton>
+	<lc:CircuitSymbol>
+		<lc:CircuitSymbolId>356936c4-b2aa-4275-ac21-b3758a23ce66</lc:CircuitSymbolId>
+		<lc:CircuitId>00000000-0000-0000-0000-000000080100</lc:CircuitId>
+		<lc:LogicalCircuitId>45824670-14e2-43c2-b2c0-3d6cb1497130</lc:LogicalCircuitId>
+		<lc:X> 9 </lc:X>
+		<lc:Y> 8 </lc:Y>
+	</lc:CircuitSymbol>
+	<lc:Wire>
+		<lc:WireId>a9cf70c8-4624-4412-97ce-b074743f35d9</lc:WireId>
+		<lc:LogicalCircuitId>45824670-14e2-43c2-b2c0-3d6cb1497130</lc:LogicalCircuitId>
+		<lc:X1>5</lc:X1>
+		<lc:Y1>9</lc:Y1>
+		<lc:X2>9</lc:X2>
+		<lc:Y2>9</lc:Y2>
+	</lc:Wire>
+	<lc:CircuitSymbol>
+		<lc:LogicalCircuitId>45824670-14e2-43c2-b2c0-3d6cb1497130</lc:LogicalCircuitId>
+		<lc:Y>
+			<lc:SubElement>8</lc:SubElement>
+		</lc:Y>
+		<lc:CircuitId>38b6daa0-a162-43a0-9dc2-954ec9e60216</lc:CircuitId>
+		<lc:X>
+			<lc:hello>
+				<!-- Comments to ignore -->
+			</lc:hello>
+			3
+			<lc:world>
+				<!-- Comments to ignore -->
+			</lc:world>
+		</lc:X>
+		<lc:CircuitSymbolId>98b1b2bb-628d-4f33-a84e-a93a1219461a</lc:CircuitSymbolId>
+	</lc:CircuitSymbol>
+	<lc:LogicalCircuit>
+		<lc:LogicalCircuitId>45824670-14e2-43c2-b2c0-3d6cb1497130</lc:LogicalCircuitId>
+		<lc:Notation>Main</lc:Notation>
+	</lc:LogicalCircuit>
+	<lc:Project>
+		<!-- A comment to ignore -->
+		<lc:ProjectId>99521de3-9a75-4ab8-9f5a-19e78077c4af</lc:ProjectId>
+		<lc:LogicalCircuitId>45824670-14e2-43c2-b2c0-3d6cb1497130</lc:LogicalCircuitId>
+	</lc:Project>
+</lc:CircuitProject>
