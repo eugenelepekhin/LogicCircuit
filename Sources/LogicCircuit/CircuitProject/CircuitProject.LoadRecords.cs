@@ -59,7 +59,9 @@ namespace LogicCircuit {
 						reader.Skip();  // skip everything else
 					}
 				}
-				Debug.Assert(reader.IsEndElement(ns, this.table.Name));
+				#if DEBUG
+					Debug.Assert(reader.IsEndElement(ns, this.table.Name));
+				#endif
 				Debug.Assert(reader.Depth == fieldDepth - 1);
 			}
 
