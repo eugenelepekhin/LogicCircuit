@@ -15,7 +15,8 @@ namespace LogicCircuit {
 			IgnoreComments = true,
 			IgnoreProcessingInstructions = true,
 			IgnoreWhitespace = true,
-			DtdProcessing = DtdProcessing.Prohibit,       // we don't use DTD. Let's prohibit it for better security
+			DtdProcessing = DtdProcessing.Prohibit, // we don't use DTD. Let's prohibit it for better security
+			XmlResolver = null // no external resources are allowed
 		};
 
 		private static readonly XmlWriterSettings xmlWriterSettings = new XmlWriterSettings() {
