@@ -242,11 +242,11 @@ namespace LogicCircuit {
 		}
 
 		/// <summary>
-		/// By giving XML namespace finds the XSLT that transforms LogicCurcuit of given version to the next version
+		/// By giving XML namespace finds the XSLT that transforms CurcuitProject of given version to the next version
 		/// </summary>
 		/// <param name="ns">XML namespace that defines the project version</param>
 		/// <returns>
-		/// String.Empty -- when ns is for current version and not transformation is required
+		/// String.Empty -- when ns is for current version and no transformation is required
 		/// XSLT string  -- when ns is for know previous version
 		/// null         -- when ns is unknown
 		/// </returns>
