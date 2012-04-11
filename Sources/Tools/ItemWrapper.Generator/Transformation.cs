@@ -1,9 +1,11 @@
 ﻿using System;
+using System.CodeDom;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Globalization;
 
 namespace ItemWrapper.Generator {
 	public abstract class Transformation {
@@ -25,8 +27,11 @@ namespace ItemWrapper.Generator {
 		private StringBuilder generationEnvironmentField;
 
 		public string MakeString(string text) {
-			// TODO: escape text
-			return "\"" + text + "\"";
+			StringBuilder stringBuilder = new StringBuilder();
+			using(StringWriter writer = new StringWriter(stringBuilder)) {
+				CodeDomProvider.CreateProvider("CSharp").GenerateCodeFromExpression(new CodePrimitiveExpression(text), writer, new CodeGeneratorOptions());
+			}
+			return stringBuilder.ToString();
 		}
 
 		public string Camelize(string text) {
