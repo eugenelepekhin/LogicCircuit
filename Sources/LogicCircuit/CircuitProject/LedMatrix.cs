@@ -76,20 +76,21 @@ namespace LogicCircuit {
 			int columns = this.Columns;
 			int colors = this.Colors;
 			if(this.MatrixType == LedMatrixType.Individual) {
+				int bitWidth = columns * colors;
 				for(int i = 0; i < rows; i++) {
-					DevicePin pin = this.CircuitProject.DevicePinSet.Create(this, PinType.Input, columns * colors);
+					DevicePin pin = this.CircuitProject.DevicePinSet.Create(this, PinType.Input, bitWidth);
 					pin.Name = Resources.LedMatrixRowIndividual(i + 1);
 				}
 			} else { //this.MatrixType == LedMatrixType.Selector
 				Tracer.Assert(this.MatrixType == LedMatrixType.Selector);
-				for(int i = 0; i < rows; i++) {
-					DevicePin pin = this.CircuitProject.DevicePinSet.Create(this, PinType.Input, colors);
-					pin.Name = Resources.LedMatrixRowSelector(i + 1);
-				}
 				for(int i = 0; i < columns; i++) {
-					DevicePin pin = this.CircuitProject.DevicePinSet.Create(this, PinType.Input, 1);
+					DevicePin pin = this.CircuitProject.DevicePinSet.Create(this, PinType.Input, colors);
 					pin.Name = Resources.LedMatrixColumnSelector(i + 1);
-					pin.PinSide = PinSide.Bottom;
+					pin.PinSide = PinSide.Top;
+				}
+				for(int i = 0; i < rows; i++) {
+					DevicePin pin = this.CircuitProject.DevicePinSet.Create(this, PinType.Input, 1);
+					pin.Name = Resources.LedMatrixRowSelector(i + 1);
 				}
 			}
 		}
