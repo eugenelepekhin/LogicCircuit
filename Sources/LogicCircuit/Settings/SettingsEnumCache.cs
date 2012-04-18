@@ -33,5 +33,16 @@ namespace LogicCircuit {
 			}
 			this.cache = Enum.IsDefined(typeof(T), value) ? value : this.defaultValue;
 		}
+
+		public static T Parse(string text, T defaultValue) {
+			T value;
+			if(string.IsNullOrWhiteSpace(text) || !Enum.TryParse<T>(text, out value) || !Enum.IsDefined(typeof(T), value)) {
+				if(!Enum.IsDefined(typeof(T), defaultValue)) {
+					return (T)Enum.GetValues(typeof(T)).GetValue(0);
+				}
+				return defaultValue;
+			}
+			return value;
+		}
 	}
 }
