@@ -138,7 +138,8 @@ namespace LogicCircuit {
 				file = Path.Combine(dir, this.Editor.Project.Name + Mainframe.FileExtention);
 			}
 			SaveFileDialog dialog = new SaveFileDialog();
-			dialog.FileName = file;
+			dialog.InitialDirectory = Path.GetDirectoryName(Path.GetFullPath(file));
+			dialog.FileName = Path.GetFileName(file);
 			dialog.Filter = Mainframe.FileFilter;
 			dialog.DefaultExt = Mainframe.FileExtention;
 			bool? result = dialog.ShowDialog(this);
