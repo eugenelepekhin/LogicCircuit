@@ -22,6 +22,7 @@ namespace LogicCircuit {
 
 		private SettingsWindowLocationCache windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
+		private SettingsStringCache openFileFolder = new SettingsStringCache(Settings.User, "DialogROM.OpenFile.Folder", Mainframe.DefaultProjectFolder());
 
 		private Memory memory;
 		private byte[] data;
@@ -111,8 +112,10 @@ namespace LogicCircuit {
 		private void ButtonLoadClick(object sender, RoutedEventArgs e) {
 			try {
 				OpenFileDialog dialog = new OpenFileDialog();
+				dialog.InitialDirectory = this.openFileFolder.Value;
 				bool? result = dialog.ShowDialog(this);
 				if(result.HasValue && result.Value) {
+					this.openFileFolder.Value = Path.GetDirectoryName(dialog.FileName);
 					int addressBitWidth = this.AddressBitWidth;
 					int dataBitWidth = this.DataBitWidth;
 					byte[] buffer = new byte[Memory.BytesPerCellFor(dataBitWidth)];

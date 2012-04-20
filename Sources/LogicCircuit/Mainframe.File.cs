@@ -13,6 +13,13 @@ namespace LogicCircuit {
 		private const string FileExtention = ".CircuitProject";
 		private static readonly string FileFilter = LogicCircuit.Resources.FileFilter(Mainframe.FileExtention);
 
+		public static string DefaultProjectFolder() {
+			return Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+		}
+		public static string DefaultPictureFolder() {
+			return Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+		}
+
 		public static bool IsFilePathValid(string path) {
 			if(path != null && path.Length > 0) {
 				try {
@@ -92,6 +99,8 @@ namespace LogicCircuit {
 				string file = Settings.User.RecentFile();
 				if(Mainframe.IsFilePathValid(file)) {
 					dialog.InitialDirectory = Path.GetDirectoryName(Path.GetFullPath(file));
+				} else {
+					dialog.InitialDirectory = Mainframe.DefaultProjectFolder();
 				}
 				dialog.Filter = Mainframe.FileFilter;
 				dialog.DefaultExt = Mainframe.FileExtention;
@@ -133,7 +142,7 @@ namespace LogicCircuit {
 				if(Mainframe.IsFilePathValid(file)) {
 					dir = Path.GetDirectoryName(file);
 				} else {
-					dir = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+					dir = Mainframe.DefaultProjectFolder();
 				}
 				file = Path.Combine(dir, this.Editor.Project.Name + Mainframe.FileExtention);
 			}
@@ -159,7 +168,7 @@ namespace LogicCircuit {
 
 		private void Import() {
 			if(this.Editor != null && this.Editor.InEditMode) {
-				string dir = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+				string dir = Mainframe.DefaultProjectFolder();
 				string recent = Settings.User.RecentFile();
 				if(Mainframe.IsFilePathValid(recent)) {
 					dir = Path.GetDirectoryName(recent);

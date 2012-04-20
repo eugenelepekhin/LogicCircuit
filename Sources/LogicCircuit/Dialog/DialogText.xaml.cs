@@ -18,10 +18,7 @@ namespace LogicCircuit {
 
 		private SettingsWindowLocationCache windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
-		private SettingsStringCache openImageFolder = new SettingsStringCache(Settings.User,
-			"DialogText.OpenImage.Folder",
-			Environment.GetFolderPath(Environment.SpecialFolder.MyPictures)
-		);
+		private SettingsStringCache openImageFolder = new SettingsStringCache(Settings.User, "DialogText.OpenImage.Folder", Mainframe.DefaultPictureFolder());
 		
 		public string Document { get; set; }
 

@@ -52,9 +52,7 @@ namespace LogicCircuit {
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		private SettingsStringCache imageExportType = new SettingsStringCache(Settings.User, "ImageExport.Type", "Png");
-		private SettingsStringCache imageExportFolder = new SettingsStringCache(Settings.User, "ImageExport.Folder",
-			Environment.GetFolderPath(Environment.SpecialFolder.MyPictures)
-		);
+		private SettingsStringCache imageExportFolder = new SettingsStringCache(Settings.User, "ImageExport.Folder", Mainframe.DefaultPictureFolder());
 
 		private Editor editor;
 
@@ -87,7 +85,7 @@ namespace LogicCircuit {
 		private string DefaultFileName() {
 			string imagePath = this.imageExportFolder.Value;
 			if(!Mainframe.IsDirectoryPathValid(imagePath)) {
-				imagePath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+				imagePath = Mainframe.DefaultPictureFolder();
 			}
 			string fileName = string.Format(CultureInfo.InvariantCulture, "{0}.{1}.{2}",
 				this.editor.Project.Name,
@@ -147,7 +145,8 @@ namespace LogicCircuit {
 					file = this.DefaultFileName();
 				}
 				SaveFileDialog dialog = new SaveFileDialog();
-				dialog.FileName = file;
+				dialog.InitialDirectory = Path.GetDirectoryName(file);
+				dialog.FileName = Path.GetFileName(file);
 				dialog.Filter = LogicCircuit.Resources.ImageFileFilter;
 				dialog.DefaultExt = this.Encoder.Name;
 				bool? result = dialog.ShowDialog(this);
