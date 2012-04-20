@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace LogicCircuit {
 	internal class SettingsEnumCache<T> where T:struct {
@@ -36,13 +37,21 @@ namespace LogicCircuit {
 
 		public static T Parse(string text, T defaultValue) {
 			T value;
-			if(string.IsNullOrWhiteSpace(text) || !Enum.TryParse<T>(text, out value) || !Enum.IsDefined(typeof(T), value)) {
-				if(!Enum.IsDefined(typeof(T), defaultValue)) {
-					return (T)Enum.GetValues(typeof(T)).GetValue(0);
-				}
+			if(string.IsNullOrWhiteSpace(text) || !Enum.TryParse<T>(text, true, out value) || !IsValid(value)) {
 				return defaultValue;
 			}
 			return value;
+		}
+
+		private static bool IsValid(T value) {
+			string[] name = Enum.GetNames(typeof(T));
+			string text = value.ToString();
+			StringComparer comparer = StringComparer.OrdinalIgnoreCase;
+			if(!name.Contains(text, comparer)) {
+				string[] part = text.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+				return part.All(p => name.Contains(p, comparer));
+			}
+			return true;
 		}
 	}
 }
