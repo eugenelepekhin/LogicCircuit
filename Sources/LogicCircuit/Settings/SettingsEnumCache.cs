@@ -23,16 +23,8 @@ namespace LogicCircuit {
 		) {
 			this.settings = settings;
 			this.key = key;
-			if(!Enum.IsDefined(typeof(T), defaultValue)) {
-				defaultValue = (T)Enum.GetValues(typeof(T)).GetValue(0);
-			}
 			this.defaultValue = defaultValue;
-			string text = this.settings[this.key];
-			T value;
-			if(string.IsNullOrEmpty(text) || !Enum.TryParse<T>(text, out value)) {
-				value = defaultValue;
-			}
-			this.cache = Enum.IsDefined(typeof(T), value) ? value : this.defaultValue;
+			this.cache = Parse(this.settings[this.key], this.defaultValue);
 		}
 
 		public static T Parse(string text, T defaultValue) {
