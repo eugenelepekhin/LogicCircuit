@@ -127,7 +127,7 @@ namespace LogicCircuit {
 		private void InsertImage() {
 			try {
 				OpenFileDialog dialog = new OpenFileDialog();
-				dialog.InitialDirectory = this.openImageFolder.Value;
+				dialog.InitialDirectory = Mainframe.IsDirectoryPathValid(this.openImageFolder.Value) ? this.openImageFolder.Value : Mainframe.DefaultPictureFolder();
 				dialog.Filter = LogicCircuit.Resources.ImageFilter("*.bmp;*.dib;*.gif;*.jpg;*.jpeg;*.jpe;*.png;*.tiff;*.tif");
 				dialog.FilterIndex = 0;
 				bool? result = dialog.ShowDialog(this);

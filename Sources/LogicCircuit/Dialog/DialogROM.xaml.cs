@@ -112,7 +112,7 @@ namespace LogicCircuit {
 		private void ButtonLoadClick(object sender, RoutedEventArgs e) {
 			try {
 				OpenFileDialog dialog = new OpenFileDialog();
-				dialog.InitialDirectory = this.openFileFolder.Value;
+				dialog.InitialDirectory = Mainframe.IsDirectoryPathValid(this.openFileFolder.Value) ? this.openFileFolder.Value : Mainframe.DefaultProjectFolder();
 				bool? result = dialog.ShowDialog(this);
 				if(result.HasValue && result.Value) {
 					this.openFileFolder.Value = Path.GetDirectoryName(dialog.FileName);

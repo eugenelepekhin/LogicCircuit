@@ -177,7 +177,7 @@ namespace LogicCircuit {
 				OpenFileDialog dialog = new OpenFileDialog();
 				dialog.Filter = Mainframe.FileFilter;
 				dialog.DefaultExt = Mainframe.FileExtention;
-				dialog.InitialDirectory = location.Value;
+				dialog.InitialDirectory = Mainframe.IsDirectoryPathValid(location.Value) ? location.Value : Mainframe.DefaultProjectFolder();
 				bool? result = dialog.ShowDialog(this);
 				if(result.HasValue && result.Value) {
 					string file = dialog.FileName;
