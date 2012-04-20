@@ -68,7 +68,10 @@ namespace LogicCircuit {
 
 		public static bool IsValidText(string text) {
 			FlowDocument doc = TextNote.Load(text);
-			return doc != null && 0 < (new TextRange(doc.ContentStart, doc.ContentEnd).Text.Trim().Length);
+			return doc != null && (
+				!string.IsNullOrWhiteSpace(new TextRange(doc.ContentStart, doc.ContentEnd).Text) ||
+				!text.StartsWith("<FlowDocument", StringComparison.OrdinalIgnoreCase)
+			);
 		}
 
 		public bool IsValid { get { return TextNote.IsValidText(this.Note); } }
