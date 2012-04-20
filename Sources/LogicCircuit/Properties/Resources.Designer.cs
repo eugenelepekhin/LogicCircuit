@@ -2099,5 +2099,12 @@ namespace LogicCircuit {
  		public static string ErrorClipboardCorrupted {
 			get { return ResourceManager.GetString("ErrorClipboardCorrupted", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Shaped.
+		/// </summary>
+ 		public static string DefaultGateShape {
+			get { return ResourceManager.GetString("DefaultGateShape", Culture); }
+		}
 	}
 }

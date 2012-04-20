@@ -120,7 +120,9 @@ namespace LogicCircuit {
 			this.fileWatcher.EnableRaisingEvents = true;
 			this.maxRecentFileCount = new SettingsIntegerCache(this, "Settings.MaxRecentFileCount", 1, 24, 4);
 			this.loadLastFileOnStartup = new SettingsBoolCache(this, "Settings.LoadLastFileOnStartup", true);
-			this.gateShape = new SettingsEnumCache<GateShape>(this, "Settings.GateShape", GateShape.Rectangular);
+			this.gateShape = new SettingsEnumCache<GateShape>(this, "Settings.GateShape",
+				SettingsEnumCache<GateShape>.Parse(Resources.DefaultGateShape, GateShape.Rectangular)
+			);
 			this.TruncateRecentFile();
 		}
 

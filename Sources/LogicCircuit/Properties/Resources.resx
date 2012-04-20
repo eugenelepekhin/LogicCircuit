@@ -1048,4 +1048,8 @@ Do you want to remove the reference to it from the Recent Files list?</value>
   <data name="ErrorClipboardCorrupted" xml:space="preserve">
     <value>Data in clipboard is corrupted and cannot be pasted.</value>
   </data>
+  <data name="DefaultGateShape" xml:space="preserve">
+    <value>Shaped</value>
+    <comment>!(Rectangular, Shaped) - chose defalut gate shape for your culture.</comment>
+  </data>
 </root>
