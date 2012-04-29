@@ -13,7 +13,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("LogicCircuit.org")]
 [assembly: AssemblyProduct("LogicCircuit")]
-[assembly: AssemblyCopyright("Copyright © LogicCircuit.org 2009-2011")]
+[assembly: AssemblyCopyright("Copyright © LogicCircuit.org 2009-2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
