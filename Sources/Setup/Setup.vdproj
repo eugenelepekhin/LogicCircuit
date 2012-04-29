@@ -235,15 +235,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:LogicCircuit"
-        "ProductCode" = "8:{151B0CBF-70C1-4581-BC72-83389D8D1EAD}"
-        "PackageCode" = "8:{A3C63819-F011-40B9-BBCA-754D0C663C32}"
+        "ProductCode" = "8:{0DADC873-64EA-4D82-A47B-98ABF5F044E0}"
+        "PackageCode" = "8:{BB1B7A73-0C92-4DA3-8C27-D274B032513A}"
         "UpgradeCode" = "8:{D2D9AB38-631B-471D-B6C1-2C4F4391FE5E}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:2.11.0813"
+        "ProductVersion" = "8:2.12.0501"
         "Manufacturer" = "8:LogicCircuit"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://www.LogicCircuit.org/"
@@ -771,7 +771,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_846BF9F02B0F46B3ACE8B59AA15A2D8D"
             {
-            "SourcePath" = "8:..\\LogicCircuit\\obj\\Debug\\LogicCircuit.exe"
+            "SourcePath" = "8:..\\LogicCircuit\\obj\\Release\\LogicCircuit.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_01EF9547D3BE4763A026F7D0DA5A7942"
