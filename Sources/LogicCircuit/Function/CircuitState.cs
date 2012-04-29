@@ -22,7 +22,7 @@ namespace LogicCircuit {
 		public IEnumerable<CircuitFunction> Functions { get { return this.functions; } }
 
 		private HashSet<CircuitFunction> updated = new HashSet<CircuitFunction>();
-		private List<FunctionClock> clockList = new List<FunctionClock>();
+		private List<CircuitFunction> clockList = new List<CircuitFunction>();
 		private List<FunctionProbe> probeList = new List<FunctionProbe>();
 
 		public Random Random { get; private set; }
@@ -54,6 +54,9 @@ namespace LogicCircuit {
 				}
 			}
 			this.functions.Add(function);
+			if(function is IFunctionClock) {
+				this.clockList.Add(function);
+			}
 			int count = 0;
 			foreach(int parameter in function.Parameter) {
 				this.dependant[parameter].Add(function);
@@ -61,10 +64,6 @@ namespace LogicCircuit {
 			}
 			if(count <= 0) {
 				this.dirty.Add(function);
-				FunctionClock clock = function as FunctionClock;
-				if(clock != null) {
-					this.clockList.Add(clock);
-				}
 			} else {
 				FunctionProbe probe = function as FunctionProbe;
 				if(probe != null) {
@@ -114,9 +113,10 @@ namespace LogicCircuit {
 				}
 			}
 			if(flipClock) {
-				foreach(FunctionClock c in this.clockList) {
-					c.Flip();
-					this.dirty.Add(c);
+				foreach(CircuitFunction c in this.clockList) {
+					if(((IFunctionClock)c).Flip()) {
+						this.dirty.Add(c);
+					}
 				}
 			}
 			int maxRetry = 3;

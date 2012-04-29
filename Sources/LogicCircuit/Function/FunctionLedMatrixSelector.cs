@@ -1,11 +1,14 @@
 ﻿using System;
 
 namespace LogicCircuit {
-	public class FunctionLedMatrixSelector : FunctionLedMatrix {
+	public class FunctionLedMatrixSelector : FunctionLedMatrix, IFunctionClock {
 		private readonly State[] row;
 		private readonly int[] column;
 		private readonly bool[] columnChanged;
+		private readonly int[] cell;
+		private readonly int[] cellFlip;
 		private readonly int rowParameter;
+		private int filp;
 
 		/// <summary>
 		/// Creates function. Assumes parameter layout: first goes columns states starting from column 0, bit 0 to bit 2. After all columns goes rows they are one bit wide.
@@ -19,7 +22,15 @@ namespace LogicCircuit {
 			int columns = matrix.Columns;
 			this.column = new int[columns];
 			this.columnChanged = new bool[columns];
+			this.cell = new int[this.column.Length * this.row.Length];
+			this.cellFlip = new int[this.column.Length * this.row.Length];
 			this.rowParameter = columns * this.BitPerLed;
+		}
+
+		public bool Flip() {
+			this.filp++;
+			this.Invalid = true;
+			return false;
 		}
 
 		public override void Redraw() {
@@ -43,20 +54,42 @@ namespace LogicCircuit {
 					if(rowState == State.On1) {
 						// set all the columns values
 						for(int j = 0; j < this.column.Length; j++) {
-							this.Fill(i * this.column.Length + j, this.column[j]);
+							int value = this.column[j];
+							int index = i * this.column.Length + j;
+							if(value != 0) {
+								this.Fill(index, value);
+							} else {
+								this.cellFlip[index] = this.filp;
+							}
+							this.cell[index] = value;
 						}
 					} else { // rowState == State.On0 or Off that is same as 0 here.
 						for(int j = 0; j < this.column.Length; j++) {
-							this.Fill(i * this.column.Length + j, 0);
+							int index = i * this.column.Length + j;
+							this.cell[index] = 0;
+							this.cellFlip[index] = this.filp;
 						}
 					}
 				} else if(rowState == State.On1) {
 					// row state was not changed so update all the columns that was changed in this row
 					for(int j = 0; j < this.column.Length; j++) {
 						if(this.columnChanged[j]) {
-							this.Fill(i * this.column.Length + j, this.column[j]);
+							int value = this.column[j];
+							int index = i * this.column.Length + j;
+							if(value != 0) {
+								this.Fill(index, value);
+							} else {
+								this.cellFlip[index] = this.filp;
+							}
+							this.cell[index] = value;
 						}
 					}
+				}
+			}
+			int toOff = this.filp - this.row.Length;
+			for(int i = 0; i < this.cellFlip.Length; i++) {
+				if(this.cell[i] == 0 && this.cellFlip[i] == toOff) {
+					this.Fill(i, 0);
 				}
 			}
 		}

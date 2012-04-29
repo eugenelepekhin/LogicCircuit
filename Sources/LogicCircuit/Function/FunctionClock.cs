@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 
 namespace LogicCircuit {
-	public class FunctionClock : CircuitFunction {
+	public class FunctionClock : CircuitFunction, IFunctionClock {
 		private bool state;
 		public FunctionClock(CircuitState circuitState, int result) : base(circuitState, null, new int[] { result }) {
 			this.state = false;
 		}
-		public void Flip() {
+		public bool Flip() {
 			this.state = !this.state;
+			return true;
 		}
 		public override bool Evaluate() {
 			return this.SetResult(CircuitFunction.FromBool(this.state));
