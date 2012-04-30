@@ -62,7 +62,13 @@ namespace LogicCircuit {
 		}
 
 		private static DateTime ReleaseDate(Version version) {
-			return new DateTime(version.Minor, version.Build, version.Revision);
+			int year = version.Minor;
+			int month = version.Build;
+			int day = version.Revision;
+			if(year < 2000) {
+				year += 2000;
+			}
+			return new DateTime(year, month, day);
 		}
 
 		public static void CheckVersion(Dispatcher dispatcher) {
