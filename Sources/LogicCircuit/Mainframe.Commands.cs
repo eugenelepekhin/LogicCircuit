@@ -575,6 +575,26 @@ namespace LogicCircuit {
 			}
 		}
 
+		private void CircuitTruthTableExecuted(object target, ExecutedRoutedEventArgs e) {
+			try {
+				if(this.Editor != null) {
+					this.ShowDialog(new DialogTruthTable(this.Editor.Project.LogicalCircuit));
+				}
+			} catch(Exception exception) {
+				Tracer.Report("Mainframe.CircuitTruthTableExecuted", exception);
+				this.ReportException(exception);
+			}
+		}
+
+		private void CircuitTruthTableCanExecute(object target, CanExecuteRoutedEventArgs e) {
+			try {
+				e.CanExecute = (this.Editor != null);
+			} catch(Exception exception) {
+				Tracer.Report("Mainframe.CircuitTruthTableCanExecute", exception);
+				this.ReportException(exception);
+			}
+		}
+
 		private void ToolsReportCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
 				if(this.Editor != null) {

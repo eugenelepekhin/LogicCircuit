@@ -121,6 +121,9 @@
     <Compile Include="Dialog\DialogText.xaml.cs">
       <DependentUpon>DialogText.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialog\DialogTruthTable.xaml.cs">
+      <DependentUpon>DialogTruthTable.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialog\DialogUsage.xaml.cs">
       <DependentUpon>DialogUsage.xaml</DependentUpon>
     </Compile>
@@ -360,6 +363,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Dialog\DialogText.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialog\DialogTruthTable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

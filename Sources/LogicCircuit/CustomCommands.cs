@@ -37,6 +37,7 @@ namespace LogicCircuit {
 		public static readonly RoutedUICommand CircuitDelete = Create("CommandCircuitDelete");
 		public static readonly RoutedUICommand CircuitUsage = Create("CommandCircuitUsage");
 		public static readonly RoutedUICommand CircuitPower = Create("CommandCircuitPower", new KeyGesture(Key.W, ModifierKeys.Control));
+		public static readonly RoutedUICommand CircuitTruthTable = Create("CommandTruthTable");
 
 		public static readonly RoutedUICommand ToolsReport = Create("CommandToolsReport");
 		public static readonly RoutedUICommand ToolsOscilloscope = Create("CommandToolsOscilloscope");

@@ -1052,4 +1052,7 @@ Do you want to remove the reference to it from the Recent Files list?</value>
     <value>Shaped</value>
     <comment>!(Rectangular, Shaped) - chose default gate shape for your culture.</comment>
   </data>
+  <data name="CommandTruthTable" xml:space="preserve">
+    <value>Truth Table</value>
+  </data>
 </root>

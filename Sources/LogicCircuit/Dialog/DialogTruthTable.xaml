@@ -1,0 +1,39 @@
+﻿<Window x:Class="LogicCircuit.DialogTruthTable"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:lc="clr-namespace:LogicCircuit"
+	WindowStartupLocation="CenterOwner"
+	Title="{Binding Source={x:Static lc:Resources.CommandTruthTable}, Mode=OneTime}"
+	Style="{DynamicResource DialogWindow}"
+>
+	<!--FocusManager.FocusedElement="{Binding ElementName=name}"-->
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+		<ContentControl Grid.Row="0" Margin="3">
+			<ContentControl.Resources>
+				<DataTemplate x:Key="NoPins">
+					<TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5"
+						Text="There is no Input or Output Pins on this circuit. Please add them in order to build truth table."
+					/>
+				</DataTemplate>
+				<DataTemplate x:Key="TruthTable">
+					<TextBlock Text="Truth Table"/>
+				</DataTemplate>
+				<Style TargetType="ContentControl">
+					<Setter Property="ContentTemplate" Value="{StaticResource TruthTable}"/>
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding Path=HasInputsAndOutputs}" Value="False">
+							<Setter Property="ContentTemplate" Value="{StaticResource NoPins}"/>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</ContentControl.Resources>
+		</ContentControl>
+
+		<Button Grid.Row="1" Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" IsCancel="True" HorizontalAlignment="Right"/>
+	</Grid>
+</Window>

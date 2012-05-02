@@ -114,6 +114,7 @@
 		<CommandBinding Command="{x:Static lc:CustomCommands.CircuitDelete}" Executed="CircuitDeleteCommandExecuted" CanExecute="CircuitDeleteCommandCanExecute"/>
 		<CommandBinding Command="{x:Static lc:CustomCommands.CircuitUsage}" Executed="CircuitUsageCommandExecuted" CanExecute="CircuitUsageCommandCanExecute"/>
 		<CommandBinding Command="{x:Static lc:CustomCommands.CircuitPower}" Executed="CircuitPowerCommandExecuted" CanExecute="CircuitPowerCommandCanExecute"/>
+		<CommandBinding Command="{x:Static lc:CustomCommands.CircuitTruthTable}" Executed="CircuitTruthTableExecuted" CanExecute="CircuitTruthTableCanExecute"/>
 
 		<CommandBinding Command="{x:Static lc:CustomCommands.ToolsReport}" Executed="ToolsReportCommandExecuted"/>
 		<CommandBinding Command="{x:Static lc:CustomCommands.ToolsOscilloscope}" Executed="ToolsOscilloscopeCommandExecuted" CanExecute="ToolsOscilloscopeCommandCanExecute"/>
@@ -191,8 +192,9 @@
 				<MenuItem Command="lc:CustomCommands.CircuitDelete"/>
 				<MenuItem Command="lc:CustomCommands.CircuitUsage"/>
 				<Separator />
+				<MenuItem Command="lc:CustomCommands.CircuitTruthTable"/>
 				<MenuItem Command="lc:CustomCommands.CircuitPower"/>
-            </MenuItem>
+			</MenuItem>
             <MenuItem Header="{x:Static lc:Resources.MenuHeaderTools}">
 				<MenuItem Command="lc:CustomCommands.ToolsReport"/>
 				<MenuItem Command="lc:CustomCommands.ToolsOscilloscope"/>

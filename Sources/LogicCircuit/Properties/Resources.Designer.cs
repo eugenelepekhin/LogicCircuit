@@ -2106,5 +2106,12 @@ namespace LogicCircuit {
  		public static string DefaultGateShape {
 			get { return ResourceManager.GetString("DefaultGateShape", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Truth Table.
+		/// </summary>
+ 		public static string CommandTruthTable {
+			get { return ResourceManager.GetString("CommandTruthTable", Culture); }
+		}
 	}
 }
