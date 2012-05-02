@@ -2113,5 +2113,12 @@ namespace LogicCircuit {
  		public static string CommandTruthTable {
 			get { return ResourceManager.GetString("CommandTruthTable", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to There is no Input or Output Pins on this circuit. The truth tables are built by sending all the permutations of data to Input Pins and reading the results from Output Pins..
+		/// </summary>
+ 		public static string MessageInputOutputPinsMissing {
+			get { return ResourceManager.GetString("MessageInputOutputPinsMissing", Culture); }
+		}
 	}
 }

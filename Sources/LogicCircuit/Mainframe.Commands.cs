@@ -578,7 +578,11 @@ namespace LogicCircuit {
 		private void CircuitTruthTableExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
 				if(this.Editor != null) {
-					this.ShowDialog(new DialogTruthTable(this.Editor.Project.LogicalCircuit));
+					if(CircuitTestSocket.IsTestable(this.Editor.Project.LogicalCircuit)) {
+						this.ShowDialog(new DialogTruthTable(this.Editor.Project.LogicalCircuit));
+					} else {
+						this.ErrorMessage(LogicCircuit.Resources.MessageInputOutputPinsMissing);
+					}
 				}
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.CircuitTruthTableExecuted", exception);

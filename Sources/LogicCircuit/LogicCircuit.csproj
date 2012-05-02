@@ -29,6 +29,7 @@
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -63,6 +64,7 @@
     <Compile Include="CircuitProject\Wrappers\CollapsedCategory.cs" />
     <Compile Include="CircuitProject\Wrappers\LedMatrix.cs" />
     <Compile Include="CircuitProject\Wrappers\TextNote.cs" />
+    <Compile Include="CircuitTestSocket.cs" />
     <Compile Include="ColorMethods.cs" />
     <Compile Include="Conductor.cs" />
     <Compile Include="ConductorMap.cs" />

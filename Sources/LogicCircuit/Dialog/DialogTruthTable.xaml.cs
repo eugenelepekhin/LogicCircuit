@@ -15,16 +15,10 @@ namespace LogicCircuit {
 		public LogicalCircuit LogicalCircuit { get; private set; }
 
 		public DialogTruthTable(LogicalCircuit logicalCircuit) {
+			Tracer.Assert(CircuitTestSocket.IsTestable(logicalCircuit));
 			this.LogicalCircuit  = logicalCircuit;
 			this.DataContext = this;
 			this.InitializeComponent();
-		}
-
-		public bool HasInputsAndOutputs {
-			get {
-				IEnumerable<Pin> pins = this.LogicalCircuit.CircuitProject.PinSet.SelectByCircuit(this.LogicalCircuit);
-				return pins.Any(p => p.PinType == PinType.Input) && pins.Any(p => p.PinType == PinType.Output);
-			}
 		}
 	}
 }
