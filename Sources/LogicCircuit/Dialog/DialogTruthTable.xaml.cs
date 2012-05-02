@@ -12,11 +12,10 @@ namespace LogicCircuit {
 		private SettingsWindowLocationCache windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 
-		public LogicalCircuit LogicalCircuit { get; private set; }
+		public CircuitTestSocket TestSocket { get; private set; }
 
 		public DialogTruthTable(LogicalCircuit logicalCircuit) {
-			Tracer.Assert(CircuitTestSocket.IsTestable(logicalCircuit));
-			this.LogicalCircuit  = logicalCircuit;
+			this.TestSocket  = new CircuitTestSocket(logicalCircuit);
 			this.DataContext = this;
 			this.InitializeComponent();
 		}
