@@ -581,7 +581,7 @@ namespace LogicCircuit {
 					if(CircuitTestSocket.IsTestable(this.Editor.Project.LogicalCircuit)) {
 						this.ShowDialog(new DialogTruthTable(this.Editor.Project.LogicalCircuit));
 					} else {
-						this.ErrorMessage(LogicCircuit.Resources.MessageInputOutputPinsMissing);
+						this.InformationMessage(LogicCircuit.Resources.MessageInputOutputPinsMissing);
 					}
 				}
 			} catch(Exception exception) {

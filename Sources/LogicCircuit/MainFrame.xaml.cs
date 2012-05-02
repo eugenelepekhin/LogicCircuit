@@ -153,19 +153,23 @@ namespace LogicCircuit {
 			this.NotifyPropertyChanged(this.PropertyChanged, this, propertyName);
 		}
 
-		private void ShowErrorMessage(string message, string details) {
+		private void ShowMessage(string message, string details, MessageBoxImage messageBoxImage) {
 			if(!this.Dispatcher.CheckAccess()) {
 				this.Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle,
-					new Action<string, string>(this.ShowErrorMessage), message, details
+					new Action<string, string, MessageBoxImage>(this.ShowMessage), message, details, messageBoxImage
 				);
 			} else {
 				DialogMessage.Show(this,
-					LogicCircuit.Resources.MainFrameCaption(null), message, details, MessageBoxImage.Error, MessageBoxButton.OK
+					LogicCircuit.Resources.MainFrameCaption(null), message, details, messageBoxImage, MessageBoxButton.OK
 				);
-				if(this.Editor != null) {
+				if(this.Editor != null && this.Editor.Power && messageBoxImage == MessageBoxImage.Error) {
 					this.Editor.Power = false;
 				}
 			}
+		}
+
+		private void ShowErrorMessage(string message, string details) {
+			this.ShowMessage(message, details, MessageBoxImage.Error);
 		}
 
 		public void ErrorMessage(string message, Exception exception) {
@@ -174,6 +178,10 @@ namespace LogicCircuit {
 
 		public void ErrorMessage(string message) {
 			this.ShowErrorMessage(message, null);
+		}
+
+		public void InformationMessage(string message) {
+			this.ShowMessage(message, null, MessageBoxImage.Information);
 		}
 
 		public void ReportException(Exception exception) {
