@@ -37,11 +37,11 @@ namespace LogicCircuit {
 			return pins.Any(p => p.PinType == PinType.Input) && pins.Any(p => p.PinType == PinType.Output);
 		}
 
-		public void BuildTruthTable() {
-			int inputCount = this.inputs.Count;
-			int outputCount = this.outputs.Count;
+		//public void BuildTruthTable() {
+			//int inputCount = this.inputs.Count;
+			//int outputCount = this.outputs.Count;
 
-		}
+		//}
 
 		private static LogicalCircuit Copy(LogicalCircuit circuit) {
 			LogicalCircuit other = null;
