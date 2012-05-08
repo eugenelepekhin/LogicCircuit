@@ -115,6 +115,8 @@ namespace LogicCircuit {
 		}
 
 		public static bool CanPaste(string text) {
+			// To reduce number of exceptions from XML reader lets check there if some familiar text is in the string.
+			// Lets not use namespace as it will prevent pasting of old versions of the XML.
 			if (!string.IsNullOrEmpty(text) && text.Contains("<lc:CircuitProject")) {
 				try {
 					using (XmlReader xmlReader = XmlHelper.CreateReader(new StringReader(text))) {
