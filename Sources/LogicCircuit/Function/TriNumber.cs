@@ -19,7 +19,7 @@ namespace LogicCircuit {
 		}
 
 		public TriNumber(int bitWidth, int value) {
-			Tracer.Assert(0 < bitWidth && bitWidth <= 32 && bitWidth < BasePin.MaxBitWidth);
+			Tracer.Assert(0 < bitWidth && bitWidth <= 32 && bitWidth <= BasePin.MaxBitWidth);
 			this.BitWidth = bitWidth;
 			long pack = 0;
 			for(int i = 0; i < bitWidth; i++) {
@@ -29,7 +29,7 @@ namespace LogicCircuit {
 		}
 
 		private TriNumber(int bitWidth, long pack) {
-			Tracer.Assert(0 < bitWidth && bitWidth <= 32 && bitWidth < BasePin.MaxBitWidth);
+			Tracer.Assert(0 < bitWidth && bitWidth <= 32 && bitWidth <= BasePin.MaxBitWidth);
 			this.BitWidth = bitWidth;
 			this.Data = pack;
 		}

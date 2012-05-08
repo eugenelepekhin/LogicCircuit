@@ -13,7 +13,7 @@
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 
-		<TextBlock Grid.Row="0" Text="{Binding Path=TestSocket.LogicalCircuit.Name}"/>
+		<ListView Grid.Row="0" View="{Binding Path=Columns}" ItemsSource="{Binding Path=TruthTable}" Margin="3" VirtualizingStackPanel.IsVirtualizing="True"/>
 
 		<Button Grid.Row="1" Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" IsCancel="True" HorizontalAlignment="Right"/>
 	</Grid>

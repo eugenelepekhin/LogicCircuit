@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Diagnostics.CodeAnalysis;
 
 namespace LogicCircuit {
-	public class CircuitTestSocket : INotifyPropertyChanged {
-
-		public event PropertyChangedEventHandler PropertyChanged;
-
+	public class CircuitTestSocket {
 		public LogicalCircuit LogicalCircuit { get; private set; }
 		private readonly List<InputPinSocket> inputs = new List<InputPinSocket>();
 		private readonly List<OutputPinSocket> outputs = new List<OutputPinSocket>();
 		private CircuitMap CircuitMap { get; set; }
 		private CircuitState CircuitState { get; set; }
+
+		public IEnumerable<InputPinSocket> Inputs { get { return this.inputs; } }
+		public IEnumerable<OutputPinSocket> Outputs { get { return this.outputs; } }
 
 		public CircuitTestSocket(LogicalCircuit circuit) {
 			Tracer.Assert(CircuitTestSocket.IsTestable(circuit));
@@ -37,11 +38,32 @@ namespace LogicCircuit {
 			return pins.Any(p => p.PinType == PinType.Input) && pins.Any(p => p.PinType == PinType.Output);
 		}
 
-		//public void BuildTruthTable() {
-			//int inputCount = this.inputs.Count;
-			//int outputCount = this.outputs.Count;
-
-		//}
+		public IEnumerable<TruthState> BuildTruthTable() {
+			int inputCount = this.inputs.Count;
+			int outputCount = this.outputs.Count;
+			List<TruthState> result = new List<TruthState>();
+			for(;;) {
+				if(!this.CircuitState.Evaluate(true)) {
+					return null;
+				}
+				TruthState state = new TruthState(inputCount, outputCount);
+				for(int i = 0; i < inputCount; i++) {
+					state.Input[i] = new TriNumber(this.inputs[i].Function.BitWidth, this.inputs[i].Function.Value);
+				}
+				for(int i = 0; i < outputCount; i++) {
+					state.Output[i] = new TriNumber(this.outputs[i].Function);
+				}
+				result.Add(state);
+				for(int i = inputCount - 1; 0 <= i; i--) {
+					this.inputs[i].Function.Value++;
+					if(this.inputs[i].Function.Value != 0) {
+						break;
+					} else if(i == 0) {
+						return result;
+					}
+				}
+			}
+		}
 
 		private static LogicalCircuit Copy(LogicalCircuit circuit) {
 			LogicalCircuit other = null;
@@ -67,13 +89,6 @@ namespace LogicCircuit {
 					}
 				}
 			});
-		}
-
-		private void NotifyPropertyChanged(string propertyName) {
-			PropertyChangedEventHandler handler = this.PropertyChanged;
-			if(handler != null) {
-				handler(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 
@@ -115,13 +130,17 @@ namespace LogicCircuit {
 		}
 	}
 
+	[SuppressMessage("Microsoft.Performance", "CA1815:OverrideEqualsAndOperatorEqualsOnValueTypes")]
 	public struct TruthState {
-		public readonly int[] Input;
-		public readonly int[] Output;
+		private readonly TriNumber[] input;
+		private readonly TriNumber[] output;
+
+		public TriNumber[] Input { get { return this.input; } }
+		public TriNumber[] Output { get { return this.output; } }
 
 		public TruthState(int inputCount, int outputCount) {
-			this.Input = new int[inputCount];
-			this.Output = new int[outputCount];
+			this.input = new TriNumber[inputCount];
+			this.output = new TriNumber[outputCount];
 		}
 	}
 }
