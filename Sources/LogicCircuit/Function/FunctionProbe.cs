@@ -83,7 +83,7 @@ namespace LogicCircuit {
 		}
 
 		public void Redraw() {
-			((TextBlock)this.CircuitSymbol.ProbeView).Text = this.ToHex();
+			((TextBlock)this.CircuitSymbol.ProbeView).Text = new TriNumber(this).ToHexString();
 		}
 
 		private class History<T> {

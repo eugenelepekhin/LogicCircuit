@@ -1077,7 +1077,7 @@ namespace LogicCircuit {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to 0x{0:X}.
+		/// Looks up a localized string similar to {0:X}.
 		/// </summary>
  		public static string ProbeHistoryHex(int value) {
 			return string.Format(Culture, ResourceManager.GetString("ProbeHistoryHex", Culture), value);

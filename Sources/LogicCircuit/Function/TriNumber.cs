@@ -9,6 +9,7 @@ namespace LogicCircuit {
 		private readonly long Data;
 
 		public TriNumber(Probe probe) {
+			Tracer.Assert(probe.BitWidth <= 32);
 			this.BitWidth = probe.BitWidth;
 			long pack = 0;
 			for(int i = 0; i < this.BitWidth; i++) {
@@ -18,7 +19,7 @@ namespace LogicCircuit {
 		}
 
 		public TriNumber(int bitWidth, int value) {
-			Tracer.Assert(0 < bitWidth && bitWidth <= 32);
+			Tracer.Assert(0 < bitWidth && bitWidth <= 32 && bitWidth < BasePin.MaxBitWidth);
 			this.BitWidth = bitWidth;
 			long pack = 0;
 			for(int i = 0; i < bitWidth; i++) {
@@ -28,7 +29,7 @@ namespace LogicCircuit {
 		}
 
 		private TriNumber(int bitWidth, long pack) {
-			Tracer.Assert(0 < bitWidth && bitWidth <= 32);
+			Tracer.Assert(0 < bitWidth && bitWidth <= 32 && bitWidth < BasePin.MaxBitWidth);
 			this.BitWidth = bitWidth;
 			this.Data = pack;
 		}
@@ -51,6 +52,24 @@ namespace LogicCircuit {
 
 		public override int GetHashCode() {
 			return this.BitWidth.GetHashCode() ^ this.Data.GetHashCode();
+		}
+
+		public string ToBinString() {
+			char[] text = new char[this.BitWidth];
+			for(int i = 0; i < this.BitWidth; i++) {
+				text[i] = CircuitFunction.ToChar(this.Unpack(i));
+			}
+			Array.Reverse(text);
+			return new string(text);
+		}
+
+		public string ToHexString() {
+			int value = 0;
+			if(this.TryUnpack(out value)) {
+				return LogicCircuit.Resources.ProbeHistoryHex(value);
+			} else {
+				return this.ToBinString();
+			}
 		}
 
 		public override string ToString() {
@@ -98,24 +117,6 @@ namespace LogicCircuit {
 			}
 			value = number;
 			return true;
-		}
-
-		private string ToBinString() {
-			char[] text = new char[this.BitWidth];
-			for(int i = 0; i < this.BitWidth; i++) {
-				text[i] = CircuitFunction.ToChar(this.Unpack(i));
-			}
-			Array.Reverse(text);
-			return new string(text);
-		}
-
-		private string ToHexString() {
-			int value = 0;
-			if(this.TryUnpack(out value)) {
-				return LogicCircuit.Resources.ProbeHistoryHex(value);
-			} else {
-				return this.ToBinString();
-			}
 		}
 
 		#if false

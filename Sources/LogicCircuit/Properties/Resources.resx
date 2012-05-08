@@ -591,7 +591,7 @@ Out</value>
     <value>Power On</value>
   </data>
   <data name="ProbeHistoryHex" xml:space="preserve">
-    <value>0x{0:X}</value>
+    <value>{0:X}</value>
     <comment>{int value}</comment>
   </data>
   <data name="ProbeHistoryMark" xml:space="preserve">

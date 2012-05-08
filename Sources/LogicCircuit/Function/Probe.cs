@@ -42,46 +42,5 @@ namespace LogicCircuit {
 			}
 			this.state.CopyTo(copy, 0);
 		}
-
-		public string ToBinary() {
-			if(this.state != null) {
-				char[] c = new char[this.state.Length];
-				for(int i = 0; i < this.state.Length; i++) {
-					c[c.Length - i - 1] = CircuitFunction.ToChar(this.state[i]);
-				}
-				return new string(c);
-			}
-			return string.Empty;
-		}
-
-		private string ToNumber(string format) {
-			if(this.state != null) {
-				long l = 0L;
-				int count = Math.Min(this.state.Length, 64);
-				for(int i = 0; i < count; i++) {
-					switch(this.state[i]) {
-					case State.Off:
-						return string.Empty;
-					case State.On0:
-						break;
-					case State.On1:
-						l |= 1L << i;
-						break;
-					default:
-						throw CircuitFunction.BadState(this.state[i]);
-					}
-				}
-				return string.Format(CultureInfo.InvariantCulture, format,  l);
-			}
-			return string.Empty;
-		}
-
-		public string ToHex() {
-			return this.ToNumber("{0:X}");
-		}
-
-		public string ToDecimal() {
-			return this.ToNumber("{0:G}");
-		}
 	}
 }
