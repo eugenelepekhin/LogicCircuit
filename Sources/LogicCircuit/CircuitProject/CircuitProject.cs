@@ -115,7 +115,7 @@ namespace LogicCircuit {
 		}
 
 		public static bool CanPaste(string text) {
-			if (!string.IsNullOrEmpty(text)) {
+			if (!string.IsNullOrEmpty(text) && text.Contains("<lc:CircuitProject")) {
 				try {
 					using (XmlReader xmlReader = XmlHelper.CreateReader(new StringReader(text))) {
 						string rootName = xmlReader.NameTable.Add("CircuitProject");
