@@ -277,7 +277,7 @@ namespace LogicCircuit.UnitTest {
 				test3.Verify(State.On1, 0, 1, 0, 1, 1, 1);
 				test3.Verify(State.On0, 1, 1, 0, 1, 1, 1);
 				test3.Verify(State.On0, 0, 1, 1, 1, 1, 1);
-				test3.Verify(State.On0, 1, 1, 1, 1, 1, 1);
+				test3.Verify(State.On1, 1, 1, 1, 1, 1, 1);
 
 				test3.Verify(State.On0, 0, 0, 1, 1, 1, 1);
 				test3.Verify(State.On0, 1, 1, 0, 0, 1, 1);
@@ -312,7 +312,7 @@ namespace LogicCircuit.UnitTest {
 				test3.Verify(State.On0, 0, 1, 0, 1, 1, 1);
 				test3.Verify(State.On1, 1, 1, 0, 1, 1, 1);
 				test3.Verify(State.On1, 0, 1, 1, 1, 1, 1);
-				test3.Verify(State.On1, 1, 1, 1, 1, 1, 1);
+				test3.Verify(State.On0, 1, 1, 1, 1, 1, 1);
 
 				test3.Verify(State.On1, 0, 0, 1, 1, 1, 1);
 				test3.Verify(State.On1, 1, 1, 0, 0, 1, 1);
