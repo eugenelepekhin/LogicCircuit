@@ -2,7 +2,7 @@
 using System.Text;
 
 namespace LogicCircuit {
-	public struct TriNumber {
+	public struct TriNumber : IComparable<TriNumber> {
 		public static readonly TriNumber NaN = new TriNumber(32, -1L);
 
 		private readonly int BitWidth;
@@ -52,6 +52,17 @@ namespace LogicCircuit {
 
 		public override int GetHashCode() {
 			return this.BitWidth.GetHashCode() ^ this.Data.GetHashCode();
+		}
+
+		public int CompareTo(TriNumber other) {
+			if(this.BitWidth == other.BitWidth) {
+				int t, o;
+				if(this.TryUnpack(out t) && other.TryUnpack(out o)) {
+					return t - o;
+				}
+			}
+			//Tracer.Fail();
+			return 0;
 		}
 
 		public string ToBinString() {

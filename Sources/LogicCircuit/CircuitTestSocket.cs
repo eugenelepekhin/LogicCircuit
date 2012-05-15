@@ -38,7 +38,7 @@ namespace LogicCircuit {
 			return pins.Any(p => p.PinType == PinType.Input) && pins.Any(p => p.PinType == PinType.Output);
 		}
 
-		public IEnumerable<TruthState> BuildTruthTable() {
+		public IList<TruthState> BuildTruthTable() {
 			int inputCount = this.inputs.Count;
 			int outputCount = this.outputs.Count;
 			List<TruthState> result = new List<TruthState>();
