@@ -531,6 +531,9 @@
   <ItemGroup>
     <Resource Include="Properties\Image.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema\ConvertFrom.2.0.0.3.xslt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>$(SolutionDir)Tools\ResourceWrapper.Generator.exe ProjectPath=$(ProjectPath)
