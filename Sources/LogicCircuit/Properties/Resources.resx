@@ -151,12 +151,6 @@ The file you are trying to open either corrupted or it was created by newer vers
   <data name="GateClockNotation" xml:space="preserve">
     <value>ω</value>
   </data>
-  <data name="GateEvenName" xml:space="preserve">
-    <value>Even</value>
-  </data>
-  <data name="GateEvenNotation" xml:space="preserve">
-    <value>2k</value>
-  </data>
   <data name="GateLedName" xml:space="preserve">
     <value>LED</value>
   </data>
@@ -168,13 +162,6 @@ The file you are trying to open either corrupted or it was created by newer vers
   </data>
   <data name="GateNotNotation" xml:space="preserve">
     <value>~</value>
-  </data>
-  <data name="GateOddName" xml:space="preserve">
-    <value>Odd</value>
-  </data>
-  <data name="GateOddNotation" xml:space="preserve">
-    <value>2k
-+1</value>
   </data>
   <data name="GateOrName" xml:space="preserve">
     <value>Or</value>

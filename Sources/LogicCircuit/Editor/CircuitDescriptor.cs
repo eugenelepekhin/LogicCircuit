@@ -165,8 +165,6 @@ namespace LogicCircuit {
 			case GateType.Or:
 			case GateType.And:
 			case GateType.Xor:
-			case GateType.Odd:
-			case GateType.Even:
 				this.InputCountRange = GateDescriptor.inputCountRange;
 				this.InputCountRangeLength = GateDescriptor.inputCountRange.Length;
 				break;

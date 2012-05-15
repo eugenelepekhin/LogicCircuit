@@ -121,20 +121,6 @@ namespace LogicCircuit {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Even.
-		/// </summary>
- 		public static string GateEvenName {
-			get { return ResourceManager.GetString("GateEvenName", Culture); }
-		}
-
-		/// <summary>
-		/// Looks up a localized string similar to 2k.
-		/// </summary>
- 		public static string GateEvenNotation {
-			get { return ResourceManager.GetString("GateEvenNotation", Culture); }
-		}
-
-		/// <summary>
 		/// Looks up a localized string similar to LED.
 		/// </summary>
  		public static string GateLedName {
@@ -160,21 +146,6 @@ namespace LogicCircuit {
 		/// </summary>
  		public static string GateNotNotation {
 			get { return ResourceManager.GetString("GateNotNotation", Culture); }
-		}
-
-		/// <summary>
-		/// Looks up a localized string similar to Odd.
-		/// </summary>
- 		public static string GateOddName {
-			get { return ResourceManager.GetString("GateOddName", Culture); }
-		}
-
-		/// <summary>
-		/// Looks up a localized string similar to 2k
-		/// +1.
-		/// </summary>
- 		public static string GateOddNotation {
-			get { return ResourceManager.GetString("GateOddNotation", Culture); }
 		}
 
 		/// <summary>
