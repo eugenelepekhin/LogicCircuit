@@ -481,8 +481,6 @@ namespace LogicCircuit {
 				case GateType.Or:
 				case GateType.And:
 				case GateType.Xor:
-				case GateType.Odd:
-				case GateType.Even:
 					CircuitMap.DefineGate(gate, circuitState, symbolMap);
 					break;
 				case GateType.Led:
@@ -585,8 +583,6 @@ namespace LogicCircuit {
 					case GateType.Or:	return new FunctionOr(circuitState, parameter, result);
 					case GateType.And:	return new FunctionAnd(circuitState, parameter, result);
 					case GateType.Xor:	return new FunctionXor(circuitState, parameter, result);
-					case GateType.Odd:	return new FunctionOdd(circuitState, parameter, result);
-					case GateType.Even:	return new FunctionEven(circuitState, parameter, result);
 					}
 				}
 				Tracer.Fail();

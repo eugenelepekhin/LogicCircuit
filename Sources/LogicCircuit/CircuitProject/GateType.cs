@@ -9,8 +9,8 @@ namespace LogicCircuit {
 		Or,
 		And,
 		Xor,
-		Odd,
-		Even,
+		Odd,	// This one should not be used anymore
+		Even,	// This one should not be used anymore
 		Led,
 		Probe,
 		TriState

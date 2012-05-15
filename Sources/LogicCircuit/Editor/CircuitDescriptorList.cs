@@ -118,9 +118,6 @@ namespace LogicCircuit {
 			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.Xor, 2, false)));
 			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.Xor, 2, true)));
 
-			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.Even, 2, false)));
-			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.Odd, 2, false)));
-
 			list.Add(new MemoryDescriptor(project, false));
 			list.Add(new MemoryDescriptor(project, true));
 

@@ -45,7 +45,8 @@ namespace LogicCircuit {
 				break;
 			case GateType.Odd:
 			case GateType.Even:
-				return symbol.CreateRectangularGlyph();
+				Tracer.Fail();
+				return null;
 			case GateType.Led:
 				if(this.InputCount == 1) {
 					skin = SymbolShape.Led;
@@ -90,7 +91,7 @@ namespace LogicCircuit {
 
 	public partial class GateSet {
 		private static bool IsValid(GateType gateType) {
-			return Enum.IsDefined(typeof(GateType), gateType);
+			return Enum.IsDefined(typeof(GateType), gateType) && gateType != GateType.Odd && gateType != GateType.Even;
 		}
 
 		private static bool IsValid(GateType gateType, int inputCount) {
@@ -104,8 +105,6 @@ namespace LogicCircuit {
 			case GateType.Or:
 			case GateType.And:
 			case GateType.Xor:
-			case GateType.Odd:
-			case GateType.Even:
 				return 1 < inputCount && inputCount <= LogicCircuit.Gate.MaxInputCount;
 			case GateType.Led:
 				return inputCount == 1 || inputCount == 8;
@@ -113,6 +112,10 @@ namespace LogicCircuit {
 				return inputCount == 1;
 			case GateType.TriState:
 				return inputCount == 2;
+			case GateType.Odd:
+			case GateType.Even:
+				Tracer.Fail();
+				return false;
 			default:
 				return false;
 			}
@@ -194,16 +197,6 @@ namespace LogicCircuit {
 				gate.Notation = Resources.GateXorNotation;
 				gate.Category = Resources.CategoryPrimitives;
 				break;
-			case GateType.Odd:
-				gate.Name = Resources.GateOddName;
-				gate.Notation = Resources.GateOddNotation;
-				gate.Category = Resources.CategoryPrimitives;
-				break;
-			case GateType.Even:
-				gate.Name = Resources.GateEvenName;
-				gate.Notation = Resources.GateEvenNotation;
-				gate.Category = Resources.CategoryPrimitives;
-				break;
 			case GateType.Led:
 				gate.Name = Resources.GateLedName;
 				gate.Notation = Resources.GateLedNotation;
@@ -219,6 +212,8 @@ namespace LogicCircuit {
 				gate.Notation = Resources.GateTriStateNotation;
 				gate.Category = Resources.CategoryPrimitives;
 				break;
+			case GateType.Odd:
+			case GateType.Even:
 			default:
 				Tracer.Fail();
 				break;
