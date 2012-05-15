@@ -10,42 +10,11 @@ namespace LogicCircuit.UnitTest {
 	///</summary>
 	[TestClass()]
 	public class FunctionTest {
-
-		#region Additional test attributes
 		/// <summary>
 		///Gets or sets the test context which provides
 		///information about and functionality for the current test run.
 		///</summary>
 		public TestContext TestContext { get; set; }
-
-		//
-		//You can use the following additional attributes as you write your tests:
-		//
-		//Use ClassInitialize to run code before running the first test in the class
-		//[ClassInitialize()]
-		//public static void MyClassInitialize(TestContext testContext)
-		//{
-		//}
-		//
-		//Use ClassCleanup to run code after all tests in a class have run
-		//[ClassCleanup()]
-		//public static void MyClassCleanup()
-		//{
-		//}
-		//
-		//Use TestInitialize to run code before running each test
-		//[TestInitialize()]
-		//public void MyTestInitialize()
-		//{
-		//}
-		//
-		//Use TestCleanup to run code after each test has run
-		//[TestCleanup()]
-		//public void MyTestCleanup()
-		//{
-		//}
-		//
-		#endregion
 
 		/// <summary>
 		/// A test of Clock function
@@ -421,6 +390,141 @@ namespace LogicCircuit.UnitTest {
 				Assert.IsTrue(this.Tester.CircuitState.Evaluate(true));
 				Assert.AreEqual(expected, this.Result);
 			}
+		}
+
+		private void TestFunction(Func<CircuitState, int[], int, CircuitFunction> create, Func<CircuitState, int[], int, bool> isValid) {
+			for(int count = 2; count <= 12; count++) {
+				CircuitState state = new CircuitState(3);
+				int result = state.ReserveState();
+				int[] param = new int[count];
+				for(int i = 0; i < param.Length; i++) {
+					param[i] = state.ReserveState();
+				}
+				CircuitFunction func = create(state, param, result);
+				bool canContinue = true;
+				while(canContinue) {
+					func.Evaluate();
+					Assert.IsTrue(isValid(state, param, result));
+					for(int i = param.Length - 1; canContinue = (0 <= i); i--) {
+						switch(state[param[i]]) {
+						case State.Off:
+							state[param[i]] = State.On0;
+							break;
+						case State.On0:
+							state[param[i]] = State.On1;
+							break;
+						case State.On1:
+							state[param[i]] = State.Off;
+							break;
+						}
+						if(state[param[i]] != State.Off) {
+							break;
+						}
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// A test of And function
+		/// </summary>
+		[TestMethod()]
+		public void FunctionAndFullTest() {
+			this.TestFunction(
+				(state, param, result) => new FunctionAnd(state, param, result),
+				(state, param, result) => {
+					bool value = true;
+					foreach(int p in param) {
+						value &= (state[p] != State.On0);
+					}
+					return value ? state[result] == State.On1 : state[result] == State.On0;
+				}
+			);
+		}
+
+		/// <summary>
+		/// A test of AndNot function
+		/// </summary>
+		[TestMethod()]
+		public void FunctionAndNotFullTest() {
+			this.TestFunction(
+				(state, param, result) => new FunctionAndNot(state, param, result),
+				(state, param, result) => {
+					bool value = true;
+					foreach(int p in param) {
+						value &= (state[p] != State.On0);
+					}
+					return !value ? state[result] == State.On1 : state[result] == State.On0;
+				}
+			);
+		}
+
+		/// <summary>
+		/// A test of Or function
+		/// </summary>
+		[TestMethod()]
+		public void FunctionOrFullTest() {
+			this.TestFunction(
+				(state, param, result) => new FunctionOr(state, param, result),
+				(state, param, result) => {
+					bool value = false;
+					foreach(int p in param) {
+						value |= (state[p] == State.On1);
+					}
+					return value ? state[result] == State.On1 : state[result] == State.On0;
+				}
+			);
+		}
+
+		/// <summary>
+		/// A test of OrNot function
+		/// </summary>
+		[TestMethod()]
+		public void FunctionOrNotFullTest() {
+			this.TestFunction(
+				(state, param, result) => new FunctionOrNot(state, param, result),
+				(state, param, result) => {
+					bool value = false;
+					foreach(int p in param) {
+						value |= (state[p] == State.On1);
+					}
+					return !value ? state[result] == State.On1 : state[result] == State.On0;
+				}
+			);
+		}
+
+		/// <summary>
+		/// A test of Xor function
+		/// </summary>
+		[TestMethod()]
+		public void FunctionXorFullTest() {
+			this.TestFunction(
+				(state, param, result) => new FunctionXor(state, param, result),
+				(state, param, result) => {
+					bool value = false;
+					foreach(int p in param) {
+						value ^= (state[p] == State.On1);
+					}
+					return value ? state[result] == State.On1 : state[result] == State.On0;
+				}
+			);
+		}
+
+		/// <summary>
+		/// A test of XorNot function
+		/// </summary>
+		[TestMethod()]
+		public void FunctionXorNotFullTest() {
+			this.TestFunction(
+				(state, param, result) => new FunctionXorNot(state, param, result),
+				(state, param, result) => {
+					bool value = false;
+					foreach(int p in param) {
+						value ^= (state[p] == State.On1);
+					}
+					return !value ? state[result] == State.On1 : state[result] == State.On0;
+				}
+			);
 		}
 	}
 }
