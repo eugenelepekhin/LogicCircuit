@@ -8,3 +8,4 @@
 8. Push repos to bitbucket.org
 9. Create a release on http://www.codeplex.com/
 10. Push repo to http://www.codeplex.com/
+11. Publish web site
