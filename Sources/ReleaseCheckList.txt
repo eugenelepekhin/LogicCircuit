@@ -1,9 +1,10 @@
 1. Set version in LogicCircuit\Properties\AssemblyInfo.cs
 2. Set version in Setup project
 3. Build and test Setup project
-4. Add tag to repo
-5. Prepare website - add what is new.
-6. Create a release on http://www.codeplex.com/
-7. Push repo to http://www.codeplex.com/
-8. Set version on http://www.logiccircuit.org/LatestVersion.txt file
-???
+4. Prepare website - add what is new in download.html
+5. Add News item in Project.xml
+6. Change version in LatestVersion.txt.
+7. Add tags to repos (both logic circuit and web site)
+8. Push repos to bitbucket.org
+9. Create a release on http://www.codeplex.com/
+10. Push repo to http://www.codeplex.com/
