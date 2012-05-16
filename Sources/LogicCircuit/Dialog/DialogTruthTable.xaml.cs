@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Threading;
+using System.Windows.Input;
 
 namespace LogicCircuit {
 	/// <summary>
@@ -76,8 +77,8 @@ namespace LogicCircuit {
 		}
 
 		private  void DataGridSorting(object sender, DataGridSortingEventArgs e) {
-			this.sortComparer.ToggleColumn(this, (DataGridTextColumn)e.Column);
-			this.TruthTable.CustomSort  = this.sortComparer;
+			this.sortComparer.ToggleColumn((DataGridTextColumn)e.Column, (Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.Shift);
+			this.TruthTable.CustomSort  = this.sortComparer.IsEmpty ? null : this.sortComparer;
 			e.Handled = true;
 		}
 
@@ -91,32 +92,62 @@ namespace LogicCircuit {
 			private readonly Dictionary<DataGridTextColumn, Func<TruthState, TriNumber>> dataAccessor;
 			private List<Sort> sort = new List<Sort>();
 
+			public bool IsEmpty { get { return this.sort.Count == 0; } }
 
 			public TruthStateComparer(Dictionary<DataGridTextColumn, Func<TruthState, TriNumber>> dataAccessor) {
 				this.dataAccessor = dataAccessor;
 			}
 
-			public void ToggleColumn(DialogTruthTable dialog, DataGridTextColumn column) {
-				bool found = false;
-				for(int i = 0; i < this.sort.Count; i++) {
-					Sort s = this.sort[i];
-					if(s.Column == column) {
-						if(s.Direction == 1) {
-							s.Direction = -1;
-							this.sort[i] = s;
-						} else {
-							this.sort.RemoveAt(i);
+			public void ToggleColumn(DataGridTextColumn column, bool extend) {
+				if(extend) {
+					bool found = false;
+					for(int i = 0; i < this.sort.Count; i++) {
+						Sort s = this.sort[i];
+						if(s.Column == column) {
+							if(s.Direction == 1) {
+								s.Direction = -1;
+								this.sort[i] = s;
+								column.SortDirection = ListSortDirection.Descending;
+							} else {
+								this.sort.RemoveAt(i);
+								column.SortDirection = null;
+							}
+							found = true;
+							break;
 						}
-						found = true;
-						break;
 					}
-				}
-				if(!found) {
-					this.sort.Add(new Sort() {
-						Data = this.dataAccessor[column],
-						Direction = 1,
-						Column = column
-					});
+					if(!found) {
+						this.sort.Add(new Sort() {
+							Data = this.dataAccessor[column],
+							Direction = 1,
+							Column = column
+						});
+						column.SortDirection = ListSortDirection.Ascending;
+					}
+				} else {
+					for(int i = 0; i < this.sort.Count; i++) {
+						Sort s = this.sort[i];
+						if(s.Column != column) {
+							s.Column.SortDirection = null;
+						}
+					}
+					if(column.SortDirection.HasValue) {
+						if(column.SortDirection == ListSortDirection.Ascending) {
+							column.SortDirection = ListSortDirection.Descending;
+						} else {
+							column.SortDirection = null;
+						}
+					} else {
+						column.SortDirection = ListSortDirection.Ascending;
+					}
+					this.sort.Clear();
+					if(column.SortDirection.HasValue) {
+						this.sort.Add(new Sort() {
+							Data = this.dataAccessor[column],
+							Direction = (column.SortDirection == ListSortDirection.Ascending ? 1 : -1),
+							Column = column
+						});
+					}
 				}
 			}
 
@@ -124,7 +155,7 @@ namespace LogicCircuit {
 				foreach(Sort s in this.sort) {
 					int result = s.Data(x).CompareTo(s.Data(y));
 					if(result != 0) {
-						return result;
+						return result * s.Direction;
 					}
 				}
 				return 0;
