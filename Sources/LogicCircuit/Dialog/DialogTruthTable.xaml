@@ -10,11 +10,23 @@
 
 	<Grid>
 		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 
-		<DataGrid Grid.Row="0" Name="dataGrid" AutoGenerateColumns="False" IsReadOnly="True" Margin="3"
+		<Grid Grid.Row="0" Margin="3">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
+			<Label Grid.Column="0" Content="_Filter:" Target="{Binding ElementName=filter}"/>
+			<TextBox Grid.Column="1" Name="filter" VerticalAlignment="Center"/>
+			<Button Grid.Column="2" Content="_Apply" Click="ButtonApplyClick"/>
+		</Grid>
+
+		<DataGrid Grid.Row="1" Name="dataGrid" AutoGenerateColumns="False" IsReadOnly="True" Margin="3"
 			VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Standard"
 			ItemsSource="{Binding Path=TruthTable}"
 		>
@@ -25,6 +37,6 @@
 			</DataGrid.CellStyle>
 		</DataGrid>
 
-		<Button Grid.Row="1" Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" IsCancel="True" HorizontalAlignment="Right"/>
+		<Button Grid.Row="2" Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" IsCancel="True" HorizontalAlignment="Right"/>
 	</Grid>
 </Window>

@@ -219,6 +219,7 @@
     <Compile Include="Editor\WireMarker.cs" />
     <Compile Include="Editor\WirePledge.cs" />
     <Compile Include="Editor\WirePointMarker.cs" />
+    <Compile Include="ExpressionParser.cs" />
     <Compile Include="Function\FunctionAnd.cs" />
     <Compile Include="Function\FunctionAndNot.cs" />
     <Compile Include="Function\CircuitState.cs" />

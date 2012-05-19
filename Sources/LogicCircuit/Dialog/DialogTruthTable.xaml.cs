@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using EXPR=System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Threading;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace LogicCircuit {
 	/// <summary>
@@ -80,6 +81,32 @@ namespace LogicCircuit {
 			this.sortComparer.ToggleColumn((DataGridTextColumn)e.Column, (Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.Shift);
 			this.TruthTable.CustomSort  = this.sortComparer.IsEmpty ? null : this.sortComparer;
 			e.Handled = true;
+		}
+
+		private void ButtonApplyClick(object sender, RoutedEventArgs e) {
+			try {
+				string text = this.filter.Text.Trim();
+				if(string.IsNullOrWhiteSpace(text)) {
+					this.TruthTable.Filter = null;
+				} else {
+					ExpressionParser parser = new ExpressionParser(this.testSocket);
+					EXPR.Expression<Func<TruthState, TriNumber>> expr = parser.Parse(text);
+					if(parser.Error == null) {
+						Func<TruthState, TriNumber> func = expr.Compile();
+						this.TruthTable.Filter = o => {
+							if(o is TruthState) {
+								TruthState s = (TruthState)o;
+								return func(s).ToBoolean();
+							}
+							return false;
+						};
+					} else {
+						MessageBox.Show(parser.Error);
+					}
+				}
+			} catch(Exception exception) {
+				App.Mainframe.ReportException(exception);
+			}
 		}
 
 		private class TruthStateComparer : IComparer<TruthState>, IComparer {

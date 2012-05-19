@@ -28,6 +28,10 @@ namespace LogicCircuit {
 			this.Data = pack;
 		}
 
+		public TriNumber(int value) {
+			
+		}
+
 		private TriNumber(int bitWidth, long pack) {
 			Tracer.Assert(0 < bitWidth && bitWidth <= 32 && bitWidth <= BasePin.MaxBitWidth);
 			this.BitWidth = bitWidth;
@@ -63,6 +67,78 @@ namespace LogicCircuit {
 			}
 			//Tracer.Fail();
 			return 0;
+		}
+
+		public static TriNumber And(TriNumber x, TriNumber y) {
+			long result = 0;
+			int count = Math.Max(x.BitWidth, y.BitWidth);
+			for(int i = 0; i < count; i++) {
+				State sx = (State)((x.Data >> (2 * i)) & 3);
+				State sy = (State)((y.Data >> (2 * i)) & 3);
+				result |= (long)((sx == State.On0 || sy == State.On0) ? State.On0 : State.On1) << (2 * i);
+			}
+			return new TriNumber(count, result);
+		}
+
+		public static TriNumber Or(TriNumber x, TriNumber y) {
+			long result = 0;
+			int count = Math.Max(x.BitWidth, y.BitWidth);
+			for(int i = 0; i < count; i++) {
+				State sx = (State)((x.Data >> (2 * i)) & 3);
+				State sy = (State)((y.Data >> (2 * i)) & 3);
+				result |= (long)((sx == State.On1 || sy == State.On1) ? State.On1 : State.On0) << (2 * i);
+			}
+			return new TriNumber(count, result);
+		}
+
+		public static TriNumber Xor(TriNumber x, TriNumber y) {
+			long result = 0;
+			int count = Math.Max(x.BitWidth, y.BitWidth);
+			for(int i = 0; i < count; i++) {
+				State sx = (State)((x.Data >> (2 * i)) & 3);
+				State sy = (State)((y.Data >> (2 * i)) & 3);
+				int c = 0;
+				if(sx == State.On1) {
+					c++;
+				}
+				if(sy == State.On1) {
+					c++;
+				}
+				result |= (long)(((c & 1) != 0) ? State.On1 : State.On0) << (2 * i);
+			}
+			return new TriNumber(count, result);
+		}
+
+		public static TriNumber Not(TriNumber x) {
+			long result = 0;
+			int count = x.BitWidth;
+			for(int i = 0; i < count; i++) {
+				State sx = (State)((x.Data >> (2 * i)) & 3);
+				result |= (long)((sx == State.On0) ? State.On1 : State.On0) << (2 * i);
+			}
+			return new TriNumber(count, result);
+		}
+
+		public static TriNumber Equal(TriNumber x, TriNumber y) {
+			int count = Math.Max(x.BitWidth, y.BitWidth);
+			for(int i = 0; i < count; i++) {
+				State sx = (State)((x.Data >> (2 * i)) & 3);
+				State sy = (State)((y.Data >> (2 * i)) & 3);
+				if(sx != sy || sx == State.Off) {
+					return new TriNumber(1, 0);
+				}
+			}
+			return new TriNumber(1, 1);
+		}
+
+		public bool ToBoolean() {
+			int count = this.BitWidth;
+			for(int i = 0; i < count; i++) {
+				if((State)(this.Data >> (2 * i)) == State.On1) {
+					return true;
+				}
+			}
+			return false;
 		}
 
 		public string ToBinString() {
