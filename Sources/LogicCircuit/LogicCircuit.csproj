@@ -254,6 +254,7 @@
     <Compile Include="GridLengthAnimation.cs" />
     <Compile Include="GridPoint.cs" />
     <Compile Include="HyperlinkNavigationCommand.cs" />
+    <Compile Include="InverseBooleanConverter.cs" />
     <Compile Include="LambdaUICommand.cs" />
     <Compile Include="Mainframe.Commands.cs" />
     <Compile Include="Mainframe.File.cs" />

@@ -86,6 +86,16 @@ namespace LogicCircuit {
 			((TextBlock)this.CircuitSymbol.ProbeView).Text = new TriNumber(this).ToHexString();
 		}
 
+		public int ToInt32() {
+			int number = 0;
+			for(int i = 0; i < this.BitWidth; i++) {
+				if(this[i] == State.On1) {
+					number |= (1 << i);
+				}
+			}
+			return number;
+		}
+
 		private class History<T> {
 			private volatile bool adding;
 			private T[] list;

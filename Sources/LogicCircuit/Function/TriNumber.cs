@@ -28,10 +28,6 @@ namespace LogicCircuit {
 			this.Data = pack;
 		}
 
-		public TriNumber(int value) {
-			
-		}
-
 		private TriNumber(int bitWidth, long pack) {
 			Tracer.Assert(0 < bitWidth && bitWidth <= 32 && bitWidth <= BasePin.MaxBitWidth);
 			this.BitWidth = bitWidth;

@@ -8,6 +8,10 @@
 >
 	<!--FocusManager.FocusedElement="{Binding ElementName=name}"-->
 
+	<Window.Resources>
+		<lc:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+	</Window.Resources>
+
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
@@ -23,7 +27,7 @@
 			</Grid.ColumnDefinitions>
 			<Label Grid.Column="0" Content="_Filter:" Target="{Binding ElementName=filter}"/>
 			<TextBox Grid.Column="1" Name="filter" VerticalAlignment="Center"/>
-			<Button Grid.Column="2" Content="_Apply" Click="ButtonApplyClick"/>
+			<Button Grid.Column="2" Name="buttonApply" Content="_Apply" Click="ButtonApplyClick" IsDefault="{Binding ElementName=filter, Path=IsFocused}"/>
 		</Grid>
 
 		<DataGrid Grid.Row="1" Name="dataGrid" AutoGenerateColumns="False" IsReadOnly="True" Margin="3"
@@ -37,6 +41,9 @@
 			</DataGrid.CellStyle>
 		</DataGrid>
 
-		<Button Grid.Row="2" Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" IsCancel="True" HorizontalAlignment="Right"/>
+		<Button Grid.Row="2" Name="buttonOk" HorizontalAlignment="Right"
+			Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}"
+			IsDefault="{Binding ElementName=filter, Path=IsFocused, Converter={StaticResource InverseBooleanConverter}}" IsCancel="True"
+		/>
 	</Grid>
 </Window>
