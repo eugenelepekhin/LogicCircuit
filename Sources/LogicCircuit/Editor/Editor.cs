@@ -74,7 +74,7 @@ namespace LogicCircuit {
 		}
 
 		public void Save(string file) {
-			using (TextWriter textWriter = new StreamWriter(file)) {
+			using (TextWriter textWriter = XmlHelper.FileWriter(file)) {
 				this.CircuitProject.Save(textWriter);
 			}
 			this.File = file;

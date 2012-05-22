@@ -29,6 +29,16 @@ namespace LogicCircuit {
 			return XmlReader.Create(textReader, XmlHelper.xmlReaderSettings);
 		}
 
+		public static TextWriter FileWriter(string fileName) {
+			if(!File.Exists(fileName)) {
+				string dir = Path.GetDirectoryName(fileName);
+				if(!Directory.Exists(dir)) {
+					Directory.CreateDirectory(dir);
+				}
+			}
+			return new StreamWriter(fileName);
+		}
+
 		public static XmlWriter CreateWriter(TextWriter textWriter) {
 			return XmlWriter.Create(textWriter, XmlHelper.xmlWriterSettings);
 		}

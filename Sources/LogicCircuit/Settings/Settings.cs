@@ -74,7 +74,7 @@ namespace LogicCircuit {
 		}
 
 		protected void Save(string file) {
-			using (XmlWriter writer = XmlHelper.CreateWriter(new StreamWriter(file))) {
+			using (XmlWriter writer = XmlHelper.CreateWriter(XmlHelper.FileWriter(file))) {
 				writer.WriteStartDocument();
 				writer.WriteStartElement("lcs", "settings", Settings.NamespaceUri);
 				this.Save(writer);
@@ -104,6 +104,7 @@ namespace LogicCircuit {
 		private FileSystemWatcher fileWatcher;
 		public bool IsFirstRun { get; private set; }
 
+		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
 		[SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands")]
 		public UserSettings() {
 			this.fileWatcher = new FileSystemWatcher();
@@ -111,7 +112,11 @@ namespace LogicCircuit {
 			string file = UserSettings.FileName();
 			if(!File.Exists(file)) {
 				this.IsFirstRun = true;
-				this.Save();
+				try {
+					this.Save();
+				} catch(Exception exception) {
+					Tracer.Report("UserSettings.ctor", exception);
+				}
 			}
 			this.Load(file);
 			this.fileWatcher.Path = Path.GetDirectoryName(file);
