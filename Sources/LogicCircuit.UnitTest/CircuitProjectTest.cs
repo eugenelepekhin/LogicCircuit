@@ -1,7 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
-using LogicCircuit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using LogicCircuit;
 
 namespace LogicCircuit.UnitTest {
 	/// <summary>
@@ -78,6 +79,39 @@ namespace LogicCircuit.UnitTest {
 
 			Wire wire = project.WireSet.Create(logicalCircuit, new GridPoint(10, 20), new GridPoint(30, 40));
 			Assert.AreEqual(1, project.WireSet.Count());
+		}
+
+		/// <summary>
+		/// A test of saving/loading roundtrip
+		/// </summary>
+		[TestMethod()]
+		public void CircuitProjectSaveLoadTest() {
+			string dir = Path.Combine(this.TestContext.TestRunDirectory, this.TestContext.TestName + DateTime.UtcNow.Ticks, "Some Test Sub Directory");
+			string file = Path.Combine(dir, "My Test File.CircuitProject");
+
+			// save in inexistent folder
+			CircuitProject project1 = CircuitProject.Create(null);
+			project1.InTransaction(() => {
+				LogicalCircuit main = project1.ProjectSet.Project.LogicalCircuit;
+				CircuitButton button = project1.CircuitButtonSet.Create("b", false);
+				CircuitSymbol buttonSymbol = project1.CircuitSymbolSet.Create(button, main, 1, 2);
+				Gate led = project1.GateSet.Gate(GateType.Led, 1, false);
+				project1.CircuitSymbolSet.Create(led, main, 6, 2);
+				Wire wire = project1.WireSet.Create(main, new GridPoint(3, 3), new GridPoint(6, 3));
+			});
+			Assert.IsTrue(!Directory.Exists(dir));
+			project1.Save(file);
+			Assert.IsTrue(File.Exists(file));
+			CircuitProject project2 = CircuitProject.Create(file);
+			Assert.IsTrue(ProjectTester.Equal(project1, project2));
+
+			// save in existing folder and existing file.
+			CircuitProject project3 = ProjectTester.Load(this.TestContext, Properties.Resources.Digital_Clock, null);
+			Assert.IsTrue(File.Exists(file));
+			project3.Save(file);
+			CircuitProject project4 = CircuitProject.Create(file);
+			File.Delete(file);
+			Assert.IsTrue(ProjectTester.Equal(project3, project4));
 		}
 	}
 }
