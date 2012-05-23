@@ -55,7 +55,13 @@ namespace LogicCircuit {
 			}
 		}
 
-		public void Save(TextWriter textWriter) {
+		public void Save(string file) {
+			using (TextWriter textWriter = XmlHelper.FileWriter(file)) {
+				this.Save(textWriter);
+			}
+		}
+
+		private void Save(TextWriter textWriter) {
 			using(XmlWriter writer = XmlHelper.CreateWriter(textWriter)) {
 				this.SaveRecords(writer);
 			}

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -10,7 +9,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Xml;
 
 namespace LogicCircuit {
 	public partial class Editor : EditorDiagram, INotifyPropertyChanged {
@@ -74,9 +72,7 @@ namespace LogicCircuit {
 		}
 
 		public void Save(string file) {
-			using (TextWriter textWriter = XmlHelper.FileWriter(file)) {
-				this.CircuitProject.Save(textWriter);
-			}
+			this.CircuitProject.Save(file);
 			this.File = file;
 			this.savedVersion = this.CircuitProject.Version;
 			this.NotifyPropertyChanged("Caption");
