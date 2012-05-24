@@ -65,6 +65,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SettingsEnumCacheTest.cs" />
+    <Compile Include="SettingsTest.cs" />
     <Compile Include="XmlLoadTest.cs" />
     <Compile Include="Socket.cs" />
     <Compile Include="SplitterConverterTest.cs" />
