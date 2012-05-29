@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using LogicCircuit;
+using LogicCircuit.DataPersistent;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace LogicCircuit.UnitTest {
@@ -91,6 +92,48 @@ namespace LogicCircuit.UnitTest {
 					app.InitializeComponent();
 				}
 			}
+		}
+
+		public static bool Equal(CircuitProject x, CircuitProject y) {
+			Assert.IsNotNull(x);
+			Assert.IsNotNull(y);
+
+			return (
+				ProjectTester.Equal(x.ProjectSet.Table, y.ProjectSet.Table) &&
+				ProjectTester.Equal(x.CollapsedCategorySet.Table, y.CollapsedCategorySet.Table) &&
+				ProjectTester.EqualCount(x.CircuitSet.Table, y.CircuitSet.Table) &&
+				ProjectTester.EqualCount(x.DevicePinSet.Table, y.DevicePinSet.Table) &&
+				ProjectTester.EqualCount(x.GateSet.Table, y.GateSet.Table) &&
+				ProjectTester.Equal(x.LogicalCircuitSet.Table, y.LogicalCircuitSet.Table) &&
+				ProjectTester.Equal(x.PinSet.Table, y.PinSet.Table) &&
+				ProjectTester.Equal(x.ConstantSet.Table, y.ConstantSet.Table) &&
+				ProjectTester.Equal(x.ConstantSet.Table, y.ConstantSet.Table) &&
+				ProjectTester.Equal(x.CircuitButtonSet.Table, y.CircuitButtonSet.Table) &&
+				ProjectTester.Equal(x.MemorySet.Table, y.MemorySet.Table) &&
+				ProjectTester.Equal(x.LedMatrixSet.Table, y.LedMatrixSet.Table) &&
+				ProjectTester.Equal(x.SplitterSet.Table, y.SplitterSet.Table) &&
+				ProjectTester.Equal(x.CircuitSymbolSet.Table, y.CircuitSymbolSet.Table) &&
+				ProjectTester.Equal(x.WireSet.Table, y.WireSet.Table) &&
+				ProjectTester.Equal(x.TextNoteSet.Table, y.TextNoteSet.Table)
+			);
+		}
+
+		private static bool EqualCount<T>(TableSnapshot<T> x, TableSnapshot<T> y) where T:struct {
+			return x.Count() == y.Count();
+		}
+
+		private static bool Equal<T>(TableSnapshot<T> x, TableSnapshot<T> y) where T:struct {
+			return ProjectTester.EqualCount(x, y) && x.Zip(y, (RowId xr, RowId yr) => {
+				T xd, yd;
+				x.GetData(xr, out xd);
+				y.GetData(yr, out yd);
+				foreach(IField<T> field in x.Fields) {
+					if(field.Compare(ref xd, ref yd) != 0) {
+						return false;
+					}
+				}
+				return true;
+			}).All(r => r);
 		}
 	}
 }
