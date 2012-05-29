@@ -48,10 +48,10 @@ namespace LogicCircuit {
 				}
 				TruthState state = new TruthState(inputCount, outputCount);
 				for(int i = 0; i < inputCount; i++) {
-					state.Input[i] = new TriNumber(this.inputs[i].Function.BitWidth, this.inputs[i].Function.Value);
+					state.Input[i] = this.inputs[i].Function.Value;
 				}
 				for(int i = 0; i < outputCount; i++) {
-					state.Output[i] = new TriNumber(this.outputs[i].Function);
+					state.Output[i] = this.outputs[i].Function.ToInt32();
 				}
 				result.Add(state);
 				for(int i = inputCount - 1; 0 <= i; i--) {
@@ -132,15 +132,15 @@ namespace LogicCircuit {
 
 	[SuppressMessage("Microsoft.Performance", "CA1815:OverrideEqualsAndOperatorEqualsOnValueTypes")]
 	public struct TruthState {
-		private readonly TriNumber[] input;
-		private readonly TriNumber[] output;
+		private readonly int[] input;
+		private readonly int[] output;
 
-		public TriNumber[] Input { get { return this.input; } }
-		public TriNumber[] Output { get { return this.output; } }
+		public int[] Input { get { return this.input; } }
+		public int[] Output { get { return this.output; } }
 
 		public TruthState(int inputCount, int outputCount) {
-			this.input = new TriNumber[inputCount];
-			this.output = new TriNumber[outputCount];
+			this.input = new int[inputCount];
+			this.output = new int[outputCount];
 		}
 	}
 }

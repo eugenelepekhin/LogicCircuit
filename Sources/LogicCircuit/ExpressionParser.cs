@@ -36,7 +36,7 @@ namespace LogicCircuit {
 			this.socket = socket;
 		}
 
-		public Expression<Func<TruthState, TriNumber>> Parse(string text) {
+		public Expression<Func<TruthState, int>> Parse(string text) {
 			this.Error = null;
 			using(this.reader = new StringReader(text)) {
 				return this.Comparison();
@@ -72,7 +72,7 @@ namespace LogicCircuit {
 			if(char.IsDigit(c)) {
 				return this.NextNumber();
 			}
-			if("()+-*/%&|^!=<>".Contains(c)) {
+			if("()+-*/%&|^~!=<>".Contains(c)) {
 				return this.NextOperator();
 			}
 			this.Error = "Unknown char";
@@ -174,6 +174,7 @@ namespace LogicCircuit {
 			case '&': // allow &&
 			case '|':
 			case '^':
+			case '~':
 				this.buffer.Append((char)this.reader.Read());
 				break;
 			case '!':
@@ -213,74 +214,239 @@ namespace LogicCircuit {
 			return new Token() { Value = this.buffer.ToString(), TokenType = tokenType };
 		}
 
-		private Expression<Func<TruthState, TriNumber>> Comparison() {
-			Expression<Func<TruthState, TriNumber>> left = this.Addition();
+		private Expression<Func<TruthState, int>> Comparison() {
+			Expression<Func<TruthState, int>> left = this.Addition();
 			Token token = this.Current();
 			if(token.TokenType == TokenType.Binary && token.Value == "=") {
 				this.Next();
-				Expression<Func<TruthState, TriNumber>> right = this.Disjunction();
+				Expression<Func<TruthState, int>> right = this.Addition();
 				if(right == null && this.Error == null) {
 					this.Error = "Expression is missing after " + token.Value;
 					return null;
 				}
-				return s => TriNumber.Equal(left.Compile()(s), right.Compile()(s));
+				Func<TruthState, int> lf = left.Compile();
+				Func<TruthState, int> rf = right.Compile();
+				return s => (lf(s) == rf(s)) ? 1 : 0;
+			}
+			if(token.TokenType == TokenType.Binary && token.Value == "!=") {
+				this.Next();
+				Expression<Func<TruthState, int>> right = this.Addition();
+				if(right == null && this.Error == null) {
+					this.Error = "Expression is missing after " + token.Value;
+					return null;
+				}
+				Func<TruthState, int> lf = left.Compile();
+				Func<TruthState, int> rf = right.Compile();
+				return s => (lf(s) != rf(s)) ? 1 : 0;
+			}
+			if(token.TokenType == TokenType.Binary && token.Value == "<") {
+				this.Next();
+				Expression<Func<TruthState, int>> right = this.Addition();
+				if(right == null && this.Error == null) {
+					this.Error = "Expression is missing after " + token.Value;
+					return null;
+				}
+				Func<TruthState, int> lf = left.Compile();
+				Func<TruthState, int> rf = right.Compile();
+				return s => (lf(s) < rf(s)) ? 1 : 0;
+			}
+			if(token.TokenType == TokenType.Binary && token.Value == "<=") {
+				this.Next();
+				Expression<Func<TruthState, int>> right = this.Addition();
+				if(right == null && this.Error == null) {
+					this.Error = "Expression is missing after " + token.Value;
+					return null;
+				}
+				Func<TruthState, int> lf = left.Compile();
+				Func<TruthState, int> rf = right.Compile();
+				return s => (lf(s) <= rf(s)) ? 1 : 0;
+			}
+			if(token.TokenType == TokenType.Binary && token.Value == ">") {
+				this.Next();
+				Expression<Func<TruthState, int>> right = this.Addition();
+				if(right == null && this.Error == null) {
+					this.Error = "Expression is missing after " + token.Value;
+					return null;
+				}
+				Func<TruthState, int> lf = left.Compile();
+				Func<TruthState, int> rf = right.Compile();
+				return s => (lf(s) > rf(s)) ? 1 : 0;
+			}
+			if(token.TokenType == TokenType.Binary && token.Value == ">=") {
+				this.Next();
+				Expression<Func<TruthState, int>> right = this.Addition();
+				if(right == null && this.Error == null) {
+					this.Error = "Expression is missing after " + token.Value;
+					return null;
+				}
+				Func<TruthState, int> lf = left.Compile();
+				Func<TruthState, int> rf = right.Compile();
+				return s => (lf(s) >= rf(s)) ? 1 : 0;
 			}
 			return left;
 		}
 
-		private Expression<Func<TruthState, TriNumber>> Addition() {
-			Expression<Func<TruthState, TriNumber>> left = this.Multiplication();
+		private Expression<Func<TruthState, int>> Addition() {
+			Expression<Func<TruthState, int>> left = this.Multiplication();
+			Token token = this.Current();
+			if(token.TokenType == TokenType.Binary && token.Value == "+") {
+				this.Next();
+				Expression<Func<TruthState, int>> right = this.Multiplication();
+				if(right == null && this.Error == null) {
+					this.Error = "Expression is missing after " + token.Value;
+					return null;
+				}
+				Func<TruthState, int> lf = left.Compile();
+				Func<TruthState, int> rf = right.Compile();
+				return s => lf(s) + rf(s);
+			}
+			if(token.TokenType == TokenType.Binary && token.Value == "-") {
+				this.Next();
+				Expression<Func<TruthState, int>> right = this.Multiplication();
+				if(right == null && this.Error == null) {
+					this.Error = "Expression is missing after " + token.Value;
+					return null;
+				}
+				Func<TruthState, int> lf = left.Compile();
+				Func<TruthState, int> rf = right.Compile();
+				return s => lf(s) - rf(s);
+			}
 			return left;
 		}
 
-		private Expression<Func<TruthState, TriNumber>> Multiplication() {
-			Expression<Func<TruthState, TriNumber>> left = this.Conjunction();
+		private Expression<Func<TruthState, int>> Multiplication() {
+			Expression<Func<TruthState, int>> left = this.Conjunction();
+			Token token = this.Current();
+			if(token.TokenType == TokenType.Binary && token.Value == "*") {
+				this.Next();
+				Expression<Func<TruthState, int>> right = this.Conjunction();
+				if(right == null && this.Error == null) {
+					this.Error = "Expression is missing after " + token.Value;
+					return null;
+				}
+				Func<TruthState, int> lf = left.Compile();
+				Func<TruthState, int> rf = right.Compile();
+				return s => lf(s) * rf(s);
+			}
+			if(token.TokenType == TokenType.Binary && token.Value == "/") {
+				this.Next();
+				Expression<Func<TruthState, int>> right = this.Conjunction();
+				if(right == null && this.Error == null) {
+					this.Error = "Expression is missing after " + token.Value;
+					return null;
+				}
+				Func<TruthState, int> lf = left.Compile();
+				Func<TruthState, int> rf = right.Compile();
+				return s => lf(s) / rf(s);
+			}
+			if(token.TokenType == TokenType.Binary && token.Value == "%") {
+				this.Next();
+				Expression<Func<TruthState, int>> right = this.Conjunction();
+				if(right == null && this.Error == null) {
+					this.Error = "Expression is missing after " + token.Value;
+					return null;
+				}
+				Func<TruthState, int> lf = left.Compile();
+				Func<TruthState, int> rf = right.Compile();
+				return s => lf(s) % rf(s);
+			}
 			return left;
 		}
 
-		private Expression<Func<TruthState, TriNumber>> Conjunction() {
-			Expression<Func<TruthState, TriNumber>> left = this.Disjunction();
+		private Expression<Func<TruthState, int>> Conjunction() {
+			Expression<Func<TruthState, int>> left = this.Disjunction();
 			Token token = this.Current();
 			if(token.TokenType == TokenType.Binary && token.Value == "|") {
 				this.Next();
-				Expression<Func<TruthState, TriNumber>> right = this.Disjunction();
+				Expression<Func<TruthState, int>> right = this.Disjunction();
 				if(right == null && this.Error == null) {
 					this.Error = "Expression is missing after " + token.Value;
 					return null;
 				}
-				return s => TriNumber.Or(left.Compile()(s), right.Compile()(s));
+				Func<TruthState, int> lf = left.Compile();
+				Func<TruthState, int> rf = right.Compile();
+				return s => lf(s) | rf(s);
+			}
+			if(token.TokenType == TokenType.Binary && token.Value == "^") {
+				this.Next();
+				Expression<Func<TruthState, int>> right = this.Disjunction();
+				if(right == null && this.Error == null) {
+					this.Error = "Expression is missing after " + token.Value;
+					return null;
+				}
+				Func<TruthState, int> lf = left.Compile();
+				Func<TruthState, int> rf = right.Compile();
+				return s => lf(s) ^ rf(s);
 			}
 			return left;
 		}
 
-		private Expression<Func<TruthState, TriNumber>> Disjunction() {
-			Expression<Func<TruthState, TriNumber>> left = this.Primary();
+		private Expression<Func<TruthState, int>> Disjunction() {
+			Expression<Func<TruthState, int>> left = this.Primary();
 			Token token = this.Current();
 			if(token.TokenType == TokenType.Binary && token.Value == "&") {
 				this.Next();
-				Expression<Func<TruthState, TriNumber>> right = this.Primary();
+				Expression<Func<TruthState, int>> right = this.Primary();
 				if(right == null && this.Error == null) {
 					this.Error = "Expression is missing after " + token.Value;
 					return null;
 				}
-				return s => TriNumber.And(left.Compile()(s), right.Compile()(s));
+				Func<TruthState, int> lf = left.Compile();
+				Func<TruthState, int> rf = right.Compile();
+				return s => lf(s) & rf(s);
 			}
 			return left;
 		}
 
-		private Expression<Func<TruthState, TriNumber>> Primary() {
+		private Expression<Func<TruthState, int>> Primary() {
 			Token token = this.Current();
 			if(token.TokenType == TokenType.Open) {
 				this.Next();
-				Expression<Func<TruthState, TriNumber>> expr = this.Comparison();
+				Expression<Func<TruthState, int>> expr = this.Comparison();
 				if(expr != null) {
 					token = this.Current();
 					if(token.TokenType != TokenType.Close) {
 						this.Error = "Missing ')'";
 					}
 					this.Next();
+				} else if(this.Error == null) {
+					this.Error = "Expression is missing after (";
+					return null;
 				}
 				return expr;
+			}
+			if(token.TokenType == TokenType.Binary && token.Value == "-") {
+				this.Next();
+				Expression<Func<TruthState, int>> expr = this.Comparison();
+				if(expr != null) {
+					Func<TruthState, int> f = expr.Compile();
+					return s => -f(s);
+				} else if(this.Error == null) {
+					this.Error = "Expression is missing after (";
+					return null;
+				}
+			}
+			if(token.TokenType == TokenType.Binary && token.Value == "~") {
+				this.Next();
+				Expression<Func<TruthState, int>> expr = this.Comparison();
+				if(expr != null) {
+					Func<TruthState, int> f = expr.Compile();
+					return s => ~f(s);
+				} else if(this.Error == null) {
+					this.Error = "Expression is missing after (";
+					return null;
+				}
+			}
+			if(token.TokenType == TokenType.Binary && token.Value == "!") {
+				this.Next();
+				Expression<Func<TruthState, int>> expr = this.Comparison();
+				if(expr != null) {
+					Func<TruthState, int> f = expr.Compile();
+					return s => (f(s) == 0) ? 1 : 0;
+				} else if(this.Error == null) {
+					this.Error = "Expression is missing after (";
+					return null;
+				}
 			}
 			if(token.TokenType == TokenType.Id) {
 				this.Next();
@@ -298,7 +464,7 @@ namespace LogicCircuit {
 			return null;
 		}
 
-		private Expression<Func<TruthState, TriNumber>> Variable(string name) {
+		private Expression<Func<TruthState, int>> Variable(string name) {
 			int index = 0;
 			foreach(InputPinSocket pin in this.socket.Inputs) {
 				if(StringComparer.OrdinalIgnoreCase.Equals(pin.Pin.Name, name)) {
@@ -317,7 +483,7 @@ namespace LogicCircuit {
 			return null;
 		}
 
-		private Expression<Func<TruthState, TriNumber>> Literal(Token token) {
+		private Expression<Func<TruthState, int>> Literal(Token token) {
 			switch(token.TokenType) {
 			case TokenType.IntBin: return this.Literal(this.FromBin(token.Value));
 			case TokenType.IntDec: return this.Literal(this.FromDec(token.Value));
@@ -327,9 +493,8 @@ namespace LogicCircuit {
 			return null;
 		}
 
-		private Expression<Func<TruthState, TriNumber>> Literal(int value) {
-			TriNumber n = new TriNumber(32, value);
-			return s => n;
+		private Expression<Func<TruthState, int>> Literal(int value) {
+			return s => value;
 		}
 
 		private int FromBin(string text) {

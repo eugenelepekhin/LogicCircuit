@@ -39,7 +39,7 @@ namespace LogicCircuit {
 			this.DataContext = this;
 			this.InitializeComponent();
 
-			Dictionary<DataGridTextColumn, Func<TruthState, TriNumber>> dataAccessor = new Dictionary<DataGridTextColumn, Func<TruthState, TriNumber>>();
+			Dictionary<DataGridTextColumn, Func<TruthState, int>> dataAccessor = new Dictionary<DataGridTextColumn, Func<TruthState, int>>();
 			int index = 0;
 			foreach(InputPinSocket socket in this.testSocket.Inputs) {
 				DataGridTextColumn column = new DataGridTextColumn();
@@ -63,11 +63,11 @@ namespace LogicCircuit {
 			this.dataGrid.Sorting += new DataGridSortingEventHandler(this.DataGridSorting);
 		}
 
-		private static Func<TruthState, TriNumber> InputFieldAccesor(int index) {
+		private static Func<TruthState, int> InputFieldAccesor(int index) {
 			return s => s.Input[index];
 		}
 
-		private static Func<TruthState, TriNumber> OutputFieldAccesor(int index) {
+		private static Func<TruthState, int> OutputFieldAccesor(int index) {
 			return s => s.Output[index];
 		}
 
@@ -90,13 +90,13 @@ namespace LogicCircuit {
 					this.TruthTable.Filter = null;
 				} else {
 					ExpressionParser parser = new ExpressionParser(this.testSocket);
-					EXPR.Expression<Func<TruthState, TriNumber>> expr = parser.Parse(text);
+					EXPR.Expression<Func<TruthState, int>> expr = parser.Parse(text);
 					if(parser.Error == null) {
-						Func<TruthState, TriNumber> func = expr.Compile();
+						Func<TruthState, int> func = expr.Compile();
 						this.TruthTable.Filter = o => {
 							if(o is TruthState) {
 								TruthState s = (TruthState)o;
-								return func(s).ToBoolean();
+								return func(s) != 0;
 							}
 							return false;
 						};
@@ -111,17 +111,17 @@ namespace LogicCircuit {
 
 		private class TruthStateComparer : IComparer<TruthState>, IComparer {
 			private struct Sort {
-				public Func<TruthState, TriNumber> Data;
+				public Func<TruthState, int> Data;
 				public int Direction;
 				public DataGridTextColumn Column;
 			}
 			
-			private readonly Dictionary<DataGridTextColumn, Func<TruthState, TriNumber>> dataAccessor;
+			private readonly Dictionary<DataGridTextColumn, Func<TruthState, int>> dataAccessor;
 			private List<Sort> sort = new List<Sort>();
 
 			public bool IsEmpty { get { return this.sort.Count == 0; } }
 
-			public TruthStateComparer(Dictionary<DataGridTextColumn, Func<TruthState, TriNumber>> dataAccessor) {
+			public TruthStateComparer(Dictionary<DataGridTextColumn, Func<TruthState, int>> dataAccessor) {
 				this.dataAccessor = dataAccessor;
 			}
 
