@@ -289,7 +289,7 @@ namespace LogicCircuit {
 		private Expression<Func<TruthState, int>> Addition() {
 			Expression<Func<TruthState, int>> left = this.Multiplication();
 			Token token = this.Current();
-			if(token.TokenType == TokenType.Binary && token.Value == "+") {
+			while(token.TokenType == TokenType.Binary && (token.Value == "+" || token.Value == "-")) {
 				this.Next();
 				Expression<Func<TruthState, int>> right = this.Multiplication();
 				if(right == null && this.Error == null) {
@@ -298,18 +298,15 @@ namespace LogicCircuit {
 				}
 				Func<TruthState, int> lf = left.Compile();
 				Func<TruthState, int> rf = right.Compile();
-				return s => lf(s) + rf(s);
-			}
-			if(token.TokenType == TokenType.Binary && token.Value == "-") {
-				this.Next();
-				Expression<Func<TruthState, int>> right = this.Multiplication();
-				if(right == null && this.Error == null) {
-					this.Error = "Expression is missing after " + token.Value;
-					return null;
+				switch(token.Value) {
+				case "+":
+					left = s => lf(s) + rf(s);
+					break;
+				case "-":
+					left = s => lf(s) - rf(s);
+					break;
 				}
-				Func<TruthState, int> lf = left.Compile();
-				Func<TruthState, int> rf = right.Compile();
-				return s => lf(s) - rf(s);
+				token = this.Current();
 			}
 			return left;
 		}
@@ -317,7 +314,7 @@ namespace LogicCircuit {
 		private Expression<Func<TruthState, int>> Multiplication() {
 			Expression<Func<TruthState, int>> left = this.Conjunction();
 			Token token = this.Current();
-			if(token.TokenType == TokenType.Binary && token.Value == "*") {
+			while(token.TokenType == TokenType.Binary && (token.Value == "*" || token.Value == "/" || token.Value == "%")) {
 				this.Next();
 				Expression<Func<TruthState, int>> right = this.Conjunction();
 				if(right == null && this.Error == null) {
@@ -326,29 +323,18 @@ namespace LogicCircuit {
 				}
 				Func<TruthState, int> lf = left.Compile();
 				Func<TruthState, int> rf = right.Compile();
-				return s => lf(s) * rf(s);
-			}
-			if(token.TokenType == TokenType.Binary && token.Value == "/") {
-				this.Next();
-				Expression<Func<TruthState, int>> right = this.Conjunction();
-				if(right == null && this.Error == null) {
-					this.Error = "Expression is missing after " + token.Value;
-					return null;
+				switch(token.Value) {
+				case "*":
+					left = s => lf(s) * rf(s);
+					break;
+				case "/":
+					left = s => lf(s) / rf(s);
+					break;
+				case "%":
+					left = s => lf(s) % rf(s);
+					break;
 				}
-				Func<TruthState, int> lf = left.Compile();
-				Func<TruthState, int> rf = right.Compile();
-				return s => lf(s) / rf(s);
-			}
-			if(token.TokenType == TokenType.Binary && token.Value == "%") {
-				this.Next();
-				Expression<Func<TruthState, int>> right = this.Conjunction();
-				if(right == null && this.Error == null) {
-					this.Error = "Expression is missing after " + token.Value;
-					return null;
-				}
-				Func<TruthState, int> lf = left.Compile();
-				Func<TruthState, int> rf = right.Compile();
-				return s => lf(s) % rf(s);
+				token = this.Current();
 			}
 			return left;
 		}
@@ -356,7 +342,7 @@ namespace LogicCircuit {
 		private Expression<Func<TruthState, int>> Conjunction() {
 			Expression<Func<TruthState, int>> left = this.Disjunction();
 			Token token = this.Current();
-			if(token.TokenType == TokenType.Binary && token.Value == "|") {
+			while(token.TokenType == TokenType.Binary && (token.Value == "|" || token.Value == "^")) {
 				this.Next();
 				Expression<Func<TruthState, int>> right = this.Disjunction();
 				if(right == null && this.Error == null) {
@@ -365,18 +351,15 @@ namespace LogicCircuit {
 				}
 				Func<TruthState, int> lf = left.Compile();
 				Func<TruthState, int> rf = right.Compile();
-				return s => lf(s) | rf(s);
-			}
-			if(token.TokenType == TokenType.Binary && token.Value == "^") {
-				this.Next();
-				Expression<Func<TruthState, int>> right = this.Disjunction();
-				if(right == null && this.Error == null) {
-					this.Error = "Expression is missing after " + token.Value;
-					return null;
+				switch(token.Value) {
+				case "|":
+					left = s => lf(s) | rf(s);
+					break;
+				case "^":
+					left = s => lf(s) ^ rf(s);
+					break;
 				}
-				Func<TruthState, int> lf = left.Compile();
-				Func<TruthState, int> rf = right.Compile();
-				return s => lf(s) ^ rf(s);
+				token = this.Current();
 			}
 			return left;
 		}
@@ -384,7 +367,7 @@ namespace LogicCircuit {
 		private Expression<Func<TruthState, int>> Disjunction() {
 			Expression<Func<TruthState, int>> left = this.Primary();
 			Token token = this.Current();
-			if(token.TokenType == TokenType.Binary && token.Value == "&") {
+			while(token.TokenType == TokenType.Binary && token.Value == "&") {
 				this.Next();
 				Expression<Func<TruthState, int>> right = this.Primary();
 				if(right == null && this.Error == null) {
@@ -393,7 +376,8 @@ namespace LogicCircuit {
 				}
 				Func<TruthState, int> lf = left.Compile();
 				Func<TruthState, int> rf = right.Compile();
-				return s => lf(s) & rf(s);
+				left = s => lf(s) & rf(s);
+				token = this.Current();
 			}
 			return left;
 		}
