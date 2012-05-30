@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using EXPR=System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -90,9 +89,8 @@ namespace LogicCircuit {
 					this.TruthTable.Filter = null;
 				} else {
 					ExpressionParser parser = new ExpressionParser(this.testSocket);
-					EXPR.Expression<Func<TruthState, int>> expr = parser.Parse(text);
+					Func<TruthState, int> func = parser.Parse(text);
 					if(parser.Error == null) {
-						Func<TruthState, int> func = expr.Compile();
 						this.TruthTable.Filter = o => {
 							if(o is TruthState) {
 								TruthState s = (TruthState)o;

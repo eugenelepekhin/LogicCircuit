@@ -44,10 +44,11 @@ namespace LogicCircuit {
 			this.socket = socket;
 		}
 
-		public Expression<Func<TruthState, int>> Parse(string text) {
+		public Func<TruthState, int> Parse(string text) {
 			this.Error = null;
 			using(this.reader = new StringReader(text)) {
-				return this.Comparison();
+				Expression<Func<TruthState, int>> expr = this.Comparison();
+				return expr.Compile();
 			}
 		}
 
