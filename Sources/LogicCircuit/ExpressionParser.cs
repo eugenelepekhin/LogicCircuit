@@ -30,7 +30,15 @@ namespace LogicCircuit {
 		private StringReader reader;
 		private StringBuilder buffer = new StringBuilder();
 		private Token current;
-		public string Error { get; private set; }
+		private string error;
+		public string Error {
+			get { return this.error; }
+			private set {
+				if(value == null || this.error == null) {
+					this.error = value;
+				}
+			}
+		}
 
 		public ExpressionParser(CircuitTestSocket socket) {
 			this.socket = socket;
@@ -220,7 +228,7 @@ namespace LogicCircuit {
 			if(token.TokenType == TokenType.Binary && token.Value == "=") {
 				this.Next();
 				Expression<Func<TruthState, int>> right = this.Addition();
-				if(right == null && this.Error == null) {
+				if(right == null) {
 					this.Error = "Expression is missing after " + token.Value;
 					return null;
 				}
@@ -231,7 +239,7 @@ namespace LogicCircuit {
 			if(token.TokenType == TokenType.Binary && token.Value == "!=") {
 				this.Next();
 				Expression<Func<TruthState, int>> right = this.Addition();
-				if(right == null && this.Error == null) {
+				if(right == null) {
 					this.Error = "Expression is missing after " + token.Value;
 					return null;
 				}
@@ -242,7 +250,7 @@ namespace LogicCircuit {
 			if(token.TokenType == TokenType.Binary && token.Value == "<") {
 				this.Next();
 				Expression<Func<TruthState, int>> right = this.Addition();
-				if(right == null && this.Error == null) {
+				if(right == null) {
 					this.Error = "Expression is missing after " + token.Value;
 					return null;
 				}
@@ -253,7 +261,7 @@ namespace LogicCircuit {
 			if(token.TokenType == TokenType.Binary && token.Value == "<=") {
 				this.Next();
 				Expression<Func<TruthState, int>> right = this.Addition();
-				if(right == null && this.Error == null) {
+				if(right == null) {
 					this.Error = "Expression is missing after " + token.Value;
 					return null;
 				}
@@ -264,7 +272,7 @@ namespace LogicCircuit {
 			if(token.TokenType == TokenType.Binary && token.Value == ">") {
 				this.Next();
 				Expression<Func<TruthState, int>> right = this.Addition();
-				if(right == null && this.Error == null) {
+				if(right == null) {
 					this.Error = "Expression is missing after " + token.Value;
 					return null;
 				}
@@ -275,7 +283,7 @@ namespace LogicCircuit {
 			if(token.TokenType == TokenType.Binary && token.Value == ">=") {
 				this.Next();
 				Expression<Func<TruthState, int>> right = this.Addition();
-				if(right == null && this.Error == null) {
+				if(right == null) {
 					this.Error = "Expression is missing after " + token.Value;
 					return null;
 				}
@@ -292,7 +300,7 @@ namespace LogicCircuit {
 			while(token.TokenType == TokenType.Binary && (token.Value == "+" || token.Value == "-")) {
 				this.Next();
 				Expression<Func<TruthState, int>> right = this.Multiplication();
-				if(right == null && this.Error == null) {
+				if(right == null) {
 					this.Error = "Expression is missing after " + token.Value;
 					return null;
 				}
@@ -317,7 +325,7 @@ namespace LogicCircuit {
 			while(token.TokenType == TokenType.Binary && (token.Value == "*" || token.Value == "/" || token.Value == "%")) {
 				this.Next();
 				Expression<Func<TruthState, int>> right = this.Conjunction();
-				if(right == null && this.Error == null) {
+				if(right == null) {
 					this.Error = "Expression is missing after " + token.Value;
 					return null;
 				}
@@ -345,7 +353,7 @@ namespace LogicCircuit {
 			while(token.TokenType == TokenType.Binary && (token.Value == "|" || token.Value == "^")) {
 				this.Next();
 				Expression<Func<TruthState, int>> right = this.Disjunction();
-				if(right == null && this.Error == null) {
+				if(right == null) {
 					this.Error = "Expression is missing after " + token.Value;
 					return null;
 				}
@@ -365,18 +373,43 @@ namespace LogicCircuit {
 		}
 
 		private Expression<Func<TruthState, int>> Disjunction() {
-			Expression<Func<TruthState, int>> left = this.Primary();
+			Expression<Func<TruthState, int>> left = this.Shift();
 			Token token = this.Current();
 			while(token.TokenType == TokenType.Binary && token.Value == "&") {
 				this.Next();
-				Expression<Func<TruthState, int>> right = this.Primary();
-				if(right == null && this.Error == null) {
+				Expression<Func<TruthState, int>> right = this.Shift();
+				if(right == null) {
 					this.Error = "Expression is missing after " + token.Value;
 					return null;
 				}
 				Func<TruthState, int> lf = left.Compile();
 				Func<TruthState, int> rf = right.Compile();
 				left = s => lf(s) & rf(s);
+				token = this.Current();
+			}
+			return left;
+		}
+
+		private Expression<Func<TruthState, int>> Shift() {
+			Expression<Func<TruthState, int>> left = this.Primary();
+			Token token = this.Current();
+			while(token.TokenType == TokenType.Binary && (token.Value == "<<" || token.Value == ">>")) {
+				this.Next();
+				Expression<Func<TruthState, int>> right = this.Primary();
+				if(right == null) {
+					this.Error = "Expression is missing after " + token.Value;
+					return null;
+				}
+				Func<TruthState, int> lf = left.Compile();
+				Func<TruthState, int> rf = right.Compile();
+				switch(token.Value) {
+				case "<<":
+					left = s => lf(s) << rf(s);
+					break;
+				case ">>":
+					left = s => lf(s) >> rf(s);
+					break;
+				}
 				token = this.Current();
 			}
 			return left;
@@ -391,9 +424,10 @@ namespace LogicCircuit {
 					token = this.Current();
 					if(token.TokenType != TokenType.Close) {
 						this.Error = "Missing ')'";
+						return null;
 					}
 					this.Next();
-				} else if(this.Error == null) {
+				} else {
 					this.Error = "Expression is missing after (";
 					return null;
 				}
@@ -405,7 +439,7 @@ namespace LogicCircuit {
 				if(expr != null) {
 					Func<TruthState, int> f = expr.Compile();
 					return s => -f(s);
-				} else if(this.Error == null) {
+				} else {
 					this.Error = "Expression is missing after (";
 					return null;
 				}
@@ -416,7 +450,7 @@ namespace LogicCircuit {
 				if(expr != null) {
 					Func<TruthState, int> f = expr.Compile();
 					return s => ~f(s);
-				} else if(this.Error == null) {
+				} else {
 					this.Error = "Expression is missing after (";
 					return null;
 				}
@@ -427,7 +461,7 @@ namespace LogicCircuit {
 				if(expr != null) {
 					Func<TruthState, int> f = expr.Compile();
 					return s => (f(s) == 0) ? 1 : 0;
-				} else if(this.Error == null) {
+				} else {
 					this.Error = "Expression is missing after (";
 					return null;
 				}
