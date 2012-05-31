@@ -44,6 +44,7 @@ namespace LogicCircuit {
 				DataGridTextColumn column = new DataGridTextColumn();
 				column.Header = socket.Pin.Name;
 				column.Binding = new Binding("Input[" + index + "]");
+				column.Binding.StringFormat = "{0:X}";
 				this.dataGrid.Columns.Add(column);
 				dataAccessor.Add(column, DialogTruthTable.InputFieldAccesor(index));
 				index++;
@@ -53,6 +54,7 @@ namespace LogicCircuit {
 				DataGridTextColumn column = new DataGridTextColumn();
 				column.Header = socket.Pin.Name;
 				column.Binding = new Binding("Output[" + index + "]");
+				column.Binding.StringFormat = "{0:X}";
 				this.dataGrid.Columns.Add(column);
 				dataAccessor.Add(column, DialogTruthTable.OutputFieldAccesor(index));
 				index++;
