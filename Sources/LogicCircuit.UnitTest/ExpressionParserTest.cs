@@ -27,6 +27,7 @@ namespace LogicCircuit.UnitTest {
 			Func<TruthState, int> expr = parser.Parse(text);
 			Assert.IsNull(expr, "Expecting parse to faile: " + text);
 			Assert.IsNotNull(parser.Error, "Expecting parsing error");
+			this.TestContext.WriteLine("Expression: {0} parsing error: {1}", text, parser.Error);
 		}
 
 		private void Revert(StringBuilder text) {
@@ -276,7 +277,223 @@ namespace LogicCircuit.UnitTest {
 			this.Valid(parser, state, 0, "0 = 10");
 			this.Valid(parser, state, 0, "5 == 3");
 			this.Invalid(parser, state, "1 = ");
-			this.Invalid(parser, state, "10 == ");
+			this.Invalid(parser, state, "1 = 1 ==");
+			// check priority of expressions
+			this.Valid(parser, state, 0, "3 = 3 + 1");
+
+			this.Valid(parser, state, 0, "0 != 0");
+			this.Valid(parser, state, 1, "0 != 1");
+			this.Valid(parser, state, 1, "-1 <> 1");
+			this.Valid(parser, state, 0, "1 <> 1");
+			this.Valid(parser, state, 0, "-1 != -1");
+			this.Valid(parser, state, 1, "-1 != -2");
+			this.Invalid(parser, state, "3 != ");
+			this.Invalid(parser, state, "3 != 2 = ");
+			// check priority of expressions
+			this.Valid(parser, state, 1, "3 != 3 + 10");
+
+			this.Valid(parser, state, 0, "0 < 0");
+			this.Valid(parser, state, 1, "0 < 1");
+			this.Valid(parser, state, 1, "-1 < 1");
+			this.Valid(parser, state, 1, "-3 < -1");
+			this.Valid(parser, state, 0, "-1 < -3");
+			this.Valid(parser, state, 0, "-1 < -1");
+			this.Invalid(parser, state, "3 < ");
+			this.Invalid(parser, state, "3 < 2 < ");
+			// check priority of expressions
+			this.Valid(parser, state, 1, "3 < 3 + 10");
+
+			this.Valid(parser, state, 1, "0 <= 0");
+			this.Valid(parser, state, 1, "0 <= 1");
+			this.Valid(parser, state, 1, "-1 <= 1");
+			this.Valid(parser, state, 1, "-3 <= -1");
+			this.Valid(parser, state, 0, "-1 <= -3");
+			this.Valid(parser, state, 1, "-1 <= -1");
+			this.Invalid(parser, state, "3 <= ");
+			this.Invalid(parser, state, "3 <= 2 <= ");
+			// check priority of expressions
+			this.Valid(parser, state, 1, "3 <= 3 + 10");
+
+			this.Valid(parser, state, 1, "0 >= 0");
+			this.Valid(parser, state, 0, "0 >= 1");
+			this.Valid(parser, state, 0, "-1 >= 1");
+			this.Valid(parser, state, 0, "-3 >= -1");
+			this.Valid(parser, state, 1, "-1 >= -3");
+			this.Valid(parser, state, 1, "-1 >= -1");
+			this.Invalid(parser, state, "3 >= ");
+			this.Invalid(parser, state, "3 >= 2 >= ");
+			// check priority of expressions
+			this.Valid(parser, state, 1, "30 >= 3 + 10");
+
+			this.Valid(parser, state, 0, "0 > 0");
+			this.Valid(parser, state, 0, "0 > 1");
+			this.Valid(parser, state, 0, "-1 > 1");
+			this.Valid(parser, state, 0, "-3 > -1");
+			this.Valid(parser, state, 1, "-1 > -3");
+			this.Valid(parser, state, 0, "-1 > -1");
+			this.Invalid(parser, state, "3 > ");
+			this.Invalid(parser, state, "3 > 2 > ");
+			// check priority of expressions
+			this.Valid(parser, state, 1, "30 > 3 + 10");
+		}
+
+		/// <summary>
+		/// A test for Parse of addition expression
+		/// </summary>
+		[TestMethod()]
+		public void ExpressionParserAdditionParseTest() {
+			CircuitTestSocket socket = null;
+			ExpressionParser parser = new ExpressionParser(socket);
+			TruthState state = new TruthState(0, 0);
+
+			this.Valid(parser, state, 0, "0 + 0");
+			this.Valid(parser, state, 2, "1 + 1");
+			this.Valid(parser, state, 6, "1 + 2 + 3");
+			this.Valid(parser, state, -18, "10 + 2 - 30");
+			this.Valid(parser, state, 8, "10 - 2");
+			this.Valid(parser, state, -12, "-10 - 2");
+
+			this.Invalid(parser, state, "3 + ");
+			this.Invalid(parser, state, "5 - ");
+			this.Invalid(parser, state, "3 - 2 + ");
+			this.Invalid(parser, state, "3 + 2 - ");
+
+			// check priority of expressions
+			this.Valid(parser, state, 7, "1 + 3 * 2");
+			this.Valid(parser, state, 8, "(1 + 3) * 2");
+			this.Valid(parser, state, 26, "2 * 3 + 5 * 4");
+			this.Valid(parser, state, -26, "-2 * 3 - 5 * 4");
+		}
+
+		/// <summary>
+		/// A test for Parse of multiplication expression
+		/// </summary>
+		[TestMethod()]
+		public void ExpressionParserMultiplicationParseTest() {
+			CircuitTestSocket socket = null;
+			ExpressionParser parser = new ExpressionParser(socket);
+			TruthState state = new TruthState(0, 0);
+
+			this.Valid(parser, state, 0, "0 * 0");
+			this.Valid(parser, state, 1, "1 * 1");
+			this.Valid(parser, state, 6, "1 * 2 * 3");
+			this.Valid(parser, state, -20, "10 * -2");
+			this.Valid(parser, state, 5, "10 / 2");
+			this.Valid(parser, state, -4, "100 / -25");
+			this.Valid(parser, state, 1, "10 % 3");
+			this.Valid(parser, state, 2, "10 % 4");
+			this.Valid(parser, state, 0, "10 % 5");
+			this.Valid(parser, state, 2, "10 * 4 / 5 % 3");
+
+			this.Invalid(parser, state, "3 * ");
+			this.Invalid(parser, state, "5 / ");
+			this.Invalid(parser, state, "5 % ");
+			this.Invalid(parser, state, "3 * 2 * ");
+			this.Invalid(parser, state, "3 / 2 / ");
+
+			// check priority of expressions
+			this.Valid(parser, state, 9, "3 * 2 | 1");
+			this.Valid(parser, state, 36, "1 | 2 * 4 | 8");
+			this.Valid(parser, state, 4, "4 | 8 / 1 | 2");
+			this.Valid(parser, state, 2, "4 | 8 | 2 % 0b1 | 0b10");
+		}
+
+		/// <summary>
+		/// A test for Parse of conjunction expression
+		/// </summary>
+		[TestMethod()]
+		public void ExpressionParserConjunctionParseTest() {
+			CircuitTestSocket socket = null;
+			ExpressionParser parser = new ExpressionParser(socket);
+			TruthState state = new TruthState(0, 0);
+
+			this.Valid(parser, state, 0, "0 | 0");
+			this.Valid(parser, state, 1, "1 | 1");
+			this.Valid(parser, state, 7, "1 | 2 | 4");
+			this.Valid(parser, state, 1, "1 ^ 1 ^ 1");
+			this.Valid(parser, state, 0, "1 ^ 1 ^ 1 ^ 1");
+			this.Valid(parser, state, 0, "1 ^ 1");
+			this.Valid(parser, state, 0, "198 ^ 198");
+			this.Valid(parser, state, 3, "1 | 2");
+
+			this.Invalid(parser, state, "3 | ");
+			this.Invalid(parser, state, "5 ^ ");
+			this.Invalid(parser, state, "3 | 2 ^ ");
+			this.Invalid(parser, state, "3 ^ 2 | ");
+
+			// check priority of expressions
+			this.Valid(parser, state, 7, "7 | 2 & 1");
+			this.Valid(parser, state, 6, "7 ^ 3 & 1");
+		}
+
+		/// <summary>
+		/// A test for Parse of disjunction expression
+		/// </summary>
+		[TestMethod()]
+		public void ExpressionParserDisjunctionParseTest() {
+			CircuitTestSocket socket = null;
+			ExpressionParser parser = new ExpressionParser(socket);
+			TruthState state = new TruthState(0, 0);
+
+			this.Valid(parser, state, 0, "0 & 0");
+			this.Valid(parser, state, 1, "1 & 1");
+			this.Valid(parser, state, 1, "3 & 1");
+			this.Valid(parser, state, 198, "198 & 198");
+			this.Valid(parser, state, 0, "1 & 2");
+
+			this.Invalid(parser, state, "3 & ");
+			this.Invalid(parser, state, "3 & 2 & ");
+
+			// check priority of expressions
+			this.Valid(parser, state, 0xFC, "0xFF & 0xFF << 2");
+		}
+
+		/// <summary>
+		/// A test for Parse of shift expression
+		/// </summary>
+		[TestMethod()]
+		public void ExpressionParserShiftParseTest() {
+			CircuitTestSocket socket = null;
+			ExpressionParser parser = new ExpressionParser(socket);
+			TruthState state = new TruthState(0, 0);
+
+			this.Valid(parser, state, 0, "0 << 0");
+			this.Valid(parser, state, 2, "1 << 1");
+			this.Valid(parser, state, 6, "3 << 1");
+			this.Valid(parser, state, 12, "3 << 2");
+			this.Valid(parser, state, 3, "7 >> 1");
+			this.Valid(parser, state, 1, "7 >> 2");
+			this.Valid(parser, state, 7 >> -1, "7 >> -1");
+
+			this.Invalid(parser, state, "3 << ");
+			this.Invalid(parser, state, "3 << 2 << ");
+
+			// check priority of expressions
+			this.Valid(parser, state, 3, "7 >> --1");
+		}
+
+		/// <summary>
+		/// A test for Parse of primary expression
+		/// </summary>
+		[TestMethod()]
+		public void ExpressionParserPrimaryParseTest() {
+			CircuitTestSocket socket = null;
+			ExpressionParser parser = new ExpressionParser(socket);
+			TruthState state = new TruthState(0, 0);
+
+			this.Valid(parser, state, -1, "-1");
+			this.Valid(parser, state, 3, "--3");
+			this.Valid(parser, state, 0, "!3");
+			this.Valid(parser, state, 1, "!0");
+			this.Valid(parser, state, -8, "~7");
+
+			this.Invalid(parser, state, "-");
+			this.Invalid(parser, state, "!");
+			this.Invalid(parser, state, "~");
+			this.Invalid(parser, state, "(3 + 2");
+
+			// check priority of expressions
+			this.Valid(parser, state, 6, "3 * (1 + 1)");
 		}
 	}
 }

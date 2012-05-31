@@ -51,7 +51,7 @@ namespace LogicCircuit {
 			public TokenType TokenType;
 
 			public static Token Eos() {
-				return new Token() { Value = string.Empty, TokenType = TokenType.EOS };
+				return new Token() { Value = "End Of Text", TokenType = TokenType.EOS };
 			}
 
 			public bool Is(string value) {
@@ -467,7 +467,8 @@ namespace LogicCircuit {
 					if(right == null) {
 						return this.ExprMissing(token);
 					}
-					left = s => left(s) & right(s);
+					Func<TruthState, int> original = left;
+					left = s => original(s) & right(s);
 					token = this.Current();
 				}
 			}
