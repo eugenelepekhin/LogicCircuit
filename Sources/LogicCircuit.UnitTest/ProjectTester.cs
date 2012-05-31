@@ -58,10 +58,10 @@ namespace LogicCircuit.UnitTest {
 			// Load it from test directory
 			CircuitProject circuitProject = CircuitProject.Create(path);
 			File.Delete(path);
+			ProjectTester.InitResources();
 			if(initialCircuit != null) {
 				ProjectTester.SwitchTo(circuitProject, initialCircuit);
 			}
-			ProjectTester.InitResources();
 			ProjectTester.GuaranteeGlyph(circuitProject);
 			return circuitProject;
 		}

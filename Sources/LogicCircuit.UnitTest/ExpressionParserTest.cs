@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using LogicCircuit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -25,9 +26,9 @@ namespace LogicCircuit.UnitTest {
 
 		private void Invalid(ExpressionParser parser, TruthState state, string text) {
 			Func<TruthState, int> expr = parser.Parse(text);
-			Assert.IsNull(expr, "Expecting parse to faile: " + text);
+			Assert.IsNull(expr, "Expecting parse to fail: " + text);
 			Assert.IsNotNull(parser.Error, "Expecting parsing error");
-			this.TestContext.WriteLine("Expression: {0} parsing error: {1}", text, parser.Error);
+			this.TestContext.WriteLine("Expression: [{0}] Expected parsing error: {1}", text, parser.Error);
 		}
 
 		private void Revert(StringBuilder text) {
@@ -76,6 +77,28 @@ namespace LogicCircuit.UnitTest {
 
 		private string ToHex(int n) {
 			return "0x" + n.ToString("x");
+		}
+
+		private int InputIndex(CircuitTestSocket socket, string pinName) {
+			int index = 0;
+			foreach(InputPinSocket pin in socket.Inputs) {
+				if(pin.Pin.Name == pinName) {
+					return index;
+				}
+				index++;
+			}
+			return index;
+		}
+
+		private int OutputIndex(CircuitTestSocket socket, string pinName) {
+			int index = 0;
+			foreach(OutputPinSocket pin in socket.Outputs) {
+				if(pin.Pin.Name == pinName) {
+					return index;
+				}
+				index++;
+			}
+			return index;
 		}
 
 		/// <summary>
@@ -494,6 +517,34 @@ namespace LogicCircuit.UnitTest {
 
 			// check priority of expressions
 			this.Valid(parser, state, 6, "3 * (1 + 1)");
+		}
+
+		/// <summary>
+		/// A test for Parse of primary expression
+		/// </summary>
+		[TestMethod()]
+		public void ExpressionParserVariableParseTest() {
+			CircuitProject project = ProjectTester.Load(this.TestContext, Properties.Resources.Digital_Clock, "4 bit adder");
+			CircuitTestSocket socket = new CircuitTestSocket(project.ProjectSet.Project.LogicalCircuit);
+			ExpressionParser parser = new ExpressionParser(socket);
+			TruthState state = new TruthState(socket.Inputs.Count(), socket.Outputs.Count());
+
+			state.Input[this.InputIndex(socket, "c")]  = 1;
+			state.Input[this.InputIndex(socket, "x1")] = 5;
+			state.Input[this.InputIndex(socket, "x2")] = 4;
+			state.Output[this.OutputIndex(socket, "s")] = 9;
+			state.Output[this.OutputIndex(socket, "c'")] = 1;
+			
+			this.Valid(parser, state, 1, "c");
+			this.Valid(parser, state, 5, "x1");
+			this.Valid(parser, state, 4, "x2");
+			this.Valid(parser, state, 9, "s");
+			this.Valid(parser, state, 1, "\"c'\"");
+
+			this.Invalid(parser, state, "d");
+			this.Invalid(parser, state, "\"c'");
+			this.Invalid(parser, state, "\"c'\\");
+			this.Invalid(parser, state, "\"c'\\\"\"");
 		}
 	}
 }
