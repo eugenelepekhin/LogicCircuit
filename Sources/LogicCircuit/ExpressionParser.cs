@@ -7,6 +7,31 @@ using System.Linq.Expressions;
 using System.Globalization;
 
 namespace LogicCircuit {
+	/// <summary>
+	/// Parse expressions over it input and output pins.
+	/// BNF:
+	/// Expr ::= LogicalOr
+	/// LogicalOr ::= LogicalAnd || LogicalAnd
+	/// LogicalAnd ::= Comparison && Comparison
+	/// Comparison ::= Addition CMP Addition
+	/// CMP ::= = | == | != | <> | < | <= | >= | >
+	/// Addition ::= Multiplication ADD Multiplication
+	/// ADD ::= + | -
+	/// Multiplication ::= Conjunction MUL Conjunction
+	/// MUL ::= * | / | %
+	/// Conjunction ::= Disjunction CON Disjunction
+	/// CON ::= ^ | '|'
+	/// Disjunction ::= Shift DIS Shift
+	/// DIS ::= &
+	/// Shift ::= Primary SHT Primary
+	/// SHT ::= << | >>
+	/// Primary ::= ( Expr ) | - Expr | ~ Expr | ! Expr | ID | Literal
+	/// ID ::= SimpleId | QuotedId
+	/// SimpleId ::= Letter | Letter LettersOrDigids
+	/// LettersOrDigids ::= LettersOrDigids | Letter | Digit
+	/// QuotedId ::= " (ESC | [~"\])* "
+	/// ESC ::= \\ | \" | \.
+	/// </summary>
 	public class ExpressionParser {
 		private enum TokenType {
 			IntBin,
@@ -24,12 +49,27 @@ namespace LogicCircuit {
 		private struct Token {
 			public string Value;
 			public TokenType TokenType;
+
+			public static Token Eos() {
+				return new Token() { Value = string.Empty, TokenType = TokenType.EOS };
+			}
+
+			public bool Is(string value) {
+				return this.Value == value;
+			}
+			public bool Is(string value1, string value2) {
+				return this.Value == value1 || this.Value == value2;
+			}
+			public bool Is(string value1, string value2, string value3) {
+				return this.Value == value1 || this.Value == value2 || this.Value == value3;
+			}
 		}
 
 		private CircuitTestSocket socket;
 		private StringReader reader;
 		private StringBuilder buffer = new StringBuilder();
 		private Token current;
+
 		private string error;
 		public string Error {
 			get { return this.error; }
@@ -46,9 +86,14 @@ namespace LogicCircuit {
 
 		public Func<TruthState, int> Parse(string text) {
 			this.Error = null;
+			this.current = new Token();
 			using(this.reader = new StringReader(text)) {
-				Expression<Func<TruthState, int>> expr = this.Comparison();
-				return expr.Compile();
+				Func<TruthState, int> expr = this.Expression();
+				if(this.Current().TokenType != TokenType.EOS) {
+					this.Error = this.Current().Value + " Unexpected";
+					return null;
+				}
+				return expr;
 			}
 		}
 
@@ -69,7 +114,7 @@ namespace LogicCircuit {
 				this.reader.Read();
 			}
 			if(this.reader.Peek() == -1) {
-				return new Token() { Value = string.Empty, TokenType = TokenType.EOS };
+				return Token.Eos();
 			}
 			char c = (char)this.reader.Peek();
 			if(char.IsLetter(c)) {
@@ -84,8 +129,8 @@ namespace LogicCircuit {
 			if("()+-*/%&|^~!=<>".Contains(c)) {
 				return this.NextOperator();
 			}
-			this.Error = "Unknown char";
-			return new Token() { Value = string.Empty, TokenType = TokenType.EOS };
+			this.Error = "Unknown char: " + c.ToString();
+			return Token.Eos();
 		}
 
 		private Token NextId() {
@@ -106,15 +151,15 @@ namespace LogicCircuit {
 					next = this.reader.Read();
 					if(next == -1) {
 						this.buffer.Append(c);
-						this.Error = "Quoted identifier does not have closing quote";
-						break;
+						this.Error = "Quoted identifier does not have closing quote: " + this.buffer.ToString().Trim();
+						return Token.Eos();
 					}
 					c = (char)next;
 				}
 				this.buffer.Append(c);
 				next = this.reader.Read();
 			}
-			return new Token() { Value = this.buffer.ToString(), TokenType = TokenType.Id };
+			return new Token() { Value = this.buffer.ToString().Trim(), TokenType = TokenType.Id };
 		}
 
 		private Token NextNumber() {
@@ -164,7 +209,8 @@ namespace LogicCircuit {
 				next = this.reader.Peek();
 			}
 			if(maxLength < this.buffer.Length || this.buffer.Length < 1) {
-				this.Error = "Invalid number";
+				this.Error = "Invalid number: " + this.buffer.ToString();
+				return Token.Eos();
 			}
 			return new Token() { Value = this.buffer.ToString(), TokenType = tokenType };
 		}
@@ -172,7 +218,8 @@ namespace LogicCircuit {
 		private Token NextOperator() {
 			this.buffer.Length = 0;
 			TokenType tokenType = TokenType.Binary;
-			switch(this.reader.Peek()) {
+			int c = this.reader.Peek();
+			switch(c) {
 			case '(': return new Token() { Value = new string((char)this.reader.Read(), 1), TokenType = TokenType.Open };
 			case ')': return new Token() { Value = new string((char)this.reader.Read(), 1), TokenType = TokenType.Close };
 			case '+':
@@ -180,11 +227,19 @@ namespace LogicCircuit {
 			case '*':
 			case '/':
 			case '%':
-			case '&': // allow &&
-			case '|':
-			case '^':
+				this.buffer.Append((char)this.reader.Read());
+				break;
 			case '~':
 				this.buffer.Append((char)this.reader.Read());
+				tokenType = TokenType.Unary;
+				break;
+			case '&':
+			case '|':
+			case '^':
+				this.buffer.Append((char)this.reader.Read());
+				if(this.reader.Peek() == c) {
+					this.buffer.Append((char)this.reader.Read());
+				}
 				break;
 			case '!':
 				this.buffer.Append((char)this.reader.Read());
@@ -223,248 +278,269 @@ namespace LogicCircuit {
 			return new Token() { Value = this.buffer.ToString(), TokenType = tokenType };
 		}
 
-		private Expression<Func<TruthState, int>> Comparison() {
-			Expression<Func<TruthState, int>> left = this.Addition();
-			Token token = this.Current();
-			if(token.TokenType == TokenType.Binary && token.Value == "=") {
-				this.Next();
-				Expression<Func<TruthState, int>> right = this.Addition();
-				if(right == null) {
-					this.Error = "Expression is missing after " + token.Value;
-					return null;
+		private Func<TruthState, int> ExprMissing(Token after) {
+			this.Error = "Expression is missing after " + after.Value;
+			return null;
+		}
+
+		private Func<TruthState, int> Expression() {
+			return this.LogicalOr();
+		}
+
+		private Func<TruthState, int> LogicalOr() {
+			Func<TruthState, int> left = this.LogicalAnd();
+			if(left != null) {
+				Token token = this.Current();
+				while(token.TokenType == TokenType.Binary && token.Is("||")) {
+					this.Next();
+					Func<TruthState, int> right = this.LogicalAnd();
+					if(right == null) {
+						return this.ExprMissing(token);
+					}
+					Func<TruthState, int> original = left;
+					left = s => (original(s) != 0 || right(s) != 0) ? 1 : 0;
+					token = this.Current();
 				}
-				Func<TruthState, int> lf = left.Compile();
-				Func<TruthState, int> rf = right.Compile();
-				return s => (lf(s) == rf(s)) ? 1 : 0;
-			}
-			if(token.TokenType == TokenType.Binary && token.Value == "!=") {
-				this.Next();
-				Expression<Func<TruthState, int>> right = this.Addition();
-				if(right == null) {
-					this.Error = "Expression is missing after " + token.Value;
-					return null;
-				}
-				Func<TruthState, int> lf = left.Compile();
-				Func<TruthState, int> rf = right.Compile();
-				return s => (lf(s) != rf(s)) ? 1 : 0;
-			}
-			if(token.TokenType == TokenType.Binary && token.Value == "<") {
-				this.Next();
-				Expression<Func<TruthState, int>> right = this.Addition();
-				if(right == null) {
-					this.Error = "Expression is missing after " + token.Value;
-					return null;
-				}
-				Func<TruthState, int> lf = left.Compile();
-				Func<TruthState, int> rf = right.Compile();
-				return s => (lf(s) < rf(s)) ? 1 : 0;
-			}
-			if(token.TokenType == TokenType.Binary && token.Value == "<=") {
-				this.Next();
-				Expression<Func<TruthState, int>> right = this.Addition();
-				if(right == null) {
-					this.Error = "Expression is missing after " + token.Value;
-					return null;
-				}
-				Func<TruthState, int> lf = left.Compile();
-				Func<TruthState, int> rf = right.Compile();
-				return s => (lf(s) <= rf(s)) ? 1 : 0;
-			}
-			if(token.TokenType == TokenType.Binary && token.Value == ">") {
-				this.Next();
-				Expression<Func<TruthState, int>> right = this.Addition();
-				if(right == null) {
-					this.Error = "Expression is missing after " + token.Value;
-					return null;
-				}
-				Func<TruthState, int> lf = left.Compile();
-				Func<TruthState, int> rf = right.Compile();
-				return s => (lf(s) > rf(s)) ? 1 : 0;
-			}
-			if(token.TokenType == TokenType.Binary && token.Value == ">=") {
-				this.Next();
-				Expression<Func<TruthState, int>> right = this.Addition();
-				if(right == null) {
-					this.Error = "Expression is missing after " + token.Value;
-					return null;
-				}
-				Func<TruthState, int> lf = left.Compile();
-				Func<TruthState, int> rf = right.Compile();
-				return s => (lf(s) >= rf(s)) ? 1 : 0;
 			}
 			return left;
 		}
 
-		private Expression<Func<TruthState, int>> Addition() {
-			Expression<Func<TruthState, int>> left = this.Multiplication();
-			Token token = this.Current();
-			while(token.TokenType == TokenType.Binary && (token.Value == "+" || token.Value == "-")) {
-				this.Next();
-				Expression<Func<TruthState, int>> right = this.Multiplication();
-				if(right == null) {
-					this.Error = "Expression is missing after " + token.Value;
-					return null;
+		private Func<TruthState, int> LogicalAnd() {
+			Func<TruthState, int> left = this.Comparison();
+			if(left != null) {
+				Token token = this.Current();
+				while(token.TokenType == TokenType.Binary && token.Is("&&")) {
+					this.Next();
+					Func<TruthState, int> right = this.Comparison();
+					if(right == null) {
+						return this.ExprMissing(token);
+					}
+					Func<TruthState, int> original = left;
+					left = s => (original(s) != 0 && right(s) != 0) ? 1 : 0;
+					token = this.Current();
 				}
-				Func<TruthState, int> lf = left.Compile();
-				Func<TruthState, int> rf = right.Compile();
-				switch(token.Value) {
-				case "+":
-					left = s => lf(s) + rf(s);
-					break;
-				case "-":
-					left = s => lf(s) - rf(s);
-					break;
-				}
-				token = this.Current();
 			}
 			return left;
 		}
 
-		private Expression<Func<TruthState, int>> Multiplication() {
-			Expression<Func<TruthState, int>> left = this.Conjunction();
-			Token token = this.Current();
-			while(token.TokenType == TokenType.Binary && (token.Value == "*" || token.Value == "/" || token.Value == "%")) {
-				this.Next();
-				Expression<Func<TruthState, int>> right = this.Conjunction();
-				if(right == null) {
-					this.Error = "Expression is missing after " + token.Value;
-					return null;
+		private Func<TruthState, int> Comparison() {
+			Func<TruthState, int> left = this.Addition();
+			if(left != null) {
+				Token token = this.Current();
+				if(token.TokenType == TokenType.Binary && token.Is("=", "==")) {
+					this.Next();
+					Func<TruthState, int> right = this.Addition();
+					if(right == null) {
+						return this.ExprMissing(token);
+					}
+					return s => (left(s) == right(s)) ? 1 : 0;
 				}
-				Func<TruthState, int> lf = left.Compile();
-				Func<TruthState, int> rf = right.Compile();
-				switch(token.Value) {
-				case "*":
-					left = s => lf(s) * rf(s);
-					break;
-				case "/":
-					left = s => lf(s) / rf(s);
-					break;
-				case "%":
-					left = s => lf(s) % rf(s);
-					break;
+				if(token.TokenType == TokenType.Binary && token.Is("!=", "<>")) {
+					this.Next();
+					Func<TruthState, int> right = this.Addition();
+					if(right == null) {
+						return this.ExprMissing(token);
+					}
+					return s => (left(s) != right(s)) ? 1 : 0;
 				}
-				token = this.Current();
+				if(token.TokenType == TokenType.Binary && token.Is("<")) {
+					this.Next();
+					Func<TruthState, int> right = this.Addition();
+					if(right == null) {
+						return this.ExprMissing(token);
+					}
+					return s => (left(s) < right(s)) ? 1 : 0;
+				}
+				if(token.TokenType == TokenType.Binary && token.Is("<=")) {
+					this.Next();
+					Func<TruthState, int> right = this.Addition();
+					if(right == null) {
+						return this.ExprMissing(token);
+					}
+					return s => (left(s) <= right(s)) ? 1 : 0;
+				}
+				if(token.TokenType == TokenType.Binary && token.Is(">")) {
+					this.Next();
+					Func<TruthState, int> right = this.Addition();
+					if(right == null) {
+						return this.ExprMissing(token);
+					}
+					return s => (left(s) > right(s)) ? 1 : 0;
+				}
+				if(token.TokenType == TokenType.Binary && token.Is(">=")) {
+					this.Next();
+					Func<TruthState, int> right = this.Addition();
+					if(right == null) {
+						return this.ExprMissing(token);
+					}
+					return s => (left(s) >= right(s)) ? 1 : 0;
+				}
 			}
 			return left;
 		}
 
-		private Expression<Func<TruthState, int>> Conjunction() {
-			Expression<Func<TruthState, int>> left = this.Disjunction();
-			Token token = this.Current();
-			while(token.TokenType == TokenType.Binary && (token.Value == "|" || token.Value == "^")) {
-				this.Next();
-				Expression<Func<TruthState, int>> right = this.Disjunction();
-				if(right == null) {
-					this.Error = "Expression is missing after " + token.Value;
-					return null;
+		private Func<TruthState, int> Addition() {
+			Func<TruthState, int> left = this.Multiplication();
+			if(left != null) {
+				Token token = this.Current();
+				while(token.TokenType == TokenType.Binary && token.Is("+", "-")) {
+					this.Next();
+					Func<TruthState, int> right = this.Multiplication();
+					if(right == null) {
+						return this.ExprMissing(token);
+					}
+					Func<TruthState, int> original = left;
+					switch(token.Value) {
+					case "+":
+						left = s => original(s) + right(s);
+						break;
+					case "-":
+						left = s => original(s) - right(s);
+						break;
+					}
+					token = this.Current();
 				}
-				Func<TruthState, int> lf = left.Compile();
-				Func<TruthState, int> rf = right.Compile();
-				switch(token.Value) {
-				case "|":
-					left = s => lf(s) | rf(s);
-					break;
-				case "^":
-					left = s => lf(s) ^ rf(s);
-					break;
-				}
-				token = this.Current();
 			}
 			return left;
 		}
 
-		private Expression<Func<TruthState, int>> Disjunction() {
-			Expression<Func<TruthState, int>> left = this.Shift();
-			Token token = this.Current();
-			while(token.TokenType == TokenType.Binary && token.Value == "&") {
-				this.Next();
-				Expression<Func<TruthState, int>> right = this.Shift();
-				if(right == null) {
-					this.Error = "Expression is missing after " + token.Value;
-					return null;
+		private Func<TruthState, int> Multiplication() {
+			Func<TruthState, int> left = this.Conjunction();
+			if(left != null) {
+				Token token = this.Current();
+				while(token.TokenType == TokenType.Binary && token.Is("*", "/", "%")) {
+					this.Next();
+					Func<TruthState, int> right = this.Conjunction();
+					if(right == null) {
+						return this.ExprMissing(token);
+					}
+					Func<TruthState, int> original = left;
+					switch(token.Value) {
+					case "*":
+						left = s => original(s) * right(s);
+						break;
+					case "/":
+						left = s => original(s) / right(s);
+						break;
+					case "%":
+						left = s => original(s) % right(s);
+						break;
+					}
+					token = this.Current();
 				}
-				Func<TruthState, int> lf = left.Compile();
-				Func<TruthState, int> rf = right.Compile();
-				left = s => lf(s) & rf(s);
-				token = this.Current();
 			}
 			return left;
 		}
 
-		private Expression<Func<TruthState, int>> Shift() {
-			Expression<Func<TruthState, int>> left = this.Primary();
-			Token token = this.Current();
-			while(token.TokenType == TokenType.Binary && (token.Value == "<<" || token.Value == ">>")) {
-				this.Next();
-				Expression<Func<TruthState, int>> right = this.Primary();
-				if(right == null) {
-					this.Error = "Expression is missing after " + token.Value;
-					return null;
+		private Func<TruthState, int> Conjunction() {
+			Func<TruthState, int> left = this.Disjunction();
+			if(left != null) {
+				Token token = this.Current();
+				while(token.TokenType == TokenType.Binary && token.Is("|", "^")) {
+					this.Next();
+					Func<TruthState, int> right = this.Disjunction();
+					if(right == null) {
+						return this.ExprMissing(token);
+					}
+					Func<TruthState, int> original = left;
+					switch(token.Value) {
+					case "|":
+						left = s => original(s) | right(s);
+						break;
+					case "^":
+						left = s => original(s) ^ right(s);
+						break;
+					}
+					token = this.Current();
 				}
-				Func<TruthState, int> lf = left.Compile();
-				Func<TruthState, int> rf = right.Compile();
-				switch(token.Value) {
-				case "<<":
-					left = s => lf(s) << rf(s);
-					break;
-				case ">>":
-					left = s => lf(s) >> rf(s);
-					break;
-				}
-				token = this.Current();
 			}
 			return left;
 		}
 
-		private Expression<Func<TruthState, int>> Primary() {
+		private Func<TruthState, int> Disjunction() {
+			Func<TruthState, int> left = this.Shift();
+			if(left != null) {
+				Token token = this.Current();
+				while(token.TokenType == TokenType.Binary && token.Is("&")) {
+					this.Next();
+					Func<TruthState, int> right = this.Shift();
+					if(right == null) {
+						return this.ExprMissing(token);
+					}
+					left = s => left(s) & right(s);
+					token = this.Current();
+				}
+			}
+			return left;
+		}
+
+		private Func<TruthState, int> Shift() {
+			Func<TruthState, int> left = this.Primary();
+			if(left != null) {
+				Token token = this.Current();
+				while(token.TokenType == TokenType.Binary && token.Is("<<", ">>")) {
+					this.Next();
+					Func<TruthState, int> right = this.Primary();
+					if(right == null) {
+						return this.ExprMissing(token);
+					}
+					Func<TruthState, int> original = left;
+					switch(token.Value) {
+					case "<<":
+						left = s => original(s) << right(s);
+						break;
+					case ">>":
+						left = s => original(s) >> right(s);
+						break;
+					}
+					token = this.Current();
+				}
+			}
+			return left;
+		}
+
+		private Func<TruthState, int> Primary() {
 			Token token = this.Current();
 			if(token.TokenType == TokenType.Open) {
 				this.Next();
-				Expression<Func<TruthState, int>> expr = this.Comparison();
+				Func<TruthState, int> expr = this.Expression();
 				if(expr != null) {
 					token = this.Current();
 					if(token.TokenType != TokenType.Close) {
-						this.Error = "Missing ')'";
+						this.Error = "Missing ')' instead of: " + token.Value;
 						return null;
 					}
 					this.Next();
 				} else {
-					this.Error = "Expression is missing after (";
-					return null;
+					return this.ExprMissing(token);
 				}
 				return expr;
 			}
-			if(token.TokenType == TokenType.Binary && token.Value == "-") {
+			if(token.TokenType == TokenType.Binary && token.Is("-")) {
 				this.Next();
-				Expression<Func<TruthState, int>> expr = this.Comparison();
+				Func<TruthState, int> expr = this.Expression();
 				if(expr != null) {
-					Func<TruthState, int> f = expr.Compile();
-					return s => -f(s);
+					return s => -expr(s);
 				} else {
-					this.Error = "Expression is missing after (";
-					return null;
+					return this.ExprMissing(token);
 				}
 			}
-			if(token.TokenType == TokenType.Binary && token.Value == "~") {
+			if(token.TokenType == TokenType.Unary && token.Value == "~") {
 				this.Next();
-				Expression<Func<TruthState, int>> expr = this.Comparison();
+				Func<TruthState, int> expr = this.Expression();
 				if(expr != null) {
-					Func<TruthState, int> f = expr.Compile();
-					return s => ~f(s);
+					return s => ~expr(s);
 				} else {
-					this.Error = "Expression is missing after (";
-					return null;
+					return this.ExprMissing(token);
 				}
 			}
-			if(token.TokenType == TokenType.Binary && token.Value == "!") {
+			if(token.TokenType == TokenType.Unary && token.Is("!")) {
 				this.Next();
-				Expression<Func<TruthState, int>> expr = this.Comparison();
+				Func<TruthState, int> expr = this.Expression();
 				if(expr != null) {
-					Func<TruthState, int> f = expr.Compile();
-					return s => (f(s) == 0) ? 1 : 0;
+					return s => (expr(s) == 0) ? 1 : 0;
 				} else {
-					this.Error = "Expression is missing after (";
-					return null;
+					return this.ExprMissing(token);
 				}
 			}
 			if(token.TokenType == TokenType.Id) {
@@ -477,13 +553,13 @@ namespace LogicCircuit {
 			case TokenType.IntHex:
 			case TokenType.IntOct:
 				this.Next();
-				return this.Literal(token);
+				return ExpressionParser.Literal(token);
 			}
 			this.Error = token.Value + " - unexpected";
 			return null;
 		}
 
-		private Expression<Func<TruthState, int>> Variable(string name) {
+		private Func<TruthState, int> Variable(string name) {
 			int index = 0;
 			foreach(InputPinSocket pin in this.socket.Inputs) {
 				if(StringComparer.OrdinalIgnoreCase.Equals(pin.Pin.Name, name)) {
@@ -502,21 +578,21 @@ namespace LogicCircuit {
 			return null;
 		}
 
-		private Expression<Func<TruthState, int>> Literal(Token token) {
+		private static Func<TruthState, int> Literal(Token token) {
 			switch(token.TokenType) {
-			case TokenType.IntBin: return this.Literal(this.FromBin(token.Value));
-			case TokenType.IntDec: return this.Literal(this.FromDec(token.Value));
-			case TokenType.IntHex: return this.Literal(this.FromHex(token.Value));
-			case TokenType.IntOct: return this.Literal(this.FromOct(token.Value));
+			case TokenType.IntBin: return ExpressionParser.Literal(ExpressionParser.FromBin(token.Value));
+			case TokenType.IntDec: return ExpressionParser.Literal(ExpressionParser.FromDec(token.Value));
+			case TokenType.IntHex: return ExpressionParser.Literal(ExpressionParser.FromHex(token.Value));
+			case TokenType.IntOct: return ExpressionParser.Literal(ExpressionParser.FromOct(token.Value));
 			}
 			return null;
 		}
 
-		private Expression<Func<TruthState, int>> Literal(int value) {
+		private static Func<TruthState, int> Literal(int value) {
 			return s => value;
 		}
 
-		private int FromBin(string text) {
+		private static int FromBin(string text) {
 			int value = 0;
 			foreach(char c in text) {
 				value <<= 1;
@@ -527,19 +603,15 @@ namespace LogicCircuit {
 			return value;
 		}
 
-		private int FromDec(string text) {
-			int value = 0;
-			int.TryParse(text, out value);
-			return value;
+		private static int FromDec(string text) {
+			return int.Parse(text, CultureInfo.InvariantCulture);
 		}
 
-		private int FromHex(string text) {
-			int value = 0;
-			int.TryParse(text, NumberStyles.HexNumber, null, out value);
-			return value;
+		private static int FromHex(string text) {
+			return int.Parse(text, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
 		}
 
-		private int FromOct(string text) {
+		private static int FromOct(string text) {
 			int value = 0;
 			foreach(char c in text) {
 				value <<= 3;

@@ -55,6 +55,7 @@
     <Compile Include="CircuitProjectTest.cs" />
     <Compile Include="CircuitStateTest.cs" />
     <Compile Include="CircuitTest.cs" />
+    <Compile Include="ExpressionParserTest.cs" />
     <Compile Include="FunctionTest.cs" />
     <Compile Include="MemoryTest.cs" />
     <Compile Include="ProjectTester.cs" />
