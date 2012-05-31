@@ -25,7 +25,7 @@ namespace LogicCircuit {
 	/// DIS ::= &
 	/// Shift ::= Primary SHT Primary
 	/// SHT ::= << | >>
-	/// Primary ::= ( Expr ) | - Expr | ~ Expr | ! Expr | ID | Literal
+	/// Primary ::= ( Expr ) | - Primary | ~ Primary | ! Primary | ID | Literal
 	/// ID ::= SimpleId | QuotedId
 	/// SimpleId ::= Letter | Letter LettersOrDigids
 	/// LettersOrDigids ::= LettersOrDigids | Letter | Digit
@@ -518,7 +518,7 @@ namespace LogicCircuit {
 			}
 			if(token.TokenType == TokenType.Binary && token.Is("-")) {
 				this.Next();
-				Func<TruthState, int> expr = this.Expression();
+				Func<TruthState, int> expr = this.Primary();
 				if(expr != null) {
 					return s => -expr(s);
 				} else {
@@ -527,7 +527,7 @@ namespace LogicCircuit {
 			}
 			if(token.TokenType == TokenType.Unary && token.Value == "~") {
 				this.Next();
-				Func<TruthState, int> expr = this.Expression();
+				Func<TruthState, int> expr = this.Primary();
 				if(expr != null) {
 					return s => ~expr(s);
 				} else {
@@ -536,7 +536,7 @@ namespace LogicCircuit {
 			}
 			if(token.TokenType == TokenType.Unary && token.Is("!")) {
 				this.Next();
-				Func<TruthState, int> expr = this.Expression();
+				Func<TruthState, int> expr = this.Primary();
 				if(expr != null) {
 					return s => (expr(s) == 0) ? 1 : 0;
 				} else {

@@ -225,11 +225,16 @@ namespace LogicCircuit.UnitTest {
 			this.Valid(parser, state, 0, "0 || 0 || 0 || 0 || 0");
 			this.Valid(parser, state, 1, "0 || 2");
 			this.Valid(parser, state, 1, "5 || 0");
-			this.Valid(parser, state, 1, "1 || 3");
+			this.Valid(parser, state, 1, "1 || -3");
 			this.Valid(parser, state, 1, "0 || 0 || 0 || 0 || 0 || 5");
 
 			this.Invalid(parser, state, "1 || ");
 			this.Invalid(parser, state, "1 || 0 ||");
+
+			// check priority of expressions
+			this.Valid(parser, state, 0, "0 || 3 && 0");
+			this.Valid(parser, state, 1, "2 || 3 && 0");
+			this.Valid(parser, state, 1, "-2 || -3 && 0");
 		}
 
 		/// <summary>
@@ -250,6 +255,28 @@ namespace LogicCircuit.UnitTest {
 
 			this.Invalid(parser, state, "1 && ");
 			this.Invalid(parser, state, "1 && 0 &&");
+
+			// check priority of expressions
+			this.Valid(parser, state, 0, "1 && 3 == 0");
+			this.Valid(parser, state, 0, "~1 && 3 == 0");
+		}
+
+		/// <summary>
+		/// A test for Parse of comparison expression
+		/// </summary>
+		[TestMethod()]
+		public void ExpressionParserComparisonParseTest() {
+			CircuitTestSocket socket = null;
+			ExpressionParser parser = new ExpressionParser(socket);
+			TruthState state = new TruthState(0, 0);
+
+			this.Valid(parser, state, 1, "0 = 0");
+			this.Valid(parser, state, 1, "-1 == -1");
+			this.Valid(parser, state, 1, "10 = 10");
+			this.Valid(parser, state, 0, "0 = 10");
+			this.Valid(parser, state, 0, "5 == 3");
+			this.Invalid(parser, state, "1 = ");
+			this.Invalid(parser, state, "10 == ");
 		}
 	}
 }
