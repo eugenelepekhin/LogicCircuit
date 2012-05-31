@@ -9,30 +9,32 @@ using System.Globalization;
 namespace LogicCircuit {
 	/// <summary>
 	/// Parse expressions over it input and output pins.
-	/// BNF:
-	/// Expr ::= LogicalOr
-	/// LogicalOr ::= LogicalAnd || LogicalAnd
-	/// LogicalAnd ::= Comparison && Comparison
-	/// Comparison ::= Addition CMP Addition
-	/// CMP ::= = | == | != | <> | < | <= | >= | >
-	/// Addition ::= Multiplication ADD Multiplication
-	/// ADD ::= + | -
-	/// Multiplication ::= Conjunction MUL Conjunction
-	/// MUL ::= * | / | %
-	/// Conjunction ::= Disjunction CON Disjunction
-	/// CON ::= ^ | '|'
-	/// Disjunction ::= Shift DIS Shift
-	/// DIS ::= &
-	/// Shift ::= Primary SHT Primary
-	/// SHT ::= << | >>
-	/// Primary ::= ( Expr ) | - Primary | ~ Primary | ! Primary | ID | Literal
-	/// ID ::= SimpleId | QuotedId
-	/// SimpleId ::= Letter | Letter LettersOrDigids
-	/// LettersOrDigids ::= LettersOrDigids | Letter | Digit
-	/// QuotedId ::= " (ESC | [~"\])* "
-	/// ESC ::= \\ | \" | \.
 	/// </summary>
 	public class ExpressionParser {
+
+		// BNF:
+		// Expr ::= LogicalOr
+		// LogicalOr ::= LogicalAnd || LogicalAnd
+		// LogicalAnd ::= Comparison && Comparison
+		// Comparison ::= Addition CMP Addition
+		// CMP ::= = | == | != | <> | < | <= | >= | >
+		// Addition ::= Multiplication ADD Multiplication
+		// ADD ::= + | -
+		// Multiplication ::= Conjunction MUL Conjunction
+		// MUL ::= * | / | %
+		// Conjunction ::= Disjunction CON Disjunction
+		// CON ::= ^ | '|'
+		// Disjunction ::= Shift DIS Shift
+		// DIS ::= &
+		// Shift ::= Primary SHT Primary
+		// SHT ::= << | >>
+		// Primary ::= ( Expr ) | - Primary | ~ Primary | ! Primary | ID | Literal
+		// ID ::= SimpleId | QuotedId
+		// SimpleId ::= Letter | Letter LettersOrDigids
+		// LettersOrDigids ::= LettersOrDigids | Letter | Digit
+		// QuotedId ::= " (ESC | [~"\])* "
+		// ESC ::= \\ | \" | \.
+
 		private enum TokenType {
 			IntBin,
 			IntOct,
