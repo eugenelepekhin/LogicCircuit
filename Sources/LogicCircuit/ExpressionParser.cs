@@ -141,18 +141,24 @@ namespace LogicCircuit {
 			return new Token() { Value = this.buffer.ToString(), TokenType = TokenType.Id };
 		}
 
+		private Token UnclosedQuote(string text) {
+			this.Error = "Quoted identifier does not have closing quote: " + text;
+			return Token.Eos();
+		}
+
 		private Token NextQuote() {
 			this.buffer.Length = 0;
 			int quote = this.reader.Read();
 			int next = this.reader.Read();
-			while(next != quote && next != -1) {
+			while(next != quote) {
+				if(next == -1) {
+					return this.UnclosedQuote(this.buffer.ToString().Trim());
+				}
 				char c = (char)next;
 				if(c == '\\') {
 					next = this.reader.Read();
 					if(next == -1) {
-						this.buffer.Append(c);
-						this.Error = "Quoted identifier does not have closing quote: " + this.buffer.ToString().Trim();
-						return Token.Eos();
+						return this.UnclosedQuote(this.buffer.ToString().Trim());
 					}
 					c = (char)next;
 				}
