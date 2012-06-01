@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Windows.Controls;
 
 namespace LogicCircuit {
@@ -83,7 +84,7 @@ namespace LogicCircuit {
 		}
 
 		public void Redraw() {
-			((TextBlock)this.CircuitSymbol.ProbeView).Text = new TriNumber(this).ToHexString();
+			((TextBlock)this.CircuitSymbol.ProbeView).Text = this.ToInt32().ToString("{0:X}", CultureInfo.InvariantCulture);
 		}
 
 		public int ToInt32() {

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Linq.Expressions;
-using System.Globalization;
 
 namespace LogicCircuit {
 	/// <summary>
@@ -170,6 +170,7 @@ namespace LogicCircuit {
 			return new Token() { Value = this.buffer.ToString().Trim(), TokenType = TokenType.Id };
 		}
 
+		[SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
 		private Token NextNumber() {
 			this.buffer.Length = 0;
 			int maxLength = 10;
@@ -331,57 +332,41 @@ namespace LogicCircuit {
 			return left;
 		}
 
+		[SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
 		private Func<TruthState, int> Comparison() {
 			Func<TruthState, int> left = this.Addition();
 			if(left != null) {
 				Token token = this.Current();
-				if(token.TokenType == TokenType.Binary && token.Is("=", "==")) {
-					this.Next();
-					Func<TruthState, int> right = this.Addition();
-					if(right == null) {
-						return this.ExprMissing(token);
-					}
-					return s => (left(s) == right(s)) ? 1 : 0;
+				Func<Func<TruthState, int>, Func<TruthState, int>, Func<TruthState, int>> compare = null;
+				switch(token.Value) {
+				case "=":
+				case "==":
+					compare = (l, r) => s => (l(s) == r(s)) ? 1 : 0;
+					break;
+				case "!=":
+				case "<>":
+					compare = (l, r) => s => (l(s) != r(s)) ? 1 : 0;
+					break;
+				case "<":
+					compare = (l, r) => s => (l(s) < r(s)) ? 1 : 0;
+					break;
+				case "<=":
+					compare = (l, r) => s => (l(s) <= r(s)) ? 1 : 0;
+					break;
+				case ">=":
+					compare = (l, r) => s => (l(s) >= r(s)) ? 1 : 0;
+					break;
+				case ">":
+					compare = (l, r) => s => (l(s) > r(s)) ? 1 : 0;
+					break;
 				}
-				if(token.TokenType == TokenType.Binary && token.Is("!=", "<>")) {
+				if(compare != null) {
 					this.Next();
 					Func<TruthState, int> right = this.Addition();
 					if(right == null) {
 						return this.ExprMissing(token);
 					}
-					return s => (left(s) != right(s)) ? 1 : 0;
-				}
-				if(token.TokenType == TokenType.Binary && token.Is("<")) {
-					this.Next();
-					Func<TruthState, int> right = this.Addition();
-					if(right == null) {
-						return this.ExprMissing(token);
-					}
-					return s => (left(s) < right(s)) ? 1 : 0;
-				}
-				if(token.TokenType == TokenType.Binary && token.Is("<=")) {
-					this.Next();
-					Func<TruthState, int> right = this.Addition();
-					if(right == null) {
-						return this.ExprMissing(token);
-					}
-					return s => (left(s) <= right(s)) ? 1 : 0;
-				}
-				if(token.TokenType == TokenType.Binary && token.Is(">")) {
-					this.Next();
-					Func<TruthState, int> right = this.Addition();
-					if(right == null) {
-						return this.ExprMissing(token);
-					}
-					return s => (left(s) > right(s)) ? 1 : 0;
-				}
-				if(token.TokenType == TokenType.Binary && token.Is(">=")) {
-					this.Next();
-					Func<TruthState, int> right = this.Addition();
-					if(right == null) {
-						return this.ExprMissing(token);
-					}
-					return s => (left(s) >= right(s)) ? 1 : 0;
+					return compare(left, right);
 				}
 			}
 			return left;

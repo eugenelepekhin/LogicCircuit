@@ -135,7 +135,9 @@ namespace LogicCircuit {
 		private readonly int[] input;
 		private readonly int[] output;
 
+		[SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
 		public int[] Input { get { return this.input; } }
+		[SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
 		public int[] Output { get { return this.output; } }
 
 		public TruthState(int inputCount, int outputCount) {
