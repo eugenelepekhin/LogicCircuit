@@ -19,18 +19,17 @@
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 
-		<Grid Grid.Row="0" Margin="3">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="Auto"/>
-			</Grid.ColumnDefinitions>
-			<Label Grid.Column="0" Content="_Filter:" Target="{Binding ElementName=filter}"/>
-			<TextBox Grid.Column="1" Name="filter" VerticalAlignment="Center"/>
-			<Button Grid.Column="2" Name="buttonApply" Content="_Apply" Click="ButtonApplyClick" IsDefault="{Binding ElementName=filter, Path=IsFocused}"/>
-		</Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="Auto"/>
+		</Grid.ColumnDefinitions>
 
-		<DataGrid Grid.Row="1" Name="dataGrid" AutoGenerateColumns="False" IsReadOnly="True" Margin="3"
+		<Label Grid.Row="0" Grid.Column="0" Content="_Filter:" Target="{Binding ElementName=filter}"/>
+		<TextBox Grid.Row="0" Grid.Column="1" Name="filter" VerticalAlignment="Center"/>
+		<Button Grid.Row="0" Grid.Column="2" Name="buttonApply" Content="_Apply" Click="ButtonApplyClick" IsDefault="{Binding ElementName=filter, Path=IsFocused}"/>
+
+		<DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Name="dataGrid" AutoGenerateColumns="False" IsReadOnly="True" Margin="3"
 			VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Standard"
 			ItemsSource="{Binding Path=TruthTable}"
 		>
@@ -41,34 +40,27 @@
 			</DataGrid.CellStyle>
 		</DataGrid>
 
-		<Grid Grid.Row="2">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="Auto"/>
-			</Grid.ColumnDefinitions>
-
-			<WrapPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Top">
-				<WrapPanel.Resources>
-					<Style TargetType="TextBlock">
-						<Setter Property="Margin" Value="3,1"/>
-					</Style>
-				</WrapPanel.Resources>
+		<WrapPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Top">
+			<WrapPanel.Resources>
+				<Style TargetType="TextBlock">
+					<Setter Property="Margin" Value="3,1"/>
+				</Style>
+			</WrapPanel.Resources>
 			
-				<StackPanel Orientation="Horizontal">
-					<TextBlock Text="Total rows:"/>
-					<TextBlock Text="{Binding Path=TotalRows}"/>
-				</StackPanel>
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="Total rows:"/>
+				<TextBlock Text="{Binding Path=TotalRows}"/>
+			</StackPanel>
 
-				<StackPanel Orientation="Horizontal">
-					<TextBlock Text="Displayed rows:"/>
-					<TextBlock Text="{Binding Path=TruthTable.Count}"/>
-				</StackPanel>
-			</WrapPanel>
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="Displayed rows:"/>
+				<TextBlock Text="{Binding Path=TruthTable.Count}"/>
+			</StackPanel>
+		</WrapPanel>
 
-			<Button Grid.Column="1" Name="buttonOk" VerticalAlignment="Bottom"
-				Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}"
-				IsDefault="{Binding ElementName=filter, Path=IsFocused, Converter={StaticResource InverseBooleanConverter}}" IsCancel="True"
-			/>
-		</Grid>
+		<Button Grid.Row="2" Grid.Column="2" Name="buttonOk" VerticalAlignment="Bottom"
+			Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}"
+			IsDefault="{Binding ElementName=filter, Path=IsFocused, Converter={StaticResource InverseBooleanConverter}}" IsCancel="True"
+		/>
 	</Grid>
 </Window>
