@@ -32,9 +32,12 @@ namespace LogicCircuit {
 		private readonly TruthStateComparer sortComparer;
 		private Task task;
 
+		public int TotalRows { get; private set; }
+
 		public DialogTruthTable(LogicalCircuit logicalCircuit) {
 			this.testSocket  = new CircuitTestSocket(logicalCircuit);
 			this.task = Task.Factory.StartNew(this.BuildTruthTable);
+			this.TotalRows = 1 << this.testSocket.Inputs.Sum(p => p.Pin.BitWidth);
 			this.DataContext = this;
 			this.InitializeComponent();
 

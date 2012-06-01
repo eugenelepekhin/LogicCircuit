@@ -41,9 +41,34 @@
 			</DataGrid.CellStyle>
 		</DataGrid>
 
-		<Button Grid.Row="2" Name="buttonOk" HorizontalAlignment="Right"
-			Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}"
-			IsDefault="{Binding ElementName=filter, Path=IsFocused, Converter={StaticResource InverseBooleanConverter}}" IsCancel="True"
-		/>
+		<Grid Grid.Row="2">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
+
+			<WrapPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Top">
+				<WrapPanel.Resources>
+					<Style TargetType="TextBlock">
+						<Setter Property="Margin" Value="3,1"/>
+					</Style>
+				</WrapPanel.Resources>
+			
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="Total rows:"/>
+					<TextBlock Text="{Binding Path=TotalRows}"/>
+				</StackPanel>
+
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="Displayed rows:"/>
+					<TextBlock Text="{Binding Path=TruthTable.Count}"/>
+				</StackPanel>
+			</WrapPanel>
+
+			<Button Grid.Column="1" Name="buttonOk" VerticalAlignment="Bottom"
+				Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}"
+				IsDefault="{Binding ElementName=filter, Path=IsFocused, Converter={StaticResource InverseBooleanConverter}}" IsCancel="True"
+			/>
+		</Grid>
 	</Grid>
 </Window>
