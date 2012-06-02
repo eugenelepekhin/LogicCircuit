@@ -579,7 +579,11 @@ namespace LogicCircuit {
 			try {
 				if(this.Editor != null) {
 					if(CircuitTestSocket.IsTestable(this.Editor.Project.LogicalCircuit)) {
-						this.ShowDialog(new DialogTruthTable(this.Editor.Project.LogicalCircuit));
+						if(this.Editor.CircuitProject.PinSet.SelectByCircuit(this.Editor.Project.LogicalCircuit).Where(p => p.PinType == PinType.Input).Sum(p => p.BitWidth) <= 20) {
+							this.ShowDialog(new DialogTruthTable(this.Editor.Project.LogicalCircuit));
+						} else {
+							this.ErrorMessage("Sum of bit widths of inputs pins is too big. Maximum of 20 bits is supported by the truth table.");
+						}
 					} else {
 						this.InformationMessage(LogicCircuit.Resources.MessageInputOutputPinsMissing);
 					}
