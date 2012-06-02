@@ -5,10 +5,10 @@
 	WindowStartupLocation="CenterOwner"
 	Title="{Binding Source={x:Static lc:Resources.CommandTruthTable}, Mode=OneTime}"
 	Style="{DynamicResource DialogWindow}"
+	FocusManager.FocusedElement="{Binding ElementName=dataGrid}"
 >
-	<!--FocusManager.FocusedElement="{Binding ElementName=name}"-->
-
 	<Window.Resources>
+		<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 		<lc:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
 	</Window.Resources>
 
@@ -23,13 +23,15 @@
 			<ColumnDefinition Width="Auto"/>
 			<ColumnDefinition Width="*"/>
 			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="Auto"/>
 		</Grid.ColumnDefinitions>
 
-		<Label Grid.Row="0" Grid.Column="0" Content="_Filter:" Target="{Binding ElementName=filter}"/>
+		<Label Grid.Row="0" Grid.Column="0" Content="_Filter:" Target="{Binding ElementName=filter}" VerticalAlignment="Center"/>
 		<TextBox Grid.Row="0" Grid.Column="1" Name="filter" VerticalAlignment="Center"/>
-		<Button Grid.Row="0" Grid.Column="2" Name="buttonApply" Content="_Apply" Click="ButtonApplyClick" IsDefault="{Binding ElementName=filter, Path=IsFocused}"/>
+		<CheckBox Grid.Row="0" Grid.Column="2" Content="_Invert" IsChecked="{Binding Path=InvertFilter}" VerticalAlignment="Center"/>
+		<Button Grid.Row="0" Grid.Column="3" Name="buttonApply" Content="_Apply" Click="ButtonApplyClick" IsDefault="{Binding ElementName=filter, Path=IsFocused}" VerticalAlignment="Center"/>
 
-		<DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Name="dataGrid" AutoGenerateColumns="False" IsReadOnly="True" Margin="3"
+		<DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Name="dataGrid" AutoGenerateColumns="False" IsReadOnly="True" Margin="3"
 			VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Standard"
 			ItemsSource="{Binding Path=TruthTable}"
 		>
@@ -40,10 +42,10 @@
 			</DataGrid.CellStyle>
 		</DataGrid>
 
-		<WrapPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Top">
+		<WrapPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" VerticalAlignment="Top">
 			<WrapPanel.Resources>
 				<Style TargetType="TextBlock">
-					<Setter Property="Margin" Value="3,1"/>
+					<Setter Property="Margin" Value="5,2"/>
 				</Style>
 			</WrapPanel.Resources>
 			
@@ -56,9 +58,13 @@
 				<TextBlock Text="Displayed rows:"/>
 				<TextBlock Text="{Binding Path=TruthTable.Count}"/>
 			</StackPanel>
+
+			<TextBlock Visibility="{Binding Path=Truncated, Converter={StaticResource BooleanToVisibilityConverter}}" TextWrapping="Wrap"
+				Text="Truth table is too long and get truncated. Please use Filter to verify correctness of your circuit"
+			/>
 		</WrapPanel>
 
-		<Button Grid.Row="2" Grid.Column="2" Name="buttonOk" VerticalAlignment="Bottom"
+		<Button Grid.Row="2" Grid.Column="3" Name="buttonOk" VerticalAlignment="Bottom"
 			Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}"
 			IsDefault="{Binding ElementName=filter, Path=IsFocused, Converter={StaticResource InverseBooleanConverter}}" IsCancel="True"
 		/>

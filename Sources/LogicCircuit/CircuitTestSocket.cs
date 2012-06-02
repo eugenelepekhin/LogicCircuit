@@ -38,11 +38,17 @@ namespace LogicCircuit {
 			return pins.Any(p => p.PinType == PinType.Input) && pins.Any(p => p.PinType == PinType.Output);
 		}
 
-		public IList<TruthState> BuildTruthTable() {
+		[SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "2#")]
+		public IList<TruthState> BuildTruthTable(Predicate<TruthState> include, int maxCount, out bool truncated) {
+			truncated = false;
 			int inputCount = this.inputs.Count;
 			int outputCount = this.outputs.Count;
 			List<TruthState> result = new List<TruthState>();
 			for(;;) {
+				if(maxCount <= result.Count) {
+					truncated = true;
+					return result;
+				}
 				if(!this.CircuitState.Evaluate(true)) {
 					return null;
 				}
@@ -53,7 +59,9 @@ namespace LogicCircuit {
 				for(int i = 0; i < outputCount; i++) {
 					state.Output[i] = this.outputs[i].Function.ToInt32();
 				}
-				result.Add(state);
+				if(include == null || include(state)) {
+					result.Add(state);
+				}
 				for(int i = inputCount - 1; 0 <= i; i--) {
 					this.inputs[i].Function.Value++;
 					if(this.inputs[i].Function.Value != 0) {
