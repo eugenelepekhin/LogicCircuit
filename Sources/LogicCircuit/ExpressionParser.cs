@@ -13,7 +13,7 @@ namespace LogicCircuit {
 	public class ExpressionParser {
 
 		// BNF:
-		// Expr ::= LogicalOr
+		// Expression ::= LogicalOr
 		// LogicalOr ::= LogicalAnd || LogicalAnd
 		// LogicalAnd ::= Comparison && Comparison
 		// Comparison ::= Addition CMP Addition
@@ -28,7 +28,7 @@ namespace LogicCircuit {
 		// DIS ::= &
 		// Shift ::= Primary SHT Primary
 		// SHT ::= << | >>
-		// Primary ::= ( Expr ) | - Primary | ~ Primary | ! Primary | ID | Literal
+		// Primary ::= ( Expression ) | - Primary | ~ Primary | ! Primary | ID | Literal
 		// ID ::= SimpleId | QuotedId
 		// SimpleId ::= Letter | Letter LettersOrDigids
 		// LettersOrDigids ::= LettersOrDigids | Letter | Digit
@@ -53,7 +53,7 @@ namespace LogicCircuit {
 			public TokenType TokenType;
 
 			public static Token Eos() {
-				return new Token() { Value = "End Of Text", TokenType = TokenType.EOS };
+				return new Token() { Value = "End of expression", TokenType = TokenType.EOS };
 			}
 
 			public bool Is(string value) {
@@ -92,11 +92,25 @@ namespace LogicCircuit {
 			using(this.reader = new StringReader(text)) {
 				Func<TruthState, int> expr = this.Expression();
 				if(this.Current().TokenType != TokenType.EOS) {
-					this.Error = this.Current().Value + " Unexpected";
-					return null;
+					return this.ErrorUnexpected(this.Current());
 				}
 				return expr;
 			}
+		}
+
+		private Func<TruthState, int> ErrorUnexpected(Token token) {
+			this.Error = this.Current().Value + " unexpected";
+			return null;
+		}
+
+		private Token UnclosedQuote(string text) {
+			this.Error = "Quoted identifier does not have closing quote: " + text;
+			return Token.Eos();
+		}
+
+		private Func<TruthState, int> ExprMissing(Token after) {
+			this.Error = "Expression is missing after " + after.Value;
+			return null;
 		}
 
 		private Token Next() {
@@ -141,11 +155,6 @@ namespace LogicCircuit {
 				this.buffer.Append((char)this.reader.Read());
 			} while(this.reader.Peek() != -1 && char.IsLetterOrDigit((char)this.reader.Peek()));
 			return new Token() { Value = this.buffer.ToString(), TokenType = TokenType.Id };
-		}
-
-		private Token UnclosedQuote(string text) {
-			this.Error = "Quoted identifier does not have closing quote: " + text;
-			return Token.Eos();
 		}
 
 		private Token NextQuote() {
@@ -285,11 +294,6 @@ namespace LogicCircuit {
 				break;
 			}
 			return new Token() { Value = this.buffer.ToString(), TokenType = tokenType };
-		}
-
-		private Func<TruthState, int> ExprMissing(Token after) {
-			this.Error = "Expression is missing after " + after.Value;
-			return null;
 		}
 
 		private Func<TruthState, int> Expression() {
@@ -549,8 +553,7 @@ namespace LogicCircuit {
 				this.Next();
 				return ExpressionParser.Literal(token);
 			}
-			this.Error = token.Value + " - unexpected";
-			return null;
+			return this.ErrorUnexpected(token);
 		}
 
 		private Func<TruthState, int> Variable(string name) {
