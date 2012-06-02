@@ -5,6 +5,7 @@
 	WindowStartupLocation="CenterOwner"
 	Title="{Binding Source={x:Static lc:Resources.CommandTruthTable}, Mode=OneTime}"
 	Style="{DynamicResource DialogWindow}"
+	MinWidth="480" MinHeight="320"
 	FocusManager.FocusedElement="{Binding ElementName=dataGrid}"
 >
 	<Window.Resources>
