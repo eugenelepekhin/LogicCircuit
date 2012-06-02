@@ -28,6 +28,9 @@ namespace LogicCircuit {
 			this.inputs.ForEach(s => s.Function = (FunctionConstant)this.CircuitMap.Input(s.Symbol));
 			this.outputs.ForEach(s => s.Function = this.CircuitMap.FunctionProbe(s.Symbol));
 
+			this.inputs.Where(s => s.Function == null).ToList().ForEach(s => this.inputs.Remove(s));
+			this.outputs.Where(s => s.Function == null).ToList().ForEach(s => this.outputs.Remove(s));
+			
 			Tracer.Assert(this.inputs.All(s => s.Function != null) && this.outputs.All(s => s.Function != null));
 
 			this.CircuitMap.TurnOn();
