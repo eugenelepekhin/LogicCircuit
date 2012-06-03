@@ -1045,4 +1045,58 @@ Do you want to remove the reference to it from the Recent Files list?</value>
   <data name="MessageInputOutputPinsMissing" xml:space="preserve">
     <value>There is no Input or Output Pins on this circuit. The truth tables are built by sending all the permutations of data to Input Pins and reading the results from Output Pins.</value>
   </data>
+  <data name="MessageTooBigInput" xml:space="preserve">
+    <value>Sum of input pins bit widths is too big. Maximum of 20 bits is supported by the truth table.</value>
+  </data>
+  <data name="MessageTruthTableTooBig" xml:space="preserve">
+    <value>Truth table is too long and get truncated. Please use Filter to verify correctness of your circuit.</value>
+  </data>
+  <data name="ParserEOS" xml:space="preserve">
+    <value>End of expression</value>
+  </data>
+  <data name="ParserErrorCloseParenMissing" xml:space="preserve">
+    <value>Missing ')' instead of: {0}</value>
+    <comment>{string token}</comment>
+  </data>
+  <data name="ParserErrorExpressionMissing" xml:space="preserve">
+    <value>Expression is missing after {0}</value>
+    <comment>{string token}</comment>
+  </data>
+  <data name="ParserErrorInvalidNumber" xml:space="preserve">
+    <value>Invalid number: {0}</value>
+    <comment>{string number}</comment>
+  </data>
+  <data name="ParserErrorUnclosedQuote" xml:space="preserve">
+    <value>Quoted identifier does not have closing quote: {0}</value>
+    <comment>{string text}</comment>
+  </data>
+  <data name="ParserErrorUnexpected" xml:space="preserve">
+    <value>{0} unexpected</value>
+    <comment>{string token}</comment>
+  </data>
+  <data name="ParserErrorUnknownChar" xml:space="preserve">
+    <value>Unknown char: {0}</value>
+    <comment>{char c}</comment>
+  </data>
+  <data name="ParserErrorUnknownPin" xml:space="preserve">
+    <value>{0} - input or output pin not found</value>
+    <comment>{string name}</comment>
+  </data>
+  <data name="TitleApply" xml:space="preserve">
+    <value>_Apply</value>
+  </data>
+  <data name="TitleDisplayedRows" xml:space="preserve">
+    <value>Displayed rows: {0}</value>
+    <comment>-{int count}</comment>
+  </data>
+  <data name="TitleFilter" xml:space="preserve">
+    <value>_Filter:</value>
+  </data>
+  <data name="TitleInvert" xml:space="preserve">
+    <value>_Invert</value>
+  </data>
+  <data name="TitleTotalRows" xml:space="preserve">
+    <value>Total rows: {0}</value>
+    <comment>-{int count}</comment>
+  </data>
 </root>

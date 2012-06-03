@@ -3,8 +3,8 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:lc="clr-namespace:LogicCircuit"
 	WindowStartupLocation="CenterOwner"
-	Title="{Binding Source={x:Static lc:Resources.CommandTruthTable}, Mode=OneTime}"
-	Style="{DynamicResource DialogWindow}"
+	Title="{x:Static lc:Resources.CommandTruthTable}"
+	Style="{StaticResource DialogWindow}"
 	MinWidth="480" MinHeight="320"
 	FocusManager.FocusedElement="{Binding ElementName=dataGrid}"
 >
@@ -27,10 +27,18 @@
 			<ColumnDefinition Width="Auto"/>
 		</Grid.ColumnDefinitions>
 
-		<Label Grid.Row="0" Grid.Column="0" Content="_Filter:" Target="{Binding ElementName=filter}" VerticalAlignment="Center"/>
+		<Label Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=filter}" VerticalAlignment="Center"
+			Content="{x:Static lc:Resources.TitleFilter}"
+		/>
 		<TextBox Grid.Row="0" Grid.Column="1" Name="filter" VerticalAlignment="Center"/>
-		<CheckBox Grid.Row="0" Grid.Column="2" Content="_Invert" IsChecked="{Binding Path=InvertFilter}" VerticalAlignment="Center"/>
-		<Button Grid.Row="0" Grid.Column="3" Name="buttonApply" Content="_Apply" Click="ButtonApplyClick" IsDefault="{Binding ElementName=filter, Path=IsFocused}" VerticalAlignment="Center"/>
+		<CheckBox Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"
+			Content="{x:Static lc:Resources.TitleInvert}"
+			IsChecked="{Binding Path=InvertFilter}"
+		/>
+		<Button Grid.Row="0" Grid.Column="3" Name="buttonApply" Click="ButtonApplyClick" VerticalAlignment="Center"
+			Content="{x:Static lc:Resources.TitleApply}"
+			IsDefault="{Binding ElementName=filter, Path=IsFocused}"
+		/>
 
 		<DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Name="dataGrid" AutoGenerateColumns="False" IsReadOnly="True" Margin="3"
 			VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Standard"
@@ -50,23 +58,16 @@
 				</Style>
 			</WrapPanel.Resources>
 			
-			<StackPanel Orientation="Horizontal">
-				<TextBlock Text="Total rows:"/>
-				<TextBlock Text="{Binding Path=TotalRows}"/>
-			</StackPanel>
+			<TextBlock Text="{Binding Path=TotalRows, StringFormat={x:Static lc:Resources.TitleTotalRows}}"/>
+			<TextBlock Text="{Binding Path=TruthTable.Count, StringFormat={x:Static lc:Resources.TitleDisplayedRows}}"/>
 
-			<StackPanel Orientation="Horizontal">
-				<TextBlock Text="Displayed rows:"/>
-				<TextBlock Text="{Binding Path=TruthTable.Count}"/>
-			</StackPanel>
-
-			<TextBlock Visibility="{Binding Path=Truncated, Converter={StaticResource BooleanToVisibilityConverter}}" TextWrapping="Wrap"
-				Text="Truth table is too long and get truncated. Please use Filter to verify correctness of your circuit"
+			<TextBlock Visibility="{Binding Path=Truncated, Converter={StaticResource BooleanToVisibilityConverter}}" TextWrapping="Wrap" Foreground="Red"
+				Text="{x:Static lc:Resources.MessageTruthTableTooBig}"
 			/>
 		</WrapPanel>
 
 		<Button Grid.Row="2" Grid.Column="3" Name="buttonOk" VerticalAlignment="Bottom"
-			Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}"
+			Content="{x:Static lc:Resources.TitleOK}"
 			IsDefault="{Binding ElementName=filter, Path=IsFocused, Converter={StaticResource InverseBooleanConverter}}" IsCancel="True"
 		/>
 	</Grid>

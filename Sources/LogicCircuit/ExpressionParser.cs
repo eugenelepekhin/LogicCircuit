@@ -53,7 +53,7 @@ namespace LogicCircuit {
 			public TokenType TokenType;
 
 			public static Token Eos() {
-				return new Token() { Value = "End of expression", TokenType = TokenType.EOS };
+				return new Token() { Value = Resources.ParserEOS, TokenType = TokenType.EOS };
 			}
 
 			public bool Is(string value) {
@@ -99,17 +99,17 @@ namespace LogicCircuit {
 		}
 
 		private Func<TruthState, int> ErrorUnexpected(Token token) {
-			this.Error = this.Current().Value + " unexpected";
+			this.Error = Resources.ParserErrorUnexpected(token.Value);
 			return null;
 		}
 
 		private Token UnclosedQuote(string text) {
-			this.Error = "Quoted identifier does not have closing quote: " + text;
+			this.Error = Resources.ParserErrorUnclosedQuote(text);
 			return Token.Eos();
 		}
 
 		private Func<TruthState, int> ExprMissing(Token after) {
-			this.Error = "Expression is missing after " + after.Value;
+			this.Error = Resources.ParserErrorExpressionMissing(after.Value);
 			return null;
 		}
 
@@ -145,7 +145,7 @@ namespace LogicCircuit {
 			if("()+-*/%&|^~!=<>".Contains(c)) {
 				return this.NextOperator();
 			}
-			this.Error = "Unknown char: " + c.ToString();
+			this.Error = Resources.ParserErrorUnknownChar(c);
 			return Token.Eos();
 		}
 
@@ -227,7 +227,7 @@ namespace LogicCircuit {
 				next = this.reader.Peek();
 			}
 			if(maxLength < this.buffer.Length || this.buffer.Length < 1) {
-				this.Error = "Invalid number: " + this.buffer.ToString();
+				this.Error = Resources.ParserErrorInvalidNumber(this.buffer.ToString());
 				return Token.Eos();
 			}
 			return new Token() { Value = this.buffer.ToString(), TokenType = tokenType };
@@ -505,7 +505,7 @@ namespace LogicCircuit {
 				if(expr != null) {
 					token = this.Current();
 					if(token.TokenType != TokenType.Close) {
-						this.Error = "Missing ')' instead of: " + token.Value;
+						this.Error = Resources.ParserErrorCloseParenMissing(token.Value);
 						return null;
 					}
 					this.Next();
@@ -571,7 +571,7 @@ namespace LogicCircuit {
 				}
 				index++;
 			}
-			this.Error = name + " - input or output pin not found";
+			this.Error = Resources.ParserErrorUnknownPin(name);
 			return null;
 		}
 

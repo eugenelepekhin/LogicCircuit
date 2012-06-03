@@ -2091,5 +2091,110 @@ namespace LogicCircuit {
  		public static string MessageInputOutputPinsMissing {
 			get { return ResourceManager.GetString("MessageInputOutputPinsMissing", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Sum of input pins bit widths is too big. Maximum of 20 bits is supported by the truth table..
+		/// </summary>
+ 		public static string MessageTooBigInput {
+			get { return ResourceManager.GetString("MessageTooBigInput", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Truth table is too long and get truncated. Please use Filter to verify correctness of your circuit..
+		/// </summary>
+ 		public static string MessageTruthTableTooBig {
+			get { return ResourceManager.GetString("MessageTruthTableTooBig", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to End of expression.
+		/// </summary>
+ 		public static string ParserEOS {
+			get { return ResourceManager.GetString("ParserEOS", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Missing ')' instead of: {0}.
+		/// </summary>
+ 		public static string ParserErrorCloseParenMissing(string token) {
+			return string.Format(Culture, ResourceManager.GetString("ParserErrorCloseParenMissing", Culture), token);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Expression is missing after {0}.
+		/// </summary>
+ 		public static string ParserErrorExpressionMissing(string token) {
+			return string.Format(Culture, ResourceManager.GetString("ParserErrorExpressionMissing", Culture), token);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Invalid number: {0}.
+		/// </summary>
+ 		public static string ParserErrorInvalidNumber(string number) {
+			return string.Format(Culture, ResourceManager.GetString("ParserErrorInvalidNumber", Culture), number);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Quoted identifier does not have closing quote: {0}.
+		/// </summary>
+ 		public static string ParserErrorUnclosedQuote(string text) {
+			return string.Format(Culture, ResourceManager.GetString("ParserErrorUnclosedQuote", Culture), text);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to {0} unexpected.
+		/// </summary>
+ 		public static string ParserErrorUnexpected(string token) {
+			return string.Format(Culture, ResourceManager.GetString("ParserErrorUnexpected", Culture), token);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Unknown char: {0}.
+		/// </summary>
+ 		public static string ParserErrorUnknownChar(char c) {
+			return string.Format(Culture, ResourceManager.GetString("ParserErrorUnknownChar", Culture), c);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to {0} - input or output pin not found.
+		/// </summary>
+ 		public static string ParserErrorUnknownPin(string name) {
+			return string.Format(Culture, ResourceManager.GetString("ParserErrorUnknownPin", Culture), name);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Apply.
+		/// </summary>
+ 		public static string TitleApply {
+			get { return ResourceManager.GetString("TitleApply", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Displayed rows: {0}.
+		/// </summary>
+ 		public static string TitleDisplayedRows {
+			get { return ResourceManager.GetString("TitleDisplayedRows", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Filter:.
+		/// </summary>
+ 		public static string TitleFilter {
+			get { return ResourceManager.GetString("TitleFilter", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Invert.
+		/// </summary>
+ 		public static string TitleInvert {
+			get { return ResourceManager.GetString("TitleInvert", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Total rows: {0}.
+		/// </summary>
+ 		public static string TitleTotalRows {
+			get { return ResourceManager.GetString("TitleTotalRows", Culture); }
+		}
 	}
 }
