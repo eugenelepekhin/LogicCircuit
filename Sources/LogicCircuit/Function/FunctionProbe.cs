@@ -84,7 +84,7 @@ namespace LogicCircuit {
 		}
 
 		public void Redraw() {
-			((TextBlock)this.CircuitSymbol.ProbeView).Text = this.ToInt32().ToString("{0:X}", CultureInfo.InvariantCulture);
+			((TextBlock)this.CircuitSymbol.ProbeView).Text = this.ToInt32().ToString("X", CultureInfo.InvariantCulture);
 		}
 
 		public int ToInt32() {
