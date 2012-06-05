@@ -14,61 +14,95 @@
 	</Window.Resources>
 
 	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="Auto"/>
-		</Grid.RowDefinitions>
+		<Grid IsEnabled="{Binding Path=ShowProgress, Converter={StaticResource InverseBooleanConverter}}">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
 
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="Auto"/>
-			<ColumnDefinition Width="*"/>
-			<ColumnDefinition Width="Auto"/>
-			<ColumnDefinition Width="Auto"/>
-		</Grid.ColumnDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
 
-		<Label Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=filter}" VerticalAlignment="Center"
-			Content="{x:Static lc:Resources.TitleFilter}"
-		/>
-		<TextBox Grid.Row="0" Grid.Column="1" Name="filter" VerticalAlignment="Center"/>
-		<CheckBox Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"
-			Content="{x:Static lc:Resources.TitleInvert}"
-			IsChecked="{Binding Path=InvertFilter}"
-		/>
-		<Button Grid.Row="0" Grid.Column="3" Name="buttonApply" Click="ButtonApplyClick" VerticalAlignment="Center"
-			Content="{x:Static lc:Resources.TitleApply}"
-			IsDefault="{Binding ElementName=filter, Path=IsFocused}"
-		/>
-
-		<DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Name="dataGrid" AutoGenerateColumns="False" IsReadOnly="True" Margin="3"
-			VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Standard"
-			ItemsSource="{Binding Path=TruthTable}"
-		>
-			<DataGrid.CellStyle>
-				<Style TargetType="DataGridCell">
-					<Setter Property="HorizontalAlignment" Value="Right"/>
-				</Style>
-			</DataGrid.CellStyle>
-		</DataGrid>
-
-		<WrapPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" VerticalAlignment="Top">
-			<WrapPanel.Resources>
-				<Style TargetType="TextBlock">
-					<Setter Property="Margin" Value="5,2"/>
-				</Style>
-			</WrapPanel.Resources>
-			
-			<TextBlock Text="{Binding Path=TotalRows, StringFormat={x:Static lc:Resources.TitleTotalRows}}"/>
-			<TextBlock Text="{Binding Path=TruthTable.Count, StringFormat={x:Static lc:Resources.TitleDisplayedRows}}"/>
-
-			<TextBlock Visibility="{Binding Path=Truncated, Converter={StaticResource BooleanToVisibilityConverter}}" TextWrapping="Wrap" Foreground="Red"
-				Text="{x:Static lc:Resources.MessageTruthTableTooBig}"
+			<Label Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=filter}" VerticalAlignment="Center"
+				Content="{x:Static lc:Resources.TitleFilter}"
 			/>
-		</WrapPanel>
+			<TextBox Grid.Row="0" Grid.Column="1" Name="filter" VerticalAlignment="Center"/>
+			<CheckBox Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"
+				Content="{x:Static lc:Resources.TitleInvert}"
+				IsChecked="{Binding Path=InvertFilter}"
+			/>
+			<Button Grid.Row="0" Grid.Column="3" Name="buttonApply" Click="ButtonApplyClick" VerticalAlignment="Center"
+				Content="{x:Static lc:Resources.TitleApply}"
+				IsDefault="{Binding ElementName=filter, Path=IsFocused}"
+			/>
 
-		<Button Grid.Row="2" Grid.Column="3" Name="buttonOk" VerticalAlignment="Bottom"
-			Content="{x:Static lc:Resources.TitleOK}"
-			IsDefault="{Binding ElementName=filter, Path=IsFocused, Converter={StaticResource InverseBooleanConverter}}" IsCancel="True"
-		/>
+			<DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Name="dataGrid" AutoGenerateColumns="False" IsReadOnly="True" Margin="3"
+				VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Standard"
+				ItemsSource="{Binding Path=TruthTable}"
+			>
+				<DataGrid.CellStyle>
+					<Style TargetType="DataGridCell">
+						<Setter Property="HorizontalAlignment" Value="Right"/>
+					</Style>
+				</DataGrid.CellStyle>
+			</DataGrid>
+
+			<WrapPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" VerticalAlignment="Top">
+				<WrapPanel.Resources>
+					<Style TargetType="TextBlock">
+						<Setter Property="Margin" Value="5,2"/>
+					</Style>
+				</WrapPanel.Resources>
+			
+				<TextBlock Text="{Binding Path=TotalRows, StringFormat={x:Static lc:Resources.TitleTotalRows}}"/>
+				<TextBlock Text="{Binding Path=TruthTable.Count, StringFormat={x:Static lc:Resources.TitleDisplayedRows}}"/>
+
+				<TextBlock Visibility="{Binding Path=Truncated, Converter={StaticResource BooleanToVisibilityConverter}}" TextWrapping="Wrap" Foreground="Red"
+					Text="{x:Static lc:Resources.MessageTruthTableTooBig}"
+				/>
+			</WrapPanel>
+
+			<Button Grid.Row="2" Grid.Column="3" Name="buttonOk" VerticalAlignment="Bottom"
+				Content="{x:Static lc:Resources.TitleOK}"
+				IsDefault="{Binding ElementName=filter, Path=IsFocused, Converter={StaticResource InverseBooleanConverter}}" IsCancel="True"
+			/>
+		</Grid>
+
+		<Grid Background="#80000000" Visibility="{Binding Path=ShowProgress, Converter={StaticResource BooleanToVisibilityConverter}}" Opacity="0">
+			<Grid.Style>
+				<Style TargetType="Grid">
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding Path=ShowProgress}" Value="True">
+							<DataTrigger.EnterActions>
+								<BeginStoryboard>
+									<Storyboard>
+										<DoubleAnimation
+											Storyboard.TargetProperty="(Grid.Opacity)"
+											Duration="0:0:0.5"
+											AccelerationRatio="0.5"
+											From="0"
+											To="1"
+										/>
+									</Storyboard>
+								</BeginStoryboard>
+							</DataTrigger.EnterActions>
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Path=ShowProgress}" Value="False">
+							<Setter Property="Opacity" Value="0"/>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</Grid.Style>
+			
+			<StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+				<ProgressBar Minimum="0" Maximum="100" Value="{Binding Path=Progress}" Width="200" Height="20" HorizontalAlignment="Center"/>
+				<Button Content="Stop" Click="ButtonStopClick" HorizontalAlignment="Center"/>
+			</StackPanel>
+		</Grid>
 	</Grid>
 </Window>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Diagnostics.CodeAnalysis;
 
@@ -41,14 +42,20 @@ namespace LogicCircuit {
 			return pins.Any(p => p.PinType == PinType.Input) && pins.Any(p => p.PinType == PinType.Output);
 		}
 
-		[SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "2#")]
-		public IList<TruthState> BuildTruthTable(Predicate<TruthState> include, int maxCount, out bool truncated) {
+		[SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters")]
+		public IList<TruthState> BuildTruthTable(Action<int> reportProgress, Func<bool> keepGoing, Predicate<TruthState> include, int maxCount, out bool truncated) {
 			truncated = false;
 			int inputCount = this.inputs.Count;
 			int outputCount = this.outputs.Count;
 			List<TruthState> result = new List<TruthState>();
+			BigInteger onePercent = (BigInteger.One << this.inputs.Sum(i => i.Pin.BitWidth)) / 100;
+			BigInteger count = 0;
+			int progress = 0;
+			foreach(InputPinSocket pin in this.inputs) {
+				pin.Function.Value = 0;
+			}
 			for(;;) {
-				if(maxCount <= result.Count) {
+				if(maxCount <= result.Count || !keepGoing()) {
 					truncated = true;
 					return result;
 				}
@@ -71,6 +78,13 @@ namespace LogicCircuit {
 						break;
 					} else if(i == 0) {
 						return result;
+					}
+				}
+				if(reportProgress != null) {
+					count++;
+					if(onePercent < count) {
+						count = 0;
+						reportProgress(Math.Min(++progress, 100));
 					}
 				}
 			}

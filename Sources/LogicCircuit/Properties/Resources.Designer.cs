@@ -2093,13 +2093,6 @@ namespace LogicCircuit {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Sum of input pins bit widths is too big. Maximum of 20 bits is supported by the truth table..
-		/// </summary>
- 		public static string MessageTooBigInput {
-			get { return ResourceManager.GetString("MessageTooBigInput", Culture); }
-		}
-
-		/// <summary>
 		/// Looks up a localized string similar to Truth table is too long and get truncated. Please use Filter to verify correctness of your circuit..
 		/// </summary>
  		public static string MessageTruthTableTooBig {
@@ -2170,7 +2163,7 @@ namespace LogicCircuit {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Displayed rows: {0}.
+		/// Looks up a localized string similar to Displayed rows: {0:N0}.
 		/// </summary>
  		public static string TitleDisplayedRows {
 			get { return ResourceManager.GetString("TitleDisplayedRows", Culture); }
@@ -2191,7 +2184,7 @@ namespace LogicCircuit {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Total rows: {0}.
+		/// Looks up a localized string similar to Total rows: {0:N0}.
 		/// </summary>
  		public static string TitleTotalRows {
 			get { return ResourceManager.GetString("TitleTotalRows", Culture); }
