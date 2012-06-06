@@ -47,6 +47,7 @@ namespace LogicCircuit {
 			truncated = false;
 			int inputCount = this.inputs.Count;
 			int outputCount = this.outputs.Count;
+			Tracer.Assert(0 < inputCount && 0 < outputCount);
 			List<TruthState> result = new List<TruthState>();
 			BigInteger onePercent = (BigInteger.One << this.inputs.Sum(i => i.Pin.BitWidth)) / 100;
 			BigInteger count = 0;
