@@ -74,7 +74,12 @@ namespace LogicCircuit {
 
 		public DialogTruthTable(LogicalCircuit logicalCircuit) {
 			this.testSocket  = new CircuitTestSocket(logicalCircuit);
-			this.TotalRows = BigInteger.One << this.testSocket.Inputs.Sum(p => p.Pin.BitWidth);
+			int inputBits = this.testSocket.Inputs.Sum(p => p.Pin.BitWidth);
+			if(0 < inputBits) {
+				this.TotalRows = BigInteger.One << inputBits;
+			} else {
+				this.TotalRows = 0;
+			}
 
 			this.BuildTruthTable();
 
@@ -129,34 +134,38 @@ namespace LogicCircuit {
 		}
 
 		private void BuildTruthTable() {
-			if(Interlocked.CompareExchange(ref this.building, 1, 0) == 0) {
-				this.SetShowProgress(true);
-				Predicate<TruthState> include = null;
-				if(DialogTruthTable.MaxRows < this.TotalRows) {
-					include = this.Filter();
-				}
-				this.Progress = 0;
-				this.abort = false;
-				ThreadPool.QueueUserWorkItem(o => {
-					try {
-						IList<TruthState> table = null;
-						bool truncated = false;
-						this.testSocket.LogicalCircuit.CircuitProject.InTransaction(
-							() => table = this.testSocket.BuildTruthTable(
-								this.SetProgress, () => !this.abort, include, DialogTruthTable.MaxRows, out truncated
-							)
-						);
-						this.Dispatcher.BeginInvoke(new Action(() => {
-							this.TruthTable = new ListCollectionView((IList)table);
-							this.Truncated = truncated;
-						}));
-					} catch(Exception exception) {
-						App.Mainframe.ReportException(exception);
-					} finally {
-						this.SetShowProgress(false);
-						this.building = 0;
+			if(0 < this.TotalRows) {
+				if(Interlocked.CompareExchange(ref this.building, 1, 0) == 0) {
+					this.SetShowProgress(true);
+					Predicate<TruthState> include = null;
+					if(DialogTruthTable.MaxRows < this.TotalRows) {
+						include = this.Filter();
 					}
-				});
+					this.Progress = 0;
+					this.abort = false;
+					ThreadPool.QueueUserWorkItem(o => {
+						try {
+							IList<TruthState> table = null;
+							bool truncated = false;
+							this.testSocket.LogicalCircuit.CircuitProject.InTransaction(
+								() => table = this.testSocket.BuildTruthTable(
+									this.SetProgress, () => !this.abort, include, DialogTruthTable.MaxRows, out truncated
+								)
+							);
+							this.Dispatcher.BeginInvoke(new Action(() => {
+								this.TruthTable = new ListCollectionView((IList)table);
+								this.Truncated = truncated;
+							}));
+						} catch(Exception exception) {
+							App.Mainframe.ReportException(exception);
+						} finally {
+							this.SetShowProgress(false);
+							this.building = 0;
+						}
+					});
+				}
+			} else {
+				this.TruthTable = new ListCollectionView(new List<TruthState>());
 			}
 		}
 
