@@ -83,11 +83,14 @@
 									<Storyboard>
 										<DoubleAnimation
 											Storyboard.TargetProperty="(Grid.Opacity)"
-											Duration="0:0:0.5"
-											AccelerationRatio="0.5"
+											Duration="0:0:0.75"
 											From="0"
 											To="1"
-										/>
+										>
+											<DoubleAnimation.EasingFunction>
+												<QuinticEase EasingMode="EaseIn"/>
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
 									</Storyboard>
 								</BeginStoryboard>
 							</DataTrigger.EnterActions>
