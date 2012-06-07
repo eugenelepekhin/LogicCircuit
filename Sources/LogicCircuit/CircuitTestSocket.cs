@@ -55,6 +55,7 @@ namespace LogicCircuit {
 			foreach(InputPinSocket pin in this.inputs) {
 				pin.Function.Value = 0;
 			}
+			TruthState state = new TruthState(inputCount, outputCount);
 			for(;;) {
 				if(maxCount <= result.Count || !keepGoing()) {
 					truncated = true;
@@ -63,7 +64,6 @@ namespace LogicCircuit {
 				if(!this.CircuitState.Evaluate(true)) {
 					return null;
 				}
-				TruthState state = new TruthState(inputCount, outputCount);
 				for(int i = 0; i < inputCount; i++) {
 					state.Input[i] = this.inputs[i].Function.Value;
 				}
@@ -72,6 +72,7 @@ namespace LogicCircuit {
 				}
 				if(include == null || include(state)) {
 					result.Add(state);
+					state = new TruthState(inputCount, outputCount);
 				}
 				for(int i = inputCount - 1; 0 <= i; i--) {
 					this.inputs[i].Function.Value++;
