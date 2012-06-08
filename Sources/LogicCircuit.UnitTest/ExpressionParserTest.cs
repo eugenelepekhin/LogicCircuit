@@ -24,6 +24,13 @@ namespace LogicCircuit.UnitTest {
 			Assert.AreEqual(expected, expr(state), "Expression evaluated to unexpected value");
 		}
 
+		private void Valid(ExpressionParser parser, TruthState state, bool expected, string text, bool inverted) {
+			Predicate<TruthState> expr = parser.Parse(text, inverted);
+			Assert.IsNotNull(expr, "Parse failed: " + parser.Error + ">> " + text);
+			Assert.IsNull(parser.Error, "Unexpected parsing error");
+			Assert.AreEqual(expected, expr(state), "Expression evaluated to unexpected value");
+		}
+
 		private void Invalid(ExpressionParser parser, TruthState state, string text) {
 			Func<TruthState, int> expr = parser.Parse(text);
 			Assert.IsNull(expr, "Expecting parse to fail: " + text);
@@ -545,6 +552,44 @@ namespace LogicCircuit.UnitTest {
 			this.Invalid(parser, state, "\"c'");
 			this.Invalid(parser, state, "\"c'\\");
 			this.Invalid(parser, state, "\"c'\\\"\"");
+		}
+
+		/// <summary>
+		/// A test for Parse of Predicate flavor of expression
+		/// </summary>
+		[TestMethod()]
+		public void ExpressionParserPredicateParseTest() {
+			int seed = (int)DateTime.UtcNow.Ticks;
+			this.TestContext.WriteLine("Seed={0}", seed);
+			Random rand = new Random(seed);
+
+			CircuitTestSocket socket = null;
+			ExpressionParser parser = new ExpressionParser(socket);
+			TruthState state = new TruthState(0, 0);
+
+			this.Valid(parser, state, false, "1", true);
+			this.Valid(parser, state, false, "-1", true);
+			this.Valid(parser, state, true, "0", true);
+			this.Valid(parser, state, false, "10", true);
+			this.Valid(parser, state, true, "5 - 5", true);
+			this.Valid(parser, state, true, "-5 + 5", true);
+
+			this.Valid(parser, state, true, "1", false);
+			this.Valid(parser, state, true, "-1", false);
+			this.Valid(parser, state, false, "0", false);
+			this.Valid(parser, state, true, "10", false);
+			this.Valid(parser, state, false, "5 - 5", false);
+			this.Valid(parser, state, false, "-5 + 5", false);
+
+			for(int i = 0; i < 1000; i++) {
+				int n = rand.Next(1) * Math.Abs(rand.Next());
+				this.Valid(parser, state, n == 0, n.ToString(), true);
+			}
+
+			for(int i = 0; i < 1000; i++) {
+				int n = rand.Next(1) * Math.Abs(rand.Next());
+				this.Valid(parser, state, n != 0, n.ToString(), false);
+			}
 		}
 	}
 }

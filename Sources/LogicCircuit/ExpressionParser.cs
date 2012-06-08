@@ -90,6 +90,30 @@ namespace LogicCircuit {
 		}
 
 		public Func<TruthState, int> Parse(string text) {
+			Expression body = this.ParseExpression(text);
+			if(body == null) {
+				return null;
+			}
+			Expression<Func<TruthState, int>> lambda = Expression.Lambda<Func<TruthState, int>>(
+				body,
+				this.stateParameter
+			);
+			return lambda.Compile();
+		}
+
+		public Predicate<TruthState> Parse(string text, bool inverted) {
+			Expression body = this.ParseExpression(text);
+			if(body == null) {
+				return null;
+			}
+			Expression<Predicate<TruthState>> lambda = Expression.Lambda<Predicate<TruthState>>(
+				inverted ? Expression.Equal(body, Expression.Constant(0)) : Expression.NotEqual(body, Expression.Constant(0)),
+				this.stateParameter
+			);
+			return lambda.Compile();
+		}
+
+		private Expression ParseExpression(string text) {
 			this.Error = null;
 			this.current = new Token();
 			Expression body = null;
@@ -104,11 +128,7 @@ namespace LogicCircuit {
 					return null;
 				}
 			}
-			Expression<Func<TruthState, int>> lambda = Expression.Lambda<Func<TruthState, int>>(
-				body,
-				this.stateParameter
-			);
-			return lambda.Compile();
+			return body;
 		}
 
 		private Expression ErrorUnexpected(Token token) {

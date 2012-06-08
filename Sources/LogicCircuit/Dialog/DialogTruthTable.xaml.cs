@@ -208,13 +208,9 @@ namespace LogicCircuit {
 				bool inverted = this.InvertFilter;
 				if(!string.IsNullOrEmpty(text)) {
 					ExpressionParser parser = new ExpressionParser(this.testSocket);
-					Func<TruthState, int> func = parser.Parse(text);
+					Predicate<TruthState> func = parser.Parse(text, inverted);
 					if(parser.Error == null) {
-						if(inverted) {
-							return s => func(s) == 0;
-						} else {
-							return s => func(s) != 0;
-						}
+						return func;
 					} else {
 						App.Mainframe.ErrorMessage(parser.Error);
 					}
