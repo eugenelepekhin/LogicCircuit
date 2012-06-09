@@ -28,14 +28,11 @@ namespace LogicCircuit {
 		public static readonly DependencyProperty TruncatedProperty = DependencyProperty.Register(
 			"Truncated", typeof(bool), typeof(DialogTruthTable)
 		);
-		public static readonly DependencyProperty InvertFilterProperty = DependencyProperty.Register(
-			"InvertFilter", typeof(bool), typeof(DialogTruthTable), new PropertyMetadata(true)
-		);
 		public static readonly DependencyProperty ShowProgressProperty = DependencyProperty.Register(
 			"ShowProgress", typeof(bool), typeof(DialogTruthTable), new PropertyMetadata(false)
 		);
 		public static readonly DependencyProperty ProgressProperty = DependencyProperty.Register(
-			"Progress", typeof(int), typeof(DialogTruthTable)
+			"Progress", typeof(double), typeof(DialogTruthTable)
 		);
 
 		public ListCollectionView TruthTable {
@@ -48,22 +45,18 @@ namespace LogicCircuit {
 			set { this.SetValue(DialogTruthTable.TruncatedProperty, value); }
 		}
 
-		public bool InvertFilter {
-			get { return (bool)this.GetValue(DialogTruthTable.InvertFilterProperty); }
-			set { this.SetValue(DialogTruthTable.InvertFilterProperty, value); }
-		}
+		public bool InvertFilter { get; set; }
 
 		public bool ShowProgress {
 			get { return (bool)this.GetValue(DialogTruthTable.ShowProgressProperty); }
 			set { this.SetValue(DialogTruthTable.ShowProgressProperty, value); }
 		}
 
-		public int Progress {
-			get { return (int)this.GetValue(DialogTruthTable.ProgressProperty); }
+		public double Progress {
+			get { return (double)this.GetValue(DialogTruthTable.ProgressProperty); }
 			set { this.SetValue(DialogTruthTable.ProgressProperty, value); }
 		}
 
-		private int building = 0;
 		private bool abort;
 
 		private readonly CircuitTestSocket testSocket;
@@ -73,6 +66,7 @@ namespace LogicCircuit {
 		public BigInteger TotalRows { get; private set; }
 
 		public DialogTruthTable(LogicalCircuit logicalCircuit) {
+			this.InvertFilter = true;
 			this.testSocket  = new CircuitTestSocket(logicalCircuit);
 			int inputBits = this.testSocket.Inputs.Sum(p => p.Pin.BitWidth);
 			if(0 < inputBits) {
@@ -114,9 +108,7 @@ namespace LogicCircuit {
 
 		protected override void OnClosing(CancelEventArgs e) {
 			base.OnClosing(e);
-			if(this.building != 0) {
-				e.Cancel = true;
-			}
+			e.Cancel = this.ShowProgress;
 		}
 
 		private static Func<TruthState, int> InputFieldAccesor(int index) {
@@ -134,16 +126,21 @@ namespace LogicCircuit {
 		}
 
 		private void BuildTruthTable() {
-			if(0 < this.TotalRows) {
-				if(Interlocked.CompareExchange(ref this.building, 1, 0) == 0) {
-					this.SetShowProgress(true);
+			if(!this.ShowProgress) {
+				if(0 < this.TotalRows) {
 					Predicate<TruthState> include = null;
 					if(DialogTruthTable.MaxRows < this.TotalRows) {
-						include = this.Filter();
+						bool success;
+						include = this.Filter(out success);
+						if(!success) {
+							return;
+						}
 					}
-					this.Progress = 0;
 					this.abort = false;
+					this.Progress = 0;
+					this.ShowProgress = true;
 					ThreadPool.QueueUserWorkItem(o => {
+						Exception error = null;
 						try {
 							IList<TruthState> table = null;
 							bool truncated = false;
@@ -157,19 +154,21 @@ namespace LogicCircuit {
 								this.Truncated = truncated;
 							}));
 						} catch(Exception exception) {
-							App.Mainframe.ReportException(exception);
+							error = exception;
 						} finally {
 							this.SetShowProgress(false);
-							this.building = 0;
+						}
+						if(error != null) {
+							App.Mainframe.ReportException(error);
 						}
 					});
+				} else {
+					this.TruthTable = new ListCollectionView(new List<TruthState>());
 				}
-			} else {
-				this.TruthTable = new ListCollectionView(new List<TruthState>());
 			}
 		}
 
-		private void SetProgress(int progress) {
+		private void SetProgress(double progress) {
 			this.Dispatcher.BeginInvoke(new Action(() => this.Progress = progress));
 		}
 
@@ -177,12 +176,13 @@ namespace LogicCircuit {
 			this.Dispatcher.Invoke(new Action(() => this.ShowProgress = show));
 		}
 
-		private void ApplyFilter() {
+		private void ButtonApplyClick(object sender, RoutedEventArgs e) {
 			try {
 				if(DialogTruthTable.MaxRows < this.TotalRows) {
 					this.BuildTruthTable();
 				} else {
-					Predicate<TruthState> include = this.Filter();
+					bool success;
+					Predicate<TruthState> include = this.Filter(out success);
 					if(include != null) {
 						this.TruthTable.Filter = o => o is TruthState ? include((TruthState)o) : false;
 					} else {
@@ -194,25 +194,23 @@ namespace LogicCircuit {
 			}
 		}
 
-		private void ButtonApplyClick(object sender, RoutedEventArgs e) {
-			this.ApplyFilter();
-		}
-
 		private void ButtonStopClick(object sender, RoutedEventArgs e) {
 			this.abort = true;
+			this.ShowProgress = false;
 		}
 
-		private Predicate<TruthState> Filter() {
+		private Predicate<TruthState> Filter(out bool success) {
+			success = true;
 			if(this.filter != null) {
 				string text = this.filter.Text.Trim();
-				bool inverted = this.InvertFilter;
 				if(!string.IsNullOrEmpty(text)) {
 					ExpressionParser parser = new ExpressionParser(this.testSocket);
-					Predicate<TruthState> func = parser.Parse(text, inverted);
+					Predicate<TruthState> func = parser.Parse(text, this.InvertFilter);
 					if(parser.Error == null) {
 						return func;
 					} else {
 						App.Mainframe.ErrorMessage(parser.Error);
+						success = false;
 					}
 				}
 			}

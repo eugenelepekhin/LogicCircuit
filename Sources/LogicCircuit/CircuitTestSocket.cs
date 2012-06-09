@@ -43,7 +43,7 @@ namespace LogicCircuit {
 		}
 
 		[SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters")]
-		public IList<TruthState> BuildTruthTable(Action<int> reportProgress, Func<bool> keepGoing, Predicate<TruthState> include, int maxCount, out bool truncated) {
+		public IList<TruthState> BuildTruthTable(Action<double> reportProgress, Func<bool> keepGoing, Predicate<TruthState> include, int maxCount, out bool truncated) {
 			truncated = false;
 			int inputCount = this.inputs.Count;
 			int outputCount = this.outputs.Count;
@@ -51,7 +51,7 @@ namespace LogicCircuit {
 			List<TruthState> result = new List<TruthState>();
 			BigInteger onePercent = (BigInteger.One << this.inputs.Sum(i => i.Pin.BitWidth)) / 100;
 			BigInteger count = 0;
-			int progress = 0;
+			double progress = 0;
 			foreach(InputPinSocket pin in this.inputs) {
 				pin.Function.Value = 0;
 			}
