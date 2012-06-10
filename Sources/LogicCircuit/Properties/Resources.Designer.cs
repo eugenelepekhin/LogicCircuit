@@ -2189,5 +2189,12 @@ namespace LogicCircuit {
  		public static string TitleTotalRows {
 			get { return ResourceManager.GetString("TitleTotalRows", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Stop.
+		/// </summary>
+ 		public static string TitleStop {
+			get { return ResourceManager.GetString("TitleStop", Culture); }
+		}
 	}
 }

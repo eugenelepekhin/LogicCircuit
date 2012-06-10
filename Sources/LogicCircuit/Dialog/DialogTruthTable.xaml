@@ -103,8 +103,8 @@
 			</Grid.Style>
 			
 			<StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
-				<ProgressBar Minimum="0" Maximum="100" Value="{Binding Path=Progress}" Width="200" Height="20" HorizontalAlignment="Center"/>
-				<Button Content="Stop" Click="ButtonStopClick" HorizontalAlignment="Center"/>
+				<ProgressBar Minimum="0" Maximum="100" Value="{Binding Path=Progress}" Width="200" Height="15" HorizontalAlignment="Center"/>
+				<Button Content="{x:Static lc:Resources.TitleStop}" Click="ButtonStopClick" HorizontalAlignment="Center"/>
 			</StackPanel>
 		</Grid>
 	</Grid>

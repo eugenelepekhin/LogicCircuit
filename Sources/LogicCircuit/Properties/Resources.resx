@@ -1096,4 +1096,7 @@ Do you want to remove the reference to it from the Recent Files list?</value>
     <value>Total rows: {0:N0}</value>
     <comment>-{int count}</comment>
   </data>
+  <data name="TitleStop" xml:space="preserve">
+    <value>_Stop</value>
+  </data>
 </root>
