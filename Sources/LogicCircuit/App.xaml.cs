@@ -11,7 +11,7 @@ namespace LogicCircuit {
 	public partial class App : Application {
 
 		public static App CurrentApp { get { return (App)App.Current; } }
-		public static Mainframe Mainframe { get { return (Mainframe)App.Current.MainWindow; } }
+		public static Mainframe Mainframe { get; set; }
 
 		public string FileToOpen { get; private set; }
 

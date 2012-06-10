@@ -73,6 +73,7 @@ namespace LogicCircuit {
 				this.TotalRows = BigInteger.One << inputBits;
 			} else {
 				this.TotalRows = 0;
+				this.TruthTable = new ListCollectionView(new List<TruthState>());
 			}
 
 			this.BuildTruthTable();
@@ -126,45 +127,48 @@ namespace LogicCircuit {
 		}
 
 		private void BuildTruthTable() {
-			if(!this.ShowProgress) {
-				if(0 < this.TotalRows) {
-					Predicate<TruthState> include = null;
-					if(DialogTruthTable.MaxRows < this.TotalRows) {
-						bool success;
-						include = this.Filter(out success);
-						if(!success) {
-							return;
-						}
+			if(!this.ShowProgress && 0 < this.TotalRows) {
+				Predicate<TruthState> include = null;
+				if(DialogTruthTable.MaxRows < this.TotalRows) {
+					bool success;
+					include = this.Filter(out success);
+					if(!success) {
+						return;
 					}
-					this.abort = false;
-					this.Progress = 0;
-					this.ShowProgress = true;
-					ThreadPool.QueueUserWorkItem(o => {
-						Exception error = null;
-						try {
-							IList<TruthState> table = null;
-							bool truncated = false;
-							this.testSocket.LogicalCircuit.CircuitProject.InTransaction(
-								() => table = this.testSocket.BuildTruthTable(
-									this.SetProgress, () => !this.abort, include, DialogTruthTable.MaxRows, out truncated
-								)
-							);
+				}
+				this.abort = false;
+				this.Progress = 0;
+				this.ShowProgress = true;
+				ThreadPool.QueueUserWorkItem(o => {
+					Exception error = null;
+					bool oscillation = false;
+					try {
+						IList<TruthState> table = null;
+						bool truncated = false;
+						this.testSocket.LogicalCircuit.CircuitProject.InTransaction(
+							() => table = this.testSocket.BuildTruthTable(
+								this.SetProgress, () => !this.abort, include, DialogTruthTable.MaxRows, out truncated
+							)
+						);
+						if(table != null) {
 							this.Dispatcher.BeginInvoke(new Action(() => {
 								this.TruthTable = new ListCollectionView((IList)table);
 								this.Truncated = truncated;
 							}));
-						} catch(Exception exception) {
-							error = exception;
-						} finally {
-							this.SetShowProgress(false);
+						} else {
+							oscillation = true;
 						}
-						if(error != null) {
-							App.Mainframe.ReportException(error);
-						}
-					});
-				} else {
-					this.TruthTable = new ListCollectionView(new List<TruthState>());
-				}
+					} catch(Exception exception) {
+						error = exception;
+					} finally {
+						this.SetShowProgress(false);
+					}
+					if(error != null) {
+						App.Mainframe.ReportException(error);
+					} else if(oscillation) {
+						App.Mainframe.ErrorMessage(LogicCircuit.Resources.Oscillation);
+					}
+				});
 			}
 		}
 
