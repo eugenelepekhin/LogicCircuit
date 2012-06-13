@@ -1,40 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
 using System.Text;
-using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 
 namespace LogicCircuit {
 	public class CircuitTestSocket {
 		public LogicalCircuit LogicalCircuit { get; private set; }
-		private readonly List<InputPinSocket> inputs = new List<InputPinSocket>();
-		private readonly List<OutputPinSocket> outputs = new List<OutputPinSocket>();
-		private CircuitMap CircuitMap { get; set; }
-		private CircuitState CircuitState { get; set; }
-
-		public IEnumerable<InputPinSocket> Inputs { get { return this.inputs; } }
-		public IEnumerable<OutputPinSocket> Outputs { get { return this.outputs; } }
+		private TableChank chank;
+		private TableChank[] chankList;
+		public IEnumerable<InputPinSocket> Inputs { get { return this.chank.Inputs; } }
+		public IEnumerable<OutputPinSocket> Outputs { get { return this.chank.Outputs; } }
 
 		public CircuitTestSocket(LogicalCircuit circuit) {
 			Tracer.Assert(CircuitTestSocket.IsTestable(circuit));
-			this.LogicalCircuit = CircuitTestSocket.Copy(circuit);
-			this.Plug();
-
-			// Create map and state
-			this.CircuitMap = new CircuitMap(this.LogicalCircuit);
-			this.CircuitState = this.CircuitMap.Apply(CircuitRunner.HistorySize);
-
-			this.inputs.ForEach(s => s.Function = (FunctionConstant)this.CircuitMap.Input(s.Symbol));
-			this.outputs.ForEach(s => s.Function = this.CircuitMap.FunctionProbe(s.Symbol));
-
-			this.inputs.Where(s => s.Function == null).ToList().ForEach(s => this.inputs.Remove(s));
-			this.outputs.Where(s => s.Function == null).ToList().ForEach(s => this.outputs.Remove(s));
-			
-			Tracer.Assert(this.inputs.All(s => s.Function != null) && this.outputs.All(s => s.Function != null));
-
-			this.CircuitMap.TurnOn();
+			this.LogicalCircuit = circuit;
+			this.chank = new TableChank(this.LogicalCircuit);
+			if(1 < Environment.ProcessorCount && 15 < this.chank.InputBitCount) {
+				this.chankList = new TableChank[Environment.ProcessorCount];
+				BigInteger count = this.chank.Count / this.chankList.Length;
+				for(int i = 0; i < this.chankList.Length; i++) {
+					if(i == 0) {
+						this.chankList[i] = this.chank;
+					} else {
+						this.chankList[i] = new TableChank(circuit);
+					}
+					this.chankList[i].Count = count;
+					this.chankList[i].Start = count * i;
+				}
+			}
 		}
 
 		public static bool IsTestable(LogicalCircuit circuit) {
@@ -44,78 +41,164 @@ namespace LogicCircuit {
 
 		[SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters")]
 		public IList<TruthState> BuildTruthTable(Action<double> reportProgress, Func<bool> keepGoing, Predicate<TruthState> include, int maxCount, out bool truncated) {
-			truncated = false;
-			int inputCount = this.inputs.Count;
-			int outputCount = this.outputs.Count;
-			Tracer.Assert(0 < inputCount && 0 < outputCount);
-			List<TruthState> result = new List<TruthState>();
-			BigInteger onePercent = (BigInteger.One << this.inputs.Sum(i => i.Pin.BitWidth)) / 100;
-			BigInteger count = 0;
-			double progress = 0;
-			foreach(InputPinSocket pin in this.inputs) {
-				pin.Function.Value = 0;
-			}
-			TruthState state = new TruthState(inputCount, outputCount);
-			for(;;) {
-				if(maxCount <= result.Count || !keepGoing()) {
-					truncated = true;
-					return result;
-				}
-				if(!this.CircuitState.Evaluate(true)) {
+			System.Diagnostics.Stopwatch watch = new System.Diagnostics.Stopwatch();
+			watch.Start();
+			if(this.chankList == null) {
+				this.chank.BuildTruthTable(reportProgress, keepGoing, include, maxCount);
+				truncated = this.chank.Trancated;
+				if(this.chank.Oscillation) {
 					return null;
 				}
-				for(int i = 0; i < inputCount; i++) {
-					state.Input[i] = this.inputs[i].Function.Value;
+				watch.Stop();
+				Tracer.FullInfo("CircuitTestSocket.BuildTruthTable", "Single threaded time: {0}", watch.Elapsed);
+				return this.chank.Results;
+			}
+			double[] progress = new double[this.chankList.Length];
+			Parallel.For(0, this.chankList.Length, i =>
+				this.chankList[i].BuildTruthTable(
+					d => {
+						progress[i] = d;
+						reportProgress(progress.Sum() / progress.Length);
+					},
+					() => keepGoing() && !this.chankList.Take(i).Any(c => c.Trancated) && !this.chankList.Any(c => c.Oscillation),
+					include,
+					maxCount
+				)
+			);
+			truncated = this.chankList.Any(c => c.Trancated);
+			if(this.chankList.Any(c => c.Oscillation)) {
+				return null;
+			}
+			List<TruthState> list = new List<TruthState>();
+			foreach(TableChank table in this.chankList) {
+				if(table.Results != null) {
+					list.AddRange(table.Results);
 				}
-				for(int i = 0; i < outputCount; i++) {
-					state.Output[i] = this.outputs[i].Function.ToInt32();
+				if(maxCount <= list.Count) {
+					break;
 				}
-				if(include == null || include(state)) {
-					result.Add(state);
-					state = new TruthState(inputCount, outputCount);
-				}
-				for(int i = inputCount - 1; 0 <= i; i--) {
-					this.inputs[i].Function.Value++;
-					if(this.inputs[i].Function.Value != 0) {
+			}
+			if(maxCount < list.Count) {
+				list.RemoveRange(maxCount, list.Count - maxCount);
+			}
+			watch.Stop();
+			Tracer.FullInfo("CircuitTestSocket.BuildTruthTable", "Multi threaded time: {0}", watch.Elapsed);
+			return list;
+		}
+
+		private class TableChank {
+			public readonly LogicalCircuit LogicalCircuit;
+			public readonly CircuitState CircuitState;
+			public readonly List<InputPinSocket> Inputs = new List<InputPinSocket>();
+			public readonly List<OutputPinSocket> Outputs = new List<OutputPinSocket>();
+			public readonly int InputBitCount;
+			public List<TruthState> Results = new List<TruthState>();
+			public BigInteger Start = 0;
+			public BigInteger Count;
+			public bool Oscillation = false;
+			public bool Trancated = false;
+			
+			public TableChank(LogicalCircuit logicalCircuit) {
+				this.LogicalCircuit = TableChank.Copy(logicalCircuit);
+				this.Plug();
+
+				// Create map and state
+				CircuitMap circuitMap = new CircuitMap(this.LogicalCircuit);
+				this.CircuitState = circuitMap.Apply(CircuitRunner.HistorySize);
+
+				this.Inputs.ForEach(s => s.Function = (FunctionConstant)circuitMap.Input(s.Symbol));
+				this.Outputs.ForEach(s => s.Function = circuitMap.FunctionProbe(s.Symbol));
+
+				this.Inputs.Where(s => s.Function == null).ToList().ForEach(s => this.Inputs.Remove(s));
+				this.Outputs.Where(s => s.Function == null).ToList().ForEach(s => this.Outputs.Remove(s));
+			
+				Tracer.Assert(this.Inputs.All(s => s.Function != null) && this.Outputs.All(s => s.Function != null));
+
+				this.InputBitCount = this.Inputs.Sum(p => p.Pin.BitWidth);
+				this.Count = BigInteger.One << this.InputBitCount;
+
+				circuitMap.TurnOn();
+			}
+
+			public void BuildTruthTable(Action<double> reportProgress, Func<bool> keepGoing, Predicate<TruthState> include, int maxCount) {
+				this.LogicalCircuit.CircuitProject.InOmitTransaction(() => this.Build(reportProgress, keepGoing, include, maxCount));
+			}
+
+			private void Build(Action<double> reportProgress, Func<bool> keepGoing, Predicate<TruthState> include, int maxCount) {
+				this.Results = new List<TruthState>();
+				this.Oscillation = false;
+				this.Trancated = false;
+				int inputCount = this.Inputs.Count;
+				int outputCount = this.Outputs.Count;
+				Tracer.Assert(0 < inputCount && 0 < outputCount);
+				BigInteger end = this.Start + this.Count;
+				BigInteger onePercent = this.Count / 100;
+				BigInteger count = 0;
+				double progress = 0;
+
+				TruthState state = new TruthState(inputCount, outputCount);
+				for(BigInteger value = this.Start; value < end; value++) {
+					if(maxCount <= this.Results.Count || !keepGoing()) {
+						this.Trancated = true;
 						break;
-					} else if(i == 0) {
-						return result;
 					}
-				}
-				if(reportProgress != null) {
-					count++;
-					if(onePercent < count) {
-						count = 0;
-						reportProgress(Math.Min(++progress, 100));
+					int bit = 0;
+					for(int i = this.Inputs.Count - 1; 0 <= i; i--) {
+						InputPinSocket pin = this.Inputs[i];
+						int v = (int)((value >> bit) & int.MaxValue) & (pin.Pin.BitWidth < 32 ? (1 << pin.Pin.BitWidth) - 1 : ~0);
+						pin.Function.Value = v;
+						Tracer.Assert(pin.Function.Value == v, "Value get truncated");
+						bit += pin.Pin.BitWidth;
+					}
+					if(!this.CircuitState.Evaluate(true)) {
+						this.Oscillation = true;
+						break;
+					}
+					for(int i = 0; i < inputCount; i++) {
+						state.Input[i] = this.Inputs[i].Function.Value;
+					}
+					for(int i = 0; i < outputCount; i++) {
+						state.Output[i] = this.Outputs[i].Function.ToInt32();
+					}
+					if(include == null || include(state)) {
+						this.Results.Add(state);
+						state = new TruthState(inputCount, outputCount);
+					}
+					if(reportProgress != null) {
+						count++;
+						if(onePercent < count) {
+							count = 0;
+							reportProgress(Math.Min(++progress, 100));
+						}
 					}
 				}
 			}
-		}
 
-		private static LogicalCircuit Copy(LogicalCircuit circuit) {
-			LogicalCircuit other = null;
-			CircuitProject copy = new CircuitProject();
-			copy.InTransaction(() => {
-				copy.ProjectSet.Copy(circuit.CircuitProject.ProjectSet.Project);
-				other = copy.LogicalCircuitSet.Copy(circuit, true);
-			});
-			return other;
-		}
+			private static LogicalCircuit Copy(LogicalCircuit circuit) {
+				LogicalCircuit other = null;
+				CircuitProject copy = new CircuitProject();
+				copy.InTransaction(() => {
+					copy.ProjectSet.Copy(circuit.CircuitProject.ProjectSet.Project);
+					other = copy.LogicalCircuitSet.Copy(circuit, true);
+				});
+				return other;
+			}
 
-		private void Plug() {
-			List<Pin> pins = this.LogicalCircuit.CircuitProject.PinSet.SelectByCircuit(this.LogicalCircuit).ToList();
-			pins.Sort(PinComparer.Comparer);
-			this.LogicalCircuit.CircuitProject.InTransaction(() => {
-				foreach(Pin pin in pins) {
-					if(pin.PinType == PinType.Input) {
-						this.inputs.Add(new InputPinSocket(pin));
-					} else if(pin.PinType == PinType.Output) {
-						this.outputs.Add(new OutputPinSocket(pin));
-					} else {
-						Tracer.Fail();
+			private void Plug() {
+				List<Pin> pins = this.LogicalCircuit.CircuitProject.PinSet.SelectByCircuit(this.LogicalCircuit).ToList();
+				pins.Sort(PinComparer.Comparer);
+				this.LogicalCircuit.CircuitProject.InTransaction(() => {
+					foreach(Pin pin in pins) {
+						if(pin.PinType == PinType.Input) {
+							this.Inputs.Add(new InputPinSocket(pin));
+						} else if(pin.PinType == PinType.Output) {
+							this.Outputs.Add(new OutputPinSocket(pin));
+						} else {
+							Tracer.Fail();
+						}
 					}
-				}
-			});
+				});
+			}
 		}
 	}
 
