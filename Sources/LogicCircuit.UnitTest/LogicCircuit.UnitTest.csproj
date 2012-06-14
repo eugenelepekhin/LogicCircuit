@@ -40,6 +40,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
@@ -55,6 +56,7 @@
     <Compile Include="CircuitProjectTest.cs" />
     <Compile Include="CircuitStateTest.cs" />
     <Compile Include="CircuitTest.cs" />
+    <Compile Include="CircuitTestSocketTest.cs" />
     <Compile Include="ExpressionParserTest.cs" />
     <Compile Include="FunctionTest.cs" />
     <Compile Include="MemoryTest.cs" />
@@ -94,6 +96,7 @@
     <None Include="Properties\XmlLoadReadElementTextTest.CircuitProject" />
     <None Include="Properties\ExternalCalculator.CircuitProject" />
     <None Include="Properties\CircuitMapCleanUpTest.CircuitProject" />
+    <None Include="Properties\CircuitTestSocketTest.CircuitProject" />
     <Content Include="Properties\Splitter Conversion.CircuitProject" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

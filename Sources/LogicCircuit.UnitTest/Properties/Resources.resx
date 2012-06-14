@@ -121,6 +121,9 @@
   <data name="CircuitMapCleanUpTest" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>circuitmapcleanuptest.circuitproject;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="CircuitTestSocketTest" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>circuittestsockettest.circuitproject;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
   <data name="Digital_Clock" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>digital clock.circuitproject;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
