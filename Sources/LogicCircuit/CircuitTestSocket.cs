@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace LogicCircuit {
 	public class CircuitTestSocket {
-		public LogicalCircuit LogicalCircuit { get; private set; }
 		private TableChank chank;
 		private TableChank[] chankList;
 		public IEnumerable<InputPinSocket> Inputs { get { return this.chank.Inputs; } }
@@ -17,8 +16,7 @@ namespace LogicCircuit {
 
 		public CircuitTestSocket(LogicalCircuit circuit) {
 			Tracer.Assert(CircuitTestSocket.IsTestable(circuit));
-			this.LogicalCircuit = circuit;
-			this.chank = new TableChank(this.LogicalCircuit);
+			this.chank = new TableChank(circuit);
 			if(1 < Environment.ProcessorCount && 15 < this.chank.InputBitCount) {
 				this.chankList = new TableChank[Environment.ProcessorCount];
 				BigInteger count = this.chank.Count / this.chankList.Length;
@@ -87,16 +85,16 @@ namespace LogicCircuit {
 		}
 
 		private class TableChank {
-			public readonly LogicalCircuit LogicalCircuit;
-			public readonly CircuitState CircuitState;
+			private readonly LogicalCircuit LogicalCircuit;
+			private readonly CircuitState CircuitState;
 			public readonly List<InputPinSocket> Inputs = new List<InputPinSocket>();
 			public readonly List<OutputPinSocket> Outputs = new List<OutputPinSocket>();
 			public readonly int InputBitCount;
-			public List<TruthState> Results = new List<TruthState>();
+			public List<TruthState> Results { get; private set; }
 			public BigInteger Start = 0;
 			public BigInteger Count;
-			public bool Oscillation = false;
-			public bool Trancated = false;
+			public bool Oscillation { get; private set; }
+			public bool Trancated { get; private set; }
 			
 			public TableChank(LogicalCircuit logicalCircuit) {
 				this.LogicalCircuit = TableChank.Copy(logicalCircuit);
