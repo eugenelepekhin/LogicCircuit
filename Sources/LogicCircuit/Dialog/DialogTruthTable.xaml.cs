@@ -143,12 +143,9 @@ namespace LogicCircuit {
 					Exception error = null;
 					bool oscillation = false;
 					try {
-						IList<TruthState> table = null;
 						bool truncated = false;
-						this.testSocket.LogicalCircuit.CircuitProject.InTransaction(
-							() => table = this.testSocket.BuildTruthTable(
-								this.SetProgress, () => !this.abort, include, DialogTruthTable.MaxRows, out truncated
-							)
+						IList<TruthState> table = this.testSocket.BuildTruthTable(
+							this.SetProgress, () => !this.abort, include, DialogTruthTable.MaxRows, out truncated
 						);
 						if(table != null) {
 							this.Dispatcher.BeginInvoke(new Action(() => {
