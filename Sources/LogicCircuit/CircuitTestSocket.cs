@@ -166,7 +166,12 @@ namespace LogicCircuit {
 						count++;
 						if(onePercent < count) {
 							count = 0;
-							reportProgress(Math.Min(++progress, 100));
+							if(onePercent == BigInteger.Zero) {
+								Tracer.Assert(0 < this.Count && this.Count < 100);
+								reportProgress((double)((value + 1 - this.Start) * 100) / (double)this.Count);
+							} else {
+								reportProgress(Math.Min(++progress, 100));
+							}
 						}
 					}
 				}

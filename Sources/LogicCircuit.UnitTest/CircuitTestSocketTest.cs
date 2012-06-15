@@ -89,7 +89,7 @@ namespace LogicCircuit.UnitTest {
 				2,
 				out truncated
 			);
-			Assert.IsTrue(Math.Abs(progress - 100) < 0.01);
+			Assert.IsTrue(Math.Abs(progress - 100) < 2);
 			Assert.IsTrue(!truncated);
 			Assert.IsTrue(table1 != null && table1.Count == 2);
 			Assert.IsTrue(table1[0].Input[0] == 0 && table1[0].Output[0] == 0);
