@@ -220,5 +220,42 @@ namespace LogicCircuit.UnitTest {
 			Assert.IsTrue(!truncated);
 			Assert.IsTrue(table2 != null && table2.Count == 0);
 		}
+
+		/// <summary>
+		/// A test for BuildTruthTable in multi threaded case with truncation.
+		/// </summary>
+		[TestMethod()]
+		public void CircuitTestSocketBuildTruthTable5Test() {
+			ProjectTester.SwitchTo(this.CircuitProject, "8 bit adder");
+			CircuitTestSocket s1 = new CircuitTestSocket(this.CircuitProject.ProjectSet.Project.LogicalCircuit);
+			ExpressionParser parser = new ExpressionParser(s1);
+			Predicate<TruthState> predicate = parser.Parse("outC << 8 | s = inC + a + b && v = !(a & 0x80 != b & 0x80 || a & 0x80 == s & 0x80)", true);
+			double progress = -1;
+			bool truncated;
+			int maxSize = 128;
+			IList<TruthState> table1 = s1.BuildTruthTable(
+				p => { Assert.IsTrue(0 <= p && p <= 100); progress = p; },
+				() => true,
+				null,
+				maxSize,
+				out truncated
+			);
+			Assert.IsTrue(truncated);
+			Assert.IsTrue(table1 != null && table1.Count == maxSize);
+			foreach(TruthState state in table1) {
+				Assert.IsFalse(predicate(state));
+			}
+
+			IList<TruthState> table2 = s1.BuildTruthTable(
+				p => { Assert.IsTrue(0 <= p && p <= 100); progress = p; },
+				() => true,
+				predicate,
+				1,
+				out truncated
+			);
+			Assert.IsTrue(Math.Abs(progress - 100) < 2);
+			Assert.IsTrue(!truncated);
+			Assert.IsTrue(table2 != null && table2.Count == 0);
+		}
 	}
 }
