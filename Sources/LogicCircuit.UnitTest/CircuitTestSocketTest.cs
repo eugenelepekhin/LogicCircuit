@@ -80,6 +80,8 @@ namespace LogicCircuit.UnitTest {
 		public void CircuitTestSocketBuildTruthTable1Test() {
 			ProjectTester.SwitchTo(this.CircuitProject, "1 Bit Wire");
 			CircuitTestSocket s1 = new CircuitTestSocket(this.CircuitProject.ProjectSet.Project.LogicalCircuit);
+			ExpressionParser parser = new ExpressionParser(s1);
+			Predicate<TruthState> predicate = parser.Parse("q=x", true);
 			double progress = -1;
 			bool truncated;
 			IList<TruthState> table1 = s1.BuildTruthTable(
@@ -94,6 +96,129 @@ namespace LogicCircuit.UnitTest {
 			Assert.IsTrue(table1 != null && table1.Count == 2);
 			Assert.IsTrue(table1[0].Input[0] == 0 && table1[0].Output[0] == 0);
 			Assert.IsTrue(table1[1].Input[0] == 1 && table1[1].Output[0] == 1);
+
+			IList<TruthState> table2 = s1.BuildTruthTable(
+				p => { Assert.IsTrue(0 <= p && p <= 100); progress = p; },
+				() => true,
+				predicate,
+				2,
+				out truncated
+			);
+			Assert.IsTrue(Math.Abs(progress - 100) < 2);
+			Assert.IsTrue(!truncated);
+			Assert.IsTrue(table2 != null && table2.Count == 0);
+		}
+
+		/// <summary>
+		/// A test for BuildTruthTable in single threaded case.
+		/// </summary>
+		[TestMethod()]
+		public void CircuitTestSocketBuildTruthTable2Test() {
+			ProjectTester.SwitchTo(this.CircuitProject, "1 bit 2 entry AND");
+			CircuitTestSocket s1 = new CircuitTestSocket(this.CircuitProject.ProjectSet.Project.LogicalCircuit);
+			ExpressionParser parser = new ExpressionParser(s1);
+			Predicate<TruthState> predicate = parser.Parse("q=a&b", true);
+			double progress = -1;
+			bool truncated;
+			IList<TruthState> table1 = s1.BuildTruthTable(
+				p => { Assert.IsTrue(0 <= p && p <= 100); progress = p; },
+				() => true,
+				null,
+				4,
+				out truncated
+			);
+			Assert.IsTrue(Math.Abs(progress - 100) < 2);
+			Assert.IsTrue(!truncated);
+			Assert.IsTrue(table1 != null && table1.Count == 4);
+			Assert.IsTrue(table1[0].Input[0] == 0 && table1[0].Input[1] == 0 && table1[0].Output[0] == 0);
+			Assert.IsTrue(table1[1].Input[0] == 0 && table1[1].Input[1] == 1 && table1[1].Output[0] == 0);
+			Assert.IsTrue(table1[2].Input[0] == 1 && table1[2].Input[1] == 0 && table1[2].Output[0] == 0);
+			Assert.IsTrue(table1[3].Input[0] == 1 && table1[3].Input[1] == 1 && table1[3].Output[0] == 1);
+
+			IList<TruthState> table2 = s1.BuildTruthTable(
+				p => { Assert.IsTrue(0 <= p && p <= 100); progress = p; },
+				() => true,
+				predicate,
+				1,
+				out truncated
+			);
+			Assert.IsTrue(Math.Abs(progress - 100) < 2);
+			Assert.IsTrue(!truncated);
+			Assert.IsTrue(table2 != null && table2.Count == 0);
+		}
+
+		/// <summary>
+		/// A test for BuildTruthTable in single threaded case.
+		/// </summary>
+		[TestMethod()]
+		public void CircuitTestSocketBuildTruthTable3Test() {
+			ProjectTester.SwitchTo(this.CircuitProject, "1 bit full adder");
+			CircuitTestSocket s1 = new CircuitTestSocket(this.CircuitProject.ProjectSet.Project.LogicalCircuit);
+			ExpressionParser parser = new ExpressionParser(s1);
+			Predicate<TruthState> predicate = parser.Parse("outC << 1 | s = inC + a + b", true);
+			double progress = -1;
+			bool truncated;
+			IList<TruthState> table1 = s1.BuildTruthTable(
+				p => { Assert.IsTrue(0 <= p && p <= 100); progress = p; },
+				() => true,
+				null,
+				8,
+				out truncated
+			);
+			Assert.IsTrue(Math.Abs(progress - 100) < 2);
+			Assert.IsTrue(!truncated);
+			Assert.IsTrue(table1 != null && table1.Count == 8);
+			foreach(TruthState state in table1) {
+				Assert.IsFalse(predicate(state));
+			}
+
+			IList<TruthState> table2 = s1.BuildTruthTable(
+				p => { Assert.IsTrue(0 <= p && p <= 100); progress = p; },
+				() => true,
+				predicate,
+				1,
+				out truncated
+			);
+			Assert.IsTrue(Math.Abs(progress - 100) < 2);
+			Assert.IsTrue(!truncated);
+			Assert.IsTrue(table2 != null && table2.Count == 0);
+		}
+
+		/// <summary>
+		/// A test for BuildTruthTable in multi threaded case.
+		/// </summary>
+		[TestMethod()]
+		public void CircuitTestSocketBuildTruthTable4Test() {
+			ProjectTester.SwitchTo(this.CircuitProject, "8 bit adder");
+			CircuitTestSocket s1 = new CircuitTestSocket(this.CircuitProject.ProjectSet.Project.LogicalCircuit);
+			ExpressionParser parser = new ExpressionParser(s1);
+			Predicate<TruthState> predicate = parser.Parse("outC << 8 | s = inC + a + b && v = !(a & 0x80 != b & 0x80 || a & 0x80 == s & 0x80)", true);
+			double progress = -1;
+			bool truncated;
+			IList<TruthState> table1 = s1.BuildTruthTable(
+				p => { Assert.IsTrue(0 <= p && p <= 100); progress = p; },
+				() => true,
+				null,
+				1 << 17,
+				out truncated
+			);
+			Assert.IsTrue(Math.Abs(progress - 100) < 2);
+			Assert.IsTrue(!truncated);
+			Assert.IsTrue(table1 != null && table1.Count == (1 << 17));
+			foreach(TruthState state in table1) {
+				Assert.IsFalse(predicate(state));
+			}
+
+			IList<TruthState> table2 = s1.BuildTruthTable(
+				p => { Assert.IsTrue(0 <= p && p <= 100); progress = p; },
+				() => true,
+				predicate,
+				1,
+				out truncated
+			);
+			Assert.IsTrue(Math.Abs(progress - 100) < 2);
+			Assert.IsTrue(!truncated);
+			Assert.IsTrue(table2 != null && table2.Count == 0);
 		}
 	}
 }
