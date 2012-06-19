@@ -11,3 +11,17 @@ Colors of symbols
 Running tree not always open the item when it clicked on the diagram
 
 Check that all enums in model are verified when reading project file.
+
+
+=== Function Optimization Ideas ===
+Local optimizations.
+Local optimizations applicable to individual basic block, so the blocks without any extra receivers in the middle.
+
+Note that constant folding is not applicable as there no compile time constants in the logic circuit.
+Remove double NOTs if there is no another receiver between them.
+Remove or simplify functions receiving same parameter.
+Simplify Function followed by another function if there is no another receiver between them.
+Eliminate common sub expressions.
+Grouping up few primitive functions to complex one (dynamically built?) if there is no another receivers in the middle.
+
+Global optimizations.
