@@ -49,7 +49,7 @@ namespace LogicCircuit {
 		}
 
 		private bool EnsureSaved() {
-			if(this.Editor.HasChanges) {
+			if(this.Editor != null && this.Editor.HasChanges) {
 				MessageBoxResult result = DialogMessage.Show(this, this.Title,
 					LogicCircuit.Resources.MessageSaveFile(this.Editor.Project.Name), null,
 					MessageBoxImage.Question, MessageBoxButton.YesNoCancel
