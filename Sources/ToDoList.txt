@@ -12,6 +12,8 @@ Running tree not always open the item when it clicked on the diagram
 
 Check that all enums in model are verified when reading project file.
 
+Make possible hyperlinks in message box.
+
 
 === Function Optimization Ideas ===
 Local optimizations.
