@@ -527,7 +527,7 @@ namespace LogicCircuit.UnitTest {
 		}
 
 		/// <summary>
-		/// A test for Parse of primary expression
+		/// A test for Parse of primary expression - name of input or output pin
 		/// </summary>
 		[TestMethod()]
 		public void ExpressionParserVariableParseTest() {
@@ -552,6 +552,58 @@ namespace LogicCircuit.UnitTest {
 			this.Invalid(parser, state, "\"c'");
 			this.Invalid(parser, state, "\"c'\\");
 			this.Invalid(parser, state, "\"c'\\\"\"");
+		}
+
+		/// <summary>
+		/// A test for Parse of primary expression - case sensitivity of name of input or output pin
+		/// </summary>
+		[TestMethod()]
+		public void ExpressionParserVariableCaseParseTest() {
+			CircuitProject project = ProjectTester.Load(this.TestContext, Properties.Resources.Digital_Clock, "4 bit adder");
+			Pin x1 = null, x2 = null, s = null, c = null;
+
+			foreach(Pin pin in project.PinSet.SelectByCircuit(project.ProjectSet.Project.LogicalCircuit)) {
+				switch(pin.Name) {
+				case "x1":
+					x1 = pin;
+					break;
+				case "x2":
+					x2 = pin;
+					break;
+				case "s":
+					s = pin;
+					break;
+				case "c'":
+					c = pin;
+					break;
+				}
+			}
+			Assert.IsNotNull(x1);
+			Assert.IsNotNull(x2);
+			Assert.IsNotNull(s);
+			Assert.IsNotNull(c);
+			project.InTransaction(() => {
+				x1.Name = "variant";
+				x2.Name = "vaRIAnt";
+				s.Name = "VAriaNT";
+				c.Name = "VARIANT";
+			});
+
+			CircuitTestSocket socket = new CircuitTestSocket(project.ProjectSet.Project.LogicalCircuit);
+			ExpressionParser parser = new ExpressionParser(socket);
+			TruthState state = new TruthState(socket.Inputs.Count(), socket.Outputs.Count());
+
+			state.Input[this.InputIndex(socket, "c")]  = 1;
+			state.Input[this.InputIndex(socket, "variant")] = 5;
+			state.Input[this.InputIndex(socket, "vaRIAnt")] = 4;
+			state.Output[this.OutputIndex(socket, "VAriaNT")] = 9;
+			state.Output[this.OutputIndex(socket, "VARIANT")] = 1;
+
+			this.Valid(parser, state, 1, "c");
+			this.Valid(parser, state, 5, "variant");
+			this.Valid(parser, state, 4, "vaRIAnt");
+			this.Valid(parser, state, 9, "VAriaNT");
+			this.Valid(parser, state, 1, "VARIANT");
 		}
 
 		/// <summary>

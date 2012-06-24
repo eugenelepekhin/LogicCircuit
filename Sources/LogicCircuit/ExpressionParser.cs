@@ -608,7 +608,7 @@ namespace LogicCircuit {
 		private Expression Variable(string name) {
 			int index = 0;
 			foreach(InputPinSocket pin in this.socket.Inputs) {
-				if(StringComparer.OrdinalIgnoreCase.Equals(pin.Pin.Name, name)) {
+				if(StringComparer.Ordinal.Equals(pin.Pin.Name, name)) {
 					return Expression.MakeIndex(
 						Expression.Property(
 							this.stateParameter,
@@ -622,7 +622,7 @@ namespace LogicCircuit {
 			}
 			index = 0;
 			foreach(OutputPinSocket pin in this.socket.Outputs) {
-				if(StringComparer.OrdinalIgnoreCase.Equals(pin.Pin.Name, name)) {
+				if(StringComparer.Ordinal.Equals(pin.Pin.Name, name)) {
 					return Expression.MakeIndex(
 						Expression.Property(
 							this.stateParameter,
