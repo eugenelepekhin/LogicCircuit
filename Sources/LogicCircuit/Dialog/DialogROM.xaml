@@ -187,7 +187,7 @@
 
 		<GroupBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="3,0,3,3" Header="{Binding Source={x:Static lc:Resources.CaptionNote}, Mode=OneTime}">
 			<TextBox Name="note" Margin="0" BorderThickness="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
-				AcceptsReturn="True" SpellCheck.IsEnabled="True"
+				AcceptsReturn="True" AcceptsTab="True" SpellCheck.IsEnabled="True"
 			/>
 		</GroupBox>
 

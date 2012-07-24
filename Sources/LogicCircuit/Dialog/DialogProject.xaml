@@ -33,7 +33,7 @@
 		<TextBox Grid.Row="0" Grid.Column="1" Name="name" SpellCheck.IsEnabled="True"/>
 
 		<Label Grid.Row="1" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleDescription}, Mode=OneTime}" Target="{Binding ElementName=description}"/>
-		<TextBox Grid.Row="1" Grid.Column="1" Name="description" AcceptsReturn="True"
+		<TextBox Grid.Row="1" Grid.Column="1" Name="description" AcceptsReturn="True" AcceptsTab="True"
 			VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
 			SpellCheck.IsEnabled="True"
 		/>
