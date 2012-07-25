@@ -2,7 +2,7 @@
 using System.Globalization;
 
 namespace LogicCircuit {
-	internal class SettingsIntegerCache {
+	public class SettingsIntegerCache {
 		private Settings settings;
 		private string key;
 		private int minimum;
