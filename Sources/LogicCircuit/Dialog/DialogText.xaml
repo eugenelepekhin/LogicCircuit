@@ -15,8 +15,8 @@
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 
-		<ToolBar Grid.Row="0">
-			<ToolBar.Resources>
+		<ToolBarTray Grid.Row="0">
+			<ToolBarTray.Resources>
 				<Style TargetType="ToggleButton" x:Key="toolToggleButton">
 					<Setter Property="CommandTarget" Value="{Binding ElementName=editor}"/>
 					<Setter Property="VerticalAlignment" Value="Stretch"/>
@@ -28,88 +28,95 @@
 						</Trigger>
 					</Style.Triggers>
 				</Style>
-			</ToolBar.Resources>
+			</ToolBarTray.Resources>
+			<!-- Edit Toolbar -->
+			<ToolBar Band="{Binding Path=EditToolBarBand.Value, Mode=TwoWay}" BandIndex="{Binding Path=EditToolBarBandIndex.Value, Mode=TwoWay}">
+				<ToggleButton Style="{StaticResource toolToggleButton}" Command="ApplicationCommands.Cut">
+					<Image Source="..\Properties\EditCut.png" Height="24"/>
+				</ToggleButton>
+				<ToggleButton Style="{StaticResource toolToggleButton}" Command="ApplicationCommands.Copy">
+					<Image Source="..\Properties\EditCopy.png"/>
+				</ToggleButton>
+				<ToggleButton Style="{StaticResource toolToggleButton}" Command="ApplicationCommands.Paste">
+					<Image Source="..\Properties\EditPaste.png"/>
+				</ToggleButton>
 
-			<ToggleButton Style="{StaticResource toolToggleButton}" Command="ApplicationCommands.Cut">
-				<Image Source="..\Properties\EditCut.png" Height="24"/>
-			</ToggleButton>
-			<ToggleButton Style="{StaticResource toolToggleButton}" Command="ApplicationCommands.Copy">
-				<Image Source="..\Properties\EditCopy.png"/>
-			</ToggleButton>
-			<ToggleButton Style="{StaticResource toolToggleButton}" Command="ApplicationCommands.Paste">
-				<Image Source="..\Properties\EditPaste.png"/>
-			</ToggleButton>
+				<Separator/>
 
-			<Separator />
+				<ToggleButton Style="{StaticResource toolToggleButton}" Command="ApplicationCommands.Undo">
+					<Image Source="..\Properties\EditUndo.png"/>
+				</ToggleButton>
+				<ToggleButton Style="{StaticResource toolToggleButton}" Command="ApplicationCommands.Redo">
+					<Image Source="..\Properties\EditRedo.png"/>
+				</ToggleButton>
+			</ToolBar>
+			<!-- Font Toolbar -->
+			<ToolBar Band="{Binding Path=FontToolBarBand.Value, Mode=TwoWay}" BandIndex="{Binding Path=FontToolBarBandIndex.Value, Mode=TwoWay}">
+				<ComboBox Width="150" ItemsSource="{Binding Path=FontFamilies}" SelectedItem="{Binding Path=CurrentFontFamily}">
+					<ComboBox.ItemTemplate>
+						<DataTemplate>
+							<TextBlock Text="{Binding Path=Source}" FontFamily="{Binding}" FontSize="16" ToolTip="{Binding}"/>
+						</DataTemplate>
+					</ComboBox.ItemTemplate>
+				</ComboBox>
 
-			<ToggleButton Style="{StaticResource toolToggleButton}" Command="ApplicationCommands.Undo">
-				<Image Source="..\Properties\EditUndo.png"/>
-			</ToggleButton>
-			<ToggleButton Style="{StaticResource toolToggleButton}" Command="ApplicationCommands.Redo">
-				<Image Source="..\Properties\EditRedo.png"/>
-			</ToggleButton>
+				<ToggleButton Name="boldButton" Style="{StaticResource toolToggleButton}" Command="EditingCommands.ToggleBold" IsChecked="{Binding Path=IsBoldFont, Mode=OneWay}">
+					<TextBlock FontSize="18" FontWeight="Bold">B</TextBlock>
+				</ToggleButton>
+				<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.ToggleItalic" IsChecked="{Binding Path=IsItalicFont, Mode=OneWay}">
+					<TextBlock FontSize="18" FontWeight="Bold" FontStyle="Italic">I</TextBlock>
+				</ToggleButton>
+				<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.ToggleUnderline" IsChecked="{Binding Path=IsUnderlineFont, Mode=OneWay}">
+					<TextBlock FontSize="18" FontWeight="Bold" TextDecorations="Underline">U</TextBlock>
+				</ToggleButton>
+				<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.IncreaseFontSize">
+					<Image Source="..\Properties\CharacterGrowFont.png"></Image>
+				</ToggleButton>
+				<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.DecreaseFontSize">
+					<Image Source="..\Properties\CharacterShrinkFont.png"></Image>
+				</ToggleButton>
+			</ToolBar>
+			<!-- Paragraph Toolbar -->
+			<ToolBar Band="{Binding Path=ParaToolBarBand.Value, Mode=TwoWay}" BandIndex="{Binding Path=ParaToolBarBandIndex.Value, Mode=TwoWay}">
+				<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.ToggleBullets" IsChecked="{Binding Path=IsBulletted, Mode=OneWay}">
+					<Image Source="..\Properties\ListBullets.png"/>
+				</ToggleButton>
+				<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.ToggleNumbering" IsChecked="{Binding Path=IsNumbered, Mode=OneWay}">
+					<Image Source="..\Properties\ListNumbering.png"/>
+				</ToggleButton>
 
-			<Separator />
+				<Separator />
 
-			<ToggleButton Name="boldButton" Style="{StaticResource toolToggleButton}" Command="EditingCommands.ToggleBold" IsChecked="{Binding Path=IsBoldFont, Mode=OneWay}">
-				<TextBlock FontSize="18" FontWeight="Bold">B</TextBlock>
-			</ToggleButton>
-			<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.ToggleItalic" IsChecked="{Binding Path=IsItalicFont, Mode=OneWay}">
-				<TextBlock FontSize="18" FontWeight="Bold" FontStyle="Italic">I</TextBlock>
-			</ToggleButton>
-			<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.ToggleUnderline" IsChecked="{Binding Path=IsUnderlineFont, Mode=OneWay}">
-				<TextBlock FontSize="18" FontWeight="Bold" TextDecorations="Underline">U</TextBlock>
-			</ToggleButton>
-			<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.IncreaseFontSize">
-				<Image Source="..\Properties\CharacterGrowFont.png"></Image>
-			</ToggleButton>
-			<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.DecreaseFontSize">
-				<Image Source="..\Properties\CharacterShrinkFont.png"></Image>
-			</ToggleButton>
+				<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.AlignLeft" IsChecked="{Binding Path=IsLeftAlignment, Mode=OneWay}">
+					<Image Source="..\Properties\ParagraphLeftJustify.png"/>
+				</ToggleButton>
+				<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.AlignCenter" IsChecked="{Binding Path=IsCenterAlignment, Mode=OneWay}">
+					<Image Source="..\Properties\ParagraphCenterJustify.png"/>
+				</ToggleButton>
+				<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.AlignRight" IsChecked="{Binding Path=IsRightAlignment, Mode=OneWay}">
+					<Image Source="..\Properties\ParagraphRightJustify.png"/>
+				</ToggleButton>
+				<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.AlignJustify" IsChecked="{Binding Path=IsJustifyAlignment, Mode=OneWay}">
+					<Image Source="..\Properties\ParagraphFullJustify.png"/>
+				</ToggleButton>
+				<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.IncreaseIndentation" IsChecked="False">
+					<Image Source="..\Properties\ParagraphIncreaseIndentation.png"></Image>
+				</ToggleButton>
+				<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.DecreaseIndentation" IsChecked="False">
+					<Image Source="..\Properties\ParagraphDecreaseIndentation.png"></Image>
+				</ToggleButton>
+			</ToolBar>
+			<!-- Other Toolbar -->
+			<ToolBar Band="{Binding Path=OtherToolBarBand.Value, Mode=TwoWay}" BandIndex="{Binding Path=OtherToolBarBandIndex.Value, Mode=TwoWay}">
+				<ToggleButton Style="{StaticResource toolToggleButton}" Command="{Binding Path=HyperlinkCommand}">
+					<Image Source="..\Properties\Hyperlink.png"/>
+				</ToggleButton>
 
-			<Separator />
-
-			<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.ToggleBullets" IsChecked="{Binding Path=IsBulletted, Mode=OneWay}">
-				<Image Source="..\Properties\ListBullets.png"/>
-			</ToggleButton>
-			<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.ToggleNumbering" IsChecked="{Binding Path=IsNumbered, Mode=OneWay}">
-				<Image Source="..\Properties\ListNumbering.png"/>
-			</ToggleButton>
-
-			<Separator />
-
-			<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.AlignLeft" IsChecked="{Binding Path=IsLeftAlignment, Mode=OneWay}">
-				<Image Source="..\Properties\ParagraphLeftJustify.png"/>
-			</ToggleButton>
-			<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.AlignCenter" IsChecked="{Binding Path=IsCenterAlignment, Mode=OneWay}">
-				<Image Source="..\Properties\ParagraphCenterJustify.png"/>
-			</ToggleButton>
-			<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.AlignRight" IsChecked="{Binding Path=IsRightAlignment, Mode=OneWay}">
-				<Image Source="..\Properties\ParagraphRightJustify.png"/>
-			</ToggleButton>
-			<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.AlignJustify" IsChecked="{Binding Path=IsJustifyAlignment, Mode=OneWay}">
-				<Image Source="..\Properties\ParagraphFullJustify.png"/>
-			</ToggleButton>
-
-			<Separator />
-
-			<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.IncreaseIndentation" IsChecked="False">
-				<Image Source="..\Properties\ParagraphIncreaseIndentation.png"></Image>
-			</ToggleButton>
-			<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.DecreaseIndentation" IsChecked="False">
-				<Image Source="..\Properties\ParagraphDecreaseIndentation.png"></Image>
-			</ToggleButton>
-
-			<Separator />
-
-			<ToggleButton Style="{StaticResource toolToggleButton}" Command="{Binding Path=HyperlinkCommand}">
-				<Image Source="..\Properties\Hyperlink.png"/>
-			</ToggleButton>
-
-			<ToggleButton Style="{StaticResource toolToggleButton}" Command="{Binding Path=InsertImageCommand}">
-				<Image Source="..\Properties\Image.png"/>
-			</ToggleButton>
-		</ToolBar>
+				<ToggleButton Style="{StaticResource toolToggleButton}" Command="{Binding Path=InsertImageCommand}">
+					<Image Source="..\Properties\Image.png"/>
+				</ToggleButton>
+			</ToolBar>
+		</ToolBarTray>
 
 		<RichTextBox Grid.Row="1" Name="editor" AcceptsReturn="True" AcceptsTab="True" SpellCheck.IsEnabled="True" TextChanged="editorTextChanged" SelectionChanged="editorSelectionChanged"
 			FontFamily="Georgia"

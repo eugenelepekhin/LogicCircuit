@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 
@@ -19,9 +22,56 @@ namespace LogicCircuit {
 		private SettingsWindowLocationCache windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 		private SettingsStringCache openImageFolder = new SettingsStringCache(Settings.User, "DialogText.OpenImage.Folder", Mainframe.DefaultPictureFolder());
-		
+
+		private SettingsIntegerCache editToolBarBand = new SettingsIntegerCache(Settings.User, "DialogText.EditToolBarBand", 0, 10, 0);
+		public SettingsIntegerCache EditToolBarBand { get { return this.editToolBarBand; } }
+
+		private SettingsIntegerCache editToolBarBandIndex = new SettingsIntegerCache(Settings.User, "DialogText.EditToolBarBandIndex", 0, 10, 0);
+		public SettingsIntegerCache EditToolBarBandIndex { get { return this.editToolBarBandIndex; } }
+
+		private SettingsIntegerCache fontToolBarBand = new SettingsIntegerCache(Settings.User, "DialogText.FontToolBarBand", 0, 10, 0);
+		public SettingsIntegerCache FontToolBarBand { get { return this.fontToolBarBand; } }
+
+		private SettingsIntegerCache fontToolBarBandIndex = new SettingsIntegerCache(Settings.User, "DialogText.FontToolBarBandIndex", 0, 10, 0);
+		public SettingsIntegerCache FontToolBarBandIndex { get { return this.fontToolBarBandIndex; } }
+
+		private SettingsIntegerCache paraToolBarBand = new SettingsIntegerCache(Settings.User, "DialogText.ParaToolBarBand", 0, 10, 0);
+		public SettingsIntegerCache ParaToolBarBand { get { return this.paraToolBarBand; } }
+
+		private SettingsIntegerCache paraToolBarBandIndex = new SettingsIntegerCache(Settings.User, "DialogText.ParaToolBarBandIndex", 0, 10, 0);
+		public SettingsIntegerCache ParaToolBarBandIndex { get { return this.paraToolBarBandIndex; } }
+
+		private SettingsIntegerCache otherToolBarBand = new SettingsIntegerCache(Settings.User, "DialogText.OtherToolBarBand", 0, 10, 0);
+		public SettingsIntegerCache OtherToolBarBand { get { return this.otherToolBarBand; } }
+
+		private SettingsIntegerCache otherToolBarBandIndex = new SettingsIntegerCache(Settings.User, "DialogText.OtherToolBarBandIndex", 0, 10, 0);
+		public SettingsIntegerCache OtherToolBarBandIndex { get { return this.otherToolBarBandIndex; } }
+
 		public string Document { get; set; }
 
+		public IEnumerable<FontFamily> FontFamilies { get { return Fonts.SystemFontFamilies.OrderBy(f => f.Source); } }
+		public FontFamily CurrentFontFamily {
+			get {
+				try {
+					if(this.editor != null && this.editor.Selection != null) {
+						return this.editor.Selection.GetPropertyValue(TextElement.FontFamilyProperty) as FontFamily;
+					}
+				} catch(Exception exception) {
+					Tracer.Report("DialogText.get_CurrentFontFamily", exception);
+				}
+				return null;
+			}
+			set {
+				try {
+					if(this.editor != null && this.editor.Selection != null) {
+						this.editor.Selection.ApplyPropertyValue(TextElement.FontFamilyProperty, value);
+					}
+				} catch(Exception exception) {
+					Tracer.Report("DialogText.set_CurrentFontFamily", exception);
+				}
+			}
+		}
+		
 		public bool IsBoldFont { get { return this.IsSelected(FontWeights.Bold, TextElement.FontWeightProperty); } }
 		public bool IsItalicFont { get { return this.IsSelected(FontStyles.Italic, TextElement.FontStyleProperty); } }
 		public bool IsUnderlineFont { get { return this.IsSelected(TextDecorations.Underline, Inline.TextDecorationsProperty); } }
@@ -91,6 +141,8 @@ namespace LogicCircuit {
 
 		private void UpdateToolbar() {
 			try {
+				this.NotifyPropertyChanged("CurrentFontFamily");
+
 				this.NotifyPropertyChanged("IsBoldFont");
 				this.NotifyPropertyChanged("IsItalicFont");
 				this.NotifyPropertyChanged("IsUnderlineFont");
@@ -122,6 +174,20 @@ namespace LogicCircuit {
 
 		private void editorSelectionChanged(object sender, RoutedEventArgs e) {
 			this.UpdateToolbar();
+		}
+
+		private void FontFamilySelectionChanged(object sender, SelectionChangedEventArgs e) {
+			try {
+				ComboBox combo = sender as ComboBox;
+				if(combo != null) {
+					FontFamily fontFamily = combo.SelectedItem as FontFamily;
+					if(fontFamily != null) {
+						this.editor.Selection.ApplyPropertyValue(TextElement.FontFamilyProperty, fontFamily);
+					}
+				}
+			} catch(Exception exception) {
+				App.Mainframe.ReportException(exception);
+			}
 		}
 
 		private void InsertImage() {
