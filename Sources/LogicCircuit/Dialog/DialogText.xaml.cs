@@ -29,7 +29,7 @@ namespace LogicCircuit {
 		private SettingsIntegerCache editToolBarBandIndex = new SettingsIntegerCache(Settings.User, "DialogText.EditToolBarBandIndex", 0, 10, 0);
 		public SettingsIntegerCache EditToolBarBandIndex { get { return this.editToolBarBandIndex; } }
 
-		private SettingsIntegerCache fontToolBarBand = new SettingsIntegerCache(Settings.User, "DialogText.FontToolBarBand", 0, 10, 0);
+		private SettingsIntegerCache fontToolBarBand = new SettingsIntegerCache(Settings.User, "DialogText.FontToolBarBand", 0, 10, 1);
 		public SettingsIntegerCache FontToolBarBand { get { return this.fontToolBarBand; } }
 
 		private SettingsIntegerCache fontToolBarBandIndex = new SettingsIntegerCache(Settings.User, "DialogText.FontToolBarBandIndex", 0, 10, 0);
@@ -38,13 +38,13 @@ namespace LogicCircuit {
 		private SettingsIntegerCache paraToolBarBand = new SettingsIntegerCache(Settings.User, "DialogText.ParaToolBarBand", 0, 10, 0);
 		public SettingsIntegerCache ParaToolBarBand { get { return this.paraToolBarBand; } }
 
-		private SettingsIntegerCache paraToolBarBandIndex = new SettingsIntegerCache(Settings.User, "DialogText.ParaToolBarBandIndex", 0, 10, 0);
+		private SettingsIntegerCache paraToolBarBandIndex = new SettingsIntegerCache(Settings.User, "DialogText.ParaToolBarBandIndex", 0, 10, 1);
 		public SettingsIntegerCache ParaToolBarBandIndex { get { return this.paraToolBarBandIndex; } }
 
-		private SettingsIntegerCache otherToolBarBand = new SettingsIntegerCache(Settings.User, "DialogText.OtherToolBarBand", 0, 10, 0);
+		private SettingsIntegerCache otherToolBarBand = new SettingsIntegerCache(Settings.User, "DialogText.OtherToolBarBand", 0, 10, 1);
 		public SettingsIntegerCache OtherToolBarBand { get { return this.otherToolBarBand; } }
 
-		private SettingsIntegerCache otherToolBarBandIndex = new SettingsIntegerCache(Settings.User, "DialogText.OtherToolBarBandIndex", 0, 10, 0);
+		private SettingsIntegerCache otherToolBarBandIndex = new SettingsIntegerCache(Settings.User, "DialogText.OtherToolBarBandIndex", 0, 10, 1);
 		public SettingsIntegerCache OtherToolBarBandIndex { get { return this.otherToolBarBandIndex; } }
 
 		public string Document { get; set; }
@@ -68,6 +68,32 @@ namespace LogicCircuit {
 					}
 				} catch(Exception exception) {
 					Tracer.Report("DialogText.set_CurrentFontFamily", exception);
+				}
+			}
+		}
+
+		public IEnumerable<double> FontSizes { get { return new double[] { 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72 }; } }
+		public double CurrentFontSize {
+			get {
+				try {
+					if(this.editor != null && this.editor.Selection != null) {
+						object size = this.editor.Selection.GetPropertyValue(TextElement.FontSizeProperty);
+						if(size is double) {
+							return (double)size;
+						}
+					}
+				} catch(Exception exception) {
+					Tracer.Report("DialogText.get_CurrentFontSize", exception);
+				}
+				return 0;
+			}
+			set {
+				try {
+					if(this.editor != null && this.editor.Selection != null) {
+						this.editor.Selection.ApplyPropertyValue(TextElement.FontSizeProperty, value);
+					}
+				} catch(Exception exception) {
+					Tracer.Report("DialogText.set_CurrentFontSize", exception);
 				}
 			}
 		}
@@ -142,6 +168,7 @@ namespace LogicCircuit {
 		private void UpdateToolbar() {
 			try {
 				this.NotifyPropertyChanged("CurrentFontFamily");
+				this.NotifyPropertyChanged("CurrentFontSize");
 
 				this.NotifyPropertyChanged("IsBoldFont");
 				this.NotifyPropertyChanged("IsItalicFont");

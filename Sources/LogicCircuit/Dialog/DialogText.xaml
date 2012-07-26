@@ -60,6 +60,8 @@
 					</ComboBox.ItemTemplate>
 				</ComboBox>
 
+				<ComboBox Width="50" ItemsSource="{Binding Path=FontSizes}" SelectedItem="{Binding Path=CurrentFontSize}"/>
+
 				<ToggleButton Name="boldButton" Style="{StaticResource toolToggleButton}" Command="EditingCommands.ToggleBold" IsChecked="{Binding Path=IsBoldFont, Mode=OneWay}">
 					<TextBlock FontSize="18" FontWeight="Bold">B</TextBlock>
 				</ToggleButton>
