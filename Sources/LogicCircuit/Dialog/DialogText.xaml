@@ -121,7 +121,6 @@
 		</ToolBarTray>
 
 		<RichTextBox Grid.Row="1" Name="editor" AcceptsReturn="True" AcceptsTab="True" SpellCheck.IsEnabled="True" TextChanged="editorTextChanged" SelectionChanged="editorSelectionChanged"
-			FontFamily="Georgia"
 			VerticalScrollBarVisibility="Auto"
 			HorizontalScrollBarVisibility="Auto"
 		/>

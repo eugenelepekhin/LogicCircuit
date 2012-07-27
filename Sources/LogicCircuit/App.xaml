@@ -130,6 +130,10 @@
 			<Setter Property="Margin" Value="3"/>
 		</Style>
 
+		<Style TargetType="{x:Type FlowDocument}">
+			<Setter Property="FontFamily" Value="{x:Static SystemFonts.MessageFontFamily}"/>
+		</Style>
+
 		<Style x:Key="LogicCircuitBackground" TargetType="{x:Type Canvas}">
 			<Setter Property="Background" Value="White"/>
 			<Style.Triggers>
