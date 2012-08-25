@@ -2196,5 +2196,47 @@ namespace LogicCircuit {
  		public static string TitleStop {
 			get { return ResourceManager.GetString("TitleStop", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Available colors:.
+		/// </summary>
+ 		public static string ColorPickerCaptionAvailable {
+			get { return ResourceManager.GetString("ColorPickerCaptionAvailable", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Recent colors:.
+		/// </summary>
+ 		public static string ColorPickerCaptionRecent {
+			get { return ResourceManager.GetString("ColorPickerCaptionRecent", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Select.
+		/// </summary>
+ 		public static string ColorPickerCaptionSelectCustom {
+			get { return ResourceManager.GetString("ColorPickerCaptionSelectCustom", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Standard colors:.
+		/// </summary>
+ 		public static string ColorPickerCaptionStandard {
+			get { return ResourceManager.GetString("ColorPickerCaptionStandard", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Custom.
+		/// </summary>
+ 		public static string ColorPickerTabCustom {
+			get { return ResourceManager.GetString("ColorPickerTabCustom", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Standard.
+		/// </summary>
+ 		public static string ColorPickerTabStandard {
+			get { return ResourceManager.GetString("ColorPickerTabStandard", Culture); }
+		}
 	}
 }

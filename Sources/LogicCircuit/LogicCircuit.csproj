@@ -66,6 +66,14 @@
     <Compile Include="CircuitProject\Wrappers\TextNote.cs" />
     <Compile Include="CircuitTestSocket.cs" />
     <Compile Include="ColorMethods.cs" />
+    <Compile Include="ColorPicker\ColorPicker.cs" />
+    <Compile Include="ColorPicker\ColorPickerMode.cs" />
+    <Compile Include="ColorPicker\ColorSlider.cs" />
+    <Compile Include="ColorPicker\ColorThumb.cs" />
+    <Compile Include="ColorPicker\HsvColor.cs" />
+    <Compile Include="ColorPicker\HueToColorConverter.cs" />
+    <Compile Include="ColorPicker\SaturationPicker.cs" />
+    <Compile Include="ColorPicker\SpectrumSlider.cs" />
     <Compile Include="Conductor.cs" />
     <Compile Include="ConductorMap.cs" />
     <Compile Include="CustomCommands.cs" />
@@ -292,6 +300,10 @@
       <DependentUpon>TracerMessage.resx</DependentUpon>
     </Compile>
     <Compile Include="XmlHelper.cs" />
+    <Page Include="ColorPicker\ColorPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dialog\DialogAbout.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -446,6 +458,11 @@
     <Resource Include="Properties\ParagraphIncreaseIndentation.png" />
     <Resource Include="Properties\ParagraphLeftJustify.png" />
     <Resource Include="Properties\ParagraphRightJustify.png" />
+    <Resource Include="Properties\Hyperlink.png" />
+    <Resource Include="Properties\Image.png" />
+    <Resource Include="Properties\Color.png" />
+    <Resource Include="Properties\FontColor.png" />
+    <Resource Include="Properties\Highlight.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema\ConvertSettings.xslt" />
@@ -453,6 +470,7 @@
     <None Include="Schema\ConvertFrom.1.0.0.3.xslt" />
     <None Include="Schema\ConvertFrom.2.0.0.1.xslt" />
     <None Include="Schema\ConvertFrom.2.0.0.2.xslt" />
+    <None Include="Schema\ConvertFrom.2.0.0.3.xslt" />
     <None Include="Schema\Empty.xml" />
     <None Include="Schema\CircuitProject.xml">
       <SubType>Designer</SubType>
@@ -533,15 +551,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Properties\Hyperlink.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Properties\Image.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Schema\ConvertFrom.2.0.0.3.xslt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

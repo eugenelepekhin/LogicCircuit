@@ -1099,4 +1099,22 @@ Do you want to remove the reference to it from the Recent Files list?</value>
   <data name="TitleStop" xml:space="preserve">
     <value>_Stop</value>
   </data>
+  <data name="ColorPickerCaptionAvailable" xml:space="preserve">
+    <value>Available colors:</value>
+  </data>
+  <data name="ColorPickerCaptionRecent" xml:space="preserve">
+    <value>Recent colors:</value>
+  </data>
+  <data name="ColorPickerCaptionSelectCustom" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="ColorPickerCaptionStandard" xml:space="preserve">
+    <value>Standard colors:</value>
+  </data>
+  <data name="ColorPickerTabCustom" xml:space="preserve">
+    <value>Custom</value>
+  </data>
+  <data name="ColorPickerTabStandard" xml:space="preserve">
+    <value>Standard</value>
+  </data>
 </root>
