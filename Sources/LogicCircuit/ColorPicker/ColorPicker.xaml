@@ -216,7 +216,7 @@
 												<Setter Property="Template">
 													<Setter.Value>
 														<ControlTemplate TargetType="local:SpectrumSlider">
-															<Border Background="{TemplateBinding Background}" Width="16">
+															<Border Background="{TemplateBinding Background}" Width="16" BorderThickness="1" BorderBrush="{x:Static SystemColors.ActiveBorderBrush}">
 																<Track Margin="0,-5" Name="PART_Track">
 																	<Track.DecreaseRepeatButton>
 																		<RepeatButton Command="Slider.DecreaseLarge"/>
@@ -264,7 +264,7 @@
 												<Setter Property="Template">
 													<Setter.Value>
 														<ControlTemplate TargetType="local:ColorSlider">
-															<Border Height="12">
+															<Border Height="12" BorderThickness="1" BorderBrush="{x:Static SystemColors.ActiveBorderBrush}">
 																<Border.Background>
 																	<LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
 																		<GradientStop Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=LeftColor}" Offset="0"/>
@@ -327,53 +327,54 @@
 											<ColumnDefinition Width="Auto"/>
 										</Grid.ColumnDefinitions>
 
-										<!-- Substrate of SaturationPicker showing gradient from white on left to color based on hue on the right -->
-										<Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Height="150" Margin="3">
-											<Rectangle.Fill>
+										<!-- SaturationPicker -->
+										<Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Height="150" Margin="3" BorderThickness="1" BorderBrush="{x:Static SystemColors.ActiveBorderBrush}">
+											<Border.Background>
 												<LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
 													<GradientStop Offset="0" Color="#FFFFFFFF"/>
 													<GradientStop Offset="1" Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Hue, Converter={StaticResource HueToColorConverter}}"/>
 												</LinearGradientBrush>
-											</Rectangle.Fill>
-										</Rectangle>
-										<local:SaturationPicker Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Height="150" Margin="3" ClipToBounds="True"
-											Saturation="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Saturation, Mode=TwoWay, NotifyOnSourceUpdated=True}"
-											Lightness="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Lightness, Mode=TwoWay, NotifyOnSourceUpdated=True}"
-										>
-											<local:SaturationPicker.Background>
-												<LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-													<GradientStop Offset="0" Color="#00000000"/>
-													<GradientStop Offset="1" Color="#FF000000"/>
-												</LinearGradientBrush>
-											</local:SaturationPicker.Background>
-											<local:ColorThumb
-												Canvas.Left="{Binding RelativeSource={RelativeSource Self}, Path=X, Mode=OneWay}"
-												Canvas.Top="{Binding RelativeSource={RelativeSource Self}, Path=Y, Mode=OneWay}"
-												Saturation="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Saturation, Mode=OneWay}"
-												Lightness="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Lightness, Mode=OneWay}"
+											</Border.Background>
+
+											<local:SaturationPicker ClipToBounds="True"
+												Saturation="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Saturation, Mode=TwoWay, NotifyOnSourceUpdated=True}"
+												Lightness="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Lightness, Mode=TwoWay, NotifyOnSourceUpdated=True}"
 											>
-												<local:ColorThumb.Style>
-													<Style TargetType="local:ColorThumb">
-														<Setter Property="Template">
-															<Setter.Value>
-																<ControlTemplate TargetType="local:ColorThumb">
-																	<Grid Width="12" Height="12">
-																		<Ellipse Stroke="White" Margin="0"/>
-																		<Ellipse Stroke="Black" Margin="1"/>
-																		<Ellipse Stroke="White" Margin="2"/>
-																		<Line Stroke="#80000000" X1="0" Y1="6" X2="12" Y2="6"/>
-																		<Line Stroke="#80000000" X1="6" Y1="0" X2="6" Y2="12"/>
-																	</Grid>
-																</ControlTemplate>
-															</Setter.Value>
-														</Setter>
-													</Style>
-												</local:ColorThumb.Style>
-												<local:ColorThumb.RenderTransform>
-													<TranslateTransform X="-5" Y="-5"/>
-												</local:ColorThumb.RenderTransform>
-											</local:ColorThumb>
-										</local:SaturationPicker>
+												<local:SaturationPicker.Background>
+													<LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+														<GradientStop Offset="0" Color="#00000000"/>
+														<GradientStop Offset="1" Color="#FF000000"/>
+													</LinearGradientBrush>
+												</local:SaturationPicker.Background>
+												<local:ColorThumb
+													Canvas.Left="{Binding RelativeSource={RelativeSource Self}, Path=X, Mode=OneWay}"
+													Canvas.Top="{Binding RelativeSource={RelativeSource Self}, Path=Y, Mode=OneWay}"
+													Saturation="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Saturation, Mode=OneWay}"
+													Lightness="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Lightness, Mode=OneWay}"
+												>
+													<local:ColorThumb.Style>
+														<Style TargetType="local:ColorThumb">
+															<Setter Property="Template">
+																<Setter.Value>
+																	<ControlTemplate TargetType="local:ColorThumb">
+																		<Grid Width="12" Height="12">
+																			<Ellipse Stroke="White" Margin="0"/>
+																			<Ellipse Stroke="Black" Margin="1"/>
+																			<Ellipse Stroke="White" Margin="2"/>
+																			<Line Stroke="#80000000" X1="0" Y1="6" X2="12" Y2="6"/>
+																			<Line Stroke="#80000000" X1="6" Y1="0" X2="6" Y2="12"/>
+																		</Grid>
+																	</ControlTemplate>
+																</Setter.Value>
+															</Setter>
+														</Style>
+													</local:ColorThumb.Style>
+													<local:ColorThumb.RenderTransform>
+														<TranslateTransform X="-5" Y="-5"/>
+													</local:ColorThumb.RenderTransform>
+												</local:ColorThumb>
+											</local:SaturationPicker>
+										</Border>
 
 										<local:SpectrumSlider Grid.Row="0" Grid.Column="3" Grid.RowSpan="5" Margin="3"
 											Hue="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Hue, Mode=TwoWay}"
