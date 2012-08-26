@@ -6,210 +6,216 @@
 	StartupUri="Mainframe.xaml"
 >
 	<Application.Resources>
-		<lc:HyperlinkNavigationCommand x:Key="HyperlinkNavigationCommand"/>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="ColorPicker/ColorPicker.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
 
-		<Style TargetType="Hyperlink">
-			<Setter Property="Command" Value="{StaticResource HyperlinkNavigationCommand}"/>
-			<Setter Property="CommandParameter" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=NavigateUri}"/>
-			<Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=NavigateUri}"/>
-		</Style>
+			<lc:HyperlinkNavigationCommand x:Key="HyperlinkNavigationCommand"/>
 
-		<LinearGradientBrush x:Key="WindowBackground" StartPoint="0.25,0" EndPoint="0.75,1" PresentationOptions:Freeze="True">
-			<GradientStop Color="{x:Static SystemColors.ControlLightLightColor}" Offset="0"/>
-			<GradientStop Color="{x:Static SystemColors.ControlColor}" Offset="1"/>
-		</LinearGradientBrush>
+			<Style TargetType="Hyperlink">
+				<Setter Property="Command" Value="{StaticResource HyperlinkNavigationCommand}"/>
+				<Setter Property="CommandParameter" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=NavigateUri}"/>
+				<Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=NavigateUri}"/>
+			</Style>
 
-		<SolidColorBrush x:Key="MarkerStroke" Color="#FFF505F5" PresentationOptions:Freeze="True"/>
+			<LinearGradientBrush x:Key="WindowBackground" StartPoint="0.25,0" EndPoint="0.75,1" PresentationOptions:Freeze="True">
+				<GradientStop Color="{x:Static SystemColors.ControlLightLightColor}" Offset="0"/>
+				<GradientStop Color="{x:Static SystemColors.ControlColor}" Offset="1"/>
+			</LinearGradientBrush>
 
-		<LinearGradientBrush x:Key="MarkerFill" StartPoint="0,0" EndPoint="1,1" PresentationOptions:Freeze="True">
-			<GradientStop Color="#54AC51AB" Offset="0"/>
-			<GradientStop Color="#54F606F5" Offset="0.5"/>
-			<GradientStop Color="#54AC51AB" Offset="1"/>
-		</LinearGradientBrush>
+			<SolidColorBrush x:Key="MarkerStroke" Color="#FFF505F5" PresentationOptions:Freeze="True"/>
 
-		<LinearGradientBrush x:Key="LedOff" StartPoint="0,0" EndPoint="1,1" PresentationOptions:Freeze="True">
-			<GradientStop Color="#FFCEE3CF" Offset="0"/>
-			<GradientStop Color="#FF909090" Offset="1"/>
-		</LinearGradientBrush>
+			<LinearGradientBrush x:Key="MarkerFill" StartPoint="0,0" EndPoint="1,1" PresentationOptions:Freeze="True">
+				<GradientStop Color="#54AC51AB" Offset="0"/>
+				<GradientStop Color="#54F606F5" Offset="0.5"/>
+				<GradientStop Color="#54AC51AB" Offset="1"/>
+			</LinearGradientBrush>
 
-		<SolidColorBrush x:Key="LedOn0" Color="#FF5B4949" PresentationOptions:Freeze="True"/>
+			<LinearGradientBrush x:Key="LedOff" StartPoint="0,0" EndPoint="1,1" PresentationOptions:Freeze="True">
+				<GradientStop Color="#FFCEE3CF" Offset="0"/>
+				<GradientStop Color="#FF909090" Offset="1"/>
+			</LinearGradientBrush>
 
-		<RadialGradientBrush x:Key="LedOn1" PresentationOptions:Freeze="True">
-			<GradientStop Color="#FFFF7000" Offset="0"/>
-			<GradientStop Color="#FFFB0303" Offset="0.2"/>
-			<GradientStop Color="#FF985A5A" Offset="0.9"/>
-			<GradientStop Color="#FF787878" Offset="1"/>
-		</RadialGradientBrush>
+			<SolidColorBrush x:Key="LedOn0" Color="#FF5B4949" PresentationOptions:Freeze="True"/>
 
-		<LinearGradientBrush x:Key="Led7SegmentBackground" StartPoint="0,0" EndPoint="1,1" PresentationOptions:Freeze="True">
-			<GradientStop Color="{x:Static SystemColors.ControlDarkColor}" Offset="0"/>
-			<GradientStop Color="{x:Static SystemColors.ControlDarkDarkColor}" Offset="1"/>
-		</LinearGradientBrush>
+			<RadialGradientBrush x:Key="LedOn1" PresentationOptions:Freeze="True">
+				<GradientStop Color="#FFFF7000" Offset="0"/>
+				<GradientStop Color="#FFFB0303" Offset="0.2"/>
+				<GradientStop Color="#FF985A5A" Offset="0.9"/>
+				<GradientStop Color="#FF787878" Offset="1"/>
+			</RadialGradientBrush>
 
-		<SolidColorBrush x:Key="Led7SegmentOff" Color="#FF445644" PresentationOptions:Freeze="True"/>
-		<SolidColorBrush x:Key="Led7SegmentOn0" Color="#FF7F7F7F" PresentationOptions:Freeze="True"/>
-		<SolidColorBrush x:Key="Led7SegmentOn1" Color="#FF02FD02" PresentationOptions:Freeze="True"/>
+			<LinearGradientBrush x:Key="Led7SegmentBackground" StartPoint="0,0" EndPoint="1,1" PresentationOptions:Freeze="True">
+				<GradientStop Color="{x:Static SystemColors.ControlDarkColor}" Offset="0"/>
+				<GradientStop Color="{x:Static SystemColors.ControlDarkDarkColor}" Offset="1"/>
+			</LinearGradientBrush>
 
-		<LinearGradientBrush x:Key="LedMatrixBackground" StartPoint="0.5,0" EndPoint="0.5,1" PresentationOptions:Freeze="True">
-			<GradientStop Color="{x:Static SystemColors.ControlDarkColor}" Offset="0"/>
-			<GradientStop Color="{x:Static SystemColors.ControlDarkDarkColor}" Offset="1"/>
-		</LinearGradientBrush>
+			<SolidColorBrush x:Key="Led7SegmentOff" Color="#FF445644" PresentationOptions:Freeze="True"/>
+			<SolidColorBrush x:Key="Led7SegmentOn0" Color="#FF7F7F7F" PresentationOptions:Freeze="True"/>
+			<SolidColorBrush x:Key="Led7SegmentOn1" Color="#FF02FD02" PresentationOptions:Freeze="True"/>
 
-		<SolidColorBrush x:Key="LedMatrixOff" Color="#FF1F2B1F" PresentationOptions:Freeze="True"/>
+			<LinearGradientBrush x:Key="LedMatrixBackground" StartPoint="0.5,0" EndPoint="0.5,1" PresentationOptions:Freeze="True">
+				<GradientStop Color="{x:Static SystemColors.ControlDarkColor}" Offset="0"/>
+				<GradientStop Color="{x:Static SystemColors.ControlDarkDarkColor}" Offset="1"/>
+			</LinearGradientBrush>
 
-		<SolidColorBrush x:Key="OscilloscopeBackground" Color="Black" PresentationOptions:Freeze="True"/>
-		<SolidColorBrush x:Key="OscilloscopeText" Color="#FF7F7F7F" PresentationOptions:Freeze="True"/>
-		<SolidColorBrush x:Key="OscilloscopeLine" Color="#FF02FD02" PresentationOptions:Freeze="True"/>
+			<SolidColorBrush x:Key="LedMatrixOff" Color="#FF1F2B1F" PresentationOptions:Freeze="True"/>
 
-		<LinearGradientBrush x:Key="ConstantBackground" StartPoint="0,0" EndPoint="1,1" PresentationOptions:Freeze="True">
-			<GradientStop Color="#FFCFDCDC" Offset="0"/>
-			<GradientStop Color="#FF9BB7B7" Offset="1"/>
-		</LinearGradientBrush>
+			<SolidColorBrush x:Key="OscilloscopeBackground" Color="Black" PresentationOptions:Freeze="True"/>
+			<SolidColorBrush x:Key="OscilloscopeText" Color="#FF7F7F7F" PresentationOptions:Freeze="True"/>
+			<SolidColorBrush x:Key="OscilloscopeLine" Color="#FF02FD02" PresentationOptions:Freeze="True"/>
 
-		<LinearGradientBrush x:Key="ClockBackground" StartPoint="0,0" EndPoint="1,1" PresentationOptions:Freeze="True">
-			<!--<GradientStop Color="{x:Static SystemColors.ControlLightLightColor}" Offset="0"/>
-			<GradientStop Color="{x:Static SystemColors.ControlColor}" Offset="1"/>-->
-			<GradientStop Color="#FFDFEFEF" Offset="0"/>
-			<GradientStop Color="#FFAFCFCF" Offset="1"/>
-		</LinearGradientBrush>
+			<LinearGradientBrush x:Key="ConstantBackground" StartPoint="0,0" EndPoint="1,1" PresentationOptions:Freeze="True">
+				<GradientStop Color="#FFCFDCDC" Offset="0"/>
+				<GradientStop Color="#FF9BB7B7" Offset="1"/>
+			</LinearGradientBrush>
 
-		<LinearGradientBrush x:Key="PinBackground" StartPoint="0,0" EndPoint="1,1" PresentationOptions:Freeze="True">
-			<GradientStop Color="#FFCFDCDC" Offset="0"/>
-			<!--<GradientStop Color="Red" Offset="0.5"/>-->
-			<GradientStop Color="#FF9BB7B7" Offset="1"/>
-		</LinearGradientBrush>
+			<LinearGradientBrush x:Key="ClockBackground" StartPoint="0,0" EndPoint="1,1" PresentationOptions:Freeze="True">
+				<!--<GradientStop Color="{x:Static SystemColors.ControlLightLightColor}" Offset="0"/>
+				<GradientStop Color="{x:Static SystemColors.ControlColor}" Offset="1"/>-->
+				<GradientStop Color="#FFDFEFEF" Offset="0"/>
+				<GradientStop Color="#FFAFCFCF" Offset="1"/>
+			</LinearGradientBrush>
 
-		<LinearGradientBrush x:Key="ProbeBackground" StartPoint="0,0" EndPoint="1,1" PresentationOptions:Freeze="True">
-			<GradientStop Color="{x:Static SystemColors.ControlLightLightColor}" Offset="0"/>
-			<GradientStop Color="{x:Static SystemColors.ControlColor}" Offset="1"/>
-		</LinearGradientBrush>
+			<LinearGradientBrush x:Key="PinBackground" StartPoint="0,0" EndPoint="1,1" PresentationOptions:Freeze="True">
+				<GradientStop Color="#FFCFDCDC" Offset="0"/>
+				<!--<GradientStop Color="Red" Offset="0.5"/>-->
+				<GradientStop Color="#FF9BB7B7" Offset="1"/>
+			</LinearGradientBrush>
 
-		<Style x:Key="DialogFixedWindow" TargetType="{x:Type Window}">
-			<Setter Property="FlowDirection" Value="{Binding Source={x:Static lc:Resources.FlowDirection}, Mode=OneTime}"/>
-			<Setter Property="Background" Value="{StaticResource WindowBackground}"/>
-			<Setter Property="ResizeMode" Value="NoResize"/>
-			<Setter Property="WindowStyle" Value="SingleBorderWindow"/>
-			<Setter Property="ShowInTaskbar" Value="False"/>
-			<Setter Property="SizeToContent" Value="WidthAndHeight"/>
-		</Style>
+			<LinearGradientBrush x:Key="ProbeBackground" StartPoint="0,0" EndPoint="1,1" PresentationOptions:Freeze="True">
+				<GradientStop Color="{x:Static SystemColors.ControlLightLightColor}" Offset="0"/>
+				<GradientStop Color="{x:Static SystemColors.ControlColor}" Offset="1"/>
+			</LinearGradientBrush>
 
-		<Style x:Key="DialogWindow" TargetType="{x:Type Window}">
-			<Setter Property="FlowDirection" Value="{Binding Source={x:Static lc:Resources.FlowDirection}, Mode=OneTime}"/>
-			<Setter Property="Background" Value="{StaticResource WindowBackground}"/>
-			<Setter Property="ResizeMode" Value="CanResizeWithGrip"/>
-			<Setter Property="WindowStyle" Value="SingleBorderWindow"/>
-			<Setter Property="ShowInTaskbar" Value="False"/>
-			<Setter Property="SizeToContent" Value="Manual"/>
-			<Setter Property="MinWidth" Value="320"/>
-			<Setter Property="MinHeight" Value="240"/>
-			<Setter Property="Width" Value="{Binding Path=WindowLocation.Width, Mode=TwoWay}"/>
-			<Setter Property="Height" Value="{Binding Path=WindowLocation.Height, Mode=TwoWay}"/>
-			<Setter Property="WindowState" Value="{Binding Path=WindowLocation.WindowState, Mode=TwoWay}"/>
-		</Style>
+			<Style x:Key="DialogFixedWindow" TargetType="{x:Type Window}">
+				<Setter Property="FlowDirection" Value="{Binding Source={x:Static lc:Resources.FlowDirection}, Mode=OneTime}"/>
+				<Setter Property="Background" Value="{StaticResource WindowBackground}"/>
+				<Setter Property="ResizeMode" Value="NoResize"/>
+				<Setter Property="WindowStyle" Value="SingleBorderWindow"/>
+				<Setter Property="ShowInTaskbar" Value="False"/>
+				<Setter Property="SizeToContent" Value="WidthAndHeight"/>
+			</Style>
 
-		<Style TargetType="{x:Type Button}">
-			<Setter Property="Width" Value="Auto"/>
-			<Setter Property="MinWidth" Value="76"/>
-			<Setter Property="Margin" Value="8"/>
-			<Setter Property="Padding" Value="8,0,8,0"/>
-		</Style>
+			<Style x:Key="DialogWindow" TargetType="{x:Type Window}">
+				<Setter Property="FlowDirection" Value="{Binding Source={x:Static lc:Resources.FlowDirection}, Mode=OneTime}"/>
+				<Setter Property="Background" Value="{StaticResource WindowBackground}"/>
+				<Setter Property="ResizeMode" Value="CanResizeWithGrip"/>
+				<Setter Property="WindowStyle" Value="SingleBorderWindow"/>
+				<Setter Property="ShowInTaskbar" Value="False"/>
+				<Setter Property="SizeToContent" Value="Manual"/>
+				<Setter Property="MinWidth" Value="320"/>
+				<Setter Property="MinHeight" Value="240"/>
+				<Setter Property="Width" Value="{Binding Path=WindowLocation.Width, Mode=TwoWay}"/>
+				<Setter Property="Height" Value="{Binding Path=WindowLocation.Height, Mode=TwoWay}"/>
+				<Setter Property="WindowState" Value="{Binding Path=WindowLocation.WindowState, Mode=TwoWay}"/>
+			</Style>
 
-		<Style TargetType="{x:Type ToggleButton}">
-			<Setter Property="Width" Value="Auto"/>
-			<Setter Property="MinWidth" Value="76"/>
-			<Setter Property="Margin" Value="8"/>
-			<Setter Property="Padding" Value="8,0,8,0"/>
-		</Style>
+			<Style TargetType="{x:Type Button}">
+				<Setter Property="Width" Value="Auto"/>
+				<Setter Property="MinWidth" Value="76"/>
+				<Setter Property="Margin" Value="8"/>
+				<Setter Property="Padding" Value="8,0,8,0"/>
+			</Style>
 
-		<Style TargetType="{x:Type CheckBox}">
-			<Setter Property="Margin" Value="8,8,8,8"/>
-			<Setter Property="Padding" Value="3,0,3,0"/>
-		</Style>
+			<Style TargetType="{x:Type ToggleButton}">
+				<Setter Property="Width" Value="Auto"/>
+				<Setter Property="MinWidth" Value="76"/>
+				<Setter Property="Margin" Value="8"/>
+				<Setter Property="Padding" Value="8,0,8,0"/>
+			</Style>
 
-		<Style TargetType="{x:Type TextBox}">
-			<Setter Property="Margin" Value="3"/>
-		</Style>
+			<Style TargetType="{x:Type CheckBox}">
+				<Setter Property="Margin" Value="8,8,8,8"/>
+				<Setter Property="Padding" Value="3,0,3,0"/>
+			</Style>
 
-		<Style TargetType="{x:Type FlowDocument}">
-			<Setter Property="FontFamily" Value="{x:Static SystemFonts.MessageFontFamily}"/>
-		</Style>
+			<Style TargetType="{x:Type TextBox}">
+				<Setter Property="Margin" Value="3"/>
+			</Style>
 
-		<Style x:Key="LogicCircuitBackground" TargetType="{x:Type Canvas}">
-			<Setter Property="Background" Value="White"/>
-			<Style.Triggers>
-				<DataTrigger Binding="{Binding Path=ShowGrid}" Value="True">
-					<Setter Property="Background">
-						<Setter.Value>
-							<DrawingBrush Viewport="{Binding Source={x:Static lc:Symbol.LogicalCircuitBackgroundTile}}" ViewportUnits="Absolute" TileMode="Tile">
-								<DrawingBrush.Drawing>
-									<DrawingGroup>
-										<GeometryDrawing Brush="White">
-											<GeometryDrawing.Geometry>
-												<RectangleGeometry Rect="0,0,102,102"/>
-											</GeometryDrawing.Geometry>
-										</GeometryDrawing>
-										<GeometryDrawing Brush="#D0000000">
-											<GeometryDrawing.Geometry>
-												<GeometryGroup>
-													<RectangleGeometry Rect="98,98,4,4"/>
-												</GeometryGroup>
-											</GeometryDrawing.Geometry>
-										</GeometryDrawing>
-									</DrawingGroup>
-								</DrawingBrush.Drawing>
-							</DrawingBrush>
-						</Setter.Value>
-					</Setter>
-				</DataTrigger>
-			</Style.Triggers>
-		</Style>
+			<Style TargetType="{x:Type FlowDocument}">
+				<Setter Property="FontFamily" Value="{x:Static SystemFonts.MessageFontFamily}"/>
+			</Style>
 
-		<DrawingBrush x:Key="SliderBackground" PresentationOptions:Freeze="True">
-			<DrawingBrush.Drawing>
-				<GeometryDrawing>
-					<GeometryDrawing.Brush>
-						<LinearGradientBrush StartPoint="0,1" EndPoint="1,1">
-							<GradientStop Color="{x:Static SystemColors.ControlColor}" Offset="1"/>
-							<GradientStop Color="{x:Static SystemColors.ControlLightLightColor}" Offset="0"/>
-						</LinearGradientBrush>
-					</GeometryDrawing.Brush>
-					<GeometryDrawing.Geometry>
-						<PathGeometry>
-							<PathFigure IsClosed="True">
-								<PolyLineSegment Points="100,0 100,-50"/>
-							</PathFigure>
-						</PathGeometry>
-					</GeometryDrawing.Geometry>
-				</GeometryDrawing>
-			</DrawingBrush.Drawing>
-		</DrawingBrush>
+			<Style x:Key="LogicCircuitBackground" TargetType="{x:Type Canvas}">
+				<Setter Property="Background" Value="White"/>
+				<Style.Triggers>
+					<DataTrigger Binding="{Binding Path=ShowGrid}" Value="True">
+						<Setter Property="Background">
+							<Setter.Value>
+								<DrawingBrush Viewport="{Binding Source={x:Static lc:Symbol.LogicalCircuitBackgroundTile}}" ViewportUnits="Absolute" TileMode="Tile">
+									<DrawingBrush.Drawing>
+										<DrawingGroup>
+											<GeometryDrawing Brush="White">
+												<GeometryDrawing.Geometry>
+													<RectangleGeometry Rect="0,0,102,102"/>
+												</GeometryDrawing.Geometry>
+											</GeometryDrawing>
+											<GeometryDrawing Brush="#D0000000">
+												<GeometryDrawing.Geometry>
+													<GeometryGroup>
+														<RectangleGeometry Rect="98,98,4,4"/>
+													</GeometryGroup>
+												</GeometryDrawing.Geometry>
+											</GeometryDrawing>
+										</DrawingGroup>
+									</DrawingBrush.Drawing>
+								</DrawingBrush>
+							</Setter.Value>
+						</Setter>
+					</DataTrigger>
+				</Style.Triggers>
+			</Style>
 
-		<Style x:Key="CircuitDescriptorGroup" TargetType="GroupItem">
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="GroupItem">
-						<Expander IsExpanded="{Binding Path=Items[0].CategoryExpanded}">
-							<Expander.Header>
-								<TextBlock FontWeight="Bold" Foreground="{x:Static SystemColors.AppWorkspaceBrush}">
-									<TextBlock.Style>
-										<Style TargetType="TextBlock">
-											<Setter Property="Text" Value="{Binding Path=Name}"/>
-											<Style.Triggers>
-												<DataTrigger Binding="{Binding Path=Name}" Value="">
-													<Setter Property="Text" Value="{Binding Path=Items[0].Circuit.CircuitProject.ProjectSet.Project.Name}"/>
-												</DataTrigger>
-											</Style.Triggers>
-										</Style>
-									</TextBlock.Style>
-								</TextBlock>
-							</Expander.Header>
-							<Expander.Content>
-								<ItemsPresenter/>
-							</Expander.Content>
-						</Expander>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
+			<DrawingBrush x:Key="SliderBackground" PresentationOptions:Freeze="True">
+				<DrawingBrush.Drawing>
+					<GeometryDrawing>
+						<GeometryDrawing.Brush>
+							<LinearGradientBrush StartPoint="0,1" EndPoint="1,1">
+								<GradientStop Color="{x:Static SystemColors.ControlColor}" Offset="1"/>
+								<GradientStop Color="{x:Static SystemColors.ControlLightLightColor}" Offset="0"/>
+							</LinearGradientBrush>
+						</GeometryDrawing.Brush>
+						<GeometryDrawing.Geometry>
+							<PathGeometry>
+								<PathFigure IsClosed="True">
+									<PolyLineSegment Points="100,0 100,-50"/>
+								</PathFigure>
+							</PathGeometry>
+						</GeometryDrawing.Geometry>
+					</GeometryDrawing>
+				</DrawingBrush.Drawing>
+			</DrawingBrush>
+
+			<Style x:Key="CircuitDescriptorGroup" TargetType="GroupItem">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="GroupItem">
+							<Expander IsExpanded="{Binding Path=Items[0].CategoryExpanded}">
+								<Expander.Header>
+									<TextBlock FontWeight="Bold" Foreground="{x:Static SystemColors.AppWorkspaceBrush}">
+										<TextBlock.Style>
+											<Style TargetType="TextBlock">
+												<Setter Property="Text" Value="{Binding Path=Name}"/>
+												<Style.Triggers>
+													<DataTrigger Binding="{Binding Path=Name}" Value="">
+														<Setter Property="Text" Value="{Binding Path=Items[0].Circuit.CircuitProject.ProjectSet.Project.Name}"/>
+													</DataTrigger>
+												</Style.Triggers>
+											</Style>
+										</TextBlock.Style>
+									</TextBlock>
+								</Expander.Header>
+								<Expander.Content>
+									<ItemsPresenter/>
+								</Expander.Content>
+							</Expander>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Style>
+		</ResourceDictionary>
 	</Application.Resources>
 </Application>

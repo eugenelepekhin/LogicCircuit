@@ -80,11 +80,11 @@
 
 					<Grid>
 						<!-- Main button of the picker -->
-						<ToggleButton x:Name="ColorPickerOpenButton"
+						<ToggleButton x:Name="ColorPickerOpenButton" MinWidth="24" Margin="0" Padding="0"
 							IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsOpen, Mode=TwoWay}"
 						>
 							<ToggleButton.Content>
-								<Grid Height="24" Margin="3">
+								<Grid>
 									<Grid.ColumnDefinitions>
 										<ColumnDefinition Width="Auto"/>
 										<ColumnDefinition Width="Auto"/>
@@ -94,7 +94,7 @@
 										<RowDefinition Height="*"/>
 									</Grid.RowDefinitions>
 
-									<Image Grid.Column="0" Grid.Row="0">
+									<Image Grid.Column="0" Grid.Row="0" VerticalAlignment="Center">
 										<Image.Style>
 											<Style TargetType="Image">
 												<Style.Triggers>
@@ -111,7 +111,7 @@
 											</Style>
 										</Image.Style>
 									</Image>
-									<Rectangle Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Stretch">
+									<Rectangle Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Height="5" Margin="3,0">
 										<Rectangle.Fill>
 											<SolidColorBrush Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectedColor}"/>
 										</Rectangle.Fill>
@@ -390,19 +390,20 @@
 
 										<Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Stretch">
 											<Grid.ColumnDefinitions>
-												<ColumnDefinition Width="90"/>
+												<ColumnDefinition Width="Auto"/>
 												<ColumnDefinition Width="*"/>
 												<ColumnDefinition Width="Auto"/>
 											</Grid.ColumnDefinitions>
 											
-											<TextBlock Grid.Column="0" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=CustomColor}" Margin="3" VerticalAlignment="Center"/>
-											<Rectangle Grid.Column="1" Margin="5" Fill="{StaticResource TransparentBrush}"/>
-											<Rectangle Grid.Column="1" Margin="5">
+											<TextBlock Grid.Column="0" Text="#DDDDDDDD" Margin="3,3,1,3" VerticalAlignment="Center" Visibility="Hidden"/> <!-- Widest string will determine width of the column -->
+											<TextBlock Grid.Column="0" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=CustomColor}" Margin="3,3,1,3" VerticalAlignment="Center"/>
+											<Rectangle Grid.Column="1" Margin="1,5,4,5" Fill="{StaticResource TransparentBrush}"/>
+											<Rectangle Grid.Column="1" Margin="1,5,3,5">
 												<Rectangle.Fill>
 													<SolidColorBrush Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=CustomColor}"/>
 												</Rectangle.Fill>
 											</Rectangle>
-											<Button Grid.Column="2" HorizontalAlignment="Right" Margin="3"
+											<Button Grid.Column="2" HorizontalAlignment="Right" Margin="3" MinWidth="24" Padding="3,0"
 												Content="{x:Static local:Resources.ColorPickerCaptionSelectCustom}"
 												Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectColorCommand, Mode=OneTime}"
 											/>
@@ -413,11 +414,11 @@
 						</Popup>
 					</Grid>
 
-					<ControlTemplate.Triggers>
+					<!--<ControlTemplate.Triggers>
 						<Trigger Property="IsKeyboardFocusWithin" Value="False">
 							<Setter TargetName="ColorPickerOpenButton" Property="IsChecked" Value="False"/>
 						</Trigger>
-					</ControlTemplate.Triggers>
+					</ControlTemplate.Triggers>-->
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>

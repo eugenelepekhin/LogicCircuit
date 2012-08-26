@@ -97,7 +97,37 @@ namespace LogicCircuit {
 				}
 			}
 		}
-		
+
+		private Color highlightColor = Colors.Yellow;
+		public Color HighlightColor {
+			get { return highlightColor; }
+			set {
+				try {
+					if(this.editor != null && this.editor.Selection != null) {
+						this.editor.Selection.ApplyPropertyValue(TextElement.BackgroundProperty, new SolidColorBrush(value));
+						this.highlightColor = value;
+					}
+				} catch(Exception exception) {
+					Tracer.Report("DialogText.set_HighlightColor", exception);
+				}
+			}
+		}
+
+		private Color foregroundColor = SystemColors.WindowTextColor;
+		public Color ForegroundColor {
+			get { return foregroundColor; }
+			set {
+				try {
+					if(this.editor != null && this.editor.Selection != null) {
+						this.editor.Selection.ApplyPropertyValue(TextElement.ForegroundProperty, new SolidColorBrush(value));
+						this.foregroundColor = value;
+					}
+				} catch(Exception exception) {
+					Tracer.Report("DialogText.set_ForegroundColor", exception);
+				}
+			}
+		}
+
 		public bool IsBoldFont { get { return this.IsSelected(FontWeights.Bold, TextElement.FontWeightProperty); } }
 		public bool IsItalicFont { get { return this.IsSelected(FontStyles.Italic, TextElement.FontStyleProperty); } }
 		public bool IsUnderlineFont { get { return this.IsSelected(TextDecorations.Underline, Inline.TextDecorationsProperty); } }
