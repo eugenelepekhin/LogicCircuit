@@ -1117,4 +1117,10 @@ Do you want to remove the reference to it from the Recent Files list?</value>
   <data name="ColorPickerTabStandard" xml:space="preserve">
     <value>Standard</value>
   </data>
+  <data name="ToolTipBackgroundColor" xml:space="preserve">
+    <value>Highlight color</value>
+  </data>
+  <data name="ToolTipFontColor" xml:space="preserve">
+    <value>Text color</value>
+  </data>
 </root>

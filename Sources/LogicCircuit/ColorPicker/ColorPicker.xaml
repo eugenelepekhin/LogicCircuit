@@ -83,8 +83,32 @@
 						<ToggleButton x:Name="ColorPickerOpenButton" MinWidth="24" Margin="0" Padding="0"
 							IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsOpen, Mode=TwoWay}"
 						>
+							<ToggleButton.Template>
+								<ControlTemplate TargetType="ToggleButton">
+									<Grid Background="Transparent">
+										<ContentPresenter/>
+
+										<Border BorderThickness="1" BorderBrush="{x:Static SystemColors.HighlightBrush}">
+											<Border.Style>
+												<Style TargetType="Border">
+													<Setter Property="Visibility" Value="Hidden"/>
+													<Style.Triggers>
+														<DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsMouseOver}" Value="True">
+															<Setter Property="Visibility" Value="Visible"/>
+														</DataTrigger>
+														<DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsChecked}" Value="True">
+															<Setter Property="Visibility" Value="Visible"/>
+														</DataTrigger>
+													</Style.Triggers>
+												</Style>
+											</Border.Style>
+											<Rectangle Opacity="0.3" Fill="{x:Static SystemColors.HighlightBrush}"/>
+										</Border>
+									</Grid>
+								</ControlTemplate>
+							</ToggleButton.Template>
 							<ToggleButton.Content>
-								<Grid>
+								<Grid Margin="2">
 									<Grid.ColumnDefinitions>
 										<ColumnDefinition Width="Auto"/>
 										<ColumnDefinition Width="Auto"/>

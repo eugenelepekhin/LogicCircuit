@@ -2238,5 +2238,19 @@ namespace LogicCircuit {
  		public static string ColorPickerTabStandard {
 			get { return ResourceManager.GetString("ColorPickerTabStandard", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Highlight color.
+		/// </summary>
+ 		public static string ToolTipBackgroundColor {
+			get { return ResourceManager.GetString("ToolTipBackgroundColor", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Text color.
+		/// </summary>
+ 		public static string ToolTipFontColor {
+			get { return ResourceManager.GetString("ToolTipFontColor", Culture); }
+		}
 	}
 }

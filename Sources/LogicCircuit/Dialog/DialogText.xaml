@@ -78,8 +78,12 @@
 					<Image Source="..\Properties\CharacterShrinkFont.png"></Image>
 				</ToggleButton>
 
-				<lc:ColorPicker ColorPickerMode="Background" SelectedColor="{Binding Path=HighlightColor, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True}"/>
-				<lc:ColorPicker ColorPickerMode="Foreground" SelectedColor="{Binding Path=ForegroundColor, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True}"/>
+				<lc:ColorPicker ColorPickerMode="Background" ToolTip="{x:Static lc:Resources.ToolTipBackgroundColor}"
+					SelectedColor="{Binding Path=HighlightColor, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True}"
+				/>
+				<lc:ColorPicker ColorPickerMode="Foreground" ToolTip="{x:Static lc:Resources.ToolTipFontColor}"
+					SelectedColor="{Binding Path=ForegroundColor, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True}"
+				/>
 			</ToolBar>
 			<!-- Paragraph Toolbar -->
 			<ToolBar Band="{Binding Path=ParaToolBarBand.Value, Mode=TwoWay}" BandIndex="{Binding Path=ParaToolBarBandIndex.Value, Mode=TwoWay}">
