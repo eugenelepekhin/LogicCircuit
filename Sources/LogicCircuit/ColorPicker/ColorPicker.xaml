@@ -428,7 +428,7 @@
 													<SolidColorBrush Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=CustomColor}"/>
 												</Rectangle.Fill>
 											</Rectangle>
-											<Button Grid.Column="2" HorizontalAlignment="Right" Margin="3" MinWidth="24" Padding="3,0"
+											<Button Grid.Column="2" HorizontalAlignment="Right" Margin="3" MinWidth="24"
 												Content="{x:Static local:Resources.ColorPickerCaptionSelectCustom}"
 												Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectColorCommand, Mode=OneTime}"
 											/>
