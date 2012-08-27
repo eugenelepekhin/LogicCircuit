@@ -4,7 +4,7 @@
 	xmlns:lc="clr-namespace:LogicCircuit"
 	WindowStartupLocation="CenterOwner"
 	Title="{Binding Source={x:Static lc:Resources.TextNotation}, Mode=OneTime}"
-	MinWidth="480" MinHeight="240"
+	MinWidth="580" MinHeight="300"
 	Style="{DynamicResource DialogWindow}"
 	FocusManager.FocusedElement="{Binding ElementName=editor}"
 >
