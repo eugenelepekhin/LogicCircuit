@@ -58,7 +58,7 @@ namespace LogicCircuit {
 
 		/// <summary>
 		/// Looks up a localized string similar to Attempt to load an unknown version of Circuit Project.
-		/// The file you are trying to open either corrupted or it was created by newer version of Logic Circuit software. Please check http://www.logiccircuit.org/ for newer versions..
+		/// The file you are trying to open either corrupted or it was created by newer version of Logic Circuit software. Please check <Hyperlink NavigateUri="http://www.logiccircuit.org/">http://www.logiccircuit.org/</Hyperlink> for newer versions..
 		/// </summary>
  		public static string ErrorUnknownVersion {
 			get { return ResourceManager.GetString("ErrorUnknownVersion", Culture); }

@@ -122,7 +122,7 @@
   </data>
   <data name="ErrorUnknownVersion" xml:space="preserve">
     <value>Attempt to load an unknown version of Circuit Project.
-The file you are trying to open either corrupted or it was created by newer version of Logic Circuit software. Please check http://www.logiccircuit.org/ for newer versions.</value>
+The file you are trying to open either corrupted or it was created by newer version of Logic Circuit software. Please check &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt; for newer versions.</value>
   </data>
   <data name="FileFilter" xml:space="preserve">
     <value>Circuit Project (*{0})|*{0}|All files (*.*)|*.*</value>

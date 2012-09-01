@@ -30,9 +30,7 @@
 				Margin="8" VerticalAlignment="Center" HorizontalAlignment="Stretch" MaxHeight="240"
 				HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
 			>
-				<TextBlock Text="{Binding Path=Message, Mode=OneTime}" VerticalAlignment="Center" TextWrapping="Wrap" TextTrimming="None"
-					MaxWidth="620" Margin="3" Padding="0"
-				/>
+				<TextBlock Name="message" VerticalAlignment="Center" TextWrapping="Wrap" TextTrimming="None" MaxWidth="620" Margin="3,3,20,3" Padding="0"/>
 			</ScrollViewer>
 
 			<TextBox Grid.Column="1" Grid.Row="1" IsReadOnly="True"

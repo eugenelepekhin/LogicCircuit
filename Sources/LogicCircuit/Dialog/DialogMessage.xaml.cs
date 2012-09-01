@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Media;
+using System.Text.RegularExpressions;
 
 namespace LogicCircuit {
 	/// <summary>
@@ -45,8 +46,48 @@ namespace LogicCircuit {
 			this.Loaded += new RoutedEventHandler(this.DialogMessageLoaded);
 		}
 
+		private void SetMessage(string text) {
+			try {
+				List<string> list = new List<string>();
+				int start = 0;
+				Regex hyperlink = new Regex("<Hyperlink.*</Hyperlink>", RegexOptions.Compiled | RegexOptions.Multiline);
+				foreach(Match m in hyperlink.Matches(text)) {
+					if(0 < m.Index - start) {
+						list.Add(text.Substring(start, m.Index - start));
+					}
+					list.Add(text.Substring(m.Index, m.Length));
+					start = m.Index + m.Length;
+				}
+				if(start < text.Length) {
+					list.Add(text.Substring(start));
+				}
+
+				List<Inline> inlines = new List<Inline>();
+				Regex parts = new Regex("NavigateUri=\"(?<uri>.*)\">(?<text>.*)</Hyperlink>", RegexOptions.Compiled | RegexOptions.Multiline);
+				foreach(string s in list) {
+					if(hyperlink.IsMatch(s)) {
+						Match m = parts.Match(s);
+						string uri = m.Groups["uri"].Value;
+						string txt = m.Groups["text"].Value;
+						Hyperlink link = new Hyperlink(new Run(txt));
+						link.NavigateUri = new Uri(uri);
+						this.message.Inlines.Add(link);
+					} else {
+						this.message.Inlines.Add(new Run(s));
+					}
+				}
+				this.message.Inlines.AddRange(inlines);
+				return;
+			} catch(Exception exception) {
+				Tracer.Report("DialogMessage.SetMessage", exception);
+			}
+			this.message.Inlines.Clear();
+			this.message.Text = text;
+		}
+
 		private void DialogMessageLoaded(object sender, RoutedEventArgs e) {
 			try {
+				this.SetMessage(this.Message);
 				SystemSound sound;
 				switch(this.image) {
 				case MessageBoxImage.Information:
