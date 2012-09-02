@@ -2252,5 +2252,26 @@ namespace LogicCircuit {
  		public static string ToolTipFontColor {
 			get { return ResourceManager.GetString("ToolTipFontColor", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Save As....
+		/// </summary>
+ 		public static string TitleSaveAs {
+			get { return ResourceManager.GetString("TitleSaveAs", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Load data from file.
+		/// </summary>
+ 		public static string ToolTipLoadData {
+			get { return ResourceManager.GetString("ToolTipLoadData", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Save data to file.
+		/// </summary>
+ 		public static string ToolTipSaveData {
+			get { return ResourceManager.GetString("ToolTipSaveData", Culture); }
+		}
 	}
 }

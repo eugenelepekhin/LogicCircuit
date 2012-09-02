@@ -192,7 +192,8 @@
 		</GroupBox>
 
 		<StackPanel Grid.Row="5" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Bottom">
-			<Button Content="{Binding Source={x:Static lc:Resources.TitleLoad}, Mode=OneTime}" Click="ButtonLoadClick"/>
+			<Button Content="{x:Static lc:Resources.TitleLoad}" Click="ButtonLoadClick" ToolTip="{x:Static lc:Resources.ToolTipLoadData}"/>
+			<Button Content="{x:Static lc:Resources.TitleSaveAs}" Click="ButtonSaveClick" ToolTip="{x:Static lc:Resources.ToolTipSaveData}"/>
 		</StackPanel>
 
 		<StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">

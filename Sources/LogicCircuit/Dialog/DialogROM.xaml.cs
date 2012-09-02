@@ -146,6 +146,25 @@ namespace LogicCircuit {
 			}
 		}
 
+		private void ButtonSaveClick(object sender, RoutedEventArgs e) {
+			try {
+				SaveFileDialog dialog = new SaveFileDialog();
+				dialog.InitialDirectory = Mainframe.IsDirectoryPathValid(this.openFileFolder.Value) ? this.openFileFolder.Value : Mainframe.DefaultProjectFolder();
+				bool? result = dialog.ShowDialog(this);
+				if(result.HasValue && result.Value) {
+					this.ApplyChanges();
+					string file = dialog.FileName;
+					this.openFileFolder.Value = Path.GetDirectoryName(file);
+					using(FileStream stream = File.Open(file, FileMode.Create, FileAccess.Write, FileShare.Write)) {
+						stream.Write(this.data, 0, this.data.Length);
+						stream.Flush();
+					}
+				}
+			} catch(Exception exception) {
+				App.Mainframe.ReportException(exception);
+			}
+		}
+
 		private void MemorySizeChanged(object sender, SelectionChangedEventArgs e) {
 			try {
 				if(this.initialized) {
