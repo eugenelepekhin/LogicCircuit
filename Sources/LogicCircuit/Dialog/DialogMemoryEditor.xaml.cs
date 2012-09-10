@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
@@ -14,41 +13,59 @@ using Microsoft.Win32;
 
 namespace LogicCircuit {
 	/// <summary>
-	/// Interaction logic for DialogROM.xaml
+	/// Interaction logic for DialogMemoryEditor.xaml
 	/// </summary>
-	public partial class DialogROM : Window, INotifyPropertyChanged {
-
-		public event PropertyChangedEventHandler PropertyChanged;
+	public partial class DialogMemoryEditor : Window {
 
 		private SettingsWindowLocationCache windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
-		private SettingsStringCache openFileFolder = new SettingsStringCache(Settings.User, "DialogROM.OpenFile.Folder", Mainframe.DefaultProjectFolder());
+		private SettingsStringCache openFileFolder;
+		public SettingsGridLengthCache DataHeight { get; private set; }
+		public SettingsGridLengthCache NoteHeight { get; private set; }
+		
+		public Memory Memory { get; private set; }
 
-		private Memory memory;
+		public static DependencyProperty RowListProperty = DependencyProperty.Register("RowList", typeof(RowList), typeof(DialogMemoryEditor));
+		public RowList Rows {
+			get { return (RowList)this.GetValue(DialogMemoryEditor.RowListProperty); }
+			private set { this.SetValue(DialogMemoryEditor.RowListProperty, value); }
+		}
+
 		private byte[] data;
-		public RowList Rows { get; private set; }
 		private int currentRow = 0;
 		private int currentCol = 0;
 		private bool initialized = false;
 
-		public DialogROM(Memory memory) {
-			Tracer.Assert(!memory.Writable);
-			this.memory = memory;
+		private int AddressBitWidth { get { return (int)this.addressBitWidth.SelectedItem; } }
+		private int DataBitWidth { get { return (int)this.dataBitWidth.SelectedItem; } }
+
+		public DialogMemoryEditor(Memory memory) {
+			string typeName = this.GetType().Name;
+			this.openFileFolder = new SettingsStringCache(Settings.User, typeName + ".OpenFile.Folder", Mainframe.DefaultProjectFolder());
+			this.DataHeight = new SettingsGridLengthCache(Settings.User, typeName + ".Data.Height", memory.Writable ? "0.25*" : "0.75*");
+			this.NoteHeight = new SettingsGridLengthCache(Settings.User, typeName + ".Note.Height", memory.Writable ? "0.75*" : "0.25*");
+
+			this.Memory = memory;
 			this.data = memory.MemoryValue();
-			this.Rows = new RowList(this.data, this.memory.AddressBitWidth, this.memory.DataBitWidth);
+			this.Rows = new RowList(this.data, this.Memory.AddressBitWidth, this.Memory.DataBitWidth);
+
 			this.DataContext = this;
 			this.InitializeComponent();
 
 			this.addressBitWidth.ItemsSource = MemoryDescriptor.AddressBitWidthRange;
 			this.dataBitWidth.ItemsSource = PinDescriptor.BitWidthRange;
-			this.addressBitWidth.SelectedItem = this.memory.AddressBitWidth;
-			this.dataBitWidth.SelectedItem = this.memory.DataBitWidth;
-			this.note.Text = this.memory.Note;
+			this.writeOn.ItemsSource = new string[] { LogicCircuit.Resources.WriteOn0, LogicCircuit.Resources.WriteOn1 };
+			this.onStart.ItemsSource = new string[] {
+				LogicCircuit.Resources.MemoryOnStartRandom, LogicCircuit.Resources.MemoryOnStartZeros, LogicCircuit.Resources.MemoryOnStartOnes, LogicCircuit.Resources.MemoryOnStartData
+			};
+
+			this.addressBitWidth.SelectedItem = this.Memory.AddressBitWidth;
+			this.dataBitWidth.SelectedItem = this.Memory.DataBitWidth;
+			this.writeOn.SelectedIndex = this.Memory.WriteOn1 ? 1 : 0;
+			this.onStart.SelectedIndex = (int)this.Memory.OnStart;
+			this.note.Text = this.Memory.Note;
 			this.Loaded += new RoutedEventHandler(this.DialogLoaded);
 		}
-
-		private int AddressBitWidth { get { return (int)this.addressBitWidth.SelectedItem; } }
-		private int DataBitWidth { get { return (int)this.dataBitWidth.SelectedItem; } }
 
 		private void DialogLoaded(object sender, RoutedEventArgs e) {
 			try {
@@ -81,7 +98,7 @@ namespace LogicCircuit {
 				this.ApplyChanges();
 				int addressBitWidth = this.AddressBitWidth;
 				int dataBitWidth = this.DataBitWidth;
-				byte[] originalData = this.memory.MemoryValue();
+				byte[] originalData = this.Memory.MemoryValue();
 				string text = this.note.Text.Trim();
 				Func<byte[], byte[], bool> equal = (a, b) => {
 					if(a.Length == b.Length) {
@@ -95,12 +112,12 @@ namespace LogicCircuit {
 					return false;
 				};
 
-				if(this.memory.AddressBitWidth != addressBitWidth || this.memory.DataBitWidth != dataBitWidth || this.memory.Note != text || !equal(originalData, this.data)) {
-					this.memory.CircuitProject.InTransaction(() => {
-						this.memory.AddressBitWidth = addressBitWidth;
-						this.memory.DataBitWidth = dataBitWidth;
-						this.memory.SetMemoryValue(this.data);
-						this.memory.Note = text;
+				if(this.Memory.AddressBitWidth != addressBitWidth || this.Memory.DataBitWidth != dataBitWidth || this.Memory.Note != text || !equal(originalData, this.data)) {
+					this.Memory.CircuitProject.InTransaction(() => {
+						this.Memory.AddressBitWidth = addressBitWidth;
+						this.Memory.DataBitWidth = dataBitWidth;
+						this.Memory.SetMemoryValue(this.data);
+						this.Memory.Note = text;
 					});
 				}
 				this.Close();
@@ -132,13 +149,9 @@ namespace LogicCircuit {
 							Memory.SetCellValue(this.data, dataBitWidth, i, value);
 						}
 					}
-					this.Rows = new RowList(this.data, addressBitWidth, dataBitWidth);
 					this.currentRow = 0;
 					this.currentCol = 0;
-					PropertyChangedEventHandler handler = this.PropertyChanged;
-					if(handler != null) {
-						handler(this, new PropertyChangedEventArgs("Rows"));
-					}
+					this.Rows = new RowList(this.data, addressBitWidth, dataBitWidth);
 					this.Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new Action(this.UpdateListView));
 				}
 			} catch(Exception exception) {
@@ -173,13 +186,9 @@ namespace LogicCircuit {
 					if(this.Rows.AddressBitWidth != addressBitWidth || this.Rows.DataBitWidth != dataBitWidth) {
 						this.ApplyChanges();
 						this.data = Memory.Reallocate(this.data, this.Rows.AddressBitWidth, this.Rows.DataBitWidth, addressBitWidth, dataBitWidth);
-						this.Rows = new RowList(this.data, addressBitWidth, dataBitWidth);
 						this.currentRow = 0;
 						this.currentCol = 0;
-						PropertyChangedEventHandler handler = this.PropertyChanged;
-						if(handler != null) {
-							handler(this, new PropertyChangedEventArgs("Rows"));
-						}
+						this.Rows = new RowList(this.data, addressBitWidth, dataBitWidth);
 						this.Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new Action(this.UpdateListView));
 					}
 				}

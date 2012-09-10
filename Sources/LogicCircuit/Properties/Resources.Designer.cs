@@ -2254,7 +2254,7 @@ namespace LogicCircuit {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Save As....
+		/// Looks up a localized string similar to Sa_ve As....
 		/// </summary>
  		public static string TitleSaveAs {
 			get { return ResourceManager.GetString("TitleSaveAs", Culture); }
@@ -2272,6 +2272,48 @@ namespace LogicCircuit {
 		/// </summary>
  		public static string ToolTipSaveData {
 			get { return ResourceManager.GetString("ToolTipSaveData", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Persist memory between runs.
+		/// </summary>
+ 		public static string MemoryOnStartData {
+			get { return ResourceManager.GetString("MemoryOnStartData", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Set all bits to 1.
+		/// </summary>
+ 		public static string MemoryOnStartOnes {
+			get { return ResourceManager.GetString("MemoryOnStartOnes", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Randomly.
+		/// </summary>
+ 		public static string MemoryOnStartRandom {
+			get { return ResourceManager.GetString("MemoryOnStartRandom", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Set all bits to 0.
+		/// </summary>
+ 		public static string MemoryOnStartZeros {
+			get { return ResourceManager.GetString("MemoryOnStartZeros", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to On _start fill:.
+		/// </summary>
+ 		public static string TitleMemoryOnStart {
+			get { return ResourceManager.GetString("TitleMemoryOnStart", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Choose how RAM will be initialized on power on.
+		/// </summary>
+ 		public static string ToolTipMemoryOnStart {
+			get { return ResourceManager.GetString("ToolTipMemoryOnStart", Culture); }
 		}
 	}
 }

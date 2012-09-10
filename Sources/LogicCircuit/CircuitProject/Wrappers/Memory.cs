@@ -15,6 +15,7 @@ namespace LogicCircuit {
 		public Guid MemoryId;
 		public bool Writable;
 		public bool WriteOn1;
+		public MemoryOnStart OnStart;
 		private int fieldAddressBitWidth;
 		public int AddressBitWidth {
 			get { return this.fieldAddressBitWidth; }
@@ -131,6 +132,41 @@ namespace LogicCircuit {
 			}
 			void IFieldSerializer<MemoryData>.SetTextValue(ref MemoryData data, string text) {
 				data.WriteOn1 = bool.Parse(text);
+			}
+		}
+
+		// Accessor of the OnStart field
+		public sealed class OnStartField : IField<MemoryData, MemoryOnStart>, IFieldSerializer<MemoryData> {
+			public static readonly OnStartField Field = new OnStartField();
+			private OnStartField() {}
+			public string Name { get { return "OnStart"; } }
+			public int Order { get; set; }
+			public MemoryOnStart DefaultValue { get { return MemoryOnStart.Random; } }
+			public MemoryOnStart GetValue(ref MemoryData record) {
+				return record.OnStart;
+			}
+			public void SetValue(ref MemoryData record, MemoryOnStart value) {
+				record.OnStart = value;
+			}
+			public int Compare(ref MemoryData l, ref MemoryData r) {
+				return l.OnStart.CompareTo(r.OnStart);
+			}
+			public int Compare(MemoryOnStart l, MemoryOnStart r) {
+				return l.CompareTo(r);
+			}
+
+			// Implementation of interface IFieldSerializer<MemoryData>
+			bool IFieldSerializer<MemoryData>.NeedToSave(ref MemoryData data) {
+				return this.Compare(data.OnStart, this.DefaultValue) != 0;
+			}
+			string IFieldSerializer<MemoryData>.GetTextValue(ref MemoryData data) {
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.OnStart);
+			}
+			void IFieldSerializer<MemoryData>.SetDefault(ref MemoryData data) {
+				data.OnStart = this.DefaultValue;
+			}
+			void IFieldSerializer<MemoryData>.SetTextValue(ref MemoryData data, string text) {
+				data.OnStart = (MemoryOnStart)Enum.Parse(typeof(MemoryOnStart), text, true);
 			}
 		}
 
@@ -303,6 +339,7 @@ namespace LogicCircuit {
 			MemoryIdField.Field,
 			WritableField.Field,
 			WriteOn1Field.Field,
+			OnStartField.Field,
 			AddressBitWidthField.Field,
 			DataBitWidthField.Field,
 			DataField.Field,
@@ -366,6 +403,12 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.MemoryRowId, MemoryData.WriteOn1Field.Field, value); }
 		}
 
+		// Gets or sets value of the OnStart field.
+		public MemoryOnStart OnStart {
+			get { return this.Table.GetField(this.MemoryRowId, MemoryData.OnStartField.Field); }
+			set { this.Table.SetField(this.MemoryRowId, MemoryData.OnStartField.Field, value); }
+		}
+
 		// Gets or sets value of the AddressBitWidth field.
 		public int AddressBitWidth {
 			get { return this.Table.GetField(this.MemoryRowId, MemoryData.AddressBitWidthField.Field); }
@@ -404,6 +447,9 @@ namespace LogicCircuit {
 				}
 				if(MemoryData.WriteOn1Field.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("WriteOn1");
+				}
+				if(MemoryData.OnStartField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("OnStart");
 				}
 				if(MemoryData.AddressBitWidthField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("AddressBitWidth");
@@ -504,6 +550,7 @@ namespace LogicCircuit {
 			Guid MemoryId,
 			bool Writable,
 			bool WriteOn1,
+			MemoryOnStart OnStart,
 			int AddressBitWidth,
 			int DataBitWidth,
 			string Data,
@@ -521,6 +568,7 @@ namespace LogicCircuit {
 				MemoryId = MemoryId,
 				Writable = Writable,
 				WriteOn1 = WriteOn1,
+				OnStart = OnStart,
 				AddressBitWidth = AddressBitWidth,
 				DataBitWidth = DataBitWidth,
 				Data = Data,

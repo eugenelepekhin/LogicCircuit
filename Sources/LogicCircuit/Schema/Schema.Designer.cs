@@ -85,6 +85,13 @@ namespace LogicCircuit {
 		}
 
 		/// <summary>
+		/// Looks up a localized string similar to content of the file: "convertfrom.2.0.0.4.xslt".
+		/// </summary>
+ 		public static string ConvertFrom_2_0_0_4 {
+			get { return ResourceManager.GetString("ConvertFrom_2_0_0_4", Culture); }
+		}
+
+		/// <summary>
 		/// Looks up a localized string similar to content of the file: "convertsettings.xslt".
 		/// </summary>
  		public static string ConvertSettings {

@@ -1124,12 +1124,30 @@ Do you want to remove the reference to it from the Recent Files list?</value>
     <value>Text color</value>
   </data>
   <data name="TitleSaveAs" xml:space="preserve">
-    <value>Save As...</value>
+    <value>Sa_ve As...</value>
   </data>
   <data name="ToolTipLoadData" xml:space="preserve">
     <value>Load data from file</value>
   </data>
   <data name="ToolTipSaveData" xml:space="preserve">
     <value>Save data to file</value>
+  </data>
+  <data name="MemoryOnStartData" xml:space="preserve">
+    <value>Persist memory between runs</value>
+  </data>
+  <data name="MemoryOnStartOnes" xml:space="preserve">
+    <value>Set all bits to 1</value>
+  </data>
+  <data name="MemoryOnStartRandom" xml:space="preserve">
+    <value>Randomly</value>
+  </data>
+  <data name="MemoryOnStartZeros" xml:space="preserve">
+    <value>Set all bits to 0</value>
+  </data>
+  <data name="TitleMemoryOnStart" xml:space="preserve">
+    <value>On _start fill:</value>
+  </data>
+  <data name="ToolTipMemoryOnStart" xml:space="preserve">
+    <value>Choose how RAM will be initialized on power on</value>
   </data>
 </root>

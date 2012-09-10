@@ -834,7 +834,7 @@ namespace LogicCircuit {
 			Tracer.Assert(parameters.TrueForAll(p => p.Jam.Pin == memory.AddressPin));
 			results.Sort(ResultComparer.BitOrderComparer);
 			parameters.Sort(ParameterComparer.BitOrderComparer);
-			FunctionRom rom = new FunctionRom(circuitState, CircuitMap.Parameters(parameters), CircuitMap.Results(results), memory.RomValue());
+			FunctionRom rom = new FunctionRom(circuitState, CircuitMap.Parameters(parameters), CircuitMap.Results(results), memory.MemoryValue());
 			if(symbolMap.CircuitMap.memories == null) {
 				symbolMap.CircuitMap.memories = new Dictionary<CircuitSymbol, FunctionMemory>();
 			}

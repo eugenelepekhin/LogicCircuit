@@ -383,7 +383,8 @@ namespace LogicCircuit {
 		}
 
 		private void Edit(Memory memory) {
-			this.Mainframe.ShowDialog(memory.Writable ? (Window)new DialogRAM(memory) : (Window)new DialogROM(memory));
+			//this.Mainframe.ShowDialog(memory.Writable ? (Window)new DialogRAM(memory) : (Window)new DialogROM(memory));
+			this.Mainframe.ShowDialog(new DialogMemoryEditor(memory));
 		}
 
 		private void Edit(Pin pin) {

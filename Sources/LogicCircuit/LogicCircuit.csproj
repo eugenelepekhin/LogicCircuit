@@ -59,6 +59,7 @@
     <Compile Include="CircuitProject\LedMatrix.cs" />
     <Compile Include="CircuitProject\LedMatrixCellShape.cs" />
     <Compile Include="CircuitProject\LedMatrixType.cs" />
+    <Compile Include="CircuitProject\MemoryOnStart.cs" />
     <Compile Include="CircuitProject\PinComparer.cs" />
     <Compile Include="CircuitProject\TextNote.cs" />
     <Compile Include="CircuitProject\Wrappers\CollapsedCategory.cs" />
@@ -103,6 +104,9 @@
     </Compile>
     <Compile Include="Dialog\DialogMemory.xaml.cs">
       <DependentUpon>DialogMemory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\DialogMemoryEditor.xaml.cs">
+      <DependentUpon>DialogMemoryEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialog\DialogOptions.xaml.cs">
       <DependentUpon>DialogOptions.xaml</DependentUpon>
@@ -340,6 +344,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Dialog\DialogMemoryEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dialog\DialogMessage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -551,6 +559,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Schema\ConvertFrom.2.0.0.4.xslt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

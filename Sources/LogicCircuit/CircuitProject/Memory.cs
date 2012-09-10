@@ -109,8 +109,7 @@ namespace LogicCircuit {
 			return old;
 		}
 
-		public byte[] RomValue() {
-			Tracer.Assert(!this.Writable);
+		public byte[] MemoryValue() {
 			byte[] d = Convert.FromBase64String(this.Data);
 			if(d.Length != this.BytesPerCell * this.TotalCells) {
 				d = Memory.Reallocate(d, this.AddressBitWidth, this.DataBitWidth);
@@ -118,8 +117,7 @@ namespace LogicCircuit {
 			return d;
 		}
 
-		public void SetRomValue(byte[] value) {
-			Tracer.Assert(!this.Writable);
+		public void SetMemoryValue(byte[] value) {
 			Tracer.Assert(value != null && value.Length == this.BytesPerCell * this.TotalCells);
 			this.Data = Convert.ToBase64String(value, Base64FormattingOptions.InsertLineBreaks);
 		}
@@ -212,8 +210,8 @@ namespace LogicCircuit {
 		}
 
 		public Memory Create(bool writable, int addressBitWidth, int dataBitWidth) {
-			Memory memory = this.CreateItem(Guid.NewGuid(), writable, MemoryData.WriteOn1Field.Field.DefaultValue, addressBitWidth, dataBitWidth,
-				MemoryData.DataField.Field.DefaultValue, MemoryData.NoteField.Field.DefaultValue
+			Memory memory = this.CreateItem(Guid.NewGuid(), writable, MemoryData.WriteOn1Field.Field.DefaultValue, MemoryData.OnStartField.Field.DefaultValue,
+				addressBitWidth, dataBitWidth, MemoryData.DataField.Field.DefaultValue, MemoryData.NoteField.Field.DefaultValue
 			);
 			this.CreatePins(memory);
 			return memory;
