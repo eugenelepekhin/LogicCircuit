@@ -15,7 +15,7 @@ namespace LogicCircuit {
 	/// <summary>
 	/// Interaction logic for DialogMemoryEditor.xaml
 	/// </summary>
-	public partial class DialogMemoryEditor : Window {
+	public abstract partial class DialogMemoryEditor : Window {
 
 		private SettingsWindowLocationCache windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
@@ -39,7 +39,7 @@ namespace LogicCircuit {
 		private int AddressBitWidth { get { return (int)this.addressBitWidth.SelectedItem; } }
 		private int DataBitWidth { get { return (int)this.dataBitWidth.SelectedItem; } }
 
-		public DialogMemoryEditor(Memory memory) {
+		protected DialogMemoryEditor(Memory memory) {
 			string typeName = this.GetType().Name;
 			this.openFileFolder = new SettingsStringCache(Settings.User, typeName + ".OpenFile.Folder", Mainframe.DefaultProjectFolder());
 			this.DataHeight = new SettingsGridLengthCache(Settings.User, typeName + ".Data.Height", memory.Writable ? "0.25*" : "0.75*");
