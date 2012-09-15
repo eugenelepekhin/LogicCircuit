@@ -17,6 +17,14 @@
 			<Setter Property="MinWidth" Value="65"/>
 			<Setter Property="VerticalAlignment" Value="Center"/>
 		</Style>
+
+		<Style x:Key="ramOnly" TargetType="{x:Type FrameworkElement}">
+			<Style.Triggers>
+				<DataTrigger Binding="{Binding Path=Memory.Writable}" Value="False">
+					<Setter Property="Visibility" Value="Collapsed"/>
+				</DataTrigger>
+			</Style.Triggers>
+		</Style>
 	</Window.Resources>
 
 	<Grid Margin="3">
@@ -42,15 +50,23 @@
 		<Label Grid.Row="1" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleDataBitWidth}, Mode=OneTime}" Target="{Binding ElementName=dataBitWidth}"/>
 		<ComboBox Grid.Row="1" Grid.Column="1" Name="dataBitWidth" SelectionChanged="MemorySizeChanged" ToolTip="{x:Static lc:Resources.ToolTipDataBitWidth}" HorizontalAlignment="Left"/>
 
-		<Label Grid.Row="2" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleWriteOn}, Mode=OneTime}" Target="{Binding ElementName=writeOn}"/>
-		<ComboBox Grid.Row="2" Grid.Column="1" Name="writeOn" ToolTip="{x:Static lc:Resources.ToolTipRamWriteOn}"/>
+		<StackPanel Grid.Row="2" Grid.Column="0" Style="{StaticResource ramOnly}">
+			<Label Content="{Binding Source={x:Static lc:Resources.TitleWriteOn}, Mode=OneTime}" Target="{Binding ElementName=writeOn}"/>
+		</StackPanel>
+		<StackPanel Grid.Row="2" Grid.Column="1" Style="{StaticResource ramOnly}">
+			<ComboBox Name="writeOn" ToolTip="{x:Static lc:Resources.ToolTipRamWriteOn}"/>
+		</StackPanel>
 
-		<Label Grid.Row="3" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleMemoryOnStart}, Mode=OneTime}" Target="{Binding ElementName=onStart}"/>
-		<ListBox Grid.Row="3" Grid.Column="1" Name="onStartList" Visibility="Hidden" HorizontalAlignment="Left" Padding="10,0"
-			Height="{Binding ElementName=onStart, Path=ActualHeight}" ItemsSource="{Binding ElementName=onStart, Path=ItemsSource}"
-		/>
-		<ComboBox Grid.Row="3" Grid.Column="1" Name="onStart"
-			Width="{Binding ElementName=onStartList, Path=ActualWidth}" ToolTip="{x:Static lc:Resources.ToolTipMemoryOnStart}"
+		<StackPanel Grid.Row="3" Grid.Column="0" Style="{StaticResource ramOnly}">
+			<Label Content="{Binding Source={x:Static lc:Resources.TitleMemoryOnStart}, Mode=OneTime}" Target="{Binding ElementName=onStart}"/>
+		</StackPanel>
+		<StackPanel Grid.Row="3" Grid.Column="1" Style="{StaticResource ramOnly}">
+			<ComboBox Grid.Row="3" Grid.Column="1" Name="onStart"
+				Width="{Binding ElementName=onStartList, Path=ActualWidth}" ToolTip="{x:Static lc:Resources.ToolTipMemoryOnStart}"
+			/>
+		</StackPanel>
+		<ListBox Grid.Row="3" Grid.Column="1" Name="onStartList" Visibility="Hidden" HorizontalAlignment="Left" Padding="10,0" Style="{StaticResource ramOnly}"
+			Height="0" ItemsSource="{Binding ElementName=onStart, Path=ItemsSource}"
 		/>
 
 		<GroupBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Header="{Binding Source={x:Static lc:Resources.TitleData}, Mode=OneTime}" Margin="3,3,3,0">
