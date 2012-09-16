@@ -85,6 +85,7 @@
 					<Setter Property="HorizontalAlignment" Value="Stretch"/>
 					<Setter Property="Margin" Value="-6,0,-6,0"/>
 					<Setter Property="Padding" Value="5,0,5,0"/>
+					<EventSetter Event="MouseLeftButtonDown" Handler="GridView_MouseDown"/>
 				</Style>
 			</GroupBox.Resources>
 			<ListView ItemsSource="{Binding Path=Rows}" Name="listView" Focusable="True" Style="{StaticResource dataAllowed}"
@@ -105,112 +106,112 @@
 						<GridViewColumn Header="0">
 							<GridViewColumn.CellTemplate>
 								<DataTemplate>
-									<TextBlock Text="{Binding Path=C0}" Name="C0" MouseLeftButtonDown="GridView_MouseDown" Style="{StaticResource memoryCell}"/>
+									<TextBlock Text="{Binding Path=C0}" Name="C0" Style="{StaticResource memoryCell}"/>
 								</DataTemplate>
 							</GridViewColumn.CellTemplate>
 						</GridViewColumn>
 						<GridViewColumn Header="1">
 							<GridViewColumn.CellTemplate>
 								<DataTemplate>
-									<TextBlock Text="{Binding Path=C1}" Name="C1" MouseLeftButtonDown="GridView_MouseDown" Style="{StaticResource memoryCell}"/>
+									<TextBlock Text="{Binding Path=C1}" Name="C1" Style="{StaticResource memoryCell}"/>
 								</DataTemplate>
 							</GridViewColumn.CellTemplate>
 						</GridViewColumn>
 						<GridViewColumn Header="2">
 							<GridViewColumn.CellTemplate>
 								<DataTemplate>
-									<TextBlock Text="{Binding Path=C2}" Name="C2" MouseLeftButtonDown="GridView_MouseDown" Style="{StaticResource memoryCell}"/>
+									<TextBlock Text="{Binding Path=C2}" Name="C2" Style="{StaticResource memoryCell}"/>
 								</DataTemplate>
 							</GridViewColumn.CellTemplate>
 						</GridViewColumn>
 						<GridViewColumn Header="3">
 							<GridViewColumn.CellTemplate>
 								<DataTemplate>
-									<TextBlock Text="{Binding Path=C3}" Name="C3" MouseLeftButtonDown="GridView_MouseDown" Style="{StaticResource memoryCell}"/>
+									<TextBlock Text="{Binding Path=C3}" Name="C3" Style="{StaticResource memoryCell}"/>
 								</DataTemplate>
 							</GridViewColumn.CellTemplate>
 						</GridViewColumn>
 						<GridViewColumn Header="4">
 							<GridViewColumn.CellTemplate>
 								<DataTemplate>
-									<TextBlock Text="{Binding Path=C4}" Name="C4" MouseLeftButtonDown="GridView_MouseDown" Style="{StaticResource memoryCell}"/>
+									<TextBlock Text="{Binding Path=C4}" Name="C4" Style="{StaticResource memoryCell}"/>
 								</DataTemplate>
 							</GridViewColumn.CellTemplate>
 						</GridViewColumn>
 						<GridViewColumn Header="5">
 							<GridViewColumn.CellTemplate>
 								<DataTemplate>
-									<TextBlock Text="{Binding Path=C5}" Name="C5" MouseLeftButtonDown="GridView_MouseDown" Style="{StaticResource memoryCell}"/>
+									<TextBlock Text="{Binding Path=C5}" Name="C5" Style="{StaticResource memoryCell}"/>
 								</DataTemplate>
 							</GridViewColumn.CellTemplate>
 						</GridViewColumn>
 						<GridViewColumn Header="6">
 							<GridViewColumn.CellTemplate>
 								<DataTemplate>
-									<TextBlock Text="{Binding Path=C6}" Name="C6" MouseLeftButtonDown="GridView_MouseDown" Style="{StaticResource memoryCell}"/>
+									<TextBlock Text="{Binding Path=C6}" Name="C6" Style="{StaticResource memoryCell}"/>
 								</DataTemplate>
 							</GridViewColumn.CellTemplate>
 						</GridViewColumn>
 						<GridViewColumn Header="7">
 							<GridViewColumn.CellTemplate>
 								<DataTemplate>
-									<TextBlock Text="{Binding Path=C7}" Name="C7" MouseLeftButtonDown="GridView_MouseDown" Style="{StaticResource memoryCell}"/>
+									<TextBlock Text="{Binding Path=C7}" Name="C7" Style="{StaticResource memoryCell}"/>
 								</DataTemplate>
 							</GridViewColumn.CellTemplate>
 						</GridViewColumn>
 						<GridViewColumn Header="8">
 							<GridViewColumn.CellTemplate>
 								<DataTemplate>
-									<TextBlock Text="{Binding Path=C8}" Name="C8" MouseLeftButtonDown="GridView_MouseDown" Style="{StaticResource memoryCell}"/>
+									<TextBlock Text="{Binding Path=C8}" Name="C8" Style="{StaticResource memoryCell}"/>
 								</DataTemplate>
 							</GridViewColumn.CellTemplate>
 						</GridViewColumn>
 						<GridViewColumn Header="9">
 							<GridViewColumn.CellTemplate>
 								<DataTemplate>
-									<TextBlock Text="{Binding Path=C9}" Name="C9" MouseLeftButtonDown="GridView_MouseDown" Style="{StaticResource memoryCell}"/>
+									<TextBlock Text="{Binding Path=C9}" Name="C9" Style="{StaticResource memoryCell}"/>
 								</DataTemplate>
 							</GridViewColumn.CellTemplate>
 						</GridViewColumn>
 						<GridViewColumn Header="A">
 							<GridViewColumn.CellTemplate>
 								<DataTemplate>
-									<TextBlock Text="{Binding Path=CA}" Name="CA" MouseLeftButtonDown="GridView_MouseDown" Style="{StaticResource memoryCell}"/>
+									<TextBlock Text="{Binding Path=CA}" Name="CA" Style="{StaticResource memoryCell}"/>
 								</DataTemplate>
 							</GridViewColumn.CellTemplate>
 						</GridViewColumn>
 						<GridViewColumn Header="B">
 							<GridViewColumn.CellTemplate>
 								<DataTemplate>
-									<TextBlock Text="{Binding Path=CB}" Name="CB" MouseLeftButtonDown="GridView_MouseDown" Style="{StaticResource memoryCell}"/>
+									<TextBlock Text="{Binding Path=CB}" Name="CB" Style="{StaticResource memoryCell}"/>
 								</DataTemplate>
 							</GridViewColumn.CellTemplate>
 						</GridViewColumn>
 						<GridViewColumn Header="C">
 							<GridViewColumn.CellTemplate>
 								<DataTemplate>
-									<TextBlock Text="{Binding Path=CC}" Name="CC" MouseLeftButtonDown="GridView_MouseDown" Style="{StaticResource memoryCell}"/>
+									<TextBlock Text="{Binding Path=CC}" Name="CC" Style="{StaticResource memoryCell}"/>
 								</DataTemplate>
 							</GridViewColumn.CellTemplate>
 						</GridViewColumn>
 						<GridViewColumn Header="D">
 							<GridViewColumn.CellTemplate>
 								<DataTemplate>
-									<TextBlock Text="{Binding Path=CD}" Name="CD" MouseLeftButtonDown="GridView_MouseDown" Style="{StaticResource memoryCell}"/>
+									<TextBlock Text="{Binding Path=CD}" Name="CD" Style="{StaticResource memoryCell}"/>
 								</DataTemplate>
 							</GridViewColumn.CellTemplate>
 						</GridViewColumn>
 						<GridViewColumn Header="E">
 							<GridViewColumn.CellTemplate>
 								<DataTemplate>
-									<TextBlock Text="{Binding Path=CE}" Name="CE" MouseLeftButtonDown="GridView_MouseDown" Style="{StaticResource memoryCell}"/>
+									<TextBlock Text="{Binding Path=CE}" Name="CE" Style="{StaticResource memoryCell}"/>
 								</DataTemplate>
 							</GridViewColumn.CellTemplate>
 						</GridViewColumn>
 						<GridViewColumn Header="F">
 							<GridViewColumn.CellTemplate>
 								<DataTemplate>
-									<TextBlock Text="{Binding Path=CF}" Name="CF" MouseLeftButtonDown="GridView_MouseDown" Style="{StaticResource memoryCell}"/>
+									<TextBlock Text="{Binding Path=CF}" Name="CF" Style="{StaticResource memoryCell}"/>
 								</DataTemplate>
 							</GridViewColumn.CellTemplate>
 						</GridViewColumn>
