@@ -90,6 +90,7 @@
 			</GroupBox.Resources>
 			<ListView ItemsSource="{Binding Path=Rows}" Name="listView" Focusable="True" Style="{StaticResource dataAllowed}"
 				SelectionChanged="listView_SelectionChanged" PreviewKeyDown="listView_PreviewKeyDown" PreviewTextInput="listView_PreviewTextInput"
+				GotKeyboardFocus="listView_GotKeyboardFocus" LostKeyboardFocus="listView_LostKeyboardFocus"
 			>
 				<ListView.View>
 					<GridView AllowsColumnReorder="False">

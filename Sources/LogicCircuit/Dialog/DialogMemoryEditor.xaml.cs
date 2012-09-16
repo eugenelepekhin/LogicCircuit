@@ -81,9 +81,6 @@ namespace LogicCircuit {
 		}
 
 		private void UpdateListView() {
-			if(0 < this.data.Length) {
-				this.SelectCell(this.currentRow, this.currentCol);
-			}
 			GridView view = (GridView)this.listView.View;
 			foreach(GridViewColumn column in view.Columns) {
 				column.Width = 0;
@@ -231,6 +228,22 @@ namespace LogicCircuit {
 					}
 					e.Handled = true;
 				}
+			} catch(Exception exception) {
+				App.Mainframe.ReportException(exception);
+			}
+		}
+
+		private void listView_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e) {
+			try {
+				this.SelectCell(this.currentRow, this.currentCol);
+			} catch(Exception exception) {
+				App.Mainframe.ReportException(exception);
+			}
+		}
+
+		private void listView_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e) {
+			try {
+				this.UnselectCell(this.currentRow, this.currentCol);
 			} catch(Exception exception) {
 				App.Mainframe.ReportException(exception);
 			}
