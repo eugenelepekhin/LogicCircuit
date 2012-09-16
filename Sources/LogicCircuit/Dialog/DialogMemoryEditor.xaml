@@ -5,6 +5,7 @@
 	WindowStartupLocation="CenterOwner"
 	Style="{DynamicResource DialogWindow}"
 	MinWidth="450" MinHeight="350"
+	FocusManager.FocusedElement="{Binding ElementName=addressBitWidth}"
 >
 	<Window.Resources>
 		<Style TargetType="{x:Type Label}">
