@@ -110,7 +110,8 @@ namespace LogicCircuit {
 		}
 
 		public byte[] MemoryValue() {
-			byte[] d = Convert.FromBase64String(this.Data);
+			string data = this.Data;
+			byte[] d = !string.IsNullOrEmpty(data) ? Convert.FromBase64String(data) : new byte[this.BytesPerCell * this.TotalCells];
 			if(d.Length != this.BytesPerCell * this.TotalCells) {
 				d = Memory.Reallocate(d, this.AddressBitWidth, this.DataBitWidth);
 			}
@@ -118,8 +119,8 @@ namespace LogicCircuit {
 		}
 
 		public void SetMemoryValue(byte[] value) {
-			Tracer.Assert(value != null && value.Length == this.BytesPerCell * this.TotalCells);
-			this.Data = Convert.ToBase64String(value, Base64FormattingOptions.InsertLineBreaks);
+			Tracer.Assert(value == null || value.Length == this.BytesPerCell * this.TotalCells);
+			this.Data = (value != null) ? Convert.ToBase64String(value, Base64FormattingOptions.InsertLineBreaks) : string.Empty;
 		}
 
 		internal void SetPins(DevicePin addressPin, DevicePin dataPin) {
