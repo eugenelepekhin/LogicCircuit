@@ -123,11 +123,11 @@
     <Compile Include="Dialog\DialogProject.xaml.cs">
       <DependentUpon>DialogProject.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dialog\DialogRAM.cs" />
+    <Compile Include="Dialog\DialogRam.cs" />
     <Compile Include="Dialog\DialogReport.xaml.cs">
       <DependentUpon>DialogReport.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dialog\DialogROM.cs" />
+    <Compile Include="Dialog\DialogRom.cs" />
     <Compile Include="Dialog\DialogText.xaml.cs">
       <DependentUpon>DialogText.xaml</DependentUpon>
     </Compile>
