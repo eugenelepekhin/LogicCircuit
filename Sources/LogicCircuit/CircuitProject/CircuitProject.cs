@@ -255,7 +255,7 @@ namespace LogicCircuit {
 		/// <param name="ns">XML namespace that defines the project version</param>
 		/// <returns>
 		/// String.Empty -- when ns is for current version and no transformation is required
-		/// XSLT string  -- when ns is for know previous version
+		/// XSLT string  -- when ns is for known previous version
 		/// null         -- when ns is unknown
 		/// </returns>
 		private static string FindTransformation(string ns) {
