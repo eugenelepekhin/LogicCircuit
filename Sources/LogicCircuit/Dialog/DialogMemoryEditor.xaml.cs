@@ -25,10 +25,10 @@ namespace LogicCircuit {
 		
 		public Memory Memory { get; private set; }
 
-		public static DependencyProperty RowListProperty = DependencyProperty.Register("RowList", typeof(RowList), typeof(DialogMemoryEditor));
+		public static DependencyProperty RowsProperty = DependencyProperty.Register("Rows", typeof(RowList), typeof(DialogMemoryEditor));
 		public RowList Rows {
-			get { return (RowList)this.GetValue(DialogMemoryEditor.RowListProperty); }
-			private set { this.SetValue(DialogMemoryEditor.RowListProperty, value); }
+			get { return (RowList)this.GetValue(DialogMemoryEditor.RowsProperty); }
+			private set { this.SetValue(DialogMemoryEditor.RowsProperty, value); }
 		}
 
 		private byte[] data;
@@ -55,14 +55,18 @@ namespace LogicCircuit {
 			this.addressBitWidth.ItemsSource = MemoryDescriptor.AddressBitWidthRange;
 			this.dataBitWidth.ItemsSource = PinDescriptor.BitWidthRange;
 			this.writeOn.ItemsSource = new string[] { LogicCircuit.Resources.WriteOn0, LogicCircuit.Resources.WriteOn1 };
-			this.onStart.ItemsSource = new string[] {
-				LogicCircuit.Resources.MemoryOnStartRandom, LogicCircuit.Resources.MemoryOnStartZeros, LogicCircuit.Resources.MemoryOnStartOnes, LogicCircuit.Resources.MemoryOnStartData
+			OnStartDescriptor[] onStartList = new OnStartDescriptor[] {
+				new OnStartDescriptor(MemoryOnStart.Random, LogicCircuit.Resources.MemoryOnStartRandom),
+				new OnStartDescriptor(MemoryOnStart.Zeros, LogicCircuit.Resources.MemoryOnStartZeros),
+				new OnStartDescriptor(MemoryOnStart.Ones, LogicCircuit.Resources.MemoryOnStartOnes),
+				new OnStartDescriptor(MemoryOnStart.Data, LogicCircuit.Resources.MemoryOnStartData)
 			};
+			this.onStart.ItemsSource = onStartList;
 
 			this.addressBitWidth.SelectedItem = this.Memory.AddressBitWidth;
 			this.dataBitWidth.SelectedItem = this.Memory.DataBitWidth;
 			this.writeOn.SelectedIndex = this.Memory.WriteOn1 ? 1 : 0;
-			this.onStart.SelectedIndex = (int)this.Memory.OnStart;
+			this.onStart.SelectedItem = onStartList.First(d => d.OnStart == (this.Memory.Writable ? this.Memory.OnStart : MemoryOnStart.Data));
 			this.note.Text = this.Memory.Note;
 			this.Loaded += new RoutedEventHandler(this.DialogLoaded);
 		}
@@ -98,8 +102,14 @@ namespace LogicCircuit {
 				this.ApplyChanges();
 				int addressBitWidth = this.AddressBitWidth;
 				int dataBitWidth = this.DataBitWidth;
-				byte[] originalData = this.Memory.MemoryValue();
+				bool writeOn1 = this.Memory.Writable && this.writeOn.SelectedIndex != 0;
+				MemoryOnStart memoryOnStart = ((OnStartDescriptor)this.onStart.SelectedItem).OnStart;
+				bool saveData = !this.Memory.Writable || memoryOnStart == MemoryOnStart.Data;
+				if(!this.Memory.Writable) {
+					memoryOnStart = MemoryOnStart.Random; // set to default value for ROM
+				}
 				string text = this.note.Text.Trim();
+
 				Func<byte[], byte[], bool> equal = (a, b) => {
 					if(a.Length == b.Length) {
 						for(int i = 0; i < a.Length; i++) {
@@ -112,11 +122,15 @@ namespace LogicCircuit {
 					return false;
 				};
 
-				if(this.Memory.AddressBitWidth != addressBitWidth || this.Memory.DataBitWidth != dataBitWidth || this.Memory.Note != text || !equal(originalData, this.data)) {
+				if(this.Memory.AddressBitWidth != addressBitWidth || this.Memory.DataBitWidth != dataBitWidth || this.Memory.Note != text ||
+					this.Memory.WriteOn1 != writeOn1 || this.Memory.OnStart != memoryOnStart || (saveData && !equal(this.Memory.MemoryValue(), this.data))
+				) {
 					this.Memory.CircuitProject.InTransaction(() => {
 						this.Memory.AddressBitWidth = addressBitWidth;
 						this.Memory.DataBitWidth = dataBitWidth;
-						this.Memory.SetMemoryValue(this.data);
+						this.Memory.WriteOn1 = writeOn1;
+						this.Memory.OnStart = memoryOnStart;
+						this.Memory.SetMemoryValue(saveData ? this.data : null);
 						this.Memory.Note = text;
 					});
 				}
@@ -545,6 +559,16 @@ namespace LogicCircuit {
 				public void Reset() {
 					throw new NotImplementedException();
 				}
+			}
+		}
+
+		public class OnStartDescriptor {
+			public MemoryOnStart OnStart { get; private set; }
+			public string Text { get; private set; }
+
+			public OnStartDescriptor(MemoryOnStart onStart, string text) {
+				this.OnStart = onStart;
+				this.Text = text;
 			}
 		}
 	}

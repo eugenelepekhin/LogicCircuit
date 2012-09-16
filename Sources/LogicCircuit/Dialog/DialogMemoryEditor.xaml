@@ -21,7 +21,17 @@
 		<Style x:Key="ramOnly" TargetType="{x:Type FrameworkElement}">
 			<Style.Triggers>
 				<DataTrigger Binding="{Binding Path=Memory.Writable}" Value="False">
+					<Setter Property="IsEnabled" Value="False"/>
 					<Setter Property="Visibility" Value="Collapsed"/>
+				</DataTrigger>
+			</Style.Triggers>
+		</Style>
+
+		<Style x:Key="dataAllowed" TargetType="{x:Type FrameworkElement}">
+			<Setter Property="IsEnabled" Value="False"/>
+			<Style.Triggers>
+				<DataTrigger Binding="{Binding ElementName=onStart, Path=SelectedItem.OnStart}" Value="{x:Static lc:MemoryOnStart.Data}">
+					<Setter Property="IsEnabled" Value="True"/>
 				</DataTrigger>
 			</Style.Triggers>
 		</Style>
@@ -61,12 +71,12 @@
 			<Label Content="{Binding Source={x:Static lc:Resources.TitleMemoryOnStart}, Mode=OneTime}" Target="{Binding ElementName=onStart}"/>
 		</StackPanel>
 		<StackPanel Grid.Row="3" Grid.Column="1" Style="{StaticResource ramOnly}">
-			<ComboBox Grid.Row="3" Grid.Column="1" Name="onStart"
+			<ComboBox Grid.Row="3" Grid.Column="1" Name="onStart" DisplayMemberPath="Text"
 				Width="{Binding ElementName=onStartList, Path=ActualWidth}" ToolTip="{x:Static lc:Resources.ToolTipMemoryOnStart}"
 			/>
 		</StackPanel>
 		<ListBox Grid.Row="3" Grid.Column="1" Name="onStartList" Visibility="Hidden" HorizontalAlignment="Left" Padding="10,0" Style="{StaticResource ramOnly}"
-			Height="0" ItemsSource="{Binding ElementName=onStart, Path=ItemsSource}"
+			Height="0" ItemsSource="{Binding ElementName=onStart, Path=ItemsSource}" DisplayMemberPath="Text"
 		/>
 
 		<GroupBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Header="{Binding Source={x:Static lc:Resources.TitleData}, Mode=OneTime}" Margin="3,3,3,0">
@@ -77,7 +87,7 @@
 					<Setter Property="Padding" Value="5,0,5,0"/>
 				</Style>
 			</GroupBox.Resources>
-			<ListView ItemsSource="{Binding Path=Rows}" Name="listView" Focusable="True"
+			<ListView ItemsSource="{Binding Path=Rows}" Name="listView" Focusable="True" Style="{StaticResource dataAllowed}"
 				SelectionChanged="listView_SelectionChanged" PreviewKeyDown="listView_PreviewKeyDown" PreviewTextInput="listView_PreviewTextInput"
 			>
 				<ListView.View>
@@ -217,7 +227,7 @@
 			/>
 		</GroupBox>
 
-		<StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" VerticalAlignment="Bottom">
+		<StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" VerticalAlignment="Bottom" Style="{StaticResource dataAllowed}">
 			<Button Content="{x:Static lc:Resources.TitleLoad}" Click="ButtonLoadClick" ToolTip="{x:Static lc:Resources.ToolTipLoadData}"/>
 			<Button Content="{x:Static lc:Resources.TitleSaveAs}" Click="ButtonSaveClick" ToolTip="{x:Static lc:Resources.ToolTipSaveData}"/>
 		</StackPanel>
