@@ -414,6 +414,11 @@ namespace LogicCircuit {
 						}
 					}
 				}
+				if(this.memories != null) {
+					foreach(FunctionMemory memory in this.memories.Values) {
+						memory.TurnOff();
+					}
+				}
 				this.turnedOn = false;
 			}
 			foreach(CircuitMap map in this.Children) {

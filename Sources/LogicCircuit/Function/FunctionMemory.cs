@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace LogicCircuit {
 	public abstract class FunctionMemory : CircuitFunction {
@@ -99,6 +100,13 @@ namespace LogicCircuit {
 
 		public int this[int index] {
 			get { return Memory.CellValue(this.data, this.DataBitWidth, index); }
+		}
+
+		[SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "TurnOff")]
+		public void TurnOff() {
+			if(this.Memory.Writable && this.Memory.OnStart == MemoryOnStart.Data) {
+				this.Memory.SetMemoryValue(this.data);
+			}
 		}
 	}
 }

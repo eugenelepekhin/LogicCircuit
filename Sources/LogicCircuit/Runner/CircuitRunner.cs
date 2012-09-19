@@ -157,7 +157,10 @@ namespace LogicCircuit {
 				}
 				if(this.RootMap != null) {
 					while(this.updatingUI);
-					this.Editor.Mainframe.Dispatcher.BeginInvoke(new Action(() => this.RootMap.TurnOff()), DispatcherPriority.ApplicationIdle);
+					this.Editor.Mainframe.Dispatcher.BeginInvoke(
+						new Action(() => this.RootMap.Circuit.CircuitProject.InTransaction(() => this.RootMap.TurnOff())),
+						DispatcherPriority.ApplicationIdle
+					);
 				}
 				this.Editor.Mainframe.Status = Resources.PowerOff;
 			}
