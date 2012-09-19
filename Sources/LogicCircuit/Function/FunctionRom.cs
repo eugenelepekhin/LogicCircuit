@@ -5,8 +5,7 @@ using System.Text;
 
 namespace LogicCircuit {
 	public class FunctionRom : FunctionMemory {
-		public FunctionRom(CircuitState circuitState, int[] address, int[] result, byte[] data) : base(circuitState, address, null, result, 0, false) {
-			this.Write(data);
+		public FunctionRom(CircuitState circuitState, int[] address, int[] result, Memory memory) : base(circuitState, address, null, result, 0, memory) {
 		}
 
 		public override bool Evaluate() {

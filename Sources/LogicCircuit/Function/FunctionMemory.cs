@@ -10,22 +10,50 @@ namespace LogicCircuit {
 		private State writeOn;
 		private State oldWriteState = State.Off;
 		private byte[] data;
+		public Memory Memory { get; private set; }
 
 		protected FunctionMemory(
-			CircuitState circuitState, int[] address, int[] inputData, int[] outputData, int write, bool writeOn1
+			CircuitState circuitState, int[] address, int[] inputData, int[] outputData, int write, Memory memory
 		) : base(circuitState, FunctionMemory.Input(address, inputData, write), outputData) {
 			this.address = address;
 			this.inputData = inputData;
 			this.outputData = outputData;
+			this.Memory = memory;
 			if(inputData != null) {
+				Tracer.Assert(memory.Writable);
 				Tracer.Assert(this.inputData.Length == this.outputData.Length);
-				this.data = new byte[Memory.BytesPerCellFor(this.inputData.Length) * Memory.NumberCellsFor(this.address.Length)];
-				circuitState.Random.NextBytes(this.data);
 				this.write = write;
-				this.writeOn = writeOn1 ? State.On1 : State.On0;
+				this.writeOn = this.Memory.WriteOn1 ? State.On1 : State.On0;
+				switch(this.Memory.OnStart) {
+				case MemoryOnStart.Random:
+					this.data = this.Allocate();
+					circuitState.Random.NextBytes(this.data);
+					break;
+				case MemoryOnStart.Zeros:
+					this.data = this.Allocate();
+					break;
+				case MemoryOnStart.Ones:
+					this.data = this.Allocate();
+					for(int i = 0; i < this.data.Length; i++) {
+						this.data[i] = 0xFF;
+					}
+					break;
+				case MemoryOnStart.Data:
+					this.data = memory.MemoryValue();
+					break;
+				default:
+					Tracer.Fail();
+					break;
+				}
 			} else {
+				Tracer.Assert(!memory.Writable);
 				this.write = -1;
+				this.data = memory.MemoryValue();
 			}
+		}
+
+		private byte[] Allocate() {
+			return new byte[Memory.BytesPerCellFor(this.inputData.Length) * Memory.NumberCellsFor(this.address.Length)];
 		}
 
 		private static int[] Input(int[] address, int[] inputData, int clock) {
@@ -37,11 +65,6 @@ namespace LogicCircuit {
 			Array.Copy(inputData, 0, input, address.Length, inputData.Length);
 			input[address.Length + inputData.Length] = clock;
 			return input;
-		}
-
-		public void Write(byte[] newData) {
-			Tracer.Assert(this.inputData == null && this.data == null);
-			this.data = newData;
 		}
 
 		private int ReadState(int[] parameter) {
