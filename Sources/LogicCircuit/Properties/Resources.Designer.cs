@@ -2315,5 +2315,13 @@ namespace LogicCircuit {
  		public static string ToolTipMemoryOnStart {
 			get { return ResourceManager.GetString("ToolTipMemoryOnStart", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Circuit {0} contains {1} that preserves data between runs.
+		/// Such circuit cannot be used more than once on other circuits as potentially different sets of data will be stored on one memory module..
+		/// </summary>
+ 		public static string ErrorManyMemoryData(string circuitName, string ramNotation) {
+			return string.Format(Culture, ResourceManager.GetString("ErrorManyMemoryData", Culture), circuitName, ramNotation);
+		}
 	}
 }

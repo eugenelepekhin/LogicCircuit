@@ -132,6 +132,8 @@ namespace LogicCircuit {
 			// Remove not used results
 			CircuitMap.CleanUp(list);
 
+			CircuitMap.Validate(list);
+
 			//TODO: optimize the list. What if sort it in such way that state will be allocated with a better locality, so it will be less cache misses?
 
 			CircuitState circuitState = new CircuitState(3);
@@ -328,6 +330,19 @@ namespace LogicCircuit {
 					list.Remove(map);
 				}
 			} while(0 < unconnected.Count);
+		}
+
+		private static void Validate(SymbolMapList list) {
+			// check that all memory that persisted data between runs is used only once
+			HashSet<CircuitSymbol> persisted = new HashSet<CircuitSymbol>();
+			foreach(SymbolMap symbolMap in list.SymbolMaps) {
+				Memory memory = symbolMap.CircuitSymbol.Circuit as Memory;
+				if(memory != null && memory.Writable && memory.OnStart == MemoryOnStart.Data && !persisted.Add(symbolMap.CircuitSymbol)) {
+					throw new CircuitException(Cause.UserError,
+						Resources.ErrorManyMemoryData(symbolMap.CircuitSymbol.LogicalCircuit.Name, memory.Notation + symbolMap.CircuitSymbol.Point.ToString())
+					);
+				}
+			}
 		}
 
 		public CircuitMap Child(CircuitSymbol symbol) {
