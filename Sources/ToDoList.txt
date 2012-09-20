@@ -4,7 +4,6 @@ smarter wires
 
 Keyboard device
 Display device
-"hard drive" device
 
 Colors of symbols
 
