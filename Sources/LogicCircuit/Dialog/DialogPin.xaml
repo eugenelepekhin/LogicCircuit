@@ -2,8 +2,9 @@
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:lc="clr-namespace:LogicCircuit"
+	xmlns:properties="clr-namespace:LogicCircuit.Properties"
 	WindowStartupLocation="CenterOwner"
-	Title="{Binding Source={x:Static lc:Resources.NamePin}, Mode=OneTime}"
+	Title="{Binding Source={x:Static properties:Resources.NamePin}, Mode=OneTime}"
 	Style="{DynamicResource DialogWindow}"
 	MinWidth="320" MinHeight="320"
 	FocusManager.FocusedElement="{Binding ElementName=name}"
@@ -42,31 +43,31 @@
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 
-		<Label Grid.Row="0" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleType}, Mode=OneTime}"/>
+		<Label Grid.Row="0" Grid.Column="0" Content="{Binding Source={x:Static properties:Resources.TitleType}, Mode=OneTime}"/>
 		<TextBlock Grid.Row="0" Grid.Column="1" Name="type" VerticalAlignment="Center" Margin="3"/>
 
-		<Label Grid.Row="1" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleName}, Mode=OneTime}" Target="{Binding ElementName=name}"/>
+		<Label Grid.Row="1" Grid.Column="0" Content="{Binding Source={x:Static properties:Resources.TitleName}, Mode=OneTime}" Target="{Binding ElementName=name}"/>
 		<TextBox Grid.Row="1" Grid.Column="1" Name="name"/>
 
-		<Label Grid.Row="2" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleNotation}, Mode=OneTime}" Target="{Binding ElementName=notation}"/>
-		<TextBox Grid.Row="2" Grid.Column="1" Name="notation" ToolTip="{x:Static lc:Resources.ToolTipPinNotation}"/>
+		<Label Grid.Row="2" Grid.Column="0" Content="{Binding Source={x:Static properties:Resources.TitleNotation}, Mode=OneTime}" Target="{Binding ElementName=notation}"/>
+		<TextBox Grid.Row="2" Grid.Column="1" Name="notation" ToolTip="{x:Static properties:Resources.ToolTipPinNotation}"/>
 
-		<Label Grid.Row="3" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleSide}, Mode=OneTime}" Target="{Binding ElementName=side}"/>
-		<ComboBox Grid.Row="3" Grid.Column="1" Name="side" ToolTip="{x:Static lc:Resources.ToolTipPinSide}"/>
+		<Label Grid.Row="3" Grid.Column="0" Content="{Binding Source={x:Static properties:Resources.TitleSide}, Mode=OneTime}" Target="{Binding ElementName=side}"/>
+		<ComboBox Grid.Row="3" Grid.Column="1" Name="side" ToolTip="{x:Static properties:Resources.ToolTipPinSide}"/>
 
-		<Label Grid.Row="4" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleBitWidth}, Mode=OneTime}" Target="{Binding ElementName=bitWidth}"/>
-		<ComboBox Grid.Row="4" Grid.Column="1" Name="bitWidth" ToolTip="{x:Static lc:Resources.ToolTipPinBitWidth}"/>
+		<Label Grid.Row="4" Grid.Column="0" Content="{Binding Source={x:Static properties:Resources.TitleBitWidth}, Mode=OneTime}" Target="{Binding ElementName=bitWidth}"/>
+		<ComboBox Grid.Row="4" Grid.Column="1" Name="bitWidth" ToolTip="{x:Static properties:Resources.ToolTipPinBitWidth}"/>
 
-		<CheckBox Grid.Row="5" Grid.Column="1" Name="inverted" Content="{Binding Source={x:Static lc:Resources.TitleInverted}, Mode=OneTime}" IsThreeState="False"/>
+		<CheckBox Grid.Row="5" Grid.Column="1" Name="inverted" Content="{Binding Source={x:Static properties:Resources.TitleInverted}, Mode=OneTime}" IsThreeState="False"/>
 
-		<Label Grid.Row="6" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleDescription}, Mode=OneTime}" Target="{Binding ElementName=note}"/>
+		<Label Grid.Row="6" Grid.Column="0" Content="{Binding Source={x:Static properties:Resources.TitleDescription}, Mode=OneTime}" Target="{Binding ElementName=note}"/>
 		<TextBox Grid.Row="6" Grid.Column="1" Name="note" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
 			AcceptsReturn="True" AcceptsTab="True" SpellCheck.IsEnabled="True"
 		/>
 
 		<StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-			<Button Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="ButtonOkClick"/>
-			<Button Content="{Binding Source={x:Static lc:Resources.TitleCancel}, Mode=OneTime}" IsCancel="True"/>
+			<Button Content="{Binding Source={x:Static properties:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="ButtonOkClick"/>
+			<Button Content="{Binding Source={x:Static properties:Resources.TitleCancel}, Mode=OneTime}" IsCancel="True"/>
 		</StackPanel>
 	</Grid>
 </Window>

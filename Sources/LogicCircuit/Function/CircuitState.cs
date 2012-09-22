@@ -206,7 +206,7 @@ namespace LogicCircuit {
 			public CircuitFunction Get() {
 				if(this.current.Count <= this.index) {
 					if(this.next.Count <= 0) {
-						throw new InvalidOperationException(Resources.ErrorDirtyListIsEmpty);
+						throw new InvalidOperationException(Properties.Resources.ErrorDirtyListIsEmpty);
 					}
 
 					this.iteration++;

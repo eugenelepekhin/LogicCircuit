@@ -26,7 +26,7 @@ namespace LogicCircuit {
 				throw new ArgumentNullException("parameter");
 			}
 			if(parameter.Length < minimumParameterCount) {
-				throw new ArgumentException(Resources.FunctionParameter(this.Name, minimumParameterCount));
+				throw new ArgumentException(Properties.Resources.FunctionParameter(this.Name, minimumParameterCount));
 			}
 		}
 		protected CircuitFunction(CircuitState circuitState, int[] parameter, int result) : this(circuitState, parameter, 1, result) {
@@ -70,7 +70,7 @@ namespace LogicCircuit {
 				case '1':
 					return State.On1;
 				default:
-					throw new Exception(Resources.UnknownStateCharacter(c));
+					throw new Exception(Properties.Resources.UnknownStateCharacter(c));
 				}
 			}
 		#endif
@@ -99,7 +99,7 @@ namespace LogicCircuit {
 		}
 
 		protected static Exception BadState(State state) {
-			return new AssertException(Resources.UnknownState(state));
+			return new AssertException(Properties.Resources.UnknownState(state));
 		}
 
 		protected State TriStateGroup() {

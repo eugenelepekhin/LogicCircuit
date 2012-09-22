@@ -13,7 +13,7 @@ namespace LogicCircuit {
 		protected int BitPerLed { get; private set; }
 		public bool Invalid { get; set; }
 
-		public override string ReportName { get { return Resources.NameLedMatrix; } }
+		public override string ReportName { get { return Properties.Resources.NameLedMatrix; } }
 
 		protected FunctionLedMatrix(CircuitState circuitState, CircuitSymbol symbol, int[] parameter) : base(circuitState, parameter) {
 			this.grid = (UniformGrid)symbol.ProbeView;

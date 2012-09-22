@@ -11,7 +11,7 @@ namespace LogicCircuit {
 	partial class Mainframe {
 
 		private const string FileExtention = ".CircuitProject";
-		private static readonly string FileFilter = LogicCircuit.Resources.FileFilter(Mainframe.FileExtention);
+		private static readonly string FileFilter = Properties.Resources.FileFilter(Mainframe.FileExtention);
 
 		public static string DefaultProjectFolder() {
 			return Environment.GetFolderPath(Environment.SpecialFolder.Personal);
@@ -51,7 +51,7 @@ namespace LogicCircuit {
 		private bool EnsureSaved() {
 			if(this.Editor != null && this.Editor.HasChanges) {
 				MessageBoxResult result = DialogMessage.Show(this, this.Title,
-					LogicCircuit.Resources.MessageSaveFile(this.Editor.Project.Name), null,
+					Properties.Resources.MessageSaveFile(this.Editor.Project.Name), null,
 					MessageBoxImage.Question, MessageBoxButton.YesNoCancel
 				);
 				switch(result) {
@@ -61,7 +61,7 @@ namespace LogicCircuit {
 				case MessageBoxResult.No:
 					break;
 				case MessageBoxResult.Cancel:
-					this.Status = LogicCircuit.Resources.OperationCanceled;
+					this.Status = Properties.Resources.OperationCanceled;
 					return false;
 				}
 			}
@@ -74,7 +74,7 @@ namespace LogicCircuit {
 				editor = new Editor(this, file);
 			} catch(SnapStoreException snapStoreException) {
 				Tracer.Report("Mainframe.Edit", snapStoreException);
-				throw new CircuitException(Cause.CorruptedFile, snapStoreException, LogicCircuit.Resources.ErrorFileCorrupted(file));
+				throw new CircuitException(Cause.CorruptedFile, snapStoreException, Properties.Resources.ErrorFileCorrupted(file));
 			}
 			if(this.Editor != null) {
 				this.Editor.Power = false;
@@ -84,7 +84,7 @@ namespace LogicCircuit {
 			}
 			this.Dispatcher.BeginInvoke(new Action(() => this.ScrollOffset = new Point(0, 0)), System.Windows.Threading.DispatcherPriority.Normal);
 			this.Editor = editor;
-			this.Status = LogicCircuit.Resources.Ready;
+			this.Status = Properties.Resources.Ready;
 		}
 
 		private void New() {
@@ -119,7 +119,7 @@ namespace LogicCircuit {
 				}
 			} else if(file != null) {
 				MessageBoxResult result = DialogMessage.Show(this, this.Title,
-					LogicCircuit.Resources.MessageInvalidRecentFile(file), null,
+					Properties.Resources.MessageInvalidRecentFile(file), null,
 					MessageBoxImage.Question, MessageBoxButton.YesNo
 				);
 				if(result == MessageBoxResult.Yes) {
@@ -131,7 +131,7 @@ namespace LogicCircuit {
 		private void Save(string file) {
 			this.Editor.Save(file);
 			Settings.User.AddRecentFile(file);
-			this.Status = LogicCircuit.Resources.FileSaved(file);
+			this.Status = Properties.Resources.FileSaved(file);
 		}
 
 		private void SaveAs() {

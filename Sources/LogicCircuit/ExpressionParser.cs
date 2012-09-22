@@ -54,7 +54,7 @@ namespace LogicCircuit {
 			public TokenType TokenType;
 
 			public static Token Eos() {
-				return new Token() { Value = Resources.ParserEOS, TokenType = TokenType.EOS };
+				return new Token() { Value = Properties.Resources.ParserEOS, TokenType = TokenType.EOS };
 			}
 
 			public bool Is(string value) {
@@ -132,17 +132,17 @@ namespace LogicCircuit {
 		}
 
 		private Expression ErrorUnexpected(Token token) {
-			this.Error = Resources.ParserErrorUnexpected(token.Value);
+			this.Error = Properties.Resources.ParserErrorUnexpected(token.Value);
 			return null;
 		}
 
 		private Token UnclosedQuote(string text) {
-			this.Error = Resources.ParserErrorUnclosedQuote(text);
+			this.Error = Properties.Resources.ParserErrorUnclosedQuote(text);
 			return Token.Eos();
 		}
 
 		private Expression ExprMissing(Token after) {
-			this.Error = Resources.ParserErrorExpressionMissing(after.Value);
+			this.Error = Properties.Resources.ParserErrorExpressionMissing(after.Value);
 			return null;
 		}
 
@@ -178,7 +178,7 @@ namespace LogicCircuit {
 			if("()+-*/%&|^~!=<>".Contains(c)) {
 				return this.NextOperator();
 			}
-			this.Error = Resources.ParserErrorUnknownChar(c);
+			this.Error = Properties.Resources.ParserErrorUnknownChar(c);
 			return Token.Eos();
 		}
 
@@ -260,7 +260,7 @@ namespace LogicCircuit {
 				next = this.reader.Peek();
 			}
 			if(maxLength < this.buffer.Length || this.buffer.Length < 1) {
-				this.Error = Resources.ParserErrorInvalidNumber(this.buffer.ToString());
+				this.Error = Properties.Resources.ParserErrorInvalidNumber(this.buffer.ToString());
 				return Token.Eos();
 			}
 			return new Token() { Value = this.buffer.ToString(), TokenType = tokenType };
@@ -550,7 +550,7 @@ namespace LogicCircuit {
 				if(expr != null) {
 					token = this.Current();
 					if(token.TokenType != TokenType.Close) {
-						this.Error = Resources.ParserErrorCloseParenMissing(token.Value);
+						this.Error = Properties.Resources.ParserErrorCloseParenMissing(token.Value);
 						return null;
 					}
 					this.Next();
@@ -634,7 +634,7 @@ namespace LogicCircuit {
 				}
 				index++;
 			}
-			this.Error = Resources.ParserErrorUnknownPin(name);
+			this.Error = Properties.Resources.ParserErrorUnknownPin(name);
 			return null;
 		}
 

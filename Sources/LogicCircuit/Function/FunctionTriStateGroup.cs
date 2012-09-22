@@ -11,6 +11,6 @@ namespace LogicCircuit {
 			return this.SetResult(this.TriStateGroup());
 		}
 
-		public override string ReportName { get { return Resources.TriStateGroupName; } }
+		public override string ReportName { get { return Properties.Resources.TriStateGroupName; } }
 	}
 }

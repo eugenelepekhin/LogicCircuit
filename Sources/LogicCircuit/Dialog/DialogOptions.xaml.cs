@@ -13,7 +13,7 @@ namespace LogicCircuit {
 		private Mainframe mainFrame;
 
 		//The order of items in this array should match order in enum GateShape
-		private string[] gateShapeList = new string[] { LogicCircuit.Resources.GateShapeRectangular, LogicCircuit.Resources.GateShapeShaped };
+		private string[] gateShapeList = new string[] { Properties.Resources.GateShapeRectangular, Properties.Resources.GateShapeShaped };
 
 		public IEnumerable<string> GateShapeList { get { return this.gateShapeList; } }
 		public IEnumerable<int> RecentFileRange { get; private set; }

@@ -2,8 +2,9 @@
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:lc="clr-namespace:LogicCircuit"
+	xmlns:properties="clr-namespace:LogicCircuit.Properties"
 	WindowStartupLocation="CenterOwner"
-	Title="{Binding Source={x:Static lc:Resources.TextNotation}, Mode=OneTime}"
+	Title="{Binding Source={x:Static properties:Resources.TextNotation}, Mode=OneTime}"
 	MinWidth="580" MinHeight="300"
 	Style="{DynamicResource DialogWindow}"
 	FocusManager.FocusedElement="{Binding ElementName=editor}"
@@ -78,10 +79,10 @@
 					<Image Source="..\Properties\CharacterShrinkFont.png"></Image>
 				</ToggleButton>
 
-				<lc:ColorPicker ColorPickerMode="Background" ToolTip="{x:Static lc:Resources.ToolTipBackgroundColor}"
+				<lc:ColorPicker ColorPickerMode="Background" ToolTip="{x:Static properties:Resources.ToolTipBackgroundColor}"
 					SelectedColor="{Binding Path=HighlightColor, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True}"
 				/>
-				<lc:ColorPicker ColorPickerMode="Foreground" ToolTip="{x:Static lc:Resources.ToolTipFontColor}"
+				<lc:ColorPicker ColorPickerMode="Foreground" ToolTip="{x:Static properties:Resources.ToolTipFontColor}"
 					SelectedColor="{Binding Path=ForegroundColor, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True}"
 				/>
 			</ToolBar>
@@ -133,8 +134,8 @@
 		/>
 
 		<StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-			<Button Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="ButtonOkClick"/>
-			<Button Content="{Binding Source={x:Static lc:Resources.TitleCancel}, Mode=OneTime}" IsCancel="True"/>
+			<Button Content="{Binding Source={x:Static properties:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="ButtonOkClick"/>
+			<Button Content="{Binding Source={x:Static properties:Resources.TitleCancel}, Mode=OneTime}" IsCancel="True"/>
 		</StackPanel>
 	</Grid>
 </Window>

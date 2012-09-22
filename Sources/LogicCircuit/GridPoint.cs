@@ -33,7 +33,7 @@ namespace LogicCircuit {
 
 		// This is used to display coordinates to user. Do not make it debug only.
 		public override string ToString() {
-			return Resources.GridPoint(this.X, this.Y);
+			return Properties.Resources.GridPoint(this.X, this.Y);
 		}
 
 		public GridPoint Offset(int x, int y) {

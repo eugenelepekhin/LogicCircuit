@@ -7,7 +7,7 @@
 //
 //-----------------------------------------------------------------------------
 
-namespace LogicCircuit {
+namespace LogicCircuit.Properties {
 	using System;
 	using System.Collections.Generic;
 	using System.ComponentModel;

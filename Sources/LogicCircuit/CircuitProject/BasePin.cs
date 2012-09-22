@@ -21,7 +21,7 @@ namespace LogicCircuit {
 		}
 
 		public static string DefaultName(PinType pinType) {
-			return (pinType == PinType.Input) ? Resources.PinInName : Resources.PinOutName;
+			return (pinType == PinType.Input) ? Properties.Resources.PinInName : Properties.Resources.PinOutName;
 		}
 
 		/// <summary>
@@ -62,17 +62,17 @@ namespace LogicCircuit {
 		public override string ToolTip {
 			get {
 				if(this.PinType == PinType.Input) {
-					return this.AppendNote(Resources.ToolTipInputPin(this.BitWidth, this.Name));
+					return this.AppendNote(Properties.Resources.ToolTipInputPin(this.BitWidth, this.Name));
 				} else if(this.PinType == PinType.Output) {
-					return this.AppendNote(Resources.ToolTipOutputPin(this.BitWidth, this.Name));
+					return this.AppendNote(Properties.Resources.ToolTipOutputPin(this.BitWidth, this.Name));
 				} else {
-					return this.AppendNote(Resources.ToolTipNonePin(this.BitWidth, this.Name));
+					return this.AppendNote(Properties.Resources.ToolTipNonePin(this.BitWidth, this.Name));
 				}
 			}
 		}
 
 		public override string Category {
-			get { return Resources.CategoryInputOutput; }
+			get { return Properties.Resources.CategoryInputOutput; }
 			set { throw new InvalidOperationException(); }
 		}
 

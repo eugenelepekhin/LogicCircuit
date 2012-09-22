@@ -164,7 +164,7 @@ namespace LogicCircuit {
 			list.Sort(ColorComparer.comparer);
 			this.AvailableColors = new List<Color>(list.Distinct(ColorComparer.comparer));
 
-			this.SelectColorCommand = new LambdaUICommand(LogicCircuit.Resources.ColorPickerCaptionSelectCustom,
+			this.SelectColorCommand = new LambdaUICommand(Properties.Resources.ColorPickerCaptionSelectCustom,
 				o => {
 					this.IsOpen = false;
 					this.SelectedColor = this.CustomColor;

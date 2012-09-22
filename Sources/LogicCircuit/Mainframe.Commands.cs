@@ -267,7 +267,7 @@ namespace LogicCircuit {
 				if(this.IsEditorInEditMode()) {
 					int count = this.Editor.SelectFreeWires();
 					if(0 < count) {
-						this.Status = LogicCircuit.Resources.MessageFreeWireCount(count);
+						this.Status = Properties.Resources.MessageFreeWireCount(count);
 					}
 				}
 			} catch(Exception exception) {
@@ -290,7 +290,7 @@ namespace LogicCircuit {
 				if(this.IsEditorInEditMode()) {
 					int count = this.Editor.SelectFloatingSymbols();
 					if(0 < count) {
-						this.Status = LogicCircuit.Resources.MessageFloatingSymbolCount(count);
+						this.Status = Properties.Resources.MessageFloatingSymbolCount(count);
 					}
 				}
 			} catch(Exception exception) {
@@ -581,7 +581,7 @@ namespace LogicCircuit {
 					if(CircuitTestSocket.IsTestable(this.Editor.Project.LogicalCircuit)) {
 						this.ShowDialog(new DialogTruthTable(this.Editor.Project.LogicalCircuit));
 					} else {
-						this.InformationMessage(LogicCircuit.Resources.MessageInputOutputPinsMissing);
+						this.InformationMessage(Properties.Resources.MessageInputOutputPinsMissing);
 					}
 				}
 			} catch(Exception exception) {
@@ -668,7 +668,7 @@ namespace LogicCircuit {
 
 		private void HelpContentCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
-				Process.Start(LogicCircuit.Resources.HelpContent);
+				Process.Start(Properties.Resources.HelpContent);
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.HelpContentCommandExecuted", exception);
 				this.ReportException(exception);

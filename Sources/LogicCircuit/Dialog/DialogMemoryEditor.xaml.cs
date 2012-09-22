@@ -54,12 +54,12 @@ namespace LogicCircuit {
 
 			this.addressBitWidth.ItemsSource = MemoryDescriptor.AddressBitWidthRange;
 			this.dataBitWidth.ItemsSource = PinDescriptor.BitWidthRange;
-			this.writeOn.ItemsSource = new string[] { LogicCircuit.Resources.WriteOn0, LogicCircuit.Resources.WriteOn1 };
+			this.writeOn.ItemsSource = new string[] { Properties.Resources.WriteOn0, Properties.Resources.WriteOn1 };
 			OnStartDescriptor[] onStartList = new OnStartDescriptor[] {
-				new OnStartDescriptor(MemoryOnStart.Random, LogicCircuit.Resources.MemoryOnStartRandom),
-				new OnStartDescriptor(MemoryOnStart.Zeros, LogicCircuit.Resources.MemoryOnStartZeros),
-				new OnStartDescriptor(MemoryOnStart.Ones, LogicCircuit.Resources.MemoryOnStartOnes),
-				new OnStartDescriptor(MemoryOnStart.Data, LogicCircuit.Resources.MemoryOnStartData)
+				new OnStartDescriptor(MemoryOnStart.Random, Properties.Resources.MemoryOnStartRandom),
+				new OnStartDescriptor(MemoryOnStart.Zeros, Properties.Resources.MemoryOnStartZeros),
+				new OnStartDescriptor(MemoryOnStart.Ones, Properties.Resources.MemoryOnStartOnes),
+				new OnStartDescriptor(MemoryOnStart.Data, Properties.Resources.MemoryOnStartData)
 			};
 			this.onStart.ItemsSource = onStartList;
 

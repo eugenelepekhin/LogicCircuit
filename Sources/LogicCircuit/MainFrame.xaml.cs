@@ -46,7 +46,7 @@ namespace LogicCircuit {
 		}
 		private LogicalCircuit LogicalCircuit() { return this.Editor.Project.LogicalCircuit; }
 
-		private string statusText = LogicCircuit.Resources.Loading;
+		private string statusText = Properties.Resources.Loading;
 		private volatile bool statusChanged = false;
 		public string Status {
 			get { return this.statusText; }
@@ -161,7 +161,7 @@ namespace LogicCircuit {
 				);
 			} else {
 				DialogMessage.Show(this,
-					LogicCircuit.Resources.MainFrameCaption(null), message, details, messageBoxImage, MessageBoxButton.OK
+					Properties.Resources.MainFrameCaption(null), message, details, messageBoxImage, MessageBoxButton.OK
 				);
 				if(this.Editor != null && this.Editor.Power && messageBoxImage == MessageBoxImage.Error) {
 					this.Editor.Power = false;

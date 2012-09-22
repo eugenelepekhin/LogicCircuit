@@ -22,7 +22,7 @@ namespace LogicCircuit {
 		private Switcher switcher;
 
 		public bool HasChanges { get { return this.savedVersion != this.CircuitProject.Version; } }
-		public string Caption { get { return Resources.MainFrameCaption(this.File); } }
+		public string Caption { get { return Properties.Resources.MainFrameCaption(this.File); } }
 
 		// use process specific id in order to prevent dragging and dropping between processes.
 		private const double DragStartProximity = 3;
@@ -470,7 +470,7 @@ namespace LogicCircuit {
 								this.CircuitProject.InOmitTransaction(() => functionConstant.Value++);
 							}
 						} else {
-							this.Mainframe.Status = Resources.MessageNotRootConstant(this.CircuitRunner.Root.First().Circuit.Name);
+							this.Mainframe.Status = Properties.Resources.MessageNotRootConstant(this.CircuitRunner.Root.First().Circuit.Name);
 						}
 					}
 				}
@@ -647,7 +647,7 @@ namespace LogicCircuit {
 			if(this.InEditMode) {
 				if(e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl) {
 					this.switcher.OnControlDown();
-					this.Mainframe.Status = Resources.TipOnCtrlDown;
+					this.Mainframe.Status = Properties.Resources.TipOnCtrlDown;
 					e.Handled = true;
 				} else if(e.Key == Key.Tab) {
 					this.switcher.OnTabDown(

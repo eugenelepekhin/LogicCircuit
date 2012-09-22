@@ -144,7 +144,7 @@ namespace LogicCircuit {
 		public LambdaUICommand InsertImageCommand { get; private set; }
 
 		public DialogText(string document) {
-			this.HyperlinkCommand = new LambdaUICommand(LogicCircuit.Resources.CommandHyperlink,
+			this.HyperlinkCommand = new LambdaUICommand(Properties.Resources.CommandHyperlink,
 				o => {
 					try {
 						DialogHyperlink dialog = new DialogHyperlink(this.editor);
@@ -155,7 +155,7 @@ namespace LogicCircuit {
 					}
 				}
 			);
-			this.InsertImageCommand = new LambdaUICommand(LogicCircuit.Resources.CommandInsertImage, o => this.InsertImage());
+			this.InsertImageCommand = new LambdaUICommand(Properties.Resources.CommandInsertImage, o => this.InsertImage());
 
 			this.Document = document;
 			this.DataContext = this;
@@ -251,7 +251,7 @@ namespace LogicCircuit {
 			try {
 				OpenFileDialog dialog = new OpenFileDialog();
 				dialog.InitialDirectory = Mainframe.IsDirectoryPathValid(this.openImageFolder.Value) ? this.openImageFolder.Value : Mainframe.DefaultPictureFolder();
-				dialog.Filter = LogicCircuit.Resources.ImageFilter("*.bmp;*.dib;*.gif;*.jpg;*.jpeg;*.jpe;*.png;*.tiff;*.tif");
+				dialog.Filter = Properties.Resources.ImageFilter("*.bmp;*.dib;*.gif;*.jpg;*.jpeg;*.jpe;*.png;*.tiff;*.tif");
 				dialog.FilterIndex = 0;
 				bool? result = dialog.ShowDialog(this);
 				if(result.HasValue && result.Value) {

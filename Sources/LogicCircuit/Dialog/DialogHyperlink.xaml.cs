@@ -154,11 +154,11 @@ namespace LogicCircuit {
 			bool validText = 0 < this.HyperlinkText.Trim().Length;
 			this.errorInfo.Clear();
 			if(!validText) {
-				this.errorInfo["HyperlinkText"] = LogicCircuit.Resources.ErrorHyperlinkText;
+				this.errorInfo["HyperlinkText"] = Properties.Resources.ErrorHyperlinkText;
 			}
 			bool validUrl = DialogHyperlink.IsValidUrl(this.HyperlinkUrl);
 			if(!validUrl) {
-				this.errorInfo["HyperlinkUrl"] = LogicCircuit.Resources.ErrorHyperlinkUrl;
+				this.errorInfo["HyperlinkUrl"] = Properties.Resources.ErrorHyperlinkUrl;
 			}
 			this.IsValidHyperlink = validText && validUrl;
 			if(0 < this.errorInfo.Count) {

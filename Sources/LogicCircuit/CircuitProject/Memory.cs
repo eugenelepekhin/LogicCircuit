@@ -24,16 +24,16 @@ namespace LogicCircuit {
 		}
 
 		public override string Notation {
-			get { return this.Writable ? Resources.RAMNotation : Resources.ROMNotation; }
+			get { return this.Writable ? Properties.Resources.RAMNotation : Properties.Resources.ROMNotation; }
 			set { throw new InvalidOperationException(); }
 		}
 
 		public override string ToolTip {
-			get { return this.AppendNote(this.Writable ? Resources.ToolTipRAM(this.AddressBitWidth, this.DataBitWidth) : Resources.ToolTipROM(this.AddressBitWidth, this.DataBitWidth)); }
+			get { return this.AppendNote(this.Writable ? Properties.Resources.ToolTipRAM(this.AddressBitWidth, this.DataBitWidth) : Properties.Resources.ToolTipROM(this.AddressBitWidth, this.DataBitWidth)); }
 		}
 
 		public override string Category {
-			get { return Resources.CategoryPrimitives; }
+			get { return Properties.Resources.CategoryPrimitives; }
 			set { throw new InvalidOperationException(); }
 		}
 
@@ -183,21 +183,21 @@ namespace LogicCircuit {
 
 			DevicePin address = this.CircuitProject.DevicePinSet.Create(memory, PinType.Input, memory.AddressBitWidth);
 			address.PinSide = PinSide.Left;
-			address.Name = Resources.MemoryAddressPinName;
-			address.JamNotation = Resources.MemoryAddressPinNotation;
+			address.Name = Properties.Resources.MemoryAddressPinName;
+			address.JamNotation = Properties.Resources.MemoryAddressPinNotation;
 			DevicePin data = this.CircuitProject.DevicePinSet.Create(memory, PinType.Output, memory.DataBitWidth);
 			data.PinSide = PinSide.Right;
-			data.Name = Resources.MemoryDataPinName;
-			data.JamNotation = Resources.MemoryDataPinNotation;
+			data.Name = Properties.Resources.MemoryDataPinName;
+			data.JamNotation = Properties.Resources.MemoryDataPinNotation;
 			if(memory.Writable) {
 				DevicePin dataIn = this.CircuitProject.DevicePinSet.Create(memory, PinType.Input, memory.DataBitWidth);
 				dataIn.PinSide = PinSide.Left;
-				dataIn.Name = Resources.MemoryDataInPinName;
-				dataIn.JamNotation = Resources.MemoryDataPinNotation;
+				dataIn.Name = Properties.Resources.MemoryDataInPinName;
+				dataIn.JamNotation = Properties.Resources.MemoryDataPinNotation;
 				DevicePin write = this.CircuitProject.DevicePinSet.Create(memory, PinType.Input, 1);
 				write.PinSide = PinSide.Bottom;
-				write.Name = Resources.MemoryWritePinName(memory.WriteOn1 ? Resources.WriteOn1 : Resources.WriteOn0);
-				write.JamNotation = Resources.MemoryWritePinNotation;
+				write.Name = Properties.Resources.MemoryWritePinName(memory.WriteOn1 ? Properties.Resources.WriteOn1 : Properties.Resources.WriteOn0);
+				write.JamNotation = Properties.Resources.MemoryWritePinNotation;
 				memory.SetPins(address, data, dataIn, write);
 				MemorySet.UpdateWritePinName(memory);
 			} else {
@@ -207,7 +207,7 @@ namespace LogicCircuit {
 
 		public static void UpdateWritePinName(Memory memory) {
 			Tracer.Assert(memory.Writable);
-			memory.WritePin.Name = Resources.MemoryWritePinName(memory.WriteOn1 ? Resources.WriteOn1 : Resources.WriteOn0);
+			memory.WritePin.Name = Properties.Resources.MemoryWritePinName(memory.WriteOn1 ? Properties.Resources.WriteOn1 : Properties.Resources.WriteOn0);
 		}
 
 		public Memory Create(bool writable, int addressBitWidth, int dataBitWidth) {

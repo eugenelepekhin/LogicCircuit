@@ -17,6 +17,6 @@ namespace LogicCircuit {
 			return this.SetResult(CircuitFunction.FromBool(this.state));
 		}
 
-		public override string ReportName { get { return Resources.GateClockName; } }
+		public override string ReportName { get { return Properties.Resources.GateClockName; } }
 	}
 }

@@ -70,7 +70,7 @@ namespace LogicCircuit {
 			if(this.Parent != null) {
 				this.Parent.Path(text);
 			}
-			text.Append(Resources.CircuitMapPathSeparator);
+			text.Append(Properties.Resources.CircuitMapPathSeparator);
 			text.Append(this.Circuit.Name);
 			if(this.CircuitSymbol != null) {
 				text.Append(this.CircuitSymbol.Point.ToString());
@@ -80,7 +80,7 @@ namespace LogicCircuit {
 		private void Path(StringBuilder text, CircuitSymbol circuitSymbol) {
 			Tracer.Assert(circuitSymbol.LogicalCircuit == this.Circuit);
 			this.Path(text);
-			text.Append(Resources.CircuitMapPathSeparator);
+			text.Append(Properties.Resources.CircuitMapPathSeparator);
 			text.Append(circuitSymbol.Circuit.Name);
 			text.Append(circuitSymbol.Point.ToString());
 		}
@@ -105,7 +105,7 @@ namespace LogicCircuit {
 				if(lc != null) {
 					if(this.HasLoop(lc)) {
 						throw new CircuitException(Cause.UserError,
-							Resources.ErrorLoopInCircuit(lc.Name, this.Circuit.Name)
+							Properties.Resources.ErrorLoopInCircuit(lc.Name, this.Circuit.Name)
 						);
 					}
 					CircuitMap child = new CircuitMap(this, symbol);
@@ -196,7 +196,7 @@ namespace LogicCircuit {
 												Gate gate = inJam.CircuitSymbol.Circuit as Gate;
 												if(gate == null || gate.GateType != GateType.Probe) {
 													throw new CircuitException(Cause.UserError,
-														Resources.ErrorJamBitWidthDifferent(
+														Properties.Resources.ErrorJamBitWidthDifferent(
 															inJam.CircuitSymbol.Circuit.Name, inJam.CircuitSymbol.Point,
 															outJam.CircuitSymbol.Circuit.Name, outJam.CircuitSymbol.Point,
 															this.Circuit.Name
@@ -339,7 +339,7 @@ namespace LogicCircuit {
 				Memory memory = symbolMap.CircuitSymbol.Circuit as Memory;
 				if(memory != null && memory.Writable && memory.OnStart == MemoryOnStart.Data && !persisted.Add(symbolMap.CircuitSymbol)) {
 					throw new CircuitException(Cause.UserError,
-						Resources.ErrorManyMemoryData(symbolMap.CircuitSymbol.LogicalCircuit.Name, memory.Notation + symbolMap.CircuitSymbol.Point.ToString())
+						Properties.Resources.ErrorManyMemoryData(symbolMap.CircuitSymbol.LogicalCircuit.Name, memory.Notation + symbolMap.CircuitSymbol.Point.ToString())
 					);
 				}
 			}
@@ -848,7 +848,7 @@ namespace LogicCircuit {
 			Tracer.Assert(results.Count <= memory.DataOutPin.BitWidth);
 			Tracer.Assert(parameters.Count <= memory.AddressPin.BitWidth);
 			if(parameters.Count < memory.AddressPin.BitWidth) {
-				throw new CircuitException(Cause.UserError, Resources.ErrorAddressNotConnected(symbolMap.CircuitMap.Path(symbolMap.CircuitSymbol)));
+				throw new CircuitException(Cause.UserError, Properties.Resources.ErrorAddressNotConnected(symbolMap.CircuitMap.Path(symbolMap.CircuitSymbol)));
 			}
 			Tracer.Assert(results.TrueForAll(r => r.Jam.Pin == memory.DataOutPin));
 			Tracer.Assert(parameters.TrueForAll(p => p.Jam.Pin == memory.AddressPin));
@@ -885,10 +885,10 @@ namespace LogicCircuit {
 			Tracer.Assert(dataIn.Count <= memory.DataBitWidth);
 
 			if(address.Count != memory.AddressBitWidth) {
-				throw new CircuitException(Cause.UserError, Resources.ErrorAddressNotConnected(symbolMap.CircuitMap.Path(symbolMap.CircuitSymbol)));
+				throw new CircuitException(Cause.UserError, Properties.Resources.ErrorAddressNotConnected(symbolMap.CircuitMap.Path(symbolMap.CircuitSymbol)));
 			}
 			if(dataIn.Count != memory.DataBitWidth) {
-				throw new CircuitException(Cause.UserError, Resources.ErrorDataInNotConnected(symbolMap.CircuitMap.Path(symbolMap.CircuitSymbol)));
+				throw new CircuitException(Cause.UserError, Properties.Resources.ErrorDataInNotConnected(symbolMap.CircuitMap.Path(symbolMap.CircuitSymbol)));
 			}
 			dataOut.Sort(ResultComparer.BitOrderComparer);
 			address.Sort(ParameterComparer.BitOrderComparer);
@@ -905,7 +905,7 @@ namespace LogicCircuit {
 
 		#if DEBUG
 			public override string ToString() {
-				return string.Format(Resources.Culture, "CircuitMap of {0}", this.Circuit.Notation);
+				return string.Format(Properties.Resources.Culture, "CircuitMap of {0}", this.Circuit.Notation);
 			}
 		#endif
 	}

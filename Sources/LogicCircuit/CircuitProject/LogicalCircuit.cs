@@ -104,7 +104,7 @@ namespace LogicCircuit {
 		}
 
 		public LogicalCircuit Create() {
-			string name = this.UniqueName(Resources.LogicalCircuitName);
+			string name = this.UniqueName(Properties.Resources.LogicalCircuitName);
 			return this.CreateItem(Guid.NewGuid(),
 				name,
 				name,

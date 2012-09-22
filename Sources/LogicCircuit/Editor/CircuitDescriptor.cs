@@ -209,7 +209,7 @@ namespace LogicCircuit {
 
 		protected override Constant GetCircuitToDrop(CircuitProject circuitProject) {
 			int value;
-			if(!int.TryParse(this.Value, NumberStyles.HexNumber, Resources.Culture, out value)) {
+			if(!int.TryParse(this.Value, NumberStyles.HexNumber, Properties.Resources.Culture, out value)) {
 				value = 0;
 			}
 			return circuitProject.ConstantSet.Create(this.BitWidth, value);
@@ -235,7 +235,7 @@ namespace LogicCircuit {
 	}
 
 	public class LedMatrixDescriptor : IOCircuitDescriptor<LedMatrix> {
-		private static readonly IEnumerable<string> matrixTypeNames = new string[] { Resources.LedMatrixTypeIndividual, Resources.LedMatrixTypeSelector };
+		private static readonly IEnumerable<string> matrixTypeNames = new string[] { Properties.Resources.LedMatrixTypeIndividual, Properties.Resources.LedMatrixTypeSelector };
 		public static IEnumerable<string> MatrixTypeNames { get { return LedMatrixDescriptor.matrixTypeNames; } }
 
 		private static readonly IEnumerable<int> ledRange = PinDescriptor.NumberRange(LedMatrix.MinLedCount, LedMatrix.MaxLedCount);
@@ -257,7 +257,7 @@ namespace LogicCircuit {
 	}
 
 	public class PinDescriptor : IOCircuitDescriptor<Pin> {
-		private static readonly string[] pinSideRange = new string[] { Resources.PinSideLeft, Resources.PinSideTop, Resources.PinSideRight, Resources.PinSideBottom };
+		private static readonly string[] pinSideRange = new string[] { Properties.Resources.PinSideLeft, Properties.Resources.PinSideTop, Properties.Resources.PinSideRight, Properties.Resources.PinSideBottom };
 		private static readonly int[] bitWidthRange = PinDescriptor.NumberRange(1);
 
 		public static IEnumerable<string> PinSideRange { get { return PinDescriptor.pinSideRange; } }
@@ -321,7 +321,7 @@ namespace LogicCircuit {
 			this.Direction = 0;
 			this.PinCountRange = PinDescriptor.NumberRange(2, Gate.MaxInputCount);
 			this.BitWidthRange = PinDescriptor.NumberRange(1, BasePin.MaxBitWidth / 2);
-			this.DirectionRange = new string[] { Resources.SplitterDirectionClockwise, Resources.SplitterDirectionCounterclockwise };
+			this.DirectionRange = new string[] { Properties.Resources.SplitterDirectionClockwise, Properties.Resources.SplitterDirectionCounterclockwise };
 		}
 
 		protected override Splitter GetCircuitToDrop(CircuitProject circuitProject) {
@@ -332,7 +332,7 @@ namespace LogicCircuit {
 	public class LogicalCircuitDescriptor : CircuitDescriptor<LogicalCircuit> {
 		public LogicalCircuitDescriptor(LogicalCircuit logicalCircuit, Predicate<string> isReserved) : base(logicalCircuit) {
 			if(isReserved(logicalCircuit.Category)) {
-				this.Category = Resources.CategoryDuplicate(logicalCircuit.Category);
+				this.Category = Properties.Resources.CategoryDuplicate(logicalCircuit.Category);
 			}
 		}
 
@@ -389,8 +389,8 @@ namespace LogicCircuit {
 		public TextNoteDescriptor(CircuitProject circuitProject) {
 			// create dummy circuit to provide category and name for sorting and displaying in list of circuits descriptors
 			LogicalCircuit circuit = circuitProject.LogicalCircuitSet.Create();
-			circuit.Category = Resources.TextNotation;
-			circuit.Name = Resources.TextNotation;
+			circuit.Category = Properties.Resources.TextNotation;
+			circuit.Name = Properties.Resources.TextNotation;
 			this.Circuit = circuit;
 		}
 

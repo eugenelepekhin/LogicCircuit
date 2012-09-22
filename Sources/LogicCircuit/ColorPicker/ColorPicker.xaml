@@ -2,6 +2,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:LogicCircuit"
+	xmlns:properties="clr-namespace:LogicCircuit.Properties"
 >
 	<Style TargetType="{x:Type local:ColorPicker}">
 		<Setter Property="Template">
@@ -153,7 +154,7 @@
 							PopupAnimation="Slide"
 						>
 							<TabControl TabStripPlacement="Bottom">
-								<TabItem Header="{x:Static local:Resources.ColorPickerTabStandard}">
+								<TabItem Header="{x:Static properties:Resources.ColorPickerTabStandard}">
 									<Grid x:Name="standartColorSelector">
 										<StackPanel Orientation="Vertical">
 											<StackPanel Orientation="Vertical">
@@ -167,7 +168,7 @@
 													</Style>
 												</StackPanel.Style>
 
-												<TextBlock Text="{x:Static local:Resources.ColorPickerCaptionRecent}"/>
+												<TextBlock Text="{x:Static properties:Resources.ColorPickerCaptionRecent}"/>
 												<ListBox Style="{StaticResource ColorList}"
 													ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=RecentColors}"
 												/>
@@ -175,21 +176,21 @@
 												<Separator HorizontalAlignment="Stretch" Margin="3"/>
 											</StackPanel>
 
-											<TextBlock Text="{x:Static local:Resources.ColorPickerCaptionStandard}"/>
+											<TextBlock Text="{x:Static properties:Resources.ColorPickerCaptionStandard}"/>
 											<ListBox Style="{StaticResource ColorList}"
 												ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=StandardColors}"
 											/>
 
 											<Separator HorizontalAlignment="Stretch" Margin="3"/>
 
-											<TextBlock Text="{x:Static local:Resources.ColorPickerCaptionAvailable}"/>
+											<TextBlock Text="{x:Static properties:Resources.ColorPickerCaptionAvailable}"/>
 											<ListBox Style="{StaticResource ColorList}"
 												ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=AvailableColors}"
 											/>
 										</StackPanel>
 									</Grid>
 								</TabItem>
-								<TabItem Header="{x:Static local:Resources.ColorPickerTabCustom}">
+								<TabItem Header="{x:Static properties:Resources.ColorPickerTabCustom}">
 									<Grid Height="{Binding ElementName=standartColorSelector, Path=ActualHeight}" Width="{Binding ElementName=standartColorSelector, Path=ActualWidth}">
 										<Grid.Resources>
 											<!-- Repeat button on sliders is transparent and not focusable -->
@@ -429,7 +430,7 @@
 												</Rectangle.Fill>
 											</Rectangle>
 											<Button Grid.Column="2" HorizontalAlignment="Right" Margin="3" MinWidth="24"
-												Content="{x:Static local:Resources.ColorPickerCaptionSelectCustom}"
+												Content="{x:Static properties:Resources.ColorPickerCaptionSelectCustom}"
 												Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectColorCommand, Mode=OneTime}"
 											/>
 										</Grid>

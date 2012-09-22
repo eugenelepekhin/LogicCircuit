@@ -24,7 +24,7 @@ namespace LogicCircuit {
 
 		public bool Invalid { get; set; }
 
-		public override string ReportName { get { return Resources.NameButton; } }
+		public override string ReportName { get { return Properties.Resources.NameButton; } }
 
 		public void SymbolPress() {
 			if(this.IsToggle) {

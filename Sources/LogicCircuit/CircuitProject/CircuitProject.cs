@@ -28,16 +28,16 @@ namespace LogicCircuit {
 					(TextReader) new StringReader(
 						string.Format(CultureInfo.InvariantCulture, Schema.Empty,
 							Guid.NewGuid(), //ProjectId
-							Resources.CircuitProjectName,
+							Properties.Resources.CircuitProjectName,
 							Guid.NewGuid(), //LogicalCircuitId
-							Resources.LogicalCircuitMainName,
-							Resources.LogicalCircuitMainNotation
+							Properties.Resources.LogicalCircuitMainName,
+							Properties.Resources.LogicalCircuitMainNotation
 						)
 					)
 				));
 				return CircuitProject.CreateAndClose(xmlReader);
 			} catch(XmlException xmlException) {
-				throw new CircuitException(Cause.CorruptedFile, xmlException, Resources.ErrorFileCorrupted(file));
+				throw new CircuitException(Cause.CorruptedFile, xmlException, Properties.Resources.ErrorFileCorrupted(file));
 			}
 		}
 
@@ -143,7 +143,7 @@ namespace LogicCircuit {
 			try {
 				paste = CircuitProject.CreateAndClose(XmlHelper.CreateReader(new StringReader(text)));
 			} catch(XmlException xmlException) {
-				throw new CircuitException(Cause.CorruptedFile, xmlException, Resources.ErrorClipboardCorrupted);
+				throw new CircuitException(Cause.CorruptedFile, xmlException, Properties.Resources.ErrorClipboardCorrupted);
 			}
 
 			List<Symbol> result = new List<Symbol>();
@@ -281,7 +281,7 @@ namespace LogicCircuit {
 
 				string xslt = CircuitProject.FindTransformation(xmlReader.NamespaceURI);
 				if (xslt == null) {
-					throw new CircuitException(Cause.UnknownVersion, Resources.ErrorUnknownVersion);
+					throw new CircuitException(Cause.UnknownVersion, Properties.Resources.ErrorUnknownVersion);
 				}
 				if (xslt.Length == 0) {
 					// No transform needed. We are at the current version.

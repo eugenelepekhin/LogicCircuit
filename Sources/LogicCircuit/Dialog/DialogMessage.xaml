@@ -2,6 +2,7 @@
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:lc="clr-namespace:LogicCircuit"
+	xmlns:properties="clr-namespace:LogicCircuit.Properties"
 	WindowStartupLocation="CenterOwner"
 	Title="{Binding Path=Caption, Mode=OneTime}"
 	Style="{StaticResource DialogFixedWindow}"
@@ -63,7 +64,7 @@
 			</Grid.ColumnDefinitions>
 
 			<CheckBox Grid.Column="0" Name="showDetails" Margin="8" VerticalAlignment="Bottom"
-				Content="{Binding Source={x:Static lc:Resources.TitleShowDetails}, Mode=OneTime}"
+				Content="{Binding Source={x:Static properties:Resources.TitleShowDetails}, Mode=OneTime}"
 			>
 				<CheckBox.Style>
 					<Style TargetType="{x:Type CheckBox}">
@@ -77,10 +78,10 @@
 			</CheckBox>
 
 			<StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-				<Button Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}" Click="ButtonClick" Name="OK"/>
-				<Button Content="{Binding Source={x:Static lc:Resources.TitleYes}, Mode=OneTime}" Click="ButtonClick" Name="Yes"/>
-				<Button Content="{Binding Source={x:Static lc:Resources.TitleNo}, Mode=OneTime}" Click="ButtonClick" Name="No"/>
-				<Button Content="{Binding Source={x:Static lc:Resources.TitleCancel}, Mode=OneTime}" Click="ButtonClick" Name="Cancel"/>
+				<Button Content="{Binding Source={x:Static properties:Resources.TitleOK}, Mode=OneTime}" Click="ButtonClick" Name="OK"/>
+				<Button Content="{Binding Source={x:Static properties:Resources.TitleYes}, Mode=OneTime}" Click="ButtonClick" Name="Yes"/>
+				<Button Content="{Binding Source={x:Static properties:Resources.TitleNo}, Mode=OneTime}" Click="ButtonClick" Name="No"/>
+				<Button Content="{Binding Source={x:Static properties:Resources.TitleCancel}, Mode=OneTime}" Click="ButtonClick" Name="Cancel"/>
 			</StackPanel>
 		</Grid>
 	</Grid>

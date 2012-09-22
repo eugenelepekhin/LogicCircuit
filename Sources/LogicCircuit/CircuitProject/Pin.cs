@@ -14,8 +14,8 @@ namespace LogicCircuit {
 		public override string Notation {
 			get {
 				switch(this.PinType) {
-				case LogicCircuit.PinType.Input: return Resources.TitlePinInput(this.Name);
-				case LogicCircuit.PinType.Output: return Resources.TitlePinOutput(this.Name);
+				case LogicCircuit.PinType.Input: return Properties.Resources.TitlePinInput(this.Name);
+				case LogicCircuit.PinType.Output: return Properties.Resources.TitlePinOutput(this.Name);
 				default:
 					Tracer.Fail();
 					return string.Empty;

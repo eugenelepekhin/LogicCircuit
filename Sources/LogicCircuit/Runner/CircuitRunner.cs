@@ -90,7 +90,7 @@ namespace LogicCircuit {
 			PropertyChangedEventHandler editorPropertyChanged = null;
 			try {
 				this.running = true;
-				this.Editor.Mainframe.Status = Resources.PowerOn;
+				this.Editor.Mainframe.Status = Properties.Resources.PowerOn;
 
 				this.CircuitState = this.RootMap.Apply(CircuitRunner.HistorySize);
 				this.CircuitState.FunctionUpdated += new EventHandler(this.OnFunctionUpdated);
@@ -162,7 +162,7 @@ namespace LogicCircuit {
 						DispatcherPriority.ApplicationIdle
 					);
 				}
-				this.Editor.Mainframe.Status = Resources.PowerOff;
+				this.Editor.Mainframe.Status = Properties.Resources.PowerOff;
 			}
 		}
 
@@ -229,7 +229,7 @@ namespace LogicCircuit {
 					Thread.Yield();
 				}
 			}
-			this.Editor.Mainframe.ErrorMessage(Resources.Oscillation);
+			this.Editor.Mainframe.ErrorMessage(Properties.Resources.Oscillation);
 		}
 
 		private void TimerTick() {

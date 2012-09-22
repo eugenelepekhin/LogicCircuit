@@ -25,7 +25,7 @@ namespace LogicCircuit {
 					Process.Start(uri.AbsoluteUri);
 				}
 			} catch(Exception exception) {
-				App.Mainframe.ErrorMessage(LogicCircuit.Resources.ErrorUnsupportedUri, exception);
+				App.Mainframe.ErrorMessage(Properties.Resources.ErrorUnsupportedUri, exception);
 			}
 		}
 	}

@@ -2,8 +2,9 @@
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:lc="clr-namespace:LogicCircuit"
+	xmlns:properties="clr-namespace:LogicCircuit.Properties"
 	WindowStartupLocation="CenterOwner"
-	Title="{Binding Source={x:Static lc:Resources.TitleAbout}, Mode=OneTime}"
+	Title="{Binding Source={x:Static properties:Resources.TitleAbout}, Mode=OneTime}"
 	Style="{DynamicResource DialogFixedWindow}"
 >
 	<Window.Resources>
@@ -34,26 +35,26 @@
 		<StackPanel Grid.Row="0" Orientation="Horizontal">
 			<Image Width="256" Height="256" Margin="32,16,16,16" Source="..\Properties\LogicCircuit.png"/>
 			<TextBlock
-				Text="{Binding Source={x:Static lc:Resources.TitleApplication}, Mode=OneTime}" VerticalAlignment="Center" HorizontalAlignment="Center"
+				Text="{Binding Source={x:Static properties:Resources.TitleApplication}, Mode=OneTime}" VerticalAlignment="Center" HorizontalAlignment="Center"
 				FontSize="36" FontWeight="Bold" Margin="16,16,64,16"
 			/>
 		</StackPanel>
 
 		<StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-			<TextBlock Text="{Binding Source={x:Static lc:Resources.TitleVersion}, Mode=OneTime}"/>
+			<TextBlock Text="{Binding Source={x:Static properties:Resources.TitleVersion}, Mode=OneTime}"/>
 			<TextBlock Text="{Binding Path=Version}"/>
 		</StackPanel>
 
 		<StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,16">
-			<TextBlock Text="{Binding Source={x:Static lc:Resources.TitleWeb}, Mode=OneTime}"/>
+			<TextBlock Text="{Binding Source={x:Static properties:Resources.TitleWeb}, Mode=OneTime}"/>
 			<TextBlock>
 				<Hyperlink Foreground="{StaticResource dialogTextColor}"
-					NavigateUri="{Binding Source={x:Static lc:Resources.WebSiteUri}, Mode=OneTime}"
+					NavigateUri="{Binding Source={x:Static properties:Resources.WebSiteUri}, Mode=OneTime}"
 				>http://www.LogicCircuit.org/</Hyperlink>
 			</TextBlock>
 		</StackPanel>
 
-		<CheckBox Grid.Row="3" Content="{x:Static lc:Resources.TitleCheckVersionPeriodically}" IsChecked="{Binding Path=CheckVersionPeriodically}"/>
+		<CheckBox Grid.Row="3" Content="{x:Static properties:Resources.TitleCheckVersionPeriodically}" IsChecked="{Binding Path=CheckVersionPeriodically}"/>
 
 		<Grid Grid.Row="4">
 			<Grid.Resources>
@@ -61,19 +62,19 @@
 					<Setter Property="HorizontalAlignment" Value="Center"/>
 				</Style>
 			</Grid.Resources>
-			<TextBlock Name="latestVersion" Text="{x:Static lc:Resources.MessageVersionLatest}" Visibility="Hidden"/>
+			<TextBlock Name="latestVersion" Text="{x:Static properties:Resources.MessageVersionLatest}" Visibility="Hidden"/>
 			<StackPanel Name="outdatedVersion" Orientation="Vertical" Visibility="Hidden">
-				<TextBlock Text="{x:Static lc:Resources.MessageVersionOutdated}"/>
+				<TextBlock Text="{x:Static properties:Resources.MessageVersionOutdated}"/>
 				<TextBlock>
 					<Hyperlink Foreground="{StaticResource dialogTextColor}"
-						NavigateUri="{Binding Source={x:Static lc:Resources.WebSiteDownloadUri}, Mode=OneTime}"
+						NavigateUri="{Binding Source={x:Static properties:Resources.WebSiteDownloadUri}, Mode=OneTime}"
 					>http://www.LogicCircuit.org/Download.html</Hyperlink>
 				</TextBlock>
 			</StackPanel>
-			<TextBlock Name="previewVersion" Text="{x:Static lc:Resources.MessageVersionPreview}" Visibility="Hidden"/>
-			<Button Name="checkVersion" Content="{Binding Source={x:Static lc:Resources.TitleCheckVersion}, Mode=OneTime}" Click="CheckVersionButtonClick" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+			<TextBlock Name="previewVersion" Text="{x:Static properties:Resources.MessageVersionPreview}" Visibility="Hidden"/>
+			<Button Name="checkVersion" Content="{Binding Source={x:Static properties:Resources.TitleCheckVersion}, Mode=OneTime}" Click="CheckVersionButtonClick" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 		</Grid>
 
-		<Button Grid.Row="5" Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" IsCancel="True" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+		<Button Grid.Row="5" Content="{Binding Source={x:Static properties:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" IsCancel="True" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
 	</Grid>
 </Window>

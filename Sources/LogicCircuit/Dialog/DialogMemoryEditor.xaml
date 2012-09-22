@@ -2,6 +2,7 @@
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:lc="clr-namespace:LogicCircuit"
+	xmlns:properties="clr-namespace:LogicCircuit.Properties"
 	WindowStartupLocation="CenterOwner"
 	Style="{DynamicResource DialogWindow}"
 	MinWidth="450" MinHeight="350"
@@ -55,32 +56,32 @@
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 
-		<Label Grid.Row="0" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleAddressBitWidth}, Mode=OneTime}" Target="{Binding ElementName=addressBitWidth}"/>
-		<ComboBox Grid.Row="0" Grid.Column="1" Name="addressBitWidth" SelectionChanged="MemorySizeChanged" ToolTip="{x:Static lc:Resources.ToolTipAddressBitWidth}" HorizontalAlignment="Left"/>
+		<Label Grid.Row="0" Grid.Column="0" Content="{Binding Source={x:Static properties:Resources.TitleAddressBitWidth}, Mode=OneTime}" Target="{Binding ElementName=addressBitWidth}"/>
+		<ComboBox Grid.Row="0" Grid.Column="1" Name="addressBitWidth" SelectionChanged="MemorySizeChanged" ToolTip="{x:Static properties:Resources.ToolTipAddressBitWidth}" HorizontalAlignment="Left"/>
 
-		<Label Grid.Row="1" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleDataBitWidth}, Mode=OneTime}" Target="{Binding ElementName=dataBitWidth}"/>
-		<ComboBox Grid.Row="1" Grid.Column="1" Name="dataBitWidth" SelectionChanged="MemorySizeChanged" ToolTip="{x:Static lc:Resources.ToolTipDataBitWidth}" HorizontalAlignment="Left"/>
+		<Label Grid.Row="1" Grid.Column="0" Content="{Binding Source={x:Static properties:Resources.TitleDataBitWidth}, Mode=OneTime}" Target="{Binding ElementName=dataBitWidth}"/>
+		<ComboBox Grid.Row="1" Grid.Column="1" Name="dataBitWidth" SelectionChanged="MemorySizeChanged" ToolTip="{x:Static properties:Resources.ToolTipDataBitWidth}" HorizontalAlignment="Left"/>
 
 		<StackPanel Grid.Row="2" Grid.Column="0" Style="{StaticResource ramOnly}">
-			<Label Content="{Binding Source={x:Static lc:Resources.TitleWriteOn}, Mode=OneTime}" Target="{Binding ElementName=writeOn}"/>
+			<Label Content="{Binding Source={x:Static properties:Resources.TitleWriteOn}, Mode=OneTime}" Target="{Binding ElementName=writeOn}"/>
 		</StackPanel>
 		<StackPanel Grid.Row="2" Grid.Column="1" Style="{StaticResource ramOnly}">
-			<ComboBox Name="writeOn" ToolTip="{x:Static lc:Resources.ToolTipRamWriteOn}"/>
+			<ComboBox Name="writeOn" ToolTip="{x:Static properties:Resources.ToolTipRamWriteOn}"/>
 		</StackPanel>
 
 		<StackPanel Grid.Row="3" Grid.Column="0" Style="{StaticResource ramOnly}">
-			<Label Content="{Binding Source={x:Static lc:Resources.TitleMemoryOnStart}, Mode=OneTime}" Target="{Binding ElementName=onStart}"/>
+			<Label Content="{Binding Source={x:Static properties:Resources.TitleMemoryOnStart}, Mode=OneTime}" Target="{Binding ElementName=onStart}"/>
 		</StackPanel>
 		<StackPanel Grid.Row="3" Grid.Column="1" Style="{StaticResource ramOnly}">
 			<ComboBox Grid.Row="3" Grid.Column="1" Name="onStart" DisplayMemberPath="Text"
-				Width="{Binding ElementName=onStartList, Path=ActualWidth}" ToolTip="{x:Static lc:Resources.ToolTipMemoryOnStart}"
+				Width="{Binding ElementName=onStartList, Path=ActualWidth}" ToolTip="{x:Static properties:Resources.ToolTipMemoryOnStart}"
 			/>
 		</StackPanel>
 		<ListBox Grid.Row="3" Grid.Column="1" Name="onStartList" Visibility="Hidden" HorizontalAlignment="Left" Padding="10,0" Style="{StaticResource ramOnly}"
 			Height="0" ItemsSource="{Binding ElementName=onStart, Path=ItemsSource}" DisplayMemberPath="Text"
 		/>
 
-		<GroupBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Header="{Binding Source={x:Static lc:Resources.TitleData}, Mode=OneTime}" Margin="3,3,3,0">
+		<GroupBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Header="{Binding Source={x:Static properties:Resources.TitleData}, Mode=OneTime}" Margin="3,3,3,0">
 			<GroupBox.Resources>
 				<Style x:Key="memoryCell" TargetType="TextBlock">
 					<Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -224,20 +225,20 @@
 
 		<GridSplitter Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="3" Background="Transparent"/>
 
-		<GroupBox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Margin="3,0,3,3" Header="{Binding Source={x:Static lc:Resources.CaptionNote}, Mode=OneTime}">
+		<GroupBox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Margin="3,0,3,3" Header="{Binding Source={x:Static properties:Resources.CaptionNote}, Mode=OneTime}">
 			<TextBox Name="note" Margin="0" BorderThickness="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
 				AcceptsReturn="True" AcceptsTab="True" SpellCheck.IsEnabled="True"
 			/>
 		</GroupBox>
 
 		<StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" VerticalAlignment="Bottom" Style="{StaticResource dataAllowed}">
-			<Button Content="{x:Static lc:Resources.TitleLoad}" Click="ButtonLoadClick" ToolTip="{x:Static lc:Resources.ToolTipLoadData}"/>
-			<Button Content="{x:Static lc:Resources.TitleSaveAs}" Click="ButtonSaveClick" ToolTip="{x:Static lc:Resources.ToolTipSaveData}"/>
+			<Button Content="{x:Static properties:Resources.TitleLoad}" Click="ButtonLoadClick" ToolTip="{x:Static properties:Resources.ToolTipLoadData}"/>
+			<Button Content="{x:Static properties:Resources.TitleSaveAs}" Click="ButtonSaveClick" ToolTip="{x:Static properties:Resources.ToolTipSaveData}"/>
 		</StackPanel>
 
 		<StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-			<Button Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="ButtonOkClick"/>
-			<Button Content="{Binding Source={x:Static lc:Resources.TitleCancel}, Mode=OneTime}" IsCancel="True"/>
+			<Button Content="{Binding Source={x:Static properties:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="ButtonOkClick"/>
+			<Button Content="{Binding Source={x:Static properties:Resources.TitleCancel}, Mode=OneTime}" IsCancel="True"/>
 		</StackPanel>
 	</Grid>
 </Window>

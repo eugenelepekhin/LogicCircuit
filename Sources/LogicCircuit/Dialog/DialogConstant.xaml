@@ -2,8 +2,9 @@
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:lc="clr-namespace:LogicCircuit"
+	xmlns:properties="clr-namespace:LogicCircuit.Properties"
 	WindowStartupLocation="CenterOwner"
-	Title="{Binding Source={x:Static lc:Resources.NameConstant}, Mode=OneTime}"
+	Title="{Binding Source={x:Static properties:Resources.NameConstant}, Mode=OneTime}"
 	Style="{DynamicResource DialogWindow}"
 	FocusManager.FocusedElement="{Binding ElementName=value}"
 >
@@ -37,24 +38,24 @@
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 
-		<Label Grid.Row="0" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleBitWidth}, Mode=OneTime}"
+		<Label Grid.Row="0" Grid.Column="0" Content="{Binding Source={x:Static properties:Resources.TitleBitWidth}, Mode=OneTime}"
 			Target="{Binding ElementName=bitWidth}"
 		/>
-		<ComboBox Grid.Row="0" Grid.Column="1" Name="bitWidth" ToolTip="{x:Static lc:Resources.ToolTipConstantBitWidth}"/>
+		<ComboBox Grid.Row="0" Grid.Column="1" Name="bitWidth" ToolTip="{x:Static properties:Resources.ToolTipConstantBitWidth}"/>
 
-		<Label Grid.Row="1" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleValue}, Mode=OneTime}"
+		<Label Grid.Row="1" Grid.Column="0" Content="{Binding Source={x:Static properties:Resources.TitleValue}, Mode=OneTime}"
 			Target="{Binding ElementName=value}"
 		/>
-		<TextBox Grid.Row="1" Grid.Column="1" Name="value" ToolTip="{x:Static lc:Resources.ToolTipConstantValue}"/>
+		<TextBox Grid.Row="1" Grid.Column="1" Name="value" ToolTip="{x:Static properties:Resources.ToolTipConstantValue}"/>
 
-		<Label Grid.Row="2" Grid.Column="0" Content="{Binding Source={x:Static lc:Resources.TitleDescription}, Mode=OneTime}" Target="{Binding ElementName=note}"/>
+		<Label Grid.Row="2" Grid.Column="0" Content="{Binding Source={x:Static properties:Resources.TitleDescription}, Mode=OneTime}" Target="{Binding ElementName=note}"/>
 		<TextBox Grid.Row="2" Grid.Column="1" Name="note" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
 			AcceptsReturn="True" AcceptsTab="True" SpellCheck.IsEnabled="True"
 		/>
 
 		<StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-			<Button Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="ButtonOkClick"/>
-			<Button Content="{Binding Source={x:Static lc:Resources.TitleCancel}, Mode=OneTime}" IsCancel="True"/>
+			<Button Content="{Binding Source={x:Static properties:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="ButtonOkClick"/>
+			<Button Content="{Binding Source={x:Static properties:Resources.TitleCancel}, Mode=OneTime}" IsCancel="True"/>
 		</StackPanel>
 	</Grid>
 </Window>

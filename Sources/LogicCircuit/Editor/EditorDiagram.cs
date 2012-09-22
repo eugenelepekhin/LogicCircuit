@@ -524,7 +524,7 @@ namespace LogicCircuit {
 		}
 
 		private void StartMove(Marker marker, Point startPoint) {
-			this.StartMove(marker, startPoint, Resources.TipOnStartMove);
+			this.StartMove(marker, startPoint, Properties.Resources.TipOnStartMove);
 		}
 
 		private void MoveSelection(Point point) {
@@ -548,14 +548,14 @@ namespace LogicCircuit {
 			this.CancelMove();
 			WirePledge wirePledge = new WirePledge(point);
 			this.AddMarkerGlyph(wirePledge);
-			this.StartMove(wirePledge, point, Resources.TipOnStartWire);
+			this.StartMove(wirePledge, point, Properties.Resources.TipOnStartWire);
 		}
 
 		private void StartAreaSelection(Point point) {
 			this.CancelMove();
 			AreaMarker marker = new AreaMarker(point);
 			this.AddMarkerGlyph(marker);
-			this.StartMove(marker, point, Resources.TipOnAwaitingArea(this.Project.LogicalCircuit.Name, Symbol.GridPoint(point)));
+			this.StartMove(marker, point, Properties.Resources.TipOnAwaitingArea(this.Project.LogicalCircuit.Name, Symbol.GridPoint(point)));
 		}
 
 		private void FinishMove(Point position, bool withWires) {
@@ -904,7 +904,7 @@ namespace LogicCircuit {
 							this.ClearSelection();
 							this.StartMove(this.SelectSymbol(wire), e.GetPosition(this.Diagram));
 						}
-						this.Mainframe.Status = Resources.TipOnWireSelect;
+						this.Mainframe.Status = Properties.Resources.TipOnWireSelect;
 						return;
 					}
 

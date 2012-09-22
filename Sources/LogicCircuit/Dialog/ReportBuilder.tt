@@ -1,17 +1,17 @@
 ﻿<#@ template language="C#" debug="True" inherits="T4Transformation" #>
 <#@ import namespace="System.Linq" #>
 <FlowDocument xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<Paragraph FontSize="20" FontWeight="Bold"><#=Resources.CommandCircuitProject#> "<#=this.Project.Name#>"</Paragraph>
-	<Paragraph><Bold><#=Resources.TitleProjectDescription#></Bold> <#=this.Project.Description#></Paragraph>
-	<Paragraph><Bold><#=Resources.TitleSummary#></Bold>
-		<#=Resources.ProjectSummary(
+	<Paragraph FontSize="20" FontWeight="Bold"><#=Properties.Resources.CommandCircuitProject#> "<#=this.Project.Name#>"</Paragraph>
+	<Paragraph><Bold><#=Properties.Resources.TitleProjectDescription#></Bold> <#=this.Project.Description#></Paragraph>
+	<Paragraph><Bold><#=Properties.Resources.TitleSummary#></Bold>
+		<#=Properties.Resources.ProjectSummary(
 			this.Project.CircuitProject.LogicalCircuitSet.Count(),
 			this.CategoryCount,
 			this.Project.CircuitProject.CircuitSymbolSet.Count(),
 			this.Project.CircuitProject.WireSet.Count()
 		)#>
 	</Paragraph>
-	<Paragraph FontSize="20" FontWeight="Bold"><#=Resources.ReportFunctions(this.Root.Name)#></Paragraph>
+	<Paragraph FontSize="20" FontWeight="Bold"><#=Properties.Resources.ReportFunctions(this.Root.Name)#></Paragraph>
 <#if(this.BuildMapException == null) {#>
 	<Table CellSpacing="5">
 		<Table.Columns>
@@ -20,8 +20,8 @@
 		</Table.Columns>
 		<TableRowGroup>
 			<TableRow Background="Gray">
-				<TableCell><Paragraph FontSize="15" FontWeight="Bold"><#=Resources.TitleFunction#></Paragraph></TableCell>
-				<TableCell><Paragraph FontSize="15" FontWeight="Bold"><#=Resources.TitleCount#></Paragraph></TableCell>
+				<TableCell><Paragraph FontSize="15" FontWeight="Bold"><#=Properties.Resources.TitleFunction#></Paragraph></TableCell>
+				<TableCell><Paragraph FontSize="15" FontWeight="Bold"><#=Properties.Resources.TitleCount#></Paragraph></TableCell>
 			</TableRow>
 <#	for(int i = 0; i < this.Functions.Count; i++) {#>
 			<TableRow Background="<#=((i & 1) == 0) ? "White" : "WhiteSmoke"#>">
@@ -30,14 +30,14 @@
 			</TableRow>
 <#	}#>
 			<TableRow Background="Gray">
-				<TableCell><Paragraph FontWeight="Bold"><#=Resources.TitleTotal#></Paragraph></TableCell>
+				<TableCell><Paragraph FontWeight="Bold"><#=Properties.Resources.TitleTotal#></Paragraph></TableCell>
 				<TableCell><Paragraph><#=this.Usage.Values.Sum()#></Paragraph></TableCell>
 			</TableRow>
 		</TableRowGroup>
 	</Table>
 <#} else {#>
-	<Paragraph FontSize="20" FontWeight="Bold"><#=Resources.ReportError(this.BuildMapException.Message)#></Paragraph>
-	<Paragraph FontSize="8" FontWeight="Bold"><#=Resources.TitleReportErrorDetails#></Paragraph>
+	<Paragraph FontSize="20" FontWeight="Bold"><#=Properties.Resources.ReportError(this.BuildMapException.Message)#></Paragraph>
+	<Paragraph FontSize="8" FontWeight="Bold"><#=Properties.Resources.TitleReportErrorDetails#></Paragraph>
 	<Paragraph FontSize="8"><#=this.BuildMapException.ToString()#></Paragraph>
 <#}#>
 </FlowDocument>

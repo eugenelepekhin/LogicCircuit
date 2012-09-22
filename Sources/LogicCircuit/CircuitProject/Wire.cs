@@ -46,7 +46,7 @@ namespace LogicCircuit {
 			Line line = new Line();
 			line.Stroke = Symbol.WireStroke;
 			line.StrokeThickness = 1;
-			line.ToolTip = Resources.ToolTipWire;
+			line.ToolTip = Properties.Resources.ToolTipWire;
 			line.DataContext = this;
 			Panel.SetZIndex(line, this.Z);
 			return line;

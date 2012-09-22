@@ -27,19 +27,19 @@ namespace LogicCircuit {
 		}
 
 		public override string Name {
-			get { return Resources.NameConstant; }
+			get { return Properties.Resources.NameConstant; }
 			set { throw new NotSupportedException(); }
 		}
 
 		public override string Notation {
-			get { return Resources.ConstantNotation(this.ConstantValue); }
+			get { return Properties.Resources.ConstantNotation(this.ConstantValue); }
 			set { throw new InvalidOperationException(); }
 		}
 
-		public override string ToolTip { get { return Circuit.BuildToolTip(Resources.ToolTipConstant(this.BitWidth, this.ConstantValue), this.Note); } }
+		public override string ToolTip { get { return Circuit.BuildToolTip(Properties.Resources.ToolTipConstant(this.BitWidth, this.ConstantValue), this.Note); } }
 
 		public override string Category {
-			get { return Resources.CategoryInputOutput; }
+			get { return Properties.Resources.CategoryInputOutput; }
 			set { throw new InvalidOperationException(); }
 		}
 

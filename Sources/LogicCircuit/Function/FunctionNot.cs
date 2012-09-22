@@ -10,6 +10,6 @@ namespace LogicCircuit {
 			return this.SetResult(this.Not());
 		}
 
-		public override string ReportName { get { return Resources.GateNotName; } }
+		public override string ReportName { get { return Properties.Resources.GateNotName; } }
 	}
 }

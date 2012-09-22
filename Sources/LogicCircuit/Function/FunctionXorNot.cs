@@ -10,6 +10,6 @@ namespace LogicCircuit {
 			return this.SetResult(CircuitFunction.FromBool((this.Count(State.On1) & 1) != 1));
 		}
 
-		public override string ReportName { get { return Resources.ReportGateName(Resources.GateXorNotName, this.ParameterCount); } }
+		public override string ReportName { get { return Properties.Resources.ReportGateName(Properties.Resources.GateXorNotName, this.ParameterCount); } }
 	}
 }

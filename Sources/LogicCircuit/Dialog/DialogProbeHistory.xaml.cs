@@ -35,7 +35,7 @@ namespace LogicCircuit {
 			Array.Reverse(this.reads);
 			foreach(long pack in this.reads) {
 				if(pack == -1L) {
-					list.Add(LogicCircuit.Resources.ProbeHistoryMark);
+					list.Add(Properties.Resources.ProbeHistoryMark);
 				} else {
 					list.Add(this.Hex(pack, width));
 				}
@@ -59,7 +59,7 @@ namespace LogicCircuit {
 					break;
 				}
 			}
-			return LogicCircuit.Resources.ProbeHistoryHex(value);
+			return Properties.Resources.ProbeHistoryHex(value);
 		}
 
 		private string Bin(long pack, int width) {

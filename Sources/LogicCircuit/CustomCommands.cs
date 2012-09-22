@@ -9,7 +9,7 @@ namespace LogicCircuit {
 
 		private static RoutedUICommand Create(string name, params InputGesture[] gestures) {
 			return new RoutedUICommand(
-				Resources.ResourceManager.GetString(name, Resources.Culture),
+				Properties.Resources.ResourceManager.GetString(name, Properties.Resources.Culture),
 				name,
 				typeof(CustomCommands),
 				new InputGestureCollection(gestures)

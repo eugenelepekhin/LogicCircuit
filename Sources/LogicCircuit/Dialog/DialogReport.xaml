@@ -2,8 +2,9 @@
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:lc="clr-namespace:LogicCircuit"
+	xmlns:properties="clr-namespace:LogicCircuit.Properties"
 	WindowStartupLocation="CenterOwner"
-	Title="{Binding Source={x:Static lc:Resources.CommandToolsReport}, Mode=OneTime}"
+	Title="{Binding Source={x:Static properties:Resources.CommandToolsReport}, Mode=OneTime}"
 	Style="{DynamicResource DialogWindow}"
 >
 	<Grid>

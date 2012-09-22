@@ -46,7 +46,7 @@ namespace LogicCircuit {
 				this.TextNote = textNote;
 				this.MarkerGlyph = new Canvas();
 				this.MarkerGlyph.DataContext = this;
-				this.MarkerGlyph.ToolTip = Resources.TextNotation;
+				this.MarkerGlyph.ToolTip = Properties.Resources.TextNotation;
 				Panel.SetZIndex(this.rectangle, 0);
 				this.MarkerGlyph.Children.Add(this.rectangle);
 				this.resizeMarker = new ResizeMarker[] {

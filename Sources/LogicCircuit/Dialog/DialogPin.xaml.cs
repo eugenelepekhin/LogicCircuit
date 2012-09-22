@@ -20,13 +20,13 @@ namespace LogicCircuit {
 			this.InitializeComponent();
 			switch(this.pin.PinType) {
 			case PinType.None:
-				this.type.Text = LogicCircuit.Resources.PinTypeNameNone;
+				this.type.Text = Properties.Resources.PinTypeNameNone;
 				break;
 			case PinType.Input:
-				this.type.Text = LogicCircuit.Resources.PinTypeNameInput;
+				this.type.Text = Properties.Resources.PinTypeNameInput;
 				break;
 			case PinType.Output:
-				this.type.Text = LogicCircuit.Resources.PinTypeNameOutput;
+				this.type.Text = Properties.Resources.PinTypeNameOutput;
 				break;
 			default:
 				Tracer.Fail("Unknown pin type");

@@ -2,8 +2,9 @@
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:lc="clr-namespace:LogicCircuit"
+	xmlns:properties="clr-namespace:LogicCircuit.Properties"
 	WindowStartupLocation="CenterOwner"
-	Title="{x:Static lc:Resources.CommandTruthTable}"
+	Title="{x:Static properties:Resources.CommandTruthTable}"
 	Style="{StaticResource DialogWindow}"
 	MinWidth="480" MinHeight="320"
 	FocusManager.FocusedElement="{Binding ElementName=dataGrid}"
@@ -29,15 +30,15 @@
 			</Grid.ColumnDefinitions>
 
 			<Label Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=filter}" VerticalAlignment="Center"
-				Content="{x:Static lc:Resources.TitleFilter}"
+				Content="{x:Static properties:Resources.TitleFilter}"
 			/>
 			<TextBox Grid.Row="0" Grid.Column="1" Name="filter" VerticalAlignment="Center"/>
 			<CheckBox Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"
-				Content="{x:Static lc:Resources.TitleInvert}"
+				Content="{x:Static properties:Resources.TitleInvert}"
 				IsChecked="{Binding Path=InvertFilter}"
 			/>
 			<Button Grid.Row="0" Grid.Column="3" Name="buttonApply" Click="ButtonApplyClick" VerticalAlignment="Center"
-				Content="{x:Static lc:Resources.TitleApply}"
+				Content="{x:Static properties:Resources.TitleApply}"
 				IsDefault="{Binding ElementName=filter, Path=IsFocused}"
 			/>
 
@@ -59,16 +60,16 @@
 					</Style>
 				</WrapPanel.Resources>
 			
-				<TextBlock Text="{Binding Path=TotalRows, StringFormat={x:Static lc:Resources.TitleTotalRows}}"/>
-				<TextBlock Text="{Binding Path=TruthTable.Count, StringFormat={x:Static lc:Resources.TitleDisplayedRows}}"/>
+				<TextBlock Text="{Binding Path=TotalRows, StringFormat={x:Static properties:Resources.TitleTotalRows}}"/>
+				<TextBlock Text="{Binding Path=TruthTable.Count, StringFormat={x:Static properties:Resources.TitleDisplayedRows}}"/>
 
 				<TextBlock Visibility="{Binding Path=Truncated, Converter={StaticResource BooleanToVisibilityConverter}}" TextWrapping="Wrap" Foreground="Red"
-					Text="{x:Static lc:Resources.MessageTruthTableTooBig}"
+					Text="{x:Static properties:Resources.MessageTruthTableTooBig}"
 				/>
 			</WrapPanel>
 
 			<Button Grid.Row="2" Grid.Column="3" Name="buttonOk" VerticalAlignment="Bottom"
-				Content="{x:Static lc:Resources.TitleOK}"
+				Content="{x:Static properties:Resources.TitleOK}"
 				IsDefault="{Binding ElementName=filter, Path=IsFocused, Converter={StaticResource InverseBooleanConverter}}" IsCancel="True"
 			/>
 		</Grid>
@@ -104,7 +105,7 @@
 			
 			<StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
 				<ProgressBar Minimum="0" Maximum="100" Value="{Binding Path=Progress}" Width="200" Height="15" HorizontalAlignment="Center"/>
-				<Button Content="{x:Static lc:Resources.TitleStop}" Click="ButtonStopClick" HorizontalAlignment="Center"/>
+				<Button Content="{x:Static properties:Resources.TitleStop}" Click="ButtonStopClick" HorizontalAlignment="Center"/>
 			</StackPanel>
 		</Grid>
 	</Grid>

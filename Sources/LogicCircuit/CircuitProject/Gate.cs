@@ -173,44 +173,44 @@ namespace LogicCircuit {
 			gate.InvertedOutput = invertedOutput;
 			switch(gate.GateType) {
 			case GateType.Clock:
-				gate.Name = Resources.GateClockName;
-				gate.Notation = Resources.GateClockNotation;
-				gate.Category = Resources.CategoryInputOutput;
+				gate.Name = Properties.Resources.GateClockName;
+				gate.Notation = Properties.Resources.GateClockNotation;
+				gate.Category = Properties.Resources.CategoryInputOutput;
 				break;
 			case GateType.Not:
-				gate.Name = Resources.GateNotName;
-				gate.Notation = Resources.GateNotNotation;
-				gate.Category = Resources.CategoryPrimitives;
+				gate.Name = Properties.Resources.GateNotName;
+				gate.Notation = Properties.Resources.GateNotNotation;
+				gate.Category = Properties.Resources.CategoryPrimitives;
 				break;
 			case GateType.Or:
-				gate.Name = invertedOutput ? Resources.GateOrNotName : Resources.GateOrName;
-				gate.Notation = Resources.GateOrNotation;
-				gate.Category = Resources.CategoryPrimitives;
+				gate.Name = invertedOutput ? Properties.Resources.GateOrNotName : Properties.Resources.GateOrName;
+				gate.Notation = Properties.Resources.GateOrNotation;
+				gate.Category = Properties.Resources.CategoryPrimitives;
 				break;
 			case GateType.And:
-				gate.Name = invertedOutput ? Resources.GateAndNotName : Resources.GateAndName;
-				gate.Notation = Resources.GateAndNotation;
-				gate.Category = Resources.CategoryPrimitives;
+				gate.Name = invertedOutput ? Properties.Resources.GateAndNotName : Properties.Resources.GateAndName;
+				gate.Notation = Properties.Resources.GateAndNotation;
+				gate.Category = Properties.Resources.CategoryPrimitives;
 				break;
 			case GateType.Xor:
-				gate.Name = invertedOutput ? Resources.GateXorNotName : Resources.GateXorName;
-				gate.Notation = Resources.GateXorNotation;
-				gate.Category = Resources.CategoryPrimitives;
+				gate.Name = invertedOutput ? Properties.Resources.GateXorNotName : Properties.Resources.GateXorName;
+				gate.Notation = Properties.Resources.GateXorNotation;
+				gate.Category = Properties.Resources.CategoryPrimitives;
 				break;
 			case GateType.Led:
-				gate.Name = Resources.GateLedName;
-				gate.Notation = Resources.GateLedNotation;
-				gate.Category = Resources.CategoryInputOutput;
+				gate.Name = Properties.Resources.GateLedName;
+				gate.Notation = Properties.Resources.GateLedNotation;
+				gate.Category = Properties.Resources.CategoryInputOutput;
 				break;
 			case GateType.Probe:
-				gate.Name = Resources.GateProbeName;
-				gate.Notation = Resources.GateProbeNotation;
-				gate.Category = Resources.CategoryInputOutput;
+				gate.Name = Properties.Resources.GateProbeName;
+				gate.Notation = Properties.Resources.GateProbeNotation;
+				gate.Category = Properties.Resources.CategoryInputOutput;
 				break;
 			case GateType.TriState:
-				gate.Name = Resources.GateTriStateName;
-				gate.Notation = Resources.GateTriStateNotation;
-				gate.Category = Resources.CategoryPrimitives;
+				gate.Name = Properties.Resources.GateTriStateName;
+				gate.Notation = Properties.Resources.GateTriStateNotation;
+				gate.Category = Properties.Resources.CategoryPrimitives;
 				break;
 			case GateType.Odd:
 			case GateType.Even:
@@ -231,12 +231,12 @@ namespace LogicCircuit {
 		private void GeneratePins(Gate gate, int inputCount, bool invertedOutput) {
 			for(int i = 0; i < inputCount; i++) {
 				DevicePin pin = this.CircuitProject.DevicePinSet.Create(gate, PinType.Input, 1);
-				pin.Name = Resources.PinName(Resources.PinInName, i + 1);
+				pin.Name = Properties.Resources.PinName(Properties.Resources.PinInName, i + 1);
 			}
 			if(GateSet.HasOutput(gate.GateType)) {
 				DevicePin pin = this.CircuitProject.DevicePinSet.Create(gate, PinType.Output, 1);
 				pin.Inverted = invertedOutput;
-				pin.Name = Resources.PinOutName;
+				pin.Name = Properties.Resources.PinOutName;
 			}
 		}
 
@@ -245,29 +245,29 @@ namespace LogicCircuit {
 			int name = 1;
 			for(int i = 0; i < 4; i++) {
 				DevicePin pin = this.CircuitProject.DevicePinSet.Create(gate, PinType.Input, 1);
-				pin.Name = Resources.ResourceManager.GetString(prefix + name);
+				pin.Name = Properties.Resources.ResourceManager.GetString(prefix + name);
 				name++;
 			}
 			for(int i = 0; i < 3; i++) {
 				DevicePin pin = this.CircuitProject.DevicePinSet.Create(gate, PinType.Input, 1);
-				pin.Name = Resources.ResourceManager.GetString(prefix + name);
+				pin.Name = Properties.Resources.ResourceManager.GetString(prefix + name);
 				pin.PinSide = PinSide.Right;
 				name++;
 			}
 			DevicePin pinDot = this.CircuitProject.DevicePinSet.Create(gate, PinType.Input, 1);
-			pinDot.Name = Resources.ResourceManager.GetString(prefix + name);
+			pinDot.Name = Properties.Resources.ResourceManager.GetString(prefix + name);
 			pinDot.PinSide = PinSide.Right;
 		}
 
 		private void GenerateTriStatePins(Gate gate) {
 			DevicePin pinX = this.CircuitProject.DevicePinSet.Create(gate, PinType.Input, 1);
-			pinX.Name = Resources.PinInName;
+			pinX.Name = Properties.Resources.PinInName;
 			DevicePin pinE = this.CircuitProject.DevicePinSet.Create(gate, PinType.Input, 1);
-			pinE.Name = Resources.PinEnableName;
+			pinE.Name = Properties.Resources.PinEnableName;
 			pinE.PinSide = PinSide.Bottom;
 			DevicePin pin = this.CircuitProject.DevicePinSet.Create(gate, PinType.Output, 1);
 			pin.Inverted = false;
-			pin.Name = Resources.PinOutName;
+			pin.Name = Properties.Resources.PinOutName;
 		}
 	}
 }

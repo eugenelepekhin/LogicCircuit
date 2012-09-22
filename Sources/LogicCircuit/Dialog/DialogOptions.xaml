@@ -2,8 +2,9 @@
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:lc="clr-namespace:LogicCircuit"
+	xmlns:properties="clr-namespace:LogicCircuit.Properties"
 	WindowStartupLocation="CenterOwner"
-	Title="{Binding Source={x:Static lc:Resources.TitleOptions}, Mode=OneTime}"
+	Title="{Binding Source={x:Static properties:Resources.TitleOptions}, Mode=OneTime}"
 	Style="{DynamicResource DialogFixedWindow}"
 >
 	<Window.Resources>
@@ -24,29 +25,29 @@
 
 		<StackPanel Grid.Row="0" Margin="8,0,8,0">
 			<GroupBox HorizontalAlignment="Stretch" VerticalAlignment="Top"
-				Header="{Binding Source={x:Static lc:Resources.TitleFileOptions}, Mode=OneTime}"
+				Header="{Binding Source={x:Static properties:Resources.TitleFileOptions}, Mode=OneTime}"
 			>
 				<StackPanel>
 					<CheckBox Name="loadLastFile" IsThreeState="False"
-						Content="{Binding Source={x:Static lc:Resources.TitleLoadLastFile}, Mode=OneTime}"
+						Content="{Binding Source={x:Static properties:Resources.TitleLoadLastFile}, Mode=OneTime}"
 					/>
 					<StackPanel Orientation="Horizontal">
-						<Label Content="{Binding Source={x:Static lc:Resources.TitleMaxRecentFiles}, Mode=OneTime}" Target="{Binding ElementName=maxRecentFiles}"/>
+						<Label Content="{Binding Source={x:Static properties:Resources.TitleMaxRecentFiles}, Mode=OneTime}" Target="{Binding ElementName=maxRecentFiles}"/>
 						<ComboBox Name="maxRecentFiles" ItemsSource="{Binding RecentFileRange}" MinWidth="50"/>
 					</StackPanel>
 				</StackPanel>
 			</GroupBox>
 
 			<GroupBox HorizontalAlignment="Stretch" VerticalAlignment="Top"
-				Header="{Binding Source={x:Static lc:Resources.TitleDisplayOptions}, Mode=OneTime}"
+				Header="{Binding Source={x:Static properties:Resources.TitleDisplayOptions}, Mode=OneTime}"
 			>
 				<StackPanel>
 					<CheckBox Name="showGrid" IsThreeState="False"
-						Content="{Binding Source={x:Static lc:Resources.TitleShowGrid}, Mode=OneTime}"
+						Content="{Binding Source={x:Static properties:Resources.TitleShowGrid}, Mode=OneTime}"
 					/>
 					<StackPanel Orientation="Horizontal">
 						<Label Target="{Binding ElementName=gateShape}"
-							Content="{Binding Source={x:Static lc:Resources.TitleGateShape}, Mode=OneTime}"
+							Content="{Binding Source={x:Static properties:Resources.TitleGateShape}, Mode=OneTime}"
 						/>
 						<ComboBox Name="gateShape" ItemsSource="{Binding Path=GateShapeList}" IsEditable="False" MinWidth="115"/>
 					</StackPanel>
@@ -55,8 +56,8 @@
 		</StackPanel>
 
 		<StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-			<Button Content="{Binding Source={x:Static lc:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="OkButtonClick"/>
-			<Button Content="{Binding Source={x:Static lc:Resources.TitleCancel}, Mode=OneTime}" IsCancel="True"/>
+			<Button Content="{Binding Source={x:Static properties:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="OkButtonClick"/>
+			<Button Content="{Binding Source={x:Static properties:Resources.TitleCancel}, Mode=OneTime}" IsCancel="True"/>
 		</StackPanel>
 	</Grid>
 </Window>

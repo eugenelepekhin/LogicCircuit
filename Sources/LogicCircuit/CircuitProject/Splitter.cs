@@ -14,7 +14,7 @@ namespace LogicCircuit {
 		public override bool IsSmallSymbol { get { return true; } }
 
 		public override string Name {
-			get { return Resources.NameSplitter; }
+			get { return Properties.Resources.NameSplitter; }
 			set { throw new NotSupportedException(); }
 		}
 
@@ -24,11 +24,11 @@ namespace LogicCircuit {
 		}
 
 		public override string ToolTip {
-			get { return Resources.ToolTipSplitter(this.BitWidth, this.PinCount); }
+			get { return Properties.Resources.ToolTipSplitter(this.BitWidth, this.PinCount); }
 		}
 
 		public override string Category {
-			get { return Resources.CategoryInputOutput; }
+			get { return Properties.Resources.CategoryInputOutput; }
 			set { throw new InvalidOperationException(); }
 		}
 
@@ -62,7 +62,7 @@ namespace LogicCircuit {
 				splitter.BitWidth = splitter.PinCount;
 			}
 			DevicePin pin = this.CircuitProject.DevicePinSet.Create(splitter, PinType.None, splitter.BitWidth);
-			pin.Name = Resources.SplitterWidePinName;
+			pin.Name = Properties.Resources.SplitterWidePinName;
 			PinSide pinSide;
 			if(splitter.Clockwise) {
 				pinSide = PinSide.Right;
@@ -87,9 +87,9 @@ namespace LogicCircuit {
 
 		private static void SetName(DevicePin pin, int firstBit, int pinWidth) {
 			if(pinWidth == 1) {
-				pin.Name = Resources.SplitterThin1PinName(firstBit);
+				pin.Name = Properties.Resources.SplitterThin1PinName(firstBit);
 			} else {
-				pin.Name = Resources.SplitterThin2PinName(firstBit, firstBit + pinWidth - 1);
+				pin.Name = Properties.Resources.SplitterThin2PinName(firstBit, firstBit + pinWidth - 1);
 			}
 		}
 

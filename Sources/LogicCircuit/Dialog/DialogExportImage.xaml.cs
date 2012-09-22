@@ -147,7 +147,7 @@ namespace LogicCircuit {
 				SaveFileDialog dialog = new SaveFileDialog();
 				dialog.InitialDirectory = Path.GetDirectoryName(file);
 				dialog.FileName = Path.GetFileName(file);
-				dialog.Filter = LogicCircuit.Resources.ImageFileFilter;
+				dialog.Filter = Properties.Resources.ImageFileFilter;
 				dialog.DefaultExt = this.Encoder.Name;
 				bool? result = dialog.ShowDialog(this);
 				if(result.HasValue && result.Value) {
@@ -164,7 +164,7 @@ namespace LogicCircuit {
 				BindingExpression filePathBindingExpression = BindingOperations.GetBindingExpression(this.fileName, TextBox.TextProperty);
 				filePathBindingExpression.UpdateSource();
 				if(File.Exists(this.FilePath)) {
-					if(MessageBoxResult.No == DialogMessage.Show(this, this.Title, LogicCircuit.Resources.MessageImageFileExists(this.FilePath),
+					if(MessageBoxResult.No == DialogMessage.Show(this, this.Title, Properties.Resources.MessageImageFileExists(this.FilePath),
 						null, MessageBoxImage.Warning, MessageBoxButton.YesNo
 					)) {
 						return;
@@ -173,7 +173,7 @@ namespace LogicCircuit {
 				}
 				if(!Mainframe.IsFilePathValid(this.FilePath)) {
 					DialogMessage.Show(this, this.Title,
-						LogicCircuit.Resources.ImagePathInvalid, null, MessageBoxImage.Error, MessageBoxButton.OK
+						Properties.Resources.ImagePathInvalid, null, MessageBoxImage.Error, MessageBoxButton.OK
 					);
 					return;
 				}

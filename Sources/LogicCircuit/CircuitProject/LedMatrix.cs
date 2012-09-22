@@ -28,12 +28,12 @@ namespace LogicCircuit {
 		}
 
 		public override string Category {
-			get { return Resources.CategoryInputOutput; }
+			get { return Properties.Resources.CategoryInputOutput; }
 			set { throw new InvalidOperationException(); }
 		}
 
 		public override string Name {
-			get { return Resources.NameLedMatrix; }
+			get { return Properties.Resources.NameLedMatrix; }
 			set { throw new NotSupportedException(); }
 		}
 
@@ -42,7 +42,7 @@ namespace LogicCircuit {
 			set { throw new InvalidOperationException(); }
 		}
 
-		public override string ToolTip { get { return Circuit.BuildToolTip(Resources.ToolTipLedMatrix(this.Rows, this.Columns, this.Colors, 1 << this.Colors), this.Note); } }
+		public override string ToolTip { get { return Circuit.BuildToolTip(Properties.Resources.ToolTipLedMatrix(this.Rows, this.Columns, this.Colors, 1 << this.Colors), this.Note); } }
 
 		public override Circuit CopyTo(LogicalCircuit target) {
 			return target.CircuitProject.LedMatrixSet.Copy(this);
@@ -79,18 +79,18 @@ namespace LogicCircuit {
 				int bitWidth = columns * colors;
 				for(int i = 0; i < rows; i++) {
 					DevicePin pin = this.CircuitProject.DevicePinSet.Create(this, PinType.Input, bitWidth);
-					pin.Name = Resources.LedMatrixRowIndividual(i + 1);
+					pin.Name = Properties.Resources.LedMatrixRowIndividual(i + 1);
 				}
 			} else { //this.MatrixType == LedMatrixType.Selector
 				Tracer.Assert(this.MatrixType == LedMatrixType.Selector);
 				for(int i = 0; i < columns; i++) {
 					DevicePin pin = this.CircuitProject.DevicePinSet.Create(this, PinType.Input, colors);
-					pin.Name = Resources.LedMatrixColumnSelector(i + 1);
+					pin.Name = Properties.Resources.LedMatrixColumnSelector(i + 1);
 					pin.PinSide = PinSide.Top;
 				}
 				for(int i = 0; i < rows; i++) {
 					DevicePin pin = this.CircuitProject.DevicePinSet.Create(this, PinType.Input, 1);
-					pin.Name = Resources.LedMatrixRowSelector(i + 1);
+					pin.Name = Properties.Resources.LedMatrixRowSelector(i + 1);
 				}
 			}
 		}

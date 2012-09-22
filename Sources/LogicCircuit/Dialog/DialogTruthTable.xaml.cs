@@ -163,7 +163,7 @@ namespace LogicCircuit {
 					if(error != null) {
 						App.Mainframe.ReportException(error);
 					} else if(oscillation) {
-						App.Mainframe.ErrorMessage(LogicCircuit.Resources.Oscillation);
+						App.Mainframe.ErrorMessage(Properties.Resources.Oscillation);
 					}
 				});
 			}

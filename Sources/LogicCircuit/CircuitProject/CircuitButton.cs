@@ -14,14 +14,14 @@ namespace LogicCircuit {
 		public override bool IsSmallSymbol { get { return true; } }
 
 		public override string Name {
-			get { return Resources.NameButton; }
+			get { return Properties.Resources.NameButton; }
 			set { throw new NotSupportedException(); }
 		}
 
-		public override string ToolTip { get { return Circuit.BuildToolTip(Resources.ToolTipButton(this.Notation), this.Note); } }
+		public override string ToolTip { get { return Circuit.BuildToolTip(Properties.Resources.ToolTipButton(this.Notation), this.Note); } }
 
 		public override string Category {
-			get { return Resources.CategoryInputOutput; }
+			get { return Properties.Resources.CategoryInputOutput; }
 			set { throw new InvalidOperationException(); }
 		}
 

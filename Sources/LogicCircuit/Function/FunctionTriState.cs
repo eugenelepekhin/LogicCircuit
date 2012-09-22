@@ -13,6 +13,6 @@ namespace LogicCircuit {
 			return this.SetResult(this.ControlledState(State.On1));
 		}
 
-		public override string ReportName { get { return Resources.GateTriStateName; } }
+		public override string ReportName { get { return Properties.Resources.GateTriStateName; } }
 	}
 }

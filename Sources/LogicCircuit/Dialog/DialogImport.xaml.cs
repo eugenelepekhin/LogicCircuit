@@ -40,7 +40,7 @@ namespace LogicCircuit {
 					this.NotifyPropertyChanged("List");
 				} catch(SnapStoreException snapStoreException) {
 					Tracer.Report("DialogImport.Load", snapStoreException);
-					mainframe.ErrorMessage(LogicCircuit.Resources.ErrorFileCorrupted(file), snapStoreException);
+					mainframe.ErrorMessage(Properties.Resources.ErrorFileCorrupted(file), snapStoreException);
 					mainframe.Dispatcher.BeginInvoke(new Action(() => { this.Close(); }));
 				} catch(Exception exception) {
 					Tracer.Report("DialogImport.Load", exception);
