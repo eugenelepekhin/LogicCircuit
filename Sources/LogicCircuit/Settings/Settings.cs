@@ -40,6 +40,7 @@ namespace LogicCircuit {
 			}
 		}
 
+		[SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
 		protected void Load(string file) {
 			if(File.Exists(file)) {
 				XmlReader xmlReader = XmlHelper.CreateReader(new StreamReader(file));

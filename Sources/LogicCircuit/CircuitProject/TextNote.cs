@@ -145,6 +145,7 @@ namespace LogicCircuit {
 		}
 	}
 
+	[SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
 	public sealed partial class TextNoteSet {
 		public TextNote Create(LogicalCircuit logicalCircuit, GridPoint point, string note) {
 			return this.CreateItem(Guid.NewGuid(), logicalCircuit, point.X, point.Y,

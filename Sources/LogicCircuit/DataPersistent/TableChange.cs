@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace LogicCircuit.DataPersistent {
 	/// <summary>
@@ -32,6 +33,7 @@ namespace LogicCircuit.DataPersistent {
 		/// Gets new version of the data
 		/// </summary>
 		/// <param name="data"></param>
+		[SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "0#")]
 		public void GetNewData(out TRecord data) {
 			if(this.Action == SnapTableAction.Delete) {
 				throw new InvalidOperationException(Properties.Resources.ErrorWrongNewData);
@@ -43,6 +45,7 @@ namespace LogicCircuit.DataPersistent {
 		/// Gets old version of the data
 		/// </summary>
 		/// <param name="data"></param>
+		[SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "0#")]
 		public void GetOldData(out TRecord data) {
 			if(this.Action == SnapTableAction.Insert) {
 				throw new InvalidOperationException(Properties.Resources.ErrorWrongOldRow);

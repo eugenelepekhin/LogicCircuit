@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace LogicCircuit {
+	[SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 	public partial class Editor : EditorDiagram, INotifyPropertyChanged {
 
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -40,6 +42,7 @@ namespace LogicCircuit {
 			}
 		}
 
+		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
 		public bool Power {
 			get { return this.CircuitRunner != null; }
 			set {
@@ -93,6 +96,7 @@ namespace LogicCircuit {
 			this.Mainframe.NotifyPropertyChanged(this.PropertyChanged, this, propertyName);
 		}
 
+		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
 		public double Zoom {
 			get { return this.Project.Zoom; }
 			set {
@@ -106,6 +110,7 @@ namespace LogicCircuit {
 			}
 		}
 
+		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
 		public int Frequency {
 			get { return this.Project.Frequency; }
 			set {
@@ -119,6 +124,7 @@ namespace LogicCircuit {
 			}
 		}
 
+		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
 		public bool IsMaximumSpeed {
 			get { return this.Project.IsMaximumSpeed; }
 			set {

@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Diagnostics.CodeAnalysis;
 
 namespace LogicCircuit.DataPersistent {
+	[SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
 	public class SetToListAdapter<T> : IList<T>, IList, INotifyCollectionChanged where T:class {
 
 		private event NotifyCollectionChangedEventHandler collectionChanged;

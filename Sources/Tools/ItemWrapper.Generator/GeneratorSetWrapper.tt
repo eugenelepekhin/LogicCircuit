@@ -73,13 +73,13 @@
 			return null;
 		}
 
-		private void Delete(RowId rowId) {
 <#if(this.RealmType == RealmType.Multiverse) {#>
+		private void Delete(RowId rowId) {
 			if(this.itemByRowId.ContainsKey(rowId)) {
 				this.itemByRowId.Remove(rowId);
 			}
-<#}#>
 		}
+<#}#>
 
 		// gets items wrapper by RowId
 		private IEnumerable<<#=this.Table.Name#>> Select(IEnumerable<RowId> rows) {
@@ -493,7 +493,9 @@ foreach(Key key in this.Table.Keys) {
 					while(change.MoveNext()) {
 						RowId rowId = change.Current;
 						if(this.Table.IsDeleted(rowId)) {
+<#if(this.RealmType == RealmType.Multiverse) {#>
 							this.Delete(rowId);
+<#}#>
 						} else {
 							this.FindOrCreate(rowId);
 						}

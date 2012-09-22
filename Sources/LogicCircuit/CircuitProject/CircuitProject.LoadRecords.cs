@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using LogicCircuit.DataPersistent;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace LogicCircuit {
 	public interface IRecordLoader {
@@ -73,6 +74,7 @@ namespace LogicCircuit {
 	}
 
 	public partial class CircuitProject {
+		[SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		private void LoadRecords(XmlReader xmlReader) {
 			XmlNameTable nameTable = xmlReader.NameTable;
 			string ns = nameTable.Add(CircuitProject.PersistenceNamespace);

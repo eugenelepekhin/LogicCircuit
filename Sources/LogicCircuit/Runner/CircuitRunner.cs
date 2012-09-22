@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Threading;
 using System.Windows.Threading;
-using System.Diagnostics;
 
 namespace LogicCircuit {
 	public class CircuitRunner {
@@ -86,6 +87,7 @@ namespace LogicCircuit {
 			}
 		}
 
+		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
 		private void Run() {
 			PropertyChangedEventHandler editorPropertyChanged = null;
 			try {
@@ -242,6 +244,7 @@ namespace LogicCircuit {
 			}
 		}
 
+		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
 		private void OnFunctionUpdated(object sender, EventArgs e) {
 			try {
 				this.evaluationGate.Set();
@@ -252,6 +255,7 @@ namespace LogicCircuit {
 			}
 		}
 
+		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
 		private void MonitorUI() {
 			try {
 				Action refresh = new Action(this.RefreshUI);
@@ -270,6 +274,7 @@ namespace LogicCircuit {
 			}
 		}
 
+		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
 		private void RefreshUI() {
 			try {
 				if(this.running) {

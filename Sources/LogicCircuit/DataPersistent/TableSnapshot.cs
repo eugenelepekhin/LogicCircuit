@@ -32,6 +32,7 @@ namespace LogicCircuit.DataPersistent {
 		/// <summary>
 		/// Gets fields of the table
 		/// </summary>
+		[SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
 		public IEnumerable<IField<TRecord>> Fields { get { return new ReadOnlyCollection<IField<TRecord>>(this.table.Fields); } }
 
 		/// <summary>
@@ -252,6 +253,7 @@ namespace LogicCircuit.DataPersistent {
 		/// </summary>
 		/// <param name="data"></param>
 		/// <returns></returns>
+		[SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
 		public RowId Insert(ref TRecord data) {
 			this.ValidateModification();
 			RowId rowId = this.table.Insert(ref data);
@@ -374,6 +376,7 @@ namespace LogicCircuit.DataPersistent {
 		/// </summary>
 		/// <param name="rowId"></param>
 		/// <param name="data"></param>
+		[SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
 		public void GetData(RowId rowId, out TRecord data) {
 			this.table.GetData(rowId, this.StoreSnapshot.Version, out data);
 		}
@@ -629,6 +632,7 @@ namespace LogicCircuit.DataPersistent {
 		/// </summary>
 		/// <param name="version"></param>
 		/// <returns></returns>
+		[SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
 		public IEnumerator<TableChange<TRecord>> GetChanges(int version) {
 			return this.GetChanges(version, version);
 		}
@@ -639,6 +643,7 @@ namespace LogicCircuit.DataPersistent {
 		/// <param name="fromVersion"></param>
 		/// <param name="toVersion"></param>
 		/// <returns></returns>
+		[SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
 		public IEnumerator<TableChange<TRecord>> GetChanges(int fromVersion, int toVersion) {
 			if(toVersion < fromVersion) {
 				throw new ArgumentOutOfRangeException("toVersion");
@@ -661,6 +666,7 @@ namespace LogicCircuit.DataPersistent {
 		/// <param name="fromVersion"></param>
 		/// <param name="toVersion"></param>
 		/// <returns></returns>
+		[SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
 		public IEnumerator<TableChange<TRecord>> GetVersionChangeChanges(int fromVersion, int toVersion) {
 			if(fromVersion != toVersion) {
 				bool reverse = toVersion < fromVersion;

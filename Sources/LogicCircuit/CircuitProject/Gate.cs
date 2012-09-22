@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Windows;
 
@@ -89,6 +90,7 @@ namespace LogicCircuit {
 		}
 	}
 
+	[SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
 	public partial class GateSet {
 		private static bool IsValid(GateType gateType) {
 			return Enum.IsDefined(typeof(GateType), gateType) && gateType != GateType.Odd && gateType != GateType.Even;

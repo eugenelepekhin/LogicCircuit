@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Windows;
 using System.Xml;
@@ -81,6 +82,7 @@ namespace LogicCircuit {
 		}
 	}
 
+	[SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
 	public sealed partial class LogicalCircuitSet : NamedItemSet {
 		public event EventHandler LogicalCircuitSetChanged;
 

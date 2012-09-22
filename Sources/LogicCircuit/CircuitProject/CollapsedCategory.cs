@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Xml;
@@ -8,6 +9,7 @@ namespace LogicCircuit {
 	public partial class CollapsedCategory {
 	}
 
+	[SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
 	public sealed partial class CollapsedCategorySet {
 		public bool IsCollapsed(string name) {
 			return this.Find(name) != null;

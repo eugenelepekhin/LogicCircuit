@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
-using System.Xml;
-using LogicCircuit.DataPersistent;
 using System.Windows;
 using System.Windows.Controls.Primitives;
+using System.Xml;
+using LogicCircuit.DataPersistent;
 
 namespace LogicCircuit {
 	public partial class LedMatrix {
@@ -101,6 +102,7 @@ namespace LogicCircuit {
 		}
 	}
 
+	[SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
 	public sealed partial class LedMatrixSet {
 		private LedMatrix Register(RowId rowId) {
 			CircuitData data = new CircuitData() {

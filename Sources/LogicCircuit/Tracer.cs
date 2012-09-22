@@ -1,8 +1,9 @@
 using System;
-using System.IO;
-using System.Diagnostics;
-using System.Globalization;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.IO;
 using System.Text;
 
 namespace LogicCircuit {
@@ -117,6 +118,7 @@ namespace LogicCircuit {
 
 		//---------------------------------------------------------------------
 
+		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
 		private static void WriteToFile(string description, string category) {
 			if(!File.Exists(Tracer.LogPath)) {
 				string dir = Path.GetDirectoryName(Tracer.LogPath);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using System.Xml;
 using LogicCircuit.DataPersistent;
@@ -48,6 +49,7 @@ namespace LogicCircuit {
 		}
 	}
 
+	[SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
 	public sealed partial class PinSet : NamedItemSet {
 		private Pin Register(RowId rowId) {
 			CircuitData data = new CircuitData() {

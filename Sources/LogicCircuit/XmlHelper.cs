@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.XPath;
 using System.Xml.Xsl;
-using System.Diagnostics;
 
 namespace LogicCircuit {
 	internal static class XmlHelper {
@@ -45,6 +46,8 @@ namespace LogicCircuit {
 
 		// Transform will close input reader and replace it with new one.
 		// To emphasize this we pass xmlReader by ref.
+		[SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")]
+		[SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
 		public static void Transform(string xsltText, ref XmlReader inputXml) {
 			XslCompiledTransform xslt = new XslCompiledTransform();
 			using(StringReader stringReader = new StringReader(xsltText)) {

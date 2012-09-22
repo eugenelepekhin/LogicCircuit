@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace LogicCircuit.DataPersistent {
 	/// <summary>
@@ -22,13 +23,18 @@ namespace LogicCircuit.DataPersistent {
 		/// <param name="data1"></param>
 		/// <param name="data2"></param>
 		/// <returns></returns>
+		[SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference")]
 		int Compare(ref TRecord data1, ref TRecord data2);
 	}
 
 	public interface IFieldSerializer<TRecord> where TRecord:struct {
+		[SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
 		bool NeedToSave(ref TRecord data);
+		[SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
 		string GetTextValue(ref TRecord data);
+		[SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
 		void SetDefault(ref TRecord data);
+		[SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
 		void SetTextValue(ref TRecord data, string text);
 	}
 
@@ -48,6 +54,7 @@ namespace LogicCircuit.DataPersistent {
 		/// </summary>
 		/// <param name="record"></param>
 		/// <returns></returns>
+		[SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
 		TField GetValue(ref TRecord record);
 
 		/// <summary>
@@ -55,6 +62,7 @@ namespace LogicCircuit.DataPersistent {
 		/// </summary>
 		/// <param name="record"></param>
 		/// <param name="value"></param>
+		[SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
 		void SetValue(ref TRecord record, TField value);
 	}
 }

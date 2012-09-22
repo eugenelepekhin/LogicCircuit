@@ -424,8 +424,6 @@ namespace LogicCircuit {
 			return null;
 		}
 
-		private void Delete(RowId rowId) {
-		}
 
 		// gets items wrapper by RowId
 		private IEnumerable<Wire> Select(IEnumerable<RowId> rows) {
@@ -581,7 +579,6 @@ namespace LogicCircuit {
 					while(change.MoveNext()) {
 						RowId rowId = change.Current;
 						if(this.Table.IsDeleted(rowId)) {
-							this.Delete(rowId);
 						} else {
 							this.FindOrCreate(rowId);
 						}

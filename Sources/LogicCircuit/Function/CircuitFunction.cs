@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 
@@ -13,6 +14,7 @@ namespace LogicCircuit {
 		public IEnumerable<int> Result { get { return this.result; } }
 
 		public long Iteration { get; set; }
+		[SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
 		public CircuitFunction[] Dependant { get; set; }
 
 		protected CircuitFunction(CircuitState circuitState, int[] parameter, int[] result) {

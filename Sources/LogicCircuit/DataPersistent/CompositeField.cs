@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace LogicCircuit.DataPersistent {
 
+	[SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
 	partial class TableSnapshot<TRecord> {
 		private struct Composite<T1, T2> {
 			public T1 t1;

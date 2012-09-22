@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 using LogicCircuit.DataPersistent;
-using System.Diagnostics;
-using System.IO;
 
 namespace LogicCircuit {
+	[SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 	public partial class CircuitProject {
 		private TableSnapshot<CircuitData> circuitTable;
 		internal TableSnapshot<CircuitData> CircuitTable {
@@ -21,6 +23,7 @@ namespace LogicCircuit {
 			}
 		}
 
+		[SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
 		public static CircuitProject Create(string file) {
 			try {
 				XmlReader xmlReader = XmlHelper.CreateReader((file != null ?
@@ -120,6 +123,8 @@ namespace LogicCircuit {
 			return sb.ToString();
 		}
 
+		[SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
+		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
 		public static bool CanPaste(string text) {
 			// To reduce number of exceptions from XML reader lets check there if some familiar text is in the string.
 			// Lets not use namespace as it will prevent pasting of old versions of the XML.
@@ -138,6 +143,7 @@ namespace LogicCircuit {
 			return false;
 		}
 
+		[SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
 		public IEnumerable<Symbol> Paste(string text) {
 			CircuitProject paste = null;
 			try {
@@ -194,7 +200,8 @@ namespace LogicCircuit {
 			}
 		}
 
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
+		[SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
+		[SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
 		[Conditional("DEBUG")]
 		private void ValidateCircuitProject() {
 			foreach(Circuit circuit in this.CircuitSet) {
