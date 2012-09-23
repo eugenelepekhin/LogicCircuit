@@ -64,7 +64,7 @@ namespace ItemWrapper.Generator {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Item generation complete witout errors..
+		/// Looks up a localized string similar to Realm item generation complete witout errors..
 		/// </summary>
  		public static string ReportSuccess {
 			get { return ResourceManager.GetString("ReportSuccess", Culture); }

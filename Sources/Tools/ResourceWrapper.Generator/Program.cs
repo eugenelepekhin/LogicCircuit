@@ -15,7 +15,7 @@ namespace ResourceWrapper.Generator {
 				if(Program.ParseArguments(args, out projectPath, out pseudo)) {
 					ProjectParser parser = new ProjectParser();
 					if(parser.Generate(projectPath, pseudo)) {
-						Message.Write("Generation complete without errors");
+						Message.Write("Resource wrappers generation complete without errors");
 						Message.Flush();
 						return 0;
 					}
