@@ -556,7 +556,7 @@
   </Target>
   -->
   <Target Name="BeforeBuild">
-	<Exec Command="$(SolutionDir)Tools\ResourceWrapper.Generator.exe ProjectPath=$(ProjectPath)"/>
-	<Exec Command="$(SolutionDir)Tools\ItemWrapper.Generator.exe /RealmType:Universe /UseDispatcher:false /Schema:$(ProjectDir)Schema\CircuitProject.xml /Target:$(ProjectDir)CircuitProject\Wrappers"/>
+	<Exec Command='"$(SolutionDir)Tools\ResourceWrapper.Generator.exe" "ProjectPath=$(ProjectPath)"'/>
+	<Exec Command='"$(SolutionDir)Tools\ItemWrapper.Generator.exe" /RealmType:Universe /UseDispatcher:false "/Schema:$(ProjectDir)Schema\CircuitProject.xml" "/Target:$(ProjectDir)CircuitProject\Wrappers"'/>
   </Target>
 </Project>

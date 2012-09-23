@@ -140,7 +140,7 @@
   </PropertyGroup>
 
   <Target Name="BeforeBuild">
-    <Exec Command="$(ToolsFolder)\ResourceWrapper.Generator.exe ProjectPath=$(ProjectPath)"/>
+    <Exec Command='"$(ToolsFolder)\ResourceWrapper.Generator.exe" "ProjectPath=$(ProjectPath)"'/>
   </Target>
 
   <Target Name="AfterBuild">
