@@ -202,7 +202,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="DataPersistent\Realm\SetToListAdapter.cs" />
     <Compile Include="DataPersistent\RolledBackEventArgs.cs" />
     <Compile Include="DataPersistent\RowId.cs" />
     <Compile Include="DataPersistent\RowIdField.cs" />
@@ -227,6 +226,7 @@
     <Compile Include="Editor\WireMarker.cs" />
     <Compile Include="Editor\WirePledge.cs" />
     <Compile Include="Editor\WirePointMarker.cs" />
+    <Compile Include="EnumHelper.cs" />
     <Compile Include="ExpressionParser.cs" />
     <Compile Include="Function\FunctionAnd.cs" />
     <Compile Include="Function\FunctionAndNot.cs" />
@@ -467,6 +467,7 @@
     <None Include="Schema\ConvertFrom.2.0.0.1.xslt" />
     <None Include="Schema\ConvertFrom.2.0.0.2.xslt" />
     <None Include="Schema\ConvertFrom.2.0.0.3.xslt" />
+    <None Include="Schema\ConvertFrom.2.0.0.4.xslt" />
     <None Include="Schema\Empty.xml" />
     <None Include="Schema\CircuitProject.xml">
       <SubType>Designer</SubType>
@@ -547,9 +548,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Schema\ConvertFrom.2.0.0.4.xslt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

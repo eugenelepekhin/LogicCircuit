@@ -163,7 +163,7 @@ namespace LogicCircuit {
 				data.PinType = this.DefaultValue;
 			}
 			void IFieldSerializer<PinData>.SetTextValue(ref PinData data, string text) {
-				data.PinType = (PinType)Enum.Parse(typeof(PinType), text, true);
+				data.PinType = EnumHelper.Parse<PinType>(text, this.DefaultValue);
 			}
 		}
 
@@ -198,7 +198,7 @@ namespace LogicCircuit {
 				data.PinSide = this.DefaultValue;
 			}
 			void IFieldSerializer<PinData>.SetTextValue(ref PinData data, string text) {
-				data.PinSide = (PinSide)Enum.Parse(typeof(PinSide), text, true);
+				data.PinSide = EnumHelper.Parse<PinSide>(text, this.DefaultValue);
 			}
 		}
 

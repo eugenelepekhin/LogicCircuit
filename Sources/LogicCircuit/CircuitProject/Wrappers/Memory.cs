@@ -166,7 +166,7 @@ namespace LogicCircuit {
 				data.OnStart = this.DefaultValue;
 			}
 			void IFieldSerializer<MemoryData>.SetTextValue(ref MemoryData data, string text) {
-				data.OnStart = (MemoryOnStart)Enum.Parse(typeof(MemoryOnStart), text, true);
+				data.OnStart = EnumHelper.Parse<MemoryOnStart>(text, this.DefaultValue);
 			}
 		}
 

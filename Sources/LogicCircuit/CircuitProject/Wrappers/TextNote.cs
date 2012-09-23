@@ -298,7 +298,7 @@ namespace LogicCircuit {
 				data.Rotation = this.DefaultValue;
 			}
 			void IFieldSerializer<TextNoteData>.SetTextValue(ref TextNoteData data, string text) {
-				data.Rotation = (Rotation)Enum.Parse(typeof(Rotation), text, true);
+				data.Rotation = EnumHelper.Parse<Rotation>(text, this.DefaultValue);
 			}
 		}
 

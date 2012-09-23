@@ -9,9 +9,6 @@ Colors of symbols
 
 Running tree not always open the item when it clicked on the diagram
 
-Check that all enums in model are verified when reading project file.
-
-
 === Function Optimization Ideas ===
 Local optimizations.
 Local optimizations applicable to individual basic block, so the blocks without any extra receivers in the middle.

@@ -13,7 +13,7 @@ namespace ItemWrapper.Generator
     using System;
     
     
-    #line 1 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+    #line 1 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "10.0.0.0")]
     public partial class GeneratorTableDefinition : Transformation
     {
@@ -21,21 +21,21 @@ namespace ItemWrapper.Generator
         {
             this.Write("\t// Defines the shape of the table ");
             
-            #line 3 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 3 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("\r\n\tinternal partial struct ");
             
-            #line 4 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 4 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data {\r\n");
             
-            #line 5 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 5 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
 
 foreach(Column column in this.Table.Columns) {
 	if(string.IsNullOrEmpty(column.Check)) {
@@ -45,77 +45,77 @@ foreach(Column column in this.Table.Columns) {
             #line hidden
             this.Write("\t\tpublic ");
             
-            #line 9 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 9 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Type));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 9 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 9 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Name));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 10 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 10 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
 	} else {
             
             #line default
             #line hidden
             this.Write("\t\tprivate ");
             
-            #line 11 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 11 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Type));
             
             #line default
             #line hidden
             this.Write(" field");
             
-            #line 11 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 11 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Name));
             
             #line default
             #line hidden
             this.Write(";\r\n\t\tpublic ");
             
-            #line 12 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 12 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Type));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 12 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 12 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Name));
             
             #line default
             #line hidden
             this.Write(" {\r\n\t\t\tget { return this.field");
             
-            #line 13 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 13 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Name));
             
             #line default
             #line hidden
             this.Write("; }\r\n\t\t\tset { this.field");
             
-            #line 14 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 14 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Name));
             
             #line default
             #line hidden
             this.Write(" = ");
             
-            #line 14 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 14 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Check));
             
             #line default
             #line hidden
             this.Write("(value); }\r\n\t\t}\r\n");
             
-            #line 16 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 16 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
 
 	}
 }
@@ -125,28 +125,28 @@ if(this.RealmType == RealmType.Universe) {
             #line hidden
             this.Write("\t\tinternal ");
             
-            #line 20 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 20 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 20 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 20 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 21 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 21 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
 }
             
             #line default
             #line hidden
             this.Write("\t\t// Field accessors\r\n");
             
-            #line 23 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 23 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
 
 foreach(Column column in this.Table.Columns) {
 	string defaultValue = (column.Default != null) ? column.Default : "default(" + column.Type + ")";
@@ -180,266 +180,266 @@ foreach(Column column in this.Table.Columns) {
             #line hidden
             this.Write("\t\t// Accessor of the ");
             
-            #line 51 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 51 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Name));
             
             #line default
             #line hidden
             this.Write(" field\r\n");
             
-            #line 52 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 52 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
 if(column.Type == "RowId") {
             
             #line default
             #line hidden
             this.Write("\t\tpublic sealed class ");
             
-            #line 53 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 53 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Name));
             
             #line default
             #line hidden
             this.Write("Field : RowIdField<");
             
-            #line 53 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 53 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data> {\r\n\t\t\tpublic static readonly ");
             
-            #line 54 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 54 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Name));
             
             #line default
             #line hidden
             this.Write("Field Field = new ");
             
-            #line 54 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 54 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Name));
             
             #line default
             #line hidden
             this.Write("Field();\r\n\t\t\tprivate ");
             
-            #line 55 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 55 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Name));
             
             #line default
             #line hidden
             this.Write("Field() : base(\"");
             
-            #line 55 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 55 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Name));
             
             #line default
             #line hidden
             this.Write("\") {}\r\n\t\t\tpublic override RowId GetValue(ref ");
             
-            #line 56 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 56 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data record) {\r\n\t\t\t\treturn record.");
             
-            #line 57 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 57 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Name));
             
             #line default
             #line hidden
             this.Write(";\r\n\t\t\t}\r\n\t\t\tpublic override void SetValue(ref ");
             
-            #line 59 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 59 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data record, RowId value) {\r\n\t\t\t\trecord.");
             
-            #line 60 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 60 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Name));
             
             #line default
             #line hidden
             this.Write(" = value;\r\n\t\t\t}\r\n\t\t}\r\n");
             
-            #line 63 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 63 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
 } else {
             
             #line default
             #line hidden
             this.Write("\t\tpublic sealed class ");
             
-            #line 64 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 64 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Name));
             
             #line default
             #line hidden
             this.Write("Field : IField<");
             
-            #line 64 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 64 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data, ");
             
-            #line 64 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 64 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Type));
             
             #line default
             #line hidden
             this.Write(">");
             
-            #line 64 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 64 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
 if(this.Table.Persistent) {
             
             #line default
             #line hidden
             this.Write(", IFieldSerializer<");
             
-            #line 64 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 64 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data>");
             
-            #line 64 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 64 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
 }
             
             #line default
             #line hidden
             this.Write(" {\r\n\t\t\tpublic static readonly ");
             
-            #line 65 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 65 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Name));
             
             #line default
             #line hidden
             this.Write("Field Field = new ");
             
-            #line 65 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 65 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Name));
             
             #line default
             #line hidden
             this.Write("Field();\r\n\t\t\tprivate ");
             
-            #line 66 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 66 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Name));
             
             #line default
             #line hidden
             this.Write("Field() {}\r\n\t\t\tpublic string Name { get { return \"");
             
-            #line 67 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 67 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Name));
             
             #line default
             #line hidden
             this.Write("\"; } }\r\n\t\t\tpublic int Order { get; set; }\r\n\t\t\tpublic ");
             
-            #line 69 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 69 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Type));
             
             #line default
             #line hidden
             this.Write(" DefaultValue { get { return ");
             
-            #line 69 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 69 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(defaultValue));
             
             #line default
             #line hidden
             this.Write("; } }\r\n\t\t\tpublic ");
             
-            #line 70 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 70 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Type));
             
             #line default
             #line hidden
             this.Write(" GetValue(ref ");
             
-            #line 70 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 70 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data record) {\r\n\t\t\t\treturn record.");
             
-            #line 71 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 71 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Name));
             
             #line default
             #line hidden
             this.Write(";\r\n\t\t\t}\r\n\t\t\tpublic void SetValue(ref ");
             
-            #line 73 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 73 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data record, ");
             
-            #line 73 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 73 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Type));
             
             #line default
             #line hidden
             this.Write(" value) {\r\n\t\t\t\trecord.");
             
-            #line 74 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 74 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Name));
             
             #line default
             #line hidden
             this.Write(" = value;\r\n\t\t\t}\r\n\t\t\tpublic int Compare(ref ");
             
-            #line 76 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 76 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data l, ref ");
             
-            #line 76 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 76 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data r) {\r\n\t\t\t\treturn ");
             
-            #line 77 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 77 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(compare("l." + column.Name, "r." + column.Name)));
             
             #line default
             #line hidden
             this.Write(";\r\n\t\t\t}\r\n\t\t\tpublic int Compare(");
             
-            #line 79 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 79 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Type));
             
             #line default
             #line hidden
             this.Write(" l, ");
             
-            #line 79 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 79 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Type));
             
             #line default
             #line hidden
             this.Write(" r) {\r\n\t\t\t\treturn ");
             
-            #line 80 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 80 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(compare("l", "r")));
             
             #line default
             #line hidden
             this.Write(";\r\n\t\t\t}\r\n");
             
-            #line 82 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 82 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
 
 	if(this.Table.Persistent) {
 		string parse = "text";
@@ -465,7 +465,7 @@ if(this.Table.Persistent) {
 			parse = "(System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(text)";
 			break;
 		default:
-			parse = "(" + column.Type + ")Enum.Parse(typeof(" + column.Type + "), text, true)";
+			parse = "EnumHelper.Parse<" + column.Type + ">(text, this.DefaultValue)";
 			break;
 		}
 
@@ -474,42 +474,42 @@ if(this.Table.Persistent) {
             #line hidden
             this.Write("\r\n\t\t\t// Implementation of interface IFieldSerializer<");
             
-            #line 112 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 112 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data>\r\n\t\t\tbool IFieldSerializer<");
             
-            #line 113 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 113 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data>.NeedToSave(ref ");
             
-            #line 113 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 113 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data data) {\r\n\t\t\t\treturn this.Compare(data.");
             
-            #line 114 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 114 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Name));
             
             #line default
             #line hidden
             this.Write(", this.DefaultValue) != 0;\r\n\t\t\t}\r\n\t\t\tstring IFieldSerializer<");
             
-            #line 116 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 116 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data>.GetTextValue(ref ");
             
-            #line 116 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 116 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
@@ -517,77 +517,77 @@ if(this.Table.Persistent) {
             this.Write("Data data) {\r\n\t\t\t\treturn string.Format(CultureInfo.InvariantCulture, \"{0}\", data." +
                     "");
             
-            #line 117 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 117 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Name));
             
             #line default
             #line hidden
             this.Write(");\r\n\t\t\t}\r\n\t\t\tvoid IFieldSerializer<");
             
-            #line 119 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 119 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data>.SetDefault(ref ");
             
-            #line 119 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 119 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data data) {\r\n\t\t\t\tdata.");
             
-            #line 120 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 120 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Name));
             
             #line default
             #line hidden
             this.Write(" = this.DefaultValue;\r\n\t\t\t}\r\n\t\t\tvoid IFieldSerializer<");
             
-            #line 122 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 122 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data>.SetTextValue(ref ");
             
-            #line 122 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 122 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data data, string text) {\r\n\t\t\t\tdata.");
             
-            #line 123 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 123 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Name));
             
             #line default
             #line hidden
             this.Write(" = ");
             
-            #line 123 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 123 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(parse));
             
             #line default
             #line hidden
             this.Write(";\r\n\t\t\t}\r\n");
             
-            #line 125 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 125 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
 	}
             
             #line default
             #line hidden
             this.Write("\t\t}\r\n");
             
-            #line 127 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 127 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
 }
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 129 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 129 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
 
 }
 if(this.RealmType == RealmType.Universe) {
@@ -597,140 +597,140 @@ if(this.RealmType == RealmType.Universe) {
             this.Write("\t\t// Special field used to access items wrapper of this record from record.\r\n\t\t//" +
                     " This is used when no other universes is used\r\n\t\tinternal sealed class ");
             
-            #line 134 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 134 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Field : IField<");
             
-            #line 134 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 134 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data, ");
             
-            #line 134 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 134 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("> {\r\n\t\t\tpublic static readonly ");
             
-            #line 135 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 135 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Field Field = new ");
             
-            #line 135 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 135 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Field();\r\n\t\t\tprivate ");
             
-            #line 136 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 136 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Field() {}\r\n\t\t\tpublic string Name { get { return \"");
             
-            #line 137 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 137 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Wrapper\"; } }\r\n\t\t\tpublic int Order { get; set; }\r\n\t\t\tpublic ");
             
-            #line 139 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 139 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write(" DefaultValue { get { return null; } }\r\n\t\t\tpublic ");
             
-            #line 140 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 140 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write(" GetValue(ref ");
             
-            #line 140 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 140 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data record) {\r\n\t\t\t\treturn record.");
             
-            #line 141 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 141 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write(";\r\n\t\t\t}\r\n\t\t\tpublic void SetValue(ref ");
             
-            #line 143 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 143 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data record, ");
             
-            #line 143 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 143 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write(" value) {\r\n\t\t\t\trecord.");
             
-            #line 144 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 144 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write(" = value;\r\n\t\t\t}\r\n\t\t\tpublic int Compare(ref ");
             
-            #line 146 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 146 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data l, ref ");
             
-            #line 146 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 146 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data r) {\r\n\t\t\t\treturn this.Compare(l.");
             
-            #line 147 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 147 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write(", r.");
             
-            #line 147 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 147 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write(");\r\n\t\t\t}\r\n\t\t\tpublic int Compare(");
             
-            #line 149 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 149 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write(" l, ");
             
-            #line 149 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 149 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
@@ -738,111 +738,111 @@ if(this.RealmType == RealmType.Universe) {
             this.Write(" r) {\r\n\t\t\t\tif(object.ReferenceEquals(l, r)) return 0;\r\n\t\t\t\tif(l == null) return -" +
                     "1;\r\n\t\t\t\tif(r == null) return 1;\r\n\t\t\t\treturn l.");
             
-            #line 153 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 153 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("RowId.CompareTo(r.");
             
-            #line 153 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 153 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("RowId);\r\n\t\t\t}\r\n\t\t}\r\n\r\n");
             
-            #line 157 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 157 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
 }
             
             #line default
             #line hidden
             this.Write("\t\tprivate static IField<");
             
-            #line 158 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 158 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data>[] fields = {\r\n");
             
-            #line 159 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 159 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
 foreach(Column column in this.Table.Columns) {
             
             #line default
             #line hidden
             this.Write("\t\t\t");
             
-            #line 160 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 160 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Name));
             
             #line default
             #line hidden
             this.Write("Field.Field,\r\n");
             
-            #line 161 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 161 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
 }
             
             #line default
             #line hidden
             
-            #line 162 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 162 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
 if(this.RealmType == RealmType.Universe) {
             
             #line default
             #line hidden
             this.Write("\t\t\t");
             
-            #line 163 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 163 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Field.Field\r\n");
             
-            #line 164 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 164 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
 }
             
             #line default
             #line hidden
             this.Write("\t\t};\r\n\r\n\t\t// Creates table.\r\n\t\tpublic static TableSnapshot<");
             
-            #line 168 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 168 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data> CreateTable(StoreSnapshot store) {\r\n\t\t\tTableSnapshot<");
             
-            #line 169 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 169 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data> table = new TableSnapshot<");
             
-            #line 169 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 169 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data>(store, \"");
             
-            #line 169 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 169 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("\", ");
             
-            #line 169 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 169 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data.fields);\r\n\t\t\t// Create all but foreign keys of the table\r\n");
             
-            #line 171 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 171 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
 
 foreach(Key key in this.Table.Keys) {
 	if(key.IsUnique() || key.IsIndex()) { // this will ignore only foreign keys
@@ -854,7 +854,7 @@ foreach(Key key in this.Table.Keys) {
             #line hidden
             this.Write("\t\t\ttable.MakeAutoUnique();\r\n");
             
-            #line 178 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 178 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
 
 		} else if(key.Count == 1) {
 			string primary = "";
@@ -871,42 +871,42 @@ foreach(Key key in this.Table.Keys) {
             #line hidden
             this.Write("\t\t\ttable.");
             
-            #line 189 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 189 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(function));
             
             #line default
             #line hidden
             this.Write("(\"");
             
-            #line 189 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 189 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(key.Name));
             
             #line default
             #line hidden
             this.Write("\", ");
             
-            #line 189 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 189 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data.");
             
-            #line 189 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 189 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(key[0].Name));
             
             #line default
             #line hidden
             this.Write("Field.Field ");
             
-            #line 189 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 189 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(primary));
             
             #line default
             #line hidden
             this.Write(");\r\n");
             
-            #line 190 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 190 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
 
 		} else {
 
@@ -915,49 +915,49 @@ foreach(Key key in this.Table.Keys) {
             #line hidden
             this.Write("\t\t\ttable.");
             
-            #line 193 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 193 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(function));
             
             #line default
             #line hidden
             this.Write("(\"");
             
-            #line 193 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 193 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(key.Name));
             
             #line default
             #line hidden
             this.Write("\", ");
             
-            #line 193 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 193 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data.");
             
-            #line 193 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 193 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(key[0].Name));
             
             #line default
             #line hidden
             this.Write("Field.Field, ");
             
-            #line 193 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 193 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data.");
             
-            #line 193 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 193 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(key[1].Name));
             
             #line default
             #line hidden
             this.Write("Field.Field);\r\n");
             
-            #line 194 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 194 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
 
 		}
 	}
@@ -969,35 +969,35 @@ foreach(Key key in this.Table.Keys) {
             this.Write("\t\t\t// Return created table\r\n\t\t\treturn table;\r\n\t\t}\r\n\r\n\t\t// Creates all foreign key" +
                     "s of the table\r\n\t\tpublic static void CreateForeignKeys(StoreSnapshot store) {\r\n");
             
-            #line 205 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 205 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
 if(this.Table.Keys.Any(k => k.IsForeign())) {
             
             #line default
             #line hidden
             this.Write("\t\t\tTableSnapshot<");
             
-            #line 206 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 206 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data> table = (TableSnapshot<");
             
-            #line 206 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 206 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data>)store.Table(\"");
             
-            #line 206 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 206 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("\");\r\n");
             
-            #line 207 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 207 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
 
 foreach(Key key in this.Table.Keys) {
 	if(key.IsForeign()) {
@@ -1007,49 +1007,49 @@ foreach(Key key in this.Table.Keys) {
             #line hidden
             this.Write("\t\t\ttable.CreateForeignKey(\"");
             
-            #line 211 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 211 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(key.Name));
             
             #line default
             #line hidden
             this.Write("\", store.Table(\"");
             
-            #line 211 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 211 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(key.ParentName));
             
             #line default
             #line hidden
             this.Write("\"), ");
             
-            #line 211 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 211 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data.");
             
-            #line 211 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 211 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(key[0].Name));
             
             #line default
             #line hidden
             this.Write("Field.Field, ForeignKeyAction.");
             
-            #line 211 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 211 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(key.Action));
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 211 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 211 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(key.AllowsDefault ? "true" : "false"));
             
             #line default
             #line hidden
             this.Write(");\r\n");
             
-            #line 212 "C:\LogicCircuit\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
+            #line 212 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Refactor\Sources\Tools\ItemWrapper.Generator\GeneratorTableDefinition.tt"
 
 		}
 	}

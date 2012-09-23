@@ -99,7 +99,7 @@ namespace LogicCircuit {
 				data.MatrixType = this.DefaultValue;
 			}
 			void IFieldSerializer<LedMatrixData>.SetTextValue(ref LedMatrixData data, string text) {
-				data.MatrixType = (LedMatrixType)Enum.Parse(typeof(LedMatrixType), text, true);
+				data.MatrixType = EnumHelper.Parse<LedMatrixType>(text, this.DefaultValue);
 			}
 		}
 
@@ -134,7 +134,7 @@ namespace LogicCircuit {
 				data.CellShape = this.DefaultValue;
 			}
 			void IFieldSerializer<LedMatrixData>.SetTextValue(ref LedMatrixData data, string text) {
-				data.CellShape = (LedMatrixCellShape)Enum.Parse(typeof(LedMatrixCellShape), text, true);
+				data.CellShape = EnumHelper.Parse<LedMatrixCellShape>(text, this.DefaultValue);
 			}
 		}
 

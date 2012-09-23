@@ -104,7 +104,7 @@ foreach(Column column in this.Table.Columns) {
 			parse = "(System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(text)";
 			break;
 		default:
-			parse = "(" + column.Type + ")Enum.Parse(typeof(" + column.Type + "), text, true)";
+			parse = "EnumHelper.Parse<" + column.Type + ">(text, this.DefaultValue)";
 			break;
 		}
 #>
