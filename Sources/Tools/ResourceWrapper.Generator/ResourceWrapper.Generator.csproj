@@ -64,20 +64,20 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup>
-    <PostBuildEvent>if exist "$(SolutionDir)Tools" (
-xcopy /Y /D "$(TargetPath)" "$(SolutionDir)Tools"
-)</PostBuildEvent>
-  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
-  <Target Name="AfterBuild">
-  </Target>
   -->
+  <PropertyGroup>
+	<ToolsFolder>$(SolutionDir)Tools</ToolsFolder>
+  </PropertyGroup>
+  <Target Name="AfterBuild">
+	<Copy
+		Condition="Exists($(ToolsFolder))"
+		SkipUnchangedFiles="true"
+		SourceFiles="$(TargetPath)"
+		DestinationFolder="$(ToolsFolder)"
+	/>
+  </Target>
 </Project>
