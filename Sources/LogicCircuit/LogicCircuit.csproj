@@ -417,6 +417,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.ru-RU.resx" />
     <EmbeddedResource Include="Schema\Schema.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Schema.Designer.cs</LastGenOutput>
@@ -556,7 +557,7 @@
   </Target>
   -->
   <Target Name="BeforeBuild">
-	<Exec Command='"$(SolutionDir)Tools\ResourceWrapper.Generator.exe" "ProjectPath=$(ProjectPath)"'/>
-	<Exec Command='"$(SolutionDir)Tools\ItemWrapper.Generator.exe" /RealmType:Universe /UseDispatcher:false "/Schema:$(ProjectDir)Schema\CircuitProject.xml" "/Target:$(ProjectDir)CircuitProject\Wrappers"'/>
+    <Exec Command="&quot;$(SolutionDir)Tools\ResourceWrapper.Generator.exe&quot; &quot;ProjectPath=$(ProjectPath)&quot;" />
+    <Exec Command="&quot;$(SolutionDir)Tools\ItemWrapper.Generator.exe&quot; /RealmType:Universe /UseDispatcher:false &quot;/Schema:$(ProjectDir)Schema\CircuitProject.xml&quot; &quot;/Target:$(ProjectDir)CircuitProject\Wrappers&quot;" />
   </Target>
 </Project>
