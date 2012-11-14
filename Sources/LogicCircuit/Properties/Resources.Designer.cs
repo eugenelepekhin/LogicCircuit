@@ -2051,13 +2051,6 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to All Pictures ({0})|{0}|All files (*.*)|*.*.
-		/// </summary>
- 		public static string ImageFilter(string supportedExtensions) {
-			return string.Format(Culture, ResourceManager.GetString("ImageFilter", Culture), supportedExtensions);
-		}
-
-		/// <summary>
 		/// Looks up a localized string similar to Check periodically for new versions.
 		/// </summary>
  		public static string TitleCheckVersionPeriodically {

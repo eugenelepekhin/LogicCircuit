@@ -251,7 +251,7 @@ namespace LogicCircuit {
 			try {
 				OpenFileDialog dialog = new OpenFileDialog();
 				dialog.InitialDirectory = Mainframe.IsDirectoryPathValid(this.openImageFolder.Value) ? this.openImageFolder.Value : Mainframe.DefaultPictureFolder();
-				dialog.Filter = Properties.Resources.ImageFilter("*.bmp;*.dib;*.gif;*.jpg;*.jpeg;*.jpe;*.png;*.tiff;*.tif");
+				dialog.Filter = Properties.Resources.ImageFileFilter;
 				dialog.FilterIndex = 0;
 				bool? result = dialog.ShowDialog(this);
 				if(result.HasValue && result.Value) {

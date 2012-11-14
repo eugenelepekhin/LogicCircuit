@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1024,10 +1024,6 @@ Do you want to remove the reference to it from the Recent Files list?</value>
   </data>
   <data name="CommandInsertImage" xml:space="preserve">
     <value>Picture</value>
-  </data>
-  <data name="ImageFilter" xml:space="preserve">
-    <value>All Pictures ({0})|{0}|All files (*.*)|*.*</value>
-    <comment>{string supportedExtensions}</comment>
   </data>
   <data name="TitleCheckVersionPeriodically" xml:space="preserve">
     <value>Check periodically for new versions</value>
