@@ -2323,5 +2323,19 @@ namespace LogicCircuit.Properties {
  		public static string ErrorManyMemoryData(string circuitName, string ramNotation) {
 			return string.Format(Culture, ResourceManager.GetString("ErrorManyMemoryData", Culture), circuitName, ramNotation);
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Your language selection has been changed. You need to restart the application so the new settings will take place..
+		/// </summary>
+ 		public static string MessageRestartRequared {
+			get { return ResourceManager.GetString("MessageRestartRequared", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to L_anguage.
+		/// </summary>
+ 		public static string TitleCulture {
+			get { return ResourceManager.GetString("TitleCulture", Culture); }
+		}
 	}
 }

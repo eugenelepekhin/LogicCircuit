@@ -14,6 +14,7 @@
 
 		<Style TargetType="{x:Type ComboBox}">
 			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="Margin" Value="5"/>
 		</Style>
 	</Window.Resources>
 
@@ -52,6 +53,16 @@
 						<ComboBox Name="gateShape" ItemsSource="{Binding Path=GateShapeList}" IsEditable="False" MinWidth="115"/>
 					</StackPanel>
 				</StackPanel>
+			</GroupBox>
+
+			<GroupBox HorizontalAlignment="Stretch" VerticalAlignment="Top"
+				Header="{x:Static properties:Resources.TitleCulture}"
+			>
+				<ComboBox Name="cultureSelector" IsEditable="False" HorizontalAlignment="Stretch"
+					ItemsSource="{x:Static lc:App.AvailableCultures}"
+					SelectedItem="{Binding Path=CurrentCulture}"
+					DisplayMemberPath="NativeName"
+				/>
 			</GroupBox>
 		</StackPanel>
 

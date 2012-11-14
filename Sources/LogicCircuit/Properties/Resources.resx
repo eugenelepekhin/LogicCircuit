@@ -1155,4 +1155,10 @@ Do you want to remove the reference to it from the Recent Files list?</value>
 Such circuit cannot be used more than once on other circuits as potentially different sets of data will be stored on one memory module.</value>
     <comment>{string circuitName, string ramNotation}</comment>
   </data>
+  <data name="MessageRestartRequared" xml:space="preserve">
+    <value>Your language selection has been changed. You need to restart the application so the new settings will take place.</value>
+  </data>
+  <data name="TitleCulture" xml:space="preserve">
+    <value>L_anguage</value>
+  </data>
 </root>
