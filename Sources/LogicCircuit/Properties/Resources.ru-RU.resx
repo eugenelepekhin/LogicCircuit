@@ -184,7 +184,7 @@
     <value>Проект</value>
   </data>
   <data name="ColorPickerCaptionAvailable" xml:space="preserve">
-    <value>Стандартные цвета:</value>
+    <value>Доступные цвета:</value>
   </data>
   <data name="ColorPickerCaptionRecent" xml:space="preserve">
     <value>Недавно выбранные цвета:</value>
@@ -202,7 +202,7 @@
     <value>Стандартный</value>
   </data>
   <data name="CommandCircuitCurrent" xml:space="preserve">
-    <value>Схема</value>
+    <value>Логическая схема</value>
   </data>
   <data name="CommandCircuitDelete" xml:space="preserve">
     <value>Удалить текущую схему</value>
@@ -238,10 +238,10 @@
     <value>Выделить все провода</value>
   </data>
   <data name="CommandEditSelectFloatingSymbols" xml:space="preserve">
-    <value>Выделить все не подсоединённые символы</value>
+    <value>Выделить все не подсоединенные символы</value>
   </data>
   <data name="CommandEditSelectFreeWires" xml:space="preserve">
-    <value>Выделить все не подсоединённые провода</value>
+    <value>Выделить все не подсоединенные провода</value>
   </data>
   <data name="CommandEditUnselectAllButWires" xml:space="preserve">
     <value>Снять выделение всего кроме проводов</value>
@@ -324,16 +324,13 @@
     <value>Файлы проектов (*{0})|*{0}|Все файлы (*.*)|*.*</value>
   </data>
   <data name="FileSaved" xml:space="preserve">
-    <value>Файл {0} сохранён.</value>
-  </data>
-  <data name="FlowDirection" xml:space="preserve">
-    <value>LeftToRight</value>
+    <value>Файл {0} сохранен.</value>
   </data>
   <data name="FunctionParameter" xml:space="preserve">
     <value>Функция {0} требует по крайней мере {1} параметр(ов)</value>
   </data>
   <data name="ErrorManyResults" xml:space="preserve">
-    <value>Входной разъем {0} схемы {1} соединён с более, чем одним выходным разъемом схем, которые не являются схемами с тремя состояниями.</value>
+    <value>Входной разъем {0} схемы {1} соединен с более, чем одним выходным разъемом схем, которые не являются схемами с тремя состояниями.</value>
   </data>
   <data name="FailUnknownFunction" xml:space="preserve">
     <value>Неизвестная функция {0}</value>
@@ -491,7 +488,7 @@
   </data>
   <data name="MessageInvalidRecentFile" xml:space="preserve">
     <value>Файл "{0}" не может быть открыт.
-Вы хотите, чтобы удалить ссылку на него из списка последних открытых файлов?</value>
+Вы хотите, удалить ссылку на него из списка последних открытых файлов?</value>
   </data>
   <data name="MessageInputOutputPinsMissing" xml:space="preserve">
     <value>Эта схема не содержит входных или выходных разъемов. Таблицы истинности строятся путем подачи всех возможных перестановок данных на входы и чтения результатов на выходных разъемах.</value>
@@ -603,10 +600,10 @@
     <value>ОЗУ</value>
   </data>
   <data name="ProjectSummary" xml:space="preserve">
-    <value>{0} логических схем, объединённых в {1} категории, использующих {2} символов и {3} проводов</value>
+    <value>{0} логических схем, объединенных в {1} категории, использующих {2} символов и {3} проводов</value>
   </data>
   <data name="ReportError" xml:space="preserve">
-    <value>Не удается построить отчёт о функциях из-за следующей ошибки: {0}</value>
+    <value>Не удается построить отчет о функциях из-за следующей ошибки: {0}</value>
   </data>
   <data name="SplitterThin1PinName" xml:space="preserve">
     <value>(бит {0}) объединенного разъема разветвителя</value>
@@ -630,13 +627,13 @@
     <value>(биты {0}-{1}) объединенного разъема разветвителя</value>
   </data>
   <data name="SplitterWidePinName" xml:space="preserve">
-    <value>Объединенный разъём разветвителя</value>
+    <value>Объединенный разъем разветвителя</value>
   </data>
   <data name="TextNotation" xml:space="preserve">
     <value>Пояснения</value>
   </data>
   <data name="TipOnCtrlDown" xml:space="preserve">
-    <value>Нажмите сочетание клавиш Ctrl + {Shift} + Tab для переключения между логическими схемами, или щелкните мышкой, чтобы выделить или снять выделение с отдельных символов.</value>
+    <value>Нажмите сочетание клавиш Ctrl+{Shift}+Tab для переключения между логическими схемами, или щелкните мышкой, чтобы выделить или снять выделение с отдельных символов.</value>
   </data>
   <data name="TipOnAwaitingArea" xml:space="preserve">
     <value>{0} {1}. Обведите несколько символов, чтобы выделить их, удерживайте Shift, чтобы сохранить текущее выделение.</value>
@@ -1002,5 +999,8 @@
   </data>
   <data name="TitleTotal" xml:space="preserve">
     <value>Всего:</value>
+  </data>
+  <data name="GateLedNotation" xml:space="preserve">
+    <value>Светодиод</value>
   </data>
 </root>
