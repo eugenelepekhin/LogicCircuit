@@ -148,13 +148,13 @@
     <value>Сторона</value>
   </data>
   <data name="CaptionSplitterBitWidth" xml:space="preserve">
-    <value>Разрядность раздельных контактов</value>
+    <value>Разрядность разветвленных разъемов</value>
   </data>
   <data name="CaptionSplitterDirection" xml:space="preserve">
-    <value>Объединенный контакт</value>
+    <value>Объединенный разъем</value>
   </data>
   <data name="CaptionSplitterPinNumber" xml:space="preserve">
-    <value>Расщепленных контактов</value>
+    <value>Разветвленных разъемов</value>
   </data>
   <data name="CaptionTextNote1" xml:space="preserve">
     <value>Текст</value>
@@ -286,13 +286,13 @@
     <value>Rectangular</value>
   </data>
   <data name="ErrorAddressNotConnected" xml:space="preserve">
-    <value>Не все биты адреса подключены к памяти {0}</value>
+    <value>Не все биты адресного входа модуля памяти {0} подключены</value>
   </data>
   <data name="ErrorClipboardCorrupted" xml:space="preserve">
     <value>Данные в буфере обмена повреждены и не могут быть вставлены.</value>
   </data>
   <data name="ErrorDataInNotConnected" xml:space="preserve">
-    <value>Не все биты данных подключены к памяти {0}</value>
+    <value>Не все биты входа данных модуля памяти {0} подключены</value>
   </data>
   <data name="ErrorFileCorrupted" xml:space="preserve">
     <value>Файл "{0}" поврежден и не может быть загружен.</value>
@@ -304,7 +304,7 @@
     <value>Адрес гиперссылки некорректен</value>
   </data>
   <data name="ErrorJamBitWidthDifferent" xml:space="preserve">
-    <value>Входной контакт {0} ({1}) и выходной контакт {2} ({3}) на {4} имеют различную разрядность и не могут быть соединены. Пожалуйста, устраните эту проблему.</value>
+    <value>Входной разъем {0} ({1}) и выходной разъем {2} ({3}) на {4} имеют различную разрядность и не могут быть соединены. Пожалуйста, устраните эту проблему.</value>
   </data>
   <data name="ErrorLoopInCircuit" xml:space="preserve">
     <value>Символ схемы "{0}" на логической схеме "{1}" образует бесконечный цикл. Пожалуйста, разорвите цикл.</value>
@@ -333,7 +333,7 @@
     <value>Функция {0} требует по крайней мере {1} параметр(ов)</value>
   </data>
   <data name="ErrorManyResults" xml:space="preserve">
-    <value>Входной контакт {0} схемы {1} связан с более, чем одним выходным контактом схем, которые не являются схемами с тремя состояниями.</value>
+    <value>Входной разъем {0} схемы {1} соединён с более, чем одним выходным разъемом схем, которые не являются схемами с тремя состояниями.</value>
   </data>
   <data name="FailUnknownFunction" xml:space="preserve">
     <value>Неизвестная функция {0}</value>
@@ -494,7 +494,7 @@
 Вы хотите, чтобы удалить ссылку на него из списка последних открытых файлов?</value>
   </data>
   <data name="MessageInputOutputPinsMissing" xml:space="preserve">
-    <value>Эта схема не содержит входных или выходных контактов. Таблицы истинности строятся путем подачи всех возможных перестановок данных на входы и чтения результатов на выходных контактах.</value>
+    <value>Эта схема не содержит входных или выходных разъемов. Таблицы истинности строятся путем подачи всех возможных перестановок данных на входы и чтения результатов на выходных разъемах.</value>
   </data>
   <data name="MessageRestartRequared" xml:space="preserve">
     <value>Вы выбрали другой язык интерфейса. Необходимо перезапустить приложение чтобы новые настройки вступили в силу.</value>
@@ -534,7 +534,7 @@
     <value>Разветвитель</value>
   </data>
   <data name="NamePin" xml:space="preserve">
-    <value>Контакт</value>
+    <value>Разъем</value>
   </data>
   <data name="Oscillation" xml:space="preserve">
     <value>Автоколебание</value>
@@ -594,7 +594,7 @@
     <value>Выходной</value>
   </data>
   <data name="ParserErrorUnknownPin" xml:space="preserve">
-    <value>{0} - входной или выходной контакт не найден</value>
+    <value>{0} - входной или выходной разъем не найден</value>
   </data>
   <data name="Ready" xml:space="preserve">
     <value>Готово.</value>
@@ -609,7 +609,7 @@
     <value>Не удается построить отчёт о функциях из-за следующей ошибки: {0}</value>
   </data>
   <data name="SplitterThin1PinName" xml:space="preserve">
-    <value>(бит {0}) комбинированного разъёма разветвителя</value>
+    <value>(бит {0}) объединенного разъема разветвителя</value>
   </data>
   <data name="ROMNotation" xml:space="preserve">
     <value>ПЗУ</value>
@@ -627,10 +627,10 @@
     <value>Функции схемы "{0}"</value>
   </data>
   <data name="SplitterThin2PinName" xml:space="preserve">
-    <value>(биты {0}-{1}) комбинированного разъёма разветвителя</value>
+    <value>(биты {0}-{1}) объединенного разъема разветвителя</value>
   </data>
   <data name="SplitterWidePinName" xml:space="preserve">
-    <value>Комбинированный разъём разветвителя</value>
+    <value>Объединенный разъём разветвителя</value>
   </data>
   <data name="TextNotation" xml:space="preserve">
     <value>Пояснения</value>
@@ -917,7 +917,7 @@
     <value>Выберите количество входов вентиля</value>
   </data>
   <data name="ToolTipInputPin" xml:space="preserve">
-    <value>Входной {0} битовый контакт {1}</value>
+    <value>Входной {0} битовый разъем {1}</value>
   </data>
   <data name="ToolTipIsMaximumSpeed1" xml:space="preserve">
     <value>Работать на максимально возможной частоте, игнорируя установку ползунка выше.</value>
@@ -944,19 +944,19 @@
     <value>{0} бит {1}</value>
   </data>
   <data name="ToolTipOutputPin" xml:space="preserve">
-    <value>Выходной {0} битовый контакт {1}</value>
+    <value>Выходной {0} битовый разъем {1}</value>
   </data>
   <data name="ToolTipPinBitWidth" xml:space="preserve">
-    <value>Выберите разрядность контакта</value>
+    <value>Выберите разрядность разъема</value>
   </data>
   <data name="ToolTipPinNotation" xml:space="preserve">
-    <value>Введите очень короткий текст, который будет отображаться на символе схемы рядом с контактом</value>
+    <value>Введите очень короткий текст, который будет отображаться на символе схемы рядом с разъемом</value>
   </data>
   <data name="ToolTipRAM" xml:space="preserve">
     <value>ОЗУ - разрядность адреса: {0} бит,  / разрядность данных {1} бит</value>
   </data>
   <data name="ToolTipPinSide" xml:space="preserve">
-    <value>Выберите сторону символа схемы, на которой будет располагаться новый контакт</value>
+    <value>Выберите сторону символа схемы, на которой будет располагаться новый разъем</value>
   </data>
   <data name="ToolTipROM" xml:space="preserve">
     <value>ПЗУ - разрядность адреса: {0} бит,  / разрядность данных {1} бит</value>
@@ -971,19 +971,19 @@
     <value>Сохранить данные в файл</value>
   </data>
   <data name="ToolTipSplitter" xml:space="preserve">
-    <value>Разветвитель {0} бит в {1} контакта</value>
+    <value>Разветвитель {0} бит в {1} разъема</value>
   </data>
   <data name="ToolTipSplitterBitWidth" xml:space="preserve">
-    <value>Выберите разрядность расщеплённого контакта разветвителя.</value>
+    <value>Выберите разрядность разветвленного контакта разветвителя.</value>
   </data>
   <data name="ToolTipSplitterPinNumber" xml:space="preserve">
-    <value>Выберите число расщеплённых контактов разветвителя.</value>
+    <value>Выберите число разветвленных разъемов разветвителя.</value>
   </data>
   <data name="ToolTipWire" xml:space="preserve">
     <value>Провод</value>
   </data>
   <data name="ToolTipSplitterRotation" xml:space="preserve">
-    <value>Выберите направление комбинированного контакта разветвителя.</value>
+    <value>Выберите направление объединенного контакта разветвителя.</value>
   </data>
   <data name="ToolTipZoom" xml:space="preserve">
     <value>Установить масштаб диаграммы.</value>
