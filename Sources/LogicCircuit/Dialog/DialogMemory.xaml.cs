@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text;
 using System.Windows;
@@ -38,6 +39,7 @@ namespace LogicCircuit {
 
 		private int TotalCells { get { return Memory.NumberCellsFor(this.functionMemory.AddressBitWidth); } }
 
+		[SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
 		public class Row {
 
 			private DialogMemory dialogMemory;
@@ -78,6 +80,9 @@ namespace LogicCircuit {
 			}
 		}
 
+		[SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
+		[SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+		[SuppressMessage("Microsoft.Design", "CA1010:CollectionsShouldImplementGenericInterface")]
 		public class RowList : IEnumerable {
 
 			private Row[] list;

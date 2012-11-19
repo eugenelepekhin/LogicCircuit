@@ -69,9 +69,9 @@ namespace LogicCircuit {
 		}
 
 		private void Edit(string file) {
-			Editor editor;
+			Editor circuitEditor;
 			try {
-				editor = new Editor(this, file);
+				circuitEditor = new Editor(this, file);
 			} catch(SnapStoreException snapStoreException) {
 				Tracer.Report("Mainframe.Edit", snapStoreException);
 				throw new CircuitException(Cause.CorruptedFile, snapStoreException, Properties.Resources.ErrorFileCorrupted(file));
@@ -79,11 +79,11 @@ namespace LogicCircuit {
 			if(this.Editor != null) {
 				this.Editor.Power = false;
 			}
-			if(editor.File != null) {
-				Settings.User.AddRecentFile(editor.File);
+			if(circuitEditor.File != null) {
+				Settings.User.AddRecentFile(circuitEditor.File);
 			}
 			this.Dispatcher.BeginInvoke(new Action(() => this.ScrollOffset = new Point(0, 0)), System.Windows.Threading.DispatcherPriority.Normal);
-			this.Editor = editor;
+			this.Editor = circuitEditor;
 			this.Status = Properties.Resources.Ready;
 		}
 

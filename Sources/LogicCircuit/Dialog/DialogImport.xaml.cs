@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 using System.Windows;
@@ -98,7 +99,8 @@ namespace LogicCircuit {
 			}
 		}
 
-		public class CircuitInfo : LogicalCircuitDescriptor {
+		[SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
+		public sealed class CircuitInfo : LogicalCircuitDescriptor {
 			public bool Import { get; set; }
 			public bool CanImport { get; private set; }
 

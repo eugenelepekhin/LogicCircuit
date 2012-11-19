@@ -54,6 +54,7 @@
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="{Binding Path=NoteHeight.Value, Mode=TwoWay}" MinHeight="50"/>
 			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 
 		<Label Grid.Row="0" Grid.Column="0" Content="{Binding Source={x:Static properties:Resources.TitleAddressBitWidth}, Mode=OneTime}" Target="{Binding ElementName=addressBitWidth}"/>
@@ -77,9 +78,6 @@
 				Width="{Binding ElementName=onStartList, Path=ActualWidth}" ToolTip="{x:Static properties:Resources.ToolTipMemoryOnStart}"
 			/>
 		</StackPanel>
-		<ListBox Grid.Row="3" Grid.Column="1" Name="onStartList" Visibility="Hidden" HorizontalAlignment="Left" Padding="10,0" Style="{StaticResource ramOnly}"
-			Height="0" ItemsSource="{Binding ElementName=onStart, Path=ItemsSource}" DisplayMemberPath="Text"
-		/>
 
 		<GroupBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Header="{Binding Source={x:Static properties:Resources.TitleData}, Mode=OneTime}" Margin="3,3,3,0">
 			<GroupBox.Resources>
@@ -240,5 +238,11 @@
 			<Button Content="{Binding Source={x:Static properties:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="ButtonOkClick"/>
 			<Button Content="{Binding Source={x:Static properties:Resources.TitleCancel}, Mode=OneTime}" IsCancel="True"/>
 		</StackPanel>
+
+		<Canvas Grid.Row="8" Grid.Column="1" Height="0" ClipToBounds="True">
+			<ListBox Name="onStartList" Visibility="Visible" HorizontalAlignment="Left" Padding="10,0" Style="{StaticResource ramOnly}"
+				ItemsSource="{Binding ElementName=onStart, Path=ItemsSource}" DisplayMemberPath="Text"
+			/>
+		</Canvas>
 	</Grid>
 </Window>

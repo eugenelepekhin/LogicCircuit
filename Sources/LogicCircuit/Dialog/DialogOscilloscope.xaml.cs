@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-using System.Windows.Media;
 
 namespace LogicCircuit {
 
 	/// <summary>
 	/// Interaction logic for DialogOscilloscope.xaml
 	/// </summary>
+	[SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
 	public partial class DialogOscilloscope : Window {
 
 		private SettingsWindowLocationCache windowLocation;
@@ -24,7 +26,9 @@ namespace LogicCircuit {
 		private Timer timer;
 		public double GraphWidth { get; private set; }
 		public double GraphHeight { get; private set; }
+		[SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
 		public Rect GraphGrid { get { return new Rect(0, 0, Oscillogram.DX, Oscillogram.DY); } }
+		[SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
 		public Point GridEndPoint { get { return new Point(0, Oscillogram.DY); } }
 
 		public DialogOscilloscope(CircuitRunner circuitRunner) {
@@ -82,6 +86,7 @@ namespace LogicCircuit {
 			}
 		}
 
+		[SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
 		public class Oscillogram {
 
 			public const double DX = 8;

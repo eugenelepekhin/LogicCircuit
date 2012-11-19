@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -49,6 +50,7 @@ namespace LogicCircuit {
 
 		public string Document { get; set; }
 
+		[SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
 		public IEnumerable<FontFamily> FontFamilies { get { return Fonts.SystemFontFamilies.OrderBy(f => f.Source); } }
 		public FontFamily CurrentFontFamily {
 			get {
@@ -72,6 +74,7 @@ namespace LogicCircuit {
 			}
 		}
 
+		[SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
 		public IEnumerable<double> FontSizes { get { return new double[] { 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72 }; } }
 		public double CurrentFontSize {
 			get {
@@ -137,7 +140,8 @@ namespace LogicCircuit {
 		public bool IsRightAlignment { get { return this.IsSelected(TextAlignment.Right, Paragraph.TextAlignmentProperty); } }
 		public bool IsJustifyAlignment { get { return this.IsSelected(TextAlignment.Justify, Paragraph.TextAlignmentProperty); } }
 
-		public bool IsBulletted { get { return this.IsSelected(TextMarkerStyle.Disc); } }
+		[SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Bulleted")]
+		public bool IsBulleted { get { return this.IsSelected(TextMarkerStyle.Disc); } }
 		public bool IsNumbered { get { return this.IsSelected(TextMarkerStyle.Decimal); } }
 
 		public LambdaUICommand HyperlinkCommand { get; private set; }
@@ -209,7 +213,7 @@ namespace LogicCircuit {
 				this.NotifyPropertyChanged("IsRightAlignment");
 				this.NotifyPropertyChanged("IsJustifyAlignment");
 
-				this.NotifyPropertyChanged("IsBulletted");
+				this.NotifyPropertyChanged("IsBulleted");
 				this.NotifyPropertyChanged("IsNumbered");
 			} catch(Exception exception) {
 				App.Mainframe.ReportException(exception);
@@ -233,6 +237,7 @@ namespace LogicCircuit {
 			this.UpdateToolbar();
 		}
 
+		[SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
 		private void FontFamilySelectionChanged(object sender, SelectionChangedEventArgs e) {
 			try {
 				ComboBox combo = sender as ComboBox;

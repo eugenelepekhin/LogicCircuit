@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -50,6 +51,7 @@ namespace LogicCircuit {
 				}
 			}
 		}
+		[SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings")]
 		public string HyperlinkUrl {
 			get { return this.url; }
 			set {
@@ -115,12 +117,13 @@ namespace LogicCircuit {
 			return null;
 		}
 
+		[SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
 		private static Hyperlink SelectedHyperlink(TextPointer textPointer) {
 			DependencyObject o = textPointer.Parent;
 			while(o != null && !(o is Hyperlink)) {
-				TextElement text = o as TextElement;
-				if(text != null) {
-					o = text.Parent;
+				TextElement textElement = o as TextElement;
+				if(textElement != null) {
+					o = textElement.Parent;
 				} else {
 					o = null;
 				}
@@ -162,11 +165,11 @@ namespace LogicCircuit {
 			}
 			this.IsValidHyperlink = validText && validUrl;
 			if(0 < this.errorInfo.Count) {
-				StringBuilder text = new StringBuilder();
+				StringBuilder stringBuilder = new StringBuilder();
 				foreach(string error in this.errorInfo.Values) {
-					text.AppendLine(error);
+					stringBuilder.AppendLine(error);
 				}
-				this.Error = text.ToString();
+				this.Error = stringBuilder.ToString();
 			} else {
 				this.Error = string.Empty;
 			}

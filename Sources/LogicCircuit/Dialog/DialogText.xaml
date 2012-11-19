@@ -88,7 +88,7 @@
 			</ToolBar>
 			<!-- Paragraph Toolbar -->
 			<ToolBar Band="{Binding Path=ParaToolBarBand.Value, Mode=TwoWay}" BandIndex="{Binding Path=ParaToolBarBandIndex.Value, Mode=TwoWay}">
-				<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.ToggleBullets" IsChecked="{Binding Path=IsBulletted, Mode=OneWay}">
+				<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.ToggleBullets" IsChecked="{Binding Path=IsBulleted, Mode=OneWay}">
 					<Image Source="..\Properties\ListBullets.png"/>
 				</ToggleButton>
 				<ToggleButton Style="{StaticResource toolToggleButton}" Command="EditingCommands.ToggleNumbering" IsChecked="{Binding Path=IsNumbered, Mode=OneWay}">

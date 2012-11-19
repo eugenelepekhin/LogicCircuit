@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Reflection;
 using System.Threading;
@@ -14,6 +15,7 @@ namespace LogicCircuit {
 		private VersionChecker versionChecker = new VersionChecker();
 		public Version Version { get; set; }
 
+		[SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
 		public bool CheckVersionPeriodically {
 			get { return VersionChecker.CheckVersionPeriodically; }
 			set { VersionChecker.CheckVersionPeriodically = value; }
@@ -136,12 +138,13 @@ namespace LogicCircuit {
 				return VersionChecker.CheckVersionPeriodically && VersionChecker.LastCheckedCache.Value.AddMonths(1) < DateTime.UtcNow;
 			}
 
-			public bool Check(Action<Version, Exception> onComplete) {
-				if(onComplete == null) {
-					throw new ArgumentNullException("onComplete");
+			[SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
+			public bool Check(Action<Version, Exception> completeAction) {
+				if(completeAction == null) {
+					throw new ArgumentNullException("completeAction");
 				}
 				if(Interlocked.CompareExchange(ref this.webClient, new WebClient(), null) == null) {
-					this.onComplete = onComplete;
+					this.onComplete = completeAction;
 					this.webClient.UseDefaultCredentials = true;
 					this.webClient.DownloadStringCompleted += this.DownloadCompleted;
 					this.webClient.DownloadStringAsync(new Uri("http://www.LogicCircuit.org/LatestVersion.txt"));
@@ -151,6 +154,7 @@ namespace LogicCircuit {
 			}
 
 			private void DownloadCompleted(object sender, DownloadStringCompletedEventArgs e) {
+				this.webClient.Dispose();
 				this.webClient = null;
 				this.onComplete(
 					(e.Error == null) ? new Version(e.Result.Trim()) : null,

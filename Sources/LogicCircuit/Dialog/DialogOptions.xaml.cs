@@ -11,7 +11,7 @@ namespace LogicCircuit {
 	/// </summary>
 	public partial class DialogOptions : Window {
 
-		private Mainframe mainFrame;
+		private Mainframe mainframe;
 
 		//The order of items in this array should match order in enum GateShape
 		private string[] gateShapeList = new string[] { Properties.Resources.GateShapeRectangular, Properties.Resources.GateShapeShaped };
@@ -20,14 +20,14 @@ namespace LogicCircuit {
 		public IEnumerable<int> RecentFileRange { get; private set; }
 		public CultureInfo CurrentCulture { get; set; }
 
-		public DialogOptions(Mainframe mainFrame) {
-			this.mainFrame = mainFrame;
+		public DialogOptions(Mainframe mainframe) {
+			this.mainframe = mainframe;
 			this.RecentFileRange = PinDescriptor.NumberRange(1, 24);
 			this.CurrentCulture = App.CurrentCulture;
 			this.DataContext = this;
 			this.InitializeComponent();
 			this.loadLastFile.IsChecked = Settings.User.LoadLastFileOnStartup;
-			this.showGrid.IsChecked = mainFrame.ShowGrid;
+			this.showGrid.IsChecked = this.mainframe.ShowGrid;
 			this.gateShape.SelectedIndex = (int)Settings.User.GateShape;
 			this.maxRecentFiles.SelectedItem = Settings.User.MaxRecentFileCount;
 
@@ -36,7 +36,7 @@ namespace LogicCircuit {
 		private void OkButtonClick(object sender, RoutedEventArgs e) {
 			Settings.User.LoadLastFileOnStartup = this.loadLastFile.IsChecked.Value;
 			Settings.User.MaxRecentFileCount = (int)this.maxRecentFiles.SelectedItem;
-			this.mainFrame.ShowGrid = this.showGrid.IsChecked.Value;
+			this.mainframe.ShowGrid = this.showGrid.IsChecked.Value;
 			Settings.User.GateShape = (GateShape)this.gateShape.SelectedIndex;
 			if(this.CurrentCulture != App.CurrentCulture) {
 				App.CurrentCulture = this.CurrentCulture;

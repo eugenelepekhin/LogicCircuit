@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace LogicCircuit {
 		
 		public Memory Memory { get; private set; }
 
-		public static DependencyProperty RowsProperty = DependencyProperty.Register("Rows", typeof(RowList), typeof(DialogMemoryEditor));
+		public static readonly DependencyProperty RowsProperty = DependencyProperty.Register("Rows", typeof(RowList), typeof(DialogMemoryEditor));
 		public RowList Rows {
 			get { return (RowList)this.GetValue(DialogMemoryEditor.RowsProperty); }
 			private set { this.SetValue(DialogMemoryEditor.RowsProperty, value); }
@@ -94,6 +95,8 @@ namespace LogicCircuit {
 			this.Rows.ApplyChanges(this.data);
 		}
 
+		[SuppressMessage("Microsoft.Maintainability", "CA1500:VariableNamesShouldNotMatchFieldNames", MessageId = "addressBitWidth")]
+		[SuppressMessage("Microsoft.Maintainability", "CA1500:VariableNamesShouldNotMatchFieldNames", MessageId = "dataBitWidth")]
 		private void ButtonOkClick(object sender, RoutedEventArgs e) {
 			try {
 				this.ApplyChanges();
@@ -137,6 +140,8 @@ namespace LogicCircuit {
 			}
 		}
 
+		[SuppressMessage("Microsoft.Maintainability", "CA1500:VariableNamesShouldNotMatchFieldNames", MessageId = "addressBitWidth")]
+		[SuppressMessage("Microsoft.Maintainability", "CA1500:VariableNamesShouldNotMatchFieldNames", MessageId = "dataBitWidth")]
 		private void ButtonLoadClick(object sender, RoutedEventArgs e) {
 			try {
 				OpenFileDialog dialog = new OpenFileDialog();
@@ -189,6 +194,8 @@ namespace LogicCircuit {
 			}
 		}
 
+		[SuppressMessage("Microsoft.Maintainability", "CA1500:VariableNamesShouldNotMatchFieldNames", MessageId = "addressBitWidth")]
+		[SuppressMessage("Microsoft.Maintainability", "CA1500:VariableNamesShouldNotMatchFieldNames", MessageId = "dataBitWidth")]
 		private void MemorySizeChanged(object sender, SelectionChangedEventArgs e) {
 			try {
 				if(this.initialized) {
@@ -398,6 +405,7 @@ namespace LogicCircuit {
 			}
 		}
 
+		[SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
 		public class Row : INotifyPropertyChanged {
 			private static readonly string[] Cell = new string[] {
 				"C0", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "CA", "CB", "CC", "CD", "CE", "CF"
@@ -480,14 +488,14 @@ namespace LogicCircuit {
 			public string CF { get { return this[0xF]; } }
 
 			public void AddDigit(int index, string digits) {
-				string text = this[index];
+				string cellText = this[index];
 				foreach(char c in digits) {
 					char d = char.ToUpper(c, CultureInfo.InvariantCulture);
 					if(0 <= "0123456789ABCDEF".IndexOf(d)) {
-						text = string.Concat(text.Substring(1), d);
+						cellText = string.Concat(cellText.Substring(1), d);
 					}
 				}
-				int v = int.Parse(text, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+				int v = int.Parse(cellText, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
 				if(this.bitWidth < 32) {
 					v = v & ((1 << this.bitWidth) - 1);
 				}
@@ -503,6 +511,8 @@ namespace LogicCircuit {
 			}
 		}
 
+		[SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
+		[SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
 		public class RowList : IEnumerable<Row> {
 
 			private Row[] list;
@@ -575,8 +585,9 @@ namespace LogicCircuit {
 			}
 		}
 
-		public class OnStartDescriptor {
+		private class OnStartDescriptor {
 			public MemoryOnStart OnStart { get; private set; }
+			[SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
 			public string Text { get; private set; }
 
 			public OnStartDescriptor(MemoryOnStart onStart, string text) {

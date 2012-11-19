@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Windows;
@@ -15,6 +16,7 @@ namespace LogicCircuit {
 	/// </summary>
 	public partial class DialogExportImage : Window, INotifyPropertyChanged {
 
+		[SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
 		public class ImageEncoder {
 			public string Name { get; private set; }
 			private Func<BitmapEncoder> bitmapEncoder;
@@ -87,12 +89,12 @@ namespace LogicCircuit {
 			if(!Mainframe.IsDirectoryPathValid(imagePath)) {
 				imagePath = Mainframe.DefaultPictureFolder();
 			}
-			string fileName = string.Format(CultureInfo.InvariantCulture, "{0}.{1}.{2}",
+			string name = string.Format(CultureInfo.InvariantCulture, "{0}.{1}.{2}",
 				this.editor.Project.Name,
 				this.editor.Project.LogicalCircuit.Name,
 				this.Encoder.Name
 			);
-			return Path.Combine(imagePath, fileName);
+			return Path.Combine(imagePath, name);
 		}
 
 		private void SetFilePath(string filePath) {
