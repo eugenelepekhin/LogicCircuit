@@ -542,9 +542,6 @@ Out</value>
     <value>State {0} is unknown</value>
     <comment>{LogicCircuit.State state}</comment>
   </data>
-  <data name="ErrorDirtyListIsEmpty" xml:space="preserve">
-    <value>Attempt to get function from an empty dirty list.</value>
-  </data>
   <data name="CircuitMapPathSeparator" xml:space="preserve">
     <value>/</value>
   </data>

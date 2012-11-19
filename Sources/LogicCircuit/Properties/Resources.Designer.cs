@@ -978,13 +978,6 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Attempt to get function from an empty dirty list..
-		/// </summary>
- 		public static string ErrorDirtyListIsEmpty {
-			get { return ResourceManager.GetString("ErrorDirtyListIsEmpty", Culture); }
-		}
-
-		/// <summary>
 		/// Looks up a localized string similar to /.
 		/// </summary>
  		public static string CircuitMapPathSeparator {
