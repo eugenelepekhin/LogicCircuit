@@ -265,6 +265,7 @@
     <Compile Include="LambdaUICommand.cs" />
     <Compile Include="Mainframe.Commands.cs" />
     <Compile Include="Mainframe.File.cs" />
+    <Compile Include="RemoveAcceleratorConverter.cs" />
     <Compile Include="Runner\CircuitMap.cs" />
     <Compile Include="Runner\CircuitMap.SymbolMap.cs" />
     <Compile Include="Runner\CircuitMap.Connection.cs" />

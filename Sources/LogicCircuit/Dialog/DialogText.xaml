@@ -18,11 +18,13 @@
 
 		<ToolBarTray Grid.Row="0">
 			<ToolBarTray.Resources>
+				<lc:RemoveAcceleratorConverter x:Key="RemoveAcceleratorConverter"/>
+
 				<Style TargetType="ToggleButton" x:Key="toolToggleButton">
 					<Setter Property="CommandTarget" Value="{Binding ElementName=editor}"/>
 					<Setter Property="VerticalAlignment" Value="Stretch"/>
 					<Setter Property="Width" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=ActualHeight}"/>
-					<Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Command.Text}"/>
+					<Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Command.Text, Converter={StaticResource RemoveAcceleratorConverter}}"/>
 					<Style.Triggers>
 						<Trigger Property="IsEnabled" Value="False">
 							<Setter Property="Opacity" Value="0.5"/>
@@ -53,7 +55,7 @@
 			</ToolBar>
 			<!-- Font Toolbar -->
 			<ToolBar Band="{Binding Path=FontToolBarBand.Value, Mode=TwoWay}" BandIndex="{Binding Path=FontToolBarBandIndex.Value, Mode=TwoWay}">
-				<ComboBox Width="150" ItemsSource="{Binding Path=FontFamilies}" SelectedItem="{Binding Path=CurrentFontFamily}">
+				<ComboBox Width="150" ItemsSource="{Binding Path=FontFamilies}" SelectedItem="{Binding Path=CurrentFontFamily}" ToolTip="{x:Static properties:Resources.ToolTipFontFamily}">
 					<ComboBox.ItemTemplate>
 						<DataTemplate>
 							<TextBlock Text="{Binding Path=Source}" FontFamily="{Binding}" FontSize="16" ToolTip="{Binding}"/>
@@ -61,7 +63,7 @@
 					</ComboBox.ItemTemplate>
 				</ComboBox>
 
-				<ComboBox Width="50" ItemsSource="{Binding Path=FontSizes}" SelectedItem="{Binding Path=CurrentFontSize}"/>
+				<ComboBox Width="50" ItemsSource="{Binding Path=FontSizes}" SelectedItem="{Binding Path=CurrentFontSize}" ToolTip="{x:Static properties:Resources.ToolTipFontSize}"/>
 
 				<ToggleButton Name="boldButton" Style="{StaticResource toolToggleButton}" Command="EditingCommands.ToggleBold" IsChecked="{Binding Path=IsBoldFont, Mode=OneWay}">
 					<TextBlock FontSize="18" FontWeight="Bold">B</TextBlock>

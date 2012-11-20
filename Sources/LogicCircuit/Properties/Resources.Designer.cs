@@ -2323,5 +2323,201 @@ namespace LogicCircuit.Properties {
  		public static string TitleCulture {
 			get { return ResourceManager.GetString("TitleCulture", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Align Center.
+		/// </summary>
+ 		public static string CommandEditAlignCenter {
+			get { return ResourceManager.GetString("CommandEditAlignCenter", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Justify.
+		/// </summary>
+ 		public static string CommandEditAlignJustify {
+			get { return ResourceManager.GetString("CommandEditAlignJustify", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Align Left.
+		/// </summary>
+ 		public static string CommandEditAlignLeft {
+			get { return ResourceManager.GetString("CommandEditAlignLeft", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Align Right.
+		/// </summary>
+ 		public static string CommandEditAlignRight {
+			get { return ResourceManager.GetString("CommandEditAlignRight", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Bold.
+		/// </summary>
+ 		public static string CommandEditBold {
+			get { return ResourceManager.GetString("CommandEditBold", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Bullets.
+		/// </summary>
+ 		public static string CommandEditBullets {
+			get { return ResourceManager.GetString("CommandEditBullets", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Copy.
+		/// </summary>
+ 		public static string CommandEditCopy {
+			get { return ResourceManager.GetString("CommandEditCopy", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Cu_t.
+		/// </summary>
+ 		public static string CommandEditCut {
+			get { return ResourceManager.GetString("CommandEditCut", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Decrease Font Size.
+		/// </summary>
+ 		public static string CommandEditDecreaseFontSize {
+			get { return ResourceManager.GetString("CommandEditDecreaseFontSize", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Decrease Indentation.
+		/// </summary>
+ 		public static string CommandEditDecreaseIndentation {
+			get { return ResourceManager.GetString("CommandEditDecreaseIndentation", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to De_lete.
+		/// </summary>
+ 		public static string CommandEditDelete {
+			get { return ResourceManager.GetString("CommandEditDelete", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Increase Font Size.
+		/// </summary>
+ 		public static string CommandEditIncreaseFontSize {
+			get { return ResourceManager.GetString("CommandEditIncreaseFontSize", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Increase Indentation.
+		/// </summary>
+ 		public static string CommandEditIncreaseIndentation {
+			get { return ResourceManager.GetString("CommandEditIncreaseIndentation", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Italic.
+		/// </summary>
+ 		public static string CommandEditItalic {
+			get { return ResourceManager.GetString("CommandEditItalic", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Numbering.
+		/// </summary>
+ 		public static string CommandEditNumbering {
+			get { return ResourceManager.GetString("CommandEditNumbering", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Paste.
+		/// </summary>
+ 		public static string CommandEditPaste {
+			get { return ResourceManager.GetString("CommandEditPaste", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Redo.
+		/// </summary>
+ 		public static string CommandEditRedo {
+			get { return ResourceManager.GetString("CommandEditRedo", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Select _All.
+		/// </summary>
+ 		public static string CommandEditSelectAll {
+			get { return ResourceManager.GetString("CommandEditSelectAll", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Underline.
+		/// </summary>
+ 		public static string CommandEditUnderline {
+			get { return ResourceManager.GetString("CommandEditUnderline", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Undo.
+		/// </summary>
+ 		public static string CommandEditUndo {
+			get { return ResourceManager.GetString("CommandEditUndo", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to E_xit.
+		/// </summary>
+ 		public static string CommandFileClose {
+			get { return ResourceManager.GetString("CommandFileClose", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _New.
+		/// </summary>
+ 		public static string CommandFileNew {
+			get { return ResourceManager.GetString("CommandFileNew", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Open.
+		/// </summary>
+ 		public static string CommandFileOpen {
+			get { return ResourceManager.GetString("CommandFileOpen", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Save.
+		/// </summary>
+ 		public static string CommandFileSave {
+			get { return ResourceManager.GetString("CommandFileSave", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Save _As....
+		/// </summary>
+ 		public static string CommandFileSaveAs {
+			get { return ResourceManager.GetString("CommandFileSaveAs", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to View _Help.
+		/// </summary>
+ 		public static string CommandHelpView {
+			get { return ResourceManager.GetString("CommandHelpView", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Font Family.
+		/// </summary>
+ 		public static string ToolTipFontFamily {
+			get { return ResourceManager.GetString("ToolTipFontFamily", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Font Size.
+		/// </summary>
+ 		public static string ToolTipFontSize {
+			get { return ResourceManager.GetString("ToolTipFontSize", Culture); }
+		}
 	}
 }

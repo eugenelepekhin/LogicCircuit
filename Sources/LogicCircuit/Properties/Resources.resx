@@ -1154,4 +1154,88 @@ Such circuit cannot be used more than once on other circuits as potentially diff
   <data name="TitleCulture" xml:space="preserve">
     <value>L_anguage</value>
   </data>
+  <data name="CommandEditAlignCenter" xml:space="preserve">
+    <value>Align Center</value>
+  </data>
+  <data name="CommandEditAlignJustify" xml:space="preserve">
+    <value>Justify</value>
+  </data>
+  <data name="CommandEditAlignLeft" xml:space="preserve">
+    <value>Align Left</value>
+  </data>
+  <data name="CommandEditAlignRight" xml:space="preserve">
+    <value>Align Right</value>
+  </data>
+  <data name="CommandEditBold" xml:space="preserve">
+    <value>Bold</value>
+  </data>
+  <data name="CommandEditBullets" xml:space="preserve">
+    <value>Bullets</value>
+  </data>
+  <data name="CommandEditCopy" xml:space="preserve">
+    <value>_Copy</value>
+  </data>
+  <data name="CommandEditCut" xml:space="preserve">
+    <value>Cu_t</value>
+  </data>
+  <data name="CommandEditDecreaseFontSize" xml:space="preserve">
+    <value>Decrease Font Size</value>
+  </data>
+  <data name="CommandEditDecreaseIndentation" xml:space="preserve">
+    <value>Decrease Indentation</value>
+  </data>
+  <data name="CommandEditDelete" xml:space="preserve">
+    <value>De_lete</value>
+  </data>
+  <data name="CommandEditIncreaseFontSize" xml:space="preserve">
+    <value>Increase Font Size</value>
+  </data>
+  <data name="CommandEditIncreaseIndentation" xml:space="preserve">
+    <value>Increase Indentation</value>
+  </data>
+  <data name="CommandEditItalic" xml:space="preserve">
+    <value>Italic</value>
+  </data>
+  <data name="CommandEditNumbering" xml:space="preserve">
+    <value>Numbering</value>
+  </data>
+  <data name="CommandEditPaste" xml:space="preserve">
+    <value>_Paste</value>
+  </data>
+  <data name="CommandEditRedo" xml:space="preserve">
+    <value>_Redo</value>
+  </data>
+  <data name="CommandEditSelectAll" xml:space="preserve">
+    <value>Select _All</value>
+  </data>
+  <data name="CommandEditUnderline" xml:space="preserve">
+    <value>Underline</value>
+  </data>
+  <data name="CommandEditUndo" xml:space="preserve">
+    <value>_Undo</value>
+  </data>
+  <data name="CommandFileClose" xml:space="preserve">
+    <value>E_xit</value>
+  </data>
+  <data name="CommandFileNew" xml:space="preserve">
+    <value>_New</value>
+  </data>
+  <data name="CommandFileOpen" xml:space="preserve">
+    <value>_Open</value>
+  </data>
+  <data name="CommandFileSave" xml:space="preserve">
+    <value>_Save</value>
+  </data>
+  <data name="CommandFileSaveAs" xml:space="preserve">
+    <value>Save _As...</value>
+  </data>
+  <data name="CommandHelpView" xml:space="preserve">
+    <value>View _Help</value>
+  </data>
+  <data name="ToolTipFontFamily" xml:space="preserve">
+    <value>Font Family</value>
+  </data>
+  <data name="ToolTipFontSize" xml:space="preserve">
+    <value>Font Size</value>
+  </data>
 </root>

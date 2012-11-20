@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Documents;
 
 namespace LogicCircuit {
 	/// <summary>
@@ -37,7 +38,11 @@ namespace LogicCircuit {
 
 		protected override void OnStartup(StartupEventArgs e) {
 			LogicCircuit.Properties.Resources.Culture = App.CurrentCulture;
+
 			base.OnStartup(e);
+
+			App.InitCommands();
+
 			if(e != null && e.Args != null && 0 < e.Args.Length && !string.IsNullOrEmpty(e.Args[0])) {
 				this.FileToOpen = e.Args[0];
 			}
@@ -75,6 +80,41 @@ namespace LogicCircuit {
 				name = App.availableCultureNames[0];
 			}
 			return name;
+		}
+
+		private static void InitCommands() {
+			ApplicationCommands.New.Text = LogicCircuit.Properties.Resources.CommandFileNew;
+			ApplicationCommands.Open.Text = LogicCircuit.Properties.Resources.CommandFileOpen;
+			ApplicationCommands.Save.Text = LogicCircuit.Properties.Resources.CommandFileSave;
+			ApplicationCommands.SaveAs.Text = LogicCircuit.Properties.Resources.CommandFileSaveAs;
+			ApplicationCommands.Close.Text = LogicCircuit.Properties.Resources.CommandFileClose;
+
+			ApplicationCommands.Undo.Text = LogicCircuit.Properties.Resources.CommandEditUndo;
+			ApplicationCommands.Redo.Text = LogicCircuit.Properties.Resources.CommandEditRedo;
+			ApplicationCommands.Cut.Text = LogicCircuit.Properties.Resources.CommandEditCut;
+			ApplicationCommands.Copy.Text = LogicCircuit.Properties.Resources.CommandEditCopy;
+			ApplicationCommands.Paste.Text = LogicCircuit.Properties.Resources.CommandEditPaste;
+			ApplicationCommands.Delete.Text = LogicCircuit.Properties.Resources.CommandEditDelete;
+			ApplicationCommands.SelectAll.Text = LogicCircuit.Properties.Resources.CommandEditSelectAll;
+
+			ApplicationCommands.Help.Text = LogicCircuit.Properties.Resources.CommandHelpView;
+
+			// Text editor commands
+			EditingCommands.ToggleBold.Text = LogicCircuit.Properties.Resources.CommandEditBold;
+			EditingCommands.ToggleItalic.Text = LogicCircuit.Properties.Resources.CommandEditItalic;
+			EditingCommands.ToggleUnderline.Text = LogicCircuit.Properties.Resources.CommandEditUnderline;
+			EditingCommands.IncreaseFontSize.Text = LogicCircuit.Properties.Resources.CommandEditIncreaseFontSize;
+			EditingCommands.DecreaseFontSize.Text = LogicCircuit.Properties.Resources.CommandEditDecreaseFontSize;
+
+			EditingCommands.ToggleBullets.Text = LogicCircuit.Properties.Resources.CommandEditBullets;
+			EditingCommands.ToggleNumbering.Text = LogicCircuit.Properties.Resources.CommandEditNumbering;
+
+			EditingCommands.AlignLeft.Text = LogicCircuit.Properties.Resources.CommandEditAlignLeft;
+			EditingCommands.AlignCenter.Text = LogicCircuit.Properties.Resources.CommandEditAlignCenter;
+			EditingCommands.AlignRight.Text = LogicCircuit.Properties.Resources.CommandEditAlignRight;
+			EditingCommands.AlignJustify.Text = LogicCircuit.Properties.Resources.CommandEditAlignJustify;
+			EditingCommands.IncreaseIndentation.Text = LogicCircuit.Properties.Resources.CommandEditIncreaseIndentation;
+			EditingCommands.DecreaseIndentation.Text = LogicCircuit.Properties.Resources.CommandEditDecreaseIndentation;
 		}
 	}
 }
