@@ -301,7 +301,7 @@
     <value>Текст гиперссылки пуст</value>
   </data>
   <data name="ErrorHyperlinkUrl" xml:space="preserve">
-    <value>Адрес гиперссылки некорректен</value>
+    <value>Адрес перехода некорректен</value>
   </data>
   <data name="ErrorJamBitWidthDifferent" xml:space="preserve">
     <value>Входной разъем {0} ({1}) и выходной разъем {2} ({3}) на {4} имеют различную разрядность и не могут быть соединены. Пожалуйста, устраните эту проблему.</value>
@@ -462,7 +462,7 @@
     <value>_Файл</value>
   </data>
   <data name="MenuHeaderHelp" xml:space="preserve">
-    <value>_Справка</value>
+    <value>Спр_авка</value>
   </data>
   <data name="MessageFloatingSymbolCount" xml:space="preserve">
     <value>Найдено {0} не подсоединенных символов.</value>
@@ -744,7 +744,7 @@
     <value>_Инвертировать</value>
   </data>
   <data name="TitleInverted" xml:space="preserve">
-    <value>_Инвертирован</value>
+    <value>Ин_вертирован</value>
   </data>
   <data name="TitleIsMaximumSpeed1" xml:space="preserve">
     <value>Работать на максимальной скорости</value>
@@ -756,7 +756,7 @@
     <value>_Переключатель</value>
   </data>
   <data name="TitleLoad" xml:space="preserve">
-    <value>_Загрузить...</value>
+    <value>За_грузить...</value>
   </data>
   <data name="TitleLoadLastFile" xml:space="preserve">
     <value>_Загружать последний отрытый файл при запуске</value>
@@ -863,7 +863,7 @@
     <value>Веб-сайт:</value>
   </data>
   <data name="TitleWriteOn" xml:space="preserve">
-    <value>Запись на:</value>
+    <value>Запись _на:</value>
   </data>
   <data name="TitleYes" xml:space="preserve">
     <value>_Да</value>
