@@ -256,7 +256,7 @@
     <value>_Импортировать...</value>
   </data>
   <data name="CommandFileOpenRecent" xml:space="preserve">
-    <value>Открыть _недавние</value>
+    <value>Открыть _недавний</value>
   </data>
   <data name="CommandHelpAbout" xml:space="preserve">
     <value>_О программе</value>
@@ -1002,5 +1002,89 @@
   </data>
   <data name="GateLedNotation" xml:space="preserve">
     <value>Светодиод</value>
+  </data>
+  <data name="CommandEditAlignCenter" xml:space="preserve">
+    <value>По центру</value>
+  </data>
+  <data name="CommandEditAlignJustify" xml:space="preserve">
+    <value>Выключка</value>
+  </data>
+  <data name="CommandEditAlignLeft" xml:space="preserve">
+    <value>Выровнять по левому краю</value>
+  </data>
+  <data name="CommandEditAlignRight" xml:space="preserve">
+    <value>Выровнять по правому краю</value>
+  </data>
+  <data name="CommandEditBold" xml:space="preserve">
+    <value>Жирный</value>
+  </data>
+  <data name="CommandEditBullets" xml:space="preserve">
+    <value>Маркированный</value>
+  </data>
+  <data name="CommandEditCopy" xml:space="preserve">
+    <value>_Копировать</value>
+  </data>
+  <data name="CommandEditCut" xml:space="preserve">
+    <value>_Вырезать</value>
+  </data>
+  <data name="CommandEditDecreaseFontSize" xml:space="preserve">
+    <value>Уменьшить размер шрифта</value>
+  </data>
+  <data name="CommandEditDecreaseIndentation" xml:space="preserve">
+    <value>Уменьшение отступа</value>
+  </data>
+  <data name="CommandEditDelete" xml:space="preserve">
+    <value>_Удалить</value>
+  </data>
+  <data name="CommandEditIncreaseFontSize" xml:space="preserve">
+    <value>Увеличить размер шрифта</value>
+  </data>
+  <data name="CommandEditIncreaseIndentation" xml:space="preserve">
+    <value>Увеличение отступа</value>
+  </data>
+  <data name="CommandEditItalic" xml:space="preserve">
+    <value>Курсив</value>
+  </data>
+  <data name="CommandEditNumbering" xml:space="preserve">
+    <value>Нумерованный</value>
+  </data>
+  <data name="CommandEditPaste" xml:space="preserve">
+    <value>Вст_авить</value>
+  </data>
+  <data name="CommandEditRedo" xml:space="preserve">
+    <value>В_ернуть</value>
+  </data>
+  <data name="CommandEditSelectAll" xml:space="preserve">
+    <value>Выделить в_се</value>
+  </data>
+  <data name="CommandEditUnderline" xml:space="preserve">
+    <value>Подчеркивание</value>
+  </data>
+  <data name="CommandEditUndo" xml:space="preserve">
+    <value>_Отменить</value>
+  </data>
+  <data name="CommandFileClose" xml:space="preserve">
+    <value>В_ыход</value>
+  </data>
+  <data name="CommandFileNew" xml:space="preserve">
+    <value>Созд_ать</value>
+  </data>
+  <data name="CommandFileOpen" xml:space="preserve">
+    <value>_Открыть</value>
+  </data>
+  <data name="CommandFileSave" xml:space="preserve">
+    <value>_Сохранить</value>
+  </data>
+  <data name="CommandFileSaveAs" xml:space="preserve">
+    <value>Сохранить _как...</value>
+  </data>
+  <data name="CommandHelpView" xml:space="preserve">
+    <value>Прос_мотреть справку</value>
+  </data>
+  <data name="ToolTipFontFamily" xml:space="preserve">
+    <value>Семейство шрифтов</value>
+  </data>
+  <data name="ToolTipFontSize" xml:space="preserve">
+    <value>Размер шрифта</value>
   </data>
 </root>
