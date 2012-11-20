@@ -609,11 +609,7 @@
 
 		<!-- Status bar of the window -->
 		<StatusBar Grid.Row="2">
-			<StatusBarItem>
-				<TextBlock Margin="8,0" Text="{Binding Path=Status}" VerticalAlignment="Center"/>
-			</StatusBarItem>
-
-			<StatusBarItem HorizontalAlignment="Right">
+			<StatusBarItem DockPanel.Dock="Right">
 				<StackPanel Orientation="Horizontal">
 					<Label Content="{x:Static properties:Resources.TitleZoom}" Target="{Binding ElementName=zoom}" VerticalAlignment="Center"/>
 					<Slider Width="100" x:Name="zoom" VerticalAlignment="Center" Background="{StaticResource SliderBackground}"
@@ -677,6 +673,10 @@
 						</Grid>
 					</Border>
 				</StackPanel>
+			</StatusBarItem>
+
+			<StatusBarItem DockPanel.Dock="Left">
+				<TextBlock Margin="8,0" Text="{Binding Path=Status}" VerticalAlignment="Center" ToolTip="{Binding Path=Status}"/>
 			</StatusBarItem>
 		</StatusBar>
 	</Grid>
