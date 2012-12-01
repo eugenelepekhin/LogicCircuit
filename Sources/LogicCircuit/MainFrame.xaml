@@ -581,7 +581,7 @@
 			<GridSplitter Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Stretch" Width="4" Background="Transparent"/>
 
 			<!-- Main Diagram -->
-			<GroupBox Grid.Column="2" Header="{Binding Path=Editor.Project.LogicalCircuit.Name}">
+			<GroupBox Grid.Column="2" Header="{Binding Path=Editor.Project.LogicalCircuit.Name, FallbackValue=''}">
 				<ScrollViewer Name="DiagramScroll" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" LostFocus="DiagramLostFocus" LostKeyboardFocus="DiagramLostKeyboardFocus">
 					<Canvas Name="Diagram" HorizontalAlignment="Left" VerticalAlignment="Top"
 						Width="{x:Static lc:Symbol.LogicalCircuitWidth}"
@@ -613,7 +613,7 @@
 				<StackPanel Orientation="Horizontal">
 					<Label Content="{x:Static properties:Resources.TitleZoom}" Target="{Binding ElementName=zoom}" VerticalAlignment="Center"/>
 					<Slider Width="100" x:Name="zoom" VerticalAlignment="Center" Background="{StaticResource SliderBackground}"
-						Minimum="0.1" Maximum="3" Value="{Binding Path=Editor.Zoom, Mode=TwoWay}"
+						Minimum="0.1" Maximum="3" Value="{Binding Path=Editor.Zoom, Mode=TwoWay, FallbackValue=1}"
 						IsMoveToPointEnabled="True"
 						TickPlacement="TopLeft"
 						Ticks="0, 0.5, 1, 1.5, 2, 2.5, 3"
