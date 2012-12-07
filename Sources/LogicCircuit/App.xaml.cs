@@ -13,7 +13,7 @@ namespace LogicCircuit {
 	/// Interaction logic for App.xaml
 	/// </summary>
 	public partial class App : Application {
-		private static string[] availableCultureNames = new string[] {
+		private static readonly string[] availableCultureNames = new string[] {
 			"en-US",
 			"ru-RU",
 		};
@@ -76,8 +76,11 @@ namespace LogicCircuit {
 
 		private static string DefaultCultureName() {
 			string name = CultureInfo.CurrentUICulture.Name;
-			if(!App.availableCultureNames.Contains(name)) {
-				name = App.availableCultureNames[0];
+			if(!App.availableCultureNames.Contains(name, StringComparer.OrdinalIgnoreCase)) {
+				// Take language part of culture name: first two chars of "en-EN"
+				string prefix = name.Substring(0, Math.Min(name.Length, 2));
+				Tracer.Assert(prefix.Length == 2);
+				name = App.availableCultureNames.FirstOrDefault(n => n.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)) ?? App.availableCultureNames[0];
 			}
 			return name;
 		}
