@@ -1238,4 +1238,7 @@ Such circuit cannot be used more than once on other circuits as potentially diff
   <data name="ToolTipFontSize" xml:space="preserve">
     <value>Font Size</value>
   </data>
+  <data name="TitleCredits" xml:space="preserve">
+    <value>Credits:</value>
+  </data>
 </root>

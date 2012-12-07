@@ -2519,5 +2519,12 @@ namespace LogicCircuit.Properties {
  		public static string ToolTipFontSize {
 			get { return ResourceManager.GetString("ToolTipFontSize", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Credits:.
+		/// </summary>
+ 		public static string TitleCredits {
+			get { return ResourceManager.GetString("TitleCredits", Culture); }
+		}
 	}
 }
