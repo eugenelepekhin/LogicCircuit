@@ -177,9 +177,6 @@
   <data name="CircuitMapLabelSeparator" xml:space="preserve">
     <value> на </value>
   </data>
-  <data name="CircuitMapPathSeparator" xml:space="preserve">
-    <value>/</value>
-  </data>
   <data name="CircuitProjectName" xml:space="preserve">
     <value>Проект</value>
   </data>
@@ -279,9 +276,6 @@
   <data name="CommandTruthTable" xml:space="preserve">
     <value>Таблица истинности</value>
   </data>
-  <data name="ConstantNotation" xml:space="preserve">
-    <value>{0:X}</value>
-  </data>
   <data name="DefaultGateShape" xml:space="preserve">
     <value>Rectangular</value>
   </data>
@@ -341,9 +335,6 @@
   <data name="GateAndName" xml:space="preserve">
     <value>И</value>
   </data>
-  <data name="GateAndNotation" xml:space="preserve">
-    <value>&amp;</value>
-  </data>
   <data name="Gate7SegName" xml:space="preserve">
     <value>7-сегментный индикатор</value>
   </data>
@@ -352,9 +343,6 @@
   </data>
   <data name="GateClockName" xml:space="preserve">
     <value>Генератор тактовой частоты</value>
-  </data>
-  <data name="GateClockNotation" xml:space="preserve">
-    <value>ω</value>
   </data>
   <data name="GateLedName" xml:space="preserve">
     <value>Светодиод</value>
@@ -367,9 +355,6 @@
   </data>
   <data name="GateOrNotName" xml:space="preserve">
     <value>Или-Не</value>
-  </data>
-  <data name="GateNotNotation" xml:space="preserve">
-    <value>~</value>
   </data>
   <data name="GateProbeName" xml:space="preserve">
     <value>Пробник</value>
