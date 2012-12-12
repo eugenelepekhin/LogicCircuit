@@ -132,6 +132,9 @@ namespace LogicCircuit {
 						this.Memory.OnStart = memoryOnStart;
 						this.Memory.SetMemoryValue(saveData ? this.data : null);
 						this.Memory.Note = text;
+						if(this.Memory.Writable) {
+							MemorySet.UpdateWritePinName(this.Memory);
+						}
 					});
 				}
 				this.Close();
