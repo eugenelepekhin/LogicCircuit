@@ -405,7 +405,7 @@
     <value>Главная</value>
   </data>
   <data name="LogicalCircuitMainNotation" xml:space="preserve">
-    <value>Главная</value>
+    <value>Глав.</value>
   </data>
   <data name="LedMatrixRowSelector" xml:space="preserve">
     <value>для выбора строки {0}</value>
@@ -432,7 +432,8 @@
     <value>Случайно</value>
   </data>
   <data name="MemoryWritePinName" xml:space="preserve">
-    <value>Вход записи ОЗУ. Значение в памяти обновляется при {0}</value>
+    <value>Вход записи ОЗУ.
+Значение в памяти обновляется при {0}</value>
   </data>
   <data name="MemoryOnStartZeros" xml:space="preserve">
     <value>Установить все биты в 0</value>
@@ -977,10 +978,10 @@
     <value>Неизвестное состояние {0}</value>
   </data>
   <data name="WriteOn0" xml:space="preserve">
-    <value>переход из 1 в 0</value>
+    <value>переходе из 1 в 0</value>
   </data>
   <data name="WriteOn1" xml:space="preserve">
-    <value>переход из 0 в 1</value>
+    <value>переходе из 0 в 1</value>
   </data>
   <data name="TitleTotal" xml:space="preserve">
     <value>Всего:</value>
