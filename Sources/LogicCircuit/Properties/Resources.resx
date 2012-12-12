@@ -246,7 +246,8 @@ The file you are trying to open either corrupted or it was created by newer vers
     <value>d</value>
   </data>
   <data name="MemoryWritePinName" xml:space="preserve">
-    <value>RAM Write input. Memory value get updated on {0}</value>
+    <value>RAM Write input.
+Memory value get updated on {0}</value>
     <comment>{string writeOn}</comment>
   </data>
   <data name="MemoryWritePinNotation" xml:space="preserve">
@@ -303,10 +304,10 @@ Do you want to save it?</value>
     <value>_Yes</value>
   </data>
   <data name="WriteOn0" xml:space="preserve">
-    <value>failing from 1 to 0</value>
+    <value>falling from 1 to 0</value>
   </data>
   <data name="WriteOn1" xml:space="preserve">
-    <value>raising from 0 to 1</value>
+    <value>rising from 0 to 1</value>
   </data>
   <data name="ConstantNotation" xml:space="preserve">
     <value>{0:X}</value>

@@ -338,7 +338,8 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to RAM Write input. Memory value get updated on {0}.
+		/// Looks up a localized string similar to RAM Write input.
+		/// Memory value get updated on {0}.
 		/// </summary>
  		public static string MemoryWritePinName(string writeOn) {
 			return string.Format(Culture, ResourceManager.GetString("MemoryWritePinName", Culture), writeOn);
@@ -458,14 +459,14 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to failing from 1 to 0.
+		/// Looks up a localized string similar to falling from 1 to 0.
 		/// </summary>
  		public static string WriteOn0 {
 			get { return ResourceManager.GetString("WriteOn0", Culture); }
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to raising from 0 to 1.
+		/// Looks up a localized string similar to rising from 0 to 1.
 		/// </summary>
  		public static string WriteOn1 {
 			get { return ResourceManager.GetString("WriteOn1", Culture); }
