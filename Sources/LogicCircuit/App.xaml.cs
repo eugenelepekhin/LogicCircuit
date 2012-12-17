@@ -15,7 +15,9 @@ namespace LogicCircuit {
 	public partial class App : Application {
 		private static readonly string[] availableCultureNames = new string[] {
 			"en-US",
+			"ar",
 			"ru-RU",
+			"uk-UA",
 		};
 		
 		public static IEnumerable<CultureInfo> AvailableCultures {

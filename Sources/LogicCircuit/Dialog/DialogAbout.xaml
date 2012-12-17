@@ -59,6 +59,8 @@
 				<ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="5">
 					<StackPanel Orientation="Vertical">
 						<TextBlock>Eugene Lepekhin</TextBlock>
+						<TextBlock>Maxym</TextBlock>
+						<TextBlock>Mohammad Mawaheb Seraj Eddin</TextBlock>
 						<TextBlock>Natalia Pererezova</TextBlock>
 						<TextBlock>Sergey Dubinets</TextBlock>
 					</StackPanel>
