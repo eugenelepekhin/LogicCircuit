@@ -472,7 +472,7 @@
 		<value>إضغط   Ctrl+{Shift}+Tab للتحويل بين الدارات المنطقية و انقر لتحديد\إزالة تحديد العناصر بشكل منفرد</value>
 	</data>
 	<data name="TipOnWireSelect" xml:space="preserve">
-		<value> </value>
+		<value>Shift+{Ctrl}+Click  على سلك من أجل تحديد\إزالة تحديد بالكامل ,  Alt+Click على سلك محدد من أجل تقسيمه , أو على نقطة مشتركة من أجل الدمج.</value>
 	</data>
 	<data name="PowerOff" xml:space="preserve">
 		<value>إطفاء الطاقة</value>
@@ -859,5 +859,63 @@
 	</data>
 	<data name="ProjectSummary" xml:space="preserve">
 		<value>{0} دارة منطقية, في {1} تصنيق تقوم باستخدام {2} رمز و {3} سلك</value>
+	</data>
+	<data name="MemoryWritePinName" xml:space="preserve">
+		<value>مدخل الكتابة الخاص بالـ RAM . يتم تحديث القيمة المخزنة  في الذاكرة عند {0}</value>
+	</data>
+	<data name="ErrorJamBitWidthDifferent" xml:space="preserve">
+		<value>تماس الدخل الخاص بـ {0} ({1}) و تماس الخرج الخاص بـ  {2} ({3}) لهما عرض بت مختلف و لا يمكن وصلهما. الرجاء حاول حل المشكلة.</value>
+	</data>
+	<data name="ErrorManyResults" xml:space="preserve">
+		<value>تماس الدخل {0} الخاص بـ {0} متصل بأكثر من تماس خرج واحد و التماسات المتصل بها ليست ثلاثية الحالة.</value>
+	</data>
+	<data name="MessageNotRootConstant" xml:space="preserve">
+		<value>فقط الثوابت الموجودة في الدارة  الرئيسية  ({0}) يمكن تغييرها عند تشغيل الطاقة.</value>
+	</data>
+	<data name="CaptionSplitterPinNumber" xml:space="preserve">
+		<value>تقسيم التماسات.</value>
+	</data>
+	<data name="CaptionSplitterDirection" xml:space="preserve">
+		<value>دمج التماسات</value>
+	</data>
+	<data name="TitleRunningCircuit" xml:space="preserve">
+		<value>الدارة الفعالة</value>
+	</data>
+	<data name="ToolTipPinSide" xml:space="preserve">
+		<value>اختر طرف الدارة التي سيتم وضع التماس فيها.</value>
+	</data>
+	<data name="CommandCircuitPower" xml:space="preserve">
+		<value>الطاقة</value>
+	</data>
+	<data name="ErrorUnsupportedUri" xml:space="preserve">
+		<value>لا يمكن الوصول إلى هذا العنوان.</value>
+	</data>
+	<data name="ToolTipColumns" xml:space="preserve">
+		<value>اختر عدد أعمدة مصفوفة الـ LED</value>
+	</data>
+	<data name="MessageInputOutputPinsMissing" xml:space="preserve">
+		<value>لا يوجد تماسات دخل أو خرج لهذه الدارة.
+سيتم بناء جداول الحقيقة بإرسال جميع التبديلات الممكنة للبيانات إلى تماسات الدخل و قراءة النتائج من تماسات الخرج.</value>
+	</data>
+	<data name="MemoryOnStartData" xml:space="preserve">
+		<value>حافظ على بيانات الذاكرة بين مرات التشغيل.</value>
+	</data>
+	<data name="ToolTipInputPin" xml:space="preserve">
+		<value>دخل {0} بتات تماس{1}</value>
+	</data>
+	<data name="ToolTipRAM" xml:space="preserve">
+		<value>بت عنوان RAM {0} \ بت بينات {1}</value>
+	</data>
+	<data name="ToolTipROM" xml:space="preserve">
+		<value>بت العنوان ROM {0} \ {1}  بت بيانات</value>
+	</data>
+	<data name="ReportMemoryName" xml:space="preserve">
+		<value>{0}: {1}بت عنوان, {2}بت بينات</value>
+	</data>
+	<data name="ToolTipIsToggle" xml:space="preserve">
+		<value>اذا تم توضيع الزر ,عندها سيغر حالته عند كل نقرة, اما اذا لم يتم توضيعه, عندها سيغر حالته فقط عندما يكون مضغوطاً أو غير مضغوط.</value>
+	</data>
+	<data name="MessageUsageNote" xml:space="preserve">
+		<value>أختر الدارة التي يستخدم فيها العنصر الحالي و انقر نقراً مزدوجاً للذهاب إلى هناك و اختر الرمز للعنصر الحالي.</value>
 	</data>
 </root>

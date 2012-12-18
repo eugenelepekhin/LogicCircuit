@@ -1028,7 +1028,7 @@
     <value>Вимкнути</value>
   </data>
   <data name="CaptionColumns" xml:space="preserve">
-    <value>Рядки</value>
+    <value>Стовпчиків</value>
   </data>
   <data name="FlowDirection" xml:space="preserve">
     <value>LeftToRight</value>
