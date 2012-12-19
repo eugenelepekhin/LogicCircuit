@@ -1171,9 +1171,6 @@
   <data name="ErrorClipboardCorrupted" xml:space="preserve">
     <value>Дані в буфері обміну пошкоджені та не можуть бути вставлені.</value>
   </data>
-  <data name="DefaultGateShape" xml:space="preserve">
-    <value>Фігурний</value>
-  </data>
   <data name="CommandTruthTable" xml:space="preserve">
     <value>Таблиця істинності</value>
   </data>
