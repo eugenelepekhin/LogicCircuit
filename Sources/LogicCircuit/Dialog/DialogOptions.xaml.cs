@@ -42,7 +42,17 @@ namespace LogicCircuit {
 				App.CurrentCulture = this.CurrentCulture;
 			}
 			if(Properties.Resources.Culture != this.CurrentCulture) {
-				App.Mainframe.InformationMessage(Properties.Resources.MessageRestartRequared);
+				// Show message in both languages old and new.
+				CultureInfo old = Properties.Resources.Culture;
+				string oldMessage = Properties.Resources.MessageRestartRequared;
+				Properties.Resources.Culture = this.CurrentCulture;
+				string newMessage = Properties.Resources.MessageRestartRequared;
+				Properties.Resources.Culture = old;
+				if(oldMessage != newMessage) {
+					App.Mainframe.InformationMessage(oldMessage + "\n\n" + newMessage);
+				} else {
+					App.Mainframe.InformationMessage(oldMessage);
+				}
 			}
 			this.DialogResult = true;
 			this.Close();
