@@ -235,15 +235,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:LogicCircuit"
-        "ProductCode" = "8:{3333C754-6A96-4F3B-8FF3-E471BD8BBEBA}"
-        "PackageCode" = "8:{0A9B3BF3-E95C-4E87-B456-8A8C8A16B6D1}"
+        "ProductCode" = "8:{58B0F195-7E53-4DFB-8098-0CDE32AB3E31}"
+        "PackageCode" = "8:{5FF32448-9E19-4619-9FF3-45A9B0DA4C2C}"
         "UpgradeCode" = "8:{D2D9AB38-631B-471D-B6C1-2C4F4391FE5E}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:2.12.0920"
+        "ProductVersion" = "8:2.12.1220"
         "Manufacturer" = "8:LogicCircuit"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://www.LogicCircuit.org/"
@@ -769,6 +769,34 @@
         }
         "ProjectOutput"
         {
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_3329243ACE8E43D781B0E0F7BBFDA206"
+            {
+            "SourcePath" = "8:"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_01EF9547D3BE4763A026F7D0DA5A7942"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:LocalizedResourceDlls"
+            "OutputProjectGuid" = "8:{45ED9DDA-67B2-4AA9-BB4C-65A9684060AE}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_846BF9F02B0F46B3ACE8B59AA15A2D8D"
             {
             "SourcePath" = "8:..\\LogicCircuit\\obj\\Release\\LogicCircuit.exe"
