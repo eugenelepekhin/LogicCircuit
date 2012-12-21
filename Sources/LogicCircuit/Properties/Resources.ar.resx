@@ -300,7 +300,7 @@
 		<value>إزالة تحديد جميع الأسلاك</value>
 	</data>
 	<data name="CommandFileFileImport" xml:space="preserve">
-		<value>إستيراد</value>
+		<value>إستيراد...</value>
 	</data>
 	<data name="CommandEditBullets" xml:space="preserve">
 		<value>نقط</value>
@@ -333,7 +333,7 @@
 		<value>احفظ البيانات في ملف</value>
 	</data>
 	<data name="ToolTipPinNotation" xml:space="preserve">
-		<value>ادخل نصاً قصيراً جداً ليظهر على رمز الدارة بجانب التماس (pin)</value>
+		<value>ادخل نصاً قصيراً جداً ليظهر على رمز الدارة بجانب التماس</value>
 	</data>
 	<data name="ToolTipLedMatrixType" xml:space="preserve">
 		<value>اختر طريقة التحكم بالمصفوفة</value>
@@ -388,7 +388,7 @@
 		<value>رئيسي</value>
 	</data>
 	<data name="ErrorClipboardCorrupted" xml:space="preserve">
-		<value>البيانات التي تم نسخها معطوبةو لا يمكن لصقها</value>
+		<value>البيانات التي تم نسخها معطوبة و لا يمكن لصقها</value>
 	</data>
 	<data name="MemoryOnStartOnes" xml:space="preserve">
 		<value>تحويل كل البتات إلى 1</value>
@@ -544,7 +544,7 @@
 		<value>محرف غير معروف :{0}</value>
 	</data>
 	<data name="ParserErrorUnknownPin" xml:space="preserve">
-		<value>{0} تماس الدخل (Pin) أو تماس الخرج (Pin)غير موجود</value>
+		<value>{0} تماس الدخل  أو تماس الخرج غير موجود</value>
 	</data>
 	<data name="CaptionAddressBitWidth" xml:space="preserve">
 		<value>بت العنوان</value>
@@ -720,7 +720,7 @@
 لا يمكن استخدام مثل هذه الدارات أكثر من مرة واحدة في دارة أخرى لأنه قد يتم تخزين بينات مختلفة على الذاكرة .</value>
 	</data>
 	<data name="TipOnAwaitingArea" xml:space="preserve">
-		<value>{0} {1}. قم بإحاطة عدة رموز من أجل تحديدها, اضغط   Shift  من أجل الحفاظ على التحديد الحالي.</value>
+		<value>{0} {1}. قم بإحاطة عدة رموز من أجل تحديدها, اضغط   Shift باستمرار من أجل الحفاظ على التحديد الحالي.</value>
 	</data>
 	<data name="FailUnknownFunction" xml:space="preserve">
 		<value>دالة غير معروفة {0}</value>
@@ -858,16 +858,16 @@
 		<value>تحته خط</value>
 	</data>
 	<data name="ProjectSummary" xml:space="preserve">
-		<value>{0} دارة منطقية, في {1} تصنيق تقوم باستخدام {2} رمز و {3} سلك</value>
+		<value>{0} دارة منطقية, في {1} تصنيف تقوم باستخدام {2} رمز و {3} سلك</value>
 	</data>
 	<data name="MemoryWritePinName" xml:space="preserve">
 		<value>مدخل الكتابة الخاص بالـ RAM . يتم تحديث القيمة المخزنة  في الذاكرة عند {0}</value>
 	</data>
 	<data name="ErrorJamBitWidthDifferent" xml:space="preserve">
-		<value>تماس الدخل الخاص بـ {0} ({1}) و تماس الخرج الخاص بـ  {2} ({3}) لهما عرض بت مختلف و لا يمكن وصلهما. الرجاء حاول حل المشكلة.</value>
+		<value>تماس الدخل الخاص بـ {0} ({1}) و تماس الخرج الخاص بـ  {2} ({3})  في {4} لهما عرض بت مختلف و لا يمكن وصلهما. الرجاء حاول حل المشكلة.</value>
 	</data>
 	<data name="ErrorManyResults" xml:space="preserve">
-		<value>تماس الدخل {0} الخاص بـ {0} متصل بأكثر من تماس خرج واحد و التماسات المتصل بها ليست ثلاثية الحالة.</value>
+		<value>تماس الدخل {0} الخاص بـ {1} متصل بأكثر من تماس خرج واحد و التماسات المتصل بها ليست ثلاثية الحالة.</value>
 	</data>
 	<data name="MessageNotRootConstant" xml:space="preserve">
 		<value>فقط الثوابت الموجودة في الدارة  الرئيسية  ({0}) يمكن تغييرها عند تشغيل الطاقة.</value>
