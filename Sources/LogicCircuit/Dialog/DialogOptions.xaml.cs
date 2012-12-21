@@ -38,9 +38,8 @@ namespace LogicCircuit {
 			Settings.User.MaxRecentFileCount = (int)this.maxRecentFiles.SelectedItem;
 			this.mainframe.ShowGrid = this.showGrid.IsChecked.Value;
 			Settings.User.GateShape = (GateShape)this.gateShape.SelectedIndex;
-			if(this.CurrentCulture != App.CurrentCulture) {
-				App.CurrentCulture = this.CurrentCulture;
-			}
+			App.CurrentCulture = this.CurrentCulture;
+			
 			if(Properties.Resources.Culture != this.CurrentCulture) {
 				// Show message in both languages old and new.
 				CultureInfo old = Properties.Resources.Culture;
