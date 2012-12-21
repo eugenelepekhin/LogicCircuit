@@ -10,8 +10,10 @@ namespace LogicCircuit {
 		public GridLength Value {
 			get { return this.cache; }
 			set {
-				this.cache = value;
-				this.settings[this.key] = this.cache.ToString();
+				if(this.cache != value) {
+					this.cache = value;
+					this.settings[this.key] = this.cache.ToString();
+				}
 			}
 		}
 

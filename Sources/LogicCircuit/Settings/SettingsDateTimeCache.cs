@@ -10,8 +10,10 @@ namespace LogicCircuit {
 		public DateTime Value {
 			get { return this.cache; }
 			set {
-				this.cache = value;
-				this.settings[this.key] = this.cache.ToString("s", CultureInfo.InvariantCulture);
+				if(this.cache != value) {
+					this.cache = value;
+					this.settings[this.key] = this.cache.ToString("s", CultureInfo.InvariantCulture);
+				}
 			}
 		}
 

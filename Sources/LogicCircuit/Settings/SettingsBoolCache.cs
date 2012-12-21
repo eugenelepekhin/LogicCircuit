@@ -10,8 +10,10 @@ namespace LogicCircuit {
 		public bool Value {
 			get { return this.cache; }
 			set {
-				this.cache = value;
-				this.settings[this.key] = this.cache.ToString(CultureInfo.InvariantCulture);
+				if(this.cache != value) {
+					this.cache = value;
+					this.settings[this.key] = this.cache.ToString(CultureInfo.InvariantCulture);
+				}
 			}
 		}
 

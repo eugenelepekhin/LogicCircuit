@@ -11,8 +11,11 @@ namespace LogicCircuit {
 		public string Value {
 			get { return this.cache; }
 			set {
-				this.cache = this.Normalize(value);
-				this.settings[this.key] = this.cache;
+				string text = this.Normalize(value);
+				if(!StringComparer.Ordinal.Equals(this.cache, text)) {
+					this.cache = text;
+					this.settings[this.key] = this.cache;
+				}
 			}
 		}
 

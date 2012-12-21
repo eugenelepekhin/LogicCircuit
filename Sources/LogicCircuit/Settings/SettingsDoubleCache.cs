@@ -12,8 +12,11 @@ namespace LogicCircuit {
 		public double Value {
 			get { return this.cache; }
 			set {
-				this.cache = Math.Max(this.minimum, Math.Min(value, this.maximum));
-				this.settings[this.key] = this.cache.ToString(CultureInfo.InvariantCulture);
+				double number = Math.Max(this.minimum, Math.Min(value, this.maximum));
+				if(this.cache != number) {
+					this.cache = number;
+					this.settings[this.key] = this.cache.ToString(CultureInfo.InvariantCulture);
+				}
 			}
 		}
 
@@ -24,6 +27,7 @@ namespace LogicCircuit {
 			double maximum,
 			double defaultValue
 		) {
+			Tracer.Assert(minimum <= maximum);
 			this.settings = settings;
 			this.key = key;
 			this.minimum = minimum;

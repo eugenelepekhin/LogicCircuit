@@ -11,8 +11,11 @@ namespace LogicCircuit {
 		public T Value {
 			get { return this.cache; }
 			set {
-				this.cache = EnumHelper.IsValid(value) ? value : this.defaultValue;
-				this.settings[this.key] = this.cache.ToString();
+				T t = EnumHelper.IsValid(value) ? value : this.defaultValue;
+				if(!this.cache.Equals(t)) {
+					this.cache = t;
+					this.settings[this.key] = this.cache.ToString();
+				}
 			}
 		}
 
