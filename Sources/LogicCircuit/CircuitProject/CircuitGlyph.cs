@@ -145,8 +145,8 @@ namespace LogicCircuit {
 			return new JamItem(pin, this);
 		}
 
-		private static FrameworkElement Skin(Canvas canvas, string skinText) {
-			FrameworkElement shape = Symbol.Skin(skinText);
+		private static FrameworkElement Skin(Canvas canvas, string skin) {
+			FrameworkElement shape = Symbol.Skin(skin);
 			shape.Width = canvas.Width;
 			shape.Height = canvas.Height;
 			canvas.Children.Add(shape);

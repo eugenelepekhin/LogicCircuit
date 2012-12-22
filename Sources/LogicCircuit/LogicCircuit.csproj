@@ -287,11 +287,7 @@
     <Compile Include="Settings\SettingsIntegerCache.cs" />
     <Compile Include="Settings\SettingsStringCache.cs" />
     <Compile Include="Settings\SettingsWindowLocationCache.cs" />
-    <Compile Include="SymbolShapes\SymbolShape.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SymbolShape.resx</DependentUpon>
-    </Compile>
+    <Compile Include="SymbolShapes\SymbolShape.cs" />
     <Compile Include="T4ToStringHelper.cs" />
     <Compile Include="T4Transformation.cs" />
     <Compile Include="Tracer.cs" />
@@ -426,11 +422,6 @@
       <LastGenOutput>Schema.Designer.cs</LastGenOutput>
       <CustomToolNamespace>LogicCircuit</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="SymbolShapes\SymbolShape.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>SymbolShape.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>LogicCircuit</CustomToolNamespace>
-    </EmbeddedResource>
     <EmbeddedResource Include="TracerMessage.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>TracerMessage.Designer.cs</LastGenOutput>
@@ -476,66 +467,86 @@
     <None Include="Schema\CircuitProject.xml">
       <SubType>Designer</SubType>
     </None>
-    <None Include="SymbolShapes\MarkerRectangle.xaml">
+    <Page Include="SymbolShapes\MarkerRectangle.xaml">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="SymbolShapes\Clock.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SymbolShapes\Clock.xaml">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="SymbolShapes\Constant.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SymbolShapes\Constant.xaml">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="SymbolShapes\Led.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SymbolShapes\Led.xaml">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="SymbolShapes\LedMatrix.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SymbolShapes\LedMatrix.xaml">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="SymbolShapes\LedMatrixRectCell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SymbolShapes\LedMatrixRectCell.xaml">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="SymbolShapes\LedMatrixRoundCell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SymbolShapes\LedMatrixRoundCell.xaml">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="SymbolShapes\Pin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SymbolShapes\Pin.xaml">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="SymbolShapes\Probe.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SymbolShapes\Probe.xaml">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="SymbolShapes\Rectangular.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SymbolShapes\Rectangular.xaml">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="SymbolShapes\SevenSegment.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SymbolShapes\SevenSegment.xaml">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="SymbolShapes\ShapedAnd.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SymbolShapes\ShapedAnd.xaml">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="SymbolShapes\ShapedNot.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SymbolShapes\ShapedNot.xaml">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="SymbolShapes\ShapedOr.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SymbolShapes\ShapedOr.xaml">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="SymbolShapes\ShapedTriState.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SymbolShapes\ShapedTriState.xaml">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="SymbolShapes\ShapedXor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SymbolShapes\ShapedXor.xaml">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="SymbolShapes\Splitter.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SymbolShapes\Splitter.xaml">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="SymbolShapes\MarkerLine.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SymbolShapes\MarkerLine.xaml">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="SymbolShapes\TextNote.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SymbolShapes\TextNote.xaml">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="SymbolShapes\ToggleLed.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SymbolShapes\ToggleLed.xaml">
       <SubType>Designer</SubType>
-    </None>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <None Include="LogicCircuit.ruleset">

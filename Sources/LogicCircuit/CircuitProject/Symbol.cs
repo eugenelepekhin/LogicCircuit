@@ -24,17 +24,12 @@ namespace LogicCircuit {
 		public static Brush JamInvertedFill { get { return Brushes.White; } }
 		public static Brush JamStroke { get { return Brushes.Black; } }
 
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")]
-		public static T Skin<T>(string skinText) where T:FrameworkElement {
-			using(StringReader stringReader = new StringReader(skinText)) {
-				using(XmlTextReader xmlReader = new XmlTextReader(stringReader)) {
-					return (T)XamlReader.Load(xmlReader);
-				}
-			}
+		public static T Skin<T>(string skinPath) where T:FrameworkElement {
+			return (T)Application.LoadComponent(new Uri(skinPath, UriKind.Relative));
 		}
 
-		public static FrameworkElement Skin(string skinText) {
-			return Symbol.Skin<FrameworkElement>(skinText);
+		public static FrameworkElement Skin(string skinPath) {
+			return Symbol.Skin<FrameworkElement>(skinPath);
 		}
 
 		public static double ScreenPoint(int xGrid) {
