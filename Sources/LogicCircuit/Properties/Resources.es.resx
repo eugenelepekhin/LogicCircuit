@@ -369,7 +369,7 @@
     <comment>{int constantValue}</comment>
   </data>
   <data name="DefaultGateShape" xml:space="preserve">
-    <value>Forma</value>
+    <value>Shaped</value>
     <comment>!(Rectangular, Shaped) - chose default gate shape for your culture.</comment>
   </data>
   <data name="ErrorAddressNotConnected" xml:space="preserve">
@@ -433,7 +433,7 @@ El archivo que intenta abrir puede estar dañado o fue creado en una versión m�
     <comment>{string fileName}</comment>
   </data>
   <data name="FlowDirection" xml:space="preserve">
-    <value>Izquiera a Derecha</value>
+    <value>LeftToRight</value>
     <comment>!(LeftToRight, RightToLeft) - selecciona la orientación.</comment>
   </data>
   <data name="FunctionParameter" xml:space="preserve">
