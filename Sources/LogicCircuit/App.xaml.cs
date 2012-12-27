@@ -16,6 +16,8 @@ namespace LogicCircuit {
 		private static readonly string[] availableCultureNames = new string[] {
 			"en-US",
 			"ar",
+			"es",
+			"it-IT",
 			"ru-RU",
 			"uk-UA",
 		};
