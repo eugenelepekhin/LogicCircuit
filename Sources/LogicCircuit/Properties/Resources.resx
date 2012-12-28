@@ -546,9 +546,6 @@ Out</value>
   <data name="CircuitMapPathSeparator" xml:space="preserve">
     <value>/</value>
   </data>
-  <data name="CircuitMapLabelSeparator" xml:space="preserve">
-    <value> on </value>
-  </data>
   <data name="ErrorAddressNotConnected" xml:space="preserve">
     <value>Not all address bits connected on memory {0}</value>
     <comment>{string memoryPath}</comment>
@@ -653,10 +650,6 @@ Do you want to replace it?</value>
   </data>
   <data name="TitleFileOpen" xml:space="preserve">
     <value>...</value>
-  </data>
-  <data name="FailUnknownFunction" xml:space="preserve">
-    <value>Unknown Function {0}</value>
-    <comment>{string functionName}</comment>
   </data>
   <data name="Gate7SegName" xml:space="preserve">
     <value>7-seg</value>
@@ -849,9 +842,6 @@ Do you want to replace it?</value>
   </data>
   <data name="TitleCircuitUsage" xml:space="preserve">
     <value>Logical Circuit Usage</value>
-  </data>
-  <data name="TitleNote" xml:space="preserve">
-    <value>_Note:</value>
   </data>
   <data name="CaptionNote" xml:space="preserve">
     <value>_Note</value>

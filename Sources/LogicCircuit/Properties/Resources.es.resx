@@ -181,9 +181,6 @@
   <data name="CategoryPrimitives" xml:space="preserve">
     <value>Primitivas</value>
   </data>
-  <data name="CircuitMapLabelSeparator" xml:space="preserve">
-    <value>Encendido</value>
-  </data>
   <data name="CircuitMapPathSeparator" xml:space="preserve">
     <value>/</value>
   </data>
@@ -419,10 +416,6 @@ El archivo que intenta abrir puede estar dañado o fue creado en una versión m�
   </data>
   <data name="ErrorUnsupportedUri" xml:space="preserve">
     <value>La navegación hacia esta dirección no esta soportada.</value>
-  </data>
-  <data name="FailUnknownFunction" xml:space="preserve">
-    <value>Función desconocida {0}</value>
-    <comment>{string functionName}</comment>
   </data>
   <data name="FileFilter" xml:space="preserve">
     <value>Circuit Project (*{0})|*{0}|Todos los archivos (*.*)|*.*</value>
@@ -991,9 +984,6 @@ Desea guardado?</value>
   </data>
   <data name="TitleNotation" xml:space="preserve">
     <value>Notacion:</value>
-  </data>
-  <data name="TitleNote" xml:space="preserve">
-    <value>Nota:</value>
   </data>
   <data name="TitleOK" xml:space="preserve">
     <value>OK</value>

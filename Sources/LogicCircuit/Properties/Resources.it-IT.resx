@@ -545,9 +545,6 @@ Out</value>
   <data name="CircuitMapPathSeparator" xml:space="preserve">
     <value>/</value>
   </data>
-  <data name="CircuitMapLabelSeparator" xml:space="preserve">
-    <value> su </value>
-  </data>
   <data name="ErrorAddressNotConnected" xml:space="preserve">
     <value>Non tutti i bit di indirizzo collegati alla memoria {0}</value>
     <comment>{string memoryPath}</comment>
@@ -652,10 +649,6 @@ Si desidera sostituirlo?</value>
   </data>
   <data name="TitleFileOpen" xml:space="preserve">
     <value>...</value>
-  </data>
-  <data name="FailUnknownFunction" xml:space="preserve">
-    <value>Funzione sconosciuta {0}</value>
-    <comment>{string functionName}</comment>
   </data>
   <data name="Gate7SegName" xml:space="preserve">
     <value>7-seg</value>
@@ -848,9 +841,6 @@ Si desidera sostituirlo?</value>
   </data>
   <data name="TitleCircuitUsage" xml:space="preserve">
     <value>Uso di circuito logico</value>
-  </data>
-  <data name="TitleNote" xml:space="preserve">
-    <value>_Nota:</value>
   </data>
   <data name="CaptionNote" xml:space="preserve">
     <value>_Nota</value>

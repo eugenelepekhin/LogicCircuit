@@ -174,9 +174,6 @@
   <data name="CategoryPrimitives" xml:space="preserve">
     <value>Базовые элементы</value>
   </data>
-  <data name="CircuitMapLabelSeparator" xml:space="preserve">
-    <value> на </value>
-  </data>
   <data name="CircuitProjectName" xml:space="preserve">
     <value>Проект</value>
   </data>
@@ -325,9 +322,6 @@
   </data>
   <data name="ErrorManyResults" xml:space="preserve">
     <value>Входной разъем {0} схемы {1} соединен с более, чем одним выходным разъемом схем, которые не являются схемами с тремя состояниями.</value>
-  </data>
-  <data name="FailUnknownFunction" xml:space="preserve">
-    <value>Неизвестная функция {0}</value>
   </data>
   <data name="ErrorUnsupportedUri" xml:space="preserve">
     <value>Навигация на этот адрес не поддерживается.</value>
@@ -773,9 +767,6 @@
   </data>
   <data name="TitleOscillogram" xml:space="preserve">
     <value>Осциллограмма</value>
-  </data>
-  <data name="TitleNote" xml:space="preserve">
-    <value>_Примечание:</value>
   </data>
   <data name="TitleOscilloscope" xml:space="preserve">
     <value>Осциллограф</value>

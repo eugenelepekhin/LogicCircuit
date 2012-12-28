@@ -123,10 +123,4 @@
   <data name="LogFileName" xml:space="preserve">
     <value>TracerLog.txt</value>
   </data>
-  <data name="OperationCanceled" xml:space="preserve">
-    <value>Operation was aborted.</value>
-  </data>
-  <data name="XsltError" xml:space="preserve">
-    <value>Error applying XSLT.</value>
-  </data>
 </root>
