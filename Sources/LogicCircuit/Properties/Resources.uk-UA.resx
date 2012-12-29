@@ -783,9 +783,6 @@
   <data name="TitleCircuitUsage" xml:space="preserve">
     <value>Використання логічної схеми</value>
   </data>
-  <data name="TitleNote" xml:space="preserve">
-    <value>_Примітка</value>
-  </data>
   <data name="TitleMemory" xml:space="preserve">
     <value>Пам'ять</value>
   </data>
@@ -1039,9 +1036,6 @@
   <data name="ErrorManyResults" xml:space="preserve">
     <value>Вхідний роз'єм {0} схеми {1} з'єднаний з більше, чим одним вихідним роз'ємом, що не підтримує три стани.</value>
   </data>
-  <data name="FailUnknownFunction" xml:space="preserve">
-    <value>Невідома функція {0}</value>
-  </data>
   <data name="Gate7SegName" xml:space="preserve">
     <value>7-сегментний індикатор</value>
   </data>
@@ -1050,9 +1044,6 @@
   </data>
   <data name="CircuitMapPathSeparator" xml:space="preserve">
     <value>/</value>
-  </data>
-  <data name="CircuitMapLabelSeparator" xml:space="preserve">
-    <value>на</value>
   </data>
   <data name="CircuitProjectName" xml:space="preserve">
     <value>Проект</value>

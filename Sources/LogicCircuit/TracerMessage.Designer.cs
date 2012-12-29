@@ -62,19 +62,5 @@ namespace LogicCircuit {
  		public static string LogFileName {
 			get { return ResourceManager.GetString("LogFileName", Culture); }
 		}
-
-		/// <summary>
-		/// Looks up a localized string similar to Operation was aborted..
-		/// </summary>
- 		public static string OperationCanceled {
-			get { return ResourceManager.GetString("OperationCanceled", Culture); }
-		}
-
-		/// <summary>
-		/// Looks up a localized string similar to Error applying XSLT..
-		/// </summary>
- 		public static string XsltError {
-			get { return ResourceManager.GetString("XsltError", Culture); }
-		}
 	}
 }

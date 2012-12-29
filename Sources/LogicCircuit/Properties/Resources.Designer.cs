@@ -986,13 +986,6 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to on.
-		/// </summary>
- 		public static string CircuitMapLabelSeparator {
-			get { return ResourceManager.GetString("CircuitMapLabelSeparator", Culture); }
-		}
-
-		/// <summary>
 		/// Looks up a localized string similar to Not all address bits connected on memory {0}.
 		/// </summary>
  		public static string ErrorAddressNotConnected(string memoryPath) {
@@ -1215,13 +1208,6 @@ namespace LogicCircuit.Properties {
 		/// </summary>
  		public static string TitleFileOpen {
 			get { return ResourceManager.GetString("TitleFileOpen", Culture); }
-		}
-
-		/// <summary>
-		/// Looks up a localized string similar to Unknown Function {0}.
-		/// </summary>
- 		public static string FailUnknownFunction(string functionName) {
-			return string.Format(Culture, ResourceManager.GetString("FailUnknownFunction", Culture), functionName);
 		}
 
 		/// <summary>
@@ -1663,13 +1649,6 @@ namespace LogicCircuit.Properties {
 		/// </summary>
  		public static string TitleCircuitUsage {
 			get { return ResourceManager.GetString("TitleCircuitUsage", Culture); }
-		}
-
-		/// <summary>
-		/// Looks up a localized string similar to _Note:.
-		/// </summary>
- 		public static string TitleNote {
-			get { return ResourceManager.GetString("TitleNote", Culture); }
 		}
 
 		/// <summary>
