@@ -972,4 +972,7 @@ Sortie</value>
 	<data name="ToolTipMemoryOnStart" xml:space="preserve">
 		<value>Choisir comment la RAM sera initialisé à la simulation</value>
 	</data>
+	<data name="DefaultGateShape" xml:space="preserve">
+		<value>Rectangular</value>
+	</data>
 </root>
