@@ -71,6 +71,8 @@
 				<PropertyGroupDescription PropertyName="Category"/>
 			</CollectionViewSource.GroupDescriptions>
 		</CollectionViewSource>
+
+		<lc:FormatConverter x:Key="FormatConverter"/>
 	</Window.Resources>
 
 	<Window.Triggers>
@@ -628,7 +630,10 @@
 							<ScaleTransform ScaleX="1" ScaleY="0.8"/>
 						</Slider.LayoutTransform>
 					</Slider>
-					<TextBlock Text="{Binding Path=Editor.Zoom, StringFormat={}{0:P0}}" VerticalAlignment="Center" MinWidth="50" Margin="3,0" ToolTip="{x:Static properties:Resources.ToolTipCurrentZoom}"/>
+					<TextBlock VerticalAlignment="Center" MinWidth="50" Margin="3,0"
+						Text="{Binding Path=Editor.Zoom, Converter={StaticResource FormatConverter}, ConverterParameter='{}{0:P0}'}"
+						ToolTip="{x:Static properties:Resources.ToolTipCurrentZoom}"
+					/>
 
 					<!-- This check box is invisible and only used for controlling animation in left column when power switches on and off. -->
 					<CheckBox IsChecked="{Binding Path=Editor.Power}" Visibility="Collapsed" IsTabStop="False">
