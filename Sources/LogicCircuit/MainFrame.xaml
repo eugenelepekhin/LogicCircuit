@@ -327,6 +327,7 @@
 								<Setter Property="MinWidth" Value="50"/>
 								<Setter Property="Margin" Value="3,3,8,3"/>
 								<Setter Property="Content" Value="{Binding Path=CircuitGlyph.Glyph}"/>
+								<Setter Property="FlowDirection" Value="LeftToRight"/>
 								<Setter Property="LayoutTransform">
 									<Setter.Value>
 										<ScaleTransform ScaleX="0.75" ScaleY="0.75"/>
@@ -582,7 +583,11 @@
 
 			<!-- Main Diagram -->
 			<GroupBox Grid.Column="2" Header="{Binding Path=Editor.Project.LogicalCircuit.Name, FallbackValue=''}">
-				<ScrollViewer Name="DiagramScroll" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" LostFocus="DiagramLostFocus" LostKeyboardFocus="DiagramLostKeyboardFocus">
+				<ScrollViewer Name="DiagramScroll"
+					HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible"
+					LostFocus="DiagramLostFocus" LostKeyboardFocus="DiagramLostKeyboardFocus"
+					FlowDirection="LeftToRight"
+				>
 					<Canvas Name="Diagram" HorizontalAlignment="Left" VerticalAlignment="Top"
 						Width="{x:Static lc:Symbol.LogicalCircuitWidth}"
 						Height="{x:Static lc:Symbol.LogicalCircuitHeight}"
