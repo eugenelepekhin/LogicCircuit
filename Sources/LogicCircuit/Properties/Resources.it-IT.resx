@@ -367,7 +367,7 @@ Out</value>
     <comment>{string pinName}</comment>
   </data>
   <data name="CommandHelpAbout" xml:space="preserve">
-    <value>_Di</value>
+    <value>_Informazioni su Logical Circuit</value>
   </data>
   <data name="NameButton" xml:space="preserve">
     <value>Pulsante</value>
@@ -379,7 +379,7 @@ Out</value>
     <value>Divisore</value>
   </data>
   <data name="TitleAbout" xml:space="preserve">
-    <value>Di</value>
+    <value>Informazioni su Logical Circuit</value>
   </data>
   <data name="TitleApplication" xml:space="preserve">
     <value>Circuito logico</value>
@@ -1234,5 +1234,8 @@ Circuito di questo tipo non possono essere utilizzati più di una volta su altri
   <data name="ToolTipIsDisplay" xml:space="preserve">
     <value>Quando si contrassegna circuito logico come display 
 tutti i simboli del display saranno visibili sul suo simbolo.</value>
+  </data>
+  <data name="TitleCredits" xml:space="preserve">
+    <value>Su questo programma hanno lavorato:</value>
   </data>
 </root>
