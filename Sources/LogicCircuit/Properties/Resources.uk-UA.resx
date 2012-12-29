@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -130,13 +130,13 @@
     <value>Файл {0} збережено.</value>
   </data>
   <data name="GateAndName" xml:space="preserve">
-    <value>AND</value>
+    <value>І</value>
   </data>
   <data name="GateAndNotation" xml:space="preserve">
     <value>&amp;</value>
   </data>
   <data name="GateAndNotName" xml:space="preserve">
-    <value>NAND</value>
+    <value>І-НЕ</value>
   </data>
   <data name="GateClockName" xml:space="preserve">
     <value>Генератор тактової частоти</value>
@@ -151,19 +151,19 @@
     <value>Світлодіод</value>
   </data>
   <data name="GateNotName" xml:space="preserve">
-    <value>NOT</value>
+    <value>НЕ</value>
   </data>
   <data name="GateNotNotation" xml:space="preserve">
-    <value>~</value>
+    <value>1</value>
   </data>
   <data name="GateOrName" xml:space="preserve">
-    <value>OR</value>
+    <value>АБО</value>
   </data>
   <data name="GateOrNotation" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="GateOrNotName" xml:space="preserve">
-    <value>NOR</value>
+    <value>АБО-НЕ</value>
   </data>
   <data name="GateProbeName" xml:space="preserve">
     <value>Проба</value>
@@ -178,19 +178,19 @@
     <value>Фігурні</value>
   </data>
   <data name="GateTriStateName" xml:space="preserve">
-    <value>Tristate буфер</value>
+    <value>Перемикач</value>
   </data>
   <data name="GateTriStateNotation" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="GateXorName" xml:space="preserve">
-    <value>XOR</value>
+    <value>ВИКЛЮЧНЕ АБО</value>
   </data>
   <data name="GateXorNotation" xml:space="preserve">
     <value>=</value>
   </data>
   <data name="GateXorNotName" xml:space="preserve">
-    <value>XNOR</value>
+    <value>ВИКЛЮЧНЕ АБО-НЕ</value>
   </data>
   <data name="Led7Pin1" xml:space="preserve">
     <value>a</value>
@@ -296,10 +296,10 @@
     <value>{0:X}</value>
   </data>
   <data name="RAMNotation" xml:space="preserve">
-    <value>RAM</value>
+    <value>ПДД</value>
   </data>
   <data name="ROMNotation" xml:space="preserve">
-    <value>ROM</value>
+    <value>ПЗП</value>
   </data>
   <data name="ToolTipButton" xml:space="preserve">
     <value>Кнопка {0}</value>
@@ -317,13 +317,13 @@
     <value>Вихідний {0} бітовий роз'єм {1}</value>
   </data>
   <data name="ToolTipRAM" xml:space="preserve">
-    <value>RAM - розрядність адресу: {0} біт,  / розрядність шини даних {1} біт</value>
+    <value>ПДД - кількість адресних входів: {0},  / довжина слова: {1} біт</value>
   </data>
   <data name="ToolTipROM" xml:space="preserve">
-    <value>ROM - розрядність адреси: {0} біт,  / розрядність шини даних {1} біт</value>
+    <value>ПЗП - адресних входів: {0},  / довжина слова: {1} біт</value>
   </data>
   <data name="ToolTipSplitter" xml:space="preserve">
-    <value>Розгалужувач {0} біт в {1} роз'єми</value>
+    <value>Розгалужувач {0} біт(-и) в {1} роз'єм(-и)(-ів)</value>
   </data>
   <data name="ToolTipWire" xml:space="preserve">
     <value>Провідник</value>
@@ -370,13 +370,13 @@
     <value>_Опції</value>
   </data>
   <data name="TitleDisplayOptions" xml:space="preserve">
-    <value>Відображати</value>
+    <value>Вигляд</value>
   </data>
   <data name="TitleFileOptions" xml:space="preserve">
     <value>Файл</value>
   </data>
   <data name="TitleGateShape" xml:space="preserve">
-    <value>_Форма вентилей</value>
+    <value>_Форма елементів:</value>
   </data>
   <data name="TitleLoadLastFile" xml:space="preserve">
     <value>_Завантажувати останній відкритий файл при завантаженні</value>
@@ -550,7 +550,7 @@
     <value>Схема {0} має {1}, який зберігає дані між завантаженнями. Така схема не може бути використана більше одного разу в інших схемах, бо різні набори даних будуть зберігатися на одному модулі пам'яті.</value>
   </data>
   <data name="MessageRestartRequared" xml:space="preserve">
-    <value>Ви обрали нову мову інтерфейсу. Необхідно перезавантажити програму, щоб зміни вступили в силу.</value>
+    <value>Ви обрали нову мову інтерфейсу. Перезавантажте програму, щоб зміни вступили в силу.</value>
   </data>
   <data name="CommandEditAlignCenter" xml:space="preserve">
     <value>Вирівняти по центру</value>
@@ -616,7 +616,7 @@
     <value>Робота на максимально можливій частоті; ігнорується стан повзунка.</value>
   </data>
   <data name="ToolTipIsMaximumSpeed2" xml:space="preserve">
-    <value>Встановлення цього флагу може спричинити до того, що інтерфейс перестане відповідати на запитиі.</value>
+    <value>Встановлення цього прапорця може спричинити відмову інтерфейсу на запити.</value>
   </data>
   <data name="ToolTipPinBitWidth" xml:space="preserve">
     <value>Розрядність контакту</value>
@@ -670,7 +670,7 @@
     <value>Натисніть Ctrl+{Shift}+Tab для перемикання між логічними схемами або клікніть, щоб виділить, або зняти виділення з окремих символів.</value>
   </data>
   <data name="TipOnWireSelect" xml:space="preserve">
-    <value>Shift+{Ctrl}+Клік на провіднику, щоб виділить/зняти виділення всього провідника, Alt+Клік на виділеному провіднику розділить його на дві частини; на спільній точці для ъх злиття.</value>
+    <value>Shift+{Ctrl}+Клік на провіднику, щоб виділить/зняти виділення всього провідника; Alt+Клік на виділеному провіднику розділить його на дві частини, а на спільній точці з'єднає їх.</value>
   </data>
   <data name="TipOnAwaitingArea" xml:space="preserve">
     <value>{0} {1}. Обведіть декілька символів, щоб виділити їх, утримуйте Shift, щоб зберегти поточне виділення.</value>
@@ -688,7 +688,7 @@
     <value>&lt;&lt;&lt;&lt;&lt;&lt; Мітка &gt;&gt;&gt;&gt;&gt;&gt;</value>
   </data>
   <data name="TitleMark" xml:space="preserve">
-    <value>_Помітити</value>
+    <value>_Позначити</value>
   </data>
   <data name="TitleProbeHistory" xml:space="preserve">
     <value>Історія проби</value>
@@ -712,7 +712,7 @@
     <value>Імпортувати</value>
   </data>
   <data name="TitleCheckAll" xml:space="preserve">
-    <value>_Помітити всі</value>
+    <value>_Позначити всі</value>
   </data>
   <data name="TitleUncheckAll" xml:space="preserve">
     <value>_Зняти все</value>
@@ -730,7 +730,7 @@
     <value>{0} ({1})</value>
   </data>
   <data name="ReportMemoryName" xml:space="preserve">
-    <value>{0} {1} бітна адреса, {2} битні дані</value>
+    <value>{0} {1} бітна адреса, {2} бітні дані</value>
   </data>
   <data name="TextNotation" xml:space="preserve">
     <value>Пояснення</value>
@@ -742,19 +742,19 @@
     <value>Працювати на максимальній швидкості</value>
   </data>
   <data name="TitleIsMaximumSpeed2" xml:space="preserve">
-    <value>Велике навантаження на CPU</value>
+    <value>Велике навантаження на процесор</value>
   </data>
   <data name="TitleProject" xml:space="preserve">
     <value>Проект</value>
   </data>
   <data name="TitleRunningCircuit" xml:space="preserve">
-    <value>Робоча схема</value>
+    <value>Функціональна схема</value>
   </data>
   <data name="TitleZoom" xml:space="preserve">
     <value>_Збільшення:</value>
   </data>
   <data name="ToolTipAddressBitWidth" xml:space="preserve">
-    <value>Розрядність адреси</value>
+    <value>Кількість адресних входів</value>
   </data>
   <data name="ToolTipButtonNotation" xml:space="preserve">
     <value>Позначення кнопки</value>
@@ -790,13 +790,13 @@
     <value>Максимальна кількість останніх файлів:</value>
   </data>
   <data name="ProjectSummary" xml:space="preserve">
-    <value>{0} логічних схем, об'єднаних в {1} категорії, використовують {2} символів та {3} провідників</value>
+    <value>{0} логічн(-а)(-і)(-их) схем, об'єднаних в {1} категор(-ії)(-ях), використовують {2} символ(-и)(-ів) та {3} провідник(-и)(-ів)</value>
   </data>
   <data name="ReportError" xml:space="preserve">
     <value>Не вдається вивести звіт через наступні помилки: {0}</value>
   </data>
   <data name="ReportFunctions" xml:space="preserve">
-    <value>Функції схеми "{0}"</value>
+    <value>Функції схеми "{0}":</value>
   </data>
   <data name="TitleCount" xml:space="preserve">
     <value>Використано разів</value>
@@ -805,7 +805,7 @@
     <value>Функція</value>
   </data>
   <data name="TitleProjectDescription" xml:space="preserve">
-    <value>Опис</value>
+    <value>Опис:</value>
   </data>
   <data name="TitleReportErrorDetails" xml:space="preserve">
     <value>Додаткові відомості про помилку</value>
@@ -916,7 +916,7 @@
     <value>Невірне число: {0}</value>
   </data>
   <data name="ParserErrorUnclosedQuote" xml:space="preserve">
-    <value>Ідентифікатор, що почався з лапок не має кінцевих лапок: {0}</value>
+    <value>Порушено баланс лапок у ідентифікаторі: {0}</value>
   </data>
   <data name="ParserErrorUnexpected" xml:space="preserve">
     <value>Не очікувалось {0}</value>
@@ -931,17 +931,17 @@
     <value>Тільки константи, що знаходяться в коренній схемі({0}) можна змінювати при ввімкненому живленні.</value>
   </data>
   <data name="MessageImageFileExists" xml:space="preserve">
-    <value>Файл "{0}" існує.
+    <value>Файл "{0}"уже  існує.
 Хочете його замінити?</value>
   </data>
   <data name="MessageNotUsed" xml:space="preserve">
     <value>Ця логічна схема ніде не використовується.</value>
   </data>
   <data name="MessageInvalidRecentFile" xml:space="preserve">
-    <value>Неможливо відкрити файл "{0}". Хочете видалити вказівник на нього зі списку останніх відкритих файлів?</value>
+    <value>Неможливо відкрити файл "{0}". Видалити вказівник на нього зі списку останніх відкритих файлів?</value>
   </data>
   <data name="MessageInputOutputPinsMissing" xml:space="preserve">
-    <value>Ця схема не має вхідних/вихідних розємів. Таблиця істинності складається шляхом перебору всіх можливих значень на входах і записуються в таблицю результати виходів.</value>
+    <value>Ця схема не має вхідних/вихідних роз'ємів. Таблиця істинності складається шляхом перебору всіх можливих значень на входах і записуються в таблицю результати виходів.</value>
   </data>
   <data name="MessageTruthTableTooBig" xml:space="preserve">
     <value>Таблицю істинності перервано. Вона занадто довга. Будь-ласка, використовуйте фільтр для перевірки правильності Вашої схеми.</value>
@@ -1010,13 +1010,13 @@
     <value>Файли зображень(*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif)|*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif|Всі файли (*.*)|*.*</value>
   </data>
   <data name="ImagePathInvalid" xml:space="preserve">
-    <value>Недопустиме ім'я файлу. Будь-ласка, перевірте, чи існує батьківська папка та чи ім'я файлу коректне.</value>
+    <value>Недопустиме ім'я файлу. Будь-ласка, перевірте, чи існує батьківська папка або чи коректне ім'я файлу.</value>
   </data>
   <data name="GridPoint" xml:space="preserve">
     <value>({0}, {1})</value>
   </data>
   <data name="CaptionAddressBitWidth" xml:space="preserve">
-    <value>Розрядність адреси</value>
+    <value>Кількість адресних входів</value>
   </data>
   <data name="CaptionBitWidth" xml:space="preserve">
     <value>Розрядність</value>
@@ -1034,7 +1034,7 @@
     <value>Функція {0} потребує хоча б {1} параметр(ів)</value>
   </data>
   <data name="ErrorManyResults" xml:space="preserve">
-    <value>Вхідний роз'єм {0} схеми {1} з'єднаний з більше, чим одним вихідним роз'ємом, що не підтримує три стани.</value>
+    <value>Вхідний роз'єм {0} схеми {1} з'єднаний з більш, ніж одним вихідним роз'ємом, що не підтримує три стани.</value>
   </data>
   <data name="Gate7SegName" xml:space="preserve">
     <value>7-сегментний індикатор</value>
@@ -1145,7 +1145,7 @@
     <value>Відкрити _останній</value>
   </data>
   <data name="ErrorFileCorrupted" xml:space="preserve">
-    <value>Файл "{0}" пошкоджено та не може бути завантажений.</value>
+    <value>Файл "{0}" пошкоджений і не може бути завантажений.</value>
   </data>
   <data name="CommandHyperlink" xml:space="preserve">
     <value>Посилання</value>
@@ -1160,7 +1160,7 @@
     <value>Зображення</value>
   </data>
   <data name="ErrorClipboardCorrupted" xml:space="preserve">
-    <value>Дані в буфері обміну пошкоджені та не можуть бути вставлені.</value>
+    <value>Дані в буфері обміну пошкоджені й не можуть бути вставлені.</value>
   </data>
   <data name="CommandTruthTable" xml:space="preserve">
     <value>Таблиця істинності</value>

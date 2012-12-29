@@ -422,7 +422,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ru-RU.resx" />
-    <EmbeddedResource Include="Properties\Resources.uk-UA.resx" />
+    <EmbeddedResource Include="Properties\Resources.uk-UA.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Schema\Schema.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Schema.Designer.cs</LastGenOutput>
