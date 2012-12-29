@@ -61,8 +61,24 @@
 				<ComboBox Name="cultureSelector" IsEditable="False" HorizontalAlignment="Stretch"
 					ItemsSource="{x:Static lc:App.AvailableCultures}"
 					SelectedItem="{Binding Path=CurrentCulture}"
-					DisplayMemberPath="NativeName"
-				/>
+				>
+					<ComboBox.ItemTemplate>
+						<DataTemplate>
+							<TextBlock Text="{Binding Path=NativeName}">
+								<TextBlock.Style>
+									<Style TargetType="TextBlock">
+										<Setter Property="FlowDirection" Value="LeftToRight"/>
+										<Style.Triggers>
+											<DataTrigger Binding="{Binding Path=TextInfo.IsRightToLeft}" Value="True">
+												<Setter Property="FlowDirection" Value="RightToLeft"/>
+											</DataTrigger>
+										</Style.Triggers>
+									</Style>
+								</TextBlock.Style>
+							</TextBlock>
+						</DataTemplate>
+					</ComboBox.ItemTemplate>
+				</ComboBox>
 			</GroupBox>
 		</StackPanel>
 
