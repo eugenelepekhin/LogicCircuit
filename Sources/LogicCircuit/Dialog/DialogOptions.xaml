@@ -46,12 +46,17 @@
 					<CheckBox Name="showGrid" IsThreeState="False"
 						Content="{Binding Source={x:Static properties:Resources.TitleShowGrid}, Mode=OneTime}"
 					/>
-					<StackPanel Orientation="Horizontal">
-						<Label Target="{Binding ElementName=gateShape}"
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto"/>
+							<ColumnDefinition Width="*"/>
+						</Grid.ColumnDefinitions>
+						<Label Grid.Column="0" Target="{Binding ElementName=gateShape}"
 							Content="{Binding Source={x:Static properties:Resources.TitleGateShape}, Mode=OneTime}"
 						/>
-						<ComboBox Name="gateShape" ItemsSource="{Binding Path=GateShapeList}" IsEditable="False" MinWidth="115"/>
-					</StackPanel>
+						<ComboBox Grid.Column="1" Name="gateShape" ItemsSource="{Binding Path=GateShapeList}" IsEditable="False"/>
+						<ListBox Grid.Column="1" ItemsSource="{Binding Path=GateShapeList}" Height="1" Visibility="Hidden" Padding="10,0"/>
+					</Grid>
 				</StackPanel>
 			</GroupBox>
 
