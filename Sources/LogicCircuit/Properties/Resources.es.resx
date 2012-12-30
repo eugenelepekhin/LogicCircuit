@@ -412,7 +412,7 @@ Tal circuito no puede utilizarse más de una vez en otros circuitos debido a que
   </data>
   <data name="ErrorUnknownVersion" xml:space="preserve">
     <value>Versión de proyecto no reconocida.
-El archivo que intenta abrir puede estar dañado o fue creado en una versión más reciente de Logic Circuit. Por favor compruebe &lt;Hyperlink NavigateUri=http://www.logiccircuit.org/ "&gt; http://www.logiccircuit.org/&lt;/Hyperlink&gt; para obtener las versión más reciente.</value>
+El archivo que intenta abrir puede estar dañado o fue creado en una versión más reciente de Logic Circuit. Por favor compruebe &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt; para obtener las versión más reciente.</value>
   </data>
   <data name="ErrorUnsupportedUri" xml:space="preserve">
     <value>La navegación hacia esta dirección no esta soportada.</value>
