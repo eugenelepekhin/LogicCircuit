@@ -255,7 +255,7 @@
 	</data>
 	<data name="ErrorUnknownVersion" xml:space="preserve">
 		<value>Tentative de chargement d'une version inconnue d'un projet de circuit.
-Le fichier que vous essayez d'ouvrir est endommagé ou a été créé par une version plus récente du logiciel Logic Circuit. S'il vous plaît vérifier &lt;Hyperlink NavigateUri=""http://www.logiccircuit.org/""&gt; http://www.logiccircuit.org/ &lt;/ Hyperlink&gt; pour les versions plus récentes.</value>
+Le fichier que vous essayez d'ouvrir est endommagé ou a été créé par une version plus récente du logiciel Logic Circuit. S'il vous plaît vérifier &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt; pour les versions plus récentes.</value>
 	</data>
 	<data name="FileFilter" xml:space="preserve">
 		<value>Projet de circuit (*{0})|*{0}|Tous les fichiers (*.*) |*.*</value>
