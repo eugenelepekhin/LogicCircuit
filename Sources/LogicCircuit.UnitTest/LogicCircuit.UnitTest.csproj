@@ -68,6 +68,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="EnumHelperTest.cs" />
+    <Compile Include="ResourcesTest.cs" />
     <Compile Include="SettingsTest.cs" />
     <Compile Include="XmlLoadTest.cs" />
     <Compile Include="Socket.cs" />
