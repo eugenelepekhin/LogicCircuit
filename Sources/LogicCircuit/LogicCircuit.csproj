@@ -197,11 +197,6 @@
     <Compile Include="DataPersistent\ITableChange.cs" />
     <Compile Include="DataPersistent\ITableSnapshot.cs" />
     <Compile Include="DataPersistent\LockFreeSync.cs" />
-    <Compile Include="DataPersistent\Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="DataPersistent\RolledBackEventArgs.cs" />
     <Compile Include="DataPersistent\RowId.cs" />
     <Compile Include="DataPersistent\RowIdField.cs" />
@@ -274,11 +269,6 @@
     <Compile Include="Runner\CircuitRunner.cs" />
     <Compile Include="Runner\Oscilloscope.cs" />
     <Compile Include="Runner\PreciseTimer.cs" />
-    <Compile Include="Schema\Schema.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Schema.resx</DependentUpon>
-    </Compile>
     <Compile Include="Settings\Settings.cs" />
     <Compile Include="Settings\SettingsBoolCache.cs" />
     <Compile Include="Settings\SettingsDateTimeCache.cs" />
@@ -292,11 +282,6 @@
     <Compile Include="T4ToStringHelper.cs" />
     <Compile Include="T4Transformation.cs" />
     <Compile Include="Tracer.cs" />
-    <Compile Include="TracerMessage.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TracerMessage.resx</DependentUpon>
-    </Compile>
     <Compile Include="XmlHelper.cs" />
     <Page Include="ColorPicker\ColorPicker.xaml">
       <SubType>Designer</SubType>
@@ -405,16 +390,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="DataPersistent\Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ar.resx" />
     <EmbeddedResource Include="Properties\Resources.es.resx" />
-    <EmbeddedResource Include="Properties\Resources.fr.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.fr.resx" />
     <EmbeddedResource Include="Properties\Resources.it-IT.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -422,14 +400,24 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ru-RU.resx" />
-    <EmbeddedResource Include="Properties\Resources.uk-UA.resx">
+    <EmbeddedResource Include="Properties\Resources.uk-UA.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataPersistent\Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="DataPersistent\Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Schema\Schema.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Schema.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>LogicCircuit</CustomToolNamespace>
-    </EmbeddedResource>
+    <Compile Include="TracerMessage.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TracerMessage.resx</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="TracerMessage.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>TracerMessage.Designer.cs</LastGenOutput>
@@ -464,6 +452,16 @@
     <Resource Include="Properties\Highlight.png" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Schema\Schema.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Schema.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Schema\Schema.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Schema.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>LogicCircuit</CustomToolNamespace>
+    </EmbeddedResource>
     <None Include="Schema\ConvertSettings.xslt" />
     <None Include="Schema\ConvertFrom.1.0.0.2.xslt" />
     <None Include="Schema\ConvertFrom.1.0.0.3.xslt" />
@@ -475,10 +473,8 @@
     <None Include="Schema\CircuitProject.xml">
       <SubType>Designer</SubType>
     </None>
-    <Page Include="SymbolShapes\MarkerRectangle.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+  </ItemGroup>
+  <ItemGroup>
     <Page Include="SymbolShapes\Clock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -500,6 +496,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SymbolShapes\LedMatrixRoundCell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SymbolShapes\MarkerLine.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SymbolShapes\MarkerRectangle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -540,10 +544,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SymbolShapes\Splitter.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="SymbolShapes\MarkerLine.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
