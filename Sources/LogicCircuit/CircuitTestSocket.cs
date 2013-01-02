@@ -128,49 +128,50 @@ namespace LogicCircuit {
 				this.Trancated = false;
 				int inputCount = this.Inputs.Count;
 				int outputCount = this.Outputs.Count;
-				Tracer.Assert(0 < inputCount && 0 < outputCount);
-				BigInteger end = this.Start + this.Count;
-				BigInteger onePercent = this.Count / 100;
-				BigInteger count = 0;
-				double progress = 0;
+				if(0 < inputCount && 0 < outputCount) {
+					BigInteger end = this.Start + this.Count;
+					BigInteger onePercent = this.Count / 100;
+					BigInteger count = 0;
+					double progress = 0;
 
-				TruthState state = new TruthState(inputCount, outputCount);
-				for(BigInteger value = this.Start; value < end; value++) {
-					if(maxCount <= this.Results.Count || !keepGoing()) {
-						this.Trancated = true;
-						break;
-					}
-					int bit = 0;
-					for(int i = this.Inputs.Count - 1; 0 <= i; i--) {
-						InputPinSocket pin = this.Inputs[i];
-						int v = (int)((value >> bit) & int.MaxValue) & (pin.Pin.BitWidth < 32 ? (1 << pin.Pin.BitWidth) - 1 : ~0);
-						pin.Function.Value = v;
-						Tracer.Assert(pin.Function.Value == v, "Value get truncated");
-						bit += pin.Pin.BitWidth;
-					}
-					if(!this.CircuitState.Evaluate(true)) {
-						this.Oscillation = true;
-						break;
-					}
-					for(int i = 0; i < inputCount; i++) {
-						state.Input[i] = this.Inputs[i].Function.Value;
-					}
-					for(int i = 0; i < outputCount; i++) {
-						state.Output[i] = this.Outputs[i].Function.ToInt32();
-					}
-					if(include == null || include(state)) {
-						this.Results.Add(state);
-						state = new TruthState(inputCount, outputCount);
-					}
-					if(reportProgress != null) {
-						count++;
-						if(onePercent < count) {
-							count = 0;
-							if(onePercent == BigInteger.Zero) {
-								Tracer.Assert(0 < this.Count && this.Count < 100);
-								reportProgress((double)((value + 1 - this.Start) * 100) / (double)this.Count);
-							} else {
-								reportProgress(Math.Min(++progress, 100));
+					TruthState state = new TruthState(inputCount, outputCount);
+					for(BigInteger value = this.Start; value < end; value++) {
+						if(maxCount <= this.Results.Count || !keepGoing()) {
+							this.Trancated = true;
+							break;
+						}
+						int bit = 0;
+						for(int i = this.Inputs.Count - 1; 0 <= i; i--) {
+							InputPinSocket pin = this.Inputs[i];
+							int v = (int)((value >> bit) & int.MaxValue) & (pin.Pin.BitWidth < 32 ? (1 << pin.Pin.BitWidth) - 1 : ~0);
+							pin.Function.Value = v;
+							Tracer.Assert(pin.Function.Value == v, "Value get truncated");
+							bit += pin.Pin.BitWidth;
+						}
+						if(!this.CircuitState.Evaluate(true)) {
+							this.Oscillation = true;
+							break;
+						}
+						for(int i = 0; i < inputCount; i++) {
+							state.Input[i] = this.Inputs[i].Function.Value;
+						}
+						for(int i = 0; i < outputCount; i++) {
+							state.Output[i] = this.Outputs[i].Function.ToInt32();
+						}
+						if(include == null || include(state)) {
+							this.Results.Add(state);
+							state = new TruthState(inputCount, outputCount);
+						}
+						if(reportProgress != null) {
+							count++;
+							if(onePercent < count) {
+								count = 0;
+								if(onePercent == BigInteger.Zero) {
+									Tracer.Assert(0 < this.Count && this.Count < 100);
+									reportProgress((double)((value + 1 - this.Start) * 100) / (double)this.Count);
+								} else {
+									reportProgress(Math.Min(++progress, 100));
+								}
 							}
 						}
 					}
@@ -184,6 +185,9 @@ namespace LogicCircuit {
 					copy.ProjectSet.Copy(circuit.CircuitProject.ProjectSet.Project);
 					other = copy.LogicalCircuitSet.Copy(circuit, true);
 				});
+				foreach(CircuitSymbol symbol in other.CircuitSymbols()) {
+					symbol.GuaranteeGlyph();
+				}
 				return other;
 			}
 
