@@ -11,14 +11,14 @@ namespace LogicCircuit {
 	/// Utility class to produce culture-oriented representation of an object as a string.
 	/// </summary>
 	public class T4ToStringHelper {
-		private IFormatProvider formatProvider = CultureInfo.CurrentUICulture;
+		private IFormatProvider formatProvider = Properties.Resources.Culture;
 
 		/// <summary>
 		/// Gets or sets format provider to be used by ToStringWithCulture method.
 		/// </summary>
 		public IFormatProvider FormatProvider {
 			get { return this.formatProvider; }
-			set { this.formatProvider = value ?? CultureInfo.CurrentUICulture; }
+			set { this.formatProvider = value ?? Properties.Resources.Culture; }
 		}
 
 		public bool EscapeXmlText { get; set; }
@@ -42,9 +42,8 @@ namespace LogicCircuit {
 			}
 		}
 
-		[SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
 		public string ToStringWithCulture(int value) {
-			return value.ToString("D", this.FormatProvider);
+			return this.EscapeXml(value.ToString("D", this.FormatProvider));
 		}
 
 		public string ToStringWithCulture(string value) {
