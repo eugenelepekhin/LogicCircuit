@@ -21,12 +21,13 @@ namespace LogicCircuit {
 			set { this.formatProvider = value ?? CultureInfo.CurrentUICulture; }
 		}
 
+		public bool EscapeXmlText { get; set; }
+
 		/// <summary>
 		/// This is called from the compile/run appdomain to convert objects within an expression block to a string
 		/// </summary>
 		/// <param name="value"></param>
 		/// <returns></returns>
-		[SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
 		public string ToStringWithCulture(object value) {
 			if(value == null) {
 				throw new ArgumentNullException("value");
@@ -35,9 +36,9 @@ namespace LogicCircuit {
 			Type type = value.GetType();
 			MethodInfo method = type.GetMethod("ToString", new Type[] { typeof(IFormatProvider) });
 			if(method != null) {
-				return (string)method.Invoke(value, new object[] { this.FormatProvider });
+				return this.EscapeXml((string)method.Invoke(value, new object[] { this.FormatProvider }));
 			} else {
-				return value.ToString();
+				return this.EscapeXml(value.ToString());
 			}
 		}
 
@@ -46,9 +47,19 @@ namespace LogicCircuit {
 			return value.ToString("D", this.FormatProvider);
 		}
 
-		[SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
 		public string ToStringWithCulture(string value) {
-			return value;
+			return this.EscapeXml(value);
+		}
+
+		private string EscapeXml(string text) {
+			if(this.EscapeXmlText) {
+				return text
+					.Replace("&", "&amp;")
+					.Replace("<", "&lt;")
+					.Replace(">", "&gt;")
+				;
+			}
+			return text;
 		}
 	}
 }
