@@ -56,6 +56,8 @@ namespace LogicCircuit {
 					.Replace("&", "&amp;")
 					.Replace("<", "&lt;")
 					.Replace(">", "&gt;")
+					.Replace("\"", "&quot;")
+					.Replace("'", "&apos;")
 				;
 			}
 			return text;
