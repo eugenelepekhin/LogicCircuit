@@ -391,6 +391,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.ar.resx" />
+    <EmbeddedResource Include="Properties\Resources.de.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.es.resx" />
     <EmbeddedResource Include="Properties\Resources.fr.resx" />
     <EmbeddedResource Include="Properties\Resources.it-IT.resx" />
