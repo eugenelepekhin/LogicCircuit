@@ -56,17 +56,18 @@
 				/>
 
 				<TextBlock Grid.Row="1" Text="{x:Static properties:Resources.TitleCredits}" Style="{StaticResource BigText}"/>
-				<ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="5">
-					<StackPanel Orientation="Vertical" FlowDirection="LeftToRight" Margin="3">
-						<TextBlock>David Chastant</TextBlock>
-						<TextBlock>Eugene Lepekhin</TextBlock>
-						<TextBlock>Fernando Perulles Aguilar</TextBlock>
-						<TextBlock>Maxym Hylliaka</TextBlock>
-						<TextBlock>Mohammad Mawaheb Seraj Eddin</TextBlock>
-						<TextBlock>Natasha Pererezova</TextBlock>
-						<TextBlock>Sergey Dubinets</TextBlock>
-					</StackPanel>
-				</ScrollViewer>
+				<WrapPanel Grid.Row="2" Orientation="Vertical" FlowDirection="LeftToRight" Margin="3">
+					<TextBlock>David Chastant</TextBlock>
+					<TextBlock>Eugene Lepekhin</TextBlock>
+					<TextBlock>Fernando Perulles Aguilar</TextBlock>
+					<TextBlock>Gé Brander</TextBlock>
+					<TextBlock>Markus Grundner</TextBlock>
+					<TextBlock>Maxym Hylliaka</TextBlock>
+					<TextBlock>Mohammad Mawaheb Seraj Eddin</TextBlock>
+					<TextBlock>Natasha Pererezova</TextBlock>
+					<TextBlock>Sergey Dubinets</TextBlock>
+					<TextBlock>Vitalii Dutka</TextBlock>
+				</WrapPanel>
 			</Grid>
 		</Grid>
 
