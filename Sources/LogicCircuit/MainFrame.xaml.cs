@@ -223,7 +223,7 @@ namespace LogicCircuit {
 
 		private void DescriptorMouseDown(object sender, MouseButtonEventArgs e) {
 			try {
-				if(this.Editor != null) {
+				if(e.ChangedButton == MouseButton.Left && this.Editor != null) {
 					this.Editor.DescriptorMouseDown((FrameworkElement)sender, e);
 				}
 			} catch(Exception exception) {
@@ -234,7 +234,7 @@ namespace LogicCircuit {
 
 		private void DescriptorMouseUp(object sender, MouseButtonEventArgs e) {
 			try {
-				if(this.Editor != null) {
+				if(e.ChangedButton == MouseButton.Left && this.Editor != null) {
 					this.Editor.DescriptorMouseUp();
 				}
 			} catch(Exception exception) {
@@ -245,7 +245,7 @@ namespace LogicCircuit {
 
 		private void DescriptorMouseMove(object sender, MouseEventArgs e) {
 			try {
-				if(this.Editor != null) {
+				if(e.LeftButton == MouseButtonState.Pressed && this.Editor != null) {
 					this.Editor.DescriptorMouseMove((FrameworkElement)sender, e);
 				}
 			} catch(Exception exception) {
@@ -279,7 +279,7 @@ namespace LogicCircuit {
 		private void DiagramMouseDown(object sender, MouseButtonEventArgs e) {
 			try {
 				Tracer.Assert(sender == this.Diagram);
-				if(this.Editor != null) {
+				if(e.ChangedButton == MouseButton.Left && this.Editor != null) {
 					this.Editor.DiagramMouseDown(e);
 				}
 			} catch(Exception exception) {
@@ -291,7 +291,7 @@ namespace LogicCircuit {
 		private void DiagramMouseUp(object sender, MouseButtonEventArgs e) {
 			try {
 				Tracer.Assert(sender == this.Diagram);
-				if(this.Editor != null) {
+				if(e.ChangedButton == MouseButton.Left && this.Editor != null) {
 					this.Editor.DiagramMouseUp(e);
 				}
 			} catch(Exception exception) {
@@ -303,7 +303,7 @@ namespace LogicCircuit {
 		private void DiagramMouseMove(object sender, MouseEventArgs e) {
 			try {
 				Tracer.Assert(sender == this.Diagram);
-				if(this.Editor != null) {
+				if(e.LeftButton == MouseButtonState.Pressed && this.Editor != null) {
 					this.Editor.DiagramMouseMove(e);
 				}
 			} catch(Exception exception) {
@@ -337,7 +337,7 @@ namespace LogicCircuit {
 		private void PowerButtonMouseDown(object sender, MouseButtonEventArgs e) {
 			try {
 				Editor current = this.Editor;
-				if(current != null) {
+				if(e.ChangedButton == MouseButton.Left && current != null) {
 					current.Power = !current.Power;
 				}
 			} catch(Exception exception) {

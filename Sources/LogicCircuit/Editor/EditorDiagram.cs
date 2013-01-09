@@ -867,7 +867,7 @@ namespace LogicCircuit {
 		}
 
 		public void DiagramMouseUp(MouseButtonEventArgs e) {
-			if(e.ChangedButton == MouseButton.Left && this.InEditMode) {
+			if(this.InEditMode) {
 				if(this.movingMarker != null) {
 					this.FinishMove(e.GetPosition(this.Diagram), (Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.None);
 				}
@@ -875,7 +875,7 @@ namespace LogicCircuit {
 		}
 
 		public void DiagramMouseMove(MouseEventArgs e) {
-			if(e.LeftButton == MouseButtonState.Pressed && this.InEditMode && this.movingMarker != null) {
+			if(this.InEditMode && this.movingMarker != null) {
 				this.movingMarker.Move(this, e.GetPosition(this.Diagram));
 			}
 		}
@@ -883,42 +883,40 @@ namespace LogicCircuit {
 		[SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
 		private void SymbolMouseDown(Symbol symbol, MouseButtonEventArgs e) {
 			if(this.InEditMode) {
-				if(e.ChangedButton == MouseButton.Left) {
-					Wire wire = symbol as Wire;
-					if(wire != null) {
-						if(Keyboard.Modifiers == ModifierKeys.Control) {
-							this.StartMove(this.SelectSymbol(wire), e.GetPosition(this.Diagram));
-						} else if(Keyboard.Modifiers == ModifierKeys.Shift) {
-							this.ClearSelection();
-							this.SelectConductor(wire);
-							this.StartMove(this.FindMarker(wire), e.GetPosition(this.Diagram));
-						} else if(Keyboard.Modifiers == (ModifierKeys.Shift | ModifierKeys.Control)) {
-							this.SelectConductor(wire);
-							this.StartMove(this.FindMarker(wire), e.GetPosition(this.Diagram));
-						} else {
-							Point point = e.GetPosition(this.Diagram);
-							if(Editor.IsPinClose(point, Symbol.ScreenPoint(wire.Point1)) || Editor.IsPinClose(point, Symbol.ScreenPoint(wire.Point2))) {
-								this.StartWire(point);
-								return;
-							}
-							this.ClearSelection();
-							this.StartMove(this.SelectSymbol(wire), e.GetPosition(this.Diagram));
-						}
-						this.Mainframe.Status = Properties.Resources.TipOnWireSelect;
-						return;
-					}
-
-					if((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control) {
-						this.Select(symbol);
-					} else {
+				Wire wire = symbol as Wire;
+				if(wire != null) {
+					if(Keyboard.Modifiers == ModifierKeys.Control) {
+						this.StartMove(this.SelectSymbol(wire), e.GetPosition(this.Diagram));
+					} else if(Keyboard.Modifiers == ModifierKeys.Shift) {
 						this.ClearSelection();
-						this.StartMove(this.SelectSymbol(symbol), e.GetPosition(this.Diagram));
+						this.SelectConductor(wire);
+						this.StartMove(this.FindMarker(wire), e.GetPosition(this.Diagram));
+					} else if(Keyboard.Modifiers == (ModifierKeys.Shift | ModifierKeys.Control)) {
+						this.SelectConductor(wire);
+						this.StartMove(this.FindMarker(wire), e.GetPosition(this.Diagram));
+					} else {
+						Point point = e.GetPosition(this.Diagram);
+						if(Editor.IsPinClose(point, Symbol.ScreenPoint(wire.Point1)) || Editor.IsPinClose(point, Symbol.ScreenPoint(wire.Point2))) {
+							this.StartWire(point);
+							return;
+						}
+						this.ClearSelection();
+						this.StartMove(this.SelectSymbol(wire), e.GetPosition(this.Diagram));
 					}
+					this.Mainframe.Status = Properties.Resources.TipOnWireSelect;
+					return;
+				}
 
-					CircuitSymbol circuitSymbol = symbol as CircuitSymbol;
-					if(circuitSymbol != null) {
-						this.ShowStatus(circuitSymbol);
-					}
+				if((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control) {
+					this.Select(symbol);
+				} else {
+					this.ClearSelection();
+					this.StartMove(this.SelectSymbol(symbol), e.GetPosition(this.Diagram));
+				}
+
+				CircuitSymbol circuitSymbol = symbol as CircuitSymbol;
+				if(circuitSymbol != null) {
+					this.ShowStatus(circuitSymbol);
 				}
 			} else {
 				CircuitSymbol circuitSymbol = symbol as CircuitSymbol;
@@ -986,7 +984,7 @@ namespace LogicCircuit {
 		}
 
 		private void JamMouseDown(MouseButtonEventArgs e) {
-			if(this.InEditMode && e.ChangedButton == MouseButton.Left) {
+			if(this.InEditMode) {
 				this.StartWire(e.GetPosition(this.Diagram));
 			}
 		}
