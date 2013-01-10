@@ -2,6 +2,7 @@
 
 namespace LogicCircuit {
 	internal static class SymbolShape {
+		public const string Button = "SymbolShapes/Button.xaml";
 		public const string Clock = "SymbolShapes/Clock.xaml";
 		public const string Constant = "SymbolShapes/Constant.xaml";
 		public const string Led = "SymbolShapes/Led.xaml";

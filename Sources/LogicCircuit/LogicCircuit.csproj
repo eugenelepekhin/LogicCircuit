@@ -479,6 +479,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="SymbolShapes\Button.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SymbolShapes\Clock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

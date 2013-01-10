@@ -85,7 +85,7 @@ namespace LogicCircuit {
 			int index = 0;
 			foreach(InputPinSocket socket in this.testSocket.Inputs) {
 				DataGridTextColumn column = new DataGridTextColumn();
-				column.Header = socket.Pin.Name;
+				column.Header = socket.Pin.Name.Replace("_", "__");
 				column.Binding = new Binding("Input[" + index + "]");
 				column.Binding.StringFormat = "{0:X}";
 				this.dataGrid.Columns.Add(column);
@@ -95,7 +95,7 @@ namespace LogicCircuit {
 			index = 0;
 			foreach(OutputPinSocket socket in this.testSocket.Outputs) {
 				DataGridTextColumn column = new DataGridTextColumn();
-				column.Header = socket.Pin.Name;
+				column.Header = socket.Pin.Name.Replace("_", "__");
 				column.Binding = new Binding("Output[" + index + "]");
 				column.Binding.StringFormat = "{0:X}";
 				this.dataGrid.Columns.Add(column);

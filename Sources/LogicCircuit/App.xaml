@@ -217,6 +217,11 @@
 					</Setter.Value>
 				</Setter>
 			</Style>
+
+			<!-- Used as header template in controls that support accelerator keys and get content from user input to show underscore rather then use it as a hot key -->
+			<DataTemplate x:Key="ignoreHotkey">
+				<TextBlock Text="{Binding}"/>
+			</DataTemplate>
 		</ResourceDictionary>
 	</Application.Resources>
 </Application>

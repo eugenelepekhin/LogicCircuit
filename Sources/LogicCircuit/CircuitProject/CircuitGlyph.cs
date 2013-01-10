@@ -206,7 +206,7 @@ namespace LogicCircuit {
 			Tracer.Assert(this.Circuit is CircuitButton);
 			Canvas canvas = this.CreateGlyphCanvas();
 			CircuitGlyph.AddJam(canvas, this.Jams(), null);
-			ButtonControl buttonControl = new ButtonControl();
+			ButtonControl buttonControl = CircuitGlyph.Skin<ButtonControl>(SymbolShape.Button);
 			Panel.SetZIndex(buttonControl, 0);
 			buttonControl.Content = this.Circuit.Notation;
 			buttonControl.Width = canvas.Width;

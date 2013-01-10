@@ -584,7 +584,7 @@
 			<GridSplitter Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Stretch" Width="4" Background="Transparent"/>
 
 			<!-- Main Diagram -->
-			<GroupBox Grid.Column="2" Header="{Binding Path=Editor.Project.LogicalCircuit.Name, FallbackValue=''}">
+			<GroupBox Grid.Column="2" Header="{Binding Path=Editor.Project.LogicalCircuit.Name, FallbackValue=''}" HeaderTemplate="{StaticResource ignoreHotkey}">
 				<ScrollViewer Name="DiagramScroll"
 					HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible"
 					LostFocus="DiagramLostFocus" LostKeyboardFocus="DiagramLostKeyboardFocus"
