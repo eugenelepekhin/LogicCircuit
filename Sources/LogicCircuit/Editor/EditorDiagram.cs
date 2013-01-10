@@ -866,7 +866,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		public void DiagramMouseUp(MouseButtonEventArgs e) {
+		public void DiagramMouseUp(MouseEventArgs e) {
 			if(this.InEditMode) {
 				if(this.movingMarker != null) {
 					this.FinishMove(e.GetPosition(this.Diagram), (Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.None);
@@ -881,7 +881,7 @@ namespace LogicCircuit {
 		}
 
 		[SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
-		private void SymbolMouseDown(Symbol symbol, MouseButtonEventArgs e) {
+		private void SymbolMouseDown(Symbol symbol, MouseEventArgs e) {
 			if(this.InEditMode) {
 				Wire wire = symbol as Wire;
 				if(wire != null) {
@@ -927,7 +927,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private void MarkerMouseDown(Marker marker, MouseButtonEventArgs e) {
+		private void MarkerMouseDown(Marker marker, MouseEventArgs e) {
 			if((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control) {
 				this.Unselect(marker.Symbol);
 				return;
@@ -983,7 +983,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private void JamMouseDown(MouseButtonEventArgs e) {
+		private void JamMouseDown(MouseEventArgs e) {
 			if(this.InEditMode) {
 				this.StartWire(e.GetPosition(this.Diagram));
 			}
