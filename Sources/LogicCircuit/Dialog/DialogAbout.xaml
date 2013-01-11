@@ -56,11 +56,19 @@
 				/>
 
 				<TextBlock Grid.Row="1" Text="{x:Static properties:Resources.TitleCredits}" Style="{StaticResource BigText}"/>
-				<WrapPanel Grid.Row="2" Orientation="Vertical" FlowDirection="LeftToRight" Margin="3">
+				<WrapPanel Grid.Row="2" Orientation="Vertical" Margin="3">
+					<WrapPanel.Resources>
+						<Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+							<Setter Property="FlowDirection" Value="LeftToRight"/>
+							<Setter Property="Margin" Value="5,0"/>
+						</Style>
+					</WrapPanel.Resources>
+					
 					<TextBlock>David Chastant</TextBlock>
 					<TextBlock>Eugene Lepekhin</TextBlock>
 					<TextBlock>Fernando Perulles Aguilar</TextBlock>
 					<TextBlock>Gé Brander</TextBlock>
+					<TextBlock>Karen Flores</TextBlock>
 					<TextBlock>Markus Grundner</TextBlock>
 					<TextBlock>Maxym Hylliaka</TextBlock>
 					<TextBlock>Mohammad Mawaheb Seraj Eddin</TextBlock>
