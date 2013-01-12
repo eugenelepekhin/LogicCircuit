@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -19,15 +20,13 @@ namespace LogicCircuit {
 			this.logicalCircuit = logicalCircuit;
 			this.name.Text = this.logicalCircuit.Name;
 			this.notation.Text = this.logicalCircuit.Notation;
-			HashSet<string> list = new HashSet<string>();
-			foreach(LogicalCircuit circuit in this.logicalCircuit.CircuitProject.LogicalCircuitSet) {
-				if(list.Add(circuit.Category)) {
-					this.category.Items.Add(circuit.Category);
-				}
+
+			HashSet<string> set = new HashSet<string>(this.logicalCircuit.CircuitProject.LogicalCircuitSet.Select(c => c.Category));
+			set.Add(string.Empty);
+			foreach(string s in set.OrderBy(s => s)) {
+				this.category.Items.Add(s);
 			}
-			if(list.Add(string.Empty)) {
-				this.category.Items.Add(string.Empty);
-			}
+
 			this.category.Text = this.logicalCircuit.Category;
 			this.description.Text = this.logicalCircuit.Description;
 			this.Loaded += new RoutedEventHandler(this.DialogCircuitLoaded);
