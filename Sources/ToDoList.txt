@@ -2,6 +2,14 @@ ToDo list:
 
 smarter wires
 
+Backward navigation on circuits
+Sound component
+Sensor component
+Input/output bidirectional pins
+Lightweight probe or color wires to observe current signals
+Named probes
+Tunnels
+
 Keyboard device
 Display device
 
