@@ -884,16 +884,16 @@
     <value>فقط الثوابت الموجودة في الدارة  الرئيسية  ({0}) يمكن تغييرها عند تشغيل الطاقة.</value>
   </data>
   <data name="CaptionSplitterPinNumber" xml:space="preserve">
-    <value>تقسيم التماسات.</value>
+    <value>تفريع التماسات.</value>
   </data>
   <data name="CaptionSplitterDirection" xml:space="preserve">
-    <value>دمج التماسات</value>
+    <value>اتجاه التماسات الجديدة</value>
   </data>
   <data name="TitleRunningCircuit" xml:space="preserve">
     <value>الدارة الفعالة</value>
   </data>
   <data name="ToolTipPinSide" xml:space="preserve">
-    <value>اختر طرف الدارة التي سيتم وضع التماس فيها.</value>
+    <value>اختر طرف الدارة التي سيتم وضع التماس فيه.</value>
   </data>
   <data name="CommandCircuitPower" xml:space="preserve">
     <value>الطاقة</value>
@@ -928,5 +928,53 @@
   </data>
   <data name="MessageUsageNote" xml:space="preserve">
     <value>أختر الدارة التي يستخدم فيها العنصر الحالي و انقر نقراً مزدوجاً للذهاب إلى هناك و اختر الرمز للعنصر الحالي.</value>
+  </data>
+  <data name="TitleCount" xml:space="preserve">
+    <value>العدد</value>
+  </data>
+  <data name="ToolTipSplitter" xml:space="preserve">
+    <value>مفرع {0} بت إلى {1} تماس</value>
+  </data>
+  <data name="NameSplitter" xml:space="preserve">
+    <value>مفرع</value>
+  </data>
+  <data name="TitleFunction" xml:space="preserve">
+    <value>الدالة</value>
+  </data>
+  <data name="FileFilter" xml:space="preserve">
+    <value>مشروع دارة (*{0})|*{0}|All files (*.*)|*.*</value>
+  </data>
+  <data name="ToolTipSplitterPinNumber" xml:space="preserve">
+    <value>اختر عدد تماسات التفريع الجديدة المطلوبة.</value>
+  </data>
+  <data name="ToolTipSplitterRotation" xml:space="preserve">
+    <value>اختر اتجاه التماسات الجديدة الناتجة .</value>
+  </data>
+  <data name="CaptionSplitterBitWidth" xml:space="preserve">
+    <value>عرض بت كل تماس جديد ناتج عن التقسيم</value>
+  </data>
+  <data name="ToolTipSplitterBitWidth" xml:space="preserve">
+    <value>اختر عرض بت التماسات الجديدة الناتجة عن التفريع.</value>
+  </data>
+  <data name="SplitterThin1PinName" xml:space="preserve">
+    <value>(بت {0}) من المفرع</value>
+  </data>
+  <data name="SplitterThin2PinName" xml:space="preserve">
+    <value>(البتات من {0}إلى{1})  من المفرع</value>
+  </data>
+  <data name="SplitterWidePinName" xml:space="preserve">
+    <value>مفرع</value>
+  </data>
+  <data name="TitleInverted" xml:space="preserve">
+    <value>معكوس:</value>
+  </data>
+  <data name="TitleSide" xml:space="preserve">
+    <value>طرف:</value>
+  </data>
+  <data name="ToolTipButtonNotation" xml:space="preserve">
+    <value>أدخل وصف الزر</value>
+  </data>
+  <data name="TitleIsToggle" xml:space="preserve">
+    <value>وصف</value>
   </data>
 </root>
