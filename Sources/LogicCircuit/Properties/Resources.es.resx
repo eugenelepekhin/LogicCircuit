@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -154,13 +154,13 @@
     <value>Lado</value>
   </data>
   <data name="CaptionSplitterBitWidth" xml:space="preserve">
-    <value>Dividir pin, longitud de bit</value>
+    <value>Divisor de bits por pin</value>
   </data>
   <data name="CaptionSplitterDirection" xml:space="preserve">
-    <value>Pin Combinado</value>
+    <value>Ubicación de Pines Combinados</value>
   </data>
   <data name="CaptionSplitterPinNumber" xml:space="preserve">
-    <value>Dividir Pines</value>
+    <value>Divisor de Pines</value>
   </data>
   <data name="CaptionTextNote1" xml:space="preserve">
     <value>Texto</value>
@@ -683,7 +683,7 @@ Desea guardado?</value>
     <value>Constante</value>
   </data>
   <data name="NameLedMatrix" xml:space="preserve">
-    <value>LED Matriz</value>
+    <value>Matriz de LEDs</value>
   </data>
   <data name="NamePin" xml:space="preserve">
     <value>Pin</value>
@@ -1144,7 +1144,7 @@ Out</value>
     <value>Si el botón esta seleccionado cambiara su estado con cada click, si no se encuentra seleccionado cambiara al presionar y al soltar</value>
   </data>
   <data name="ToolTipLedMatrix" xml:space="preserve">
-    <value>LED Matriz {0}x{1} con {2} bit(s) por LED ({3} colores)</value>
+    <value>Matriz de LEDs {0}x{1} con {2} bit(s) por LED ({3} colores)</value>
     <comment>{int rows, int columns, int bitsPerLed, int colors}</comment>
   </data>
   <data name="ToolTipLedMatrixType" xml:space="preserve">
