@@ -876,7 +876,7 @@ Si desidera di rimuovere il riferimento dall'elenco dei File recenti?</value>
     <comment>{string fileName}</comment>
   </data>
   <data name="ProjectSummary" xml:space="preserve">
-    <value>{0} circuiti logici, in {1} categorie si utilizzano {2} simboli e {3} fili </value>
+    <value>{0} circuiti logici, in {1} categorie si utilizzano {2} simboli e {3} fili</value>
     <comment>{int logicalCircuits, int categories, int symbols, int wires}</comment>
   </data>
   <data name="ReportError" xml:space="preserve">
@@ -1175,7 +1175,7 @@ Circuiti di questo tipo non possono essere utilizzati più di una volta su altri
     <value>Diminuire indentazione</value>
   </data>
   <data name="CommandEditDelete" xml:space="preserve">
-    <value>_Elimina </value>
+    <value>_Elimina</value>
   </data>
   <data name="CommandEditIncreaseFontSize" xml:space="preserve">
     <value>Aumenta dimensione del carattere</value>

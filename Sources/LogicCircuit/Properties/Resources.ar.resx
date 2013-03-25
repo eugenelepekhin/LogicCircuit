@@ -124,8 +124,7 @@
     <value>محاولة تحميل نسخة غير معروفة من مشروع Circuit
 الملف الذي تحاول فتحه إما معطوب أو أنه تم إنشاؤه بإصدار Logic Circuit أحدث من الإصدار الموجود لديك 
 الرجاء التحقق  من وجود إصدار جديد
-&lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt;
- </value>
+&lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt;</value>
   </data>
   <data name="FileSaved" xml:space="preserve">
     <value>تم حفظ الملف ,{0}.</value>
@@ -278,7 +277,7 @@
     <value>إعادة الأمر</value>
   </data>
   <data name="CommandEditSelectAll" xml:space="preserve">
-    <value>تحديد الكل </value>
+    <value>تحديد الكل</value>
   </data>
   <data name="CommandEditUndo" xml:space="preserve">
     <value>تراجع</value>
@@ -423,7 +422,7 @@
     <value>تم اكتشف أسلاك غير موصولة {0}</value>
   </data>
   <data name="MessageFloatingSymbolCount" xml:space="preserve">
-    <value>تم اكتشف رمز غير متصل {0}  </value>
+    <value>تم اكتشف رمز غير متصل {0}</value>
   </data>
   <data name="MessageExportImageDialog" xml:space="preserve">
     <value>حدد نوع الصورة و اسم الملف ليتم تصدير المخطط الحالي إليه</value>
@@ -558,7 +557,7 @@
     <value>رقم غير صحيح: {0}</value>
   </data>
   <data name="ParserErrorUnexpected" xml:space="preserve">
-    <value> {0} غير متوقع</value>
+    <value>{0} غير متوقع</value>
   </data>
   <data name="ParserErrorUnknownChar" xml:space="preserve">
     <value>محرف غير معروف :{0}</value>

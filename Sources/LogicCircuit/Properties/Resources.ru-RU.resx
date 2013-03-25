@@ -526,7 +526,7 @@
     <value>Отсутствует ')' вместо: {0}</value>
   </data>
   <data name="ParserErrorExpressionMissing" xml:space="preserve">
-    <value>После {0} ожидается выражение </value>
+    <value>После {0} ожидается выражение</value>
   </data>
   <data name="ParserErrorInvalidNumber" xml:space="preserve">
     <value>Неверное число: {0}</value>

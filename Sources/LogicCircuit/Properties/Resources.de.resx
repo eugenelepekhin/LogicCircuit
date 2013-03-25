@@ -478,7 +478,7 @@ Soll die Datei ersetzt werden?</value>
     <value>Speicher</value>
   </data>
   <data name="TitleMaxRecentFiles" xml:space="preserve">
-    <value>_Maximale Anzahl zuletzt verwendeter Dateien: </value>
+    <value>_Maximale Anzahl zuletzt verwendeter Dateien:</value>
   </data>
   <data name="BitOff" xml:space="preserve">
     <value>Aus</value>
@@ -664,7 +664,7 @@ Soll die Datei ersetzt werden?</value>
     <value>Wählen Sie aus wie RAM beim Einschalten initialisiert wird.</value>
   </data>
   <data name="MessageRestartRequared" xml:space="preserve">
-    <value>Ihre Spracheauswahl wurde geändert. Sie müssen die Anwendung neu starten, damit die neuen Einstellungen aktiv werden. </value>
+    <value>Ihre Spracheauswahl wurde geändert. Sie müssen die Anwendung neu starten, damit die neuen Einstellungen aktiv werden.</value>
   </data>
   <data name="TitleCulture" xml:space="preserve">
     <value>_Sprache</value>
@@ -788,7 +788,7 @@ Möchten Sie den Verweis von der Liste der zuletzt verwendeten Dateien löschen?
     <value>{0} Schaltung(en), in {1} Kategorie(n) verwend(et/en) {2} Symbol(e) und {3} Verbindung(en)</value>
   </data>
   <data name="ParserErrorCloseParenMissing" xml:space="preserve">
-    <value>Beim Ausdruck: {0} fehlt die schließende ')'. </value>
+    <value>Beim Ausdruck: {0} fehlt die schließende ')'.</value>
   </data>
   <data name="ErrorProjectCount" xml:space="preserve">
     <value>Es befindet sich mehr als ein Projekt in der Datei.</value>
