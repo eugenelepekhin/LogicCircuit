@@ -17,6 +17,7 @@ namespace LogicCircuit {
 			"en-US",
 			"ar",
 			"de",
+			"el-GR",
 			"es",
 			"fr",
 			"it-IT",

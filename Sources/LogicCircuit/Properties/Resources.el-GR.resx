@@ -1,0 +1,1170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ErrorProjectCount" xml:space="preserve">
+    <value>Παραπανω απο μια εργασιες υπαρχουν στο αρχειο.</value>
+  </data>
+  <data name="ErrorUnknownVersion" xml:space="preserve">
+    <value>Η φορτωση μια αγνωστης εκδοσης του Circuit Project απετυχε. Το αρχειο που θελετε να ανοιξετε ειναι χαλασμενο η δημιουργθηκε με μια νεοτερη εκδοση του  Logic Circuit. Επισκεφθειτε την ιστοσελιδα &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt; για νεοτερες εκδοσεις.</value>
+  </data>
+  <data name="FileFilter" xml:space="preserve">
+    <value>Circuit Project (*{0})|*{0}|Ολα τα αρχεια (*.*)|*.*</value>
+  </data>
+  <data name="FileSaved" xml:space="preserve">
+    <value>Αρχειο {0} αποθηκευθηκε</value>
+  </data>
+  <data name="GateAndName" xml:space="preserve">
+    <value>Και</value>
+  </data>
+  <data name="GateAndNotation" xml:space="preserve">
+    <value>&amp;</value>
+  </data>
+  <data name="GateAndNotName" xml:space="preserve">
+    <value>NΚαι</value>
+  </data>
+  <data name="GateClockName" xml:space="preserve">
+    <value>Ρολοι</value>
+  </data>
+  <data name="GateClockNotation" xml:space="preserve">
+    <value>ω</value>
+  </data>
+  <data name="GateLedName" xml:space="preserve">
+    <value>Δίοδος Εκπομπής Φωτός</value>
+  </data>
+  <data name="GateLedNotation" xml:space="preserve">
+    <value>Δίοδος Εκπομπής Φωτός</value>
+  </data>
+  <data name="GateNotName" xml:space="preserve">
+    <value>Οχι</value>
+  </data>
+  <data name="GateNotNotation" xml:space="preserve">
+    <value>~</value>
+  </data>
+  <data name="GateOrName" xml:space="preserve">
+    <value>Η</value>
+  </data>
+  <data name="GateOrNotation" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="GateOrNotName" xml:space="preserve">
+    <value>NΗ</value>
+  </data>
+  <data name="GateProbeName" xml:space="preserve">
+    <value>Καθετηρας</value>
+  </data>
+  <data name="GateProbeNotation" xml:space="preserve">
+    <value>?</value>
+  </data>
+  <data name="GateShapeRectangular" xml:space="preserve">
+    <value>Ορθογωνιο</value>
+  </data>
+  <data name="GateShapeShaped" xml:space="preserve">
+    <value>Σχημα</value>
+  </data>
+  <data name="GateTriStateName" xml:space="preserve">
+    <value>Tri-state</value>
+  </data>
+  <data name="GateTriStateNotation" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="GateXorName" xml:space="preserve">
+    <value>Xη</value>
+  </data>
+  <data name="GateXorNotation" xml:space="preserve">
+    <value>=</value>
+  </data>
+  <data name="GateXorNotName" xml:space="preserve">
+    <value>XNη</value>
+  </data>
+  <data name="Led7Pin1" xml:space="preserve">
+    <value>α</value>
+  </data>
+  <data name="Led7Pin2" xml:space="preserve">
+    <value>β</value>
+  </data>
+  <data name="Led7Pin3" xml:space="preserve">
+    <value>σ</value>
+  </data>
+  <data name="Led7Pin4" xml:space="preserve">
+    <value>δ</value>
+  </data>
+  <data name="Led7Pin5" xml:space="preserve">
+    <value>ε</value>
+  </data>
+  <data name="Led7Pin6" xml:space="preserve">
+    <value>φ</value>
+  </data>
+  <data name="Led7Pin7" xml:space="preserve">
+    <value>γ</value>
+  </data>
+  <data name="Led7Pin8" xml:space="preserve">
+    <value>τελεια</value>
+  </data>
+  <data name="LogicalCircuitName" xml:space="preserve">
+    <value>Κυκλωμα</value>
+  </data>
+  <data name="MainFrameCaption" xml:space="preserve">
+    <value>Λογικο Κυκλωμα {0}</value>
+  </data>
+  <data name="MemoryAddressPinName" xml:space="preserve">
+    <value>διευθυνση μνημης</value>
+  </data>
+  <data name="MemoryAddressPinNotation" xml:space="preserve">
+    <value>α</value>
+  </data>
+  <data name="MemoryDataInPinName" xml:space="preserve">
+    <value>Δεδομενα εισοσου μνημης</value>
+  </data>
+  <data name="MemoryDataPinName" xml:space="preserve">
+    <value>Δεδομενα μνημης</value>
+  </data>
+  <data name="MemoryDataPinNotation" xml:space="preserve">
+    <value>δ</value>
+  </data>
+  <data name="MemoryWritePinName" xml:space="preserve">
+    <value>Εγγραφη δεδομενων εισοδου στο RAM. Η μνημη θα ανανεωθει σε  {0}</value>
+  </data>
+  <data name="MemoryWritePinNotation" xml:space="preserve">
+    <value>ψ</value>
+  </data>
+  <data name="MessageSaveFile" xml:space="preserve">
+    <value>Η εργασια {0} αλλαχθηκε. Να αποθηκευθει ?</value>
+  </data>
+  <data name="OperationCanceled" xml:space="preserve">
+    <value>Η ενεργεια διακοπηκε.</value>
+  </data>
+  <data name="PinEnableName" xml:space="preserve">
+    <value>Ε</value>
+  </data>
+  <data name="PinInName" xml:space="preserve">
+    <value>χ</value>
+  </data>
+  <data name="PinName" xml:space="preserve">
+    <value>{0}{1}</value>
+  </data>
+  <data name="PinOutName" xml:space="preserve">
+    <value>q</value>
+  </data>
+  <data name="Ready" xml:space="preserve">
+    <value>Ετοιμοτητα.</value>
+  </data>
+  <data name="SplitterThin1PinName" xml:space="preserve">
+    <value>(bit {0}) της συνδυασμενης Splitter συνδεσης</value>
+  </data>
+  <data name="SplitterThin2PinName" xml:space="preserve">
+    <value>(bits {0}-{1})  της συνδυασμενης Splitter συνδεσης</value>
+  </data>
+  <data name="SplitterWidePinName" xml:space="preserve">
+    <value>Συνδυασμενη Splitter συνδεση</value>
+  </data>
+  <data name="TitleCancel" xml:space="preserve">
+    <value>Διακοπη</value>
+  </data>
+  <data name="TitleNo" xml:space="preserve">
+    <value>_Οχι</value>
+  </data>
+  <data name="TitleOK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="TitleShowDetails" xml:space="preserve">
+    <value>_Εμφανιση λεπτομερειων</value>
+  </data>
+  <data name="TitleYes" xml:space="preserve">
+    <value>_Ναι</value>
+  </data>
+  <data name="WriteOn0" xml:space="preserve">
+    <value>πτωση απο 1 σε 0</value>
+  </data>
+  <data name="WriteOn1" xml:space="preserve">
+    <value>αυξηση απο 0 σε 1</value>
+  </data>
+  <data name="ConstantNotation" xml:space="preserve">
+    <value>{0:X}</value>
+  </data>
+  <data name="RAMNotation" xml:space="preserve">
+    <value>RAM</value>
+  </data>
+  <data name="ROMNotation" xml:space="preserve">
+    <value>ROM</value>
+  </data>
+  <data name="ToolTipButton" xml:space="preserve">
+    <value>Πλαισιο {0}</value>
+  </data>
+  <data name="ToolTipConstant" xml:space="preserve">
+    <value>{0} bit(s) σταθερα {1:X}</value>
+  </data>
+  <data name="ToolTipInputPin" xml:space="preserve">
+    <value>Εισοδος {0} bit(s) Pin {1}</value>
+  </data>
+  <data name="ToolTipNonePin" xml:space="preserve">
+    <value>{0} bit(s) {1}</value>
+  </data>
+  <data name="ToolTipOutputPin" xml:space="preserve">
+    <value>Εξωδος {0} bit(s) Pin {1}</value>
+  </data>
+  <data name="ToolTipRAM" xml:space="preserve">
+    <value>RAM {0} bit διευθυνση / {1} bit δεδομενα</value>
+  </data>
+  <data name="ToolTipROM" xml:space="preserve">
+    <value>ROM {0} bit διευθυνση / {1} bit δεδομενα</value>
+  </data>
+  <data name="ToolTipSplitter" xml:space="preserve">
+    <value>Διαχωρισμος απο {0} bits σε {1} pins</value>
+  </data>
+  <data name="ToolTipWire" xml:space="preserve">
+    <value>Καλωδιο</value>
+  </data>
+  <data name="CategoryInputOutput" xml:space="preserve">
+    <value>Εισοδος - Εξοδος</value>
+  </data>
+  <data name="TitlePinInput" xml:space="preserve">
+    <value>{0}
+Εισοδος</value>
+  </data>
+  <data name="TitlePinOutput" xml:space="preserve">
+    <value>{0}
+Εξοδος</value>
+  </data>
+  <data name="CommandHelpAbout" xml:space="preserve">
+    <value>_Πληροφοριες</value>
+  </data>
+  <data name="NameButton" xml:space="preserve">
+    <value>Πλαισιο</value>
+  </data>
+  <data name="NameConstant" xml:space="preserve">
+    <value>Σταθεροτητα</value>
+  </data>
+  <data name="NameSplitter" xml:space="preserve">
+    <value>Διαχωριστικο</value>
+  </data>
+  <data name="TitleAbout" xml:space="preserve">
+    <value>Πληροφοριες για το</value>
+  </data>
+  <data name="TitleApplication" xml:space="preserve">
+    <value>Logical Circuit</value>
+  </data>
+  <data name="TitleVersion" xml:space="preserve">
+    <value>Εκδοση:</value>
+  </data>
+  <data name="TitleWeb" xml:space="preserve">
+    <value>Ιστοσελιδα:</value>
+  </data>
+  <data name="WebSiteUri" xml:space="preserve">
+    <value>http://www.logiccircuit.org/</value>
+  </data>
+  <data name="CommandToolsOptions" xml:space="preserve">
+    <value>_Ρυθμισεις</value>
+  </data>
+  <data name="TitleDisplayOptions" xml:space="preserve">
+    <value>Οθονη</value>
+  </data>
+  <data name="TitleFileOptions" xml:space="preserve">
+    <value>Αρχειο</value>
+  </data>
+  <data name="TitleGateShape" xml:space="preserve">
+    <value>Σχημα πυλης</value>
+  </data>
+  <data name="TitleLoadLastFile" xml:space="preserve">
+    <value>Φορτωση του τελευταιου αρχειου στην εκκινηση</value>
+  </data>
+  <data name="TitleOptions" xml:space="preserve">
+    <value>Ρυθμισεις</value>
+  </data>
+  <data name="TitleShowGrid" xml:space="preserve">
+    <value>_Εμφανιση πλεγματος</value>
+  </data>
+  <data name="MessageFreeWireCount" xml:space="preserve">
+    <value>{0} ελευθερα καλωδια βρεθηκαν.</value>
+  </data>
+  <data name="MessageFloatingSymbolCount" xml:space="preserve">
+    <value>{0} μη συνδεδεμενα συμβολα βρεθηκαν.</value>
+  </data>
+  <data name="CommandCircuitCurrent" xml:space="preserve">
+    <value>Logical Circuit</value>
+  </data>
+  <data name="CommandCircuitDelete" xml:space="preserve">
+    <value>Διαγραφη του τρεχων κυκλωματος</value>
+  </data>
+  <data name="CommandCircuitNew" xml:space="preserve">
+    <value>Νεο λογικο κυκλωμα</value>
+  </data>
+  <data name="CommandCircuitProject" xml:space="preserve">
+    <value>Εργασια</value>
+  </data>
+  <data name="CommandEditSelectAllButWires" xml:space="preserve">
+    <value>Επιλογη μονο των καλωδιων</value>
+  </data>
+  <data name="CommandEditSelectAllProbes" xml:space="preserve">
+    <value>Επιλογη ολων των καθετηρων</value>
+  </data>
+  <data name="CommandEditSelectAllProbesWithWire" xml:space="preserve">
+    <value>Επιλογη ολων των καθετηρων και των συνδεδεμενων καλωδιων</value>
+  </data>
+  <data name="CommandEditSelectAllWires" xml:space="preserve">
+    <value>Επιλογη καλωδιων</value>
+  </data>
+  <data name="CommandEditSelectFloatingSymbols" xml:space="preserve">
+    <value>Επιλογη κυμενωμενων συμβολων</value>
+  </data>
+  <data name="CommandEditSelectFreeWires" xml:space="preserve">
+    <value>Επιλογη ελευθερων καλωδιων</value>
+  </data>
+  <data name="CommandEditUnselectAllButWires" xml:space="preserve">
+    <value>Αποεπιλογη μονο των καλωδιων</value>
+  </data>
+  <data name="CommandEditUnselectAllWires" xml:space="preserve">
+    <value>Αποεπιλογη ολων των καλωδιων</value>
+  </data>
+  <data name="CommandFileExportImage" xml:space="preserve">
+    <value>Εξαγωγη εικονας</value>
+  </data>
+  <data name="CommandToolsOscilloscope" xml:space="preserve">
+    <value>Παλμοσκοπιο</value>
+  </data>
+  <data name="CommandToolsReport" xml:space="preserve">
+    <value>Αναφορα εργασιας</value>
+  </data>
+  <data name="HelpContent" xml:space="preserve">
+    <value>http://www.logiccircuit.org/help.html</value>
+  </data>
+  <data name="TitleCategory" xml:space="preserve">
+    <value>_Κατηγορια:</value>
+  </data>
+  <data name="TitleDescription" xml:space="preserve">
+    <value>_Περιγραφη:</value>
+  </data>
+  <data name="TitleName" xml:space="preserve">
+    <value>_Ονομα:</value>
+  </data>
+  <data name="TitleNotation" xml:space="preserve">
+    <value>Σ_ημειωμα:</value>
+  </data>
+  <data name="TitleBitWidth" xml:space="preserve">
+    <value>_Bit πλατος:</value>
+  </data>
+  <data name="TitleValue" xml:space="preserve">
+    <value>_Τιμη:</value>
+  </data>
+  <data name="NamePin" xml:space="preserve">
+    <value>Pin</value>
+  </data>
+  <data name="TitleAddressBitWidth" xml:space="preserve">
+    <value>_Πλατος της bit διευθυνσης:</value>
+  </data>
+  <data name="TitleData" xml:space="preserve">
+    <value>Δεδο_μενα</value>
+  </data>
+  <data name="TitleDataBitWidth" xml:space="preserve">
+    <value>_Πλατος των bit δεδομενων:</value>
+  </data>
+  <data name="TitleInverted" xml:space="preserve">
+    <value>_Αντιστροφη</value>
+  </data>
+  <data name="TitleLoad" xml:space="preserve">
+    <value>_Φορτωση...</value>
+  </data>
+  <data name="TitleSide" xml:space="preserve">
+    <value>_Πλευρα:</value>
+  </data>
+  <data name="TitleType" xml:space="preserve">
+    <value>_Τυπος:</value>
+  </data>
+  <data name="TitleWriteOn" xml:space="preserve">
+    <value>_Εγγραφη σε:</value>
+  </data>
+  <data name="TipOnStartMove" xml:space="preserve">
+    <value>Drag &amp; drop στην επιλογή στην επιθυμητή θέση. Πατήστε Esc για να ακυρώσετε την κίνηση. Κρατήστε πατημένο το πλήκτρο Shift για να μην πέφτουν τα μη συνδεδεμένα καλώδια.</value>
+  </data>
+  <data name="TipOnStartWire" xml:space="preserve">
+    <value>Σύρετε τέλος του καλωδιου στην επιθυμητή θέση. Πατήστε Esc για να ακυρώσετε τη δημιουργία καλωδιου.</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Φορτωση...</value>
+  </data>
+  <data name="TipOnCtrlDown" xml:space="preserve">
+    <value>Πατήστε Ctrl + Shift } { + Tab για εναλλαγή μεταξύ λογικών κυκλωμάτων ή κάντε κλικ για να επιλέξετε / αποεπιλέξετε μεμονωμένα σύμβολα.</value>
+  </data>
+  <data name="TipOnWireSelect" xml:space="preserve">
+    <value>Shift + Ctrl } { + Κάντε κλικ στο καλωδιο για να επιλογη / αποεπιλολη αγωγου , Alt + κλικ σε επιλεγμένο καλωδιο να αποχωρίσει, με κοινό σημείο των δύο να συγχωνευθούν.</value>
+  </data>
+  <data name="TipOnAwaitingArea" xml:space="preserve">
+    <value>{0} {1}. Surround πολλαπλά σύμβολα για επιλογη, κρατήστε πατημένο το πλήκτρο Shift για να διατηρήσετε την τρέχουσα επιλογή.</value>
+  </data>
+  <data name="FunctionParameter" xml:space="preserve">
+    <value>Για αυτη την λειτουγια {0} απαιτουνται τουλαχιστον {1} παραμετροι</value>
+  </data>
+  <data name="UnknownState" xml:space="preserve">
+    <value>Η περιοχη {0} ειναι αγνωστη</value>
+  </data>
+  <data name="CircuitMapPathSeparator" xml:space="preserve">
+    <value>/</value>
+  </data>
+  <data name="ErrorAddressNotConnected" xml:space="preserve">
+    <value>Δεν είναι όλα τα bit της διεύθυνσης  συνδεδεμενα με τη μνήμη {0}</value>
+  </data>
+  <data name="ErrorDataInNotConnected" xml:space="preserve">
+    <value>Δεν είναι όλα τα bits των δεδομένων εισόδου συνδεδεμενα με τη μνήμη {0}</value>
+  </data>
+  <data name="ErrorJamBitWidthDifferent" xml:space="preserve">
+    <value>Το pin εισοδου του {0} ({1}) και το pin εξοδου του {2} ({3}) στο {4} εχουν διαφορετικο πλατος και δεν μπορουν να συνδεθουν.</value>
+  </data>
+  <data name="ErrorLoopInCircuit" xml:space="preserve">
+    <value>Το συμβολο του κυκλωματος "{0}" στο λογικο κυκλωμα "{1}" αποτελει απειρο βροχο.</value>
+  </data>
+  <data name="ErrorManyResults" xml:space="preserve">
+    <value>Το pin εισοδου {0} απο {1} ειναι συνδεδεμενο με περισσοτερα απο ενα εξωτερικα pin που δεν ειναι σε θεση να δημιουργησουν τριφασικο κυκλωμα.</value>
+  </data>
+  <data name="PowerOff" xml:space="preserve">
+    <value>Διακοπή τροφοδοσίας</value>
+  </data>
+  <data name="PowerOn" xml:space="preserve">
+    <value>Ενεργοποιηση τροφοδοσιας</value>
+  </data>
+  <data name="ProbeHistoryHex" xml:space="preserve">
+    <value>{0:X}</value>
+  </data>
+  <data name="ProbeHistoryMark" xml:space="preserve">
+    <value>&lt;&lt;&lt;&lt;&lt;&lt; Μαρκαρισμα &gt;&gt;&gt;&gt;&gt;&gt;</value>
+  </data>
+  <data name="TitleMark" xml:space="preserve">
+    <value>_Μαρκαρισμα</value>
+  </data>
+  <data name="TitleProbeHistory" xml:space="preserve">
+    <value>Ιστορικο του αισθητηρα</value>
+  </data>
+  <data name="MessageNotRootConstant" xml:space="preserve">
+    <value>Μόνο οι σταθερές στο κύκλωμα ρίζας ({0}) μπορουν να αλλαχθουν κατα την ενεργοποιηση της τροφοδοσιας..</value>
+  </data>
+  <data name="LogicalCircuitMainName" xml:space="preserve">
+    <value>Κεντρικα</value>
+  </data>
+  <data name="CircuitProjectName" xml:space="preserve">
+    <value>Κύκλωμα Έργου</value>
+  </data>
+  <data name="Oscillation" xml:space="preserve">
+    <value>Ταλάντωση</value>
+  </data>
+  <data name="TitleOscillogram" xml:space="preserve">
+    <value>Παλμογράφημα</value>
+  </data>
+  <data name="TitleOscilloscope" xml:space="preserve">
+    <value>Παλμοσκόπιο κυκλώματος</value>
+  </data>
+  <data name="TitleOscilloscoping" xml:space="preserve">
+    <value>_Παλμογραφημα</value>
+  </data>
+  <data name="CommandFileFileImport" xml:space="preserve">
+    <value>_Εισαγωγη...</value>
+  </data>
+  <data name="ImportTitle" xml:space="preserve">
+    <value>Εισαγωγη</value>
+  </data>
+  <data name="TitleCircuitDescriptor" xml:space="preserve">
+    <value>Κυκλωμα</value>
+  </data>
+  <data name="TitleFileName" xml:space="preserve">
+    <value>Αρχειο:</value>
+  </data>
+  <data name="TitleImportCircuit" xml:space="preserve">
+    <value>Εισαγωγη</value>
+  </data>
+  <data name="TitleCheckAll" xml:space="preserve">
+    <value>_Ελεγχος ολων</value>
+  </data>
+  <data name="TitleUncheckAll" xml:space="preserve">
+    <value>_Αποεπιλογη ολων</value>
+  </data>
+  <data name="ImageFileFilter" xml:space="preserve">
+    <value>Αρχειο εικονων (*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif)|*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif|Ολα τα αρχεια (*.*)|*.*</value>
+  </data>
+  <data name="ImagePathInvalid" xml:space="preserve">
+    <value>Το όνομα του αρχείου δεν είναι έγκυρο. Παρακαλώ ελέγξτε ότι υπαρχει ο γονικος φάκελος και το όνομα αρχείου είναι έγκυρο.</value>
+  </data>
+  <data name="MessageExportImageDialog" xml:space="preserve">
+    <value>Επιλέξτε τον τύπο της εικόνας και το όνομα αρχείου για εξαγωγή διάγραμματος.</value>
+  </data>
+  <data name="MessageImageFileExists" xml:space="preserve">
+    <value>Το αρχειο "{0}" υπαρχει ηδη.
+Να αντικατασταθει?</value>
+  </data>
+  <data name="TitleExportImage" xml:space="preserve">
+    <value>Εξαγωγη εικονας</value>
+  </data>
+  <data name="TitleFile" xml:space="preserve">
+    <value>_Αρχειο:</value>
+  </data>
+  <data name="TitleFileOpen" xml:space="preserve">
+    <value>...</value>
+  </data>
+  <data name="Gate7SegName" xml:space="preserve">
+    <value>7-σεγ</value>
+  </data>
+  <data name="ReportGateName" xml:space="preserve">
+    <value>{0} ({1})</value>
+  </data>
+  <data name="ReportMemoryName" xml:space="preserve">
+    <value>{0}: {1} bit διευθυνση, {2} bit δεδομενα</value>
+  </data>
+  <data name="TriStateGroupName" xml:space="preserve">
+    <value>Τριφασικη ομαδα</value>
+  </data>
+  <data name="TextNotation" xml:space="preserve">
+    <value>Σημείωση Κείμενου</value>
+  </data>
+  <data name="CaptionAddressBitWidth" xml:space="preserve">
+    <value>Διευθυνσεις των Bit</value>
+  </data>
+  <data name="CaptionBitWidth" xml:space="preserve">
+    <value>Πλατος του Bit</value>
+  </data>
+  <data name="CaptionDataBitWidth" xml:space="preserve">
+    <value>Δεδομενα των Bit</value>
+  </data>
+  <data name="CaptionSplitterPinNumber" xml:space="preserve">
+    <value>Διαιρεση των Pin</value>
+  </data>
+  <data name="CaptionSplitterDirection" xml:space="preserve">
+    <value>Συνδυασμενα Pin</value>
+  </data>
+  <data name="CaptionSide" xml:space="preserve">
+    <value>Πλευρα</value>
+  </data>
+  <data name="CaptionTextNote1" xml:space="preserve">
+    <value>Κειμενο</value>
+  </data>
+  <data name="CaptionTextNote2" xml:space="preserve">
+    <value>Σημειωμα</value>
+  </data>
+  <data name="CaptionValue" xml:space="preserve">
+    <value>Τιμη</value>
+  </data>
+  <data name="MenuHeaderCircuit" xml:space="preserve">
+    <value>_Κυκλωμα</value>
+  </data>
+  <data name="MenuHeaderEdit" xml:space="preserve">
+    <value>_Επεξεργασια</value>
+  </data>
+  <data name="MenuHeaderFile" xml:space="preserve">
+    <value>_Αρχειο</value>
+  </data>
+  <data name="MenuHeaderHelp" xml:space="preserve">
+    <value>_Βοηθεια</value>
+  </data>
+  <data name="MenuHeaderTools" xml:space="preserve">
+    <value>_Εργαλεια</value>
+  </data>
+  <data name="MessageWarning" xml:space="preserve">
+    <value>Προσοχη!</value>
+  </data>
+  <data name="TitleFrequency" xml:space="preserve">
+    <value>Συχ_νοτητα:</value>
+  </data>
+  <data name="TitleIsMaximumSpeed1" xml:space="preserve">
+    <value>Εκκινηση με την μεγιστη ταχυτητα</value>
+  </data>
+  <data name="TitleIsMaximumSpeed2" xml:space="preserve">
+    <value>Υψηλή φορτίο της CPU</value>
+  </data>
+  <data name="TitleProject" xml:space="preserve">
+    <value>Εργο</value>
+  </data>
+  <data name="TitleRunningCircuit" xml:space="preserve">
+    <value>Εκκινηση κυκλωματος</value>
+  </data>
+  <data name="TitleZoom" xml:space="preserve">
+    <value>_Μεγεθυνση:</value>
+  </data>
+  <data name="ToolTipAddressBitWidth" xml:space="preserve">
+    <value>Επιλέξτε το πλάτος κομμάτι του πείρου διεύθυνση</value>
+  </data>
+  <data name="ToolTipButtonNotation" xml:space="preserve">
+    <value>Εισάγωγη σημειογραφίας του πλαισιου</value>
+  </data>
+  <data name="ToolTipConstantBitWidth" xml:space="preserve">
+    <value>Επιλέξτε το πλάτος της σταθερής</value>
+  </data>
+  <data name="ToolTipConstantValue" xml:space="preserve">
+    <value>Εισαγωγη αρχικής τιμής για την σταθερη</value>
+  </data>
+  <data name="ToolTipCurrentFrequency" xml:space="preserve">
+    <value>Τρέχουσα Συχνότητα</value>
+  </data>
+  <data name="ToolTipCurrentZoom" xml:space="preserve">
+    <value>Τρεχουσα μεγεθυνση</value>
+  </data>
+  <data name="ToolTipDataBitWidth" xml:space="preserve">
+    <value>Επιλέξτε το πλάτος του πείρου δεδομένων</value>
+  </data>
+  <data name="ToolTipFrequency" xml:space="preserve">
+    <value>Αλλαγή της συχνότητας των πυλών ρολογιού του κυκλώματος λειτουργίας.</value>
+  </data>
+  <data name="ToolTipGateInputCount" xml:space="preserve">
+    <value>Επιλέξτε τον αριθμό των εισροών για την πύλη</value>
+  </data>
+  <data name="ToolTipIsMaximumSpeed1" xml:space="preserve">
+    <value>Εκτελεση κύκλωματος για μέγιστη δυνατή ταχύτητα αγνοώντας την συχνότητα που καθορίζεται από το ρυθμιστικό.</value>
+  </data>
+  <data name="ToolTipIsMaximumSpeed2" xml:space="preserve">
+    <value>Επιλέγοντας αυτό το πλαίσιο μπορεί να οδηγήσει σε διεπαφή τον χρήστη αν δεν ανταποκρίνεται σε ορισμένους υπολογιστές.</value>
+  </data>
+  <data name="ToolTipPinBitWidth" xml:space="preserve">
+    <value>Επιλέξτε το πλάτος του πείρου</value>
+  </data>
+  <data name="ToolTipPinSide" xml:space="preserve">
+    <value>Επιλέξτε την πλευρά του ανάγλυφου  κυκλώματος, ο νέος  πειρος θα βρίσκεται μεσα</value>
+  </data>
+  <data name="ToolTipSplitterBitWidth" xml:space="preserve">
+    <value>Επιλέξτε το πλάτος διάσπασης του διαχωριστή.</value>
+  </data>
+  <data name="ToolTipSplitterPinNumber" xml:space="preserve">
+    <value>Επιλέξτε τον αριθμό των συνδέσμων διάσπασης του διαχωριστή.</value>
+  </data>
+  <data name="ToolTipSplitterRotation" xml:space="preserve">
+    <value>Επιλέξτε τον προσανατολισμό του συνδυασμένου συνδετήρα του διαχωριστή.</value>
+  </data>
+  <data name="ToolTipZoom" xml:space="preserve">
+    <value>Ρύθμιση μεγεθυνσης του διαγράμματος.</value>
+  </data>
+  <data name="ToolTipRamWriteOn" xml:space="preserve">
+    <value>Επιλέξτε χρόνο μνήμης</value>
+  </data>
+  <data name="ToolTipPinNotation" xml:space="preserve">
+    <value>Εισαγωγη πολύ σύντομου κείμενου που θα εμφανίζεται στο σύμβολο του κυκλώματος δίπλα στον πείρο</value>
+  </data>
+  <data name="CaptionNotation" xml:space="preserve">
+    <value>Σημειωμα</value>
+  </data>
+  <data name="TitleIsToggle" xml:space="preserve">
+    <value>Είναι η εναλλαγή</value>
+  </data>
+  <data name="ToolTipIsToggle" xml:space="preserve">
+    <value>Αν το πλαισιο ειναι εναλλακτικο θα αλλάξει είναι η κατάσταση για κάθε κλικ, αν όχι, τότε όταν πιεστεί ή κατάθλιψη</value>
+  </data>
+  <data name="CommandCircuitPower" xml:space="preserve">
+    <value>Δύναμη διακοπτών</value>
+  </data>
+  <data name="CommandEditRotateLeft" xml:space="preserve">
+    <value>Περιστροφή αριστερά</value>
+  </data>
+  <data name="CommandEditRotateRight" xml:space="preserve">
+    <value>Περιστροφη δεξια</value>
+  </data>
+  <data name="SplitterDirectionClockwise" xml:space="preserve">
+    <value>Αριστερα</value>
+  </data>
+  <data name="SplitterDirectionCounterclockwise" xml:space="preserve">
+    <value>Δεξια</value>
+  </data>
+  <data name="CategoryDuplicate" xml:space="preserve">
+    <value>{0} 2</value>
+  </data>
+  <data name="PinSideBottom" xml:space="preserve">
+    <value>Πλαισιο</value>
+  </data>
+  <data name="PinSideLeft" xml:space="preserve">
+    <value>Αριστερα</value>
+  </data>
+  <data name="PinSideRight" xml:space="preserve">
+    <value>Δεξια</value>
+  </data>
+  <data name="PinSideTop" xml:space="preserve">
+    <value>Μπροστα</value>
+  </data>
+  <data name="CaptionSplitterBitWidth" xml:space="preserve">
+    <value>Split pin πλάτος</value>
+  </data>
+  <data name="CommandCircuitUsage" xml:space="preserve">
+    <value>Χρησιμοποιηση απο...</value>
+  </data>
+  <data name="MessageNotUsed" xml:space="preserve">
+    <value>Αυτή το λογικο κύκλωμα δεν θα χρησιμοποιηθεί οπουδήποτε.</value>
+  </data>
+  <data name="MessageUsageNote" xml:space="preserve">
+    <value>Επιλέξτε κύκλωμα και κάντε διπλό κλικ για να πλοηγηθείτε εκεί και να επιλέξετε τα σύμβολα της τρέχουσας.</value>
+  </data>
+  <data name="TitleCircuitUsage" xml:space="preserve">
+    <value>Λογική Χρήση Circuit</value>
+  </data>
+  <data name="CaptionNote" xml:space="preserve">
+    <value>_Σημειωμα</value>
+  </data>
+  <data name="CategoryPrimitives" xml:space="preserve">
+    <value>Απειρα</value>
+  </data>
+  <data name="TitleMemory" xml:space="preserve">
+    <value>Μνημη</value>
+  </data>
+  <data name="CommandFileOpenRecent" xml:space="preserve">
+    <value>Ανοιγμα προσφατων</value>
+  </data>
+  <data name="MessageInvalidRecentFile" xml:space="preserve">
+    <value>Το αρχειο "{0}" δεν μπορει να ανοιχθει. Θέλετε να καταργήσετε την αναφορά σε αυτό από την λίστα πρόσφατων αρχείων?</value>
+  </data>
+  <data name="TitleMaxRecentFiles" xml:space="preserve">
+    <value>_Μεγιστος αριθμός πρόσφατων αρχείων:</value>
+  </data>
+  <data name="Bit0" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Bit1" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="BitOff" xml:space="preserve">
+    <value>Απενεργοποιημενο</value>
+  </data>
+  <data name="ErrorFileCorrupted" xml:space="preserve">
+    <value>Το αρχειο "{0}" ειναι χαλασμενο και δεν μπορει να φορτωθει.</value>
+  </data>
+  <data name="ProjectSummary" xml:space="preserve">
+    <value>{0} λογικα κυκλωματα, σε {1} κατηγοριες που χρησιμοποιουν {2} συμβολα και {3} καλωδια</value>
+  </data>
+  <data name="ReportError" xml:space="preserve">
+    <value>Δεν είναι δυνατή η αναφορά λειτουργίας λόγω του παρακάτω σφάλματως: {0}</value>
+  </data>
+  <data name="ReportFunctions" xml:space="preserve">
+    <value>Λειτουργιες του κυκλωματος "{0}"</value>
+  </data>
+  <data name="TitleCount" xml:space="preserve">
+    <value>Υπολογισμος</value>
+  </data>
+  <data name="TitleFunction" xml:space="preserve">
+    <value>Λειτουργια</value>
+  </data>
+  <data name="TitleProjectDescription" xml:space="preserve">
+    <value>Περιγραφη</value>
+  </data>
+  <data name="TitleReportErrorDetails" xml:space="preserve">
+    <value>Λεπτομερειες σφαλματος</value>
+  </data>
+  <data name="TitleSummary" xml:space="preserve">
+    <value>Περιληψη:</value>
+  </data>
+  <data name="TitleTotal" xml:space="preserve">
+    <value>Αποτελεσμα:</value>
+  </data>
+  <data name="LogicalCircuitMainNotation" xml:space="preserve">
+    <value>Κεντρικα</value>
+  </data>
+  <data name="PinTypeNameInput" xml:space="preserve">
+    <value>Εισοδος</value>
+  </data>
+  <data name="PinTypeNameNone" xml:space="preserve">
+    <value>Καμμια</value>
+  </data>
+  <data name="PinTypeNameOutput" xml:space="preserve">
+    <value>Εξοδος</value>
+  </data>
+  <data name="ErrorUnsupportedUri" xml:space="preserve">
+    <value>Η πλοηγηση στην διευθυνση δεν υποστηριζεται</value>
+  </data>
+  <data name="GridPoint" xml:space="preserve">
+    <value>({0}, {1})</value>
+  </data>
+  <data name="NameLedMatrix" xml:space="preserve">
+    <value>Μήτρα δίοδου εκπομπής φωτός</value>
+  </data>
+  <data name="ToolTipLedMatrix" xml:space="preserve">
+    <value>Μήτρα δίοδου εκπομπής Φωτός  {0}x{1} με {2} bit μεσω δίοδου εκπομπής Φωτός ({3} χρωματα)</value>
+  </data>
+  <data name="CaptionColumns" xml:space="preserve">
+    <value>στήλες</value>
+  </data>
+  <data name="CaptionRows" xml:space="preserve">
+    <value>σειρες</value>
+  </data>
+  <data name="ToolTipColumns" xml:space="preserve">
+    <value>Επιλογη αριθμου των στηλών της μητρας διοδου εκπομπης φωτος</value>
+  </data>
+  <data name="ToolTipRows" xml:space="preserve">
+    <value>Επιλογη αριθμου των σειρων της μητρας διοδου εκπομπης φωτος</value>
+  </data>
+  <data name="CaptionLedMatrixType" xml:space="preserve">
+    <value>Τυπος</value>
+  </data>
+  <data name="LedMatrixColumnSelector" xml:space="preserve">
+    <value>για την επιλεγμενη στηλη #{0}</value>
+  </data>
+  <data name="LedMatrixRowIndividual" xml:space="preserve">
+    <value>για καθε διοδο εκπομπης φωτος σε σειρα #{0}</value>
+  </data>
+  <data name="LedMatrixRowSelector" xml:space="preserve">
+    <value>για καθε επιλεγμενη σειρα #{0}</value>
+  </data>
+  <data name="LedMatrixTypeIndividual" xml:space="preserve">
+    <value>Ξεχωριστα</value>
+  </data>
+  <data name="LedMatrixTypeSelector" xml:space="preserve">
+    <value>Επιλογέας</value>
+  </data>
+  <data name="TitleCellShape" xml:space="preserve">
+    <value>Κυτταρο _Σκιας:</value>
+  </data>
+  <data name="TitleColumns" xml:space="preserve">
+    <value>_Στηλες:</value>
+  </data>
+  <data name="TitleRows" xml:space="preserve">
+    <value>_Σειρες:</value>
+  </data>
+  <data name="ToolTipLedMatrixType" xml:space="preserve">
+    <value>Επιλογη τρόπου ελέγχου της μήτρας</value>
+  </data>
+  <data name="TitleColors" xml:space="preserve">
+    <value>Χ_ρωματα:</value>
+  </data>
+  <data name="MessageVersionLatest" xml:space="preserve">
+    <value>Έχετε ήδη την πιο πρόσφατη έκδοση.</value>
+  </data>
+  <data name="MessageVersionOutdated" xml:space="preserve">
+    <value>Εχετε μια παλια εκδοση. Πατηστε στο λινκ για να γινει λυψη της νεοτερης.</value>
+  </data>
+  <data name="MessageVersionPreview" xml:space="preserve">
+    <value>Εχετε μια ακυκλοφόρητη δοκιμαστικη έκδοση.</value>
+  </data>
+  <data name="TitleCheckVersion" xml:space="preserve">
+    <value>Ελεγχος τωρα</value>
+  </data>
+  <data name="WebSiteDownloadUri" xml:space="preserve">
+    <value>http://www.logiccircuit.org/download.html</value>
+  </data>
+  <data name="CommandHyperlink" xml:space="preserve">
+    <value>Υπερσύνδεση</value>
+  </data>
+  <data name="ErrorHyperlinkText" xml:space="preserve">
+    <value>Το πλαισιο κειμενου της υπερσυνδεσης ειναι αδειο</value>
+  </data>
+  <data name="ErrorHyperlinkUrl" xml:space="preserve">
+    <value>Η διευθυνση της υπερσυνδεσης ειναι ακυρη</value>
+  </data>
+  <data name="TitleHyperlink" xml:space="preserve">
+    <value>_Λινκ σε:</value>
+  </data>
+  <data name="TitleText" xml:space="preserve">
+    <value>_Κειμενο:</value>
+  </data>
+  <data name="CommandInsertImage" xml:space="preserve">
+    <value>Εικονα</value>
+  </data>
+  <data name="TitleCheckVersionPeriodically" xml:space="preserve">
+    <value>Περιοδικος ελεγχος για νεες εκδοσεις</value>
+  </data>
+  <data name="ErrorClipboardCorrupted" xml:space="preserve">
+    <value>Τα δεδομενα στο clipboard ειναι χαλασμενα και δεν μπορουν να επικολληθουν.</value>
+  </data>
+  <data name="DefaultGateShape" xml:space="preserve">
+    <value>Shaped</value>
+  </data>
+  <data name="CommandTruthTable" xml:space="preserve">
+    <value>Πίνακας Αληθείας</value>
+  </data>
+  <data name="MessageInputOutputPinsMissing" xml:space="preserve">
+    <value>Δεν υπάρχει εισόδου ή εξόδου πειρωνγια αυτό το κύκλωμα. Οι πίνακες αλήθειας δημιουργηθηκαν για την αποστολή όλων των μεταθέσεων των δεδομένων εισόδου Πειρων και ανάγνωση των αποτελεσμάτων από τις πινακίδες εξόδου.</value>
+  </data>
+  <data name="MessageTruthTableTooBig" xml:space="preserve">
+    <value>Ο πίνακας αλήθειας είναι πολυ μεγαλος και θα περικοπεί. Παρακαλούμε να χρησιμοποιήσετε το φίλτρο για την επαλήθευση της ορθότητας του κυκλώματος σας.</value>
+  </data>
+  <data name="ParserEOS" xml:space="preserve">
+    <value>Τέλος της έκφρασης</value>
+  </data>
+  <data name="ParserErrorCloseParenMissing" xml:space="preserve">
+    <value>Ελλειπης ')' αντι του: {0}</value>
+  </data>
+  <data name="ParserErrorExpressionMissing" xml:space="preserve">
+    <value>Έκφραση που λείπει μετά από {0}</value>
+  </data>
+  <data name="ParserErrorInvalidNumber" xml:space="preserve">
+    <value>Ακυροι αριθμοι: {0}</value>
+  </data>
+  <data name="ParserErrorUnclosedQuote" xml:space="preserve">
+    <value>Εισηγμένα αναγνωριστικα που δεν έχουν  απόσπασμα: {0}</value>
+  </data>
+  <data name="ParserErrorUnexpected" xml:space="preserve">
+    <value>{0} απροσμενο</value>
+  </data>
+  <data name="ParserErrorUnknownChar" xml:space="preserve">
+    <value>Αγνωστος χαρακτηρας: {0}</value>
+  </data>
+  <data name="ParserErrorUnknownPin" xml:space="preserve">
+    <value>{0} - δεν βρεθηκε εσωτερικος η εξωτερικος πειρος</value>
+  </data>
+  <data name="TitleApply" xml:space="preserve">
+    <value>_Εφαρμογη</value>
+  </data>
+  <data name="TitleDisplayedRows" xml:space="preserve">
+    <value>Εμφανίσμενες σειρες: {0:N0}</value>
+  </data>
+  <data name="TitleFilter" xml:space="preserve">
+    <value>_Φιλτρα:</value>
+  </data>
+  <data name="TitleInvert" xml:space="preserve">
+    <value>_Αντιστροφή</value>
+  </data>
+  <data name="TitleTotalRows" xml:space="preserve">
+    <value>Σύνολο σειρων: {0:N0}</value>
+  </data>
+  <data name="TitleStop" xml:space="preserve">
+    <value>_Παυση</value>
+  </data>
+  <data name="ColorPickerCaptionAvailable" xml:space="preserve">
+    <value>Διαθεσιμα χρωματα:</value>
+  </data>
+  <data name="ColorPickerCaptionRecent" xml:space="preserve">
+    <value>Χρησιμοποιημενα χρωματα:</value>
+  </data>
+  <data name="ColorPickerCaptionSelectCustom" xml:space="preserve">
+    <value>Επιλογη</value>
+  </data>
+  <data name="ColorPickerCaptionStandard" xml:space="preserve">
+    <value>Προκαθορισμενα χρωματα:</value>
+  </data>
+  <data name="ColorPickerTabCustom" xml:space="preserve">
+    <value>Προσαρμογή</value>
+  </data>
+  <data name="ColorPickerTabStandard" xml:space="preserve">
+    <value>Κανονικα</value>
+  </data>
+  <data name="ToolTipBackgroundColor" xml:space="preserve">
+    <value>Τονιση χρωματος</value>
+  </data>
+  <data name="ToolTipFontColor" xml:space="preserve">
+    <value>Χρωμα κειμενου</value>
+  </data>
+  <data name="TitleSaveAs" xml:space="preserve">
+    <value>Αποθηκευση ως...</value>
+  </data>
+  <data name="ToolTipLoadData" xml:space="preserve">
+    <value>Φορτωση δεδομενων απο αρχειο</value>
+  </data>
+  <data name="ToolTipSaveData" xml:space="preserve">
+    <value>Αποθηκευση δεδομενων σε αρχειο</value>
+  </data>
+  <data name="MemoryOnStartData" xml:space="preserve">
+    <value>Εξακολουθούν να υφίστανται μεταξύ μνήμης που τρέχει</value>
+  </data>
+  <data name="MemoryOnStartOnes" xml:space="preserve">
+    <value>Ρυθμίση όλων των bit σε 1</value>
+  </data>
+  <data name="MemoryOnStartRandom" xml:space="preserve">
+    <value>Τυχαια</value>
+  </data>
+  <data name="MemoryOnStartZeros" xml:space="preserve">
+    <value>Ρυθμιση ολων των bit σε 0</value>
+  </data>
+  <data name="TitleMemoryOnStart" xml:space="preserve">
+    <value>Συμπληρωση _κατα την εκκινηση:</value>
+  </data>
+  <data name="ToolTipMemoryOnStart" xml:space="preserve">
+    <value>Επιλέξτε ποσο RAM θα πρέπει να προετοιμαστεί για την ενεργοποιηση</value>
+  </data>
+  <data name="ErrorManyMemoryData" xml:space="preserve">
+    <value>Περιέχει κύκλωμα  {0} που διατηρεί  {1} δεδομένα κατα την εκκινηση. Τέτοιο κύκλωμα δεν μπορεί να χρησιμοποιηθεί περισσότερο από μία φορά σε άλλα κυκλώματα όπως δυνάμει διαφορετικά σύνολα δεδομένων θα αποθηκεύονται σε μία μνήμη υποδομής προτύπου.</value>
+  </data>
+  <data name="MessageRestartRequared" xml:space="preserve">
+    <value>Η επιλογή της γλώσσας έχει αλλάξει. Θα χρειαστεί να επανεκκινήσετε την εφαρμογή, ώστε οι νέες ρυθμίσεις να εφαρμοσθουν.</value>
+  </data>
+  <data name="TitleCulture" xml:space="preserve">
+    <value>Γλωσσα</value>
+  </data>
+  <data name="CommandEditAlignCenter" xml:space="preserve">
+    <value>Στοίχιση στο κέντρο</value>
+  </data>
+  <data name="CommandEditAlignJustify" xml:space="preserve">
+    <value>Πλήρης στοίχιση</value>
+  </data>
+  <data name="CommandEditAlignLeft" xml:space="preserve">
+    <value>Στοιχιση αριστερα</value>
+  </data>
+  <data name="CommandEditAlignRight" xml:space="preserve">
+    <value>Στοιχιση δεξια</value>
+  </data>
+  <data name="CommandEditBold" xml:space="preserve">
+    <value>Έντονη γραφή</value>
+  </data>
+  <data name="CommandEditBullets" xml:space="preserve">
+    <value>Κουκκιδες</value>
+  </data>
+  <data name="CommandEditCopy" xml:space="preserve">
+    <value>_Αντιγραφη</value>
+  </data>
+  <data name="CommandEditCut" xml:space="preserve">
+    <value>Αποκοπη</value>
+  </data>
+  <data name="CommandEditDecreaseFontSize" xml:space="preserve">
+    <value>Μείωση μεγέθους γραμματοσειράς</value>
+  </data>
+  <data name="CommandEditDecreaseIndentation" xml:space="preserve">
+    <value>Μείωση εσοχής</value>
+  </data>
+  <data name="CommandEditDelete" xml:space="preserve">
+    <value>Διαγραφη</value>
+  </data>
+  <data name="CommandEditIncreaseFontSize" xml:space="preserve">
+    <value>Αύξηση μεγέθους γραμματοσειράς</value>
+  </data>
+  <data name="CommandEditIncreaseIndentation" xml:space="preserve">
+    <value>Αύξηση εσοχής</value>
+  </data>
+  <data name="CommandEditItalic" xml:space="preserve">
+    <value>Italic</value>
+  </data>
+  <data name="CommandEditNumbering" xml:space="preserve">
+    <value>Αρίθμηση</value>
+  </data>
+  <data name="CommandEditPaste" xml:space="preserve">
+    <value>_Επικολληση</value>
+  </data>
+  <data name="CommandEditRedo" xml:space="preserve">
+    <value>_Επαναλυψη</value>
+  </data>
+  <data name="CommandEditSelectAll" xml:space="preserve">
+    <value>Επιλογη _ολων</value>
+  </data>
+  <data name="CommandEditUnderline" xml:space="preserve">
+    <value>Υπογράμμιση</value>
+  </data>
+  <data name="CommandEditUndo" xml:space="preserve">
+    <value>_Επαναλυψη</value>
+  </data>
+  <data name="CommandFileClose" xml:space="preserve">
+    <value>Α_ποχωρηση</value>
+  </data>
+  <data name="CommandFileNew" xml:space="preserve">
+    <value>_Νεο αρχειο</value>
+  </data>
+  <data name="CommandFileOpen" xml:space="preserve">
+    <value>_Ανοιγμα</value>
+  </data>
+  <data name="CommandFileSave" xml:space="preserve">
+    <value>_Αποθηκευση</value>
+  </data>
+  <data name="CommandFileSaveAs" xml:space="preserve">
+    <value>Αποθηκευση _ως...</value>
+  </data>
+  <data name="CommandHelpView" xml:space="preserve">
+    <value>Εμφανιση _βοηθειας</value>
+  </data>
+  <data name="ToolTipFontFamily" xml:space="preserve">
+    <value>Οικογένεια γραμματοσειράς</value>
+  </data>
+  <data name="ToolTipFontSize" xml:space="preserve">
+    <value>Μεγεθος γραματοσειρας</value>
+  </data>
+  <data name="TitleCredits" xml:space="preserve">
+    <value>Συντελεστές:</value>
+  </data>
+</root>
