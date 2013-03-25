@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Globalization;
 using System.Linq;
+using System.Resources;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using LogicCircuit;
@@ -133,6 +136,39 @@ namespace LogicCircuit.UnitTest {
 				Resources.Culture = culture;
 				string actual = Resources.WebSiteUri;
 				Assert.IsTrue(this.ValidUrl(actual, uri => uri.LocalPath == "/"), "WebSiteUri for \"{0}\" has invalid URL", culture.Name);
+			}
+		}
+
+		/// <summary>
+		/// A test for leading and trailing whitespaces in resources.
+		/// </summary>
+		[TestMethod()]
+		public void ResourcesTrimedTest() {
+			StringBuilder errors = new StringBuilder();
+			foreach(CultureInfo culture in App.AvailableCultures) {
+				ResourceSet set = Resources.ResourceManager.GetResourceSet(culture, true, false);
+				errors.Clear();
+				foreach(DictionaryEntry item in set) {
+					string name = item.Key.ToString();
+					if(item.Value == null) {
+						errors.AppendFormat("Resource {0} in {1} culture is null", name, culture.Name);
+						errors.AppendLine();
+					}
+					string text = item.Value.ToString();
+					if(text.Length <= 0) {
+						errors.AppendFormat("Resource {0} in {1} culture is empty", name, culture.Name);
+						errors.AppendLine();
+					}
+					if(char.IsWhiteSpace(text[0])) {
+						errors.AppendFormat("Resource {0} in {1} culture begins with whitespace character", name, culture.Name);
+						errors.AppendLine();
+					}
+					if(char.IsWhiteSpace(text[text.Length - 1])) {
+						errors.AppendFormat("Resource {0} in {1} culture ends with whitespace character", name, culture.Name);
+						errors.AppendLine();
+					}
+				}
+				Assert.IsTrue(errors.Length == 0, "\r\n" + errors.ToString());
 			}
 		}
 	}
