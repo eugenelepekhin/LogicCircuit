@@ -1,974 +1,994 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-	<!-- 
-		Microsoft ResX Schema
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
 
-		Version 1.3
-
-		The primary goals of this format is to allow a simple XML format 
-		that is mostly human readable. The generation and parsing of the 
-		various data types are done through the TypeConverter classes 
-		associated with the data types.
-
-		Example:
-
-		... ado.net/XML headers & schema ...
-		<resheader name="resmimetype">text/microsoft-resx</resheader>
-		<resheader name="version">1.3</resheader>
-		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-		<data name="Name1">this is my long string</data>
-		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-			[base64 mime encoded serialized .NET Framework object]
-		</data>
-		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-			[base64 mime encoded string representing a byte array form of the .NET Framework object]
-		</data>
-
-		There are any number of "resheader" rows that contain simple 
-		name/value pairs.
-
-		Each data row contains a name, and value. The row also contains a 
-		type or mimetype. Type corresponds to a .NET class that support 
-		text/value conversion through the TypeConverter architecture. 
-		Classes that don't support this are serialized and stored with the 
-		mimetype set.
-
-		The mimetype is used for serialized objects, and tells the 
-		ResXResourceReader how to depersist the object. This is currently not 
-		extensible. For a given mimetype the value must be set accordingly:
-
-		Note - application/x-microsoft.net.object.binary.base64 is the format 
-		that the ResXResourceWriter will generate, however the reader can 
-		read any of the formats listed below.
-
-		mimetype: application/x-microsoft.net.object.binary.base64
-		value   : The object must be serialized with 
-			: System.Serialization.Formatters.Binary.BinaryFormatter
-			: and then encoded with base64 encoding.
-
-		mimetype: application/x-microsoft.net.object.soap.base64
-		value   : The object must be serialized with 
-			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-			: and then encoded with base64 encoding.
-
-		mimetype: application/x-microsoft.net.object.bytearray.base64
-		value   : The object must be serialized into a byte array 
-			: using a System.ComponentModel.TypeConverter
-			: and then encoded with base64 encoding.
-	-->
-	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-		<xsd:element name="root" msdata:IsDataSet="true">
-			<xsd:complexType>
-				<xsd:choice maxOccurs="unbounded">
-					<xsd:element name="data">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
-							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="resheader">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" />
-						</xsd:complexType>
-					</xsd:element>
-				</xsd:choice>
-			</xsd:complexType>
-		</xsd:element>
-	</xsd:schema>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-	<resheader name="version">
-		<value>1.3</value>
-	</resheader>
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<data name="Led7Pin8" xml:space="preserve">
-		<value>점</value>
-	</data>
-	<data name="WriteOn0" xml:space="preserve">
-		<value>1에서 0으로 감소</value>
-	</data>
-	<data name="WriteOn1" xml:space="preserve">
-		<value>0에서 1로 증가</value>
-	</data>
-	<data name="CategoryInputOutput" xml:space="preserve">
-		<value>입력 - 출력</value>
-	</data>
-	<data name="CommandToolsOptions" xml:space="preserve">
-		<value>설정</value>
-	</data>
-	<data name="CommandCircuitDelete" xml:space="preserve">
-		<value>현재 회로 제거</value>
-	</data>
-	<data name="CommandCircuitNew" xml:space="preserve">
-		<value>새 회로 생성</value>
-	</data>
-	<data name="CommandCircuitProject" xml:space="preserve">
-		<value>프로젝트</value>
-	</data>
-	<data name="CommandEditSelectAllButWires" xml:space="preserve">
-		<value>와이어를 제외한 모두 선택</value>
-	</data>
-	<data name="CommandEditSelectAllProbes" xml:space="preserve">
-		<value>모든 프로브 선택</value>
-	</data>
-	<data name="CommandEditSelectAllProbesWithWire" xml:space="preserve">
-		<value>모든 프로브와 연결된 와이어 선택</value>
-	</data>
-	<data name="CommandEditSelectAllWires" xml:space="preserve">
-		<value>모든 와이어 선택</value>
-	</data>
-	<data name="CommandEditSelectFreeWires" xml:space="preserve">
-		<value>빈 와이어 선택</value>
-	</data>
-	<data name="CommandEditUnselectAllButWires" xml:space="preserve">
-		<value>와이어를 제외하고 선택 취소</value>
-	</data>
-	<data name="CommandEditUnselectAllWires" xml:space="preserve">
-		<value>모든 와이어 선택 취소</value>
-	</data>
-	<data name="CommandFileExportImage" xml:space="preserve">
-		<value>이미지 내보내기</value>
-	</data>
-	<data name="CommandToolsReport" xml:space="preserve">
-		<value>프로젝트 리포트</value>
-	</data>
-	<data name="UnknownState" xml:space="preserve">
-		<value>상태 {0} 이/가 잘못 되었습니다.</value>
-	</data>
-	<data name="ErrorAddressNotConnected" xml:space="preserve">
-		<value>주소비트 중에 메모리에 연결되지 않은 것이 있습니다. {0}</value>
-	</data>
-	<data name="ErrorDataInNotConnected" xml:space="preserve">
-		<value>입력 데이터 비트 중에 메모리에 연결되지 않은 것이 있습니다. {0}</value>
-	</data>
-	<data name="ErrorJamBitWidthDifferent" xml:space="preserve">
-		<value>{4}에 대한 {0} ({1}) 입력 핀과 {2} ({3})의 출력 핀이 다른 비트 크기를 갖고있어 연결이 불가능합니다. 문제를 해결하시기 바랍니다.</value>
-	</data>
-	<data name="CommandFileFileImport" xml:space="preserve">
-		<value>가져오기...</value>
-	</data>
-	<data name="ImportTitle" xml:space="preserve">
-		<value>가져오기</value>
-	</data>
-	<data name="ImageFileFilter" xml:space="preserve">
-		<value>이미지 파일(*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif)|*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif|All Files (*.*)|*.*</value>
-	</data>
-	<data name="CaptionAddressBitWidth" xml:space="preserve">
-		<value>주소 비트</value>
-	</data>
-	<data name="CaptionBitWidth" xml:space="preserve">
-		<value>비트 크기</value>
-	</data>
-	<data name="CaptionDataBitWidth" xml:space="preserve">
-		<value>데이터 비트</value>
-	</data>
-	<data name="CaptionTextNote1" xml:space="preserve">
-		<value>텍스트</value>
-	</data>
-	<data name="CaptionValue" xml:space="preserve">
-		<value>값</value>
-	</data>
-	<data name="CommandEditRotateLeft" xml:space="preserve">
-		<value>왼쪽으로 회전</value>
-	</data>
-	<data name="CommandEditRotateRight" xml:space="preserve">
-		<value>오른쪽으로 회전</value>
-	</data>
-	<data name="CommandFileOpenRecent" xml:space="preserve">
-		<value>최근 파일</value>
-	</data>
-	<data name="BitOff" xml:space="preserve">
-		<value>끄기</value>
-	</data>
-	<data name="ErrorFileCorrupted" xml:space="preserve">
-		<value>파일 "{0}"이 손상되어 로드할수 없습니다.</value>
-	</data>
-	<data name="CaptionColumns" xml:space="preserve">
-		<value>열</value>
-	</data>
-	<data name="CaptionRows" xml:space="preserve">
-		<value>행</value>
-	</data>
-	<data name="CaptionLedMatrixType" xml:space="preserve">
-		<value>타입</value>
-	</data>
-	<data name="CommandHyperlink" xml:space="preserve">
-		<value>하이퍼링크</value>
-	</data>
-	<data name="ErrorHyperlinkText" xml:space="preserve">
-		<value>하이퍼링크 텍스트가 비어있습니다.</value>
-	</data>
-	<data name="ErrorHyperlinkUrl" xml:space="preserve">
-		<value>하이퍼링크 주소가 잘못되었습니다.</value>
-	</data>
-	<data name="ErrorClipboardCorrupted" xml:space="preserve">
-		<value>클립보드의 데이터가 손상되어 붙여넣기 할 수 없습니다.</value>
-	</data>
-	<data name="DefaultGateShape" xml:space="preserve">
-		<value>Shaped</value>
-	</data>
-	<data name="ColorPickerCaptionAvailable" xml:space="preserve">
-		<value>사용 가능한 색상:</value>
-	</data>
-	<data name="ColorPickerCaptionRecent" xml:space="preserve">
-		<value>최근 색:</value>
-	</data>
-	<data name="ColorPickerCaptionSelectCustom" xml:space="preserve">
-		<value>선택</value>
-	</data>
-	<data name="ColorPickerCaptionStandard" xml:space="preserve">
-		<value>기본 색:</value>
-	</data>
-	<data name="CommandEditBold" xml:space="preserve">
-		<value>진하게</value>
-	</data>
-	<data name="CommandEditBullets" xml:space="preserve">
-		<value>글 머리 기호</value>
-	</data>
-	<data name="CommandEditCopy" xml:space="preserve">
-		<value>복사</value>
-	</data>
-	<data name="CommandEditCut" xml:space="preserve">
-		<value>잘라내기</value>
-	</data>
-	<data name="CommandEditDecreaseFontSize" xml:space="preserve">
-		<value>글자 크기 감소</value>
-	</data>
-	<data name="CommandEditDecreaseIndentation" xml:space="preserve">
-		<value>내어쓰기</value>
-	</data>
-	<data name="CommandEditDelete" xml:space="preserve">
-		<value>삭제</value>
-	</data>
-	<data name="CommandEditIncreaseFontSize" xml:space="preserve">
-		<value>글자 크기 증가</value>
-	</data>
-	<data name="CommandEditIncreaseIndentation" xml:space="preserve">
-		<value>들여쓰기</value>
-	</data>
-	<data name="CommandEditItalic" xml:space="preserve">
-		<value>기울임</value>
-	</data>
-	<data name="CommandEditNumbering" xml:space="preserve">
-		<value>문단 번호</value>
-	</data>
-	<data name="CommandEditPaste" xml:space="preserve">
-		<value>붙여넣기</value>
-	</data>
-	<data name="CommandEditRedo" xml:space="preserve">
-		<value>다시 실행</value>
-	</data>
-	<data name="CommandEditSelectAll" xml:space="preserve">
-		<value>모두 선택</value>
-	</data>
-	<data name="CommandEditUnderline" xml:space="preserve">
-		<value>밑줄</value>
-	</data>
-	<data name="CommandEditUndo" xml:space="preserve">
-		<value>실행 취소</value>
-	</data>
-	<data name="CommandFileClose" xml:space="preserve">
-		<value>종료</value>
-	</data>
-	<data name="CommandFileNew" xml:space="preserve">
-		<value>새로 만들기</value>
-	</data>
-	<data name="CommandFileOpen" xml:space="preserve">
-		<value>열기</value>
-	</data>
-	<data name="CommandFileSave" xml:space="preserve">
-		<value>저장</value>
-	</data>
-	<data name="CommandFileSaveAs" xml:space="preserve">
-		<value>다른 이름으로 저장</value>
-	</data>
-	<data name="CommandHelpView" xml:space="preserve">
-		<value>도움말</value>
-	</data>
-	<data name="LogicalCircuitName" xml:space="preserve">
-		<value>회로</value>
-	</data>
-	<data name="MemoryAddressPinName" xml:space="preserve">
-		<value>메모리 주소</value>
-	</data>
-	<data name="MemoryDataInPinName" xml:space="preserve">
-		<value>메모리 입력 데이터</value>
-	</data>
-	<data name="MemoryDataPinName" xml:space="preserve">
-		<value>메모리 데이터</value>
-	</data>
-	<data name="TitleShowDetails" xml:space="preserve">
-		<value>자세히 보기</value>
-	</data>
-	<data name="TitleYes" xml:space="preserve">
-		<value>예</value>
-	</data>
-	<data name="ToolTipRAM" xml:space="preserve">
-		<value>RAM {0} 비트 주소 / {1} 비트 데이터</value>
-	</data>
-	<data name="TitlePinInput" xml:space="preserve">
-		<value>{0}
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Led7Pin8" xml:space="preserve">
+    <value>점</value>
+  </data>
+  <data name="WriteOn0" xml:space="preserve">
+    <value>1에서 0으로 감소</value>
+  </data>
+  <data name="WriteOn1" xml:space="preserve">
+    <value>0에서 1로 증가</value>
+  </data>
+  <data name="CategoryInputOutput" xml:space="preserve">
+    <value>입력 - 출력</value>
+  </data>
+  <data name="CommandToolsOptions" xml:space="preserve">
+    <value>설정</value>
+  </data>
+  <data name="CommandCircuitDelete" xml:space="preserve">
+    <value>현재 회로 제거</value>
+  </data>
+  <data name="CommandCircuitNew" xml:space="preserve">
+    <value>새 회로 생성</value>
+  </data>
+  <data name="CommandCircuitProject" xml:space="preserve">
+    <value>프로젝트</value>
+  </data>
+  <data name="CommandEditSelectAllButWires" xml:space="preserve">
+    <value>와이어를 제외한 모두 선택</value>
+  </data>
+  <data name="CommandEditSelectAllProbes" xml:space="preserve">
+    <value>모든 프로브 선택</value>
+  </data>
+  <data name="CommandEditSelectAllProbesWithWire" xml:space="preserve">
+    <value>모든 프로브와 연결된 와이어 선택</value>
+  </data>
+  <data name="CommandEditSelectAllWires" xml:space="preserve">
+    <value>모든 와이어 선택</value>
+  </data>
+  <data name="CommandEditSelectFreeWires" xml:space="preserve">
+    <value>빈 와이어 선택</value>
+  </data>
+  <data name="CommandEditUnselectAllButWires" xml:space="preserve">
+    <value>와이어를 제외하고 선택 취소</value>
+  </data>
+  <data name="CommandEditUnselectAllWires" xml:space="preserve">
+    <value>모든 와이어 선택 취소</value>
+  </data>
+  <data name="CommandFileExportImage" xml:space="preserve">
+    <value>이미지 내보내기</value>
+  </data>
+  <data name="CommandToolsReport" xml:space="preserve">
+    <value>프로젝트 리포트</value>
+  </data>
+  <data name="UnknownState" xml:space="preserve">
+    <value>상태 {0} 이/가 잘못 되었습니다.</value>
+  </data>
+  <data name="ErrorAddressNotConnected" xml:space="preserve">
+    <value>주소비트 중에 메모리에 연결되지 않은 것이 있습니다. {0}</value>
+  </data>
+  <data name="ErrorDataInNotConnected" xml:space="preserve">
+    <value>입력 데이터 비트 중에 메모리에 연결되지 않은 것이 있습니다. {0}</value>
+  </data>
+  <data name="ErrorJamBitWidthDifferent" xml:space="preserve">
+    <value>{4}에 대한 {0} ({1}) 입력 핀과 {2} ({3})의 출력 핀이 다른 비트 크기를 갖고있어 연결이 불가능합니다. 문제를 해결하시기 바랍니다.</value>
+  </data>
+  <data name="CommandFileFileImport" xml:space="preserve">
+    <value>가져오기...</value>
+  </data>
+  <data name="ImportTitle" xml:space="preserve">
+    <value>가져오기</value>
+  </data>
+  <data name="ImageFileFilter" xml:space="preserve">
+    <value>이미지 파일(*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif)|*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif|All Files (*.*)|*.*</value>
+  </data>
+  <data name="CaptionAddressBitWidth" xml:space="preserve">
+    <value>주소 비트</value>
+  </data>
+  <data name="CaptionBitWidth" xml:space="preserve">
+    <value>비트 크기</value>
+  </data>
+  <data name="CaptionDataBitWidth" xml:space="preserve">
+    <value>데이터 비트</value>
+  </data>
+  <data name="CaptionTextNote1" xml:space="preserve">
+    <value>텍스트</value>
+  </data>
+  <data name="CaptionValue" xml:space="preserve">
+    <value>값</value>
+  </data>
+  <data name="CommandEditRotateLeft" xml:space="preserve">
+    <value>왼쪽으로 회전</value>
+  </data>
+  <data name="CommandEditRotateRight" xml:space="preserve">
+    <value>오른쪽으로 회전</value>
+  </data>
+  <data name="CommandFileOpenRecent" xml:space="preserve">
+    <value>최근 파일</value>
+  </data>
+  <data name="BitOff" xml:space="preserve">
+    <value>끄기</value>
+  </data>
+  <data name="ErrorFileCorrupted" xml:space="preserve">
+    <value>파일 "{0}"이 손상되어 로드할수 없습니다.</value>
+  </data>
+  <data name="CaptionColumns" xml:space="preserve">
+    <value>열</value>
+  </data>
+  <data name="CaptionRows" xml:space="preserve">
+    <value>행</value>
+  </data>
+  <data name="CaptionLedMatrixType" xml:space="preserve">
+    <value>타입</value>
+  </data>
+  <data name="CommandHyperlink" xml:space="preserve">
+    <value>하이퍼링크</value>
+  </data>
+  <data name="ErrorHyperlinkText" xml:space="preserve">
+    <value>하이퍼링크 텍스트가 비어있습니다.</value>
+  </data>
+  <data name="ErrorHyperlinkUrl" xml:space="preserve">
+    <value>하이퍼링크 주소가 잘못되었습니다.</value>
+  </data>
+  <data name="ErrorClipboardCorrupted" xml:space="preserve">
+    <value>클립보드의 데이터가 손상되어 붙여넣기 할 수 없습니다.</value>
+  </data>
+  <data name="DefaultGateShape" xml:space="preserve">
+    <value>Shaped</value>
+  </data>
+  <data name="ColorPickerCaptionAvailable" xml:space="preserve">
+    <value>사용 가능한 색상:</value>
+  </data>
+  <data name="ColorPickerCaptionRecent" xml:space="preserve">
+    <value>최근 색:</value>
+  </data>
+  <data name="ColorPickerCaptionSelectCustom" xml:space="preserve">
+    <value>선택</value>
+  </data>
+  <data name="ColorPickerCaptionStandard" xml:space="preserve">
+    <value>기본 색:</value>
+  </data>
+  <data name="CommandEditBold" xml:space="preserve">
+    <value>진하게</value>
+  </data>
+  <data name="CommandEditBullets" xml:space="preserve">
+    <value>글 머리 기호</value>
+  </data>
+  <data name="CommandEditCopy" xml:space="preserve">
+    <value>복사</value>
+  </data>
+  <data name="CommandEditCut" xml:space="preserve">
+    <value>잘라내기</value>
+  </data>
+  <data name="CommandEditDecreaseFontSize" xml:space="preserve">
+    <value>글자 크기 감소</value>
+  </data>
+  <data name="CommandEditDecreaseIndentation" xml:space="preserve">
+    <value>내어쓰기</value>
+  </data>
+  <data name="CommandEditDelete" xml:space="preserve">
+    <value>삭제</value>
+  </data>
+  <data name="CommandEditIncreaseFontSize" xml:space="preserve">
+    <value>글자 크기 증가</value>
+  </data>
+  <data name="CommandEditIncreaseIndentation" xml:space="preserve">
+    <value>들여쓰기</value>
+  </data>
+  <data name="CommandEditItalic" xml:space="preserve">
+    <value>기울임</value>
+  </data>
+  <data name="CommandEditNumbering" xml:space="preserve">
+    <value>문단 번호</value>
+  </data>
+  <data name="CommandEditPaste" xml:space="preserve">
+    <value>붙여넣기</value>
+  </data>
+  <data name="CommandEditRedo" xml:space="preserve">
+    <value>다시 실행</value>
+  </data>
+  <data name="CommandEditSelectAll" xml:space="preserve">
+    <value>모두 선택</value>
+  </data>
+  <data name="CommandEditUnderline" xml:space="preserve">
+    <value>밑줄</value>
+  </data>
+  <data name="CommandEditUndo" xml:space="preserve">
+    <value>실행 취소</value>
+  </data>
+  <data name="CommandFileClose" xml:space="preserve">
+    <value>종료</value>
+  </data>
+  <data name="CommandFileNew" xml:space="preserve">
+    <value>새로 만들기</value>
+  </data>
+  <data name="CommandFileOpen" xml:space="preserve">
+    <value>열기</value>
+  </data>
+  <data name="CommandFileSave" xml:space="preserve">
+    <value>저장</value>
+  </data>
+  <data name="CommandFileSaveAs" xml:space="preserve">
+    <value>다른 이름으로 저장</value>
+  </data>
+  <data name="CommandHelpView" xml:space="preserve">
+    <value>도움말</value>
+  </data>
+  <data name="LogicalCircuitName" xml:space="preserve">
+    <value>회로</value>
+  </data>
+  <data name="MemoryAddressPinName" xml:space="preserve">
+    <value>메모리 주소</value>
+  </data>
+  <data name="MemoryDataInPinName" xml:space="preserve">
+    <value>메모리 입력 데이터</value>
+  </data>
+  <data name="MemoryDataPinName" xml:space="preserve">
+    <value>메모리 데이터</value>
+  </data>
+  <data name="TitleShowDetails" xml:space="preserve">
+    <value>자세히 보기</value>
+  </data>
+  <data name="TitleYes" xml:space="preserve">
+    <value>예</value>
+  </data>
+  <data name="ToolTipRAM" xml:space="preserve">
+    <value>RAM {0} 비트 주소 / {1} 비트 데이터</value>
+  </data>
+  <data name="TitlePinInput" xml:space="preserve">
+    <value>{0}
 입력</value>
-	</data>
-	<data name="TitlePinOutput" xml:space="preserve">
-		<value>{0}
+  </data>
+  <data name="TitlePinOutput" xml:space="preserve">
+    <value>{0}
 출력</value>
-	</data>
-	<data name="TitleVersion" xml:space="preserve">
-		<value>버전:</value>
-	</data>
-	<data name="TitleWeb" xml:space="preserve">
-		<value>사이트:</value>
-	</data>
-	<data name="MessageFreeWireCount" xml:space="preserve">
-		<value>{0}개의 빈 와이어를 찾았습니다.</value>
-	</data>
-	<data name="TitleValue" xml:space="preserve">
-		<value>값:</value>
-	</data>
-	<data name="Loading" xml:space="preserve">
-		<value>로딩...</value>
-	</data>
-	<data name="TitleProbeHistory" xml:space="preserve">
-		<value>프로브 기록</value>
-	</data>
-	<data name="MenuHeaderHelp" xml:space="preserve">
-		<value>도움말</value>
-	</data>
-	<data name="TitleProject" xml:space="preserve">
-		<value>프로젝트</value>
-	</data>
-	<data name="TitleZoom" xml:space="preserve">
-		<value>크기조절:</value>
-	</data>
-	<data name="TitleRows" xml:space="preserve">
-		<value>행:</value>
-	</data>
-	<data name="ToolTipFontColor" xml:space="preserve">
-		<value>글자 색</value>
-	</data>
-	<data name="TitleSaveAs" xml:space="preserve">
-		<value>다른 이름으로 저장...</value>
-	</data>
-	<data name="ToolTipSaveData" xml:space="preserve">
-		<value>파일 저장</value>
-	</data>
-	<data name="MemoryOnStartOnes" xml:space="preserve">
-		<value>모든 비트를 1로 설정</value>
-	</data>
-	<data name="MemoryOnStartRandom" xml:space="preserve">
-		<value>무작위</value>
-	</data>
-	<data name="MemoryOnStartZeros" xml:space="preserve">
-		<value>모든 비트를 0으로 설정</value>
-	</data>
-	<data name="ToolTipButton" xml:space="preserve">
-		<value>버튼 {0}</value>
-	</data>
-	<data name="ToolTipCurrentFrequency" xml:space="preserve">
-		<value>현재 진동수</value>
-	</data>
-	<data name="ToolTipCurrentZoom" xml:space="preserve">
-		<value>현재 화면 크기</value>
-	</data>
-	<data name="ToolTipDataBitWidth" xml:space="preserve">
-		<value>데이터 핀의 비트 크기 선택</value>
-	</data>
-	<data name="ToolTipBackgroundColor" xml:space="preserve">
-		<value>강조 색</value>
-	</data>
-	<data name="GateClockName" xml:space="preserve">
-		<value>클럭</value>
-	</data>
-	<data name="GateProbeName" xml:space="preserve">
-		<value>프로브</value>
-	</data>
-	<data name="GateShapeShaped" xml:space="preserve">
-		<value>도형기호</value>
-	</data>
-	<data name="MenuHeaderCircuit" xml:space="preserve">
-		<value>회로</value>
-	</data>
-	<data name="MenuHeaderEdit" xml:space="preserve">
-		<value>편집</value>
-	</data>
-	<data name="MenuHeaderFile" xml:space="preserve">
-		<value>파일</value>
-	</data>
-	<data name="MenuHeaderTools" xml:space="preserve">
-		<value>도구</value>
-	</data>
-	<data name="ErrorProjectCount" xml:space="preserve">
-		<value>파일에 하나 이상의 프로젝트가 존재해야 합니다.</value>
-	</data>
-	<data name="ErrorUnknownVersion" xml:space="preserve">
-		<value>Circuit Project의 알수없는 버전을 로드하려고 합니다.
+  </data>
+  <data name="TitleVersion" xml:space="preserve">
+    <value>버전:</value>
+  </data>
+  <data name="TitleWeb" xml:space="preserve">
+    <value>사이트:</value>
+  </data>
+  <data name="MessageFreeWireCount" xml:space="preserve">
+    <value>{0}개의 빈 와이어를 찾았습니다.</value>
+  </data>
+  <data name="TitleValue" xml:space="preserve">
+    <value>값:</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>로딩...</value>
+  </data>
+  <data name="TitleProbeHistory" xml:space="preserve">
+    <value>프로브 기록</value>
+  </data>
+  <data name="MenuHeaderHelp" xml:space="preserve">
+    <value>도움말</value>
+  </data>
+  <data name="TitleProject" xml:space="preserve">
+    <value>프로젝트</value>
+  </data>
+  <data name="TitleZoom" xml:space="preserve">
+    <value>크기조절:</value>
+  </data>
+  <data name="TitleRows" xml:space="preserve">
+    <value>행:</value>
+  </data>
+  <data name="ToolTipFontColor" xml:space="preserve">
+    <value>글자 색</value>
+  </data>
+  <data name="TitleSaveAs" xml:space="preserve">
+    <value>다른 이름으로 저장...</value>
+  </data>
+  <data name="ToolTipSaveData" xml:space="preserve">
+    <value>파일 저장</value>
+  </data>
+  <data name="MemoryOnStartOnes" xml:space="preserve">
+    <value>모든 비트를 1로 설정</value>
+  </data>
+  <data name="MemoryOnStartRandom" xml:space="preserve">
+    <value>무작위</value>
+  </data>
+  <data name="MemoryOnStartZeros" xml:space="preserve">
+    <value>모든 비트를 0으로 설정</value>
+  </data>
+  <data name="ToolTipButton" xml:space="preserve">
+    <value>버튼 {0}</value>
+  </data>
+  <data name="ToolTipCurrentFrequency" xml:space="preserve">
+    <value>현재 진동수</value>
+  </data>
+  <data name="ToolTipCurrentZoom" xml:space="preserve">
+    <value>현재 화면 크기</value>
+  </data>
+  <data name="ToolTipDataBitWidth" xml:space="preserve">
+    <value>데이터 핀의 비트 크기 선택</value>
+  </data>
+  <data name="ToolTipBackgroundColor" xml:space="preserve">
+    <value>강조 색</value>
+  </data>
+  <data name="GateClockName" xml:space="preserve">
+    <value>클럭</value>
+  </data>
+  <data name="GateProbeName" xml:space="preserve">
+    <value>프로브</value>
+  </data>
+  <data name="GateShapeShaped" xml:space="preserve">
+    <value>도형기호</value>
+  </data>
+  <data name="MenuHeaderCircuit" xml:space="preserve">
+    <value>회로</value>
+  </data>
+  <data name="MenuHeaderEdit" xml:space="preserve">
+    <value>편집</value>
+  </data>
+  <data name="MenuHeaderFile" xml:space="preserve">
+    <value>파일</value>
+  </data>
+  <data name="MenuHeaderTools" xml:space="preserve">
+    <value>도구</value>
+  </data>
+  <data name="ErrorProjectCount" xml:space="preserve">
+    <value>파일에 하나 이상의 프로젝트가 존재해야 합니다.</value>
+  </data>
+  <data name="ErrorUnknownVersion" xml:space="preserve">
+    <value>Circuit Project의 알수없는 버전을 로드하려고 합니다.
 열고자 하는 파일이 손상되었거나 상위버전의 Logic Circuit으로 제작되었습니다.&lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt;최신버전을 확인해 주시기 바랍니다. </value>
-	</data>
-	<data name="FileSaved" xml:space="preserve">
-		<value>{0}이 저장되었습니다.</value>
-	</data>
-	<data name="FlowDirection" xml:space="preserve">
-		<value>LeftToRight</value>
-	</data>
-	<data name="GateShapeRectangular" xml:space="preserve">
-		<value>직사각형</value>
-	</data>
-	<data name="MessageSaveFile" xml:space="preserve">
-		<value>프로젝트 {0} 가 변경되었습니다.
+  </data>
+  <data name="FileSaved" xml:space="preserve">
+    <value>{0}이 저장되었습니다.</value>
+  </data>
+  <data name="FlowDirection" xml:space="preserve">
+    <value>LeftToRight</value>
+  </data>
+  <data name="GateShapeRectangular" xml:space="preserve">
+    <value>직사각형</value>
+  </data>
+  <data name="MessageSaveFile" xml:space="preserve">
+    <value>프로젝트 {0} 가 변경되었습니다.
 저장 하시겠습니까?</value>
-	</data>
-	<data name="OperationCanceled" xml:space="preserve">
-		<value>작업이 취소되었습니다.</value>
-	</data>
-	<data name="Ready" xml:space="preserve">
-		<value>준비.</value>
-	</data>
-	<data name="TitleCancel" xml:space="preserve">
-		<value>취소</value>
-	</data>
-	<data name="TitleNo" xml:space="preserve">
-		<value>아니오</value>
-	</data>
-	<data name="TitleOK" xml:space="preserve">
-		<value>확인</value>
-	</data>
-	<data name="ToolTipConstant" xml:space="preserve">
-		<value>{0} 비트 상수 {1:X}</value>
-	</data>
-	<data name="ToolTipInputPin" xml:space="preserve">
-		<value>{0} 비트의 입력 핀 {1}</value>
-	</data>
-	<data name="ToolTipNonePin" xml:space="preserve">
-		<value>{0} 비트 {1}</value>
-	</data>
-	<data name="ToolTipOutputPin" xml:space="preserve">
-		<value>{0} 비트의 출력 핀 {1}</value>
-	</data>
-	<data name="ToolTipROM" xml:space="preserve">
-		<value>ROM {0} 비트 주소 / {1} 비트 데이터</value>
-	</data>
-	<data name="ToolTipWire" xml:space="preserve">
-		<value>와이어</value>
-	</data>
-	<data name="CommandHelpAbout" xml:space="preserve">
-		<value>LogicCircuit 정보</value>
-	</data>
-	<data name="NameButton" xml:space="preserve">
-		<value>버튼</value>
-	</data>
-	<data name="NameConstant" xml:space="preserve">
-		<value>상수</value>
-	</data>
-	<data name="NameSplitter" xml:space="preserve">
-		<value>분리기</value>
-	</data>
-	<data name="TitleDisplayOptions" xml:space="preserve">
-		<value>화면</value>
-	</data>
-	<data name="TitleFileOptions" xml:space="preserve">
-		<value>파일</value>
-	</data>
-	<data name="TitleGateShape" xml:space="preserve">
-		<value>게이트 모양</value>
-	</data>
-	<data name="TitleLoadLastFile" xml:space="preserve">
-		<value>시작할 때 마지막 파일 불러오기</value>
-	</data>
-	<data name="TitleOptions" xml:space="preserve">
-		<value>설정</value>
-	</data>
-	<data name="TitleShowGrid" xml:space="preserve">
-		<value>격자 보이기</value>
-	</data>
-	<data name="TitleCategory" xml:space="preserve">
-		<value>카테고리:</value>
-	</data>
-	<data name="TitleDescription" xml:space="preserve">
-		<value>설명:</value>
-	</data>
-	<data name="TitleName" xml:space="preserve">
-		<value>이름:</value>
-	</data>
-	<data name="TitleNotation" xml:space="preserve">
-		<value>표기:</value>
-	</data>
-	<data name="TitleBitWidth" xml:space="preserve">
-		<value>비트 폭:</value>
-	</data>
-	<data name="NamePin" xml:space="preserve">
-		<value>핀</value>
-	</data>
-	<data name="TitleData" xml:space="preserve">
-		<value>데이터</value>
-	</data>
-	<data name="TitleDataBitWidth" xml:space="preserve">
-		<value>데이터 비트 폭:</value>
-	</data>
-	<data name="TipOnStartMove" xml:space="preserve">
-		<value>선택한 항목을 원하는 위치에 드래그&amp;드롭 합니다. 이동을 취소하려면 ESC를 누릅니다. 연결된 와이어의 이동을 방지하기 위해 이동할 때 SHIFT키를 누릅니다.</value>
-	</data>
-	<data name="PowerOff" xml:space="preserve">
-		<value>종료</value>
-	</data>
-	<data name="PowerOn" xml:space="preserve">
-		<value>시작</value>
-	</data>
-	<data name="CircuitProjectName" xml:space="preserve">
-		<value>Circuit 프로젝트</value>
-	</data>
-	<data name="TitleCircuitDescriptor" xml:space="preserve">
-		<value>회로</value>
-	</data>
-	<data name="TitleFileName" xml:space="preserve">
-		<value>파일:</value>
-	</data>
-	<data name="TitleExportImage" xml:space="preserve">
-		<value>이미지 내보내기</value>
-	</data>
-	<data name="TitleFile" xml:space="preserve">
-		<value>파일:</value>
-	</data>
-	<data name="MessageWarning" xml:space="preserve">
-		<value>경고!</value>
-	</data>
-	<data name="CaptionNotation" xml:space="preserve">
-		<value>이름</value>
-	</data>
-	<data name="SplitterDirectionClockwise" xml:space="preserve">
-		<value>왼쪽</value>
-	</data>
-	<data name="SplitterDirectionCounterclockwise" xml:space="preserve">
-		<value>오른쪽</value>
-	</data>
-	<data name="PinSideBottom" xml:space="preserve">
-		<value>아래</value>
-	</data>
-	<data name="PinSideLeft" xml:space="preserve">
-		<value>왼쪽</value>
-	</data>
-	<data name="PinSideRight" xml:space="preserve">
-		<value>오른쪽</value>
-	</data>
-	<data name="PinSideTop" xml:space="preserve">
-		<value>위</value>
-	</data>
-	<data name="TitleSummary" xml:space="preserve">
-		<value>요약:</value>
-	</data>
-	<data name="PinTypeNameInput" xml:space="preserve">
-		<value>입력</value>
-	</data>
-	<data name="PinTypeNameOutput" xml:space="preserve">
-		<value>출력</value>
-	</data>
-	<data name="NameLedMatrix" xml:space="preserve">
-		<value>LED 행렬</value>
-	</data>
-	<data name="TitleColumns" xml:space="preserve">
-		<value>열:</value>
-	</data>
-	<data name="MessageVersionLatest" xml:space="preserve">
-		<value>이미 최신 버전입니다.</value>
-	</data>
-	<data name="MessageVersionOutdated" xml:space="preserve">
-		<value>당신은 구버전을 사용중입니다. 최신버전을 다운로드 하려면 아래 링크를 클릭하십시오.</value>
-	</data>
-	<data name="CommandInsertImage" xml:space="preserve">
-		<value>이미지 삽입</value>
-	</data>
-	<data name="TitleCheckVersionPeriodically" xml:space="preserve">
-		<value>새로운 버전 주기적으로 확인</value>
-	</data>
-	<data name="CommandTruthTable" xml:space="preserve">
-		<value>진리표</value>
-	</data>
-	<data name="ParserErrorUnknownPin" xml:space="preserve">
-		<value>{0} - 입력 또는 출력 핀을 찾을 수 없습니다.</value>
-	</data>
-	<data name="TitleApply" xml:space="preserve">
-		<value>적용</value>
-	</data>
-	<data name="TitleDisplayedRows" xml:space="preserve">
-		<value>보여지는 열 {0:N0}</value>
-	</data>
-	<data name="TitleTotalRows" xml:space="preserve">
-		<value>전체 열: {0:N0}</value>
-	</data>
-	<data name="TitleStop" xml:space="preserve">
-		<value>정지</value>
-	</data>
-	<data name="ColorPickerTabStandard" xml:space="preserve">
-		<value>표준</value>
-	</data>
-	<data name="ToolTipLoadData" xml:space="preserve">
-		<value>파일에서 데이터를 불러오기</value>
-	</data>
-	<data name="MemoryOnStartData" xml:space="preserve">
-		<value>실행되는 동안 메모리 유지</value>
-	</data>
-	<data name="TitleMemoryOnStart" xml:space="preserve">
-		<value>시작시 자동 채우기:</value>
-	</data>
-	<data name="ToolTipMemoryOnStart" xml:space="preserve">
-		<value>전원이 켜질 때 램을 초기화 할 것인지 선택</value>
-	</data>
-	<data name="MessageRestartRequared" xml:space="preserve">
-		<value>언어 설정이 변경되었습니다. 설정을 적용하려면 프로그램을 다시 시작해야 합니다.</value>
-	</data>
-	<data name="TitleCulture" xml:space="preserve">
-		<value>언어</value>
-	</data>
-	<data name="CommandEditAlignCenter" xml:space="preserve">
-		<value>가운데 정렬</value>
-	</data>
-	<data name="CommandEditAlignJustify" xml:space="preserve">
-		<value>양쪽 정렬</value>
-	</data>
-	<data name="CommandEditAlignLeft" xml:space="preserve">
-		<value>왼쪽 정렬</value>
-	</data>
-	<data name="CommandEditAlignRight" xml:space="preserve">
-		<value>오른쪽 정렬</value>
-	</data>
-	<data name="ToolTipFontFamily" xml:space="preserve">
-		<value>글자 집합</value>
-	</data>
-	<data name="ToolTipFontSize" xml:space="preserve">
-		<value>글자 크기</value>
-	</data>
-	<data name="TitleCredits" xml:space="preserve">
-		<value>제작자:</value>
-	</data>
-	<data name="CaptionNote" xml:space="preserve">
-		<value>메모</value>
-	</data>
-	<data name="TitleLoad" xml:space="preserve">
-		<value>불러오기...</value>
-	</data>
-	<data name="TitleSide" xml:space="preserve">
-		<value>면:</value>
-	</data>
-	<data name="TitleType" xml:space="preserve">
-		<value>유형:</value>
-	</data>
-	<data name="TitleWriteOn" xml:space="preserve">
-		<value>쓰기:</value>
-	</data>
-	<data name="TitleOscilloscope" xml:space="preserve">
-		<value>논리회로 Oscilloscope</value>
-	</data>
-	<data name="TitleUncheckAll" xml:space="preserve">
-		<value>선택되지 않은 항목</value>
-	</data>
-	<data name="CaptionSide" xml:space="preserve">
-		<value>방향</value>
-	</data>
-	<data name="TitleIsMaximumSpeed1" xml:space="preserve">
-		<value>최대 속도로 구동</value>
-	</data>
-	<data name="TitleRunningCircuit" xml:space="preserve">
-		<value>실행중인 회로</value>
-	</data>
-	<data name="TitleIsToggle" xml:space="preserve">
-		<value>눌린 상태 유지</value>
-	</data>
-	<data name="TitleProjectDescription" xml:space="preserve">
-		<value>표현</value>
-	</data>
-	<data name="TitleReportErrorDetails" xml:space="preserve">
-		<value>오류 설명</value>
-	</data>
-	<data name="TitleTotal" xml:space="preserve">
-		<value>전체:</value>
-	</data>
-	<data name="TitleText" xml:space="preserve">
-		<value>문자:</value>
-	</data>
-	<data name="TitleCheckAll" xml:space="preserve">
-		<value>모두 선택</value>
-	</data>
-	<data name="TitleCellShape" xml:space="preserve">
-		<value>Cell 모양:</value>
-	</data>
-	<data name="ToolTipSplitter" xml:space="preserve">
-		<value>{0}비트를 {1}핀으로 분리</value>
-	</data>
-	<data name="TitleAddressBitWidth" xml:space="preserve">
-		<value>주소 비트 폭:</value>
-	</data>
-	<data name="CaptionSplitterPinNumber" xml:space="preserve">
-		<value>분리 핀 수</value>
-	</data>
-	<data name="CaptionSplitterDirection" xml:space="preserve">
-		<value>결합 된 핀 방향</value>
-	</data>
-	<data name="CaptionTextNote2" xml:space="preserve">
-		<value>메모</value>
-	</data>
-	<data name="CaptionSplitterBitWidth" xml:space="preserve">
-		<value>분리 핀 비트 크기</value>
-	</data>
-	<data name="TitleCircuitUsage" xml:space="preserve">
-		<value>논리 회로 사용</value>
-	</data>
-	<data name="CategoryPrimitives" xml:space="preserve">
-		<value>기본 요소</value>
-	</data>
-	<data name="TitleCount" xml:space="preserve">
-		<value>수</value>
-	</data>
-	<data name="LedMatrixTypeIndividual" xml:space="preserve">
-		<value>단독</value>
-	</data>
-	<data name="LedMatrixTypeSelector" xml:space="preserve">
-		<value>선택</value>
-	</data>
-	<data name="TitleColors" xml:space="preserve">
-		<value>색:</value>
-	</data>
-	<data name="TitleCheckVersion" xml:space="preserve">
-		<value>즉시 확인</value>
-	</data>
-	<data name="MessageFloatingSymbolCount" xml:space="preserve">
-		<value>{0}개의 연결되지 않은 요소가 발견되었습니다.</value>
-	</data>
-	<data name="CommandEditSelectFloatingSymbols" xml:space="preserve">
-		<value>연결되지 않은 심볼 선택</value>
-	</data>
-	<data name="TitleInverted" xml:space="preserve">
-		<value>반전 표시</value>
-	</data>
-	<data name="TipOnCtrlDown" xml:space="preserve">
-		<value>Ctrl+{Shift}+Tab 를 누르면 회로를 전환할수 있습니다.</value>
-	</data>
-	<data name="TitleImportCircuit" xml:space="preserve">
-		<value>가져오기</value>
-	</data>
-	<data name="MessageExportImageDialog" xml:space="preserve">
-		<value>저장될 파일 경로, 이름, 유형을 정하여 주십시오.</value>
-	</data>
-	<data name="TitleFrequency" xml:space="preserve">
-		<value>진동수:</value>
-	</data>
-	<data name="CommandCircuitUsage" xml:space="preserve">
-		<value>사용된 곳...</value>
-	</data>
-	<data name="TitleFunction" xml:space="preserve">
-		<value>기능</value>
-	</data>
-	<data name="TitleHyperlink" xml:space="preserve">
-		<value>링크:</value>
-	</data>
-	<data name="TitleInvert" xml:space="preserve">
-		<value>반전</value>
-	</data>
-	<data name="TipOnAwaitingArea" xml:space="preserve">
-		<value>{0} {1}. 여러 심볼을 각각 드래그 해서 선택하시려면 Shift키를 누른채로 선택하십시오.</value>
-	</data>
-	<data name="TextNotation" xml:space="preserve">
-		<value>메모</value>
-	</data>
-	<data name="TipOnStartWire" xml:space="preserve">
-		<value>원하는 위치에 와이어의 끝을 드래그합니다. 생성을 취소하려면 Esc를 누르십시오.</value>
-	</data>
-	<data name="TipOnWireSelect" xml:space="preserve">
-		<value>Shift+{Ctrl}+Click시 연결된 모든 와이어가 선택 됩니다, 또] Alt+Click시 선이 분리 됩니다. </value>
-	</data>
-	<data name="TitleMark" xml:space="preserve">
-		<value>Mark</value>
-	</data>
-	<data name="TitleMaxRecentFiles" xml:space="preserve">
-		<value>최근 열어본 파일의 최대 갯수:</value>
-	</data>
-	<data name="SplitterThin1PinName" xml:space="preserve">
-		<value>(bit {0}) 의 결합된 분리기의 커넥터</value>
-	</data>
-	<data name="SplitterThin2PinName" xml:space="preserve">
-		<value>(bits {0}-{1}) 의 결합된 분리기의 커넥터</value>
-	</data>
-	<data name="CommandCircuitCurrent" xml:space="preserve">
-		<value>회로 설정</value>
-	</data>
-	<data name="TitleIsMaximumSpeed2" xml:space="preserve">
-		<value>CPU의 무리가 갈수 있습니다.</value>
-	</data>
-	<data name="ToolTipAddressBitWidth" xml:space="preserve">
-		<value>주소핀의 비트폭을 선택하시오.</value>
-	</data>
-	<data name="ToolTipPinBitWidth" xml:space="preserve">
-		<value>핀의 비트폭을 선택하시오.</value>
-	</data>
-	<data name="ToolTipSplitterBitWidth" xml:space="preserve">
-		<value>분리 핀 비트 크기를 선택 하시오.</value>
-	</data>
-	<data name="ToolTipZoom" xml:space="preserve">
-		<value>확대/축소 설정</value>
-	</data>
-	<data name="CommandCircuitPower" xml:space="preserve">
-		<value>실행</value>
-	</data>
-	<data name="PinName" xml:space="preserve">
-		<value>{0}{1}</value>
-	</data>
-	<data name="SplitterWidePinName" xml:space="preserve">
-		<value>결합된 분리기 커넥터</value>
-	</data>
-	<data name="MessageImageFileExists" xml:space="preserve">
-		<value>"{0}" 파일이 이미 존재합니다. 덮어 쓰시겠습니까?</value>
-	</data>
-	<data name="ReportMemoryName" xml:space="preserve">
-		<value>{0}: {1} 주소 비트, {2} 비트 데이터</value>
-	</data>
-	<data name="ToolTipConstantBitWidth" xml:space="preserve">
-		<value>상수의 비트폭을 선택하시오.</value>
-	</data>
-	<data name="ToolTipGateInputCount" xml:space="preserve">
-		<value>입력 받을 개수를 선택하시오.</value>
-	</data>
-	<data name="ToolTipSplitterPinNumber" xml:space="preserve">
-		<value>분리기의 분리 핀의 수를 선택하시오.</value>
-	</data>
-	<data name="ToolTipSplitterRotation" xml:space="preserve">
-		<value>결합 된 핀 방향을 선택하시오.</value>
-	</data>
-	<data name="ToolTipRamWriteOn" xml:space="preserve">
-		<value>메모리 사용할 시기를 선택하시오.</value>
-	</data>
-	<data name="ToolTipLedMatrix" xml:space="preserve">
-		<value>{0}x{1} LED 행렬 ({2} 비트 당 LED ({3} 색))</value>
-	</data>
-	<data name="ToolTipColumns" xml:space="preserve">
-		<value>LED 행렬의 열의 수를 선택하시오.</value>
-	</data>
-	<data name="ToolTipRows" xml:space="preserve">
-		<value>LED 행렬의 행의 수를 선택하시오.</value>
-	</data>
-	<data name="ToolTipLedMatrixType" xml:space="preserve">
-		<value>행렬의 타입을 선택하시오.</value>
-	</data>
-	<data name="MessageInputOutputPinsMissing" xml:space="preserve">
-		<value>입력 또는 출력핀이 없습니다. 진리표는 출력 핀으로부터 결과를 읽고 모든 데이터를 입력으로 전달 시킴으로써 만들어집니다.</value>
-	</data>
-	<data name="MessageTruthTableTooBig" xml:space="preserve">
-		<value>진리표가 너무 길어서 잘렸습니다. 당신의 회로의 정확성을 확인하기 위해 필터를 사용하십시오.</value>
-	</data>
-	<data name="ParserErrorUnknownChar" xml:space="preserve">
-		<value>미확인 문자: {0}</value>
-	</data>
-	<data name="ColorPickerTabCustom" xml:space="preserve">
-		<value>사용자 지정</value>
-	</data>
-	<data name="MemoryWritePinName" xml:space="preserve">
-		<value>RAM에 입력되었습니다. 변경되는 시점은 {0} 할 때 입니다.</value>
-	</data>
-	<data name="ToolTipFrequency" xml:space="preserve">
-		<value>실행중인 회로의 클럭 게이트의 진동수를 변경합니다.</value>
-	</data>
-	<data name="ToolTipIsMaximumSpeed1" xml:space="preserve">
-		<value>슬라이더에 의한 진동수를 무시하고 가능한 최고 속도로 회로를 구동합니다.</value>
-	</data>
-	<data name="ToolTipIsMaximumSpeed2" xml:space="preserve">
-		<value>버튼을 누를 경우 일부 컴퓨터에서는 UI가 반응하지 않을 수 있습니다</value>
-	</data>
-	<data name="ToolTipPinNotation" xml:space="preserve">
-		<value>메모를 짧게 작성해 주십시오. 요소의 핀 옆에 보여질 것입니다.</value>
-	</data>
-	<data name="MessageNotUsed" xml:space="preserve">
-		<value>현재 논리회로는 사용되지 않았습니다.</value>
-	</data>
-	<data name="MessageUsageNote" xml:space="preserve">
-		<value>선택한 회로는 사용중이며, 더블클릭시 사용중인 회로로 이동 후  현재 회로가 선택됩니다.</value>
-	</data>
-	<data name="MessageInvalidRecentFile" xml:space="preserve">
-		<value>파일 "{0}"을 열 수 없습니다. 최근 목록에서 지우시겠습니까?</value>
-	</data>
-	<data name="ProjectSummary" xml:space="preserve">
-		<value>{1}개의 카테고리, {0}개의 논리회로, {2}개의 요소, {3}개의 와이어로 구성되어 있습니다.</value>
-	</data>
-	<data name="ReportFunctions" xml:space="preserve">
-		<value>회로 "{0}"의 구성</value>
-	</data>
-	<data name="LedMatrixColumnSelector" xml:space="preserve">
-		<value>선택된 열 #{0}</value>
-	</data>
-	<data name="LedMatrixRowIndividual" xml:space="preserve">
-		<value>선택된 행 #{0}</value>
-	</data>
-	<data name="LedMatrixRowSelector" xml:space="preserve">
-		<value>선택된 행 #{0}</value>
-	</data>
-	<data name="MessageVersionPreview" xml:space="preserve">
-		<value>출시되지 않은 개발자 버전입니다.</value>
-	</data>
-	<data name="TitleFilter" xml:space="preserve">
-		<value>필터:</value>
-	</data>
-	<data name="ErrorLoopInCircuit" xml:space="preserve">
-		<value>"{1}"회로에 있는 요소 "{0}"은 무한반복됩니다. 반복을 풀어주십시오.</value>
-	</data>
-	<data name="ToolTipButtonNotation" xml:space="preserve">
-		<value>버튼의 이름을 입력하십시오.</value>
-	</data>
-	<data name="ToolTipConstantValue" xml:space="preserve">
-		<value>상수값을 입력하십시오.</value>
-	</data>
-	<data name="ToolTipPinSide" xml:space="preserve">
-		<value>회로에서 핀이 위치할 방향을 정하십시오.</value>
-	</data>
-	<data name="ToolTipIsToggle" xml:space="preserve">
-		<value>버튼이 눌려있으면 상태가 클릭시마다 바뀌어 유지되고, 아닐 경우 클릭중일때와 아닐때로 구분한다.</value>
-	</data>
-	<data name="ParserErrorInvalidNumber" xml:space="preserve">
-		<value>사용 불가능한 번호: {0}</value>
-	</data>
-	<data name="ErrorManyMemoryData" xml:space="preserve">
-		<value>회로 {0}은 실행중에 데이터를 보존하는 회로 {1}을 포함하고 있습니다. 이 회로는 데이터가 잠재적으로 메모리 모듈에 저장되기 때문에 다른 회로에서 한번 이상 사용될 수 없습니다.</value>
-	</data>
-	<data name="FunctionParameter" xml:space="preserve">
-		<value>기능 {0}은 최소한 {1}개의 요소가 필요하다.</value>
-	</data>
-	<data name="ErrorManyResults" xml:space="preserve">
-		<value>{1}의 입력 핀 {0}은 Tri-state를 이용가능하지 않은 하나 이상의 출력 핀에 연결되었다.</value>
-	</data>
-	<data name="MessageNotRootConstant" xml:space="preserve">
-		<value>최상위 회로에 오직 상수만 존재하는 ({0}) 는 작동될 때 변경 될 수 있습니다.</value>
-	</data>
-	<data name="ImagePathInvalid" xml:space="preserve">
-		<value>입력한 파일의 이름이 유효하지 않습니다. 파일 이름의 유효성과 상위폴더의 존재 여부를 확인해 주십시오.</value>
-	</data>
-	<data name="ReportError" xml:space="preserve">
-		<value>다음 오류로 인해 기능을 보고할 수 없습니다: {0}</value>
-	</data>
-	<data name="ErrorUnsupportedUri" xml:space="preserve">
-		<value>이 주소로 이동이 불가능합니다.</value>
-	</data>
-	<data name="ParserEOS" xml:space="preserve">
-		<value>표현의 끝</value>
-	</data>
-	<data name="ParserErrorCloseParenMissing" xml:space="preserve">
-		<value>')'가 빠졌습니다. 다음으로 대체하십시오: {0}</value>
-	</data>
-	<data name="ParserErrorExpressionMissing" xml:space="preserve">
-		<value>{0} 뒤에 표현이 빠졌습니다.</value>
-	</data>
-	<data name="ParserErrorUnexpected" xml:space="preserve">
-		<value>{0} 예상치 못한 에러</value>
-	</data>
+  </data>
+  <data name="OperationCanceled" xml:space="preserve">
+    <value>작업이 취소되었습니다.</value>
+  </data>
+  <data name="Ready" xml:space="preserve">
+    <value>준비.</value>
+  </data>
+  <data name="TitleCancel" xml:space="preserve">
+    <value>취소</value>
+  </data>
+  <data name="TitleNo" xml:space="preserve">
+    <value>아니오</value>
+  </data>
+  <data name="TitleOK" xml:space="preserve">
+    <value>확인</value>
+  </data>
+  <data name="ToolTipConstant" xml:space="preserve">
+    <value>{0} 비트 상수 {1:X}</value>
+  </data>
+  <data name="ToolTipInputPin" xml:space="preserve">
+    <value>{0} 비트의 입력 핀 {1}</value>
+  </data>
+  <data name="ToolTipNonePin" xml:space="preserve">
+    <value>{0} 비트 {1}</value>
+  </data>
+  <data name="ToolTipOutputPin" xml:space="preserve">
+    <value>{0} 비트의 출력 핀 {1}</value>
+  </data>
+  <data name="ToolTipROM" xml:space="preserve">
+    <value>ROM {0} 비트 주소 / {1} 비트 데이터</value>
+  </data>
+  <data name="ToolTipWire" xml:space="preserve">
+    <value>와이어</value>
+  </data>
+  <data name="CommandHelpAbout" xml:space="preserve">
+    <value>LogicCircuit 정보</value>
+  </data>
+  <data name="NameButton" xml:space="preserve">
+    <value>버튼</value>
+  </data>
+  <data name="NameConstant" xml:space="preserve">
+    <value>상수</value>
+  </data>
+  <data name="NameSplitter" xml:space="preserve">
+    <value>분리기</value>
+  </data>
+  <data name="TitleDisplayOptions" xml:space="preserve">
+    <value>화면</value>
+  </data>
+  <data name="TitleFileOptions" xml:space="preserve">
+    <value>파일</value>
+  </data>
+  <data name="TitleGateShape" xml:space="preserve">
+    <value>게이트 모양</value>
+  </data>
+  <data name="TitleLoadLastFile" xml:space="preserve">
+    <value>시작할 때 마지막 파일 불러오기</value>
+  </data>
+  <data name="TitleOptions" xml:space="preserve">
+    <value>설정</value>
+  </data>
+  <data name="TitleShowGrid" xml:space="preserve">
+    <value>격자 보이기</value>
+  </data>
+  <data name="TitleCategory" xml:space="preserve">
+    <value>카테고리:</value>
+  </data>
+  <data name="TitleDescription" xml:space="preserve">
+    <value>설명:</value>
+  </data>
+  <data name="TitleName" xml:space="preserve">
+    <value>이름:</value>
+  </data>
+  <data name="TitleNotation" xml:space="preserve">
+    <value>표기:</value>
+  </data>
+  <data name="TitleBitWidth" xml:space="preserve">
+    <value>비트 폭:</value>
+  </data>
+  <data name="NamePin" xml:space="preserve">
+    <value>핀</value>
+  </data>
+  <data name="TitleData" xml:space="preserve">
+    <value>데이터</value>
+  </data>
+  <data name="TitleDataBitWidth" xml:space="preserve">
+    <value>데이터 비트 폭:</value>
+  </data>
+  <data name="TipOnStartMove" xml:space="preserve">
+    <value>선택한 항목을 원하는 위치에 드래그&amp;드롭 합니다. 이동을 취소하려면 ESC를 누릅니다. 연결된 와이어의 이동을 방지하기 위해 이동할 때 SHIFT키를 누릅니다.</value>
+  </data>
+  <data name="PowerOff" xml:space="preserve">
+    <value>종료</value>
+  </data>
+  <data name="PowerOn" xml:space="preserve">
+    <value>시작</value>
+  </data>
+  <data name="CircuitProjectName" xml:space="preserve">
+    <value>Circuit 프로젝트</value>
+  </data>
+  <data name="TitleCircuitDescriptor" xml:space="preserve">
+    <value>회로</value>
+  </data>
+  <data name="TitleFileName" xml:space="preserve">
+    <value>파일:</value>
+  </data>
+  <data name="TitleExportImage" xml:space="preserve">
+    <value>이미지 내보내기</value>
+  </data>
+  <data name="TitleFile" xml:space="preserve">
+    <value>파일:</value>
+  </data>
+  <data name="MessageWarning" xml:space="preserve">
+    <value>경고!</value>
+  </data>
+  <data name="CaptionNotation" xml:space="preserve">
+    <value>이름</value>
+  </data>
+  <data name="SplitterDirectionClockwise" xml:space="preserve">
+    <value>왼쪽</value>
+  </data>
+  <data name="SplitterDirectionCounterclockwise" xml:space="preserve">
+    <value>오른쪽</value>
+  </data>
+  <data name="PinSideBottom" xml:space="preserve">
+    <value>아래</value>
+  </data>
+  <data name="PinSideLeft" xml:space="preserve">
+    <value>왼쪽</value>
+  </data>
+  <data name="PinSideRight" xml:space="preserve">
+    <value>오른쪽</value>
+  </data>
+  <data name="PinSideTop" xml:space="preserve">
+    <value>위</value>
+  </data>
+  <data name="TitleSummary" xml:space="preserve">
+    <value>요약:</value>
+  </data>
+  <data name="PinTypeNameInput" xml:space="preserve">
+    <value>입력</value>
+  </data>
+  <data name="PinTypeNameOutput" xml:space="preserve">
+    <value>출력</value>
+  </data>
+  <data name="NameLedMatrix" xml:space="preserve">
+    <value>LED 행렬</value>
+  </data>
+  <data name="TitleColumns" xml:space="preserve">
+    <value>열:</value>
+  </data>
+  <data name="MessageVersionLatest" xml:space="preserve">
+    <value>이미 최신 버전입니다.</value>
+  </data>
+  <data name="MessageVersionOutdated" xml:space="preserve">
+    <value>당신은 구버전을 사용중입니다. 최신버전을 다운로드 하려면 아래 링크를 클릭하십시오.</value>
+  </data>
+  <data name="CommandInsertImage" xml:space="preserve">
+    <value>이미지 삽입</value>
+  </data>
+  <data name="TitleCheckVersionPeriodically" xml:space="preserve">
+    <value>새로운 버전 주기적으로 확인</value>
+  </data>
+  <data name="CommandTruthTable" xml:space="preserve">
+    <value>진리표</value>
+  </data>
+  <data name="ParserErrorUnknownPin" xml:space="preserve">
+    <value>{0} - 입력 또는 출력 핀을 찾을 수 없습니다.</value>
+  </data>
+  <data name="TitleApply" xml:space="preserve">
+    <value>적용</value>
+  </data>
+  <data name="TitleDisplayedRows" xml:space="preserve">
+    <value>보여지는 열 {0:N0}</value>
+  </data>
+  <data name="TitleTotalRows" xml:space="preserve">
+    <value>전체 열: {0:N0}</value>
+  </data>
+  <data name="TitleStop" xml:space="preserve">
+    <value>정지</value>
+  </data>
+  <data name="ColorPickerTabStandard" xml:space="preserve">
+    <value>표준</value>
+  </data>
+  <data name="ToolTipLoadData" xml:space="preserve">
+    <value>파일에서 데이터를 불러오기</value>
+  </data>
+  <data name="MemoryOnStartData" xml:space="preserve">
+    <value>실행되는 동안 메모리 유지</value>
+  </data>
+  <data name="TitleMemoryOnStart" xml:space="preserve">
+    <value>시작시 자동 채우기:</value>
+  </data>
+  <data name="ToolTipMemoryOnStart" xml:space="preserve">
+    <value>전원이 켜질 때 램을 초기화 할 것인지 선택</value>
+  </data>
+  <data name="MessageRestartRequared" xml:space="preserve">
+    <value>언어 설정이 변경되었습니다. 설정을 적용하려면 프로그램을 다시 시작해야 합니다.</value>
+  </data>
+  <data name="TitleCulture" xml:space="preserve">
+    <value>언어</value>
+  </data>
+  <data name="CommandEditAlignCenter" xml:space="preserve">
+    <value>가운데 정렬</value>
+  </data>
+  <data name="CommandEditAlignJustify" xml:space="preserve">
+    <value>양쪽 정렬</value>
+  </data>
+  <data name="CommandEditAlignLeft" xml:space="preserve">
+    <value>왼쪽 정렬</value>
+  </data>
+  <data name="CommandEditAlignRight" xml:space="preserve">
+    <value>오른쪽 정렬</value>
+  </data>
+  <data name="ToolTipFontFamily" xml:space="preserve">
+    <value>글자 집합</value>
+  </data>
+  <data name="ToolTipFontSize" xml:space="preserve">
+    <value>글자 크기</value>
+  </data>
+  <data name="TitleCredits" xml:space="preserve">
+    <value>제작자:</value>
+  </data>
+  <data name="CaptionNote" xml:space="preserve">
+    <value>메모</value>
+  </data>
+  <data name="TitleLoad" xml:space="preserve">
+    <value>불러오기...</value>
+  </data>
+  <data name="TitleSide" xml:space="preserve">
+    <value>면:</value>
+  </data>
+  <data name="TitleType" xml:space="preserve">
+    <value>유형:</value>
+  </data>
+  <data name="TitleWriteOn" xml:space="preserve">
+    <value>쓰기:</value>
+  </data>
+  <data name="TitleOscilloscope" xml:space="preserve">
+    <value>논리회로 Oscilloscope</value>
+  </data>
+  <data name="TitleUncheckAll" xml:space="preserve">
+    <value>선택되지 않은 항목</value>
+  </data>
+  <data name="CaptionSide" xml:space="preserve">
+    <value>방향</value>
+  </data>
+  <data name="TitleIsMaximumSpeed1" xml:space="preserve">
+    <value>최대 속도로 구동</value>
+  </data>
+  <data name="TitleRunningCircuit" xml:space="preserve">
+    <value>실행중인 회로</value>
+  </data>
+  <data name="TitleIsToggle" xml:space="preserve">
+    <value>눌린 상태 유지</value>
+  </data>
+  <data name="TitleProjectDescription" xml:space="preserve">
+    <value>표현</value>
+  </data>
+  <data name="TitleReportErrorDetails" xml:space="preserve">
+    <value>오류 설명</value>
+  </data>
+  <data name="TitleTotal" xml:space="preserve">
+    <value>전체:</value>
+  </data>
+  <data name="TitleText" xml:space="preserve">
+    <value>문자:</value>
+  </data>
+  <data name="TitleCheckAll" xml:space="preserve">
+    <value>모두 선택</value>
+  </data>
+  <data name="TitleCellShape" xml:space="preserve">
+    <value>Cell 모양:</value>
+  </data>
+  <data name="ToolTipSplitter" xml:space="preserve">
+    <value>{0}비트를 {1}핀으로 분리</value>
+  </data>
+  <data name="TitleAddressBitWidth" xml:space="preserve">
+    <value>주소 비트 폭:</value>
+  </data>
+  <data name="CaptionSplitterPinNumber" xml:space="preserve">
+    <value>분리 핀 수</value>
+  </data>
+  <data name="CaptionSplitterDirection" xml:space="preserve">
+    <value>결합 된 핀 방향</value>
+  </data>
+  <data name="CaptionTextNote2" xml:space="preserve">
+    <value>메모</value>
+  </data>
+  <data name="CaptionSplitterBitWidth" xml:space="preserve">
+    <value>분리 핀 비트 크기</value>
+  </data>
+  <data name="TitleCircuitUsage" xml:space="preserve">
+    <value>논리 회로 사용</value>
+  </data>
+  <data name="CategoryPrimitives" xml:space="preserve">
+    <value>기본 요소</value>
+  </data>
+  <data name="TitleCount" xml:space="preserve">
+    <value>수</value>
+  </data>
+  <data name="LedMatrixTypeIndividual" xml:space="preserve">
+    <value>단독</value>
+  </data>
+  <data name="LedMatrixTypeSelector" xml:space="preserve">
+    <value>선택</value>
+  </data>
+  <data name="TitleColors" xml:space="preserve">
+    <value>색:</value>
+  </data>
+  <data name="TitleCheckVersion" xml:space="preserve">
+    <value>즉시 확인</value>
+  </data>
+  <data name="MessageFloatingSymbolCount" xml:space="preserve">
+    <value>{0}개의 연결되지 않은 요소가 발견되었습니다.</value>
+  </data>
+  <data name="CommandEditSelectFloatingSymbols" xml:space="preserve">
+    <value>연결되지 않은 심볼 선택</value>
+  </data>
+  <data name="TitleInverted" xml:space="preserve">
+    <value>반전 표시</value>
+  </data>
+  <data name="TipOnCtrlDown" xml:space="preserve">
+    <value>Ctrl+{Shift}+Tab 를 누르면 회로를 전환할수 있습니다.</value>
+  </data>
+  <data name="TitleImportCircuit" xml:space="preserve">
+    <value>가져오기</value>
+  </data>
+  <data name="MessageExportImageDialog" xml:space="preserve">
+    <value>저장될 파일 경로, 이름, 유형을 정하여 주십시오.</value>
+  </data>
+  <data name="TitleFrequency" xml:space="preserve">
+    <value>진동수:</value>
+  </data>
+  <data name="CommandCircuitUsage" xml:space="preserve">
+    <value>사용된 곳...</value>
+  </data>
+  <data name="TitleFunction" xml:space="preserve">
+    <value>기능</value>
+  </data>
+  <data name="TitleHyperlink" xml:space="preserve">
+    <value>링크:</value>
+  </data>
+  <data name="TitleInvert" xml:space="preserve">
+    <value>반전</value>
+  </data>
+  <data name="TipOnAwaitingArea" xml:space="preserve">
+    <value>{0} {1}. 여러 심볼을 각각 드래그 해서 선택하시려면 Shift키를 누른채로 선택하십시오.</value>
+  </data>
+  <data name="TextNotation" xml:space="preserve">
+    <value>메모</value>
+  </data>
+  <data name="TipOnStartWire" xml:space="preserve">
+    <value>원하는 위치에 와이어의 끝을 드래그합니다. 생성을 취소하려면 Esc를 누르십시오.</value>
+  </data>
+  <data name="TipOnWireSelect" xml:space="preserve">
+    <value>Shift+{Ctrl}+Click시 연결된 모든 와이어가 선택 됩니다, 또] Alt+Click시 선이 분리 됩니다. </value>
+  </data>
+  <data name="TitleMark" xml:space="preserve">
+    <value>Mark</value>
+  </data>
+  <data name="TitleMaxRecentFiles" xml:space="preserve">
+    <value>최근 열어본 파일의 최대 갯수:</value>
+  </data>
+  <data name="SplitterThin1PinName" xml:space="preserve">
+    <value>(bit {0}) 의 결합된 분리기의 커넥터</value>
+  </data>
+  <data name="SplitterThin2PinName" xml:space="preserve">
+    <value>(bits {0}-{1}) 의 결합된 분리기의 커넥터</value>
+  </data>
+  <data name="CommandCircuitCurrent" xml:space="preserve">
+    <value>회로 설정</value>
+  </data>
+  <data name="TitleIsMaximumSpeed2" xml:space="preserve">
+    <value>CPU의 무리가 갈수 있습니다.</value>
+  </data>
+  <data name="ToolTipAddressBitWidth" xml:space="preserve">
+    <value>주소핀의 비트폭을 선택하시오.</value>
+  </data>
+  <data name="ToolTipPinBitWidth" xml:space="preserve">
+    <value>핀의 비트폭을 선택하시오.</value>
+  </data>
+  <data name="ToolTipSplitterBitWidth" xml:space="preserve">
+    <value>분리 핀 비트 크기를 선택 하시오.</value>
+  </data>
+  <data name="ToolTipZoom" xml:space="preserve">
+    <value>확대/축소 설정</value>
+  </data>
+  <data name="CommandCircuitPower" xml:space="preserve">
+    <value>실행</value>
+  </data>
+  <data name="PinName" xml:space="preserve">
+    <value>{0}{1}</value>
+  </data>
+  <data name="SplitterWidePinName" xml:space="preserve">
+    <value>결합된 분리기 커넥터</value>
+  </data>
+  <data name="MessageImageFileExists" xml:space="preserve">
+    <value>"{0}" 파일이 이미 존재합니다. 덮어 쓰시겠습니까?</value>
+  </data>
+  <data name="ReportMemoryName" xml:space="preserve">
+    <value>{0}: {1} 주소 비트, {2} 비트 데이터</value>
+  </data>
+  <data name="ToolTipConstantBitWidth" xml:space="preserve">
+    <value>상수의 비트폭을 선택하시오.</value>
+  </data>
+  <data name="ToolTipGateInputCount" xml:space="preserve">
+    <value>입력 받을 개수를 선택하시오.</value>
+  </data>
+  <data name="ToolTipSplitterPinNumber" xml:space="preserve">
+    <value>분리기의 분리 핀의 수를 선택하시오.</value>
+  </data>
+  <data name="ToolTipSplitterRotation" xml:space="preserve">
+    <value>결합 된 핀 방향을 선택하시오.</value>
+  </data>
+  <data name="ToolTipRamWriteOn" xml:space="preserve">
+    <value>메모리 사용할 시기를 선택하시오.</value>
+  </data>
+  <data name="ToolTipLedMatrix" xml:space="preserve">
+    <value>{0}x{1} LED 행렬 ({2} 비트 당 LED ({3} 색))</value>
+  </data>
+  <data name="ToolTipColumns" xml:space="preserve">
+    <value>LED 행렬의 열의 수를 선택하시오.</value>
+  </data>
+  <data name="ToolTipRows" xml:space="preserve">
+    <value>LED 행렬의 행의 수를 선택하시오.</value>
+  </data>
+  <data name="ToolTipLedMatrixType" xml:space="preserve">
+    <value>행렬의 타입을 선택하시오.</value>
+  </data>
+  <data name="MessageInputOutputPinsMissing" xml:space="preserve">
+    <value>입력 또는 출력핀이 없습니다. 진리표는 출력 핀으로부터 결과를 읽고 모든 데이터를 입력으로 전달 시킴으로써 만들어집니다.</value>
+  </data>
+  <data name="MessageTruthTableTooBig" xml:space="preserve">
+    <value>진리표가 너무 길어서 잘렸습니다. 당신의 회로의 정확성을 확인하기 위해 필터를 사용하십시오.</value>
+  </data>
+  <data name="ParserErrorUnknownChar" xml:space="preserve">
+    <value>미확인 문자: {0}</value>
+  </data>
+  <data name="ColorPickerTabCustom" xml:space="preserve">
+    <value>사용자 지정</value>
+  </data>
+  <data name="MemoryWritePinName" xml:space="preserve">
+    <value>RAM에 입력되었습니다. 변경되는 시점은 {0} 할 때 입니다.</value>
+  </data>
+  <data name="ToolTipFrequency" xml:space="preserve">
+    <value>실행중인 회로의 클럭 게이트의 진동수를 변경합니다.</value>
+  </data>
+  <data name="ToolTipIsMaximumSpeed1" xml:space="preserve">
+    <value>슬라이더에 의한 진동수를 무시하고 가능한 최고 속도로 회로를 구동합니다.</value>
+  </data>
+  <data name="ToolTipIsMaximumSpeed2" xml:space="preserve">
+    <value>버튼을 누를 경우 일부 컴퓨터에서는 UI가 반응하지 않을 수 있습니다</value>
+  </data>
+  <data name="ToolTipPinNotation" xml:space="preserve">
+    <value>메모를 짧게 작성해 주십시오. 요소의 핀 옆에 보여질 것입니다.</value>
+  </data>
+  <data name="MessageNotUsed" xml:space="preserve">
+    <value>현재 논리회로는 사용되지 않았습니다.</value>
+  </data>
+  <data name="MessageUsageNote" xml:space="preserve">
+    <value>선택한 회로는 사용중이며, 더블클릭시 사용중인 회로로 이동 후  현재 회로가 선택됩니다.</value>
+  </data>
+  <data name="MessageInvalidRecentFile" xml:space="preserve">
+    <value>파일 "{0}"을 열 수 없습니다. 최근 목록에서 지우시겠습니까?</value>
+  </data>
+  <data name="ProjectSummary" xml:space="preserve">
+    <value>{1}개의 카테고리, {0}개의 논리회로, {2}개의 요소, {3}개의 와이어로 구성되어 있습니다.</value>
+  </data>
+  <data name="ReportFunctions" xml:space="preserve">
+    <value>회로 "{0}"의 구성</value>
+  </data>
+  <data name="LedMatrixColumnSelector" xml:space="preserve">
+    <value>선택된 열 #{0}</value>
+  </data>
+  <data name="LedMatrixRowIndividual" xml:space="preserve">
+    <value>선택된 행 #{0}</value>
+  </data>
+  <data name="LedMatrixRowSelector" xml:space="preserve">
+    <value>선택된 행 #{0}</value>
+  </data>
+  <data name="MessageVersionPreview" xml:space="preserve">
+    <value>출시되지 않은 개발자 버전입니다.</value>
+  </data>
+  <data name="TitleFilter" xml:space="preserve">
+    <value>필터:</value>
+  </data>
+  <data name="ErrorLoopInCircuit" xml:space="preserve">
+    <value>"{1}"회로에 있는 요소 "{0}"은 무한반복됩니다. 반복을 풀어주십시오.</value>
+  </data>
+  <data name="ToolTipButtonNotation" xml:space="preserve">
+    <value>버튼의 이름을 입력하십시오.</value>
+  </data>
+  <data name="ToolTipConstantValue" xml:space="preserve">
+    <value>상수값을 입력하십시오.</value>
+  </data>
+  <data name="ToolTipPinSide" xml:space="preserve">
+    <value>회로에서 핀이 위치할 방향을 정하십시오.</value>
+  </data>
+  <data name="ToolTipIsToggle" xml:space="preserve">
+    <value>버튼이 눌려있으면 상태가 클릭시마다 바뀌어 유지되고, 아닐 경우 클릭중일때와 아닐때로 구분한다.</value>
+  </data>
+  <data name="ParserErrorInvalidNumber" xml:space="preserve">
+    <value>사용 불가능한 번호: {0}</value>
+  </data>
+  <data name="ErrorManyMemoryData" xml:space="preserve">
+    <value>회로 {0}은 실행중에 데이터를 보존하는 회로 {1}을 포함하고 있습니다. 이 회로는 데이터가 잠재적으로 메모리 모듈에 저장되기 때문에 다른 회로에서 한번 이상 사용될 수 없습니다.</value>
+  </data>
+  <data name="FunctionParameter" xml:space="preserve">
+    <value>기능 {0}은 최소한 {1}개의 요소가 필요하다.</value>
+  </data>
+  <data name="ErrorManyResults" xml:space="preserve">
+    <value>{1}의 입력 핀 {0}은 Tri-state를 이용가능하지 않은 하나 이상의 출력 핀에 연결되었다.</value>
+  </data>
+  <data name="MessageNotRootConstant" xml:space="preserve">
+    <value>최상위 회로에 오직 상수만 존재하는 ({0}) 는 작동될 때 변경 될 수 있습니다.</value>
+  </data>
+  <data name="ImagePathInvalid" xml:space="preserve">
+    <value>입력한 파일의 이름이 유효하지 않습니다. 파일 이름의 유효성과 상위폴더의 존재 여부를 확인해 주십시오.</value>
+  </data>
+  <data name="ReportError" xml:space="preserve">
+    <value>다음 오류로 인해 기능을 보고할 수 없습니다: {0}</value>
+  </data>
+  <data name="ErrorUnsupportedUri" xml:space="preserve">
+    <value>이 주소로 이동이 불가능합니다.</value>
+  </data>
+  <data name="ParserEOS" xml:space="preserve">
+    <value>표현의 끝</value>
+  </data>
+  <data name="ParserErrorCloseParenMissing" xml:space="preserve">
+    <value>')'가 빠졌습니다. 다음으로 대체하십시오: {0}</value>
+  </data>
+  <data name="ParserErrorExpressionMissing" xml:space="preserve">
+    <value>{0} 뒤에 표현이 빠졌습니다.</value>
+  </data>
+  <data name="ParserErrorUnexpected" xml:space="preserve">
+    <value>{0} 예상치 못한 에러</value>
+  </data>
 </root>
