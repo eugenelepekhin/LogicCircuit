@@ -335,11 +335,11 @@
   </data>
   <data name="TitlePinInput" xml:space="preserve">
     <value>{0}
-Εισοδος</value>
+Μεσα</value>
   </data>
   <data name="TitlePinOutput" xml:space="preserve">
     <value>{0}
-Εξοδος</value>
+Εξω</value>
   </data>
   <data name="CommandHelpAbout" xml:space="preserve">
     <value>_Πληροφοριες</value>
