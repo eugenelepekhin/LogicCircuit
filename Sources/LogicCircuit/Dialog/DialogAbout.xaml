@@ -61,6 +61,7 @@
 						<Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
 							<Setter Property="FlowDirection" Value="LeftToRight"/>
 							<Setter Property="Margin" Value="5,0"/>
+							<Setter Property="FontSize" Value="11"/>
 						</Style>
 					</WrapPanel.Resources>
 					
@@ -80,6 +81,7 @@
 					<TextBlock>Natasha Pererezova</TextBlock>
 					<TextBlock>Sergey Dubinets</TextBlock>
 					<TextBlock>Vitalii Dutka</TextBlock>
+					<TextBlock>Wasilis Mandratzis</TextBlock>
 				</WrapPanel>
 			</Grid>
 		</Grid>
