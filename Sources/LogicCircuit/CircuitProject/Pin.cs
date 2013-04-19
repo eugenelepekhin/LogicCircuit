@@ -10,8 +10,6 @@ namespace LogicCircuit {
 	public partial class Pin {
 		public LogicalCircuit LogicalCircuit { get { return (LogicalCircuit)this.Circuit; } }
 
-		public override bool IsSmallSymbol { get { return true; } }
-
 		public override string Notation {
 			get {
 				switch(this.PinType) {

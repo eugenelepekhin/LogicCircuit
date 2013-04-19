@@ -12,8 +12,6 @@ namespace LogicCircuit {
 			base.Delete();
 		}
 
-		public override bool IsSmallSymbol { get { return true; } }
-
 		public static int Normalize(int value, int bitWidth) {
 			bitWidth = BasePin.CheckBitWidth(bitWidth);
 			if(bitWidth < 32) {

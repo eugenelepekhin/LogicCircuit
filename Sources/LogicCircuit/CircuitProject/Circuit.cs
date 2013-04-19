@@ -13,14 +13,14 @@ namespace LogicCircuit {
 		private int symbolWidth;
 		private int symbolHeight;
 
-		public virtual int SymbolWidth {
+		public int SymbolWidth {
 			get {
 				this.Update();
 				return this.symbolWidth;
 			}
 		}
 
-		public virtual int SymbolHeight {
+		public int SymbolHeight {
 			get{
 				this.Update();
 				return this.symbolHeight;
@@ -38,8 +38,6 @@ namespace LogicCircuit {
 		}
 		
 		public abstract FrameworkElement CreateGlyph(CircuitGlyph symbol);
-
-		public virtual bool IsSmallSymbol { get { return false; } }
 
 		public virtual IEnumerable<BasePin> Pins {
 			get { return this.CircuitProject.DevicePinSet.SelectByCircuit(this); }
@@ -91,6 +89,14 @@ namespace LogicCircuit {
 			}
 		}
 
+		protected virtual int CircuitSymbolWidth(int defaultWidth) {
+			return Math.Max(2, defaultWidth);
+		}
+
+		protected virtual int CircuitSymbolHeight(int defaultHeight) {
+			return Math.Max(2, defaultHeight);
+		}
+
 		private void Update() {
 			if(!this.isUpdated) {
 				if(this.pins == null) {
@@ -110,42 +116,21 @@ namespace LogicCircuit {
 				List<BasePin> top = this.pins[(int)PinSide.Top];
 				List<BasePin> right = this.pins[(int)PinSide.Right];
 				List<BasePin> bottom = this.pins[(int)PinSide.Bottom];
-				int width;
-				int height;
-				if(this.IsSmallSymbol) {
-					Splitter splitter = this as Splitter;
-					if(splitter != null) {
-						width = Math.Max(top.Count, bottom.Count) + 1;
-						height = Math.Max(left.Count, right.Count) + 1;
-						Debug.Assert(width == 1 && 2 < height || height == 1 && 2 < width);
-					} else {
-						LedMatrix ledMatrix = this as LedMatrix;
-						if(ledMatrix != null) {
-							width = ledMatrix.SymbolWidth;
-							height = ledMatrix.SymbolHeight;
-						} else {
-							Debug.Assert(this.Pins.Count() == 1);
-							height = width = 2;
-						}
-					}
-				} else {
-					width = Math.Max(2, Math.Max(top.Count, bottom.Count)) + 1;
-					height = Math.Max(3, Math.Max(left.Count, right.Count)) + 1;
-				}
-				this.symbolWidth = width;
-				this.symbolHeight = height;
+
+				this.symbolWidth = this.CircuitSymbolWidth(Math.Max(top.Count, bottom.Count) + 1);
+				this.symbolHeight = this.CircuitSymbolHeight(Math.Max(left.Count, right.Count) + 1);
 
 				if(0 < left.Count) {
-					Circuit.UpdatePin(height, left, y => new GridPoint(0, y));
+					Circuit.UpdatePin(this.symbolHeight, left, y => new GridPoint(0, y));
 				}
 				if(0 < top.Count) {
-					Circuit.UpdatePin(width, top, x => new GridPoint(x, 0));
+					Circuit.UpdatePin(this.symbolWidth, top, x => new GridPoint(x, 0));
 				}
 				if(0 < right.Count) {
-					Circuit.UpdatePin(height, right, y => new GridPoint(width, y));
+					Circuit.UpdatePin(this.symbolHeight, right, y => new GridPoint(this.symbolWidth, y));
 				}
 				if(0 < bottom.Count) {
-					Circuit.UpdatePin(width, bottom, x => new GridPoint(x, height));
+					Circuit.UpdatePin(this.symbolWidth, bottom, x => new GridPoint(x, this.symbolHeight));
 				}
 
 				this.isUpdated = true;

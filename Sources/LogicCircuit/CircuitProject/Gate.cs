@@ -17,19 +17,6 @@ namespace LogicCircuit {
 			throw new InvalidOperationException();
 		}
 
-		public override bool IsSmallSymbol {
-			get {
-				switch(this.GateType) {
-				case LogicCircuit.GateType.Clock:
-				case LogicCircuit.GateType.Probe:
-					return true;
-				case LogicCircuit.GateType.Led:
-					return this.Pins.Count() == 1;
-				}
-				return false;
-			}
-		}
-
 		public bool InvertedOutput { get; internal set; }
 
 		public int InputCount { get { return this.Pins.Count(p => p.PinType == PinType.Input); } }
@@ -41,6 +28,35 @@ namespace LogicCircuit {
 		public override bool IsDisplay {
 			get { return this.GateType == LogicCircuit.GateType.Led; }
 			set { base.IsDisplay = value; }
+		}
+
+		protected override int CircuitSymbolWidth(int defaultWidth) {
+			Tracer.Assert(defaultWidth == (this.GateType == LogicCircuit.GateType.TriState ? 2 : 1));
+			switch(this.GateType) {
+			case LogicCircuit.GateType.Clock:
+			case LogicCircuit.GateType.Probe:
+				return base.CircuitSymbolWidth(defaultWidth);
+			case LogicCircuit.GateType.Led:
+				if(this.Pins.Count() == 1) {
+					return base.CircuitSymbolWidth(defaultWidth);
+				}
+				break;
+			}
+			return 3;
+		}
+
+		protected override int CircuitSymbolHeight(int defaultHeight) {
+			switch(this.GateType) {
+			case LogicCircuit.GateType.Clock:
+			case LogicCircuit.GateType.Probe:
+				return base.CircuitSymbolHeight(defaultHeight);
+			case LogicCircuit.GateType.Led:
+				if(this.Pins.Count() == 1) {
+					return base.CircuitSymbolHeight(defaultHeight);
+				}
+				break;
+			}
+			return Math.Max(4, defaultHeight);
 		}
 
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {

@@ -12,8 +12,6 @@ namespace LogicCircuit {
 			base.Delete();
 		}
 
-		public override bool IsSmallSymbol { get { return true; } }
-
 		public override string Name {
 			get { return Properties.Resources.NameButton; }
 			set { throw new NotSupportedException(); }

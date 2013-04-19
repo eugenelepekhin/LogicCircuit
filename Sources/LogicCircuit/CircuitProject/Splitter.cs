@@ -12,8 +12,6 @@ namespace LogicCircuit {
 			base.Delete();
 		}
 
-		public override bool IsSmallSymbol { get { return true; } }
-
 		public override string Name {
 			get { return Properties.Resources.NameSplitter; }
 			set { throw new NotSupportedException(); }
@@ -35,6 +33,16 @@ namespace LogicCircuit {
 
 		public override Circuit CopyTo(LogicalCircuit target) {
 			return target.CircuitProject.SplitterSet.Copy(this);
+		}
+
+		protected override int CircuitSymbolWidth(int defaultWidth) {
+			Tracer.Assert(defaultWidth == 1);
+			return 1;
+		}
+
+		protected override int CircuitSymbolHeight(int defaultHeight) {
+			Tracer.Assert(defaultHeight == this.PinCount + 1);
+			return base.CircuitSymbolHeight(defaultHeight);
 		}
 
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {

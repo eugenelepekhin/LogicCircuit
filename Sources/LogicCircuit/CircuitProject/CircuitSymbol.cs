@@ -46,6 +46,16 @@ namespace LogicCircuit {
 			rotation.Angle = Symbol.Angle(this.Rotation);
 		}
 
+		public Rect Bounds() {
+			Rect bounds = new Rect(Symbol.ScreenPoint(this.Point),
+				new Size(Symbol.ScreenPoint(this.Circuit.SymbolWidth), Symbol.ScreenPoint(this.Circuit.SymbolHeight))
+			);
+			if(this.Rotation != Rotation.Up) {
+				bounds = Symbol.Transform(bounds, Symbol.RotationTransform(this.Rotation, this.X, this.Y, this.Circuit.SymbolWidth, this.Circuit.SymbolHeight));
+			}
+			return bounds;
+		}
+
 		public override Symbol CopyTo(LogicalCircuit target) {
 			return target.CircuitProject.CircuitSymbolSet.Copy(this, target);
 		}

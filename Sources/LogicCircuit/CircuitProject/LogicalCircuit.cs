@@ -87,6 +87,24 @@ namespace LogicCircuit {
 			return false;
 		}
 
+		private Rect DisplayBounds() {
+			return this.CircuitSymbols().Where(s => s.Circuit.IsDisplay).Select(s => s.Bounds()).Aggregate((r1, r2) => Rect.Union(r1, r2));
+		}
+
+		protected override int CircuitSymbolWidth(int defaultWidth) {
+			if(this.IsDisplay && this.ContainsDisplays()) {
+				return Math.Max(defaultWidth, Symbol.GridPoint(this.DisplayBounds().Width));
+			}
+			return Math.Max(3, defaultWidth);
+		}
+
+		protected override int CircuitSymbolHeight(int defaultHeight) {
+			if(this.IsDisplay && this.ContainsDisplays()) {
+				return Math.Max(defaultHeight, Symbol.GridPoint(this.DisplayBounds().Height));
+			}
+			return Math.Max(4, defaultHeight);
+		}
+
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
 			return symbol.CreateRectangularGlyph();
 		}

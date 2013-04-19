@@ -54,9 +54,15 @@ namespace LogicCircuit {
 			set { base.IsDisplay = value; }
 		}
 
-		public override bool IsSmallSymbol { get { return true; } }
-		public override int SymbolWidth { get { return this.Columns + 1; } }
-		public override int SymbolHeight { get { return this.Rows + 1; } }
+		protected override int CircuitSymbolWidth(int defaultWidth) {
+			Tracer.Assert((this.MatrixType == LedMatrixType.Selector && defaultWidth == this.Columns + 1) || (this.MatrixType == LedMatrixType.Individual && defaultWidth == 1));
+			return this.Columns + 1;
+		}
+
+		protected override int CircuitSymbolHeight(int defaultHeight) {
+			Tracer.Assert(defaultHeight == this.Rows + 1);
+			return base.CircuitSymbolHeight(defaultHeight);
+		}
 
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
 			FrameworkElement glyph = symbol.CreateSimpleGlyph(SymbolShape.LedMatrix);

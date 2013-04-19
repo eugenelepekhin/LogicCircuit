@@ -155,6 +155,16 @@ namespace LogicCircuit {
 			return target.CircuitProject.MemorySet.Copy(this);
 		}
 
+		protected override int CircuitSymbolWidth(int defaultWidth) {
+			Tracer.Assert(defaultWidth == (this.Writable ? 2 : 1));
+			return 3;
+		}
+
+		protected override int CircuitSymbolHeight(int defaultHeight) {
+			Tracer.Assert(defaultHeight == (this.Writable ? 3 : 2));
+			return Math.Max(4, defaultHeight);
+		}
+
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
 			return symbol.CreateRectangularGlyph();
 		}
