@@ -32,6 +32,11 @@ namespace LogicCircuit {
 		public abstract string ToolTip { get; }
 		public abstract string Category { get; set; }
 
+		public virtual bool IsDisplay {
+			get { return false; }
+			set { Tracer.Fail(); }
+		}
+		
 		public abstract FrameworkElement CreateGlyph(CircuitGlyph symbol);
 
 		public virtual bool IsSmallSymbol { get { return false; } }

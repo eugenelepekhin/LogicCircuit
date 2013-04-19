@@ -124,7 +124,7 @@
 			<Column Name="Notation" Type="string" Default="" PropertyOverrides="true"/>
 			<Column Name="Description" Type="string" Default=""/>
 			<Column Name="Category" Type="string" Default="" PropertyOverrides="true"/>
-			<Column Name="IsDisplay" Type="bool" Default="false"/>
+			<Column Name="IsDisplay" Type="bool" Default="false" PropertyOverrides="true"/>
 		</Table.Columns>
 
 		<Table.Keys>

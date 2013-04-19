@@ -66,6 +66,27 @@ namespace LogicCircuit {
 			}
 		}
 
+		private bool HasDisplayLoop(HashSet<LogicalCircuit> parents) {
+			if(parents.Add(this)) {
+				foreach(CircuitSymbol symbol in this.CircuitSymbols()) {
+					LogicalCircuit lc = symbol.Circuit as LogicalCircuit;
+					if(lc != null && lc.IsDisplay && lc.HasDisplayLoop(parents)) {
+						return true;
+					}
+				}
+				parents.Remove(this);
+				return false;
+			}
+			return true;
+		}
+		
+		public bool ContainsDisplays() {
+			if(!this.HasDisplayLoop(new HashSet<LogicalCircuit>())) {
+				return this.CircuitSymbols().Any(symbol => symbol.Circuit.IsDisplay);
+			}
+			return false;
+		}
+
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
 			return symbol.CreateRectangularGlyph();
 		}

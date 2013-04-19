@@ -28,6 +28,11 @@ namespace LogicCircuit {
 			}
 
 			this.category.Text = this.logicalCircuit.Category;
+			if(this.logicalCircuit.ContainsDisplays()) {
+				this.isDisplay.IsChecked = logicalCircuit.IsDisplay;
+			} else {
+				this.isDisplay.IsEnabled = false;
+			}
 			this.description.Text = this.logicalCircuit.Description;
 			this.Loaded += new RoutedEventHandler(this.DialogCircuitLoaded);
 		}
@@ -51,15 +56,17 @@ namespace LogicCircuit {
 				string notation = this.notation.Text.Trim();
 				string category = this.category.Text.Trim();
 				category = category.Substring(0, Math.Min(category.Length, 64)).Trim();
+				bool isDisplay = this.logicalCircuit.ContainsDisplays() ? this.isDisplay.IsChecked.Value : this.logicalCircuit.IsDisplay;
 				string description = this.description.Text.Trim();
 
 				if(this.logicalCircuit.Name != name || this.logicalCircuit.Notation != notation ||
-					this.logicalCircuit.Category != category || this.logicalCircuit.Description != description
+					this.logicalCircuit.Category != category || this.logicalCircuit.IsDisplay != isDisplay || this.logicalCircuit.Description != description
 				) {
 					this.logicalCircuit.CircuitProject.InTransaction(() => {
 						this.logicalCircuit.Rename(name);
 						this.logicalCircuit.Notation = notation;
 						this.logicalCircuit.Category = category;
+						this.logicalCircuit.IsDisplay = isDisplay;
 						this.logicalCircuit.Description = description;
 						this.logicalCircuit.CircuitProject.CollapsedCategorySet.Purge();
 					});

@@ -335,7 +335,7 @@ namespace LogicCircuit {
 		}
 
 		// Gets or sets value of the IsDisplay field.
-		public bool IsDisplay {
+		public override bool IsDisplay {
 			get { return this.Table.GetField(this.LogicalCircuitRowId, LogicalCircuitData.IsDisplayField.Field); }
 			set { this.Table.SetField(this.LogicalCircuitRowId, LogicalCircuitData.IsDisplayField.Field, value); }
 		}

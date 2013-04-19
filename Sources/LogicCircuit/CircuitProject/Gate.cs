@@ -38,6 +38,11 @@ namespace LogicCircuit {
 			return target.CircuitProject.GateSet.Gate(this.GateId);
 		}
 
+		public override bool IsDisplay {
+			get { return this.GateType == LogicCircuit.GateType.Led; }
+			set { base.IsDisplay = value; }
+		}
+
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
 			string skin;
 			switch(this.GateType) {

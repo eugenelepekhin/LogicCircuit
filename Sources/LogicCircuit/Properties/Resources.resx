@@ -1139,6 +1139,9 @@ Do you want to remove the reference to it from the Recent Files list?</value>
 Such circuit cannot be used more than once on other circuits as potentially different sets of data will be stored on one memory module.</value>
     <comment>{string circuitName, string ramNotation}</comment>
   </data>
+  <data name="TitleIsDisplay" xml:space="preserve">
+    <value>_Symbol is display</value>
+  </data>
   <data name="MessageRestartRequared" xml:space="preserve">
     <value>Your language selection has been changed. You need to restart the application so the new settings will take place.</value>
   </data>
@@ -1231,5 +1234,9 @@ Such circuit cannot be used more than once on other circuits as potentially diff
   </data>
   <data name="TitleCredits" xml:space="preserve">
     <value>Credits:</value>
+  </data>
+  <data name="ToolTipIsDisplay" xml:space="preserve">
+    <value>When you mark Logical Circuit as Display
+all display symbols will be visible on it's symbol.</value>
   </data>
 </root>

@@ -2291,6 +2291,13 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
+		/// Looks up a localized string similar to _Symbol is display.
+		/// </summary>
+ 		public static string TitleIsDisplay {
+			get { return ResourceManager.GetString("TitleIsDisplay", Culture); }
+		}
+
+		/// <summary>
 		/// Looks up a localized string similar to Your language selection has been changed. You need to restart the application so the new settings will take place..
 		/// </summary>
  		public static string MessageRestartRequared {
@@ -2505,6 +2512,14 @@ namespace LogicCircuit.Properties {
 		/// </summary>
  		public static string TitleCredits {
 			get { return ResourceManager.GetString("TitleCredits", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to When you mark Logical Circuit as Display
+		/// all display symbols will be visible on it's symbol..
+		/// </summary>
+ 		public static string ToolTipIsDisplay {
+			get { return ResourceManager.GetString("ToolTipIsDisplay", Culture); }
 		}
 	}
 }

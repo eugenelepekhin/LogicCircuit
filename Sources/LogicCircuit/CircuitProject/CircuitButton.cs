@@ -30,6 +30,11 @@ namespace LogicCircuit {
 			return target.CircuitProject.CircuitButtonSet.Copy(this);
 		}
 
+		public override bool IsDisplay {
+			get { return true; }
+			set { base.IsDisplay = value; }
+		}
+
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
 			return symbol.CreateButtonGlyph();
 		}
