@@ -17,6 +17,7 @@ namespace LogicCircuit {
 		public string Notation;
 		public string Description;
 		public string Category;
+		public bool IsDisplay;
 		internal LogicalCircuit LogicalCircuit;
 		// Field accessors
 		// Accessor of the LogicalCircuitId field
@@ -194,6 +195,41 @@ namespace LogicCircuit {
 			}
 		}
 
+		// Accessor of the IsDisplay field
+		public sealed class IsDisplayField : IField<LogicalCircuitData, bool>, IFieldSerializer<LogicalCircuitData> {
+			public static readonly IsDisplayField Field = new IsDisplayField();
+			private IsDisplayField() {}
+			public string Name { get { return "IsDisplay"; } }
+			public int Order { get; set; }
+			public bool DefaultValue { get { return false; } }
+			public bool GetValue(ref LogicalCircuitData record) {
+				return record.IsDisplay;
+			}
+			public void SetValue(ref LogicalCircuitData record, bool value) {
+				record.IsDisplay = value;
+			}
+			public int Compare(ref LogicalCircuitData l, ref LogicalCircuitData r) {
+				return l.IsDisplay.CompareTo(r.IsDisplay);
+			}
+			public int Compare(bool l, bool r) {
+				return l.CompareTo(r);
+			}
+
+			// Implementation of interface IFieldSerializer<LogicalCircuitData>
+			bool IFieldSerializer<LogicalCircuitData>.NeedToSave(ref LogicalCircuitData data) {
+				return this.Compare(data.IsDisplay, this.DefaultValue) != 0;
+			}
+			string IFieldSerializer<LogicalCircuitData>.GetTextValue(ref LogicalCircuitData data) {
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.IsDisplay);
+			}
+			void IFieldSerializer<LogicalCircuitData>.SetDefault(ref LogicalCircuitData data) {
+				data.IsDisplay = this.DefaultValue;
+			}
+			void IFieldSerializer<LogicalCircuitData>.SetTextValue(ref LogicalCircuitData data, string text) {
+				data.IsDisplay = bool.Parse(text);
+			}
+		}
+
 		// Special field used to access items wrapper of this record from record.
 		// This is used when no other universes is used
 		internal sealed class LogicalCircuitField : IField<LogicalCircuitData, LogicalCircuit> {
@@ -225,6 +261,7 @@ namespace LogicCircuit {
 			NotationField.Field,
 			DescriptionField.Field,
 			CategoryField.Field,
+			IsDisplayField.Field,
 			LogicalCircuitField.Field
 		};
 
@@ -297,6 +334,12 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.LogicalCircuitRowId, LogicalCircuitData.CategoryField.Field, value); }
 		}
 
+		// Gets or sets value of the IsDisplay field.
+		public bool IsDisplay {
+			get { return this.Table.GetField(this.LogicalCircuitRowId, LogicalCircuitData.IsDisplayField.Field); }
+			set { this.Table.SetField(this.LogicalCircuitRowId, LogicalCircuitData.IsDisplayField.Field, value); }
+		}
+
 
 		internal void NotifyChanged(TableChange<LogicalCircuitData> change) {
 			if(this.HasListener) {
@@ -317,6 +360,9 @@ namespace LogicCircuit {
 				}
 				if(LogicalCircuitData.CategoryField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("Category");
+				}
+				if(LogicalCircuitData.IsDisplayField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("IsDisplay");
 				}
 			}
 			this.OnLogicalCircuitChanged();
@@ -404,7 +450,8 @@ namespace LogicCircuit {
 			string Name,
 			string Notation,
 			string Description,
-			string Category
+			string Category,
+			bool IsDisplay
 			// Fields of Circuit table
 
 		) {
@@ -420,6 +467,7 @@ namespace LogicCircuit {
 				Notation = Notation,
 				Description = Description,
 				Category = Category,
+				IsDisplay = IsDisplay,
 			};
 			return this.Create(this.Table.Insert(ref dataLogicalCircuit), rowIdCircuit);
 		}

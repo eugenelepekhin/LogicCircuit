@@ -111,7 +111,8 @@ namespace LogicCircuit {
 				name,
 				name,
 				LogicalCircuitData.DescriptionField.Field.DefaultValue,
-				LogicalCircuitData.CategoryField.Field.DefaultValue
+				LogicalCircuitData.CategoryField.Field.DefaultValue,
+				LogicalCircuitData.IsDisplayField.Field.DefaultValue
 			);
 		}
 
