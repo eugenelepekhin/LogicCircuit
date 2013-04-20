@@ -64,6 +64,7 @@ namespace LogicCircuit {
 		protected abstract void UpdateGlyph(LogicalCircuit logicalCircuit);
 
 		private void CircuitProjectVersionChanged(object sender, VersionChangeEventArgs e) {
+			this.UpdateDisplay(this.Project.LogicalCircuit, new HashSet<LogicalCircuit>());
 			if(this.refreshPending) {
 				this.refreshPending = false;
 				this.Refresh();
@@ -83,8 +84,19 @@ namespace LogicCircuit {
 				}
 			}
 			this.CircuitProject.CircuitSymbolSet.ValidateAll();
-			if(this.CircuitProject.Version == this.Project.LogicalCircuit.PinVersion) {
-				this.UpdateGlyph(this.Project.LogicalCircuit);
+		}
+
+		private void UpdateDisplay(LogicalCircuit display, HashSet<LogicalCircuit> updated) {
+			if(updated.Add(display)) {
+				display.ResetPins();
+				this.UpdateGlyph(display);
+				foreach(CircuitSymbol symbol in this.CircuitProject.CircuitSymbolSet.SelectByCircuit(display)) {
+					symbol.ResetJams();
+					this.UpdateGlyph(symbol.LogicalCircuit);
+					if(symbol.LogicalCircuit.IsDisplay) {
+						this.UpdateDisplay(symbol.LogicalCircuit, updated);
+					}
+				}
 			}
 		}
 
