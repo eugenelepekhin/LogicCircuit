@@ -65,21 +65,13 @@ namespace LogicCircuit {
 		}
 
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
-			FrameworkElement glyph = symbol.CreateSimpleGlyph(SymbolShape.LedMatrix);
-			this.UpdateGlyph(symbol);
-			return glyph;
+			Tracer.Assert(this == symbol.Circuit);
+			return symbol.CreateLedMatrixGlyph(symbol);
 		}
 
-		private void UpdateGlyph(CircuitGlyph symbol) {
-			UniformGrid grid = (UniformGrid)symbol.ProbeView;
-			grid.Children.Clear();
-			grid.Columns = this.Columns;
-			grid.Rows = this.Rows;
-			string skin = (this.CellShape == LedMatrixCellShape.Round) ? SymbolShape.LedMatrixRoundCell : SymbolShape.LedMatrixRectCell;
-			int cellCount = this.Rows * this.Columns;
-			for(int i = 0; i < cellCount; i++) {
-				grid.Children.Add(Symbol.Skin(skin));
-			}
+		public override FrameworkElement CreateDisplay(CircuitGlyph symbol, CircuitGlyph mainSymbol) {
+			Tracer.Assert(this == symbol.Circuit);
+			return symbol.CreateLedMatrixGlyph(mainSymbol);
 		}
 
 		public void UpdatePins() {

@@ -34,7 +34,13 @@ namespace LogicCircuit {
 		}
 
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
-			return symbol.CreateButtonGlyph();
+			Tracer.Assert(this == symbol.Circuit);
+			return symbol.CreateButtonGlyph(symbol);
+		}
+
+		public override FrameworkElement CreateDisplay(CircuitGlyph symbol, CircuitGlyph mainSymbol) {
+			Tracer.Assert(this == symbol.Circuit);
+			return symbol.CreateButtonGlyph(mainSymbol);
 		}
 
 		partial void OnCircuitButtonChanged() {

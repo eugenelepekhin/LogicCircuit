@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System.Windows.Controls.Primitives;
 
 namespace LogicCircuit {
 	public abstract class CircuitGlyph : Symbol {
@@ -191,10 +192,10 @@ namespace LogicCircuit {
 			return hasNotation;
 		}
 
-		private Canvas CreateGlyphCanvas() {
+		private Canvas CreateGlyphCanvas(CircuitGlyph mainSymbol) {
 			Canvas canvas = new Canvas();
 			Panel.SetZIndex(canvas, this.Z);
-			canvas.DataContext = this;
+			canvas.DataContext = mainSymbol;
 			canvas.Width = Symbol.ScreenPoint(this.Circuit.SymbolWidth);
 			canvas.Height = Symbol.ScreenPoint(this.Circuit.SymbolHeight);
 			canvas.ToolTip = this.Circuit.ToolTip;
@@ -202,17 +203,21 @@ namespace LogicCircuit {
 			return canvas;
 		}
 
-		public FrameworkElement CreateButtonGlyph() {
+		public FrameworkElement CreateButtonGlyph(CircuitGlyph mainSymbol) {
 			Tracer.Assert(this.Circuit is CircuitButton);
-			Canvas canvas = this.CreateGlyphCanvas();
-			CircuitGlyph.AddJam(canvas, this.Jams(), null);
+			Canvas canvas = this.CreateGlyphCanvas(mainSymbol);
+			if(this == mainSymbol) {
+				CircuitGlyph.AddJam(canvas, this.Jams(), null);
+			}
 			ButtonControl buttonControl = CircuitGlyph.Skin<ButtonControl>(SymbolShape.Button);
 			Panel.SetZIndex(buttonControl, 0);
 			buttonControl.Content = this.Circuit.Notation;
 			buttonControl.Width = canvas.Width;
 			buttonControl.Height = canvas.Height;
 			canvas.Children.Add(buttonControl);
-			this.ProbeView = buttonControl;
+			if(this == mainSymbol) {
+				this.ProbeView = buttonControl;
+			}
 			this.UpdateButtonGlyph(canvas);
 			return canvas;
 		}
@@ -234,13 +239,17 @@ namespace LogicCircuit {
 			}
 		}
 
-		public FrameworkElement CreateSimpleGlyph(string skin) {
-			Canvas canvas = this.CreateGlyphCanvas();
-			CircuitGlyph.AddJam(canvas, this.Jams(), null);
+		public FrameworkElement CreateSimpleGlyph(string skin, CircuitGlyph mainSymbol) {
+			Canvas canvas = this.CreateGlyphCanvas(mainSymbol);
+			if(this == mainSymbol) {
+				CircuitGlyph.AddJam(canvas, this.Jams(), null);
+			}
 			FrameworkElement shape = CircuitGlyph.Skin(canvas, skin);
 			FrameworkElement probeView = shape.FindName("ProbeView") as FrameworkElement;
 			if(probeView != null) {
-				this.ProbeView = probeView;
+				if(this == mainSymbol) {
+					this.ProbeView = probeView;
+				}
 				TextBlock textBlock = probeView as TextBlock;
 				if(textBlock != null) {
 					textBlock.Text = this.Circuit.Notation;
@@ -249,8 +258,30 @@ namespace LogicCircuit {
 			return canvas;
 		}
 
+		public FrameworkElement CreateLedMatrixGlyph(CircuitGlyph mainSymbol) {
+			Canvas canvas = this.CreateGlyphCanvas(mainSymbol);
+			if(this == mainSymbol) {
+				CircuitGlyph.AddJam(canvas, this.Jams(), null);
+			}
+			FrameworkElement shape = CircuitGlyph.Skin(canvas, SymbolShape.LedMatrix);
+			UniformGrid grid = shape.FindName("ProbeView") as UniformGrid;
+			Tracer.Assert(grid != null);
+			if(this == mainSymbol) {
+				this.ProbeView = grid;
+			}
+			LedMatrix matrix = (LedMatrix)this.Circuit;
+			grid.Columns = matrix.Columns;
+			grid.Rows = matrix.Rows;
+			string skin = (matrix.CellShape == LedMatrixCellShape.Round) ? SymbolShape.LedMatrixRoundCell : SymbolShape.LedMatrixRectCell;
+			int cellCount = matrix.Rows * matrix.Columns;
+			for(int i = 0; i < cellCount; i++) {
+				grid.Children.Add(Symbol.Skin(skin));
+			}
+			return canvas;
+		}
+
 		public FrameworkElement CreateRectangularGlyph() {
-			Canvas canvas = this.CreateGlyphCanvas();
+			Canvas canvas = this.CreateGlyphCanvas(this);
 			canvas.Background = Symbol.CircuitFill;
 			bool ln = CircuitGlyph.AddJam(canvas, this.Left, (j, t) => { Canvas.SetLeft(t, Symbol.PinRadius); Canvas.SetTop(t, Symbol.ScreenPoint(j.Y) - 2 * Symbol.PinRadius); });
 			bool tn = CircuitGlyph.AddJam(canvas, this.Top, (j, t) => { Canvas.SetLeft(t, Symbol.ScreenPoint(j.X) - Symbol.PinRadius); Canvas.SetTop(t, Symbol.PinRadius); });
@@ -268,7 +299,7 @@ namespace LogicCircuit {
 		public FrameworkElement CreateShapedGlyph(string skin) {
 			Gate gate = this.Circuit as Gate;
 			Tracer.Assert(gate != null);
-			Canvas canvas = this.CreateGlyphCanvas();
+			Canvas canvas = this.CreateGlyphCanvas(this);
 			CircuitGlyph.AddJam(canvas, this.Jams(), null);
 			FrameworkElement shape = CircuitGlyph.Skin(canvas, skin);
 			int top = Math.Max(0, gate.InputCount - 3) / 2;
@@ -281,6 +312,44 @@ namespace LogicCircuit {
 			if(bottomLine != null) {
 				bottomLine.Height = Symbol.ScreenPoint(bottom);
 			}
+			return canvas;
+		}
+
+		public FrameworkElement CreateDisplayGlyph(CircuitGlyph mainSymbol) {
+			Tracer.Assert(mainSymbol != null);
+			List<CircuitSymbol> list = ((LogicalCircuit)this.Circuit).CircuitSymbols().Where(s => s.Circuit.IsDisplay).ToList();
+			GridPoint offset = Symbol.GridPoint(list.Select(s => s.Bounds()).Aggregate((r1, r2) => Rect.Union(r1, r2)).TopLeft);
+			Canvas canvas = this.CreateGlyphCanvas(mainSymbol);
+
+			if(this == mainSymbol) {
+				Border border = Symbol.Skin<Border>(SymbolShape.DisplayBackground);
+				border.Width = canvas.Width;
+				border.Height = canvas.Height;
+				canvas.Children.Add(border);
+
+				CircuitGlyph.AddJam(canvas, this.Left, (j, t) => { Canvas.SetLeft(t, Symbol.PinRadius); Canvas.SetTop(t, Symbol.ScreenPoint(j.Y) - 2 * Symbol.PinRadius); });
+				CircuitGlyph.AddJam(canvas, this.Top, (j, t) => { Canvas.SetLeft(t, Symbol.ScreenPoint(j.X) - Symbol.PinRadius); Canvas.SetTop(t, Symbol.PinRadius); });
+				CircuitGlyph.AddJam(canvas, this.Right, (j, t) => { Canvas.SetRight(t, Symbol.PinRadius); Canvas.SetTop(t, Symbol.ScreenPoint(j.Y) - 2 * Symbol.PinRadius); });
+				CircuitGlyph.AddJam(canvas, this.Bottom, (j, t) => { Canvas.SetLeft(t, Symbol.ScreenPoint(j.X) - Symbol.PinRadius); Canvas.SetBottom(t, Symbol.PinRadius); });
+
+				border = Symbol.Skin<Border>(SymbolShape.DisplayBorder);
+				border.Width = canvas.Width;
+				border.Height = canvas.Height;
+				Panel.SetZIndex(border, int.MaxValue - 1);
+				canvas.Children.Add(border);
+			}
+
+			foreach(CircuitSymbol symbol in list) {
+				FrameworkElement display = symbol.Circuit.CreateDisplay(symbol, mainSymbol);
+				display.ToolTip = null;
+				Canvas.SetLeft(display, Symbol.ScreenPoint(symbol.X - offset.X));
+				Canvas.SetTop(display, Symbol.ScreenPoint(symbol.Y - offset.Y));
+				display.RenderTransformOrigin = Symbol.RotationCenter(symbol.Circuit.SymbolWidth, symbol.Circuit.SymbolHeight);
+				RotateTransform rotation = (RotateTransform)display.RenderTransform;
+				rotation.Angle = Symbol.Angle(symbol.Rotation);
+				canvas.Children.Add(display);
+			}
+
 			return canvas;
 		}
 

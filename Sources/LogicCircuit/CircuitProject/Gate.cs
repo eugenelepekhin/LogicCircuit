@@ -60,6 +60,7 @@ namespace LogicCircuit {
 		}
 
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
+			Tracer.Assert(this == symbol.Circuit);
 			string skin;
 			switch(this.GateType) {
 			case GateType.Clock:
@@ -107,7 +108,22 @@ namespace LogicCircuit {
 					return symbol.CreateShapedGlyph(skin);
 				}
 			}
-			return symbol.CreateSimpleGlyph(skin);
+			return symbol.CreateSimpleGlyph(skin, symbol);
+		}
+
+		public override FrameworkElement CreateDisplay(CircuitGlyph symbol, CircuitGlyph mainSymbol) {
+			Tracer.Assert(this == symbol.Circuit);
+			if(this.GateType == LogicCircuit.GateType.Led) {
+				string skin;
+				if(this.InputCount == 1) {
+					skin = SymbolShape.Led;
+				} else {
+					Tracer.Assert(this.InputCount == 8);
+					skin = SymbolShape.SevenSegment;
+				}
+				return symbol.CreateSimpleGlyph(skin, mainSymbol);
+			}
+			return base.CreateDisplay(symbol, mainSymbol);
 		}
 	}
 

@@ -39,7 +39,7 @@ namespace LogicCircuit {
 		}
 
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
-			return symbol.CreateSimpleGlyph(SymbolShape.Pin);
+			return symbol.CreateSimpleGlyph(SymbolShape.Pin, symbol);
 		}
 
 		partial void OnPinChanged() {

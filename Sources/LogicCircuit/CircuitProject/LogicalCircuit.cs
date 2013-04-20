@@ -106,7 +106,20 @@ namespace LogicCircuit {
 		}
 
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
-			return symbol.CreateRectangularGlyph();
+			Tracer.Assert(this == symbol.Circuit);
+			if(this.IsDisplay && this.ContainsDisplays()) {
+				return symbol.CreateDisplayGlyph(symbol);
+			} else {
+				return symbol.CreateRectangularGlyph();
+			}
+		}
+
+		public override FrameworkElement CreateDisplay(CircuitGlyph symbol, CircuitGlyph mainSymbol) {
+			Tracer.Assert(this == symbol.Circuit);
+			if(this.IsDisplay && this.ContainsDisplays()) {
+				return symbol.CreateDisplayGlyph(mainSymbol);
+			}
+			return base.CreateDisplay(symbol, mainSymbol);
 		}
 
 		public override void ResetPins() {

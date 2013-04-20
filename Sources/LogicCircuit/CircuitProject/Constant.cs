@@ -47,7 +47,7 @@ namespace LogicCircuit {
 		}
 
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
-			return symbol.CreateSimpleGlyph(SymbolShape.Constant);
+			return symbol.CreateSimpleGlyph(SymbolShape.Constant, symbol);
 		}
 
 		partial void OnConstantChanged() {

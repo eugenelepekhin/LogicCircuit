@@ -492,6 +492,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="SymbolShapes\DisplayBackground.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SymbolShapes\DisplayBorder.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="SymbolShapes\Led.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

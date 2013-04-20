@@ -34,9 +34,14 @@ namespace LogicCircuit {
 
 		public virtual bool IsDisplay {
 			get { return false; }
-			set { Tracer.Fail(); }
+			set { throw new InvalidOperationException(); }
 		}
-		
+
+		public virtual FrameworkElement CreateDisplay(CircuitGlyph symbol, CircuitGlyph mainSymbol) {
+			Tracer.Assert(this == symbol.Circuit);
+			throw new InvalidOperationException();
+		}
+
 		public abstract FrameworkElement CreateGlyph(CircuitGlyph symbol);
 
 		public virtual IEnumerable<BasePin> Pins {
