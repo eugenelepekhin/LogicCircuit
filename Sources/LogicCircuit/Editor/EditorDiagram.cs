@@ -64,7 +64,17 @@ namespace LogicCircuit {
 		protected abstract void UpdateGlyph(LogicalCircuit logicalCircuit);
 
 		private void CircuitProjectVersionChanged(object sender, VersionChangeEventArgs e) {
-			this.UpdateDisplay(this.Project.LogicalCircuit, new HashSet<LogicalCircuit>());
+			HashSet<LogicalCircuit> updated = new HashSet<LogicalCircuit>();
+			if(this.UpdateAllRequared(e)) {
+				foreach(LogicalCircuit circuit in this.CircuitProject.LogicalCircuitSet) {
+					this.UpdateDisplay(circuit, updated);
+				}
+				foreach(CircuitSymbol symbol in this.CircuitProject.CircuitSymbolSet) {
+					symbol.Reset();
+				}
+			} else {
+				this.UpdateDisplay(this.Project.LogicalCircuit, updated);
+			}
 			if(this.refreshPending) {
 				this.refreshPending = false;
 				this.Refresh();
@@ -84,6 +94,17 @@ namespace LogicCircuit {
 				}
 			}
 			this.CircuitProject.CircuitSymbolSet.ValidateAll();
+		}
+
+		private bool UpdateAllRequared(VersionChangeEventArgs e) {
+			IEnumerator<string> updated = this.CircuitProject.AffectedTables(e.NewVersion, e.NewVersion);
+			string name = this.CircuitProject.LogicalCircuitSet.Table.Name;
+			while(updated.MoveNext()) {
+				if(updated.Current == name) {
+					return true;
+				}
+			}
+			return false;
 		}
 
 		private void UpdateDisplay(LogicalCircuit display, HashSet<LogicalCircuit> updated) {
