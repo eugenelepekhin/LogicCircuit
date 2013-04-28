@@ -612,6 +612,33 @@ namespace LogicCircuit {
 			return null;
 		}
 
+		private static IEnumerable<CircuitSymbol> DisplayChain(SymbolMap symbolMap) {
+			yield return symbolMap.CircuitSymbol;
+			CircuitMap map = symbolMap.CircuitMap;
+			while(map != null && map.CircuitSymbol != null && map.Circuit.IsDisplay) {
+				yield return map.CircuitSymbol;
+				map = map.Parent;
+			}
+		}
+
+		private static void UpdateDisplays(SymbolMap symbolMap, IFunctionVisual function) {
+			CircuitMap map = symbolMap.CircuitMap;
+			while(map != null && map.CircuitSymbol != null && map.Circuit.IsDisplay) {
+				if(map.displays == null) {
+					map.displays = new HashSet<IFunctionVisual>();
+				}
+				map.displays.Add(function);
+				map = map.Parent;
+			}
+			if(map != null) {
+				if(map.displays == null) {
+					map.displays = new HashSet<IFunctionVisual>();
+				}
+				map.displays.Add(function);
+				map = map.Parent;
+			}
+		}
+
 		private static CircuitFunction DefineLed(CircuitState circuitState, SymbolMap symbolMap) {
 			//The jams have special meaning here, so lets go from them
 			List<Jam> jam = symbolMap.CircuitSymbol.Jams().ToList();
@@ -622,7 +649,7 @@ namespace LogicCircuit {
 			if(jam.Count == 1) {
 				Parameter parameter = symbolMap.Parameter(jam[0], 0);
 				if(parameter != null) {
-					function = new FunctionLed(circuitState, symbolMap.CircuitSymbol, parameter.Result.StateIndex);
+					function = new FunctionLed(circuitState, CircuitMap.DisplayChain(symbolMap), parameter.Result.StateIndex);
 				} else {
 					#if DEBUG
 						Tracer.FullInfo("DefineLed", "{0} on {1}{2} is not connected",
@@ -653,10 +680,7 @@ namespace LogicCircuit {
 				}
 			}
 			if(function != null) {
-				if(symbolMap.CircuitMap.displays == null) {
-					symbolMap.CircuitMap.displays = new HashSet<IFunctionVisual>();
-				}
-				symbolMap.CircuitMap.displays.Add((IFunctionVisual)function);
+				CircuitMap.UpdateDisplays(symbolMap, (IFunctionVisual)function);
 			}
 			return function;
 		}

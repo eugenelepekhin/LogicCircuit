@@ -152,6 +152,8 @@ namespace LogicCircuit {
 			shape.Height = canvas.Height;
 			canvas.Children.Add(shape);
 			Panel.SetZIndex(shape, 0);
+			// Use name scope from shape in canvas, so ProbeView can be found from canvas
+			NameScope.SetNameScope(canvas, NameScope.GetNameScope(shape));
 			return shape;
 		}
 
@@ -192,14 +194,26 @@ namespace LogicCircuit {
 			return hasNotation;
 		}
 
-		private Canvas CreateGlyphCanvas(CircuitGlyph mainSymbol) {
-			Canvas canvas = new Canvas();
+		private void InitGlyphCanvas(Canvas canvas, CircuitGlyph mainSymbol) {
 			Panel.SetZIndex(canvas, this.Z);
 			canvas.DataContext = mainSymbol;
 			canvas.Width = Symbol.ScreenPoint(this.Circuit.SymbolWidth);
 			canvas.Height = Symbol.ScreenPoint(this.Circuit.SymbolHeight);
-			canvas.ToolTip = this.Circuit.ToolTip;
+			if(this == mainSymbol) {
+				canvas.ToolTip = this.Circuit.ToolTip;
+			}
 			canvas.RenderTransform = new RotateTransform();
+		}
+
+		private Canvas CreateGlyphCanvas(CircuitGlyph mainSymbol) {
+			Canvas canvas = new Canvas();
+			this.InitGlyphCanvas(canvas, mainSymbol);
+			return canvas;
+		}
+
+		private DisplayCanvas CreateDisplayCanvas(CircuitGlyph mainSymbol) {
+			DisplayCanvas canvas = new DisplayCanvas();
+			this.InitGlyphCanvas(canvas, mainSymbol);
 			return canvas;
 		}
 
@@ -209,12 +223,11 @@ namespace LogicCircuit {
 			if(this == mainSymbol) {
 				CircuitGlyph.AddJam(canvas, this.Jams(), null);
 			}
-			ButtonControl buttonControl = CircuitGlyph.Skin<ButtonControl>(SymbolShape.Button);
+			ButtonControl buttonControl = (ButtonControl)CircuitGlyph.Skin(canvas, SymbolShape.Button);
 			Panel.SetZIndex(buttonControl, 0);
 			buttonControl.Content = this.Circuit.Notation;
 			buttonControl.Width = canvas.Width;
 			buttonControl.Height = canvas.Height;
-			canvas.Children.Add(buttonControl);
 			if(this == mainSymbol) {
 				this.ProbeView = buttonControl;
 			}
@@ -319,7 +332,7 @@ namespace LogicCircuit {
 			Tracer.Assert(mainSymbol != null);
 			List<CircuitSymbol> list = ((LogicalCircuit)this.Circuit).CircuitSymbols().Where(s => s.Circuit.IsDisplay).ToList();
 			GridPoint offset = Symbol.GridPoint(list.Select(s => s.Bounds()).Aggregate((r1, r2) => Rect.Union(r1, r2)).TopLeft);
-			Canvas canvas = this.CreateGlyphCanvas(mainSymbol);
+			DisplayCanvas canvas = this.CreateDisplayCanvas(mainSymbol);
 
 			if(this == mainSymbol) {
 				Border border = Symbol.Skin<Border>(SymbolShape.DisplayBackground);
@@ -341,13 +354,12 @@ namespace LogicCircuit {
 
 			foreach(CircuitSymbol symbol in list) {
 				FrameworkElement display = symbol.Circuit.CreateDisplay(symbol, mainSymbol);
-				display.ToolTip = null;
 				Canvas.SetLeft(display, Symbol.ScreenPoint(symbol.X - offset.X));
 				Canvas.SetTop(display, Symbol.ScreenPoint(symbol.Y - offset.Y));
 				display.RenderTransformOrigin = Symbol.RotationCenter(symbol.Circuit.SymbolWidth, symbol.Circuit.SymbolHeight);
 				RotateTransform rotation = (RotateTransform)display.RenderTransform;
 				rotation.Angle = Symbol.Angle(symbol.Rotation);
-				canvas.Children.Add(display);
+				canvas.AddDisplay(symbol, display);
 			}
 
 			return canvas;

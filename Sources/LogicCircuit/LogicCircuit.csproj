@@ -143,6 +143,7 @@
       <DependentUpon>ReportBuilder.tt</DependentUpon>
     </Compile>
     <Compile Include="Dialog\ReportBuilder.Properties.cs" />
+    <Compile Include="DisplayCanvas.cs" />
     <Compile Include="Editor\AreaMarker.cs" />
     <Compile Include="Editor\CircuitDescriptor.cs" />
     <Compile Include="Editor\CircuitDescriptorComparer.cs" />

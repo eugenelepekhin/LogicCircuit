@@ -49,7 +49,7 @@ namespace LogicCircuit.UnitTest {
 			CircuitState target = new CircuitState(3);
 			int buttonResult = target.ReserveState();
 			FunctionButton functionButton = new FunctionButton(target, buttonSymbol, buttonResult);
-			FunctionLed functionLed = new FunctionLed(target, ledSymbol, buttonResult);
+			FunctionLed functionLed = new FunctionLed(target, new CircuitSymbol[] { ledSymbol }, buttonResult);
 			target.EndDefinition();
 
 			Assert.IsTrue(functionButton.Dependant != null && functionButton.Dependant.Length == 1 && functionButton.Dependant[0] == functionLed);
