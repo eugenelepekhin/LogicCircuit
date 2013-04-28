@@ -104,7 +104,7 @@ namespace LogicCircuit {
 				CircuitMap circuitMap = new CircuitMap(this.LogicalCircuit);
 				this.CircuitState = circuitMap.Apply(CircuitRunner.HistorySize);
 
-				this.Inputs.ForEach(s => s.Function = (FunctionConstant)circuitMap.Input(s.Symbol));
+				this.Inputs.ForEach(s => s.Function = circuitMap.FunctionConstant(s.Symbol));
 				this.Outputs.ForEach(s => s.Function = circuitMap.FunctionProbe(s.Symbol));
 
 				this.Inputs.Where(s => s.Function == null).ToList().ForEach(s => this.Inputs.Remove(s));

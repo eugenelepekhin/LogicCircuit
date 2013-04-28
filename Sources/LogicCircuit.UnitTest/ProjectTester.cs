@@ -36,7 +36,7 @@ namespace LogicCircuit.UnitTest {
 			}
 			CircuitSymbolComparer circuitSymbolComparer = new CircuitSymbolComparer(true);
 			inputSymbol.Sort(circuitSymbolComparer);
-			this.Input = inputSymbol.Select(s => (FunctionConstant)this.CircuitMap.Input(s)).ToArray();
+			this.Input = inputSymbol.Select(s => this.CircuitMap.FunctionConstant(s)).ToArray();
 
 			List<CircuitSymbol> outputSymbol = new List<CircuitSymbol>();
 			foreach(CircuitSymbol symbol in this.Project.LogicalCircuit.CircuitSymbols()) {

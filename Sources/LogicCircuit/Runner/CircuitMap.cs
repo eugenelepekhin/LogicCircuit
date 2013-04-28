@@ -20,7 +20,7 @@ namespace LogicCircuit {
 		private List<CircuitSymbol> symbols;
 		private Dictionary<CircuitSymbol, CircuitMap> children;
 		private HashSet<IFunctionVisual> displays;
-		private Dictionary<CircuitSymbol, CircuitFunction> inputs;
+		private Dictionary<CircuitSymbol, FunctionConstant> constants;
 		private Dictionary<CircuitSymbol, FunctionMemory> memories;
 		private bool turnedOn = false;
 
@@ -388,12 +388,9 @@ namespace LogicCircuit {
 						func.TurnOn();
 					}
 				}
-				if(this.inputs != null) {
-					foreach(CircuitFunction func in this.inputs.Values) {
-						IFunctionVisual visual = func as IFunctionVisual;
-						if(visual != null) {
-							visual.TurnOn();
-						}
+				if(this.constants != null) {
+					foreach(FunctionConstant func in this.constants.Values) {
+						func.TurnOn();
 					}
 				}
 				this.turnedOn = true;
@@ -408,12 +405,9 @@ namespace LogicCircuit {
 						func.TurnOff();
 					}
 				}
-				if(this.inputs != null) {
-					foreach(CircuitFunction func in this.inputs.Values) {
-						IFunctionVisual visual = func as IFunctionVisual;
-						if(visual != null) {
-							visual.TurnOff();
-						}
+				if(this.constants != null) {
+					foreach(FunctionConstant func in this.constants.Values) {
+						func.TurnOff();
 					}
 				}
 				if(this.memories != null) {
@@ -440,10 +434,10 @@ namespace LogicCircuit {
 			}
 		}
 
-		public CircuitFunction Input(CircuitSymbol symbol) {
-			if(this.inputs != null) {
-				CircuitFunction function;
-				if(this.inputs.TryGetValue(symbol,  out function)) {
+		public FunctionConstant FunctionConstant(CircuitSymbol symbol) {
+			if(this.constants != null) {
+				FunctionConstant function;
+				if(this.constants.TryGetValue(symbol,  out function)) {
 					return function;
 				}
 			}
@@ -839,16 +833,10 @@ namespace LogicCircuit {
 			int index = CircuitMap.SingleResult(symbolMap);
 			Tracer.Assert(0 < index);
 			FunctionButton button = new FunctionButton(circuitState, symbolMap.CircuitSymbol, index);
-			if(symbolMap.CircuitMap.inputs == null) {
-				symbolMap.CircuitMap.inputs = new Dictionary<CircuitSymbol, CircuitFunction>();
+			if(symbolMap.CircuitMap.displays == null) {
+				symbolMap.CircuitMap.displays = new HashSet<IFunctionVisual>();
 			}
-			symbolMap.CircuitMap.inputs.Add(symbolMap.CircuitSymbol, button);
-			if(button.IsToggle) {
-				if(symbolMap.CircuitMap.displays == null) {
-					symbolMap.CircuitMap.displays = new HashSet<IFunctionVisual>();
-				}
-				symbolMap.CircuitMap.displays.Add(button);
-			}
+			symbolMap.CircuitMap.displays.Add(button);
 			return button;
 		}
 
@@ -859,10 +847,10 @@ namespace LogicCircuit {
 			Constant c = (Constant)symbolMap.CircuitSymbol.Circuit;
 			Tracer.Assert(map.Length == c.BitWidth);
 			FunctionConstant constant = new FunctionConstant(circuitState, symbolMap.CircuitSymbol, map);
-			if(symbolMap.CircuitMap.inputs == null) {
-				symbolMap.CircuitMap.inputs = new Dictionary<CircuitSymbol, CircuitFunction>();
+			if(symbolMap.CircuitMap.constants == null) {
+				symbolMap.CircuitMap.constants = new Dictionary<CircuitSymbol, FunctionConstant>();
 			}
-			symbolMap.CircuitMap.inputs.Add(symbolMap.CircuitSymbol, constant);
+			symbolMap.CircuitMap.constants.Add(symbolMap.CircuitSymbol, constant);
 			return constant;
 		}
 

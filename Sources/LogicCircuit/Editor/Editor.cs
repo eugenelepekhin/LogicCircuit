@@ -471,7 +471,7 @@ namespace LogicCircuit {
 					Constant constant = circuitSymbol.Circuit as Constant;
 					if(constant != null) {
 						if(this.CircuitRunner.Root.First() == this.CircuitRunner.VisibleMap) {
-							FunctionConstant functionConstant = (FunctionConstant)this.CircuitRunner.VisibleMap.Input(circuitSymbol);
+							FunctionConstant functionConstant = this.CircuitRunner.VisibleMap.FunctionConstant(circuitSymbol);
 							if(functionConstant != null) {
 								this.CircuitProject.InOmitTransaction(() => functionConstant.Value++);
 							}
