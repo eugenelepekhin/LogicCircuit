@@ -488,19 +488,6 @@ namespace LogicCircuit {
 			}
 		}
 
-		protected override void ButtonIsPressedChanged(CircuitSymbol symbol, bool isPressed) {
-			if(this.Power && this.CircuitRunner.VisibleMap != null) {
-				FunctionButton function = (FunctionButton)this.CircuitRunner.VisibleMap.Input(symbol);
-				if(function != null) {
-					if(isPressed) {
-						function.SymbolPress();
-					} else {
-						function.SymbolRelease();
-					}
-				}
-			}
-		}
-
 		public void SelectAll() {
 			if(this.InEditMode) {
 				LogicalCircuit logicalCircuit = this.Project.LogicalCircuit;

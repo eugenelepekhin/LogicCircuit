@@ -229,8 +229,6 @@ namespace LogicCircuit {
 
 		//--- Drawing ---
 
-		protected abstract void ButtonIsPressedChanged(CircuitSymbol symbol, bool isPressed);
-
 		public void Refresh() {
 			if(this.Dispatcher.Thread != Thread.CurrentThread) {
 				this.Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new Action(this.RedrawDiagram));
@@ -252,10 +250,6 @@ namespace LogicCircuit {
 		private void Add(CircuitSymbol symbol) {
 			symbol.PositionGlyph();
 			this.Diagram.Children.Add(symbol.Glyph);
-			ButtonControl button = symbol.ProbeView as ButtonControl;
-			if(button != null) {
-				button.ButtonPressed = this.ButtonIsPressedChanged;
-			}
 		}
 
 		private void AddWirePoint(GridPoint point) {

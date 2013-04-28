@@ -7,11 +7,11 @@ namespace LogicCircuit {
 
 		private static Brush[] stateBrush = null;
 
-		public CircuitSymbol CircuitSymbol { get; private set; }
+		private CircuitSymbol circuitSymbol;
 		public bool IsToggle { get; private set; }
 
 		public FunctionButton(CircuitState circuitState, CircuitSymbol symbol, int result) : base(circuitState, State.On0, result) {
-			this.CircuitSymbol = symbol;
+			this.circuitSymbol = symbol;
 			this.IsToggle = ((CircuitButton)symbol.Circuit).IsToggle;
 			if(this.IsToggle && FunctionButton.stateBrush == null) {
 				FunctionButton.stateBrush = new Brush[] {
@@ -26,7 +26,7 @@ namespace LogicCircuit {
 
 		public override string ReportName { get { return Properties.Resources.NameButton; } }
 
-		public void SymbolPress() {
+		private void SymbolPress() {
 			if(this.IsToggle) {
 				this.SetState(CircuitFunction.Not(this.State));
 				this.Invalid = true;
@@ -35,21 +35,29 @@ namespace LogicCircuit {
 			}
 		}
 
-		public void SymbolRelease() {
+		private void SymbolRelease() {
 			if(!this.IsToggle) {
 				this.SetState(State.On0);
 			}
 		}
 
+		private void StateChangedAction(CircuitSymbol symbol, bool isPressed) {
+			if(isPressed) {
+				this.SymbolPress();
+			} else {
+				this.SymbolRelease();
+			}
+		}
+
 		public void TurnOn() {
-			ButtonControl button = (ButtonControl)this.CircuitSymbol.ProbeView;
-			button.Clickable = true;
+			ButtonControl button = (ButtonControl)this.circuitSymbol.ProbeView;
+			button.ButtonStateChanged = this.StateChangedAction;
 		}
 
 		public void TurnOff() {
-			if(this.CircuitSymbol.HasCreatedGlyph) {
-				ButtonControl button = (ButtonControl)this.CircuitSymbol.ProbeView;
-				button.Clickable = false;
+			if(this.circuitSymbol.HasCreatedGlyph) {
+				ButtonControl button = (ButtonControl)this.circuitSymbol.ProbeView;
+				button.ButtonStateChanged = null;
 				this.DrawState(State.Off);
 			}
 		}
@@ -60,7 +68,7 @@ namespace LogicCircuit {
 
 		private void DrawState(State state) {
 			if(this.IsToggle) {
-				Canvas canvas = (Canvas)this.CircuitSymbol.Glyph;
+				Canvas canvas = (Canvas)this.circuitSymbol.Glyph;
 				Border border = (Border)canvas.Children[2];
 				Tracer.Assert(border != null);
 				border.Background = FunctionButton.stateBrush[(int)state];
