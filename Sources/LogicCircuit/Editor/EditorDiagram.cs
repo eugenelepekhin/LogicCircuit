@@ -72,6 +72,7 @@ namespace LogicCircuit {
 				foreach(CircuitSymbol symbol in this.CircuitProject.CircuitSymbolSet) {
 					symbol.Reset();
 				}
+				this.refreshPending = true;
 			} else {
 				this.UpdateDisplay(this.Project.LogicalCircuit, updated);
 			}
