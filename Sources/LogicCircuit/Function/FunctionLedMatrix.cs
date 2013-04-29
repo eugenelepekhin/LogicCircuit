@@ -9,16 +9,21 @@ namespace LogicCircuit {
 	public abstract class FunctionLedMatrix : Probe, IFunctionVisual {
 		private static Brush[] brush;
 
-		private readonly UniformGrid grid;
+		private List<CircuitSymbol> circuitSymbol;
+		protected LedMatrix Matrix { get; private set; }
 		protected int BitPerLed { get; private set; }
+		private Project project;
+		protected LogicalCircuit CurrentLogicalCircuit { get { return this.project.LogicalCircuit; } }
+
 		public bool Invalid { get; set; }
 
 		public override string ReportName { get { return Properties.Resources.NameLedMatrix; } }
 
-		protected FunctionLedMatrix(CircuitState circuitState, CircuitSymbol symbol, int[] parameter) : base(circuitState, parameter) {
-			this.grid = (UniformGrid)symbol.ProbeView;
-			LedMatrix matrix = (LedMatrix)symbol.Circuit;
-			this.BitPerLed = matrix.Colors;
+		protected FunctionLedMatrix(CircuitState circuitState, IEnumerable<CircuitSymbol> symbols, int[] parameter) : base(circuitState, parameter) {
+			this.circuitSymbol = symbols.ToList();
+			this.Matrix = (LedMatrix)this.circuitSymbol[0].Circuit;
+			this.BitPerLed = this.Matrix.Colors;
+			this.project = this.circuitSymbol[0].LogicalCircuit.CircuitProject.ProjectSet.Project;
 		}
 
 		public override bool Evaluate() {
@@ -29,7 +34,15 @@ namespace LogicCircuit {
 		}
 
 		protected void Fill(int index, int value) {
-			((Shape)this.grid.Children[index]).Fill = FunctionLedMatrix.brush[value];
+			UniformGrid grid = null;
+			if(this.circuitSymbol.Count == 1) {
+				grid = (UniformGrid)this.circuitSymbol[0].ProbeView;
+			} else {
+				LogicalCircuit currentCircuit = this.CurrentLogicalCircuit;
+				CircuitSymbol symbol = this.circuitSymbol.First(s => s.LogicalCircuit == currentCircuit);
+				grid = this.ProbeView(symbol);
+			}
+			((Shape)grid.Children[index]).Fill = FunctionLedMatrix.brush[value];
 		}
 
 		public abstract void Redraw();
@@ -53,9 +66,23 @@ namespace LogicCircuit {
 
 		public void TurnOff() {
 			if(FunctionLedMatrix.brush != null) {
-				foreach(Shape shape in this.grid.Children) {
-					shape.Fill = FunctionLedMatrix.brush[0];
+				foreach(CircuitSymbol symbol in this.circuitSymbol) {
+					if(symbol.HasCreatedGlyph) {
+						UniformGrid grid = this.ProbeView(symbol);
+						foreach(Shape shape in grid.Children) {
+							shape.Fill = FunctionLedMatrix.brush[0];
+						}
+					}
 				}
+			}
+		}
+
+		private UniformGrid ProbeView(CircuitSymbol symbol) {
+			if(symbol == this.circuitSymbol[0]) {
+				return (UniformGrid)this.circuitSymbol[0].ProbeView;
+			} else {
+				DisplayCanvas canvas = (DisplayCanvas)symbol.Glyph;
+				return (UniformGrid)canvas.DisplayOf(this.circuitSymbol);
 			}
 		}
 	}

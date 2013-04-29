@@ -709,7 +709,7 @@ namespace LogicCircuit {
 					}
 				}
 				if(connected) {
-					function = new FunctionLedMatrixIndividual(circuitState, symbolMap.CircuitSymbol, param);
+					function = new FunctionLedMatrixIndividual(circuitState, CircuitMap.DisplayChain(symbolMap), param);
 				}
 			} else { //matrix.MatrixType == LedMatrixType.Selector
 				Tracer.Assert(matrix.MatrixType == LedMatrixType.Selector);
@@ -746,14 +746,11 @@ namespace LogicCircuit {
 					}
 				}
 				if(rowConnected && columnConnected) {
-					function = new FunctionLedMatrixSelector(circuitState, symbolMap.CircuitSymbol, param);
+					function = new FunctionLedMatrixSelector(circuitState, CircuitMap.DisplayChain(symbolMap), param);
 				}
 			}
 			if(function != null) {
-				if(symbolMap.CircuitMap.displays == null) {
-					symbolMap.CircuitMap.displays = new HashSet<IFunctionVisual>();
-				}
-				symbolMap.CircuitMap.displays.Add((IFunctionVisual)function);
+				CircuitMap.UpdateDisplays(symbolMap, (IFunctionVisual)function);
 			}
 			return function;
 		}

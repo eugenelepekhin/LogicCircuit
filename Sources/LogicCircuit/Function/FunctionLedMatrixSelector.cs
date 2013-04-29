@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace LogicCircuit {
 	public class FunctionLedMatrixSelector : FunctionLedMatrix, IFunctionClock {
@@ -9,6 +10,7 @@ namespace LogicCircuit {
 		private readonly int[] cellFlip;
 		private readonly int rowParameter;
 		private int flip;
+		private LogicalCircuit lastLogicalCircuit = null;
 
 		/// <summary>
 		/// Creates function. Assumes parameter layout: first goes columns states starting from column 0, bit 0 to bit 2. After all columns goes rows they are one bit wide.
@@ -16,8 +18,8 @@ namespace LogicCircuit {
 		/// <param name="circuitState"></param>
 		/// <param name="symbol"></param>
 		/// <param name="parameter"></param>
-		public FunctionLedMatrixSelector(CircuitState circuitState, CircuitSymbol symbol, int[] parameter) : base(circuitState, symbol, parameter) {
-			LedMatrix matrix = (LedMatrix)symbol.Circuit;
+		public FunctionLedMatrixSelector(CircuitState circuitState, IEnumerable<CircuitSymbol> symbols, int[] parameter) : base(circuitState, symbols, parameter) {
+			LedMatrix matrix = this.Matrix;
 			this.row = new State[matrix.Rows];
 			int columns = matrix.Columns;
 			this.column = new int[columns];
@@ -34,6 +36,16 @@ namespace LogicCircuit {
 		}
 
 		public override void Redraw() {
+			LogicalCircuit current = this.CurrentLogicalCircuit;
+			if(current != this.lastLogicalCircuit) {
+				this.lastLogicalCircuit = current;
+				for(int i = 0; i < this.row.Length; i++) {
+					this.row[i] = (State)(0xFF);
+				}
+				for(int i = 0; i < this.column.Length; i++) {
+					this.column[i] = -1;
+				}
+			}
 			// track changes in the column state parameters
 			for(int i = 0; i < this.column.Length; i++) {
 				int value = 0;
