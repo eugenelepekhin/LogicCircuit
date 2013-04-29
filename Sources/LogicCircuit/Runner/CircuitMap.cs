@@ -670,7 +670,7 @@ namespace LogicCircuit {
 					}
 				}
 				if(connected) {
-					function = new Function7Segment(circuitState, symbolMap.CircuitSymbol, param);
+					function = new Function7Segment(circuitState, CircuitMap.DisplayChain(symbolMap), param);
 				}
 			}
 			if(function != null) {

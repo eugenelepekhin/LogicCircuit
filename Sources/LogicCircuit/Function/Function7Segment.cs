@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Shapes;
 using System.Windows.Media;
@@ -10,16 +11,16 @@ namespace LogicCircuit {
 
 		private static Brush[] stateBrush = null;
 
-		public CircuitSymbol CircuitSymbol { get; private set; }
+		private List<CircuitSymbol> circuitSymbol;
 
-		public Function7Segment(CircuitState circuitState, CircuitSymbol symbol, int[] parameter) : base(circuitState, parameter) {
+		public Function7Segment(CircuitState circuitState, IEnumerable<CircuitSymbol> symbols, int[] parameter) : base(circuitState, parameter) {
 			if(Function7Segment.stateBrush == null) {
 				Function7Segment.stateBrush = new Brush[3];
 				Function7Segment.stateBrush[(int)State.Off] = (Brush)App.CurrentApp.FindResource("Led7SegmentOff");
 				Function7Segment.stateBrush[(int)State.On0] = (Brush)App.CurrentApp.FindResource("Led7SegmentOn0");
 				Function7Segment.stateBrush[(int)State.On1] = (Brush)App.CurrentApp.FindResource("Led7SegmentOn1");
 			}
-			this.CircuitSymbol = symbol;
+			this.circuitSymbol = symbols.ToList();
 		}
 
 		public bool Invalid { get; set; }
@@ -27,7 +28,14 @@ namespace LogicCircuit {
 		public override string ReportName { get { return Properties.Resources.Gate7SegName; } }
 
 		public void Redraw() {
-			Canvas back = (Canvas)this.CircuitSymbol.ProbeView;
+			Canvas back = null;
+			if(this.circuitSymbol.Count == 1) {
+				back = (Canvas)this.circuitSymbol[0].ProbeView;
+			} else {
+				LogicalCircuit currentCircuit = this.circuitSymbol[0].LogicalCircuit.CircuitProject.ProjectSet.Project.LogicalCircuit;
+				CircuitSymbol symbol = this.circuitSymbol.First(s => s.LogicalCircuit == currentCircuit);
+				back = this.ProbeView(symbol);
+			}
 			Tracer.Assert(back.Children.Count == this.BitWidth);
 			for(int i = 0; i < this.BitWidth; i++) {
 				Function7Segment.SetVisual((Shape)back.Children[i], this[i]);
@@ -55,11 +63,22 @@ namespace LogicCircuit {
 		}
 
 		public void TurnOff() {
-			if(this.CircuitSymbol.HasCreatedGlyph) {
-				Canvas back = (Canvas)this.CircuitSymbol.ProbeView;
-				for(int i = 0; i < 8; i++) {
-					Function7Segment.SetVisual((Shape)back.Children[i], State.Off);
+			foreach(CircuitSymbol symbol in this.circuitSymbol) {
+				if(symbol.HasCreatedGlyph) {
+					Canvas back = this.ProbeView(symbol);
+					for(int i = 0; i < 8; i++) {
+						Function7Segment.SetVisual((Shape)back.Children[i], State.Off);
+					}
 				}
+			}
+		}
+
+		private Canvas ProbeView(CircuitSymbol symbol) {
+			if(symbol == this.circuitSymbol[0]) {
+				return (Canvas)this.circuitSymbol[0].ProbeView;
+			} else {
+				DisplayCanvas canvas = (DisplayCanvas)symbol.Glyph;
+				return (Canvas)canvas.DisplayOf(this.circuitSymbol);
 			}
 		}
 	}
