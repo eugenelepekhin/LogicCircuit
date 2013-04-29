@@ -8,7 +8,7 @@ namespace LogicCircuit {
 		private readonly int[] cell;
 		private readonly int[] cellFlip;
 		private readonly int rowParameter;
-		private int filp;
+		private int flip;
 
 		/// <summary>
 		/// Creates function. Assumes parameter layout: first goes columns states starting from column 0, bit 0 to bit 2. After all columns goes rows they are one bit wide.
@@ -28,7 +28,7 @@ namespace LogicCircuit {
 		}
 
 		public bool Flip() {
-			this.filp++;
+			this.flip++;
 			this.Invalid = true;
 			return false;
 		}
@@ -59,7 +59,7 @@ namespace LogicCircuit {
 							if(value != 0) {
 								this.Fill(index, value);
 							} else {
-								this.cellFlip[index] = this.filp;
+								this.cellFlip[index] = this.flip;
 							}
 							this.cell[index] = value;
 						}
@@ -67,7 +67,7 @@ namespace LogicCircuit {
 						for(int j = 0; j < this.column.Length; j++) {
 							int index = i * this.column.Length + j;
 							this.cell[index] = 0;
-							this.cellFlip[index] = this.filp;
+							this.cellFlip[index] = this.flip;
 						}
 					}
 				} else if(rowState == State.On1) {
@@ -79,14 +79,14 @@ namespace LogicCircuit {
 							if(value != 0) {
 								this.Fill(index, value);
 							} else {
-								this.cellFlip[index] = this.filp;
+								this.cellFlip[index] = this.flip;
 							}
 							this.cell[index] = value;
 						}
 					}
 				}
 			}
-			int toOff = this.filp - this.row.Length;
+			int toOff = this.flip - this.row.Length;
 			for(int i = 0; i < this.cellFlip.Length; i++) {
 				if(this.cell[i] == 0 && this.cellFlip[i] == toOff) {
 					this.Fill(i, 0);
