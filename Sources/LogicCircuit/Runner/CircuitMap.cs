@@ -832,11 +832,8 @@ namespace LogicCircuit {
 		private static CircuitFunction DefineButton(CircuitState circuitState, SymbolMap symbolMap) {
 			int index = CircuitMap.SingleResult(symbolMap);
 			Tracer.Assert(0 < index);
-			FunctionButton button = new FunctionButton(circuitState, symbolMap.CircuitSymbol, index);
-			if(symbolMap.CircuitMap.displays == null) {
-				symbolMap.CircuitMap.displays = new HashSet<IFunctionVisual>();
-			}
-			symbolMap.CircuitMap.displays.Add(button);
+			FunctionButton button = new FunctionButton(circuitState, CircuitMap.DisplayChain(symbolMap), index);
+			CircuitMap.UpdateDisplays(symbolMap, button);
 			return button;
 		}
 

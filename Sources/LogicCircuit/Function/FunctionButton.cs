@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -7,13 +9,13 @@ namespace LogicCircuit {
 
 		private static Brush[] stateBrush = null;
 
-		private CircuitSymbol circuitSymbol;
-		public bool IsToggle { get; private set; }
+		private List<CircuitSymbol> circuitSymbol;
+		private bool isToggle;
 
-		public FunctionButton(CircuitState circuitState, CircuitSymbol symbol, int result) : base(circuitState, State.On0, result) {
-			this.circuitSymbol = symbol;
-			this.IsToggle = ((CircuitButton)symbol.Circuit).IsToggle;
-			if(this.IsToggle && FunctionButton.stateBrush == null) {
+		public FunctionButton(CircuitState circuitState, IEnumerable<CircuitSymbol> symbols, int result) : base(circuitState, State.On0, result) {
+			this.circuitSymbol = symbols.ToList();
+			this.isToggle = ((CircuitButton)this.circuitSymbol[0].Circuit).IsToggle;
+			if(this.isToggle && FunctionButton.stateBrush == null) {
 				FunctionButton.stateBrush = new Brush[] {
 					(Brush)App.CurrentApp.FindResource("Led7SegmentOff"),
 					(Brush)App.CurrentApp.FindResource("Led7SegmentOn0"),
@@ -27,7 +29,7 @@ namespace LogicCircuit {
 		public override string ReportName { get { return Properties.Resources.NameButton; } }
 
 		private void SymbolPress() {
-			if(this.IsToggle) {
+			if(this.isToggle) {
 				this.SetState(CircuitFunction.Not(this.State));
 				this.Invalid = true;
 			} else {
@@ -36,7 +38,7 @@ namespace LogicCircuit {
 		}
 
 		private void SymbolRelease() {
-			if(!this.IsToggle) {
+			if(!this.isToggle) {
 				this.SetState(State.On0);
 			}
 		}
@@ -50,28 +52,54 @@ namespace LogicCircuit {
 		}
 
 		public void TurnOn() {
-			ButtonControl button = (ButtonControl)this.circuitSymbol.ProbeView;
-			button.ButtonStateChanged = this.StateChangedAction;
+			foreach(CircuitSymbol symbol in this.circuitSymbol) {
+				if(symbol.HasCreatedGlyph) {
+					ButtonControl button = this.ProbeView(symbol);
+					button.ButtonStateChanged = this.StateChangedAction;
+					this.DrawState(button, State.Off);
+				}
+			}
 		}
 
 		public void TurnOff() {
-			if(this.circuitSymbol.HasCreatedGlyph) {
-				ButtonControl button = (ButtonControl)this.circuitSymbol.ProbeView;
-				button.ButtonStateChanged = null;
-				this.DrawState(State.Off);
+			foreach(CircuitSymbol symbol in this.circuitSymbol) {
+				if(symbol.HasCreatedGlyph) {
+					ButtonControl button = this.ProbeView(symbol);
+					button.ButtonStateChanged = null;
+					this.DrawState(button, State.Off);
+				}
 			}
 		}
 
 		public void Redraw() {
-			this.DrawState(this.State);
+			if(this.isToggle) {
+				ButtonControl button = null;
+				if(this.circuitSymbol.Count == 1) {
+					button = (ButtonControl)this.circuitSymbol[0].ProbeView;
+				} else {
+					LogicalCircuit currentCircuit = this.circuitSymbol[0].LogicalCircuit.CircuitProject.ProjectSet.Project.LogicalCircuit;
+					CircuitSymbol symbol = this.circuitSymbol.First(s => s.LogicalCircuit == currentCircuit);
+					button = this.ProbeView(symbol);
+				}
+				this.DrawState(button, this.State);
+			}
 		}
 
-		private void DrawState(State state) {
-			if(this.IsToggle) {
-				Canvas canvas = (Canvas)this.circuitSymbol.Glyph;
-				Border border = (Border)canvas.Children[2];
+		private void DrawState(ButtonControl button, State state) {
+			if(this.isToggle) {
+				Canvas canvas = (Canvas)button.Parent;
+				Border border = (Border)canvas.Children[canvas.Children.Count - 1];
 				Tracer.Assert(border != null);
 				border.Background = FunctionButton.stateBrush[(int)state];
+			}
+		}
+
+		private ButtonControl ProbeView(CircuitSymbol symbol) {
+			if(symbol == this.circuitSymbol[0]) {
+				return (ButtonControl)this.circuitSymbol[0].ProbeView;
+			} else {
+				DisplayCanvas canvas = (DisplayCanvas)symbol.Glyph;
+				return (ButtonControl)canvas.DisplayOf(this.circuitSymbol);
 			}
 		}
 	}

@@ -48,7 +48,7 @@ namespace LogicCircuit.UnitTest {
 
 			CircuitState target = new CircuitState(3);
 			int buttonResult = target.ReserveState();
-			FunctionButton functionButton = new FunctionButton(target, buttonSymbol, buttonResult);
+			FunctionButton functionButton = new FunctionButton(target, new CircuitSymbol[] { buttonSymbol }, buttonResult);
 			FunctionLed functionLed = new FunctionLed(target, new CircuitSymbol[] { ledSymbol }, buttonResult);
 			target.EndDefinition();
 
