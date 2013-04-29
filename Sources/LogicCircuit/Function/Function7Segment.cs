@@ -11,7 +11,10 @@ namespace LogicCircuit {
 
 		private static Brush[] stateBrush = null;
 
-		private List<CircuitSymbol> circuitSymbol;
+		private readonly List<CircuitSymbol> circuitSymbol;
+		private readonly Project project;
+		private LogicalCircuit lastLogicalCircuit = null;
+		private Canvas lastBack;
 
 		public Function7Segment(CircuitState circuitState, IEnumerable<CircuitSymbol> symbols, int[] parameter) : base(circuitState, parameter) {
 			if(Function7Segment.stateBrush == null) {
@@ -21,6 +24,7 @@ namespace LogicCircuit {
 				Function7Segment.stateBrush[(int)State.On1] = (Brush)App.CurrentApp.FindResource("Led7SegmentOn1");
 			}
 			this.circuitSymbol = symbols.ToList();
+			this.project = this.circuitSymbol[0].LogicalCircuit.CircuitProject.ProjectSet.Project;
 		}
 
 		public bool Invalid { get; set; }
@@ -28,17 +32,22 @@ namespace LogicCircuit {
 		public override string ReportName { get { return Properties.Resources.Gate7SegName; } }
 
 		public void Redraw() {
-			Canvas back = null;
-			if(this.circuitSymbol.Count == 1) {
-				back = (Canvas)this.circuitSymbol[0].ProbeView;
-			} else {
-				LogicalCircuit currentCircuit = this.circuitSymbol[0].LogicalCircuit.CircuitProject.ProjectSet.Project.LogicalCircuit;
-				CircuitSymbol symbol = this.circuitSymbol.First(s => s.LogicalCircuit == currentCircuit);
-				back = this.ProbeView(symbol);
+			LogicalCircuit currentCircuit = this.project.LogicalCircuit;
+			if(this.lastLogicalCircuit != currentCircuit) {
+				this.lastLogicalCircuit = currentCircuit;
+				this.lastBack = null;
 			}
-			Tracer.Assert(back.Children.Count == this.BitWidth);
+			if(this.lastBack == null) {
+				if(this.circuitSymbol.Count == 1) {
+					this.lastBack = (Canvas)this.circuitSymbol[0].ProbeView;
+				} else {
+					CircuitSymbol symbol = this.circuitSymbol.First(s => s.LogicalCircuit == currentCircuit);
+					this.lastBack = this.ProbeView(symbol);
+				}
+				Tracer.Assert(this.lastBack.Children.Count == this.BitWidth);
+			}
 			for(int i = 0; i < this.BitWidth; i++) {
-				Function7Segment.SetVisual((Shape)back.Children[i], this[i]);
+				Function7Segment.SetVisual((Shape)this.lastBack.Children[i], this[i]);
 			}
 		}
 

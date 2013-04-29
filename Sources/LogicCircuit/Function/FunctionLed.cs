@@ -10,7 +10,10 @@ namespace LogicCircuit {
 
 		private static Brush[] stateBrush = null;
 
-		private List<CircuitSymbol> circuitSymbol;
+		private readonly List<CircuitSymbol> circuitSymbol;
+		private readonly Project project;
+		private LogicalCircuit lastLogicalCircuit = null;
+		private Shape lastShape;
 
 		public FunctionLed(CircuitState circuitState, IEnumerable<CircuitSymbol> symbols, int parameter) : base(circuitState, parameter) {
 			if(FunctionLed.stateBrush == null) {
@@ -20,6 +23,7 @@ namespace LogicCircuit {
 				FunctionLed.stateBrush[(int)State.On1] = (Brush)App.CurrentApp.FindResource("LedOn1");
 			}
 			this.circuitSymbol = symbols.ToList();
+			this.project = this.circuitSymbol[0].LogicalCircuit.CircuitProject.ProjectSet.Project;
 		}
 
 		public bool Invalid { get; set; }
@@ -27,15 +31,20 @@ namespace LogicCircuit {
 		public override string ReportName { get { return Properties.Resources.GateLedName; } }
 
 		public void Redraw() {
-			Shape shape = null;
-			if(this.circuitSymbol.Count == 1) {
-				shape = (Shape)this.circuitSymbol[0].ProbeView;
-			} else {
-				LogicalCircuit currentCircuit = this.circuitSymbol[0].LogicalCircuit.CircuitProject.ProjectSet.Project.LogicalCircuit;
-				CircuitSymbol symbol = this.circuitSymbol.First(s => s.LogicalCircuit == currentCircuit);
-				shape = this.ProbeView(symbol);
+			LogicalCircuit currentCircuit = this.project.LogicalCircuit;
+			if(this.lastLogicalCircuit != currentCircuit) {
+				this.lastLogicalCircuit = currentCircuit;
+				this.lastShape = null;
 			}
-			shape.Fill = FunctionLed.stateBrush[(int)this[0]];
+			if(this.lastShape == null) {
+				if(this.circuitSymbol.Count == 1) {
+					this.lastShape = (Shape)this.circuitSymbol[0].ProbeView;
+				} else {
+					CircuitSymbol symbol = this.circuitSymbol.First(s => s.LogicalCircuit == currentCircuit);
+					this.lastShape = this.ProbeView(symbol);
+				}
+			}
+			this.lastShape.Fill = FunctionLed.stateBrush[(int)this[0]];
 		}
 
 		public override bool Evaluate() {
