@@ -2291,7 +2291,7 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to _Symbol is display.
+		/// Looks up a localized string similar to Circuit i_s Display Block.
 		/// </summary>
  		public static string TitleIsDisplay {
 			get { return ResourceManager.GetString("TitleIsDisplay", Culture); }
@@ -2515,8 +2515,9 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to When you mark Logical Circuit as Display
-		/// all display symbols will be visible on it's symbol..
+		/// Looks up a localized string similar to When you mark Logic Circuit as Display Block
+		/// all display symbols on this circuit will visible alive on its symbols.
+		/// Displays are: LED, LED Matrix, Button, or other Logic Circuit that is Display..
 		/// </summary>
  		public static string ToolTipIsDisplay {
 			get { return ResourceManager.GetString("ToolTipIsDisplay", Culture); }
