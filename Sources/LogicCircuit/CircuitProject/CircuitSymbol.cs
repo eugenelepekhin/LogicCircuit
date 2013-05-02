@@ -22,6 +22,9 @@ namespace LogicCircuit {
 			if(pin != null) {
 				pin.LogicalCircuit.ResetPins();
 			}
+			if(this.LogicalCircuit.IsDisplay && (pin != null || this.Circuit.IsDisplay)) {
+				this.CircuitProject.LogicalCircuitSet.Invalidate(this.LogicalCircuit);
+			}
 			this.PositionGlyph();
 		}
 
@@ -63,6 +66,12 @@ namespace LogicCircuit {
 		public override void Invalidate() {
 			this.CircuitProject.CircuitSymbolSet.Invalidate(this);
 		}
+
+		#if DEBUG
+			public override string ToString() {
+				return string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0} of {1}{2} on \"{3}\"", this.GetType().Name, this.Circuit.Notation, this.Point, this.LogicalCircuit.Name);
+			}
+		#endif
 	}
 
 	[SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]

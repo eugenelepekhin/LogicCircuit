@@ -51,6 +51,7 @@ namespace LogicCircuit {
 			this.Mainframe = mainframe;
 			this.CircuitProject = circuitProject;
 			this.Project.PropertyChanged += new PropertyChangedEventHandler(this.ProjectPropertyChanged);
+			this.CircuitProject.LogicalCircuitSet.CollectionChanged += new NotifyCollectionChangedEventHandler(this.LogicalCircuitSetCollectionChanged);
 			this.CircuitProject.CircuitSymbolSet.CollectionChanged += new NotifyCollectionChangedEventHandler(this.CircuitSymbolSetCollectionChanged);
 			this.CircuitProject.WireSet.CollectionChanged += new NotifyCollectionChangedEventHandler(this.WireSetCollectionChanged);
 			this.CircuitProject.WireSet.WireSetChanged += new EventHandler(this.WireSetChanged);
@@ -64,18 +65,7 @@ namespace LogicCircuit {
 		protected abstract void UpdateGlyph(LogicalCircuit logicalCircuit);
 
 		private void CircuitProjectVersionChanged(object sender, VersionChangeEventArgs e) {
-			HashSet<LogicalCircuit> updated = new HashSet<LogicalCircuit>();
-			if(this.UpdateAllRequared(e)) {
-				foreach(LogicalCircuit circuit in this.CircuitProject.LogicalCircuitSet) {
-					this.UpdateDisplay(circuit, updated);
-				}
-				foreach(CircuitSymbol symbol in this.CircuitProject.CircuitSymbolSet) {
-					symbol.Reset();
-				}
-				this.refreshPending = true;
-			} else {
-				this.UpdateDisplay(this.Project.LogicalCircuit, updated);
-			}
+			this.UpdateAllDisplay();
 			if(this.refreshPending) {
 				this.refreshPending = false;
 				this.Refresh();
@@ -95,17 +85,19 @@ namespace LogicCircuit {
 				}
 			}
 			this.CircuitProject.CircuitSymbolSet.ValidateAll();
+			if(this.CircuitProject.Version == this.Project.LogicalCircuit.PinVersion) {
+				this.UpdateGlyph(this.Project.LogicalCircuit);
+			}
 		}
 
-		private bool UpdateAllRequared(VersionChangeEventArgs e) {
-			IEnumerator<string> updated = this.CircuitProject.AffectedTables(e.NewVersion, e.NewVersion);
-			string name = this.CircuitProject.LogicalCircuitSet.Table.Name;
-			while(updated.MoveNext()) {
-				if(updated.Current == name) {
-					return true;
+		private void UpdateAllDisplay() {
+			if(this.InEditMode) {
+				HashSet<LogicalCircuit> updated = new HashSet<LogicalCircuit>();
+				foreach(LogicalCircuit circuit in this.CircuitProject.LogicalCircuitSet.Invalid) {
+					this.UpdateDisplay(circuit, updated);
 				}
+				this.CircuitProject.LogicalCircuitSet.ValidateAll();
 			}
-			return false;
 		}
 
 		private void UpdateDisplay(LogicalCircuit display, HashSet<LogicalCircuit> updated) {
@@ -114,7 +106,8 @@ namespace LogicCircuit {
 				this.UpdateGlyph(display);
 				foreach(CircuitSymbol symbol in this.CircuitProject.CircuitSymbolSet.SelectByCircuit(display)) {
 					symbol.ResetJams();
-					this.UpdateGlyph(symbol.LogicalCircuit);
+					symbol.Reset();
+					symbol.Invalidate();
 					if(symbol.LogicalCircuit.IsDisplay) {
 						this.UpdateDisplay(symbol.LogicalCircuit, updated);
 					}
@@ -141,7 +134,15 @@ namespace LogicCircuit {
 			}
 		}
 
+		private void LogicalCircuitSetCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
+			// As it is not possible to check if deleted was display or not, lets invalidate all displays.
+			foreach(LogicalCircuit circuit in this.CircuitProject.LogicalCircuitSet.Where(c => c.IsDisplay)) {
+				this.CircuitProject.LogicalCircuitSet.Invalidate(circuit);
+			}
+		}
+
 		private void CircuitSymbolSetCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
+			bool invalidateAllDisplays = false;
 			if(!this.refreshPending) {
 				if(e.OldItems != null && 0 < e.OldItems.Count) {
 					foreach(CircuitSymbol symbol in e.OldItems) {
@@ -153,6 +154,12 @@ namespace LogicCircuit {
 							}
 							Tracer.Assert(glyph.Parent == null);
 						}
+						LogicalCircuit circuit = symbol.CachedLogicCircuit;
+						if(circuit != null && !circuit.IsDeleted() && circuit.IsDisplay) {
+							this.CircuitProject.LogicalCircuitSet.Invalidate(circuit);
+						} else if(circuit == null) {
+							invalidateAllDisplays = true;
+						}
 					}
 				}
 				if(e.NewItems != null && 0 < e.NewItems.Count) {
@@ -161,7 +168,15 @@ namespace LogicCircuit {
 						if(symbol.LogicalCircuit == current) {
 							this.Add(symbol);
 						}
+						if(symbol.LogicalCircuit.IsDisplay && (symbol.Circuit.IsDisplay || symbol.Circuit is Pin)) {
+							this.CircuitProject.LogicalCircuitSet.Invalidate(symbol.LogicalCircuit);
+						}
 					}
+				}
+			}
+			if(invalidateAllDisplays) {
+				foreach(LogicalCircuit circuit in this.CircuitProject.LogicalCircuitSet.Where(c => c.IsDisplay)) {
+					this.CircuitProject.LogicalCircuitSet.Invalidate(circuit);
 				}
 			}
 		}

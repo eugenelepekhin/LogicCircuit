@@ -48,8 +48,9 @@ namespace LogicCircuit {
 			foreach(CircuitSymbol symbol in this.circuitSymbol) {
 				if(symbol.HasCreatedGlyph) {
 					ButtonControl button = this.ProbeView(symbol);
+					bool turnedOff = (button.ButtonStateChanged == null);
 					button.ButtonStateChanged = this.StateChangedAction;
-					if(this.isToggle) {
+					if(turnedOff && this.isToggle) {
 						FunctionButton.DrawState(button, State.Off);
 					}
 				}

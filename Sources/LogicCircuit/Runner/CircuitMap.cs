@@ -394,6 +394,14 @@ namespace LogicCircuit {
 					}
 				}
 				this.turnedOn = true;
+			} else if(this.displays != null) {
+				// When switching to map that already was turned on buttons still need to be initiated with current functions.
+				foreach(IFunctionVisual func in this.displays) {
+					FunctionButton button = func as FunctionButton;
+					if(button != null) {
+						button.TurnOn();
+					}
+				}
 			}
 		}
 

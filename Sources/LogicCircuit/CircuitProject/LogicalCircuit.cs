@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Windows;
@@ -132,17 +133,42 @@ namespace LogicCircuit {
 				symbol.Invalidate();
 			}
 		}
+
+		#if DEBUG
+			public override string ToString() {
+				return string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}: \"{1}\"", this.GetType().Name, this.Name);
+			}
+		#endif
 	}
 
 	[SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
 	public sealed partial class LogicalCircuitSet : NamedItemSet {
 		public event EventHandler LogicalCircuitSetChanged;
 
+		private HashSet<LogicalCircuit> invalid = new HashSet<LogicalCircuit>();
+		public IEnumerable<LogicalCircuit> Invalid { get { return this.invalid; } }
+		public void Invalidate(LogicalCircuit circuit) {
+			if(!circuit.IsDeleted()) {
+				this.invalid.Add(circuit);
+			}
+		}
+		public void ValidateAll() {
+			this.invalid.Clear();
+		}
+
 		private LogicalCircuit Register(RowId rowId) {
 			CircuitData data = new CircuitData() {
 				CircuitId = this.Table.GetField(rowId, LogicalCircuitData.LogicalCircuitIdField.Field)
 			};
-			return this.Create(rowId, this.CircuitProject.CircuitTable.Insert(ref data));
+			LogicalCircuit circuit = this.Create(rowId, this.CircuitProject.CircuitTable.Insert(ref data));
+			circuit.PropertyChanged += new PropertyChangedEventHandler(this.CircuitPropertyChanged);
+			return circuit;
+		}
+
+		private void CircuitPropertyChanged(object sender, PropertyChangedEventArgs e) {
+			if(e.PropertyName == "IsDisplay") {
+				this.Invalidate((LogicalCircuit)sender);
+			}
 		}
 
 		protected override bool Exists(string name) {
@@ -159,13 +185,15 @@ namespace LogicCircuit {
 
 		public LogicalCircuit Create() {
 			string name = this.UniqueName(Properties.Resources.LogicalCircuitName);
-			return this.CreateItem(Guid.NewGuid(),
+			LogicalCircuit circuit = this.CreateItem(Guid.NewGuid(),
 				name,
 				name,
 				LogicalCircuitData.DescriptionField.Field.DefaultValue,
 				LogicalCircuitData.CategoryField.Field.DefaultValue,
 				LogicalCircuitData.IsDisplayField.Field.DefaultValue
 			);
+			circuit.PropertyChanged += new PropertyChangedEventHandler(this.CircuitPropertyChanged);
+			return circuit;
 		}
 
 		public LogicalCircuit Copy(LogicalCircuit other, bool deepCopy) {

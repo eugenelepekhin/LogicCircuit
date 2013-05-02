@@ -201,6 +201,7 @@ namespace LogicCircuit {
 				this.logicalCircuit = this.SymbolLogicalCircuit = value;
 			}
 		}
+		public LogicalCircuit CachedLogicCircuit { get { return this.logicalCircuit; } }
 
 		public abstract void Shift(int dx, int dy);
 		public abstract int Z { get; }
