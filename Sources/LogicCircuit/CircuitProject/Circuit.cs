@@ -158,6 +158,12 @@ namespace LogicCircuit {
 			}
 			return mandatoryPart;
 		}
+
+		#if DEBUG
+			public override string ToString() {
+				return string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}: \"{1}\"", this.GetType().Name, this.Name);
+			}
+		#endif
 	}
 
 	[SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]

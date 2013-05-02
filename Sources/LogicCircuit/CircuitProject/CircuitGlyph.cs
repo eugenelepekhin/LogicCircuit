@@ -99,11 +99,6 @@ namespace LogicCircuit {
 
 		public void ResetJams() {
 			this.isUpdated = false;
-			//this.NotifyPropertyChanged("Left");
-			//this.NotifyPropertyChanged("Top");
-			//this.NotifyPropertyChanged("Right");
-			//this.NotifyPropertyChanged("Bottom");
-			//this.NotifyPropertyChanged("Glyph");
 			this.Invalidate();
 		}
 

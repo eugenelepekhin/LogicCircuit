@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Windows;
 using System.Windows.Markup;
@@ -201,6 +202,7 @@ namespace LogicCircuit {
 				this.logicalCircuit = this.SymbolLogicalCircuit = value;
 			}
 		}
+		[SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "LogicCircuit")]
 		public LogicalCircuit CachedLogicCircuit { get { return this.logicalCircuit; } }
 
 		public abstract void Shift(int dx, int dy);
