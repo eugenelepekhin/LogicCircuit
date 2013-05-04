@@ -37,7 +37,7 @@ namespace LogicCircuit {
 					Directory.CreateDirectory(dir);
 				}
 			}
-			return new StreamWriter(fileName);
+			return new StreamWriter(fileName, false, Encoding.UTF8);
 		}
 
 		public static XmlWriter CreateWriter(TextWriter textWriter) {
