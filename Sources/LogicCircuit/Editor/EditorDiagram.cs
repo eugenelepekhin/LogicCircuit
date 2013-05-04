@@ -106,7 +106,6 @@ namespace LogicCircuit {
 				this.UpdateGlyph(display);
 				foreach(CircuitSymbol symbol in this.CircuitProject.CircuitSymbolSet.SelectByCircuit(display)) {
 					symbol.ResetJams();
-					symbol.Reset();
 					symbol.Invalidate();
 					if(symbol.LogicalCircuit.IsDisplay) {
 						this.UpdateDisplay(symbol.LogicalCircuit, updated);

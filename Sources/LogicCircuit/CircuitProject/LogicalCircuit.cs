@@ -82,10 +82,13 @@ namespace LogicCircuit {
 		}
 		
 		public bool ContainsDisplays() {
-			if(!this.HasDisplayLoop(new HashSet<LogicalCircuit>())) {
-				return this.CircuitSymbols().Any(symbol => symbol.Circuit.IsDisplay);
-			}
-			return false;
+			return !this.HasDisplayLoop(new HashSet<LogicalCircuit>()) && this.CircuitSymbols().Any(symbol => {
+				if(symbol.Circuit.IsDisplay) {
+					LogicalCircuit lc = symbol.Circuit as LogicalCircuit;
+					return lc == null || lc.ContainsDisplays();
+				}
+				return false;
+			});
 		}
 
 		private Rect DisplayBounds() {
