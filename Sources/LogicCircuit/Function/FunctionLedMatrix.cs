@@ -9,10 +9,10 @@ namespace LogicCircuit {
 	public abstract class FunctionLedMatrix : Probe, IFunctionVisual {
 		private static Brush[] brush;
 
-		private List<CircuitSymbol> circuitSymbol;
+		private readonly List<CircuitSymbol> circuitSymbol;
+		private readonly Project project;
 		protected LedMatrix Matrix { get; private set; }
 		protected int BitPerLed { get; private set; }
-		private Project project;
 		protected LogicalCircuit CurrentLogicalCircuit { get { return this.project.LogicalCircuit; } }
 
 		public bool Invalid { get; set; }
