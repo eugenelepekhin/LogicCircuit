@@ -23,6 +23,7 @@ namespace LogicCircuit {
 			"it-IT",
 			"ko-KR",
 			"nl",
+			"pt-BR",
 			"ru-RU",
 			"uk-UA",
 		};
