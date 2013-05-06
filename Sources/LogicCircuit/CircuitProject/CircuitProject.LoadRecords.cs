@@ -85,6 +85,7 @@ namespace LogicCircuit {
 			loaders.Add(nameTable.Add(this.CollapsedCategorySet.Table.Name), this.CollapsedCategorySet.CreateRecordLoader(nameTable));
 			loaders.Add(nameTable.Add(this.LogicalCircuitSet   .Table.Name), this.LogicalCircuitSet   .CreateRecordLoader(nameTable));
 			loaders.Add(nameTable.Add(this.PinSet              .Table.Name), this.PinSet              .CreateRecordLoader(nameTable));
+			loaders.Add(nameTable.Add(this.CircuitProbeSet     .Table.Name), this.CircuitProbeSet     .CreateRecordLoader(nameTable));
 			loaders.Add(nameTable.Add(this.ConstantSet         .Table.Name), this.ConstantSet         .CreateRecordLoader(nameTable));
 			loaders.Add(nameTable.Add(this.CircuitButtonSet    .Table.Name), this.CircuitButtonSet    .CreateRecordLoader(nameTable));
 			loaders.Add(nameTable.Add(this.MemorySet           .Table.Name), this.MemorySet           .CreateRecordLoader(nameTable));
@@ -128,6 +129,7 @@ namespace LogicCircuit {
 			CircuitProject.SaveRecords(xmlWriter, this.CollapsedCategorySet.Table);
 			CircuitProject.SaveRecords(xmlWriter, this.LogicalCircuitSet.Table   );
 			CircuitProject.SaveRecords(xmlWriter, this.PinSet.Table              );
+			CircuitProject.SaveRecords(xmlWriter, this.CircuitProbeSet.Table     );
 			CircuitProject.SaveRecords(xmlWriter, this.ConstantSet.Table         );
 			CircuitProject.SaveRecords(xmlWriter, this.CircuitButtonSet.Table    );
 			CircuitProject.SaveRecords(xmlWriter, this.MemorySet.Table           );

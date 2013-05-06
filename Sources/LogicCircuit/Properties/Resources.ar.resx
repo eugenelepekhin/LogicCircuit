@@ -387,7 +387,7 @@
   <data name="ToolTipFontSize" xml:space="preserve">
     <value>حجم النص</value>
   </data>
-  <data name="GateProbeName" xml:space="preserve">
+  <data name="CircuitProbeName" xml:space="preserve">
     <value>مجس</value>
   </data>
   <data name="Loading" xml:space="preserve">

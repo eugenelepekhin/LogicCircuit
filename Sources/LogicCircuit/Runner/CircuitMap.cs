@@ -82,8 +82,18 @@ namespace LogicCircuit {
 			Tracer.Assert(circuitSymbol.LogicalCircuit == this.Circuit);
 			this.Path(text);
 			text.Append(Properties.Resources.CircuitMapPathSeparator);
-			text.Append(circuitSymbol.Circuit.Name);
-			text.Append(circuitSymbol.Point.ToString());
+			CircuitProbe probe = circuitSymbol.Circuit as CircuitProbe;
+			if(probe != null) {
+				if(probe.HasName) {
+					text.Append(probe.DisplayName);
+				} else {
+					text.Append(Properties.Resources.CircuitProbeNotation);
+					text.Append(circuitSymbol.Point.ToString());
+				}
+			} else {
+				text.Append(circuitSymbol.Circuit.Name);
+				text.Append(circuitSymbol.Point.ToString());
+			}
 		}
 
 		public string Path() {
@@ -194,8 +204,7 @@ namespace LogicCircuit {
 									foreach(Jam inJam in list) {
 										if(inJam != outJam) {
 											if(inJam.Pin.BitWidth != outJam.Pin.BitWidth) {
-												Gate gate = inJam.CircuitSymbol.Circuit as Gate;
-												if(gate == null || gate.GateType != GateType.Probe) {
+												if(!(inJam.CircuitSymbol.Circuit is CircuitProbe)) {
 													throw new CircuitException(Cause.UserError,
 														Properties.Resources.ErrorJamBitWidthDifferent(
 															inJam.CircuitSymbol.Circuit.Name, inJam.CircuitSymbol.Point,
@@ -476,7 +485,7 @@ namespace LogicCircuit {
 		}
 
 		private static bool IsPrimitive(Circuit circuit) {
-			return circuit is Gate || circuit is CircuitButton || circuit is Constant || circuit is Memory || circuit is LedMatrix;
+			return circuit is Gate || circuit is CircuitProbe || circuit is CircuitButton || circuit is Constant || circuit is Memory || circuit is LedMatrix;
 		}
 
 		private bool HasLoop(LogicalCircuit circuit) {
@@ -510,9 +519,6 @@ namespace LogicCircuit {
 				case GateType.Led:
 					CircuitMap.DefineLed(circuitState, symbolMap);
 					break;
-				case GateType.Probe:
-					CircuitMap.DefineProbe(circuitState, symbolMap, probeCapacity);
-					break;
 				case GateType.TriState:
 					CircuitMap.DefineTriState(circuitState, symbolMap);
 					break;
@@ -521,6 +527,8 @@ namespace LogicCircuit {
 					Tracer.Fail();
 					break;
 				}
+			} else if(symbolMap.CircuitSymbol.Circuit is CircuitProbe) {
+				CircuitMap.DefineProbe(circuitState, symbolMap, probeCapacity);
 			} else if(symbolMap.CircuitSymbol.Circuit is CircuitButton) {
 				CircuitMap.DefineButton(circuitState, symbolMap);
 			} else if(symbolMap.CircuitSymbol.Circuit is Constant) {

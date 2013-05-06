@@ -34,7 +34,6 @@ namespace LogicCircuit {
 			Tracer.Assert(defaultWidth == (this.GateType == LogicCircuit.GateType.TriState ? 2 : 1));
 			switch(this.GateType) {
 			case LogicCircuit.GateType.Clock:
-			case LogicCircuit.GateType.Probe:
 				return base.CircuitSymbolWidth(defaultWidth);
 			case LogicCircuit.GateType.Led:
 				if(this.Pins.Count() == 1) {
@@ -48,7 +47,6 @@ namespace LogicCircuit {
 		protected override int CircuitSymbolHeight(int defaultHeight) {
 			switch(this.GateType) {
 			case LogicCircuit.GateType.Clock:
-			case LogicCircuit.GateType.Probe:
 				return base.CircuitSymbolHeight(defaultHeight);
 			case LogicCircuit.GateType.Led:
 				if(this.Pins.Count() == 1) {
@@ -68,6 +66,7 @@ namespace LogicCircuit {
 				break;
 			case GateType.Odd:
 			case GateType.Even:
+			case GateType.Probe:
 				Tracer.Fail();
 				return null;
 			case GateType.Led:
@@ -77,9 +76,6 @@ namespace LogicCircuit {
 					Tracer.Assert(this.InputCount == 8);
 					skin = SymbolShape.SevenSegment;
 				}
-				break;
-			case GateType.Probe:
-				skin = SymbolShape.Probe;
 				break;
 			default:
 				if(Settings.User.GateShape == GateShape.Rectangular) {
@@ -130,7 +126,7 @@ namespace LogicCircuit {
 	[SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
 	public partial class GateSet {
 		private static bool IsValid(GateType gateType) {
-			return Enum.IsDefined(typeof(GateType), gateType) && gateType != GateType.Odd && gateType != GateType.Even;
+			return Enum.IsDefined(typeof(GateType), gateType) && gateType != GateType.Odd && gateType != GateType.Even && gateType != GateType.Probe;
 		}
 
 		private static bool IsValid(GateType gateType, int inputCount) {
@@ -147,12 +143,11 @@ namespace LogicCircuit {
 				return 1 < inputCount && inputCount <= LogicCircuit.Gate.MaxInputCount;
 			case GateType.Led:
 				return inputCount == 1 || inputCount == 8;
-			case GateType.Probe:
-				return inputCount == 1;
 			case GateType.TriState:
 				return inputCount == 2;
 			case GateType.Odd:
 			case GateType.Even:
+			case GateType.Probe:
 				Tracer.Fail();
 				return false;
 			default:
@@ -162,7 +157,7 @@ namespace LogicCircuit {
 
 		private static bool HasOutput(GateType gateType) {
 			Tracer.Assert(GateSet.IsValid(gateType));
-			return gateType != GateType.Nop && gateType != GateType.Led && gateType != GateType.Probe;
+			return gateType != GateType.Nop && gateType != GateType.Led;
 		}
 
 		public Gate Gate(GateType gateType, int inputCount, bool invertedOutput) {
@@ -241,11 +236,6 @@ namespace LogicCircuit {
 				gate.Notation = Properties.Resources.GateLedNotation;
 				gate.Category = Properties.Resources.CategoryInputOutput;
 				break;
-			case GateType.Probe:
-				gate.Name = Properties.Resources.GateProbeName;
-				gate.Notation = Properties.Resources.GateProbeNotation;
-				gate.Category = Properties.Resources.CategoryInputOutput;
-				break;
 			case GateType.TriState:
 				gate.Name = Properties.Resources.GateTriStateName;
 				gate.Notation = Properties.Resources.GateTriStateNotation;
@@ -253,6 +243,7 @@ namespace LogicCircuit {
 				break;
 			case GateType.Odd:
 			case GateType.Even:
+			case GateType.Probe:
 			default:
 				Tracer.Fail();
 				break;

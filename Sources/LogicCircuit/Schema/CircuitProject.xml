@@ -17,7 +17,7 @@
 		Version 2.0.0.3 - Adding note field to button and constant. Adding LedMatrix circuits.
 		Version 2.0.0.4 - removing Odd and Even functions and replace them with XOR and XOR NOT
 		Version 2.0.0.5 - Adding MemoryOnStart to memory circuits
-		Version 2.0.0.6 - Adding IsDisplay property to LogicalCircuit
+		Version 2.0.0.6 - Adding IsDisplay property to LogicalCircuit. Making Probe separate circuit to enable naming of it.
 	-->
 
 	<Table Name="Project">
@@ -167,6 +167,23 @@
 
 			<Key Name="IX_Circuit_Pin" KeyType="Index">
 				<Column Name="CircuitId"/>
+			</Key>
+		</Table.Keys>
+	</Table>
+
+	<Table Name="CircuitProbe">
+		<Table.Columns>
+			<Column Name="CircuitProbeId" Type="Guid" ReadOnly="true"/>
+			<Column Name="Name" Type="string" Default="" Check="this.CheckName" PropertyOverrides="true"/>
+			<Column Name="Note" Type="string" Default=""/>
+		</Table.Columns>
+
+		<Table.Keys>
+			<Key Name="PK_CircuitProbe" KeyType="Subclass" ParentName="Circuit" Action="Cascade">
+				<Column Name="CircuitProbeId"/>
+			</Key>
+			<Key Name="AK_CircuitProbe_Name" KeyType="Unique">
+				<Column Name="Name"/>
 			</Key>
 		</Table.Keys>
 	</Table>

@@ -350,7 +350,7 @@
   <data name="GateOrNotName" xml:space="preserve">
     <value>Или-Не</value>
   </data>
-  <data name="GateProbeName" xml:space="preserve">
+  <data name="CircuitProbeName" xml:space="preserve">
     <value>Пробник</value>
   </data>
   <data name="GateShapeRectangular" xml:space="preserve">

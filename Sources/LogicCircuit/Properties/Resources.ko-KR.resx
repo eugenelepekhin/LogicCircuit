@@ -416,7 +416,7 @@
   <data name="GateClockName" xml:space="preserve">
     <value>클럭</value>
   </data>
-  <data name="GateProbeName" xml:space="preserve">
+  <data name="CircuitProbeName" xml:space="preserve">
     <value>프로브</value>
   </data>
   <data name="GateShapeShaped" xml:space="preserve">

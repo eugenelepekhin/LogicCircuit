@@ -158,7 +158,6 @@ namespace LogicCircuit {
 			case GateType.Clock:
 			case GateType.Not:
 			case GateType.Led:
-			case GateType.Probe:
 			case GateType.TriState:
 				this.InputCountRangeLength = 0;
 				break;
@@ -177,6 +176,21 @@ namespace LogicCircuit {
 
 		protected override Gate GetCircuitToDrop(CircuitProject circuitProject) {
 			return circuitProject.GateSet.Gate(this.Circuit.GateType, this.InputCount, this.Circuit.InvertedOutput);
+		}
+	}
+
+	public class ProbeDescriptor : IOCircuitDescriptor<CircuitProbe> {
+		public string Name { get; set; }
+
+		public ProbeDescriptor(CircuitProject circuitProject) : base(circuitProject.CircuitProbeSet.Create(null)) {
+			this.Name = string.Empty;
+		}
+
+		protected override CircuitProbe GetCircuitToDrop(CircuitProject circuitProject) {
+			string name = this.Name;
+			this.Name = string.Empty;
+			this.NotifyPropertyChanged("Name");
+			return circuitProject.CircuitProbeSet.Create(name);
 		}
 	}
 

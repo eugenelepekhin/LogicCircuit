@@ -817,7 +817,7 @@ Möchten Sie den Verweis von der Liste der zuletzt verwendeten Dateien löschen?
   <data name="PinTypeNameOutput" xml:space="preserve">
     <value>Ausgang</value>
   </data>
-  <data name="GateProbeName" xml:space="preserve">
+  <data name="CircuitProbeName" xml:space="preserve">
     <value>Prüfspitze</value>
   </data>
   <data name="MemoryDataInPinName" xml:space="preserve">

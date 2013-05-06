@@ -40,8 +40,7 @@ namespace LogicCircuit.UnitTest {
 
 			List<CircuitSymbol> outputSymbol = new List<CircuitSymbol>();
 			foreach(CircuitSymbol symbol in this.Project.LogicalCircuit.CircuitSymbols()) {
-				Gate g = symbol.Circuit as Gate;
-				if(g != null && g.GateType == GateType.Probe) {
+				if(symbol.Circuit is CircuitProbe) {
 					outputSymbol.Add(symbol);
 				}
 			}

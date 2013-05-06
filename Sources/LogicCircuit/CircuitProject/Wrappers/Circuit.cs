@@ -232,6 +232,11 @@ namespace LogicCircuit {
 				return this.CircuitProject.PinSet.FindOrCreate(rowIdPin);
 			}
 
+			RowId rowIdCircuitProbe = this.CircuitProject.CircuitProbeSet.Table.Find(CircuitProbeData.CircuitProbeIdField.Field, primaryKeyValue);
+			if(!rowIdCircuitProbe.IsEmpty) {
+				return this.CircuitProject.CircuitProbeSet.FindOrCreate(rowIdCircuitProbe);
+			}
+
 			RowId rowIdConstant = this.CircuitProject.ConstantSet.Table.Find(ConstantData.ConstantIdField.Field, primaryKeyValue);
 			if(!rowIdConstant.IsEmpty) {
 				return this.CircuitProject.ConstantSet.FindOrCreate(rowIdConstant);

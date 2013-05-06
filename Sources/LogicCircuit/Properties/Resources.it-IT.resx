@@ -172,10 +172,10 @@ Il file che si sta tentando di aprire è danneggiato o è stato creato da una ve
   <data name="GateOrNotName" xml:space="preserve">
     <value>NotOr</value>
   </data>
-  <data name="GateProbeName" xml:space="preserve">
+  <data name="CircuitProbeName" xml:space="preserve">
     <value>Sonda</value>
   </data>
-  <data name="GateProbeNotation" xml:space="preserve">
+  <data name="CircuitProbeNotation" xml:space="preserve">
     <value>?</value>
   </data>
   <data name="GateShapeRectangular" xml:space="preserve">

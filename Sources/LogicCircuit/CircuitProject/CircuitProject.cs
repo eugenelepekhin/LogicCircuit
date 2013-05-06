@@ -207,6 +207,9 @@ namespace LogicCircuit {
 			foreach(Circuit circuit in this.CircuitSet) {
 				if(circuit is LogicalCircuit) {
 					Tracer.Assert(this.LogicalCircuitSet.Table.Exists(LogicalCircuitData.LogicalCircuitIdField.Field, circuit.CircuitId));
+				} else if(circuit is CircuitProbe) {
+					Tracer.Assert(this.CircuitProbeSet.Table.Exists(CircuitProbeData.CircuitProbeIdField.Field, circuit.CircuitId));
+					Tracer.Assert(this.CircuitSymbolSet.SelectByCircuit(circuit).Count() == 1);
 				} else if(circuit is CircuitButton) {
 					Tracer.Assert(this.CircuitButtonSet.Table.Exists(CircuitButtonData.CircuitButtonIdField.Field, circuit.CircuitId));
 					Tracer.Assert(this.CircuitSymbolSet.SelectByCircuit(circuit).Count() == 1);

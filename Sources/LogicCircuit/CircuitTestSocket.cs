@@ -230,7 +230,7 @@ namespace LogicCircuit {
 
 	public class OutputPinSocket {
 		public Pin Pin { get; private set; }
-		public Gate Value { get; private set; }
+		public CircuitProbe Value { get; private set; }
 		public CircuitSymbol Symbol { get; private set; }
 		public FunctionProbe Function { get; set; }
 
@@ -238,7 +238,7 @@ namespace LogicCircuit {
 			Tracer.Assert(pin.PinType == PinType.Output);
 			CircuitProject project = pin.CircuitProject;
 			this.Pin = pin;
-			this.Value = project.GateSet.Gate(GateType.Probe, 1, false);
+			this.Value = project.CircuitProbeSet.Create(null);
 			CircuitSymbol pinSymbol = project.CircuitSymbolSet.SelectByCircuit(pin).FirstOrDefault();
 			Tracer.Assert(pinSymbol != null);
 			this.Symbol = project.CircuitSymbolSet.Create(this.Value, pin.LogicalCircuit, pinSymbol.X, pinSymbol.Y);

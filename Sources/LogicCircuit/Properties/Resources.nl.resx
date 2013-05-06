@@ -173,10 +173,10 @@ The file you are trying to open either corrupted or it was created by newer vers
   <data name="GateOrNotName" xml:space="preserve">
     <value>NOr</value>
   </data>
-  <data name="GateProbeName" xml:space="preserve">
+  <data name="CircuitProbeName" xml:space="preserve">
     <value>Probe</value>
   </data>
-  <data name="GateProbeNotation" xml:space="preserve">
+  <data name="CircuitProbeNotation" xml:space="preserve">
     <value>?</value>
   </data>
   <data name="GateShapeRectangular" xml:space="preserve">

@@ -172,15 +172,15 @@ namespace LogicCircuit.Properties {
 		/// <summary>
 		/// Looks up a localized string similar to Probe.
 		/// </summary>
- 		public static string GateProbeName {
-			get { return ResourceManager.GetString("GateProbeName", Culture); }
+ 		public static string CircuitProbeName {
+			get { return ResourceManager.GetString("CircuitProbeName", Culture); }
 		}
 
 		/// <summary>
 		/// Looks up a localized string similar to ?.
 		/// </summary>
- 		public static string GateProbeNotation {
-			get { return ResourceManager.GetString("GateProbeNotation", Culture); }
+ 		public static string CircuitProbeNotation {
+			get { return ResourceManager.GetString("CircuitProbeNotation", Culture); }
 		}
 
 		/// <summary>
@@ -2521,6 +2521,20 @@ namespace LogicCircuit.Properties {
 		/// </summary>
  		public static string ToolTipIsDisplay {
 			get { return ResourceManager.GetString("ToolTipIsDisplay", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Name.
+		/// </summary>
+ 		public static string CaptionName {
+			get { return ResourceManager.GetString("CaptionName", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Probe {0}.
+		/// </summary>
+ 		public static string CircuitProbeToolTip(string probeName) {
+			return string.Format(Culture, ResourceManager.GetString("CircuitProbeToolTip", Culture), probeName);
 		}
 	}
 }

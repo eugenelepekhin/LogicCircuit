@@ -12,7 +12,7 @@ namespace LogicCircuit {
 		Odd,	// This one should not be used anymore
 		Even,	// This one should not be used anymore
 		Led,
-		Probe,
+		Probe,	// This one should not be used anymore
 		TriState
 	}
 }

@@ -24,7 +24,7 @@ namespace LogicCircuit {
 
 		public bool Invalid { get; set; }
 
-		public override string ReportName { get { return Properties.Resources.GateProbeName; } }
+		public override string ReportName { get { return Properties.Resources.CircuitProbeName; } }
 
 		public override bool Evaluate() {
 			if(this.GetState()) {
@@ -79,7 +79,7 @@ namespace LogicCircuit {
 
 		public void TurnOff() {
 			if(this.CircuitSymbol.HasCreatedGlyph) {
-				((TextBlock)this.CircuitSymbol.ProbeView).Text = Properties.Resources.GateProbeNotation;
+				((TextBlock)this.CircuitSymbol.ProbeView).Text = this.CircuitSymbol.Circuit.Notation;
 			}
 		}
 

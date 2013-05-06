@@ -18,6 +18,7 @@
 		public GateSet GateSet { get; private set; }
 		public LogicalCircuitSet LogicalCircuitSet { get; private set; }
 		public PinSet PinSet { get; private set; }
+		public CircuitProbeSet CircuitProbeSet { get; private set; }
 		public ConstantSet ConstantSet { get; private set; }
 		public CircuitButtonSet CircuitButtonSet { get; private set; }
 		public MemorySet MemorySet { get; private set; }
@@ -41,6 +42,7 @@
 			GateData.CreateForeignKeys(this);
 			LogicalCircuitData.CreateForeignKeys(this);
 			PinData.CreateForeignKeys(this);
+			CircuitProbeData.CreateForeignKeys(this);
 			ConstantData.CreateForeignKeys(this);
 			CircuitButtonData.CreateForeignKeys(this);
 			MemoryData.CreateForeignKeys(this);
@@ -62,6 +64,7 @@
 			this.GateSet = new GateSet(this);
 			this.LogicalCircuitSet = new LogicalCircuitSet(this);
 			this.PinSet = new PinSet(this);
+			this.CircuitProbeSet = new CircuitProbeSet(this);
 			this.ConstantSet = new ConstantSet(this);
 			this.CircuitButtonSet = new CircuitButtonSet(this);
 			this.MemorySet = new MemorySet(this);
@@ -97,6 +100,7 @@
 				List<Gate> deletedGate = this.GateSet.UpdateSet(oldVersion, newVersion);
 				List<LogicalCircuit> deletedLogicalCircuit = this.LogicalCircuitSet.UpdateSet(oldVersion, newVersion);
 				List<Pin> deletedPin = this.PinSet.UpdateSet(oldVersion, newVersion);
+				List<CircuitProbe> deletedCircuitProbe = this.CircuitProbeSet.UpdateSet(oldVersion, newVersion);
 				List<Constant> deletedConstant = this.ConstantSet.UpdateSet(oldVersion, newVersion);
 				List<CircuitButton> deletedCircuitButton = this.CircuitButtonSet.UpdateSet(oldVersion, newVersion);
 				List<Memory> deletedMemory = this.MemorySet.UpdateSet(oldVersion, newVersion);
@@ -113,6 +117,7 @@
 				this.GateSet.NotifyVersionChanged(oldVersion, newVersion, deletedGate);
 				this.LogicalCircuitSet.NotifyVersionChanged(oldVersion, newVersion, deletedLogicalCircuit);
 				this.PinSet.NotifyVersionChanged(oldVersion, newVersion, deletedPin);
+				this.CircuitProbeSet.NotifyVersionChanged(oldVersion, newVersion, deletedCircuitProbe);
 				this.ConstantSet.NotifyVersionChanged(oldVersion, newVersion, deletedConstant);
 				this.CircuitButtonSet.NotifyVersionChanged(oldVersion, newVersion, deletedCircuitButton);
 				this.MemorySet.NotifyVersionChanged(oldVersion, newVersion, deletedMemory);
@@ -141,6 +146,7 @@
 			this.GateSet.NotifyRolledBack(version);
 			this.LogicalCircuitSet.NotifyRolledBack(version);
 			this.PinSet.NotifyRolledBack(version);
+			this.CircuitProbeSet.NotifyRolledBack(version);
 			this.ConstantSet.NotifyRolledBack(version);
 			this.CircuitButtonSet.NotifyRolledBack(version);
 			this.MemorySet.NotifyRolledBack(version);

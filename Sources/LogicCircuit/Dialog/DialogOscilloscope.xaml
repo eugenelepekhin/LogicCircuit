@@ -59,7 +59,7 @@
 			<ListView.View>
 				<GridView>
 					<GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Width="Auto"
-						Header="{Binding Source={x:Static properties:Resources.GateProbeName}, Mode=OneTime}"
+						Header="{Binding Source={x:Static properties:Resources.CircuitProbeName}, Mode=OneTime}"
 					/>
 					<GridViewColumn Header="{Binding Source={x:Static properties:Resources.TitleOscillogram}, Mode=OneTime}">
 						<GridViewColumn.CellTemplate>

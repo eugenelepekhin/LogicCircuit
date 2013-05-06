@@ -29,8 +29,7 @@ namespace LogicCircuit {
 				if(bitNumber < this.Pin.BitWidth) {
 					return true;
 				}
-				Gate gate = this.CircuitSymbol.Circuit as Gate;
-				return gate != null && gate.GateType == GateType.Probe;
+				return this.CircuitSymbol.Circuit is CircuitProbe;
 			}
 			return false;
 		}

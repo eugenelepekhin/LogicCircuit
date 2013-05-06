@@ -165,10 +165,10 @@
   <data name="GateOrNotName" xml:space="preserve">
     <value>АБО-НЕ</value>
   </data>
-  <data name="GateProbeName" xml:space="preserve">
+  <data name="CircuitProbeName" xml:space="preserve">
     <value>Проба</value>
   </data>
-  <data name="GateProbeNotation" xml:space="preserve">
+  <data name="CircuitProbeNotation" xml:space="preserve">
     <value>?</value>
   </data>
   <data name="GateShapeRectangular" xml:space="preserve">

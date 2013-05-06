@@ -380,6 +380,10 @@ namespace LogicCircuit {
 			this.Mainframe.ShowDialog(new DialogUsage(logicalCircuit));
 		}
 
+		private void Edit(CircuitProbe probe) {
+			this.Mainframe.ShowDialog(new DialogProbe(probe));
+		}
+
 		private void Edit(CircuitButton button) {
 			this.Mainframe.ShowDialog(new DialogButton(button));
 		}
@@ -421,6 +425,11 @@ namespace LogicCircuit {
 						this.OpenLogicalCircuit(lc);
 						return;
 					}
+					CircuitProbe cp = circuitSymbol.Circuit as CircuitProbe;
+					if(cp != null) {
+						this.Edit(cp);
+						return;
+					}
 					CircuitButton cb = circuitSymbol.Circuit as CircuitButton;
 					if(cb != null) {
 						this.Edit(cb);
@@ -452,8 +461,8 @@ namespace LogicCircuit {
 						this.OpenLogicalCircuit(map);
 						return;
 					}
-					Gate gate = circuitSymbol.Circuit as Gate;
-					if(gate != null && gate.GateType == GateType.Probe) {
+					CircuitProbe probe = circuitSymbol.Circuit as CircuitProbe;
+					if(probe != null) {
 						FunctionProbe functionProbe = this.CircuitRunner.VisibleMap.FunctionProbe(circuitSymbol);
 						if(functionProbe != null) {
 							this.Mainframe.ShowDialog(new DialogProbeHistory(functionProbe));
@@ -613,8 +622,7 @@ namespace LogicCircuit {
 			if(this.InEditMode) {
 				LogicalCircuit logicalCircuit = this.Project.LogicalCircuit;
 				foreach(CircuitSymbol symbol in logicalCircuit.CircuitSymbols()) {
-					Gate gate = symbol.Circuit as Gate;
-					if(gate != null && gate.GateType == GateType.Probe) {
+					if(symbol.Circuit is CircuitProbe) {
 						this.Select(symbol);
 						if(withWire) {
 							Tracer.Assert(symbol.Jams().Count() == 1);

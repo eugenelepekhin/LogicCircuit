@@ -373,6 +373,17 @@
 								</StackPanel>
 							</DataTemplate>
 
+							<DataTemplate DataType="{x:Type lc:ProbeDescriptor}">
+								<StackPanel Style="{StaticResource DescriptorPanel}">
+									<ContentControl/>
+									<TextBox MaxLength="4" Width="65" VerticalAlignment="Center"
+										Text="{Binding Path=Name}"
+									/>
+									<TextBlock Text="{x:Static properties:Resources.CaptionName}" VerticalAlignment="Center"/>
+									<TextBlock Text="{x:Static properties:Resources.CircuitProbeName}" VerticalAlignment="Center" Margin="16,0,0,0"/>
+								</StackPanel>
+							</DataTemplate>
+
 							<DataTemplate DataType="{x:Type lc:ButtonDescriptor}">
 								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl/>
