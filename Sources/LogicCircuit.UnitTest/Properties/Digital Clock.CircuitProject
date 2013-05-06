@@ -758,6 +758,50 @@ hexadecimal number</lc:Description>
 		<lc:PinSide>Bottom</lc:PinSide>
 		<lc:Name>x</lc:Name>
 	</lc:Pin>
+	<lc:CircuitProbe>
+		<lc:CircuitProbeId>85f41ebf-c213-4e3c-98c5-66e5f2eeeb8b</lc:CircuitProbeId>
+		<lc:Name>85f41ebf-c213-4e3c-98c5-66e5f2eeeb8b</lc:Name>
+	</lc:CircuitProbe>
+	<lc:CircuitProbe>
+		<lc:CircuitProbeId>89a8705f-5f9f-4e5c-a03d-e7efcb1dab96</lc:CircuitProbeId>
+		<lc:Name>89a8705f-5f9f-4e5c-a03d-e7efcb1dab96</lc:Name>
+	</lc:CircuitProbe>
+	<lc:CircuitProbe>
+		<lc:CircuitProbeId>1bafaf3b-7626-4691-b0be-90a03f8f280d</lc:CircuitProbeId>
+		<lc:Name>1bafaf3b-7626-4691-b0be-90a03f8f280d</lc:Name>
+	</lc:CircuitProbe>
+	<lc:CircuitProbe>
+		<lc:CircuitProbeId>a55cd5db-5299-4749-bc4d-49a734b85057</lc:CircuitProbeId>
+		<lc:Name>a55cd5db-5299-4749-bc4d-49a734b85057</lc:Name>
+	</lc:CircuitProbe>
+	<lc:CircuitProbe>
+		<lc:CircuitProbeId>09c10ae9-ac32-428c-a143-ea0c0b0f965c</lc:CircuitProbeId>
+		<lc:Name>09c10ae9-ac32-428c-a143-ea0c0b0f965c</lc:Name>
+	</lc:CircuitProbe>
+	<lc:CircuitProbe>
+		<lc:CircuitProbeId>64444fa7-6783-4d46-965e-df60ecf42f5e</lc:CircuitProbeId>
+		<lc:Name>64444fa7-6783-4d46-965e-df60ecf42f5e</lc:Name>
+	</lc:CircuitProbe>
+	<lc:CircuitProbe>
+		<lc:CircuitProbeId>2ab2f1a5-6fff-412e-a86e-bb6a1f6bf874</lc:CircuitProbeId>
+		<lc:Name>2ab2f1a5-6fff-412e-a86e-bb6a1f6bf874</lc:Name>
+	</lc:CircuitProbe>
+	<lc:CircuitProbe>
+		<lc:CircuitProbeId>76e5d59f-31bf-4d6c-9f91-d75116bc8d73</lc:CircuitProbeId>
+		<lc:Name>76e5d59f-31bf-4d6c-9f91-d75116bc8d73</lc:Name>
+	</lc:CircuitProbe>
+	<lc:CircuitProbe>
+		<lc:CircuitProbeId>b05e27dc-aa5a-4310-876a-44fd5e4e304f</lc:CircuitProbeId>
+		<lc:Name>b05e27dc-aa5a-4310-876a-44fd5e4e304f</lc:Name>
+	</lc:CircuitProbe>
+	<lc:CircuitProbe>
+		<lc:CircuitProbeId>9b337fc1-f876-4419-82c1-ea8d819d93d6</lc:CircuitProbeId>
+		<lc:Name>9b337fc1-f876-4419-82c1-ea8d819d93d6</lc:Name>
+	</lc:CircuitProbe>
+	<lc:CircuitProbe>
+		<lc:CircuitProbeId>a3bdf0eb-e064-4407-b892-810b5a73428d</lc:CircuitProbeId>
+		<lc:Name>a3bdf0eb-e064-4407-b892-810b5a73428d</lc:Name>
+	</lc:CircuitProbe>
 	<lc:Constant>
 		<lc:ConstantId>c1a431f5-bcc6-4f67-9225-309f36499419</lc:ConstantId>
 		<lc:Value>1</lc:Value>
@@ -1787,14 +1831,14 @@ Press and hold it to auto increment minutes.</lc:Note>
 	</lc:CircuitSymbol>
 	<lc:CircuitSymbol>
 		<lc:CircuitSymbolId>85f41ebf-c213-4e3c-98c5-66e5f2eeeb8b</lc:CircuitSymbolId>
-		<lc:CircuitId>00000000-0000-0000-0000-000000090100</lc:CircuitId>
+		<lc:CircuitId>85f41ebf-c213-4e3c-98c5-66e5f2eeeb8b</lc:CircuitId>
 		<lc:LogicalCircuitId>bbc2d924-19b8-4360-ba6c-76c429601c5a</lc:LogicalCircuitId>
 		<lc:X>13</lc:X>
 		<lc:Y>3</lc:Y>
 	</lc:CircuitSymbol>
 	<lc:CircuitSymbol>
 		<lc:CircuitSymbolId>89a8705f-5f9f-4e5c-a03d-e7efcb1dab96</lc:CircuitSymbolId>
-		<lc:CircuitId>00000000-0000-0000-0000-000000090100</lc:CircuitId>
+		<lc:CircuitId>89a8705f-5f9f-4e5c-a03d-e7efcb1dab96</lc:CircuitId>
 		<lc:LogicalCircuitId>bbc2d924-19b8-4360-ba6c-76c429601c5a</lc:LogicalCircuitId>
 		<lc:X>13</lc:X>
 		<lc:Y>5</lc:Y>
@@ -2039,14 +2083,14 @@ Press and hold it to auto increment minutes.</lc:Note>
 	</lc:CircuitSymbol>
 	<lc:CircuitSymbol>
 		<lc:CircuitSymbolId>1bafaf3b-7626-4691-b0be-90a03f8f280d</lc:CircuitSymbolId>
-		<lc:CircuitId>00000000-0000-0000-0000-000000090100</lc:CircuitId>
+		<lc:CircuitId>1bafaf3b-7626-4691-b0be-90a03f8f280d</lc:CircuitId>
 		<lc:LogicalCircuitId>bbc2d924-19b8-4360-ba6c-76c429601c5a</lc:LogicalCircuitId>
 		<lc:X>12</lc:X>
 		<lc:Y>17</lc:Y>
 	</lc:CircuitSymbol>
 	<lc:CircuitSymbol>
 		<lc:CircuitSymbolId>a55cd5db-5299-4749-bc4d-49a734b85057</lc:CircuitSymbolId>
-		<lc:CircuitId>00000000-0000-0000-0000-000000090100</lc:CircuitId>
+		<lc:CircuitId>a55cd5db-5299-4749-bc4d-49a734b85057</lc:CircuitId>
 		<lc:LogicalCircuitId>bbc2d924-19b8-4360-ba6c-76c429601c5a</lc:LogicalCircuitId>
 		<lc:X>12</lc:X>
 		<lc:Y>15</lc:Y>
@@ -2277,21 +2321,21 @@ Press and hold it to auto increment minutes.</lc:Note>
 	</lc:CircuitSymbol>
 	<lc:CircuitSymbol>
 		<lc:CircuitSymbolId>09c10ae9-ac32-428c-a143-ea0c0b0f965c</lc:CircuitSymbolId>
-		<lc:CircuitId>00000000-0000-0000-0000-000000090100</lc:CircuitId>
+		<lc:CircuitId>09c10ae9-ac32-428c-a143-ea0c0b0f965c</lc:CircuitId>
 		<lc:LogicalCircuitId>bbc2d924-19b8-4360-ba6c-76c429601c5a</lc:LogicalCircuitId>
 		<lc:X>30</lc:X>
 		<lc:Y>14</lc:Y>
 	</lc:CircuitSymbol>
 	<lc:CircuitSymbol>
 		<lc:CircuitSymbolId>64444fa7-6783-4d46-965e-df60ecf42f5e</lc:CircuitSymbolId>
-		<lc:CircuitId>00000000-0000-0000-0000-000000090100</lc:CircuitId>
+		<lc:CircuitId>64444fa7-6783-4d46-965e-df60ecf42f5e</lc:CircuitId>
 		<lc:LogicalCircuitId>bbc2d924-19b8-4360-ba6c-76c429601c5a</lc:LogicalCircuitId>
 		<lc:X>30</lc:X>
 		<lc:Y>16</lc:Y>
 	</lc:CircuitSymbol>
 	<lc:CircuitSymbol>
 		<lc:CircuitSymbolId>2ab2f1a5-6fff-412e-a86e-bb6a1f6bf874</lc:CircuitSymbolId>
-		<lc:CircuitId>00000000-0000-0000-0000-000000090100</lc:CircuitId>
+		<lc:CircuitId>2ab2f1a5-6fff-412e-a86e-bb6a1f6bf874</lc:CircuitId>
 		<lc:LogicalCircuitId>bbc2d924-19b8-4360-ba6c-76c429601c5a</lc:LogicalCircuitId>
 		<lc:X>30</lc:X>
 		<lc:Y>18</lc:Y>
@@ -2354,7 +2398,7 @@ Press and hold it to auto increment minutes.</lc:Note>
 	</lc:CircuitSymbol>
 	<lc:CircuitSymbol>
 		<lc:CircuitSymbolId>76e5d59f-31bf-4d6c-9f91-d75116bc8d73</lc:CircuitSymbolId>
-		<lc:CircuitId>00000000-0000-0000-0000-000000090100</lc:CircuitId>
+		<lc:CircuitId>76e5d59f-31bf-4d6c-9f91-d75116bc8d73</lc:CircuitId>
 		<lc:LogicalCircuitId>bbc2d924-19b8-4360-ba6c-76c429601c5a</lc:LogicalCircuitId>
 		<lc:X>30</lc:X>
 		<lc:Y>5</lc:Y>
@@ -2515,21 +2559,21 @@ Press and hold it to auto increment minutes.</lc:Note>
 	</lc:CircuitSymbol>
 	<lc:CircuitSymbol>
 		<lc:CircuitSymbolId>b05e27dc-aa5a-4310-876a-44fd5e4e304f</lc:CircuitSymbolId>
-		<lc:CircuitId>00000000-0000-0000-0000-000000090100</lc:CircuitId>
+		<lc:CircuitId>b05e27dc-aa5a-4310-876a-44fd5e4e304f</lc:CircuitId>
 		<lc:LogicalCircuitId>9ad1764e-6c7c-4efa-9e61-b2e328541433</lc:LogicalCircuitId>
 		<lc:X>13</lc:X>
 		<lc:Y>5</lc:Y>
 	</lc:CircuitSymbol>
 	<lc:CircuitSymbol>
 		<lc:CircuitSymbolId>9b337fc1-f876-4419-82c1-ea8d819d93d6</lc:CircuitSymbolId>
-		<lc:CircuitId>00000000-0000-0000-0000-000000090100</lc:CircuitId>
+		<lc:CircuitId>9b337fc1-f876-4419-82c1-ea8d819d93d6</lc:CircuitId>
 		<lc:LogicalCircuitId>9ad1764e-6c7c-4efa-9e61-b2e328541433</lc:LogicalCircuitId>
 		<lc:X>13</lc:X>
 		<lc:Y>7</lc:Y>
 	</lc:CircuitSymbol>
 	<lc:CircuitSymbol>
 		<lc:CircuitSymbolId>a3bdf0eb-e064-4407-b892-810b5a73428d</lc:CircuitSymbolId>
-		<lc:CircuitId>00000000-0000-0000-0000-000000090100</lc:CircuitId>
+		<lc:CircuitId>a3bdf0eb-e064-4407-b892-810b5a73428d</lc:CircuitId>
 		<lc:LogicalCircuitId>9ad1764e-6c7c-4efa-9e61-b2e328541433</lc:LogicalCircuitId>
 		<lc:X>13</lc:X>
 		<lc:Y>9</lc:Y>

@@ -60,6 +60,7 @@
     <Compile Include="ExpressionParserTest.cs" />
     <Compile Include="FunctionTest.cs" />
     <Compile Include="MemoryTest.cs" />
+    <Compile Include="ProbeConverterTest.cs" />
     <Compile Include="ProjectTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -98,6 +99,7 @@
     <None Include="Properties\ExternalCalculator.CircuitProject" />
     <None Include="Properties\CircuitMapCleanUpTest.CircuitProject" />
     <None Include="Properties\CircuitTestSocketTest.CircuitProject" />
+    <None Include="Properties\ProbeConvertTest.CircuitProject" />
     <Content Include="Properties\Splitter Conversion.CircuitProject" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
