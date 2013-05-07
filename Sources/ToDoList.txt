@@ -7,7 +7,6 @@ Sound component
 Sensor component
 Input/output bidirectional pins
 Lightweight probe or color wires to observe current signals
-Named probes
 Tunnels
 
 Keyboard device
