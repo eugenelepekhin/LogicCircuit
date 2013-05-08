@@ -11,6 +11,10 @@ namespace LogicCircuit {
 
 		public int Z { get { return this.Pin.Inverted ? 2 : 0; } }
 
+		public PinType EffectivePinType {
+			get { return (this.Pin is Pin) ? PinType.None : this.Pin.PinType; }
+		}
+
 		public GridPoint AbsolutePoint {
 			get {
 				CircuitSymbol symbol = this.CircuitSymbol as CircuitSymbol;
@@ -37,5 +41,11 @@ namespace LogicCircuit {
 		public virtual Jam InnerJam {
 			get { throw new InvalidOperationException("Should not be called. Only override call is allowed."); }
 		}
+
+		#if DEBUG
+			public override string ToString() {
+				return string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0} of {1} on {2}", this.GetType().Name, this.Pin.ToString(), this.CircuitSymbol.ToString());
+			}
+		#endif
 	}
 }

@@ -180,43 +180,37 @@ namespace LogicCircuit {
 			Tracer.Assert(!connectionSet.IsConnected(this.Circuit));
 			Dictionary<GridPoint, List<Jam>> inJamMap = new Dictionary<GridPoint, List<Jam>>();
 			foreach(CircuitSymbol symbol in this.symbols) {
-				foreach(Jam jam in symbol.Jams()) {
-					if(jam.Pin.PinType != PinType.Output) {
-						GridPoint p = jam.AbsolutePoint;
-						List<Jam> list;
-						if(!inJamMap.TryGetValue(p, out list)) {
-							list = new List<Jam>();
-							inJamMap.Add(p, list);
-						}
-						list.Add(jam);
+				foreach(Jam jam in symbol.Jams().Where(j => j.EffectivePinType != PinType.Output)) {
+					GridPoint p = jam.AbsolutePoint;
+					List<Jam> list;
+					if(!inJamMap.TryGetValue(p, out list)) {
+						list = new List<Jam>();
+						inJamMap.Add(p, list);
 					}
+					list.Add(jam);
 				}
 			}
 			ConductorMap conductorMap = this.Circuit.ConductorMap();
 			foreach(CircuitSymbol symbol in this.symbols) {
-				foreach(Jam outJam in symbol.Jams()) {
-					if(outJam.Pin.PinType != PinType.Input) {
-						Conductor conductor;
-						if(conductorMap.TryGetValue(outJam.AbsolutePoint, out conductor)) {
-							foreach(GridPoint point in conductor.Points) {
-								List<Jam> list;
-								if(inJamMap.TryGetValue(point, out list)) {
-									foreach(Jam inJam in list) {
-										if(inJam != outJam) {
-											if(inJam.Pin.BitWidth != outJam.Pin.BitWidth) {
-												if(!(inJam.CircuitSymbol.Circuit is CircuitProbe)) {
-													throw new CircuitException(Cause.UserError,
-														Properties.Resources.ErrorJamBitWidthDifferent(
-															inJam.CircuitSymbol.Circuit.Name, inJam.CircuitSymbol.Point,
-															outJam.CircuitSymbol.Circuit.Name, outJam.CircuitSymbol.Point,
-															this.Circuit.Name
-														)
-													);
-												}
-											}
-											connectionSet.Connect(inJam, outJam);
+				foreach(Jam outJam in symbol.Jams().Where(j => j.EffectivePinType != PinType.Input)) {
+					Conductor conductor;
+					if(conductorMap.TryGetValue(outJam.AbsolutePoint, out conductor)) {
+						foreach(GridPoint point in conductor.Points) {
+							List<Jam> list;
+							if(inJamMap.TryGetValue(point, out list)) {
+								foreach(Jam inJam in list.Where(j => j != outJam)) {
+									if(inJam.Pin.BitWidth != outJam.Pin.BitWidth) {
+										if(!(inJam.CircuitSymbol.Circuit is CircuitProbe)) {
+											throw new CircuitException(Cause.UserError,
+												Properties.Resources.ErrorJamBitWidthDifferent(
+													inJam.CircuitSymbol.Circuit.Name, inJam.CircuitSymbol.Point,
+													outJam.CircuitSymbol.Circuit.Name, outJam.CircuitSymbol.Point,
+													this.Circuit.Name
+												)
+											);
 										}
 									}
+									connectionSet.Connect(inJam, outJam);
 								}
 							}
 						}

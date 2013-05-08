@@ -62,7 +62,7 @@ namespace LogicCircuit {
 			PinType pinType = pin.PinType;
 			if(pinType != PinType.None) {
 				DevicePin devicePin = this.CircuitProject.DevicePinSet.Create(
-					pin, (pinType == PinType.Input) ? PinType.Output : PinType.Input, pin.BitWidth
+					pin, PinType.None, pin.BitWidth
 				);
 				devicePin.Inverted = pin.Inverted;
 			}

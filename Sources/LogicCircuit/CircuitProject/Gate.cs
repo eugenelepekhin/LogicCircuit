@@ -259,9 +259,14 @@ namespace LogicCircuit {
 		}
 
 		private void GeneratePins(Gate gate, int inputCount, bool invertedOutput) {
-			for(int i = 0; i < inputCount; i++) {
+			if(inputCount == 1) {
 				DevicePin pin = this.CircuitProject.DevicePinSet.Create(gate, PinType.Input, 1);
-				pin.Name = Properties.Resources.PinName(Properties.Resources.PinInName, i + 1);
+				pin.Name = Properties.Resources.PinInName;
+			} else {
+				for(int i = 0; i < inputCount; i++) {
+					DevicePin pin = this.CircuitProject.DevicePinSet.Create(gate, PinType.Input, 1);
+					pin.Name = Properties.Resources.PinName(Properties.Resources.PinInName, i + 1);
+				}
 			}
 			if(GateSet.HasOutput(gate.GateType)) {
 				DevicePin pin = this.CircuitProject.DevicePinSet.Create(gate, PinType.Output, 1);

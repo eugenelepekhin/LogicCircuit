@@ -9,8 +9,8 @@ namespace LogicCircuit {
 			public Jam OutJam { get; private set; }
 
 			public Connection(Jam inJam, Jam outJam) {
-				Tracer.Assert(inJam != null && inJam.Pin.PinType != PinType.Output);
-				Tracer.Assert(outJam != null && outJam.Pin.PinType != PinType.Input);
+				Tracer.Assert(inJam != null && inJam.EffectivePinType != PinType.Output);
+				Tracer.Assert(outJam != null && outJam.EffectivePinType != PinType.Input);
 				this.InJam = inJam;
 				this.OutJam = outJam;
 			}
@@ -52,6 +52,25 @@ namespace LogicCircuit {
 				}
 				return Enumerable.Empty<Connection>();
 			}
+
+			#if DEBUG
+				[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+				public string Dump {
+					get {
+						System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"\s+");
+						Func<Jam, string> trim = jam => regex.Replace(jam.ToString(), " ").Trim();
+						System.Text.StringBuilder text = new System.Text.StringBuilder();
+						System.Globalization.CultureInfo culture = System.Globalization.CultureInfo.InvariantCulture;
+						foreach(Dictionary<Jam, Connection> dic in this.outputs.Values) {
+							foreach(Connection con in dic.Values) {
+								text.AppendFormat(culture, "{0} -> {1}", trim(con.InJam), trim(con.OutJam));
+								text.AppendLine();
+							}
+						}
+						return text.ToString();
+					}
+				}
+			#endif
 		}
 	}
 }

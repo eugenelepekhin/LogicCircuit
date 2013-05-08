@@ -81,7 +81,9 @@ namespace LogicCircuit {
 		}
 
 		public DevicePin Create(Circuit circuit, PinType pinType, int bitWidth) {
-			DevicePin pin = this.CreateItem(Guid.NewGuid(), circuit, bitWidth, pinType, BasePin.DefaultSide(pinType), false,
+			Pin circuitPin = circuit as Pin;
+			PinSide pinSide = BasePin.DefaultSide((circuitPin != null) ? (circuitPin.PinType == PinType.Input ? PinType.Output : PinType.Input) : pinType);
+			DevicePin pin = this.CreateItem(Guid.NewGuid(), circuit, bitWidth, pinType, pinSide, false,
 				this.UniqueName(BasePin.DefaultName(pinType), circuit),
 				DevicePinData.NoteField.Field.DefaultValue, DevicePinData.JamNotationField.Field.DefaultValue
 			);
