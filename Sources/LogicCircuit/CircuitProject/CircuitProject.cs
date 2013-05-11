@@ -84,6 +84,7 @@ namespace LogicCircuit {
 				}
 			}
 
+			this.DistinctSymbol(this.CircuitProbeSet);
 			this.DistinctSymbol(this.CircuitButtonSet);
 			this.DistinctSymbol(this.ConstantSet);
 			this.DistinctSymbol(this.MemorySet);
