@@ -14,6 +14,9 @@ Display device
 
 Colors of symbols
 
+Display actual frequency
+Search
+
 Running tree not always open the item when it clicked on the diagram
 
 === Function Optimization Ideas ===
