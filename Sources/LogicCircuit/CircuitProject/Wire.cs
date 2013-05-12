@@ -53,6 +53,10 @@ namespace LogicCircuit {
 			return line;
 		}
 
+		public override Rect Bounds() {
+			return new Rect(Symbol.ScreenPoint(this.Point1), Symbol.ScreenPoint(this.Point2));
+		}
+
 		public override void Shift(int dx, int dy) {
 			this.X1 += dx;
 			this.Y1 += dy;

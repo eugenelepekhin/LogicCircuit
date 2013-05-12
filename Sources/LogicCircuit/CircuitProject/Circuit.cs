@@ -159,6 +159,10 @@ namespace LogicCircuit {
 			return mandatoryPart;
 		}
 
+		public virtual bool Similar(Circuit other) {
+			return this == other || this.GetType() == other.GetType();
+		}
+
 		#if DEBUG
 			public override string ToString() {
 				return string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}: \"{1}\"", this.GetType().Name, this.Name);

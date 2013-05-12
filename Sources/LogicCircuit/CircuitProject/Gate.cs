@@ -121,6 +121,14 @@ namespace LogicCircuit {
 			}
 			return base.CreateDisplay(symbol, mainSymbol);
 		}
+
+		public override bool Similar(Circuit other) {
+			if(this != other) {
+				Gate g = other as Gate;
+				return g != null && this.GateType == g.GateType;
+			}
+			return true;
+		}
 	}
 
 	[SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]

@@ -9,6 +9,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 using LogicCircuit.DataPersistent;
+using System.Windows;
 
 namespace LogicCircuit {
 	[SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
@@ -168,13 +169,55 @@ namespace LogicCircuit {
 					}
 				}
 
-				if(0 < result.Count && paste.ProjectSet.Project.LogicalCircuit.LogicalCircuitId == target.LogicalCircuitId) {
-					foreach(Symbol symbol in result) {
-						symbol.Shift(2, 2);
+				if(0 < result.Count) {
+					while(this.NeedToShift(result)) {
+						foreach(Symbol symbol in result) {
+							symbol.Shift(2, 2);
+						}
 					}
 				}
 			});
 			return result;
+		}
+
+		private bool NeedToShift(List<Symbol> list) {
+			bool need = false;
+			Point diagram = new Point(Symbol.LogicalCircuitWidth, Symbol.LogicalCircuitHeight);
+			LogicalCircuit target = this.ProjectSet.Project.LogicalCircuit;
+			foreach(Symbol symbol in list) {
+				CircuitSymbol circuitSymbol = symbol as CircuitSymbol;
+				if(circuitSymbol != null) {
+					foreach(CircuitSymbol other in target.CircuitSymbols().Where(s => s != circuitSymbol && s.Circuit.Similar(circuitSymbol.Circuit))) {
+						Point point = other.Bounds().BottomRight;
+						if(diagram.X < point.X || diagram.Y < point.Y) {
+							return false;
+						}
+						need = need || (other.X == circuitSymbol.X && other.Y == circuitSymbol.Y);
+					}
+				} else {
+					TextNote textNote = symbol as TextNote;
+					if(textNote != null) {
+						foreach(TextNote other in target.TextNotes().Where(n => n != textNote)) {
+							Point point = other.Bounds().BottomRight;
+							if(diagram.X < point.X || diagram.Y < point.Y) {
+								return false;
+							}
+							need = need || (other.X == textNote.X && other.Y == textNote.Y && other.Width == textNote.Width && other.Height == textNote.Height);
+						}
+					} else {
+						Wire wire = symbol as Wire;
+						if(wire != null) {
+							foreach(Wire other in target.Wires().Where(w => w != wire)) {
+								if(diagram.X < Math.Max(wire.X1, wire.X2) || diagram.Y < Math.Max(wire.Y1, wire.Y2)) {
+									return false;
+								}
+								need = need || (wire.Point1 == other.Point1 && wire.Point2 == other.Point2);
+							}
+						}
+					}
+				}
+			}
+			return need;
 		}
 
 		private void InTransaction(Action action, bool commit) {

@@ -49,7 +49,7 @@ namespace LogicCircuit {
 			rotation.Angle = Symbol.Angle(this.Rotation);
 		}
 
-		public Rect Bounds() {
+		public override Rect Bounds() {
 			Rect bounds = new Rect(Symbol.ScreenPoint(this.Point),
 				new Size(Symbol.ScreenPoint(this.Circuit.SymbolWidth), Symbol.ScreenPoint(this.Circuit.SymbolHeight))
 			);

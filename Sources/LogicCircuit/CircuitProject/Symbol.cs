@@ -212,6 +212,8 @@ namespace LogicCircuit {
 		public abstract bool HasCreatedGlyph { get; }
 		public abstract void PositionGlyph();
 
+		public abstract Rect Bounds();
+
 		public abstract void DeleteSymbol();
 
 		protected void NotifyPropertyChanged(string name) {

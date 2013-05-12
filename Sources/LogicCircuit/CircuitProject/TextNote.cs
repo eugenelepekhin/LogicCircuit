@@ -58,6 +58,16 @@ namespace LogicCircuit {
 			this.Y += dy;
 		}
 
+		public override Rect Bounds() {
+			Rect bounds = new Rect(Symbol.ScreenPoint(this.Point),
+				new Size(Symbol.ScreenPoint(this.Width), Symbol.ScreenPoint(this.Height))
+			);
+			if(this.Rotation != Rotation.Up) {
+				bounds = Symbol.Transform(bounds, Symbol.RotationTransform(this.Rotation, this.X, this.Y, this.Width, this.Height));
+			}
+			return bounds;
+		}
+
 		public override void DeleteSymbol() {
 			this.Delete();
 		}

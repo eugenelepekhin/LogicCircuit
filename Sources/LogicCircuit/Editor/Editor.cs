@@ -343,7 +343,34 @@ namespace LogicCircuit {
 			this.ClearSelection();
 			IEnumerable<Symbol> result = CircuitProject.Paste(Clipboard.GetText());
 			Tracer.Assert(result.All(symbol => symbol.LogicalCircuit == this.Project.LogicalCircuit));
+			this.EnsureVisible(result);
 			this.Select(result);
+		}
+
+		private void EnsureVisible(IEnumerable<Symbol> symbols) {
+			ScrollViewer scrollViewer = this.Diagram.Parent as ScrollViewer;
+			if(scrollViewer != null) {
+				double zoom = this.Zoom;
+				Rect rect = symbols.Select(s => s.Bounds()).Aggregate((r1, r2) => Rect.Union(r1, r2));
+				rect = new Rect(rect.X * zoom, rect.Y * zoom, rect.Width * zoom, rect.Height * zoom);
+				Rect view = new Rect(scrollViewer.HorizontalOffset, scrollViewer.VerticalOffset, scrollViewer.ViewportWidth, scrollViewer.ViewportHeight);
+				if(!view.IntersectsWith(rect)) {
+					double x, y;
+					if(rect.X < view.X) {
+						x = Math.Min(rect.X + rect.Width / 2 - view.X, rect.Right - view.X - view.Width / 2) + scrollViewer.HorizontalOffset;
+					} else {
+						x = Math.Min(rect.X - view.X - view.Width / 2, rect.X + rect.Width / 2 - view.Right) + scrollViewer.HorizontalOffset;
+					}
+					if(rect.Y < view.Y) {
+						y = Math.Min(rect.Y + rect.Height / 2 - view.Y, rect.Bottom - view.Y - view.Height / 2) + scrollViewer.VerticalOffset;
+					} else {
+						y = Math.Min(rect.Y - view.Y - view.Height / 2, rect.Y + rect.Height / 2 - view.Bottom) + scrollViewer.VerticalOffset;
+					}
+					scrollViewer.ScrollToHorizontalOffset(x);
+					scrollViewer.ScrollToVerticalOffset(y);
+					this.Project.LogicalCircuit.ScrollOffset = new Point(x, y);
+				}
+			}
 		}
 
 		public void Delete() {

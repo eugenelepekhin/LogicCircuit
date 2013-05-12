@@ -95,6 +95,10 @@ namespace LogicCircuit {
 				this.Reset();
 				this.NotifyPropertyChanged("Glyph");
 			}
+
+			public override Rect Bounds() {
+				throw new InvalidOperationException();
+			}
 		}
 	}
 
