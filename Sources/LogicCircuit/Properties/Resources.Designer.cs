@@ -2536,5 +2536,12 @@ namespace LogicCircuit.Properties {
  		public static string CircuitProbeToolTip(string probeName) {
 			return string.Format(Culture, ResourceManager.GetString("CircuitProbeToolTip", Culture), probeName);
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Actual frequency:.
+		/// </summary>
+ 		public static string TitleActualFrequency {
+			get { return ResourceManager.GetString("TitleActualFrequency", Culture); }
+		}
 	}
 }

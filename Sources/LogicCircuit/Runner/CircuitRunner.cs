@@ -34,6 +34,8 @@ namespace LogicCircuit {
 		public CircuitState CircuitState { get; private set; }
 		private bool isMaxSpeed = false;
 		private int flipCount = 0;
+		private double actualFrequency = 0;
+		private double lastActualFrequency = 0;
 
 		private Thread evaluationThread;
 		private Thread refreshingThread;
@@ -99,6 +101,7 @@ namespace LogicCircuit {
 				this.HasProbes = this.CircuitState.HasProbes;
 
 				this.Editor.Mainframe.Dispatcher.Invoke(new Action(() => this.RootMap.TurnOn()));
+				this.Editor.ActualFrequency = this.Editor.Frequency;
 
 				if(this.Oscilloscoping && this.CircuitState.HasProbes) {
 					Tracer.Assert(this.DialogOscilloscope == null);
@@ -136,7 +139,7 @@ namespace LogicCircuit {
 							this.refreshingThread.Start();
 							this.flipCount = 1;
 							timer.Start();
-							this.Run(timer);
+							this.RunCircuit();
 						}
 					}
 				}
@@ -168,45 +171,29 @@ namespace LogicCircuit {
 			}
 		}
 
-		private void Run(PreciseTimer timer) {
+		private void RunCircuit() {
 			bool singleCPU = (Environment.ProcessorCount < 2);
-			int slownesCount = 0;
-			int slownesMax = 2;
-			bool notifyPerf = false;
 			bool hasProbes = this.CircuitState.HasProbes;
 			Stopwatch stopwatch = new Stopwatch();
+			stopwatch.Start();
+			int tickCount = 0;
 			for(;;) {
 				bool flipClock = (0 < this.flipCount);
 				bool maxSpeed = this.isMaxSpeed;
-				if(!maxSpeed) {
-					stopwatch.Reset();
-					stopwatch.Start();
-				}
 				if(!this.CircuitState.Evaluate(maxSpeed || flipClock)) {
 					break;
 				}
+				if(maxSpeed || flipClock) {
+					tickCount++;
+					long ms = stopwatch.ElapsedMilliseconds;
+					if(1500 <= ms) {
+						this.actualFrequency = Math.Round((double)(tickCount * 500) / ms, 1);
+						tickCount = 0;
+						stopwatch.Restart();
+					}
+				}
 				if(!this.refreshing) {
 					this.refreshingGate.Set();
-				}
-				if(!maxSpeed) {
-					if(timer.Period < stopwatch.Elapsed.TotalMilliseconds) {
-						slownesCount++;
-						if(slownesMax < slownesCount) {
-							slownesCount = slownesMax;
-							if(!notifyPerf) {
-								notifyPerf = true;
-								//this.Editor.Mainframe.NotifyPerformance(true);
-							}
-						}
-					} else {
-						if(0 < slownesCount) {
-							slownesCount--;
-							if(slownesCount == 0) {
-								notifyPerf = false;
-								//this.Editor.Mainframe.NotifyPerformance(false);
-							}
-						}
-					}
 				}
 				if(this.Oscilloscoping) {
 					if(flipClock && hasProbes) {
@@ -281,6 +268,10 @@ namespace LogicCircuit {
 					this.updatingUI = true;
 					Thread.MemoryBarrier();
 					this.VisibleMap.Redraw(false);
+					if(this.actualFrequency != this.lastActualFrequency) {
+						this.lastActualFrequency = this.actualFrequency;
+						this.Editor.ActualFrequency = this.actualFrequency;
+					}
 				}
 			} catch(ThreadAbortException) {
 			} catch(Exception exception) {

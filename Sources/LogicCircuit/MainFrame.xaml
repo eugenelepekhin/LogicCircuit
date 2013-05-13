@@ -233,6 +233,7 @@
 							<RowDefinition Height="Auto"/>
 							<RowDefinition Height="Auto"/>
 							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="Auto"/>
 						</Grid.RowDefinitions>
 
 						<TreeView Grid.Row="0" BorderThickness="0"
@@ -310,6 +311,11 @@
 								</Span>
 							</CheckBox.Content>
 						</CheckBox>
+
+						<StackPanel Grid.Row="4" Orientation="Horizontal">
+							<TextBlock Text="{x:Static properties:Resources.TitleActualFrequency}" Margin="5,0"/>
+							<TextBlock Text="{Binding Path=Editor.ActualFrequency, FallbackValue=0, StringFormat=N1}" Margin="3,0"/>
+						</StackPanel>
 					</Grid>
 				</GroupBox>
 

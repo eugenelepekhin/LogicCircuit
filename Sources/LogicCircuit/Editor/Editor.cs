@@ -124,6 +124,17 @@ namespace LogicCircuit {
 			}
 		}
 
+		private double actualFrequency = 0;
+		public double ActualFrequency {
+			get { return this.actualFrequency; }
+			set {
+				if(this.actualFrequency != value) {
+					this.actualFrequency = value;
+					this.NotifyPropertyChanged("ActualFrequency");
+				}
+			}
+		}
+
 		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
 		public bool IsMaximumSpeed {
 			get { return this.Project.IsMaximumSpeed; }

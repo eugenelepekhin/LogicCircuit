@@ -1247,4 +1247,7 @@ Displays are: LED, LED Matrix, Button, or other Logic Circuit that is Display.</
     <value>Probe {0}</value>
     <comment>{string probeName}</comment>
   </data>
+  <data name="TitleActualFrequency" xml:space="preserve">
+    <value>Actual frequency:</value>
+  </data>
 </root>
