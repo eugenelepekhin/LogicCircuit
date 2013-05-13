@@ -180,6 +180,7 @@ namespace LogicCircuit {
 			return result;
 		}
 
+		[SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
 		private bool NeedToShift(List<Symbol> list) {
 			bool need = false;
 			Point diagram = new Point(Symbol.LogicalCircuitWidth, Symbol.LogicalCircuitHeight);
