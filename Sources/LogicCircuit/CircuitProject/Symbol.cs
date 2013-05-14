@@ -75,6 +75,7 @@ namespace LogicCircuit {
 		/// <param name="point3">First vertex of second line segment</param>
 		/// <param name="point4">Second vertex of second line segment</param>
 		/// <returns>true if line segment (p1, p2) is intersected with line segment (p3, p4)</returns>
+		[SuppressMessage("Microsoft.Design", "CA1025:ReplaceRepetitiveArgumentsWithParamsArray")]
 		public static bool Intersected(Point point1, Point point2, Point point3, Point point4) {
 			//1. Find if bounding rectangles intersected
 			double x1 = Math.Min(point1.X, point2.X);

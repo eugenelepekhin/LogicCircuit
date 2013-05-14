@@ -2,10 +2,8 @@
 <RuleSet Name="LogicCircuit rule set" Description="This rule set contains all rules considered to be used in LogicCircuit." ToolsVersion="10.0">
   <IncludeAll Action="Warning" />
   <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
-    <Rule Id="CA1025" Action="None" />
     <Rule Id="CA1031" Action="None" /> <!--warning : CA1031 : Microsoft.Design : Modify 'xxx' to catch a more specific exception than 'Exception' or re-throw the exception.-->
-    <Rule Id="CA1032" Action="None" />
-    <Rule Id="CA1062" Action="None" />
-    <Rule Id="CA2104" Action="None" />
+    <Rule Id="CA1062" Action="None" /> <!--warning : CA1062 : Microsoft.Design : In externally visible method 'Class.Method(Type)', validate parameter 'parameterName' before using it.-->
+    <Rule Id="CA2104" Action="None" /> <!--warning : CA2104 : Microsoft.Security : Remove the read-only designation from 'Class.Field' or change the field to one that is an immutable reference type. If the reference type 'Type' is, in fact, immutable, exclude this message.-->
   </Rules>
 </RuleSet>
