@@ -1,4 +1,5 @@
 ﻿//#define DUMP_STATE
+#define VALIDATE_GET_FUNCTION
 
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace LogicCircuit {
 
 		public CircuitState(int reserveState) {
 			int seed = (int)DateTime.UtcNow.Ticks;
-			//seed = 2087553645;
+			//seed = -142808611;
 			Tracer.FullInfo("CircuitState", "CircuitState.seed={0}", seed);
 			this.dirty = new DirtyList(seed);
 			this.Random = new Random(seed);
@@ -203,11 +204,23 @@ namespace LogicCircuit {
 				}
 			}
 
+			#if VALIDATE_GET_FUNCTION
+				private int functionCount = 0;
+				private HashSet<int> functionIndex = new HashSet<int>();
+			#endif
+
 			public CircuitFunction Get() {
 				if(this.current.Count <= this.index) {
 					if(this.next.Count <= 0) {
 						throw new InvalidOperationException();
 					}
+
+					#if VALIDATE_GET_FUNCTION
+						Tracer.Assert(this.functionCount == this.functionIndex.Count);
+						Tracer.Assert(this.functionCount == 0 || (this.functionIndex.Contains(0) && this.functionIndex.Contains(this.functionCount - 1)));
+						this.functionCount = this.next.Count;
+						this.functionIndex.Clear();
+					#endif
 
 					this.iteration++;
 					this.current.Clear();
@@ -228,10 +241,21 @@ namespace LogicCircuit {
 				}
 				// This expression will iterate for this.index from 0 to this.current.Count - 1 and walk through each element
 				// of this.current exactly once.
-				// The constant should be a primary number in order to walk through entire current list
-				// The expression inside parenthesis may overflow int and become negative, so it will only work for
-				// not big prime numbers and not big list of dirty functions.
-				return this.current[(521 * (this.index++) + this.offset) % this.current.Count];
+				// The constant should be a primary number greater then (this.current.Count) in order to walk through entire current list
+				int count = this.current.Count;
+				int random = (
+					count < 43627
+					// 43627 is biggest prime that will not overflow integer for this expression
+					? (43627 * (this.index++) + this.offset) % count
+					//int.MaxValue happened to be prime. Use it to calculate the same expression in long so bigger projects are available
+					: (int)(((long)int.MaxValue * (long)(this.index++) + this.offset) % (long)count)
+				);
+
+				#if VALIDATE_GET_FUNCTION
+					Tracer.Assert(0 <= random && random < this.functionCount && this.functionIndex.Add(random));
+				#endif
+
+				return this.current[random];
 			}
 
 			public bool IsEmpty { get { return this.current.Count <= this.index && this.next.Count <= 0; } }
@@ -250,7 +274,7 @@ namespace LogicCircuit {
 
 				public void Add(CircuitFunction f) {
 					if(this.list.Length <= this.Count) {
-						Tracer.Assert(this.Count < this.list.Length * 2, "size overflowed");
+						//Tracer.Assert(this.Count < this.list.Length * 2, "size overflowed");
 						Array.Resize(ref this.list, this.list.Length * 2);
 					}
 					this.list[this.Count++] = f;
