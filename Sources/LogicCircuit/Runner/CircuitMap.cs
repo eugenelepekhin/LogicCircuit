@@ -600,15 +600,15 @@ namespace LogicCircuit {
 				if(gate.InvertedOutput) {
 					switch(gate.GateType) {
 					case GateType.Not:	return new FunctionNot(circuitState, parameter[0], result);
-					case GateType.Or:	return new FunctionOrNot(circuitState, parameter, result);
-					case GateType.And:	return new FunctionAndNot(circuitState, parameter, result);
-					case GateType.Xor:	return new FunctionXorNot(circuitState, parameter, result);
+					case GateType.Or:	return FunctionOrNot.Create(circuitState, parameter, result);
+					case GateType.And:	return FunctionAndNot.Create(circuitState, parameter, result);
+					case GateType.Xor:	return FunctionXorNot.Create(circuitState, parameter, result);
 					}
 				} else {
 					switch(gate.GateType) {
-					case GateType.Or:	return new FunctionOr(circuitState, parameter, result);
-					case GateType.And:	return new FunctionAnd(circuitState, parameter, result);
-					case GateType.Xor:	return new FunctionXor(circuitState, parameter, result);
+					case GateType.Or:	return FunctionOr.Create(circuitState, parameter, result);
+					case GateType.And:	return FunctionAnd.Create(circuitState, parameter, result);
+					case GateType.Xor:	return FunctionXor.Create(circuitState, parameter, result);
 					}
 				}
 				Tracer.Fail();

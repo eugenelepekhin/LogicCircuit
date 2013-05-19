@@ -6,8 +6,12 @@ using System.Text;
 
 namespace LogicCircuit {
 	public abstract class CircuitFunction {
-		private int[] parameter;
-		private int[] result;
+		[SuppressMessage("Microsoft.Security", "CA2105:ArrayFieldsShouldNotBeReadOnly")]
+		protected static readonly int[] EmptyList = new int[0];
+
+		private readonly int[] parameter;
+		private readonly int[] result;
+		private readonly int result0;
 		public  CircuitState CircuitState { get; private set; }
 
 		public IEnumerable<int> Parameter { get { return this.parameter; } }
@@ -19,8 +23,9 @@ namespace LogicCircuit {
 
 		protected CircuitFunction(CircuitState circuitState, int[] parameter, int[] result) {
 			this.CircuitState = circuitState;
-			this.parameter = (parameter == null) ? new int[0] : parameter;
-			this.result = (result == null) ? new int[0] : result;
+			this.parameter = (parameter == null) ? CircuitFunction.EmptyList : parameter;
+			this.result = (result == null) ? CircuitFunction.EmptyList : result;
+			this.result0 = (0 < this.result.Length) ? this.result[0] : -1;
 			this.CircuitState.DefineFunction(this);
 		}
 		protected CircuitFunction(CircuitState circuitState, int[] parameter, int minimumParameterCount, int result) : this(circuitState, parameter, new int[] { result }) {
@@ -77,6 +82,13 @@ namespace LogicCircuit {
 			}
 		#endif
 
+		protected bool SetResult0(State state) {
+			if(this.CircuitState[this.result0] != state) {
+				this.CircuitState[this.result0] = state;
+				return true;
+			}
+			return false;
+		}
 		protected bool SetResult(int index, State state) {
 			if(this.CircuitState[this.result[index]] != state) {
 				this.CircuitState[this.result[index]] = state;
@@ -152,10 +164,6 @@ namespace LogicCircuit {
 			throw CircuitFunction.BadState(state);
 		}
 
-		protected State Not() {
-			return CircuitFunction.Not(this.CircuitState[this.parameter[0]]);
-		}
-
 		protected State ControlledState(State enable) {
 			return (this.CircuitState[this.parameter[1]] == enable) ? this.CircuitState[this.parameter[0]] : State.Off;
 		}
@@ -168,6 +176,19 @@ namespace LogicCircuit {
 				}
 			}
 			return count;
+		}
+
+		protected bool GetProbeState(State[] state) {
+			//Tracer.Assert(state.Length == this.parameter.Length);
+			bool changed = false;
+			State s;
+			for(int i = 0; i < this.parameter.Length; i++) {
+				if(state[i] != (s = this.CircuitState[this.parameter[i]])) {
+					state[i] = s;
+					changed = true;
+				}
+			}
+			return changed;
 		}
 
 		#if DEBUG

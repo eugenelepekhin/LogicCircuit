@@ -23,16 +23,7 @@ namespace LogicCircuit {
 
 		[SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
 		protected bool GetState() {
-			bool changed = false;
-			int index = 0;
-			foreach(int parameter in this.Parameter) {
-				if(this.state[index] != this.CircuitState[parameter]) {
-					this.state[index] = this.CircuitState[parameter];
-					changed = true;
-				}
-				index++;
-			}
-			return changed;
+			return this.GetProbeState(this.state);
 		}
 
 		public int BitWidth { get { return this.state != null ? this.state.Length : 0; } }

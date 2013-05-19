@@ -81,7 +81,7 @@ namespace LogicCircuit.UnitTest {
 			CircuitState target = new CircuitState(3);
 			OneBitConst c1 = new OneBitConst(target, State.On0, 0);
 			OneBitConst c2 = new OneBitConst(target, State.On1, 1);
-			FunctionAnd and = new FunctionAnd(target, new int[] { 0, 1 }, 2);
+			FunctionAnd and = FunctionAnd.Create(target, new int[] { 0, 1 }, 2);
 			target.EndDefinition();
 			bool success = target.Evaluate(true);
 			Assert.IsTrue(success);
@@ -98,7 +98,7 @@ namespace LogicCircuit.UnitTest {
 			CircuitState target = new CircuitState(3);
 			OneBitConst c1 = new OneBitConst(target, State.On0, 0);
 			OneBitConst c2 = new OneBitConst(target, State.On1, 1);
-			FunctionAnd and = new FunctionAnd(target, new int[] { 0, 1 }, 2);
+			FunctionAnd and = FunctionAnd.Create(target, new int[] { 0, 1 }, 2);
 			target.EndDefinition();
 			bool success = target.Evaluate(true);
 			Assert.IsTrue(success);

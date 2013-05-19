@@ -1,5 +1,5 @@
 ﻿//#define DUMP_STATE
-#define VALIDATE_GET_FUNCTION
+//#define VALIDATE_GET_FUNCTION
 
 using System;
 using System.Collections.Generic;
@@ -124,8 +124,8 @@ namespace LogicCircuit {
 			int attempt = 0;
 			this.dirty.Delay = attempt;
 			int oscilation = this.state.Length * this.state.Length;
-			while(!this.dirty.IsEmpty) {
-				CircuitFunction function = this.dirty.Get();
+			CircuitFunction function;
+			while((function = this.dirty.Get()) != null) {
 				if(function.Evaluate()) {
 					if(function.Dependant != null) {
 						this.dirty.Add(function.Dependant);
@@ -177,8 +177,9 @@ namespace LogicCircuit {
 			public int Delay { get; set; }
 			private long iteration = 1;
 
-			private int offset = 0;
 			private int index = 0;
+			private int offset = 0;
+			private int step = 0;
 
 			public DirtyList(int seed) {
 				this.seed = seed;
@@ -210,15 +211,18 @@ namespace LogicCircuit {
 			#endif
 
 			public CircuitFunction Get() {
-				if(this.current.Count <= this.index) {
-					if(this.next.Count <= 0) {
-						throw new InvalidOperationException();
+				int random;
+				int count = this.current.Count;
+				if(count <= this.index) {
+					count = this.next.Count;
+					if(count <= 0) {
+						return null;
 					}
 
 					#if VALIDATE_GET_FUNCTION
 						Tracer.Assert(this.functionCount == this.functionIndex.Count);
 						Tracer.Assert(this.functionCount == 0 || (this.functionIndex.Contains(0) && this.functionIndex.Contains(this.functionCount - 1)));
-						this.functionCount = this.next.Count;
+						this.functionCount = count;
 						this.functionIndex.Clear();
 					#endif
 
@@ -228,28 +232,33 @@ namespace LogicCircuit {
 					this.next = this.current;
 					this.current = temp;
 
-					this.index = 0;
-					this.seed = 214013 * this.seed + 2531011;
-					this.offset = (int.MaxValue & this.seed) % this.current.Count;
+					this.index = 1;
 
-					if(0 < this.Delay && 1 < this.current.Count) {
-						int max = Math.Min(this.Delay, this.current.Count - 1);
+					// This expression for step will allow to iterate for this.index from 0 to this.current.Count - 1 and walk through each element
+					// of this.current exactly once because int.MaxValue is prime number
+					this.step = int.MaxValue % count;
+
+					// simple but fast random number generator
+					this.seed = 214013 * this.seed + 2531011;
+
+					// this will just make sure: 0 <= random < count
+					random = (int.MaxValue & this.seed) % count;
+					this.offset = random;
+
+					if(0 < this.Delay && 1 < count) {
+						int max = Math.Min(this.Delay, count - 1);
 						for(int i = 0; i < max; i++) {
 							this.Add(this.Get());
 						}
 					}
+				} else {
+					this.index++;
+					random = this.offset - this.step;
+					if(random < 0) {
+						random += count;
+					}
+					this.offset = random;
 				}
-				// This expression will iterate for this.index from 0 to this.current.Count - 1 and walk through each element
-				// of this.current exactly once.
-				// The constant should be a primary number greater then (this.current.Count) in order to walk through entire current list
-				int count = this.current.Count;
-				int random = (
-					count < 43627
-					// 43627 is biggest prime that will not overflow integer for this expression
-					? (43627 * (this.index++) + this.offset) % count
-					//int.MaxValue happened to be prime. Use it to calculate the same expression in long so bigger projects are available
-					: (int)(((long)int.MaxValue * (long)(this.index++) + this.offset) % (long)count)
-				);
 
 				#if VALIDATE_GET_FUNCTION
 					Tracer.Assert(0 <= random && random < this.functionCount && this.functionIndex.Add(random));
@@ -257,8 +266,6 @@ namespace LogicCircuit {
 
 				return this.current[random];
 			}
-
-			public bool IsEmpty { get { return this.current.Count <= this.index && this.next.Count <= 0; } }
 
 			private struct FunctionList {
 				private CircuitFunction[] list;
@@ -274,7 +281,6 @@ namespace LogicCircuit {
 
 				public void Add(CircuitFunction f) {
 					if(this.list.Length <= this.Count) {
-						//Tracer.Assert(this.Count < this.list.Length * 2, "size overflowed");
 						Array.Resize(ref this.list, this.list.Length * 2);
 					}
 					this.list[this.Count++] = f;

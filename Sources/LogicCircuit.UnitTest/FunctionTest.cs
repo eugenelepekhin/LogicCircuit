@@ -393,7 +393,7 @@ namespace LogicCircuit.UnitTest {
 		}
 
 		private void TestFunction(Func<CircuitState, int[], int, CircuitFunction> create, Func<CircuitState, int[], int, bool> isValid) {
-			for(int count = 2; count <= 12; count++) {
+			for(int count = 1; count <= 12; count++) {
 				CircuitState state = new CircuitState(3);
 				int result = state.ReserveState();
 				int[] param = new int[count];
@@ -431,7 +431,7 @@ namespace LogicCircuit.UnitTest {
 		[TestMethod()]
 		public void FunctionAndFullTest() {
 			this.TestFunction(
-				(state, param, result) => new FunctionAnd(state, param, result),
+				(state, param, result) => FunctionAnd.Create(state, param, result),
 				(state, param, result) => {
 					bool value = true;
 					foreach(int p in param) {
@@ -448,7 +448,7 @@ namespace LogicCircuit.UnitTest {
 		[TestMethod()]
 		public void FunctionAndNotFullTest() {
 			this.TestFunction(
-				(state, param, result) => new FunctionAndNot(state, param, result),
+				(state, param, result) => FunctionAndNot.Create(state, param, result),
 				(state, param, result) => {
 					bool value = true;
 					foreach(int p in param) {
@@ -465,7 +465,7 @@ namespace LogicCircuit.UnitTest {
 		[TestMethod()]
 		public void FunctionOrFullTest() {
 			this.TestFunction(
-				(state, param, result) => new FunctionOr(state, param, result),
+				(state, param, result) => FunctionOr.Create(state, param, result),
 				(state, param, result) => {
 					bool value = false;
 					foreach(int p in param) {
@@ -482,7 +482,7 @@ namespace LogicCircuit.UnitTest {
 		[TestMethod()]
 		public void FunctionOrNotFullTest() {
 			this.TestFunction(
-				(state, param, result) => new FunctionOrNot(state, param, result),
+				(state, param, result) => FunctionOrNot.Create(state, param, result),
 				(state, param, result) => {
 					bool value = false;
 					foreach(int p in param) {
@@ -499,7 +499,7 @@ namespace LogicCircuit.UnitTest {
 		[TestMethod()]
 		public void FunctionXorFullTest() {
 			this.TestFunction(
-				(state, param, result) => new FunctionXor(state, param, result),
+				(state, param, result) => FunctionXor.Create(state, param, result),
 				(state, param, result) => {
 					bool value = false;
 					foreach(int p in param) {
@@ -516,7 +516,7 @@ namespace LogicCircuit.UnitTest {
 		[TestMethod()]
 		public void FunctionXorNotFullTest() {
 			this.TestFunction(
-				(state, param, result) => new FunctionXorNot(state, param, result),
+				(state, param, result) => FunctionXorNot.Create(state, param, result),
 				(state, param, result) => {
 					bool value = false;
 					foreach(int p in param) {
