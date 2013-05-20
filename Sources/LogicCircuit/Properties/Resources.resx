@@ -1140,7 +1140,7 @@ Such circuit cannot be used more than once on other circuits as potentially diff
     <comment>{string circuitName, string ramNotation}</comment>
   </data>
   <data name="TitleIsDisplay" xml:space="preserve">
-    <value>Circuit i_s Display Block</value>
+    <value>Di_splay visual elements on symbol</value>
   </data>
   <data name="MessageRestartRequared" xml:space="preserve">
     <value>Your language selection has been changed. You need to restart the application so the new settings will take place.</value>
@@ -1236,9 +1236,10 @@ Such circuit cannot be used more than once on other circuits as potentially diff
     <value>Credits:</value>
   </data>
   <data name="ToolTipIsDisplay" xml:space="preserve">
-    <value>When you mark Logic Circuit as Display Block
-all display symbols on this circuit will visible alive on its symbols.
-Displays are: LED, LED Matrix, Button, or other Logic Circuit that is Display.</value>
+    <value>When you make Logic Circuit to display visual elements all display
+symbols on this circuit will visible alive on its symbols.
+Displays are: LED, LED Matrix, Button,
+or other Logic Circuit that displaying its visual elements.</value>
   </data>
   <data name="CaptionName" xml:space="preserve">
     <value>Name</value>
