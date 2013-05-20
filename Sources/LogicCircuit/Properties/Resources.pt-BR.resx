@@ -1,1216 +1,1235 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-	<!-- 
-		Microsoft ResX Schema
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
 
-		Version 1.3
-
-		The primary goals of this format is to allow a simple XML format 
-		that is mostly human readable. The generation and parsing of the 
-		various data types are done through the TypeConverter classes 
-		associated with the data types.
-
-		Example:
-
-		... ado.net/XML headers & schema ...
-		<resheader name="resmimetype">text/microsoft-resx</resheader>
-		<resheader name="version">1.3</resheader>
-		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-		<data name="Name1">this is my long string</data>
-		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-			[base64 mime encoded serialized .NET Framework object]
-		</data>
-		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-			[base64 mime encoded string representing a byte array form of the .NET Framework object]
-		</data>
-
-		There are any number of "resheader" rows that contain simple 
-		name/value pairs.
-
-		Each data row contains a name, and value. The row also contains a 
-		type or mimetype. Type corresponds to a .NET class that support 
-		text/value conversion through the TypeConverter architecture. 
-		Classes that don't support this are serialized and stored with the 
-		mimetype set.
-
-		The mimetype is used for serialized objects, and tells the 
-		ResXResourceReader how to depersist the object. This is currently not 
-		extensible. For a given mimetype the value must be set accordingly:
-
-		Note - application/x-microsoft.net.object.binary.base64 is the format 
-		that the ResXResourceWriter will generate, however the reader can 
-		read any of the formats listed below.
-
-		mimetype: application/x-microsoft.net.object.binary.base64
-		value   : The object must be serialized with 
-			: System.Serialization.Formatters.Binary.BinaryFormatter
-			: and then encoded with base64 encoding.
-
-		mimetype: application/x-microsoft.net.object.soap.base64
-		value   : The object must be serialized with 
-			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-			: and then encoded with base64 encoding.
-
-		mimetype: application/x-microsoft.net.object.bytearray.base64
-		value   : The object must be serialized into a byte array 
-			: using a System.ComponentModel.TypeConverter
-			: and then encoded with base64 encoding.
-	-->
-	
-	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-		<xsd:element name="root" msdata:IsDataSet="true">
-			<xsd:complexType>
-				<xsd:choice maxOccurs="unbounded">
-					<xsd:element name="data">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
-							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="resheader">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" />
-						</xsd:complexType>
-					</xsd:element>
-				</xsd:choice>
-			</xsd:complexType>
-		</xsd:element>
-	</xsd:schema>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-	<resheader name="version">
-		<value>1.3</value>
-	</resheader>
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<data name="ErrorProjectCount" xml:space="preserve">
-		<value>Mais de um projeto no arquivo.</value>
-	</data>
-	<data name="ErrorUnknownVersion" xml:space="preserve">
-		<value>Tentativa de carregar uma versão desconhecida de projeto.
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ErrorProjectCount" xml:space="preserve">
+    <value>Mais de um projeto no arquivo.</value>
+  </data>
+  <data name="ErrorUnknownVersion" xml:space="preserve">
+    <value>Tentativa de carregar uma versão desconhecida de projeto.
 O arquivo que você está tentando abrir pode estar corrompido ou foi criado por uma versão mais recente de Logic Circuit. Acesse &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt; para visualizar as versões mais recentes.</value>
-	</data>
-	<data name="FileFilter" xml:space="preserve">
-		<value>Projeto de Circuitos (*{0})|*{0}|Todos os arquivos (*.*)|*.*</value>
-		<comment>{string fileExtention}</comment>
-	</data>
-	<data name="FileSaved" xml:space="preserve">
-		<value>Arquivo {0} salvo.</value>
-		<comment>{string fileName}</comment>
-	</data>
-	<data name="FlowDirection" xml:space="preserve">
-		<value>LeftToRight</value>
-		<comment>!(LeftToRight, RightToLeft) - choose layout direction for your culture.</comment>
-	</data>
-	<data name="GateAndName" xml:space="preserve">
-		<value>And</value>
-	</data>
-	<data name="GateAndNotation" xml:space="preserve">
-		<value>&amp;</value>
-	</data>
-	<data name="GateAndNotName" xml:space="preserve">
-		<value>NAnd</value>
-	</data>
-	<data name="GateClockName" xml:space="preserve">
-		<value>Clock</value>
-	</data>
-	<data name="GateClockNotation" xml:space="preserve">
-		<value>ω</value>
-	</data>
-	<data name="GateLedName" xml:space="preserve">
-		<value>LED</value>
-	</data>
-	<data name="GateLedNotation" xml:space="preserve">
-		<value>LED</value>
-	</data>
-	<data name="GateNotName" xml:space="preserve">
-		<value>Not</value>
-	</data>
-	<data name="GateNotNotation" xml:space="preserve">
-		<value>~</value>
-	</data>
-	<data name="GateOrName" xml:space="preserve">
-		<value>Or</value>
-	</data>
-	<data name="GateOrNotation" xml:space="preserve">
-		<value>1</value>
-	</data>
-	<data name="GateOrNotName" xml:space="preserve">
-		<value>NOr</value>
-	</data>
-	<data name="CircuitProbeName" xml:space="preserve">
-		<value>Probe</value>
-	</data>
-	<data name="CircuitProbeNotation" xml:space="preserve">
-		<value>?</value>
-	</data>
-	<data name="GateShapeRectangular" xml:space="preserve">
-		<value>Rectangular</value>
-	</data>
-	<data name="GateShapeShaped" xml:space="preserve">
-		<value>Shaped</value>
-	</data>
-	<data name="GateTriStateName" xml:space="preserve">
-		<value>Tri-state</value>
-	</data>
-	<data name="GateTriStateNotation" xml:space="preserve">
-		<value>1</value>
-	</data>
-	<data name="GateXorName" xml:space="preserve">
-		<value>Xor</value>
-	</data>
-	<data name="GateXorNotation" xml:space="preserve">
-		<value>=</value>
-	</data>
-	<data name="GateXorNotName" xml:space="preserve">
-		<value>XNor</value>
-	</data>
-	<data name="Led7Pin1" xml:space="preserve">
-		<value>a</value>
-	</data>
-	<data name="Led7Pin2" xml:space="preserve">
-		<value>b</value>
-	</data>
-	<data name="Led7Pin3" xml:space="preserve">
-		<value>c</value>
-	</data>
-	<data name="Led7Pin4" xml:space="preserve">
-		<value>d</value>
-	</data>
-	<data name="Led7Pin5" xml:space="preserve">
-		<value>e</value>
-	</data>
-	<data name="Led7Pin6" xml:space="preserve">
-		<value>f</value>
-	</data>
-	<data name="Led7Pin7" xml:space="preserve">
-		<value>g</value>
-	</data>
-	<data name="Led7Pin8" xml:space="preserve">
-		<value>dot</value>
-	</data>
-	<data name="LogicalCircuitName" xml:space="preserve">
-		<value>Circuito</value>
-	</data>
-	<data name="MainFrameCaption" xml:space="preserve">
-		<value>Circuito Lógico {0}</value>
-		<comment>{string projectName}</comment>
-	</data>
-	<data name="MemoryAddressPinName" xml:space="preserve">
-		<value>Endereço de memória</value>
-	</data>
-	<data name="MemoryAddressPinNotation" xml:space="preserve">
-		<value>a</value>
-	</data>
-	<data name="MemoryDataInPinName" xml:space="preserve">
-		<value>Entrada de dados de memória</value>
-	</data>
-	<data name="MemoryDataPinName" xml:space="preserve">
-		<value>Dados de memória</value>
-	</data>
-	<data name="MemoryDataPinNotation" xml:space="preserve">
-		<value>d</value>
-	</data>
-	<data name="MemoryWritePinName" xml:space="preserve">
-		<value>Escrita na memória RAM.
+  </data>
+  <data name="FileFilter" xml:space="preserve">
+    <value>Projeto de Circuitos (*{0})|*{0}|Todos os arquivos (*.*)|*.*</value>
+    <comment>{string fileExtention}</comment>
+  </data>
+  <data name="FileSaved" xml:space="preserve">
+    <value>Arquivo {0} salvo.</value>
+    <comment>{string fileName}</comment>
+  </data>
+  <data name="FlowDirection" xml:space="preserve">
+    <value>LeftToRight</value>
+    <comment>!(LeftToRight, RightToLeft) - choose layout direction for your culture.</comment>
+  </data>
+  <data name="GateAndName" xml:space="preserve">
+    <value>And</value>
+  </data>
+  <data name="GateAndNotation" xml:space="preserve">
+    <value>&amp;</value>
+  </data>
+  <data name="GateAndNotName" xml:space="preserve">
+    <value>NAnd</value>
+  </data>
+  <data name="GateClockName" xml:space="preserve">
+    <value>Clock</value>
+  </data>
+  <data name="GateClockNotation" xml:space="preserve">
+    <value>ω</value>
+  </data>
+  <data name="GateLedName" xml:space="preserve">
+    <value>LED</value>
+  </data>
+  <data name="GateLedNotation" xml:space="preserve">
+    <value>LED</value>
+  </data>
+  <data name="GateNotName" xml:space="preserve">
+    <value>Not</value>
+  </data>
+  <data name="GateNotNotation" xml:space="preserve">
+    <value>~</value>
+  </data>
+  <data name="GateOrName" xml:space="preserve">
+    <value>Or</value>
+  </data>
+  <data name="GateOrNotation" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="GateOrNotName" xml:space="preserve">
+    <value>NOr</value>
+  </data>
+  <data name="CircuitProbeName" xml:space="preserve">
+    <value>Probe</value>
+  </data>
+  <data name="CircuitProbeNotation" xml:space="preserve">
+    <value>?</value>
+  </data>
+  <data name="GateShapeRectangular" xml:space="preserve">
+    <value>Rectangular</value>
+  </data>
+  <data name="GateShapeShaped" xml:space="preserve">
+    <value>Shaped</value>
+  </data>
+  <data name="GateTriStateName" xml:space="preserve">
+    <value>Tri-state</value>
+  </data>
+  <data name="GateTriStateNotation" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="GateXorName" xml:space="preserve">
+    <value>Xor</value>
+  </data>
+  <data name="GateXorNotation" xml:space="preserve">
+    <value>=</value>
+  </data>
+  <data name="GateXorNotName" xml:space="preserve">
+    <value>XNor</value>
+  </data>
+  <data name="Led7Pin1" xml:space="preserve">
+    <value>a</value>
+  </data>
+  <data name="Led7Pin2" xml:space="preserve">
+    <value>b</value>
+  </data>
+  <data name="Led7Pin3" xml:space="preserve">
+    <value>c</value>
+  </data>
+  <data name="Led7Pin4" xml:space="preserve">
+    <value>d</value>
+  </data>
+  <data name="Led7Pin5" xml:space="preserve">
+    <value>e</value>
+  </data>
+  <data name="Led7Pin6" xml:space="preserve">
+    <value>f</value>
+  </data>
+  <data name="Led7Pin7" xml:space="preserve">
+    <value>g</value>
+  </data>
+  <data name="Led7Pin8" xml:space="preserve">
+    <value>dot</value>
+  </data>
+  <data name="LogicalCircuitName" xml:space="preserve">
+    <value>Circuito</value>
+  </data>
+  <data name="MainFrameCaption" xml:space="preserve">
+    <value>Circuito Lógico {0}</value>
+    <comment>{string projectName}</comment>
+  </data>
+  <data name="MemoryAddressPinName" xml:space="preserve">
+    <value>Endereço de memória</value>
+  </data>
+  <data name="MemoryAddressPinNotation" xml:space="preserve">
+    <value>a</value>
+  </data>
+  <data name="MemoryDataInPinName" xml:space="preserve">
+    <value>Entrada de dados de memória</value>
+  </data>
+  <data name="MemoryDataPinName" xml:space="preserve">
+    <value>Dados de memória</value>
+  </data>
+  <data name="MemoryDataPinNotation" xml:space="preserve">
+    <value>d</value>
+  </data>
+  <data name="MemoryWritePinName" xml:space="preserve">
+    <value>Escrita na memória RAM.
 Valor de memória atualizado para {0}</value>
-	<comment>{string writeOn}</comment>
-	</data>
-	<data name="MemoryWritePinNotation" xml:space="preserve">
-		<value>w</value>
-	</data>
-	<data name="MessageSaveFile" xml:space="preserve">
-		<value>O projeto {0} sofreu alterações.
+    <comment>{string writeOn}</comment>
+  </data>
+  <data name="MemoryWritePinNotation" xml:space="preserve">
+    <value>w</value>
+  </data>
+  <data name="MessageSaveFile" xml:space="preserve">
+    <value>O projeto {0} sofreu alterações.
 Você deseja salvá-lo?</value>
-	<comment>{string projecgName}</comment>
-	</data>
-	<data name="OperationCanceled" xml:space="preserve">
-		<value>Operação cancelada.</value>
-	</data>
-	<data name="PinEnableName" xml:space="preserve">
-		<value>E</value>
-	</data>
-	<data name="PinInName" xml:space="preserve">
-		<value>x</value>
-	</data>
-	<data name="PinName" xml:space="preserve">
-		<value>{0}{1}</value>
-		<comment>{string prefix, int number}</comment>
-	</data>
-	<data name="PinOutName" xml:space="preserve">
-		<value>q</value>
-	</data>
-	<data name="Ready" xml:space="preserve">
-		<value>Pronto.</value>
-	</data>
-	<data name="SplitterThin1PinName" xml:space="preserve">
-		<value>(bit {0}) do divisor de sinal</value>
-		<comment>{int bit}</comment>
-	</data>
-	<data name="SplitterThin2PinName" xml:space="preserve">
-		<value>(bits {0}-{1}) do divisor de sinal</value>
-		<comment>{int firstBit, int lastBit}</comment>
-	</data>
-	<data name="SplitterWidePinName" xml:space="preserve">
-		<value>Divisor de sinal</value>
-	</data>
-	<data name="TitleCancel" xml:space="preserve">
-		<value>Cancelar</value>
-	</data>
-	<data name="TitleNo" xml:space="preserve">
-		<value>_Não</value>
-	</data>
-	<data name="TitleOK" xml:space="preserve">
-		<value>OK</value>
-	</data>
-	<data name="TitleShowDetails" xml:space="preserve">
-		<value>Mo_strar detalhes</value>
-	</data>
-	<data name="TitleYes" xml:space="preserve">
-		<value>Sim</value>
-	</data>
-	<data name="WriteOn0" xml:space="preserve">
-		<value>baixando de 1 para 0</value>
-	</data>
-	<data name="WriteOn1" xml:space="preserve">
-		<value>subindo de 0 para 1</value>
-	</data>
-	<data name="ConstantNotation" xml:space="preserve">
-		<value>{0:X}</value>
-		<comment>{int constantValue}</comment>
-	</data>
-	<data name="RAMNotation" xml:space="preserve">
-		<value>RAM</value>
-	</data>
-	<data name="ROMNotation" xml:space="preserve">
-		<value>ROM</value>
-	</data>
-	<data name="ToolTipButton" xml:space="preserve">
-		<value>Botão {0}</value>
-		<comment>{string buttonName}</comment>
-	</data>
-	<data name="ToolTipConstant" xml:space="preserve">
-		<value>{0} bit(s) constante(s) {1:X}</value>
-		<comment>{int bitWidth, int value}</comment>
-	</data>
-	<data name="ToolTipInputPin" xml:space="preserve">
-		<value>Entrada de {0} bit(s) no pino {1}</value>
-		<comment>{int bitWidth, string pinName}</comment>
-	</data>
-	<data name="ToolTipNonePin" xml:space="preserve">
-		<value>{0} bit(s) {1}</value>
-		<comment>{int bitWidth, string pinName}</comment>
-	</data>
-	<data name="ToolTipOutputPin" xml:space="preserve">
-		<value>Saída de {0} bit(s) no pino {1}</value>
-		<comment>{int bitWidth, string pinName}</comment>
-	</data>
-	<data name="ToolTipRAM" xml:space="preserve">
-		<value>RAM: {0} bit de endereço / {1} bit de dados</value>
-		<comment>{int address, int data}</comment>
-	</data>
-	<data name="ToolTipROM" xml:space="preserve">
-		<value>ROM: {0} bit de endereço / {1} bit de dados</value>
-		<comment>{int address, int data}</comment>
-	</data>
-	<data name="ToolTipSplitter" xml:space="preserve">
-		<value>Divisor de {0} bits para {1} pinos</value>
-		<comment>{int bitWidth, int pinCount}</comment>
-	</data>
-	<data name="ToolTipWire" xml:space="preserve">
-		<value>Fio</value>
-	</data>
-	<data name="CategoryInputOutput" xml:space="preserve">
-		<value>Entrada - Saída</value>
-	</data>
-	<data name="TitlePinInput" xml:space="preserve">
-		<value>{0}
+    <comment>{string projecgName}</comment>
+  </data>
+  <data name="OperationCanceled" xml:space="preserve">
+    <value>Operação cancelada.</value>
+  </data>
+  <data name="PinEnableName" xml:space="preserve">
+    <value>E</value>
+  </data>
+  <data name="PinInName" xml:space="preserve">
+    <value>x</value>
+  </data>
+  <data name="PinName" xml:space="preserve">
+    <value>{0}{1}</value>
+    <comment>{string prefix, int number}</comment>
+  </data>
+  <data name="PinOutName" xml:space="preserve">
+    <value>q</value>
+  </data>
+  <data name="Ready" xml:space="preserve">
+    <value>Pronto.</value>
+  </data>
+  <data name="SplitterThin1PinName" xml:space="preserve">
+    <value>(bit {0}) do divisor de sinal</value>
+    <comment>{int bit}</comment>
+  </data>
+  <data name="SplitterThin2PinName" xml:space="preserve">
+    <value>(bits {0}-{1}) do divisor de sinal</value>
+    <comment>{int firstBit, int lastBit}</comment>
+  </data>
+  <data name="SplitterWidePinName" xml:space="preserve">
+    <value>Divisor de sinal</value>
+  </data>
+  <data name="TitleCancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="TitleNo" xml:space="preserve">
+    <value>_Não</value>
+  </data>
+  <data name="TitleOK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="TitleShowDetails" xml:space="preserve">
+    <value>Mo_strar detalhes</value>
+  </data>
+  <data name="TitleYes" xml:space="preserve">
+    <value>Sim</value>
+  </data>
+  <data name="WriteOn0" xml:space="preserve">
+    <value>baixando de 1 para 0</value>
+  </data>
+  <data name="WriteOn1" xml:space="preserve">
+    <value>subindo de 0 para 1</value>
+  </data>
+  <data name="ConstantNotation" xml:space="preserve">
+    <value>{0:X}</value>
+    <comment>{int constantValue}</comment>
+  </data>
+  <data name="RAMNotation" xml:space="preserve">
+    <value>RAM</value>
+  </data>
+  <data name="ROMNotation" xml:space="preserve">
+    <value>ROM</value>
+  </data>
+  <data name="ToolTipButton" xml:space="preserve">
+    <value>Botão {0}</value>
+    <comment>{string buttonName}</comment>
+  </data>
+  <data name="ToolTipConstant" xml:space="preserve">
+    <value>{0} bit(s) constante(s) {1:X}</value>
+    <comment>{int bitWidth, int value}</comment>
+  </data>
+  <data name="ToolTipInputPin" xml:space="preserve">
+    <value>Entrada de {0} bit(s) no pino {1}</value>
+    <comment>{int bitWidth, string pinName}</comment>
+  </data>
+  <data name="ToolTipNonePin" xml:space="preserve">
+    <value>{0} bit(s) {1}</value>
+    <comment>{int bitWidth, string pinName}</comment>
+  </data>
+  <data name="ToolTipOutputPin" xml:space="preserve">
+    <value>Saída de {0} bit(s) no pino {1}</value>
+    <comment>{int bitWidth, string pinName}</comment>
+  </data>
+  <data name="ToolTipRAM" xml:space="preserve">
+    <value>RAM: {0} bit de endereço / {1} bit de dados</value>
+    <comment>{int address, int data}</comment>
+  </data>
+  <data name="ToolTipROM" xml:space="preserve">
+    <value>ROM: {0} bit de endereço / {1} bit de dados</value>
+    <comment>{int address, int data}</comment>
+  </data>
+  <data name="ToolTipSplitter" xml:space="preserve">
+    <value>Divisor de {0} bits para {1} pinos</value>
+    <comment>{int bitWidth, int pinCount}</comment>
+  </data>
+  <data name="ToolTipWire" xml:space="preserve">
+    <value>Fio</value>
+  </data>
+  <data name="CategoryInputOutput" xml:space="preserve">
+    <value>Entrada - Saída</value>
+  </data>
+  <data name="TitlePinInput" xml:space="preserve">
+    <value>{0}
 Entrada</value>
-		<comment>{string pinName}</comment>
-	</data>
-	<data name="TitlePinOutput" xml:space="preserve">
-		<value>{0}
+    <comment>{string pinName}</comment>
+  </data>
+  <data name="TitlePinOutput" xml:space="preserve">
+    <value>{0}
 Saída</value>
-		<comment>{string pinName}</comment>
-	</data>
-	<data name="CommandHelpAbout" xml:space="preserve">
-		<value>Sobre</value>
-	</data>
-	<data name="NameButton" xml:space="preserve">
-		<value>Botão</value>
-	</data>
-	<data name="NameConstant" xml:space="preserve">
-		<value>Constante</value>
-	</data>
-	<data name="NameSplitter" xml:space="preserve">
-		<value>Divisor</value>
-	</data>
-	<data name="TitleAbout" xml:space="preserve">
-		<value>Sobre</value>
-	</data>
-	<data name="TitleApplication" xml:space="preserve">
-		<value>Logical Circuit</value>
-	</data>
-	<data name="TitleVersion" xml:space="preserve">
-		<value>Versão:</value>
-	</data>
-	<data name="TitleWeb" xml:space="preserve">
-		<value>Web:</value>
-	</data>
-	<data name="WebSiteUri" xml:space="preserve">
-		<value>http://www.logiccircuit.org/</value>
-	</data>
-	<data name="CommandToolsOptions" xml:space="preserve">
-		<value>_Opções</value>
-	</data>
-	<data name="TitleDisplayOptions" xml:space="preserve">
-		<value>Display</value>
-	</data>
-	<data name="TitleFileOptions" xml:space="preserve">
-		<value>Arquivo</value>
-	</data>
-	<data name="TitleGateShape" xml:space="preserve">
-	<value>_Gate shape</value>
-	</data>
-	<data name="TitleLoadLastFile" xml:space="preserve">
-	<value>_Load last file on start up</value>
-	</data>
-	<data name="TitleOptions" xml:space="preserve">
-		<value>Opções</value>
-	</data>
-	<data name="TitleShowGrid" xml:space="preserve">
-		<value>Mo_strar grid</value>
-	</data>
-	<data name="MessageFreeWireCount" xml:space="preserve">
-		<value>Foram encontrados {0} fios desconectados.</value>
-		<comment>{int wireCount}</comment>
-	</data>
-	<data name="MessageFloatingSymbolCount" xml:space="preserve">
-		<value>Foram encontrados {0} símbolos não conectados.</value>
-		<comment>{int symbolCount}</comment>
-	</data>
-	<data name="CommandCircuitCurrent" xml:space="preserve">
-		<value>Logical Circuit</value>
-	</data>
-	<data name="CommandCircuitDelete" xml:space="preserve">
-		<value>Apagar circuito atual</value>
-	</data>
-	<data name="CommandCircuitNew" xml:space="preserve">
-		<value>Novo circuito lógico</value>
-	</data>
-	<data name="CommandCircuitProject" xml:space="preserve">
-		<value>Projeto</value>
-	</data>
-	<data name="CommandEditSelectAllButWires" xml:space="preserve">
-		<value>Selecionar tudo menos os fios</value>
-	</data>
-	<data name="CommandEditSelectAllProbes" xml:space="preserve">
-		<value>Selecionar todos os conectores</value>
-	</data>
-	<data name="CommandEditSelectAllProbesWithWire" xml:space="preserve">
-		<value>Selecionar todos os conectores e fios conectados</value>
-	</data>
-	<data name="CommandEditSelectAllWires" xml:space="preserve">
-		<value>Selecionar todos os fios</value>
-	</data>
-	<data name="CommandEditSelectFloatingSymbols" xml:space="preserve">
-		<value>Selecionar símbolos flutuantes</value>
-	</data>
-	<data name="CommandEditSelectFreeWires" xml:space="preserve">
-		<value>Selecionar fios desconectados</value>
-	</data>
-	<data name="CommandEditUnselectAllButWires" xml:space="preserve">
-		<value>Deselecionar tudo menos os fios</value>
-	</data>
-	<data name="CommandEditUnselectAllWires" xml:space="preserve">
-		<value>Deselecionar todos os fios</value>
-	</data>
-	<data name="CommandFileExportImage" xml:space="preserve">
-		<value>Exportar imagem</value>
-	</data>
-	<data name="CommandToolsOscilloscope" xml:space="preserve">
-		<value>Osciloscópio</value>
-	</data>
-	<data name="CommandToolsReport" xml:space="preserve">
-		<value>Relatório do Projeto</value>
-	</data>
-	<data name="HelpContent" xml:space="preserve">
-		<value>http://www.logiccircuit.org/help.html</value>
-	</data>
-	<data name="TitleCategory" xml:space="preserve">
-		<value>_Categoria:</value>
-	</data>
-	<data name="TitleDescription" xml:space="preserve">
-		<value>_Descrição:</value>
-	</data>
-	<data name="TitleName" xml:space="preserve">
-		<value>_Nome:</value>
-	</data>
-	<data name="TitleNotation" xml:space="preserve">
-		<value>N_otação:</value>
-	</data>
-	<data name="TitleBitWidth" xml:space="preserve">
-		<value>Largura de _Bit:</value>
-	</data>
-	<data name="TitleValue" xml:space="preserve">
-		<value>_Valor:</value>
-	</data>
-	<data name="NamePin" xml:space="preserve">
-		<value>Pino</value>
-	</data>
-	<data name="TitleAddressBitWidth" xml:space="preserve">
-		<value>L_argura de bits de endereço:</value>
-	</data>
-	<data name="TitleData" xml:space="preserve">
-		<value>Dado</value>
-	</data>
-	<data name="TitleDataBitWidth" xml:space="preserve">
-		<value>Largura _de bits de dados:</value>
-	</data>
-	<data name="TitleInverted" xml:space="preserve">
-		<value>_Invertido</value>
-	</data>
-	<data name="TitleLoad" xml:space="preserve">
-		<value>Carregar...</value>
-	</data>
-	<data name="TitleSide" xml:space="preserve">
-		<value>Lado:</value>
-	</data>
-	<data name="TitleType" xml:space="preserve">
-		<value>_Tipo:</value>
-	</data>
-	<data name="TitleWriteOn" xml:space="preserve">
-		<value>Escrever em:</value>
-	</data>
-	<data name="TipOnStartMove" xml:space="preserve">
-		<value>Arraste e solte a seleção para a localização desejada. Pressione Esc para cancelar a operação. Segure Shift enquanto soltar para evitar a movimentação de fios conectados.</value>
-	</data>
-	<data name="TipOnStartWire" xml:space="preserve">
-		<value>Arraste o final do fio para o local desejado. Pressione Esc para cancelar a operação.</value>
-	</data>
-	<data name="Loading" xml:space="preserve">
-		<value>Carregando...</value>
-	</data>
-	<data name="TipOnCtrlDown" xml:space="preserve">
-		<value>Pressione Ctrl+{Shift}+Tab para alternar entre os circuitos lógicos ou clique para selecionar/deselecionar os objetos.</value>
-	</data>
-	<data name="TipOnWireSelect" xml:space="preserve">
-		<value>Shift+{Ctrl}+Click para selecionar/deselecionar todo o condutor, Alt+Click no fio selecionado para dividir, e em dois pontos para unir.</value>
-	</data>
-	<data name="TipOnAwaitingArea" xml:space="preserve">
-		<value>{0} {1}. Selecione vários símbolos para selecioná-los, segure a tecla Shift para manter a seleção atual.</value>
-		<comment>{string logicCircuit, LogicCircuit.GridPoint point}</comment>
-	</data>
-	<data name="FunctionParameter" xml:space="preserve">
-		<value>Função {0} requer ao menos {1} parâmetro(s)</value>
-		<comment>{string function, int parameterCount}</comment>
-	</data>
-	<data name="UnknownState" xml:space="preserve">
-		<value>Estado {0} desconhecido</value>
-		<comment>{LogicCircuit.State state}</comment>
-	</data>
-	<data name="CircuitMapPathSeparator" xml:space="preserve">
-		<value>/</value>
-		</data>
-	<data name="ErrorAddressNotConnected" xml:space="preserve">
-		<value>Nem todos os bits de endereço conectados na memória {0}</value>
-		<comment>{string memoryPath}</comment>
-	</data>
-	<data name="ErrorDataInNotConnected" xml:space="preserve">
-		<value>Nem todos os bits de entrada conectados na memória {0}</value>
-		<comment>{string memoryPath}</comment>
-	</data>
-	<data name="ErrorJamBitWidthDifferent" xml:space="preserve">
-		<value>Pino de entrada {0} ({1}) e pino de saída {2} ({3}) em {4} tem larguras de bits diferentes e não podem ser conectados. Por favor, verifique.</value>
-		<comment>{string symbol1, GridPoint point1, string symbol2, GridPoint point2, string logicCircuit}</comment>
-	</data>
-	<data name="ErrorLoopInCircuit" xml:space="preserve">
-		<value>Símbolo do circuito "{0}" no circuito lógico "{1}" forma um loop infinito. Por favor, verifique.</value>
-		<comment>{string symbol, string logicCircuit}</comment>
-	</data>
-	<data name="ErrorManyResults" xml:space="preserve">
-		<value>Pino de entrada {0} de {1} conectado a mais de um pino de saída que não permite tri-state.</value>
-		<comment>{string pinName, string symbol}</comment>
-	</data>
-	<data name="PowerOff" xml:space="preserve">
-		<value>Desligar</value>
-	</data>
-	<data name="PowerOn" xml:space="preserve">
-		<value>Ligar</value>
-	</data>
-	<data name="ProbeHistoryHex" xml:space="preserve">
-		<value>{0:X}</value>
-		<comment>{int value}</comment>
-	</data>
-	<data name="ProbeHistoryMark" xml:space="preserve">
-		<value>&lt;&lt;&lt;&lt;&lt;&lt; Marcar &gt;&gt;&gt;&gt;&gt;&gt;</value>
-	</data>
-	<data name="TitleMark" xml:space="preserve">
-		<value>_Marcar</value>
-	</data>
-	<data name="TitleProbeHistory" xml:space="preserve">
-		<value>Histórico</value>
-	</data>
-	<data name="MessageNotRootConstant" xml:space="preserve">
-		<value>Somente constantes pertencentes ao circuito raiz ({0}) podem ser alteradas quando o circuito está ligado.</value>
-		<comment>{string circuitName}</comment>
-	</data>
-	<data name="LogicalCircuitMainName" xml:space="preserve">
-		<value>Principal</value>
-	</data>
-	<data name="CircuitProjectName" xml:space="preserve">
-		<value>Projeto de Circuito</value>
-	</data>
-	<data name="Oscillation" xml:space="preserve">
-		<value>Oscilação</value>
-	</data>
-	<data name="TitleOscillogram" xml:space="preserve">
-		<value>Osciligrama</value>
-	</data>
-	<data name="TitleOscilloscope" xml:space="preserve">
-		<value>Osciloscópio</value>
-	</data>
-	<data name="TitleOscilloscoping" xml:space="preserve">
-		<value>Medindo pelo osciloscópio</value>
-	</data>
-	<data name="CommandFileFileImport" xml:space="preserve">
-		<value>_Importar...</value>
-	</data>
-	<data name="ImportTitle" xml:space="preserve">
-		<value>Importar</value>
-	</data>
-	<data name="TitleCircuitDescriptor" xml:space="preserve">
-		<value>Circuito</value>
-	</data>
-	<data name="TitleFileName" xml:space="preserve">
-		<value>Arquivo:</value>
-	</data>
-	<data name="TitleImportCircuit" xml:space="preserve">
-		<value>Importar</value>
-	</data>
-	<data name="TitleCheckAll" xml:space="preserve">
-		<value>Marcar todos</value>
-	</data>
-	<data name="TitleUncheckAll" xml:space="preserve">
-		<value>Desmarcar todos</value>
-	</data>
-	<data name="ImageFileFilter" xml:space="preserve">
-		<value>Arquivo de Imagem (*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif)|*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif|Todos os Arquivos (*.*)|*.*</value>
-	</data>
-	<data name="ImagePathInvalid" xml:space="preserve">
-		<value>O nome do arquivo informado não é válido. Verifique se a pasta e o arquivo existem.</value>
-	</data>
-	<data name="MessageExportImageDialog" xml:space="preserve">
-		<value>Selecione o tipo de imagem e o nome do arquivo para exportar o diagrama.</value>
-	</data>
-	<data name="MessageImageFileExists" xml:space="preserve">
-		<value>Arquivo "{0}" já existe.
+    <comment>{string pinName}</comment>
+  </data>
+  <data name="CommandHelpAbout" xml:space="preserve">
+    <value>Sobre</value>
+  </data>
+  <data name="NameButton" xml:space="preserve">
+    <value>Botão</value>
+  </data>
+  <data name="NameConstant" xml:space="preserve">
+    <value>Constante</value>
+  </data>
+  <data name="NameSplitter" xml:space="preserve">
+    <value>Divisor</value>
+  </data>
+  <data name="TitleAbout" xml:space="preserve">
+    <value>Sobre</value>
+  </data>
+  <data name="TitleApplication" xml:space="preserve">
+    <value>Logical Circuit</value>
+  </data>
+  <data name="TitleVersion" xml:space="preserve">
+    <value>Versão:</value>
+  </data>
+  <data name="TitleWeb" xml:space="preserve">
+    <value>Web:</value>
+  </data>
+  <data name="WebSiteUri" xml:space="preserve">
+    <value>http://www.logiccircuit.org/</value>
+  </data>
+  <data name="CommandToolsOptions" xml:space="preserve">
+    <value>_Opções</value>
+  </data>
+  <data name="TitleDisplayOptions" xml:space="preserve">
+    <value>Display</value>
+  </data>
+  <data name="TitleFileOptions" xml:space="preserve">
+    <value>Arquivo</value>
+  </data>
+  <data name="TitleGateShape" xml:space="preserve">
+    <value>_Gate shape</value>
+  </data>
+  <data name="TitleLoadLastFile" xml:space="preserve">
+    <value>_Load last file on start up</value>
+  </data>
+  <data name="TitleOptions" xml:space="preserve">
+    <value>Opções</value>
+  </data>
+  <data name="TitleShowGrid" xml:space="preserve">
+    <value>Mo_strar grid</value>
+  </data>
+  <data name="MessageFreeWireCount" xml:space="preserve">
+    <value>Foram encontrados {0} fios desconectados.</value>
+    <comment>{int wireCount}</comment>
+  </data>
+  <data name="MessageFloatingSymbolCount" xml:space="preserve">
+    <value>Foram encontrados {0} símbolos não conectados.</value>
+    <comment>{int symbolCount}</comment>
+  </data>
+  <data name="CommandCircuitCurrent" xml:space="preserve">
+    <value>Logical Circuit</value>
+  </data>
+  <data name="CommandCircuitDelete" xml:space="preserve">
+    <value>Apagar circuito atual</value>
+  </data>
+  <data name="CommandCircuitNew" xml:space="preserve">
+    <value>Novo circuito lógico</value>
+  </data>
+  <data name="CommandCircuitProject" xml:space="preserve">
+    <value>Projeto</value>
+  </data>
+  <data name="CommandEditSelectAllButWires" xml:space="preserve">
+    <value>Selecionar tudo menos os fios</value>
+  </data>
+  <data name="CommandEditSelectAllProbes" xml:space="preserve">
+    <value>Selecionar todos os conectores</value>
+  </data>
+  <data name="CommandEditSelectAllProbesWithWire" xml:space="preserve">
+    <value>Selecionar todos os conectores e fios conectados</value>
+  </data>
+  <data name="CommandEditSelectAllWires" xml:space="preserve">
+    <value>Selecionar todos os fios</value>
+  </data>
+  <data name="CommandEditSelectFloatingSymbols" xml:space="preserve">
+    <value>Selecionar símbolos flutuantes</value>
+  </data>
+  <data name="CommandEditSelectFreeWires" xml:space="preserve">
+    <value>Selecionar fios desconectados</value>
+  </data>
+  <data name="CommandEditUnselectAllButWires" xml:space="preserve">
+    <value>Deselecionar tudo menos os fios</value>
+  </data>
+  <data name="CommandEditUnselectAllWires" xml:space="preserve">
+    <value>Deselecionar todos os fios</value>
+  </data>
+  <data name="CommandFileExportImage" xml:space="preserve">
+    <value>Exportar imagem</value>
+  </data>
+  <data name="CommandToolsOscilloscope" xml:space="preserve">
+    <value>Osciloscópio</value>
+  </data>
+  <data name="CommandToolsReport" xml:space="preserve">
+    <value>Relatório do Projeto</value>
+  </data>
+  <data name="HelpContent" xml:space="preserve">
+    <value>http://www.logiccircuit.org/help.html</value>
+  </data>
+  <data name="TitleCategory" xml:space="preserve">
+    <value>_Categoria:</value>
+  </data>
+  <data name="TitleDescription" xml:space="preserve">
+    <value>_Descrição:</value>
+  </data>
+  <data name="TitleName" xml:space="preserve">
+    <value>_Nome:</value>
+  </data>
+  <data name="TitleNotation" xml:space="preserve">
+    <value>N_otação:</value>
+  </data>
+  <data name="TitleBitWidth" xml:space="preserve">
+    <value>Largura de _Bit:</value>
+  </data>
+  <data name="TitleValue" xml:space="preserve">
+    <value>_Valor:</value>
+  </data>
+  <data name="NamePin" xml:space="preserve">
+    <value>Pino</value>
+  </data>
+  <data name="TitleAddressBitWidth" xml:space="preserve">
+    <value>L_argura de bits de endereço:</value>
+  </data>
+  <data name="TitleData" xml:space="preserve">
+    <value>Dado</value>
+  </data>
+  <data name="TitleDataBitWidth" xml:space="preserve">
+    <value>Largura _de bits de dados:</value>
+  </data>
+  <data name="TitleInverted" xml:space="preserve">
+    <value>_Invertido</value>
+  </data>
+  <data name="TitleLoad" xml:space="preserve">
+    <value>Carregar...</value>
+  </data>
+  <data name="TitleSide" xml:space="preserve">
+    <value>Lado:</value>
+  </data>
+  <data name="TitleType" xml:space="preserve">
+    <value>_Tipo:</value>
+  </data>
+  <data name="TitleWriteOn" xml:space="preserve">
+    <value>Escrever em:</value>
+  </data>
+  <data name="TipOnStartMove" xml:space="preserve">
+    <value>Arraste e solte a seleção para a localização desejada. Pressione Esc para cancelar a operação. Segure Shift enquanto soltar para evitar a movimentação de fios conectados.</value>
+  </data>
+  <data name="TipOnStartWire" xml:space="preserve">
+    <value>Arraste o final do fio para o local desejado. Pressione Esc para cancelar a operação.</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Carregando...</value>
+  </data>
+  <data name="TipOnCtrlDown" xml:space="preserve">
+    <value>Pressione Ctrl+{Shift}+Tab para alternar entre os circuitos lógicos ou clique para selecionar/deselecionar os objetos.</value>
+  </data>
+  <data name="TipOnWireSelect" xml:space="preserve">
+    <value>Shift+{Ctrl}+Click para selecionar/deselecionar todo o condutor, Alt+Click no fio selecionado para dividir, e em dois pontos para unir.</value>
+  </data>
+  <data name="TipOnAwaitingArea" xml:space="preserve">
+    <value>{0} {1}. Selecione vários símbolos para selecioná-los, segure a tecla Shift para manter a seleção atual.</value>
+    <comment>{string logicCircuit, LogicCircuit.GridPoint point}</comment>
+  </data>
+  <data name="FunctionParameter" xml:space="preserve">
+    <value>Função {0} requer ao menos {1} parâmetro(s)</value>
+    <comment>{string function, int parameterCount}</comment>
+  </data>
+  <data name="UnknownState" xml:space="preserve">
+    <value>Estado {0} desconhecido</value>
+    <comment>{LogicCircuit.State state}</comment>
+  </data>
+  <data name="CircuitMapPathSeparator" xml:space="preserve">
+    <value>/</value>
+  </data>
+  <data name="ErrorAddressNotConnected" xml:space="preserve">
+    <value>Nem todos os bits de endereço conectados na memória {0}</value>
+    <comment>{string memoryPath}</comment>
+  </data>
+  <data name="ErrorDataInNotConnected" xml:space="preserve">
+    <value>Nem todos os bits de entrada conectados na memória {0}</value>
+    <comment>{string memoryPath}</comment>
+  </data>
+  <data name="ErrorJamBitWidthDifferent" xml:space="preserve">
+    <value>Pino de entrada {0} ({1}) e pino de saída {2} ({3}) em {4} tem larguras de bits diferentes e não podem ser conectados. Por favor, verifique.</value>
+    <comment>{string symbol1, GridPoint point1, string symbol2, GridPoint point2, string logicCircuit}</comment>
+  </data>
+  <data name="ErrorLoopInCircuit" xml:space="preserve">
+    <value>Símbolo do circuito "{0}" no circuito lógico "{1}" forma um loop infinito. Por favor, verifique.</value>
+    <comment>{string symbol, string logicCircuit}</comment>
+  </data>
+  <data name="ErrorManyResults" xml:space="preserve">
+    <value>Pino de entrada {0} de {1} conectado a mais de um pino de saída que não permite tri-state.</value>
+    <comment>{string pinName, string symbol}</comment>
+  </data>
+  <data name="PowerOff" xml:space="preserve">
+    <value>Desligar</value>
+  </data>
+  <data name="PowerOn" xml:space="preserve">
+    <value>Ligar</value>
+  </data>
+  <data name="ProbeHistoryHex" xml:space="preserve">
+    <value>{0:X}</value>
+    <comment>{int value}</comment>
+  </data>
+  <data name="ProbeHistoryMark" xml:space="preserve">
+    <value>&lt;&lt;&lt;&lt;&lt;&lt; Marcar &gt;&gt;&gt;&gt;&gt;&gt;</value>
+  </data>
+  <data name="TitleMark" xml:space="preserve">
+    <value>_Marcar</value>
+  </data>
+  <data name="TitleProbeHistory" xml:space="preserve">
+    <value>Histórico</value>
+  </data>
+  <data name="MessageNotRootConstant" xml:space="preserve">
+    <value>Somente constantes pertencentes ao circuito raiz ({0}) podem ser alteradas quando o circuito está ligado.</value>
+    <comment>{string circuitName}</comment>
+  </data>
+  <data name="LogicalCircuitMainName" xml:space="preserve">
+    <value>Principal</value>
+  </data>
+  <data name="CircuitProjectName" xml:space="preserve">
+    <value>Projeto de Circuito</value>
+  </data>
+  <data name="Oscillation" xml:space="preserve">
+    <value>Oscilação</value>
+  </data>
+  <data name="TitleOscillogram" xml:space="preserve">
+    <value>Osciligrama</value>
+  </data>
+  <data name="TitleOscilloscope" xml:space="preserve">
+    <value>Osciloscópio</value>
+  </data>
+  <data name="TitleOscilloscoping" xml:space="preserve">
+    <value>Medindo pelo osciloscópio</value>
+  </data>
+  <data name="CommandFileFileImport" xml:space="preserve">
+    <value>_Importar...</value>
+  </data>
+  <data name="ImportTitle" xml:space="preserve">
+    <value>Importar</value>
+  </data>
+  <data name="TitleCircuitDescriptor" xml:space="preserve">
+    <value>Circuito</value>
+  </data>
+  <data name="TitleFileName" xml:space="preserve">
+    <value>Arquivo:</value>
+  </data>
+  <data name="TitleImportCircuit" xml:space="preserve">
+    <value>Importar</value>
+  </data>
+  <data name="TitleCheckAll" xml:space="preserve">
+    <value>Marcar todos</value>
+  </data>
+  <data name="TitleUncheckAll" xml:space="preserve">
+    <value>Desmarcar todos</value>
+  </data>
+  <data name="ImageFileFilter" xml:space="preserve">
+    <value>Arquivo de Imagem (*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif)|*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif|Todos os Arquivos (*.*)|*.*</value>
+  </data>
+  <data name="ImagePathInvalid" xml:space="preserve">
+    <value>O nome do arquivo informado não é válido. Verifique se a pasta e o arquivo existem.</value>
+  </data>
+  <data name="MessageExportImageDialog" xml:space="preserve">
+    <value>Selecione o tipo de imagem e o nome do arquivo para exportar o diagrama.</value>
+  </data>
+  <data name="MessageImageFileExists" xml:space="preserve">
+    <value>Arquivo "{0}" já existe.
 Deseja substituir?</value>
-		<comment>{string fileName}</comment>
-	</data>
-	<data name="TitleExportImage" xml:space="preserve">
-		<value>Exportar Imagem</value>
-	</data>
-	<data name="TitleFile" xml:space="preserve">
-		<value>Arquivo:</value>
-	</data>
-	<data name="TitleFileOpen" xml:space="preserve">
-		<value>...</value>
-	</data>
-	<data name="Gate7SegName" xml:space="preserve">
-		<value>7-seguimentos</value>
-	</data>
-	<data name="ReportGateName" xml:space="preserve">
-		<value>{0} ({1})</value>
-		<comment>{string gate, int inputCount}</comment>
-	</data>
-	<data name="ReportMemoryName" xml:space="preserve">
-		<value>{0}: {1} bits de endereço, {2} bits de dados</value>
-		<comment>{string memoryName, int address, int data}</comment>
-	</data>
-	<data name="TriStateGroupName" xml:space="preserve">
-		<value>Grupo Tri-state</value>
-	</data>
-	<data name="TextNotation" xml:space="preserve">
-		<value>Nota de Texto</value>
-	</data>
-	<data name="CaptionAddressBitWidth" xml:space="preserve">
-		<value>Bits de Endereço</value>
-	</data>
-	<data name="CaptionBitWidth" xml:space="preserve">
-		<value>Largura de Bits</value>
-	</data>
-	<data name="CaptionDataBitWidth" xml:space="preserve">
-		<value>Bits de Dados</value>
-	</data>
-	<data name="CaptionSplitterPinNumber" xml:space="preserve">
-		<value>Dividir Pinos</value>
-	</data>
-	<data name="CaptionSplitterDirection" xml:space="preserve">
-		<value>Combinar Pino</value>
-	</data>
-	<data name="CaptionSide" xml:space="preserve">
-		<value>Margem</value>
-	</data>
-	<data name="CaptionTextNote1" xml:space="preserve">
-		<value>Texto</value>
-	</data>
-	<data name="CaptionTextNote2" xml:space="preserve">
-		<value>Nota</value>
-	</data>
-	<data name="CaptionValue" xml:space="preserve">
-		<value>Valor</value>
-	</data>
-	<data name="MenuHeaderCircuit" xml:space="preserve">
-		<value>_Circuito</value>
-	</data>
-	<data name="MenuHeaderEdit" xml:space="preserve">
-		<value>_Editar</value>
-	</data>
-	<data name="MenuHeaderFile" xml:space="preserve">
-		<value>Arquivo</value>
-	</data>
-	<data name="MenuHeaderHelp" xml:space="preserve">
-		<value>Ajuda</value>
-	</data>
-	<data name="MenuHeaderTools" xml:space="preserve">
-		<value>Ferramentas</value>
-	</data>
-	<data name="MessageWarning" xml:space="preserve">
-		<value>Atenção!</value>
-	</data>
-	<data name="TitleFrequency" xml:space="preserve">
-		<value>Fre_quência:</value>
-	</data>
-	<data name="TitleIsMaximumSpeed1" xml:space="preserve">
-		<value>Executar na velocidade máxima</value>
-	</data>
-	<data name="TitleIsMaximumSpeed2" xml:space="preserve">
-		<value>High CPU</value>
-	</data>
-	<data name="TitleProject" xml:space="preserve">
-		<value>Projeto</value>
-	</data>
-	<data name="TitleRunningCircuit" xml:space="preserve">
-		<value>Circuito Executando</value>
-	</data>
-	<data name="TitleZoom" xml:space="preserve">
-		<value>_Zoom:</value>
-	</data>
-	<data name="ToolTipAddressBitWidth" xml:space="preserve">
-		<value>Selecione a largura de bits do pino de endereço</value>
-	</data>
-	<data name="ToolTipButtonNotation" xml:space="preserve">
-		<value>Informe a notação do botão</value>
-	</data>
-	<data name="ToolTipConstantBitWidth" xml:space="preserve">
-		<value>Selecione a largura de bits da constante</value>
-	</data>
-	<data name="ToolTipConstantValue" xml:space="preserve">
-		<value>Informe o valor inicial da constante</value>
-	</data>
-	<data name="ToolTipCurrentFrequency" xml:space="preserve">
-		<value>Frequência Atual</value>
-	</data>
-	<data name="ToolTipCurrentZoom" xml:space="preserve">
-		<value>Zoom Atual</value>
-	</data>
-	<data name="ToolTipDataBitWidth" xml:space="preserve">
-		<value>Selecione a largura de bits do pino de dados</value>
-	</data>
-	<data name="ToolTipFrequency" xml:space="preserve">
-		<value>Altera a frequência do clock do circuito que está sendo executado.</value>
-	</data>
-	<data name="ToolTipGateInputCount" xml:space="preserve">
-		<value>Selecione o número de entradas</value>
-	</data>
-	<data name="ToolTipIsMaximumSpeed1" xml:space="preserve">
-		<value>Executa o circuito na velocidade máxima ignorando a frequência definida.</value>
-	</data>
-	<data name="ToolTipIsMaximumSpeed2" xml:space="preserve">
-		<value>Marcar esta opção pode fazer a interface de usuário não responder em alguns computadores.</value>
-	</data>
-	<data name="ToolTipPinBitWidth" xml:space="preserve">
-		<value>Escolha a largura de bits do pino</value>
-	</data>
-	<data name="ToolTipPinSide" xml:space="preserve">
-		<value>Escolha o lado do desenho do circuito para o novo pino</value>
-	</data>
-	<data name="ToolTipSplitterBitWidth" xml:space="preserve">
-		<value>Escolha a largura de bits do divisor.</value>
-	</data>
-	<data name="ToolTipSplitterPinNumber" xml:space="preserve">
-		<value>Escolha o número de conexões do divisor.</value>
-	</data>
-	<data name="ToolTipSplitterRotation" xml:space="preserve">
-		<value>Escolha orientação do conector combinado do divisor.</value>
-	</data>
-	<data name="ToolTipZoom" xml:space="preserve">
-		<value>Atribui o zoom.</value>
-	</data>
-	<data name="ToolTipRamWriteOn" xml:space="preserve">
-		<value>Escolha o tempo de escrita em memória</value>
-	</data>
-	<data name="ToolTipPinNotation" xml:space="preserve">
-		<value>Informe um texto curto que vai ser exibido sobre o símbolo do circuito ao lado da haste</value>
-	</data>
-	<data name="CaptionNotation" xml:space="preserve">
-		<value>Notação</value>
-	</data>
-	<data name="TitleIsToggle" xml:space="preserve">
-		<value>Alternante</value>
-	</data>
-	<data name="ToolTipIsToggle" xml:space="preserve">
-		<value>Se o botão é alternante, irá mudar o estado a cada clique, se não, quando pressionado ou deprimido</value>
-	</data>
-	<data name="CommandCircuitPower" xml:space="preserve">
-		<value>Interruptor de alimentação</value>
-	</data>
-	<data name="CommandEditRotateLeft" xml:space="preserve">
-		<value>Girar para a esquerda</value>
-	</data>
-	<data name="CommandEditRotateRight" xml:space="preserve">
-		<value>Girar para a direita</value>
-	</data>
-	<data name="SplitterDirectionClockwise" xml:space="preserve">
-		<value>Esquerda</value>
-	</data>
-	<data name="SplitterDirectionCounterclockwise" xml:space="preserve">
-		<value>Direita</value>
-	</data>
-	<data name="CategoryDuplicate" xml:space="preserve">
-		<value>{0} 2</value>
-		<comment>{string reservedCategoryName}</comment>
-	</data>
-	<data name="PinSideBottom" xml:space="preserve">
-		<value>Inferior</value>
-	</data>
-	<data name="PinSideLeft" xml:space="preserve">
-		<value>Esquerda</value>
-	</data>
-	<data name="PinSideRight" xml:space="preserve">
-		<value>Direita</value>
-	</data>
-	<data name="PinSideTop" xml:space="preserve">
-		<value>Topo</value>
-	</data>
-	<data name="CaptionSplitterBitWidth" xml:space="preserve">
-		<value>Largura de bits do divisor</value>
-	</data>
-	<data name="CommandCircuitUsage" xml:space="preserve">
-		<value>Usado por...</value>
-	</data>
-	<data name="MessageNotUsed" xml:space="preserve">
-		<value>Este circuito lógico não é usado em qualquer lugar.</value>
-	</data>
-	<data name="MessageUsageNote" xml:space="preserve">
-		<value>Escolha um circuito onde a corrente é usada e dê um duplo clique nele para navegar até lá e selecionar símbolos de uma corrente.</value>
-	</data>
-	<data name="TitleCircuitUsage" xml:space="preserve">
-		<value>Uso do Circuito Lógico</value>
-	</data>
-	<data name="CaptionNote" xml:space="preserve">
-		<value>_Nota</value>
-	</data>
-	<data name="CategoryPrimitives" xml:space="preserve">
-		<value>Primitivos</value>
-	</data>
-	<data name="TitleMemory" xml:space="preserve">
-		<value>Memória</value>
-	</data>
-	<data name="CommandFileOpenRecent" xml:space="preserve">
-		<value>Abrir _Recentes</value>
-	</data>
-	<data name="MessageInvalidRecentFile" xml:space="preserve">
-		<value>O arquivo "{0}" não pode ser aberto.
+    <comment>{string fileName}</comment>
+  </data>
+  <data name="TitleExportImage" xml:space="preserve">
+    <value>Exportar Imagem</value>
+  </data>
+  <data name="TitleFile" xml:space="preserve">
+    <value>Arquivo:</value>
+  </data>
+  <data name="TitleFileOpen" xml:space="preserve">
+    <value>...</value>
+  </data>
+  <data name="Gate7SegName" xml:space="preserve">
+    <value>7-seguimentos</value>
+  </data>
+  <data name="ReportGateName" xml:space="preserve">
+    <value>{0} ({1})</value>
+    <comment>{string gate, int inputCount}</comment>
+  </data>
+  <data name="ReportMemoryName" xml:space="preserve">
+    <value>{0}: {1} bits de endereço, {2} bits de dados</value>
+    <comment>{string memoryName, int address, int data}</comment>
+  </data>
+  <data name="TriStateGroupName" xml:space="preserve">
+    <value>Grupo Tri-state</value>
+  </data>
+  <data name="TextNotation" xml:space="preserve">
+    <value>Nota de Texto</value>
+  </data>
+  <data name="CaptionAddressBitWidth" xml:space="preserve">
+    <value>Bits de Endereço</value>
+  </data>
+  <data name="CaptionBitWidth" xml:space="preserve">
+    <value>Largura de Bits</value>
+  </data>
+  <data name="CaptionDataBitWidth" xml:space="preserve">
+    <value>Bits de Dados</value>
+  </data>
+  <data name="CaptionSplitterPinNumber" xml:space="preserve">
+    <value>Dividir Pinos</value>
+  </data>
+  <data name="CaptionSplitterDirection" xml:space="preserve">
+    <value>Combinar Pino</value>
+  </data>
+  <data name="CaptionSide" xml:space="preserve">
+    <value>Margem</value>
+  </data>
+  <data name="CaptionTextNote1" xml:space="preserve">
+    <value>Texto</value>
+  </data>
+  <data name="CaptionTextNote2" xml:space="preserve">
+    <value>Nota</value>
+  </data>
+  <data name="CaptionValue" xml:space="preserve">
+    <value>Valor</value>
+  </data>
+  <data name="MenuHeaderCircuit" xml:space="preserve">
+    <value>_Circuito</value>
+  </data>
+  <data name="MenuHeaderEdit" xml:space="preserve">
+    <value>_Editar</value>
+  </data>
+  <data name="MenuHeaderFile" xml:space="preserve">
+    <value>Arquivo</value>
+  </data>
+  <data name="MenuHeaderHelp" xml:space="preserve">
+    <value>Ajuda</value>
+  </data>
+  <data name="MenuHeaderTools" xml:space="preserve">
+    <value>Ferramentas</value>
+  </data>
+  <data name="MessageWarning" xml:space="preserve">
+    <value>Atenção!</value>
+  </data>
+  <data name="TitleFrequency" xml:space="preserve">
+    <value>Fre_quência:</value>
+  </data>
+  <data name="TitleIsMaximumSpeed1" xml:space="preserve">
+    <value>Executar na velocidade máxima</value>
+  </data>
+  <data name="TitleIsMaximumSpeed2" xml:space="preserve">
+    <value>High CPU</value>
+  </data>
+  <data name="TitleProject" xml:space="preserve">
+    <value>Projeto</value>
+  </data>
+  <data name="TitleRunningCircuit" xml:space="preserve">
+    <value>Circuito Executando</value>
+  </data>
+  <data name="TitleZoom" xml:space="preserve">
+    <value>_Zoom:</value>
+  </data>
+  <data name="ToolTipAddressBitWidth" xml:space="preserve">
+    <value>Selecione a largura de bits do pino de endereço</value>
+  </data>
+  <data name="ToolTipButtonNotation" xml:space="preserve">
+    <value>Informe a notação do botão</value>
+  </data>
+  <data name="ToolTipConstantBitWidth" xml:space="preserve">
+    <value>Selecione a largura de bits da constante</value>
+  </data>
+  <data name="ToolTipConstantValue" xml:space="preserve">
+    <value>Informe o valor inicial da constante</value>
+  </data>
+  <data name="ToolTipCurrentFrequency" xml:space="preserve">
+    <value>Frequência Atual</value>
+  </data>
+  <data name="ToolTipCurrentZoom" xml:space="preserve">
+    <value>Zoom Atual</value>
+  </data>
+  <data name="ToolTipDataBitWidth" xml:space="preserve">
+    <value>Selecione a largura de bits do pino de dados</value>
+  </data>
+  <data name="ToolTipFrequency" xml:space="preserve">
+    <value>Altera a frequência do clock do circuito que está sendo executado.</value>
+  </data>
+  <data name="ToolTipGateInputCount" xml:space="preserve">
+    <value>Selecione o número de entradas</value>
+  </data>
+  <data name="ToolTipIsMaximumSpeed1" xml:space="preserve">
+    <value>Executa o circuito na velocidade máxima ignorando a frequência definida.</value>
+  </data>
+  <data name="ToolTipIsMaximumSpeed2" xml:space="preserve">
+    <value>Marcar esta opção pode fazer a interface de usuário não responder em alguns computadores.</value>
+  </data>
+  <data name="ToolTipPinBitWidth" xml:space="preserve">
+    <value>Escolha a largura de bits do pino</value>
+  </data>
+  <data name="ToolTipPinSide" xml:space="preserve">
+    <value>Escolha o lado do desenho do circuito para o novo pino</value>
+  </data>
+  <data name="ToolTipSplitterBitWidth" xml:space="preserve">
+    <value>Escolha a largura de bits do divisor.</value>
+  </data>
+  <data name="ToolTipSplitterPinNumber" xml:space="preserve">
+    <value>Escolha o número de conexões do divisor.</value>
+  </data>
+  <data name="ToolTipSplitterRotation" xml:space="preserve">
+    <value>Escolha orientação do conector combinado do divisor.</value>
+  </data>
+  <data name="ToolTipZoom" xml:space="preserve">
+    <value>Atribui o zoom.</value>
+  </data>
+  <data name="ToolTipRamWriteOn" xml:space="preserve">
+    <value>Escolha o tempo de escrita em memória</value>
+  </data>
+  <data name="ToolTipPinNotation" xml:space="preserve">
+    <value>Informe um texto curto que vai ser exibido sobre o símbolo do circuito ao lado da haste</value>
+  </data>
+  <data name="CaptionNotation" xml:space="preserve">
+    <value>Notação</value>
+  </data>
+  <data name="TitleIsToggle" xml:space="preserve">
+    <value>Alternante</value>
+  </data>
+  <data name="ToolTipIsToggle" xml:space="preserve">
+    <value>Se o botão é alternante, irá mudar o estado a cada clique, se não, quando pressionado ou deprimido</value>
+  </data>
+  <data name="CommandCircuitPower" xml:space="preserve">
+    <value>Interruptor de alimentação</value>
+  </data>
+  <data name="CommandEditRotateLeft" xml:space="preserve">
+    <value>Girar para a esquerda</value>
+  </data>
+  <data name="CommandEditRotateRight" xml:space="preserve">
+    <value>Girar para a direita</value>
+  </data>
+  <data name="SplitterDirectionClockwise" xml:space="preserve">
+    <value>Esquerda</value>
+  </data>
+  <data name="SplitterDirectionCounterclockwise" xml:space="preserve">
+    <value>Direita</value>
+  </data>
+  <data name="CategoryDuplicate" xml:space="preserve">
+    <value>{0} 2</value>
+    <comment>{string reservedCategoryName}</comment>
+  </data>
+  <data name="PinSideBottom" xml:space="preserve">
+    <value>Inferior</value>
+  </data>
+  <data name="PinSideLeft" xml:space="preserve">
+    <value>Esquerda</value>
+  </data>
+  <data name="PinSideRight" xml:space="preserve">
+    <value>Direita</value>
+  </data>
+  <data name="PinSideTop" xml:space="preserve">
+    <value>Topo</value>
+  </data>
+  <data name="CaptionSplitterBitWidth" xml:space="preserve">
+    <value>Largura de bits do divisor</value>
+  </data>
+  <data name="CommandCircuitUsage" xml:space="preserve">
+    <value>Usado por...</value>
+  </data>
+  <data name="MessageNotUsed" xml:space="preserve">
+    <value>Este circuito lógico não é usado em qualquer lugar.</value>
+  </data>
+  <data name="MessageUsageNote" xml:space="preserve">
+    <value>Escolha um circuito onde a corrente é usada e dê um duplo clique nele para navegar até lá e selecionar símbolos de uma corrente.</value>
+  </data>
+  <data name="TitleCircuitUsage" xml:space="preserve">
+    <value>Uso do Circuito Lógico</value>
+  </data>
+  <data name="CaptionNote" xml:space="preserve">
+    <value>_Nota</value>
+  </data>
+  <data name="CategoryPrimitives" xml:space="preserve">
+    <value>Primitivos</value>
+  </data>
+  <data name="TitleMemory" xml:space="preserve">
+    <value>Memória</value>
+  </data>
+  <data name="CommandFileOpenRecent" xml:space="preserve">
+    <value>Abrir _Recentes</value>
+  </data>
+  <data name="MessageInvalidRecentFile" xml:space="preserve">
+    <value>O arquivo "{0}" não pode ser aberto.
 Você deseja remover a referência dele da lista de Arquivos Rescentes?</value>
-		<comment>{string file}</comment>
-	</data>
-	<data name="TitleMaxRecentFiles" xml:space="preserve">
-		<value>Nú_mero máximo de arquivos recentes:</value>
-	</data>
-	<data name="Bit0" xml:space="preserve">
-		<value>0</value>
-	</data>
-	<data name="Bit1" xml:space="preserve">
-		<value>1</value>
-	</data>
-	<data name="BitOff" xml:space="preserve">
-		<value>Desligado</value>
-	</data>
-	<data name="ErrorFileCorrupted" xml:space="preserve">
-		<value>Arquivo "{0}" está corrompido e não pode ser aberto.</value>
-		<comment>{string fileName}</comment>
-	</data>
-	<data name="ProjectSummary" xml:space="preserve">
-		<value>{0} circuitos lógicos, em {1} categorias estão usando {2} símbolos e {3} fios</value>
-		<comment>{int logicalCircuits, int categories, int symbols, int wires}</comment>
-	</data>
-	<data name="ReportError" xml:space="preserve">
-		<value>Não é possível relatar funções devido ao seguinte erro: {0}</value>
-		<comment>{string message}</comment>
-	</data>
-	<data name="ReportFunctions" xml:space="preserve">
-		<value>Funções do circuito "{0}"</value>
-		<comment>{string name}</comment>
-	</data>
-	<data name="TitleCount" xml:space="preserve">
-		<value>Contar</value>
-	</data>
-	<data name="TitleFunction" xml:space="preserve">
-		<value>Função</value>
-	</data>
-	<data name="TitleProjectDescription" xml:space="preserve">
-		<value>Descrição</value>
-	</data>
-	<data name="TitleReportErrorDetails" xml:space="preserve">
-		<value>Detalhes dos erros</value>
-	</data>
-	<data name="TitleSummary" xml:space="preserve">
-		<value>Resumo:</value>
-	</data>
-	<data name="TitleTotal" xml:space="preserve">
-		<value>Total:</value>
-	</data>
-	<data name="LogicalCircuitMainNotation" xml:space="preserve">
-		<value>Principal</value>
-	</data>
-	<data name="PinTypeNameInput" xml:space="preserve">
-		<value>Entrada</value>
-	</data>
-	<data name="PinTypeNameNone" xml:space="preserve">
-		<value>Nenhum</value>
-	</data>
-	<data name="PinTypeNameOutput" xml:space="preserve">
-		<value>Saída</value>
-	</data>
-	<data name="ErrorUnsupportedUri" xml:space="preserve">
-		<value>Navegação para este endereço não é permitida.</value>
-	</data>
-	<data name="GridPoint" xml:space="preserve">
-		<value>({0}, {1})</value>
-		<comment>{int x, int y}</comment>
-	</data>
-	<data name="NameLedMatrix" xml:space="preserve">
-		<value>Matriz de LED</value>
-	</data>
-	<data name="ToolTipLedMatrix" xml:space="preserve">
-		<value>Matriz de LED {0}x{1} com {2} bit(s) por LED ({3} cores)</value>
-		<comment>{int rows, int columns, int bitsPerLed, int colors}</comment>
-	</data>
-	<data name="CaptionColumns" xml:space="preserve">
-		<value>Colunas</value>
-	</data>
-	<data name="CaptionRows" xml:space="preserve">
-		<value>Linhas</value>
-	</data>
-	<data name="ToolTipColumns" xml:space="preserve">
-		<value>Escolha o número de colunas da matriz de LED</value>
-	</data>
-	<data name="ToolTipRows" xml:space="preserve">
-		<value>Escolha o número de linhas da matriz de LED</value>
-	</data>
-	<data name="CaptionLedMatrixType" xml:space="preserve">
-		<value>Tipo</value>
-	</data>
-	<data name="LedMatrixColumnSelector" xml:space="preserve">
-		<value>para a seleção da coluna #{0}</value>
-		<comment>{int column}</comment>
-	</data>
-	<data name="LedMatrixRowIndividual" xml:space="preserve">
-		<value>para cada LED na linha #{0}</value>
-		<comment>{int row}</comment>
-	</data>
-	<data name="LedMatrixRowSelector" xml:space="preserve">
-		<value>para a seleção da linha #{0}</value>
-		<comment>{int row}</comment>
-	</data>
-	<data name="LedMatrixTypeIndividual" xml:space="preserve">
-		<value>Individual</value>
-	</data>
-	<data name="LedMatrixTypeSelector" xml:space="preserve">
-		<value>Seletor</value>
-	</data>
-	<data name="TitleCellShape" xml:space="preserve">
-		<value>Forma celular:</value>
-	</data>
-	<data name="TitleColumns" xml:space="preserve">
-		<value>_Colunas:</value>
-	</data>
-	<data name="TitleRows" xml:space="preserve">
-		<value>Linhas:</value>
-	</data>
-	<data name="ToolTipLedMatrixType" xml:space="preserve">
-		<value>Escolha do modo de controlar a matriz</value>
-	</data>
-	<data name="TitleColors" xml:space="preserve">
-		<value>C_ores:</value>
-	</data>
-	<data name="MessageVersionLatest" xml:space="preserve">
-		<value>Você já possui a última versão.</value>
-	</data>
-	<data name="MessageVersionOutdated" xml:space="preserve">
-		<value>Você possui uma versão antiga. Clique no link abaixo para efetuar o download da última versão.</value>
-	</data>
-	<data name="MessageVersionPreview" xml:space="preserve">
-		<value>Você tem a versão em desenvolvimento.</value>
-	</data>
-	<data name="TitleCheckVersion" xml:space="preserve">
-		<value>Verificar agora</value>
-	</data>
-	<data name="WebSiteDownloadUri" xml:space="preserve">
-		<value>http://www.logiccircuit.org/download.html</value>
-	</data>
-	<data name="CommandHyperlink" xml:space="preserve">
-		<value>Hyperlink</value>
-	</data>
-	<data name="ErrorHyperlinkText" xml:space="preserve">
-		<value>Texto do hyperlink está vazio</value>
-	</data>
-	<data name="ErrorHyperlinkUrl" xml:space="preserve">
-		<value>Endereço do hyperlink é inválido</value>
-	</data>
-	<data name="TitleHyperlink" xml:space="preserve">
-		<value>_Link para:</value>
-	</data>
-	<data name="TitleText" xml:space="preserve">
-		<value>_Texto:</value>
-	</data>
-	<data name="CommandInsertImage" xml:space="preserve">
-		<value>Imagem</value>
-	</data>
-	<data name="TitleCheckVersionPeriodically" xml:space="preserve">
-		<value>Verificar periodicamente por novas versões</value>
-	</data>
-	<data name="ErrorClipboardCorrupted" xml:space="preserve">
-		<value>Os dados na área de transferência estão corrompidos e não podem ser colados.</value>
-	</data>
-	<data name="DefaultGateShape" xml:space="preserve">
-		<value>Shaped</value>
-		<comment>!(Rectangular, Shaped) - chose default gate shape for your culture.</comment>
-	</data>
-	<data name="CommandTruthTable" xml:space="preserve">
-		<value>Tabela-Verdade</value>
-	</data>
-	<data name="MessageInputOutputPinsMissing" xml:space="preserve">
-		<value>Não há entrada ou saída pinos neste circuito. As tabelas-verdade são construídas através do envio de todas as permutações de dados para pinos de entrada e leitura dos resultados de saída nos pinos.</value>
-	</data>
-	<data name="MessageTruthTableTooBig" xml:space="preserve">
-		<value>A tabela-verdade é muito longa e foi truncada. Utilize um filtro para verificar a exatidão de seu circuito.</value>
-	</data>
-	<data name="ParserEOS" xml:space="preserve">
-		<value>Fim da expressão</value>
-	</data>
-	<data name="ParserErrorCloseParenMissing" xml:space="preserve">
-		<value>Faltando ')' em vez de: {0}</value>
-		<comment>{string token}</comment>
-	</data>
-	<data name="ParserErrorExpressionMissing" xml:space="preserve">
-		<value>Expressão está faltando após {0}</value>
-		<comment>{string token}</comment>
-	</data>
-	<data name="ParserErrorInvalidNumber" xml:space="preserve">
-		<value>Número inválido: {0}</value>
-		<comment>{string number}</comment>
-	</data>
-	<data name="ParserErrorUnclosedQuote" xml:space="preserve">
-		<value>Identificador entre aspas não tem cotação de fechamento: {0}</value>
-		<comment>{string text}</comment>
-	</data>
-	<data name="ParserErrorUnexpected" xml:space="preserve">
-		<value>{0} inesperado</value>
-		<comment>{string token}</comment>
-	</data>
-	<data name="ParserErrorUnknownChar" xml:space="preserve">
-		<value>Caractere desconhecido: {0}</value>
-		<comment>{char c}</comment>
-	</data>
-	<data name="ParserErrorUnknownPin" xml:space="preserve">
-		<value>{0} - pino de entrada ou saída não encontrado</value>
-		<comment>{string name}</comment>
-	</data>
-	<data name="TitleApply" xml:space="preserve">
-		<value>_Aplicar</value>
-	</data>
-	<data name="TitleDisplayedRows" xml:space="preserve">
-		<value>Mostrar linhas: {0:N0}</value>
-		<comment>-{int count}</comment>
-	</data>
-	<data name="TitleFilter" xml:space="preserve">
-		<value>_Filtrar:</value>
-	</data>
-	<data name="TitleInvert" xml:space="preserve">
-		<value>_Inverter</value>
-	</data>
-	<data name="TitleTotalRows" xml:space="preserve">
-		<value>Total de linhas: {0:N0}</value>
-		<comment>-{int count}</comment>
-	</data>
-	<data name="TitleStop" xml:space="preserve">
-		<value>Parar</value>
-	</data>
-	<data name="ColorPickerCaptionAvailable" xml:space="preserve">
-		<value>Cores disponíveis:</value>
-	</data>
-	<data name="ColorPickerCaptionRecent" xml:space="preserve">
-		<value>Cores recentes:</value>
-	</data>
-	<data name="ColorPickerCaptionSelectCustom" xml:space="preserve">
-		<value>Selecionar</value>
-	</data>
-	<data name="ColorPickerCaptionStandard" xml:space="preserve">
-		<value>Cores padrões:</value>
-	</data>
-	<data name="ColorPickerTabCustom" xml:space="preserve">
-		<value>Customizado</value>
-	</data>
-	<data name="ColorPickerTabStandard" xml:space="preserve">
-		<value>Padrão</value>
-	</data>
-	<data name="ToolTipBackgroundColor" xml:space="preserve">
-		<value>Realce</value>
-	</data>
-	<data name="ToolTipFontColor" xml:space="preserve">
-		<value>Cor do texto</value>
-	</data>
-	<data name="TitleSaveAs" xml:space="preserve">
-		<value>Sal_var como...</value>
-	</data>
-	<data name="ToolTipLoadData" xml:space="preserve">
-		<value>Carregar dados do arquivo</value>
-	</data>
-	<data name="ToolTipSaveData" xml:space="preserve">
-		<value>Salvar dados para arquivo</value>
-	</data>
-	<data name="MemoryOnStartData" xml:space="preserve">
-		<value>Persistir memória entre as execuções</value>
-	</data>
-	<data name="MemoryOnStartOnes" xml:space="preserve">
-		<value>Setar todos os bits para 1</value>
-	</data>
-	<data name="MemoryOnStartRandom" xml:space="preserve">
-		<value>Aleatoriamente</value>
-	</data>
-	<data name="MemoryOnStartZeros" xml:space="preserve">
-		<value>Setar todos os bits para 0</value>
-	</data>
-	<data name="TitleMemoryOnStart" xml:space="preserve">
-		<value>No início preencher:</value>
-	</data>
-	<data name="ToolTipMemoryOnStart" xml:space="preserve">
-		<value>Escolha como a memória RAM será inicializada ao ligar</value>
-	</data>
-	<data name="ErrorManyMemoryData" xml:space="preserve">
-		<value>Circuito {0} contém {1} que preserva os dados entre as execuções.
+    <comment>{string file}</comment>
+  </data>
+  <data name="TitleMaxRecentFiles" xml:space="preserve">
+    <value>Nú_mero máximo de arquivos recentes:</value>
+  </data>
+  <data name="Bit0" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Bit1" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="BitOff" xml:space="preserve">
+    <value>Desligado</value>
+  </data>
+  <data name="ErrorFileCorrupted" xml:space="preserve">
+    <value>Arquivo "{0}" está corrompido e não pode ser aberto.</value>
+    <comment>{string fileName}</comment>
+  </data>
+  <data name="ProjectSummary" xml:space="preserve">
+    <value>{0} circuitos lógicos, em {1} categorias estão usando {2} símbolos e {3} fios</value>
+    <comment>{int logicalCircuits, int categories, int symbols, int wires}</comment>
+  </data>
+  <data name="ReportError" xml:space="preserve">
+    <value>Não é possível relatar funções devido ao seguinte erro: {0}</value>
+    <comment>{string message}</comment>
+  </data>
+  <data name="ReportFunctions" xml:space="preserve">
+    <value>Funções do circuito "{0}"</value>
+    <comment>{string name}</comment>
+  </data>
+  <data name="TitleCount" xml:space="preserve">
+    <value>Contar</value>
+  </data>
+  <data name="TitleFunction" xml:space="preserve">
+    <value>Função</value>
+  </data>
+  <data name="TitleProjectDescription" xml:space="preserve">
+    <value>Descrição</value>
+  </data>
+  <data name="TitleReportErrorDetails" xml:space="preserve">
+    <value>Detalhes dos erros</value>
+  </data>
+  <data name="TitleSummary" xml:space="preserve">
+    <value>Resumo:</value>
+  </data>
+  <data name="TitleTotal" xml:space="preserve">
+    <value>Total:</value>
+  </data>
+  <data name="LogicalCircuitMainNotation" xml:space="preserve">
+    <value>Principal</value>
+  </data>
+  <data name="PinTypeNameInput" xml:space="preserve">
+    <value>Entrada</value>
+  </data>
+  <data name="PinTypeNameNone" xml:space="preserve">
+    <value>Nenhum</value>
+  </data>
+  <data name="PinTypeNameOutput" xml:space="preserve">
+    <value>Saída</value>
+  </data>
+  <data name="ErrorUnsupportedUri" xml:space="preserve">
+    <value>Navegação para este endereço não é permitida.</value>
+  </data>
+  <data name="GridPoint" xml:space="preserve">
+    <value>({0}, {1})</value>
+    <comment>{int x, int y}</comment>
+  </data>
+  <data name="NameLedMatrix" xml:space="preserve">
+    <value>Matriz de LED</value>
+  </data>
+  <data name="ToolTipLedMatrix" xml:space="preserve">
+    <value>Matriz de LED {0}x{1} com {2} bit(s) por LED ({3} cores)</value>
+    <comment>{int rows, int columns, int bitsPerLed, int colors}</comment>
+  </data>
+  <data name="CaptionColumns" xml:space="preserve">
+    <value>Colunas</value>
+  </data>
+  <data name="CaptionRows" xml:space="preserve">
+    <value>Linhas</value>
+  </data>
+  <data name="ToolTipColumns" xml:space="preserve">
+    <value>Escolha o número de colunas da matriz de LED</value>
+  </data>
+  <data name="ToolTipRows" xml:space="preserve">
+    <value>Escolha o número de linhas da matriz de LED</value>
+  </data>
+  <data name="CaptionLedMatrixType" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+  <data name="LedMatrixColumnSelector" xml:space="preserve">
+    <value>para a seleção da coluna #{0}</value>
+    <comment>{int column}</comment>
+  </data>
+  <data name="LedMatrixRowIndividual" xml:space="preserve">
+    <value>para cada LED na linha #{0}</value>
+    <comment>{int row}</comment>
+  </data>
+  <data name="LedMatrixRowSelector" xml:space="preserve">
+    <value>para a seleção da linha #{0}</value>
+    <comment>{int row}</comment>
+  </data>
+  <data name="LedMatrixTypeIndividual" xml:space="preserve">
+    <value>Individual</value>
+  </data>
+  <data name="LedMatrixTypeSelector" xml:space="preserve">
+    <value>Seletor</value>
+  </data>
+  <data name="TitleCellShape" xml:space="preserve">
+    <value>Forma celular:</value>
+  </data>
+  <data name="TitleColumns" xml:space="preserve">
+    <value>_Colunas:</value>
+  </data>
+  <data name="TitleRows" xml:space="preserve">
+    <value>Linhas:</value>
+  </data>
+  <data name="ToolTipLedMatrixType" xml:space="preserve">
+    <value>Escolha do modo de controlar a matriz</value>
+  </data>
+  <data name="TitleColors" xml:space="preserve">
+    <value>C_ores:</value>
+  </data>
+  <data name="MessageVersionLatest" xml:space="preserve">
+    <value>Você já possui a última versão.</value>
+  </data>
+  <data name="MessageVersionOutdated" xml:space="preserve">
+    <value>Você possui uma versão antiga. Clique no link abaixo para efetuar o download da última versão.</value>
+  </data>
+  <data name="MessageVersionPreview" xml:space="preserve">
+    <value>Você tem a versão em desenvolvimento.</value>
+  </data>
+  <data name="TitleCheckVersion" xml:space="preserve">
+    <value>Verificar agora</value>
+  </data>
+  <data name="WebSiteDownloadUri" xml:space="preserve">
+    <value>http://www.logiccircuit.org/download.html</value>
+  </data>
+  <data name="CommandHyperlink" xml:space="preserve">
+    <value>Hyperlink</value>
+  </data>
+  <data name="ErrorHyperlinkText" xml:space="preserve">
+    <value>Texto do hyperlink está vazio</value>
+  </data>
+  <data name="ErrorHyperlinkUrl" xml:space="preserve">
+    <value>Endereço do hyperlink é inválido</value>
+  </data>
+  <data name="TitleHyperlink" xml:space="preserve">
+    <value>_Link para:</value>
+  </data>
+  <data name="TitleText" xml:space="preserve">
+    <value>_Texto:</value>
+  </data>
+  <data name="CommandInsertImage" xml:space="preserve">
+    <value>Imagem</value>
+  </data>
+  <data name="TitleCheckVersionPeriodically" xml:space="preserve">
+    <value>Verificar periodicamente por novas versões</value>
+  </data>
+  <data name="ErrorClipboardCorrupted" xml:space="preserve">
+    <value>Os dados na área de transferência estão corrompidos e não podem ser colados.</value>
+  </data>
+  <data name="DefaultGateShape" xml:space="preserve">
+    <value>Shaped</value>
+    <comment>!(Rectangular, Shaped) - chose default gate shape for your culture.</comment>
+  </data>
+  <data name="CommandTruthTable" xml:space="preserve">
+    <value>Tabela-Verdade</value>
+  </data>
+  <data name="MessageInputOutputPinsMissing" xml:space="preserve">
+    <value>Não há entrada ou saída pinos neste circuito. As tabelas-verdade são construídas através do envio de todas as permutações de dados para pinos de entrada e leitura dos resultados de saída nos pinos.</value>
+  </data>
+  <data name="MessageTruthTableTooBig" xml:space="preserve">
+    <value>A tabela-verdade é muito longa e foi truncada. Utilize um filtro para verificar a exatidão de seu circuito.</value>
+  </data>
+  <data name="ParserEOS" xml:space="preserve">
+    <value>Fim da expressão</value>
+  </data>
+  <data name="ParserErrorCloseParenMissing" xml:space="preserve">
+    <value>Faltando ')' em vez de: {0}</value>
+    <comment>{string token}</comment>
+  </data>
+  <data name="ParserErrorExpressionMissing" xml:space="preserve">
+    <value>Expressão está faltando após {0}</value>
+    <comment>{string token}</comment>
+  </data>
+  <data name="ParserErrorInvalidNumber" xml:space="preserve">
+    <value>Número inválido: {0}</value>
+    <comment>{string number}</comment>
+  </data>
+  <data name="ParserErrorUnclosedQuote" xml:space="preserve">
+    <value>Identificador entre aspas não tem cotação de fechamento: {0}</value>
+    <comment>{string text}</comment>
+  </data>
+  <data name="ParserErrorUnexpected" xml:space="preserve">
+    <value>{0} inesperado</value>
+    <comment>{string token}</comment>
+  </data>
+  <data name="ParserErrorUnknownChar" xml:space="preserve">
+    <value>Caractere desconhecido: {0}</value>
+    <comment>{char c}</comment>
+  </data>
+  <data name="ParserErrorUnknownPin" xml:space="preserve">
+    <value>{0} - pino de entrada ou saída não encontrado</value>
+    <comment>{string name}</comment>
+  </data>
+  <data name="TitleApply" xml:space="preserve">
+    <value>_Aplicar</value>
+  </data>
+  <data name="TitleDisplayedRows" xml:space="preserve">
+    <value>Mostrar linhas: {0:N0}</value>
+    <comment>-{int count}</comment>
+  </data>
+  <data name="TitleFilter" xml:space="preserve">
+    <value>_Filtrar:</value>
+  </data>
+  <data name="TitleInvert" xml:space="preserve">
+    <value>_Inverter</value>
+  </data>
+  <data name="TitleTotalRows" xml:space="preserve">
+    <value>Total de linhas: {0:N0}</value>
+    <comment>-{int count}</comment>
+  </data>
+  <data name="TitleStop" xml:space="preserve">
+    <value>Parar</value>
+  </data>
+  <data name="ColorPickerCaptionAvailable" xml:space="preserve">
+    <value>Cores disponíveis:</value>
+  </data>
+  <data name="ColorPickerCaptionRecent" xml:space="preserve">
+    <value>Cores recentes:</value>
+  </data>
+  <data name="ColorPickerCaptionSelectCustom" xml:space="preserve">
+    <value>Selecionar</value>
+  </data>
+  <data name="ColorPickerCaptionStandard" xml:space="preserve">
+    <value>Cores padrões:</value>
+  </data>
+  <data name="ColorPickerTabCustom" xml:space="preserve">
+    <value>Customizado</value>
+  </data>
+  <data name="ColorPickerTabStandard" xml:space="preserve">
+    <value>Padrão</value>
+  </data>
+  <data name="ToolTipBackgroundColor" xml:space="preserve">
+    <value>Realce</value>
+  </data>
+  <data name="ToolTipFontColor" xml:space="preserve">
+    <value>Cor do texto</value>
+  </data>
+  <data name="TitleSaveAs" xml:space="preserve">
+    <value>Sal_var como...</value>
+  </data>
+  <data name="ToolTipLoadData" xml:space="preserve">
+    <value>Carregar dados do arquivo</value>
+  </data>
+  <data name="ToolTipSaveData" xml:space="preserve">
+    <value>Salvar dados para arquivo</value>
+  </data>
+  <data name="MemoryOnStartData" xml:space="preserve">
+    <value>Persistir memória entre as execuções</value>
+  </data>
+  <data name="MemoryOnStartOnes" xml:space="preserve">
+    <value>Setar todos os bits para 1</value>
+  </data>
+  <data name="MemoryOnStartRandom" xml:space="preserve">
+    <value>Aleatoriamente</value>
+  </data>
+  <data name="MemoryOnStartZeros" xml:space="preserve">
+    <value>Setar todos os bits para 0</value>
+  </data>
+  <data name="TitleMemoryOnStart" xml:space="preserve">
+    <value>No início preencher:</value>
+  </data>
+  <data name="ToolTipMemoryOnStart" xml:space="preserve">
+    <value>Escolha como a memória RAM será inicializada ao ligar</value>
+  </data>
+  <data name="ErrorManyMemoryData" xml:space="preserve">
+    <value>Circuito {0} contém {1} que preserva os dados entre as execuções.
 Tal circuito não pode ser usado mais de uma vez em outros circuitos já que diferentes conjuntos de dados podem ser armazenado no módulo de memória.</value>
-		<comment>{string circuitName, string ramNotation}</comment>
-	</data>
-	<data name="MessageRestartRequared" xml:space="preserve">
-		<value>O idioma foi alterado. É necessário reiniciar a aplicação para aplicar as alterações.</value>
-	</data>
-	<data name="TitleCulture" xml:space="preserve">
-		<value>Idioma</value>
-	</data>
-	<data name="CommandEditAlignCenter" xml:space="preserve">
-		<value>Centralizar</value>
-	</data>
-	<data name="CommandEditAlignJustify" xml:space="preserve">
-		<value>Justificar</value>
-	</data>
-	<data name="CommandEditAlignLeft" xml:space="preserve">
-		<value>Alinhar à Esquerda</value>
-	</data>
-	<data name="CommandEditAlignRight" xml:space="preserve">
-		<value>Alinhar à Direita</value>
-	</data>
-	<data name="CommandEditBold" xml:space="preserve">
-		<value>Negrito</value>
-	</data>
-	<data name="CommandEditBullets" xml:space="preserve">
-		<value>Marcadores</value>
-	</data>
-	<data name="CommandEditCopy" xml:space="preserve">
-		<value>_Copiar</value>
-	</data>
-	<data name="CommandEditCut" xml:space="preserve">
-		<value>Recor_tar</value>
-	</data>
-	<data name="CommandEditDecreaseFontSize" xml:space="preserve">
-		<value>Reduzir Tamanho da Fonte</value>
-	</data>
-	<data name="CommandEditDecreaseIndentation" xml:space="preserve">
-		<value>Reduzir Identação</value>
-	</data>
-	<data name="CommandEditDelete" xml:space="preserve">
-		<value>De_letar</value>
-	</data>
-	<data name="CommandEditIncreaseFontSize" xml:space="preserve">
-		<value>Aumentar Tamanho da Fonte</value>
-	</data>
-	<data name="CommandEditIncreaseIndentation" xml:space="preserve">
-		<value>Aumentar Indentação</value>
-	</data>
-	<data name="CommandEditItalic" xml:space="preserve">
-		<value>Itálico</value>
-	</data>
-	<data name="CommandEditNumbering" xml:space="preserve">
-		<value>Numeração</value>
-	</data>
-	<data name="CommandEditPaste" xml:space="preserve">
-		<value>Colar</value>
-	</data>
-	<data name="CommandEditRedo" xml:space="preserve">
-		<value>_Refazer</value>
-	</data>
-	<data name="CommandEditSelectAll" xml:space="preserve">
-		<value>Selecion_ar Tudo</value>
-	</data>
-	<data name="CommandEditUnderline" xml:space="preserve">
-		<value>Sublinhado</value>
-	</data>
-	<data name="CommandEditUndo" xml:space="preserve">
-		<value>Desfazer</value>
-	</data>
-	<data name="CommandFileClose" xml:space="preserve">
-		<value>Sair</value>
-	</data>
-	<data name="CommandFileNew" xml:space="preserve">
-		<value>_Novo</value>
-	</data>
-	<data name="CommandFileOpen" xml:space="preserve">
-		<value>Abrir</value>
-	</data>
-	<data name="CommandFileSave" xml:space="preserve">
-		<value>_Salvar</value>
-	</data>
-	<data name="CommandFileSaveAs" xml:space="preserve">
-		<value>S_alvar Como...</value>
-	</data>
-	<data name="CommandHelpView" xml:space="preserve">
-		<value>Ajuda</value>
-	</data>
-	<data name="ToolTipFontFamily" xml:space="preserve">
-		<value>Fonte</value>
-	</data>
-	<data name="ToolTipFontSize" xml:space="preserve">
-		<value>Tamanho</value>
-	</data>
-	<data name="TitleCredits" xml:space="preserve">
-		<value>Créditos:</value>
-	</data>
+    <comment>{string circuitName, string ramNotation}</comment>
+  </data>
+  <data name="MessageRestartRequared" xml:space="preserve">
+    <value>O idioma foi alterado. É necessário reiniciar a aplicação para aplicar as alterações.</value>
+  </data>
+  <data name="TitleCulture" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
+  <data name="CommandEditAlignCenter" xml:space="preserve">
+    <value>Centralizar</value>
+  </data>
+  <data name="CommandEditAlignJustify" xml:space="preserve">
+    <value>Justificar</value>
+  </data>
+  <data name="CommandEditAlignLeft" xml:space="preserve">
+    <value>Alinhar à Esquerda</value>
+  </data>
+  <data name="CommandEditAlignRight" xml:space="preserve">
+    <value>Alinhar à Direita</value>
+  </data>
+  <data name="CommandEditBold" xml:space="preserve">
+    <value>Negrito</value>
+  </data>
+  <data name="CommandEditBullets" xml:space="preserve">
+    <value>Marcadores</value>
+  </data>
+  <data name="CommandEditCopy" xml:space="preserve">
+    <value>_Copiar</value>
+  </data>
+  <data name="CommandEditCut" xml:space="preserve">
+    <value>Recor_tar</value>
+  </data>
+  <data name="CommandEditDecreaseFontSize" xml:space="preserve">
+    <value>Reduzir Tamanho da Fonte</value>
+  </data>
+  <data name="CommandEditDecreaseIndentation" xml:space="preserve">
+    <value>Reduzir Identação</value>
+  </data>
+  <data name="CommandEditDelete" xml:space="preserve">
+    <value>De_letar</value>
+  </data>
+  <data name="CommandEditIncreaseFontSize" xml:space="preserve">
+    <value>Aumentar Tamanho da Fonte</value>
+  </data>
+  <data name="CommandEditIncreaseIndentation" xml:space="preserve">
+    <value>Aumentar Indentação</value>
+  </data>
+  <data name="CommandEditItalic" xml:space="preserve">
+    <value>Itálico</value>
+  </data>
+  <data name="CommandEditNumbering" xml:space="preserve">
+    <value>Numeração</value>
+  </data>
+  <data name="CommandEditPaste" xml:space="preserve">
+    <value>Colar</value>
+  </data>
+  <data name="CommandEditRedo" xml:space="preserve">
+    <value>_Refazer</value>
+  </data>
+  <data name="CommandEditSelectAll" xml:space="preserve">
+    <value>Selecion_ar Tudo</value>
+  </data>
+  <data name="CommandEditUnderline" xml:space="preserve">
+    <value>Sublinhado</value>
+  </data>
+  <data name="CommandEditUndo" xml:space="preserve">
+    <value>Desfazer</value>
+  </data>
+  <data name="CommandFileClose" xml:space="preserve">
+    <value>Sair</value>
+  </data>
+  <data name="CommandFileNew" xml:space="preserve">
+    <value>_Novo</value>
+  </data>
+  <data name="CommandFileOpen" xml:space="preserve">
+    <value>Abrir</value>
+  </data>
+  <data name="CommandFileSave" xml:space="preserve">
+    <value>_Salvar</value>
+  </data>
+  <data name="CommandFileSaveAs" xml:space="preserve">
+    <value>S_alvar Como...</value>
+  </data>
+  <data name="CommandHelpView" xml:space="preserve">
+    <value>Ajuda</value>
+  </data>
+  <data name="ToolTipFontFamily" xml:space="preserve">
+    <value>Fonte</value>
+  </data>
+  <data name="ToolTipFontSize" xml:space="preserve">
+    <value>Tamanho</value>
+  </data>
+  <data name="TitleCredits" xml:space="preserve">
+    <value>Créditos:</value>
+  </data>
 </root>
