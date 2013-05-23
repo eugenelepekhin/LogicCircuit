@@ -237,7 +237,7 @@ O arquivo que você está tentando abrir pode estar corrompido ou foi criado por
     <value>a</value>
   </data>
   <data name="MemoryDataInPinName" xml:space="preserve">
-    <value>Entrada de dados de memória</value>
+    <value>Dados de memória (Ent.)</value>
   </data>
   <data name="MemoryDataPinName" xml:space="preserve">
     <value>Dados de memória</value>
@@ -359,7 +359,7 @@ Você deseja salvá-lo?</value>
   </data>
   <data name="TitlePinInput" xml:space="preserve">
     <value>{0}
-Entrada</value>
+Ent.</value>
     <comment>{string pinName}</comment>
   </data>
   <data name="TitlePinOutput" xml:space="preserve">
@@ -1020,7 +1020,7 @@ Você deseja remover a referência dele da lista de Arquivos Rescentes?</value>
     <value>Os dados na área de transferência estão corrompidos e não podem ser colados.</value>
   </data>
   <data name="DefaultGateShape" xml:space="preserve">
-    <value>Desenhado</value>
+    <value>Shaped</value>
     <comment>!(Rectangular, Shaped) - chose default gate shape for your culture.</comment>
   </data>
   <data name="CommandTruthTable" xml:space="preserve">
@@ -1234,5 +1234,8 @@ Tal circuito não pode ser usado mais de uma vez em outros circuitos já que dif
   </data>
   <data name="CircuitProbeToolTip" xml:space="preserve">
     <value>Inspeção {0}</value>
+  </data>
+  <data name="CaptionName" xml:space="preserve">
+    <value>Nome</value>
   </data>
 </root>
