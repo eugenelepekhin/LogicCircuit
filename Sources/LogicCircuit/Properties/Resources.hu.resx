@@ -1,0 +1,1254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ErrorProjectCount" xml:space="preserve">
+    <value>Több, mint egy projekt van a fájlban.</value>
+  </data>
+  <data name="ErrorUnknownVersion" xml:space="preserve">
+    <value>Ismeretlen verziójú kapcsolást próbáltál meg betölteni.
+A fájl, amit be kívánsz tölteni vagy sérült vagy egy újabb verziójú  Logic Circuit hozta létre. Kérlek látogass el a &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt; oldalra egy újabb verzióért</value>
+  </data>
+  <data name="FileFilter" xml:space="preserve">
+    <value>Kapcsolási projekt (*{0})|*{0}|Minden fájl (*.*)|*.*</value>
+    <comment>{string fileExtention}</comment>
+  </data>
+  <data name="FileSaved" xml:space="preserve">
+    <value>A fáj {0} mentett.</value>
+    <comment>{string fileName}</comment>
+  </data>
+  <data name="FlowDirection" xml:space="preserve">
+    <value>LeftToRight</value>
+    <comment>!(LeftToRight, RightToLeft) - choose layout direction for your culture.</comment>
+  </data>
+  <data name="GateAndName" xml:space="preserve">
+    <value>And</value>
+  </data>
+  <data name="GateAndNotation" xml:space="preserve">
+    <value>&amp;</value>
+  </data>
+  <data name="GateAndNotName" xml:space="preserve">
+    <value>NAnd</value>
+  </data>
+  <data name="GateClockName" xml:space="preserve">
+    <value>Órajel</value>
+  </data>
+  <data name="GateClockNotation" xml:space="preserve">
+    <value>ω</value>
+  </data>
+  <data name="GateLedName" xml:space="preserve">
+    <value>LED</value>
+  </data>
+  <data name="GateLedNotation" xml:space="preserve">
+    <value>LED</value>
+  </data>
+  <data name="GateNotName" xml:space="preserve">
+    <value>Not</value>
+  </data>
+  <data name="GateNotNotation" xml:space="preserve">
+    <value>~</value>
+  </data>
+  <data name="GateOrName" xml:space="preserve">
+    <value>Or</value>
+  </data>
+  <data name="GateOrNotation" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="GateOrNotName" xml:space="preserve">
+    <value>NOr</value>
+  </data>
+  <data name="CircuitProbeName" xml:space="preserve">
+    <value>Mérőpont</value>
+  </data>
+  <data name="CircuitProbeNotation" xml:space="preserve">
+    <value>?</value>
+  </data>
+  <data name="GateShapeRectangular" xml:space="preserve">
+    <value>Rectangular</value>
+  </data>
+  <data name="GateShapeShaped" xml:space="preserve">
+    <value>Shaped</value>
+  </data>
+  <data name="GateTriStateName" xml:space="preserve">
+    <value>Háromállapotú</value>
+  </data>
+  <data name="GateTriStateNotation" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="GateXorName" xml:space="preserve">
+    <value>Xor</value>
+  </data>
+  <data name="GateXorNotation" xml:space="preserve">
+    <value>=</value>
+  </data>
+  <data name="GateXorNotName" xml:space="preserve">
+    <value>XNor</value>
+  </data>
+  <data name="Led7Pin1" xml:space="preserve">
+    <value>a</value>
+  </data>
+  <data name="Led7Pin2" xml:space="preserve">
+    <value>b</value>
+  </data>
+  <data name="Led7Pin3" xml:space="preserve">
+    <value>c</value>
+  </data>
+  <data name="Led7Pin4" xml:space="preserve">
+    <value>d</value>
+  </data>
+  <data name="Led7Pin5" xml:space="preserve">
+    <value>e</value>
+  </data>
+  <data name="Led7Pin6" xml:space="preserve">
+    <value>f</value>
+  </data>
+  <data name="Led7Pin7" xml:space="preserve">
+    <value>g</value>
+  </data>
+  <data name="Led7Pin8" xml:space="preserve">
+    <value>pont</value>
+  </data>
+  <data name="LogicalCircuitName" xml:space="preserve">
+    <value>Kapcsolás</value>
+  </data>
+  <data name="MainFrameCaption" xml:space="preserve">
+    <value>Logical Circuit {0}</value>
+    <comment>{string projectName}</comment>
+  </data>
+  <data name="MemoryAddressPinName" xml:space="preserve">
+    <value>Memória cím</value>
+  </data>
+  <data name="MemoryAddressPinNotation" xml:space="preserve">
+    <value>a</value>
+  </data>
+  <data name="MemoryDataInPinName" xml:space="preserve">
+    <value>Memória bemeneti adat</value>
+  </data>
+  <data name="MemoryDataPinName" xml:space="preserve">
+    <value>Memória adat</value>
+  </data>
+  <data name="MemoryDataPinNotation" xml:space="preserve">
+    <value>d</value>
+  </data>
+  <data name="MemoryWritePinName" xml:space="preserve">
+    <value>RAM Író bemenet
+A Memória tartalma frissülni fog a következő esetekben: {0}</value>
+    <comment>{string writeOn}</comment>
+  </data>
+  <data name="MemoryWritePinNotation" xml:space="preserve">
+    <value>w</value>
+  </data>
+  <data name="MessageSaveFile" xml:space="preserve">
+    <value>A projekt {0} megváltozott.
+Szeretnéd menteni?</value>
+    <comment>{string projecgName}</comment>
+  </data>
+  <data name="OperationCanceled" xml:space="preserve">
+    <value>Művelet megszakítva.</value>
+  </data>
+  <data name="PinEnableName" xml:space="preserve">
+    <value>E</value>
+  </data>
+  <data name="PinInName" xml:space="preserve">
+    <value>x</value>
+  </data>
+  <data name="PinName" xml:space="preserve">
+    <value>{0}{1}</value>
+    <comment>{string prefix, int number}</comment>
+  </data>
+  <data name="PinOutName" xml:space="preserve">
+    <value>q</value>
+  </data>
+  <data name="Ready" xml:space="preserve">
+    <value>Kész.</value>
+  </data>
+  <data name="SplitterThin1PinName" xml:space="preserve">
+    <value>(bit {0}) of Combined Splitter connector</value>
+    <comment>{int bit}</comment>
+  </data>
+  <data name="SplitterThin2PinName" xml:space="preserve">
+    <value>(bits {0}-{1}) of Combined Splitter connector</value>
+    <comment>{int firstBit, int lastBit}</comment>
+  </data>
+  <data name="SplitterWidePinName" xml:space="preserve">
+    <value>Combined Splitter Connector</value>
+  </data>
+  <data name="TitleCancel" xml:space="preserve">
+    <value>Mégsem</value>
+  </data>
+  <data name="TitleNo" xml:space="preserve">
+    <value>_Nem</value>
+  </data>
+  <data name="TitleOK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="TitleShowDetails" xml:space="preserve">
+    <value>_Részletek mutatása</value>
+  </data>
+  <data name="TitleYes" xml:space="preserve">
+    <value>_Igen</value>
+  </data>
+  <data name="WriteOn0" xml:space="preserve">
+    <value>Lefutó, 1-ről 0-ra</value>
+  </data>
+  <data name="WriteOn1" xml:space="preserve">
+    <value>Felfutó, 0-ról 1-re</value>
+  </data>
+  <data name="ConstantNotation" xml:space="preserve">
+    <value>{0:X}</value>
+    <comment>{int constantValue}</comment>
+  </data>
+  <data name="RAMNotation" xml:space="preserve">
+    <value>RAM</value>
+  </data>
+  <data name="ROMNotation" xml:space="preserve">
+    <value>ROM</value>
+  </data>
+  <data name="ToolTipButton" xml:space="preserve">
+    <value>Gomb {0}</value>
+    <comment>{string buttonName}</comment>
+  </data>
+  <data name="ToolTipConstant" xml:space="preserve">
+    <value>{0} bit(es) konstans {1:X}</value>
+    <comment>{int bitWidth, int value}</comment>
+  </data>
+  <data name="ToolTipInputPin" xml:space="preserve">
+    <value>Bemeneti {0} bit(ek) láb {1}</value>
+    <comment>{int bitWidth, string pinName}</comment>
+  </data>
+  <data name="ToolTipNonePin" xml:space="preserve">
+    <value>{0} bit(ek) {1}</value>
+    <comment>{int bitWidth, string pinName}</comment>
+  </data>
+  <data name="ToolTipOutputPin" xml:space="preserve">
+    <value>Output {0} bit(s) Pin {1}</value>
+    <comment>{int bitWidth, string pinName}</comment>
+  </data>
+  <data name="ToolTipRAM" xml:space="preserve">
+    <value>RAM {0} bit cím / {1} bit adat</value>
+    <comment>{int address, int data}</comment>
+  </data>
+  <data name="ToolTipROM" xml:space="preserve">
+    <value>ROM {0} bit cím / {1} bit adat</value>
+    <comment>{int address, int data}</comment>
+  </data>
+  <data name="ToolTipSplitter" xml:space="preserve">
+    <value>Elosztó,{0} bit {1} lábra</value>
+    <comment>{int bitWidth, int pinCount}</comment>
+  </data>
+  <data name="ToolTipWire" xml:space="preserve">
+    <value>Vezeték</value>
+  </data>
+  <data name="CategoryInputOutput" xml:space="preserve">
+    <value>Bemenet - Kimenet</value>
+  </data>
+  <data name="TitlePinInput" xml:space="preserve">
+    <value>{0}
+Be</value>
+    <comment>{string pinName}</comment>
+  </data>
+  <data name="TitlePinOutput" xml:space="preserve">
+    <value>{0}
+Ki</value>
+    <comment>{string pinName}</comment>
+  </data>
+  <data name="CommandHelpAbout" xml:space="preserve">
+    <value>_Névjegy</value>
+  </data>
+  <data name="NameButton" xml:space="preserve">
+    <value>Gomb</value>
+  </data>
+  <data name="NameConstant" xml:space="preserve">
+    <value>Konstans</value>
+  </data>
+  <data name="NameSplitter" xml:space="preserve">
+    <value>Elválasztó</value>
+  </data>
+  <data name="TitleAbout" xml:space="preserve">
+    <value>Névjegy</value>
+  </data>
+  <data name="TitleApplication" xml:space="preserve">
+    <value>Logical Circuit</value>
+  </data>
+  <data name="TitleVersion" xml:space="preserve">
+    <value>Verzió:</value>
+  </data>
+  <data name="TitleWeb" xml:space="preserve">
+    <value>Web:</value>
+  </data>
+  <data name="WebSiteUri" xml:space="preserve">
+    <value>http://www.logiccircuit.org/</value>
+  </data>
+  <data name="CommandToolsOptions" xml:space="preserve">
+    <value>_Beállítások</value>
+  </data>
+  <data name="TitleDisplayOptions" xml:space="preserve">
+    <value>Megjelenítés</value>
+  </data>
+  <data name="TitleFileOptions" xml:space="preserve">
+    <value>Fájl</value>
+  </data>
+  <data name="TitleGateShape" xml:space="preserve">
+    <value>_Kapu alakzat</value>
+  </data>
+  <data name="TitleLoadLastFile" xml:space="preserve">
+    <value>_Legutóbb használt fájl betöltése indításkor</value>
+  </data>
+  <data name="TitleOptions" xml:space="preserve">
+    <value>Beállítások</value>
+  </data>
+  <data name="TitleShowGrid" xml:space="preserve">
+    <value>Rács _mutatása</value>
+  </data>
+  <data name="MessageFreeWireCount" xml:space="preserve">
+    <value>{0} darab szabadon hagyott vezetéket találtam.</value>
+    <comment>{int wireCount}</comment>
+  </data>
+  <data name="MessageFloatingSymbolCount" xml:space="preserve">
+    <value>{0} darab be nem kötött szimbólumot találtam</value>
+    <comment>{int symbolCount}</comment>
+  </data>
+  <data name="CommandCircuitCurrent" xml:space="preserve">
+    <value>Logikai kapcsolás</value>
+  </data>
+  <data name="CommandCircuitDelete" xml:space="preserve">
+    <value>Jelenlegi kapcsolás törlése</value>
+  </data>
+  <data name="CommandCircuitNew" xml:space="preserve">
+    <value>Új logikai kapcsolás</value>
+  </data>
+  <data name="CommandCircuitProject" xml:space="preserve">
+    <value>Projekt</value>
+  </data>
+  <data name="CommandEditSelectAllButWires" xml:space="preserve">
+    <value>Minden kijelölése, kivéve vezetékek</value>
+  </data>
+  <data name="CommandEditSelectAllProbes" xml:space="preserve">
+    <value>Minden mérőpont kijelölése</value>
+  </data>
+  <data name="CommandEditSelectAllProbesWithWire" xml:space="preserve">
+    <value>Minden mérőpont és csatlakozó vezeték kijelölése</value>
+  </data>
+  <data name="CommandEditSelectAllWires" xml:space="preserve">
+    <value>Minden vezeték kijelölése</value>
+  </data>
+  <data name="CommandEditSelectFloatingSymbols" xml:space="preserve">
+    <value>Lebegő szimbólumok kijelölse</value>
+  </data>
+  <data name="CommandEditSelectFreeWires" xml:space="preserve">
+    <value>Szabadonkhagyott vezetékek kijelölése</value>
+  </data>
+  <data name="CommandEditUnselectAllButWires" xml:space="preserve">
+    <value>Kijelölés megszüntetése, kivéve vezetékek</value>
+  </data>
+  <data name="CommandEditUnselectAllWires" xml:space="preserve">
+    <value>Kijelölés megszüntetése vezetékeken</value>
+  </data>
+  <data name="CommandFileExportImage" xml:space="preserve">
+    <value>Kép exportálása</value>
+  </data>
+  <data name="CommandToolsOscilloscope" xml:space="preserve">
+    <value>Oszcilloszkóp</value>
+  </data>
+  <data name="CommandToolsReport" xml:space="preserve">
+    <value>Project Report</value>
+  </data>
+  <data name="HelpContent" xml:space="preserve">
+    <value>http://www.logiccircuit.org/help.html</value>
+  </data>
+  <data name="TitleCategory" xml:space="preserve">
+    <value>_Kategória:</value>
+  </data>
+  <data name="TitleDescription" xml:space="preserve">
+    <value>_Leírás</value>
+  </data>
+  <data name="TitleName" xml:space="preserve">
+    <value>_Név:</value>
+  </data>
+  <data name="TitleNotation" xml:space="preserve">
+    <value>Je_lölés:</value>
+  </data>
+  <data name="TitleBitWidth" xml:space="preserve">
+    <value>_Bit szélesség:</value>
+  </data>
+  <data name="TitleValue" xml:space="preserve">
+    <value>_Érték:</value>
+  </data>
+  <data name="NamePin" xml:space="preserve">
+    <value>Pin</value>
+  </data>
+  <data name="TitleAddressBitWidth" xml:space="preserve">
+    <value>_Address bit width:</value>
+  </data>
+  <data name="TitleData" xml:space="preserve">
+    <value>Ada_t</value>
+  </data>
+  <data name="TitleDataBitWidth" xml:space="preserve">
+    <value>A_dat bitek száma</value>
+  </data>
+  <data name="TitleInverted" xml:space="preserve">
+    <value>_Invertált</value>
+  </data>
+  <data name="TitleLoad" xml:space="preserve">
+    <value>_Betöltés...</value>
+  </data>
+  <data name="TitleSide" xml:space="preserve">
+    <value>_Oldal:</value>
+  </data>
+  <data name="TitleType" xml:space="preserve">
+    <value>_Típus:</value>
+  </data>
+  <data name="TitleWriteOn" xml:space="preserve">
+    <value>_Írás a következő esetben:</value>
+  </data>
+  <data name="TipOnStartMove" xml:space="preserve">
+    <value>Fogd és vidd a kijelölést a kívánt helyre. ESC megnyomása megszakítja a műveletet. Ha a SHIFT nyomva van elengedés közben, akkor a vezékeket nem mozgatja.</value>
+  </data>
+  <data name="TipOnStartWire" xml:space="preserve">
+    <value>Mozgasd a vezeték végét a kívánt helyre. ESC gomb megnyomása megszakítja a vezeték létrehozását</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Betöltés...</value>
+  </data>
+  <data name="TipOnCtrlDown" xml:space="preserve">
+    <value>Ctrl+{Shift}+Tab vált a logikai kapcsolások között</value>
+  </data>
+  <data name="TipOnWireSelect" xml:space="preserve">
+    <value>Shift+{Ctrl}+Click on wire to select/unselect entire conductor, Alt+Click on selected wire to split, on common point of two to merge.</value>
+  </data>
+  <data name="TipOnAwaitingArea" xml:space="preserve">
+    <value>{0} {1}. Surround multiple symbols to select them, hold Shift to keep current selection.</value>
+    <comment>{string logicCircuit, LogicCircuit.GridPoint point}</comment>
+  </data>
+  <data name="FunctionParameter" xml:space="preserve">
+    <value>A funkció {0} legalább {1} paramétert igényel</value>
+    <comment>{string function, int parameterCount}</comment>
+  </data>
+  <data name="UnknownState" xml:space="preserve">
+    <value>Az állapot {0} ismeretlen</value>
+    <comment>{LogicCircuit.State state}</comment>
+  </data>
+  <data name="CircuitMapPathSeparator" xml:space="preserve">
+    <value>/</value>
+  </data>
+  <data name="ErrorAddressNotConnected" xml:space="preserve">
+    <value>Nem minden címbit csatlakoztatott a memórián {0}</value>
+    <comment>{string memoryPath}</comment>
+  </data>
+  <data name="ErrorDataInNotConnected" xml:space="preserve">
+    <value>Nem minden bejövő adatbit csatlakoztatott a meórián {0}</value>
+    <comment>{string memoryPath}</comment>
+  </data>
+  <data name="ErrorJamBitWidthDifferent" xml:space="preserve">
+    <value>{0} ({1}) Bemeneti lába és  {2} ({3}) kimeneti lába a következőn {4}  különböző bit szélességű és ezért nem összeköthető.</value>
+    <comment>{string symbol1, GridPoint point1, string symbol2, GridPoint point2, string logicCircuit}</comment>
+  </data>
+  <data name="ErrorLoopInCircuit" xml:space="preserve">
+    <value>A következő szimbólum"{0}" a következő logikai kapcsoláson "{1}" végtelen ciklust alkot. Szüntesd meg a problémát.</value>
+    <comment>{string symbol, string logicCircuit}</comment>
+  </data>
+  <data name="ErrorManyResults" xml:space="preserve">
+    <value>Input pin {0} of {1} connected to more than one output pin that are not tri state capable.</value>
+    <comment>{string pinName, string symbol}</comment>
+  </data>
+  <data name="PowerOff" xml:space="preserve">
+    <value>Feszültség kikapcsolva</value>
+  </data>
+  <data name="PowerOn" xml:space="preserve">
+    <value>Feszültség bekapcsolva</value>
+  </data>
+  <data name="ProbeHistoryHex" xml:space="preserve">
+    <value>{0:X}</value>
+    <comment>{int value}</comment>
+  </data>
+  <data name="ProbeHistoryMark" xml:space="preserve">
+    <value>&lt;&lt;&lt;&lt;&lt;&lt; Mark &gt;&gt;&gt;&gt;&gt;&gt;</value>
+  </data>
+  <data name="TitleMark" xml:space="preserve">
+    <value>_Kijelölés</value>
+  </data>
+  <data name="TitleProbeHistory" xml:space="preserve">
+    <value>Mérőpont előzmények</value>
+  </data>
+  <data name="MessageNotRootConstant" xml:space="preserve">
+    <value>Only constants resided on the root circuit ({0}) can be changed when the power is on.</value>
+    <comment>{string circuitName}</comment>
+  </data>
+  <data name="LogicalCircuitMainName" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="CircuitProjectName" xml:space="preserve">
+    <value>Circuit Project</value>
+  </data>
+  <data name="Oscillation" xml:space="preserve">
+    <value>Oszcilláció</value>
+  </data>
+  <data name="TitleOscillogram" xml:space="preserve">
+    <value>Oscillogram</value>
+  </data>
+  <data name="TitleOscilloscope" xml:space="preserve">
+    <value>Logic Circuit oszcilloszkóp</value>
+  </data>
+  <data name="TitleOscilloscoping" xml:space="preserve">
+    <value>_Oscilloscoping</value>
+  </data>
+  <data name="CommandFileFileImport" xml:space="preserve">
+    <value>_Importálás...</value>
+  </data>
+  <data name="ImportTitle" xml:space="preserve">
+    <value>Importálás</value>
+  </data>
+  <data name="TitleCircuitDescriptor" xml:space="preserve">
+    <value>Kapcsolás</value>
+  </data>
+  <data name="TitleFileName" xml:space="preserve">
+    <value>Fájl</value>
+  </data>
+  <data name="TitleImportCircuit" xml:space="preserve">
+    <value>Importálás</value>
+  </data>
+  <data name="TitleCheckAll" xml:space="preserve">
+    <value>Minden _Ellenőrzése</value>
+  </data>
+  <data name="TitleUncheckAll" xml:space="preserve">
+    <value>_Kijelölések megszüntetése</value>
+  </data>
+  <data name="ImageFileFilter" xml:space="preserve">
+    <value>Kép fájl (*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif)|*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif|All Files (*.*)|*.*</value>
+  </data>
+  <data name="ImagePathInvalid" xml:space="preserve">
+    <value>A megadott fájlnév vagy elérési útvonal érvénytelen. Ellenőrizd, hogy a megadott elérési út létezik e.</value>
+  </data>
+  <data name="MessageExportImageDialog" xml:space="preserve">
+    <value>Válazd ki a kép típusát és nevét amibe mentésre kerül a diagramm.</value>
+  </data>
+  <data name="MessageImageFileExists" xml:space="preserve">
+    <value>A fájl"{0}" már létezik.
+Kívánod lecserélni?</value>
+    <comment>{string fileName}</comment>
+  </data>
+  <data name="TitleExportImage" xml:space="preserve">
+    <value>Kép exportálása</value>
+  </data>
+  <data name="TitleFile" xml:space="preserve">
+    <value>_Fájl:</value>
+  </data>
+  <data name="TitleFileOpen" xml:space="preserve">
+    <value>...</value>
+  </data>
+  <data name="Gate7SegName" xml:space="preserve">
+    <value>7-seg</value>
+  </data>
+  <data name="ReportGateName" xml:space="preserve">
+    <value>{0} ({1})</value>
+    <comment>{string gate, int inputCount}</comment>
+  </data>
+  <data name="ReportMemoryName" xml:space="preserve">
+    <value>{0}: {1} bit cím, {2} bit adat</value>
+    <comment>{string memoryName, int address, int data}</comment>
+  </data>
+  <data name="TriStateGroupName" xml:space="preserve">
+    <value>Három állapotú csoport</value>
+  </data>
+  <data name="TextNotation" xml:space="preserve">
+    <value>Szöveges megjegyzés</value>
+  </data>
+  <data name="CaptionAddressBitWidth" xml:space="preserve">
+    <value>Cím bitek</value>
+  </data>
+  <data name="CaptionBitWidth" xml:space="preserve">
+    <value>Bit szélesség</value>
+  </data>
+  <data name="CaptionDataBitWidth" xml:space="preserve">
+    <value>Data Bits</value>
+  </data>
+  <data name="CaptionSplitterPinNumber" xml:space="preserve">
+    <value>Lábak megosztása</value>
+  </data>
+  <data name="CaptionSplitterDirection" xml:space="preserve">
+    <value>Kombinált láb</value>
+  </data>
+  <data name="CaptionSide" xml:space="preserve">
+    <value>Oldal</value>
+  </data>
+  <data name="CaptionTextNote1" xml:space="preserve">
+    <value>Szöveg</value>
+  </data>
+  <data name="CaptionTextNote2" xml:space="preserve">
+    <value>Megyjegyzés</value>
+  </data>
+  <data name="CaptionValue" xml:space="preserve">
+    <value>Érték</value>
+  </data>
+  <data name="MenuHeaderCircuit" xml:space="preserve">
+    <value>_Kapcsolás</value>
+  </data>
+  <data name="MenuHeaderEdit" xml:space="preserve">
+    <value>S_zerkesztés</value>
+  </data>
+  <data name="MenuHeaderFile" xml:space="preserve">
+    <value>_Fájl</value>
+  </data>
+  <data name="MenuHeaderHelp" xml:space="preserve">
+    <value>_Súgó</value>
+  </data>
+  <data name="MenuHeaderTools" xml:space="preserve">
+    <value>_Eszközök</value>
+  </data>
+  <data name="MessageWarning" xml:space="preserve">
+    <value>Figyelmeztetés!</value>
+  </data>
+  <data name="TitleFrequency" xml:space="preserve">
+    <value>Frekvencia:</value>
+  </data>
+  <data name="TitleIsMaximumSpeed1" xml:space="preserve">
+    <value>Futtatás maximális sebességes</value>
+  </data>
+  <data name="TitleIsMaximumSpeed2" xml:space="preserve">
+    <value>Nagy CPU terhelés</value>
+  </data>
+  <data name="TitleProject" xml:space="preserve">
+    <value>Projekt</value>
+  </data>
+  <data name="TitleRunningCircuit" xml:space="preserve">
+    <value>Futtatott áramkör</value>
+  </data>
+  <data name="TitleZoom" xml:space="preserve">
+    <value>_Nagyítás:</value>
+  </data>
+  <data name="ToolTipAddressBitWidth" xml:space="preserve">
+    <value>Válaszd ki a cím bitek számát</value>
+  </data>
+  <data name="ToolTipButtonNotation" xml:space="preserve">
+    <value>Írd be a gomb jelölését</value>
+  </data>
+  <data name="ToolTipConstantBitWidth" xml:space="preserve">
+    <value>Válaszd ki a konstans bitszélességét</value>
+  </data>
+  <data name="ToolTipConstantValue" xml:space="preserve">
+    <value>írd be a konstans kezdeti értékét</value>
+  </data>
+  <data name="ToolTipCurrentFrequency" xml:space="preserve">
+    <value>Jelenlegi frekvencia</value>
+  </data>
+  <data name="ToolTipCurrentZoom" xml:space="preserve">
+    <value>Jelenlegi nagyítás</value>
+  </data>
+  <data name="ToolTipDataBitWidth" xml:space="preserve">
+    <value>Válaszd ki az adat láb bitszélességét</value>
+  </data>
+  <data name="ToolTipFrequency" xml:space="preserve">
+    <value>Change the frequency of clock gates of the running circuit.</value>
+  </data>
+  <data name="ToolTipGateInputCount" xml:space="preserve">
+    <value>Válaszd ki a kapu bemeneteinek számát.</value>
+  </data>
+  <data name="ToolTipIsMaximumSpeed1" xml:space="preserve">
+    <value>A kapcsolást az elérhető legnagyobb frekvencián futtatja a beállított értéktől függetlenül.</value>
+  </data>
+  <data name="ToolTipIsMaximumSpeed2" xml:space="preserve">
+    <value>Ezen beállítás bekapcsolása néhány gép esetében a felhasználói felület akadását eredményezheti</value>
+  </data>
+  <data name="ToolTipPinBitWidth" xml:space="preserve">
+    <value>A láb bitszélességének megválasztása</value>
+  </data>
+  <data name="ToolTipPinSide" xml:space="preserve">
+    <value>Válaszd ki a szimbólum azon oldalát, amelyre az új láb kerülni fog.</value>
+  </data>
+  <data name="ToolTipSplitterBitWidth" xml:space="preserve">
+    <value>Válaszd meg a bitszélességét az osztott csatlakozónak az elosztón</value>
+  </data>
+  <data name="ToolTipSplitterPinNumber" xml:space="preserve">
+    <value>Válaszd ki az osztott csatlakozók számát az elosztón</value>
+  </data>
+  <data name="ToolTipSplitterRotation" xml:space="preserve">
+    <value>Válaszd ki az elhelyezkedését a kombinált lábnak az eloszón</value>
+  </data>
+  <data name="ToolTipZoom" xml:space="preserve">
+    <value>Állítsd be a kapcsolás nagyítását</value>
+  </data>
+  <data name="ToolTipRamWriteOn" xml:space="preserve">
+    <value>Válaszd ki a memória írási időt</value>
+  </data>
+  <data name="ToolTipPinNotation" xml:space="preserve">
+    <value>Írj be egy nagyon rövid szöveget ami a szimbólumon a láb mellett fog megjelenni.</value>
+  </data>
+  <data name="CaptionNotation" xml:space="preserve">
+    <value>Jelölési mód</value>
+  </data>
+  <data name="TitleIsToggle" xml:space="preserve">
+    <value>Ka_pcsoló</value>
+  </data>
+  <data name="ToolTipIsToggle" xml:space="preserve">
+    <value>Ha kapcsoló, akkor az értéke minden kattintáskor változik, ha pedig nyomógomb, akkor megnyomás vagy elengedés esetén változik.</value>
+  </data>
+  <data name="CommandCircuitPower" xml:space="preserve">
+    <value>Feszültség kapcsolása</value>
+  </data>
+  <data name="CommandEditRotateLeft" xml:space="preserve">
+    <value>Forgaltás balra</value>
+  </data>
+  <data name="CommandEditRotateRight" xml:space="preserve">
+    <value>Forgatás jobbra</value>
+  </data>
+  <data name="SplitterDirectionClockwise" xml:space="preserve">
+    <value>Bal</value>
+  </data>
+  <data name="SplitterDirectionCounterclockwise" xml:space="preserve">
+    <value>Jobb</value>
+  </data>
+  <data name="CategoryDuplicate" xml:space="preserve">
+    <value>{0} 2</value>
+    <comment>{string reservedCategoryName}</comment>
+  </data>
+  <data name="PinSideBottom" xml:space="preserve">
+    <value>Lent</value>
+  </data>
+  <data name="PinSideLeft" xml:space="preserve">
+    <value>Bal</value>
+  </data>
+  <data name="PinSideRight" xml:space="preserve">
+    <value>Jobb</value>
+  </data>
+  <data name="PinSideTop" xml:space="preserve">
+    <value>Fent</value>
+  </data>
+  <data name="CaptionSplitterBitWidth" xml:space="preserve">
+    <value>Bitszélesség megosztása</value>
+  </data>
+  <data name="CommandCircuitUsage" xml:space="preserve">
+    <value>Használatban:</value>
+  </data>
+  <data name="MessageNotUsed" xml:space="preserve">
+    <value>A kapcsolás sehol sem használt.</value>
+  </data>
+  <data name="MessageUsageNote" xml:space="preserve">
+    <value>Select circuit where the current one is used and double-click it to navigate there and select symbols of current one.</value>
+  </data>
+  <data name="TitleCircuitUsage" xml:space="preserve">
+    <value>Logical Circuit Használata</value>
+  </data>
+  <data name="CaptionNote" xml:space="preserve">
+    <value>_Megjegyzés</value>
+  </data>
+  <data name="CategoryPrimitives" xml:space="preserve">
+    <value>Alap</value>
+  </data>
+  <data name="TitleMemory" xml:space="preserve">
+    <value>Memória</value>
+  </data>
+  <data name="CommandFileOpenRecent" xml:space="preserve">
+    <value>Open _Recent</value>
+  </data>
+  <data name="MessageInvalidRecentFile" xml:space="preserve">
+    <value>A fájl "{0}" nem megnyitható.
+El kívánod távolítani a nemrég használt fájlok listájáról?</value>
+    <comment>{string file}</comment>
+  </data>
+  <data name="TitleMaxRecentFiles" xml:space="preserve">
+    <value>_Nemrég használt fájlok maximális száma:</value>
+  </data>
+  <data name="Bit0" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Bit1" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="BitOff" xml:space="preserve">
+    <value>Kikapcsolva</value>
+  </data>
+  <data name="ErrorFileCorrupted" xml:space="preserve">
+    <value>A fájl "{0}" sérült és nem betölthető.</value>
+    <comment>{string fileName}</comment>
+  </data>
+  <data name="ProjectSummary" xml:space="preserve">
+    <value>{0} logikai kapcsolás, {1} kategóriában {2} szimbólum és {3} vezeték</value>
+    <comment>{int logicalCircuits, int categories, int symbols, int wires}</comment>
+  </data>
+  <data name="ReportError" xml:space="preserve">
+    <value>A hibák jelentése nem lehetéges az alábbi hiba miatt: {0}</value>
+    <comment>{string message}</comment>
+  </data>
+  <data name="ReportFunctions" xml:space="preserve">
+    <value>A kapcsolás funkciói "{0}"</value>
+    <comment>{string name}</comment>
+  </data>
+  <data name="TitleCount" xml:space="preserve">
+    <value>Darab</value>
+  </data>
+  <data name="TitleFunction" xml:space="preserve">
+    <value>Fukció</value>
+  </data>
+  <data name="TitleProjectDescription" xml:space="preserve">
+    <value>Leírás</value>
+  </data>
+  <data name="TitleReportErrorDetails" xml:space="preserve">
+    <value>Hiba részletei</value>
+  </data>
+  <data name="TitleSummary" xml:space="preserve">
+    <value>Áttekintés:</value>
+  </data>
+  <data name="TitleTotal" xml:space="preserve">
+    <value>Összesen:</value>
+  </data>
+  <data name="LogicalCircuitMainNotation" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="PinTypeNameInput" xml:space="preserve">
+    <value>Bemenet</value>
+  </data>
+  <data name="PinTypeNameNone" xml:space="preserve">
+    <value>Egyik sem</value>
+  </data>
+  <data name="PinTypeNameOutput" xml:space="preserve">
+    <value>Kimenet</value>
+  </data>
+  <data name="ErrorUnsupportedUri" xml:space="preserve">
+    <value>Ez a webcím nem nyitható meg.</value>
+  </data>
+  <data name="GridPoint" xml:space="preserve">
+    <value>({0}, {1})</value>
+    <comment>{int x, int y}</comment>
+  </data>
+  <data name="NameLedMatrix" xml:space="preserve">
+    <value>LED Mátrix</value>
+  </data>
+  <data name="ToolTipLedMatrix" xml:space="preserve">
+    <value>LED Mátrix {0}x{1}, {2} bit/ LED, ({3} szín)</value>
+    <comment>{int rows, int columns, int bitsPerLed, int colors}</comment>
+  </data>
+  <data name="CaptionColumns" xml:space="preserve">
+    <value>Oszlopok</value>
+  </data>
+  <data name="CaptionRows" xml:space="preserve">
+    <value>Sorok</value>
+  </data>
+  <data name="ToolTipColumns" xml:space="preserve">
+    <value>Choose number of columns of the LED matrix</value>
+  </data>
+  <data name="ToolTipRows" xml:space="preserve">
+    <value>Válaszd ki a LED mátrix sorainak számát</value>
+  </data>
+  <data name="CaptionLedMatrixType" xml:space="preserve">
+    <value>Típus</value>
+  </data>
+  <data name="LedMatrixColumnSelector" xml:space="preserve">
+    <value>for selecting Column #{0}</value>
+    <comment>{int column}</comment>
+  </data>
+  <data name="LedMatrixRowIndividual" xml:space="preserve">
+    <value>for each LED in Row #{0}</value>
+    <comment>{int row}</comment>
+  </data>
+  <data name="LedMatrixRowSelector" xml:space="preserve">
+    <value>for selecting Row #{0}</value>
+    <comment>{int row}</comment>
+  </data>
+  <data name="LedMatrixTypeIndividual" xml:space="preserve">
+    <value>Egyedi</value>
+  </data>
+  <data name="LedMatrixTypeSelector" xml:space="preserve">
+    <value>Választó</value>
+  </data>
+  <data name="TitleCellShape" xml:space="preserve">
+    <value>Cella _Alakzat:</value>
+  </data>
+  <data name="TitleColumns" xml:space="preserve">
+    <value>_Oszlopok:</value>
+  </data>
+  <data name="TitleRows" xml:space="preserve">
+    <value>_Sorok:</value>
+  </data>
+  <data name="ToolTipLedMatrixType" xml:space="preserve">
+    <value>Válaszd ki a mátrix vezérlésének módját</value>
+  </data>
+  <data name="TitleColors" xml:space="preserve">
+    <value>_Színek:</value>
+  </data>
+  <data name="MessageVersionLatest" xml:space="preserve">
+    <value>A legfrissebb verziót használod.</value>
+  </data>
+  <data name="MessageVersionOutdated" xml:space="preserve">
+    <value>Egy régebbi verziót használsz. Az új változat letöltésért kattints az alábbi linkre.</value>
+  </data>
+  <data name="MessageVersionPreview" xml:space="preserve">
+    <value>Kiadatlan fejlesztői változatot használsz.</value>
+  </data>
+  <data name="TitleCheckVersion" xml:space="preserve">
+    <value>Ellenőrzés most</value>
+  </data>
+  <data name="WebSiteDownloadUri" xml:space="preserve">
+    <value>http://www.logiccircuit.org/download.html</value>
+  </data>
+  <data name="CommandHyperlink" xml:space="preserve">
+    <value>Hivatkozás</value>
+  </data>
+  <data name="ErrorHyperlinkText" xml:space="preserve">
+    <value>A hivatkozás szövege üres</value>
+  </data>
+  <data name="ErrorHyperlinkUrl" xml:space="preserve">
+    <value>A hivatkozás címe nem érvényes hivatkozás</value>
+  </data>
+  <data name="TitleHyperlink" xml:space="preserve">
+    <value>_Hivatkozás a következőre:</value>
+  </data>
+  <data name="TitleText" xml:space="preserve">
+    <value>_Szöveg:</value>
+  </data>
+  <data name="CommandInsertImage" xml:space="preserve">
+    <value>Kép</value>
+  </data>
+  <data name="TitleCheckVersionPeriodically" xml:space="preserve">
+    <value>Időközönként ellenőrizze, hogy van e új verzió</value>
+  </data>
+  <data name="ErrorClipboardCorrupted" xml:space="preserve">
+    <value>A vágólapon lévő adat sérült és nem lehet beilleszteni</value>
+  </data>
+  <data name="DefaultGateShape" xml:space="preserve">
+    <value>Shaped</value>
+    <comment>!(Rectangular, Shaped) - chose default gate shape for your culture.</comment>
+  </data>
+  <data name="CommandTruthTable" xml:space="preserve">
+    <value>Igazság táblázat</value>
+  </data>
+  <data name="MessageInputOutputPinsMissing" xml:space="preserve">
+    <value>There is no Input or Output Pins on this circuit. The truth tables are built by sending all the permutations of data to Input Pins and reading the results from Output Pins.</value>
+  </data>
+  <data name="MessageTruthTableTooBig" xml:space="preserve">
+    <value>Az igazság táblázat túl hosszú. Kérlek alkalmazz egy szűrőt, hogy ellenőrizd a kapcsolásod helyességét.</value>
+  </data>
+  <data name="ParserEOS" xml:space="preserve">
+    <value>Kifejezés vége</value>
+  </data>
+  <data name="ParserErrorCloseParenMissing" xml:space="preserve">
+    <value>Hiányzó ')' helyette: {0}</value>
+    <comment>{string token}</comment>
+  </data>
+  <data name="ParserErrorExpressionMissing" xml:space="preserve">
+    <value>Kifejezés hiányzik a következő után: {0}</value>
+    <comment>{string token}</comment>
+  </data>
+  <data name="ParserErrorInvalidNumber" xml:space="preserve">
+    <value>Érvénytelen szám: {0}</value>
+    <comment>{string number}</comment>
+  </data>
+  <data name="ParserErrorUnclosedQuote" xml:space="preserve">
+    <value>Idézett azonosító nem rendelkezik lezáró idézőjellel: {0}</value>
+    <comment>{string text}</comment>
+  </data>
+  <data name="ParserErrorUnexpected" xml:space="preserve">
+    <value>{0} váratlan</value>
+    <comment>{string token}</comment>
+  </data>
+  <data name="ParserErrorUnknownChar" xml:space="preserve">
+    <value>Ismeretlen karakter: {0}</value>
+    <comment>{char c}</comment>
+  </data>
+  <data name="ParserErrorUnknownPin" xml:space="preserve">
+    <value>{0} - bemeneti vagy kimeneti láb nem található</value>
+    <comment>{string name}</comment>
+  </data>
+  <data name="TitleApply" xml:space="preserve">
+    <value>_Alkalmaz</value>
+  </data>
+  <data name="TitleDisplayedRows" xml:space="preserve">
+    <value>Megjelenített sorok: {0:N0}</value>
+    <comment>-{int count}</comment>
+  </data>
+  <data name="TitleFilter" xml:space="preserve">
+    <value>Szű_rő:</value>
+  </data>
+  <data name="TitleInvert" xml:space="preserve">
+    <value>_Invertálás</value>
+  </data>
+  <data name="TitleTotalRows" xml:space="preserve">
+    <value>Sorok száma: {0:N0}</value>
+    <comment>-{int count}</comment>
+  </data>
+  <data name="TitleStop" xml:space="preserve">
+    <value>_Leállítás</value>
+  </data>
+  <data name="ColorPickerCaptionAvailable" xml:space="preserve">
+    <value>Elérhető színek:</value>
+  </data>
+  <data name="ColorPickerCaptionRecent" xml:space="preserve">
+    <value>Nem rég használt színek:</value>
+  </data>
+  <data name="ColorPickerCaptionSelectCustom" xml:space="preserve">
+    <value>Kiválaszt</value>
+  </data>
+  <data name="ColorPickerCaptionStandard" xml:space="preserve">
+    <value>Alap színek:</value>
+  </data>
+  <data name="ColorPickerTabCustom" xml:space="preserve">
+    <value>Egyedi</value>
+  </data>
+  <data name="ColorPickerTabStandard" xml:space="preserve">
+    <value>Alap</value>
+  </data>
+  <data name="ToolTipBackgroundColor" xml:space="preserve">
+    <value>Kijelölési szín</value>
+  </data>
+  <data name="ToolTipFontColor" xml:space="preserve">
+    <value>Szöveg színe</value>
+  </data>
+  <data name="TitleSaveAs" xml:space="preserve">
+    <value>Ment_és másként...</value>
+  </data>
+  <data name="ToolTipLoadData" xml:space="preserve">
+    <value>Adat betöltése fájlból</value>
+  </data>
+  <data name="ToolTipSaveData" xml:space="preserve">
+    <value>Adat mentése fájlba</value>
+  </data>
+  <data name="MemoryOnStartData" xml:space="preserve">
+    <value>Memória tartalmának megörzése futtatások között</value>
+  </data>
+  <data name="MemoryOnStartOnes" xml:space="preserve">
+    <value>Minden bit 1 értékre állítása</value>
+  </data>
+  <data name="MemoryOnStartRandom" xml:space="preserve">
+    <value>Véletlenszerűen</value>
+  </data>
+  <data name="MemoryOnStartZeros" xml:space="preserve">
+    <value>Minden bit 0 értékre állítása</value>
+  </data>
+  <data name="TitleMemoryOnStart" xml:space="preserve">
+    <value>Indításkor kitöltés:</value>
+  </data>
+  <data name="ToolTipMemoryOnStart" xml:space="preserve">
+    <value>Válaszd meg, hogy hogyan legyen inicializálva a memória a szimuláció indításakor</value>
+  </data>
+  <data name="ErrorManyMemoryData" xml:space="preserve">
+    <value>Circuit {0} contains {1} that preserves data between runs.
+Such circuit cannot be used more than once on other circuits as potentially different sets of data will be stored on one memory module.</value>
+    <comment>{string circuitName, string ramNotation}</comment>
+  </data>
+  <data name="TitleIsDisplay" xml:space="preserve">
+    <value>Di_splay visual elements on symbol</value>
+  </data>
+  <data name="MessageRestartRequared" xml:space="preserve">
+    <value>A program nyelve megváltozott. A változások a program újraindítása után lépnek életbe.</value>
+  </data>
+  <data name="TitleCulture" xml:space="preserve">
+    <value>_Nyelv</value>
+  </data>
+  <data name="CommandEditAlignCenter" xml:space="preserve">
+    <value>Igazítás középre</value>
+  </data>
+  <data name="CommandEditAlignJustify" xml:space="preserve">
+    <value>Sorkizárt</value>
+  </data>
+  <data name="CommandEditAlignLeft" xml:space="preserve">
+    <value>Igazítás balra</value>
+  </data>
+  <data name="CommandEditAlignRight" xml:space="preserve">
+    <value>Igazítás jobbra</value>
+  </data>
+  <data name="CommandEditBold" xml:space="preserve">
+    <value>Félkövér</value>
+  </data>
+  <data name="CommandEditBullets" xml:space="preserve">
+    <value>Felsorolás</value>
+  </data>
+  <data name="CommandEditCopy" xml:space="preserve">
+    <value>_Másolás</value>
+  </data>
+  <data name="CommandEditCut" xml:space="preserve">
+    <value>_Kivágás</value>
+  </data>
+  <data name="CommandEditDecreaseFontSize" xml:space="preserve">
+    <value>Betűméret kicsinítése</value>
+  </data>
+  <data name="CommandEditDecreaseIndentation" xml:space="preserve">
+    <value>Behúzás csökkentése</value>
+  </data>
+  <data name="CommandEditDelete" xml:space="preserve">
+    <value>_Törlés</value>
+  </data>
+  <data name="CommandEditIncreaseFontSize" xml:space="preserve">
+    <value>Betűméret növelése</value>
+  </data>
+  <data name="CommandEditIncreaseIndentation" xml:space="preserve">
+    <value>Behúzás növelése</value>
+  </data>
+  <data name="CommandEditItalic" xml:space="preserve">
+    <value>Dőlt</value>
+  </data>
+  <data name="CommandEditNumbering" xml:space="preserve">
+    <value>Számozás</value>
+  </data>
+  <data name="CommandEditPaste" xml:space="preserve">
+    <value>_Beillesztés</value>
+  </data>
+  <data name="CommandEditRedo" xml:space="preserve">
+    <value>_Ismét</value>
+  </data>
+  <data name="CommandEditSelectAll" xml:space="preserve">
+    <value>Mi_nden Kijelölése</value>
+  </data>
+  <data name="CommandEditUnderline" xml:space="preserve">
+    <value>Aláhúzás</value>
+  </data>
+  <data name="CommandEditUndo" xml:space="preserve">
+    <value>_Visszavonás</value>
+  </data>
+  <data name="CommandFileClose" xml:space="preserve">
+    <value>_Kilépés</value>
+  </data>
+  <data name="CommandFileNew" xml:space="preserve">
+    <value>_Új</value>
+  </data>
+  <data name="CommandFileOpen" xml:space="preserve">
+    <value>_Megnyitás...</value>
+  </data>
+  <data name="CommandFileSave" xml:space="preserve">
+    <value>M_entés</value>
+  </data>
+  <data name="CommandFileSaveAs" xml:space="preserve">
+    <value>Mentés M_ásként...</value>
+  </data>
+  <data name="CommandHelpView" xml:space="preserve">
+    <value>_Súgó megjelenítése</value>
+  </data>
+  <data name="ToolTipFontFamily" xml:space="preserve">
+    <value>Betűtípus</value>
+  </data>
+  <data name="ToolTipFontSize" xml:space="preserve">
+    <value>Betűméret</value>
+  </data>
+  <data name="TitleCredits" xml:space="preserve">
+    <value>Fejlesztők:</value>
+  </data>
+  <data name="ToolTipIsDisplay" xml:space="preserve">
+    <value>When you make Logic Circuit to display visual elements all display
+symbols on this circuit will visible alive on its symbols.
+Displays are: LED, LED Matrix, Button,
+or other Logic Circuit that displaying its visual elements.</value>
+  </data>
+  <data name="CaptionName" xml:space="preserve">
+    <value>Név</value>
+  </data>
+  <data name="CircuitProbeToolTip" xml:space="preserve">
+    <value>Mérőpont {0}</value>
+    <comment>{string probeName}</comment>
+  </data>
+  <data name="TitleActualFrequency" xml:space="preserve">
+    <value>Aktuális frekvencia:</value>
+  </data>
+</root>
