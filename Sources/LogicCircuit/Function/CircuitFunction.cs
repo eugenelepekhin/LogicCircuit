@@ -19,7 +19,7 @@ namespace LogicCircuit {
 
 		public long Iteration { get; set; }
 		[SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
-		public CircuitFunction[] Dependant { get; set; }
+		public CircuitFunction[] Dependent { get; set; }
 
 		protected CircuitFunction(CircuitState circuitState, int[] parameter, int[] result) {
 			this.CircuitState = circuitState;
@@ -116,6 +116,7 @@ namespace LogicCircuit {
 			return new AssertException(Properties.Resources.UnknownState(state));
 		}
 
+		[SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "TriState")]
 		protected State TriStateGroup() {
 			State state = State.Off;
 			foreach(int index in this.parameter) {

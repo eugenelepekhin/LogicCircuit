@@ -59,6 +59,7 @@ namespace LogicCircuit.DataPersistent {
 		/// <typeparam name="TField"></typeparam>
 		/// <param name="field"></param>
 		/// <returns></returns>
+		[SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "NewField")]
 		public TField GetNewField<TField>(IField<TRecord, TField> field) {
 			if(this.Action == SnapTableAction.Delete) {
 				throw new InvalidOperationException(Properties.Resources.ErrorWrongNewData);
@@ -72,6 +73,7 @@ namespace LogicCircuit.DataPersistent {
 		/// <typeparam name="TField"></typeparam>
 		/// <param name="field"></param>
 		/// <returns></returns>
+		[SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "OldField")]
 		public TField GetOldField<TField>(IField<TRecord, TField> field) {
 			if(this.Action == SnapTableAction.Insert) {
 				throw new InvalidOperationException(Properties.Resources.ErrorWrongOldRow);

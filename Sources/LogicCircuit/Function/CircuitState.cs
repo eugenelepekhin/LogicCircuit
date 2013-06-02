@@ -18,7 +18,7 @@ namespace LogicCircuit {
 		private State[] state = null;
 		public int Count { get; private set; }
 
-		private List<CircuitFunction>[] dependant = null;
+		private List<CircuitFunction>[] dependent = null;
 		private List<CircuitFunction> functions = new List<CircuitFunction>();
 		public IEnumerable<CircuitFunction> Functions { get { return this.functions; } }
 
@@ -49,9 +49,9 @@ namespace LogicCircuit {
 		public void DefineFunction(CircuitFunction function) {
 			if(this.state == null) {
 				this.state = new State[this.Count];
-				this.dependant = new List<CircuitFunction>[this.Count];
-				for(int i = 0; i < this.dependant.Length; i++) {
-					this.dependant[i] = new List<CircuitFunction>();
+				this.dependent = new List<CircuitFunction>[this.Count];
+				for(int i = 0; i < this.dependent.Length; i++) {
+					this.dependent[i] = new List<CircuitFunction>();
 				}
 			}
 			this.functions.Add(function);
@@ -60,7 +60,7 @@ namespace LogicCircuit {
 			}
 			int count = 0;
 			foreach(int parameter in function.Parameter) {
-				this.dependant[parameter].Add(function);
+				this.dependent[parameter].Add(function);
 				count++;
 			}
 			if(count <= 0) {
@@ -80,7 +80,7 @@ namespace LogicCircuit {
 			}
 			foreach(CircuitFunction function in this.functions) {
 				if(function.Result.Any()) {
-					function.Dependant = function.Result.Select(r => (IEnumerable<CircuitFunction>)this.dependant[r]).Aggregate((x, y) => x.Union(y)).ToArray();
+					function.Dependent = function.Result.Select(r => (IEnumerable<CircuitFunction>)this.dependent[r]).Aggregate((x, y) => x.Union(y)).ToArray();
 				}
 			}
 		}
@@ -127,8 +127,8 @@ namespace LogicCircuit {
 			CircuitFunction function;
 			while((function = this.dirty.Get()) != null) {
 				if(function.Evaluate()) {
-					if(function.Dependant != null) {
-						this.dirty.Add(function.Dependant);
+					if(function.Dependent != null) {
+						this.dirty.Add(function.Dependent);
 					}
 					if(oscilation-- < 0) {
 						if(maxRetry <= attempt) {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace LogicCircuit {
 	public enum GateType {
@@ -13,6 +14,7 @@ namespace LogicCircuit {
 		Even,	// This one should not be used anymore
 		Led,
 		Probe,	// This one should not be used anymore
+		[SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "TriState")]
 		TriState
 	}
 }

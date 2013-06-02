@@ -52,8 +52,8 @@ namespace LogicCircuit.UnitTest {
 			FunctionLed functionLed = new FunctionLed(target, new CircuitSymbol[] { ledSymbol }, buttonResult);
 			target.EndDefinition();
 
-			Assert.IsTrue(functionButton.Dependant != null && functionButton.Dependant.Length == 1 && functionButton.Dependant[0] == functionLed);
-			Assert.IsTrue(functionLed.Dependant == null);
+			Assert.IsTrue(functionButton.Dependent != null && functionButton.Dependent.Length == 1 && functionButton.Dependent[0] == functionLed);
+			Assert.IsTrue(functionLed.Dependent == null);
 		}
 
 		/// <summary>

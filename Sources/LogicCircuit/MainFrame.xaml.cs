@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Windows;
-using System.Windows.Threading;
-using System.Threading;
-using System.IO;
 using System.Text.RegularExpressions;
-using System.Windows.Input;
+using System.Threading;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace LogicCircuit {
 	/// <summary>
 	/// Interaction logic for Mainframe.xaml
 	/// </summary>
+	[SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 	public partial class Mainframe : Window, INotifyPropertyChanged {
 
 		public event PropertyChangedEventHandler PropertyChanged;
