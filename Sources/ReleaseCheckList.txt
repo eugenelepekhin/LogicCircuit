@@ -1,5 +1,5 @@
 1. Set version in LogicCircuit\Properties\AssemblyInfo.cs
-2. Set version in Setup project
+2. Set Version in Setup project. Create new GUID for Id.
 3. Build and test Setup project
 4. Prepare website - add what is new in download.html
 5. Add News item in Project.xml
