@@ -14,6 +14,10 @@
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine"/>
 		<Icon Id="icon" SourceFile="$(var.LogicCircuit.ProjectDir)Properties\LogicCircuit.ico"/>
 		<Property Id="ARPPRODUCTICON" Value="icon"/>
+		<Property Id="ARPHELPLINK" Value="http://www.logiccircuit.org/help.html"/>
+		<Property Id="ARPURLINFOABOUT" Value="http://www.LogicCircuit.org/"/>
+		<Property Id="ARPURLUPDATEINFO" Value="http://www.logiccircuit.org/download.html"/>
+		<Property Id="ARPCOMMENTS" Value="LogicCircuit – is educational software for designing and simulating digital logic circuits"/>
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed."/>
 		<MediaTemplate EmbedCab="yes" CompressionLevel ="high"/>
