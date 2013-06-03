@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<!--
+		For the next version update Version attribute on Product node. Note the minor version part must be 4 digit number as the MSi does not support minor versions.
+		To add new locale add new directory, component and file in it and add component id uder Feature node.
+	-->
 	<Product Id="*"
 		UpgradeCode="d2d9ab38-631b-471d-b6c1-2c4f4391fe5e"
 		Name="LogicCircuit"
