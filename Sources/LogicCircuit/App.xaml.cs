@@ -20,6 +20,7 @@ namespace LogicCircuit {
 			"el-GR",
 			"es",
 			"fr",
+			"hu",
 			"it-IT",
 			"ko-KR",
 			"nl",
