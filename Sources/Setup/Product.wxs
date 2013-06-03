@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*"
+		UpgradeCode="d2d9ab38-631b-471d-b6c1-2c4f4391fe5e"
+		Name="LogicCircuit"
+		Version="2.13.05.16"
+		Manufacturer="LogicCircuit"
+		Language="1033"
+	>
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine"/>
+		<Icon Id="icon" SourceFile="$(var.LogicCircuit.ProjectDir)Properties\LogicCircuit.ico"/>
+		<Property Id="ARPPRODUCTICON" Value="icon"/>
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed."/>
+		<MediaTemplate EmbedCab="yes" CompressionLevel ="high"/>
+
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder" Name="PFiles">
+				<Directory Id="INSTALLFOLDER" Name="LogicCircuit">
+					<Component Id="ApplicationComponent">
+						<File Id="Application_exe" Source="$(var.LogicCircuit.TargetPath)" KeyPath="yes"/>
+						<ProgId Id="RegFileExtention" Icon="Application_exe" IconIndex="0" Description="LogicCircuit Project file">
+							<Extension Id="CircuitProject" ContentType="text/XML">
+								<Verb Id="open" Command="Open" TargetFile="Application_exe" Argument="%1"/>
+							</Extension>
+						</ProgId>
+					</Component>
+					<Directory Id="ar" Name="ar">
+						<Component Id="arComponent">
+							<File Id="ar" Source="$(var.LogicCircuit.TargetDir)ar\$(var.LogicCircuit.TargetName).resources.dll"/>
+						</Component>
+					</Directory>
+					<Directory Id="de" Name="de">
+						<Component Id="deComponent">
+							<File Id="de" Source="$(var.LogicCircuit.TargetDir)de\$(var.LogicCircuit.TargetName).resources.dll"/>
+						</Component>
+					</Directory>
+					<Directory Id="el_GR" Name="el-GR">
+						<Component Id="el_GRComponent">
+							<File Id="el_GR" Source="$(var.LogicCircuit.TargetDir)el-GR\$(var.LogicCircuit.TargetName).resources.dll"/>
+						</Component>
+					</Directory>
+					<Directory Id="es" Name="es">
+						<Component Id="esComponent">
+							<File Id="es" Source="$(var.LogicCircuit.TargetDir)es\$(var.LogicCircuit.TargetName).resources.dll"/>
+						</Component>
+					</Directory>
+					<Directory Id="fr" Name="fr">
+						<Component Id="frComponent">
+							<File Id="fr" Source="$(var.LogicCircuit.TargetDir)fr\$(var.LogicCircuit.TargetName).resources.dll"/>
+						</Component>
+					</Directory>
+					<Directory Id="it_IT" Name="it-IT">
+						<Component Id="it_ITComponent">
+							<File Id="it_IT" Source="$(var.LogicCircuit.TargetDir)it-IT\$(var.LogicCircuit.TargetName).resources.dll"/>
+						</Component>
+					</Directory>
+					<Directory Id="ko_KR" Name="ko-KR">
+						<Component Id="ko_KRComponent">
+							<File Id="ko_KR" Source="$(var.LogicCircuit.TargetDir)ko-KR\$(var.LogicCircuit.TargetName).resources.dll"/>
+						</Component>
+					</Directory>
+					<Directory Id="nl" Name="nl">
+						<Component Id="nlComponent">
+							<File Id="nl" Source="$(var.LogicCircuit.TargetDir)nl\$(var.LogicCircuit.TargetName).resources.dll"/>
+						</Component>
+					</Directory>
+					<Directory Id="pt_BR" Name="pt-BR">
+						<Component Id="pt_BRComponent">
+							<File Id="pt_BR" Source="$(var.LogicCircuit.TargetDir)pt-BR\$(var.LogicCircuit.TargetName).resources.dll"/>
+						</Component>
+					</Directory>
+					<Directory Id="ru_RU" Name="ru-RU">
+						<Component Id="ru_RUComponent">
+							<File Id="ru_RU" Source="$(var.LogicCircuit.TargetDir)ru-RU\$(var.LogicCircuit.TargetName).resources.dll"/>
+						</Component>
+					</Directory>
+					<Directory Id="uk_UA" Name="uk-UA">
+						<Component Id="uk_UAComponent">
+							<File Id="uk_UA" Source="$(var.LogicCircuit.TargetDir)uk-UA\$(var.LogicCircuit.TargetName).resources.dll"/>
+						</Component>
+					</Directory>
+				</Directory>
+			</Directory>
+			<Directory Id="ProgramMenuFolder">
+				<Directory Id="ProgramMenuDir" Name="LogicCircuit">
+					<Component Id="StartMenuShortcuts" Guid="970c0bb2-c7d0-45d7-abfa-7ec378858bc0">
+						<Shortcut Id="StartMenuShortcut" Name="LogicCircuit" Description="LogicCircuit – is educational software for designing and simulating digital logic circuits"
+							Target="[INSTALLFOLDER]LogicCircuit.exe"
+						/>
+						<RemoveFolder Id="ProgramMenuDir" On="uninstall"/>
+						<RegistryValue Root="HKCU" Key="Software\[ProductName]" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+					</Component>
+				</Directory>
+			</Directory>
+		</Directory>
+		<Feature Id="ProductFeature" Title="MyWpfApp" Level="1">
+			<ComponentRef Id="ApplicationComponent"/>
+			<ComponentRef Id="arComponent"/>
+			<ComponentRef Id="deComponent"/>
+			<ComponentRef Id="el_GRComponent"/>
+			<ComponentRef Id="esComponent"/>
+			<ComponentRef Id="frComponent"/>
+			<ComponentRef Id="it_ITComponent"/>
+			<ComponentRef Id="ko_KRComponent"/>
+			<ComponentRef Id="nlComponent"/>
+			<ComponentRef Id="pt_BRComponent"/>
+			<ComponentRef Id="ru_RUComponent"/>
+			<ComponentRef Id="uk_UAComponent"/>
+			<ComponentRef Id="StartMenuShortcuts"/>
+		</Feature>
+
+		<WixVariable Id="WixUIBannerBmp" Value="Banner.bmp" />
+		<WixVariable Id="WixUIDialogBmp" Value="Dialog.bmp" />
+		<Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER"/>
+
+		<UI Id="WixUI_InstallDir">
+			<TextStyle Id="WixUI_Font_Normal" FaceName="Tahoma" Size="8" />
+			<TextStyle Id="WixUI_Font_Bigger" FaceName="Tahoma" Size="12" />
+			<TextStyle Id="WixUI_Font_Title" FaceName="Tahoma" Size="9" Bold="yes" />
+
+			<Property Id="DefaultUIFont" Value="WixUI_Font_Normal" />
+			<Property Id="WixUI_Mode" Value="InstallDir" />
+
+			<DialogRef Id="BrowseDlg" />
+			<DialogRef Id="DiskCostDlg" />
+			<DialogRef Id="ErrorDlg" />
+			<DialogRef Id="FatalError" />
+			<DialogRef Id="FilesInUse" />
+			<DialogRef Id="MsiRMFilesInUse" />
+			<DialogRef Id="PrepareDlg" />
+			<DialogRef Id="ProgressDlg" />
+			<DialogRef Id="ResumeDlg" />
+			<DialogRef Id="UserExit" />
+
+			<Publish Dialog="BrowseDlg" Control="OK" Event="DoAction" Value="WixUIValidatePath" Order="3">1</Publish>
+			<Publish Dialog="BrowseDlg" Control="OK" Event="SpawnDialog" Value="InvalidDirDlg" Order="4"><![CDATA[WIXUI_INSTALLDIR_VALID<>"1"]]></Publish>
+
+			<Publish Dialog="ExitDialog" Control="Finish" Event="EndDialog" Value="Return" Order="999">1</Publish>
+
+			<Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="InstallDirDlg">NOT Installed</Publish>
+			<Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="VerifyReadyDlg">Installed AND PATCH</Publish>
+
+			<Publish Dialog="InstallDirDlg" Control="Back" Event="NewDialog" Value="WelcomeDlg">1</Publish>
+			<Publish Dialog="InstallDirDlg" Control="Next" Event="SetTargetPath" Value="[WIXUI_INSTALLDIR]" Order="1">1</Publish>
+			<Publish Dialog="InstallDirDlg" Control="Next" Event="DoAction" Value="WixUIValidatePath" Order="2">NOT WIXUI_DONTVALIDATEPATH</Publish>
+			<Publish Dialog="InstallDirDlg" Control="Next" Event="SpawnDialog" Value="InvalidDirDlg" Order="3"><![CDATA[NOT WIXUI_DONTVALIDATEPATH AND WIXUI_INSTALLDIR_VALID<>"1"]]></Publish>
+			<Publish Dialog="InstallDirDlg" Control="Next" Event="NewDialog" Value="VerifyReadyDlg" Order="4">WIXUI_DONTVALIDATEPATH OR WIXUI_INSTALLDIR_VALID="1"</Publish>
+			<Publish Dialog="InstallDirDlg" Control="ChangeFolder" Property="_BrowseProperty" Value="[WIXUI_INSTALLDIR]" Order="1">1</Publish>
+			<Publish Dialog="InstallDirDlg" Control="ChangeFolder" Event="SpawnDialog" Value="BrowseDlg" Order="2">1</Publish>
+
+			<Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="InstallDirDlg" Order="1">NOT Installed</Publish>
+			<Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="MaintenanceTypeDlg" Order="2">Installed AND NOT PATCH</Publish>
+			<Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="WelcomeDlg" Order="2">Installed AND PATCH</Publish>
+
+			<Publish Dialog="MaintenanceWelcomeDlg" Control="Next" Event="NewDialog" Value="MaintenanceTypeDlg">1</Publish>
+
+			<Publish Dialog="MaintenanceTypeDlg" Control="RepairButton" Event="NewDialog" Value="VerifyReadyDlg">1</Publish>
+			<Publish Dialog="MaintenanceTypeDlg" Control="RemoveButton" Event="NewDialog" Value="VerifyReadyDlg">1</Publish>
+			<Publish Dialog="MaintenanceTypeDlg" Control="Back" Event="NewDialog" Value="MaintenanceWelcomeDlg">1</Publish>
+
+			<Property Id="ARPNOMODIFY" Value="1" />
+		</UI>
+
+		<UIRef Id="WixUI_Common" />
+	</Product>
+</Wix>
