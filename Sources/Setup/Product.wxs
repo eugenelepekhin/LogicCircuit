@@ -3,7 +3,7 @@
 	<Product Id="*"
 		UpgradeCode="d2d9ab38-631b-471d-b6c1-2c4f4391fe5e"
 		Name="LogicCircuit"
-		Version="2.13.05.16"
+		Version="2.13.0516"
 		Manufacturer="LogicCircuit"
 		Language="1033"
 	>
@@ -115,9 +115,9 @@
 		<Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER"/>
 
 		<UI Id="WixUI_InstallDir">
-			<TextStyle Id="WixUI_Font_Normal" FaceName="Tahoma" Size="8" />
-			<TextStyle Id="WixUI_Font_Bigger" FaceName="Tahoma" Size="12" />
-			<TextStyle Id="WixUI_Font_Title" FaceName="Tahoma" Size="9" Bold="yes" />
+			<TextStyle Id="WixUI_Font_Normal" FaceName="Segoe UI" Size="8" />
+			<TextStyle Id="WixUI_Font_Bigger" FaceName="Segoe UI" Size="12" />
+			<TextStyle Id="WixUI_Font_Title" FaceName="Segoe UI" Size="9" Bold="yes" />
 
 			<Property Id="DefaultUIFont" Value="WixUI_Font_Normal" />
 			<Property Id="WixUI_Mode" Value="InstallDir" />
