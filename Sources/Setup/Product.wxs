@@ -54,6 +54,11 @@
 							<File Id="fr" Source="$(var.LogicCircuit.TargetDir)fr\$(var.LogicCircuit.TargetName).resources.dll"/>
 						</Component>
 					</Directory>
+					<Directory Id="hu" Name="hu">
+						<Component Id="huComponent">
+							<File Id="hu" Source="$(var.LogicCircuit.TargetDir)hu\$(var.LogicCircuit.TargetName).resources.dll"/>
+						</Component>
+					</Directory>
 					<Directory Id="it_IT" Name="it-IT">
 						<Component Id="it_ITComponent">
 							<File Id="it_IT" Source="$(var.LogicCircuit.TargetDir)it-IT\$(var.LogicCircuit.TargetName).resources.dll"/>
@@ -105,6 +110,7 @@
 			<ComponentRef Id="el_GRComponent"/>
 			<ComponentRef Id="esComponent"/>
 			<ComponentRef Id="frComponent"/>
+			<ComponentRef Id="huComponent"/>
 			<ComponentRef Id="it_ITComponent"/>
 			<ComponentRef Id="ko_KRComponent"/>
 			<ComponentRef Id="nlComponent"/>
