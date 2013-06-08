@@ -95,6 +95,11 @@
 							<File Id="uk_UA" Source="$(var.LogicCircuit.TargetDir)uk-UA\$(var.LogicCircuit.TargetName).resources.dll"/>
 						</Component>
 					</Directory>
+					<Directory Id="zh_CHS" Name="zh-CHS">
+						<Component Id="zh_CHSComponent">
+							<File Id="zh_CHS" Source="$(var.LogicCircuit.TargetDir)zh-CHS\$(var.LogicCircuit.TargetName).resources.dll"/>
+						</Component>
+					</Directory>
 				</Directory>
 			</Directory>
 			<Directory Id="ProgramMenuFolder">
@@ -123,6 +128,7 @@
 			<ComponentRef Id="pt_BRComponent"/>
 			<ComponentRef Id="ru_RUComponent"/>
 			<ComponentRef Id="uk_UAComponent"/>
+			<ComponentRef Id="zh_CHSComponent"/>
 			<ComponentRef Id="StartMenuShortcuts"/>
 		</Feature>
 

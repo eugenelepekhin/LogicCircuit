@@ -27,6 +27,7 @@ namespace LogicCircuit {
 			"pt-BR",
 			"ru-RU",
 			"uk-UA",
+			"zh-CHS",
 		};
 		
 		public static IEnumerable<CultureInfo> AvailableCultures {
