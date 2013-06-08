@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -36,7 +37,7 @@ namespace LogicCircuit {
 			this.notation.Text = this.pin.JamNotation;
 			this.note.Text = this.pin.Note;
 			this.side.ItemsSource = PinDescriptor.PinSideRange;
-			this.side.SelectedIndex = (int)this.pin.PinSide;
+			this.side.SelectedItem = PinDescriptor.PinSideDescriptor(this.pin.PinSide);
 			this.inverted.IsChecked = this.pin.Inverted;
 			this.bitWidth.ItemsSource = PinDescriptor.BitWidthRange;
 			this.bitWidth.SelectedItem = this.pin.BitWidth;
@@ -47,7 +48,7 @@ namespace LogicCircuit {
 				string name = this.name.Text.Trim();
 				string notation = this.notation.Text.Trim();
 				string note = this.note.Text.Trim();
-				PinSide pinSide = (PinSide)this.side.SelectedIndex;
+				PinSide pinSide = ((EnumDescriptor<PinSide>)this.side.SelectedItem).Value;
 				bool inverted = this.inverted.IsChecked.Value;
 				int bitWidth = (int)this.bitWidth.SelectedItem;
 

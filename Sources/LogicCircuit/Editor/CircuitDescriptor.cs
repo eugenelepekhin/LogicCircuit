@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -253,8 +254,12 @@ namespace LogicCircuit {
 	}
 
 	public class LedMatrixDescriptor : IOCircuitDescriptor<LedMatrix> {
-		private static readonly IEnumerable<string> matrixTypeNames = new string[] { Properties.Resources.LedMatrixTypeIndividual, Properties.Resources.LedMatrixTypeSelector };
-		public static IEnumerable<string> MatrixTypeNames { get { return LedMatrixDescriptor.matrixTypeNames; } }
+		private static readonly IEnumerable<EnumDescriptor<LedMatrixType>> matrixTypes = new EnumDescriptor<LedMatrixType>[] {
+			new EnumDescriptor<LedMatrixType>(LedMatrixType.Individual, Properties.Resources.LedMatrixTypeIndividual),
+			new EnumDescriptor<LedMatrixType>(LedMatrixType.Selector, Properties.Resources.LedMatrixTypeSelector)
+		};
+		[SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
+		public static IEnumerable<EnumDescriptor<LedMatrixType>> MatrixTypes { get { return matrixTypes; } }
 
 		private static readonly IEnumerable<int> ledRange = PinDescriptor.NumberRange(LedMatrix.MinLedCount, LedMatrix.MaxLedCount);
 		public static IEnumerable<int> RowsRange { get { return LedMatrixDescriptor.ledRange; } }
@@ -262,39 +267,56 @@ namespace LogicCircuit {
 
 		public int Rows { get; set; }
 		public int Columns { get; set; }
-		public int MatrixType { get; set; }
+		public EnumDescriptor<LedMatrixType> MatrixType { get; set; }
 
 		public LedMatrixDescriptor(CircuitProject circuitProject) : base(circuitProject.LedMatrixSet.Create(LedMatrixType.Individual, 4, 4)) {
 			this.Rows = 4;
 			this.Columns = 4;
+			this.MatrixType = LedMatrixDescriptor.LedMatrixTypeDescriptor(LedMatrixType.Individual);
 		}
 
 		protected override LedMatrix GetCircuitToDrop(CircuitProject circuitProject) {
-			return circuitProject.LedMatrixSet.Create((LedMatrixType)this.MatrixType, this.Rows, this.Columns);
+			return circuitProject.LedMatrixSet.Create(this.MatrixType.Value, this.Rows, this.Columns);
+		}
+
+		public static EnumDescriptor<LedMatrixType> LedMatrixTypeDescriptor(LedMatrixType ledMatrixType) {
+			Tracer.Assert(EnumHelper.IsValid(ledMatrixType));
+			return LedMatrixDescriptor.MatrixTypes.First(d => d.Value == ledMatrixType);
 		}
 	}
 
 	public class PinDescriptor : IOCircuitDescriptor<Pin> {
-		private static readonly string[] pinSideRange = new string[] { Properties.Resources.PinSideLeft, Properties.Resources.PinSideTop, Properties.Resources.PinSideRight, Properties.Resources.PinSideBottom };
+		private static readonly EnumDescriptor<PinSide>[] pinSideRange = new EnumDescriptor<PinSide>[] {
+			new EnumDescriptor<PinSide>(LogicCircuit.PinSide.Left, Properties.Resources.PinSideLeft),
+			new EnumDescriptor<PinSide>(LogicCircuit.PinSide.Top, Properties.Resources.PinSideTop),
+			new EnumDescriptor<PinSide>(LogicCircuit.PinSide.Right, Properties.Resources.PinSideRight),
+			new EnumDescriptor<PinSide>(LogicCircuit.PinSide.Bottom, Properties.Resources.PinSideBottom)
+		};
 		private static readonly int[] bitWidthRange = PinDescriptor.NumberRange(1);
 
-		public static IEnumerable<string> PinSideRange { get { return PinDescriptor.pinSideRange; } }
+		[SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
+		public static IEnumerable<EnumDescriptor<PinSide>> PinSideRange { get { return PinDescriptor.pinSideRange; } }
 		public static IEnumerable<int> BitWidthRange { get { return PinDescriptor.bitWidthRange; } }
 
 		public int BitWidth { get; set; }
-		public int PinSide { get; set; }
+		public EnumDescriptor<PinSide> PinSide { get; set; }
 
 		public PinDescriptor(CircuitProject circuitProject, PinType pinType) : base(
 			circuitProject.PinSet.Create(circuitProject.ProjectSet.Project.LogicalCircuit, pinType, 1)
 		) {
 			this.BitWidth = 1;
-			this.PinSide = (int)((pinType == PinType.Input) ? LogicCircuit.PinSide.Left : LogicCircuit.PinSide.Right);
+			this.PinSide = PinDescriptor.PinSideDescriptor((pinType == PinType.Input) ? LogicCircuit.PinSide.Left : LogicCircuit.PinSide.Right);
 		}
 
 		protected override Pin GetCircuitToDrop(CircuitProject circuitProject) {
 			Pin pin = circuitProject.PinSet.Create(circuitProject.ProjectSet.Project.LogicalCircuit, this.Circuit.PinType, this.BitWidth);
-			pin.PinSide = (PinSide)this.PinSide;
+			pin.PinSide = this.PinSide.Value;
 			return pin;
+		}
+
+		public static EnumDescriptor<PinSide> PinSideDescriptor(PinSide pinSide) {
+			Tracer.Assert(EnumHelper.IsValid(pinSide));
+			return PinDescriptor.PinSideRange.First(d => d.Value == pinSide);
 		}
 
 		public static int[] NumberRange(int minBitWidth, int maxBitWidth) {
@@ -318,32 +340,36 @@ namespace LogicCircuit {
 	public class SplitterDescriptor : IOCircuitDescriptor<Splitter> {
 		public int BitWidth { get; set; }
 		public int PinCount { get; set; }
-		private int direction;
-		public int Direction {
-			get { return this.direction; }
-			set {
-				this.direction = value;
-				this.NotifyPropertyChanged("Flip");
-			}
-		}
-
-		public double Flip { get { return this.Direction == 0 ? 1 : -1; } }
+		public DirectionDescriptor Direction { get; set; }
 
 		public IEnumerable<int> BitWidthRange { get; private set; }
 		public IEnumerable<int> PinCountRange { get; private set; }
-		public IEnumerable<string> DirectionRange { get; private set; }
+		public IEnumerable<DirectionDescriptor> DirectionRange { get; private set; }
 
 		public SplitterDescriptor(CircuitProject circuitProject) : base(circuitProject.SplitterSet.Create(3, 3, true)) {
-			this.PinCount = 3;
-			this.BitWidth = 1;
-			this.Direction = 0;
 			this.PinCountRange = PinDescriptor.NumberRange(2, Gate.MaxInputCount);
 			this.BitWidthRange = PinDescriptor.NumberRange(1, BasePin.MaxBitWidth / 2);
-			this.DirectionRange = new string[] { Properties.Resources.SplitterDirectionClockwise, Properties.Resources.SplitterDirectionCounterclockwise };
+			this.DirectionRange = new DirectionDescriptor[] {
+				new DirectionDescriptor(true, Properties.Resources.SplitterDirectionClockwise, 1),
+				new DirectionDescriptor(false, Properties.Resources.SplitterDirectionCounterclockwise, -1)
+			};
+
+			this.PinCount = 3;
+			this.BitWidth = 1;
+			this.Direction = this.DirectionRange.First();
 		}
 
 		protected override Splitter GetCircuitToDrop(CircuitProject circuitProject) {
-			return circuitProject.SplitterSet.Create(this.BitWidth * this.PinCount, this.PinCount, this.Direction == 0);
+			return circuitProject.SplitterSet.Create(this.BitWidth * this.PinCount, this.PinCount, this.Direction.Value);
+		}
+
+		[SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
+		public class DirectionDescriptor : EnumDescriptor<bool> {
+			public double Flip { get; private set; }
+			public DirectionDescriptor(bool clockwise, string text, int flip) : base(clockwise, text) {
+				Tracer.Assert(flip == 1 || flip == -1);
+				this.Flip = flip;
+			}
 		}
 	}
 

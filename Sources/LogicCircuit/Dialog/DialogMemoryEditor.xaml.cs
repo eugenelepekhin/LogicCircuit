@@ -55,19 +55,23 @@ namespace LogicCircuit {
 
 			this.addressBitWidth.ItemsSource = MemoryDescriptor.AddressBitWidthRange;
 			this.dataBitWidth.ItemsSource = PinDescriptor.BitWidthRange;
-			this.writeOn.ItemsSource = new string[] { Properties.Resources.WriteOn0, Properties.Resources.WriteOn1 };
-			OnStartDescriptor[] onStartList = new OnStartDescriptor[] {
-				new OnStartDescriptor(MemoryOnStart.Random, Properties.Resources.MemoryOnStartRandom),
-				new OnStartDescriptor(MemoryOnStart.Zeros, Properties.Resources.MemoryOnStartZeros),
-				new OnStartDescriptor(MemoryOnStart.Ones, Properties.Resources.MemoryOnStartOnes),
-				new OnStartDescriptor(MemoryOnStart.Data, Properties.Resources.MemoryOnStartData)
+			EnumDescriptor<bool>[] writeOnList = new EnumDescriptor<bool>[] {
+				new EnumDescriptor<bool>(false, Properties.Resources.WriteOn0),
+				new EnumDescriptor<bool>(true, Properties.Resources.WriteOn1)
+			};
+			this.writeOn.ItemsSource = writeOnList;
+			EnumDescriptor<MemoryOnStart>[] onStartList = new EnumDescriptor<MemoryOnStart>[] {
+				new EnumDescriptor<MemoryOnStart>(MemoryOnStart.Random, Properties.Resources.MemoryOnStartRandom),
+				new EnumDescriptor<MemoryOnStart>(MemoryOnStart.Zeros, Properties.Resources.MemoryOnStartZeros),
+				new EnumDescriptor<MemoryOnStart>(MemoryOnStart.Ones, Properties.Resources.MemoryOnStartOnes),
+				new EnumDescriptor<MemoryOnStart>(MemoryOnStart.Data, Properties.Resources.MemoryOnStartData)
 			};
 			this.onStart.ItemsSource = onStartList;
 
 			this.addressBitWidth.SelectedItem = this.Memory.AddressBitWidth;
 			this.dataBitWidth.SelectedItem = this.Memory.DataBitWidth;
-			this.writeOn.SelectedIndex = this.Memory.WriteOn1 ? 1 : 0;
-			this.onStart.SelectedItem = onStartList.First(d => d.OnStart == (this.Memory.Writable ? this.Memory.OnStart : MemoryOnStart.Data));
+			this.writeOn.SelectedItem = writeOnList.First(d => d.Value == this.Memory.WriteOn1);
+			this.onStart.SelectedItem = onStartList.First(d => d.Value == (this.Memory.Writable ? this.Memory.OnStart : MemoryOnStart.Data));
 			this.note.Text = this.Memory.Note;
 			this.Loaded += new RoutedEventHandler(this.DialogLoaded);
 		}
@@ -102,8 +106,8 @@ namespace LogicCircuit {
 				this.ApplyChanges();
 				int addressBitWidth = this.AddressBitWidth;
 				int dataBitWidth = this.DataBitWidth;
-				bool writeOn1 = this.Memory.Writable && this.writeOn.SelectedIndex != 0;
-				MemoryOnStart memoryOnStart = ((OnStartDescriptor)this.onStart.SelectedItem).OnStart;
+				bool writeOn1 = this.Memory.Writable && ((EnumDescriptor<bool>)this.writeOn.SelectedItem).Value;
+				MemoryOnStart memoryOnStart = ((EnumDescriptor<MemoryOnStart>)this.onStart.SelectedItem).Value;
 				bool saveData = !this.Memory.Writable || memoryOnStart == MemoryOnStart.Data;
 				if(!this.Memory.Writable) {
 					memoryOnStart = MemoryOnStart.Random; // set to default value for ROM
@@ -585,17 +589,6 @@ namespace LogicCircuit {
 				public void Reset() {
 					throw new NotImplementedException();
 				}
-			}
-		}
-
-		private class OnStartDescriptor {
-			public MemoryOnStart OnStart { get; private set; }
-			[SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-			public string Text { get; private set; }
-
-			public OnStartDescriptor(MemoryOnStart onStart, string text) {
-				this.OnStart = onStart;
-				this.Text = text;
 			}
 		}
 	}

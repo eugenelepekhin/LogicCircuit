@@ -32,7 +32,7 @@
 		<Style x:Key="dataAllowed" TargetType="{x:Type FrameworkElement}">
 			<Setter Property="IsEnabled" Value="False"/>
 			<Style.Triggers>
-				<DataTrigger Binding="{Binding ElementName=onStart, Path=SelectedItem.OnStart}" Value="{x:Static lc:MemoryOnStart.Data}">
+				<DataTrigger Binding="{Binding ElementName=onStart, Path=SelectedItem.Value}" Value="{x:Static lc:MemoryOnStart.Data}">
 					<Setter Property="IsEnabled" Value="True"/>
 				</DataTrigger>
 			</Style.Triggers>
@@ -74,7 +74,7 @@
 			<Label Content="{Binding Source={x:Static properties:Resources.TitleMemoryOnStart}, Mode=OneTime}" Target="{Binding ElementName=onStart}"/>
 		</StackPanel>
 		<StackPanel Grid.Row="3" Grid.Column="1" Style="{StaticResource ramOnly}">
-			<ComboBox Grid.Row="3" Grid.Column="1" Name="onStart" DisplayMemberPath="Text"
+			<ComboBox Grid.Row="3" Grid.Column="1" Name="onStart"
 				Width="{Binding ElementName=onStartList, Path=ActualWidth}" ToolTip="{x:Static properties:Resources.ToolTipMemoryOnStart}"
 			/>
 		</StackPanel>

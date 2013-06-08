@@ -227,6 +227,7 @@
     <Compile Include="Editor\WireMarker.cs" />
     <Compile Include="Editor\WirePledge.cs" />
     <Compile Include="Editor\WirePointMarker.cs" />
+    <Compile Include="EnumDescriptor.cs" />
     <Compile Include="EnumHelper.cs" />
     <Compile Include="ExpressionParser.cs" />
     <Compile Include="FormatConverter.cs" />

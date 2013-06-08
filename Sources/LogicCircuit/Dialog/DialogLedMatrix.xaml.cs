@@ -14,7 +14,7 @@ namespace LogicCircuit {
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 
 		public LedMatrix LedMatrix { get; private set; }
-		public int MatrixType { get; set; }
+		public EnumDescriptor<LedMatrixType> MatrixType { get; set; }
 		public int CellShape { get; set; }
 		public int Rows { get; set; }
 		public int Columns { get; set; }
@@ -24,7 +24,7 @@ namespace LogicCircuit {
 
 		public DialogLedMatrix(LedMatrix ledMatrix) {
 			this.LedMatrix = ledMatrix;
-			this.MatrixType = (int)this.LedMatrix.MatrixType;
+			this.MatrixType = LedMatrixDescriptor.LedMatrixTypeDescriptor(this.LedMatrix.MatrixType);
 			this.CellShape = (int)this.LedMatrix.CellShape;
 			this.Rows = this.LedMatrix.Rows;
 			this.Columns =this.LedMatrix.Columns;
@@ -38,7 +38,7 @@ namespace LogicCircuit {
 
 		private void ButtonOkClick(object sender, RoutedEventArgs e) {
 			try {
-				LedMatrixType ledMatrixType = (LedMatrixType)this.MatrixType;
+				LedMatrixType ledMatrixType = this.MatrixType.Value;
 				LedMatrixCellShape ledMatrixCellShape = (LedMatrixCellShape)this.CellShape;
 				string note = this.Note.Trim();
 

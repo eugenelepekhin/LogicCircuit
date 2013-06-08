@@ -51,11 +51,11 @@
 		</Grid.ColumnDefinitions>
 
 		<Label Grid.Row="0" Grid.Column="0" Content="{x:Static properties:Resources.TitleType}" Target="{Binding ElementName=type}"/>
-		<ComboBox Grid.Row="0" Grid.Column="1" Name="type" ItemsSource="{x:Static lc:LedMatrixDescriptor.MatrixTypeNames}" SelectedIndex="{Binding Path=MatrixType}"
+		<ComboBox Grid.Row="0" Grid.Column="1" Name="type" ItemsSource="{x:Static lc:LedMatrixDescriptor.MatrixTypes}" SelectedItem="{Binding Path=MatrixType}"
 			ToolTip="{x:Static properties:Resources.ToolTipLedMatrixType}"
 			MinWidth="{Binding ElementName=comboRuler, Path=ActualWidth}"
 		/>
-		<ListBox Name="comboRuler" Height="0" Visibility="Hidden" ItemsSource="{x:Static lc:LedMatrixDescriptor.MatrixTypeNames}" Padding="5"/>
+		<ListBox Name="comboRuler" Height="0" Visibility="Hidden" ItemsSource="{x:Static lc:LedMatrixDescriptor.MatrixTypes}" Padding="5"/>
 
 		<Label Grid.Row="1" Grid.Column="0" Content="{x:Static properties:Resources.TitleCellShape}" Target="{Binding ElementName=cellShape}"/>
 		<ComboBox Grid.Row="1" Grid.Column="1" Name="cellShape" SelectedIndex="{Binding Path=CellShape}">

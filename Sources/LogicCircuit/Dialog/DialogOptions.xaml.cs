@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -14,9 +15,13 @@ namespace LogicCircuit {
 		private Mainframe mainframe;
 
 		//The order of items in this array should match order in enum GateShape
-		private string[] gateShapeList = new string[] { Properties.Resources.GateShapeRectangular, Properties.Resources.GateShapeShaped };
+		private EnumDescriptor<GateShape>[] gateShapeList = new EnumDescriptor<GateShape>[] {
+			new EnumDescriptor<GateShape>(GateShape.Rectangular, Properties.Resources.GateShapeRectangular),
+			new EnumDescriptor<GateShape>(GateShape.Shaped, Properties.Resources.GateShapeShaped)
+		};
 
-		public IEnumerable<string> GateShapeList { get { return this.gateShapeList; } }
+		[SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
+		public IEnumerable<EnumDescriptor<GateShape>> GateShapeList { get { return this.gateShapeList; } }
 		public IEnumerable<int> RecentFileRange { get; private set; }
 		public CultureInfo CurrentCulture { get; set; }
 
@@ -28,7 +33,7 @@ namespace LogicCircuit {
 			this.InitializeComponent();
 			this.loadLastFile.IsChecked = Settings.User.LoadLastFileOnStartup;
 			this.showGrid.IsChecked = this.mainframe.ShowGrid;
-			this.gateShape.SelectedIndex = (int)Settings.User.GateShape;
+			this.gateShape.SelectedItem = this.GateShapeList.First(d => d.Value == Settings.User.GateShape);
 			this.maxRecentFiles.SelectedItem = Settings.User.MaxRecentFileCount;
 
 		}
@@ -37,7 +42,7 @@ namespace LogicCircuit {
 			Settings.User.LoadLastFileOnStartup = this.loadLastFile.IsChecked.Value;
 			Settings.User.MaxRecentFileCount = (int)this.maxRecentFiles.SelectedItem;
 			this.mainframe.ShowGrid = this.showGrid.IsChecked.Value;
-			Settings.User.GateShape = (GateShape)this.gateShape.SelectedIndex;
+			Settings.User.GateShape = ((EnumDescriptor<GateShape>)this.gateShape.SelectedItem).Value;
 			App.CurrentCulture = this.CurrentCulture;
 			
 			if(Properties.Resources.Culture != this.CurrentCulture) {

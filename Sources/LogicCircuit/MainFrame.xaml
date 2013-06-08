@@ -478,7 +478,7 @@
 											<RowDefinition Height="Auto"/>
 											<RowDefinition Height="Auto"/>
 										</Grid.RowDefinitions>
-										<ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{x:Static lc:LedMatrixDescriptor.MatrixTypeNames}" SelectedIndex="{Binding Path=MatrixType}"
+										<ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{x:Static lc:LedMatrixDescriptor.MatrixTypes}" SelectedItem="{Binding Path=MatrixType}"
 											ToolTip="{x:Static properties:Resources.ToolTipLedMatrixType}"
 											MinWidth="{Binding ElementName=comboRuler, Path=ActualWidth}"
 										/>
@@ -492,7 +492,7 @@
 										/>
 										<TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Static properties:Resources.CaptionColumns}" Margin="8,0,0,0"/>
 
-										<ListBox Name="comboRuler" Height="0" Visibility="Hidden" ItemsSource="{x:Static lc:LedMatrixDescriptor.MatrixTypeNames}" Padding="5"/>
+										<ListBox Name="comboRuler" Height="0" Visibility="Hidden" ItemsSource="{x:Static lc:LedMatrixDescriptor.MatrixTypes}" Padding="5"/>
 									</Grid>
 									<TextBlock Text="{Binding Path=Circuit.Notation}" VerticalAlignment="Center"/>
 								</StackPanel>
@@ -515,7 +515,7 @@
 										/>
 										<TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Static properties:Resources.CaptionBitWidth}" Margin="8,0,0,0"/>
 										<ComboBox Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0"
-											SelectedIndex="{Binding Path=PinSide, Mode=TwoWay}" ItemsSource="{x:Static lc:PinDescriptor.PinSideRange}"
+											SelectedItem="{Binding Path=PinSide, Mode=TwoWay}" ItemsSource="{x:Static lc:PinDescriptor.PinSideRange}"
 											ToolTip="{x:Static properties:Resources.ToolTipPinSide}"
 										/>
 										<TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Static properties:Resources.CaptionSide}" Margin="8,0,0,0"/>
@@ -528,7 +528,7 @@
 								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl RenderTransformOrigin="0.4,0">
 										<ContentControl.RenderTransform>
-											<ScaleTransform ScaleX="{Binding Path=Flip}"/>
+											<ScaleTransform ScaleX="{Binding ElementName=directions, Path=SelectedItem.Flip, FallbackValue=1}"/>
 										</ContentControl.RenderTransform>
 									</ContentControl>
 									<Grid Margin="8,3,8,3" VerticalAlignment="Center">
@@ -554,8 +554,8 @@
 										/>
 										<TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Static properties:Resources.CaptionSplitterBitWidth}" Margin="8,0,0,0" VerticalAlignment="Center"/>
 
-										<ComboBox Grid.Row="2" Grid.Column="0" MinWidth="{Binding ElementName=comboRuler, Path=ActualWidth}"
-											ItemsSource="{Binding Path=DirectionRange}" SelectedIndex="{Binding Path=Direction}"
+										<ComboBox Grid.Row="2" Grid.Column="0" Name="directions" MinWidth="{Binding ElementName=comboRuler, Path=ActualWidth}"
+											ItemsSource="{Binding Path=DirectionRange}" SelectedItem="{Binding Path=Direction}"
 											ToolTip="{x:Static properties:Resources.ToolTipSplitterRotation}"
 										/>
 										<TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Static properties:Resources.CaptionSplitterDirection}" Margin="8,0,0,0" VerticalAlignment="Center"/>
