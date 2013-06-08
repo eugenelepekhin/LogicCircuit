@@ -2515,10 +2515,10 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to When you make Logic Circuit to display visual elements all display
-		/// symbols on this circuit will visible alive on its symbols.
-		/// Displays are: LED, LED Matrix, Button,
-		/// or other Logic Circuit that displaying its visual elements..
+		/// Looks up a localized string similar to When you mark Logic Circuit to display visual elements
+		/// all display symbols on this circuit will be visible live on its symbols.
+		/// Displays are: LED, LED Matrix, Button, or other Logic Circuit
+		/// that displaying its visual elements..
 		/// </summary>
  		public static string ToolTipIsDisplay {
 			get { return ResourceManager.GetString("ToolTipIsDisplay", Culture); }

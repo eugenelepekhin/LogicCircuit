@@ -1067,4 +1067,22 @@
   <data name="TitleCredits" xml:space="preserve">
     <value>Работали над программой:</value>
   </data>
+  <data name="CaptionName" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="CircuitProbeToolTip" xml:space="preserve">
+    <value>Пробник {0}</value>
+  </data>
+  <data name="TitleActualFrequency" xml:space="preserve">
+    <value>Фактическая частота:</value>
+  </data>
+  <data name="TitleIsDisplay" xml:space="preserve">
+    <value>Отображать _визуальные элементы на символах</value>
+  </data>
+  <data name="ToolTipIsDisplay" xml:space="preserve">
+    <value>Если отметить логическую схему, как отображающую визуальные элементы,
+то все дисплейные символы этой схемы будут отображаться в живую на ее символах.
+Дисплеи это - светодиод, светодиодная матрица, кнопка или
+другие логические схемы отображающие свои визуальные элементы.</value>
+  </data>
 </root>
