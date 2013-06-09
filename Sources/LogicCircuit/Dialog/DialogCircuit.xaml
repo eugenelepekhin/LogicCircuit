@@ -6,6 +6,8 @@
 	WindowStartupLocation="CenterOwner"
 	Title="{Binding Source={x:Static properties:Resources.CommandCircuitCurrent}, Mode=OneTime}"
 	Style="{DynamicResource DialogWindow}"
+	MinWidth="320"
+	MinHeight="260"
 	FocusManager.FocusedElement="{Binding ElementName=name}"
 >
 	<Window.Resources>
@@ -46,7 +48,9 @@
 		<Label Grid.Row="2" Grid.Column="0" Content="{Binding Source={x:Static properties:Resources.TitleCategory}, Mode=OneTime}" Target="{Binding ElementName=category}"/>
 		<ComboBox Grid.Row="2" Grid.Column="1" Name="category" IsEditable="True" IsTextSearchEnabled="True"/>
 
-		<CheckBox Grid.Row="3" Grid.Column="1" Name="isDisplay" Content="{x:Static properties:Resources.TitleIsDisplay}" ToolTip="{x:Static properties:Resources.ToolTipIsDisplay}"/>
+		<CheckBox Grid.Row="3" Grid.Column="1" Name="isDisplay" ToolTip="{x:Static properties:Resources.ToolTipIsDisplay}">
+			<AccessText Text="{x:Static properties:Resources.TitleIsDisplay}" TextWrapping="Wrap"/>
+		</CheckBox>
 
 		<Label Grid.Row="4" Grid.Column="0" Content="{Binding Source={x:Static properties:Resources.TitleDescription}, Mode=OneTime}" Target="{Binding ElementName=description}"/>
 		<TextBox Grid.Row="4" Grid.Column="1" Name="description" AcceptsReturn="True" AcceptsTab="True"
