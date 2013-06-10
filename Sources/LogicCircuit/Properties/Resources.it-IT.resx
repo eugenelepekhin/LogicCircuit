@@ -1238,4 +1238,10 @@ tutti i simboli del display saranno visibili sul suo simbolo.</value>
   <data name="TitleCredits" xml:space="preserve">
     <value>Crediti:</value>
   </data>
+  <data name="CircuitProbeToolTip" xml:space="preserve">
+    <value>Sonda {0}</value>
+  </data>
+  <data name="CaptionName" xml:space="preserve">
+    <value>Nome</value>
+  </data>
 </root>

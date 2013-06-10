@@ -995,4 +995,10 @@ Sortie</value>
   <data name="DefaultGateShape" xml:space="preserve">
     <value>Rectangular</value>
   </data>
+  <data name="CaptionName" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="CircuitProbeToolTip" xml:space="preserve">
+    <value>Sonde {0}</value>
+  </data>
 </root>
