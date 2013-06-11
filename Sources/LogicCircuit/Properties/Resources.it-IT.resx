@@ -1244,4 +1244,7 @@ tutti i simboli del display saranno visibili sul suo simbolo.</value>
   <data name="CaptionName" xml:space="preserve">
     <value>Nome</value>
   </data>
+  <data name="TitleActualFrequency" xml:space="preserve">
+    <value>Frequenza effettiva:</value>
+  </data>
 </root>
