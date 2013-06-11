@@ -260,7 +260,7 @@
 							<TreeView.Resources>
 								<HierarchicalDataTemplate DataType="{x:Type lc:CircuitMap}" ItemsSource="{Binding Path=Children}">
 									<StackPanel Orientation="Horizontal" ToolTip="{Binding Path=Circuit.ToolTip}" Margin="5,3,5,3">
-										<ContentControl Content="{Binding Path=CircuitGlyph}">
+										<ContentControl Content="{Binding Path=CircuitGlyph}" FlowDirection="LeftToRight">
 											<ContentControl.LayoutTransform>
 												<ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
 											</ContentControl.LayoutTransform>

@@ -53,7 +53,7 @@
 						<GridViewColumn.CellTemplate>
 							<DataTemplate>
 								<StackPanel Orientation="Horizontal" ToolTip="{Binding Path=Circuit.ToolTip}">
-									<ContentControl Content="{Binding Path=CircuitGlyph.Glyph}" Margin="5">
+									<ContentControl Content="{Binding Path=CircuitGlyph.Glyph}" Margin="5" FlowDirection="LeftToRight">
 										<ContentControl.LayoutTransform>
 											<ScaleTransform ScaleX="0.75" ScaleY="0.75"/>
 										</ContentControl.LayoutTransform>

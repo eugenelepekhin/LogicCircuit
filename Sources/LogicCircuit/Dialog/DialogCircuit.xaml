@@ -7,7 +7,7 @@
 	Title="{Binding Source={x:Static properties:Resources.CommandCircuitCurrent}, Mode=OneTime}"
 	Style="{DynamicResource DialogWindow}"
 	MinWidth="320"
-	MinHeight="260"
+	MinHeight="270"
 	FocusManager.FocusedElement="{Binding ElementName=name}"
 >
 	<Window.Resources>
