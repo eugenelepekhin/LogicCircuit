@@ -149,6 +149,9 @@ namespace LogicCircuit {
 			foreach(CircuitSymbol symbol in this.CircuitProject.CircuitSymbolSet.SelectByCircuit(this)) {
 				Tracer.Assert(count++ == 0, "Only one symbol is expected");
 				symbol.Invalidate();
+				if(this.IsDisplay && symbol.LogicalCircuit.IsDisplay) {
+					this.CircuitProject.LogicalCircuitSet.Invalidate(symbol.LogicalCircuit);
+				}
 			}
 		}
 
