@@ -10,7 +10,7 @@ namespace LogicCircuit {
 		public GridLength Value {
 			get { return this.cache; }
 			set {
-				if(this.cache != value) {
+				if(0.0001 <= Math.Abs(this.cache.Value - value.Value)) {
 					this.cache = value;
 					this.settings[this.key] = this.cache.ToString();
 				}
@@ -33,7 +33,7 @@ namespace LogicCircuit {
 			bool success = false;
 			try {
 				this.cache = (GridLength)converter.ConvertFromInvariantString(text);
-				if(this.cache.IsAbsolute != original.IsAbsolute || this.cache.IsAuto != original.IsAuto || this.cache.IsStar != original.IsStar) {
+				if(this.cache.GridUnitType != original.GridUnitType) {
 					this.cache = original;
 				}
 				success = true;
