@@ -1001,4 +1001,16 @@ Sortie</value>
   <data name="CircuitProbeToolTip" xml:space="preserve">
     <value>Sonde {0}</value>
   </data>
+  <data name="TitleActualFrequency" xml:space="preserve">
+    <value>Fréquence actuelle:</value>
+  </data>
+  <data name="TitleIsDisplay" xml:space="preserve">
+    <value>Afficher les éléments visuels dans la liste des symboles
+</value>
+  </data>
+  <data name="ToolTipIsDisplay" xml:space="preserve">
+    <value>Quand vous sélectionner cette option, tous les symboles du circuit
+seront visible a la place du symbole de base du circuit en cours.
+Les éléments sont : LED, Matrise de LED, Bouton, ou autre circuit logique.</value>
+  </data>
 </root>
