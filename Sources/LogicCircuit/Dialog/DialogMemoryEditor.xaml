@@ -54,32 +54,36 @@
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="{Binding Path=NoteHeight.Value, Mode=TwoWay}" MinHeight="50"/>
 			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 
-		<Label Grid.Row="0" Grid.Column="0" Content="{Binding Source={x:Static properties:Resources.TitleAddressBitWidth}, Mode=OneTime}" Target="{Binding ElementName=addressBitWidth}"/>
+		<Label Grid.Row="0" Grid.Column="0" Content="{x:Static properties:Resources.TitleAddressBitWidth}" Target="{Binding ElementName=addressBitWidth}"/>
 		<ComboBox Grid.Row="0" Grid.Column="1" Name="addressBitWidth" SelectionChanged="MemorySizeChanged" ToolTip="{x:Static properties:Resources.ToolTipAddressBitWidth}" HorizontalAlignment="Left"/>
 
-		<Label Grid.Row="1" Grid.Column="0" Content="{Binding Source={x:Static properties:Resources.TitleDataBitWidth}, Mode=OneTime}" Target="{Binding ElementName=dataBitWidth}"/>
+		<Label Grid.Row="1" Grid.Column="0" Content="{x:Static properties:Resources.TitleDataBitWidth}" Target="{Binding ElementName=dataBitWidth}"/>
 		<ComboBox Grid.Row="1" Grid.Column="1" Name="dataBitWidth" SelectionChanged="MemorySizeChanged" ToolTip="{x:Static properties:Resources.ToolTipDataBitWidth}" HorizontalAlignment="Left"/>
 
 		<StackPanel Grid.Row="2" Grid.Column="0" Style="{StaticResource ramOnly}">
-			<Label Content="{Binding Source={x:Static properties:Resources.TitleWriteOn}, Mode=OneTime}" Target="{Binding ElementName=writeOn}"/>
+			<Label Content="{x:Static properties:Resources.TitleWriteOn}" Target="{Binding ElementName=writeOn}"/>
 		</StackPanel>
 		<StackPanel Grid.Row="2" Grid.Column="1" Style="{StaticResource ramOnly}">
 			<ComboBox Name="writeOn" ToolTip="{x:Static properties:Resources.ToolTipRamWriteOn}"/>
 		</StackPanel>
 
 		<StackPanel Grid.Row="3" Grid.Column="0" Style="{StaticResource ramOnly}">
-			<Label Content="{Binding Source={x:Static properties:Resources.TitleMemoryOnStart}, Mode=OneTime}" Target="{Binding ElementName=onStart}"/>
+			<Label Content="{x:Static properties:Resources.TitleMemoryOnStart}" Target="{Binding ElementName=onStart}"/>
 		</StackPanel>
 		<StackPanel Grid.Row="3" Grid.Column="1" Style="{StaticResource ramOnly}">
-			<ComboBox Grid.Row="3" Grid.Column="1" Name="onStart"
+			<Canvas Visibility="Hidden">
+				<ListBox Name="onStartList" HorizontalAlignment="Left" Padding="10,0"
+					ItemsSource="{Binding ElementName=onStart, Path=ItemsSource}"
+				/>
+			</Canvas>
+			<ComboBox Grid.Row="3" Grid.Column="1" Name="onStart" HorizontalAlignment="Left"
 				Width="{Binding ElementName=onStartList, Path=ActualWidth}" ToolTip="{x:Static properties:Resources.ToolTipMemoryOnStart}"
 			/>
 		</StackPanel>
 
-		<GroupBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Header="{Binding Source={x:Static properties:Resources.TitleData}, Mode=OneTime}" Margin="3,3,3,0">
+		<GroupBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Header="{x:Static properties:Resources.TitleData}" Margin="3,3,3,0">
 			<GroupBox.Resources>
 				<Style x:Key="memoryCell" TargetType="TextBlock">
 					<Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -223,7 +227,7 @@
 
 		<GridSplitter Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="3" Background="Transparent"/>
 
-		<GroupBox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Margin="3,0,3,3" Header="{Binding Source={x:Static properties:Resources.CaptionNote}, Mode=OneTime}">
+		<GroupBox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Margin="3,0,3,3" Header="{x:Static properties:Resources.CaptionNote}">
 			<TextBox Name="note" Margin="0" BorderThickness="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
 				AcceptsReturn="True" AcceptsTab="True" SpellCheck.IsEnabled="True"
 			/>
@@ -235,14 +239,8 @@
 		</StackPanel>
 
 		<StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-			<Button Content="{Binding Source={x:Static properties:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="ButtonOkClick"/>
-			<Button Content="{Binding Source={x:Static properties:Resources.TitleCancel}, Mode=OneTime}" IsCancel="True"/>
+			<Button Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" Click="ButtonOkClick"/>
+			<Button Content="{x:Static properties:Resources.TitleCancel}" IsCancel="True"/>
 		</StackPanel>
-
-		<Canvas Grid.Row="8" Grid.Column="1" Height="0" ClipToBounds="True">
-			<ListBox Name="onStartList" Visibility="Visible" HorizontalAlignment="Left" Padding="10,0" Style="{StaticResource ramOnly}"
-				ItemsSource="{Binding ElementName=onStart, Path=ItemsSource}" DisplayMemberPath="Text"
-			/>
-		</Canvas>
 	</Grid>
 </Window>
