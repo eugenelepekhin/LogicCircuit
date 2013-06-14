@@ -1005,8 +1005,7 @@ Sortie</value>
     <value>Fréquence actuelle:</value>
   </data>
   <data name="TitleIsDisplay" xml:space="preserve">
-    <value>Afficher les éléments visuels dans la liste des symboles
-</value>
+    <value>Afficher les éléments visuels dans la liste des symboles</value>
   </data>
   <data name="ToolTipIsDisplay" xml:space="preserve">
     <value>Quand vous sélectionner cette option, tous les symboles du circuit
