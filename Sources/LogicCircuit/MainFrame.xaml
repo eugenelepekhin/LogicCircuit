@@ -73,6 +73,7 @@
 		</CollectionViewSource>
 
 		<lc:FormatConverter x:Key="FormatConverter"/>
+		<lc:DoubleAdderConverter x:Key="DoubleAdderConverter"/>
 	</Window.Resources>
 
 	<Window.Triggers>
@@ -211,11 +212,13 @@
 		</Menu>
 
 		<!-- Main content of the window -->
-		<Grid Grid.Row="1" Margin="3">
+		<Grid Grid.Row="1" Margin="3" Name="splitGrid">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="{Binding Path=ProjectWidth.Value, Mode=TwoWay}" MinWidth="100"/> <!-- Left column with List of circuit descriptors and runtime tree -->
+				<ColumnDefinition Width="{Binding Path=ProjectWidth.Value, Mode=TwoWay}"/> <!-- Left column with List of circuit descriptors and runtime tree -->
 				<ColumnDefinition Width="Auto"/> <!-- Column Splitter -->
-				<ColumnDefinition Width="{Binding Path=DiagramWidth.Value, Mode=TwoWay}" MinWidth="100"/> <!-- Main Diagram -->
+				<ColumnDefinition Width="{Binding Path=DiagramWidth.Value, Mode=TwoWay}" MinWidth="100"
+					MaxWidth="{Binding ElementName=splitGrid, Path=ActualWidth, Converter={StaticResource DoubleAdderConverter}, ConverterParameter=-100}"
+				/> <!-- Main Diagram -->
 			</Grid.ColumnDefinitions>
 
 			<!-- Left column with List of circuits and properties and Running map tree -->
