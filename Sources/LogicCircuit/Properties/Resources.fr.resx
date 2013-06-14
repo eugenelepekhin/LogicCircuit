@@ -1012,4 +1012,184 @@ Sortie</value>
 seront visible a la place du symbole de base du circuit en cours.
 Les éléments sont : LED, Matrise de LED, Bouton, ou autre circuit logique.</value>
   </data>
+  <data name="PinOutName" xml:space="preserve">
+    <value>q</value>
+  </data>
+  <data name="TitleOK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="RAMNotation" xml:space="preserve">
+    <value>RAM</value>
+  </data>
+  <data name="ROMNotation" xml:space="preserve">
+    <value>ROM</value>
+  </data>
+  <data name="ToolTipConstant" xml:space="preserve">
+    <value>{0} bit(s) constant {1:X}</value>
+  </data>
+  <data name="ToolTipNonePin" xml:space="preserve">
+    <value>{0} bit(s) {1}</value>
+  </data>
+  <data name="TitleApplication" xml:space="preserve">
+    <value>Logical Circuit</value>
+  </data>
+  <data name="TitleWeb" xml:space="preserve">
+    <value>Web:</value>
+  </data>
+  <data name="WebSiteUri" xml:space="preserve">
+    <value>http://www.logiccircuit.org/</value>
+  </data>
+  <data name="TitleOptions" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="TitleNotation" xml:space="preserve">
+    <value>N_otation:</value>
+  </data>
+  <data name="TitleType" xml:space="preserve">
+    <value>_Type:</value>
+  </data>
+  <data name="ProbeHistoryHex" xml:space="preserve">
+    <value>{0:X}</value>
+  </data>
+  <data name="TitleCircuitDescriptor" xml:space="preserve">
+    <value>Circuit</value>
+  </data>
+  <data name="TitleFileOpen" xml:space="preserve">
+    <value>...</value>
+  </data>
+  <data name="ReportGateName" xml:space="preserve">
+    <value>{0} ({1})</value>
+  </data>
+  <data name="TitleZoom" xml:space="preserve">
+    <value>_Zoom:</value>
+  </data>
+  <data name="WebSiteDownloadUri" xml:space="preserve">
+    <value>http://www.logiccircuit.org/download.html</value>
+  </data>
+  <data name="GateAndNotation" xml:space="preserve">
+    <value>&amp;</value>
+  </data>
+  <data name="GateClockNotation" xml:space="preserve">
+    <value>ω</value>
+  </data>
+  <data name="GateLedName" xml:space="preserve">
+    <value>LED</value>
+  </data>
+  <data name="GateLedNotation" xml:space="preserve">
+    <value>LED</value>
+  </data>
+  <data name="GateNotNotation" xml:space="preserve">
+    <value>~</value>
+  </data>
+  <data name="GateOrNotation" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="GateTriStateNotation" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="GateXorNotation" xml:space="preserve">
+    <value>=</value>
+  </data>
+  <data name="Led7Pin1" xml:space="preserve">
+    <value>a</value>
+  </data>
+  <data name="Led7Pin2" xml:space="preserve">
+    <value>b</value>
+  </data>
+  <data name="Led7Pin3" xml:space="preserve">
+    <value>c</value>
+  </data>
+  <data name="Led7Pin4" xml:space="preserve">
+    <value>d</value>
+  </data>
+  <data name="Led7Pin5" xml:space="preserve">
+    <value>e</value>
+  </data>
+  <data name="Led7Pin6" xml:space="preserve">
+    <value>f</value>
+  </data>
+  <data name="Led7Pin7" xml:space="preserve">
+    <value>g</value>
+  </data>
+  <data name="MainFrameCaption" xml:space="preserve">
+    <value>Logical Circuit {0}</value>
+  </data>
+  <data name="MemoryAddressPinNotation" xml:space="preserve">
+    <value>a</value>
+  </data>
+  <data name="MemoryDataPinNotation" xml:space="preserve">
+    <value>d</value>
+  </data>
+  <data name="MemoryWritePinNotation" xml:space="preserve">
+    <value>w</value>
+  </data>
+  <data name="PinEnableName" xml:space="preserve">
+    <value>E</value>
+  </data>
+  <data name="PinInName" xml:space="preserve">
+    <value>x</value>
+  </data>
+  <data name="PinName" xml:space="preserve">
+    <value>{0}{1}</value>
+  </data>
+  <data name="HelpContent" xml:space="preserve">
+    <value>http://www.logiccircuit.org/help.html</value>
+  </data>
+  <data name="MenuHeaderCircuit" xml:space="preserve">
+    <value>_Circuit</value>
+  </data>
+  <data name="GridPoint" xml:space="preserve">
+    <value>({0}, {1})</value>
+  </data>
+  <data name="FlowDirection" xml:space="preserve">
+    <value>LeftToRight</value>
+  </data>
+  <data name="CircuitProbeNotation" xml:space="preserve">
+    <value>?</value>
+  </data>
+  <data name="ConstantNotation" xml:space="preserve">
+    <value>{0:X}</value>
+  </data>
+  <data name="CommandToolsOptions" xml:space="preserve">
+    <value>_Options</value>
+  </data>
+  <data name="CommandToolsOscilloscope" xml:space="preserve">
+    <value>Oscilloscope</value>
+  </data>
+  <data name="CircuitMapPathSeparator" xml:space="preserve">
+    <value>/</value>
+  </data>
+  <data name="CaptionTextNote2" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="CaptionNotation" xml:space="preserve">
+    <value>Notation</value>
+  </data>
+  <data name="CategoryDuplicate" xml:space="preserve">
+    <value>{0} 2</value>
+  </data>
+  <data name="CaptionNote" xml:space="preserve">
+    <value>_Note</value>
+  </data>
+  <data name="CategoryPrimitives" xml:space="preserve">
+    <value>Primitives</value>
+  </data>
+  <data name="Bit0" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Bit1" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="BitOff" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="CaptionLedMatrixType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="ColorPickerTabStandard" xml:space="preserve">
+    <value>Standard</value>
+  </data>
+  <data name="CommandEditItalic" xml:space="preserve">
+    <value>Italic</value>
+  </data>
 </root>
