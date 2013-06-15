@@ -154,13 +154,13 @@
     <value>关于</value>
   </data>
   <data name="TitleCategory" xml:space="preserve">
-    <value>类别(&amp;C)：</value>
+    <value>类别(_C)</value>
   </data>
   <data name="TitleBitWidth" xml:space="preserve">
-    <value>位宽(&amp;B)</value>
+    <value>位宽(_B)</value>
   </data>
   <data name="TitleAddressBitWidth" xml:space="preserve">
-    <value>地址位宽(&amp;A)：</value>
+    <value>地址位宽(_A)</value>
   </data>
   <data name="TitleCircuitDescriptor" xml:space="preserve">
     <value>电路</value>
@@ -175,7 +175,7 @@
     <value>检查更新</value>
   </data>
   <data name="TitleApply" xml:space="preserve">
-    <value>应用(&amp;A)</value>
+    <value>应用(_A)</value>
   </data>
   <data name="TitleActualFrequency" xml:space="preserve">
     <value>精确频率：</value>
@@ -241,7 +241,7 @@
     <value>符号</value>
   </data>
   <data name="CaptionNote" xml:space="preserve">
-    <value>注释(&amp;N)</value>
+    <value>注释(_N)</value>
   </data>
   <data name="CategoryPrimitives" xml:space="preserve">
     <value>基本元件</value>
@@ -277,16 +277,16 @@
     <value>向右旋转</value>
   </data>
   <data name="ColorPickerCaptionAvailable" xml:space="preserve">
-    <value>可用颜色：</value>
+    <value>可用颜色</value>
   </data>
   <data name="ColorPickerCaptionRecent" xml:space="preserve">
-    <value>常用颜色：</value>
+    <value>常用颜色</value>
   </data>
   <data name="ColorPickerCaptionSelectCustom" xml:space="preserve">
     <value>选择</value>
   </data>
   <data name="ColorPickerCaptionStandard" xml:space="preserve">
-    <value>标准颜色：</value>
+    <value>标准颜色</value>
   </data>
   <data name="ColorPickerTabCustom" xml:space="preserve">
     <value>自定义</value>
@@ -310,10 +310,10 @@
     <value>项目符号</value>
   </data>
   <data name="CommandEditCopy" xml:space="preserve">
-    <value>复制(&amp;C)</value>
+    <value>复制(_C)</value>
   </data>
   <data name="CommandEditCut" xml:space="preserve">
-    <value>剪切(&amp;T)</value>
+    <value>剪切(_T)</value>
   </data>
   <data name="CommandEditDecreaseFontSize" xml:space="preserve">
     <value>减小字号</value>
@@ -322,7 +322,7 @@
     <value>减小缩进</value>
   </data>
   <data name="CommandEditDelete" xml:space="preserve">
-    <value>删除(&amp;L)</value>
+    <value>删除(_L)</value>
   </data>
   <data name="CommandEditIncreaseFontSize" xml:space="preserve">
     <value>增大字号</value>
@@ -337,31 +337,31 @@
     <value>编号</value>
   </data>
   <data name="CommandEditPaste" xml:space="preserve">
-    <value>粘帖(&amp;P)</value>
+    <value>粘帖(_P)</value>
   </data>
   <data name="CommandEditRedo" xml:space="preserve">
-    <value>恢复(&amp;R)</value>
+    <value>恢复(_R)</value>
   </data>
   <data name="CommandEditSelectAll" xml:space="preserve">
-    <value>全选(&amp;A)</value>
+    <value>全选(_A)</value>
   </data>
   <data name="CircuitProbeToolTip" xml:space="preserve">
     <value>探针 {0}</value>
   </data>
   <data name="TitleCredits" xml:space="preserve">
-    <value>制作人员：</value>
+    <value>制作人员</value>
   </data>
   <data name="NameLedMatrix" xml:space="preserve">
     <value>LED 矩阵</value>
   </data>
   <data name="TitleColumns" xml:space="preserve">
-    <value>列(&amp;C)：</value>
+    <value>列(_C)</value>
   </data>
   <data name="TitleRows" xml:space="preserve">
-    <value>行(&amp;R)：</value>
+    <value>行(_R)</value>
   </data>
   <data name="TitleColors" xml:space="preserve">
-    <value>颜色(&amp;C)：</value>
+    <value>颜色(_C)</value>
   </data>
   <data name="CommandHyperlink" xml:space="preserve">
     <value>超链接</value>
@@ -373,10 +373,10 @@
     <value>超链接地址不可用</value>
   </data>
   <data name="TitleHyperlink" xml:space="preserve">
-    <value>链接(&amp;L)：</value>
+    <value>链接(_L)</value>
   </data>
   <data name="TitleText" xml:space="preserve">
-    <value>文本(&amp;T)</value>
+    <value>文本(_T)</value>
   </data>
   <data name="CommandInsertImage" xml:space="preserve">
     <value>图片</value>
@@ -385,7 +385,7 @@
     <value>真值表</value>
   </data>
   <data name="TitleStop" xml:space="preserve">
-    <value>停止(&amp;S)</value>
+    <value>停止(_S)</value>
   </data>
   <data name="ToolTipBackgroundColor" xml:space="preserve">
     <value>高亮颜色</value>
@@ -394,10 +394,10 @@
     <value>文本颜色</value>
   </data>
   <data name="TitleSaveAs" xml:space="preserve">
-    <value>另存为(&amp;V)...</value>
+    <value>另存为(_V)...</value>
   </data>
   <data name="TitleCulture" xml:space="preserve">
-    <value>语言(&amp;L)</value>
+    <value>语言(_L)</value>
   </data>
   <data name="CommandEditAlignJustify" xml:space="preserve">
     <value>两端对齐</value>
@@ -406,25 +406,25 @@
     <value>下划线</value>
   </data>
   <data name="CommandEditUndo" xml:space="preserve">
-    <value>撤销(&amp;U)</value>
+    <value>撤销(_U)</value>
   </data>
   <data name="CommandFileClose" xml:space="preserve">
-    <value>退出(&amp;X)</value>
+    <value>退出(_X)</value>
   </data>
   <data name="CommandFileNew" xml:space="preserve">
-    <value>新建(&amp;N)</value>
+    <value>新建(_N)</value>
   </data>
   <data name="CommandFileOpen" xml:space="preserve">
-    <value>打开(&amp;O)</value>
+    <value>打开(_O)</value>
   </data>
   <data name="CommandFileSave" xml:space="preserve">
-    <value>保存(&amp;S)</value>
+    <value>保存(_S)</value>
   </data>
   <data name="CommandFileSaveAs" xml:space="preserve">
-    <value>另存为(&amp;A)...</value>
+    <value>另存为(_A)...</value>
   </data>
   <data name="CommandHelpView" xml:space="preserve">
-    <value>查看帮助(&amp;H)</value>
+    <value>查看帮助(_H)</value>
   </data>
   <data name="ToolTipFontFamily" xml:space="preserve">
     <value>字体</value>
@@ -457,7 +457,7 @@
     <value>异或门</value>
   </data>
   <data name="GateXorNotName" xml:space="preserve">
-    <value>同或</value>
+    <value>同或门</value>
   </data>
   <data name="LogicalCircuitName" xml:space="preserve">
     <value>电路</value>
@@ -485,16 +485,16 @@
     <value>就绪</value>
   </data>
   <data name="TitleNo" xml:space="preserve">
-    <value>否(&amp;N)</value>
+    <value>否(_N)</value>
   </data>
   <data name="TitleOK" xml:space="preserve">
     <value>确认</value>
   </data>
   <data name="TitleShowDetails" xml:space="preserve">
-    <value>详细信息(&amp;S)</value>
+    <value>详细信息(_S)</value>
   </data>
   <data name="TitleYes" xml:space="preserve">
-    <value>是(&amp;Y)</value>
+    <value>是(_Y)</value>
   </data>
   <data name="ToolTipButton" xml:space="preserve">
     <value>按钮 {0}</value>
@@ -503,25 +503,25 @@
     <value>导线</value>
   </data>
   <data name="MenuHeaderCircuit" xml:space="preserve">
-    <value>电路(&amp;C)</value>
+    <value>电路(_C)</value>
   </data>
   <data name="MenuHeaderEdit" xml:space="preserve">
-    <value>编辑(&amp;E)</value>
+    <value>编辑(_E)</value>
   </data>
   <data name="MenuHeaderFile" xml:space="preserve">
-    <value>文件(&amp;F)</value>
+    <value>文件(_F)</value>
   </data>
   <data name="MenuHeaderHelp" xml:space="preserve">
-    <value>帮助(&amp;H)</value>
+    <value>帮助(_H)</value>
   </data>
   <data name="MenuHeaderTools" xml:space="preserve">
-    <value>工具(&amp;T)</value>
+    <value>工具(_T)</value>
   </data>
   <data name="MessageWarning" xml:space="preserve">
     <value>警告！</value>
   </data>
   <data name="TitleFrequency" xml:space="preserve">
-    <value>频率(&amp;Q)</value>
+    <value>频率(_Q)</value>
   </data>
   <data name="TitleIsMaximumSpeed1" xml:space="preserve">
     <value>最高速度运行</value>
@@ -536,16 +536,16 @@
     <value>运行中的电路</value>
   </data>
   <data name="TitleZoom" xml:space="preserve">
-    <value>缩放(&amp;Z)</value>
+    <value>缩放(_Z)</value>
   </data>
   <data name="TitleCircuitUsage" xml:space="preserve">
     <value>逻辑电路使用量</value>
   </data>
   <data name="TitleMemory" xml:space="preserve">
-    <value>内存(&amp;M)</value>
+    <value>内存(_M)</value>
   </data>
   <data name="CommandFileOpenRecent" xml:space="preserve">
-    <value>打开最近的文件(&amp;R)</value>
+    <value>打开最近的文件(_R)</value>
   </data>
   <data name="TitleTotalRows" xml:space="preserve">
     <value>总行数 {0:N0}</value>
@@ -563,13 +563,13 @@
     <value>全部置 0</value>
   </data>
   <data name="TitleMemoryOnStart" xml:space="preserve">
-    <value>初值(&amp;S)</value>
+    <value>初值(_S)</value>
   </data>
   <data name="ToolTipMemoryOnStart" xml:space="preserve">
     <value>选择加电时 RAM 的初始化方式</value>
   </data>
   <data name="TitleIsDisplay" xml:space="preserve">
-    <value>使用符号显示视觉元素(&amp;S)</value>
+    <value>使用符号显示视觉元素(_S)</value>
   </data>
   <data name="MessageRestartRequared" xml:space="preserve">
     <value>您需要重启应用程序使选择的语言生效</value>
@@ -596,7 +596,7 @@
     <value>选项</value>
   </data>
   <data name="TitleShowGrid" xml:space="preserve">
-    <value>显示表格(&amp;S)</value>
+    <value>显示表格(_S)</value>
   </data>
   <data name="CommandCircuitCurrent" xml:space="preserve">
     <value>逻辑电路</value>
@@ -638,7 +638,7 @@
     <value>&lt;&lt;&lt;&lt;&lt;&lt;标记&gt;&gt;&gt;&gt;&gt;&gt;</value>
   </data>
   <data name="TitleMark" xml:space="preserve">
-    <value>标记(&amp;M)</value>
+    <value>标记(_M)</value>
   </data>
   <data name="TitleProbeHistory" xml:space="preserve">
     <value>探针历史</value>
@@ -656,32 +656,32 @@
     <value>逻辑电路示波器</value>
   </data>
   <data name="TitleOscilloscoping" xml:space="preserve">
-    <value>示波器(&amp;O)</value>
+    <value>示波器(_O)</value>
   </data>
   <data name="CommandFileFileImport" xml:space="preserve">
-    <value>导入(&amp;I)...</value>
+    <value>导入(_I)...</value>
   </data>
   <data name="ImportTitle" xml:space="preserve">
     <value>导入</value>
   </data>
   <data name="TitleFileName" xml:space="preserve">
-    <value>文件：</value>
+    <value>文件</value>
   </data>
   <data name="TitleImportCircuit" xml:space="preserve">
     <value>导入</value>
   </data>
   <data name="TitleCheckAll" xml:space="preserve">
-    <value>全部选中(&amp;C)</value>
+    <value>全部选中(_C)</value>
   </data>
   <data name="CommandCircuitUsage" xml:space="preserve">
-    <value>使用于...</value>
+    <value>被使用于...</value>
   </data>
   <data name="MessageInvalidRecentFile" xml:space="preserve">
     <value>文件“{0}”不能够被打开。
 您想从近期文件列表中删除它吗？</value>
   </data>
   <data name="TitleMaxRecentFiles" xml:space="preserve">
-    <value>近期文件的最大数目(&amp;M)：</value>
+    <value>近期文件的最大数目(_M)</value>
   </data>
   <data name="ErrorFileCorrupted" xml:space="preserve">
     <value>文件 “{0}” 不正确或者不能够被载入</value>
@@ -693,13 +693,10 @@
     <value>错误具体信息</value>
   </data>
   <data name="TitleSummary" xml:space="preserve">
-    <value>概要：</value>
+    <value>概要</value>
   </data>
   <data name="TitleTotal" xml:space="preserve">
-    <value>总计：</value>
-  </data>
-  <data name="LogicalCircuitMainNotation" xml:space="preserve">
-    <value>主模块</value>
+    <value>总计</value>
   </data>
   <data name="LedMatrixTypeIndividual" xml:space="preserve">
     <value>单独的</value>
@@ -723,7 +720,7 @@
     <value>表达式尾部</value>
   </data>
   <data name="ParserErrorCloseParenMissing" xml:space="preserve">
-    <value>在 {0} 之后缺失 ”“</value>
+    <value>在 {0} 之后缺失 ')'</value>
   </data>
   <data name="ParserErrorExpressionMissing" xml:space="preserve">
     <value>在 {0} 之后表达式缺失</value>
@@ -747,10 +744,10 @@
     <value>显示的行数：{0:N0}</value>
   </data>
   <data name="TitleFilter" xml:space="preserve">
-    <value>过滤(&amp;F)</value>
+    <value>过滤(_F)</value>
   </data>
   <data name="TitleInvert" xml:space="preserve">
-    <value>转置(&amp;I)</value>
+    <value>转置(_I)</value>
   </data>
   <data name="MemoryWritePinName" xml:space="preserve">
     <value>RAM 写输入
@@ -793,7 +790,7 @@
     <value>{0} 位到 {1} 针脚分路器</value>
   </data>
   <data name="CommandHelpAbout" xml:space="preserve">
-    <value>关于(&amp;A)</value>
+    <value>关于(_A)</value>
   </data>
   <data name="NameButton" xml:space="preserve">
     <value>按钮</value>
@@ -811,7 +808,7 @@
     <value>网站</value>
   </data>
   <data name="CommandToolsOptions" xml:space="preserve">
-    <value>选项(&amp;O)</value>
+    <value>选项(_O)</value>
   </data>
   <data name="TitleDisplayOptions" xml:space="preserve">
     <value>显示</value>
@@ -820,10 +817,10 @@
     <value>文件</value>
   </data>
   <data name="TitleGateShape" xml:space="preserve">
-    <value>门形状(&amp;G)</value>
+    <value>门形状(_G)</value>
   </data>
   <data name="TitleLoadLastFile" xml:space="preserve">
-    <value>启动时载入上一次的文件(&amp;L)</value>
+    <value>启动时载入上一次的文件(_L)</value>
   </data>
   <data name="MessageFreeWireCount" xml:space="preserve">
     <value>发现了 {0} 根未连接的导线</value>
@@ -832,40 +829,40 @@
     <value>发现了 {0} 个没有连接的元器件</value>
   </data>
   <data name="TitleDescription" xml:space="preserve">
-    <value>描述(&amp;D)</value>
+    <value>描述(_D)</value>
   </data>
   <data name="TitleName" xml:space="preserve">
-    <value>名字(&amp;N)</value>
+    <value>名字(_N)</value>
   </data>
   <data name="TitleNotation" xml:space="preserve">
-    <value>符号(&amp;O)</value>
+    <value>符号(_O)</value>
   </data>
   <data name="TitleValue" xml:space="preserve">
-    <value>值(&amp;V)</value>
+    <value>值(_V)</value>
   </data>
   <data name="NamePin" xml:space="preserve">
     <value>针脚</value>
   </data>
   <data name="TitleData" xml:space="preserve">
-    <value>数据(&amp;T)</value>
+    <value>数据(_T)</value>
   </data>
   <data name="TitleDataBitWidth" xml:space="preserve">
-    <value>数据位宽(&amp;D)</value>
+    <value>数据位宽(_D)</value>
   </data>
   <data name="TitleInverted" xml:space="preserve">
-    <value>倒置(&amp;I)</value>
+    <value>倒置(_I)</value>
   </data>
   <data name="TitleLoad" xml:space="preserve">
-    <value>载入(&amp;L)</value>
+    <value>载入(_L)</value>
   </data>
   <data name="TitleSide" xml:space="preserve">
-    <value>边(&amp;S)</value>
+    <value>边(_S)</value>
   </data>
   <data name="TitleType" xml:space="preserve">
-    <value>类型(&amp;T)：</value>
+    <value>类型(_T)</value>
   </data>
   <data name="TitleWriteOn" xml:space="preserve">
-    <value>写入(&amp;W)</value>
+    <value>写入(_W)</value>
   </data>
   <data name="TipOnStartMove" xml:space="preserve">
     <value>拖动选择的区域到目的位置。按下 Esc 键来取消移动过程。在释放鼠标时按住 Shift 键来阻止连接导线的移动。</value>
@@ -892,7 +889,7 @@
     <value>内存 {0} 上的输入数据位没有全部连接</value>
   </data>
   <data name="TitleUncheckAll" xml:space="preserve">
-    <value>全部不选(&amp;U)</value>
+    <value>全部不选(_U)</value>
   </data>
   <data name="ImageFileFilter" xml:space="preserve">
     <value>图像文件 (*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif)|*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif|全部文件 (*.*)|*.*</value>
@@ -905,7 +902,7 @@
     <value>导出图像</value>
   </data>
   <data name="CaptionSplitterDirection" xml:space="preserve">
-    <value>组合的针脚</value>
+    <value>组合针脚位置</value>
   </data>
   <data name="ToolTipAddressBitWidth" xml:space="preserve">
     <value>选择地址针脚的位宽</value>
@@ -959,7 +956,7 @@
     <value>选择需要将当前图表导出为的图片和文件格式</value>
   </data>
   <data name="TitleFile" xml:space="preserve">
-    <value>文件(&amp;F)：</value>
+    <value>文件(_F)</value>
   </data>
   <data name="ReportMemoryName" xml:space="preserve">
     <value>{0}: {1} 位宽地址，{2} 位宽数据</value>
@@ -968,7 +965,7 @@
     <value>三态组</value>
   </data>
   <data name="CaptionSplitterPinNumber" xml:space="preserve">
-    <value>分路针脚</value>
+    <value>分路针脚数目</value>
   </data>
   <data name="ToolTipFrequency" xml:space="preserve">
     <value>更改运行中的电路的时钟门的频率</value>
@@ -998,7 +995,7 @@
     <value>输入将显示在模块符号针脚边上的简称</value>
   </data>
   <data name="TitleIsToggle" xml:space="preserve">
-    <value>是否是切换器(&amp;T)</value>
+    <value>是否是切换器(_T)</value>
   </data>
   <data name="ToolTipIsToggle" xml:space="preserve">
     <value>如果一个按钮是一个切换器，那么它将在每一次点击后更改它的状态，而不是按下和释放时</value>
@@ -1048,5 +1045,17 @@
   <data name="ErrorManyMemoryData" xml:space="preserve">
     <value>电路 {0} 包含 {1} 来在运行间保持数据。
 这样的电路不能够在其它电路上多次使用由于其存储在一个内存模块上潜在的不同数据集。</value>
+  </data>
+  <data name="TitleApplication" xml:space="preserve">
+    <value>逻辑电路</value>
+  </data>
+  <data name="TipOnAwaitingArea" xml:space="preserve">
+    <value>{0} {1}. 拖动鼠标来选中多个元素，按住 Shift 来多选</value>
+  </data>
+  <data name="ToolTipPinSide" xml:space="preserve">
+    <value>选择新引脚在电路示意图中的倚靠的边</value>
+  </data>
+  <data name="ToolTipIsDisplay" xml:space="preserve">
+    <value>当你标注逻辑电路显示视觉元素时，所有的视觉符号都会显示在电路示意图上，包括：LED，LED矩阵，按钮和其他逻辑电路。</value>
   </data>
 </root>
