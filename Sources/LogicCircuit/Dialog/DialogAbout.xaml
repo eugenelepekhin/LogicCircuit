@@ -17,7 +17,7 @@
 
 		<Style x:Key="BigText" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
 			<Setter Property="FontSize" Value="16"/>
-			<Setter Property="Margin" Value="5"/>
+			<Setter Property="Margin" Value="3"/>
 		</Style>
 
 		<Style TargetType="CheckBox">
@@ -52,7 +52,7 @@
 				</Grid.RowDefinitions>
 				<TextBlock Grid.Row="0"
 					Text="{x:Static properties:Resources.TitleApplication}" HorizontalAlignment="Left"
-					FontSize="36" FontWeight="Bold" Margin="5,16,64,16"
+					FontSize="36" FontWeight="Bold" Margin="5,10,64,10"
 				/>
 
 				<TextBlock Grid.Row="1" Text="{x:Static properties:Resources.TitleCredits}" Style="{StaticResource BigText}"/>
@@ -60,7 +60,7 @@
 					<WrapPanel.Resources>
 						<Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
 							<Setter Property="FlowDirection" Value="LeftToRight"/>
-							<Setter Property="Margin" Value="5,0"/>
+							<Setter Property="Margin" Value="3,0"/>
 							<Setter Property="FontSize" Value="11"/>
 						</Style>
 					</WrapPanel.Resources>
@@ -83,6 +83,7 @@
 					<TextBlock>Sergey Dubinets</TextBlock>
 					<TextBlock>Vitalii Dutka</TextBlock>
 					<TextBlock>Wasilis Mandratzis</TextBlock>
+					<TextBlock>Wenhua Shi</TextBlock>
 				</WrapPanel>
 			</Grid>
 		</Grid>
