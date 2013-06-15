@@ -772,7 +772,7 @@
     <value>{0} 位常量 {1:X}</value>
   </data>
   <data name="ToolTipInputPin" xml:space="preserve">
-    <value>{0} 输入针脚 {1}</value>
+    <value>{0} 位输入针脚 {1}</value>
   </data>
   <data name="ToolTipNonePin" xml:space="preserve">
     <value>{0} 位 {1}</value>
@@ -995,10 +995,11 @@
     <value>输入将显示在模块符号针脚边上的简称</value>
   </data>
   <data name="TitleIsToggle" xml:space="preserve">
-    <value>是否是切换器(_T)</value>
+    <value>切换器(_T)</value>
   </data>
   <data name="ToolTipIsToggle" xml:space="preserve">
-    <value>如果一个按钮是一个切换器，那么它将在每一次点击后更改它的状态，而不是按下和释放时</value>
+    <value>如果一个按钮是一个切换器，那么它将在每一次点击后更改它的状态，而不是按下并释放后
+</value>
   </data>
   <data name="CaptionSplitterBitWidth" xml:space="preserve">
     <value>分路针脚位宽</value>
@@ -1057,5 +1058,136 @@
   </data>
   <data name="ToolTipIsDisplay" xml:space="preserve">
     <value>当你标注逻辑电路显示视觉元素时，所有的视觉符号都会显示在电路示意图上，包括：LED，LED矩阵，按钮和其他逻辑电路。</value>
+  </data>
+  <data name="FlowDirection" xml:space="preserve">
+    <value>LeftToRight</value>
+  </data>
+  <data name="GateAndNotation" xml:space="preserve">
+    <value>&amp;</value>
+  </data>
+  <data name="GateClockNotation" xml:space="preserve">
+    <value>ω</value>
+  </data>
+  <data name="GateLedName" xml:space="preserve">
+    <value>LED</value>
+  </data>
+  <data name="GateLedNotation" xml:space="preserve">
+    <value>LED</value>
+  </data>
+  <data name="GateNotNotation" xml:space="preserve">
+    <value>~</value>
+  </data>
+  <data name="GateOrNotation" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="CircuitProbeNotation" xml:space="preserve">
+    <value>?</value>
+  </data>
+  <data name="GateTriStateNotation" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="GateXorNotation" xml:space="preserve">
+    <value>=</value>
+  </data>
+  <data name="Led7Pin1" xml:space="preserve">
+    <value>a</value>
+  </data>
+  <data name="Led7Pin2" xml:space="preserve">
+    <value>b</value>
+  </data>
+  <data name="Led7Pin3" xml:space="preserve">
+    <value>c</value>
+  </data>
+  <data name="Led7Pin4" xml:space="preserve">
+    <value>d</value>
+  </data>
+  <data name="Led7Pin5" xml:space="preserve">
+    <value>e</value>
+  </data>
+  <data name="Led7Pin6" xml:space="preserve">
+    <value>f</value>
+  </data>
+  <data name="Led7Pin7" xml:space="preserve">
+    <value>g</value>
+  </data>
+  <data name="MemoryAddressPinNotation" xml:space="preserve">
+    <value>a</value>
+  </data>
+  <data name="MemoryDataPinNotation" xml:space="preserve">
+    <value>d</value>
+  </data>
+  <data name="MemoryWritePinNotation" xml:space="preserve">
+    <value>w</value>
+  </data>
+  <data name="PinEnableName" xml:space="preserve">
+    <value>E</value>
+  </data>
+  <data name="PinInName" xml:space="preserve">
+    <value>x</value>
+  </data>
+  <data name="PinName" xml:space="preserve">
+    <value>{0}{1}</value>
+  </data>
+  <data name="PinOutName" xml:space="preserve">
+    <value>q</value>
+  </data>
+  <data name="ConstantNotation" xml:space="preserve">
+    <value>{0:X}</value>
+  </data>
+  <data name="RAMNotation" xml:space="preserve">
+    <value>RAM</value>
+  </data>
+  <data name="ROMNotation" xml:space="preserve">
+    <value>ROM</value>
+  </data>
+  <data name="TitlePinInput" xml:space="preserve">
+    <value>{0}
+In</value>
+  </data>
+  <data name="TitlePinOutput" xml:space="preserve">
+    <value>{0}
+Out</value>
+  </data>
+  <data name="WebSiteUri" xml:space="preserve">
+    <value>http://www.logiccircuit.org/</value>
+  </data>
+  <data name="HelpContent" xml:space="preserve">
+    <value>http://www.logiccircuit.org/help.html</value>
+  </data>
+  <data name="CircuitMapPathSeparator" xml:space="preserve">
+    <value>/</value>
+  </data>
+  <data name="ProbeHistoryHex" xml:space="preserve">
+    <value>{0:X}</value>
+  </data>
+  <data name="TitleFileOpen" xml:space="preserve">
+    <value>...</value>
+  </data>
+  <data name="Gate7SegName" xml:space="preserve">
+    <value>7-seg</value>
+  </data>
+  <data name="ReportGateName" xml:space="preserve">
+    <value>{0} ({1})</value>
+  </data>
+  <data name="CategoryDuplicate" xml:space="preserve">
+    <value>{0} 2</value>
+  </data>
+  <data name="Bit1" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="BitOff" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="LogicalCircuitMainNotation" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="GridPoint" xml:space="preserve">
+    <value>({0}, {1})</value>
+  </data>
+  <data name="WebSiteDownloadUri" xml:space="preserve">
+    <value>http://www.logiccircuit.org/download.html</value>
+  </data>
+  <data name="Bit0" xml:space="preserve">
+    <value>0</value>
   </data>
 </root>
