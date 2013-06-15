@@ -998,8 +998,7 @@
     <value>切换器(_T)</value>
   </data>
   <data name="ToolTipIsToggle" xml:space="preserve">
-    <value>如果一个按钮是一个切换器，那么它将在每一次点击后更改它的状态，而不是按下并释放后
-</value>
+    <value>如果一个按钮是一个切换器，那么它将在每一次点击后更改它的状态，而不是按下并释放后</value>
   </data>
   <data name="CaptionSplitterBitWidth" xml:space="preserve">
     <value>分路针脚位宽</value>
