@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1237,5 +1237,17 @@ Tal circuito não pode ser usado mais de uma vez em outros circuitos já que dif
   </data>
   <data name="CaptionName" xml:space="preserve">
     <value>Nome</value>
+  </data>
+  <data name="TitleIsDisplay" xml:space="preserve">
+    <value>Exibir elementos visuais nos símbolos</value>
+  </data>
+  <data name="ToolTipIsDisplay" xml:space="preserve">
+    <value>Quando você marca para exibir elementos visuais
+todos os símbolos de exibição neste circuito serão visíveis em seus símbolos.
+Displays são: LED, Matriz de LED, Botão, ou outro circuito lógico
+que exibe seus elementos visuais.</value>
+  </data>
+  <data name="TitleActualFrequency" xml:space="preserve">
+    <value>Frequência Atual:</value>
   </data>
 </root>
