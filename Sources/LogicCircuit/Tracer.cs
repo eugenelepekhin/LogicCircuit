@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
+using System.Reflection;
 using System.Text;
 
 namespace LogicCircuit {
@@ -12,7 +13,9 @@ namespace LogicCircuit {
 	/// </summary>
 	internal static class Tracer {
 		private static readonly string LogPath = Path.Combine(
-			Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), TracerMessage.LogFileName
+			Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+			(Assembly.GetEntryAssembly() ?? typeof(Tracer).Assembly).GetName().Name,
+			"TracerLog.txt"
 		);
 
 		/// <summary>
@@ -75,7 +78,7 @@ namespace LogicCircuit {
 
 		private static void Write(Level level, string category, string format, params object[] args) {
 			if(level <= Tracer.currentLevel) {
-				Tracer.Write(string.Format(TracerMessage.Culture, format, args), category);
+				Tracer.Write(string.Format(CultureInfo.InvariantCulture, format, args), category);
 			}
 		}
 		//public static void Report(string category, string message, Exception exception) {
@@ -113,7 +116,7 @@ namespace LogicCircuit {
 		//	Tracer.Fail(string.Format(CultureInfo.CurrentUICulture, reason, args));
 		//}
 		public static void Fail() {
-			Tracer.Fail(TracerMessage.InternalError);
+			Tracer.Fail("Internal Error.");
 		}
 
 		//---------------------------------------------------------------------

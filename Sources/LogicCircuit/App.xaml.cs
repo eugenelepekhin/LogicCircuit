@@ -49,6 +49,7 @@ namespace LogicCircuit {
 		public string FileToOpen { get; private set; }
 
 		protected override void OnStartup(StartupEventArgs e) {
+			App.InitLogging();
 			LogicCircuit.Properties.Resources.Culture = App.CurrentCulture;
 
 			base.OnStartup(e);
@@ -58,8 +59,14 @@ namespace LogicCircuit {
 			if(e != null && e.Args != null && 0 < e.Args.Length && !string.IsNullOrEmpty(e.Args[0])) {
 				this.FileToOpen = e.Args[0];
 			}
+			Tracer.FullInfo("App", "Application launched with parameter: \"{0}\"", this.FileToOpen);
 			EventManager.RegisterClassHandler(typeof(TextBox), TextBox.GotKeyboardFocusEvent, new RoutedEventHandler(TextBoxGotKeyboardFocus));
 			EventManager.RegisterClassHandler(typeof(TextBox), TextBox.PreviewMouseDownEvent, new RoutedEventHandler(TextBoxPreviewMouseDown));
+		}
+
+		private static void InitLogging() {
+			SettingsBoolCache logging = new SettingsBoolCache(Settings.User, "Tracer.WriteToLogFile", false);
+			Tracer.WriteToLogFile = logging.Value;
 		}
 
 		private void TextBoxGotKeyboardFocus(object sender, RoutedEventArgs e) {

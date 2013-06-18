@@ -458,15 +458,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Compile Include="TracerMessage.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TracerMessage.resx</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="TracerMessage.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>TracerMessage.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Properties\error.png" />
