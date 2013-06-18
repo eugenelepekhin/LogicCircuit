@@ -31,7 +31,7 @@
 						<File Id="Application_exe" Source="$(var.LogicCircuit.TargetPath)" KeyPath="yes"/>
 						<ProgId Id="RegFileExtention" Icon="Application_exe" IconIndex="0" Description="LogicCircuit Project file">
 							<Extension Id="CircuitProject" ContentType="text/XML">
-								<Verb Id="open" Command="Open" TargetFile="Application_exe" Argument="%1"/>
+								<Verb Id="open" Command="Open" TargetFile="Application_exe" Argument='"%1"'/>
 							</Extension>
 						</ProgId>
 					</Component>
