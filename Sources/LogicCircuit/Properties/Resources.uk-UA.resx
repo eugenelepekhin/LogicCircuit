@@ -1165,7 +1165,27 @@
   <data name="CommandTruthTable" xml:space="preserve">
     <value>Таблиця істинності</value>
   </data>
+  <data name="ToolTipIsDisplay" xml:space="preserve">
+    <value>Якщо ви виберете відобразити дане поле, всі візуальні 
+елементи вводу-виводу будуть відображатися в розділі 
+"Проект" у вигляді компонованого елемента.</value>
+  </data>
+  <data name="TitleIsDisplay" xml:space="preserve">
+    <value>Відображати візуальні елементи</value>
+  </data>
   <data name="CommandEditAlignJustify" xml:space="preserve">
     <value>Виключення</value>
+  </data>
+  <data name="DefaultGateShape" xml:space="preserve">
+    <value>Shaped</value>
+  </data>
+  <data name="CircuitProbeToolTip" xml:space="preserve">
+    <value>Проба {0}</value>
+  </data>
+  <data name="CaptionName" xml:space="preserve">
+    <value>Ім'я</value>
+  </data>
+  <data name="TitleActualFrequency" xml:space="preserve">
+    <value>Поточна частота:</value>
   </data>
 </root>
