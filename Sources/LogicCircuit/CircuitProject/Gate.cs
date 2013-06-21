@@ -240,7 +240,8 @@ namespace LogicCircuit {
 				gate.Category = Properties.Resources.CategoryPrimitives;
 				break;
 			case GateType.Led:
-				gate.Name = Properties.Resources.GateLedName;
+				Tracer.Assert(inputCount == 1 || inputCount == 8);
+				gate.Name = (inputCount == 1) ? Properties.Resources.GateLedName : Properties.Resources.Gate7SegName;
 				gate.Notation = Properties.Resources.GateLedNotation;
 				gate.Category = Properties.Resources.CategoryInputOutput;
 				break;
