@@ -173,7 +173,7 @@ O arquivo que você está tentando abrir pode estar corrompido ou foi criado por
     <value>NOr</value>
   </data>
   <data name="CircuitProbeName" xml:space="preserve">
-    <value>Inspeção</value>
+    <value>Ponta de Prova</value>
   </data>
   <data name="CircuitProbeNotation" xml:space="preserve">
     <value>?</value>
@@ -413,7 +413,7 @@ Saída</value>
     <value>Opções</value>
   </data>
   <data name="TitleShowGrid" xml:space="preserve">
-    <value>Mo_strar grid</value>
+    <value>Mo_strar grade</value>
   </data>
   <data name="MessageFreeWireCount" xml:space="preserve">
     <value>Foram encontrados {0} cabos desconectados.</value>
@@ -436,7 +436,7 @@ Saída</value>
     <value>Projeto</value>
   </data>
   <data name="CommandEditSelectAllButWires" xml:space="preserve">
-    <value>Selecionar tudo menos os cabos</value>
+    <value>Selecionar tudo exceto os cabos</value>
   </data>
   <data name="CommandEditSelectAllProbes" xml:space="preserve">
     <value>Selecionar todos os conectores</value>
@@ -454,7 +454,7 @@ Saída</value>
     <value>Selecionar cabos desconectados</value>
   </data>
   <data name="CommandEditUnselectAllButWires" xml:space="preserve">
-    <value>Desselecionar tudo menos os cabos</value>
+    <value>Desselecionar tudo exceto os cabos</value>
   </data>
   <data name="CommandEditUnselectAllWires" xml:space="preserve">
     <value>Desselecionar todos os cabos</value>
@@ -484,7 +484,7 @@ Saída</value>
     <value>N_otação:</value>
   </data>
   <data name="TitleBitWidth" xml:space="preserve">
-    <value>Largura de _Bit:</value>
+    <value>Nº de _Bit:</value>
   </data>
   <data name="TitleValue" xml:space="preserve">
     <value>_Valor:</value>
@@ -499,7 +499,7 @@ Saída</value>
     <value>Dado</value>
   </data>
   <data name="TitleDataBitWidth" xml:space="preserve">
-    <value>Largura _de bits de dados:</value>
+    <value>Nº _de bits de dados:</value>
   </data>
   <data name="TitleInverted" xml:space="preserve">
     <value>_Invertido</value>
@@ -567,10 +567,10 @@ Saída</value>
     <comment>{string pinName, string symbol}</comment>
   </data>
   <data name="PowerOff" xml:space="preserve">
-    <value>Desligar</value>
+    <value>Desligado</value>
   </data>
   <data name="PowerOn" xml:space="preserve">
-    <value>Ligar</value>
+    <value>Ligado</value>
   </data>
   <data name="ProbeHistoryHex" xml:space="preserve">
     <value>{0:X}</value>
@@ -652,7 +652,7 @@ Deseja substitui-lo?</value>
     <value>...</value>
   </data>
   <data name="Gate7SegName" xml:space="preserve">
-    <value>7-segmentos</value>
+    <value>7-seg</value>
   </data>
   <data name="ReportGateName" xml:space="preserve">
     <value>{0} ({1})</value>
@@ -678,10 +678,10 @@ Deseja substitui-lo?</value>
     <value>Bits de Dados</value>
   </data>
   <data name="CaptionSplitterPinNumber" xml:space="preserve">
-    <value>Dividir Pinos</value>
+    <value>Divisor de Pinos</value>
   </data>
   <data name="CaptionSplitterDirection" xml:space="preserve">
-    <value>Combinar Pino</value>
+    <value>Pino Combinado</value>
   </data>
   <data name="CaptionSide" xml:space="preserve">
     <value>Margem</value>
@@ -726,7 +726,7 @@ Deseja substitui-lo?</value>
     <value>Projeto</value>
   </data>
   <data name="TitleRunningCircuit" xml:space="preserve">
-    <value>Circuito em Executando</value>
+    <value>Circuito em Execução</value>
   </data>
   <data name="TitleZoom" xml:space="preserve">
     <value>_Zoom:</value>
@@ -798,7 +798,7 @@ Deseja substitui-lo?</value>
     <value>Se o botão for comutável, ele irá mudar o estado a cada clique, senão quando pressionado ou despressionado.</value>
   </data>
   <data name="CommandCircuitPower" xml:space="preserve">
-    <value>Interruptor de alimentação</value>
+    <value>Chave ON-OFF</value>
   </data>
   <data name="CommandEditRotateLeft" xml:space="preserve">
     <value>Girar para a esquerda</value>
@@ -826,7 +826,7 @@ Deseja substitui-lo?</value>
     <value>Direita</value>
   </data>
   <data name="PinSideTop" xml:space="preserve">
-    <value>Topo</value>
+    <value>Superior</value>
   </data>
   <data name="CaptionSplitterBitWidth" xml:space="preserve">
     <value>Nº de bits do pino divisor</value>
@@ -847,7 +847,7 @@ Deseja substitui-lo?</value>
     <value>_Nota</value>
   </data>
   <data name="CategoryPrimitives" xml:space="preserve">
-    <value>Primitivos</value>
+    <value>Elementos</value>
   </data>
   <data name="TitleMemory" xml:space="preserve">
     <value>Memória</value>
@@ -1102,7 +1102,7 @@ Você deseja remover a referência dele da lista de Arquivos Rescentes?</value>
     <value>Padrão</value>
   </data>
   <data name="ToolTipBackgroundColor" xml:space="preserve">
-    <value>Realce</value>
+    <value>Cor de Realce</value>
   </data>
   <data name="ToolTipFontColor" xml:space="preserve">
     <value>Cor do texto</value>
@@ -1233,7 +1233,7 @@ Tal circuito não pode ser usado mais de uma vez em outros circuitos potencialme
     <value>Créditos:</value>
   </data>
   <data name="CircuitProbeToolTip" xml:space="preserve">
-    <value>Inspeção {0}</value>
+    <value>Ponta de Prova {0}</value>
   </data>
   <data name="CaptionName" xml:space="preserve">
     <value>Nome</value>
@@ -1248,6 +1248,6 @@ ou outro circuito lógico que indique elementos visuais.</value>
     <value>Frequência Atual:</value>
   </data>
   <data name="TitleIsDisplay" xml:space="preserve">
-    <value>Exibir elementos visuais nos símbolos</value>
+    <value>Amostrar elementos visuais no símbolo</value>
   </data>
 </root>
