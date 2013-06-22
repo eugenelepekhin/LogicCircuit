@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -122,8 +122,8 @@
   </data>
   <data name="ErrorUnknownVersion" xml:space="preserve">
     <value>Poging tot het laden van een onbekende versie van Circuit project.
-Het bestand dat je probeert te openen is of beschadigd of is met een nieuwere versie van Logic Circuit software gemaakt. Controleer &lt;Hyperlink
-The file you are trying to open either corrupted or it was created by newer version of Logic Circuit software. Please check &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt; voor een nieuwere versie.</value>
+Het bestand dat je probeert te openen is of beschadigd of is met een nieuwere versie van Logic Circuit software gemaakt.
+Controleer &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt; voor een nieuwere versie.</value>
   </data>
   <data name="FileFilter" xml:space="preserve">
     <value>Circuit Project (*{0})|*{0}|Alle bestanden (*.*)|*.*</value>
@@ -1232,5 +1232,20 @@ Zo een circuit kan meerdere keren gebruikt worden bij andere circuits omdat pote
   </data>
   <data name="TitleCredits" xml:space="preserve">
     <value>Credits:</value>
+  </data>
+  <data name="CaptionName" xml:space="preserve">
+    <value>Naam</value>
+  </data>
+  <data name="CircuitProbeToolTip" xml:space="preserve">
+    <value>Probe {0}</value>
+  </data>
+  <data name="TitleActualFrequency" xml:space="preserve">
+    <value>Aktuele frequentie:</value>
+  </data>
+  <data name="ToolTipIsDisplay" xml:space="preserve">
+    <value>Als je in Logic Circuit aangeeft dat je visuele elementen wilt weergeven
+dan zullen alle display symbolen van het circuit live zichtbaar zijn.
+Dispay's zijn: LED, LED Matrix, Button of ander elementen
+die visuele weergave mogelijkheden hebben.</value>
   </data>
 </root>
