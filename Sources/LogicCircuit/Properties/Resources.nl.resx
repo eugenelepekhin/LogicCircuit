@@ -1248,4 +1248,7 @@ dan zullen alle display symbolen van het circuit live zichtbaar zijn.
 Dispay's zijn: LED, LED Matrix, Button of ander elementen
 die visuele weergave mogelijkheden hebben.</value>
   </data>
+  <data name="TitleIsDisplay" xml:space="preserve">
+    <value>Geef visuele elementen weer op het symbool</value>
+  </data>
 </root>
