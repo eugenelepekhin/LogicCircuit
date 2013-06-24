@@ -65,6 +65,7 @@
 						</Style>
 					</WrapPanel.Resources>
 					
+					<TextBlock>Clayrton Henrique</TextBlock>
 					<TextBlock>Daehyun Yang</TextBlock>
 					<TextBlock>David Chastant</TextBlock>
 					<TextBlock>Emanuele Pirro</TextBlock>
