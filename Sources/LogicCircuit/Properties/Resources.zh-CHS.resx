@@ -1058,9 +1058,6 @@
   <data name="ToolTipIsDisplay" xml:space="preserve">
     <value>当你标注逻辑电路显示视觉元素时，所有的视觉符号都会显示在电路示意图上，包括：LED，LED矩阵，按钮和其他逻辑电路。</value>
   </data>
-  <data name="FlowDirection" xml:space="preserve">
-    <value>LeftToRight</value>
-  </data>
   <data name="GateAndNotation" xml:space="preserve">
     <value>&amp;</value>
   </data>

@@ -1141,9 +1141,6 @@ Les éléments sont : LED, Matrise de LED, Bouton, ou autre circuit logique.</va
   <data name="GridPoint" xml:space="preserve">
     <value>({0}, {1})</value>
   </data>
-  <data name="FlowDirection" xml:space="preserve">
-    <value>LeftToRight</value>
-  </data>
   <data name="CircuitProbeNotation" xml:space="preserve">
     <value>?</value>
   </data>

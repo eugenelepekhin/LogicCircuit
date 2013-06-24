@@ -1085,9 +1085,6 @@
 Дисплеи это - светодиод, светодиодная матрица, кнопка или
 другие логические схемы отображающие свои визуальные элементы.</value>
   </data>
-  <data name="FlowDirection" xml:space="preserve">
-    <value>LeftToRight</value>
-  </data>
   <data name="GateAndNotation" xml:space="preserve">
     <value>&amp;</value>
   </data>

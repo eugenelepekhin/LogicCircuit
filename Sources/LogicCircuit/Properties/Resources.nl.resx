@@ -133,10 +133,6 @@ Controleer &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://ww
     <value>Bestand {0} opgeslagen.</value>
     <comment>{string fileName}</comment>
   </data>
-  <data name="FlowDirection" xml:space="preserve">
-    <value>LeftToRight</value>
-    <comment>!(LeftToRight, RightToLeft) - choose layout direction for your culture.</comment>
-  </data>
   <data name="GateAndName" xml:space="preserve">
     <value>And</value>
   </data>

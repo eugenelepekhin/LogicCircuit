@@ -52,6 +52,7 @@ namespace ResourceWrapper.Generator
 	using System.Reflection;
 	using System.Resources;
 	using System.Runtime.CompilerServices;
+	using System.Windows;
 
 	/// <summary>
 	/// A strongly-typed resource class, for looking up localized strings, etc.
@@ -63,14 +64,14 @@ namespace ResourceWrapper.Generator
 	[CompilerGeneratedAttribute()]
 	");
             
-            #line 30 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+            #line 31 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.IsPublic ? "public" : "internal"));
             
             #line default
             #line hidden
             this.Write(" static class ");
             
-            #line 30 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+            #line 31 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.ClassName));
             
             #line default
@@ -84,9 +85,68 @@ namespace ResourceWrapper.Generator
 		[EditorBrowsableAttribute(EditorBrowsableState.Advanced)]
 		public static CultureInfo Culture { get; set; }
 
-		private static ");
+");
             
-            #line 39 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+            #line 40 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+if(this.Pseudo) {
+            
+            #line default
+            #line hidden
+            this.Write("\t\tprivate static bool isRightToLeft = ((Environment.TickCount / 500) & 1) == 0;\r\n" +
+                    "");
+            
+            #line 42 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+}
+            
+            #line default
+            #line hidden
+            this.Write("\t\tpublic static FlowDirection FlowDirection {\r\n\t\t\tget {\r\n");
+            
+            #line 45 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+if(!this.Pseudo) {
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t\tbool isRightToLeft;\r\n\t\t\t\tif(");
+            
+            #line 47 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write(".Culture != null && ");
+            
+            #line 47 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write(".Culture.TextInfo != null) {\r\n\t\t\t\t\tisRightToLeft = ");
+            
+            #line 48 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write(@".Culture.TextInfo.IsRightToLeft;
+				} else if(CultureInfo.CurrentUICulture != null && CultureInfo.CurrentUICulture.TextInfo != null) {
+					isRightToLeft = CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft;
+				} else if(CultureInfo.CurrentCulture != null && CultureInfo.CurrentCulture.TextInfo != null) {
+					isRightToLeft = CultureInfo.CurrentCulture.TextInfo.IsRightToLeft;
+				} else {
+					isRightToLeft = false;
+				}
+");
+            
+            #line 56 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+}
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t\treturn isRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;" +
+                    "\r\n\t\t\t}\r\n\t\t}\r\n\r\n\t\tprivate static ");
+            
+            #line 61 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Pseudo ? "Pseudo" : ""));
             
             #line default
@@ -102,28 +162,28 @@ namespace ResourceWrapper.Generator
 				if(resourceManager == null) {
 					resourceManager = new ");
             
-            #line 48 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+            #line 70 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Pseudo ? "Pseudo" : ""));
             
             #line default
             #line hidden
             this.Write("ResourceManager(\"");
             
-            #line 48 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+            #line 70 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.ResourceName));
             
             #line default
             #line hidden
             this.Write("\", typeof(");
             
-            #line 48 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+            #line 70 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.ClassName));
             
             #line default
             #line hidden
             this.Write(").Assembly);\r\n\t\t\t\t}\r\n\t\t\t\treturn resourceManager;\r\n\t\t\t}\r\n\t\t}\r\n");
             
-            #line 53 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+            #line 75 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
 if(this.Pseudo) {
             
             #line default
@@ -164,138 +224,138 @@ if(this.Pseudo) {
                     "\t\t\t\t\t}\r\n\t\t\t\t\t}\r\n\t\t\t\t\treturn \"[===\" + new string(result) + \"===]\";\r\n\t\t\t\t}\r\n\t\t\t\tre" +
                     "turn text;\r\n\t\t\t}\r\n\t\t}\r\n");
             
-            #line 164 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+            #line 186 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
 }
             
             #line default
             #line hidden
             
-            #line 165 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+            #line 187 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
 foreach(ResourceItem item in this.Items) {
             
             #line default
             #line hidden
             this.Write("\r\n\t\t/// <summary>\r\n\t\t/// Looks up a localized string similar to ");
             
-            #line 168 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+            #line 190 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Comment));
             
             #line default
             #line hidden
             this.Write(".\r\n\t\t/// </summary>\r\n");
             
-            #line 170 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+            #line 192 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
 	if(item.Parameters != null) {
             
             #line default
             #line hidden
             this.Write(" \t\tpublic static string ");
             
-            #line 171 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+            #line 193 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 171 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+            #line 193 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ParametersDeclaration));
             
             #line default
             #line hidden
             this.Write(") {\r\n\t\t\treturn string.Format(Culture, ");
             
-            #line 172 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+            #line 194 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.GetStringExpression(this.Pseudo)));
             
             #line default
             #line hidden
             this.Write("\"");
             
-            #line 172 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+            #line 194 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write("\", Culture), ");
             
-            #line 172 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+            #line 194 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ParametersInvocation));
             
             #line default
             #line hidden
             this.Write(");\r\n\t\t}\r\n");
             
-            #line 174 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+            #line 196 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
 	} else if(item.Type == "string") {
             
             #line default
             #line hidden
             this.Write(" \t\tpublic static string ");
             
-            #line 175 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+            #line 197 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write(" {\r\n\t\t\tget { return ");
             
-            #line 176 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+            #line 198 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.GetStringExpression(this.Pseudo)));
             
             #line default
             #line hidden
             this.Write("\"");
             
-            #line 176 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+            #line 198 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write("\", Culture); }\r\n\t\t}\r\n");
             
-            #line 178 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+            #line 200 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
 	} else {
             
             #line default
             #line hidden
             this.Write(" \t\tpublic static ");
             
-            #line 179 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+            #line 201 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Type));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 179 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+            #line 201 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write(" {\r\n\t\t\tget { return (");
             
-            #line 180 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+            #line 202 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Type));
             
             #line default
             #line hidden
             this.Write(")ResourceManager.GetObject(\"");
             
-            #line 180 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+            #line 202 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write("\", Culture); }\r\n\t\t}\r\n");
             
-            #line 182 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+            #line 204 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
 	}
             
             #line default
             #line hidden
             
-            #line 183 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
+            #line 205 "C:\Eugene\Projects\LogicCircuit\LogicCircuit\Work\Sources\Tools\ResourceWrapper.Generator\ResourcesWrapper.tt"
 }
             
             #line default

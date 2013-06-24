@@ -444,9 +444,6 @@
   <data name="FileSaved" xml:space="preserve">
     <value>{0}이 저장되었습니다.</value>
   </data>
-  <data name="FlowDirection" xml:space="preserve">
-    <value>LeftToRight</value>
-  </data>
   <data name="GateShapeRectangular" xml:space="preserve">
     <value>직사각형</value>
   </data>

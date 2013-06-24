@@ -16,6 +16,7 @@ namespace LogicCircuit.Properties {
 	using System.Reflection;
 	using System.Resources;
 	using System.Runtime.CompilerServices;
+	using System.Windows;
 
 	/// <summary>
 	/// A strongly-typed resource class, for looking up localized strings, etc.
@@ -33,6 +34,22 @@ namespace LogicCircuit.Properties {
 		/// </summary>
 		[EditorBrowsableAttribute(EditorBrowsableState.Advanced)]
 		public static CultureInfo Culture { get; set; }
+
+		public static FlowDirection FlowDirection {
+			get {
+				bool isRightToLeft;
+				if(Resources.Culture != null && Resources.Culture.TextInfo != null) {
+					isRightToLeft = Resources.Culture.TextInfo.IsRightToLeft;
+				} else if(CultureInfo.CurrentUICulture != null && CultureInfo.CurrentUICulture.TextInfo != null) {
+					isRightToLeft = CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft;
+				} else if(CultureInfo.CurrentCulture != null && CultureInfo.CurrentCulture.TextInfo != null) {
+					isRightToLeft = CultureInfo.CurrentCulture.TextInfo.IsRightToLeft;
+				} else {
+					isRightToLeft = false;
+				}
+				return isRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
+			}
+		}
 
 		private static ResourceManager resourceManager;
 
@@ -76,13 +93,6 @@ namespace LogicCircuit.Properties {
 		/// </summary>
  		public static string FileSaved(string fileName) {
 			return string.Format(Culture, ResourceManager.GetString("FileSaved", Culture), fileName);
-		}
-
-		/// <summary>
-		/// Looks up a localized string similar to LeftToRight.
-		/// </summary>
- 		public static string FlowDirection {
-			get { return ResourceManager.GetString("FlowDirection", Culture); }
 		}
 
 		/// <summary>

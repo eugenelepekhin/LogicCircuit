@@ -132,10 +132,6 @@ A fájl, amit be kívánsz tölteni vagy sérült vagy egy újabb verziójú  Lo
     <value>A fáj {0} mentett.</value>
     <comment>{string fileName}</comment>
   </data>
-  <data name="FlowDirection" xml:space="preserve">
-    <value>LeftToRight</value>
-    <comment>!(LeftToRight, RightToLeft) - choose layout direction for your culture.</comment>
-  </data>
   <data name="GateAndName" xml:space="preserve">
     <value>And</value>
   </data>

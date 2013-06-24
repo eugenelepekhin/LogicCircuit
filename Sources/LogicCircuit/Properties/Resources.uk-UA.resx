@@ -1027,9 +1027,6 @@
   <data name="CaptionColumns" xml:space="preserve">
     <value>Стовпчиків</value>
   </data>
-  <data name="FlowDirection" xml:space="preserve">
-    <value>LeftToRight</value>
-  </data>
   <data name="FunctionParameter" xml:space="preserve">
     <value>Функція {0} потребує хоча б {1} параметр(ів)</value>
   </data>

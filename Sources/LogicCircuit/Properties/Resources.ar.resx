@@ -129,9 +129,6 @@
   <data name="FileSaved" xml:space="preserve">
     <value>تم حفظ الملف ,{0}.</value>
   </data>
-  <data name="FlowDirection" xml:space="preserve">
-    <value>RightToLeft</value>
-  </data>
   <data name="CategoryInputOutput" xml:space="preserve">
     <value>دخل - خرج</value>
   </data>

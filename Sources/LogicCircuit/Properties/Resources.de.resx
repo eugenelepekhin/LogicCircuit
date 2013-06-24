@@ -987,9 +987,6 @@ Eine solche Schaltung kann nicht mehr als einmal verwendet werden, da eventuell 
   <data name="LogicalCircuitMainNotation" xml:space="preserve">
     <value>Haupt-Schaltung</value>
   </data>
-  <data name="FlowDirection" xml:space="preserve">
-    <value>LeftToRight</value>
-  </data>
   <data name="TitleIsDisplay" xml:space="preserve">
     <value>Opti_sche Elemente im Projektbereich anzeigen</value>
   </data>

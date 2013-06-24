@@ -16,6 +16,7 @@ namespace LogicCircuit {
 	using System.Reflection;
 	using System.Resources;
 	using System.Runtime.CompilerServices;
+	using System.Windows;
 
 	/// <summary>
 	/// A strongly-typed resource class, for looking up localized strings, etc.
@@ -33,6 +34,22 @@ namespace LogicCircuit {
 		/// </summary>
 		[EditorBrowsableAttribute(EditorBrowsableState.Advanced)]
 		public static CultureInfo Culture { get; set; }
+
+		public static FlowDirection FlowDirection {
+			get {
+				bool isRightToLeft;
+				if(Schema.Culture != null && Schema.Culture.TextInfo != null) {
+					isRightToLeft = Schema.Culture.TextInfo.IsRightToLeft;
+				} else if(CultureInfo.CurrentUICulture != null && CultureInfo.CurrentUICulture.TextInfo != null) {
+					isRightToLeft = CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft;
+				} else if(CultureInfo.CurrentCulture != null && CultureInfo.CurrentCulture.TextInfo != null) {
+					isRightToLeft = CultureInfo.CurrentCulture.TextInfo.IsRightToLeft;
+				} else {
+					isRightToLeft = false;
+				}
+				return isRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
+			}
+		}
 
 		private static ResourceManager resourceManager;
 

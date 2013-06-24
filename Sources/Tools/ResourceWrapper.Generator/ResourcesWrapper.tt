@@ -18,6 +18,7 @@ namespace <#=this.NameSpace#> {
 	using System.Reflection;
 	using System.Resources;
 	using System.Runtime.CompilerServices;
+	using System.Windows;
 
 	/// <summary>
 	/// A strongly-typed resource class, for looking up localized strings, etc.
@@ -35,6 +36,27 @@ namespace <#=this.NameSpace#> {
 		/// </summary>
 		[EditorBrowsableAttribute(EditorBrowsableState.Advanced)]
 		public static CultureInfo Culture { get; set; }
+
+<#if(this.Pseudo) {#>
+		private static bool isRightToLeft = ((Environment.TickCount / 500) & 1) == 0;
+<#}#>
+		public static FlowDirection FlowDirection {
+			get {
+<#if(!this.Pseudo) {#>
+				bool isRightToLeft;
+				if(<#=this.ClassName#>.Culture != null && <#=this.ClassName#>.Culture.TextInfo != null) {
+					isRightToLeft = <#=this.ClassName#>.Culture.TextInfo.IsRightToLeft;
+				} else if(CultureInfo.CurrentUICulture != null && CultureInfo.CurrentUICulture.TextInfo != null) {
+					isRightToLeft = CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft;
+				} else if(CultureInfo.CurrentCulture != null && CultureInfo.CurrentCulture.TextInfo != null) {
+					isRightToLeft = CultureInfo.CurrentCulture.TextInfo.IsRightToLeft;
+				} else {
+					isRightToLeft = false;
+				}
+<#}#>
+				return isRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
+			}
+		}
 
 		private static <#=this.Pseudo ? "Pseudo" : ""#>ResourceManager resourceManager;
 

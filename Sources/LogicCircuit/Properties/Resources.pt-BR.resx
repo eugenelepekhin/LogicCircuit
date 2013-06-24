@@ -132,10 +132,6 @@ O arquivo que você está tentando abrir pode estar corrompido ou foi criado por
     <value>Arquivo {0} salvo.</value>
     <comment>{string fileName}</comment>
   </data>
-  <data name="FlowDirection" xml:space="preserve">
-    <value>LeftToRight</value>
-    <comment>!(LeftToRight, RightToLeft) - choose layout direction for your culture.</comment>
-  </data>
   <data name="GateAndName" xml:space="preserve">
     <value>And</value>
   </data>

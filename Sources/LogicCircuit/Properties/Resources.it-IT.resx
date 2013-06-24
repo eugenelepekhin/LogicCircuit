@@ -132,10 +132,6 @@ Il file che si sta tentando di aprire è danneggiato o è stato creato da una ve
     <value>Il file {0} è stato salvato.</value>
     <comment>{string fileName}</comment>
   </data>
-  <data name="FlowDirection" xml:space="preserve">
-    <value>LeftToRight</value>
-    <comment>!(LeftToRight, RightToLeft) - choose layout direction for your culture.</comment>
-  </data>
   <data name="GateAndName" xml:space="preserve">
     <value>And</value>
   </data>

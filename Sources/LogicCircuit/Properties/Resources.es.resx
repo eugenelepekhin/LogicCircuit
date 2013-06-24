@@ -425,10 +425,6 @@ El archivo que intenta abrir puede estar dañado o fue creado en una versión m�
     <value>Archivo {0} guardado.</value>
     <comment>{string fileName}</comment>
   </data>
-  <data name="FlowDirection" xml:space="preserve">
-    <value>LeftToRight</value>
-    <comment>!(LeftToRight, RightToLeft) - selecciona la orientación.</comment>
-  </data>
   <data name="FunctionParameter" xml:space="preserve">
     <value>La función {0} requiere al menos {1} parámetro(s).</value>
     <comment>{string function, int parameterCount}</comment>

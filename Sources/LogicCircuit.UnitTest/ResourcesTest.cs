@@ -49,8 +49,7 @@ namespace LogicCircuit.UnitTest {
 			string[] names = Enum.GetNames(typeof(FlowDirection));
 			foreach(CultureInfo culture in App.AvailableCultures) {
 				Resources.Culture = culture;
-				string actual = Resources.FlowDirection;
-				Assert.IsTrue(names.Contains(actual, StringComparer.Ordinal), "FlowDirection for \"{0}\" is invalid", culture.Name);
+				Assert.IsTrue(EnumHelper.IsValid(Resources.FlowDirection), "FlowDirection for \"{0}\" is invalid", culture.Name);
 			}
 		}
 
