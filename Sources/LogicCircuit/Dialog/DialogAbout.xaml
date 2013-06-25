@@ -42,7 +42,7 @@
 				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
 
-			<Image Grid.Column="0" Name="image" Margin="32,16,16,16" Source="..\Properties\LogicCircuit.png"/>
+			<Image Grid.Column="0" Name="image" Margin="32,20,16,20" Source="..\Properties\LogicCircuit.png"/>
 
 			<Grid Grid.Column="1" MaxHeight="{Binding ElementName=image, Path=ActualHeight}" VerticalAlignment="Center">
 				<Grid.RowDefinitions>
@@ -52,7 +52,7 @@
 				</Grid.RowDefinitions>
 				<TextBlock Grid.Row="0"
 					Text="{x:Static properties:Resources.TitleApplication}" HorizontalAlignment="Left"
-					FontSize="36" FontWeight="Bold" Margin="5,10,64,10"
+					FontSize="36" FontWeight="Bold" Margin="5,5,64,5"
 				/>
 
 				<TextBlock Grid.Row="1" Text="{x:Static properties:Resources.TitleCredits}" Style="{StaticResource BigText}"/>
@@ -71,6 +71,7 @@
 					<TextBlock>Emanuele Pirro</TextBlock>
 					<TextBlock>Eugene Lepekhin</TextBlock>
 					<TextBlock>Fernando Perulles Aguilar</TextBlock>
+					<TextBlock>Gábor Ruzsinszki</TextBlock>
 					<TextBlock>Gé Brander</TextBlock>
 					<TextBlock>Jinshik Bae</TextBlock>
 					<TextBlock>Jongbin Han</TextBlock>
