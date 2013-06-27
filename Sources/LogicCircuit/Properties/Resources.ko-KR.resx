@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -689,7 +689,7 @@
     <value>쓰기:</value>
   </data>
   <data name="TitleOscilloscope" xml:space="preserve">
-    <value>논리회로 Oscilloscope</value>
+    <value>논리회로 오실로스코프</value>
   </data>
   <data name="TitleUncheckAll" xml:space="preserve">
     <value>선택되지 않은 항목</value>
@@ -987,5 +987,200 @@
   </data>
   <data name="ParserErrorUnexpected" xml:space="preserve">
     <value>{0} 예상치 못한 에러</value>
+  </data>
+  <data name="FileFilter" xml:space="preserve">
+    <value>Circuit Project (*{0})|*{0}|All files (*.*)|*.*</value>
+  </data>
+  <data name="GateAndName" xml:space="preserve">
+    <value>And</value>
+  </data>
+  <data name="GateAndNotation" xml:space="preserve">
+    <value>&amp;</value>
+  </data>
+  <data name="GateClockNotation" xml:space="preserve">
+    <value>ω</value>
+  </data>
+  <data name="GateLedName" xml:space="preserve">
+    <value>LED</value>
+  </data>
+  <data name="GateLedNotation" xml:space="preserve">
+    <value>LED</value>
+  </data>
+  <data name="GateNotNotation" xml:space="preserve">
+    <value>~</value>
+  </data>
+  <data name="GateOrNotation" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="CircuitProbeNotation" xml:space="preserve">
+    <value>?</value>
+  </data>
+  <data name="GateTriStateName" xml:space="preserve">
+    <value>Tri-state</value>
+  </data>
+  <data name="GateTriStateNotation" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="GateXorName" xml:space="preserve">
+    <value>Xor</value>
+  </data>
+  <data name="GateXorNotation" xml:space="preserve">
+    <value>=</value>
+  </data>
+  <data name="GateXorNotName" xml:space="preserve">
+    <value>XNor</value>
+  </data>
+  <data name="Led7Pin1" xml:space="preserve">
+    <value>a</value>
+  </data>
+  <data name="Led7Pin2" xml:space="preserve">
+    <value>b</value>
+  </data>
+  <data name="Led7Pin3" xml:space="preserve">
+    <value>c</value>
+  </data>
+  <data name="Led7Pin4" xml:space="preserve">
+    <value>d</value>
+  </data>
+  <data name="Led7Pin5" xml:space="preserve">
+    <value>e</value>
+  </data>
+  <data name="Led7Pin6" xml:space="preserve">
+    <value>f</value>
+  </data>
+  <data name="Led7Pin7" xml:space="preserve">
+    <value>g</value>
+  </data>
+  <data name="MemoryAddressPinNotation" xml:space="preserve">
+    <value>a</value>
+  </data>
+  <data name="MemoryDataPinNotation" xml:space="preserve">
+    <value>d</value>
+  </data>
+  <data name="MemoryWritePinNotation" xml:space="preserve">
+    <value>w</value>
+  </data>
+  <data name="PinEnableName" xml:space="preserve">
+    <value>E</value>
+  </data>
+  <data name="PinInName" xml:space="preserve">
+    <value>x</value>
+  </data>
+  <data name="PinOutName" xml:space="preserve">
+    <value>q</value>
+  </data>
+  <data name="ConstantNotation" xml:space="preserve">
+    <value>{0:X}</value>
+  </data>
+  <data name="RAMNotation" xml:space="preserve">
+    <value>RAM</value>
+  </data>
+  <data name="ROMNotation" xml:space="preserve">
+    <value>ROM</value>
+  </data>
+  <data name="TitleAbout" xml:space="preserve">
+    <value>정보</value>
+  </data>
+  <data name="WebSiteUri" xml:space="preserve">
+    <value>http://www.logiccircuit.org/</value>
+  </data>
+  <data name="HelpContent" xml:space="preserve">
+    <value>http://www.logiccircuit.org/help.html</value>
+  </data>
+  <data name="CircuitMapPathSeparator" xml:space="preserve">
+    <value>/</value>
+  </data>
+  <data name="ProbeHistoryHex" xml:space="preserve">
+    <value>{0:X}</value>
+  </data>
+  <data name="ProbeHistoryMark" xml:space="preserve">
+    <value>&lt;&lt;&lt;&lt;&lt;&lt; Mark &gt;&gt;&gt;&gt;&gt;&gt;</value>
+  </data>
+  <data name="TitleOscilloscoping" xml:space="preserve">
+    <value>_Oscilloscoping</value>
+  </data>
+  <data name="TitleFileOpen" xml:space="preserve">
+    <value>...</value>
+  </data>
+  <data name="Gate7SegName" xml:space="preserve">
+    <value>7-seg</value>
+  </data>
+  <data name="ReportGateName" xml:space="preserve">
+    <value>{0} ({1})</value>
+  </data>
+  <data name="TriStateGroupName" xml:space="preserve">
+    <value>Tri-state group</value>
+  </data>
+  <data name="CategoryDuplicate" xml:space="preserve">
+    <value>{0} 2</value>
+  </data>
+  <data name="Bit0" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Bit1" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="GridPoint" xml:space="preserve">
+    <value>({0}, {1})</value>
+  </data>
+  <data name="WebSiteDownloadUri" xml:space="preserve">
+    <value>http://www.logiccircuit.org/download.html</value>
+  </data>
+  <data name="TitleIsDisplay" xml:space="preserve">
+    <value>회로의 모습을 시각적인 형태로 표시</value>
+  </data>
+  <data name="ToolTipIsDisplay" xml:space="preserve">
+    <value>선택 시 화면의 모든 회로의 모습(LED, LED 행렬, 버튼, 다른 회로 등)이 시각적인 형태로 표시됩니다.</value>
+  </data>
+  <data name="CaptionName" xml:space="preserve">
+    <value>이름</value>
+  </data>
+  <data name="CircuitProbeToolTip" xml:space="preserve">
+    <value>프로브 {0}</value>
+  </data>
+  <data name="TitleActualFrequency" xml:space="preserve">
+    <value>실제 주파수:</value>
+  </data>
+  <data name="GateAndNotName" xml:space="preserve">
+    <value>NAnd</value>
+  </data>
+  <data name="GateNotName" xml:space="preserve">
+    <value>Not</value>
+  </data>
+  <data name="GateOrName" xml:space="preserve">
+    <value>Or</value>
+  </data>
+  <data name="GateOrNotName" xml:space="preserve">
+    <value>NOr</value>
+  </data>
+  <data name="MainFrameCaption" xml:space="preserve">
+    <value>Logical Circuit {0}</value>
+  </data>
+  <data name="TitleApplication" xml:space="preserve">
+    <value>Logical Circuit</value>
+  </data>
+  <data name="CommandToolsOscilloscope" xml:space="preserve">
+    <value>Oscilloscope</value>
+  </data>
+  <data name="LogicalCircuitMainName" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="Oscillation" xml:space="preserve">
+    <value>Oscillation</value>
+  </data>
+  <data name="TitleOscillogram" xml:space="preserve">
+    <value>오실로그램</value>
+  </data>
+  <data name="TitleMemory" xml:space="preserve">
+    <value>Memory</value>
+  </data>
+  <data name="LogicalCircuitMainNotation" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="PinTypeNameNone" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="ParserErrorUnclosedQuote" xml:space="preserve">
+    <value>인용식별자에 닫힘이 없습니다. {0}</value>
   </data>
 </root>
