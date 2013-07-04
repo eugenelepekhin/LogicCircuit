@@ -175,10 +175,10 @@ O arquivo que você está tentando abrir pode estar corrompido ou foi criado por
     <value>?</value>
   </data>
   <data name="GateShapeRectangular" xml:space="preserve">
-    <value>Retangular</value>
+    <value>Em blocos</value>
   </data>
   <data name="GateShapeShaped" xml:space="preserve">
-    <value>Shaped</value>
+    <value>Convencional</value>
   </data>
   <data name="GateTriStateName" xml:space="preserve">
     <value>Tri-state</value>
@@ -187,13 +187,13 @@ O arquivo que você está tentando abrir pode estar corrompido ou foi criado por
     <value>1</value>
   </data>
   <data name="GateXorName" xml:space="preserve">
-    <value>Xor</value>
+    <value>XOR</value>
   </data>
   <data name="GateXorNotation" xml:space="preserve">
     <value>=</value>
   </data>
   <data name="GateXorNotName" xml:space="preserve">
-    <value>XNor</value>
+    <value>XNOR</value>
   </data>
   <data name="Led7Pin1" xml:space="preserve">
     <value>a</value>
@@ -379,7 +379,7 @@ Saída</value>
     <value>Sobre</value>
   </data>
   <data name="TitleApplication" xml:space="preserve">
-    <value>Logical Circuit</value>
+    <value>Logic Circuit</value>
   </data>
   <data name="TitleVersion" xml:space="preserve">
     <value>Versão:</value>
@@ -794,7 +794,7 @@ Deseja substitui-lo?</value>
     <value>Se o botão for comutável, ele irá mudar o estado a cada clique, senão quando pressionado ou despressionado.</value>
   </data>
   <data name="CommandCircuitPower" xml:space="preserve">
-    <value>Chave ON-OFF</value>
+    <value>Liga/Desliga Circuito</value>
   </data>
   <data name="CommandEditRotateLeft" xml:space="preserve">
     <value>Girar para a esquerda</value>
@@ -1020,7 +1020,7 @@ Você deseja remover a referência dele da lista de Arquivos Rescentes?</value>
     <comment>!(Rectangular, Shaped) - chose default gate shape for your culture.</comment>
   </data>
   <data name="CommandTruthTable" xml:space="preserve">
-    <value>Tabela-Verdade</value>
+    <value>Tabela Verdade</value>
   </data>
   <data name="MessageInputOutputPinsMissing" xml:space="preserve">
     <value>Não há pinos de entrada ou saída neste circuito. As tabelas-verdade são construídas através do envio de todas as permutações de dados para os pinos de entrada e realizando a leitura dos resultados nos pinos de saída.</value>
