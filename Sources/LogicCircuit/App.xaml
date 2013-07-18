@@ -96,7 +96,7 @@
 			</LinearGradientBrush>
 
 			<Style x:Key="DialogFixedWindow" TargetType="{x:Type Window}">
-				<Setter Property="FlowDirection" Value="{Binding Source={x:Static properties:Resources.FlowDirection}, Mode=OneTime}"/>
+				<Setter Property="FlowDirection" Value="{x:Static properties:Resources.FlowDirection}"/>
 				<Setter Property="Background" Value="{StaticResource WindowBackground}"/>
 				<Setter Property="ResizeMode" Value="NoResize"/>
 				<Setter Property="WindowStyle" Value="SingleBorderWindow"/>
@@ -105,7 +105,7 @@
 			</Style>
 
 			<Style x:Key="DialogWindow" TargetType="{x:Type Window}">
-				<Setter Property="FlowDirection" Value="{Binding Source={x:Static properties:Resources.FlowDirection}, Mode=OneTime}"/>
+				<Setter Property="FlowDirection" Value="{x:Static properties:Resources.FlowDirection}"/>
 				<Setter Property="Background" Value="{StaticResource WindowBackground}"/>
 				<Setter Property="ResizeMode" Value="CanResizeWithGrip"/>
 				<Setter Property="WindowStyle" Value="SingleBorderWindow"/>
@@ -151,7 +151,7 @@
 					<DataTrigger Binding="{Binding Path=ShowGrid}" Value="True">
 						<Setter Property="Background">
 							<Setter.Value>
-								<DrawingBrush Viewport="{Binding Source={x:Static lc:Symbol.LogicalCircuitBackgroundTile}}" ViewportUnits="Absolute" TileMode="Tile">
+								<DrawingBrush Viewport="{x:Static lc:Symbol.LogicalCircuitBackgroundTile}" ViewportUnits="Absolute" TileMode="Tile">
 									<DrawingBrush.Drawing>
 										<DrawingGroup>
 											<GeometryDrawing Brush="White">

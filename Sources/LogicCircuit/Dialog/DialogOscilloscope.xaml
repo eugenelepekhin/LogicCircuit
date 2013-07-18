@@ -4,7 +4,7 @@
 	xmlns:lc="clr-namespace:LogicCircuit"
 	xmlns:properties="clr-namespace:LogicCircuit.Properties"
 	WindowStartupLocation="Manual"
-	Title="{Binding Source={x:Static properties:Resources.TitleOscilloscope}, Mode=OneTime}"
+	Title="{x:Static properties:Resources.TitleOscilloscope}"
 	WindowStyle="ToolWindow"
 	Style="{DynamicResource DialogWindow}"
 	Name="dialog"
@@ -59,9 +59,9 @@
 			<ListView.View>
 				<GridView>
 					<GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Width="Auto"
-						Header="{Binding Source={x:Static properties:Resources.CircuitProbeName}, Mode=OneTime}"
+						Header="{x:Static properties:Resources.CircuitProbeName}"
 					/>
-					<GridViewColumn Header="{Binding Source={x:Static properties:Resources.TitleOscillogram}, Mode=OneTime}">
+					<GridViewColumn Header="{x:Static properties:Resources.TitleOscillogram}">
 						<GridViewColumn.CellTemplate>
 							<DataTemplate>
 								<Grid Style="{StaticResource OscillogramStyle}">
@@ -84,9 +84,9 @@
 											<RowDefinition Height="*"/>
 											<RowDefinition Height="*"/>
 										</Grid.RowDefinitions>
-										<TextBlock Grid.Row="0" Text="{Binding Source={x:Static properties:Resources.Bit1}, Mode=OneTime}" HorizontalAlignment="Right"/>
-										<TextBlock Grid.Row="1" Text="{Binding Source={x:Static properties:Resources.Bit0}, Mode=OneTime}" HorizontalAlignment="Right"/>
-										<TextBlock Grid.Row="2" Text="{Binding Source={x:Static properties:Resources.BitOff}, Mode=OneTime}" HorizontalAlignment="Right"/>
+										<TextBlock Grid.Row="0" Text="{x:Static properties:Resources.Bit1}" HorizontalAlignment="Right"/>
+										<TextBlock Grid.Row="1" Text="{x:Static properties:Resources.Bit0}" HorizontalAlignment="Right"/>
+										<TextBlock Grid.Row="2" Text="{x:Static properties:Resources.BitOff}" HorizontalAlignment="Right"/>
 									</Grid>
 									<ContentControl Grid.Column="1" Content="{Binding Path=Line}" Margin="0,8,0,8"
 										HorizontalAlignment="Stretch" VerticalAlignment="Top"
@@ -98,9 +98,9 @@
 											<RowDefinition Height="*"/>
 											<RowDefinition Height="*"/>
 										</Grid.RowDefinitions>
-										<TextBlock Grid.Row="0" Text="{Binding Source={x:Static properties:Resources.Bit1}, Mode=OneTime}"/>
-										<TextBlock Grid.Row="1" Text="{Binding Source={x:Static properties:Resources.Bit0}, Mode=OneTime}"/>
-										<TextBlock Grid.Row="2" Text="{Binding Source={x:Static properties:Resources.BitOff}, Mode=OneTime}"/>
+										<TextBlock Grid.Row="0" Text="{x:Static properties:Resources.Bit1}"/>
+										<TextBlock Grid.Row="1" Text="{x:Static properties:Resources.Bit0}"/>
+										<TextBlock Grid.Row="2" Text="{x:Static properties:Resources.BitOff}"/>
 									</Grid>
 								</Grid>
 							</DataTemplate>
@@ -112,7 +112,7 @@
 
 		<CheckBox Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center"
 			IsChecked="{Binding Path=CircuitRunner.Oscilloscoping, Mode=TwoWay}"
-			Content="{Binding Source={x:Static properties:Resources.TitleOscilloscoping}, Mode=OneTime}"
+			Content="{x:Static properties:Resources.TitleOscilloscoping}"
 		/>
 	</Grid>
 </Window>

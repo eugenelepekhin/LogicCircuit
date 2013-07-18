@@ -4,7 +4,7 @@
 	xmlns:lc="clr-namespace:LogicCircuit"
 	xmlns:properties="clr-namespace:LogicCircuit.Properties"
 	WindowStartupLocation="CenterOwner"
-	Title="{Binding Source={x:Static properties:Resources.TextNotation}, Mode=OneTime}"
+	Title="{x:Static properties:Resources.TextNotation}"
 	MinWidth="580" MinHeight="300"
 	Style="{DynamicResource DialogWindow}"
 	FocusManager.FocusedElement="{Binding ElementName=editor}"
@@ -136,8 +136,8 @@
 		/>
 
 		<StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-			<Button Content="{Binding Source={x:Static properties:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="ButtonOkClick"/>
-			<Button Content="{Binding Source={x:Static properties:Resources.TitleCancel}, Mode=OneTime}" IsCancel="True"/>
+			<Button Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" Click="ButtonOkClick"/>
+			<Button Content="{x:Static properties:Resources.TitleCancel}" IsCancel="True"/>
 		</StackPanel>
 	</Grid>
 </Window>

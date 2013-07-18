@@ -4,7 +4,7 @@
 	xmlns:lc="clr-namespace:LogicCircuit"
 	xmlns:properties="clr-namespace:LogicCircuit.Properties"
 	WindowStartupLocation="CenterOwner"
-	Title="{Binding Source={x:Static properties:Resources.CommandHyperlink}, Mode=OneTime}"
+	Title="{x:Static properties:Resources.CommandHyperlink}"
 	Style="{DynamicResource DialogWindow}"
 	MinWidth="320"
 	MinHeight="200"
@@ -33,12 +33,12 @@
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 
-		<Label Grid.Row="0" Grid.Column="0" Content="{Binding Source={x:Static properties:Resources.TitleText}, Mode=OneTime}" Target="{Binding ElementName=hyperlinkText}"/>
+		<Label Grid.Row="0" Grid.Column="0" Content="{x:Static properties:Resources.TitleText}" Target="{Binding ElementName=hyperlinkText}"/>
 		<TextBox Grid.Row="0" Grid.Column="1" Name="hyperlinkText"
 			Text="{Binding Path=HyperlinkText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
 		/>
 
-		<Label Grid.Row="1" Grid.Column="0" Content="{Binding Source={x:Static properties:Resources.TitleHyperlink}, Mode=OneTime}" Target="{Binding ElementName=hyperlinkUrl}"/>
+		<Label Grid.Row="1" Grid.Column="0" Content="{x:Static properties:Resources.TitleHyperlink}" Target="{Binding ElementName=hyperlinkUrl}"/>
 		<TextBox Grid.Row="1" Grid.Column="1" Name="hyperlinkUrl"
 			Text="{Binding Path=HyperlinkUrl, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
 		/>
@@ -48,10 +48,8 @@
 		/>
 
 		<StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-			<Button Content="{Binding Source={x:Static properties:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="ButtonOkClick"
-				IsEnabled="{Binding Path=IsValidHyperlink}"
-			/>
-			<Button Content="{Binding Source={x:Static properties:Resources.TitleCancel}, Mode=OneTime}" IsCancel="True"/>
+			<Button Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" Click="ButtonOkClick" IsEnabled="{Binding Path=IsValidHyperlink}"/>
+			<Button Content="{x:Static properties:Resources.TitleCancel}" IsCancel="True"/>
 		</StackPanel>
 	</Grid>
 </Window>

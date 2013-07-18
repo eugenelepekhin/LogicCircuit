@@ -4,7 +4,7 @@
 	xmlns:lc="clr-namespace:LogicCircuit"
 	xmlns:properties="clr-namespace:LogicCircuit.Properties"
 	WindowStartupLocation="CenterOwner"
-	Title="{Binding Source={x:Static properties:Resources.TitleMemory}, Mode=OneTime}"
+	Title="{x:Static properties:Resources.TitleMemory}"
 	Style="{DynamicResource DialogWindow}"
 	MinWidth="480" MinHeight="240"
 >
@@ -22,13 +22,13 @@
 				</Style>
 			</StackPanel.Resources>
 
-			<Label Content="{Binding Source={x:Static properties:Resources.TitleAddressBitWidth}, Mode=OneTime}"/>
+			<Label Content="{x:Static properties:Resources.TitleAddressBitWidth}"/>
 			<TextBlock Text="{Binding Path=AddressBitWidth}"/>
-			<Label Content="{Binding Source={x:Static properties:Resources.TitleDataBitWidth}, Mode=OneTime}"/>
+			<Label Content="{x:Static properties:Resources.TitleDataBitWidth}"/>
 			<TextBlock Text="{Binding Path=DataBitWidth}"/>
 		</StackPanel>
 
-		<GroupBox Grid.Row="1" Header="{Binding Source={x:Static properties:Resources.TitleData}, Mode=OneTime}" Margin="3">
+		<GroupBox Grid.Row="1" Header="{x:Static properties:Resources.TitleData}" Margin="3">
 			<ListView ItemsSource="{Binding Path=Rows}">
 				<ListView.View>
 					<GridView AllowsColumnReorder="False">
@@ -95,6 +95,6 @@
 			</ListView>
 		</GroupBox>
 
-		<Button Grid.Row="2" Content="{Binding Source={x:Static properties:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" IsCancel="True" HorizontalAlignment="Right"/>
+		<Button Grid.Row="2" Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" IsCancel="True" HorizontalAlignment="Right"/>
 	</Grid>
 </Window>

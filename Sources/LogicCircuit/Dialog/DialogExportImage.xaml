@@ -4,7 +4,7 @@
 	xmlns:lc="clr-namespace:LogicCircuit"
 	xmlns:properties="clr-namespace:LogicCircuit.Properties"
 	WindowStartupLocation="CenterOwner"
-	Title="{Binding Source={x:Static properties:Resources.TitleExportImage}, Mode=OneTime}"
+	Title="{x:Static properties:Resources.TitleExportImage}"
 	Style="{DynamicResource DialogFixedWindow}"
 	FocusManager.FocusedElement="{Binding ElementName=imageType}"
 >
@@ -39,28 +39,28 @@
 		</Grid.ColumnDefinitions>
 
 		<TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="8"
-			Text="{Binding Source={x:Static properties:Resources.MessageExportImageDialog}, Mode=OneTime}"
+			Text="{x:Static properties:Resources.MessageExportImageDialog}"
 		/>
 
-		<Label Grid.Row="1" Grid.Column="0" Content="{Binding Source={x:Static properties:Resources.TitleType}, Mode=OneTime}" Target="{Binding ElementName=imageType}"/>
+		<Label Grid.Row="1" Grid.Column="0" Content="{x:Static properties:Resources.TitleType}" Target="{Binding ElementName=imageType}"/>
 		<ComboBox Grid.Row="1" Grid.Column="1" Name="imageType"
 			ItemsSource="{Binding Path=Encoders}" SelectedItem="{Binding Path=Encoder, Mode=TwoWay}"
 			SelectionChanged="ImageTypeSelectionChanged"
 		/>
 
-		<Label Grid.Row="2" Grid.Column="0" Content="{Binding Source={x:Static properties:Resources.TitleFile}, Mode=OneTime}" Target="{Binding ElementName=fileName}"/>
+		<Label Grid.Row="2" Grid.Column="0" Content="{x:Static properties:Resources.TitleFile}" Target="{Binding ElementName=fileName}"/>
 		<StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Stretch">
 			<TextBox Name="fileName" HorizontalAlignment="Stretch" MinWidth="420" VerticalAlignment="Center"
 				Text="{Binding Path=FilePath, Mode=TwoWay}"
 			/>
 			<Button Click="ButtonFileClick" Padding="3,0,3,0" MinWidth="10" HorizontalAlignment="Right" VerticalAlignment="Center"
-				Content="{Binding Source={x:Static properties:Resources.TitleFileOpen}, Mode=OneTime}"
+				Content="{x:Static properties:Resources.TitleFileOpen}"
 			/>
 		</StackPanel>
 
 		<StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-			<Button Content="{Binding Source={x:Static properties:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="ButtonOkClick"/>
-			<Button Content="{Binding Source={x:Static properties:Resources.TitleCancel}, Mode=OneTime}" IsCancel="True"/>
+			<Button Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" Click="ButtonOkClick"/>
+			<Button Content="{x:Static properties:Resources.TitleCancel}" IsCancel="True"/>
 		</StackPanel>
 	</Grid>
 </Window>

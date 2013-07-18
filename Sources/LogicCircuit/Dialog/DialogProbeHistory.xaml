@@ -4,7 +4,7 @@
 	xmlns:lc="clr-namespace:LogicCircuit"
 	xmlns:properties="clr-namespace:LogicCircuit.Properties"
 	WindowStartupLocation="CenterOwner"
-	Title="{Binding Source={x:Static properties:Resources.TitleProbeHistory}, Mode=OneTime}"
+	Title="{x:Static properties:Resources.TitleProbeHistory}"
 	Style="{DynamicResource DialogWindow}"
 >
 	<Grid>
@@ -20,10 +20,10 @@
 		<ListBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Path=History}" Margin="8" SelectionMode="Extended"/>
 
 		<Button Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Click="ButtonMarkClick" IsEnabled="{Binding Path=MarkAllowed}"
-			Content="{Binding Source={x:Static properties:Resources.TitleMark}, Mode=OneTime}"
+			Content="{x:Static properties:Resources.TitleMark}"
 		/>
 		<Button Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" IsDefault="True" IsCancel="True"
-			Content="{Binding Source={x:Static properties:Resources.TitleOK}, Mode=OneTime}"
+			Content="{x:Static properties:Resources.TitleOK}"
 		/>
 	</Grid>
 </Window>

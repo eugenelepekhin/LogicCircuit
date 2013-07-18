@@ -64,7 +64,7 @@
 			</Grid.ColumnDefinitions>
 
 			<CheckBox Grid.Column="0" Name="showDetails" Margin="8" VerticalAlignment="Bottom"
-				Content="{Binding Source={x:Static properties:Resources.TitleShowDetails}, Mode=OneTime}"
+				Content="{x:Static properties:Resources.TitleShowDetails}"
 			>
 				<CheckBox.Style>
 					<Style TargetType="{x:Type CheckBox}">
@@ -78,10 +78,10 @@
 			</CheckBox>
 
 			<StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-				<Button Content="{Binding Source={x:Static properties:Resources.TitleOK}, Mode=OneTime}" Click="ButtonClick" Name="OK"/>
-				<Button Content="{Binding Source={x:Static properties:Resources.TitleYes}, Mode=OneTime}" Click="ButtonClick" Name="Yes"/>
-				<Button Content="{Binding Source={x:Static properties:Resources.TitleNo}, Mode=OneTime}" Click="ButtonClick" Name="No"/>
-				<Button Content="{Binding Source={x:Static properties:Resources.TitleCancel}, Mode=OneTime}" Click="ButtonClick" Name="Cancel"/>
+				<Button Content="{x:Static properties:Resources.TitleOK}" Click="ButtonClick" Name="OK"/>
+				<Button Content="{x:Static properties:Resources.TitleYes}" Click="ButtonClick" Name="Yes"/>
+				<Button Content="{x:Static properties:Resources.TitleNo}" Click="ButtonClick" Name="No"/>
+				<Button Content="{x:Static properties:Resources.TitleCancel}" Click="ButtonClick" Name="Cancel"/>
 			</StackPanel>
 		</Grid>
 	</Grid>

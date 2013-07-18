@@ -5,7 +5,7 @@
 	xmlns:lc="clr-namespace:LogicCircuit"
 	xmlns:properties="clr-namespace:LogicCircuit.Properties"
 	xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
-	FlowDirection="{Binding Source={x:Static properties:Resources.FlowDirection}, Mode=OneTime}"
+	FlowDirection="{x:Static properties:Resources.FlowDirection}"
 	MinWidth="550"
 	MinHeight="400"
 	Title="{Binding Path=Editor.Caption}"

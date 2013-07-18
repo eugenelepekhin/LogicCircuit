@@ -4,7 +4,7 @@
 	xmlns:lc="clr-namespace:LogicCircuit"
 	xmlns:properties="clr-namespace:LogicCircuit.Properties"
 	WindowStartupLocation="CenterOwner"
-	Title="{Binding Source={x:Static properties:Resources.CommandCircuitProject}, Mode=OneTime}"
+	Title="{x:Static properties:Resources.CommandCircuitProject}"
 	Style="{DynamicResource DialogWindow}"
 	FocusManager.FocusedElement="{Binding ElementName=name}"
 >
@@ -30,18 +30,18 @@
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 
-		<Label Grid.Row="0" Grid.Column="0" Content="{Binding Source={x:Static properties:Resources.TitleName}, Mode=OneTime}" Target="{Binding ElementName=name}"/>
+		<Label Grid.Row="0" Grid.Column="0" Content="{x:Static properties:Resources.TitleName}" Target="{Binding ElementName=name}"/>
 		<TextBox Grid.Row="0" Grid.Column="1" Name="name" SpellCheck.IsEnabled="True"/>
 
-		<Label Grid.Row="1" Grid.Column="0" Content="{Binding Source={x:Static properties:Resources.TitleDescription}, Mode=OneTime}" Target="{Binding ElementName=description}"/>
+		<Label Grid.Row="1" Grid.Column="0" Content="{x:Static properties:Resources.TitleDescription}" Target="{Binding ElementName=description}"/>
 		<TextBox Grid.Row="1" Grid.Column="1" Name="description" AcceptsReturn="True" AcceptsTab="True"
 			VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
 			SpellCheck.IsEnabled="True"
 		/>
 
 		<StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
-			<Button Content="{Binding Source={x:Static properties:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="ButtonOkClick"/>
-			<Button Content="{Binding Source={x:Static properties:Resources.TitleCancel}, Mode=OneTime}" IsCancel="True"/>
+			<Button Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" Click="ButtonOkClick"/>
+			<Button Content="{x:Static properties:Resources.TitleCancel}" IsCancel="True"/>
 		</StackPanel>
 	</Grid>
 </Window>

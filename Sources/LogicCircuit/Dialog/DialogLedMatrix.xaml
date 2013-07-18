@@ -4,7 +4,7 @@
 	xmlns:lc="clr-namespace:LogicCircuit"
 	xmlns:properties="clr-namespace:LogicCircuit.Properties"
 	WindowStartupLocation="CenterOwner"
-	Title="{Binding Source={x:Static properties:Resources.NameLedMatrix}, Mode=OneTime}"
+	Title="{x:Static properties:Resources.NameLedMatrix}"
 	Style="{DynamicResource DialogWindow}"
 	MinWidth="320" MinHeight="320"
 	FocusManager.FocusedElement="{Binding ElementName=type}"
@@ -72,14 +72,14 @@
 		<Label Grid.Row="4" Grid.Column="0" Content="{x:Static properties:Resources.TitleColors}" Target="{Binding ElementName=colors}"/>
 		<ComboBox Grid.Row="4" Grid.Column="1" Name="colors" ItemsSource="{Binding Path=ColorRange}" SelectedItem="{Binding Path=Colors}"/>
 
-		<Label Grid.Row="5" Grid.Column="0" Content="{Binding Source={x:Static properties:Resources.TitleDescription}, Mode=OneTime}" Target="{Binding ElementName=note}"/>
+		<Label Grid.Row="5" Grid.Column="0" Content="{x:Static properties:Resources.TitleDescription}" Target="{Binding ElementName=note}"/>
 		<TextBox Grid.Row="5" Grid.Column="1" Name="note" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Text="{Binding Path=Note}"
 			AcceptsReturn="True" AcceptsTab="True" SpellCheck.IsEnabled="True"
 		/>
 
 		<StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-			<Button Content="{Binding Source={x:Static properties:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="ButtonOkClick"/>
-			<Button Content="{Binding Source={x:Static properties:Resources.TitleCancel}, Mode=OneTime}" IsCancel="True"/>
+			<Button Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" Click="ButtonOkClick"/>
+			<Button Content="{x:Static properties:Resources.TitleCancel}" IsCancel="True"/>
 		</StackPanel>
 	</Grid>
 </Window>

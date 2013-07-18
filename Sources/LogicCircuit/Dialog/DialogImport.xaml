@@ -4,7 +4,7 @@
 	xmlns:lc="clr-namespace:LogicCircuit"
 	xmlns:properties="clr-namespace:LogicCircuit.Properties"
 	WindowStartupLocation="CenterOwner"
-	Title="{Binding Source={x:Static properties:Resources.ImportTitle}, Mode=OneTime}"
+	Title="{x:Static properties:Resources.ImportTitle}"
 	Style="{DynamicResource DialogWindow}"
 	MinWidth="555" MinHeight="240"
 	FocusManager.FocusedElement="{Binding ElementName=listView}"
@@ -30,7 +30,7 @@
 					<Setter Property="VerticalAlignment" Value="Top"/>
 				</Style>
 			</StackPanel.Resources>
-			<TextBlock Text="{Binding Source={x:Static properties:Resources.TitleFileName}, Mode=OneTime}"/>
+			<TextBlock Text="{x:Static properties:Resources.TitleFileName}"/>
 			<TextBlock Text="{Binding Path=FileName, Mode=OneTime}" TextWrapping="Wrap"/>
 		</StackPanel>
 
@@ -41,7 +41,7 @@
 
 			<ListView.View>
 				<GridView AllowsColumnReorder="False">
-					<GridViewColumn Header="{Binding Source={x:Static properties:Resources.TitleImportCircuit}, Mode=OneTime}">
+					<GridViewColumn Header="{x:Static properties:Resources.TitleImportCircuit}">
 						<GridViewColumn.CellTemplate>
 							<DataTemplate>
 								<CheckBox IsChecked="{Binding Path=Import}" IsEnabled="{Binding Path=CanImport}"/>
@@ -49,7 +49,7 @@
 						</GridViewColumn.CellTemplate>
 					</GridViewColumn>
 
-					<GridViewColumn Header="{Binding Source={x:Static properties:Resources.TitleCircuitDescriptor}, Mode=OneTime}">
+					<GridViewColumn Header="{x:Static properties:Resources.TitleCircuitDescriptor}">
 						<GridViewColumn.CellTemplate>
 							<DataTemplate>
 								<StackPanel Orientation="Horizontal" ToolTip="{Binding Path=Circuit.ToolTip}">
@@ -85,12 +85,12 @@
 			</Grid.ColumnDefinitions>
 
 			<StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom">
-				<Button Content="{Binding Source={x:Static properties:Resources.TitleCheckAll}, Mode=OneTime}" Click="ButtonCheckAllClick"/>
-				<Button Content="{Binding Source={x:Static properties:Resources.TitleUncheckAll}, Mode=OneTime}" Click="ButtonUncheckAllClick"/>
+				<Button Content="{x:Static properties:Resources.TitleCheckAll}" Click="ButtonCheckAllClick"/>
+				<Button Content="{x:Static properties:Resources.TitleUncheckAll}" Click="ButtonUncheckAllClick"/>
 			</StackPanel>
 
 			<StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-				<Button Content="{Binding Source={x:Static properties:Resources.TitleOK}, Mode=OneTime}" IsDefault="True" Click="ButtonOkClick">
+				<Button Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" Click="ButtonOkClick">
 					<Button.Style>
 						<Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
 							<Style.Triggers>
@@ -101,7 +101,7 @@
 						</Style>
 					</Button.Style>
 				</Button>
-				<Button Content="{Binding Source={x:Static properties:Resources.TitleCancel}, Mode=OneTime}" IsCancel="True"/>
+				<Button Content="{x:Static properties:Resources.TitleCancel}" IsCancel="True"/>
 			</StackPanel>
 		</Grid>
 	</Grid>
