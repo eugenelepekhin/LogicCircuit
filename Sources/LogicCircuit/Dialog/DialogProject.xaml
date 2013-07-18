@@ -5,7 +5,7 @@
 	xmlns:properties="clr-namespace:LogicCircuit.Properties"
 	WindowStartupLocation="CenterOwner"
 	Title="{x:Static properties:Resources.CommandCircuitProject}"
-	Style="{DynamicResource DialogWindow}"
+	Style="{StaticResource DialogWindow}"
 	FocusManager.FocusedElement="{Binding ElementName=name}"
 >
 	<Window.Resources>

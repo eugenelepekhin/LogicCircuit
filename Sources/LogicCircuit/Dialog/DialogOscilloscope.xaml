@@ -6,7 +6,7 @@
 	WindowStartupLocation="Manual"
 	Title="{x:Static properties:Resources.TitleOscilloscope}"
 	WindowStyle="ToolWindow"
-	Style="{DynamicResource DialogWindow}"
+	Style="{StaticResource DialogWindow}"
 	Name="dialog"
 	SizeToContent="WidthAndHeight"
 	Left="{Binding Path=WindowLocation.X, Mode=TwoWay}"

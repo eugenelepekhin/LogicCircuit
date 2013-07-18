@@ -5,7 +5,7 @@
 	xmlns:properties="clr-namespace:LogicCircuit.Properties"
 	WindowStartupLocation="CenterOwner"
 	Title="{x:Static properties:Resources.TitleCircuitUsage}"
-	Style="{DynamicResource DialogWindow}"
+	Style="{StaticResource DialogWindow}"
 >
 	<Grid>
 		<Grid.RowDefinitions>

@@ -5,7 +5,7 @@
 	xmlns:properties="clr-namespace:LogicCircuit.Properties"
 	WindowStartupLocation="CenterOwner"
 	Title="{x:Static properties:Resources.TitleExportImage}"
-	Style="{DynamicResource DialogFixedWindow}"
+	Style="{StaticResource DialogFixedWindow}"
 	FocusManager.FocusedElement="{Binding ElementName=imageType}"
 >
 	<Window.Resources>

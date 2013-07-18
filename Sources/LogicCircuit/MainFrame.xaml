@@ -686,8 +686,8 @@
 					<Border MinWidth="20" MinHeight="20"
 						BorderThickness="2"
 						CornerRadius="3"
-						BorderBrush="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}"
-						Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+						BorderBrush="{x:Static SystemColors.GradientActiveCaptionBrush}"
+						Background="{x:Static SystemColors.ControlBrush}"
 						ToolTip="{Binding ElementName=powerMetter, Path=ToolTip}"
 						MouseDown="PowerButtonMouseDown"
 						Margin="5,0,15,2"
@@ -698,7 +698,7 @@
 							/>
 							<Rectangle StrokeThickness="2" Width="6" Height="13" Margin="0, -6, 0, 0"
 								Fill="{Binding ElementName=powerMetter, Path=Background}"
-								Stroke="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+								Stroke="{x:Static SystemColors.ControlBrush}"
 							/>
 						</Grid>
 					</Border>

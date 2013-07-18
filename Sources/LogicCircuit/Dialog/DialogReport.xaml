@@ -5,7 +5,7 @@
 	xmlns:properties="clr-namespace:LogicCircuit.Properties"
 	WindowStartupLocation="CenterOwner"
 	Title="{Binding Source={x:Static properties:Resources.CommandToolsReport}, Mode=OneTime}"
-	Style="{DynamicResource DialogWindow}"
+	Style="{StaticResource DialogWindow}"
 >
 	<Grid>
 		<FlowDocumentReader Margin="8" ViewingMode="Scroll" Document="{Binding Path=Document}"/>

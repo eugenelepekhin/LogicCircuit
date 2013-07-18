@@ -4,7 +4,7 @@
 	xmlns:lc="clr-namespace:LogicCircuit"
 	xmlns:properties="clr-namespace:LogicCircuit.Properties"
 	WindowStartupLocation="CenterOwner"
-	Style="{DynamicResource DialogWindow}"
+	Style="{StaticResource DialogWindow}"
 	MinWidth="550" MinHeight="350"
 	FocusManager.FocusedElement="{Binding ElementName=addressBitWidth}"
 >

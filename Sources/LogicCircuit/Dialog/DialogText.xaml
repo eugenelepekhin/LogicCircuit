@@ -6,7 +6,7 @@
 	WindowStartupLocation="CenterOwner"
 	Title="{x:Static properties:Resources.TextNotation}"
 	MinWidth="580" MinHeight="300"
-	Style="{DynamicResource DialogWindow}"
+	Style="{StaticResource DialogWindow}"
 	FocusManager.FocusedElement="{Binding ElementName=editor}"
 >
 	<Grid>

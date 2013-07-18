@@ -5,7 +5,7 @@
 	xmlns:properties="clr-namespace:LogicCircuit.Properties"
 	WindowStartupLocation="CenterOwner"
 	Title="{x:Static properties:Resources.TitleAbout}"
-	Style="{DynamicResource DialogFixedWindow}"
+	Style="{StaticResource DialogFixedWindow}"
 >
 	<Window.Resources>
 		<SolidColorBrush x:Key="dialogTextColor" Color="#FFE5A48E"/>
