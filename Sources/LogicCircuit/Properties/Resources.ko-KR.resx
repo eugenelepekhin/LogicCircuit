@@ -401,9 +401,6 @@
   <data name="ToolTipButton" xml:space="preserve">
     <value>버튼 {0}</value>
   </data>
-  <data name="ToolTipCurrentFrequency" xml:space="preserve">
-    <value>현재 진동수</value>
-  </data>
   <data name="ToolTipCurrentZoom" xml:space="preserve">
     <value>현재 화면 크기</value>
   </data>

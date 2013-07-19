@@ -738,9 +738,6 @@ Si desidera sostituirlo?</value>
   <data name="ToolTipConstantValue" xml:space="preserve">
     <value>Inserisci il valore iniziale per la costante</value>
   </data>
-  <data name="ToolTipCurrentFrequency" xml:space="preserve">
-    <value>Frequenza corrente</value>
-  </data>
   <data name="ToolTipCurrentZoom" xml:space="preserve">
     <value>Zoom corrente</value>
   </data>

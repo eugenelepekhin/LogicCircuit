@@ -739,9 +739,6 @@ Do you want to replace it?</value>
   <data name="ToolTipConstantValue" xml:space="preserve">
     <value>Enter initial value for the constant</value>
   </data>
-  <data name="ToolTipCurrentFrequency" xml:space="preserve">
-    <value>Current Frequency</value>
-  </data>
   <data name="ToolTipCurrentZoom" xml:space="preserve">
     <value>Current Zoom</value>
   </data>

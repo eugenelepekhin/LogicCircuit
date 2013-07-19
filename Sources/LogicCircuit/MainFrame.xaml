@@ -289,7 +289,7 @@
 								TickPlacement="TopLeft"
 								ToolTip="{x:Static properties:Resources.ToolTipFrequency}"
 							/>
-							<TextBlock Text="{Binding Path=Editor.Frequency}" VerticalAlignment="Center" Margin="3,0" ToolTip="{x:Static properties:Resources.ToolTipCurrentFrequency}"/>
+							<TextBlock Text="{Binding Path=Editor.Frequency}" VerticalAlignment="Center" Margin="3,0"/>
 						</StackPanel>
 
 						<CheckBox Grid.Row="3"

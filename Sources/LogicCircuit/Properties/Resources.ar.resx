@@ -357,9 +357,6 @@
   <data name="ToolTipLoadData" xml:space="preserve">
     <value>حمل بيانات من ملف</value>
   </data>
-  <data name="ToolTipCurrentFrequency" xml:space="preserve">
-    <value>التردد الحالي</value>
-  </data>
   <data name="ToolTipCurrentZoom" xml:space="preserve">
     <value>نسبة تكبير الحجم الحالية Zoom</value>
   </data>

@@ -435,9 +435,6 @@ Soll die Datei ersetzt werden?</value>
   <data name="ToolTipConstantValue" xml:space="preserve">
     <value>Initialwert der Signalquelle eingeben.</value>
   </data>
-  <data name="ToolTipCurrentFrequency" xml:space="preserve">
-    <value>Aktuelle Frequenz</value>
-  </data>
   <data name="ToolTipCurrentZoom" xml:space="preserve">
     <value>Aktuelle Vergrößerung</value>
   </data>

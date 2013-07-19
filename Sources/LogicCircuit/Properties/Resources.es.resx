@@ -1102,9 +1102,6 @@ Out</value>
   <data name="ToolTipConstantValue" xml:space="preserve">
     <value>Capturar el valor inicial de la constante</value>
   </data>
-  <data name="ToolTipCurrentFrequency" xml:space="preserve">
-    <value>Frecuencia actual</value>
-  </data>
   <data name="ToolTipCurrentZoom" xml:space="preserve">
     <value>Zoom actual</value>
   </data>

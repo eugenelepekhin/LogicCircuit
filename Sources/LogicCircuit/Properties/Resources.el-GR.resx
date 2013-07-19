@@ -702,9 +702,6 @@
   <data name="ToolTipConstantValue" xml:space="preserve">
     <value>Εισαγωγη αρχικής τιμής για την σταθερη</value>
   </data>
-  <data name="ToolTipCurrentFrequency" xml:space="preserve">
-    <value>Τρέχουσα Συχνότητα</value>
-  </data>
   <data name="ToolTipCurrentZoom" xml:space="preserve">
     <value>Τρεχουσα μεγεθυνση</value>
   </data>

@@ -739,9 +739,6 @@ Kívánod lecserélni?</value>
   <data name="ToolTipConstantValue" xml:space="preserve">
     <value>írd be a konstans kezdeti értékét</value>
   </data>
-  <data name="ToolTipCurrentFrequency" xml:space="preserve">
-    <value>Jelenlegi frekvencia</value>
-  </data>
   <data name="ToolTipCurrentZoom" xml:space="preserve">
     <value>Jelenlegi nagyítás</value>
   </data>

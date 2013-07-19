@@ -1431,13 +1431,6 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Current Frequency.
-		/// </summary>
- 		public static string ToolTipCurrentFrequency {
-			get { return ResourceManager.GetString("ToolTipCurrentFrequency", Culture); }
-		}
-
-		/// <summary>
 		/// Looks up a localized string similar to Current Zoom.
 		/// </summary>
  		public static string ToolTipCurrentZoom {

@@ -916,9 +916,6 @@
   <data name="ToolTipConstantValue" xml:space="preserve">
     <value>输入常量的初始值</value>
   </data>
-  <data name="ToolTipCurrentFrequency" xml:space="preserve">
-    <value>当前频率</value>
-  </data>
   <data name="ToolTipCurrentZoom" xml:space="preserve">
     <value>当前缩放</value>
   </data>
