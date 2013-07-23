@@ -176,7 +176,7 @@ namespace LogicCircuit {
 			bool hasProbes = this.CircuitState.HasProbes;
 			Stopwatch stopwatch = new Stopwatch();
 			stopwatch.Start();
-			int tickCount = 0;
+			long tickCount = 0;
 			for(;;) {
 				bool flipClock = (0 < this.flipCount);
 				bool maxSpeed = this.isMaxSpeed;
@@ -187,7 +187,7 @@ namespace LogicCircuit {
 					tickCount++;
 					long ms = stopwatch.ElapsedMilliseconds;
 					if(1500 <= ms) {
-						this.actualFrequency = Math.Round((double)(tickCount * 500) / ms, 1);
+						this.actualFrequency = Math.Round((double)(tickCount * 500L) / ms, 1);
 						tickCount = 0;
 						stopwatch.Restart();
 					}
