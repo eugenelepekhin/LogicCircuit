@@ -895,7 +895,7 @@ namespace LogicCircuit {
 				} else {
 					this.Edit(jam.CircuitSymbol);
 				}
-			} else if(this.InEditMode) { // Nothing was clicked on the diagram
+			} else if(this.InEditMode && Keyboard.Modifiers != ModifierKeys.Control) { // Nothing was clicked on the diagram
 				if(e.ClickCount < 2) {
 					if(Keyboard.Modifiers != ModifierKeys.Shift) {
 						this.ClearSelection();
