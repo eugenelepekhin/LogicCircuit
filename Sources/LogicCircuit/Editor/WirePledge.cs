@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Shapes;
 
 namespace LogicCircuit {
@@ -45,6 +46,10 @@ namespace LogicCircuit {
 
 			public override void Shift(int dx, int dy) {
 				throw new InvalidOperationException();
+			}
+
+			public override void CancelMove(Panel selectionLayer) {
+				selectionLayer.Children.Remove(this.Glyph);
 			}
 		}
 	}

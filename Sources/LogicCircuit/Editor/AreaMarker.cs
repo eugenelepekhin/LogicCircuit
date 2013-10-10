@@ -38,6 +38,10 @@ namespace LogicCircuit {
 				this.MarkerGlyph.Width = rect.Width;
 				this.MarkerGlyph.Height = rect.Height;
 			}
+
+			public override void CancelMove(Panel selectionLayer) {
+				selectionLayer.Children.Remove(this.Glyph);
+			}
 		}
 	}
 }

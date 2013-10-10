@@ -577,9 +577,7 @@ namespace LogicCircuit {
 		protected void CancelMove() {
 			if(this.movingMarker != null) {
 				Mouse.Capture(null);
-				if(this.movingMarker is WirePledge || this.movingMarker is AreaMarker) {
-					this.selectionLayer.Children.Remove(this.movingMarker.Glyph);
-				}
+				this.movingMarker.CancelMove(this.selectionLayer);
 				this.movingMarker = null;
 				this.moveVector.X = this.moveVector.Y = 0;
 			}

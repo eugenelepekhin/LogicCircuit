@@ -60,6 +60,10 @@ namespace LogicCircuit {
 				Canvas.SetLeft(this.MarkerGlyph, point.X - Symbol.PinRadius);
 				Canvas.SetTop(this.MarkerGlyph, point.Y - Symbol.PinRadius);
 			}
+
+			public override void CancelMove(Panel selectionLayer) {
+				this.Parent.PositionGlyph();
+			}
 		}
 	}
 }
