@@ -964,6 +964,12 @@ namespace LogicCircuit {
 					this.ShowStatus(circuitSymbol);
 					return;
 				}
+				Wire wire = symbol as Wire;
+				if(wire != null) {
+					WireDisplayControl display = new WireDisplayControl(this.Diagram, e.GetPosition(this.Diagram), wire);
+					display.Start();
+					return;
+				}
 			}
 		}
 

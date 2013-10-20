@@ -225,6 +225,9 @@
     <Compile Include="Editor\Marker.cs" />
     <Compile Include="Editor\Switcher.cs" />
     <Compile Include="Editor\TextNoteMarker.cs" />
+    <Compile Include="Editor\WireDisplayControl.xaml.cs">
+      <DependentUpon>WireDisplayControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Editor\WireMarker.cs" />
     <Compile Include="Editor\WirePledge.cs" />
     <Compile Include="Editor\WirePointMarker.cs" />
@@ -376,6 +379,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialog\DialogUsage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Editor\WireDisplayControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
