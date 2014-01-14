@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +14,12 @@ namespace LogicCircuit {
 	public partial class WireDisplayControl : UserControl {
 		private readonly Editor editor;
 		private DispatcherTimer timer;
+
+		private CircuitState circuitState;
+		private int[] parameter;
+		private State[] state;
+		private char[] text;
+		private bool initiated;
 		
 		public WireDisplayControl(Canvas canvas, Point point, Wire wire) {
 			this.InitializeComponent();
@@ -26,8 +33,8 @@ namespace LogicCircuit {
 				this.editor = App.Mainframe.Editor;
 				this.timer = new DispatcherTimer(DispatcherPriority.Normal, App.Mainframe.Dispatcher);
 				this.timer.Tick += TimerTick;
-				this.timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / Math.Min(3, this.editor.Frequency));
-				this.GetState(wire);
+				this.timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / (this.editor.IsMaximumSpeed ? 25 : Math.Min(25, this.editor.Frequency * 4)));
+				this.Init(wire);
 			} else {
 				this.Cancel();
 			}
@@ -64,18 +71,72 @@ namespace LogicCircuit {
 			this.Cancel();
 		}
 
-		private void GetState(Wire wire) {
+		private void Init(Wire wire) {
 			CircuitMap map = this.editor.CircuitRunner.VisibleMap;
 			Tracer.Assert(wire.LogicalCircuit == map.Circuit);
-
+			this.circuitState = this.editor.CircuitRunner.CircuitState;
+			this.parameter = map.StateIndexes(wire).ToArray();
+			this.state = new State[this.parameter.Length];
+			this.text = new char[this.parameter.Length];
 		}
 		
 		private void TimerTick(object sender, EventArgs e) {
 			if(!this.editor.InEditMode) {
-				this.display.Text = string.Format("time={0}", DateTime.Now.ToLongTimeString());
+				if(this.WasChanged()) {
+					this.display.Text = Properties.Resources.WireDisplayValue(this.Value());
+				}
 			} else {
 				this.Cancel();
 			}
+		}
+
+		private bool WasChanged() {
+			bool chaged = this.GetState();
+			if(this.initiated) {
+				return chaged;
+			}
+			this.initiated = true;
+			return true;
+		}
+
+		// TODO: merge these functions with similar from probe, probe function, and probe dialog
+
+		public string Value() {
+			int value = 0;
+			for(int i = 0; i < this.state.Length; i++) {
+				switch(this.state[i]) {
+				case State.Off:
+					return this.Binary();
+				case State.On0:
+					break;
+				case State.On1:
+					value |= 1 << i;
+					break;
+				default:
+					Tracer.Fail();
+					break;
+				}
+			}
+			return string.Format(CultureInfo.InvariantCulture, "0x{0:X}", value);
+		}
+
+		private string Binary() {
+			for(int i = 0; i < this.state.Length; i++) {
+				this.text[this.text.Length - i - 1] = CircuitFunction.ToChar(this.state[i]);
+			}
+			return new string(this.text);
+		}
+
+		private bool GetState() {
+			bool changed = false;
+			for(int i = 0; i < this.parameter.Length; i++) {
+				State s = this.circuitState[this.parameter[i]];
+				if(this.state[i] != s) {
+					this.state[i] = s;
+					changed = true;
+				}
+			}
+			return changed;
 		}
 	}
 }

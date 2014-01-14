@@ -1244,4 +1244,8 @@ that displaying its visual elements.</value>
   <data name="TitleActualFrequency" xml:space="preserve">
     <value>Actual frequency:</value>
   </data>
+  <data name="WireDisplayValue" xml:space="preserve">
+    <value>Value: {0}</value>
+    <comment>{string value}</comment>
+  </data>
 </root>

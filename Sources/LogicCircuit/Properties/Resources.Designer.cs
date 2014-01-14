@@ -2547,5 +2547,12 @@ namespace LogicCircuit.Properties {
  		public static string TitleActualFrequency {
 			get { return ResourceManager.GetString("TitleActualFrequency", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Value: {0}.
+		/// </summary>
+ 		public static string WireDisplayValue(string value) {
+			return string.Format(Culture, ResourceManager.GetString("WireDisplayValue", Culture), value);
+		}
 	}
 }

@@ -455,6 +455,11 @@ namespace LogicCircuit {
 			return null;
 		}
 
+		public IEnumerable<int> StateIndexes(Wire wire) {
+			// TODO: implement this
+			yield return 3;
+		}
+
 		public IEnumerable<CircuitMap> Children {
 			get {
 				if(this.children == null) {
