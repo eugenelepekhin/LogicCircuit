@@ -1248,4 +1248,8 @@ that displaying its visual elements.</value>
     <value>Value: {0}</value>
     <comment>{string value}</comment>
   </data>
+  <data name="WireDisplayBitWidth" xml:space="preserve">
+    <value>Bit width: {0}</value>
+    <comment>{int bitWidth}</comment>
+  </data>
 </root>

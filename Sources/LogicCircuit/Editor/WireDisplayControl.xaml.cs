@@ -78,6 +78,7 @@ namespace LogicCircuit {
 			this.parameter = map.StateIndexes(wire).ToArray();
 			this.state = new State[this.parameter.Length];
 			this.text = new char[this.parameter.Length];
+			this.bitWidth.Text = Properties.Resources.WireDisplayBitWidth(this.parameter.Length);
 		}
 		
 		private void TimerTick(object sender, EventArgs e) {

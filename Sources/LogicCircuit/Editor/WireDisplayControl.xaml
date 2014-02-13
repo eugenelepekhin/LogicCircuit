@@ -14,6 +14,7 @@
 	>
 		<StackPanel Orientation="Vertical" Margin="3">
 			<TextBlock Text="{x:Static properties:Resources.ToolTipWire}"/>
+			<TextBlock Name="bitWidth"/>
 			<TextBlock Name="display"/>
 		</StackPanel>
 	</Border>
