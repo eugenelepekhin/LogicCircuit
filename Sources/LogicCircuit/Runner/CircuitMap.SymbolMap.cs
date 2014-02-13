@@ -126,17 +126,12 @@ namespace LogicCircuit {
 				return result;
 			}
 
-			private static bool IsTriState(Result result) {
-				Gate gate = result.Jam.CircuitSymbol.Circuit as Gate;
-				return gate != null && gate.GateType == GateType.TriState;
-			}
-
 			public Parameter AddParameter(Result result, CircuitMap circuitMap, Jam jam, int bitNumber) {
 				Tracer.Assert(circuitMap.Circuit == jam.CircuitSymbol.LogicalCircuit && jam.CircuitSymbol == this.key.CircuitSymbol);
 				JamKey jamKey = new JamKey(jam, bitNumber);
 				Parameter parameter;
 				if(this.parameters.TryGetValue(jamKey, out parameter)) {
-					if(!SymbolMap.IsTriState(parameter.Result) || !SymbolMap.IsTriState(result)) {
+					if(!parameter.Result.IsTriState || !result.IsTriState) {
 						CircuitGlyph symbol = jam.CircuitSymbol;
 						throw new CircuitException(Cause.UserError,
 							Properties.Resources.ErrorManyResults(jam.Pin.Name, symbol.Circuit.Notation + symbol.Point.ToString())
@@ -227,6 +222,7 @@ namespace LogicCircuit {
 		private class Result : StateIndex {
 
 			public HashSet<Result> TriStateGroup { get; private set; }
+			public bool IsTriState { get { return this.TriStateGroup != null; } }
 			public List<Parameter> Parameters { get; private set; }
 			public int StateIndex { get; private set; }
 			public int PrivateIndex { get; private set; }
@@ -246,7 +242,7 @@ namespace LogicCircuit {
 			}
 
 			public void Link(Result other) {
-				Tracer.Assert(this.TriStateGroup != null);
+				Tracer.Assert(this.IsTriState);
 				if(this.TriStateGroup != other.TriStateGroup) {
 					this.Parameters.AddRange(other.Parameters);
 					this.TriStateGroup.UnionWith(other.TriStateGroup);
