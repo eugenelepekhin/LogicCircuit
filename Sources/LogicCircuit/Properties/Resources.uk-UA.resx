@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1181,5 +1181,11 @@
   </data>
   <data name="TitleActualFrequency" xml:space="preserve">
     <value>Поточна частота:</value>
+  </data>
+  <data name="WireDisplayBitWidth" xml:space="preserve">
+    <value>Розрядність: {0}</value>
+  </data>
+  <data name="WireDisplayValue" xml:space="preserve">
+    <value>Значення: {0}</value>
   </data>
 </root>

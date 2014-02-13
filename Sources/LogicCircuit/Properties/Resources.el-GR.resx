@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1181,5 +1181,11 @@
 όλα τα σύμβολα οθόνη σε αυτό το κύκλωμα θα είναι ορατή ζουν με τα σύμβολά της.
 Εμφανίζει είναι: Δίοδος Εκπομπής Φωτός, Μήτρα δίοδου εκπομπής φωτός, Πλαισιο, ή άλλο κύκλωμα Logic
 ότι η εμφάνιση οπτικά στοιχεία του.</value>
+  </data>
+  <data name="WireDisplayBitWidth" xml:space="preserve">
+    <value>Πλατος του Bit: {0}</value>
+  </data>
+  <data name="WireDisplayValue" xml:space="preserve">
+    <value>Τιμη: {0}</value>
   </data>
 </root>

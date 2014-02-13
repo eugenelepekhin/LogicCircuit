@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1243,5 +1243,11 @@ that displaying its visual elements.</value>
   </data>
   <data name="TitleActualFrequency" xml:space="preserve">
     <value>Aktuális frekvencia:</value>
+  </data>
+  <data name="WireDisplayBitWidth" xml:space="preserve">
+    <value>Bit szélesség: {0}</value>
+  </data>
+  <data name="WireDisplayValue" xml:space="preserve">
+    <value>Érték: {0}</value>
   </data>
 </root>

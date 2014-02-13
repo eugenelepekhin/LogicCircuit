@@ -1240,4 +1240,10 @@ tutti i simboli del display saranno visibili sul suo simbolo.</value>
   <data name="TitleActualFrequency" xml:space="preserve">
     <value>Frequenza effettiva:</value>
   </data>
+  <data name="WireDisplayBitWidth" xml:space="preserve">
+    <value>Lunghezza bit: {0}</value>
+  </data>
+  <data name="WireDisplayValue" xml:space="preserve">
+    <value>Valore: {0}</value>
+  </data>
 </root>

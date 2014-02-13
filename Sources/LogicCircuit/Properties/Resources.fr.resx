@@ -1186,4 +1186,10 @@ Les éléments sont : LED, Matrise de LED, Bouton, ou autre circuit logique.</va
   <data name="CommandEditItalic" xml:space="preserve">
     <value>Italic</value>
   </data>
+  <data name="WireDisplayBitWidth" xml:space="preserve">
+    <value>Largeur de Bits: {0}</value>
+  </data>
+  <data name="WireDisplayValue" xml:space="preserve">
+    <value>Valeur: {0}</value>
+  </data>
 </root>

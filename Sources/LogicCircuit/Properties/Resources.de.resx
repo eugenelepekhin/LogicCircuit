@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1184,5 +1184,11 @@ Out</value>
   </data>
   <data name="CaptionName" xml:space="preserve">
     <value>Name</value>
+  </data>
+  <data name="WireDisplayBitWidth" xml:space="preserve">
+    <value>Busbreite: {0}</value>
+  </data>
+  <data name="WireDisplayValue" xml:space="preserve">
+    <value>Wert: {0}</value>
   </data>
 </root>

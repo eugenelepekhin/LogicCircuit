@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1239,5 +1239,11 @@ Out</value>
 todos los símbolos de pantalla en este circuito será visibles.
 Las elementos a mostrar son: LED, LED de matriz, botón u otro circuito lógico 
 (elementos visuales).</value>
+  </data>
+  <data name="WireDisplayBitWidth" xml:space="preserve">
+    <value>Tamaño de Bit: {0}</value>
+  </data>
+  <data name="WireDisplayValue" xml:space="preserve">
+    <value>Valor: {0}</value>
   </data>
 </root>

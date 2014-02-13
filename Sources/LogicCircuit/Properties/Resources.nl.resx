@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1243,5 +1243,11 @@ die visuele weergave mogelijkheden hebben.</value>
   </data>
   <data name="TitleIsDisplay" xml:space="preserve">
     <value>Geef visuele elementen weer op het symbool</value>
+  </data>
+  <data name="WireDisplayBitWidth" xml:space="preserve">
+    <value>Bit breedte: {0}</value>
+  </data>
+  <data name="WireDisplayValue" xml:space="preserve">
+    <value>Waarde: {0}</value>
   </data>
 </root>

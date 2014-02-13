@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1168,5 +1168,11 @@
   <data name="ToolTipIsDisplay" xml:space="preserve">
     <value>عندما تقوم بتفعيل خيار عرض العناصر كل الرموز في هذه الدارة سوف تظهر على رموزها ,العناصر هي:
 LED, مصفوفة LED ,زر , أو اية عناصر اخرى</value>
+  </data>
+  <data name="WireDisplayBitWidth" xml:space="preserve">
+    <value>عرض البت: {0}</value>
+  </data>
+  <data name="WireDisplayValue" xml:space="preserve">
+    <value>قيمة: {0}</value>
   </data>
 </root>

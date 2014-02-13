@@ -1187,4 +1187,10 @@
   <data name="WebSiteDownloadUri" xml:space="preserve">
     <value>http://www.logiccircuit.org/download.html</value>
   </data>
+  <data name="WireDisplayBitWidth" xml:space="preserve">
+    <value>Разрядность: {0}</value>
+  </data>
+  <data name="WireDisplayValue" xml:space="preserve">
+    <value>Значение: {0}</value>
+  </data>
 </root>

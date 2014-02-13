@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1179,5 +1179,11 @@
   </data>
   <data name="ParserErrorUnclosedQuote" xml:space="preserve">
     <value>인용식별자에 닫힘이 없습니다. {0}</value>
+  </data>
+  <data name="WireDisplayBitWidth" xml:space="preserve">
+    <value>비트 크기:{0}</value>
+  </data>
+  <data name="WireDisplayValue" xml:space="preserve">
+    <value>값: {0}</value>
   </data>
 </root>
