@@ -482,9 +482,13 @@ namespace LogicCircuit {
 									return;
 								}
 							} else if((pin = (circuit as Pin)) != null) {
-								this.Parent.StateIndexes(list, this.CircuitSymbol.Jam(pin).AbsolutePoint, true);
+								if(this.Parent != null) {
+									this.Parent.StateIndexes(list, this.CircuitSymbol.Jam(pin).AbsolutePoint, true);
+								}
 							} else if(circuit is LogicalCircuit) {
+								// child pin must be there as the jam only be there if the pin exists
 								CircuitSymbol childPinSymbol = this.Circuit.CircuitProject.CircuitSymbolSet.SelectByCircuit(jam.Pin).First();
+								// the child for the logic circuit also must exist
 								this.children[(CircuitSymbol)jam.CircuitSymbol].StateIndexes(list, childPinSymbol.Jams().First().AbsolutePoint, true);
 							} else if(circuit is Splitter) {
 								List<Jam> jams = symbol.Jams().ToList();
