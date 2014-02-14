@@ -2561,5 +2561,12 @@ namespace LogicCircuit.Properties {
  		public static string WireDisplayBitWidth(int bitWidth) {
 			return string.Format(Culture, ResourceManager.GetString("WireDisplayBitWidth", Culture), bitWidth);
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to The wire is disconnected..
+		/// </summary>
+ 		public static string WireDisplayDisconnected {
+			get { return ResourceManager.GetString("WireDisplayDisconnected", Culture); }
+		}
 	}
 }

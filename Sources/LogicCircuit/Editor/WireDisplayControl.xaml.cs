@@ -31,10 +31,22 @@ namespace LogicCircuit {
 
 			if(this.CaptureMouse() && Mouse.LeftButton == MouseButtonState.Pressed) {
 				this.editor = App.Mainframe.Editor;
-				this.timer = new DispatcherTimer(DispatcherPriority.Normal, App.Mainframe.Dispatcher);
-				this.timer.Tick += TimerTick;
-				this.timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / (this.editor.IsMaximumSpeed ? 25 : Math.Min(25, this.editor.Frequency * 4)));
-				this.Init(wire);
+				CircuitMap map = this.editor.CircuitRunner.VisibleMap;
+				Tracer.Assert(wire.LogicalCircuit == map.Circuit);
+				this.parameter = map.StateIndexes(wire).ToArray();
+				if(0 < this.parameter.Length) {
+					this.circuitState = this.editor.CircuitRunner.CircuitState;
+					this.state = new State[this.parameter.Length];
+					this.text = new char[this.parameter.Length];
+					this.bitWidth.Text = Properties.Resources.WireDisplayBitWidth(this.parameter.Length);
+
+					this.timer = new DispatcherTimer(DispatcherPriority.Normal, App.Mainframe.Dispatcher);
+					this.timer.Tick += TimerTick;
+					this.timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / (this.editor.IsMaximumSpeed ? 25 : Math.Min(25, this.editor.Frequency * 4)));
+				} else {
+					this.bitWidth.Text = Properties.Resources.WireDisplayDisconnected;
+					this.display.Visibility = Visibility.Collapsed;
+				}
 			} else {
 				this.Cancel();
 			}
@@ -69,16 +81,6 @@ namespace LogicCircuit {
 		protected override void OnLostMouseCapture(MouseEventArgs e) {
 			base.OnLostMouseCapture(e);
 			this.Cancel();
-		}
-
-		private void Init(Wire wire) {
-			CircuitMap map = this.editor.CircuitRunner.VisibleMap;
-			Tracer.Assert(wire.LogicalCircuit == map.Circuit);
-			this.circuitState = this.editor.CircuitRunner.CircuitState;
-			this.parameter = map.StateIndexes(wire).ToArray();
-			this.state = new State[this.parameter.Length];
-			this.text = new char[this.parameter.Length];
-			this.bitWidth.Text = Properties.Resources.WireDisplayBitWidth(this.parameter.Length);
 		}
 		
 		private void TimerTick(object sender, EventArgs e) {
