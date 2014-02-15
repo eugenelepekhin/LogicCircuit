@@ -51,7 +51,7 @@ namespace LogicCircuit {
 					bool turnedOff = (button.ButtonStateChanged == null);
 					button.ButtonStateChanged = this.StateChangedAction;
 					if(turnedOff && this.isToggle) {
-						FunctionButton.DrawState(button, State.Off);
+						FunctionButton.DrawState(button, this.State);
 					}
 				}
 			}
