@@ -102,7 +102,7 @@ namespace LogicCircuit {
 				}
 				count++;
 			}
-			if(showFormatPrefix) {
+			if(showFormatPrefix && 1 < count) {
 				return string.Format(CultureInfo.InvariantCulture, "0x{0:X}", value);
 			} else {
 				return string.Format(CultureInfo.InvariantCulture, "{0:X}", value);
