@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -81,6 +82,42 @@ namespace LogicCircuit {
 				}
 			}
 		#endif
+
+		public static string ToText(IEnumerable<State> probeState, bool showFormatPrefix) {
+			int value = 0;
+			int count = 0;
+			foreach(State state in probeState) {
+				Tracer.Assert(count < 32);
+				switch(state) {
+				case State.Off:
+					return CircuitFunction.Binary(probeState);
+				case State.On0:
+					break;
+				case State.On1:
+					value |= 1 << count;
+					break;
+				default:
+					Tracer.Fail();
+					break;
+				}
+				count++;
+			}
+			if(showFormatPrefix) {
+				return string.Format(CultureInfo.InvariantCulture, "0x{0:X}", value);
+			} else {
+				return string.Format(CultureInfo.InvariantCulture, "{0:X}", value);
+			}
+		}
+
+		private static string Binary(IEnumerable<State> probeState) {
+			char[] text = new char[32];
+			int index = 0;
+			foreach(State state in probeState) {
+				text[index++] = CircuitFunction.ToChar(state);
+			}
+			Array.Reverse(text, 0, index);
+			return new string(text, 0, index);
+		}
 
 		protected bool SetResult0(State state) {
 			if(this.CircuitState[this.result0] != state) {

@@ -37,38 +37,16 @@ namespace LogicCircuit {
 				if(pack == -1L) {
 					list.Add(Properties.Resources.ProbeHistoryMark);
 				} else {
-					list.Add(this.Hex(pack, width));
+					list.Add(CircuitFunction.ToText(this.Unpack(pack, width), false));
 				}
 			}
 			this.History = list;
 		}
 
-		private string Hex(long pack, int width) {
-			int value = 0;
+		private IEnumerable<State> Unpack(long pack, int width) {
 			for(int i = 0; i < width; i++) {
-				switch(this.functionProbe.Unpack(pack, i)) {
-				case State.Off:
-					return this.Bin(pack, width);
-				case State.On0:
-					break;
-				case State.On1:
-					value |= (1 << i);
-					break;
-				default:
-					Tracer.Fail();
-					break;
-				}
+				yield return this.functionProbe.Unpack(pack, i);
 			}
-			return Properties.Resources.ProbeHistoryHex(value);
-		}
-
-		private string Bin(long pack, int width) {
-			char[] text = new char[width];
-			for(int i = 0; i < width; i++) {
-				text[i] = CircuitFunction.ToChar(this.functionProbe.Unpack(pack, i));
-			}
-			Array.Reverse(text);
-			return new string(text);
 		}
 
 		private void NotifyPropertyChanged(string propertyName) {

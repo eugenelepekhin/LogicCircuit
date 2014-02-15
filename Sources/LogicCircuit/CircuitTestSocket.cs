@@ -122,6 +122,17 @@ namespace LogicCircuit {
 				this.LogicalCircuit.CircuitProject.InOmitTransaction(() => this.Build(reportProgress, keepGoing, include, maxCount));
 			}
 
+			private static int ToInt32(FunctionProbe probe) {
+				int number = 0;
+				for(int i = 0; i < probe.BitWidth; i++) {
+					Tracer.Assert(probe[i] != State.Off);
+					if(probe[i] == State.On1) {
+						number |= (1 << i);
+					}
+				}
+				return number;
+			}
+
 			private void Build(Action<double> reportProgress, Func<bool> keepGoing, Predicate<TruthState> include, int maxCount) {
 				this.Results = new List<TruthState>();
 				this.Oscillation = false;
@@ -156,7 +167,7 @@ namespace LogicCircuit {
 							state.Input[i] = this.Inputs[i].Function.Value;
 						}
 						for(int i = 0; i < outputCount; i++) {
-							state.Output[i] = this.Outputs[i].Function.ToInt32();
+							state.Output[i] = TableChank.ToInt32(this.Outputs[i].Function);
 						}
 						if(include == null || include(state)) {
 							this.Results.Add(state);

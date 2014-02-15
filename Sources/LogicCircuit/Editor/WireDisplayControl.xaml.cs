@@ -18,7 +18,6 @@ namespace LogicCircuit {
 		private CircuitState circuitState;
 		private int[] parameter;
 		private State[] state;
-		private char[] text;
 		private bool initiated;
 		
 		public WireDisplayControl(Canvas canvas, Point point, Wire wire) {
@@ -37,7 +36,6 @@ namespace LogicCircuit {
 				if(0 < this.parameter.Length) {
 					this.circuitState = this.editor.CircuitRunner.CircuitState;
 					this.state = new State[this.parameter.Length];
-					this.text = new char[this.parameter.Length];
 					this.bitWidth.Text = Properties.Resources.WireDisplayBitWidth(this.parameter.Length);
 
 					this.timer = new DispatcherTimer(DispatcherPriority.Normal, App.Mainframe.Dispatcher);
@@ -86,7 +84,7 @@ namespace LogicCircuit {
 		private void TimerTick(object sender, EventArgs e) {
 			if(!this.editor.InEditMode) {
 				if(this.WasChanged()) {
-					this.display.Text = Properties.Resources.WireDisplayValue(this.Value());
+					this.display.Text = Properties.Resources.WireDisplayValue(CircuitFunction.ToText(this.state, true));
 				}
 			} else {
 				this.Cancel();
@@ -102,33 +100,7 @@ namespace LogicCircuit {
 			return true;
 		}
 
-		// TODO: merge these functions with similar from probe, probe function, and probe dialog
-
-		public string Value() {
-			int value = 0;
-			for(int i = 0; i < this.state.Length; i++) {
-				switch(this.state[i]) {
-				case State.Off:
-					return this.Binary();
-				case State.On0:
-					break;
-				case State.On1:
-					value |= 1 << i;
-					break;
-				default:
-					Tracer.Fail();
-					break;
-				}
-			}
-			return string.Format(CultureInfo.InvariantCulture, "0x{0:X}", value);
-		}
-
-		private string Binary() {
-			for(int i = 0; i < this.state.Length; i++) {
-				this.text[this.text.Length - i - 1] = CircuitFunction.ToChar(this.state[i]);
-			}
-			return new string(this.text);
-		}
+		// This is very similar to probe. But for now lets not merge code.
 
 		private bool GetState() {
 			bool changed = false;

@@ -21,6 +21,10 @@ namespace LogicCircuit {
 			}
 		}
 
+		public string ToText() {
+			return CircuitFunction.ToText(this.state, false);
+		}
+
 		[SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
 		protected bool GetState() {
 			return this.GetProbeState(this.state);
