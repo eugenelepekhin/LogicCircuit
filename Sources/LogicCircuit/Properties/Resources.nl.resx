@@ -1250,4 +1250,7 @@ die visuele weergave mogelijkheden hebben.</value>
   <data name="WireDisplayValue" xml:space="preserve">
     <value>Waarde: {0}</value>
   </data>
+  <data name="WireDisplayDisconnected" xml:space="preserve">
+    <value>De draad is niet aangesloten.</value>
+  </data>
 </root>
