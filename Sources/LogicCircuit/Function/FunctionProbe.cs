@@ -74,6 +74,7 @@ namespace LogicCircuit {
 		}
 
 		public void TurnOn() {
+			this.Redraw();
 		}
 
 		public void TurnOff() {
