@@ -1016,13 +1016,13 @@ Optische Elemente sind: LED, LED Matrix, Knopf oder andere Logic Circuit Element
     <value>Not</value>
   </data>
   <data name="GateNotNotation" xml:space="preserve">
-    <value>~</value>
+    <value>1</value>
   </data>
   <data name="GateOrName" xml:space="preserve">
     <value>Or</value>
   </data>
   <data name="GateOrNotation" xml:space="preserve">
-    <value>1</value>
+    <value>≥1</value>
   </data>
   <data name="GateOrNotName" xml:space="preserve">
     <value>NOr</value>
@@ -1040,7 +1040,7 @@ Optische Elemente sind: LED, LED Matrix, Knopf oder andere Logic Circuit Element
     <value>Xor</value>
   </data>
   <data name="GateXorNotation" xml:space="preserve">
-    <value>=</value>
+    <value>=1</value>
   </data>
   <data name="GateXorNotName" xml:space="preserve">
     <value>XNor</value>

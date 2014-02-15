@@ -1004,10 +1004,10 @@
     <value>LED</value>
   </data>
   <data name="GateNotNotation" xml:space="preserve">
-    <value>~</value>
+    <value>1</value>
   </data>
   <data name="GateOrNotation" xml:space="preserve">
-    <value>1</value>
+    <value>≥1</value>
   </data>
   <data name="CircuitProbeNotation" xml:space="preserve">
     <value>?</value>
@@ -1022,7 +1022,7 @@
     <value>Xor</value>
   </data>
   <data name="GateXorNotation" xml:space="preserve">
-    <value>=</value>
+    <value>=1</value>
   </data>
   <data name="GateXorNotName" xml:space="preserve">
     <value>XNor</value>

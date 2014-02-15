@@ -152,7 +152,7 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to ~.
+		/// Looks up a localized string similar to 1.
 		/// </summary>
  		public static string GateNotNotation {
 			get { return ResourceManager.GetString("GateNotNotation", Culture); }
@@ -166,7 +166,7 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to 1.
+		/// Looks up a localized string similar to ≥1.
 		/// </summary>
  		public static string GateOrNotation {
 			get { return ResourceManager.GetString("GateOrNotation", Culture); }
@@ -229,7 +229,7 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to =.
+		/// Looks up a localized string similar to =1.
 		/// </summary>
  		public static string GateXorNotation {
 			get { return ResourceManager.GetString("GateXorNotation", Culture); }
