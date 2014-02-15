@@ -1246,4 +1246,7 @@ tutti i simboli del display saranno visibili sul suo simbolo.</value>
   <data name="WireDisplayValue" xml:space="preserve">
     <value>Valore: {0}</value>
   </data>
+  <data name="WireDisplayDisconnected" xml:space="preserve">
+    <value>Il filo non è connesso.</value>
+  </data>
 </root>
