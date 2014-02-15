@@ -5,7 +5,6 @@ smarter wires
 Backward navigation on circuits
 Sound component
 Sensor component
-Lightweight probe or color wires to observe current signals
 Tunnels
 
 Keyboard device
