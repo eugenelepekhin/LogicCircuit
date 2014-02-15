@@ -2563,7 +2563,7 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to The wire is disconnected..
+		/// Looks up a localized string similar to The wire is not connected..
 		/// </summary>
  		public static string WireDisplayDisconnected {
 			get { return ResourceManager.GetString("WireDisplayDisconnected", Culture); }

@@ -1253,6 +1253,6 @@ that displaying its visual elements.</value>
     <comment>{int bitWidth}</comment>
   </data>
   <data name="WireDisplayDisconnected" xml:space="preserve">
-    <value>The wire is disconnected.</value>
+    <value>The wire is not connected.</value>
   </data>
 </root>

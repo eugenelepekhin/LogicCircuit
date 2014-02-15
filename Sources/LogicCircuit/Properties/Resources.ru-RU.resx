@@ -1193,4 +1193,7 @@
   <data name="WireDisplayValue" xml:space="preserve">
     <value>Значение: {0}</value>
   </data>
+  <data name="WireDisplayDisconnected" xml:space="preserve">
+    <value>Провод не подключен.</value>
+  </data>
 </root>
