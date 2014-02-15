@@ -74,7 +74,9 @@ namespace LogicCircuit {
 		}
 
 		public void TurnOn() {
-			this.Redraw();
+			if(this.CircuitSymbol.HasCreatedGlyph) {
+				this.Redraw();
+			}
 		}
 
 		public void TurnOff() {
