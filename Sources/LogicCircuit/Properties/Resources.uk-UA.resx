@@ -1188,4 +1188,7 @@
   <data name="WireDisplayValue" xml:space="preserve">
     <value>Значення: {0}</value>
   </data>
+  <data name="WireDisplayDisconnected" xml:space="preserve">
+    <value>Провідник не під'єднано.</value>
+  </data>
 </root>

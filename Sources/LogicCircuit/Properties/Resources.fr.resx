@@ -1192,4 +1192,7 @@ Les éléments sont : LED, Matrise de LED, Bouton, ou autre circuit logique.</va
   <data name="WireDisplayValue" xml:space="preserve">
     <value>Valeur: {0}</value>
   </data>
+  <data name="WireDisplayDisconnected" xml:space="preserve">
+    <value>Le fil n'est pas connecté.</value>
+  </data>
 </root>

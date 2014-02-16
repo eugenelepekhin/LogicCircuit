@@ -1191,4 +1191,7 @@ Out</value>
   <data name="WireDisplayValue" xml:space="preserve">
     <value>Wert: {0}</value>
   </data>
+  <data name="WireDisplayDisconnected" xml:space="preserve">
+    <value>Es besteht kein Verbindung.</value>
+  </data>
 </root>
