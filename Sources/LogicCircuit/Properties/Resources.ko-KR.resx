@@ -1186,4 +1186,7 @@
   <data name="WireDisplayValue" xml:space="preserve">
     <value>값: {0}</value>
   </data>
+  <data name="WireDisplayDisconnected" xml:space="preserve">
+    <value>와이어가 연결되지 않았습니다.</value>
+  </data>
 </root>

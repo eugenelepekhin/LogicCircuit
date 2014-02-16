@@ -1189,4 +1189,7 @@ Out</value>
   <data name="WireDisplayBitWidth" xml:space="preserve">
     <value>位宽: {0}</value>
   </data>
+  <data name="WireDisplayDisconnected" xml:space="preserve">
+    <value>导线没有被连接。</value>
+  </data>
 </root>
