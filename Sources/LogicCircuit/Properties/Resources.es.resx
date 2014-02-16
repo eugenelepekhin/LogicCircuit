@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -763,10 +763,6 @@ Desea guardado?</value>
   </data>
   <data name="PowerOn" xml:space="preserve">
     <value>Encender</value>
-  </data>
-  <data name="ProbeHistoryHex" xml:space="preserve">
-    <value>{0:X}</value>
-    <comment>{int value}</comment>
   </data>
   <data name="ProbeHistoryMark" xml:space="preserve">
     <value>&lt;&lt;&lt;&lt;&lt;&lt; Marca &gt;&gt;&gt;&gt;&gt;&gt;</value>

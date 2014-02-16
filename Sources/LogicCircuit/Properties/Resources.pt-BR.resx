@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -567,10 +567,6 @@ Saída</value>
   </data>
   <data name="PowerOn" xml:space="preserve">
     <value>Ligado</value>
-  </data>
-  <data name="ProbeHistoryHex" xml:space="preserve">
-    <value>{0:X}</value>
-    <comment>{int value}</comment>
   </data>
   <data name="ProbeHistoryMark" xml:space="preserve">
     <value>&lt;&lt;&lt;&lt;&lt;&lt; Marcar &gt;&gt;&gt;&gt;&gt;&gt;</value>

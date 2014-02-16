@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1127,9 +1127,6 @@ Out</value>
   </data>
   <data name="CircuitMapPathSeparator" xml:space="preserve">
     <value>/</value>
-  </data>
-  <data name="ProbeHistoryHex" xml:space="preserve">
-    <value>{0:X}</value>
   </data>
   <data name="CommandFileFileImport" xml:space="preserve">
     <value>_Import...</value>

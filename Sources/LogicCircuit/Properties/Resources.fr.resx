@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1044,9 +1044,6 @@ Les éléments sont : LED, Matrise de LED, Bouton, ou autre circuit logique.</va
   </data>
   <data name="TitleType" xml:space="preserve">
     <value>_Type:</value>
-  </data>
-  <data name="ProbeHistoryHex" xml:space="preserve">
-    <value>{0:X}</value>
   </data>
   <data name="TitleCircuitDescriptor" xml:space="preserve">
     <value>Circuit</value>
