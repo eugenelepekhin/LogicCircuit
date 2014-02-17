@@ -1245,4 +1245,7 @@ ou outro circuito lógico que indique elementos visuais.</value>
   <data name="WireDisplayValue" xml:space="preserve">
     <value>Valor: {0}</value>
   </data>
+  <data name="WireDisplayDisconnected" xml:space="preserve">
+    <value>O cabo não está conectado.</value>
+  </data>
 </root>

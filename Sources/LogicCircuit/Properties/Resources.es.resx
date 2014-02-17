@@ -1242,4 +1242,7 @@ Las elementos a mostrar son: LED, LED de matriz, botón u otro circuito lógico
   <data name="WireDisplayValue" xml:space="preserve">
     <value>Valor: {0}</value>
   </data>
+  <data name="WireDisplayDisconnected" xml:space="preserve">
+    <value>El cable no está conectado.</value>
+  </data>
 </root>

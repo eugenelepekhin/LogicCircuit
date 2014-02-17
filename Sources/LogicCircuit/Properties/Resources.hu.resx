@@ -1246,4 +1246,7 @@ that displaying its visual elements.</value>
   <data name="WireDisplayValue" xml:space="preserve">
     <value>Érték: {0}</value>
   </data>
+  <data name="WireDisplayDisconnected" xml:space="preserve">
+    <value>A vezeték nincs csatlakoztatva.</value>
+  </data>
 </root>
