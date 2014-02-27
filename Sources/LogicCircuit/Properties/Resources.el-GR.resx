@@ -1185,4 +1185,7 @@
   <data name="WireDisplayValue" xml:space="preserve">
     <value>Τιμη: {0}</value>
   </data>
+  <data name="WireDisplayDisconnected" xml:space="preserve">
+    <value>Το καλώδιο δεν είναι συνδεδεμένο.</value>
+  </data>
 </root>

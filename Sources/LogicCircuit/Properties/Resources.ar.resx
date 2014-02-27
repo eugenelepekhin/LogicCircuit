@@ -1172,4 +1172,7 @@ LED, مصفوفة LED ,زر , أو اية عناصر اخرى</value>
   <data name="WireDisplayValue" xml:space="preserve">
     <value>قيمة: {0}</value>
   </data>
+  <data name="WireDisplayDisconnected" xml:space="preserve">
+    <value>لم يتم توصيل السلك.</value>
+  </data>
 </root>
