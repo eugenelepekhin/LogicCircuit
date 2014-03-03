@@ -119,11 +119,15 @@ namespace LogicCircuit {
 					Tracer.Report("UserSettings.ctor", exception);
 				}
 			}
-			this.Load(file);
-			this.fileWatcher.Path = Path.GetDirectoryName(file);
-			this.fileWatcher.Filter = Path.GetFileName(file);
-			this.fileWatcher.Changed += new FileSystemEventHandler(this.fileChanged);
-			this.fileWatcher.EnableRaisingEvents = true;
+			try {
+				this.Load(file);
+				this.fileWatcher.Path = Path.GetDirectoryName(file);
+				this.fileWatcher.Filter = Path.GetFileName(file);
+				this.fileWatcher.Changed += new FileSystemEventHandler(this.fileChanged);
+				this.fileWatcher.EnableRaisingEvents = true;
+			} catch(Exception exception) {
+				Tracer.Report("UserSettings.ctor", exception);
+			}
 			this.maxRecentFileCount = new SettingsIntegerCache(this, "Settings.MaxRecentFileCount", 1, 24, 4);
 			this.loadLastFileOnStartup = new SettingsBoolCache(this, "Settings.LoadLastFileOnStartup", true);
 			this.gateShape = new SettingsEnumCache<GateShape>(this, "Settings.GateShape",
