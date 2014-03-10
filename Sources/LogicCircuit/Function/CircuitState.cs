@@ -123,18 +123,18 @@ namespace LogicCircuit {
 			int maxRetry = 3;
 			int attempt = 0;
 			this.dirty.Delay = attempt;
-			int oscilation = this.state.Length * this.state.Length;
+			long oscillation = (long)this.state.Length * (long)this.state.Length;
 			CircuitFunction function;
 			while((function = this.dirty.Get()) != null) {
 				if(function.Evaluate()) {
 					if(function.Dependent != null) {
 						this.dirty.Add(function.Dependent);
 					}
-					if(oscilation-- < 0) {
+					if(oscillation-- < 0) {
 						if(maxRetry <= attempt) {
 							return false;
 						}
-						oscilation = this.state.Length * this.state.Length;
+						oscillation = (long)this.state.Length * (long)this.state.Length;
 						this.dirty.Delay = ++attempt;
 					}
 				}
