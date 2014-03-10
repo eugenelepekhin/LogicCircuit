@@ -239,7 +239,7 @@ namespace LogicCircuit {
 		//--- Utilities ---
 
 		private void ShowStatus(CircuitSymbol symbol) {
-			this.Mainframe.Status = symbol.Circuit.Notation + symbol.Point.ToString();
+			this.Mainframe.Status = symbol.Circuit.ToolTip + symbol.Point.ToString();
 		}
 
 		//--- Drawing ---
