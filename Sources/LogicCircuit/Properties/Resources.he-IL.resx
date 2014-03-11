@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Bit0" xml:space="preserve">
-    <value>0</value>
+    <value>‏0‏</value>
   </data>
   <data name="Bit1" xml:space="preserve">
-    <value>1</value>
+    <value>‏1‏</value>
   </data>
   <data name="BitOff" xml:space="preserve">
     <value>כבוי</value>
@@ -148,7 +148,7 @@
     <value>שם</value>
   </data>
   <data name="CaptionNote" xml:space="preserve">
-    <value>_שם</value>
+    <value>‏_שם</value>
   </data>
   <data name="CaptionRows" xml:space="preserve">
     <value>שורות</value>
@@ -175,7 +175,7 @@
     <value>ערך</value>
   </data>
   <data name="CategoryDuplicate" xml:space="preserve">
-    <value>{0} 2</value>
+    <value>‏{0} 2‏</value>
     <comment>{string reservedCategoryName}</comment>
   </data>
   <data name="CategoryInputOutput" xml:space="preserve">
@@ -185,32 +185,33 @@
     <value>רכיבים ראשוניים</value>
   </data>
   <data name="CircuitMapPathSeparator" xml:space="preserve">
-    <value>/</value>
+    <value>‏/‏</value>
   </data>
   <data name="CircuitProbeName" xml:space="preserve">
     <value>גשוש</value>
   </data>
   <data name="CircuitProbeNotation" xml:space="preserve">
-    <value>?</value>
+    <value>‏?‏</value>
   </data>
   <data name="CircuitProbeToolTip" xml:space="preserve">
-    <value>גשוש {0}</value>
+    <value>גשוש ‏{0}‏‏</value>
     <comment>{string probeName}</comment>
   </data>
   <data name="CircuitProjectName" xml:space="preserve">
     <value>פרויקט מעגל</value>
   </data>
   <data name="ColorPickerCaptionAvailable" xml:space="preserve">
-    <value>צבעים זמינים:</value>
+    <value>צבעים זמינים:‏</value>
+    <comment>‏</comment>
   </data>
   <data name="ColorPickerCaptionRecent" xml:space="preserve">
-    <value>צבעים אחרונים:</value>
+    <value>צבעים אחרונים:‏</value>
   </data>
   <data name="ColorPickerCaptionSelectCustom" xml:space="preserve">
     <value>בחירה</value>
   </data>
   <data name="ColorPickerCaptionStandard" xml:space="preserve">
-    <value>צבעים סטנדרטיים:</value>
+    <value>צבעים סטנדרטיים:‏</value>
   </data>
   <data name="ColorPickerTabCustom" xml:space="preserve">
     <value>אישי</value>
@@ -234,7 +235,7 @@
     <value>פרויקט</value>
   </data>
   <data name="CommandCircuitUsage" xml:space="preserve">
-    <value>בשימוש ע"י...</value>
+    <value>בשימוש ע"י...‏</value>
   </data>
   <data name="CommandEditAlignCenter" xml:space="preserve">
     <value>יישור לאמצע</value>
@@ -255,10 +256,10 @@
     <value>תבליטים</value>
   </data>
   <data name="CommandEditCopy" xml:space="preserve">
-    <value>_העתק</value>
+    <value>‏_העתק</value>
   </data>
   <data name="CommandEditCut" xml:space="preserve">
-    <value>_גזור</value>
+    <value>‏_גזור</value>
   </data>
   <data name="CommandEditDecreaseFontSize" xml:space="preserve">
     <value>הקטן גופן</value>
@@ -267,7 +268,7 @@
     <value>הקטן כניסה</value>
   </data>
   <data name="CommandEditDelete" xml:space="preserve">
-    <value>_מחק</value>
+    <value>‏_מחק</value>
   </data>
   <data name="CommandEditIncreaseFontSize" xml:space="preserve">
     <value>הגדל גופן</value>
@@ -294,7 +295,7 @@
     <value>סיבוב ימינה</value>
   </data>
   <data name="CommandEditSelectAll" xml:space="preserve">
-    <value>_בחירת הכל</value>
+    <value>‏_בחירת הכל</value>
   </data>
   <data name="CommandEditSelectAllButWires" xml:space="preserve">
     <value>בחירת הכל חוץ מחוטים</value>
@@ -333,13 +334,13 @@
     <value>ייצוא _תמונה</value>
   </data>
   <data name="CommandFileFileImport" xml:space="preserve">
-    <value>_ייבוא...</value>
+    <value>‏_ייבוא...‏</value>
   </data>
   <data name="CommandFileNew" xml:space="preserve">
-    <value>_חדש</value>
+    <value>‏_חדש</value>
   </data>
   <data name="CommandFileOpen" xml:space="preserve">
-    <value>_פתיחה</value>
+    <value>‏_פתיחה</value>
   </data>
   <data name="CommandFileOpenRecent" xml:space="preserve">
     <value>פתיחת קבצים אחרו_נים</value>
@@ -348,13 +349,13 @@
     <value>שמי_רה</value>
   </data>
   <data name="CommandFileSaveAs" xml:space="preserve">
-    <value>שמירה _בשם...</value>
+    <value>‏שמירה _בשם...‏</value>
   </data>
   <data name="CommandHelpAbout" xml:space="preserve">
-    <value>_אודות</value>
+    <value>‏_אודות</value>
   </data>
   <data name="CommandHelpView" xml:space="preserve">
-    <value>_עזרה</value>
+    <value>‏_עזרה</value>
   </data>
   <data name="CommandHyperlink" xml:space="preserve">
     <value>היפר-קישור</value>
@@ -383,18 +384,18 @@
     <comment>!(Rectangular, Shaped) - chose default gate shape for your culture.</comment>
   </data>
   <data name="ErrorAddressNotConnected" xml:space="preserve">
-    <value>לא כל סיביות הכתובת מחוברות ברכיב הזיכרון {0}</value>
+    <value>לא כל סיביות הכתובת מחוברות ברכיב הזיכרון‏ {0}‏</value>
     <comment>{string memoryPath}</comment>
   </data>
   <data name="ErrorClipboardCorrupted" xml:space="preserve">
     <value>הנתונים בלוח העריכה פגומים ולא ניתנים להדבקה.</value>
   </data>
   <data name="ErrorDataInNotConnected" xml:space="preserve">
-    <value>לא כל סיביות הקלט מחוברות ברכיב הזיכרון {0}</value>
+    <value>לא כל סיביות הקלט מחוברות ברכיב הזיכרון ‏{0}‏</value>
     <comment>{string memoryPath}</comment>
   </data>
   <data name="ErrorFileCorrupted" xml:space="preserve">
-    <value>הקובץ "{0}" פגום ולא ניתן לפתיחה.</value>
+    <value>הקובץ ‏"‏‏{0}‏"‏‏ פגום ולא ניתן לפתיחה.</value>
     <comment>{string fileName}</comment>
   </data>
   <data name="ErrorHyperlinkText" xml:space="preserve">
@@ -404,82 +405,82 @@
     <value>כתובת הקישור לא תקינה</value>
   </data>
   <data name="ErrorJamBitWidthDifferent" xml:space="preserve">
-    <value>פין הקלט {0} ({1}) ופין הפלט {2} ({3}) ברכיב {4} הם בעלי רוחב סיביות שונה ולא ניתנים לחיבור. נא לפתור את הבעיה.</value>
+    <value>פין הקלט של ‏{0} (‏{1})‏ ופין הפלט של ‏{2}‏ (‏{3})‏ ברכיב ‏{4}‏ הם בעלי רוחב סיביות שונה ולא ניתנים לחיבור. נא לפתור את הבעיה.‏</value>
     <comment>{string symbol1, GridPoint point1, string symbol2, GridPoint point2, string logicCircuit}</comment>
   </data>
   <data name="ErrorLoopInCircuit" xml:space="preserve">
-    <value>רכיב של המעגל "{0}" במעגל "{1}" יוצר לולאה אינסופית. נא לפתור את הלולאה.</value>
+    <value>רכיב של המעגל "‏{0}"‏ במעגל "‏{1}"‏ יוצר לולאה אינסופית. נא לפתור את הלולאה.‏</value>
     <comment>{string symbol, string logicCircuit}</comment>
   </data>
   <data name="ErrorManyMemoryData" xml:space="preserve">
-    <value>המעגל {0} מכיל רכיב מסוג {1} ששומר על נתונים בין הרצות.
-לא ניתן להשתמש במעגל כזה מספר פעמים בתוך מעגלים אחרים, מכיוון שזה יוצר מצב שבו מספר מאגרי נתונים עלולים להישמר אותו מודול זיכרון.</value>
+    <value>המעגל‏ ‏{0} ‏מכיל רכיב מסוג‏ {1} ‏ששומר על נתונים בין הרצות.‏
+לא ניתן להשתמש במעגל כזה מספר פעמים בתוך מעגלים אחרים, מכיוון שזה יוצר מצב שבו מספר מאגרי נתונים עלולים להישמר אותו מודול זיכרון. ‏</value>
     <comment>{string circuitName, string ramNotation}</comment>
   </data>
   <data name="ErrorManyResults" xml:space="preserve">
-    <value>פין הקלט {0} של {1} מחובר למספר פיני פלט שאינם תלת-מצביים.</value>
+    <value>פין הקלט ‏{0}‏ של ‏{1}‏ מחובר למספר פיני פלט שאינם תלת-מצביים.‏</value>
     <comment>{string pinName, string symbol}</comment>
   </data>
   <data name="ErrorProjectCount" xml:space="preserve">
     <value>יש יותר מפרויקט אחד בקובץ</value>
   </data>
   <data name="ErrorUnknownVersion" xml:space="preserve">
-    <value>נסיון לטעון גרסה לא ידועה של פרויקט.
-הקובץ פגום, או נוצר עם גרסה חדשה יותר של LogicCircuit. נא לבדוק את הכתובת &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt; עבור גרסה חדשה יותר.</value>
+    <value>נסיון לטעון גרסה לא ידועה של פרויקט.‏
+הקובץ פגום, או נוצר עם גרסה חדשה יותר של LogicCircuit. נא לבדוק את הכתובת &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt; עבור גרסה חדשה יותר.‏</value>
   </data>
   <data name="ErrorUnsupportedUri" xml:space="preserve">
-    <value>ניווט לכתובת הזאת לא נתמך.</value>
+    <value>ניווט לכתובת הזאת לא נתמך.‏</value>
   </data>
   <data name="FileFilter" xml:space="preserve">
-    <value>פרויקט מעגל לוגי (*{0})|*{0}|כל הקבצים (*.*)|*.*</value>
+    <value>פרויקט מעגל לוגי ‏(*{0})|*{0}‏|כל הקבצים ‏(*.*)|*.*</value>
     <comment>{string fileExtention}</comment>
   </data>
   <data name="FileSaved" xml:space="preserve">
-    <value>הקובץ {0} נשמר.</value>
+    <value>הקובץ ‏{0}‏ נשמר.‏</value>
     <comment>{string fileName}</comment>
   </data>
   <data name="FunctionParameter" xml:space="preserve">
-    <value>נדרשים לפחות {1} פרמטרים עבור הפונקציה {0}.</value>
+    <value>נדרשים לפחות ‏{1}‏ פרמטרים עבור הפונקציה ‏{0}‏.‏</value>
     <comment>{string function, int parameterCount}</comment>
   </data>
   <data name="Gate7SegName" xml:space="preserve">
     <value>תצוגת 7 חלקים</value>
   </data>
   <data name="GateAndName" xml:space="preserve">
-    <value>And</value>
+    <value>‏And‏</value>
   </data>
   <data name="GateAndNotation" xml:space="preserve">
-    <value>&amp;</value>
+    <value>‏&amp;‏</value>
   </data>
   <data name="GateAndNotName" xml:space="preserve">
-    <value>NAnd</value>
+    <value>‏NAnd‏</value>
   </data>
   <data name="GateClockName" xml:space="preserve">
     <value>שעון</value>
   </data>
   <data name="GateClockNotation" xml:space="preserve">
-    <value>ω</value>
+    <value>‏ω‏</value>
   </data>
   <data name="GateLedName" xml:space="preserve">
-    <value>LED</value>
+    <value>‏LED‏</value>
   </data>
   <data name="GateLedNotation" xml:space="preserve">
-    <value>LED</value>
+    <value>‏LED‏</value>
   </data>
   <data name="GateNotName" xml:space="preserve">
-    <value>Not</value>
+    <value>‏Not‏</value>
   </data>
   <data name="GateNotNotation" xml:space="preserve">
-    <value>1</value>
+    <value>‏1‏</value>
   </data>
   <data name="GateOrName" xml:space="preserve">
-    <value>Or</value>
+    <value>‏Or‏</value>
   </data>
   <data name="GateOrNotation" xml:space="preserve">
-    <value>≥1</value>
+    <value>‏≥1‏</value>
   </data>
   <data name="GateOrNotName" xml:space="preserve">
-    <value>NOr</value>
+    <value>‏NOr‏</value>
   </data>
   <data name="GateShapeRectangular" xml:space="preserve">
     <value>מרובע</value>
@@ -488,70 +489,70 @@
     <value>מסוגנן</value>
   </data>
   <data name="GateTriStateName" xml:space="preserve">
-    <value>Tri-state</value>
+    <value>חוצץ תלת-מצבי</value>
   </data>
   <data name="GateTriStateNotation" xml:space="preserve">
-    <value>1</value>
+    <value>‏‏1‏‏</value>
   </data>
   <data name="GateXorName" xml:space="preserve">
-    <value>Xor</value>
+    <value>‏Xor‏</value>
   </data>
   <data name="GateXorNotation" xml:space="preserve">
-    <value>=1</value>
+    <value>‏=1‏</value>
   </data>
   <data name="GateXorNotName" xml:space="preserve">
-    <value>XNor</value>
+    <value>‏XNor‏</value>
   </data>
   <data name="GridPoint" xml:space="preserve">
-    <value>({0}, {1})</value>
+    <value>‏({0}, {1})‏</value>
     <comment>{int x, int y}</comment>
   </data>
   <data name="HelpContent" xml:space="preserve">
     <value>http://www.logiccircuit.org/help.html</value>
   </data>
   <data name="ImageFileFilter" xml:space="preserve">
-    <value>קובץ תמונה (*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif)|*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif|כל הקבצים (*.*)|*.*</value>
+    <value>קובץ תמונה ‏(*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif)‏|*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif|כל הקבצים ‏(*.*)|*.*</value>
   </data>
   <data name="ImagePathInvalid" xml:space="preserve">
-    <value>שם הקובץ לא תקין. נא לבדוק שהתיקיה והקובץ קיימים וששם הקובץ הוזן נכון.</value>
+    <value>שם הקובץ לא תקין. נא לבדוק שהתיקיה והקובץ קיימים וששם הקובץ הוזן נכון.‏</value>
   </data>
   <data name="ImportTitle" xml:space="preserve">
     <value>ייבוא</value>
   </data>
   <data name="Led7Pin1" xml:space="preserve">
-    <value>a</value>
+    <value>‏a‏</value>
   </data>
   <data name="Led7Pin2" xml:space="preserve">
-    <value>b</value>
+    <value>‏b‏</value>
   </data>
   <data name="Led7Pin3" xml:space="preserve">
-    <value>c</value>
+    <value>‏c‏</value>
   </data>
   <data name="Led7Pin4" xml:space="preserve">
-    <value>d</value>
+    <value>‏d‏</value>
   </data>
   <data name="Led7Pin5" xml:space="preserve">
-    <value>e</value>
+    <value>‏e‏</value>
   </data>
   <data name="Led7Pin6" xml:space="preserve">
-    <value>f</value>
+    <value>‏f‏</value>
   </data>
   <data name="Led7Pin7" xml:space="preserve">
-    <value>g</value>
+    <value>‏g‏</value>
   </data>
   <data name="Led7Pin8" xml:space="preserve">
-    <value>dot</value>
+    <value>‏dot‏</value>
   </data>
   <data name="LedMatrixColumnSelector" xml:space="preserve">
-    <value>בחירת עמודה #{0}</value>
+    <value>בחירת עמודה #‏{0}‏</value>
     <comment>{int column}</comment>
   </data>
   <data name="LedMatrixRowIndividual" xml:space="preserve">
-    <value>בחירת כל LED בשורה #{0}</value>
+    <value>בחירת כל LED בשורה ‏#{0}</value>
     <comment>{int row}</comment>
   </data>
   <data name="LedMatrixRowSelector" xml:space="preserve">
-    <value>בחירת שורה #{0}</value>
+    <value>בחירת שורה ‏#{0}‏‏</value>
     <comment>{int row}</comment>
   </data>
   <data name="LedMatrixTypeIndividual" xml:space="preserve">
@@ -561,7 +562,7 @@
     <value>בורר</value>
   </data>
   <data name="Loading" xml:space="preserve">
-    <value>טוען...</value>
+    <value>טוען...‏</value>
   </data>
   <data name="LogicalCircuitMainName" xml:space="preserve">
     <value>ראשי</value>
@@ -573,14 +574,14 @@
     <value>מעגל לוגי</value>
   </data>
   <data name="MainFrameCaption" xml:space="preserve">
-    <value>מעגל לוגי {0}</value>
+    <value>מעגל לוגי ‏{0}‏</value>
     <comment>{string projectName}</comment>
   </data>
   <data name="MemoryAddressPinName" xml:space="preserve">
     <value>כתובת זיכרון</value>
   </data>
   <data name="MemoryAddressPinNotation" xml:space="preserve">
-    <value>a</value>
+    <value>‏a‏</value>
   </data>
   <data name="MemoryDataInPinName" xml:space="preserve">
     <value>נתונים</value>
@@ -589,99 +590,99 @@
     <value>נתונים יוצאים</value>
   </data>
   <data name="MemoryDataPinNotation" xml:space="preserve">
-    <value>d</value>
+    <value>‏d‏</value>
   </data>
   <data name="MemoryOnStartData" xml:space="preserve">
     <value>שמירת זיכרון בין הרצות</value>
   </data>
   <data name="MemoryOnStartOnes" xml:space="preserve">
-    <value>אתחול כל הסיביות ל1</value>
+    <value>אתחול כל הסיביות ל1‏</value>
   </data>
   <data name="MemoryOnStartRandom" xml:space="preserve">
     <value>אקראי</value>
   </data>
   <data name="MemoryOnStartZeros" xml:space="preserve">
-    <value>אתחול כל הסיביות ל0</value>
+    <value>אתחול כל הסיביות ל0‏</value>
   </data>
   <data name="MemoryWritePinName" xml:space="preserve">
-    <value>כתיבה לזיכרון.
-הזיכרון מתעדכן ב{0}</value>
+    <value>כתיבה לזיכרון.‏
+הזיכרון מתעדכן ב‏{0}‏</value>
     <comment>{string writeOn}</comment>
   </data>
   <data name="MemoryWritePinNotation" xml:space="preserve">
-    <value>w</value>
+    <value>‏w‏</value>
   </data>
   <data name="MenuHeaderCircuit" xml:space="preserve">
-    <value>_מעגל לוגי</value>
+    <value>‏_מעגל לוגי</value>
   </data>
   <data name="MenuHeaderEdit" xml:space="preserve">
     <value>ער_יכה</value>
   </data>
   <data name="MenuHeaderFile" xml:space="preserve">
-    <value>_קובץ</value>
+    <value>‏_קובץ</value>
   </data>
   <data name="MenuHeaderHelp" xml:space="preserve">
-    <value>_עזרה</value>
+    <value>‏_עזרה</value>
   </data>
   <data name="MenuHeaderTools" xml:space="preserve">
-    <value>_כלים</value>
+    <value>‏_כלים</value>
   </data>
   <data name="MessageExportImageDialog" xml:space="preserve">
-    <value>נא לבחור את סוג התמונה ושם הקובץ לייצוא.</value>
+    <value>נא לבחור את סוג התמונה ושם הקובץ לייצוא.‏</value>
   </data>
   <data name="MessageFloatingSymbolCount" xml:space="preserve">
-    <value>נמצאו {0} רכיבים לא מחוברים.</value>
+    <value>נמצאו ‏{0}‏ רכיבים לא מחוברים.‏</value>
     <comment>{int symbolCount}</comment>
   </data>
   <data name="MessageFreeWireCount" xml:space="preserve">
-    <value>נמצאו {0} חוטים לא מחוברים.</value>
+    <value>נמצאו ‏{0}‏ חוטים לא מחוברים.‏</value>
     <comment>{int wireCount}</comment>
   </data>
   <data name="MessageImageFileExists" xml:space="preserve">
-    <value>הקובץ "{0}" כבר קיים.
-האם להחליף אותו?</value>
+    <value>הקובץ ‏"{0}"‏ כבר קיים.‏
+האם להחליף אותו?‏</value>
     <comment>{string fileName}</comment>
   </data>
   <data name="MessageInputOutputPinsMissing" xml:space="preserve">
-    <value>במעגל הזה אין פיני קלט או פלט. טבלת האמת נבנית ע"י שליחת כל אופציות הקלט וקריאת נתוני הפלט.</value>
+    <value>במעגל הזה אין פיני קלט או פלט. טבלת האמת נבנית ע"י שליחת כל אופציות הקלט וקריאת נתוני הפלט.‏</value>
   </data>
   <data name="MessageInvalidRecentFile" xml:space="preserve">
-    <value>לא ניתן לפתוח את הקובץ "{0}".
-האם למחוק אותו מרשימת הקבצים שנפתחו לאחרונה?</value>
+    <value>לא ניתן לפתוח את הקובץ ‏"{0}".‏
+האם למחוק אותו מרשימת הקבצים שנפתחו לאחרונה?‏</value>
     <comment>{string file}</comment>
   </data>
   <data name="MessageNotRootConstant" xml:space="preserve">
-    <value>רק קבועים שנמצאים במעגל השורש ({0}) ניתנים לשינוי כאשר הזרם דולק.</value>
+    <value>רק קבועים שנמצאים במעגל השורש‏ ({0}) ‏ניתנים לשינוי כאשר הזרם דולק.‏</value>
     <comment>{string circuitName}</comment>
   </data>
   <data name="MessageNotUsed" xml:space="preserve">
-    <value>המעגל לא נמצא בשימוש באף מקום.</value>
+    <value>המעגל לא נמצא בשימוש באף מקום.‏</value>
   </data>
   <data name="MessageRestartRequared" xml:space="preserve">
-    <value>הגדרות השפה שונו. כדי שההגדרות החדשות יכנסו לתוקף יש להפעיל מחדש את המערכת.</value>
+    <value>הגדרות השפה שונו. כדי שההגדרות החדשות יכנסו לתוקף יש להפעיל מחדש את המערכת.‏</value>
   </data>
   <data name="MessageSaveFile" xml:space="preserve">
-    <value>הפרויקט {0} השתנה.
-האם לשמור שינויים?</value>
+    <value>הפרויקט‏ {0} ‏השתנה.‏
+האם לשמור שינויים?‏</value>
     <comment>{string projecgName}</comment>
   </data>
   <data name="MessageTruthTableTooBig" xml:space="preserve">
-    <value>טבלת האמת נחתכה מכיוון שהיא ארוכה מדי. נא להשתמש בפילטר כדי לאמת את נכונות המעגל.</value>
+    <value>טבלת האמת נחתכה מכיוון שהיא ארוכה מדי. נא להשתמש בפילטר כדי לאמת את נכונות ‏המעגל.</value>
   </data>
   <data name="MessageUsageNote" xml:space="preserve">
-    <value>לחיצה כפולה עם העכבר על אחד המעגלים שבהם המעגל הנוכחי נמצא בשימוש תעבור אליו ותבחר את כל העותקים של המעגל הנוכחי.</value>
+    <value>לחיצה כפולה עם העכבר על אחד המעגלים שבהם המעגל הנוכחי נמצא בשימוש תעבור אליו ותבחר את כל העותקים של המעגל הנוכחי.‏</value>
   </data>
   <data name="MessageVersionLatest" xml:space="preserve">
-    <value>הגרסה הנוכחית עדכנית.</value>
+    <value>הגרסה הנוכחית עדכנית.‏</value>
   </data>
   <data name="MessageVersionOutdated" xml:space="preserve">
-    <value>הגרסה הנוכחית ישנה. נא ללחוץ על הקישור כדי לעדכן את הגרסה.</value>
+    <value>הגרסה הנוכחית ישנה. נא ללחוץ על הקישור כדי לעדכן את הגרסה.‏</value>
   </data>
   <data name="MessageVersionPreview" xml:space="preserve">
-    <value>הגרסה הנוכחית היא גרסת פיתוח לא משוחררת.</value>
+    <value>הגרסה הנוכחית היא גרסת פיתוח לא משוחררת.‏</value>
   </data>
   <data name="MessageWarning" xml:space="preserve">
-    <value>אזהרה!</value>
+    <value>אזהרה!‏</value>
   </data>
   <data name="NameButton" xml:space="preserve">
     <value>כפתור</value>
@@ -690,7 +691,7 @@
     <value>קבוע</value>
   </data>
   <data name="NameLedMatrix" xml:space="preserve">
-    <value>מטריצת LED</value>
+    <value>מטריצת LED‏</value>
   </data>
   <data name="NamePin" xml:space="preserve">
     <value>פין</value>
@@ -699,7 +700,7 @@
     <value>מפצל</value>
   </data>
   <data name="OperationCanceled" xml:space="preserve">
-    <value>הפעולה בוטלה.</value>
+    <value>הפעולה בוטלה.‏</value>
   </data>
   <data name="Oscillation" xml:space="preserve">
     <value>תנודה</value>
@@ -708,45 +709,45 @@
     <value>סוף ביטוי</value>
   </data>
   <data name="ParserErrorCloseParenMissing" xml:space="preserve">
-    <value>חסר סימן ')' במקום: {0}</value>
+    <value>חסר סימן ‏')'‏ במקום‏: {0}‏</value>
     <comment>{string token}</comment>
   </data>
   <data name="ParserErrorExpressionMissing" xml:space="preserve">
-    <value>חסר ביטוי אחרי {0}</value>
+    <value>חסר ביטוי אחרי‏ {0}‏</value>
     <comment>{string token}</comment>
   </data>
   <data name="ParserErrorInvalidNumber" xml:space="preserve">
-    <value>מספר לא תקין: {0}</value>
+    <value>מספר לא תקין‏: {0}‏</value>
     <comment>{string number}</comment>
   </data>
   <data name="ParserErrorUnclosedQuote" xml:space="preserve">
-    <value>חסרים גרשיים סוגרים עבור המזהה: {0}</value>
+    <value>חסרים גרשיים סוגרים עבור המזהה‏: {0}‏</value>
     <comment>{string text}</comment>
   </data>
   <data name="ParserErrorUnexpected" xml:space="preserve">
-    <value>{0} לא צפוי</value>
+    <value>‏{0} ‏לא צפוי</value>
     <comment>{string token}</comment>
   </data>
   <data name="ParserErrorUnknownChar" xml:space="preserve">
-    <value>תו לא ידוע: {0}</value>
+    <value>תו לא ידוע‏: {0}‏</value>
     <comment>{char c}</comment>
   </data>
   <data name="ParserErrorUnknownPin" xml:space="preserve">
-    <value>{0} - לא נמצא פין קלט או פלט</value>
+    <value>‏{0} - ‏לא נמצא פין קלט או פלט</value>
     <comment>{string name}</comment>
   </data>
   <data name="PinEnableName" xml:space="preserve">
-    <value>E</value>
+    <value>‏E‏</value>
   </data>
   <data name="PinInName" xml:space="preserve">
-    <value>x</value>
+    <value>‏x‏</value>
   </data>
   <data name="PinName" xml:space="preserve">
-    <value>{0}{1}</value>
+    <value>‏{0}{1}‏</value>
     <comment>{string prefix, int number}</comment>
   </data>
   <data name="PinOutName" xml:space="preserve">
-    <value>q</value>
+    <value>‏q‏</value>
   </data>
   <data name="PinSideBottom" xml:space="preserve">
     <value>מלמטה</value>
@@ -776,36 +777,36 @@
     <value>הדלקה</value>
   </data>
   <data name="ProbeHistoryMark" xml:space="preserve">
-    <value>&lt;&lt;&lt;&lt;&lt;&lt; סימון &gt;&gt;&gt;&gt;&gt;&gt;</value>
+    <value>‏&lt;&lt;&lt;&lt;&lt;&lt; סימון &gt;&gt;&gt;&gt;&gt;&gt;‏</value>
   </data>
   <data name="ProjectSummary" xml:space="preserve">
-    <value>{0} מעגלים לוגיים, ב{1} קטגוריות, משתמשים ב{2} רכיבים ו{3} חוטים</value>
+    <value>‏{0} ‏מעגלים לוגיים, ב‏{1} ‏קטגוריות, משתמשים ב‏{2} ‏רכיבים ו‏{3} ‏חוטים</value>
     <comment>{int logicalCircuits, int categories, int symbols, int wires}</comment>
   </data>
   <data name="RAMNotation" xml:space="preserve">
-    <value>RAM</value>
+    <value>‏RAM‏</value>
   </data>
   <data name="Ready" xml:space="preserve">
-    <value>מוכן.</value>
+    <value>מוכן.‏</value>
   </data>
   <data name="ReportError" xml:space="preserve">
-    <value>לא ניתן לייצר דו"ח על הפונקציות של המעגל בגלל השגיאה הבאה: {0}</value>
+    <value>לא ניתן לייצר דו"ח על הפונקציות של המעגל בגלל השגיאה הבאה‏: {0}‏</value>
     <comment>{string message}</comment>
   </data>
   <data name="ReportFunctions" xml:space="preserve">
-    <value>פונקציות של המעגל "{0}"</value>
+    <value>פונקציות של המעגל‏ "{0}"‏</value>
     <comment>{string name}</comment>
   </data>
   <data name="ReportGateName" xml:space="preserve">
-    <value>{0} ({1})</value>
+    <value>‏{0} ‏(‏{1})‏‏</value>
     <comment>{string gate, int inputCount}</comment>
   </data>
   <data name="ReportMemoryName" xml:space="preserve">
-    <value>{0}: {1} סיביות כתובת, {2} סיביות נתונים</value>
+    <value>‏{0}‏:‏ {1} ‏סיביות כתובת, ‏{2} ‏סיביות נתונים</value>
     <comment>{string memoryName, int address, int data}</comment>
   </data>
   <data name="ROMNotation" xml:space="preserve">
-    <value>ROM</value>
+    <value>‏ROM‏</value>
   </data>
   <data name="SplitterDirectionClockwise" xml:space="preserve">
     <value>שמאל</value>
@@ -814,11 +815,11 @@
     <value>ימין</value>
   </data>
   <data name="SplitterThin1PinName" xml:space="preserve">
-    <value>(סיבית {0}) של המפצל</value>
+    <value>‏(‏סיבית‏ {0}) ‏של המפצל</value>
     <comment>{int bit}</comment>
   </data>
   <data name="SplitterThin2PinName" xml:space="preserve">
-    <value>(סיביות {0}-{1}) של המפצל</value>
+    <value>‏(‏סיביות ‏{0}‏-‏{1}‏) ‏של המפצל</value>
     <comment>{int firstBit, int lastBit}</comment>
   </data>
   <data name="SplitterWidePinName" xml:space="preserve">
@@ -828,50 +829,50 @@
     <value>טקסט</value>
   </data>
   <data name="TipOnAwaitingArea" xml:space="preserve">
-    <value>{0} {1}. ניתן להקיף מספר רכיבים כדי לבחור אותם ביחד, החזקת Shift תוסיף את הרכיבים לבחירה הנוכחית.</value>
+    <value>‏{0} ‏{1}‏. ‏ניתן להקיף מספר רכיבים כדי לבחור אותם ביחד, החזקת ‏Shift ‏תוסיף את הרכיבים לבחירה הנוכחית.‏</value>
     <comment>{string logicCircuit, LogicCircuit.GridPoint point}</comment>
   </data>
   <data name="TipOnCtrlDown" xml:space="preserve">
-    <value>לחיצה על Ctrl+{Shift}+Tab עוברת בין מעגלים לוגיים. ניתן ללחוץ על רכיבים ספציפיים כדי לבחור אותם או לבטל את הבחירה..</value>
+    <value>לחיצה על Ctrl+{Shift}+Tab עוברת בין מעגלים לוגיים. ניתן ללחוץ על רכיבים ספציפיים כדי לבחור אותם או לבטל את הבחירה...‏</value>
   </data>
   <data name="TipOnStartMove" xml:space="preserve">
-    <value>ניתן לגרור את הבחירה למקום הרצוי. לחיצה על Esc תבטל את ההזזה. החזקת Shift תמנע מחוטים מחוברים לזוז.</value>
+    <value>ניתן לגרור את הבחירה למקום הרצוי. לחיצה על Esc תבטל את ההזזה. החזקת Shift תמנע מחוטים מחוברים לזוז.‏</value>
   </data>
   <data name="TipOnStartWire" xml:space="preserve">
-    <value>ניתן לגרור את קצת החוט למקום הרצוי. לחיצה על Esc תבטל את יצירת החוט.</value>
+    <value>ניתן לגרור את קצת החוט למקום הרצוי. לחיצה על Esc תבטל את יצירת החוט.‏</value>
   </data>
   <data name="TipOnWireSelect" xml:space="preserve">
-    <value>Shift+{Ctrl}+Click על חוט כדי לבחור/לבטל בחירה על המוליך כולו, Alt+Click על חוט מפצל אותו לשני חוטים, או מחבר שני חוטים כשהלחיצה היא על נקודה משותפת להם.</value>
+    <value>Shift+{Ctrl}+Click על חוט כדי לבחור/לבטל בחירה על המוליך כולו, Alt+Click על חוט מפצל אותו לשני חוטים, או מחבר שני חוטים כשהלחיצה היא על נקודה משותפת להם.‏</value>
   </data>
   <data name="TitleAbout" xml:space="preserve">
     <value>אודות</value>
   </data>
   <data name="TitleActualFrequency" xml:space="preserve">
-    <value>תדירות אמתית:</value>
+    <value>תדירות אמתית:‏</value>
   </data>
   <data name="TitleAddressBitWidth" xml:space="preserve">
-    <value>רוחב סיביות _כתובת:</value>
+    <value>רוחב סיביות _כתובת:‏</value>
   </data>
   <data name="TitleApplication" xml:space="preserve">
-    <value>Logical Circuit</value>
+    <value>‏Logical Circuit‏</value>
   </data>
   <data name="TitleApply" xml:space="preserve">
-    <value>_יישם</value>
+    <value>‏_יישם</value>
   </data>
   <data name="TitleBitWidth" xml:space="preserve">
-    <value>_רוחב סיביות</value>
+    <value>‏_רוחב סיביות</value>
   </data>
   <data name="TitleCancel" xml:space="preserve">
     <value>ביטול</value>
   </data>
   <data name="TitleCategory" xml:space="preserve">
-    <value>_קטגוריה:</value>
+    <value>‏_קטגוריה:‏</value>
   </data>
   <data name="TitleCellShape" xml:space="preserve">
-    <value>_צורת תא:</value>
+    <value>‏_צורת תא:‏</value>
   </data>
   <data name="TitleCheckAll" xml:space="preserve">
-    <value>_סימון הכל</value>
+    <value>‏_סימון הכל</value>
   </data>
   <data name="TitleCheckVersion" xml:space="preserve">
     <value>בדיקת גרסה</value>
@@ -886,31 +887,31 @@
     <value>שימוש במעגל</value>
   </data>
   <data name="TitleColors" xml:space="preserve">
-    <value>צ_בעים:</value>
+    <value>‏צ_בעים:‏</value>
   </data>
   <data name="TitleColumns" xml:space="preserve">
-    <value>_עמודות:</value>
+    <value>‏_עמודות:‏</value>
   </data>
   <data name="TitleCount" xml:space="preserve">
     <value>כמות הפעמים בשימוש</value>
   </data>
   <data name="TitleCredits" xml:space="preserve">
-    <value>יוצרי התכנה:</value>
+    <value>יוצרי התכנה:‏</value>
   </data>
   <data name="TitleCulture" xml:space="preserve">
-    <value>_שפה</value>
+    <value>‏_שפה</value>
   </data>
   <data name="TitleData" xml:space="preserve">
     <value>נ_תונים</value>
   </data>
   <data name="TitleDataBitWidth" xml:space="preserve">
-    <value>רוחב סיביות _נתונים:</value>
+    <value>רוחב סיביות _נתונים:‏</value>
   </data>
   <data name="TitleDescription" xml:space="preserve">
-    <value>_תיאור:</value>
+    <value>‏_תיאור:‏</value>
   </data>
   <data name="TitleDisplayedRows" xml:space="preserve">
-    <value>שורות לתצוגה: {0:N0}</value>
+    <value>‏שורות לתצוגה:‏ {0:N0}‏</value>
     <comment>-{int count}</comment>
   </data>
   <data name="TitleDisplayOptions" xml:space="preserve">
@@ -920,40 +921,40 @@
     <value>ייצוא תמונה</value>
   </data>
   <data name="TitleFile" xml:space="preserve">
-    <value>_קובץ:</value>
+    <value>‏_קובץ:‏</value>
   </data>
   <data name="TitleFileName" xml:space="preserve">
-    <value>קובץ:</value>
+    <value>‏קובץ:‏</value>
   </data>
   <data name="TitleFileOpen" xml:space="preserve">
-    <value>...</value>
+    <value>‏...‏</value>
   </data>
   <data name="TitleFileOptions" xml:space="preserve">
     <value>קובץ</value>
   </data>
   <data name="TitleFilter" xml:space="preserve">
-    <value>_סינון:</value>
+    <value>‏_סינון:‏</value>
   </data>
   <data name="TitleFrequency" xml:space="preserve">
-    <value>_תדירות:</value>
+    <value>‏_תדירות:‏</value>
   </data>
   <data name="TitleFunction" xml:space="preserve">
     <value>פונקציה</value>
   </data>
   <data name="TitleGateShape" xml:space="preserve">
-    <value>_סגנון שערים</value>
+    <value>‏_סגנון שערים</value>
   </data>
   <data name="TitleHyperlink" xml:space="preserve">
-    <value>_קישור:</value>
+    <value>‏_קישור:‏</value>
   </data>
   <data name="TitleImportCircuit" xml:space="preserve">
     <value>ייבוא</value>
   </data>
   <data name="TitleInvert" xml:space="preserve">
-    <value>_הפוך</value>
+    <value>‏_הפוך</value>
   </data>
   <data name="TitleInverted" xml:space="preserve">
-    <value>_הפוך</value>
+    <value>‏_הפוך</value>
   </data>
   <data name="TitleIsDisplay" xml:space="preserve">
     <value>ה_צג רכיבי תצוגה על הסימן</value>
@@ -965,34 +966,34 @@
     <value>עומס גבוה על המעבד</value>
   </data>
   <data name="TitleIsToggle" xml:space="preserve">
-    <value>_מתג</value>
+    <value>‏_מתג</value>
   </data>
   <data name="TitleLoad" xml:space="preserve">
-    <value>_טעינה מקובץ...</value>
+    <value>‏_טעינה מקובץ...‏</value>
   </data>
   <data name="TitleLoadLastFile" xml:space="preserve">
-    <value>_טען את הקובץ האחרון בפתיחה</value>
+    <value>‏_טען את הקובץ האחרון בפתיחה</value>
   </data>
   <data name="TitleMark" xml:space="preserve">
-    <value>_הכנס סימון</value>
+    <value>‏_הכנס סימון</value>
   </data>
   <data name="TitleMaxRecentFiles" xml:space="preserve">
-    <value>_מקסימום קבצים אחרונים לשמירה:</value>
+    <value>‏_מקסימום קבצים אחרונים לשמירה:‏</value>
   </data>
   <data name="TitleMemory" xml:space="preserve">
     <value>זיכרון</value>
   </data>
   <data name="TitleMemoryOnStart" xml:space="preserve">
-    <value>_אתחול:</value>
+    <value>‏_אתחול:‏</value>
   </data>
   <data name="TitleName" xml:space="preserve">
-    <value>_שם:</value>
+    <value>‏_שם:‏</value>
   </data>
   <data name="TitleNo" xml:space="preserve">
-    <value>_לא</value>
+    <value>‏_לא‏</value>
   </data>
   <data name="TitleNotation" xml:space="preserve">
-    <value>_סימון:</value>
+    <value>‏_סימון:‏</value>
   </data>
   <data name="TitleOK" xml:space="preserve">
     <value>אישור</value>
@@ -1007,15 +1008,15 @@
     <value>מרשם תנודות</value>
   </data>
   <data name="TitleOscilloscoping" xml:space="preserve">
-    <value>_פועל</value>
+    <value>‏_פועל</value>
   </data>
   <data name="TitlePinInput" xml:space="preserve">
-    <value>{0}
+    <value>‏{0}‏
 קלט</value>
     <comment>{string pinName}</comment>
   </data>
   <data name="TitlePinOutput" xml:space="preserve">
-    <value>{0}
+    <value>‏{0}‏
 פלט</value>
     <comment>{string pinName}</comment>
   </data>
@@ -1032,62 +1033,62 @@
     <value>פרטי שגיאה</value>
   </data>
   <data name="TitleRows" xml:space="preserve">
-    <value>_שורות:</value>
+    <value>‏_שורות:‏</value>
   </data>
   <data name="TitleRunningCircuit" xml:space="preserve">
     <value>המעגל הרץ</value>
   </data>
   <data name="TitleSaveAs" xml:space="preserve">
-    <value>שמירה _בשם...</value>
+    <value>שמירה _בשם...‏</value>
   </data>
   <data name="TitleShowDetails" xml:space="preserve">
-    <value>_הצגת נתונים</value>
+    <value>‏_הצגת נתונים</value>
   </data>
   <data name="TitleShowGrid" xml:space="preserve">
-    <value>_הצגת רשת</value>
+    <value>‏_הצגת רשת </value>
   </data>
   <data name="TitleSide" xml:space="preserve">
-    <value>_צד:</value>
+    <value>‏_צד:‏</value>
   </data>
   <data name="TitleStop" xml:space="preserve">
-    <value>_עצור</value>
+    <value>‏_עצור</value>
   </data>
   <data name="TitleSummary" xml:space="preserve">
-    <value>סיכום:</value>
+    <value>‏סיכום:‏</value>
   </data>
   <data name="TitleText" xml:space="preserve">
-    <value>_טקסט:</value>
+    <value>‏_טקסט:‏</value>
   </data>
   <data name="TitleTotal" xml:space="preserve">
-    <value>סה"כ:</value>
+    <value>סה"כ:‏</value>
   </data>
   <data name="TitleTotalRows" xml:space="preserve">
-    <value>סה"כ שורות: {0:N0}</value>
+    <value>‏סה"כ שורות:‏ {0:N0}‏</value>
     <comment>-{int count}</comment>
   </data>
   <data name="TitleType" xml:space="preserve">
-    <value>ס_וג:</value>
+    <value>ס_וג:‏</value>
   </data>
   <data name="TitleUncheckAll" xml:space="preserve">
     <value>ביטול הבחירה מהכל</value>
   </data>
   <data name="TitleValue" xml:space="preserve">
-    <value>_ערך:</value>
+    <value>‏_ערך:‏</value>
   </data>
   <data name="TitleVersion" xml:space="preserve">
-    <value>גרסה:</value>
+    <value>גרסה:‏</value>
   </data>
   <data name="TitleWeb" xml:space="preserve">
-    <value>עמוד ווב:</value>
+    <value>עמוד ווב:‏</value>
   </data>
   <data name="TitleWriteOn" xml:space="preserve">
-    <value>כת_יבה ב:</value>
+    <value>כת_יבה ב:‏</value>
   </data>
   <data name="TitleYes" xml:space="preserve">
-    <value>_כן</value>
+    <value>‏_כן</value>
   </data>
   <data name="TitleZoom" xml:space="preserve">
-    <value>_זום:</value>
+    <value>‏_זום:‏</value>
   </data>
   <data name="ToolTipAddressBitWidth" xml:space="preserve">
     <value>רוחב סיביות הכתובת</value>
@@ -1096,17 +1097,17 @@
     <value>צבע הדגשה</value>
   </data>
   <data name="ToolTipButton" xml:space="preserve">
-    <value>כפתור {0}</value>
+    <value>כפתור‏ {0}‏</value>
     <comment>{string buttonName}</comment>
   </data>
   <data name="ToolTipButtonNotation" xml:space="preserve">
     <value>שם הכפתור</value>
   </data>
   <data name="ToolTipColumns" xml:space="preserve">
-    <value>כמות העמודות של מטריצת הLED</value>
+    <value>כמות העמודות של מטריצת ה‏LED‏</value>
   </data>
   <data name="ToolTipConstant" xml:space="preserve">
-    <value>קבוע {1:X} ברוחב {0} סיביות</value>
+    <value>קבוע‏ {1:X} ‏ברוחב‏ {0} ‏סיביות</value>
     <comment>{int bitWidth, int value}</comment>
   </data>
   <data name="ToolTipConstantBitWidth" xml:space="preserve">
@@ -1131,30 +1132,30 @@
     <value>גודל הגופן</value>
   </data>
   <data name="ToolTipFrequency" xml:space="preserve">
-    <value>שינוי תדירות רכיבי השעון של המעגל.</value>
+    <value>שינוי תדירות רכיבי השעון של המעגל.‏</value>
   </data>
   <data name="ToolTipGateInputCount" xml:space="preserve">
     <value>כמות פיני הקלט של השער</value>
   </data>
   <data name="ToolTipInputPin" xml:space="preserve">
-    <value>קלט - {1} ברוחב {0} סיביות</value>
+    <value>קלט ברוחב‏ {0}‏ סיביות - ‏{1}‏</value>
     <comment>{int bitWidth, string pinName}</comment>
   </data>
   <data name="ToolTipIsDisplay" xml:space="preserve">
-    <value>כאשר נבחרה תצוגת רכיבי תצוגה עבור רכיב, כל רכיבי התצוגה שלו יוצגו על הסימונים שלו.
-רכיבת התצוגה הם: LED, מטריצת LED, כפתור, או מעגל לוגי אחר שמציג את רכיבי התצוגה שלו.</value>
+    <value>כאשר נבחרה תצוגת רכיבי תצוגה עבור רכיב, כל רכיבי התצוגה שלו יוצגו על הסימונים שלו.‏
+רכיבת התצוגה הם: ‏LED‏, מטריצת ‏LED‏, כפתור, או מעגל לוגי אחר שמציג את רכיבי התצוגה שלו.‏</value>
   </data>
   <data name="ToolTipIsMaximumSpeed1" xml:space="preserve">
-    <value>גורם למעגל לרוץ בתדירות הגבוהה ביותר הניתנת בהתעלם מהבחירה במחוון שמעל.</value>
+    <value>גורם למעגל לרוץ בתדירות הגבוהה ביותר הניתנת בהתעלם מהבחירה במחוון שמעל.‏</value>
   </data>
   <data name="ToolTipIsMaximumSpeed2" xml:space="preserve">
-    <value>בחירת האפשרות הזאת עלולה לגרום לממשק המשתמש לא להגיב במחשבים מסוימים.</value>
+    <value>בחירת האפשרות הזאת עלולה לגרום לממשק המשתמש לא להגיב במחשבים מסוימים.‏</value>
   </data>
   <data name="ToolTipIsToggle" xml:space="preserve">
-    <value>אם הכפתור מוגדר כמתג, הוא ישנה את מצבו מדלוק לכבוי בלחיצה, אחרת יהיה דלוק רק כל עוד הוא לחוץ ע"י העכבר.</value>
+    <value>אם הכפתור מוגדר כמתג, הוא ישנה את מצבו מדלוק לכבוי בלחיצה, אחרת יהיה דלוק רק כל עוד הוא לחוץ ע"י העכבר.‏</value>
   </data>
   <data name="ToolTipLedMatrix" xml:space="preserve">
-    <value>מטריצת LED בגודל {0}על{1} עם {2} סיביות עבור כל LED ({3} צבעים)</value>
+    <value>מטריצת ‏LED‏ בגודל ‏{0}‏ על ‏{1}‏ עם ‏{2} ‏סיביות עבור כל‏ LED‏ ({3} ‏צבעים)‏</value>
     <comment>{int rows, int columns, int bitsPerLed, int colors}</comment>
   </data>
   <data name="ToolTipLedMatrixType" xml:space="preserve">
@@ -1164,14 +1165,14 @@
     <value>טעינת נתונים מקובץ</value>
   </data>
   <data name="ToolTipMemoryOnStart" xml:space="preserve">
-    <value>בחירת אופן אתחול הזיכרון בזמן הרצה.</value>
+    <value>בחירת אופן אתחול הזיכרון בזמן הרצה.‏</value>
   </data>
   <data name="ToolTipNonePin" xml:space="preserve">
-    <value>{0} סיביות {1}</value>
+    <value>‏{0} ‏סיביות‏ {1}‏</value>
     <comment>{int bitWidth, string pinName}</comment>
   </data>
   <data name="ToolTipOutputPin" xml:space="preserve">
-    <value>פלט - {1} ברוחב {0} סיביות</value>
+    <value>פלט ברוחב‏ {0}‏ סיביות - ‏{1}‏</value>
     <comment>{int bitWidth, string pinName}</comment>
   </data>
   <data name="ToolTipPinBitWidth" xml:space="preserve">
@@ -1184,24 +1185,24 @@
     <value>הצד של הרכיב שבו יופיע הפין</value>
   </data>
   <data name="ToolTipRAM" xml:space="preserve">
-    <value>זיכרון גישה אקראית עם כתובת ברוחב {0} סיביות, ונתונים ברוחב {1} סיביות</value>
+    <value>זיכרון גישה אקראית עם כתובת ברוחב‏ {0} ‏סיביות, ונתונים ברוחב‏ {1} ‏סיביות</value>
     <comment>{int address, int data}</comment>
   </data>
   <data name="ToolTipRamWriteOn" xml:space="preserve">
     <value>זמן כתיבת הנתונים</value>
   </data>
   <data name="ToolTipROM" xml:space="preserve">
-    <value>זיכרון לקריאה בלבד עם כתובת ברוחב {0} סיביות, ונתונים ברוחב {1} סיביות</value>
+    <value>זיכרון לקריאה בלבד עם כתובת ברוחב‏ {0} ‏סיביות, ונתונים ברוחב‏ {1} ‏סיביות</value>
     <comment>{int address, int data}</comment>
   </data>
   <data name="ToolTipRows" xml:space="preserve">
-    <value>מספר השורות במטריצת הLED</value>
+    <value>מספר השורות במטריצת ה‏LED‏</value>
   </data>
   <data name="ToolTipSaveData" xml:space="preserve">
     <value>שמירת נתונים לקובץ</value>
   </data>
   <data name="ToolTipSplitter" xml:space="preserve">
-    <value>מפצל {0} סיביות ל{1} פינים</value>
+    <value>מפצל‏ {0} ‏סיביות ל‏{1} ‏פינים</value>
     <comment>{int bitWidth, int pinCount}</comment>
   </data>
   <data name="ToolTipSplitterBitWidth" xml:space="preserve">
@@ -1211,19 +1212,19 @@
     <value>כמות הפינים המפוצלים</value>
   </data>
   <data name="ToolTipSplitterRotation" xml:space="preserve">
-    <value>כיוון הפין המאוחד של המפצל.</value>
+    <value>כיוון הפין המאוחד של המפצל.‏</value>
   </data>
   <data name="ToolTipWire" xml:space="preserve">
     <value>חוט</value>
   </data>
   <data name="ToolTipZoom" xml:space="preserve">
-    <value>הזום של הדיאגרמה.</value>
+    <value>הזום של הדיאגרמה.‏</value>
   </data>
   <data name="TriStateGroupName" xml:space="preserve">
     <value>קבוצת רכיבים תלת-מצביים</value>
   </data>
   <data name="UnknownState" xml:space="preserve">
-    <value>המצב {0} לא ידוע</value>
+    <value>המצב ‏{0}‏ לא ידוע</value>
     <comment>{LogicCircuit.State state}</comment>
   </data>
   <data name="WebSiteDownloadUri" xml:space="preserve">
@@ -1233,20 +1234,20 @@
     <value>http://www.logiccircuit.org/</value>
   </data>
   <data name="WireDisplayBitWidth" xml:space="preserve">
-    <value>רוחב סיביות: {0}</value>
+    <value>רוחב סיביות‏: ‏{0}‏</value>
     <comment>{int bitWidth}</comment>
   </data>
   <data name="WireDisplayDisconnected" xml:space="preserve">
-    <value>החוט אינו מחובר.</value>
+    <value>החוט אינו מחובר.‏</value>
   </data>
   <data name="WireDisplayValue" xml:space="preserve">
-    <value>ערך: {0}</value>
+    <value>ערך‏: ‏{0}‏</value>
     <comment>{string value}</comment>
   </data>
   <data name="WriteOn0" xml:space="preserve">
-    <value>ירידה מ1 ל0</value>
+    <value>ירידה מ1 ל0‏</value>
   </data>
   <data name="WriteOn1" xml:space="preserve">
-    <value>עליה מ0 ל1</value>
+    <value>עליה מ0 ל1‏</value>
   </data>
 </root>
