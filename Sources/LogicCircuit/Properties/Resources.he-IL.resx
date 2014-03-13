@@ -432,7 +432,7 @@
     <value>ניווט לכתובת הזאת לא נתמך.‏</value>
   </data>
   <data name="FileFilter" xml:space="preserve">
-    <value>פרויקט מעגל לוגי ‏(*{0})|*{0}‏|כל הקבצים ‏(*.*)|*.*</value>
+    <value>פרויקט מעגל לוגי (*{0})|*{0}|כל הקבצים‏(*.*)|*.*</value>
     <comment>{string fileExtention}</comment>
   </data>
   <data name="FileSaved" xml:space="preserve">
@@ -511,7 +511,7 @@
     <value>http://www.logiccircuit.org/help.html</value>
   </data>
   <data name="ImageFileFilter" xml:space="preserve">
-    <value>קובץ תמונה ‏(*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif)‏|*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif|כל הקבצים ‏(*.*)|*.*</value>
+    <value>קובץ תמונה(*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif)|*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif|כל הקבצים‏(*.*)|*.*</value>
   </data>
   <data name="ImagePathInvalid" xml:space="preserve">
     <value>שם הקובץ לא תקין. נא לבדוק שהתיקיה והקובץ קיימים וששם הקובץ הוזן נכון.‏</value>
