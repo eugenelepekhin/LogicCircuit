@@ -58,7 +58,7 @@ namespace LogicCircuit.UnitTest {
 			Assert.AreEqual(1, project.ConstantSet.Count());
 			Assert.AreEqual(3, project.DevicePinSet.Count());
 
-			CircuitButton button = project.CircuitButtonSet.Create("a", false);
+			CircuitButton button = project.CircuitButtonSet.Create("a", false, PinSide.Right);
 			Assert.AreEqual(1, project.CircuitButtonSet.Count());
 			Assert.AreEqual(4, project.DevicePinSet.Count());
 
@@ -93,7 +93,7 @@ namespace LogicCircuit.UnitTest {
 			CircuitProject project1 = CircuitProject.Create(null);
 			project1.InTransaction(() => {
 				LogicalCircuit main = project1.ProjectSet.Project.LogicalCircuit;
-				CircuitButton button = project1.CircuitButtonSet.Create("b", false);
+				CircuitButton button = project1.CircuitButtonSet.Create("b", false, PinSide.Right);
 				CircuitSymbol buttonSymbol = project1.CircuitSymbolSet.Create(button, main, 1, 2);
 				Gate led = project1.GateSet.Gate(GateType.Led, 1, false);
 				project1.CircuitSymbolSet.Create(led, main, 6, 2);

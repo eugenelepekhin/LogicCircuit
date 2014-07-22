@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Store xmlns="clr-namespace:ItemWrapper.Generator;assembly=ItemWrapper.Generator"
 	Namespace="LogicCircuit" Name="CircuitProject"
-	PersistencePrefix="lc" PersistenceNamespace="http://LogicCircuit.net/2.0.0.6/CircuitProject.xsd"
+	PersistencePrefix="lc" PersistenceNamespace="http://LogicCircuit.net/2.0.0.7/CircuitProject.xsd"
 >
 
 	<!--
@@ -18,6 +18,7 @@
 		Version 2.0.0.4 - removing Odd and Even functions and replace them with XOR and XOR NOT
 		Version 2.0.0.5 - Adding MemoryOnStart to memory circuits
 		Version 2.0.0.6 - Adding IsDisplay property to LogicalCircuit. Making Probe separate circuit to enable naming of it.
+		Version 2.0.0.7 - Adding PinSide to Button.
 	-->
 
 	<Table Name="Project">
@@ -208,6 +209,7 @@
 			<Column Name="CircuitButtonId" Type="Guid" ReadOnly="true"/>
 			<Column Name="Notation" Type="string" Default="" PropertyOverrides="true"/>
 			<Column Name="IsToggle" Type="bool" Default="false"/>
+			<Column Name="PinSide" Type="PinSide" Default="PinSide.Right"/>
 			<Column Name="Note" Type="string" Default=""/>
 		</Table.Columns>
 

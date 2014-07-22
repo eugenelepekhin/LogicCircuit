@@ -40,7 +40,7 @@ namespace LogicCircuit.UnitTest {
 			CircuitSymbol ledSymbol = null;
 
 			project.InTransaction(() => {
-				button = project.CircuitButtonSet.Create("b", false);
+				button = project.CircuitButtonSet.Create("b", false, PinSide.Right);
 				buttonSymbol = project.CircuitSymbolSet.Create(button, project.ProjectSet.Project.LogicalCircuit, 1, 1);
 				led = project.GateSet.Gate(GateType.Led, 1, false);
 				ledSymbol = project.CircuitSymbolSet.Create(led, project.ProjectSet.Project.LogicalCircuit, 5, 1);

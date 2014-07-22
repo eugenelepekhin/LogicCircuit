@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -20,6 +21,8 @@ namespace LogicCircuit {
 
 			this.name.Text = this.button.Notation;
 			this.isToggle.IsChecked = this.button.IsToggle;
+			this.side.ItemsSource = PinDescriptor.PinSideRange;
+			this.side.SelectedItem = PinDescriptor.PinSideDescriptor(this.button.PinSide);
 			this.note.Text = this.button.Note;
 		}
 
@@ -27,11 +30,14 @@ namespace LogicCircuit {
 			try {
 				string name = this.name.Text.Trim();
 				string note = this.note.Text.Trim();
-				if(this.button.Notation != name || this.button.IsToggle != this.isToggle.IsChecked || this.button.Note != note) {
+				PinSide pinSide = ((EnumDescriptor<PinSide>)this.side.SelectedItem).Value;
+				if(this.button.Notation != name || this.button.IsToggle != this.isToggle.IsChecked || this.button.PinSide != pinSide || this.button.Note != note) {
 					this.button.CircuitProject.InTransaction(() => {
 						this.button.Notation = name;
 						this.button.IsToggle = this.isToggle.IsChecked.Value;
+						this.button.PinSide = pinSide;
 						this.button.Note = note;
+						this.button.Pins.First().PinSide = pinSide;
 					});
 				}
 				this.Close();

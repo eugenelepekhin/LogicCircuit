@@ -203,8 +203,11 @@ namespace LogicCircuit {
 		public string Notation { get; set; }
 		public bool IsToggle { get; set; }
 
-		public ButtonDescriptor(CircuitProject circuitProject) : base(circuitProject.CircuitButtonSet.Create(string.Empty, false)) {
+		public EnumDescriptor<PinSide> PinSide { get; set; }
+
+		public ButtonDescriptor(CircuitProject circuitProject) : base(circuitProject.CircuitButtonSet.Create(string.Empty, false, LogicCircuit.PinSide.Right)) {
 			this.Notation = string.Empty;
+			this.PinSide = PinDescriptor.PinSideDescriptor(LogicCircuit.PinSide.Right);
 		}
 
 		protected override CircuitButton GetCircuitToDrop(CircuitProject circuitProject) {
@@ -213,7 +216,7 @@ namespace LogicCircuit {
 				this.Notation = string.Empty;
 				this.NotifyPropertyChanged("Notation");
 			}
-			return circuitProject.CircuitButtonSet.Create(notation, this.IsToggle);
+			return circuitProject.CircuitButtonSet.Create(notation, this.IsToggle, this.PinSide.Value);
 		}
 	}
 

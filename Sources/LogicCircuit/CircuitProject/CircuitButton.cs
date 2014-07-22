@@ -44,6 +44,7 @@ namespace LogicCircuit {
 		}
 
 		partial void OnCircuitButtonChanged() {
+			this.ResetPins();
 			this.InvalidateDistinctSymbol();
 		}
 	}
@@ -55,14 +56,19 @@ namespace LogicCircuit {
 				CircuitId = this.Table.GetField(rowId, CircuitButtonData.CircuitButtonIdField.Field)
 			};
 			CircuitButton button = this.Create(rowId, this.CircuitProject.CircuitTable.Insert(ref data));
-			this.CircuitProject.DevicePinSet.Create(button, PinType.Output, 1);
+			this.CreateDevicePin(button);
 			return button;
 		}
 
-		public CircuitButton Create(string notation, bool isToggle) {
-			CircuitButton button = this.CreateItem(Guid.NewGuid(), notation, isToggle, CircuitButtonData.NoteField.Field.DefaultValue);
-			this.CircuitProject.DevicePinSet.Create(button, PinType.Output, 1);
+		public CircuitButton Create(string notation, bool isToggle, PinSide pinSide) {
+			CircuitButton button = this.CreateItem(Guid.NewGuid(), notation, isToggle, pinSide, CircuitButtonData.NoteField.Field.DefaultValue);
+			this.CreateDevicePin(button);
 			return button;
+		}
+
+		private void CreateDevicePin(CircuitButton button) {
+			DevicePin pin = this.CircuitProject.DevicePinSet.Create(button, PinType.Output, 1);
+			pin.PinSide = button.PinSide;
 		}
 
 		public CircuitButton Copy(CircuitButton other) {

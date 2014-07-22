@@ -10,17 +10,25 @@
 >
 	<Window.Resources>
 		<Style TargetType="{x:Type TextBox}">
-			<Setter Property="Margin" Value="7,3,8,3"/>
+			<Setter Property="Margin" Value="3,3,8,3"/>
 		</Style>
 
 		<Style TargetType="{x:Type Label}">
 			<Setter Property="Margin" Value="3"/>
 			<Setter Property="HorizontalContentAlignment" Value="Right"/>
 		</Style>
+
+		<Style TargetType="{x:Type ComboBox}">
+			<Setter Property="Margin" Value="3"/>
+			<Setter Property="MinWidth" Value="65"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+		</Style>
 	</Window.Resources>
 
 	<Grid Margin="3">
 		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="*"/>
@@ -38,12 +46,15 @@
 			Content="{x:Static properties:Resources.TitleIsToggle}" ToolTip="{x:Static properties:Resources.ToolTipIsToggle}"
 		/>
 
-		<Label Grid.Row="2" Grid.Column="0" Content="{x:Static properties:Resources.TitleDescription}" Target="{Binding ElementName=note}"/>
-		<TextBox Grid.Row="2" Grid.Column="1" Name="note" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+		<Label Grid.Row="2" Grid.Column="0" Content="{x:Static properties:Resources.TitlePinSide}" Target="{Binding ElementName=side}"/>
+		<ComboBox Grid.Row="2" Grid.Column="1" Name="side" ToolTip="{x:Static properties:Resources.ToolTipButtonPinSide}"/>
+
+		<Label Grid.Row="3" Grid.Column="0" Content="{x:Static properties:Resources.TitleDescription}" Target="{Binding ElementName=note}"/>
+		<TextBox Grid.Row="3" Grid.Column="1" Name="note" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
 			AcceptsReturn="True" AcceptsTab="True" SpellCheck.IsEnabled="True"
 		/>
 
-		<StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+		<StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
 			<Button Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" Click="ButtonOkClick"/>
 			<Button Content="{x:Static properties:Resources.TitleCancel}" IsCancel="True"/>
 		</StackPanel>

@@ -1251,4 +1251,13 @@ that displaying its visual elements.</value>
   <data name="WireDisplayDisconnected" xml:space="preserve">
     <value>The wire is not connected.</value>
   </data>
+  <data name="CaptionPinSide" xml:space="preserve">
+    <value>Pin side</value>
+  </data>
+  <data name="TitlePinSide" xml:space="preserve">
+    <value>Pin _side:</value>
+  </data>
+  <data name="ToolTipButtonPinSide" xml:space="preserve">
+    <value>Choose the side of the button where the pin will reside on</value>
+  </data>
 </root>

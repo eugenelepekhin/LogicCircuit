@@ -516,6 +516,7 @@
     <None Include="Schema\ConvertFrom.2.0.0.3.xslt" />
     <None Include="Schema\ConvertFrom.2.0.0.4.xslt" />
     <None Include="Schema\ConvertFrom.2.0.0.5.xslt" />
+    <None Include="Schema\ConvertFrom.2.0.0.6.xslt" />
     <None Include="Schema\Empty.xml" />
     <None Include="Schema\CircuitProject.xml">
       <SubType>Designer</SubType>

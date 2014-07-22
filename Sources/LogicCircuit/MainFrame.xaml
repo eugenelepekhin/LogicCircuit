@@ -396,12 +396,13 @@
 							<DataTemplate DataType="{x:Type lc:ButtonDescriptor}">
 								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl/>
-									<Grid>
+									<Grid Margin="3,3,8,3" VerticalAlignment="Center">
 										<Grid.ColumnDefinitions>
-											<ColumnDefinition Width="Auto"/>
+											<ColumnDefinition Width="Auto" MinWidth="65"/>
 											<ColumnDefinition Width="Auto"/>
 										</Grid.ColumnDefinitions>
 										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto"/>
 											<RowDefinition Height="Auto"/>
 											<RowDefinition Height="Auto"/>
 										</Grid.RowDefinitions>
@@ -412,6 +413,11 @@
 										<CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" IsChecked="{Binding Path=IsToggle}" Margin="6,0,8,5"
 											Content="{x:Static properties:Resources.TitleIsToggle}" ToolTip="{x:Static properties:Resources.ToolTipIsToggle}"
 										/>
+										<ComboBox Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="3,0"
+											SelectedItem="{Binding Path=PinSide, Mode=TwoWay}" ItemsSource="{x:Static lc:PinDescriptor.PinSideRange}"
+											ToolTip="{x:Static properties:Resources.ToolTipButtonPinSide}"
+										/>
+										<TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Static properties:Resources.CaptionPinSide}" Margin="8,0,0,0"/>
 									</Grid>
 									<TextBlock Style="{StaticResource CircuitName}"/>
 								</StackPanel>

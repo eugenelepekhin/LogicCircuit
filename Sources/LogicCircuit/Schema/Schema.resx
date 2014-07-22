@@ -139,6 +139,9 @@
   <data name="ConvertFrom_2_0_0_5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>convertfrom.2.0.0.5.xslt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="ConvertFrom_2_0_0_6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>convertfrom.2.0.0.6.xslt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="ConvertSettings" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>convertsettings.xslt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>

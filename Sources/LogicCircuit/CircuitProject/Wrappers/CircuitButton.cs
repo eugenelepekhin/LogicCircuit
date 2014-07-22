@@ -15,6 +15,7 @@ namespace LogicCircuit {
 		public Guid CircuitButtonId;
 		public string Notation;
 		public bool IsToggle;
+		public PinSide PinSide;
 		public string Note;
 		internal CircuitButton CircuitButton;
 		// Field accessors
@@ -123,6 +124,41 @@ namespace LogicCircuit {
 			}
 		}
 
+		// Accessor of the PinSide field
+		public sealed class PinSideField : IField<CircuitButtonData, PinSide>, IFieldSerializer<CircuitButtonData> {
+			public static readonly PinSideField Field = new PinSideField();
+			private PinSideField() {}
+			public string Name { get { return "PinSide"; } }
+			public int Order { get; set; }
+			public PinSide DefaultValue { get { return PinSide.Right; } }
+			public PinSide GetValue(ref CircuitButtonData record) {
+				return record.PinSide;
+			}
+			public void SetValue(ref CircuitButtonData record, PinSide value) {
+				record.PinSide = value;
+			}
+			public int Compare(ref CircuitButtonData l, ref CircuitButtonData r) {
+				return l.PinSide.CompareTo(r.PinSide);
+			}
+			public int Compare(PinSide l, PinSide r) {
+				return l.CompareTo(r);
+			}
+
+			// Implementation of interface IFieldSerializer<CircuitButtonData>
+			bool IFieldSerializer<CircuitButtonData>.NeedToSave(ref CircuitButtonData data) {
+				return this.Compare(data.PinSide, this.DefaultValue) != 0;
+			}
+			string IFieldSerializer<CircuitButtonData>.GetTextValue(ref CircuitButtonData data) {
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.PinSide);
+			}
+			void IFieldSerializer<CircuitButtonData>.SetDefault(ref CircuitButtonData data) {
+				data.PinSide = this.DefaultValue;
+			}
+			void IFieldSerializer<CircuitButtonData>.SetTextValue(ref CircuitButtonData data, string text) {
+				data.PinSide = EnumHelper.Parse<PinSide>(text, this.DefaultValue);
+			}
+		}
+
 		// Accessor of the Note field
 		public sealed class NoteField : IField<CircuitButtonData, string>, IFieldSerializer<CircuitButtonData> {
 			public static readonly NoteField Field = new NoteField();
@@ -187,6 +223,7 @@ namespace LogicCircuit {
 			CircuitButtonIdField.Field,
 			NotationField.Field,
 			IsToggleField.Field,
+			PinSideField.Field,
 			NoteField.Field,
 			CircuitButtonField.Field
 		};
@@ -247,6 +284,12 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.CircuitButtonRowId, CircuitButtonData.IsToggleField.Field, value); }
 		}
 
+		// Gets or sets value of the PinSide field.
+		public PinSide PinSide {
+			get { return this.Table.GetField(this.CircuitButtonRowId, CircuitButtonData.PinSideField.Field); }
+			set { this.Table.SetField(this.CircuitButtonRowId, CircuitButtonData.PinSideField.Field, value); }
+		}
+
 		// Gets or sets value of the Note field.
 		public string Note {
 			get { return this.Table.GetField(this.CircuitButtonRowId, CircuitButtonData.NoteField.Field); }
@@ -267,6 +310,9 @@ namespace LogicCircuit {
 				}
 				if(CircuitButtonData.IsToggleField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("IsToggle");
+				}
+				if(CircuitButtonData.PinSideField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("PinSide");
 				}
 				if(CircuitButtonData.NoteField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("Note");
@@ -356,6 +402,7 @@ namespace LogicCircuit {
 			Guid CircuitButtonId,
 			string Notation,
 			bool IsToggle,
+			PinSide PinSide,
 			string Note
 			// Fields of Circuit table
 
@@ -370,6 +417,7 @@ namespace LogicCircuit {
 				CircuitButtonId = CircuitButtonId,
 				Notation = Notation,
 				IsToggle = IsToggle,
+				PinSide = PinSide,
 				Note = Note,
 			};
 			return this.Create(this.Table.Insert(ref dataCircuitButton), rowIdCircuit);

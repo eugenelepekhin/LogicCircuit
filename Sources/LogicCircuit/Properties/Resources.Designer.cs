@@ -2561,5 +2561,26 @@ namespace LogicCircuit.Properties {
  		public static string WireDisplayDisconnected {
 			get { return ResourceManager.GetString("WireDisplayDisconnected", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Pin side.
+		/// </summary>
+ 		public static string CaptionPinSide {
+			get { return ResourceManager.GetString("CaptionPinSide", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Pin _side:.
+		/// </summary>
+ 		public static string TitlePinSide {
+			get { return ResourceManager.GetString("TitlePinSide", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Choose the side of the button where the pin will reside on.
+		/// </summary>
+ 		public static string ToolTipButtonPinSide {
+			get { return ResourceManager.GetString("ToolTipButtonPinSide", Culture); }
+		}
 	}
 }
