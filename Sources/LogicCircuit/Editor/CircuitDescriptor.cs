@@ -269,9 +269,24 @@ namespace LogicCircuit {
 		public int BitWidth { get; set; }
 		public string Value { get; set; }
 
-		public ConstantDescriptor(CircuitProject circuitProject) : base(circuitProject.ConstantSet.Create(1, 0)) {
+		private EnumDescriptor<PinSide> pinSide;
+		public EnumDescriptor<PinSide> PinSide {
+			get { return this.pinSide; }
+			set {
+				if(this.pinSide != value) {
+					this.InTransaction(() => {
+						this.Circuit.Pins.First().PinSide = value.Value;
+					});
+					this.pinSide = value;
+					this.RefreshGlyph();
+				}
+			}
+		}
+
+		public ConstantDescriptor(CircuitProject circuitProject) : base(circuitProject.ConstantSet.Create(1, 0, LogicCircuit.PinSide.Right)) {
 			this.BitWidth = 1;
 			this.Value = "0";
+			this.pinSide = PinDescriptor.PinSideDescriptor(LogicCircuit.PinSide.Right);
 		}
 
 		protected override Constant GetCircuitToDrop(CircuitProject circuitProject) {
@@ -279,7 +294,12 @@ namespace LogicCircuit {
 			if(!int.TryParse(this.Value, NumberStyles.HexNumber, Properties.Resources.Culture, out value)) {
 				value = 0;
 			}
-			return circuitProject.ConstantSet.Create(this.BitWidth, value);
+			return circuitProject.ConstantSet.Create(this.BitWidth, value, this.PinSide.Value);
+		}
+
+		private void RefreshGlyph() {
+			this.Circuit.ResetPins();
+			this.ResetGlyph();
 		}
 	}
 

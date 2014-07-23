@@ -19,6 +19,7 @@ namespace LogicCircuit {
 			set { this.fieldBitWidth = BasePin.CheckBitWidth(value); }
 		}
 		public int Value;
+		public PinSide PinSide;
 		public string Note;
 		internal Constant Constant;
 		// Field accessors
@@ -127,6 +128,41 @@ namespace LogicCircuit {
 			}
 		}
 
+		// Accessor of the PinSide field
+		public sealed class PinSideField : IField<ConstantData, PinSide>, IFieldSerializer<ConstantData> {
+			public static readonly PinSideField Field = new PinSideField();
+			private PinSideField() {}
+			public string Name { get { return "PinSide"; } }
+			public int Order { get; set; }
+			public PinSide DefaultValue { get { return PinSide.Right; } }
+			public PinSide GetValue(ref ConstantData record) {
+				return record.PinSide;
+			}
+			public void SetValue(ref ConstantData record, PinSide value) {
+				record.PinSide = value;
+			}
+			public int Compare(ref ConstantData l, ref ConstantData r) {
+				return l.PinSide.CompareTo(r.PinSide);
+			}
+			public int Compare(PinSide l, PinSide r) {
+				return l.CompareTo(r);
+			}
+
+			// Implementation of interface IFieldSerializer<ConstantData>
+			bool IFieldSerializer<ConstantData>.NeedToSave(ref ConstantData data) {
+				return this.Compare(data.PinSide, this.DefaultValue) != 0;
+			}
+			string IFieldSerializer<ConstantData>.GetTextValue(ref ConstantData data) {
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.PinSide);
+			}
+			void IFieldSerializer<ConstantData>.SetDefault(ref ConstantData data) {
+				data.PinSide = this.DefaultValue;
+			}
+			void IFieldSerializer<ConstantData>.SetTextValue(ref ConstantData data, string text) {
+				data.PinSide = EnumHelper.Parse<PinSide>(text, this.DefaultValue);
+			}
+		}
+
 		// Accessor of the Note field
 		public sealed class NoteField : IField<ConstantData, string>, IFieldSerializer<ConstantData> {
 			public static readonly NoteField Field = new NoteField();
@@ -191,6 +227,7 @@ namespace LogicCircuit {
 			ConstantIdField.Field,
 			BitWidthField.Field,
 			ValueField.Field,
+			PinSideField.Field,
 			NoteField.Field,
 			ConstantField.Field
 		};
@@ -251,6 +288,12 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.ConstantRowId, ConstantData.ValueField.Field, value); }
 		}
 
+		// Gets or sets value of the PinSide field.
+		public PinSide PinSide {
+			get { return this.Table.GetField(this.ConstantRowId, ConstantData.PinSideField.Field); }
+			set { this.Table.SetField(this.ConstantRowId, ConstantData.PinSideField.Field, value); }
+		}
+
 		// Gets or sets value of the Note field.
 		public string Note {
 			get { return this.Table.GetField(this.ConstantRowId, ConstantData.NoteField.Field); }
@@ -271,6 +314,9 @@ namespace LogicCircuit {
 				}
 				if(ConstantData.ValueField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("Value");
+				}
+				if(ConstantData.PinSideField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("PinSide");
 				}
 				if(ConstantData.NoteField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("Note");
@@ -360,6 +406,7 @@ namespace LogicCircuit {
 			Guid ConstantId,
 			int BitWidth,
 			int Value,
+			PinSide PinSide,
 			string Note
 			// Fields of Circuit table
 
@@ -374,6 +421,7 @@ namespace LogicCircuit {
 				ConstantId = ConstantId,
 				BitWidth = BitWidth,
 				Value = Value,
+				PinSide = PinSide,
 				Note = Note,
 			};
 			return this.Create(this.Table.Insert(ref dataConstant), rowIdCircuit);

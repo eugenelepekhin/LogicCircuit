@@ -54,7 +54,7 @@ namespace LogicCircuit.UnitTest {
 			Assert.AreEqual(2, project.PinSet.Count());
 			Assert.AreEqual(2, project.DevicePinSet.Count());
 
-			Constant constant = project.ConstantSet.Create(3, 7);
+			Constant constant = project.ConstantSet.Create(3, 7, PinSide.Right);
 			Assert.AreEqual(1, project.ConstantSet.Count());
 			Assert.AreEqual(3, project.DevicePinSet.Count());
 

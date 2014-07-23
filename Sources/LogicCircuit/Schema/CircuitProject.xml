@@ -18,7 +18,7 @@
 		Version 2.0.0.4 - removing Odd and Even functions and replace them with XOR and XOR NOT
 		Version 2.0.0.5 - Adding MemoryOnStart to memory circuits
 		Version 2.0.0.6 - Adding IsDisplay property to LogicalCircuit. Making Probe separate circuit to enable naming of it.
-		Version 2.0.0.7 - Adding PinSide to Button.
+		Version 2.0.0.7 - Adding PinSide to Button and Constant.
 	-->
 
 	<Table Name="Project">
@@ -194,6 +194,7 @@
 			<Column Name="ConstantId" Type="Guid" ReadOnly="true"/>
 			<Column Name="BitWidth" Type="int" Default="1" Check="BasePin.CheckBitWidth"/>
 			<Column Name="Value" Type="int" Default="0" AccessModifier="Private"/>
+			<Column Name="PinSide" Type="PinSide" Default="PinSide.Right"/>
 			<Column Name="Note" Type="string" Default=""/>
 		</Table.Columns>
 

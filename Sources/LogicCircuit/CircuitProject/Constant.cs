@@ -51,6 +51,7 @@ namespace LogicCircuit {
 		}
 
 		partial void OnConstantChanged() {
+			this.ResetPins();
 			this.InvalidateDistinctSymbol();
 		}
 	}
@@ -62,14 +63,19 @@ namespace LogicCircuit {
 				CircuitId = this.Table.GetField(rowId, ConstantData.ConstantIdField.Field)
 			};
 			Constant constant = this.Create(rowId, this.CircuitProject.CircuitTable.Insert(ref data));
-			this.CircuitProject.DevicePinSet.Create(constant, PinType.Output, constant.BitWidth);
+			this.CreateDevicePin(constant);
 			return constant;
 		}
 
-		public Constant Create(int bitWidth, int value) {
-			Constant constant = this.CreateItem(Guid.NewGuid(), bitWidth, Constant.Normalize(value, bitWidth), ConstantData.NoteField.Field.DefaultValue);
-			this.CircuitProject.DevicePinSet.Create(constant, PinType.Output, constant.BitWidth);
+		public Constant Create(int bitWidth, int value, PinSide pinSide) {
+			Constant constant = this.CreateItem(Guid.NewGuid(), bitWidth, Constant.Normalize(value, bitWidth), pinSide, ConstantData.NoteField.Field.DefaultValue);
+			this.CreateDevicePin(constant);
 			return constant;
+		}
+
+		private void CreateDevicePin(Constant constant) {
+			DevicePin pin = this.CircuitProject.DevicePinSet.Create(constant, PinType.Output, constant.BitWidth);
+			pin.PinSide = constant.PinSide;
 		}
 
 		public Constant Copy(Constant other) {
