@@ -1193,4 +1193,13 @@
   <data name="WireDisplayDisconnected" xml:space="preserve">
     <value>Провод не подключен.</value>
   </data>
+  <data name="CaptionPinSide" xml:space="preserve">
+    <value>Положение разъема</value>
+  </data>
+  <data name="TitlePinSide" xml:space="preserve">
+    <value>Положение _разъема:</value>
+  </data>
+  <data name="ToolTipButtonPinSide" xml:space="preserve">
+    <value>Выберите сторону кнопки, где будет находиться разъем</value>
+  </data>
 </root>
