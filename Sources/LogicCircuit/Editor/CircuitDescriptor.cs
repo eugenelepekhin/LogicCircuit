@@ -201,13 +201,39 @@ namespace LogicCircuit {
 
 	public class ButtonDescriptor : IOCircuitDescriptor<CircuitButton> {
 		public string Notation { get; set; }
-		public bool IsToggle { get; set; }
+		private bool isToggle;
+		public bool IsToggle {
+			get { return this.isToggle; }
+			set {
+				if(this.isToggle != value) {
+					this.isToggle = value;
+					CircuitProject project = this.Circuit.CircuitProject;
+					project.StartTransaction();
+					this.Circuit.IsToggle = value;
+					project.Omit();
+					this.RefreshGlyph();
+				}
+			}
+		}
 
-		public EnumDescriptor<PinSide> PinSide { get; set; }
+		private EnumDescriptor<PinSide> pinSide;
+		public EnumDescriptor<PinSide> PinSide {
+			get { return this.pinSide; }
+			set {
+				if(this.pinSide != value) {
+					this.pinSide = value;
+					CircuitProject project = this.Circuit.CircuitProject;
+					project.StartTransaction();
+					this.Circuit.Pins.First().PinSide = value.Value;
+					project.Omit();
+					this.RefreshGlyph();
+				}
+			}
+		}
 
 		public ButtonDescriptor(CircuitProject circuitProject) : base(circuitProject.CircuitButtonSet.Create(string.Empty, false, LogicCircuit.PinSide.Right)) {
 			this.Notation = string.Empty;
-			this.PinSide = PinDescriptor.PinSideDescriptor(LogicCircuit.PinSide.Right);
+			this.pinSide = PinDescriptor.PinSideDescriptor(LogicCircuit.PinSide.Right);
 		}
 
 		protected override CircuitButton GetCircuitToDrop(CircuitProject circuitProject) {
@@ -217,6 +243,11 @@ namespace LogicCircuit {
 				this.NotifyPropertyChanged("Notation");
 			}
 			return circuitProject.CircuitButtonSet.Create(notation, this.IsToggle, this.PinSide.Value);
+		}
+
+		private void RefreshGlyph() {
+			this.Circuit.ResetPins();
+			this.ResetGlyph();
 		}
 	}
 

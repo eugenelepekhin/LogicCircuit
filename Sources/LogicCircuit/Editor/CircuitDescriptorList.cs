@@ -90,8 +90,8 @@ namespace LogicCircuit {
 
 		private static void InitPrimitive() {
 			CircuitProject project = CircuitProject.Create(null);
+			List<IDescriptor> list = new List<IDescriptor>(32);
 			project.StartTransaction();
-			List<IDescriptor> list = new List<IDescriptor>();
 
 			list.Add(new TextNoteDescriptor(project));
 
@@ -120,6 +120,8 @@ namespace LogicCircuit {
 
 			list.Add(new MemoryDescriptor(project, false));
 			list.Add(new MemoryDescriptor(project, true));
+
+			project.Commit();
 
 			CircuitDescriptorList.primitiveList = list;
 		}
