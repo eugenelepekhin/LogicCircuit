@@ -65,6 +65,24 @@ namespace LogicCircuit {
 			}
 		}
 
+		protected void InTransaction(Action action) {
+			CircuitProject project = this.Circuit.CircuitProject;
+			if(project.StartTransaction()) {
+				try {
+					action();
+				} catch {
+					project.Rollback();
+					throw;
+				} finally {
+					if(project.IsEditor) {
+						project.Omit();
+					}
+				}
+			} else {
+				Tracer.Fail();
+			}
+		}
+
 		private class CircuitDescriptorGlyph : CircuitGlyph {
 			private readonly CircuitDescriptor<T> circuitDescriptor;
 
@@ -201,16 +219,13 @@ namespace LogicCircuit {
 
 	public class ButtonDescriptor : IOCircuitDescriptor<CircuitButton> {
 		public string Notation { get; set; }
-		private bool isToggle;
 		public bool IsToggle {
-			get { return this.isToggle; }
+			get { return this.Circuit.IsToggle; }
 			set {
-				if(this.isToggle != value) {
-					this.isToggle = value;
-					CircuitProject project = this.Circuit.CircuitProject;
-					project.StartTransaction();
-					this.Circuit.IsToggle = value;
-					project.Omit();
+				if(this.IsToggle != value) {
+					this.InTransaction(() => {
+						this.Circuit.IsToggle = value;
+					});
 					this.RefreshGlyph();
 				}
 			}
@@ -221,11 +236,10 @@ namespace LogicCircuit {
 			get { return this.pinSide; }
 			set {
 				if(this.pinSide != value) {
+					this.InTransaction(() => {
+						this.Circuit.Pins.First().PinSide = value.Value;
+					});
 					this.pinSide = value;
-					CircuitProject project = this.Circuit.CircuitProject;
-					project.StartTransaction();
-					this.Circuit.Pins.First().PinSide = value.Value;
-					project.Omit();
 					this.RefreshGlyph();
 				}
 			}
