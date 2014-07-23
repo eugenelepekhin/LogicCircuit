@@ -415,7 +415,7 @@
 										/>
 										<ComboBox Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="3,0"
 											SelectedItem="{Binding Path=PinSide, Mode=TwoWay}" ItemsSource="{x:Static lc:PinDescriptor.PinSideRange}"
-											ToolTip="{x:Static properties:Resources.ToolTipButtonPinSide}"
+											ToolTip="{x:Static properties:Resources.ToolTipDevicePinSide}"
 										/>
 										<TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Static properties:Resources.CaptionPinSide}" Margin="8,0,0,0"/>
 									</Grid>

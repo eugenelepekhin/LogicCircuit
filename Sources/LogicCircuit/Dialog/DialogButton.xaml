@@ -47,7 +47,7 @@
 		/>
 
 		<Label Grid.Row="2" Grid.Column="0" Content="{x:Static properties:Resources.TitlePinSide}" Target="{Binding ElementName=side}"/>
-		<ComboBox Grid.Row="2" Grid.Column="1" Name="side" ToolTip="{x:Static properties:Resources.ToolTipButtonPinSide}"/>
+		<ComboBox Grid.Row="2" Grid.Column="1" Name="side" ToolTip="{x:Static properties:Resources.ToolTipDevicePinSide}"/>
 
 		<Label Grid.Row="3" Grid.Column="0" Content="{x:Static properties:Resources.TitleDescription}" Target="{Binding ElementName=note}"/>
 		<TextBox Grid.Row="3" Grid.Column="1" Name="note" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"

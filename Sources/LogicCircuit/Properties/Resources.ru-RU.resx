@@ -1199,7 +1199,7 @@
   <data name="TitlePinSide" xml:space="preserve">
     <value>Положение _разъема:</value>
   </data>
-  <data name="ToolTipButtonPinSide" xml:space="preserve">
-    <value>Выберите сторону кнопки, где будет находиться разъем</value>
+  <data name="ToolTipDevicePinSide" xml:space="preserve">
+    <value>Выберите сторону, где будет находиться разъем</value>
   </data>
 </root>

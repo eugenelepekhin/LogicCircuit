@@ -1257,7 +1257,7 @@ that displaying its visual elements.</value>
   <data name="TitlePinSide" xml:space="preserve">
     <value>Pin _side:</value>
   </data>
-  <data name="ToolTipButtonPinSide" xml:space="preserve">
-    <value>Choose the side of the button where the pin will reside on</value>
+  <data name="ToolTipDevicePinSide" xml:space="preserve">
+    <value>Choose the side where the pin will reside on</value>
   </data>
 </root>

@@ -2577,10 +2577,10 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Choose the side of the button where the pin will reside on.
+		/// Looks up a localized string similar to Choose the side where the pin will reside on.
 		/// </summary>
- 		public static string ToolTipButtonPinSide {
-			get { return ResourceManager.GetString("ToolTipButtonPinSide", Culture); }
+ 		public static string ToolTipDevicePinSide {
+			get { return ResourceManager.GetString("ToolTipDevicePinSide", Culture); }
 		}
 	}
 }
