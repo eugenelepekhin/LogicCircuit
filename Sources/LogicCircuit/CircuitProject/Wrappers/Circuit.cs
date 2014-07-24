@@ -262,6 +262,11 @@ namespace LogicCircuit {
 				return this.CircuitProject.SplitterSet.FindOrCreate(rowIdSplitter);
 			}
 
+			RowId rowIdSensor = this.CircuitProject.SensorSet.Table.Find(SensorData.SensorIdField.Field, primaryKeyValue);
+			if(!rowIdSensor.IsEmpty) {
+				return this.CircuitProject.SensorSet.FindOrCreate(rowIdSensor);
+			}
+
 			return this.Create(rowId);
 		}
 

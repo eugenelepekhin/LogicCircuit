@@ -18,7 +18,7 @@
 		Version 2.0.0.4 - removing Odd and Even functions and replace them with XOR and XOR NOT
 		Version 2.0.0.5 - Adding MemoryOnStart to memory circuits
 		Version 2.0.0.6 - Adding IsDisplay property to LogicalCircuit. Making Probe separate circuit to enable naming of it.
-		Version 2.0.0.7 - Adding PinSide to Button and Constant.
+		Version 2.0.0.7 - Adding PinSide to Button and Constant. Adding Sensor circuit.
 	-->
 
 	<Table Name="Project">
@@ -269,6 +269,24 @@
 		<Table.Keys>
 			<Key Name="PK_Splitter" KeyType="Subclass" ParentName="Circuit" Action="Cascade">
 				<Column Name="SplitterId"/>
+			</Key>
+		</Table.Keys>
+	</Table>
+
+	<Table Name="Sensor">
+		<Table.Columns>
+			<Column Name="SensorId" Type="Guid" ReadOnly="true"/>
+			<Column Name="SensorType" Type="SensorType" Default="SensorType.Random"/>
+			<Column Name="BitWidth" Type="int" Default="1" Check="BasePin.CheckBitWidth"/>
+			<Column Name="PinSide" Type="PinSide" Default="PinSide.Right"/>
+			<Column Name="Notation" Type="string" Default="" PropertyOverrides="true"/>
+			<Column Name="Data" Type="string" Default=""/>
+			<Column Name="Note" Type="string" Default=""/>
+		</Table.Columns>
+
+		<Table.Keys>
+			<Key Name="PK_Sensor" KeyType="Subclass" ParentName="Circuit" Action="Cascade">
+				<Column Name="SensorId"/>
 			</Key>
 		</Table.Keys>
 	</Table>

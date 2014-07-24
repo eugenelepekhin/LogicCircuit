@@ -1260,4 +1260,11 @@ that displaying its visual elements.</value>
   <data name="ToolTipDevicePinSide" xml:space="preserve">
     <value>Choose the side where the pin will reside on</value>
   </data>
+  <data name="NameSensor" xml:space="preserve">
+    <value>Sensor</value>
+  </data>
+  <data name="ToolTipSensor" xml:space="preserve">
+    <value>Sensor {0}</value>
+    <comment>{string notation}</comment>
+  </data>
 </root>

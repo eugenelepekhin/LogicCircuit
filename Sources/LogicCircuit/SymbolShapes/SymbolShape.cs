@@ -5,6 +5,8 @@ namespace LogicCircuit {
 		public const string Button = "SymbolShapes/Button.xaml";
 		public const string Clock = "SymbolShapes/Clock.xaml";
 		public const string Constant = "SymbolShapes/Constant.xaml";
+		public const string SensorAuto = "SymbolShapes/SensorAuto.xaml";
+		public const string SensorManual = "SymbolShapes/SensorManual.xaml";
 		public const string DisplayBackground = "SymbolShapes/DisplayBackground.xaml";
 		public const string DisplayBorder = "SymbolShapes/DisplayBorder.xaml";
 		public const string Led = "SymbolShapes/Led.xaml";

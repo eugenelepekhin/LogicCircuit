@@ -2582,5 +2582,19 @@ namespace LogicCircuit.Properties {
  		public static string ToolTipDevicePinSide {
 			get { return ResourceManager.GetString("ToolTipDevicePinSide", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Sensor.
+		/// </summary>
+ 		public static string NameSensor {
+			get { return ResourceManager.GetString("NameSensor", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Sensor {0}.
+		/// </summary>
+ 		public static string ToolTipSensor(string notation) {
+			return string.Format(Culture, ResourceManager.GetString("ToolTipSensor", Culture), notation);
+		}
 	}
 }

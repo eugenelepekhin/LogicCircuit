@@ -92,6 +92,7 @@ namespace LogicCircuit {
 			this.DistinctSymbol(this.LedMatrixSet);
 			this.DistinctSymbol(this.PinSet);
 			this.DistinctSymbol(this.SplitterSet);
+			this.DistinctSymbol(this.SensorSet);
 
 			this.WireSet.Where(wire => wire.Point1 == wire.Point2).ToList().ForEach(wire => wire.Delete());
 			this.TextNoteSet.Where(textNote => !textNote.IsValid).ToList().ForEach(textNote => textNote.Delete());
@@ -260,6 +261,9 @@ namespace LogicCircuit {
 					Tracer.Assert(this.CircuitSymbolSet.SelectByCircuit(circuit).Count() == 1);
 				} else if(circuit is Constant) {
 					Tracer.Assert(this.ConstantSet.Table.Exists(ConstantData.ConstantIdField.Field, circuit.CircuitId));
+					Tracer.Assert(this.CircuitSymbolSet.SelectByCircuit(circuit).Count() == 1);
+				} else if(circuit is Sensor) {
+					Tracer.Assert(this.SensorSet.Table.Exists(SensorData.SensorIdField.Field, circuit.CircuitId));
 					Tracer.Assert(this.CircuitSymbolSet.SelectByCircuit(circuit).Count() == 1);
 				} else if(circuit is DevicePin) {
 					Tracer.Assert(this.DevicePinSet.Table.Exists(DevicePinData.PinIdField.Field, circuit.CircuitId));

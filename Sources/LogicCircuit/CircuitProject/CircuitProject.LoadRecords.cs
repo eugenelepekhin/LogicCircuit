@@ -91,6 +91,7 @@ namespace LogicCircuit {
 			loaders.Add(nameTable.Add(this.MemorySet           .Table.Name), this.MemorySet           .CreateRecordLoader(nameTable));
 			loaders.Add(nameTable.Add(this.LedMatrixSet        .Table.Name), this.LedMatrixSet        .CreateRecordLoader(nameTable));
 			loaders.Add(nameTable.Add(this.SplitterSet         .Table.Name), this.SplitterSet         .CreateRecordLoader(nameTable));
+			loaders.Add(nameTable.Add(this.SensorSet           .Table.Name), this.SensorSet           .CreateRecordLoader(nameTable));
 			loaders.Add(nameTable.Add(this.CircuitSymbolSet    .Table.Name), this.CircuitSymbolSet    .CreateRecordLoader(nameTable));
 			loaders.Add(nameTable.Add(this.WireSet             .Table.Name), this.WireSet             .CreateRecordLoader(nameTable));
 			loaders.Add(nameTable.Add(this.TextNoteSet         .Table.Name), this.TextNoteSet         .CreateRecordLoader(nameTable));
@@ -135,6 +136,7 @@ namespace LogicCircuit {
 			CircuitProject.SaveRecords(xmlWriter, this.MemorySet.Table           );
 			CircuitProject.SaveRecords(xmlWriter, this.LedMatrixSet.Table        );
 			CircuitProject.SaveRecords(xmlWriter, this.SplitterSet.Table         );
+			CircuitProject.SaveRecords(xmlWriter, this.SensorSet.Table           );
 			CircuitProject.SaveRecords(xmlWriter, this.CircuitSymbolSet.Table    );
 			CircuitProject.SaveRecords(xmlWriter, this.WireSet.Table             );
 			CircuitProject.SaveRecords(xmlWriter, this.TextNoteSet.Table         );
