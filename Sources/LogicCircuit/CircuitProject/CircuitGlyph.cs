@@ -255,8 +255,6 @@ namespace LogicCircuit {
 			Tracer.Assert(probeView != null);
 			this.ProbeView = probeView;
 
-			Sensor sensor = (Sensor)this.Circuit;
-
 			TextBlock textBlock = probeView as TextBlock;
 			if(textBlock != null) {
 				textBlock.Text = Sensor.UnknownValue;
