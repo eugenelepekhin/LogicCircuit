@@ -38,7 +38,7 @@ namespace LogicCircuit.UnitTest {
 		/// </summary>
 		[TestMethod()]
 		public void FunctionTriStateTest() {
-			FunctionSocket test1 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "TriStateTest"));
+			FunctionSocket test1 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "TriState1Test"));
 			test1.Execute(() => {
 				test1.Verify(State.On0, 0, 1);
 				test1.Verify(State.On1, 1, 1);
@@ -47,7 +47,16 @@ namespace LogicCircuit.UnitTest {
 				test1.Verify(State.Off, 1, 0);
 			});
 
-			FunctionSocket test3 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "TriStateMultyTest"));
+			FunctionSocket test2 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "TriState2Test"));
+			test2.Execute(() => {
+				test2.Verify(State.On0, 1, 0);
+				test2.Verify(State.On1, 1, 1);
+
+				test2.Verify(State.Off, 0, 0);
+				test2.Verify(State.Off, 0, 1);
+			});
+
+			FunctionSocket test3 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "TriState1MultyTest"));
 			test3.Execute(() => {
 				test3.Verify(State.On0, 0, 1, 0, 1, 0, 1);
 				test3.Verify(State.On0, 1, 1, 0, 1, 0, 1);
@@ -62,6 +71,36 @@ namespace LogicCircuit.UnitTest {
 				test3.Verify(State.On1, 1, 1, 0, 0, 1, 1);
 				test3.Verify(State.On1, 1, 1, 1, 1, 0, 0);
 				test3.Verify(State.Off, 0, 0, 0, 0, 0, 0);
+			});
+
+			FunctionSocket test4 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "TriState2MultyTest"));
+			test4.Execute(() => {
+				test4.Verify(State.On0, 1, 0, 1, 0, 1, 0);
+				test4.Verify(State.On0, 1, 1, 1, 0, 1, 0);
+				test4.Verify(State.On0, 1, 0, 1, 1, 1, 0);
+				test4.Verify(State.On0, 1, 1, 1, 1, 1, 0);
+				test4.Verify(State.On0, 1, 0, 1, 0, 1, 1);
+				test4.Verify(State.On0, 1, 1, 1, 0, 1, 1);
+				test4.Verify(State.On0, 1, 0, 1, 1, 1, 1);
+				test4.Verify(State.On1, 1, 1, 1, 1, 1, 1);
+
+				test4.Verify(State.On1, 0, 0, 1, 1, 1, 1);
+				test4.Verify(State.On1, 1, 1, 0, 0, 1, 1);
+				test4.Verify(State.On1, 1, 1, 1, 1, 0, 0);
+				test4.Verify(State.Off, 0, 0, 0, 0, 0, 0);
+			});
+
+			FunctionSocket test5 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "TriState12MultyTest"));
+			test5.Execute(() => {
+				test5.Verify(State.Off, 0, 0, 0, 0);
+				test5.Verify(State.Off, 0, 1, 1, 0);
+				test5.Verify(State.On0, 1, 0, 0, 0);
+				test5.Verify(State.On1, 1, 1, 0, 0);
+				test5.Verify(State.On0, 0, 0, 0, 1);
+				test5.Verify(State.On1, 0, 0, 1, 1);
+
+				test5.Verify(State.On0, 1, 0, 1, 1);
+				test5.Verify(State.On0, 1, 1, 0, 1);
 			});
 		}
 
