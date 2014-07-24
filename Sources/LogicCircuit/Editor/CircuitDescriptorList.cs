@@ -107,7 +107,8 @@ namespace LogicCircuit {
 			list.Add(new ProbeDescriptor(project));
 
 			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.Not, 1, true)));
-			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.TriState, 2, false)));
+			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.TriState2, 2, false)));
+			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.TriState1, 2, false)));
 
 			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.And, 2, false)));
 			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.And, 2, true)));

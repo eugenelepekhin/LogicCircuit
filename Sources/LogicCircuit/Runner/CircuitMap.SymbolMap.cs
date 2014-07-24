@@ -231,7 +231,7 @@ namespace LogicCircuit {
 				Tracer.Assert(jam.Pin.PinType == PinType.Output);
 				this.Parameters = new List<Parameter>();
 				Gate gate = jam.Pin.Circuit as Gate;
-				if(gate != null && gate.GateType == GateType.TriState) {
+				if(gate != null && (gate.GateType == GateType.TriState1 || gate.GateType == GateType.TriState2)) {
 					this.TriStateGroup = new HashSet<Result>();
 					this.TriStateGroup.Add(this);
 				}

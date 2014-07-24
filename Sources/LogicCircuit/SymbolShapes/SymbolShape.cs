@@ -20,7 +20,8 @@ namespace LogicCircuit {
 		public const string ShapedAnd = "SymbolShapes/ShapedAnd.xaml";
 		public const string ShapedNot = "SymbolShapes/ShapedNot.xaml";
 		public const string ShapedOr = "SymbolShapes/ShapedOr.xaml";
-		public const string ShapedTriState = "SymbolShapes/ShapedTriState.xaml";
+		public const string ShapedTriState1 = "SymbolShapes/ShapedTriState1.xaml";
+		public const string ShapedTriState2 = "SymbolShapes/ShapedTriState2.xaml";
 		public const string ShapedXor = "SymbolShapes/ShapedXor.xaml";
 		public const string Splitter = "SymbolShapes/Splitter.xaml";
 		public const string TextNote = "SymbolShapes/TextNote.xaml";

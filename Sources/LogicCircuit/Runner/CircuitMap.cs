@@ -585,7 +585,8 @@ namespace LogicCircuit {
 				case GateType.Led:
 					CircuitMap.DefineLed(circuitState, symbolMap);
 					break;
-				case GateType.TriState:
+				case GateType.TriState1:
+				case GateType.TriState2:
 					CircuitMap.DefineTriState(circuitState, symbolMap);
 					break;
 				case GateType.Nop:

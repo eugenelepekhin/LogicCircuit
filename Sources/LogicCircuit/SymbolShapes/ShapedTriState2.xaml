@@ -1,0 +1,7 @@
+﻿<Grid
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+>
+	<Line X1="18" Y1="0" X2="18" Y2="28" Stroke="Black" StrokeThickness="1" VerticalAlignment="Top"/>
+	<Polygon Points="53,27.5 1,54 1,0" Fill="White" Stroke="Black" StrokeThickness="1" VerticalAlignment="Center"/>
+</Grid>

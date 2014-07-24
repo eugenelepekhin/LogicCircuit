@@ -181,7 +181,8 @@ namespace LogicCircuit {
 			case GateType.Clock:
 			case GateType.Not:
 			case GateType.Led:
-			case GateType.TriState:
+			case GateType.TriState1:
+			case GateType.TriState2:
 				this.InputCountRangeLength = 0;
 				break;
 			case GateType.Or:

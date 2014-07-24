@@ -15,6 +15,8 @@ namespace LogicCircuit {
 		Led,
 		Probe,	// This one should not be used anymore
 		[SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "TriState")]
-		TriState
+		TriState1,	// This with controlling pin at the bottom
+		[SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "TriState")]
+		TriState2	// This with controlling pin at the top
 	}
 }

@@ -31,7 +31,7 @@ namespace LogicCircuit {
 		}
 
 		protected override int CircuitSymbolWidth(int defaultWidth) {
-			Tracer.Assert(defaultWidth == (this.GateType == LogicCircuit.GateType.TriState ? 2 : 1));
+			Tracer.Assert(defaultWidth == (this.GateType == LogicCircuit.GateType.TriState1 || this.GateType == LogicCircuit.GateType.TriState2 ? 2 : 1));
 			switch(this.GateType) {
 			case LogicCircuit.GateType.Clock:
 				return base.CircuitSymbolWidth(defaultWidth);
@@ -94,8 +94,11 @@ namespace LogicCircuit {
 					case GateType.Xor:
 						skin = SymbolShape.ShapedXor;
 						break;
-					case GateType.TriState:
-						skin = SymbolShape.ShapedTriState;
+					case GateType.TriState1:
+						skin = SymbolShape.ShapedTriState1;
+						break;
+					case GateType.TriState2:
+						skin = SymbolShape.ShapedTriState2;
 						break;
 					default:
 						Tracer.Fail();
@@ -151,7 +154,8 @@ namespace LogicCircuit {
 				return 1 < inputCount && inputCount <= LogicCircuit.Gate.MaxInputCount;
 			case GateType.Led:
 				return inputCount == 1 || inputCount == 8;
-			case GateType.TriState:
+			case GateType.TriState1:
+			case GateType.TriState2:
 				return inputCount == 2;
 			case GateType.Odd:
 			case GateType.Even:
@@ -245,7 +249,8 @@ namespace LogicCircuit {
 				gate.Notation = Properties.Resources.GateLedNotation;
 				gate.Category = Properties.Resources.CategoryInputOutput;
 				break;
-			case GateType.TriState:
+			case GateType.TriState1:
+			case GateType.TriState2:
 				gate.Name = Properties.Resources.GateTriStateName;
 				gate.Notation = Properties.Resources.GateTriStateNotation;
 				gate.Category = Properties.Resources.CategoryPrimitives;
@@ -257,7 +262,7 @@ namespace LogicCircuit {
 				Tracer.Fail();
 				break;
 			}
-			if(gate.GateType == GateType.TriState) {
+			if(gate.GateType == GateType.TriState1 || gate.GateType == GateType.TriState2) {
 				this.GenerateTriStatePins(gate);
 			} else if(gate.GateType == GateType.Led && inputCount == 8) {
 				this.GenerateSevenSegmentIndicatorPins(gate);
@@ -304,11 +309,15 @@ namespace LogicCircuit {
 		}
 
 		private void GenerateTriStatePins(Gate gate) {
+			Tracer.Assert(gate.GateType == GateType.TriState1 || gate.GateType == GateType.TriState2);
+
 			DevicePin pinX = this.CircuitProject.DevicePinSet.Create(gate, PinType.Input, 1);
 			pinX.Name = Properties.Resources.PinInName;
+			
 			DevicePin pinE = this.CircuitProject.DevicePinSet.Create(gate, PinType.Input, 1);
 			pinE.Name = Properties.Resources.PinEnableName;
-			pinE.PinSide = PinSide.Bottom;
+			pinE.PinSide = (gate.GateType == GateType.TriState1) ? PinSide.Bottom : PinSide.Top;
+			
 			DevicePin pin = this.CircuitProject.DevicePinSet.Create(gate, PinType.Output, 1);
 			pin.Inverted = false;
 			pin.Name = Properties.Resources.PinOutName;
