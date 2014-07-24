@@ -26,8 +26,18 @@ namespace LogicCircuit {
 			set { throw new InvalidOperationException(); }
 		}
 
+		public static string UnknownValue { get { return Properties.Resources.CircuitProbeNotation; } } // Show ? on power off.
+
 		public override Circuit CopyTo(LogicalCircuit target) {
 			return target.CircuitProject.SensorSet.Copy(this);
+		}
+
+		protected override int CircuitSymbolWidth(int defaultWidth) {
+			return base.CircuitSymbolWidth(4);
+		}
+
+		protected override int CircuitSymbolHeight(int defaultHeight) {
+			return base.CircuitSymbolHeight(3);
 		}
 
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
@@ -45,7 +55,7 @@ namespace LogicCircuit {
 				Tracer.Fail();
 				break;
 			}
-			return symbol.CreateSimpleGlyph(skin, symbol);
+			return symbol.CreateSensorGlyph(skin);
 		}
 
 		partial void OnSensorChanged() {

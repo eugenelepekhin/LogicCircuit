@@ -77,6 +77,11 @@
 				<GradientStop Color="#FF9BB7B7" Offset="1"/>
 			</LinearGradientBrush>
 
+			<LinearGradientBrush x:Key="SensorBackground" StartPoint="0,0" EndPoint="1,1" PresentationOptions:Freeze="True">
+				<GradientStop Color="#FFDFEFEF" Offset="0"/>
+				<GradientStop Color="#FFAFCFCF" Offset="1"/>
+			</LinearGradientBrush>
+
 			<LinearGradientBrush x:Key="ClockBackground" StartPoint="0,0" EndPoint="1,1" PresentationOptions:Freeze="True">
 				<!--<GradientStop Color="{x:Static SystemColors.ControlLightLightColor}" Offset="0"/>
 				<GradientStop Color="{x:Static SystemColors.ControlColor}" Offset="1"/>-->

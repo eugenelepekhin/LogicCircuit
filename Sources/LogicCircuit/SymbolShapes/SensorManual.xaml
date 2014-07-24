@@ -3,7 +3,16 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:properties="clr-namespace:LogicCircuit.Properties"
 	FlowDirection="{x:Static properties:Resources.FlowDirection}"
-	BorderBrush="Black" BorderThickness="1" CornerRadius="6" Background="Red"
+	BorderBrush="Black" BorderThickness="1" CornerRadius="6" Background="{StaticResource SensorBackground}"
 >
-	<TextBlock Name="ProbeView" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" IsHyphenationEnabled="True" TextWrapping="Wrap" Foreground="Black"/>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+		<TextBlock Grid.Row="0" HorizontalAlignment="Center" Text="{x:Static properties:Resources.NameSensor}"/>
+		<TextBox Grid.Row="1" Name="ProbeView" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0" IsEnabled="False" MaxLength="8"/>
+		<TextBlock Grid.Row="2" Name="Notation" HorizontalAlignment="Center" />
+	</Grid>
 </Border>

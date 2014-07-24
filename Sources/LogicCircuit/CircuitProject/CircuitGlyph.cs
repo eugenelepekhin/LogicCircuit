@@ -247,6 +247,30 @@ namespace LogicCircuit {
 			}
 		}
 
+		public FrameworkElement CreateSensorGlyph(string skin) {
+			Canvas canvas = this.CreateGlyphCanvas(this);
+			CircuitGlyph.AddJam(canvas, this.Jams(), null);
+			FrameworkElement shape = CircuitGlyph.Skin(canvas, skin);
+			FrameworkElement probeView = shape.FindName("ProbeView") as FrameworkElement;
+			Tracer.Assert(probeView != null);
+			this.ProbeView = probeView;
+
+			Sensor sensor = (Sensor)this.Circuit;
+
+			TextBlock textBlock = probeView as TextBlock;
+			if(textBlock != null) {
+				textBlock.Text = Sensor.UnknownValue;
+			} else {
+				TextBox textBox = (TextBox)probeView;
+				textBox.Text = Sensor.UnknownValue;
+			}
+
+			TextBlock notation = shape.FindName("Notation") as TextBlock;
+			Tracer.Assert(notation != null);
+			notation.Text = this.Circuit.Notation;
+			return canvas;
+		}
+
 		public FrameworkElement CreateSimpleGlyph(string skin, CircuitGlyph mainSymbol) {
 			Canvas canvas = this.CreateGlyphCanvas(mainSymbol);
 			if(this == mainSymbol) {
