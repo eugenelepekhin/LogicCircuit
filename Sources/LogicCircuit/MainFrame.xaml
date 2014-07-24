@@ -455,6 +455,43 @@
 								</StackPanel>
 							</DataTemplate>
 
+							<DataTemplate DataType="{x:Type lc:SensorDescriptor}">
+								<StackPanel Style="{StaticResource DescriptorPanel}">
+									<ContentControl/>
+									<Grid Margin="3,3,8,3" VerticalAlignment="Center">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="Auto" MinWidth="65"/>
+											<ColumnDefinition Width="Auto"/>
+										</Grid.ColumnDefinitions>
+										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto"/>
+											<RowDefinition Height="Auto"/>
+											<RowDefinition Height="Auto"/>
+											<RowDefinition Height="Auto"/>
+										</Grid.RowDefinitions>
+										<ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{x:Static lc:SensorDescriptor.SensorTypes}" SelectedItem="{Binding Path=SensorType}"
+											ToolTip="{x:Static properties:Resources.ToolTipSensorType}"
+										/>
+										<TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Static properties:Resources.CaptionSensorType}" Margin="8,0,0,0"/>
+										<ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{x:Static lc:PinDescriptor.BitWidthRange}" SelectedItem="{Binding Path=BitWidth}"
+											ToolTip="{x:Static properties:Resources.ToolTipSensorBitWidth}"
+										/>
+										<TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Static properties:Resources.CaptionBitWidth}" Margin="8,0,0,0"/>
+										<ComboBox Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="0"
+											SelectedItem="{Binding Path=PinSide, Mode=TwoWay}" ItemsSource="{x:Static lc:PinDescriptor.PinSideRange}"
+											ToolTip="{x:Static properties:Resources.ToolTipDevicePinSide}"
+										/>
+										<TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Static properties:Resources.CaptionPinSide}" Margin="8,0,0,0"/>
+										<TextBox Grid.Row="3" Grid.Column="0" Text="{Binding Path=Notation, Mode=TwoWay}" VerticalAlignment="Center"
+											MaxLength="8" ToolTip="{x:Static properties:Resources.ToolTipSensorNotation}"
+											Margin="0"
+										/>
+										<TextBlock Grid.Row="3" Grid.Column="1" Text="{x:Static properties:Resources.CaptionNotation}" Margin="8,0,0,0"/>
+									</Grid>
+									<TextBlock Style="{StaticResource CircuitName}"/>
+								</StackPanel>
+							</DataTemplate>
+
 							<DataTemplate DataType="{x:Type lc:MemoryDescriptor}">
 								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl/>

@@ -167,6 +167,11 @@ namespace LogicCircuit {
 				}
 			}
 		}
+
+		protected void RefreshGlyph() {
+			this.Circuit.ResetPins();
+			this.ResetGlyph();
+		}
 	}
 
 	public class GateDescriptor : PrimitiveCircuitDescriptor<Gate> {
@@ -259,11 +264,6 @@ namespace LogicCircuit {
 			}
 			return circuitProject.CircuitButtonSet.Create(notation, this.IsToggle, this.PinSide.Value);
 		}
-
-		private void RefreshGlyph() {
-			this.Circuit.ResetPins();
-			this.ResetGlyph();
-		}
 	}
 
 	public class ConstantDescriptor : IOCircuitDescriptor<Constant> {
@@ -297,10 +297,64 @@ namespace LogicCircuit {
 			}
 			return circuitProject.ConstantSet.Create(this.BitWidth, value, this.PinSide.Value);
 		}
+	}
 
-		private void RefreshGlyph() {
-			this.Circuit.ResetPins();
-			this.ResetGlyph();
+	public class SensorDescriptor : IOCircuitDescriptor<Sensor> {
+		private static readonly IEnumerable<EnumDescriptor<SensorType>> sensorTypes = new EnumDescriptor<SensorType>[] {
+			new EnumDescriptor<SensorType>(LogicCircuit.SensorType.Series, Properties.Resources.SensorTypeSeries),
+			new EnumDescriptor<SensorType>(LogicCircuit.SensorType.Loop,   Properties.Resources.SensorTypeLoop),
+			new EnumDescriptor<SensorType>(LogicCircuit.SensorType.Random, Properties.Resources.SensorTypeRandom),
+			new EnumDescriptor<SensorType>(LogicCircuit.SensorType.Manual, Properties.Resources.SensorTypeManual),
+		};
+		[SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
+
+		public static IEnumerable<EnumDescriptor<SensorType>> SensorTypes { get { return sensorTypes; } }
+
+		private EnumDescriptor<SensorType> sensorType;
+		public EnumDescriptor<SensorType> SensorType {
+			get { return this.sensorType; }
+			set {
+				if(this.sensorType != value) {
+					this.InTransaction(() => {
+						this.Circuit.SensorType = value.Value;
+					});
+					this.sensorType = value;
+					this.RefreshGlyph();
+				}
+			}
+		}
+		public int BitWidth { get; set; }
+
+		private EnumDescriptor<PinSide> pinSide;
+		public EnumDescriptor<PinSide> PinSide {
+			get { return this.pinSide; }
+			set {
+				if(this.pinSide != value) {
+					this.InTransaction(() => {
+						this.Circuit.Pins.First().PinSide = value.Value;
+					});
+					this.pinSide = value;
+					this.RefreshGlyph();
+				}
+			}
+		}
+
+		public string Notation { get; set; }
+
+		public SensorDescriptor(CircuitProject circuitProject) : base(circuitProject.SensorSet.Create(LogicCircuit.SensorType.Random, 1, LogicCircuit.PinSide.Right, string.Empty)) {
+			this.sensorType = SensorDescriptor.sensorTypes.First(t => t.Value == this.Circuit.SensorType);
+			this.BitWidth = this.Circuit.BitWidth;
+			this.pinSide = PinDescriptor.PinSideDescriptor(this.Circuit.PinSide);
+			this.Notation = string.Empty;
+		}
+
+		protected override Sensor GetCircuitToDrop(CircuitProject circuitProject) {
+			string notation = (this.Notation ?? string.Empty).Trim();
+			if(!string.IsNullOrEmpty(notation)) {
+				this.Notation = string.Empty;
+				this.NotifyPropertyChanged("Notation");
+			}
+			return circuitProject.SensorSet.Create(this.SensorType.Value, this.BitWidth, this.PinSide.Value, notation);
 		}
 	}
 

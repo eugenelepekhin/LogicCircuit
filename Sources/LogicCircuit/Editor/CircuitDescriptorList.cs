@@ -104,6 +104,7 @@ namespace LogicCircuit {
 			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.Led, 1, false)));
 			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.Led, 8, false)));
 			list.Add(new LedMatrixDescriptor(project));
+			list.Add(new SensorDescriptor(project));
 			list.Add(new ProbeDescriptor(project));
 
 			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.Not, 1, true)));

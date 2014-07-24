@@ -2596,5 +2596,61 @@ namespace LogicCircuit.Properties {
  		public static string ToolTipSensor(string notation) {
 			return string.Format(Culture, ResourceManager.GetString("ToolTipSensor", Culture), notation);
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Sensor type.
+		/// </summary>
+ 		public static string CaptionSensorType {
+			get { return ResourceManager.GetString("CaptionSensorType", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Looping.
+		/// </summary>
+ 		public static string SensorTypeLoop {
+			get { return ResourceManager.GetString("SensorTypeLoop", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Manual.
+		/// </summary>
+ 		public static string SensorTypeManual {
+			get { return ResourceManager.GetString("SensorTypeManual", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Random.
+		/// </summary>
+ 		public static string SensorTypeRandom {
+			get { return ResourceManager.GetString("SensorTypeRandom", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Series.
+		/// </summary>
+ 		public static string SensorTypeSeries {
+			get { return ResourceManager.GetString("SensorTypeSeries", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Choose bit width of the sensor.
+		/// </summary>
+ 		public static string ToolTipSensorBitWidth {
+			get { return ResourceManager.GetString("ToolTipSensorBitWidth", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Enter notation of the sensor.
+		/// </summary>
+ 		public static string ToolTipSensorNotation {
+			get { return ResourceManager.GetString("ToolTipSensorNotation", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Choose where the sensor will get data to provide.
+		/// </summary>
+ 		public static string ToolTipSensorType {
+			get { return ResourceManager.GetString("ToolTipSensorType", Culture); }
+		}
 	}
 }
