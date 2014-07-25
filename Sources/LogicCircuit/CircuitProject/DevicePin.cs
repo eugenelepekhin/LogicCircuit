@@ -36,6 +36,10 @@ namespace LogicCircuit {
 							Tracer.Fail("Unknown pin");
 						}
 					}
+					Sensor sensor = circuit as Sensor;
+					if(sensor != null) {
+						return sensor.BitWidth;
+					}
 					this.bitWidth = this.PinBitWidth;
 				}
 				return this.bitWidth;

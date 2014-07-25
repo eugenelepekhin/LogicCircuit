@@ -430,6 +430,10 @@ namespace LogicCircuit {
 			this.Mainframe.ShowDialog(new DialogConstant(constant));
 		}
 
+		private void Edit(Sensor sensor) {
+			this.Mainframe.ShowDialog(new DialogSensor(sensor));
+		}
+
 		private void Edit(Memory memory) {
 			this.Mainframe.ShowDialog(memory.Writable ? (Window)new DialogRam(memory) : (Window)new DialogRom(memory));
 		}
@@ -476,6 +480,11 @@ namespace LogicCircuit {
 					Constant ct = circuitSymbol.Circuit as Constant;
 					if(ct != null) {
 						this.Edit(ct);
+						return;
+					}
+					Sensor sr = circuitSymbol.Circuit as Sensor;
+					if(sr != null) {
+						this.Edit(sr);
 						return;
 					}
 					Memory m = circuitSymbol.Circuit as Memory;

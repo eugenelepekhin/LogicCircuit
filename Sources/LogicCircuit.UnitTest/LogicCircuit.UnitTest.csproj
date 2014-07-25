@@ -71,6 +71,7 @@
     <Compile Include="EnumHelperTest.cs" />
     <Compile Include="ResourcesTest.cs" />
     <Compile Include="SettingsTest.cs" />
+    <Compile Include="SensorTest.cs" />
     <Compile Include="XmlLoadTest.cs" />
     <Compile Include="Socket.cs" />
     <Compile Include="SplitterConverterTest.cs" />

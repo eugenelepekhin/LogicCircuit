@@ -63,6 +63,7 @@
     <Compile Include="CircuitProject\MemoryOnStart.cs" />
     <Compile Include="CircuitProject\PinComparer.cs" />
     <Compile Include="CircuitProject\Sensor.cs" />
+    <Compile Include="CircuitProject\SensorPoint.cs" />
     <Compile Include="CircuitProject\SensorType.cs" />
     <Compile Include="CircuitProject\TextNote.cs" />
     <Compile Include="CircuitProject\Wrappers\CircuitProbe.cs" />
@@ -136,6 +137,9 @@
       <DependentUpon>DialogReport.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialog\DialogRom.cs" />
+    <Compile Include="Dialog\DialogSensor.xaml.cs">
+      <DependentUpon>DialogSensor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialog\DialogText.xaml.cs">
       <DependentUpon>DialogText.xaml</DependentUpon>
     </Compile>
@@ -370,6 +374,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Dialog\DialogReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialog\DialogSensor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

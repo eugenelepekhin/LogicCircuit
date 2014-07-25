@@ -1291,4 +1291,7 @@ that displaying its visual elements.</value>
   <data name="ToolTipSensorType" xml:space="preserve">
     <value>Choose where the sensor will get data to provide</value>
   </data>
+  <data name="TitleSensorType" xml:space="preserve">
+    <value>Sensor _type:</value>
+  </data>
 </root>
