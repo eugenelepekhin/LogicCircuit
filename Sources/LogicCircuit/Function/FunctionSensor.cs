@@ -28,7 +28,7 @@ namespace LogicCircuit {
 			switch(this.Sensor.SensorType) {
 			case SensorType.Series:
 			case SensorType.Loop:
-				this.sensorValue = new RandomValue(10, 20, this.Sensor.BitWidth);
+				this.sensorValue = new SeriesValue(this.Sensor.Data, this.Sensor.SensorType == SensorType.Loop, this.Sensor.BitWidth);
 				break;
 			case SensorType.Random:
 				this.sensorValue = new RandomValue(10, 20, this.Sensor.BitWidth);
@@ -115,6 +115,41 @@ namespace LogicCircuit {
 
 			private void Reset() {
 				this.flip = this.random.Next(this.minTick, this.maxTick);
+				this.tick = 0;
+			}
+		}
+
+		private class SeriesValue : SensorValue {
+			private readonly IList<SensorPoint> list;
+			private readonly bool isLoop;
+			private int index;
+			private int tick;
+			private bool stop;
+
+			public SeriesValue(string data, bool isLoop, int bitWidth) : base(bitWidth) {
+				this.list = Sensor.ParseSeries(data, bitWidth);
+				this.stop = (this.list.Count == 0);
+				this.isLoop = isLoop;
+				this.Reset();
+			}
+
+			public override bool Flip() {
+				if(!this.stop && this.list[this.index].Tick == this.tick++) {
+					this.Value = this.list[this.index].Value;
+					if(this.list.Count <= ++this.index) {
+						if(this.isLoop) {
+							this.Reset();
+						} else {
+							this.stop = true;
+						}
+					}
+					return true;
+				}
+				return false;
+			}
+
+			private void Reset() {
+				this.index = 0;
 				this.tick = 0;
 			}
 		}
