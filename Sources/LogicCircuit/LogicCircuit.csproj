@@ -258,6 +258,7 @@
     <Compile Include="Function\FunctionProbe.cs" />
     <Compile Include="Function\FunctionRam.cs" />
     <Compile Include="Function\FunctionRom.cs" />
+    <Compile Include="Function\FunctionSensor.cs" />
     <Compile Include="Function\IFunctionClock.cs" />
     <Compile Include="Function\IFunctionVisual.cs" />
     <Compile Include="Function\FunctionNot.cs" />

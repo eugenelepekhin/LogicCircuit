@@ -551,7 +551,7 @@ namespace LogicCircuit {
 		}
 
 		private static bool IsPrimitive(Circuit circuit) {
-			return circuit is Gate || circuit is CircuitProbe || circuit is CircuitButton || circuit is Constant || circuit is Memory || circuit is LedMatrix;
+			return circuit is Gate || circuit is CircuitProbe || circuit is CircuitButton || circuit is Constant || circuit is Memory || circuit is LedMatrix || circuit is Sensor;
 		}
 
 		private bool HasLoop(LogicalCircuit circuit) {
@@ -609,6 +609,8 @@ namespace LogicCircuit {
 				}
 			} else if(symbolMap.CircuitSymbol.Circuit is LedMatrix) {
 				CircuitMap.DefineLedMatrix(circuitState, symbolMap);
+			} else if(symbolMap.CircuitSymbol.Circuit is Sensor) {
+				CircuitMap.DefineSensor(circuitState, symbolMap);
 			} else {
 				Tracer.Fail();
 			}
@@ -930,6 +932,20 @@ namespace LogicCircuit {
 			}
 			symbolMap.CircuitMap.constants.Add(symbolMap.CircuitSymbol, constant);
 			return constant;
+		}
+
+		private static CircuitFunction DefineSensor(CircuitState circuitState, SymbolMap symbolMap) {
+			List<Result> results = new List<Result>(symbolMap.Results);
+			results.Sort(ResultComparer.BitOrderComparer);
+			int[] map = CircuitMap.Results(results);
+			Sensor s = (Sensor)symbolMap.CircuitSymbol.Circuit;
+			Tracer.Assert(map.Length == s.BitWidth);
+			FunctionSensor sensor = new FunctionSensor(circuitState, symbolMap.CircuitSymbol, map);
+			if(symbolMap.CircuitMap.displays == null) {
+				symbolMap.CircuitMap.displays = new HashSet<IFunctionVisual>();
+			}
+			symbolMap.CircuitMap.displays.Add(sensor);
+			return sensor;
 		}
 
 		private static CircuitFunction DefineRom(CircuitState circuitState, SymbolMap symbolMap) {
