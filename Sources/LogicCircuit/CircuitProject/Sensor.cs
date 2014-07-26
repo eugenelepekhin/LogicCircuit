@@ -23,7 +23,7 @@ namespace LogicCircuit {
 						!int.TryParse(parts[1], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out value) ||
 						tick <= lastTick
 					) {
-						throw new ArgumentException();
+						throw new ArgumentOutOfRangeException("data");
 					}
 					lastTick = tick;
 					list.Add(new SensorPoint(tick, Constant.Normalize(value, bitWidth)));

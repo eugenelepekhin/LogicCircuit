@@ -127,10 +127,10 @@ namespace LogicCircuit {
 		private abstract class SensorValue {
 			public int BitWidth { get; private set; }
 
-			private int value;
+			private int sensorValue;
 			public int Value {
-				get { return this.value; }
-				set { this.value = Constant.Normalize(value, this.BitWidth); }
+				get { return this.sensorValue; }
+				set { this.sensorValue = Constant.Normalize(value, this.BitWidth); }
 			}
 
 			protected SensorValue(int bitWidth) {
