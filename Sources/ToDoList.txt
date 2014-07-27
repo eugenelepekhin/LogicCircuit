@@ -14,6 +14,9 @@ Colors of symbols
 
 Search
 
+Power up root
+FPGA
+
 Running tree not always open the item when it clicked on the diagram
 
 === Function Optimization Ideas ===
