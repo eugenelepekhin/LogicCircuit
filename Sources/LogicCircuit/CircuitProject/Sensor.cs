@@ -10,26 +10,38 @@ using LogicCircuit.DataPersistent;
 
 namespace LogicCircuit {
 	public partial class Sensor {
+		public const string DefaultSeriesData = "0:0";
+		public const int DefaultRandomMinInterval = 10;
+		public const int DefaultRandomMaxInterval = 20;
+		public static readonly string DefaultRandomData = Sensor.SavePoint(new SensorPoint(DefaultRandomMinInterval, DefaultRandomMaxInterval));
+
 		public static IList<SensorPoint> ParseSeries(string data, int bitWidth) {
 			Tracer.Assert(data != null);
 			List<SensorPoint> list = new List<SensorPoint>();
 			int lastTick = -1;
 			foreach(string item in data.Split(' ')) {
 				if(!string.IsNullOrWhiteSpace(item)) {
-					int tick, value;
-					string[] parts = item.Split(':');
-					if(	parts == null || parts.Length != 2 ||
-						!int.TryParse(parts[0], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out tick) ||
-						!int.TryParse(parts[1], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out value) ||
-						tick <= lastTick
-					) {
+					SensorPoint point = Sensor.ParsePoint(item, bitWidth);
+					if(point.Tick <= lastTick) {
 						throw new ArgumentOutOfRangeException("data");
 					}
-					lastTick = tick;
-					list.Add(new SensorPoint(tick, Constant.Normalize(value, bitWidth)));
+					lastTick = point.Tick;
+					list.Add(point);
 				}
 			}
 			return list;
+		}
+
+		private static SensorPoint ParsePoint(string data, int bitWidth) {
+			int tick, value;
+			string[] parts = data.Split(':');
+			if(	parts == null || parts.Length != 2 ||
+				!int.TryParse(parts[0], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out tick) ||
+				!int.TryParse(parts[1], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out value)
+			) {
+				throw new ArgumentOutOfRangeException("data");
+			}
+			return new SensorPoint(tick, Constant.Normalize(value, bitWidth));
 		}
 
 		public static string SaveSeries(IList<SensorPoint> list) {
@@ -38,9 +50,13 @@ namespace LogicCircuit {
 				if(0 < text.Length) {
 					text.Append(" ");
 				}
-				text.AppendFormat(CultureInfo.InvariantCulture, "{0:X}:{1:X}", point.Tick, point.Value);
+				text.Append(Sensor.SavePoint(point));
 			}
 			return text.ToString();
+		}
+
+		private static string SavePoint(SensorPoint point) {
+			return string.Format(CultureInfo.InvariantCulture, "{0:X}:{1:X}", point.Tick, point.Value);
 		}
 
 		public override void Delete() {
@@ -115,7 +131,24 @@ namespace LogicCircuit {
 		}
 
 		public Sensor Create(SensorType sensorType, int bitWidth, PinSide pinSide, string notation) {
-			Sensor sensor = this.CreateItem(Guid.NewGuid(), sensorType, bitWidth, pinSide, notation, SensorData.DataField.Field.DefaultValue, SensorData.NoteField.Field.DefaultValue);
+			string data;
+			switch(sensorType) {
+			case SensorType.Series:
+			case SensorType.Loop:
+				data = Sensor.DefaultSeriesData;
+				break;
+			case SensorType.Random:
+				data = Sensor.DefaultRandomData;
+				break;
+			case SensorType.Manual:
+				data = string.Empty;
+				break;
+			default:
+				Tracer.Fail();
+				data = null;
+				break;
+			}
+			Sensor sensor = this.CreateItem(Guid.NewGuid(), sensorType, bitWidth, pinSide, notation, data, SensorData.NoteField.Field.DefaultValue);
 			this.CreateDevicePin(sensor);
 			return sensor;
 		}

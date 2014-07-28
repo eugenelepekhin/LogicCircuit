@@ -302,7 +302,6 @@ namespace LogicCircuit {
 	public class SensorDescriptor : IOCircuitDescriptor<Sensor> {
 		private static readonly IEnumerable<EnumDescriptor<SensorType>> sensorTypes = new EnumDescriptor<SensorType>[] {
 			new EnumDescriptor<SensorType>(LogicCircuit.SensorType.Series, Properties.Resources.SensorTypeSeries),
-			new EnumDescriptor<SensorType>(LogicCircuit.SensorType.Loop,   Properties.Resources.SensorTypeLoop),
 			new EnumDescriptor<SensorType>(LogicCircuit.SensorType.Random, Properties.Resources.SensorTypeRandom),
 			new EnumDescriptor<SensorType>(LogicCircuit.SensorType.Manual, Properties.Resources.SensorTypeManual),
 		};
@@ -354,7 +353,11 @@ namespace LogicCircuit {
 				this.Notation = string.Empty;
 				this.NotifyPropertyChanged("Notation");
 			}
-			return circuitProject.SensorSet.Create(this.SensorType.Value, this.BitWidth, this.PinSide.Value, notation);
+			SensorType type = this.SensorType.Value;
+			if(type == LogicCircuit.SensorType.Series) {
+				type = LogicCircuit.SensorType.Loop;
+			}
+			return circuitProject.SensorSet.Create(type, this.BitWidth, this.PinSide.Value, notation);
 		}
 	}
 
