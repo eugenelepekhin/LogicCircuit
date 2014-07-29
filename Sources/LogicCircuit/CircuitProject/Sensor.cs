@@ -29,6 +29,26 @@ namespace LogicCircuit {
 			return true;
 		}
 
+		public static string ParseError(string data) {
+			if(string.IsNullOrWhiteSpace(data)) {
+				return Properties.Resources.ErrorEmptySeries;
+			}
+			int lastTick = -1;
+			foreach(string item in data.Split(' ')) {
+				if(!string.IsNullOrWhiteSpace(item)) {
+					SensorPoint point;
+					if(!Sensor.TryParsePoint(item, 32, out point)) {
+						return Properties.Resources.ErrorSeriesItem(item);
+					}
+					if(point.Tick <= lastTick) {
+						return Properties.Resources.ErrorSeriesItemOrder(item);
+					}
+					lastTick = point.Tick;
+				}
+			}
+			return null;
+		}
+
 		public static bool TryParseSeries(string data, int bitWidth, out IList<SensorPoint> result) {
 			result = null;
 			Tracer.Assert(data != null);

@@ -2659,5 +2659,92 @@ namespace LogicCircuit.Properties {
  		public static string TitleSensorType {
 			get { return ResourceManager.GetString("TitleSensorType", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Minimum should be less or equal than maximum..
+		/// </summary>
+ 		public static string ErrorBadInterval {
+			get { return ResourceManager.GetString("ErrorBadInterval", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Expecting number greater that 0..
+		/// </summary>
+ 		public static string ErrorBadPositiveNumber {
+			get { return ResourceManager.GetString("ErrorBadPositiveNumber", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to The series should not be empty.
+		/// </summary>
+ 		public static string ErrorEmptySeries {
+			get { return ResourceManager.GetString("ErrorEmptySeries", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Error in {0}. It should be a pair of hexadecimal numbers separated by :.
+		/// </summary>
+ 		public static string ErrorSeriesItem(string item) {
+			return string.Format(Culture, ResourceManager.GetString("ErrorSeriesItem", Culture), item);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Error in {0}. Each next cycle should be greater than previous..
+		/// </summary>
+ 		public static string ErrorSeriesItemOrder(string item) {
+			return string.Format(Culture, ResourceManager.GetString("ErrorSeriesItemOrder", Culture), item);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Repeat series.
+		/// </summary>
+ 		public static string TitleLoopSeries {
+			get { return ResourceManager.GetString("TitleLoopSeries", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Max cycles:.
+		/// </summary>
+ 		public static string TitleSensorRandomMax {
+			get { return ResourceManager.GetString("TitleSensorRandomMax", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Min cycles:.
+		/// </summary>
+ 		public static string TitleSensorRandomMin {
+			get { return ResourceManager.GetString("TitleSensorRandomMin", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Series:.
+		/// </summary>
+ 		public static string TitleSeries {
+			get { return ResourceManager.GetString("TitleSeries", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Enter maximum number of cycles before the sensor change its measure..
+		/// </summary>
+ 		public static string ToolTipSensorRandomMax {
+			get { return ResourceManager.GetString("ToolTipSensorRandomMax", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Enter minimum number of cycles before the sensor change its measure..
+		/// </summary>
+ 		public static string ToolTipSensorRandomMin {
+			get { return ResourceManager.GetString("ToolTipSensorRandomMin", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Please provide series of sensor measures in form <cycle>:<value>
+		/// where both cycle and value are hexadecimal.
+		/// When the cycle is even number or 0 then it corresponds to changing
+		/// clock from 0 to 1, when it is odd then clock is changing from 1 to 0..
+		/// </summary>
+ 		public static string ToolTipSeriesData {
+			get { return ResourceManager.GetString("ToolTipSeriesData", Culture); }
+		}
 	}
 }

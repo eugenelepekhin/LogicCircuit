@@ -1294,4 +1294,45 @@ that displaying its visual elements.</value>
   <data name="TitleSensorType" xml:space="preserve">
     <value>Sensor _type:</value>
   </data>
+  <data name="ErrorBadInterval" xml:space="preserve">
+    <value>Minimum should be less or equal than maximum.</value>
+  </data>
+  <data name="ErrorBadPositiveNumber" xml:space="preserve">
+    <value>Expecting number greater that 0.</value>
+  </data>
+  <data name="ErrorEmptySeries" xml:space="preserve">
+    <value>The series should not be empty</value>
+  </data>
+  <data name="ErrorSeriesItem" xml:space="preserve">
+    <value>Error in {0}. It should be a pair of hexadecimal numbers separated by :</value>
+    <comment>{string item}</comment>
+  </data>
+  <data name="ErrorSeriesItemOrder" xml:space="preserve">
+    <value>Error in {0}. Each next cycle should be greater than previous.</value>
+    <comment>{string item}</comment>
+  </data>
+  <data name="TitleLoopSeries" xml:space="preserve">
+    <value>Repeat series</value>
+  </data>
+  <data name="TitleSensorRandomMax" xml:space="preserve">
+    <value>Max cycles:</value>
+  </data>
+  <data name="TitleSensorRandomMin" xml:space="preserve">
+    <value>Min cycles:</value>
+  </data>
+  <data name="TitleSeries" xml:space="preserve">
+    <value>_Series:</value>
+  </data>
+  <data name="ToolTipSensorRandomMax" xml:space="preserve">
+    <value>Enter maximum number of cycles before the sensor change its measure.</value>
+  </data>
+  <data name="ToolTipSensorRandomMin" xml:space="preserve">
+    <value>Enter minimum number of cycles before the sensor change its measure.</value>
+  </data>
+  <data name="ToolTipSeriesData" xml:space="preserve">
+    <value>Please provide series of sensor measures in form &lt;cycle&gt;:&lt;value&gt;
+where both cycle and value are hexadecimal.
+When the cycle is even number or 0 then it corresponds to changing
+clock from 0 to 1, when it is odd then clock is changing from 1 to 0.</value>
+  </data>
 </root>

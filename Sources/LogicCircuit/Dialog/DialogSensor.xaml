@@ -27,6 +27,15 @@
 		</Style>
 
 		<lc:EnumToVisibilityConvertor x:Key="EnumToVisibilityConvertor"/>
+
+		<ControlTemplate x:Key="validationTemplate">
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Foreground="Red" FontSize="20">!</TextBlock>
+				<Border BorderBrush="Red" BorderThickness="1">
+					<AdornedElementPlaceholder/>
+				</Border>
+			</StackPanel>
+		</ControlTemplate>
 	</Window.Resources>
 
 	<Grid Margin="3">
@@ -48,7 +57,11 @@
 		<Label Grid.Row="0" Grid.Column="0" Content="{x:Static properties:Resources.TitleSensorType}"
 			Target="{Binding ElementName=sensorType}"
 		/>
-		<ComboBox Grid.Row="0" Grid.Column="1" Name="sensorType" ToolTip="{x:Static properties:Resources.ToolTipSensorType}"/>
+		<ComboBox Grid.Row="0" Grid.Column="1" Name="sensorType"
+			ToolTip="{x:Static properties:Resources.ToolTipSensorType}"
+			ItemsSource="{Binding Path=SensorTypes}"
+			SelectedItem="{Binding Path=SelectedSensorType, ValidatesOnDataErrors=True}"
+		/>
 
 		<Label Grid.Row="1" Grid.Column="0" Content="{x:Static properties:Resources.TitleBitWidth}"
 			Target="{Binding ElementName=bitWidth}"
@@ -65,31 +78,41 @@
 
 		<!-- Series -->
 
-		<Label Grid.Row="4" Grid.Column="0" Content="Data:" Target="{Binding ElementName=data}"
+		<Label Grid.Row="4" Grid.Column="0" Content="{x:Static properties:Resources.TitleSeries}" Target="{Binding ElementName=data}"
 			Visibility="{Binding ElementName=sensorType, Path=SelectedItem.Value, Converter={StaticResource EnumToVisibilityConvertor}, ConverterParameter={x:Static lc:SensorType.Series}}"
 		/>
 		<TextBox Grid.Row="4" Grid.Column="1" Name="data"
 			Visibility="{Binding ElementName=sensorType, Path=SelectedItem.Value, Converter={StaticResource EnumToVisibilityConvertor}, ConverterParameter={x:Static lc:SensorType.Series}}"
+			Text="{Binding Path=SeriesData, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+			Validation.ErrorTemplate="{StaticResource validationTemplate}"
+			ToolTip="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent, FallbackValue={x:Static properties:Resources.ToolTipSeriesData}}"
 		/>
 
-		<CheckBox Grid.Row="5" Grid.Column="1" Name="loop" Content="Loop it in"
+		<CheckBox Grid.Row="5" Grid.Column="1" Content="{x:Static properties:Resources.TitleLoopSeries}"
 			Visibility="{Binding ElementName=sensorType, Path=SelectedItem.Value, Converter={StaticResource EnumToVisibilityConvertor}, ConverterParameter={x:Static lc:SensorType.Series}}"
+			IsChecked="{Binding Path=IsLoop}"
 		/>
 
 		<!-- Random -->
 
-		<Label Grid.Row="4" Grid.Column="0" Content="Min ticks:" Target="{Binding ElementName=minTicks}"
+		<Label Grid.Row="4" Grid.Column="0" Content="{x:Static properties:Resources.TitleSensorRandomMin}" Target="{Binding ElementName=minTicks}"
 			Visibility="{Binding ElementName=sensorType, Path=SelectedItem.Value, Converter={StaticResource EnumToVisibilityConvertor}, ConverterParameter={x:Static lc:SensorType.Random}}"
 		/>
 		<TextBox Grid.Row="4" Grid.Column="1" Name="minTicks"
 			Visibility="{Binding ElementName=sensorType, Path=SelectedItem.Value, Converter={StaticResource EnumToVisibilityConvertor}, ConverterParameter={x:Static lc:SensorType.Random}}"
+			Text="{Binding Path=RandomMin, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+			Validation.ErrorTemplate="{StaticResource validationTemplate}"
+			ToolTip="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent, FallbackValue={x:Static properties:Resources.ToolTipSensorRandomMin}}"
 		/>
 
-		<Label Grid.Row="5" Grid.Column="0" Content="Max ticks:" Target="{Binding ElementName=maxTicks}"
+		<Label Grid.Row="5" Grid.Column="0" Content="{x:Static properties:Resources.TitleSensorRandomMax}" Target="{Binding ElementName=maxTicks}"
 			Visibility="{Binding ElementName=sensorType, Path=SelectedItem.Value, Converter={StaticResource EnumToVisibilityConvertor}, ConverterParameter={x:Static lc:SensorType.Random}}"
 		/>
 		<TextBox Grid.Row="5" Grid.Column="1" Name="maxTicks"
 			Visibility="{Binding ElementName=sensorType, Path=SelectedItem.Value, Converter={StaticResource EnumToVisibilityConvertor}, ConverterParameter={x:Static lc:SensorType.Random}}"
+			Text="{Binding Path=RandomMax, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+			Validation.ErrorTemplate="{StaticResource validationTemplate}"
+			ToolTip="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent, FallbackValue={x:Static properties:Resources.ToolTipSensorRandomMax}}"
 		/>
 
 		<!-- End of variable controls -->
@@ -100,7 +123,7 @@
 		/>
 
 		<StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-			<Button Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" Click="ButtonOkClick"/>
+			<Button Name="buttonOk" Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" Click="ButtonOkClick"/>
 			<Button Content="{x:Static properties:Resources.TitleCancel}" IsCancel="True"/>
 		</StackPanel>
 	</Grid>
