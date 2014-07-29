@@ -46,6 +46,9 @@ namespace LogicCircuit {
 					lastTick = point.Tick;
 				}
 			}
+			if(lastTick < 0) {
+				return Properties.Resources.ErrorEmptySeries;
+			}
 			return null;
 		}
 
@@ -146,9 +149,10 @@ namespace LogicCircuit {
 				CircuitId = this.Table.GetField(rowId, SensorData.SensorIdField.Field)
 			};
 			Sensor sensor = this.Create(rowId, this.CircuitProject.CircuitTable.Insert(ref data));
+			this.CreateDevicePin(sensor);
+
 			IList<SensorPoint> list;
 			SensorPoint point;
-			this.CreateDevicePin(sensor);
 			switch(sensor.SensorType) {
 			case SensorType.Series:
 			case SensorType.Loop:
@@ -168,6 +172,7 @@ namespace LogicCircuit {
 				Tracer.Fail();
 				break;
 			}
+
 			return sensor;
 		}
 

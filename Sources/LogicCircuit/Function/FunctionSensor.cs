@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace LogicCircuit {
@@ -100,14 +101,14 @@ namespace LogicCircuit {
 			textBox.PreviewLostKeyboardFocus += textBox_PreviewLostKeyboardFocus;
 		}
 
-		private void textBox_PreviewKeyUp(object sender, System.Windows.Input.KeyEventArgs e) {
+		private void textBox_PreviewKeyUp(object sender, KeyEventArgs e) {
 			TextBox textBox = sender as TextBox;
-			if(textBox != null && e.Key == System.Windows.Input.Key.Enter) {
+			if(textBox != null && e.Key == Key.Enter) {
 				this.SetManualValue(textBox);
 			}
 		}
 
-		private void textBox_PreviewLostKeyboardFocus(object sender, System.Windows.Input.KeyboardFocusChangedEventArgs e) {
+		private void textBox_PreviewLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e) {
 			TextBox textBox = sender as TextBox;
 			if(textBox != null) {
 				this.SetManualValue(textBox);
@@ -142,10 +143,10 @@ namespace LogicCircuit {
 		}
 
 		private class RandomValue : SensorValue {
-			private Random random;
-			private int maxValue;
-			private int minTick;
-			private int maxTick;
+			private readonly Random random;
+			private readonly int maxValue;
+			private readonly int minTick;
+			private readonly int maxTick;
 			private int flip;
 			private int tick;
 			
@@ -160,9 +161,7 @@ namespace LogicCircuit {
 					minTick = Sensor.DefaultRandomMinInterval;
 					maxTick = Sensor.DefaultRandomMaxInterval;
 				}
-				Tracer.Assert(0 < minTick && minTick < int.MaxValue / 2);
-				Tracer.Assert(0 < maxTick && maxTick < int.MaxValue / 2);
-				Tracer.Assert(minTick <= maxTick);
+				Tracer.Assert(0 < minTick && minTick <= maxTick);
 				this.random = new Random();
 				this.maxValue = (bitWidth < 32) ? 1 << bitWidth : int.MaxValue;
 				this.minTick = minTick;

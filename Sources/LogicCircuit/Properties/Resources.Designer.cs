@@ -2605,13 +2605,6 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Looping.
-		/// </summary>
- 		public static string SensorTypeLoop {
-			get { return ResourceManager.GetString("SensorTypeLoop", Culture); }
-		}
-
-		/// <summary>
 		/// Looks up a localized string similar to Manual.
 		/// </summary>
  		public static string SensorTypeManual {
@@ -2696,28 +2689,28 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Repeat series.
+		/// Looks up a localized string similar to _Repeat series.
 		/// </summary>
  		public static string TitleLoopSeries {
 			get { return ResourceManager.GetString("TitleLoopSeries", Culture); }
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Max cycles:.
+		/// Looks up a localized string similar to M_ax cycles:.
 		/// </summary>
  		public static string TitleSensorRandomMax {
 			get { return ResourceManager.GetString("TitleSensorRandomMax", Culture); }
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Min cycles:.
+		/// Looks up a localized string similar to _Min cycles:.
 		/// </summary>
  		public static string TitleSensorRandomMin {
 			get { return ResourceManager.GetString("TitleSensorRandomMin", Culture); }
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to _Series:.
+		/// Looks up a localized string similar to S_eries:.
 		/// </summary>
  		public static string TitleSeries {
 			get { return ResourceManager.GetString("TitleSeries", Culture); }

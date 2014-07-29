@@ -36,10 +36,10 @@ namespace LogicCircuit {
 		public string this[string columnName] {
 			get {
 				int old;
-				string error = string.Empty;
+				string error = null;
 				switch(columnName) {
 				case "SeriesData":
-					this.dataError = Sensor.ParseError(this.SeriesData) ?? string.Empty;
+					this.dataError = Sensor.ParseError(this.SeriesData);
 					error = this.dataError;
 					break;
 				case "RandomMin":
@@ -126,21 +126,27 @@ namespace LogicCircuit {
 		}
 
 		private void ButtonOkClick(object sender, RoutedEventArgs e) {
+			// All the logic of this method assumes that validation prevents this been called if there is an incorrect user input.
 			try {
-				SensorType type = this.SelectedSensorType.Value;
 				int bitWidth = (int)this.bitWidth.SelectedItem;
 				PinSide pinSide = ((EnumDescriptor<PinSide>)this.side.SelectedItem).Value;
 				string notation = this.notation.Text.Trim();
 				string note = this.note.Text.Trim();
-				string data = this.SeriesData;
+				string data = this.SeriesData.Trim();
 				string minText = this.RandomMin.Trim();
 				string maxText = this.RandomMax.Trim();
+
+				SensorType type = this.SelectedSensorType.Value;
+				if(type == SensorType.Series && string.IsNullOrWhiteSpace(data)) {
+					data = Sensor.DefaultSeriesData;
+				}
 				if(type == SensorType.Series && this.IsLoop) {
 					type = SensorType.Loop;
 				} else if(type == SensorType.Random) {
 					int min, max;
 					if(	int.TryParse(minText, NumberStyles.Integer, Properties.Resources.Culture, out min) &&
-						int.TryParse(maxText, NumberStyles.Integer, Properties.Resources.Culture, out max)
+						int.TryParse(maxText, NumberStyles.Integer, Properties.Resources.Culture, out max) &&
+						0 < min && min <= max
 					) {
 						data = Sensor.SaveSeries(new List<SensorPoint>() { new SensorPoint(min, max) });
 					} else {

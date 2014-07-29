@@ -1270,9 +1270,6 @@ that displaying its visual elements.</value>
   <data name="CaptionSensorType" xml:space="preserve">
     <value>Sensor type</value>
   </data>
-  <data name="SensorTypeLoop" xml:space="preserve">
-    <value>Looping</value>
-  </data>
   <data name="SensorTypeManual" xml:space="preserve">
     <value>Manual</value>
   </data>
@@ -1312,16 +1309,16 @@ that displaying its visual elements.</value>
     <comment>{string item}</comment>
   </data>
   <data name="TitleLoopSeries" xml:space="preserve">
-    <value>Repeat series</value>
+    <value>_Repeat series</value>
   </data>
   <data name="TitleSensorRandomMax" xml:space="preserve">
-    <value>Max cycles:</value>
+    <value>M_ax cycles:</value>
   </data>
   <data name="TitleSensorRandomMin" xml:space="preserve">
-    <value>Min cycles:</value>
+    <value>_Min cycles:</value>
   </data>
   <data name="TitleSeries" xml:space="preserve">
-    <value>_Series:</value>
+    <value>S_eries:</value>
   </data>
   <data name="ToolTipSensorRandomMax" xml:space="preserve">
     <value>Enter maximum number of cycles before the sensor change its measure.</value>

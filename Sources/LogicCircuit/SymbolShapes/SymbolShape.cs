@@ -5,8 +5,6 @@ namespace LogicCircuit {
 		public const string Button = "SymbolShapes/Button.xaml";
 		public const string Clock = "SymbolShapes/Clock.xaml";
 		public const string Constant = "SymbolShapes/Constant.xaml";
-		public const string SensorAuto = "SymbolShapes/SensorAuto.xaml";
-		public const string SensorManual = "SymbolShapes/SensorManual.xaml";
 		public const string DisplayBackground = "SymbolShapes/DisplayBackground.xaml";
 		public const string DisplayBorder = "SymbolShapes/DisplayBorder.xaml";
 		public const string Led = "SymbolShapes/Led.xaml";
@@ -18,6 +16,8 @@ namespace LogicCircuit {
 		public const string Pin = "SymbolShapes/Pin.xaml";
 		public const string Probe = "SymbolShapes/Probe.xaml";
 		public const string Rectangular = "SymbolShapes/Rectangular.xaml";
+		public const string SensorAuto = "SymbolShapes/SensorAuto.xaml";
+		public const string SensorManual = "SymbolShapes/SensorManual.xaml";
 		public const string SevenSegment = "SymbolShapes/SevenSegment.xaml";
 		public const string ShapedAnd = "SymbolShapes/ShapedAnd.xaml";
 		public const string ShapedNot = "SymbolShapes/ShapedNot.xaml";
