@@ -38,10 +38,10 @@ namespace LogicCircuit {
 			int min = Sensor.DefaultRandomMinInterval;
 			int max = Sensor.DefaultRandomMaxInterval;
 			if(type == SensorType.Random) {
-				IList<SensorPoint> list = Sensor.ParseSeries(this.sensor.Data, 32);
-				if(0 < list.Count) {
-					min = list[0].Tick;
-					max = list[0].Value;
+				SensorPoint point;
+				if(Sensor.TryParsePoint(this.sensor.Data, 32, out point)) {
+					min = point.Tick;
+					max = point.Value;
 				}
 			}
 			this.minTicks.Text = min.ToString(Properties.Resources.Culture);

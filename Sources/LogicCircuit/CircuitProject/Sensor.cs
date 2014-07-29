@@ -10,38 +10,43 @@ using LogicCircuit.DataPersistent;
 
 namespace LogicCircuit {
 	public partial class Sensor {
-		public const string DefaultSeriesData = "0:0";
+		public static readonly string DefaultSeriesData = Sensor.SavePoint(new SensorPoint(0, 0));
 		public const int DefaultRandomMinInterval = 10;
 		public const int DefaultRandomMaxInterval = 20;
 		public static readonly string DefaultRandomData = Sensor.SavePoint(new SensorPoint(DefaultRandomMinInterval, DefaultRandomMaxInterval));
 
-		public static IList<SensorPoint> ParseSeries(string data, int bitWidth) {
-			Tracer.Assert(data != null);
-			List<SensorPoint> list = new List<SensorPoint>();
-			int lastTick = -1;
-			foreach(string item in data.Split(' ')) {
-				if(!string.IsNullOrWhiteSpace(item)) {
-					SensorPoint point = Sensor.ParsePoint(item, bitWidth);
-					if(point.Tick <= lastTick) {
-						throw new ArgumentOutOfRangeException("data");
-					}
-					lastTick = point.Tick;
-					list.Add(point);
-				}
-			}
-			return list;
-		}
-
-		private static SensorPoint ParsePoint(string data, int bitWidth) {
+		public static bool TryParsePoint(string data, int bitWidth, out SensorPoint point) {
+			point = new SensorPoint();
 			int tick, value;
 			string[] parts = data.Split(':');
 			if(	parts == null || parts.Length != 2 ||
 				!int.TryParse(parts[0], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out tick) ||
 				!int.TryParse(parts[1], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out value)
 			) {
-				throw new ArgumentOutOfRangeException("data");
+				return false;
 			}
-			return new SensorPoint(tick, Constant.Normalize(value, bitWidth));
+			point = new SensorPoint(tick, Constant.Normalize(value, bitWidth));
+			return true;
+		}
+
+		public static bool TryParseSeries(string data, int bitWidth, out IList<SensorPoint> result) {
+			result = null;
+			Tracer.Assert(data != null);
+			Tracer.Assert(0 < bitWidth && bitWidth <= 32);
+			List<SensorPoint> list = new List<SensorPoint>();
+			int lastTick = -1;
+			foreach(string item in data.Split(' ')) {
+				if(!string.IsNullOrWhiteSpace(item)) {
+					SensorPoint point;
+					if(!Sensor.TryParsePoint(item, bitWidth, out point) || point.Tick <= lastTick) {
+						return false;
+					}
+					lastTick = point.Tick;
+					list.Add(point);
+				}
+			}
+			result = list;
+			return true;
 		}
 
 		public static string SaveSeries(IList<SensorPoint> list) {
@@ -121,7 +126,28 @@ namespace LogicCircuit {
 				CircuitId = this.Table.GetField(rowId, SensorData.SensorIdField.Field)
 			};
 			Sensor sensor = this.Create(rowId, this.CircuitProject.CircuitTable.Insert(ref data));
+			IList<SensorPoint> list;
+			SensorPoint point;
 			this.CreateDevicePin(sensor);
+			switch(sensor.SensorType) {
+			case SensorType.Series:
+			case SensorType.Loop:
+				if(!Sensor.TryParseSeries(sensor.Data, sensor.BitWidth, out list)) {
+					sensor.Data = Sensor.DefaultSeriesData;
+				}
+				break;
+			case SensorType.Random:
+				if(!Sensor.TryParsePoint(sensor.Data, 32, out point)) {
+					sensor.Data = Sensor.DefaultRandomData;
+				}
+				break;
+			case SensorType.Manual:
+				sensor.Data = string.Empty;
+				break;
+			default:
+				Tracer.Fail();
+				break;
+			}
 			return sensor;
 		}
 

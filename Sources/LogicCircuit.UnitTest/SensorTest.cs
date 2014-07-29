@@ -21,13 +21,15 @@ namespace LogicCircuit.UnitTest {
 				new SensorPoint(0x5, 0xE),
 				new SensorPoint(0x7, 0x10),
 			};
-			IList<SensorPoint> actual = Sensor.ParseSeries("2:5 4:A 5:E 7:10", 32);
+			IList<SensorPoint> actual;
+			Assert.IsTrue(Sensor.TryParseSeries("2:5 4:A 5:E 7:10", 32, out actual));
 			Assert.IsTrue(this.AreEqual(expected, actual));
 		}
 
 		[TestMethod]
 		public void SensorParseSeriesEmptyTest() {
-			IList<SensorPoint> actual = Sensor.ParseSeries("", 32);
+			IList<SensorPoint> actual;
+			Assert.IsTrue(Sensor.TryParseSeries("", 32, out actual));
 			Assert.IsTrue(actual != null && actual.Count == 0);
 		}
 
@@ -42,7 +44,8 @@ namespace LogicCircuit.UnitTest {
 			};
 			string text = Sensor.SaveSeries(expected);
 
-			IList<SensorPoint> actual = Sensor.ParseSeries(text, 32);
+			IList<SensorPoint> actual;
+			Assert.IsTrue(Sensor.TryParseSeries(text, 32, out actual));
 			Assert.IsTrue(this.AreEqual(expected, actual));
 		}
 

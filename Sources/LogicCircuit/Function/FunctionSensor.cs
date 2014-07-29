@@ -150,12 +150,15 @@ namespace LogicCircuit {
 			private int tick;
 			
 			public RandomValue(string data, int bitWidth) : base(bitWidth) {
-				int minTick = 4;
-				int maxTick = 10;
-				IList<SensorPoint> list = Sensor.ParseSeries(data, 32);
-				if(0 < list.Count) {
-					minTick = list[0].Tick;
-					maxTick = list[0].Value;
+				int minTick;
+				int maxTick;
+				SensorPoint point;
+				if(Sensor.TryParsePoint(data, 32, out point)) {
+					minTick = point.Tick;
+					maxTick = point.Value;
+				} else {
+					minTick = Sensor.DefaultRandomMinInterval;
+					maxTick = Sensor.DefaultRandomMaxInterval;
 				}
 				Tracer.Assert(0 < minTick && minTick < int.MaxValue / 2);
 				Tracer.Assert(0 < maxTick && maxTick < int.MaxValue / 2);
@@ -190,7 +193,9 @@ namespace LogicCircuit {
 			private bool stop;
 
 			public SeriesValue(string data, bool isLoop, int bitWidth) : base(bitWidth) {
-				this.list = Sensor.ParseSeries(data, bitWidth);
+				if(!Sensor.TryParseSeries(data, bitWidth, out this.list)) {
+					this.list = new List<SensorPoint>();
+				}
 				this.stop = (this.list.Count == 0);
 				this.isLoop = isLoop;
 				this.Reset();
