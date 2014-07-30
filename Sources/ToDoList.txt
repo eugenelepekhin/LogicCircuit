@@ -13,7 +13,6 @@ Colors of symbols
 
 Search
 
-Power up root
 FPGA
 
 Running tree not always open the item when it clicked on the diagram
@@ -30,3 +29,8 @@ Eliminate common sub expressions.
 Grouping up few primitive functions to complex one (dynamically built?) if there is no another receivers in the middle.
 
 Global optimizations.
+
+
+=== Feature not implementing ===
+Power up root: to much hassle to start up the runtime.
+For example if user has circuit that is not on the execution tree. or when the execution tree has multiple of current circuits.
