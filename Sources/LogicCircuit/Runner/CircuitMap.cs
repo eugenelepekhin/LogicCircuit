@@ -551,7 +551,7 @@ namespace LogicCircuit {
 		}
 
 		private static bool IsPrimitive(Circuit circuit) {
-			return circuit is Gate || circuit is CircuitProbe || circuit is CircuitButton || circuit is Constant || circuit is Memory || circuit is LedMatrix || circuit is Sensor;
+			return circuit is Gate || circuit is CircuitProbe || circuit is CircuitButton || circuit is Constant || circuit is Memory || circuit is LedMatrix || circuit is Sensor || circuit is Sound;
 		}
 
 		private bool HasLoop(LogicalCircuit circuit) {
@@ -611,6 +611,8 @@ namespace LogicCircuit {
 				CircuitMap.DefineLedMatrix(circuitState, symbolMap);
 			} else if(symbolMap.CircuitSymbol.Circuit is Sensor) {
 				CircuitMap.DefineSensor(circuitState, symbolMap);
+			} else if(symbolMap.CircuitSymbol.Circuit is Sound) {
+				CircuitMap.DefineSound(circuitState, symbolMap);
 			} else {
 				Tracer.Fail();
 			}
@@ -946,6 +948,19 @@ namespace LogicCircuit {
 			}
 			symbolMap.CircuitMap.displays.Add(sensor);
 			return sensor;
+		}
+
+		private static CircuitFunction DefineSound(CircuitState circuitState, SymbolMap symbolMap) {
+			List<Parameter> list = new List<Parameter>(symbolMap.Parameters);
+			if(list.Count == 1) {
+				FunctionSound sound = new FunctionSound(circuitState, list[0].Result.StateIndex, (Sound)symbolMap.CircuitSymbol.Circuit);
+				if(symbolMap.CircuitMap.displays == null) {
+					symbolMap.CircuitMap.displays = new HashSet<IFunctionVisual>();
+				}
+				symbolMap.CircuitMap.displays.Add(sound);
+				return sound;
+			}
+			return null;
 		}
 
 		private static CircuitFunction DefineRom(CircuitState circuitState, SymbolMap symbolMap) {

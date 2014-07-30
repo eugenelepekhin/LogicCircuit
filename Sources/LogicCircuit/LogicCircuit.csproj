@@ -262,6 +262,7 @@
     <Compile Include="Function\FunctionRam.cs" />
     <Compile Include="Function\FunctionRom.cs" />
     <Compile Include="Function\FunctionSensor.cs" />
+    <Compile Include="Function\FunctionSound.cs" />
     <Compile Include="Function\IFunctionClock.cs" />
     <Compile Include="Function\IFunctionVisual.cs" />
     <Compile Include="Function\FunctionNot.cs" />
@@ -662,6 +663,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\default.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
