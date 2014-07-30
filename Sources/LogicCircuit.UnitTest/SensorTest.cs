@@ -56,5 +56,42 @@ namespace LogicCircuit.UnitTest {
 
 			Assert.IsTrue(text != null && text.Length == 0);
 		}
+
+		[TestMethod]
+		public void SensorLoopTest() {
+			ProjectTester tester = new ProjectTester(this.TestContext, Properties.Resources.SensorTests, "Loop Test");
+			OutputSocket target = new OutputSocket(tester.Output[0]);
+			for(int i = 0; i < 1000; i++) {
+				Assert.IsTrue(tester.CircuitState.Evaluate(true));
+				int result = target.BinaryInt();
+				Assert.AreEqual(i % 0x14, result);
+			}
+		}
+
+		[TestMethod]
+		public void SensorSeriesTest() {
+			ProjectTester tester = new ProjectTester(this.TestContext, Properties.Resources.SensorTests, "Series Test");
+			OutputSocket target = new OutputSocket(tester.Output[0]);
+			for(int i = 0; i < 2000; i++) {
+				Assert.IsTrue(tester.CircuitState.Evaluate(true));
+				int result = target.BinaryInt();
+				Assert.AreEqual(i < 0x14 ? i * 2 + 1 : 0x27, result);
+			}
+		}
+
+		[TestMethod]
+		public void SensorRandomTest() {
+			ProjectTester tester = new ProjectTester(this.TestContext, Properties.Resources.SensorTests, "Random Test");
+			OutputSocket target = new OutputSocket(tester.Output[0]);
+			HashSet<int> values = new HashSet<int>();
+			for(int i = 0; i < 5000; i++) {
+				Assert.IsTrue(tester.CircuitState.Evaluate(true));
+				values.Add(target.BinaryInt());
+			}
+			Assert.IsTrue(1 < values.Count);
+			int max = 1 << target.BitWidth;
+			// If this fail, it is possible to ignore.
+			Assert.AreEqual(max, values.Count);
+		}
 	}
 }
