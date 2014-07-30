@@ -4,7 +4,6 @@ smarter wires
 
 Backward navigation on circuits
 Sound component
-Sensor component
 Tunnels
 
 Keyboard device
