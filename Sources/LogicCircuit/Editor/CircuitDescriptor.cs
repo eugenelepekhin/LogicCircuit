@@ -361,6 +361,39 @@ namespace LogicCircuit {
 		}
 	}
 
+	public class SoundDescriptor : IOCircuitDescriptor<Sound> {
+
+		private EnumDescriptor<PinSide> pinSide;
+		public EnumDescriptor<PinSide> PinSide {
+			get { return this.pinSide; }
+			set {
+				if(this.pinSide != value) {
+					this.InTransaction(() => {
+						this.Circuit.Pins.First().PinSide = value.Value;
+					});
+					this.pinSide = value;
+					this.RefreshGlyph();
+				}
+			}
+		}
+
+		public string Notation { get; set; }
+
+		public SoundDescriptor(CircuitProject circuitProject) : base(circuitProject.SoundSet.Create(LogicCircuit.PinSide.Left, string.Empty)) {
+			this.pinSide = PinDescriptor.PinSideDescriptor(this.Circuit.PinSide);
+			this.Notation = string.Empty;
+		}
+
+		protected override Sound GetCircuitToDrop(CircuitProject circuitProject) {
+			string notation = (this.Notation ?? string.Empty).Trim();
+			if(!string.IsNullOrEmpty(notation)) {
+				this.Notation = string.Empty;
+				this.NotifyPropertyChanged("Notation");
+			}
+			return circuitProject.SoundSet.Create(this.PinSide.Value, notation);
+		}
+	}
+
 	public class MemoryDescriptor : PrimitiveCircuitDescriptor<Memory> {
 		private static readonly int[] addressBitWidthRange = PinDescriptor.AddressBitRange();
 

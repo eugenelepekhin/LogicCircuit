@@ -93,6 +93,7 @@ namespace LogicCircuit {
 			this.DistinctSymbol(this.PinSet);
 			this.DistinctSymbol(this.SplitterSet);
 			this.DistinctSymbol(this.SensorSet);
+			this.DistinctSymbol(this.SoundSet);
 
 			this.WireSet.Where(wire => wire.Point1 == wire.Point2).ToList().ForEach(wire => wire.Delete());
 			this.TextNoteSet.Where(textNote => !textNote.IsValid).ToList().ForEach(textNote => textNote.Delete());
@@ -283,6 +284,9 @@ namespace LogicCircuit {
 					Tracer.Assert(pin.LogicalCircuit == this.CircuitSymbolSet.SelectByCircuit(circuit).First().LogicalCircuit);
 				} else if(circuit is Splitter) {
 					Tracer.Assert(this.SplitterSet.Table.Exists(SplitterData.SplitterIdField.Field, circuit.CircuitId));
+					Tracer.Assert(this.CircuitSymbolSet.SelectByCircuit(circuit).Count() == 1);
+				} else if(circuit is Sound) {
+					Tracer.Assert(this.SoundSet.Table.Exists(SoundData.SoundIdField.Field, circuit.CircuitId));
 					Tracer.Assert(this.CircuitSymbolSet.SelectByCircuit(circuit).Count() == 1);
 				}
 			}

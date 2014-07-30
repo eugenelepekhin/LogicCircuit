@@ -492,6 +492,35 @@
 								</StackPanel>
 							</DataTemplate>
 
+							<DataTemplate DataType="{x:Type lc:SoundDescriptor}">
+								<StackPanel Style="{StaticResource DescriptorPanel}">
+									<ContentControl/>
+									<Grid Margin="3,3,8,3" VerticalAlignment="Center">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="Auto" MinWidth="65"/>
+											<ColumnDefinition Width="Auto"/>
+										</Grid.ColumnDefinitions>
+										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto"/>
+											<RowDefinition Height="Auto"/>
+											<RowDefinition Height="Auto"/>
+											<RowDefinition Height="Auto"/>
+										</Grid.RowDefinitions>
+										<ComboBox Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="0"
+											SelectedItem="{Binding Path=PinSide, Mode=TwoWay}" ItemsSource="{x:Static lc:PinDescriptor.PinSideRange}"
+											ToolTip="{x:Static properties:Resources.ToolTipDevicePinSide}"
+										/>
+										<TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Static properties:Resources.CaptionPinSide}" Margin="8,0,0,0"/>
+										<TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Path=Notation, Mode=TwoWay}" VerticalAlignment="Center"
+											MaxLength="8" ToolTip="{x:Static properties:Resources.ToolTipSoundNotation}"
+											Margin="0"
+										/>
+										<TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Static properties:Resources.CaptionNotation}" Margin="8,0,0,0"/>
+									</Grid>
+									<TextBlock Style="{StaticResource CircuitName}"/>
+								</StackPanel>
+							</DataTemplate>
+
 							<DataTemplate DataType="{x:Type lc:MemoryDescriptor}">
 								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl/>

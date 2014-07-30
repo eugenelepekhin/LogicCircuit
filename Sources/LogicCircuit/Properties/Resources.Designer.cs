@@ -2739,5 +2739,26 @@ namespace LogicCircuit.Properties {
  		public static string ToolTipSeriesData {
 			get { return ResourceManager.GetString("ToolTipSeriesData", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Sound.
+		/// </summary>
+ 		public static string NameSound {
+			get { return ResourceManager.GetString("NameSound", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Sound {0}.
+		/// </summary>
+ 		public static string ToolTipSound(string notation) {
+			return string.Format(Culture, ResourceManager.GetString("ToolTipSound", Culture), notation);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Enter notation of the sound device.
+		/// </summary>
+ 		public static string ToolTipSoundNotation {
+			get { return ResourceManager.GetString("ToolTipSoundNotation", Culture); }
+		}
 	}
 }

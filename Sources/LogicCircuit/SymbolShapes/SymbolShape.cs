@@ -25,6 +25,7 @@ namespace LogicCircuit {
 		public const string ShapedTriState1 = "SymbolShapes/ShapedTriState1.xaml";
 		public const string ShapedTriState2 = "SymbolShapes/ShapedTriState2.xaml";
 		public const string ShapedXor = "SymbolShapes/ShapedXor.xaml";
+		public const string Sound = "SymbolShapes/Sound.xaml";
 		public const string Splitter = "SymbolShapes/Splitter.xaml";
 		public const string TextNote = "SymbolShapes/TextNote.xaml";
 		public const string ToggleLed = "SymbolShapes/ToggleLed.xaml";

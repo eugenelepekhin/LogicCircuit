@@ -65,11 +65,13 @@
     <Compile Include="CircuitProject\Sensor.cs" />
     <Compile Include="CircuitProject\SensorPoint.cs" />
     <Compile Include="CircuitProject\SensorType.cs" />
+    <Compile Include="CircuitProject\Sound.cs" />
     <Compile Include="CircuitProject\TextNote.cs" />
     <Compile Include="CircuitProject\Wrappers\CircuitProbe.cs" />
     <Compile Include="CircuitProject\Wrappers\CollapsedCategory.cs" />
     <Compile Include="CircuitProject\Wrappers\LedMatrix.cs" />
     <Compile Include="CircuitProject\Wrappers\Sensor.cs" />
+    <Compile Include="CircuitProject\Wrappers\Sound.cs" />
     <Compile Include="CircuitProject\Wrappers\TextNote.cs" />
     <Compile Include="CircuitTestSocket.cs" />
     <Compile Include="ColorMethods.cs" />
@@ -625,6 +627,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SymbolShapes\ShapedXor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SymbolShapes\Sound.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

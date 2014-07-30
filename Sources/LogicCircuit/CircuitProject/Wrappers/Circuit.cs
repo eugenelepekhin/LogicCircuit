@@ -267,6 +267,11 @@ namespace LogicCircuit {
 				return this.CircuitProject.SensorSet.FindOrCreate(rowIdSensor);
 			}
 
+			RowId rowIdSound = this.CircuitProject.SoundSet.Table.Find(SoundData.SoundIdField.Field, primaryKeyValue);
+			if(!rowIdSound.IsEmpty) {
+				return this.CircuitProject.SoundSet.FindOrCreate(rowIdSound);
+			}
+
 			return this.Create(rowId);
 		}
 

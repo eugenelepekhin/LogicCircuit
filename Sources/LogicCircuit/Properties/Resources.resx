@@ -1332,4 +1332,14 @@ where both cycle and value are hexadecimal.
 When the cycle is even number or 0 then it corresponds to changing
 clock from 0 to 1, when it is odd then clock is changing from 1 to 0.</value>
   </data>
+  <data name="NameSound" xml:space="preserve">
+    <value>Sound</value>
+  </data>
+  <data name="ToolTipSound" xml:space="preserve">
+    <value>Sound {0}</value>
+    <comment>{string notation}</comment>
+  </data>
+  <data name="ToolTipSoundNotation" xml:space="preserve">
+    <value>Enter notation of the sound device</value>
+  </data>
 </root>
