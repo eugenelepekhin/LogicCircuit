@@ -6,7 +6,9 @@ using System.Reflection;
 namespace LogicCircuit {
 	[SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
 	public class FunctionSound : Probe, IFunctionVisual {
-		private SoundPlayer player;
+
+		// SoundPlayer does not support multiple WAVs to played, so play only one sound, no matter how many sound function is running.
+		private static SoundPlayer player;
 
 		// Note that turning sound on and off will happening only from "Run" thread.
 		// Turning Visual off will happened on main thread but only after Run thread ends.
@@ -19,50 +21,46 @@ namespace LogicCircuit {
 		public bool Invalid { get; set; }
 
 		public FunctionSound(CircuitState circuitState, int parameter) : base(circuitState, parameter) {
-			this.player = new SoundPlayer(Assembly.GetExecutingAssembly().GetManifestResourceStream("LogicCircuit.Properties.default.wav"));
-			this.player.LoadAsync();
+			if(FunctionSound.player == null) {
+				FunctionSound.player = new SoundPlayer(Assembly.GetExecutingAssembly().GetManifestResourceStream("LogicCircuit.Properties.default.wav"));
+				FunctionSound.player.LoadAsync();
+			}
+			FunctionSound.playCount = 0;
 		}
 
 		public override bool Evaluate() {
 			if(this.GetState()) {
 				if(this[0] == State.On1) {
-					this.TurnSoundOn();
-				} else {
-					this.TurnSoundOff();
+					int count = ++FunctionSound.playCount;
+					if(count == 1) {
+						FunctionSound.player.PlayLooping();
+					}
+				} else if(0 < FunctionSound.playCount) {
+					int count = --FunctionSound.playCount;
+					if(count == 0) {
+						FunctionSound.player.Stop();
+					}
+					Tracer.Assert(0 <= count);
 				}
 			}
 			return false;
 		}
 
 		public void TurnOn() {
-			FunctionSound.playCount = 0;
 		}
 
 		public void TurnOff() {
 			FunctionSound.playCount = 0;
-			this.player.Stop();
-			this.player.Dispose();
+			SoundPlayer p = FunctionSound.player;
+			FunctionSound.player = null;
+			if(p != null) {
+				p.Stop();
+				p.Dispose();
+			}
 		}
 
 		public void Redraw() {
 			// nothing to do
-		}
-
-		private void TurnSoundOn() {
-			int count = ++FunctionSound.playCount;
-			if(count == 1) {
-				this.player.PlayLooping();
-			}
-		}
-
-		private void TurnSoundOff() {
-			if(0 < FunctionSound.playCount) {
-				int count = --FunctionSound.playCount;
-				if(count == 0) {
-					this.player.Stop();
-				}
-				Tracer.Assert(0 <= count);
-			}
 		}
 	}
 }
