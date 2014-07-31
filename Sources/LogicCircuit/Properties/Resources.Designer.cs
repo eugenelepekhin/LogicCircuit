@@ -2741,21 +2741,21 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Sound.
+		/// Looks up a localized string similar to Buzzer.
 		/// </summary>
  		public static string NameSound {
 			get { return ResourceManager.GetString("NameSound", Culture); }
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Sound {0}.
+		/// Looks up a localized string similar to Buzzer {0}.
 		/// </summary>
  		public static string ToolTipSound(string notation) {
 			return string.Format(Culture, ResourceManager.GetString("ToolTipSound", Culture), notation);
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Enter notation of the sound device.
+		/// Looks up a localized string similar to Enter notation of the buzzer device.
 		/// </summary>
  		public static string ToolTipSoundNotation {
 			get { return ResourceManager.GetString("ToolTipSoundNotation", Culture); }
