@@ -100,6 +100,11 @@
 				<GradientStop Color="{x:Static SystemColors.ControlColor}" Offset="1"/>
 			</LinearGradientBrush>
 
+			<LinearGradientBrush x:Key="SoundBackground" StartPoint="0,0" EndPoint="1,1" PresentationOptions:Freeze="True">
+				<GradientStop Color="#FF36BF8E" Offset="0"/>
+				<GradientStop Color="#FF97F3D2" Offset="1"/>
+			</LinearGradientBrush>
+
 			<Style x:Key="DialogFixedWindow" TargetType="{x:Type Window}">
 				<Setter Property="FlowDirection" Value="{x:Static properties:Resources.FlowDirection}"/>
 				<Setter Property="Background" Value="{StaticResource WindowBackground}"/>
