@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Windows;
 using System.Xml;
 using LogicCircuit.DataPersistent;
 
 namespace LogicCircuit {
 	public partial class Sound {
-
 		public override void Delete() {
 			this.CircuitProject.DevicePinSet.DeleteAllPins(this);
 			base.Delete();
@@ -66,7 +63,7 @@ namespace LogicCircuit {
 		}
 
 		public Sound Create(PinSide pinSide, string notation) {
-			Sound sound = this.CreateItem(Guid.NewGuid(), SoundData.LoopingField.Field.DefaultValue, pinSide, notation, SoundData.NoteField.Field.DefaultValue, SoundData.DataField.Field.DefaultValue);
+			Sound sound = this.CreateItem(Guid.NewGuid(), pinSide, notation, SoundData.NoteField.Field.DefaultValue);
 			this.CreateDevicePin(sound);
 			return sound;
 		}

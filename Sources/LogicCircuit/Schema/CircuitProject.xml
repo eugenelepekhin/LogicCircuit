@@ -294,11 +294,9 @@
 	<Table Name="Sound">
 		<Table.Columns>
 			<Column Name="SoundId" Type="Guid" ReadOnly="true"/>
-			<Column Name="Looping" Type="bool" Default="true"/>
 			<Column Name="PinSide" Type="PinSide" Default="PinSide.Left"/>
 			<Column Name="Notation" Type="string" Default="" PropertyOverrides="true"/>
 			<Column Name="Note" Type="string" Default=""/>
-			<Column Name="Data" Type="string" Default=""/>
 		</Table.Columns>
 
 		<Table.Keys>

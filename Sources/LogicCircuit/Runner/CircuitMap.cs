@@ -953,7 +953,7 @@ namespace LogicCircuit {
 		private static CircuitFunction DefineSound(CircuitState circuitState, SymbolMap symbolMap) {
 			List<Parameter> list = new List<Parameter>(symbolMap.Parameters);
 			if(list.Count == 1) {
-				FunctionSound sound = new FunctionSound(circuitState, list[0].Result.StateIndex, (Sound)symbolMap.CircuitSymbol.Circuit);
+				FunctionSound sound = new FunctionSound(circuitState, list[0].Result.StateIndex);
 				if(symbolMap.CircuitMap.displays == null) {
 					symbolMap.CircuitMap.displays = new HashSet<IFunctionVisual>();
 				}

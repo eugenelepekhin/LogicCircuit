@@ -1,31 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Media;
 using System.Reflection;
-using System.Windows;
 
 namespace LogicCircuit {
 	[SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
 	public class FunctionSound : Probe, IFunctionVisual {
-		private const string DefaultSound = "LogicCircuit.Properties.default.wav";
-
 		private SoundPlayer player;
-		private bool looping;
+
+		// Note that turning sound on and off will happening only from "Run" thread.
+		// Turning Visual off will happened on main thread but only after Run thread ends.
+		// So overall there is no need for synchronization of incrementing and decrementing this count.
+		private static int playCount = 0;
 
 		public override string ReportName { get { return Properties.Resources.NameSound; } }
 
 		// not used here as Visual is used to turn off sound on power off.
 		public bool Invalid { get; set; }
 
-		public FunctionSound(CircuitState circuitState, int parameter, Sound sound) : base(circuitState, parameter) {
-			string data = sound.Data;
-			if(string.IsNullOrEmpty(data)) {
-				this.player = new SoundPlayer(Assembly.GetExecutingAssembly().GetManifestResourceStream(FunctionSound.DefaultSound));
-				player.LoadAsync();
-				this.looping = sound.Looping;
-			}
+		public FunctionSound(CircuitState circuitState, int parameter) : base(circuitState, parameter) {
+			this.player = new SoundPlayer(Assembly.GetExecutingAssembly().GetManifestResourceStream("LogicCircuit.Properties.default.wav"));
+			this.player.LoadAsync();
 		}
 
 		public override bool Evaluate() {
@@ -40,11 +35,12 @@ namespace LogicCircuit {
 		}
 
 		public void TurnOn() {
-			// nothing to do
+			FunctionSound.playCount = 0;
 		}
 
 		public void TurnOff() {
-			this.TurnSoundOff();
+			FunctionSound.playCount = 0;
+			this.player.Stop();
 			this.player.Dispose();
 		}
 
@@ -53,15 +49,20 @@ namespace LogicCircuit {
 		}
 
 		private void TurnSoundOn() {
-			if(this.looping) {
+			int count = ++FunctionSound.playCount;
+			if(count == 1) {
 				this.player.PlayLooping();
-			} else {
-				this.player.Play();
 			}
 		}
 
 		private void TurnSoundOff() {
-			this.player.Stop();
+			if(0 < FunctionSound.playCount) {
+				int count = --FunctionSound.playCount;
+				if(count == 0) {
+					this.player.Stop();
+				}
+				Tracer.Assert(0 <= count);
+			}
 		}
 	}
 }

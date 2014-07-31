@@ -446,6 +446,10 @@ namespace LogicCircuit {
 			this.Mainframe.ShowDialog(new DialogLedMatrix(ledMatrix));
 		}
 
+		private void Edit(Sound sound) {
+			this.Mainframe.ShowDialog(new DialogSound(sound));
+		}
+
 		private void Edit(TextNote textNote) {
 			DialogText dialog = new DialogText(textNote.Note);
 			bool? result = this.Mainframe.ShowDialog(dialog);
@@ -458,6 +462,7 @@ namespace LogicCircuit {
 			}
 		}
 
+		[SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
 		protected override void Edit(Symbol symbol) {
 			CircuitSymbol circuitSymbol = symbol as CircuitSymbol;
 			if(circuitSymbol != null) {
@@ -500,6 +505,11 @@ namespace LogicCircuit {
 					LedMatrix ledMatrix = circuitSymbol.Circuit as LedMatrix;
 					if(ledMatrix != null) {
 						this.Edit(ledMatrix);
+						return;
+					}
+					Sound sound = circuitSymbol.Circuit as Sound;
+					if(sound != null) {
+						this.Edit(sound);
 						return;
 					}
 				} else if(this.CircuitRunner != null && this.CircuitRunner.VisibleMap != null) {

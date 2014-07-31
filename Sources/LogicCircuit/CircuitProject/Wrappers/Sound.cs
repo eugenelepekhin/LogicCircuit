@@ -13,11 +13,9 @@ namespace LogicCircuit {
 	// Defines the shape of the table Sound
 	internal partial struct SoundData {
 		public Guid SoundId;
-		public bool Looping;
 		public PinSide PinSide;
 		public string Notation;
 		public string Note;
-		public string Data;
 		internal Sound Sound;
 		// Field accessors
 		// Accessor of the SoundId field
@@ -52,41 +50,6 @@ namespace LogicCircuit {
 			}
 			void IFieldSerializer<SoundData>.SetTextValue(ref SoundData data, string text) {
 				data.SoundId = new Guid(text);
-			}
-		}
-
-		// Accessor of the Looping field
-		public sealed class LoopingField : IField<SoundData, bool>, IFieldSerializer<SoundData> {
-			public static readonly LoopingField Field = new LoopingField();
-			private LoopingField() {}
-			public string Name { get { return "Looping"; } }
-			public int Order { get; set; }
-			public bool DefaultValue { get { return true; } }
-			public bool GetValue(ref SoundData record) {
-				return record.Looping;
-			}
-			public void SetValue(ref SoundData record, bool value) {
-				record.Looping = value;
-			}
-			public int Compare(ref SoundData l, ref SoundData r) {
-				return l.Looping.CompareTo(r.Looping);
-			}
-			public int Compare(bool l, bool r) {
-				return l.CompareTo(r);
-			}
-
-			// Implementation of interface IFieldSerializer<SoundData>
-			bool IFieldSerializer<SoundData>.NeedToSave(ref SoundData data) {
-				return this.Compare(data.Looping, this.DefaultValue) != 0;
-			}
-			string IFieldSerializer<SoundData>.GetTextValue(ref SoundData data) {
-				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Looping);
-			}
-			void IFieldSerializer<SoundData>.SetDefault(ref SoundData data) {
-				data.Looping = this.DefaultValue;
-			}
-			void IFieldSerializer<SoundData>.SetTextValue(ref SoundData data, string text) {
-				data.Looping = bool.Parse(text);
 			}
 		}
 
@@ -195,41 +158,6 @@ namespace LogicCircuit {
 			}
 		}
 
-		// Accessor of the Data field
-		public sealed class DataField : IField<SoundData, string>, IFieldSerializer<SoundData> {
-			public static readonly DataField Field = new DataField();
-			private DataField() {}
-			public string Name { get { return "Data"; } }
-			public int Order { get; set; }
-			public string DefaultValue { get { return ""; } }
-			public string GetValue(ref SoundData record) {
-				return record.Data;
-			}
-			public void SetValue(ref SoundData record, string value) {
-				record.Data = value;
-			}
-			public int Compare(ref SoundData l, ref SoundData r) {
-				return StringComparer.Ordinal.Compare(l.Data, r.Data);
-			}
-			public int Compare(string l, string r) {
-				return StringComparer.Ordinal.Compare(l, r);
-			}
-
-			// Implementation of interface IFieldSerializer<SoundData>
-			bool IFieldSerializer<SoundData>.NeedToSave(ref SoundData data) {
-				return this.Compare(data.Data, this.DefaultValue) != 0;
-			}
-			string IFieldSerializer<SoundData>.GetTextValue(ref SoundData data) {
-				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Data);
-			}
-			void IFieldSerializer<SoundData>.SetDefault(ref SoundData data) {
-				data.Data = this.DefaultValue;
-			}
-			void IFieldSerializer<SoundData>.SetTextValue(ref SoundData data, string text) {
-				data.Data = text;
-			}
-		}
-
 		// Special field used to access items wrapper of this record from record.
 		// This is used when no other universes is used
 		internal sealed class SoundField : IField<SoundData, Sound> {
@@ -257,11 +185,9 @@ namespace LogicCircuit {
 
 		private static IField<SoundData>[] fields = {
 			SoundIdField.Field,
-			LoopingField.Field,
 			PinSideField.Field,
 			NotationField.Field,
 			NoteField.Field,
-			DataField.Field,
 			SoundField.Field
 		};
 
@@ -309,12 +235,6 @@ namespace LogicCircuit {
 			get { return this.Table.GetField(this.SoundRowId, SoundData.SoundIdField.Field); }
 		}
 
-		// Gets or sets value of the Looping field.
-		public bool Looping {
-			get { return this.Table.GetField(this.SoundRowId, SoundData.LoopingField.Field); }
-			set { this.Table.SetField(this.SoundRowId, SoundData.LoopingField.Field, value); }
-		}
-
 		// Gets or sets value of the PinSide field.
 		public PinSide PinSide {
 			get { return this.Table.GetField(this.SoundRowId, SoundData.PinSideField.Field); }
@@ -333,12 +253,6 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.SoundRowId, SoundData.NoteField.Field, value); }
 		}
 
-		// Gets or sets value of the Data field.
-		public string Data {
-			get { return this.Table.GetField(this.SoundRowId, SoundData.DataField.Field); }
-			set { this.Table.SetField(this.SoundRowId, SoundData.DataField.Field, value); }
-		}
-
 
 		internal void NotifyChanged(TableChange<SoundData> change) {
 			if(this.HasListener) {
@@ -348,9 +262,6 @@ namespace LogicCircuit {
 				if(SoundData.SoundIdField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("SoundId");
 				}
-				if(SoundData.LoopingField.Field.Compare(ref oldData, ref newData) != 0) {
-					this.NotifyPropertyChanged("Looping");
-				}
 				if(SoundData.PinSideField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("PinSide");
 				}
@@ -359,9 +270,6 @@ namespace LogicCircuit {
 				}
 				if(SoundData.NoteField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("Note");
-				}
-				if(SoundData.DataField.Field.Compare(ref oldData, ref newData) != 0) {
-					this.NotifyPropertyChanged("Data");
 				}
 			}
 			this.OnSoundChanged();
@@ -446,11 +354,9 @@ namespace LogicCircuit {
 		private Sound CreateItem(
 			// Fields of Sound table
 			Guid SoundId,
-			bool Looping,
 			PinSide PinSide,
 			string Notation,
-			string Note,
-			string Data
+			string Note
 			// Fields of Circuit table
 
 		) {
@@ -462,11 +368,9 @@ namespace LogicCircuit {
 
 			SoundData dataSound = new SoundData() {
 				SoundId = SoundId,
-				Looping = Looping,
 				PinSide = PinSide,
 				Notation = Notation,
 				Note = Note,
-				Data = Data,
 			};
 			return this.Create(this.Table.Insert(ref dataSound), rowIdCircuit);
 		}

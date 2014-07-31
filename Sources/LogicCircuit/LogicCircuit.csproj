@@ -142,6 +142,9 @@
     <Compile Include="Dialog\DialogSensor.xaml.cs">
       <DependentUpon>DialogSensor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialog\DialogSound.xaml.cs">
+      <DependentUpon>DialogSound.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialog\DialogText.xaml.cs">
       <DependentUpon>DialogText.xaml</DependentUpon>
     </Compile>
@@ -385,6 +388,10 @@
     <Page Include="Dialog\DialogSensor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialog\DialogSound.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Dialog\DialogText.xaml">
       <SubType>Designer</SubType>
