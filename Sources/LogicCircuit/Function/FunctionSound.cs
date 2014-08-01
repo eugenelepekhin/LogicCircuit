@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Media;
 using System.Reflection;
 
 namespace LogicCircuit {
-	[SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
 	public class FunctionSound : Probe, IFunctionVisual {
 
 		// SoundPlayer does not support multiple WAVs to played, so play only one sound, no matter how many sound function is running.
@@ -47,6 +45,7 @@ namespace LogicCircuit {
 		}
 
 		public void TurnOn() {
+			// Nothing to do
 		}
 
 		public void TurnOff() {
