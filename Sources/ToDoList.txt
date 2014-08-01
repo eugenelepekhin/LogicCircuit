@@ -3,7 +3,6 @@ ToDo list:
 smarter wires
 
 Backward navigation on circuits
-Sound component
 Tunnels
 
 Keyboard device
