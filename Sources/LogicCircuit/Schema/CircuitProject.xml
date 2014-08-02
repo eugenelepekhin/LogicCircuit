@@ -176,7 +176,7 @@
 		<Table.Columns>
 			<Column Name="CircuitProbeId" Type="Guid" ReadOnly="true"/>
 			<Column Name="Name" Type="string" Default="" Check="this.CheckName" PropertyOverrides="true"/>
-			<Column Name="Note" Type="string" Default=""/>
+			<Column Name="Note" Type="string" Default="" PropertyOverrides="true"/>
 		</Table.Columns>
 
 		<Table.Keys>
@@ -195,7 +195,7 @@
 			<Column Name="BitWidth" Type="int" Default="1" Check="BasePin.CheckBitWidth"/>
 			<Column Name="Value" Type="int" Default="0" AccessModifier="Private"/>
 			<Column Name="PinSide" Type="PinSide" Default="PinSide.Right"/>
-			<Column Name="Note" Type="string" Default=""/>
+			<Column Name="Note" Type="string" Default="" PropertyOverrides="true"/>
 		</Table.Columns>
 
 		<Table.Keys>
@@ -211,7 +211,7 @@
 			<Column Name="Notation" Type="string" Default="" PropertyOverrides="true"/>
 			<Column Name="IsToggle" Type="bool" Default="false"/>
 			<Column Name="PinSide" Type="PinSide" Default="PinSide.Right"/>
-			<Column Name="Note" Type="string" Default=""/>
+			<Column Name="Note" Type="string" Default="" PropertyOverrides="true"/>
 		</Table.Columns>
 
 		<Table.Keys>
@@ -230,7 +230,7 @@
 			<Column Name="AddressBitWidth" Type="int" Check="Memory.CheckAddressBitWidth"/>
 			<Column Name="DataBitWidth" Type="int" Check="BasePin.CheckBitWidth"/>
 			<Column Name="Data" Type="string" Default="" AccessModifier="Private"/>
-			<Column Name="Note" Type="string" Default=""/>
+			<Column Name="Note" Type="string" Default="" PropertyOverrides="true"/>
 		</Table.Columns>
 
 		<Table.Keys>
@@ -248,7 +248,7 @@
 			<Column Name="Rows" Type="int" Check="LedMatrix.Check"/>
 			<Column Name="Columns" Type="int" Check="LedMatrix.Check"/>
 			<Column Name="Colors" Type="int" Check="LedMatrix.CheckColors" Default="1"/>
-			<Column Name="Note" Type="string" Default=""/>
+			<Column Name="Note" Type="string" Default="" PropertyOverrides="true"/>
 		</Table.Columns>
 
 		<Table.Keys>
@@ -281,7 +281,7 @@
 			<Column Name="PinSide" Type="PinSide" Default="PinSide.Right"/>
 			<Column Name="Notation" Type="string" Default="" PropertyOverrides="true"/>
 			<Column Name="Data" Type="string" Default=""/>
-			<Column Name="Note" Type="string" Default=""/>
+			<Column Name="Note" Type="string" Default="" PropertyOverrides="true"/>
 		</Table.Columns>
 
 		<Table.Keys>
@@ -296,7 +296,7 @@
 			<Column Name="SoundId" Type="Guid" ReadOnly="true"/>
 			<Column Name="PinSide" Type="PinSide" Default="PinSide.Left"/>
 			<Column Name="Notation" Type="string" Default="" PropertyOverrides="true"/>
-			<Column Name="Note" Type="string" Default=""/>
+			<Column Name="Note" Type="string" Default="" PropertyOverrides="true"/>
 		</Table.Columns>
 
 		<Table.Keys>

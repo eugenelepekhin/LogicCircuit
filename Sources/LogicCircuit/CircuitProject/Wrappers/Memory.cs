@@ -428,7 +428,7 @@ namespace LogicCircuit {
 		}
 
 		// Gets or sets value of the Note field.
-		public string Note {
+		public override string Note {
 			get { return this.Table.GetField(this.MemoryRowId, MemoryData.NoteField.Field); }
 			set { this.Table.SetField(this.MemoryRowId, MemoryData.NoteField.Field, value); }
 		}

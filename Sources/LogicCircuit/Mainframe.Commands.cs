@@ -553,6 +553,26 @@ namespace LogicCircuit {
 			}
 		}
 
+		private void CircuitFindCommandExecuted(object target, ExecutedRoutedEventArgs e) {
+			try {
+				if(this.IsEditorInEditMode()) {
+					this.Editor.Find();
+				}
+			} catch(Exception exception) {
+				Tracer.Report("Mainframe.CircuitFindCommandExecuted", exception);
+				this.ReportException(exception);
+			}
+		}
+
+		private void CircuitFindCommandCanExecute(object target, CanExecuteRoutedEventArgs e) {
+			try {
+				e.CanExecute = this.IsEditorInEditMode();
+			} catch(Exception exception) {
+				Tracer.Report("Mainframe.CircuitFindCommandCanExecute", exception);
+				this.ReportException(exception);
+			}
+		}
+
 		private void CircuitPowerCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
 				if(this.Editor != null) {

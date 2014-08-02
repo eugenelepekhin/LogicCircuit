@@ -39,6 +39,11 @@ namespace LogicCircuit {
 			get { return (IEnumerable<BasePin>)this.LogicalPins; }
 		}
 
+		public override string Note {
+			get { return this.Description; }
+			set { throw new NotSupportedException(); }
+		}
+
 		public override string ToolTip { get { return Circuit.BuildToolTip(this.Name, this.Description); } }
 
 		public IEnumerable<CircuitSymbol> CircuitSymbols() {

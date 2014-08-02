@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -152,6 +153,13 @@ namespace LogicCircuit {
 			}
 
 			return TextNote.LoadPackage(text);
+		}
+
+		public bool Match(Regex regex) {
+			FlowDocument doc = TextNote.Load(this.Note);
+			TextRange range = new TextRange(doc.ContentStart, doc.ContentEnd);
+			string text = range.Text;
+			return !string.IsNullOrEmpty(text) && regex.IsMatch(text);
 		}
 	}
 

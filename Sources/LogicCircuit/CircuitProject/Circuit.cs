@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Text.RegularExpressions;
 using System.Windows;
 
 namespace LogicCircuit {
@@ -27,6 +28,7 @@ namespace LogicCircuit {
 
 		public abstract string Name { get; set; }
 		public abstract string Notation { get; set; }
+		public abstract string Note { get; set; }
 		public abstract string ToolTip { get; }
 		public abstract string Category { get; set; }
 
@@ -162,6 +164,14 @@ namespace LogicCircuit {
 
 		public virtual bool Similar(Circuit other) {
 			return this == other || this.GetType() == other.GetType();
+		}
+
+		private static bool Match(Regex regex, string text) {
+			return !string.IsNullOrEmpty(text) && regex.IsMatch(text);
+		}
+
+		public bool Match(Regex regex) {
+			return Circuit.Match(regex, this.Name) || Circuit.Match(regex, this.Notation) || Circuit.Match(regex, this.Note);
 		}
 
 		#if DEBUG

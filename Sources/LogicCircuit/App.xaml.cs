@@ -119,6 +119,7 @@ namespace LogicCircuit {
 			ApplicationCommands.Paste.Text = LogicCircuit.Properties.Resources.CommandEditPaste;
 			ApplicationCommands.Delete.Text = LogicCircuit.Properties.Resources.CommandEditDelete;
 			ApplicationCommands.SelectAll.Text = LogicCircuit.Properties.Resources.CommandEditSelectAll;
+			ApplicationCommands.Find.Text = LogicCircuit.Properties.Resources.CommandEditFind;
 
 			ApplicationCommands.Help.Text = LogicCircuit.Properties.Resources.CommandHelpView;
 

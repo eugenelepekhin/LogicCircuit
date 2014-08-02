@@ -52,7 +52,7 @@ namespace LogicCircuit {
 		}
 		public abstract int BitWidth { get; set; }
 		//public abstract string Name { get; set; }
-		public abstract string Note { get; set; }
+		//public abstract string Note { get; set; }
 		public abstract bool Inverted { get; set; }
 		public abstract string JamNotation { get; set; }
 

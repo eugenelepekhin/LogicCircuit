@@ -99,6 +99,7 @@
 		<CommandBinding Command="ApplicationCommands.Paste" Executed="EditPasteCommandExecuted" CanExecute="EditPasteCommandCanExecute"/>
 		<CommandBinding Command="ApplicationCommands.Delete" Executed="EditDeleteCommandExecuted" CanExecute="EditDeleteCommandCanExecute"/>
 		<CommandBinding Command="ApplicationCommands.SelectAll" Executed="EditSelectAllCommandExecuted" CanExecute="EditSelectAllCommandCanExecute"/>
+		<CommandBinding Command="ApplicationCommands.Find" Executed="CircuitFindCommandExecuted" CanExecute="CircuitFindCommandCanExecute"/>
 
 		<CommandBinding Command="{x:Static lc:CustomCommands.EditSelectAllWires}" Executed="EditSelectAllWiresCommandExecuted" CanExecute="EditSelectAllWiresCommandCanExecute"/>
 		<CommandBinding Command="{x:Static lc:CustomCommands.EditSelectFreeWires}" Executed="EditSelectFreeWiresCommandExecuted" CanExecute="EditSelectFreeWiresCommandCanExecute"/>
@@ -195,6 +196,7 @@
 				<MenuItem Command="lc:CustomCommands.CircuitNew"/>
 				<MenuItem Command="lc:CustomCommands.CircuitDelete"/>
 				<MenuItem Command="lc:CustomCommands.CircuitUsage"/>
+				<MenuItem Command="ApplicationCommands.Find"/>
 				<Separator />
 				<MenuItem Command="lc:CustomCommands.CircuitTruthTable"/>
 				<MenuItem Command="lc:CustomCommands.CircuitPower"/>

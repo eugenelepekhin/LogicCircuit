@@ -693,6 +693,10 @@ namespace LogicCircuit {
 			}
 		}
 
+		public void Find() {
+			this.Mainframe.ShowDialog(new DialogFind(this));
+		}
+
 		//--- Event Handling ---
 
 		public void DiagramLostFocus() {

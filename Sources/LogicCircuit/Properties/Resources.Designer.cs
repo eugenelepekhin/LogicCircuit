@@ -2760,5 +2760,33 @@ namespace LogicCircuit.Properties {
  		public static string ToolTipSoundNotation {
 			get { return ResourceManager.GetString("ToolTipSoundNotation", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Find.
+		/// </summary>
+ 		public static string CommandEditFind {
+			get { return ResourceManager.GetString("CommandEditFind", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Find circuit.
+		/// </summary>
+ 		public static string TitleFind {
+			get { return ResourceManager.GetString("TitleFind", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Search.
+		/// </summary>
+ 		public static string TitleSearch {
+			get { return ResourceManager.GetString("TitleSearch", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Find what:.
+		/// </summary>
+ 		public static string TitleSearchPattern {
+			get { return ResourceManager.GetString("TitleSearchPattern", Culture); }
+		}
 	}
 }

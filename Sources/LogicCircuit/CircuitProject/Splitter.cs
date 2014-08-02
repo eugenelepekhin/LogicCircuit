@@ -22,6 +22,11 @@ namespace LogicCircuit {
 			set { throw new InvalidOperationException(); }
 		}
 
+		public override string Note {
+			get { return null; }
+			set { throw new NotSupportedException(); }
+		}
+
 		public override string ToolTip {
 			get { return Properties.Resources.ToolTipSplitter(this.BitWidth, this.PinCount); }
 		}
