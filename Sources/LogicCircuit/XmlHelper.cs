@@ -6,7 +6,6 @@ using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Xml;
-using System.Xml.XPath;
 using System.Xml.Xsl;
 
 namespace LogicCircuit {

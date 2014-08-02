@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Linq;
-using LogicCircuit;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace LogicCircuit.UnitTest {
 	/// <summary>

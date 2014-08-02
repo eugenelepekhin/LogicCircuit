@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows;
-using Microsoft.Win32;
 using LogicCircuit.DataPersistent;
+using Microsoft.Win32;
 
 namespace LogicCircuit {
 	partial class Mainframe {

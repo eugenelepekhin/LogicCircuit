@@ -1,9 +1,9 @@
-﻿using System.Xml;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using LogicCircuit.DataPersistent;
-using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Xml;
+using LogicCircuit.DataPersistent;
 
 namespace LogicCircuit {
 	public interface IRecordLoader {

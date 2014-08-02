@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
 using System.Xml;
-using LogicCircuit.DataPersistent;
 
 namespace LogicCircuit {
 	public partial class Project {

@@ -1,11 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.IO;
 using System.Windows;
-using System.Windows.Markup;
 using System.Windows.Media;
-using System.Xml;
 
 namespace LogicCircuit {
 	public abstract class Symbol : INotifyPropertyChanged {

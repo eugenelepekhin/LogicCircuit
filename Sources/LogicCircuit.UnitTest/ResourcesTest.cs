@@ -6,7 +6,6 @@ using System.Resources;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
-using LogicCircuit;
 using LogicCircuit.Properties;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Xml;
-using LogicCircuit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace LogicCircuit.UnitTest {

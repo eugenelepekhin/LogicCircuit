@@ -6,10 +6,9 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
+using System.Windows;
 using System.Xml;
 using LogicCircuit.DataPersistent;
-using System.Windows;
 
 namespace LogicCircuit {
 	[SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]

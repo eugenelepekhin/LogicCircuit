@@ -1,6 +1,5 @@
-﻿using LogicCircuit;
+﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 namespace LogicCircuit.UnitTest {
 

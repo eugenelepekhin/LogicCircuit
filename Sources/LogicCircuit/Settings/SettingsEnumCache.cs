@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 
 namespace LogicCircuit {
 	internal class SettingsEnumCache<T> where T:struct {

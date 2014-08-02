@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Threading;
 
 namespace LogicCircuit.DataPersistent {
 	/// <summary>

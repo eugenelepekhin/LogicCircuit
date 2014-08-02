@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using LogicCircuit;
 
 namespace LogicCircuit.UnitTest {
 	/// <summary>
