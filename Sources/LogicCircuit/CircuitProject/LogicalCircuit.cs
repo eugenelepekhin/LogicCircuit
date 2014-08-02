@@ -39,12 +39,7 @@ namespace LogicCircuit {
 			get { return (IEnumerable<BasePin>)this.LogicalPins; }
 		}
 
-		public override string Note {
-			get { return this.Description; }
-			set { throw new NotSupportedException(); }
-		}
-
-		public override string ToolTip { get { return Circuit.BuildToolTip(this.Name, this.Description); } }
+		public override string ToolTip { get { return Circuit.BuildToolTip(this.Name, this.Note); } }
 
 		public IEnumerable<CircuitSymbol> CircuitSymbols() {
 			return this.CircuitProject.CircuitSymbolSet.SelectByLogicalCircuit(this);
@@ -190,7 +185,7 @@ namespace LogicCircuit {
 			LogicalCircuit circuit = this.CreateItem(Guid.NewGuid(),
 				name,
 				name,
-				LogicalCircuitData.DescriptionField.Field.DefaultValue,
+				LogicalCircuitData.NoteField.Field.DefaultValue,
 				LogicalCircuitData.CategoryField.Field.DefaultValue,
 				LogicalCircuitData.IsDisplayField.Field.DefaultValue
 			);

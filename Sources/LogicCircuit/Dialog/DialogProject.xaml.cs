@@ -17,7 +17,7 @@ namespace LogicCircuit {
 			this.project = project;
 			this.InitializeComponent();
 			this.name.Text = project.Name;
-			this.description.Text = project.Description;
+			this.description.Text = project.Note;
 		}
 
 		private void ButtonOkClick(object sender, RoutedEventArgs e) {
@@ -25,10 +25,10 @@ namespace LogicCircuit {
 				string name = this.name.Text.Trim();
 				string description = this.description.Text.Trim();
 
-				if(this.project.Name != name || this.project.Description != description) {
+				if(this.project.Name != name || this.project.Note != description) {
 					this.project.CircuitProject.InTransaction(() => {
 						this.project.Name = name;
-						this.project.Description = description;
+						this.project.Note = description;
 					});
 				}
 				this.Close();

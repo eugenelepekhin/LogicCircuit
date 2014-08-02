@@ -18,14 +18,14 @@
 		Version 2.0.0.4 - removing Odd and Even functions and replace them with XOR and XOR NOT
 		Version 2.0.0.5 - Adding MemoryOnStart to memory circuits
 		Version 2.0.0.6 - Adding IsDisplay property to LogicalCircuit. Making Probe separate circuit to enable naming of it.
-		Version 2.0.0.7 - Adding PinSide to Button and Constant. Adding Sensor circuit. Adding Sound circuit.
+		Version 2.0.0.7 - Adding PinSide to Button and Constant. Adding Sensor circuit. Adding Sound circuit. LogicalCircuit.Description and Project.Description both renamed to Note.
 	-->
 
 	<Table Name="Project">
 		<Table.Columns>
 			<Column Name="ProjectId" Type="Guid" ReadOnly="true"/>
 			<Column Name="Name" Type="string" Default="Circuit Project"/>
-			<Column Name="Description" Type="string" Default=""/>
+			<Column Name="Note" Type="string" Default=""/>
 			<Column Name="Zoom" Type="double" Default="1" Check="Project.CheckZoom"/>
 			<Column Name="Frequency" Type="int" Default="10" Check="Project.CheckFrequency"/>
 			<Column Name="IsMaximumSpeed" Type="bool" Default="false"/>
@@ -123,7 +123,7 @@
 			<Column Name="LogicalCircuitId" Type="Guid" ReadOnly="true"/>
 			<Column Name="Name" Type="string" Default="Main" PropertyOverrides="true"/>
 			<Column Name="Notation" Type="string" Default="" PropertyOverrides="true"/>
-			<Column Name="Description" Type="string" Default=""/>
+			<Column Name="Note" Type="string" Default="" PropertyOverrides="true"/>
 			<Column Name="Category" Type="string" Default="" PropertyOverrides="true"/>
 			<Column Name="IsDisplay" Type="bool" Default="false" PropertyOverrides="true"/>
 		</Table.Columns>

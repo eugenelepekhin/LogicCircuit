@@ -16,4 +16,9 @@
 		</xsl:element>
 	</xsl:template>
 
+	<!-- This will rename all Description fields to Note on all LogicalCircuits and Project -->
+	<xsl:template match="old:Description">
+		<lc:Note><xsl:value-of select="."/></lc:Note>
+	</xsl:template>
+
 </xsl:stylesheet>

@@ -14,7 +14,7 @@ namespace LogicCircuit {
 	internal partial struct ProjectData {
 		public Guid ProjectId;
 		public string Name;
-		public string Description;
+		public string Note;
 		private double fieldZoom;
 		public double Zoom {
 			get { return this.fieldZoom; }
@@ -102,21 +102,21 @@ namespace LogicCircuit {
 			}
 		}
 
-		// Accessor of the Description field
-		public sealed class DescriptionField : IField<ProjectData, string>, IFieldSerializer<ProjectData> {
-			public static readonly DescriptionField Field = new DescriptionField();
-			private DescriptionField() {}
-			public string Name { get { return "Description"; } }
+		// Accessor of the Note field
+		public sealed class NoteField : IField<ProjectData, string>, IFieldSerializer<ProjectData> {
+			public static readonly NoteField Field = new NoteField();
+			private NoteField() {}
+			public string Name { get { return "Note"; } }
 			public int Order { get; set; }
 			public string DefaultValue { get { return ""; } }
 			public string GetValue(ref ProjectData record) {
-				return record.Description;
+				return record.Note;
 			}
 			public void SetValue(ref ProjectData record, string value) {
-				record.Description = value;
+				record.Note = value;
 			}
 			public int Compare(ref ProjectData l, ref ProjectData r) {
-				return StringComparer.Ordinal.Compare(l.Description, r.Description);
+				return StringComparer.Ordinal.Compare(l.Note, r.Note);
 			}
 			public int Compare(string l, string r) {
 				return StringComparer.Ordinal.Compare(l, r);
@@ -124,16 +124,16 @@ namespace LogicCircuit {
 
 			// Implementation of interface IFieldSerializer<ProjectData>
 			bool IFieldSerializer<ProjectData>.NeedToSave(ref ProjectData data) {
-				return this.Compare(data.Description, this.DefaultValue) != 0;
+				return this.Compare(data.Note, this.DefaultValue) != 0;
 			}
 			string IFieldSerializer<ProjectData>.GetTextValue(ref ProjectData data) {
-				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Description);
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Note);
 			}
 			void IFieldSerializer<ProjectData>.SetDefault(ref ProjectData data) {
-				data.Description = this.DefaultValue;
+				data.Note = this.DefaultValue;
 			}
 			void IFieldSerializer<ProjectData>.SetTextValue(ref ProjectData data, string text) {
-				data.Description = text;
+				data.Note = text;
 			}
 		}
 
@@ -410,7 +410,7 @@ namespace LogicCircuit {
 		private static IField<ProjectData>[] fields = {
 			ProjectIdField.Field,
 			NameField.Field,
-			DescriptionField.Field,
+			NoteField.Field,
 			ZoomField.Field,
 			FrequencyField.Field,
 			IsMaximumSpeedField.Field,
@@ -483,10 +483,10 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.ProjectRowId, ProjectData.NameField.Field, value); }
 		}
 
-		// Gets or sets value of the Description field.
-		public string Description {
-			get { return this.Table.GetField(this.ProjectRowId, ProjectData.DescriptionField.Field); }
-			set { this.Table.SetField(this.ProjectRowId, ProjectData.DescriptionField.Field, value); }
+		// Gets or sets value of the Note field.
+		public string Note {
+			get { return this.Table.GetField(this.ProjectRowId, ProjectData.NoteField.Field); }
+			set { this.Table.SetField(this.ProjectRowId, ProjectData.NoteField.Field, value); }
 		}
 
 		// Gets or sets value of the Zoom field.
@@ -553,8 +553,8 @@ namespace LogicCircuit {
 				if(ProjectData.NameField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("Name");
 				}
-				if(ProjectData.DescriptionField.Field.Compare(ref oldData, ref newData) != 0) {
-					this.NotifyPropertyChanged("Description");
+				if(ProjectData.NoteField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("Note");
 				}
 				if(ProjectData.ZoomField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("Zoom");
@@ -658,7 +658,7 @@ namespace LogicCircuit {
 			// Fields of Project table
 			Guid ProjectId,
 			string Name,
-			string Description,
+			string Note,
 			double Zoom,
 			int Frequency,
 			bool IsMaximumSpeed,
@@ -670,7 +670,7 @@ namespace LogicCircuit {
 			ProjectData dataProject = new ProjectData() {
 				ProjectId = ProjectId,
 				Name = Name,
-				Description = Description,
+				Note = Note,
 				Zoom = Zoom,
 				Frequency = Frequency,
 				IsMaximumSpeed = IsMaximumSpeed,

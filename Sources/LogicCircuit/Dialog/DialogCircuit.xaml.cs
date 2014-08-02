@@ -33,7 +33,7 @@ namespace LogicCircuit {
 			} else {
 				this.isDisplay.IsEnabled = false;
 			}
-			this.description.Text = this.logicalCircuit.Description;
+			this.description.Text = this.logicalCircuit.Note;
 			this.Loaded += new RoutedEventHandler(this.DialogCircuitLoaded);
 		}
 
@@ -60,14 +60,14 @@ namespace LogicCircuit {
 				string description = this.description.Text.Trim();
 
 				if(this.logicalCircuit.Name != name || this.logicalCircuit.Notation != notation ||
-					this.logicalCircuit.Category != category || this.logicalCircuit.IsDisplay != isDisplay || this.logicalCircuit.Description != description
+					this.logicalCircuit.Category != category || this.logicalCircuit.IsDisplay != isDisplay || this.logicalCircuit.Note != description
 				) {
 					this.logicalCircuit.CircuitProject.InTransaction(() => {
 						this.logicalCircuit.Rename(name);
 						this.logicalCircuit.Notation = notation;
 						this.logicalCircuit.Category = category;
 						this.logicalCircuit.IsDisplay = isDisplay;
-						this.logicalCircuit.Description = description;
+						this.logicalCircuit.Note = description;
 						this.logicalCircuit.CircuitProject.CollapsedCategorySet.Purge();
 					});
 				}
