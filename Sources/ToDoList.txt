@@ -2,15 +2,11 @@ ToDo list:
 
 smarter wires
 
-Backward navigation on circuits
 Tunnels
-
 Keyboard device
 Display device
 
 Colors of symbols
-
-Search
 
 FPGA
 
@@ -33,3 +29,6 @@ Global optimizations.
 === Feature not implementing ===
 Power up root: to much hassle to start up the runtime.
 For example if user has circuit that is not on the execution tree. or when the execution tree has multiple of current circuits.
+
+Backward navigation on circuits
+It is already implemented ad Ctrl-Tab and Ctrl-Shift-Tab
