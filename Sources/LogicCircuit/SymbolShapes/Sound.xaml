@@ -6,7 +6,7 @@
 	BorderBrush="Black" BorderThickness="1" CornerRadius="6" Background="{StaticResource SoundBackground}"
 >
 	<StackPanel Orientation="Vertical">
-		<Polygon Points="10,11 0,11 0,25 10,25 10,11 20,2 20,34 10,25" Stroke="Black" StrokeThickness="1" HorizontalAlignment="Center"/>
+		<Polygon Points="10,11 0,11 0,25 10,25 10,11 20,2 20,34 10,25" Stroke="Black" StrokeThickness="1" HorizontalAlignment="Center" FlowDirection="LeftToRight"/>
 		<TextBlock Name="ProbeView" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" IsHyphenationEnabled="True" TextWrapping="Wrap" Foreground="Black"/>
 	</StackPanel>
 </Border>
