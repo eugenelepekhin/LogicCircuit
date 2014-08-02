@@ -1202,4 +1202,94 @@
   <data name="ToolTipDevicePinSide" xml:space="preserve">
     <value>Выберите сторону, где будет находиться разъем</value>
   </data>
+  <data name="NameSensor" xml:space="preserve">
+    <value>Датчик</value>
+  </data>
+  <data name="ToolTipSensor" xml:space="preserve">
+    <value>Датчик {0}</value>
+  </data>
+  <data name="CaptionSensorType" xml:space="preserve">
+    <value>Тип датчика</value>
+  </data>
+  <data name="SensorTypeManual" xml:space="preserve">
+    <value>Ручной</value>
+  </data>
+  <data name="SensorTypeRandom" xml:space="preserve">
+    <value>Случайный</value>
+  </data>
+  <data name="SensorTypeSeries" xml:space="preserve">
+    <value>Заданный</value>
+  </data>
+  <data name="ToolTipSensorBitWidth" xml:space="preserve">
+    <value>Выберите разрядность датчика</value>
+  </data>
+  <data name="ToolTipSensorNotation" xml:space="preserve">
+    <value>Введите обозначение датчика</value>
+  </data>
+  <data name="ToolTipSensorType" xml:space="preserve">
+    <value>Выберите способ получения данных датчиком</value>
+  </data>
+  <data name="TitleSensorType" xml:space="preserve">
+    <value>Тип датчика:</value>
+  </data>
+  <data name="ErrorBadInterval" xml:space="preserve">
+    <value>Минимальное значение должно быть меньше или равно максимальному.</value>
+  </data>
+  <data name="ErrorBadPositiveNumber" xml:space="preserve">
+    <value>Ожидается число большее нуля</value>
+  </data>
+  <data name="ErrorEmptySeries" xml:space="preserve">
+    <value>Задаваемая последовательность не может быть пустой</value>
+  </data>
+  <data name="ErrorSeriesItem" xml:space="preserve">
+    <value>Ошибка в {0}. Ожидается пара шестнадцатеричных чисел разделенных :</value>
+  </data>
+  <data name="ErrorSeriesItemOrder" xml:space="preserve">
+    <value>Ошибка в {0}. Номер каждого следующего цикла должен быть больше, предыдущего.</value>
+  </data>
+  <data name="TitleLoopSeries" xml:space="preserve">
+    <value>Повторять последовательность</value>
+  </data>
+  <data name="TitleSensorRandomMax" xml:space="preserve">
+    <value>Максимальное число циклов:</value>
+  </data>
+  <data name="TitleSensorRandomMin" xml:space="preserve">
+    <value>Минимальное число циклов:</value>
+  </data>
+  <data name="TitleSeries" xml:space="preserve">
+    <value>Последовательность:</value>
+  </data>
+  <data name="ToolTipSensorRandomMax" xml:space="preserve">
+    <value>Введите максимальное количество циклов до изменения значения датчика.</value>
+  </data>
+  <data name="ToolTipSensorRandomMin" xml:space="preserve">
+    <value>Введите минимальное количество циклов до изменения значения датчика.</value>
+  </data>
+  <data name="ToolTipSeriesData" xml:space="preserve">
+    <value>Пожалуйста, введите последовательность значений датчика в виде &lt;цикл&gt;: &lt;значение&gt;
+где цикл и значение шестнадцатеричные числа.
+Когда цикл является четным числом или 0, то это соответствует изменению
+тактового сигнала от 0 до 1, когда он нечетным, то тактовый сигнал меняется с 1 на 0.</value>
+  </data>
+  <data name="NameSound" xml:space="preserve">
+    <value>Зуммер</value>
+  </data>
+  <data name="ToolTipSound" xml:space="preserve">
+    <value>Зуммер {0}</value>
+  </data>
+  <data name="ToolTipSoundNotation" xml:space="preserve">
+    <value>Введите обозначение зуммера</value>
+  </data>
+  <data name="CommandEditFind" xml:space="preserve">
+    <value>Поиск</value>
+  </data>
+  <data name="TitleFind" xml:space="preserve">
+    <value>Поиск схемы</value>
+  </data>
+  <data name="TitleSearch" xml:space="preserve">
+    <value>Искать</value>
+  </data>
+  <data name="TitleSearchPattern" xml:space="preserve">
+    <value>Что искать</value>
+  </data>
 </root>
