@@ -63,6 +63,8 @@ namespace LogicCircuit {
 			Tracer.FullInfo("App", "Application launched with parameter: \"{0}\"", this.FileToOpen);
 			EventManager.RegisterClassHandler(typeof(TextBox), TextBox.GotKeyboardFocusEvent, new RoutedEventHandler(TextBoxGotKeyboardFocus));
 			EventManager.RegisterClassHandler(typeof(TextBox), TextBox.PreviewMouseDownEvent, new RoutedEventHandler(TextBoxPreviewMouseDown));
+
+			ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(UIElement), new FrameworkPropertyMetadata(10000));
 		}
 
 		private static void InitLogging() {

@@ -1354,4 +1354,47 @@ clock from 0 to 1, when it is odd then clock is changing from 1 to 0.</value>
   <data name="TitleSearchPattern" xml:space="preserve">
     <value>_Find what:</value>
   </data>
+  <data name="ToolTipDescriptorClock" xml:space="preserve">
+    <value>Generates signal that oscillates between 1 and 0
+and is used to coordinate actions of circuits.</value>
+  </data>
+  <data name="ToolTipDescriptorPin" xml:space="preserve">
+    <value>Used to create a connector that is other circuits can use
+to provide or receive data to and from current circuit.
+Rearrange pins on the circuit to change their
+relative positions on symbols of this circuit.</value>
+  </data>
+  <data name="ToolTipDescriptorProbe" xml:space="preserve">
+    <value>Add and connect probes to you circuits to observe
+current state of powered up circuit on the surface of
+the probe, history of values when you double click the
+probe or view this data on oscilloscope.</value>
+  </data>
+  <data name="ToolTipDescriptorSensor" xml:space="preserve">
+    <value>Provides data from "external source" as
+a series of predefined, randomly chosen,
+or manually entered values.</value>
+  </data>
+  <data name="ToolTipDescriptorSplitter" xml:space="preserve">
+    <value>Allows to create wire harness or
+separate it to individual wires.
+Use of splitters and multi-bit pins can
+significantly simplify drawing and
+understanding of circuit.</value>
+  </data>
+  <data name="ToolTipDescriptorText" xml:space="preserve">
+    <value>Place text notes anywhere on the diagram to
+comment your circuit, provide helpful links to any
+web sites and decorate you circuit with pictures.</value>
+  </data>
+  <data name="ToolTipDescriptorTriState" xml:space="preserve">
+    <value>Can have three different outputs: 1, 0, and high-impedance (Z).
+The high-impedance state plays no role in the logic, which is strictly binary.
+These devices are used on buses of the CPU to allow multiple sources to send data.
+A group of three-states driving a line with a suitable control circuit
+is basically equivalent to a multiplexer.</value>
+  </data>
+  <data name="ToolTipSensorManualValue" xml:space="preserve">
+    <value>Type hexadecimal value and press Enter.</value>
+  </data>
 </root>

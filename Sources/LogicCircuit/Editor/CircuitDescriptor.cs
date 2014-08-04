@@ -180,7 +180,7 @@ namespace LogicCircuit {
 		public IEnumerable<int> InputCountRange { get; private set; }
 		public int InputCountRangeLength { get; private set; }
 
-		public GateDescriptor(Gate gate) : base(gate) {
+		public GateDescriptor(Gate gate, string note) : base(gate) {
 			switch(gate.GateType) {
 			case GateType.Clock:
 			case GateType.Not:
@@ -200,6 +200,7 @@ namespace LogicCircuit {
 				break;
 			}
 			this.InputCount = gate.InputCount;
+			gate.Note = note;
 		}
 
 		protected override Gate GetCircuitToDrop(CircuitProject circuitProject) {
@@ -212,6 +213,7 @@ namespace LogicCircuit {
 
 		public ProbeDescriptor(CircuitProject circuitProject) : base(circuitProject.CircuitProbeSet.Create(null)) {
 			this.Name = string.Empty;
+			this.Circuit.Note = Properties.Resources.ToolTipDescriptorProbe;
 		}
 
 		protected override CircuitProbe GetCircuitToDrop(CircuitProject circuitProject) {
@@ -344,6 +346,7 @@ namespace LogicCircuit {
 			this.BitWidth = this.Circuit.BitWidth;
 			this.pinSide = PinDescriptor.PinSideDescriptor(this.Circuit.PinSide);
 			this.Notation = string.Empty;
+			this.Circuit.Note = Properties.Resources.ToolTipDescriptorSensor;
 		}
 
 		protected override Sensor GetCircuitToDrop(CircuitProject circuitProject) {
@@ -464,6 +467,7 @@ namespace LogicCircuit {
 		) {
 			this.BitWidth = 1;
 			this.PinSide = PinDescriptor.PinSideDescriptor((pinType == PinType.Input) ? LogicCircuit.PinSide.Left : LogicCircuit.PinSide.Right);
+			this.Circuit.Note = Properties.Resources.ToolTipDescriptorPin;
 		}
 
 		protected override Pin GetCircuitToDrop(CircuitProject circuitProject) {
@@ -515,6 +519,7 @@ namespace LogicCircuit {
 			this.PinCount = 3;
 			this.BitWidth = 1;
 			this.Direction = this.DirectionRange.First();
+			this.Circuit.Note = Properties.Resources.ToolTipDescriptorSplitter;
 		}
 
 		protected override Splitter GetCircuitToDrop(CircuitProject circuitProject) {

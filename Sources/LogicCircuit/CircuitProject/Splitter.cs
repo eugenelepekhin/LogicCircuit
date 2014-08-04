@@ -22,13 +22,10 @@ namespace LogicCircuit {
 			set { throw new InvalidOperationException(); }
 		}
 
-		public override string Note {
-			get { return null; }
-			set { throw new NotSupportedException(); }
-		}
+		public override string Note { get; set; }
 
 		public override string ToolTip {
-			get { return Properties.Resources.ToolTipSplitter(this.BitWidth, this.PinCount); }
+			get { return Circuit.BuildToolTip(Properties.Resources.ToolTipSplitter(this.BitWidth, this.PinCount), this.Note); }
 		}
 
 		public override string Category {

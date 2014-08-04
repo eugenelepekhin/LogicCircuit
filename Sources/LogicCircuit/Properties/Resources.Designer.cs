@@ -2788,5 +2788,78 @@ namespace LogicCircuit.Properties {
  		public static string TitleSearchPattern {
 			get { return ResourceManager.GetString("TitleSearchPattern", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Generates signal that oscillates between 1 and 0
+		/// and is used to coordinate actions of circuits..
+		/// </summary>
+ 		public static string ToolTipDescriptorClock {
+			get { return ResourceManager.GetString("ToolTipDescriptorClock", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Used to create a connector that is other circuits can use
+		/// to provide or receive data to and from current circuit.
+		/// Rearrange pins on the circuit to change their
+		/// relative positions on symbols of this circuit..
+		/// </summary>
+ 		public static string ToolTipDescriptorPin {
+			get { return ResourceManager.GetString("ToolTipDescriptorPin", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Add and connect probes to you circuits to observe
+		/// current state of powered up circuit on the surface of
+		/// the probe, history of values when you double click the
+		/// probe or view this data on oscilloscope..
+		/// </summary>
+ 		public static string ToolTipDescriptorProbe {
+			get { return ResourceManager.GetString("ToolTipDescriptorProbe", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Provides data from "external source" as
+		/// a series of predefined, randomly chosen,
+		/// or manually entered values..
+		/// </summary>
+ 		public static string ToolTipDescriptorSensor {
+			get { return ResourceManager.GetString("ToolTipDescriptorSensor", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Allows to create wire harness or
+		/// separate it to individual wires.
+		/// Use of splitters and multi-bit pins can
+		/// significantly simplify drawing and.
+		/// </summary>
+ 		public static string ToolTipDescriptorSplitter {
+			get { return ResourceManager.GetString("ToolTipDescriptorSplitter", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Place text notes anywhere on the diagram to
+		/// comment your circuit, provide helpful links to any
+		/// web sites and decorate you circuit with pictures..
+		/// </summary>
+ 		public static string ToolTipDescriptorText {
+			get { return ResourceManager.GetString("ToolTipDescriptorText", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Can have three different outputs: 1, 0, and high-impedance (Z).
+		/// The high-impedance state plays no role in the logic, which is strictly binary.
+		/// These devices are used on buses of the CPU to allow multiple sources to send data.
+		/// A group of three-states driving a line with a suitable control circuit.
+		/// </summary>
+ 		public static string ToolTipDescriptorTriState {
+			get { return ResourceManager.GetString("ToolTipDescriptorTriState", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Type hexadecimal value and press Enter..
+		/// </summary>
+ 		public static string ToolTipSensorManualValue {
+			get { return ResourceManager.GetString("ToolTipSensorManualValue", Culture); }
+		}
 	}
 }

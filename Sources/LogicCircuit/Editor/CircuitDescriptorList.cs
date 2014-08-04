@@ -97,26 +97,26 @@ namespace LogicCircuit {
 			list.Add(new ButtonDescriptor(project));
 			list.Add(new ConstantDescriptor(project));
 			list.Add(new SensorDescriptor(project));
-			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.Clock, 0, false)));
+			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.Clock, 0, false), Properties.Resources.ToolTipDescriptorClock));
 			list.Add(new SplitterDescriptor(project));
-			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.Led, 1, false)));
-			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.Led, 8, false)));
+			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.Led, 1, false), null));
+			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.Led, 8, false), null));
 			list.Add(new LedMatrixDescriptor(project));
 			list.Add(new SoundDescriptor(project));
 			list.Add(new ProbeDescriptor(project));
 
-			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.Not, 1, true)));
-			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.TriState2, 2, false)));
-			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.TriState1, 2, false)));
+			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.Not, 1, true), null));
+			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.TriState2, 2, false), Properties.Resources.ToolTipDescriptorTriState));
+			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.TriState1, 2, false), Properties.Resources.ToolTipDescriptorTriState));
 
-			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.And, 2, false)));
-			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.And, 2, true)));
+			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.And, 2, false), null));
+			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.And, 2, true), null));
 
-			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.Or, 2, false)));
-			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.Or, 2, true)));
+			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.Or, 2, false), null));
+			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.Or, 2, true), null));
 
-			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.Xor, 2, false)));
-			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.Xor, 2, true)));
+			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.Xor, 2, false), null));
+			list.Add(new GateDescriptor(project.GateSet.Gate(GateType.Xor, 2, true), null));
 
 			list.Add(new MemoryDescriptor(project, false));
 			list.Add(new MemoryDescriptor(project, true));

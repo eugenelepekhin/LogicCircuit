@@ -12,7 +12,9 @@
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 		<TextBlock Grid.Row="0" HorizontalAlignment="Center" Text="{x:Static properties:Resources.NameSensor}"/>
-		<TextBox Grid.Row="1" Name="ProbeView" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0" IsEnabled="False" MaxLength="8"/>
+		<TextBox Grid.Row="1" Name="ProbeView" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0" IsEnabled="False" MaxLength="8"
+			ToolTip="{x:Static properties:Resources.ToolTipSensorManualValue}"
+		/>
 		<TextBlock Grid.Row="2" Name="Notation" HorizontalAlignment="Center" />
 	</Grid>
 </Border>

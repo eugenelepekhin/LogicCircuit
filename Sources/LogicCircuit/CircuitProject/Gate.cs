@@ -8,7 +8,7 @@ namespace LogicCircuit {
 		public const int MaxInputCount = 18;
 
 		public override string Name { get; set; }
-		public override string ToolTip { get { return this.Name; } }
+		public override string ToolTip { get { return Circuit.BuildToolTip(this.Name, this.Note); } }
 		public override string Notation { get; set; }
 		public override string Note { get; set; }
 		public override string Category { get; set; }

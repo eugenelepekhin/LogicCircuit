@@ -667,7 +667,7 @@
 							</DataTemplate>
 
 							<DataTemplate DataType="{x:Type lc:TextNoteDescriptor}">
-								<StackPanel Style="{StaticResource DescriptorPanel}">
+								<StackPanel Style="{StaticResource DescriptorPanel}" ToolTip="{x:Static properties:Resources.ToolTipDescriptorText}" Background="Transparent">
 									<StackPanel Orientation="Vertical" MinWidth="50" Margin="3">
 										<TextBlock FontFamily="Georgia" FontSize="16" FontWeight="Bold" Margin="5" Text="{x:Static properties:Resources.CaptionTextNote1}"/>
 										<TextBlock FontFamily="Georgia" FontSize="14" FontStyle="Italic" Margin="5" Text="{x:Static properties:Resources.CaptionTextNote2}"/>
