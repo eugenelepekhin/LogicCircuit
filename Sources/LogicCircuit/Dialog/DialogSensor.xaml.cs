@@ -27,6 +27,7 @@ namespace LogicCircuit {
 		public string SeriesData { get; set; }
 		public string RandomMin { get; set; }
 		public string RandomMax { get; set; }
+		public string ManualInitialValue { get; set; }
 
 		public string Error { get { return null; } }
 
@@ -70,6 +71,11 @@ namespace LogicCircuit {
 						this.minTicks.GetBindingExpression(TextBox.TextProperty).UpdateSource();
 					}
 					break;
+				case "ManualInitialValue":
+					if(!int.TryParse(this.ManualInitialValue.Trim(), NumberStyles.HexNumber, CultureInfo.InvariantCulture, out old)) {
+						error = Properties.Resources.ErrorBadHexNumber;
+					}
+					break;
 				}
 				if(this.buttonOk != null) {
 					switch(this.SelectedSensorType.Value) {
@@ -78,6 +84,9 @@ namespace LogicCircuit {
 						break;
 					case SensorType.Random:
 						this.buttonOk.IsEnabled = (0 < this.parsedMin && this.parsedMin <= this.parsedMax);
+						break;
+					case SensorType.Manual:
+						this.buttonOk.IsEnabled = string.IsNullOrEmpty(error);
 						break;
 					default:
 						this.buttonOk.IsEnabled = true;
@@ -113,6 +122,17 @@ namespace LogicCircuit {
 			this.RandomMin = min.ToString(Properties.Resources.Culture);
 			this.RandomMax = max.ToString(Properties.Resources.Culture);
 
+			if(type == SensorType.Manual) {
+				string text = this.sensor.Data;
+				int value;
+				if(string.IsNullOrEmpty(text) || !int.TryParse(text, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out value)) {
+					value = 0;
+				}
+				this.ManualInitialValue = Constant.Normalize(value, this.sensor.BitWidth).ToString("X", CultureInfo.InvariantCulture);
+			} else {
+				this.ManualInitialValue = "0";
+			}
+
 			this.DataContext = this;
 			this.InitializeComponent();
 
@@ -135,6 +155,7 @@ namespace LogicCircuit {
 				string data = this.SeriesData.Trim();
 				string minText = this.RandomMin.Trim();
 				string maxText = this.RandomMax.Trim();
+				string initial = this.ManualInitialValue.Trim();
 
 				SensorType type = this.SelectedSensorType.Value;
 				if(type == SensorType.Series && string.IsNullOrWhiteSpace(data)) {
@@ -153,7 +174,11 @@ namespace LogicCircuit {
 						data = Sensor.DefaultRandomData;
 					}
 				} else if(type == SensorType.Manual) {
-					data = string.Empty;
+					int value;
+					if(!int.TryParse(initial, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out value)) {
+						value = 0;
+					}
+					data = Constant.Normalize(value, bitWidth).ToString("X", CultureInfo.InvariantCulture);
 				}
 
 				if(	this.sensor.SensorType != type ||

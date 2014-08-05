@@ -2861,5 +2861,26 @@ namespace LogicCircuit.Properties {
  		public static string ToolTipSensorManualValue {
 			get { return ResourceManager.GetString("ToolTipSensorManualValue", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Invalid hexadecimal number.
+		/// </summary>
+ 		public static string ErrorBadHexNumber {
+			get { return ResourceManager.GetString("ErrorBadHexNumber", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Initial _value:.
+		/// </summary>
+ 		public static string TitleSensorManualInitialValue {
+			get { return ResourceManager.GetString("TitleSensorManualInitialValue", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Enter initial value as hexadecimal number..
+		/// </summary>
+ 		public static string ToolTipSensorManualInitialValue {
+			get { return ResourceManager.GetString("ToolTipSensorManualInitialValue", Culture); }
+		}
 	}
 }

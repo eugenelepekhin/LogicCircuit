@@ -115,6 +115,18 @@
 			ToolTip="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent, FallbackValue={x:Static properties:Resources.ToolTipSensorRandomMax}}"
 		/>
 
+		<!-- Manual -->
+
+		<Label Grid.Row="4" Grid.Column="0" Content="{x:Static properties:Resources.TitleSensorManualInitialValue}" Target="{Binding ElementName=manualValue}"
+			Visibility="{Binding ElementName=sensorType, Path=SelectedItem.Value, Converter={StaticResource EnumToVisibilityConvertor}, ConverterParameter={x:Static lc:SensorType.Manual}}"
+		/>
+		<TextBox Grid.Row="4" Grid.Column="1" Name="manualValue"
+			Visibility="{Binding ElementName=sensorType, Path=SelectedItem.Value, Converter={StaticResource EnumToVisibilityConvertor}, ConverterParameter={x:Static lc:SensorType.Manual}}"
+			Text="{Binding Path=ManualInitialValue, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+			Validation.ErrorTemplate="{StaticResource validationTemplate}"
+			ToolTip="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent, FallbackValue={x:Static properties:Resources.ToolTipSensorManualInitialValue}}"
+		/>
+
 		<!-- End of variable controls -->
 
 		<Label Grid.Row="6" Grid.Column="0" Content="{x:Static properties:Resources.TitleDescription}" Target="{Binding ElementName=note}"/>

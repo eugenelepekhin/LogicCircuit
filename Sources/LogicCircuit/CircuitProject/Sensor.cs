@@ -165,7 +165,6 @@ namespace LogicCircuit {
 				}
 				break;
 			case SensorType.Manual:
-				sensor.Data = string.Empty;
 				break;
 			default:
 				Tracer.Fail();

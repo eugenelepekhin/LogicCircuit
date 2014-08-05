@@ -37,7 +37,7 @@ namespace LogicCircuit {
 				this.sensorValue = new RandomValue(this.Sensor.Data, this.Sensor.BitWidth);
 				break;
 			case SensorType.Manual:
-				this.sensorValue = new ManualValue(this.Sensor.BitWidth);
+				this.sensorValue = new ManualValue(this.Sensor.Data, this.Sensor.BitWidth);
 				break;
 			default:
 				Tracer.Fail();
@@ -167,6 +167,7 @@ namespace LogicCircuit {
 				this.minTick = minTick;
 				this.maxTick = maxTick;
 				this.Reset();
+				this.Value = this.random.Next(this.maxValue);
 			}
 
 			public override bool Flip() {
@@ -224,7 +225,13 @@ namespace LogicCircuit {
 		private class ManualValue : SensorValue {
 			private int lastValue;
 
-			public ManualValue(int bitWidth) : base(bitWidth) {
+			public ManualValue(string data, int bitWidth) : base(bitWidth) {
+				int value;
+				if(string.IsNullOrEmpty(data) || !int.TryParse(data, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out value)) {
+					value = 0;
+				}
+				this.Value = value;
+				this.lastValue = value + 1;
 			}
 
 			public override bool Flip() {

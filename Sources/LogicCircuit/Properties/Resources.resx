@@ -1397,4 +1397,13 @@ is basically equivalent to a multiplexer.</value>
   <data name="ToolTipSensorManualValue" xml:space="preserve">
     <value>Type hexadecimal value and press Enter.</value>
   </data>
+  <data name="ErrorBadHexNumber" xml:space="preserve">
+    <value>Invalid hexadecimal number</value>
+  </data>
+  <data name="TitleSensorManualInitialValue" xml:space="preserve">
+    <value>Initial _value:</value>
+  </data>
+  <data name="ToolTipSensorManualInitialValue" xml:space="preserve">
+    <value>Enter initial value as hexadecimal number.</value>
+  </data>
 </root>
