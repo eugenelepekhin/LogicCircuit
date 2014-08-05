@@ -2790,7 +2790,7 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Generates signal that oscillates between 1 and 0
+		/// Looks up a localized string similar to Generates signal that oscillates between 0 and 1
 		/// and is used to coordinate actions of circuits..
 		/// </summary>
  		public static string ToolTipDescriptorClock {

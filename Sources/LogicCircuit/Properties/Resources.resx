@@ -1355,7 +1355,7 @@ clock from 0 to 1, when it is odd then clock is changing from 1 to 0.</value>
     <value>_Find what:</value>
   </data>
   <data name="ToolTipDescriptorClock" xml:space="preserve">
-    <value>Generates signal that oscillates between 1 and 0
+    <value>Generates signal that oscillates between 0 and 1
 and is used to coordinate actions of circuits.</value>
   </data>
   <data name="ToolTipDescriptorPin" xml:space="preserve">
