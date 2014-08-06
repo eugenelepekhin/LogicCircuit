@@ -1358,7 +1358,7 @@ Az adat lehet manuálisan választott vagy véletlenszerűen generált.</value>
     <value>Írd be a ciklusok maximális számát, amely a szenzor értékének változásához szükséges</value>
   </data>
   <data name="ToolTipSensorRandomMin" xml:space="preserve">
-    <value>Írd be a ciklusok minimális számát, amely a szenzor értékének változásához </value>
+    <value>Írd be a ciklusok minimális számát, amely a szenzor értékének változásához</value>
   </data>
   <data name="ToolTipSeriesData" xml:space="preserve">
     <value>Kérlek add meg a szenzor által mért étékeket &lt;ciklus&gt;:&lt;érték&gt;
