@@ -1283,7 +1283,7 @@ that displaying its visual elements.</value>
     <value>A sorozatnak nem szabad üresnek lennie.</value>
   </data>
   <data name="ErrorSeriesItem" xml:space="preserve">
-    <value>Hiba a következőben: {0}. Egy pár hexadecimális számnak kellene lennie, elválasztva a következővel: </value>
+    <value>Hiba a következőben: {0}. Egy pár hexadecimális számnak kellene lennie, elválasztva a következővel :</value>
   </data>
   <data name="ErrorSeriesItemOrder" xml:space="preserve">
     <value>Hiba a következőben: {0}. A következő ciklusnak nagyobbnak kell lennie az előzőnél.</value>
@@ -1316,16 +1316,22 @@ that displaying its visual elements.</value>
     <value>_Keresendő szöveg:</value>
   </data>
   <data name="ToolTipDescriptorClock" xml:space="preserve">
-    <value>0 és 1 között oszcilláló jelet generál, amivel vezérelhető a kapcsolás működése</value>
+    <value>0 és 1 között oszcilláló jelet generál,
+amivel vezérelhető a kapcsolás működése</value>
   </data>
   <data name="ToolTipDescriptorPin" xml:space="preserve">
-    <value>Csatakozási pontot hoz létre a kapcsoláshoz, ami segítségével a jelenlegi kapcsolás más kapcsolásokhoz csatlakoztatható.</value>
+    <value>Csatakozási pontot hoz létre a kapcsoláshoz, ami segítségével
+a jelenlegi kapcsolás más kapcsolásokhoz csatlakoztatható.</value>
   </data>
   <data name="ToolTipDescriptorProbe" xml:space="preserve">
-    <value>Mérőpontok csatlakoztatása a kapcsoláshoz. A mérőpont segítségével elemezhetőek a kapcsolások működései, illetve a pontra duplán kattintva oszciloszkóp nézetben is megtekinthetőek a pont előzményei.</value>
+    <value>Mérőpontok csatlakoztatása a kapcsoláshoz.
+A mérőpont segítségével elemezhetőek a kapcsolások
+működései, illetve a pontra duplán kattintva oszciloszkóp
+nézetben is megtekinthetőek a pont előzményei.</value>
   </data>
   <data name="ToolTipDescriptorSensor" xml:space="preserve">
-    <value>Adatot biztosít "külső forrásból". Az adat lehet manuálisan választott vagy véletlenszerűen generált.</value>
+    <value>Adatot biztosít "külső forrásból".
+Az adat lehet manuálisan választott vagy véletlenszerűen generált.</value>
   </data>
   <data name="ErrorBadHexNumber" xml:space="preserve">
     <value>Nem megfelelő hexadecimális szám</value>
@@ -1355,7 +1361,9 @@ that displaying its visual elements.</value>
     <value>Írd be a ciklusok minimális számát, amely a szenzor értékének változásához </value>
   </data>
   <data name="ToolTipSeriesData" xml:space="preserve">
-    <value>Kérlek add meg a szenzor által mért étékeket &lt;ciklus&gt; : &lt;érték&gt; formában, ahol a ciklusok és az érték is hexadecimális formátumban van. Ha a ciklus szám páros, akkor az órajel 0 -&gt; 1 átmenetű, ha páratlan, akkor 1 -&gt; 0 átmenetű.</value>
+    <value>Kérlek add meg a szenzor által mért étékeket &lt;ciklus&gt;:&lt;érték&gt;
+formában, ahol a ciklusok és az érték is hexadecimális formátumban van.
+Ha a ciklus szám páros, akkor az órajel 0 -&gt; 1 átmenetű, ha páratlan, akkor 1 -&gt; 0 átmenetű.</value>
   </data>
   <data name="ToolTipSound" xml:space="preserve">
     <value>Hangszóró {0}</value>
@@ -1364,13 +1372,21 @@ that displaying its visual elements.</value>
     <value>Írd be a hangszóró jelölését</value>
   </data>
   <data name="ToolTipDescriptorSplitter" xml:space="preserve">
-    <value>Vezeték csoportok létrehozása vagy felbontása. Segítségével egyszerűsíthető a több bites kimenetű eszközök kezelése és a kapcsolási rajz is.</value>
+    <value>Vezeték csoportok létrehozása vagy felbontása.
+Segítségével egyszerűsíthető a több bites
+kimenetű eszközök kezelése és a kapcsolási rajz is.</value>
   </data>
   <data name="ToolTipDescriptorText" xml:space="preserve">
-    <value>Szöveg elhelyezése a rajzon bárhol. A szövegek segítségével megyjegyzések adhatóak hozzá, amelyek segíthetnek megérteni a kapcsolás működését.</value>
+    <value>Szöveg elhelyezése a rajzon bárhol.
+A szövegek segítségével megyjegyzések adhatóak hozzá,
+amelyek segíthetnek megérteni a kapcsolás működését.</value>
   </data>
   <data name="ToolTipDescriptorTriState" xml:space="preserve">
-    <value>Három kimeneti érték lehetséges: 1, 0 és magas impedancia (Z). A magas impedancia állapot nem rendelkezik jelentős szereppel a logikában, amely kétértékű. Ezen eszközöket olyan buszrendszerek esetén használják, ahol több küldő van. Egy háromállapotú vezérlés által hajtott kapcsolás felfogható egyfajta multiplexerként is.</value>
+    <value>Három kimeneti érték lehetséges: 1, 0 és magas impedancia (Z).
+A magas impedancia állapot nem rendelkezik jelentős szereppel a logikában,
+amely kétértékű. Ezen eszközöket olyan buszrendszerek esetén használják,
+ahol több küldő van. Egy háromállapotú vezérlés által hajtott
+kapcsolás felfogható egyfajta multiplexerként is.</value>
   </data>
   <data name="ToolTipSensorManualValue" xml:space="preserve">
     <value>Írj be egy hexadecimális értéket, majd nyomd le az entert</value>
