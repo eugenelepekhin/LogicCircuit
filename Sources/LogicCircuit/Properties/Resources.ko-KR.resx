@@ -1186,4 +1186,136 @@
   <data name="WireDisplayDisconnected" xml:space="preserve">
     <value>와이어가 연결되지 않았습니다.</value>
   </data>
+  <data name="CaptionPinSide" xml:space="preserve">
+    <value>핀 방향</value>
+  </data>
+  <data name="TitlePinSide" xml:space="preserve">
+    <value>핀 방향:</value>
+  </data>
+  <data name="ToolTipDevicePinSide" xml:space="preserve">
+    <value>핀의 방향을 선택하십시오.</value>
+  </data>
+  <data name="NameSensor" xml:space="preserve">
+    <value>센서</value>
+  </data>
+  <data name="ToolTipSensor" xml:space="preserve">
+    <value>센서 {0}</value>
+  </data>
+  <data name="CaptionSensorType" xml:space="preserve">
+    <value>센서 종류</value>
+  </data>
+  <data name="SensorTypeManual" xml:space="preserve">
+    <value>직접입력</value>
+  </data>
+  <data name="SensorTypeRandom" xml:space="preserve">
+    <value>랜덤생성</value>
+  </data>
+  <data name="SensorTypeSeries" xml:space="preserve">
+    <value>연속값</value>
+  </data>
+  <data name="ToolTipSensorBitWidth" xml:space="preserve">
+    <value>센서의 비트폭을 선택하십시오.</value>
+  </data>
+  <data name="ToolTipSensorNotation" xml:space="preserve">
+    <value>센서 이름을 입력하십시오.</value>
+  </data>
+  <data name="ToolTipSensorType" xml:space="preserve">
+    <value>센서 데이터 생성 방법을 선택하십시오.</value>
+  </data>
+  <data name="TitleSensorType" xml:space="preserve">
+    <value>센서 종류:</value>
+  </data>
+  <data name="ErrorBadInterval" xml:space="preserve">
+    <value>최솟값은 최댓값보다 같거나 작아야 합니다.</value>
+  </data>
+  <data name="ErrorBadPositiveNumber" xml:space="preserve">
+    <value>0보다 커야 합니다.</value>
+  </data>
+  <data name="ErrorEmptySeries" xml:space="preserve">
+    <value>연속값을 입력해야 합니다.</value>
+  </data>
+  <data name="ErrorSeriesItem" xml:space="preserve">
+    <value>{0}에 오류. 콜론(:)으로 구분되는 16진수 쌍이어야 합니다.</value>
+  </data>
+  <data name="ErrorSeriesItemOrder" xml:space="preserve">
+    <value>{0}에 오류. 이전 값보다 다음 주기 값이 커야 합니다.</value>
+  </data>
+  <data name="TitleLoopSeries" xml:space="preserve">
+    <value>연속값 반복</value>
+  </data>
+  <data name="TitleSensorRandomMax" xml:space="preserve">
+    <value>최대 주기</value>
+  </data>
+  <data name="TitleSensorRandomMin" xml:space="preserve">
+    <value>최소 주기</value>
+  </data>
+  <data name="TitleSeries" xml:space="preserve">
+    <value>연속값:</value>
+  </data>
+  <data name="ToolTipSensorRandomMax" xml:space="preserve">
+    <value>센서값이 변경되는 주기의 최솟값을 입력하십시오.</value>
+  </data>
+  <data name="ToolTipSensorRandomMin" xml:space="preserve">
+    <value>센서값이 변경되는 주기의 최댓값을 입력하십시오.</value>
+  </data>
+  <data name="ToolTipSeriesData" xml:space="preserve">
+    <value>센서 연속값을 &lt;주기&gt;:&lt;값&gt; 형태로 입력하십시오. 주기와 값은 모두 16진수이어야 합니다. 주기가 짝수나 0이면 클럭이 0에서 1로 바뀔때 값이 바뀌고 홀수라면 클럭이 1에서 0으로 바뀔때 값이 바뀝니다.</value>
+  </data>
+  <data name="NameSound" xml:space="preserve">
+    <value>버저</value>
+  </data>
+  <data name="ToolTipSound" xml:space="preserve">
+    <value>버저 {0}</value>
+  </data>
+  <data name="ToolTipSoundNotation" xml:space="preserve">
+    <value>버저 장치의 이름을 입력하십시오.</value>
+  </data>
+  <data name="CommandEditFind" xml:space="preserve">
+    <value>찾기</value>
+  </data>
+  <data name="TitleFind" xml:space="preserve">
+    <value>회로 찾기</value>
+  </data>
+  <data name="TitleSearch" xml:space="preserve">
+    <value>검색</value>
+  </data>
+  <data name="TitleSearchPattern" xml:space="preserve">
+    <value>찾을 내용:</value>
+  </data>
+  <data name="ToolTipDescriptorClock" xml:space="preserve">
+    <value>0과 1을 주기적으로 반복하는 신호를 생성하는 것으로, 회로의 동작을 조정한다.</value>
+  </data>
+  <data name="ToolTipDescriptorPin" xml:space="preserve">
+    <value>다른 회로와 연결하여 데이터를 주고 받는 연결단이다. 회로 심볼에서 보이게 될 핀의 상대 위치(위, 아래, 왼쪽, 오른쪽)를 변경할 수 있다.</value>
+  </data>
+  <data name="ToolTipDescriptorProbe" xml:space="preserve">
+    <value>프로브를 추가하여 연결하면 전원을 켠 회로의 현재 상태를 프로브 위에서 확인할 수 있다. 프로브를 더블클릭하거나 오실로스코프에서 보면 상태값의 히스토리를 볼 수 있다.</value>
+  </data>
+  <data name="ToolTipDescriptorSensor" xml:space="preserve">
+    <value>미리 정한 연속값 또는 랜덤값, 직접 입력한 값 형태로 "외부 소스"에서 데이터를 받는다.</value>
+  </data>
+  <data name="ToolTipDescriptorSplitter" xml:space="preserve">
+    <value>와이어 묶음을 만들거나 묶음을 개별 와이어로 분리한다. 분리기와 멀티 비트 핀을 사용하면 회로를 훨씬 단순화시킬 수 있고 이해하기 좋다.</value>
+  </data>
+  <data name="ToolTipDescriptorText" xml:space="preserve">
+    <value>회로에 대한 설명을 위해 노트를 넣을 수 있다. 웹사이트 링크나 그림도 가능하다.</value>
+  </data>
+  <data name="ToolTipDescriptorTriState" xml:space="preserve">
+    <value>1과 0, 하이 임피던스(Z)의 세 가지 출력을 갖는다.
+하이 임피던스 상태는 1,0만 갖는 논리에서는 아무런 역할이 없다.
+이런 장치는 CPU의 버스에서 같이 여러 소스가 데이터를 보내려고 할 때 사용된다.
+Tri-state와 적절한 제어 회로를 함께 써서 멀티플렉서를 만들 수 있다.</value>
+  </data>
+  <data name="ToolTipSensorManualValue" xml:space="preserve">
+    <value>16진수 값을 입력하고 엔터를 누르십시오.</value>
+  </data>
+  <data name="ErrorBadHexNumber" xml:space="preserve">
+    <value>잘못된 16진수 값</value>
+  </data>
+  <data name="TitleSensorManualInitialValue" xml:space="preserve">
+    <value>초기 값:</value>
+  </data>
+  <data name="ToolTipSensorManualInitialValue" xml:space="preserve">
+    <value>초기 값을 16진수로 입력하십시오.</value>
+  </data>
 </root>
