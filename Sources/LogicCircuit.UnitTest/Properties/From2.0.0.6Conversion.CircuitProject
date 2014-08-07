@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<lc:CircuitProject xmlns:lc="http://LogicCircuit.net/2.0.0.6/CircuitProject.xsd">
+	<lc:Project>
+		<lc:ProjectId>ec8e00a2-6fc9-408a-aefc-dc7ef94c4a41</lc:ProjectId>
+		<lc:Name>Test Circuit Project</lc:Name>
+		<lc:Description>Project Description
+&lt;xml&gt;text&lt;/xml&gt;</lc:Description>
+		<lc:LogicalCircuitId>81b563d9-6a68-4505-949f-1a0a1d2c9c0f</lc:LogicalCircuitId>
+	</lc:Project>
+	<lc:LogicalCircuit>
+		<lc:LogicalCircuitId>81b563d9-6a68-4505-949f-1a0a1d2c9c0f</lc:LogicalCircuitId>
+		<lc:Name>Test Circuit</lc:Name>
+		<lc:Notation>TC</lc:Notation>
+		<lc:Description>Test Circuit description
+&lt;xml&gt;node&lt;/xml&gt;</lc:Description>
+	</lc:LogicalCircuit>
+	<lc:TextNote>
+		<lc:TextNoteId>e2877b61-6432-40f3-89e8-da421db42d2b</lc:TextNoteId>
+		<lc:LogicalCircuitId>81b563d9-6a68-4505-949f-1a0a1d2c9c0f</lc:LogicalCircuitId>
+		<lc:X>1</lc:X>
+		<lc:Y>1</lc:Y>
+		<lc:Width>21</lc:Width>
+		<lc:Height>4</lc:Height>
+		<lc:Note>&lt;FlowDocument PagePadding="5,0,5,0" AllowDrop="True" NumberSubstitution.CultureSource="User" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;&lt;Paragraph&gt;Test of conversion 2.0.0.6 projects&lt;/Paragraph&gt;&lt;Paragraph&gt;This renames Project and LogicalCircuit Description to Note&lt;/Paragraph&gt;&lt;/FlowDocument&gt;</lc:Note>
+	</lc:TextNote>
+</lc:CircuitProject>

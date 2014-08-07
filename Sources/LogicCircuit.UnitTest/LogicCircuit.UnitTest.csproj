@@ -72,6 +72,7 @@
     <Compile Include="ResourcesTest.cs" />
     <Compile Include="SettingsTest.cs" />
     <Compile Include="SensorTest.cs" />
+    <Compile Include="ConversionTest.cs" />
     <Compile Include="XmlLoadTest.cs" />
     <Compile Include="Socket.cs" />
     <Compile Include="SplitterConverterTest.cs" />
@@ -102,6 +103,7 @@
     <None Include="Properties\CircuitTestSocketTest.CircuitProject" />
     <None Include="Properties\ProbeConvertTest.CircuitProject" />
     <None Include="Properties\SensorTests.CircuitProject" />
+    <None Include="Properties\From2.0.0.6Conversion.CircuitProject" />
     <Content Include="Properties\Splitter Conversion.CircuitProject" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

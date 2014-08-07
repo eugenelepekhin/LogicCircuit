@@ -140,6 +140,25 @@ namespace LogicCircuit.UnitTest.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;lc:CircuitProject xmlns:lc=&quot;http://LogicCircuit.net/2.0.0.6/CircuitProject.xsd&quot;&gt;
+        ///	&lt;lc:Project&gt;
+        ///		&lt;lc:ProjectId&gt;ec8e00a2-6fc9-408a-aefc-dc7ef94c4a41&lt;/lc:ProjectId&gt;
+        ///		&lt;lc:Name&gt;Test Circuit Project&lt;/lc:Name&gt;
+        ///		&lt;lc:Description&gt;Project Description
+        ///&amp;lt;xml&amp;gt;text&amp;lt;/xml&amp;gt;&lt;/lc:Description&gt;
+        ///		&lt;lc:LogicalCircuitId&gt;81b563d9-6a68-4505-949f-1a0a1d2c9c0f&lt;/lc:LogicalCircuitId&gt;
+        ///	&lt;/lc:Project&gt;
+        ///	&lt;lc:LogicalCircuit&gt;
+        ///		&lt;lc:LogicalCircuitId&gt;81b563d9-6a68-4505-949f-1a0a1d2c9 [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string From2_0_0_6Conversion {
+            get {
+                return ResourceManager.GetString("From2_0_0_6Conversion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;lc:CircuitProject xmlns:lc=&quot;http://LogicCircuit.net/2.0.0.7/CircuitProject.xsd&quot;&gt;
         ///	&lt;lc:Project&gt;
         ///		&lt;lc:ProjectId&gt;272db380-618e-434d-952e-6ff115083f9b&lt;/lc:ProjectId&gt;
@@ -207,9 +226,9 @@ namespace LogicCircuit.UnitTest.Properties {
         ///	&lt;/lc:Project&gt;
         ///	&lt;lc:LogicalCircuit&gt;
         ///		&lt;lc:LogicalCircuitId&gt;25252f20-f83f-4396-8e66-b52687f115d1&lt;/lc:LogicalCircuitId&gt;
-        ///		&lt;lc:Name&gt;LoopTest&lt;/lc:Name&gt;
+        ///		&lt;lc:Name&gt;Loop Test&lt;/lc:Name&gt;
         ///		&lt;lc:Notation&gt;loop&lt;/lc:Notation&gt;
-        ///	 [rest of string was truncated]&quot;;.
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string SensorTests {
             get {
