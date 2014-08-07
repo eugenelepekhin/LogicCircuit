@@ -1259,7 +1259,9 @@
     <value>센서값이 변경되는 주기의 최댓값을 입력하십시오.</value>
   </data>
   <data name="ToolTipSeriesData" xml:space="preserve">
-    <value>센서 연속값을 &lt;주기&gt;:&lt;값&gt; 형태로 입력하십시오. 주기와 값은 모두 16진수이어야 합니다. 주기가 짝수나 0이면 클럭이 0에서 1로 바뀔때 값이 바뀌고 홀수라면 클럭이 1에서 0으로 바뀔때 값이 바뀝니다.</value>
+    <value>센서 연속값을 &lt;주기&gt;:&lt;값&gt; 형태로 입력하십시오.
+주기와 값은 모두 16진수이어야 합니다. 주기가 짝수나 0이면 클럭이 0에서 1로
+바뀔때 값이 바뀌고 홀수라면 클럭이 1에서 0으로 바뀔때 값이 바뀝니다.</value>
   </data>
   <data name="NameSound" xml:space="preserve">
     <value>버저</value>
@@ -1286,16 +1288,19 @@
     <value>0과 1을 주기적으로 반복하는 신호를 생성하는 것으로, 회로의 동작을 조정한다.</value>
   </data>
   <data name="ToolTipDescriptorPin" xml:space="preserve">
-    <value>다른 회로와 연결하여 데이터를 주고 받는 연결단이다. 회로 심볼에서 보이게 될 핀의 상대 위치(위, 아래, 왼쪽, 오른쪽)를 변경할 수 있다.</value>
+    <value>다른 회로와 연결하여 데이터를 주고 받는 연결단이다.
+회로 심볼에서 보이게 될 핀의 상대 위치(위, 아래, 왼쪽, 오른쪽)를 변경할 수 있다.</value>
   </data>
   <data name="ToolTipDescriptorProbe" xml:space="preserve">
-    <value>프로브를 추가하여 연결하면 전원을 켠 회로의 현재 상태를 프로브 위에서 확인할 수 있다. 프로브를 더블클릭하거나 오실로스코프에서 보면 상태값의 히스토리를 볼 수 있다.</value>
+    <value>프로브를 추가하여 연결하면 전원을 켠 회로의 현재 상태를 프로브 위에서 확인할 수 있다.
+프로브를 더블클릭하거나 오실로스코프에서 보면 상태값의 히스토리를 볼 수 있다.</value>
   </data>
   <data name="ToolTipDescriptorSensor" xml:space="preserve">
     <value>미리 정한 연속값 또는 랜덤값, 직접 입력한 값 형태로 "외부 소스"에서 데이터를 받는다.</value>
   </data>
   <data name="ToolTipDescriptorSplitter" xml:space="preserve">
-    <value>와이어 묶음을 만들거나 묶음을 개별 와이어로 분리한다. 분리기와 멀티 비트 핀을 사용하면 회로를 훨씬 단순화시킬 수 있고 이해하기 좋다.</value>
+    <value>와이어 묶음을 만들거나 묶음을 개별 와이어로 분리한다.
+분리기와 멀티 비트 핀을 사용하면 회로를 훨씬 단순화시킬 수 있고 이해하기 좋다.</value>
   </data>
   <data name="ToolTipDescriptorText" xml:space="preserve">
     <value>회로에 대한 설명을 위해 노트를 넣을 수 있다. 웹사이트 링크나 그림도 가능하다.</value>
