@@ -548,7 +548,7 @@
     <comment>{int column}</comment>
   </data>
   <data name="LedMatrixRowIndividual" xml:space="preserve">
-    <value>בחירת כל LED בשורה ‏#{0}</value>
+    <value>בחירת כל נורה בשורה ‏# ‏{0}‏</value>
     <comment>{int row}</comment>
   </data>
   <data name="LedMatrixRowSelector" xml:space="preserve">
@@ -691,7 +691,7 @@
     <value>קבוע</value>
   </data>
   <data name="NameLedMatrix" xml:space="preserve">
-    <value>מטריצת LED‏</value>
+    <value>מטריצת נורות ‏LED‏</value>
   </data>
   <data name="NamePin" xml:space="preserve">
     <value>פין</value>
@@ -1104,7 +1104,7 @@
     <value>שם הכפתור</value>
   </data>
   <data name="ToolTipColumns" xml:space="preserve">
-    <value>כמות העמודות של מטריצת ה‏LED‏</value>
+    <value>כמות העמודות של מטריצת ה‏נורות</value>
   </data>
   <data name="ToolTipConstant" xml:space="preserve">
     <value>קבוע‏ {1:X} ‏ברוחב‏ {0} ‏סיביות</value>
@@ -1155,7 +1155,7 @@
     <value>אם הכפתור מוגדר כמתג, הוא ישנה את מצבו מדלוק לכבוי בלחיצה, אחרת יהיה דלוק רק כל עוד הוא לחוץ ע"י העכבר.‏</value>
   </data>
   <data name="ToolTipLedMatrix" xml:space="preserve">
-    <value>מטריצת ‏LED‏ בגודל ‏{0}‏ על ‏{1}‏ עם ‏{2} ‏סיביות עבור כל‏ LED‏ ({3} ‏צבעים)‏</value>
+    <value>מטריצה בגודל ‏{0}‏ על ‏{1}‏ עם ‏{2} ‏סיביות עבור כל‏ נורה‏ ({3} ‏צבעים)‏</value>
     <comment>{int rows, int columns, int bitsPerLed, int colors}</comment>
   </data>
   <data name="ToolTipLedMatrixType" xml:space="preserve">
@@ -1196,7 +1196,7 @@
     <comment>{int address, int data}</comment>
   </data>
   <data name="ToolTipRows" xml:space="preserve">
-    <value>מספר השורות במטריצת ה‏LED‏</value>
+    <value>מספר השורות במטריצת ה‏נורות</value>
   </data>
   <data name="ToolTipSaveData" xml:space="preserve">
     <value>שמירת נתונים לקובץ</value>
@@ -1249,5 +1249,143 @@
   </data>
   <data name="WriteOn1" xml:space="preserve">
     <value>עליה מ0 ל1‏</value>
+  </data>
+  <data name="CaptionPinSide" xml:space="preserve">
+    <value>כיוון הפין</value>
+  </data>
+  <data name="TitlePinSide" xml:space="preserve">
+    <value>_כיוון הפין‏:‏</value>
+  </data>
+  <data name="ToolTipDevicePinSide" xml:space="preserve">
+    <value>בחירת הכיוון שבו יימצא פין החיבור</value>
+  </data>
+  <data name="NameSensor" xml:space="preserve">
+    <value>חיישן</value>
+  </data>
+  <data name="ToolTipSensor" xml:space="preserve">
+    <value>חיישן ‏{0}‏</value>
+  </data>
+  <data name="CaptionSensorType" xml:space="preserve">
+    <value>סוג חיישן</value>
+  </data>
+  <data name="SensorTypeManual" xml:space="preserve">
+    <value>ידני</value>
+  </data>
+  <data name="SensorTypeRandom" xml:space="preserve">
+    <value>אקראי</value>
+  </data>
+  <data name="SensorTypeSeries" xml:space="preserve">
+    <value>סדרה</value>
+  </data>
+  <data name="ToolTipSensorBitWidth" xml:space="preserve">
+    <value>בחירת רוחב הסיביות של החיישן</value>
+  </data>
+  <data name="ToolTipSensorNotation" xml:space="preserve">
+    <value>הסימון שיוצג על החיישן</value>
+  </data>
+  <data name="ToolTipSensorType" xml:space="preserve">
+    <value>בחירת מקור הנתונים שהחיישן יספק</value>
+  </data>
+  <data name="TitleSensorType" xml:space="preserve">
+    <value>סו_ג החיישן‏:‏</value>
+  </data>
+  <data name="ErrorBadInterval" xml:space="preserve">
+    <value>הערך המינימלי צריך להיות קטן יותר מהערך המקסימלי</value>
+  </data>
+  <data name="ErrorBadPositiveNumber" xml:space="preserve">
+    <value>הערך חייב להיות גדול מ0</value>
+  </data>
+  <data name="ErrorEmptySeries" xml:space="preserve">
+    <value>הסדרה אינה יכולה להיות ריקה</value>
+  </data>
+  <data name="ErrorSeriesItem" xml:space="preserve">
+    <value>שגיאה ב‏{0}‏.‏ הערך צריך להיות זוג מספרים הקסדצימליים מופרדים ב נקודתיים ‏(‏:‏)‏</value>
+  </data>
+  <data name="ErrorSeriesItemOrder" xml:space="preserve">
+    <value>שגיאה ב‏{0}‏.‏ מספר מחזור בסדרה לא יכול להיות קטן יותר ממספר מחזור של איבר שקדם לו בסדרה‏.‏</value>
+  </data>
+  <data name="TitleLoopSeries" xml:space="preserve">
+    <value>ל_חזור על הרצף</value>
+  </data>
+  <data name="TitleSensorRandomMax" xml:space="preserve">
+    <value>מ_קסימום מחזורים‏:‏</value>
+  </data>
+  <data name="TitleSensorRandomMin" xml:space="preserve">
+    <value>מ_ינימום מחזורים‏:‏</value>
+  </data>
+  <data name="TitleSeries" xml:space="preserve">
+    <value>ס_דרה‏:‏</value>
+  </data>
+  <data name="ToolTipSensorRandomMax" xml:space="preserve">
+    <value>מספר מחזורים מקסימלי לפני שהחיישן ישנה את הערך שלו‏.‏</value>
+  </data>
+  <data name="ToolTipSensorRandomMin" xml:space="preserve">
+    <value>מספר מחזורים מינימלי לפני שהחיישן ישנה את הערך שלו‏.‏</value>
+  </data>
+  <data name="ToolTipSeriesData" xml:space="preserve">
+    <value>נא להזין סדרת ערכים בפורמט ‏&lt;‏מחזור‏&gt;‏:‏&lt;‏ערך‏&gt;‏
+שני הערכים הם מספרים הקסדצימליים‏.‏ 
+כאשר מספר המחזור הוא אפס או מספר זוגי‏,‏ זהו שינוי השעון מ‏0‏ ל ‏1‏,‏ כאשר מספר המחזור הוא אי זוגי‏,‏ זהו שינוי השעון מ‏1‏ ל‏0‏.‏</value>
+  </data>
+  <data name="NameSound" xml:space="preserve">
+    <value>זמזם</value>
+  </data>
+  <data name="ToolTipSound" xml:space="preserve">
+    <value>זמזם ‏{0}‏</value>
+  </data>
+  <data name="ToolTipSoundNotation" xml:space="preserve">
+    <value>הסימון שיוצג על הזמזם‏.‏</value>
+  </data>
+  <data name="CommandEditFind" xml:space="preserve">
+    <value>חיפוש</value>
+  </data>
+  <data name="TitleFind" xml:space="preserve">
+    <value>חיפוש מעגל</value>
+  </data>
+  <data name="TitleSearch" xml:space="preserve">
+    <value>חיפוש</value>
+  </data>
+  <data name="TitleSearchPattern" xml:space="preserve">
+    <value>ערך לחיפוש‏:‏</value>
+  </data>
+  <data name="ToolTipDescriptorClock" xml:space="preserve">
+    <value>מייצר פלט שנע מ‏0‏ ל‏1‏ וחזרה‏.‏ 
+משמש בסנכרון ותיאום הפעילות של מעגלים‏.‏</value>
+  </data>
+  <data name="ToolTipDescriptorPin" xml:space="preserve">
+    <value>משמש ליצירת מחברים שמעגלים יכולים להשתמש בהם כדי לקבל קלט אל תוך או לספק פלט מתוך המעגל‏.‏ 
+שינוי מיקום הפינים במעגל ישנה את מיקומם היחסי של הפינים ברכיב‏.‏</value>
+  </data>
+  <data name="ToolTipDescriptorProbe" xml:space="preserve">
+    <value>הוספת גשוש למעגל מאפשרת לצפות במצב נתוניו של מעגל דלוק על פני הגשוש‏‏.‏
+להצגת הסטוריית ערכים עבור הגשוש ניתן ללחוץ עליו לחיצה כפולה‏‏‏,‏ או לראות את הנתונים במרשם התנודות‏.‏</value>
+  </data>
+  <data name="ToolTipDescriptorSensor" xml:space="preserve">
+    <value>מדמה מידע מתוך מקור חיצוני על ידי רשימת ערכים מוגדרת מראש‏,‏ רשימה אקראית‏,‏ או ערכים שמוזנים ידנית‏.‏</value>
+  </data>
+  <data name="ToolTipDescriptorSplitter" xml:space="preserve">
+    <value>מאפשר לאגד או להפריד מספר חוטים‏.‏
+שימוש במפצלים וחוטים מרובי סיביות יכול לפשט את הקריאות וקלות הבנייה של מעגל חשמלי‏.‏</value>
+  </data>
+  <data name="ToolTipDescriptorText" xml:space="preserve">
+    <value>ניתן למקם טקסט בכל מקום בדיאגרמה על מנת לספק הערות לגבי המעגל‏, ‏קישורים לאתרים רלוונטיים‏, ‏או על מנת לתאר את המעגל בעזרת תמונות‏.‏</value>
+  </data>
+  <data name="ToolTipDescriptorTriState" xml:space="preserve">
+    <value>יכול לספק 3 ערכי פלט שונים‏:‏ ‏1‏, ‏0‏, ועכבה חשמלית גבוהה‏.‏
+מצב העכבה החשמלית הגבוהה לא משחק תפקיד בלוגיקה הבינארית‏.‏
+הרכיבים האלו נמצאים בשימוש באפיקי הנתונים של מעבדים‏ כדי לאפשר למקורות שונים לשלוח נתונים‏.‏
+קבוצה של חוצצים תלת‏-‏מצביים כאלו עם רכיב בקרה מתאים יכולים לתפקד כמרבב‏.‏</value>
+  </data>
+  <data name="ToolTipSensorManualValue" xml:space="preserve">
+    <value>נא להזין ערך הקסדצימלי ולהקיש על אנטר‏.‏</value>
+  </data>
+  <data name="ErrorBadHexNumber" xml:space="preserve">
+    <value>מספר הקסדצימלי שגוי‏.‏</value>
+  </data>
+  <data name="TitleSensorManualInitialValue" xml:space="preserve">
+    <value>_ערך התחלתי‏:‏</value>
+  </data>
+  <data name="ToolTipSensorManualInitialValue" xml:space="preserve">
+    <value>נא להזין את הערך ההתחלתי כמספר הקסדצימלי‏.‏</value>
   </data>
 </root>
