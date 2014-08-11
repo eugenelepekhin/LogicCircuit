@@ -1192,4 +1192,156 @@ Les éléments sont : LED, Matrise de LED, Bouton, ou autre circuit logique.</va
   <data name="WireDisplayDisconnected" xml:space="preserve">
     <value>Le fil n'est pas connecté.</value>
   </data>
+  <data name="ToolTipDescriptorProbe" xml:space="preserve">
+    <value>Ajouter et connecter des sondes pour observer votre circuit
+état actuel du circuit actif sur la surface
+la sonde, historique de valeurs quand vous double cliquez le
+sonde ou voir cette donnée sur l'oscilloscope.</value>
+  </data>
+  <data name="ToolTipDescriptorSplitter" xml:space="preserve">
+    <value>Permet de créer le faisceau de cable ou
+de le séparez en cables individuels.
+Utiliser des séparateurs et des broches multi-bit peut
+grandement simplifier le dessin et
+d'améliorer la compréhention du circuit.</value>
+  </data>
+  <data name="NameSound" xml:space="preserve">
+    <value>Buzzer</value>
+  </data>
+  <data name="ToolTipSound" xml:space="preserve">
+    <value>Buzzer {0}</value>
+  </data>
+  <data name="ToolTipDescriptorTriState" xml:space="preserve">
+    <value>Peut avoir trois différentes sorties: 1, 0, et haute impédance (Z).
+L'état de haute impédance ne joue pas de rôle dans la logique,
+qui est uniquement binaire. Ces dispositifs sont utilisés avec les
+bus du CPU pour permettre la transmition de données par plusieurs sources.
+Un groupe de Trois-états pilote une ligne avec un contrôle approprié
+est clasiquement équivalent a un multiplexeur.</value>
+  </data>
+  <data name="ToolTipDevicePinSide" xml:space="preserve">
+    <value>Choisissez le coté où la broche sera disposée</value>
+  </data>
+  <data name="ToolTipSensorBitWidth" xml:space="preserve">
+    <value>Choisissez la largeur de bit du capteur</value>
+  </data>
+  <data name="ToolTipSensorType" xml:space="preserve">
+    <value>Choisissez ou le capteur prendra les données a fournir</value>
+  </data>
+  <data name="ToolTipSensorManualInitialValue" xml:space="preserve">
+    <value>Entrer la valeur initiale en hexadécimal.</value>
+  </data>
+  <data name="ToolTipSensorRandomMax" xml:space="preserve">
+    <value>Entrer la valeur maximale de cycle avant que le capteur change sa mesure.</value>
+  </data>
+  <data name="ToolTipSensorRandomMin" xml:space="preserve">
+    <value>Entrer la valeur minimale de cycle avant que le capteur change sa mesure.</value>
+  </data>
+  <data name="ToolTipSensorNotation" xml:space="preserve">
+    <value>Entrer le nom du capteur.</value>
+  </data>
+  <data name="ToolTipSoundNotation" xml:space="preserve">
+    <value>Entrer le nom du buzzer.</value>
+  </data>
+  <data name="ErrorSeriesItemOrder" xml:space="preserve">
+    <value>Erreur sur {0}. Chaque cycle doit être plus grand que le précédent.</value>
+  </data>
+  <data name="ErrorSeriesItem" xml:space="preserve">
+    <value>Erreur sur {0}. Cela doit être une paire de nombre hexadécimal séparé par :</value>
+  </data>
+  <data name="ErrorBadPositiveNumber" xml:space="preserve">
+    <value>Nombre supérieur a 0 attendu.</value>
+  </data>
+  <data name="CommandEditFind" xml:space="preserve">
+    <value>Trouver</value>
+  </data>
+  <data name="TitleFind" xml:space="preserve">
+    <value>Circuit trouvé</value>
+  </data>
+  <data name="TitleSearchPattern" xml:space="preserve">
+    <value>Trouvé:</value>
+  </data>
+  <data name="ToolTipDescriptorClock" xml:space="preserve">
+    <value>Le signal généré oscillera entre 0 et 1
+et sera utilisé pour coordonner les actions du circuit.</value>
+  </data>
+  <data name="TitleSensorManualInitialValue" xml:space="preserve">
+    <value>Valeur initiale:</value>
+  </data>
+  <data name="SensorTypeManual" xml:space="preserve">
+    <value>Manuel</value>
+  </data>
+  <data name="ErrorBadInterval" xml:space="preserve">
+    <value>Le minimum doit être plus petit ou égal au maximum.</value>
+  </data>
+  <data name="TitleSensorRandomMax" xml:space="preserve">
+    <value>Cycles maximum:</value>
+  </data>
+  <data name="TitleSensorRandomMin" xml:space="preserve">
+    <value>Cycles minimum:</value>
+  </data>
+  <data name="ErrorBadHexNumber" xml:space="preserve">
+    <value>Nombre hexadécimal invalide</value>
+  </data>
+  <data name="CaptionPinSide" xml:space="preserve">
+    <value>Coté de broche</value>
+  </data>
+  <data name="TitlePinSide" xml:space="preserve">
+    <value>Coté de broche:</value>
+  </data>
+  <data name="ToolTipDescriptorText" xml:space="preserve">
+    <value>Placez la note textuelle où vous voulez sur le diagrame
+pour commenter votre circuit, donner des liens utiles vers n'importe
+quels sites et décorer votre circuit avec des images.</value>
+  </data>
+  <data name="ToolTipSeriesData" xml:space="preserve">
+    <value>S'il vous plait, donnez des listes de mesures sous la forme &lt;cycle&gt;:&lt;valeur&gt;
+en valeur hexadecimale pour les deux. Quand le cycle ne change pas ou égal à 0,
+alors cela correspond au changement de l'horloge de 0 vers 1,
+et quand il est impair, l'horloge passe de 1 vers 0.</value>
+  </data>
+  <data name="ToolTipDescriptorSensor" xml:space="preserve">
+    <value>Fournir des données d'une "source externe"
+sous la forme d'une liste prédéfinie,
+choisie aléatoirement, ou entrées manuellement.</value>
+  </data>
+  <data name="SensorTypeRandom" xml:space="preserve">
+    <value>Aléatoire</value>
+  </data>
+  <data name="TitleLoopSeries" xml:space="preserve">
+    <value>Répéter les séries</value>
+  </data>
+  <data name="TitleSearch" xml:space="preserve">
+    <value>Chercher</value>
+  </data>
+  <data name="NameSensor" xml:space="preserve">
+    <value>Capteur</value>
+  </data>
+  <data name="ToolTipSensor" xml:space="preserve">
+    <value>Capteur {0}</value>
+  </data>
+  <data name="CaptionSensorType" xml:space="preserve">
+    <value>Type de capteur</value>
+  </data>
+  <data name="SensorTypeSeries" xml:space="preserve">
+    <value>Séries</value>
+  </data>
+  <data name="TitleSensorType" xml:space="preserve">
+    <value>Type de capteur:</value>
+  </data>
+  <data name="ErrorEmptySeries" xml:space="preserve">
+    <value>Les séries ne peuvent pas être vides.</value>
+  </data>
+  <data name="TitleSeries" xml:space="preserve">
+    <value>Séries:</value>
+  </data>
+  <data name="ToolTipSensorManualValue" xml:space="preserve">
+    <value>Ecrivez la valeur hexadécimale et appuyez sur Entrer.</value>
+  </data>
+  <data name="ToolTipDescriptorPin" xml:space="preserve">
+    <value>Utilisé pour créer un connecteur que les autres circuits pourront
+utiliser en envoyant ou recevant des données de et vers le circuit actuel.
+Agencez les broches dans le circuit pour changer leurs
+positions relatives sur le symbole du circuit.</value>
+  </data>
 </root>
