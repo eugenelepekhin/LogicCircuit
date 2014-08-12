@@ -29,18 +29,24 @@ namespace LogicCircuit {
 			return Math.Max(1, Math.Min(value, GraphicsArray.MaxHeight));
 		}
 
-		public int AddressBitWidth {
-			get {
-				int bits = this.Width * this.Height * this.BitsPerPixel;
-				int d = this.DataBitWidth;
-				int cells = bits / d + (((bits % d) == 0) ? 0 : 1);
-				int width = 0;
-				while(cells != 0) {
-					width++;
-					cells >>= 1;
-				}
-				return width;
+		public static int NumberCellsFor(int dataBitWidth, int bitsPerPixel, int width, int height) {
+			int w = width * bitsPerPixel;
+			int stride = w / dataBitWidth + (((w % dataBitWidth) == 0) ? 0 : 1);
+			return stride * height;
+		}
+
+		public static int AddressBitsFor(int dataBitWidth, int bitsPerPixel, int width, int height) {
+			int bits = 0;
+			int cells = GraphicsArray.NumberCellsFor(dataBitWidth, bitsPerPixel, width, height);
+			while(cells != 0) {
+				bits++;
+				cells >>= 1;
 			}
+			return bits;
+		}
+
+		public int AddressBitWidth {
+			get { return GraphicsArray.AddressBitsFor(this.DataBitWidth, this.BitsPerPixel, this.Width, this.Height); }
 		}
 
 		public override string Name {
