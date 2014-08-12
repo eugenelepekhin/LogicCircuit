@@ -2889,5 +2889,36 @@ namespace LogicCircuit.Properties {
  		public static string GraphicsArrayNotation {
 			get { return ResourceManager.GetString("GraphicsArrayNotation", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Bits per pixel.
+		/// </summary>
+ 		public static string CaptionGraphicsArrayBPP {
+			get { return ResourceManager.GetString("CaptionGraphicsArrayBPP", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Dot matrix display can show data stored in
+		/// the internal memory and allows to select
+		/// size and color depth/scheme. Used with in
+		/// advanced circuits like computers or controllers..
+		/// </summary>
+ 		public static string ToolTipDescriptorGraphicsArray {
+			get { return ResourceManager.GetString("ToolTipDescriptorGraphicsArray", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to {0} {1}x{2} with {3} bit(s) per pixel ({4} colors).
+		/// </summary>
+ 		public static string ToolTipGraphicsArray(string name, int width, int height, int bitsPerPixel, int colors) {
+			return string.Format(Culture, ResourceManager.GetString("ToolTipGraphicsArray", Culture), name, width, height, bitsPerPixel, colors);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Choose number bits per pixel.
+		/// </summary>
+ 		public static string ToolTipGraphicsArrayBPP {
+			get { return ResourceManager.GetString("ToolTipGraphicsArrayBPP", Culture); }
+		}
 	}
 }

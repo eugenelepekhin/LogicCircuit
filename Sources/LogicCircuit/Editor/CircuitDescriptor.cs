@@ -446,6 +446,22 @@ namespace LogicCircuit {
 		}
 	}
 
+	public class GraphicsArrayDescriptor : IOCircuitDescriptor<GraphicsArray> {
+		private static readonly IEnumerable<int> bitsPerPixel = new int[] { 1, 2, 3, 4, 8 };
+		public static IEnumerable<int> BitsPerPixelRange { get { return GraphicsArrayDescriptor.bitsPerPixel; } }
+
+		public int BitsPerPixel { get; set; }
+
+		public GraphicsArrayDescriptor(CircuitProject circuitProject) : base(circuitProject.GraphicsArraySet.Create(1, 85, 64)) {
+			this.Circuit.Note = Properties.Resources.ToolTipDescriptorGraphicsArray;
+			this.BitsPerPixel = this.Circuit.BitsPerPixel;
+		}
+
+		protected override GraphicsArray GetCircuitToDrop(CircuitProject circuitProject) {
+			return circuitProject.GraphicsArraySet.Create(this.BitsPerPixel, GraphicsArrayData.WidthField.Field.DefaultValue, GraphicsArrayData.HeightField.Field.DefaultValue);
+		}
+	}
+
 	public class PinDescriptor : IOCircuitDescriptor<Pin> {
 		private static readonly EnumDescriptor<PinSide>[] pinSideRange = new EnumDescriptor<PinSide>[] {
 			new EnumDescriptor<PinSide>(LogicCircuit.PinSide.Left, Properties.Resources.PinSideLeft),

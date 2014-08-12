@@ -60,7 +60,10 @@ namespace LogicCircuit {
 		}
 
 		public override string ToolTip {
-			get { return Circuit.BuildToolTip(this.Name, this.Note); }
+			get {
+				int bpp = this.BitsPerPixel;
+				return Circuit.BuildToolTip(Properties.Resources.ToolTipGraphicsArray(this.Name, this.Width, this.Height, bpp, 1 << bpp), this.Note);
+			}
 		}
 
 		public override string Category {
@@ -91,17 +94,21 @@ namespace LogicCircuit {
 			return target.CircuitProject.GraphicsArraySet.Copy(this);
 		}
 
+		private static int PixelsToGridSize(int pixels) {
+			return pixels / Symbol.GridSize + (((pixels % Symbol.GridSize) == 0) ? 0 : 1);
+		}
+
 		protected override int CircuitSymbolWidth(int defaultWidth) {
-			return base.CircuitSymbolWidth(3);
+			return base.CircuitSymbolWidth(Math.Max(2, GraphicsArray.PixelsToGridSize(this.Width)));
 		}
 
 		protected override int CircuitSymbolHeight(int defaultHeight) {
-			return base.CircuitSymbolHeight(3);
+			return base.CircuitSymbolHeight(Math.Max(3, GraphicsArray.PixelsToGridSize(this.Height)));
 		}
 
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
 			Tracer.Assert(this == symbol.Circuit);
-			return symbol.CreateSimpleGlyph(SymbolShape.Sound, symbol);
+			return symbol.CreateSimpleGlyph(SymbolShape.GraphicsArray, symbol);
 		}
 
 		partial void OnGraphicsArrayChanged() {
@@ -133,20 +140,16 @@ namespace LogicCircuit {
 			DevicePin address = this.CircuitProject.DevicePinSet.Create(graphicsArray, PinType.Input, graphicsArray.AddressBitWidth);
 			address.PinSide = PinSide.Left;
 			address.Name = Properties.Resources.MemoryAddressPinName;
-			address.JamNotation = Properties.Resources.MemoryAddressPinNotation;
 			DevicePin data = this.CircuitProject.DevicePinSet.Create(graphicsArray, PinType.Output, graphicsArray.DataBitWidth);
 			data.PinSide = PinSide.Right;
 			data.Name = Properties.Resources.MemoryDataPinName;
-			data.JamNotation = Properties.Resources.MemoryDataPinNotation;
 
 			DevicePin dataIn = this.CircuitProject.DevicePinSet.Create(graphicsArray, PinType.Input, graphicsArray.DataBitWidth);
 			dataIn.PinSide = PinSide.Left;
 			dataIn.Name = Properties.Resources.MemoryDataInPinName;
-			dataIn.JamNotation = Properties.Resources.MemoryDataPinNotation;
 			DevicePin write = this.CircuitProject.DevicePinSet.Create(graphicsArray, PinType.Input, 1);
 			write.PinSide = PinSide.Bottom;
 			write.Name = Properties.Resources.MemoryWritePinName(graphicsArray.WriteOn1 ? Properties.Resources.WriteOn1 : Properties.Resources.WriteOn0);
-			write.JamNotation = Properties.Resources.MemoryWritePinNotation;
 			graphicsArray.SetPins(address, data, dataIn, write);
 			GraphicsArraySet.UpdateWritePinName(graphicsArray);
 		}

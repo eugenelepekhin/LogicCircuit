@@ -1,0 +1,9 @@
+﻿<Border
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:properties="clr-namespace:LogicCircuit.Properties"
+	FlowDirection="LeftToRight"
+	Background="{StaticResource GraphicsArrayBackground}"
+>
+	<Image Name="ProbeView" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+</Border>

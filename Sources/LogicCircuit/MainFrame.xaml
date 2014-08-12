@@ -581,6 +581,26 @@
 								</StackPanel>
 							</DataTemplate>
 
+							<DataTemplate DataType="{x:Type lc:GraphicsArrayDescriptor}">
+								<StackPanel Style="{StaticResource DescriptorPanel}">
+									<ContentControl/>
+									<Grid Margin="3,3,8,3" VerticalAlignment="Center">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="Auto" MinWidth="65"/>
+											<ColumnDefinition Width="Auto"/>
+										</Grid.ColumnDefinitions>
+										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto"/>
+										</Grid.RowDefinitions>
+										<ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{x:Static lc:GraphicsArrayDescriptor.BitsPerPixelRange}" SelectedItem="{Binding Path=BitsPerPixel}"
+											ToolTip="{x:Static properties:Resources.ToolTipGraphicsArrayBPP}"
+										/>
+										<TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Static properties:Resources.CaptionGraphicsArrayBPP}" Margin="8,0,0,0"/>
+									</Grid>
+									<TextBlock Text="{Binding Path=Circuit.Notation}" VerticalAlignment="Center"/>
+								</StackPanel>
+							</DataTemplate>
+
 							<DataTemplate DataType="{x:Type lc:PinDescriptor}">
 								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl/>
