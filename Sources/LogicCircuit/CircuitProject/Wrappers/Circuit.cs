@@ -272,6 +272,11 @@ namespace LogicCircuit {
 				return this.CircuitProject.SoundSet.FindOrCreate(rowIdSound);
 			}
 
+			RowId rowIdGraphicsArray = this.CircuitProject.GraphicsArraySet.Table.Find(GraphicsArrayData.GraphicsArrayIdField.Field, primaryKeyValue);
+			if(!rowIdGraphicsArray.IsEmpty) {
+				return this.CircuitProject.GraphicsArraySet.FindOrCreate(rowIdGraphicsArray);
+			}
+
 			return this.Create(rowId);
 		}
 

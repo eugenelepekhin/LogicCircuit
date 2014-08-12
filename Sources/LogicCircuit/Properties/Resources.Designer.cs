@@ -2882,5 +2882,12 @@ namespace LogicCircuit.Properties {
  		public static string ToolTipSensorManualInitialValue {
 			get { return ResourceManager.GetString("ToolTipSensorManualInitialValue", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Graphics Array.
+		/// </summary>
+ 		public static string GraphicsArrayNotation {
+			get { return ResourceManager.GetString("GraphicsArrayNotation", Culture); }
+		}
 	}
 }

@@ -57,6 +57,7 @@
     <Compile Include="CircuitProject\CircuitSymbolComparer.cs" />
     <Compile Include="CircuitProject\CollapsedCategory.cs" />
     <Compile Include="CircuitProject\CircuitProject.LoadRecords.cs" />
+    <Compile Include="CircuitProject\GraphicsArray.cs" />
     <Compile Include="CircuitProject\LedMatrix.cs" />
     <Compile Include="CircuitProject\LedMatrixCellShape.cs" />
     <Compile Include="CircuitProject\LedMatrixType.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="CircuitProject\TextNote.cs" />
     <Compile Include="CircuitProject\Wrappers\CircuitProbe.cs" />
     <Compile Include="CircuitProject\Wrappers\CollapsedCategory.cs" />
+    <Compile Include="CircuitProject\Wrappers\GraphicsArray.cs" />
     <Compile Include="CircuitProject\Wrappers\LedMatrix.cs" />
     <Compile Include="CircuitProject\Wrappers\Sensor.cs" />
     <Compile Include="CircuitProject\Wrappers\Sound.cs" />

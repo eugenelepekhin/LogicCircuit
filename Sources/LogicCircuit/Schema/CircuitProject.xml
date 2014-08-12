@@ -18,7 +18,7 @@
 		Version 2.0.0.4 - removing Odd and Even functions and replace them with XOR and XOR NOT
 		Version 2.0.0.5 - Adding MemoryOnStart to memory circuits
 		Version 2.0.0.6 - Adding IsDisplay property to LogicalCircuit. Making Probe separate circuit to enable naming of it.
-		Version 2.0.0.7 - Adding PinSide to Button and Constant. Adding Sensor circuit. Adding Sound circuit. LogicalCircuit.Description and Project.Description both renamed to Note.
+		Version 2.0.0.7 - Adding PinSide to Button and Constant. Adding Sensor, Sound, and GraphicsArray circuits. LogicalCircuit.Description and Project.Description both renamed to Note.
 	-->
 
 	<Table Name="Project">
@@ -302,6 +302,25 @@
 		<Table.Keys>
 			<Key Name="PK_Sound" KeyType="Subclass" ParentName="Circuit" Action="Cascade">
 				<Column Name="SoundId"/>
+			</Key>
+		</Table.Keys>
+	</Table>
+
+	<Table Name="GraphicsArray">
+		<Table.Columns>
+			<Column Name="GraphicsArrayId" Type="Guid" ReadOnly="true"/>
+			<Column Name="WriteOn1" Type="bool" Default="false"/>
+			<Column Name="OnStart" Type="MemoryOnStart" Default="MemoryOnStart.Zeros" Check="GraphicsArray.CheckOnStart"/>
+			<Column Name="DataBitWidth" Type="int" Check="BasePin.CheckBitWidth" Default="8"/>
+			<Column Name="BitsPerPixel" Type="int" Check="GraphicsArray.CheckBitsPerPixel" Default="1"/>
+			<Column Name="Width" Type="int" Check="GraphicsArray.CheckWidth" Default="320"/>
+			<Column Name="Height" Type="int" Check="GraphicsArray.CheckHeight" Default="200"/>
+			<Column Name="Note" Type="string" Default="" PropertyOverrides="true"/>
+		</Table.Columns>
+
+		<Table.Keys>
+			<Key Name="PK_GraphicsArray" KeyType="Subclass" ParentName="Circuit" Action="Cascade">
+				<Column Name="GraphicsArrayId"/>
 			</Key>
 		</Table.Keys>
 	</Table>

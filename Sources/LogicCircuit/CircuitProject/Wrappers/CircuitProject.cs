@@ -26,6 +26,7 @@
 		public SplitterSet SplitterSet { get; private set; }
 		public SensorSet SensorSet { get; private set; }
 		public SoundSet SoundSet { get; private set; }
+		public GraphicsArraySet GraphicsArraySet { get; private set; }
 		public CircuitSymbolSet CircuitSymbolSet { get; private set; }
 		public WireSet WireSet { get; private set; }
 		public TextNoteSet TextNoteSet { get; private set; }
@@ -52,6 +53,7 @@
 			SplitterData.CreateForeignKeys(this);
 			SensorData.CreateForeignKeys(this);
 			SoundData.CreateForeignKeys(this);
+			GraphicsArrayData.CreateForeignKeys(this);
 			CircuitSymbolData.CreateForeignKeys(this);
 			WireData.CreateForeignKeys(this);
 			TextNoteData.CreateForeignKeys(this);
@@ -76,6 +78,7 @@
 			this.SplitterSet = new SplitterSet(this);
 			this.SensorSet = new SensorSet(this);
 			this.SoundSet = new SoundSet(this);
+			this.GraphicsArraySet = new GraphicsArraySet(this);
 			this.CircuitSymbolSet = new CircuitSymbolSet(this);
 			this.WireSet = new WireSet(this);
 			this.TextNoteSet = new TextNoteSet(this);
@@ -114,6 +117,7 @@
 				List<Splitter> deletedSplitter = this.SplitterSet.UpdateSet(oldVersion, newVersion);
 				List<Sensor> deletedSensor = this.SensorSet.UpdateSet(oldVersion, newVersion);
 				List<Sound> deletedSound = this.SoundSet.UpdateSet(oldVersion, newVersion);
+				List<GraphicsArray> deletedGraphicsArray = this.GraphicsArraySet.UpdateSet(oldVersion, newVersion);
 				List<CircuitSymbol> deletedCircuitSymbol = this.CircuitSymbolSet.UpdateSet(oldVersion, newVersion);
 				List<Wire> deletedWire = this.WireSet.UpdateSet(oldVersion, newVersion);
 				List<TextNote> deletedTextNote = this.TextNoteSet.UpdateSet(oldVersion, newVersion);
@@ -133,6 +137,7 @@
 				this.SplitterSet.NotifyVersionChanged(oldVersion, newVersion, deletedSplitter);
 				this.SensorSet.NotifyVersionChanged(oldVersion, newVersion, deletedSensor);
 				this.SoundSet.NotifyVersionChanged(oldVersion, newVersion, deletedSound);
+				this.GraphicsArraySet.NotifyVersionChanged(oldVersion, newVersion, deletedGraphicsArray);
 				this.CircuitSymbolSet.NotifyVersionChanged(oldVersion, newVersion, deletedCircuitSymbol);
 				this.WireSet.NotifyVersionChanged(oldVersion, newVersion, deletedWire);
 				this.TextNoteSet.NotifyVersionChanged(oldVersion, newVersion, deletedTextNote);
@@ -164,6 +169,7 @@
 			this.SplitterSet.NotifyRolledBack(version);
 			this.SensorSet.NotifyRolledBack(version);
 			this.SoundSet.NotifyRolledBack(version);
+			this.GraphicsArraySet.NotifyRolledBack(version);
 			this.CircuitSymbolSet.NotifyRolledBack(version);
 			this.WireSet.NotifyRolledBack(version);
 			this.TextNoteSet.NotifyRolledBack(version);

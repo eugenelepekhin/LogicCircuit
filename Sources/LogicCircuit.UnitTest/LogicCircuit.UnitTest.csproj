@@ -73,6 +73,7 @@
     <Compile Include="SettingsTest.cs" />
     <Compile Include="SensorTest.cs" />
     <Compile Include="ConversionTest.cs" />
+    <Compile Include="GraphicsArrayTest.cs" />
     <Compile Include="XmlLoadTest.cs" />
     <Compile Include="Socket.cs" />
     <Compile Include="SplitterConverterTest.cs" />

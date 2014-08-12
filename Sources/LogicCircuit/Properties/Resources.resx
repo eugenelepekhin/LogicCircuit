@@ -1406,4 +1406,7 @@ is basically equivalent to a multiplexer.</value>
   <data name="ToolTipSensorManualInitialValue" xml:space="preserve">
     <value>Enter initial value as hexadecimal number.</value>
   </data>
+  <data name="GraphicsArrayNotation" xml:space="preserve">
+    <value>Graphics Array</value>
+  </data>
 </root>
