@@ -401,6 +401,16 @@ namespace LogicCircuit {
 
 		public static IEnumerable<int> AddressBitWidthRange { get { return MemoryDescriptor.addressBitWidthRange; } }
 
+		[SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
+		public static IEnumerable<EnumDescriptor<bool>> WriteOnList {
+			get {
+				return new EnumDescriptor<bool>[] {
+					new EnumDescriptor<bool>(false, Properties.Resources.WriteOn0),
+					new EnumDescriptor<bool>(true, Properties.Resources.WriteOn1)
+				};
+			}
+		}
+
 		public int AddressBitWidth { get; set; }
 		public int DataBitWidth { get; set; }
 

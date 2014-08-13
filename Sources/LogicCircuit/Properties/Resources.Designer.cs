@@ -2886,8 +2886,8 @@ namespace LogicCircuit.Properties {
 		/// <summary>
 		/// Looks up a localized string similar to Graphics Array.
 		/// </summary>
- 		public static string GraphicsArrayNotation {
-			get { return ResourceManager.GetString("GraphicsArrayNotation", Culture); }
+ 		public static string NameGraphicsArray {
+			get { return ResourceManager.GetString("NameGraphicsArray", Culture); }
 		}
 
 		/// <summary>
@@ -2919,6 +2919,48 @@ namespace LogicCircuit.Properties {
 		/// </summary>
  		public static string ToolTipGraphicsArrayBPP {
 			get { return ResourceManager.GetString("ToolTipGraphicsArrayBPP", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Expecting number in range {0} – {1}..
+		/// </summary>
+ 		public static string ErrorBadIntegerInRange(int min, int max) {
+			return string.Format(Culture, ResourceManager.GetString("ErrorBadIntegerInRange", Culture), min, max);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Bits per pixel:.
+		/// </summary>
+ 		public static string TitleGraphicsArrayBPP {
+			get { return ResourceManager.GetString("TitleGraphicsArrayBPP", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Height:.
+		/// </summary>
+ 		public static string TitleHeight {
+			get { return ResourceManager.GetString("TitleHeight", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Width:.
+		/// </summary>
+ 		public static string TitleWidth {
+			get { return ResourceManager.GetString("TitleWidth", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Enter height of the graphics array in pixels..
+		/// </summary>
+ 		public static string ToolTipGraphicsArrayHeight {
+			get { return ResourceManager.GetString("ToolTipGraphicsArrayHeight", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Enter width of the graphics array in pixels..
+		/// </summary>
+ 		public static string ToolTipGraphicsArrayWidth {
+			get { return ResourceManager.GetString("ToolTipGraphicsArrayWidth", Culture); }
 		}
 	}
 }

@@ -1406,7 +1406,7 @@ is basically equivalent to a multiplexer.</value>
   <data name="ToolTipSensorManualInitialValue" xml:space="preserve">
     <value>Enter initial value as hexadecimal number.</value>
   </data>
-  <data name="GraphicsArrayNotation" xml:space="preserve">
+  <data name="NameGraphicsArray" xml:space="preserve">
     <value>Graphics Array</value>
   </data>
   <data name="CaptionGraphicsArrayBPP" xml:space="preserve">
@@ -1424,5 +1424,24 @@ advanced circuits like computers or controllers.</value>
   </data>
   <data name="ToolTipGraphicsArrayBPP" xml:space="preserve">
     <value>Choose number bits per pixel</value>
+  </data>
+  <data name="ErrorBadIntegerInRange" xml:space="preserve">
+    <value>Expecting number in range {0} – {1}.</value>
+    <comment>{int min, int max}</comment>
+  </data>
+  <data name="TitleGraphicsArrayBPP" xml:space="preserve">
+    <value>_Bits per pixel:</value>
+  </data>
+  <data name="TitleHeight" xml:space="preserve">
+    <value>_Height:</value>
+  </data>
+  <data name="TitleWidth" xml:space="preserve">
+    <value>_Width:</value>
+  </data>
+  <data name="ToolTipGraphicsArrayHeight" xml:space="preserve">
+    <value>Enter height of the graphics array in pixels.</value>
+  </data>
+  <data name="ToolTipGraphicsArrayWidth" xml:space="preserve">
+    <value>Enter width of the graphics array in pixels.</value>
   </data>
 </root>

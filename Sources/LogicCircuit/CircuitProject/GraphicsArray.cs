@@ -49,13 +49,18 @@ namespace LogicCircuit {
 			get { return GraphicsArray.AddressBitsFor(this.DataBitWidth, this.BitsPerPixel, this.Width, this.Height); }
 		}
 
+		public override void Delete() {
+			this.CircuitProject.DevicePinSet.DeleteAllPins(this);
+			base.Delete();
+		}
+
 		public override string Name {
 			get { return this.Notation; }
 			set { throw new NotSupportedException(); }
 		}
 
 		public override string Notation {
-			get { return Properties.Resources.GraphicsArrayNotation; }
+			get { return Properties.Resources.NameGraphicsArray; }
 			set { throw new InvalidOperationException(); }
 		}
 

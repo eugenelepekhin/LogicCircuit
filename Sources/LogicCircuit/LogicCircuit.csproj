@@ -106,6 +106,9 @@
     <Compile Include="Dialog\DialogFind.xaml.cs">
       <DependentUpon>DialogFind.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialog\DialogGraphicsArray.xaml.cs">
+      <DependentUpon>DialogGraphicsArray.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialog\DialogHyperlink.xaml.cs">
       <DependentUpon>DialogHyperlink.xaml</DependentUpon>
     </Compile>
@@ -339,6 +342,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialog\DialogFind.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialog\DialogGraphicsArray.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -55,10 +55,7 @@ namespace LogicCircuit {
 
 			this.addressBitWidth.ItemsSource = MemoryDescriptor.AddressBitWidthRange;
 			this.dataBitWidth.ItemsSource = PinDescriptor.BitWidthRange;
-			EnumDescriptor<bool>[] writeOnList = new EnumDescriptor<bool>[] {
-				new EnumDescriptor<bool>(false, Properties.Resources.WriteOn0),
-				new EnumDescriptor<bool>(true, Properties.Resources.WriteOn1)
-			};
+			IEnumerable<EnumDescriptor<bool>> writeOnList = MemoryDescriptor.WriteOnList;
 			this.writeOn.ItemsSource = writeOnList;
 			EnumDescriptor<MemoryOnStart>[] onStartList = new EnumDescriptor<MemoryOnStart>[] {
 				new EnumDescriptor<MemoryOnStart>(MemoryOnStart.Random, Properties.Resources.MemoryOnStartRandom),

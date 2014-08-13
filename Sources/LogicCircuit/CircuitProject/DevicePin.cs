@@ -40,6 +40,18 @@ namespace LogicCircuit {
 					if(sensor != null) {
 						return sensor.BitWidth;
 					}
+					GraphicsArray graphicsArray = circuit as GraphicsArray;
+					if(graphicsArray != null) {
+						if(this == graphicsArray.AddressPin) {
+							return graphicsArray.AddressBitWidth;
+						} else if(this == graphicsArray.DataInPin || this == graphicsArray.DataOutPin) {
+							return graphicsArray.DataBitWidth;
+						} else if(this == graphicsArray.WritePin) {
+							return 1;
+						} else {
+							Tracer.Fail("Unknown pin");
+						}
+					}
 					this.bitWidth = this.PinBitWidth;
 				}
 				return this.bitWidth;

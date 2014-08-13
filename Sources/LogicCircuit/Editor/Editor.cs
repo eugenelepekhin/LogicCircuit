@@ -448,6 +448,10 @@ namespace LogicCircuit {
 			this.Mainframe.ShowDialog(new DialogSound(sound));
 		}
 
+		private void Edit(GraphicsArray graphicsArray) {
+			this.Mainframe.ShowDialog(new DialogGraphicsArray(graphicsArray));
+		}
+
 		private void Edit(TextNote textNote) {
 			DialogText dialog = new DialogText(textNote.Note);
 			bool? result = this.Mainframe.ShowDialog(dialog);
@@ -508,6 +512,11 @@ namespace LogicCircuit {
 					Sound sound = circuitSymbol.Circuit as Sound;
 					if(sound != null) {
 						this.Edit(sound);
+						return;
+					}
+					GraphicsArray graphicsArray = circuitSymbol.Circuit as GraphicsArray;
+					if(graphicsArray != null) {
+						this.Edit(graphicsArray);
 						return;
 					}
 				} else if(this.CircuitRunner != null && this.CircuitRunner.VisibleMap != null) {
