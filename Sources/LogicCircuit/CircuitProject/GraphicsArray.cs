@@ -99,6 +99,11 @@ namespace LogicCircuit {
 			return target.CircuitProject.GraphicsArraySet.Copy(this);
 		}
 
+		public override bool IsDisplay {
+			get { return true; }
+			set { base.IsDisplay = value; }
+		}
+
 		private static int PixelsToGridSize(int pixels) {
 			return pixels / Symbol.GridSize + (((pixels % Symbol.GridSize) == 0) ? 0 : 1);
 		}
@@ -114,6 +119,11 @@ namespace LogicCircuit {
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
 			Tracer.Assert(this == symbol.Circuit);
 			return symbol.CreateSimpleGlyph(SymbolShape.GraphicsArray, symbol);
+		}
+
+		public override FrameworkElement CreateDisplay(CircuitGlyph symbol, CircuitGlyph mainSymbol) {
+			Tracer.Assert(this == symbol.Circuit);
+			return symbol.CreateSimpleGlyph(SymbolShape.GraphicsArray, mainSymbol);
 		}
 
 		partial void OnGraphicsArrayChanged() {
