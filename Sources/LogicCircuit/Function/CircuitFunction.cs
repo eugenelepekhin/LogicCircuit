@@ -228,6 +228,17 @@ namespace LogicCircuit {
 			return changed;
 		}
 
+		protected int ReadNumericState(int[] parameter) {
+			Tracer.Assert(parameter.Length <= 32);
+			int state = 0;
+			for(int i = 0; i < parameter.Length; i++) {
+				if(this.CircuitState[parameter[i]] == State.On1) {
+					state |= 1 << i;
+				}
+			}
+			return state;
+		}
+
 		#if DEBUG
 			public override string ToString() {
 				StringBuilder text = new StringBuilder();

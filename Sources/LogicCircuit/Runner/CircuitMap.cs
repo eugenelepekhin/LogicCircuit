@@ -550,7 +550,17 @@ namespace LogicCircuit {
 		}
 
 		private static bool IsPrimitive(Circuit circuit) {
-			return circuit is Gate || circuit is CircuitProbe || circuit is CircuitButton || circuit is Constant || circuit is Memory || circuit is LedMatrix || circuit is Sensor || circuit is Sound;
+			return (
+				circuit is Gate ||
+				circuit is CircuitProbe ||
+				circuit is CircuitButton ||
+				circuit is Constant ||
+				circuit is Memory ||
+				circuit is LedMatrix ||
+				circuit is Sensor ||
+				circuit is Sound ||
+				circuit is GraphicsArray
+			);
 		}
 
 		private bool HasLoop(LogicalCircuit circuit) {
@@ -612,6 +622,8 @@ namespace LogicCircuit {
 				CircuitMap.DefineSensor(circuitState, symbolMap);
 			} else if(symbolMap.CircuitSymbol.Circuit is Sound) {
 				CircuitMap.DefineSound(circuitState, symbolMap);
+			} else if(symbolMap.CircuitSymbol.Circuit is GraphicsArray) {
+				CircuitMap.DefineGraphicsArray(circuitState, symbolMap);
 			} else {
 				Tracer.Fail();
 			}
@@ -1023,6 +1035,55 @@ namespace LogicCircuit {
 			}
 			symbolMap.CircuitMap.memories.Add(symbolMap.CircuitSymbol, ram);
 			return ram;
+		}
+
+		private static CircuitFunction DefineGraphicsArray(CircuitState circuitState, SymbolMap symbolMap) {
+			GraphicsArray graphicsArray = (GraphicsArray)symbolMap.CircuitSymbol.Circuit;
+			Tracer.Assert(symbolMap.CircuitSymbol.Jams().Count() == 4);
+			List<Result> dataOut = new List<Result>(symbolMap.Results);
+			Tracer.Assert(dataOut.TrueForAll(o => o.Jam.Pin == graphicsArray.DataOutPin));
+			List<Parameter> address = new List<Parameter>();
+			List<Parameter> dataIn = new List<Parameter>();
+			Parameter write = null;
+			foreach(Parameter p in symbolMap.Parameters) {
+				if(p.Jam.Pin == graphicsArray.AddressPin) {
+					address.Add(p);
+				} else if(p.Jam.Pin == graphicsArray.DataInPin) {
+					dataIn.Add(p);
+				} else {
+					Tracer.Assert(p.Jam.Pin == graphicsArray.WritePin && write == null);
+					write = p;
+				}
+			}
+			Tracer.Assert(address.Count <= graphicsArray.AddressBitWidth);
+			Tracer.Assert(dataOut.Count <= graphicsArray.DataBitWidth);
+			Tracer.Assert(dataIn.Count <= graphicsArray.DataBitWidth);
+			Tracer.Assert(write != null);
+
+			if(address.Count != graphicsArray.AddressBitWidth) {
+				throw new CircuitException(Cause.UserError, Properties.Resources.ErrorAddressNotConnected(symbolMap.CircuitMap.Path(symbolMap.CircuitSymbol)));
+			}
+			if(dataIn.Count != graphicsArray.DataBitWidth) {
+				throw new CircuitException(Cause.UserError, Properties.Resources.ErrorDataInNotConnected(symbolMap.CircuitMap.Path(symbolMap.CircuitSymbol)));
+			}
+			dataOut.Sort(ResultComparer.BitOrderComparer);
+			address.Sort(ParameterComparer.BitOrderComparer);
+			dataIn.Sort(ParameterComparer.BitOrderComparer);
+			
+			FunctionGraphicsArray function = new FunctionGraphicsArray(circuitState,
+				CircuitMap.Parameters(address),
+				CircuitMap.Parameters(dataIn),
+				CircuitMap.Results(dataOut),
+				write.Result.StateIndex,
+				CircuitMap.DisplayChain(symbolMap)
+			);
+
+			if(symbolMap.CircuitMap.displays == null) {
+				symbolMap.CircuitMap.displays = new HashSet<IFunctionVisual>();
+			}
+			symbolMap.CircuitMap.displays.Add(function);
+
+			return function;
 		}
 
 		#if DEBUG

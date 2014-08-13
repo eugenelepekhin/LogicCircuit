@@ -56,7 +56,7 @@ namespace LogicCircuit {
 			return new byte[Memory.BytesPerCellFor(this.inputData.Length) * Memory.NumberCellsFor(this.address.Length)];
 		}
 
-		private static int[] Input(int[] address, int[] inputData, int clock) {
+		internal static int[] Input(int[] address, int[] inputData, int clock) {
 			if(inputData == null) {
 				return address;
 			}
@@ -67,31 +67,19 @@ namespace LogicCircuit {
 			return input;
 		}
 
-		private int ReadState(int[] parameter) {
-			int state = 0;
-			for(int i = 0; i < parameter.Length; i++) {
-				if(this.CircuitState[parameter[i]] == State.On1) {
-					state |= 1 << i;
-				}
-			}
-			return state;
-		}
-
 		protected void Write() {
-			Memory.SetCellValue(this.data, this.inputData.Length, this.ReadState(this.address), this.ReadState(this.inputData));
+			Memory.SetCellValue(this.data, this.inputData.Length, this.ReadNumericState(this.address), this.ReadNumericState(this.inputData));
 		}
 
 		protected bool Read() {
-			return this.SetResult(Memory.CellValue(this.data, this.DataBitWidth, this.ReadState(this.address)));
+			return this.SetResult(Memory.CellValue(this.data, this.DataBitWidth, this.ReadNumericState(this.address)));
 		}
 
-		protected bool IsWriteAllowed {
-			get {
-				State state = this.CircuitState[this.write];
-				bool allowed = (state == this.writeOn && CircuitFunction.Not(state) == this.oldWriteState);
-				this.oldWriteState = state;
-				return allowed;
-			}
+		protected bool IsWriteAllowed() {
+			State state = this.CircuitState[this.write];
+			bool allowed = (state == this.writeOn && CircuitFunction.Not(state) == this.oldWriteState);
+			this.oldWriteState = state;
+			return allowed;
 		}
 
 		public int AddressBitWidth { get { return this.address.Length; } }

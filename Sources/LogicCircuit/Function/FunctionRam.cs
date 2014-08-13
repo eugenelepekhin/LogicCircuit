@@ -8,7 +8,7 @@ namespace LogicCircuit {
 		}
 
 		public override bool Evaluate() {
-			if(this.IsWriteAllowed) {
+			if(this.IsWriteAllowed()) {
 				this.Write();
 			}
 			return this.Read();
