@@ -228,11 +228,11 @@ namespace LogicCircuit {
 			return changed;
 		}
 
-		protected int ReadNumericState(int[] parameter) {
-			Tracer.Assert(parameter.Length <= 32);
+		protected int ReadNumericState(int[] parameters) {
+			Tracer.Assert(parameters.Length <= 32);
 			int state = 0;
-			for(int i = 0; i < parameter.Length; i++) {
-				if(this.CircuitState[parameter[i]] == State.On1) {
+			for(int i = 0; i < parameters.Length; i++) {
+				if(this.CircuitState[parameters[i]] == State.On1) {
 					state |= 1 << i;
 				}
 			}
