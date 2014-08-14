@@ -535,7 +535,7 @@ namespace LogicCircuit {
 		public IEnumerable<DirectionDescriptor> DirectionRange { get; private set; }
 
 		public SplitterDescriptor(CircuitProject circuitProject) : base(circuitProject.SplitterSet.Create(3, 3, true)) {
-			this.PinCountRange = PinDescriptor.NumberRange(2, Gate.MaxInputCount);
+			this.PinCountRange = PinDescriptor.NumberRange(2, BasePin.MaxBitWidth);
 			this.BitWidthRange = PinDescriptor.NumberRange(1, BasePin.MaxBitWidth / 2);
 			this.DirectionRange = new DirectionDescriptor[] {
 				new DirectionDescriptor(true, Properties.Resources.SplitterDirectionClockwise, 1),
