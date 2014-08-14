@@ -61,8 +61,13 @@ namespace LogicCircuit {
 		}
 
 		public static int NumberCellsFor(int addressBitWidth) {
-			Tracer.Assert(0 < addressBitWidth && addressBitWidth <= Memory.MaxAddressBitWidth);
+			// GraphicsArray can have up to 22 address bits
+			Tracer.Assert(0 < addressBitWidth && addressBitWidth <= 22);
 			return 1 << addressBitWidth;
+		}
+
+		public static void AssertAddressBitWidth(int addressBitWidth) {
+			Tracer.Assert(0 < addressBitWidth && addressBitWidth <= Memory.MaxAddressBitWidth);
 		}
 
 		public static int CellValue(byte[] data, int bitWidth, int index) {
@@ -86,6 +91,8 @@ namespace LogicCircuit {
 		}
 
 		public static byte[] Reallocate(byte[] old, int oldAddressBitWidth, int oldDataBitWidth, int newAddressBitWidth, int newDataBitWidth) {
+			Memory.AssertAddressBitWidth(oldAddressBitWidth);
+			Memory.AssertAddressBitWidth(newAddressBitWidth);
 			Tracer.Assert(old.Length == Memory.BytesPerCellFor(oldDataBitWidth) * Memory.NumberCellsFor(oldAddressBitWidth));
 			if(oldAddressBitWidth != newAddressBitWidth || oldDataBitWidth != newDataBitWidth) {
 				byte[] data = new byte[Memory.BytesPerCellFor(newDataBitWidth) * Memory.NumberCellsFor(newAddressBitWidth)];
