@@ -59,25 +59,6 @@ namespace LogicCircuit {
 			case MemoryOnStart.Random:
 				this.data = this.Allocate();
 				circuitState.Random.NextBytes(this.data);
-
-				#if DEBUG
-				{
-					int w = this.graphicsArray.Width;
-					int h = this.graphicsArray.Height;
-					int bpp = this.graphicsArray.BitsPerPixel;
-					int c = 1 << bpp;
-					int d = 8 / bpp;
-					int s = w / d + Math.Sign(w % d);
-					if(c < w) {
-						for(int i = 0; i < c; i++) {
-							for(int j = 0; j < h; j++) {
-								this.data[j * s + i] = (byte)i;
-							}
-						}
-					}
-				}
-				#endif
-
 				break;
 			case MemoryOnStart.Zeros:
 				this.data = this.Allocate();
