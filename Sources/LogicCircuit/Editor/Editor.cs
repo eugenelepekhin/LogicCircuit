@@ -533,9 +533,8 @@ namespace LogicCircuit {
 						}
 						return;
 					}
-					Memory memory = circuitSymbol.Circuit as Memory;
-					if(memory != null) {
-						FunctionMemory functionMemory = this.CircuitRunner.VisibleMap.FunctionMemory(circuitSymbol);
+					if((circuitSymbol.Circuit is Memory) || (circuitSymbol.Circuit is GraphicsArray)) {
+						IFunctionMemory functionMemory = this.CircuitRunner.VisibleMap.FunctionMemory(circuitSymbol);
 						if(functionMemory != null) {
 							this.Mainframe.ShowDialog(new DialogMemory(functionMemory));
 						}

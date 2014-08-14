@@ -7,7 +7,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace LogicCircuit {
-	public class FunctionGraphicsArray : CircuitFunction, IFunctionVisual {
+	public class FunctionGraphicsArray : CircuitFunction, IFunctionVisual, IFunctionMemory {
 		public override string ReportName { get { return Properties.Resources.NameGraphicsArray; } }
 		public bool Invalid { get; set; }
 
@@ -26,6 +26,13 @@ namespace LogicCircuit {
 		private readonly Project project;
 		private LogicalCircuit lastLogicalCircuit = null;
 		private Image lastImage = null;
+
+		public int AddressBitWidth { get { return this.address.Length; } }
+		public int DataBitWidth { get { return this.inputData.Length; } }
+
+		public int this[int index] {
+			get { return Memory.CellValue(this.data, this.DataBitWidth, index); }
+		}
 
 		public FunctionGraphicsArray(
 			CircuitState circuitState,
@@ -89,15 +96,15 @@ namespace LogicCircuit {
 		}
 
 		private byte[] Allocate() {
-			return new byte[Memory.BytesPerCellFor(this.inputData.Length) * Memory.NumberCellsFor(this.address.Length)];
+			return new byte[Memory.BytesPerCellFor(this.DataBitWidth) * Memory.NumberCellsFor(this.address.Length)];
 		}
 
 		private void Write() {
-			Memory.SetCellValue(this.data, this.inputData.Length, this.ReadNumericState(this.address), this.ReadNumericState(this.inputData));
+			Memory.SetCellValue(this.data, this.DataBitWidth, this.ReadNumericState(this.address), this.ReadNumericState(this.inputData));
 		}
 
 		private bool Read() {
-			return this.SetResult(Memory.CellValue(this.data, this.outputData.Length, this.ReadNumericState(this.address)));
+			return this.SetResult(Memory.CellValue(this.data, this.DataBitWidth, this.ReadNumericState(this.address)));
 		}
 
 		private bool IsWriteAllowed() {

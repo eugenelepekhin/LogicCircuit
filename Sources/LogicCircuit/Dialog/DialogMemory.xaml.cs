@@ -13,12 +13,12 @@ namespace LogicCircuit {
 		private SettingsWindowLocationCache windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 
-		private FunctionMemory functionMemory;
+		private IFunctionMemory functionMemory;
 		private string format;
 		private string rowNumberFormat;
 		public RowList Rows { get; private set; }
 
-		public DialogMemory(FunctionMemory functionMemory) {
+		public DialogMemory(IFunctionMemory functionMemory) {
 			this.functionMemory = functionMemory;
 			this.format = string.Format(CultureInfo.InvariantCulture, "{{0:X{0}}}",
 				this.functionMemory.DataBitWidth / 4 + (((this.functionMemory.DataBitWidth % 4) == 0) ? 0 : 1)

@@ -2,7 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 
 namespace LogicCircuit {
-	public abstract class FunctionMemory : CircuitFunction {
+	public abstract class FunctionMemory : CircuitFunction, IFunctionMemory {
 		private int[] address;
 		private int[] inputData;
 		private int[] outputData;

@@ -20,7 +20,7 @@ namespace LogicCircuit {
 		private Dictionary<CircuitSymbol, CircuitMap> children;
 		private HashSet<IFunctionVisual> displays;
 		private Dictionary<CircuitSymbol, FunctionConstant> constants;
-		private Dictionary<CircuitSymbol, FunctionMemory> memories;
+		private Dictionary<CircuitSymbol, IFunctionMemory> memories;
 		private bool turnedOn = false;
 
 		private CircuitMap visible;
@@ -373,9 +373,9 @@ namespace LogicCircuit {
 			return null;
 		}
 
-		public FunctionMemory FunctionMemory(CircuitSymbol symbol) {
+		public IFunctionMemory FunctionMemory(CircuitSymbol symbol) {
 			if(this.memories != null) {
-				FunctionMemory memory;
+				IFunctionMemory memory;
 				if(this.memories.TryGetValue(symbol, out memory)) {
 					return memory;
 				}
@@ -425,8 +425,11 @@ namespace LogicCircuit {
 					}
 				}
 				if(this.memories != null) {
-					foreach(FunctionMemory memory in this.memories.Values) {
-						memory.TurnOff();
+					foreach(IFunctionMemory iMemory in this.memories.Values) {
+						FunctionMemory memory = iMemory as FunctionMemory;
+						if(memory != null) {
+							memory.TurnOff();
+						}
 					}
 				}
 				this.turnedOn = false;
@@ -990,7 +993,7 @@ namespace LogicCircuit {
 			parameters.Sort(ParameterComparer.BitOrderComparer);
 			FunctionRom rom = new FunctionRom(circuitState, CircuitMap.Parameters(parameters), CircuitMap.Results(results), memory);
 			if(symbolMap.CircuitMap.memories == null) {
-				symbolMap.CircuitMap.memories = new Dictionary<CircuitSymbol, FunctionMemory>();
+				symbolMap.CircuitMap.memories = new Dictionary<CircuitSymbol, IFunctionMemory>();
 			}
 			symbolMap.CircuitMap.memories.Add(symbolMap.CircuitSymbol, rom);
 			return rom;
@@ -1031,7 +1034,7 @@ namespace LogicCircuit {
 				CircuitMap.Parameters(address), CircuitMap.Parameters(dataIn), CircuitMap.Results(dataOut), (write != null) ? write.Result.StateIndex : 0, memory
 			);
 			if(symbolMap.CircuitMap.memories == null) {
-				symbolMap.CircuitMap.memories = new Dictionary<CircuitSymbol, FunctionMemory>();
+				symbolMap.CircuitMap.memories = new Dictionary<CircuitSymbol, IFunctionMemory>();
 			}
 			symbolMap.CircuitMap.memories.Add(symbolMap.CircuitSymbol, ram);
 			return ram;
@@ -1082,6 +1085,11 @@ namespace LogicCircuit {
 			);
 
 			CircuitMap.UpdateDisplays(symbolMap, (IFunctionVisual)function);
+
+			if(symbolMap.CircuitMap.memories == null) {
+				symbolMap.CircuitMap.memories = new Dictionary<CircuitSymbol, IFunctionMemory>();
+			}
+			symbolMap.CircuitMap.memories.Add(symbolMap.CircuitSymbol, function);
 
 			return function;
 		}

@@ -276,6 +276,7 @@
     <Compile Include="Function\FunctionSensor.cs" />
     <Compile Include="Function\FunctionSound.cs" />
     <Compile Include="Function\IFunctionClock.cs" />
+    <Compile Include="Function\IFunctionMemory.cs" />
     <Compile Include="Function\IFunctionVisual.cs" />
     <Compile Include="Function\FunctionNot.cs" />
     <Compile Include="Function\OneBitConst.cs" />
