@@ -317,7 +317,7 @@ namespace LogicCircuit {
 			do {
 				unconnected.Clear();
 				foreach(SymbolMap symbolMap in list.SymbolMaps) {
-					if(symbolMap.HasResults) {
+					if(symbolMap.HasResults && !(symbolMap.CircuitSymbol.Circuit is GraphicsArray)) {
 						bool connected = false;
 						foreach(Result result in symbolMap.Results) {
 							if(0 < result.Parameters.Count) {
@@ -1078,10 +1078,7 @@ namespace LogicCircuit {
 				CircuitMap.DisplayChain(symbolMap)
 			);
 
-			if(symbolMap.CircuitMap.displays == null) {
-				symbolMap.CircuitMap.displays = new HashSet<IFunctionVisual>();
-			}
-			symbolMap.CircuitMap.displays.Add(function);
+			CircuitMap.UpdateDisplays(symbolMap, (IFunctionVisual)function);
 
 			return function;
 		}

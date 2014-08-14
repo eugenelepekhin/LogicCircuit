@@ -457,7 +457,7 @@ namespace LogicCircuit {
 	}
 
 	public class GraphicsArrayDescriptor : IOCircuitDescriptor<GraphicsArray> {
-		private static readonly IEnumerable<int> bitsPerPixel = new int[] { 1, 2, 3, 4, 8 };
+		private static readonly IEnumerable<int> bitsPerPixel = new int[] { 1, 2, 4, 8 };
 		public static IEnumerable<int> BitsPerPixelRange { get { return GraphicsArrayDescriptor.bitsPerPixel; } }
 
 		public int BitsPerPixel { get; set; }

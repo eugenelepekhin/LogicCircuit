@@ -17,8 +17,10 @@ namespace LogicCircuit {
 		}
 
 		public static int CheckBitsPerPixel(int value) {
-			value = Math.Max(1, Math.Min(value, GraphicsArray.MaxBitsPerPixel));
-			return value <= 4 ? value : 8;
+			if(8 <= value) return 8;
+			if(4 <= value) return 4;
+			if(2 <= value) return 2;
+			return 1;
 		}
 
 		public static int CheckWidth(int value) {

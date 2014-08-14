@@ -52,6 +52,25 @@ namespace LogicCircuit {
 			case MemoryOnStart.Random:
 				this.data = this.Allocate();
 				circuitState.Random.NextBytes(this.data);
+
+				#if DEBUG
+				{
+					int w = this.graphicsArray.Width;
+					int h = this.graphicsArray.Height;
+					int bpp = this.graphicsArray.BitsPerPixel;
+					int c = 1 << bpp;
+					int d = 8 / bpp;
+					int s = w / d + Math.Sign(w % d);
+					if(c < w) {
+						for(int i = 0; i < c; i++) {
+							for(int j = 0; j < h; j++) {
+								this.data[j * s + i] = (byte)i;
+							}
+						}
+					}
+				}
+				#endif
+
 				break;
 			case MemoryOnStart.Zeros:
 				this.data = this.Allocate();
@@ -114,11 +133,6 @@ namespace LogicCircuit {
 				format = PixelFormats.Indexed2;
 				palette = BitmapPalettes.Gray4;
 				break;
-			case 3:
-				format = PixelFormats.Indexed4;
-				palette = BitmapPalettes.Halftone8;
-				Tracer.Fail("Not yet implemented.");
-				break;
 			case 4:
 				format = PixelFormats.Indexed4;
 				palette = BitmapPalettes.Halftone8;
@@ -132,6 +146,7 @@ namespace LogicCircuit {
 				break;
 			}
 			this.bitmap = new WriteableBitmap(this.drawingRect.Width, this.drawingRect.Height, 96, 96, format, palette);
+			this.Invalid = true;
 		}
 
 		public void TurnOff() {
@@ -158,9 +173,9 @@ namespace LogicCircuit {
 					CircuitSymbol symbol = this.circuitSymbol.First(s => s.LogicalCircuit == currentCircuit);
 					this.lastImage = this.ProbeView(symbol);
 				}
-				if(this.lastImage.Source == null) {
-					this.lastImage.Source = this.bitmap;
-				}
+				this.lastImage.Source = this.bitmap;
+				this.lastImage.Width = this.bitmap.Width;
+				this.lastImage.Height = this.bitmap.Height;
 			}
 		}
 

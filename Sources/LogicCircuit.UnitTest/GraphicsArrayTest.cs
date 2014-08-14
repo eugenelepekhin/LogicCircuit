@@ -24,11 +24,11 @@ namespace LogicCircuit.UnitTest {
 			Assert.AreEqual(1, GraphicsArray.CheckBitsPerPixel(0));
 			Assert.AreEqual(1, GraphicsArray.CheckBitsPerPixel(1));
 			Assert.AreEqual(2, GraphicsArray.CheckBitsPerPixel(2));
-			Assert.AreEqual(3, GraphicsArray.CheckBitsPerPixel(3));
+			Assert.AreEqual(2, GraphicsArray.CheckBitsPerPixel(3));
 			Assert.AreEqual(4, GraphicsArray.CheckBitsPerPixel(4));
-			Assert.AreEqual(8, GraphicsArray.CheckBitsPerPixel(5));
-			Assert.AreEqual(8, GraphicsArray.CheckBitsPerPixel(6));
-			Assert.AreEqual(8, GraphicsArray.CheckBitsPerPixel(7));
+			Assert.AreEqual(4, GraphicsArray.CheckBitsPerPixel(5));
+			Assert.AreEqual(4, GraphicsArray.CheckBitsPerPixel(6));
+			Assert.AreEqual(4, GraphicsArray.CheckBitsPerPixel(7));
 			Assert.AreEqual(8, GraphicsArray.CheckBitsPerPixel(8));
 			Assert.AreEqual(8, GraphicsArray.CheckBitsPerPixel(9));
 			Assert.AreEqual(8, GraphicsArray.CheckBitsPerPixel(10));
