@@ -107,6 +107,7 @@ namespace LogicCircuit {
 		}
 
 		private static int PixelsToGridSize(int pixels) {
+			pixels += 3;
 			return pixels / Symbol.GridSize + (((pixels % Symbol.GridSize) == 0) ? 0 : 1);
 		}
 

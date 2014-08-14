@@ -1444,4 +1444,8 @@ advanced circuits like computers or controllers.</value>
   <data name="ToolTipGraphicsArrayWidth" xml:space="preserve">
     <value>Enter width of the graphics array in pixels.</value>
   </data>
+  <data name="ErrorWriteNotConnected" xml:space="preserve">
+    <value>Write input does not connected on Graphics array {0}</value>
+    <comment>{string path}</comment>
+  </data>
 </root>

@@ -1058,7 +1058,6 @@ namespace LogicCircuit {
 			Tracer.Assert(address.Count <= graphicsArray.AddressBitWidth);
 			Tracer.Assert(dataOut.Count <= graphicsArray.DataBitWidth);
 			Tracer.Assert(dataIn.Count <= graphicsArray.DataBitWidth);
-			Tracer.Assert(write != null);
 
 			if(address.Count != graphicsArray.AddressBitWidth) {
 				throw new CircuitException(Cause.UserError, Properties.Resources.ErrorAddressNotConnected(symbolMap.CircuitMap.Path(symbolMap.CircuitSymbol)));
@@ -1066,6 +1065,10 @@ namespace LogicCircuit {
 			if(dataIn.Count != graphicsArray.DataBitWidth) {
 				throw new CircuitException(Cause.UserError, Properties.Resources.ErrorDataInNotConnected(symbolMap.CircuitMap.Path(symbolMap.CircuitSymbol)));
 			}
+			if(write == null) {
+				throw new CircuitException(Cause.UserError, Properties.Resources.ErrorWriteNotConnected(symbolMap.CircuitMap.Path(symbolMap.CircuitSymbol)));
+			}
+
 			dataOut.Sort(ResultComparer.BitOrderComparer);
 			address.Sort(ParameterComparer.BitOrderComparer);
 			dataIn.Sort(ParameterComparer.BitOrderComparer);

@@ -4,6 +4,7 @@
 	xmlns:properties="clr-namespace:LogicCircuit.Properties"
 	FlowDirection="LeftToRight"
 	Background="{StaticResource GraphicsArrayBackground}"
+	CornerRadius="3"
 >
 	<Image Name="ProbeView" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 </Border>

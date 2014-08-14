@@ -2962,5 +2962,12 @@ namespace LogicCircuit.Properties {
  		public static string ToolTipGraphicsArrayWidth {
 			get { return ResourceManager.GetString("ToolTipGraphicsArrayWidth", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Write input does not connected on Graphics array {0}.
+		/// </summary>
+ 		public static string ErrorWriteNotConnected(string path) {
+			return string.Format(Culture, ResourceManager.GetString("ErrorWriteNotConnected", Culture), path);
+		}
 	}
 }
