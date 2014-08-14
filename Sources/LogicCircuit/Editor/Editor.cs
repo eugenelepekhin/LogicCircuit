@@ -525,8 +525,7 @@ namespace LogicCircuit {
 						this.OpenLogicalCircuit(map);
 						return;
 					}
-					CircuitProbe probe = circuitSymbol.Circuit as CircuitProbe;
-					if(probe != null) {
+					if(circuitSymbol.Circuit is CircuitProbe) {
 						FunctionProbe functionProbe = this.CircuitRunner.VisibleMap.FunctionProbe(circuitSymbol);
 						if(functionProbe != null) {
 							this.Mainframe.ShowDialog(new DialogProbeHistory(functionProbe));
@@ -540,8 +539,7 @@ namespace LogicCircuit {
 						}
 						return;
 					}
-					Constant constant = circuitSymbol.Circuit as Constant;
-					if(constant != null) {
+					if(circuitSymbol.Circuit is Constant) {
 						if(this.CircuitRunner.Root.First() == this.CircuitRunner.VisibleMap) {
 							FunctionConstant functionConstant = this.CircuitRunner.VisibleMap.FunctionConstant(circuitSymbol);
 							if(functionConstant != null) {
