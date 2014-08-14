@@ -143,7 +143,7 @@ namespace LogicCircuit {
 		}
 
 		private class RandomValue : SensorValue {
-			private readonly Random random;
+			private static readonly Random random = new Random();
 			private readonly int maxValue;
 			private readonly int minTick;
 			private readonly int maxTick;
@@ -162,25 +162,24 @@ namespace LogicCircuit {
 					maxTick = Sensor.DefaultRandomMaxInterval;
 				}
 				Tracer.Assert(0 < minTick && minTick <= maxTick);
-				this.random = new Random();
 				this.maxValue = (bitWidth < 32) ? 1 << bitWidth : int.MaxValue;
 				this.minTick = minTick;
 				this.maxTick = maxTick;
 				this.Reset();
-				this.Value = this.random.Next(this.maxValue);
+				this.Value = RandomValue.random.Next(this.maxValue);
 			}
 
 			public override bool Flip() {
 				if(this.flip == this.tick++) {
 					this.Reset();
-					this.Value = this.random.Next(this.maxValue);
+					this.Value = RandomValue.random.Next(this.maxValue);
 					return true;
 				}
 				return false;
 			}
 
 			private void Reset() {
-				this.flip = this.random.Next(this.minTick, this.maxTick);
+				this.flip = RandomValue.random.Next(this.minTick, this.maxTick);
 				this.tick = 0;
 			}
 		}
