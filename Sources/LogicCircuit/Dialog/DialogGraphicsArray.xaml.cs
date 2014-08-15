@@ -65,7 +65,7 @@ namespace LogicCircuit {
 			this.DataContext = this;
 			this.InitializeComponent();
 
-			this.dataBitWidth.ItemsSource = PinDescriptor.BitWidthRange;
+			this.dataBitWidth.ItemsSource = GraphicsArrayDescriptor.DataBitWidthRange;
 			this.bitsPerPixel.ItemsSource = GraphicsArrayDescriptor.BitsPerPixelRange;
 
 			IEnumerable<EnumDescriptor<bool>> writeOnList = MemoryDescriptor.WriteOnList;

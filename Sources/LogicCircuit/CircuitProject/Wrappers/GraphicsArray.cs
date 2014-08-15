@@ -22,7 +22,7 @@ namespace LogicCircuit {
 		private int fieldDataBitWidth;
 		public int DataBitWidth {
 			get { return this.fieldDataBitWidth; }
-			set { this.fieldDataBitWidth = BasePin.CheckBitWidth(value); }
+			set { this.fieldDataBitWidth = GraphicsArray.CheckBitWidth(value); }
 		}
 		private int fieldBitsPerPixel;
 		public int BitsPerPixel {
@@ -223,7 +223,7 @@ namespace LogicCircuit {
 			private WidthField() {}
 			public string Name { get { return "Width"; } }
 			public int Order { get; set; }
-			public int DefaultValue { get { return 320; } }
+			public int DefaultValue { get { return 160; } }
 			public int GetValue(ref GraphicsArrayData record) {
 				return record.Width;
 			}
@@ -258,7 +258,7 @@ namespace LogicCircuit {
 			private HeightField() {}
 			public string Name { get { return "Height"; } }
 			public int Order { get; set; }
-			public int DefaultValue { get { return 200; } }
+			public int DefaultValue { get { return 120; } }
 			public int GetValue(ref GraphicsArrayData record) {
 				return record.Height;
 			}

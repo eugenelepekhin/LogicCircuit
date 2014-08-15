@@ -24,11 +24,11 @@ namespace LogicCircuit.UnitTest {
 			Assert.AreEqual(1, GraphicsArray.CheckBitsPerPixel(0));
 			Assert.AreEqual(1, GraphicsArray.CheckBitsPerPixel(1));
 			Assert.AreEqual(2, GraphicsArray.CheckBitsPerPixel(2));
-			Assert.AreEqual(2, GraphicsArray.CheckBitsPerPixel(3));
+			Assert.AreEqual(4, GraphicsArray.CheckBitsPerPixel(3));
 			Assert.AreEqual(4, GraphicsArray.CheckBitsPerPixel(4));
-			Assert.AreEqual(4, GraphicsArray.CheckBitsPerPixel(5));
-			Assert.AreEqual(4, GraphicsArray.CheckBitsPerPixel(6));
-			Assert.AreEqual(4, GraphicsArray.CheckBitsPerPixel(7));
+			Assert.AreEqual(8, GraphicsArray.CheckBitsPerPixel(5));
+			Assert.AreEqual(8, GraphicsArray.CheckBitsPerPixel(6));
+			Assert.AreEqual(8, GraphicsArray.CheckBitsPerPixel(7));
 			Assert.AreEqual(8, GraphicsArray.CheckBitsPerPixel(8));
 			Assert.AreEqual(8, GraphicsArray.CheckBitsPerPixel(9));
 			Assert.AreEqual(8, GraphicsArray.CheckBitsPerPixel(10));
@@ -52,7 +52,7 @@ namespace LogicCircuit.UnitTest {
 			GraphicsArray target = null;
 
 			project.InTransaction(() => {
-				target = project.GraphicsArraySet.Create(1, 1, 1);
+				target = project.GraphicsArraySet.Create(1, 1, 1, 1);
 				project.CircuitSymbolSet.Create(target, project.ProjectSet.Project.LogicalCircuit, 10, 10);
 			});
 			Assert.IsNotNull(target);
@@ -69,7 +69,6 @@ namespace LogicCircuit.UnitTest {
 			};
 
 			Assert.AreEqual(5, abw(8, 1, 10, 10));
-			Assert.AreEqual(4, abw(10, 1, 10, 10));
 			Assert.AreEqual(7, abw(1, 1, 10, 10));
 			Assert.AreEqual(10, abw(1, 8, 10, 10));
 			Assert.AreEqual(13, abw(8, 1, 320, 200));

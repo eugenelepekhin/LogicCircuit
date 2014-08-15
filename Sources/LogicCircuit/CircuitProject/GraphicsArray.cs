@@ -16,11 +16,23 @@ namespace LogicCircuit {
 			return (MemoryOnStart.Random <= value && value <= MemoryOnStart.Ones) ? value : MemoryOnStart.Zeros;
 		}
 
+		private static int CheckPower2(int maxPower, int value) {
+			int max = 1;
+			for(int power = 0; power < maxPower; power++) {
+				if(value <= max) {
+					return max;
+				}
+				max <<= 1;
+			}
+			return max;
+		}
+
+		public static int CheckBitWidth(int value) {
+			return CheckPower2(5, value);
+		}
+
 		public static int CheckBitsPerPixel(int value) {
-			if(8 <= value) return 8;
-			if(4 <= value) return 4;
-			if(2 <= value) return 2;
-			return 1;
+			return CheckPower2(3, value);
 		}
 
 		public static int CheckWidth(int value) {
@@ -172,11 +184,11 @@ namespace LogicCircuit {
 			GraphicsArraySet.UpdateWritePinName(graphicsArray);
 		}
 
-		public GraphicsArray Create(int bitsPerPixel, int width, int height) {
+		public GraphicsArray Create(int dataBitWidth, int bitsPerPixel, int width, int height) {
 			GraphicsArray graphicsArray = this.CreateItem(Guid.NewGuid(),
 				GraphicsArrayData.WriteOn1Field.Field.DefaultValue,
 				GraphicsArrayData.OnStartField.Field.DefaultValue,
-				GraphicsArrayData.DataBitWidthField.Field.DefaultValue,
+				dataBitWidth,
 				bitsPerPixel,
 				width,
 				height,

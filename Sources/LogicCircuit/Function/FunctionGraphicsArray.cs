@@ -11,28 +11,28 @@ namespace LogicCircuit {
 		public override string ReportName { get { return Properties.Resources.NameGraphicsArray; } }
 		public bool Invalid { get; set; }
 
-		private GraphicsArray graphicsArray;
-		private int[] address;
-		private int[] inputData;
-		private int[] outputData;
-		private int write;
-		private State writeOn;
-		private State oldWriteState = State.Off;
-		private byte[] data;
-		private WriteableBitmap bitmap;
-		private Int32Rect drawingRect;
-		private int stride;
 		private readonly List<CircuitSymbol> circuitSymbol;
 		private readonly Project project;
+
+		private readonly int[] address;
+		private readonly int[] inputData;
+		private readonly int write;
+		private readonly State writeOn;
+		private State oldWriteState = State.Off;
+
+		private readonly int bitsPerPixel;
+		private readonly Int32Rect drawingRect;
+		private readonly int memoryStride;
+		private readonly int bitmapStride;
+
+		private readonly byte[] data;
+		private WriteableBitmap bitmap;
 		private LogicalCircuit lastLogicalCircuit = null;
 		private Image lastImage = null;
 
 		public int AddressBitWidth { get { return this.address.Length; } }
 		public int DataBitWidth { get { return this.inputData.Length; } }
-
-		public int this[int index] {
-			get { return Memory.CellValue(this.data, this.DataBitWidth, index); }
-		}
+		public int this[int index] { get { return this.Read(index); } }
 
 		public FunctionGraphicsArray(
 			CircuitState circuitState,
@@ -42,20 +42,30 @@ namespace LogicCircuit {
 			int write,
 			IEnumerable<CircuitSymbol> symbols
 		) : base(circuitState, FunctionMemory.Input(address, inputData, write), outputData) {
+
 			this.circuitSymbol = symbols.ToList();
 			Tracer.Assert(0 < this.circuitSymbol.Count);
-			this.graphicsArray = (GraphicsArray)this.circuitSymbol.First().Circuit;
-			this.project = this.graphicsArray.CircuitProject.ProjectSet.Project;
+
+			GraphicsArray graphicsArray = (GraphicsArray)this.circuitSymbol[0].Circuit;
+			this.project = graphicsArray.CircuitProject.ProjectSet.Project;
 
 			this.address = address;
 			this.inputData = inputData;
-			this.outputData = outputData;
 			this.write = write;
-			this.writeOn = this.graphicsArray.WriteOn1 ? State.On1 : State.On0;
+			this.writeOn = graphicsArray.WriteOn1 ? State.On1 : State.On0;
 
-			Tracer.Assert(this.inputData.Length == this.outputData.Length);
+			Tracer.Assert(this.inputData.Length == outputData.Length && this.inputData.Length == graphicsArray.DataBitWidth);
 
-			switch(this.graphicsArray.OnStart) {
+			this.bitsPerPixel = graphicsArray.BitsPerPixel;
+			this.drawingRect = new Int32Rect(0, 0, graphicsArray.Width, graphicsArray.Height);
+			
+			int w = this.drawingRect.Width * this.bitsPerPixel;
+			this.memoryStride = w / this.DataBitWidth + (((w % this.DataBitWidth) == 0) ? 0 : 1);
+			int byteStride = w / 8 + (((w % 8) == 0) ? 0 : 1);
+			this.bitmapStride = Math.Max(byteStride * 8, this.memoryStride * this.DataBitWidth) / 8;
+			Tracer.Assert(this.memoryStride * this.DataBitWidth <= this.bitmapStride * 8);
+
+			switch(graphicsArray.OnStart) {
 			case MemoryOnStart.Random:
 				this.data = this.Allocate();
 				circuitState.Random.NextBytes(this.data);
@@ -77,15 +87,55 @@ namespace LogicCircuit {
 		}
 
 		private byte[] Allocate() {
-			return new byte[Memory.BytesPerCellFor(this.DataBitWidth) * Memory.NumberCellsFor(this.address.Length)];
+			// Allocate only needed for bitmap size.
+			return new byte[this.bitmapStride * this.drawingRect.Height];
 		}
 
 		private void Write() {
-			Memory.SetCellValue(this.data, this.DataBitWidth, this.ReadNumericState(this.address), this.ReadNumericState(this.inputData));
+			int addr = this.ReadNumericState(this.address);
+			int row = addr / this.memoryStride;
+			if(row < this.drawingRect.Height) {
+				int value = this.ReadNumericState(this.inputData);
+				int cell = addr % this.memoryStride;
+				int firstByte = row * this.bitmapStride + cell * this.DataBitWidth / 8;
+				if(this.DataBitWidth < 8) {
+					int shift = (cell * this.DataBitWidth) % 8;
+					int mask = ((1 << this.DataBitWidth) - 1) << (8 - shift - this.DataBitWidth);
+					value = (value << (8 - shift - this.DataBitWidth)) & mask;
+					value = value | (this.data[firstByte] & ~mask);
+					this.data[firstByte] = (byte)value;
+				} else {
+					int count = this.DataBitWidth / 8;
+					for(int i = 0; i < count; i++) {
+						data[firstByte + i] = (byte)(value >> (i * 8));
+					}
+				}
+			}
+		}
+
+		private int Read(int addr) {
+			int row = addr / this.memoryStride;
+			int value = 0;
+			if(row < this.drawingRect.Height) {
+				int cell = addr % this.memoryStride;
+				int firstByte = row * this.bitmapStride + cell * this.DataBitWidth / 8;
+				if(this.DataBitWidth < 8) {
+					int shift = cell * this.DataBitWidth % 8;
+					int mask = ((1 << this.DataBitWidth) - 1) << (8 - shift - this.DataBitWidth);
+					value = (this.data[firstByte] & mask) >> (8 - shift - this.DataBitWidth);
+				} else {
+					int count = this.DataBitWidth / 8;
+					for(int i = 0; i < count; i++) {
+						value |= ((int)data[firstByte + i]) << (i * 8);
+					}
+				}
+			}
+			return value;
 		}
 
 		private bool Read() {
-			return this.SetResult(Memory.CellValue(this.data, this.DataBitWidth, this.ReadNumericState(this.address)));
+			int addr = this.ReadNumericState(this.address);
+			return this.SetResult(this.Read(addr));
 		}
 
 		private bool IsWriteAllowed() {
@@ -104,15 +154,10 @@ namespace LogicCircuit {
 		}
 
 		public void TurnOn() {
-			int bitsPerPixel = this.graphicsArray.BitsPerPixel;
-			this.drawingRect = new Int32Rect(0, 0, this.graphicsArray.Width, this.graphicsArray.Height);
-			int w = this.drawingRect.Width * bitsPerPixel;
-			this.stride = w / 8 + (((w % 8) == 0) ? 0 : 1);
-
+			// Bitmap should be created on UI thread, so this is the right place for it.
 			PixelFormat format = new PixelFormat();
 			BitmapPalette palette = null;
-
-			switch(bitsPerPixel) {
+			switch(this.bitsPerPixel) {
 			case 1:
 				format = PixelFormats.Indexed1;
 				palette = BitmapPalettes.BlackAndWhite;
@@ -147,7 +192,7 @@ namespace LogicCircuit {
 		}
 
 		public void Redraw() {
-			this.bitmap.WritePixels(this.drawingRect, this.data, this.stride, 0);
+			this.bitmap.WritePixels(this.drawingRect, this.data, this.bitmapStride, 0);
 
 			LogicalCircuit currentCircuit = this.project.LogicalCircuit;
 			if(this.lastLogicalCircuit != currentCircuit) {

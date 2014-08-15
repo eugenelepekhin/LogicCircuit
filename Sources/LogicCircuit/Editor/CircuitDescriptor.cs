@@ -457,18 +457,24 @@ namespace LogicCircuit {
 	}
 
 	public class GraphicsArrayDescriptor : IOCircuitDescriptor<GraphicsArray> {
+		private static readonly IEnumerable<int> dataBitWidthRange = new int[] { 1, 2, 4, 8, 16, 32 };
+		public static IEnumerable<int> DataBitWidthRange { get { return GraphicsArrayDescriptor.dataBitWidthRange; } }
+
+		public int DataBitWidth { get; set; }
+
 		private static readonly IEnumerable<int> bitsPerPixel = new int[] { 1, 2, 4, 8 };
 		public static IEnumerable<int> BitsPerPixelRange { get { return GraphicsArrayDescriptor.bitsPerPixel; } }
 
 		public int BitsPerPixel { get; set; }
 
-		public GraphicsArrayDescriptor(CircuitProject circuitProject) : base(circuitProject.GraphicsArraySet.Create(1, 85, 64)) {
+		public GraphicsArrayDescriptor(CircuitProject circuitProject) : base(circuitProject.GraphicsArraySet.Create(8, 1, 85, 64)) {
 			this.Circuit.Note = Properties.Resources.ToolTipDescriptorGraphicsArray;
+			this.DataBitWidth = this.Circuit.DataBitWidth;
 			this.BitsPerPixel = this.Circuit.BitsPerPixel;
 		}
 
 		protected override GraphicsArray GetCircuitToDrop(CircuitProject circuitProject) {
-			return circuitProject.GraphicsArraySet.Create(this.BitsPerPixel, GraphicsArrayData.WidthField.Field.DefaultValue, GraphicsArrayData.HeightField.Field.DefaultValue);
+			return circuitProject.GraphicsArraySet.Create(this.DataBitWidth, this.BitsPerPixel, GraphicsArrayData.WidthField.Field.DefaultValue, GraphicsArrayData.HeightField.Field.DefaultValue);
 		}
 	}
 

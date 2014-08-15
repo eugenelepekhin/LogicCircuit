@@ -310,11 +310,11 @@
 		<Table.Columns>
 			<Column Name="GraphicsArrayId" Type="Guid" ReadOnly="true"/>
 			<Column Name="WriteOn1" Type="bool" Default="false"/>
-			<Column Name="OnStart" Type="MemoryOnStart" Default="MemoryOnStart.Zeros" Check="GraphicsArray.CheckOnStart"/>
-			<Column Name="DataBitWidth" Type="int" Check="BasePin.CheckBitWidth" Default="8"/>
+			<Column Name="OnStart" Type="MemoryOnStart" Check="GraphicsArray.CheckOnStart" Default="MemoryOnStart.Zeros"/>
+			<Column Name="DataBitWidth" Type="int" Check="GraphicsArray.CheckBitWidth" Default="8"/>
 			<Column Name="BitsPerPixel" Type="int" Check="GraphicsArray.CheckBitsPerPixel" Default="1"/>
-			<Column Name="Width" Type="int" Check="GraphicsArray.CheckWidth" Default="320"/>
-			<Column Name="Height" Type="int" Check="GraphicsArray.CheckHeight" Default="200"/>
+			<Column Name="Width" Type="int" Check="GraphicsArray.CheckWidth" Default="160"/>
+			<Column Name="Height" Type="int" Check="GraphicsArray.CheckHeight" Default="120"/>
 			<Column Name="Note" Type="string" Default="" PropertyOverrides="true"/>
 		</Table.Columns>
 
