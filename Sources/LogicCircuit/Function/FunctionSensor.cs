@@ -34,7 +34,7 @@ namespace LogicCircuit {
 				this.sensorValue = new SeriesValue(this.Sensor.Data, this.Sensor.SensorType == SensorType.Loop, this.Sensor.BitWidth);
 				break;
 			case SensorType.Random:
-				this.sensorValue = new RandomValue(this.Sensor.Data, this.Sensor.BitWidth);
+				this.sensorValue = new RandomValue(this.Sensor.Data, this.Sensor.BitWidth, this.CircuitState.Random);
 				break;
 			case SensorType.Manual:
 				this.sensorValue = new ManualValue(this.Sensor.Data, this.Sensor.BitWidth);
@@ -143,14 +143,14 @@ namespace LogicCircuit {
 		}
 
 		private class RandomValue : SensorValue {
-			private static readonly Random random = new Random();
+			private readonly Random random;
 			private readonly int maxValue;
 			private readonly int minTick;
 			private readonly int maxTick;
 			private int flip;
 			private int tick;
 			
-			public RandomValue(string data, int bitWidth) : base(bitWidth) {
+			public RandomValue(string data, int bitWidth, Random random) : base(bitWidth) {
 				int minTick;
 				int maxTick;
 				SensorPoint point;
@@ -162,24 +162,25 @@ namespace LogicCircuit {
 					maxTick = Sensor.DefaultRandomMaxInterval;
 				}
 				Tracer.Assert(0 < minTick && minTick <= maxTick);
+				this.random = random;
 				this.maxValue = (bitWidth < 32) ? 1 << bitWidth : int.MaxValue;
 				this.minTick = minTick;
 				this.maxTick = maxTick;
 				this.Reset();
-				this.Value = RandomValue.random.Next(this.maxValue);
+				this.Value = this.random.Next(this.maxValue);
 			}
 
 			public override bool Flip() {
 				if(this.flip == this.tick++) {
 					this.Reset();
-					this.Value = RandomValue.random.Next(this.maxValue);
+					this.Value = this.random.Next(this.maxValue);
 					return true;
 				}
 				return false;
 			}
 
 			private void Reset() {
-				this.flip = RandomValue.random.Next(this.minTick, this.maxTick);
+				this.flip = this.random.Next(this.minTick, this.maxTick);
 				this.tick = 0;
 			}
 		}
