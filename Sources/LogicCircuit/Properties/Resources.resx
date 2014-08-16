@@ -1413,10 +1413,13 @@ is basically equivalent to a multiplexer.</value>
     <value>Bits per pixel</value>
   </data>
   <data name="ToolTipDescriptorGraphicsArray" xml:space="preserve">
-    <value>Dot matrix display can show data stored in
-the internal memory and allows to select
-size and color depth/scheme. Used with in
-advanced circuits like computers or controllers.</value>
+    <value>(Dot matrix display) can show data stored in the internal memory.
+Used with advanced circuits like computers or controllers.
+Allows to select size and color depth/scheme:
+1 bit/pixel - black and white
+2 bits/pixel - 4 shades of gray
+4 bits/pixel - 16 colors
+8 bits/pixel - 256 colors</value>
   </data>
   <data name="ToolTipGraphicsArray" xml:space="preserve">
     <value>{0} {1}x{2} with {3} bit(s) per pixel ({4} colors)</value>
@@ -1426,7 +1429,7 @@ advanced circuits like computers or controllers.</value>
     <value>Choose number bits per pixel</value>
   </data>
   <data name="ErrorBadIntegerInRange" xml:space="preserve">
-    <value>Expecting number in range {0} – {1}.</value>
+    <value>Expecting number in range {0} - {1}.</value>
     <comment>{int min, int max}</comment>
   </data>
   <data name="TitleGraphicsArrayBPP" xml:space="preserve">

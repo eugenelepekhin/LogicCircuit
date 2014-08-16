@@ -2898,10 +2898,10 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Dot matrix display can show data stored in
-		/// the internal memory and allows to select
-		/// size and color depth/scheme. Used with in
-		/// advanced circuits like computers or controllers..
+		/// Looks up a localized string similar to (Dot matrix display) can show data stored in the internal memory.
+		/// Used with advanced circuits like computers or controllers.
+		/// Allows to select size and color depth/scheme:
+		/// 1 bit/pixel - black and white.
 		/// </summary>
  		public static string ToolTipDescriptorGraphicsArray {
 			get { return ResourceManager.GetString("ToolTipDescriptorGraphicsArray", Culture); }
@@ -2922,7 +2922,7 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Expecting number in range {0} – {1}..
+		/// Looks up a localized string similar to Expecting number in range {0} - {1}..
 		/// </summary>
  		public static string ErrorBadIntegerInRange(int min, int max) {
 			return string.Format(Culture, ResourceManager.GetString("ErrorBadIntegerInRange", Culture), min, max);

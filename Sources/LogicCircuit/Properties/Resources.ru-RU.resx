@@ -1346,4 +1346,47 @@
   <data name="ToolTipSensorManualInitialValue" xml:space="preserve">
     <value>Введите начальное значение, как шестнадцатеричное число.</value>
   </data>
+  <data name="NameGraphicsArray" xml:space="preserve">
+    <value>Графический дисплей</value>
+  </data>
+  <data name="CaptionGraphicsArrayBPP" xml:space="preserve">
+    <value>Бит(а) на пиксель</value>
+  </data>
+  <data name="ToolTipDescriptorGraphicsArray" xml:space="preserve">
+    <value>Графический (матричный) дисплей показывает данные,
+хранящиеся во внутренней памяти. Используется в 
+сложных схемах - таких, как компьютеры или контроллеры.
+Позволяет выбирать размер и цветовую схему:
+1 бит на пиксель - черно-белый
+2 бита на пиксель - 4 оттенка серого
+4 бита на пиксель - 16 цветов
+8 бит на пиксель - 256 цветов</value>
+  </data>
+  <data name="ToolTipGraphicsArray" xml:space="preserve">
+    <value>{0} {1}х{2}. {3} бит(а) на пиксель: {4} цвета(ов)</value>
+  </data>
+  <data name="ToolTipGraphicsArrayBPP" xml:space="preserve">
+    <value>Выберите число бит на пиксель</value>
+  </data>
+  <data name="ErrorBadIntegerInRange" xml:space="preserve">
+    <value>Ожидается число в диапазоне {0} - {1}.</value>
+  </data>
+  <data name="TitleGraphicsArrayBPP" xml:space="preserve">
+    <value>_Бит на пиксель:</value>
+  </data>
+  <data name="TitleHeight" xml:space="preserve">
+    <value>_Высота:</value>
+  </data>
+  <data name="TitleWidth" xml:space="preserve">
+    <value>_Ширина:</value>
+  </data>
+  <data name="ToolTipGraphicsArrayHeight" xml:space="preserve">
+    <value>Введите высоту дисплея в пикселях.</value>
+  </data>
+  <data name="ToolTipGraphicsArrayWidth" xml:space="preserve">
+    <value>Введите ширину дисплея в пикселях.</value>
+  </data>
+  <data name="ErrorWriteNotConnected" xml:space="preserve">
+    <value>Не подключен вход записи дисплея {0}</value>
+  </data>
 </root>
