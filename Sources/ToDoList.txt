@@ -4,7 +4,6 @@ smarter wires
 
 Tunnels
 Keyboard device
-Display device
 
 Colors of symbols
 
