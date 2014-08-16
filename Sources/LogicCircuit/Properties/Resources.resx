@@ -1295,7 +1295,7 @@ that displaying its visual elements.</value>
     <value>Minimum should be less or equal than maximum.</value>
   </data>
   <data name="ErrorBadPositiveNumber" xml:space="preserve">
-    <value>Expecting number greater that 0.</value>
+    <value>Expecting number greater than 0.</value>
   </data>
   <data name="ErrorEmptySeries" xml:space="preserve">
     <value>The series should not be empty</value>

@@ -2661,7 +2661,7 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Expecting number greater that 0..
+		/// Looks up a localized string similar to Expecting number greater than 0..
 		/// </summary>
  		public static string ErrorBadPositiveNumber {
 			get { return ResourceManager.GetString("ErrorBadPositiveNumber", Culture); }
