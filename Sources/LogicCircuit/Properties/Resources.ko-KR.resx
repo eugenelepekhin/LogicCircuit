@@ -1323,4 +1323,46 @@ Tri-state와 적절한 제어 회로를 함께 써서 멀티플렉서를 만들 
   <data name="ToolTipSensorManualInitialValue" xml:space="preserve">
     <value>초기 값을 16진수로 입력하십시오.</value>
   </data>
+  <data name="NameGraphicsArray" xml:space="preserve">
+    <value>그래픽 장치</value>
+  </data>
+  <data name="CaptionGraphicsArrayBPP" xml:space="preserve">
+    <value>비트 당 픽셀</value>
+  </data>
+  <data name="ToolTipDescriptorGraphicsArray" xml:space="preserve">
+    <value>(도트 행렬 디스플레이) 내부 메모리에 저장된 데이터를 보여준다.
+컴퓨터나 컨트롤러와 같이 고급 논리 회로에 사용된다.
+크기와 컬러 수를 선택할 수 있다:
+1 비트/픽셀 - 흑백
+2 비트/픽셀 - 4색 그레이스케일
+4 비트/픽셀 - 16색 컬러
+8 비트/픽셀 - 256색 컬러</value>
+  </data>
+  <data name="ToolTipGraphicsArray" xml:space="preserve">
+    <value>{0} {1}x{2}, {3} 비트/픽셀 ({4}색) </value>
+  </data>
+  <data name="ToolTipGraphicsArrayBPP" xml:space="preserve">
+    <value>비트/픽셀 수를 선택하십시오.</value>
+  </data>
+  <data name="ErrorBadIntegerInRange" xml:space="preserve">
+    <value>{0} - {1} 범위내의 수를 입력하십시오.</value>
+  </data>
+  <data name="TitleGraphicsArrayBPP" xml:space="preserve">
+    <value>비트/픽셀:</value>
+  </data>
+  <data name="TitleHeight" xml:space="preserve">
+    <value>세로:</value>
+  </data>
+  <data name="TitleWidth" xml:space="preserve">
+    <value>가로:</value>
+  </data>
+  <data name="ToolTipGraphicsArrayHeight" xml:space="preserve">
+    <value>그래픽 장치의 세로 픽셀 수를 입력하십시오.</value>
+  </data>
+  <data name="ToolTipGraphicsArrayWidth" xml:space="preserve">
+    <value>그래픽 장치의 가로 픽셀 수를 입력하십시오.</value>
+  </data>
+  <data name="ErrorWriteNotConnected" xml:space="preserve">
+    <value>그래픽 장치 {0}에 쓰기 입력이 연결되지 않았습니다.</value>
+  </data>
 </root>

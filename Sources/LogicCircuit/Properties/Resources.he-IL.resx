@@ -1389,4 +1389,46 @@
   <data name="ToolTipSensorManualInitialValue" xml:space="preserve">
     <value>נא להזין את הערך ההתחלתי כמספר הקסדצימלי‏.‏</value>
   </data>
+  <data name="NameGraphicsArray" xml:space="preserve">
+    <value>מערך גרפי‏.‏</value>
+  </data>
+  <data name="CaptionGraphicsArrayBPP" xml:space="preserve">
+    <value>סיביות לכל פיקסל</value>
+  </data>
+  <data name="ToolTipDescriptorGraphicsArray" xml:space="preserve">
+    <value>‏(‏מטריצת תצוגת פיקסלים‏)‏ מציגה מידע ששמור בזכרון הפנימי‏.‏
+לשימוש במעגלים מורכבים כמו מחשבים ובקרים‏.‏
+מאפשרת לבחור אתכמות הצבעים בהתאם לרוחב המידע‏:‏
+‏סיבית לכל פיקסל‏ - ‏שחור לבן
+2‏ ‏סיביות לכל פיקסל‏ - ‏4‏ ‏גוונים של אפור
+‏4 ‏סיביות לכל פיקסל‏ - ‏16 ‏ צבעים
+‏8 ‏סיביות לכל פיקסל‏ - ‏256 ‏צבעים</value>
+  </data>
+  <data name="ToolTipGraphicsArray" xml:space="preserve">
+    <value>‏{0}‏ {1}‏ על ‏{2}‏ עם ‏{3}‏ סיביות לכל פיקסל ‏(‏{4}‏ צבעים‏)‏</value>
+  </data>
+  <data name="ToolTipGraphicsArrayBPP" xml:space="preserve">
+    <value>כמות הסיביות עבור כל פיקסל</value>
+  </data>
+  <data name="ErrorBadIntegerInRange" xml:space="preserve">
+    <value>דרוש מספר בין ‏{0}‏ ל‏-‏{1}‏.‏</value>
+  </data>
+  <data name="TitleGraphicsArrayBPP" xml:space="preserve">
+    <value>‏_סיביות לפיקסל‏:‏</value>
+  </data>
+  <data name="TitleHeight" xml:space="preserve">
+    <value>‏_גובה‏:‏</value>
+  </data>
+  <data name="TitleWidth" xml:space="preserve">
+    <value>‏_רוחב‏:‏</value>
+  </data>
+  <data name="ToolTipGraphicsArrayHeight" xml:space="preserve">
+    <value>גובה המערך הגרפי בפיקסלים‏.‏</value>
+  </data>
+  <data name="ToolTipGraphicsArrayWidth" xml:space="preserve">
+    <value>רוחב המערך הגרפי בפיקסלים‏.‏</value>
+  </data>
+  <data name="ErrorWriteNotConnected" xml:space="preserve">
+    <value>קלט כתיבה לא מחובר במערך גרפי ‏{0}‏.‏</value>
+  </data>
 </root>
