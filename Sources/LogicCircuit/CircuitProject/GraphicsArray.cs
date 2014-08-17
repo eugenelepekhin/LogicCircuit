@@ -51,12 +51,12 @@ namespace LogicCircuit {
 
 		public static int AddressBitsFor(int dataBitWidth, int bitsPerPixel, int width, int height) {
 			int bits = 0;
-			int cells = GraphicsArray.NumberCellsFor(dataBitWidth, bitsPerPixel, width, height);
-			while(cells != 0) {
+			int max = GraphicsArray.NumberCellsFor(dataBitWidth, bitsPerPixel, width, height) - 1;
+			while(max != 0) {
 				bits++;
-				cells >>= 1;
+				max >>= 1;
 			}
-			return bits;
+			return Math.Max(1, bits);
 		}
 
 		public int AddressBitWidth {
