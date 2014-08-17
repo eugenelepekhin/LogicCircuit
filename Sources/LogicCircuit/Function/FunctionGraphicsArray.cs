@@ -106,8 +106,9 @@ namespace LogicCircuit {
 					this.data[firstByte] = (byte)value;
 				} else {
 					int count = this.DataBitWidth / 8;
+					firstByte += count - 1;
 					for(int i = 0; i < count; i++) {
-						data[firstByte + i] = (byte)(value >> (i * 8));
+						data[firstByte - i] = (byte)(value >> (i * 8));
 					}
 				}
 			}
@@ -125,8 +126,9 @@ namespace LogicCircuit {
 					value = (this.data[firstByte] & mask) >> (8 - shift - this.DataBitWidth);
 				} else {
 					int count = this.DataBitWidth / 8;
+					firstByte += count - 1;
 					for(int i = 0; i < count; i++) {
-						value |= ((int)data[firstByte + i]) << (i * 8);
+						value |= ((int)data[firstByte - i]) << (i * 8);
 					}
 				}
 			}
