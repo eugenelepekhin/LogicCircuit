@@ -1339,7 +1339,7 @@ Tri-state와 적절한 제어 회로를 함께 써서 멀티플렉서를 만들 
 8 비트/픽셀 - 256색 컬러</value>
   </data>
   <data name="ToolTipGraphicsArray" xml:space="preserve">
-    <value>{0} {1}x{2}, {3} 비트/픽셀 ({4}색) </value>
+    <value>{0} {1}x{2}, {3} 비트/픽셀 ({4}색)</value>
   </data>
   <data name="ToolTipGraphicsArrayBPP" xml:space="preserve">
     <value>비트/픽셀 수를 선택하십시오.</value>
