@@ -988,8 +988,10 @@ Eine solche Schaltung kann nicht mehr als einmal verwendet werden, da eventuell 
     <value>Opti_sche Elemente im Projektbereich anzeigen</value>
   </data>
   <data name="ToolTipIsDisplay" xml:space="preserve">
-    <value>Wenn Sie diese Funktion aktivieren, werden alle optischen Elemente dieses Schaltungs-Projekts im Projektbereich angezeigt.
-Optische Elemente sind: LED, LED Matrix, Knopf oder andere Logic Circuit Elemente welche optische Anzeigen haben.</value>
+    <value>Wenn Sie diese Funktion aktivieren, werden alle optischen
+Elemente dieses Schaltungs-Projekts im Projektbereich angezeigt.
+Optische Elemente sind: LED, LED Matrix, Grafik-Display,
+Knopf oder andere Logic Circuit Elemente welche optische Anzeigen haben.</value>
   </data>
   <data name="TitleActualFrequency" xml:space="preserve">
     <value>Aktuelle Frequenz:</value>
