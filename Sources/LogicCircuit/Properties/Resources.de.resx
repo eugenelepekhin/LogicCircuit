@@ -1265,30 +1265,41 @@ Out</value>
     <value>S_erien:</value>
   </data>
   <data name="ToolTipDescriptorClock" xml:space="preserve">
-    <value>Generiert ein digitales Taktsignal bestehend aus 0 und 1 und wird benutzt um Schaltungen zu takten.</value>
+    <value>Generiert ein digitales Taktsignal bestehend aus 0 und 1
+und wird benutzt um Schaltungen zu takten.</value>
   </data>
   <data name="ToolTipDescriptorPin" xml:space="preserve">
-    <value>Wird benutzt um einen Anschluß bereitzustellen welcher Daten an andere Schaltungen senden oder von dort empfangen kann.</value>
+    <value>Wird benutzt um einen Anschluß bereitzustellen welcher Daten
+an andere Schaltungen senden oder von dort empfangen kann.</value>
   </data>
   <data name="ToolTipDescriptorProbe" xml:space="preserve">
-    <value>Fügt eine Prüfspitze zur Schaltung hinzu um den aktuellen Zustand der eingeschalteten Schaltung zu untersuchen.
-Klicken Sie doppelt auf die Prüfspitze um die vergangenen Meßwerte zu sehen oder diese auf dem Oszilloskop zu betrachten.</value>
+    <value>Fügt eine Prüfspitze zur Schaltung hinzu um den aktuellen 
+Zustand der eingeschalteten Schaltung zu untersuchen.
+Klicken Sie doppelt auf die Prüfspitze um die vergangenen Meßwerte
+zu sehen oder diese auf dem Oszilloskop zu betrachten.</value>
   </data>
   <data name="ToolTipDescriptorSensor" xml:space="preserve">
-    <value>Erzeugt Daten aus einer "externen Quelle" als Serie von vordefinierten, zufällig erzeugten oder manuell eingegebenen Werten.</value>
+    <value>Erzeugt Daten aus einer "externen Quelle" als Serie von vordefinierten,
+zufällig erzeugten oder manuell eingegebenen Werten.</value>
   </data>
   <data name="ToolTipDescriptorSplitter" xml:space="preserve">
-    <value>Ermöglicht die Erstellung eines Leitungsstangs oder die Aufteilung in einzelne Verbindungen.
-Die Nutzung von Verzweigern und Multi-Bit-Anschlüssen kann Schaltpläne und deren Verständnis signifikant vereinfachen.</value>
+    <value>Ermöglicht die Erstellung eines Leitungsstangs oder
+die Aufteilung in einzelne Verbindungen.
+Die Nutzung von Verzweigern und Multi-Bit-Anschlüssen kann
+Schaltpläne und deren Verständnis signifikant vereinfachen.</value>
   </data>
   <data name="ToolTipDescriptorText" xml:space="preserve">
-    <value>Plazieren Sie Notizen irgendwo in der Schaltung um Ihre Schaltung zu kommentieren, erstellen Sie hilfreiche Links zu beliebigen Webseiten und dekorieren Sie Ihre Schaltung mit Bildern.</value>
+    <value>Plazieren Sie Notizen irgendwo in der Schaltung um Ihre Schaltung zu
+kommentieren, erstellen Sie hilfreiche Links zu beliebigen Webseiten
+und dekorieren Sie Ihre Schaltung mit Bildern.</value>
   </data>
   <data name="ToolTipDescriptorTriState" xml:space="preserve">
     <value>Kann drei Zustände am Ausgang haben: 1, 0 und hochohmig (Z).
-Der hochohmige Zustand (Z) hat keinen Einfluß auf die Logik einer digitalen Schaltung.
-Diese Bausteine werden für die Bussysteme eines Prozessors benutzt um das Senden von Daten durch mehrere Quellen zu ermöglichen.
-Eine Gruppe aus Tri-State-Treibern mit einer passenden Steuerung gleicht grundsätzlich einem Multiplexer.</value>
+Der hochohmige Zustand (Z) hat keinen Einfluß auf die Logik
+einer digitalen Schaltung. Diese Bausteine werden für die Bussysteme
+eines Prozessors benutzt um das Senden von Daten durch mehrere Quellen
+zu ermöglichen. Eine Gruppe aus Tri-State-Treibern mit einer passenden
+Steuerung gleicht grundsätzlich einem Multiplexer.</value>
   </data>
   <data name="ToolTipDevicePinSide" xml:space="preserve">
     <value>Wählen Sie die Seite an welcher sich der Anschluß befinden soll.</value>
@@ -1319,8 +1330,10 @@ Eine Gruppe aus Tri-State-Treibern mit einer passenden Steuerung gleicht grunds�
     <value>Wählen Sie von wo der Sensor seine Meßwert herbekommt.</value>
   </data>
   <data name="ToolTipSeriesData" xml:space="preserve">
-    <value>Bitte geben Sie die Meßwert-Reihe des Sensors in der Form &lt;cycle&gt;:&lt;value&gt; ein, wobei beide Daten Hexadezimalwerte sein müssen.
-Wenn der aktuelle Schritt einen geraden Wert oder 0 hat entspricht dies einem Taktwechsel von 0 auf 1, wenn er ungerade ist entspricht dies einem Taktwechsel von 1 auf 0.</value>
+    <value>Bitte geben Sie die Meßwert-Reihe des Sensors in der Form &lt;cycle&gt;:&lt;value&gt; ein,
+wobei beide Daten Hexadezimalwerte sein müssen. Wenn der aktuelle Schritt
+einen geraden Wert oder 0 hat entspricht dies einem Taktwechsel von
+0 auf 1, wenn er ungerade ist entspricht dies einem Taktwechsel von 1 auf 0.</value>
   </data>
   <data name="ToolTipSound" xml:space="preserve">
     <value>Summer {0}</value>
