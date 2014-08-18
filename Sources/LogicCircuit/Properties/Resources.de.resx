@@ -879,7 +879,7 @@ Speicherwert wird bei {0} aktualisiert.</value>
     <value>{0}: {1} Adressleitungen, {2} Datenleitungen</value>
   </data>
   <data name="CaptionSplitterDirection" xml:space="preserve">
-    <value>Bus-Anschluss</value>
+    <value>Bus-Anschluss Richtung</value>
   </data>
   <data name="ToolTipFrequency" xml:space="preserve">
     <value>Ändert die Frequenz der Taktgeneratoren der laufenden Schaltung.</value>
@@ -1190,5 +1190,185 @@ Out</value>
   </data>
   <data name="WireDisplayDisconnected" xml:space="preserve">
     <value>Es besteht keine Verbindung.</value>
+  </data>
+  <data name="CaptionPinSide" xml:space="preserve">
+    <value>Pin-Seite</value>
+  </data>
+  <data name="CaptionSensorType" xml:space="preserve">
+    <value>Sensor Typ</value>
+  </data>
+  <data name="CommandEditFind" xml:space="preserve">
+    <value>Suchen</value>
+  </data>
+  <data name="ErrorBadHexNumber" xml:space="preserve">
+    <value>Ungültige hexadezimale Zahl</value>
+  </data>
+  <data name="ErrorBadInterval" xml:space="preserve">
+    <value>Das Minimalwert muss kleiner oder gleich dem Maximalwert sein</value>
+  </data>
+  <data name="ErrorBadPositiveNumber" xml:space="preserve">
+    <value>Zahl größer Null erwartet</value>
+  </data>
+  <data name="ErrorEmptySeries" xml:space="preserve">
+    <value>Die Serie darf nicht leer sein</value>
+  </data>
+  <data name="ErrorSeriesItem" xml:space="preserve">
+    <value>Fehler in {0}. Es muss ein Paar aus hexadezimalen Nummern sein, getrennt durch einen :</value>
+    <comment>{string item}</comment>
+  </data>
+  <data name="ErrorSeriesItemOrder" xml:space="preserve">
+    <value>Fehler in {0}. Jeder weitere Schritt muß größer als der vorherige sein.</value>
+  </data>
+  <data name="NameSensor" xml:space="preserve">
+    <value>Sensor</value>
+  </data>
+  <data name="NameSound" xml:space="preserve">
+    <value>Summer</value>
+  </data>
+  <data name="SensorTypeManual" xml:space="preserve">
+    <value>Manuell</value>
+  </data>
+  <data name="SensorTypeRandom" xml:space="preserve">
+    <value>Zufällig</value>
+  </data>
+  <data name="SensorTypeSeries" xml:space="preserve">
+    <value>Serie</value>
+  </data>
+  <data name="TitleFind" xml:space="preserve">
+    <value>Suche Schaltung</value>
+  </data>
+  <data name="TitleLoopSeries" xml:space="preserve">
+    <value>Serie wiederholen</value>
+  </data>
+  <data name="TitlePinSide" xml:space="preserve">
+    <value>Pin _Seite:</value>
+  </data>
+  <data name="TitleSearch" xml:space="preserve">
+    <value>Suchen</value>
+  </data>
+  <data name="TitleSearchPattern" xml:space="preserve">
+    <value>Suchen nach:</value>
+  </data>
+  <data name="TitleSensorManualInitialValue" xml:space="preserve">
+    <value>Initialer _Wert:</value>
+  </data>
+  <data name="TitleSensorRandomMax" xml:space="preserve">
+    <value>M_aximale Schritte:</value>
+  </data>
+  <data name="TitleSensorRandomMin" xml:space="preserve">
+    <value>_Minimale Schritte:</value>
+  </data>
+  <data name="TitleSensorType" xml:space="preserve">
+    <value>Sensor _Typ:</value>
+  </data>
+  <data name="TitleSeries" xml:space="preserve">
+    <value>S_erien:</value>
+  </data>
+  <data name="ToolTipDescriptorClock" xml:space="preserve">
+    <value>Generiert ein digitales Taktsignal bestehend aus 0 und 1 und wird benutzt um Schaltungen zu takten.</value>
+  </data>
+  <data name="ToolTipDescriptorPin" xml:space="preserve">
+    <value>Wird benutzt um einen Anschluß bereitzustellen welcher Daten an andere Schaltungen senden oder von dort empfangen kann.</value>
+  </data>
+  <data name="ToolTipDescriptorProbe" xml:space="preserve">
+    <value>Fügt eine Prüfspitze zur Schaltung hinzu um den aktuellen Zustand der eingeschalteten Schaltung zu untersuchen.
+Klicken Sie doppelt auf die Prüfspitze um die vergangenen Meßwerte zu sehen oder diese auf dem Oszilloskop zu betrachten.</value>
+  </data>
+  <data name="ToolTipDescriptorSensor" xml:space="preserve">
+    <value>Erzeugt Daten aus einer "externen Quelle" als Serie von vordefinierten, zufällig erzeugten oder manuell eingegebenen Werten.</value>
+  </data>
+  <data name="ToolTipDescriptorSplitter" xml:space="preserve">
+    <value>Ermöglicht die Erstellung eines Leitungsstangs oder die Aufteilung in einzelne Verbindungen.
+Die Nutzung von Verzweigern und Multi-Bit-Anschlüssen kann Schaltpläne und deren Verständnis signifikant vereinfachen.</value>
+  </data>
+  <data name="ToolTipDescriptorText" xml:space="preserve">
+    <value>Plazieren Sie Notizen irgendwo in der Schaltung um Ihre Schaltung zu kommentieren, erstellen Sie hilfreiche Links zu beliebigen Webseiten und dekorieren Sie Ihre Schaltung mit Bildern.</value>
+  </data>
+  <data name="ToolTipDescriptorTriState" xml:space="preserve">
+    <value>Kann drei Zustände am Ausgang haben: 1, 0 und hochohmig (Z).
+Der hochohmige Zustand (Z) hat keinen Einfluß auf die Logik einer digitalen Schaltung.
+Diese Bausteine werden für die Bussysteme eines Prozessors benutzt um das Senden von Daten durch mehrere Quellen zu ermöglichen.
+Eine Gruppe aus Tri-State-Treibern mit einer passenden Steuerung gleicht grundsätzlich einem Multiplexer.</value>
+  </data>
+  <data name="ToolTipDevicePinSide" xml:space="preserve">
+    <value>Wählen Sie die Seite an welcher sich der Anschluß befinden soll.</value>
+  </data>
+  <data name="ToolTipSensor" xml:space="preserve">
+    <value>Sensor {0}</value>
+    <comment>{string notation}</comment>
+  </data>
+  <data name="ToolTipSensorBitWidth" xml:space="preserve">
+    <value>Wählen Sie die Bitbreite des Sensors.</value>
+  </data>
+  <data name="ToolTipSensorManualInitialValue" xml:space="preserve">
+    <value>Geben Sie den Initialwert als Hexadezimalzahl ein.</value>
+  </data>
+  <data name="ToolTipSensorManualValue" xml:space="preserve">
+    <value>Geben Sie einen Hexadezimalwert ein und drücken Sie Enter.</value>
+  </data>
+  <data name="ToolTipSensorNotation" xml:space="preserve">
+    <value>Geben Sie die Bezeichnung des Sensors ein.</value>
+  </data>
+  <data name="ToolTipSensorRandomMax" xml:space="preserve">
+    <value>Geben Sie die maximale Anzahl der Schritte ein bevor der Sensor seinen Meßwert ändert.</value>
+  </data>
+  <data name="ToolTipSensorRandomMin" xml:space="preserve">
+    <value>Geben Sie die minimale Anzahl der Schritte ein bevor der Sensor seinen Meßwert ändert.</value>
+  </data>
+  <data name="ToolTipSensorType" xml:space="preserve">
+    <value>Wählen Sie von wo der Sensor seine Meßwert herbekommt.</value>
+  </data>
+  <data name="ToolTipSeriesData" xml:space="preserve">
+    <value>Bitte geben Sie die Meßwert-Reihe des Sensors in der Form &lt;cycle&gt;:&lt;value&gt; ein, wobei beide Daten Hexadezimalwerte sein müssen.
+Wenn der aktuelle Schritt einen geraden Wert oder 0 hat entspricht dies einem Taktwechsel von 0 auf 1, wenn er ungerade ist entspricht dies einem Taktwechsel von 1 auf 0.</value>
+  </data>
+  <data name="ToolTipSound" xml:space="preserve">
+    <value>Summer {0}</value>
+    <comment>{string notation}</comment>
+  </data>
+  <data name="ToolTipSoundNotation" xml:space="preserve">
+    <value>Geben Sie eine Bezeichnung für den Summer ein.</value>
+  </data>
+  <data name="NameGraphicsArray" xml:space="preserve">
+    <value>Grafik-Display</value>
+  </data>
+  <data name="CaptionGraphicsArrayBPP" xml:space="preserve">
+    <value>Bits pro Pixel</value>
+  </data>
+  <data name="ToolTipDescriptorGraphicsArray" xml:space="preserve">
+    <value>Ein Grafik-Display kann im internen Speicher abgelegte Daten anzeigen.
+Wird zusammen mit komplexen Schaltungen wie Computern oder Controllern benutzt.
+Es ist möglich die Größe und Farbtiefe/Grafik zu wählen:
+1 Bit/Pixel - Schwarz / Weiß
+2 Bits/Pixel - 4 Graustufen
+4 Bits/Pixel - 16 Farben
+8 bits/pixel - 256 colors</value>
+  </data>
+  <data name="ToolTipGraphicsArray" xml:space="preserve">
+    <value>{0} {1}x{2} mit {3} Bit(s) pro Pixel ({4} Farben)</value>
+  </data>
+  <data name="ToolTipGraphicsArrayBPP" xml:space="preserve">
+    <value>Wählen Sie die Anzahl der Bits pro Pixel</value>
+  </data>
+  <data name="ErrorBadIntegerInRange" xml:space="preserve">
+    <value>Erwarte Zahl im Bereich {0} - {1}.</value>
+  </data>
+  <data name="TitleGraphicsArrayBPP" xml:space="preserve">
+    <value>_Bits pro Pixel:</value>
+  </data>
+  <data name="TitleHeight" xml:space="preserve">
+    <value>_Höhe:</value>
+  </data>
+  <data name="TitleWidth" xml:space="preserve">
+    <value>_Breite:</value>
+  </data>
+  <data name="ToolTipGraphicsArrayHeight" xml:space="preserve">
+    <value>Geben Sie die Höhe des Grafik-Displays in Pixel ein.</value>
+  </data>
+  <data name="ToolTipGraphicsArrayWidth" xml:space="preserve">
+    <value>Geben Sie die Breite des Grafik-Displays in Pixel ein.</value>
+  </data>
+  <data name="ErrorWriteNotConnected" xml:space="preserve">
+    <value>Eingang hat keine Verbindung zum Grafik-Display {0}</value>
   </data>
 </root>
