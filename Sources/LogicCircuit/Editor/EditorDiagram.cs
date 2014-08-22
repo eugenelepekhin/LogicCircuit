@@ -870,6 +870,17 @@ namespace LogicCircuit {
 					marker = this.FindMarker(wire);
 					if(marker == null) {
 						symbol = wire;
+					} else if(this.SelectionCount == 1) {
+						// Check if user clicked close to WirePointMarker and treat this as attempt to move one end of the wire.
+						WireMarker wireMarker = marker as WireMarker;
+						if(wireMarker != null) {
+							Rect rect = EditorDiagram.ClickArea(point);
+							if(rect.Contains(Symbol.ScreenPoint(wireMarker.Point1.WirePoint()))) {
+								marker = wireMarker.Point1;
+							} else if(rect.Contains(Symbol.ScreenPoint(wireMarker.Point2.WirePoint()))) {
+								marker = wireMarker.Point2;
+							}
+						}
 					}
 				} else {
 					jam = this.JamNear(point);

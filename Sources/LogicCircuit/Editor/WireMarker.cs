@@ -14,8 +14,8 @@ namespace LogicCircuit {
 
 			private Line Line { get; set; }
 
-			private WirePointMarker Point1 { get; set; }
-			private WirePointMarker Point2 { get; set; }
+			public WirePointMarker Point1 { get; private set; }
+			public WirePointMarker Point2 { get; private set; }
 
 			public WireMarker(Wire wire) {
 				this.Wire = wire;
