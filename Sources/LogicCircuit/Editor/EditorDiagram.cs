@@ -599,8 +599,9 @@ namespace LogicCircuit {
 		}
 
 		private void FinishMove(Point position, bool withWires) {
-			this.movingMarker.Commit(this, position, withWires);
+			Marker marker = this.movingMarker;
 			this.CancelMove();
+			marker.Commit(this, position, withWires);
 		}
 
 		private void CommitMove(Point point, bool withWires) {
