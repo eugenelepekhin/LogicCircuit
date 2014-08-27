@@ -1053,7 +1053,9 @@
     <value>选择新引脚在电路示意图中的倚靠的边</value>
   </data>
   <data name="ToolTipIsDisplay" xml:space="preserve">
-    <value>当你标注逻辑电路显示视觉元素时，所有的视觉符号都会显示在电路示意图上，包括：LED，LED矩阵，按钮和其他逻辑电路。</value>
+    <value>当你标注逻辑电路显示视觉元素时，
+所有的视觉符号都会显示在电路示意图上，包括：
+LED，LED矩阵，图形序列，按钮和其他逻辑电路。</value>
   </data>
   <data name="GateAndNotation" xml:space="preserve">
     <value>&amp;</value>
@@ -1292,19 +1294,24 @@ Out</value>
     <value>生成在 0 和 1 之间振荡的信号，协调整个电路的响应</value>
   </data>
   <data name="ToolTipDescriptorPin" xml:space="preserve">
-    <value>用来创建一个可以被其他电路所使用从当前电路提供或接收数据的连接器。重新安排电路上的针脚来改变他们在这个电路上符号的相对位置。</value>
+    <value>用来创建一个可以被其他电路所使用从当前电路提供或接收数据的连接器。
+重新安排电路上的针脚来改变他们在这个电路上符号的相对位置。</value>
   </data>
   <data name="ToolTipDescriptorProbe" xml:space="preserve">
-    <value>添加并连接连到你电路上的探针来观察当前正在运行的电路中探针表面的状态，当你双击这个探针或者查看示波器数据时可以看到历史值。</value>
+    <value>添加并连接连到你电路上的探针来观察当前正在运行的电路中探针表面的状态，
+当你双击这个探针或者查看示波器数据时可以看到历史值。</value>
   </data>
   <data name="ToolTipDescriptorSensor" xml:space="preserve">
     <value>提供将“外部源”当作预定义序列，随机序列或者人工输入序列值的数据。</value>
   </data>
   <data name="ToolTipDescriptorSplitter" xml:space="preserve">
-    <value>允许创建线束或将其分开为单独导线。使用分路器和多位针脚能够显著地降低电路绘制的复杂度和让人更容易理解电路。</value>
+    <value>允许创建线束或将其分开为单独导线。
+使用分路器和多位针脚能够显著地降低电路绘制的复杂度和让人更容易理解电路。</value>
   </data>
   <data name="ToolTipDescriptorText" xml:space="preserve">
-    <value>在电路中任意放置文本来给你的电路添加注释，提供可以连接到任意网站的链接，并可以用图片来修饰你的电路。</value>
+    <value>在电路中任意放置文本来给你的电路添加注释，
+提供可以连接到任意网站的链接，
+并可以用图片来修饰你的电路。</value>
   </data>
   <data name="ToolTipDescriptorTriState" xml:space="preserve">
     <value>有三种不同的输出：1，0 和高阻抗 (Z)
