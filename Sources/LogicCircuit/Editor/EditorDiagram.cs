@@ -849,6 +849,30 @@ namespace LogicCircuit {
 							symbol = this.FindWireNear(e.GetPosition(this.Diagram));
 						}
 						Tracer.Assert(symbol != null);
+						Wire wire = symbol as Wire;
+						if(wire != null && 0 < this.SelectionCount) {
+							Point point = e.GetPosition(this.Diagram);
+							Rect rect = EditorDiagram.ClickArea(point);
+							Conductor conductor;
+							this.Project.LogicalCircuit.ConductorMap().TryGetValue(wire.Point1, out conductor);
+							Tracer.Assert(conductor != null);
+							foreach(Symbol other in this.SelectedSymbols) {
+								Wire otherWire = other as Wire;
+								if(otherWire != null && otherWire != wire && conductor.Contains(otherWire)) {
+									WireMarker wireMarker = this.FindMarker(otherWire) as WireMarker;
+									Tracer.Assert(wireMarker != null);
+									if(rect.Contains(Symbol.ScreenPoint(wireMarker.Point1.WirePoint()))) {
+										marker = wireMarker.Point1;
+										symbol = null;
+										break;
+									} else if(rect.Contains(Symbol.ScreenPoint(wireMarker.Point2.WirePoint()))) {
+										marker = wireMarker.Point2;
+										symbol = null;
+										break;
+									}
+								}
+							}
+						}
 					} else {
 						if(!(element is Ellipse)) { // Jam's notations - text on circuit symbol was clicked. Treat this as symbol click
 							symbol = jam.CircuitSymbol;
