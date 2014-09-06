@@ -265,22 +265,31 @@ namespace LogicCircuit {
 			}
 
 			private struct FunctionList {
-				private CircuitFunction[] list;
+				/// <summary>
+				/// This wrapper is value type which is not inheritable.
+				/// So array of value type will not be covariant.
+				/// That means faster assigning to elements of array.
+				/// </summary>
+				private struct FunctionWrapper {
+					public CircuitFunction CircuitFunction;
+				}
+
+				private FunctionWrapper[] list;
 				public int Count { get; private set; }
 
 				public FunctionList(int size) : this() {
-					this.list = new CircuitFunction[size];
+					this.list = new FunctionWrapper[size];
 				}
 
 				public CircuitFunction this[int index] {
-					get { return this.list[index]; }
+					get { return this.list[index].CircuitFunction; }
 				}
 
 				public void Add(CircuitFunction f) {
 					if(this.list.Length <= this.Count) {
 						Array.Resize(ref this.list, this.list.Length * 2);
 					}
-					this.list[this.Count++] = f;
+					this.list[this.Count++].CircuitFunction = f;
 				}
 
 				public void Clear() {
