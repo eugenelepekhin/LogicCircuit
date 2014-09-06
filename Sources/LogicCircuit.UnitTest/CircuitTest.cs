@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace LogicCircuit.UnitTest {
@@ -20,10 +21,13 @@ namespace LogicCircuit.UnitTest {
 		[TestMethod()]
 		public void CircuitDigitalClockTest() {
 			ClockSocket clock = new ClockSocket(new ProjectTester(this.TestContext, Properties.Resources.Digital_Clock, "Unit Test"));
+			TimeSpan timeSpan = TimeSpan.Zero;
+			int days = 2;
 			clock.Tester.CircuitProject.InTransaction(() => {
 				clock.Start();
-				clock.TestTick(60 * 60 * 24 * 2);
+				timeSpan = clock.TestTick(60 * 60 * 24 * days);
 			});
+			this.TestContext.WriteLine("{0} days counted in {1}", days, timeSpan);
 		}
 
 		private class ClockSocket {
@@ -114,13 +118,18 @@ namespace LogicCircuit.UnitTest {
 				return this.Time();
 			}
 
-			public void TestTick(int count) {
+			public TimeSpan TestTick(int count) {
 				TimeSpan time = this.Time();
+				Stopwatch watch = new Stopwatch();
+				watch.Reset();
+				watch.Start();
 				for(int i = 0; i < count; i++) {
 					TimeSpan total = new TimeSpan(0, 0, i + 1) + time;
 					TimeSpan expected = new TimeSpan(total.Hours, total.Minutes, total.Seconds);
 					Assert.AreEqual(expected, this.Tick(), "wrong time");
 				}
+				watch.Stop();
+				return watch.Elapsed;
 			}
 		}
 	}
