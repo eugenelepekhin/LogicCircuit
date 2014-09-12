@@ -804,6 +804,25 @@ namespace LogicCircuit {
 			e.Handled = true;
 		}
 
+		private WirePointMarker FindPointMarkerNear(Point point) {
+			if(0 < this.SelectionCount) {
+				Rect clickArea = EditorDiagram.ClickArea(point);
+				foreach(Symbol other in this.SelectedSymbols) {
+					Wire otherWire = other as Wire;
+					if(otherWire != null) {
+						WireMarker wireMarker = this.FindMarker(otherWire) as WireMarker;
+						Tracer.Assert(wireMarker != null);
+						if(clickArea.Contains(Symbol.ScreenPoint(wireMarker.Point1.WirePoint()))) {
+							return wireMarker.Point1;
+						} else if(clickArea.Contains(Symbol.ScreenPoint(wireMarker.Point2.WirePoint()))) {
+							return wireMarker.Point2;
+						}
+					}
+				}
+			}
+			return null;
+		}
+
 		[SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
 		public void DiagramMouseDown(MouseButtonEventArgs e) {
 			FrameworkElement element = e.OriginalSource as FrameworkElement;
@@ -851,31 +870,25 @@ namespace LogicCircuit {
 						Tracer.Assert(symbol != null);
 						Wire wire = symbol as Wire;
 						if(wire != null && 0 < this.SelectionCount) {
-							Point point = e.GetPosition(this.Diagram);
-							Rect rect = EditorDiagram.ClickArea(point);
-							Conductor conductor;
-							this.Project.LogicalCircuit.ConductorMap().TryGetValue(wire.Point1, out conductor);
-							Tracer.Assert(conductor != null);
-							foreach(Symbol other in this.SelectedSymbols) {
-								Wire otherWire = other as Wire;
-								if(otherWire != null && otherWire != wire && conductor.Contains(otherWire)) {
-									WireMarker wireMarker = this.FindMarker(otherWire) as WireMarker;
-									Tracer.Assert(wireMarker != null);
-									if(rect.Contains(Symbol.ScreenPoint(wireMarker.Point1.WirePoint()))) {
-										marker = wireMarker.Point1;
-										symbol = null;
-										break;
-									} else if(rect.Contains(Symbol.ScreenPoint(wireMarker.Point2.WirePoint()))) {
-										marker = wireMarker.Point2;
-										symbol = null;
-										break;
-									}
-								}
+							marker = this.FindPointMarkerNear(e.GetPosition(this.Diagram));
+							if(marker != null) {
+								symbol = null;
 							}
 						}
 					} else {
 						if(!(element is Ellipse)) { // Jam's notations - text on circuit symbol was clicked. Treat this as symbol click
 							symbol = jam.CircuitSymbol;
+						}
+					}
+				} else {
+					// Check if wire marker was clicked near tip of the wire then treat this as click on PointMarker
+					WireMarker wireMarker = marker as WireMarker;
+					if(wireMarker != null) {
+						Rect clickArea = EditorDiagram.ClickArea(e.GetPosition(this.Diagram));
+						if(clickArea.Contains(Symbol.ScreenPoint(wireMarker.Point1.WirePoint()))) {
+							marker = wireMarker.Point1;
+						} else if(clickArea.Contains(Symbol.ScreenPoint(wireMarker.Point2.WirePoint()))) {
+							marker = wireMarker.Point2;
 						}
 					}
 				}
@@ -892,7 +905,10 @@ namespace LogicCircuit {
 					wire = this.FindWireNear(point);
 				}
 				if(wire != null) {
-					marker = this.FindMarker(wire);
+					marker = this.FindPointMarkerNear(point);
+					if(marker == null) {
+						marker = this.FindMarker(wire);
+					}
 					if(marker == null) {
 						symbol = wire;
 					} else if(this.SelectionCount == 1) {
