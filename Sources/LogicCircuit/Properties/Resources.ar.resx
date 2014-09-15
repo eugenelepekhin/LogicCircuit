@@ -1175,4 +1175,194 @@ LED, مصفوفة LED ,زر , أو اية عناصر اخرى</value>
   <data name="WireDisplayDisconnected" xml:space="preserve">
     <value>لم يتم توصيل السلك.</value>
   </data>
+  <data name="CaptionPinSide" xml:space="preserve">
+    <value>طرف الموصل (Pin)</value>
+  </data>
+  <data name="TitlePinSide" xml:space="preserve">
+    <value>طرف الموصل (Pin):</value>
+  </data>
+  <data name="ToolTipDevicePinSide" xml:space="preserve">
+    <value>اختر الطرف الذي سوف يتوضع الموصل (pin) عليه</value>
+  </data>
+  <data name="NameSensor" xml:space="preserve">
+    <value>حساس</value>
+  </data>
+  <data name="ToolTipSensor" xml:space="preserve">
+    <value>حساس  {0}</value>
+  </data>
+  <data name="CaptionSensorType" xml:space="preserve">
+    <value>نوع الحساس</value>
+  </data>
+  <data name="SensorTypeManual" xml:space="preserve">
+    <value>يدوي</value>
+  </data>
+  <data name="SensorTypeRandom" xml:space="preserve">
+    <value>عشوائي</value>
+  </data>
+  <data name="SensorTypeSeries" xml:space="preserve">
+    <value>سلسلة</value>
+  </data>
+  <data name="ToolTipSensorBitWidth" xml:space="preserve">
+    <value>اختر عرض بتات الحساس</value>
+  </data>
+  <data name="ToolTipSensorNotation" xml:space="preserve">
+    <value>أدخل رمز الحساس</value>
+  </data>
+  <data name="ToolTipSensorType" xml:space="preserve">
+    <value>اختر مصدر بيانات الحساس.</value>
+  </data>
+  <data name="TitleSensorType" xml:space="preserve">
+    <value>نوع الحساس:</value>
+  </data>
+  <data name="ErrorBadInterval" xml:space="preserve">
+    <value>الحد الأدنى يجب أن يكون أقل أو يساوي الحد اﻷعلى.</value>
+  </data>
+  <data name="ErrorBadPositiveNumber" xml:space="preserve">
+    <value>النتيجة المتوقعة هي رقم أكبر من 0.</value>
+  </data>
+  <data name="ErrorEmptySeries" xml:space="preserve">
+    <value>لا يجب أن تكون السلسة فارغة</value>
+  </data>
+  <data name="ErrorSeriesItem" xml:space="preserve">
+    <value>خطأ في {0}. يجب أن يكون زوج من اﻷرقام الست عشرية مفصولة بـ :</value>
+  </data>
+  <data name="ErrorSeriesItemOrder" xml:space="preserve">
+    <value>خطأ في {0}. يجب أن تكون كل دورة أكبر من سابقتها.</value>
+  </data>
+  <data name="TitleLoopSeries" xml:space="preserve">
+    <value>أعد السلسة</value>
+  </data>
+  <data name="TitleSensorRandomMax" xml:space="preserve">
+    <value>عدد الدورات اﻷعظمي:</value>
+  </data>
+  <data name="TitleSensorRandomMin" xml:space="preserve">
+    <value>عدد الدورات اﻷدنى:</value>
+  </data>
+  <data name="TitleSeries" xml:space="preserve">
+    <value>سلسلة:</value>
+  </data>
+  <data name="ToolTipSensorRandomMax" xml:space="preserve">
+    <value>أدخل عدد الدورات اﻷعظمي قبل أن يغير الحساس قراءته.</value>
+  </data>
+  <data name="ToolTipSensorRandomMin" xml:space="preserve">
+    <value>أدخل عدد الدورات اﻷدنى قبل أن يغير الحساس قراءته</value>
+  </data>
+  <data name="ToolTipSeriesData" xml:space="preserve">
+    <value>رجاءً قم بإدخال سلسلة من قراءات الحساس بشكل &lt;دورة&gt;:&lt;قيمة&gt; بحيث كلا القيمتين بشكل ست عشري.
+عندما تكون قيمة الدورة قيمة زوجية أو 0 عندها تستجيب لتغير النبضات من 0 إلى 1 , و عندما تكون قيمة فردية عندها تستجب لتغير النبضات من 1 إلى 0.</value>
+  </data>
+  <data name="NameSound" xml:space="preserve">
+    <value>منبه صوتي</value>
+  </data>
+  <data name="ToolTipSound" xml:space="preserve">
+    <value>منبه صوتي {0}</value>
+  </data>
+  <data name="ToolTipSoundNotation" xml:space="preserve">
+    <value>أدخل رمز جهاز التنبيه الصوتي</value>
+  </data>
+  <data name="CommandEditFind" xml:space="preserve">
+    <value>بحث</value>
+  </data>
+  <data name="TitleFind" xml:space="preserve">
+    <value>إبحث عن دارة</value>
+  </data>
+  <data name="TitleSearch" xml:space="preserve">
+    <value>بحث</value>
+  </data>
+  <data name="TitleSearchPattern" xml:space="preserve">
+    <value>إبحث عن:</value>
+  </data>
+  <data name="ToolTipDescriptorClock" xml:space="preserve">
+    <value>توليد إشارة تهتز بين 0 و 1 و تقوم بتنظيم أحداث الدارات.</value>
+  </data>
+  <data name="ToolTipDescriptorPin" xml:space="preserve">
+    <value>تستخدم من أجل إنشاء موصل تسطيع درات أخرى استخدامه لإرسال و إستقبال البيانات من و إلى الدارة الحالية.
+قم بإعادة ترتيب الموصلات (Pins) من أجل تغيير أماكنها على الرموز في الدارة الحالية.</value>
+  </data>
+  <data name="ToolTipDescriptorProbe" xml:space="preserve">
+    <value>أضف و أوصل مجسات للدراة من أجل مراقبة وضع الدارة الفعالة الحالي على سطح المجس, يمكن الحصول على القيم السابقة (أرشيف) بالنقر المزدوج على المجس أو يمكن استعراض هذه القيم من قارء الإشارة.</value>
+  </data>
+  <data name="ToolTipDescriptorSensor" xml:space="preserve">
+    <value>يقوم بتقديم البيانات من "مصدر خارجي" على شكل سلسة قيم معدة مسبقا, و باختيار عشوائي, أو قيم مدخلة يدويا.</value>
+  </data>
+  <data name="ToolTipDescriptorSplitter" xml:space="preserve">
+    <value>يسمح بتجميع (حزم) اﻷسلاك أو فصلها كل على حدة.
+فصل الأسلاك  أو استخدام الموصلات متعددة البتات (multi-bit pins) يحسن قراءة الدارة و فهمها.</value>
+  </data>
+  <data name="ToolTipDescriptorText" xml:space="preserve">
+    <value>يمكن وضع تعليقات نصية في أي مكان من المخطط من أجل التوضيح, يمكنك إضافة روابط ﻷي موقع مفيد على اﻷنترنت و يمكنك تزيين الدارة بالصور.</value>
+  </data>
+  <data name="ToolTipDescriptorTriState" xml:space="preserve">
+    <value>مكن أن تملك ثلاث قيم خرج: 1 و 0 , و ممانعة عالية   (Z). 
+حالة الممانعة العالية لا تؤثر على المنطق , الذي هو حصراً ثنائي.
+تستخدم هذه الأجهزة في ممرات نقل المعالج CPU للسماح بأكثر من مصدر لإرسال البيانات.
+ مجموعة من الموصلات ثلاثية الحالة و دارة تحكم مناسبة تعتبر مكافئ للناخب multiplexer</value>
+  </data>
+  <data name="ToolTipSensorManualValue" xml:space="preserve">
+    <value>قم بإدخال قيم ست عشرية و اضغط Enter.</value>
+  </data>
+  <data name="ErrorBadHexNumber" xml:space="preserve">
+    <value>رقم ست عشري غير صالحرقم ست عشري غير صالح</value>
+  </data>
+  <data name="TitleSensorManualInitialValue" xml:space="preserve">
+    <value>قيم ابتدائية:</value>
+  </data>
+  <data name="ToolTipSensorManualInitialValue" xml:space="preserve">
+    <value>أدخل القيم الابتدائية بشكل رقم ست عشري</value>
+  </data>
+  <data name="NameGraphicsArray" xml:space="preserve">
+    <value>مصفوفة غرافيك</value>
+  </data>
+  <data name="CaptionGraphicsArrayBPP" xml:space="preserve">
+    <value>بتات في البكسل:</value>
+  </data>
+  <data name="ToolTipDescriptorGraphicsArray" xml:space="preserve">
+    <value>(عرض-شاشة مصفوفة نقطية) يمكنها عرض البيانات المخزنة في الذاكرة الداخلية. تستخدم مع الدارات المتقدمة مثل الحواسيب و المتحكمات. يمكن اختيار الحجم و العمق اللوني كما يلي: عمق\مخطط:
+1 بت\بكسل - أبيض و أسود.
+2 بت\بكسل - 4 تدرجات رمادية.
+4 بت\بكسل - 16 لون.
+8 بت\بكسل - 256 لون.</value>
+  </data>
+  <data name="ToolTipGraphicsArray" xml:space="preserve">
+    <value>{0} {1}في{2} مع {3} بتات بالبكسل ({4} ألوان)</value>
+  </data>
+  <data name="ToolTipGraphicsArrayBPP" xml:space="preserve">
+    <value>اختر عدد البتات في البكسل الواحد</value>
+  </data>
+  <data name="ErrorBadIntegerInRange" xml:space="preserve">
+    <value>النتيجة المتوقعة هي رقم ضمن المجال {0} - {1} .</value>
+  </data>
+  <data name="TitleGraphicsArrayBPP" xml:space="preserve">
+    <value>بتات في البكسل:</value>
+  </data>
+  <data name="TitleHeight" xml:space="preserve">
+    <value>الارتفاع:</value>
+  </data>
+  <data name="TitleWidth" xml:space="preserve">
+    <value>عرض:</value>
+  </data>
+  <data name="ToolTipGraphicsArrayHeight" xml:space="preserve">
+    <value>أدخل ارتفاع مصفوفة العرض بالبكسل.</value>
+  </data>
+  <data name="ToolTipGraphicsArrayWidth" xml:space="preserve">
+    <value>أدخل عرض مصفوفة العرض بالبكسل.</value>
+  </data>
+  <data name="GateClockName" xml:space="preserve">
+    <value>ساعة (نبضات)</value>
+  </data>
+  <data name="ProbeHistoryMark" xml:space="preserve">
+    <value>&lt;&lt;&lt;&lt;&lt;&lt; علامة &gt;&gt;&gt;&gt;&gt;&gt;</value>
+  </data>
+  <data name="TitleMark" xml:space="preserve">
+    <value>علامة</value>
+  </data>
+  <data name="TitleWeb" xml:space="preserve">
+    <value>شبكة:</value>
+  </data>
+  <data name="PinTypeNameNone" xml:space="preserve">
+    <value>لاشيئ</value>
+  </data>
+  <data name="TitleCredits" xml:space="preserve">
+    <value>المشاركون في العمل :</value>
+  </data>
 </root>
