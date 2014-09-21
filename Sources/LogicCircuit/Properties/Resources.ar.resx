@@ -1365,4 +1365,7 @@ LED, مصفوفة LED ,زر , أو اية عناصر اخرى</value>
   <data name="TitleCredits" xml:space="preserve">
     <value>المشاركون في العمل :</value>
   </data>
+  <data name="ErrorWriteNotConnected" xml:space="preserve">
+    <value>مصدر الدخل غير متصل بمصفوفة العرض {0}</value>
+  </data>
 </root>
