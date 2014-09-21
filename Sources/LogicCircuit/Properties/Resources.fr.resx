@@ -1344,4 +1344,46 @@ utiliser en envoyant ou recevant des données de et vers le circuit actuel.
 Agencez les broches dans le circuit pour changer leurs
 positions relatives sur le symbole du circuit.</value>
   </data>
+  <data name="NameGraphicsArray" xml:space="preserve">
+    <value>Tableau graphique</value>
+  </data>
+  <data name="CaptionGraphicsArrayBPP" xml:space="preserve">
+    <value>Bits par pixel</value>
+  </data>
+  <data name="ToolTipDescriptorGraphicsArray" xml:space="preserve">
+    <value>(Affichage de point matriciel) peut afficher des données stockées dans la mémoire interne.
+Utilisé avec les circuits avancés comme les ordinateurs ou contrôleurs.
+Permet de selectionner la taille ou couleur de profondeur/système:
+1 bit/pixel - noir et blanc
+2 bits/pixel - 4 niveaux de gris
+4 bits/pixel - 16 couleurs
+8 bits/pixel - 256 couleurs</value>
+  </data>
+  <data name="ToolTipGraphicsArray" xml:space="preserve">
+    <value>{0} {1}x{2} avec {3} bit(s) par pixel ({4} couleurs)</value>
+  </data>
+  <data name="ToolTipGraphicsArrayBPP" xml:space="preserve">
+    <value>Choisissez le nombre de bits par pixel</value>
+  </data>
+  <data name="ErrorBadIntegerInRange" xml:space="preserve">
+    <value>Valeurs comprisent entre {0} - {1}.</value>
+  </data>
+  <data name="TitleGraphicsArrayBPP" xml:space="preserve">
+    <value>Bits par pixel:</value>
+  </data>
+  <data name="TitleHeight" xml:space="preserve">
+    <value>Hauteur:</value>
+  </data>
+  <data name="TitleWidth" xml:space="preserve">
+    <value>Largeur:</value>
+  </data>
+  <data name="ToolTipGraphicsArrayHeight" xml:space="preserve">
+    <value>Donnez la hauteur du tableau graphique en pixel.</value>
+  </data>
+  <data name="ToolTipGraphicsArrayWidth" xml:space="preserve">
+    <value>Donnez la largeur du tableau graphique en pixel.</value>
+  </data>
+  <data name="ErrorWriteNotConnected" xml:space="preserve">
+    <value>Les entrées écrites ne sont pas connectées sur le tableau graphique {0}</value>
+  </data>
 </root>
