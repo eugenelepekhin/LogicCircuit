@@ -25,7 +25,7 @@ namespace LogicCircuit {
 		public string this[string propertyName] {
 			get {
 				string value;
-				if(this.property.TryGetValue(propertyName, out value) && value != null) {
+				if(this.property.TryGetValue(propertyName, out value)) {
 					return value;
 				}
 				return null;
