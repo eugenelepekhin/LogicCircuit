@@ -56,6 +56,8 @@ namespace LogicCircuit {
 				} else {
 					App.Mainframe.InformationMessage(oldMessage);
 				}
+				// User changed culture, so recheck if there is a need for translation
+				DialogAbout.ResetTranslationRequestVersion();
 			}
 			this.DialogResult = true;
 			this.Close();

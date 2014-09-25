@@ -102,6 +102,8 @@ namespace LogicCircuit {
 					} else {
 						this.Edit(null);
 					}
+					// Reuse this thread to check if there are any translations requests are pending
+					DialogAbout.CheckTranslationRequests(this.Dispatcher);
 				} catch(Exception exception) {
 					Tracer.Report("Mainframe.PostLoaded", exception);
 					this.ReportException(exception);

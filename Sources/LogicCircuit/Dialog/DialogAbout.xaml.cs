@@ -91,6 +91,50 @@ namespace LogicCircuit {
 			}
 		}
 
+		/// <summary>
+		/// Check if http://www.LogicCircuit.org/TranslationRequests.txt contains name of current culture.
+		/// If this is the case then show user message dialog asking to help translating this program.
+		/// </summary>
+		/// <param name="dispatcher"></param>
+		/// <param name="recheck"></param>
+		[SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "LogicCircuit.Mainframe.InformationMessage(System.String)")]
+		[SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "NavigateUri")]
+		public static void CheckTranslationRequests(Dispatcher dispatcher) {
+			try {
+				SettingsStringCache checkedVersion = DialogAbout.TranslationRequestVersion();
+				Version version;
+				if(!Version.TryParse(checkedVersion.Value, out version) || version < DialogAbout.CurrentVersion()) {
+					string text = null;
+					using(WebClient client = new WebClient()) {
+						client.UseDefaultCredentials = true;
+						text = client.DownloadString(new Uri("http://www.LogicCircuit.org/TranslationRequests.txt"));
+					}
+					if(!string.IsNullOrWhiteSpace(text) && text.Contains(App.CurrentCulture.Name)) {
+						dispatcher.BeginInvoke(
+							new Action(() => App.Mainframe.InformationMessage(
+								"If you can help translating this program to any language you are fluent in please contact me at:\n" +
+								"<Hyperlink NavigateUri=\"http://www.logiccircuit.org/contact.html\">http://www.logiccircuit.org/contact.html</Hyperlink>"
+							)),
+							DispatcherPriority.ApplicationIdle
+						);
+					}
+					checkedVersion.Value = DialogAbout.CurrentVersion().ToString();
+				}
+			} catch(Exception exception) {
+				Tracer.Report("DialogAbout.CheckTranslationRequests", exception);
+				// ignore all exception here
+			}
+		}
+
+		public static void ResetTranslationRequestVersion() {
+			SettingsStringCache checkedVersion = DialogAbout.TranslationRequestVersion();
+			checkedVersion.Value = null;
+		}
+
+		private static SettingsStringCache TranslationRequestVersion() {
+			return new SettingsStringCache(Settings.User, "DialogAbout.TranslationRequestVersion", string.Empty);
+		}
+
 		private static void ShowNewVersionAvailable(Version version) {
 			DialogAbout dialog = new DialogAbout();
 			dialog.DownloadCompleted(version, null);
