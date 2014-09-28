@@ -211,6 +211,8 @@
 			<Column Name="Notation" Type="string" Default="" PropertyOverrides="true"/>
 			<Column Name="IsToggle" Type="bool" Default="false"/>
 			<Column Name="PinSide" Type="PinSide" Default="PinSide.Right"/>
+			<Column Name="Width" Type="int" Default="2"/>
+			<Column Name="Height" Type="int" Default="2"/>
 			<Column Name="Note" Type="string" Default="" PropertyOverrides="true"/>
 		</Table.Columns>
 

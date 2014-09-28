@@ -32,6 +32,14 @@ namespace LogicCircuit {
 			set { base.IsDisplay = value; }
 		}
 
+		protected override int CircuitSymbolWidth(int defaultWidth) {
+			return base.CircuitSymbolWidth(Math.Max(defaultWidth, Math.Min(this.Width, 10)));
+		}
+
+		protected override int CircuitSymbolHeight(int defaultHeight) {
+			return base.CircuitSymbolHeight(Math.Max(defaultHeight, Math.Min(this.Height, 10)));
+		}
+
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
 			Tracer.Assert(this == symbol.Circuit);
 			return symbol.CreateButtonGlyph(symbol);
@@ -60,7 +68,11 @@ namespace LogicCircuit {
 		}
 
 		public CircuitButton Create(string notation, bool isToggle, PinSide pinSide) {
-			CircuitButton button = this.CreateItem(Guid.NewGuid(), notation, isToggle, pinSide, CircuitButtonData.NoteField.Field.DefaultValue);
+			CircuitButton button = this.CreateItem(Guid.NewGuid(), notation, isToggle, pinSide,
+				CircuitButtonData.WidthField.Field.DefaultValue,
+				CircuitButtonData.HeightField.Field.DefaultValue,
+				CircuitButtonData.NoteField.Field.DefaultValue
+			);
 			this.CreateDevicePin(button);
 			return button;
 		}

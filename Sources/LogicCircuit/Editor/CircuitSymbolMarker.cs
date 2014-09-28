@@ -9,15 +9,18 @@ namespace LogicCircuit {
 			public CircuitSymbol CircuitSymbol { get; private set; }
 			public override Symbol Symbol { get { return this.CircuitSymbol; } }
 
-			public Rectangle MarkerGlyph { get; private set; }
+			public FrameworkElement MarkerGlyph { get; private set; }
 			public override FrameworkElement Glyph { get { return this.MarkerGlyph; } }
 
-			public CircuitSymbolMarker(CircuitSymbol symbol) {
+			protected CircuitSymbolMarker(CircuitSymbol symbol, FrameworkElement markerGlyph) {
 				this.CircuitSymbol = symbol;
-				this.MarkerGlyph = Symbol.Skin<Rectangle>(SymbolShape.MarkerRectangle);
+				this.MarkerGlyph = markerGlyph;
 				this.MarkerGlyph.DataContext = this;
 				this.MarkerGlyph.RenderTransform = this.CircuitSymbol.Glyph.RenderTransform;
 				this.Invalidate();
+			}
+
+			public CircuitSymbolMarker(CircuitSymbol symbol) : this(symbol, Symbol.Skin<Rectangle>(SymbolShape.MarkerRectangle)) {
 			}
 
 			public override void Move(EditorDiagram editor, Point point) {

@@ -440,7 +440,11 @@ namespace LogicCircuit {
 		private static Marker CreateMarker(Symbol symbol) {
 			CircuitSymbol circuitSymbol = symbol as CircuitSymbol;
 			if(circuitSymbol != null) {
-				return new CircuitSymbolMarker(circuitSymbol);
+				if(circuitSymbol.Circuit is CircuitButton) {
+					return new ButtonMarker(circuitSymbol);
+				} else {
+					return new CircuitSymbolMarker(circuitSymbol);
+				}
 			}
 			Wire wire = symbol as Wire;
 			if(wire != null) {
@@ -694,6 +698,27 @@ namespace LogicCircuit {
 					textNote.Y = y;
 					textNote.Width = w;
 					textNote.Height = h;
+				});
+			}
+			marker.Refresh();
+		}
+
+		private void CommitMove(ButtonMarker marker) {
+			CircuitSymbol symbol = marker.CircuitSymbol;
+			CircuitButton button = (CircuitButton)symbol.Circuit;
+			Rect rect = marker.ResizedRect();
+
+			int x = Symbol.GridPoint(rect.X);
+			int y = Symbol.GridPoint(rect.Y);
+			int w = Math.Max(Symbol.GridPoint(rect.Width), 1);
+			int h = Math.Max(Symbol.GridPoint(rect.Height), 1);
+
+			if(x != symbol.X || y != symbol.Y || w != button.Width || h != button.Height) {
+				this.CircuitProject.InTransaction(() => {
+					symbol.X = x;
+					symbol.Y = y;
+					button.Width = w;
+					button.Height = h;
 				});
 			}
 			marker.Refresh();

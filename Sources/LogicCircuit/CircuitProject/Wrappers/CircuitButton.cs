@@ -16,6 +16,8 @@ namespace LogicCircuit {
 		public string Notation;
 		public bool IsToggle;
 		public PinSide PinSide;
+		public int Width;
+		public int Height;
 		public string Note;
 		internal CircuitButton CircuitButton;
 		// Field accessors
@@ -159,6 +161,76 @@ namespace LogicCircuit {
 			}
 		}
 
+		// Accessor of the Width field
+		public sealed class WidthField : IField<CircuitButtonData, int>, IFieldSerializer<CircuitButtonData> {
+			public static readonly WidthField Field = new WidthField();
+			private WidthField() {}
+			public string Name { get { return "Width"; } }
+			public int Order { get; set; }
+			public int DefaultValue { get { return 2; } }
+			public int GetValue(ref CircuitButtonData record) {
+				return record.Width;
+			}
+			public void SetValue(ref CircuitButtonData record, int value) {
+				record.Width = value;
+			}
+			public int Compare(ref CircuitButtonData l, ref CircuitButtonData r) {
+				return Math.Sign((long)l.Width - (long)r.Width);
+			}
+			public int Compare(int l, int r) {
+				return Math.Sign((long)l - (long)r);
+			}
+
+			// Implementation of interface IFieldSerializer<CircuitButtonData>
+			bool IFieldSerializer<CircuitButtonData>.NeedToSave(ref CircuitButtonData data) {
+				return this.Compare(data.Width, this.DefaultValue) != 0;
+			}
+			string IFieldSerializer<CircuitButtonData>.GetTextValue(ref CircuitButtonData data) {
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Width);
+			}
+			void IFieldSerializer<CircuitButtonData>.SetDefault(ref CircuitButtonData data) {
+				data.Width = this.DefaultValue;
+			}
+			void IFieldSerializer<CircuitButtonData>.SetTextValue(ref CircuitButtonData data, string text) {
+				data.Width = int.Parse(text, CultureInfo.InvariantCulture);
+			}
+		}
+
+		// Accessor of the Height field
+		public sealed class HeightField : IField<CircuitButtonData, int>, IFieldSerializer<CircuitButtonData> {
+			public static readonly HeightField Field = new HeightField();
+			private HeightField() {}
+			public string Name { get { return "Height"; } }
+			public int Order { get; set; }
+			public int DefaultValue { get { return 2; } }
+			public int GetValue(ref CircuitButtonData record) {
+				return record.Height;
+			}
+			public void SetValue(ref CircuitButtonData record, int value) {
+				record.Height = value;
+			}
+			public int Compare(ref CircuitButtonData l, ref CircuitButtonData r) {
+				return Math.Sign((long)l.Height - (long)r.Height);
+			}
+			public int Compare(int l, int r) {
+				return Math.Sign((long)l - (long)r);
+			}
+
+			// Implementation of interface IFieldSerializer<CircuitButtonData>
+			bool IFieldSerializer<CircuitButtonData>.NeedToSave(ref CircuitButtonData data) {
+				return this.Compare(data.Height, this.DefaultValue) != 0;
+			}
+			string IFieldSerializer<CircuitButtonData>.GetTextValue(ref CircuitButtonData data) {
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Height);
+			}
+			void IFieldSerializer<CircuitButtonData>.SetDefault(ref CircuitButtonData data) {
+				data.Height = this.DefaultValue;
+			}
+			void IFieldSerializer<CircuitButtonData>.SetTextValue(ref CircuitButtonData data, string text) {
+				data.Height = int.Parse(text, CultureInfo.InvariantCulture);
+			}
+		}
+
 		// Accessor of the Note field
 		public sealed class NoteField : IField<CircuitButtonData, string>, IFieldSerializer<CircuitButtonData> {
 			public static readonly NoteField Field = new NoteField();
@@ -224,6 +296,8 @@ namespace LogicCircuit {
 			NotationField.Field,
 			IsToggleField.Field,
 			PinSideField.Field,
+			WidthField.Field,
+			HeightField.Field,
 			NoteField.Field,
 			CircuitButtonField.Field
 		};
@@ -290,6 +364,18 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.CircuitButtonRowId, CircuitButtonData.PinSideField.Field, value); }
 		}
 
+		// Gets or sets value of the Width field.
+		public int Width {
+			get { return this.Table.GetField(this.CircuitButtonRowId, CircuitButtonData.WidthField.Field); }
+			set { this.Table.SetField(this.CircuitButtonRowId, CircuitButtonData.WidthField.Field, value); }
+		}
+
+		// Gets or sets value of the Height field.
+		public int Height {
+			get { return this.Table.GetField(this.CircuitButtonRowId, CircuitButtonData.HeightField.Field); }
+			set { this.Table.SetField(this.CircuitButtonRowId, CircuitButtonData.HeightField.Field, value); }
+		}
+
 		// Gets or sets value of the Note field.
 		public override string Note {
 			get { return this.Table.GetField(this.CircuitButtonRowId, CircuitButtonData.NoteField.Field); }
@@ -313,6 +399,12 @@ namespace LogicCircuit {
 				}
 				if(CircuitButtonData.PinSideField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("PinSide");
+				}
+				if(CircuitButtonData.WidthField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("Width");
+				}
+				if(CircuitButtonData.HeightField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("Height");
 				}
 				if(CircuitButtonData.NoteField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("Note");
@@ -403,6 +495,8 @@ namespace LogicCircuit {
 			string Notation,
 			bool IsToggle,
 			PinSide PinSide,
+			int Width,
+			int Height,
 			string Note
 			// Fields of Circuit table
 
@@ -418,6 +512,8 @@ namespace LogicCircuit {
 				Notation = Notation,
 				IsToggle = IsToggle,
 				PinSide = PinSide,
+				Width = Width,
+				Height = Height,
 				Note = Note,
 			};
 			return this.Create(this.Table.Insert(ref dataCircuitButton), rowIdCircuit);
