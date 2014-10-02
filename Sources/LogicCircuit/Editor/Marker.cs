@@ -28,14 +28,13 @@ namespace LogicCircuit {
 			public abstract void Refresh();
 		}
 
-		private interface IRectangleMarker {
-			Rectangle Rectangle { get; }
+		private interface ISizableMarker {
+			Size Size { get; }
 			void Resize(double x1, double y1, double x2, double y2);
 			void CommitResize(EditorDiagram editor);
-			Rect ResizedRect();
 		}
 
-		private class ResizeMarker<TParent> : Marker where TParent: Marker, IRectangleMarker {
+		private class ResizeMarker<TParent> : Marker where TParent: Marker, ISizableMarker {
 			private static readonly Action<TParent, Point>[] move = new Action<TParent, Point>[] {
 				(marker, point) => marker.Resize(point.X, point.Y, double.NaN, double.NaN),
 				(marker, point) => marker.Resize(double.NaN, point.Y, double.NaN, double.NaN),
@@ -100,8 +99,9 @@ namespace LogicCircuit {
 			}
 
 			public override void Refresh() {
-				Canvas.SetLeft(this.rectangle, this.parent.Rectangle.Width * this.x / 2 - Symbol.PinRadius);
-				Canvas.SetTop(this.rectangle, this.parent.Rectangle.Height * this.y / 2 - Symbol.PinRadius);
+				Size size = this.parent.Size;
+				Canvas.SetLeft(this.rectangle, size.Width * this.x / 2 - Symbol.PinRadius);
+				Canvas.SetTop(this.rectangle, size.Height * this.y / 2 - Symbol.PinRadius);
 			}
 		}
 	}

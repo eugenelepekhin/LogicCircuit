@@ -6,6 +6,9 @@ using LogicCircuit.DataPersistent;
 
 namespace LogicCircuit {
 	public partial class CircuitButton {
+		public const int MaxWidth = 20;
+		public const int MaxHeight = 20;
+
 		public override void Delete() {
 			this.CircuitProject.DevicePinSet.DeleteAllPins(this);
 			base.Delete();
@@ -33,11 +36,11 @@ namespace LogicCircuit {
 		}
 
 		protected override int CircuitSymbolWidth(int defaultWidth) {
-			return base.CircuitSymbolWidth(Math.Max(defaultWidth, Math.Min(this.Width, 10)));
+			return base.CircuitSymbolWidth(Math.Max(defaultWidth, Math.Min(this.Width, CircuitButton.MaxWidth)));
 		}
 
 		protected override int CircuitSymbolHeight(int defaultHeight) {
-			return base.CircuitSymbolHeight(Math.Max(defaultHeight, Math.Min(this.Height, 10)));
+			return base.CircuitSymbolHeight(Math.Max(defaultHeight, Math.Min(this.Height, CircuitButton.MaxHeight)));
 		}
 
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {

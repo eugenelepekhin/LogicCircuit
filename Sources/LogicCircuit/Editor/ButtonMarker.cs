@@ -5,12 +5,12 @@ using System.Windows.Shapes;
 
 namespace LogicCircuit {
 	partial class EditorDiagram {
-		private sealed class ButtonMarker : CircuitMarker, IRectangleMarker {
+		private sealed class ButtonMarker : CircuitMarker, ISizableMarker {
 			private Rect symbolRect;
-
+			private readonly Rectangle rectangle;
 			private readonly ResizeMarker<ButtonMarker>[] resizeMarker;
 
-			public Rectangle Rectangle { get; private set; }
+			public Size Size { get { return new Size(this.rectangle.Width, this.rectangle.Height); } }
 
 			public ButtonMarker(CircuitSymbol symbol) : base(symbol, new Canvas()) {
 				Tracer.Assert(symbol.Circuit is CircuitButton);
@@ -21,11 +21,11 @@ namespace LogicCircuit {
 					new ResizeMarker<ButtonMarker>(this, 0, 2), new ResizeMarker<ButtonMarker>(this, 1, 2), new ResizeMarker<ButtonMarker>(this, 2, 2)
 				};
 
-				this.Rectangle = Symbol.Skin<Rectangle>(SymbolShape.MarkerRectangle);
-				Panel.SetZIndex(this.Rectangle, 0);
+				this.rectangle = Symbol.Skin<Rectangle>(SymbolShape.MarkerRectangle);
+				Panel.SetZIndex(this.rectangle, 0);
 
 				Canvas markerCanvas = (Canvas)this.Glyph;
-				markerCanvas.Children.Add(this.Rectangle);
+				markerCanvas.Children.Add(this.rectangle);
 
 				foreach(ResizeMarker<ButtonMarker> marker in this.resizeMarker) {
 					markerCanvas.Children.Add(marker.Glyph);
@@ -57,10 +57,13 @@ namespace LogicCircuit {
 			}
 
 			public Rect ResizedRect() {
-				CircuitButton button = (CircuitButton)this.CircuitSymbol.Circuit;
-				Rect rect = new Rect(Canvas.GetLeft(this.Glyph), Canvas.GetTop(this.Glyph), this.Rectangle.Width, this.Rectangle.Height);
+				int x = Symbol.GridPoint(Canvas.GetLeft(this.Glyph));
+				int y = Symbol.GridPoint(Canvas.GetTop(this.Glyph));
+				int w = Math.Max(2, Math.Min(Symbol.GridPoint(this.rectangle.Width), CircuitButton.MaxWidth));
+				int h = Math.Max(2, Math.Min(Symbol.GridPoint(this.rectangle.Height), CircuitButton.MaxHeight));
+				Rect rect = new Rect(Symbol.ScreenPoint(x), Symbol.ScreenPoint(y), Symbol.ScreenPoint(w), Symbol.ScreenPoint(h));
 				if(this.CircuitSymbol.Rotation != Rotation.Up) {
-					rect = Symbol.Transform(rect, Symbol.RotationTransform(-Symbol.Angle(this.CircuitSymbol.Rotation), this.CircuitSymbol.X, this.CircuitSymbol.Y, button.Width, button.Height));
+					rect = Symbol.Transform(rect, Symbol.RotationTransform(-Symbol.Angle(this.CircuitSymbol.Rotation), x, y, w, h));
 				}
 				return rect;
 			}
@@ -83,8 +86,8 @@ namespace LogicCircuit {
 			private void PositionGlyph(Rect rect) {
 				Canvas.SetLeft(this.Glyph, rect.X);
 				Canvas.SetTop(this.Glyph, rect.Y);
-				this.Rectangle.Width = rect.Width;
-				this.Rectangle.Height = rect.Height;
+				this.rectangle.Width = rect.Width;
+				this.rectangle.Height = rect.Height;
 				foreach(ResizeMarker<ButtonMarker> marker in this.resizeMarker) {
 					marker.Refresh();
 				}
