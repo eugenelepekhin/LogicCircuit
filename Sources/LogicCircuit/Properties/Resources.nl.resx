@@ -1289,7 +1289,7 @@ die visuele weergave mogelijkheden hebben.</value>
     <value>Deze reeks mag niet leeg zijn</value>
   </data>
   <data name="ErrorSeriesItem" xml:space="preserve">
-    <value>Fout in {0}. Het moeten Hexadecimale getallen zijn, gescheiden door een : </value>
+    <value>Fout in {0}. Het moeten Hexadecimale getallen zijn, gescheiden door een :</value>
   </data>
   <data name="ErrorSeriesItemOrder" xml:space="preserve">
     <value>Fout in {0}. Elke volgende cyclus moet groter zijn dan de vorige</value>
@@ -1353,7 +1353,7 @@ Hergroepeer aansluitpennen om hun relatieve posities op de symbolen van dit circ
     <value>Plaats aantekeningen overal in het  diagram om de schakeling uit te leggen. Voorzie het diagram, van links naar nuttige web sites, en nuttige tekeningen</value>
   </data>
   <data name="ToolTipDescriptorTriState" xml:space="preserve">
-    <value>Kan drie verschillende waarden hebben: 1, 0, en zwevend (Z). De zwevende toestand is niet van belang in logica, die strikt genomen, tweewaardig is. Deze onderdelen worden gebruikt bij de bussen van de CPU, om ervoor te zorgen dat deze gegevens kan ontvangen uit verschillende bronnen. Dit is dan de vervanging van een multiplexer </value>
+    <value>Kan drie verschillende waarden hebben: 1, 0, en zwevend (Z). De zwevende toestand is niet van belang in logica, die strikt genomen, tweewaardig is. Deze onderdelen worden gebruikt bij de bussen van de CPU, om ervoor te zorgen dat deze gegevens kan ontvangen uit verschillende bronnen. Dit is dan de vervanging van een multiplexer</value>
   </data>
   <data name="ToolTipSensorManualValue" xml:space="preserve">
     <value>Typ Hexadecimale waarde en druk op Enter</value>
