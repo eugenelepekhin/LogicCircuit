@@ -244,6 +244,7 @@
       <DependentUpon>DialogMessage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Editor\Marker.cs" />
+    <Compile Include="Editor\ResizeMarker.cs" />
     <Compile Include="Editor\Switcher.cs" />
     <Compile Include="Editor\TextNoteMarker.cs" />
     <Compile Include="Editor\WireDisplayControl.xaml.cs">
