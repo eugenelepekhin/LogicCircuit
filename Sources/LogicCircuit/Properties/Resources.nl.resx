@@ -977,7 +977,7 @@ Wil je de referentie naar dit bestand uit de lijst met recente bestanden wissen?
     <value>Dit is een oudere versie. Klik op de link hieronder om de laatste versie te downloaden.</value>
   </data>
   <data name="MessageVersionPreview" xml:space="preserve">
-    <value>Je hebt een unreleased developers versie.</value>
+    <value>Je hebt een unreleased developers versie. Hier is een betere vertaling mogelijk</value>
   </data>
   <data name="TitleCheckVersion" xml:space="preserve">
     <value>Controleer nu</value>
@@ -1248,5 +1248,155 @@ die visuele weergave mogelijkheden hebben.</value>
   </data>
   <data name="WireDisplayDisconnected" xml:space="preserve">
     <value>De draad is niet aangesloten.</value>
+  </data>
+  <data name="CaptionPinSide" xml:space="preserve">
+    <value>Pinzijde</value>
+  </data>
+  <data name="TitlePinSide" xml:space="preserve">
+    <value>Pin_zijde</value>
+  </data>
+  <data name="ToolTipDevicePinSide" xml:space="preserve">
+    <value>Kies aan welke kant de pin geplaatst moet worden</value>
+  </data>
+  <data name="NameSensor" xml:space="preserve">
+    <value>Sensor</value>
+  </data>
+  <data name="SensorTypeManual" xml:space="preserve">
+    <value>Handleiding</value>
+  </data>
+  <data name="SensorTypeRandom" xml:space="preserve">
+    <value>Willekeurig</value>
+  </data>
+  <data name="SensorTypeSeries" xml:space="preserve">
+    <value>Reeks</value>
+  </data>
+  <data name="ToolTipSensorBitWidth" xml:space="preserve">
+    <value>Kies de bitbreedte van de sensor</value>
+  </data>
+  <data name="ToolTipSensorNotation" xml:space="preserve">
+    <value>Voer de notatie van de sensor in</value>
+  </data>
+  <data name="ToolTipSensorType" xml:space="preserve">
+    <value>Kies, waar de sensor de gegevens van krijgt</value>
+  </data>
+  <data name="ErrorBadInterval" xml:space="preserve">
+    <value>Minimum moet kleiner dan maximum, of gelijk aan maximum zijn</value>
+  </data>
+  <data name="ErrorBadPositiveNumber" xml:space="preserve">
+    <value>Getal moet groter zijn dan nul</value>
+  </data>
+  <data name="ErrorEmptySeries" xml:space="preserve">
+    <value>Deze reeks mag niet leeg zijn</value>
+  </data>
+  <data name="ErrorSeriesItem" xml:space="preserve">
+    <value>Fout in {0}. Het moeten Hexadecimale getallen zijn, gescheiden door een : </value>
+  </data>
+  <data name="ErrorSeriesItemOrder" xml:space="preserve">
+    <value>Fout in {0}. Elke volgende cyclus moet groter zijn dan de vorige</value>
+  </data>
+  <data name="TitleLoopSeries" xml:space="preserve">
+    <value>_Herhaal reeks</value>
+  </data>
+  <data name="TitleSensorRandomMax" xml:space="preserve">
+    <value>M_ax reeks:</value>
+  </data>
+  <data name="TitleSensorRandomMin" xml:space="preserve">
+    <value>_Min reeks:</value>
+  </data>
+  <data name="TitleSeries" xml:space="preserve">
+    <value>R_eeks</value>
+  </data>
+  <data name="ToolTipSensorRandomMax" xml:space="preserve">
+    <value>Voer maximale aantal reeksen in, voordat de sensor de meting wijzigt</value>
+  </data>
+  <data name="ToolTipSensorRandomMin" xml:space="preserve">
+    <value>Voer de minimale aantal reeksen in, voordat de sensor de meting wijzigt</value>
+  </data>
+  <data name="ToolTipSeriesData" xml:space="preserve">
+    <value>Voer reeks sensor metingen in, in de vorm &lt;reeks&gt;:&lt;waarde&gt;, beide Hexadecimaal. Wanneer reeks nul is of even, dan komt dit overeen met opgaande flank van de clock, wanneer reeks oneven is, dan gaat de clock van 1 naar 0.</value>
+  </data>
+  <data name="NameSound" xml:space="preserve">
+    <value>Zoemer</value>
+  </data>
+  <data name="ToolTipSound" xml:space="preserve">
+    <value>Zoemer {0}</value>
+  </data>
+  <data name="ToolTipSoundNotation" xml:space="preserve">
+    <value>Voer de notatie van de zoemer in</value>
+  </data>
+  <data name="CommandEditFind" xml:space="preserve">
+    <value>Zoek op</value>
+  </data>
+  <data name="TitleFind" xml:space="preserve">
+    <value>Zoek schakeling op</value>
+  </data>
+  <data name="TitleSearch" xml:space="preserve">
+    <value>Zoek</value>
+  </data>
+  <data name="ToolTipDescriptorClock" xml:space="preserve">
+    <value>Wek signaal op, dat oscilleert tussen 0 en 1, en dat wordt gebruikt om akties tussen circuits te coördineren</value>
+  </data>
+  <data name="ToolTipDescriptorPin" xml:space="preserve">
+    <value>Wordt gebruikt om een connector te maken, die andere circuits kunnen gebruiken, om data te leveren aan, of te ontvangen van het huidige circuit.
+Hergroepeer aansluitpennen om hun relatieve posities op de symbolen van dit circuit te wijzigen</value>
+  </data>
+  <data name="ToolTipDescriptorProbe" xml:space="preserve">
+    <value>Sluit probes aan op je circuits om de huidige toestand van een werkend circuit te observeren, en de geschiedenis, na dubbelklikken.Je kunt de gegevens ook zien op de oscilloscoop.</value>
+  </data>
+  <data name="ToolTipDescriptorSensor" xml:space="preserve">
+    <value>Levert gegevens van een "externe bron" als een reeks, gedefinieerde, willekeurig gekozen, of handmatig ingevoerde waarden.</value>
+  </data>
+  <data name="ToolTipDescriptorSplitter" xml:space="preserve">
+    <value>Maakt het mogelijk om draden te bundelen, of bundels te scheiden in afzonderlijke draden. Het gebruik van splitters en multi-bit pinnen, vereenvoudigt het tekenen en begrijpen van de schakeling aanzienlijk.</value>
+  </data>
+  <data name="ToolTipDescriptorText" xml:space="preserve">
+    <value>Plaats aantekeningen overal in het  diagram om de schakeling uit te leggen. Voorzie het diagram, van links naar nuttige web sites, en nuttige tekeningen</value>
+  </data>
+  <data name="ToolTipDescriptorTriState" xml:space="preserve">
+    <value>Kan drie verschillende waarden hebben: 1, 0, en zwevend (Z). De zwevende toestand is niet van belang in logica, die strikt genomen, tweewaardig is. Deze onderdelen worden gebruikt bij de bussen van de CPU, om ervoor te zorgen dat deze gegevens kan ontvangen uit verschillende bronnen. Dit is dan de vervanging van een multiplexer </value>
+  </data>
+  <data name="ToolTipSensorManualValue" xml:space="preserve">
+    <value>Typ Hexadecimale waarde en druk op Enter</value>
+  </data>
+  <data name="ErrorBadHexNumber" xml:space="preserve">
+    <value>Ongeldig Hexadecimaal getal</value>
+  </data>
+  <data name="TitleSensorManualInitialValue" xml:space="preserve">
+    <value>Start_Waarde</value>
+  </data>
+  <data name="ToolTipSensorManualInitialValue" xml:space="preserve">
+    <value>Voer beginwaarde in als Hexadecimaal getal</value>
+  </data>
+  <data name="ToolTipDescriptorGraphicsArray" xml:space="preserve">
+    <value>(Dot Matrix Display) kan gegevens weergeven, die in het geheugen zijn opgeslagen. Dit wordt gebruikt bij geavanceerde schakelingen zoals computers of controllers.
+Hier kunt u grootte en kleurdiepte kiezen:
+   1 bit /pixel - zwart en wit.
+   2 bits/pixel - 4 grijstinten
+   4 bits/pixel - 16 kleuren
+   8 bits/pixel - 256 kleuren</value>
+  </data>
+  <data name="ToolTipGraphicsArray" xml:space="preserve">
+    <value>{0} {1}x{2} met {3} bit(s) per pixel ({4} kleuren)</value>
+  </data>
+  <data name="ToolTipGraphicsArrayBPP" xml:space="preserve">
+    <value>Kies aantal bits per pixel</value>
+  </data>
+  <data name="ErrorBadIntegerInRange" xml:space="preserve">
+    <value>Getal moet liggen tussen {0} - {1}</value>
+  </data>
+  <data name="TitleHeight" xml:space="preserve">
+    <value>_Hoogte</value>
+  </data>
+  <data name="TitleWidth" xml:space="preserve">
+    <value>_Breedte</value>
+  </data>
+  <data name="ToolTipGraphicsArrayHeight" xml:space="preserve">
+    <value>Voer hoogte in (in pixels) voor graphics array</value>
+  </data>
+  <data name="ToolTipGraphicsArrayWidth" xml:space="preserve">
+    <value>Voer breedte in (in pixels) voor graphics array</value>
+  </data>
+  <data name="ErrorWriteNotConnected" xml:space="preserve">
+    <value>Schrijf-ingang is niet verbonden met graphics array {0}</value>
   </data>
 </root>
