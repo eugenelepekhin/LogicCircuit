@@ -465,6 +465,7 @@ namespace LogicCircuit {
 			Tracer.Assert(this.Circuit == wire.LogicalCircuit);
 			List<int> list = new List<int>();
 			this.StateIndexes(list, wire.Point1, false);
+			Tracer.Assert(0 <= list.Count && list.Count <= 32);
 			return list;
 		}
 
@@ -480,7 +481,7 @@ namespace LogicCircuit {
 							if(CircuitMap.IsPrimitive(circuit)) {
 								SymbolMap symbolMap;
 								if(jam.Pin.PinType == PinType.Output && this.Root.results.TryGetValue(new SymbolMapKey(this, symbol), out symbolMap)) {
-									list.AddRange(symbolMap.Results.Select(r => r.StateIndex));
+									list.AddRange(symbolMap.Results.Select(r => r.StateIndex).Where(i => !list.Contains(i)));
 									return;
 								}
 							} else if((pin = (circuit as Pin)) != null) {
