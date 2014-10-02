@@ -5,62 +5,67 @@ using System.Windows.Shapes;
 
 namespace LogicCircuit {
 	partial class EditorDiagram {
-		private class ButtonMarker : CircuitSymbolMarker, IRectangleMarker {
-			public Rect SymbolRect { get; private set; }
+		private sealed class ButtonMarker : CircuitMarker, IRectangleMarker {
+			private Rect symbolRect;
 
-			public double X { get; set; }
-			public double Y { get; set; }
-			public double W { get; set; }
-			public double H { get; set; }
+			private readonly ResizeMarker<ButtonMarker>[] resizeMarker;
 
-			private Canvas MarkerCanvas { get { return (Canvas)this.MarkerGlyph; } }
 			public Rectangle Rectangle { get; private set; }
 
-			private readonly ResizeMarker[] resizeMarker;
-
 			public ButtonMarker(CircuitSymbol symbol) : base(symbol, new Canvas()) {
-				CircuitButton button = symbol.Circuit as CircuitButton;
-				Tracer.Assert(button != null);
+				Tracer.Assert(symbol.Circuit is CircuitButton);
+
+				this.resizeMarker = new ResizeMarker<ButtonMarker>[] {
+					new ResizeMarker<ButtonMarker>(this, 0, 0), new ResizeMarker<ButtonMarker>(this, 1, 0), new ResizeMarker<ButtonMarker>(this, 2, 0),
+					new ResizeMarker<ButtonMarker>(this, 0, 1), new ResizeMarker<ButtonMarker>(this, 2, 1),
+					new ResizeMarker<ButtonMarker>(this, 0, 2), new ResizeMarker<ButtonMarker>(this, 1, 2), new ResizeMarker<ButtonMarker>(this, 2, 2)
+				};
+
 				this.Rectangle = Symbol.Skin<Rectangle>(SymbolShape.MarkerRectangle);
 				Panel.SetZIndex(this.Rectangle, 0);
-				this.MarkerCanvas.Children.Add(this.Rectangle);
 
-				this.resizeMarker = new ResizeMarker[] {
-					new ResizeMarker(this, 0, 0), new ResizeMarker(this, 1, 0), new ResizeMarker(this, 2, 0),
-					new ResizeMarker(this, 0, 1), new ResizeMarker(this, 2, 1),
-					new ResizeMarker(this, 0, 2), new ResizeMarker(this, 1, 2), new ResizeMarker(this, 2, 2)
-				};
-				foreach(ResizeMarker marker in this.resizeMarker) {
-					this.MarkerCanvas.Children.Add(marker.Glyph);
+				Canvas markerCanvas = (Canvas)this.Glyph;
+				markerCanvas.Children.Add(this.Rectangle);
+
+				foreach(ResizeMarker<ButtonMarker> marker in this.resizeMarker) {
+					markerCanvas.Children.Add(marker.Glyph);
 				}
 
-				this.SnapToButton();
-				this.PositionGlyph();
+				this.Refresh();
 			}
 
-			public void PositionGlyph() {
-				Rect symbolRect = this.SymbolRect;
-				double sx = symbolRect.X + this.X;
-				double sy = symbolRect.Y + this.Y;
-				double sw = symbolRect.Width - this.X + this.W;
-				double sh = symbolRect.Height - this.Y + this.H;
-				Rect rect = new Rect(new Point(sx, sy), new Point(sx + sw, sy + sh));
-
-				Canvas.SetLeft(this.MarkerGlyph, rect.X);
-				Canvas.SetTop(this.MarkerGlyph, rect.Y);
-				this.Rectangle.Width = rect.Width;
-				this.Rectangle.Height = rect.Height;
-
-				foreach(ResizeMarker marker in this.resizeMarker) {
-					marker.PositionGlyph();
+			public void Resize(double x1, double y1, double x2, double y2) {
+				Point p1 = this.symbolRect.TopLeft;
+				Point p2 = this.symbolRect.BottomRight;
+				if(!double.IsNaN(x1)) {
+					p1.X = x1;
 				}
+				if(!double.IsNaN(y1)) {
+					p1.Y = y1;
+				}
+				if(!double.IsNaN(x2)) {
+					p2.X = x2;
+				}
+				if(!double.IsNaN(y2)) {
+					p2.Y = y2;
+				}
+				this.PositionGlyph(new Rect(p1, p2));
 			}
 
 			public void CommitResize(EditorDiagram editor) {
 				editor.CommitMove(this);
 			}
 
-			private void SnapToButton() {
+			public Rect ResizedRect() {
+				CircuitButton button = (CircuitButton)this.CircuitSymbol.Circuit;
+				Rect rect = new Rect(Canvas.GetLeft(this.Glyph), Canvas.GetTop(this.Glyph), this.Rectangle.Width, this.Rectangle.Height);
+				if(this.CircuitSymbol.Rotation != Rotation.Up) {
+					rect = Symbol.Transform(rect, Symbol.RotationTransform(-Symbol.Angle(this.CircuitSymbol.Rotation), this.CircuitSymbol.X, this.CircuitSymbol.Y, button.Width, button.Height));
+				}
+				return rect;
+			}
+
+			public override void Refresh() {
 				CircuitButton button = (CircuitButton)this.CircuitSymbol.Circuit;
 				Rect rect = new Rect(
 					Symbol.ScreenPoint(this.CircuitSymbol.X),
@@ -71,31 +76,18 @@ namespace LogicCircuit {
 				if(this.CircuitSymbol.Rotation != Rotation.Up) {
 					rect = Symbol.Transform(rect, Symbol.RotationTransform(this.CircuitSymbol.Rotation, this.CircuitSymbol.X, this.CircuitSymbol.Y, button.Width, button.Height));
 				}
-				this.SymbolRect = rect;
+				this.symbolRect = rect;
+				this.PositionGlyph(rect);
 			}
 
-			public Rect ResizedRect() {
-				CircuitButton button = (CircuitButton)this.CircuitSymbol.Circuit;
-				this.X = 0;
-				this.Y = 0;
-				this.W = 0;
-				this.H = 0;
-
-				Rect rect = new Rect(Canvas.GetLeft(this.MarkerGlyph), Canvas.GetTop(this.MarkerGlyph), this.Rectangle.Width, this.Rectangle.Height);
-				if(this.CircuitSymbol.Rotation != Rotation.Up) {
-					rect = Symbol.Transform(rect, Symbol.RotationTransform(-Symbol.Angle(this.CircuitSymbol.Rotation), this.CircuitSymbol.X, this.CircuitSymbol.Y, button.Width, button.Height));
+			private void PositionGlyph(Rect rect) {
+				Canvas.SetLeft(this.Glyph, rect.X);
+				Canvas.SetTop(this.Glyph, rect.Y);
+				this.Rectangle.Width = rect.Width;
+				this.Rectangle.Height = rect.Height;
+				foreach(ResizeMarker<ButtonMarker> marker in this.resizeMarker) {
+					marker.Refresh();
 				}
-				return rect;
-			}
-
-			public void Refresh() {
-				this.X = 0;
-				this.Y = 0;
-				this.W = 0;
-				this.H = 0;
-
-				this.SnapToButton();
-				this.PositionGlyph();
 			}
 		}
 	}

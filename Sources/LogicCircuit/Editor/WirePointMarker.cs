@@ -12,57 +12,55 @@ namespace LogicCircuit {
 			private readonly Action<int, int> shift;
 			public Func<GridPoint> WirePoint { get; private set; }
 
-			public override Symbol Symbol { get { return this.Parent.Symbol; } }
+			private readonly Rectangle markerGlyph;
 
-			public Rectangle MarkerGlyph { get; private set; }
+			public override FrameworkElement Glyph { get { return this.markerGlyph; } }
 
-			public override FrameworkElement Glyph { get { return this.MarkerGlyph; } }
-
-			public WirePointMarker(WireMarker parent, Func<Point> getPoint, Action<Point> setPoint, Action<int, int> shift, Func<GridPoint> wirePoint) {
+			public WirePointMarker(WireMarker parent, Func<Point> getPoint, Action<Point> setPoint, Action<int, int> shift, Func<GridPoint> wirePoint) : base(parent.Symbol) {
 				this.Parent = parent;
 				this.getPoint = getPoint;
 				this.setPoint = setPoint;
 				this.shift = shift;
 				this.WirePoint = wirePoint;
-				this.MarkerGlyph = Symbol.Skin<Rectangle>(SymbolShape.MarkerRectangle);
-				this.MarkerGlyph.DataContext = this;
-				this.MarkerGlyph.Width = this.MarkerGlyph.Height = 2 * Symbol.PinRadius;
+				this.markerGlyph = Symbol.Skin<Rectangle>(SymbolShape.MarkerRectangle);
+				this.markerGlyph.DataContext = this;
+				this.markerGlyph.Width = this.markerGlyph.Height = 2 * Symbol.PinRadius;
 			}
 
 			public override void Move(EditorDiagram editor, Point point) {
 				if(editor.SelectionCount > 1) {
-					editor.MoveSelection(point);
+					base.Move(editor, point);
 				} else {
 					this.setPoint(point);
-					this.PositionGlyph();
+					this.Refresh();
 				}
 			}
 
 			public override void Commit(EditorDiagram editor, Point point, bool withWires) {
 				if(editor.SelectionCount > 1) {
-					editor.CommitMove(point, withWires);
+					base.Commit(editor, point, withWires);
 				} else {
 					editor.CommitMove(point, withWires, this);
 					if(this.Parent.Wire.IsDeleted()) {
 						editor.Unselect(this.Parent.Wire);
 					} else {
-						this.Parent.PositionGlyph();
+						this.Parent.Refresh();
 					}
 				}
 			}
 
-			public override void Shift(int dx, int dy) {
+			public void Shift(int dx, int dy) {
 				this.shift(dx, dy);
 			}
 
-			public void PositionGlyph() {
-				Point point = this.getPoint();
-				Canvas.SetLeft(this.MarkerGlyph, point.X - Symbol.PinRadius);
-				Canvas.SetTop(this.MarkerGlyph, point.Y - Symbol.PinRadius);
+			public override void CancelMove(Panel selectionLayer) {
+				this.Parent.Refresh();
 			}
 
-			public override void CancelMove(Panel selectionLayer) {
-				this.Parent.PositionGlyph();
+			public override void Refresh() {
+				Point point = this.getPoint();
+				Canvas.SetLeft(this.markerGlyph, point.X - Symbol.PinRadius);
+				Canvas.SetTop(this.markerGlyph, point.Y - Symbol.PinRadius);
 			}
 		}
 	}

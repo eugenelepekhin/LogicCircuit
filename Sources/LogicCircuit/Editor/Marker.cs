@@ -7,42 +7,49 @@ using System.Windows.Shapes;
 namespace LogicCircuit {
 	partial class EditorDiagram {
 		private abstract class Marker {
-			public abstract Symbol Symbol { get; }
+			public Symbol Symbol { get; private set; }
 			public abstract FrameworkElement Glyph { get; }
-			public abstract void Move(EditorDiagram editor, Point point);
-			public abstract void Commit(EditorDiagram editor, Point point, bool withWires);
-			public abstract void Shift(int dx, int dy);
+
+			protected Marker(Symbol symbol) {
+				this.Symbol = symbol;
+			}
+
+			public virtual void Move(EditorDiagram editor, Point point) {
+				editor.MoveSelection(point);
+			}
+
+			public virtual void Commit(EditorDiagram editor, Point point, bool withWires) {
+				editor.CommitMove(point, withWires);
+			}
+
 			public virtual void CancelMove(Panel selectionLayer) {
 			}
+
+			public abstract void Refresh();
 		}
 
 		private interface IRectangleMarker {
-			Rect SymbolRect { get; }
-			double X { get; set; }
-			double Y { get; set; }
-			double W { get; set; }
-			double H { get; set; }
 			Rectangle Rectangle { get; }
-			void PositionGlyph();
-			Symbol Symbol { get; }
+			void Resize(double x1, double y1, double x2, double y2);
 			void CommitResize(EditorDiagram editor);
 			Rect ResizedRect();
 		}
 
-		private class ResizeMarker : Marker {
-			private static readonly Action<IRectangleMarker, Point>[] move = new Action<IRectangleMarker, Point>[] {
-				(marker, point) => { marker.X = point.X - marker.SymbolRect.X; marker.Y = point.Y - marker.SymbolRect.Y; },
-				(marker, point) => { marker.Y = point.Y - marker.SymbolRect.Y; },
-				(marker, point) => { marker.W = point.X - marker.SymbolRect.Right; marker.Y = point.Y - marker.SymbolRect.Y; },
+		private class ResizeMarker<TParent> : Marker where TParent: Marker, IRectangleMarker {
+			private static readonly Action<TParent, Point>[] move = new Action<TParent, Point>[] {
+				(marker, point) => marker.Resize(point.X, point.Y, double.NaN, double.NaN),
+				(marker, point) => marker.Resize(double.NaN, point.Y, double.NaN, double.NaN),
+				(marker, point) => marker.Resize(double.NaN, point.Y, point.X, double.NaN),
 
-				(marker, point) => { marker.X = point.X - marker.SymbolRect.X; },
+				(marker, point) => marker.Resize(point.X, double.NaN, double.NaN, double.NaN),
 				null,
-				(marker, point) => { marker.W = point.X - marker.SymbolRect.Right; },
+				(marker, point) => marker.Resize(double.NaN, double.NaN, point.X, double.NaN),
 
-				(marker, point) => { marker.X = point.X - marker.SymbolRect.X; marker.H = point.Y - marker.SymbolRect.Bottom; },
-				(marker, point) => { marker.H = point.Y - marker.SymbolRect.Bottom; },
-				(marker, point) => { marker.W = point.X - marker.SymbolRect.Right; marker.H = point.Y - marker.SymbolRect.Bottom; }
+				(marker, point) => marker.Resize(point.X, double.NaN, double.NaN, point.Y),
+				(marker, point) => marker.Resize(double.NaN, double.NaN, double.NaN, point.Y),
+				(marker, point) => marker.Resize(double.NaN, double.NaN, point.X, point.Y)
 			};
+
 
 			private static readonly Cursor[]  cursors = new Cursor[] {
 				Cursors.SizeNWSE, Cursors.SizeNS, Cursors.SizeNESW,
@@ -50,8 +57,7 @@ namespace LogicCircuit {
 				Cursors.SizeNESW, Cursors.SizeNS, Cursors.SizeNWSE
 			};
 
-			private readonly IRectangleMarker parent;
-			public override Symbol Symbol { get { return this.parent.Symbol; } }
+			private readonly TParent parent;
 
 			private readonly Rectangle rectangle = Symbol.Skin<Rectangle>(SymbolShape.MarkerRectangle);
 			public override FrameworkElement Glyph { get { return this.rectangle; } }
@@ -65,7 +71,7 @@ namespace LogicCircuit {
 			/// <param name="parent"></param>
 			/// <param name="x">0 - leftmost position on the parent. 1 - center of the edge. 2 - rightmost position</param>
 			/// <param name="y">0 - topmost position on the parent. 1 - center of the edge. 2 - bottommost position</param>
-			public ResizeMarker(IRectangleMarker parent, int x, int y) {
+			public ResizeMarker(TParent parent, int x, int y) : base(parent.Symbol) {
 				Tracer.Assert(0 <= x && x <= 2 && 0 <= y && y <= 2);
 				this.parent = parent;
 				this.x = x;
@@ -73,34 +79,29 @@ namespace LogicCircuit {
 				this.rectangle.DataContext = this;
 				Panel.SetZIndex(this.rectangle, 1);
 				this.rectangle.Width = this.rectangle.Height = 2 * Symbol.PinRadius;
-				this.rectangle.Cursor = ResizeMarker.cursors[this.x + this.y * 3];
+				this.rectangle.Cursor = ResizeMarker<TParent>.cursors[this.x + this.y * 3];
 				Tracer.Assert(this.rectangle.Cursor != null);
-			}
-
-			public void PositionGlyph() {
-				Canvas.SetLeft(this.rectangle, this.parent.Rectangle.Width * this.x / 2 - Symbol.PinRadius);
-				Canvas.SetTop(this.rectangle, this.parent.Rectangle.Height * this.y / 2 - Symbol.PinRadius);
 			}
 
 			public override void Move(EditorDiagram editor, Point point) {
 				if(editor.SelectionCount > 1) {
-					editor.MoveSelection(point);
+					base.Move(editor, point);
 				} else {
-					ResizeMarker.move[this.x + this.y * 3](this.parent, point);
-					this.parent.PositionGlyph();
+					ResizeMarker<TParent>.move[this.x + this.y * 3](this.parent, point);
 				}
 			}
 
 			public override void Commit(EditorDiagram editor, Point point, bool withWires) {
 				if(editor.SelectionCount > 1) {
-					editor.CommitMove(point, withWires);
+					base.Commit(editor, point, withWires);
 				} else {
 					this.parent.CommitResize(editor);
 				}
 			}
 
-			public override void Shift(int dx, int dy) {
-				throw new InvalidOperationException();
+			public override void Refresh() {
+				Canvas.SetLeft(this.rectangle, this.parent.Rectangle.Width * this.x / 2 - Symbol.PinRadius);
+				Canvas.SetTop(this.rectangle, this.parent.Rectangle.Height * this.y / 2 - Symbol.PinRadius);
 			}
 		}
 	}

@@ -75,9 +75,9 @@ namespace LogicCircuit {
 						this.Diagram.Children.Remove(symbol.Glyph);
 						symbol.Reset();
 						this.Add(symbol);
-						CircuitSymbolMarker marker = (CircuitSymbolMarker)this.FindMarker(symbol);
+						Marker marker = this.FindMarker(symbol);
 						if(marker != null) {
-							marker.Invalidate();
+							marker.Refresh();
 						}
 					} else {
 						symbol.Reset();
@@ -632,7 +632,9 @@ namespace LogicCircuit {
 				}
 				this.CircuitProject.InTransaction(() => {
 					foreach(Marker marker in this.selection.Values) {
-						marker.Shift(dx, dy);
+						marker.Symbol.Shift(dx, dy);
+						marker.Symbol.PositionGlyph();
+						marker.Refresh();
 					}
 					if(withWires) {
 						foreach(Wire wire in this.Project.LogicalCircuit.Wires()) {
@@ -704,7 +706,7 @@ namespace LogicCircuit {
 		}
 
 		private void CommitMove(ButtonMarker marker) {
-			CircuitSymbol symbol = marker.CircuitSymbol;
+			CircuitSymbol symbol = (CircuitSymbol)marker.Symbol;
 			CircuitButton button = (CircuitButton)symbol.Circuit;
 			Rect rect = marker.ResizedRect();
 

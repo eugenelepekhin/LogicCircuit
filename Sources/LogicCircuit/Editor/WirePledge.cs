@@ -6,13 +6,15 @@ using System.Windows.Shapes;
 namespace LogicCircuit {
 	partial class EditorDiagram {
 		private class WirePledge : Marker {
-			public Line MarkerLine { get; private set; }
-			public GridPoint Point1 { get { return Symbol.GridPoint(new Point(this.MarkerLine.X1, this.MarkerLine.Y1)); } }
-			public GridPoint Point2 { get { return Symbol.GridPoint(new Point(this.MarkerLine.X2, this.MarkerLine.Y2)); } }
+			private readonly Line markerLine;
+			public override FrameworkElement Glyph { get { return this.markerLine; } }
 
-			public WirePledge(Point point) {
+			private GridPoint Point1 { get { return Symbol.GridPoint(new Point(this.markerLine.X1, this.markerLine.Y1)); } }
+			private GridPoint Point2 { get { return Symbol.GridPoint(new Point(this.markerLine.X2, this.markerLine.Y2)); } }
+
+			public WirePledge(Point point) : base(null) {
 				Point start = Symbol.ScreenPoint(Symbol.GridPoint(point));
-				this.MarkerLine = new Line() {
+				this.markerLine = new Line() {
 					X1 = start.X,
 					Y1 = start.Y,
 					X2 = point.X,
@@ -23,14 +25,10 @@ namespace LogicCircuit {
 				};
 			}
 
-			public override Symbol Symbol { get { throw new InvalidOperationException(); } }
-
-			public override FrameworkElement Glyph { get { return this.MarkerLine; } }
-
 			public override void Move(EditorDiagram editor, Point point) {
 				Point end = Symbol.ScreenPoint(Symbol.GridPoint(point));
-				this.MarkerLine.X2 = end.X;
-				this.MarkerLine.Y2 = end.Y;
+				this.markerLine.X2 = end.X;
+				this.markerLine.Y2 = end.Y;
 			}
 
 			public override void Commit(EditorDiagram editor, Point point, bool withWires) {
@@ -44,12 +42,12 @@ namespace LogicCircuit {
 				}
 			}
 
-			public override void Shift(int dx, int dy) {
-				throw new InvalidOperationException();
-			}
-
 			public override void CancelMove(Panel selectionLayer) {
 				selectionLayer.Children.Remove(this.Glyph);
+			}
+
+			public override void Refresh() {
+				throw new InvalidOperationException();
 			}
 		}
 	}

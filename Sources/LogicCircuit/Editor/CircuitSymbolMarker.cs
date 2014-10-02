@@ -5,49 +5,31 @@ using System.Windows.Shapes;
 
 namespace LogicCircuit {
 	partial class EditorDiagram {
-		private class CircuitSymbolMarker : Marker {
-			public CircuitSymbol CircuitSymbol { get; private set; }
-			public override Symbol Symbol { get { return this.CircuitSymbol; } }
+		private abstract class CircuitMarker : Marker {
+			public CircuitSymbol CircuitSymbol { get { return (CircuitSymbol)this.Symbol; } }
 
-			public FrameworkElement MarkerGlyph { get; private set; }
-			public override FrameworkElement Glyph { get { return this.MarkerGlyph; } }
+			private readonly FrameworkElement markerGlyph;
+			public override FrameworkElement Glyph { get { return this.markerGlyph; } }
 
-			protected CircuitSymbolMarker(CircuitSymbol symbol, FrameworkElement markerGlyph) {
-				this.CircuitSymbol = symbol;
-				this.MarkerGlyph = markerGlyph;
-				this.MarkerGlyph.DataContext = this;
-				this.MarkerGlyph.RenderTransform = this.CircuitSymbol.Glyph.RenderTransform;
-				this.Invalidate();
+			protected CircuitMarker(CircuitSymbol symbol, FrameworkElement markerGlyph) : base(symbol) {
+				this.markerGlyph = markerGlyph;
+				this.markerGlyph.DataContext = this;
 			}
 
-			public CircuitSymbolMarker(CircuitSymbol symbol) : this(symbol, Symbol.Skin<Rectangle>(SymbolShape.MarkerRectangle)) {
+			public override void Refresh() {
+				this.markerGlyph.Width = Symbol.ScreenPoint(this.CircuitSymbol.Circuit.SymbolWidth) + 2 * Symbol.PinRadius;
+				this.markerGlyph.Height = Symbol.ScreenPoint(this.CircuitSymbol.Circuit.SymbolHeight) + 2 * Symbol.PinRadius;
+				Canvas.SetLeft(this.markerGlyph, Symbol.ScreenPoint(this.CircuitSymbol.X) - Symbol.PinRadius);
+				Canvas.SetTop(this.markerGlyph, Symbol.ScreenPoint(this.CircuitSymbol.Y) - Symbol.PinRadius);
+				this.markerGlyph.RenderTransformOrigin = Symbol.MarkerRotationCenter(this.CircuitSymbol.Circuit.SymbolWidth, this.CircuitSymbol.Circuit.SymbolHeight);
+				this.markerGlyph.ToolTip = this.CircuitSymbol.Circuit.ToolTip;
 			}
+		}
 
-			public override void Move(EditorDiagram editor, Point point) {
-				editor.MoveSelection(point);
-			}
-
-			public override void Commit(EditorDiagram editor, Point point, bool withWires) {
-				editor.CommitMove(point, withWires);
-			}
-
-			public override void Shift(int dx, int dy) {
-				this.CircuitSymbol.Shift(dx, dy);
-				this.CircuitSymbol.PositionGlyph();
-				this.PositionGlyph();
-			}
-
-			public void Invalidate() {
-				this.MarkerGlyph.Width = Symbol.ScreenPoint(this.CircuitSymbol.Circuit.SymbolWidth) + 2 * Symbol.PinRadius;
-				this.MarkerGlyph.Height = Symbol.ScreenPoint(this.CircuitSymbol.Circuit.SymbolHeight) + 2 * Symbol.PinRadius;
-				this.PositionGlyph();
-				this.MarkerGlyph.ToolTip = this.CircuitSymbol.Circuit.ToolTip;
-			}
-
-			private void PositionGlyph() {
-				Canvas.SetLeft(this.MarkerGlyph, Symbol.ScreenPoint(this.CircuitSymbol.X) - Symbol.PinRadius);
-				Canvas.SetTop(this.MarkerGlyph, Symbol.ScreenPoint(this.CircuitSymbol.Y) - Symbol.PinRadius);
-				this.MarkerGlyph.RenderTransformOrigin = Symbol.MarkerRotationCenter(this.CircuitSymbol.Circuit.SymbolWidth, this.CircuitSymbol.Circuit.SymbolHeight);
+		private sealed class CircuitSymbolMarker : CircuitMarker {
+			public CircuitSymbolMarker(CircuitSymbol symbol) : base(symbol, Symbol.Skin<Rectangle>(SymbolShape.MarkerRectangle)) {
+				this.Glyph.RenderTransform = this.CircuitSymbol.Glyph.RenderTransform;
+				this.Refresh();
 			}
 		}
 	}
