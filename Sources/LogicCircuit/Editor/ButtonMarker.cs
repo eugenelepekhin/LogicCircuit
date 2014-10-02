@@ -52,8 +52,8 @@ namespace LogicCircuit {
 				this.PositionGlyph(new Rect(p1, p2));
 			}
 
-			public void CommitResize(EditorDiagram editor) {
-				editor.CommitMove(this);
+			public void CommitResize(EditorDiagram editor, bool withWires) {
+				editor.CommitMove(this, withWires);
 			}
 
 			public Rect ResizedRect() {

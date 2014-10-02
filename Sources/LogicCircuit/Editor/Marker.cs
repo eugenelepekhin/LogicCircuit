@@ -31,7 +31,7 @@ namespace LogicCircuit {
 		private interface ISizableMarker {
 			Size Size { get; }
 			void Resize(double x1, double y1, double x2, double y2);
-			void CommitResize(EditorDiagram editor);
+			void CommitResize(EditorDiagram editor, bool withWires);
 		}
 
 		private class ResizeMarker<TParent> : Marker where TParent: Marker, ISizableMarker {
@@ -94,7 +94,7 @@ namespace LogicCircuit {
 				if(editor.SelectionCount > 1) {
 					base.Commit(editor, point, withWires);
 				} else {
-					this.parent.CommitResize(editor);
+					this.parent.CommitResize(editor, withWires);
 				}
 			}
 

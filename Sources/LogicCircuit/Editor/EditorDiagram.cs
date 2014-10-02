@@ -705,15 +705,18 @@ namespace LogicCircuit {
 			marker.Refresh();
 		}
 
-		private void CommitMove(ButtonMarker marker) {
+		private void CommitMove(ButtonMarker marker, bool withWires) {
 			CircuitSymbol symbol = (CircuitSymbol)marker.Symbol;
 			CircuitButton button = (CircuitButton)symbol.Circuit;
+			Tracer.Assert(symbol.LogicalCircuit == this.Project.LogicalCircuit);
+			Tracer.Assert(this.SelectedSymbols.Count() == 1 && this.SelectedSymbols.First() == symbol);
+			GridPoint originalPoint = symbol.Jams().First().AbsolutePoint;
 			Rect rect = marker.ResizedRect();
 
 			int x = Symbol.GridPoint(rect.X);
 			int y = Symbol.GridPoint(rect.Y);
-			int w = Math.Max(Symbol.GridPoint(rect.Width), 1);
-			int h = Math.Max(Symbol.GridPoint(rect.Height), 1);
+			int w = Math.Max(2, Math.Min(Symbol.GridPoint(rect.Width), CircuitButton.MaxWidth));
+			int h = Math.Max(2, Math.Min(Symbol.GridPoint(rect.Height), CircuitButton.MaxHeight));
 
 			if(x != symbol.X || y != symbol.Y || w != button.Width || h != button.Height) {
 				this.CircuitProject.InTransaction(() => {
@@ -721,6 +724,24 @@ namespace LogicCircuit {
 					symbol.Y = y;
 					button.Width = w;
 					button.Height = h;
+					if(withWires) {
+						button.ResetPins();
+						symbol.ResetJams();
+						symbol.PositionGlyph();
+						GridPoint point = symbol.Jams().First().AbsolutePoint;
+						foreach(Wire wire in symbol.LogicalCircuit.Wires()) {
+							if(originalPoint == wire.Point1) {
+								wire.X1 = point.X;
+								wire.Y1 = point.Y;
+								wire.PositionGlyph();
+							}
+							if(originalPoint == wire.Point2) {
+								wire.X2 = point.X;
+								wire.Y2 = point.Y;
+								wire.PositionGlyph();
+							}
+						}
+					}
 				});
 			}
 			marker.Refresh();
