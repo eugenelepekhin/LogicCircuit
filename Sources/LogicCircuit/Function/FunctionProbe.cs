@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows.Controls;
 
 namespace LogicCircuit {
@@ -49,6 +50,29 @@ namespace LogicCircuit {
 				pack |= ((long)((int)this[i] & 0x03)) << (2 * i);
 			}
 			return pack;
+		}
+
+		[SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "2#")]
+		public static bool ToInt(long packed, int bitWidth, out int result) {
+			Tracer.Assert(0 < bitWidth && bitWidth <= 32);
+			int unpacked = 0;
+			for(int i = 0; i < bitWidth; i++) {
+				switch((State)((packed >> (i * 2)) & 0x3)) {
+				case State.Off:
+					result = 0;
+					return false;
+				case State.On0:
+					break;
+				case State.On1:
+					unpacked |= (1 << i);
+					break;
+				default:
+					Tracer.Fail();
+					break;
+				}
+			}
+			result = unpacked;
+			return true;
 		}
 
 		public State Unpack(long pack, int bitNumber) {

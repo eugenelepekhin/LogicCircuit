@@ -92,8 +92,7 @@ namespace LogicCircuit {
 			foreach(OutputPinSocket socket in this.testSocket.Outputs) {
 				DataGridTextColumn column = new DataGridTextColumn();
 				column.Header = socket.Pin.Name.Replace("_", "__");
-				column.Binding = new Binding("Output[" + index + "]");
-				column.Binding.StringFormat = "{0:X}";
+				column.Binding = new Binding("[" + index + "]");
 				this.dataGrid.Columns.Add(column);
 				dataAccessor.Add(column, DialogTruthTable.OutputFieldAccesor(index));
 				index++;

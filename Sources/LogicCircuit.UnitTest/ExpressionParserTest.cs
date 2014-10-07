@@ -534,6 +534,11 @@ namespace LogicCircuit.UnitTest {
 			CircuitTestSocket socket = new CircuitTestSocket(project.ProjectSet.Project.LogicalCircuit);
 			ExpressionParser parser = new ExpressionParser(socket);
 			TruthState state = new TruthState(socket.Inputs.Count(), socket.Outputs.Count());
+			for(int i = 0; i < state.Result.Length; i++) {
+				state.Result[i] = 0x5555555555555555L;
+			}
+			bool success = state.Unpack(socket.Outputs.Select(o => o.Function.ParameterCount).ToArray());
+			Assert.IsTrue(success);
 
 			state.Input[this.InputIndex(socket, "c")]  = 1;
 			state.Input[this.InputIndex(socket, "x1")] = 5;
@@ -591,6 +596,10 @@ namespace LogicCircuit.UnitTest {
 			CircuitTestSocket socket = new CircuitTestSocket(project.ProjectSet.Project.LogicalCircuit);
 			ExpressionParser parser = new ExpressionParser(socket);
 			TruthState state = new TruthState(socket.Inputs.Count(), socket.Outputs.Count());
+			for(int i = 0; i < state.Result.Length; i++) {
+				state.Result[i] = 0x5555555555555555L;
+			}
+			state.Unpack(socket.Outputs.Select(o => o.Function.ParameterCount).ToArray());
 
 			state.Input[this.InputIndex(socket, "c")]  = 1;
 			state.Input[this.InputIndex(socket, "variant")] = 5;

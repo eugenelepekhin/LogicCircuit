@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
@@ -120,17 +121,6 @@ namespace LogicCircuit {
 				this.LogicalCircuit.CircuitProject.InOmitTransaction(() => this.Build(reportProgress, keepGoing, include, maxCount));
 			}
 
-			private static int ToInt32(FunctionProbe probe) {
-				int number = 0;
-				for(int i = 0; i < probe.BitWidth; i++) {
-					Tracer.Assert(probe[i] != State.Off);
-					if(probe[i] == State.On1) {
-						number |= (1 << i);
-					}
-				}
-				return number;
-			}
-
 			private void Build(Action<double> reportProgress, Func<bool> keepGoing, Predicate<TruthState> include, int maxCount) {
 				this.Results = new List<TruthState>();
 				this.Oscillation = false;
@@ -165,9 +155,9 @@ namespace LogicCircuit {
 							state.Input[i] = this.Inputs[i].Function.Value;
 						}
 						for(int i = 0; i < outputCount; i++) {
-							state.Output[i] = TableChank.ToInt32(this.Outputs[i].Function);
+							state.Result[i] = this.Outputs[i].Function.Pack();
 						}
-						if(include == null || include(state)) {
+						if(!state.Unpack(this.Outputs.Select(o => o.Function.ParameterCount).ToArray()) || include == null || include(state)) {
 							this.Results.Add(state);
 							state = new TruthState(inputCount, outputCount);
 						}
@@ -259,16 +249,51 @@ namespace LogicCircuit {
 	[SuppressMessage("Microsoft.Performance", "CA1815:OverrideEqualsAndOperatorEqualsOnValueTypes")]
 	public struct TruthState {
 		private readonly int[] input;
-		private readonly int[] output;
+		private readonly long[] result;
+		private int[] output;
+		private int[] bitWidth;
 
 		[SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
 		public int[] Input { get { return this.input; } }
+		[SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
+		public long[] Result { get { return this.result; } }
 		[SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
 		public int[] Output { get { return this.output; } }
 
 		public TruthState(int inputCount, int outputCount) {
 			this.input = new int[inputCount];
-			this.output = new int[outputCount];
+			this.result = new long[outputCount];
+			this.output = null;
+			this.bitWidth = null;
+		}
+
+		public bool Unpack(int[] bitWidthList) {
+			Tracer.Assert(bitWidthList.Length == this.result.Length);
+			this.bitWidth = bitWidthList;
+			int[] res = new int[this.result.Length];
+			for(int i = 0; i < res.Length; i++) {
+				int unpacked;
+				if(!FunctionProbe.ToInt(this.result[i], this.bitWidth[i], out unpacked)) {
+					return false;
+				}
+				res[i] = unpacked;
+			}
+			this.output = res;
+			return true;
+		}
+
+		public string this[int index] {
+			get {
+				if(this.output != null) {
+					return this.output[index].ToString("X", CultureInfo.InvariantCulture);
+				}
+				int unpacked;
+				if(FunctionProbe.ToInt(this.result[index], bitWidth[index], out unpacked)) {
+					return unpacked.ToString("X", CultureInfo.InvariantCulture);
+				}
+				long res = this.result[index];
+				return CircuitFunction.ToText(Enumerable.Range(0, this.bitWidth[index]).Select(i => (State)((res >> i * 2) & 0x3)), false);
+			}
 		}
 	}
 }
