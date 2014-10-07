@@ -117,6 +117,7 @@
 				<Setter Property="WindowStyle" Value="SingleBorderWindow"/>
 				<Setter Property="ShowInTaskbar" Value="False"/>
 				<Setter Property="SizeToContent" Value="WidthAndHeight"/>
+				<Setter Property="SnapsToDevicePixels" Value="True"/>
 			</Style>
 
 			<Style x:Key="DialogWindow" TargetType="{x:Type Window}">
@@ -131,6 +132,7 @@
 				<Setter Property="Width" Value="{Binding Path=WindowLocation.Width, Mode=TwoWay}"/>
 				<Setter Property="Height" Value="{Binding Path=WindowLocation.Height, Mode=TwoWay}"/>
 				<Setter Property="WindowState" Value="{Binding Path=WindowLocation.WindowState, Mode=TwoWay}"/>
+				<Setter Property="SnapsToDevicePixels" Value="True"/>
 			</Style>
 
 			<Style TargetType="{x:Type Button}">
