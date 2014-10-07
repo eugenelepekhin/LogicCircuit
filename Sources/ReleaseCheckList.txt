@@ -4,8 +4,9 @@
 4. Prepare website - add what is new in download.html
 5. Add News item in Project.xml
 6. Change version in LatestVersion.txt.
-7. Add tags to repos (both logic circuit and web site)
-8. Push repos to bitbucket.org
-9. Create a release on http://www.codeplex.com/
-10. Push repo to http://www.codeplex.com/
-11. Publish web site
+7. Review and update TranslationRequests.txt.
+8. Add tags to repos (both logic circuit and web site)
+9. Push repos to bitbucket.org
+10. Create a release on http://www.codeplex.com/
+11. Push repo to http://www.codeplex.com/
+12. Publish web site
