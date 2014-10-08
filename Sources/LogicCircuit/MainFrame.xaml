@@ -16,6 +16,7 @@
 	WindowState="{Binding Path=WindowLocation.WindowState, Mode=TwoWay}"
 	Background="{StaticResource WindowBackground}"
 	ResizeMode="CanResizeWithGrip"
+	SnapsToDevicePixels="True"
 
 	Keyboard.KeyDown="WindowKeyDown"
 	Keyboard.KeyUp="WindowKeyUp"
