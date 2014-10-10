@@ -729,6 +729,7 @@
 						MouseMove="DiagramMouseMove"
 						LostFocus="DiagramLostFocus"
 						LostKeyboardFocus="DiagramLostKeyboardFocus"
+						SnapsToDevicePixels="False"
 					>
 						<Canvas.LayoutTransform>
 							<ScaleTransform
