@@ -464,14 +464,17 @@ namespace LogicCircuit {
 		public IEnumerable<int> StateIndexes(Wire wire) {
 			Tracer.Assert(this.Circuit == wire.LogicalCircuit);
 			List<int> list = new List<int>();
-			this.StateIndexes(list, wire.Point1, false);
+			this.StateIndexes(list, wire.Point1, false, 0, 32);
 			Tracer.Assert(0 <= list.Count && list.Count <= 32);
 			return list;
 		}
 
-		private void StateIndexes(List<int> list, GridPoint point, bool ignore) {
+		[SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
+		[SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+		private bool StateIndexes(List<int> list, GridPoint point, bool ignore, int start, int count) {
+			Tracer.Assert(0 <= start && start < 32 && count <= 32);
 			Conductor conductor;
-			if(this.Circuit.ConductorMap().TryGetValue(point, out conductor)) {
+			if(0 < count && this.Circuit.ConductorMap().TryGetValue(point, out conductor)) {
 				foreach(CircuitSymbol symbol in this.symbols) {
 					foreach(Jam jam in symbol.Jams()) {
 						GridPoint jamPoint = jam.AbsolutePoint;
@@ -481,44 +484,63 @@ namespace LogicCircuit {
 							if(CircuitMap.IsPrimitive(circuit)) {
 								SymbolMap symbolMap;
 								if(jam.Pin.PinType == PinType.Output && this.Root.results.TryGetValue(new SymbolMapKey(this, symbol), out symbolMap)) {
-									list.AddRange(symbolMap.Results.Select(r => r.StateIndex).Where(i => !list.Contains(i)));
-									return;
+									Gate gate = circuit as Gate;
+									if(gate != null && (gate.GateType == GateType.TriState1 || gate.GateType == GateType.TriState2)) {
+										list.AddRange(symbolMap.Results.Skip(start).Take(count).Select(r => r.StateIndex).Where(i => !list.Contains(i)));
+									} else {
+										list.AddRange(symbolMap.Results.Skip(start).Take(count).Select(r => r.StateIndex));
+									}
+									return true;
 								}
 							} else if((pin = (circuit as Pin)) != null) {
-								if(this.Parent != null) {
-									this.Parent.StateIndexes(list, this.CircuitSymbol.Jam(pin).AbsolutePoint, true);
+								if(this.Parent != null && this.Parent.StateIndexes(list, this.CircuitSymbol.Jam(pin).AbsolutePoint, true, start, count)) {
+									return true;
 								}
 							} else if(circuit is LogicalCircuit) {
 								// child pin must be there as the jam only be there if the pin exists
 								CircuitSymbol childPinSymbol = this.Circuit.CircuitProject.CircuitSymbolSet.SelectByCircuit(jam.Pin).First();
 								// the child for the logic circuit also must exist
-								this.children[(CircuitSymbol)jam.CircuitSymbol].StateIndexes(list, childPinSymbol.Jams().First().AbsolutePoint, true);
+								if(this.children[(CircuitSymbol)jam.CircuitSymbol].StateIndexes(list, childPinSymbol.Jams().First().AbsolutePoint, true, start, count)) {
+									return true;
+								}
 							} else if(circuit is Splitter) {
 								List<Jam> jams = symbol.Jams().ToList();
 								// Sort jams in order of their device pins. Assuming first one will be the wide pin and the rest are thin ones,
 								// starting from lower bits to higher. This implies that creating of the pins should happened in that order.
 								jams.Sort(JamComparer.Comparer);
 
-								if(jam == jams[0]) { //wide jam. so find thin one, this bit will be redirected to
-									for(int i = 1; i < jams.Count; i++) {
-										this.StateIndexes(list, jams[i].AbsolutePoint, true);
+								if(jam == jams[0]) { //wide jam. so combine all the thin pins in the interval between start and start + count
+									int jamStart = 0;
+									bool obtained = false;
+									for(int i = 1; i < jams.Count && jamStart < start + count; i++) {
+										int bitWidth = jams[i].Pin.BitWidth;
+										if(start < jamStart + bitWidth) {
+											List<int> child = new List<int>();
+											obtained |= this.StateIndexes(child, jams[i].AbsolutePoint, true,
+												Math.Max(0, start - jamStart),
+												Math.Min(jamStart + bitWidth - start, Math.Min(start + count - jamStart, bitWidth))
+											);
+											list.AddRange(child);
+										}
+										jamStart += bitWidth;
+									}
+									if(obtained) {
+										return true;
 									}
 								} else { // thin jam. find position of this bit in wide pin
 									int jamStart = 0;
+									bool obtained = false;
 									for(int i = 1; i < jams.Count; i++) {
+										int bitWidth = jams[i].Pin.BitWidth;
 										if(jams[i] == jam) {
-											int start = list.Count;
-											this.StateIndexes(list, jams[0].AbsolutePoint, true);
-											if(start < list.Count) {
-												list.RemoveRange(start, jamStart);
-												start += jams[i].Pin.BitWidth;
-												if(start < list.Count) {
-													list.RemoveRange(start, list.Count - start);
-												}
-											}
+											Tracer.Assert(start < bitWidth);
+											obtained = this.StateIndexes(list, jams[0].AbsolutePoint, true, jamStart + start, Math.Min(bitWidth - start, count));
 											break;
 										}
-										jamStart += jams[i].Pin.BitWidth;
+										jamStart += bitWidth;
+									}
+									if(obtained) {
+										return true;
 									}
 								}
 							} else {
@@ -528,6 +550,7 @@ namespace LogicCircuit {
 					}
 				}
 			}
+			return false;
 		}
 
 		public IEnumerable<CircuitMap> Children {
