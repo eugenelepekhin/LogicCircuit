@@ -121,7 +121,7 @@
     <value>Meer dan één project in het bestand.</value>
   </data>
   <data name="ErrorUnknownVersion" xml:space="preserve">
-    <value>Poging tot het laden van een onbekende versie van Circuit project.
+    <value>Poging om een onbekende versie van Circuit project te laden.
 Het bestand dat je probeert te openen is of beschadigd of is met een nieuwere versie van Logic Circuit software gemaakt.
 Controleer &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt; voor een nieuwere versie.</value>
   </data>
@@ -176,7 +176,7 @@ Controleer &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://ww
     <value>?</value>
   </data>
   <data name="GateShapeRectangular" xml:space="preserve">
-    <value>Rectangular</value>
+    <value>Rechthoekig</value>
   </data>
   <data name="GateShapeShaped" xml:space="preserve">
     <value>Shaped</value>
@@ -218,33 +218,33 @@ Controleer &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://ww
     <value>g</value>
   </data>
   <data name="Led7Pin8" xml:space="preserve">
-    <value>dot</value>
+    <value>punt</value>
   </data>
   <data name="LogicalCircuitName" xml:space="preserve">
-    <value>Circuit</value>
+    <value>Schakeling</value>
   </data>
   <data name="MainFrameCaption" xml:space="preserve">
-    <value>Logical Circuit {0}</value>
+    <value>Logische Schakeling {0}</value>
     <comment>{string projectName}</comment>
   </data>
   <data name="MemoryAddressPinName" xml:space="preserve">
-    <value>Memory address</value>
+    <value>Geheugen adres</value>
   </data>
   <data name="MemoryAddressPinNotation" xml:space="preserve">
     <value>a</value>
   </data>
   <data name="MemoryDataInPinName" xml:space="preserve">
-    <value>Memory input data</value>
+    <value>Geheugen invoer data</value>
   </data>
   <data name="MemoryDataPinName" xml:space="preserve">
-    <value>Memory data</value>
+    <value>Geheugen Data</value>
   </data>
   <data name="MemoryDataPinNotation" xml:space="preserve">
     <value>d</value>
   </data>
   <data name="MemoryWritePinName" xml:space="preserve">
-    <value>RAM Write input.
-Memory value get updated on {0}</value>
+    <value>RAM Schrijf ingang.
+Geheugenwaarde wordt  vernieuwd op  {0}</value>
     <comment>{string writeOn}</comment>
   </data>
   <data name="MemoryWritePinNotation" xml:space="preserve">
@@ -275,15 +275,15 @@ Wil je de wijzigingen opslaan?</value>
     <value>Klaar.</value>
   </data>
   <data name="SplitterThin1PinName" xml:space="preserve">
-    <value>(bit {0}) of Combined Splitter connector</value>
+    <value>(bit {0}) van gecombineerde splitser/connector</value>
     <comment>{int bit}</comment>
   </data>
   <data name="SplitterThin2PinName" xml:space="preserve">
-    <value>(bits {0}-{1}) of Combined Splitter connector</value>
+    <value>(bits {0}-{1}) van gecombineerde splitser/connector</value>
     <comment>{int firstBit, int lastBit}</comment>
   </data>
   <data name="SplitterWidePinName" xml:space="preserve">
-    <value>Combined Splitter Connector</value>
+    <value>Gecombineerde splitser/connector</value>
   </data>
   <data name="TitleCancel" xml:space="preserve">
     <value>Annuleer</value>
@@ -301,10 +301,10 @@ Wil je de wijzigingen opslaan?</value>
     <value>_Ja</value>
   </data>
   <data name="WriteOn0" xml:space="preserve">
-    <value>falling from 1 to 0</value>
+    <value>Neergaande flank</value>
   </data>
   <data name="WriteOn1" xml:space="preserve">
-    <value>rising from 0 to 1</value>
+    <value>Opgaande flank</value>
   </data>
   <data name="ConstantNotation" xml:space="preserve">
     <value>{0:X}</value>
@@ -321,11 +321,11 @@ Wil je de wijzigingen opslaan?</value>
     <comment>{string buttonName}</comment>
   </data>
   <data name="ToolTipConstant" xml:space="preserve">
-    <value>{0} bit(s) constant {1:X}</value>
+    <value>{0} bit(s) constante{1:X}</value>
     <comment>{int bitWidth, int value}</comment>
   </data>
   <data name="ToolTipInputPin" xml:space="preserve">
-    <value>Input {0} bit(s) Pin {1}</value>
+    <value>Invoer {0} bit(s) Pin {1}</value>
     <comment>{int bitWidth, string pinName}</comment>
   </data>
   <data name="ToolTipNonePin" xml:space="preserve">
@@ -333,26 +333,26 @@ Wil je de wijzigingen opslaan?</value>
     <comment>{int bitWidth, string pinName}</comment>
   </data>
   <data name="ToolTipOutputPin" xml:space="preserve">
-    <value>Output {0} bit(s) Pin {1}</value>
+    <value>Uitvoer {0} bit(s) Pin {1}</value>
     <comment>{int bitWidth, string pinName}</comment>
   </data>
   <data name="ToolTipRAM" xml:space="preserve">
-    <value>RAM {0} bit address / {1} bit data</value>
+    <value>RAM {0} bit adres / {1} bit data</value>
     <comment>{int address, int data}</comment>
   </data>
   <data name="ToolTipROM" xml:space="preserve">
-    <value>ROM {0} bit address / {1} bit data</value>
+    <value>ROM {0} bit adres / {1} bit data</value>
     <comment>{int address, int data}</comment>
   </data>
   <data name="ToolTipSplitter" xml:space="preserve">
-    <value>Splitter of {0} bits to {1} pins</value>
+    <value>Splitser van {0} bits naar {1} pins</value>
     <comment>{int bitWidth, int pinCount}</comment>
   </data>
   <data name="ToolTipWire" xml:space="preserve">
-    <value>Wire</value>
+    <value>Draad</value>
   </data>
   <data name="CategoryInputOutput" xml:space="preserve">
-    <value>Input - Output</value>
+    <value>Invoer - Uitvoer</value>
   </data>
   <data name="TitlePinInput" xml:space="preserve">
     <value>{0}
@@ -361,7 +361,7 @@ In</value>
   </data>
   <data name="TitlePinOutput" xml:space="preserve">
     <value>{0}
-Out</value>
+Uit</value>
     <comment>{string pinName}</comment>
   </data>
   <data name="CommandHelpAbout" xml:space="preserve">
@@ -371,16 +371,16 @@ Out</value>
     <value>Knop</value>
   </data>
   <data name="NameConstant" xml:space="preserve">
-    <value>Constant</value>
+    <value>Constante</value>
   </data>
   <data name="NameSplitter" xml:space="preserve">
-    <value>Splitter</value>
+    <value>Splitser</value>
   </data>
   <data name="TitleAbout" xml:space="preserve">
     <value>Over</value>
   </data>
   <data name="TitleApplication" xml:space="preserve">
-    <value>Logical Circuit</value>
+    <value>Logische schakeling</value>
   </data>
   <data name="TitleVersion" xml:space="preserve">
     <value>Versie:</value>
@@ -401,7 +401,7 @@ Out</value>
     <value>Bestand</value>
   </data>
   <data name="TitleGateShape" xml:space="preserve">
-    <value>_Gate vorm</value>
+    <value>_Poort Symbool</value>
   </data>
   <data name="TitleLoadLastFile" xml:space="preserve">
     <value>_Laad laatste file tijdens starten</value>
@@ -410,24 +410,24 @@ Out</value>
     <value>Opties</value>
   </data>
   <data name="TitleShowGrid" xml:space="preserve">
-    <value>_Grid weergeven</value>
+    <value>_Show raster</value>
   </data>
   <data name="MessageFreeWireCount" xml:space="preserve">
-    <value>{0} losse draden zijn gevonden.</value>
+    <value>{0} Er zijn losse draden gevonden.</value>
     <comment>{int wireCount}</comment>
   </data>
   <data name="MessageFloatingSymbolCount" xml:space="preserve">
-    <value>{0} niet aangesloten symbolen zijn gevonden.</value>
+    <value>{0}Er zijn niet aangesloten symbolen gevonden.</value>
     <comment>{int symbolCount}</comment>
   </data>
   <data name="CommandCircuitCurrent" xml:space="preserve">
-    <value>Logisch circuit</value>
+    <value>Logische schakeling</value>
   </data>
   <data name="CommandCircuitDelete" xml:space="preserve">
-    <value>Verwijder huidig circuit</value>
+    <value>Verwijder huidige schakeling</value>
   </data>
   <data name="CommandCircuitNew" xml:space="preserve">
-    <value>Nieuw logisch circuit</value>
+    <value>Nieuwe logische schakeling</value>
   </data>
   <data name="CommandCircuitProject" xml:space="preserve">
     <value>Project</value>
@@ -481,7 +481,7 @@ Out</value>
     <value>N_otering:</value>
   </data>
   <data name="TitleBitWidth" xml:space="preserve">
-    <value>_Bit breedte:</value>
+    <value>_Aantal bits:</value>
   </data>
   <data name="TitleValue" xml:space="preserve">
     <value>_Waarde:</value>
@@ -490,16 +490,16 @@ Out</value>
     <value>Pin</value>
   </data>
   <data name="TitleAddressBitWidth" xml:space="preserve">
-    <value>_Adres bit breedte:</value>
+    <value>_Aantal Adres bits:</value>
   </data>
   <data name="TitleData" xml:space="preserve">
     <value>Da_ta</value>
   </data>
   <data name="TitleDataBitWidth" xml:space="preserve">
-    <value>_Data bit breedte:</value>
+    <value>Aantal</value>
   </data>
   <data name="TitleInverted" xml:space="preserve">
-    <value>_Geinverteerd</value>
+    <value>_Geïnverteerd</value>
   </data>
   <data name="TitleLoad" xml:space="preserve">
     <value>_Laad...</value>
@@ -526,7 +526,7 @@ Out</value>
     <value>Druk op CTRL+{SHIFT}+Tab om te schakelen tussen logische circuits of klik om individuele symbolen te selecteren/deselecteren.</value>
   </data>
   <data name="TipOnWireSelect" xml:space="preserve">
-    <value>Druk op SHIFT+{CTRL}+Click op de draad om de gehele conductor te selecteren/deselectern, ALT+Click om de geselecteerde draad te splitsen, op gemeenschappelijke punten van twee draden om te deze samen te voegen.</value>
+    <value>Druk op SHIFT+{CTRL}+Click op de draad om de gehele conductor te selecteren/deselecteren, ALT+Click om de geselecteerde draad te splitsen, op gemeenschappelijke punten van twee draden om te deze samen te voegen.</value>
   </data>
   <data name="TipOnAwaitingArea" xml:space="preserve">
     <value>{0} {1}. Selecteer meerdere symbolen, houdt SHIFT ingedrukt om de huidige selectie te behouden.</value>
@@ -544,15 +544,15 @@ Out</value>
     <value>/</value>
   </data>
   <data name="ErrorAddressNotConnected" xml:space="preserve">
-    <value>Niet alle adresbits zijn geconnect met het geheugen {0}</value>
+    <value>Niet alle adresbits zijn met het geheugen verbonden {0}</value>
     <comment>{string memoryPath}</comment>
   </data>
   <data name="ErrorDataInNotConnected" xml:space="preserve">
-    <value>Niet alle input data bits zijn geconnect met het geheugen {0}</value>
+    <value>Niet alle input data bits zijn verbonden met het geheugen {0}</value>
     <comment>{string memoryPath}</comment>
   </data>
   <data name="ErrorJamBitWidthDifferent" xml:space="preserve">
-    <value>Input pin van {0} ({1}) en output pin van {2} ({3}) op {4} hebben verschillende bitbreedte en kunnen niet geconnect worden. Los dit eerst op.</value>
+    <value>Invoerpin van {0} ({1}) en uitvoerpin van {2} ({3}) op {4} hebben verschillende woordbreedte en kunnen niet verbonden worden. Los dit eerst op.</value>
     <comment>{string symbol1, GridPoint point1, string symbol2, GridPoint point2, string logicCircuit}</comment>
   </data>
   <data name="ErrorLoopInCircuit" xml:space="preserve">
@@ -560,7 +560,7 @@ Out</value>
     <comment>{string symbol, string logicCircuit}</comment>
   </data>
   <data name="ErrorManyResults" xml:space="preserve">
-    <value>Input pin {0} van {1} aangesloten op meer dan één uitgang pins die niet 'tri state' compatible is.</value>
+    <value>Invoer pin {0} van {1} is aangesloten op meer dan één uitgang pin, die niet 'tri state' compatible zijn.</value>
     <comment>{string pinName, string symbol}</comment>
   </data>
   <data name="PowerOff" xml:space="preserve">
@@ -665,7 +665,7 @@ Wil je het vervangen?</value>
     <value>Adres bits</value>
   </data>
   <data name="CaptionBitWidth" xml:space="preserve">
-    <value>Bit breedte</value>
+    <value>Woord breedte</value>
   </data>
   <data name="CaptionDataBitWidth" xml:space="preserve">
     <value>Data bits</value>
@@ -725,28 +725,28 @@ Wil je het vervangen?</value>
     <value>_Zoom:</value>
   </data>
   <data name="ToolTipAddressBitWidth" xml:space="preserve">
-    <value>Kies de bit breedte van de adres pin</value>
+    <value>Kies de woord breedte van de adres pin</value>
   </data>
   <data name="ToolTipButtonNotation" xml:space="preserve">
     <value>Voer knop notatie in</value>
   </data>
   <data name="ToolTipConstantBitWidth" xml:space="preserve">
-    <value>Kies de bit breedte van de constante</value>
+    <value>Kies de woord breedte van de constante</value>
   </data>
   <data name="ToolTipConstantValue" xml:space="preserve">
     <value>Voer de intitiele waarde van de constante in</value>
   </data>
   <data name="ToolTipCurrentZoom" xml:space="preserve">
-    <value>Huidige zoom</value>
+    <value>Huidige vergroting</value>
   </data>
   <data name="ToolTipDataBitWidth" xml:space="preserve">
-    <value>Kies de bit breedte van de data pin</value>
+    <value>Kies de woord breedte van de data pin</value>
   </data>
   <data name="ToolTipFrequency" xml:space="preserve">
-    <value>Verander de frequentie van de klok gates van het huidige circuit.</value>
+    <value>Verander de frequentie van de klok gates van het huidige schakeling</value>
   </data>
   <data name="ToolTipGateInputCount" xml:space="preserve">
-    <value>Kies het aantal inputs voor de gate</value>
+    <value>Kies het aantal inputs voor de poort</value>
   </data>
   <data name="ToolTipIsMaximumSpeed1" xml:space="preserve">
     <value>Draai het circuit op de maximaal mogelijke snelheid en negeer de ingestelde frequentie van hierboven.</value>
@@ -755,13 +755,13 @@ Wil je het vervangen?</value>
     <value>Aanvinken van deze checkbox kan resulteren in een trage tot niet meer reagerende gebruikersinterface op sommige computers.</value>
   </data>
   <data name="ToolTipPinBitWidth" xml:space="preserve">
-    <value>Kies de bit breedte van de pin</value>
+    <value>Kies aantal bits voor de pin</value>
   </data>
   <data name="ToolTipPinSide" xml:space="preserve">
     <value>Kies de kant van het circuit 'glyph' waar de nieuwe pin geplaatst zal worden</value>
   </data>
   <data name="ToolTipSplitterBitWidth" xml:space="preserve">
-    <value>Kies de bit breedte van de split connector van de splitter.</value>
+    <value>Kies de woord breedte van de split connector van de splitter.</value>
   </data>
   <data name="ToolTipSplitterPinNumber" xml:space="preserve">
     <value>Kies het aantal split connectors voor de splitter.</value>
@@ -776,7 +776,7 @@ Wil je het vervangen?</value>
     <value>Kies de waarde voor 'memory time'</value>
   </data>
   <data name="ToolTipPinNotation" xml:space="preserve">
-    <value>Voer een korte tekst in dat zal worden weergegeven op het symbool van het circuit naast de pin</value>
+    <value>Voer een korte tekst in die zal worden weergegeven op het symbool van het circuit naast de pin</value>
   </data>
   <data name="CaptionNotation" xml:space="preserve">
     <value>Notitie</value>
@@ -788,7 +788,7 @@ Wil je het vervangen?</value>
     <value>Als de knop getoggled wordt, zal de status wijzigen bij elke click. Als de knop niet getoggled is dan wanneer er op gedrukt wordt of losgelaten</value>
   </data>
   <data name="CommandCircuitPower" xml:space="preserve">
-    <value>Schakel stroom</value>
+    <value>Schakel in</value>
   </data>
   <data name="CommandEditRotateLeft" xml:space="preserve">
     <value>Linksom roteren</value>
@@ -819,16 +819,16 @@ Wil je het vervangen?</value>
     <value>Boven</value>
   </data>
   <data name="CaptionSplitterBitWidth" xml:space="preserve">
-    <value>Split pin bit breedte</value>
+    <value>Split pin woord breedte</value>
   </data>
   <data name="CommandCircuitUsage" xml:space="preserve">
     <value>In gebruik door...</value>
   </data>
   <data name="MessageNotUsed" xml:space="preserve">
-    <value>Dit logische circuit is nergens gebruikt.</value>
+    <value>Dit logische circuit wordt nergens gebruikt.</value>
   </data>
   <data name="MessageUsageNote" xml:space="preserve">
-    <value>Selecteer het circuit waar de huidige is gebruikt en dubbel klik er op m daarheen te navigeren en selecteer de symbolen van de huidige.</value>
+    <value>Selecteer het circuit waar de huidige is gebruikt en dubbel klik er op om daarheen te navigeren en selecteer de symbolen van de huidige.</value>
   </data>
   <data name="TitleCircuitUsage" xml:space="preserve">
     <value>Gebruik van logisch circuit</value>
@@ -900,16 +900,16 @@ Wil je de referentie naar dit bestand uit de lijst met recente bestanden wissen?
     <value>Main</value>
   </data>
   <data name="PinTypeNameInput" xml:space="preserve">
-    <value>Input</value>
+    <value>Invoer</value>
   </data>
   <data name="PinTypeNameNone" xml:space="preserve">
     <value>Geen</value>
   </data>
   <data name="PinTypeNameOutput" xml:space="preserve">
-    <value>Output</value>
+    <value>Uitvoer</value>
   </data>
   <data name="ErrorUnsupportedUri" xml:space="preserve">
-    <value>Navigeren naar dit adres wordt niet gesupport</value>
+    <value>Navigeren naar dit adres wordt niet ondersteund</value>
   </data>
   <data name="GridPoint" xml:space="preserve">
     <value>({0}, {1})</value>
@@ -1017,10 +1017,10 @@ Wil je de referentie naar dit bestand uit de lijst met recente bestanden wissen?
     <value>Truth Table</value>
   </data>
   <data name="MessageInputOutputPinsMissing" xml:space="preserve">
-    <value>Er zijn geen input of output pinnen op dit circuit. De 'truth tables' zijn opgebouwd door alle permutaties van data naar input pins te sturen en de resultaten te lezen van de output pins.</value>
+    <value>Er zijn geen invoer of uitvoer pinnen op dit circuit. De waarheidstabellen zijn opgebouwd door alle permutaties van data naar invoer pinnen te sturen en de resultaten te lezen van de uitvoer pins.</value>
   </data>
   <data name="MessageTruthTableTooBig" xml:space="preserve">
-    <value>De 'truth table' is te lang en zal getruncate worden. Gebruik aub Filter om de juistheid van het circuit te controleren.</value>
+    <value>De waarheidstabel is te lang en zal ingekort worden. Gebruik aub Filter om de juistheid van het circuit te controleren.</value>
   </data>
   <data name="ParserEOS" xml:space="preserve">
     <value>Einde van de expressie</value>
@@ -1122,21 +1122,21 @@ Wil je de referentie naar dit bestand uit de lijst met recente bestanden wissen?
     <value>Vul tijdens _starten:</value>
   </data>
   <data name="ToolTipMemoryOnStart" xml:space="preserve">
-    <value>Kies hoe het geheugen geinitialiseerd wordt bij aanschakelen</value>
+    <value>Kies hoe het geheugen geinitialiseerd wordt bij inschakelen</value>
   </data>
   <data name="ErrorManyMemoryData" xml:space="preserve">
     <value>Circuit {0} bevat {1} welke data behoudt tussen de runs. 
-Zo een circuit kan meerdere keren gebruikt worden bij andere circuits omdat potentieel verschillende data sets opgeslagen worden in elke module.</value>
+Zo'n circuit kan meerdere keren gebruikt worden bij andere circuits omdat potentieel verschillende data sets opgeslagen worden in elke module.</value>
     <comment>{string circuitName, string ramNotation}</comment>
   </data>
   <data name="MessageRestartRequared" xml:space="preserve">
-    <value>De taalkeuze is veranderd. De applicatie moet opnieuw opgestart worden om de settings door te voeren.</value>
+    <value>De taalkeuze is veranderd. De applicatie moet opnieuw opgestart worden om de instellingen door te voeren.</value>
   </data>
   <data name="TitleCulture" xml:space="preserve">
     <value>T_aal</value>
   </data>
   <data name="CommandEditAlignCenter" xml:space="preserve">
-    <value>Midden uitlijnen</value>
+    <value>Centreren</value>
   </data>
   <data name="CommandEditAlignJustify" xml:space="preserve">
     <value>Controleer</value>
@@ -1234,14 +1234,14 @@ Zo een circuit kan meerdere keren gebruikt worden bij andere circuits omdat pote
   <data name="ToolTipIsDisplay" xml:space="preserve">
     <value>Als je in Logic Circuit aangeeft dat je visuele elementen wilt weergeven
 dan zullen alle display symbolen van het circuit live zichtbaar zijn.
-Dispay's zijn: LED, LED Matrix, Button of ander elementen
+Dispay's zijn: LED, LED Matrix, Button of ander elementen,
 die visuele weergave mogelijkheden hebben.</value>
   </data>
   <data name="TitleIsDisplay" xml:space="preserve">
     <value>Geef visuele elementen weer op het symbool</value>
   </data>
   <data name="WireDisplayBitWidth" xml:space="preserve">
-    <value>Bit breedte: {0}</value>
+    <value>Woord breedte: {0}</value>
   </data>
   <data name="WireDisplayValue" xml:space="preserve">
     <value>Waarde: {0}</value>
@@ -1271,7 +1271,7 @@ die visuele weergave mogelijkheden hebben.</value>
     <value>Reeks</value>
   </data>
   <data name="ToolTipSensorBitWidth" xml:space="preserve">
-    <value>Kies de bitbreedte van de sensor</value>
+    <value>Kies de woord breedte van de sensor</value>
   </data>
   <data name="ToolTipSensorNotation" xml:space="preserve">
     <value>Voer de notatie van de sensor in</value>
@@ -1347,7 +1347,7 @@ Hergroepeer aansluitpennen om hun relatieve posities op de symbolen van dit circ
     <value>Levert gegevens van een "externe bron" als een reeks, gedefinieerde, willekeurig gekozen, of handmatig ingevoerde waarden.</value>
   </data>
   <data name="ToolTipDescriptorSplitter" xml:space="preserve">
-    <value>Maakt het mogelijk om draden te bundelen, of bundels te scheiden in afzonderlijke draden. Het gebruik van splitters en multi-bit pinnen, vereenvoudigt het tekenen en begrijpen van de schakeling aanzienlijk.</value>
+    <value>Maakt het mogelijk om draden te bundelen, of bundels te scheiden in afzonderlijke draden. Het gebruik van splitsers en multi-bit pinnen, vereenvoudigt het tekenen en begrijpen van de schakeling aanzienlijk.</value>
   </data>
   <data name="ToolTipDescriptorText" xml:space="preserve">
     <value>Plaats aantekeningen overal in het  diagram om de schakeling uit te leggen. Voorzie het diagram, van links naar nuttige web sites, en nuttige tekeningen</value>
