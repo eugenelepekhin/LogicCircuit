@@ -101,24 +101,27 @@ namespace LogicCircuit {
 		[SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "NavigateUri")]
 		public static void CheckTranslationRequests(Dispatcher dispatcher) {
 			try {
-				SettingsStringCache checkedVersion = DialogAbout.TranslationRequestVersion();
-				Version version;
-				if(!Version.TryParse(checkedVersion.Value, out version) || version < DialogAbout.CurrentVersion()) {
-					string text = null;
-					using(WebClient client = new WebClient()) {
-						client.UseDefaultCredentials = true;
-						text = client.DownloadString(new Uri("http://www.LogicCircuit.org/TranslationRequests.txt"));
+				string cultureName = App.CurrentCulture.Name;
+				if(!cultureName.StartsWith("en", StringComparison.OrdinalIgnoreCase)) {
+					SettingsStringCache checkedVersion = DialogAbout.TranslationRequestVersion();
+					Version version;
+					if(!Version.TryParse(checkedVersion.Value, out version) || version < DialogAbout.CurrentVersion()) {
+						string text = null;
+						using(WebClient client = new WebClient()) {
+							client.UseDefaultCredentials = true;
+							text = client.DownloadString(new Uri("http://www.LogicCircuit.org/TranslationRequests.txt"));
+						}
+						if(!string.IsNullOrWhiteSpace(text) && text.Contains(cultureName)) {
+							dispatcher.BeginInvoke(
+								new Action(() => App.Mainframe.InformationMessage(
+									"If you can help translating this program to any language you are fluent in please contact me at:\n" +
+									"<Hyperlink NavigateUri=\"http://www.logiccircuit.org/contact.html\">http://www.logiccircuit.org/contact.html</Hyperlink>"
+								)),
+								DispatcherPriority.ApplicationIdle
+							);
+						}
+						checkedVersion.Value = DialogAbout.CurrentVersion().ToString();
 					}
-					if(!string.IsNullOrWhiteSpace(text) && text.Contains(App.CurrentCulture.Name)) {
-						dispatcher.BeginInvoke(
-							new Action(() => App.Mainframe.InformationMessage(
-								"If you can help translating this program to any language you are fluent in please contact me at:\n" +
-								"<Hyperlink NavigateUri=\"http://www.logiccircuit.org/contact.html\">http://www.logiccircuit.org/contact.html</Hyperlink>"
-							)),
-							DispatcherPriority.ApplicationIdle
-						);
-					}
-					checkedVersion.Value = DialogAbout.CurrentVersion().ToString();
 				}
 			} catch(Exception exception) {
 				Tracer.Report("DialogAbout.CheckTranslationRequests", exception);
