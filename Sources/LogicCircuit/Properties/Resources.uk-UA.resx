@@ -1188,4 +1188,190 @@
   <data name="WireDisplayDisconnected" xml:space="preserve">
     <value>Провідник не під'єднано.</value>
   </data>
+  <data name="CaptionPinSide" xml:space="preserve">
+    <value>Позиція роз'єму</value>
+  </data>
+  <data name="CaptionSensorType" xml:space="preserve">
+    <value>Датчик типу</value>
+  </data>
+  <data name="ErrorBadInterval" xml:space="preserve">
+    <value>Мінімальне значення має бути меншим або дорівнювати максимальному.</value>
+  </data>
+  <data name="ErrorBadPositiveNumber" xml:space="preserve">
+    <value>Очікуючи число більше за нуль</value>
+  </data>
+  <data name="ErrorEmptySeries" xml:space="preserve">
+    <value>Послідовності не може бути пустим</value>
+  </data>
+  <data name="ErrorSeriesItem" xml:space="preserve">
+    <value>Помилка {0}. Очікується, пара шістнадцяткових чисел, розділених :</value>
+  </data>
+  <data name="ErrorSeriesItemOrder" xml:space="preserve">
+    <value>Помилка {0}. Номер кожного наступного циклу має бути більш колишнього.</value>
+  </data>
+  <data name="CommandEditFind" xml:space="preserve">
+    <value>Пошук</value>
+  </data>
+  <data name="ErrorBadHexNumber" xml:space="preserve">
+    <value>Неприпустима шістнадцяткова цифра</value>
+  </data>
+  <data name="CaptionGraphicsArrayBPP" xml:space="preserve">
+    <value>Біт на піксель</value>
+  </data>
+  <data name="ToolTipDescriptorGraphicsArray" xml:space="preserve">
+    <value>Графічний (матричний) дисплей показує дані, що зберігаються у внутрішній пам'яті. Використовується в складних схемах - таких, як комп'ютери або контролери. 
+Дозволяє вибирати розмір і колірну схему: 
+1 біт на піксель - чорно-білий 
+2 біта на піксель - 4 відтінки сірого 
+4 біта на піксель - 16 кольорів</value>
+  </data>
+  <data name="ErrorBadIntegerInRange" xml:space="preserve">
+    <value>Очікувалося число в діапазоні {0}-{1}.</value>
+  </data>
+  <data name="TitleWidth" xml:space="preserve">
+    <value>_Ширина:</value>
+  </data>
+  <data name="NameSensor" xml:space="preserve">
+    <value>Датчик</value>
+  </data>
+  <data name="NameSound" xml:space="preserve">
+    <value>Зуммер</value>
+  </data>
+  <data name="SensorTypeManual" xml:space="preserve">
+    <value>Ручний</value>
+  </data>
+  <data name="SensorTypeRandom" xml:space="preserve">
+    <value>Випадковий</value>
+  </data>
+  <data name="SensorTypeSeries" xml:space="preserve">
+    <value>Заданий</value>
+  </data>
+  <data name="NameGraphicsArray" xml:space="preserve">
+    <value>Графічний дисплей</value>
+  </data>
+  <data name="TitleFind" xml:space="preserve">
+    <value>Пошук схеми</value>
+  </data>
+  <data name="TitleGraphicsArrayBPP" xml:space="preserve">
+    <value>_Біт на піксель:</value>
+  </data>
+  <data name="TitleHeight" xml:space="preserve">
+    <value>_Висота:</value>
+  </data>
+  <data name="TitlePinSide" xml:space="preserve">
+    <value>Положення _раз'ема:</value>
+  </data>
+  <data name="TitleSensorType" xml:space="preserve">
+    <value>Тип датчика:</value>
+  </data>
+  <data name="TitleLoopSeries" xml:space="preserve">
+    <value>Повторювати послідовність</value>
+  </data>
+  <data name="TitleSensorRandomMax" xml:space="preserve">
+    <value>Максимальне число циклів:</value>
+  </data>
+  <data name="TitleSensorRandomMin" xml:space="preserve">
+    <value>Мінімальне число циклів:</value>
+  </data>
+  <data name="TitleSeries" xml:space="preserve">
+    <value>Послідовність:</value>
+  </data>
+  <data name="TitleSearch" xml:space="preserve">
+    <value>Шукати</value>
+  </data>
+  <data name="TitleSearchPattern" xml:space="preserve">
+    <value>Що шукати</value>
+  </data>
+  <data name="TitleSensorManualInitialValue" xml:space="preserve">
+    <value>Початкове значення:</value>
+  </data>
+  <data name="ToolTipDescriptorClock" xml:space="preserve">
+    <value>Генерує сигнал, який коливається між 0 і 1 і використовується для узгодження дій схем.</value>
+  </data>
+  <data name="ToolTipDescriptorPin" xml:space="preserve">
+    <value>Використовується для створення з'єднання з іншими схемами, які використовують поточну. 
+Інші схеми можуть поставляти або приймати дані підключившись до роз'ємів на символі цієї схеми. 
+Щоб змінити відносні положення роз'ємів на символі, пересуньте їх на поточній діаграмі.</value>
+  </data>
+  <data name="ToolTipDevicePinSide" xml:space="preserve">
+    <value>Виберіть сторону, де буде знаходитися роз'єм</value>
+  </data>
+  <data name="ToolTipDescriptorProbe" xml:space="preserve">
+    <value>Додавайте та підключайте пробники до схем, що б спостерігати поточний стан на поверхні пробника, історію значень при подвійному натисканні або перегляду цієї інформації на осцилографі.</value>
+  </data>
+  <data name="ToolTipDescriptorSensor" xml:space="preserve">
+    <value>Надає дані з "зовнішнього джерела", 
+як серію зумовлених, випадково 
+обраних, або введених вручну значень.</value>
+  </data>
+  <data name="ToolTipDescriptorSplitter" xml:space="preserve">
+    <value>Дозволяє створювати або розділяти джгути проводів. 
+Використання разветвителей і багаторозрядних сполук, 
+допоможе значно спростити схему і її розуміння.</value>
+  </data>
+  <data name="ToolTipDescriptorText" xml:space="preserve">
+    <value>Розміщення текстових заміток на діаграмі 
+дозволить її прокоментувати, додати до неї 
+ілюстрації та корисні посилання на веб-сайти.</value>
+  </data>
+  <data name="ToolTipDescriptorTriState" xml:space="preserve">
+    <value>Вихід схеми може приймати три різних значення: 0, 1 і стан 
+високого опору (імпедансу) - Z. Стан з високого імпедансу 
+не грає ніякої ролі в логіці, яка є строго двійковий але 
+дозволяє відключити вихід від схеми. Ці пристрої використовуються на шинах 
+ЦП, що дозволяє підключати до шини кілька джерел даних. 
+Група з схем з трьома станами з відповідним контролером в 
+основному еквівалентна використанню мультиплексора.</value>
+  </data>
+  <data name="ToolTipGraphicsArray" xml:space="preserve">
+    <value>{0} {1} х {2}. {3} біт (а) на піксель: {4} кольору (ів)</value>
+  </data>
+  <data name="ToolTipGraphicsArrayBPP" xml:space="preserve">
+    <value>Виберіть число біт на піксель</value>
+  </data>
+  <data name="ToolTipGraphicsArrayHeight" xml:space="preserve">
+    <value>Введіть висоту дисплея в пікселях.</value>
+  </data>
+  <data name="ToolTipGraphicsArrayWidth" xml:space="preserve">
+    <value>Введите ширину дисплея в пикселях.</value>
+  </data>
+  <data name="ToolTipSensor" xml:space="preserve">
+    <value>Датчик {0}</value>
+  </data>
+  <data name="ToolTipSensorBitWidth" xml:space="preserve">
+    <value>Виберіть розрядність датчика</value>
+  </data>
+  <data name="ToolTipSensorNotation" xml:space="preserve">
+    <value>Введіть позначення датчика</value>
+  </data>
+  <data name="ToolTipSensorType" xml:space="preserve">
+    <value>Виберіть спосіб отримання даних датчиком</value>
+  </data>
+  <data name="ToolTipSensorRandomMax" xml:space="preserve">
+    <value>Введіть максимальну кількість циклів до зміни значення датчика</value>
+  </data>
+  <data name="ToolTipSensorRandomMin" xml:space="preserve">
+    <value>Введіть мінімальна кількість циклів до зміни значення датчика.</value>
+  </data>
+  <data name="ToolTipSeriesData" xml:space="preserve">
+    <value>Будь ласка, введіть послідовність значень датчика у вигляді &lt;цикл&gt;: &lt;значення&gt; 
+де цикл і значення шістнадцятиричні числа. 
+Коли цикл є парним числом або 0, то це відповідає зміні 
+тактового сигналу від 0 до 1, коли непарних - тактовий сигнал змінюється з 1 на 0.</value>
+  </data>
+  <data name="ToolTipSound" xml:space="preserve">
+    <value>Зуммер {0}</value>
+  </data>
+  <data name="ToolTipSensorManualValue" xml:space="preserve">
+    <value>Введіть шестнадцатеричное число і натисніть Enter.</value>
+  </data>
+  <data name="ToolTipSensorManualInitialValue" xml:space="preserve">
+    <value>Введіть початкове значення, як шістнадцяткове число.</value>
+  </data>
+  <data name="ToolTipSoundNotation" xml:space="preserve">
+    <value>Введіть позначення зумера</value>
+  </data>
+  <data name="ErrorWriteNotConnected" xml:space="preserve">
+    <value>Не підключений вхід записи дисплея {0}</value>
+  </data>
 </root>
