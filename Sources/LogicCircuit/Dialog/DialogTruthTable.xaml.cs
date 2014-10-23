@@ -2,11 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -61,6 +63,7 @@ namespace LogicCircuit {
 		private const int MaxRows = 1 << 12;
 		public BigInteger TotalRows { get; private set; }
 
+		[SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		public DialogTruthTable(LogicalCircuit logicalCircuit) {
 			this.InvertFilter = true;
 			this.testSocket  = new CircuitTestSocket(logicalCircuit);
@@ -78,23 +81,28 @@ namespace LogicCircuit {
 			this.InitializeComponent();
 
 			Dictionary<DataGridTextColumn, Func<TruthState, int>> dataAccessor = new Dictionary<DataGridTextColumn, Func<TruthState, int>>();
+			Action<Pin, string, int> addColumn = (Pin pin, string path, int i) => {
+				DataGridTextColumn column = new DataGridTextColumn();
+				column.Header = pin.Name.Replace("_", "__");
+				column.Binding = new Binding(path);
+				if(pin.PinType == PinType.Input) {
+					column.Binding.StringFormat = "{0:X}";
+				}
+				Style style = new Style(typeof(DataGridColumnHeader));
+				style.Setters.Add(new Setter(ToolTipService.ToolTipProperty, pin.ToolTip));
+				column.HeaderStyle = style;
+				this.dataGrid.Columns.Add(column);
+				dataAccessor.Add(column, DialogTruthTable.InputFieldAccesor(i));
+			};
+
 			int index = 0;
 			foreach(InputPinSocket socket in this.testSocket.Inputs) {
-				DataGridTextColumn column = new DataGridTextColumn();
-				column.Header = socket.Pin.Name.Replace("_", "__");
-				column.Binding = new Binding("Input[" + index + "]");
-				column.Binding.StringFormat = "{0:X}";
-				this.dataGrid.Columns.Add(column);
-				dataAccessor.Add(column, DialogTruthTable.InputFieldAccesor(index));
+				addColumn(socket.Pin, "Input[" + index + "]", index);
 				index++;
 			}
 			index = 0;
 			foreach(OutputPinSocket socket in this.testSocket.Outputs) {
-				DataGridTextColumn column = new DataGridTextColumn();
-				column.Header = socket.Pin.Name.Replace("_", "__");
-				column.Binding = new Binding("[" + index + "]");
-				this.dataGrid.Columns.Add(column);
-				dataAccessor.Add(column, DialogTruthTable.OutputFieldAccesor(index));
+				addColumn(socket.Pin, "[" + index + "]", index);
 				index++;
 			}
 
