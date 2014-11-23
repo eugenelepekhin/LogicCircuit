@@ -3,8 +3,6 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>
-    </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{4938E321-A7F8-455F-8EFD-4E968949C568}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -14,6 +12,8 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,16 +21,12 @@
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
@@ -86,18 +82,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Digital Clock.CircuitProject" />
-    <None Include="Properties\FunctionTest.CircuitProject" />
-    <None Include="Properties\IntegerCalculator.CircuitProject" />
-    <None Include="Properties\VisualElementLoadTest.CircuitProject" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\Digital Clock.CircuitProject" />
+    <None Include="Properties\FunctionTest.CircuitProject" />
+    <None Include="Properties\IntegerCalculator.CircuitProject" />
+    <None Include="Properties\VisualElementLoadTest.CircuitProject" />
     <None Include="Properties\XmlLoadReadElementTextTest.CircuitProject" />
     <None Include="Properties\ExternalCalculator.CircuitProject" />
     <None Include="Properties\CircuitMapCleanUpTest.CircuitProject" />
@@ -105,7 +99,7 @@
     <None Include="Properties\ProbeConvertTest.CircuitProject" />
     <None Include="Properties\SensorTests.CircuitProject" />
     <None Include="Properties\From2.0.0.6Conversion.CircuitProject" />
-    <Content Include="Properties\Splitter Conversion.CircuitProject" />
+    <None Include="Properties\Splitter Conversion.CircuitProject" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
