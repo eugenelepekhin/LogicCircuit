@@ -1245,4 +1245,190 @@ Las elementos a mostrar son: LED, LED de matriz, botón u otro circuito lógico
   <data name="WireDisplayDisconnected" xml:space="preserve">
     <value>El cable no está conectado.</value>
   </data>
+  <data name="CaptionPinSide" xml:space="preserve">
+    <value>Lado del Pin</value>
+  </data>
+  <data name="TitlePinSide" xml:space="preserve">
+    <value>Lado del Pin:</value>
+  </data>
+  <data name="ToolTipDevicePinSide" xml:space="preserve">
+    <value>Seleccione el lado donde el pin residirá</value>
+  </data>
+  <data name="NameSensor" xml:space="preserve">
+    <value>Sensor</value>
+  </data>
+  <data name="ToolTipSensor" xml:space="preserve">
+    <value>Sensor {0}</value>
+  </data>
+  <data name="CaptionSensorType" xml:space="preserve">
+    <value>Tipo de sensor</value>
+  </data>
+  <data name="SensorTypeManual" xml:space="preserve">
+    <value>Manual</value>
+  </data>
+  <data name="SensorTypeRandom" xml:space="preserve">
+    <value>Aleatorio</value>
+  </data>
+  <data name="SensorTypeSeries" xml:space="preserve">
+    <value>Series</value>
+  </data>
+  <data name="ToolTipSensorBitWidth" xml:space="preserve">
+    <value>Seleccione la longitud de bit del sensor</value>
+  </data>
+  <data name="ToolTipSensorNotation" xml:space="preserve">
+    <value>Introduzca la notación del sensor</value>
+  </data>
+  <data name="ToolTipSensorType" xml:space="preserve">
+    <value>Seleccione donde el sensor obtendrá datos para proporcionar</value>
+  </data>
+  <data name="TitleSensorType" xml:space="preserve">
+    <value>Tipo de Sensor:</value>
+  </data>
+  <data name="ErrorBadInterval" xml:space="preserve">
+    <value>El mínimo debe ser menor o igual que el máximo</value>
+  </data>
+  <data name="ErrorBadPositiveNumber" xml:space="preserve">
+    <value>Número esperado mayor que 0</value>
+  </data>
+  <data name="ErrorEmptySeries" xml:space="preserve">
+    <value>La serie no debería estar vacía</value>
+  </data>
+  <data name="ErrorSeriesItem" xml:space="preserve">
+    <value>Error in {0}. Debería ser un par de números hexadecimales separados por :</value>
+  </data>
+  <data name="ErrorSeriesItemOrder" xml:space="preserve">
+    <value>Error en {0}. Cada ciclo siguiente debe ser mayor que el anterior.</value>
+  </data>
+  <data name="TitleLoopSeries" xml:space="preserve">
+    <value>Repetición de las series</value>
+  </data>
+  <data name="TitleSensorRandomMax" xml:space="preserve">
+    <value>Ciclos Máximos</value>
+  </data>
+  <data name="TitleSensorRandomMin" xml:space="preserve">
+    <value>Ciclos Mínimos</value>
+  </data>
+  <data name="TitleSeries" xml:space="preserve">
+    <value>Series:</value>
+  </data>
+  <data name="ToolTipSensorRandomMax" xml:space="preserve">
+    <value>Introduzca el número máximo de ciclos antes de cambiar el sensor de su medida.</value>
+  </data>
+  <data name="ToolTipSensorRandomMin" xml:space="preserve">
+    <value>Introduzca el número mínimo de ciclos antes de cambiar el sensor de su medida.</value>
+  </data>
+  <data name="ToolTipSeriesData" xml:space="preserve">
+    <value>Por favor proporcione una serie de medidas de sensores en forma &lt;ciclo&gt;: &lt;valor&gt;
+donde tanto el ciclo y el valor son hexadecimal.
+Cuando el ciclo es un número par o 0, entonces corresponde a la evolución de reloj de 0 a 1, cuando es impar entonces reloj está cambiando de 1 a 0.</value>
+  </data>
+  <data name="NameSound" xml:space="preserve">
+    <value>Zumbador</value>
+  </data>
+  <data name="ToolTipSound" xml:space="preserve">
+    <value>Zumbador {0}</value>
+  </data>
+  <data name="ToolTipSoundNotation" xml:space="preserve">
+    <value>Introduzca la notación del dispositivo zumbador</value>
+  </data>
+  <data name="CommandEditFind" xml:space="preserve">
+    <value>Encontrar</value>
+  </data>
+  <data name="TitleFind" xml:space="preserve">
+    <value>Encuentre el circuito</value>
+  </data>
+  <data name="TitleSearch" xml:space="preserve">
+    <value>Buscar</value>
+  </data>
+  <data name="TitleSearchPattern" xml:space="preserve">
+    <value>Encuentre que:</value>
+  </data>
+  <data name="ToolTipDescriptorClock" xml:space="preserve">
+    <value>Genera una señal oscilante entre 0 y 1 y se usa para coordinar acciones de los circuitos.</value>
+  </data>
+  <data name="ToolTipDescriptorPin" xml:space="preserve">
+    <value>Utilizar para crear un conector que otros circuitos pueden usar para proporcionar o recibir datos desde y hacia el circuito de corriente.
+Reorganizar los pines en el circuito de cambiar su
+posiciones relativas de los símbolos de este circuito.</value>
+  </data>
+  <data name="ToolTipDescriptorProbe" xml:space="preserve">
+    <value>Añadir y conectar las sondas a sus circuitos para observar el estado actual del encendido del circuito en la superficie de la sonda, el historial de los valores cuando se hace doble clic en el
+sonda o visualiza esta información en el osciloscopio.</value>
+  </data>
+  <data name="ToolTipDescriptorSensor" xml:space="preserve">
+    <value>Proporciona datos de "fuentes externas" como
+una serie de predefinidos, elegido al azar,
+o valores introducidos manualmente.</value>
+  </data>
+  <data name="ToolTipDescriptorSplitter" xml:space="preserve">
+    <value>Permite la creación de un juego de cables o
+separar en cables individuales.
+El uso de los divisores y multi-bits pines pueden
+simplificar significativamente el dibujo y la
+comprensión del circuito.</value>
+  </data>
+  <data name="ToolTipDescriptorText" xml:space="preserve">
+    <value>Colocar texto en cualquier lugar del diagrama para comentar su circuito, proporcioer enlaces de ayuda a cualquier sitios web y decore el circuito con imágenes.</value>
+  </data>
+  <data name="ToolTipDescriptorTriState" xml:space="preserve">
+    <value>Puede tener tres salidas diferentes: 1 , 0 , y de alta impedancia ( Z ) .
+El estado de alta impedancia no juega ningún papel en la lógica , que es estrictamente binario.
+Estos dispositivos se utilizan en los buses de la CPU para permitir que múltiples fuentes envien datos.
+Un grupo de tres estados que conducen una línea de circuíto de control adecuado
+es básicamente equivalente a un multiplexor.</value>
+  </data>
+  <data name="ToolTipSensorManualValue" xml:space="preserve">
+    <value>Escriba el valor hexadecimal y presione Entrar</value>
+  </data>
+  <data name="ErrorBadHexNumber" xml:space="preserve">
+    <value>Número haxadecimal incorrecto</value>
+  </data>
+  <data name="TitleSensorManualInitialValue" xml:space="preserve">
+    <value>Valor inicial</value>
+  </data>
+  <data name="ToolTipSensorManualInitialValue" xml:space="preserve">
+    <value>Introduzca el valor como número hexadecimal</value>
+  </data>
+  <data name="NameGraphicsArray" xml:space="preserve">
+    <value>Arreglo de gráficos</value>
+  </data>
+  <data name="CaptionGraphicsArrayBPP" xml:space="preserve">
+    <value>Bits por pixel</value>
+  </data>
+  <data name="ToolTipDescriptorGraphicsArray" xml:space="preserve">
+    <value>( Pantalla de matriz de puntos ) puede mostrar los datos almacenados en la memoria interna.
+Se utiliza con circuitos avanzados como los ordenadores o los controladores .
+Permite seleccionar el tamaño y profundidad de color / esquema:
+1 bit / pixel - en blanco y negro
+2 bits / pixel - 4 tonos de gris
+4 bits / pixel - 16 colores
+8 bits / pixel - 256 colores</value>
+  </data>
+  <data name="ToolTipGraphicsArray" xml:space="preserve">
+    <value>{0} {1}x{2} con {3} bit(s) por pixel ({4} colores)</value>
+  </data>
+  <data name="ToolTipGraphicsArrayBPP" xml:space="preserve">
+    <value>Seleccione el número esperado por pixel</value>
+  </data>
+  <data name="ErrorBadIntegerInRange" xml:space="preserve">
+    <value>Numero esperado entre {0} - {1}</value>
+  </data>
+  <data name="TitleGraphicsArrayBPP" xml:space="preserve">
+    <value>Bits por pixeles</value>
+  </data>
+  <data name="TitleHeight" xml:space="preserve">
+    <value>Altura</value>
+  </data>
+  <data name="TitleWidth" xml:space="preserve">
+    <value>Longitud</value>
+  </data>
+  <data name="ToolTipGraphicsArrayHeight" xml:space="preserve">
+    <value>Introduzca la altura del arreglo de graficos en pixeles</value>
+  </data>
+  <data name="ToolTipGraphicsArrayWidth" xml:space="preserve">
+    <value>Introduzca la longitud del arreglo de graficos en pixeles</value>
+  </data>
+  <data name="ErrorWriteNotConnected" xml:space="preserve">
+    <value>Escritura de entrada no conecta con el arreglo de graficos {0}</value>
+  </data>
 </root>
