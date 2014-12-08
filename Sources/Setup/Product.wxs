@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+	xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension"
+>
 	<!--
 		For the next version update Version attribute on Product node and Id attribute with a new GUID.
 		Do not use "*" in Id attribute as it will produce GUID automatically and MSI will install a new instance of the app for each build.
@@ -20,6 +22,11 @@
 		<Property Id="ARPURLINFOABOUT" Value="http://www.LogicCircuit.org/"/>
 		<Property Id="ARPURLUPDATEINFO" Value="http://www.logiccircuit.org/download.html"/>
 		<Property Id="ARPCOMMENTS" Value="LogicCircuit – is educational software for designing and simulating digital logic circuits"/>
+
+		<PropertyRef Id="NETFRAMEWORK40CLIENT"/>
+		<Condition Message="This application requires Microsoft .NET Framework 4.0. Please install the .NET Framework then run this installer again.">
+			<![CDATA[Installed OR NETFRAMEWORK40CLIENT]]>
+		</Condition>
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed."/>
 		<MediaTemplate EmbedCab="yes" CompressionLevel ="high"/>
