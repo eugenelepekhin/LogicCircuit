@@ -1320,7 +1320,8 @@ Las elementos a mostrar son: LED, LED de matriz, botón u otro circuito lógico
   <data name="ToolTipSeriesData" xml:space="preserve">
     <value>Por favor proporcione una serie de medidas de sensores en forma &lt;ciclo&gt;: &lt;valor&gt;
 donde tanto el ciclo y el valor son hexadecimal.
-Cuando el ciclo es un número par o 0, entonces corresponde a la evolución de reloj de 0 a 1, cuando es impar entonces reloj está cambiando de 1 a 0.</value>
+Cuando el ciclo es un número par o 0, entonces corresponde a la evolución de reloj de 0 a 1,
+cuando es impar entonces reloj está cambiando de 1 a 0.</value>
   </data>
   <data name="NameSound" xml:space="preserve">
     <value>Zumbador</value>
@@ -1344,15 +1345,19 @@ Cuando el ciclo es un número par o 0, entonces corresponde a la evolución de r
     <value>Encuentre que:</value>
   </data>
   <data name="ToolTipDescriptorClock" xml:space="preserve">
-    <value>Genera una señal oscilante entre 0 y 1 y se usa para coordinar acciones de los circuitos.</value>
+    <value>Genera una señal oscilante entre 0 y 1 y se
+usa para coordinar acciones de los circuitos.</value>
   </data>
   <data name="ToolTipDescriptorPin" xml:space="preserve">
-    <value>Utilizar para crear un conector que otros circuitos pueden usar para proporcionar o recibir datos desde y hacia el circuito de corriente.
+    <value>Utilizar para crear un conector que otros circuitos pueden usar para
+proporcionar o recibir datos desde y hacia el circuito de corriente.
 Reorganizar los pines en el circuito de cambiar su
 posiciones relativas de los símbolos de este circuito.</value>
   </data>
   <data name="ToolTipDescriptorProbe" xml:space="preserve">
-    <value>Añadir y conectar las sondas a sus circuitos para observar el estado actual del encendido del circuito en la superficie de la sonda, el historial de los valores cuando se hace doble clic en el
+    <value>Añadir y conectar las sondas a sus circuitos para observar
+el estado actual del encendido del circuito en la superficie
+de la sonda, el historial de los valores cuando se hace doble clic en el
 sonda o visualiza esta información en el osciloscopio.</value>
   </data>
   <data name="ToolTipDescriptorSensor" xml:space="preserve">
@@ -1368,7 +1373,9 @@ simplificar significativamente el dibujo y la
 comprensión del circuito.</value>
   </data>
   <data name="ToolTipDescriptorText" xml:space="preserve">
-    <value>Colocar texto en cualquier lugar del diagrama para comentar su circuito, proporcioer enlaces de ayuda a cualquier sitios web y decore el circuito con imágenes.</value>
+    <value>Colocar texto en cualquier lugar del diagrama para comentar
+su circuito, proporcioer enlaces de ayuda a cualquier sitios
+web y decore el circuito con imágenes.</value>
   </data>
   <data name="ToolTipDescriptorTriState" xml:space="preserve">
     <value>Puede tener tres salidas diferentes: 1 , 0 , y de alta impedancia ( Z ) .
