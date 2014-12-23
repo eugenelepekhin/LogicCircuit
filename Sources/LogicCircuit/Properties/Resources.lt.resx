@@ -1033,10 +1033,12 @@ kada tai yra nelyginis tada laikordis keičiasi nuo 1 iki 0.</value>
     <value>Taip</value>
   </data>
   <data name="TitlePinInput" xml:space="preserve">
-    <value>{0} Į</value>
+    <value>{0}
+Į</value>
   </data>
   <data name="TitlePinOutput" xml:space="preserve">
-    <value>{0} Iš</value>
+    <value>{0}
+Iš</value>
   </data>
   <data name="TitleLoadLastFile" xml:space="preserve">
     <value>Įkrauti paskutinį failą per paleidimą</value>

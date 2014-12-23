@@ -169,5 +169,19 @@ namespace LogicCircuit.UnitTest {
 				Assert.IsTrue(errors.Length == 0, "\r\n" + errors.ToString());
 			}
 		}
+
+		/// <summary>
+		/// Test that resources TitlePinInput and TitlePinOutput have two lines.
+		/// </summary>
+		[TestMethod]
+		public void ResourcePinTitleIs2LinesTest() {
+			foreach(CultureInfo culture in App.AvailableCultures) {
+				Resources.Culture = culture;
+				string input = Resources.TitlePinInput("In");
+				Assert.IsTrue(input.Split('\n').Length == 2, "TitlePinInput expected to contain two lines in {0} culture", culture.Name);
+				string output = Resources.TitlePinOutput("Out");
+				Assert.IsTrue(output.Split('\n').Length == 2, "TitlePinOutput expected to contain two lines in {0} culture", culture.Name);
+			}
+		}
 	}
 }
