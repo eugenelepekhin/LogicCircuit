@@ -433,7 +433,7 @@
     <value>Pastaba</value>
   </data>
   <data name="TitleReportErrorDetails" xml:space="preserve">
-    <value>Išsami problema </value>
+    <value>Išsami problema</value>
   </data>
   <data name="TitleRunningCircuit" xml:space="preserve">
     <value>Veikianti grandinė</value>
@@ -652,7 +652,7 @@
     <value>Nuoroda</value>
   </data>
   <data name="DefaultGateShape" xml:space="preserve">
-    <value>Forma</value>
+    <value>Shaped</value>
   </data>
   <data name="CommandFileSave" xml:space="preserve">
     <value>Išsaugoti</value>
@@ -709,7 +709,7 @@
     <value>{0} bitų pločio Spliteris {1} Kaiščiam</value>
   </data>
   <data name="ToolTipSplitterBitWidth" xml:space="preserve">
-    <value>Padalytų junčių Spliterius Pasirinkti bitų plotį </value>
+    <value>Padalytų junčių Spliterius Pasirinkti bitų plotį</value>
   </data>
   <data name="ToolTipSplitterPinNumber" xml:space="preserve">
     <value>Pasirinkti skaičių Spliterių konektorių padalytų</value>
@@ -841,7 +841,7 @@
     <value>Importuoti</value>
   </data>
   <data name="ImageFileFilter" xml:space="preserve">
-    <value>Vaizdo failai i(*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif)|*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif|Visi failai </value>
+    <value>Vaizdo failai i(*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif)|*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif|Visi failai (*.*)|*.*</value>
   </data>
   <data name="ImagePathInvalid" xml:space="preserve">
     <value>Pateiktas failo vardas nėra tinkamas. Prašau patikrinti ar Aplankas egzistuoja ar failo varas yra būtent tas</value>
@@ -1156,7 +1156,7 @@
     <value>Pasirinkti konstantos bitų plotį</value>
   </data>
   <data name="ToolTipConstantValue" xml:space="preserve">
-    <value>Pasirinkti konstantos pradinę reikšmę </value>
+    <value>Pasirinkti konstantos pradinę reikšmę</value>
   </data>
   <data name="TitleSummary" xml:space="preserve">
     <value>Sutrumpinimas:</value>
@@ -1165,7 +1165,7 @@
     <value>Visas:</value>
   </data>
   <data name="ToolTipColumns" xml:space="preserve">
-    <value>Pasirinkti skaičių LED matricos stulpelį </value>
+    <value>Pasirinkti skaičių LED matricos stulpelį</value>
   </data>
   <data name="TitleStop" xml:space="preserve">
     <value>Stabdyti:</value>
@@ -1225,7 +1225,7 @@
     <value>Funcija {0} Reikalauja bent {1} parametrų</value>
   </data>
   <data name="MessageExportImageDialog" xml:space="preserve">
-    <value>Pasirinkite vaizdo formatą ir failo vardą į kurį bus  eksportuota dabartinė diagrama </value>
+    <value>Pasirinkite vaizdo formatą ir failo vardą į kurį bus  eksportuota dabartinė diagrama</value>
   </data>
   <data name="MessageImageFileExists" xml:space="preserve">
     <value>Failas "{0}" jau egzistuoja. Ar norite jį pakeisti savu failu</value>
