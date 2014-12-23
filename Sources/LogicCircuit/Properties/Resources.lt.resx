@@ -1,0 +1,1357 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Led7Pin1" xml:space="preserve">
+    <value>a</value>
+  </data>
+  <data name="Led7Pin2" xml:space="preserve">
+    <value>b</value>
+  </data>
+  <data name="Led7Pin3" xml:space="preserve">
+    <value>c</value>
+  </data>
+  <data name="Led7Pin4" xml:space="preserve">
+    <value>d</value>
+  </data>
+  <data name="Led7Pin5" xml:space="preserve">
+    <value>e</value>
+  </data>
+  <data name="Led7Pin6" xml:space="preserve">
+    <value>f</value>
+  </data>
+  <data name="Led7Pin7" xml:space="preserve">
+    <value>g</value>
+  </data>
+  <data name="Led7Pin8" xml:space="preserve">
+    <value>taškas</value>
+  </data>
+  <data name="TitleOptions" xml:space="preserve">
+    <value>Nustatymai</value>
+  </data>
+  <data name="GateAndName" xml:space="preserve">
+    <value>And vardas</value>
+  </data>
+  <data name="GateAndNotation" xml:space="preserve">
+    <value>&amp;</value>
+  </data>
+  <data name="GateClockName" xml:space="preserve">
+    <value>Laikrodis</value>
+  </data>
+  <data name="GateClockNotation" xml:space="preserve">
+    <value>ω</value>
+  </data>
+  <data name="GateNotName" xml:space="preserve">
+    <value>Ne</value>
+  </data>
+  <data name="TitleAbout" xml:space="preserve">
+    <value>Apie</value>
+  </data>
+  <data name="TitleVersion" xml:space="preserve">
+    <value>Versija:</value>
+  </data>
+  <data name="CommandToolsOptions" xml:space="preserve">
+    <value>_Nustatymai</value>
+  </data>
+  <data name="TitleFileOptions" xml:space="preserve">
+    <value>Failas</value>
+  </data>
+  <data name="CaptionTextNote1" xml:space="preserve">
+    <value>Tekstas</value>
+  </data>
+  <data name="MenuHeaderHelp" xml:space="preserve">
+    <value>_Pagalba</value>
+  </data>
+  <data name="MenuHeaderTools" xml:space="preserve">
+    <value>_Instrumentai</value>
+  </data>
+  <data name="TitleFilter" xml:space="preserve">
+    <value>:Filtras</value>
+  </data>
+  <data name="ErrorProjectCount" xml:space="preserve">
+    <value>Daugiau nei viename projekte Daugiau nei viename projekte Daugiau nei vienamas projektas faile.</value>
+  </data>
+  <data name="ErrorHyperlinkText" xml:space="preserve">
+    <value>Hiperlinkas tekstas nerastas</value>
+  </data>
+  <data name="ErrorHyperlinkUrl" xml:space="preserve">
+    <value>Netinkamas hiperlinkas</value>
+  </data>
+  <data name="TitleText" xml:space="preserve">
+    <value>Tekstas:</value>
+  </data>
+  <data name="CommandInsertImage" xml:space="preserve">
+    <value>Nuotrauka</value>
+  </data>
+  <data name="TitleCheckVersionPeriodically" xml:space="preserve">
+    <value>Periodiškai tikrinti ar yra nauja versija</value>
+  </data>
+  <data name="ErrorClipboardCorrupted" xml:space="preserve">
+    <value>Duomenys iškarpoje yra sugadintas ir negali būti įterpti.</value>
+  </data>
+  <data name="CommandTruthTable" xml:space="preserve">
+    <value>Tiesos lentele</value>
+  </data>
+  <data name="ColorPickerCaptionSelectCustom" xml:space="preserve">
+    <value>Pasirinkimas</value>
+  </data>
+  <data name="TitleTotalRows" xml:space="preserve">
+    <value>Eilučių kiekis:{0:Ne}</value>
+  </data>
+  <data name="ColorPickerCaptionAvailable" xml:space="preserve">
+    <value>Galimos spalvos</value>
+  </data>
+  <data name="ColorPickerTabCustom" xml:space="preserve">
+    <value>Įprastas</value>
+  </data>
+  <data name="ColorPickerTabStandard" xml:space="preserve">
+    <value>Standartas</value>
+  </data>
+  <data name="ColorPickerCaptionStandard" xml:space="preserve">
+    <value>Standartinė splava:</value>
+  </data>
+  <data name="ToolTipBackgroundColor" xml:space="preserve">
+    <value>Pažymėjimo spalva</value>
+  </data>
+  <data name="ToolTipFontColor" xml:space="preserve">
+    <value>Teksto spalva</value>
+  </data>
+  <data name="TitleSaveAs" xml:space="preserve">
+    <value>Saugoti iš naujo...</value>
+  </data>
+  <data name="ToolTipLoadData" xml:space="preserve">
+    <value>Įkelti duomenis iš failo</value>
+  </data>
+  <data name="ToolTipSaveData" xml:space="preserve">
+    <value>Duomenis išsaugoti į failą</value>
+  </data>
+  <data name="MemoryOnStartRandom" xml:space="preserve">
+    <value>Atsitiktinai</value>
+  </data>
+  <data name="SensorTypeManual" xml:space="preserve">
+    <value>Rankinis</value>
+  </data>
+  <data name="SensorTypeRandom" xml:space="preserve">
+    <value>Atsitiktinis</value>
+  </data>
+  <data name="SensorTypeSeries" xml:space="preserve">
+    <value>Serijinis</value>
+  </data>
+  <data name="ToolTipSensorBitWidth" xml:space="preserve">
+    <value>Pasirinkti sensoriaus bito ploti</value>
+  </data>
+  <data name="ToolTipSensorNotation" xml:space="preserve">
+    <value>Pasirinkite sensoriaus užrašymą</value>
+  </data>
+  <data name="ErrorEmptySeries" xml:space="preserve">
+    <value>Šita eilutė neturėtu būti tuščia</value>
+  </data>
+  <data name="ToolTipGraphicsArrayBPP" xml:space="preserve">
+    <value>Pisrink kiek bitu per pikselį</value>
+  </data>
+  <data name="ToolTipGraphicsArrayHeight" xml:space="preserve">
+    <value>Įveskite grafinio mąsyvo aukšti pikseliais</value>
+  </data>
+  <data name="NamePin" xml:space="preserve">
+    <value>Pinas</value>
+  </data>
+  <data name="CommandToolsOscilloscope" xml:space="preserve">
+    <value>Okliskopas</value>
+  </data>
+  <data name="CommandFileExportImage" xml:space="preserve">
+    <value>Iškelti paveikslėli</value>
+  </data>
+  <data name="HelpContent" xml:space="preserve">
+    <value>http://www.logiccircuit.org/help.html</value>
+  </data>
+  <data name="CommandEditRotateLeft" xml:space="preserve">
+    <value>Pasukti kairėn</value>
+  </data>
+  <data name="CommandEditRotateRight" xml:space="preserve">
+    <value>Pasukti dešnėn</value>
+  </data>
+  <data name="CommandEditFind" xml:space="preserve">
+    <value>Rasti</value>
+  </data>
+  <data name="CommandEditNumbering" xml:space="preserve">
+    <value>Numeravimas</value>
+  </data>
+  <data name="CommandEditIncreaseIndentation" xml:space="preserve">
+    <value>Didinti įlinkį</value>
+  </data>
+  <data name="CommandEditItalic" xml:space="preserve">
+    <value>Kursyvinis</value>
+  </data>
+  <data name="PinSideBottom" xml:space="preserve">
+    <value>Apačia</value>
+  </data>
+  <data name="PinSideLeft" xml:space="preserve">
+    <value>Kairė</value>
+  </data>
+  <data name="PinSideRight" xml:space="preserve">
+    <value>Dešnė</value>
+  </data>
+  <data name="PinSideTop" xml:space="preserve">
+    <value>Viršus</value>
+  </data>
+  <data name="PinTypeNameInput" xml:space="preserve">
+    <value>Įvestis</value>
+  </data>
+  <data name="PinTypeNameOutput" xml:space="preserve">
+    <value>Išvestis</value>
+  </data>
+  <data name="PinTypeNameNone" xml:space="preserve">
+    <value>Joksai</value>
+  </data>
+  <data name="PowerOff" xml:space="preserve">
+    <value>Išjungimas</value>
+  </data>
+  <data name="PowerOn" xml:space="preserve">
+    <value>Įjungimas</value>
+  </data>
+  <data name="RAMNotation" xml:space="preserve">
+    <value>Ramai</value>
+  </data>
+  <data name="Ready" xml:space="preserve">
+    <value>Pasiruošes.</value>
+  </data>
+  <data name="CaptionAddressBitWidth" xml:space="preserve">
+    <value>Adreso bitai</value>
+  </data>
+  <data name="Bit0" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Bit1" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="BitOff" xml:space="preserve">
+    <value>Neaktyvus</value>
+  </data>
+  <data name="CaptionBitWidth" xml:space="preserve">
+    <value>bito plotis</value>
+  </data>
+  <data name="CaptionColumns" xml:space="preserve">
+    <value>Stulpelis</value>
+  </data>
+  <data name="CaptionLedMatrixType" xml:space="preserve">
+    <value>Tipas</value>
+  </data>
+  <data name="CaptionName" xml:space="preserve">
+    <value>Vardas</value>
+  </data>
+  <data name="CaptionNotation" xml:space="preserve">
+    <value>Užrašymas</value>
+  </data>
+  <data name="CaptionRows" xml:space="preserve">
+    <value>Eiluė</value>
+  </data>
+  <data name="CaptionSide" xml:space="preserve">
+    <value>Pusė</value>
+  </data>
+  <data name="CaptionSplitterDirection" xml:space="preserve">
+    <value>Jungti piną</value>
+  </data>
+  <data name="CaptionSplitterPinNumber" xml:space="preserve">
+    <value>Dalyti piną</value>
+  </data>
+  <data name="CaptionSplitterBitWidth" xml:space="preserve">
+    <value>Dalyti pino bitų plotį</value>
+  </data>
+  <data name="CaptionSensorType" xml:space="preserve">
+    <value>Sensoriaus tipas</value>
+  </data>
+  <data name="CaptionPinSide" xml:space="preserve">
+    <value>Pino pusė</value>
+  </data>
+  <data name="CaptionDataBitWidth" xml:space="preserve">
+    <value>Duomenų bitai</value>
+  </data>
+  <data name="CaptionGraphicsArrayBPP" xml:space="preserve">
+    <value>Bitai per pikselį</value>
+  </data>
+  <data name="CommandCircuitProject" xml:space="preserve">
+    <value>Projektas</value>
+  </data>
+  <data name="CommandCircuitUsage" xml:space="preserve">
+    <value>Naudotojas...</value>
+  </data>
+  <data name="CommandEditAlignCenter" xml:space="preserve">
+    <value>Suliguoti su centru</value>
+  </data>
+  <data name="CommandEditAlignJustify" xml:space="preserve">
+    <value>Užtikrinti</value>
+  </data>
+  <data name="CommandEditAlignLeft" xml:space="preserve">
+    <value>Suliguoti su kaire</value>
+  </data>
+  <data name="CommandEditAlignRight" xml:space="preserve">
+    <value>Suligiuoti su dešne</value>
+  </data>
+  <data name="CommandEditBold" xml:space="preserve">
+    <value>Ryškus</value>
+  </data>
+  <data name="CommandEditDecreaseFontSize" xml:space="preserve">
+    <value>Mažinti rašto dydi</value>
+  </data>
+  <data name="CommandEditDecreaseIndentation" xml:space="preserve">
+    <value>Sumažinti įlinkį</value>
+  </data>
+  <data name="CommandEditIncreaseFontSize" xml:space="preserve">
+    <value>Didinti rašto dydi</value>
+  </data>
+  <data name="CommandEditSelectAllButWires" xml:space="preserve">
+    <value>Pasirinkti viską išskyrus laidus</value>
+  </data>
+  <data name="CommandEditSelectAllProbes" xml:space="preserve">
+    <value>Pasirinkti visus zondus</value>
+  </data>
+  <data name="CommandEditSelectAllProbesWithWire" xml:space="preserve">
+    <value>Pasirinkti visus zondus ir jungenčiuosius laidus</value>
+  </data>
+  <data name="TextNotation" xml:space="preserve">
+    <value>Teksto pastaba</value>
+  </data>
+  <data name="TitleProject" xml:space="preserve">
+    <value>Projektas</value>
+  </data>
+  <data name="TitleProjectDescription" xml:space="preserve">
+    <value>Pastaba</value>
+  </data>
+  <data name="TitleReportErrorDetails" xml:space="preserve">
+    <value>Išsami problema </value>
+  </data>
+  <data name="TitleRunningCircuit" xml:space="preserve">
+    <value>Veikianti grandinė</value>
+  </data>
+  <data name="TitleSearch" xml:space="preserve">
+    <value>Paieška</value>
+  </data>
+  <data name="TitleProbeHistory" xml:space="preserve">
+    <value>Zondo istorija</value>
+  </data>
+  <data name="TitleIsMaximumSpeed1" xml:space="preserve">
+    <value>Veikti didžiausiu greičiu</value>
+  </data>
+  <data name="TitleImportCircuit" xml:space="preserve">
+    <value>Importuoti</value>
+  </data>
+  <data name="TitleFunction" xml:space="preserve">
+    <value>Funkcija</value>
+  </data>
+  <data name="TitleIsMaximumSpeed2" xml:space="preserve">
+    <value>Aukštas procesoriaus apkrovimas</value>
+  </data>
+  <data name="TitleFind" xml:space="preserve">
+    <value>Ransti grandinę</value>
+  </data>
+  <data name="NameSensor" xml:space="preserve">
+    <value>Sensorius</value>
+  </data>
+  <data name="NameLedMatrix" xml:space="preserve">
+    <value>Šviesą skleidžiančio diodo matrica</value>
+  </data>
+  <data name="NameSound" xml:space="preserve">
+    <value>Garso skleidšjęs</value>
+  </data>
+  <data name="NameConstant" xml:space="preserve">
+    <value>Konstanta</value>
+  </data>
+  <data name="NameGraphicsArray" xml:space="preserve">
+    <value>Grafinis masyvas</value>
+  </data>
+  <data name="Oscillation" xml:space="preserve">
+    <value>Virpesys</value>
+  </data>
+  <data name="ParserEOS" xml:space="preserve">
+    <value>Išraiškos pabaiga</value>
+  </data>
+  <data name="OperationCanceled" xml:space="preserve">
+    <value>Operacija nutraukta.</value>
+  </data>
+  <data name="MemoryAddressPinNotation" xml:space="preserve">
+    <value>a</value>
+  </data>
+  <data name="NameSplitter" xml:space="preserve">
+    <value>Dalintojas</value>
+  </data>
+  <data name="MemoryAddressPinName" xml:space="preserve">
+    <value>Atminties adresas</value>
+  </data>
+  <data name="MemoryDataPinName" xml:space="preserve">
+    <value>Atminties duomenįs</value>
+  </data>
+  <data name="MemoryDataInPinName" xml:space="preserve">
+    <value>Atminties įvedimo duomenys</value>
+  </data>
+  <data name="LogicalCircuitName" xml:space="preserve">
+    <value>Grandinė</value>
+  </data>
+  <data name="LogicalCircuitMainName" xml:space="preserve">
+    <value>Pagrindinis</value>
+  </data>
+  <data name="LogicalCircuitMainNotation" xml:space="preserve">
+    <value>Pagrindinis</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Įkraunama...</value>
+  </data>
+  <data name="LedMatrixTypeIndividual" xml:space="preserve">
+    <value>Individinis tipas</value>
+  </data>
+  <data name="GateTriStateNotation" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="LedMatrixTypeSelector" xml:space="preserve">
+    <value>Parenkamasis tipas</value>
+  </data>
+  <data name="GateTriStateName" xml:space="preserve">
+    <value>Tiguba-būsena</value>
+  </data>
+  <data name="CommandToolsReport" xml:space="preserve">
+    <value>Projekto ataskaita</value>
+  </data>
+  <data name="CircuitProbeName" xml:space="preserve">
+    <value>Leistuvas</value>
+  </data>
+  <data name="CircuitProbeNotation" xml:space="preserve">
+    <value>?</value>
+  </data>
+  <data name="CategoryInputOutput" xml:space="preserve">
+    <value>Įvestis-Išvestis</value>
+  </data>
+  <data name="CommandCircuitCurrent" xml:space="preserve">
+    <value>Loginė grandinė</value>
+  </data>
+  <data name="CommandCircuitDelete" xml:space="preserve">
+    <value>Ištrinti dabartinę grandinę</value>
+  </data>
+  <data name="CommandCircuitNew" xml:space="preserve">
+    <value>Nauja Loginė Grandinė</value>
+  </data>
+  <data name="CommandEditSelectAllWires" xml:space="preserve">
+    <value>Pasirinkti visus laidus</value>
+  </data>
+  <data name="CommandEditSelectFloatingSymbols" xml:space="preserve">
+    <value>Pasirinkti plūduriuojančius laidus</value>
+  </data>
+  <data name="CommandEditSelectFreeWires" xml:space="preserve">
+    <value>Pasirinkti Laisvus laidus</value>
+  </data>
+  <data name="CommandEditUnselectAllButWires" xml:space="preserve">
+    <value>Atsirinkti Viską tik ne Laidus</value>
+  </data>
+  <data name="CommandEditUnselectAllWires" xml:space="preserve">
+    <value>Atsirinkti Visus Laidus</value>
+  </data>
+  <data name="CircuitMapPathSeparator" xml:space="preserve">
+    <value>/</value>
+  </data>
+  <data name="CircuitProjectName" xml:space="preserve">
+    <value>Grandinės projekto vardas</value>
+  </data>
+  <data name="CommandFileFileImport" xml:space="preserve">
+    <value>Importuoti</value>
+  </data>
+  <data name="CaptionTextNote2" xml:space="preserve">
+    <value>Pastabos</value>
+  </data>
+  <data name="CaptionValue" xml:space="preserve">
+    <value>Reiksme</value>
+  </data>
+  <data name="CommandCircuitPower" xml:space="preserve">
+    <value>Galios Jungiklis</value>
+  </data>
+  <data name="CategoryDuplicate" xml:space="preserve">
+    <value>{0}2</value>
+  </data>
+  <data name="CaptionNote" xml:space="preserve">
+    <value>Pastabos</value>
+  </data>
+  <data name="CategoryPrimitives" xml:space="preserve">
+    <value>Primityvai</value>
+  </data>
+  <data name="CommandFileOpenRecent" xml:space="preserve">
+    <value>Atitdaryti Nesenus</value>
+  </data>
+  <data name="ColorPickerCaptionRecent" xml:space="preserve">
+    <value>Nesenai pasirinktos spalvos:</value>
+  </data>
+  <data name="CommandEditBullets" xml:space="preserve">
+    <value>Keisti buletenus</value>
+  </data>
+  <data name="CommandEditCopy" xml:space="preserve">
+    <value>Kopijuoti</value>
+  </data>
+  <data name="CommandEditCut" xml:space="preserve">
+    <value>Iškirpti</value>
+  </data>
+  <data name="CommandEditDelete" xml:space="preserve">
+    <value>Trinti</value>
+  </data>
+  <data name="CommandEditPaste" xml:space="preserve">
+    <value>Įklijuoti</value>
+  </data>
+  <data name="CommandEditRedo" xml:space="preserve">
+    <value>Pakartoti</value>
+  </data>
+  <data name="CommandEditSelectAll" xml:space="preserve">
+    <value>Pasirinkti Visus</value>
+  </data>
+  <data name="CommandEditUnderline" xml:space="preserve">
+    <value>Kaisti Po Juoste</value>
+  </data>
+  <data name="CommandEditUndo" xml:space="preserve">
+    <value>Atkartoti</value>
+  </data>
+  <data name="CommandFileClose" xml:space="preserve">
+    <value>Išeiti</value>
+  </data>
+  <data name="CommandFileNew" xml:space="preserve">
+    <value>Naujas</value>
+  </data>
+  <data name="CommandFileOpen" xml:space="preserve">
+    <value>Atidaryti</value>
+  </data>
+  <data name="CircuitProbeToolTip" xml:space="preserve">
+    <value>Leistuvo pastaba {0}</value>
+  </data>
+  <data name="WriteOn1" xml:space="preserve">
+    <value>Kyla nuo 0 iki 1</value>
+  </data>
+  <data name="ConstantNotation" xml:space="preserve">
+    <value>{0:X}</value>
+  </data>
+  <data name="CommandHelpAbout" xml:space="preserve">
+    <value>Apie</value>
+  </data>
+  <data name="ErrorAddressNotConnected" xml:space="preserve">
+    <value>Nevisi Atmintie bitai yra sujunkti {0}</value>
+  </data>
+  <data name="ErrorDataInNotConnected" xml:space="preserve">
+    <value>Nevisi Įvesties duomenų bitai yra sujunkti kelyje {0}</value>
+  </data>
+  <data name="ErrorFileCorrupted" xml:space="preserve">
+    <value>Failas "{0}" yra korumpuotas ir negali būti įkrautas.</value>
+  </data>
+  <data name="CommandHyperlink" xml:space="preserve">
+    <value>Nuoroda</value>
+  </data>
+  <data name="DefaultGateShape" xml:space="preserve">
+    <value>Forma</value>
+  </data>
+  <data name="CommandFileSave" xml:space="preserve">
+    <value>Išsaugoti</value>
+  </data>
+  <data name="CommandFileSaveAs" xml:space="preserve">
+    <value>Išsaugoti kaip</value>
+  </data>
+  <data name="CommandHelpView" xml:space="preserve">
+    <value>Peržiurėti pagalba</value>
+  </data>
+  <data name="ErrorBadInterval" xml:space="preserve">
+    <value>Mažiausias reikšmė turėtu būti mažesnė arba lygi</value>
+  </data>
+  <data name="ErrorBadPositiveNumber" xml:space="preserve">
+    <value>Tikimasi skaičiaus didesnio nei 0</value>
+  </data>
+  <data name="ErrorBadHexNumber" xml:space="preserve">
+    <value>Netinkamas Šešioliktainis skaičius</value>
+  </data>
+  <data name="ErrorBadIntegerInRange" xml:space="preserve">
+    <value>Tikimasi numerio nuo {0}-{1}.</value>
+  </data>
+  <data name="WriteOn0" xml:space="preserve">
+    <value>Leidžiasi nuo 1 iki 0</value>
+  </data>
+  <data name="WebSiteUri" xml:space="preserve">
+    <value>http://www.logiccircuit.org/</value>
+  </data>
+  <data name="UnknownState" xml:space="preserve">
+    <value>Būsena {0} yra nežinoma</value>
+  </data>
+  <data name="TriStateGroupName" xml:space="preserve">
+    <value>Tri-Būsenų grupė</value>
+  </data>
+  <data name="WebSiteDownloadUri" xml:space="preserve">
+    <value>http://www.logiccircuit.org/download.html</value>
+  </data>
+  <data name="WireDisplayValue" xml:space="preserve">
+    <value>Reikšmė: {0}</value>
+  </data>
+  <data name="WireDisplayBitWidth" xml:space="preserve">
+    <value>bito plotis: {0}</value>
+  </data>
+  <data name="WireDisplayDisconnected" xml:space="preserve">
+    <value>Laidas yra nesujunktas</value>
+  </data>
+  <data name="ToolTipZoom" xml:space="preserve">
+    <value>Nustatyti diagramos priartinimą</value>
+  </data>
+  <data name="ToolTipWire" xml:space="preserve">
+    <value>Laidas</value>
+  </data>
+  <data name="ToolTipSplitter" xml:space="preserve">
+    <value>{0} bitų pločio Spliteris {1} Kaiščiam</value>
+  </data>
+  <data name="ToolTipSplitterBitWidth" xml:space="preserve">
+    <value>Padalytų junčių Spliterius Pasirinkti bitų plotį </value>
+  </data>
+  <data name="ToolTipSplitterPinNumber" xml:space="preserve">
+    <value>Pasirinkti skaičių Spliterių konektorių padalytų</value>
+  </data>
+  <data name="ToolTipSplitterRotation" xml:space="preserve">
+    <value>Pasirinkti Orentacija Sujungtų junčių Spliterių</value>
+  </data>
+  <data name="ToolTipSensorType" xml:space="preserve">
+    <value>Pasirinkti kur sensorius gaus duomenis pravesti</value>
+  </data>
+  <data name="ToolTipSensorRandomMax" xml:space="preserve">
+    <value>Įvesti maksimalų ciklų skaičių prieš tai kai sensorius pakeis savo matavimus.</value>
+  </data>
+  <data name="ToolTipSensorRandomMin" xml:space="preserve">
+    <value>Įvesti minimalų ciklų skaičių prieš tai kai sensorius pakeis savo matavimus.</value>
+  </data>
+  <data name="ToolTipSeriesData" xml:space="preserve">
+    <value>Prošau pateikti serija sensorių matavimui formoi &lt;ciklas&gt;:&lt;reikšmė&gt; kur abudu ciklai ir reikšmės yra šešioliktainės. Kada ciklas yra lyginis arba 0 tada tai atitinka kitimam laikodžio nuo 0 iki 1, kada tai yra nelyginis tada laikordis keičiasi nuo 1 iki 0</value>
+  </data>
+  <data name="ToolTipSound" xml:space="preserve">
+    <value>Zumeris {0}</value>
+  </data>
+  <data name="ToolTipSoundNotation" xml:space="preserve">
+    <value>Įdėti zumerio irenginį</value>
+  </data>
+  <data name="ToolTipSensorManualValue" xml:space="preserve">
+    <value>Įvesti šešioliktainį skaičių ir paspausti Enter.</value>
+  </data>
+  <data name="ToolTipSensorManualInitialValue" xml:space="preserve">
+    <value>Įvesti pradinę reikšmę kaip šešioliktainį skaičių.</value>
+  </data>
+  <data name="ToolTipNonePin" xml:space="preserve">
+    <value>{0} bit(as/us) {1}</value>
+  </data>
+  <data name="ToolTipOutputPin" xml:space="preserve">
+    <value>Išvesti {0} bit(as\us) Kaištis {1}</value>
+  </data>
+  <data name="ToolTipRAM" xml:space="preserve">
+    <value>RAM {0} bitų adresą / {1} bitų duomenys</value>
+  </data>
+  <data name="ToolTipROM" xml:space="preserve">
+    <value>ROM {0} bitų adresas / {1} bitų duomenįs</value>
+  </data>
+  <data name="ToolTipPinBitWidth" xml:space="preserve">
+    <value>Pasirinkti kaiščio bitų plotį</value>
+  </data>
+  <data name="ToolTipPinSide" xml:space="preserve">
+    <value>Pasirinkti grandinės glifo pusę kurioje bus naujas kaištis</value>
+  </data>
+  <data name="ToolTipRamWriteOn" xml:space="preserve">
+    <value>Pasirinkti parašymą atminties laiką</value>
+  </data>
+  <data name="ToolTipPinNotation" xml:space="preserve">
+    <value>Įvesti trumpą tekstą kuris bus rodomas ant grandinės netoli kaiščio simbolį</value>
+  </data>
+  <data name="ToolTipIsToggle" xml:space="preserve">
+    <value>Jei myktukas paspaustas tai pasikeis busena su kiekvienu paspaudimu jei ne paspaustas tai kada paspaustas arba depresyvus</value>
+  </data>
+  <data name="ToolTipLedMatrix" xml:space="preserve">
+    <value>LED Matrica{0}x{1} su {2} bit (as/ai) per LED({3} spalvą)</value>
+  </data>
+  <data name="ToolTipRows" xml:space="preserve">
+    <value>Pasirinkti eilučių skaičių LED matricoje</value>
+  </data>
+  <data name="ToolTipLedMatrixType" xml:space="preserve">
+    <value>Pasirinkti matricos valdymą</value>
+  </data>
+  <data name="ToolTipMemoryOnStart" xml:space="preserve">
+    <value>Pasirikti kaip RAMai inicilizuosis kai galia bus įjunkta</value>
+  </data>
+  <data name="ToolTipSensor" xml:space="preserve">
+    <value>Sensorius {0}</value>
+  </data>
+  <data name="GateNotNotation" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="GateOrName" xml:space="preserve">
+    <value>Arba</value>
+  </data>
+  <data name="GateOrNotation" xml:space="preserve">
+    <value>≥1</value>
+  </data>
+  <data name="GateOrNotName" xml:space="preserve">
+    <value>NOr</value>
+  </data>
+  <data name="GateShapeRectangular" xml:space="preserve">
+    <value>Stačiakampiškas</value>
+  </data>
+  <data name="GateShapeShaped" xml:space="preserve">
+    <value>Formuotas</value>
+  </data>
+  <data name="GateXorName" xml:space="preserve">
+    <value>Xor</value>
+  </data>
+  <data name="GateXorNotation" xml:space="preserve">
+    <value>=1</value>
+  </data>
+  <data name="GateXorNotName" xml:space="preserve">
+    <value>XNor</value>
+  </data>
+  <data name="MainFrameCaption" xml:space="preserve">
+    <value>Loginės Grandinė {0}</value>
+  </data>
+  <data name="MemoryDataPinNotation" xml:space="preserve">
+    <value>d</value>
+  </data>
+  <data name="MemoryWritePinName" xml:space="preserve">
+    <value>RAM rašymo įvestis. Atmities reikšmė yra atnaujinama ant {0}</value>
+  </data>
+  <data name="MemoryWritePinNotation" xml:space="preserve">
+    <value>w</value>
+  </data>
+  <data name="PinEnableName" xml:space="preserve">
+    <value>E</value>
+  </data>
+  <data name="PinInName" xml:space="preserve">
+    <value>x</value>
+  </data>
+  <data name="PinName" xml:space="preserve">
+    <value>{0}{1}</value>
+  </data>
+  <data name="PinOutName" xml:space="preserve">
+    <value>q</value>
+  </data>
+  <data name="ProbeHistoryMark" xml:space="preserve">
+    <value>&lt;&lt;&lt;&lt;&lt;&lt; Ženklas &gt;&gt;&gt;&gt;&gt;&gt;</value>
+  </data>
+  <data name="ImportTitle" xml:space="preserve">
+    <value>Importuoti</value>
+  </data>
+  <data name="ImageFileFilter" xml:space="preserve">
+    <value>Vaizdo failai i(*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif)|*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif|Visi failai </value>
+  </data>
+  <data name="ImagePathInvalid" xml:space="preserve">
+    <value>Pateiktas failo vardas nėra tinkamas. Prašau patikrinti ar Aplankas egzistuoja ar failo varas yra būtent tas</value>
+  </data>
+  <data name="MenuHeaderCircuit" xml:space="preserve">
+    <value>Krandinė</value>
+  </data>
+  <data name="MenuHeaderEdit" xml:space="preserve">
+    <value>Keisti</value>
+  </data>
+  <data name="MenuHeaderFile" xml:space="preserve">
+    <value>Failas</value>
+  </data>
+  <data name="ToolTipIsMaximumSpeed2" xml:space="preserve">
+    <value>Šitos dėžės pasirinkimas privas prie to kad neatsakantis naudotojo interfeisas ant kaikurių kompiuterių.</value>
+  </data>
+  <data name="ProjectSummary" xml:space="preserve">
+    <value>{0} loginė grandinė, {1} kategorijos naudoja {2} simbolius ir {3} laidus</value>
+  </data>
+  <data name="GridPoint" xml:space="preserve">
+    <value>({0},{1})</value>
+  </data>
+  <data name="LedMatrixColumnSelector" xml:space="preserve">
+    <value>Pasirinkimui Stulpelio #{0}</value>
+  </data>
+  <data name="LedMatrixRowIndividual" xml:space="preserve">
+    <value>Kiekvienai LED eilutėje #{0}</value>
+  </data>
+  <data name="LedMatrixRowSelector" xml:space="preserve">
+    <value>Eilutės pasirinkimui #{0}</value>
+  </data>
+  <data name="ParserErrorCloseParenMissing" xml:space="preserve">
+    <value>Truksta ')' vietoj : {0}</value>
+  </data>
+  <data name="ParserErrorExpressionMissing" xml:space="preserve">
+    <value>Truksta išsireiškimo po {0}</value>
+  </data>
+  <data name="ParserErrorInvalidNumber" xml:space="preserve">
+    <value>Netinkamas numeris: {0}</value>
+  </data>
+  <data name="ParserErrorUnclosedQuote" xml:space="preserve">
+    <value>Cituojamas identifikatorius neturi uždarymo ženklo :{0}</value>
+  </data>
+  <data name="ParserErrorUnexpected" xml:space="preserve">
+    <value>{0} netikėtas</value>
+  </data>
+  <data name="ParserErrorUnknownChar" xml:space="preserve">
+    <value>Nežinomas char: {0}</value>
+  </data>
+  <data name="ParserErrorUnknownPin" xml:space="preserve">
+    <value>{0} - Įvestis arba Išvestis kaištis nerastas</value>
+  </data>
+  <data name="MemoryOnStartData" xml:space="preserve">
+    <value>Pastovi atmintis tarp paleidimų</value>
+  </data>
+  <data name="MemoryOnStartOnes" xml:space="preserve">
+    <value>pakeisti visus bitus į 1</value>
+  </data>
+  <data name="MemoryOnStartZeros" xml:space="preserve">
+    <value>pakeiti visus bitus į 0</value>
+  </data>
+  <data name="SplitterThin1PinName" xml:space="preserve">
+    <value>(bitas {0}) iš Sujungtų Spliterių jungčių</value>
+  </data>
+  <data name="SplitterThin2PinName" xml:space="preserve">
+    <value>(bitai {0}-{1}) iš Sujungtų Spliterių jungčių</value>
+  </data>
+  <data name="SplitterWidePinName" xml:space="preserve">
+    <value>Sujungtų Spliterių Jungčių</value>
+  </data>
+  <data name="TitleCancel" xml:space="preserve">
+    <value>Atšaukti</value>
+  </data>
+  <data name="ROMNotation" xml:space="preserve">
+    <value>ROM</value>
+  </data>
+  <data name="TitleApplication" xml:space="preserve">
+    <value>Loginė Grandinė</value>
+  </data>
+  <data name="TitleCategory" xml:space="preserve">
+    <value>Kategorija:</value>
+  </data>
+  <data name="TitleBitWidth" xml:space="preserve">
+    <value>Bitų plotis:</value>
+  </data>
+  <data name="TitleAddressBitWidth" xml:space="preserve">
+    <value>Bitų pločio adresas</value>
+  </data>
+  <data name="ReportGateName" xml:space="preserve">
+    <value>{0}({1})</value>
+  </data>
+  <data name="ReportMemoryName" xml:space="preserve">
+    <value>{0}:{1} bitų adresas, {2} bitų duomenys</value>
+  </data>
+  <data name="SplitterDirectionClockwise" xml:space="preserve">
+    <value>Kairė</value>
+  </data>
+  <data name="SplitterDirectionCounterclockwise" xml:space="preserve">
+    <value>Dešnė</value>
+  </data>
+  <data name="ReportError" xml:space="preserve">
+    <value>Neglima raportuoti funkcijos dės {0} Problemos</value>
+  </data>
+  <data name="ReportFunctions" xml:space="preserve">
+    <value>Grandinės funkcija  "{0}"</value>
+  </data>
+  <data name="TitleApply" xml:space="preserve">
+    <value>Suderinti</value>
+  </data>
+  <data name="TitleActualFrequency" xml:space="preserve">
+    <value>Tikrasis dažnis:</value>
+  </data>
+  <data name="TitleDisplayOptions" xml:space="preserve">
+    <value>Vaizdavimas</value>
+  </data>
+  <data name="TitleGateShape" xml:space="preserve">
+    <value>Vartų Forma</value>
+  </data>
+  <data name="TitleDescription" xml:space="preserve">
+    <value>Aprašimas:</value>
+  </data>
+  <data name="TitleData" xml:space="preserve">
+    <value>Duomenys</value>
+  </data>
+  <data name="TitleDataBitWidth" xml:space="preserve">
+    <value>Duomenų bitų plotis:</value>
+  </data>
+  <data name="TitleCircuitDescriptor" xml:space="preserve">
+    <value>Grandinė</value>
+  </data>
+  <data name="TitleFileName" xml:space="preserve">
+    <value>Failas:</value>
+  </data>
+  <data name="TitleCheckAll" xml:space="preserve">
+    <value>Parinkti Visus</value>
+  </data>
+  <data name="TitleExportImage" xml:space="preserve">
+    <value>Eksportuoti Paveikslėli</value>
+  </data>
+  <data name="TitleFile" xml:space="preserve">
+    <value>Failas:</value>
+  </data>
+  <data name="TitleFileOpen" xml:space="preserve">
+    <value>...</value>
+  </data>
+  <data name="TitleFrequency" xml:space="preserve">
+    <value>Dažnis:</value>
+  </data>
+  <data name="TitleCircuitUsage" xml:space="preserve">
+    <value>Loginių Grandinių Naudojimas</value>
+  </data>
+  <data name="TitleCount" xml:space="preserve">
+    <value>Skaičiuoti</value>
+  </data>
+  <data name="TitleCellShape" xml:space="preserve">
+    <value>Laukelio_Forma:</value>
+  </data>
+  <data name="TitleColumns" xml:space="preserve">
+    <value>Stulpeliai:</value>
+  </data>
+  <data name="TitleColors" xml:space="preserve">
+    <value>Spalvos:</value>
+  </data>
+  <data name="TitleCheckVersion" xml:space="preserve">
+    <value>Parinkti dabar</value>
+  </data>
+  <data name="TitleDisplayedRows" xml:space="preserve">
+    <value>Parodytos eilutės: {0:Ne}</value>
+  </data>
+  <data name="TitleCulture" xml:space="preserve">
+    <value>Kalba</value>
+  </data>
+  <data name="TitleCredits" xml:space="preserve">
+    <value>Kreditai:</value>
+  </data>
+  <data name="TitleNo" xml:space="preserve">
+    <value>Ne</value>
+  </data>
+  <data name="TitleOK" xml:space="preserve">
+    <value>Gerai</value>
+  </data>
+  <data name="TitleShowDetails" xml:space="preserve">
+    <value>Paroditi detales</value>
+  </data>
+  <data name="TitleYes" xml:space="preserve">
+    <value>Taip</value>
+  </data>
+  <data name="TitlePinInput" xml:space="preserve">
+    <value>{0} Į</value>
+  </data>
+  <data name="TitlePinOutput" xml:space="preserve">
+    <value>{0} Iš</value>
+  </data>
+  <data name="TitleLoadLastFile" xml:space="preserve">
+    <value>Įkrauti paskutinį failą per paleidimą</value>
+  </data>
+  <data name="TitleName" xml:space="preserve">
+    <value>Vardas:</value>
+  </data>
+  <data name="TitleNotation" xml:space="preserve">
+    <value>Anotacija</value>
+  </data>
+  <data name="TitleInverted" xml:space="preserve">
+    <value>Invertuora</value>
+  </data>
+  <data name="TitleLoad" xml:space="preserve">
+    <value>Įkrauti...</value>
+  </data>
+  <data name="TitleMark" xml:space="preserve">
+    <value>ženkas</value>
+  </data>
+  <data name="TitleOscillogram" xml:space="preserve">
+    <value>Oscilograma</value>
+  </data>
+  <data name="TitleOscilloscope" xml:space="preserve">
+    <value>Loginės Grandinės Oscilograma</value>
+  </data>
+  <data name="TitleOscilloscoping" xml:space="preserve">
+    <value>Oscilogramavimas</value>
+  </data>
+  <data name="TitleIsToggle" xml:space="preserve">
+    <value>Yra Aktivuotas</value>
+  </data>
+  <data name="TitleMemory" xml:space="preserve">
+    <value>Atmintis</value>
+  </data>
+  <data name="TitleMaxRecentFiles" xml:space="preserve">
+    <value>Maksimalus nesenų failų kiekis:</value>
+  </data>
+  <data name="TitleRows" xml:space="preserve">
+    <value>Eilutės:</value>
+  </data>
+  <data name="TitleHyperlink" xml:space="preserve">
+    <value>Nuoroda Į:</value>
+  </data>
+  <data name="TitleInvert" xml:space="preserve">
+    <value>Invertuoti</value>
+  </data>
+  <data name="TitleMemoryOnStart" xml:space="preserve">
+    <value>Pradžioje ušpildyti:</value>
+  </data>
+  <data name="TitleIsDisplay" xml:space="preserve">
+    <value>Paroditi vaisdinių elementus ant simbolio</value>
+  </data>
+  <data name="TitlePinSide" xml:space="preserve">
+    <value>Kaiščio pusė:</value>
+  </data>
+  <data name="TitleSensorType" xml:space="preserve">
+    <value>Sensoriaus tipai:</value>
+  </data>
+  <data name="TitleLoopSeries" xml:space="preserve">
+    <value>Pakartoti serija</value>
+  </data>
+  <data name="TitleSensorRandomMax" xml:space="preserve">
+    <value>Maksimumo ciklai:</value>
+  </data>
+  <data name="TitleSensorRandomMin" xml:space="preserve">
+    <value>Minimumo ciklai:</value>
+  </data>
+  <data name="TitleSeries" xml:space="preserve">
+    <value>Serijos:</value>
+  </data>
+  <data name="TitleSearchPattern" xml:space="preserve">
+    <value>Rasti ką:</value>
+  </data>
+  <data name="TitleSensorManualInitialValue" xml:space="preserve">
+    <value>Pradinė reikšmė:</value>
+  </data>
+  <data name="TitleGraphicsArrayBPP" xml:space="preserve">
+    <value>Bitai per pikselį</value>
+  </data>
+  <data name="TitleHeight" xml:space="preserve">
+    <value>Aukštis:</value>
+  </data>
+  <data name="ToolTipButton" xml:space="preserve">
+    <value>Myktukas {0}</value>
+  </data>
+  <data name="ToolTipConstant" xml:space="preserve">
+    <value>{0} bit(as/us) konstanta{1:X}</value>
+  </data>
+  <data name="TitleWeb" xml:space="preserve">
+    <value>Inernetas:</value>
+  </data>
+  <data name="TitleShowGrid" xml:space="preserve">
+    <value>Paroditi tinklelį</value>
+  </data>
+  <data name="TitleValue" xml:space="preserve">
+    <value>Reikšmė:</value>
+  </data>
+  <data name="TitleSide" xml:space="preserve">
+    <value>Pusė:</value>
+  </data>
+  <data name="TitleType" xml:space="preserve">
+    <value>Tipas:</value>
+  </data>
+  <data name="TitleWriteOn" xml:space="preserve">
+    <value>Rašimas ant:</value>
+  </data>
+  <data name="TitleUncheckAll" xml:space="preserve">
+    <value>Atžymėti visus</value>
+  </data>
+  <data name="TitleZoom" xml:space="preserve">
+    <value>Priartinimas:</value>
+  </data>
+  <data name="ToolTipAddressBitWidth" xml:space="preserve">
+    <value>Adreso kyštuko bitų plotčio pasirinkimas</value>
+  </data>
+  <data name="ToolTipButtonNotation" xml:space="preserve">
+    <value>Įvesti myktuko Anotacija</value>
+  </data>
+  <data name="ToolTipConstantBitWidth" xml:space="preserve">
+    <value>Pasirinkti konstantos bitų plotį</value>
+  </data>
+  <data name="ToolTipConstantValue" xml:space="preserve">
+    <value>Pasirinkti konstantos pradinę reikšmę </value>
+  </data>
+  <data name="TitleSummary" xml:space="preserve">
+    <value>Sutrumpinimas:</value>
+  </data>
+  <data name="TitleTotal" xml:space="preserve">
+    <value>Visas:</value>
+  </data>
+  <data name="ToolTipColumns" xml:space="preserve">
+    <value>Pasirinkti skaičių LED matricos stulpelį </value>
+  </data>
+  <data name="TitleStop" xml:space="preserve">
+    <value>Stabdyti:</value>
+  </data>
+  <data name="TitleWidth" xml:space="preserve">
+    <value>Plotis:</value>
+  </data>
+  <data name="ToolTipCurrentZoom" xml:space="preserve">
+    <value>Dabartinis Priartinimas</value>
+  </data>
+  <data name="ToolTipDataBitWidth" xml:space="preserve">
+    <value>Pasirinkti duomenų kyštuko bitų plotį</value>
+  </data>
+  <data name="GateAndNotName" xml:space="preserve">
+    <value>NeAnd vardas</value>
+  </data>
+  <data name="GateLedName" xml:space="preserve">
+    <value>LED</value>
+  </data>
+  <data name="GateLedNotation" xml:space="preserve">
+    <value>LED</value>
+  </data>
+  <data name="ErrorJamBitWidthDifferent" xml:space="preserve">
+    <value>Įvesties kaištukas {0} {1} ir Išvesties kaištukas {2} {3} ant {4} turi skirtingų bitų plotį ir negali būti sujungti. Prašome išspresti šią problemą.</value>
+  </data>
+  <data name="ErrorLoopInCircuit" xml:space="preserve">
+    <value>grandinės simbolis {0} loginėje grandinėje "{1}" formuoja begalinį kilpa. Prašom išspresti kilpa.</value>
+  </data>
+  <data name="ErrorManyResults" xml:space="preserve">
+    <value>Įvesties kaištukas {0} iš {1} sujungtas su daugiau negu su vienu išvesties kaištukus kurie nėra Tri būsenų suderintas</value>
+  </data>
+  <data name="ErrorManyMemoryData" xml:space="preserve">
+    <value>Grandinė {0} turi {1} kuris saugo duomenis tarp paleidimų. Tokios grandinės negali būti naudojamos daugiau negu vieną ant kitos grandinės kaip potencialiai skirtingi rinkiniai duomenys bus saugomi ant vieno atminties modulio</value>
+  </data>
+  <data name="ErrorSeriesItem" xml:space="preserve">
+    <value>Eroras {0}. Tai turėtu būti suporinti šešioliktainiai skaičiai atskirti su :</value>
+  </data>
+  <data name="ErrorUnknownVersion" xml:space="preserve">
+    <value>Bandyta įkrauti nežinoma Grandinės Projekto versija.     failas kurį bandote atidaryti yra korumpuotas arba buvo sukurtas naujesnės Logic Circuit programos. Prašome patikrinti &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt; naujesnei versijai.</value>
+  </data>
+  <data name="FileFilter" xml:space="preserve">
+    <value>Grandinės projektas (*{0})|*{0}|Visi failai (*.*)|*.*</value>
+  </data>
+  <data name="FileSaved" xml:space="preserve">
+    <value>Failas {0} Saugomas.</value>
+  </data>
+  <data name="ToolTipInputPin" xml:space="preserve">
+    <value>Įvestis {0} bit(as/us) kištukas {1}</value>
+  </data>
+  <data name="MessageFreeWireCount" xml:space="preserve">
+    <value>{0} laisvi laidai buvo rasti.</value>
+  </data>
+  <data name="MessageFloatingSymbolCount" xml:space="preserve">
+    <value>{0} nesujunktas simbolis buvo rastas</value>
+  </data>
+  <data name="FunctionParameter" xml:space="preserve">
+    <value>Funcija {0} Reikalauja bent {1} parametrų</value>
+  </data>
+  <data name="MessageExportImageDialog" xml:space="preserve">
+    <value>Pasirinkite vaizdo formatą ir failo vardą į kurį bus  eksportuota dabartinė diagrama </value>
+  </data>
+  <data name="MessageImageFileExists" xml:space="preserve">
+    <value>Failas "{0}" jau egzistuoja. Ar norite jį pakeisti savu failu</value>
+  </data>
+  <data name="Gate7SegName" xml:space="preserve">
+    <value>7-seg</value>
+  </data>
+  <data name="ToolTipFrequency" xml:space="preserve">
+    <value>Pakeiskite dažnį laikrodžio vartus veikiančios grandinės</value>
+  </data>
+  <data name="ToolTipGateInputCount" xml:space="preserve">
+    <value>Pasirinkti įvesčių vartam skaičių</value>
+  </data>
+  <data name="ToolTipIsMaximumSpeed1" xml:space="preserve">
+    <value>grandinės paleidimas and maksimalaus galimo greičio ingnoruojant dažnį kuris yra nustatytas sklandžio aukščiau.</value>
+  </data>
+  <data name="ErrorUnsupportedUri" xml:space="preserve">
+    <value>Navikacija į ši adresą nėra palaikoma</value>
+  </data>
+  <data name="ToolTipFontFamily" xml:space="preserve">
+    <value>Šrifto Šeima</value>
+  </data>
+  <data name="ToolTipFontSize" xml:space="preserve">
+    <value>Šrifto dydis</value>
+  </data>
+  <data name="ToolTipDevicePinSide" xml:space="preserve">
+    <value>Pasirinkite kurioje pusėje bus kyštukas</value>
+  </data>
+  <data name="ErrorSeriesItemOrder" xml:space="preserve">
+    <value>Eroras {0}. Kiekvienas sekantis ciklas turėtu būti didesnis negu ankstesnis</value>
+  </data>
+  <data name="ToolTipGraphicsArray" xml:space="preserve">
+    <value>{0} {1}x{2} su {3} bit(as/us) per pikselius ({4} spalvos)</value>
+  </data>
+  <data name="ToolTipGraphicsArrayWidth" xml:space="preserve">
+    <value>Įveskite grafinio masyvo plotį pikseliais.</value>
+  </data>
+  <data name="ErrorWriteNotConnected" xml:space="preserve">
+    <value>Rašymo įvestis nesusijungia ant grafinio masyvo {0}</value>
+  </data>
+  <data name="MessageSaveFile" xml:space="preserve">
+    <value>Projektas {0} pasikeitė. Ar norite pakeitimus išsaugoti</value>
+  </data>
+  <data name="NameButton" xml:space="preserve">
+    <value>Myktukas</value>
+  </data>
+  <data name="MessageNotRootConstant" xml:space="preserve">
+    <value>Konstantos yra traukiamos tik iš šakninės grandinės ({0}) gali būti pakeistos kai galia yra įjungta.</value>
+  </data>
+  <data name="MessageWarning" xml:space="preserve">
+    <value>Įspejimas!</value>
+  </data>
+  <data name="MessageNotUsed" xml:space="preserve">
+    <value>Ši loginė grandinė nera kur nors naudojima.</value>
+  </data>
+  <data name="MessageUsageNote" xml:space="preserve">
+    <value>Pasirinkite kur dabartinė yra naudojama ir dukart paspauskite ją ,kad nukeliauti ten ir pasirinkti dabartinį simbolį</value>
+  </data>
+  <data name="MessageInvalidRecentFile" xml:space="preserve">
+    <value>Failas ({0}) negali būti atidarytas. Ar norite pašalinti nuordą į šį failą iš savo nesenai atidarytų failū sarašo?</value>
+  </data>
+  <data name="MessageVersionLatest" xml:space="preserve">
+    <value>Jūs jau turite naujiausią versiją.</value>
+  </data>
+  <data name="MessageVersionOutdated" xml:space="preserve">
+    <value>Jūs turite senesne versiją. Paspauskite and nuorodos apačioje ,kad parsisiūsti naujiausią.</value>
+  </data>
+  <data name="MessageVersionPreview" xml:space="preserve">
+    <value>Jūs turine neišleista kurėjo versija.</value>
+  </data>
+  <data name="MessageInputOutputPinsMissing" xml:space="preserve">
+    <value>Grandinėje nera Įvesties arba išvesties kyštukų. Tiesos lentelė yra sudaroma sunčiant visus  duomenų parametrus į Įvesties kištukus ir skaitant rezultatą iš išvesties kištukus.</value>
+  </data>
+  <data name="MessageTruthTableTooBig" xml:space="preserve">
+    <value>Tiesos lentelė yra per ilga ir yra apkarpoma. Prašome naudoti filtrus ,kad užtikrinti savo grandinės teisingumą</value>
+  </data>
+  <data name="MessageRestartRequared" xml:space="preserve">
+    <value>Jūsų kalbos pasirinkimas buvo pakeistas. Jum reikia programą paleisti iš naujo ,kad pakeitimai būtų matomi.</value>
+  </data>
+  <data name="ToolTipIsDisplay" xml:space="preserve">
+    <value>Kai yra pažymima rodyti vizualinius elementus visi simboliai grandinėje bus matomi. Rodomi yra:LED,LED Matrica, Grafinis masyvas, myktukas, ar kitos Loginės Grandinės kurios rodo savo vizualinius elementus</value>
+  </data>
+  <data name="ToolTipDescriptorClock" xml:space="preserve">
+    <value>Generuoti signalą kuris svyruoja nuo 0 iki 1 ir yra naudojamas,  kad kordinuoti veiksmus grandinėje.</value>
+  </data>
+  <data name="ToolTipDescriptorProbe" xml:space="preserve">
+    <value>Pridėti ir sujunkti leistukus prie savo grandinės kad matyti dabatinę būseną dabar aktyvios grandinės and leistuko paviršiaus reikšmių istorija kai yra du kart paspaustas leistukas ar pežiurėti oskiloskopo duomenis</value>
+  </data>
+  <data name="ToolTipDescriptorSensor" xml:space="preserve">
+    <value>Pateikia duomenis iš "išorinio šaltinio" kaip serija prieštai nustatytų , atsitiktinių ar rankinių reikšmių</value>
+  </data>
+  <data name="ToolTipDescriptorSplitter" xml:space="preserve">
+    <value>Leisti kurti laidų pakinktus arba atskirus individualius laidus. Spliterių ir kelių-bitų kyštukų naudojimas gali palengvinti grandinės piešimą ir supratimą</value>
+  </data>
+  <data name="ToolTipDescriptorText" xml:space="preserve">
+    <value>Padėti teksto pastabas bet kur ant diagramos kad komentuoti grandinę pateikti naudingų nuorodų į bet kokį saitą ir papuošti savo grandinę su nuotrauką.</value>
+  </data>
+  <data name="TipOnStartMove" xml:space="preserve">
+    <value>Nuotemti pasirinkimą į norimą vietą. Spauskite Esc, kad atšaukti perkelima. Laikykite Shift, kai paleidžiate, kad neleisti laidų judėjimo.</value>
+  </data>
+  <data name="TipOnStartWire" xml:space="preserve">
+    <value>Tutempkite laiko galą į norima vietą. paspauskite Esc ,kad atšaukti laido kurimą.</value>
+  </data>
+  <data name="TipOnCtrlDown" xml:space="preserve">
+    <value>Paspauskite Ctrl+{Shift}+Tab , kad keistis tarp loginių grandinių arba paspauskite, kad pasirinkti/atsirinkti individualius simbolius.</value>
+  </data>
+  <data name="TipOnWireSelect" xml:space="preserve">
+    <value>Shift+{Ctrl}+Paspausti ant laido pasirinkti/atsirinkti visą konduktorių, Alt+Click ant pasirinkto laido, kad jį padalyti, ant bendro taško kad du sujunkti.</value>
+  </data>
+  <data name="TipOnAwaitingArea" xml:space="preserve">
+    <value>{0}{1}.Apsupti kelis simbolius kad juos pasirinkti , laikykite Shift , pasilikti dabartinį pasirinkimą.</value>
+  </data>
+  <data name="ToolTipDescriptorPin" xml:space="preserve">
+    <value>Naudojamas norint sukurti jugima su kita grandine kuri gali suteikti arba gauti duomenis į ir iš dabartinės grandinės. Pertvarkyti grandinės kyštukus norint pakeisti jų reliatyvią grandinės simbolių poziciją .</value>
+  </data>
+  <data name="ToolTipDescriptorTriState" xml:space="preserve">
+    <value>gali turėti 3 išvestis:1,0, aukštos varžos(Z).
+Aukštos varžos būsena naudoja  logikos roles kurios yra grieštai binarinės.
+Šie įrenginiai yra naudojami and procesoriu laikotuvų(buses), kad leistų kelių šaltinių duomenų siuntimą.
+Grupe tri-būsenų keliaujančių linija su tinkamų valdymo grandinių yra beveik multiplekserio(multiplexer) ekvivalentas</value>
+  </data>
+  <data name="ToolTipDescriptorGraphicsArray" xml:space="preserve">
+    <value>(Taškų matricos vaizduoklis) gali paroditi duomenis kurie yra saugomi vidinėje atmintyje. Naudojamas su pažangiom grandinėm ,kaip kompiuteriai ar kontroleriai. Leidžia pasirinkti dydi ir spalvos gyli/schema:
+1bitas/pikselį- juodą ir balta
+2bitai/pikselį - 4 pilki atspalviai
+4bitai/pikselį - 16 spalvų
+8bitai/pikselį - 256 spalvos</value>
+  </data>
+</root>
