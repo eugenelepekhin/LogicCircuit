@@ -87,6 +87,11 @@
 							<File Id="ko_KR" Source="$(var.LogicCircuit.TargetDir)ko-KR\$(var.LogicCircuit.TargetName).resources.dll"/>
 						</Component>
 					</Directory>
+					<Directory Id="lt" Name="lt">
+						<Component Id="ltComponent">
+							<File Id="lt" Source="$(var.LogicCircuit.TargetDir)lt\$(var.LogicCircuit.TargetName).resources.dll"/>
+						</Component>
+					</Directory>
 					<Directory Id="nl" Name="nl">
 						<Component Id="nlComponent">
 							<File Id="nl" Source="$(var.LogicCircuit.TargetDir)nl\$(var.LogicCircuit.TargetName).resources.dll"/>
@@ -137,6 +142,7 @@
 			<ComponentRef Id="huComponent"/>
 			<ComponentRef Id="it_ITComponent"/>
 			<ComponentRef Id="ko_KRComponent"/>
+			<ComponentRef Id="ltComponent"/>
 			<ComponentRef Id="nlComponent"/>
 			<ComponentRef Id="pt_BRComponent"/>
 			<ComponentRef Id="ru_RUComponent"/>
