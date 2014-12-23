@@ -727,7 +727,10 @@
     <value>Įvesti minimalų ciklų skaičių prieš tai kai sensorius pakeis savo matavimus.</value>
   </data>
   <data name="ToolTipSeriesData" xml:space="preserve">
-    <value>Prošau pateikti serija sensorių matavimui formoi &lt;ciklas&gt;:&lt;reikšmė&gt; kur abudu ciklai ir reikšmės yra šešioliktainės. Kada ciklas yra lyginis arba 0 tada tai atitinka kitimam laikodžio nuo 0 iki 1, kada tai yra nelyginis tada laikordis keičiasi nuo 1 iki 0</value>
+    <value>Prošau pateikti serija sensorių matavimui formoi &lt;ciklas&gt;:&lt;reikšmė&gt;
+kur abudu ciklai ir reikšmės yra šešioliktainės. Kada ciklas yra
+lyginis arba 0 tada tai atitinka kitimam laikodžio nuo 0 iki 1,
+kada tai yra nelyginis tada laikordis keičiasi nuo 1 iki 0.</value>
   </data>
   <data name="ToolTipSound" xml:space="preserve">
     <value>Zumeris {0}</value>
@@ -1306,22 +1309,38 @@
     <value>Jūsų kalbos pasirinkimas buvo pakeistas. Jum reikia programą paleisti iš naujo ,kad pakeitimai būtų matomi.</value>
   </data>
   <data name="ToolTipIsDisplay" xml:space="preserve">
-    <value>Kai yra pažymima rodyti vizualinius elementus visi simboliai grandinėje bus matomi. Rodomi yra:LED,LED Matrica, Grafinis masyvas, myktukas, ar kitos Loginės Grandinės kurios rodo savo vizualinius elementus</value>
+    <value>Kai yra pažymima rodyti vizualinius elementus
+visi simboliai grandinėje bus matomi.
+Rodomi yra: LED, LED Matrica, Grafinis masyvas,
+myktukas, ar kitos Loginės Grandinės kurios
+rodo savo vizualinius elementus.</value>
   </data>
   <data name="ToolTipDescriptorClock" xml:space="preserve">
-    <value>Generuoti signalą kuris svyruoja nuo 0 iki 1 ir yra naudojamas,  kad kordinuoti veiksmus grandinėje.</value>
+    <value>Generuoti signalą kuris svyruoja nuo 0 iki 1 ir yra
+naudojamas,  kad kordinuoti veiksmus grandinėje.</value>
   </data>
   <data name="ToolTipDescriptorProbe" xml:space="preserve">
-    <value>Pridėti ir sujunkti leistukus prie savo grandinės kad matyti dabatinę būseną dabar aktyvios grandinės and leistuko paviršiaus reikšmių istorija kai yra du kart paspaustas leistukas ar pežiurėti oskiloskopo duomenis</value>
+    <value>Pridėti ir sujunkti leistukus prie savo grandinės kad matyti
+dabatinę būseną dabar aktyvios grandinės and leistuko paviršiaus
+reikšmių istorija kai yra du kart paspaustas leistukas
+ar pežiurėti oskiloskopo duomenis.</value>
   </data>
   <data name="ToolTipDescriptorSensor" xml:space="preserve">
-    <value>Pateikia duomenis iš "išorinio šaltinio" kaip serija prieštai nustatytų , atsitiktinių ar rankinių reikšmių</value>
+    <value>Pateikia duomenis iš "išorinio šaltinio"
+kaip serija prieštai nustatytų,
+atsitiktinių ar rankinių reikšmių.</value>
   </data>
   <data name="ToolTipDescriptorSplitter" xml:space="preserve">
-    <value>Leisti kurti laidų pakinktus arba atskirus individualius laidus. Spliterių ir kelių-bitų kyštukų naudojimas gali palengvinti grandinės piešimą ir supratimą</value>
+    <value>Leisti kurti laidų pakinktus arba
+atskirus individualius laidus.
+Spliterių ir kelių-bitų kyštukų
+naudojimas gali palengvinti
+grandinės piešimą ir supratimą.</value>
   </data>
   <data name="ToolTipDescriptorText" xml:space="preserve">
-    <value>Padėti teksto pastabas bet kur ant diagramos kad komentuoti grandinę pateikti naudingų nuorodų į bet kokį saitą ir papuošti savo grandinę su nuotrauką.</value>
+    <value>Padėti teksto pastabas bet kur ant diagramos kad
+komentuoti grandinę pateikti naudingų nuorodų į bet
+kokį saitą ir papuošti savo grandinę su nuotrauką.</value>
   </data>
   <data name="TipOnStartMove" xml:space="preserve">
     <value>Nuotemti pasirinkimą į norimą vietą. Spauskite Esc, kad atšaukti perkelima. Laikykite Shift, kai paleidžiate, kad neleisti laidų judėjimo.</value>
@@ -1339,16 +1358,22 @@
     <value>{0}{1}.Apsupti kelis simbolius kad juos pasirinkti , laikykite Shift , pasilikti dabartinį pasirinkimą.</value>
   </data>
   <data name="ToolTipDescriptorPin" xml:space="preserve">
-    <value>Naudojamas norint sukurti jugima su kita grandine kuri gali suteikti arba gauti duomenis į ir iš dabartinės grandinės. Pertvarkyti grandinės kyštukus norint pakeisti jų reliatyvią grandinės simbolių poziciją .</value>
+    <value>Naudojamas norint sukurti jugima su kita grandine kuri gal
+suteikti arba gauti duomenis į ir iš dabartinės grandinės.
+Pertvarkyti grandinės kyštukus norint pakeisti jų
+reliatyvią grandinės simbolių poziciją.</value>
   </data>
   <data name="ToolTipDescriptorTriState" xml:space="preserve">
     <value>gali turėti 3 išvestis:1,0, aukštos varžos(Z).
 Aukštos varžos būsena naudoja  logikos roles kurios yra grieštai binarinės.
-Šie įrenginiai yra naudojami and procesoriu laikotuvų(buses), kad leistų kelių šaltinių duomenų siuntimą.
-Grupe tri-būsenų keliaujančių linija su tinkamų valdymo grandinių yra beveik multiplekserio(multiplexer) ekvivalentas</value>
+Šie įrenginiai yra naudojami and procesoriu laikotuvų(buses), kad leistų kelių
+šaltinių duomenų siuntimą. Grupe tri-būsenų keliaujančių linija su tinkamų
+valdymo grandinių yra beveik multiplekserio (multiplexer) ekvivalentas.</value>
   </data>
   <data name="ToolTipDescriptorGraphicsArray" xml:space="preserve">
-    <value>(Taškų matricos vaizduoklis) gali paroditi duomenis kurie yra saugomi vidinėje atmintyje. Naudojamas su pažangiom grandinėm ,kaip kompiuteriai ar kontroleriai. Leidžia pasirinkti dydi ir spalvos gyli/schema:
+    <value>(Taškų matricos vaizduoklis) gali paroditi duomenis kurie yra saugomi vidinėje
+atmintyje. Naudojamas su pažangiom grandinėm ,kaip kompiuteriai ar kontroleriai.
+Leidžia pasirinkti dydi ir spalvos gyli/schema:
 1bitas/pikselį- juodą ir balta
 2bitai/pikselį - 4 pilki atspalviai
 4bitai/pikselį - 16 spalvų
