@@ -16,6 +16,15 @@
 			<Setter Property="VerticalAlignment" Value="Center"/>
 			<Setter Property="Margin" Value="5"/>
 		</Style>
+
+		<Style x:Key="CultureTranslation" TargetType="TextBlock">
+			<Setter Property="FlowDirection" Value="LeftToRight"/>
+			<Style.Triggers>
+				<DataTrigger Binding="{Binding Path=Name}" Value="en-US">
+					<Setter Property="Visibility" Value="Collapsed"/>
+				</DataTrigger>
+			</Style.Triggers>
+		</Style>
 	</Window.Resources>
 
 	<Grid>
@@ -69,9 +78,9 @@
 				>
 					<ComboBox.ItemTemplate>
 						<DataTemplate>
-							<TextBlock Text="{Binding Path=NativeName}">
-								<TextBlock.Style>
-									<Style TargetType="TextBlock">
+							<StackPanel Orientation="Horizontal">
+								<StackPanel.Style>
+									<Style TargetType="StackPanel">
 										<Setter Property="FlowDirection" Value="LeftToRight"/>
 										<Style.Triggers>
 											<DataTrigger Binding="{Binding Path=TextInfo.IsRightToLeft}" Value="True">
@@ -79,8 +88,12 @@
 											</DataTrigger>
 										</Style.Triggers>
 									</Style>
-								</TextBlock.Style>
-							</TextBlock>
+								</StackPanel.Style>
+
+								<TextBlock Text="{Binding Path=NativeName}"/>
+								<TextBlock Text=" - " Style="{StaticResource CultureTranslation}"/>
+								<TextBlock Text="{Binding Path=DisplayName}" Style="{StaticResource CultureTranslation}"/>
+							</StackPanel>
 						</DataTemplate>
 					</ComboBox.ItemTemplate>
 				</ComboBox>
