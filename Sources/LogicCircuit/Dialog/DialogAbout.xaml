@@ -61,7 +61,7 @@
 						<Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
 							<Setter Property="FlowDirection" Value="LeftToRight"/>
 							<Setter Property="Margin" Value="3,0"/>
-							<Setter Property="FontSize" Value="10"/>
+							<Setter Property="FontSize" Value="12"/>
 							<Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=Text}"/>
 						</Style>
 					</WrapPanel.Resources>
@@ -81,6 +81,7 @@
 					<TextBlock>Jongbin Han</TextBlock>
 					<TextBlock>Junyoung Heo</TextBlock>
 					<TextBlock>Karen Flores</TextBlock>
+					<TextBlock>Konstantinas Birželis</TextBlock>
 					<TextBlock>Markus Grundner</TextBlock>
 					<TextBlock>Maxym Hylliaka</TextBlock>
 					<TextBlock>Mohammad Mawaheb Seraj Eddin</TextBlock>
