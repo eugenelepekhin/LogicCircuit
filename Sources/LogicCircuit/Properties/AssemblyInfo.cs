@@ -9,12 +9,12 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("LogicCircuit")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("www.LogicCircuit.org")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("LogicCircuit.org")]
 [assembly: AssemblyProduct("LogicCircuit")]
-[assembly: AssemblyCopyright("Copyright © LogicCircuit.org 2009-2012")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("© LogicCircuit.org")]
+//[assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("LogicCircuit.UnitTest")]
