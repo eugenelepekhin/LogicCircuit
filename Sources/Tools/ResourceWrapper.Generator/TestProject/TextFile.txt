@@ -1,4 +1,0 @@
-﻿Content
-	of
-		Text
-			File

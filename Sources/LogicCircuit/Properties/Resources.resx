@@ -523,9 +523,11 @@ Out</value>
   </data>
   <data name="TipOnCtrlDown" xml:space="preserve">
     <value>Press Ctrl+{Shift}+Tab to switch between logical circuits or click to select/unselect individual symbols.</value>
+    <comment>-</comment>
   </data>
   <data name="TipOnWireSelect" xml:space="preserve">
     <value>Shift+{Ctrl}+Click on wire to select/unselect entire conductor, Alt+Click on selected wire to split, on common point of two to merge.</value>
+    <comment>-</comment>
   </data>
   <data name="TipOnAwaitingArea" xml:space="preserve">
     <value>{0} {1}. Surround multiple symbols to select them, hold Shift to keep current selection.</value>

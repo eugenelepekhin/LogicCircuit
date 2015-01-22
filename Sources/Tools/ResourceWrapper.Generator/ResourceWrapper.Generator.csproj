@@ -3,17 +3,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <ProjectGuid>{B543E594-A653-4E16-9203-5C833D430A8C}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ResourceWrapper.Generator</RootNamespace>
     <AssemblyName>ResourceWrapper.Generator</AssemblyName>
-    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,30 +20,28 @@
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>TRACE;DEBUG</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Build" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="CommandLine.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="Parameter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProjectParser.cs" />
     <Compile Include="ResourceItem.cs" />
+    <Compile Include="ResourceParser.cs" />
     <Compile Include="ResourcesWrapper.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -70,14 +67,9 @@
   </Target>
   -->
   <PropertyGroup>
-	<ToolsFolder>$(SolutionDir)Tools</ToolsFolder>
+    <ToolsFolder>$(SolutionDir)Tools</ToolsFolder>
   </PropertyGroup>
   <Target Name="AfterBuild">
-	<Copy
-		Condition="Exists($(ToolsFolder))"
-		SkipUnchangedFiles="true"
-		SourceFiles="$(TargetPath)"
-		DestinationFolder="$(ToolsFolder)"
-	/>
+    <Copy Condition="Exists($(ToolsFolder))" SkipUnchangedFiles="true" SourceFiles="$(TargetPath)" DestinationFolder="$(ToolsFolder)" />
   </Target>
 </Project>

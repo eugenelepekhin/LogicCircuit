@@ -137,10 +137,11 @@
 
   <PropertyGroup>
 	<ToolsFolder>$(SolutionDir)Tools</ToolsFolder>
+    <ResourceWrapperGeneratorCommand>"$(ToolsFolder)\ResourceWrapper.Generator.exe" /p "$(ProjectPath)"</ResourceWrapperGeneratorCommand>
   </PropertyGroup>
 
   <Target Name="BeforeBuild">
-    <Exec Command='"$(ToolsFolder)\ResourceWrapper.Generator.exe" "ProjectPath=$(ProjectPath)"'/>
+    <Exec Command="$(ResourceWrapperGeneratorCommand)"/>
   </Target>
 
   <Target Name="AfterBuild">

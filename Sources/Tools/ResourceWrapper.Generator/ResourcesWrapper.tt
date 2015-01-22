@@ -11,14 +11,18 @@
 
 namespace <#=this.NameSpace#> {
 	using System;
-	using System.Collections.Generic;
-	using System.ComponentModel;
 	using System.Diagnostics;
 	using System.Globalization;
-	using System.Reflection;
-	using System.Resources;
 	using System.Runtime.CompilerServices;
+	using System.ComponentModel;
+	using System.Resources;
+<#if(this.Pseudo) {#>
+	using System.Collections.Generic;
+	using System.Reflection;
+<#}#>
+<#if(this.FlowDirection) {#>
 	using System.Windows;
+<#}#>
 
 	/// <summary>
 	/// A strongly-typed resource class, for looking up localized strings, etc.
@@ -37,12 +41,22 @@ namespace <#=this.NameSpace#> {
 		[EditorBrowsableAttribute(EditorBrowsableState.Advanced)]
 		public static CultureInfo Culture { get; set; }
 
-<#if(this.Pseudo) {#>
+		/// <summary>
+		/// Used for formating of the resource strings. Usually same as CultureInfo.CurrentCulture.
+		/// </summary>
+		[EditorBrowsableAttribute(EditorBrowsableState.Advanced)]
+		public static CultureInfo FormatCulture { get; set; }
+
+<#if(this.FlowDirection) {#>
+<#	if(this.Pseudo) {#>
 		private static bool isRightToLeft = ((Environment.TickCount / 500) & 1) == 0;
-<#}#>
+<#	}#>
+		/// <summary>
+		/// Gets FlowDirection for current culture.
+		/// </summary>
 		public static FlowDirection FlowDirection {
 			get {
-<#if(!this.Pseudo) {#>
+<#	if(!this.Pseudo) {#>
 				bool isRightToLeft;
 				if(<#=this.ClassName#>.Culture != null && <#=this.ClassName#>.Culture.TextInfo != null) {
 					isRightToLeft = <#=this.ClassName#>.Culture.TextInfo.IsRightToLeft;
@@ -53,10 +67,11 @@ namespace <#=this.NameSpace#> {
 				} else {
 					isRightToLeft = false;
 				}
-<#}#>
+<#	}#>
 				return isRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
 			}
 		}
+<#}#>
 
 		private static <#=this.Pseudo ? "Pseudo" : ""#>ResourceManager resourceManager;
 
@@ -162,36 +177,50 @@ namespace <#=this.NameSpace#> {
 			private string Pseudo(string name) {
 				string text;
 				if(!this.resources.TryGetValue(name, out text)) {
-					this.resources[name] = text = this.PseudoLocalize(base.GetString(name, null));
+					this.resources[name] = text = PseudoResourceManager.PseudoLocalize(base.GetString(name, null));
 				}
 				return text;
 			}
 
-			private string PseudoLocalize(string text) {
-				if(!string.IsNullOrEmpty(text)) {
-					char[] result = new char[text.Length];
-					for(int i = 0; i < result.Length; i++) {
-						char c;
-						if(map.TryGetValue(text[i], out c)) {
-							result[i] = c;
+			private static string PseudoLocalize(string text) {
+				if(text == null) {
+					text = string.Empty;
+				}
+				char[] result = new char[text.Length];
+				bool open = false; // open means loop index i is inside of the format item. So no translations should happen as all the character are format specifiers.
+				for(int i = 0; i < text.Length; i++) {
+					char c = text[i];
+					if(!open && c == '{') {
+						if(i + 1 < text.Length && text[i + 1] == '{') {
+							result[i++] = c;
 						} else {
-							result[i] = text[i];
+							open = i + 1 < text.Length && '0' <= text[i + 1] && text[i + 1] <= '9';
+						}
+					} else if(open && c == '}') {
+						if(i + 1 < text.Length && text[i + 1] == '}') {
+							result[i++] = c;
+						} else {
+							open = false;
 						}
 					}
-					return "[===" + new string(result) + "===]";
+					char pseudo;
+					if(!open && map.TryGetValue(c, out pseudo)) {
+						c = pseudo;
+					}
+					result[i] = c;
 				}
-				return text;
+				return "[-~=" + new string(result) + "=~-]";
 			}
 		}
 <#}#>
 <#foreach(ResourceItem item in this.Items) {#>
 
 		/// <summary>
-		/// Looks up a localized string similar to <#=item.Comment#>.
+		/// Looks up a localized string similar to <#=item.Comment()#>.
 		/// </summary>
 <#	if(item.Parameters != null) {#>
- 		public static string <#=item.Name#>(<#=item.ParametersDeclaration#>) {
-			return string.Format(Culture, <#=item.GetStringExpression(this.Pseudo)#>"<#=item.Name#>", Culture), <#=item.ParametersInvocation#>);
+ 		public static string <#=item.Name#>(<#=item.ParametersDeclaration()#>) {
+			return string.Format(FormatCulture, <#=item.GetStringExpression(this.Pseudo)#>"<#=item.Name#>", Culture), <#=item.ParametersInvocation()#>);
 		}
 <#	} else if(item.Type == "string") {#>
  		public static string <#=item.Name#> {

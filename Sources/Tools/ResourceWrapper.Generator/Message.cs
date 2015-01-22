@@ -10,6 +10,11 @@ namespace ResourceWrapper.Generator {
 			Console.Error.WriteLine(text, args);
 		}
 
+		public static void Warning(string text, params object[] args) {
+			Message.Flush();
+			Console.Error.WriteLine(text, args);
+		}
+
 		public static void Write(string text, params object[] args) {
 			Message.text.AppendFormat(text, args);
 			Message.text.AppendLine();

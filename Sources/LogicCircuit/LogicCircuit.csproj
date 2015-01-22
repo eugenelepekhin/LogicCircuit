@@ -3,8 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <ProjectGuid>{45ED9DDA-67B2-4AA9-BB4C-65A9684060AE}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -23,7 +22,6 @@
     <ApplicationIcon>Properties\LogicCircuit.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -31,7 +29,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -707,8 +704,17 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <ResourceWrapperGeneratorCommand>"$(SolutionDir)Tools\ResourceWrapper.Generator.exe" /FlowDirection /p "$(ProjectPath)"</ResourceWrapperGeneratorCommand>
+    <!--
+	<PseudoBuildDefined>$(DefineConstants.Contains("Pseudo"))</PseudoBuildDefined>
+    <ResourceWrapperGeneratorCommand Condition="$(PseudoBuildDefined)">$(ResourceWrapperGeneratorCommand) Pseudo=LogicCircuit.Properties.Resources</ResourceWrapperGeneratorCommand>
+	-->
+	<ItemWrapperGeneratorCommand>"$(SolutionDir)Tools\ItemWrapper.Generator.exe" /RealmType:Universe /UseDispatcher:false "/Schema:$(ProjectDir)Schema\CircuitProject.xml" "/Target:$(ProjectDir)CircuitProject\Wrappers"</ItemWrapperGeneratorCommand>
+  </PropertyGroup>
+
   <Target Name="BeforeBuild">
-    <Exec Command="&quot;$(SolutionDir)Tools\ResourceWrapper.Generator.exe&quot; &quot;ProjectPath=$(ProjectPath)&quot;" />
-    <Exec Command="&quot;$(SolutionDir)Tools\ItemWrapper.Generator.exe&quot; /RealmType:Universe /UseDispatcher:false &quot;/Schema:$(ProjectDir)Schema\CircuitProject.xml&quot; &quot;/Target:$(ProjectDir)CircuitProject\Wrappers&quot;" />
+    <Exec Command="$(ResourceWrapperGeneratorCommand)" />
+    <Exec Command="$(ItemWrapperGeneratorCommand)" />
   </Target>
 </Project>
