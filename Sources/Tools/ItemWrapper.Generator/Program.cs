@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using CommandLineParser;
 
 namespace ItemWrapper.Generator {
 	public class Program {
@@ -8,52 +9,36 @@ namespace ItemWrapper.Generator {
 		public static int Main(string[] args) {
 			int returnCode = 0;
 			try {
-				string schemaPrefix = "/Schema:";
-				string targetPrefix = "/Target:";
-				string useDispatcherPrefix = "/UseDispatcher:";
-				string realmTypePrefix = "/RealmType:";
+				bool printHelp = false;
 				Generator generator = new Generator();
-				foreach(string arg in args) {
-					if(arg.StartsWith(schemaPrefix, StringComparison.OrdinalIgnoreCase)) {
+				generator.RealmType = RealmType.Universe;
+				CommandLine commandLine = new CommandLine()
+					.AddString("Schema", "s", "Path to database schema definition file", true, value => {
 						if(generator.SchemaPath != null) {
-							throw new Usage(TextMessage.ArgumentRedefinition(schemaPrefix));
+							throw new Usage(TextMessage.ArgumentRedefinition("Schema"));
 						}
-						generator.SchemaPath = arg.Substring(schemaPrefix.Length);
-					} else if(arg.StartsWith(targetPrefix, StringComparison.OrdinalIgnoreCase)) {
+						generator.SchemaPath = value;
+					})
+					.AddString("Target", "t", "Path to destination folder", true, value => {
 						if(generator.TargetFolder != null) {
-							throw new Usage(TextMessage.ArgumentRedefinition(targetPrefix));
+							throw new Usage(TextMessage.ArgumentRedefinition("Target"));
 						}
-						generator.TargetFolder = arg.Substring(targetPrefix.Length);
-					} else if(arg.StartsWith(useDispatcherPrefix, StringComparison.OrdinalIgnoreCase)) {
-						bool use;
-						if(!bool.TryParse(arg.Substring(useDispatcherPrefix.Length), out use)) {
-							throw new Usage("UseDispatcher should provide true or false value");
-						}
-						generator.UseDispatcher = use;
-					} else if(arg.StartsWith(realmTypePrefix, StringComparison.OrdinalIgnoreCase)) {
-						RealmType realmType;
-						if(!Enum.TryParse<RealmType>(arg.Substring(realmTypePrefix.Length), out realmType)) {
-							throw new Usage("RealmType should provide a valid value");
-						}
-						generator.RealmType = realmType;
-					} else {
-						throw new Usage(TextMessage.UnknownArgument(arg));
-					}
+						generator.TargetFolder = value;
+					})
+					.AddFlag("UseDispatcher", "d", "Set this flag to send notifications via dispatcher", false, value => generator.UseDispatcher = value)
+					.AddFlag("Multiverse", "m", "Set this flag to generate Multiverse realm", false, value => generator.RealmType = value ? RealmType.Multiverse : RealmType.Universe)
+					.AddFlag("Help", "?", "Print help", false, value => printHelp = true)
+				;
+				string errors = commandLine.Parse(args, null);
+				if(printHelp) {
+					Console.Out.WriteLine(TextMessage.Usage);
+					Console.Out.WriteLine(commandLine.Help());
+				} else if(errors != null) {
+					Console.Error.WriteLine(errors);
+				} else {
+					generator.Generate();
+					Console.Out.WriteLine(TextMessage.ReportSuccess);
 				}
-				if(generator.SchemaPath == null) {
-					throw new Usage(TextMessage.ArgumentMissing(schemaPrefix));
-				}
-				if(generator.TargetFolder == null) {
-					throw new Usage(TextMessage.ArgumentMissing(targetPrefix));
-				}
-				if(!File.Exists(generator.SchemaPath)) {
-					throw new Usage(TextMessage.SchemaFileMissing(generator.SchemaPath));
-				}
-				if(!Directory.Exists(generator.TargetFolder)) {
-					throw new Usage(TextMessage.TargetFolderMissing(generator.TargetFolder));
-				}
-				generator.Generate();
-				Console.Out.WriteLine(TextMessage.ReportSuccess);
 			} catch(Error error) {
 				returnCode = 1;
 				Console.Error.WriteLine(error.Message);

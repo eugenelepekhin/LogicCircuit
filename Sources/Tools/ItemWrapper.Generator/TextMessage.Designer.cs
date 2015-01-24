@@ -97,7 +97,8 @@ namespace ItemWrapper.Generator {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to ItemWrapper.Generator /Schema:<file.xaml> /Target:<Destination folder> [/UseDispatcher:<true|false>] [/RealmType:<None|Universe|Multiverse>].
+		/// Looks up a localized string similar to ItemWrapper.Generator OPTIONS
+		/// OPTIONS are:.
 		/// </summary>
  		public static string Usage {
 			get { return ResourceManager.GetString("Usage", Culture); }

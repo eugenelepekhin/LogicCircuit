@@ -141,6 +141,7 @@
     <comment>{string argument}</comment>
   </data>
   <data name="Usage" xml:space="preserve">
-    <value>ItemWrapper.Generator /Schema:&lt;file.xaml&gt; /Target:&lt;Destination folder&gt; [/UseDispatcher:&lt;true|false&gt;] [/RealmType:&lt;None|Universe|Multiverse&gt;]</value>
+    <value>ItemWrapper.Generator OPTIONS
+OPTIONS are:</value>
   </data>
 </root>

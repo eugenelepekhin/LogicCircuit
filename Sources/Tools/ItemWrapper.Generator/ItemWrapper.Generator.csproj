@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="AccessModifier.cs" />
     <Compile Include="Column.cs" />
+    <Compile Include="CommandLine.cs" />
     <Compile Include="Error.cs" />
     <Compile Include="Generator.cs" />
     <Compile Include="GeneratorItemWrapper.cs">
@@ -134,21 +135,14 @@
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   -->
-
   <PropertyGroup>
-	<ToolsFolder>$(SolutionDir)Tools</ToolsFolder>
+    <ToolsFolder>$(SolutionDir)Tools</ToolsFolder>
     <ResourceWrapperGeneratorCommand>"$(ToolsFolder)\ResourceWrapper.Generator.exe" /p "$(ProjectPath)"</ResourceWrapperGeneratorCommand>
   </PropertyGroup>
-
   <Target Name="BeforeBuild">
-    <Exec Command="$(ResourceWrapperGeneratorCommand)"/>
+    <Exec Command="$(ResourceWrapperGeneratorCommand)" />
   </Target>
-
   <Target Name="AfterBuild">
-	<Copy
-		SkipUnchangedFiles="true"
-		SourceFiles="$(TargetPath)"
-		DestinationFolder="$(ToolsFolder)"
-	/>
+    <Copy SkipUnchangedFiles="true" SourceFiles="$(TargetPath)" DestinationFolder="$(ToolsFolder)" />
   </Target>
 </Project>

@@ -710,7 +710,7 @@
 	<PseudoBuildDefined>$(DefineConstants.Contains("Pseudo"))</PseudoBuildDefined>
     <ResourceWrapperGeneratorCommand Condition="$(PseudoBuildDefined)">$(ResourceWrapperGeneratorCommand) Pseudo=LogicCircuit.Properties.Resources</ResourceWrapperGeneratorCommand>
 	-->
-	<ItemWrapperGeneratorCommand>"$(SolutionDir)Tools\ItemWrapper.Generator.exe" /RealmType:Universe /UseDispatcher:false "/Schema:$(ProjectDir)Schema\CircuitProject.xml" "/Target:$(ProjectDir)CircuitProject\Wrappers"</ItemWrapperGeneratorCommand>
+	<ItemWrapperGeneratorCommand>"$(SolutionDir)Tools\ItemWrapper.Generator.exe" /Schema "$(ProjectDir)Schema\CircuitProject.xml" /Target "$(ProjectDir)CircuitProject\Wrappers"</ItemWrapperGeneratorCommand>
   </PropertyGroup>
 
   <Target Name="BeforeBuild">
