@@ -1228,8 +1228,8 @@ Tal circuito não pode ser usado mais de uma vez em outros circuitos potencialme
     <value>Nome</value>
   </data>
   <data name="ToolTipIsDisplay" xml:space="preserve">
-    <value>Quando o Logic Circuit realizar a indicação de elementos visuais para você,
-todos os símbolos ligados neste circuito serão acesos.
+    <value>Quando o Logic Circuit realizar a indicação de elementos visuais
+para você, todos os símbolos ligados neste circuito serão acesos.
 Os dispositivos displays são: LED, Matriz de LED, Botão
 ou outro circuito lógico que indique elementos visuais.</value>
   </data>
@@ -1297,7 +1297,10 @@ ou outro circuito lógico que indique elementos visuais.</value>
     <value>Digite o número mínimo de ciclos antes que o sensor mudar sua medida.</value>
   </data>
   <data name="ToolTipSeriesData" xml:space="preserve">
-    <value>Por favor, forneça a medidas do sendor aqui &lt;cycle&gt;:&lt;value&gt; sendo que  ciclo e valor devem ser ambos hexadecimal. Quando for colocado somente um número ou 0, isso significa que o contador começara do 0 e irá para 1.</value>
+    <value>Por favor, forneça a medidas do sendor aqui &lt;cycle&gt;:&lt;value&gt;
+sendo que  ciclo e valor devem ser ambos hexadecimal.
+Quando for colocado somente um número ou 0, isso
+significa que o contador começara do 0 e irá para 1.</value>
   </data>
   <data name="NameSound" xml:space="preserve">
     <value>Campainha</value>
@@ -1318,24 +1321,40 @@ ou outro circuito lógico que indique elementos visuais.</value>
     <value>_O que procurar:</value>
   </data>
   <data name="ToolTipDescriptorPin" xml:space="preserve">
-    <value>Usado para criar um conector que outro circuito pode usar para fornecer ou receber dados para e a partir do circuito atual. Reorganize os pinos do circuito para mudar sua posições relativas aos simbolos dese circuito.</value>
+    <value>Usado para criar um conector que outro circuito pode usar para
+fornecer ou receber dados para e a partir do circuito atual.
+Reorganize os pinos do circuito para mudar sua posições
+relativas aos simbolos dese circuito.</value>
   </data>
   <data name="ToolTipDescriptorProbe" xml:space="preserve">
-    <value>Adiciona e conecta sondas nos seus circuitos para observar o estado atual ligado à sonda, o histórco de valores quando dá dois clique ou ou visualiza od dados no ociloscópio.</value>
+    <value>Adiciona e conecta sondas nos seus circuitos para
+observar o estado atual ligado à sonda,
+o histórco de valores quando dá dois clique ou ou
+visualiza od dados no ociloscópio.</value>
   </data>
   <data name="ToolTipDescriptorSensor" xml:space="preserve">
-    <value>Fornece dados de fontes extenas como sequencias predefinidas, escolha aleatória ou entrada manual de valores</value>
+    <value>Fornece dados de fontes extenas como
+sequencias predefinidas, escolha
+aleatória ou entrada manual de valores.</value>
   </data>
   <data name="ToolTipDescriptorSplitter" xml:space="preserve">
-    <value>Permite para criar conjuntos de fios ou
-separá-lo em fios individuais.
-Uso de pinos de bits múltiplos e divisores pode simplificar significativamente o desenho e a compreensão do circuito</value>
+    <value>Permite para criar conjuntos de fios
+ou separá-lo em fios individuais.
+Uso de pinos de bits múltiplos e
+divisores pode simplificar significativamente
+o desenho e a compreensão do circuito.</value>
   </data>
   <data name="ToolTipDescriptorText" xml:space="preserve">
-    <value>Coloque notas em qualquer lugar do diagrama para comentar seu circuito, fonecer links ara quallquer site e decorar com imagens.</value>
+    <value>Coloque notas em qualquer lugar do diagrama
+para comentar seu circuito, fonecer links
+ara quallquer site e decorar com imagens.</value>
   </data>
   <data name="ToolTipDescriptorTriState" xml:space="preserve">
-    <value>Pode haver 3 diferentes saídas: 1, 0 and high-impedance (Z). O estado de alta impedância não desempenha nenhuma função na lógica, que é estritamente binária. Estes dispositivos são utilizados nos barramentos da CPU para permitir que várias fontes enviem dados. Basicamente equivale a um multiplexador.</value>
+    <value>Pode haver 3 diferentes saídas: 1, 0 and high-impedance (Z).
+O estado de alta impedância não desempenha nenhuma função na
+lógica, que é estritamente binária. Estes dispositivos são
+utilizados nos barramentos da CPU para permitir que várias
+fontes enviem dados. Basicamente equivale a um multiplexador.</value>
   </data>
   <data name="ToolTipSensorManualValue" xml:space="preserve">
     <value>Digite o valor hexadecimal e pressione Enter.</value>
@@ -1407,7 +1426,8 @@ Permite selecionar o tamanho e profundidade/esquema de cor:
     <value>Encontrar Circuito</value>
   </data>
   <data name="ToolTipDescriptorClock" xml:space="preserve">
-    <value>Gera sinais que oscilam entre 0 e 1. E são usados para coordenar as ações do circuito.</value>
+    <value>Gera sinais que oscilam entre 0 e 1. E são
+usados para coordenar as ações do circuito.</value>
   </data>
   <data name="NameGraphicsArray" xml:space="preserve">
     <value>Graphics Array</value>
