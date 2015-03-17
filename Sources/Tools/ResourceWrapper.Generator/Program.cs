@@ -18,8 +18,8 @@ namespace ResourceWrapper.Generator {
 				bool printHelp = false;
 
 				CommandLine commandLine = new CommandLine()
-					.AddString("Project", "p", "Path to project file (.csproj)", true, p => projectPath = p)
-					.AddString("Pseudo", null, "Fully qualified name of resource wrapper class to pseudo localize", false, l => pseudo.Add(l))
+					.AddString("Project", "p", "<filePath>", "Path to project file (.csproj)", true, p => projectPath = p)
+					.AddString("Pseudo", null, "<class name>", "Fully qualified name of resource wrapper class to pseudo localize", false, l => pseudo.Add(l))
 					.AddFlag("Optional", "o", "Optional parameter declaration. Set this flag during conversion existing project for the time of conversion", false, o => optionalParameterDeclaration = o)
 					.AddFlag("FlowDirection", null, "Turns on generation of FlowDirection property", false, f => flowDirection = f)
 					.AddFlag("Help", "?", "Print help", false, h => printHelp = h)
@@ -58,7 +58,7 @@ namespace ResourceWrapper.Generator {
 		private static void Usage(string help) {
 			string name = Process.GetCurrentProcess().ProcessName;
 			Message.Write("{0}: Generates strong typed wrappers for managed resources.", name);
-			Message.Write("Usage: {0} /Project $(ProjectPath) [Pseudo=ResourceName]* [Options]", name);
+			Message.Write("Usage: {0} Options", name);
 			Message.Write("");
 			Message.Write("Options:");
 			Message.Write(help);

@@ -13,13 +13,13 @@ namespace ItemWrapper.Generator {
 				Generator generator = new Generator();
 				generator.RealmType = RealmType.Universe;
 				CommandLine commandLine = new CommandLine()
-					.AddString("Schema", "s", "Path to database schema definition file", true, value => {
+					.AddString("Schema", "s", "<filePath>", "Path to database schema definition file", true, value => {
 						if(generator.SchemaPath != null) {
 							throw new Usage(TextMessage.ArgumentRedefinition("Schema"));
 						}
 						generator.SchemaPath = value;
 					})
-					.AddString("Target", "t", "Path to destination folder", true, value => {
+					.AddString("Target", "t", "<dir>", "Path to destination folder", true, value => {
 						if(generator.TargetFolder != null) {
 							throw new Usage(TextMessage.ArgumentRedefinition("Target"));
 						}

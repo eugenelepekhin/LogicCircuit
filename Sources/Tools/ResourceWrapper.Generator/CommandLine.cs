@@ -32,12 +32,13 @@ namespace CommandLineParser {
 		/// </summary>
 		/// <param name="name">Full name of the parameter</param>
 		/// <param name="alias">Short name of the parameter</param>
+		/// <param name="value">Help text that will represent the value passed to the parameter</param>
 		/// <param name="note">Help text for the parameter</param>
 		/// <param name="required">True if the parameter is mandatory</param>
 		/// <param name="assign">Method to assign flag parameter back to the application variable</param>
 		/// <returns>Returns this reference</returns>
-		public CommandLine AddString(string name, string alias, string note, bool required, Action<string> assign) {
-			this.parameterList.Add(new ParameterString(name, alias, note, required, assign));
+		public CommandLine AddString(string name, string alias, string value, string note, bool required, Action<string> assign) {
+			this.parameterList.Add(new ParameterString(name, alias, value, note, required, assign));
 			return this;
 		}
 
@@ -111,11 +112,11 @@ namespace CommandLineParser {
 		/// <returns>Constructed help string</returns>
 		public string Help() {
 			this.parameterList.EnsureDefined();
-			Func<Parameter, string> required = parameter => parameter.Required ? " required" : string.Empty;
+			Func<Parameter, string> value = parameter => parameter.Value != null ? " " + parameter.Value : string.Empty;
 			Func<Parameter, string> format = parameter =>
 				(parameter.Alias == null)
-				? string.Format("/{0}{1}", parameter.Name, required(parameter))
-				: string.Format("/{0} ({1}){2}", parameter.Name, parameter.Alias, required(parameter))
+				? string.Format("/{0}{1}", parameter.Name, value(parameter))
+				: string.Format("/{0} -{1}{2}", parameter.Alias, parameter.Name, value(parameter))
 			;
 			int width = this.parameterList.Select(parameter => format(parameter).Length).Max();
 			StringBuilder text = new StringBuilder();
@@ -124,6 +125,9 @@ namespace CommandLineParser {
 				text.Append(help);
 				text.Append(' ', width - help.Length);
 				text.Append(" - ");
+				if(parameter.Required) {
+					text.Append("required: ");
+				}
 				text.AppendLine(parameter.Note);
 			});
 			return text.ToString();
@@ -132,18 +136,21 @@ namespace CommandLineParser {
 		private abstract class Parameter {
 			public string Name { get; private set; }
 			public string Alias { get; private set; }
+			public string Value { get; private set; }
 			public string Note { get; private set; }
 			public bool Required { get; private set; }
 			public bool HasValue { get; set; }
 
-			protected Parameter(string name, string alias, string note, bool required) {
+			protected Parameter(string name, string alias, string value, string note, bool required) {
 				Debug.Assert(!string.IsNullOrWhiteSpace(name) && name == name.Trim(), "Invalid parameter name: " + name);
 				Debug.Assert(alias == null || (alias == alias.Trim() && 0 < alias.Length), "Invalid parameter alias: " + alias);
 				Debug.Assert(alias != name, "alias == name for parameter " + name);
+				Debug.Assert(value == null || (value == value.Trim() && 0 < value.Length), "Invalid parameter value: " + value);
 				Debug.Assert(!string.IsNullOrWhiteSpace(note) && note == note.Trim(), "Invalid parameter note: " + note);
 
 				this.Name = name;
 				this.Alias = alias;
+				this.Value = value;
 				this.Note = note;
 				this.Required = required;
 			}
@@ -187,7 +194,7 @@ namespace CommandLineParser {
 		private abstract class Parameter<T> : Parameter {
 			private readonly Action<T> assign;
 
-			protected Parameter(string name, string alias, string note, bool required, Action<T> assign) : base(name, alias, note, required) {
+			protected Parameter(string name, string alias, string value, string note, bool required, Action<T> assign) : base(name, alias, value, note, required) {
 				Debug.Assert(assign != null, "Assign parameter is missing");
 				this.assign = assign;
 			}
@@ -200,7 +207,7 @@ namespace CommandLineParser {
 		}
 
 		private sealed class ParameterFlag : Parameter<bool> {
-			public ParameterFlag(string name, string alias, string note, bool required, Action<bool> assign) : base(name, alias, note, required, assign) {
+			public ParameterFlag(string name, string alias, string note, bool required, Action<bool> assign) : base(name, alias, null, note, required, assign) {
 			}
 
 			public override string SetValue(string value) {
@@ -236,7 +243,7 @@ namespace CommandLineParser {
 		}
 
 		private sealed class ParameterString : Parameter<string> {
-			public ParameterString(string name, string alias, string note, bool required, Action<string> assign) : base(name, alias, note, required, assign) {
+			public ParameterString(string name, string alias, string value, string note, bool required, Action<string> assign) : base(name, alias, value, note, required, assign) {
 			}
 
 			public override string SetValue(string value) {
