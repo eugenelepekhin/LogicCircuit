@@ -76,71 +76,71 @@ namespace LogicCircuit {
 		/// <summary>
 		/// Looks up a localized string similar to content of the file: "convertfrom.1.0.0.2.xslt".
 		/// </summary>
- 		public static string ConvertFrom_1_0_0_2 {
-			get { return ResourceManager.GetString("ConvertFrom_1_0_0_2", Culture); }
+ 		public static System.String ConvertFrom_1_0_0_2 {
+			get { return (System.String)ResourceManager.GetObject("ConvertFrom_1_0_0_2", Culture); }
 		}
 
 		/// <summary>
 		/// Looks up a localized string similar to content of the file: "convertfrom.1.0.0.3.xslt".
 		/// </summary>
- 		public static string ConvertFrom_1_0_0_3 {
-			get { return ResourceManager.GetString("ConvertFrom_1_0_0_3", Culture); }
+ 		public static System.String ConvertFrom_1_0_0_3 {
+			get { return (System.String)ResourceManager.GetObject("ConvertFrom_1_0_0_3", Culture); }
 		}
 
 		/// <summary>
 		/// Looks up a localized string similar to content of the file: "convertfrom.2.0.0.1.xslt".
 		/// </summary>
- 		public static string ConvertFrom_2_0_0_1 {
-			get { return ResourceManager.GetString("ConvertFrom_2_0_0_1", Culture); }
+ 		public static System.String ConvertFrom_2_0_0_1 {
+			get { return (System.String)ResourceManager.GetObject("ConvertFrom_2_0_0_1", Culture); }
 		}
 
 		/// <summary>
 		/// Looks up a localized string similar to content of the file: "convertfrom.2.0.0.2.xslt".
 		/// </summary>
- 		public static string ConvertFrom_2_0_0_2 {
-			get { return ResourceManager.GetString("ConvertFrom_2_0_0_2", Culture); }
+ 		public static System.String ConvertFrom_2_0_0_2 {
+			get { return (System.String)ResourceManager.GetObject("ConvertFrom_2_0_0_2", Culture); }
 		}
 
 		/// <summary>
 		/// Looks up a localized string similar to content of the file: "convertfrom.2.0.0.3.xslt".
 		/// </summary>
- 		public static string ConvertFrom_2_0_0_3 {
-			get { return ResourceManager.GetString("ConvertFrom_2_0_0_3", Culture); }
+ 		public static System.String ConvertFrom_2_0_0_3 {
+			get { return (System.String)ResourceManager.GetObject("ConvertFrom_2_0_0_3", Culture); }
 		}
 
 		/// <summary>
 		/// Looks up a localized string similar to content of the file: "convertfrom.2.0.0.4.xslt".
 		/// </summary>
- 		public static string ConvertFrom_2_0_0_4 {
-			get { return ResourceManager.GetString("ConvertFrom_2_0_0_4", Culture); }
+ 		public static System.String ConvertFrom_2_0_0_4 {
+			get { return (System.String)ResourceManager.GetObject("ConvertFrom_2_0_0_4", Culture); }
 		}
 
 		/// <summary>
 		/// Looks up a localized string similar to content of the file: "convertfrom.2.0.0.5.xslt".
 		/// </summary>
- 		public static string ConvertFrom_2_0_0_5 {
-			get { return ResourceManager.GetString("ConvertFrom_2_0_0_5", Culture); }
+ 		public static System.String ConvertFrom_2_0_0_5 {
+			get { return (System.String)ResourceManager.GetObject("ConvertFrom_2_0_0_5", Culture); }
 		}
 
 		/// <summary>
 		/// Looks up a localized string similar to content of the file: "convertfrom.2.0.0.6.xslt".
 		/// </summary>
- 		public static string ConvertFrom_2_0_0_6 {
-			get { return ResourceManager.GetString("ConvertFrom_2_0_0_6", Culture); }
+ 		public static System.String ConvertFrom_2_0_0_6 {
+			get { return (System.String)ResourceManager.GetObject("ConvertFrom_2_0_0_6", Culture); }
 		}
 
 		/// <summary>
 		/// Looks up a localized string similar to content of the file: "convertsettings.xslt".
 		/// </summary>
- 		public static string ConvertSettings {
-			get { return ResourceManager.GetString("ConvertSettings", Culture); }
+ 		public static System.String ConvertSettings {
+			get { return (System.String)ResourceManager.GetObject("ConvertSettings", Culture); }
 		}
 
 		/// <summary>
 		/// Looks up a localized string similar to content of the file: "empty.xml".
 		/// </summary>
- 		public static string Empty {
-			get { return ResourceManager.GetString("Empty", Culture); }
+ 		public static System.String Empty {
+			get { return (System.String)ResourceManager.GetObject("Empty", Culture); }
 		}
 	}
 }

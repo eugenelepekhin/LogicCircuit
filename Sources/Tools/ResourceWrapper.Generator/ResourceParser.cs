@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -16,7 +15,7 @@ namespace ResourceWrapper.Generator {
 	/// If there are formating parameters comment should declare parameters of formating function: {type1 parameter1, type2 parameter2, ... typeM parameterM}
 	/// </summary>
 	internal class ResourceParser {
-		public static IEnumerable<ResourceItem> Parse(string file, bool enforceParameterDeclaration, IEnumerable<string> satelites) {
+		public static IEnumerable<ResourceItem> Parse(string file, bool enforceParameterDeclaration, IEnumerable<string> satelites, out int errors, out int warnings) {
 			XmlDocument resource = new XmlDocument();
 			resource.Load(file);
 			XmlNodeList nodeList = ResourceParser.SelectResources(resource);
@@ -31,13 +30,23 @@ namespace ResourceWrapper.Generator {
 				if(parser.errorCount == 0 && parser.satelites != null) {
 					parser.VerifySatelites(list);
 				}
+				errors = parser.errorCount;
+				warnings = parser.warningCount;
 				if(parser.errorCount == 0) {
 					return list;
 				} else {
 					return null;
 				}
 			}
+			errors = 0;
+			warnings = 0;
 			return Enumerable.Empty<ResourceItem>();
+		}
+
+		public static IEnumerable<ResourceItem> Parse(string file, bool enforceParameterDeclaration, IEnumerable<string> satelites) {
+			int errors;
+			int warnings;
+			return ResourceParser.Parse(file, enforceParameterDeclaration, satelites, out errors, out warnings);
 		}
 
 		private static XmlNodeList SelectResources(XmlDocument resource) {
@@ -97,22 +106,32 @@ namespace ResourceWrapper.Generator {
 			Dictionary<string, ResourceItem> items = new Dictionary<string,ResourceItem>(itemList.Count);
 			itemList.ForEach(i => items.Add(i.Name, i));
 			string mainFile = this.fileName;
+			Action<string> unknownResource = name => this.Warning(name, "resource does not exist in the main resource file \"{0}\"", mainFile);
 			foreach(string file in this.satelites) {
 				XmlDocument resource = new XmlDocument();
 				resource.Load(file);
 				XmlNodeList nodeList = ResourceParser.SelectResources(resource);
 				if(nodeList != null && 0 < nodeList.Count) {
 					this.fileName = file;
-					this.Parse(nodeList, (a, b, c) => {},
+					this.Parse(nodeList,
+						(string name, string value, string comment) => {
+							ResourceItem item;
+							if(items.TryGetValue(name, out item)) {
+								ResourceItem satellite = this.GenerateInclude(name, value, comment);
+								if(item.Type != satellite.Type) {
+									this.Error(name, "type of file resource is different in main resource file \"{0}\" and language resource file \"{1}\"", mainFile, file);
+								}
+							} else {
+								unknownResource(name);
+							}
+						},
 						(string name, string value, string comment) => {
 							ResourceItem item;
 							if(items.TryGetValue(name, out item)) {
 								if(!item.SuppressValidation) {
 									int count = this.ValidateFormatItems(name, value, false);
-									if(item.Parameters != null) {
-										if(count != item.Parameters.Count) {
-											this.Warning(name, "number of parameters is different from the same resource in the main resource file \"{0}\"", mainFile);
-										}
+									if(count != (item.Parameters == null ? 0 : item.Parameters.Count)) {
+										this.Warning(name, "number of parameters is different from the same resource in the main resource file \"{0}\"", mainFile);
 									} else if(item.LocalizationVariants != null) {
 										if(!item.LocalizationVariants.Contains(value)) {
 											this.Error(name, "provided value is not in variant list defined in main resource file: \"{0}\"", mainFile);
@@ -120,7 +139,7 @@ namespace ResourceWrapper.Generator {
 									}
 								}
 							} else {
-								this.Warning(name, "resource does not exist in the main resource file \"{0}\"", mainFile);
+								unknownResource(name);
 							}
 						}
 					);
@@ -163,14 +182,13 @@ namespace ResourceWrapper.Generator {
 				return null;
 			}
 			string type = list[0].Trim();
-			if(type == "System.String") {
-				return this.GenerateString(name, this.Format("content of the file: \"{0}\"", file), comment);
+			if(0 == this.errorCount) {
+				if(type == "System.String") {
+					file = this.Format("content of the file: \"{0}\"", file);
+				}
+				return new ResourceItem(name, file, type);
 			}
-			return this.GenerateObjectProperty(name, file, type);
-		}
-
-		private ResourceItem GenerateObjectProperty(string name, string file, string type) {
-			return (0 == this.errorCount) ? new ResourceItem(name, file, type) : null;
+			return null;
 		}
 
 		private ResourceItem GenerateString(string name, string value, string comment) {
@@ -178,7 +196,7 @@ namespace ResourceWrapper.Generator {
 
 			if(!comment.StartsWith("-")) {
 				if(!this.IsVariantList(item, value, comment)) {
-					this.ParseFormatList(item, value, comment);
+					this.ParseFormatParameters(item, value, comment);
 				}
 			} else {
 				item.SuppressValidation = true;
@@ -207,7 +225,7 @@ namespace ResourceWrapper.Generator {
 			return match.Success;
 		}
 
-		private void ParseFormatList(ResourceItem item, string value, string comment) {
+		private void ParseFormatParameters(ResourceItem item, string value, string comment) {
 			int count = this.ValidateFormatItems(item.Name, value, true);
 			if(0 < count) {
 				Match paramsMatch = this.functionParameters.Match(comment);
@@ -239,6 +257,13 @@ namespace ResourceWrapper.Generator {
 			}
 		}
 
+		/// <summary>
+		/// Validates format string in a manner very close to what string.Format do.
+		/// </summary>
+		/// <param name="name"></param>
+		/// <param name="value"></param>
+		/// <param name="requareAllParameters"></param>
+		/// <returns></returns>
 		private int ValidateFormatItems(string name, string value, bool requareAllParameters) {
 			Func<int> error = () => {
 				this.Error(name, "Invalid formating item.");
@@ -258,6 +283,7 @@ namespace ResourceWrapper.Generator {
 						continue; // skip escaped {
 					}
 					// Formating item is started
+					// First is parameter number. Spaces are not allowed in front or it.
 					bool isNumber = false;
 					int index = 0;
 					while(i < value.Length && '0' <= value[i] && value[i] <= '9' && index < 1000000) {
@@ -269,9 +295,11 @@ namespace ResourceWrapper.Generator {
 						return error();
 					}
 					indexes.Add(index);
+					//Skip spaces
 					while(i < value.Length && ' ' == value[i]) {
 						i++;
 					}
+					//Check for alignment
 					if(i < value.Length && ',' == value[i]) {
 						i++;
 						while(i < value.Length && ' ' == value[i]) {
@@ -283,6 +311,7 @@ namespace ResourceWrapper.Generator {
 						isNumber = false;
 						index = 0;
 						while(i < value.Length && '0' <= value[i] && value[i] <= '9' && index < 1000000) {
+							index = index * 10 + value[i] - '0';
 							isNumber = true;
 							i++;
 						}
@@ -290,9 +319,11 @@ namespace ResourceWrapper.Generator {
 							return error();
 						}
 					}
+					//Skip spaces
 					while(i < value.Length && ' ' == value[i]) {
 						i++;
 					}
+					//Check for format string.
 					if(i < value.Length && ':' == value[i]) {
 						// Inside format string. It is allowed to have escaped open and closed braces, so skip them until single }
 						for(;;) {
@@ -318,6 +349,7 @@ namespace ResourceWrapper.Generator {
 					}
 				}
 			}
+			// Check that all format parameters are present.
 			int current = 0;
 			foreach(int index in indexes.OrderBy(i => i)) {
 				if(index != current++) {

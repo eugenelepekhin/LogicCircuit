@@ -9,8 +9,17 @@ namespace ResourceWrapper.Generator {
 		public string Name { get; private set; }
 		public string Value { get; private set; }
 		public string Type { get; private set; }
+		/// <summary>
+		/// List of parameters if format placeholders are present, null otherwise.
+		/// </summary>
 		public List<Parameter> Parameters { get; set; }
+		/// <summary>
+		/// List of variant acceptable for this resource if it specified like: !(one, two, three) null otherwise.
+		/// </summary>
 		public List<string> LocalizationVariants { get; set; }
+		/// <summary>
+		/// True if minus was in the first character of comment to suppress validation of satellites.
+		/// </summary>
 		public bool SuppressValidation { get; set; }
 
 		public ResourceItem(string name, string value, string type) {
@@ -19,6 +28,10 @@ namespace ResourceWrapper.Generator {
 			this.Type = type;
 		}
 
+		/// <summary>
+		/// Creates comment string as it should appear in generated wrapper.
+		/// </summary>
+		/// <returns></returns>
 		public string Comment() {
 			string[] line = this.Value.Split('\n', '\r');
 			if(line != null && line.Length > 0) {
@@ -42,6 +55,10 @@ namespace ResourceWrapper.Generator {
 			return string.Empty;
 		}
 
+		/// <summary>
+		/// Creates parameter declaration for use in wrapper method for resource with format placeholders.
+		/// </summary>
+		/// <returns></returns>
 		public string ParametersDeclaration() {
 			Debug.Assert(this.Parameters != null, "There are no parameters");
 			StringBuilder parameter = new StringBuilder();
@@ -54,6 +71,10 @@ namespace ResourceWrapper.Generator {
 			return parameter.ToString();
 		}
 
+		/// <summary>
+		/// Creates string of parameter invocations inside of wrapper function body for resources with format placeholders.
+		/// </summary>
+		/// <returns></returns>
 		public string ParametersInvocation() {
 			Debug.Assert(this.Parameters != null, "There are no parameters");
 			StringBuilder parameter = new StringBuilder();
