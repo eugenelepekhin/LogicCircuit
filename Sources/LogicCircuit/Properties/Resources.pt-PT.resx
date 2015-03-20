@@ -355,7 +355,7 @@ Deseja guardá-lo?</value>
   </data>
   <data name="TitlePinInput" xml:space="preserve">
     <value>{0}
-Entrada</value>
+Ent.</value>
     <comment>{string pinName}</comment>
   </data>
   <data name="TitlePinOutput" xml:space="preserve">
