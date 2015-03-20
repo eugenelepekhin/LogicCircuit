@@ -66,6 +66,7 @@
 						</Style>
 					</WrapPanel.Resources>
 					
+					<TextBlock>Bruno Ramalhete</TextBlock>
 					<TextBlock>Clayrton Henrique</TextBlock>
 					<TextBlock>Daehyun Yang</TextBlock>
 					<TextBlock>Daniela Becker</TextBlock>
