@@ -102,6 +102,11 @@
 							<File Id="pt_BR" Source="$(var.LogicCircuit.TargetDir)pt-BR\$(var.LogicCircuit.TargetName).resources.dll"/>
 						</Component>
 					</Directory>
+					<Directory Id="pt_PT" Name="pt-PT">
+						<Component Id="pt_PTComponent">
+							<File Id="pt_PT" Source="$(var.LogicCircuit.TargetDir)pt-PT\$(var.LogicCircuit.TargetName).resources.dll"/>
+						</Component>
+					</Directory>
 					<Directory Id="ru_RU" Name="ru-RU">
 						<Component Id="ru_RUComponent">
 							<File Id="ru_RU" Source="$(var.LogicCircuit.TargetDir)ru-RU\$(var.LogicCircuit.TargetName).resources.dll"/>
@@ -145,6 +150,7 @@
 			<ComponentRef Id="ltComponent"/>
 			<ComponentRef Id="nlComponent"/>
 			<ComponentRef Id="pt_BRComponent"/>
+			<ComponentRef Id="pt_PTComponent"/>
 			<ComponentRef Id="ru_RUComponent"/>
 			<ComponentRef Id="uk_UAComponent"/>
 			<ComponentRef Id="zh_CHSComponent"/>
