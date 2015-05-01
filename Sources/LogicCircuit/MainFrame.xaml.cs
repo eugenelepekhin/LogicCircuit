@@ -123,6 +123,16 @@ namespace LogicCircuit {
 			versionThread.Name = "CheckVersion";
 			versionThread.Priority = ThreadPriority.BelowNormal;
 			versionThread.Start();
+
+			#if DEBUG && false
+				this.Loaded += (object sender, RoutedEventArgs e) => {
+					Menu menu = (Menu)((Grid)this.Content).Children[0];
+					string text = "Test";
+					menu.Items.Add(new MenuItem() { Header = text, Command = new LambdaUICommand(text, o => {
+						DialogMessage.Show(this, "hello", "world", "details", MessageBoxImage.Error, MessageBoxButton.OKCancel);
+					})});
+				};
+			#endif
 		}
 
 		protected override void OnClosing(System.ComponentModel.CancelEventArgs e) {
