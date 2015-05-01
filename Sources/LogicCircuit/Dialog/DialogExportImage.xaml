@@ -26,30 +26,19 @@
 		</Style>
 	</Window.Resources>
 
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="Auto"/>
-			<ColumnDefinition Width="*"/>
-		</Grid.ColumnDefinitions>
-
-		<TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="8"
+	<lc:AutoGrid>
+		<TextBlock Grid.ColumnSpan="2" Margin="8"
 			Text="{x:Static properties:Resources.MessageExportImageDialog}"
 		/>
 
-		<Label Grid.Row="1" Grid.Column="0" Content="{x:Static properties:Resources.TitleType}" Target="{Binding ElementName=imageType}"/>
-		<ComboBox Grid.Row="1" Grid.Column="1" Name="imageType"
+		<Label Content="{x:Static properties:Resources.TitleType}" Target="{Binding ElementName=imageType}"/>
+		<ComboBox Name="imageType"
 			ItemsSource="{Binding Path=Encoders}" SelectedItem="{Binding Path=Encoder, Mode=TwoWay}"
 			SelectionChanged="ImageTypeSelectionChanged"
 		/>
 
-		<Label Grid.Row="2" Grid.Column="0" Content="{x:Static properties:Resources.TitleFile}" Target="{Binding ElementName=fileName}"/>
-		<StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Stretch">
+		<Label Content="{x:Static properties:Resources.TitleFile}" Target="{Binding ElementName=fileName}"/>
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
 			<TextBox Name="fileName" HorizontalAlignment="Stretch" MinWidth="420" VerticalAlignment="Center"
 				Text="{Binding Path=FilePath, Mode=TwoWay}"
 			/>
@@ -58,9 +47,9 @@
 			/>
 		</StackPanel>
 
-		<StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+		<StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
 			<Button Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" Click="ButtonOkClick"/>
 			<Button Content="{x:Static properties:Resources.TitleCancel}" IsCancel="True"/>
 		</StackPanel>
-	</Grid>
+	</lc:AutoGrid>
 </Window>
