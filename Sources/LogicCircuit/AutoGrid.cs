@@ -125,7 +125,7 @@ namespace LogicCircuit {
 		}
 
 		private void UpdateRowHeight(DependencyObject child) {
-			object objHeight = child.GetValue(AutoGrid.RowHeightProperty);
+			object objHeight = child.ReadLocalValue(AutoGrid.RowHeightProperty);
 			if(AutoGrid.WasSet(objHeight)) {
 				GridLength rowHeight = (GridLength)objHeight;
 				RowDefinition row = this.RowDefinitions[(int)child.GetValue(Grid.RowProperty)];
@@ -135,7 +135,7 @@ namespace LogicCircuit {
 			} else {
 				TextBox textBox = child as TextBox;
 				if((textBox != null && textBox.AcceptsReturn && !(0 < textBox.Height || 1 < textBox.MinLines || textBox.MaxLines < int.MaxValue)) ||
-					child is GroupBox || child is ListBox
+					child is GroupBox || child is ListBox || child is ListView
 				) {
 					RowDefinition row = this.RowDefinitions[(int)child.GetValue(Grid.RowProperty)];
 					if(row.Height == GridLength.Auto) {
