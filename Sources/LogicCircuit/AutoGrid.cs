@@ -119,7 +119,7 @@ namespace LogicCircuit {
 		private void UpdateRowHeight(DependencyObject child) {
 			TextBox textBox = child as TextBox;
 			if((textBox != null && textBox.AcceptsReturn && !(0 < textBox.Height || 1 < textBox.MinLines || textBox.MaxLines < int.MaxValue)) ||
-				child is GroupBox
+				child is GroupBox || child is ListBox
 			) {
 				RowDefinition row = this.RowDefinitions[(int)child.GetValue(Grid.RowProperty)];
 				if(row.Height == GridLength.Auto) {
