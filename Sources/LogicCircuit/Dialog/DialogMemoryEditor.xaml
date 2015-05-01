@@ -41,49 +41,35 @@
 		<lc:DoubleAdderConverter x:Key="DoubleAdderConverter"/>
 	</Window.Resources>
 
-	<Grid Margin="3">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="Auto"/>
-			<ColumnDefinition Width="Auto"/>
-			<ColumnDefinition Width="*"/>
-		</Grid.ColumnDefinitions>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="Auto"/>
-		</Grid.RowDefinitions>
+	<lc:AutoGrid Margin="3">
+		<Label Content="{x:Static properties:Resources.TitleAddressBitWidth}" Target="{Binding ElementName=addressBitWidth}"/>
+		<ComboBox Name="addressBitWidth" SelectionChanged="MemorySizeChanged" ToolTip="{x:Static properties:Resources.ToolTipAddressBitWidth}" HorizontalAlignment="Left"/>
 
-		<Label Grid.Row="0" Grid.Column="0" Content="{x:Static properties:Resources.TitleAddressBitWidth}" Target="{Binding ElementName=addressBitWidth}"/>
-		<ComboBox Grid.Row="0" Grid.Column="1" Name="addressBitWidth" SelectionChanged="MemorySizeChanged" ToolTip="{x:Static properties:Resources.ToolTipAddressBitWidth}" HorizontalAlignment="Left"/>
+		<Label Content="{x:Static properties:Resources.TitleDataBitWidth}" Target="{Binding ElementName=dataBitWidth}"/>
+		<ComboBox Name="dataBitWidth" SelectionChanged="MemorySizeChanged" ToolTip="{x:Static properties:Resources.ToolTipDataBitWidth}" HorizontalAlignment="Left"/>
 
-		<Label Grid.Row="1" Grid.Column="0" Content="{x:Static properties:Resources.TitleDataBitWidth}" Target="{Binding ElementName=dataBitWidth}"/>
-		<ComboBox Grid.Row="1" Grid.Column="1" Name="dataBitWidth" SelectionChanged="MemorySizeChanged" ToolTip="{x:Static properties:Resources.ToolTipDataBitWidth}" HorizontalAlignment="Left"/>
-
-		<StackPanel Grid.Row="2" Grid.Column="0" Style="{StaticResource ramOnly}">
+		<StackPanel Style="{StaticResource ramOnly}">
 			<Label Content="{x:Static properties:Resources.TitleWriteOn}" Target="{Binding ElementName=writeOn}"/>
 		</StackPanel>
-		<StackPanel Grid.Row="2" Grid.Column="1" Style="{StaticResource ramOnly}">
+		<StackPanel Style="{StaticResource ramOnly}">
 			<ComboBox Name="writeOn" ToolTip="{x:Static properties:Resources.ToolTipRamWriteOn}"/>
 		</StackPanel>
 
-		<StackPanel Grid.Row="3" Grid.Column="0" Style="{StaticResource ramOnly}">
+		<StackPanel Style="{StaticResource ramOnly}">
 			<Label Content="{x:Static properties:Resources.TitleMemoryOnStart}" Target="{Binding ElementName=onStart}"/>
 		</StackPanel>
-		<StackPanel Grid.Row="3" Grid.Column="1" Style="{StaticResource ramOnly}">
+		<StackPanel Style="{StaticResource ramOnly}">
 			<Canvas Visibility="Hidden">
 				<ListBox Name="onStartList" HorizontalAlignment="Left" Padding="10,0"
 					ItemsSource="{Binding ElementName=onStart, Path=ItemsSource}"
 				/>
 			</Canvas>
-			<ComboBox Grid.Row="3" Grid.Column="1" Name="onStart" HorizontalAlignment="Left"
+			<ComboBox Name="onStart" HorizontalAlignment="Left"
 				Width="{Binding ElementName=onStartList, Path=ActualWidth}" ToolTip="{x:Static properties:Resources.ToolTipMemoryOnStart}"
 			/>
 		</StackPanel>
 
-		<Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Name="splitGrid">
+		<Grid Grid.ColumnSpan="2" lc:AutoGrid.RowHeight="*" Name="splitGrid">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="{Binding Path=DataHeight.Value, Mode=TwoWay}"/>
 				<RowDefinition Height="Auto"/>
@@ -243,14 +229,14 @@
 			</GroupBox>
 		</Grid>
 
-		<StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" VerticalAlignment="Bottom" Style="{StaticResource dataAllowed}">
+		<StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Style="{StaticResource dataAllowed}">
 			<Button Content="{x:Static properties:Resources.TitleLoad}" Click="ButtonLoadClick" ToolTip="{x:Static properties:Resources.ToolTipLoadData}"/>
 			<Button Content="{x:Static properties:Resources.TitleSaveAs}" Click="ButtonSaveClick" ToolTip="{x:Static properties:Resources.ToolTipSaveData}"/>
 		</StackPanel>
 
-		<StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
 			<Button Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" Click="ButtonOkClick"/>
 			<Button Content="{x:Static properties:Resources.TitleCancel}" IsCancel="True"/>
 		</StackPanel>
-	</Grid>
+	</lc:AutoGrid>
 </Window>

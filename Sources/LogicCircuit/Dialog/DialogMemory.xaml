@@ -8,14 +8,8 @@
 	Style="{StaticResource DialogWindow}"
 	MinWidth="480" MinHeight="240"
 >
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="Auto"/>
-		</Grid.RowDefinitions>
-
-		<StackPanel Grid.Row="0" Orientation="Horizontal" Margin="3">
+	<lc:AutoGrid ColumnWidths="*">
+		<StackPanel Orientation="Horizontal" Margin="3">
 			<StackPanel.Resources>
 				<Style TargetType="TextBlock">
 					<Setter Property="VerticalAlignment" Value="Center"/>
@@ -28,7 +22,7 @@
 			<TextBlock Text="{Binding Path=DataBitWidth}"/>
 		</StackPanel>
 
-		<GroupBox Grid.Row="1" Header="{x:Static properties:Resources.TitleData}" Margin="3">
+		<GroupBox Header="{x:Static properties:Resources.TitleData}" Margin="3">
 			<ListView ItemsSource="{Binding Path=Rows}">
 				<ListView.View>
 					<GridView AllowsColumnReorder="False">
@@ -95,6 +89,6 @@
 			</ListView>
 		</GroupBox>
 
-		<Button Grid.Row="2" Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" IsCancel="True" HorizontalAlignment="Right"/>
-	</Grid>
+		<Button Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" IsCancel="True" HorizontalAlignment="Right"/>
+	</lc:AutoGrid>
 </Window>

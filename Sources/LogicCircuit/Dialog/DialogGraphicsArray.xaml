@@ -37,24 +37,9 @@
 		</ControlTemplate>
 	</Window.Resources>
 
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="Auto"/>
-		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="Auto"/>
-			<ColumnDefinition Width="*"/>
-		</Grid.ColumnDefinitions>
-
-		<Label Grid.Row="0" Grid.Column="0" Content="{x:Static properties:Resources.TitleWriteOn}" Target="{Binding ElementName=writeOn}"/>
-		<StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
+	<lc:AutoGrid>
+		<Label Content="{x:Static properties:Resources.TitleWriteOn}" Target="{Binding ElementName=writeOn}"/>
+		<StackPanel Orientation="Vertical">
 			<Canvas Visibility="Hidden">
 				<ListBox Name="writeOnList" HorizontalAlignment="Left" Padding="10,0"
 					ItemsSource="{Binding ElementName=writeOn, Path=ItemsSource}"
@@ -67,8 +52,8 @@
 			/>
 		</StackPanel>
 
-		<Label Grid.Row="1" Grid.Column="0" Content="{x:Static properties:Resources.TitleMemoryOnStart}" Target="{Binding ElementName=onStart}"/>
-		<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical">
+		<Label Content="{x:Static properties:Resources.TitleMemoryOnStart}" Target="{Binding ElementName=onStart}"/>
+		<StackPanel Orientation="Vertical">
 			<Canvas Visibility="Hidden">
 				<ListBox Name="onStartList" HorizontalAlignment="Left" Padding="10,0"
 					ItemsSource="{Binding ElementName=onStart, Path=ItemsSource}"
@@ -80,34 +65,34 @@
 			/>
 		</StackPanel>
 
-		<Label Grid.Row="2" Grid.Column="0" Content="{x:Static properties:Resources.TitleDataBitWidth}" Target="{Binding ElementName=dataBitWidth}"/>
-		<ComboBox Grid.Row="2" Grid.Column="1" Name="dataBitWidth" ToolTip="{x:Static properties:Resources.ToolTipDataBitWidth}" HorizontalAlignment="Left"/>
+		<Label Content="{x:Static properties:Resources.TitleDataBitWidth}" Target="{Binding ElementName=dataBitWidth}"/>
+		<ComboBox Name="dataBitWidth" ToolTip="{x:Static properties:Resources.ToolTipDataBitWidth}" HorizontalAlignment="Left"/>
 
-		<Label Grid.Row="3" Grid.Column="0" Content="{x:Static properties:Resources.TitleGraphicsArrayBPP}" Target="{Binding ElementName=bitsPerPixel}"/>
-		<ComboBox Grid.Row="3" Grid.Column="1" Name="bitsPerPixel" ToolTip="{x:Static properties:Resources.ToolTipGraphicsArrayBPP}" HorizontalAlignment="Left"/>
+		<Label Content="{x:Static properties:Resources.TitleGraphicsArrayBPP}" Target="{Binding ElementName=bitsPerPixel}"/>
+		<ComboBox Name="bitsPerPixel" ToolTip="{x:Static properties:Resources.ToolTipGraphicsArrayBPP}" HorizontalAlignment="Left"/>
 
-		<Label Grid.Row="4" Grid.Column="0" Content="{x:Static properties:Resources.TitleWidth}" Target="{Binding ElementName=width}"/>
-		<TextBox Grid.Row="4" Grid.Column="1" Name="width" Width="{Binding ElementName=dataBitWidth, Path=ActualWidth}" HorizontalAlignment="Left"
+		<Label Content="{x:Static properties:Resources.TitleWidth}" Target="{Binding ElementName=width}"/>
+		<TextBox Name="width" Width="{Binding ElementName=dataBitWidth, Path=ActualWidth}" HorizontalAlignment="Left"
 			Text="{Binding Path=GraphicsArrayWidth, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
 			Validation.ErrorTemplate="{StaticResource validationTemplate}"
 			ToolTip="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent, FallbackValue={x:Static properties:Resources.ToolTipGraphicsArrayWidth}}"
 		/>
 
-		<Label Grid.Row="5" Grid.Column="0" Content="{x:Static properties:Resources.TitleHeight}" Target="{Binding ElementName=height}"/>
-		<TextBox Grid.Row="5" Grid.Column="1" Name="height" Width="{Binding ElementName=dataBitWidth, Path=ActualWidth}" HorizontalAlignment="Left"
+		<Label Content="{x:Static properties:Resources.TitleHeight}" Target="{Binding ElementName=height}"/>
+		<TextBox Name="height" Width="{Binding ElementName=dataBitWidth, Path=ActualWidth}" HorizontalAlignment="Left"
 			Text="{Binding Path=GraphicsArrayHeight, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
 			Validation.ErrorTemplate="{StaticResource validationTemplate}"
 			ToolTip="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent, FallbackValue={x:Static properties:Resources.ToolTipGraphicsArrayHeight}}"
 		/>
 
-		<Label Grid.Row="6" Grid.Column="0" Content="{x:Static properties:Resources.TitleDescription}" Target="{Binding ElementName=note}"/>
-		<TextBox Grid.Row="6" Grid.Column="1" Name="note" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+		<Label Content="{x:Static properties:Resources.TitleDescription}" Target="{Binding ElementName=note}"/>
+		<TextBox Name="note" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
 			AcceptsReturn="True" AcceptsTab="True" SpellCheck.IsEnabled="True"
 		/>
 
-		<StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+		<StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
 			<Button Name="buttonOk" Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" Click="ButtonOkClick"/>
 			<Button Content="{x:Static properties:Resources.TitleCancel}" IsCancel="True"/>
 		</StackPanel>
-	</Grid>
+	</lc:AutoGrid>
 </Window>

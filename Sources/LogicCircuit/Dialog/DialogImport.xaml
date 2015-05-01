@@ -16,14 +16,9 @@
 			</CollectionViewSource.GroupDescriptions>
 		</CollectionViewSource>
 	</Window.Resources>
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="Auto"/>
-		</Grid.RowDefinitions>
 
-		<StackPanel Grid.Row="0" Orientation="Horizontal">
+	<lc:AutoGrid>
+		<StackPanel Grid.ColumnSpan="2" Orientation="Horizontal">
 			<StackPanel.Resources>
 				<Style TargetType="TextBlock">
 					<Setter Property="Margin" Value="5"/>
@@ -34,7 +29,7 @@
 			<TextBlock Text="{Binding Path=FileName, Mode=OneTime}" TextWrapping="Wrap"/>
 		</StackPanel>
 
-		<ListView Grid.Row="1" Name="listView" ItemsSource="{Binding Source={StaticResource circuitInfoList}}" Margin="3">
+		<ListView Grid.ColumnSpan="2" Name="listView" ItemsSource="{Binding Source={StaticResource circuitInfoList}}" Margin="3">
 			<ListView.GroupStyle>
 				<GroupStyle ContainerStyle="{StaticResource CircuitDescriptorGroup}"/>
 			</ListView.GroupStyle>
@@ -77,32 +72,24 @@
 			</ListView.Style>
 		</ListView>
 
-		<Grid Grid.Row="2">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="Auto"/>
-			</Grid.ColumnDefinitions>
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+			<Button Content="{x:Static properties:Resources.TitleCheckAll}" Click="ButtonCheckAllClick"/>
+			<Button Content="{x:Static properties:Resources.TitleUncheckAll}" Click="ButtonUncheckAllClick"/>
+		</StackPanel>
 
-			<StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom">
-				<Button Content="{x:Static properties:Resources.TitleCheckAll}" Click="ButtonCheckAllClick"/>
-				<Button Content="{x:Static properties:Resources.TitleUncheckAll}" Click="ButtonUncheckAllClick"/>
-			</StackPanel>
-
-			<StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-				<Button Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" Click="ButtonOkClick">
-					<Button.Style>
-						<Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-							<Style.Triggers>
-								<DataTrigger Binding="{Binding Path=List}" Value="{x:Null}">
-									<Setter Property="IsEnabled" Value="False"/>
-								</DataTrigger>
-							</Style.Triggers>
-						</Style>
-					</Button.Style>
-				</Button>
-				<Button Content="{x:Static properties:Resources.TitleCancel}" IsCancel="True"/>
-			</StackPanel>
-		</Grid>
-	</Grid>
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+			<Button Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" Click="ButtonOkClick">
+				<Button.Style>
+					<Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+						<Style.Triggers>
+							<DataTrigger Binding="{Binding Path=List}" Value="{x:Null}">
+								<Setter Property="IsEnabled" Value="False"/>
+							</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</Button.Style>
+			</Button>
+			<Button Content="{x:Static properties:Resources.TitleCancel}" IsCancel="True"/>
+		</StackPanel>
+	</lc:AutoGrid>
 </Window>

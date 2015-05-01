@@ -21,35 +21,24 @@
 		</Style>
 	</Window.Resources>
 
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="Auto"/>
-		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="Auto"/>
-			<ColumnDefinition Width="*"/>
-		</Grid.ColumnDefinitions>
-
-		<Label Grid.Row="0" Grid.Column="0" Content="{x:Static properties:Resources.TitleText}" Target="{Binding ElementName=hyperlinkText}"/>
-		<TextBox Grid.Row="0" Grid.Column="1" Name="hyperlinkText"
+	<lc:AutoGrid>
+		<Label Content="{x:Static properties:Resources.TitleText}" Target="{Binding ElementName=hyperlinkText}"/>
+		<TextBox Name="hyperlinkText"
 			Text="{Binding Path=HyperlinkText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
 		/>
 
-		<Label Grid.Row="1" Grid.Column="0" Content="{x:Static properties:Resources.TitleHyperlink}" Target="{Binding ElementName=hyperlinkUrl}"/>
-		<TextBox Grid.Row="1" Grid.Column="1" Name="hyperlinkUrl"
+		<Label Content="{x:Static properties:Resources.TitleHyperlink}" Target="{Binding ElementName=hyperlinkUrl}"/>
+		<TextBox Name="hyperlinkUrl"
 			Text="{Binding Path=HyperlinkUrl, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
 		/>
 
-		<TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Path=Error}" HorizontalAlignment="Center" VerticalAlignment="Center"
+		<TextBlock Grid.ColumnSpan="2" lc:AutoGrid.RowHeight="*" Text="{Binding Path=Error}" HorizontalAlignment="Center" VerticalAlignment="Center"
 			FontSize="12" FontWeight="Bold"
 		/>
 
-		<StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+		<StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
 			<Button Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" Click="ButtonOkClick" IsEnabled="{Binding Path=IsValidHyperlink}"/>
 			<Button Content="{x:Static properties:Resources.TitleCancel}" IsCancel="True"/>
 		</StackPanel>
-	</Grid>
+	</lc:AutoGrid>
 </Window>

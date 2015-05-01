@@ -35,51 +35,39 @@
 		</Style>
 	</Window.Resources>
 
-	<Grid Margin="3">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="Auto"/>
-		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="Auto"/>
-			<ColumnDefinition Width="*"/>
-		</Grid.ColumnDefinitions>
-
-		<Label Grid.Row="0" Grid.Column="0" Content="{x:Static properties:Resources.TitleType}" Target="{Binding ElementName=type}"/>
-		<ComboBox Grid.Row="0" Grid.Column="1" Name="type" ItemsSource="{x:Static lc:LedMatrixDescriptor.MatrixTypes}" SelectedItem="{Binding Path=MatrixType}"
+	<lc:AutoGrid Margin="3">
+		<Label Content="{x:Static properties:Resources.TitleType}" Target="{Binding ElementName=type}"/>
+		<ComboBox Name="type" ItemsSource="{x:Static lc:LedMatrixDescriptor.MatrixTypes}" SelectedItem="{Binding Path=MatrixType}"
 			ToolTip="{x:Static properties:Resources.ToolTipLedMatrixType}"
 			MinWidth="{Binding ElementName=comboRuler, Path=ActualWidth}"
 		/>
-		<ListBox Name="comboRuler" Height="0" Visibility="Hidden" ItemsSource="{x:Static lc:LedMatrixDescriptor.MatrixTypes}" Padding="5"/>
+		<Canvas Grid.Column="1">
+			<ListBox Name="comboRuler" Visibility="Hidden" ItemsSource="{x:Static lc:LedMatrixDescriptor.MatrixTypes}" Padding="5"/>
+		</Canvas>
 
-		<Label Grid.Row="1" Grid.Column="0" Content="{x:Static properties:Resources.TitleCellShape}" Target="{Binding ElementName=cellShape}"/>
-		<ComboBox Grid.Row="1" Grid.Column="1" Name="cellShape" SelectedIndex="{Binding Path=CellShape}">
+		<Label Content="{x:Static properties:Resources.TitleCellShape}" Target="{Binding ElementName=cellShape}"/>
+		<ComboBox Name="cellShape" SelectedIndex="{Binding Path=CellShape}">
 			<ComboBoxItem Style="{StaticResource ShapeContainerStyle}"><Ellipse   Style="{StaticResource ShapeStyle}"/></ComboBoxItem>
 			<ComboBoxItem Style="{StaticResource ShapeContainerStyle}"><Rectangle Style="{StaticResource ShapeStyle}"/></ComboBoxItem>
 		</ComboBox>
 
-		<Label Grid.Row="2" Grid.Column="0" Content="{x:Static properties:Resources.TitleRows}" Target="{Binding ElementName=rows}"/>
-		<ComboBox Grid.Row="2" Grid.Column="1" Name="rows" ItemsSource="{x:Static lc:LedMatrixDescriptor.RowsRange}" SelectedItem="{Binding Path=Rows}"/>
+		<Label Content="{x:Static properties:Resources.TitleRows}" Target="{Binding ElementName=rows}"/>
+		<ComboBox Name="rows" ItemsSource="{x:Static lc:LedMatrixDescriptor.RowsRange}" SelectedItem="{Binding Path=Rows}"/>
 
-		<Label Grid.Row="3" Grid.Column="0" Content="{x:Static properties:Resources.TitleColumns}" Target="{Binding ElementName=columns}"/>
-		<ComboBox Grid.Row="3" Grid.Column="1" Name="columns" ItemsSource="{x:Static lc:LedMatrixDescriptor.ColumnsRange}" SelectedItem="{Binding Path=Columns}"/>
+		<Label Content="{x:Static properties:Resources.TitleColumns}" Target="{Binding ElementName=columns}"/>
+		<ComboBox Name="columns" ItemsSource="{x:Static lc:LedMatrixDescriptor.ColumnsRange}" SelectedItem="{Binding Path=Columns}"/>
 
-		<Label Grid.Row="4" Grid.Column="0" Content="{x:Static properties:Resources.TitleColors}" Target="{Binding ElementName=colors}"/>
-		<ComboBox Grid.Row="4" Grid.Column="1" Name="colors" ItemsSource="{Binding Path=ColorRange}" SelectedItem="{Binding Path=Colors}"/>
+		<Label Content="{x:Static properties:Resources.TitleColors}" Target="{Binding ElementName=colors}"/>
+		<ComboBox Name="colors" ItemsSource="{Binding Path=ColorRange}" SelectedItem="{Binding Path=Colors}"/>
 
-		<Label Grid.Row="5" Grid.Column="0" Content="{x:Static properties:Resources.TitleDescription}" Target="{Binding ElementName=note}"/>
-		<TextBox Grid.Row="5" Grid.Column="1" Name="note" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Text="{Binding Path=Note}"
+		<Label Content="{x:Static properties:Resources.TitleDescription}" Target="{Binding ElementName=note}"/>
+		<TextBox Name="note" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Text="{Binding Path=Note}"
 			AcceptsReturn="True" AcceptsTab="True" SpellCheck.IsEnabled="True"
 		/>
 
-		<StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+		<StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
 			<Button Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" Click="ButtonOkClick"/>
 			<Button Content="{x:Static properties:Resources.TitleCancel}" IsCancel="True"/>
 		</StackPanel>
-	</Grid>
+	</lc:AutoGrid>
 </Window>
