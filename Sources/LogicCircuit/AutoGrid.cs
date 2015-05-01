@@ -15,6 +15,14 @@ namespace LogicCircuit {
 			set { this.SetValue(AutoGrid.ColumnWidthsProperty, value); }
 		}
 
+		public static readonly DependencyProperty RowHeightProperty = DependencyProperty.RegisterAttached("RowHeight", typeof(GridLength), typeof(AutoGrid));
+		public static GridLength GetRowHeight(DependencyObject obj) {
+			return (GridLength)obj.GetValue(AutoGrid.RowHeightProperty);
+		}
+		public static void SetRowHeight(DependencyObject obj, GridLength rowHeight) {
+			obj.SetValue(AutoGrid.RowHeightProperty, rowHeight);
+		}
+
 		public AutoGrid() {
 			this.DefineColumns();
 			this.Loaded += this.AutoGridLoaded;
@@ -117,13 +125,22 @@ namespace LogicCircuit {
 		}
 
 		private void UpdateRowHeight(DependencyObject child) {
-			TextBox textBox = child as TextBox;
-			if((textBox != null && textBox.AcceptsReturn && !(0 < textBox.Height || 1 < textBox.MinLines || textBox.MaxLines < int.MaxValue)) ||
-				child is GroupBox || child is ListBox
-			) {
+			object objHeight = child.GetValue(AutoGrid.RowHeightProperty);
+			if(AutoGrid.WasSet(objHeight)) {
+				GridLength rowHeight = (GridLength)objHeight;
 				RowDefinition row = this.RowDefinitions[(int)child.GetValue(Grid.RowProperty)];
-				if(row.Height == GridLength.Auto) {
-					row.Height = new GridLength(1, GridUnitType.Star);
+				if(rowHeight != row.Height) {
+					row.Height = rowHeight;
+				}
+			} else {
+				TextBox textBox = child as TextBox;
+				if((textBox != null && textBox.AcceptsReturn && !(0 < textBox.Height || 1 < textBox.MinLines || textBox.MaxLines < int.MaxValue)) ||
+					child is GroupBox || child is ListBox
+				) {
+					RowDefinition row = this.RowDefinitions[(int)child.GetValue(Grid.RowProperty)];
+					if(row.Height == GridLength.Auto) {
+						row.Height = new GridLength(1, GridUnitType.Star);
+					}
 				}
 			}
 		}
