@@ -78,19 +78,13 @@ namespace LogicCircuit {
 		}
 
 		private static IEnumerable<GridLength> ParseColumnWidths(string widths) {
-			int count = 0;
 			if(!string.IsNullOrWhiteSpace(widths)) {
 				GridLengthConverter converter = new GridLengthConverter();
 				foreach(string text in widths.Split(';').Where(str => !string.IsNullOrWhiteSpace(str)).Select(str => str.Trim())) {
-					count++;
 					yield return (GridLength)converter.ConvertFromInvariantString(text);
 				}
-			}
-			if(count < 1) {
-				count++;
+			} else {
 				yield return GridLength.Auto;
-			}
-			if(count < 2) {
 				yield return new GridLength(1, GridUnitType.Star);
 			}
 		}
