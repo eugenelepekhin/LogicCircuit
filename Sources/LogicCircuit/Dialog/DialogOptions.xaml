@@ -3,6 +3,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:lc="clr-namespace:LogicCircuit"
 	xmlns:properties="clr-namespace:LogicCircuit.Properties"
+	xmlns:glob="clr-namespace:System.Globalization;assembly=mscorlib"
 	WindowStartupLocation="CenterOwner"
 	Title="{x:Static properties:Resources.TitleOptions}"
 	Style="{StaticResource DialogFixedWindow}"
@@ -25,84 +26,74 @@
 				</DataTrigger>
 			</Style.Triggers>
 		</Style>
+
+		<DataTemplate x:Key="LanguageName" DataType="{x:Type glob:CultureInfo}">
+			<StackPanel Orientation="Horizontal">
+				<StackPanel.Style>
+					<Style TargetType="StackPanel">
+						<Setter Property="FlowDirection" Value="LeftToRight"/>
+						<Style.Triggers>
+							<DataTrigger Binding="{Binding Path=TextInfo.IsRightToLeft}" Value="True">
+								<Setter Property="FlowDirection" Value="RightToLeft"/>
+							</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</StackPanel.Style>
+
+				<TextBlock Text="{Binding Path=NativeName}"/>
+				<TextBlock Text=" - " Style="{StaticResource CultureTranslation}"/>
+				<TextBlock Text="{Binding Path=DisplayName}" Style="{StaticResource CultureTranslation}"/>
+			</StackPanel>
+		</DataTemplate>
 	</Window.Resources>
 
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="Auto"/>
-		</Grid.RowDefinitions>
+	<StackPanel Orientation="Vertical" Margin="8,0">
+		<GroupBox HorizontalAlignment="Stretch" VerticalAlignment="Top"
+			Header="{x:Static properties:Resources.TitleFileOptions}"
+		>
+			<lc:AutoGrid>
+				<CheckBox Grid.ColumnSpan="2" Name="loadLastFile" IsThreeState="False"
+					Content="{x:Static properties:Resources.TitleLoadLastFile}"
+				/>
 
-		<StackPanel Grid.Row="0" Margin="8,0,8,0">
-			<GroupBox HorizontalAlignment="Stretch" VerticalAlignment="Top"
-				Header="{x:Static properties:Resources.TitleFileOptions}"
-			>
-				<StackPanel>
-					<CheckBox Name="loadLastFile" IsThreeState="False"
-						Content="{x:Static properties:Resources.TitleLoadLastFile}"
-					/>
-					<StackPanel Orientation="Horizontal">
-						<Label Content="{x:Static properties:Resources.TitleMaxRecentFiles}" Target="{Binding ElementName=maxRecentFiles}"/>
-						<ComboBox Name="maxRecentFiles" ItemsSource="{Binding RecentFileRange}" MinWidth="50"/>
-					</StackPanel>
-				</StackPanel>
-			</GroupBox>
+				<Label Content="{x:Static properties:Resources.TitleMaxRecentFiles}" Target="{Binding ElementName=maxRecentFiles}"/>
+				<ComboBox Name="maxRecentFiles" ItemsSource="{Binding RecentFileRange}" MinWidth="50"/>
+			</lc:AutoGrid>
+		</GroupBox>
 
-			<GroupBox HorizontalAlignment="Stretch" VerticalAlignment="Top"
-				Header="{x:Static properties:Resources.TitleDisplayOptions}"
-			>
-				<StackPanel>
-					<CheckBox Name="showGrid" IsThreeState="False"
-						Content="{x:Static properties:Resources.TitleShowGrid}"
-					/>
-					<Grid>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="Auto"/>
-							<ColumnDefinition Width="*"/>
-						</Grid.ColumnDefinitions>
-						<Label Grid.Column="0" Target="{Binding ElementName=gateShape}"
-							Content="{x:Static properties:Resources.TitleGateShape}"
-						/>
-						<ComboBox Grid.Column="1" Name="gateShape" ItemsSource="{Binding Path=GateShapeList}" IsEditable="False"/>
-						<ListBox Grid.Column="1" ItemsSource="{Binding Path=GateShapeList}" Height="1" Visibility="Hidden" Padding="10,0"/>
-					</Grid>
-				</StackPanel>
-			</GroupBox>
+		<GroupBox HorizontalAlignment="Stretch" VerticalAlignment="Top"
+			Header="{x:Static properties:Resources.TitleDisplayOptions}"
+		>
+			<lc:AutoGrid>
+				<CheckBox Grid.ColumnSpan="2" Name="showGrid" IsThreeState="False"
+					Content="{x:Static properties:Resources.TitleShowGrid}"
+				/>
 
-			<GroupBox HorizontalAlignment="Stretch" VerticalAlignment="Top"
-				Header="{x:Static properties:Resources.TitleCulture}"
-			>
-				<ComboBox Name="cultureSelector" IsEditable="False" HorizontalAlignment="Stretch"
+				<Label Target="{Binding ElementName=gateShape}"
+					Content="{x:Static properties:Resources.TitleGateShape}"
+				/>
+				<ComboBox Name="gateShape" ItemsSource="{Binding Path=GateShapeList}" IsEditable="False"/>
+			</lc:AutoGrid>
+		</GroupBox>
+
+		<GroupBox HorizontalAlignment="Stretch" VerticalAlignment="Top"
+			Header="{x:Static properties:Resources.TitleCulture}"
+		>
+			<Grid>
+				<Canvas>
+					<ListBox Name="languageList" ItemsSource="{x:Static lc:App.AvailableCultures}" Padding="10,0" ItemTemplate="{StaticResource LanguageName}" Visibility="Hidden"/>
+				</Canvas>
+				<ComboBox Name="cultureSelector" IsEditable="False" HorizontalAlignment="Stretch" MinWidth="{Binding ElementName=languageList, Path=ActualWidth}"
 					ItemsSource="{x:Static lc:App.AvailableCultures}"
 					SelectedItem="{Binding Path=CurrentCulture}"
-				>
-					<ComboBox.ItemTemplate>
-						<DataTemplate>
-							<StackPanel Orientation="Horizontal">
-								<StackPanel.Style>
-									<Style TargetType="StackPanel">
-										<Setter Property="FlowDirection" Value="LeftToRight"/>
-										<Style.Triggers>
-											<DataTrigger Binding="{Binding Path=TextInfo.IsRightToLeft}" Value="True">
-												<Setter Property="FlowDirection" Value="RightToLeft"/>
-											</DataTrigger>
-										</Style.Triggers>
-									</Style>
-								</StackPanel.Style>
+					ItemTemplate="{StaticResource LanguageName}"
+				/>
+			</Grid>
+		</GroupBox>
 
-								<TextBlock Text="{Binding Path=NativeName}"/>
-								<TextBlock Text=" - " Style="{StaticResource CultureTranslation}"/>
-								<TextBlock Text="{Binding Path=DisplayName}" Style="{StaticResource CultureTranslation}"/>
-							</StackPanel>
-						</DataTemplate>
-					</ComboBox.ItemTemplate>
-				</ComboBox>
-			</GroupBox>
-		</StackPanel>
-
-		<StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
 			<Button Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" Click="OkButtonClick"/>
 			<Button Content="{x:Static properties:Resources.TitleCancel}" IsCancel="True"/>
 		</StackPanel>
-	</Grid>
+	</StackPanel>
 </Window>

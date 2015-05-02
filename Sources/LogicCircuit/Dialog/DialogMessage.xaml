@@ -8,62 +8,38 @@
 	Style="{StaticResource DialogFixedWindow}"
 	MinWidth="340" MinHeight="100"
 >
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-		</Grid.RowDefinitions>
+	<lc:AutoGrid>
+		<Image Source="{Binding Path=BitmapSource, Mode=OneTime}" Margin="24,24,12,24" VerticalAlignment="Top"/>
+		<ScrollViewer Margin="8" VerticalAlignment="Center" HorizontalAlignment="Stretch" MaxHeight="240"
+			HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+		>
+			<TextBlock Name="message" VerticalAlignment="Center" TextWrapping="Wrap" TextTrimming="None" MaxWidth="620" Margin="3,3,20,3" Padding="0"/>
+		</ScrollViewer>
 
-		<Grid Grid.Row="0">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="*"/>
-			</Grid.ColumnDefinitions>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="Auto"/>
-			</Grid.RowDefinitions>
+		<TextBox Grid.Column="1" IsReadOnly="True"
+			Margin="8" HorizontalAlignment="Stretch"
+			MaxWidth="640" MaxHeight="320"
+			TextWrapping="WrapWithOverflow"
+			HorizontalScrollBarVisibility="Auto"
+			VerticalScrollBarVisibility="Auto"
+			Text="{Binding Path=Details, Mode=OneTime}"
+		>
+			<TextBox.Style>
+				<Style TargetType="{x:Type TextBox}">
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding ElementName=showDetails, Path=IsChecked}" Value="True">
+							<Setter Property="Visibility" Value="Visible"/>
+						</DataTrigger>
+						<DataTrigger Binding="{Binding ElementName=showDetails, Path=IsChecked}" Value="False">
+							<Setter Property="Visibility" Value="Collapsed"/>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</TextBox.Style>
+		</TextBox>
 
-			<Grid Grid.Column="0" Grid.Row="0" Margin="8">
-				<Image Source="{Binding Path=BitmapSource, Mode=OneTime}" Margin="16,16,3,16" VerticalAlignment="Top"/>
-			</Grid>
-			<ScrollViewer Grid.Column="1" Grid.Row="0"
-				Margin="8" VerticalAlignment="Center" HorizontalAlignment="Stretch" MaxHeight="240"
-				HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
-			>
-				<TextBlock Name="message" VerticalAlignment="Center" TextWrapping="Wrap" TextTrimming="None" MaxWidth="620" Margin="3,3,20,3" Padding="0"/>
-			</ScrollViewer>
-
-			<TextBox Grid.Column="1" Grid.Row="1" IsReadOnly="True"
-				Margin="8" HorizontalAlignment="Stretch"
-				MaxWidth="640" MaxHeight="320"
-				TextWrapping="WrapWithOverflow"
-				HorizontalScrollBarVisibility="Auto"
-				VerticalScrollBarVisibility="Auto"
-				Text="{Binding Path=Details, Mode=OneTime}"
-			>
-				<TextBox.Style>
-					<Style TargetType="{x:Type TextBox}">
-						<Style.Triggers>
-							<DataTrigger Binding="{Binding ElementName=showDetails, Path=IsChecked}" Value="True">
-								<Setter Property="Visibility" Value="Visible"/>
-							</DataTrigger>
-							<DataTrigger Binding="{Binding ElementName=showDetails, Path=IsChecked}" Value="False">
-								<Setter Property="Visibility" Value="Collapsed"/>
-							</DataTrigger>
-						</Style.Triggers>
-					</Style>
-				</TextBox.Style>
-			</TextBox>
-		</Grid>
-
-		<Grid Grid.Row="1">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="*"/>
-			</Grid.ColumnDefinitions>
-
-			<CheckBox Grid.Column="0" Name="showDetails" Margin="8" VerticalAlignment="Bottom"
+		<lc:AutoGrid Grid.ColumnSpan="2">
+			<CheckBox Name="showDetails" Margin="8" VerticalAlignment="Bottom"
 				Content="{x:Static properties:Resources.TitleShowDetails}"
 			>
 				<CheckBox.Style>
@@ -77,12 +53,12 @@
 				</CheckBox.Style>
 			</CheckBox>
 
-			<StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
 				<Button Content="{x:Static properties:Resources.TitleOK}" Click="ButtonClick" Name="OK"/>
 				<Button Content="{x:Static properties:Resources.TitleYes}" Click="ButtonClick" Name="Yes"/>
 				<Button Content="{x:Static properties:Resources.TitleNo}" Click="ButtonClick" Name="No"/>
 				<Button Content="{x:Static properties:Resources.TitleCancel}" Click="ButtonClick" Name="Cancel"/>
 			</StackPanel>
-		</Grid>
-	</Grid>
+		</lc:AutoGrid>
+	</lc:AutoGrid>
 </Window>

@@ -27,47 +27,32 @@
 		</Style>
 	</Window.Resources>
 
-	<Grid Margin="3">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="Auto"/>
-		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="Auto"/>
-			<ColumnDefinition Width="*"/>
-		</Grid.ColumnDefinitions>
+	<lc:AutoGrid Margin="3">
+		<Label Content="{x:Static properties:Resources.TitleType}"/>
+		<TextBlock Name="type" VerticalAlignment="Center" Margin="3"/>
 
-		<Label Grid.Row="0" Grid.Column="0" Content="{x:Static properties:Resources.TitleType}"/>
-		<TextBlock Grid.Row="0" Grid.Column="1" Name="type" VerticalAlignment="Center" Margin="3"/>
+		<Label Content="{x:Static properties:Resources.TitleName}" Target="{Binding ElementName=name}"/>
+		<TextBox Name="name"/>
 
-		<Label Grid.Row="1" Grid.Column="0" Content="{x:Static properties:Resources.TitleName}" Target="{Binding ElementName=name}"/>
-		<TextBox Grid.Row="1" Grid.Column="1" Name="name"/>
+		<Label Content="{x:Static properties:Resources.TitleNotation}" Target="{Binding ElementName=notation}"/>
+		<TextBox Name="notation" ToolTip="{x:Static properties:Resources.ToolTipPinNotation}"/>
 
-		<Label Grid.Row="2" Grid.Column="0" Content="{x:Static properties:Resources.TitleNotation}" Target="{Binding ElementName=notation}"/>
-		<TextBox Grid.Row="2" Grid.Column="1" Name="notation" ToolTip="{x:Static properties:Resources.ToolTipPinNotation}"/>
+		<Label Content="{x:Static properties:Resources.TitleSide}" Target="{Binding ElementName=side}"/>
+		<ComboBox Name="side" ToolTip="{x:Static properties:Resources.ToolTipPinSide}"/>
 
-		<Label Grid.Row="3" Grid.Column="0" Content="{x:Static properties:Resources.TitleSide}" Target="{Binding ElementName=side}"/>
-		<ComboBox Grid.Row="3" Grid.Column="1" Name="side" ToolTip="{x:Static properties:Resources.ToolTipPinSide}"/>
+		<Label Content="{x:Static properties:Resources.TitleBitWidth}" Target="{Binding ElementName=bitWidth}"/>
+		<ComboBox Name="bitWidth" ToolTip="{x:Static properties:Resources.ToolTipPinBitWidth}"/>
 
-		<Label Grid.Row="4" Grid.Column="0" Content="{x:Static properties:Resources.TitleBitWidth}" Target="{Binding ElementName=bitWidth}"/>
-		<ComboBox Grid.Row="4" Grid.Column="1" Name="bitWidth" ToolTip="{x:Static properties:Resources.ToolTipPinBitWidth}"/>
+		<CheckBox Grid.Column="1" Name="inverted" Content="{x:Static properties:Resources.TitleInverted}" IsThreeState="False"/>
 
-		<CheckBox Grid.Row="5" Grid.Column="1" Name="inverted" Content="{x:Static properties:Resources.TitleInverted}" IsThreeState="False"/>
-
-		<Label Grid.Row="6" Grid.Column="0" Content="{x:Static properties:Resources.TitleDescription}" Target="{Binding ElementName=note}"/>
-		<TextBox Grid.Row="6" Grid.Column="1" Name="note" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+		<Label Content="{x:Static properties:Resources.TitleDescription}" Target="{Binding ElementName=note}"/>
+		<TextBox Name="note" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
 			AcceptsReturn="True" AcceptsTab="True" SpellCheck.IsEnabled="True"
 		/>
 
-		<StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+		<StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
 			<Button Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" Click="ButtonOkClick"/>
 			<Button Content="{x:Static properties:Resources.TitleCancel}" IsCancel="True"/>
 		</StackPanel>
-	</Grid>
+	</lc:AutoGrid>
 </Window>

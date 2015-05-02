@@ -7,23 +7,14 @@
 	Title="{x:Static properties:Resources.TitleProbeHistory}"
 	Style="{StaticResource DialogWindow}"
 >
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="Auto"/>
-		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*"/>
-			<ColumnDefinition Width="*"/>
-		</Grid.ColumnDefinitions>
+	<lc:AutoGrid>
+		<ListBox Grid.ColumnSpan="2" ItemsSource="{Binding Path=History}" Margin="8" SelectionMode="Extended"/>
 
-		<ListBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Path=History}" Margin="8" SelectionMode="Extended"/>
-
-		<Button Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Click="ButtonMarkClick" IsEnabled="{Binding Path=MarkAllowed}"
+		<Button HorizontalAlignment="Left" Click="ButtonMarkClick" IsEnabled="{Binding Path=MarkAllowed}"
 			Content="{x:Static properties:Resources.TitleMark}"
 		/>
-		<Button Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" IsDefault="True" IsCancel="True"
+		<Button HorizontalAlignment="Right" IsDefault="True" IsCancel="True"
 			Content="{x:Static properties:Resources.TitleOK}"
 		/>
-	</Grid>
+	</lc:AutoGrid>
 </Window>

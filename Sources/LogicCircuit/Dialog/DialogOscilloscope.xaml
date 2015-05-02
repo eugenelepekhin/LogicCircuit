@@ -49,13 +49,8 @@
 		</Style>
 	</Window.Resources>
 
-	<Grid Margin="3">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="Auto"/>
-		</Grid.RowDefinitions>
-
-		<ListView Grid.Row="0" ItemsSource="{Binding Path=Oscillograms}" SelectionMode="Single" SelectionChanged="OscillogramListSelectionChanged">
+	<lc:AutoGrid Margin="3" ColumnWidths="*">
+		<ListView ItemsSource="{Binding Path=Oscillograms}" SelectionMode="Single" SelectionChanged="OscillogramListSelectionChanged">
 			<ListView.View>
 				<GridView>
 					<GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Width="Auto"
@@ -110,9 +105,9 @@
 			</ListView.View>
 		</ListView>
 
-		<CheckBox Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center"
+		<CheckBox HorizontalAlignment="Left" VerticalAlignment="Center"
 			IsChecked="{Binding Path=CircuitRunner.Oscilloscoping, Mode=TwoWay}"
 			Content="{x:Static properties:Resources.TitleOscilloscoping}"
 		/>
-	</Grid>
+	</lc:AutoGrid>
 </Window>

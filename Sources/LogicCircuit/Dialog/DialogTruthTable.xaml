@@ -15,34 +15,21 @@
 	</Window.Resources>
 
 	<Grid>
-		<Grid IsEnabled="{Binding Path=ShowProgress, Converter={StaticResource InverseBooleanConverter}}">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="*"/>
-				<RowDefinition Height="Auto"/>
-			</Grid.RowDefinitions>
-
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="Auto"/>
-			</Grid.ColumnDefinitions>
-
-			<Label Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=filter}" VerticalAlignment="Center"
+		<lc:AutoGrid IsEnabled="{Binding Path=ShowProgress, Converter={StaticResource InverseBooleanConverter}}" ColumnWidths="Auto;*;Auto;Auto">
+			<Label Target="{Binding ElementName=filter}" VerticalAlignment="Center"
 				Content="{x:Static properties:Resources.TitleFilter}"
 			/>
-			<TextBox Grid.Row="0" Grid.Column="1" Name="filter" VerticalAlignment="Center"/>
-			<CheckBox Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"
+			<TextBox Name="filter" VerticalAlignment="Center"/>
+			<CheckBox VerticalAlignment="Center"
 				Content="{x:Static properties:Resources.TitleInvert}"
 				IsChecked="{Binding Path=InvertFilter}"
 			/>
-			<Button Grid.Row="0" Grid.Column="3" Name="buttonApply" Click="ButtonApplyClick" VerticalAlignment="Center"
+			<Button Name="buttonApply" Click="ButtonApplyClick" VerticalAlignment="Center"
 				Content="{x:Static properties:Resources.TitleApply}"
 				IsDefault="{Binding ElementName=filter, Path=IsFocused}"
 			/>
 
-			<DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Name="dataGrid" AutoGenerateColumns="False" IsReadOnly="True" Margin="3"
+			<DataGrid Grid.ColumnSpan="4" Name="dataGrid" AutoGenerateColumns="False" IsReadOnly="True" Margin="3"
 				VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Standard"
 				ItemsSource="{Binding Path=TruthTable}"
 			>
@@ -53,7 +40,7 @@
 				</DataGrid.CellStyle>
 			</DataGrid>
 
-			<WrapPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" VerticalAlignment="Top">
+			<WrapPanel Grid.ColumnSpan="3" Orientation="Horizontal" VerticalAlignment="Top">
 				<WrapPanel.Resources>
 					<Style TargetType="TextBlock">
 						<Setter Property="Margin" Value="5,2"/>
@@ -68,11 +55,11 @@
 				/>
 			</WrapPanel>
 
-			<Button Grid.Row="2" Grid.Column="3" Name="buttonOk" VerticalAlignment="Bottom"
+			<Button Name="buttonOk" VerticalAlignment="Bottom"
 				Content="{x:Static properties:Resources.TitleOK}"
 				IsDefault="{Binding ElementName=filter, Path=IsFocused, Converter={StaticResource InverseBooleanConverter}}" IsCancel="True"
 			/>
-		</Grid>
+		</lc:AutoGrid>
 
 		<Grid Background="#80000000" Visibility="{Binding Path=ShowProgress, Converter={StaticResource BooleanToVisibilityConverter}}" Opacity="0">
 			<Grid.Style>

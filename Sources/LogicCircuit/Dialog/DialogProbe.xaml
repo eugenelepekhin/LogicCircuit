@@ -1,6 +1,7 @@
 ﻿<Window x:Class="LogicCircuit.DialogProbe"
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:lc="clr-namespace:LogicCircuit"
 	xmlns:properties="clr-namespace:LogicCircuit.Properties"
 	WindowStartupLocation="CenterOwner"
 	Title="{x:Static properties:Resources.CircuitProbeName}"
@@ -18,29 +19,19 @@
 		</Style>
 	</Window.Resources>
 
-	<Grid Margin="3">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="Auto"/>
-		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="Auto"/>
-			<ColumnDefinition Width="*"/>
-		</Grid.ColumnDefinitions>
+	<lc:AutoGrid Margin="3">
+		<Label Content="{x:Static properties:Resources.TitleName}" Target="{Binding ElementName=name}"/>
+		<TextBox Name="name" SpellCheck.IsEnabled="True" MaxLength="4"/>
 
-		<Label Grid.Row="0" Grid.Column="0" Content="{x:Static properties:Resources.TitleName}" Target="{Binding ElementName=name}"/>
-		<TextBox Grid.Row="0" Grid.Column="1" Name="name" SpellCheck.IsEnabled="True" MaxLength="4"/>
-
-		<Label Grid.Row="1" Grid.Column="0" Content="{x:Static properties:Resources.TitleDescription}" Target="{Binding ElementName=description}"/>
-		<TextBox Grid.Row="1" Grid.Column="1" Name="description" AcceptsReturn="True" AcceptsTab="True"
+		<Label Content="{x:Static properties:Resources.TitleDescription}" Target="{Binding ElementName=description}"/>
+		<TextBox Name="description" AcceptsReturn="True" AcceptsTab="True"
 			VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
 			SpellCheck.IsEnabled="True"
 		/>
 
-		<StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+		<StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
 			<Button Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" Click="ButtonOkClick"/>
 			<Button Content="{x:Static properties:Resources.TitleCancel}" IsCancel="True"/>
 		</StackPanel>
-	</Grid>
+	</lc:AutoGrid>
 </Window>
