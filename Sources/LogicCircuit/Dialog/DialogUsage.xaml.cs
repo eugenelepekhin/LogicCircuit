@@ -14,14 +14,11 @@ namespace LogicCircuit {
 		private SettingsWindowLocationCache windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 		public LogicalCircuit LogicalCircuit { get; private set; }
-
-		public int UsageCount { get; private set; }
 		public IEnumerable<LogicalCircuit> Usage { get; private set; }
 
 		public DialogUsage(LogicalCircuit logicalCircuit) {
 			this.LogicalCircuit = logicalCircuit;
-			this.Usage = new HashSet<LogicalCircuit>(this.LogicalCircuit.CircuitProject.CircuitSymbolSet.SelectByCircuit(this.LogicalCircuit).Select(s => s.LogicalCircuit));
-			this.UsageCount = this.Usage.Count();
+			this.Usage = new HashSet<LogicalCircuit>(this.LogicalCircuit.CircuitProject.CircuitSymbolSet.SelectByCircuit(this.LogicalCircuit).Select(s => s.LogicalCircuit)).ToList();
 			this.DataContext = this;
 			this.InitializeComponent();
 		}

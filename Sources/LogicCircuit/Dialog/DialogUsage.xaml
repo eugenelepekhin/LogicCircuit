@@ -7,64 +7,44 @@
 	Title="{x:Static properties:Resources.TitleCircuitUsage}"
 	Style="{StaticResource DialogWindow}"
 >
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="Auto"/>
-		</Grid.RowDefinitions>
+	<Window.Resources>
+		<DataTemplate x:Key="NotUsed">
+			<TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.MessageNotUsed}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+		</DataTemplate>
 
-		<StackPanel Grid.Row="0" Orientation="Horizontal">
-			<Label Content="{x:Static properties:Resources.TitleName}"/>
-			<TextBlock Text="{Binding Path=LogicalCircuit.Name}" VerticalAlignment="Center"/>
-		</StackPanel>
-
-		<Grid Grid.Row="1" Margin="5">
-			<Grid>
-				<Grid.Style>
-					<Style TargetType="Grid">
-						<Setter Property="Visibility" Value="Collapsed"/>
-						<Style.Triggers>
-							<DataTrigger Binding="{Binding Path=UsageCount}" Value="0">
-								<Setter Property="Visibility" Value="Visible"/>
-							</DataTrigger>
-						</Style.Triggers>
-					</Style>
-				</Grid.Style>
-
-				<TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.MessageNotUsed}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-			</Grid>
-
-			<Grid>
-				<Grid.Style>
-					<Style TargetType="Grid">
-						<Setter Property="Visibility" Value="Visible"/>
-						<Style.Triggers>
-							<DataTrigger Binding="{Binding Path=UsageCount}" Value="0">
-								<Setter Property="Visibility" Value="Collapsed"/>
-							</DataTrigger>
-						</Style.Triggers>
-					</Style>
-				</Grid.Style>
-
-				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="*"/>
-				</Grid.RowDefinitions>
-
-				<TextBlock Grid.Row="0" TextWrapping="Wrap" Text="{x:Static properties:Resources.MessageUsageNote}"/>
-				<ListBox Grid.Row="1" ItemsSource="{Binding Path=Usage}" Margin="3" MouseDoubleClick="ListBoxMouseDoubleClick">
+		<DataTemplate x:Key="IsUsed">
+			<lc:AutoGrid ColumnWidths="*">
+				<TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.MessageUsageNote}" Margin="5"/>
+				<ListBox ItemsSource="{Binding}" Margin="3" MouseDoubleClick="ListBoxMouseDoubleClick">
 					<ListBox.ItemTemplate>
 						<DataTemplate>
 							<TextBlock Text="{Binding Path=Name}"/>
 						</DataTemplate>
 					</ListBox.ItemTemplate>
 				</ListBox>
-			</Grid>
-		</Grid>
+			</lc:AutoGrid>
+		</DataTemplate>
+	</Window.Resources>
 
-		<StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+	<lc:AutoGrid>
+		<Label Content="{x:Static properties:Resources.TitleName}"/>
+		<TextBlock Text="{Binding Path=LogicalCircuit.Name}" VerticalAlignment="Center"/>
+
+		<ContentControl Grid.ColumnSpan="2" lc:AutoGrid.RowHeight="*" Content="{Binding Path=Usage}">
+			<ContentControl.Style>
+				<Style TargetType="ContentControl">
+					<Setter Property="ContentTemplate" Value="{StaticResource IsUsed}"/>
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding Path=Usage.Count}" Value="0">
+							<Setter Property="ContentTemplate" Value="{StaticResource NotUsed}"/>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</ContentControl.Style>
+		</ContentControl>
+
+		<StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
 			<Button Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" IsCancel="True"/>
 		</StackPanel>
-	</Grid>
+	</lc:AutoGrid>
 </Window>
