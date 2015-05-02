@@ -129,7 +129,7 @@ namespace LogicCircuit {
 			} else {
 				TextBox textBox = child as TextBox;
 				if((textBox != null && textBox.AcceptsReturn && !(0 < textBox.Height || 1 < textBox.MinLines || textBox.MaxLines < int.MaxValue)) ||
-					child is GroupBox || child is ListBox || child is ListView
+					child is GroupBox || child is ListBox || child is ListView || child is RichTextBox || child is DataGrid
 				) {
 					RowDefinition row = this.RowDefinitions[(int)child.GetValue(Grid.RowProperty)];
 					if(row.Height == GridLength.Auto) {
