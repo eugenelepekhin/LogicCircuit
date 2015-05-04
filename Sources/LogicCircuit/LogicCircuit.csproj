@@ -50,6 +50,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AutoGrid.cs" />
+    <Compile Include="AutoWidthComboBox.cs" />
     <Compile Include="ButtonControl.cs" />
     <Compile Include="CircuitProject\CircuitProbe.cs" />
     <Compile Include="CircuitProject\CircuitSymbolComparer.cs" />

@@ -311,10 +311,6 @@
 					</lc:AutoGrid>
 				</GroupBox>
 
-				<Canvas Grid.Row="1">
-					<ListBox Name="pinSideList" ItemsSource="{x:Static lc:PinDescriptor.PinSideRange}" Visibility="Hidden" Padding="10,0"/>
-				</Canvas>
-
 				<!-- Bottom row with List of circuit descriptors -->
 				<GroupBox Grid.Row="1" Header="{x:Static properties:Resources.TitleProject}">
 					<ListView SelectionMode="Single" BorderThickness="0" HorizontalContentAlignment="Stretch"
@@ -391,15 +387,16 @@
 								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl/>
 									<lc:AutoGrid Margin="3,3,8,3" VerticalAlignment="Center" ColumnWidths="Auto;Auto">
-										<TextBox Text="{Binding Path=Notation, Mode=TwoWay}" VerticalAlignment="Center" MinWidth="65"
+										<TextBox Text="{Binding Path=Notation, Mode=TwoWay}" VerticalAlignment="Center" MinWidth="15"
 											ToolTip="{x:Static properties:Resources.ToolTipButtonNotation}" MaxLength="4"
 										/>
 										<TextBlock Text="{x:Static properties:Resources.CaptionNotation}" Margin="3,0,8,0" VerticalAlignment="Center"/>
 										<CheckBox Grid.ColumnSpan="2" IsChecked="{Binding Path=IsToggle}" Margin="6,0,8,5"
 											Content="{x:Static properties:Resources.TitleIsToggle}" ToolTip="{x:Static properties:Resources.ToolTipIsToggle}"
 										/>
-										<ComboBox VerticalAlignment="Center" Margin="3,0" MinWidth="{Binding ElementName=pinSideList, Path=ActualWidth}"
-											SelectedItem="{Binding Path=PinSide, Mode=TwoWay}" ItemsSource="{x:Static lc:PinDescriptor.PinSideRange}"
+										<lc:AutoWidthComboBox VerticalAlignment="Center" Margin="3,0"
+											ItemsSource="{x:Static lc:PinDescriptor.PinSideRange}"
+											SelectedItem="{Binding Path=PinSide, Mode=TwoWay}"
 											ToolTip="{x:Static properties:Resources.ToolTipDevicePinSide}"
 										/>
 										<TextBlock Text="{x:Static properties:Resources.CaptionPinSide}" Margin="3,0,8,0"/>
