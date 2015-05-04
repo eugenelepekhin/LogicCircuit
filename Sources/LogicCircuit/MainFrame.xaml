@@ -408,31 +408,22 @@
 							<DataTemplate DataType="{x:Type lc:ConstantDescriptor}">
 								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl/>
-									<Grid Margin="3,3,8,3" VerticalAlignment="Center">
-										<Grid.ColumnDefinitions>
-											<ColumnDefinition Width="Auto" MinWidth="65"/>
-											<ColumnDefinition Width="Auto"/>
-										</Grid.ColumnDefinitions>
-										<Grid.RowDefinitions>
-											<RowDefinition Height="Auto"/>
-											<RowDefinition Height="Auto"/>
-											<RowDefinition Height="Auto"/>
-										</Grid.RowDefinitions>
-										<ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{x:Static lc:PinDescriptor.BitWidthRange}" SelectedItem="{Binding Path=BitWidth}"
+									<lc:AutoGrid Margin="3,3,8,3" VerticalAlignment="Center" ColumnWidths="Auto;Auto">
+										<ComboBox ItemsSource="{x:Static lc:PinDescriptor.BitWidthRange}" SelectedItem="{Binding Path=BitWidth}"
 											ToolTip="{x:Static properties:Resources.ToolTipConstantBitWidth}"
 										/>
-										<TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Static properties:Resources.CaptionBitWidth}" Margin="8,0,0,0"/>
-										<TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Path=Value, Mode=TwoWay}" VerticalAlignment="Center"
-											CharacterCasing="Upper" MaxLength="4" ToolTip="{x:Static properties:Resources.ToolTipConstantValue}"
+										<TextBlock Text="{x:Static properties:Resources.CaptionBitWidth}" Margin="8,0,0,0"/>
+										<TextBox Text="{Binding Path=Value, Mode=TwoWay}" VerticalAlignment="Center"
+											CharacterCasing="Upper" MaxLength="8" ToolTip="{x:Static properties:Resources.ToolTipConstantValue}"
 											Margin="0"
 										/>
-										<TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Static properties:Resources.CaptionValue}" Margin="8,0,0,0"/>
-										<ComboBox Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="0"
+										<TextBlock Text="{x:Static properties:Resources.CaptionValue}" Margin="8,0,0,0"/>
+										<lc:AutoWidthComboBox VerticalAlignment="Center" Margin="0"
 											SelectedItem="{Binding Path=PinSide, Mode=TwoWay}" ItemsSource="{x:Static lc:PinDescriptor.PinSideRange}"
 											ToolTip="{x:Static properties:Resources.ToolTipDevicePinSide}"
 										/>
-										<TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Static properties:Resources.CaptionPinSide}" Margin="8,0,0,0"/>
-									</Grid>
+										<TextBlock Text="{x:Static properties:Resources.CaptionPinSide}" Margin="8,0,0,0"/>
+									</lc:AutoGrid>
 									<TextBlock Style="{StaticResource CircuitName}"/>
 								</StackPanel>
 							</DataTemplate>
@@ -440,36 +431,26 @@
 							<DataTemplate DataType="{x:Type lc:SensorDescriptor}">
 								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl/>
-									<Grid Margin="3,3,8,3" VerticalAlignment="Center">
-										<Grid.ColumnDefinitions>
-											<ColumnDefinition Width="Auto" MinWidth="65"/>
-											<ColumnDefinition Width="Auto"/>
-										</Grid.ColumnDefinitions>
-										<Grid.RowDefinitions>
-											<RowDefinition Height="Auto"/>
-											<RowDefinition Height="Auto"/>
-											<RowDefinition Height="Auto"/>
-											<RowDefinition Height="Auto"/>
-										</Grid.RowDefinitions>
-										<ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{x:Static lc:SensorDescriptor.SensorTypes}" SelectedItem="{Binding Path=SensorType}"
+									<lc:AutoGrid Margin="3,3,8,3" VerticalAlignment="Center" ColumnWidths="Auto;Auto">
+										<lc:AutoWidthComboBox ItemsSource="{x:Static lc:SensorDescriptor.SensorTypes}" SelectedItem="{Binding Path=SensorType}"
 											ToolTip="{x:Static properties:Resources.ToolTipSensorType}"
 										/>
-										<TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Static properties:Resources.CaptionSensorType}" Margin="8,0,0,0"/>
-										<ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{x:Static lc:PinDescriptor.BitWidthRange}" SelectedItem="{Binding Path=BitWidth}"
+										<TextBlock Text="{x:Static properties:Resources.CaptionSensorType}" Margin="8,0,0,0"/>
+										<ComboBox ItemsSource="{x:Static lc:PinDescriptor.BitWidthRange}" SelectedItem="{Binding Path=BitWidth}"
 											ToolTip="{x:Static properties:Resources.ToolTipSensorBitWidth}"
 										/>
-										<TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Static properties:Resources.CaptionBitWidth}" Margin="8,0,0,0"/>
-										<ComboBox Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="0"
+										<TextBlock Text="{x:Static properties:Resources.CaptionBitWidth}" Margin="8,0,0,0"/>
+										<lc:AutoWidthComboBox VerticalAlignment="Center" Margin="0"
 											SelectedItem="{Binding Path=PinSide, Mode=TwoWay}" ItemsSource="{x:Static lc:PinDescriptor.PinSideRange}"
 											ToolTip="{x:Static properties:Resources.ToolTipDevicePinSide}"
 										/>
-										<TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Static properties:Resources.CaptionPinSide}" Margin="8,0,0,0"/>
-										<TextBox Grid.Row="3" Grid.Column="0" Text="{Binding Path=Notation, Mode=TwoWay}" VerticalAlignment="Center"
+										<TextBlock Text="{x:Static properties:Resources.CaptionPinSide}" Margin="8,0,0,0"/>
+										<TextBox Text="{Binding Path=Notation, Mode=TwoWay}" VerticalAlignment="Center"
 											MaxLength="8" ToolTip="{x:Static properties:Resources.ToolTipSensorNotation}"
 											Margin="0"
 										/>
-										<TextBlock Grid.Row="3" Grid.Column="1" Text="{x:Static properties:Resources.CaptionNotation}" Margin="8,0,0,0"/>
-									</Grid>
+										<TextBlock Text="{x:Static properties:Resources.CaptionNotation}" Margin="8,0,0,0"/>
+									</lc:AutoGrid>
 									<TextBlock Style="{StaticResource CircuitName}"/>
 								</StackPanel>
 							</DataTemplate>
@@ -477,28 +458,18 @@
 							<DataTemplate DataType="{x:Type lc:SoundDescriptor}">
 								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl/>
-									<Grid Margin="3,3,8,3" VerticalAlignment="Center">
-										<Grid.ColumnDefinitions>
-											<ColumnDefinition Width="Auto" MinWidth="65"/>
-											<ColumnDefinition Width="Auto"/>
-										</Grid.ColumnDefinitions>
-										<Grid.RowDefinitions>
-											<RowDefinition Height="Auto"/>
-											<RowDefinition Height="Auto"/>
-											<RowDefinition Height="Auto"/>
-											<RowDefinition Height="Auto"/>
-										</Grid.RowDefinitions>
-										<ComboBox Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="0"
+									<lc:AutoGrid Margin="3,3,8,3" VerticalAlignment="Center" ColumnWidths="Auto;Auto">
+										<lc:AutoWidthComboBox VerticalAlignment="Center" Margin="0"
 											SelectedItem="{Binding Path=PinSide, Mode=TwoWay}" ItemsSource="{x:Static lc:PinDescriptor.PinSideRange}"
 											ToolTip="{x:Static properties:Resources.ToolTipDevicePinSide}"
 										/>
-										<TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Static properties:Resources.CaptionPinSide}" Margin="8,0,0,0"/>
-										<TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Path=Notation, Mode=TwoWay}" VerticalAlignment="Center"
+										<TextBlock Text="{x:Static properties:Resources.CaptionPinSide}" Margin="8,0,0,0"/>
+										<TextBox Text="{Binding Path=Notation, Mode=TwoWay}" VerticalAlignment="Center"
 											MaxLength="8" ToolTip="{x:Static properties:Resources.ToolTipSoundNotation}"
 											Margin="0"
 										/>
-										<TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Static properties:Resources.CaptionNotation}" Margin="8,0,0,0"/>
-									</Grid>
+										<TextBlock Text="{x:Static properties:Resources.CaptionNotation}" Margin="8,0,0,0"/>
+									</lc:AutoGrid>
 									<TextBlock Style="{StaticResource CircuitName}"/>
 								</StackPanel>
 							</DataTemplate>
@@ -506,24 +477,16 @@
 							<DataTemplate DataType="{x:Type lc:MemoryDescriptor}">
 								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl/>
-									<Grid Margin="3,3,8,3" VerticalAlignment="Center">
-										<Grid.ColumnDefinitions>
-											<ColumnDefinition Width="Auto" MinWidth="65"/>
-											<ColumnDefinition Width="Auto"/>
-										</Grid.ColumnDefinitions>
-										<Grid.RowDefinitions>
-											<RowDefinition Height="Auto"/>
-											<RowDefinition Height="Auto"/>
-										</Grid.RowDefinitions>
-										<ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{x:Static lc:MemoryDescriptor.AddressBitWidthRange}" SelectedItem="{Binding Path=AddressBitWidth}"
+									<lc:AutoGrid Margin="3,3,8,3" VerticalAlignment="Center" ColumnWidths="Auto;Auto">
+										<ComboBox ItemsSource="{x:Static lc:MemoryDescriptor.AddressBitWidthRange}" SelectedItem="{Binding Path=AddressBitWidth}" MinWidth="50"
 											ToolTip="{x:Static properties:Resources.ToolTipAddressBitWidth}"
 										/>
-										<TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Static properties:Resources.CaptionAddressBitWidth}" Margin="8,0,0,0"/>
-										<ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{x:Static lc:PinDescriptor.BitWidthRange}" SelectedItem="{Binding Path=DataBitWidth}"
+										<TextBlock Text="{x:Static properties:Resources.CaptionAddressBitWidth}" Margin="8,0,0,0"/>
+										<ComboBox ItemsSource="{x:Static lc:PinDescriptor.BitWidthRange}" SelectedItem="{Binding Path=DataBitWidth}"
 											ToolTip="{x:Static properties:Resources.ToolTipDataBitWidth}"
 										/>
-										<TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Static properties:Resources.CaptionDataBitWidth}" Margin="8,0,0,0"/>
-									</Grid>
+										<TextBlock Text="{x:Static properties:Resources.CaptionDataBitWidth}" Margin="8,0,0,0"/>
+									</lc:AutoGrid>
 									<TextBlock Text="{Binding Path=Circuit.Notation}" VerticalAlignment="Center"/>
 								</StackPanel>
 							</DataTemplate>
@@ -531,32 +494,20 @@
 							<DataTemplate DataType="{x:Type lc:LedMatrixDescriptor}">
 								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl/>
-									<Grid Margin="3,3,8,3" VerticalAlignment="Center">
-										<Grid.ColumnDefinitions>
-											<ColumnDefinition Width="Auto" MinWidth="65"/>
-											<ColumnDefinition Width="Auto"/>
-										</Grid.ColumnDefinitions>
-										<Grid.RowDefinitions>
-											<RowDefinition Height="Auto"/>
-											<RowDefinition Height="Auto"/>
-											<RowDefinition Height="Auto"/>
-										</Grid.RowDefinitions>
-										<ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{x:Static lc:LedMatrixDescriptor.MatrixTypes}" SelectedItem="{Binding Path=MatrixType}"
+									<lc:AutoGrid Margin="3,3,8,3" VerticalAlignment="Center" ColumnWidths="Auto;Auto">
+										<lc:AutoWidthComboBox ItemsSource="{x:Static lc:LedMatrixDescriptor.MatrixTypes}" SelectedItem="{Binding Path=MatrixType}"
 											ToolTip="{x:Static properties:Resources.ToolTipLedMatrixType}"
-											MinWidth="{Binding ElementName=comboRuler, Path=ActualWidth}"
 										/>
-										<TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Static properties:Resources.CaptionLedMatrixType}" Margin="8,0,0,0"/>
-										<ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{x:Static lc:LedMatrixDescriptor.RowsRange}" SelectedItem="{Binding Path=Rows}"
+										<TextBlock Text="{x:Static properties:Resources.CaptionLedMatrixType}" Margin="8,0,0,0"/>
+										<ComboBox ItemsSource="{x:Static lc:LedMatrixDescriptor.RowsRange}" SelectedItem="{Binding Path=Rows}"
 											ToolTip="{x:Static properties:Resources.ToolTipRows}"
 										/>
-										<TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Static properties:Resources.CaptionRows}" Margin="8,0,0,0"/>
-										<ComboBox Grid.Row="2" Grid.Column="0" ItemsSource="{x:Static lc:LedMatrixDescriptor.ColumnsRange}" SelectedItem="{Binding Path=Columns}"
+										<TextBlock Text="{x:Static properties:Resources.CaptionRows}" Margin="8,0,0,0"/>
+										<ComboBox ItemsSource="{x:Static lc:LedMatrixDescriptor.ColumnsRange}" SelectedItem="{Binding Path=Columns}"
 											ToolTip="{x:Static properties:Resources.ToolTipColumns}"
 										/>
-										<TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Static properties:Resources.CaptionColumns}" Margin="8,0,0,0"/>
-
-										<ListBox Name="comboRuler" Height="0" Visibility="Hidden" ItemsSource="{x:Static lc:LedMatrixDescriptor.MatrixTypes}" Padding="5"/>
-									</Grid>
+										<TextBlock Text="{x:Static properties:Resources.CaptionColumns}" Margin="8,0,0,0"/>
+									</lc:AutoGrid>
 									<TextBlock Text="{Binding Path=Circuit.Notation}" VerticalAlignment="Center"/>
 								</StackPanel>
 							</DataTemplate>
@@ -564,25 +515,17 @@
 							<DataTemplate DataType="{x:Type lc:GraphicsArrayDescriptor}">
 								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl/>
-									<Grid Margin="3,3,8,3" VerticalAlignment="Center">
-										<Grid.ColumnDefinitions>
-											<ColumnDefinition Width="Auto" MinWidth="65"/>
-											<ColumnDefinition Width="Auto"/>
-										</Grid.ColumnDefinitions>
-										<Grid.RowDefinitions>
-											<RowDefinition Height="Auto"/>
-											<RowDefinition Height="Auto"/>
-										</Grid.RowDefinitions>
-										<ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{x:Static lc:GraphicsArrayDescriptor.DataBitWidthRange}" SelectedItem="{Binding Path=DataBitWidth}"
+									<lc:AutoGrid Margin="3,3,8,3" VerticalAlignment="Center" ColumnWidths="Auto;Auto">
+										<ComboBox ItemsSource="{x:Static lc:GraphicsArrayDescriptor.DataBitWidthRange}" SelectedItem="{Binding Path=DataBitWidth}" MinWidth="45"
 											ToolTip="{x:Static properties:Resources.ToolTipDataBitWidth}"
 										/>
-										<TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Static properties:Resources.CaptionDataBitWidth}" Margin="8,0,0,0"/>
+										<TextBlock Text="{x:Static properties:Resources.CaptionDataBitWidth}" Margin="8,0,0,0"/>
 
-										<ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{x:Static lc:GraphicsArrayDescriptor.BitsPerPixelRange}" SelectedItem="{Binding Path=BitsPerPixel}"
+										<ComboBox ItemsSource="{x:Static lc:GraphicsArrayDescriptor.BitsPerPixelRange}" SelectedItem="{Binding Path=BitsPerPixel}"
 											ToolTip="{x:Static properties:Resources.ToolTipGraphicsArrayBPP}"
 										/>
-										<TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Static properties:Resources.CaptionGraphicsArrayBPP}" Margin="8,0,0,0"/>
-									</Grid>
+										<TextBlock Text="{x:Static properties:Resources.CaptionGraphicsArrayBPP}" Margin="8,0,0,0"/>
+									</lc:AutoGrid>
 									<TextBlock Text="{Binding Path=Circuit.Notation}" VerticalAlignment="Center"/>
 								</StackPanel>
 							</DataTemplate>
@@ -590,25 +533,17 @@
 							<DataTemplate DataType="{x:Type lc:PinDescriptor}">
 								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl/>
-									<Grid Margin="3,3,8,3" VerticalAlignment="Center">
-										<Grid.ColumnDefinitions>
-											<ColumnDefinition Width="Auto" MinWidth="65"/>
-											<ColumnDefinition Width="Auto"/>
-										</Grid.ColumnDefinitions>
-										<Grid.RowDefinitions>
-											<RowDefinition Height="Auto"/>
-											<RowDefinition Height="Auto"/>
-										</Grid.RowDefinitions>
-										<ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{x:Static lc:PinDescriptor.BitWidthRange}" SelectedItem="{Binding Path=BitWidth}"
+									<lc:AutoGrid Margin="3,3,8,3" VerticalAlignment="Center" ColumnWidths="Auto;Auto">
+										<ComboBox ItemsSource="{x:Static lc:PinDescriptor.BitWidthRange}" SelectedItem="{Binding Path=BitWidth}"
 											ToolTip="{x:Static properties:Resources.ToolTipPinBitWidth}"
 										/>
-										<TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Static properties:Resources.CaptionBitWidth}" Margin="8,0,0,0"/>
-										<ComboBox Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0"
+										<TextBlock Text="{x:Static properties:Resources.CaptionBitWidth}" Margin="8,0,0,0"/>
+										<lc:AutoWidthComboBox VerticalAlignment="Center" Margin="0"
 											SelectedItem="{Binding Path=PinSide, Mode=TwoWay}" ItemsSource="{x:Static lc:PinDescriptor.PinSideRange}"
 											ToolTip="{x:Static properties:Resources.ToolTipPinSide}"
 										/>
-										<TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Static properties:Resources.CaptionSide}" Margin="8,0,0,0"/>
-									</Grid>
+										<TextBlock Text="{x:Static properties:Resources.CaptionSide}" Margin="8,0,0,0"/>
+									</lc:AutoGrid>
 									<TextBlock Text="{x:Static properties:Resources.NamePin}" VerticalAlignment="Center"/>
 								</StackPanel>
 							</DataTemplate>
@@ -620,36 +555,23 @@
 											<ScaleTransform ScaleX="{Binding ElementName=directions, Path=SelectedItem.Flip, FallbackValue=1}"/>
 										</ContentControl.RenderTransform>
 									</ContentControl>
-									<Grid Margin="8,3,8,3" VerticalAlignment="Center">
-										<Grid.ColumnDefinitions>
-											<ColumnDefinition Width="Auto" MinWidth="65"/>
-											<ColumnDefinition Width="Auto"/>
-										</Grid.ColumnDefinitions>
-										<Grid.RowDefinitions>
-											<RowDefinition Height="Auto"/>
-											<RowDefinition Height="Auto"/>
-											<RowDefinition Height="Auto"/>
-										</Grid.RowDefinitions>
-
-										<ComboBox Grid.Row="0" Grid.Column="0"
-											ItemsSource="{Binding Path=PinCountRange}" SelectedItem="{Binding Path=PinCount}"
+									<lc:AutoGrid Margin="8,3,8,3" VerticalAlignment="Center" ColumnWidths="Auto;Auto">
+										<ComboBox ItemsSource="{Binding Path=PinCountRange}" SelectedItem="{Binding Path=PinCount}"
 											ToolTip="{x:Static properties:Resources.ToolTipSplitterPinNumber}"
 										/>
-										<TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Static properties:Resources.CaptionSplitterPinNumber}" Margin="8,0,0,0" VerticalAlignment="Center"/>
+										<TextBlock Text="{x:Static properties:Resources.CaptionSplitterPinNumber}" Margin="8,0,0,0" VerticalAlignment="Center"/>
 
-										<ComboBox Grid.Row="1" Grid.Column="0"
-											ItemsSource="{Binding Path=BitWidthRange}" SelectedItem="{Binding Path=BitWidth}"
+										<ComboBox ItemsSource="{Binding Path=BitWidthRange}" SelectedItem="{Binding Path=BitWidth}"
 											ToolTip="{x:Static properties:Resources.ToolTipSplitterBitWidth}"
 										/>
-										<TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Static properties:Resources.CaptionSplitterBitWidth}" Margin="8,0,0,0" VerticalAlignment="Center"/>
+										<TextBlock Text="{x:Static properties:Resources.CaptionSplitterBitWidth}" Margin="8,0,0,0" VerticalAlignment="Center"/>
 
-										<ComboBox Grid.Row="2" Grid.Column="0" Name="directions" MinWidth="{Binding ElementName=comboRuler, Path=ActualWidth}"
+										<lc:AutoWidthComboBox Name="directions"
 											ItemsSource="{Binding Path=DirectionRange}" SelectedItem="{Binding Path=Direction}"
 											ToolTip="{x:Static properties:Resources.ToolTipSplitterRotation}"
 										/>
-										<TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Static properties:Resources.CaptionSplitterDirection}" Margin="8,0,0,0" VerticalAlignment="Center"/>
-										<ListBox Name="comboRuler" Height="0" Visibility="Hidden" ItemsSource="{Binding Path=DirectionRange}" Padding="5"/>
-									</Grid>
+										<TextBlock Text="{x:Static properties:Resources.CaptionSplitterDirection}" Margin="8,0,0,0" VerticalAlignment="Center"/>
+									</lc:AutoGrid>
 									<TextBlock Style="{StaticResource CircuitName}"/>
 								</StackPanel>
 							</DataTemplate>
