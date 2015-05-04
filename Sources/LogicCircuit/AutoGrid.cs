@@ -97,10 +97,8 @@ namespace LogicCircuit {
 			int index = this.Children.Count - 2; // The last element needs to be placed in the grid. The previous already placed so inspect it.
 			if (0 <= index) {
 				UIElement last = this.Children[index];
-				object columnObject = last.ReadLocalValue(Grid.ColumnProperty);
-				object spanObject = last.ReadLocalValue(Grid.ColumnSpanProperty);
-				int column = AutoGrid.WasSet(columnObject) ? (int)columnObject : 0;
-				int span = AutoGrid.WasSet(spanObject) ? (int)spanObject : 1;
+				int column = (int)last.GetValue(Grid.ColumnProperty);
+				int span = (int)last.GetValue(Grid.ColumnSpanProperty);
 				return column + span;
 			}
 			return 0;
@@ -110,10 +108,7 @@ namespace LogicCircuit {
 			int index = this.Children.Count - 2; // The last element needs to be placed in the grid. The previous already placed so inspect it.
 			if (0 <= index) {
 				UIElement last = this.Children[index];
-				object rowObject = last.ReadLocalValue(Grid.RowProperty);
-				if (AutoGrid.WasSet(rowObject)) {
-					return (int)rowObject;
-				}
+				return (int)last.GetValue(Grid.RowProperty);
 			}
 			return 0;
 		}
