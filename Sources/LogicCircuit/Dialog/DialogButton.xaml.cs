@@ -19,7 +19,6 @@ namespace LogicCircuit {
 
 			this.name.Text = this.button.Notation;
 			this.isToggle.IsChecked = this.button.IsToggle;
-			this.side.ItemsSource = PinDescriptor.PinSideRange;
 			this.side.SelectedItem = PinDescriptor.PinSideDescriptor(this.button.PinSide);
 			this.note.Text = this.button.Note;
 		}
