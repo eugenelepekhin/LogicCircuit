@@ -19,7 +19,7 @@
 			<Setter Property="HorizontalContentAlignment" Value="Right"/>
 		</Style>
 
-		<Style TargetType="{x:Type ComboBox}">
+		<Style x:Key="comboStyle" TargetType="{x:Type ComboBox}">
 			<Setter Property="Margin" Value="3"/>
 			<Setter Property="MinWidth" Value="65"/>
 			<Setter Property="HorizontalAlignment" Value="Left"/>
@@ -42,7 +42,7 @@
 		<Label Content="{x:Static properties:Resources.TitleSensorType}"
 			Target="{Binding ElementName=sensorType}"
 		/>
-		<ComboBox Name="sensorType"
+		<lc:AutoWidthComboBox x:Name="sensorType" Style="{StaticResource comboStyle}"
 			ToolTip="{x:Static properties:Resources.ToolTipSensorType}"
 			ItemsSource="{Binding Path=SensorTypes}"
 			SelectedItem="{Binding Path=SelectedSensorType, ValidatesOnDataErrors=True}"
@@ -51,15 +51,23 @@
 		<Label Content="{x:Static properties:Resources.TitleBitWidth}"
 			Target="{Binding ElementName=bitWidth}"
 		/>
-		<ComboBox Name="bitWidth" ToolTip="{x:Static properties:Resources.ToolTipSensorBitWidth}"/>
+		<ComboBox Name="bitWidth" ToolTip="{x:Static properties:Resources.ToolTipSensorBitWidth}" Style="{StaticResource comboStyle}"/>
 
 		<Label Content="{x:Static properties:Resources.TitlePinSide}" Target="{Binding ElementName=side}"/>
-		<ComboBox Name="side" ToolTip="{x:Static properties:Resources.ToolTipDevicePinSide}"/>
+		<lc:AutoWidthComboBox x:Name="side" ToolTip="{x:Static properties:Resources.ToolTipDevicePinSide}" Style="{StaticResource comboStyle}"/>
 
 		<Label Content="{x:Static properties:Resources.TitleNotation}" Target="{Binding ElementName=notation}"/>
 		<TextBox Name="notation" SpellCheck.IsEnabled="True" MaxLength="8"/>
 
 		<!-- Variable controls start here -->
+
+		<Grid Height="0"> <!-- Make sure all labels allocating their space -->
+			<Label Content="{x:Static properties:Resources.TitleSeries}" IsEnabled="False"/>
+			<Label Content="{x:Static properties:Resources.TitleSensorRandomMin}" IsEnabled="False"/>
+			<Label Content="{x:Static properties:Resources.TitleSensorRandomMax}" IsEnabled="False"/>
+			<Label Content="{x:Static properties:Resources.TitleSensorManualInitialValue}" IsEnabled="False"/>
+		</Grid>
+		<Grid Height="0"/>
 
 		<!-- Series -->
 

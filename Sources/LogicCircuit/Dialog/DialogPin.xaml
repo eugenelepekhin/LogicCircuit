@@ -19,7 +19,7 @@
 			<Setter Property="HorizontalContentAlignment" Value="Right"/>
 		</Style>
 
-		<Style TargetType="{x:Type ComboBox}">
+		<Style x:Key="comboStyle" TargetType="{x:Type ComboBox}">
 			<Setter Property="Margin" Value="3"/>
 			<Setter Property="MinWidth" Value="65"/>
 			<Setter Property="HorizontalAlignment" Value="Left"/>
@@ -38,10 +38,10 @@
 		<TextBox Name="notation" ToolTip="{x:Static properties:Resources.ToolTipPinNotation}"/>
 
 		<Label Content="{x:Static properties:Resources.TitleSide}" Target="{Binding ElementName=side}"/>
-		<ComboBox Name="side" ToolTip="{x:Static properties:Resources.ToolTipPinSide}"/>
+		<lc:AutoWidthComboBox x:Name="side" ToolTip="{x:Static properties:Resources.ToolTipPinSide}" Style="{StaticResource comboStyle}"/>
 
 		<Label Content="{x:Static properties:Resources.TitleBitWidth}" Target="{Binding ElementName=bitWidth}"/>
-		<ComboBox Name="bitWidth" ToolTip="{x:Static properties:Resources.ToolTipPinBitWidth}"/>
+		<ComboBox Name="bitWidth" ToolTip="{x:Static properties:Resources.ToolTipPinBitWidth}" Style="{StaticResource comboStyle}" MinWidth="{Binding ElementName=side, Path=MinWidth}"/>
 
 		<CheckBox Grid.Column="1" Name="inverted" Content="{x:Static properties:Resources.TitleInverted}" IsThreeState="False"/>
 

@@ -127,6 +127,7 @@ namespace LogicCircuit {
 			return Path.GetExtension(this.FilePath).Trim().TrimStart('.');
 		}
 
+		[SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification="This methid is used in XAML")]
 		private void ImageTypeSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e) {
 			try {
 				if(!this.Encoder.IsKnownExtension(this.CurrentExtension())) {

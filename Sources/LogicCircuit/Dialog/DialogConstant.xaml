@@ -18,9 +18,8 @@
 			<Setter Property="HorizontalContentAlignment" Value="Right"/>
 		</Style>
 
-		<Style TargetType="{x:Type ComboBox}">
+		<Style x:Key="comboStyle" TargetType="{x:Type ComboBox}">
 			<Setter Property="Margin" Value="3"/>
-			<Setter Property="MinWidth" Value="65"/>
 			<Setter Property="HorizontalAlignment" Value="Left"/>
 			<Setter Property="VerticalAlignment" Value="Center"/>
 		</Style>
@@ -30,7 +29,9 @@
 		<Label Content="{x:Static properties:Resources.TitleBitWidth}"
 			Target="{Binding ElementName=bitWidth}"
 		/>
-		<ComboBox Name="bitWidth" ToolTip="{x:Static properties:Resources.ToolTipConstantBitWidth}"/>
+		<ComboBox Name="bitWidth" ItemsSource="{x:Static lc:PinDescriptor.BitWidthRange}" ToolTip="{x:Static properties:Resources.ToolTipConstantBitWidth}" Style="{StaticResource comboStyle}"
+			Width="{Binding ElementName=side, Path=ActualWidth}"
+		/>
 
 		<Label Content="{x:Static properties:Resources.TitleValue}"
 			Target="{Binding ElementName=value}"
@@ -38,7 +39,7 @@
 		<TextBox Name="value" ToolTip="{x:Static properties:Resources.ToolTipConstantValue}"/>
 
 		<Label Content="{x:Static properties:Resources.TitlePinSide}" Target="{Binding ElementName=side}"/>
-		<ComboBox Name="side" ToolTip="{x:Static properties:Resources.ToolTipDevicePinSide}"/>
+		<lc:AutoWidthComboBox x:Name="side" ItemsSource="{x:Static lc:PinDescriptor.PinSideRange}" ToolTip="{x:Static properties:Resources.ToolTipDevicePinSide}" Style="{StaticResource comboStyle}"/>
 
 		<Label Content="{x:Static properties:Resources.TitleDescription}" Target="{Binding ElementName=note}"/>
 		<TextBox Name="note" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"

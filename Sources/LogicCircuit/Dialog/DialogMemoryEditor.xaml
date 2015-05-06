@@ -5,7 +5,7 @@
 	xmlns:properties="clr-namespace:LogicCircuit.Properties"
 	WindowStartupLocation="CenterOwner"
 	Style="{StaticResource DialogWindow}"
-	MinWidth="550" MinHeight="350"
+	MinWidth="590" MinHeight="350"
 	FocusManager.FocusedElement="{Binding ElementName=addressBitWidth}"
 >
 	<Window.Resources>
@@ -14,10 +14,11 @@
 			<Setter Property="HorizontalContentAlignment" Value="Right"/>
 		</Style>
 
-		<Style TargetType="{x:Type ComboBox}">
+		<Style x:Key="comboStyle" TargetType="{x:Type ComboBox}">
 			<Setter Property="Margin" Value="3"/>
 			<Setter Property="MinWidth" Value="65"/>
 			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
 		</Style>
 
 		<Style x:Key="ramOnly" TargetType="{x:Type FrameworkElement}">
@@ -43,29 +44,24 @@
 
 	<lc:AutoGrid Margin="3">
 		<Label Content="{x:Static properties:Resources.TitleAddressBitWidth}" Target="{Binding ElementName=addressBitWidth}"/>
-		<ComboBox Name="addressBitWidth" SelectionChanged="MemorySizeChanged" ToolTip="{x:Static properties:Resources.ToolTipAddressBitWidth}" HorizontalAlignment="Left"/>
+		<ComboBox Name="addressBitWidth" SelectionChanged="MemorySizeChanged" ToolTip="{x:Static properties:Resources.ToolTipAddressBitWidth}" Style="{StaticResource comboStyle}"/>
 
 		<Label Content="{x:Static properties:Resources.TitleDataBitWidth}" Target="{Binding ElementName=dataBitWidth}"/>
-		<ComboBox Name="dataBitWidth" SelectionChanged="MemorySizeChanged" ToolTip="{x:Static properties:Resources.ToolTipDataBitWidth}" HorizontalAlignment="Left"/>
+		<ComboBox Name="dataBitWidth" SelectionChanged="MemorySizeChanged" ToolTip="{x:Static properties:Resources.ToolTipDataBitWidth}" Style="{StaticResource comboStyle}"/>
 
 		<StackPanel Style="{StaticResource ramOnly}">
 			<Label Content="{x:Static properties:Resources.TitleWriteOn}" Target="{Binding ElementName=writeOn}"/>
 		</StackPanel>
 		<StackPanel Style="{StaticResource ramOnly}">
-			<ComboBox Name="writeOn" ToolTip="{x:Static properties:Resources.ToolTipRamWriteOn}"/>
+			<lc:AutoWidthComboBox x:Name="writeOn" ToolTip="{x:Static properties:Resources.ToolTipRamWriteOn}" Style="{StaticResource comboStyle}"/>
 		</StackPanel>
 
 		<StackPanel Style="{StaticResource ramOnly}">
 			<Label Content="{x:Static properties:Resources.TitleMemoryOnStart}" Target="{Binding ElementName=onStart}"/>
 		</StackPanel>
 		<StackPanel Style="{StaticResource ramOnly}">
-			<Canvas Visibility="Hidden">
-				<ListBox Name="onStartList" HorizontalAlignment="Left" Padding="10,0"
-					ItemsSource="{Binding ElementName=onStart, Path=ItemsSource}"
-				/>
-			</Canvas>
-			<ComboBox Name="onStart" HorizontalAlignment="Left"
-				Width="{Binding ElementName=onStartList, Path=ActualWidth}" ToolTip="{x:Static properties:Resources.ToolTipMemoryOnStart}"
+			<lc:AutoWidthComboBox x:Name="onStart" HorizontalAlignment="Left" Style="{StaticResource comboStyle}"
+				ToolTip="{x:Static properties:Resources.ToolTipMemoryOnStart}"
 			/>
 		</StackPanel>
 
@@ -229,14 +225,16 @@
 			</GroupBox>
 		</Grid>
 
-		<StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Style="{StaticResource dataAllowed}">
-			<Button Content="{x:Static properties:Resources.TitleLoad}" Click="ButtonLoadClick" ToolTip="{x:Static properties:Resources.ToolTipLoadData}"/>
-			<Button Content="{x:Static properties:Resources.TitleSaveAs}" Click="ButtonSaveClick" ToolTip="{x:Static properties:Resources.ToolTipSaveData}"/>
-		</StackPanel>
+		<Grid Grid.ColumnSpan="2">
+			<StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Style="{StaticResource dataAllowed}">
+				<Button Content="{x:Static properties:Resources.TitleLoad}" Click="ButtonLoadClick" ToolTip="{x:Static properties:Resources.ToolTipLoadData}"/>
+				<Button Content="{x:Static properties:Resources.TitleSaveAs}" Click="ButtonSaveClick" ToolTip="{x:Static properties:Resources.ToolTipSaveData}"/>
+			</StackPanel>
 
-		<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-			<Button Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" Click="ButtonOkClick"/>
-			<Button Content="{x:Static properties:Resources.TitleCancel}" IsCancel="True"/>
-		</StackPanel>
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+				<Button Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" Click="ButtonOkClick"/>
+				<Button Content="{x:Static properties:Resources.TitleCancel}" IsCancel="True"/>
+			</StackPanel>
+		</Grid>
 	</lc:AutoGrid>
 </Window>

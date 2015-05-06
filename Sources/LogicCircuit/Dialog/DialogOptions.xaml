@@ -79,16 +79,11 @@
 		<GroupBox HorizontalAlignment="Stretch" VerticalAlignment="Top"
 			Header="{x:Static properties:Resources.TitleCulture}"
 		>
-			<Grid>
-				<Canvas>
-					<ListBox Name="languageList" ItemsSource="{x:Static lc:App.AvailableCultures}" Padding="10,0" ItemTemplate="{StaticResource LanguageName}" Visibility="Hidden"/>
-				</Canvas>
-				<ComboBox Name="cultureSelector" IsEditable="False" HorizontalAlignment="Stretch" MinWidth="{Binding ElementName=languageList, Path=ActualWidth}"
-					ItemsSource="{x:Static lc:App.AvailableCultures}"
-					SelectedItem="{Binding Path=CurrentCulture}"
-					ItemTemplate="{StaticResource LanguageName}"
-				/>
-			</Grid>
+			<lc:AutoWidthComboBox IsEditable="False" HorizontalAlignment="Stretch"
+				ItemsSource="{x:Static lc:App.AvailableCultures}"
+				SelectedItem="{Binding Path=CurrentCulture}"
+				ItemTemplate="{StaticResource LanguageName}"
+			/>
 		</GroupBox>
 
 		<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">

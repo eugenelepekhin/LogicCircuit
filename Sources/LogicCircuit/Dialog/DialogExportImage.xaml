@@ -18,9 +18,8 @@
 			<Setter Property="HorizontalContentAlignment" Value="Right"/>
 		</Style>
 
-		<Style TargetType="{x:Type ComboBox}">
+		<Style TargetType="{x:Type lc:AutoWidthComboBox}">
 			<Setter Property="Margin" Value="3"/>
-			<Setter Property="MinWidth" Value="65"/>
 			<Setter Property="HorizontalAlignment" Value="Left"/>
 			<Setter Property="VerticalAlignment" Value="Center"/>
 		</Style>
@@ -32,7 +31,7 @@
 		/>
 
 		<Label Content="{x:Static properties:Resources.TitleType}" Target="{Binding ElementName=imageType}"/>
-		<ComboBox Name="imageType"
+		<lc:AutoWidthComboBox x:Name="imageType"
 			ItemsSource="{Binding Path=Encoders}" SelectedItem="{Binding Path=Encoder, Mode=TwoWay}"
 			SelectionChanged="ImageTypeSelectionChanged"
 		/>

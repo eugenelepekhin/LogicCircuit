@@ -6,7 +6,7 @@
 	WindowStartupLocation="CenterOwner"
 	Title="{x:Static properties:Resources.NameGraphicsArray}"
 	Style="{StaticResource DialogWindow}"
-	MinWidth="400"
+	MinWidth="420"
 	MinHeight="320"
 	FocusManager.FocusedElement="{Binding ElementName=writeOn}"
 >
@@ -20,7 +20,7 @@
 			<Setter Property="HorizontalContentAlignment" Value="Right"/>
 		</Style>
 
-		<Style TargetType="{x:Type ComboBox}">
+		<Style x:Key="comboStyle" TargetType="{x:Type ComboBox}">
 			<Setter Property="Margin" Value="3"/>
 			<Setter Property="MinWidth" Value="65"/>
 			<Setter Property="HorizontalAlignment" Value="Left"/>
@@ -39,37 +39,20 @@
 
 	<lc:AutoGrid>
 		<Label Content="{x:Static properties:Resources.TitleWriteOn}" Target="{Binding ElementName=writeOn}"/>
-		<StackPanel Orientation="Vertical">
-			<Canvas Visibility="Hidden">
-				<ListBox Name="writeOnList" HorizontalAlignment="Left" Padding="10,0"
-					ItemsSource="{Binding ElementName=writeOn, Path=ItemsSource}"
-					MinWidth="{Binding ElementName=onStartList, Path=ActualWidth}"
-				/>
-			</Canvas>
-			<ComboBox Name="writeOn"
-				Width="{Binding ElementName=writeOnList, Path=ActualWidth}"
-				ToolTip="{x:Static properties:Resources.ToolTipRamWriteOn}"
-			/>
-		</StackPanel>
+		<lc:AutoWidthComboBox x:Name="writeOn" Style="{StaticResource comboStyle}"
+			ToolTip="{x:Static properties:Resources.ToolTipRamWriteOn}"
+		/>
 
 		<Label Content="{x:Static properties:Resources.TitleMemoryOnStart}" Target="{Binding ElementName=onStart}"/>
-		<StackPanel Orientation="Vertical">
-			<Canvas Visibility="Hidden">
-				<ListBox Name="onStartList" HorizontalAlignment="Left" Padding="10,0"
-					ItemsSource="{Binding ElementName=onStart, Path=ItemsSource}"
-					MinWidth="{Binding ElementName=writeOnList, Path=ActualWidth}"
-				/>
-			</Canvas>
-			<ComboBox Name="onStart" HorizontalAlignment="Left"
-				Width="{Binding ElementName=onStartList, Path=ActualWidth}" ToolTip="{x:Static properties:Resources.ToolTipMemoryOnStart}"
-			/>
-		</StackPanel>
+		<lc:AutoWidthComboBox x:Name="onStart" HorizontalAlignment="Left" Style="{StaticResource comboStyle}"
+			ToolTip="{x:Static properties:Resources.ToolTipMemoryOnStart}"
+		/>
 
 		<Label Content="{x:Static properties:Resources.TitleDataBitWidth}" Target="{Binding ElementName=dataBitWidth}"/>
-		<ComboBox Name="dataBitWidth" ToolTip="{x:Static properties:Resources.ToolTipDataBitWidth}" HorizontalAlignment="Left"/>
+		<ComboBox Name="dataBitWidth" ToolTip="{x:Static properties:Resources.ToolTipDataBitWidth}" HorizontalAlignment="Left" Style="{StaticResource comboStyle}"/>
 
 		<Label Content="{x:Static properties:Resources.TitleGraphicsArrayBPP}" Target="{Binding ElementName=bitsPerPixel}"/>
-		<ComboBox Name="bitsPerPixel" ToolTip="{x:Static properties:Resources.ToolTipGraphicsArrayBPP}" HorizontalAlignment="Left"/>
+		<ComboBox Name="bitsPerPixel" ToolTip="{x:Static properties:Resources.ToolTipGraphicsArrayBPP}" HorizontalAlignment="Left" Style="{StaticResource comboStyle}"/>
 
 		<Label Content="{x:Static properties:Resources.TitleWidth}" Target="{Binding ElementName=width}"/>
 		<TextBox Name="width" Width="{Binding ElementName=dataBitWidth, Path=ActualWidth}" HorizontalAlignment="Left"
@@ -96,3 +79,4 @@
 		</StackPanel>
 	</lc:AutoGrid>
 </Window>
+	

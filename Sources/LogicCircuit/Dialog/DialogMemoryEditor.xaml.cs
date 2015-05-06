@@ -16,6 +16,7 @@ namespace LogicCircuit {
 	/// <summary>
 	/// Interaction logic for DialogMemoryEditor.xaml
 	/// </summary>
+	[SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 	public abstract partial class DialogMemoryEditor : Window {
 
 		private SettingsWindowLocationCache windowLocation;

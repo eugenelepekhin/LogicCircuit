@@ -20,7 +20,6 @@ namespace LogicCircuit {
 			this.value.Text = constant.ConstantValue.ToString("X", CultureInfo.InvariantCulture);
 			this.bitWidth.ItemsSource = PinDescriptor.BitWidthRange;
 			this.bitWidth.SelectedItem = this.constant.BitWidth;
-			this.side.ItemsSource = PinDescriptor.PinSideRange;
 			this.side.SelectedItem = PinDescriptor.PinSideDescriptor(this.constant.PinSide);
 			this.note.Text = constant.Note;
 		}
