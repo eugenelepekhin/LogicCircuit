@@ -9,10 +9,6 @@
 	FocusManager.FocusedElement="{Binding ElementName=name}"
 >
 	<Window.Resources>
-		<Style TargetType="{x:Type TextBox}">
-			<Setter Property="Margin" Value="3,3,8,3"/>
-		</Style>
-
 		<Style TargetType="{x:Type Label}">
 			<Setter Property="Margin" Value="3"/>
 			<Setter Property="HorizontalContentAlignment" Value="Right"/>
@@ -37,9 +33,7 @@
 		<lc:AutoWidthComboBox x:Name="side" ItemsSource="{x:Static lc:PinDescriptor.PinSideRange}" ToolTip="{x:Static properties:Resources.ToolTipDevicePinSide}"/>
 
 		<Label Content="{x:Static properties:Resources.TitleDescription}" Target="{Binding ElementName=note}"/>
-		<TextBox Name="note" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
-			AcceptsReturn="True" AcceptsTab="True" SpellCheck.IsEnabled="True"
-		/>
+		<TextBox Name="note" AcceptsReturn="True"/>
 
 		<StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
 			<Button Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" Click="ButtonOkClick"/>

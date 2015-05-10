@@ -375,9 +375,7 @@
 							<DataTemplate DataType="{x:Type lc:ProbeDescriptor}">
 								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl/>
-									<TextBox MaxLength="4" Width="65" VerticalAlignment="Center"
-										Text="{Binding Path=Name}"
-									/>
+									<TextBox MaxLength="4" Text="{Binding Path=Name}"/>
 									<TextBlock Text="{x:Static properties:Resources.CaptionName}" VerticalAlignment="Center"/>
 									<TextBlock Text="{x:Static properties:Resources.CircuitProbeName}" VerticalAlignment="Center" Margin="16,0,0,0"/>
 								</StackPanel>
@@ -387,8 +385,8 @@
 								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl/>
 									<lc:AutoGrid Margin="3,3,8,3" VerticalAlignment="Center" ColumnWidths="Auto;Auto">
-										<TextBox Text="{Binding Path=Notation, Mode=TwoWay}" VerticalAlignment="Center" MinWidth="15"
-											ToolTip="{x:Static properties:Resources.ToolTipButtonNotation}" MaxLength="4"
+										<TextBox Text="{Binding Path=Notation, Mode=TwoWay}"
+											ToolTip="{x:Static properties:Resources.ToolTipButtonNotation}"
 										/>
 										<TextBlock Text="{x:Static properties:Resources.CaptionNotation}" Margin="3,0,8,0" VerticalAlignment="Center"/>
 										<CheckBox Grid.ColumnSpan="2" IsChecked="{Binding Path=IsToggle}" Margin="6,0,8,5"
@@ -413,9 +411,9 @@
 											ToolTip="{x:Static properties:Resources.ToolTipConstantBitWidth}"
 										/>
 										<TextBlock Text="{x:Static properties:Resources.CaptionBitWidth}" Margin="8,0,0,0"/>
-										<TextBox Text="{Binding Path=Value, Mode=TwoWay}" VerticalAlignment="Center"
-											CharacterCasing="Upper" MaxLength="8" ToolTip="{x:Static properties:Resources.ToolTipConstantValue}"
-											Margin="0"
+										<TextBox MaxLength="8" CharacterCasing="Upper"
+											Text="{Binding Path=Value, Mode=TwoWay}"
+											ToolTip="{x:Static properties:Resources.ToolTipConstantValue}"
 										/>
 										<TextBlock Text="{x:Static properties:Resources.CaptionValue}" Margin="8,0,0,0"/>
 										<lc:AutoWidthComboBox VerticalAlignment="Center" Margin="0"
@@ -445,9 +443,9 @@
 											ToolTip="{x:Static properties:Resources.ToolTipDevicePinSide}"
 										/>
 										<TextBlock Text="{x:Static properties:Resources.CaptionPinSide}" Margin="8,0,0,0"/>
-										<TextBox Text="{Binding Path=Notation, Mode=TwoWay}" VerticalAlignment="Center"
-											MaxLength="8" ToolTip="{x:Static properties:Resources.ToolTipSensorNotation}"
-											Margin="0"
+										<TextBox MaxLength="8"
+											Text="{Binding Path=Notation, Mode=TwoWay}"
+											ToolTip="{x:Static properties:Resources.ToolTipSensorNotation}"
 										/>
 										<TextBlock Text="{x:Static properties:Resources.CaptionNotation}" Margin="8,0,0,0"/>
 									</lc:AutoGrid>
@@ -464,9 +462,9 @@
 											ToolTip="{x:Static properties:Resources.ToolTipDevicePinSide}"
 										/>
 										<TextBlock Text="{x:Static properties:Resources.CaptionPinSide}" Margin="8,0,0,0"/>
-										<TextBox Text="{Binding Path=Notation, Mode=TwoWay}" VerticalAlignment="Center"
-											MaxLength="8" ToolTip="{x:Static properties:Resources.ToolTipSoundNotation}"
-											Margin="0"
+										<TextBox MaxLength="8"
+											Text="{Binding Path=Notation, Mode=TwoWay}"
+											ToolTip="{x:Static properties:Resources.ToolTipSoundNotation}"
 										/>
 										<TextBlock Text="{x:Static properties:Resources.CaptionNotation}" Margin="8,0,0,0"/>
 									</lc:AutoGrid>
