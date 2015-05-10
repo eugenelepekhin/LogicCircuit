@@ -142,13 +142,6 @@
 				<Setter Property="Padding" Value="8,2"/>
 			</Style>
 
-			<Style TargetType="{x:Type ToggleButton}">
-				<Setter Property="Width" Value="Auto"/>
-				<Setter Property="MinWidth" Value="76"/>
-				<Setter Property="Margin" Value="8"/>
-				<Setter Property="Padding" Value="8,0,8,0"/>
-			</Style>
-
 			<Style TargetType="{x:Type CheckBox}">
 				<Setter Property="Margin" Value="3"/>
 				<Setter Property="HorizontalAlignment" Value="Left"/>
