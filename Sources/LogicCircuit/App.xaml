@@ -139,7 +139,7 @@
 				<Setter Property="Width" Value="Auto"/>
 				<Setter Property="MinWidth" Value="76"/>
 				<Setter Property="Margin" Value="8"/>
-				<Setter Property="Padding" Value="8,1"/>
+				<Setter Property="Padding" Value="8,2"/>
 			</Style>
 
 			<Style TargetType="{x:Type ToggleButton}">
