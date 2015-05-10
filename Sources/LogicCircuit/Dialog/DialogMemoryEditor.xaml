@@ -219,9 +219,7 @@
 			<GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="3" Background="Transparent"/>
 
 			<GroupBox Grid.Row="2" Margin="3,0,3,3" Header="{x:Static properties:Resources.CaptionNote}">
-				<TextBox Name="note" Margin="0" BorderThickness="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
-					AcceptsReturn="True" AcceptsTab="True" SpellCheck.IsEnabled="True"
-				/>
+				<TextBox Name="note" BorderThickness="0" AcceptsReturn="True"/>
 			</GroupBox>
 		</Grid>
 

@@ -19,7 +19,7 @@
 			<Label Target="{Binding ElementName=filter}" VerticalAlignment="Center"
 				Content="{x:Static properties:Resources.TitleFilter}"
 			/>
-			<TextBox Name="filter" VerticalAlignment="Center"/>
+			<TextBox Name="filter"/>
 			<CheckBox VerticalAlignment="Center"
 				Content="{x:Static properties:Resources.TitleInvert}"
 				IsChecked="{Binding Path=InvertFilter}"

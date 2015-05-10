@@ -11,10 +11,6 @@
 	FocusManager.FocusedElement="{Binding ElementName=hyperlinkText}"
 >
 	<Window.Resources>
-		<Style TargetType="{x:Type TextBox}">
-			<Setter Property="Margin" Value="7,3,8,3"/>
-		</Style>
-
 		<Style TargetType="{x:Type Label}">
 			<Setter Property="Margin" Value="3"/>
 			<Setter Property="HorizontalContentAlignment" Value="Right"/>
@@ -28,7 +24,7 @@
 		/>
 
 		<Label Content="{x:Static properties:Resources.TitleHyperlink}" Target="{Binding ElementName=hyperlinkUrl}"/>
-		<TextBox Name="hyperlinkUrl"
+		<TextBox Name="hyperlinkUrl" SpellCheck.IsEnabled="False"
 			Text="{Binding Path=HyperlinkUrl, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
 		/>
 

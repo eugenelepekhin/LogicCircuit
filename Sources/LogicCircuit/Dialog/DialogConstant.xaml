@@ -9,10 +9,6 @@
 	FocusManager.FocusedElement="{Binding ElementName=value}"
 >
 	<Window.Resources>
-		<Style TargetType="{x:Type TextBox}">
-			<Setter Property="Margin" Value="3,3,8,3"/>
-		</Style>
-
 		<Style TargetType="{x:Type Label}">
 			<Setter Property="Margin" Value="3"/>
 			<Setter Property="HorizontalContentAlignment" Value="Right"/>
@@ -36,15 +32,13 @@
 		<Label Content="{x:Static properties:Resources.TitleValue}"
 			Target="{Binding ElementName=value}"
 		/>
-		<TextBox Name="value" ToolTip="{x:Static properties:Resources.ToolTipConstantValue}"/>
+		<TextBox Name="value" ToolTip="{x:Static properties:Resources.ToolTipConstantValue}" HorizontalAlignment="Left" Width="{Binding ElementName=side, Path=ActualWidth}" SpellCheck.IsEnabled="False"/>
 
 		<Label Content="{x:Static properties:Resources.TitlePinSide}" Target="{Binding ElementName=side}"/>
 		<lc:AutoWidthComboBox x:Name="side" ItemsSource="{x:Static lc:PinDescriptor.PinSideRange}" ToolTip="{x:Static properties:Resources.ToolTipDevicePinSide}" Style="{StaticResource comboStyle}"/>
 
 		<Label Content="{x:Static properties:Resources.TitleDescription}" Target="{Binding ElementName=note}"/>
-		<TextBox Name="note" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
-			AcceptsReturn="True" AcceptsTab="True" SpellCheck.IsEnabled="True"
-		/>
+		<TextBox Name="note" AcceptsReturn="True"/>
 
 		<StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
 			<Button Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" Click="ButtonOkClick"/>

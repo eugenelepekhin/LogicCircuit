@@ -10,10 +10,6 @@
 	FocusManager.FocusedElement="{Binding ElementName=sensorType}"
 >
 	<Window.Resources>
-		<Style TargetType="{x:Type TextBox}">
-			<Setter Property="Margin" Value="3,3,8,3"/>
-		</Style>
-
 		<Style TargetType="{x:Type Label}">
 			<Setter Property="Margin" Value="3"/>
 			<Setter Property="HorizontalContentAlignment" Value="Right"/>
@@ -57,7 +53,7 @@
 		<lc:AutoWidthComboBox x:Name="side" ToolTip="{x:Static properties:Resources.ToolTipDevicePinSide}" Style="{StaticResource comboStyle}"/>
 
 		<Label Content="{x:Static properties:Resources.TitleNotation}" Target="{Binding ElementName=notation}"/>
-		<TextBox Name="notation" SpellCheck.IsEnabled="True" MaxLength="8"/>
+		<TextBox Name="notation" MaxLength="8"/>
 
 		<!-- Variable controls start here -->
 
@@ -123,9 +119,7 @@
 		<!-- End of variable controls -->
 
 		<Label Content="{x:Static properties:Resources.TitleDescription}" Target="{Binding ElementName=note}"/>
-		<TextBox Name="note" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
-			AcceptsReturn="True" AcceptsTab="True" SpellCheck.IsEnabled="True"
-		/>
+		<TextBox Name="note" AcceptsReturn="True"/>
 
 		<StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
 			<Button Name="buttonOk" Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" Click="ButtonOkClick"/>

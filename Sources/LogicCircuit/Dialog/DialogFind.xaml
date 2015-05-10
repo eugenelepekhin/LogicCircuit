@@ -11,7 +11,7 @@
 >
 	<lc:AutoGrid Margin="3" ColumnWidths="Auto;*;Auto">
 		<Label Content="{x:Static properties:Resources.TitleSearchPattern}" Target="{Binding ElementName=filter}" VerticalAlignment="Center"/>
-		<TextBox Name="filter" VerticalAlignment="Center" Text="{Binding Path=SearchFilter, UpdateSourceTrigger=PropertyChanged}"/>
+		<TextBox Name="filter" Text="{Binding Path=SearchFilter, UpdateSourceTrigger=PropertyChanged}"/>
 		<Button Content="{x:Static properties:Resources.TitleSearch}" Click="ButtonSearchClick" IsDefault="True">
 			<Button.Style>
 				<Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
