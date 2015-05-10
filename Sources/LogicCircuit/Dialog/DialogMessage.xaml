@@ -43,7 +43,7 @@
 				Content="{x:Static properties:Resources.TitleShowDetails}"
 			>
 				<CheckBox.Style>
-					<Style TargetType="{x:Type CheckBox}">
+					<Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
 						<Style.Triggers>
 							<DataTrigger Binding="{Binding Path=Details.Length, Mode=OneTime}" Value="0">
 								<Setter Property="Visibility" Value="Collapsed"/>

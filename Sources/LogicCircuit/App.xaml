@@ -150,8 +150,9 @@
 			</Style>
 
 			<Style TargetType="{x:Type CheckBox}">
-				<Setter Property="Margin" Value="8,8,8,8"/>
-				<Setter Property="Padding" Value="3,0,3,0"/>
+				<Setter Property="Margin" Value="3"/>
+				<Setter Property="HorizontalAlignment" Value="Left"/>
+				<Setter Property="VerticalAlignment" Value="Center"/>
 			</Style>
 
 			<Style TargetType="{x:Type TextBox}">

@@ -20,7 +20,7 @@
 			<Setter Property="Margin" Value="3"/>
 		</Style>
 
-		<Style TargetType="CheckBox">
+		<Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
 			<Setter Property="Foreground" Value="{StaticResource dialogTextColor}"/>
 			<Setter Property="HorizontalAlignment" Value="Center"/>
 		</Style>

@@ -105,7 +105,7 @@
 			</ListView.View>
 		</ListView>
 
-		<CheckBox HorizontalAlignment="Left" VerticalAlignment="Center"
+		<CheckBox
 			IsChecked="{Binding Path=CircuitRunner.Oscilloscoping, Mode=TwoWay}"
 			Content="{x:Static properties:Resources.TitleOscilloscoping}"
 		/>

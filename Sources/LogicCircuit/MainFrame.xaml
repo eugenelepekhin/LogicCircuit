@@ -389,8 +389,10 @@
 											ToolTip="{x:Static properties:Resources.ToolTipButtonNotation}"
 										/>
 										<TextBlock Text="{x:Static properties:Resources.CaptionNotation}" Margin="3,0,8,0" VerticalAlignment="Center"/>
-										<CheckBox Grid.ColumnSpan="2" IsChecked="{Binding Path=IsToggle}" Margin="6,0,8,5"
-											Content="{x:Static properties:Resources.TitleIsToggle}" ToolTip="{x:Static properties:Resources.ToolTipIsToggle}"
+										<CheckBox Grid.ColumnSpan="2"
+											IsChecked="{Binding Path=IsToggle}"
+											Content="{x:Static properties:Resources.TitleIsToggle}"
+											ToolTip="{x:Static properties:Resources.ToolTipIsToggle}"
 										/>
 										<lc:AutoWidthComboBox VerticalAlignment="Center" Margin="3,0"
 											ItemsSource="{x:Static lc:PinDescriptor.PinSideRange}"

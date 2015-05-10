@@ -52,7 +52,7 @@
 			Header="{x:Static properties:Resources.TitleFileOptions}"
 		>
 			<lc:AutoGrid>
-				<CheckBox Grid.ColumnSpan="2" Name="loadLastFile" IsThreeState="False"
+				<CheckBox Grid.ColumnSpan="2" Name="loadLastFile"
 					Content="{x:Static properties:Resources.TitleLoadLastFile}"
 				/>
 
@@ -65,7 +65,7 @@
 			Header="{x:Static properties:Resources.TitleDisplayOptions}"
 		>
 			<lc:AutoGrid>
-				<CheckBox Grid.ColumnSpan="2" Name="showGrid" IsThreeState="False"
+				<CheckBox Grid.ColumnSpan="2" Name="showGrid"
 					Content="{x:Static properties:Resources.TitleShowGrid}"
 				/>
 

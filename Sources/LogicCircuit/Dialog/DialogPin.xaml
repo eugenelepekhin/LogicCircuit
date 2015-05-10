@@ -39,7 +39,7 @@
 		<Label Content="{x:Static properties:Resources.TitleBitWidth}" Target="{Binding ElementName=bitWidth}"/>
 		<ComboBox Name="bitWidth" ToolTip="{x:Static properties:Resources.ToolTipPinBitWidth}" Style="{StaticResource comboStyle}" MinWidth="{Binding ElementName=side, Path=MinWidth}"/>
 
-		<CheckBox Grid.Column="1" Name="inverted" Content="{x:Static properties:Resources.TitleInverted}" IsThreeState="False"/>
+		<CheckBox Grid.Column="1" Name="inverted" Content="{x:Static properties:Resources.TitleInverted}"/>
 
 		<Label Content="{x:Static properties:Resources.TitleDescription}" Target="{Binding ElementName=note}"/>
 		<TextBox Name="note" AcceptsReturn="True"/>
