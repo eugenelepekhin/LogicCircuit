@@ -14,10 +14,7 @@
 			<Setter Property="HorizontalContentAlignment" Value="Right"/>
 		</Style>
 
-		<Style x:Key="comboStyle" TargetType="{x:Type ComboBox}">
-			<Setter Property="Margin" Value="3"/>
-			<Setter Property="MinWidth" Value="65"/>
-			<Setter Property="VerticalAlignment" Value="Center"/>
+		<Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
 			<Setter Property="HorizontalAlignment" Value="Left"/>
 		</Style>
 
@@ -44,23 +41,23 @@
 
 	<lc:AutoGrid Margin="3">
 		<Label Content="{x:Static properties:Resources.TitleAddressBitWidth}" Target="{Binding ElementName=addressBitWidth}"/>
-		<ComboBox Name="addressBitWidth" SelectionChanged="MemorySizeChanged" ToolTip="{x:Static properties:Resources.ToolTipAddressBitWidth}" Style="{StaticResource comboStyle}"/>
+		<ComboBox Name="addressBitWidth" SelectionChanged="MemorySizeChanged" ToolTip="{x:Static properties:Resources.ToolTipAddressBitWidth}"/>
 
 		<Label Content="{x:Static properties:Resources.TitleDataBitWidth}" Target="{Binding ElementName=dataBitWidth}"/>
-		<ComboBox Name="dataBitWidth" SelectionChanged="MemorySizeChanged" ToolTip="{x:Static properties:Resources.ToolTipDataBitWidth}" Style="{StaticResource comboStyle}"/>
+		<ComboBox Name="dataBitWidth" SelectionChanged="MemorySizeChanged" ToolTip="{x:Static properties:Resources.ToolTipDataBitWidth}"/>
 
 		<StackPanel Style="{StaticResource ramOnly}">
 			<Label Content="{x:Static properties:Resources.TitleWriteOn}" Target="{Binding ElementName=writeOn}"/>
 		</StackPanel>
 		<StackPanel Style="{StaticResource ramOnly}">
-			<lc:AutoWidthComboBox x:Name="writeOn" ToolTip="{x:Static properties:Resources.ToolTipRamWriteOn}" Style="{StaticResource comboStyle}"/>
+			<lc:AutoWidthComboBox x:Name="writeOn" ToolTip="{x:Static properties:Resources.ToolTipRamWriteOn}"/>
 		</StackPanel>
 
 		<StackPanel Style="{StaticResource ramOnly}">
 			<Label Content="{x:Static properties:Resources.TitleMemoryOnStart}" Target="{Binding ElementName=onStart}"/>
 		</StackPanel>
 		<StackPanel Style="{StaticResource ramOnly}">
-			<lc:AutoWidthComboBox x:Name="onStart" HorizontalAlignment="Left" Style="{StaticResource comboStyle}"
+			<lc:AutoWidthComboBox x:Name="onStart"
 				ToolTip="{x:Static properties:Resources.ToolTipMemoryOnStart}"
 			/>
 		</StackPanel>

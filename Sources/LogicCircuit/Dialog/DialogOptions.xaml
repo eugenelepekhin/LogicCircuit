@@ -13,11 +13,6 @@
 			<Setter Property="Margin" Value="0,5,0,0"/>
 		</Style>
 
-		<Style TargetType="{x:Type ComboBox}">
-			<Setter Property="VerticalAlignment" Value="Center"/>
-			<Setter Property="Margin" Value="5"/>
-		</Style>
-
 		<Style x:Key="CultureTranslation" TargetType="TextBlock">
 			<Setter Property="FlowDirection" Value="LeftToRight"/>
 			<Style.Triggers>
@@ -57,7 +52,7 @@
 				/>
 
 				<Label Content="{x:Static properties:Resources.TitleMaxRecentFiles}" Target="{Binding ElementName=maxRecentFiles}"/>
-				<ComboBox Name="maxRecentFiles" ItemsSource="{Binding RecentFileRange}" MinWidth="50"/>
+				<ComboBox Name="maxRecentFiles" ItemsSource="{Binding RecentFileRange}"/>
 			</lc:AutoGrid>
 		</GroupBox>
 
@@ -72,14 +67,14 @@
 				<Label Target="{Binding ElementName=gateShape}"
 					Content="{x:Static properties:Resources.TitleGateShape}"
 				/>
-				<ComboBox Name="gateShape" ItemsSource="{Binding Path=GateShapeList}" IsEditable="False"/>
+				<ComboBox Name="gateShape" ItemsSource="{Binding Path=GateShapeList}"/>
 			</lc:AutoGrid>
 		</GroupBox>
 
 		<GroupBox HorizontalAlignment="Stretch" VerticalAlignment="Top"
 			Header="{x:Static properties:Resources.TitleCulture}"
 		>
-			<lc:AutoWidthComboBox IsEditable="False" HorizontalAlignment="Stretch"
+			<lc:AutoWidthComboBox HorizontalAlignment="Stretch"
 				ItemsSource="{x:Static lc:App.AvailableCultures}"
 				SelectedItem="{Binding Path=CurrentCulture}"
 				ItemTemplate="{StaticResource LanguageName}"

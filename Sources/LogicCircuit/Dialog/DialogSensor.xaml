@@ -15,13 +15,6 @@
 			<Setter Property="HorizontalContentAlignment" Value="Right"/>
 		</Style>
 
-		<Style x:Key="comboStyle" TargetType="{x:Type ComboBox}">
-			<Setter Property="Margin" Value="3"/>
-			<Setter Property="MinWidth" Value="65"/>
-			<Setter Property="HorizontalAlignment" Value="Left"/>
-			<Setter Property="VerticalAlignment" Value="Center"/>
-		</Style>
-
 		<lc:EnumToVisibilityConvertor x:Key="EnumToVisibilityConvertor"/>
 
 		<ControlTemplate x:Key="validationTemplate">
@@ -38,7 +31,7 @@
 		<Label Content="{x:Static properties:Resources.TitleSensorType}"
 			Target="{Binding ElementName=sensorType}"
 		/>
-		<lc:AutoWidthComboBox x:Name="sensorType" Style="{StaticResource comboStyle}"
+		<lc:AutoWidthComboBox x:Name="sensorType"
 			ToolTip="{x:Static properties:Resources.ToolTipSensorType}"
 			ItemsSource="{Binding Path=SensorTypes}"
 			SelectedItem="{Binding Path=SelectedSensorType, ValidatesOnDataErrors=True}"
@@ -47,10 +40,10 @@
 		<Label Content="{x:Static properties:Resources.TitleBitWidth}"
 			Target="{Binding ElementName=bitWidth}"
 		/>
-		<ComboBox Name="bitWidth" ToolTip="{x:Static properties:Resources.ToolTipSensorBitWidth}" Style="{StaticResource comboStyle}"/>
+		<ComboBox Name="bitWidth" ToolTip="{x:Static properties:Resources.ToolTipSensorBitWidth}" MinWidth="{Binding ElementName=side, Path=ActualWidth}" HorizontalAlignment="Left"/>
 
 		<Label Content="{x:Static properties:Resources.TitlePinSide}" Target="{Binding ElementName=side}"/>
-		<lc:AutoWidthComboBox x:Name="side" ToolTip="{x:Static properties:Resources.ToolTipDevicePinSide}" Style="{StaticResource comboStyle}"/>
+		<lc:AutoWidthComboBox x:Name="side" ToolTip="{x:Static properties:Resources.ToolTipDevicePinSide}"/>
 
 		<Label Content="{x:Static properties:Resources.TitleNotation}" Target="{Binding ElementName=notation}"/>
 		<TextBox Name="notation" MaxLength="8"/>

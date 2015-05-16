@@ -13,12 +13,6 @@
 			<Setter Property="Margin" Value="3"/>
 			<Setter Property="HorizontalContentAlignment" Value="Right"/>
 		</Style>
-
-		<Style TargetType="{x:Type lc:AutoWidthComboBox}">
-			<Setter Property="Margin" Value="3"/>
-			<Setter Property="HorizontalAlignment" Value="Left"/>
-			<Setter Property="VerticalAlignment" Value="Center"/>
-		</Style>
 	</Window.Resources>
 
 	<lc:AutoGrid Margin="3">

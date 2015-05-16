@@ -32,31 +32,29 @@
 			<Setter Property="Margin" Value="3"/>
 			<Setter Property="HorizontalContentAlignment" Value="Right"/>
 		</Style>
-
-		<Style x:Key="comboStyle" TargetType="{x:Type ComboBox}">
-			<Setter Property="Margin" Value="3"/>
-			<Setter Property="MinWidth" Value="65"/>
-			<Setter Property="HorizontalAlignment" Value="Left"/>
-			<Setter Property="VerticalAlignment" Value="Center"/>
-		</Style>
 	</Window.Resources>
 
 	<lc:AutoGrid>
 		<Label Content="{x:Static properties:Resources.TitleWriteOn}" Target="{Binding ElementName=writeOn}"/>
-		<lc:AutoWidthComboBox x:Name="writeOn" Style="{StaticResource comboStyle}"
+		<lc:AutoWidthComboBox x:Name="writeOn"
 			ToolTip="{x:Static properties:Resources.ToolTipRamWriteOn}"
 		/>
 
 		<Label Content="{x:Static properties:Resources.TitleMemoryOnStart}" Target="{Binding ElementName=onStart}"/>
-		<lc:AutoWidthComboBox x:Name="onStart" HorizontalAlignment="Left" Style="{StaticResource comboStyle}"
+		<lc:AutoWidthComboBox x:Name="onStart"
 			ToolTip="{x:Static properties:Resources.ToolTipMemoryOnStart}"
 		/>
 
 		<Label Content="{x:Static properties:Resources.TitleDataBitWidth}" Target="{Binding ElementName=dataBitWidth}"/>
-		<ComboBox Name="dataBitWidth" ToolTip="{x:Static properties:Resources.ToolTipDataBitWidth}" HorizontalAlignment="Left" Style="{StaticResource comboStyle}"/>
+		<ComboBox Name="dataBitWidth" ToolTip="{x:Static properties:Resources.ToolTipDataBitWidth}"
+			HorizontalAlignment="Left"
+		/>
 
 		<Label Content="{x:Static properties:Resources.TitleGraphicsArrayBPP}" Target="{Binding ElementName=bitsPerPixel}"/>
-		<ComboBox Name="bitsPerPixel" ToolTip="{x:Static properties:Resources.ToolTipGraphicsArrayBPP}" HorizontalAlignment="Left" Style="{StaticResource comboStyle}"/>
+		<ComboBox Name="bitsPerPixel" ToolTip="{x:Static properties:Resources.ToolTipGraphicsArrayBPP}"
+			Width="{Binding ElementName=dataBitWidth, Path=ActualWidth}"
+			HorizontalAlignment="Left"
+		/>
 
 		<Label Content="{x:Static properties:Resources.TitleWidth}" Target="{Binding ElementName=width}"/>
 		<TextBox Name="width" Style="{StaticResource sizeEditor}"

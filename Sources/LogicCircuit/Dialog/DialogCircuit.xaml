@@ -11,10 +11,6 @@
 	FocusManager.FocusedElement="{Binding ElementName=name}"
 >
 	<Window.Resources>
-		<Style TargetType="{x:Type ComboBox}">
-			<Setter Property="Margin" Value="3,3,8,3"/>
-		</Style>
-
 		<Style TargetType="{x:Type Label}">
 			<Setter Property="Margin" Value="3"/>
 			<Setter Property="HorizontalContentAlignment" Value="Right"/>

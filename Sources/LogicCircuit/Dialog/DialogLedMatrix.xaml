@@ -15,11 +15,8 @@
 			<Setter Property="HorizontalContentAlignment" Value="Right"/>
 		</Style>
 
-		<Style x:Key="comboStyle" TargetType="{x:Type ComboBox}">
-			<Setter Property="Margin" Value="3"/>
-			<Setter Property="MinWidth" Value="65"/>
+		<Style TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
 			<Setter Property="HorizontalAlignment" Value="Left"/>
-			<Setter Property="VerticalAlignment" Value="Center"/>
 		</Style>
 
 		<Style x:Key="ShapeContainerStyle" TargetType="{x:Type ComboBoxItem}">
@@ -37,24 +34,26 @@
 
 	<lc:AutoGrid Margin="3">
 		<Label Content="{x:Static properties:Resources.TitleType}" Target="{Binding ElementName=type}"/>
-		<lc:AutoWidthComboBox x:Name="type" ItemsSource="{x:Static lc:LedMatrixDescriptor.MatrixTypes}" SelectedItem="{Binding Path=MatrixType}"
-			ToolTip="{x:Static properties:Resources.ToolTipLedMatrixType}" Style="{StaticResource comboStyle}"
+		<lc:AutoWidthComboBox x:Name="type"
+			ItemsSource="{x:Static lc:LedMatrixDescriptor.MatrixTypes}"
+			SelectedItem="{Binding Path=MatrixType}"
+			ToolTip="{x:Static properties:Resources.ToolTipLedMatrixType}"
 		/>
 
 		<Label Content="{x:Static properties:Resources.TitleCellShape}" Target="{Binding ElementName=cellShape}"/>
-		<ComboBox Name="cellShape" SelectedIndex="{Binding Path=CellShape}" Style="{StaticResource comboStyle}">
+		<ComboBox Name="cellShape" SelectedIndex="{Binding Path=CellShape}">
 			<ComboBoxItem Style="{StaticResource ShapeContainerStyle}"><Ellipse   Style="{StaticResource ShapeStyle}"/></ComboBoxItem>
 			<ComboBoxItem Style="{StaticResource ShapeContainerStyle}"><Rectangle Style="{StaticResource ShapeStyle}"/></ComboBoxItem>
 		</ComboBox>
 
 		<Label Content="{x:Static properties:Resources.TitleRows}" Target="{Binding ElementName=rows}"/>
-		<ComboBox Name="rows" ItemsSource="{x:Static lc:LedMatrixDescriptor.RowsRange}" SelectedItem="{Binding Path=Rows}" Style="{StaticResource comboStyle}"/>
+		<ComboBox Name="rows" ItemsSource="{x:Static lc:LedMatrixDescriptor.RowsRange}" SelectedItem="{Binding Path=Rows}"/>
 
 		<Label Content="{x:Static properties:Resources.TitleColumns}" Target="{Binding ElementName=columns}"/>
-		<ComboBox Name="columns" ItemsSource="{x:Static lc:LedMatrixDescriptor.ColumnsRange}" SelectedItem="{Binding Path=Columns}" Style="{StaticResource comboStyle}"/>
+		<ComboBox Name="columns" ItemsSource="{x:Static lc:LedMatrixDescriptor.ColumnsRange}" SelectedItem="{Binding Path=Columns}"/>
 
 		<Label Content="{x:Static properties:Resources.TitleColors}" Target="{Binding ElementName=colors}"/>
-		<ComboBox Name="colors" ItemsSource="{Binding Path=ColorRange}" SelectedItem="{Binding Path=Colors}" Style="{StaticResource comboStyle}"/>
+		<ComboBox Name="colors" ItemsSource="{Binding Path=ColorRange}" SelectedItem="{Binding Path=Colors}"/>
 
 		<Label Content="{x:Static properties:Resources.TitleDescription}" Target="{Binding ElementName=note}"/>
 		<TextBox Name="note" AcceptsReturn="True" Text="{Binding Path=Note}"/>

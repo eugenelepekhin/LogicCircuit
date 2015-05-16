@@ -13,20 +13,17 @@
 			<Setter Property="Margin" Value="3"/>
 			<Setter Property="HorizontalContentAlignment" Value="Right"/>
 		</Style>
-
-		<Style x:Key="comboStyle" TargetType="{x:Type ComboBox}">
-			<Setter Property="Margin" Value="3"/>
-			<Setter Property="HorizontalAlignment" Value="Left"/>
-			<Setter Property="VerticalAlignment" Value="Center"/>
-		</Style>
 	</Window.Resources>
 
 	<lc:AutoGrid Margin="3">
 		<Label Content="{x:Static properties:Resources.TitleBitWidth}"
 			Target="{Binding ElementName=bitWidth}"
 		/>
-		<ComboBox Name="bitWidth" ItemsSource="{x:Static lc:PinDescriptor.BitWidthRange}" ToolTip="{x:Static properties:Resources.ToolTipConstantBitWidth}" Style="{StaticResource comboStyle}"
+		<ComboBox Name="bitWidth"
+			ItemsSource="{x:Static lc:PinDescriptor.BitWidthRange}"
+			ToolTip="{x:Static properties:Resources.ToolTipConstantBitWidth}"
 			Width="{Binding ElementName=side, Path=ActualWidth}"
+			HorizontalAlignment="Left"
 		/>
 
 		<Label Content="{x:Static properties:Resources.TitleValue}"
@@ -35,7 +32,10 @@
 		<TextBox Name="value" ToolTip="{x:Static properties:Resources.ToolTipConstantValue}" HorizontalAlignment="Left" Width="{Binding ElementName=side, Path=ActualWidth}" SpellCheck.IsEnabled="False"/>
 
 		<Label Content="{x:Static properties:Resources.TitlePinSide}" Target="{Binding ElementName=side}"/>
-		<lc:AutoWidthComboBox x:Name="side" ItemsSource="{x:Static lc:PinDescriptor.PinSideRange}" ToolTip="{x:Static properties:Resources.ToolTipDevicePinSide}" Style="{StaticResource comboStyle}"/>
+		<lc:AutoWidthComboBox x:Name="side"
+			ItemsSource="{x:Static lc:PinDescriptor.PinSideRange}"
+			ToolTip="{x:Static properties:Resources.ToolTipDevicePinSide}"
+		/>
 
 		<Label Content="{x:Static properties:Resources.TitleDescription}" Target="{Binding ElementName=note}"/>
 		<TextBox Name="note" AcceptsReturn="True"/>

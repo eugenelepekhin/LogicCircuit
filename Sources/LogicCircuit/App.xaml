@@ -164,6 +164,17 @@
 				</Style.Triggers>
 			</Style>
 
+			<Style TargetType="ComboBox">
+				<Setter Property="Margin" Value="3"/>
+				<Setter Property="HorizontalAlignment" Value="Stretch"/>
+				<Setter Property="VerticalAlignment" Value="Center"/>
+				<Setter Property="MinWidth" Value="65"/>
+			</Style>
+
+			<Style TargetType="lc:AutoWidthComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+				<Setter Property="HorizontalAlignment" Value="Left"/>
+			</Style>
+
 			<Style TargetType="{x:Type FlowDocument}">
 				<Setter Property="FontFamily" Value="{x:Static SystemFonts.MessageFontFamily}"/>
 			</Style>
