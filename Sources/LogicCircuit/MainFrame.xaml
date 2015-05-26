@@ -348,6 +348,7 @@
 							<Style x:Key="CircuitName" TargetType="TextBlock">
 								<Setter Property="Text" Value="{Binding Path=Circuit.Name}"/>
 								<Setter Property="VerticalAlignment" Value="Center"/>
+								<Setter Property="Margin" Value="16,0,0,0"/>
 							</Style>
 
 							<DataTemplate DataType="{x:Type lc:GateDescriptor}">
@@ -377,7 +378,7 @@
 									<ContentControl/>
 									<TextBox MaxLength="4" Text="{Binding Path=Name}"/>
 									<TextBlock Text="{x:Static properties:Resources.CaptionName}" VerticalAlignment="Center"/>
-									<TextBlock Text="{x:Static properties:Resources.CircuitProbeName}" VerticalAlignment="Center" Margin="16,0,0,0"/>
+									<TextBlock Style="{StaticResource CircuitName}" Text="{x:Static properties:Resources.CircuitProbeName}"/>
 								</StackPanel>
 							</DataTemplate>
 
@@ -496,7 +497,7 @@
 										/>
 										<TextBlock Text="{x:Static properties:Resources.CaptionDataBitWidth}" Margin="8,0,0,0"/>
 									</lc:AutoGrid>
-									<TextBlock Text="{Binding Path=Circuit.Notation}" VerticalAlignment="Center"/>
+									<TextBlock Style="{StaticResource CircuitName}" Text="{Binding Path=Circuit.Notation}"/>
 								</StackPanel>
 							</DataTemplate>
 
@@ -522,7 +523,7 @@
 										/>
 										<TextBlock Text="{x:Static properties:Resources.CaptionColumns}" Margin="8,0,0,0"/>
 									</lc:AutoGrid>
-									<TextBlock Text="{Binding Path=Circuit.Notation}" VerticalAlignment="Center"/>
+									<TextBlock Style="{StaticResource CircuitName}" Text="{Binding Path=Circuit.Notation}"/>
 								</StackPanel>
 							</DataTemplate>
 
@@ -544,7 +545,7 @@
 										/>
 										<TextBlock Text="{x:Static properties:Resources.CaptionGraphicsArrayBPP}" Margin="8,0,0,0"/>
 									</lc:AutoGrid>
-									<TextBlock Text="{Binding Path=Circuit.Notation}" VerticalAlignment="Center"/>
+									<TextBlock Style="{StaticResource CircuitName}" Text="{Binding Path=Circuit.Notation}"/>
 								</StackPanel>
 							</DataTemplate>
 
@@ -565,7 +566,7 @@
 										/>
 										<TextBlock Text="{x:Static properties:Resources.CaptionSide}" Margin="8,0,0,0"/>
 									</lc:AutoGrid>
-									<TextBlock Text="{x:Static properties:Resources.NamePin}" VerticalAlignment="Center"/>
+									<TextBlock Style="{StaticResource CircuitName}" Text="{x:Static properties:Resources.NamePin}"/>
 								</StackPanel>
 							</DataTemplate>
 
