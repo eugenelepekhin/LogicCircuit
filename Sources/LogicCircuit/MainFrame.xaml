@@ -345,6 +345,11 @@
 								<EventSetter Event="MouseMove" Handler="DescriptorMouseMove"/>
 							</Style>
 
+							<Style x:Key="PropertyLabel" TargetType="TextBlock">
+								<Setter Property="VerticalAlignment" Value="Center"/>
+								<Setter Property="Margin" Value="3,0"/>
+							</Style>
+
 							<Style x:Key="CircuitName" TargetType="TextBlock">
 								<Setter Property="Text" Value="{Binding Path=Circuit.Name}"/>
 								<Setter Property="VerticalAlignment" Value="Center"/>
@@ -377,7 +382,7 @@
 								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl/>
 									<TextBox MaxLength="4" Text="{Binding Path=Name}"/>
-									<TextBlock Text="{x:Static properties:Resources.CaptionName}" VerticalAlignment="Center"/>
+									<TextBlock Style="{StaticResource PropertyLabel}" Text="{x:Static properties:Resources.CaptionName}"/>
 									<TextBlock Style="{StaticResource CircuitName}" Text="{x:Static properties:Resources.CircuitProbeName}"/>
 								</StackPanel>
 							</DataTemplate>
@@ -389,7 +394,7 @@
 										<TextBox Text="{Binding Path=Notation, Mode=TwoWay}"
 											ToolTip="{x:Static properties:Resources.ToolTipButtonNotation}"
 										/>
-										<TextBlock Text="{x:Static properties:Resources.CaptionNotation}" Margin="3,0,8,0" VerticalAlignment="Center"/>
+										<TextBlock Style="{StaticResource PropertyLabel}" Text="{x:Static properties:Resources.CaptionNotation}"/>
 										<CheckBox Grid.ColumnSpan="2"
 											IsChecked="{Binding Path=IsToggle}"
 											Content="{x:Static properties:Resources.TitleIsToggle}"
@@ -400,7 +405,7 @@
 											SelectedItem="{Binding Path=PinSide, Mode=TwoWay}"
 											ToolTip="{x:Static properties:Resources.ToolTipDevicePinSide}"
 										/>
-										<TextBlock Text="{x:Static properties:Resources.CaptionPinSide}" Margin="3,0,8,0"/>
+										<TextBlock Style="{StaticResource PropertyLabel}" Text="{x:Static properties:Resources.CaptionPinSide}"/>
 									</lc:AutoGrid>
 									<TextBlock Style="{StaticResource CircuitName}"/>
 								</StackPanel>
@@ -414,18 +419,20 @@
 											SelectedItem="{Binding Path=BitWidth}"
 											ToolTip="{x:Static properties:Resources.ToolTipConstantBitWidth}"
 										/>
-										<TextBlock Text="{x:Static properties:Resources.CaptionBitWidth}" Margin="8,0,0,0"/>
+										<TextBlock Style="{StaticResource PropertyLabel}" Text="{x:Static properties:Resources.CaptionBitWidth}"/>
+
 										<TextBox MaxLength="8" CharacterCasing="Upper"
 											Text="{Binding Path=Value, Mode=TwoWay}"
 											ToolTip="{x:Static properties:Resources.ToolTipConstantValue}"
 										/>
-										<TextBlock Text="{x:Static properties:Resources.CaptionValue}" Margin="8,0,0,0"/>
+										<TextBlock Style="{StaticResource PropertyLabel}" Text="{x:Static properties:Resources.CaptionValue}"/>
+
 										<lc:AutoWidthComboBox
 											SelectedItem="{Binding Path=PinSide, Mode=TwoWay}"
 											ItemsSource="{x:Static lc:PinDescriptor.PinSideRange}"
 											ToolTip="{x:Static properties:Resources.ToolTipDevicePinSide}"
 										/>
-										<TextBlock Text="{x:Static properties:Resources.CaptionPinSide}" Margin="8,0,0,0"/>
+										<TextBlock Style="{StaticResource PropertyLabel}" Text="{x:Static properties:Resources.CaptionPinSide}"/>
 									</lc:AutoGrid>
 									<TextBlock Style="{StaticResource CircuitName}"/>
 								</StackPanel>
@@ -440,23 +447,26 @@
 											SelectedItem="{Binding Path=SensorType}"
 											ToolTip="{x:Static properties:Resources.ToolTipSensorType}"
 										/>
-										<TextBlock Text="{x:Static properties:Resources.CaptionSensorType}" Margin="8,0,0,0"/>
+										<TextBlock Style="{StaticResource PropertyLabel}" Text="{x:Static properties:Resources.CaptionSensorType}"/>
+
 										<ComboBox ItemsSource="{x:Static lc:PinDescriptor.BitWidthRange}"
 											SelectedItem="{Binding Path=BitWidth}"
 											ToolTip="{x:Static properties:Resources.ToolTipSensorBitWidth}"
 										/>
-										<TextBlock Text="{x:Static properties:Resources.CaptionBitWidth}" Margin="8,0,0,0"/>
+										<TextBlock Style="{StaticResource PropertyLabel}" Text="{x:Static properties:Resources.CaptionBitWidth}"/>
+
 										<lc:AutoWidthComboBox HorizontalAlignment="Stretch"
 											SelectedItem="{Binding Path=PinSide, Mode=TwoWay}"
 											ItemsSource="{x:Static lc:PinDescriptor.PinSideRange}"
 											ToolTip="{x:Static properties:Resources.ToolTipDevicePinSide}"
 										/>
-										<TextBlock Text="{x:Static properties:Resources.CaptionPinSide}" Margin="8,0,0,0"/>
+										<TextBlock Style="{StaticResource PropertyLabel}" Text="{x:Static properties:Resources.CaptionPinSide}"/>
+
 										<TextBox MaxLength="8"
 											Text="{Binding Path=Notation, Mode=TwoWay}"
 											ToolTip="{x:Static properties:Resources.ToolTipSensorNotation}"
 										/>
-										<TextBlock Text="{x:Static properties:Resources.CaptionNotation}" Margin="8,0,0,0"/>
+										<TextBlock Style="{StaticResource PropertyLabel}" Text="{x:Static properties:Resources.CaptionNotation}"/>
 									</lc:AutoGrid>
 									<TextBlock Style="{StaticResource CircuitName}"/>
 								</StackPanel>
@@ -471,12 +481,13 @@
 											ItemsSource="{x:Static lc:PinDescriptor.PinSideRange}"
 											ToolTip="{x:Static properties:Resources.ToolTipDevicePinSide}"
 										/>
-										<TextBlock Text="{x:Static properties:Resources.CaptionPinSide}" Margin="8,0,0,0"/>
+										<TextBlock Style="{StaticResource PropertyLabel}" Text="{x:Static properties:Resources.CaptionPinSide}"/>
+
 										<TextBox MaxLength="8"
 											Text="{Binding Path=Notation, Mode=TwoWay}"
 											ToolTip="{x:Static properties:Resources.ToolTipSoundNotation}"
 										/>
-										<TextBlock Text="{x:Static properties:Resources.CaptionNotation}" Margin="8,0,0,0"/>
+										<TextBlock Style="{StaticResource PropertyLabel}" Text="{x:Static properties:Resources.CaptionNotation}"/>
 									</lc:AutoGrid>
 									<TextBlock Style="{StaticResource CircuitName}"/>
 								</StackPanel>
@@ -490,12 +501,13 @@
 											SelectedItem="{Binding Path=AddressBitWidth}"
 											ToolTip="{x:Static properties:Resources.ToolTipAddressBitWidth}"
 										/>
-										<TextBlock Text="{x:Static properties:Resources.CaptionAddressBitWidth}" Margin="8,0,0,0"/>
+										<TextBlock Style="{StaticResource PropertyLabel}" Text="{x:Static properties:Resources.CaptionAddressBitWidth}"/>
+
 										<ComboBox ItemsSource="{x:Static lc:PinDescriptor.BitWidthRange}"
 											SelectedItem="{Binding Path=DataBitWidth}"
 											ToolTip="{x:Static properties:Resources.ToolTipDataBitWidth}"
 										/>
-										<TextBlock Text="{x:Static properties:Resources.CaptionDataBitWidth}" Margin="8,0,0,0"/>
+										<TextBlock Style="{StaticResource PropertyLabel}" Text="{x:Static properties:Resources.CaptionDataBitWidth}"/>
 									</lc:AutoGrid>
 									<TextBlock Style="{StaticResource CircuitName}" Text="{Binding Path=Circuit.Notation}"/>
 								</StackPanel>
@@ -509,19 +521,21 @@
 											SelectedItem="{Binding Path=MatrixType}"
 											ToolTip="{x:Static properties:Resources.ToolTipLedMatrixType}"
 										/>
-										<TextBlock Text="{x:Static properties:Resources.CaptionLedMatrixType}" Margin="8,0,0,0"/>
+										<TextBlock Style="{StaticResource PropertyLabel}" Text="{x:Static properties:Resources.CaptionLedMatrixType}"/>
+
 										<ComboBox
 											ItemsSource="{x:Static lc:LedMatrixDescriptor.RowsRange}"
 											SelectedItem="{Binding Path=Rows}"
 											ToolTip="{x:Static properties:Resources.ToolTipRows}"
 										/>
-										<TextBlock Text="{x:Static properties:Resources.CaptionRows}" Margin="8,0,0,0"/>
+										<TextBlock Style="{StaticResource PropertyLabel}" Text="{x:Static properties:Resources.CaptionRows}"/>
+
 										<ComboBox
 											ItemsSource="{x:Static lc:LedMatrixDescriptor.ColumnsRange}"
 											SelectedItem="{Binding Path=Columns}"
 											ToolTip="{x:Static properties:Resources.ToolTipColumns}"
 										/>
-										<TextBlock Text="{x:Static properties:Resources.CaptionColumns}" Margin="8,0,0,0"/>
+										<TextBlock Style="{StaticResource PropertyLabel}" Text="{x:Static properties:Resources.CaptionColumns}"/>
 									</lc:AutoGrid>
 									<TextBlock Style="{StaticResource CircuitName}" Text="{Binding Path=Circuit.Notation}"/>
 								</StackPanel>
@@ -536,14 +550,14 @@
 											SelectedItem="{Binding Path=DataBitWidth}"
 											ToolTip="{x:Static properties:Resources.ToolTipDataBitWidth}"
 										/>
-										<TextBlock Text="{x:Static properties:Resources.CaptionDataBitWidth}" Margin="8,0,0,0"/>
+										<TextBlock Style="{StaticResource PropertyLabel}" Text="{x:Static properties:Resources.CaptionDataBitWidth}"/>
 
 										<ComboBox
 											ItemsSource="{x:Static lc:GraphicsArrayDescriptor.BitsPerPixelRange}"
 											SelectedItem="{Binding Path=BitsPerPixel}"
 											ToolTip="{x:Static properties:Resources.ToolTipGraphicsArrayBPP}"
 										/>
-										<TextBlock Text="{x:Static properties:Resources.CaptionGraphicsArrayBPP}" Margin="8,0,0,0"/>
+										<TextBlock Style="{StaticResource PropertyLabel}" Text="{x:Static properties:Resources.CaptionGraphicsArrayBPP}"/>
 									</lc:AutoGrid>
 									<TextBlock Style="{StaticResource CircuitName}" Text="{Binding Path=Circuit.Notation}"/>
 								</StackPanel>
@@ -558,13 +572,14 @@
 											SelectedItem="{Binding Path=BitWidth}"
 											ToolTip="{x:Static properties:Resources.ToolTipPinBitWidth}"
 										/>
-										<TextBlock Text="{x:Static properties:Resources.CaptionBitWidth}" Margin="8,0,0,0"/>
+										<TextBlock Style="{StaticResource PropertyLabel}" Text="{x:Static properties:Resources.CaptionBitWidth}"/>
+
 										<lc:AutoWidthComboBox
 											SelectedItem="{Binding Path=PinSide, Mode=TwoWay}"
 											ItemsSource="{x:Static lc:PinDescriptor.PinSideRange}"
 											ToolTip="{x:Static properties:Resources.ToolTipPinSide}"
 										/>
-										<TextBlock Text="{x:Static properties:Resources.CaptionSide}" Margin="8,0,0,0"/>
+										<TextBlock Style="{StaticResource PropertyLabel}" Text="{x:Static properties:Resources.CaptionSide}"/>
 									</lc:AutoGrid>
 									<TextBlock Style="{StaticResource CircuitName}" Text="{x:Static properties:Resources.NamePin}"/>
 								</StackPanel>
@@ -582,20 +597,20 @@
 											SelectedItem="{Binding Path=PinCount}"
 											ToolTip="{x:Static properties:Resources.ToolTipSplitterPinNumber}"
 										/>
-										<TextBlock Text="{x:Static properties:Resources.CaptionSplitterPinNumber}" Margin="8,0,0,0" VerticalAlignment="Center"/>
+										<TextBlock Style="{StaticResource PropertyLabel}" Text="{x:Static properties:Resources.CaptionSplitterPinNumber}"/>
 
 										<ComboBox ItemsSource="{Binding Path=BitWidthRange}"
 											SelectedItem="{Binding Path=BitWidth}"
 											ToolTip="{x:Static properties:Resources.ToolTipSplitterBitWidth}"
 										/>
-										<TextBlock Text="{x:Static properties:Resources.CaptionSplitterBitWidth}" Margin="8,0,0,0" VerticalAlignment="Center"/>
+										<TextBlock Style="{StaticResource PropertyLabel}" Text="{x:Static properties:Resources.CaptionSplitterBitWidth}"/>
 
 										<lc:AutoWidthComboBox Name="directions"
 											ItemsSource="{Binding Path=DirectionRange}"
 											SelectedItem="{Binding Path=Direction}"
 											ToolTip="{x:Static properties:Resources.ToolTipSplitterRotation}"
 										/>
-										<TextBlock Text="{x:Static properties:Resources.CaptionSplitterDirection}" Margin="8,0,0,0" VerticalAlignment="Center"/>
+										<TextBlock Style="{StaticResource PropertyLabel}" Text="{x:Static properties:Resources.CaptionSplitterDirection}"/>
 									</lc:AutoGrid>
 									<TextBlock Style="{StaticResource CircuitName}"/>
 								</StackPanel>
