@@ -356,6 +356,12 @@
 								<Setter Property="Margin" Value="16,0,0,0"/>
 							</Style>
 
+							<Style TargetType="lc:AutoGrid">
+								<Setter Property="Margin" Value="3,3,8,3"/>
+								<Setter Property="VerticalAlignment" Value="Center"/>
+								<Setter Property="ColumnWidths" Value="Auto;Auto"/>
+							</Style>
+
 							<DataTemplate DataType="{x:Type lc:GateDescriptor}">
 								<DataTemplate.Resources>
 									<Style TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
@@ -390,7 +396,7 @@
 							<DataTemplate DataType="{x:Type lc:ButtonDescriptor}">
 								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl/>
-									<lc:AutoGrid Margin="3,3,8,3" VerticalAlignment="Center" ColumnWidths="Auto;Auto">
+									<lc:AutoGrid>
 										<TextBox Text="{Binding Path=Notation, Mode=TwoWay}"
 											ToolTip="{x:Static properties:Resources.ToolTipButtonNotation}"
 										/>
@@ -414,7 +420,7 @@
 							<DataTemplate DataType="{x:Type lc:ConstantDescriptor}">
 								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl/>
-									<lc:AutoGrid Margin="3,3,8,3" VerticalAlignment="Center" ColumnWidths="Auto;Auto">
+									<lc:AutoGrid>
 										<ComboBox ItemsSource="{x:Static lc:PinDescriptor.BitWidthRange}"
 											SelectedItem="{Binding Path=BitWidth}"
 											ToolTip="{x:Static properties:Resources.ToolTipConstantBitWidth}"
@@ -441,7 +447,7 @@
 							<DataTemplate DataType="{x:Type lc:SensorDescriptor}">
 								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl/>
-									<lc:AutoGrid Margin="3,3,8,3" VerticalAlignment="Center" ColumnWidths="Auto;Auto">
+									<lc:AutoGrid>
 										<lc:AutoWidthComboBox HorizontalAlignment="Stretch"
 											ItemsSource="{x:Static lc:SensorDescriptor.SensorTypes}"
 											SelectedItem="{Binding Path=SensorType}"
@@ -475,7 +481,7 @@
 							<DataTemplate DataType="{x:Type lc:SoundDescriptor}">
 								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl/>
-									<lc:AutoGrid Margin="3,3,8,3" VerticalAlignment="Center" ColumnWidths="Auto;Auto">
+									<lc:AutoGrid>
 										<lc:AutoWidthComboBox
 											SelectedItem="{Binding Path=PinSide, Mode=TwoWay}"
 											ItemsSource="{x:Static lc:PinDescriptor.PinSideRange}"
@@ -496,7 +502,7 @@
 							<DataTemplate DataType="{x:Type lc:MemoryDescriptor}">
 								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl/>
-									<lc:AutoGrid Margin="3,3,8,3" VerticalAlignment="Center" ColumnWidths="Auto;Auto">
+									<lc:AutoGrid>
 										<ComboBox ItemsSource="{x:Static lc:MemoryDescriptor.AddressBitWidthRange}"
 											SelectedItem="{Binding Path=AddressBitWidth}"
 											ToolTip="{x:Static properties:Resources.ToolTipAddressBitWidth}"
@@ -516,7 +522,7 @@
 							<DataTemplate DataType="{x:Type lc:LedMatrixDescriptor}">
 								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl/>
-									<lc:AutoGrid Margin="3,3,8,3" VerticalAlignment="Center" ColumnWidths="Auto;Auto">
+									<lc:AutoGrid>
 										<lc:AutoWidthComboBox ItemsSource="{x:Static lc:LedMatrixDescriptor.MatrixTypes}"
 											SelectedItem="{Binding Path=MatrixType}"
 											ToolTip="{x:Static properties:Resources.ToolTipLedMatrixType}"
@@ -544,7 +550,7 @@
 							<DataTemplate DataType="{x:Type lc:GraphicsArrayDescriptor}">
 								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl/>
-									<lc:AutoGrid Margin="3,3,8,3" VerticalAlignment="Center" ColumnWidths="Auto;Auto">
+									<lc:AutoGrid>
 										<ComboBox
 											ItemsSource="{x:Static lc:GraphicsArrayDescriptor.DataBitWidthRange}"
 											SelectedItem="{Binding Path=DataBitWidth}"
@@ -566,7 +572,7 @@
 							<DataTemplate DataType="{x:Type lc:PinDescriptor}">
 								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl/>
-									<lc:AutoGrid Margin="3,3,8,3" VerticalAlignment="Center" ColumnWidths="Auto;Auto">
+									<lc:AutoGrid>
 										<ComboBox
 											ItemsSource="{x:Static lc:PinDescriptor.BitWidthRange}"
 											SelectedItem="{Binding Path=BitWidth}"
@@ -592,7 +598,7 @@
 											<ScaleTransform ScaleX="{Binding ElementName=directions, Path=SelectedItem.Flip, FallbackValue=1}"/>
 										</ContentControl.RenderTransform>
 									</ContentControl>
-									<lc:AutoGrid Margin="8,3,8,3" VerticalAlignment="Center" ColumnWidths="Auto;Auto">
+									<lc:AutoGrid>
 										<ComboBox ItemsSource="{Binding Path=PinCountRange}"
 											SelectedItem="{Binding Path=PinCount}"
 											ToolTip="{x:Static properties:Resources.ToolTipSplitterPinNumber}"
