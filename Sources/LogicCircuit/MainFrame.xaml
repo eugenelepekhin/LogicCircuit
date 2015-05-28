@@ -132,7 +132,7 @@
 
 	<lc:AutoGrid ColumnWidths="*">
 		<!-- Main Menu -->
-		<Menu Padding="3,1,3,1" Background="Transparent">
+		<Menu Padding="3,1" Background="Transparent">
 			<MenuItem Header="{x:Static properties:Resources.MenuHeaderFile}">
 				<MenuItem Command="ApplicationCommands.New"/>
 				<MenuItem Command="ApplicationCommands.Open"/>
@@ -251,14 +251,14 @@
 							</TreeView.ItemContainerStyle>
 							<TreeView.Resources>
 								<HierarchicalDataTemplate DataType="{x:Type lc:CircuitMap}" ItemsSource="{Binding Path=Children}">
-									<StackPanel Orientation="Horizontal" ToolTip="{Binding Path=Circuit.ToolTip}" Margin="5,3,5,3">
+									<StackPanel Orientation="Horizontal" ToolTip="{Binding Path=Circuit.ToolTip}">
 										<ContentControl Content="{Binding Path=CircuitGlyph}" FlowDirection="LeftToRight" SnapsToDevicePixels="False">
 											<ContentControl.LayoutTransform>
 												<ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
 											</ContentControl.LayoutTransform>
 										</ContentControl>
-										<TextBlock Text="{Binding Path=Circuit.Notation}" VerticalAlignment="Center" Margin="5,0,0,0"/>
-										<TextBlock Text="{Binding Path=CircuitSymbol.Point}" VerticalAlignment="Center" Margin="5,0,0,0"/>
+										<TextBlock Text="{Binding Path=Circuit.Notation}" VerticalAlignment="Center" Margin="8,0,0,0"/>
+										<TextBlock Text="{Binding Path=CircuitSymbol.Point}" VerticalAlignment="Center" Margin="8,0"/>
 									</StackPanel>
 								</HierarchicalDataTemplate>
 							</TreeView.Resources>
@@ -305,8 +305,8 @@
 						</CheckBox>
 
 						<StackPanel Orientation="Horizontal">
-							<TextBlock Text="{x:Static properties:Resources.TitleActualFrequency}" Margin="5,0"/>
-							<TextBlock Text="{Binding Path=Editor.ActualFrequency, FallbackValue=0, StringFormat=N1}" Margin="3,0"/>
+							<TextBlock Text="{x:Static properties:Resources.TitleActualFrequency}" Margin="5,3"/>
+							<TextBlock Text="{Binding Path=Editor.ActualFrequency, FallbackValue=0, StringFormat=N1}" Margin="3"/>
 						</StackPanel>
 					</lc:AutoGrid>
 				</GroupBox>
