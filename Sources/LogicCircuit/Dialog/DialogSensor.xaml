@@ -10,11 +10,6 @@
 	FocusManager.FocusedElement="{Binding ElementName=sensorType}"
 >
 	<Window.Resources>
-		<Style TargetType="{x:Type Label}">
-			<Setter Property="Margin" Value="3"/>
-			<Setter Property="HorizontalContentAlignment" Value="Right"/>
-		</Style>
-
 		<lc:EnumToVisibilityConvertor x:Key="EnumToVisibilityConvertor"/>
 
 		<ControlTemplate x:Key="validationTemplate">
@@ -28,24 +23,20 @@
 	</Window.Resources>
 
 	<lc:AutoGrid Margin="3">
-		<Label Content="{x:Static properties:Resources.TitleSensorType}"
-			Target="{Binding ElementName=sensorType}"
-		/>
+		<Label Content="{x:Static properties:Resources.TitleSensorType}"/>
 		<lc:AutoWidthComboBox x:Name="sensorType"
 			ToolTip="{x:Static properties:Resources.ToolTipSensorType}"
 			ItemsSource="{Binding Path=SensorTypes}"
 			SelectedItem="{Binding Path=SelectedSensorType, ValidatesOnDataErrors=True}"
 		/>
 
-		<Label Content="{x:Static properties:Resources.TitleBitWidth}"
-			Target="{Binding ElementName=bitWidth}"
-		/>
+		<Label Content="{x:Static properties:Resources.TitleBitWidth}"/>
 		<ComboBox Name="bitWidth" ToolTip="{x:Static properties:Resources.ToolTipSensorBitWidth}" MinWidth="{Binding ElementName=side, Path=ActualWidth}" HorizontalAlignment="Left"/>
 
-		<Label Content="{x:Static properties:Resources.TitlePinSide}" Target="{Binding ElementName=side}"/>
+		<Label Content="{x:Static properties:Resources.TitlePinSide}"/>
 		<lc:AutoWidthComboBox x:Name="side" ToolTip="{x:Static properties:Resources.ToolTipDevicePinSide}"/>
 
-		<Label Content="{x:Static properties:Resources.TitleNotation}" Target="{Binding ElementName=notation}"/>
+		<Label Content="{x:Static properties:Resources.TitleNotation}"/>
 		<TextBox Name="notation" MaxLength="8"/>
 
 		<!-- Variable controls start here -->
@@ -60,7 +51,7 @@
 
 		<!-- Series -->
 
-		<Label Content="{x:Static properties:Resources.TitleSeries}" Target="{Binding ElementName=data}"
+		<Label Content="{x:Static properties:Resources.TitleSeries}"
 			Visibility="{Binding ElementName=sensorType, Path=SelectedItem.Value, Converter={StaticResource EnumToVisibilityConvertor}, ConverterParameter={x:Static lc:SensorType.Series}}"
 		/>
 		<TextBox Name="data"
@@ -77,7 +68,7 @@
 
 		<!-- Random -->
 
-		<Label Content="{x:Static properties:Resources.TitleSensorRandomMin}" Target="{Binding ElementName=minTicks}"
+		<Label Content="{x:Static properties:Resources.TitleSensorRandomMin}"
 			Visibility="{Binding ElementName=sensorType, Path=SelectedItem.Value, Converter={StaticResource EnumToVisibilityConvertor}, ConverterParameter={x:Static lc:SensorType.Random}}"
 		/>
 		<TextBox Name="minTicks"
@@ -87,7 +78,7 @@
 			ToolTip="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent, FallbackValue={x:Static properties:Resources.ToolTipSensorRandomMin}}"
 		/>
 
-		<Label Content="{x:Static properties:Resources.TitleSensorRandomMax}" Target="{Binding ElementName=maxTicks}"
+		<Label Content="{x:Static properties:Resources.TitleSensorRandomMax}"
 			Visibility="{Binding ElementName=sensorType, Path=SelectedItem.Value, Converter={StaticResource EnumToVisibilityConvertor}, ConverterParameter={x:Static lc:SensorType.Random}}"
 		/>
 		<TextBox Name="maxTicks"
@@ -99,7 +90,7 @@
 
 		<!-- Manual -->
 
-		<Label Content="{x:Static properties:Resources.TitleSensorManualInitialValue}" Target="{Binding ElementName=manualValue}"
+		<Label Content="{x:Static properties:Resources.TitleSensorManualInitialValue}"
 			Visibility="{Binding ElementName=sensorType, Path=SelectedItem.Value, Converter={StaticResource EnumToVisibilityConvertor}, ConverterParameter={x:Static lc:SensorType.Manual}}"
 		/>
 		<TextBox Name="manualValue"
@@ -111,7 +102,7 @@
 
 		<!-- End of variable controls -->
 
-		<Label Content="{x:Static properties:Resources.TitleDescription}" Target="{Binding ElementName=note}"/>
+		<Label Content="{x:Static properties:Resources.TitleDescription}"/>
 		<TextBox Name="note" AcceptsReturn="True"/>
 
 		<StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">

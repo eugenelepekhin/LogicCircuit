@@ -8,18 +8,11 @@
 	Style="{StaticResource DialogWindow}"
 	FocusManager.FocusedElement="{Binding ElementName=name}"
 >
-	<Window.Resources>
-		<Style TargetType="{x:Type Label}">
-			<Setter Property="Margin" Value="3"/>
-			<Setter Property="HorizontalContentAlignment" Value="Right"/>
-		</Style>
-	</Window.Resources>
-
 	<lc:AutoGrid Margin="3">
-		<Label Content="{x:Static properties:Resources.TitleName}" Target="{Binding ElementName=name}"/>
+		<Label Content="{x:Static properties:Resources.TitleName}"/>
 		<TextBox Name="name"/>
 
-		<Label Content="{x:Static properties:Resources.TitleDescription}" Target="{Binding ElementName=description}"/>
+		<Label Content="{x:Static properties:Resources.TitleDescription}"/>
 		<TextBox Name="description" AcceptsReturn="True"/>
 
 		<StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">

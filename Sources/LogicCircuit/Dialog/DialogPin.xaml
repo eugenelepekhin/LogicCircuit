@@ -9,32 +9,25 @@
 	MinWidth="320" MinHeight="320"
 	FocusManager.FocusedElement="{Binding ElementName=name}"
 >
-	<Window.Resources>
-		<Style TargetType="{x:Type Label}">
-			<Setter Property="Margin" Value="3"/>
-			<Setter Property="HorizontalContentAlignment" Value="Right"/>
-		</Style>
-	</Window.Resources>
-
 	<lc:AutoGrid Margin="3">
 		<Label Content="{x:Static properties:Resources.TitleType}"/>
 		<TextBlock Name="type" VerticalAlignment="Center" Margin="3"/>
 
-		<Label Content="{x:Static properties:Resources.TitleName}" Target="{Binding ElementName=name}"/>
+		<Label Content="{x:Static properties:Resources.TitleName}"/>
 		<TextBox Name="name"/>
 
-		<Label Content="{x:Static properties:Resources.TitleNotation}" Target="{Binding ElementName=notation}"/>
+		<Label Content="{x:Static properties:Resources.TitleNotation}"/>
 		<TextBox Name="notation" ToolTip="{x:Static properties:Resources.ToolTipPinNotation}"/>
 
-		<Label Content="{x:Static properties:Resources.TitleSide}" Target="{Binding ElementName=side}"/>
+		<Label Content="{x:Static properties:Resources.TitleSide}"/>
 		<lc:AutoWidthComboBox x:Name="side" ToolTip="{x:Static properties:Resources.ToolTipPinSide}"/>
 
-		<Label Content="{x:Static properties:Resources.TitleBitWidth}" Target="{Binding ElementName=bitWidth}"/>
+		<Label Content="{x:Static properties:Resources.TitleBitWidth}"/>
 		<ComboBox Name="bitWidth" ToolTip="{x:Static properties:Resources.ToolTipPinBitWidth}" MinWidth="{Binding ElementName=side, Path=MinWidth}" HorizontalAlignment="Left"/>
 
 		<CheckBox Grid.Column="1" Name="inverted" Content="{x:Static properties:Resources.TitleInverted}"/>
 
-		<Label Content="{x:Static properties:Resources.TitleDescription}" Target="{Binding ElementName=note}"/>
+		<Label Content="{x:Static properties:Resources.TitleDescription}"/>
 		<TextBox Name="note" AcceptsReturn="True"/>
 
 		<StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">

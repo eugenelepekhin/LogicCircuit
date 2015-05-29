@@ -135,6 +135,12 @@
 				<Setter Property="SnapsToDevicePixels" Value="True"/>
 			</Style>
 
+			<Style TargetType="{x:Type Label}">
+				<Setter Property="Margin" Value="3"/>
+				<Setter Property="HorizontalContentAlignment" Value="Right"/>
+				<Setter Property="VerticalAlignment" Value="Top"/>
+			</Style>
+
 			<Style TargetType="{x:Type Button}">
 				<Setter Property="Width" Value="Auto"/>
 				<Setter Property="MinWidth" Value="76"/>
@@ -156,6 +162,7 @@
 				<Setter Property="SpellCheck.IsEnabled" Value="True"/>
 				<Style.Triggers>
 					<DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=AcceptsReturn}" Value="True">
+						<Setter Property="Margin" Value="3,5"/>
 						<Setter Property="VerticalAlignment" Value="Stretch"/>
 						<Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
 						<Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>

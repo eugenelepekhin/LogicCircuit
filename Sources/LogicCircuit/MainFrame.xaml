@@ -267,7 +267,7 @@
 						<Separator HorizontalAlignment="Stretch" Margin="5,3"/>
 
 						<StackPanel Orientation="Horizontal">
-							<Label Content="{x:Static properties:Resources.TitleFrequency}" Target="{Binding ElementName=frequency}" VerticalAlignment="Center"/>
+							<Label Content="{x:Static properties:Resources.TitleFrequency}" Target="{Binding ElementName=frequency}" Margin="0"/>
 							<Slider Width="100" x:Name="frequency" VerticalAlignment="Center" Background="{StaticResource SliderBackground}"
 								Minimum="1" Maximum="50" Value="{Binding Path=Editor.Frequency, Mode=TwoWay}"
 								Ticks="1,10,20,30,40,50"
@@ -706,7 +706,7 @@
 		<StatusBar>
 			<StatusBarItem DockPanel.Dock="Right">
 				<StackPanel Orientation="Horizontal">
-					<Label Content="{x:Static properties:Resources.TitleZoom}" Target="{Binding ElementName=zoom}" VerticalAlignment="Center"/>
+					<Label Content="{x:Static properties:Resources.TitleZoom}" Target="{Binding ElementName=zoom}" Margin="0"/>
 					<Slider Width="100" x:Name="zoom" VerticalAlignment="Center" Background="{StaticResource SliderBackground}"
 						Minimum="0.1" Maximum="3" Value="{Binding Path=Editor.Zoom, Mode=TwoWay, FallbackValue=1}"
 						IsMoveToPointEnabled="True"

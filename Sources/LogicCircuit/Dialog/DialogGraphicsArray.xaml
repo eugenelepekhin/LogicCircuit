@@ -27,48 +27,43 @@
 			<Setter Property="Validation.ErrorTemplate" Value="{StaticResource validationTemplate}"/>
 			<Setter Property="SpellCheck.IsEnabled" Value="False"/>
 		</Style>
-
-		<Style TargetType="{x:Type Label}">
-			<Setter Property="Margin" Value="3"/>
-			<Setter Property="HorizontalContentAlignment" Value="Right"/>
-		</Style>
 	</Window.Resources>
 
 	<lc:AutoGrid>
-		<Label Content="{x:Static properties:Resources.TitleWriteOn}" Target="{Binding ElementName=writeOn}"/>
+		<Label Content="{x:Static properties:Resources.TitleWriteOn}"/>
 		<lc:AutoWidthComboBox x:Name="writeOn"
 			ToolTip="{x:Static properties:Resources.ToolTipRamWriteOn}"
 		/>
 
-		<Label Content="{x:Static properties:Resources.TitleMemoryOnStart}" Target="{Binding ElementName=onStart}"/>
+		<Label Content="{x:Static properties:Resources.TitleMemoryOnStart}"/>
 		<lc:AutoWidthComboBox x:Name="onStart"
 			ToolTip="{x:Static properties:Resources.ToolTipMemoryOnStart}"
 		/>
 
-		<Label Content="{x:Static properties:Resources.TitleDataBitWidth}" Target="{Binding ElementName=dataBitWidth}"/>
+		<Label Content="{x:Static properties:Resources.TitleDataBitWidth}"/>
 		<ComboBox Name="dataBitWidth" ToolTip="{x:Static properties:Resources.ToolTipDataBitWidth}"
 			HorizontalAlignment="Left"
 		/>
 
-		<Label Content="{x:Static properties:Resources.TitleGraphicsArrayBPP}" Target="{Binding ElementName=bitsPerPixel}"/>
+		<Label Content="{x:Static properties:Resources.TitleGraphicsArrayBPP}"/>
 		<ComboBox Name="bitsPerPixel" ToolTip="{x:Static properties:Resources.ToolTipGraphicsArrayBPP}"
 			Width="{Binding ElementName=dataBitWidth, Path=ActualWidth}"
 			HorizontalAlignment="Left"
 		/>
 
-		<Label Content="{x:Static properties:Resources.TitleWidth}" Target="{Binding ElementName=width}"/>
+		<Label Content="{x:Static properties:Resources.TitleWidth}"/>
 		<TextBox Name="width" Style="{StaticResource sizeEditor}"
 			Text="{Binding Path=GraphicsArrayWidth, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
 			ToolTip="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent, FallbackValue={x:Static properties:Resources.ToolTipGraphicsArrayWidth}}"
 		/>
 
-		<Label Content="{x:Static properties:Resources.TitleHeight}" Target="{Binding ElementName=height}"/>
+		<Label Content="{x:Static properties:Resources.TitleHeight}"/>
 		<TextBox Name="height" Style="{StaticResource sizeEditor}"
 			Text="{Binding Path=GraphicsArrayHeight, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
 			ToolTip="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent, FallbackValue={x:Static properties:Resources.ToolTipGraphicsArrayHeight}}"
 		/>
 
-		<Label Content="{x:Static properties:Resources.TitleDescription}" Target="{Binding ElementName=note}"/>
+		<Label Content="{x:Static properties:Resources.TitleDescription}"/>
 		<TextBox Name="note" AcceptsReturn="True"/>
 
 		<StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">

@@ -8,25 +8,18 @@
 	Style="{StaticResource DialogWindow}"
 	FocusManager.FocusedElement="{Binding ElementName=name}"
 >
-	<Window.Resources>
-		<Style TargetType="{x:Type Label}">
-			<Setter Property="Margin" Value="3"/>
-			<Setter Property="HorizontalContentAlignment" Value="Right"/>
-		</Style>
-	</Window.Resources>
-
 	<lc:AutoGrid Margin="3">
-		<Label Content="{x:Static properties:Resources.TitleNotation}" Target="{Binding ElementName=name}"/>
+		<Label Content="{x:Static properties:Resources.TitleNotation}"/>
 		<TextBox Name="name" ToolTip="{x:Static properties:Resources.ToolTipButtonNotation}"/>
 
 		<CheckBox Grid.Column="1" Name="isToggle"
 			Content="{x:Static properties:Resources.TitleIsToggle}" ToolTip="{x:Static properties:Resources.ToolTipIsToggle}"
 		/>
 
-		<Label Content="{x:Static properties:Resources.TitlePinSide}" Target="{Binding ElementName=side}"/>
+		<Label Content="{x:Static properties:Resources.TitlePinSide}"/>
 		<lc:AutoWidthComboBox x:Name="side" ItemsSource="{x:Static lc:PinDescriptor.PinSideRange}" ToolTip="{x:Static properties:Resources.ToolTipDevicePinSide}"/>
 
-		<Label Content="{x:Static properties:Resources.TitleDescription}" Target="{Binding ElementName=note}"/>
+		<Label Content="{x:Static properties:Resources.TitleDescription}"/>
 		<TextBox Name="note" AcceptsReturn="True"/>
 
 		<StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">

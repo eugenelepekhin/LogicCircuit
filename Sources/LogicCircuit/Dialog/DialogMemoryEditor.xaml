@@ -9,11 +9,6 @@
 	FocusManager.FocusedElement="{Binding ElementName=addressBitWidth}"
 >
 	<Window.Resources>
-		<Style TargetType="{x:Type Label}">
-			<Setter Property="Margin" Value="3"/>
-			<Setter Property="HorizontalContentAlignment" Value="Right"/>
-		</Style>
-
 		<Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
 			<Setter Property="HorizontalAlignment" Value="Left"/>
 		</Style>
@@ -40,23 +35,23 @@
 	</Window.Resources>
 
 	<lc:AutoGrid Margin="3">
-		<Label Content="{x:Static properties:Resources.TitleAddressBitWidth}" Target="{Binding ElementName=addressBitWidth}"/>
+		<Label Content="{x:Static properties:Resources.TitleAddressBitWidth}"/>
 		<ComboBox Name="addressBitWidth" SelectionChanged="MemorySizeChanged" ToolTip="{x:Static properties:Resources.ToolTipAddressBitWidth}"/>
 
-		<Label Content="{x:Static properties:Resources.TitleDataBitWidth}" Target="{Binding ElementName=dataBitWidth}"/>
+		<Label Content="{x:Static properties:Resources.TitleDataBitWidth}"/>
 		<ComboBox Name="dataBitWidth" SelectionChanged="MemorySizeChanged" ToolTip="{x:Static properties:Resources.ToolTipDataBitWidth}"/>
 
-		<StackPanel Style="{StaticResource ramOnly}">
+		<StackPanel Style="{StaticResource ramOnly}" VerticalAlignment="Center">
 			<Label Content="{x:Static properties:Resources.TitleWriteOn}" Target="{Binding ElementName=writeOn}"/>
 		</StackPanel>
-		<StackPanel Style="{StaticResource ramOnly}">
+		<StackPanel Style="{StaticResource ramOnly}" VerticalAlignment="Center">
 			<lc:AutoWidthComboBox x:Name="writeOn" ToolTip="{x:Static properties:Resources.ToolTipRamWriteOn}"/>
 		</StackPanel>
 
-		<StackPanel Style="{StaticResource ramOnly}">
+		<StackPanel Style="{StaticResource ramOnly}" VerticalAlignment="Center">
 			<Label Content="{x:Static properties:Resources.TitleMemoryOnStart}" Target="{Binding ElementName=onStart}"/>
 		</StackPanel>
-		<StackPanel Style="{StaticResource ramOnly}">
+		<StackPanel Style="{StaticResource ramOnly}" VerticalAlignment="Center">
 			<lc:AutoWidthComboBox x:Name="onStart"
 				ToolTip="{x:Static properties:Resources.ToolTipMemoryOnStart}"
 			/>

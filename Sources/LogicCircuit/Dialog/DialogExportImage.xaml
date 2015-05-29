@@ -8,19 +8,12 @@
 	Style="{StaticResource DialogFixedWindow}"
 	FocusManager.FocusedElement="{Binding ElementName=imageType}"
 >
-	<Window.Resources>
-		<Style TargetType="{x:Type Label}">
-			<Setter Property="Margin" Value="3"/>
-			<Setter Property="HorizontalContentAlignment" Value="Right"/>
-		</Style>
-	</Window.Resources>
-
 	<lc:AutoGrid>
 		<TextBlock Grid.ColumnSpan="2" Margin="8"
 			Text="{x:Static properties:Resources.MessageExportImageDialog}"
 		/>
 
-		<Label Content="{x:Static properties:Resources.TitleType}" Target="{Binding ElementName=imageType}"/>
+		<Label Content="{x:Static properties:Resources.TitleType}"/>
 		<lc:AutoWidthComboBox x:Name="imageType"
 			ItemsSource="{Binding Path=Encoders}"
 			SelectedItem="{Binding Path=Encoder, Mode=TwoWay}"
@@ -32,7 +25,9 @@
 			<TextBox Name="fileName" MinWidth="420" SpellCheck.IsEnabled="False"
 				Text="{Binding Path=FilePath, Mode=TwoWay}"
 			/>
-			<Button Click="ButtonFileClick" Padding="3,0,3,0" MinWidth="10" HorizontalAlignment="Right" VerticalAlignment="Center"
+			<Button Click="ButtonFileClick" Padding="3,0,3,0" Margin="3,0,8,0" MinWidth="10" HorizontalAlignment="Right" VerticalAlignment="Center"
+				Width="{Binding ElementName=fileName, Path=ActualHeight}"
+				Height="{Binding ElementName=fileName, Path=ActualHeight}"
 				Content="{x:Static properties:Resources.TitleFileOpen}"
 			/>
 		</StackPanel>

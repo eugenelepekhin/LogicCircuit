@@ -51,7 +51,7 @@
 					Content="{x:Static properties:Resources.TitleLoadLastFile}"
 				/>
 
-				<Label Content="{x:Static properties:Resources.TitleMaxRecentFiles}" Target="{Binding ElementName=maxRecentFiles}"/>
+				<Label Content="{x:Static properties:Resources.TitleMaxRecentFiles}"/>
 				<ComboBox Name="maxRecentFiles" ItemsSource="{Binding RecentFileRange}"/>
 			</lc:AutoGrid>
 		</GroupBox>
@@ -64,9 +64,7 @@
 					Content="{x:Static properties:Resources.TitleShowGrid}"
 				/>
 
-				<Label Target="{Binding ElementName=gateShape}"
-					Content="{x:Static properties:Resources.TitleGateShape}"
-				/>
+				<Label Content="{x:Static properties:Resources.TitleGateShape}"/>
 				<ComboBox Name="gateShape" ItemsSource="{Binding Path=GateShapeList}"/>
 			</lc:AutoGrid>
 		</GroupBox>

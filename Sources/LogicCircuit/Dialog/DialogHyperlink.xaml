@@ -10,20 +10,13 @@
 	MinHeight="200"
 	FocusManager.FocusedElement="{Binding ElementName=hyperlinkText}"
 >
-	<Window.Resources>
-		<Style TargetType="{x:Type Label}">
-			<Setter Property="Margin" Value="3"/>
-			<Setter Property="HorizontalContentAlignment" Value="Right"/>
-		</Style>
-	</Window.Resources>
-
 	<lc:AutoGrid>
-		<Label Content="{x:Static properties:Resources.TitleText}" Target="{Binding ElementName=hyperlinkText}"/>
+		<Label Content="{x:Static properties:Resources.TitleText}"/>
 		<TextBox Name="hyperlinkText"
 			Text="{Binding Path=HyperlinkText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
 		/>
 
-		<Label Content="{x:Static properties:Resources.TitleHyperlink}" Target="{Binding ElementName=hyperlinkUrl}"/>
+		<Label Content="{x:Static properties:Resources.TitleHyperlink}"/>
 		<TextBox Name="hyperlinkUrl" SpellCheck.IsEnabled="False"
 			Text="{Binding Path=HyperlinkUrl, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
 		/>

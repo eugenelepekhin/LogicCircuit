@@ -10,11 +10,6 @@
 	FocusManager.FocusedElement="{Binding ElementName=type}"
 >
 	<Window.Resources>
-		<Style TargetType="{x:Type Label}">
-			<Setter Property="Margin" Value="3"/>
-			<Setter Property="HorizontalContentAlignment" Value="Right"/>
-		</Style>
-
 		<Style TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
 			<Setter Property="HorizontalAlignment" Value="Left"/>
 		</Style>
@@ -33,29 +28,29 @@
 	</Window.Resources>
 
 	<lc:AutoGrid Margin="3">
-		<Label Content="{x:Static properties:Resources.TitleType}" Target="{Binding ElementName=type}"/>
+		<Label Content="{x:Static properties:Resources.TitleType}"/>
 		<lc:AutoWidthComboBox x:Name="type"
 			ItemsSource="{x:Static lc:LedMatrixDescriptor.MatrixTypes}"
 			SelectedItem="{Binding Path=MatrixType}"
 			ToolTip="{x:Static properties:Resources.ToolTipLedMatrixType}"
 		/>
 
-		<Label Content="{x:Static properties:Resources.TitleCellShape}" Target="{Binding ElementName=cellShape}"/>
+		<Label Content="{x:Static properties:Resources.TitleCellShape}"/>
 		<ComboBox Name="cellShape" SelectedIndex="{Binding Path=CellShape}">
 			<ComboBoxItem Style="{StaticResource ShapeContainerStyle}"><Ellipse   Style="{StaticResource ShapeStyle}"/></ComboBoxItem>
 			<ComboBoxItem Style="{StaticResource ShapeContainerStyle}"><Rectangle Style="{StaticResource ShapeStyle}"/></ComboBoxItem>
 		</ComboBox>
 
-		<Label Content="{x:Static properties:Resources.TitleRows}" Target="{Binding ElementName=rows}"/>
+		<Label Content="{x:Static properties:Resources.TitleRows}"/>
 		<ComboBox Name="rows" ItemsSource="{x:Static lc:LedMatrixDescriptor.RowsRange}" SelectedItem="{Binding Path=Rows}"/>
 
-		<Label Content="{x:Static properties:Resources.TitleColumns}" Target="{Binding ElementName=columns}"/>
+		<Label Content="{x:Static properties:Resources.TitleColumns}"/>
 		<ComboBox Name="columns" ItemsSource="{x:Static lc:LedMatrixDescriptor.ColumnsRange}" SelectedItem="{Binding Path=Columns}"/>
 
-		<Label Content="{x:Static properties:Resources.TitleColors}" Target="{Binding ElementName=colors}"/>
+		<Label Content="{x:Static properties:Resources.TitleColors}"/>
 		<ComboBox Name="colors" ItemsSource="{Binding Path=ColorRange}" SelectedItem="{Binding Path=Colors}"/>
 
-		<Label Content="{x:Static properties:Resources.TitleDescription}" Target="{Binding ElementName=note}"/>
+		<Label Content="{x:Static properties:Resources.TitleDescription}"/>
 		<TextBox Name="note" AcceptsReturn="True" Text="{Binding Path=Note}"/>
 
 		<StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
