@@ -30,8 +30,21 @@ namespace LogicCircuit {
 
 		private void AutoGridLoaded(object sender, RoutedEventArgs e) {
 			this.Loaded -= AutoGridLoaded;
-			foreach(UIElement child in this.Children) {
+			for(int i = 0; i < this.Children.Count; i++) {
+				UIElement child = this.Children[i];
 				this.UpdateRowHeight(child);
+				// Link labels to next controls if they are not linked already.
+				Label label = child as Label;
+				if(label != null && i + 1 < this.Children.Count && !AutoGrid.WasSet(label.Target)) {
+					UIElement next = this.Children[i + 1];
+					if(!(next is Panel) && !(next is GroupBox) &&
+						(int)label.GetValue(Grid.RowProperty) == (int)next.GetValue(Grid.RowProperty) &&
+						(int)label.GetValue(Grid.ColumnProperty) == 0 &&
+						(int)next.GetValue(Grid.ColumnProperty) == 1
+					) {
+						label.Target = next;
+					}
+				}
 			}
 		}
 
