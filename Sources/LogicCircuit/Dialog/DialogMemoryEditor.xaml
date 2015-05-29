@@ -30,8 +30,6 @@
 				</DataTrigger>
 			</Style.Triggers>
 		</Style>
-
-		<lc:DoubleAdderConverter x:Key="DoubleAdderConverter"/>
 	</Window.Resources>
 
 	<lc:AutoGrid Margin="3">

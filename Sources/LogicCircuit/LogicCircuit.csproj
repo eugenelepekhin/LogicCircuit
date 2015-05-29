@@ -256,7 +256,6 @@
     <Compile Include="EnumHelper.cs" />
     <Compile Include="EnumToVisibilityConvertor.cs" />
     <Compile Include="ExpressionParser.cs" />
-    <Compile Include="FormatConverter.cs" />
     <Compile Include="Function\FunctionAnd.cs" />
     <Compile Include="Function\FunctionAndNot.cs" />
     <Compile Include="Function\CircuitState.cs" />

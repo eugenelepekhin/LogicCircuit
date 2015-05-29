@@ -12,6 +12,7 @@
 				<ResourceDictionary Source="ColorPicker/ColorPicker.xaml"/>
 			</ResourceDictionary.MergedDictionaries>
 
+			<lc:DoubleAdderConverter x:Key="DoubleAdderConverter"/>
 			<lc:HyperlinkNavigationCommand x:Key="HyperlinkNavigationCommand"/>
 
 			<Style TargetType="Hyperlink">

@@ -72,9 +72,6 @@
 				<PropertyGroupDescription PropertyName="Category"/>
 			</CollectionViewSource.GroupDescriptions>
 		</CollectionViewSource>
-
-		<lc:FormatConverter x:Key="FormatConverter"/>
-		<lc:DoubleAdderConverter x:Key="DoubleAdderConverter"/>
 	</Window.Resources>
 
 	<Window.Triggers>
@@ -719,7 +716,7 @@
 						</Slider.LayoutTransform>
 					</Slider>
 					<TextBlock VerticalAlignment="Center" MinWidth="50" Margin="3,0"
-						Text="{Binding Path=Editor.Zoom, Converter={StaticResource FormatConverter}, ConverterParameter='{}{0:P0}'}"
+						Text="{Binding Path=Editor.Zoom, StringFormat=P0}"
 						ToolTip="{x:Static properties:Resources.ToolTipCurrentZoom}"
 					/>
 
