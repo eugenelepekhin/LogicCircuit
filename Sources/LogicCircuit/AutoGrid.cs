@@ -35,9 +35,9 @@ namespace LogicCircuit {
 				this.UpdateRowHeight(child);
 				// Link labels to next controls if they are not linked already.
 				Label label = child as Label;
-				if(label != null && i + 1 < this.Children.Count && !AutoGrid.WasSet(label.Target)) {
+				if(label != null && i + 1 < this.Children.Count && !AutoGrid.WasSet(label.Target) && label.GetBindingExpression(Label.TargetProperty) == null) {
 					UIElement next = this.Children[i + 1];
-					if(!(next is Panel) && !(next is GroupBox) &&
+					if(!(next is Panel) && !(next is GroupBox) && next.Focusable &&
 						(int)label.GetValue(Grid.RowProperty) == (int)next.GetValue(Grid.RowProperty) &&
 						(int)label.GetValue(Grid.ColumnProperty) == 0 &&
 						(int)next.GetValue(Grid.ColumnProperty) == 1
