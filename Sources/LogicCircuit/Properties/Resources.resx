@@ -495,7 +495,7 @@ Out</value>
     <value>Da_ta</value>
   </data>
   <data name="TitleDataBitWidth" xml:space="preserve">
-    <value>_Data bit width:</value>
+    <value>Data _bit width:</value>
   </data>
   <data name="TitleInverted" xml:space="preserve">
     <value>_Inverted</value>
@@ -1435,13 +1435,13 @@ Allows to select size and color depth/scheme:
     <comment>{int min, int max}</comment>
   </data>
   <data name="TitleGraphicsArrayBPP" xml:space="preserve">
-    <value>_Bits per pixel:</value>
+    <value>Bits per _pixel:</value>
   </data>
   <data name="TitleHeight" xml:space="preserve">
     <value>_Height:</value>
   </data>
   <data name="TitleWidth" xml:space="preserve">
-    <value>_Width:</value>
+    <value>Wid_th:</value>
   </data>
   <data name="ToolTipGraphicsArrayHeight" xml:space="preserve">
     <value>Enter height of the graphics array in pixels.</value>

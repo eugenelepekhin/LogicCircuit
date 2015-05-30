@@ -898,7 +898,7 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to _Data bit width:.
+		/// Looks up a localized string similar to Data _bit width:.
 		/// </summary>
  		public static string TitleDataBitWidth {
 			get { return ResourceManager.GetString("TitleDataBitWidth", Culture); }
@@ -2936,7 +2936,7 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to _Bits per pixel:.
+		/// Looks up a localized string similar to Bits per _pixel:.
 		/// </summary>
  		public static string TitleGraphicsArrayBPP {
 			get { return ResourceManager.GetString("TitleGraphicsArrayBPP", Culture); }
@@ -2950,7 +2950,7 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to _Width:.
+		/// Looks up a localized string similar to Wid_th:.
 		/// </summary>
  		public static string TitleWidth {
 			get { return ResourceManager.GetString("TitleWidth", Culture); }
