@@ -1,6 +1,12 @@
-﻿using System;
+﻿// Comment out any of #define to turn off unneeded parameter type.
+#define HaveFlagParam
+#define HaveStringParam
+//#define HaveIntParam
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -13,34 +19,71 @@ namespace CommandLineParser {
 	internal class CommandLine {
 		private ParameterList parameterList = new ParameterList();
 
-		/// <summary>
-		/// Defines flag parameter
-		/// </summary>
-		/// <param name="name">Full name of the parameter</param>
-		/// <param name="alias">Short name of the parameter</param>
-		/// <param name="note">Help text for the parameter</param>
-		/// <param name="required">True if the parameter is mandatory</param>
-		/// <param name="assign">Method to assign flag parameter back to the application variable</param>
-		/// <returns>Returns this reference</returns>
-		public CommandLine AddFlag(string name, string alias, string note, bool required, Action<bool> assign) {
-			this.parameterList.Add(new ParameterFlag(name, alias, note, required, assign));
-			return this;
-		}
+		#if HaveFlagParam
+			/// <summary>
+			/// Defines flag parameter
+			/// </summary>
+			/// <param name="name">Full name of the parameter</param>
+			/// <param name="alias">Short name of the parameter</param>
+			/// <param name="note">Help text for the parameter</param>
+			/// <param name="required">True if the parameter is mandatory</param>
+			/// <param name="assign">Method to assign flag parameter back to the application variable</param>
+			/// <returns>Returns this reference</returns>
+			public CommandLine AddFlag(string name, string alias, string note, bool required, Action<bool> assign) {
+				this.parameterList.Add(new ParameterFlag(name, alias, note, required, assign));
+				return this;
+			}
+		#endif
 
-		/// <summary>
-		/// Defines string parameter
-		/// </summary>
-		/// <param name="name">Full name of the parameter</param>
-		/// <param name="alias">Short name of the parameter</param>
-		/// <param name="value">Help text that will represent the value passed to the parameter</param>
-		/// <param name="note">Help text for the parameter</param>
-		/// <param name="required">True if the parameter is mandatory</param>
-		/// <param name="assign">Method to assign flag parameter back to the application variable</param>
-		/// <returns>Returns this reference</returns>
-		public CommandLine AddString(string name, string alias, string value, string note, bool required, Action<string> assign) {
-			this.parameterList.Add(new ParameterString(name, alias, value, note, required, assign));
-			return this;
-		}
+		#if HaveStringParam
+			/// <summary>
+			/// Defines string parameter
+			/// </summary>
+			/// <param name="name">Full name of the parameter</param>
+			/// <param name="alias">Short name of the parameter</param>
+			/// <param name="value">Help text that will represent the value passed to the parameter</param>
+			/// <param name="note">Help text for the parameter</param>
+			/// <param name="required">True if the parameter is mandatory</param>
+			/// <param name="assign">Method to assign string parameter back to the application variable</param>
+			/// <returns>Returns this reference</returns>
+			public CommandLine AddString(string name, string alias, string value, string note, bool required, Action<string> assign) {
+				this.parameterList.Add(new ParameterString(name, alias, value, note, required, assign));
+				return this;
+			}
+		#endif
+
+		#if HaveIntParam
+			/// <summary>
+			/// Defines integer parameter
+			/// </summary>
+			/// <param name="name">Full name of the parameter</param>
+			/// <param name="alias">Short name of the parameter</param>
+			/// <param name="value">Help text that will represent the value passed to the parameter</param>
+			/// <param name="note">Help text for the parameter</param>
+			/// <param name="required">True if the parameter is mandatory</param>
+			/// <param name="min">Min value</param>
+			/// <param name="max">Max value</param>
+			/// <param name="assign">Method to assign int parameter back to the application variable</param>
+			/// <returns>Returns this reference</returns>
+			public CommandLine AddInt(string name, string alias, string value, string note, bool required, int min, int max, Action<int> assign) {
+				this.parameterList.Add(new ParameterInt(name, alias, value, note, required, min, max, assign));
+				return this;
+			}
+
+			/// <summary>
+			/// Defines int parameter allowing any integer value
+			/// </summary>
+			/// <param name="name">Full name of the parameter</param>
+			/// <param name="alias">Short name of the parameter</param>
+			/// <param name="value">Help text that will represent the value passed to the parameter</param>
+			/// <param name="note">Help text for the parameter</param>
+			/// <param name="required">True if the parameter is mandatory</param>
+			/// <param name="assign">Method to assign int parameter back to the application variable</param>
+			/// <returns>Returns this reference</returns>
+			public CommandLine AddInt(string name, string alias, string value, string note, bool required, Action<int> assign) {
+				return this.AddInt(name, alias, value, note, required, int.MinValue, int.MaxValue, assign);
+			}
+		#endif
 
 		/// <summary>
 		/// Parses the array of command line parameters and calling all the assign methods to set values of parsed parameters.
@@ -206,49 +249,77 @@ namespace CommandLineParser {
 			}
 		}
 
-		private sealed class ParameterFlag : Parameter<bool> {
-			public ParameterFlag(string name, string alias, string note, bool required, Action<bool> assign) : base(name, alias, null, note, required, assign) {
-			}
-
-			public override string SetValue(string value) {
-				bool flag = false;
-				if(string.IsNullOrWhiteSpace(value)) {
-					flag = true;
-				} else {
-					switch(value.ToLowerInvariant()) {
-					case "+":
-					case "yes":
-					case "true":
-					case "on":
-					case "1":
-						flag = true;
-						break;
-					case "-":
-					case "no":
-					case "false":
-					case "off":
-					case "0":
-						flag = false;
-						break;
-					default:
-						return string.Format("Parameter {0} has invalid value {1}", this.Name, value);
-					}
+		#if HaveFlagParam
+			private sealed class ParameterFlag : Parameter<bool> {
+				public ParameterFlag(string name, string alias, string note, bool required, Action<bool> assign) : base(name, alias, null, note, required, assign) {
 				}
-				return this.AssignValue(flag);
-			}
 
-			public override bool ExpectValue() {
-				return false;
-			}
-		}
+				public override string SetValue(string value) {
+					bool flag = false;
+					if(string.IsNullOrWhiteSpace(value)) {
+						flag = true;
+					} else {
+						switch(value.ToLowerInvariant()) {
+						case "+":
+						case "yes":
+						case "true":
+						case "on":
+						case "1":
+							flag = true;
+							break;
+						case "-":
+						case "no":
+						case "false":
+						case "off":
+						case "0":
+							flag = false;
+							break;
+						default:
+							return string.Format("Parameter {0} has invalid value {1}", this.Name, value);
+						}
+					}
+					return this.AssignValue(flag);
+				}
 
-		private sealed class ParameterString : Parameter<string> {
-			public ParameterString(string name, string alias, string value, string note, bool required, Action<string> assign) : base(name, alias, value, note, required, assign) {
+				public override bool ExpectValue() {
+					return false;
+				}
 			}
+		#endif
 
-			public override string SetValue(string value) {
-				return this.AssignValue(value);
+		#if HaveStringParam
+			private sealed class ParameterString : Parameter<string> {
+				public ParameterString(string name, string alias, string value, string note, bool required, Action<string> assign) : base(name, alias, value, note, required, assign) {
+				}
+
+				public override string SetValue(string value) {
+					return this.AssignValue(value);
+				}
 			}
-		}
+		#endif
+
+		#if HaveIntParam
+			private sealed class ParameterInt : Parameter<int> {
+				private int min;
+				private int max;
+
+				public ParameterInt(string name, string alias, string value, string note, bool required, int min, int max, Action<int> assign) : base(name, alias, value, note, required, assign) {
+					Debug.Assert(min < max, "min should be less than max for integer parameter.");
+					this.min = min;
+					this.max = max;
+				}
+
+				public override string SetValue(string value) {
+					int parsedValue;
+					if(int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out parsedValue)) {
+						if(this.min <= parsedValue && parsedValue <= this.max) {
+							return this.AssignValue(parsedValue);
+						}
+						return string.Format("Provided value {0} of parameter {1} expected to be in range: {2} <= {3} <= {4}.", value, this.Name, this.min, this.Value, this.max);
+					}
+					return string.Format("Parameter {0} has invalid value {1}. This parameter is expecting numerical value.", this.Name, value);
+				}
+			}
+		#endif
 	}
 }
