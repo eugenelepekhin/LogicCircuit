@@ -188,7 +188,13 @@ namespace LogicCircuit {
 					bool success;
 					Predicate<TruthState> include = this.Filter(out success);
 					if(include != null) {
-						this.TruthTable.Filter = o => o is TruthState ? include((TruthState)o) : false;
+						this.TruthTable.Filter = o => {
+							if(o is TruthState) {
+								TruthState state = (TruthState)o;
+								return (state.Output == null) || include(state);
+							}
+							return false;
+						};
 					} else {
 						this.TruthTable.Filter = null;
 					}
