@@ -175,10 +175,12 @@ namespace LogicCircuit {
 		}
 
 		private static bool IsValidUrl(string url) {
-			try {
-				UriBuilder builder = new UriBuilder(url);
-				return StringComparer.OrdinalIgnoreCase.Equals(builder.Scheme, Uri.UriSchemeHttp);
-			} catch {}
+			if(!string.IsNullOrWhiteSpace(url)) {
+				try {
+					UriBuilder builder = new UriBuilder(url);
+					return StringComparer.OrdinalIgnoreCase.Equals(builder.Scheme, Uri.UriSchemeHttp);
+				} catch {}
+			}
 			return false;
 		}
 
