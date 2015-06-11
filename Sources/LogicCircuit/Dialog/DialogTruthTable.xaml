@@ -17,7 +17,7 @@
 	<Grid>
 		<lc:AutoGrid IsEnabled="{Binding Path=ShowProgress, Converter={StaticResource InverseBooleanConverter}}" ColumnWidths="Auto;*;Auto;Auto">
 			<Label Content="{x:Static properties:Resources.TitleFilter}" VerticalAlignment="Center"/>
-			<TextBox Name="filter"/>
+			<TextBox Name="filter" SpellCheck.IsEnabled="False"/>
 			<CheckBox VerticalAlignment="Center"
 				Content="{x:Static properties:Resources.TitleInvert}"
 				IsChecked="{Binding Path=InvertFilter}"
