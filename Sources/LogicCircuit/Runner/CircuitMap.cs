@@ -516,10 +516,11 @@ namespace LogicCircuit {
 										int bitWidth = jams[i].Pin.BitWidth;
 										if(start < jamStart + bitWidth) {
 											List<int> child = new List<int>();
-											obtained |= this.StateIndexes(child, jams[i].AbsolutePoint, true,
-												Math.Max(0, start - jamStart),
-												Math.Min(jamStart + bitWidth - start, Math.Min(start + count - jamStart, bitWidth))
-											);
+											int localStart = Math.Max(0, start - jamStart);
+											Tracer.Assert(0 <= localStart && localStart < bitWidth);
+											int localCount = Math.Min(start + count, jamStart + bitWidth) - (jamStart + localStart);
+											Tracer.Assert(0 < localCount && localCount <= count && localCount <= bitWidth);
+											obtained |= this.StateIndexes(child, jams[i].AbsolutePoint, true, localStart, localCount);
 											list.AddRange(child);
 										}
 										jamStart += bitWidth;
