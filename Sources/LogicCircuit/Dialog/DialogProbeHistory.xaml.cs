@@ -16,11 +16,13 @@ namespace LogicCircuit {
 
 		private FunctionProbe functionProbe;
 		private long[] reads;
+		public int BitWidth { get; private set; }
 		public IEnumerable<string> History { get; private set; }
 		public bool MarkAllowed { get { return this.reads.Length < 1 || this.reads[0] != -1L; } }
 
 		public DialogProbeHistory(FunctionProbe functionProbe) {
 			this.functionProbe = functionProbe;
+			this.BitWidth = this.functionProbe.BitWidth;
 			this.RefreshHistory();
 			this.DataContext = this;
 			this.InitializeComponent();

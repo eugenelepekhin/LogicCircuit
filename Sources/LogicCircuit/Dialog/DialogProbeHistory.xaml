@@ -8,7 +8,12 @@
 	Style="{StaticResource DialogWindow}"
 >
 	<lc:AutoGrid>
-		<ListBox Grid.ColumnSpan="2" ItemsSource="{Binding Path=History}" Margin="8" SelectionMode="Extended"/>
+		<StackPanel Orientation="Horizontal" Grid.ColumnSpan="2">
+			<Label Content="{x:Static properties:Resources.TitleBitWidth}"/>
+			<TextBlock Text="{Binding Path=BitWidth}" VerticalAlignment="Center"/>
+		</StackPanel>
+
+		<ListBox Grid.ColumnSpan="2" ItemsSource="{Binding Path=History}" Margin="8,0" SelectionMode="Extended"/>
 
 		<Button HorizontalAlignment="Left" Click="ButtonMarkClick" IsEnabled="{Binding Path=MarkAllowed}"
 			Content="{x:Static properties:Resources.TitleMark}"
