@@ -25,11 +25,9 @@ namespace LogicCircuit {
 
 		public AutoGrid() {
 			this.DefineColumns();
-			this.Loaded += this.AutoGridLoaded;
 		}
 
-		private void AutoGridLoaded(object sender, RoutedEventArgs e) {
-			this.Loaded -= AutoGridLoaded;
+		public override void EndInit() {
 			for(int i = 0; i < this.Children.Count; i++) {
 				UIElement child = this.Children[i];
 				this.UpdateRowHeight(child);
@@ -46,6 +44,8 @@ namespace LogicCircuit {
 					}
 				}
 			}
+
+			base.EndInit();
 		}
 
 		protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e) {
@@ -137,6 +137,7 @@ namespace LogicCircuit {
 			} else {
 				TextBox textBox = child as TextBox;
 				if((textBox != null && textBox.AcceptsReturn && !(0 < textBox.Height || 1 < textBox.MinLines || textBox.MaxLines < int.MaxValue)) ||
+					// Do not replace ListBox, ListView,... with ItemsControl. As too many of controls are ItemsControls.
 					child is GroupBox || child is ListBox || child is ListView || child is RichTextBox || child is DataGrid || child is TreeView
 				) {
 					RowDefinition row = this.RowDefinitions[(int)child.GetValue(Grid.RowProperty)];
