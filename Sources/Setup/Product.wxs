@@ -23,9 +23,9 @@
 		<Property Id="ARPURLUPDATEINFO" Value="http://www.logiccircuit.org/download.html"/>
 		<Property Id="ARPCOMMENTS" Value="LogicCircuit – is educational software for designing and simulating digital logic circuits"/>
 
-		<PropertyRef Id="NETFRAMEWORK40CLIENT"/>
-		<Condition Message="This application requires Microsoft .NET Framework 4.0. Please install the .NET Framework then run this installer again.">
-			<![CDATA[Installed OR NETFRAMEWORK40CLIENT]]>
+		<PropertyRef Id="NETFRAMEWORK45"/>
+		<Condition Message="This application requires Microsoft .NET Framework 4.5. Please install the .NET Framework then run this installer again.">
+			<![CDATA[Installed OR NETFRAMEWORK45]]>
 		</Condition>
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed."/>
