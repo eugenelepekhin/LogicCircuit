@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,15 +24,45 @@ namespace LogicCircuit {
 			obj.SetValue(AutoGrid.RowHeightProperty, rowHeight);
 		}
 
-		public AutoGrid() {
-			this.DefineColumns();
+		public override void EndInit() {
+			this.PlaceChildren();
+			this.LinkLabels();
+			base.EndInit();
 		}
 
-		public override void EndInit() {
+		private void PlaceChildren() {
+			int maxColumns = this.DefineColumns();
+			int column = 0;
+			int row = 0;
+			foreach(UIElement child in this.Children) {
+				int desiredColumn = AutoGrid.DesiredColumn(child);
+				Debug.Assert(-1 <= desiredColumn && desiredColumn < maxColumns);
+				if(0 <= desiredColumn) {
+					if(desiredColumn < column) {
+						row++;
+					}
+					column = desiredColumn;
+				} else if(maxColumns <= column) {
+					column = 0;
+					row++;
+				}
+				if(this.RowDefinitions.Count <= row) {
+					this.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
+				}
+				if(desiredColumn != column) {
+					child.SetValue(Grid.ColumnProperty, column);
+				}
+				child.SetValue(Grid.RowProperty, row);
+				int columnSpan = (int)child.GetValue(Grid.ColumnSpanProperty);
+				Debug.Assert(column + columnSpan <= maxColumns);
+				column += columnSpan;
+				this.UpdateRowHeight(child);
+			}
+		}
+
+		private void LinkLabels() {
 			for(int i = 0; i < this.Children.Count; i++) {
 				UIElement child = this.Children[i];
-				this.UpdateRowHeight(child);
-				// Link labels to next controls if they are not linked already.
 				Label label = child as Label;
 				if(label != null && i + 1 < this.Children.Count && !AutoGrid.WasSet(label.Target) && label.GetBindingExpression(Label.TargetProperty) == null) {
 					UIElement next = this.Children[i + 1];
@@ -44,50 +75,25 @@ namespace LogicCircuit {
 					}
 				}
 			}
-
-			base.EndInit();
 		}
 
-		protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e) {
-			base.OnPropertyChanged(e);
-			if(e.Property == AutoGrid.ColumnWidthsProperty) {
-				this.DefineColumns();
-				if(0 < this.Children.Count) {
-					UIElement[] children = new UIElement[this.Children.Count];
-					this.Children.CopyTo(children, 0);
-					this.Children.Clear();
-					foreach (var child in children) {
-						this.Children.Add(child);
-					}
-				}
+		private static int DesiredColumn(UIElement child) {
+			object column = child.ReadLocalValue(Grid.ColumnProperty);
+			if(AutoGrid.WasSet(column)) {
+				return (int)column;
 			}
+			return -1;
 		}
 
-		protected override void OnVisualChildrenChanged(DependencyObject visualAdded, DependencyObject visualRemoved) {
-			base.OnVisualChildrenChanged(visualAdded, visualRemoved);
-			if(visualAdded != null) {
-				int column = this.AvailableColumn();
-				int row = this.AvailableRow();
-				if(this.ColumnDefinitions.Count <= column) {
-					column = 0;
-					row++;
-				}
-				if(this.RowDefinitions.Count <= row) {
-					this.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
-				}
-				if(!AutoGrid.WasSet(visualAdded.ReadLocalValue(Grid.ColumnProperty))) {
-					visualAdded.SetValue(Grid.ColumnProperty, column);
-				}
-				visualAdded.SetValue(Grid.RowProperty, row);
-			}
-		}
-
-		private void DefineColumns() {
-			this.ColumnDefinitions.Clear();
-			this.RowDefinitions.Clear();
+		private int DefineColumns() {
+			Debug.Assert(this.ColumnDefinitions.Count == 0);
+			Debug.Assert(this.RowDefinitions.Count == 0);
+			int count = 0;
 			foreach(GridLength gridLength in AutoGrid.ParseColumnWidths(this.ColumnWidths)) {
 				this.ColumnDefinitions.Add(new ColumnDefinition() { Width = gridLength });
+				count++;
 			}
+			return count;
 		}
 
 		private static IEnumerable<GridLength> ParseColumnWidths(string widths) {
@@ -104,26 +110,6 @@ namespace LogicCircuit {
 
 		private static bool WasSet(object obj) {
 			return obj != null && obj != DependencyProperty.UnsetValue;
-		}
-
-		private int AvailableColumn() {
-			int index = this.Children.Count - 2; // The last element needs to be placed in the grid. The previous already placed so inspect it.
-			if (0 <= index) {
-				UIElement last = this.Children[index];
-				int column = (int)last.GetValue(Grid.ColumnProperty);
-				int span = (int)last.GetValue(Grid.ColumnSpanProperty);
-				return column + span;
-			}
-			return 0;
-		}
-
-		private int AvailableRow() {
-			int index = this.Children.Count - 2; // The last element needs to be placed in the grid. The previous already placed so inspect it.
-			if (0 <= index) {
-				UIElement last = this.Children[index];
-				return (int)last.GetValue(Grid.RowProperty);
-			}
-			return 0;
 		}
 
 		private void UpdateRowHeight(DependencyObject child) {
