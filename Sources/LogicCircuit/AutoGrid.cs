@@ -121,14 +121,17 @@ namespace LogicCircuit {
 					row.Height = rowHeight;
 				}
 			} else {
-				TextBox textBox = child as TextBox;
-				if((textBox != null && textBox.AcceptsReturn && !(0 < textBox.Height || 1 < textBox.MinLines || textBox.MaxLines < int.MaxValue)) ||
+				FrameworkElement fe = child as FrameworkElement;
+				if(fe != null && !(fe.MaxHeight < double.MaxValue || 0 < fe.Height)) {
+					TextBox textBox;
 					// Do not replace ListBox, ListView,... with ItemsControl. As too many of controls are ItemsControls.
-					child is GroupBox || child is ListBox || child is ListView || child is RichTextBox || child is DataGrid || child is TreeView
-				) {
-					RowDefinition row = this.RowDefinitions[(int)child.GetValue(Grid.RowProperty)];
-					if(row.Height == GridLength.Auto) {
-						row.Height = new GridLength(1, GridUnitType.Star);
+					if(fe is GroupBox || fe is RichTextBox || fe is TreeView || fe is ListView || fe is ListBox || fe is DataGrid ||
+						(textBox = fe as TextBox) != null && textBox.AcceptsReturn && !(1 < textBox.MinLines || textBox.MaxLines < int.MaxValue)
+					) {
+						RowDefinition row = this.RowDefinitions[(int)child.GetValue(Grid.RowProperty)];
+						if(row.Height == GridLength.Auto) {
+							row.Height = new GridLength(1, GridUnitType.Star);
+						}
 					}
 				}
 			}
