@@ -16,11 +16,11 @@ namespace LogicCircuit {
 			set { this.SetValue(AutoGrid.ColumnWidthsProperty, value); }
 		}
 
-		public static readonly DependencyProperty RowHeightProperty = DependencyProperty.RegisterAttached("RowHeight", typeof(GridLength), typeof(AutoGrid));
-		public static GridLength GetRowHeight(DependencyObject obj) {
-			return (GridLength)obj.GetValue(AutoGrid.RowHeightProperty);
+		public static readonly DependencyProperty RowHeightProperty = DependencyProperty.RegisterAttached("RowHeight", typeof(GridLength?), typeof(AutoGrid));
+		public static GridLength? GetRowHeight(DependencyObject obj) {
+			return (GridLength?)obj.GetValue(AutoGrid.RowHeightProperty);
 		}
-		public static void SetRowHeight(DependencyObject obj, GridLength rowHeight) {
+		public static void SetRowHeight(DependencyObject obj, GridLength? rowHeight) {
 			obj.SetValue(AutoGrid.RowHeightProperty, rowHeight);
 		}
 
@@ -113,7 +113,7 @@ namespace LogicCircuit {
 		}
 
 		private void UpdateRowHeight(DependencyObject child) {
-			object objHeight = child.ReadLocalValue(AutoGrid.RowHeightProperty);
+			object objHeight = child.GetValue(AutoGrid.RowHeightProperty);
 			if(AutoGrid.WasSet(objHeight)) {
 				GridLength rowHeight = (GridLength)objHeight;
 				RowDefinition row = this.RowDefinitions[(int)child.GetValue(Grid.RowProperty)];
