@@ -1,0 +1,1182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ErrorProjectCount" xml:space="preserve">
+    <value>بیش از یک پروژه در فایل موجود است.</value>
+  </data>
+  <data name="ErrorUnknownVersion" xml:space="preserve">
+    <value>فایل انتخاب شده نامفهوم است.
+فایلی که انتخاب کردید یا آسیب دیده است یا توسط ورژن جدیدتری از برنامه Logic Circuit ایجاد شده. برای دانلود آخرین ورژن برنامه به آدرس  &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt;  مراجعه کنید.</value>
+  </data>
+  <data name="FileSaved" xml:space="preserve">
+    <value>فایل {0} ذخیره شد.</value>
+  </data>
+  <data name="GateShapeRectangular" xml:space="preserve">
+    <value>مستطیل شکل</value>
+  </data>
+  <data name="GateShapeShaped" xml:space="preserve">
+    <value>منحنی شکل</value>
+  </data>
+  <data name="LogicalCircuitName" xml:space="preserve">
+    <value>مدار</value>
+  </data>
+  <data name="MainFrameCaption" xml:space="preserve">
+    <value>مدار منطقی {0}</value>
+  </data>
+  <data name="MemoryAddressPinName" xml:space="preserve">
+    <value>آدرس حافظه</value>
+  </data>
+  <data name="MemoryDataInPinName" xml:space="preserve">
+    <value>ورودی دیتای حافظه</value>
+  </data>
+  <data name="MemoryDataPinName" xml:space="preserve">
+    <value>دیتای حافظه</value>
+  </data>
+  <data name="MemoryWritePinName" xml:space="preserve">
+    <value>ورودی حافظه RAM.
+مقدار حافظه به {0} بروز شد.</value>
+  </data>
+  <data name="MessageSaveFile" xml:space="preserve">
+    <value>پروژه "{0}" تغییر پیدا کرده است.
+آیا مایل به ذخیره آن هستید؟</value>
+  </data>
+  <data name="OperationCanceled" xml:space="preserve">
+    <value>عملیات لغو شد.</value>
+  </data>
+  <data name="Ready" xml:space="preserve">
+    <value>آماده</value>
+  </data>
+  <data name="TitleCancel" xml:space="preserve">
+    <value>لغو</value>
+  </data>
+  <data name="TitleNo" xml:space="preserve">
+    <value>خیر</value>
+  </data>
+  <data name="TitleOK" xml:space="preserve">
+    <value>قبول</value>
+  </data>
+  <data name="TitleShowDetails" xml:space="preserve">
+    <value>نمایش جزئیات</value>
+  </data>
+  <data name="TitleYes" xml:space="preserve">
+    <value>بله</value>
+  </data>
+  <data name="WriteOn0" xml:space="preserve">
+    <value>کاهش از 1 به 0</value>
+  </data>
+  <data name="WriteOn1" xml:space="preserve">
+    <value>افزایش از 0 به 1</value>
+  </data>
+  <data name="ToolTipButton" xml:space="preserve">
+    <value>دکمه {0}</value>
+  </data>
+  <data name="ToolTipWire" xml:space="preserve">
+    <value>سیم</value>
+  </data>
+  <data name="CategoryInputOutput" xml:space="preserve">
+    <value>ورودی - خروجی</value>
+  </data>
+  <data name="CommandHelpAbout" xml:space="preserve">
+    <value>درباره ما</value>
+  </data>
+  <data name="NameButton" xml:space="preserve">
+    <value>دکمه</value>
+  </data>
+  <data name="NameConstant" xml:space="preserve">
+    <value>ثابت</value>
+  </data>
+  <data name="NameSplitter" xml:space="preserve">
+    <value>جدا کننده</value>
+  </data>
+  <data name="TitleAbout" xml:space="preserve">
+    <value>درباره ما</value>
+  </data>
+  <data name="TitleVersion" xml:space="preserve">
+    <value>ورژن:</value>
+  </data>
+  <data name="CommandToolsOptions" xml:space="preserve">
+    <value>تنظیمات</value>
+  </data>
+  <data name="TitleDisplayOptions" xml:space="preserve">
+    <value>نمایش</value>
+  </data>
+  <data name="TitleFileOptions" xml:space="preserve">
+    <value>فایل</value>
+  </data>
+  <data name="TitleGateShape" xml:space="preserve">
+    <value>شکل گیت</value>
+  </data>
+  <data name="TitleLoadLastFile" xml:space="preserve">
+    <value>آخرین فایل جاری را هنگام شروع باز کن</value>
+  </data>
+  <data name="TitleOptions" xml:space="preserve">
+    <value>تنظیمات</value>
+  </data>
+  <data name="TitleShowGrid" xml:space="preserve">
+    <value>صفحه را قسمت بندی کن</value>
+  </data>
+  <data name="MessageFreeWireCount" xml:space="preserve">
+    <value>{0} سیم آزاد پیدا شد.</value>
+  </data>
+  <data name="MessageFloatingSymbolCount" xml:space="preserve">
+    <value>{0} شئ بدون اتصال پیدا شد.</value>
+  </data>
+  <data name="CommandCircuitCurrent" xml:space="preserve">
+    <value>مدار منطقی</value>
+  </data>
+  <data name="CommandCircuitDelete" xml:space="preserve">
+    <value>مدار فعلی را پاک کن.</value>
+  </data>
+  <data name="CommandCircuitNew" xml:space="preserve">
+    <value>ایجاد مدار منطقی جدید</value>
+  </data>
+  <data name="CommandCircuitProject" xml:space="preserve">
+    <value>پروژه</value>
+  </data>
+  <data name="CommandEditSelectAllButWires" xml:space="preserve">
+    <value>انتخاب  همه اشیاء به جز سیم ها </value>
+  </data>
+  <data name="CommandEditSelectAllProbes" xml:space="preserve">
+    <value>انتخاب همه Probe ها</value>
+  </data>
+  <data name="CommandEditSelectAllProbesWithWire" xml:space="preserve">
+    <value>انتخاب همه Probe ها و سیم های متصل</value>
+  </data>
+  <data name="CommandEditSelectAllWires" xml:space="preserve">
+    <value>انتخاب همه سیم ها</value>
+  </data>
+  <data name="CommandEditSelectFloatingSymbols" xml:space="preserve">
+    <value>انتخاب اشیاء ناقص</value>
+  </data>
+  <data name="CommandEditSelectFreeWires" xml:space="preserve">
+    <value>انتخاب سیم های آزاد</value>
+  </data>
+  <data name="CommandEditUnselectAllButWires" xml:space="preserve">
+    <value>عدم انتخاب همه اشیاء به جز سیم ها</value>
+  </data>
+  <data name="CommandEditUnselectAllWires" xml:space="preserve">
+    <value>عدم انتخاب همه سیم ها</value>
+  </data>
+  <data name="CommandFileExportImage" xml:space="preserve">
+    <value>تهیه عکس از مدار</value>
+  </data>
+  <data name="CommandToolsOscilloscope" xml:space="preserve">
+    <value>نوسان نما</value>
+  </data>
+  <data name="CommandToolsReport" xml:space="preserve">
+    <value>گزارش از پروژه</value>
+  </data>
+  <data name="TitleCategory" xml:space="preserve">
+    <value>دسته بندی:</value>
+  </data>
+  <data name="TitleDescription" xml:space="preserve">
+    <value>توضیحات:</value>
+  </data>
+  <data name="TitleName" xml:space="preserve">
+    <value>نام:</value>
+  </data>
+  <data name="TitleNotation" xml:space="preserve">
+    <value>یادداشت</value>
+  </data>
+  <data name="TitleBitWidth" xml:space="preserve">
+    <value>طول بیت</value>
+  </data>
+  <data name="TitleValue" xml:space="preserve">
+    <value>مقدار</value>
+  </data>
+  <data name="NamePin" xml:space="preserve">
+    <value>پین</value>
+  </data>
+  <data name="TitleAddressBitWidth" xml:space="preserve">
+    <value>طول بیت های آدرس</value>
+  </data>
+  <data name="TitleData" xml:space="preserve">
+    <value>دیتا</value>
+  </data>
+  <data name="TitleDataBitWidth" xml:space="preserve">
+    <value>طول بیت های دیتا</value>
+  </data>
+  <data name="TitleInverted" xml:space="preserve">
+    <value>معکوس</value>
+  </data>
+  <data name="TitleLoad" xml:space="preserve">
+    <value>بارگذاری...</value>
+  </data>
+  <data name="TitleSide" xml:space="preserve">
+    <value>طرف:</value>
+  </data>
+  <data name="TitleType" xml:space="preserve">
+    <value>نوع:</value>
+  </data>
+  <data name="TitleWriteOn" xml:space="preserve">
+    <value>نوشته شود زمانی که:</value>
+  </data>
+  <data name="TipOnStartMove" xml:space="preserve">
+    <value>شئ انتخاب شده را به محل مورد نظر بکشید. برای لغو حرکت Esc را بزنید. برای جلوگیری از حرکت سیم های متصل Shift را نگه دارید.</value>
+  </data>
+  <data name="TipOnStartWire" xml:space="preserve">
+    <value>انتهای سیم را به محل مورد نظر بکشید. برای لغو ایجاد سیم Esc را بزنید.</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>در حال بارگذاری...</value>
+  </data>
+  <data name="TipOnCtrlDown" xml:space="preserve">
+    <value>برای جابجایی بین مدار ها از Ctrl+{Shift}+Tab استفاده کنید یا برای انتخاب شان کلیک کنید.</value>
+  </data>
+  <data name="TipOnWireSelect" xml:space="preserve">
+    <value>برای انتخاب همه سیم های متصل به هم از Shift+{Ctrl}+Click استفاده کنید. برای ایجاد گره جدید در سیم انتخاب شده از Alt+Click استفاده کنید.</value>
+  </data>
+  <data name="TipOnAwaitingArea" xml:space="preserve">
+    <value>{0} {1}. اشیاء مختلف را با موس انتخاب کنید، برای نگه داشتن انتخاب فعلی Shift را نگه دارید.</value>
+  </data>
+  <data name="FunctionParameter" xml:space="preserve">
+    <value>تابع {0} حداقل به {1} پارامتر نیاز دارد</value>
+  </data>
+  <data name="UnknownState" xml:space="preserve">
+    <value>حالت {0} نامفهوم است</value>
+  </data>
+  <data name="ErrorAddressNotConnected" xml:space="preserve">
+    <value>همه بیت های آدرس به حافظه {0} وصل نشده اند</value>
+  </data>
+  <data name="ErrorDataInNotConnected" xml:space="preserve">
+    <value>همه بیت های ورودی دیتا به حافظه {0} وصل نشده اند</value>
+  </data>
+  <data name="ErrorJamBitWidthDifferent" xml:space="preserve">
+    <value>پین ورودی {0} ({1}) و پین خروجی {2} ({3}) در  {4} طول بیت متفاوتی دارند و نمی توانند به هم متصل شوند. لطفا این مشکل را حل کنید.</value>
+  </data>
+  <data name="ErrorLoopInCircuit" xml:space="preserve">
+    <value>شئ "{0}" در مدار "{1}" حلقه بینهایت تشکیل می دهد. لطفا این مشکل را حل کنید.</value>
+  </data>
+  <data name="ErrorManyResults" xml:space="preserve">
+    <value>پین ورودی {0} در {1} به بیش از یک پین خروجی وصل شده.</value>
+  </data>
+  <data name="PowerOff" xml:space="preserve">
+    <value>خاموش</value>
+  </data>
+  <data name="PowerOn" xml:space="preserve">
+    <value>روشن</value>
+  </data>
+  <data name="ProbeHistoryMark" xml:space="preserve">
+    <value>&lt;&lt;&lt;&lt;&lt;&lt; نشان &gt;&gt;&gt;&gt;&gt;&gt;</value>
+  </data>
+  <data name="TitleMark" xml:space="preserve">
+    <value>نشانه گذاری</value>
+  </data>
+  <data name="TitleProbeHistory" xml:space="preserve">
+    <value>تاریخچه Probe</value>
+  </data>
+  <data name="MessageNotRootConstant" xml:space="preserve">
+    <value>فقط ثابت هایی که در مدار پایه ({0}) مستقر هستند می توانند در زمان روشن بودن مدار تغییر وضعیت دهند.</value>
+  </data>
+  <data name="LogicalCircuitMainName" xml:space="preserve">
+    <value>اصلی</value>
+  </data>
+  <data name="CircuitProjectName" xml:space="preserve">
+    <value>پروژه مدار</value>
+  </data>
+  <data name="Oscillation" xml:space="preserve">
+    <value>نوسان</value>
+  </data>
+  <data name="TitleOscillogram" xml:space="preserve">
+    <value>نوسان سنچ</value>
+  </data>
+  <data name="TitleOscilloscope" xml:space="preserve">
+    <value>نوسان نمای مدار منطقی</value>
+  </data>
+  <data name="CommandFileFileImport" xml:space="preserve">
+    <value>وارد کردن...</value>
+  </data>
+  <data name="ImportTitle" xml:space="preserve">
+    <value>وارد کردن</value>
+  </data>
+  <data name="TitleCircuitDescriptor" xml:space="preserve">
+    <value>مدار</value>
+  </data>
+  <data name="TitleFileName" xml:space="preserve">
+    <value>فایل:</value>
+  </data>
+  <data name="TitleImportCircuit" xml:space="preserve">
+    <value>وارد کردن</value>
+  </data>
+  <data name="TitleCheckAll" xml:space="preserve">
+    <value>انتخاب همه</value>
+  </data>
+  <data name="TitleUncheckAll" xml:space="preserve">
+    <value>عدم انتخاب همه</value>
+  </data>
+  <data name="ImagePathInvalid" xml:space="preserve">
+    <value>نام فابل معتبر نمی باشد. لطفا مسیر فولدر و نام فایل را چک کنید.</value>
+  </data>
+  <data name="MessageExportImageDialog" xml:space="preserve">
+    <value>نوع عکس و مسیر آن را برای ذخیره مشخص کنید.</value>
+  </data>
+  <data name="MessageImageFileExists" xml:space="preserve">
+    <value>فایل "{0}" موجود می باشد.
+آیا می خواهید آن را جایگزین کنید؟</value>
+  </data>
+  <data name="TitleExportImage" xml:space="preserve">
+    <value>ذخیره عکس</value>
+  </data>
+  <data name="TitleFile" xml:space="preserve">
+    <value>فایل:</value>
+  </data>
+  <data name="TextNotation" xml:space="preserve">
+    <value>یادداشت</value>
+  </data>
+  <data name="CaptionAddressBitWidth" xml:space="preserve">
+    <value>بیت آدرس</value>
+  </data>
+  <data name="CaptionBitWidth" xml:space="preserve">
+    <value>طول بیت</value>
+  </data>
+  <data name="CaptionDataBitWidth" xml:space="preserve">
+    <value>بیت دیتا</value>
+  </data>
+  <data name="CaptionSplitterPinNumber" xml:space="preserve">
+    <value>پین جدا کننده</value>
+  </data>
+  <data name="CaptionSplitterDirection" xml:space="preserve">
+    <value>پین تک</value>
+  </data>
+  <data name="CaptionSide" xml:space="preserve">
+    <value>جهت</value>
+  </data>
+  <data name="CaptionTextNote1" xml:space="preserve">
+    <value>متن</value>
+  </data>
+  <data name="CaptionTextNote2" xml:space="preserve">
+    <value>یادداشت</value>
+  </data>
+  <data name="CaptionValue" xml:space="preserve">
+    <value>مقدار</value>
+  </data>
+  <data name="MenuHeaderCircuit" xml:space="preserve">
+    <value>مدار</value>
+  </data>
+  <data name="MenuHeaderEdit" xml:space="preserve">
+    <value>ویرایش</value>
+  </data>
+  <data name="MenuHeaderFile" xml:space="preserve">
+    <value>فایل</value>
+  </data>
+  <data name="MenuHeaderHelp" xml:space="preserve">
+    <value>راهنما</value>
+  </data>
+  <data name="MenuHeaderTools" xml:space="preserve">
+    <value>ابزار</value>
+  </data>
+  <data name="MessageWarning" xml:space="preserve">
+    <value>هشدار!</value>
+  </data>
+  <data name="TitleFrequency" xml:space="preserve">
+    <value>فرکانس:</value>
+  </data>
+  <data name="TitleIsMaximumSpeed1" xml:space="preserve">
+    <value>با حداکثر سرعت اجرا کن</value>
+  </data>
+  <data name="TitleIsMaximumSpeed2" xml:space="preserve">
+    <value>فشار به پردازنده وارد می شود</value>
+  </data>
+  <data name="TitleProject" xml:space="preserve">
+    <value>پروژه</value>
+  </data>
+  <data name="TitleRunningCircuit" xml:space="preserve">
+    <value>مدار در حال اجرا</value>
+  </data>
+  <data name="TitleZoom" xml:space="preserve">
+    <value>بزرگنمایی</value>
+  </data>
+  <data name="ToolTipAddressBitWidth" xml:space="preserve">
+    <value>طول بیت پین آدرس را انتخاب می کند</value>
+  </data>
+  <data name="ToolTipButtonNotation" xml:space="preserve">
+    <value>متن دکمه را وارد می کند</value>
+  </data>
+  <data name="ToolTipConstantBitWidth" xml:space="preserve">
+    <value>طول بیت ثابت را انتخاب می کند</value>
+  </data>
+  <data name="ToolTipConstantValue" xml:space="preserve">
+    <value>مقدار اولیه ثابت را وارد می کند</value>
+  </data>
+  <data name="ToolTipCurrentZoom" xml:space="preserve">
+    <value>بزرگنمایی فعلی</value>
+  </data>
+  <data name="ToolTipDataBitWidth" xml:space="preserve">
+    <value>طول بیت پین دیتا را انتخاب می کند</value>
+  </data>
+  <data name="ToolTipFrequency" xml:space="preserve">
+    <value>فرکانس clock مدار در حال اجرا را تغییر می دهد</value>
+  </data>
+  <data name="ToolTipGateInputCount" xml:space="preserve">
+    <value>تعداد ورودی های گیت را انتخاب می کند</value>
+  </data>
+  <data name="ToolTipIsMaximumSpeed1" xml:space="preserve">
+    <value>مدار را با حداکثر سرعت اجرا می کند</value>
+  </data>
+  <data name="ToolTipIsMaximumSpeed2" xml:space="preserve">
+    <value>انتخاب این گزینه موجب هنگ کردن در برخی کامپیوتر ها می شود</value>
+  </data>
+  <data name="ToolTipPinBitWidth" xml:space="preserve">
+    <value>طول بیت پین را انتخاب می کند</value>
+  </data>
+  <data name="ToolTipPinSide" xml:space="preserve">
+    <value>جهت علامت پین جدید را مشخص می کند</value>
+  </data>
+  <data name="ToolTipSplitterBitWidth" xml:space="preserve">
+    <value>طول بیت جدا کننده ها را مشخص می کند</value>
+  </data>
+  <data name="ToolTipSplitterPinNumber" xml:space="preserve">
+    <value>تعداد شکاف های جدا کننده را مشخص می کند</value>
+  </data>
+  <data name="ToolTipSplitterRotation" xml:space="preserve">
+    <value>جهت جدا کننده را مشخص می کند</value>
+  </data>
+  <data name="ToolTipZoom" xml:space="preserve">
+    <value>میزان بزرگنمایی را تنظیم می کند</value>
+  </data>
+  <data name="ToolTipRamWriteOn" xml:space="preserve">
+    <value>زمان نوشتن حافظه را انتخاب می کند</value>
+  </data>
+  <data name="ToolTipPinNotation" xml:space="preserve">
+    <value>متن کوتاهی را برای نمایش روی شئ وارد کنید</value>
+  </data>
+  <data name="CaptionNotation" xml:space="preserve">
+    <value>یادداشت</value>
+  </data>
+  <data name="TitleIsToggle" xml:space="preserve">
+    <value>تغییر وضعیت باقی بماند</value>
+  </data>
+  <data name="ToolTipIsToggle" xml:space="preserve">
+    <value>اگر این گزینه را انتخاب کنید دکمه با هر کلیک تغییر وضعیت می دهد، در غیر این صورت فقط زمانی که فشار داده شود تغییر وضعیت خواهد داد</value>
+  </data>
+  <data name="CommandCircuitPower" xml:space="preserve">
+    <value>روشن / خاموش</value>
+  </data>
+  <data name="CommandEditRotateLeft" xml:space="preserve">
+    <value>چرخش به چپ</value>
+  </data>
+  <data name="CommandEditRotateRight" xml:space="preserve">
+    <value>چرخش به راست</value>
+  </data>
+  <data name="SplitterDirectionClockwise" xml:space="preserve">
+    <value>چپ</value>
+  </data>
+  <data name="SplitterDirectionCounterclockwise" xml:space="preserve">
+    <value>راست</value>
+  </data>
+  <data name="PinSideBottom" xml:space="preserve">
+    <value>پایین</value>
+  </data>
+  <data name="PinSideLeft" xml:space="preserve">
+    <value>چپ</value>
+  </data>
+  <data name="PinSideRight" xml:space="preserve">
+    <value>راست</value>
+  </data>
+  <data name="PinSideTop" xml:space="preserve">
+    <value>بالا</value>
+  </data>
+  <data name="CaptionSplitterBitWidth" xml:space="preserve">
+    <value>طول بیت جدا کننده</value>
+  </data>
+  <data name="CommandCircuitUsage" xml:space="preserve">
+    <value>استفاده شده در...</value>
+  </data>
+  <data name="MessageNotUsed" xml:space="preserve">
+    <value>این مدار منطقی هیچ جا استفاده نشده.</value>
+  </data>
+  <data name="MessageUsageNote" xml:space="preserve">
+    <value>مدار مورد نظر را انتخاب کنید و برای پیمایش بین اشیاء آن از دابل-کلیک استفاده کنید.</value>
+  </data>
+  <data name="TitleCircuitUsage" xml:space="preserve">
+    <value>استفاده مدار منطقی</value>
+  </data>
+  <data name="CaptionNote" xml:space="preserve">
+    <value>یادداشت</value>
+  </data>
+  <data name="CategoryPrimitives" xml:space="preserve">
+    <value>اولیه</value>
+  </data>
+  <data name="TitleMemory" xml:space="preserve">
+    <value>حافظه</value>
+  </data>
+  <data name="CommandFileOpenRecent" xml:space="preserve">
+    <value>باز کردن فایل های اخیر</value>
+  </data>
+  <data name="MessageInvalidRecentFile" xml:space="preserve">
+    <value>فایل "{0}" نمی تواند باز شود.
+آیا می خواهید از قسمت فایل های اخیر پاک شود؟</value>
+  </data>
+  <data name="TitleMaxRecentFiles" xml:space="preserve">
+    <value>حداکثر تعداد فایل های اخیر:</value>
+  </data>
+  <data name="ErrorFileCorrupted" xml:space="preserve">
+    <value>فایل "{0}" آسیب دیده و نمی تواند باز شود.</value>
+  </data>
+  <data name="ProjectSummary" xml:space="preserve">
+    <value>در {0} مدار منطقی، در {1} دسته بندی از {2} شئ و {3} سیم استفاده شده است</value>
+  </data>
+  <data name="ReportError" xml:space="preserve">
+    <value>به علت خطا های زیر نمی توان توابع را گزارش داد: {0}</value>
+  </data>
+  <data name="ReportFunctions" xml:space="preserve">
+    <value>توابع مدار "{0}"</value>
+  </data>
+  <data name="TitleCount" xml:space="preserve">
+    <value>شمارش</value>
+  </data>
+  <data name="TitleFunction" xml:space="preserve">
+    <value>تابع</value>
+  </data>
+  <data name="TitleProjectDescription" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="TitleReportErrorDetails" xml:space="preserve">
+    <value>جزئیات خطا</value>
+  </data>
+  <data name="TitleSummary" xml:space="preserve">
+    <value>جمع بندی:</value>
+  </data>
+  <data name="TitleTotal" xml:space="preserve">
+    <value>مجموع:</value>
+  </data>
+  <data name="LogicalCircuitMainNotation" xml:space="preserve">
+    <value>اصلی</value>
+  </data>
+  <data name="PinTypeNameInput" xml:space="preserve">
+    <value>ورودی</value>
+  </data>
+  <data name="PinTypeNameNone" xml:space="preserve">
+    <value>هیچ</value>
+  </data>
+  <data name="PinTypeNameOutput" xml:space="preserve">
+    <value>خروجی</value>
+  </data>
+  <data name="ErrorUnsupportedUri" xml:space="preserve">
+    <value>پیمایش به این آدرس پشتیبانی نمی شود.</value>
+  </data>
+  <data name="CaptionColumns" xml:space="preserve">
+    <value>ستون</value>
+  </data>
+  <data name="CaptionRows" xml:space="preserve">
+    <value>ردیف</value>
+  </data>
+  <data name="ToolTipColumns" xml:space="preserve">
+    <value>تعداد ستون LED matrix را انتخاب کنید</value>
+  </data>
+  <data name="ToolTipRows" xml:space="preserve">
+    <value>تعداد ردیف LED matrix را انتخاب کنید</value>
+  </data>
+  <data name="CaptionLedMatrixType" xml:space="preserve">
+    <value>نوع</value>
+  </data>
+  <data name="LedMatrixColumnSelector" xml:space="preserve">
+    <value>برای انتخاب ستون #{0}</value>
+  </data>
+  <data name="LedMatrixRowIndividual" xml:space="preserve">
+    <value>برای هر LED در ردیف #{0}</value>
+  </data>
+  <data name="LedMatrixRowSelector" xml:space="preserve">
+    <value>برای انتخاب ردیف #{0}</value>
+  </data>
+  <data name="LedMatrixTypeIndividual" xml:space="preserve">
+    <value>فردی</value>
+  </data>
+  <data name="LedMatrixTypeSelector" xml:space="preserve">
+    <value>گزینشگر</value>
+  </data>
+  <data name="TitleCellShape" xml:space="preserve">
+    <value>شکل سلول</value>
+  </data>
+  <data name="TitleColumns" xml:space="preserve">
+    <value>ستون</value>
+  </data>
+  <data name="TitleRows" xml:space="preserve">
+    <value>ردیف</value>
+  </data>
+  <data name="ToolTipLedMatrixType" xml:space="preserve">
+    <value>روش کنترل ماتریکس را مشخص می کند</value>
+  </data>
+  <data name="TitleColors" xml:space="preserve">
+    <value>رنگ:</value>
+  </data>
+  <data name="MessageVersionLatest" xml:space="preserve">
+    <value>شما هم اکنون از بروز ترین ورژن برنامه استفاده می کنید</value>
+  </data>
+  <data name="MessageVersionOutdated" xml:space="preserve">
+    <value>ورژن برنامه شما قدیمی شده. لطفا از لینک زیر آخرین ورژن را دانلود کنید.</value>
+  </data>
+  <data name="TitleCheckVersion" xml:space="preserve">
+    <value>هم اکنون چک شود</value>
+  </data>
+  <data name="CommandHyperlink" xml:space="preserve">
+    <value>لینک</value>
+  </data>
+  <data name="ErrorHyperlinkText" xml:space="preserve">
+    <value>متن لینک خالی می باشد</value>
+  </data>
+  <data name="ErrorHyperlinkUrl" xml:space="preserve">
+    <value>آدرس لینک نا معتبر است</value>
+  </data>
+  <data name="TitleHyperlink" xml:space="preserve">
+    <value>لینک به:</value>
+  </data>
+  <data name="TitleText" xml:space="preserve">
+    <value>متن:</value>
+  </data>
+  <data name="CommandInsertImage" xml:space="preserve">
+    <value>تصویر</value>
+  </data>
+  <data name="TitleCheckVersionPeriodically" xml:space="preserve">
+    <value>به طور خودکار برای آخرین ورژن چک شود</value>
+  </data>
+  <data name="ErrorClipboardCorrupted" xml:space="preserve">
+    <value>دیتای داخل کلیپ بورد آسیب دیده و نمی تواند الصاق شود.</value>
+  </data>
+  <data name="DefaultGateShape" xml:space="preserve">
+    <value>منحنی</value>
+  </data>
+  <data name="CommandTruthTable" xml:space="preserve">
+    <value>جدول درستی</value>
+  </data>
+  <data name="MessageInputOutputPinsMissing" xml:space="preserve">
+    <value>در این مدار هیچ پین ورودی یا خروجی وجود ندارد. وظیفه جدول درستی ارسال تمام حالت های پین ورودی و سپس بررسی پین خروجی می باشد.</value>
+  </data>
+  <data name="MessageTruthTableTooBig" xml:space="preserve">
+    <value>جدول درستی بسیار طولانی می باشد و خلاصه شده. لطفا برای اطمینان از صحت مدار خود از قیلتر استفاده کنید.</value>
+  </data>
+  <data name="ParserEOS" xml:space="preserve">
+    <value>پایان عبارت</value>
+  </data>
+  <data name="ParserErrorCloseParenMissing" xml:space="preserve">
+    <value>'(' جا افتاده بجای: {0}</value>
+  </data>
+  <data name="ParserErrorExpressionMissing" xml:space="preserve">
+    <value>عبارت بعد از {0} جا افتاده</value>
+  </data>
+  <data name="ParserErrorInvalidNumber" xml:space="preserve">
+    <value>شماره نامعتبر: {0}</value>
+  </data>
+  <data name="ParserErrorUnclosedQuote" xml:space="preserve">
+    <value>متن شناسه گیومه بسته ندارد: {0}</value>
+  </data>
+  <data name="ParserErrorUnexpected" xml:space="preserve">
+    <value>{0} انتظار نمی رفت</value>
+  </data>
+  <data name="ParserErrorUnknownChar" xml:space="preserve">
+    <value>کاراکتر ناشناخته: {0}</value>
+  </data>
+  <data name="ParserErrorUnknownPin" xml:space="preserve">
+    <value>{0} - پین ورودی یا خروجی پیدا نشد</value>
+  </data>
+  <data name="TitleApply" xml:space="preserve">
+    <value>اجرا </value>
+  </data>
+  <data name="TitleDisplayedRows" xml:space="preserve">
+    <value>ردیف های نشان داده شده: {0:N0}</value>
+  </data>
+  <data name="TitleFilter" xml:space="preserve">
+    <value>فیلتر:</value>
+  </data>
+  <data name="TitleInvert" xml:space="preserve">
+    <value>معکوس</value>
+  </data>
+  <data name="TitleTotalRows" xml:space="preserve">
+    <value>مجموع ردیف ها: {0:N0}</value>
+  </data>
+  <data name="TitleStop" xml:space="preserve">
+    <value>توقف</value>
+  </data>
+  <data name="ColorPickerCaptionAvailable" xml:space="preserve">
+    <value>رنگ های موجود:</value>
+  </data>
+  <data name="ColorPickerCaptionRecent" xml:space="preserve">
+    <value>رنگ های اخیر:</value>
+  </data>
+  <data name="ColorPickerCaptionSelectCustom" xml:space="preserve">
+    <value>انتخاب</value>
+  </data>
+  <data name="ColorPickerCaptionStandard" xml:space="preserve">
+    <value>رنگ های استاندارد:</value>
+  </data>
+  <data name="ColorPickerTabCustom" xml:space="preserve">
+    <value>سفارشی</value>
+  </data>
+  <data name="ColorPickerTabStandard" xml:space="preserve">
+    <value>استاندارد</value>
+  </data>
+  <data name="ToolTipBackgroundColor" xml:space="preserve">
+    <value>رنگ برجسته</value>
+  </data>
+  <data name="ToolTipFontColor" xml:space="preserve">
+    <value>رنگ متن</value>
+  </data>
+  <data name="TitleSaveAs" xml:space="preserve">
+    <value>دخیره به عنوان...</value>
+  </data>
+  <data name="ToolTipLoadData" xml:space="preserve">
+    <value>بارگذاری دیتا از فایل</value>
+  </data>
+  <data name="ToolTipSaveData" xml:space="preserve">
+    <value>ذخیره دیتا در فایل</value>
+  </data>
+  <data name="MemoryOnStartData" xml:space="preserve">
+    <value>حافظه بین اجرا ها به کار خود ادامه دهد</value>
+  </data>
+  <data name="MemoryOnStartOnes" xml:space="preserve">
+    <value>همه بیت ها 1 شود</value>
+  </data>
+  <data name="MemoryOnStartRandom" xml:space="preserve">
+    <value>تصادفی</value>
+  </data>
+  <data name="MemoryOnStartZeros" xml:space="preserve">
+    <value>همه بیت ها 0 شود</value>
+  </data>
+  <data name="TitleMemoryOnStart" xml:space="preserve">
+    <value>وضعیت بیت ها هنگام شروع:</value>
+  </data>
+  <data name="ToolTipMemoryOnStart" xml:space="preserve">
+    <value>مشخص می کند هنگام روشن شدن مدار مقادیر RAM چگونه باشد</value>
+  </data>
+  <data name="ErrorManyMemoryData" xml:space="preserve">
+    <value>مدار {0} شامل {1} می باشد که دیتا را بین اجرا ها حفظ می کند.
+چنین مداری نمی تواند در مدار های دیگر بیش از یکبار اجرا شود.</value>
+  </data>
+  <data name="TitleIsDisplay" xml:space="preserve">
+    <value>عناصر بصری روی شئ نشان داده شود</value>
+  </data>
+  <data name="MessageRestartRequared" xml:space="preserve">
+    <value>شما زبان برنامه را تغییر دادید. برای اعمال تغییرات برنامه باید یک بار بسته و سپس باز شود.</value>
+  </data>
+  <data name="TitleCulture" xml:space="preserve">
+    <value>زبان</value>
+  </data>
+  <data name="CommandEditAlignCenter" xml:space="preserve">
+    <value>وسط چین</value>
+  </data>
+  <data name="CommandEditAlignJustify" xml:space="preserve">
+    <value>کناره های مساوی</value>
+  </data>
+  <data name="CommandEditAlignLeft" xml:space="preserve">
+    <value>چپ چین</value>
+  </data>
+  <data name="CommandEditAlignRight" xml:space="preserve">
+    <value>راست چین</value>
+  </data>
+  <data name="CommandEditBold" xml:space="preserve">
+    <value>برجسته</value>
+  </data>
+  <data name="CommandEditBullets" xml:space="preserve">
+    <value>نشانه گذاری</value>
+  </data>
+  <data name="CommandEditCopy" xml:space="preserve">
+    <value>کپی</value>
+  </data>
+  <data name="CommandEditCut" xml:space="preserve">
+    <value>برش</value>
+  </data>
+  <data name="CommandEditDecreaseFontSize" xml:space="preserve">
+    <value>کاهش اندازه فونت</value>
+  </data>
+  <data name="CommandEditDecreaseIndentation" xml:space="preserve">
+    <value>کاهش دندانه</value>
+  </data>
+  <data name="CommandEditDelete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="CommandEditIncreaseFontSize" xml:space="preserve">
+    <value>افزایش اندازه فونت</value>
+  </data>
+  <data name="CommandEditIncreaseIndentation" xml:space="preserve">
+    <value>افزایش دندانه</value>
+  </data>
+  <data name="CommandEditItalic" xml:space="preserve">
+    <value>شکسته</value>
+  </data>
+  <data name="CommandEditNumbering" xml:space="preserve">
+    <value>عدد گذاری</value>
+  </data>
+  <data name="CommandEditPaste" xml:space="preserve">
+    <value>الصاق</value>
+  </data>
+  <data name="CommandEditRedo" xml:space="preserve">
+    <value>انجام دوباره</value>
+  </data>
+  <data name="CommandEditSelectAll" xml:space="preserve">
+    <value>انتخاب همه</value>
+  </data>
+  <data name="CommandEditUnderline" xml:space="preserve">
+    <value>خط دار</value>
+  </data>
+  <data name="CommandEditUndo" xml:space="preserve">
+    <value>بازگشت</value>
+  </data>
+  <data name="CommandFileClose" xml:space="preserve">
+    <value>خروج</value>
+  </data>
+  <data name="CommandFileNew" xml:space="preserve">
+    <value>ایجاد جدید</value>
+  </data>
+  <data name="CommandFileOpen" xml:space="preserve">
+    <value>باز کردن</value>
+  </data>
+  <data name="CommandFileSave" xml:space="preserve">
+    <value>ذخیره</value>
+  </data>
+  <data name="CommandFileSaveAs" xml:space="preserve">
+    <value>ذخیره به عنوان...</value>
+  </data>
+  <data name="CommandHelpView" xml:space="preserve">
+    <value>مشاهده راهنما</value>
+  </data>
+  <data name="ToolTipFontFamily" xml:space="preserve">
+    <value>فونت</value>
+  </data>
+  <data name="ToolTipFontSize" xml:space="preserve">
+    <value>اندازه فونت</value>
+  </data>
+  <data name="TitleCredits" xml:space="preserve">
+    <value>سازندگان:</value>
+  </data>
+  <data name="ToolTipIsDisplay" xml:space="preserve">
+    <value>زمانی که این گزینه انتخاب شده باشد تمام شئ های نمایشگر (مانند LED) در این مدار به طور زنده قابل مشاهده خواهند بود.</value>
+  </data>
+  <data name="CaptionName" xml:space="preserve">
+    <value>نام</value>
+  </data>
+  <data name="TitleActualFrequency" xml:space="preserve">
+    <value>قرکانس فعلی:</value>
+  </data>
+  <data name="WireDisplayValue" xml:space="preserve">
+    <value>مقدار: {0}</value>
+  </data>
+  <data name="WireDisplayBitWidth" xml:space="preserve">
+    <value>طول بیت: {0}</value>
+  </data>
+  <data name="WireDisplayDisconnected" xml:space="preserve">
+    <value>سیم متصل نیست.</value>
+  </data>
+  <data name="CaptionPinSide" xml:space="preserve">
+    <value>جهت پین</value>
+  </data>
+  <data name="TitlePinSide" xml:space="preserve">
+    <value>جهت پین:</value>
+  </data>
+  <data name="ToolTipDevicePinSide" xml:space="preserve">
+    <value>طرفی که پین در آن مستقر خواهد شد را مشخص می کند</value>
+  </data>
+  <data name="NameSensor" xml:space="preserve">
+    <value>سنسور</value>
+  </data>
+  <data name="ToolTipSensor" xml:space="preserve">
+    <value>سنسور {0}</value>
+  </data>
+  <data name="CaptionSensorType" xml:space="preserve">
+    <value>نوع سنسور</value>
+  </data>
+  <data name="SensorTypeManual" xml:space="preserve">
+    <value>دستی</value>
+  </data>
+  <data name="SensorTypeRandom" xml:space="preserve">
+    <value>تصادفی</value>
+  </data>
+  <data name="SensorTypeSeries" xml:space="preserve">
+    <value>سری</value>
+  </data>
+  <data name="ToolTipSensorBitWidth" xml:space="preserve">
+    <value>طول بیت سنسور را مشخص می کند</value>
+  </data>
+  <data name="ToolTipSensorNotation" xml:space="preserve">
+    <value>متن روی سنسور را مشخص می کند</value>
+  </data>
+  <data name="ToolTipSensorType" xml:space="preserve">
+    <value>نحوه عملکرد سنسور را مشخص می کند</value>
+  </data>
+  <data name="TitleSensorType" xml:space="preserve">
+    <value>نوع سنسور:</value>
+  </data>
+  <data name="ErrorBadInterval" xml:space="preserve">
+    <value>مقدار حداقل باید کوچکتر یا مساوی مقدار حداکثر باشد.</value>
+  </data>
+  <data name="ErrorBadPositiveNumber" xml:space="preserve">
+    <value>مقداری بزرگتر از 0 نیاز است.</value>
+  </data>
+  <data name="ErrorEmptySeries" xml:space="preserve">
+    <value>سری نباید خالی باشد</value>
+  </data>
+  <data name="ErrorSeriesItem" xml:space="preserve">
+    <value>خطا در {0}. باید دو عدد در مبنای شانزده وارد کنید که با علامت : از هم جدا شده اند.</value>
+  </data>
+  <data name="ErrorSeriesItemOrder" xml:space="preserve">
+    <value>خطا در {0}. دوره بعدی باید بزرگ تر از دوره قبلی باشد.</value>
+  </data>
+  <data name="TitleLoopSeries" xml:space="preserve">
+    <value>تکرار سری</value>
+  </data>
+  <data name="TitleSensorRandomMax" xml:space="preserve">
+    <value>بیشینه دوره:</value>
+  </data>
+  <data name="TitleSensorRandomMin" xml:space="preserve">
+    <value>کمینه دوره:</value>
+  </data>
+  <data name="TitleSeries" xml:space="preserve">
+    <value>سری:</value>
+  </data>
+  <data name="ToolTipSensorRandomMax" xml:space="preserve">
+    <value>حداکثر مقدار دوره ها را قبل از اینکه سنسور مقدارش را عوض کند مشخص می کند.</value>
+  </data>
+  <data name="ToolTipSensorRandomMin" xml:space="preserve">
+    <value>حداقل مقدار دوره ها را قبل از اینکه سنسور مقدارش را عوض کند مشخص می کند.</value>
+  </data>
+  <data name="ToolTipSeriesData" xml:space="preserve">
+    <value>لطفا دوره و مقدار سری را به صورت &lt;cycle&gt;:&lt;value&gt; در مبنای شانزده وارد کنید.</value>
+  </data>
+  <data name="NameSound" xml:space="preserve">
+    <value>زنگ</value>
+  </data>
+  <data name="ToolTipSound" xml:space="preserve">
+    <value>زنگ {0}</value>
+  </data>
+  <data name="ToolTipSoundNotation" xml:space="preserve">
+    <value>متن روی زنگ را مشخص می کند</value>
+  </data>
+  <data name="CommandEditFind" xml:space="preserve">
+    <value>جستوجو</value>
+  </data>
+  <data name="TitleFind" xml:space="preserve">
+    <value>جستوجوی مدار</value>
+  </data>
+  <data name="TitleSearch" xml:space="preserve">
+    <value>بگرد</value>
+  </data>
+  <data name="TitleSearchPattern" xml:space="preserve">
+    <value>جستوجوی:</value>
+  </data>
+  <data name="ToolTipDescriptorClock" xml:space="preserve">
+    <value>سیگنال های هماهنگ با نوسان بین 0 و 1 تولید می کند.</value>
+  </data>
+  <data name="ToolTipDescriptorPin" xml:space="preserve">
+    <value>برای تهیه دیتا برای مدار استفاده می شود.</value>
+  </data>
+  <data name="ToolTipDescriptorProbe" xml:space="preserve">
+    <value>برای مشاهده وضعیت فعلی پاور در مدار استفاده می شود. برای مشاهده مقادیر گذشته اش روی آن دابل-کلیک کنید.</value>
+  </data>
+  <data name="ToolTipDescriptorSensor" xml:space="preserve">
+    <value>دیتا را با استناد به منبعی خارجی برای مدار تهیه می کند. مقادیر می تواند به صورت سری یا تصادفی یا دستی وارد شود.</value>
+  </data>
+  <data name="ToolTipDescriptorSplitter" xml:space="preserve">
+    <value>برای ایجاد انشعاب در سیم ها بکار می رود.</value>
+  </data>
+  <data name="ToolTipDescriptorText" xml:space="preserve">
+    <value>از یادداشت می توان برای ارائه توضیحات یا قرار دادن لینک استفاده کرد.</value>
+  </data>
+  <data name="ToolTipDescriptorTriState" xml:space="preserve">
+    <value>این شئ میتواند سه خروچی متفاوت داشته باشد: 0 و 1 و Z</value>
+  </data>
+  <data name="ToolTipSensorManualValue" xml:space="preserve">
+    <value>مقدار وارد کنید و سپس Enter را بزنید.</value>
+  </data>
+  <data name="ErrorBadHexNumber" xml:space="preserve">
+    <value>مقدار نامعتبر</value>
+  </data>
+  <data name="TitleSensorManualInitialValue" xml:space="preserve">
+    <value>مقدار اولیه:</value>
+  </data>
+  <data name="ToolTipSensorManualInitialValue" xml:space="preserve">
+    <value>مقدار اولیه را در مبنای شانزده وارد کنید.</value>
+  </data>
+  <data name="CaptionGraphicsArrayBPP" xml:space="preserve">
+    <value>بیت بر پیکسل</value>
+  </data>
+  <data name="ToolTipDescriptorGraphicsArray" xml:space="preserve">
+    <value>این شئ می تواند دیتای ذخیره شده در حافظه داخلی را نمایش دهد.</value>
+  </data>
+  <data name="ToolTipGraphicsArrayBPP" xml:space="preserve">
+    <value>عدد بیت بر پیکسل را مشخص می کند</value>
+  </data>
+  <data name="ErrorBadIntegerInRange" xml:space="preserve">
+    <value>عدد باید بین {0} و {1} باشد.</value>
+  </data>
+  <data name="TitleGraphicsArrayBPP" xml:space="preserve">
+    <value>بیت بر پیکسل:</value>
+  </data>
+  <data name="TitleHeight" xml:space="preserve">
+    <value>ارتفاع:</value>
+  </data>
+  <data name="TitleWidth" xml:space="preserve">
+    <value>پهنا:</value>
+  </data>
+  <data name="ToolTipGraphicsArrayHeight" xml:space="preserve">
+    <value>طول پیکسل های Graphics array را مشخص می کند</value>
+  </data>
+  <data name="ToolTipGraphicsArrayWidth" xml:space="preserve">
+    <value>عرض پیکسل های Graphics array را مشخص می کند</value>
+  </data>
+  <data name="ErrorWriteNotConnected" xml:space="preserve">
+    <value>ورودی نوشتن به Graphics array {0} متصل نشده</value>
+  </data>
+  <data name="SplitterThin1PinName" xml:space="preserve">
+    <value>(بیت {0}) از جدا کننده</value>
+  </data>
+  <data name="SplitterThin2PinName" xml:space="preserve">
+    <value>(بیت های {0}-{1}) از جدا کننده</value>
+  </data>
+  <data name="SplitterWidePinName" xml:space="preserve">
+    <value>کانکتور جدا کننده</value>
+  </data>
+  <data name="ToolTipConstant" xml:space="preserve">
+    <value>ثابت {0} بیتی با مقدار {1:X}</value>
+  </data>
+  <data name="ToolTipInputPin" xml:space="preserve">
+    <value>پین ورودی {0} بیتی {1}</value>
+  </data>
+  <data name="ToolTipNonePin" xml:space="preserve">
+    <value>{1} {0} بیتی</value>
+  </data>
+  <data name="ToolTipOutputPin" xml:space="preserve">
+    <value>پین خروجی {0} بیتی {1}</value>
+  </data>
+  <data name="ToolTipRAM" xml:space="preserve">
+    <value>RAM با {0} بیت آدرس / {1} بیت دیتا</value>
+  </data>
+  <data name="ToolTipROM" xml:space="preserve">
+    <value>ROM با {0} بیت آدرس / {1} بیت دیتا</value>
+  </data>
+  <data name="ToolTipSplitter" xml:space="preserve">
+    <value>جدا کننده {0} به {1} پین</value>
+  </data>
+  <data name="TitleOscilloscoping" xml:space="preserve">
+    <value>نوسان یابی</value>
+  </data>
+  <data name="ReportMemoryName" xml:space="preserve">
+    <value>حافظه {0}: {1} بیت آدرس، {2} بیت دیتا</value>
+  </data>
+  <data name="TriStateGroupName" xml:space="preserve">
+    <value>گروه سه جانبه</value>
+  </data>
+  <data name="ToolTipLedMatrix" xml:space="preserve">
+    <value>ماتریکس ال-ای-دی {0}x{1} با {2} بیت بر ال-ای-دی ({3} رنگ)</value>
+  </data>
+  <data name="ToolTipGraphicsArray" xml:space="preserve">
+    <value>{0} {1}x{2} با {3} بیت بر پیکسل ({4} رنگ)</value>
+  </data>
+  <data name="TitleWeb" xml:space="preserve">
+    <value>آدرس وب:</value>
+  </data>
+</root>
