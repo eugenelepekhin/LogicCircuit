@@ -62,6 +62,11 @@
 							<File Id="es" Source="$(var.LogicCircuit.TargetDir)es\$(var.LogicCircuit.TargetName).resources.dll"/>
 						</Component>
 					</Directory>
+					<Directory Id="fa" Name="fa">
+						<Component Id="faComponent">
+							<File Id="fa" Source="$(var.LogicCircuit.TargetDir)fa\$(var.LogicCircuit.TargetName).resources.dll"/>
+						</Component>
+					</Directory>
 					<Directory Id="fr" Name="fr">
 						<Component Id="frComponent">
 							<File Id="fr" Source="$(var.LogicCircuit.TargetDir)fr\$(var.LogicCircuit.TargetName).resources.dll"/>
@@ -142,6 +147,7 @@
 			<ComponentRef Id="deComponent"/>
 			<ComponentRef Id="el_GRComponent"/>
 			<ComponentRef Id="esComponent"/>
+			<ComponentRef Id="faComponent"/>
 			<ComponentRef Id="frComponent"/>
 			<ComponentRef Id="he_ILComponent"/>
 			<ComponentRef Id="huComponent"/>
