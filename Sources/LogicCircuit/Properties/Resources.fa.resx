@@ -750,7 +750,7 @@
     <value>دیتای داخل کلیپ بورد آسیب دیده و نمی تواند الصاق شود.</value>
   </data>
   <data name="DefaultGateShape" xml:space="preserve">
-    <value>منحنی</value>
+    <value>Shaped</value>
   </data>
   <data name="CommandTruthTable" xml:space="preserve">
     <value>جدول درستی</value>
