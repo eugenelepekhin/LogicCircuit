@@ -87,6 +87,7 @@ namespace LogicCircuit {
 
 		public int this[int index] {
 			get { return Memory.CellValue(this.data, this.DataBitWidth, index); }
+			set { Memory.SetCellValue(this.data, this.DataBitWidth, index, value); }
 		}
 
 		[SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "TurnOff")]

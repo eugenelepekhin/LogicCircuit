@@ -32,7 +32,11 @@ namespace LogicCircuit {
 
 		public int AddressBitWidth { get { return this.address.Length; } }
 		public int DataBitWidth { get { return this.inputData.Length; } }
-		public int this[int index] { get { return this.Read(index); } }
+		public int this[int index] {
+			get { return this.Read(index); }
+			//TODO: implement
+			set { Tracer.Fail("Not yet implemented"); }
+		}
 
 		public FunctionGraphicsArray(
 			CircuitState circuitState,

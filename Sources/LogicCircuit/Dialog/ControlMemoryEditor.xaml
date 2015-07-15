@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="LogicCircuit.ControlMemoryEditor"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:lc="clr-namespace:LogicCircuit"
+>
+	<DataGrid Name="dataGrid"
+		AutoGenerateColumns="False"
+		Background="Transparent"
+		HorizontalGridLinesBrush="{x:Static SystemColors.ControlLightBrush}"
+		VerticalGridLinesBrush="{x:Static SystemColors.ControlLightBrush}"
+		SelectionUnit="Cell"
+		MinColumnWidth="20"
+		MaxColumnWidth="100"
+		CanUserAddRows="False"
+		CanUserDeleteRows="False"
+		CanUserReorderColumns="False"
+		CanUserResizeRows="False"
+		CanUserSortColumns="False"
+		IsReadOnly="{Binding RelativeSource={RelativeSource AncestorType=lc:ControlMemoryEditor}, Path=IsReadOnly}"
+	>
+		<DataGrid.RowStyle>
+			<Style TargetType="DataGridRow">
+				<Setter Property="HorizontalAlignment" Value="Left"/>
+				<Style.Triggers>
+					<Trigger Property="IsMouseOver" Value="True">
+						<Setter Property="Background" Value="{x:Static SystemColors.InactiveSelectionHighlightBrush}"/>
+					</Trigger>
+				</Style.Triggers>
+			</Style>
+		</DataGrid.RowStyle>
+
+		<DataGrid.RowHeaderStyle>
+			<Style TargetType="DataGridRowHeader">
+				<Setter Property="Content" Value="{Binding Path=RowIndex}"/>
+			</Style>
+		</DataGrid.RowHeaderStyle>
+
+		<DataGrid.ColumnHeaderStyle>
+			<Style TargetType="DataGridColumnHeader">
+				<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			</Style>
+		</DataGrid.ColumnHeaderStyle>
+	</DataGrid>
+</UserControl>

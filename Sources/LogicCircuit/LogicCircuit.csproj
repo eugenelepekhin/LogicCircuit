@@ -87,6 +87,9 @@
     <Compile Include="Conductor.cs" />
     <Compile Include="ConductorMap.cs" />
     <Compile Include="CustomCommands.cs" />
+    <Compile Include="Dialog\ControlMemoryEditor.xaml.cs">
+      <DependentUpon>ControlMemoryEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialog\DialogAbout.xaml.cs">
       <DependentUpon>DialogAbout.xaml</DependentUpon>
     </Compile>
@@ -320,6 +323,10 @@
     <Compile Include="Tracer.cs" />
     <Compile Include="XmlHelper.cs" />
     <Page Include="ColorPicker\ColorPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialog\ControlMemoryEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
