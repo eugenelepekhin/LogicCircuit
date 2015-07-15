@@ -250,7 +250,7 @@
     <value>پروژه</value>
   </data>
   <data name="CommandEditSelectAllButWires" xml:space="preserve">
-    <value>انتخاب  همه اشیاء به جز سیم ها </value>
+    <value>انتخاب  همه اشیاء به جز سیم ها</value>
   </data>
   <data name="CommandEditSelectAllProbes" xml:space="preserve">
     <value>انتخاب همه Probe ها</value>
@@ -786,7 +786,7 @@
     <value>{0} - پین ورودی یا خروجی پیدا نشد</value>
   </data>
   <data name="TitleApply" xml:space="preserve">
-    <value>اجرا </value>
+    <value>اجرا</value>
   </data>
   <data name="TitleDisplayedRows" xml:space="preserve">
     <value>ردیف های نشان داده شده: {0:N0}</value>
