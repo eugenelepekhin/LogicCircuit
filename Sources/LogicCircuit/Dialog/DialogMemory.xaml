@@ -17,76 +17,13 @@
 			</StackPanel.Resources>
 
 			<Label Content="{x:Static properties:Resources.TitleAddressBitWidth}"/>
-			<TextBlock Text="{Binding Path=AddressBitWidth}"/>
+			<TextBlock Text="{Binding Path=FunctionMemory.AddressBitWidth}"/>
 			<Label Content="{x:Static properties:Resources.TitleDataBitWidth}"/>
-			<TextBlock Text="{Binding Path=DataBitWidth}"/>
+			<TextBlock Text="{Binding Path=FunctionMemory.DataBitWidth}"/>
 		</StackPanel>
 
 		<GroupBox Header="{x:Static properties:Resources.TitleData}" Margin="3">
-			<ListView ItemsSource="{Binding Path=Rows}">
-				<ListView.View>
-					<GridView AllowsColumnReorder="False">
-						<GridViewColumn>
-							<GridViewColumn.CellTemplate>
-								<DataTemplate>
-									<TextBlock Text="{Binding Path=RowNumber}"
-										Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}"
-										Margin="-6,0,-6,0" Padding="8,0,8,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-									/>
-								</DataTemplate>
-							</GridViewColumn.CellTemplate>
-						</GridViewColumn>
-						<GridViewColumn Header="0">
-							<GridViewColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Path=[0]}"/></DataTemplate></GridViewColumn.CellTemplate>
-						</GridViewColumn>
-						<GridViewColumn Header="1">
-							<GridViewColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Path=[1]}"/></DataTemplate></GridViewColumn.CellTemplate>
-						</GridViewColumn>
-						<GridViewColumn Header="2">
-							<GridViewColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Path=[2]}"/></DataTemplate></GridViewColumn.CellTemplate>
-						</GridViewColumn>
-						<GridViewColumn Header="3">
-							<GridViewColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Path=[3]}"/></DataTemplate></GridViewColumn.CellTemplate>
-						</GridViewColumn>
-						<GridViewColumn Header="4">
-							<GridViewColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Path=[4]}"/></DataTemplate></GridViewColumn.CellTemplate>
-						</GridViewColumn>
-						<GridViewColumn Header="5">
-							<GridViewColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Path=[5]}"/></DataTemplate></GridViewColumn.CellTemplate>
-						</GridViewColumn>
-						<GridViewColumn Header="6">
-							<GridViewColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Path=[6]}"/></DataTemplate></GridViewColumn.CellTemplate>
-						</GridViewColumn>
-						<GridViewColumn Header="7">
-							<GridViewColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Path=[7]}"/></DataTemplate></GridViewColumn.CellTemplate>
-						</GridViewColumn>
-						<GridViewColumn Header="8">
-							<GridViewColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Path=[8]}"/></DataTemplate></GridViewColumn.CellTemplate>
-						</GridViewColumn>
-						<GridViewColumn Header="9">
-							<GridViewColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Path=[9]}"/></DataTemplate></GridViewColumn.CellTemplate>
-						</GridViewColumn>
-						<GridViewColumn Header="A">
-							<GridViewColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Path=[10]}"/></DataTemplate></GridViewColumn.CellTemplate>
-						</GridViewColumn>
-						<GridViewColumn Header="B">
-							<GridViewColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Path=[11]}"/></DataTemplate></GridViewColumn.CellTemplate>
-						</GridViewColumn>
-						<GridViewColumn Header="C">
-							<GridViewColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Path=[12]}"/></DataTemplate></GridViewColumn.CellTemplate>
-						</GridViewColumn>
-						<GridViewColumn Header="D">
-							<GridViewColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Path=[13]}"/></DataTemplate></GridViewColumn.CellTemplate>
-						</GridViewColumn>
-						<GridViewColumn Header="E">
-							<GridViewColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Path=[14]}"/></DataTemplate></GridViewColumn.CellTemplate>
-						</GridViewColumn>
-						<GridViewColumn Header="F">
-							<GridViewColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding Path=[15]}"/></DataTemplate></GridViewColumn.CellTemplate>
-						</GridViewColumn>
-					</GridView>
-				</ListView.View>
-			</ListView>
+			<lc:ControlMemoryEditor FunctionMemory="{Binding Path=FunctionMemory}" IsReadOnly="True"/>
 		</GroupBox>
 
 		<Button Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" IsCancel="True" HorizontalAlignment="Right"/>
