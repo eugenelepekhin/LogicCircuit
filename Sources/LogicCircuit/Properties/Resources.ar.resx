@@ -1368,4 +1368,7 @@ LED, مصفوفة LED ,زر , أو اية عناصر اخرى</value>
   <data name="ErrorWriteNotConnected" xml:space="preserve">
     <value>مصدر الدخل غير متصل بمصفوفة العرض {0}</value>
   </data>
+  <data name="ErrorBadHexInRange" xml:space="preserve">
+    <value>النتيجة المتوقعة هي رقم ضمن المجال {0:X} - {1:X} .</value>
+  </data>
 </root>

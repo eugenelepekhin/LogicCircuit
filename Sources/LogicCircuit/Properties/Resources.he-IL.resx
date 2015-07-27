@@ -1431,4 +1431,7 @@
   <data name="ErrorWriteNotConnected" xml:space="preserve">
     <value>קלט כתיבה לא מחובר במערך גרפי ‏{0}‏.‏</value>
   </data>
+  <data name="ErrorBadHexInRange" xml:space="preserve">
+    <value>דרוש מספר בין ‏{0:X}‏ ל‏-‏{1:X}‏.‏</value>
+  </data>
 </root>

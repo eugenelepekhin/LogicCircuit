@@ -25,6 +25,12 @@ namespace LogicCircuit {
 			set { this.SetValue(ControlMemoryEditor.IsReadOnlyProperty, value); }
 		}
 
+		public static readonly DependencyProperty DataDigitsProperty = DependencyProperty.Register("DataDigits", typeof(int), typeof(ControlMemoryEditor));
+		public int DataDigits {
+			get { return (int)this.GetValue(ControlMemoryEditor.DataDigitsProperty); }
+			set { this.SetValue(ControlMemoryEditor.DataDigitsProperty, value); }
+		}
+
 		public ControlMemoryEditor() {
 			this.InitializeComponent();
 		}
@@ -37,8 +43,9 @@ namespace LogicCircuit {
 					this.dataGrid.Columns.Clear();
 					int addressBits = functionMemory.AddressBitWidth;
 					int count = (4 <= addressBits) ? 16 : 1 << addressBits;
-					Style style = new Style(typeof(TextBox));
-					style.Setters.Add(new Setter(TextBox.MaxLengthProperty, ControlMemoryEditor.HexDigits(functionMemory.DataBitWidth)));
+					this.DataDigits = ControlMemoryEditor.HexDigits(functionMemory.DataBitWidth);
+					Style styleViewer = (Style)this.FindResource("cellViewer");
+					Style styleEditor = (Style)this.FindResource("cellEditor");
 					for(int i = 0; i < count; i++) {
 						DataGridTextColumn column = new DataGridTextColumn() {
 							Header = string.Format(CultureInfo.InvariantCulture, "{0:X}", i),
@@ -46,7 +53,8 @@ namespace LogicCircuit {
 								UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
 								ValidatesOnDataErrors = true
 							},
-							EditingElementStyle = style
+							ElementStyle = styleViewer,
+							EditingElementStyle = styleEditor
 						};
 						this.dataGrid.Columns.Add(column);
 					}
@@ -143,14 +151,14 @@ namespace LogicCircuit {
 
 			private string Parse(string number, out int value) {
 				if(!int.TryParse(number, NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture, out value)) {
-					return "Invalid format";
+					return Properties.Resources.ErrorBadHexNumber;
 				}
 
 				int bitWidth = this.memory.DataBitWidth;
 				Tracer.Assert(0 < bitWidth && bitWidth <= Pin.MaxBitWidth);
 
 				if(bitWidth < 32 && (1 << bitWidth) <= value) {
-					return "Number is too big";
+					return Properties.Resources.ErrorBadHexInRange(0, (1 << bitWidth) - 1);
 				}
 				return null;
 			}

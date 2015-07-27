@@ -1365,4 +1365,7 @@ Tri-state와 적절한 제어 회로를 함께 써서 멀티플렉서를 만들 
   <data name="ErrorWriteNotConnected" xml:space="preserve">
     <value>그래픽 장치 {0}에 쓰기 입력이 연결되지 않았습니다.</value>
   </data>
+  <data name="ErrorBadHexInRange" xml:space="preserve">
+    <value>{0:X} - {1:X} 범위내의 수를 입력하십시오.</value>
+  </data>
 </root>

@@ -1425,4 +1425,7 @@ Hier kunt u grootte en kleurdiepte kiezen:
   <data name="ErrorWriteNotConnected" xml:space="preserve">
     <value>Schrijf-ingang is niet verbonden met graphics array {0}</value>
   </data>
+  <data name="ErrorBadHexInRange" xml:space="preserve">
+    <value>Getal moet liggen tussen {0:X} - {1:X}</value>
+  </data>
 </root>

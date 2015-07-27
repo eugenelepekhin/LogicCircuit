@@ -3,6 +3,25 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:lc="clr-namespace:LogicCircuit"
 >
+	<UserControl.Resources>
+		<Style x:Key="cellViewer" TargetType="TextBlock">
+			<Style.Triggers>
+				<Trigger Property="Validation.HasError" Value="true">
+					<Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+
+		<Style x:Key="cellEditor" TargetType="TextBox">
+			<Setter Property="MaxLength" Value="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataDigits}"/>
+			<Style.Triggers>
+				<Trigger Property="Validation.HasError" Value="true">
+					<Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+	</UserControl.Resources>
+
 	<DataGrid Name="dataGrid"
 		AutoGenerateColumns="False"
 		Background="Transparent"

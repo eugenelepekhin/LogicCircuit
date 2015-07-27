@@ -1453,4 +1453,8 @@ Permite selecionar o tamanho e a cor da profundidade/esquema:
     <value>Entrada de escrita não está ligada com a matriz de gráficos {0}</value>
     <comment>{string path}</comment>
   </data>
+  <data name="ErrorBadHexInRange" xml:space="preserve">
+    <value>A aguardar número entre {0:X} - {1:X}.</value>
+    <comment>{int min, int max}</comment>
+  </data>
 </root>

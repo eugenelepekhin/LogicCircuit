@@ -1386,4 +1386,7 @@ Permet de selectionner la taille ou couleur de profondeur/système:
   <data name="ErrorWriteNotConnected" xml:space="preserve">
     <value>Les entrées écrites ne sont pas connectées sur le tableau graphique {0}</value>
   </data>
+  <data name="ErrorBadHexInRange" xml:space="preserve">
+    <value>Valeurs comprisent entre {0:X} - {1:X}.</value>
+  </data>
 </root>

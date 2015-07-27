@@ -1373,4 +1373,7 @@ Out</value>
   <data name="ErrorWriteNotConnected" xml:space="preserve">
     <value>输入端没有被连接到图形序列 {0}</value>
   </data>
+  <data name="ErrorBadHexInRange" xml:space="preserve">
+    <value>该数字应当介于 {0:X} 和 {1:X}</value>
+  </data>
 </root>

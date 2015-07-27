@@ -1382,4 +1382,7 @@
   <data name="ErrorWriteNotConnected" xml:space="preserve">
     <value>Не підключений вхід записи дисплея {0}</value>
   </data>
+  <data name="ErrorBadHexInRange" xml:space="preserve">
+    <value>Очікувалося число в діапазоні {0:X}-{1:X}.</value>
+  </data>
 </root>

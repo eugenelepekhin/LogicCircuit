@@ -1381,4 +1381,7 @@ Leidžia pasirinkti dydi ir spalvos gyli/schema:
 4bitai/pikselį - 16 spalvų
 8bitai/pikselį - 256 spalvos</value>
   </data>
+  <data name="ErrorBadHexInRange" xml:space="preserve">
+    <value>Tikimasi numerio nuo {0:X}-{1:X}.</value>
+  </data>
 </root>

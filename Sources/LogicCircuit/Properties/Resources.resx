@@ -1453,4 +1453,8 @@ Allows to select size and color depth/scheme:
     <value>Write input does not connected on Graphics array {0}</value>
     <comment>{string path}</comment>
   </data>
+  <data name="ErrorBadHexInRange" xml:space="preserve">
+    <value>Expecting number in range {0:X} - {1:X}.</value>
+    <comment>{int min, int max}</comment>
+  </data>
 </root>

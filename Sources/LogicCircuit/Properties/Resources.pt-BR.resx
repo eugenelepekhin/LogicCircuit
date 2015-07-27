@@ -1441,4 +1441,7 @@ usados para coordenar as ações do circuito.</value>
   <data name="ErrorWriteNotConnected" xml:space="preserve">
     <value>Entradas de texto não são caonectadas aos Graphics Array {0}</value>
   </data>
+  <data name="ErrorBadHexInRange" xml:space="preserve">
+    <value>Esperando número no intervalo{0:X} - {1:X}.</value>
+  </data>
 </root>

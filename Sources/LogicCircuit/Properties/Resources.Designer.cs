@@ -2976,5 +2976,12 @@ namespace LogicCircuit.Properties {
  		public static string ErrorWriteNotConnected(string path) {
 			return string.Format(FormatCulture, ResourceManager.GetString("ErrorWriteNotConnected", Culture), path);
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Expecting number in range {0:X} - {1:X}..
+		/// </summary>
+ 		public static string ErrorBadHexInRange(int min, int max) {
+			return string.Format(FormatCulture, ResourceManager.GetString("ErrorBadHexInRange", Culture), min, max);
+		}
 	}
 }

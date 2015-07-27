@@ -1179,4 +1179,7 @@
   <data name="TitleWeb" xml:space="preserve">
     <value>آدرس وب:</value>
   </data>
+  <data name="ErrorBadHexInRange" xml:space="preserve">
+    <value>عدد باید بین {0:X} و {1:X} باشد.</value>
+  </data>
 </root>
