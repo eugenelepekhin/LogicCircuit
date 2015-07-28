@@ -8,6 +8,7 @@
 			<Style.Triggers>
 				<Trigger Property="Validation.HasError" Value="true">
 					<Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+					<Setter Property="Background" Value="#5FFF0000"/>
 				</Trigger>
 			</Style.Triggers>
 		</Style>
@@ -51,8 +52,14 @@
 		<DataGrid.RowHeaderStyle>
 			<Style TargetType="DataGridRowHeader">
 				<Setter Property="Content" Value="{Binding Path=RowIndex}"/>
+				<Setter Property="Padding" Value="8,2"/>
 			</Style>
 		</DataGrid.RowHeaderStyle>
+
+		<DataGrid.RowValidationErrorTemplate>
+			<!-- Empty template will not show exclamation mark on errors which is not clearing up when user fixes the errors. -->
+			<ControlTemplate/>
+		</DataGrid.RowValidationErrorTemplate>
 
 		<DataGrid.ColumnHeaderStyle>
 			<Style TargetType="DataGridColumnHeader">
