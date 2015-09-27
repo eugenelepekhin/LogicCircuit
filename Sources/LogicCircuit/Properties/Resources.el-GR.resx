@@ -615,7 +615,7 @@
     <value>{0} ({1})</value>
   </data>
   <data name="ReportMemoryName" xml:space="preserve">
-    <value>{0}: {1} διεύθυνση bit, {2} δεδομένα bit </value>
+    <value>{0}: {1} διεύθυνση bit, {2} δεδομένα bit</value>
   </data>
   <data name="TriStateGroupName" xml:space="preserve">
     <value>Τριφασική ομάδα</value>
@@ -1187,14 +1187,12 @@
   <data name="CaptionPinSide" xml:space="preserve">
     <value>Πλευρά pin</value>
   </data>
-   <data name="TitlePinSide" xml:space="preserve">
+  <data name="TitlePinSide" xml:space="preserve">
     <value>Πλευρά pin:</value>
   </data>
-   <data name="ToolTipDevicePinSide" xml:space="preserve">
+  <data name="ToolTipDevicePinSide" xml:space="preserve">
     <value>Διαλέξτε πλευρά για να τοποθετηθεί το pin</value>
   </data>
-  
-  
   <data name="NameSensor" xml:space="preserve">
     <value>Αισθητήρας</value>
   </data>
@@ -1365,5 +1363,4 @@
   <data name="ErrorBadHexInRange" xml:space="preserve">
     <value>Η τιμή να κυμαίνεται από {0:X} - {1:X}.</value>
   </data>
-  
 </root>
