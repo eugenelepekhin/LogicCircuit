@@ -22,6 +22,7 @@ namespace LogicCircuit {
 		private HashSet<CircuitFunction> updated = new HashSet<CircuitFunction>();
 		private List<CircuitFunction> clockList = new List<CircuitFunction>();
 		private List<FunctionProbe> probeList = new List<FunctionProbe>();
+		private List<FunctionTriStateGroup> triStateGroupList = new List<FunctionTriStateGroup>();
 
 		public Random Random { get; private set; }
 
@@ -68,6 +69,10 @@ namespace LogicCircuit {
 					this.probeList.Add(probe);
 				}
 			}
+			FunctionTriStateGroup group = function as FunctionTriStateGroup;
+			if(group != null) {
+				this.triStateGroupList.Add(group);
+			}
 		}
 
 		public void EndDefinition() {
@@ -79,6 +84,9 @@ namespace LogicCircuit {
 				if(function.Result.Any()) {
 					function.Dependent = function.Result.Select(r => (IEnumerable<CircuitFunction>)this.dependent[r]).Aggregate((x, y) => x.Union(y)).ToArray();
 				}
+			}
+			foreach(FunctionTriStateGroup group in this.triStateGroupList) {
+				this.dirty.Add(group.Dependent);
 			}
 		}
 
