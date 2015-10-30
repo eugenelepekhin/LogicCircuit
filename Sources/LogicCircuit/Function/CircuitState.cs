@@ -1,5 +1,6 @@
 ﻿//#define DUMP_STATE
 //#define VALIDATE_GET_FUNCTION
+//#define REPORT_STAT
 
 using System;
 using System.Collections.Generic;
@@ -148,6 +149,9 @@ namespace LogicCircuit {
 					Tracer.FullInfo("CircuitState.Evaluate", this.ToString());
 				#endif
 			}
+			#if REPORT_STAT
+				System.Diagnostics.Debug.Print(this.ReportStat);
+			#endif
 			return true;
 		}
 
@@ -175,7 +179,33 @@ namespace LogicCircuit {
 			}
 		#endif
 
+		#if REPORT_STAT
+			public string ReportStat { get { return this.dirty.ReportStat(); } }
+		#endif
+
 		private class DirtyList {
+			#if REPORT_STAT
+				private int minCount = int.MaxValue;
+				private int maxCount = int.MinValue;
+				private int reportCount = 0;
+				private long sumCount = 0;
+
+				private void ReportStat(int count) {
+					if(count < this.minCount) {
+						this.minCount = count;
+					}
+					if(this.maxCount < count) {
+						this.maxCount = count;
+					}
+					this.sumCount += count;
+					this.reportCount++;
+				}
+				public string ReportStat() {
+					return string.Format(System.Globalization.CultureInfo.InvariantCulture,
+						"DirtyList stat: Min={0}, Max={1}, Avg={2}, Count={3}", this.minCount, this.maxCount, this.sumCount / this.reportCount, this.reportCount
+					);
+                }
+			#endif
 			private FunctionList current = new FunctionList(1024);
 			private FunctionList next = new FunctionList(1024);
 			private int seed;
@@ -256,6 +286,9 @@ namespace LogicCircuit {
 							this.Add(this.Get());
 						}
 					}
+					#if REPORT_STAT
+						this.ReportStat(this.current.Count);
+					#endif
 				} else {
 					this.index++;
 					random = this.offset - this.step;
