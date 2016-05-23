@@ -31,8 +31,8 @@ namespace LogicCircuit {
 				CircuitMap map = this.editor.CircuitRunner.VisibleMap;
 				Tracer.Assert(wire.LogicalCircuit == map.Circuit);
 				this.parameter = map.StateIndexes(wire).ToArray();
-				if(0 < this.parameter.Length) {
-					this.circuitState = this.editor.CircuitRunner.CircuitState;
+				this.circuitState = this.editor.CircuitRunner.CircuitState;
+				if(0 < this.parameter.Length && this.circuitState != null) {
 					this.state = new State[this.parameter.Length];
 					this.bitWidth.Text = Properties.Resources.WireDisplayBitWidth(this.parameter.Length);
 
