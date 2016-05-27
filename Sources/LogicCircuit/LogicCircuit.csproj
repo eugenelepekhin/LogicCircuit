@@ -493,6 +493,9 @@
     <EmbeddedResource Include="Properties\Resources.nl.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.pl.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.pt-BR.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
