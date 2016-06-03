@@ -1285,7 +1285,10 @@ Do zapisu dochodzi przy zboczu {0}</value>
     <value>Wprowadź maksymalną liczbę cykli zanim sensor zmieni pomiar.</value>
   </data>
   <data name="ToolTipSeriesData" xml:space="preserve">
-    <value>Wprowadź serię pomiarów sensora w formie &lt;cykl&gt;:&lt;wartość&gt; gdzie obie wartości są liczbami szesnastkowymi. Kiedy cykl jest liczbą parzystą lub 0 odpowiada zmienie zegara z 0 na 1, gdy nieparzystą z 1 na 0.</value>
+    <value>Wprowadź serię pomiarów sensora w formie &lt;cykl&gt;:&lt;wartość&gt;
+gdzie obie wartości są liczbami szesnastkowymi.
+Kiedy cykl jest liczbą parzystą lub 0 odpowiada zmienie
+zegara z 0 na 1, gdy nieparzystą z 1 na 0.</value>
   </data>
   <data name="NameSound" xml:space="preserve">
     <value>Brzęczyk</value>
@@ -1306,19 +1309,32 @@ Do zapisu dochodzi przy zboczu {0}</value>
     <value>Pozwala stworzyć port, który inne obwody mogą używać do odbierania lub wysyłania danych. Zmiana położenia portów w obwodzie pozwala na zmianę ich położenia na symbolu.</value>
   </data>
   <data name="ToolTipDescriptorProbe" xml:space="preserve">
-    <value>Dodaj i podłącz do obwodu próbniki aby po jego włączeniu obserwować stan poszczególnych elementów. Po kliknięciu na próbnik można zobaczyć historię odczytów. Próbniki są widoczne w oscyloskopie.</value>
+    <value>Dodaj i podłącz do obwodu próbniki aby po jego włączeniu
+obserwować stan poszczególnych elementów.
+Po kliknięciu na próbnik można zobaczyć historię odczytów.
+Próbniki są widoczne w oscyloskopie.</value>
   </data>
   <data name="ToolTipDescriptorSensor" xml:space="preserve">
-    <value>Dostarcza danych z "zewnętrznego źródła" w postaci serii predefiniowanych, losowych lub manualnie wprowadzonych wartości.</value>
+    <value>Dostarcza danych z "zewnętrznego źródła" w
+postaci serii predefiniowanych, losowych lub
+manualnie wprowadzonych wartości.</value>
   </data>
   <data name="ToolTipDescriptorSplitter" xml:space="preserve">
-    <value>Pozwala połączyć kilka portów w jeden port lub rozdzielić go ponownie na kilka portów. Pozwala to na zmniejszenie ilości pojedyńczych przewodów w odbwodzie.</value>
+    <value>Pozwala połączyć kilka portów w jeden port
+lub rozdzielić go ponownie na kilka portów.
+Pozwala to na zmniejszenie ilości
+pojedyńczych przewodów w odbwodzie.</value>
   </data>
   <data name="ToolTipDescriptorText" xml:space="preserve">
-    <value>Umieść notatkę w dowolnym miejscu projektu w celu opisania obwodu, podania przydatnego linku lub wzbogać go o obraz.</value>
+    <value>Umieść notatkę w dowolnym miejscu projektu w
+celu opisania obwodu, podania przydatnego
+linku lub wzbogać go o obraz.</value>
   </data>
   <data name="ToolTipDescriptorTriState" xml:space="preserve">
-    <value>Może mieć 3 różne stany na wyjściu: 0, 1, Z. Stan Z nie ma wpływu na działanie obwodu. Bufory sterowane stosuje się gdy kilka źródeł danych jest podłączonych do jednego wejścia.</value>
+    <value>Może mieć 3 różne stany na wyjściu: 0, 1, Z.
+Stan Z nie ma wpływu na działanie obwodu.
+Bufory sterowane stosuje się gdy kilka źródeł
+danych jest podłączonych do jednego wejścia.</value>
   </data>
   <data name="SplitterThin1PinName" xml:space="preserve">
     <value>(bit {0}) połączonego złącza rozdzielacza</value>
