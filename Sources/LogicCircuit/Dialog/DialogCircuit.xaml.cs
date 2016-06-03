@@ -29,7 +29,7 @@ namespace LogicCircuit {
 
 			this.category.Text = this.logicalCircuit.Category;
 			if(this.logicalCircuit.ContainsDisplays()) {
-				this.isDisplay.IsChecked = logicalCircuit.IsDisplay;
+				this.isDisplay.IsChecked = this.logicalCircuit.IsDisplay;
 			} else {
 				this.isDisplay.IsEnabled = false;
 			}

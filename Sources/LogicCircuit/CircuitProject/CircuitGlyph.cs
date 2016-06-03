@@ -347,7 +347,7 @@ namespace LogicCircuit {
 
 		public FrameworkElement CreateDisplayGlyph(CircuitGlyph mainSymbol) {
 			Tracer.Assert(mainSymbol != null);
-			List<CircuitSymbol> list = ((LogicalCircuit)this.Circuit).CircuitSymbols().Where(s => s.Circuit.IsDisplay).ToList();
+			List<CircuitSymbol> list = ((LogicalCircuit)this.Circuit).CircuitSymbols().Where(s => s.Circuit.IsValidDisplay()).ToList();
 			GridPoint offset = Symbol.GridPoint(list.Select(s => s.Bounds()).Aggregate((r1, r2) => Rect.Union(r1, r2)).TopLeft);
 			DisplayCanvas canvas = this.CreateDisplayCanvas(mainSymbol);
 

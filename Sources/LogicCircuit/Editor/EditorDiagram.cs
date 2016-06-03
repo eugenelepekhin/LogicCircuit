@@ -94,6 +94,9 @@ namespace LogicCircuit {
 			if(this.InEditMode) {
 				HashSet<LogicalCircuit> updated = new HashSet<LogicalCircuit>();
 				foreach(LogicalCircuit circuit in this.CircuitProject.LogicalCircuitSet.Invalid) {
+					circuit.ResetPins();
+				}
+				foreach(LogicalCircuit circuit in this.CircuitProject.LogicalCircuitSet.Invalid) {
 					this.UpdateDisplay(circuit, updated);
 				}
 				this.CircuitProject.LogicalCircuitSet.ValidateAll();
@@ -155,7 +158,7 @@ namespace LogicCircuit {
 						}
 						LogicalCircuit circuit = symbol.CachedLogicCircuit;
 						if(circuit != null && !circuit.IsDeleted() && circuit.IsDisplay) {
-							this.CircuitProject.LogicalCircuitSet.Invalidate(circuit);
+							invalidateAllDisplays = true;
 						} else if(circuit == null) {
 							invalidateAllDisplays = true;
 						}

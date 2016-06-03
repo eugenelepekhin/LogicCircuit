@@ -37,6 +37,10 @@ namespace LogicCircuit {
 			set { throw new InvalidOperationException(); }
 		}
 
+		public virtual bool IsValidDisplay() {
+			return this.IsDisplay;
+		}
+
 		public virtual FrameworkElement CreateDisplay(CircuitGlyph symbol, CircuitGlyph mainSymbol) {
 			Tracer.Assert(this == symbol.Circuit);
 			throw new InvalidOperationException();

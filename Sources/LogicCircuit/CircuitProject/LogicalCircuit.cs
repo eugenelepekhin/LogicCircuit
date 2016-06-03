@@ -82,28 +82,30 @@ namespace LogicCircuit {
 		}
 		
 		public bool ContainsDisplays() {
-			return !this.HasDisplayLoop(new HashSet<LogicalCircuit>()) && this.CircuitSymbols().Any(symbol => {
-				if(symbol.Circuit.IsDisplay) {
-					LogicalCircuit lc = symbol.Circuit as LogicalCircuit;
-					return lc == null || lc.ContainsDisplays();
-				}
-				return false;
-			});
+			return !this.HasDisplayLoop(new HashSet<LogicalCircuit>()) && this.CircuitSymbols().Any(symbol => symbol.Circuit.IsValidDisplay());
 		}
 
+		public override bool IsValidDisplay() {
+			return this.IsDisplay && this.ContainsDisplays();
+		}
+
+		#if DEBUG
+			public IList<CircuitSymbol> ValidDisplayList => this.CircuitSymbols().Where(s => s.Circuit.IsValidDisplay()).ToList();
+		#endif
+
 		private Rect DisplayBounds() {
-			return this.CircuitSymbols().Where(s => s.Circuit.IsDisplay).Select(s => s.Bounds()).Aggregate((r1, r2) => Rect.Union(r1, r2));
+			return this.CircuitSymbols().Where(s => s.Circuit.IsValidDisplay()).Select(s => s.Bounds()).Aggregate((r1, r2) => Rect.Union(r1, r2));
 		}
 
 		protected override int CircuitSymbolWidth(int defaultWidth) {
-			if(this.IsDisplay && this.ContainsDisplays()) {
+			if(this.IsValidDisplay()) {
 				return Math.Max(defaultWidth, Symbol.GridPoint(this.DisplayBounds().Width));
 			}
 			return Math.Max(3, defaultWidth);
 		}
 
 		protected override int CircuitSymbolHeight(int defaultHeight) {
-			if(this.IsDisplay && this.ContainsDisplays()) {
+			if(this.IsValidDisplay()) {
 				return Math.Max(defaultHeight, Symbol.GridPoint(this.DisplayBounds().Height));
 			}
 			return Math.Max(4, defaultHeight);
@@ -111,7 +113,7 @@ namespace LogicCircuit {
 
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
 			Tracer.Assert(this == symbol.Circuit);
-			if(this.IsDisplay && this.ContainsDisplays()) {
+			if(this.IsValidDisplay()) {
 				return symbol.CreateDisplayGlyph(symbol);
 			} else {
 				return symbol.CreateRectangularGlyph();
@@ -120,7 +122,7 @@ namespace LogicCircuit {
 
 		public override FrameworkElement CreateDisplay(CircuitGlyph symbol, CircuitGlyph mainSymbol) {
 			Tracer.Assert(this == symbol.Circuit);
-			if(this.IsDisplay && this.ContainsDisplays()) {
+			if(this.IsValidDisplay()) {
 				return symbol.CreateDisplayGlyph(mainSymbol);
 			}
 			return base.CreateDisplay(symbol, mainSymbol);
