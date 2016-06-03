@@ -1219,7 +1219,10 @@ Do zapisu dochodzi przy zboczu {0}</value>
     <value>Autorzy:</value>
   </data>
   <data name="ToolTipIsDisplay" xml:space="preserve">
-    <value>Gdy zaznaczysz aby wyświetlały się elementy graficzne na symbolach ich stan będzie widoczny na żywo. Dotyczy to Diod LED, matryc diod LED, wyświetlaczy graficznych i przycisków.</value>
+    <value>Gdy zaznaczysz aby wyświetlały się elementy graficzne
+na symbolach ich stan będzie widoczny na żywo.
+Dotyczy to Diod LED, matryc diod LED,
+wyświetlaczy graficznych i przycisków.</value>
   </data>
   <data name="CaptionPinSide" xml:space="preserve">
     <value>Strona portu</value>
@@ -1303,10 +1306,14 @@ zegara z 0 na 1, gdy nieparzystą z 1 na 0.</value>
     <value>Znajdź:</value>
   </data>
   <data name="ToolTipDescriptorClock" xml:space="preserve">
-    <value>Generuje sygnał oscylujący między 0 a 1, Jest używany do skoordynowania pracy obwodu.</value>
+    <value>Generuje sygnał oscylujący między 0 a 1,
+Jest używany do skoordynowania pracy obwodu.</value>
   </data>
   <data name="ToolTipDescriptorPin" xml:space="preserve">
-    <value>Pozwala stworzyć port, który inne obwody mogą używać do odbierania lub wysyłania danych. Zmiana położenia portów w obwodzie pozwala na zmianę ich położenia na symbolu.</value>
+    <value>Pozwala stworzyć port, który inne obwody mogą
+używać do odbierania lub wysyłania danych.
+Zmiana położenia portów w obwodzie pozwala
+na zmianę ich położenia na symbolu.</value>
   </data>
   <data name="ToolTipDescriptorProbe" xml:space="preserve">
     <value>Dodaj i podłącz do obwodu próbniki aby po jego włączeniu
