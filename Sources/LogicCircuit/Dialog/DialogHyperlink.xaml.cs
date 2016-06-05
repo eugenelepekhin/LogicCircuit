@@ -178,7 +178,7 @@ namespace LogicCircuit {
 			if(!string.IsNullOrWhiteSpace(url)) {
 				try {
 					UriBuilder builder = new UriBuilder(url);
-					return StringComparer.OrdinalIgnoreCase.Equals(builder.Scheme, Uri.UriSchemeHttp);
+					return StringComparer.OrdinalIgnoreCase.Equals(builder.Scheme, Uri.UriSchemeHttp) || StringComparer.OrdinalIgnoreCase.Equals(builder.Scheme, Uri.UriSchemeHttps);
 				} catch {}
 			}
 			return false;
