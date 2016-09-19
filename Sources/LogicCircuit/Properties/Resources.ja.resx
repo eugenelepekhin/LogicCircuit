@@ -1,0 +1,1239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<!-- 
+		Microsoft ResX Schema
+
+		Version 1.3
+
+		The primary goals of this format is to allow a simple XML format 
+		that is mostly human readable. The generation and parsing of the 
+		various data types are done through the TypeConverter classes 
+		associated with the data types.
+
+		Example:
+
+		... ado.net/XML headers & schema ...
+		<resheader name="resmimetype">text/microsoft-resx</resheader>
+		<resheader name="version">1.3</resheader>
+		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+		<data name="Name1">this is my long string</data>
+		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+			[base64 mime encoded serialized .NET Framework object]
+		</data>
+		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+			[base64 mime encoded string representing a byte array form of the .NET Framework object]
+		</data>
+
+		There are any number of "resheader" rows that contain simple 
+		name/value pairs.
+
+		Each data row contains a name, and value. The row also contains a 
+		type or mimetype. Type corresponds to a .NET class that support 
+		text/value conversion through the TypeConverter architecture. 
+		Classes that don't support this are serialized and stored with the 
+		mimetype set.
+
+		The mimetype is used for serialized objects, and tells the 
+		ResXResourceReader how to depersist the object. This is currently not 
+		extensible. For a given mimetype the value must be set accordingly:
+
+		Note - application/x-microsoft.net.object.binary.base64 is the format 
+		that the ResXResourceWriter will generate, however the reader can 
+		read any of the formats listed below.
+
+		mimetype: application/x-microsoft.net.object.binary.base64
+		value   : The object must be serialized with 
+			: System.Serialization.Formatters.Binary.BinaryFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.soap.base64
+		value   : The object must be serialized with 
+			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.bytearray.base64
+		value   : The object must be serialized into a byte array 
+			: using a System.ComponentModel.TypeConverter
+			: and then encoded with base64 encoding.
+	-->
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>1.3</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="ErrorProjectCount" xml:space="preserve">
+		<value>ファイルに複数のプロジェクトがあります。</value>
+	</data>
+	<data name="ErrorUnknownVersion" xml:space="preserve">
+		<value>不明なバージョンの回路プロジェクトが開かれました。
+開こうとしたファイルが壊れているか、新しいバージョンの Logic Circuitで作成されたものです。新しいバージョンについては &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt; をクリックしてください。</value>
+	</data>
+	<data name="FileFilter" xml:space="preserve">
+		<value>回路プロジェクト (*{0})|*{0}|すべてのファイル (*.*)|*.*</value>
+	</data>
+	<data name="FileSaved" xml:space="preserve">
+		<value>{0} が保存されました。</value>
+	</data>
+	<data name="GateShapeRectangular" xml:space="preserve">
+		<value>長方形</value>
+	</data>
+	<data name="MemoryAddressPinName" xml:space="preserve">
+		<value>メモリのアドレス</value>
+	</data>
+	<data name="MessageSaveFile" xml:space="preserve">
+		<value>{0} プロジェクトが変更されました。
+保存しますか？</value>
+	</data>
+	<data name="OperationCanceled" xml:space="preserve">
+		<value>キャンセルされました。</value>
+	</data>
+	<data name="TitleCancel" xml:space="preserve">
+		<value>キャンセル</value>
+	</data>
+	<data name="ToolTipButton" xml:space="preserve">
+		<value>ボタン {0}</value>
+	</data>
+	<data name="CategoryInputOutput" xml:space="preserve">
+		<value>入出力装置</value>
+	</data>
+	<data name="NameButton" xml:space="preserve">
+		<value>ボタン</value>
+	</data>
+	<data name="NameConstant" xml:space="preserve">
+		<value>定数</value>
+	</data>
+	<data name="NameSplitter" xml:space="preserve">
+		<value>分配器</value>
+	</data>
+	<data name="TitleAbout" xml:space="preserve">
+		<value>このプログラムについて</value>
+	</data>
+	<data name="TitleVersion" xml:space="preserve">
+		<value>バージョン:</value>
+	</data>
+	<data name="TitleWeb" xml:space="preserve">
+		<value>ウェブサイト:</value>
+	</data>
+	<data name="TitleDisplayOptions" xml:space="preserve">
+		<value>表示</value>
+	</data>
+	<data name="TitleFileOptions" xml:space="preserve">
+		<value>ファイル</value>
+	</data>
+	<data name="TitleOptions" xml:space="preserve">
+		<value>オプション</value>
+	</data>
+	<data name="CommandCircuitCurrent" xml:space="preserve">
+		<value>この回路について</value>
+	</data>
+	<data name="CommandCircuitDelete" xml:space="preserve">
+		<value>現在の回路を削除</value>
+	</data>
+	<data name="CommandCircuitNew" xml:space="preserve">
+		<value>新しい回路を作成</value>
+	</data>
+	<data name="CommandCircuitProject" xml:space="preserve">
+		<value>プロジェクト</value>
+	</data>
+	<data name="CommandEditSelectAllButWires" xml:space="preserve">
+		<value>配線以外をすべて選択</value>
+	</data>
+	<data name="CommandEditSelectAllProbes" xml:space="preserve">
+		<value>プローブをすべて選択</value>
+	</data>
+	<data name="CommandEditSelectAllProbesWithWire" xml:space="preserve">
+		<value>プローブとその配線をすべて選択</value>
+	</data>
+	<data name="CommandEditSelectAllWires" xml:space="preserve">
+		<value>配線をすべて選択</value>
+	</data>
+	<data name="CommandEditSelectFloatingSymbols" xml:space="preserve">
+		<value>配線が浮いているシンボルを選択</value>
+	</data>
+	<data name="CommandEditSelectFreeWires" xml:space="preserve">
+		<value>接続されていない配線を選択</value>
+	</data>
+	<data name="CommandEditUnselectAllButWires" xml:space="preserve">
+		<value>配線以外の選択をすべて解除</value>
+	</data>
+	<data name="CommandEditUnselectAllWires" xml:space="preserve">
+		<value>配線の選択をすべて解除</value>
+	</data>
+	<data name="CommandFileExportImage" xml:space="preserve">
+		<value>回路を画像として保存</value>
+	</data>
+	<data name="CommandToolsOscilloscope" xml:space="preserve">
+		<value>オシロスコープ</value>
+	</data>
+	<data name="CommandToolsReport" xml:space="preserve">
+		<value>プロジェクトの診断情報</value>
+	</data>
+	<data name="TipOnStartMove" xml:space="preserve">
+		<value>選択したものを好きな場所にドラッグ&amp;ドロップします。Escキーを押すと移動をキャンセルできます。シフトキーを押しながらドロップすると、配線を移動しません。</value>
+	</data>
+	<data name="TipOnStartWire" xml:space="preserve">
+		<value>配線の端を好きな場所にドラッグします。Escキーを押すと配線をキャンセルできます。</value>
+	</data>
+	<data name="Loading" xml:space="preserve">
+		<value>読み込み中...</value>
+	</data>
+	<data name="TipOnCtrlDown" xml:space="preserve">
+		<value>Ctrl+{Shift}+Tab を押して回路を切り替えるか、個別のシンボルをクリックして選択状態を切り替えます。</value>
+	</data>
+	<data name="TipOnWireSelect" xml:space="preserve">
+		<value>Shift + {Ctrl} を押しながら配線をクリックすると導線全体の選択状態が切り替わります。また、Alt を押しながら選択中の配線をクリックすると分割したり結合したりできます。</value>
+	</data>
+	<data name="TipOnAwaitingArea" xml:space="preserve">
+		<value>{0} {1}. シンボルを囲うと選択できます。そのとき、Shift を押しておけば現在の選択も残ります。</value>
+	</data>
+	<data name="FunctionParameter" xml:space="preserve">
+		<value>関数 {0} は {1} 個以上のパラメータが必要です。</value>
+	</data>
+	<data name="UnknownState" xml:space="preserve">
+		<value>状態 {0} は不明です。</value>
+	</data>
+	<data name="ErrorAddressNotConnected" xml:space="preserve">
+		<value>メモリ {0} のアドレスに接続されていないビットがあります。</value>
+	</data>
+	<data name="ErrorDataInNotConnected" xml:space="preserve">
+		<value>メモリ {0} のデータに接続されていないビットがあります。</value>
+	</data>
+	<data name="ErrorJamBitWidthDifferent" xml:space="preserve">
+		<value>{4} にある {0} の入力端子 ({1}) と、{2} の出力端子 ({3}) のビット幅が異なるため接続できません。修正してください。 </value>
+	</data>
+	<data name="ErrorLoopInCircuit" xml:space="preserve">
+		<value>回路「{0}」にある回路「{1}」が無限ループになっています。修正してください。 </value>
+	</data>
+	<data name="ErrorManyResults" xml:space="preserve">
+		<value>{1} の入力端子 {0} が、3ステートでない複数の出力端子に接続されています。</value>
+	</data>
+	<data name="PowerOff" xml:space="preserve">
+		<value>電源オフ</value>
+	</data>
+	<data name="PowerOn" xml:space="preserve">
+		<value>電源オン</value>
+	</data>
+	<data name="TitleProbeHistory" xml:space="preserve">
+		<value>プローブ履歴</value>
+	</data>
+	<data name="MessageNotRootConstant" xml:space="preserve">
+		<value>電源がオンのときはルート回路({0})上でしか定数の変更はできません。</value>
+	</data>
+	<data name="Oscillation" xml:space="preserve">
+		<value>発振</value>
+	</data>
+	<data name="TitleOscillogram" xml:space="preserve">
+		<value>オシログラム</value>
+	</data>
+	<data name="SplitterDirectionClockwise" xml:space="preserve">
+		<value>左</value>
+	</data>
+	<data name="SplitterDirectionCounterclockwise" xml:space="preserve">
+		<value>右</value>
+	</data>
+	<data name="PinSideBottom" xml:space="preserve">
+		<value>下</value>
+	</data>
+	<data name="PinSideLeft" xml:space="preserve">
+		<value>左</value>
+	</data>
+	<data name="PinSideRight" xml:space="preserve">
+		<value>右</value>
+	</data>
+	<data name="PinSideTop" xml:space="preserve">
+		<value>上</value>
+	</data>
+	<data name="MessageNotUsed" xml:space="preserve">
+		<value>この回路はどこでも使われていません。</value>
+	</data>
+	<data name="TitleMemory" xml:space="preserve">
+		<value>メモリ</value>
+	</data>
+	<data name="MessageInvalidRecentFile" xml:space="preserve">
+		<value>ファイル "{0}" は開けません。
+最近使用したファイルの一覧から削除しますか？</value>
+	</data>
+	<data name="TitleProjectDescription" xml:space="preserve">
+		<value>説明</value>
+	</data>
+	<data name="TitleReportErrorDetails" xml:space="preserve">
+		<value>エラー詳細</value>
+	</data>
+	<data name="TitleSummary" xml:space="preserve">
+		<value>概要:</value>
+	</data>
+	<data name="TitleTotal" xml:space="preserve">
+		<value>全体:</value>
+	</data>
+	<data name="PinTypeNameInput" xml:space="preserve">
+		<value>入力</value>
+	</data>
+	<data name="PinTypeNameNone" xml:space="preserve">
+		<value>なし</value>
+	</data>
+	<data name="PinTypeNameOutput" xml:space="preserve">
+		<value>出力</value>
+	</data>
+	<data name="NameLedMatrix" xml:space="preserve">
+		<value>LEDマトリクス</value>
+	</data>
+	<data name="ToolTipLedMatrix" xml:space="preserve">
+		<value>{2}ビットのLED({3}色)を使用した、{0}x{1}のLEDマトリクス</value>
+	</data>
+	<data name="CaptionColumns" xml:space="preserve">
+		<value>列</value>
+	</data>
+	<data name="CaptionRows" xml:space="preserve">
+		<value>行</value>
+	</data>
+	<data name="ToolTipColumns" xml:space="preserve">
+		<value>LEDマトリクスの列数を選択してください。</value>
+	</data>
+	<data name="ToolTipRows" xml:space="preserve">
+		<value>LEDマトリクスの行数を選択してください。</value>
+	</data>
+	<data name="CaptionLedMatrixType" xml:space="preserve">
+		<value>タイプ</value>
+	</data>
+	<data name="LedMatrixTypeIndividual" xml:space="preserve">
+		<value>個別制御方式</value>
+	</data>
+	<data name="MessageVersionLatest" xml:space="preserve">
+		<value>最新のバージョンをお使いです。</value>
+	</data>
+	<data name="MessageVersionOutdated" xml:space="preserve">
+		<value>古いバージョンをお使いです。下のリンクをクリックして最新バージョンをダウンロードしてください。</value>
+	</data>
+	<data name="MessageVersionPreview" xml:space="preserve">
+		<value>開発版をお使いです。</value>
+	</data>
+	<data name="TitleCheckVersion" xml:space="preserve">
+		<value>今すぐ確認</value>
+	</data>
+	<data name="TitleCategory" xml:space="preserve">
+		<value>カテゴリ:</value>
+	</data>
+	<data name="TitleDescription" xml:space="preserve">
+		<value>説明:</value>
+	</data>
+	<data name="TitleName" xml:space="preserve">
+		<value>名前:</value>
+	</data>
+	<data name="TitleBitWidth" xml:space="preserve">
+		<value>ビット幅:</value>
+	</data>
+	<data name="TitleValue" xml:space="preserve">
+		<value>値:</value>
+	</data>
+	<data name="NamePin" xml:space="preserve">
+		<value>端子</value>
+	</data>
+	<data name="TitleAddressBitWidth" xml:space="preserve">
+		<value>アドレスビット幅:</value>
+	</data>
+	<data name="TitleData" xml:space="preserve">
+		<value>データ</value>
+	</data>
+	<data name="TitleDataBitWidth" xml:space="preserve">
+		<value>データビット幅:</value>
+	</data>
+	<data name="TitleInverted" xml:space="preserve">
+		<value>反転</value>
+	</data>
+	<data name="MenuHeaderEdit" xml:space="preserve">
+		<value>編集</value>
+	</data>
+	<data name="MenuHeaderFile" xml:space="preserve">
+		<value>ファイル</value>
+	</data>
+	<data name="MenuHeaderHelp" xml:space="preserve">
+		<value>ヘルプ</value>
+	</data>
+	<data name="MenuHeaderTools" xml:space="preserve">
+		<value>ツール</value>
+	</data>
+	<data name="MessageWarning" xml:space="preserve">
+		<value>警告</value>
+	</data>
+	<data name="TitleFrequency" xml:space="preserve">
+		<value>周波数</value>
+	</data>
+	<data name="TitleIsMaximumSpeed1" xml:space="preserve">
+		<value>最高速度で実行</value>
+	</data>
+	<data name="CommandTruthTable" xml:space="preserve">
+		<value>真理値表</value>
+	</data>
+	<data name="ToolTipFontColor" xml:space="preserve">
+		<value>文字の色</value>
+	</data>
+	<data name="TitleSaveAs" xml:space="preserve">
+		<value>別名で保存...</value>
+	</data>
+	<data name="ToolTipLoadData" xml:space="preserve">
+		<value>ファイルからデータを読み込む</value>
+	</data>
+	<data name="ToolTipSaveData" xml:space="preserve">
+		<value>ファイルにデータを保存</value>
+	</data>
+	<data name="CommandEditAlignLeft" xml:space="preserve">
+		<value>左揃え</value>
+	</data>
+	<data name="CommandEditAlignRight" xml:space="preserve">
+		<value>右揃え</value>
+	</data>
+	<data name="CommandEditBold" xml:space="preserve">
+		<value>太字</value>
+	</data>
+	<data name="CommandEditSelectAll" xml:space="preserve">
+		<value>すべて選択</value>
+	</data>
+	<data name="CommandEditUndo" xml:space="preserve">
+		<value>取り消す</value>
+	</data>
+	<data name="CommandFileNew" xml:space="preserve">
+		<value>新規</value>
+	</data>
+	<data name="CommandFileOpen" xml:space="preserve">
+		<value>開く</value>
+	</data>
+	<data name="CommandFileSave" xml:space="preserve">
+		<value>保存</value>
+	</data>
+	<data name="CommandFileSaveAs" xml:space="preserve">
+		<value>別名で保存...</value>
+	</data>
+	<data name="CommandHelpView" xml:space="preserve">
+		<value>ヘルプを表示</value>
+	</data>
+	<data name="ToolTipFontSize" xml:space="preserve">
+		<value>フォントサイズ</value>
+	</data>
+	<data name="CaptionName" xml:space="preserve">
+		<value>名前</value>
+	</data>
+	<data name="TitleActualFrequency" xml:space="preserve">
+		<value>実際の周波数</value>
+	</data>
+	<data name="WireDisplayValue" xml:space="preserve">
+		<value>値: {0}</value>
+	</data>
+	<data name="WireDisplayBitWidth" xml:space="preserve">
+		<value>ビット幅: {0}</value>
+	</data>
+	<data name="WireDisplayDisconnected" xml:space="preserve">
+		<value>この配線は接続されていません。</value>
+	</data>
+	<data name="CaptionPinSide" xml:space="preserve">
+		<value>端子の位置</value>
+	</data>
+	<data name="TitlePinSide" xml:space="preserve">
+		<value>端子の位置:</value>
+	</data>
+	<data name="ToolTipDevicePinSide" xml:space="preserve">
+		<value>端子を配置する向きを選択してください。</value>
+	</data>
+	<data name="NameSensor" xml:space="preserve">
+		<value>センサ</value>
+	</data>
+	<data name="ToolTipSensor" xml:space="preserve">
+		<value>センサ {0}</value>
+	</data>
+	<data name="CaptionSensorType" xml:space="preserve">
+		<value>センサのタイプ</value>
+	</data>
+	<data name="SensorTypeManual" xml:space="preserve">
+		<value>手動</value>
+	</data>
+	<data name="SensorTypeRandom" xml:space="preserve">
+		<value>ランダム</value>
+	</data>
+	<data name="SensorTypeSeries" xml:space="preserve">
+		<value>データ列</value>
+	</data>
+	<data name="CommandEditFind" xml:space="preserve">
+		<value>検索</value>
+	</data>
+	<data name="TitleFind" xml:space="preserve">
+		<value>回路を検索</value>
+	</data>
+	<data name="TitleSearch" xml:space="preserve">
+		<value>検索</value>
+	</data>
+	<data name="CommandEditRotateLeft" xml:space="preserve">
+		<value>左に回転</value>
+	</data>
+	<data name="CommandEditRotateRight" xml:space="preserve">
+		<value>右に回転</value>
+	</data>
+	<data name="CommandCircuitUsage" xml:space="preserve">
+		<value>使われている場所を表示...</value>
+	</data>
+	<data name="MessageUsageNote" xml:space="preserve">
+		<value>回路を選択してダブルクリックすると、その回路が開いて現在の回路が選択された状態になります。</value>
+	</data>
+	<data name="TitleCircuitUsage" xml:space="preserve">
+		<value>回路の使用状況</value>
+	</data>
+	<data name="CommandFileOpenRecent" xml:space="preserve">
+		<value>最近使用したファイルを開く</value>
+	</data>
+	<data name="CommandEditCopy" xml:space="preserve">
+		<value>コピー</value>
+	</data>
+	<data name="CommandEditCut" xml:space="preserve">
+		<value>カット</value>
+	</data>
+	<data name="CommandEditDecreaseFontSize" xml:space="preserve">
+		<value>フォントを大きく</value>
+	</data>
+	<data name="CommandEditDecreaseIndentation" xml:space="preserve">
+		<value>インデントを小さく</value>
+	</data>
+	<data name="CommandEditDelete" xml:space="preserve">
+		<value>削除</value>
+	</data>
+	<data name="CommandEditIncreaseFontSize" xml:space="preserve">
+		<value>フォントを大きく</value>
+	</data>
+	<data name="CommandEditIncreaseIndentation" xml:space="preserve">
+		<value>インデントを大きく</value>
+	</data>
+	<data name="CommandEditItalic" xml:space="preserve">
+		<value>イタリック</value>
+	</data>
+	<data name="CommandEditPaste" xml:space="preserve">
+		<value>貼り付け</value>
+	</data>
+	<data name="CommandEditRedo" xml:space="preserve">
+		<value>やり直し</value>
+	</data>
+	<data name="CommandEditUnderline" xml:space="preserve">
+		<value>下線</value>
+	</data>
+	<data name="TitleCredits" xml:space="preserve">
+		<value>作者:</value>
+	</data>
+	<data name="CircuitProbeToolTip" xml:space="preserve">
+		<value>プローブ {0}</value>
+	</data>
+	<data name="TitleCheckVersionPeriodically" xml:space="preserve">
+		<value>新しいバージョンを定期的に調べる</value>
+	</data>
+	<data name="ErrorClipboardCorrupted" xml:space="preserve">
+		<value>クリップボードのデータが壊れているためペーストできません。</value>
+	</data>
+	<data name="MessageTruthTableTooBig" xml:space="preserve">
+		<value>真理値表が大きすぎるので省略されました。フィルタを使って回路の検証をしてください。</value>
+	</data>
+	<data name="TitleApply" xml:space="preserve">
+		<value>適用</value>
+	</data>
+	<data name="ColorPickerCaptionAvailable" xml:space="preserve">
+		<value>利用可能な色:</value>
+	</data>
+	<data name="ColorPickerCaptionRecent" xml:space="preserve">
+		<value>最近使用した色:</value>
+	</data>
+	<data name="ColorPickerCaptionSelectCustom" xml:space="preserve">
+		<value>選択</value>
+	</data>
+	<data name="ColorPickerCaptionStandard" xml:space="preserve">
+		<value>標準色:</value>
+	</data>
+	<data name="ColorPickerTabCustom" xml:space="preserve">
+		<value>カスタム</value>
+	</data>
+	<data name="ColorPickerTabStandard" xml:space="preserve">
+		<value>標準</value>
+	</data>
+	<data name="ToolTipBackgroundColor" xml:space="preserve">
+		<value>蛍光ペンの色:</value>
+	</data>
+	<data name="TitleCulture" xml:space="preserve">
+		<value>言語</value>
+	</data>
+	<data name="CommandEditAlignCenter" xml:space="preserve">
+		<value>中央揃え</value>
+	</data>
+	<data name="CommandHyperlink" xml:space="preserve">
+		<value>ハイパーリンク</value>
+	</data>
+	<data name="ErrorHyperlinkText" xml:space="preserve">
+		<value>ハイパーリンクの表示名が空です</value>
+	</data>
+	<data name="ErrorHyperlinkUrl" xml:space="preserve">
+		<value>ハイバーリンクのアドレスが不正です</value>
+	</data>
+	<data name="TitleHyperlink" xml:space="preserve">
+		<value>リンク先:</value>
+	</data>
+	<data name="TitleText" xml:space="preserve">
+		<value>表示名</value>
+	</data>
+	<data name="TitleFilter" xml:space="preserve">
+		<value>フィルタ:</value>
+	</data>
+	<data name="TitleInvert" xml:space="preserve">
+		<value>反転</value>
+	</data>
+	<data name="CommandInsertImage" xml:space="preserve">
+		<value>画像</value>
+	</data>
+	<data name="CommandEditBullets" xml:space="preserve">
+		<value>箇条書き</value>
+	</data>
+	<data name="CommandEditNumbering" xml:space="preserve">
+		<value>段落番号</value>
+	</data>
+	<data name="CommandEditAlignJustify" xml:space="preserve">
+		<value>両端揃え</value>
+	</data>
+	<data name="CommandFileClose" xml:space="preserve">
+		<value>終了</value>
+	</data>
+	<data name="MemoryOnStartData" xml:space="preserve">
+		<value>回路の電源をオフにしてもメモリの内容を保持する</value>
+	</data>
+	<data name="MemoryOnStartOnes" xml:space="preserve">
+		<value>すべてのビットを1にする</value>
+	</data>
+	<data name="MemoryOnStartZeros" xml:space="preserve">
+		<value>すべてのビットを0にする</value>
+	</data>
+	<data name="ToolTipFontFamily" xml:space="preserve">
+		<value>フォント名</value>
+	</data>
+	<data name="TitleIsMaximumSpeed2" xml:space="preserve">
+		<value>CPU負荷が高くなります</value>
+	</data>
+	<data name="TitleProject" xml:space="preserve">
+		<value>プロジェクト</value>
+	</data>
+	<data name="TitleRunningCircuit" xml:space="preserve">
+		<value>実行中の回路</value>
+	</data>
+	<data name="TitleZoom" xml:space="preserve">
+		<value>拡大率:</value>
+	</data>
+	<data name="ToolTipAddressBitWidth" xml:space="preserve">
+		<value>アドレス端子のビット幅を選択してください。</value>
+	</data>
+	<data name="ToolTipButtonNotation" xml:space="preserve">
+		<value>ボタンの表示名を入力</value>
+	</data>
+	<data name="ToolTipConstantBitWidth" xml:space="preserve">
+		<value>定数のビット幅を選択してください。</value>
+	</data>
+	<data name="ToolTipConstantValue" xml:space="preserve">
+		<value>定数の初期値を入力</value>
+	</data>
+	<data name="ToolTipDataBitWidth" xml:space="preserve">
+		<value>データ端子のビット幅を選択してください。</value>
+	</data>
+	<data name="ToolTipFrequency" xml:space="preserve">
+		<value>実行中の回路のクロック周波数を変更します。</value>
+	</data>
+	<data name="MemoryOnStartRandom" xml:space="preserve">
+		<value>ランダム</value>
+	</data>
+	<data name="ToolTipSensorBitWidth" xml:space="preserve">
+		<value>センサのビット幅を選択してください。</value>
+	</data>
+	<data name="ToolTipSensorNotation" xml:space="preserve">
+		<value>センサの表示名を入力</value>
+	</data>
+	<data name="TitleSensorType" xml:space="preserve">
+		<value>センサのタイプ</value>
+	</data>
+	<data name="ToolTipCurrentZoom" xml:space="preserve">
+		<value>現在の拡大率:</value>
+	</data>
+	<data name="ToolTipSensorType" xml:space="preserve">
+		<value>センサが出力するデータの生成方法を選択してください。</value>
+	</data>
+	<data name="ErrorBadInterval" xml:space="preserve">
+		<value>最小値は最大値よりも大きくできません。</value>
+	</data>
+	<data name="ErrorBadPositiveNumber" xml:space="preserve">
+		<value>0より大きな数を入れる必要があります。</value>
+	</data>
+	<data name="ErrorEmptySeries" xml:space="preserve">
+		<value>データ列は空にできません。</value>
+	</data>
+	<data name="ErrorSeriesItem" xml:space="preserve">
+		<value>{0} にエラーがあります。コロン(:)で区切られた十六進数を入力してください。</value>
+	</data>
+	<data name="ErrorSeriesItemOrder" xml:space="preserve">
+		<value>{0} にエラーがあります。</value>
+	</data>
+	<data name="TitleLoopSeries" xml:space="preserve">
+		<value>データ列を繰り返す</value>
+	</data>
+	<data name="TitleSensorRandomMax" xml:space="preserve">
+		<value>最大クロック数:</value>
+	</data>
+	<data name="TitleSensorRandomMin" xml:space="preserve">
+		<value>最小クロック数:</value>
+	</data>
+	<data name="TitleSeries" xml:space="preserve">
+		<value>データ列:</value>
+	</data>
+	<data name="ToolTipSensorRandomMax" xml:space="preserve">
+		<value>センサの測定値が変化するまでの最大クロック数を入力してください。</value>
+	</data>
+	<data name="ToolTipSensorRandomMin" xml:space="preserve">
+		<value>センサの測定値が変化するまでの最小クロック数を入力してください。</value>
+	</data>
+	<data name="ToolTipSeriesData" xml:space="preserve">
+		<value>&lt;サイクル数&gt;:&lt;値&gt; の形式でセンサの測定値を入力してください。サイクル数と値はどちらも十六進数です。
+サイクル数が偶数もしくは0の場合、センサの値はクロックが0から1に変化するタイミングで変化します。奇数を指定するとクロックが1から0に変化するタイミングで変化します。</value>
+	</data>
+	<data name="NameSound" xml:space="preserve">
+		<value>ブザー</value>
+	</data>
+	<data name="ToolTipSound" xml:space="preserve">
+		<value>ブザー {0}</value>
+	</data>
+	<data name="ToolTipSoundNotation" xml:space="preserve">
+		<value>ブザーの表示名を入力してください</value>
+	</data>
+	<data name="Gate7SegName" xml:space="preserve">
+		<value>7セグメントLED</value>
+	</data>
+	<data name="TitleIsToggle" xml:space="preserve">
+		<value>トグル式</value>
+	</data>
+	<data name="ToolTipIsToggle" xml:space="preserve">
+		<value>ボタンをトグル式にすると、クリックするたびに状態が変化します。トグル式でない場合は押しているか押していないかで状態が決まります。</value>
+	</data>
+	<data name="GateTriStateName" xml:space="preserve">
+		<value>3ステートバッファ</value>
+	</data>
+	<data name="MemoryDataInPinName" xml:space="preserve">
+		<value>メモリ入力データ</value>
+	</data>
+	<data name="MemoryDataPinName" xml:space="preserve">
+		<value>メモリのデータ</value>
+	</data>
+	<data name="Ready" xml:space="preserve">
+		<value>準備完了</value>
+	</data>
+	<data name="TitleNo" xml:space="preserve">
+		<value>いいえ</value>
+	</data>
+	<data name="TitleShowDetails" xml:space="preserve">
+		<value>詳細を表示</value>
+	</data>
+	<data name="TitleYes" xml:space="preserve">
+		<value>はい</value>
+	</data>
+	<data name="WriteOn0" xml:space="preserve">
+		<value>1から0への立下り</value>
+	</data>
+	<data name="WriteOn1" xml:space="preserve">
+		<value>0から1への立上り</value>
+	</data>
+	<data name="CaptionAddressBitWidth" xml:space="preserve">
+		<value>アドレスのビット数</value>
+	</data>
+	<data name="CaptionBitWidth" xml:space="preserve">
+		<value>ビット幅</value>
+	</data>
+	<data name="CaptionDataBitWidth" xml:space="preserve">
+		<value>データのビット数</value>
+	</data>
+	<data name="CaptionSplitterPinNumber" xml:space="preserve">
+		<value>分割端子数</value>
+	</data>
+	<data name="CaptionSplitterDirection" xml:space="preserve">
+		<value>結合端子の方向</value>
+	</data>
+	<data name="ToolTipDescriptorText" xml:space="preserve">
+		<value>回路を説明するために好きな場所にテキストメモを配置することができます。メモにはウェブサイトへのリンク、画像などを含めることもできます。</value>
+	</data>
+	<data name="ToolTipDescriptorTriState" xml:space="preserve">
+		<value>1、0、ハイインピーダンス(Z) を出力することができます。
+ハイインピーダンス状態は回路に何の影響も及ぼさないため、二進数であることに変わりはありません。
+3ステートバッファはCPUのバスなどで複数の装置がデータを送信できるようにするために使用されます。
+一つの信号線を適切な制御回路を使って複数の3ステートバッファで制御すると、マルチプレクサとして動作します。</value>
+	</data>
+	<data name="ToolTipSensorManualValue" xml:space="preserve">
+		<value>十六進数を入力してエンターキーを押してください。</value>
+	</data>
+	<data name="ErrorBadHexNumber" xml:space="preserve">
+		<value>不正な十六進数です。</value>
+	</data>
+	<data name="TitleSensorManualInitialValue" xml:space="preserve">
+		<value>初期値:</value>
+	</data>
+	<data name="ToolTipSensorManualInitialValue" xml:space="preserve">
+		<value>初期値を十六進数で入力できます。</value>
+	</data>
+	<data name="NameGraphicsArray" xml:space="preserve">
+		<value>グラフィックディスプレイ</value>
+	</data>
+	<data name="CaptionGraphicsArrayBPP" xml:space="preserve">
+		<value>ビット/ピクセル</value>
+	</data>
+	<data name="ToolTipDescriptorGraphicsArray" xml:space="preserve">
+		<value>(ドットマトリクスディスプレイ)は内蔵メモリに保持されたデータを表示する装置です。CPUやコントローラーのような高度な回路が必要です。
+サイズを変えたり、以下のように色数を変更することができます:
+1ビット/ピクセル - 白黒
+2ビット/ピクセル - グレースケール(4階調)
+4ビット/ピクセル - 16色
+8ビット/ピクセル - 256色</value>
+	</data>
+	<data name="ToolTipGraphicsArray" xml:space="preserve">
+		<value>{0} {1}x{2} {3}ビット/ピクセル ({4}色)</value>
+	</data>
+	<data name="ToolTipGraphicsArrayBPP" xml:space="preserve">
+		<value>ピクセルごとのビット数を選択してください。</value>
+	</data>
+	<data name="ErrorBadIntegerInRange" xml:space="preserve">
+		<value>{0}から{1}の範囲で数値を入力してください。</value>
+	</data>
+	<data name="TitleGraphicsArrayBPP" xml:space="preserve">
+		<value>ビット/ピクセル:</value>
+	</data>
+	<data name="TitleHeight" xml:space="preserve">
+		<value>縦幅:</value>
+	</data>
+	<data name="TitleWidth" xml:space="preserve">
+		<value>横幅:</value>
+	</data>
+	<data name="ToolTipGraphicsArrayHeight" xml:space="preserve">
+		<value>グラフィックディスプレイの縦ピクセル数を入力してください。</value>
+	</data>
+	<data name="ToolTipGraphicsArrayWidth" xml:space="preserve">
+		<value>グラフィックディスプレイの横ピクセル数を入力してください。</value>
+	</data>
+	<data name="ToolTipConstant" xml:space="preserve">
+		<value>{0} ビットの定数 {1:X}</value>
+	</data>
+	<data name="ErrorWriteNotConnected" xml:space="preserve">
+		<value>グラフィックディスプレイ {0} の書き込み入力端子が接続されていません</value>
+	</data>
+	<data name="ErrorBadHexInRange" xml:space="preserve">
+		<value>{0:X}から{1:X}の範囲で数値を入力してください。</value>
+	</data>
+	<data name="CommandFileFileImport" xml:space="preserve">
+		<value>読み込み...</value>
+	</data>
+	<data name="ImportTitle" xml:space="preserve">
+		<value>読み込み</value>
+	</data>
+	<data name="TitleFileName" xml:space="preserve">
+		<value>ファイル:</value>
+	</data>
+	<data name="TitleImportCircuit" xml:space="preserve">
+		<value>読み込み</value>
+	</data>
+	<data name="TitleCheckAll" xml:space="preserve">
+		<value>すべて選択</value>
+	</data>
+	<data name="TitleUncheckAll" xml:space="preserve">
+		<value>すべて選択解除</value>
+	</data>
+	<data name="ImageFileFilter" xml:space="preserve">
+		<value>画像ファイル (*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif)|*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif|すべてのファイル (*.*)|*.*</value>
+	</data>
+	<data name="ImagePathInvalid" xml:space="preserve">
+		<value>入力されたファイル名が不正です。親フォルダが存在するか、ファイル名が正しいかをチェックして下さい。</value>
+	</data>
+	<data name="MessageExportImageDialog" xml:space="preserve">
+		<value>回路を出力する画像のフォーマットやファイル名を選択してください。</value>
+	</data>
+	<data name="MessageImageFileExists" xml:space="preserve">
+		<value>ファイル "{0}" はすでに存在しています。
+上書きしてもよいですか？</value>
+	</data>
+	<data name="TitleExportImage" xml:space="preserve">
+		<value>画像の書き出し</value>
+	</data>
+	<data name="TitleFile" xml:space="preserve">
+		<value>ファイル:</value>
+	</data>
+	<data name="TriStateGroupName" xml:space="preserve">
+		<value>3ステートグループ</value>
+	</data>
+	<data name="TextNotation" xml:space="preserve">
+		<value>テキストメモ</value>
+	</data>
+	<data name="CommandCircuitPower" xml:space="preserve">
+		<value>電源スイッチ</value>
+	</data>
+	<data name="CircuitProbeName" xml:space="preserve">
+		<value>プローブ</value>
+	</data>
+	<data name="CaptionNotation" xml:space="preserve">
+		<value>表示名</value>
+	</data>
+	<data name="TitlePinInput" xml:space="preserve">
+		<value>{0}
+入力</value>
+	</data>
+	<data name="TitlePinOutput" xml:space="preserve">
+		<value>{0}
+出力</value>
+	</data>
+	<data name="CommandHelpAbout" xml:space="preserve">
+		<value>このプログラムについて</value>
+	</data>
+	<data name="CommandToolsOptions" xml:space="preserve">
+		<value>オプション</value>
+	</data>
+	<data name="ToolTipPinSide" xml:space="preserve">
+		<value>配置された端子が回路の外観上のどの方向に表示されるかを選択してください。</value>
+	</data>
+	<data name="ToolTipSplitterBitWidth" xml:space="preserve">
+		<value>分配器の分配側端子のビット幅を選択してください。</value>
+	</data>
+	<data name="ToolTipSplitterPinNumber" xml:space="preserve">
+		<value>分配器の分配数を選択してください。</value>
+	</data>
+	<data name="ToolTipSplitterRotation" xml:space="preserve">
+		<value>分配器の結合端子をどちら側に配置するかを選択してください。</value>
+	</data>
+	<data name="ToolTipGateInputCount" xml:space="preserve">
+		<value>ゲートの入力端子数を選択してください。</value>
+	</data>
+	<data name="ToolTipIsMaximumSpeed1" xml:space="preserve">
+		<value>上のスライダの設定を無視して、可能な限り最大の速さで回路を動作させます。</value>
+	</data>
+	<data name="ToolTipIsMaximumSpeed2" xml:space="preserve">
+		<value>このチェックをオンにすると、コンピュータによってはユーザーインターフェースが操作できなくなることがあります。</value>
+	</data>
+	<data name="ToolTipPinBitWidth" xml:space="preserve">
+		<value>端子のビット幅を選択してください。</value>
+	</data>
+	<data name="ToolTipZoom" xml:space="preserve">
+		<value>回路図の拡大率を設定します。</value>
+	</data>
+	<data name="TitleLoad" xml:space="preserve">
+		<value>読み込み...</value>
+	</data>
+	<data name="CaptionTextNote1" xml:space="preserve">
+		<value>テキスト</value>
+	</data>
+	<data name="CaptionTextNote2" xml:space="preserve">
+		<value>メモ</value>
+	</data>
+	<data name="CaptionValue" xml:space="preserve">
+		<value>値</value>
+	</data>
+	<data name="TitleOscilloscoping" xml:space="preserve">
+		<value>オシロスコープを作動</value>
+	</data>
+	<data name="TitleMemoryOnStart" xml:space="preserve">
+		<value>メモリの初期値:</value>
+	</data>
+	<data name="ToolTipMemoryOnStart" xml:space="preserve">
+		<value>回路の電源がオンになったときのRAMの初期化方法を選択してください。</value>
+	</data>
+	<data name="ErrorManyMemoryData" xml:space="preserve">
+		<value>回路 {0} は以前動作した時のデータを保持するように設定した {1} を含んでいます。
+このような回路を他の回路に二つ以上配置することはできません（一つのメモリモジュールに異なる複数のデータを書き込む可能性があるため）。</value>
+	</data>
+	<data name="MessageRestartRequared" xml:space="preserve">
+		<value>言語選択が変更されました。新しい設定を有効にするためにはアプリケーションを再起動する必要があります。</value>
+	</data>
+	<data name="TitleIsDisplay" xml:space="preserve">
+		<value>回路のシンボルにビジュアル要素を表示する</value>
+	</data>
+	<data name="ToolTipIsDisplay" xml:space="preserve">
+		<value>ビジュアル要素を表示するように回路を設定すると、この回路上にあるすべての表示要素がこの回路のシンボルとしても見えるようになります。
+表示要素とは、LED、LEDマトリクス、グラフィックディスプレイ、ボタン、そしてビジュアル要素を表示するように設定された他の回路のことです。</value>
+	</data>
+	<data name="ToolTipDescriptorClock" xml:space="preserve">
+		<value>0と1を繰り返し出力する発振器です。回路を協調動作させるために使われます。</value>
+	</data>
+	<data name="ToolTipDescriptorPin" xml:space="preserve">
+		<value>他の回路がこの回路にデータを入力したり出力するための端子を配置できます。
+端子を再配置すると、回路のシンボル上の端子位置を変更することができます。</value>
+	</data>
+	<data name="ToolTipDescriptorProbe" xml:space="preserve">
+		<value>回路上にプローブを追加して接続すると、動作中の回路の状態がプローブ上に表示されるようになります。また、オシロスコープで値を見たり、プローブをダブルクリックすることで過去の値の変化を確認することもできます。</value>
+	</data>
+	<data name="ToolTipDescriptorSensor" xml:space="preserve">
+		<value>事前に設定したデータ列、ランダム値、手動で入力した値を、あたかも外部から取り込まれたデータとして入力することができます。</value>
+	</data>
+	<data name="CategoryPrimitives" xml:space="preserve">
+		<value>論理回路の要素</value>
+	</data>
+	<data name="ProjectSummary" xml:space="preserve">
+		<value>{1} 個のカテゴリに {0} 個の回路があり、{2} 個のシンボルと {3} 本の配線を使用しています。</value>
+	</data>
+	<data name="TitleMaxRecentFiles" xml:space="preserve">
+		<value>最近使用したファイルの履歴に表示する数</value>
+	</data>
+	<data name="ReportError" xml:space="preserve">
+		<value>以下のエラーのため、機能の診断をすることができません: {0}</value>
+	</data>
+	<data name="ReportFunctions" xml:space="preserve">
+		<value>回路 {0} に含まれる機能</value>
+	</data>
+	<data name="TitleCount" xml:space="preserve">
+		<value>数</value>
+	</data>
+	<data name="TitleFunction" xml:space="preserve">
+		<value>機能</value>
+	</data>
+	<data name="LogicalCircuitMainNotation" xml:space="preserve">
+		<value>メイン</value>
+	</data>
+	<data name="ToolTipDescriptorSplitter" xml:space="preserve">
+		<value>いくつかの配線を一つに束ねたり、束ねられた配線を個別の配線に分けることができます。
+分配器や多ビット端子を使えば回路を簡単に描くことができ、理解もしやすくなります。</value>
+	</data>
+	<data name="ToolTipRAM" xml:space="preserve">
+		<value>RAM アドレス幅 {0}ビット / データ幅 {1}ビット</value>
+	</data>
+	<data name="ToolTipROM" xml:space="preserve">
+		<value>ROM アドレス幅 {0}ビット / データ幅 {1}ビット</value>
+	</data>
+	<data name="ToolTipSplitter" xml:space="preserve">
+		<value>{0}ビット幅の信号を{1}分割する分配器</value>
+	</data>
+	<data name="ToolTipWire" xml:space="preserve">
+		<value>配線</value>
+	</data>
+	<data name="TitleSide" xml:space="preserve">
+		<value>端子の位置:</value>
+	</data>
+	<data name="TitleType" xml:space="preserve">
+		<value>タイプ:</value>
+	</data>
+	<data name="CaptionSplitterBitWidth" xml:space="preserve">
+		<value>端子のビット幅</value>
+	</data>
+	<data name="CaptionNote" xml:space="preserve">
+		<value>メモ</value>
+	</data>
+	<data name="LedMatrixColumnSelector" xml:space="preserve">
+		<value>{0}列目の選択(色指定)用</value>
+	</data>
+	<data name="LedMatrixRowIndividual" xml:space="preserve">
+		<value>{0}行目のそれぞれのLEDの選択(色指定)用</value>
+	</data>
+	<data name="LedMatrixRowSelector" xml:space="preserve">
+		<value>{0}行目の選択用</value>
+	</data>
+	<data name="LedMatrixTypeSelector" xml:space="preserve">
+		<value>セレクタ方式</value>
+	</data>
+	<data name="TitleCellShape" xml:space="preserve">
+		<value>セルの形状:</value>
+	</data>
+	<data name="TitleColumns" xml:space="preserve">
+		<value>列数:</value>
+	</data>
+	<data name="TitleRows" xml:space="preserve">
+		<value>行数:</value>
+	</data>
+	<data name="ToolTipLedMatrixType" xml:space="preserve">
+		<value>LEDマトリクスの制御方式を選択してください。</value>
+	</data>
+	<data name="TitleColors" xml:space="preserve">
+		<value>色数(ビット数):</value>
+	</data>
+	<data name="ToolTipInputPin" xml:space="preserve">
+		<value>{0}ビットの入力端子 ({1})</value>
+	</data>
+	<data name="ToolTipNonePin" xml:space="preserve">
+		<value>{0}ビット ({1})</value>
+	</data>
+	<data name="ToolTipOutputPin" xml:space="preserve">
+		<value>{0}ビットの出力端子 ({1})</value>
+	</data>
+	<data name="TitleShowGrid" xml:space="preserve">
+		<value>グリッドを表示</value>
+	</data>
+	<data name="MessageFreeWireCount" xml:space="preserve">
+		<value>接続されていない配線が{0}本見つかりました。</value>
+	</data>
+	<data name="MessageFloatingSymbolCount" xml:space="preserve">
+		<value>接続されていないシンボルが{0}個見つかりました。</value>
+	</data>
+	<data name="TitleLoadLastFile" xml:space="preserve">
+		<value>起動時に前回のファイルを開く</value>
+	</data>
+	<data name="DefaultGateShape" xml:space="preserve">
+		<value>Shaped</value>
+	</data>
+	<data name="MessageInputOutputPinsMissing" xml:space="preserve">
+		<value>回路に入力端子と出力端子が必要です。真理値表は入力端子にすべての組み合わせを入力し、出力端子から結果を読みとることで作られます。</value>
+	</data>
+	<data name="ReportMemoryName" xml:space="preserve">
+		<value>{0}: アドレス幅 {1}ビット / データ幅 {2}ビット</value>
+	</data>
+	<data name="CaptionSide" xml:space="preserve">
+		<value>端子の位置</value>
+	</data>
+	<data name="MenuHeaderCircuit" xml:space="preserve">
+		<value>回路</value>
+	</data>
+	<data name="TitleTotalRows" xml:space="preserve">
+		<value>総行数: {0:N0}</value>
+	</data>
+	<data name="TitleStop" xml:space="preserve">
+		<value>停止</value>
+	</data>
+	<data name="CircuitProjectName" xml:space="preserve">
+		<value>回路プロジェクト</value>
+	</data>
+	<data name="ToolTipPinNotation" xml:space="preserve">
+		<value>この端子の名前を短い文字列で入力してください。名前はシンボルじょうで端子の隣に表示されます。</value>
+	</data>
+	<data name="GateShapeShaped" xml:space="preserve">
+		<value>記号</value>
+	</data>
+	<data name="TitleGateShape" xml:space="preserve">
+		<value>ゲートの形状</value>
+	</data>
+	<data name="TitleWriteOn" xml:space="preserve">
+		<value>書き込みタイミング:</value>
+	</data>
+	<data name="GateClockName" xml:space="preserve">
+		<value>クロック</value>
+	</data>
+	<data name="SplitterThin1PinName" xml:space="preserve">
+		<value>(結合端子のビット{0})</value>
+	</data>
+	<data name="SplitterThin2PinName" xml:space="preserve">
+		<value>(結合端子のビット{0}-{1})</value>
+	</data>
+	<data name="ParserErrorUnknownPin" xml:space="preserve">
+		<value>{0} - 入出力端子がみつかりません。</value>
+	</data>
+	<data name="SplitterWidePinName" xml:space="preserve">
+		<value>結合端子</value>
+	</data>
+	<data name="TitleNotation" xml:space="preserve">
+		<value>表示名:</value>
+	</data>
+	<data name="TitleMark" xml:space="preserve">
+		<value>目印を挿入</value>
+	</data>
+	<data name="TitleOK" xml:space="preserve">
+		<value>OK</value>
+	</data>
+	<data name="TitleOscilloscope" xml:space="preserve">
+		<value>回路のオシロスコープ</value>
+	</data>
+	<data name="TitleSearchPattern" xml:space="preserve">
+		<value>検索内容:</value>
+	</data>
+	<data name="ErrorFileCorrupted" xml:space="preserve">
+		<value>ファイル "{0}" は壊れているため読み込めません。</value>
+	</data>
+	<data name="ErrorUnsupportedUri" xml:space="preserve">
+		<value>このアドレスは開けません。</value>
+	</data>
+	<data name="LogicalCircuitMainName" xml:space="preserve">
+		<value>メイン</value>
+	</data>
+	<data name="LogicalCircuitName" xml:space="preserve">
+		<value>回路</value>
+	</data>
+	<data name="MainFrameCaption" xml:space="preserve">
+		<value>回路 {0}</value>
+	</data>
+	<data name="MemoryWritePinName" xml:space="preserve">
+		<value>RAMの書き込み端子。
+メモリの値は{0}のタイミングで更新されます。</value>
+	</data>
+	<data name="TitleDisplayedRows" xml:space="preserve">
+		<value>表示されている行数: {0:N0}</value>
+	</data>
+	<data name="TitleCircuitDescriptor" xml:space="preserve">
+		<value>回路</value>
+	</data>
+	<data name="ToolTipRamWriteOn" xml:space="preserve">
+		<value>メモリの書き込みタイミングを選択してください。</value>
+	</data>
+	<data name="ParserEOS" xml:space="preserve">
+		<value>式の終わり</value>
+	</data>
+	<data name="ParserErrorCloseParenMissing" xml:space="preserve">
+		<value>{0}までに ')' がありません。</value>
+	</data>
+	<data name="ParserErrorExpressionMissing" xml:space="preserve">
+		<value>{0}のあとに式がありません。</value>
+	</data>
+	<data name="ParserErrorInvalidNumber" xml:space="preserve">
+		<value>不正な数値: {0}</value>
+	</data>
+	<data name="ParserErrorUnclosedQuote" xml:space="preserve">
+		<value>引用されたID({0})の引用符が閉じていません。</value>
+	</data>
+	<data name="ParserErrorUnexpected" xml:space="preserve">
+		<value>{0}が不正に現れました。</value>
+	</data>
+	<data name="ParserErrorUnknownChar" xml:space="preserve">
+		<value>不正な文字: {0}</value>
+	</data>
+	<data name="GateAndName" xml:space="preserve">
+		<value>AND</value>
+	</data>
+	<data name="GateAndNotName" xml:space="preserve">
+		<value>NAND</value>
+	</data>
+	<data name="GateNotName" xml:space="preserve">
+		<value>NOT</value>
+	</data>
+	<data name="GateOrName" xml:space="preserve">
+		<value>OR</value>
+	</data>
+	<data name="GateOrNotName" xml:space="preserve">
+		<value>NOR</value>
+	</data>
+	<data name="GateXorName" xml:space="preserve">
+		<value>XOR</value>
+	</data>
+	<data name="GateXorNotName" xml:space="preserve">
+		<value>XNOR</value>
+	</data>
+	<data name="RAMNotation" xml:space="preserve">
+		<value>RAM</value>
+	</data>
+	<data name="ROMNotation" xml:space="preserve">
+		<value>ROM</value>
+	</data>
+</root>
