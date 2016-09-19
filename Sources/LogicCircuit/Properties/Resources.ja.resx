@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
 	<!-- 
 		Microsoft ResX Schema
@@ -235,10 +235,10 @@
 		<value>メモリ {0} のデータに接続されていないビットがあります。</value>
 	</data>
 	<data name="ErrorJamBitWidthDifferent" xml:space="preserve">
-		<value>{4} にある {0} の入力端子 ({1}) と、{2} の出力端子 ({3}) のビット幅が異なるため接続できません。修正してください。 </value>
+		<value>{4} にある {0} の入力端子 ({1}) と、{2} の出力端子 ({3}) のビット幅が異なるため接続できません。修正してください。</value>
 	</data>
 	<data name="ErrorLoopInCircuit" xml:space="preserve">
-		<value>回路「{0}」にある回路「{1}」が無限ループになっています。修正してください。 </value>
+		<value>回路「{0}」にある回路「{1}」が無限ループになっています。修正してください。</value>
 	</data>
 	<data name="ErrorManyResults" xml:space="preserve">
 		<value>{1} の入力端子 {0} が、3ステートでない複数の出力端子に接続されています。</value>
