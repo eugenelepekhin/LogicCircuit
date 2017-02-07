@@ -1,0 +1,32 @@
+﻿<Window x:Class="LogicCircuit.ScriptConsole"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:lc="clr-namespace:LogicCircuit"
+	xmlns:properties="clr-namespace:LogicCircuit.Properties"
+	Title="ScriptConsole"
+	Style="{StaticResource DialogWindow}"
+	Left="{Binding Path=WindowLocation.X, Mode=TwoWay}"
+	Top="{Binding Path=WindowLocation.Y, Mode=TwoWay}"
+	WindowState="{Binding Path=WindowLocation.WindowState, Mode=TwoWay}"
+	FocusManager.FocusedElement="{Binding ElementName=textBoxCommand}"
+>
+	<Window.Resources>
+		<Style TargetType="TextBox">
+			<Setter Property="Margin" Value="0"/>
+			<Setter Property="Padding" Value="3,2"/>
+			<!--<Setter Property="TextWrapping" Value="Wrap"/>-->
+			<Setter Property="FontFamily" Value="Consolas"/>
+			<Setter Property="FontSize" Value="14"/>
+		</Style>
+	</Window.Resources>
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+		<TextBox Grid.Row="0" Name="textBoxLog" BorderThickness="0" MinLines="5" AcceptsReturn="True" IsReadOnly="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"/>
+		<TextBox Grid.Row="1" Name="textBoxCommand" BorderThickness="0" PreviewKeyDown="textBoxCommandKeyDown"/>
+	</Grid>
+</Window>

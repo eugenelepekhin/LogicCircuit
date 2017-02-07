@@ -121,6 +121,7 @@
 
 		<CommandBinding Command="{x:Static lc:CustomCommands.ToolsReport}" Executed="ToolsReportCommandExecuted"/>
 		<CommandBinding Command="{x:Static lc:CustomCommands.ToolsOscilloscope}" Executed="ToolsOscilloscopeCommandExecuted" CanExecute="ToolsOscilloscopeCommandCanExecute"/>
+		<CommandBinding Command="{x:Static lc:CustomCommands.ToolsIronPython}" Executed="ToolsIronPythonCommandExecuted" CanExecute="ToolsIronPythonCommandCanExecute"/>
 		<CommandBinding Command="{x:Static lc:CustomCommands.ToolsOptions}" Executed="ToolsOptionsCommandExecuted" CanExecute="ToolsOptionsCommandCanExecuted"/>
 
 		<CommandBinding Command="ApplicationCommands.Help" Executed="HelpContentCommandExecuted"/>
@@ -196,6 +197,7 @@
             <MenuItem Header="{x:Static properties:Resources.MenuHeaderTools}">
 				<MenuItem Command="lc:CustomCommands.ToolsReport"/>
 				<MenuItem Command="lc:CustomCommands.ToolsOscilloscope"/>
+				<MenuItem Command="lc:CustomCommands.ToolsIronPython"/>
 				<MenuItem Command="lc:CustomCommands.ToolsOptions"/>
 			</MenuItem>
 			<MenuItem Header="{x:Static properties:Resources.MenuHeaderHelp}">

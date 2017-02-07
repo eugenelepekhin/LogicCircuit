@@ -660,6 +660,26 @@ namespace LogicCircuit {
 			}
 		}
 
+		private void ToolsIronPythonCommandExecuted(object target, ExecutedRoutedEventArgs e) {
+			try {
+				if(this.Editor != null) {
+					ScriptConsole.Run(this);
+				}
+			} catch(Exception exception) {
+				Tracer.Report("Mainframe.ToolsIronPythonCommandExecuted", exception);
+				this.ReportException(exception);
+			}
+		}
+
+		private void ToolsIronPythonCommandCanExecute(object target, CanExecuteRoutedEventArgs e) {
+			try {
+				e.CanExecute = (this.Editor != null);
+			} catch(Exception exception) {
+				Tracer.Report("Mainframe.ToolsIronPythonCommandCanExecute", exception);
+				this.ReportException(exception);
+			}
+		}
+
 		private void ToolsOptionsCommandExecuted(object target, ExecutedRoutedEventArgs e) {
 			try {
 				if(this.Editor != null && this.Editor.InEditMode) {

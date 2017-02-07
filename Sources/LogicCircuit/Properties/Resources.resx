@@ -1457,4 +1457,8 @@ Allows to select size and color depth/scheme:
     <value>Expecting number in range {0:X} - {1:X}.</value>
     <comment>{int min, int max}</comment>
   </data>
+  <data name="CommandToolsIronPython" xml:space="preserve">
+    <value>IronPython Console</value>
+    <comment>Do not translate IronPython</comment>
+  </data>
 </root>

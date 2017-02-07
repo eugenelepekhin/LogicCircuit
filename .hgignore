@@ -9,3 +9,5 @@ glob:*.vsp
 glob:*.psess
 glob:*.msi
 glob:*.orig
+syntax: glob
+Sources/packages/*

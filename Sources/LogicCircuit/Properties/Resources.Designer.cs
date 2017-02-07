@@ -2983,5 +2983,12 @@ namespace LogicCircuit.Properties {
  		public static string ErrorBadHexInRange(int min, int max) {
 			return string.Format(FormatCulture, ResourceManager.GetString("ErrorBadHexInRange", Culture), min, max);
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to IronPython Console.
+		/// </summary>
+ 		public static string CommandToolsIronPython {
+			get { return ResourceManager.GetString("CommandToolsIronPython", Culture); }
+		}
 	}
 }

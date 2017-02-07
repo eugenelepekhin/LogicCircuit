@@ -38,6 +38,7 @@ namespace LogicCircuit {
 
 		public static readonly RoutedUICommand ToolsReport = Create("CommandToolsReport");
 		public static readonly RoutedUICommand ToolsOscilloscope = Create("CommandToolsOscilloscope");
+		public static readonly RoutedUICommand ToolsIronPython = Create("CommandToolsIronPython");
 		public static readonly RoutedUICommand ToolsOptions = Create("CommandToolsOptions");
 
 		public static readonly RoutedUICommand HelpAbout = Create("CommandHelpAbout");
