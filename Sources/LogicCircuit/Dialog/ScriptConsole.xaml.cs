@@ -74,6 +74,7 @@ namespace LogicCircuit {
 					if(result != null) {
 						this.writer.WriteLine(result.ToString());
 					}
+					this.textBoxLog.ScrollToEnd();
 				} catch(Exception exception) {
 					this.writer.WriteLine(exception.Message);
 				}
@@ -147,11 +148,6 @@ namespace LogicCircuit {
 			public override void Write(string value) {
 				if(!string.IsNullOrEmpty(value)) {
 					this.textBox.AppendText(value.Replace("\r", ""));
-					if(value.Contains("\n")) {
-						this.textBox.Select(this.textBox.Text.Length, 0);
-						this.textBox.ScrollToEnd();
-						//Dispatcher.Yield(DispatcherPriority.Normal);
-					}
 				}
 			}
 		}
