@@ -113,12 +113,6 @@ namespace LogicCircuit {
 		}
 
 		private static void InitCommands() {
-			ApplicationCommands.New.Text = LogicCircuit.Properties.Resources.CommandFileNew;
-			ApplicationCommands.Open.Text = LogicCircuit.Properties.Resources.CommandFileOpen;
-			ApplicationCommands.Save.Text = LogicCircuit.Properties.Resources.CommandFileSave;
-			ApplicationCommands.SaveAs.Text = LogicCircuit.Properties.Resources.CommandFileSaveAs;
-			ApplicationCommands.Close.Text = LogicCircuit.Properties.Resources.CommandFileClose;
-
 			ApplicationCommands.Undo.Text = LogicCircuit.Properties.Resources.CommandEditUndo;
 			ApplicationCommands.Redo.Text = LogicCircuit.Properties.Resources.CommandEditRedo;
 			ApplicationCommands.Cut.Text = LogicCircuit.Properties.Resources.CommandEditCut;
@@ -127,8 +121,6 @@ namespace LogicCircuit {
 			ApplicationCommands.Delete.Text = LogicCircuit.Properties.Resources.CommandEditDelete;
 			ApplicationCommands.SelectAll.Text = LogicCircuit.Properties.Resources.CommandEditSelectAll;
 			ApplicationCommands.Find.Text = LogicCircuit.Properties.Resources.CommandEditFind;
-
-			ApplicationCommands.Help.Text = LogicCircuit.Properties.Resources.CommandHelpView;
 
 			// Text editor commands
 			EditingCommands.ToggleBold.Text = LogicCircuit.Properties.Resources.CommandEditBold;

@@ -136,6 +136,20 @@
 				<Setter Property="SnapsToDevicePixels" Value="True"/>
 			</Style>
 
+			<Style TargetType="lc:CommandMenuItem">
+				<Setter Property="Header" Value="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}"/>
+				<Setter Property="InputGestureText" Value="{Binding RelativeSource={RelativeSource Self}, Path=Command.InputGestureText}"/>
+				<Style.Triggers>
+					<MultiDataTrigger>
+						<MultiDataTrigger.Conditions>
+							<Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Items.Count}" Value="0"/>
+							<Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Command}" Value="{x:Null}"/>
+						</MultiDataTrigger.Conditions>
+						<Setter Property="IsEnabled" Value="False"/>
+					</MultiDataTrigger>
+				</Style.Triggers>
+			</Style>
+
 			<Style TargetType="{x:Type Label}">
 				<Setter Property="Margin" Value="3"/>
 				<Setter Property="HorizontalContentAlignment" Value="Right"/>

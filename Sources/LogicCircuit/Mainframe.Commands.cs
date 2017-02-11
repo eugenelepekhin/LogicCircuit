@@ -9,93 +9,31 @@ namespace LogicCircuit {
 			return this.Editor != null && this.Editor.InEditMode;
 		}
 
-		private void FileNewCommandExecuted(object target, ExecutedRoutedEventArgs e) {
-			try {
-				this.New();
-			} catch(Exception exception) {
-				Tracer.Report("Mainframe.FileNewCommandExecuted", exception);
-				this.ReportException(exception);
-			}
-		}
+		public LambdaUICommand CommandNew { get; private set; }
+		public LambdaUICommand CommandOpen { get; private set; }
+		public LambdaUICommand CommandOpenRecent { get; private set; }
+		public LambdaUICommand CommandSave { get; private set; }
+		public LambdaUICommand CommandSaveAs { get; private set; }
+		public LambdaUICommand CommandImport { get; private set; }
+		public LambdaUICommand CommandExportImage { get; private set; }
+		public LambdaUICommand CommandClose { get; private set; }
+		public LambdaUICommand CommandHelp { get; private set; }
+		public LambdaUICommand CommandAbout { get; private set; }
 
-		private void FileOpenCommandExecuted(object target, ExecutedRoutedEventArgs e) {
-			try {
-				this.Open();
-			} catch(Exception exception) {
-				Tracer.Report("Mainframe.FileOpenCommandExecuted", exception);
-				this.ReportException(exception);
-			}
-		}
-
-		private void FileOpenRecentCommandExecuted(object target, ExecutedRoutedEventArgs e) {
-			try {
-				this.OpenRecent(e.Parameter as string);
-			} catch(Exception exception) {
-				Tracer.Report("Mainframe.FileOpenRecentCommandExecuted", exception);
-				this.ReportException(exception);
-			}
-		}
-
-		private void FileSaveCommandExecuted(object target, ExecutedRoutedEventArgs e) {
-			try {
-				this.Save();
-			} catch(Exception exception) {
-				Tracer.Report("Mainframe.FileSaveCommandExecuted", exception);
-				this.ReportException(exception);
-			}
-		}
-
-		private void FileSaveAsCommandExecuted(object target, ExecutedRoutedEventArgs e) {
-			try {
-				this.SaveAs();
-			} catch(Exception exception) {
-				Tracer.Report("Mainframe.FileSaveAsCommandExecuted", exception);
-				this.ReportException(exception);
-			}
-		}
-
-		private void FileImportCommandExecuted(object target, ExecutedRoutedEventArgs e) {
-			try {
-				if(this.Editor != null && this.Editor.InEditMode) {
-					this.Import();
-				}
-			} catch(Exception exception) {
-				Tracer.Report("Mainframe.FileImportCommandExecuted", exception);
-				this.ReportException(exception);
-			}
-		}
-
-		private void FileImportCommandCanExecute(object target, CanExecuteRoutedEventArgs e) {
-			try {
-				e.CanExecute = (this.Editor != null && this.Editor.InEditMode);
-			} catch(Exception exception) {
-				Tracer.Report("Mainframe.FileImportCommandCanExecute", exception);
-				this.ReportException(exception);
-			}
-		}
-
-		private void FileExportImageCommandExecuted(object target, ExecutedRoutedEventArgs e) {
-			try {
-				if(this.Editor != null && !this.LogicalCircuit().IsEmpty()) {
-					this.ShowDialog(new DialogExportImage(this.Editor));
-				}
-			} catch(Exception exception) {
-				Tracer.Report("Mainframe.FileExportImageCommandExecuted", exception);
-				this.ReportException(exception);
-			}
-		}
-
-		private void FileExportImageCommandCanExecute(object target, CanExecuteRoutedEventArgs e) {
-			try {
-				e.CanExecute = (this.Editor != null && !this.LogicalCircuit().IsEmpty());
-			} catch(Exception exception) {
-				Tracer.Report("Mainframe.FileExportImageCommandCanExecute", exception);
-				this.ReportException(exception);
-			}
-		}
-
-		private void FileCloseCommandExecuted(object target, ExecutedRoutedEventArgs e) {
-			this.Close();
+		private void InitCommands() {
+			this.CommandNew = new LambdaUICommand(Properties.Resources.CommandFileNew, o => this.New(), new KeyGesture(Key.N, ModifierKeys.Control));
+			this.CommandOpen = new LambdaUICommand(Properties.Resources.CommandFileOpen, o => this.Open(), new KeyGesture(Key.O, ModifierKeys.Control));
+			this.CommandOpenRecent = new LambdaUICommand(Properties.Resources.CommandFileOpenRecent, file => this.OpenRecent(file as string));
+			this.CommandSave = new LambdaUICommand(Properties.Resources.CommandFileSave, o => this.Save(), new KeyGesture(Key.S, ModifierKeys.Control));
+			this.CommandSaveAs = new LambdaUICommand(Properties.Resources.CommandFileSaveAs, o => this.SaveAs());
+			this.CommandImport = new LambdaUICommand(Properties.Resources.CommandFileFileImport, o => this.Editor != null && this.Editor.InEditMode, o => this.Import());
+			this.CommandExportImage = new LambdaUICommand(Properties.Resources.CommandFileExportImage,
+				o => this.Editor != null && !this.LogicalCircuit().IsEmpty(),
+				o => this.ShowDialog(new DialogExportImage(this.Editor))
+			);
+			this.CommandClose = new LambdaUICommand(Properties.Resources.CommandFileClose, o => this.Close(), new KeyGesture(Key.F4, ModifierKeys.Alt));
+			this.CommandHelp = new LambdaUICommand(Properties.Resources.CommandHelpView, o => Process.Start(Properties.Resources.HelpContent), new KeyGesture(Key.F1));
+			this.CommandAbout = new LambdaUICommand(Properties.Resources.CommandHelpAbout, o => this.ShowDialog(new DialogAbout()));
 		}
 
 		private void EditUndoCommandExecuted(object target, ExecutedRoutedEventArgs e) {
@@ -680,24 +618,6 @@ namespace LogicCircuit {
 				e.CanExecute = (this.Editor != null && this.Editor.InEditMode);
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.ToolsOscilloscopeCommandCanExecute", exception);
-				this.ReportException(exception);
-			}
-		}
-
-		private void HelpContentCommandExecuted(object target, ExecutedRoutedEventArgs e) {
-			try {
-				Process.Start(Properties.Resources.HelpContent);
-			} catch(Exception exception) {
-				Tracer.Report("Mainframe.HelpContentCommandExecuted", exception);
-				this.ReportException(exception);
-			}
-		}
-
-		private void HelpAboutCommandExecuted(object target, ExecutedRoutedEventArgs e) {
-			try {
-				this.ShowDialog(new DialogAbout());
-			} catch(Exception exception) {
-				Tracer.Report("Mainframe.HelpAboutCommandExecuted", exception);
 				this.ReportException(exception);
 			}
 		}

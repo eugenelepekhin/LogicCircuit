@@ -86,6 +86,8 @@ namespace LogicCircuit {
 			this.ProjectWidth = new SettingsGridLengthCache(Settings.User, "Mainframe.ProjectWidth", "0.25*");
 			this.DiagramWidth = new SettingsGridLengthCache(Settings.User, "Mainframe.DiagramWidth", "0.75*");
 
+			this.InitCommands();
+
 			this.DataContext = this;
 			this.InitializeComponent();
 

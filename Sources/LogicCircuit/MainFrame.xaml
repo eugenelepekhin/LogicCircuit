@@ -81,14 +81,6 @@
 	</Window.Triggers>
 
 	<Window.CommandBindings>
-		<CommandBinding Command="ApplicationCommands.New" Executed="FileNewCommandExecuted"/>
-		<CommandBinding Command="ApplicationCommands.Open" Executed="FileOpenCommandExecuted"/>
-		<CommandBinding Command="{x:Static lc:CustomCommands.FileOpenRecent}" Executed="FileOpenRecentCommandExecuted"/>
-		<CommandBinding Command="ApplicationCommands.Save" Executed="FileSaveCommandExecuted"/>
-		<CommandBinding Command="ApplicationCommands.SaveAs" Executed="FileSaveAsCommandExecuted"/>
-		<CommandBinding Command="{x:Static lc:CustomCommands.FileImport}" Executed="FileImportCommandExecuted" CanExecute="FileImportCommandCanExecute"/>
-		<CommandBinding Command="{x:Static lc:CustomCommands.FileExportImage}" Executed="FileExportImageCommandExecuted" CanExecute="FileExportImageCommandCanExecute"/>
-		<CommandBinding Command="ApplicationCommands.Close" Executed="FileCloseCommandExecuted"/>
 
 		<CommandBinding Command="ApplicationCommands.Undo" Executed="EditUndoCommandExecuted" CanExecute="EditUndoCommandCanExecute"/>
 		<CommandBinding Command="ApplicationCommands.Redo" Executed="EditRedoCommandExecuted" CanExecute="EditRedoCommandCanExecute"/>
@@ -122,42 +114,31 @@
 		<CommandBinding Command="{x:Static lc:CustomCommands.ToolsReport}" Executed="ToolsReportCommandExecuted"/>
 		<CommandBinding Command="{x:Static lc:CustomCommands.ToolsOscilloscope}" Executed="ToolsOscilloscopeCommandExecuted" CanExecute="ToolsOscilloscopeCommandCanExecute"/>
 		<CommandBinding Command="{x:Static lc:CustomCommands.ToolsOptions}" Executed="ToolsOptionsCommandExecuted" CanExecute="ToolsOptionsCommandCanExecuted"/>
-
-		<CommandBinding Command="ApplicationCommands.Help" Executed="HelpContentCommandExecuted"/>
-		<CommandBinding Command="{x:Static lc:CustomCommands.HelpAbout}" Executed="HelpAboutCommandExecuted"/>
 	</Window.CommandBindings>
 
 	<lc:AutoGrid ColumnWidths="*">
 		<!-- Main Menu -->
 		<Menu Padding="3,1" Background="Transparent">
 			<MenuItem Header="{x:Static properties:Resources.MenuHeaderFile}">
-				<MenuItem Command="ApplicationCommands.New"/>
-				<MenuItem Command="ApplicationCommands.Open"/>
-				<MenuItem Header="{x:Static properties:Resources.CommandFileOpenRecent}" ItemsSource="{Binding Source={x:Static lc:Settings.User}, Path=RecentFiles}">
-					<MenuItem.Style>
+				<lc:CommandMenuItem Command="{Binding Path=CommandNew}"/>
+				<lc:CommandMenuItem Command="{Binding Path=CommandOpen}"/>
+				<lc:CommandMenuItem Header="{x:Static properties:Resources.CommandFileOpenRecent}" ItemsSource="{Binding Source={x:Static lc:Settings.User}, Path=RecentFiles}">
+					<lc:CommandMenuItem.Resources>
 						<Style TargetType="MenuItem">
-							<Style.Triggers>
-								<DataTrigger Binding="{Binding Source={x:Static lc:Settings.User}, Path=RecentFilesCount}" Value="0">
-									<Setter Property="IsEnabled" Value="False"/>
-								</DataTrigger>
-							</Style.Triggers>
-						</Style>
-					</MenuItem.Style>
-					<MenuItem.Resources>
-						<Style TargetType="MenuItem">
-							<Setter Property="Command" Value="{x:Static lc:CustomCommands.FileOpenRecent}"/>
+							<Setter Property="Header" Value="{Binding}"/>
+							<Setter Property="Command" Value="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=CommandOpenRecent}"/>
 							<Setter Property="CommandParameter" Value="{Binding}"/>
 						</Style>
-					</MenuItem.Resources>
-				</MenuItem>
+					</lc:CommandMenuItem.Resources>
+				</lc:CommandMenuItem>
 				<Separator/>
-				<MenuItem Command="ApplicationCommands.Save"/>
-				<MenuItem Command="ApplicationCommands.SaveAs"/>
+				<lc:CommandMenuItem Command="{Binding Path=CommandSave}"/>
+				<lc:CommandMenuItem Command="{Binding Path=CommandSaveAs}"/>
 				<Separator/>
-				<MenuItem Command="lc:CustomCommands.FileImport"/>
-				<MenuItem Command="lc:CustomCommands.FileExportImage"/>
+				<lc:CommandMenuItem Command="{Binding Path=CommandImport}"/>
+				<lc:CommandMenuItem Command="{Binding Path=CommandExportImage}"/>
 				<Separator/>
-				<MenuItem Command="ApplicationCommands.Close"/>
+				<lc:CommandMenuItem Command="{Binding Path=CommandClose}"/>
 			</MenuItem>
 			<MenuItem Header="{x:Static properties:Resources.MenuHeaderEdit}">
 				<MenuItem Command="ApplicationCommands.Undo"/>
@@ -199,9 +180,9 @@
 				<MenuItem Command="lc:CustomCommands.ToolsOptions"/>
 			</MenuItem>
 			<MenuItem Header="{x:Static properties:Resources.MenuHeaderHelp}">
-				<MenuItem Command="ApplicationCommands.Help"/>
+				<lc:CommandMenuItem Command="{Binding Path=CommandHelp}"/>
 				<Separator />
-				<MenuItem Command="lc:CustomCommands.HelpAbout"/>
+				<lc:CommandMenuItem Command="{Binding Path=CommandAbout}"/>
 			</MenuItem>
 		</Menu>
 

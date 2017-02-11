@@ -13,10 +13,6 @@ namespace LogicCircuit {
 			);
 		}
 
-		public static readonly RoutedUICommand FileOpenRecent = Create("CommandFileOpenRecent");
-		public static readonly RoutedUICommand FileImport = Create("CommandFileFileImport");
-		public static readonly RoutedUICommand FileExportImage = Create("CommandFileExportImage");
-
 		public static readonly RoutedUICommand EditSelectAllWires = Create("CommandEditSelectAllWires");
 		public static readonly RoutedUICommand EditSelectFreeWires = Create("CommandEditSelectFreeWires");
 		public static readonly RoutedUICommand EditSelectFloatingSymbols = Create("CommandEditSelectFloatingSymbols");
@@ -39,7 +35,5 @@ namespace LogicCircuit {
 		public static readonly RoutedUICommand ToolsReport = Create("CommandToolsReport");
 		public static readonly RoutedUICommand ToolsOscilloscope = Create("CommandToolsOscilloscope");
 		public static readonly RoutedUICommand ToolsOptions = Create("CommandToolsOptions");
-
-		public static readonly RoutedUICommand HelpAbout = Create("CommandHelpAbout");
 	}
 }
