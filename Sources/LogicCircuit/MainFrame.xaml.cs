@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -80,13 +81,34 @@ namespace LogicCircuit {
 				scrollViewer.ScrollToVerticalOffset(value.Y);
 			}
 		}
+		public LambdaUICommand CommandNew => new LambdaUICommand(Properties.Resources.CommandFileNew, o => this.New(), new KeyGesture(Key.N, ModifierKeys.Control));
+		public LambdaUICommand CommandOpen => new LambdaUICommand(Properties.Resources.CommandFileOpen, o => this.Open(), new KeyGesture(Key.O, ModifierKeys.Control));
+		public LambdaUICommand CommandOpenRecent { get; private set; }
+		public LambdaUICommand CommandSave => new LambdaUICommand(Properties.Resources.CommandFileSave, o => this.Save(), new KeyGesture(Key.S, ModifierKeys.Control));
+		public LambdaUICommand CommandSaveAs => new LambdaUICommand(Properties.Resources.CommandFileSaveAs, o => this.SaveAs());
+		public LambdaUICommand CommandImport => new LambdaUICommand(Properties.Resources.CommandFileFileImport, o => this.Editor != null && this.Editor.InEditMode, o => this.Import());
+		public LambdaUICommand CommandExportImage => new LambdaUICommand(Properties.Resources.CommandFileExportImage,
+			o => this.Editor != null && !this.LogicalCircuit().IsEmpty(),
+			o => this.ShowDialog(new DialogExportImage(this.Editor))
+		);
+		public LambdaUICommand CommandClose => new LambdaUICommand(Properties.Resources.CommandFileClose, o => this.Close(), new KeyGesture(Key.F4, ModifierKeys.Alt));
+		[SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+		public LambdaUICommand CommandHelp => new LambdaUICommand(Properties.Resources.CommandHelpView, o => Process.Start(Properties.Resources.HelpContent), new KeyGesture(Key.F1));
+		public LambdaUICommand CommandAbout => new LambdaUICommand(Properties.Resources.CommandHelpAbout, o => this.ShowDialog(new DialogAbout()));
+		public LambdaUICommand CommandOptions => new LambdaUICommand(Properties.Resources.CommandToolsOptions, o => this.Editor != null && this.Editor.InEditMode, o => {
+			bool? result = this.ShowDialog(new DialogOptions(this));
+			if(result.HasValue && result.Value) {
+				this.NotifyPropertyChanged("Editor");
+				this.Editor.FullRefresh();
+			}
+		});
 
 		public Mainframe() {
 			App.Mainframe = this;
 			this.ProjectWidth = new SettingsGridLengthCache(Settings.User, "Mainframe.ProjectWidth", "0.25*");
 			this.DiagramWidth = new SettingsGridLengthCache(Settings.User, "Mainframe.DiagramWidth", "0.75*");
 
-			this.InitCommands();
+			this.CommandOpenRecent = new LambdaUICommand(Properties.Resources.CommandFileOpenRecent, file => this.OpenRecent(file as string));
 
 			this.DataContext = this;
 			this.InitializeComponent();

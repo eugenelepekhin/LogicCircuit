@@ -65,6 +65,82 @@ namespace LogicCircuit {
 
 		public override bool InEditMode { get { return !this.Power; } }
 
+		public LambdaUICommand CommandUndo => new LambdaUICommand(Properties.Resources.CommandEditUndo, o => this.CanUndo(), o => this.Undo(), new KeyGesture(Key.Z, ModifierKeys.Control));
+		public LambdaUICommand CommandRedo => new LambdaUICommand(Properties.Resources.CommandEditRedo, o => this.CanRedo(), o => this.Redo(), new KeyGesture(Key.Y, ModifierKeys.Control));
+
+		public LambdaUICommand CommandCut => new LambdaUICommand(Properties.Resources.CommandEditCut, o => this.InEditMode && 0 < this.SelectionCount, o => this.Cut(), new KeyGesture(Key.X, ModifierKeys.Control));
+		public LambdaUICommand CommandCopy => new LambdaUICommand(Properties.Resources.CommandEditCopy, o => this.InEditMode && 0 < this.SelectionCount, o => this.Copy(), new KeyGesture(Key.C, ModifierKeys.Control));
+		public LambdaUICommand CommandPaste => new LambdaUICommand(Properties.Resources.CommandEditPaste, o => this.InEditMode && Editor.CanPaste(), o => this.Paste(), new KeyGesture(Key.V, ModifierKeys.Control));
+		public LambdaUICommand CommandDelete => new LambdaUICommand(Properties.Resources.CommandEditDelete, o => this.InEditMode && 0 < this.SelectionCount, o => this.Delete(), new KeyGesture(Key.Delete));
+
+		public LambdaUICommand CommandSelectAll => new LambdaUICommand(Properties.Resources.CommandEditSelectAll, o => this.InEditMode, o => this.SelectAll(), new KeyGesture(Key.A, ModifierKeys.Control));
+		public LambdaUICommand CommandSelectAllWires => new LambdaUICommand(Properties.Resources.CommandEditSelectAllWires, o => this.InEditMode, o => this.SelectAllWires());
+		public LambdaUICommand CommandSelectFreeWires => new LambdaUICommand(Properties.Resources.CommandEditSelectFreeWires, o => this.InEditMode, o => {
+			int count = this.SelectFreeWires();
+			if(0 < count) {
+				this.Mainframe.Status = Properties.Resources.MessageFreeWireCount(count);
+			}
+		});
+		public LambdaUICommand CommandSelectFloatingSymbols => new LambdaUICommand(Properties.Resources.CommandEditSelectFloatingSymbols, o => this.InEditMode,
+		o => {
+			int count = this.SelectFloatingSymbols();
+			if(0 < count) {
+				this.Mainframe.Status = Properties.Resources.MessageFloatingSymbolCount(count);
+			}
+		});
+		public LambdaUICommand CommandSelectAllButWires => new LambdaUICommand(Properties.Resources.CommandEditSelectAllButWires, o => this.InEditMode, o => this.SelectAllButWires());
+		public LambdaUICommand CommandUnselectAllWires => new LambdaUICommand(Properties.Resources.CommandEditUnselectAllWires, o => this.InEditMode && 0 < this.SelectionCount, o => this.UnselectAllWires());
+		public LambdaUICommand CommandUnselectAllButWires => new LambdaUICommand(Properties.Resources.CommandEditUnselectAllButWires, o => this.InEditMode && 0 < this.SelectionCount, o => this.UnselectAllButWires());
+		public LambdaUICommand CommandSelectAllProbes => new LambdaUICommand(Properties.Resources.CommandEditSelectAllProbes, o => this.InEditMode, o => this.SelectAllProbes(false));
+		public LambdaUICommand CommandSelectAllProbesWithWire => new LambdaUICommand(Properties.Resources.CommandEditSelectAllProbesWithWire, o => this.InEditMode, o => this.SelectAllProbes(true));
+		public LambdaUICommand CommandRotateLeft => new LambdaUICommand(Properties.Resources.CommandEditRotateLeft, o => this.InEditMode && this.SelectionCount == 1, o => {
+			IRotatable symbol = this.SelectedSymbols.FirstOrDefault() as IRotatable;
+			if(symbol != null) {
+				this.RotateLeft(symbol, (Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.None);
+			}
+		}, new KeyGesture(Key.L, ModifierKeys.Control));
+		public LambdaUICommand CommandRotateRight => new LambdaUICommand(Properties.Resources.CommandEditRotateRight, o => this.InEditMode && this.SelectionCount == 1, o => {
+			IRotatable symbol = this.SelectedSymbols.FirstOrDefault() as IRotatable;
+			if(symbol != null) {
+				this.RotateRight(symbol, (Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.None);
+			}
+		}, new KeyGesture(Key.R, ModifierKeys.Control));
+
+		public LambdaUICommand CommandCircuitProject => new LambdaUICommand(Properties.Resources.CommandCircuitProject, o => this.InEditMode, o => this.Edit(this.CircuitProject.ProjectSet.Project));
+		public LambdaUICommand CommandCircuitCurrent => new LambdaUICommand(Properties.Resources.CommandCircuitCurrent, o => this.InEditMode, o => this.Edit(this.Project.LogicalCircuit));
+		public LambdaUICommand CommandCircuitNew => new LambdaUICommand(Properties.Resources.CommandCircuitNew, o => this.InEditMode,
+			o => this.CircuitProject.InTransaction(() => this.OpenLogicalCircuit(this.CircuitProject.LogicalCircuitSet.Create()))
+		);
+		public LambdaUICommand CommandCircuitDelete => new LambdaUICommand(Properties.Resources.CommandCircuitDelete, o => this.InEditMode && 1 < this.CircuitProject.LogicalCircuitSet.Count(),
+			o => this.DeleteLogicalCircuit()
+		);
+		public LambdaUICommand CommandCircuitUsage => new LambdaUICommand(Properties.Resources.CommandCircuitUsage, o => this.InEditMode, o => this.LogicalCircuitUsage(this.Project.LogicalCircuit));
+		public LambdaUICommand CommandFind => new LambdaUICommand(Properties.Resources.CommandEditFind, o => this.InEditMode, o => this.Find(), new KeyGesture(Key.F, ModifierKeys.Control));
+		public LambdaUICommand CommandTruthTable => new LambdaUICommand(Properties.Resources.CommandTruthTable, o => {
+			if(CircuitTestSocket.IsTestable(this.Project.LogicalCircuit)) {
+				this.Mainframe.ShowDialog(new DialogTruthTable(this.Project.LogicalCircuit));
+			} else {
+				this.Mainframe.InformationMessage(Properties.Resources.MessageInputOutputPinsMissing);
+			}
+		}, new KeyGesture(Key.T, ModifierKeys.Control));
+		public LambdaUICommand CommandPower => new LambdaUICommand(Properties.Resources.CommandCircuitPower, o => this.Power = !this.Power, new KeyGesture(Key.W, ModifierKeys.Control));
+
+		public LambdaUICommand CommandReport => new LambdaUICommand(Properties.Resources.CommandToolsReport, o => {
+			LogicalCircuit root = this.Project.LogicalCircuit;
+			if(this.CircuitRunner != null) {
+				CircuitMap map = this.CircuitRunner.VisibleMap;
+				if(map != null && !this.InEditMode) {
+					map = map.Root;
+					root = map.Circuit;
+				}
+			}
+			this.Mainframe.ShowDialog(new DialogReport(root));
+		});
+		public LambdaUICommand CommandOscilloscope => new LambdaUICommand(Properties.Resources.CommandToolsOscilloscope,
+			o => this.Power && this.CircuitRunner.HasProbes && this.CircuitRunner.DialogOscilloscope == null,
+			o => this.CircuitRunner.ShowOscilloscope()
+		);
+
 		public Editor(Mainframe mainframe, string file) : base(mainframe, CircuitProject.Create(file)) {
 			this.File = file;
 			this.savedVersion = this.CircuitProject.Version;

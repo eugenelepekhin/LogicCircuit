@@ -113,15 +113,6 @@ namespace LogicCircuit {
 		}
 
 		private static void InitCommands() {
-			ApplicationCommands.Undo.Text = LogicCircuit.Properties.Resources.CommandEditUndo;
-			ApplicationCommands.Redo.Text = LogicCircuit.Properties.Resources.CommandEditRedo;
-			ApplicationCommands.Cut.Text = LogicCircuit.Properties.Resources.CommandEditCut;
-			ApplicationCommands.Copy.Text = LogicCircuit.Properties.Resources.CommandEditCopy;
-			ApplicationCommands.Paste.Text = LogicCircuit.Properties.Resources.CommandEditPaste;
-			ApplicationCommands.Delete.Text = LogicCircuit.Properties.Resources.CommandEditDelete;
-			ApplicationCommands.SelectAll.Text = LogicCircuit.Properties.Resources.CommandEditSelectAll;
-			ApplicationCommands.Find.Text = LogicCircuit.Properties.Resources.CommandEditFind;
-
 			// Text editor commands
 			EditingCommands.ToggleBold.Text = LogicCircuit.Properties.Resources.CommandEditBold;
 			EditingCommands.ToggleItalic.Text = LogicCircuit.Properties.Resources.CommandEditItalic;

@@ -87,7 +87,6 @@
     <Compile Include="CommandMenuItem.cs" />
     <Compile Include="Conductor.cs" />
     <Compile Include="ConductorMap.cs" />
-    <Compile Include="CustomCommands.cs" />
     <Compile Include="Dialog\ControlMemoryEditor.xaml.cs">
       <DependentUpon>ControlMemoryEditor.xaml</DependentUpon>
     </Compile>
@@ -299,7 +298,6 @@
     <Compile Include="HyperlinkNavigationCommand.cs" />
     <Compile Include="InverseBooleanConverter.cs" />
     <Compile Include="LambdaUICommand.cs" />
-    <Compile Include="Mainframe.Commands.cs" />
     <Compile Include="Mainframe.File.cs" />
     <Compile Include="RemoveAcceleratorConverter.cs" />
     <Compile Include="Runner\CircuitMap.cs" />
