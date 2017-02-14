@@ -114,6 +114,12 @@ namespace LogicCircuit {
 
 		private static void InitCommands() {
 			// Text editor commands
+			ApplicationCommands.Cut.Text = LogicCircuit.Properties.Resources.CommandEditCut;
+			ApplicationCommands.Copy.Text = LogicCircuit.Properties.Resources.CommandEditCopy;
+			ApplicationCommands.Paste.Text = LogicCircuit.Properties.Resources.CommandEditPaste;
+			ApplicationCommands.Undo.Text = LogicCircuit.Properties.Resources.CommandEditUndo;
+			ApplicationCommands.Redo.Text = LogicCircuit.Properties.Resources.CommandEditRedo;
+
 			EditingCommands.ToggleBold.Text = LogicCircuit.Properties.Resources.CommandEditBold;
 			EditingCommands.ToggleItalic.Text = LogicCircuit.Properties.Resources.CommandEditItalic;
 			EditingCommands.ToggleUnderline.Text = LogicCircuit.Properties.Resources.CommandEditUnderline;
