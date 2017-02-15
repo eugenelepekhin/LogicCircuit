@@ -80,7 +80,6 @@
 		</EventTrigger>
 	</Window.Triggers>
 
-		<CommandBinding Command="{x:Static lc:CustomCommands.ToolsIronPython}" Executed="ToolsIronPythonCommandExecuted" CanExecute="ToolsIronPythonCommandCanExecute"/>
 	<lc:AutoGrid ColumnWidths="*">
 		<!-- Main Menu -->
 		<Menu Padding="3,1" Background="Transparent">
@@ -142,7 +141,7 @@
             <MenuItem Header="{x:Static properties:Resources.MenuHeaderTools}">
 				<lc:CommandMenuItem Command="{Binding Path=Editor.CommandReport}"/>
 				<lc:CommandMenuItem Command="{Binding Path=Editor.CommandOscilloscope}"/>
-				<MenuItem Command="lc:CustomCommands.ToolsIronPython"/>
+				<lc:CommandMenuItem Command="{Binding Path=CommandIronPython}"/>
 				<lc:CommandMenuItem Command="{Binding Path=CommandOptions}"/>
 			</MenuItem>
 			<MenuItem Header="{x:Static properties:Resources.MenuHeaderHelp}">

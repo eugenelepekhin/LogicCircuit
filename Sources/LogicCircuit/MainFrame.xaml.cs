@@ -102,6 +102,7 @@ namespace LogicCircuit {
 				this.Editor.FullRefresh();
 			}
 		});
+		public LambdaUICommand CommandIronPython => new LambdaUICommand(Properties.Resources.CommandToolsIronPython, o => this.Editor != null, o => ScriptConsole.Run(this));
 
 		public Mainframe() {
 			App.Mainframe = this;
