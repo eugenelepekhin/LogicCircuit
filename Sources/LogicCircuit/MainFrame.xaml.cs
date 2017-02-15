@@ -108,6 +108,7 @@ namespace LogicCircuit {
 			this.ProjectWidth = new SettingsGridLengthCache(Settings.User, "Mainframe.ProjectWidth", "0.25*");
 			this.DiagramWidth = new SettingsGridLengthCache(Settings.User, "Mainframe.DiagramWidth", "0.75*");
 
+			// Create this command here as it used multiple times not like all other commands only onces when menu is created.
 			this.CommandOpenRecent = new LambdaUICommand(Properties.Resources.CommandFileOpenRecent, file => this.OpenRecent(file as string));
 
 			this.DataContext = this;
