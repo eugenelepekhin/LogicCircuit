@@ -113,24 +113,13 @@ namespace LogicCircuit {
 		}
 
 		private static void InitCommands() {
-			ApplicationCommands.New.Text = LogicCircuit.Properties.Resources.CommandFileNew;
-			ApplicationCommands.Open.Text = LogicCircuit.Properties.Resources.CommandFileOpen;
-			ApplicationCommands.Save.Text = LogicCircuit.Properties.Resources.CommandFileSave;
-			ApplicationCommands.SaveAs.Text = LogicCircuit.Properties.Resources.CommandFileSaveAs;
-			ApplicationCommands.Close.Text = LogicCircuit.Properties.Resources.CommandFileClose;
-
-			ApplicationCommands.Undo.Text = LogicCircuit.Properties.Resources.CommandEditUndo;
-			ApplicationCommands.Redo.Text = LogicCircuit.Properties.Resources.CommandEditRedo;
+			// Text editor commands
 			ApplicationCommands.Cut.Text = LogicCircuit.Properties.Resources.CommandEditCut;
 			ApplicationCommands.Copy.Text = LogicCircuit.Properties.Resources.CommandEditCopy;
 			ApplicationCommands.Paste.Text = LogicCircuit.Properties.Resources.CommandEditPaste;
-			ApplicationCommands.Delete.Text = LogicCircuit.Properties.Resources.CommandEditDelete;
-			ApplicationCommands.SelectAll.Text = LogicCircuit.Properties.Resources.CommandEditSelectAll;
-			ApplicationCommands.Find.Text = LogicCircuit.Properties.Resources.CommandEditFind;
+			ApplicationCommands.Undo.Text = LogicCircuit.Properties.Resources.CommandEditUndo;
+			ApplicationCommands.Redo.Text = LogicCircuit.Properties.Resources.CommandEditRedo;
 
-			ApplicationCommands.Help.Text = LogicCircuit.Properties.Resources.CommandHelpView;
-
-			// Text editor commands
 			EditingCommands.ToggleBold.Text = LogicCircuit.Properties.Resources.CommandEditBold;
 			EditingCommands.ToggleItalic.Text = LogicCircuit.Properties.Resources.CommandEditItalic;
 			EditingCommands.ToggleUnderline.Text = LogicCircuit.Properties.Resources.CommandEditUnderline;
