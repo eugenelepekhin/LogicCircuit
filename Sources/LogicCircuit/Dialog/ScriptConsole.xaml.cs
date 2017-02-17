@@ -52,6 +52,16 @@ namespace LogicCircuit {
 
 			this.history = new List<string>();
 
+			this.scope.ImportModule("clr");
+			this.scriptEngine.Execute("import clr", this.scope);
+			this.scriptEngine.Execute("import System", this.scope);
+			this.scriptEngine.Execute("clr.AddReference(\"System\")", this.scope);
+			this.scriptEngine.Execute("clr.AddReference(\"System.Core\")", this.scope);
+			this.scriptEngine.Execute("clr.AddReference(\"System.Linq\")", this.scope);
+			this.scriptEngine.Execute("clr.ImportExtensions(System.Linq)", this.scope);
+			this.scriptEngine.Execute("clr.AddReference(\"LogicCircuit\")", this.scope);
+			this.scriptEngine.Execute("from LogicCircuit import *", this.scope);
+
 			this.writer.WriteLine("IronPython");
 		}
 
@@ -69,15 +79,16 @@ namespace LogicCircuit {
 			if(!string.IsNullOrEmpty(text)) {
 				this.textBoxCommand.Clear();
 				this.HistoryAdd(text);
+				this.writer.WriteLine("> " + text);
 				try {
 					dynamic result = this.scriptEngine.Execute(text, this.scope);
 					if(result != null) {
 						this.writer.WriteLine(result.ToString());
 					}
-					this.textBoxLog.ScrollToEnd();
 				} catch(Exception exception) {
 					this.writer.WriteLine(exception.Message);
 				}
+				this.textBoxLog.ScrollToEnd();
 			}
 		}
 

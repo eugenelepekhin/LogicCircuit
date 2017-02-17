@@ -20,13 +20,12 @@
 		</Style>
 	</Window.Resources>
 
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="Auto"/>
-		</Grid.RowDefinitions>
+	<lc:AutoGrid>
+		<TextBox Grid.ColumnSpan="2" Name="textBoxLog" lc:AutoGrid.RowHeight="*"
+			BorderThickness="0" MinLines="5" AcceptsReturn="True" IsReadOnly="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+		/>
 
-		<TextBox Grid.Row="0" Name="textBoxLog" BorderThickness="0" MinLines="5" AcceptsReturn="True" IsReadOnly="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"/>
-		<TextBox Grid.Row="1" Name="textBoxCommand" BorderThickness="0" PreviewKeyDown="textBoxCommandKeyDown"/>
-	</Grid>
+		<TextBlock Text="&gt;" VerticalAlignment="Center" Background="{Binding ElementName=textBoxCommand, Path=Background}"/>
+		<TextBox Name="textBoxCommand" BorderThickness="0" PreviewKeyDown="textBoxCommandKeyDown"/>
+	</lc:AutoGrid>
 </Window>
