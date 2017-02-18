@@ -91,6 +91,7 @@
     <Compile Include="CircuitProject\Wrappers\Sensor.cs" />
     <Compile Include="CircuitProject\Wrappers\Sound.cs" />
     <Compile Include="CircuitProject\Wrappers\TextNote.cs" />
+    <Compile Include="CircuitTester.cs" />
     <Compile Include="CircuitTestSocket.cs" />
     <Compile Include="ColorMethods.cs" />
     <Compile Include="ColorPicker\ColorPicker.cs" />

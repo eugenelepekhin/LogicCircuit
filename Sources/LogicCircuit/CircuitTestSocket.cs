@@ -13,10 +13,10 @@ namespace LogicCircuit {
 		public IEnumerable<InputPinSocket> Inputs { get { return this.chank.Inputs; } }
 		public IEnumerable<OutputPinSocket> Outputs { get { return this.chank.Outputs; } }
 
-		public CircuitTestSocket(LogicalCircuit circuit) {
+		public CircuitTestSocket(LogicalCircuit circuit, bool multiThreaded) {
 			Tracer.Assert(CircuitTestSocket.IsTestable(circuit));
 			this.chank = new TableChank(circuit);
-			if(1 < Environment.ProcessorCount && 15 < this.chank.InputBitCount) {
+			if(multiThreaded && 1 < Environment.ProcessorCount && 15 < this.chank.InputBitCount) {
 				this.chankList = new TableChank[Environment.ProcessorCount];
 				BigInteger count = this.chank.Count / this.chankList.Length;
 				for(int i = 0; i < this.chankList.Length; i++) {
@@ -31,9 +31,16 @@ namespace LogicCircuit {
 			}
 		}
 
+		public CircuitTestSocket(LogicalCircuit circuit) : this(circuit, true) {
+		}
+
 		public static bool IsTestable(LogicalCircuit circuit) {
 			IEnumerable<Pin> pins = circuit.CircuitProject.PinSet.SelectByCircuit(circuit);
 			return pins.Any(p => p.PinType == PinType.Input) && pins.Any(p => p.PinType == PinType.Output);
+		}
+
+		public bool Evaluate() {
+			return this.chank.Evaluate();
 		}
 
 		[SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters")]
@@ -115,6 +122,10 @@ namespace LogicCircuit {
 				this.Count = BigInteger.One << this.InputBitCount;
 
 				circuitMap.TurnOn();
+			}
+
+			public bool Evaluate() {
+				return this.CircuitState.Evaluate(true);
 			}
 
 			public void BuildTruthTable(Action<double> reportProgress, Func<bool> keepGoing, Predicate<TruthState> include, int maxCount) {

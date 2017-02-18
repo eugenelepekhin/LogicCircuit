@@ -779,6 +779,10 @@ namespace LogicCircuit {
 			this.Mainframe.ShowDialog(new DialogFind(this));
 		}
 
+		public CircuitTester CreateCircuitTester() {
+			return new CircuitTester(this);
+		}
+
 		//--- Event Handling ---
 
 		public void DiagramLostFocus() {
