@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Threading;
 using IronPython.Hosting;
 using Microsoft.Scripting.Hosting;
 
@@ -14,7 +14,8 @@ namespace LogicCircuit {
 	/// <summary>
 	/// Interaction logic for ScriptConsole.xaml
 	/// </summary>
-	public partial class ScriptConsole : Window {
+	[SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
+	public sealed partial class ScriptConsole : Window {
 		private static ScriptConsole currentConsole = null;
 
 		public static void Run(Mainframe mainframe) {
@@ -62,7 +63,7 @@ namespace LogicCircuit {
 			this.scriptEngine.Execute("clr.AddReference(\"LogicCircuit\")", this.scope);
 			this.scriptEngine.Execute("from LogicCircuit import *", this.scope);
 
-			this.writer.WriteLine("IronPython");
+			this.writer.WriteLine("IronPython " + this.scriptEngine.LanguageVersion.ToString());
 		}
 
 		protected override void OnClosed(EventArgs e) {
@@ -74,8 +75,6 @@ namespace LogicCircuit {
 
 		private void Execute() {
 			string text = this.textBoxCommand.Text.Trim();
-			//string text = "mainframe.InformationMessage('hello, world! message')";
-			//string text = "print 'hello, world! print'";
 			if(!string.IsNullOrEmpty(text)) {
 				this.textBoxCommand.Clear();
 				this.HistoryAdd(text);

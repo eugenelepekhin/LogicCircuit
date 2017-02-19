@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace LogicCircuit {
@@ -13,6 +14,10 @@ namespace LogicCircuit {
 			this.Editor = editor;
 		}
 
+		public LogicalCircuit LogicalCircuit(string name) {
+			return this.Editor.CircuitProject.LogicalCircuitSet.FindByName(name);
+		}
+
 		public void TurnOn(LogicalCircuit circuit) {
 			Tracer.Assert(circuit.CircuitProject == this.Editor.CircuitProject);
 			this.TurnOff();
@@ -24,6 +29,7 @@ namespace LogicCircuit {
 			Tracer.Assert(started);
 		}
 
+		[SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "TurnOff")]
 		public void TurnOff() {
 			if(this.socket != null) {
 				this.socket = null;
@@ -37,12 +43,12 @@ namespace LogicCircuit {
 			Tracer.Assert(pin.Function.Value == value, "Value get truncated");
 		}
 
-		public long GetOutput(string outputName) {
+		public long GetStateOutput(string outputName) {
 			OutputPinSocket pin = this.socket.Outputs.First(o => o.Pin.Name == outputName);
 			return pin.Function.Pack();
 		}
 
-		public int GetIntOutput(string outputName) {
+		public int GetOutput(string outputName) {
 			OutputPinSocket pin = this.socket.Outputs.First(o => o.Pin.Name == outputName);
 			int value;
 			if(FunctionProbe.ToInt(pin.Function.Pack(), pin.Pin.BitWidth, out value)) {
