@@ -15,6 +15,8 @@ namespace LogicCircuit {
 
 		public CircuitTestSocket(LogicalCircuit circuit) {
 			Tracer.Assert(CircuitTestSocket.IsTestable(circuit));
+			TableChank.Validate(circuit);
+
 			this.chank = new TableChank(circuit);
 			if(1 < Environment.ProcessorCount && 15 < this.chank.InputBitCount) {
 				this.chankList = new TableChank[Environment.ProcessorCount];
@@ -115,6 +117,12 @@ namespace LogicCircuit {
 				this.Count = BigInteger.One << this.InputBitCount;
 
 				circuitMap.TurnOn();
+			}
+
+			public static void Validate(LogicalCircuit logicalCircuit) {
+				CircuitMap map = new CircuitMap(TableChank.Copy(logicalCircuit));
+				// this will throw if bit width error occurred.
+				map.Apply(1);
 			}
 
 			public void BuildTruthTable(Action<double> reportProgress, Func<bool> keepGoing, Predicate<TruthState> include, int maxCount) {
