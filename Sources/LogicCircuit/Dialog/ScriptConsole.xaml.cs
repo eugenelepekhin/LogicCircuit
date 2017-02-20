@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -29,8 +30,15 @@ namespace LogicCircuit {
 			}
 		}
 
+		public static void Stop() {
+			if(ScriptConsole.currentConsole != null) {
+				ScriptConsole.currentConsole.Close();
+			}
+		}
+
 		private SettingsWindowLocationCache windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
+		private SettingsStringCache historySettings = new SettingsStringCache(Settings.User, "ScriptConsole.History", null);
 
 		private ScriptEngine scriptEngine;
 		private MemoryStream stdout;
@@ -51,7 +59,8 @@ namespace LogicCircuit {
 			this.scope = this.scriptEngine.CreateScope();
 			this.scope.SetVariable("mainframe", mainframe);
 
-			this.history = new List<string>();
+			this.history = this.LoadHistory();
+			this.historyIndex = this.history.Count;
 
 			this.scope.ImportModule("clr");
 			this.scriptEngine.Execute("import clr", this.scope);
@@ -66,11 +75,38 @@ namespace LogicCircuit {
 			this.writer.WriteLine("IronPython " + this.scriptEngine.LanguageVersion.ToString());
 		}
 
+		private List<string> LoadHistory() {
+			string text = this.historySettings.Value;
+			List<string> list = new List<string>();
+			if(!string.IsNullOrEmpty(text)) {
+				string[] item = text.Split(new char[] { '\n' }, Settings.User.MaxRecentFileCount, StringSplitOptions.RemoveEmptyEntries);
+				if(item != null) {
+					HashSet<string> set = new HashSet<string>();
+					foreach(string c in item) {
+						string command = c.Trim();
+						if(set.Add(command)) {
+							list.Add(command);
+						}
+					}
+				}
+			}
+			return list;
+		}
+
+		private void SaveHistory() {
+			StringBuilder text = new StringBuilder();
+			for(int i = Math.Max(0, this.history.Count - Settings.User.MaxRecentFileCount); i < this.history.Count; i++) {
+				text.AppendLine(this.history[i]);
+			}
+			this.historySettings.Value = text.ToString();
+		}
+
 		protected override void OnClosed(EventArgs e) {
 			base.OnClosed(e);
 			ScriptConsole.currentConsole = null;
 			this.stdout.Close();
 			this.writer.Close();
+			this.SaveHistory();
 		}
 
 		private void Execute() {

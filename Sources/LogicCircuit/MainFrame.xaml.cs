@@ -168,6 +168,7 @@ namespace LogicCircuit {
 				if(!this.EnsureSaved()) {
 					e.Cancel = true;
 				} else {
+					ScriptConsole.Stop();
 					Settings.User.Save();
 				}
 			} catch(Exception exception) {
