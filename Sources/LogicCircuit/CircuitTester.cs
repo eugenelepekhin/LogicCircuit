@@ -1,60 +1,85 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Linq;
 
 namespace LogicCircuit {
 	public class CircuitTester {
 		public Editor Editor { get; private set; }
+		public LogicalCircuit LogicalCircuit { get; private set; }
 
 		private CircuitTestSocket socket;
 
-		internal CircuitTester(Editor editor) {
+		internal CircuitTester(Editor editor, LogicalCircuit circuit) {
 			Tracer.Assert(editor != null);
+			Tracer.Assert(circuit != null);
+			Tracer.Assert(circuit.CircuitProject == editor.CircuitProject);
+			Tracer.Assert(CircuitTestSocket.IsTestable(circuit));
+
 			this.Editor = editor;
-		}
+			this.LogicalCircuit = circuit;
 
-		public LogicalCircuit LogicalCircuit(string name) {
-			return this.Editor.CircuitProject.LogicalCircuitSet.FindByName(name);
-		}
-
-		public void TurnOn(LogicalCircuit circuit) {
-			Tracer.Assert(circuit.CircuitProject == this.Editor.CircuitProject);
-			this.TurnOff();
-			if(this.Editor.Project.LogicalCircuit != circuit) {
-				this.Editor.OpenLogicalCircuit(circuit);
+			if(this.Editor.Project.LogicalCircuit != this.LogicalCircuit) {
+				this.Editor.OpenLogicalCircuit(this.LogicalCircuit);
 			}
-			this.socket = new CircuitTestSocket(circuit, false);
+			this.socket = new CircuitTestSocket(this.LogicalCircuit, false);
+			// start transaction on the copy of main circuit.
 			bool started = this.socket.Inputs.First().Pin.CircuitProject.StartTransaction();
 			Tracer.Assert(started);
 		}
 
-		[SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "TurnOff")]
-		public void TurnOff() {
-			if(this.socket != null) {
-				this.socket = null;
+		public void SetInput(string inputName, int value) {
+			if(string.IsNullOrEmpty(inputName)) {
+				throw new ArgumentNullException(nameof(inputName));
+			}
+			InputPinSocket pin = this.socket.Inputs.FirstOrDefault(i => i.Pin.Name == inputName);
+			if(pin == null) {
+				throw new CircuitException(Cause.UserError,
+					string.Format(CultureInfo.InvariantCulture, "Input pin {0} not found on Logical Circuit {1}", inputName, this.LogicalCircuit.Name)
+				);
+			}
+			pin.Function.Value = value;
+			if(pin.Function.Value != value) {
+				throw new CircuitException(Cause.UserError,
+					string.Format(CultureInfo.InvariantCulture, "Value {0} get truncated by pin {1}. Make sure value can fit to {2} bit(s) of the pin.", value, inputName, pin.Pin.BitWidth)
+				);
 			}
 		}
 
-		public void SetInput(string inputName, int value) {
-			InputPinSocket pin = this.socket.Inputs.First(i => i.Pin.Name == inputName);
-			Tracer.Assert(pin != null);
-			pin.Function.Value = value;
-			Tracer.Assert(pin.Function.Value == value, "Value get truncated");
-		}
-
 		public long GetStateOutput(string outputName) {
+			if(string.IsNullOrEmpty(outputName)) {
+				throw new ArgumentNullException(nameof(outputName));
+			}
 			OutputPinSocket pin = this.socket.Outputs.First(o => o.Pin.Name == outputName);
+			if(pin == null) {
+				throw new CircuitException(Cause.UserError,
+					string.Format(CultureInfo.InvariantCulture, "Output pin {0} not found on Logical Circuit {1}", outputName, this.LogicalCircuit.Name)
+				);
+			}
 			return pin.Function.Pack();
 		}
 
+		[SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "GetStateOutput")]
 		public int GetOutput(string outputName) {
-			OutputPinSocket pin = this.socket.Outputs.First(o => o.Pin.Name == outputName);
+			if(string.IsNullOrEmpty(outputName)) {
+				throw new ArgumentNullException(nameof(outputName));
+			}
+			OutputPinSocket pin = this.socket.Outputs.FirstOrDefault(o => o.Pin.Name == outputName);
+			if(pin == null) {
+				throw new CircuitException(Cause.UserError,
+					string.Format(CultureInfo.InvariantCulture, "Output pin {0} not found on Logical Circuit {1}", outputName, this.LogicalCircuit.Name)
+				);
+			}
 			int value;
 			if(FunctionProbe.ToInt(pin.Function.Pack(), pin.Pin.BitWidth, out value)) {
 				return value;
 			}
-			return 0;
+			throw new CircuitException(Cause.UserError,
+				string.Format(CultureInfo.InvariantCulture,
+					"Output value cannot be represented by number because it contains bit(s) in high impedance state: {0}. Use GetStateOutput instead.",
+					pin.Function.ToText()
+				)
+			);
 		}
 
 		public bool Evaluate() {
