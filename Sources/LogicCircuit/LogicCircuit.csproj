@@ -188,8 +188,8 @@
       <DependentUpon>ReportBuilder.tt</DependentUpon>
     </Compile>
     <Compile Include="Dialog\ReportBuilder.Properties.cs" />
-    <Compile Include="Dialog\ScriptConsole.xaml.cs">
-      <DependentUpon>ScriptConsole.xaml</DependentUpon>
+    <Compile Include="Dialog\IronPythonConsole.xaml.cs">
+      <DependentUpon>IronPythonConsole.xaml</DependentUpon>
     </Compile>
     <Compile Include="DisplayCanvas.cs" />
     <Compile Include="DoubleAdderConverter.cs" />
@@ -450,7 +450,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dialog\ScriptConsole.xaml">
+    <Page Include="Dialog\IronPythonConsole.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

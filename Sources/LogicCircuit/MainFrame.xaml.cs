@@ -103,7 +103,7 @@ namespace LogicCircuit {
 				this.Editor.FullRefresh();
 			}
 		});
-		public LambdaUICommand CommandIronPython => new LambdaUICommand(Properties.Resources.CommandToolsIronPython, o => this.Editor != null, o => ScriptConsole.Run(this));
+		public LambdaUICommand CommandIronPython => new LambdaUICommand(Properties.Resources.CommandToolsIronPython, o => this.Editor != null, o => IronPythonConsole.Run(this));
 
 		public Mainframe() {
 			App.Mainframe = this;
@@ -168,7 +168,7 @@ namespace LogicCircuit {
 				if(!this.EnsureSaved()) {
 					e.Cancel = true;
 				} else {
-					ScriptConsole.Stop();
+					IronPythonConsole.Stop();
 					Settings.User.Save();
 				}
 			} catch(Exception exception) {

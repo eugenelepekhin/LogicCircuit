@@ -13,32 +13,32 @@ using Microsoft.Scripting.Hosting;
 
 namespace LogicCircuit {
 	/// <summary>
-	/// Interaction logic for ScriptConsole.xaml
+	/// Interaction logic for IronPythonConsole.xaml
 	/// </summary>
 	[SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
-	public sealed partial class ScriptConsole : Window {
-		private static ScriptConsole currentConsole = null;
+	public sealed partial class IronPythonConsole : Window {
+		private static IronPythonConsole currentConsole = null;
 
 		public static void Run(Mainframe mainframe) {
-			if(ScriptConsole.currentConsole == null) {
-				ScriptConsole console = new ScriptConsole(mainframe);
+			if(IronPythonConsole.currentConsole == null) {
+				IronPythonConsole console = new IronPythonConsole(mainframe);
 				console.Owner = mainframe;
-				ScriptConsole.currentConsole = console;
+				IronPythonConsole.currentConsole = console;
 				console.Show();
 			} else {
-				ScriptConsole.currentConsole.Focus();
+				IronPythonConsole.currentConsole.Focus();
 			}
 		}
 
 		public static void Stop() {
-			if(ScriptConsole.currentConsole != null) {
-				ScriptConsole.currentConsole.Close();
+			if(IronPythonConsole.currentConsole != null) {
+				IronPythonConsole.currentConsole.Close();
 			}
 		}
 
 		private SettingsWindowLocationCache windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
-		private SettingsStringCache historySettings = new SettingsStringCache(Settings.User, "ScriptConsole.History", null);
+		private SettingsStringCache historySettings = new SettingsStringCache(Settings.User, "IronPythonConsole.History", null);
 
 		private ScriptEngine scriptEngine;
 		private MemoryStream stdout;
@@ -47,7 +47,7 @@ namespace LogicCircuit {
 		private List<string> history;
 		private int historyIndex;
 
-		private ScriptConsole(Mainframe mainframe) {
+		private IronPythonConsole(Mainframe mainframe) {
 			this.DataContext = this;
 			this.InitializeComponent();
 
@@ -103,7 +103,7 @@ namespace LogicCircuit {
 
 		protected override void OnClosed(EventArgs e) {
 			base.OnClosed(e);
-			ScriptConsole.currentConsole = null;
+			IronPythonConsole.currentConsole = null;
 			this.stdout.Close();
 			this.writer.Close();
 			this.SaveHistory();
