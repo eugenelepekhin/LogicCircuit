@@ -1392,4 +1392,7 @@
   <data name="ErrorBadHexInRange" xml:space="preserve">
     <value>Ожидается число в диапазоне {0:X} - {1:X}.</value>
   </data>
+  <data name="CommandToolsIronPython" xml:space="preserve">
+    <value>Консоль IronPython</value>
+  </data>
 </root>

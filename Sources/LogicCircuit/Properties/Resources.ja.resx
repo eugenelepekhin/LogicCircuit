@@ -1236,4 +1236,7 @@
 	<data name="ROMNotation" xml:space="preserve">
 		<value>ROM</value>
 	</data>
+	<data name="CommandToolsIronPython" xml:space="preserve">
+		<value>IronPythonコンソール</value>
+	</data>
 </root>
