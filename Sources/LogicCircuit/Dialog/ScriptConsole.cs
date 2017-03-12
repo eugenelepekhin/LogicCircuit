@@ -170,8 +170,11 @@ namespace LogicCircuit {
 					e.Handled = true;
 					break;
 				case Key.C:
-					if(e.KeyboardDevice.Modifiers == ModifierKeys.Control) {
+					if(e.KeyboardDevice.Modifiers == ModifierKeys.Control && this.inputStarts == int.MaxValue) {
 						this.CommandBreak();
+						e.Handled = true;
+					} else {
+						base.OnPreviewKeyDown(e);
 					}
 					break;
 				case Key.Up:
