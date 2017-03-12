@@ -37,6 +37,13 @@ namespace LogicCircuit {
 			}
 		}
 
+		public static void Clear() {
+			IronPythonConsole console = IronPythonConsole.currentConsole;
+			if(console != null) {
+				console.Dispatcher.Invoke(() => console.console.Clear());
+			}
+		}
+
 		private SettingsWindowLocationCache windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 
