@@ -191,6 +191,7 @@
     <Compile Include="Dialog\IronPythonConsole.xaml.cs">
       <DependentUpon>IronPythonConsole.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialog\ScriptConsole.cs" />
     <Compile Include="DisplayCanvas.cs" />
     <Compile Include="DoubleAdderConverter.cs" />
     <Compile Include="Editor\AreaMarker.cs" />

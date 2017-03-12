@@ -3,29 +3,12 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:lc="clr-namespace:LogicCircuit"
 	xmlns:properties="clr-namespace:LogicCircuit.Properties"
-	Title="IronPython Console"
+	Title="{x:Static properties:Resources.CommandToolsIronPython}"
 	Style="{StaticResource DialogWindow}"
 	Left="{Binding Path=WindowLocation.X, Mode=TwoWay}"
 	Top="{Binding Path=WindowLocation.Y, Mode=TwoWay}"
 	WindowState="{Binding Path=WindowLocation.WindowState, Mode=TwoWay}"
-	FocusManager.FocusedElement="{Binding ElementName=textBoxCommand}"
+	FocusManager.FocusedElement="{Binding ElementName=console}"
 >
-	<Window.Resources>
-		<Style TargetType="TextBox">
-			<Setter Property="Margin" Value="0"/>
-			<Setter Property="Padding" Value="3,2"/>
-			<!--<Setter Property="TextWrapping" Value="Wrap"/>-->
-			<Setter Property="FontFamily" Value="Consolas"/>
-			<Setter Property="FontSize" Value="14"/>
-		</Style>
-	</Window.Resources>
-
-	<lc:AutoGrid>
-		<TextBox Grid.ColumnSpan="2" Name="textBoxLog" lc:AutoGrid.RowHeight="*"
-			BorderThickness="0" MinLines="5" AcceptsReturn="True" IsReadOnly="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
-		/>
-
-		<TextBlock Text="&gt;" VerticalAlignment="Center" Background="{Binding ElementName=textBoxCommand, Path=Background}"/>
-		<TextBox Name="textBoxCommand" BorderThickness="0" PreviewKeyDown="textBoxCommandKeyDown"/>
-	</lc:AutoGrid>
+	<lc:ScriptConsole x:Name="console" BorderThickness="0" MinLines="5" Margin="0" Padding="3,2" FontFamily="Consolas" FontSize="14"/>
 </Window>
