@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 using IronPython.Hosting;
 using Microsoft.Scripting.Hosting;
 
@@ -41,6 +44,7 @@ namespace LogicCircuit {
 		private LogWriter writer;
 		private ScriptScope scope;
 		private StringBuilder command = new StringBuilder();
+		private Thread thread;
 
 		private IronPythonConsole(Mainframe mainframe) {
 			this.DataContext = this;
@@ -77,11 +81,8 @@ namespace LogicCircuit {
 		}
 
 		private void Prompt() {
-			if(0 < this.command.Length) {
-				this.console.Prompt("... ");
-			} else {
-				this.console.Prompt(">>> ");
-			}
+			string text = (0 < this.command.Length) ? "... " : ">>> ";
+			this.Dispatcher.BeginInvoke(new Action(() => this.console.Prompt(text)), DispatcherPriority.ApplicationIdle);
 		}
 
 		private static bool IsMultiline(string text) {
@@ -98,21 +99,38 @@ namespace LogicCircuit {
 					this.command.Length = 0;
 				}
 				if(!string.IsNullOrWhiteSpace(text)) {
-					try {
-						dynamic result = this.scriptEngine.Execute(text, this.scope);
-						if(result != null) {
-							this.writer.WriteLine(result.ToString());
-						}
-					} catch(Exception exception) {
-						this.writer.WriteLine(exception.Message);
-					}
+					this.Run(text);
+					return;
 				}
 			}
 			this.Prompt();
 		}
 
+		private void Run(string text) {
+			Action run = () => {
+				try {
+					dynamic result = this.scriptEngine.Execute(text, this.scope);
+					if(result != null) {
+						this.writer.WriteLine(result.ToString());
+					}
+				} catch(Exception exception) {
+					this.writer.WriteLine(exception.Message);
+				}
+				this.Prompt();
+				this.thread = null;
+			};
+			Tracer.Assert(this.thread == null);
+			this.thread = new Thread(new ThreadStart(run));
+			this.thread.SetApartmentState(ApartmentState.STA);
+			this.thread.Name = "IronPython Thread";
+			this.thread.IsBackground = true;
+			this.thread.Priority = ThreadPriority.Normal;
+			this.thread.Start();
+		}
+
 		private class LogWriter : TextWriter {
-			private TextBox textBox;
+			private readonly TextBox textBox;
+			private readonly ConcurrentQueue<string> queue = new ConcurrentQueue<string>();
 
 			public override Encoding Encoding => Encoding.Unicode;
 
@@ -123,7 +141,20 @@ namespace LogicCircuit {
 			private void Append(string text) {
 				text = text.Replace("\r", "");
 				if(!string.IsNullOrEmpty(text)) {
-					this.textBox.AppendText(text);
+					bool invoke = this.queue.IsEmpty;
+					this.queue.Enqueue(text);
+					if(invoke) {
+						this.textBox.Dispatcher.Invoke(
+							new Action(() => {
+								string str;
+								while(this.queue.TryDequeue(out str)) {
+									this.textBox.AppendText(str);
+								}
+								this.textBox.ScrollToEnd();
+								this.textBox.Select(this.textBox.Text.Length, 0);
+							})
+						);
+					}
 				}
 			}
 

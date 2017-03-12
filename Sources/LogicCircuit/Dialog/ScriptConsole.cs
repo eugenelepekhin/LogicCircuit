@@ -162,6 +162,8 @@ namespace LogicCircuit {
 					this.HistoryAdd(text);
 					this.SaveHistory();
 					this.AppendText("\n");
+					this.Select(this.Text.Length, 0);
+					this.ScrollToEnd();
 					this.Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new Action(() => this.CommandEnter(text)));
 					e.Handled = true;
 					break;
