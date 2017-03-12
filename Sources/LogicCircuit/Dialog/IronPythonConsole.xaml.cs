@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
@@ -54,6 +55,7 @@ namespace LogicCircuit {
 			this.stdout = new MemoryStream();
 			this.writer = new LogWriter(this.console);
 			this.console.CommandEnter = this.Execute;
+			this.console.CommandBreak = this.Abort;
 
 			this.scriptEngine.Runtime.IO.SetOutput(this.stdout, this.writer);
 			this.scope = this.scriptEngine.CreateScope();
@@ -71,6 +73,11 @@ namespace LogicCircuit {
 
 			this.writer.WriteLine("IronPython " + this.scriptEngine.LanguageVersion.ToString());
 			this.Prompt();
+		}
+
+		protected override void OnClosing(CancelEventArgs e) {
+			this.Abort();
+			base.OnClosing(e);
 		}
 
 		protected override void OnClosed(EventArgs e) {
@@ -99,25 +106,28 @@ namespace LogicCircuit {
 					this.command.Length = 0;
 				}
 				if(!string.IsNullOrWhiteSpace(text)) {
-					this.Run(text);
+					this.Start(text);
 					return;
 				}
 			}
 			this.Prompt();
 		}
 
-		private void Run(string text) {
+		private void Start(string text) {
 			Action run = () => {
 				try {
 					dynamic result = this.scriptEngine.Execute(text, this.scope);
 					if(result != null) {
 						this.writer.WriteLine(result.ToString());
 					}
+				} catch(ThreadAbortException) {
+					this.writer.WriteLine("Script terminated by user");
 				} catch(Exception exception) {
 					this.writer.WriteLine(exception.Message);
+				} finally {
+					this.Prompt();
+					this.thread = null;
 				}
-				this.Prompt();
-				this.thread = null;
 			};
 			Tracer.Assert(this.thread == null);
 			this.thread = new Thread(new ThreadStart(run));
@@ -126,6 +136,17 @@ namespace LogicCircuit {
 			this.thread.IsBackground = true;
 			this.thread.Priority = ThreadPriority.Normal;
 			this.thread.Start();
+		}
+
+		private void Abort() {
+			try {
+				Thread t = this.thread;
+				if(t != null) {
+					t.Abort();
+				}
+			} catch(Exception exception) {
+				App.Mainframe.ReportException(exception);
+			}
 		}
 
 		private class LogWriter : TextWriter {

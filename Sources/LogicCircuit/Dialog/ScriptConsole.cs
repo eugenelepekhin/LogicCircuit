@@ -9,6 +9,8 @@ using System.Windows.Threading;
 namespace LogicCircuit {
 	public class ScriptConsole : TextBox {
 		public Action<string> CommandEnter { get; set; } = text => {};
+		public Action CommandBreak { get; set; } = () => {};
+
 		private int inputStarts = 0;
 
 		private SettingsStringCache historySettings = new SettingsStringCache(Settings.User, "ScriptConsole.History", null);
@@ -166,6 +168,11 @@ namespace LogicCircuit {
 					this.ScrollToEnd();
 					this.Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new Action(() => this.CommandEnter(text)));
 					e.Handled = true;
+					break;
+				case Key.C:
+					if(e.KeyboardDevice.Modifiers == ModifierKeys.Control) {
+						this.CommandBreak();
+					}
 					break;
 				case Key.Up:
 					if(this.IsEditAllowed()) {
