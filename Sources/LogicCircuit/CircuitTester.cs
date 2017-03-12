@@ -5,10 +5,8 @@ using System.Linq;
 
 namespace LogicCircuit {
 	public class CircuitTester {
-		public Editor Editor { get; private set; }
-		public LogicalCircuit LogicalCircuit { get; private set; }
-
-		private CircuitTestSocket socket;
+		private readonly CircuitTestSocket socket;
+		private readonly string logicalCircuitName;
 
 		internal CircuitTester(Editor editor, LogicalCircuit circuit) {
 			Tracer.Assert(editor != null);
@@ -16,13 +14,9 @@ namespace LogicCircuit {
 			Tracer.Assert(circuit.CircuitProject == editor.CircuitProject);
 			Tracer.Assert(CircuitTestSocket.IsTestable(circuit));
 
-			this.Editor = editor;
-			this.LogicalCircuit = circuit;
+			this.logicalCircuitName = circuit.Name;
 
-			if(this.Editor.Project.LogicalCircuit != this.LogicalCircuit) {
-				this.Editor.OpenLogicalCircuit(this.LogicalCircuit);
-			}
-			this.socket = new CircuitTestSocket(this.LogicalCircuit, false);
+			this.socket = new CircuitTestSocket(circuit, false);
 			// start transaction on the copy of main circuit.
 			bool started = this.socket.Inputs.First().Pin.CircuitProject.StartTransaction();
 			Tracer.Assert(started);
@@ -35,7 +29,7 @@ namespace LogicCircuit {
 			InputPinSocket pin = this.socket.Inputs.FirstOrDefault(i => i.Pin.Name == inputName);
 			if(pin == null) {
 				throw new CircuitException(Cause.UserError,
-					string.Format(CultureInfo.InvariantCulture, "Input pin {0} not found on Logical Circuit {1}", inputName, this.LogicalCircuit.Name)
+					string.Format(CultureInfo.InvariantCulture, "Input pin {0} not found on Logical Circuit {1}", inputName, this.logicalCircuitName)
 				);
 			}
 			pin.Function.Value = value;
@@ -53,7 +47,7 @@ namespace LogicCircuit {
 			OutputPinSocket pin = this.socket.Outputs.First(o => o.Pin.Name == outputName);
 			if(pin == null) {
 				throw new CircuitException(Cause.UserError,
-					string.Format(CultureInfo.InvariantCulture, "Output pin {0} not found on Logical Circuit {1}", outputName, this.LogicalCircuit.Name)
+					string.Format(CultureInfo.InvariantCulture, "Output pin {0} not found on Logical Circuit {1}", outputName, this.logicalCircuitName)
 				);
 			}
 			return pin.Function.Pack();
@@ -67,7 +61,7 @@ namespace LogicCircuit {
 			OutputPinSocket pin = this.socket.Outputs.FirstOrDefault(o => o.Pin.Name == outputName);
 			if(pin == null) {
 				throw new CircuitException(Cause.UserError,
-					string.Format(CultureInfo.InvariantCulture, "Output pin {0} not found on Logical Circuit {1}", outputName, this.LogicalCircuit.Name)
+					string.Format(CultureInfo.InvariantCulture, "Output pin {0} not found on Logical Circuit {1}", outputName, this.logicalCircuitName)
 				);
 			}
 			int value;

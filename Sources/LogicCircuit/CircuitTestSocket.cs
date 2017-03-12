@@ -200,8 +200,9 @@ namespace LogicCircuit {
 				LogicalCircuit other = null;
 				CircuitProject copy = new CircuitProject();
 				copy.InTransaction(() => {
-					copy.ProjectSet.Copy(circuit.CircuitProject.ProjectSet.Project);
+					Project project = copy.ProjectSet.Copy(circuit.CircuitProject.ProjectSet.Project);
 					other = copy.LogicalCircuitSet.Copy(circuit, true);
+					project.LogicalCircuit = other;
 				});
 				foreach(CircuitSymbol symbol in other.CircuitSymbols()) {
 					symbol.GuaranteeGlyph();
