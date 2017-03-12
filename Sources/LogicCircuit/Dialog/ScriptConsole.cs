@@ -57,8 +57,7 @@ namespace LogicCircuit {
 				string[] item = text.Split(new char[] { '\n' }, Settings.User.MaxRecentFileCount, StringSplitOptions.RemoveEmptyEntries);
 				if(item != null) {
 					HashSet<string> set = new HashSet<string>();
-					foreach(string c in item) {
-						string command = c.Trim();
+					foreach(string command in item) {
 						if(set.Add(command)) {
 							list.Add(command);
 						}
@@ -77,9 +76,11 @@ namespace LogicCircuit {
 		}
 
 		private void HistoryAdd(string text) {
-			this.history.Remove(text);
-			this.history.Add(text);
-			this.historyIndex = this.history.Count;
+			if(!string.IsNullOrWhiteSpace(text)) {
+				this.history.Remove(text);
+				this.history.Add(text);
+				this.historyIndex = this.history.Count;
+			}
 		}
 
 		private void SetCommand(string text) {

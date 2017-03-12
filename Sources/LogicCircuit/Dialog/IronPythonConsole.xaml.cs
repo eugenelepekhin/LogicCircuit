@@ -40,6 +40,7 @@ namespace LogicCircuit {
 		private MemoryStream stdout;
 		private LogWriter writer;
 		private ScriptScope scope;
+		private StringBuilder command = new StringBuilder();
 
 		private IronPythonConsole(Mainframe mainframe) {
 			this.DataContext = this;
@@ -76,21 +77,38 @@ namespace LogicCircuit {
 		}
 
 		private void Prompt() {
-			this.console.Prompt(">>>");
+			if(0 < this.command.Length) {
+				this.console.Prompt("... ");
+			} else {
+				this.console.Prompt(">>> ");
+			}
+		}
+
+		private static bool IsMultiline(string text) {
+			string end = text.Trim();
+			return end.EndsWith(":", StringComparison.Ordinal) || end.EndsWith(@"\", StringComparison.Ordinal);
 		}
 
 		private void Execute(string text) {
-			if(!string.IsNullOrWhiteSpace(text)) {
-				try {
-					dynamic result = this.scriptEngine.Execute(text, this.scope);
-					if(result != null) {
-						this.writer.WriteLine(result.ToString());
-					}
-				} catch(Exception exception) {
-					this.writer.WriteLine(exception.Message);
+			if(0 < text.Length && (0 < this.command.Length || IronPythonConsole.IsMultiline(text))) {
+				this.command.AppendLine(text);
+			} else {
+				if(string.IsNullOrWhiteSpace(text) && 0 < this.command.Length) {
+					text = this.command.ToString();
+					this.command.Length = 0;
 				}
-				this.Prompt();
+				if(!string.IsNullOrWhiteSpace(text)) {
+					try {
+						dynamic result = this.scriptEngine.Execute(text, this.scope);
+						if(result != null) {
+							this.writer.WriteLine(result.ToString());
+						}
+					} catch(Exception exception) {
+						this.writer.WriteLine(exception.Message);
+					}
+				}
 			}
+			this.Prompt();
 		}
 
 		private class LogWriter : TextWriter {
