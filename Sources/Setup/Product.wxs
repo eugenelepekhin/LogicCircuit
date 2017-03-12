@@ -42,6 +42,21 @@
 							</Extension>
 						</ProgId>
 					</Component>
+					<Component Id="IronPython_dllComponent">
+						<File Id="IronPython_dll" Source="$(var.LogicCircuit.TargetDir)IronPython.dll"/>
+					</Component>
+					<Component Id="IronPython_Modules_dllComponent">
+						<File Id="IronPython_Modules_dll" Source="$(var.LogicCircuit.TargetDir)IronPython.Modules.dll"/>
+					</Component>
+					<Component Id="Microsoft_Dynamic_dllComponent">
+						<File Id="Microsoft_Dynamic_dll" Source="$(var.LogicCircuit.TargetDir)Microsoft.Dynamic.dll"/>
+					</Component>
+					<Component Id="Microsoft_Scripting_dllComponent">
+						<File Id="Microsoft_Scripting_dll" Source="$(var.LogicCircuit.TargetDir)Microsoft.Scripting.dll"/>
+					</Component>
+					<Component Id="Microsoft_Scripting_Metadata_dllComponent">
+						<File Id="Microsoft_Scripting_Metadata_dll" Source="$(var.LogicCircuit.TargetDir)Microsoft.Scripting.Metadata.dll"/>
+					</Component>
 					<Directory Id="ar" Name="ar">
 						<Component Id="arComponent">
 							<File Id="ar" Source="$(var.LogicCircuit.TargetDir)ar\$(var.LogicCircuit.TargetName).resources.dll"/>
@@ -153,6 +168,11 @@
 		</Directory>
 		<Feature Id="ProductFeature" Title="MyWpfApp" Level="1">
 			<ComponentRef Id="ApplicationComponent"/>
+			<ComponentRef Id="IronPython_dllComponent"/>
+			<ComponentRef Id="IronPython_Modules_dllComponent"/>
+			<ComponentRef Id="Microsoft_Dynamic_dllComponent"/>
+			<ComponentRef Id="Microsoft_Scripting_dllComponent"/>
+			<ComponentRef Id="Microsoft_Scripting_Metadata_dllComponent"/>
 			<ComponentRef Id="arComponent"/>
 			<ComponentRef Id="deComponent"/>
 			<ComponentRef Id="el_GRComponent"/>
