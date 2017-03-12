@@ -167,12 +167,15 @@ namespace LogicCircuit {
 					if(invoke) {
 						this.textBox.Dispatcher.Invoke(
 							new Action(() => {
+								bool scroll = (this.textBox.SelectionStart == this.textBox.Text.Length);
 								string str;
 								while(this.queue.TryDequeue(out str)) {
 									this.textBox.AppendText(str);
 								}
-								this.textBox.ScrollToEnd();
-								this.textBox.Select(this.textBox.Text.Length, 0);
+								if(scroll) {
+									this.textBox.ScrollToEnd();
+									this.textBox.Select(this.textBox.Text.Length, 0);
+								}
 							})
 						);
 					}
