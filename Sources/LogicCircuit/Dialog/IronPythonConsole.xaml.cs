@@ -120,18 +120,23 @@ namespace LogicCircuit {
 				this.textBox = textBox;
 			}
 
+			private void Append(string text) {
+				text = text.Replace("\r", "");
+				if(!string.IsNullOrEmpty(text)) {
+					this.textBox.AppendText(text);
+				}
+			}
+
 			public override void Write(char value) {
-				this.textBox.AppendText(new string(value, 1));
+				this.Append(new string(value, 1));
 			}
 
 			public override void Write(char[] buffer, int index, int count) {
-				this.textBox.AppendText(new string(buffer, index, count));
+				this.Append(new string(buffer, index, count));
 			}
 
 			public override void Write(string value) {
-				if(!string.IsNullOrEmpty(value)) {
-					this.textBox.AppendText(value.Replace("\r", ""));
-				}
+				this.Append(value);
 			}
 		}
 	}
