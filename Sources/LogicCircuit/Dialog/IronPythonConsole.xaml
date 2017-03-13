@@ -10,5 +10,5 @@
 	WindowState="{Binding Path=WindowLocation.WindowState, Mode=TwoWay}"
 	FocusManager.FocusedElement="{Binding ElementName=console}"
 >
-	<lc:ScriptConsole x:Name="console" BorderThickness="0" MinLines="5" Margin="0" Padding="3,2" FontFamily="Consolas" FontSize="14"/>
+	<lc:ScriptConsole x:Name="console" BorderThickness="0" MinLines="5" Margin="0" Padding="3,2" FontFamily="Consolas" FontSize="14" FlowDirection="LeftToRight"/>
 </Window>
