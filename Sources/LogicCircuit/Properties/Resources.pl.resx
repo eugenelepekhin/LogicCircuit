@@ -1385,4 +1385,7 @@ danych jest podłączonych do jednego wejścia.</value>
   <data name="PowerOn" xml:space="preserve">
     <value>Wyłącz</value>
   </data>
+  <data name="CommandToolsIronPython" xml:space="preserve">
+    <value>IronPython Konsola</value>
+  </data>
 </root>

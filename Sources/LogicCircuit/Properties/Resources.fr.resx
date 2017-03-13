@@ -1389,4 +1389,7 @@ Permet de selectionner la taille ou couleur de profondeur/système:
   <data name="ErrorBadHexInRange" xml:space="preserve">
     <value>Valeurs comprisent entre {0:X} - {1:X}.</value>
   </data>
+  <data name="CommandToolsIronPython" xml:space="preserve">
+    <value>IronPython Console</value>
+  </data>
 </root>

@@ -1182,4 +1182,7 @@
   <data name="ErrorBadHexInRange" xml:space="preserve">
     <value>عدد باید بین {0:X} و {1:X} باشد.</value>
   </data>
+  <data name="CommandToolsIronPython" xml:space="preserve">
+    <value>کنسول IronPython</value>
+  </data>
 </root>

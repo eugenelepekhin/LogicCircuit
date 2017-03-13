@@ -1434,4 +1434,7 @@
   <data name="ErrorBadHexInRange" xml:space="preserve">
     <value>דרוש מספר בין ‏{0:X}‏ ל‏-‏{1:X}‏.‏</value>
   </data>
+  <data name="CommandToolsIronPython" xml:space="preserve">
+    <value>ממשק שורת פקודה של IronPython</value>
+  </data>
 </root>
