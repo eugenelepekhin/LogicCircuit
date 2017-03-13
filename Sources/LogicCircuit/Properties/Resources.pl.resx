@@ -1386,6 +1386,6 @@ danych jest podłączonych do jednego wejścia.</value>
     <value>Wyłącz</value>
   </data>
   <data name="CommandToolsIronPython" xml:space="preserve">
-    <value>IronPython Konsola</value>
+    <value>Konsola IronPython</value>
   </data>
 </root>
