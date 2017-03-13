@@ -1383,4 +1383,7 @@
   <data name="ErrorBadHexInRange" xml:space="preserve">
     <value>Η τιμή να κυμαίνεται από {0:X} - {1:X}.</value>
   </data>
+  <data name="CommandToolsIronPython" xml:space="preserve">
+    <value>Κονσόλα IronPython</value>
+  </data>
 </root>

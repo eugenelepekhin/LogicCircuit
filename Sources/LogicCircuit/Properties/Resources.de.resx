@@ -1389,4 +1389,7 @@ Es ist möglich die Größe und Farbtiefe/Grafik zu wählen:
   <data name="ErrorBadHexInRange" xml:space="preserve">
     <value>Erwarte Zahl im Bereich {0:X} - {1:X}.</value>
   </data>
+  <data name="CommandToolsIronPython" xml:space="preserve">
+    <value>IronPython Konsole</value>
+  </data>
 </root>

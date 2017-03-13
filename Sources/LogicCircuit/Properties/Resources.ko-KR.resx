@@ -1368,4 +1368,7 @@ Tri-state와 적절한 제어 회로를 함께 써서 멀티플렉서를 만들 
   <data name="ErrorBadHexInRange" xml:space="preserve">
     <value>{0:X} - {1:X} 범위내의 수를 입력하십시오.</value>
   </data>
+  <data name="CommandToolsIronPython" xml:space="preserve">
+    <value>IronPython 콘솔</value>
+  </data>
 </root>

@@ -1376,4 +1376,7 @@ Out</value>
   <data name="ErrorBadHexInRange" xml:space="preserve">
     <value>该数字应当介于 {0:X} 和 {1:X}</value>
   </data>
+  <data name="CommandToolsIronPython" xml:space="preserve">
+    <value>IronPython 控制台</value>
+  </data>
 </root>
