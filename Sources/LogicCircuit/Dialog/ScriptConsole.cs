@@ -172,7 +172,7 @@ namespace LogicCircuit {
 					e.Handled = true;
 					break;
 				case Key.C:
-					if(e.KeyboardDevice.Modifiers == ModifierKeys.Control && this.CommandBreak()) {
+					if(e.KeyboardDevice.Modifiers == ModifierKeys.Control && 0 == this.SelectionLength && this.CommandBreak()) {
 						e.Handled = true;
 						return;
 					}
