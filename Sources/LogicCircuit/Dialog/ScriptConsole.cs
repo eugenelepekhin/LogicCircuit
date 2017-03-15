@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -155,6 +156,7 @@ namespace LogicCircuit {
 		//Ctrl+X:  Cut selected text
 		//Ctrl+C:  Copy selected text
 		//Ctrl+V:  Paste text at current position
+		[SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
 		protected override void OnPreviewKeyDown(KeyEventArgs e) {
 			try {
 				string text;
@@ -174,32 +176,26 @@ namespace LogicCircuit {
 				case Key.C:
 					if(e.KeyboardDevice.Modifiers == ModifierKeys.Control && 0 == this.SelectionLength && this.CommandBreak()) {
 						e.Handled = true;
-						return;
 					}
-					base.OnPreviewKeyDown(e);
 					break;
 				case Key.Up:
 					if(this.IsEditAllowed()) {
 						this.HistoryUp();
 						e.Handled = true;
-					} else {
-						base.OnPreviewKeyDown(e);
 					}
 					break;
 				case Key.Down:
 					if(this.IsEditAllowed()) {
 						this.HistoryDown();
 						e.Handled = true;
-					} else {
-						base.OnPreviewKeyDown(e);
 					}
 					break;
 				case Key.Left:
-					if(this.SelectionStart < this.inputStarts || this.inputStarts < this.SelectionStart &&
-						(e.KeyboardDevice.Modifiers != ModifierKeys.Control || !string.IsNullOrWhiteSpace(this.Text.Substring(this.inputStarts, this.SelectionStart - this.inputStarts)))
+					if(this.inputStarts == this.SelectionStart ||
+						this.inputStarts < this.SelectionStart &&
+						(e.KeyboardDevice.Modifiers & ModifierKeys.Control) == ModifierKeys.Control &&
+						string.IsNullOrWhiteSpace(this.Text.Substring(this.inputStarts, this.SelectionStart - this.inputStarts))
 					) {
-						base.OnPreviewKeyDown(e);
-					} else {
 						e.Handled = true;
 					}
 					break;
@@ -211,27 +207,23 @@ namespace LogicCircuit {
 							this.Select(this.inputStarts, 0);
 						}
 						e.Handled = true;
-					} else {
-						base.OnPreviewKeyDown(e);
 					}
 					break;
 				case Key.Delete:
-					if(this.IsEditAllowed()) {
-						base.OnPreviewKeyDown(e);
-					} else {
+					if(!this.IsEditAllowed()) {
 						e.Handled = true;
 					}
 					break;
 				case Key.Back:
-					if(this.inputStarts < this.SelectionStart) {
-						base.OnPreviewKeyDown(e);
-					} else {
+					if(this.SelectionStart < this.inputStarts || this.SelectionStart == this.inputStarts && this.SelectionLength == 0) {
 						e.Handled = true;
 					}
 					break;
 				default:
-					base.OnPreviewKeyDown(e);
 					break;
+				}
+				if(!e.Handled) {
+					base.OnPreviewKeyDown(e);
 				}
 			} catch(Exception exception) {
 				App.Mainframe.ReportException(exception);
