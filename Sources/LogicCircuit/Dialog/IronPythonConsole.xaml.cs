@@ -83,7 +83,8 @@ namespace LogicCircuit {
 			this.scriptEngine.Execute("clr.AddReference(\"LogicCircuit\")", this.scope);
 			this.scriptEngine.Execute("from LogicCircuit import *", this.scope);
 
-			this.writer.WriteLine("IronPython " + this.scriptEngine.LanguageVersion.ToString());
+			Version version = this.scriptEngine.LanguageVersion;
+			this.writer.WriteLine("IronPython " + version.ToString(version.Revision == 0 ? 3 : 4));
 			this.Prompt();
 		}
 
