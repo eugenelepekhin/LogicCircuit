@@ -9,7 +9,7 @@ using System.Windows.Threading;
 namespace LogicCircuit {
 	public class ScriptConsole : TextBox {
 		public Action<string> CommandEnter { get; set; } = text => {};
-		public Action CommandBreak { get; set; } = () => {};
+		public Func<bool> CommandBreak { get; set; } = () => false;
 
 		private int inputStarts = 0;
 
@@ -113,10 +113,12 @@ namespace LogicCircuit {
 			}
 		}
 
-		public void Prompt(string promptText) {
-			string text = this.Text;
-			if(0 < text.Length && text[text.Length - 1] != '\n') {
-				this.AppendText("\n");
+		public void Prompt(bool fromNewLine, string promptText) {
+			if(fromNewLine) {
+				string text = this.Text;
+				if(0 < text.Length && text[text.Length - 1] != '\n') {
+					this.AppendText("\n");
+				}
 			}
 			this.AppendText(promptText);
 			this.ScrollToEnd();
@@ -170,12 +172,11 @@ namespace LogicCircuit {
 					e.Handled = true;
 					break;
 				case Key.C:
-					if(e.KeyboardDevice.Modifiers == ModifierKeys.Control && this.inputStarts == int.MaxValue) {
-						this.CommandBreak();
+					if(e.KeyboardDevice.Modifiers == ModifierKeys.Control && this.CommandBreak()) {
 						e.Handled = true;
-					} else {
-						base.OnPreviewKeyDown(e);
+						return;
 					}
+					base.OnPreviewKeyDown(e);
 					break;
 				case Key.Up:
 					if(this.IsEditAllowed()) {

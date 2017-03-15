@@ -50,6 +50,8 @@ namespace LogicCircuit {
 		private ScriptEngine scriptEngine;
 		private MemoryStream stdout;
 		private LogWriter writer;
+		private MemoryStream stdin;
+		private LogReader reader;
 		private ScriptScope scope;
 		private StringBuilder command = new StringBuilder();
 		private Thread thread;
@@ -61,10 +63,13 @@ namespace LogicCircuit {
 			this.scriptEngine = Python.CreateEngine();
 			this.stdout = new MemoryStream();
 			this.writer = new LogWriter(this.console);
+			this.stdin = new MemoryStream();
+			this.reader = new LogReader(this.console);
 			this.console.CommandEnter = this.Execute;
 			this.console.CommandBreak = this.Abort;
 
 			this.scriptEngine.Runtime.IO.SetOutput(this.stdout, this.writer);
+			this.scriptEngine.Runtime.IO.SetInput(this.stdin, this.reader, Encoding.UTF8);
 			this.scope = this.scriptEngine.CreateScope();
 			this.scope.SetVariable("mainframe", mainframe);
 
@@ -92,11 +97,13 @@ namespace LogicCircuit {
 			IronPythonConsole.currentConsole = null;
 			this.stdout.Close();
 			this.writer.Close();
+			this.stdin.Close();
+			this.reader.Close();
 		}
 
 		private void Prompt() {
 			string text = (0 < this.command.Length) ? "... " : ">>> ";
-			this.Dispatcher.BeginInvoke(new Action(() => this.console.Prompt(text)), DispatcherPriority.ApplicationIdle);
+			this.Dispatcher.BeginInvoke(new Action(() => this.console.Prompt(true, text)), DispatcherPriority.ApplicationIdle);
 		}
 
 		private static bool IsMultiline(string text) {
@@ -145,15 +152,17 @@ namespace LogicCircuit {
 			this.thread.Start();
 		}
 
-		private void Abort() {
+		private bool Abort() {
 			try {
 				Thread t = this.thread;
 				if(t != null) {
 					t.Abort();
+					return true;
 				}
 			} catch(Exception exception) {
 				App.Mainframe.ReportException(exception);
 			}
+			return false;
 		}
 
 		private class LogWriter : TextWriter {
@@ -199,6 +208,48 @@ namespace LogicCircuit {
 
 			public override void Write(string value) {
 				this.Append(value);
+			}
+		}
+
+		private class LogReader : TextReader {
+			private readonly ScriptConsole console;
+			private StringReader stringReader;
+
+			public LogReader(ScriptConsole console) : base() {
+				this.console = console;
+			}
+
+			public override string ReadLine() {
+				Action<string> oldEnter = this.console.CommandEnter;
+				try {
+					AutoResetEvent waiter = new AutoResetEvent(false);
+					string line = null;
+					this.console.CommandEnter = text => {
+						line = text;
+						waiter.Set();
+					};
+					this.console.Dispatcher.Invoke(() => this.console.Prompt(false, string.Empty));
+					waiter.WaitOne();
+					return line;
+				} finally {
+					this.console.CommandEnter = oldEnter;
+				}
+			}
+
+			public override int Read() {
+				if(this.stringReader == null) {
+					string line = this.ReadLine();
+					if(string.IsNullOrEmpty(line)) {
+						return -1;
+					}
+					this.stringReader = new StringReader(line + "\n");
+				}
+				int i = this.stringReader.Read();
+				if(i < 0) {
+					this.stringReader.Close();
+					this.stringReader = null;
+				}
+				return i;
 			}
 		}
 	}
