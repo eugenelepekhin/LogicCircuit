@@ -160,6 +160,11 @@ namespace LogicCircuit {
 					t.Abort();
 					return true;
 				}
+				if(0 < this.command.Length) {
+					this.command.Length = 0;
+					this.Prompt();
+					return true;
+				}
 			} catch(Exception exception) {
 				App.Mainframe.ReportException(exception);
 			}

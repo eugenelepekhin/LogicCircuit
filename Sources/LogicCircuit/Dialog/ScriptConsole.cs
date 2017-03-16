@@ -21,6 +21,7 @@ namespace LogicCircuit {
 		public ScriptConsole() {
 			this.IsUndoEnabled = false;
 			this.AcceptsReturn = true;
+			this.AcceptsTab = true;
 			this.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
 			this.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
 			this.CommandBindings.Add(new CommandBinding(
