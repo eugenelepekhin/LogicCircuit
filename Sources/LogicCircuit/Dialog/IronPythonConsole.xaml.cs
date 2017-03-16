@@ -72,7 +72,7 @@ namespace LogicCircuit {
 			this.scriptEngine.Runtime.IO.SetOutput(this.stdout, this.writer);
 			this.scriptEngine.Runtime.IO.SetInput(this.stdin, this.reader, Encoding.UTF8);
 			this.scope = this.scriptEngine.CreateScope();
-			this.scope.SetVariable("mainframe", mainframe);
+			//this.scope.SetVariable("mainframe", mainframe);
 
 			this.scope.ImportModule("clr");
 			this.scriptEngine.Execute("import clr", this.scope);
@@ -84,8 +84,7 @@ namespace LogicCircuit {
 			this.scriptEngine.Execute("clr.AddReference(\"LogicCircuit\")", this.scope);
 			this.scriptEngine.Execute("from LogicCircuit import *", this.scope);
 
-			Version version = this.scriptEngine.LanguageVersion;
-			this.writer.WriteLine("IronPython " + version.ToString(version.Revision == 0 ? 3 : 4));
+			this.writer.WriteLine(this.scriptEngine.Setup.DisplayName);
 			this.Prompt();
 		}
 
