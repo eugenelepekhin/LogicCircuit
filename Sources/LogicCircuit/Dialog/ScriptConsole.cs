@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
+using System.Xml;
 
 namespace LogicCircuit {
 	public class ScriptConsole : TextBox {
@@ -57,32 +58,43 @@ namespace LogicCircuit {
 		private List<string> LoadHistory() {
 			List<string> list = new List<string>();
 			string text = this.historySettings.Value;
-			if(!string.IsNullOrEmpty(text)) {
-				string[] item = text.Split(new char[] { '\n' }, Settings.User.MaxRecentFileCount, StringSplitOptions.RemoveEmptyEntries);
-				if(item != null) {
-					HashSet<string> set = new HashSet<string>();
-					foreach(string command in item) {
-						if(set.Add(command)) {
-							list.Add(command);
-						}
+			if(!string.IsNullOrWhiteSpace(text)) {
+				try {
+					XmlDocument xml = new XmlDocument();
+					xml.LoadXml(text);
+					foreach(XmlNode item in xml.SelectNodes("/List/Item")) {
+						list.Add(item.InnerText);
 					}
+				} catch(Exception exception) {
+					Tracer.Report("ScriptConsole.LoadHistory", exception);
+					//Ignore the exception
+				}
+				int count = list.Count - Settings.User.MaxRecentFileCount * 2;
+				if(0 < count) {
+					list.RemoveRange(0, count);
 				}
 			}
 			return list;
 		}
 
 		private void SaveHistory() {
-			StringBuilder text = new StringBuilder();
-			for(int i = Math.Max(0, this.history.Count - Settings.User.MaxRecentFileCount); i < this.history.Count; i++) {
-				text.AppendLine(this.history[i]);
+			XmlDocument xml = new XmlDocument();
+			XmlNode list = xml.AppendChild(xml.CreateElement("List"));
+			foreach(string line in this.history) {
+				XmlNode item = list.AppendChild(xml.CreateElement("Item"));
+				item.InnerText = line;
 			}
-			this.historySettings.Value = text.ToString();
+			this.historySettings.Value = xml.InnerXml;
 		}
 
 		private void HistoryAdd(string text) {
 			if(!string.IsNullOrWhiteSpace(text)) {
 				this.history.Remove(text);
 				this.history.Add(text);
+				int count = this.history.Count - Settings.User.MaxRecentFileCount * 2;
+				if(0 < count) {
+					this.history.RemoveRange(0, count);
+				}
 				this.historyIndex = this.history.Count;
 			}
 		}
