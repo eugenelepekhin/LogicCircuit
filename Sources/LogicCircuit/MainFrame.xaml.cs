@@ -177,7 +177,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		public void NotifyPropertyChanged(PropertyChangedEventHandler handler, object sender, string propertyName) {
+		internal void NotifyPropertyChanged(PropertyChangedEventHandler handler, object sender, string propertyName) {
 			if(handler != null) {
 				if(this.Dispatcher.Thread != Thread.CurrentThread) {
 					this.Dispatcher.BeginInvoke(new Action<PropertyChangedEventHandler, object, string>(this.NotifyPropertyChanged),

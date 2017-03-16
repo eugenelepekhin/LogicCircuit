@@ -21,7 +21,7 @@ namespace LogicCircuit {
 	public sealed partial class IronPythonConsole : Window {
 		private static IronPythonConsole currentConsole = null;
 
-		public static void Run(Window parent) {
+		internal static void Run(Window parent) {
 			if(IronPythonConsole.currentConsole == null) {
 				IronPythonConsole console = new IronPythonConsole();
 				console.Owner = parent;
@@ -32,7 +32,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		public static void Stop() {
+		internal static void Stop() {
 			if(IronPythonConsole.currentConsole != null) {
 				IronPythonConsole.currentConsole.Close();
 			}

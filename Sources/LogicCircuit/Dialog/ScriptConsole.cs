@@ -9,8 +9,8 @@ using System.Xml;
 
 namespace LogicCircuit {
 	public class ScriptConsole : TextBox {
-		public Action<string> CommandEnter { get; set; } = text => {};
-		public Func<bool> CommandBreak { get; set; } = () => false;
+		internal Action<string> CommandEnter { get; set; } = text => {};
+		internal Func<bool> CommandBreak { get; set; } = () => false;
 
 		private int inputStarts = 0;
 
@@ -128,7 +128,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		public void Prompt(bool fromNewLine, string promptText) {
+		internal void Prompt(bool fromNewLine, string promptText) {
 			if(fromNewLine) {
 				string text = this.Text;
 				if(0 < text.Length && text[text.Length - 1] != '\n') {
