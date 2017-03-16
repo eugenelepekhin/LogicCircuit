@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using IronPython.Hosting;
+using Microsoft.Scripting;
 using Microsoft.Scripting.Hosting;
 
 namespace LogicCircuit {
@@ -107,25 +108,22 @@ namespace LogicCircuit {
 			this.Dispatcher.BeginInvoke(new Action(() => this.console.Prompt(true, text)), DispatcherPriority.ApplicationIdle);
 		}
 
-		private static bool IsMultiline(string text) {
-			string end = text.Trim();
-			return end.EndsWith(":", StringComparison.Ordinal) || end.EndsWith(@"\", StringComparison.Ordinal);
+		private bool CanExecute(string text) {
+			CompilerOptions options = this.scriptEngine.GetCompilerOptions(this.scope);
+			ScriptCodeParseResult result = this.scriptEngine.CreateScriptSourceFromString(text, SourceCodeKind.InteractiveCode).GetCodeProperties(options);
+			return (result == ScriptCodeParseResult.Complete || result == ScriptCodeParseResult.Empty || result == ScriptCodeParseResult.Invalid);
 		}
 
 		private void Execute(string text) {
-			if(0 < text.Length && (0 < this.command.Length || IronPythonConsole.IsMultiline(text))) {
-				this.command.AppendLine(text);
+			bool isEmpty = string.IsNullOrEmpty(text);
+			this.command.AppendLine(text);
+			text = this.command.ToString();
+			if(isEmpty && !string.IsNullOrEmpty(text) || this.CanExecute(text)) {
+				this.command.Length = 0;
+				this.Start(text);
 			} else {
-				if(string.IsNullOrWhiteSpace(text) && 0 < this.command.Length) {
-					text = this.command.ToString();
-					this.command.Length = 0;
-				}
-				if(!string.IsNullOrWhiteSpace(text)) {
-					this.Start(text);
-					return;
-				}
+				this.Prompt();
 			}
-			this.Prompt();
 		}
 
 		private void Start(string text) {
