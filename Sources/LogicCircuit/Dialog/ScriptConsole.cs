@@ -187,6 +187,12 @@ namespace LogicCircuit {
 					this.Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new Action(() => this.CommandEnter(text)));
 					e.Handled = true;
 					break;
+				case Key.Escape:
+					if(this.IsEditAllowed()) {
+						this.SetCommand(string.Empty);
+						e.Handled = true;
+					}
+					break;
 				case Key.C:
 					if(e.KeyboardDevice.Modifiers == ModifierKeys.Control && 0 == this.SelectionLength && this.CommandBreak()) {
 						e.Handled = true;
