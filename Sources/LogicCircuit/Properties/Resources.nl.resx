@@ -1428,4 +1428,7 @@ Hier kunt u grootte en kleurdiepte kiezen:
   <data name="ErrorBadHexInRange" xml:space="preserve">
     <value>Getal moet liggen tussen {0:X} - {1:X}</value>
   </data>
+  <data name="CommandToolsIronPython" xml:space="preserve">
+    <value>IronPython Console</value>
+  </data>
 </root>
