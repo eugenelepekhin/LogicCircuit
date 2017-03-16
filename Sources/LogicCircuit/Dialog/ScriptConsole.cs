@@ -17,6 +17,7 @@ namespace LogicCircuit {
 		private SettingsStringCache historySettings = new SettingsStringCache(Settings.User, "ScriptConsole.History", null);
 		private List<string> history;
 		private int historyIndex;
+		private static int MaxHistoryCount => Settings.User.MaxRecentFileCount * 2;
 
 		public ScriptConsole() {
 			this.IsUndoEnabled = false;
@@ -68,7 +69,7 @@ namespace LogicCircuit {
 					Tracer.Report("ScriptConsole.LoadHistory", exception);
 					//Ignore the exception
 				}
-				int count = list.Count - Settings.User.MaxRecentFileCount * 2;
+				int count = list.Count - ScriptConsole.MaxHistoryCount;
 				if(0 < count) {
 					list.RemoveRange(0, count);
 				}
@@ -90,7 +91,7 @@ namespace LogicCircuit {
 			if(!string.IsNullOrWhiteSpace(text)) {
 				this.history.Remove(text);
 				this.history.Add(text);
-				int count = this.history.Count - Settings.User.MaxRecentFileCount * 2;
+				int count = this.history.Count - ScriptConsole.MaxHistoryCount;
 				if(0 < count) {
 					this.history.RemoveRange(0, count);
 				}
@@ -120,7 +121,8 @@ namespace LogicCircuit {
 		protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e) {
 			base.OnPropertyChanged(e);
 			if(e.Property == TextBox.IsUndoEnabledProperty && this.IsUndoEnabled ||
-				e.Property == TextBox.AcceptsReturnProperty && !this.AcceptsReturn
+				e.Property == TextBox.AcceptsReturnProperty && !this.AcceptsReturn ||
+				e.Property == TextBox.AcceptsTabProperty && !this.AcceptsTab
 			) {
 				throw new InvalidOperationException();
 			}

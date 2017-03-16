@@ -21,10 +21,10 @@ namespace LogicCircuit {
 	public sealed partial class IronPythonConsole : Window {
 		private static IronPythonConsole currentConsole = null;
 
-		public static void Run(Mainframe mainframe) {
+		public static void Run(Window parent) {
 			if(IronPythonConsole.currentConsole == null) {
-				IronPythonConsole console = new IronPythonConsole(mainframe);
-				console.Owner = mainframe;
+				IronPythonConsole console = new IronPythonConsole();
+				console.Owner = parent;
 				IronPythonConsole.currentConsole = console;
 				console.Show();
 			} else {
@@ -57,7 +57,7 @@ namespace LogicCircuit {
 		private StringBuilder command = new StringBuilder();
 		private Thread thread;
 
-		private IronPythonConsole(Mainframe mainframe) {
+		private IronPythonConsole() {
 			this.DataContext = this;
 			this.InitializeComponent();
 
@@ -72,7 +72,6 @@ namespace LogicCircuit {
 			this.scriptEngine.Runtime.IO.SetOutput(this.stdout, this.writer);
 			this.scriptEngine.Runtime.IO.SetInput(this.stdin, this.reader, Encoding.UTF8);
 			this.scope = this.scriptEngine.CreateScope();
-			//this.scope.SetVariable("mainframe", mainframe);
 
 			this.scope.ImportModule("clr");
 			this.scriptEngine.Execute("import clr", this.scope);
