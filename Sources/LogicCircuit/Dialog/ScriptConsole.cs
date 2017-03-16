@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -204,7 +203,7 @@ namespace LogicCircuit {
 					}
 					break;
 				case Key.Left:
-					if(this.inputStarts == this.SelectionStart ||
+					if(this.inputStarts == this.SelectionStart && this.SelectionLength == 0 ||
 						this.inputStarts < this.SelectionStart &&
 						(e.KeyboardDevice.Modifiers & ModifierKeys.Control) == ModifierKeys.Control &&
 						string.IsNullOrWhiteSpace(this.Text.Substring(this.inputStarts, this.SelectionStart - this.inputStarts))
