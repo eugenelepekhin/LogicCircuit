@@ -17,9 +17,6 @@ namespace LogicCircuit {
 			this.logicalCircuitName = circuit.Name;
 
 			this.socket = new CircuitTestSocket(circuit, false);
-			// start transaction on the copy of main circuit.
-			bool started = this.socket.Inputs.First().Pin.CircuitProject.StartTransaction();
-			Tracer.Assert(started);
 		}
 
 		public void SetInput(string inputName, int value) {
