@@ -134,7 +134,7 @@ namespace LogicCircuit {
 				} catch(ThreadAbortException) {
 					this.writer.WriteLine("Script terminated by user");
 				} catch(Exception exception) {
-					this.writer.WriteLine(exception.Message);
+					this.writer.WriteLine("{0}: {1}", exception.GetType().Name, exception.Message);
 				} finally {
 					this.Prompt();
 					this.thread = null;

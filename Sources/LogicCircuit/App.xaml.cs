@@ -49,10 +49,10 @@ namespace LogicCircuit {
 			set { App.currentCultureName.Value = (value ?? CultureInfo.GetCultureInfo(App.DefaultCultureName())).Name; }
 		}
 
-		public static App CurrentApp { get { return (App)App.Current; } }
-		public static Mainframe Mainframe { get; set; }
+		internal static App CurrentApp { get { return (App)App.Current; } }
+		internal static Mainframe Mainframe { get; set; }
 
-		public string FileToOpen { get; private set; }
+		internal string FileToOpen { get; private set; }
 
 		protected override void OnStartup(StartupEventArgs e) {
 			App.InitLogging();
@@ -139,11 +139,13 @@ namespace LogicCircuit {
 
 		// Scripting support
 
+		public static Editor Editor => App.Mainframe?.Editor;
+
 		public static CircuitTester CreateTester(string circuitName) {
 			if(string.IsNullOrEmpty(circuitName)) {
 				throw new ArgumentNullException(nameof(circuitName));
 			}
-			Editor editor = App.Mainframe?.Editor;
+			Editor editor = App.Editor;
 			if(editor == null) {
 				throw new InvalidOperationException("Editor was not created yet");
 			}
@@ -161,6 +163,14 @@ namespace LogicCircuit {
 
 		public static void ClearConsole() {
 			IronPythonConsole.Clear();
+		}
+
+		public static void Dispatch(Action action) {
+			App.Mainframe.Dispatcher.Invoke(action);
+		}
+
+		public static void InTransaction(Action action) {
+			App.Editor.CircuitProject.InTransaction(action);
 		}
 	}
 }
