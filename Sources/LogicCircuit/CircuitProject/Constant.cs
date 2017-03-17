@@ -19,9 +19,18 @@ namespace LogicCircuit {
 			return value;
 		}
 
+		internal bool IsInputPinSocket { get; set; }
+		private int inputPinSocketValue;
+
 		public int ConstantValue {
-			get { return Constant.Normalize(this.Value, this.BitWidth); }
-			set { this.Value = Constant.Normalize(value, this.BitWidth); }
+			get { return Constant.Normalize(this.IsInputPinSocket ? this.inputPinSocketValue : this.Value, this.BitWidth); }
+			set {
+				if(this.IsInputPinSocket) {
+					this.inputPinSocketValue = Constant.Normalize(value, this.BitWidth);
+				} else {
+					this.Value = Constant.Normalize(value, this.BitWidth);
+				}
+			}
 		}
 
 		public override string Name {
