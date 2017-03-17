@@ -136,5 +136,31 @@ namespace LogicCircuit {
 			EditingCommands.IncreaseIndentation.Text = LogicCircuit.Properties.Resources.CommandEditIncreaseIndentation;
 			EditingCommands.DecreaseIndentation.Text = LogicCircuit.Properties.Resources.CommandEditDecreaseIndentation;
 		}
+
+		// Scripting support
+
+		public static CircuitTester CreateTester(string circuitName) {
+			if(string.IsNullOrEmpty(circuitName)) {
+				throw new ArgumentNullException(nameof(circuitName));
+			}
+			Editor editor = App.Mainframe?.Editor;
+			if(editor == null) {
+				throw new InvalidOperationException("Editor was not created yet");
+			}
+			LogicalCircuit circuit = editor.CircuitProject.LogicalCircuitSet.FindByName(circuitName);
+			if(circuit == null) {
+				throw new CircuitException(Cause.UserError, string.Format(CultureInfo.InvariantCulture, "Logical Circuit {0} not found", circuitName));
+			}
+			if(!CircuitTestSocket.IsTestable(circuit)) {
+				throw new CircuitException(Cause.UserError,
+					string.Format(CultureInfo.InvariantCulture, "Logical Circuit {0} is not testable. There are no any input or/and output pins on it.", circuitName)
+				);
+			}
+			return new CircuitTester(editor, circuit);
+		}
+
+		public static void ClearConsole() {
+			IronPythonConsole.Clear();
+		}
 	}
 }

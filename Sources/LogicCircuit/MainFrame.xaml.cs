@@ -238,26 +238,6 @@ namespace LogicCircuit {
 			return window.ShowDialog();
 		}
 
-		public CircuitTester CreateCircuitTester(string circuitName) {
-			if(string.IsNullOrEmpty(circuitName)) {
-				throw new ArgumentNullException(nameof(circuitName));
-			}
-			Editor e = this.Editor;
-			if(e == null) {
-				throw new InvalidOperationException("Editor was not created yet");
-			}
-			LogicalCircuit circuit = e.CircuitProject.LogicalCircuitSet.FindByName(circuitName);
-			if(circuit == null) {
-				throw new CircuitException(Cause.UserError, string.Format(CultureInfo.InvariantCulture, "Logical Circuit {0} not found", circuitName));
-			}
-			if(!CircuitTestSocket.IsTestable(circuit)) {
-				throw new CircuitException(Cause.UserError,
-					string.Format(CultureInfo.InvariantCulture, "Logical Circuit {0} is not testable. There are no any input or/and output pins on it.", circuitName)
-				);
-			}
-			return new CircuitTester(e, circuit);
-		}
-
 		private void WindowKeyDown(object sender, KeyEventArgs e) {
 			try {
 				if(this.Editor != null) {

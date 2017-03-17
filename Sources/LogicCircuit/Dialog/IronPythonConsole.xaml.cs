@@ -38,7 +38,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		public static void Clear() {
+		internal static void Clear() {
 			IronPythonConsole console = IronPythonConsole.currentConsole;
 			if(console != null) {
 				console.Dispatcher.Invoke(() => console.console.Clear());
