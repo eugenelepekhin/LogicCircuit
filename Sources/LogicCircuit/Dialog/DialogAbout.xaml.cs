@@ -44,7 +44,7 @@ namespace LogicCircuit {
 				if(error != null) {
 					App.Mainframe.ReportException(error);
 				} else {
-					int result = this.Version.CompareTo(version);
+					int result = version != null ? this.Version.CompareTo(version) : 0;
 					if(result < 0) {
 						this.outdatedVersion.Visibility = Visibility.Visible;
 					} else if(result == 0) {
@@ -78,7 +78,7 @@ namespace LogicCircuit {
 				if(VersionChecker.NeedToCheck()) {
 					VersionChecker checker = new VersionChecker();
 					checker.Check((version, error) => {
-						if(error == null && DialogAbout.CurrentVersion() < version) {
+						if(error == null && version != null && DialogAbout.CurrentVersion() < version) {
 							dispatcher.BeginInvoke(
 								new Action(() => DialogAbout.ShowNewVersionAvailable(version)),
 								DispatcherPriority.ApplicationIdle
@@ -200,11 +200,21 @@ namespace LogicCircuit {
 				return false;
 			}
 
+			private static Version ParseVersion(string text) {
+				if(!string.IsNullOrWhiteSpace(text)) {
+					Version version = null;
+					if(Version.TryParse(text, out version)) {
+						return version;
+					}
+				}
+				return null;
+			}
+
 			private void DownloadCompleted(object sender, DownloadStringCompletedEventArgs e) {
 				this.webClient.Dispose();
 				this.webClient = null;
 				this.onComplete(
-					(e.Error == null) ? new Version(e.Result.Trim()) : null,
+					(e.Error == null) ? VersionChecker.ParseVersion(e.Result?.Trim()) : null,
 					e.Error
 				);
 				if(e.Error == null && VersionChecker.LastCheckedCache.Value < DateTime.UtcNow) {
