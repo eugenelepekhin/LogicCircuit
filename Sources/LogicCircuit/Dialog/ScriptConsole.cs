@@ -23,7 +23,7 @@ namespace LogicCircuit {
 		public ScriptConsole() {
 			this.IsUndoEnabled = false;
 			this.AcceptsReturn = true;
-			this.AcceptsTab = true;
+			this.AcceptsTab = false;
 			this.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
 			this.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
 			this.CommandBindings.Add(new CommandBinding(
@@ -106,16 +106,19 @@ namespace LogicCircuit {
 		}
 
 		private void HistoryUp() {
-			if(0 < this.historyIndex) {
-				this.historyIndex--;
-				this.SetCommand(this.history[this.historyIndex]);
+			if(1 < this.historyIndex) {
+				this.SetCommand(this.history[--this.historyIndex]);
+			} else if(1 == this.historyIndex) {
+				this.SetCommand(this.history[0]);
 			}
 		}
 
 		private void HistoryDown() {
-			if(this.historyIndex < this.history.Count - 1) {
-				this.historyIndex++;
-				this.SetCommand(this.history[this.historyIndex]);
+			int count = this.history.Count - 1;
+			if(this.historyIndex < count) {
+				this.SetCommand(this.history[this.historyIndex++]);
+			} else if(this.historyIndex == count) {
+				this.SetCommand(this.history[count]);
 			}
 		}
 
@@ -123,7 +126,7 @@ namespace LogicCircuit {
 			base.OnPropertyChanged(e);
 			if(e.Property == TextBox.IsUndoEnabledProperty && this.IsUndoEnabled ||
 				e.Property == TextBox.AcceptsReturnProperty && !this.AcceptsReturn ||
-				e.Property == TextBox.AcceptsTabProperty && !this.AcceptsTab
+				e.Property == TextBox.AcceptsTabProperty && this.AcceptsTab
 			) {
 				throw new InvalidOperationException();
 			}
@@ -202,8 +205,14 @@ namespace LogicCircuit {
 							this.SelectedText = suggestion;
 							this.ScrollToEnd();
 						}
-						e.Handled = true;
+					} else if(e.KeyboardDevice.Modifiers == ModifierKeys.Control) {
+						int start = this.SelectionStart;
+						int count = 4 - (start - this.inputStarts) % 4;
+						this.SelectedText = new string(' ', count);
+						this.Select(start + count, 0);
+						this.ScrollToEnd();
 					}
+					e.Handled = true;
 					break;
 				case Key.C:
 					if(e.KeyboardDevice.Modifiers == ModifierKeys.Control && 0 == this.SelectionLength && this.CommandBreak()) {
