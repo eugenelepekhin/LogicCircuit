@@ -11,6 +11,7 @@ namespace LogicCircuit {
 	public class ScriptConsole : TextBox {
 		internal Action<string> CommandEnter { get; set; } = text => {};
 		internal Func<bool> CommandBreak { get; set; } = () => false;
+		internal Func<string, string> CommandSuggestion { get; set; } = text => string.Empty;
 
 		private int inputStarts = 0;
 
@@ -190,6 +191,17 @@ namespace LogicCircuit {
 				case Key.Escape:
 					if(this.IsEditAllowed()) {
 						this.SetCommand(string.Empty);
+						e.Handled = true;
+					}
+					break;
+				case Key.Tab:
+					if(e.KeyboardDevice.Modifiers == ModifierKeys.None) {
+						if(this.IsEditAllowed() && this.Text.Length == this.SelectionStart + this.SelectionLength) {
+							text = this.Text.Substring(this.inputStarts, this.SelectionStart - this.inputStarts);
+							string suggestion = this.CommandSuggestion(text);
+							this.SelectedText = suggestion;
+							this.ScrollToEnd();
+						}
 						e.Handled = true;
 					}
 					break;

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows;
@@ -57,6 +59,10 @@ namespace LogicCircuit {
 		private StringBuilder command = new StringBuilder();
 		private Thread thread;
 
+		private string suggestionExpr = null;
+		private List<string> suggestions = null;
+		private int lastSuggestion = 0;
+
 		private IronPythonConsole() {
 			this.DataContext = this;
 			this.InitializeComponent();
@@ -68,6 +74,7 @@ namespace LogicCircuit {
 			this.reader = new LogReader(this.console);
 			this.console.CommandEnter = this.Execute;
 			this.console.CommandBreak = this.Abort;
+			this.console.CommandSuggestion = this.Suggest;
 
 			this.scriptEngine.Runtime.IO.SetOutput(this.stdout, this.writer);
 			this.scriptEngine.Runtime.IO.SetInput(this.stdin, this.reader, Encoding.UTF8);
@@ -113,6 +120,7 @@ namespace LogicCircuit {
 		}
 
 		private void Execute(string text) {
+			this.suggestions = null;
 			bool isEmpty = string.IsNullOrEmpty(text);
 			this.command.AppendLine(text);
 			text = this.command.ToString();
@@ -150,6 +158,7 @@ namespace LogicCircuit {
 		}
 
 		private bool Abort() {
+			this.suggestions = null;
 			try {
 				Thread t = this.thread;
 				if(t != null) {
@@ -165,6 +174,50 @@ namespace LogicCircuit {
 				App.Mainframe.ReportException(exception);
 			}
 			return false;
+		}
+
+		private string Suggest(string text) {
+			string expr = text;
+			for(int i = text.Length; 0 < i; i--) {
+				char c = text[i - 1];
+				if(!char.IsLetterOrDigit(c) && c != '.' && c != '_') {
+					expr = text.Substring(i);
+					break;
+				}
+			}
+			if(!string.IsNullOrWhiteSpace(expr)) {
+				try {
+					int index = expr.LastIndexOf('.');
+					string prefix = expr.Substring(0, Math.Max(0, index));
+					string sofar = (index < 0) ? expr : expr.Substring(index + 1);
+					List<string> list;
+					if(this.suggestionExpr != expr || suggestions == null) {
+						if(string.IsNullOrWhiteSpace(prefix)) {
+							list = this.scope.GetVariableNames().Where(name => name.StartsWith(sofar, StringComparison.Ordinal)).OrderBy(name => name.Length).ToList();
+						} else {
+							object obj = this.scriptEngine.CreateScriptSourceFromString(prefix, SourceCodeKind.Expression).Execute(this.scope);
+							list = this.scriptEngine.Operations.GetMemberNames(obj).Where(name => name.StartsWith(sofar, StringComparison.Ordinal)).ToList();
+						}
+						this.lastSuggestion = 0;
+					} else {
+						list = this.suggestions;
+						this.lastSuggestion++;
+						if(list.Count <= this.lastSuggestion) {
+							this.lastSuggestion = 0;
+						}
+					}
+					this.suggestions = list;
+					this.suggestionExpr = expr;
+					if(list != null && this.lastSuggestion < list.Count) {
+						string current = list[this.lastSuggestion];
+						return current.Substring(sofar.Length);
+					}
+				} catch(Exception exception) {
+					Tracer.Report("IronPythonConsole.Suggest", exception);
+				}
+			}
+			
+			return string.Empty;
 		}
 
 		private class LogWriter : TextWriter {
