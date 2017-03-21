@@ -125,6 +125,12 @@ namespace LogicCircuit {
 			}
 		}
 
+		internal void Open(string file) {
+			if(this.Editor == null || this.EnsureSaved()) {
+				this.Edit(file);
+			}
+		}
+
 		private void Save(string file) {
 			this.Editor.Save(file);
 			Settings.User.AddRecentFile(file);

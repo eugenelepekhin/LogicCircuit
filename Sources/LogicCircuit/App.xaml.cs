@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Documents;
+using System.IO;
 
 namespace LogicCircuit {
 	/// <summary>
@@ -171,6 +172,16 @@ namespace LogicCircuit {
 
 		public static void InTransaction(Action action) {
 			App.Editor.CircuitProject.InTransaction(action);
+		}
+
+		public static void OpenFile(string fileName) {
+			if(string.IsNullOrEmpty(fileName)) {
+				throw new ArgumentNullException(nameof(fileName));
+			}
+			if(!Mainframe.IsFilePathValid(fileName) || !File.Exists(fileName)) {
+				throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "File \"{0}\" does not exist", fileName));
+			}
+			App.Mainframe.Dispatcher.Invoke(() => App.Mainframe.Open(fileName));
 		}
 	}
 }
