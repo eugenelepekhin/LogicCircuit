@@ -7,6 +7,8 @@ namespace LogicCircuit {
 	public class CircuitTester {
 		private readonly CircuitTestSocket socket;
 		private readonly string logicalCircuitName;
+		private readonly WeakReference<Editor> originalEditor;
+		private readonly int originalVersion;
 
 		internal CircuitTester(Editor editor, LogicalCircuit circuit) {
 			Tracer.Assert(editor != null);
@@ -14,12 +16,15 @@ namespace LogicCircuit {
 			Tracer.Assert(circuit.CircuitProject == editor.CircuitProject);
 			Tracer.Assert(CircuitTestSocket.IsTestable(circuit));
 
+			this.originalEditor = new WeakReference<Editor>(editor);
+			this.originalVersion = editor.CircuitProject.Version;
 			this.logicalCircuitName = circuit.Name;
 
 			this.socket = new CircuitTestSocket(circuit, false);
 		}
 
 		public void SetInput(string inputName, int value) {
+			this.ValidateEditor();
 			if(string.IsNullOrEmpty(inputName)) {
 				throw new ArgumentNullException(nameof(inputName));
 			}
@@ -38,6 +43,7 @@ namespace LogicCircuit {
 		}
 
 		public long GetStateOutput(string outputName) {
+			this.ValidateEditor();
 			if(string.IsNullOrEmpty(outputName)) {
 				throw new ArgumentNullException(nameof(outputName));
 			}
@@ -52,6 +58,7 @@ namespace LogicCircuit {
 
 		[SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "GetStateOutput")]
 		public int GetOutput(string outputName) {
+			this.ValidateEditor();
 			if(string.IsNullOrEmpty(outputName)) {
 				throw new ArgumentNullException(nameof(outputName));
 			}
@@ -74,7 +81,15 @@ namespace LogicCircuit {
 		}
 
 		public bool Evaluate() {
+			this.ValidateEditor();
 			return this.socket.Evaluate();
+		}
+
+		private void ValidateEditor() {
+			Editor editor;
+			if(!this.originalEditor.TryGetTarget(out editor) || editor != App.Editor || editor.CircuitProject.Version != this.originalVersion) {
+				throw new InvalidOperationException("Circuit project was changed since this circuit tester was created.");
+			}
 		}
 	}
 }
