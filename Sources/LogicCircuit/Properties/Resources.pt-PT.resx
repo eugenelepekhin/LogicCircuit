@@ -1457,4 +1457,7 @@ Permite selecionar o tamanho e a cor da profundidade/esquema:
     <value>A aguardar número entre {0:X} - {1:X}.</value>
     <comment>{int min, int max}</comment>
   </data>
+  <data name="CommandToolsIronPython" xml:space="preserve">
+    <value>IronPython Console</value>
+  </data>
 </root>

@@ -1384,4 +1384,7 @@ Leidžia pasirinkti dydi ir spalvos gyli/schema:
   <data name="ErrorBadHexInRange" xml:space="preserve">
     <value>Tikimasi numerio nuo {0:X}-{1:X}.</value>
   </data>
+  <data name="CommandToolsIronPython" xml:space="preserve">
+    <value>IronPython konsolė</value>
+  </data>
 </root>

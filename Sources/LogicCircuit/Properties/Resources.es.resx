@@ -1441,4 +1441,7 @@ Permite seleccionar el tamaño y profundidad de color / esquema:
   <data name="ErrorBadHexInRange" xml:space="preserve">
     <value>Numero esperado entre {0:X} - {1:X}</value>
   </data>
+  <data name="CommandToolsIronPython" xml:space="preserve">
+    <value>IronPython Consola</value>
+  </data>
 </root>

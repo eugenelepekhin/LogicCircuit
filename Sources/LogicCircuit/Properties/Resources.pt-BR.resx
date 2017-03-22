@@ -1444,4 +1444,7 @@ usados para coordenar as ações do circuito.</value>
   <data name="ErrorBadHexInRange" xml:space="preserve">
     <value>Esperando número no intervalo{0:X} - {1:X}.</value>
   </data>
+  <data name="CommandToolsIronPython" xml:space="preserve">
+    <value>IronPython Console</value>
+  </data>
 </root>
