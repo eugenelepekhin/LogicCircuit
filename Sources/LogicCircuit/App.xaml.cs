@@ -17,7 +17,7 @@ namespace LogicCircuit {
 		private const string SettingsCultureName = "Application.CultureInfo.Name";
 
 		private static readonly string[] availableCultureNames = new string[] {
-			"en-US",
+			"en",
 			"ar",
 			"de",
 			"el",

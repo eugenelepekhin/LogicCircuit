@@ -17,7 +17,7 @@ using System.Windows;
 //[assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("LogicCircuit.UnitTest")]
+[assembly: InternalsVisibleTo("LogicCircuit.UnitTest")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
 // to COM components.  If you need to access a type in this assembly from
@@ -32,7 +32,7 @@ using System.Windows;
 //in your source files, set the <UICulture> to en-US.  Then uncomment
 //the NeutralResourceLanguage attribute below.  Update the "en-US" in
 //the line below to match the UICulture setting in the project file.
-[assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.MainAssembly)]
+[assembly: NeutralResourcesLanguage("en", UltimateResourceFallbackLocation.MainAssembly)]
 
 
 [assembly: ThemeInfo(
@@ -52,8 +52,5 @@ using System.Windows;
 //      Build Number
 //      Revision
 //
-// You can specify all the values or you can default the Build and Revision Numbers
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("2.17.03.22")]
 [assembly: AssemblyFileVersion("2.17.03.22")]

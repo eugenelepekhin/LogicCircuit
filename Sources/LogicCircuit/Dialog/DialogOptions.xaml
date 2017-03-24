@@ -16,7 +16,7 @@
 		<Style x:Key="CultureTranslation" TargetType="TextBlock">
 			<Setter Property="FlowDirection" Value="LeftToRight"/>
 			<Style.Triggers>
-				<DataTrigger Binding="{Binding Path=Name}" Value="en-US">
+				<DataTrigger Binding="{Binding Path=Name}" Value="en">
 					<Setter Property="Visibility" Value="Collapsed"/>
 				</DataTrigger>
 			</Style.Triggers>
