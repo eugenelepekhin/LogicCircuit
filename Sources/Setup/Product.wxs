@@ -67,9 +67,9 @@
 							<File Id="de" Source="$(var.LogicCircuit.TargetDir)de\$(var.LogicCircuit.TargetName).resources.dll"/>
 						</Component>
 					</Directory>
-					<Directory Id="el_GR" Name="el-GR">
-						<Component Id="el_GRComponent">
-							<File Id="el_GR" Source="$(var.LogicCircuit.TargetDir)el-GR\$(var.LogicCircuit.TargetName).resources.dll"/>
+					<Directory Id="el" Name="el">
+						<Component Id="elComponent">
+							<File Id="el" Source="$(var.LogicCircuit.TargetDir)el\$(var.LogicCircuit.TargetName).resources.dll"/>
 						</Component>
 					</Directory>
 					<Directory Id="es" Name="es">
@@ -87,9 +87,9 @@
 							<File Id="fr" Source="$(var.LogicCircuit.TargetDir)fr\$(var.LogicCircuit.TargetName).resources.dll"/>
 						</Component>
 					</Directory>
-					<Directory Id="he_IL" Name="he-IL">
-						<Component Id="he_ILComponent">
-							<File Id="he_IL" Source="$(var.LogicCircuit.TargetDir)he-IL\$(var.LogicCircuit.TargetName).resources.dll"/>
+					<Directory Id="he" Name="he">
+						<Component Id="heComponent">
+							<File Id="he" Source="$(var.LogicCircuit.TargetDir)he\$(var.LogicCircuit.TargetName).resources.dll"/>
 						</Component>
 					</Directory>
 					<Directory Id="hu" Name="hu">
@@ -97,9 +97,9 @@
 							<File Id="hu" Source="$(var.LogicCircuit.TargetDir)hu\$(var.LogicCircuit.TargetName).resources.dll"/>
 						</Component>
 					</Directory>
-					<Directory Id="it_IT" Name="it-IT">
-						<Component Id="it_ITComponent">
-							<File Id="it_IT" Source="$(var.LogicCircuit.TargetDir)it-IT\$(var.LogicCircuit.TargetName).resources.dll"/>
+					<Directory Id="it" Name="it">
+						<Component Id="itComponent">
+							<File Id="it" Source="$(var.LogicCircuit.TargetDir)it\$(var.LogicCircuit.TargetName).resources.dll"/>
 						</Component>
 					</Directory>
 					<Directory Id="ja" Name="ja">
@@ -107,9 +107,9 @@
 							<File Id="ja" Source="$(var.LogicCircuit.TargetDir)ja\$(var.LogicCircuit.TargetName).resources.dll"/>
 						</Component>
 					</Directory>
-					<Directory Id="ko_KR" Name="ko-KR">
-						<Component Id="ko_KRComponent">
-							<File Id="ko_KR" Source="$(var.LogicCircuit.TargetDir)ko-KR\$(var.LogicCircuit.TargetName).resources.dll"/>
+					<Directory Id="ko" Name="ko">
+						<Component Id="koComponent">
+							<File Id="ko" Source="$(var.LogicCircuit.TargetDir)ko\$(var.LogicCircuit.TargetName).resources.dll"/>
 						</Component>
 					</Directory>
 					<Directory Id="lt" Name="lt">
@@ -137,19 +137,19 @@
 							<File Id="pt_PT" Source="$(var.LogicCircuit.TargetDir)pt-PT\$(var.LogicCircuit.TargetName).resources.dll"/>
 						</Component>
 					</Directory>
-					<Directory Id="ru_RU" Name="ru-RU">
-						<Component Id="ru_RUComponent">
-							<File Id="ru_RU" Source="$(var.LogicCircuit.TargetDir)ru-RU\$(var.LogicCircuit.TargetName).resources.dll"/>
+					<Directory Id="ru" Name="ru">
+						<Component Id="ruComponent">
+							<File Id="ru" Source="$(var.LogicCircuit.TargetDir)ru\$(var.LogicCircuit.TargetName).resources.dll"/>
 						</Component>
 					</Directory>
-					<Directory Id="uk_UA" Name="uk-UA">
-						<Component Id="uk_UAComponent">
-							<File Id="uk_UA" Source="$(var.LogicCircuit.TargetDir)uk-UA\$(var.LogicCircuit.TargetName).resources.dll"/>
+					<Directory Id="uk" Name="uk">
+						<Component Id="ukComponent">
+							<File Id="uk" Source="$(var.LogicCircuit.TargetDir)uk\$(var.LogicCircuit.TargetName).resources.dll"/>
 						</Component>
 					</Directory>
-					<Directory Id="zh_CHS" Name="zh-CHS">
-						<Component Id="zh_CHSComponent">
-							<File Id="zh_CHS" Source="$(var.LogicCircuit.TargetDir)zh-CHS\$(var.LogicCircuit.TargetName).resources.dll"/>
+					<Directory Id="zh_Hans" Name="zh-Hans">
+						<Component Id="zh_HansComponent">
+							<File Id="zh_Hans" Source="$(var.LogicCircuit.TargetDir)zh-Hans\$(var.LogicCircuit.TargetName).resources.dll"/>
 						</Component>
 					</Directory>
 				</Directory>
@@ -175,23 +175,23 @@
 			<ComponentRef Id="Microsoft_Scripting_Metadata_dllComponent"/>
 			<ComponentRef Id="arComponent"/>
 			<ComponentRef Id="deComponent"/>
-			<ComponentRef Id="el_GRComponent"/>
+			<ComponentRef Id="elComponent"/>
 			<ComponentRef Id="esComponent"/>
 			<ComponentRef Id="faComponent"/>
 			<ComponentRef Id="frComponent"/>
-			<ComponentRef Id="he_ILComponent"/>
+			<ComponentRef Id="heComponent"/>
 			<ComponentRef Id="huComponent"/>
-			<ComponentRef Id="it_ITComponent"/>
+			<ComponentRef Id="itComponent"/>
 			<ComponentRef Id="jaComponent"/>
-			<ComponentRef Id="ko_KRComponent"/>
+			<ComponentRef Id="koComponent"/>
 			<ComponentRef Id="ltComponent"/>
 			<ComponentRef Id="nlComponent"/>
 			<ComponentRef Id="plComponent"/>
 			<ComponentRef Id="pt_BRComponent"/>
 			<ComponentRef Id="pt_PTComponent"/>
-			<ComponentRef Id="ru_RUComponent"/>
-			<ComponentRef Id="uk_UAComponent"/>
-			<ComponentRef Id="zh_CHSComponent"/>
+			<ComponentRef Id="ruComponent"/>
+			<ComponentRef Id="ukComponent"/>
+			<ComponentRef Id="zh_HansComponent"/>
 			<ComponentRef Id="StartMenuShortcuts"/>
 		</Feature>
 

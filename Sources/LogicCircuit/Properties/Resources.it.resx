@@ -1245,4 +1245,7 @@ tutti i simboli del display saranno visibili sul suo simbolo.</value>
   <data name="WireDisplayDisconnected" xml:space="preserve">
     <value>Il filo non è connesso.</value>
   </data>
+  <data name="CommandToolsIronPython" xml:space="preserve">
+    <value>Terminale IronPython</value>
+  </data>
 </root>

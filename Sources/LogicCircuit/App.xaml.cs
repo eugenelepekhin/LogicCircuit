@@ -14,40 +14,42 @@ namespace LogicCircuit {
 	/// Interaction logic for App.xaml
 	/// </summary>
 	public partial class App : Application {
+		private const string SettingsCultureName = "Application.CultureInfo.Name";
+
 		private static readonly string[] availableCultureNames = new string[] {
 			"en-US",
 			"ar",
 			"de",
-			"el-GR",
+			"el",
 			"es",
 			"fa",
 			"fr",
-			"he-IL",
+			"he",
 			"hu",
-			"it-IT",
+			"it",
 			"ja",
-			"ko-KR",
+			"ko",
 			"lt",
 			"nl",
 			"pl",
 			"pt-BR",
 			"pt-PT",
-			"ru-RU",
-			"uk-UA",
-			"zh-CHS",
+			"ru",
+			"uk",
+			"zh-Hans",
 		};
 		
 		public static IEnumerable<CultureInfo> AvailableCultures {
 			get { return App.availableCultureNames.Select(s => CultureInfo.GetCultureInfo(s)); }
 		}
 
-		private static SettingsStringCache currentCultureName = new SettingsStringCache(Settings.User, "Application.CultureInfo.Name",
+		private static SettingsStringCache currentCultureName = new SettingsStringCache(Settings.User, App.SettingsCultureName,
 			App.DefaultCultureName(), App.availableCultureNames
 		);
 
 		public static CultureInfo CurrentCulture {
 			get { return CultureInfo.GetCultureInfo(App.currentCultureName.Value); }
-			set { App.currentCultureName.Value = (value ?? CultureInfo.GetCultureInfo(App.DefaultCultureName())).Name; }
+			set { App.currentCultureName.Value = App.ValidateCultureName((value ?? CultureInfo.GetCultureInfo(App.DefaultCultureName())).Name); }
 		}
 
 		internal static App CurrentApp { get { return (App)App.Current; } }
@@ -57,7 +59,9 @@ namespace LogicCircuit {
 
 		protected override void OnStartup(StartupEventArgs e) {
 			App.InitLogging();
+			App.ValidateSettingsCulture();
 			LogicCircuit.Properties.Resources.Culture = App.CurrentCulture;
+			Tracer.FullInfo("App", "Starting with culture: {0}", App.CurrentCulture.Name);
 
 			base.OnStartup(e);
 
@@ -76,6 +80,15 @@ namespace LogicCircuit {
 		private static void InitLogging() {
 			SettingsBoolCache logging = new SettingsBoolCache(Settings.User, "Tracer.WriteToLogFile", false);
 			Tracer.WriteToLogFile = logging.Value;
+		}
+
+		private static void ValidateSettingsCulture() {
+			SettingsStringCache cultureName = new SettingsStringCache(Settings.User, App.SettingsCultureName, App.DefaultCultureName());
+			string name = App.ValidateCultureName(cultureName.Value);
+			if(name != cultureName.Value) {
+				Tracer.FullInfo("App.ValidateSettingsCulture", "Replacing current settings culture {0} with {1}", cultureName.Value, name);
+				App.currentCultureName.Value = name;
+			}
 		}
 
 		private void TextBoxGotKeyboardFocus(object sender, RoutedEventArgs e) {
@@ -102,15 +115,17 @@ namespace LogicCircuit {
 			}
 		}
 
-		private static string DefaultCultureName() {
-			string name = CultureInfo.CurrentUICulture.Name;
-			if(!App.availableCultureNames.Contains(name, StringComparer.OrdinalIgnoreCase)) {
+		private static string ValidateCultureName(string cultureName) {
+			if(!App.availableCultureNames.Contains(cultureName, StringComparer.OrdinalIgnoreCase)) {
 				// Take language part of culture name: first two chars of "en-EN"
-				string prefix = name.Substring(0, Math.Min(name.Length, 2));
-				Tracer.Assert(prefix.Length == 2);
-				name = App.availableCultureNames.FirstOrDefault(n => n.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)) ?? App.availableCultureNames[0];
+				string prefix = cultureName.Substring(0, Math.Min(cultureName.Length, 2));
+				cultureName = App.availableCultureNames.FirstOrDefault(n => n.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)) ?? App.availableCultureNames[0];
 			}
-			return name;
+			return cultureName;
+		}
+
+		private static string DefaultCultureName() {
+			return App.ValidateCultureName(CultureInfo.CurrentUICulture.Name);
 		}
 
 		private static void InitCommands() {
