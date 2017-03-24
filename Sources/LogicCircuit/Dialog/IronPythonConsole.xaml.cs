@@ -277,14 +277,15 @@ namespace LogicCircuit {
 			public override string ReadLine() {
 				Action<string> oldEnter = this.console.CommandEnter;
 				try {
-					AutoResetEvent waiter = new AutoResetEvent(false);
 					string line = null;
-					this.console.CommandEnter = text => {
-						line = text;
-						waiter.Set();
-					};
-					this.console.Dispatcher.Invoke(() => this.console.Prompt(false, string.Empty));
-					waiter.WaitOne();
+					using(AutoResetEvent waiter = new AutoResetEvent(false)) {
+						this.console.CommandEnter = text => {
+							line = text;
+							waiter.Set();
+						};
+						this.console.Dispatcher.Invoke(() => this.console.Prompt(false, string.Empty));
+						waiter.WaitOne();
+					}
 					return line;
 				} finally {
 					this.console.CommandEnter = oldEnter;
