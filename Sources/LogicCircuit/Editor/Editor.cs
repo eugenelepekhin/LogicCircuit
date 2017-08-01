@@ -149,7 +149,17 @@ namespace LogicCircuit {
 		}
 
 		public void Save(string file) {
-			this.CircuitProject.Save(file);
+			if(System.IO.File.Exists(file)) {
+				string temp = Mainframe.TempFile(file);
+				string backup = null;
+				if(Settings.User.CreateBackupFileOnSave) {
+					backup = Mainframe.BackupFile(file);
+				}
+				this.CircuitProject.Save(temp);
+				System.IO.File.Replace(temp, file, backup);
+			} else {
+				this.CircuitProject.Save(file);
+			}
 			this.File = file;
 			this.savedVersion = this.CircuitProject.Version;
 			this.NotifyPropertyChanged("Caption");

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Windows;
 using LogicCircuit.DataPersistent;
@@ -43,6 +44,20 @@ namespace LogicCircuit {
 				}
 			}
 			return false;
+		}
+
+		// This is not bulletproof as file might be created between File.Exist and creating the file.
+		// However, seems like good enough for circuit saving.
+		public static string TempFile(string originalFile) {
+			string file;
+			do {
+				file = Path.Combine(Path.GetDirectoryName(originalFile), DateTime.Now.Ticks.ToString("x", CultureInfo.InvariantCulture));
+			} while(File.Exists(file));
+			return file;
+		}
+
+		public static string BackupFile(string originalFile) {
+			return Path.ChangeExtension(originalFile, ".backup");
 		}
 
 		private bool EnsureSaved() {

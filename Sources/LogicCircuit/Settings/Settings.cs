@@ -98,6 +98,7 @@ namespace LogicCircuit {
 
 		private SettingsIntegerCache maxRecentFileCount;
 		private SettingsBoolCache loadLastFileOnStartup;
+		private SettingsBoolCache createBackupFileOnSave;
 		private SettingsEnumCache<GateShape> gateShape;
 
 		private Dictionary<string, DateTime> recentFile = new Dictionary<string, DateTime>(StringComparer.OrdinalIgnoreCase);
@@ -129,6 +130,7 @@ namespace LogicCircuit {
 			}
 			this.maxRecentFileCount = new SettingsIntegerCache(this, "Settings.MaxRecentFileCount", 1, 24, 4);
 			this.loadLastFileOnStartup = new SettingsBoolCache(this, "Settings.LoadLastFileOnStartup", true);
+			this.createBackupFileOnSave = new SettingsBoolCache(this, "Settings.CreateBackupFileOnSave", false);
 			this.gateShape = new SettingsEnumCache<GateShape>(this, "Settings.GateShape",
 				EnumHelper.Parse(Properties.Resources.DefaultGateShape, GateShape.Rectangular)
 			);
@@ -216,6 +218,11 @@ namespace LogicCircuit {
 		public bool LoadLastFileOnStartup {
 			get { return this.loadLastFileOnStartup.Value; }
 			set { this.loadLastFileOnStartup.Value = value; }
+		}
+
+		public bool CreateBackupFileOnSave {
+			get { return this.createBackupFileOnSave.Value; }
+			set { this.createBackupFileOnSave.Value = value; }
 		}
 
 		public GateShape GateShape {
