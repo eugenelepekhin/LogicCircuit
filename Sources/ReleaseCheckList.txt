@@ -2,11 +2,11 @@
 2. Set Version in Setup project. Create new GUID for Id.
 3. Build and test Setup project
 4. Prepare website - add what is new in download.html
-5. Add News item in Project.xml
-6. Change version in LatestVersion.txt.
-7. Review and update TranslationRequests.txt.
-8. Add tags to repos (both logic circuit and web site)
-9. Push repos to bitbucket.org
-10. Create a release on http://www.codeplex.com/
-11. Push repo to http://www.codeplex.com/
+5. Upload setup zip to downloads folder on the website.
+6. Fix link on the download .html page to download of the new file.
+7. Add News item in Project.xml
+8. Change version in LatestVersion.txt.
+9. Review and update TranslationRequests.txt.
+10. Add tags to repos (both logic circuit and web site)
+11. Push repos to bitbucket.org
 12. Publish web site

@@ -11,3 +11,4 @@ glob:*.msi
 glob:*.orig
 syntax: glob
 Sources/packages/*
+*/.vs/*
