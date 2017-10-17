@@ -1,6 +1,9 @@
 ToDo list:
 
+Autosave to a file next to project.
+
 smarter wires
+hdl: convert to and logical circuit in it.
 
 Tunnels
 Keyboard device
