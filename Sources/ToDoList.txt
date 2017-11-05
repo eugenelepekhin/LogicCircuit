@@ -1,18 +1,12 @@
 ToDo list:
 
-Autosave to a file next to project.
-
 smarter wires
-hdl: convert to and logical circuit in it.
-
 Tunnels
-Keyboard device
 
-Colors of symbols
-
+hdl: convert to and logical circuit in it.
 FPGA
 
-Running tree not always open the item when it clicked on the diagram
+Colors of symbols
 
 === Function Optimization Ideas ===
 Local optimizations.
@@ -34,3 +28,4 @@ For example if user has circuit that is not on the execution tree. or when the e
 
 Backward navigation on circuits
 It is already implemented ad Ctrl-Tab and Ctrl-Shift-Tab
+Keyboard device - can be built with displays feature
