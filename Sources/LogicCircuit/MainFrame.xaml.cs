@@ -15,8 +15,9 @@ namespace LogicCircuit {
 	/// <summary>
 	/// Interaction logic for Mainframe.xaml
 	/// </summary>
+	[SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
 	[SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
-	public partial class Mainframe : Window, INotifyPropertyChanged {
+	public sealed partial class Mainframe : Window, INotifyPropertyChanged {
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
@@ -45,6 +46,18 @@ namespace LogicCircuit {
 				}
 			}
 		}
+		private SettingsIntegerCache autoSaveInterval = new SettingsIntegerCache(Settings.User, "Settings.AutoSaveInterval", 0, 15 * 60, 0);
+		public int AutoSaveInterval {
+			get { return this.autoSaveInterval.Value; }
+			set {
+				if(this.autoSaveInterval.Value != value) {
+					this.autoSaveInterval.Value = value;
+					this.ResetAutoSaveTimer();
+				}
+			}
+		}
+
+		private Timer autoSaveTimer;
 		private LogicalCircuit LogicalCircuit() { return this.Editor.Project.LogicalCircuit; }
 
 		private string statusText = Properties.Resources.Loading;
@@ -151,6 +164,9 @@ namespace LogicCircuit {
 			versionThread.Priority = ThreadPriority.BelowNormal;
 			versionThread.Start();
 
+			this.autoSaveTimer = new Timer(o => this.Editor?.AutoSave(), null, Timeout.Infinite, Timeout.Infinite);
+			this.ResetAutoSaveTimer();
+
 			#if DEBUG && false
 				this.Loaded += (object sender, RoutedEventArgs e) => {
 					Menu menu = (Menu)((Grid)this.Content).Children[0];
@@ -162,6 +178,12 @@ namespace LogicCircuit {
 			#endif
 		}
 
+		internal void ResetAutoSaveTimer() {
+			int interval = this.AutoSaveInterval;
+			interval = (interval == 0) ? Timeout.Infinite : interval * 1000;
+			this.autoSaveTimer.Change(interval, interval);
+		}
+
 		protected override void OnClosing(System.ComponentModel.CancelEventArgs e) {
 			base.OnClosing(e);
 			try {
@@ -170,6 +192,8 @@ namespace LogicCircuit {
 				} else {
 					IronPythonConsole.Stop();
 					Settings.User.Save();
+					this.autoSaveTimer?.Dispose();
+					this.autoSaveTimer = null;
 				}
 			} catch(Exception exception) {
 				Tracer.Report("Mainframe.OnClosing", exception);

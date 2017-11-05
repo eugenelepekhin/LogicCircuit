@@ -2990,5 +2990,27 @@ namespace LogicCircuit.Properties {
  		public static string CommandToolsIronPython {
 			get { return ResourceManager.GetString("CommandToolsIronPython", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to File "{0}" was not saved correctly.
+		/// Do you want to load auto saved state of this file?.
+		/// </summary>
+ 		public static string MessageLoadAutoSavedFile(string file) {
+			return string.Format(FormatCulture, ResourceManager.GetString("MessageLoadAutoSavedFile", Culture), file);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to A_utomatically save changes every:.
+		/// </summary>
+ 		public static string TitleAutoSave {
+			get { return ResourceManager.GetString("TitleAutoSave", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to minutes.
+		/// </summary>
+ 		public static string TitleMinutesUnits {
+			get { return ResourceManager.GetString("TitleMinutesUnits", Culture); }
+		}
 	}
 }

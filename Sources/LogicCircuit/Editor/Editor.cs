@@ -17,6 +17,7 @@ namespace LogicCircuit {
 
 		public string File { get; private set; }
 		private int savedVersion;
+		private int autoSavedVersion;
 
 		public CircuitDescriptorList CircuitDescriptorList { get; private set; }
 		private Switcher switcher;
@@ -141,14 +142,48 @@ namespace LogicCircuit {
 			o => this.CircuitRunner.ShowOscilloscope()
 		);
 
-		public Editor(Mainframe mainframe, string file) : base(mainframe, CircuitProject.Create(file)) {
+		private static CircuitProject Create(Mainframe mainframe, string file) {
+			bool useAutoSaveFile = false;
+			string autoSaveFile = Mainframe.AutoSaveFile(file);
+			if(Mainframe.IsFileExists(autoSaveFile)) {
+				App.Dispatch(() => {
+					MessageBoxResult result = DialogMessage.Show(
+						mainframe,
+						Properties.Resources.TitleApplication,
+						Properties.Resources.MessageLoadAutoSavedFile(file),
+						null,
+						MessageBoxImage.Question,
+						MessageBoxButton.YesNo
+					);
+					if(result == MessageBoxResult.Yes) {
+						useAutoSaveFile = true;
+					}
+				});
+				if(!useAutoSaveFile) {
+					Mainframe.DeleteFile(autoSaveFile);
+				}
+			}
+			if(!useAutoSaveFile) {
+				autoSaveFile = file;
+			}
+			CircuitProject project = CircuitProject.Create(autoSaveFile);
+			if(useAutoSaveFile) {
+				project.InOmitTransaction(() => {});
+			}
+			return project;
+		}
+
+		public Editor(Mainframe mainframe, string file) : base(mainframe, Editor.Create(mainframe, file)) {
 			this.File = file;
-			this.savedVersion = this.CircuitProject.Version;
+			// Assume loading taken only one transaction. If auto saved file is loaded a new empty transaction is created, so set this to 1 to mark store dirty.
+			this.savedVersion = 1;
 			this.CircuitDescriptorList = new CircuitDescriptorList(this.CircuitProject);
 			this.switcher = new Switcher(this);
 		}
 
 		public void Save(string file) {
+			this.Mainframe.ResetAutoSaveTimer();
+			string oldFile = this.File;
 			if(System.IO.File.Exists(file)) {
 				string temp = Mainframe.TempFile(file);
 				string backup = null;
@@ -162,7 +197,25 @@ namespace LogicCircuit {
 			}
 			this.File = file;
 			this.savedVersion = this.CircuitProject.Version;
+			Mainframe.DeleteAutoSaveFile(oldFile);
+
 			this.NotifyPropertyChanged("Caption");
+		}
+
+		public void AutoSave() {
+			try {
+				if(!string.IsNullOrEmpty(this.File) && this.HasChanges && this.autoSavedVersion != this.CircuitProject.Version) {
+					string file = Mainframe.AutoSaveFile(this.File);
+					if(!string.IsNullOrEmpty(file)) {
+						Mainframe.DeleteFile(file);
+						this.CircuitProject.SaveSnapshot(file);
+						Mainframe.Hide(file);
+					}
+					this.autoSavedVersion = this.CircuitProject.Version;
+				}
+			} catch(Exception exception) {
+				Tracer.Report("Editor.AutoSave", exception);
+			}
 		}
 
 		protected override void OnProjectPropertyChanged(string propertyName) {

@@ -53,6 +53,12 @@
 
 				<Label Content="{x:Static properties:Resources.TitleMaxRecentFiles}"/>
 				<ComboBox Name="maxRecentFiles" ItemsSource="{Binding RecentFileRange}"/>
+
+				<CheckBox Grid.ColumnSpan="2" Name="autoSave" Content="{x:Static properties:Resources.TitleAutoSave}"/>
+				<StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" Margin="25,0,0,0" IsEnabled="{Binding ElementName=autoSave, Path=IsChecked}">
+					<ComboBox ItemsSource="{Binding Path=AutoSaveIntervalList}" SelectedItem="{Binding Path=AutoSaveInterval}"/>
+					<TextBlock Text="{x:Static properties:Resources.TitleMinutesUnits}" VerticalAlignment="Center" Margin="5,1"/>
+				</StackPanel>
 			</lc:AutoGrid>
 		</GroupBox>
 

@@ -60,6 +60,42 @@ namespace LogicCircuit {
 			return Path.ChangeExtension(originalFile, ".backup");
 		}
 
+		internal static string AutoSaveFile(string file) {
+			if(Mainframe.IsFilePathValid(file) && Path.HasExtension(file)) {
+				string extension = Path.GetExtension(file);
+				if(!string.IsNullOrEmpty(extension) && 2 < extension.Length) {
+					return file.Substring(0, file.Length - 2) + "~$";
+				}
+			}
+			return null;
+		}
+
+		internal static void Hide(string file) {
+			if(Mainframe.IsFileExists(file)) {
+				File.SetAttributes(file, FileAttributes.Hidden | File.GetAttributes(file));
+			}
+		}
+
+		public static bool IsFileExists(string file) {
+			return Mainframe.IsFilePathValid(file) && File.Exists(file);
+		}
+
+		internal static void DeleteFile(string file) {
+			if(Mainframe.IsFileExists(file)) {
+				try {
+					File.Delete(file);
+				} catch(Exception exception) {
+					Tracer.Report("Mainframe.DeleteFile", exception);
+				}
+			}
+		}
+
+		internal static void DeleteAutoSaveFile(string file) {
+			if(!string.IsNullOrEmpty(file)) {
+				Mainframe.DeleteFile(Mainframe.AutoSaveFile(file));
+			}
+		}
+
 		private bool EnsureSaved() {
 			if(this.Editor != null && this.Editor.HasChanges) {
 				MessageBoxResult result = DialogMessage.Show(this, this.Title,
@@ -71,6 +107,8 @@ namespace LogicCircuit {
 					this.Save();
 					break;
 				case MessageBoxResult.No:
+					this.ResetAutoSaveTimer();
+					Mainframe.DeleteAutoSaveFile(this.Editor?.File);
 					break;
 				case MessageBoxResult.Cancel:
 					this.Status = Properties.Resources.OperationCanceled;
@@ -81,6 +119,7 @@ namespace LogicCircuit {
 		}
 
 		private void Edit(string file) {
+			this.ResetAutoSaveTimer();
 			Editor circuitEditor;
 			try {
 				circuitEditor = new Editor(this, file);

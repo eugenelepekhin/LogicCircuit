@@ -1461,4 +1461,15 @@ Allows to select size and color depth/scheme:
     <value>IronPython Console</value>
     <comment>Do not translate IronPython</comment>
   </data>
+  <data name="MessageLoadAutoSavedFile" xml:space="preserve">
+    <value>File "{0}" was not saved correctly.
+Do you want to load auto saved state of this file?</value>
+    <comment>{string file}</comment>
+  </data>
+  <data name="TitleAutoSave" xml:space="preserve">
+    <value>A_utomatically save changes every:</value>
+  </data>
+  <data name="TitleMinutesUnits" xml:space="preserve">
+    <value>minutes</value>
+  </data>
 </root>

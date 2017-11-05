@@ -58,10 +58,19 @@ namespace LogicCircuit {
 			}
 		}
 
+		private CircuitProject(CircuitProject other) : base(other) {
+			this.CreateSets();
+		}
+
 		public void Save(string file) {
 			using (TextWriter textWriter = XmlHelper.FileWriter(file)) {
 				this.Save(textWriter);
 			}
+		}
+
+		public void SaveSnapshot(string file) {
+			CircuitProject other = new CircuitProject(this);
+			other.Save(file);
 		}
 
 		private void Save(TextWriter textWriter) {
