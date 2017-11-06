@@ -1403,6 +1403,6 @@
     <value>Автоматически сохранять изменения каждые:</value>
   </data>
   <data name="TitleMinutesUnits" xml:space="preserve">
-    <value>минут(ы)</value>
+    <value>минут(у/ы)</value>
   </data>
 </root>
