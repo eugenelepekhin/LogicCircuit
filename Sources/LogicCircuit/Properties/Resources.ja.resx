@@ -1239,4 +1239,14 @@
 	<data name="CommandToolsIronPython" xml:space="preserve">
 		<value>IronPythonコンソール</value>
 	</data>
+	<data name="MessageLoadAutoSavedFile" xml:space="preserve">
+		<value>ファイル「{0}」は正しく保存されていません。
+自動保存されたファイルを開きますか？</value>
+	</data>
+	<data name="TitleAutoSave" xml:space="preserve">
+		<value>変更を次の間隔で自動保存する:</value>
+	</data>
+	<data name="TitleMinutesUnits" xml:space="preserve">
+		<value>分</value>
+	</data>
 </root>

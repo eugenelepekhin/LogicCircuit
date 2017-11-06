@@ -1371,4 +1371,14 @@ Tri-state와 적절한 제어 회로를 함께 써서 멀티플렉서를 만들 
   <data name="CommandToolsIronPython" xml:space="preserve">
     <value>IronPython 콘솔</value>
   </data>
+  <data name="MessageLoadAutoSavedFile" xml:space="preserve">
+    <value>파일 "{0}"이 정상적으로 저장되지 않았습니다.
+이 파일의 자동 저장된 상태로 로드하시겠습니까?</value>
+  </data>
+  <data name="TitleAutoSave" xml:space="preserve">
+    <value>변경 사항이 자동 저장되는 주기:</value>
+  </data>
+  <data name="TitleMinutesUnits" xml:space="preserve">
+    <value>분</value>
+  </data>
 </root>
