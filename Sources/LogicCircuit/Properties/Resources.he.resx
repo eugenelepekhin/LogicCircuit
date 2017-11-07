@@ -1437,4 +1437,14 @@
   <data name="CommandToolsIronPython" xml:space="preserve">
     <value>ממשק שורת פקודה של IronPython</value>
   </data>
+  <data name="MessageLoadAutoSavedFile" xml:space="preserve">
+    <value>ארעה שגיאה בעת שמירת הקובץ "{0}"
+האם לטעון תמונת מצב שמורה אוטומטית של הקובץ הזה?</value>
+  </data>
+  <data name="TitleAutoSave" xml:space="preserve">
+    <value>שמירה אוטומטית של הקובץ כל:</value>
+  </data>
+  <data name="TitleMinutesUnits" xml:space="preserve">
+    <value>דקות</value>
+  </data>
 </root>
