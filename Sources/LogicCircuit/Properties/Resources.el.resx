@@ -1386,4 +1386,14 @@
   <data name="CommandToolsIronPython" xml:space="preserve">
     <value>Κονσόλα IronPython</value>
   </data>
+  <data name="MessageLoadAutoSavedFile" xml:space="preserve">
+    <value>Το αρχείο "{0}" δεν αποθηκεύτηκε σωστά.
+Θέλετε να επαναφέρετε την εκδοχή του αρχείου που αποθηκεύτηκε αυτόματα;</value>
+  </data>
+  <data name="TitleAutoSave" xml:space="preserve">
+    <value>Αυτόματη αποθήκευση αρχείου κάθε:</value>
+  </data>
+  <data name="TitleMinutesUnits" xml:space="preserve">
+    <value>λεπτά</value>
+  </data>
 </root>

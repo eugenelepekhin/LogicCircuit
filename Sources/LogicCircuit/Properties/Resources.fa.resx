@@ -1185,4 +1185,14 @@
   <data name="CommandToolsIronPython" xml:space="preserve">
     <value>کنسول IronPython</value>
   </data>
+  <data name="MessageLoadAutoSavedFile" xml:space="preserve">
+    <value>فایل {0} به درستی ذخیره نشده است
+آیا مایل اید نسخه ذخیره خودکار این فایل را بارگذاری کنید؟</value>
+  </data>
+  <data name="TitleAutoSave" xml:space="preserve">
+    <value>ذخیره خودکار تغیرات در هر:</value>
+  </data>
+  <data name="TitleMinutesUnits" xml:space="preserve">
+    <value>دقیقه</value>
+  </data>
 </root>

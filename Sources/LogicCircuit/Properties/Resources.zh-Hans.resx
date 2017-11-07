@@ -1379,4 +1379,14 @@ Out</value>
   <data name="CommandToolsIronPython" xml:space="preserve">
     <value>IronPython 控制台</value>
   </data>
+  <data name="MessageLoadAutoSavedFile" xml:space="preserve">
+    <value>文件"{0}"未能正确保存
+是否载入该文件已自动保存的状态？</value>
+  </data>
+  <data name="TitleAutoSave" xml:space="preserve">
+    <value>自动保存间隔：</value>
+  </data>
+  <data name="TitleMinutesUnits" xml:space="preserve">
+    <value>分钟</value>
+  </data>
 </root>

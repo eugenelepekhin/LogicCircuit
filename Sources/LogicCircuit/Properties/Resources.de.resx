@@ -1392,4 +1392,14 @@ Es ist möglich die Größe und Farbtiefe/Grafik zu wählen:
   <data name="CommandToolsIronPython" xml:space="preserve">
     <value>IronPython Konsole</value>
   </data>
+  <data name="MessageLoadAutoSavedFile" xml:space="preserve">
+    <value>Datei "{0}" wurde nicht korrekt gespeichert.
+Möchten Sie den automatisch gespeicherten Stand dieser Datei laden?</value>
+  </data>
+  <data name="TitleAutoSave" xml:space="preserve">
+    <value>Änderungen alle:</value>
+  </data>
+  <data name="TitleMinutesUnits" xml:space="preserve">
+    <value>Minuten automatisch speichern.</value>
+  </data>
 </root>
