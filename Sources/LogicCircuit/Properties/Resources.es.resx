@@ -1444,4 +1444,14 @@ Permite seleccionar el tamaño y profundidad de color / esquema:
   <data name="CommandToolsIronPython" xml:space="preserve">
     <value>IronPython Consola</value>
   </data>
+  <data name="MessageLoadAutoSavedFile" xml:space="preserve">
+    <value>Archivo "{0}" no ha sido salvado correctamente.
+¿Desea cargar el archivo guardado anteriormente?</value>
+  </data>
+  <data name="TitleAutoSave" xml:space="preserve">
+    <value>Autoguardar cambios cada:</value>
+  </data>
+  <data name="TitleMinutesUnits" xml:space="preserve">
+    <value>Minutos</value>
+  </data>
 </root>
