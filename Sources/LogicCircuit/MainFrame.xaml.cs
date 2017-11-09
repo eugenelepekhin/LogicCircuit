@@ -129,6 +129,8 @@ namespace LogicCircuit {
 			this.DataContext = this;
 			this.InitializeComponent();
 
+			this.autoSaveTimer = new Timer(o => this.Editor?.AutoSave(), null, Timeout.Infinite, Timeout.Infinite);
+
 			Thread thread = new Thread(new ThreadStart(() => {
 				try {
 					string file = App.CurrentApp.FileToOpen;
@@ -163,9 +165,6 @@ namespace LogicCircuit {
 			versionThread.Name = "CheckVersion";
 			versionThread.Priority = ThreadPriority.BelowNormal;
 			versionThread.Start();
-
-			this.autoSaveTimer = new Timer(o => this.Editor?.AutoSave(), null, Timeout.Infinite, Timeout.Infinite);
-			this.ResetAutoSaveTimer();
 
 			#if DEBUG && false
 				this.Loaded += (object sender, RoutedEventArgs e) => {
