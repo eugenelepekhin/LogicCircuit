@@ -265,7 +265,9 @@ namespace LogicCircuit {
 						this.Parent.Connect(connectionSet, list, result, this.CircuitSymbol.Jam(pin), bitNumber);
 					}
 				} else if(circuit is LogicalCircuit) {
-					this.children[(CircuitSymbol)con.InJam.CircuitSymbol].Connect(connectionSet, list, result, con.InJam.InnerJam, bitNumber);
+					if(!connectionSet.IsConnected(this, con.InJam, bitNumber)) {
+						this.children[(CircuitSymbol)con.InJam.CircuitSymbol].Connect(connectionSet, list, result, con.InJam.InnerJam, bitNumber);
+					}
 				} else {
 					Splitter splitter = circuit as Splitter;
 					if(splitter != null) {
