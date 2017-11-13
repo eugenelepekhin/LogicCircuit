@@ -100,6 +100,9 @@
     <None Include="Properties\From2.0.0.6Conversion.CircuitProject" />
     <None Include="Properties\Splitter Conversion.CircuitProject" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Properties\CircuitMapTests.CircuitProject" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

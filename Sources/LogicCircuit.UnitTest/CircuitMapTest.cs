@@ -75,5 +75,22 @@ namespace LogicCircuit.UnitTest {
 			this.CircuitMapCleanUpTest(circuitProject, "4. Chain Out", 8);
 			Assert.AreEqual(11, circuitProject.ProjectSet.Project.LogicalCircuit.CircuitSymbols().Count());
 		}
+
+		[TestMethod()]
+		public void CircuitMapDeepWireLoopTest() {
+			ProjectTester tester = new ProjectTester(this.TestContext, Properties.Resources.CircuitMapTests, "DeepWireLoopTest");
+			InputSocket input = new InputSocket(tester.Input[0]);
+			OutputSocket target = new OutputSocket(tester.Output[0]);
+			Action<int> test = value => {
+				input.Value = value;
+				tester.CircuitState.Evaluate(true);
+				Assert.AreEqual(value, target.BinaryInt());
+			};
+			tester.CircuitProject.InOmitTransaction(() => {
+				for(int i = 0; i < 10; i++) {
+					test(i & 1);
+				}
+			});
+		}
 	}
 }
