@@ -104,22 +104,22 @@ namespace CommandLineParser {
 					string text = Parameter.Trim(args[i]);
 					Match match = regex.Match(text);
 					if(match.Success) {
-						bool separatorIsEmpty = (Parameter.Trim(match.Groups["separator"].Value).Length == 0);
 						Parameter parameter = this.parameterList.Find(Parameter.Trim(match.Groups["name"].Value));
 						if(parameter == null) {
-							if(separatorIsEmpty && Parameter.Trim(match.Groups["prefix"].Value).Length == 0) {
+							if(Parameter.Trim(match.Groups["prefix"].Value).Length == 0) {
 								unmatched.Add(text);
 							} else {
-								errors.Add(string.Format("Unknown parameter: {0}", text));
+								errors.Add(string.Format(CultureInfo.InvariantCulture, "Unknown parameter: {0}", text));
 								break;
 							}
 						} else {
+							bool separatorIsEmpty = (Parameter.Trim(match.Groups["separator"].Value).Length == 0);
 							string value = Parameter.Trim(match.Groups["value"].Value);
 							if(separatorIsEmpty && value.Length == 0 && parameter.ExpectValue()) {
 								if(i + 1 < args.Length) {
 									value = Parameter.Trim(args[++i]); // assume next argument is the value. Note! the index of the loop is advanced here.
 								} else {
-									errors.Add(string.Format("Parameter \"{0}\" is missing its value", text));
+									errors.Add(string.Format(CultureInfo.InvariantCulture, "Parameter \"{0}\" is missing its value", text));
 									break;
 								}
 							}
@@ -136,14 +136,14 @@ namespace CommandLineParser {
 			}
 			if(errors.Count == 0) {
 				foreach(Parameter parameter in this.parameterList.Where(p => p.Required && !p.HasValue)) {
-					errors.Add(string.Format("Required parameter \"{0}\" is missing", parameter.Name));
+					errors.Add(string.Format(CultureInfo.InvariantCulture, "Required parameter \"{0}\" is missing", parameter.Name));
 				}
 			}
 			if(errors.Count == 0) {
 				if(assingUnmatched != null) {
 					assingUnmatched(unmatched);
 				} else if(0 < unmatched.Count) {
-					errors.Add(string.Format("Unrecognized parameter: {0}", unmatched[0]));
+					errors.Add(string.Format(CultureInfo.InvariantCulture, "Unrecognized parameter: {0}", unmatched[0]));
 				}
 			}
 			return errors.Aggregate((string)null, (left, right) => string.IsNullOrEmpty(left) ? right : left + "\n" + right);
@@ -158,8 +158,8 @@ namespace CommandLineParser {
 			Func<Parameter, string> value = parameter => parameter.Value != null ? " " + parameter.Value : string.Empty;
 			Func<Parameter, string> format = parameter =>
 				(parameter.Alias == null)
-				? string.Format("/{0}{1}", parameter.Name, value(parameter))
-				: string.Format("/{0} -{1}{2}", parameter.Alias, parameter.Name, value(parameter))
+				? string.Format(CultureInfo.InvariantCulture, "/{0}{1}", parameter.Name, value(parameter))
+				: string.Format(CultureInfo.InvariantCulture, "/{0} -{1}{2}", parameter.Alias, parameter.Name, value(parameter))
 			;
 			int width = this.parameterList.Select(parameter => format(parameter).Length).Max();
 			StringBuilder text = new StringBuilder();
@@ -221,7 +221,7 @@ namespace CommandLineParser {
 
 			public new void Add(Parameter parameter) {
 				if(this.Find(parameter.Name) != null || (parameter.Alias != null && this.Find(parameter.Alias) != null)) {
-					throw new ArgumentException(string.Format("Parameter with such name or alias already defined: name={0}, alias={1}", parameter.Name, parameter.Alias));
+					throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "Parameter with such name or alias already defined: name={0}, alias={1}", parameter.Name, parameter.Alias));
 				}
 				base.Add(parameter);
 			}
@@ -259,23 +259,23 @@ namespace CommandLineParser {
 					if(string.IsNullOrWhiteSpace(value)) {
 						flag = true;
 					} else {
-						switch(value.ToLowerInvariant()) {
+						switch(value.ToUpperInvariant()) {
 						case "+":
-						case "yes":
-						case "true":
-						case "on":
+						case "YES":
+						case "TRUE":
+						case "ON":
 						case "1":
 							flag = true;
 							break;
 						case "-":
-						case "no":
-						case "false":
-						case "off":
+						case "NO":
+						case "FALSE":
+						case "OFF":
 						case "0":
 							flag = false;
 							break;
 						default:
-							return string.Format("Parameter {0} has invalid value {1}", this.Name, value);
+							return string.Format(CultureInfo.InvariantCulture, "Parameter {0} has invalid value {1}", this.Name, value);
 						}
 					}
 					return this.AssignValue(flag);
@@ -315,9 +315,9 @@ namespace CommandLineParser {
 						if(this.min <= parsedValue && parsedValue <= this.max) {
 							return this.AssignValue(parsedValue);
 						}
-						return string.Format("Provided value {0} of parameter {1} expected to be in range: {2} <= {3} <= {4}.", value, this.Name, this.min, this.Value, this.max);
+						return string.Format(CultureInfo.InvariantCulture, "Provided value {0} of parameter {1} expected to be in range: {2} <= {3} <= {4}.", value, this.Name, this.min, this.Value, this.max);
 					}
-					return string.Format("Parameter {0} has invalid value {1}. This parameter is expecting numerical value.", this.Name, value);
+					return string.Format(CultureInfo.InvariantCulture, "Parameter {0} has invalid value {1}. This parameter is expecting numerical value.", this.Name, value);
 				}
 			}
 		#endif

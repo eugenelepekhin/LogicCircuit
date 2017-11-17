@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Documents;
 using System.IO;
+using CommandLineParser;
 
 namespace LogicCircuit {
 	/// <summary>
@@ -56,6 +57,8 @@ namespace LogicCircuit {
 		internal static Mainframe Mainframe { get; set; }
 
 		internal string FileToOpen { get; private set; }
+		internal string ScriptToRun { get; private set; }
+		internal string CommandLineErrors { get; private set; }
 
 		protected override void OnStartup(StartupEventArgs e) {
 			App.InitLogging();
@@ -67,10 +70,26 @@ namespace LogicCircuit {
 
 			App.InitCommands();
 
-			if(e != null && e.Args != null && 0 < e.Args.Length && !string.IsNullOrEmpty(e.Args[0])) {
-				this.FileToOpen = e.Args[0];
+			if(e != null && e.Args != null && 0 < e.Args.Length) {
+				bool showHelp = false;
+				CommandLine commandLine = new CommandLine()
+					.AddFlag("help", "?", "Show this message", false, value => showHelp = value)
+					.AddString("run", "r", "<script>", "IronPython script to run on startup", false, file => this.ScriptToRun = file)
+				;
+				string errors = commandLine.Parse(e.Args, files => this.FileToOpen = files.FirstOrDefault());
+
+				if(!string.IsNullOrEmpty(errors)) {
+					Tracer.FullInfo("App", "Errors parsing command line parameters: {0}", errors);
+				}
+				if(showHelp || errors != null) {
+					this.CommandLineErrors = (
+						(errors ?? "") +
+						"\nLogicCircuit command line parameters:\n" + commandLine.Help() + "<CircuitProject file path> - open the file"
+					).Trim();
+				}
 			}
-			Tracer.FullInfo("App", "Application launched with parameter: \"{0}\"", this.FileToOpen);
+			Tracer.FullInfo("App", "Application launched with file to open: \"{0}\"", this.FileToOpen);
+			Tracer.FullInfo("App", "Application launched with script to run: \"{0}\"", this.ScriptToRun);
 			EventManager.RegisterClassHandler(typeof(TextBox), TextBox.GotKeyboardFocusEvent, new RoutedEventHandler(TextBoxGotKeyboardFocus));
 			EventManager.RegisterClassHandler(typeof(TextBox), TextBox.PreviewMouseDownEvent, new RoutedEventHandler(TextBoxPreviewMouseDown));
 

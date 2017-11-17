@@ -144,8 +144,14 @@ namespace LogicCircuit {
 					} else {
 						this.Edit(null);
 					}
-					// Reuse this thread to check if there are any translations requests are pending
-					DialogAbout.CheckTranslationRequests(this.Dispatcher);
+					if(!string.IsNullOrEmpty(App.CurrentApp.CommandLineErrors)) {
+						this.ShowErrorMessage(App.CurrentApp.CommandLineErrors, null);
+					} else if(!string.IsNullOrEmpty(App.CurrentApp.ScriptToRun)) {
+						this.Dispatcher.BeginInvoke(new Action(() => IronPythonConsole.Run(this, App.CurrentApp.ScriptToRun)));
+					} else {
+						// Reuse this thread to check if there are any translations requests are pending
+						DialogAbout.CheckTranslationRequests(this.Dispatcher);
+					}
 				} catch(Exception exception) {
 					Tracer.Report("Mainframe.PostLoaded", exception);
 					this.ReportException(exception);

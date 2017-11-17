@@ -34,6 +34,15 @@ namespace LogicCircuit {
 			}
 		}
 
+		internal static void Run(Window parent, string script) {
+			IronPythonConsole.Run(parent);
+			IronPythonConsole console = IronPythonConsole.currentConsole;
+			if(console != null) {
+				console.writer.WriteLine(script);
+				console.Execute(script);
+			}
+		}
+
 		internal static void Stop() {
 			if(IronPythonConsole.currentConsole != null) {
 				IronPythonConsole.currentConsole.Close();

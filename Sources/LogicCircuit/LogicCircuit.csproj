@@ -102,6 +102,7 @@
     <Compile Include="ColorPicker\HueToColorConverter.cs" />
     <Compile Include="ColorPicker\SaturationPicker.cs" />
     <Compile Include="ColorPicker\SpectrumSlider.cs" />
+    <Compile Include="CommandLine.cs" />
     <Compile Include="CommandMenuItem.cs" />
     <Compile Include="Conductor.cs" />
     <Compile Include="ConductorMap.cs" />
