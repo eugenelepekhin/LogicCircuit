@@ -404,13 +404,13 @@ Uit</value>
     <value>_Poort Symbool</value>
   </data>
   <data name="TitleLoadLastFile" xml:space="preserve">
-    <value>_Laad laatste file tijdens starten</value>
+    <value>_Laad meest recente bestand bij starten</value>
   </data>
   <data name="TitleOptions" xml:space="preserve">
     <value>Opties</value>
   </data>
   <data name="TitleShowGrid" xml:space="preserve">
-    <value>_Show raster</value>
+    <value>_Toon raster</value>
   </data>
   <data name="MessageFreeWireCount" xml:space="preserve">
     <value>{0} Er zijn losse draden gevonden.</value>
@@ -1436,9 +1436,9 @@ Hier kunt u grootte en kleurdiepte kiezen:
 Wil je het, automatisch opgeslagen, bestand laden.</value>
   </data>
   <data name="TitleAutoSave" xml:space="preserve">
-    <value>Er wordt, elke:</value>
+    <value>Bewaar wijzigingen elke:</value>
   </data>
   <data name="TitleMinutesUnits" xml:space="preserve">
-    <value>minuten, een kopie gemaakt</value>
+    <value>minuten</value>
   </data>
 </root>
