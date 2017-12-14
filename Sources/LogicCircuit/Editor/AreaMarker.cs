@@ -18,6 +18,10 @@ namespace LogicCircuit {
 				this.PositionGlyph(point);
 			}
 
+			public override Rect Bounds() {
+				return new Rect(Canvas.GetLeft(this.markerGlyph), Canvas.GetTop(this.markerGlyph), this.markerGlyph.Width, this.markerGlyph.Height);
+			}
+
 			public override void Move(EditorDiagram editor, Point point) {
 				this.PositionGlyph(point);
 			}

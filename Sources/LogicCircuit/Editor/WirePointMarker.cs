@@ -27,6 +27,16 @@ namespace LogicCircuit {
 				this.markerGlyph.Width = this.markerGlyph.Height = 2 * Symbol.PinRadius;
 			}
 
+			public override Rect Bounds() {
+				Point point = this.getPoint();
+				return new Rect(
+					point.X - Symbol.PinRadius,
+					point.Y - Symbol.PinRadius,
+					2 * Symbol.PinRadius,
+					2 * Symbol.PinRadius
+				);
+			}
+
 			public override void Move(EditorDiagram editor, Point point) {
 				if(editor.SelectionCount > 1) {
 					base.Move(editor, point);

@@ -60,6 +60,16 @@ namespace LogicCircuit {
 				Tracer.Assert(this.rectangle.Cursor != null);
 			}
 
+			public override Rect Bounds() {
+				Rect rect = this.parent.Bounds();
+				return new Rect(
+					rect.X + rect.Width * this.x / 2 - Symbol.PinRadius,
+					rect.Y + rect.Height * this.y / 2 - Symbol.PinRadius,
+					2 * Symbol.PinRadius,
+					2 * Symbol.PinRadius
+				);
+			}
+
 			public override void Move(EditorDiagram editor, Point point) {
 				if(editor.SelectionCount > 1) {
 					base.Move(editor, point);

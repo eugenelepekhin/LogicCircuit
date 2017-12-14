@@ -12,6 +12,10 @@ namespace LogicCircuit {
 				this.Symbol = symbol;
 			}
 
+			public virtual Rect Bounds() {
+				return this.Symbol.Bounds();
+			}
+
 			public virtual void Move(EditorDiagram editor, Point point) {
 				editor.MoveSelection(point);
 			}

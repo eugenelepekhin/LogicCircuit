@@ -46,6 +46,7 @@ namespace LogicCircuit {
 		private Marker movingMarker;
 		private Point moveStart;
 		private TranslateTransform moveVector;
+		private Point maxMove;
 
 		protected EditorDiagram(Mainframe mainframe, CircuitProject circuitProject) {
 			this.Mainframe = mainframe;
@@ -570,6 +571,21 @@ namespace LogicCircuit {
 			this.movingMarker = marker;
 			this.moveStart = startPoint;
 			this.Mainframe.Status = tip;
+
+			if(marker is WirePledge) {
+				this.maxMove = new Point(0, 0);
+			} else {
+				Rect bound = marker.Bounds();
+				if(bound.Width < 3 * Symbol.PinRadius && this.SelectionCount == 1) {
+					this.maxMove = new Point(0, 0);
+				} else {
+					bound = this.Selection().Aggregate(new Rect(startPoint, startPoint), (rect, symbol) => Rect.Union(rect, symbol.Bounds()));
+					this.maxMove = new Point(
+						startPoint.X - bound.X,
+						startPoint.Y - bound.Y
+					);
+				}
+			}
 		}
 
 		private void StartMove(Marker marker, Point startPoint) {
@@ -608,7 +624,7 @@ namespace LogicCircuit {
 		private void FinishMove(Point position, bool withWires) {
 			Marker marker = this.movingMarker;
 			this.CancelMove();
-			marker.Commit(this, position, withWires);
+			marker.Commit(this, new Point(Math.Max(this.maxMove.X, position.X), Math.Max(this.maxMove.Y, position.Y)), withWires);
 		}
 
 		private void CommitMove(Point point, bool withWires) {
@@ -1019,7 +1035,8 @@ namespace LogicCircuit {
 
 		public void DiagramMouseMove(MouseEventArgs e) {
 			if(this.InEditMode && this.movingMarker != null) {
-				this.movingMarker.Move(this, e.GetPosition(this.Diagram));
+				Point point = e.GetPosition(this.Diagram);
+				this.movingMarker.Move(this, new Point(Math.Max(this.maxMove.X, point.X), Math.Max(this.maxMove.Y, point.Y)));
 			}
 		}
 
