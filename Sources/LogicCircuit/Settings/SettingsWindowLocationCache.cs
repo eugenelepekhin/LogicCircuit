@@ -17,10 +17,10 @@ namespace LogicCircuit {
 				height = window.Height;
 			}
 			string windowName = window.GetType().Name;
-			this.x = new SettingsDoubleCache(settings, windowName + ".X", 0, SystemParameters.VirtualScreenWidth - 30, window.Left);
-			this.y = new SettingsDoubleCache(settings, windowName + ".Y", 0, SystemParameters.VirtualScreenHeight - 30, window.Top);
-			this.width = new SettingsDoubleCache(settings, windowName + ".Width", window.MinWidth, window.MaxWidth, width);
-			this.height = new SettingsDoubleCache(settings, windowName + ".Height", window.MinHeight, window.MaxHeight, height);
+			this.x = new SettingsDoubleCache(settings, windowName + ".X", 0, SystemParameters.VirtualScreenWidth - 30, window.Left, true);
+			this.y = new SettingsDoubleCache(settings, windowName + ".Y", 0, SystemParameters.VirtualScreenHeight - 30, window.Top, true);
+			this.width = new SettingsDoubleCache(settings, windowName + ".Width", window.MinWidth, window.MaxWidth, width, true);
+			this.height = new SettingsDoubleCache(settings, windowName + ".Height", window.MinHeight, window.MaxHeight, height, true);
 			this.state = new SettingsWindowStateCache(settings, windowName + ".WindowState");
 		}
 
