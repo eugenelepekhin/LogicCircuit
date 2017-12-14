@@ -3,8 +3,8 @@ using System.Windows;
 
 namespace LogicCircuit {
 	public class SettingsGridLengthCache {
-		private Settings settings;
-		private string key;
+		private readonly Settings settings;
+		private readonly string key;
 
 		private GridLength cache;
 		public GridLength Value {

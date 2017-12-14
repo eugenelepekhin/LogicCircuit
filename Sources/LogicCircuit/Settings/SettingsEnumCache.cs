@@ -2,9 +2,9 @@
 
 namespace LogicCircuit {
 	internal class SettingsEnumCache<T> where T:struct {
-		private Settings settings;
-		private string key;
-		private T defaultValue;
+		private readonly Settings settings;
+		private readonly string key;
+		private readonly T defaultValue;
 
 		private T cache;
 		public T Value {

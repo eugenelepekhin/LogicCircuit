@@ -3,8 +3,8 @@ using System.Globalization;
 
 namespace LogicCircuit {
 	internal class SettingsDateTimeCache {
-		private Settings settings;
-		private string key;
+		private readonly Settings settings;
+		private readonly string key;
 
 		private DateTime cache;
 		public DateTime Value {

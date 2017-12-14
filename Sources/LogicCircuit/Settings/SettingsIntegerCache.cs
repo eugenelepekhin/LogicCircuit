@@ -3,10 +3,10 @@ using System.Globalization;
 
 namespace LogicCircuit {
 	public class SettingsIntegerCache {
-		private Settings settings;
-		private string key;
-		private int minimum;
-		private int maximum;
+		private readonly Settings settings;
+		private readonly string key;
+		private readonly int minimum;
+		private readonly int maximum;
 
 		private int cache;
 		public int Value {

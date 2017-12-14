@@ -3,8 +3,8 @@ using System.Globalization;
 
 namespace LogicCircuit {
 	internal class SettingsBoolCache {
-		private Settings settings;
-		private string key;
+		private readonly Settings settings;
+		private readonly string key;
 
 		private bool cache;
 		public bool Value {

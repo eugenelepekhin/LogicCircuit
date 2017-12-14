@@ -2,10 +2,10 @@
 
 namespace LogicCircuit {
 	internal class SettingsStringCache {
-		private Settings settings;
-		private string key;
-		private string[] constraint;
-		private string defaultValue;
+		private readonly Settings settings;
+		private readonly string key;
+		private readonly string[] constraint;
+		private readonly string defaultValue;
 
 		private string cache;
 		public string Value {

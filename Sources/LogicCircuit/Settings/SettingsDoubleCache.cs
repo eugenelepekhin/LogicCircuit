@@ -3,11 +3,11 @@ using System.Globalization;
 
 namespace LogicCircuit {
 	internal class SettingsDoubleCache {
-		private Settings settings;
-		private string key;
-		private double minimum;
-		private double maximum;
-		private string format;
+		private readonly Settings settings;
+		private readonly string key;
+		private readonly double minimum;
+		private readonly double maximum;
+		private readonly string format;
 
 		private double cache;
 		public double Value {

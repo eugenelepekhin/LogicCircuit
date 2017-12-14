@@ -3,11 +3,11 @@ using System.Windows;
 
 namespace LogicCircuit {
 	public class SettingsWindowLocationCache {
-		private SettingsDoubleCache x;
-		private SettingsDoubleCache y;
-		private SettingsDoubleCache width;
-		private SettingsDoubleCache height;
-		private SettingsWindowStateCache state;
+		private readonly SettingsDoubleCache x;
+		private readonly SettingsDoubleCache y;
+		private readonly SettingsDoubleCache width;
+		private readonly SettingsDoubleCache height;
+		private readonly SettingsWindowStateCache state;
 
 		public SettingsWindowLocationCache(Settings settings, Window window, double width, double height) {
 			if(double.IsNaN(width)) {
