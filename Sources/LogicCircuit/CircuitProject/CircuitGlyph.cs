@@ -236,12 +236,12 @@ namespace LogicCircuit {
 			Tracer.Assert(button != null);
 			if(button.IsToggle) {
 				if(panel.Children.Count < 3) {
-					panel.Children.Add(CircuitGlyph.Skin<Border>(SymbolShape.ToggleLed));
+					panel.Children.Add(CircuitGlyph.Skin<Grid>(SymbolShape.ToggleLed));
 				}
 			} else {
 				if(2 < panel.Children.Count) {
 					UIElement rect = panel.Children[2];
-					Tracer.Assert(rect is Border);
+					Tracer.Assert(rect is Grid);
 					panel.Children.Remove(rect);
 				}
 			}

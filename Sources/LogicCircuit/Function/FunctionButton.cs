@@ -85,7 +85,8 @@ namespace LogicCircuit {
 
 		private static void DrawState(ButtonControl button, State state) {
 			Canvas canvas = (Canvas)button.Parent;
-			Border border = (Border)canvas.Children[canvas.Children.Count - 1];
+			Panel panel = (Panel)canvas.Children[canvas.Children.Count - 1];
+			Border border = (Border)panel.Children[0];
 			Tracer.Assert(border != null);
 			border.Background = FunctionButton.stateBrush[(int)state];
 		}
