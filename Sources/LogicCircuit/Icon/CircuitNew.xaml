@@ -1,0 +1,23 @@
+<Viewbox Width="16" Height="16" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<Rectangle Width="16" Height="16">
+		<Rectangle.Fill>
+			<DrawingBrush>
+				<DrawingBrush.Drawing>
+					<DrawingGroup>
+						<DrawingGroup.Children>
+							<GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />
+							<GeometryDrawing Brush="#FFF6F6F6" Geometry="F1M2.9997,-0.000199999999999534L2.9997,0.8778 2.3787,0.2568 0.2577,2.3788 0.8787,3.0008 -0.000300000000000189,3.0008 -0.000300000000000189,5.9998 0.8787,5.9998 0.2567,6.6208 1.9997,8.3638 1.9997,10.9998 0.9997,10.9998 0.9997,15.9998 16.0007,15.9998 16.0007,10.9998 15.0007,10.9998 15.0007,7.9998 9.9997,7.9998 9.9997,6.9998 11.9997,6.9998 11.9997,0.9998 7.3637,0.9998 6.6217,0.2568 6.0007,0.8778 6.0007,-0.000199999999999534z" />
+							<GeometryDrawing Brush="#FF414141" Geometry="F1M14,14L13,14 13,13 14,13z M9,14L8,14 8,13 9,13z M4,14L3,14 3,13 4,13z M14,12L14,9 9,9 9,6 8.121,6 8.742,6.621 8,7.363 8,8 8,9 6,9 3,9 3,12 2,12 2,15 5,15 5,12 4,12 4,10 8,10 8,12 7,12 7,15 10,15 10,12 9,12 9,10 13,10 13,12 12,12 12,15 15,15 15,12z" />
+							<GeometryDrawing Brush="#FF424242" Geometry="F1M8.3633,2L8.7423,2.379 8.1213,3 9.0003,3 10.0003,3 10.0003,5 9.0003,5 9.0003,6 11.0003,6 11.0003,2z" />
+							<GeometryDrawing Brush="#FFC27C19" Geometry="F1M5,5L4,5 4,4 5,4z M8,4L5.707,4 7.328,2.379 6.621,1.671 5,3.292 5,1 4,1 4,3.292 2.379,1.671 1.671,2.379 3.292,4 1,4 1,5 3.292,5 1.671,6.621 2.379,7.328 4,5.707 4,8 5,8 5,5.707 6.621,7.328 7.328,6.621 5.707,5 8,5z" />
+							<GeometryDrawing Brush="#FFF0EFF1" Geometry="F1M8,14L9,14 9,13 8,13z" />
+							<GeometryDrawing Brush="#FFF0EFF1" Geometry="F1M3,14L4,14 4,13 3,13z" />
+							<GeometryDrawing Brush="#FFF0EFF1" Geometry="F1M9,5L10,5 10,3 9,3z" />
+							<GeometryDrawing Brush="#FFF0EFF1" Geometry="F1M13,14L14.001,14 14.001,13 13,13z" />
+						</DrawingGroup.Children>
+					</DrawingGroup>
+				</DrawingBrush.Drawing>
+			</DrawingBrush>
+		</Rectangle.Fill>
+	</Rectangle>
+</Viewbox>

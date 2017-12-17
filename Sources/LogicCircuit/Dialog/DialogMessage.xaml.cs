@@ -127,26 +127,25 @@ namespace LogicCircuit {
 			}
 		}
 
-		public BitmapSource BitmapSource {
+		public FrameworkElement Image {
 			get {
 				string icon;
 				switch(this.image) {
 				case MessageBoxImage.Information:
-					icon = "pack://application:,,,/Properties/info.png";
+					icon = "/Icon/Info.xaml";
 					break;
 				case MessageBoxImage.Warning:
-					icon = "pack://application:,,,/Properties/warning.png";
+					icon = "/Icon/Warning.xaml";
 					break;
 				case MessageBoxImage.Question:
-					icon = "pack://application:,,,/Properties/question.png";
+					icon = "/Icon/Question.xaml";
 					break;
 				case MessageBoxImage.Error:
 				default:
-					icon = "pack://application:,,,/Properties/error.png";
+					icon = "/Icon/Error.xaml";
 					break;
 				}
-				PngBitmapDecoder decoder = new PngBitmapDecoder(new Uri(icon), BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
-				return decoder.Frames[0];
+				return Symbol.Skin(icon);
 			}
 		}
 

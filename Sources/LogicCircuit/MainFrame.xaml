@@ -127,7 +127,7 @@
 				<lc:CommandMenuItem Command="{Binding Path=Editor.CommandRotateLeft}"/>
 				<lc:CommandMenuItem Command="{Binding Path=Editor.CommandRotateRight}"/>
 			</MenuItem>
-            <MenuItem Header="{x:Static properties:Resources.MenuHeaderCircuit}">
+			<MenuItem Header="{x:Static properties:Resources.MenuHeaderCircuit}">
 				<lc:CommandMenuItem Command="{Binding Path=Editor.CommandCircuitProject}"/>
 				<lc:CommandMenuItem Command="{Binding Path=Editor.CommandCircuitCurrent}"/>
 				<lc:CommandMenuItem Command="{Binding Path=Editor.CommandCircuitNew}"/>
@@ -138,7 +138,7 @@
 				<lc:CommandMenuItem Command="{Binding Path=Editor.CommandTruthTable}"/>
 				<lc:CommandMenuItem Command="{Binding Path=Editor.CommandPower}"/>
 			</MenuItem>
-            <MenuItem Header="{x:Static properties:Resources.MenuHeaderTools}">
+			<MenuItem Header="{x:Static properties:Resources.MenuHeaderTools}">
 				<lc:CommandMenuItem Command="{Binding Path=Editor.CommandReport}"/>
 				<lc:CommandMenuItem Command="{Binding Path=Editor.CommandOscilloscope}"/>
 				<lc:CommandMenuItem Command="{Binding Path=CommandIronPython}"/>

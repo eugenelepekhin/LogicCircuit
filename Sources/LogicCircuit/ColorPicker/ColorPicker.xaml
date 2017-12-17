@@ -1,9 +1,10 @@
 ﻿<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:LogicCircuit"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:local="clr-namespace:LogicCircuit"
 	xmlns:properties="clr-namespace:LogicCircuit.Properties"
 >
+	<local:VectorImageLoaderConverter x:Key="VectorImageLoaderConverter"/>
 	<Style TargetType="{x:Type local:ColorPicker}">
 		<Setter Property="Template">
 			<Setter.Value>
@@ -119,23 +120,23 @@
 										<RowDefinition Height="*"/>
 									</Grid.RowDefinitions>
 
-									<Image Grid.Column="0" Grid.Row="0" VerticalAlignment="Center">
-										<Image.Style>
-											<Style TargetType="Image">
+									<ContentControl Grid.Column="0" Grid.Row="0" VerticalAlignment="Center">
+										<ContentControl.Style>
+											<Style TargetType="ContentControl">
 												<Style.Triggers>
 													<DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ColorPickerMode}" Value="{x:Static local:ColorPickerMode.Color}">
-														<Setter Property="Source" Value="..\Properties\Color.png"/>
+														<Setter Property="Content" Value="{Binding Converter={StaticResource VectorImageLoaderConverter}, ConverterParameter='Icon\\Color.xaml'}"/>
 													</DataTrigger>
 													<DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ColorPickerMode}" Value="{x:Static local:ColorPickerMode.Foreground}">
-														<Setter Property="Source" Value="..\Properties\FontColor.png"/>
+														<Setter Property="Content" Value="{Binding Converter={StaticResource VectorImageLoaderConverter}, ConverterParameter='Icon\\ColorFont.xaml'}"/>
 													</DataTrigger>
 													<DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ColorPickerMode}" Value="{x:Static local:ColorPickerMode.Background}">
-														<Setter Property="Source" Value="..\Properties\Highlight.png"/>
+														<Setter Property="Content" Value="{Binding Converter={StaticResource VectorImageLoaderConverter}, ConverterParameter='Icon\\ColorHiglight.xaml'}"/>
 													</DataTrigger>
 												</Style.Triggers>
 											</Style>
-										</Image.Style>
-									</Image>
+										</ContentControl.Style>
+									</ContentControl>
 									<Rectangle Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Height="5" Margin="3,0">
 										<Rectangle.Fill>
 											<SolidColorBrush Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectedColor}"/>

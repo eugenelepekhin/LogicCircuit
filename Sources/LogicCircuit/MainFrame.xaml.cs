@@ -95,19 +95,35 @@ namespace LogicCircuit {
 				scrollViewer.ScrollToVerticalOffset(value.Y);
 			}
 		}
-		public LambdaUICommand CommandNew => new LambdaUICommand(Properties.Resources.CommandFileNew, o => this.New(), new KeyGesture(Key.N, ModifierKeys.Control));
-		public LambdaUICommand CommandOpen => new LambdaUICommand(Properties.Resources.CommandFileOpen, o => this.Open(), new KeyGesture(Key.O, ModifierKeys.Control));
+		public LambdaUICommand CommandNew => new LambdaUICommand(Properties.Resources.CommandFileNew, o => this.New(), new KeyGesture(Key.N, ModifierKeys.Control)) {
+			IconPath = "Icon/FileNew.xaml"
+		};
+		public LambdaUICommand CommandOpen => new LambdaUICommand(Properties.Resources.CommandFileOpen, o => this.Open(), new KeyGesture(Key.O, ModifierKeys.Control)) {
+			IconPath = "Icon/FileOpen.xaml"
+		};
 		public LambdaUICommand CommandOpenRecent { get; private set; }
-		public LambdaUICommand CommandSave => new LambdaUICommand(Properties.Resources.CommandFileSave, o => this.Save(), new KeyGesture(Key.S, ModifierKeys.Control));
-		public LambdaUICommand CommandSaveAs => new LambdaUICommand(Properties.Resources.CommandFileSaveAs, o => this.SaveAs());
-		public LambdaUICommand CommandImport => new LambdaUICommand(Properties.Resources.CommandFileFileImport, o => this.Editor != null && this.Editor.InEditMode, o => this.Import());
+		public LambdaUICommand CommandSave => new LambdaUICommand(Properties.Resources.CommandFileSave, o => this.Save(), new KeyGesture(Key.S, ModifierKeys.Control)) {
+			IconPath = "Icon/FileSave.xaml"
+		};
+		public LambdaUICommand CommandSaveAs => new LambdaUICommand(Properties.Resources.CommandFileSaveAs, o => this.SaveAs()) {
+			IconPath = "Icon/FileSaveAs.xaml"
+		};
+		public LambdaUICommand CommandImport => new LambdaUICommand(Properties.Resources.CommandFileFileImport, o => this.Editor != null && this.Editor.InEditMode, o => this.Import()) {
+			IconPath = "Icon/FileImport.xaml"
+		};
 		public LambdaUICommand CommandExportImage => new LambdaUICommand(Properties.Resources.CommandFileExportImage,
 			o => this.Editor != null && !this.LogicalCircuit().IsEmpty(),
 			o => this.ShowDialog(new DialogExportImage(this.Editor))
-		);
-		public LambdaUICommand CommandClose => new LambdaUICommand(Properties.Resources.CommandFileClose, o => this.Close(), new KeyGesture(Key.F4, ModifierKeys.Alt));
+		) {
+			IconPath = "Icon/FileExportImage.xaml"
+		};
+		public LambdaUICommand CommandClose => new LambdaUICommand(Properties.Resources.CommandFileClose, o => this.Close(), new KeyGesture(Key.F4, ModifierKeys.Alt)) {
+			IconPath = "Icon/FileClose.xaml"
+		};
 		[SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-		public LambdaUICommand CommandHelp => new LambdaUICommand(Properties.Resources.CommandHelpView, o => Process.Start(Properties.Resources.HelpContent), new KeyGesture(Key.F1));
+		public LambdaUICommand CommandHelp => new LambdaUICommand(Properties.Resources.CommandHelpView, o => Process.Start(Properties.Resources.HelpContent), new KeyGesture(Key.F1)) {
+			IconPath = "Icon/F1Help.xaml"
+		};
 		public LambdaUICommand CommandAbout => new LambdaUICommand(Properties.Resources.CommandHelpAbout, o => this.ShowDialog(new DialogAbout()));
 		public LambdaUICommand CommandOptions => new LambdaUICommand(Properties.Resources.CommandToolsOptions, o => this.Editor != null && this.Editor.InEditMode, o => {
 			bool? result = this.ShowDialog(new DialogOptions(this));
@@ -115,8 +131,12 @@ namespace LogicCircuit {
 				this.NotifyPropertyChanged("Editor");
 				this.Editor.FullRefresh();
 			}
-		});
-		public LambdaUICommand CommandIronPython => new LambdaUICommand(Properties.Resources.CommandToolsIronPython, o => this.Editor != null, o => IronPythonConsole.Run(this));
+		}) {
+			IconPath = "Icon/ToolsOptions.xaml"
+		};
+		public LambdaUICommand CommandIronPython => new LambdaUICommand(Properties.Resources.CommandToolsIronPython, o => this.Editor != null, o => IronPythonConsole.Run(this)) {
+			IconPath = "Icon/PythonConsole.xaml"
+		};
 
 		public Mainframe() {
 			App.Mainframe = this;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Input;
 
 namespace LogicCircuit {
@@ -24,6 +25,9 @@ namespace LogicCircuit {
 				return null;
 			}
 		}
+
+		public string IconPath { get; set; }
+		public FrameworkElement Icon => (this.IconPath != null) ? Symbol.Skin(this.IconPath) : null;
 
 		public LambdaUICommand(string text, Predicate<object> canExecute, Action<object> execute, KeyGesture keyGesture) {
 			if(string.IsNullOrEmpty(text)) {

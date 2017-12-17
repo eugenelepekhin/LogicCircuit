@@ -343,6 +343,7 @@
     <Compile Include="T4ToStringHelper.cs" />
     <Compile Include="T4Transformation.cs" />
     <Compile Include="Tracer.cs" />
+    <Compile Include="VectorImageLoaderConverter.cs" />
     <Compile Include="XmlHelper.cs" />
     <Page Include="ColorPicker\ColorPicker.xaml">
       <SubType>Designer</SubType>
@@ -556,32 +557,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Properties\error.png" />
-    <Resource Include="Properties\info.png" />
     <Resource Include="Properties\LogicCircuit.ico" />
     <Resource Include="Properties\LogicCircuit.png" />
-    <Resource Include="Properties\question.png" />
-    <Resource Include="Properties\warning.png" />
-    <Resource Include="Properties\CharacterGrowFont.png" />
-    <Resource Include="Properties\CharacterShrinkFont.png" />
-    <Resource Include="Properties\EditCopy.png" />
-    <Resource Include="Properties\EditCut.png" />
-    <Resource Include="Properties\EditPaste.png" />
-    <Resource Include="Properties\EditRedo.png" />
-    <Resource Include="Properties\EditUndo.png" />
-    <Resource Include="Properties\ListBullets.png" />
-    <Resource Include="Properties\ListNumbering.png" />
-    <Resource Include="Properties\ParagraphCenterJustify.png" />
-    <Resource Include="Properties\ParagraphDecreaseIndentation.png" />
-    <Resource Include="Properties\ParagraphFullJustify.png" />
-    <Resource Include="Properties\ParagraphIncreaseIndentation.png" />
-    <Resource Include="Properties\ParagraphLeftJustify.png" />
-    <Resource Include="Properties\ParagraphRightJustify.png" />
-    <Resource Include="Properties\Hyperlink.png" />
-    <Resource Include="Properties\Image.png" />
-    <Resource Include="Properties\Color.png" />
-    <Resource Include="Properties\FontColor.png" />
-    <Resource Include="Properties\Highlight.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Schema\Schema.Designer.cs">
@@ -613,6 +590,190 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Icon\CircuitPower.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Icon\Color.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\ColorFont.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\ColorHiglight.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\Error.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Icon\Info.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Icon\Question.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Icon\Warning.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Icon\CircuitNew.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\CircuitProjectProperty.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\CircuitProperty.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\CircuitPulse.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\CircuitReport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\CircuitSearch.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\CircuitTable.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\CircuitUsedBy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Icon\EditBulletList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\EditCopy.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\EditCut.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\EditDecreaseFontSize.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\EditIncreaseFontSize.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\EditJustify.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\EditLeftJustify.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\EditOrderedList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\EditPaste.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\EditRedo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\EditRightJustify.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\EditRotateLeft.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\EditRotateRight.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\EditSelectAll.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\EditTextCenter.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\EditTextIndent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\EditTextOutdent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\EditUndo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\F1Help.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\FileClose.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\FileExportImage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\FileImport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\FileNew.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\FileOpen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\FileSaveAs.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\FileSave.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\Hyperlink.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\Image.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\PythonConsole.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon\ToolsOptions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="SymbolShapes\Button.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -139,6 +139,7 @@
 			<Style TargetType="lc:CommandMenuItem">
 				<Setter Property="Header" Value="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}"/>
 				<Setter Property="InputGestureText" Value="{Binding RelativeSource={RelativeSource Self}, Path=Command.InputGestureText}"/>
+				<Setter Property="Icon" Value="{Binding RelativeSource={RelativeSource Self}, Path=Command.Icon}"/>
 				<Style.Triggers>
 					<MultiDataTrigger>
 						<MultiDataTrigger.Conditions>

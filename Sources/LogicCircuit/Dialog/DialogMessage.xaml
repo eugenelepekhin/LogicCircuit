@@ -9,7 +9,7 @@
 	MinWidth="340" MinHeight="100"
 >
 	<lc:AutoGrid>
-		<Image Source="{Binding Path=BitmapSource, Mode=OneTime}" Margin="24,24,12,24" VerticalAlignment="Top"/>
+		<ContentControl Content="{Binding Path=Image, Mode=OneTime}" Margin="24,24,12,24" VerticalAlignment="Top"/>
 		<ScrollViewer Margin="8" VerticalAlignment="Center" HorizontalAlignment="Stretch" MaxHeight="240"
 			HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
 		>
