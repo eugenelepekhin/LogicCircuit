@@ -6,15 +6,15 @@ using System.Reflection;
 using System.Xml;
 
 namespace FindUnusedResources {
-    /// <summary>
+	/// <summary>
 	/// TODO: write it down
-    /// This utility is used for finding unused resource strings in the project.
-    /// Currently you need to modify hard coded strings to provide path to the project
-    /// Currently algorithm is fairly primitive so it will miss cases like: name versus names.
-    /// </summary>
+	/// This utility is used for finding unused resource strings in the project.
+	/// Currently you need to modify hard coded strings to provide path to the project
+	/// Currently algorithm is fairly primitive so it will miss cases like: name versus names.
+	/// </summary>
 	internal static class Program {
 		public static void Main(string[] args) {
-            string projectPath = null;
+			string projectPath = null;
 			if(args != null && 0 < args.Length && args[0] != null) {
 				projectPath = args[0];
 			} else {
@@ -37,25 +37,6 @@ namespace FindUnusedResources {
 				}
 				// This is list of resources that accessed in a custom way. Beware it can mask a real problem
 				List<string> exclude = new List<string>() {
-					"Resources.CommandCircuitDelete",
-					"Resources.CommandCircuitNew",
-					"Resources.CommandCircuitPower",
-					"Resources.CommandCircuitUsage",
-					"Resources.CommandEditRotateLeft",
-					"Resources.CommandEditRotateRight",
-					"Resources.CommandEditSelectAllButWires",
-					"Resources.CommandEditSelectAllProbes",
-					"Resources.CommandEditSelectAllProbesWithWire",
-					"Resources.CommandEditSelectAllWires",
-					"Resources.CommandEditSelectFloatingSymbols",
-					"Resources.CommandEditSelectFreeWires",
-					"Resources.CommandEditUnselectAllButWires",
-					"Resources.CommandEditUnselectAllWires",
-					"Resources.CommandFileExportImage",
-					"Resources.CommandFileFileImport",
-					"Resources.CommandHelpAbout",
-					"Resources.CommandToolsOptions",
-					"Resources.CommandToolsOscilloscope",
 					"Resources.ErrorNotUniqueIndex",
 					"Resources.Led7Pin1",
 					"Resources.Led7Pin2",
