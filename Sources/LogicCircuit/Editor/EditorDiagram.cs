@@ -572,7 +572,7 @@ namespace LogicCircuit {
 			this.moveStart = startPoint;
 			this.Mainframe.Status = tip;
 
-			if(marker is WirePledge) {
+			if(marker is WirePledge || marker is AreaMarker) {
 				this.maxMove = new Point(0, 0);
 			} else {
 				Rect bound = marker.Bounds();
