@@ -328,6 +328,7 @@
     <Compile Include="Runner\CircuitMap.Connection.cs" />
     <Compile Include="CircuitProject\JamComparer.cs" />
     <Compile Include="Runner\CircuitRunner.cs" />
+    <Compile Include="Runner\JamTracker.cs" />
     <Compile Include="Runner\Oscilloscope.cs" />
     <Compile Include="Runner\PreciseTimer.cs" />
     <Compile Include="Settings\Settings.cs" />
