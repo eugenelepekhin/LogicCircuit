@@ -36,6 +36,7 @@ namespace LogicCircuit {
 			"pt-BR",
 			"pt-PT",
 			"ru",
+			"tr",
 			"uk",
 			"zh-Hans",
 		};

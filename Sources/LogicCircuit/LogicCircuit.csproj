@@ -538,6 +538,9 @@
     <EmbeddedResource Include="Properties\Resources.ru.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.tr.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.uk.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
