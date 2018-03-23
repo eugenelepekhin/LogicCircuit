@@ -16,6 +16,10 @@ namespace LogicCircuit {
 				this.InJam = inJam;
 				this.OutJam = outJam;
 			}
+
+			#if DEBUG
+				public override string ToString() => string.Format(System.Globalization.CultureInfo.InvariantCulture, "Connect {0} -> {1}", this.InJam.ToString(), this.OutJam.ToString());
+			#endif
 		}
 
 		private class ConnectionSet {

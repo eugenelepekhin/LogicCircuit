@@ -204,7 +204,7 @@ namespace LogicCircuit {
 					return string.Format(System.Globalization.CultureInfo.InvariantCulture,
 						"DirtyList stat: Min={0}, Max={1}, Avg={2}, Count={3}", this.minCount, this.maxCount, this.sumCount / this.reportCount, this.reportCount
 					);
-                }
+				}
 			#endif
 			private FunctionList current = new FunctionList(1024);
 			private FunctionList next = new FunctionList(1024);
