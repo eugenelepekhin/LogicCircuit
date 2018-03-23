@@ -142,6 +142,11 @@
 							<File Id="ru" Source="$(var.LogicCircuit.TargetDir)ru\$(var.LogicCircuit.TargetName).resources.dll"/>
 						</Component>
 					</Directory>
+					<Directory Id="tr" Name="tr">
+						<Component Id="trComponent">
+							<File Id="tr" Source="$(var.LogicCircuit.TargetDir)tr\$(var.LogicCircuit.TargetName).resources.dll"/>
+						</Component>
+					</Directory>
 					<Directory Id="uk" Name="uk">
 						<Component Id="ukComponent">
 							<File Id="uk" Source="$(var.LogicCircuit.TargetDir)uk\$(var.LogicCircuit.TargetName).resources.dll"/>
@@ -190,6 +195,7 @@
 			<ComponentRef Id="pt_BRComponent"/>
 			<ComponentRef Id="pt_PTComponent"/>
 			<ComponentRef Id="ruComponent"/>
+			<ComponentRef Id="trComponent"/>
 			<ComponentRef Id="ukComponent"/>
 			<ComponentRef Id="zh_HansComponent"/>
 			<ComponentRef Id="StartMenuShortcuts"/>
