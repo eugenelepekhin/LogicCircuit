@@ -256,7 +256,7 @@
     <value>_Dosya</value>
   </data>
   <data name="MenuHeaderHelp" xml:space="preserve">
-    <value>_Yardım</value>
+    <value>Yar_dım</value>
   </data>
   <data name="MenuHeaderTools" xml:space="preserve">
     <value>_Araçlar</value>
@@ -325,7 +325,7 @@
     <value>İtalik</value>
   </data>
   <data name="CommandEditPaste" xml:space="preserve">
-    <value>_Yapıştır</value>
+    <value>Ya_pıştır</value>
   </data>
   <data name="ToolTipFontFamily" xml:space="preserve">
     <value>Font Ailesi</value>
@@ -463,7 +463,7 @@
     <value>Tüm Probları ve Bağlı Telleri Seç</value>
   </data>
   <data name="CommandEditSelectFreeWires" xml:space="preserve">
-    <value>Boşta Telleri Seç</value>
+    <value>Boşta Olan Telleri Seç</value>
   </data>
   <data name="CommandEditUnselectAllButWires" xml:space="preserve">
     <value>Teller Hariç Seçimi kaldır</value>
@@ -490,7 +490,7 @@
     <value>_ileri</value>
   </data>
   <data name="CommandEditSelectAll" xml:space="preserve">
-    <value>Tümünü _Seç</value>
+    <value>T_ümünü Seç</value>
   </data>
   <data name="CommandEditUnderline" xml:space="preserve">
     <value>Alt Çizgi</value>
@@ -540,7 +540,7 @@ Bellek değeri {0} tarihinde güncellenir</value>
     <value>Kombine Splitter konnektörü</value>
   </data>
   <data name="TitleNo" xml:space="preserve">
-    <value>_Yok</value>
+    <value>Y_ok</value>
   </data>
   <data name="TitleYes" xml:space="preserve">
     <value>_Evet</value>
@@ -576,9 +576,6 @@ Giriş</value>
   </data>
   <data name="TitleAbout" xml:space="preserve">
     <value>Hakkında</value>
-  </data>
-  <data name="TitleApplication" xml:space="preserve">
-    <value>Lojik Devre</value>
   </data>
   <data name="TitleGateShape" xml:space="preserve">
     <value>_Kapı Şekli</value>
@@ -617,10 +614,10 @@ Giriş</value>
     <value>_Evirilmiş</value>
   </data>
   <data name="TitleLoad" xml:space="preserve">
-    <value>_Yükle...</value>
+    <value>Y_ükle...</value>
   </data>
   <data name="TitleSide" xml:space="preserve">
-    <value>_Yan:</value>
+    <value>Y_an:</value>
   </data>
   <data name="TitleType" xml:space="preserve">
     <value>_Tip:</value>
@@ -780,7 +777,7 @@ Değiştirmek istiyor musun?</value>
     <value>Lojik Devre Kullanımı</value>
   </data>
   <data name="CommandFileOpenRecent" xml:space="preserve">
-    <value>Son _Kullanılanlardan Aç</value>
+    <value>_Son Kullanılanlardan Aç</value>
   </data>
   <data name="MessageInvalidRecentFile" xml:space="preserve">
     <value>"{0}" dosyası açılamıyor.
@@ -1157,7 +1154,7 @@ Bu dosyanın otomatik kaydedilmiş durumunu yüklemek istiyor musunuz?</value>
     <value>Pinin yanındaki devrenin sembolü üzerinde görüntülenecek kısa metin girin</value>
   </data>
   <data name="ToolTipIsToggle" xml:space="preserve">
-    <value>Düğme geçiş yaparsa, her tıklamada, değiştirilmezse, sonra basıldığında veya basıldığında değişecektir.</value>
+    <value>toggle ise, her tıklamada; toggle değil ise, sonra basıldığında veya basılmadığında değişecektir.</value>
   </data>
   <data name="ToolTipLedMatrix" xml:space="preserve">
     <value>LED Matrix {0} x {1}, LED başına {2} bit (ler) ile ({3} renk)</value>
@@ -1256,5 +1253,149 @@ temelde bir çoğullayıcıya eşdeğerdir.</value>
   </data>
   <data name="ToolTipGraphicsArrayWidth" xml:space="preserve">
     <value>Grafik dizisinin genişliğini piksel cinsinden girin.</value>
+  </data>
+  <data name="CircuitMapPathSeparator" xml:space="preserve">
+    <value>/</value>
+  </data>
+  <data name="CategoryDuplicate" xml:space="preserve">
+    <value>{0} 2</value>
+  </data>
+  <data name="CategoryPrimitives" xml:space="preserve">
+    <value>Primitives</value>
+  </data>
+  <data name="Bit0" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Bit1" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="FileFilter" xml:space="preserve">
+    <value>Circuit Project (*{0})|*{0}|All files (*.*)|*.*</value>
+  </data>
+  <data name="GateAndNotation" xml:space="preserve">
+    <value>&amp;</value>
+  </data>
+  <data name="GateClockNotation" xml:space="preserve">
+    <value>ω</value>
+  </data>
+  <data name="GateNotNotation" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="GateOrNotation" xml:space="preserve">
+    <value>≥1</value>
+  </data>
+  <data name="CircuitProbeNotation" xml:space="preserve">
+    <value>?</value>
+  </data>
+  <data name="GateTriStateNotation" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="GateXorNotation" xml:space="preserve">
+    <value>=1</value>
+  </data>
+  <data name="GateXorNotName" xml:space="preserve">
+    <value>XNor</value>
+  </data>
+  <data name="Led7Pin1" xml:space="preserve">
+    <value>a</value>
+  </data>
+  <data name="Led7Pin2" xml:space="preserve">
+    <value>b</value>
+  </data>
+  <data name="Led7Pin3" xml:space="preserve">
+    <value>c</value>
+  </data>
+  <data name="Led7Pin4" xml:space="preserve">
+    <value>d</value>
+  </data>
+  <data name="Led7Pin5" xml:space="preserve">
+    <value>e</value>
+  </data>
+  <data name="Led7Pin6" xml:space="preserve">
+    <value>f</value>
+  </data>
+  <data name="Led7Pin7" xml:space="preserve">
+    <value>g</value>
+  </data>
+  <data name="Led7Pin8" xml:space="preserve">
+    <value>dot</value>
+  </data>
+  <data name="MemoryAddressPinNotation" xml:space="preserve">
+    <value>a</value>
+  </data>
+  <data name="MemoryDataPinNotation" xml:space="preserve">
+    <value>d</value>
+  </data>
+  <data name="MemoryWritePinNotation" xml:space="preserve">
+    <value>w</value>
+  </data>
+  <data name="PinEnableName" xml:space="preserve">
+    <value>E</value>
+  </data>
+  <data name="PinInName" xml:space="preserve">
+    <value>x</value>
+  </data>
+  <data name="PinName" xml:space="preserve">
+    <value>{0}{1}</value>
+  </data>
+  <data name="PinOutName" xml:space="preserve">
+    <value>q</value>
+  </data>
+  <data name="ConstantNotation" xml:space="preserve">
+    <value>{0:X}</value>
+  </data>
+  <data name="RAMNotation" xml:space="preserve">
+    <value>RAM</value>
+  </data>
+  <data name="ROMNotation" xml:space="preserve">
+    <value>ROM</value>
+  </data>
+  <data name="TitleApplication" xml:space="preserve">
+    <value>Logical Circuit</value>
+  </data>
+  <data name="WebSiteUri" xml:space="preserve">
+    <value>http://www.logiccircuit.org/</value>
+  </data>
+  <data name="TitleDisplayOptions" xml:space="preserve">
+    <value>Display</value>
+  </data>
+  <data name="HelpContent" xml:space="preserve">
+    <value>http://www.logiccircuit.org/help.html</value>
+  </data>
+  <data name="NamePin" xml:space="preserve">
+    <value>Pin</value>
+  </data>
+  <data name="TitleData" xml:space="preserve">
+    <value>Da_ta</value>
+  </data>
+  <data name="ImageFileFilter" xml:space="preserve">
+    <value>Image File (*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif)|*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif|All Files (*.*)|*.*</value>
+  </data>
+  <data name="TitleFileOpen" xml:space="preserve">
+    <value>...</value>
+  </data>
+  <data name="Gate7SegName" xml:space="preserve">
+    <value>7-seg</value>
+  </data>
+  <data name="ReportGateName" xml:space="preserve">
+    <value>{0} ({1})</value>
+  </data>
+  <data name="GridPoint" xml:space="preserve">
+    <value>({0}, {1})</value>
+  </data>
+  <data name="WebSiteDownloadUri" xml:space="preserve">
+    <value>http://www.logiccircuit.org/download.html</value>
+  </data>
+  <data name="CommandHyperlink" xml:space="preserve">
+    <value>Hyperlink</value>
+  </data>
+  <data name="CommandEditBullets" xml:space="preserve">
+    <value>Bullets</value>
+  </data>
+  <data name="NameSound" xml:space="preserve">
+    <value>Buzzer</value>
+  </data>
+  <data name="ToolTipSound" xml:space="preserve">
+    <value>Buzzer {0}</value>
   </data>
 </root>
