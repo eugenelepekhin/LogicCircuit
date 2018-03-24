@@ -60,8 +60,8 @@ namespace LogicCircuit {
 				return Enumerable.Empty<Connection>();
 			}
 
-			public bool IsConnected(CircuitMap map, Jam jam, int bit) {
-				return this.jamTracker.WasTracked(map, jam, bit);
+			public bool IsConnected(CircuitMap map, Jam inJam, Jam outJam, int bit) {
+				return this.jamTracker.WasTracked(map, inJam, outJam, bit);
 			}
 
 			#if DEBUG
