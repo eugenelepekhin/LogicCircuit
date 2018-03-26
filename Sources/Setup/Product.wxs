@@ -8,10 +8,10 @@
 		Note the minor version part must be 4 digit number as the MSi does not support minor versions.
 		To add new locale add new directory, component and file in it and add component id under Feature node.
 	-->
-	<Product Id="{17924666-7062-4971-872D-BBCAD44A5282}"
+	<Product Id="{D1017F76-0D91-4773-885A-B2D0289723C1}"
 		UpgradeCode="d2d9ab38-631b-471d-b6c1-2c4f4391fe5e"
 		Name="LogicCircuit"
-		Version="2.18.0321"
+		Version="2.18.0325"
 		Manufacturer="LogicCircuit"
 		Language="1033"
 	>
