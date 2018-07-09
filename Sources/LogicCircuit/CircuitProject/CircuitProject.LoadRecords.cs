@@ -52,7 +52,7 @@ namespace LogicCircuit {
 						string fieldName  = reader.LocalName;
 						string fieldValue = reader.ReadElementText();  // reads the text and moves the reader beyond this element
 						IFieldSerializer<TRecord> serializer;
-						if (this.serializers.TryGetValue(fieldName, out serializer)) {
+						if (!string.IsNullOrEmpty(fieldValue) && this.serializers.TryGetValue(fieldName, out serializer)) {
 							Debug.Assert(serializer != null);
 							serializer.SetTextValue(ref data, fieldValue);
 						}
