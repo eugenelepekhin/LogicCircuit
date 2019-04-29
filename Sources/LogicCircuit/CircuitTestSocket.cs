@@ -20,7 +20,8 @@ namespace LogicCircuit {
 			this.chank = new TableChank(circuit);
 			if(multithreaded && 1 < Environment.ProcessorCount && 15 < this.chank.InputBitCount) {
 				this.chankList = new TableChank[Environment.ProcessorCount];
-				BigInteger count = this.chank.Count / this.chankList.Length;
+				BigInteger total = this.chank.Count;
+				BigInteger count = total / this.chankList.Length;
 				for(int i = 0; i < this.chankList.Length; i++) {
 					if(i == 0) {
 						this.chankList[i] = this.chank;
@@ -30,6 +31,7 @@ namespace LogicCircuit {
 					this.chankList[i].Count = count;
 					this.chankList[i].Start = count * i;
 				}
+				this.chankList[this.chankList.Length - 1].Count += total % this.chankList.Length;
 			}
 		}
 
