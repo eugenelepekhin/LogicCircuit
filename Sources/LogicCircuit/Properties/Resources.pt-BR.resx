@@ -394,7 +394,7 @@ Saída</value>
     <value>_Opções</value>
   </data>
   <data name="TitleDisplayOptions" xml:space="preserve">
-    <value>Display</value>
+    <value>Visualizar</value>
   </data>
   <data name="TitleFileOptions" xml:space="preserve">
     <value>Arquivo</value>
@@ -1430,7 +1430,7 @@ Permite selecionar o tamanho e profundidade/esquema de cor:
 usados para coordenar as ações do circuito.</value>
   </data>
   <data name="NameGraphicsArray" xml:space="preserve">
-    <value>Graphics Array</value>
+    <value>Matriz de Gráficos</value>
   </data>
   <data name="TitleGraphicsArrayBPP" xml:space="preserve">
     <value>_Bits por pixel</value>

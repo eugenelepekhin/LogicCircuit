@@ -175,7 +175,7 @@ O ficheiro que você está a tentar abrir pode estar corrompido ou foi criado po
     <value>?</value>
   </data>
   <data name="GateShapeRectangular" xml:space="preserve">
-    <value>Em blocos</value>
+    <value>Rectangular</value>
   </data>
   <data name="GateShapeShaped" xml:space="preserve">
     <value>Convencional</value>
@@ -348,7 +348,7 @@ Deseja guardá-lo?</value>
     <comment>{int bitWidth, int pinCount}</comment>
   </data>
   <data name="ToolTipWire" xml:space="preserve">
-    <value>Cabo</value>
+    <value>Fio</value>
   </data>
   <data name="CategoryInputOutput" xml:space="preserve">
     <value>Entada - Saída</value>
@@ -432,28 +432,28 @@ Saída</value>
     <value>Projeto</value>
   </data>
   <data name="CommandEditSelectAllButWires" xml:space="preserve">
-    <value>Selecionar tudo exceto os cabos</value>
+    <value>Selecionar Tudo Excepto os Fios</value>
   </data>
   <data name="CommandEditSelectAllProbes" xml:space="preserve">
-    <value>Selecionar todos os conectores</value>
+    <value>Selecionar Todas as Sondas</value>
   </data>
   <data name="CommandEditSelectAllProbesWithWire" xml:space="preserve">
-    <value>Selecionar conectores e cabos conectados</value>
+    <value>Selecionar Todas as Sondas e Fio Ligado</value>
   </data>
   <data name="CommandEditSelectAllWires" xml:space="preserve">
-    <value>Selecionar todos os CabosSelect All Wires</value>
+    <value>Selecionar Todos os Fios</value>
   </data>
   <data name="CommandEditSelectFloatingSymbols" xml:space="preserve">
     <value>Selecionar Símbolos Flutuantes</value>
   </data>
   <data name="CommandEditSelectFreeWires" xml:space="preserve">
-    <value>Selecionar Cabos Livres</value>
+    <value>Selecionar Fios Livres</value>
   </data>
   <data name="CommandEditUnselectAllButWires" xml:space="preserve">
-    <value>Desselecionar tudo exceto os cabos</value>
+    <value>Desmarcar Tudo Excepto os Fios</value>
   </data>
   <data name="CommandEditUnselectAllWires" xml:space="preserve">
-    <value>Desselecionar todos os cabos</value>
+    <value>Desmarcar Todos os Fios</value>
   </data>
   <data name="CommandFileExportImage" xml:space="preserve">
     <value>Exportar Imagem</value>
@@ -480,7 +480,7 @@ Saída</value>
     <value>N_otação:</value>
   </data>
   <data name="TitleBitWidth" xml:space="preserve">
-    <value>Nº de _Bit:</value>
+    <value>Largura de _bit:</value>
   </data>
   <data name="TitleValue" xml:space="preserve">
     <value>_Valor:</value>
@@ -489,7 +489,7 @@ Saída</value>
     <value>Pino</value>
   </data>
   <data name="TitleAddressBitWidth" xml:space="preserve">
-    <value>_Address bit width:</value>
+    <value>C_omprimento de bit de endereço:</value>
   </data>
   <data name="TitleData" xml:space="preserve">
     <value>Da_do</value>
@@ -672,7 +672,7 @@ Deseja substitui-lo?</value>
     <value>Bits de Dados</value>
   </data>
   <data name="CaptionSplitterPinNumber" xml:space="preserve">
-    <value>Dividir Pinos</value>
+    <value>Separar Pinos</value>
   </data>
   <data name="CaptionSplitterDirection" xml:space="preserve">
     <value>Pino Combinado</value>
@@ -820,10 +820,10 @@ Deseja substitui-lo?</value>
     <value>Superior</value>
   </data>
   <data name="CaptionSplitterBitWidth" xml:space="preserve">
-    <value>Nº de bits do pino divisor</value>
+    <value>Largura de bit do pino separado</value>
   </data>
   <data name="CommandCircuitUsage" xml:space="preserve">
-    <value>Usado por...</value>
+    <value>Utilizado Por...</value>
   </data>
   <data name="MessageNotUsed" xml:space="preserve">
     <value>Este circuito lógico não é usado em lugar nenhum.</value>
@@ -1087,7 +1087,7 @@ Deseja remover a referência dele da lista de Ficheiros Recentes?</value>
     <value>Cores Padrão:</value>
   </data>
   <data name="ColorPickerTabCustom" xml:space="preserve">
-    <value>Customizado</value>
+    <value>Personalizado</value>
   </data>
   <data name="ColorPickerTabStandard" xml:space="preserve">
     <value>Padrão</value>
@@ -1164,7 +1164,7 @@ Tal circuito não pode ser usado mais de uma vez em outros circuitos potencialme
     <value>Cor_tar</value>
   </data>
   <data name="CommandEditDecreaseFontSize" xml:space="preserve">
-    <value>Reduziar o Tamanho da Fonte</value>
+    <value>Reduzir o Tamanho da Fonte</value>
   </data>
   <data name="CommandEditDecreaseIndentation" xml:space="preserve">
     <value>Reduzir Identação</value>
@@ -1194,7 +1194,7 @@ Tal circuito não pode ser usado mais de uma vez em outros circuitos potencialme
     <value>Selecion_ar Tudo</value>
   </data>
   <data name="CommandEditUnderline" xml:space="preserve">
-    <value>Sublinhado</value>
+    <value>Sublinhar</value>
   </data>
   <data name="CommandEditUndo" xml:space="preserve">
     <value>An_ular</value>
@@ -1251,7 +1251,7 @@ ou outro circuito lógico que indique elementos visuais.</value>
     <comment>{int bitWidth}</comment>
   </data>
   <data name="WireDisplayDisconnected" xml:space="preserve">
-    <value>O cabo não está conetado.</value>
+    <value>O fio não está ligado.</value>
   </data>
   <data name="CaptionPinSide" xml:space="preserve">
     <value>Lado do Pino</value>
