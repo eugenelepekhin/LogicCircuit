@@ -64,6 +64,8 @@ namespace LogicCircuit {
 					Debug.Assert(reader.IsEndElement(ns, this.table.Name));
 				#endif
 				Debug.Assert(reader.Depth == fieldDepth - 1);
+			} else {
+				reader.Skip();  // skip empty element
 			}
 
 			// insert 'data' into the table

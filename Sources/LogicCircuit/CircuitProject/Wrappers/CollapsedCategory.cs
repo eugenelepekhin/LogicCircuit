@@ -21,7 +21,7 @@ namespace LogicCircuit {
 			private NameField() {}
 			public string Name { get { return "Name"; } }
 			public int Order { get; set; }
-			public string DefaultValue { get { return null; } }
+			public string DefaultValue { get { return ""; } }
 			public string GetValue(ref CollapsedCategoryData record) {
 				return record.Name;
 			}

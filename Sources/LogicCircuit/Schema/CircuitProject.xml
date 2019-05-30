@@ -47,7 +47,7 @@
 
 	<Table Name="CollapsedCategory">
 		<Table.Columns>
-			<Column Name="Name" Type="string"/>
+			<Column Name="Name" Type="string" Default=""/>
 		</Table.Columns>
 		<Table.Keys>
 			<Key Name="PK_CollapsedCategory" KeyType="Primary">
