@@ -508,7 +508,6 @@ namespace LogicCircuit {
 			}
 		}
 
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")]
 		public void Copy() {
 			this.CancelMove();
 			if(0 < this.SelectionCount) {
@@ -516,14 +515,26 @@ namespace LogicCircuit {
 			}
 		}
 
+		private static string ClipboardText() {
+			string text = null;
+			try {
+				text = Clipboard.GetText();
+			} catch(Exception exception) {
+				Tracer.Report("Bad clipboard", exception);
+				App.Mainframe.Dispatcher.BeginInvoke(new Action(() => App.Mainframe.ReportException(exception)));
+				text = null;
+			}
+			return text;
+		}
+
 		public static bool CanPaste() {
-			return CircuitProject.CanPaste(Clipboard.GetText());
+			return CircuitProject.CanPaste(Editor.ClipboardText());
 		}
 
 		public void Paste() {
 			this.CancelMove();
 			this.ClearSelection();
-			IEnumerable<Symbol> result = CircuitProject.Paste(Clipboard.GetText());
+			IEnumerable<Symbol> result = CircuitProject.Paste(Editor.ClipboardText());
 			Tracer.Assert(result.All(symbol => symbol.LogicalCircuit == this.Project.LogicalCircuit));
 			this.EnsureVisible(result);
 			this.Select(result);
