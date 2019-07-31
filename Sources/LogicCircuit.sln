@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29123.88
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicCircuit", "LogicCircuit\LogicCircuit.csproj", "{45ED9DDA-67B2-4AA9-BB4C-65A9684060AE}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -64,5 +64,8 @@ Global
 		{B543E594-A653-4E16-9203-5C833D430A8C} = {CB4E8339-8103-4966-B911-ADFAF3D68FBD}
 		{1F9944A5-5A8C-4298-A2A7-B57FBBE6D6CD} = {CB4E8339-8103-4966-B911-ADFAF3D68FBD}
 		{AB214504-19D6-4ABB-8EF4-3F674AD18790} = {CB4E8339-8103-4966-B911-ADFAF3D68FBD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C4E2E1FA-003E-4490-906C-32D8B87FB335}
 	EndGlobalSection
 EndGlobal
