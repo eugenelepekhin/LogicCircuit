@@ -175,13 +175,13 @@ namespace LogicCircuit {
 
 		public Gate Gate(GateType gateType, int inputCount, bool invertedOutput) {
 			if(!GateSet.IsValid(gateType)) {
-				throw new ArgumentOutOfRangeException("gateType");
+				throw new ArgumentOutOfRangeException(nameof(gateType));
 			}
 			if(!GateSet.IsValid(gateType, inputCount)) {
-				throw new ArgumentOutOfRangeException("inputCount");
+				throw new ArgumentOutOfRangeException(nameof(inputCount));
 			}
 			if(invertedOutput && !GateSet.HasOutput(gateType)) {
-				throw new ArgumentOutOfRangeException("invertedOutput");
+				throw new ArgumentOutOfRangeException(nameof(invertedOutput));
 			}
 			Gate gate = this.FindByGateId(GateSet.GateGuid(gateType, inputCount, invertedOutput));
 			if(gate == null) {
@@ -295,17 +295,17 @@ namespace LogicCircuit {
 			int name = 1;
 			for(int i = 0; i < 4; i++) {
 				DevicePin pin = this.CircuitProject.DevicePinSet.Create(gate, PinType.Input, 1);
-				pin.Name = Properties.Resources.ResourceManager.GetString(prefix + name);
+				pin.Name = Properties.Resources.ResourceManager.GetString(prefix + name, Properties.Resources.Culture);
 				name++;
 			}
 			for(int i = 0; i < 3; i++) {
 				DevicePin pin = this.CircuitProject.DevicePinSet.Create(gate, PinType.Input, 1);
-				pin.Name = Properties.Resources.ResourceManager.GetString(prefix + name);
+				pin.Name = Properties.Resources.ResourceManager.GetString(prefix + name, Properties.Resources.Culture);
 				pin.PinSide = PinSide.Right;
 				name++;
 			}
 			DevicePin pinDot = this.CircuitProject.DevicePinSet.Create(gate, PinType.Input, 1);
-			pinDot.Name = Properties.Resources.ResourceManager.GetString(prefix + name);
+			pinDot.Name = Properties.Resources.ResourceManager.GetString(prefix + name, Properties.Resources.Culture);
 			pinDot.PinSide = PinSide.Right;
 		}
 

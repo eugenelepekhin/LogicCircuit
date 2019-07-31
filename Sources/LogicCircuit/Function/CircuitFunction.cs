@@ -30,7 +30,7 @@ namespace LogicCircuit {
 		}
 		protected CircuitFunction(CircuitState circuitState, int[] parameter, int minimumParameterCount, int result) : this(circuitState, parameter, new int[] { result }) {
 			if(parameter == null) {
-				throw new ArgumentNullException("parameter");
+				throw new ArgumentNullException(nameof(parameter));
 			}
 			if(parameter.Length < minimumParameterCount) {
 				throw new ArgumentException(Properties.Resources.FunctionParameter(this.Name, minimumParameterCount));

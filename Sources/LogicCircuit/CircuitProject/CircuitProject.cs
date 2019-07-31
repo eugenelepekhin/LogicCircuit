@@ -277,7 +277,7 @@ namespace LogicCircuit {
 					Tracer.Assert(this.CircuitSymbolSet.SelectByCircuit(circuit).Count() == 1);
 				} else if(circuit is DevicePin) {
 					Tracer.Assert(this.DevicePinSet.Table.Exists(DevicePinData.PinIdField.Field, circuit.CircuitId));
-					Tracer.Assert(this.CircuitSymbolSet.SelectByCircuit(circuit).Count() == 0);
+					Tracer.Assert(!this.CircuitSymbolSet.SelectByCircuit(circuit).Any());
 				} else if(circuit is Gate) {
 					Tracer.Assert(this.GateSet.Table.Exists(GateData.GateIdField.Field, circuit.CircuitId));
 				} else if(circuit is Memory) {

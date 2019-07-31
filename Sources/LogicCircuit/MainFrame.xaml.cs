@@ -32,7 +32,7 @@ namespace LogicCircuit {
 			get { return this.showGrid.Value; }
 			set {
 				this.showGrid.Value = value;
-				this.NotifyPropertyChanged("ShowGrid");
+				this.NotifyPropertyChanged(nameof(this.ShowGrid));
 			}
 		}
 
@@ -42,7 +42,7 @@ namespace LogicCircuit {
 			set {
 				if(this.editor != value) {
 					this.editor = value;
-					this.NotifyPropertyChanged("Editor");
+					this.NotifyPropertyChanged(nameof(this.Editor));
 				}
 			}
 		}
@@ -76,7 +76,7 @@ namespace LogicCircuit {
 						this.Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle,
 							new Action(() => {
 								this.statusChanged = false;
-								this.NotifyPropertyChanged("Status");
+								this.NotifyPropertyChanged(nameof(this.Status));
 							})
 						);
 					}
@@ -128,7 +128,7 @@ namespace LogicCircuit {
 		public LambdaUICommand CommandOptions => new LambdaUICommand(Properties.Resources.CommandToolsOptions, o => this.Editor != null && this.Editor.InEditMode, o => {
 			bool? result = this.ShowDialog(new DialogOptions(this));
 			if(result.HasValue && result.Value) {
-				this.NotifyPropertyChanged("Editor");
+				this.NotifyPropertyChanged(nameof(this.Editor));
 				this.Editor.FullRefresh();
 			}
 		}) {

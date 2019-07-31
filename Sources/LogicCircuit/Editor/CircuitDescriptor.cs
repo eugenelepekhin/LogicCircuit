@@ -219,7 +219,7 @@ namespace LogicCircuit {
 		protected override CircuitProbe GetCircuitToDrop(CircuitProject circuitProject) {
 			string name = this.Name;
 			this.Name = string.Empty;
-			this.NotifyPropertyChanged("Name");
+			this.NotifyPropertyChanged(nameof(this.Name));
 			return circuitProject.CircuitProbeSet.Create(name);
 		}
 	}
@@ -261,7 +261,7 @@ namespace LogicCircuit {
 			string notation = (this.Notation ?? string.Empty).Trim();
 			if(!string.IsNullOrEmpty(notation)) {
 				this.Notation = string.Empty;
-				this.NotifyPropertyChanged("Notation");
+				this.NotifyPropertyChanged(nameof(this.Notation));
 			}
 			return circuitProject.CircuitButtonSet.Create(notation, this.IsToggle, this.PinSide.Value);
 		}
@@ -353,7 +353,7 @@ namespace LogicCircuit {
 			string notation = (this.Notation ?? string.Empty).Trim();
 			if(!string.IsNullOrEmpty(notation)) {
 				this.Notation = string.Empty;
-				this.NotifyPropertyChanged("Notation");
+				this.NotifyPropertyChanged(nameof(this.Notation));
 			}
 			SensorType type = this.SensorType.Value;
 			if(type == LogicCircuit.SensorType.Series) {
@@ -390,7 +390,7 @@ namespace LogicCircuit {
 			string notation = (this.Notation ?? string.Empty).Trim();
 			if(!string.IsNullOrEmpty(notation)) {
 				this.Notation = string.Empty;
-				this.NotifyPropertyChanged("Notation");
+				this.NotifyPropertyChanged(nameof(this.Notation));
 			}
 			return circuitProject.SoundSet.Create(this.PinSide.Value, notation);
 		}
@@ -582,7 +582,7 @@ namespace LogicCircuit {
 		}
 
 		public void NotifyCurrentChanged() {
-			this.NotifyPropertyChanged("IsCurrent");
+			this.NotifyPropertyChanged(nameof(this.IsCurrent));
 		}
 
 		public override bool CategoryExpanded {

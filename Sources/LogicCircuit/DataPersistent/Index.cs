@@ -111,7 +111,7 @@ namespace LogicCircuit.DataPersistent {
 
 			public RowId Value(RowId rowId, int version) {
 				if(this.table.IsDeleted(rowId, version, false)) {
-					throw new ArgumentOutOfRangeException("rowId");
+					throw new ArgumentOutOfRangeException(nameof(rowId));
 				}
 				return rowId;
 			}

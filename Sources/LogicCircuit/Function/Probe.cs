@@ -31,7 +31,7 @@ namespace LogicCircuit {
 
 		protected void CopyTo(State[] copy) {
 			if(copy == null || copy.Length != this.state.Length) {
-				throw new ArgumentOutOfRangeException("copy");
+				throw new ArgumentOutOfRangeException(nameof(copy));
 			}
 			this.state.CopyTo(copy, 0);
 		}

@@ -158,7 +158,7 @@ namespace LogicCircuit.DataPersistent {
 
 		public Unique(SnapStore store, string name, IComparer<TField> comparer, float loadFactor) {
 			if(!(loadFactor >= 0.1f && loadFactor <= 1.0f)) {
-				throw new ArgumentOutOfRangeException("loadFactor");
+				throw new ArgumentOutOfRangeException(nameof(loadFactor));
 			}
 			this.valueField = new ValueField(comparer);
 			this.table = new SnapTable<Bucket>(store, name, Unique<TField>.MinSize,

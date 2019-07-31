@@ -260,8 +260,8 @@ namespace LogicCircuit {
 		public int RecentFilesCount { get { return this.recentFile.Count; } }
 
 		private void NotifyRecentFilesChanged() {
-			this.NotifyPropertyChanged("RecentFilesCount");
-			this.NotifyPropertyChanged("RecentFiles");
+			this.NotifyPropertyChanged(nameof(this.RecentFilesCount));
+			this.NotifyPropertyChanged(nameof(this.RecentFiles));
 		}
 
 		/// <summary>

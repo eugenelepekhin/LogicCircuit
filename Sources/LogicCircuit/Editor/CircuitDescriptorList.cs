@@ -81,7 +81,7 @@ namespace LogicCircuit {
 		private void NotifyPropertyChanged() {
 			PropertyChangedEventHandler handler = this.PropertyChanged;
 			if(handler != null) {
-				handler(this, new PropertyChangedEventArgs("CircuitDescriptors"));
+				handler(this, new PropertyChangedEventArgs(nameof(this.CircuitDescriptors)));
 			}
 		}
 

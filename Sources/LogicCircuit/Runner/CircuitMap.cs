@@ -67,7 +67,7 @@ namespace LogicCircuit {
 		}
 
 		private void NotifyIsCurrentChanged() {
-			this.NotifyPropertyChanged("IsCurrent");
+			this.NotifyPropertyChanged(nameof(this.IsCurrent));
 		}
 
 		private void Path(StringBuilder text) {

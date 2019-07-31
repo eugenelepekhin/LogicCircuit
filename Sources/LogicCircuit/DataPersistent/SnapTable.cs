@@ -196,7 +196,7 @@ namespace LogicCircuit.DataPersistent {
 		/// <param name="isUserTable"></param>
 		public SnapTable(SnapStore store, string name, int initialSize, IField<TRecord>[] fields, bool isUserTable) {
 			if(!(0 <= initialSize && initialSize < int.MaxValue - 1)) {
-				throw new ArgumentOutOfRangeException("initialSize");
+				throw new ArgumentOutOfRangeException(nameof(initialSize));
 			}
 			this.SnapStore = store;
 			this.Name = name;
@@ -336,7 +336,7 @@ namespace LogicCircuit.DataPersistent {
 				if(includeNotCreated && 0 <= rowId.Value && rowId.Value < this.table.Count) {
 					return true;
 				}
-				throw new ArgumentOutOfRangeException("rowId");
+				throw new ArgumentOutOfRangeException(nameof(rowId));
 			}
 			// cache log size here. the original can only grow in time
 			int logSize = snapAddress.Page[snapAddress.Index].LogSize;
@@ -439,7 +439,7 @@ namespace LogicCircuit.DataPersistent {
 				snapAddress = this.snap.ItemAddress(--pointIndex);
 			}
 			if(!(0 <= rowId.Value && rowId.Value < snapAddress.Page[snapAddress.Index].TableSize)) {
-				throw new ArgumentOutOfRangeException("rowId");
+				throw new ArgumentOutOfRangeException(nameof(rowId));
 			}
 			// cache log size here. the original can only grow in time
 			int logSize = snapAddress.Page[snapAddress.Index].LogSize;
@@ -454,7 +454,7 @@ namespace LogicCircuit.DataPersistent {
 				if(rowAddress.Page[rowAddress.Index].LogIndex < logSize) {
 					// if it is still latest return.
 					if(isDeleted) {
-						throw new ArgumentOutOfRangeException("rowId");
+						throw new ArgumentOutOfRangeException(nameof(rowId));
 					}
 					return value;
 				}
@@ -466,7 +466,7 @@ namespace LogicCircuit.DataPersistent {
 				logAddress = this.log.ItemAddress(logAddress.Page[logAddress.Index].LogIndex);
 			}
 			if(logAddress.Page[logAddress.Index].IsDeleted) {
-				throw new ArgumentOutOfRangeException("rowId");
+				throw new ArgumentOutOfRangeException(nameof(rowId));
 			}
 			return field.GetValue(ref logAddress.Page[logAddress.Index].Data);
 		}
@@ -500,7 +500,7 @@ namespace LogicCircuit.DataPersistent {
 				snapAddress = this.snap.ItemAddress(--pointIndex);
 			}
 			if(!(0 <= rowId.Value && rowId.Value < snapAddress.Page[snapAddress.Index].TableSize)) {
-				throw new ArgumentOutOfRangeException("rowId");
+				throw new ArgumentOutOfRangeException(nameof(rowId));
 			}
 			// cache log size here. the original can only grow in time
 			int logSize = snapAddress.Page[snapAddress.Index].LogSize;
@@ -515,7 +515,7 @@ namespace LogicCircuit.DataPersistent {
 					// if it is still latest return.
 					if(isDeleted) {
 						data = default(TRecord);
-						throw new ArgumentOutOfRangeException("rowId");
+						throw new ArgumentOutOfRangeException(nameof(rowId));
 					}
 					return;
 				}
@@ -528,7 +528,7 @@ namespace LogicCircuit.DataPersistent {
 			}
 			if(logAddress.Page[logAddress.Index].IsDeleted) {
 				data = default(TRecord);
-				throw new ArgumentOutOfRangeException("rowId");
+				throw new ArgumentOutOfRangeException(nameof(rowId));
 			}
 			data = logAddress.Page[logAddress.Index].Data;
 		}
@@ -704,19 +704,19 @@ namespace LogicCircuit.DataPersistent {
 		/// <param name="address"></param>
 		private static void ValidateModification(ref ValueList<Row>.Address address) {
 			if(address.Page[address.Index].IsDeleted) {
-				throw new ArgumentOutOfRangeException("address");
+				throw new ArgumentOutOfRangeException(nameof(address));
 			}
 		}
 
 		private void ValidateVersion(int version) {
 			if(!(0 < version && version <= this.SnapStore.Version)) {
-				throw new ArgumentOutOfRangeException("version");
+				throw new ArgumentOutOfRangeException(nameof(version));
 			}
 		}
 
 		internal void ValidateField(IField<TRecord> field) {
 			if(this.Fields[field.Order] != field) {
-				throw new ArgumentOutOfRangeException("field");
+				throw new ArgumentOutOfRangeException(nameof(field));
 			}
 		}
 
@@ -799,7 +799,7 @@ namespace LogicCircuit.DataPersistent {
 					snapAddress = this.table.snap.ItemAddress(--pointIndex);
 				}
 				if(version != snapAddress.Page[snapAddress.Index].Version) {
-					throw new ArgumentOutOfRangeException("version");
+					throw new ArgumentOutOfRangeException(nameof(version));
 				}
 				this.newVersion = snapAddress.Page[snapAddress.Index];
 				snapAddress = this.table.snap.ItemAddress(pointIndex - 1);

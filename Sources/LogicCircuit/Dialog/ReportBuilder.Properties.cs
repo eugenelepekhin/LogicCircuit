@@ -9,7 +9,7 @@ namespace LogicCircuit {
 	partial class ReportBuilder {
 		public static FlowDocument Build(LogicalCircuit root) {
 			using(StringReader textReader = new StringReader(new ReportBuilder(root).TransformText())) {
-				using(XmlTextReader xmlReader = new XmlTextReader(textReader)) {
+				using(XmlReader xmlReader = XmlHelper.CreateReader(textReader)) {
 					return XamlReader.Load(xmlReader) as FlowDocument;
 				}
 			}

@@ -218,7 +218,7 @@ namespace LogicCircuit {
 				foreach(string name in MemoryEditorRow.ColumnName) {
 					this.NotifyPropertyChanged(name);
 				}
-				this.NotifyPropertyChanged("Error");
+				this.NotifyPropertyChanged(nameof(this.Error));
 			}
 
 			public void EndEdit() {

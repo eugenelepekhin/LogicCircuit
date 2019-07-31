@@ -137,7 +137,7 @@ namespace LogicCircuit.DataPersistent {
 		/// <returns></returns>
 		private int StartTransaction(StoreSnapshot newEditor, TransactionType transactionType) {
 			if(newEditor == null) {
-				throw new ArgumentNullException("newEditor");
+				throw new ArgumentNullException(nameof(newEditor));
 			}
 			Debug.Assert(transactionType == TransactionType.Edit || transactionType == TransactionType.Undo || transactionType == TransactionType.Redo, "Wrong transaction type");
 			this.CheckFrozen();

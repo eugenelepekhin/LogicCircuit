@@ -36,7 +36,7 @@ namespace LogicCircuit {
 			private set {
 				if(this.circuitRunner != value) {
 					this.circuitRunner = value;
-					this.NotifyPropertyChanged("CircuitRunner");
+					this.NotifyPropertyChanged(nameof(this.CircuitRunner));
 				}
 			}
 		}
@@ -60,7 +60,7 @@ namespace LogicCircuit {
 				} catch(Exception exception) {
 					this.Mainframe.ReportException(exception);
 				}
-				this.NotifyPropertyChanged("Power");
+				this.NotifyPropertyChanged(nameof(this.Power));
 			}
 		}
 
@@ -233,7 +233,7 @@ namespace LogicCircuit {
 			this.savedVersion = this.CircuitProject.Version;
 			Mainframe.DeleteAutoSaveFile(oldFile);
 
-			this.NotifyPropertyChanged("Caption");
+			this.NotifyPropertyChanged(nameof(this.Caption));
 		}
 
 		public void AutoSave() {
@@ -301,7 +301,7 @@ namespace LogicCircuit {
 			set {
 				if(this.actualFrequency != value) {
 					this.actualFrequency = value;
-					this.NotifyPropertyChanged("ActualFrequency");
+					this.NotifyPropertyChanged(nameof(this.ActualFrequency));
 				}
 			}
 		}

@@ -111,7 +111,7 @@ namespace LogicCircuit.DataPersistent {
 					}
 				}
 			} else if(oldSize < newSize) {
-				throw new ArgumentOutOfRangeException("newSize");
+				throw new ArgumentOutOfRangeException(nameof(newSize));
 			}
 		}
 
@@ -124,7 +124,7 @@ namespace LogicCircuit.DataPersistent {
 			if(0 <= index && index < this.Count) {
 				return new Address(this.page[index >> LogPageSize], index & IndexOnPageMask);
 			} else {
-				throw new ArgumentOutOfRangeException("index");
+				throw new ArgumentOutOfRangeException(nameof(index));
 			}
 		}
 

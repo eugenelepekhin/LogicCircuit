@@ -47,10 +47,10 @@ namespace LogicCircuit.DataPersistent {
 		/// <param name="fields"></param>
 		public TableSnapshot(StoreSnapshot store, string name, params IField<TRecord>[] fields) {
 			if(store == null) {
-				throw new ArgumentNullException("store");
+				throw new ArgumentNullException(nameof(store));
 			}
 			if(fields == null) {
-				throw new ArgumentNullException("fields");
+				throw new ArgumentNullException(nameof(fields));
 			}
 			this.StoreSnapshot = store;
 			this.table = new SnapTable<TRecord>(store.SnapStore, name, 0, fields, true);
@@ -208,25 +208,25 @@ namespace LogicCircuit.DataPersistent {
 		public void CreateForeignKey<TField>(string name, ITableSnapshot parentTable, IField<TRecord, TField> foreignColumn, ForeignKeyAction action, bool allowsDefault) {
 			this.StoreSnapshot.SnapStore.CheckNotFrozen();
 			if(string.IsNullOrEmpty(name)) {
-				throw new ArgumentNullException("name");
+				throw new ArgumentNullException(nameof(name));
 			}
 			if(parentTable == null) {
-				throw new ArgumentNullException("parentTable");
+				throw new ArgumentNullException(nameof(parentTable));
 			}
 			IPrimaryKeyHolder parent = (IPrimaryKeyHolder)parentTable;
 			if(parent.PrimaryKey<TField>() == null) {
-				throw new ArgumentException(Properties.Resources.ErrorPrimaryKeyMissing(this.Name), "parentTable");
+				throw new ArgumentException(Properties.Resources.ErrorPrimaryKeyMissing(this.Name), nameof(parentTable));
 			}
 			this.table.ValidateField(foreignColumn);
 			if(!Enum.IsDefined(typeof(ForeignKeyAction), action)) {
-				throw new ArgumentOutOfRangeException("action");
+				throw new ArgumentOutOfRangeException(nameof(action));
 			}
 			if(this.table.ForeignKeys[foreignColumn.Order] != null) {
 				throw new ArgumentException(Properties.Resources.ErrorForeignKeyExists(this.Name, foreignColumn.Name));
 			}
 			foreach(IForeignKey fk in this.table.ForeignKeys) {
 				if(fk != null && fk.Name == name) {
-					throw new ArgumentException(Properties.Resources.ErrorForeignKeyNameExists(this.Name, name), "name");
+					throw new ArgumentException(Properties.Resources.ErrorForeignKeyNameExists(this.Name, name), nameof(name));
 				}
 			}
 
@@ -604,10 +604,10 @@ namespace LogicCircuit.DataPersistent {
 		public bool WasChanged(int fromVersion, int toVersion) {
 			int completed = this.StoreSnapshot.SnapStore.CompletedVersion;
 			if(!(0 <= fromVersion && fromVersion <= completed)) {
-				throw new ArgumentOutOfRangeException("fromVersion");
+				throw new ArgumentOutOfRangeException(nameof(fromVersion));
 			}
 			if(!(fromVersion <= toVersion && toVersion <= completed)) {
-				throw new ArgumentOutOfRangeException("toVersion");
+				throw new ArgumentOutOfRangeException(nameof(toVersion));
 			}
 			for(int i = fromVersion; i <= toVersion; i++) {
 				if(this.table.WasChangedIn(i)) {
@@ -645,7 +645,7 @@ namespace LogicCircuit.DataPersistent {
 		[SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
 		public IEnumerator<TableChange<TRecord>> GetChanges(int fromVersion, int toVersion) {
 			if(toVersion < fromVersion) {
-				throw new ArgumentOutOfRangeException("toVersion");
+				throw new ArgumentOutOfRangeException(nameof(toVersion));
 			}
 			List<int> version = new List<int>();
 			for(int i = fromVersion; i <= toVersion; i++) {
@@ -853,35 +853,36 @@ namespace LogicCircuit.DataPersistent {
 
 			private void MergeChanges(List<int> version) {
 				for(int i = 0; i < version.Count; i++) {
-					IEnumerator<SnapTableChange<TRecord>> e = this.table.GetChanges(version[i]);
-					while(e.MoveNext()) {
-						SnapTableAction old;
-						switch(e.Current.Action) {
-						case SnapTableAction.Insert:
-							if(this.action.ContainsKey(e.Current.RowId)) {
-								Debug.Assert(this.action[e.Current.RowId] == SnapTableAction.Delete);
-								this.action.Remove(e.Current.RowId);
-							} else {
-								this.action.Add(e.Current.RowId, SnapTableAction.Insert);
+					using(IEnumerator<SnapTableChange<TRecord>> e = this.table.GetChanges(version[i])) {
+						while(e.MoveNext()) {
+							SnapTableAction old;
+							switch(e.Current.Action) {
+							case SnapTableAction.Insert:
+								if(this.action.ContainsKey(e.Current.RowId)) {
+									Debug.Assert(this.action[e.Current.RowId] == SnapTableAction.Delete);
+									this.action.Remove(e.Current.RowId);
+								} else {
+									this.action.Add(e.Current.RowId, SnapTableAction.Insert);
+								}
+								break;
+							case SnapTableAction.Delete:
+								if(this.action.TryGetValue(e.Current.RowId, out old) && old == SnapTableAction.Insert) {
+									this.action.Remove(e.Current.RowId);
+								} else {
+									Debug.Assert(!this.action.TryGetValue(e.Current.RowId, out old) || old == SnapTableAction.Update);
+									this.action[e.Current.RowId] = SnapTableAction.Delete;
+								}
+								break;
+							case SnapTableAction.Update:
+								if(!this.action.ContainsKey(e.Current.RowId)) {
+									this.action.Add(e.Current.RowId, SnapTableAction.Update);
+								}
+								Debug.Assert(this.action[e.Current.RowId] != SnapTableAction.Delete);
+								break;
+							default:
+								Debug.Fail("Unknown action");
+								break;
 							}
-							break;
-						case SnapTableAction.Delete:
-							if(this.action.TryGetValue(e.Current.RowId, out old) && old == SnapTableAction.Insert) {
-								this.action.Remove(e.Current.RowId);
-							} else {
-								Debug.Assert(!this.action.TryGetValue(e.Current.RowId, out old) || old == SnapTableAction.Update);
-								this.action[e.Current.RowId] = SnapTableAction.Delete;
-							}
-							break;
-						case SnapTableAction.Update:
-							if(!this.action.ContainsKey(e.Current.RowId)) {
-								this.action.Add(e.Current.RowId, SnapTableAction.Update);
-							}
-							Debug.Assert(this.action[e.Current.RowId] != SnapTableAction.Delete);
-							break;
-						default:
-							Debug.Fail("Unknown action");
-							break;
 						}
 					}
 				}

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace LogicCircuit.DataPersistent {
 	/// <summary>
@@ -42,7 +43,7 @@ namespace LogicCircuit.DataPersistent {
 				}
 				this.SnapStore.CheckFrozen();
 				if(value < 0 || this.SnapStore.CompletedVersion < value) {
-					throw new ArgumentOutOfRangeException("value");
+					throw new ArgumentOutOfRangeException(nameof(value));
 				}
 				if(this.snapshotVersion != value) {
 					this.Upgrade(value);
@@ -154,10 +155,10 @@ namespace LogicCircuit.DataPersistent {
 		public IEnumerator<string> AffectedTables(int fromVersion, int toVersion) {
 			int completed = this.SnapStore.CompletedVersion;
 			if(!(0 <= fromVersion && fromVersion <= completed)) {
-				throw new ArgumentOutOfRangeException("fromVersion");
+				throw new ArgumentOutOfRangeException(nameof(fromVersion));
 			}
 			if(!(fromVersion <= toVersion && toVersion <= completed)) {
-				throw new ArgumentOutOfRangeException("toVersion");
+				throw new ArgumentOutOfRangeException(nameof(toVersion));
 			}
 			return new ChangeEnumerator(this, fromVersion, toVersion);
 		}
@@ -336,6 +337,7 @@ namespace LogicCircuit.DataPersistent {
 			}
 		}
 
+		[SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed")]
 		private class ChangeEnumerator : IEnumerator<string> {
 			private IEnumerator<ITableSnapshot> enumerator;
 			private int oldVersion;

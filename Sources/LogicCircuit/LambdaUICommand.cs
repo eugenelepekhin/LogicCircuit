@@ -31,10 +31,10 @@ namespace LogicCircuit {
 
 		public LambdaUICommand(string text, Predicate<object> canExecute, Action<object> execute, KeyGesture keyGesture) {
 			if(string.IsNullOrEmpty(text)) {
-				throw new ArgumentNullException("text");
+				throw new ArgumentNullException(nameof(text));
 			}
 			if(execute == null) {
-				throw new ArgumentNullException("execute");
+				throw new ArgumentNullException(nameof(execute));
 			}
 			this.Text = text;
 			this.canExecutePredicate = canExecute;

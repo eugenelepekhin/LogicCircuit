@@ -25,7 +25,7 @@ namespace LogicCircuit {
 		public Project Project { get; private set; }
 
 		public Project Copy(Project other) {
-			Tracer.Assert(this.Count() == 0);
+			Tracer.Assert(!this.Any());
 			ProjectData data;
 			other.CircuitProject.ProjectSet.Table.GetData(other.ProjectRowId, out data);
 			data.Project = null;

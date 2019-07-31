@@ -61,8 +61,7 @@ namespace LogicCircuit {
 			string text = this.historySettings.Value;
 			if(!string.IsNullOrWhiteSpace(text)) {
 				try {
-					XmlDocument xml = new XmlDocument();
-					xml.LoadXml(text);
+					XmlDocument xml = XmlHelper.LoadXml(text);
 					foreach(XmlNode item in xml.SelectNodes("/List/Item")) {
 						list.Add(item.InnerText);
 					}
@@ -79,7 +78,7 @@ namespace LogicCircuit {
 		}
 
 		private void SaveHistory() {
-			XmlDocument xml = new XmlDocument();
+			XmlDocument xml = XmlHelper.Create();
 			XmlNode list = xml.AppendChild(xml.CreateElement("List"));
 			foreach(string line in this.history) {
 				XmlNode item = list.AppendChild(xml.CreateElement("Item"));

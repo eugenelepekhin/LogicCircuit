@@ -29,6 +29,21 @@ namespace LogicCircuit {
 			return XmlReader.Create(textReader, XmlHelper.xmlReaderSettings);
 		}
 
+		public static XmlDocument Create() {
+			return new XmlDocument() { XmlResolver = new XmlSecureResolver(new XmlUrlResolver(), string.Empty) };
+		}
+
+		[SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")]
+		public static XmlDocument LoadXml(string text) {
+			using(StringReader reader = new StringReader(text)) {
+				using(XmlReader xmlReader = XmlHelper.CreateReader(reader)) {
+					XmlDocument xml = XmlHelper.Create();
+					xml.Load(xmlReader);
+					return xml;
+				}
+			}
+		}
+
 		public static TextWriter FileWriter(string fileName) {
 			if(!File.Exists(fileName)) {
 				string dir = Path.GetDirectoryName(fileName);
@@ -50,7 +65,7 @@ namespace LogicCircuit {
 		public static void Transform(string xsltText, ref XmlReader inputXml) {
 			XslCompiledTransform xslt = new XslCompiledTransform();
 			using(StringReader stringReader = new StringReader(xsltText)) {
-				using(XmlTextReader xmlTextReader = new XmlTextReader(stringReader)) {
+				using(XmlReader xmlTextReader = XmlHelper.CreateReader(stringReader)) {
 					xslt.Load(xmlTextReader);
 				}
 			}

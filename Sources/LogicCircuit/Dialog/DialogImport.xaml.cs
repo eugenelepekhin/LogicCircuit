@@ -38,7 +38,7 @@ namespace LogicCircuit {
 					}
 					list.Sort(CircuitDescriptorComparer.Comparer);
 					this.List = list;
-					this.NotifyPropertyChanged("List");
+					this.NotifyPropertyChanged(nameof(this.List));
 				} catch(SnapStoreException snapStoreException) {
 					Tracer.Report("DialogImport.Load", snapStoreException);
 					mainframe.ErrorMessage(Properties.Resources.ErrorFileCorrupted(file), snapStoreException);
@@ -112,7 +112,7 @@ namespace LogicCircuit {
 
 			public void SetImport(bool value) {
 				this.Import = value;
-				this.NotifyPropertyChanged("Import");
+				this.NotifyPropertyChanged(nameof(this.Import));
 			}
 
 			// There is no need to persist this to the project so override the property.

@@ -188,7 +188,7 @@ namespace LogicCircuit {
 			[SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
 			public bool Check(Action<Version, Exception> completeAction) {
 				if(completeAction == null) {
-					throw new ArgumentNullException("completeAction");
+					throw new ArgumentNullException(nameof(completeAction));
 				}
 				if(Interlocked.CompareExchange(ref this.webClient, new WebClient(), null) == null) {
 					this.onComplete = completeAction;

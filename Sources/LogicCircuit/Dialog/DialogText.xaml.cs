@@ -200,20 +200,20 @@ namespace LogicCircuit {
 
 		private void UpdateToolbar() {
 			try {
-				this.NotifyPropertyChanged("CurrentFontFamily");
-				this.NotifyPropertyChanged("CurrentFontSize");
+				this.NotifyPropertyChanged(nameof(this.CurrentFontFamily));
+				this.NotifyPropertyChanged(nameof(this.CurrentFontSize));
 
-				this.NotifyPropertyChanged("IsBoldFont");
-				this.NotifyPropertyChanged("IsItalicFont");
-				this.NotifyPropertyChanged("IsUnderlineFont");
+				this.NotifyPropertyChanged(nameof(this.IsBoldFont));
+				this.NotifyPropertyChanged(nameof(this.IsItalicFont));
+				this.NotifyPropertyChanged(nameof(this.IsUnderlineFont));
 
-				this.NotifyPropertyChanged("IsLeftAlignment");
-				this.NotifyPropertyChanged("IsCenterAlignment");
-				this.NotifyPropertyChanged("IsRightAlignment");
-				this.NotifyPropertyChanged("IsJustifyAlignment");
+				this.NotifyPropertyChanged(nameof(this.IsLeftAlignment));
+				this.NotifyPropertyChanged(nameof(this.IsCenterAlignment));
+				this.NotifyPropertyChanged(nameof(this.IsRightAlignment));
+				this.NotifyPropertyChanged(nameof(this.IsJustifyAlignment));
 
-				this.NotifyPropertyChanged("IsBulleted");
-				this.NotifyPropertyChanged("IsNumbered");
+				this.NotifyPropertyChanged(nameof(this.IsBulleted));
+				this.NotifyPropertyChanged(nameof(this.IsNumbered));
 			} catch(Exception exception) {
 				App.Mainframe.ReportException(exception);
 			}

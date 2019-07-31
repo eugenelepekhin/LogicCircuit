@@ -61,8 +61,8 @@ namespace LogicCircuit {
 				if(this.MarkAllowed) {
 					this.functionProbe.Mark();
 					this.RefreshHistory();
-					this.NotifyPropertyChanged("History");
-					this.NotifyPropertyChanged("MarkAllowed");
+					this.NotifyPropertyChanged(nameof(this.History));
+					this.NotifyPropertyChanged(nameof(this.MarkAllowed));
 				}
 			} catch(Exception exception) {
 				App.Mainframe.ReportException(exception);

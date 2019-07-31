@@ -76,14 +76,15 @@ namespace LogicCircuit.DataPersistent {
 			public void Validate() {
 				int version = this.childTable.StoreSnapshot.Version;
 				if(this.childTable.table.WasChangedIn(version)) {
-					IEnumerator<SnapTableChange<TRecord>> enumerator = this.childTable.table.GetChanges(version);
-					while(enumerator.MoveNext()) {
-						if(enumerator.Current.Action != SnapTableAction.Delete) {
-							TField value = enumerator.Current.GetNewField<TField>(this.childColumn);
-							if(!this.allowsDefault || this.childColumn.Compare(value, this.childColumn.DefaultValue) != 0) {
-								RowId parentId = this.primaryKey.FindUnique(value, version);
-								if(parentId == RowId.Empty) {
-									throw new ForeignKeyViolationException(this.Name);
+					using(IEnumerator<SnapTableChange<TRecord>> enumerator = this.childTable.table.GetChanges(version)) {
+						while(enumerator.MoveNext()) {
+							if(enumerator.Current.Action != SnapTableAction.Delete) {
+								TField value = enumerator.Current.GetNewField<TField>(this.childColumn);
+								if(!this.allowsDefault || this.childColumn.Compare(value, this.childColumn.DefaultValue) != 0) {
+									RowId parentId = this.primaryKey.FindUnique(value, version);
+									if(parentId == RowId.Empty) {
+										throw new ForeignKeyViolationException(this.Name);
+									}
 								}
 							}
 						}
