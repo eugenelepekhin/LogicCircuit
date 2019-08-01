@@ -172,10 +172,10 @@
     <value>Simulation ON/OFF</value>
   </data>
   <data name="CommandCircuitUsage" xml:space="preserve">
-    <value>Utiliser par...</value>
+    <value>Utilisé par...</value>
   </data>
   <data name="ColorPickerCaptionAvailable" xml:space="preserve">
-    <value>Couleurs disponibles:</value>
+    <value>Couleurs disponibles :</value>
   </data>
   <data name="ColorPickerCaptionRecent" xml:space="preserve">
     <value>Couleurs récentes</value>
@@ -184,7 +184,7 @@
     <value>Selectionner</value>
   </data>
   <data name="ColorPickerCaptionStandard" xml:space="preserve">
-    <value>Couleurs standards:</value>
+    <value>Couleurs standards :</value>
   </data>
   <data name="ColorPickerTabCustom" xml:space="preserve">
     <value>Personnaliser</value>
@@ -229,7 +229,7 @@
     <value>Augmenter l'indentation</value>
   </data>
   <data name="CommandEditSelectAllButWires" xml:space="preserve">
-    <value>Tout sélectionner sauf fils</value>
+    <value>Tout sélectionner sauf les fils</value>
   </data>
   <data name="CommandEditSelectAllProbes" xml:space="preserve">
     <value>Sélectionner toutes les sondes</value>
@@ -275,7 +275,7 @@
   </data>
   <data name="ErrorUnknownVersion" xml:space="preserve">
     <value>Tentative de chargement d'une version inconnue d'un projet de circuit.
-Le fichier que vous essayez d'ouvrir est endommagé ou a été créé par une version plus récente du logiciel Logic Circuit. S'il vous plaît vérifier &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt; pour les versions plus récentes.</value>
+Le fichier que vous essayez d'ouvrir est endommagé ou a été créé par une version plus récente du logiciel Logic Circuit. Veuillez vérifier &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt; pour les versions plus récentes.</value>
   </data>
   <data name="FileFilter" xml:space="preserve">
     <value>Projet de circuit (*{0})|*{0}|Tous les fichiers (*.*)|*.*</value>
@@ -360,16 +360,16 @@ Valeur de la mémoire mis à jour le {0}</value>
     <value>La fonction {0} requiert au moins {1} paramètre(s).</value>
   </data>
   <data name="ErrorAddressNotConnected" xml:space="preserve">
-    <value>Certains Bits d'adresse ne sont pas connecté sur la mémoire {0}</value>
+    <value>Certains bits d'adresse ne sont pas connecté sur la mémoire {0}</value>
   </data>
   <data name="ErrorDataInNotConnected" xml:space="preserve">
-    <value>Certains bits de donnée d'entrée ne sont pas connecté sur mémoire {0}</value>
+    <value>Certains bits de donnée d'entrée ne sont pas connectés sur mémoire {0}</value>
   </data>
   <data name="ErrorJamBitWidthDifferent" xml:space="preserve">
-    <value>L'entrée de {0} ({1}) et la sortie de {2} ({3}) sur {4} ont des tailles différentes et ne peuvent être connectés. Vous êtes prié de resoudre ce problème.</value>
+    <value>L'entrée de {0} ({1}) et la sortie de {2} ({3}) sur {4} ont des tailles différentes et ne peuvent être connectées. Veuillez resoudre ce problème.</value>
   </data>
   <data name="ErrorLoopInCircuit" xml:space="preserve">
-    <value>Le symbole du circuit "{0}" sur le circuit logique "{1}" forme une boucle infinie. Vous êtes prié de resoudre cette boucle.</value>
+    <value>Le symbole du circuit "{0}" dans le circuit logique "{1}" forme une boucle infinie. Veuillez resoudre cette boucle.</value>
   </data>
   <data name="ErrorManyResults" xml:space="preserve">
     <value>Broche d'entrée {0} de {1} connecté à plus d'une broche de sortie qui ne sont pas en mesure à trois états.</value>
@@ -387,7 +387,7 @@ Valeur de la mémoire mis à jour le {0}</value>
     <value>Fichier image (*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif)|*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif|All Files (*.*)|*.*</value>
   </data>
   <data name="ImagePathInvalid" xml:space="preserve">
-    <value>Le nom de fichier fourni n'est pas valide. S'il vous plaît vérifier que le dossier parent existe et la validitédu nom de fichier.</value>
+    <value>Le nom de fichier fourni est invalide. Veuillez vérifier le nom du fichier et que le dossier parent existe.</value>
   </data>
   <data name="Gate7SegName" xml:space="preserve">
     <value>7 segments</value>
@@ -396,19 +396,19 @@ Valeur de la mémoire mis à jour le {0}</value>
     <value>Ouvert récemment</value>
   </data>
   <data name="ErrorFileCorrupted" xml:space="preserve">
-    <value>Le fichier "{0}" est corrompus et ne peut pas être chargé.</value>
+    <value>Le fichier "{0}" est corrompu et ne peut pas être chargé.</value>
   </data>
   <data name="LogicalCircuitMainNotation" xml:space="preserve">
     <value>Principal</value>
   </data>
   <data name="ErrorUnsupportedUri" xml:space="preserve">
-    <value>La navigation pour cette adresse n'est pas pris en charge.</value>
+    <value>La navigation à cette adresse n'est pas supportée.</value>
   </data>
   <data name="LedMatrixColumnSelector" xml:space="preserve">
     <value>Pour selectionner la colonne #{0}</value>
   </data>
   <data name="LedMatrixRowIndividual" xml:space="preserve">
-    <value>Pour chaque LED dans la ligne #{0}</value>
+    <value>Pour chaque DEL sur la ligne #{0}</value>
   </data>
   <data name="LedMatrixRowSelector" xml:space="preserve">
     <value>Pour selectionner la ligne #{0}</value>
@@ -417,7 +417,7 @@ Valeur de la mémoire mis à jour le {0}</value>
     <value>Individuel</value>
   </data>
   <data name="LedMatrixTypeSelector" xml:space="preserve">
-    <value>Selecteur</value>
+    <value>Sélecteur</value>
   </data>
   <data name="CommandHyperlink" xml:space="preserve">
     <value>Hyperlien</value>
@@ -432,7 +432,7 @@ Valeur de la mémoire mis à jour le {0}</value>
     <value>Image</value>
   </data>
   <data name="ErrorClipboardCorrupted" xml:space="preserve">
-    <value>Les données dans le buffer sont corrompus et ne peuvent être collées.</value>
+    <value>Les données dans le buffer sont corrompues et ne peuvent être collées.</value>
   </data>
   <data name="CommandTruthTable" xml:space="preserve">
     <value>Table de vérité</value>
@@ -450,8 +450,8 @@ Valeur de la mémoire mis à jour le {0}</value>
     <value>Mettre tous les Bit à 0</value>
   </data>
   <data name="ErrorManyMemoryData" xml:space="preserve">
-    <value>Le circuit {0} contenant {1} concervera les données entre chaque exécution.
-Ce circuit ne peut pas être utilisé plus d'une fois sur d'autres circuits comme des ensembles potentiellement différents de données seront stockées sur un module de mémoire</value>
+    <value>Le circuit {0} contient {1} qui concerve des données entre chaque exécution.
+Ce circuit ne peut pas être utilisé plus d'une fois dans d'autres circuits car des jeux de données potentiellement différents seront stockées sur un même module mémoire</value>
   </data>
   <data name="CommandFileClose" xml:space="preserve">
     <value>Sortie</value>
@@ -472,7 +472,7 @@ Ce circuit ne peut pas être utilisé plus d'une fois sur d'autres circuits comm
     <value>Voir l'aide</value>
   </data>
   <data name="MessageFreeWireCount" xml:space="preserve">
-    <value>{0} fils libre ont été trouvé.</value>
+    <value>{0} fil(s) libre(s) ont été trouvé.</value>
   </data>
   <data name="MessageFloatingSymbolCount" xml:space="preserve">
     <value>{0} symbole non connecté trouvé.</value>
@@ -498,20 +498,20 @@ Voulez-vous le remplacer ?</value>
   </data>
   <data name="MessageInvalidRecentFile" xml:space="preserve">
     <value>Le fichier "{0}" ne peut pas être ouvert.
-Voulez-vous supprimer la référence de la liste des fichiers récents?</value>
+Voulez-vous supprimer la référence de la liste des fichiers récents ?</value>
   </data>
   <data name="MessageInputOutputPinsMissing" xml:space="preserve">
-    <value>Il n'y a pas d'entrée ou de sortie de broche sur ce circuit. Les tables de vérité sont construites en envoyant toutes les permutations des données aux broches d'entrée et de lecture des résultats de broches de sortie.</value>
+    <value>Il n'y a pas d'entrée ou de sortie de broche sur ce circuit. Les tables de vérité sont construites en envoyant toutes les combinaisons de données aux broches d'entrée et en lisant les résultats aux broches de sortie.</value>
   </data>
   <data name="MessageSaveFile" xml:space="preserve">
     <value>Le projet {0} a changé.
 Voulez vous le sauvegarder ?</value>
   </data>
   <data name="MessageNotRootConstant" xml:space="preserve">
-    <value>Seules les constantes sur le circuit de racine ({0}) peut être modifié en simulation.</value>
+    <value>Seules les constantes sur le circuit principal ({0}) peuvent être modifiées en simulation.</value>
   </data>
   <data name="MessageNotUsed" xml:space="preserve">
-    <value>Ce circuit logique n'est pas utilisé autre part.</value>
+    <value>Ce circuit logique n'est pas utilisé ailleurs.</value>
   </data>
   <data name="MessageRestartRequared" xml:space="preserve">
     <value>Votre sélection de la langue a été modifiée. Vous devez redémarrer l'application pour que les nouveaux paramètres prennent place.</value>
@@ -520,7 +520,7 @@ Voulez vous le sauvegarder ?</value>
     <value>Opération annulée.</value>
   </data>
   <data name="Ready" xml:space="preserve">
-    <value>Près.</value>
+    <value>Prêt.</value>
   </data>
   <data name="NameButton" xml:space="preserve">
     <value>Bouton</value>
@@ -547,10 +547,10 @@ Voulez vous le sauvegarder ?</value>
     <value>Oscillation</value>
   </data>
   <data name="ReportMemoryName" xml:space="preserve">
-    <value>{0}: {1} bits d'addresse, {2} bits de donnée</value>
+    <value>{0} : {1} bit d'addresse, {2} bit de donnée</value>
   </data>
   <data name="MessageWarning" xml:space="preserve">
-    <value>Attention!</value>
+    <value>Attention !</value>
   </data>
   <data name="SplitterDirectionClockwise" xml:space="preserve">
     <value>Gauche</value>
@@ -571,13 +571,13 @@ Voulez vous le sauvegarder ?</value>
     <value>Haut</value>
   </data>
   <data name="MessageUsageNote" xml:space="preserve">
-    <value>Sélectionnez le circuit où le courant est utilisé et double cliquez dessus pour naviguer dessus et sélectionner des symboles.</value>
+    <value>Select circuit where the current one is used and double-click it to navigate there and select symbols of current one.</value>
   </data>
   <data name="ProjectSummary" xml:space="preserve">
     <value>{0} circuits logiques, dans {1} catégories utilisant {2} symboles et {3} fils</value>
   </data>
   <data name="ReportError" xml:space="preserve">
-    <value>Vous ne pouvez pas signaler les fonctions en raison de l'erreur suivante: {0}</value>
+    <value>Impossible de signaler les fonctions en raison de l'erreur suivante : {0}</value>
   </data>
   <data name="ReportFunctions" xml:space="preserve">
     <value>Fonctions du circuit "{0}"</value>
@@ -592,7 +592,7 @@ Voulez vous le sauvegarder ?</value>
     <value>Sortie</value>
   </data>
   <data name="NameLedMatrix" xml:space="preserve">
-    <value>Matrice à LED</value>
+    <value>Matrice de DEL</value>
   </data>
   <data name="MessageVersionLatest" xml:space="preserve">
     <value>Vous avez déjà la dernière version.</value>
@@ -604,28 +604,28 @@ Voulez vous le sauvegarder ?</value>
     <value>Vous disposez de la version développeur.</value>
   </data>
   <data name="MessageTruthTableTooBig" xml:space="preserve">
-    <value>La table de vérité est trop longue et tronqués. S'il vous plaît utiliser le filtre pour vérifier l'exactitude de votre circuit.</value>
+    <value>La table de vérité est trop longue et à été tronquée. Veuillez utiliser le filtre pour vérifier l'exactitude de votre circuit.</value>
   </data>
   <data name="ParserEOS" xml:space="preserve">
     <value>Fin de l'expression.</value>
   </data>
   <data name="ParserErrorCloseParenMissing" xml:space="preserve">
-    <value>')' Manquante au lieu de: {0}</value>
+    <value>')' Manquante au lieu de : {0}</value>
   </data>
   <data name="ParserErrorExpressionMissing" xml:space="preserve">
     <value>Expression manquante après {0}</value>
   </data>
   <data name="ParserErrorInvalidNumber" xml:space="preserve">
-    <value>Nombre invalide: {0}</value>
+    <value>Nombre invalide : {0}</value>
   </data>
   <data name="ParserErrorUnclosedQuote" xml:space="preserve">
-    <value>l'identifiant entre guillemets n'a pas de fermeture: {0}</value>
+    <value>l'identifiant entre guillemets n'a pas de guillemet de fin : {0}</value>
   </data>
   <data name="ParserErrorUnexpected" xml:space="preserve">
     <value>{0} inattendue</value>
   </data>
   <data name="ParserErrorUnknownChar" xml:space="preserve">
-    <value>Charactère inconnu: {0}</value>
+    <value>Charactère inconnu : {0}</value>
   </data>
   <data name="ParserErrorUnknownPin" xml:space="preserve">
     <value>{0} - Broche d'entrée ou de sortie non trouvée.</value>
@@ -640,7 +640,7 @@ Voulez vous le sauvegarder ?</value>
     <value>Connecteur Séparateur combiné</value>
   </data>
   <data name="TextNotation" xml:space="preserve">
-    <value>Note de texte</value>
+    <value>Note textuelle</value>
   </data>
   <data name="TitleCancel" xml:space="preserve">
     <value>Annuler</value>
@@ -655,25 +655,25 @@ Voulez vous le sauvegarder ?</value>
     <value>Fichier</value>
   </data>
   <data name="TitleGateShape" xml:space="preserve">
-    <value>Forme des portes</value>
+    <value>Forme des _portes</value>
   </data>
   <data name="TitleCategory" xml:space="preserve">
-    <value>Catégorie:</value>
+    <value>_Catégorie :</value>
   </data>
   <data name="TitleDescription" xml:space="preserve">
-    <value>Description:</value>
+    <value>_Description :</value>
   </data>
   <data name="TitleBitWidth" xml:space="preserve">
-    <value>Largeur de bits:</value>
+    <value>Largeur de _bits :</value>
   </data>
   <data name="TitleAddressBitWidth" xml:space="preserve">
-    <value>Largeur de bits d'adresse:</value>
+    <value>Largeur de bits d'_adresse :</value>
   </data>
   <data name="TitleData" xml:space="preserve">
-    <value>Données</value>
+    <value>Do_nnées</value>
   </data>
   <data name="TitleDataBitWidth" xml:space="preserve">
-    <value>Largeur de bits de donnée:</value>
+    <value>Largeur de _bits de donnée :</value>
   </data>
   <data name="TipOnStartMove" xml:space="preserve">
     <value>Glissez-déposez la sélection à l'endroit désiré. Tapez Echap pour annuler le déplacement. Maintenez la touche Maj pour prévenir le déplacement de fils connectés.</value>
@@ -682,34 +682,34 @@ Voulez vous le sauvegarder ?</value>
     <value>Faites glisser l'extrémité du fil à l'endroit désiré. Tapez Echap pour annuler la création du fil.</value>
   </data>
   <data name="TipOnCtrlDown" xml:space="preserve">
-    <value>Appuyez sur Ctrl+Maj+Tab pour basculer entre les circuits logiques ou cliquez sur pour sélectionner / désélectionner des symboles individuellement.</value>
+    <value>Appuyez sur Ctrl+{Maj}+Tab pour basculer entre les circuits logiques ou cliquez dessus pour sélectionner / désélectionner des symboles individuellement.</value>
   </data>
   <data name="TipOnWireSelect" xml:space="preserve">
-    <value>Maj+Ctrl+Clic sur le fil pour sélectionner / désélectionner tout conducteur, Alt+clic sur le fil choisi pour le diviser ou le point commun de deux fils à fusionner.</value>
+    <value>Maj+Ctrl+Clic sur le fil pour sélectionner / désélectionner tout le conducteur, Alt+Clic sur le fil choisi pour le diviser ou sur le point commun de deux fils pour les fusionner.</value>
   </data>
   <data name="TipOnAwaitingArea" xml:space="preserve">
-    <value>{0} {1}. Entourez plusieurs symboles pour les sélectionner, maintenez la touche Maj pour maintenir la sélection courante.</value>
+    <value>{0} {1}. Entourez plusieurs symboles pour les sélectionner, maintenez la touche Maj pour conserver la sélection courante.</value>
   </data>
   <data name="TitleFileName" xml:space="preserve">
-    <value>Fichier:</value>
+    <value>Fichier :</value>
   </data>
   <data name="TitleImportCircuit" xml:space="preserve">
     <value>Importer</value>
   </data>
   <data name="TitleCheckAll" xml:space="preserve">
-    <value>Tout sélectionner</value>
+    <value>Sélectionner tout</value>
   </data>
   <data name="TitleExportImage" xml:space="preserve">
     <value>Exporter l'image</value>
   </data>
   <data name="TitleFile" xml:space="preserve">
-    <value>Fichier:</value>
+    <value>_Fichier :</value>
   </data>
   <data name="TitleFrequency" xml:space="preserve">
-    <value>Fréquence:</value>
+    <value>Fré_quence :</value>
   </data>
   <data name="TitleCircuitUsage" xml:space="preserve">
-    <value>Usage du circuit logique</value>
+    <value>Utilisation de circuit logique</value>
   </data>
   <data name="TitleCount" xml:space="preserve">
     <value>Compteur</value>
@@ -718,40 +718,40 @@ Voulez vous le sauvegarder ?</value>
     <value>Fonction</value>
   </data>
   <data name="TitleCellShape" xml:space="preserve">
-    <value>Taille de cellule:</value>
+    <value>_Forme des cellules :</value>
   </data>
   <data name="TitleColumns" xml:space="preserve">
-    <value>Colonnes:</value>
+    <value>_Colonnes :</value>
   </data>
   <data name="TitleColors" xml:space="preserve">
-    <value>Couleurs:</value>
+    <value>C_ouleurs :</value>
   </data>
   <data name="TitleCheckVersion" xml:space="preserve">
     <value>Vérifier maintenant</value>
   </data>
   <data name="TitleHyperlink" xml:space="preserve">
-    <value>Lien vers:</value>
+    <value>_Lien vers :</value>
   </data>
   <data name="TitleCheckVersionPeriodically" xml:space="preserve">
     <value>Vérifier périodiquement les nouvelles version</value>
   </data>
   <data name="TitleApply" xml:space="preserve">
-    <value>Appliquer</value>
+    <value>_Appliquer</value>
   </data>
   <data name="TitleDisplayedRows" xml:space="preserve">
-    <value>Lignes affichées: {0:N0}</value>
+    <value>Lignes affichées : {0:N0}</value>
   </data>
   <data name="TitleFilter" xml:space="preserve">
-    <value>Filtre</value>
+    <value>_Filtre :</value>
   </data>
   <data name="TitleCulture" xml:space="preserve">
-    <value>Langage</value>
+    <value>L_angage</value>
   </data>
   <data name="TitleCredits" xml:space="preserve">
-    <value>Crédits:</value>
+    <value>Crédits :</value>
   </data>
   <data name="TitleNo" xml:space="preserve">
-    <value>Non</value>
+    <value>_Non</value>
   </data>
   <data name="TitlePinInput" xml:space="preserve">
     <value>{0}
@@ -762,19 +762,19 @@ Entrée</value>
 Sortie</value>
   </data>
   <data name="TitleLoadLastFile" xml:space="preserve">
-    <value>Charger le dernier fichier au démarrage</value>
+    <value>_Charger le dernier fichier au démarrage</value>
   </data>
   <data name="TitleName" xml:space="preserve">
-    <value>Nom:</value>
+    <value>_Nom :</value>
   </data>
   <data name="TitleInverted" xml:space="preserve">
-    <value>Inversé</value>
+    <value>_Inversé</value>
   </data>
   <data name="TitleLoad" xml:space="preserve">
-    <value>Charger...</value>
+    <value>_Charger...</value>
   </data>
   <data name="TitleMark" xml:space="preserve">
-    <value>Marque</value>
+    <value>_Marque</value>
   </data>
   <data name="TitleOscillogram" xml:space="preserve">
     <value>Oscillogramme</value>
@@ -792,19 +792,19 @@ Sortie</value>
     <value>Haut niveau de charge processeur</value>
   </data>
   <data name="TitleIsToggle" xml:space="preserve">
-    <value>Est à bascule</value>
+    <value>Est à _bascule</value>
   </data>
   <data name="TitleMemory" xml:space="preserve">
     <value>Mémoire</value>
   </data>
   <data name="TitleMaxRecentFiles" xml:space="preserve">
-    <value>Nombre maximum de fichier récent.</value>
+    <value>Nombre _maximum de fichier récent.</value>
   </data>
   <data name="TitleInvert" xml:space="preserve">
-    <value>Inverser</value>
+    <value>_Inverser</value>
   </data>
   <data name="TitleMemoryOnStart" xml:space="preserve">
-    <value>Remplir au démarrage:</value>
+    <value>_Remplir au démarrage :</value>
   </data>
   <data name="TitleShowDetails" xml:space="preserve">
     <value>Montrer les détails</value>
@@ -813,7 +813,7 @@ Sortie</value>
     <value>Montrer la grille</value>
   </data>
   <data name="TitleSide" xml:space="preserve">
-    <value>Coté:</value>
+    <value>Coté :</value>
   </data>
   <data name="TitleProbeHistory" xml:space="preserve">
     <value>Historique des sondes</value>
@@ -822,7 +822,7 @@ Sortie</value>
     <value>Projet</value>
   </data>
   <data name="TitleRunningCircuit" xml:space="preserve">
-    <value>Exécution du circuit</value>
+    <value>Simulation du circuit</value>
   </data>
   <data name="TitleProjectDescription" xml:space="preserve">
     <value>Description</value>
@@ -831,25 +831,25 @@ Sortie</value>
     <value>Détail des erreurs</value>
   </data>
   <data name="TitleRows" xml:space="preserve">
-    <value>Lignes:</value>
+    <value>_Lignes :</value>
   </data>
   <data name="TitleStop" xml:space="preserve">
     <value>Arréter</value>
   </data>
   <data name="TitleSaveAs" xml:space="preserve">
-    <value>Enregistrer sous...</value>
+    <value>Enre_gistrer sous...</value>
   </data>
   <data name="TitleYes" xml:space="preserve">
     <value>Oui</value>
   </data>
   <data name="TitleVersion" xml:space="preserve">
-    <value>Version:</value>
+    <value>Version :</value>
   </data>
   <data name="TitleValue" xml:space="preserve">
-    <value>Valeur:</value>
+    <value>Valeur :</value>
   </data>
   <data name="TitleWriteOn" xml:space="preserve">
-    <value>Ecrire sur:</value>
+    <value>Ecrire sur :</value>
   </data>
   <data name="TitleUncheckAll" xml:space="preserve">
     <value>Déselectionner tout</value>
@@ -858,25 +858,25 @@ Sortie</value>
     <value>Choisir la largeur de bits de la broche d'adresse</value>
   </data>
   <data name="TitleSummary" xml:space="preserve">
-    <value>Sommaire:</value>
+    <value>Résumé :</value>
   </data>
   <data name="TitleTotal" xml:space="preserve">
-    <value>Total:</value>
+    <value>Total :</value>
   </data>
   <data name="TitleText" xml:space="preserve">
-    <value>Texte:</value>
+    <value>Texte :</value>
   </data>
   <data name="TitleTotalRows" xml:space="preserve">
-    <value>Lignes total: {0:N0}</value>
+    <value>Lignes totales : {0:N0}</value>
   </data>
   <data name="ToolTipButton" xml:space="preserve">
     <value>Bouton {0}</value>
   </data>
   <data name="ToolTipButtonNotation" xml:space="preserve">
-    <value>Entrer la notation du bouton</value>
+    <value>Entrez la notation du bouton</value>
   </data>
   <data name="ToolTipConstantBitWidth" xml:space="preserve">
-    <value>Choisir la largeur de Bit de la constante</value>
+    <value>Choisir la largeur de bit de la constante</value>
   </data>
   <data name="ToolTipConstantValue" xml:space="preserve">
     <value>Entrer la valeur initiale pour la constante</value>
@@ -888,7 +888,7 @@ Sortie</value>
     <value>Choisir la largeur de Bit de la broche de données</value>
   </data>
   <data name="ToolTipColumns" xml:space="preserve">
-    <value>Choisir le nombre de colonnes de la matrice à LED</value>
+    <value>Choisir le nombre de colonnes de la matrice à DEL</value>
   </data>
   <data name="ToolTipBackgroundColor" xml:space="preserve">
     <value>Couleur de surlignage</value>
@@ -927,7 +927,7 @@ Sortie</value>
     <value>Fil</value>
   </data>
   <data name="UnknownState" xml:space="preserve">
-    <value>Etat {0} est inconnu</value>
+    <value>L'état {0} est inconnu</value>
   </data>
   <data name="TriStateGroupName" xml:space="preserve">
     <value>Groupe 3-état</value>
@@ -942,7 +942,7 @@ Sortie</value>
     <value>Exécute le circuit sur la vitesse maximale possible en ignorant fréquence définie par le curseur.</value>
   </data>
   <data name="ToolTipIsMaximumSpeed2" xml:space="preserve">
-    <value>En cochant cette case vous pouvez avoir une perte de réponse de l'interface utilisateur sur certains ordinateurs.</value>
+    <value>Cocher cette case vous peut provoquer une perte de réponse de l'interface utilisateur sur certains ordinateurs.</value>
   </data>
   <data name="ToolTipPinBitWidth" xml:space="preserve">
     <value>Choisir la largeur de bit de la broche</value>
@@ -960,7 +960,7 @@ Sortie</value>
     <value>Choisir l'orientation des connecteur combiné du séparateur.</value>
   </data>
   <data name="ToolTipZoom" xml:space="preserve">
-    <value>Définir le zomm du diagramme</value>
+    <value>Définir le zoom du diagramme</value>
   </data>
   <data name="ToolTipRamWriteOn" xml:space="preserve">
     <value>Choisir le temps d'écriture de la mémoire</value>
@@ -969,13 +969,13 @@ Sortie</value>
     <value>Entrez le texte très court qui sera affiché sur le symbole du circuit a côté de la broche</value>
   </data>
   <data name="ToolTipIsToggle" xml:space="preserve">
-    <value>Si le bouton est à bascule, il va changer son état sur ??chaque clic, sinon lorsqu'il est pressé ou non</value>
+    <value>Si le bouton est à bascule, il va changer son état à chaque clic, sinon son état indiquera s'il est pressé ou non</value>
   </data>
   <data name="ToolTipLedMatrix" xml:space="preserve">
-    <value>Matrice à LED {0}x{1} avec {2} bit(s) par LED ({3} couleurs)</value>
+    <value>Matrice de DEL {0}x{1} avec {2} bit(s) par DEL ({3} couleurs)</value>
   </data>
   <data name="ToolTipRows" xml:space="preserve">
-    <value>Choisir le nombre de lignes de la matrice à LED</value>
+    <value>Choisir le nombre de lignes de la matrice à DEL</value>
   </data>
   <data name="ToolTipLedMatrixType" xml:space="preserve">
     <value>Choisir comment contrôler la matrice</value>
@@ -999,15 +999,15 @@ Sortie</value>
     <value>Sonde {0}</value>
   </data>
   <data name="TitleActualFrequency" xml:space="preserve">
-    <value>Fréquence actuelle:</value>
+    <value>Fréquence actuelle :</value>
   </data>
   <data name="TitleIsDisplay" xml:space="preserve">
-    <value>Afficher les éléments visuels dans la liste des symboles</value>
+    <value>Affic_her les éléments visuels dans la liste des symboles</value>
   </data>
   <data name="ToolTipIsDisplay" xml:space="preserve">
     <value>Quand vous sélectionner cette option, tous les symboles du circuit
-seront visible a la place du symbole de base du circuit en cours.
-Les éléments sont : LED, Matrise de LED, Bouton, ou autre circuit logique.</value>
+seront visibles à la place du symbole de base du circuit en cours.
+Les éléments sont : DEL, Matrice de DEL, Bouton, ou autre circuit logique.</value>
   </data>
   <data name="PinOutName" xml:space="preserve">
     <value>q</value>
@@ -1028,10 +1028,10 @@ Les éléments sont : LED, Matrise de LED, Bouton, ou autre circuit logique.</va
     <value>{0} bit(s) {1}</value>
   </data>
   <data name="TitleApplication" xml:space="preserve">
-    <value>Logical Circuit</value>
+    <value>Circuit Logique</value>
   </data>
   <data name="TitleWeb" xml:space="preserve">
-    <value>Web:</value>
+    <value>Web :</value>
   </data>
   <data name="WebSiteUri" xml:space="preserve">
     <value>http://www.logiccircuit.org/</value>
@@ -1040,10 +1040,10 @@ Les éléments sont : LED, Matrise de LED, Bouton, ou autre circuit logique.</va
     <value>Options</value>
   </data>
   <data name="TitleNotation" xml:space="preserve">
-    <value>N_otation:</value>
+    <value>N_otation :</value>
   </data>
   <data name="TitleType" xml:space="preserve">
-    <value>_Type:</value>
+    <value>_Type :</value>
   </data>
   <data name="TitleCircuitDescriptor" xml:space="preserve">
     <value>Circuit</value>
@@ -1055,7 +1055,7 @@ Les éléments sont : LED, Matrise de LED, Bouton, ou autre circuit logique.</va
     <value>{0} ({1})</value>
   </data>
   <data name="TitleZoom" xml:space="preserve">
-    <value>_Zoom:</value>
+    <value>_Zoom :</value>
   </data>
   <data name="WebSiteDownloadUri" xml:space="preserve">
     <value>http://www.logiccircuit.org/download.html</value>
@@ -1067,10 +1067,10 @@ Les éléments sont : LED, Matrise de LED, Bouton, ou autre circuit logique.</va
     <value>ω</value>
   </data>
   <data name="GateLedName" xml:space="preserve">
-    <value>LED</value>
+    <value>DEL</value>
   </data>
   <data name="GateLedNotation" xml:space="preserve">
-    <value>LED</value>
+    <value>DEL</value>
   </data>
   <data name="GateNotNotation" xml:space="preserve">
     <value>1</value>
@@ -1106,7 +1106,7 @@ Les éléments sont : LED, Matrise de LED, Bouton, ou autre circuit logique.</va
     <value>g</value>
   </data>
   <data name="MainFrameCaption" xml:space="preserve">
-    <value>Logical Circuit {0}</value>
+    <value>Circuit Logique {0}</value>
   </data>
   <data name="MemoryAddressPinNotation" xml:space="preserve">
     <value>a</value>
@@ -1184,19 +1184,19 @@ Les éléments sont : LED, Matrise de LED, Bouton, ou autre circuit logique.</va
     <value>Italic</value>
   </data>
   <data name="WireDisplayBitWidth" xml:space="preserve">
-    <value>Largeur de Bits: {0}</value>
+    <value>Largeur de Bits : {0}</value>
   </data>
   <data name="WireDisplayValue" xml:space="preserve">
-    <value>Valeur: {0}</value>
+    <value>Valeur : {0}</value>
   </data>
   <data name="WireDisplayDisconnected" xml:space="preserve">
     <value>Le fil n'est pas connecté.</value>
   </data>
   <data name="ToolTipDescriptorProbe" xml:space="preserve">
-    <value>Ajouter et connecter des sondes pour observer votre circuit
-état actuel du circuit actif sur la surface
-la sonde, historique de valeurs quand vous double cliquez le
-sonde ou voir cette donnée sur l'oscilloscope.</value>
+    <value>Ajoutez et connectez des sondes pour observer l'état du circuit
+actuel sur la surface de la sonde, affichez l'historique de valeurs
+en double cliquant sur la sonde ou regardez cette donnée sur
+l'oscilloscope.</value>
   </data>
   <data name="ToolTipDescriptorSplitter" xml:space="preserve">
     <value>Permet de créer le faisceau de cable ou
@@ -1212,7 +1212,7 @@ d'améliorer la compréhention du circuit.</value>
     <value>Buzzer {0}</value>
   </data>
   <data name="ToolTipDescriptorTriState" xml:space="preserve">
-    <value>Peut avoir trois différentes sorties: 1, 0, et haute impédance (Z).
+    <value>Peut avoir trois différentes sorties : 1, 0, et haute impédance (Z).
 L'état de haute impédance ne joue pas de rôle dans la logique,
 qui est uniquement binaire. Ces dispositifs sont utilisés avec les
 bus du CPU pour permettre la transmition de données par plusieurs sources.
@@ -1244,10 +1244,10 @@ est clasiquement équivalent a un multiplexeur.</value>
     <value>Entrer le nom du buzzer.</value>
   </data>
   <data name="ErrorSeriesItemOrder" xml:space="preserve">
-    <value>Erreur sur {0}. Chaque cycle doit être plus grand que le précédent.</value>
+    <value>Erreur dans {0}. Chaque cycle doit être plus grand que le précédent.</value>
   </data>
   <data name="ErrorSeriesItem" xml:space="preserve">
-    <value>Erreur sur {0}. Cela doit être une paire de nombre hexadécimal séparé par :</value>
+    <value>Erreur dans {0}. Cela devrait être une paire de nombre hexadécimaux séparés par :</value>
   </data>
   <data name="ErrorBadPositiveNumber" xml:space="preserve">
     <value>Nombre supérieur a 0 attendu.</value>
@@ -1256,17 +1256,17 @@ est clasiquement équivalent a un multiplexeur.</value>
     <value>Trouver</value>
   </data>
   <data name="TitleFind" xml:space="preserve">
-    <value>Circuit trouvé</value>
+    <value>Trouver un circuit</value>
   </data>
   <data name="TitleSearchPattern" xml:space="preserve">
-    <value>Trouvé:</value>
+    <value>Trouver :</value>
   </data>
   <data name="ToolTipDescriptorClock" xml:space="preserve">
     <value>Le signal généré oscillera entre 0 et 1
 et sera utilisé pour coordonner les actions du circuit.</value>
   </data>
   <data name="TitleSensorManualInitialValue" xml:space="preserve">
-    <value>Valeur initiale:</value>
+    <value>Valeur initiale :</value>
   </data>
   <data name="SensorTypeManual" xml:space="preserve">
     <value>Manuel</value>
@@ -1275,10 +1275,10 @@ et sera utilisé pour coordonner les actions du circuit.</value>
     <value>Le minimum doit être plus petit ou égal au maximum.</value>
   </data>
   <data name="TitleSensorRandomMax" xml:space="preserve">
-    <value>Cycles maximum:</value>
+    <value>Cycles maximum :</value>
   </data>
   <data name="TitleSensorRandomMin" xml:space="preserve">
-    <value>Cycles minimum:</value>
+    <value>Cycles minimum :</value>
   </data>
   <data name="ErrorBadHexNumber" xml:space="preserve">
     <value>Nombre hexadécimal invalide</value>
@@ -1287,7 +1287,7 @@ et sera utilisé pour coordonner les actions du circuit.</value>
     <value>Coté de broche</value>
   </data>
   <data name="TitlePinSide" xml:space="preserve">
-    <value>Coté de broche:</value>
+    <value>_Coté de broche :</value>
   </data>
   <data name="ToolTipDescriptorText" xml:space="preserve">
     <value>Placez la note textuelle où vous voulez sur le diagrame
@@ -1295,21 +1295,21 @@ pour commenter votre circuit, donner des liens utiles vers n'importe
 quels sites et décorer votre circuit avec des images.</value>
   </data>
   <data name="ToolTipSeriesData" xml:space="preserve">
-    <value>S'il vous plait, donnez des listes de mesures sous la forme &lt;cycle&gt;:&lt;valeur&gt;
+    <value>Veuillez donner des listes de mesures sous la forme &lt;cycle&gt;:&lt;valeur&gt;
 en valeur hexadecimale pour les deux. Quand le cycle ne change pas ou égal à 0,
 alors cela correspond au changement de l'horloge de 0 vers 1,
 et quand il est impair, l'horloge passe de 1 vers 0.</value>
   </data>
   <data name="ToolTipDescriptorSensor" xml:space="preserve">
-    <value>Fournir des données d'une "source externe"
+    <value>Fourni des données d'une "source externe"
 sous la forme d'une liste prédéfinie,
-choisie aléatoirement, ou entrées manuellement.</value>
+choisie aléatoirement, ou entrée manuellement.</value>
   </data>
   <data name="SensorTypeRandom" xml:space="preserve">
     <value>Aléatoire</value>
   </data>
   <data name="TitleLoopSeries" xml:space="preserve">
-    <value>Répéter les séries</value>
+    <value>_Répéter les séries</value>
   </data>
   <data name="TitleSearch" xml:space="preserve">
     <value>Chercher</value>
@@ -1327,13 +1327,13 @@ choisie aléatoirement, ou entrées manuellement.</value>
     <value>Séries</value>
   </data>
   <data name="TitleSensorType" xml:space="preserve">
-    <value>Type de capteur:</value>
+    <value>Type de capteur :</value>
   </data>
   <data name="ErrorEmptySeries" xml:space="preserve">
     <value>Les séries ne peuvent pas être vides.</value>
   </data>
   <data name="TitleSeries" xml:space="preserve">
-    <value>Séries:</value>
+    <value>Séries :</value>
   </data>
   <data name="ToolTipSensorManualValue" xml:space="preserve">
     <value>Ecrivez la valeur hexadécimale et appuyez sur Entrer.</value>
@@ -1351,9 +1351,9 @@ positions relatives sur le symbole du circuit.</value>
     <value>Bits par pixel</value>
   </data>
   <data name="ToolTipDescriptorGraphicsArray" xml:space="preserve">
-    <value>(Affichage de point matriciel) peut afficher des données stockées dans la mémoire interne.
-Utilisé avec les circuits avancés comme les ordinateurs ou contrôleurs.
-Permet de selectionner la taille ou couleur de profondeur/système:
+    <value>(Matrice d'affichage à pixels) peut afficher des données stockées dans la mémoire interne.
+Utilisée avec les circuits avancés comme les ordinateurs ou contrôleurs.
+Permet de selectionner la taille et profondeur/palette de couleur :
 1 bit/pixel - noir et blanc
 2 bits/pixel - 4 niveaux de gris
 4 bits/pixel - 16 couleurs
@@ -1366,16 +1366,16 @@ Permet de selectionner la taille ou couleur de profondeur/système:
     <value>Choisissez le nombre de bits par pixel</value>
   </data>
   <data name="ErrorBadIntegerInRange" xml:space="preserve">
-    <value>Valeurs comprisent entre {0} - {1}.</value>
+    <value>Valeurs comprises entre {0} - {1}.</value>
   </data>
   <data name="TitleGraphicsArrayBPP" xml:space="preserve">
-    <value>Bits par pixel:</value>
+    <value>Bits par pi_xel :</value>
   </data>
   <data name="TitleHeight" xml:space="preserve">
-    <value>Hauteur:</value>
+    <value>_Hauteur :</value>
   </data>
   <data name="TitleWidth" xml:space="preserve">
-    <value>Largeur:</value>
+    <value>Largeur :</value>
   </data>
   <data name="ToolTipGraphicsArrayHeight" xml:space="preserve">
     <value>Donnez la hauteur du tableau graphique en pixel.</value>
@@ -1387,17 +1387,17 @@ Permet de selectionner la taille ou couleur de profondeur/système:
     <value>Les entrées écrites ne sont pas connectées sur le tableau graphique {0}</value>
   </data>
   <data name="ErrorBadHexInRange" xml:space="preserve">
-    <value>Valeurs comprisent entre {0:X} - {1:X}.</value>
+    <value>Valeurs comprises entre {0:X} - {1:X}.</value>
   </data>
   <data name="CommandToolsIronPython" xml:space="preserve">
-    <value>IronPython Console</value>
+    <value>Console IronPython</value>
   </data>
   <data name="MessageLoadAutoSavedFile" xml:space="preserve">
     <value>Le fichier "{0}" n'a pas été sauvegardé correctement.
-Voulez vous charger l'état sauvegardé automatiquement de ce fichier ?</value>
+Voulez-vous charger l'état sauvegardé automatiquement de ce fichier ?</value>
   </data>
   <data name="TitleAutoSave" xml:space="preserve">
-    <value>Sauvegarder les changements automatiquement tous les:</value>
+    <value>Sauvegarder les changements a_utomatiquement tous les :</value>
   </data>
   <data name="TitleMinutesUnits" xml:space="preserve">
     <value>minutes</value>

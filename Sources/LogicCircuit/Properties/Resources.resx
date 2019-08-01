@@ -1018,7 +1018,7 @@ Do you want to remove the reference to it from the Recent Files list?</value>
     <value>Truth Table</value>
   </data>
   <data name="MessageInputOutputPinsMissing" xml:space="preserve">
-    <value>There is no Input or Output Pins on this circuit. The truth tables are built by sending all the permutations of data to Input Pins and reading the results from Output Pins.</value>
+    <value>There is no Input or Output Pins on this circuit. The truth tables are built by sending all the combinations of data to Input Pins and reading the results from Output Pins.</value>
   </data>
   <data name="MessageTruthTableTooBig" xml:space="preserve">
     <value>Truth table is too long and get truncated. Please use Filter to verify correctness of your circuit.</value>
@@ -1361,7 +1361,7 @@ clock from 0 to 1, when it is odd then clock is changing from 1 to 0.</value>
 and is used to coordinate actions of circuits.</value>
   </data>
   <data name="ToolTipDescriptorPin" xml:space="preserve">
-    <value>Used to create a connector that is other circuits can use
+    <value>Used to create a connector that other circuits can use
 to provide or receive data to and from current circuit.
 Rearrange pins on the circuit to change their
 relative positions on symbols of this circuit.</value>
