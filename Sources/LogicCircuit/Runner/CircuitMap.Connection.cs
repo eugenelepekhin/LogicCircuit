@@ -23,9 +23,9 @@ namespace LogicCircuit {
 		}
 
 		private class ConnectionSet {
-			private HashSet<LogicalCircuit> connected = new HashSet<LogicalCircuit>();
-			private Dictionary<Jam, Dictionary<Jam, Connection>> outputs = new Dictionary<Jam, Dictionary<Jam, Connection>>();
-			private JamTracker jamTracker = new JamTracker();
+			private readonly HashSet<LogicalCircuit> connected = new HashSet<LogicalCircuit>();
+			private readonly Dictionary<Jam, Dictionary<Jam, Connection>> outputs = new Dictionary<Jam, Dictionary<Jam, Connection>>();
+			private readonly JamTracker jamTracker = new JamTracker();
 
 			public bool IsConnected(LogicalCircuit logicalCircuit) {
 				return this.connected.Contains(logicalCircuit);
@@ -53,8 +53,7 @@ namespace LogicCircuit {
 			}
 
 			public IEnumerable<Connection> SelectByOutput(Jam outputJam) {
-				Dictionary<Jam, Connection> inputs;
-				if(this.outputs.TryGetValue(outputJam, out inputs)) {
+				if(this.outputs.TryGetValue(outputJam, out Dictionary<Jam, Connection> inputs)) {
 					return inputs.Values;
 				}
 				return Enumerable.Empty<Connection>();
@@ -69,7 +68,7 @@ namespace LogicCircuit {
 				public string Dump {
 					get {
 						System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"\s+");
-						Func<Jam, string> trim = jam => regex.Replace(jam.ToString(), " ").Trim();
+						string trim(Jam jam) => regex.Replace(jam.ToString(), " ").Trim();
 						System.Text.StringBuilder text = new System.Text.StringBuilder();
 						System.Globalization.CultureInfo culture = System.Globalization.CultureInfo.InvariantCulture;
 						foreach(Dictionary<Jam, Connection> dic in this.outputs.Values) {

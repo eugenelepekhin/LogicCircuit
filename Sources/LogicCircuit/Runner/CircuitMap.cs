@@ -60,10 +60,7 @@ namespace LogicCircuit {
 		}
 
 		private void NotifyPropertyChanged(string propertyName) {
-			PropertyChangedEventHandler handler = this.PropertyChanged;
-			if(handler != null) {
-				handler(this, new PropertyChangedEventArgs(propertyName));
-			}
+			this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 
 		private void NotifyIsCurrentChanged() {
@@ -85,8 +82,7 @@ namespace LogicCircuit {
 			Tracer.Assert(circuitSymbol.LogicalCircuit == this.Circuit);
 			this.Path(text);
 			text.Append(Properties.Resources.CircuitMapPathSeparator);
-			CircuitProbe probe = circuitSymbol.Circuit as CircuitProbe;
-			if(probe != null) {
+			if(circuitSymbol.Circuit is CircuitProbe probe) {
 				if(probe.HasName) {
 					text.Append(probe.DisplayName);
 				} else {
@@ -115,8 +111,7 @@ namespace LogicCircuit {
 			this.symbols = new List<CircuitSymbol>();
 			foreach(CircuitSymbol symbol in this.Circuit.CircuitSymbols()) {
 				this.symbols.Add(symbol);
-				LogicalCircuit lc = symbol.Circuit as LogicalCircuit;
-				if(lc != null) {
+				if(symbol.Circuit is LogicalCircuit lc) {
 					if(this.HasLoop(lc)) {
 						throw new CircuitException(Cause.UserError,
 							Properties.Resources.ErrorLoopInCircuit(lc.Name, this.Circuit.Name)
@@ -185,8 +180,7 @@ namespace LogicCircuit {
 			foreach(CircuitSymbol symbol in this.symbols) {
 				foreach(Jam jam in symbol.Jams().Where(j => j.EffectivePinType != PinType.Output)) {
 					GridPoint p = jam.AbsolutePoint;
-					List<Jam> list;
-					if(!inJamMap.TryGetValue(p, out list)) {
+					if(!inJamMap.TryGetValue(p, out List<Jam> list)) {
 						list = new List<Jam>();
 						inJamMap.Add(p, list);
 					}
@@ -196,11 +190,9 @@ namespace LogicCircuit {
 			ConductorMap conductorMap = this.Circuit.ConductorMap();
 			foreach(CircuitSymbol symbol in this.symbols) {
 				foreach(Jam outJam in symbol.Jams().Where(j => j.EffectivePinType != PinType.Input)) {
-					Conductor conductor;
-					if(conductorMap.TryGetValue(outJam.AbsolutePoint, out conductor)) {
+					if(conductorMap.TryGetValue(outJam.AbsolutePoint, out Conductor conductor)) {
 						foreach(GridPoint point in conductor.Points) {
-							List<Jam> list;
-							if(inJamMap.TryGetValue(point, out list)) {
+							if(inJamMap.TryGetValue(point, out List<Jam> list)) {
 								foreach(Jam inJam in list.Where(j => j != outJam)) {
 									if(inJam.Pin.BitWidth != outJam.Pin.BitWidth) {
 										if(!(inJam.CircuitSymbol.Circuit is CircuitProbe)) {
@@ -269,8 +261,7 @@ namespace LogicCircuit {
 						this.children[(CircuitSymbol)con.InJam.CircuitSymbol].Connect(connectionSet, list, result, con.InJam.InnerJam, bitNumber);
 					}
 				} else {
-					Splitter splitter = circuit as Splitter;
-					if(splitter != null) {
+					if(circuit is Splitter splitter) {
 						int splitterPinCount = splitter.PinCount;
 						int splitterBitWidth = splitter.BitWidth;
 						List<Jam> jams = con.InJam.CircuitSymbol.Jams().ToList();
@@ -345,8 +336,7 @@ namespace LogicCircuit {
 			// check that all memory that persisted data between runs is used only once
 			HashSet<CircuitSymbol> persisted = new HashSet<CircuitSymbol>();
 			foreach(SymbolMap symbolMap in list.SymbolMaps) {
-				Memory memory = symbolMap.CircuitSymbol.Circuit as Memory;
-				if(memory != null && memory.Writable && memory.OnStart == MemoryOnStart.Data && !persisted.Add(symbolMap.CircuitSymbol)) {
+				if(symbolMap.CircuitSymbol.Circuit is Memory memory && memory.Writable && memory.OnStart == MemoryOnStart.Data && !persisted.Add(symbolMap.CircuitSymbol)) {
 					throw new CircuitException(Cause.UserError,
 						Properties.Resources.ErrorManyMemoryData(symbolMap.CircuitSymbol.LogicalCircuit.Name, memory.Notation + symbolMap.CircuitSymbol.Point.ToString())
 					);
@@ -355,8 +345,7 @@ namespace LogicCircuit {
 		}
 
 		public CircuitMap Child(CircuitSymbol symbol) {
-			CircuitMap map;
-			if(this.children != null && this.children.TryGetValue(symbol, out map)) {
+			if(this.children != null && this.children.TryGetValue(symbol, out CircuitMap map)) {
 				return map;
 			}
 			return null;
@@ -366,8 +355,7 @@ namespace LogicCircuit {
 		public FunctionProbe FunctionProbe(CircuitSymbol symbol) {
 			if(this.displays != null) {
 				foreach(IFunctionVisual visual in this.displays) {
-					FunctionProbe probe = visual as FunctionProbe;
-					if(probe != null && probe.CircuitSymbol == symbol) {
+					if(visual is FunctionProbe probe && probe.CircuitSymbol == symbol) {
 						return probe;
 					}
 				}
@@ -377,8 +365,7 @@ namespace LogicCircuit {
 
 		public IFunctionMemory FunctionMemory(CircuitSymbol symbol) {
 			if(this.memories != null) {
-				IFunctionMemory memory;
-				if(this.memories.TryGetValue(symbol, out memory)) {
+				if(this.memories.TryGetValue(symbol, out IFunctionMemory memory)) {
 					return memory;
 				}
 			}
@@ -405,8 +392,7 @@ namespace LogicCircuit {
 			} else if(this.displays != null) {
 				// When switching to map that already was turned on buttons still need to be initiated with current functions.
 				foreach(IFunctionVisual func in this.displays) {
-					FunctionButton button = func as FunctionButton;
-					if(button != null) {
+					if(func is FunctionButton button) {
 						button.TurnOn();
 					}
 				}
@@ -428,8 +414,7 @@ namespace LogicCircuit {
 				}
 				if(this.memories != null) {
 					foreach(IFunctionMemory iMemory in this.memories.Values) {
-						FunctionMemory memory = iMemory as FunctionMemory;
-						if(memory != null) {
+						if(iMemory is FunctionMemory memory) {
 							memory.TurnOff();
 						}
 					}
@@ -455,8 +440,7 @@ namespace LogicCircuit {
 
 		public FunctionConstant FunctionConstant(CircuitSymbol symbol) {
 			if(this.constants != null) {
-				FunctionConstant function;
-				if(this.constants.TryGetValue(symbol,  out function)) {
+				if(this.constants.TryGetValue(symbol, out FunctionConstant function)) {
 					return function;
 				}
 			}
@@ -476,8 +460,7 @@ namespace LogicCircuit {
 		[SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
 		private bool StateIndexes(JamTracker jamTracker, List<int> list, GridPoint point, bool ignore, int start, int count) {
 			Tracer.Assert(0 <= start && start < 32 && count <= 32);
-			Conductor conductor;
-			if(0 < count && this.Circuit.ConductorMap().TryGetValue(point, out conductor)) {
+			if(0 < count && this.Circuit.ConductorMap().TryGetValue(point, out Conductor conductor)) {
 				foreach(CircuitSymbol symbol in this.symbols) {
 					foreach(Jam jam in symbol.Jams()) {
 						GridPoint jamPoint = jam.AbsolutePoint;
@@ -485,10 +468,8 @@ namespace LogicCircuit {
 							Circuit circuit = symbol.Circuit;
 							Pin pin;
 							if(CircuitMap.IsPrimitive(circuit)) {
-								SymbolMap symbolMap;
-								if(jam.Pin.PinType == PinType.Output && this.Root.results.TryGetValue(new SymbolMapKey(this, symbol), out symbolMap)) {
-									Gate gate = circuit as Gate;
-									if(gate != null && (gate.GateType == GateType.TriState1 || gate.GateType == GateType.TriState2)) {
+								if(jam.Pin.PinType == PinType.Output && this.Root.results.TryGetValue(new SymbolMapKey(this, symbol), out SymbolMap symbolMap)) {
+									if(circuit is Gate gate && (gate.GateType == GateType.TriState1 || gate.GateType == GateType.TriState2)) {
 										list.AddRange(symbolMap.Results.Skip(start).Take(count).Select(r => r.StateIndex).Where(i => !list.Contains(i)));
 									} else {
 										list.AddRange(symbolMap.Results.Skip(start).Take(count).Select(r => r.StateIndex));
@@ -612,8 +593,7 @@ namespace LogicCircuit {
 		}
 
 		private static void Apply(CircuitState circuitState, SymbolMap symbolMap, int probeCapacity) {
-			if(symbolMap.CircuitSymbol.Circuit is Gate) {
-				Gate gate = (Gate)symbolMap.CircuitSymbol.Circuit;
+			if(symbolMap.CircuitSymbol.Circuit is Gate gate) {
 				switch(gate.GateType) {
 				case GateType.Clock:
 					CircuitMap.DefineClock(circuitState, symbolMap);
@@ -642,8 +622,7 @@ namespace LogicCircuit {
 				CircuitMap.DefineButton(circuitState, symbolMap);
 			} else if(symbolMap.CircuitSymbol.Circuit is Constant) {
 				CircuitMap.DefineConstant(circuitState, symbolMap);
-			} else if(symbolMap.CircuitSymbol.Circuit is Memory) {
-				Memory memory = (Memory)symbolMap.CircuitSymbol.Circuit;
+			} else if(symbolMap.CircuitSymbol.Circuit is Memory memory) {
 				if(memory.Writable) {
 					CircuitMap.DefineRam(circuitState, symbolMap);
 				} else {
@@ -761,7 +740,6 @@ namespace LogicCircuit {
 					map.displays = new HashSet<IFunctionVisual>();
 				}
 				map.displays.Add(function);
-				map = map.Parent;
 			}
 		}
 
@@ -895,8 +873,9 @@ namespace LogicCircuit {
 				parameters[i] = list[i].Result.StateIndex;
 			}
 			if(parameters != null && 0 < parameters.Length) {
-				FunctionProbe probe = new FunctionProbe(symbolMap.CircuitSymbol, circuitState, parameters, capacity);
-				probe.Label = symbolMap.CircuitMap.Path(symbolMap.CircuitSymbol);
+				FunctionProbe probe = new FunctionProbe(symbolMap.CircuitSymbol, circuitState, parameters, capacity) {
+					Label = symbolMap.CircuitMap.Path(symbolMap.CircuitSymbol)
+				};
 
 				if(symbolMap.CircuitMap.displays == null) {
 					symbolMap.CircuitMap.displays = new HashSet<IFunctionVisual>();

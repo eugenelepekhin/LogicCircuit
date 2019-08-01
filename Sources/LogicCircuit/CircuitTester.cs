@@ -68,8 +68,7 @@ namespace LogicCircuit {
 					string.Format(CultureInfo.InvariantCulture, "Output pin {0} not found on Logical Circuit {1}", outputName, this.logicalCircuitName)
 				);
 			}
-			int value;
-			if(FunctionProbe.ToInt(pin.Function.Pack(), pin.Pin.BitWidth, out value)) {
+			if(FunctionProbe.ToInt(pin.Function.Pack(), pin.Pin.BitWidth, out int value)) {
 				return value;
 			}
 			throw new CircuitException(Cause.UserError,
@@ -86,8 +85,7 @@ namespace LogicCircuit {
 		}
 
 		private void ValidateEditor() {
-			Editor editor;
-			if(!this.originalEditor.TryGetTarget(out editor) || editor != App.Editor || editor.CircuitProject.Version != this.originalVersion) {
+			if(!this.originalEditor.TryGetTarget(out Editor editor) || editor != App.Editor || editor.CircuitProject.Version != this.originalVersion) {
 				throw new InvalidOperationException("Circuit project was changed since this circuit tester was created.");
 			}
 		}

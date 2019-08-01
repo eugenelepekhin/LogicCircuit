@@ -23,8 +23,8 @@ namespace LogicCircuit {
 
 		protected CircuitFunction(CircuitState circuitState, int[] parameter, int[] result) {
 			this.CircuitState = circuitState;
-			this.parameter = (parameter == null) ? CircuitFunction.EmptyList : parameter;
-			this.result = (result == null) ? CircuitFunction.EmptyList : result;
+			this.parameter = parameter ?? CircuitFunction.EmptyList;
+			this.result = result ?? CircuitFunction.EmptyList;
 			this.result0 = (0 < this.result.Length) ? this.result[0] : -1;
 			this.CircuitState.DefineFunction(this);
 		}
