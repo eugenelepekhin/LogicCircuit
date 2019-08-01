@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Target Name="GenerateWrappers" BeforeTargets="PrepareForBuild;BeforeBuild" Condition="Exists('$(ProjectDir)Schema\CircuitProject.xml')">
+		<PropertyGroup>
+			<ResourceWrapperGeneratorCommand>"$(SolutionDir)Tools\ResourceWrapper.Generator.exe" /FlowDirection /p "$(ProjectPath)"</ResourceWrapperGeneratorCommand>
+			<PseudoBuildDefined>$(DefineConstants.Contains("Pseudo"))</PseudoBuildDefined>
+			<ResourceWrapperGeneratorCommand Condition="$(PseudoBuildDefined)">$(ResourceWrapperGeneratorCommand) Pseudo=$(RootNamespace).Properties.Resources</ResourceWrapperGeneratorCommand>
+
+			<ItemWrapperGeneratorCommand>"$(SolutionDir)Tools\ItemWrapper.Generator.exe" /Schema "$(ProjectDir)Schema\CircuitProject.xml" /Target "$(ProjectDir)CircuitProject\Wrappers"</ItemWrapperGeneratorCommand>
+		</PropertyGroup>
+		<!--<Message Importance="high" Text=">>> Building Resource Wrappers: $(ResourceWrapperGeneratorCommand)"/>
+		<Message Importance="high" Text=">>> Building Snap store Wrappers: $(ItemWrapperGeneratorCommand)"/>-->
+		<Exec Command="$(ResourceWrapperGeneratorCommand)"/>
+		<Exec Command="$(ItemWrapperGeneratorCommand)" />
+	</Target>
+</Project>
