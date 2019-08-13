@@ -75,7 +75,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private static IField<CollapsedCategoryData>[] fields = {
+		private static readonly IField<CollapsedCategoryData>[] fields = {
 			NameField.Field,
 			CollapsedCategoryField.Field
 		};

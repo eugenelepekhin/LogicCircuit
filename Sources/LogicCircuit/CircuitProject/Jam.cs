@@ -16,8 +16,7 @@ namespace LogicCircuit {
 
 		public GridPoint AbsolutePoint {
 			get {
-				CircuitSymbol symbol = this.CircuitSymbol as CircuitSymbol;
-				if(symbol != null && symbol.Rotation != Rotation.Up) {
+				if(this.CircuitSymbol is CircuitSymbol symbol && symbol.Rotation != Rotation.Up) {
 					Matrix matrix = Symbol.RotationTransform(symbol.Rotation, symbol.X, symbol.Y, symbol.Circuit.SymbolWidth, symbol.Circuit.SymbolHeight);
 					return Symbol.GridPoint(matrix.Transform(Symbol.ScreenPoint(symbol.Point.Offset(this.X, this.Y))));
 				} else {

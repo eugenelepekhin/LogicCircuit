@@ -26,7 +26,7 @@ namespace LogicCircuit {
 			private CircuitSymbolIdField() {}
 			public string Name { get { return "CircuitSymbolId"; } }
 			public int Order { get; set; }
-			public Guid DefaultValue { get { return default(Guid); } }
+			public Guid DefaultValue { get { return default; } }
 			public Guid GetValue(ref CircuitSymbolData record) {
 				return record.CircuitSymbolId;
 			}
@@ -61,7 +61,7 @@ namespace LogicCircuit {
 			private CircuitIdField() {}
 			public string Name { get { return "CircuitId"; } }
 			public int Order { get; set; }
-			public Guid DefaultValue { get { return default(Guid); } }
+			public Guid DefaultValue { get { return default; } }
 			public Guid GetValue(ref CircuitSymbolData record) {
 				return record.CircuitId;
 			}
@@ -96,7 +96,7 @@ namespace LogicCircuit {
 			private LogicalCircuitIdField() {}
 			public string Name { get { return "LogicalCircuitId"; } }
 			public int Order { get; set; }
-			public Guid DefaultValue { get { return default(Guid); } }
+			public Guid DefaultValue { get { return default; } }
 			public Guid GetValue(ref CircuitSymbolData record) {
 				return record.LogicalCircuitId;
 			}
@@ -131,7 +131,7 @@ namespace LogicCircuit {
 			private XField() {}
 			public string Name { get { return "X"; } }
 			public int Order { get; set; }
-			public int DefaultValue { get { return default(int); } }
+			public int DefaultValue { get { return default; } }
 			public int GetValue(ref CircuitSymbolData record) {
 				return record.X;
 			}
@@ -166,7 +166,7 @@ namespace LogicCircuit {
 			private YField() {}
 			public string Name { get { return "Y"; } }
 			public int Order { get; set; }
-			public int DefaultValue { get { return default(int); } }
+			public int DefaultValue { get { return default; } }
 			public int GetValue(ref CircuitSymbolData record) {
 				return record.Y;
 			}
@@ -255,7 +255,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private static IField<CircuitSymbolData>[] fields = {
+		private static readonly IField<CircuitSymbolData>[] fields = {
 			CircuitSymbolIdField.Field,
 			CircuitIdField.Field,
 			LogicalCircuitIdField.Field,

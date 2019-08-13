@@ -59,13 +59,13 @@ namespace LogicCircuit {
 		private SettingsWindowLocationCache windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 
-		private ScriptEngine scriptEngine;
-		private MemoryStream stdout;
-		private LogWriter writer;
-		private MemoryStream stdin;
-		private LogReader reader;
-		private ScriptScope scope;
-		private StringBuilder command = new StringBuilder();
+		private readonly ScriptEngine scriptEngine;
+		private readonly MemoryStream stdout;
+		private readonly LogWriter writer;
+		private readonly MemoryStream stdin;
+		private readonly LogReader reader;
+		private readonly ScriptScope scope;
+		private readonly StringBuilder command = new StringBuilder();
 		private Thread thread;
 
 		private string suggestionExpr = null;
@@ -142,7 +142,7 @@ namespace LogicCircuit {
 		}
 
 		private void Start(string text) {
-			Action run = () => {
+			void run() {
 				try {
 					dynamic result = this.scriptEngine.Execute(text, this.scope);
 					if(result != null) {
@@ -156,7 +156,7 @@ namespace LogicCircuit {
 					this.Prompt();
 					this.thread = null;
 				}
-			};
+			}
 			Tracer.Assert(this.thread == null);
 			this.thread = new Thread(new ThreadStart(run));
 			this.thread.SetApartmentState(ApartmentState.STA);
@@ -248,8 +248,7 @@ namespace LogicCircuit {
 						this.textBox.Dispatcher.Invoke(
 							new Action(() => {
 								bool scroll = (this.textBox.SelectionStart == this.textBox.Text.Length);
-								string str;
-								while(this.queue.TryDequeue(out str)) {
+								while(this.queue.TryDequeue(out string str)) {
 									this.textBox.AppendText(str);
 								}
 								if(scroll) {

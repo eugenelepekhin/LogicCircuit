@@ -46,13 +46,10 @@ namespace LogicCircuit.DataPersistent {
 		/// <param name="name"></param>
 		/// <param name="fields"></param>
 		public TableSnapshot(StoreSnapshot store, string name, params IField<TRecord>[] fields) {
-			if(store == null) {
-				throw new ArgumentNullException(nameof(store));
-			}
 			if(fields == null) {
 				throw new ArgumentNullException(nameof(fields));
 			}
-			this.StoreSnapshot = store;
+			this.StoreSnapshot = store ?? throw new ArgumentNullException(nameof(store));
 			this.table = new SnapTable<TRecord>(store.SnapStore, name, 0, fields, true);
 			this.StoreSnapshot.Add(this, this.table);
 		}
@@ -277,8 +274,9 @@ namespace LogicCircuit.DataPersistent {
 		public void Delete(RowId rowId) {
 			this.ValidateModification();
 			if(this.table.PrimaryKey != null) {
-				HashSet<ChildRow> deleteList = new HashSet<ChildRow>();
-				deleteList.Add(new ChildRow(this, rowId));
+				HashSet<ChildRow> deleteList = new HashSet<ChildRow> {
+					new ChildRow(this, rowId)
+				};
 				foreach(IForeignKey fk in this.table.Children) {
 					fk.OnParentDelete(rowId, deleteList);
 				}
@@ -418,8 +416,7 @@ namespace LogicCircuit.DataPersistent {
 			if(list != null) {
 				foreach(IIndex<TRecord> index in list) {
 					if(!index.IsUnique) {
-						RangeIndex<TField> rangeIndex = index as RangeIndex<TField>;
-						if(rangeIndex != null && rangeIndex.Field == field) {
+						if(index is RangeIndex<TField> rangeIndex && rangeIndex.Field == field) {
 							return rangeIndex.Find(min, max, this.StoreSnapshot.Version);
 						}
 					}
@@ -532,8 +529,7 @@ namespace LogicCircuit.DataPersistent {
 				if(list != null) {
 					foreach(IIndex<TRecord> index in list) {
 						if(((IFieldHolder)index).Field == field) {
-							RangeIndex<TField> rangeIndex = index as RangeIndex<TField>;
-							if(rangeIndex != null) {
+							if(index is RangeIndex<TField> rangeIndex) {
 								return rangeIndex.MinimumValue(this.StoreSnapshot.Version);
 							}
 						}
@@ -570,8 +566,7 @@ namespace LogicCircuit.DataPersistent {
 				if(list != null) {
 					foreach(IIndex<TRecord> index in list) {
 						if(((IFieldHolder)index).Field == field) {
-							RangeIndex<TField> rangeIndex = index as RangeIndex<TField>;
-							if(rangeIndex != null) {
+							if(index is RangeIndex<TField> rangeIndex) {
 								return rangeIndex.MaximumValue(this.StoreSnapshot.Version);
 							}
 						}
@@ -770,8 +765,7 @@ namespace LogicCircuit.DataPersistent {
 			if(list != null) {
 				foreach(IIndex<TRecord> index in list) {
 					if(!uniqueOnly || index.IsUnique) {
-						ICompositeField field = ((IFieldHolder)index).Field as ICompositeField;
-						if(field != null && field.ConsistOf(field1, field2)) {
+						if(((IFieldHolder)index).Field is ICompositeField field && field.ConsistOf(field1, field2)) {
 							return index;
 						}
 					}
@@ -855,7 +849,6 @@ namespace LogicCircuit.DataPersistent {
 				for(int i = 0; i < version.Count; i++) {
 					using(IEnumerator<SnapTableChange<TRecord>> e = this.table.GetChanges(version[i])) {
 						while(e.MoveNext()) {
-							SnapTableAction old;
 							switch(e.Current.Action) {
 							case SnapTableAction.Insert:
 								if(this.action.ContainsKey(e.Current.RowId)) {
@@ -866,7 +859,7 @@ namespace LogicCircuit.DataPersistent {
 								}
 								break;
 							case SnapTableAction.Delete:
-								if(this.action.TryGetValue(e.Current.RowId, out old) && old == SnapTableAction.Insert) {
+								if(this.action.TryGetValue(e.Current.RowId, out SnapTableAction old) && old == SnapTableAction.Insert) {
 									this.action.Remove(e.Current.RowId);
 								} else {
 									Debug.Assert(!this.action.TryGetValue(e.Current.RowId, out old) || old == SnapTableAction.Update);
@@ -931,7 +924,7 @@ namespace LogicCircuit.DataPersistent {
 		/// Enumerate changes made over multiple transaction when version changed back from later to older.
 		/// </summary>
 		private class ReverseChangeEnumerator : IEnumerator<TableChange<TRecord>>, ITableChange<TRecord> {
-			private ChangeEnumerator enumerator;
+			private readonly ChangeEnumerator enumerator;
 
 			public ReverseChangeEnumerator(ChangeEnumerator enumerator) {
 				this.enumerator = enumerator;
@@ -988,7 +981,7 @@ namespace LogicCircuit.DataPersistent {
 
 		private class RolledBackChangesEnumerator : IEnumerator<RowId> {
 
-			private IEnumerator<SnapTableChange<TRecord>> enumerator;
+			private readonly IEnumerator<SnapTableChange<TRecord>> enumerator;
 
 			public RolledBackChangesEnumerator(TableSnapshot<TRecord> table, int version) {
 				this.enumerator = table.table.GetRolledBackChanges(version);

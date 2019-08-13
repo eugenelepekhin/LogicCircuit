@@ -215,10 +215,7 @@ namespace LogicCircuit {
 		public abstract void DeleteSymbol();
 
 		protected void NotifyPropertyChanged(string name) {
-			PropertyChangedEventHandler handler = this.PropertyChanged;
-			if(handler != null) {
-				handler(this, new PropertyChangedEventArgs(name));
-			}
+			this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
 
 		protected bool HasListener { get { return this.PropertyChanged != null; } }

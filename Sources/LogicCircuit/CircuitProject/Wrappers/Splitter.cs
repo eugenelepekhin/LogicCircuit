@@ -32,7 +32,7 @@ namespace LogicCircuit {
 			private SplitterIdField() {}
 			public string Name { get { return "SplitterId"; } }
 			public int Order { get; set; }
-			public Guid DefaultValue { get { return default(Guid); } }
+			public Guid DefaultValue { get { return default; } }
 			public Guid GetValue(ref SplitterData record) {
 				return record.SplitterId;
 			}
@@ -67,7 +67,7 @@ namespace LogicCircuit {
 			private BitWidthField() {}
 			public string Name { get { return "BitWidth"; } }
 			public int Order { get; set; }
-			public int DefaultValue { get { return default(int); } }
+			public int DefaultValue { get { return default; } }
 			public int GetValue(ref SplitterData record) {
 				return record.BitWidth;
 			}
@@ -102,7 +102,7 @@ namespace LogicCircuit {
 			private PinCountField() {}
 			public string Name { get { return "PinCount"; } }
 			public int Order { get; set; }
-			public int DefaultValue { get { return default(int); } }
+			public int DefaultValue { get { return default; } }
 			public int GetValue(ref SplitterData record) {
 				return record.PinCount;
 			}
@@ -137,7 +137,7 @@ namespace LogicCircuit {
 			private ClockwiseField() {}
 			public string Name { get { return "Clockwise"; } }
 			public int Order { get; set; }
-			public bool DefaultValue { get { return default(bool); } }
+			public bool DefaultValue { get { return default; } }
 			public bool GetValue(ref SplitterData record) {
 				return record.Clockwise;
 			}
@@ -191,7 +191,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private static IField<SplitterData>[] fields = {
+		private static readonly IField<SplitterData>[] fields = {
 			SplitterIdField.Field,
 			BitWidthField.Field,
 			PinCountField.Field,

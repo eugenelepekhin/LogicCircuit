@@ -27,8 +27,8 @@ namespace LogicCircuit {
 		public static CircuitProject Create(string file) {
 			try {
 				XmlReader xmlReader = XmlHelper.CreateReader((file != null ?
-					(TextReader) new StreamReader(file) :
-					(TextReader) new StringReader(
+					(TextReader)new StreamReader(file) :
+					(TextReader)new StringReader(
 						string.Format(CultureInfo.InvariantCulture, Schema.Empty,
 							Guid.NewGuid(), //ProjectId
 							Properties.Resources.CircuitProjectName,
@@ -197,8 +197,7 @@ namespace LogicCircuit {
 			Point diagram = new Point(Symbol.LogicalCircuitWidth, Symbol.LogicalCircuitHeight);
 			LogicalCircuit target = this.ProjectSet.Project.LogicalCircuit;
 			foreach(Symbol symbol in list) {
-				CircuitSymbol circuitSymbol = symbol as CircuitSymbol;
-				if(circuitSymbol != null) {
+				if(symbol is CircuitSymbol circuitSymbol) {
 					foreach(CircuitSymbol other in target.CircuitSymbols().Where(s => s != circuitSymbol && s.Circuit.Similar(circuitSymbol.Circuit))) {
 						Point point = other.Bounds().BottomRight;
 						if(diagram.X < point.X || diagram.Y < point.Y) {
@@ -206,26 +205,20 @@ namespace LogicCircuit {
 						}
 						need = need || (other.X == circuitSymbol.X && other.Y == circuitSymbol.Y);
 					}
-				} else {
-					TextNote textNote = symbol as TextNote;
-					if(textNote != null) {
-						foreach(TextNote other in target.TextNotes().Where(n => n != textNote)) {
-							Point point = other.Bounds().BottomRight;
-							if(diagram.X < point.X || diagram.Y < point.Y) {
-								return false;
-							}
-							need = need || (other.X == textNote.X && other.Y == textNote.Y && other.Width == textNote.Width && other.Height == textNote.Height);
+				} else if(symbol is TextNote textNote) {
+					foreach(TextNote other in target.TextNotes().Where(n => n != textNote)) {
+						Point point = other.Bounds().BottomRight;
+						if(diagram.X < point.X || diagram.Y < point.Y) {
+							return false;
 						}
-					} else {
-						Wire wire = symbol as Wire;
-						if(wire != null) {
-							foreach(Wire other in target.Wires().Where(w => w != wire)) {
-								if(diagram.X < Math.Max(wire.X1, wire.X2) || diagram.Y < Math.Max(wire.Y1, wire.Y2)) {
-									return false;
-								}
-								need = need || (wire.Point1 == other.Point1 && wire.Point2 == other.Point2);
-							}
+						need = need || (other.X == textNote.X && other.Y == textNote.Y && other.Width == textNote.Width && other.Height == textNote.Height);
+					}
+				} else if(symbol is Wire wire) {
+					foreach(Wire other in target.Wires().Where(w => w != wire)) {
+						if(diagram.X < Math.Max(wire.X1, wire.X2) || diagram.Y < Math.Max(wire.Y1, wire.Y2)) {
+							return false;
 						}
+						need = need || (wire.Point1 == other.Point1 && wire.Point2 == other.Point2);
 					}
 				}
 			}

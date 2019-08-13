@@ -141,18 +141,19 @@ namespace LogicCircuit {
 
 		public ColorPicker() : base() {
 			this.RecentColors = new ObservableCollection<Color>();
-			
-			this.StandardColors = new List<Color>(ColorPicker.ColorsInRow);
-			this.StandardColors.Add(Colors.Transparent);
-			this.StandardColors.Add(Colors.White);
-			this.StandardColors.Add(Colors.Gray);
-			this.StandardColors.Add(Colors.Black);
-			this.StandardColors.Add(Colors.Red);
-			this.StandardColors.Add(Colors.Green);
-			this.StandardColors.Add(Colors.Blue);
-			this.StandardColors.Add(Colors.Yellow);
-			this.StandardColors.Add(Colors.Orange);
-			this.StandardColors.Add(Colors.Purple);
+
+			this.StandardColors = new List<Color>(ColorPicker.ColorsInRow) {
+				Colors.Transparent,
+				Colors.White,
+				Colors.Gray,
+				Colors.Black,
+				Colors.Red,
+				Colors.Green,
+				Colors.Blue,
+				Colors.Yellow,
+				Colors.Orange,
+				Colors.Purple
+			};
 			System.Diagnostics.Debug.Assert(this.StandardColors.Count == ColorPicker.ColorsInRow);
 
 			List<Color> list = new List<Color>(

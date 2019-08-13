@@ -33,7 +33,7 @@ namespace LogicCircuit {
 			private PinIdField() {}
 			public string Name { get { return "PinId"; } }
 			public int Order { get; set; }
-			public Guid DefaultValue { get { return default(Guid); } }
+			public Guid DefaultValue { get { return default; } }
 			public Guid GetValue(ref DevicePinData record) {
 				return record.PinId;
 			}
@@ -54,7 +54,7 @@ namespace LogicCircuit {
 			private CircuitIdField() {}
 			public string Name { get { return "CircuitId"; } }
 			public int Order { get; set; }
-			public Guid DefaultValue { get { return default(Guid); } }
+			public Guid DefaultValue { get { return default; } }
 			public Guid GetValue(ref DevicePinData record) {
 				return record.CircuitId;
 			}
@@ -241,7 +241,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private static IField<DevicePinData>[] fields = {
+		private static readonly IField<DevicePinData>[] fields = {
 			PinIdField.Field,
 			CircuitIdField.Field,
 			BitWidthField.Field,

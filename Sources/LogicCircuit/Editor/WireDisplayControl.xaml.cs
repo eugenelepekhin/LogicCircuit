@@ -13,9 +13,9 @@ namespace LogicCircuit {
 		private readonly Editor editor;
 		private DispatcherTimer timer;
 
-		private CircuitState circuitState;
-		private int[] parameter;
-		private State[] state;
+		private readonly CircuitState circuitState;
+		private readonly int[] parameter;
+		private readonly State[] state;
 		private bool initiated;
 		
 		public WireDisplayControl(Canvas canvas, Point point, Wire wire) {
@@ -58,8 +58,7 @@ namespace LogicCircuit {
 
 		private void Cancel() {
 			this.ReleaseMouseCapture();
-			Panel parent = this.Parent as Panel;
-			if(parent != null) {
+			if(this.Parent is Panel parent) {
 				parent.Children.Remove(this);
 			}
 			DispatcherTimer t = this.timer;

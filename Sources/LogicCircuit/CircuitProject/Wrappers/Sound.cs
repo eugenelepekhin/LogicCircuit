@@ -24,7 +24,7 @@ namespace LogicCircuit {
 			private SoundIdField() {}
 			public string Name { get { return "SoundId"; } }
 			public int Order { get; set; }
-			public Guid DefaultValue { get { return default(Guid); } }
+			public Guid DefaultValue { get { return default; } }
 			public Guid GetValue(ref SoundData record) {
 				return record.SoundId;
 			}
@@ -183,7 +183,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private static IField<SoundData>[] fields = {
+		private static readonly IField<SoundData>[] fields = {
 			SoundIdField.Field,
 			PinSideField.Field,
 			NotationField.Field,

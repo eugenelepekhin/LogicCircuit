@@ -24,10 +24,8 @@ namespace LogicCircuit {
 		}
 
 		private void ListBoxMouseDoubleClick(object sender, MouseButtonEventArgs e) {
-			ListBox listBox = sender as ListBox;
-			if(listBox != null) {
-				LogicalCircuit selected = listBox.SelectedItem as LogicalCircuit;
-				if(selected != null) {
+			if(sender is ListBox listBox) {
+				if(listBox.SelectedItem is LogicalCircuit selected) {
 					Mainframe mainframe = (Mainframe)this.Owner;
 					Editor editor = mainframe.Editor;
 					editor.OpenLogicalCircuit(selected);

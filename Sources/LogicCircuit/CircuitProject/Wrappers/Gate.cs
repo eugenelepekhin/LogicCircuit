@@ -21,7 +21,7 @@ namespace LogicCircuit {
 			private GateIdField() {}
 			public string Name { get { return "GateId"; } }
 			public int Order { get; set; }
-			public Guid DefaultValue { get { return default(Guid); } }
+			public Guid DefaultValue { get { return default; } }
 			public Guid GetValue(ref GateData record) {
 				return record.GateId;
 			}
@@ -61,7 +61,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private static IField<GateData>[] fields = {
+		private static readonly IField<GateData>[] fields = {
 			GateIdField.Field,
 			GateField.Field
 		};

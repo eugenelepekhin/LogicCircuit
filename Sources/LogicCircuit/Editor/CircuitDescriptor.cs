@@ -58,10 +58,7 @@ namespace LogicCircuit {
 		}
 
 		protected void NotifyPropertyChanged(string propertyName) {
-			PropertyChangedEventHandler handler = this.PropertyChanged;
-			if(handler != null) {
-				handler(this, new PropertyChangedEventArgs(propertyName));
-			}
+			this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 
 		protected void InTransaction(Action action) {

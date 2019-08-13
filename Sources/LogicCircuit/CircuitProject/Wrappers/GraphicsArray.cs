@@ -48,7 +48,7 @@ namespace LogicCircuit {
 			private GraphicsArrayIdField() {}
 			public string Name { get { return "GraphicsArrayId"; } }
 			public int Order { get; set; }
-			public Guid DefaultValue { get { return default(Guid); } }
+			public Guid DefaultValue { get { return default; } }
 			public Guid GetValue(ref GraphicsArrayData record) {
 				return record.GraphicsArrayId;
 			}
@@ -347,7 +347,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private static IField<GraphicsArrayData>[] fields = {
+		private static readonly IField<GraphicsArrayData>[] fields = {
 			GraphicsArrayIdField.Field,
 			WriteOn1Field.Field,
 			OnStartField.Field,

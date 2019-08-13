@@ -10,7 +10,7 @@ namespace LogicCircuit {
 		private SettingsWindowLocationCache windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 
-		private Pin pin;
+		private readonly Pin pin;
 
 		public DialogPin(Pin pin) {
 			this.DataContext = this;

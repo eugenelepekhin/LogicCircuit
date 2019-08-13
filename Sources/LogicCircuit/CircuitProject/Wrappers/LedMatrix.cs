@@ -39,7 +39,7 @@ namespace LogicCircuit {
 			private LedMatrixIdField() {}
 			public string Name { get { return "LedMatrixId"; } }
 			public int Order { get; set; }
-			public Guid DefaultValue { get { return default(Guid); } }
+			public Guid DefaultValue { get { return default; } }
 			public Guid GetValue(ref LedMatrixData record) {
 				return record.LedMatrixId;
 			}
@@ -144,7 +144,7 @@ namespace LogicCircuit {
 			private RowsField() {}
 			public string Name { get { return "Rows"; } }
 			public int Order { get; set; }
-			public int DefaultValue { get { return default(int); } }
+			public int DefaultValue { get { return default; } }
 			public int GetValue(ref LedMatrixData record) {
 				return record.Rows;
 			}
@@ -179,7 +179,7 @@ namespace LogicCircuit {
 			private ColumnsField() {}
 			public string Name { get { return "Columns"; } }
 			public int Order { get; set; }
-			public int DefaultValue { get { return default(int); } }
+			public int DefaultValue { get { return default; } }
 			public int GetValue(ref LedMatrixData record) {
 				return record.Columns;
 			}
@@ -303,7 +303,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private static IField<LedMatrixData>[] fields = {
+		private static readonly IField<LedMatrixData>[] fields = {
 			LedMatrixIdField.Field,
 			MatrixTypeField.Field,
 			CellShapeField.Field,

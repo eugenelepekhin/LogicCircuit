@@ -107,7 +107,7 @@ namespace LogicCircuit.DataPersistent {
 						if(oldSize <= newSize++) {
 							return;
 						}
-						p[j] = default(TRow);
+						p[j] = default;
 					}
 				}
 			} else if(oldSize < newSize) {
@@ -129,10 +129,10 @@ namespace LogicCircuit.DataPersistent {
 		}
 
 		public struct Address {
-			private TRow[] page;
+			private readonly TRow[] page;
 			public TRow[] Page { get { return this.page; } }
 
-			private int index;
+			private readonly int index;
 			public int Index { get { return this.index; } }
 
 			public Address(TRow[] page, int index) {

@@ -5,15 +5,14 @@ namespace LogicCircuit.DataPersistent {
 
 		internal static readonly RowId Empty = new RowId(-1);
 
-		private int rowId;
+		private readonly int rowId;
 
 		internal RowId(int rowId) {
 			this.rowId = rowId;
 		}
 
 		public override bool Equals(object obj) {
-			if(obj is RowId) {
-				RowId other = (RowId)obj;
+			if(obj is RowId other) {
 				return this.rowId == other.rowId;
 			}
 			return false;

@@ -104,8 +104,7 @@ namespace LogicCircuit {
 				string cultureName = App.CurrentCulture.Name;
 				if(!cultureName.StartsWith("en", StringComparison.OrdinalIgnoreCase)) {
 					SettingsStringCache checkedVersion = DialogAbout.TranslationRequestVersion();
-					Version version;
-					if(!Version.TryParse(checkedVersion.Value, out version) || version < DialogAbout.CurrentVersion()) {
+					if(!Version.TryParse(checkedVersion.Value, out Version version) || version < DialogAbout.CurrentVersion()) {
 						string text = null;
 						using(WebClient client = new WebClient()) {
 							client.UseDefaultCredentials = true;
@@ -202,8 +201,7 @@ namespace LogicCircuit {
 
 			private static Version ParseVersion(string text) {
 				if(!string.IsNullOrWhiteSpace(text)) {
-					Version version = null;
-					if(Version.TryParse(text, out version)) {
+					if(Version.TryParse(text, out Version version)) {
 						return version;
 					}
 				}

@@ -255,8 +255,7 @@ namespace LogicCircuit {
 			Tracer.Assert(probeView != null);
 			this.ProbeView = probeView;
 
-			TextBlock textBlock = probeView as TextBlock;
-			if(textBlock != null) {
+			if(probeView is TextBlock textBlock) {
 				textBlock.Text = Sensor.UnknownValue;
 			} else {
 				TextBox textBox = (TextBox)probeView;
@@ -275,13 +274,11 @@ namespace LogicCircuit {
 				CircuitGlyph.AddJam(canvas, this.Jams(), null);
 			}
 			FrameworkElement shape = CircuitGlyph.Skin(canvas, skin);
-			FrameworkElement probeView = shape.FindName("ProbeView") as FrameworkElement;
-			if(probeView != null) {
+			if(shape.FindName("ProbeView") is FrameworkElement probeView) {
 				if(this == mainSymbol) {
 					this.ProbeView = probeView;
 				}
-				TextBlock textBlock = probeView as TextBlock;
-				if(textBlock != null) {
+				if(probeView is TextBlock textBlock) {
 					textBlock.Text = this.Circuit.Notation;
 				}
 			}
@@ -318,8 +315,7 @@ namespace LogicCircuit {
 			bool rn = CircuitGlyph.AddJam(canvas, this.Right, (j, t) => { Canvas.SetRight(t, Symbol.PinRadius); Canvas.SetTop(t, Symbol.ScreenPoint(j.Y) - 2 * Symbol.PinRadius); });
 			bool bn = CircuitGlyph.AddJam(canvas, this.Bottom, (j, t) => { Canvas.SetLeft(t, Symbol.ScreenPoint(j.X) - Symbol.PinRadius); Canvas.SetBottom(t, Symbol.PinRadius); });
 			FrameworkElement shape = CircuitGlyph.Skin(canvas, SymbolShape.Rectangular);
-			TextBlock text = shape.FindName("Notation") as TextBlock;
-			if(text != null) {
+			if(shape.FindName("Notation") is TextBlock text) {
 				text.Margin = new Thickness(ln ? 10 : 5, tn ? 10 : 5, rn ? 10 : 5, bn ? 10 : 5);
 				text.Text = this.Circuit.Notation;
 			}
@@ -334,12 +330,10 @@ namespace LogicCircuit {
 			FrameworkElement shape = CircuitGlyph.Skin(canvas, skin);
 			int top = Math.Max(0, gate.InputCount - 3) / 2;
 			int bottom = Math.Max(0, gate.InputCount - 3 - top);
-			Rectangle topLine = shape.FindName("topLine") as Rectangle;
-			if(topLine != null) {
+			if(shape.FindName("topLine") is Rectangle topLine) {
 				topLine.Height = Symbol.ScreenPoint(top);
 			}
-			Rectangle bottomLine = shape.FindName("bottomLine") as Rectangle;
-			if(bottomLine != null) {
+			if(shape.FindName("bottomLine") is Rectangle bottomLine) {
 				bottomLine.Height = Symbol.ScreenPoint(bottom);
 			}
 			return canvas;

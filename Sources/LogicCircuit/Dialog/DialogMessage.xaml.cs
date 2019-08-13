@@ -16,12 +16,13 @@ namespace LogicCircuit {
 		public static MessageBoxResult Show(
 			Window parent, string caption, string message, string details, MessageBoxImage image, MessageBoxButton button
 		) {
-			DialogMessage dialog = new DialogMessage();
-			dialog.Caption = caption ?? string.Empty;
-			dialog.Message = message ?? string.Empty;
-			dialog.Details = details ?? string.Empty;
-			dialog.image = image;
-			dialog.MessageBoxButton = button;
+			DialogMessage dialog = new DialogMessage {
+				Caption = caption ?? string.Empty,
+				Message = message ?? string.Empty,
+				Details = details ?? string.Empty,
+				image = image,
+				MessageBoxButton = button
+			};
 			dialog.DataContext = dialog;
 			dialog.InitializeComponent();
 			dialog.Owner = parent;
@@ -63,8 +64,9 @@ namespace LogicCircuit {
 						Match m = parts.Match(s);
 						string uri = m.Groups["uri"].Value;
 						string txt = m.Groups["text"].Value;
-						Hyperlink link = new Hyperlink(new Run(txt));
-						link.NavigateUri = new Uri(uri);
+						Hyperlink link = new Hyperlink(new Run(txt)) {
+							NavigateUri = new Uri(uri)
+						};
 						this.message.Inlines.Add(link);
 					} else {
 						this.message.Inlines.Add(new Run(s));

@@ -15,8 +15,8 @@ namespace LogicCircuit {
 
 		private int inputStarts = 0;
 
-		private SettingsStringCache historySettings = new SettingsStringCache(Settings.User, "ScriptConsole.History", null);
-		private List<string> history;
+		private readonly SettingsStringCache historySettings = new SettingsStringCache(Settings.User, "ScriptConsole.History", null);
+		private readonly List<string> history;
 		private int historyIndex;
 		private static int MaxHistoryCount => Settings.User.MaxRecentFileCount * 2;
 

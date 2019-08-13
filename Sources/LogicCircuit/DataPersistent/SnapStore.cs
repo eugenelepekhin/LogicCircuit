@@ -73,8 +73,7 @@ namespace LogicCircuit.DataPersistent {
 		/// <param name="name"></param>
 		/// <returns></returns>
 		public ISnapTable Table(string name) {
-			ISnapTable snapTable;
-			if(this.table.TryGetValue(name, out snapTable)) {
+			if(this.table.TryGetValue(name, out ISnapTable snapTable)) {
 				return snapTable;
 			} else {
 				return null;
@@ -208,10 +207,7 @@ namespace LogicCircuit.DataPersistent {
 				this.editor = null;
 				LockFreeSync.WriteBarrier();
 			}
-			EventHandler handler = this.Committed;
-			if(handler != null) {
-				handler(this, EventArgs.Empty);
-			}
+			this.Committed?.Invoke(this, EventArgs.Empty);
 			return v;
 		}
 

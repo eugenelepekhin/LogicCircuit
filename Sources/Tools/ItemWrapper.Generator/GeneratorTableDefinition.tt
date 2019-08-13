@@ -22,7 +22,7 @@ if(this.RealmType == RealmType.Universe) {#>
 		// Field accessors
 <#
 foreach(Column column in this.Table.Columns) {
-	string defaultValue = (column.Default != null) ? column.Default : "default(" + column.Type + ")";
+	string defaultValue = (column.Default != null) ? column.Default : "default";
 	string format;
 	switch(column.Type) {
 	case "string":
@@ -155,7 +155,7 @@ if(this.RealmType == RealmType.Universe) {#>
 		}
 
 <#}#>
-		private static IField<<#=this.Table.Name#>Data>[] fields = {
+		private static readonly IField<<#=this.Table.Name#>Data>[] fields = {
 <#foreach(Column column in this.Table.Columns) {#>
 			<#=column.Name#>Field.Field,
 <#}#>

@@ -27,7 +27,7 @@ namespace LogicCircuit {
 			private CircuitProbeIdField() {}
 			public string Name { get { return "CircuitProbeId"; } }
 			public int Order { get; set; }
-			public Guid DefaultValue { get { return default(Guid); } }
+			public Guid DefaultValue { get { return default; } }
 			public Guid GetValue(ref CircuitProbeData record) {
 				return record.CircuitProbeId;
 			}
@@ -151,7 +151,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private static IField<CircuitProbeData>[] fields = {
+		private static readonly IField<CircuitProbeData>[] fields = {
 			CircuitProbeIdField.Field,
 			NameField.Field,
 			NoteField.Field,

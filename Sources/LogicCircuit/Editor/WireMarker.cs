@@ -17,8 +17,9 @@ namespace LogicCircuit {
 			public WirePointMarker Point2 { get; private set; }
 
 			public WireMarker(Wire wire) : base(wire) {
-				this.markerGlyph = new Canvas();
-				this.markerGlyph.DataContext = this;
+				this.markerGlyph = new Canvas {
+					DataContext = this
+				};
 
 				this.line = Symbol.Skin<Line>(SymbolShape.MarkerLine);
 				this.Point1 = new WirePointMarker(this,

@@ -12,7 +12,7 @@ namespace LogicCircuit {
 
 		private SettingsWindowLocationCache windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
-		private LogicalCircuit logicalCircuit;
+		private readonly LogicalCircuit logicalCircuit;
 
 		public DialogCircuit(LogicalCircuit logicalCircuit) {
 			this.DataContext = this;
@@ -21,8 +21,9 @@ namespace LogicCircuit {
 			this.name.Text = this.logicalCircuit.Name;
 			this.notation.Text = this.logicalCircuit.Notation;
 
-			HashSet<string> set = new HashSet<string>(this.logicalCircuit.CircuitProject.LogicalCircuitSet.Select(c => c.Category));
-			set.Add(string.Empty);
+			HashSet<string> set = new HashSet<string>(this.logicalCircuit.CircuitProject.LogicalCircuitSet.Select(c => c.Category)) {
+				string.Empty
+			};
 			foreach(string s in set.OrderBy(s => s)) {
 				this.category.Items.Add(s);
 			}
@@ -40,8 +41,7 @@ namespace LogicCircuit {
 		private void DialogCircuitLoaded(object sender, RoutedEventArgs e) {
 			ControlTemplate template = this.category.Template;
 			if(template != null) {
-				TextBox textBox = template.FindName("PART_EditableTextBox", this.category) as TextBox;
-				if(textBox != null) {
+				if(template.FindName("PART_EditableTextBox", this.category) is TextBox textBox) {
 					SpellCheck spellCheck = textBox.SpellCheck;
 					if(spellCheck != null) {
 						spellCheck.IsEnabled = true;

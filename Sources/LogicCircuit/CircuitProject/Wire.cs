@@ -43,11 +43,12 @@ namespace LogicCircuit {
 		}
 
 		public Line CreateGlyph() {
-			Line line = new Line();
-			line.Stroke = Symbol.WireStroke;
-			line.StrokeThickness = 1;
-			line.ToolTip = Properties.Resources.ToolTipWire;
-			line.DataContext = this;
+			Line line = new Line {
+				Stroke = Symbol.WireStroke,
+				StrokeThickness = 1,
+				ToolTip = Properties.Resources.ToolTipWire,
+				DataContext = this
+			};
 			Panel.SetZIndex(line, this.Z);
 			return line;
 		}
@@ -110,10 +111,8 @@ namespace LogicCircuit {
 		}
 
 		partial void EndNotifyWireSetChanged() {
-			EventHandler handler = this.WireSetChanged;
-			if(handler != null) {
-				handler(this, EventArgs.Empty);
-			}
+			this.WireSetChanged?.Invoke(this, EventArgs.Empty);
+
 			if(this.invalidLogicalCircuit != null) {
 				foreach(LogicalCircuit circuit in this.invalidLogicalCircuit) {
 					circuit.UpdateConductorMap();

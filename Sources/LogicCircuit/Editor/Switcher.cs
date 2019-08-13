@@ -7,7 +7,7 @@ namespace LogicCircuit {
 	partial class Editor {
 		private class Switcher {
 			public Editor Editor { get; private set; }
-			private List<LogicalCircuit> history = new List<LogicalCircuit>();
+			private readonly List<LogicalCircuit> history = new List<LogicalCircuit>();
 			private int tab = 0;
 
 			public Switcher(Editor editor) {
@@ -64,16 +64,14 @@ namespace LogicCircuit {
 				this.tab = 0;
 				if(e.NewItems != null && 0 < e.NewItems.Count) {
 					foreach(object item in e.NewItems) {
-						LogicalCircuit logicalCircuit = item as LogicalCircuit;
-						if(logicalCircuit != null) {
+						if(item is LogicalCircuit logicalCircuit) {
 							this.history.Insert(0, logicalCircuit);
 						}
 					}
 				}
 				if(e.OldItems != null && 0 < e.OldItems.Count) {
 					foreach(object item in e.OldItems) {
-						LogicalCircuit logicalCircuit = item as LogicalCircuit;
-						if(logicalCircuit != null) {
+						if(item is LogicalCircuit logicalCircuit) {
 							this.history.Remove(logicalCircuit);
 						}
 					}

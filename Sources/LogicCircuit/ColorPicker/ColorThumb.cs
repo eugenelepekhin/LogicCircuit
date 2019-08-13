@@ -50,8 +50,7 @@ namespace LogicCircuit {
 		}
 
 		private Size ParentSize() {
-			FrameworkElement panel = this.Parent as FrameworkElement;
-			if(panel != null) {
+			if(this.Parent is FrameworkElement panel) {
 				return new Size(panel.ActualWidth, panel.ActualHeight);
 			}
 			return Size.Empty;

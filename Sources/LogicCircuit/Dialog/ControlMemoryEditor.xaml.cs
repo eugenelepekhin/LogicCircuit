@@ -97,10 +97,10 @@ namespace LogicCircuit {
 
 			public event PropertyChangedEventHandler PropertyChanged;
 
-			private IFunctionMemory memory;
-			private int rowIndex;
-			string rowIndexFormat;
-			string cellFormat;
+			private readonly IFunctionMemory memory;
+			private readonly int rowIndex;
+			private readonly string rowIndexFormat;
+			private readonly string cellFormat;
 
 			private string[] text;
 			private string[] error;
@@ -164,10 +164,7 @@ namespace LogicCircuit {
 			}
 
 			private void NotifyPropertyChanged(string propertyName) {
-				PropertyChangedEventHandler handler = this.PropertyChanged;
-				if (handler != null) {
-					handler(this, new PropertyChangedEventArgs(propertyName));
-				}
+				this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 			}
 
 			public string Error {

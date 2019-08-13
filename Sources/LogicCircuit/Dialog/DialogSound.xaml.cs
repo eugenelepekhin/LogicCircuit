@@ -11,7 +11,7 @@ namespace LogicCircuit {
 		private SettingsWindowLocationCache windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 
-		private Sound sound;
+		private readonly Sound sound;
 
 		public DialogSound(Sound sound) {
 			this.sound = sound;

@@ -81,7 +81,7 @@ namespace LogicCircuit {
 			this.InitializeComponent();
 
 			Dictionary<DataGridTextColumn, Func<TruthState, int>> dataAccessor = new Dictionary<DataGridTextColumn, Func<TruthState, int>>();
-			Action<Pin, string, int> addColumn = (Pin pin, string path, int i) => {
+			void addColumn(Pin pin, string path, int i) {
 				DataGridTextColumn column = new DataGridTextColumn();
 				column.Header = pin.Name.Replace("_", "__");
 				column.Binding = new Binding(path);
@@ -93,7 +93,7 @@ namespace LogicCircuit {
 				column.HeaderStyle = style;
 				this.dataGrid.Columns.Add(column);
 				dataAccessor.Add(column, DialogTruthTable.InputFieldAccesor(i));
-			};
+			}
 
 			int index = 0;
 			foreach(InputPinSocket socket in this.testSocket.Inputs) {
@@ -189,8 +189,7 @@ namespace LogicCircuit {
 					Predicate<TruthState> include = this.Filter(out success);
 					if(include != null) {
 						this.TruthTable.Filter = o => {
-							if(o is TruthState) {
-								TruthState state = (TruthState)o;
+							if(o is TruthState state) {
 								return (state.Output == null) || include(state);
 							}
 							return false;
@@ -235,7 +234,7 @@ namespace LogicCircuit {
 			}
 			
 			private readonly Dictionary<DataGridTextColumn, Func<TruthState, int>> dataAccessor;
-			private List<Sort> sort = new List<Sort>();
+			private readonly List<Sort> sort = new List<Sort>();
 
 			public bool IsEmpty { get { return this.sort.Count == 0; } }
 

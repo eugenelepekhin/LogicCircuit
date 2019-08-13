@@ -26,7 +26,7 @@ namespace LogicCircuit {
 			private LogicalCircuitIdField() {}
 			public string Name { get { return "LogicalCircuitId"; } }
 			public int Order { get; set; }
-			public Guid DefaultValue { get { return default(Guid); } }
+			public Guid DefaultValue { get { return default; } }
 			public Guid GetValue(ref LogicalCircuitData record) {
 				return record.LogicalCircuitId;
 			}
@@ -255,7 +255,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private static IField<LogicalCircuitData>[] fields = {
+		private static readonly IField<LogicalCircuitData>[] fields = {
 			LogicalCircuitIdField.Field,
 			NameField.Field,
 			NotationField.Field,

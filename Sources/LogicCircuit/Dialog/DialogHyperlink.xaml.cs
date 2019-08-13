@@ -39,7 +39,7 @@ namespace LogicCircuit {
 		private readonly RichTextBox textBox;
 		private string text;
 		private string url;
-		private Dictionary<string, string> errorInfo = new Dictionary<string, string>(3);
+		private readonly Dictionary<string, string> errorInfo = new Dictionary<string, string>(3);
 
 		public string HyperlinkText {
 			get { return this.text; }
@@ -63,8 +63,7 @@ namespace LogicCircuit {
 
 		public string this[string columnName] {
 			get {
-				string error;
-				if(this.errorInfo.TryGetValue(columnName, out error)) {
+				if(this.errorInfo.TryGetValue(columnName, out string error)) {
 					return error;
 				}
 				return null;
@@ -120,8 +119,7 @@ namespace LogicCircuit {
 		private static Hyperlink SelectedHyperlink(TextPointer textPointer) {
 			DependencyObject o = textPointer.Parent;
 			while(o != null && !(o is Hyperlink)) {
-				TextElement textElement = o as TextElement;
-				if(textElement != null) {
+				if(o is TextElement textElement) {
 					o = textElement.Parent;
 				} else {
 					o = null;
@@ -186,8 +184,7 @@ namespace LogicCircuit {
 
 		private static bool IsUrl(string url) {
 			try {
-				Uri uri;
-				if(Uri.TryCreate(url, UriKind.Absolute, out uri)) {
+				if(Uri.TryCreate(url, UriKind.Absolute, out Uri uri)) {
 					return StringComparer.OrdinalIgnoreCase.Equals(uri.Scheme, Uri.UriSchemeHttp);
 				}
 			} catch {}

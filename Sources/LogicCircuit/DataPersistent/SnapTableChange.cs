@@ -2,8 +2,8 @@
 
 namespace LogicCircuit.DataPersistent {
 	internal struct SnapTableChange<TRecord> where TRecord:struct  {
-		private ISnapTableChange<TRecord> changeData;
-		private int changeIndex;
+		private readonly ISnapTableChange<TRecord> changeData;
+		private readonly int changeIndex;
 
 		public SnapTableChange(ISnapTableChange<TRecord> changeData, int changeIndex) {
 			this.changeData = changeData;

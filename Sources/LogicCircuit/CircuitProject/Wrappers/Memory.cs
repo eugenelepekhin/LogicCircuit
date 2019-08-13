@@ -36,7 +36,7 @@ namespace LogicCircuit {
 			private MemoryIdField() {}
 			public string Name { get { return "MemoryId"; } }
 			public int Order { get; set; }
-			public Guid DefaultValue { get { return default(Guid); } }
+			public Guid DefaultValue { get { return default; } }
 			public Guid GetValue(ref MemoryData record) {
 				return record.MemoryId;
 			}
@@ -71,7 +71,7 @@ namespace LogicCircuit {
 			private WritableField() {}
 			public string Name { get { return "Writable"; } }
 			public int Order { get; set; }
-			public bool DefaultValue { get { return default(bool); } }
+			public bool DefaultValue { get { return default; } }
 			public bool GetValue(ref MemoryData record) {
 				return record.Writable;
 			}
@@ -176,7 +176,7 @@ namespace LogicCircuit {
 			private AddressBitWidthField() {}
 			public string Name { get { return "AddressBitWidth"; } }
 			public int Order { get; set; }
-			public int DefaultValue { get { return default(int); } }
+			public int DefaultValue { get { return default; } }
 			public int GetValue(ref MemoryData record) {
 				return record.AddressBitWidth;
 			}
@@ -211,7 +211,7 @@ namespace LogicCircuit {
 			private DataBitWidthField() {}
 			public string Name { get { return "DataBitWidth"; } }
 			public int Order { get; set; }
-			public int DefaultValue { get { return default(int); } }
+			public int DefaultValue { get { return default; } }
 			public int GetValue(ref MemoryData record) {
 				return record.DataBitWidth;
 			}
@@ -335,7 +335,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private static IField<MemoryData>[] fields = {
+		private static readonly IField<MemoryData>[] fields = {
 			MemoryIdField.Field,
 			WritableField.Field,
 			WriteOn1Field.Field,

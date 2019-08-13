@@ -11,7 +11,7 @@ namespace LogicCircuit {
 
 		private SettingsWindowLocationCache windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
-		private Constant constant;
+		private readonly Constant constant;
 
 		public DialogConstant(Constant constant) {
 			this.DataContext = this;

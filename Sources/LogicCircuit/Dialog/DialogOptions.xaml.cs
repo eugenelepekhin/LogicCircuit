@@ -11,7 +11,7 @@ namespace LogicCircuit {
 	/// </summary>
 	public partial class DialogOptions : Window {
 
-		private Mainframe mainframe;
+		private readonly Mainframe mainframe;
 
 		//The order of items in this array should match order in enum GateShape
 		private EnumDescriptor<GateShape>[] gateShapeList = new EnumDescriptor<GateShape>[] {

@@ -21,31 +21,23 @@ namespace LogicCircuit {
 
 		private SettingsWindowLocationCache windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
-		private SettingsStringCache openImageFolder = new SettingsStringCache(Settings.User, "DialogText.OpenImage.Folder", Mainframe.DefaultPictureFolder());
+		private readonly SettingsStringCache openImageFolder = new SettingsStringCache(Settings.User, "DialogText.OpenImage.Folder", Mainframe.DefaultPictureFolder());
 
-		private SettingsIntegerCache editToolBarBand = new SettingsIntegerCache(Settings.User, "DialogText.EditToolBarBand", 0, 10, 0);
-		public SettingsIntegerCache EditToolBarBand { get { return this.editToolBarBand; } }
+		public SettingsIntegerCache EditToolBarBand { get; } = new SettingsIntegerCache(Settings.User, "DialogText.EditToolBarBand", 0, 10, 0);
 
-		private SettingsIntegerCache editToolBarBandIndex = new SettingsIntegerCache(Settings.User, "DialogText.EditToolBarBandIndex", 0, 10, 0);
-		public SettingsIntegerCache EditToolBarBandIndex { get { return this.editToolBarBandIndex; } }
+		public SettingsIntegerCache EditToolBarBandIndex { get; } = new SettingsIntegerCache(Settings.User, "DialogText.EditToolBarBandIndex", 0, 10, 0);
 
-		private SettingsIntegerCache fontToolBarBand = new SettingsIntegerCache(Settings.User, "DialogText.FontToolBarBand", 0, 10, 1);
-		public SettingsIntegerCache FontToolBarBand { get { return this.fontToolBarBand; } }
+		public SettingsIntegerCache FontToolBarBand { get; } = new SettingsIntegerCache(Settings.User, "DialogText.FontToolBarBand", 0, 10, 1);
 
-		private SettingsIntegerCache fontToolBarBandIndex = new SettingsIntegerCache(Settings.User, "DialogText.FontToolBarBandIndex", 0, 10, 0);
-		public SettingsIntegerCache FontToolBarBandIndex { get { return this.fontToolBarBandIndex; } }
+		public SettingsIntegerCache FontToolBarBandIndex { get; } = new SettingsIntegerCache(Settings.User, "DialogText.FontToolBarBandIndex", 0, 10, 0);
 
-		private SettingsIntegerCache paraToolBarBand = new SettingsIntegerCache(Settings.User, "DialogText.ParaToolBarBand", 0, 10, 0);
-		public SettingsIntegerCache ParaToolBarBand { get { return this.paraToolBarBand; } }
+		public SettingsIntegerCache ParaToolBarBand { get; } = new SettingsIntegerCache(Settings.User, "DialogText.ParaToolBarBand", 0, 10, 0);
 
-		private SettingsIntegerCache paraToolBarBandIndex = new SettingsIntegerCache(Settings.User, "DialogText.ParaToolBarBandIndex", 0, 10, 1);
-		public SettingsIntegerCache ParaToolBarBandIndex { get { return this.paraToolBarBandIndex; } }
+		public SettingsIntegerCache ParaToolBarBandIndex { get; } = new SettingsIntegerCache(Settings.User, "DialogText.ParaToolBarBandIndex", 0, 10, 1);
 
-		private SettingsIntegerCache otherToolBarBand = new SettingsIntegerCache(Settings.User, "DialogText.OtherToolBarBand", 0, 10, 1);
-		public SettingsIntegerCache OtherToolBarBand { get { return this.otherToolBarBand; } }
+		public SettingsIntegerCache OtherToolBarBand { get; } = new SettingsIntegerCache(Settings.User, "DialogText.OtherToolBarBand", 0, 10, 1);
 
-		private SettingsIntegerCache otherToolBarBandIndex = new SettingsIntegerCache(Settings.User, "DialogText.OtherToolBarBandIndex", 0, 10, 1);
-		public SettingsIntegerCache OtherToolBarBandIndex { get { return this.otherToolBarBandIndex; } }
+		public SettingsIntegerCache OtherToolBarBandIndex { get; } = new SettingsIntegerCache(Settings.User, "DialogText.OtherToolBarBandIndex", 0, 10, 1);
 
 		public string Document { get; set; }
 
@@ -150,8 +142,9 @@ namespace LogicCircuit {
 			this.HyperlinkCommand = new LambdaUICommand(Properties.Resources.CommandHyperlink,
 				o => {
 					try {
-						DialogHyperlink dialog = new DialogHyperlink(this.editor);
-						dialog.Owner = this;
+						DialogHyperlink dialog = new DialogHyperlink(this.editor) {
+							Owner = this
+						};
 						dialog.ShowDialog();
 					} catch(Exception exception) {
 						App.Mainframe.ReportException(exception);
@@ -172,10 +165,7 @@ namespace LogicCircuit {
 		}
 
 		private void NotifyPropertyChanged(string propertyName) {
-			PropertyChangedEventHandler handler = this.PropertyChanged;
-			if(handler != null) {
-				handler(this, new PropertyChangedEventArgs(propertyName));
-			}
+			this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 
 		private bool IsSelected(object value, DependencyProperty property) {
@@ -187,9 +177,7 @@ namespace LogicCircuit {
 				Paragraph start = this.editor.Selection.Start.Paragraph;
 				Paragraph end = this.editor.Selection.End.Paragraph;
 				if(start != null && end != null) {
-					ListItem sli = start.Parent as ListItem;
-					ListItem eli = end.Parent as ListItem;
-					if(sli != null && eli != null && sli.List == eli.List && sli.List != null) {
+					if(start.Parent is ListItem sli && end.Parent is ListItem eli && sli.List == eli.List && sli.List != null) {
 						return sli.List.MarkerStyle == textMarkerStyle;
 					}
 				}
@@ -239,10 +227,8 @@ namespace LogicCircuit {
 		[SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
 		private void FontFamilySelectionChanged(object sender, SelectionChangedEventArgs e) {
 			try {
-				ComboBox combo = sender as ComboBox;
-				if(combo != null) {
-					FontFamily fontFamily = combo.SelectedItem as FontFamily;
-					if(fontFamily != null) {
+				if(sender is ComboBox combo) {
+					if(combo.SelectedItem is FontFamily fontFamily) {
 						this.editor.Selection.ApplyPropertyValue(TextElement.FontFamilyProperty, fontFamily);
 					}
 				}
@@ -253,16 +239,16 @@ namespace LogicCircuit {
 
 		private void InsertImage() {
 			try {
-				OpenFileDialog dialog = new OpenFileDialog();
-				dialog.InitialDirectory = Mainframe.IsDirectoryPathValid(this.openImageFolder.Value) ? this.openImageFolder.Value : Mainframe.DefaultPictureFolder();
-				dialog.Filter = Properties.Resources.ImageFileFilter;
-				dialog.FilterIndex = 0;
+				OpenFileDialog dialog = new OpenFileDialog {
+					InitialDirectory = Mainframe.IsDirectoryPathValid(this.openImageFolder.Value) ? this.openImageFolder.Value : Mainframe.DefaultPictureFolder(),
+					Filter = Properties.Resources.ImageFileFilter,
+					FilterIndex = 0
+				};
 				bool? result = dialog.ShowDialog(this);
 				if(result.HasValue && result.Value) {
 					string path = dialog.FileName;
 					this.openImageFolder.Value = Path.GetDirectoryName(path);
-					Uri uri;
-					if(Uri.TryCreate(path, UriKind.Absolute, out uri)) {
+					if(Uri.TryCreate(path, UriKind.Absolute, out Uri uri)) {
 						Image image = new Image();
 						image.BeginInit();
 						image.Source = new BitmapImage(uri);

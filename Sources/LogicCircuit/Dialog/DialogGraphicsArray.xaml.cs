@@ -14,7 +14,7 @@ namespace LogicCircuit {
 		private SettingsWindowLocationCache windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 
-		private GraphicsArray graphicsArray;
+		private readonly GraphicsArray graphicsArray;
 
 		public string GraphicsArrayWidth { get; set; }
 		public string GraphicsArrayHeight { get; set; }

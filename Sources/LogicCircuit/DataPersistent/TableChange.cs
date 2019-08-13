@@ -7,8 +7,8 @@ namespace LogicCircuit.DataPersistent {
 	/// </summary>
 	/// <typeparam name="TRecord"></typeparam>
 	public struct TableChange<TRecord> where TRecord:struct {
-		private ITableChange<TRecord> changeData;
-		private RowId rowId;
+		private readonly ITableChange<TRecord> changeData;
+		private readonly RowId rowId;
 
 		internal TableChange(ITableChange<TRecord> changeData, RowId rowId) {
 			this.changeData = changeData;
@@ -82,8 +82,7 @@ namespace LogicCircuit.DataPersistent {
 		}
 
 		public override bool Equals(object obj) {
-			if(obj is TableChange<TRecord>) {
-				TableChange<TRecord> other = (TableChange<TRecord>)obj;
+			if(obj is TableChange<TRecord> other) {
 				return this.changeData == other.changeData && this.rowId == other.rowId;
 			}
 			return false;

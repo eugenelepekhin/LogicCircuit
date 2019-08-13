@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace LogicCircuit {
 	public class CircuitSymbolComparer : IComparer<CircuitSymbol> {
 
-		private bool yPrecedence;
+		private readonly bool yPrecedence;
 
 		public CircuitSymbolComparer(bool yPrecedence) {
 			this.yPrecedence = yPrecedence;

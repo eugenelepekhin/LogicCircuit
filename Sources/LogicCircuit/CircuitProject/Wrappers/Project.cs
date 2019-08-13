@@ -38,7 +38,7 @@ namespace LogicCircuit {
 			private ProjectIdField() {}
 			public string Name { get { return "ProjectId"; } }
 			public int Order { get; set; }
-			public Guid DefaultValue { get { return default(Guid); } }
+			public Guid DefaultValue { get { return default; } }
 			public Guid GetValue(ref ProjectData record) {
 				return record.ProjectId;
 			}
@@ -248,7 +248,7 @@ namespace LogicCircuit {
 			private LogicalCircuitIdField() {}
 			public string Name { get { return "LogicalCircuitId"; } }
 			public int Order { get; set; }
-			public Guid DefaultValue { get { return default(Guid); } }
+			public Guid DefaultValue { get { return default; } }
 			public Guid GetValue(ref ProjectData record) {
 				return record.LogicalCircuitId;
 			}
@@ -407,7 +407,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private static IField<ProjectData>[] fields = {
+		private static readonly IField<ProjectData>[] fields = {
 			ProjectIdField.Field,
 			NameField.Field,
 			NoteField.Field,

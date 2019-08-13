@@ -20,7 +20,7 @@ namespace LogicCircuit {
 		private int autoSavedVersion;
 
 		public CircuitDescriptorList CircuitDescriptorList { get; private set; }
-		private Switcher switcher;
+		private readonly Switcher switcher;
 
 		public bool HasChanges { get { return this.savedVersion != this.CircuitProject.Version; } }
 		public string Caption { get { return Properties.Resources.MainFrameCaption(this.File); } }
@@ -107,16 +107,14 @@ namespace LogicCircuit {
 		public LambdaUICommand CommandSelectAllProbes => new LambdaUICommand(Properties.Resources.CommandEditSelectAllProbes, o => this.InEditMode, o => this.SelectAllProbes(false));
 		public LambdaUICommand CommandSelectAllProbesWithWire => new LambdaUICommand(Properties.Resources.CommandEditSelectAllProbesWithWire, o => this.InEditMode, o => this.SelectAllProbes(true));
 		public LambdaUICommand CommandRotateLeft => new LambdaUICommand(Properties.Resources.CommandEditRotateLeft, o => this.InEditMode && this.SelectionCount == 1, o => {
-			IRotatable symbol = this.SelectedSymbols.FirstOrDefault() as IRotatable;
-			if(symbol != null) {
+			if(this.SelectedSymbols.FirstOrDefault() is IRotatable symbol) {
 				this.RotateLeft(symbol, (Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.None);
 			}
 		}, new KeyGesture(Key.L, ModifierKeys.Control)) {
 			IconPath = "Icon/EditRotateLeft.xaml"
 		};
 		public LambdaUICommand CommandRotateRight => new LambdaUICommand(Properties.Resources.CommandEditRotateRight, o => this.InEditMode && this.SelectionCount == 1, o => {
-			IRotatable symbol = this.SelectedSymbols.FirstOrDefault() as IRotatable;
-			if(symbol != null) {
+			if(this.SelectedSymbols.FirstOrDefault() is IRotatable symbol) {
 				this.RotateRight(symbol, (Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.None);
 			}
 		}, new KeyGesture(Key.R, ModifierKeys.Control)) {
@@ -541,8 +539,7 @@ namespace LogicCircuit {
 		}
 
 		private void EnsureVisible(IEnumerable<Symbol> symbols) {
-			ScrollViewer scrollViewer = this.Diagram.Parent as ScrollViewer;
-			if(scrollViewer != null) {
+			if(this.Diagram.Parent is ScrollViewer scrollViewer) {
 				double zoom = this.Zoom;
 				Rect rect = symbols.Select(s => s.Bounds()).Aggregate((r1, r2) => Rect.Union(r1, r2));
 				rect = new Rect(rect.X * zoom, rect.Y * zoom, rect.Width * zoom, rect.Height * zoom);
@@ -650,56 +647,45 @@ namespace LogicCircuit {
 
 		[SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
 		protected override void Edit(Symbol symbol) {
-			CircuitSymbol circuitSymbol = symbol as CircuitSymbol;
-			if(circuitSymbol != null) {
+			if(symbol is CircuitSymbol circuitSymbol) {
 				if(this.InEditMode) {
-					LogicalCircuit lc = circuitSymbol.Circuit as LogicalCircuit;
-					if(lc != null) {
+					if(circuitSymbol.Circuit is LogicalCircuit lc) {
 						this.OpenLogicalCircuit(lc);
 						return;
 					}
-					CircuitProbe cp = circuitSymbol.Circuit as CircuitProbe;
-					if(cp != null) {
+					if(circuitSymbol.Circuit is CircuitProbe cp) {
 						this.Edit(cp);
 						return;
 					}
-					CircuitButton cb = circuitSymbol.Circuit as CircuitButton;
-					if(cb != null) {
+					if(circuitSymbol.Circuit is CircuitButton cb) {
 						this.Edit(cb);
 						return;
 					}
-					Constant ct = circuitSymbol.Circuit as Constant;
-					if(ct != null) {
+					if(circuitSymbol.Circuit is Constant ct) {
 						this.Edit(ct);
 						return;
 					}
-					Sensor sr = circuitSymbol.Circuit as Sensor;
-					if(sr != null) {
+					if(circuitSymbol.Circuit is Sensor sr) {
 						this.Edit(sr);
 						return;
 					}
-					Memory m = circuitSymbol.Circuit as Memory;
-					if(m != null) {
+					if(circuitSymbol.Circuit is Memory m) {
 						this.Edit(m);
 						return;
 					}
-					Pin pin = circuitSymbol.Circuit as Pin;
-					if(pin != null) {
+					if(circuitSymbol.Circuit is Pin pin) {
 						this.Edit(pin);
 						return;
 					}
-					LedMatrix ledMatrix = circuitSymbol.Circuit as LedMatrix;
-					if(ledMatrix != null) {
+					if(circuitSymbol.Circuit is LedMatrix ledMatrix) {
 						this.Edit(ledMatrix);
 						return;
 					}
-					Sound sound = circuitSymbol.Circuit as Sound;
-					if(sound != null) {
+					if(circuitSymbol.Circuit is Sound sound) {
 						this.Edit(sound);
 						return;
 					}
-					GraphicsArray graphicsArray = circuitSymbol.Circuit as GraphicsArray;
-					if(graphicsArray != null) {
+					if(circuitSymbol.Circuit is GraphicsArray graphicsArray) {
 						this.Edit(graphicsArray);
 						return;
 					}
@@ -735,8 +721,7 @@ namespace LogicCircuit {
 					}
 				}
 			} else if(this.InEditMode) {
-				TextNote textNote = symbol as TextNote;
-				if(textNote != null) {
+				if(symbol is TextNote textNote) {
 					this.Edit(textNote);
 				}
 			}
@@ -792,8 +777,7 @@ namespace LogicCircuit {
 				}
 				foreach(CircuitSymbol symbol in logicalCircuit.CircuitSymbols()) {
 					foreach(Jam jam in symbol.Jams()) {
-						int count;
-						if(pointCount.TryGetValue(jam.AbsolutePoint, out count) && count < 2) {
+						if(pointCount.TryGetValue(jam.AbsolutePoint, out int count) && count < 2) {
 							pointCount[jam.AbsolutePoint] = count + 1;
 						}
 					}
@@ -920,11 +904,9 @@ namespace LogicCircuit {
 
 		public void DescriptorMouseDown(FrameworkElement sender, MouseButtonEventArgs e) {
 			if(e.ChangedButton == MouseButton.Left && this.InEditMode) {
-				IDescriptor descriptor = sender.DataContext as IDescriptor;
-				if(descriptor != null) {
+				if(sender.DataContext is IDescriptor descriptor) {
 					if(1 < e.ClickCount) {
-						LogicalCircuitDescriptor logicalCircuitDescriptor = descriptor as LogicalCircuitDescriptor;
-						if(logicalCircuitDescriptor != null && !logicalCircuitDescriptor.IsCurrent) {
+						if(descriptor is LogicalCircuitDescriptor logicalCircuitDescriptor && !logicalCircuitDescriptor.IsCurrent) {
 							this.OpenLogicalCircuit(logicalCircuitDescriptor.Circuit);
 						}
 					} else {

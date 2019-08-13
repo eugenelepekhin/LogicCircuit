@@ -28,7 +28,7 @@ namespace LogicCircuit {
 			private TextNoteIdField() {}
 			public string Name { get { return "TextNoteId"; } }
 			public int Order { get; set; }
-			public Guid DefaultValue { get { return default(Guid); } }
+			public Guid DefaultValue { get { return default; } }
 			public Guid GetValue(ref TextNoteData record) {
 				return record.TextNoteId;
 			}
@@ -63,7 +63,7 @@ namespace LogicCircuit {
 			private LogicalCircuitIdField() {}
 			public string Name { get { return "LogicalCircuitId"; } }
 			public int Order { get; set; }
-			public Guid DefaultValue { get { return default(Guid); } }
+			public Guid DefaultValue { get { return default; } }
 			public Guid GetValue(ref TextNoteData record) {
 				return record.LogicalCircuitId;
 			}
@@ -98,7 +98,7 @@ namespace LogicCircuit {
 			private XField() {}
 			public string Name { get { return "X"; } }
 			public int Order { get; set; }
-			public int DefaultValue { get { return default(int); } }
+			public int DefaultValue { get { return default; } }
 			public int GetValue(ref TextNoteData record) {
 				return record.X;
 			}
@@ -133,7 +133,7 @@ namespace LogicCircuit {
 			private YField() {}
 			public string Name { get { return "Y"; } }
 			public int Order { get; set; }
-			public int DefaultValue { get { return default(int); } }
+			public int DefaultValue { get { return default; } }
 			public int GetValue(ref TextNoteData record) {
 				return record.Y;
 			}
@@ -327,7 +327,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private static IField<TextNoteData>[] fields = {
+		private static readonly IField<TextNoteData>[] fields = {
 			TextNoteIdField.Field,
 			LogicalCircuitIdField.Field,
 			XField.Field,

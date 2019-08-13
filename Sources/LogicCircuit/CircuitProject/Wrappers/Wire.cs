@@ -26,7 +26,7 @@ namespace LogicCircuit {
 			private WireIdField() {}
 			public string Name { get { return "WireId"; } }
 			public int Order { get; set; }
-			public Guid DefaultValue { get { return default(Guid); } }
+			public Guid DefaultValue { get { return default; } }
 			public Guid GetValue(ref WireData record) {
 				return record.WireId;
 			}
@@ -61,7 +61,7 @@ namespace LogicCircuit {
 			private LogicalCircuitIdField() {}
 			public string Name { get { return "LogicalCircuitId"; } }
 			public int Order { get; set; }
-			public Guid DefaultValue { get { return default(Guid); } }
+			public Guid DefaultValue { get { return default; } }
 			public Guid GetValue(ref WireData record) {
 				return record.LogicalCircuitId;
 			}
@@ -96,7 +96,7 @@ namespace LogicCircuit {
 			private X1Field() {}
 			public string Name { get { return "X1"; } }
 			public int Order { get; set; }
-			public int DefaultValue { get { return default(int); } }
+			public int DefaultValue { get { return default; } }
 			public int GetValue(ref WireData record) {
 				return record.X1;
 			}
@@ -131,7 +131,7 @@ namespace LogicCircuit {
 			private Y1Field() {}
 			public string Name { get { return "Y1"; } }
 			public int Order { get; set; }
-			public int DefaultValue { get { return default(int); } }
+			public int DefaultValue { get { return default; } }
 			public int GetValue(ref WireData record) {
 				return record.Y1;
 			}
@@ -166,7 +166,7 @@ namespace LogicCircuit {
 			private X2Field() {}
 			public string Name { get { return "X2"; } }
 			public int Order { get; set; }
-			public int DefaultValue { get { return default(int); } }
+			public int DefaultValue { get { return default; } }
 			public int GetValue(ref WireData record) {
 				return record.X2;
 			}
@@ -201,7 +201,7 @@ namespace LogicCircuit {
 			private Y2Field() {}
 			public string Name { get { return "Y2"; } }
 			public int Order { get; set; }
-			public int DefaultValue { get { return default(int); } }
+			public int DefaultValue { get { return default; } }
 			public int GetValue(ref WireData record) {
 				return record.Y2;
 			}
@@ -255,7 +255,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private static IField<WireData>[] fields = {
+		private static readonly IField<WireData>[] fields = {
 			WireIdField.Field,
 			LogicalCircuitIdField.Field,
 			X1Field.Field,

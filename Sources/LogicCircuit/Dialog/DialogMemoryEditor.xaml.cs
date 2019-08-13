@@ -84,7 +84,7 @@ namespace LogicCircuit {
 				}
 				string text = this.note.Text.Trim();
 
-				Func<byte[], byte[], bool> equal = (a, b) => {
+				bool equal(byte[] a, byte[] b) {
 					if(a.Length == b.Length) {
 						for(int i = 0; i < a.Length; i++) {
 							if(a[i] != b[i]) {
@@ -94,7 +94,7 @@ namespace LogicCircuit {
 						return true;
 					}
 					return false;
-				};
+				}
 
 				if(this.Memory.AddressBitWidth != addressBitWidth || this.Memory.DataBitWidth != dataBitWidth || this.Memory.Note != text ||
 					this.Memory.WriteOn1 != writeOn1 || this.Memory.OnStart != memoryOnStart || (saveData && !equal(this.Memory.MemoryValue(), this.data))
@@ -121,8 +121,9 @@ namespace LogicCircuit {
 		[SuppressMessage("Microsoft.Maintainability", "CA1500:VariableNamesShouldNotMatchFieldNames", MessageId = "dataBitWidth")]
 		private void ButtonLoadClick(object sender, RoutedEventArgs e) {
 			try {
-				OpenFileDialog dialog = new OpenFileDialog();
-				dialog.InitialDirectory = Mainframe.IsDirectoryPathValid(this.openFileFolder.Value) ? this.openFileFolder.Value : Mainframe.DefaultProjectFolder();
+				OpenFileDialog dialog = new OpenFileDialog {
+					InitialDirectory = Mainframe.IsDirectoryPathValid(this.openFileFolder.Value) ? this.openFileFolder.Value : Mainframe.DefaultProjectFolder()
+				};
 				bool? result = dialog.ShowDialog(this);
 				if(result.HasValue && result.Value) {
 					this.openFileFolder.Value = Path.GetDirectoryName(dialog.FileName);
@@ -151,8 +152,9 @@ namespace LogicCircuit {
 
 		private void ButtonSaveClick(object sender, RoutedEventArgs e) {
 			try {
-				SaveFileDialog dialog = new SaveFileDialog();
-				dialog.InitialDirectory = Mainframe.IsDirectoryPathValid(this.openFileFolder.Value) ? this.openFileFolder.Value : Mainframe.DefaultProjectFolder();
+				SaveFileDialog dialog = new SaveFileDialog {
+					InitialDirectory = Mainframe.IsDirectoryPathValid(this.openFileFolder.Value) ? this.openFileFolder.Value : Mainframe.DefaultProjectFolder()
+				};
 				bool? result = dialog.ShowDialog(this);
 				if(result.HasValue && result.Value) {
 					string file = dialog.FileName;
@@ -190,7 +192,7 @@ namespace LogicCircuit {
 			public int AddressBitWidth { get; private set; }
 			public int DataBitWidth { get; private set; }
 
-			private byte[] data;
+			private readonly byte[] data;
 
 			public int this[int index] {
 				get { return Memory.CellValue(this.data, this.DataBitWidth, index); }

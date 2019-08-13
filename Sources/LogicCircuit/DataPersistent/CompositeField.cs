@@ -16,8 +16,8 @@ namespace LogicCircuit.DataPersistent {
 		}
 
 		private class CompositeField<T1, T2> : IField<TRecord, Composite<T1, T2>>, ICompositeField {
-			private IField<TRecord, T1> f1;
-			private IField<TRecord, T2> f2;
+			private readonly IField<TRecord, T1> f1;
+			private readonly IField<TRecord, T2> f2;
 
 			public CompositeField(IField<TRecord, T1> f1, IField<TRecord, T2> f2) {
 				this.f1 = f1;

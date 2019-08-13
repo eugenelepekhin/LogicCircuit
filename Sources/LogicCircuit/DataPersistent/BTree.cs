@@ -78,18 +78,27 @@ namespace LogicCircuit.DataPersistent {
 			#if DEBUG
 				public override string ToString() {
 					Node node = this;
-					Func<int, Key> k = i => {
+					Key k(int i) {
 						switch(i) {
-						case 0: return node.K0; case 1: return node.K1; case 2: return node.K2; case 3: return node.K3; case 4: return node.K4;
+						case 0: return node.K0;
+						case 1: return node.K1;
+						case 2: return node.K2;
+						case 3: return node.K3;
+						case 4: return node.K4;
 						default: throw new InvalidOperationException();
 						}
-					};
-					Func<int, RowId> c = i => {
+					}
+					RowId c(int i) {
 						switch(i) {
-						case 0: return node.C0; case 1: return node.C1; case 2: return node.C2; case 3: return node.C3; case 4: return node.C4; case 5: return node.C5;
+						case 0: return node.C0;
+						case 1: return node.C1;
+						case 2: return node.C2;
+						case 3: return node.C3;
+						case 4: return node.C4;
+						case 5: return node.C5;
 						default: throw new InvalidOperationException();
 						}
-					};
+					}
 					System.Text.StringBuilder text = new System.Text.StringBuilder();
 					text.AppendFormat("{0}<", node.IsLeaf ? "Leaf" : "Node");
 					for(int i = 0; i < node.Count; i++) {
@@ -124,7 +133,7 @@ namespace LogicCircuit.DataPersistent {
 			private class K0Field : IKeyField {
 				private readonly IComparer<TField> comparer;
 				public K0Field(IComparer<TField> comparer) { this.comparer = comparer; }
-				public Key DefaultValue { get { return default(Key); } }
+				public Key DefaultValue { get { return default; } }
 				public Key GetValue(ref Node record) { return record.K0; }
 				public void SetValue(ref Node record, Key value) { record.K0 = value; }
 				public string Name { get { return "k0"; } }
@@ -150,7 +159,7 @@ namespace LogicCircuit.DataPersistent {
 			private class K1Field : IKeyField {
 				private readonly IComparer<TField> comparer;
 				public K1Field(IComparer<TField> comparer) { this.comparer = comparer; }
-				public Key DefaultValue { get { return default(Key); } }
+				public Key DefaultValue { get { return default; } }
 				public Key GetValue(ref Node record) { return record.K1; }
 				public void SetValue(ref Node record, Key value) { record.K1 = value; }
 				public string Name { get { return "k1"; } }
@@ -176,7 +185,7 @@ namespace LogicCircuit.DataPersistent {
 			private class K2Field : IKeyField {
 				private readonly IComparer<TField> comparer;
 				public K2Field(IComparer<TField> comparer) { this.comparer = comparer; }
-				public Key DefaultValue { get { return default(Key); } }
+				public Key DefaultValue { get { return default; } }
 				public Key GetValue(ref Node record) { return record.K2; }
 				public void SetValue(ref Node record, Key value) { record.K2 = value; }
 				public string Name { get { return "k2"; } }
@@ -202,7 +211,7 @@ namespace LogicCircuit.DataPersistent {
 			private class K3Field : IKeyField {
 				private readonly IComparer<TField> comparer;
 				public K3Field(IComparer<TField> comparer) { this.comparer = comparer; }
-				public Key DefaultValue { get { return default(Key); } }
+				public Key DefaultValue { get { return default; } }
 				public Key GetValue(ref Node record) { return record.K3; }
 				public void SetValue(ref Node record, Key value) { record.K3 = value; }
 				public string Name { get { return "k3"; } }
@@ -228,7 +237,7 @@ namespace LogicCircuit.DataPersistent {
 			private class K4Field : IKeyField {
 				private readonly IComparer<TField> comparer;
 				public K4Field(IComparer<TField> comparer) { this.comparer = comparer; }
-				public Key DefaultValue { get { return default(Key); } }
+				public Key DefaultValue { get { return default; } }
 				public Key GetValue(ref Node record) { return record.K4; }
 				public void SetValue(ref Node record, Key value) { record.K4 = value; }
 				public string Name { get { return "k4"; } }
@@ -308,7 +317,6 @@ namespace LogicCircuit.DataPersistent {
 		}
 
 		private readonly IField<Node, int> countField;
-		private readonly IField<Node, bool> isLeafField;
 		private readonly IKeyField[] keyFields;
 		private readonly IField<Node, RowId>[] childFields;
 		private readonly IField<Node>[] fields;
@@ -317,7 +325,7 @@ namespace LogicCircuit.DataPersistent {
 		private readonly IntArray data;
 
 		public BTree(SnapStore store, string name, IComparer<TField> comparer) {
-			this.fields = Node.CreateFields(comparer, out this.countField, out this.isLeafField, out this.keyFields, out this.childFields);
+			this.fields = Node.CreateFields(comparer, out this.countField, out _, out this.keyFields, out this.childFields);
 			this.MinDegree = this.keyFields.Length / 2;
 			Debug.Assert(1 < this.MinDegree && this.MinDegree * 2 + 1 == this.keyFields.Length && this.keyFields.Length + 1 == this.childFields.Length,
 				"Wrong field definition"
@@ -391,7 +399,7 @@ namespace LogicCircuit.DataPersistent {
 			Debug.Assert(oldChild.Count == newChild.Count && newChild.Count == this.MinDegree);
 			node.Count++;
 			this.keyFields[child].SetValue(ref node, this.keyFields[this.MinDegree].GetValue(ref oldChild));
-			this.keyFields[this.MinDegree].SetValue(ref oldChild, default(Key));
+			this.keyFields[this.MinDegree].SetValue(ref oldChild, default);
 			this.childFields[child + 1].SetValue(ref node, this.table.Insert(ref newChild));
 			this.table.SetData(childId, ref oldChild);
 			this.table.SetData(rowId, ref node);
@@ -502,7 +510,7 @@ namespace LogicCircuit.DataPersistent {
 			Debug.Assert(0 <= count && count <= this.keyFields.Length - to.Count);
 			for(int i = 0; i < count; i++) {
 				this.keyFields[to.Count + i].SetValue(ref to, this.keyFields[start + i].GetValue(ref from));
-				this.keyFields[start + i].SetValue(ref from, default(Key));
+				this.keyFields[start + i].SetValue(ref from, default);
 			}
 			for(int i = 0; i <= count; i++) {
 				this.childFields[to.Count + i].SetValue(ref to, this.childFields[start + i].GetValue(ref from));
@@ -625,9 +633,7 @@ namespace LogicCircuit.DataPersistent {
 						// make the appropriate key of node the middle key of the new node, child.
 						// Note: This may cause the root to collapse, thus making child the new root.
 						if(siblingIndex < i) {
-							int j = i;
 							i = siblingIndex;
-							siblingIndex = j;
 							RowId id = childId;
 							childId = siblingId;
 							siblingId = id;

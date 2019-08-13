@@ -16,7 +16,7 @@ namespace LogicCircuit {
 		private SettingsWindowLocationCache windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 
-		private Sensor sensor;
+		private readonly Sensor sensor;
 
 		[SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
 		public IEnumerable<EnumDescriptor<SensorType>> SensorTypes { get; private set; }
@@ -72,7 +72,7 @@ namespace LogicCircuit {
 					}
 					break;
 				case "ManualInitialValue":
-					if(!int.TryParse(this.ManualInitialValue.Trim(), NumberStyles.HexNumber, CultureInfo.InvariantCulture, out old)) {
+					if(!int.TryParse(this.ManualInitialValue.Trim(), NumberStyles.HexNumber, CultureInfo.InvariantCulture, out _)) {
 						error = Properties.Resources.ErrorBadHexNumber;
 					}
 					break;
@@ -113,8 +113,7 @@ namespace LogicCircuit {
 			int min = Sensor.DefaultRandomMinInterval;
 			int max = Sensor.DefaultRandomMaxInterval;
 			if(type == SensorType.Random) {
-				SensorPoint point;
-				if(Sensor.TryParsePoint(this.sensor.Data, 32, out point)) {
+				if(Sensor.TryParsePoint(this.sensor.Data, 32, out SensorPoint point)) {
 					min = point.Tick;
 					max = point.Value;
 				}
@@ -164,9 +163,8 @@ namespace LogicCircuit {
 				if(type == SensorType.Series && this.IsLoop) {
 					type = SensorType.Loop;
 				} else if(type == SensorType.Random) {
-					int min, max;
-					if(	int.TryParse(minText, NumberStyles.Integer, Properties.Resources.Culture, out min) &&
-						int.TryParse(maxText, NumberStyles.Integer, Properties.Resources.Culture, out max) &&
+					if(int.TryParse(minText, NumberStyles.Integer, Properties.Resources.Culture, out int min) &&
+						int.TryParse(maxText, NumberStyles.Integer, Properties.Resources.Culture, out int max) &&
 						0 < min && min <= max
 					) {
 						data = Sensor.SaveSeries(new List<SensorPoint>() { new SensorPoint(min, max) });

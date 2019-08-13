@@ -49,9 +49,9 @@ namespace LogicCircuit.DataPersistent {
 		}
 
 		private struct Hash {
-			private int seed;
-			private int factor;
-			private int size;
+			private readonly int seed;
+			private readonly int factor;
+			private readonly int size;
 
 			public Hash(TField value, int size) {
 				Debug.Assert(1 < size && size < int.MaxValue - 1);
@@ -77,7 +77,7 @@ namespace LogicCircuit.DataPersistent {
 			}
 			public string Name { get { return "Value"; } }
 			public int Order { get; set; }
-			public TField DefaultValue { get { return default(TField); } }
+			public TField DefaultValue { get { return default; } }
 			public TField GetValue(ref Bucket record) {
 				return record.Value;
 			}

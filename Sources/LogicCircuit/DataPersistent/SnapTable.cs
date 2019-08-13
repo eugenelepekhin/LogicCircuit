@@ -514,7 +514,7 @@ namespace LogicCircuit.DataPersistent {
 				if(rowAddress.Page[rowAddress.Index].LogIndex < logSize) {
 					// if it is still latest return.
 					if(isDeleted) {
-						data = default(TRecord);
+						data = default;
 						throw new ArgumentOutOfRangeException(nameof(rowId));
 					}
 					return;
@@ -527,7 +527,7 @@ namespace LogicCircuit.DataPersistent {
 				logAddress = this.log.ItemAddress(logAddress.Page[logAddress.Index].LogIndex);
 			}
 			if(logAddress.Page[logAddress.Index].IsDeleted) {
-				data = default(TRecord);
+				data = default;
 				throw new ArgumentOutOfRangeException(nameof(rowId));
 			}
 			data = logAddress.Page[logAddress.Index].Data;

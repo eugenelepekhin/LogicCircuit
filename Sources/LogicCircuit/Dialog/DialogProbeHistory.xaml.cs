@@ -14,7 +14,7 @@ namespace LogicCircuit {
 		private SettingsWindowLocationCache windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 
-		private FunctionProbe functionProbe;
+		private readonly FunctionProbe functionProbe;
 		private long[] reads;
 		public int BitWidth { get; private set; }
 		public IEnumerable<string> History { get; private set; }
@@ -50,10 +50,7 @@ namespace LogicCircuit {
 		}
 
 		private void NotifyPropertyChanged(string propertyName) {
-			PropertyChangedEventHandler handler = this.PropertyChanged;
-			if(handler != null) {
-				handler(this, new PropertyChangedEventArgs(propertyName));
-			}
+			this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 
 		private void ButtonMarkClick(object sender, RoutedEventArgs e) {

@@ -54,8 +54,7 @@ namespace LogicCircuit {
 		}
 
 		public void UpdateGlyph(LogicalCircuit logicalCircuit) {
-			LogicalCircuitDescriptor descriptor;
-			if(this.logicalCircuitDescriptors.TryGetValue(logicalCircuit, out descriptor)) {
+			if(this.logicalCircuitDescriptors.TryGetValue(logicalCircuit, out LogicalCircuitDescriptor descriptor)) {
 				descriptor.ResetGlyph();
 			}
 		}
@@ -79,10 +78,7 @@ namespace LogicCircuit {
 		}
 
 		private void NotifyPropertyChanged() {
-			PropertyChangedEventHandler handler = this.PropertyChanged;
-			if(handler != null) {
-				handler(this, new PropertyChangedEventArgs(nameof(this.CircuitDescriptors)));
-			}
+			this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(this.CircuitDescriptors)));
 		}
 
 		private static void InitPrimitive() {

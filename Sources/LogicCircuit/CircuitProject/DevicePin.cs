@@ -16,16 +16,13 @@ namespace LogicCircuit {
 			get {
 				if(this.bitWidth < 1) {
 					Circuit circuit = this.Circuit;
-					Pin pin = circuit as Pin;
-					if(pin != null) {
+					if(circuit is Pin pin) {
 						return pin.BitWidth;
 					}
-					Constant constant = circuit as Constant;
-					if(constant != null) {
+					if(circuit is Constant constant) {
 						return constant.BitWidth;
 					}
-					Memory memory = circuit as Memory;
-					if(memory != null) {
+					if(circuit is Memory memory) {
 						if(this == memory.AddressPin) {
 							return memory.AddressBitWidth;
 						} else if(this == memory.DataInPin || this == memory.DataOutPin) {
@@ -36,12 +33,10 @@ namespace LogicCircuit {
 							Tracer.Fail("Unknown pin");
 						}
 					}
-					Sensor sensor = circuit as Sensor;
-					if(sensor != null) {
+					if(circuit is Sensor sensor) {
 						return sensor.BitWidth;
 					}
-					GraphicsArray graphicsArray = circuit as GraphicsArray;
-					if(graphicsArray != null) {
+					if(circuit is GraphicsArray graphicsArray) {
 						if(this == graphicsArray.AddressPin) {
 							return graphicsArray.AddressBitWidth;
 						} else if(this == graphicsArray.DataInPin || this == graphicsArray.DataOutPin) {
@@ -64,8 +59,7 @@ namespace LogicCircuit {
 
 		public override bool Inverted {
 			get {
-				Pin pin = this.Circuit as Pin;
-				if(pin != null) {
+				if(this.Circuit is Pin pin) {
 					return pin.Inverted;
 				}
 				return this.PinInverted;
@@ -97,8 +91,7 @@ namespace LogicCircuit {
 		}
 
 		public DevicePin Create(Circuit circuit, PinType pinType, int bitWidth) {
-			Pin circuitPin = circuit as Pin;
-			PinSide pinSide = BasePin.DefaultSide((circuitPin != null) ? (circuitPin.PinType == PinType.Input ? PinType.Output : PinType.Input) : pinType);
+			PinSide pinSide = BasePin.DefaultSide((circuit is Pin circuitPin) ? (circuitPin.PinType == PinType.Input ? PinType.Output : PinType.Input) : pinType);
 			DevicePin pin = this.CreateItem(Guid.NewGuid(), circuit, bitWidth, pinType, pinSide, false,
 				this.UniqueName(BasePin.DefaultName(pinType), circuit),
 				DevicePinData.NoteField.Field.DefaultValue, DevicePinData.JamNotationField.Field.DefaultValue

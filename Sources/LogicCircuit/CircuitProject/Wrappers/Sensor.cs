@@ -31,7 +31,7 @@ namespace LogicCircuit {
 			private SensorIdField() {}
 			public string Name { get { return "SensorId"; } }
 			public int Order { get; set; }
-			public Guid DefaultValue { get { return default(Guid); } }
+			public Guid DefaultValue { get { return default; } }
 			public Guid GetValue(ref SensorData record) {
 				return record.SensorId;
 			}
@@ -295,7 +295,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private static IField<SensorData>[] fields = {
+		private static readonly IField<SensorData>[] fields = {
 			SensorIdField.Field,
 			SensorTypeField.Field,
 			BitWidthField.Field,

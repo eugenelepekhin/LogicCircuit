@@ -15,7 +15,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private LogicalCircuit Root;
+		private readonly LogicalCircuit Root;
 		private Project Project { get { return this.Root.CircuitProject.ProjectSet.Project; } }
 		private List<string> Functions;
 		private Dictionary<string, int> Usage;

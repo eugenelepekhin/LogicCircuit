@@ -19,8 +19,8 @@ namespace LogicCircuit {
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 
 		public CircuitRunner CircuitRunner { get; private set; }
-		private Oscilloscope oscilloscope;
-		private List<Oscillogram> oscillograms = new List<Oscillogram>();
+		private readonly Oscilloscope oscilloscope;
+		private readonly List<Oscillogram> oscillograms = new List<Oscillogram>();
 		private Timer timer;
 		public double GraphWidth { get; private set; }
 		public double GraphHeight { get; private set; }
@@ -70,11 +70,9 @@ namespace LogicCircuit {
 		private void OscillogramListSelectionChanged(object sender, SelectionChangedEventArgs e) {
 			//Just unselect all selected as blue selection interferes with oscillogram and makes it look ugly
 			try {
-				ListView listView = sender as ListView;
-				if(listView != null) {
+				if(sender is ListView listView) {
 					foreach(object item in e.AddedItems) {
-						ListViewItem container = listView.ItemContainerGenerator.ContainerFromItem(item) as ListViewItem;
-						if(container != null) {
+						if(listView.ItemContainerGenerator.ContainerFromItem(item) is ListViewItem container) {
 							container.IsSelected = false;
 						}
 					}
@@ -90,7 +88,7 @@ namespace LogicCircuit {
 			public const double DX = 8;
 			public const double DY = 20;
 
-			private State[] state;
+			private readonly State[] state;
 			public string Name { get; private set; }
 			public Polyline Line { get; private set; }
 

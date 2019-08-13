@@ -150,17 +150,15 @@ namespace LogicCircuit {
 			Sensor sensor = this.Create(rowId, this.CircuitProject.CircuitTable.Insert(ref data));
 			this.CreateDevicePin(sensor);
 
-			IList<SensorPoint> list;
-			SensorPoint point;
 			switch(sensor.SensorType) {
 			case SensorType.Series:
 			case SensorType.Loop:
-				if(!Sensor.TryParseSeries(sensor.Data, sensor.BitWidth, out list)) {
+				if(!Sensor.TryParseSeries(sensor.Data, sensor.BitWidth, out _)) {
 					sensor.Data = Sensor.DefaultSeriesData;
 				}
 				break;
 			case SensorType.Random:
-				if(!Sensor.TryParsePoint(sensor.Data, 32, out point)) {
+				if(!Sensor.TryParsePoint(sensor.Data, 32, out _)) {
 					sensor.Data = Sensor.DefaultRandomData;
 				}
 				break;

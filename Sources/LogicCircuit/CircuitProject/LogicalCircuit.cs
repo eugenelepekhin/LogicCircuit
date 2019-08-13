@@ -70,8 +70,7 @@ namespace LogicCircuit {
 		private bool HasDisplayLoop(HashSet<LogicalCircuit> parents) {
 			if(parents.Add(this)) {
 				foreach(CircuitSymbol symbol in this.CircuitSymbols()) {
-					LogicalCircuit lc = symbol.Circuit as LogicalCircuit;
-					if(lc != null && lc.IsDisplay && lc.HasDisplayLoop(parents)) {
+					if(symbol.Circuit is LogicalCircuit lc && lc.IsDisplay && lc.HasDisplayLoop(parents)) {
 						return true;
 					}
 				}
@@ -221,10 +220,7 @@ namespace LogicCircuit {
 
 		partial void EndNotifyLogicalCircuitSetChanged() {
 			//TODO: this is only used for update list of descriptors. Consider removing it.
-			EventHandler handler = this.LogicalCircuitSetChanged;
-			if(handler != null) {
-				handler(this, EventArgs.Empty);
-			}
+			this.LogicalCircuitSetChanged?.Invoke(this, EventArgs.Empty);
 		}
 
 		public void UpdateConductorMaps() {

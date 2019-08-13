@@ -128,8 +128,7 @@ namespace LogicCircuit {
 
 		public override bool Similar(Circuit other) {
 			if(this != other) {
-				Gate g = other as Gate;
-				return g != null && this.GateType == g.GateType;
+				return other is Gate g && this.GateType == g.GateType;
 			}
 			return true;
 		}

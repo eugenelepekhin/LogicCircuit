@@ -14,7 +14,7 @@ namespace LogicCircuit {
 		private SettingsWindowLocationCache windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 
-		private SettingsStringCache searchFilter;
+		private readonly SettingsStringCache searchFilter = new SettingsStringCache(Settings.Session, "DialogFind.filter", string.Empty);
 		public string SearchFilter {
 			get { return this.searchFilter.Value; }
 			set { this.searchFilter.Value = value; }
@@ -24,7 +24,6 @@ namespace LogicCircuit {
 		private Dictionary<LogicalCircuit, List<Symbol>> searchMap = new Dictionary<LogicalCircuit, List<Symbol>>();
 		
 		public DialogFind(Editor editor) {
-			this.searchFilter = new SettingsStringCache(Settings.Session, "DialogFind.filter", string.Empty);
 			this.editor = editor;
 			this.DataContext = this;
 			this.InitializeComponent();
@@ -84,13 +83,10 @@ namespace LogicCircuit {
 
 		private void resultListMouseDoubleClick(object sender, MouseButtonEventArgs e) {
 			try {
-				ListBox listBox = sender as ListBox;
-				if(listBox != null) {
-					LogicalCircuit selected = listBox.SelectedItem as LogicalCircuit;
-					if(selected != null) {
+				if(sender is ListBox listBox) {
+					if(listBox.SelectedItem is LogicalCircuit selected) {
 						this.editor.OpenLogicalCircuit(selected);
-						List<Symbol> list;
-						if(this.searchMap.TryGetValue(selected, out list) && list != null && 0 < list.Count) {
+						if(this.searchMap.TryGetValue(selected, out List<Symbol> list) && list != null && 0 < list.Count) {
 							this.editor.Select(list);
 						}
 					}

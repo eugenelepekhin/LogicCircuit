@@ -8,8 +8,7 @@ namespace LogicCircuit {
 
 		public int Compare(BasePin x, BasePin y) {
 			Tracer.Assert(x.GetType() == y.GetType());
-			DevicePin dp1 = x as DevicePin;
-			if(dp1 != null) {
+			if(x is DevicePin dp1) {
 				DevicePin dp2 = (DevicePin)y;
 				return dp1.Order - dp2.Order;
 			} else {

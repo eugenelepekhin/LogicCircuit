@@ -29,7 +29,7 @@ namespace LogicCircuit {
 			private ConstantIdField() {}
 			public string Name { get { return "ConstantId"; } }
 			public int Order { get; set; }
-			public Guid DefaultValue { get { return default(Guid); } }
+			public Guid DefaultValue { get { return default; } }
 			public Guid GetValue(ref ConstantData record) {
 				return record.ConstantId;
 			}
@@ -223,7 +223,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private static IField<ConstantData>[] fields = {
+		private static readonly IField<ConstantData>[] fields = {
 			ConstantIdField.Field,
 			BitWidthField.Field,
 			ValueField.Field,

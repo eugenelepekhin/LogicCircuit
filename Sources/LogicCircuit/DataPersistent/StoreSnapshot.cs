@@ -61,8 +61,8 @@ namespace LogicCircuit.DataPersistent {
 		/// </summary>
 		public bool CommitPrepared { get; internal set; }
 
-		private Dictionary<ISnapTable, ITableSnapshot> table = new Dictionary<ISnapTable, ITableSnapshot>();
-		private List<IPrimaryKeyHolder> primaryKeyHolder = new List<IPrimaryKeyHolder>();
+		private readonly Dictionary<ISnapTable, ITableSnapshot> table = new Dictionary<ISnapTable, ITableSnapshot>();
+		private readonly List<IPrimaryKeyHolder> primaryKeyHolder = new List<IPrimaryKeyHolder>();
 
 		private StoreSnapshot(SnapStore storeData) {
 			this.SnapStore = storeData;
@@ -244,10 +244,7 @@ namespace LogicCircuit.DataPersistent {
 			int version = this.Version;
 			this.SnapStore.Rollback();
 			//TODO: compensate for exception get thrown during Rollback?
-			EventHandler<RolledBackEventArgs> handler = this.RolledBack;
-			if(handler != null) {
-				handler(this, new RolledBackEventArgs(version));
-			}
+			this.RolledBack?.Invoke(this, new RolledBackEventArgs(version));
 			this.NotifyVersion(version - 1, version);
 		}
 
@@ -301,10 +298,7 @@ namespace LogicCircuit.DataPersistent {
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		private void StoreDataCommitted(object sender, EventArgs e) {
-			EventHandler handler = this.LatestVersionChanged;
-			if(handler != null) {
-				handler(this, e);
-			}
+			this.LatestVersionChanged?.Invoke(this, e);
 		}
 
 		/// <summary>
@@ -313,10 +307,7 @@ namespace LogicCircuit.DataPersistent {
 		/// <param name="oldVersion"></param>
 		/// <param name="newVersion"></param>
 		private void NotifyVersion(int oldVersion, int newVersion) {
-			EventHandler<VersionChangeEventArgs> handler = this.VersionChanged;
-			if(handler != null) {
-				handler(this, new VersionChangeEventArgs(oldVersion, newVersion));
-			}
+			this.VersionChanged?.Invoke(this, new VersionChangeEventArgs(oldVersion, newVersion));
 		}
 
 		/// <summary>
@@ -339,9 +330,9 @@ namespace LogicCircuit.DataPersistent {
 
 		[SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed")]
 		private class ChangeEnumerator : IEnumerator<string> {
-			private IEnumerator<ITableSnapshot> enumerator;
-			private int oldVersion;
-			private int newVersion;
+			private readonly IEnumerator<ITableSnapshot> enumerator;
+			private readonly int oldVersion;
+			private readonly int newVersion;
 
 			public ChangeEnumerator(StoreSnapshot store, int oldVersion, int newVersion) {
 				Debug.Assert(0 < oldVersion && oldVersion <= newVersion && newVersion <= store.SnapStore.CompletedVersion);
@@ -364,6 +355,7 @@ namespace LogicCircuit.DataPersistent {
 			object System.Collections.IEnumerator.Current { get { return this.Current; } }
 
 			public void Dispose() {
+				this.enumerator.Dispose();
 			}
 
 			public void Reset() {

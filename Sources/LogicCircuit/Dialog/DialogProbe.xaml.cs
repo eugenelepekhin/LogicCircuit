@@ -9,7 +9,7 @@ namespace LogicCircuit {
 		private SettingsWindowLocationCache windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 
-		private CircuitProbe probe;
+		private readonly CircuitProbe probe;
 
 		public DialogProbe(CircuitProbe probe) {
 			this.probe = probe;

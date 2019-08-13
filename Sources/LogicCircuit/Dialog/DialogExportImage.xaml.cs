@@ -19,10 +19,10 @@ namespace LogicCircuit {
 		[SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
 		public class ImageEncoder {
 			public string Name { get; private set; }
-			private Func<BitmapEncoder> bitmapEncoder;
+			private readonly Func<BitmapEncoder> bitmapEncoder;
 			public BitmapEncoder BitmapEncoder { get { return this.bitmapEncoder(); } }
 
-			private string[] extensions;
+			private readonly string[] extensions;
 
 			public ImageEncoder(string name, Func<BitmapEncoder> bitmapEncoder, params string[] extensions) {
 				this.Name = name;
@@ -53,10 +53,10 @@ namespace LogicCircuit {
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		private SettingsStringCache imageExportType = new SettingsStringCache(Settings.User, "ImageExport.Type", "Png");
-		private SettingsStringCache imageExportFolder = new SettingsStringCache(Settings.User, "ImageExport.Folder", Mainframe.DefaultPictureFolder());
+		private readonly SettingsStringCache imageExportType = new SettingsStringCache(Settings.User, "ImageExport.Type", "Png");
+		private readonly SettingsStringCache imageExportFolder = new SettingsStringCache(Settings.User, "ImageExport.Folder", Mainframe.DefaultPictureFolder());
 
-		private Editor editor;
+		private readonly Editor editor;
 
 		public IList<ImageEncoder> Encoders { get; private set; }
 		public ImageEncoder Encoder { get; set; }
@@ -64,12 +64,13 @@ namespace LogicCircuit {
 
 		public DialogExportImage(Editor editor) {
 			this.editor = editor;
-			List<ImageEncoder> list = new List<ImageEncoder>();
-			list.Add(new ImageEncoder("Bmp", () => new BmpBitmapEncoder(), "dib"));
-			list.Add(new ImageEncoder("Gif", () => new GifBitmapEncoder()));
-			list.Add(new ImageEncoder("Jpeg", () => new JpegBitmapEncoder(), "jpg", "jpe"));
-			list.Add(new ImageEncoder("Png", () => new PngBitmapEncoder()));
-			list.Add(new ImageEncoder("Tiff", () => new TiffBitmapEncoder(), "tif"));
+			List<ImageEncoder> list = new List<ImageEncoder> {
+				new ImageEncoder("Bmp", () => new BmpBitmapEncoder(), "dib"),
+				new ImageEncoder("Gif", () => new GifBitmapEncoder()),
+				new ImageEncoder("Jpeg", () => new JpegBitmapEncoder(), "jpg", "jpe"),
+				new ImageEncoder("Png", () => new PngBitmapEncoder()),
+				new ImageEncoder("Tiff", () => new TiffBitmapEncoder(), "tif")
+			};
 			this.Encoders = list;
 			this.SetEncoder(this.imageExportType.Value);
 			this.FilePath = this.DefaultFileName();
@@ -78,10 +79,7 @@ namespace LogicCircuit {
 		}
 
 		private void NotifyPropertyChanged(string property) {
-			PropertyChangedEventHandler handler = this.PropertyChanged;
-			if(handler != null) {
-				handler(this, new PropertyChangedEventArgs(property));
-			}
+			this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
 		}
 
 		private string DefaultFileName() {
@@ -147,11 +145,12 @@ namespace LogicCircuit {
 				if(!Mainframe.IsFilePathValid(file)) {
 					file = this.DefaultFileName();
 				}
-				SaveFileDialog dialog = new SaveFileDialog();
-				dialog.InitialDirectory = Path.GetDirectoryName(file);
-				dialog.FileName = Path.GetFileName(file);
-				dialog.Filter = Properties.Resources.ImageFileFilter;
-				dialog.DefaultExt = this.Encoder.Name;
+				SaveFileDialog dialog = new SaveFileDialog {
+					InitialDirectory = Path.GetDirectoryName(file),
+					FileName = Path.GetFileName(file),
+					Filter = Properties.Resources.ImageFileFilter,
+					DefaultExt = this.Encoder.Name
+				};
 				bool? result = dialog.ShowDialog(this);
 				if(result.HasValue && result.Value) {
 					this.SetFilePath(dialog.FileName);
