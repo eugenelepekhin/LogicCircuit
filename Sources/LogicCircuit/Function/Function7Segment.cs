@@ -52,8 +52,7 @@ namespace LogicCircuit {
 
 		private static void SetVisual(Shape shape, State state) {
 			Brush brush = Function7Segment.stateBrush[(int)state];
-			Line line = shape as Line;
-			if(line != null) {
+			if(shape is Line line) {
 				line.Stroke = brush;
 			} else {
 				shape.Fill = brush;

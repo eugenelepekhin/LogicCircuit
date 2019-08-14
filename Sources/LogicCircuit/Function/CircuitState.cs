@@ -12,18 +12,18 @@ namespace LogicCircuit {
 
 		public event EventHandler FunctionUpdated;
 
-		private DirtyList dirty;
+		private readonly DirtyList dirty;
 		private State[] state = null;
 		public int Count { get; private set; }
 
 		private List<CircuitFunction>[] dependent = null;
-		private List<CircuitFunction> functions = new List<CircuitFunction>();
+		private readonly List<CircuitFunction> functions = new List<CircuitFunction>();
 		public IEnumerable<CircuitFunction> Functions { get { return this.functions; } }
 
-		private HashSet<CircuitFunction> updated = new HashSet<CircuitFunction>();
-		private List<CircuitFunction> clockList = new List<CircuitFunction>();
-		private List<FunctionProbe> probeList = new List<FunctionProbe>();
-		private List<FunctionTriStateGroup> triStateGroupList = new List<FunctionTriStateGroup>();
+		private readonly HashSet<CircuitFunction> updated = new HashSet<CircuitFunction>();
+		private readonly List<CircuitFunction> clockList = new List<CircuitFunction>();
+		private readonly List<FunctionProbe> probeList = new List<FunctionProbe>();
+		private readonly List<FunctionTriStateGroup> triStateGroupList = new List<FunctionTriStateGroup>();
 
 		public Random Random { get; private set; }
 
@@ -65,13 +65,11 @@ namespace LogicCircuit {
 			if(count <= 0) {
 				this.dirty.Add(function);
 			} else {
-				FunctionProbe probe = function as FunctionProbe;
-				if(probe != null) {
+				if(function is FunctionProbe probe) {
 					this.probeList.Add(probe);
 				}
 			}
-			FunctionTriStateGroup group = function as FunctionTriStateGroup;
-			if(group != null) {
+			if(function is FunctionTriStateGroup group) {
 				this.triStateGroupList.Add(group);
 			}
 		}

@@ -6,8 +6,8 @@ namespace LogicCircuit {
 	public class FunctionProbe : Probe, IFunctionVisual {
 
 		public CircuitSymbol CircuitSymbol { get; private set; }
-		private History<State>[] tickHistory;
-		private History<long> valueHistory;
+		private readonly History<State>[] tickHistory;
+		private readonly History<long> valueHistory;
 		public string Label { get; set; }
 
 		public FunctionProbe(CircuitSymbol symbol, CircuitState circuitState, int[] parameter, int capacity) : base(circuitState, parameter) {
@@ -114,7 +114,7 @@ namespace LogicCircuit {
 
 		private class History<T> {
 			private volatile bool adding;
-			private T[] list;
+			private readonly T[] list;
 			private volatile int head;
 			private bool full;
 
@@ -138,7 +138,7 @@ namespace LogicCircuit {
 			}
 
 			public int GetState(T[] state) {
-				int size = 0;
+				int size;
 				do {
 					while(this.adding);
 					int h = this.head;

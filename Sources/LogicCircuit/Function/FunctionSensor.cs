@@ -59,8 +59,7 @@ namespace LogicCircuit {
 		}
 
 		public void TurnOn() {
-			TextBox textBox = this.CircuitSymbol.ProbeView as TextBox;
-			if(textBox != null) {
+			if(this.CircuitSymbol.ProbeView is TextBox textBox) {
 				textBox.IsEnabled = true;
 				textBox.Text = this.Value.ToString("X", CultureInfo.InvariantCulture);
 				this.HookupEvents(textBox);
@@ -70,13 +69,11 @@ namespace LogicCircuit {
 		}
 
 		public void TurnOff() {
-			TextBlock textBlock = this.CircuitSymbol.ProbeView as TextBlock;
-			if(textBlock != null) {
+			if(this.CircuitSymbol.ProbeView is TextBlock textBlock) {
 				textBlock.Text = Sensor.UnknownValue;
 				return;
 			}
-			TextBox textBox = this.CircuitSymbol.ProbeView as TextBox;
-			if(textBox != null) {
+			if(this.CircuitSymbol.ProbeView is TextBox textBox) {
 				textBox.IsEnabled = false;
 				textBox.Text = Sensor.UnknownValue;
 				textBox.Background = this.defaultBackground;
@@ -85,8 +82,7 @@ namespace LogicCircuit {
 		}
 
 		public void Redraw() {
-			TextBlock textBlock = this.CircuitSymbol.ProbeView as TextBlock;
-			if(textBlock != null) {
+			if(this.CircuitSymbol.ProbeView is TextBlock textBlock) {
 				textBlock.Text = this.Value.ToString("X", CultureInfo.InvariantCulture);
 			}
 		}
@@ -102,22 +98,19 @@ namespace LogicCircuit {
 		}
 
 		private void textBox_PreviewKeyUp(object sender, KeyEventArgs e) {
-			TextBox textBox = sender as TextBox;
-			if(textBox != null && e.Key == Key.Enter) {
+			if(sender is TextBox textBox && e.Key == Key.Enter) {
 				this.SetManualValue(textBox);
 			}
 		}
 
 		private void textBox_PreviewLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e) {
-			TextBox textBox = sender as TextBox;
-			if(textBox != null) {
+			if(sender is TextBox textBox) {
 				this.SetManualValue(textBox);
 			}
 		}
 
 		private void SetManualValue(TextBox textBox) {
-			int value;
-			if(int.TryParse((textBox.Text ?? string.Empty).Trim(), NumberStyles.HexNumber, CultureInfo.InvariantCulture, out value)) {
+			if(int.TryParse((textBox.Text ?? string.Empty).Trim(), NumberStyles.HexNumber, CultureInfo.InvariantCulture, out int value)) {
 				this.sensorValue.Value = value;
 				textBox.Background = this.defaultBackground;
 			} else {
@@ -153,8 +146,7 @@ namespace LogicCircuit {
 			public RandomValue(string data, int bitWidth, Random random) : base(bitWidth) {
 				int minTick;
 				int maxTick;
-				SensorPoint point;
-				if(Sensor.TryParsePoint(data, 32, out point)) {
+				if(Sensor.TryParsePoint(data, 32, out SensorPoint point)) {
 					minTick = point.Tick;
 					maxTick = point.Value;
 				} else {

@@ -3,13 +3,13 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace LogicCircuit {
 	public abstract class FunctionMemory : CircuitFunction, IFunctionMemory {
-		private int[] address;
-		private int[] inputData;
-		private int[] outputData;
-		private int write;
-		private State writeOn;
+		private readonly int[] address;
+		private readonly int[] inputData;
+		private readonly int[] outputData;
+		private readonly int write;
+		private readonly State writeOn;
 		private State oldWriteState = State.Off;
-		private byte[] data;
+		private readonly byte[] data;
 		public Memory Memory { get; private set; }
 
 		protected FunctionMemory(
