@@ -6,8 +6,8 @@ namespace LogicCircuit {
 
 		private const int CicleCount = 32;
 
-		private Action action;
-		private Timer timer;
+		private readonly Action action;
+		private readonly Timer timer;
 
 		private TimerState state;
 
@@ -23,11 +23,12 @@ namespace LogicCircuit {
 			set {
 				Tracer.Assert(3 < value && value <= 10000);
 				if(this.state == null || this.state.period != value * TimeSpan.TicksPerMillisecond) {
-					TimerState s = new TimerState();
-					s.period = value * TimeSpan.TicksPerMillisecond;
-					s.cicle = 0;
-					s.interval = int.MaxValue / 2;
-					s.start = DateTime.UtcNow.Ticks;
+					TimerState s = new TimerState {
+						period = value * TimeSpan.TicksPerMillisecond,
+						cicle = 0,
+						interval = int.MaxValue / 2,
+						start = DateTime.UtcNow.Ticks
+					};
 					this.state = s;
 				}
 			}

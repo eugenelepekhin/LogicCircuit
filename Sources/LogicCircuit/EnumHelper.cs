@@ -2,7 +2,7 @@
 using System.Linq;
 
 namespace LogicCircuit {
-	internal class EnumHelper {
+	internal static class EnumHelper {
 		public static T Parse<T>(string text, T defaultValue) where T:struct {
 			T value;
 			if(string.IsNullOrWhiteSpace(text) || !Enum.TryParse<T>(text, true, out value) || !IsValid(value)) {

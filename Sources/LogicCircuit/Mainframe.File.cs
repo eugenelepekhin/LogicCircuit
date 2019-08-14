@@ -203,11 +203,12 @@ namespace LogicCircuit {
 				}
 				file = Path.Combine(dir, this.Editor.Project.Name + Mainframe.FileExtention);
 			}
-			SaveFileDialog dialog = new SaveFileDialog();
-			dialog.InitialDirectory = Path.GetDirectoryName(Path.GetFullPath(file));
-			dialog.FileName = Path.GetFileName(file);
-			dialog.Filter = Mainframe.FileFilter;
-			dialog.DefaultExt = Mainframe.FileExtention;
+			SaveFileDialog dialog = new SaveFileDialog {
+				InitialDirectory = Path.GetDirectoryName(Path.GetFullPath(file)),
+				FileName = Path.GetFileName(file),
+				Filter = Mainframe.FileFilter,
+				DefaultExt = Mainframe.FileExtention
+			};
 			bool? result = dialog.ShowDialog(this);
 			if(result.HasValue && result.Value) {
 				this.Save(dialog.FileName);
@@ -231,10 +232,11 @@ namespace LogicCircuit {
 					dir = Path.GetDirectoryName(recent);
 				}
 				SettingsStringCache location = new SettingsStringCache(Settings.User, "ImportFile.Folder", dir);
-				OpenFileDialog dialog = new OpenFileDialog();
-				dialog.Filter = Mainframe.FileFilter;
-				dialog.DefaultExt = Mainframe.FileExtention;
-				dialog.InitialDirectory = Mainframe.IsDirectoryPathValid(location.Value) ? location.Value : Mainframe.DefaultProjectFolder();
+				OpenFileDialog dialog = new OpenFileDialog {
+					Filter = Mainframe.FileFilter,
+					DefaultExt = Mainframe.FileExtention,
+					InitialDirectory = Mainframe.IsDirectoryPathValid(location.Value) ? location.Value : Mainframe.DefaultProjectFolder()
+				};
 				bool? result = dialog.ShowDialog(this);
 				if(result.HasValue && result.Value) {
 					string file = dialog.FileName;

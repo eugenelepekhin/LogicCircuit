@@ -7,8 +7,7 @@ namespace LogicCircuit {
 	public class CommandMenuItem : MenuItem {
 		private static void RemoveInputBinding(Window window, KeyGesture keyGesture) {
 			foreach(InputBinding old in window.InputBindings) {
-				KeyGesture gesture = old.Gesture as KeyGesture;
-				if(gesture != null && gesture.Key == keyGesture.Key && gesture.Modifiers == keyGesture.Modifiers) {
+				if(old.Gesture is KeyGesture gesture && gesture.Key == keyGesture.Key && gesture.Modifiers == keyGesture.Modifiers) {
 					window.InputBindings.Remove(old);
 					break;
 				}
@@ -21,8 +20,7 @@ namespace LogicCircuit {
 				if(e.Property == MenuItem.CommandProperty) {
 					Window window = Window.GetWindow(this);
 					if(window != null) {
-						LambdaUICommand command = this.Command as LambdaUICommand;
-						if(command != null && command.KeyGesture != null) {
+						if(this.Command is LambdaUICommand command && command.KeyGesture != null) {
 							CommandMenuItem.RemoveInputBinding(window, command.KeyGesture);
 							window.InputBindings.Add(new InputBinding(command, command.KeyGesture));
 						} else {
@@ -33,8 +31,7 @@ namespace LogicCircuit {
 						}
 					}
 				} else if(e.Property == MenuItem.IsVisibleProperty && this.IsVisible) {
-					LambdaUICommand command = this.Command as LambdaUICommand;
-					if(command != null) {
+					if(this.Command is LambdaUICommand command) {
 						command.NotifyCanExecuteChanged();
 					}
 				}

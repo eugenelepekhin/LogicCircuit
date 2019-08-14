@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LogicCircuit {
 	public abstract class T4Transformation {
-		private T4ToStringHelper toStringHelper = new T4ToStringHelper();
+		private readonly T4ToStringHelper toStringHelper = new T4ToStringHelper();
 		public T4ToStringHelper ToStringHelper { get { return this.toStringHelper; } }
 
 		private StringBuilder generationEnvironmentField;

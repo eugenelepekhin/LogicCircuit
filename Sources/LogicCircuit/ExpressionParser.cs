@@ -69,9 +69,9 @@ namespace LogicCircuit {
 
 		private readonly ParameterExpression stateParameter = Expression.Parameter(typeof(TruthState), "state");
 
-		private CircuitTestSocket socket;
+		private readonly CircuitTestSocket socket;
 		private StringReader reader;
-		private StringBuilder buffer = new StringBuilder();
+		private readonly StringBuilder buffer = new StringBuilder();
 		private Token current;
 
 		private string error;

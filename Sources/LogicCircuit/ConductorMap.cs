@@ -4,8 +4,8 @@ using System.Collections.Generic;
 namespace LogicCircuit {
 	public class ConductorMap {
 
-		private Dictionary<GridPoint, Conductor> map = new Dictionary<GridPoint, Conductor>();
-		private HashSet<Conductor> list = new HashSet<Conductor>();
+		private readonly Dictionary<GridPoint, Conductor> map = new Dictionary<GridPoint, Conductor>();
+		private readonly HashSet<Conductor> list = new HashSet<Conductor>();
 
 		public ConductorMap(LogicalCircuit logicalCircuit) {
 			foreach(Wire wire in logicalCircuit.Wires()) {
@@ -14,8 +14,7 @@ namespace LogicCircuit {
 				Tracer.Assert(p1 != p2);
 				Conductor conductor;
 				if(this.TryGetValue(p1, out conductor)) {
-					Conductor other;
-					if(!this.TryGetValue(p2, out other)) {
+					if(!this.TryGetValue(p2, out Conductor other)) {
 						this.map.Add(p2, conductor);
 					} else if(conductor != other) {
 						conductor = this.Join(conductor, other);

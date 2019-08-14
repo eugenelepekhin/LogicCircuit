@@ -113,8 +113,7 @@ namespace LogicCircuit {
 
 		private void TextBoxGotKeyboardFocus(object sender, RoutedEventArgs e) {
 			try {
-				TextBox textBox = sender as TextBox;
-				if(textBox != null && !textBox.AcceptsReturn) {
+				if(sender is TextBox textBox && !textBox.AcceptsReturn) {
 					textBox.SelectAll();
 				}
 			} catch(Exception exception) {
@@ -124,8 +123,7 @@ namespace LogicCircuit {
 
 		private void TextBoxPreviewMouseDown(object sender, RoutedEventArgs e) {
 			try {
-				TextBox textBox = sender as TextBox;
-				if(textBox != null && !textBox.AcceptsReturn && !textBox.IsFocused) {
+				if(sender is TextBox textBox && !textBox.AcceptsReturn && !textBox.IsFocused) {
 					textBox.Focus();
 					textBox.SelectAll();
 					e.Handled = true;

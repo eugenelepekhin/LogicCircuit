@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace LogicCircuit {
 	public class CircuitTestSocket {
-		private TableChank chank;
-		private TableChank[] chankList;
+		private readonly TableChank chank;
+		private readonly TableChank[] chankList;
 		public IEnumerable<InputPinSocket> Inputs { get { return this.chank.Inputs; } }
 		public IEnumerable<OutputPinSocket> Outputs { get { return this.chank.Outputs; } }
 
@@ -310,8 +310,7 @@ namespace LogicCircuit {
 				if(this.output != null) {
 					return this.output[index].ToString("X", CultureInfo.InvariantCulture);
 				}
-				int unpacked;
-				if(FunctionProbe.ToInt(this.result[index], bitWidth[index], out unpacked)) {
+				if(FunctionProbe.ToInt(this.result[index], bitWidth[index], out int unpacked)) {
 					return unpacked.ToString("X", CultureInfo.InvariantCulture);
 				}
 				long res = this.result[index];

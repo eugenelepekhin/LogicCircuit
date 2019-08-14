@@ -6,7 +6,7 @@ using System.Windows.Controls;
 
 namespace LogicCircuit {
 	public class DisplayCanvas : Canvas {
-		private Dictionary<CircuitSymbol, FrameworkElement> symbolMap = new Dictionary<CircuitSymbol, FrameworkElement>();
+		private readonly Dictionary<CircuitSymbol, FrameworkElement> symbolMap = new Dictionary<CircuitSymbol, FrameworkElement>();
 
 		[SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
 		public void AddDisplay(CircuitSymbol symbol, FrameworkElement glyph) {

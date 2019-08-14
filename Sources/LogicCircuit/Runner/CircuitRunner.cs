@@ -45,7 +45,7 @@ namespace LogicCircuit {
 		private volatile bool refreshing = false;
 		private volatile bool updatingUI = false;
 
-		private SettingsBoolCache oscilloscoping;
+		private readonly SettingsBoolCache oscilloscoping;
 		public bool Oscilloscoping {
 			get { return this.oscilloscoping.Value; }
 			set { this.oscilloscoping.Value = value; }
@@ -62,10 +62,11 @@ namespace LogicCircuit {
 
 		public void Start() {
 			Tracer.Assert(this.evaluationThread == null);
-			this.evaluationThread = new Thread(new ThreadStart(this.Run));
-			this.evaluationThread.IsBackground = true;
-			this.evaluationThread.Name = "EvaluationThread";
-			this.evaluationThread.Priority = ThreadPriority.Normal;
+			this.evaluationThread = new Thread(new ThreadStart(this.Run)) {
+				IsBackground = true,
+				Name = "EvaluationThread",
+				Priority = ThreadPriority.Normal
+			};
 
 			this.evaluationThread.Start();
 		}
@@ -82,8 +83,9 @@ namespace LogicCircuit {
 
 		public void ShowOscilloscope() {
 			if(this.DialogOscilloscope == null) {
-				this.DialogOscilloscope = new DialogOscilloscope(this);
-				this.DialogOscilloscope.Owner = this.Editor.Mainframe;
+				this.DialogOscilloscope = new DialogOscilloscope(this) {
+					Owner = this.Editor.Mainframe
+				};
 				this.DialogOscilloscope.Show();
 			}
 		}
@@ -109,10 +111,11 @@ namespace LogicCircuit {
 					this.Oscilloscoping = false;
 				}
 
-				this.refreshingThread = new Thread(new ThreadStart(this.MonitorUI));
-				this.refreshingThread.IsBackground = true;
-				this.refreshingThread.Name = "RefreshingThread";
-				this.refreshingThread.Priority = ThreadPriority.BelowNormal;
+				this.refreshingThread = new Thread(new ThreadStart(this.MonitorUI)) {
+					IsBackground = true,
+					Name = "RefreshingThread",
+					Priority = ThreadPriority.BelowNormal
+				};
 
 
 				using(this.evaluationGate = new AutoResetEvent(false)) {

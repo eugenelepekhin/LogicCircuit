@@ -4,9 +4,9 @@ using System.Collections.Generic;
 namespace LogicCircuit {
 	public class Oscilloscope {
 
-		private Dictionary<string, List<string>> probeLabels = new Dictionary<string, List<string>>();
-		private List<string> probes = new List<string>();
-		private Dictionary<string, State[]> history = new Dictionary<string, State[]>();
+		private readonly Dictionary<string, List<string>> probeLabels = new Dictionary<string, List<string>>();
+		private readonly List<string> probes = new List<string>();
+		private readonly Dictionary<string, State[]> history = new Dictionary<string, State[]>();
 
 		public Oscilloscope(CircuitRunner circuitRunner) {
 			foreach(FunctionProbe probe in circuitRunner.CircuitState.Probes) {

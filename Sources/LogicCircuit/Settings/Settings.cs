@@ -20,12 +20,11 @@ namespace LogicCircuit {
 		public static UserSettings User { get { return Settings.user; } }
 		public static Settings Session { get { return Settings.session; } }
 
-		private Dictionary<string, string> property = new Dictionary<string, string>();
+		private readonly Dictionary<string, string> property = new Dictionary<string, string>();
 
 		public string this[string propertyName] {
 			get {
-				string value;
-				if(this.property.TryGetValue(propertyName, out value)) {
+				if(this.property.TryGetValue(propertyName, out string value)) {
 					return value;
 				}
 				return null;
@@ -96,20 +95,21 @@ namespace LogicCircuit {
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		private SettingsIntegerCache maxRecentFileCount;
-		private SettingsBoolCache loadLastFileOnStartup;
-		private SettingsBoolCache createBackupFileOnSave;
-		private SettingsEnumCache<GateShape> gateShape;
+		private readonly SettingsIntegerCache maxRecentFileCount;
+		private readonly SettingsBoolCache loadLastFileOnStartup;
+		private readonly SettingsBoolCache createBackupFileOnSave;
+		private readonly SettingsEnumCache<GateShape> gateShape;
 
-		private Dictionary<string, DateTime> recentFile = new Dictionary<string, DateTime>(StringComparer.OrdinalIgnoreCase);
+		private readonly Dictionary<string, DateTime> recentFile = new Dictionary<string, DateTime>(StringComparer.OrdinalIgnoreCase);
 		private FileSystemWatcher fileWatcher;
 		public bool IsFirstRun { get; private set; }
 
 		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
 		[SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands")]
 		public UserSettings() {
-			this.fileWatcher = new FileSystemWatcher();
-			this.fileWatcher.EnableRaisingEvents = false;
+			this.fileWatcher = new FileSystemWatcher {
+				EnableRaisingEvents = false
+			};
 			string file = UserSettings.FileName();
 			if(!File.Exists(file)) {
 				this.IsFirstRun = true;
@@ -123,7 +123,7 @@ namespace LogicCircuit {
 				this.Load(file);
 				this.fileWatcher.Path = Path.GetDirectoryName(file);
 				this.fileWatcher.Filter = Path.GetFileName(file);
-				this.fileWatcher.Changed += new FileSystemEventHandler(this.fileChanged);
+				this.fileWatcher.Changed += new FileSystemEventHandler(this.FileChanged);
 				this.fileWatcher.EnableRaisingEvents = true;
 			} catch(Exception exception) {
 				Tracer.Report("UserSettings.ctor", exception);
@@ -138,7 +138,7 @@ namespace LogicCircuit {
 		}
 
 		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-		private void fileChanged(object sender, FileSystemEventArgs e) {
+		private void FileChanged(object sender, FileSystemEventArgs e) {
 			try {
 				if(e.ChangeType == WatcherChangeTypes.Changed) {
 					this.Merge();
@@ -151,10 +151,7 @@ namespace LogicCircuit {
 		}
 
 		private void NotifyPropertyChanged(string propertyName) {
-			PropertyChangedEventHandler handler = this.PropertyChanged;
-			if(handler != null) {
-				handler(this, new PropertyChangedEventArgs(propertyName));
-			}
+			this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 
 		[SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands")]
@@ -187,8 +184,7 @@ namespace LogicCircuit {
 				string file = node.GetAttribute("name", "");
 				if(!string.IsNullOrEmpty(file)) {
 					string text = node.GetAttribute("date", "");
-					DateTime date;
-					if(!string.IsNullOrEmpty(text) && DateTime.TryParse(text, out date)) {
+					if(!string.IsNullOrEmpty(text) && DateTime.TryParse(text, out DateTime date)) {
 						this.recentFile[file] = date;
 					}
 				}

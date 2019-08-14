@@ -4,8 +4,8 @@ using System.Collections.Generic;
 namespace LogicCircuit {
 	public class Conductor {
 
-		private HashSet<Wire> wire = new HashSet<Wire>();
-		private HashSet<GridPoint> point = new HashSet<GridPoint>();
+		private readonly HashSet<Wire> wire = new HashSet<Wire>();
+		private readonly HashSet<GridPoint> point = new HashSet<GridPoint>();
 
 		public void Add(Wire item) {
 			if(this.wire.Add(item)) {

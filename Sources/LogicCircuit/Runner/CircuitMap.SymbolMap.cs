@@ -5,7 +5,7 @@ using System.Globalization;
 namespace LogicCircuit {
 	partial class CircuitMap {
 		private class SymbolMapList {
-			private Dictionary<SymbolMapKey, SymbolMap> symbols = new Dictionary<SymbolMapKey, SymbolMap>();
+			private readonly Dictionary<SymbolMapKey, SymbolMap> symbols = new Dictionary<SymbolMapKey, SymbolMap>();
 
 			public SymbolMap AddSymbol(CircuitMap circuitMap, CircuitSymbol circuitSymbol) {
 				SymbolMapKey key = new SymbolMapKey(circuitMap, circuitSymbol);
@@ -39,15 +39,12 @@ namespace LogicCircuit {
 		}
 
 		private struct SymbolMapKey {
-			private CircuitMap circuitMap;
-			public  CircuitMap CircuitMap { get { return this.circuitMap; } }
-
-			private CircuitSymbol circuitSymbol;
-			public  CircuitSymbol CircuitSymbol { get { return this.circuitSymbol; } }
+			public CircuitMap CircuitMap { get; }
+			public CircuitSymbol CircuitSymbol { get; }
 
 			public SymbolMapKey(CircuitMap circuitMap, CircuitSymbol circuitSymbol) {
-				this.circuitMap = circuitMap;
-				this.circuitSymbol = circuitSymbol;
+				this.CircuitMap = circuitMap;
+				this.CircuitSymbol = circuitSymbol;
 			}
 
 			public override bool Equals(object obj) {
@@ -75,16 +72,13 @@ namespace LogicCircuit {
 		private class SymbolMap {
 
 			private struct JamKey {
-				private Jam jam;
-				public Jam Jam { get { return this.jam; } }
-
-				private int bitNumber;
-				public int BitNumber { get { return this.bitNumber; } }
+				public Jam Jam { get; }
+				public int BitNumber { get; }
 
 				public JamKey(Jam jam, int bitNumber) {
 					Tracer.Assert(jam.IsValid(bitNumber));
-					this.jam = jam;
-					this.bitNumber = bitNumber;
+					this.Jam = jam;
+					this.BitNumber = bitNumber;
 				}
 
 				public override bool Equals(object obj) {
@@ -111,9 +105,9 @@ namespace LogicCircuit {
 				#endif
 			}
 
-			private Dictionary<JamKey, Result> results = new Dictionary<JamKey, Result>();
-			private Dictionary<JamKey, Parameter> parameters = new Dictionary<JamKey, Parameter>();
-			private SymbolMapKey key;
+			private readonly Dictionary<JamKey, Result> results = new Dictionary<JamKey, Result>();
+			private readonly Dictionary<JamKey, Parameter> parameters = new Dictionary<JamKey, Parameter>();
+			private readonly SymbolMapKey key;
 
 			public SymbolMap(SymbolMapKey key) {
 				this.key = key;
@@ -169,16 +163,14 @@ namespace LogicCircuit {
 			}
 
 			public Result Result(Jam jam, int bitNumber) {
-				Result resut;
-				if(this.results.TryGetValue(new JamKey(jam, bitNumber), out resut)) {
+				if(this.results.TryGetValue(new JamKey(jam, bitNumber), out Result resut)) {
 					return resut;
 				}
 				return null;
 			}
 
 			public Parameter Parameter(Jam jam, int bitNumber) {
-				Parameter parameter;
-				if(this.parameters.TryGetValue(new JamKey(jam, bitNumber), out parameter)) {
+				if(this.parameters.TryGetValue(new JamKey(jam, bitNumber), out Parameter parameter)) {
 					return parameter;
 				}
 				return null;
@@ -232,10 +224,8 @@ namespace LogicCircuit {
 			public Result(CircuitMap circuitMap, Jam jam, int bitNumber) : base(circuitMap, jam, bitNumber) {
 				Tracer.Assert(jam.Pin.PinType == PinType.Output);
 				this.Parameters = new List<Parameter>();
-				Gate gate = jam.Pin.Circuit as Gate;
-				if(gate != null && (gate.GateType == GateType.TriState1 || gate.GateType == GateType.TriState2)) {
-					this.TriStateGroup = new HashSet<Result>();
-					this.TriStateGroup.Add(this);
+				if(jam.Pin.Circuit is Gate gate && (gate.GateType == GateType.TriState1 || gate.GateType == GateType.TriState2)) {
+					this.TriStateGroup = new HashSet<Result> { this };
 				}
 			}
 

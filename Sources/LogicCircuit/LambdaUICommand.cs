@@ -9,8 +9,8 @@ namespace LogicCircuit {
 
 		public string Text { get; private set; }
 
-		private Predicate<object> canExecutePredicate;
-		private Action<object> executeAction;
+		private readonly Predicate<object> canExecutePredicate;
+		private readonly Action<object> executeAction;
 
 		public KeyGesture KeyGesture { get; private set; }
 		public string InputGestureText {

@@ -63,8 +63,7 @@ namespace LogicCircuit {
 		private void LinkLabels() {
 			for(int i = 0; i < this.Children.Count; i++) {
 				UIElement child = this.Children[i];
-				Label label = child as Label;
-				if(label != null && i + 1 < this.Children.Count && !AutoGrid.WasSet(label.Target) && label.GetBindingExpression(Label.TargetProperty) == null) {
+				if(child is Label label && i + 1 < this.Children.Count && !AutoGrid.WasSet(label.Target) && label.GetBindingExpression(Label.TargetProperty) == null) {
 					UIElement next = this.Children[i + 1];
 					if(!(next is Panel) && !(next is GroupBox) && next.Focusable &&
 						(int)label.GetValue(Grid.RowProperty) == (int)next.GetValue(Grid.RowProperty) &&
@@ -121,8 +120,7 @@ namespace LogicCircuit {
 					row.Height = rowHeight;
 				}
 			} else {
-				FrameworkElement fe = child as FrameworkElement;
-				if(fe != null && !(fe.MaxHeight < double.MaxValue || 0 < fe.Height)) {
+				if(child is FrameworkElement fe && !(fe.MaxHeight < double.MaxValue || 0 < fe.Height)) {
 					TextBox textBox;
 					// Do not replace ListBox, ListView,... with ItemsControl. As too many of controls are ItemsControls.
 					if(fe is GroupBox || fe is RichTextBox || fe is TreeView || fe is ListView || fe is ListBox || fe is DataGrid ||

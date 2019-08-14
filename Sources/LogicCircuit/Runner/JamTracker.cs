@@ -36,7 +36,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private HashSet<JamBit> jamConnected = new HashSet<JamBit>();
+		private readonly HashSet<JamBit> jamConnected = new HashSet<JamBit>();
 
 		public bool WasTracked(CircuitMap map, Jam inJam, Jam outJam, int bit) {
 			return !this.jamConnected.Add(new JamBit(map, inJam, outJam, bit));

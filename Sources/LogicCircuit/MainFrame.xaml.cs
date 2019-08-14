@@ -65,7 +65,7 @@ namespace LogicCircuit {
 		public string Status {
 			get { return this.statusText; }
 			set {
-				string text = (value == null) ? string.Empty : value;
+				string text = value ?? string.Empty;
 				if(0 < text.Length) {
 					text = Regex.Replace(text.Trim(), @"\s+", " ");
 				}
@@ -186,10 +186,11 @@ namespace LogicCircuit {
 			thread.Start();
 
 			// Check for new available version
-			Thread versionThread = new Thread(new ThreadStart(() => DialogAbout.CheckVersion(this.Dispatcher)));
-			versionThread.IsBackground = true;
-			versionThread.Name = "CheckVersion";
-			versionThread.Priority = ThreadPriority.BelowNormal;
+			Thread versionThread = new Thread(new ThreadStart(() => DialogAbout.CheckVersion(this.Dispatcher))) {
+				IsBackground = true,
+				Name = "CheckVersion",
+				Priority = ThreadPriority.BelowNormal
+			};
 			versionThread.Start();
 
 			#if DEBUG && false
@@ -274,8 +275,7 @@ namespace LogicCircuit {
 		}
 
 		public void ReportException(Exception exception) {
-			CircuitException circuitException = exception as CircuitException;
-			if(circuitException != null && circuitException.Cause == Cause.UserError) {
+			if(exception is CircuitException circuitException && circuitException.Cause == Cause.UserError) {
 				this.ShowErrorMessage(exception.Message, null);
 			} else {
 				this.ShowErrorMessage(exception.Message, exception.ToString());
@@ -452,10 +452,8 @@ namespace LogicCircuit {
 		private void RunningMapDoubleClick(object sender, MouseButtonEventArgs e) {
 			try {
 				if(this.Editor != null && this.Editor.Power && e.ChangedButton == MouseButton.Left) {
-					TreeView treeView = sender as TreeView;
-					if(treeView != null && treeView.SelectedItem != null) {
-						CircuitMap map = treeView.SelectedItem as CircuitMap;
-						if(map != null) {
+					if(sender is TreeView treeView && treeView.SelectedItem != null) {
+						if(treeView.SelectedItem is CircuitMap map) {
 							this.Editor.OpenLogicalCircuit(map);
 							TreeViewItem item = this.Container(treeView, map);
 							if(item != null) {
@@ -474,8 +472,7 @@ namespace LogicCircuit {
 		private void RunningMapTreeViewSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e) {
 			try {
 				if(sender == e.OriginalSource && e.NewValue != null && !object.ReferenceEquals(e.OldValue, e.NewValue)) {
-					CircuitMap map = e.NewValue as CircuitMap;
-					if(map != null) {
+					if(e.NewValue is CircuitMap map) {
 						TreeViewItem item = this.Container((TreeView)sender, map);
 						if(item != null) {
 							item.IsExpanded = true;

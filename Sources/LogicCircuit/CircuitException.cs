@@ -28,11 +28,10 @@ namespace LogicCircuit {
 	[SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors")]
 	[SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable")]
 	public class CircuitException : Exception {
-		private Cause cause;
-		public Cause Cause { get { return this.cause; } }
+		public Cause Cause { get; }
 
 		public CircuitException(Cause cause, Exception innerException, string message) : base(message, innerException) {
-			this.cause = cause;
+			this.Cause = cause;
 		}
 		//public CircuitException(Cause cause, Exception innerException, string message, params object[] args) : this(
 		//    cause, innerException, string.Format(CultureInfo.CurrentUICulture, message, args)
