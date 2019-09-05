@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -108,11 +109,24 @@ namespace LogicCircuit {
 
 			this.sortComparer = new TruthStateComparer(dataAccessor);
 			this.dataGrid.Sorting += new DataGridSortingEventHandler(this.DataGridSorting);
+			DataObject.AddPastingHandler(this.filter, this.OnFilterPaste);
 		}
 
 		protected override void OnClosing(CancelEventArgs e) {
 			base.OnClosing(e);
 			e.Cancel = this.ShowProgress;
+		}
+
+		private void OnFilterPaste(object sender, DataObjectPastingEventArgs e) {
+			if(sender == this.filter && e.DataObject != null && e.DataObject.GetDataPresent(DataFormats.Text)) {
+				string original = e.DataObject.GetData(DataFormats.Text) as string;
+				if(!string.IsNullOrWhiteSpace(original)) {
+					string text = Regex.Replace(original.Trim(), @"\s+", " ");
+					if(original != text) {
+						e.DataObject = new DataObject(DataFormats.Text, text);
+					}
+				}
+			}
 		}
 
 		private static Func<TruthState, int> InputFieldAccesor(int index) {
