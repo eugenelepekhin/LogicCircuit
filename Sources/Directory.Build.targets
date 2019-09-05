@@ -12,5 +12,6 @@
 		<Message Importance="high" Text=">>> Building Snap store Wrappers: $(ItemWrapperGeneratorCommand)"/>-->
 		<Exec Command="$(ResourceWrapperGeneratorCommand)"/>
 		<Exec Command="$(ItemWrapperGeneratorCommand)" />
+		<Copy SourceFiles="$(SolutionDir)License.txt" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true"/>
 	</Target>
 </Project>

@@ -36,6 +36,7 @@
 				<Directory Id="INSTALLFOLDER" Name="LogicCircuit">
 					<Component Id="ApplicationComponent">
 						<File Id="Application_exe" Source="$(var.LogicCircuit.TargetPath)" KeyPath="yes"/>
+						<File Id="License_txt" Source="$(var.LogicCircuit.TargetDir)License.txt"/>
 						<ProgId Id="RegFileExtention" Icon="Application_exe" IconIndex="0" Description="LogicCircuit Project file">
 							<Extension Id="CircuitProject" ContentType="text/XML">
 								<Verb Id="open" Command="Open" TargetFile="Application_exe" Argument='"%1"'/>
@@ -164,6 +165,9 @@
 					<Component Id="StartMenuShortcuts" Guid="970c0bb2-c7d0-45d7-abfa-7ec378858bc0">
 						<Shortcut Id="StartMenuShortcut" Name="LogicCircuit" Description="LogicCircuit – is educational software for designing and simulating digital logic circuits"
 							Target="[INSTALLFOLDER]LogicCircuit.exe"
+						/>
+						<Shortcut Id="LicenseMenuShortcut" Name="License.txt" Description="MIT License"
+							Target="[INSTALLFOLDER]License.txt"
 						/>
 						<RemoveFolder Id="ProgramMenuDir" On="uninstall"/>
 						<RegistryValue Root="HKCU" Key="Software\[ProductName]" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
