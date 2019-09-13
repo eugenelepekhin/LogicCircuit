@@ -45,7 +45,7 @@ namespace LogicCircuit {
 			try {
 				List<string> list = new List<string>();
 				int start = 0;
-				Regex hyperlink = new Regex("<Hyperlink.*</Hyperlink>", RegexOptions.Compiled | RegexOptions.Multiline);
+				Regex hyperlink = new Regex("<Hyperlink.*?</Hyperlink>", RegexOptions.Compiled | RegexOptions.Multiline);
 				foreach(Match m in hyperlink.Matches(text)) {
 					if(0 < m.Index - start) {
 						list.Add(text.Substring(start, m.Index - start));

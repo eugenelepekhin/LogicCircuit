@@ -198,7 +198,13 @@ namespace LogicCircuit {
 					Menu menu = (Menu)((Grid)this.Content).Children[0];
 					string text = "Test";
 					menu.Items.Add(new MenuItem() { Header = text, Command = new LambdaUICommand(text, o => {
-						DialogMessage.Show(this, "hello", "world", "details", MessageBoxImage.Error, MessageBoxButton.OKCancel);
+						DialogMessage.Show(this,
+							"hello",
+							"world <Hyperlink NavigateUri=\"http://www.rbc.ru\">link 1</Hyperlink> or <Hyperlink NavigateUri=\"http://www.lenta.ru\">link 2</Hyperlink> hello <Hyperlink NavigateUri=\"http://www.cnn.com\">and link 3</Hyperlink> end",
+							"details",
+							MessageBoxImage.Error,
+							MessageBoxButton.OKCancel
+						);
 					})});
 				};
 			#endif
