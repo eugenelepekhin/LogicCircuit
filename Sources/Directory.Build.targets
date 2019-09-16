@@ -1,17 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-	<Target Name="GenerateWrappers" BeforeTargets="PrepareForBuild;BeforeBuild" Condition="Exists('$(ProjectDir)Schema\CircuitProject.xml')">
+	<Target Name="GenerateResourceWrappers" BeforeTargets="BeforeBuild" Condition="'@(EmbeddedResource)' != '' and '$(MSBuildProjectName)' != 'LogicCircuit.UnitTest'">
 		<PropertyGroup>
-			<ResourceWrapperGeneratorCommand>"$(SolutionDir)Tools\ResourceWrapper.Generator.exe" /FlowDirection /p "$(ProjectPath)"</ResourceWrapperGeneratorCommand>
+			<ResourceWrapperGeneratorCommand>"$(MSBuildThisFileDirectory)Tools\ResourceWrapper.Generator.exe" /FlowDirection /p "$(ProjectPath)"</ResourceWrapperGeneratorCommand>
 			<PseudoBuildDefined>$(DefineConstants.Contains("Pseudo"))</PseudoBuildDefined>
 			<ResourceWrapperGeneratorCommand Condition="$(PseudoBuildDefined)">$(ResourceWrapperGeneratorCommand) Pseudo=$(RootNamespace).Properties.Resources</ResourceWrapperGeneratorCommand>
-
-			<ItemWrapperGeneratorCommand>"$(SolutionDir)Tools\ItemWrapper.Generator.exe" /Schema "$(ProjectDir)Schema\CircuitProject.xml" /Target "$(ProjectDir)CircuitProject\Wrappers"</ItemWrapperGeneratorCommand>
 		</PropertyGroup>
-		<!--<Message Importance="high" Text=">>> Building Resource Wrappers: $(ResourceWrapperGeneratorCommand)"/>
-		<Message Importance="high" Text=">>> Building Snap store Wrappers: $(ItemWrapperGeneratorCommand)"/>-->
+
+		<!--<Message Importance="high" Text=">>> Building Resource Wrappers: $(ResourceWrapperGeneratorCommand)"/>-->
 		<Exec Command="$(ResourceWrapperGeneratorCommand)"/>
-		<Exec Command="$(ItemWrapperGeneratorCommand)" />
-		<Copy SourceFiles="$(SolutionDir)License.txt" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" Condition="'$(Configuration)' == 'Release'"/>
+	</Target>
+
+	<Target Name="GenerateItemWrappers" BeforeTargets="BeforeBuild" Condition="Exists('$(MSBuildProjectDirectory)\Schema\CircuitProject.xml')">
+		<PropertyGroup>
+			<ItemWrapperGeneratorCommand>"$(MSBuildThisFileDirectory)Tools\ItemWrapper.Generator.exe" /Schema "$(MSBuildProjectDirectory)\Schema\CircuitProject.xml" /Target "$(MSBuildProjectDirectory)\CircuitProject\Wrappers"</ItemWrapperGeneratorCommand>
+		</PropertyGroup>
+
+		<!--<Message Importance="high" Text=">>> Building Snap store Wrappers: $(ItemWrapperGeneratorCommand)"/>-->
+		<Exec Command="$(ItemWrapperGeneratorCommand)"/>
+	</Target>
+
+	<Target Name="CopyTools" AfterTargets="AfterBuild">
+		<PropertyGroup>
+			<ToolsFolder>$(MSBuildThisFileDirectory)Tools</ToolsFolder>
+		</PropertyGroup>
+
+		<!--<Message Condition="$(MSBuildProjectDirectory.StartsWith($(ToolsFolder)))" Importance="high" Text=">>> Copy tool $(TargetPath)"/>-->
+		<Copy Condition="$(MSBuildProjectDirectory.StartsWith($(ToolsFolder)))" SourceFiles="$(TargetPath)" DestinationFolder="$(ToolsFolder)" SkipUnchangedFiles="true"/>
+	</Target>
+
+	<Target Name="CopyLicenseFile" AfterTargets="AfterBuild" Condition="Exists('$(MSBuildThisFileDirectory)License.txt') and '$(Configuration)' == 'Release' and '$(MSBuildProjectName)' == 'LogicCircuit'">
+		<!--<Message Importance="high" Text=">>> Copy License.txt to $(TargetPath)"/>-->
+		<Copy SourceFiles="$(MSBuildThisFileDirectory)License.txt" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true"/>
 	</Target>
 </Project>

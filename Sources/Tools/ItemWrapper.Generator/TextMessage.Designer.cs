@@ -14,6 +14,7 @@ namespace ItemWrapper.Generator {
 	using System.Runtime.CompilerServices;
 	using System.ComponentModel;
 	using System.Resources;
+	using System.Windows;
 
 	/// <summary>
 	/// A strongly-typed resource class, for looking up localized strings, etc.
@@ -38,6 +39,24 @@ namespace ItemWrapper.Generator {
 		[EditorBrowsableAttribute(EditorBrowsableState.Advanced)]
 		public static CultureInfo FormatCulture { get; set; }
 
+		/// <summary>
+		/// Gets FlowDirection for current culture.
+		/// </summary>
+		public static FlowDirection FlowDirection {
+			get {
+				bool isRightToLeft;
+				if(TextMessage.Culture != null && TextMessage.Culture.TextInfo != null) {
+					isRightToLeft = TextMessage.Culture.TextInfo.IsRightToLeft;
+				} else if(CultureInfo.CurrentUICulture != null && CultureInfo.CurrentUICulture.TextInfo != null) {
+					isRightToLeft = CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft;
+				} else if(CultureInfo.CurrentCulture != null && CultureInfo.CurrentCulture.TextInfo != null) {
+					isRightToLeft = CultureInfo.CurrentCulture.TextInfo.IsRightToLeft;
+				} else {
+					isRightToLeft = false;
+				}
+				return isRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
+			}
+		}
 
 		private static ResourceManager resourceManager;
 
