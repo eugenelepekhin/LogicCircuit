@@ -11,6 +11,7 @@
             <Word>oscillogram</Word>
             <Word>oscillograms</Word>
             <Word>oscilloscoping</Word>
-        </Recognized>
+			<Word>Accessor</Word>
+		</Recognized>
     </Words>
 </Dictionary>
