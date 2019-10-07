@@ -257,7 +257,7 @@ namespace LogicCircuit {
 						this.Parent.Connect(connectionSet, list, result, this.CircuitSymbol.Jam(pin), bitNumber);
 					}
 				} else if(circuit is LogicalCircuit) {
-					if(!connectionSet.IsConnected(this, con.InJam, con.OutJam, bitNumber)) {
+					if(!connectionSet.IsConnected(this, con.InJam, bitNumber)) {
 						this.children[(CircuitSymbol)con.InJam.CircuitSymbol].Connect(connectionSet, list, result, con.InJam.InnerJam, bitNumber);
 					}
 				} else {
@@ -481,7 +481,7 @@ namespace LogicCircuit {
 									return true;
 								}
 							} else if(circuit is LogicalCircuit) {
-								if(!jamTracker.WasTracked(this, jam, null, start)) {
+								if(!jamTracker.WasTracked(this, jam, start)) {
 									// child pin must be there as the jam only be there if the pin exists
 									CircuitSymbol childPinSymbol = this.Circuit.CircuitProject.CircuitSymbolSet.SelectByCircuit(jam.Pin).First();
 									// the child for the logic circuit also must exist
