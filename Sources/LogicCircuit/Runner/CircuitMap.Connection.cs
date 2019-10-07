@@ -60,7 +60,7 @@ namespace LogicCircuit {
 			}
 
 			public bool IsConnected(CircuitMap map, Jam jam, int bit) {
-				return this.jamTracker.WasTracked(map, jam, bit);
+				return !this.jamConnected.Add(new JamBit(map, jam, bit));
 			}
 
 			#if DEBUG
