@@ -23,9 +23,8 @@ namespace LogicCircuit {
 		}
 
 		private class ConnectionSet {
-			private readonly HashSet<LogicalCircuit> connected = new HashSet<LogicalCircuit>();
-			private readonly Dictionary<Jam, Dictionary<Jam, Connection>> outputs = new Dictionary<Jam, Dictionary<Jam, Connection>>();
-			private readonly JamTracker jamTracker = new JamTracker();
+			private HashSet<LogicalCircuit> connected = new HashSet<LogicalCircuit>();
+			private Dictionary<Jam, Dictionary<Jam, Connection>> outputs = new Dictionary<Jam, Dictionary<Jam, Connection>>();
 
 			public bool IsConnected(LogicalCircuit logicalCircuit) {
 				return this.connected.Contains(logicalCircuit);
@@ -57,10 +56,6 @@ namespace LogicCircuit {
 					return inputs.Values;
 				}
 				return Enumerable.Empty<Connection>();
-			}
-
-			public bool IsConnected(CircuitMap map, Jam jam, int bit) {
-				return !this.jamConnected.Add(new JamBit(map, jam, bit));
 			}
 
 			#if DEBUG
