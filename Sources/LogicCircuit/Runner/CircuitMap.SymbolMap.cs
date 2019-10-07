@@ -125,15 +125,13 @@ namespace LogicCircuit {
 				JamKey jamKey = new JamKey(jam, bitNumber);
 				Parameter parameter;
 				if(this.parameters.TryGetValue(jamKey, out parameter)) {
-					if(parameter.Result != result) {
-						if(!parameter.Result.IsTriState || !result.IsTriState) {
-							CircuitGlyph symbol = jam.CircuitSymbol;
-							throw new CircuitException(Cause.UserError,
-								Properties.Resources.ErrorManyResults(jam.Pin.Name, symbol.Circuit.Notation + symbol.Point.ToString())
-							);
-						}
-						parameter.Result.Link(result);
+					if(!parameter.Result.IsTriState || !result.IsTriState) {
+						CircuitGlyph symbol = jam.CircuitSymbol;
+						throw new CircuitException(Cause.UserError,
+							Properties.Resources.ErrorManyResults(jam.Pin.Name, symbol.Circuit.Notation + symbol.Point.ToString())
+						);
 					}
+					parameter.Result.Link(result);
 				} else {
 					parameter = new Parameter(result, circuitMap, jam, bitNumber);
 					this.parameters.Add(jamKey, parameter);
