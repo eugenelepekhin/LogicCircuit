@@ -453,20 +453,20 @@ namespace LogicCircuit {
 		public IEnumerable<int> StateIndexes(Wire wire) {
 			Tracer.Assert(this.Circuit == wire.LogicalCircuit);
 			List<int> list = new List<int>();
-			this.StateIndexes(list, wire.Point1, false, 0, 32);
+			this.StateIndexes(list, wire.Point1, false, 0, 32, new HashSet<JamBit>());
 			Tracer.Assert(0 <= list.Count && list.Count <= 32);
 			return list;
 		}
 
 		[SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		[SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-		private bool StateIndexes(List<int> list, GridPoint point, bool ignore, int start, int count) {
+		private bool StateIndexes(List<int> list, GridPoint point, bool ignore, int start, int count, HashSet<JamBit> visited) {
 			Tracer.Assert(0 <= start && start < 32 && count <= 32);
 			if(0 < count && this.Circuit.ConductorMap().TryGetValue(point, out Conductor conductor)) {
 				foreach(CircuitSymbol symbol in this.symbols) {
 					foreach(Jam jam in symbol.Jams()) {
 						GridPoint jamPoint = jam.AbsolutePoint;
-						if(conductor.Contains(jamPoint) && (!ignore || jamPoint != point)) {
+						if(conductor.Contains(jamPoint) && (!ignore || jamPoint != point) && visited.Add(new JamBit(this, jam, start))) {
 							Circuit circuit = symbol.Circuit;
 							Pin pin;
 							if(CircuitMap.IsPrimitive(circuit)) {
@@ -479,14 +479,14 @@ namespace LogicCircuit {
 									return true;
 								}
 							} else if((pin = (circuit as Pin)) != null) {
-								if(this.Parent != null && this.Parent.StateIndexes(list, this.CircuitSymbol.Jam(pin).AbsolutePoint, true, start, count)) {
+								if(this.Parent != null && this.Parent.StateIndexes(list, this.CircuitSymbol.Jam(pin).AbsolutePoint, true, start, count, visited)) {
 									return true;
 								}
 							} else if(circuit is LogicalCircuit) {
 								// child pin must be there as the jam only be there if the pin exists
 								CircuitSymbol childPinSymbol = this.Circuit.CircuitProject.CircuitSymbolSet.SelectByCircuit(jam.Pin).First();
 								// the child for the logic circuit also must exist
-								if(this.children[(CircuitSymbol)jam.CircuitSymbol].StateIndexes(list, childPinSymbol.Jams().First().AbsolutePoint, true, start, count)) {
+								if(this.children[(CircuitSymbol)jam.CircuitSymbol].StateIndexes(list, childPinSymbol.Jams().First().AbsolutePoint, true, start, count, visited)) {
 									return true;
 								}
 							} else if(circuit is Splitter) {
@@ -506,7 +506,7 @@ namespace LogicCircuit {
 											Tracer.Assert(0 <= localStart && localStart < bitWidth);
 											int localCount = Math.Min(start + count, jamStart + bitWidth) - (jamStart + localStart);
 											Tracer.Assert(0 < localCount && localCount <= count && localCount <= bitWidth);
-											obtained |= this.StateIndexes(child, jams[i].AbsolutePoint, true, localStart, localCount);
+											obtained |= this.StateIndexes(child, jams[i].AbsolutePoint, true, localStart, localCount, visited);
 											list.AddRange(child);
 										}
 										jamStart += bitWidth;
@@ -521,7 +521,7 @@ namespace LogicCircuit {
 										int bitWidth = jams[i].Pin.BitWidth;
 										if(jams[i] == jam) {
 											Tracer.Assert(start < bitWidth);
-											obtained = this.StateIndexes(list, jams[0].AbsolutePoint, true, jamStart + start, Math.Min(bitWidth - start, count));
+											obtained = this.StateIndexes(list, jams[0].AbsolutePoint, true, jamStart + start, Math.Min(bitWidth - start, count), visited);
 											break;
 										}
 										jamStart += bitWidth;
