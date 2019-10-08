@@ -181,7 +181,7 @@ namespace LogicCircuit {
 				foreach(Jam jam in symbol.Jams().Where(j => j.EffectivePinType != PinType.Output)) {
 					GridPoint p = jam.AbsolutePoint;
 					if(!inJamMap.TryGetValue(p, out List<Jam> list)) {
-						list = new List<Jam>();
+						list = new List<Jam>(1);
 						inJamMap.Add(p, list);
 					}
 					list.Add(jam);
