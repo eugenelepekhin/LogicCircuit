@@ -453,20 +453,20 @@ namespace LogicCircuit {
 		public IEnumerable<int> StateIndexes(Wire wire) {
 			Tracer.Assert(this.Circuit == wire.LogicalCircuit);
 			List<int> list = new List<int>();
-			this.StateIndexes(list, wire.Point1, false, 0, 32, new HashSet<JamBit>());
+			this.StateIndexes(list, wire.Point1, false, 0, 32, new HashSet<CircuitMap>());
 			Tracer.Assert(0 <= list.Count && list.Count <= 32);
 			return list;
 		}
 
 		[SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		[SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-		private bool StateIndexes(List<int> list, GridPoint point, bool ignore, int start, int count, HashSet<JamBit> visited) {
-			Tracer.Assert(0 <= start && start < 32 && count <= 32);
+		private bool StateIndexes(List<int> list, GridPoint point, bool ignore, int start, int count, HashSet<CircuitMap> visited) {
+			Tracer.Assert(0 <= start && start < 32 && 0 <= count && count <= 32);
 			if(0 < count && this.Circuit.ConductorMap().TryGetValue(point, out Conductor conductor)) {
 				foreach(CircuitSymbol symbol in this.symbols) {
 					foreach(Jam jam in symbol.Jams()) {
 						GridPoint jamPoint = jam.AbsolutePoint;
-						if(conductor.Contains(jamPoint) && (!ignore || jamPoint != point) && visited.Add(new JamBit(this, jam, start))) {
+						if(conductor.Contains(jamPoint) && (!ignore || jamPoint != point)) {
 							Circuit circuit = symbol.Circuit;
 							Pin pin;
 							if(CircuitMap.IsPrimitive(circuit)) {
@@ -483,11 +483,16 @@ namespace LogicCircuit {
 									return true;
 								}
 							} else if(circuit is LogicalCircuit) {
-								// child pin must be there as the jam only be there if the pin exists
-								CircuitSymbol childPinSymbol = this.Circuit.CircuitProject.CircuitSymbolSet.SelectByCircuit(jam.Pin).First();
-								// the child for the logic circuit also must exist
-								if(this.children[(CircuitSymbol)jam.CircuitSymbol].StateIndexes(list, childPinSymbol.Jams().First().AbsolutePoint, true, start, count, visited)) {
-									return true;
+								CircuitMap child = this.children[(CircuitSymbol)jam.CircuitSymbol];
+								if(visited.Add(child)) {
+									// child pin must be there as the jam only be there if the pin exists
+									CircuitSymbol childPinSymbol = this.Circuit.CircuitProject.CircuitSymbolSet.SelectByCircuit(jam.Pin).First();
+									// the child for the logic circuit also must exist
+									if(child.StateIndexes(list, childPinSymbol.Jams().First().AbsolutePoint, true, start, count, visited)) {
+										visited.Remove(child);
+										return true;
+									}
+									visited.Remove(child);
 								}
 							} else if(circuit is Splitter) {
 								List<Jam> jams = symbol.Jams().ToList();
