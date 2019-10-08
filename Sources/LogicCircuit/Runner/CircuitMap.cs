@@ -236,15 +236,20 @@ namespace LogicCircuit {
 		}
 
 		private static void Connect(ConnectionSet connectionSet, SymbolMapList list) {
+			HashSet<JamBit> visited = new HashSet<JamBit>();
 			foreach(SymbolMap symbolMap in list.SymbolMaps) {
 				foreach(Result result in symbolMap.Results) {
-					result.CircuitMap.Connect(connectionSet, list, result, result.Jam, result.BitNumber);
+					visited.Clear();
+					result.CircuitMap.Connect(connectionSet, list, result, result.Jam, result.BitNumber, visited);
 				}
 			}
 		}
 
-		private void Connect(ConnectionSet connectionSet, SymbolMapList list, Result result, Jam jam, int bitNumber) {
+		private void Connect(ConnectionSet connectionSet, SymbolMapList list, Result result, Jam jam, int bitNumber, HashSet<JamBit> visited) {
 			Tracer.Assert(bitNumber < jam.Pin.BitWidth);
+			if(!visited.Add(new JamBit(this, jam, bitNumber))) {
+				return;
+			}
 			foreach(Connection con in connectionSet.SelectByOutput(jam)) {
 				Tracer.Assert(con.InJam.CircuitSymbol.LogicalCircuit == this.Circuit);
 				Tracer.Assert(con.OutJam.CircuitSymbol.LogicalCircuit == this.Circuit);
@@ -254,10 +259,10 @@ namespace LogicCircuit {
 					list.AddParameter(result, this, con.InJam, bitNumber);
 				} else if((pin = (circuit as Pin)) != null) {
 					if(this.Parent != null) {
-						this.Parent.Connect(connectionSet, list, result, this.CircuitSymbol.Jam(pin), bitNumber);
+						this.Parent.Connect(connectionSet, list, result, this.CircuitSymbol.Jam(pin), bitNumber, visited);
 					}
 				} else if(circuit is LogicalCircuit) {
-					this.children[(CircuitSymbol)con.InJam.CircuitSymbol].Connect(connectionSet, list, result, con.InJam.InnerJam, bitNumber);
+					this.children[(CircuitSymbol)con.InJam.CircuitSymbol].Connect(connectionSet, list, result, con.InJam.InnerJam, bitNumber, visited);
 				} else {
 					if(circuit is Splitter splitter) {
 						int splitterPinCount = splitter.PinCount;
@@ -279,7 +284,7 @@ namespace LogicCircuit {
 							int width = 0;
 							for(int i = 1; i < jams.Count; i++) {
 								if(bitNumber < width + jams[i].Pin.BitWidth) {
-									this.Connect(connectionSet, list, result, jams[i], bitNumber - width);
+									this.Connect(connectionSet, list, result, jams[i], bitNumber - width, visited);
 									break;
 								}
 								width += jams[i].Pin.BitWidth;
@@ -289,7 +294,7 @@ namespace LogicCircuit {
 							int width = 0;
 							for(int i = 1; i < jams.Count; i++) {
 								if(jams[i] == con.InJam) {
-									this.Connect(connectionSet, list, result, jams[0], width + bitNumber);
+									this.Connect(connectionSet, list, result, jams[0], width + bitNumber, visited);
 									break;
 								}
 								width += jams[i].Pin.BitWidth;

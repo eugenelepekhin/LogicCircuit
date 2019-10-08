@@ -126,6 +126,9 @@ namespace LogicCircuit {
 				Parameter parameter;
 				if(this.parameters.TryGetValue(jamKey, out parameter)) {
 					if(!parameter.Result.IsTriState || !result.IsTriState) {
+						if(parameter.Result == result && parameter.CircuitMap == circuitMap && parameter.Jam == jam && parameter.BitNumber == bitNumber) {
+							return parameter;
+						}
 						CircuitGlyph symbol = jam.CircuitSymbol;
 						throw new CircuitException(Cause.UserError,
 							Properties.Resources.ErrorManyResults(jam.Pin.Name, symbol.Circuit.Notation + symbol.Point.ToString())
@@ -304,6 +307,24 @@ namespace LogicCircuit {
 			public int Compare(Parameter x, Parameter y) {
 				return x.BitNumber - y.BitNumber;
 			}
+		}
+
+		private struct JamBit {
+			public CircuitMap Map { get; }
+			public Jam Jam { get; }
+			public int Bit { get; }
+
+			public JamBit(CircuitMap circuitMap, Jam jam, int bit) {
+				this.Map = circuitMap;
+				this.Jam = jam;
+				this.Bit = bit;
+			}
+
+			public bool Equals(JamBit other) => this.Map == other.Map && this.Jam == other.Jam && this.Bit == other.Bit;
+
+			public override bool Equals(object obj) => obj is JamBit other && this.Equals(other);
+
+			public override int GetHashCode() => this.Map.GetHashCode() ^ this.Jam.GetHashCode() ^ this.Bit;
 		}
 	}
 }
