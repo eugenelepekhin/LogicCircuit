@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LogicCircuit {
 	public class ConductorMap {
@@ -47,5 +48,14 @@ namespace LogicCircuit {
 		}
 
 		public IEnumerable<Conductor> Conductors { get { return this.list; } }
+
+		public int JunctionCount(GridPoint point) {
+			if(this.TryGetValue(point, out Conductor conductor)) {
+				return conductor.JunctionCount(point);
+			}
+			return 0;
+		}
+
+		public IEnumerable<GridPoint> JunctionPoints(int minCount) => this.Conductors.SelectMany(conductor => conductor.JunctionPoints(minCount));
 	}
 }

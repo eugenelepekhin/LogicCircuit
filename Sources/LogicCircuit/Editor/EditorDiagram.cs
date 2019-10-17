@@ -21,11 +21,6 @@ namespace LogicCircuit {
 		private const int ClickProximity = 2 * Symbol.PinRadius;
 		protected static readonly string CircuitDescriptorDataFormat = "LogicCircuit.CircuitDescriptor." + Process.GetCurrentProcess().Id;
 
-		private struct Connect {
-			public int Count;
-			public Ellipse Solder;
-		}
-
 		public Mainframe Mainframe { get; private set; }
 		private Dispatcher Dispatcher { get { return this.Mainframe.Dispatcher; } }
 		protected Canvas Diagram { get { return this.Mainframe.Diagram; } }
@@ -38,7 +33,7 @@ namespace LogicCircuit {
 		public abstract bool InEditMode { get; }
 
 		private LogicalCircuit currentLogicalCircuit;
-		private readonly Dictionary<GridPoint, Connect> wirePoint = new Dictionary<GridPoint, Connect>();
+		private readonly Dictionary<GridPoint, Ellipse> wireJunctionPoint = new Dictionary<GridPoint, Ellipse>();
 
 		private readonly Dictionary<Symbol, Marker> selection = new Dictionary<Symbol, Marker>();
 		private Canvas selectionLayer;
@@ -271,41 +266,37 @@ namespace LogicCircuit {
 			this.Diagram.Children.Add(symbol.Glyph);
 		}
 
-		private void AddWirePoint(GridPoint point) {
-			Connect connect;
-			if(!this.wirePoint.TryGetValue(point, out connect)) {
-				connect = new Connect();
-			}
-			connect.Count++;
-			if(2 < connect.Count && connect.Solder == null) {
-				connect.Solder = new Ellipse();
-				Panel.SetZIndex(connect.Solder, 0);
-				connect.Solder.Width = connect.Solder.Height = 2 * Symbol.PinRadius;
-				Canvas.SetLeft(connect.Solder, Symbol.ScreenPoint(point.X) - Symbol.PinRadius);
-				Canvas.SetTop(connect.Solder, Symbol.ScreenPoint(point.Y) - Symbol.PinRadius);
-				connect.Solder.Fill = Symbol.JamDirectFill;
-				connect.Solder.DataContext = this.wirePoint;
-				this.Diagram.Children.Add(connect.Solder);
-			}
-			this.wirePoint[point] = connect;
-		}
-
 		private void UpdateSolders() {
-			foreach(Connect connect in this.wirePoint.Values) {
-				if(connect.Solder != null) {
-					this.Diagram.Children.Remove(connect.Solder);
+			ConductorMap map = this.Project.LogicalCircuit.ConductorMap();
+			List<GridPoint> deleted = new List<GridPoint>();
+			foreach(KeyValuePair<GridPoint, Ellipse> pair in this.wireJunctionPoint) {
+				if(map.JunctionCount(pair.Key) < 3) {
+					this.Diagram.Children.Remove(pair.Value);
+					deleted.Add(pair.Key);
 				}
 			}
-			this.wirePoint.Clear();
-			foreach(Wire wire in this.Project.LogicalCircuit.Wires()) {
-				this.AddWirePoint(wire.Point1);
-				this.AddWirePoint(wire.Point2);
+			foreach(GridPoint point in deleted) {
+				this.wireJunctionPoint.Remove(point);
+			}
+			foreach(GridPoint point in map.JunctionPoints(3)) {
+				if(!this.wireJunctionPoint.ContainsKey(point)) {
+					Ellipse solder = new Ellipse();
+					Panel.SetZIndex(solder, 0);
+					solder.Width = solder.Height = 2 * Symbol.PinRadius;
+					Canvas.SetLeft(solder, Symbol.ScreenPoint(point.X) - Symbol.PinRadius);
+					Canvas.SetTop(solder, Symbol.ScreenPoint(point.Y) - Symbol.PinRadius);
+					solder.Fill = Symbol.JamDirectFill;
+					solder.DataContext = this.wireJunctionPoint;
+					this.Diagram.Children.Add(solder);
+
+					this.wireJunctionPoint.Add(point, solder);
+				}
 			}
 		}
 
 		private void RedrawDiagram() {
 			this.Diagram.Children.Clear();
-			this.wirePoint.Clear();
+			this.wireJunctionPoint.Clear();
 			LogicalCircuit logicalCircuit = this.Project.LogicalCircuit;
 			foreach(TextNote symbol in logicalCircuit.TextNotes()) {
 				this.Add(symbol);
@@ -919,7 +910,7 @@ namespace LogicCircuit {
 								symbol = root.DataContext as Symbol;
 							}
 						}
-						if(symbol == null && element.DataContext == this.wirePoint) {
+						if(symbol == null && element.DataContext == this.wireJunctionPoint) {
 							// User clicked solder
 							symbol = this.FindWireNear(e.GetPosition(this.Diagram));
 						}

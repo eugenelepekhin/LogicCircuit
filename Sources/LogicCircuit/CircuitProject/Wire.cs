@@ -111,8 +111,6 @@ namespace LogicCircuit {
 		}
 
 		partial void EndNotifyWireSetChanged() {
-			this.WireSetChanged?.Invoke(this, EventArgs.Empty);
-
 			if(this.invalidLogicalCircuit != null) {
 				foreach(LogicalCircuit circuit in this.invalidLogicalCircuit) {
 					circuit.UpdateConductorMap();
@@ -123,6 +121,7 @@ namespace LogicCircuit {
 				this.invalidLogicalCircuit = new HashSet<LogicalCircuit>();
 				this.CircuitProject.LogicalCircuitSet.UpdateConductorMaps();
 			}
+			this.WireSetChanged?.Invoke(this, EventArgs.Empty);
 		}
 
 		public IRecordLoader CreateRecordLoader(XmlNameTable nameTable) {
