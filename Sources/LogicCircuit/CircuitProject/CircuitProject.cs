@@ -193,7 +193,7 @@ namespace LogicCircuit {
 
 		[SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
 		private bool NeedToShift(List<Symbol> list) {
-			bool ovelap(int pos1, int size1, int pos2, int size2) => pos1 <= pos2 + size2 && pos2 <= pos1 + size1;
+			bool covered(int pos1, int size1, int pos2, int size2) => pos2 <= pos1 && pos1 + size1 <= pos2 + size2;
 
 			HashSet<Symbol> exclude = new HashSet<Symbol>(list);
 			bool need = false;
@@ -207,8 +207,8 @@ namespace LogicCircuit {
 					}
 					if(target.CircuitSymbols().Any(other =>
 						!exclude.Contains(other) && circuitSymbol.Circuit.Similar(other.Circuit) &&
-						ovelap(circuitSymbol.X, circuitSymbol.Circuit.SymbolWidth, other.X, other.Circuit.SymbolWidth) &&
-						ovelap(circuitSymbol.Y, circuitSymbol.Circuit.SymbolHeight, other.Y, other.Circuit.SymbolHeight)
+						covered(circuitSymbol.X, circuitSymbol.Circuit.SymbolWidth, other.X, other.Circuit.SymbolWidth) &&
+						covered(circuitSymbol.Y, circuitSymbol.Circuit.SymbolHeight, other.Y, other.Circuit.SymbolHeight)
 					)) {
 						need = true;
 					}
@@ -219,8 +219,8 @@ namespace LogicCircuit {
 						return false;
 					}
 					if(target.TextNotes().Any(other => !exclude.Contains(other) &&
-						ovelap(textNote.X, textNote.Width, other.X, other.Width) &&
-						ovelap(textNote.Y, textNote.Height, other.Y, other.Height)
+						covered(textNote.X, textNote.Width, other.X, other.Width) &&
+						covered(textNote.Y, textNote.Height, other.Y, other.Height)
 					)) {
 						need = true;
 					}
@@ -230,7 +230,10 @@ namespace LogicCircuit {
 					) {
 						return false;
 					}
-					if(target.Wires().Any(other => !exclude.Contains(other) && (wire.Point1 == other.Point1 || wire.Point2 == other.Point2))) {
+					if(target.Wires().Any(other => !exclude.Contains(other) && (
+						wire.Point1 == other.Point1 || wire.Point1 == other.Point2 ||
+						wire.Point2 == other.Point1 || wire.Point2 == other.Point2
+					))) {
 						need = true;
 					}
 				}
