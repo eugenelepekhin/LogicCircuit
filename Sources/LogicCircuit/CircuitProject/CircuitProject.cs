@@ -193,32 +193,45 @@ namespace LogicCircuit {
 
 		[SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
 		private bool NeedToShift(List<Symbol> list) {
+			bool ovelap(int pos1, int size1, int pos2, int size2) => pos1 <= pos2 + size2 && pos2 <= pos1 + size1;
+
+			HashSet<Symbol> exclude = new HashSet<Symbol>(list);
 			bool need = false;
-			Point diagram = new Point(Symbol.LogicalCircuitWidth, Symbol.LogicalCircuitHeight);
 			LogicalCircuit target = this.ProjectSet.Project.LogicalCircuit;
 			foreach(Symbol symbol in list) {
 				if(symbol is CircuitSymbol circuitSymbol) {
-					foreach(CircuitSymbol other in target.CircuitSymbols().Where(s => s != circuitSymbol && s.Circuit.Similar(circuitSymbol.Circuit))) {
-						Point point = other.Bounds().BottomRight;
-						if(diagram.X < point.X || diagram.Y < point.Y) {
-							return false;
-						}
-						need = need || (other.X == circuitSymbol.X && other.Y == circuitSymbol.Y);
+					if(	Symbol.LogicalCircuitGridWidth <= circuitSymbol.X + circuitSymbol.Circuit.SymbolWidth ||
+						Symbol.LogicalCircuitGridHeight <= circuitSymbol.Y + circuitSymbol.Circuit.SymbolHeight
+					) {
+						return false;
+					}
+					if(target.CircuitSymbols().Any(other =>
+						!exclude.Contains(other) && circuitSymbol.Circuit.Similar(other.Circuit) &&
+						ovelap(circuitSymbol.X, circuitSymbol.Circuit.SymbolWidth, other.X, other.Circuit.SymbolWidth) &&
+						ovelap(circuitSymbol.Y, circuitSymbol.Circuit.SymbolHeight, other.Y, other.Circuit.SymbolHeight)
+					)) {
+						need = true;
 					}
 				} else if(symbol is TextNote textNote) {
-					foreach(TextNote other in target.TextNotes().Where(n => n != textNote)) {
-						Point point = other.Bounds().BottomRight;
-						if(diagram.X < point.X || diagram.Y < point.Y) {
-							return false;
-						}
-						need = need || (other.X == textNote.X && other.Y == textNote.Y && other.Width == textNote.Width && other.Height == textNote.Height);
+					if(	Symbol.LogicalCircuitGridWidth <= textNote.X + textNote.Width ||
+						Symbol.LogicalCircuitGridHeight <= textNote.Y + textNote.Height
+					) {
+						return false;
+					}
+					if(target.TextNotes().Any(other => !exclude.Contains(other) &&
+						ovelap(textNote.X, textNote.Width, other.X, other.Width) &&
+						ovelap(textNote.Y, textNote.Height, other.Y, other.Height)
+					)) {
+						need = true;
 					}
 				} else if(symbol is Wire wire) {
-					foreach(Wire other in target.Wires().Where(w => w != wire)) {
-						if(diagram.X < Math.Max(wire.X1, wire.X2) || diagram.Y < Math.Max(wire.Y1, wire.Y2)) {
-							return false;
-						}
-						need = need || (wire.Point1 == other.Point1 && wire.Point2 == other.Point2);
+					if(	Symbol.LogicalCircuitGridWidth <= wire.X1 || Symbol.LogicalCircuitGridWidth <= wire.X2 ||
+						Symbol.LogicalCircuitGridHeight <= wire.Y1 || Symbol.LogicalCircuitGridHeight <= wire.Y2
+					) {
+						return false;
+					}
+					if(target.Wires().Any(other => !exclude.Contains(other) && (wire.Point1 == other.Point1 || wire.Point2 == other.Point2))) {
+						need = true;
 					}
 				}
 			}
