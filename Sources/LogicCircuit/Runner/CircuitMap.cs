@@ -468,7 +468,6 @@ namespace LogicCircuit {
 						GridPoint jamPoint = jam.AbsolutePoint;
 						if(conductor.Contains(jamPoint) && (!ignore || jamPoint != point)) {
 							Circuit circuit = symbol.Circuit;
-							Pin pin;
 							if(CircuitMap.IsPrimitive(circuit)) {
 								if(jam.Pin.PinType == PinType.Output && this.Root.results.TryGetValue(new SymbolMapKey(this, symbol), out SymbolMap symbolMap)) {
 									if(circuit is Gate gate && (gate.GateType == GateType.TriState1 || gate.GateType == GateType.TriState2)) {
@@ -478,7 +477,7 @@ namespace LogicCircuit {
 									}
 									return true;
 								}
-							} else if((pin = (circuit as Pin)) != null) {
+							} else if(circuit is Pin pin) {
 								if(this.Parent != null && this.Parent.StateIndexes(list, this.CircuitSymbol.Jam(pin).AbsolutePoint, true, start, count, visited)) {
 									return true;
 								}
