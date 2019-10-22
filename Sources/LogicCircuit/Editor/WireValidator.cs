@@ -72,7 +72,7 @@ namespace LogicCircuit {
 		}
 
 		private void UpdateCurrent() {
-			Debug.Print("<<< starting UpdateCurrent");
+			//Debug.Print("<<< starting UpdateCurrent");
 			try {
 				this.running = true;
 				LogicalCircuit current = this.diagram.CircuitProject.ProjectSet.Project.LogicalCircuit;
@@ -106,7 +106,7 @@ namespace LogicCircuit {
 				App.Mainframe.ReportException(exception);
 			} finally {
 				this.running = false;
-				Debug.Print(">>> ending UpdateCurrent");
+				//Debug.Print(">>> ending UpdateCurrent");
 			}
 		}
 
