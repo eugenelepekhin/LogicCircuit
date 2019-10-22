@@ -18,6 +18,7 @@ namespace LogicCircuit {
 
 		public static Brush CircuitFill { get { return Brushes.White; } }
 		public static Brush WireStroke { get { return Brushes.Black; } }
+		public static Brush BadWireStroke { get { return Brushes.Red; } }
 		public static Brush JamDirectFill { get { return Brushes.Black; } }
 		public static Brush JamInvertedFill { get { return Brushes.White; } }
 		public static Brush JamStroke { get { return Brushes.Black; } }

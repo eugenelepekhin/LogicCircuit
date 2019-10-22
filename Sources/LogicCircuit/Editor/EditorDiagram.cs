@@ -29,6 +29,7 @@ namespace LogicCircuit {
 		public Project Project { get { return this.CircuitProject.ProjectSet.Project; } }
 
 		private bool refreshPending;
+		private readonly WireValidator wireValidator;
 
 		public abstract bool InEditMode { get; }
 
@@ -46,6 +47,7 @@ namespace LogicCircuit {
 		protected EditorDiagram(Mainframe mainframe, CircuitProject circuitProject) {
 			this.Mainframe = mainframe;
 			this.CircuitProject = circuitProject;
+			this.wireValidator = new WireValidator(this);
 			this.Project.PropertyChanged += new PropertyChangedEventHandler(this.ProjectPropertyChanged);
 			this.CircuitProject.LogicalCircuitSet.CollectionChanged += new NotifyCollectionChangedEventHandler(this.LogicalCircuitSetCollectionChanged);
 			this.CircuitProject.CircuitSymbolSet.CollectionChanged += new NotifyCollectionChangedEventHandler(this.CircuitSymbolSetCollectionChanged);
@@ -79,6 +81,7 @@ namespace LogicCircuit {
 						symbol.Reset();
 					}
 				}
+				this.wireValidator.Update();
 			}
 			this.CircuitProject.CircuitSymbolSet.ValidateAll();
 			if(this.CircuitProject.Version == this.Project.LogicalCircuit.PinVersion) {
@@ -249,6 +252,8 @@ namespace LogicCircuit {
 			} else {
 				this.RedrawDiagram();
 			}
+			this.wireValidator.Reset();
+			this.wireValidator.Update();
 		}
 
 		private void Add(TextNote textNote) {
