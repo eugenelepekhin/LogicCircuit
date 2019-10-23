@@ -247,13 +247,12 @@ namespace LogicCircuit {
 		//--- Drawing ---
 
 		public void Refresh() {
+			this.wireValidator.Reset();
 			if(this.Dispatcher.Thread != Thread.CurrentThread) {
 				this.Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new Action(this.RedrawDiagram));
 			} else {
 				this.RedrawDiagram();
 			}
-			this.wireValidator.Reset();
-			this.wireValidator.Update();
 		}
 
 		private void Add(TextNote textNote) {
@@ -313,6 +312,7 @@ namespace LogicCircuit {
 				this.Add(symbol);
 			}
 			this.UpdateSolders();
+			this.wireValidator.Update();
 		}
 
 		//--- Diagram Primitives ---

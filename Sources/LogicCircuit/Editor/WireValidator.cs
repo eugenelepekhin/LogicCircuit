@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace LogicCircuit {
 	internal class WireValidator {
-		private readonly Task task;
-		private readonly AutoResetEvent updateRequest;
+		private static Thread thread;
+		private static AutoResetEvent updateRequest;
+		private static WireValidator wireValidator;
+
 		private bool running = false;
 		private bool stopPending;
 
@@ -19,9 +20,18 @@ namespace LogicCircuit {
 
 		public WireValidator(EditorDiagram diagram) {
 			this.diagram = diagram;
-			this.updateRequest = new AutoResetEvent(false);
-			this.task = new Task(this.Run, TaskCreationOptions.LongRunning);
-			this.task.Start();
+			if(WireValidator.thread == null) {
+				Thread attempt = new Thread(new ThreadStart(WireValidator.Run)) {
+					Name = nameof(WireValidator),
+					IsBackground = true,
+					Priority = ThreadPriority.BelowNormal
+				};
+				if(null == Interlocked.CompareExchange(ref WireValidator.thread, attempt, null)) {
+					WireValidator.updateRequest = new AutoResetEvent(false);
+					WireValidator.thread.Start();
+				}
+			}
+			WireValidator.wireValidator = this;
 		}
 
 		private HashSet<Wire> Bad(LogicalCircuit current) {
@@ -110,11 +120,11 @@ namespace LogicCircuit {
 			}
 		}
 
-		private void Run() {
+		private static void Run() {
 			try {
 				for(;;) {
-					this.updateRequest.WaitOne();
-					this.UpdateCurrent();
+					WireValidator.updateRequest.WaitOne();
+					WireValidator.wireValidator.UpdateCurrent();
 				}
 			} catch(Exception exception) {
 				App.Mainframe.ReportException(exception);
@@ -130,7 +140,7 @@ namespace LogicCircuit {
 					Thread.Sleep(0);
 				}
 				this.stopPending = false;
-				this.updateRequest.Set();
+				WireValidator.updateRequest.Set();
 			}
 		}
 
