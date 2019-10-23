@@ -16,6 +16,7 @@ namespace LogicCircuit {
 		public string Notation;
 		public bool IsToggle;
 		public PinSide PinSide;
+		public bool Inverted;
 		public int Width;
 		public int Height;
 		public string Note;
@@ -161,6 +162,41 @@ namespace LogicCircuit {
 			}
 		}
 
+		// Accessor of the Inverted field
+		public sealed class InvertedField : IField<CircuitButtonData, bool>, IFieldSerializer<CircuitButtonData> {
+			public static readonly InvertedField Field = new InvertedField();
+			private InvertedField() {}
+			public string Name { get { return "Inverted"; } }
+			public int Order { get; set; }
+			public bool DefaultValue { get { return false; } }
+			public bool GetValue(ref CircuitButtonData record) {
+				return record.Inverted;
+			}
+			public void SetValue(ref CircuitButtonData record, bool value) {
+				record.Inverted = value;
+			}
+			public int Compare(ref CircuitButtonData l, ref CircuitButtonData r) {
+				return l.Inverted.CompareTo(r.Inverted);
+			}
+			public int Compare(bool l, bool r) {
+				return l.CompareTo(r);
+			}
+
+			// Implementation of interface IFieldSerializer<CircuitButtonData>
+			bool IFieldSerializer<CircuitButtonData>.NeedToSave(ref CircuitButtonData data) {
+				return this.Compare(data.Inverted, this.DefaultValue) != 0;
+			}
+			string IFieldSerializer<CircuitButtonData>.GetTextValue(ref CircuitButtonData data) {
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Inverted);
+			}
+			void IFieldSerializer<CircuitButtonData>.SetDefault(ref CircuitButtonData data) {
+				data.Inverted = this.DefaultValue;
+			}
+			void IFieldSerializer<CircuitButtonData>.SetTextValue(ref CircuitButtonData data, string text) {
+				data.Inverted = bool.Parse(text);
+			}
+		}
+
 		// Accessor of the Width field
 		public sealed class WidthField : IField<CircuitButtonData, int>, IFieldSerializer<CircuitButtonData> {
 			public static readonly WidthField Field = new WidthField();
@@ -296,6 +332,7 @@ namespace LogicCircuit {
 			NotationField.Field,
 			IsToggleField.Field,
 			PinSideField.Field,
+			InvertedField.Field,
 			WidthField.Field,
 			HeightField.Field,
 			NoteField.Field,
@@ -364,6 +401,12 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.CircuitButtonRowId, CircuitButtonData.PinSideField.Field, value); }
 		}
 
+		// Gets or sets value of the Inverted field.
+		public bool Inverted {
+			get { return this.Table.GetField(this.CircuitButtonRowId, CircuitButtonData.InvertedField.Field); }
+			set { this.Table.SetField(this.CircuitButtonRowId, CircuitButtonData.InvertedField.Field, value); }
+		}
+
 		// Gets or sets value of the Width field.
 		public int Width {
 			get { return this.Table.GetField(this.CircuitButtonRowId, CircuitButtonData.WidthField.Field); }
@@ -399,6 +442,9 @@ namespace LogicCircuit {
 				}
 				if(CircuitButtonData.PinSideField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("PinSide");
+				}
+				if(CircuitButtonData.InvertedField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("Inverted");
 				}
 				if(CircuitButtonData.WidthField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("Width");
@@ -495,6 +541,7 @@ namespace LogicCircuit {
 			string Notation,
 			bool IsToggle,
 			PinSide PinSide,
+			bool Inverted,
 			int Width,
 			int Height,
 			string Note
@@ -512,6 +559,7 @@ namespace LogicCircuit {
 				Notation = Notation,
 				IsToggle = IsToggle,
 				PinSide = PinSide,
+				Inverted = Inverted,
 				Width = Width,
 				Height = Height,
 				Note = Note,

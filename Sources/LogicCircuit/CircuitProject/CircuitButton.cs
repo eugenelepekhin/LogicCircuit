@@ -72,6 +72,7 @@ namespace LogicCircuit {
 
 		public CircuitButton Create(string notation, bool isToggle, PinSide pinSide) {
 			CircuitButton button = this.CreateItem(Guid.NewGuid(), notation, isToggle, pinSide,
+				CircuitButtonData.InvertedField.Field.DefaultValue,
 				CircuitButtonData.WidthField.Field.DefaultValue,
 				CircuitButtonData.HeightField.Field.DefaultValue,
 				CircuitButtonData.NoteField.Field.DefaultValue
@@ -83,6 +84,7 @@ namespace LogicCircuit {
 		private void CreateDevicePin(CircuitButton button) {
 			DevicePin pin = this.CircuitProject.DevicePinSet.Create(button, PinType.Output, 1);
 			pin.PinSide = button.PinSide;
+			pin.Inverted = button.Inverted;
 		}
 
 		public CircuitButton Copy(CircuitButton other) {

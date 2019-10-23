@@ -230,7 +230,7 @@ namespace LogicCircuit {
 			return canvas;
 		}
 
-		public void UpdateButtonGlyph(Panel panel) {
+		private void UpdateButtonGlyph(Panel panel) {
 			Tracer.Assert(panel != null);
 			CircuitButton button = this.Circuit as CircuitButton;
 			Tracer.Assert(button != null);

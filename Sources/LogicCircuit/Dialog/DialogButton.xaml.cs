@@ -20,6 +20,7 @@ namespace LogicCircuit {
 			this.name.Text = this.button.Notation;
 			this.isToggle.IsChecked = this.button.IsToggle;
 			this.side.SelectedItem = PinDescriptor.PinSideDescriptor(this.button.PinSide);
+			this.inverted.IsChecked = this.button.Inverted;
 			this.note.Text = this.button.Note;
 		}
 
@@ -28,11 +29,18 @@ namespace LogicCircuit {
 				string name = this.name.Text.Trim();
 				string note = this.note.Text.Trim();
 				PinSide pinSide = ((EnumDescriptor<PinSide>)this.side.SelectedItem).Value;
-				if(this.button.Notation != name || this.button.IsToggle != this.isToggle.IsChecked || this.button.PinSide != pinSide || this.button.Note != note) {
+				bool isInverted = this.inverted.IsChecked.HasValue && this.inverted.IsChecked.Value;
+				if(	this.button.Notation != name ||
+					this.button.IsToggle != this.isToggle.IsChecked ||
+					this.button.PinSide != pinSide ||
+					this.button.Inverted != isInverted ||
+					this.button.Note != note
+				) {
 					this.button.CircuitProject.InTransaction(() => {
 						this.button.Notation = name;
 						this.button.IsToggle = this.isToggle.IsChecked.Value;
 						this.button.PinSide = pinSide;
+						this.button.Inverted = isInverted;
 						this.button.Note = note;
 						this.button.Pins.First().PinSide = pinSide;
 					});

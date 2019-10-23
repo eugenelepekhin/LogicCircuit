@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Store xmlns="clr-namespace:ItemWrapper.Generator;assembly=ItemWrapper.Generator"
 	Namespace="LogicCircuit" Name="CircuitProject"
-	PersistencePrefix="lc" PersistenceNamespace="http://LogicCircuit.net/2.0.0.7/CircuitProject.xsd"
+	PersistencePrefix="lc" PersistenceNamespace="http://LogicCircuit.net/2.0.0.8/CircuitProject.xsd"
 >
 
 	<!--
@@ -19,6 +19,7 @@
 		Version 2.0.0.5 - Adding MemoryOnStart to memory circuits
 		Version 2.0.0.6 - Adding IsDisplay property to LogicalCircuit. Making Probe separate circuit to enable naming of it.
 		Version 2.0.0.7 - Adding PinSide to Button and Constant. Adding Sensor, Sound, and GraphicsArray circuits. LogicalCircuit.Description and Project.Description both renamed to Note.
+		Version 2.0.0.8 - Adding Inverted flag to the button
 	-->
 
 	<Table Name="Project">
@@ -211,6 +212,7 @@
 			<Column Name="Notation" Type="string" Default="" PropertyOverrides="true"/>
 			<Column Name="IsToggle" Type="bool" Default="false"/>
 			<Column Name="PinSide" Type="PinSide" Default="PinSide.Right"/>
+			<Column Name="Inverted" Type="bool" Default="false"/>
 			<Column Name="Width" Type="int" Default="2"/>
 			<Column Name="Height" Type="int" Default="2"/>
 			<Column Name="Note" Type="string" Default="" PropertyOverrides="true"/>

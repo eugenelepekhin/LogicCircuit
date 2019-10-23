@@ -62,6 +62,9 @@ namespace LogicCircuit {
 				if(this.Circuit is Pin pin) {
 					return pin.Inverted;
 				}
+				if(this.Circuit is CircuitButton button) {
+					return button.Inverted;
+				}
 				return this.PinInverted;
 			}
 			set { this.PinInverted = value; }

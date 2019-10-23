@@ -16,6 +16,8 @@
 			Content="{x:Static properties:Resources.TitleIsToggle}" ToolTip="{x:Static properties:Resources.ToolTipIsToggle}"
 		/>
 
+		<CheckBox Grid.Column="1" Name="inverted" Content="{x:Static properties:Resources.TitleInverted}"/>
+
 		<Label Content="{x:Static properties:Resources.TitlePinSide}"/>
 		<lc:AutoWidthComboBox x:Name="side" ItemsSource="{x:Static lc:PinDescriptor.PinSideRange}" ToolTip="{x:Static properties:Resources.ToolTipDevicePinSide}"/>
 

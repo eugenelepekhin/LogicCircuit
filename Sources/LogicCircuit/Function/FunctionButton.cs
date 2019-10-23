@@ -11,12 +11,14 @@ namespace LogicCircuit {
 
 		private readonly List<CircuitSymbol> circuitSymbol;
 		private readonly bool isToggle;
+		private readonly bool inverted;
 		private readonly Project project;
 
 		public FunctionButton(CircuitState circuitState, IEnumerable<CircuitSymbol> symbols, int result) : base(circuitState, State.On0, result) {
 			this.circuitSymbol = symbols.ToList();
 			this.project = this.circuitSymbol[0].LogicalCircuit.CircuitProject.ProjectSet.Project;
 			this.isToggle = ((CircuitButton)this.circuitSymbol[0].Circuit).IsToggle;
+			this.inverted = ((CircuitButton)this.circuitSymbol[0].Circuit).Inverted;
 
 			if(this.isToggle && FunctionButton.stateBrush == null) {
 				FunctionButton.stateBrush = new Brush[] {
@@ -24,6 +26,9 @@ namespace LogicCircuit {
 					(Brush)App.CurrentApp.FindResource("Led7SegmentOn0"),
 					(Brush)App.CurrentApp.FindResource("Led7SegmentOn1")
 				};
+			}
+			if(this.inverted) {
+				this.SetState(State.On1);
 			}
 		}
 
@@ -37,10 +42,10 @@ namespace LogicCircuit {
 					this.SetState(CircuitFunction.Not(this.State));
 					this.Invalid = true;
 				} else {
-					this.SetState(State.On1);
+					this.SetState(this.inverted ? State.On0 : State.On1);
 				}
 			} else if(!this.isToggle) {
-				this.SetState(State.On0);
+				this.SetState(this.inverted ? State.On1 : State.On0);
 			}
 		}
 
