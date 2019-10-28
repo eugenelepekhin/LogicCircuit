@@ -1472,4 +1472,10 @@ Do you want to load auto saved state of this file?</value>
   <data name="TitleMinutesUnits" xml:space="preserve">
     <value>minutes</value>
   </data>
+  <data name="TitlePinIndex" xml:space="preserve">
+    <value>Pin order</value>
+  </data>
+  <data name="TitlePinIndexReset" xml:space="preserve">
+    <value>Reset to graphical placement</value>
+  </data>
 </root>

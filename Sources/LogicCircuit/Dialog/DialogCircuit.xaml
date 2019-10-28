@@ -6,26 +6,52 @@
 	WindowStartupLocation="CenterOwner"
 	Title="{x:Static properties:Resources.CommandCircuitCurrent}"
 	Style="{StaticResource DialogWindow}"
-	MinWidth="320"
-	MinHeight="270"
+	MinWidth="350"
+	MinHeight="350"
 	FocusManager.FocusedElement="{Binding ElementName=name}"
 >
 	<lc:AutoGrid Margin="3">
-		<Label Content="{x:Static properties:Resources.TitleName}"/>
-		<TextBox Name="name"/>
+		<TabControl Grid.ColumnSpan="2" lc:AutoGrid.RowHeight="*">
+			<TabItem Header="{x:Static properties:Resources.TitleCircuitDescriptor}">
+				<lc:AutoGrid>
+					<Label Content="{x:Static properties:Resources.TitleName}"/>
+					<TextBox Name="name"/>
 
-		<Label Content="{x:Static properties:Resources.TitleNotation}"/>
-		<TextBox Name="notation"/>
+					<Label Content="{x:Static properties:Resources.TitleNotation}"/>
+					<TextBox Name="notation"/>
 
-		<Label Content="{x:Static properties:Resources.TitleCategory}"/>
-		<ComboBox Name="category" IsEditable="True" IsTextSearchEnabled="True"/>
+					<Label Content="{x:Static properties:Resources.TitleCategory}"/>
+					<ComboBox Name="category" IsEditable="True" IsTextSearchEnabled="True"/>
 
-		<CheckBox Grid.Column="1" Name="isDisplay" ToolTip="{x:Static properties:Resources.ToolTipIsDisplay}">
-			<AccessText Text="{x:Static properties:Resources.TitleIsDisplay}" TextWrapping="Wrap"/>
-		</CheckBox>
+					<CheckBox Grid.Column="1" Name="isDisplay" ToolTip="{x:Static properties:Resources.ToolTipIsDisplay}">
+						<AccessText Text="{x:Static properties:Resources.TitleIsDisplay}" TextWrapping="Wrap"/>
+					</CheckBox>
 
-		<Label Content="{x:Static properties:Resources.TitleDescription}"/>
-		<TextBox Name="description" AcceptsReturn="True"/>
+					<Label Content="{x:Static properties:Resources.TitleDescription}"/>
+					<TextBox Name="description" AcceptsReturn="True"/>
+				</lc:AutoGrid>
+			</TabItem>
+
+			<TabItem Header="{x:Static properties:Resources.TitlePinIndex}">
+				<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch">
+					<lc:AutoGrid>
+						<Label Content="{x:Static properties:Resources.PinSideLeft}"/>
+						<lc:ControlPinOrder x:Name="leftPins"/>
+
+						<Label Content="{x:Static properties:Resources.PinSideRight}"/>
+						<lc:ControlPinOrder x:Name="rightPins"/>
+
+						<Label Content="{x:Static properties:Resources.PinSideTop}"/>
+						<lc:ControlPinOrder x:Name="topPins"/>
+
+						<Label Content="{x:Static properties:Resources.PinSideBottom}"/>
+						<lc:ControlPinOrder x:Name="bottomPins"/>
+
+						<Button Grid.Column="1" Content="{x:Static properties:Resources.TitlePinIndexReset}" Click="ButtonResetClick" HorizontalAlignment="Left"/>
+					</lc:AutoGrid>
+				</ScrollViewer>
+			</TabItem>
+		</TabControl>
 
 		<StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
 			<Button Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" Click="ButtonOkClick"/>

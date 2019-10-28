@@ -25,6 +25,7 @@ namespace LogicCircuit {
 		public string Name;
 		public string Note;
 		public string JamNotation;
+		public int Index;
 		internal Pin Pin;
 		// Field accessors
 		// Accessor of the PinId field
@@ -342,6 +343,41 @@ namespace LogicCircuit {
 			}
 		}
 
+		// Accessor of the Index field
+		public sealed class IndexField : IField<PinData, int>, IFieldSerializer<PinData> {
+			public static readonly IndexField Field = new IndexField();
+			private IndexField() {}
+			public string Name { get { return "Index"; } }
+			public int Order { get; set; }
+			public int DefaultValue { get { return 0; } }
+			public int GetValue(ref PinData record) {
+				return record.Index;
+			}
+			public void SetValue(ref PinData record, int value) {
+				record.Index = value;
+			}
+			public int Compare(ref PinData l, ref PinData r) {
+				return Math.Sign((long)l.Index - (long)r.Index);
+			}
+			public int Compare(int l, int r) {
+				return Math.Sign((long)l - (long)r);
+			}
+
+			// Implementation of interface IFieldSerializer<PinData>
+			bool IFieldSerializer<PinData>.NeedToSave(ref PinData data) {
+				return this.Compare(data.Index, this.DefaultValue) != 0;
+			}
+			string IFieldSerializer<PinData>.GetTextValue(ref PinData data) {
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Index);
+			}
+			void IFieldSerializer<PinData>.SetDefault(ref PinData data) {
+				data.Index = this.DefaultValue;
+			}
+			void IFieldSerializer<PinData>.SetTextValue(ref PinData data, string text) {
+				data.Index = int.Parse(text, CultureInfo.InvariantCulture);
+			}
+		}
+
 		// Special field used to access items wrapper of this record from record.
 		// This is used when no other universes is used
 		internal sealed class PinField : IField<PinData, Pin> {
@@ -377,6 +413,7 @@ namespace LogicCircuit {
 			NameField.Field,
 			NoteField.Field,
 			JamNotationField.Field,
+			IndexField.Field,
 			PinField.Field
 		};
 
@@ -474,6 +511,12 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.PinRowId, PinData.JamNotationField.Field, value); }
 		}
 
+		// Gets or sets value of the Index field.
+		public int Index {
+			get { return this.Table.GetField(this.PinRowId, PinData.IndexField.Field); }
+			set { this.Table.SetField(this.PinRowId, PinData.IndexField.Field, value); }
+		}
+
 
 		internal void NotifyChanged(TableChange<PinData> change) {
 			if(this.HasListener) {
@@ -506,6 +549,9 @@ namespace LogicCircuit {
 				}
 				if(PinData.JamNotationField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("JamNotation");
+				}
+				if(PinData.IndexField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("Index");
 				}
 			}
 			this.OnPinChanged();
@@ -597,7 +643,8 @@ namespace LogicCircuit {
 			bool Inverted,
 			string Name,
 			string Note,
-			string JamNotation
+			string JamNotation,
+			int Index
 			// Fields of Circuit table
 
 		) {
@@ -617,6 +664,7 @@ namespace LogicCircuit {
 				Name = Name,
 				Note = Note,
 				JamNotation = JamNotation,
+				Index = Index,
 			};
 			return this.Create(this.Table.Insert(ref dataPin), rowIdCircuit);
 		}

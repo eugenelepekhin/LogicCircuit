@@ -35,6 +35,13 @@ namespace LogicCircuit {
 				this.isDisplay.IsEnabled = false;
 			}
 			this.description.Text = this.logicalCircuit.Note;
+
+			IEnumerable<Pin> pins(PinSide pinSide) => this.logicalCircuit.Pins.Where(pin => pin.PinSide == pinSide).Select(pin => (Pin)pin);
+			this.leftPins.SetPins(pins(PinSide.Left));
+			this.rightPins.SetPins(pins(PinSide.Right));
+			this.topPins.SetPins(pins(PinSide.Top));
+			this.bottomPins.SetPins(pins(PinSide.Bottom));
+
 			this.Loaded += new RoutedEventHandler(this.DialogCircuitLoaded);
 		}
 
@@ -50,6 +57,17 @@ namespace LogicCircuit {
 			}
 		}
 
+		private void ButtonResetClick(object sender, RoutedEventArgs e) {
+			try {
+				this.leftPins.Reset();
+				this.rightPins.Reset();
+				this.topPins.Reset();
+				this.bottomPins.Reset();
+			} catch(Exception exception) {
+				App.Mainframe.ReportException(exception);
+			}
+		}
+
 		private void ButtonOkClick(object sender, RoutedEventArgs e) {
 			try {
 				string name = this.name.Text.Trim();
@@ -58,9 +76,14 @@ namespace LogicCircuit {
 				category = category.Substring(0, Math.Min(category.Length, 64)).Trim();
 				bool isDisplay = this.logicalCircuit.ContainsDisplays() ? this.isDisplay.IsChecked.Value : this.logicalCircuit.IsDisplay;
 				string description = this.description.Text.Trim();
+				bool leftChanged = this.leftPins.HasChanges();
+				bool rightChanged = this.rightPins.HasChanges();
+				bool topChanged = this.topPins.HasChanges();
+				bool bottomChanged = this.bottomPins.HasChanges();
 
 				if(this.logicalCircuit.Name != name || this.logicalCircuit.Notation != notation ||
-					this.logicalCircuit.Category != category || this.logicalCircuit.IsDisplay != isDisplay || this.logicalCircuit.Note != description
+					this.logicalCircuit.Category != category || this.logicalCircuit.IsDisplay != isDisplay || this.logicalCircuit.Note != description ||
+					leftChanged || rightChanged || topChanged || bottomChanged
 				) {
 					this.logicalCircuit.CircuitProject.InTransaction(() => {
 						this.logicalCircuit.Rename(name);
@@ -69,6 +92,10 @@ namespace LogicCircuit {
 						this.logicalCircuit.IsDisplay = isDisplay;
 						this.logicalCircuit.Note = description;
 						this.logicalCircuit.CircuitProject.CollapsedCategorySet.Purge();
+						if(leftChanged) this.leftPins.Update();
+						if(rightChanged) this.rightPins.Update();
+						if(topChanged) this.topPins.Update();
+						if(bottomChanged) this.bottomPins.Update();
 					});
 				}
 				this.Close();

@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="LogicCircuit.ControlPinOrder"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:lc="clr-namespace:LogicCircuit"
+>
+	<lc:AutoGrid ColumnWidths="*;Auto" DataContext="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}">
+		<ListBox x:Name="listBox" SelectionMode="Single" ItemsSource="{Binding Path=PinList}" IsSynchronizedWithCurrentItem="True">
+			<ListBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<StackPanel Orientation="Horizontal"/>
+				</ItemsPanelTemplate>
+			</ListBox.ItemsPanel>
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<ContentControl Content="{Binding Path=CircuitGlyph.Glyph}"/>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+
+		<StackPanel Orientation="Horizontal">
+			<Button Style="{StaticResource SmallButton}" Command="{Binding Path=CommandLeft}"/>
+			<Button Style="{StaticResource SmallButton}" Command="{Binding Path=CommandRight}"/>
+		</StackPanel>
+	</lc:AutoGrid>
+</UserControl>

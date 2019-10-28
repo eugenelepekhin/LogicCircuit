@@ -80,7 +80,8 @@ namespace LogicCircuit {
 				PinData.InvertedField.Field.DefaultValue,
 				this.UniqueName(BasePin.DefaultName(pinType), logicalCircuit),
 				PinData.NoteField.Field.DefaultValue,
-				PinData.JamNotationField.Field.DefaultValue
+				PinData.JamNotationField.Field.DefaultValue,
+				PinData.IndexField.Field.DefaultValue
 			);
 			this.CreateDevicePin(pin);
 			return pin;

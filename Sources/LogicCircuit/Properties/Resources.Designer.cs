@@ -3012,5 +3012,19 @@ namespace LogicCircuit.Properties {
  		public static string TitleMinutesUnits {
 			get { return ResourceManager.GetString("TitleMinutesUnits", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Pin order.
+		/// </summary>
+ 		public static string TitlePinIndex {
+			get { return ResourceManager.GetString("TitlePinIndex", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Reset to graphical placement.
+		/// </summary>
+ 		public static string TitlePinIndexReset {
+			get { return ResourceManager.GetString("TitlePinIndexReset", Culture); }
+		}
 	}
 }

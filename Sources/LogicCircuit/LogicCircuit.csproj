@@ -110,6 +110,9 @@
     <Compile Include="Dialog\ControlMemoryEditor.xaml.cs">
       <DependentUpon>ControlMemoryEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialog\ControlPinOrder.xaml.cs">
+      <DependentUpon>ControlPinOrder.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialog\DialogAbout.xaml.cs">
       <DependentUpon>DialogAbout.xaml</DependentUpon>
     </Compile>
@@ -184,6 +187,7 @@
     <Compile Include="Dialog\DialogUsage.xaml.cs">
       <DependentUpon>DialogUsage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialog\PinOrderDescriptor.cs" />
     <Compile Include="Dialog\ReportBuilder.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -352,6 +356,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialog\ControlMemoryEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialog\ControlPinOrder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
