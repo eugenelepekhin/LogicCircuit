@@ -170,7 +170,11 @@ namespace LogicCircuit {
 					ellipse.Fill = Symbol.JamDirectFill;
 					Panel.SetZIndex(ellipse, -1);
 				}
-				ellipse.ToolTip = jam.Pin.ToolTip;
+				string toolTip = jam.Pin.ToolTip;
+				#if DEBUG
+					toolTip += "\n" + jam.AbsolutePoint.ToString();
+				#endif
+				ellipse.ToolTip = toolTip;
 				string jamNotation = jam.Pin.JamNotation;
 				if(!string.IsNullOrEmpty(jamNotation)) {
 					Tracer.Assert(notationPosition != null); // If pin has notation then it should belong to rectangular rendering circuit.
@@ -178,7 +182,7 @@ namespace LogicCircuit {
 					text.Foreground = Brushes.Black;
 					int len = (jam.Pin.PinSide == PinSide.Top || jam.Pin.PinSide == PinSide.Bottom) ? 4 : 2;
 					text.Text = jamNotation.Substring(0, Math.Min(len, jamNotation.Length));
-					text.ToolTip = jam.Pin.ToolTip;
+					text.ToolTip = toolTip;
 					text.FontSize = 8;
 					Panel.SetZIndex(text, 1);
 					notationPosition(jam, text);

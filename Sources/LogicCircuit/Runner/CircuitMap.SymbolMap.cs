@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 
 namespace LogicCircuit {
 	partial class CircuitMap {
@@ -176,6 +177,8 @@ namespace LogicCircuit {
 				}
 				return null;
 			}
+
+			public IEnumerable<Parameter> AllParameters(Jam jam) => this.parameters.Where(p => p.Key.Jam == jam).OrderBy(p => p.Key.BitNumber).Select(p => p.Value);
 
 			#if DEBUG
 				public override string ToString() {

@@ -42,7 +42,13 @@ namespace LogicCircuit {
 
 		#if DEBUG
 			public override string ToString() {
-				return string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0} of {1} on {2}", this.GetType().Name, this.Pin.ToString(), this.CircuitSymbol.ToString());
+				return string.Format(System.Globalization.CultureInfo.InvariantCulture,
+					"{0} of {1} on {2} at{3}",
+					this.GetType().Name,
+					this.Pin.ToString(),
+					this.CircuitSymbol.ToString(),
+					this.AbsolutePoint
+				);
 			}
 		#endif
 	}

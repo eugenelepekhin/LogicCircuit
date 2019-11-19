@@ -45,6 +45,36 @@ namespace LogicCircuit {
 		// This only exists on the root.
 		private Dictionary<SymbolMapKey, SymbolMap> results;
 
+		// This only exists on the root;
+		private Dictionary<LogicalCircuit, Dictionary<GridPoint, List<Jam>>> jamMaps;
+
+		private Dictionary<GridPoint, List<Jam>> JamMap {
+			get {
+				CircuitMap root = this.Root;
+				if(root.jamMaps == null) {
+					root.jamMaps = new Dictionary<LogicalCircuit, Dictionary<GridPoint, List<Jam>>>();
+				}
+				Dictionary<GridPoint, List<Jam>> map;
+				if(!root.jamMaps.TryGetValue(this.Circuit, out map)) {
+					map = new Dictionary<GridPoint, List<Jam>>();
+					root.jamMaps.Add(this.Circuit, map);
+
+					foreach(CircuitSymbol symbol in this.symbols) {
+						foreach(Jam jam in symbol.Jams()) {
+							GridPoint point = jam.AbsolutePoint;
+							List<Jam> list;
+							if(!map.TryGetValue(point, out list)) {
+								list = new List<Jam>(1);
+								map.Add(point, list);
+							}
+							list.Add(jam);
+						}
+					}
+				}
+				return map;
+			}
+		}
+
 		public CircuitMap(LogicalCircuit circuit) {
 			this.Circuit = circuit;
 			this.CircuitSymbol = null;
@@ -452,92 +482,103 @@ namespace LogicCircuit {
 
 		public IEnumerable<int> StateIndexes(Wire wire) {
 			Tracer.Assert(this.Circuit == wire.LogicalCircuit);
-			List<int> list = new List<int>();
-			this.StateIndexes(list, wire.Point1, false, 0, 32, new HashSet<CircuitMap>());
-			Tracer.Assert(0 <= list.Count && list.Count <= 32);
-			return list;
+			ConductorMap conductorMap = this.Circuit.ConductorMap();
+			Conductor conductor;
+			bool gotIt = conductorMap.TryGetValue(wire.Point1, out conductor);
+			Tracer.Assert(gotIt);
+			Dictionary<GridPoint, List<Jam>> map = this.JamMap;
+			List<Jam> jams = conductor.Points.SelectMany(p => map.TryGetValue(p, out List<Jam> l) ? l : Enumerable.Empty<Jam>()).ToList();
+			if(jams.Any()) {
+				foreach(Jam jam in jams.Where(j => CircuitMap.IsPrimitive(j.CircuitSymbol.Circuit))) {
+					if(this.Root.results.TryGetValue(new SymbolMapKey(this, (CircuitSymbol)jam.CircuitSymbol), out SymbolMap symbolMap)) {
+						if(jam.Pin.PinType == PinType.Output) {
+							return symbolMap.Results.Select(r => r.StateIndex);
+						} else {
+							return symbolMap.AllParameters(jam).Select(p => p.Result.StateIndex);
+						}
+					}
+				}
+				Jam start = jams.FirstOrDefault(j => !CircuitMap.IsPrimitive(j.CircuitSymbol.Circuit));
+				if(start != null) {
+					List<int> list = new List<int>();
+					this.StateIndexes(list, start.AbsolutePoint, false, 0, start.Pin.BitWidth, new HashSet<JamBit>());
+					return list;
+				}
+			}
+			return Enumerable.Empty<int>();
 		}
 
-		[SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		[SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-		private bool StateIndexes(List<int> list, GridPoint point, bool ignore, int start, int count, HashSet<CircuitMap> visited) {
-			Tracer.Assert(0 <= start && start < 32 && 0 <= count && count <= 32);
-			if(0 < count && this.Circuit.ConductorMap().TryGetValue(point, out Conductor conductor)) {
-				foreach(CircuitSymbol symbol in this.symbols) {
-					foreach(Jam jam in symbol.Jams()) {
-						GridPoint jamPoint = jam.AbsolutePoint;
-						if(conductor.Contains(jamPoint) && (!ignore || jamPoint != point)) {
-							Circuit circuit = symbol.Circuit;
-							if(CircuitMap.IsPrimitive(circuit)) {
-								if(jam.Pin.PinType == PinType.Output && this.Root.results.TryGetValue(new SymbolMapKey(this, symbol), out SymbolMap symbolMap)) {
-									if(circuit is Gate gate && (gate.GateType == GateType.TriState1 || gate.GateType == GateType.TriState2)) {
-										list.AddRange(symbolMap.Results.Skip(start).Take(count).Select(r => r.StateIndex).Where(i => !list.Contains(i)));
-									} else {
-										list.AddRange(symbolMap.Results.Skip(start).Take(count).Select(r => r.StateIndex));
-									}
-									return true;
-								}
-							} else if(circuit is Pin pin) {
-								if(this.Parent != null && this.Parent.StateIndexes(list, this.CircuitSymbol.Jam(pin).AbsolutePoint, true, start, count, visited)) {
-									return true;
-								}
-							} else if(circuit is LogicalCircuit) {
-								CircuitMap child = this.children[(CircuitSymbol)jam.CircuitSymbol];
-								if(visited.Add(child)) {
-									// child pin must be there as the jam only be there if the pin exists
-									CircuitSymbol childPinSymbol = this.Circuit.CircuitProject.CircuitSymbolSet.SelectByCircuit(jam.Pin).First();
-									// the child for the logic circuit also must exist
-									if(child.StateIndexes(list, childPinSymbol.Jams().First().AbsolutePoint, true, start, count, visited)) {
-										visited.Remove(child);
-										return true;
-									}
-									visited.Remove(child);
-								}
-							} else if(circuit is Splitter) {
-								List<Jam> jams = symbol.Jams().ToList();
-								// Sort jams in order of their device pins. Assuming first one will be the wide pin and the rest are thin ones,
-								// starting from lower bits to higher. This implies that creating of the pins should happened in that order.
-								jams.Sort(JamComparer.Comparer);
+		private bool StateIndexes(List<int> list, GridPoint point, bool ignore, int start, int count, HashSet<JamBit> visited) {
+			Tracer.FullInfo("CircuitMap.StateIndexes", "Point={0}", point);
 
-								if(jam == jams[0]) { //wide jam. so combine all the thin pins in the interval between start and start + count
-									int jamStart = 0;
-									bool obtained = false;
-									for(int i = 1; i < jams.Count && jamStart < start + count; i++) {
-										int bitWidth = jams[i].Pin.BitWidth;
-										if(start < jamStart + bitWidth) {
-											List<int> child = new List<int>();
-											int localStart = Math.Max(0, start - jamStart);
-											Tracer.Assert(0 <= localStart && localStart < bitWidth);
-											int localCount = Math.Min(start + count, jamStart + bitWidth) - (jamStart + localStart);
-											Tracer.Assert(0 < localCount && localCount <= count && localCount <= bitWidth);
-											obtained |= this.StateIndexes(child, jams[i].AbsolutePoint, true, localStart, localCount, visited);
-											list.AddRange(child);
-										}
-										jamStart += bitWidth;
-									}
-									if(obtained) {
-										return true;
-									}
-								} else { // thin jam. find position of this bit in wide pin
-									int jamStart = 0;
-									bool obtained = false;
-									for(int i = 1; i < jams.Count; i++) {
-										int bitWidth = jams[i].Pin.BitWidth;
-										if(jams[i] == jam) {
-											Tracer.Assert(start < bitWidth);
-											obtained = this.StateIndexes(list, jams[0].AbsolutePoint, true, jamStart + start, Math.Min(bitWidth - start, count), visited);
-											break;
-										}
-										jamStart += bitWidth;
-									}
-									if(obtained) {
-										return true;
-									}
-								}
-							} else {
-								Tracer.Fail();
+			if(this.Circuit.ConductorMap().TryGetValue(point, out Conductor conductor)) {
+				Dictionary<GridPoint, List<Jam>> map = this.JamMap;
+				List<Jam> jams = conductor.Points.SelectMany(p => map.TryGetValue(p, out List<Jam> l) ? l : Enumerable.Empty<Jam>()).ToList();
+				foreach(Jam jam in jams.Where(j => CircuitMap.IsPrimitive(j.CircuitSymbol.Circuit))) {
+					if(this.Root.results.TryGetValue(new SymbolMapKey(this, (CircuitSymbol)jam.CircuitSymbol), out SymbolMap symbolMap)) {
+						if(jam.Pin.PinType == PinType.Output) {
+							list.AddRange(symbolMap.Results.Skip(start).Take(count).Select(r => r.StateIndex));
+						} else {
+							list.AddRange(symbolMap.AllParameters(jam).Skip(start).Take(count).Select(p => p.Result.StateIndex));
+						}
+						return true;
+					}
+				}
+
+				foreach(Jam jam in jams.Where(j => !CircuitMap.IsPrimitive(j.CircuitSymbol.Circuit) && (!ignore || point != j.AbsolutePoint))) {
+					if(jam.CircuitSymbol.Circuit is LogicalCircuit) {
+						if(visited.Add(new JamBit(this, jam, start))) {
+							CircuitMap child = this.children[(CircuitSymbol)jam.CircuitSymbol];
+							// child pin must be there as the jam only be there if the pin exists
+							CircuitSymbol childPinSymbol = this.Circuit.CircuitProject.CircuitSymbolSet.SelectByCircuit(jam.Pin).First();
+							if(child.StateIndexes(list, childPinSymbol.Jams().First().AbsolutePoint, true, start, count, visited)) {
+								return true;
 							}
 						}
+					} else if(jam.CircuitSymbol.Circuit is Pin pin) {
+						if(this.Parent != null) {
+							if(this.Parent.StateIndexes(list, this.CircuitSymbol.Jam(pin).AbsolutePoint, true, start, count, visited)) {
+								return true;
+							}
+						}
+					} else if(jam.CircuitSymbol.Circuit is Splitter) {
+						List<Jam> splitterJams = jam.CircuitSymbol.Jams().ToList();
+						// Sort jams in order of their device pins. Assuming first one will be the wide pin and the rest are thin ones,
+						// starting from lower bits to higher. This implies that creating of the pins should happened in that order.
+						splitterJams.Sort(JamComparer.Comparer);
+
+						if(jam == splitterJams[0]) { //wide jam. so combine all the thin pins in the interval between start and start + count
+							bool done = false;
+							int jamStart = 0;
+							for(int i = 1; i < splitterJams.Count && jamStart < start + count; i++) {
+								int bitWidth = splitterJams[i].Pin.BitWidth;
+								if(start < jamStart + bitWidth) {
+									int localStart = Math.Max(0, start - jamStart);
+									Tracer.Assert(0 <= localStart && localStart < bitWidth);
+									int localCount = Math.Min(start + count, jamStart + bitWidth) - (jamStart + localStart);
+									Tracer.Assert(0 < localCount && localCount <= count && localCount <= bitWidth);
+									done |= this.StateIndexes(list, splitterJams[i].AbsolutePoint, true, localStart, localCount, visited);
+								}
+								jamStart += bitWidth;
+							}
+							if(done) return true;
+						} else { // thin jam. find position of this bit in wide pin
+							int jamStart = 0;
+							for(int i = 1; i < splitterJams.Count; i++) {
+								int bitWidth = splitterJams[i].Pin.BitWidth;
+								if(splitterJams[i] == jam) {
+									Tracer.Assert(start < bitWidth);
+									if(this.StateIndexes(list, splitterJams[0].AbsolutePoint, true, jamStart + start, Math.Min(bitWidth - start, count), visited)) {
+										return true;
+									}
+									break;
+								}
+								jamStart += bitWidth;
+							}
+						}
+					} else {
+						Tracer.Fail();
 					}
 				}
 			}
