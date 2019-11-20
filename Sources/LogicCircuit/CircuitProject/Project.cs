@@ -18,6 +18,14 @@ namespace LogicCircuit {
 		public static int CheckFrequency(int value) {
 			return Math.Max(Project.MinFrequency, Math.Min(value, Project.MaxFrequency));
 		}
+
+		public void SetStartup(LogicalCircuit circuit) {
+			if(circuit != null) {
+				this.StartupCircuit = circuit;
+			} else {
+				this.Table.SetField(this.ProjectRowId, ProjectData.StartupCircuitIdField.Field, ProjectData.StartupCircuitIdField.Field.DefaultValue);
+			}
+		}
 	}
 
 	[SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]

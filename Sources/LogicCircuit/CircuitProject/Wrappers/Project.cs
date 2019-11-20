@@ -27,6 +27,7 @@ namespace LogicCircuit {
 		}
 		public bool IsMaximumSpeed;
 		public Guid LogicalCircuitId;
+		public Guid StartupCircuitId;
 		public bool CategoryTextNoteCollapsed;
 		public bool CategoryInputOutputCollapsed;
 		public bool CategoryPrimitivesCollapsed;
@@ -277,6 +278,41 @@ namespace LogicCircuit {
 			}
 		}
 
+		// Accessor of the StartupCircuitId field
+		public sealed class StartupCircuitIdField : IField<ProjectData, Guid>, IFieldSerializer<ProjectData> {
+			public static readonly StartupCircuitIdField Field = new StartupCircuitIdField();
+			private StartupCircuitIdField() {}
+			public string Name { get { return "StartupCircuitId"; } }
+			public int Order { get; set; }
+			public Guid DefaultValue { get { return default; } }
+			public Guid GetValue(ref ProjectData record) {
+				return record.StartupCircuitId;
+			}
+			public void SetValue(ref ProjectData record, Guid value) {
+				record.StartupCircuitId = value;
+			}
+			public int Compare(ref ProjectData l, ref ProjectData r) {
+				return l.StartupCircuitId.CompareTo(r.StartupCircuitId);
+			}
+			public int Compare(Guid l, Guid r) {
+				return l.CompareTo(r);
+			}
+
+			// Implementation of interface IFieldSerializer<ProjectData>
+			bool IFieldSerializer<ProjectData>.NeedToSave(ref ProjectData data) {
+				return this.Compare(data.StartupCircuitId, this.DefaultValue) != 0;
+			}
+			string IFieldSerializer<ProjectData>.GetTextValue(ref ProjectData data) {
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.StartupCircuitId);
+			}
+			void IFieldSerializer<ProjectData>.SetDefault(ref ProjectData data) {
+				data.StartupCircuitId = this.DefaultValue;
+			}
+			void IFieldSerializer<ProjectData>.SetTextValue(ref ProjectData data, string text) {
+				data.StartupCircuitId = new Guid(text);
+			}
+		}
+
 		// Accessor of the CategoryTextNoteCollapsed field
 		public sealed class CategoryTextNoteCollapsedField : IField<ProjectData, bool>, IFieldSerializer<ProjectData> {
 			public static readonly CategoryTextNoteCollapsedField Field = new CategoryTextNoteCollapsedField();
@@ -415,6 +451,7 @@ namespace LogicCircuit {
 			FrequencyField.Field,
 			IsMaximumSpeedField.Field,
 			LogicalCircuitIdField.Field,
+			StartupCircuitIdField.Field,
 			CategoryTextNoteCollapsedField.Field,
 			CategoryInputOutputCollapsedField.Field,
 			CategoryPrimitivesCollapsedField.Field,
@@ -434,6 +471,7 @@ namespace LogicCircuit {
 		public static void CreateForeignKeys(StoreSnapshot store) {
 			TableSnapshot<ProjectData> table = (TableSnapshot<ProjectData>)store.Table("Project");
 			table.CreateForeignKey("FK_LogicalCircuit_Project", store.Table("LogicalCircuit"), ProjectData.LogicalCircuitIdField.Field, ForeignKeyAction.Restrict, false);
+			table.CreateForeignKey("FK_StartupCircuit_Project", store.Table("LogicalCircuit"), ProjectData.StartupCircuitIdField.Field, ForeignKeyAction.SetDefault, true);
 		}
 	}
 
@@ -513,6 +551,12 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.ProjectRowId, ProjectData.LogicalCircuitIdField.Field, value.LogicalCircuitId); }
 		}
 
+		// Gets or sets the value referred by the foreign key on field StartupCircuitId
+		public LogicalCircuit StartupCircuit {
+			get { return this.CircuitProject.LogicalCircuitSet.FindByLogicalCircuitId(this.Table.GetField(this.ProjectRowId, ProjectData.StartupCircuitIdField.Field)); }
+			set { this.Table.SetField(this.ProjectRowId, ProjectData.StartupCircuitIdField.Field, value.LogicalCircuitId); }
+		}
+
 		// Gets or sets value of the CategoryTextNoteCollapsed field.
 		public bool CategoryTextNoteCollapsed {
 			get { return this.Table.GetField(this.ProjectRowId, ProjectData.CategoryTextNoteCollapsedField.Field); }
@@ -567,6 +611,9 @@ namespace LogicCircuit {
 				}
 				if(ProjectData.LogicalCircuitIdField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("LogicalCircuit");
+				}
+				if(ProjectData.StartupCircuitIdField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("StartupCircuit");
 				}
 				if(ProjectData.CategoryTextNoteCollapsedField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("CategoryTextNoteCollapsed");
@@ -663,6 +710,7 @@ namespace LogicCircuit {
 			int Frequency,
 			bool IsMaximumSpeed,
 			LogicalCircuit LogicalCircuit,
+			LogicalCircuit StartupCircuit,
 			bool CategoryTextNoteCollapsed,
 			bool CategoryInputOutputCollapsed,
 			bool CategoryPrimitivesCollapsed
@@ -675,6 +723,7 @@ namespace LogicCircuit {
 				Frequency = Frequency,
 				IsMaximumSpeed = IsMaximumSpeed,
 				LogicalCircuitId = (LogicalCircuit != null) ? LogicalCircuit.LogicalCircuitId : ProjectData.LogicalCircuitIdField.Field.DefaultValue,
+				StartupCircuitId = (StartupCircuit != null) ? StartupCircuit.LogicalCircuitId : ProjectData.StartupCircuitIdField.Field.DefaultValue,
 				CategoryTextNoteCollapsed = CategoryTextNoteCollapsed,
 				CategoryInputOutputCollapsed = CategoryInputOutputCollapsed,
 				CategoryPrimitivesCollapsed = CategoryPrimitivesCollapsed,
@@ -692,6 +741,11 @@ namespace LogicCircuit {
 		// Selects Project by LogicalCircuit
 		public IEnumerable<Project> SelectByLogicalCircuit(LogicalCircuit logicalCircuit) {
 			return this.Select(this.Table.Select(ProjectData.LogicalCircuitIdField.Field, logicalCircuit.LogicalCircuitId));
+		}
+
+		// Selects Project by StartupCircuit
+		public IEnumerable<Project> SelectByStartupCircuit(LogicalCircuit startupCircuit) {
+			return this.Select(this.Table.Select(ProjectData.StartupCircuitIdField.Field, startupCircuit.LogicalCircuitId));
 		}
 
 		public IEnumerator<Project> GetEnumerator() {

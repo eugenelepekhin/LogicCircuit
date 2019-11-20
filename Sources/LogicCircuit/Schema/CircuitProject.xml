@@ -19,7 +19,7 @@
 		Version 2.0.0.5 - Adding MemoryOnStart to memory circuits
 		Version 2.0.0.6 - Adding IsDisplay property to LogicalCircuit. Making Probe separate circuit to enable naming of it.
 		Version 2.0.0.7 - Adding PinSide to Button and Constant. Adding Sensor, Sound, and GraphicsArray circuits. LogicalCircuit.Description and Project.Description both renamed to Note.
-		Version 2.0.0.8 - Adding Inverted flag to the button, adding index on pin so it can be rearranged on the symbol's side
+		Version 2.0.0.8 - Adding Inverted flag to the button, adding index on pin so it can be rearranged on the symbol's side, adding startup circuit to project
 	-->
 
 	<Table Name="Project">
@@ -31,6 +31,7 @@
 			<Column Name="Frequency" Type="int" Default="10" Check="Project.CheckFrequency"/>
 			<Column Name="IsMaximumSpeed" Type="bool" Default="false"/>
 			<Column Name="LogicalCircuitId" Type="Guid"/>
+			<Column Name="StartupCircuitId" Type="Guid" Default="default"/>
 			<Column Name="CategoryTextNoteCollapsed" Type="bool" Default="false"/>
 			<Column Name="CategoryInputOutputCollapsed" Type="bool" Default="false"/>
 			<Column Name="CategoryPrimitivesCollapsed" Type="bool" Default="false"/>
@@ -42,6 +43,10 @@
 
 			<Key Name="FK_LogicalCircuit_Project" KeyType="Foreign" ParentName="LogicalCircuit" Action="Restrict">
 				<Column Name="LogicalCircuitId"/>
+			</Key>
+
+			<Key Name="FK_StartupCircuit_Project" KeyType="Foreign" ParentName="LogicalCircuit" Action="SetDefault" AllowsDefault="true">
+				<Column Name="StartupCircuitId"/>
 			</Key>
 		</Table.Keys>
 	</Table>

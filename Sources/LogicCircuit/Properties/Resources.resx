@@ -1478,4 +1478,10 @@ Do you want to load auto saved state of this file?</value>
   <data name="TitlePinIndexReset" xml:space="preserve">
     <value>Reset to graphical placement</value>
   </data>
+  <data name="TitleStartupCircuit" xml:space="preserve">
+    <value>_Startup:</value>
+  </data>
+  <data name="TitleCurrent" xml:space="preserve">
+    <value>Current</value>
+  </data>
 </root>

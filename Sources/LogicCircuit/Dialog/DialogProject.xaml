@@ -12,6 +12,9 @@
 		<Label Content="{x:Static properties:Resources.TitleName}"/>
 		<TextBox Name="name"/>
 
+		<Label Content="{x:Static properties:Resources.TitleStartupCircuit}"/>
+		<ComboBox Name="startup" IsSynchronizedWithCurrentItem="True" DisplayMemberPath="Name"/>
+
 		<Label Content="{x:Static properties:Resources.TitleDescription}"/>
 		<TextBox Name="description" AcceptsReturn="True"/>
 

@@ -50,6 +50,9 @@ namespace LogicCircuit {
 						if(value) {
 							this.CancelMove();
 							this.ClearSelection();
+							if(this.Project.StartupCircuit != null && this.Project.StartupCircuit != this.Project.LogicalCircuit) {
+								this.OpenLogicalCircuit(this.Project.StartupCircuit);
+							}
 							this.CircuitRunner = new CircuitRunner(this);
 							this.CircuitRunner.Start();
 						} else {

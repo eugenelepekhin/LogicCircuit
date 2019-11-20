@@ -3026,5 +3026,19 @@ namespace LogicCircuit.Properties {
  		public static string TitlePinIndexReset {
 			get { return ResourceManager.GetString("TitlePinIndexReset", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Startup:.
+		/// </summary>
+ 		public static string TitleStartupCircuit {
+			get { return ResourceManager.GetString("TitleStartupCircuit", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Current.
+		/// </summary>
+ 		public static string TitleCurrent {
+			get { return ResourceManager.GetString("TitleCurrent", Culture); }
+		}
 	}
 }
