@@ -1022,6 +1022,15 @@ namespace LogicCircuit {
 			}
 		}
 
+		public void DiagramMouseWheel(ScrollViewer diagramScroll, MouseWheelEventArgs e) {
+			if(this.movingMarker == null) {
+				if(Keyboard.Modifiers == ModifierKeys.Shift) {
+					diagramScroll.ScrollToHorizontalOffset(diagramScroll.HorizontalOffset - e.Delta);
+					e.Handled = true;
+				}
+			}
+		}
+
 		[SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
 		private void SymbolMouseDown(Symbol symbol, MouseEventArgs e) {
 			if(this.InEditMode) {

@@ -630,6 +630,7 @@
 						MouseDown="DiagramMouseDown"
 						MouseUp="DiagramMouseUp"
 						MouseMove="DiagramMouseMove"
+						MouseWheel="DiagramMouseWheel"
 						LostFocus="DiagramLostFocus"
 						LostKeyboardFocus="DiagramLostKeyboardFocus"
 						SnapsToDevicePixels="False"
