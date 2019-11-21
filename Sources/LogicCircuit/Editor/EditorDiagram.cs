@@ -1027,6 +1027,13 @@ namespace LogicCircuit {
 				if(Keyboard.Modifiers == ModifierKeys.Shift) {
 					diagramScroll.ScrollToHorizontalOffset(diagramScroll.HorizontalOffset - e.Delta);
 					e.Handled = true;
+				} else if(Keyboard.Modifiers == ModifierKeys.Control) {
+					double old = this.Project.Zoom;
+					double zoom = Project.CheckZoom(old + Math.Sign(e.Delta) * 0.1);
+					if(0.0001 < Math.Abs(zoom - old)) {
+						this.CircuitProject.InTransaction(() => this.Project.Zoom = zoom);
+					}
+					e.Handled = true;
 				}
 			}
 		}
