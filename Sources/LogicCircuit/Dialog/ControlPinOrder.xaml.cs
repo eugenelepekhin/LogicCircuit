@@ -23,8 +23,8 @@ namespace LogicCircuit {
 		private List<PinOrderDescriptor> list;
 
 		public ControlPinOrder() {
-			this.CommandLeft = new LambdaUICommand("<", o => this.CanLeft(), o => this.Left());
-			this.CommandRight = new LambdaUICommand(">", o => this.CanRight(), o => this.Right());
+			this.CommandLeft = new LambdaUICommand("_<", o => this.CanLeft(), o => this.Left());
+			this.CommandRight = new LambdaUICommand("_>", o => this.CanRight(), o => this.Right());
 			this.InitializeComponent();
 		}
 

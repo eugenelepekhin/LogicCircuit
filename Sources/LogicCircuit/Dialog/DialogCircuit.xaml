@@ -35,16 +35,16 @@
 			<TabItem Header="{x:Static properties:Resources.TitlePinIndex}">
 				<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch">
 					<lc:AutoGrid>
-						<Label Content="{x:Static properties:Resources.PinSideLeft}"/>
+						<Label Content="{x:Static properties:Resources.TitleLeft}"/>
 						<lc:ControlPinOrder x:Name="leftPins"/>
 
-						<Label Content="{x:Static properties:Resources.PinSideRight}"/>
+						<Label Content="{x:Static properties:Resources.TitleRight}"/>
 						<lc:ControlPinOrder x:Name="rightPins"/>
 
-						<Label Content="{x:Static properties:Resources.PinSideTop}"/>
+						<Label Content="{x:Static properties:Resources.TitleTop}"/>
 						<lc:ControlPinOrder x:Name="topPins"/>
 
-						<Label Content="{x:Static properties:Resources.PinSideBottom}"/>
+						<Label Content="{x:Static properties:Resources.TitleBottom}"/>
 						<lc:ControlPinOrder x:Name="bottomPins"/>
 
 						<Button Grid.Column="1" Content="{x:Static properties:Resources.TitlePinIndexReset}" Click="ButtonResetClick" HorizontalAlignment="Left"/>

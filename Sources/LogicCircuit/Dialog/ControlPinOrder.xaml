@@ -2,6 +2,8 @@
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:lc="clr-namespace:LogicCircuit"
+	Focusable="True"
+	FocusManager.FocusedElement="{Binding ElementName=listBox}"
 >
 	<lc:AutoGrid ColumnWidths="*;Auto" DataContext="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}">
 		<ListBox x:Name="listBox" SelectionMode="Single" ItemsSource="{Binding Path=PinList}" IsSynchronizedWithCurrentItem="True">

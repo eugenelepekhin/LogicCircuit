@@ -961,7 +961,7 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Press Ctrl+{Shift}+Tab to switch between logical circuits or click to select/unselect individual symbols..
+		/// Looks up a localized string similar to Press Ctrl+{Shift}+Tab to switch between logical circuits or click to select/unselect individual symbols, zoom with mouse wheel, or pan..
 		/// </summary>
  		public static string TipOnCtrlDown {
 			get { return ResourceManager.GetString("TipOnCtrlDown", Culture); }
@@ -3021,7 +3021,7 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Reset to graphical placement.
+		/// Looks up a localized string similar to Reset to _graphical placement.
 		/// </summary>
  		public static string TitlePinIndexReset {
 			get { return ResourceManager.GetString("TitlePinIndexReset", Culture); }
@@ -3035,10 +3035,38 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Current.
+		/// Looks up a localized string similar to Current logical circuit.
 		/// </summary>
  		public static string TitleCurrent {
 			get { return ResourceManager.GetString("TitleCurrent", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Bottom:.
+		/// </summary>
+ 		public static string TitleBottom {
+			get { return ResourceManager.GetString("TitleBottom", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Left:.
+		/// </summary>
+ 		public static string TitleLeft {
+			get { return ResourceManager.GetString("TitleLeft", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Right:.
+		/// </summary>
+ 		public static string TitleRight {
+			get { return ResourceManager.GetString("TitleRight", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Top:.
+		/// </summary>
+ 		public static string TitleTop {
+			get { return ResourceManager.GetString("TitleTop", Culture); }
 		}
 	}
 }

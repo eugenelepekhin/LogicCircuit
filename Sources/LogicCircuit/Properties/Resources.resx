@@ -522,7 +522,7 @@ Out</value>
     <value>Loading...</value>
   </data>
   <data name="TipOnCtrlDown" xml:space="preserve">
-    <value>Press Ctrl+{Shift}+Tab to switch between logical circuits or click to select/unselect individual symbols.</value>
+    <value>Press Ctrl+{Shift}+Tab to switch between logical circuits or click to select/unselect individual symbols, zoom with mouse wheel, or pan.</value>
     <comment>-</comment>
   </data>
   <data name="TipOnWireSelect" xml:space="preserve">
@@ -1476,12 +1476,24 @@ Do you want to load auto saved state of this file?</value>
     <value>Pin order</value>
   </data>
   <data name="TitlePinIndexReset" xml:space="preserve">
-    <value>Reset to graphical placement</value>
+    <value>Reset to _graphical placement</value>
   </data>
   <data name="TitleStartupCircuit" xml:space="preserve">
     <value>_Startup:</value>
   </data>
   <data name="TitleCurrent" xml:space="preserve">
-    <value>Current</value>
+    <value>Current logical circuit</value>
+  </data>
+  <data name="TitleBottom" xml:space="preserve">
+    <value>_Bottom:</value>
+  </data>
+  <data name="TitleLeft" xml:space="preserve">
+    <value>_Left:</value>
+  </data>
+  <data name="TitleRight" xml:space="preserve">
+    <value>_Right:</value>
+  </data>
+  <data name="TitleTop" xml:space="preserve">
+    <value>_Top:</value>
   </data>
 </root>
