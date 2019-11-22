@@ -41,6 +41,8 @@ namespace LogicCircuit {
 
 		private Marker movingMarker;
 		private Point moveStart;
+		private Point panStart;
+		private bool panning;
 		private TranslateTransform moveVector;
 		private Point maxMove;
 
@@ -1004,6 +1006,9 @@ namespace LogicCircuit {
 					this.ClearSelection();
 					this.Edit(this.Project.LogicalCircuit);
 				}
+			} else if(Keyboard.Modifiers == ModifierKeys.Control && Mouse.Capture(this.Diagram, CaptureMode.Element)) {
+				this.panStart = e.GetPosition(this.Mainframe);
+				this.panning = true;
 			}
 		}
 
@@ -1013,12 +1018,22 @@ namespace LogicCircuit {
 					this.FinishMove(e.GetPosition(this.Diagram), (Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.None);
 				}
 			}
+			if(this.panning) {
+				Mouse.Capture(null);
+				this.panning = false;
+			}
 		}
 
 		public void DiagramMouseMove(MouseEventArgs e) {
 			if(this.InEditMode && this.movingMarker != null) {
 				Point point = e.GetPosition(this.Diagram);
 				this.movingMarker.Move(this, new Point(Math.Max(this.maxMove.X, point.X), Math.Max(this.maxMove.Y, point.Y)));
+			} else if(this.panning) {
+				Point point = e.GetPosition(this.Mainframe);
+				ScrollViewer scroll = this.Mainframe.DiagramScroll;
+				scroll.ScrollToHorizontalOffset(scroll.HorizontalOffset + this.panStart.X - point.X);
+				scroll.ScrollToVerticalOffset(scroll.VerticalOffset + this.panStart.Y - point.Y);
+				this.panStart = point;
 			}
 		}
 
