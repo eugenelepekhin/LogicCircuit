@@ -1371,4 +1371,16 @@ LED, مصفوفة LED ,زر , أو اية عناصر اخرى</value>
   <data name="ErrorBadHexInRange" xml:space="preserve">
     <value>النتيجة المتوقعة هي رقم ضمن المجال {0:X} - {1:X} .</value>
   </data>
+  <data name="TitleBottom" xml:space="preserve">
+    <value>أسفل:</value>
+  </data>
+  <data name="TitleLeft" xml:space="preserve">
+    <value>يسار:</value>
+  </data>
+  <data name="TitleRight" xml:space="preserve">
+    <value>يمين:</value>
+  </data>
+  <data name="TitleTop" xml:space="preserve">
+    <value>أعلى:</value>
+  </data>
 </root>
