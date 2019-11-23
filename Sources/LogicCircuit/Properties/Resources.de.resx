@@ -303,7 +303,8 @@ Möchten Sie die Änderungen speichern?</value>
     <value>Laden...</value>
   </data>
   <data name="TipOnCtrlDown" xml:space="preserve">
-    <value>Drücken Sie Strg+{Shift}+Tab um zwischen den Schaltplänen umzuschalten oder klicken Sie um einzelne Symbole aus-/abzuwählen.</value>
+    <value>Drücken Sie Strg+{Shift}+Tab um zwischen den Schaltplänen umzuschalten
+oder klicken Sie um einzelne Symbole aus-/abzuwählen, zoomen mit dem Mausrad oder schwenken.</value>
   </data>
   <data name="TipOnAwaitingArea" xml:space="preserve">
     <value>{0} {1}. Umfassen Sie mehrere Symbole um sie auszuwählen, halten Sie dabei Shift um die aktuelle Auswahl beizubehalten.</value>
@@ -1401,5 +1402,29 @@ Möchten Sie den automatisch gespeicherten Stand dieser Datei laden?</value>
   </data>
   <data name="TitleMinutesUnits" xml:space="preserve">
     <value>Minuten automatisch speichern.</value>
+  </data>
+  <data name="TitlePinIndex" xml:space="preserve">
+    <value>Pin Reihenfolge</value>
+  </data>
+  <data name="TitlePinIndexReset" xml:space="preserve">
+    <value>Zurücksetzen auf _grafische Anordnung</value>
+  </data>
+  <data name="TitleStartupCircuit" xml:space="preserve">
+    <value>_Inbetriebnahme:</value>
+  </data>
+  <data name="TitleCurrent" xml:space="preserve">
+    <value>Aktueller Schaltplan</value>
+  </data>
+  <data name="TitleBottom" xml:space="preserve">
+    <value>_Unten:</value>
+  </data>
+  <data name="TitleLeft" xml:space="preserve">
+    <value>_Links:</value>
+  </data>
+  <data name="TitleRight" xml:space="preserve">
+    <value>_Rechts:</value>
+  </data>
+  <data name="TitleTop" xml:space="preserve">
+    <value>_Oben:</value>
   </data>
 </root>
