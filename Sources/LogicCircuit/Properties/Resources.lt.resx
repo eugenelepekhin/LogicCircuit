@@ -1351,7 +1351,7 @@ kokį saitą ir papuošti savo grandinę su nuotrauką.</value>
     <value>Tutempkite laiko galą į norima vietą. paspauskite Esc ,kad atšaukti laido kurimą.</value>
   </data>
   <data name="TipOnCtrlDown" xml:space="preserve">
-    <value>Paspauskite Ctrl+{Shift}+Tab , kad keistis tarp loginių grandinių arba paspauskite, kad pasirinkti/atsirinkti individualius simbolius.</value>
+    <value>Paspauskite Ctrl+{Shift}+Tab , kad keistis tarp loginių grandinių arba paspauskite, kad pasirinkti/atsirinkti individualius simbolius, priartinti naudojant pelės ratą, arba panoraminiu vaizdu.</value>
   </data>
   <data name="TipOnWireSelect" xml:space="preserve">
     <value>Shift+{Ctrl}+Paspausti ant laido pasirinkti/atsirinkti visą konduktorių, Alt+Click ant pasirinkto laido, kad jį padalyti, ant bendro taško kad du sujunkti.</value>
@@ -1386,5 +1386,39 @@ Leidžia pasirinkti dydi ir spalvos gyli/schema:
   </data>
   <data name="CommandToolsIronPython" xml:space="preserve">
     <value>IronPython konsolė</value>
+  </data>
+  <data name="MessageLoadAutoSavedFile" xml:space="preserve">
+    <value>Nepavyko "{0}" failo sėkmingai išsaugoti.
+Ar norite užkrauti automatiškai išsaugota šio failo būseną?</value>
+  </data>
+  <data name="TitleAutoSave" xml:space="preserve">
+    <value>Išsaugokite pakeitimus kas:</value>
+  </data>
+  <data name="TitleMinutesUnits" xml:space="preserve">
+    <value>minutės</value>
+  </data>
+  <data name="TitlePinIndex" xml:space="preserve">
+    <value>Prisegti įsakyma</value>
+  </data>
+  <data name="TitlePinIndexReset" xml:space="preserve">
+    <value>Atstatyti į vaizdinį talpinimą</value>
+  </data>
+  <data name="TitleStartupCircuit" xml:space="preserve">
+    <value>Užvedimas:</value>
+  </data>
+  <data name="TitleCurrent" xml:space="preserve">
+    <value>Loginė srovinė grandinė</value>
+  </data>
+  <data name="TitleBottom" xml:space="preserve">
+    <value>Apatinė:</value>
+  </data>
+  <data name="TitleLeft" xml:space="preserve">
+    <value>Kairioji:</value>
+  </data>
+  <data name="TitleRight" xml:space="preserve">
+    <value>Dešnioji:</value>
+  </data>
+  <data name="TitleTop" xml:space="preserve">
+    <value>Viršutinė:</value>
   </data>
 </root>
