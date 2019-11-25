@@ -74,7 +74,7 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to More then one project in the file..
+		/// Looks up a localized string similar to More than one project in the file..
 		/// </summary>
  		public static string ErrorProjectCount {
 			get { return ResourceManager.GetString("ErrorProjectCount", Culture); }
