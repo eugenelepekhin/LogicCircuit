@@ -175,7 +175,7 @@ O arquivo que você está tentando abrir pode estar corrompido ou foi criado por
     <value>?</value>
   </data>
   <data name="GateShapeRectangular" xml:space="preserve">
-    <value>Em blocos</value>
+    <value>Retangular</value>
   </data>
   <data name="GateShapeShaped" xml:space="preserve">
     <value>Convencional</value>
@@ -400,10 +400,10 @@ Saída</value>
     <value>Arquivo</value>
   </data>
   <data name="TitleGateShape" xml:space="preserve">
-    <value>Porta Lógica</value>
+    <value>_Porta Lógica</value>
   </data>
   <data name="TitleLoadLastFile" xml:space="preserve">
-    <value>Carregar último arquivo ao iniciar</value>
+    <value>_Carregar último arquivo ao iniciar</value>
   </data>
   <data name="TitleOptions" xml:space="preserve">
     <value>Opções</value>
@@ -450,10 +450,10 @@ Saída</value>
     <value>Selecionar cabos desconectados</value>
   </data>
   <data name="CommandEditUnselectAllButWires" xml:space="preserve">
-    <value>Desselecionar tudo exceto os cabos</value>
+    <value>Desmarcar tudo exceto os cabos</value>
   </data>
   <data name="CommandEditUnselectAllWires" xml:space="preserve">
-    <value>Desselecionar todos os cabos</value>
+    <value>Desmarcar todos os cabos</value>
   </data>
   <data name="CommandFileExportImage" xml:space="preserve">
     <value>Exportar imagem</value>
@@ -492,7 +492,7 @@ Saída</value>
     <value>L_argura de bits de endereço:</value>
   </data>
   <data name="TitleData" xml:space="preserve">
-    <value>Dado</value>
+    <value>Da_do</value>
   </data>
   <data name="TitleDataBitWidth" xml:space="preserve">
     <value>Nº _de bits de dados:</value>
@@ -501,7 +501,7 @@ Saída</value>
     <value>_Invertido</value>
   </data>
   <data name="TitleLoad" xml:space="preserve">
-    <value>Carregar...</value>
+    <value>_Carregar...</value>
   </data>
   <data name="TitleSide" xml:space="preserve">
     <value>Lado:</value>
@@ -510,7 +510,7 @@ Saída</value>
     <value>_Tipo:</value>
   </data>
   <data name="TitleWriteOn" xml:space="preserve">
-    <value>Escrever em:</value>
+    <value>_Escrever em:</value>
   </data>
   <data name="TipOnStartMove" xml:space="preserve">
     <value>Arraste e solte a seleção para a localização desejada. Pressione Esc para cancelar a operação. Segure Shift enquanto soltar para evitar a movimentação de cabos conectados.</value>
@@ -522,10 +522,10 @@ Saída</value>
     <value>Carregando...</value>
   </data>
   <data name="TipOnCtrlDown" xml:space="preserve">
-    <value>Pressione Ctrl+{Shift}+Tab para alternar entre os circuitos lógicos ou clique para selecionar/deselecionar os objetos.</value>
+    <value>Pressione Ctrl+{Shift}+Tab para alternar entre circuitos lógicos ou clique para marcar/desmarcar símbolos individuais, zoom com a roda do mouse ou movimento panorâmico</value>
   </data>
   <data name="TipOnWireSelect" xml:space="preserve">
-    <value>Shift+{Ctrl}+Click para selecionar/desselecionar o cabo inteiro, Alt+Click no cabo selecionado para dividir, e em dois pontos comuns para unir.</value>
+    <value>Shift+{Ctrl}+Click para selecionar/desmarcar o cabo inteiro, Alt+Click no cabo selecionado para dividir, e em dois pontos comuns para unir.</value>
   </data>
   <data name="TipOnAwaitingArea" xml:space="preserve">
     <value>{0} {1}. Circule vários símbolos para selecioná-los, segure a tecla Ctrl para manter esta seleção.</value>
@@ -594,10 +594,10 @@ Saída</value>
     <value>Osciligrama</value>
   </data>
   <data name="TitleOscilloscope" xml:space="preserve">
-    <value>Osciloscópio</value>
+    <value>Osciloscópio do Cicuito Lógico</value>
   </data>
   <data name="TitleOscilloscoping" xml:space="preserve">
-    <value>Medição por osciloscópio</value>
+    <value>Medição por _osciloscópio</value>
   </data>
   <data name="CommandFileFileImport" xml:space="preserve">
     <value>_Importar...</value>
@@ -618,7 +618,7 @@ Saída</value>
     <value>Marcar todos</value>
   </data>
   <data name="TitleUncheckAll" xml:space="preserve">
-    <value>Desmarcar todos</value>
+    <value>_Desmarcar todos</value>
   </data>
   <data name="ImageFileFilter" xml:space="preserve">
     <value>Arquivo de Imagem (*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif)|*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif|Todos os Arquivos (*.*)|*.*</value>
@@ -638,7 +638,7 @@ Deseja substitui-lo?</value>
     <value>Exportar Imagem</value>
   </data>
   <data name="TitleFile" xml:space="preserve">
-    <value>Arquivo:</value>
+    <value>Ar_quivo:</value>
   </data>
   <data name="TitleFileOpen" xml:space="preserve">
     <value>...</value>
@@ -694,13 +694,13 @@ Deseja substitui-lo?</value>
     <value>_Editar</value>
   </data>
   <data name="MenuHeaderFile" xml:space="preserve">
-    <value>Arquivo</value>
+    <value>Ar_quivo</value>
   </data>
   <data name="MenuHeaderHelp" xml:space="preserve">
-    <value>Ajuda</value>
+    <value>_Ajuda</value>
   </data>
   <data name="MenuHeaderTools" xml:space="preserve">
-    <value>Ferramentas</value>
+    <value>_Ferramentas</value>
   </data>
   <data name="MessageWarning" xml:space="preserve">
     <value>Atenção!</value>
@@ -961,7 +961,7 @@ Você deseja remover a referência dele da lista de Arquivos Rescentes?</value>
     <value>_Colunas:</value>
   </data>
   <data name="TitleRows" xml:space="preserve">
-    <value>Linhas:</value>
+    <value>_Linhas:</value>
   </data>
   <data name="ToolTipLedMatrixType" xml:space="preserve">
     <value>Escolha do modo de controlar a matriz</value>
@@ -985,7 +985,7 @@ Você deseja remover a referência dele da lista de Arquivos Rescentes?</value>
     <value>http://www.logiccircuit.org/download.html</value>
   </data>
   <data name="CommandHyperlink" xml:space="preserve">
-    <value>Hyperlink</value>
+    <value>Hiperligação</value>
   </data>
   <data name="ErrorHyperlinkText" xml:space="preserve">
     <value>Texto do hyperlink está vazio</value>
@@ -1132,7 +1132,7 @@ Tal circuito não pode ser usado mais de uma vez em outros circuitos potencialme
     <value>O idioma foi alterado. É necessário reiniciar a aplicação para que as alterações sejam aplicadas.</value>
   </data>
   <data name="TitleCulture" xml:space="preserve">
-    <value>Idioma</value>
+    <value>_Idioma</value>
   </data>
   <data name="CommandEditAlignCenter" xml:space="preserve">
     <value>Centralizar</value>
@@ -1180,7 +1180,7 @@ Tal circuito não pode ser usado mais de uma vez em outros circuitos potencialme
     <value>Numeração</value>
   </data>
   <data name="CommandEditPaste" xml:space="preserve">
-    <value>Colar</value>
+    <value>C_olar</value>
   </data>
   <data name="CommandEditRedo" xml:space="preserve">
     <value>_Refazer</value>
@@ -1189,13 +1189,13 @@ Tal circuito não pode ser usado mais de uma vez em outros circuitos potencialme
     <value>Selecion_ar Tudo</value>
   </data>
   <data name="CommandEditUnderline" xml:space="preserve">
-    <value>Sublinhado</value>
+    <value>Sublinhar</value>
   </data>
   <data name="CommandEditUndo" xml:space="preserve">
-    <value>Desfazer</value>
+    <value>De_sfazer</value>
   </data>
   <data name="CommandFileClose" xml:space="preserve">
-    <value>Sair</value>
+    <value>_Sair</value>
   </data>
   <data name="CommandFileNew" xml:space="preserve">
     <value>_Novo</value>
@@ -1210,7 +1210,7 @@ Tal circuito não pode ser usado mais de uma vez em outros circuitos potencialme
     <value>S_alvar Como...</value>
   </data>
   <data name="CommandHelpView" xml:space="preserve">
-    <value>Ajuda</value>
+    <value>Ver _Ajuda</value>
   </data>
   <data name="ToolTipFontFamily" xml:space="preserve">
     <value>Tipo de Fonte</value>
@@ -1390,7 +1390,7 @@ Permite selecionar o tamanho e profundidade/esquema de cor:
     <value>Esperando número no intervalo{0} - {1}.</value>
   </data>
   <data name="TitleWidth" xml:space="preserve">
-    <value>Tamanho:</value>
+    <value>Ta_manho:</value>
   </data>
   <data name="ToolTipGraphicsArrayHeight" xml:space="preserve">
     <value>Colque a altura dos gráficos array em pixel.</value>
@@ -1456,5 +1456,29 @@ Você deseja carregar a configuração de salvamento automático para este arqui
   </data>
   <data name="TitleMinutesUnits" xml:space="preserve">
     <value>minutos</value>
+  </data>
+  <data name="TitlePinIndex" xml:space="preserve">
+    <value>Ordem dos pinos</value>
+  </data>
+  <data name="TitlePinIndexReset" xml:space="preserve">
+    <value>Redefinir para posicionamento _gráfico</value>
+  </data>
+  <data name="TitleStartupCircuit" xml:space="preserve">
+    <value>_Começar:</value>
+  </data>
+  <data name="TitleCurrent" xml:space="preserve">
+    <value>Circuito lógico atual</value>
+  </data>
+  <data name="TitleBottom" xml:space="preserve">
+    <value>_Inferior:</value>
+  </data>
+  <data name="TitleLeft" xml:space="preserve">
+    <value>_Esquerdo:</value>
+  </data>
+  <data name="TitleRight" xml:space="preserve">
+    <value>_Direito:</value>
+  </data>
+  <data name="TitleTop" xml:space="preserve">
+    <value>_Superior:</value>
   </data>
 </root>

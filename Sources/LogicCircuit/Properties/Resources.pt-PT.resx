@@ -175,7 +175,7 @@ O ficheiro que você está a tentar abrir pode estar corrompido ou foi criado po
     <value>?</value>
   </data>
   <data name="GateShapeRectangular" xml:space="preserve">
-    <value>Rectangular</value>
+    <value>Retangular</value>
   </data>
   <data name="GateShapeShaped" xml:space="preserve">
     <value>Convencional</value>
@@ -522,11 +522,11 @@ Saída</value>
     <value>A carregar...</value>
   </data>
   <data name="TipOnCtrlDown" xml:space="preserve">
-    <value>Pressione Ctrl+{Shift}+Tab para alternar entre os circuitos lógicos ou clique para selecionar/desselecionar os objetos.</value>
+    <value>Pressione Ctrl+{Shift}+Tab para mudar entre circuitos lógicos ou clique para marcar/desmarcar símbolos individuais, zoom com a roda do rato ou movimento panorâmico.</value>
     <comment>-</comment>
   </data>
   <data name="TipOnWireSelect" xml:space="preserve">
-    <value>Shift+{Ctrl}+Click para selecionar/desselecionar o cabo inteiro, Alt+Click no cabo selecionado para dividir, e em dois pontos comuns para unir.</value>
+    <value>Shift+{Ctrl}+Click para selecionar/desmarcar o cabo inteiro, Alt+Click no cabo selecionado para dividir, e em dois pontos comuns para unir.</value>
     <comment>-</comment>
   </data>
   <data name="TipOnAwaitingArea" xml:space="preserve">
@@ -666,7 +666,7 @@ Deseja substitui-lo?</value>
     <value>Bits de Endereço</value>
   </data>
   <data name="CaptionBitWidth" xml:space="preserve">
-    <value>Largura de Bits</value>
+    <value>Número de Bits</value>
   </data>
   <data name="CaptionDataBitWidth" xml:space="preserve">
     <value>Bits de Dados</value>
@@ -844,7 +844,7 @@ Deseja substitui-lo?</value>
     <value>Memória</value>
   </data>
   <data name="CommandFileOpenRecent" xml:space="preserve">
-    <value>Abrir _Recentes</value>
+    <value>Abrir _Recente</value>
   </data>
   <data name="MessageInvalidRecentFile" xml:space="preserve">
     <value>O ficheiro "{0}" não pode ser aberto.
@@ -1345,7 +1345,7 @@ o relógio de 0 para 1, quando é ímpar então muda o relógio de 1 para 0.</va
     <value>Introduzir a notação do dispositivo de som</value>
   </data>
   <data name="CommandEditFind" xml:space="preserve">
-    <value>Encontrar</value>
+    <value>Procurar</value>
   </data>
   <data name="TitleFind" xml:space="preserve">
     <value>Encontrar circuito</value>
@@ -1469,5 +1469,29 @@ Você deseja carregar a configuração de salvamento automático para este arqui
   </data>
   <data name="TitleMinutesUnits" xml:space="preserve">
     <value>minutos</value>
+  </data>
+  <data name="TitlePinIndex" xml:space="preserve">
+    <value>Ordem dos pinos</value>
+  </data>
+  <data name="TitlePinIndexReset" xml:space="preserve">
+    <value>Redefinir para posicionamento _gráfico</value>
+  </data>
+  <data name="TitleStartupCircuit" xml:space="preserve">
+    <value>_Começar:</value>
+  </data>
+  <data name="TitleCurrent" xml:space="preserve">
+    <value>Circuito lógico atual</value>
+  </data>
+  <data name="TitleBottom" xml:space="preserve">
+    <value>_Inferior:</value>
+  </data>
+  <data name="TitleLeft" xml:space="preserve">
+    <value>_Esquerdo:</value>
+  </data>
+  <data name="TitleRight" xml:space="preserve">
+    <value>_Direito:</value>
+  </data>
+  <data name="TitleTop" xml:space="preserve">
+    <value>_Superior:</value>
   </data>
 </root>
