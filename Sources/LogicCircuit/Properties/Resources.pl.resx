@@ -1018,7 +1018,7 @@ Do zapisu dochodzi przy zboczu {0}</value>
     <value>Nazwa</value>
   </data>
   <data name="TipOnCtrlDown" xml:space="preserve">
-    <value>Wciśnij Ctrl+{Shift}+Tab aby przełączyć się między obwodami lub kliknij aby wybrać/odznaczyć pojedyńcze symbole.</value>
+    <value>Wciśnij Ctrl+{Shift}+Tab aby przełączyć się między obwodami lub kliknij aby wybrać/odznaczyć pojedyńcze symbole, przybliżyć/oddalić kółkiem myszy oraz przesunąć.</value>
   </data>
   <data name="TipOnWireSelect" xml:space="preserve">
     <value>Shift+{Ctrl}+Kliknięcie na przewodzie aby zaznaczyć/odznaczyć całą ścieżkę, Alt+Klik na wybranym przewodzie do podziału, lub na wspólnym punkcie żeby zcalić.</value>
@@ -1397,5 +1397,29 @@ Czy chcesz wczytać automatycznie zapisaną kopię tego pliku?</value>
   </data>
   <data name="TitleMinutesUnits" xml:space="preserve">
     <value>minut</value>
+  </data>
+  <data name="TitlePinIndex" xml:space="preserve">
+    <value>Kolejność pinów</value>
+  </data>
+  <data name="TitlePinIndexReset" xml:space="preserve">
+    <value>Resetuj położenie</value>
+  </data>
+  <data name="TitleCurrent" xml:space="preserve">
+    <value>Bieżący obwód logiczny</value>
+  </data>
+  <data name="TitleBottom" xml:space="preserve">
+    <value>Dół:</value>
+  </data>
+  <data name="TitleLeft" xml:space="preserve">
+    <value>Lewo:</value>
+  </data>
+  <data name="TitleRight" xml:space="preserve">
+    <value>Prawo:</value>
+  </data>
+  <data name="TitleTop" xml:space="preserve">
+    <value>Góra:</value>
+  </data>
+  <data name="TitleStartupCircuit" xml:space="preserve">
+    <value>Uruchomienie:</value>
   </data>
 </root>
