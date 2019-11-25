@@ -874,7 +874,7 @@
     <value>载入中...</value>
   </data>
   <data name="TipOnCtrlDown" xml:space="preserve">
-    <value>按下 Ctrl+{Shift}+Tab 来切换逻辑电路视图或者点击选择 / 未选择的独立元器件。</value>
+    <value>按下 Ctrl+{Shift}+Tab 来切换逻辑电路视图或者点击选择 / 未选择的独立元器件，使用鼠标滚轮来缩放平移。</value>
   </data>
   <data name="TipOnWireSelect" xml:space="preserve">
     <value>在导线上按下 Shift+{Ctrl}+双击来选择 / 取消选择整个导线；在导线上按下 Alt+双击将导线分成两部分。</value>
@@ -1388,5 +1388,29 @@ Out</value>
   </data>
   <data name="TitleMinutesUnits" xml:space="preserve">
     <value>分钟</value>
+  </data>
+  <data name="TitlePinIndex" xml:space="preserve">
+    <value>针脚顺序</value>
+  </data>
+  <data name="TitleStartupCircuit" xml:space="preserve">
+    <value>启动(_S)：</value>
+  </data>
+  <data name="TitleCurrent" xml:space="preserve">
+    <value>当前逻辑电路</value>
+  </data>
+  <data name="TitleBottom" xml:space="preserve">
+    <value>下(_B)：</value>
+  </data>
+  <data name="TitleLeft" xml:space="preserve">
+    <value>左(_L)：</value>
+  </data>
+  <data name="TitleRight" xml:space="preserve">
+    <value>右(_R)：</value>
+  </data>
+  <data name="TitleTop" xml:space="preserve">
+    <value>上(_T)：</value>
+  </data>
+  <data name="TitlePinIndexReset" xml:space="preserve">
+    <value>重置为图形布局(_G)</value>
   </data>
 </root>
