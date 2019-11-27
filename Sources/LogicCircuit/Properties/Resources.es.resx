@@ -127,7 +127,7 @@
     <value>Apagado</value>
   </data>
   <data name="CaptionAddressBitWidth" xml:space="preserve">
-    <value>Dirección Bits</value>
+    <value>Dirección de Bits</value>
   </data>
   <data name="CaptionBitWidth" xml:space="preserve">
     <value>Tamaño de Bit</value>
@@ -915,7 +915,7 @@ Desea guardado?</value>
     <value>...</value>
   </data>
   <data name="TitleFileOptions" xml:space="preserve">
-    <value>Archivo</value>
+    <value>Opciones de Archivo</value>
   </data>
   <data name="TitleFilter" xml:space="preserve">
     <value>Filtro:</value>
@@ -1453,5 +1453,29 @@ Permite seleccionar el tamaño y profundidad de color / esquema:
   </data>
   <data name="TitleMinutesUnits" xml:space="preserve">
     <value>Minutos</value>
+  </data>
+  <data name="TitleBottom" xml:space="preserve">
+    <value>Botón:</value>
+  </data>
+  <data name="TitleCurrent" xml:space="preserve">
+    <value>Corriente</value>
+  </data>
+  <data name="TitleLeft" xml:space="preserve">
+    <value>Izquierda:</value>
+  </data>
+  <data name="TitlePinIndex" xml:space="preserve">
+    <value>Índice PIN</value>
+  </data>
+  <data name="TitlePinIndexReset" xml:space="preserve">
+    <value>Reiniciar índice del PIN</value>
+  </data>
+  <data name="TitleRight" xml:space="preserve">
+    <value>Derecha:</value>
+  </data>
+  <data name="TitleStartupCircuit" xml:space="preserve">
+    <value>Iniciar Circuito:</value>
+  </data>
+  <data name="TitleTop" xml:space="preserve">
+    <value>Parte superior:</value>
   </data>
 </root>

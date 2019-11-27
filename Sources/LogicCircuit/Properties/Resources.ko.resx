@@ -770,7 +770,7 @@
     <value>반전 표시</value>
   </data>
   <data name="TipOnCtrlDown" xml:space="preserve">
-    <value>Ctrl+{Shift}+Tab 를 누르면 회로를 전환할수 있습니다.</value>
+    <value>Ctrl+{Shift}+Tab 을 눌러 회로를 전환할 수 있습니다. 마우스를 클릭하여 개별 심볼을 선택/선택취소 하거나 마우스 휠로 확대/축소할 수 있습니다.</value>
   </data>
   <data name="TitleImportCircuit" xml:space="preserve">
     <value>가져오기</value>
@@ -1380,5 +1380,29 @@ Tri-state와 적절한 제어 회로를 함께 써서 멀티플렉서를 만들 
   </data>
   <data name="TitleMinutesUnits" xml:space="preserve">
     <value>분</value>
+  </data>
+  <data name="TitlePinIndex" xml:space="preserve">
+    <value>핀 순서</value>
+  </data>
+  <data name="TitlePinIndexReset" xml:space="preserve">
+    <value>보이는 위치로 초기화</value>
+  </data>
+  <data name="TitleStartupCircuit" xml:space="preserve">
+    <value>시작</value>
+  </data>
+  <data name="TitleCurrent" xml:space="preserve">
+    <value>현재 논리회로</value>
+  </data>
+  <data name="TitleBottom" xml:space="preserve">
+    <value>아래</value>
+  </data>
+  <data name="TitleLeft" xml:space="preserve">
+    <value>왼쪽</value>
+  </data>
+  <data name="TitleRight" xml:space="preserve">
+    <value>오른쪽</value>
+  </data>
+  <data name="TitleTop" xml:space="preserve">
+    <value>위</value>
   </data>
 </root>
