@@ -409,7 +409,9 @@ namespace LogicCircuit {
 		private void DiagramMouseWheel(object sender, MouseWheelEventArgs e) {
 			try {
 				Tracer.Assert(sender == this.Diagram);
-				this.Editor.DiagramMouseWheel(this.DiagramScroll, e);
+				if(this.Editor != null) {
+					this.Editor.DiagramMouseWheel(this.DiagramScroll, e);
+				}
 			} catch(Exception exception) {
 				Tracer.Report("MainFrame.DiagramMouseMove", exception);
 				this.ReportException(exception);
