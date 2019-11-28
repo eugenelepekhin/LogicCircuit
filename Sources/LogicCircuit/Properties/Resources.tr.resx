@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
+	<!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,1010 +59,1010 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <data name="GateAndName" xml:space="preserve">
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="GateAndName" xml:space="preserve">
     <value>Ve</value>
   </data>
-  <data name="GateAndNotName" xml:space="preserve">
+	<data name="GateAndNotName" xml:space="preserve">
     <value>Ve değil</value>
   </data>
-  <data name="GateClockName" xml:space="preserve">
-    <value>Saat</value>
+	<data name="GateClockName" xml:space="preserve">
+    <value>Clock</value>
   </data>
-  <data name="GateLedName" xml:space="preserve">
+	<data name="GateLedName" xml:space="preserve">
     <value>LED</value>
   </data>
-  <data name="GateLedNotation" xml:space="preserve">
+	<data name="GateLedNotation" xml:space="preserve">
     <value>LED</value>
   </data>
-  <data name="GateNotName" xml:space="preserve">
+	<data name="GateNotName" xml:space="preserve">
     <value>Değil</value>
   </data>
-  <data name="GateOrName" xml:space="preserve">
+	<data name="GateOrName" xml:space="preserve">
     <value>Veya</value>
   </data>
-  <data name="GateOrNotName" xml:space="preserve">
+	<data name="GateOrNotName" xml:space="preserve">
     <value>Veya Değil</value>
   </data>
-  <data name="GateShapeRectangular" xml:space="preserve">
-    <value>Kare</value>
+	<data name="GateShapeRectangular" xml:space="preserve">
+    <value>Diktörtgen</value>
   </data>
-  <data name="GateXorName" xml:space="preserve">
-    <value>Özel veya</value>
+	<data name="GateXorName" xml:space="preserve">
+    <value>Xor</value>
   </data>
-  <data name="LogicalCircuitName" xml:space="preserve">
+	<data name="LogicalCircuitName" xml:space="preserve">
     <value>Devre</value>
   </data>
-  <data name="MessageSaveFile" xml:space="preserve">
+	<data name="MessageSaveFile" xml:space="preserve">
     <value>Proje {0} değiştirildi. Kaydetmek ister misiniz?</value>
   </data>
-  <data name="Ready" xml:space="preserve">
+	<data name="Ready" xml:space="preserve">
     <value>Hazır.</value>
   </data>
-  <data name="TitleCancel" xml:space="preserve">
+	<data name="TitleCancel" xml:space="preserve">
     <value>İptal</value>
   </data>
-  <data name="TitleOK" xml:space="preserve">
+	<data name="TitleOK" xml:space="preserve">
     <value>Tamam</value>
   </data>
-  <data name="CategoryInputOutput" xml:space="preserve">
+	<data name="CategoryInputOutput" xml:space="preserve">
     <value>Giriş - Çıkış</value>
   </data>
-  <data name="NameButton" xml:space="preserve">
+	<data name="NameButton" xml:space="preserve">
     <value>Buton</value>
   </data>
-  <data name="TitleVersion" xml:space="preserve">
+	<data name="TitleVersion" xml:space="preserve">
     <value>Sürüm:</value>
   </data>
-  <data name="TitleWeb" xml:space="preserve">
+	<data name="TitleWeb" xml:space="preserve">
     <value>Web:</value>
   </data>
-  <data name="TitleFileOptions" xml:space="preserve">
+	<data name="TitleFileOptions" xml:space="preserve">
     <value>Dosya</value>
   </data>
-  <data name="TitleOptions" xml:space="preserve">
+	<data name="TitleOptions" xml:space="preserve">
     <value>Ayarlar</value>
   </data>
-  <data name="TitleShowGrid" xml:space="preserve">
+	<data name="TitleShowGrid" xml:space="preserve">
     <value>_Cetveli göster</value>
   </data>
-  <data name="CommandCircuitCurrent" xml:space="preserve">
+	<data name="CommandCircuitCurrent" xml:space="preserve">
     <value>Lojik Devre</value>
   </data>
-  <data name="CommandCircuitNew" xml:space="preserve">
+	<data name="CommandCircuitNew" xml:space="preserve">
     <value>Yeni Lojik Devre</value>
   </data>
-  <data name="CommandCircuitProject" xml:space="preserve">
+	<data name="CommandCircuitProject" xml:space="preserve">
     <value>Proje</value>
   </data>
-  <data name="CommandEditSelectAllProbes" xml:space="preserve">
+	<data name="CommandEditSelectAllProbes" xml:space="preserve">
     <value>Tüm Probları Seç</value>
   </data>
-  <data name="CommandEditSelectAllWires" xml:space="preserve">
+	<data name="CommandEditSelectAllWires" xml:space="preserve">
     <value>Tüm Telleri Seç</value>
   </data>
-  <data name="CommandFileExportImage" xml:space="preserve">
+	<data name="CommandFileExportImage" xml:space="preserve">
     <value>Resmi Dışa Aktar</value>
   </data>
-  <data name="CommandToolsOscilloscope" xml:space="preserve">
+	<data name="CommandToolsOscilloscope" xml:space="preserve">
     <value>Osiloskop</value>
   </data>
-  <data name="TitleCategory" xml:space="preserve">
+	<data name="TitleCategory" xml:space="preserve">
     <value>_Kategori:</value>
   </data>
-  <data name="TitleName" xml:space="preserve">
+	<data name="TitleName" xml:space="preserve">
     <value>_İsim:</value>
   </data>
-  <data name="TitleValue" xml:space="preserve">
+	<data name="TitleValue" xml:space="preserve">
     <value>_Değer:</value>
   </data>
-  <data name="PowerOff" xml:space="preserve">
+	<data name="PowerOff" xml:space="preserve">
     <value>Gücü Kapa</value>
   </data>
-  <data name="PowerOn" xml:space="preserve">
+	<data name="PowerOn" xml:space="preserve">
     <value>Gücü Aç</value>
   </data>
-  <data name="LogicalCircuitMainName" xml:space="preserve">
+	<data name="LogicalCircuitMainName" xml:space="preserve">
     <value>Ana</value>
   </data>
-  <data name="CircuitProjectName" xml:space="preserve">
+	<data name="CircuitProjectName" xml:space="preserve">
     <value>Devre Projesi</value>
   </data>
-  <data name="CommandFileFileImport" xml:space="preserve">
+	<data name="CommandFileFileImport" xml:space="preserve">
     <value>_İçe Aktar...</value>
   </data>
-  <data name="ImportTitle" xml:space="preserve">
+	<data name="ImportTitle" xml:space="preserve">
     <value>İçe Aktar</value>
   </data>
-  <data name="TitleCircuitDescriptor" xml:space="preserve">
+	<data name="TitleCircuitDescriptor" xml:space="preserve">
     <value>Devre</value>
   </data>
-  <data name="TitleFileName" xml:space="preserve">
+	<data name="TitleFileName" xml:space="preserve">
     <value>Dosya:</value>
   </data>
-  <data name="TitleImportCircuit" xml:space="preserve">
+	<data name="TitleImportCircuit" xml:space="preserve">
     <value>İçe Aktar</value>
   </data>
-  <data name="TitleExportImage" xml:space="preserve">
+	<data name="TitleExportImage" xml:space="preserve">
     <value>Resmi Dışa Aktar</value>
   </data>
-  <data name="TitleFile" xml:space="preserve">
+	<data name="TitleFile" xml:space="preserve">
     <value>_Dosya:</value>
   </data>
-  <data name="CaptionBitWidth" xml:space="preserve">
+	<data name="CaptionBitWidth" xml:space="preserve">
     <value>Bit Uzunluğu</value>
   </data>
-  <data name="CaptionValue" xml:space="preserve">
+	<data name="CaptionValue" xml:space="preserve">
     <value>Değer</value>
   </data>
-  <data name="MenuHeaderFile" xml:space="preserve">
+	<data name="MenuHeaderFile" xml:space="preserve">
     <value>_Dosya</value>
   </data>
-  <data name="MenuHeaderHelp" xml:space="preserve">
+	<data name="MenuHeaderHelp" xml:space="preserve">
     <value>Yar_dım</value>
   </data>
-  <data name="MenuHeaderTools" xml:space="preserve">
+	<data name="MenuHeaderTools" xml:space="preserve">
     <value>_Araçlar</value>
   </data>
-  <data name="MessageWarning" xml:space="preserve">
+	<data name="MessageWarning" xml:space="preserve">
     <value>Uyarı!</value>
   </data>
-  <data name="TitleProject" xml:space="preserve">
+	<data name="TitleProject" xml:space="preserve">
     <value>Proje</value>
   </data>
-  <data name="CommandEditRotateLeft" xml:space="preserve">
+	<data name="CommandEditRotateLeft" xml:space="preserve">
     <value>Sola Döndür</value>
   </data>
-  <data name="CommandEditRotateRight" xml:space="preserve">
+	<data name="CommandEditRotateRight" xml:space="preserve">
     <value>Sağa Döndür</value>
   </data>
-  <data name="SplitterDirectionClockwise" xml:space="preserve">
+	<data name="SplitterDirectionClockwise" xml:space="preserve">
+    <value>Saat Yönü</value>
+  </data>
+	<data name="SplitterDirectionCounterclockwise" xml:space="preserve">
+    <value>Saat Yönü Tersi</value>
+  </data>
+	<data name="PinSideLeft" xml:space="preserve">
     <value>Sol</value>
   </data>
-  <data name="SplitterDirectionCounterclockwise" xml:space="preserve">
+	<data name="PinSideRight" xml:space="preserve">
     <value>Sağ</value>
   </data>
-  <data name="PinSideLeft" xml:space="preserve">
-    <value>Sol</value>
-  </data>
-  <data name="PinSideRight" xml:space="preserve">
-    <value>Sağ</value>
-  </data>
-  <data name="TitleMemory" xml:space="preserve">
+	<data name="TitleMemory" xml:space="preserve">
     <value>Hafıza</value>
   </data>
-  <data name="MessageVersionLatest" xml:space="preserve">
+	<data name="MessageVersionLatest" xml:space="preserve">
     <value>Zaten son sürüme sahipsin.</value>
   </data>
-  <data name="TitleCheckVersion" xml:space="preserve">
+	<data name="TitleCheckVersion" xml:space="preserve">
     <value>Şimdi Kontrol Et</value>
   </data>
-  <data name="CommandTruthTable" xml:space="preserve">
+	<data name="CommandTruthTable" xml:space="preserve">
     <value>Doğruluk Tablosu</value>
   </data>
-  <data name="ParserErrorInvalidNumber" xml:space="preserve">
+	<data name="ParserErrorInvalidNumber" xml:space="preserve">
     <value>Geçersiz sayı: {0}</value>
   </data>
-  <data name="TitleApply" xml:space="preserve">
+	<data name="TitleApply" xml:space="preserve">
     <value>_Uygula</value>
   </data>
-  <data name="ColorPickerCaptionSelectCustom" xml:space="preserve">
+	<data name="ColorPickerCaptionSelectCustom" xml:space="preserve">
     <value>Seç</value>
   </data>
-  <data name="ColorPickerCaptionStandard" xml:space="preserve">
+	<data name="ColorPickerCaptionStandard" xml:space="preserve">
     <value>Standart Renkler:</value>
   </data>
-  <data name="ColorPickerTabCustom" xml:space="preserve">
+	<data name="ColorPickerTabCustom" xml:space="preserve">
     <value>Özel</value>
   </data>
-  <data name="ColorPickerTabStandard" xml:space="preserve">
+	<data name="ColorPickerTabStandard" xml:space="preserve">
     <value>Standart</value>
   </data>
-  <data name="CommandEditBold" xml:space="preserve">
+	<data name="CommandEditBold" xml:space="preserve">
     <value>Kalın</value>
   </data>
-  <data name="CommandEditCopy" xml:space="preserve">
+	<data name="CommandEditCopy" xml:space="preserve">
     <value>_Kopyala</value>
   </data>
-  <data name="CommandEditItalic" xml:space="preserve">
+	<data name="CommandEditItalic" xml:space="preserve">
     <value>İtalik</value>
   </data>
-  <data name="CommandEditPaste" xml:space="preserve">
+	<data name="CommandEditPaste" xml:space="preserve">
     <value>Ya_pıştır</value>
   </data>
-  <data name="ToolTipFontFamily" xml:space="preserve">
+	<data name="ToolTipFontFamily" xml:space="preserve">
     <value>Font Ailesi</value>
   </data>
-  <data name="ToolTipFontSize" xml:space="preserve">
+	<data name="ToolTipFontSize" xml:space="preserve">
     <value>Font Büyüklüğü</value>
   </data>
-  <data name="TitleCredits" xml:space="preserve">
+	<data name="TitleCredits" xml:space="preserve">
     <value>Emeği Geçenler</value>
   </data>
-  <data name="CaptionName" xml:space="preserve">
+	<data name="CaptionName" xml:space="preserve">
     <value>İsim</value>
   </data>
-  <data name="NameSensor" xml:space="preserve">
+	<data name="NameSensor" xml:space="preserve">
     <value>Sensör</value>
   </data>
-  <data name="ToolTipSensor" xml:space="preserve">
+	<data name="ToolTipSensor" xml:space="preserve">
     <value>Sensör {0}</value>
   </data>
-  <data name="CaptionSensorType" xml:space="preserve">
+	<data name="CaptionSensorType" xml:space="preserve">
     <value>Sensör tipi</value>
   </data>
-  <data name="SensorTypeRandom" xml:space="preserve">
+	<data name="SensorTypeRandom" xml:space="preserve">
     <value>Rastgele</value>
   </data>
-  <data name="CommandEditFind" xml:space="preserve">
+	<data name="CommandEditFind" xml:space="preserve">
     <value>Bul</value>
   </data>
-  <data name="TitleFind" xml:space="preserve">
+	<data name="TitleFind" xml:space="preserve">
     <value>Devreyi bul</value>
   </data>
-  <data name="TitleSearch" xml:space="preserve">
+	<data name="TitleSearch" xml:space="preserve">
     <value>Ara</value>
   </data>
-  <data name="TitleMinutesUnits" xml:space="preserve">
+	<data name="TitleMinutesUnits" xml:space="preserve">
     <value>dakikalar</value>
   </data>
-  <data name="MainFrameCaption" xml:space="preserve">
+	<data name="MainFrameCaption" xml:space="preserve">
     <value>Lojik Devre {0}</value>
   </data>
-  <data name="TitleShowDetails" xml:space="preserve">
+	<data name="TitleShowDetails" xml:space="preserve">
     <value>_Detayları göster</value>
   </data>
-  <data name="ToolTipButton" xml:space="preserve">
+	<data name="ToolTipButton" xml:space="preserve">
     <value>Buton {0}</value>
   </data>
-  <data name="CommandToolsOptions" xml:space="preserve">
+	<data name="CommandToolsOptions" xml:space="preserve">
     <value>_Ayarlar</value>
   </data>
-  <data name="CircuitProbeName" xml:space="preserve">
+	<data name="CircuitProbeName" xml:space="preserve">
     <value>Prob</value>
   </data>
-  <data name="CommandCircuitDelete" xml:space="preserve">
+	<data name="CommandCircuitDelete" xml:space="preserve">
     <value>Geçerli Devreyi Sil</value>
   </data>
-  <data name="CaptionAddressBitWidth" xml:space="preserve">
+	<data name="CaptionAddressBitWidth" xml:space="preserve">
     <value>Bit Adresi</value>
   </data>
-  <data name="CaptionSplitterPinNumber" xml:space="preserve">
+	<data name="CaptionSplitterPinNumber" xml:space="preserve">
     <value>Pinleri Böl</value>
   </data>
-  <data name="CaptionSplitterDirection" xml:space="preserve">
+	<data name="CaptionSplitterDirection" xml:space="preserve">
     <value>Bileşik Pin</value>
   </data>
-  <data name="CaptionSide" xml:space="preserve">
+	<data name="CaptionSide" xml:space="preserve">
     <value>Taraf</value>
   </data>
-  <data name="CaptionTextNote1" xml:space="preserve">
+	<data name="CaptionTextNote1" xml:space="preserve">
     <value>Yazı</value>
   </data>
-  <data name="CaptionTextNote2" xml:space="preserve">
+	<data name="CaptionTextNote2" xml:space="preserve">
     <value>Not</value>
   </data>
-  <data name="CaptionNotation" xml:space="preserve">
+	<data name="CaptionNotation" xml:space="preserve">
     <value>Notasyon</value>
   </data>
-  <data name="CommandCircuitPower" xml:space="preserve">
+	<data name="CommandCircuitPower" xml:space="preserve">
     <value>Gücü Değiştir</value>
   </data>
-  <data name="CaptionSplitterBitWidth" xml:space="preserve">
+	<data name="CaptionSplitterBitWidth" xml:space="preserve">
     <value>Pini genişliğe göre böl</value>
   </data>
-  <data name="CommandCircuitUsage" xml:space="preserve">
+	<data name="CommandCircuitUsage" xml:space="preserve">
     <value>Tarafından  kullanılan...</value>
   </data>
-  <data name="CaptionNote" xml:space="preserve">
+	<data name="CaptionNote" xml:space="preserve">
     <value>_Not</value>
   </data>
-  <data name="BitOff" xml:space="preserve">
+	<data name="BitOff" xml:space="preserve">
     <value>Kapalı</value>
   </data>
-  <data name="CaptionColumns" xml:space="preserve">
+	<data name="CaptionColumns" xml:space="preserve">
     <value>Sütun</value>
   </data>
-  <data name="CaptionRows" xml:space="preserve">
+	<data name="CaptionRows" xml:space="preserve">
     <value>Satır</value>
   </data>
-  <data name="CaptionLedMatrixType" xml:space="preserve">
+	<data name="CaptionLedMatrixType" xml:space="preserve">
     <value>Tip</value>
   </data>
-  <data name="ColorPickerCaptionAvailable" xml:space="preserve">
+	<data name="ColorPickerCaptionAvailable" xml:space="preserve">
     <value>Kullanılabilir renkler:</value>
   </data>
-  <data name="ColorPickerCaptionRecent" xml:space="preserve">
+	<data name="ColorPickerCaptionRecent" xml:space="preserve">
     <value>Son Kullanılan Renkler:</value>
   </data>
-  <data name="CommandEditAlignCenter" xml:space="preserve">
+	<data name="CommandEditAlignCenter" xml:space="preserve">
     <value>Merkeze Hizala</value>
   </data>
-  <data name="CommandEditAlignJustify" xml:space="preserve">
+	<data name="CommandEditAlignJustify" xml:space="preserve">
     <value>Doğrula</value>
   </data>
-  <data name="CommandEditAlignLeft" xml:space="preserve">
+	<data name="CommandEditAlignLeft" xml:space="preserve">
     <value>Sola Hizala</value>
   </data>
-  <data name="CommandEditAlignRight" xml:space="preserve">
+	<data name="CommandEditAlignRight" xml:space="preserve">
     <value>Sağa Hizala</value>
   </data>
-  <data name="CommandEditCut" xml:space="preserve">
+	<data name="CommandEditCut" xml:space="preserve">
     <value>Ke_s</value>
   </data>
-  <data name="CircuitProbeToolTip" xml:space="preserve">
+	<data name="CircuitProbeToolTip" xml:space="preserve">
     <value>Prob {0}</value>
   </data>
-  <data name="CaptionPinSide" xml:space="preserve">
+	<data name="CaptionPinSide" xml:space="preserve">
     <value>Pin tarafı</value>
   </data>
-  <data name="CaptionGraphicsArrayBPP" xml:space="preserve">
+	<data name="CaptionGraphicsArrayBPP" xml:space="preserve">
     <value>Pixel Başına Bit</value>
   </data>
-  <data name="CommandEditSelectAllButWires" xml:space="preserve">
+	<data name="CommandEditSelectAllButWires" xml:space="preserve">
     <value>Tellerin Tümünü Seç</value>
   </data>
-  <data name="CommandEditSelectAllProbesWithWire" xml:space="preserve">
+	<data name="CommandEditSelectAllProbesWithWire" xml:space="preserve">
     <value>Tüm Probları ve Bağlı Telleri Seç</value>
   </data>
-  <data name="CommandEditSelectFreeWires" xml:space="preserve">
+	<data name="CommandEditSelectFreeWires" xml:space="preserve">
     <value>Boşta Olan Telleri Seç</value>
   </data>
-  <data name="CommandEditUnselectAllButWires" xml:space="preserve">
+	<data name="CommandEditUnselectAllButWires" xml:space="preserve">
     <value>Teller Hariç Seçimi kaldır</value>
   </data>
-  <data name="CommandEditDecreaseFontSize" xml:space="preserve">
+	<data name="CommandEditDecreaseFontSize" xml:space="preserve">
     <value>Font Boyutunu Azalt</value>
   </data>
-  <data name="CommandEditDecreaseIndentation" xml:space="preserve">
+	<data name="CommandEditDecreaseIndentation" xml:space="preserve">
     <value>Girintiyi Azalt</value>
   </data>
-  <data name="CommandEditDelete" xml:space="preserve">
+	<data name="CommandEditDelete" xml:space="preserve">
     <value>Sil</value>
   </data>
-  <data name="CommandEditIncreaseFontSize" xml:space="preserve">
+	<data name="CommandEditIncreaseFontSize" xml:space="preserve">
     <value>Font Boyutunu Arttır</value>
   </data>
-  <data name="CommandEditIncreaseIndentation" xml:space="preserve">
+	<data name="CommandEditIncreaseIndentation" xml:space="preserve">
     <value>Girintiyi Arttır</value>
   </data>
-  <data name="CommandEditNumbering" xml:space="preserve">
+	<data name="CommandEditNumbering" xml:space="preserve">
     <value>Numaralama</value>
   </data>
-  <data name="CommandEditRedo" xml:space="preserve">
+	<data name="CommandEditRedo" xml:space="preserve">
     <value>_ileri</value>
   </data>
-  <data name="CommandEditSelectAll" xml:space="preserve">
+	<data name="CommandEditSelectAll" xml:space="preserve">
     <value>T_ümünü Seç</value>
   </data>
-  <data name="CommandEditUnderline" xml:space="preserve">
+	<data name="CommandEditUnderline" xml:space="preserve">
     <value>Alt Çizgi</value>
   </data>
-  <data name="CommandEditUndo" xml:space="preserve">
+	<data name="CommandEditUndo" xml:space="preserve">
     <value>_Geri</value>
   </data>
-  <data name="ErrorProjectCount" xml:space="preserve">
+	<data name="ErrorProjectCount" xml:space="preserve">
     <value>Dosyada birden fazla proje var.</value>
   </data>
-  <data name="ErrorUnknownVersion" xml:space="preserve">
+	<data name="ErrorUnknownVersion" xml:space="preserve">
     <value>Devre Projesi'nin bilinmeyen bir sürümünü yüklemeyi deneyin.
 Bozuk veya açmaya çalıştığınız dosya, Logic Circuit yazılımının daha yeni bir sürümü tarafından oluşturuldu. Daha yeni sürümler için lütfen &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt; adresini kontrol edin.</value>
   </data>
-  <data name="FileSaved" xml:space="preserve">
+	<data name="FileSaved" xml:space="preserve">
     <value>{0} dosyası kaydedildi.</value>
   </data>
-  <data name="GateShapeShaped" xml:space="preserve">
+	<data name="GateShapeShaped" xml:space="preserve">
     <value>biçimli</value>
   </data>
-  <data name="GateTriStateName" xml:space="preserve">
+	<data name="GateTriStateName" xml:space="preserve">
     <value>Üç-Durumlu</value>
   </data>
-  <data name="MemoryAddressPinName" xml:space="preserve">
+	<data name="MemoryAddressPinName" xml:space="preserve">
     <value>Hafıza adresi</value>
   </data>
-  <data name="MemoryDataInPinName" xml:space="preserve">
-    <value>Hafıza input verisi</value>
+	<data name="MemoryDataInPinName" xml:space="preserve">
+    <value>Hafıza giriş verisi</value>
   </data>
-  <data name="MemoryDataPinName" xml:space="preserve">
+	<data name="MemoryDataPinName" xml:space="preserve">
     <value>Hafıza verisi</value>
   </data>
-  <data name="MemoryWritePinName" xml:space="preserve">
+	<data name="MemoryWritePinName" xml:space="preserve">
     <value>RAM Yazma girişi.
 Bellek değeri {0} tarihinde güncellenir</value>
   </data>
-  <data name="OperationCanceled" xml:space="preserve">
+	<data name="OperationCanceled" xml:space="preserve">
     <value>Operasyon iptal edildi</value>
   </data>
-  <data name="SplitterThin1PinName" xml:space="preserve">
+	<data name="SplitterThin1PinName" xml:space="preserve">
     <value>Kombine Splitter konnektörü (bit {0})</value>
   </data>
-  <data name="SplitterThin2PinName" xml:space="preserve">
+	<data name="SplitterThin2PinName" xml:space="preserve">
     <value>(Kombine Splitter konektörü bitleri {0} - {1})</value>
   </data>
-  <data name="SplitterWidePinName" xml:space="preserve">
+	<data name="SplitterWidePinName" xml:space="preserve">
     <value>Kombine Splitter konnektörü</value>
   </data>
-  <data name="TitleNo" xml:space="preserve">
-    <value>Y_ok</value>
+	<data name="TitleNo" xml:space="preserve">
+    <value>H_ayır</value>
   </data>
-  <data name="TitleYes" xml:space="preserve">
+	<data name="TitleYes" xml:space="preserve">
     <value>_Evet</value>
   </data>
-  <data name="WriteOn0" xml:space="preserve">
+	<data name="WriteOn0" xml:space="preserve">
     <value>1'den 0'a düşüyor</value>
   </data>
-  <data name="WriteOn1" xml:space="preserve">
+	<data name="WriteOn1" xml:space="preserve">
     <value>0'dan 1'e yükseliyor</value>
   </data>
-  <data name="ToolTipConstant" xml:space="preserve">
+	<data name="ToolTipConstant" xml:space="preserve">
     <value>{0} bit (s) sabiti {1: X}</value>
   </data>
-  <data name="ToolTipWire" xml:space="preserve">
+	<data name="ToolTipWire" xml:space="preserve">
     <value>Tel</value>
   </data>
-  <data name="TitlePinInput" xml:space="preserve">
+	<data name="TitlePinInput" xml:space="preserve">
     <value>{0}
 Giriş</value>
   </data>
-  <data name="TitlePinOutput" xml:space="preserve">
+	<data name="TitlePinOutput" xml:space="preserve">
     <value>{0}
 Çıkış</value>
   </data>
-  <data name="CommandHelpAbout" xml:space="preserve">
+	<data name="CommandHelpAbout" xml:space="preserve">
     <value>_Hakkında</value>
   </data>
-  <data name="NameConstant" xml:space="preserve">
+	<data name="NameConstant" xml:space="preserve">
     <value>Sabit</value>
   </data>
-  <data name="NameSplitter" xml:space="preserve">
+	<data name="NameSplitter" xml:space="preserve">
     <value>Bölücü</value>
   </data>
-  <data name="TitleAbout" xml:space="preserve">
+	<data name="TitleAbout" xml:space="preserve">
     <value>Hakkında</value>
   </data>
-  <data name="TitleGateShape" xml:space="preserve">
+	<data name="TitleGateShape" xml:space="preserve">
     <value>_Kapı Şekli</value>
   </data>
-  <data name="TitleLoadLastFile" xml:space="preserve">
+	<data name="TitleLoadLastFile" xml:space="preserve">
     <value>Başlangıçta son dosyayı _yükle</value>
   </data>
-  <data name="MessageFreeWireCount" xml:space="preserve">
+	<data name="MessageFreeWireCount" xml:space="preserve">
     <value>{0} boşta tel bulundu</value>
   </data>
-  <data name="MessageFloatingSymbolCount" xml:space="preserve">
+	<data name="MessageFloatingSymbolCount" xml:space="preserve">
     <value>{0} bağlantısı olmayan sembol bulundu.</value>
   </data>
-  <data name="CommandEditUnselectAllWires" xml:space="preserve">
+	<data name="CommandEditUnselectAllWires" xml:space="preserve">
     <value>Tüm tellerin Seçimini Kaldır</value>
   </data>
-  <data name="CommandToolsReport" xml:space="preserve">
+	<data name="CommandToolsReport" xml:space="preserve">
     <value>Proje Raporu</value>
   </data>
-  <data name="TitleDescription" xml:space="preserve">
+	<data name="TitleDescription" xml:space="preserve">
     <value>_Açıklama:</value>
   </data>
-  <data name="TitleNotation" xml:space="preserve">
+	<data name="TitleNotation" xml:space="preserve">
     <value>N_otasyon</value>
   </data>
-  <data name="TitleBitWidth" xml:space="preserve">
+	<data name="TitleBitWidth" xml:space="preserve">
     <value>_Bit Uzunluğu:</value>
   </data>
-  <data name="TitleAddressBitWidth" xml:space="preserve">
+	<data name="TitleAddressBitWidth" xml:space="preserve">
     <value>_Adres bit genişliği:</value>
   </data>
-  <data name="TitleDataBitWidth" xml:space="preserve">
+	<data name="TitleDataBitWidth" xml:space="preserve">
     <value>Data _bit genişliği</value>
   </data>
-  <data name="TitleInverted" xml:space="preserve">
+	<data name="TitleInverted" xml:space="preserve">
     <value>_Evirilmiş</value>
   </data>
-  <data name="TitleLoad" xml:space="preserve">
+	<data name="TitleLoad" xml:space="preserve">
     <value>Y_ükle...</value>
   </data>
-  <data name="TitleSide" xml:space="preserve">
+	<data name="TitleSide" xml:space="preserve">
     <value>Y_an:</value>
   </data>
-  <data name="TitleType" xml:space="preserve">
+	<data name="TitleType" xml:space="preserve">
     <value>_Tip:</value>
   </data>
-  <data name="TitleWriteOn" xml:space="preserve">
+	<data name="TitleWriteOn" xml:space="preserve">
     <value>_Üzerine yaz:</value>
   </data>
-  <data name="TipOnStartMove" xml:space="preserve">
+	<data name="TipOnStartMove" xml:space="preserve">
     <value>Seçimi istenen konuma sürükleyip bırakın. Hareketi iptal etmek için Esc tuşuna basın. Bağlı kabloların hareket etmesini önlemek için sürüklerken Shift tuşunu basılı tutun.</value>
   </data>
-  <data name="TipOnStartWire" xml:space="preserve">
+	<data name="TipOnStartWire" xml:space="preserve">
     <value>Telin ucunu istenen konuma sürükleyin. Kablo oluşumunu iptal etmek için Esc tuşuna basın.</value>
   </data>
-  <data name="Loading" xml:space="preserve">
+	<data name="Loading" xml:space="preserve">
     <value>Yükleniyor...</value>
   </data>
-  <data name="TipOnCtrlDown" xml:space="preserve">
-    <value>Mantıksal devreler arasında geçiş yapmak için Ctrl + {Shift} + Tab tuşuna basın veya tek tek semboller seçmek/seçimini kaldırmak için tıklayın.</value>
+	<data name="TipOnCtrlDown" xml:space="preserve">
+    <value>Mantıksal devreler arasında geçiş yapmak için Ctrl + {Shift} + Tab tuşuna basın veya tek tek semboller seçmek/seçimini kaldırmak için tıklayın. Yakınlaştırmak için mouse tekerleğini kullanın.</value>
   </data>
-  <data name="TipOnWireSelect" xml:space="preserve">
+	<data name="TipOnWireSelect" xml:space="preserve">
     <value>Shift + {Ctrl} + Tüm iletkeni seçmek veya seçimini kaldırmak için kabloya tıklayın, Alt + Seçilen kabloya bölünerek, birleştirmek için ortak noktaya tıklayın.</value>
   </data>
-  <data name="TipOnAwaitingArea" xml:space="preserve">
+	<data name="TipOnAwaitingArea" xml:space="preserve">
     <value>{0} {1}. Onları seçmek için çoklu semboller çevirin, mevcut seçimi korumak için Shift tuşunu basılı tutun.</value>
   </data>
-  <data name="FunctionParameter" xml:space="preserve">
+	<data name="FunctionParameter" xml:space="preserve">
     <value>{0} fonksiyonu için en az {1} parametreye ihtiyaç duyuluyor</value>
   </data>
-  <data name="UnknownState" xml:space="preserve">
+	<data name="UnknownState" xml:space="preserve">
     <value>{0} durumu Bilinmiyor</value>
   </data>
-  <data name="ErrorAddressNotConnected" xml:space="preserve">
+	<data name="ErrorAddressNotConnected" xml:space="preserve">
     <value>Tüm bit adresleri hafızaya bağlı değil {0}</value>
   </data>
-  <data name="ErrorDataInNotConnected" xml:space="preserve">
+	<data name="ErrorDataInNotConnected" xml:space="preserve">
     <value>input bir verileri hafızaya bağlı değil {0}</value>
   </data>
-  <data name="ErrorJamBitWidthDifferent" xml:space="preserve">
+	<data name="ErrorJamBitWidthDifferent" xml:space="preserve">
     <value>{0} ({1}) giriş pini ve {4} üzerindeki {2} ({3}) çıkış pini farklı bit genişliğine sahiptir ve bağlanamaz. Lütfen sorunu çözün.</value>
   </data>
-  <data name="ErrorLoopInCircuit" xml:space="preserve">
+	<data name="ErrorLoopInCircuit" xml:space="preserve">
     <value>"{1}" mantık devresi üzerindeki "{0}" devresinin sembolü sonsuz döngü oluşturur. Lütfen döngüyü çözün.</value>
   </data>
-  <data name="ProbeHistoryMark" xml:space="preserve">
+	<data name="ProbeHistoryMark" xml:space="preserve">
     <value>&lt;&lt;&lt;&lt;&lt;&lt; İşaretle &gt;&gt;&gt;&gt;&gt;&gt;</value>
   </data>
-  <data name="TitleMark" xml:space="preserve">
+	<data name="TitleMark" xml:space="preserve">
     <value>_İşaret</value>
   </data>
-  <data name="TitleProbeHistory" xml:space="preserve">
+	<data name="TitleProbeHistory" xml:space="preserve">
     <value>Prob geçmişi</value>
   </data>
-  <data name="MessageNotRootConstant" xml:space="preserve">
+	<data name="MessageNotRootConstant" xml:space="preserve">
     <value>Güç açıkken sadece kök devresinde ({0}) bulunan sabitler değiştirilebilir.</value>
   </data>
-  <data name="Oscillation" xml:space="preserve">
+	<data name="Oscillation" xml:space="preserve">
     <value>Salınım</value>
   </data>
-  <data name="TitleOscillogram" xml:space="preserve">
+	<data name="TitleOscillogram" xml:space="preserve">
     <value>Osilogram</value>
   </data>
-  <data name="TitleOscilloscope" xml:space="preserve">
+	<data name="TitleOscilloscope" xml:space="preserve">
     <value>Lojik Devre Osiloskobu</value>
   </data>
-  <data name="TitleOscilloscoping" xml:space="preserve">
+	<data name="TitleOscilloscoping" xml:space="preserve">
     <value>Osilasyon</value>
   </data>
-  <data name="TitleCheckAll" xml:space="preserve">
+	<data name="TitleCheckAll" xml:space="preserve">
     <value>_Tümünü Kontol et</value>
   </data>
-  <data name="TitleUncheckAll" xml:space="preserve">
+	<data name="TitleUncheckAll" xml:space="preserve">
     <value>_Tümünün işaretini kaldır.</value>
   </data>
-  <data name="ImagePathInvalid" xml:space="preserve">
+	<data name="ImagePathInvalid" xml:space="preserve">
     <value>Sağlanan dosya adı geçerli değil. Lütfen üst klasörün mevcut olduğunu ve dosya adının geçerli olduğunu kontrol edin.</value>
   </data>
-  <data name="MessageExportImageDialog" xml:space="preserve">
+	<data name="MessageExportImageDialog" xml:space="preserve">
     <value>Geçerli diyagramı dışa aktarmak için görüntü tipi ve dosya adını seçin.</value>
   </data>
-  <data name="MessageImageFileExists" xml:space="preserve">
+	<data name="MessageImageFileExists" xml:space="preserve">
     <value>"{0}" dosyası zaten var.
 Değiştirmek istiyor musun?</value>
   </data>
-  <data name="ReportMemoryName" xml:space="preserve">
-    <value>{0}: {1} bit adresi, {2} bit verileri</value>
+	<data name="ReportMemoryName" xml:space="preserve">
+    <value>{0}: {1} bit adresi, {2} bit verisi</value>
   </data>
-  <data name="TriStateGroupName" xml:space="preserve">
-    <value>Üç-Durumlu grop</value>
+	<data name="TriStateGroupName" xml:space="preserve">
+    <value>Üç-Durumlu grup</value>
   </data>
-  <data name="TextNotation" xml:space="preserve">
+	<data name="TextNotation" xml:space="preserve">
     <value>Metin Notu</value>
   </data>
-  <data name="CaptionDataBitWidth" xml:space="preserve">
+	<data name="CaptionDataBitWidth" xml:space="preserve">
     <value>Data Biti</value>
   </data>
-  <data name="MenuHeaderCircuit" xml:space="preserve">
+	<data name="MenuHeaderCircuit" xml:space="preserve">
     <value>_Devre</value>
   </data>
-  <data name="MenuHeaderEdit" xml:space="preserve">
+	<data name="MenuHeaderEdit" xml:space="preserve">
     <value>_Düzenle</value>
   </data>
-  <data name="TitleFrequency" xml:space="preserve">
+	<data name="TitleFrequency" xml:space="preserve">
     <value>Fre_kans</value>
   </data>
-  <data name="TitleIsMaximumSpeed1" xml:space="preserve">
+	<data name="TitleIsMaximumSpeed1" xml:space="preserve">
     <value>Maksimum hızda başlat</value>
   </data>
-  <data name="TitleIsMaximumSpeed2" xml:space="preserve">
+	<data name="TitleIsMaximumSpeed2" xml:space="preserve">
     <value>Yüksek CPU yüklü</value>
   </data>
-  <data name="TitleRunningCircuit" xml:space="preserve">
+	<data name="TitleRunningCircuit" xml:space="preserve">
     <value>Çalışan Devre</value>
   </data>
-  <data name="TitleZoom" xml:space="preserve">
+	<data name="TitleZoom" xml:space="preserve">
     <value>_Yakınlaştır:</value>
   </data>
-  <data name="ToolTipAddressBitWidth" xml:space="preserve">
+	<data name="ToolTipAddressBitWidth" xml:space="preserve">
     <value>Adres pininin bit genişliğini seçin.</value>
   </data>
-  <data name="ToolTipButtonNotation" xml:space="preserve">
+	<data name="ToolTipButtonNotation" xml:space="preserve">
     <value>Butonun notasyonunu girin</value>
   </data>
-  <data name="ToolTipConstantBitWidth" xml:space="preserve">
+	<data name="ToolTipConstantBitWidth" xml:space="preserve">
     <value>Sabitin bit genişliğini seçin</value>
   </data>
-  <data name="ToolTipConstantValue" xml:space="preserve">
+	<data name="ToolTipConstantValue" xml:space="preserve">
     <value>Sabitin başlangıç değerini girin</value>
   </data>
-  <data name="ToolTipCurrentZoom" xml:space="preserve">
+	<data name="ToolTipCurrentZoom" xml:space="preserve">
     <value>Mevcut Yakınlaştırma</value>
   </data>
-  <data name="ToolTipDataBitWidth" xml:space="preserve">
+	<data name="ToolTipDataBitWidth" xml:space="preserve">
     <value>Data pininin bit genişliğini seçin</value>
   </data>
-  <data name="ToolTipZoom" xml:space="preserve">
+	<data name="ToolTipZoom" xml:space="preserve">
     <value>Diyagramın yakınlaştırmasını ayarlayın</value>
   </data>
-  <data name="ToolTipRamWriteOn" xml:space="preserve">
+	<data name="ToolTipRamWriteOn" xml:space="preserve">
     <value>Yazma hafızası seç</value>
   </data>
-  <data name="TitleIsToggle" xml:space="preserve">
+	<data name="TitleIsToggle" xml:space="preserve">
     <value>Toggle mı</value>
   </data>
-  <data name="PinSideBottom" xml:space="preserve">
+	<data name="PinSideBottom" xml:space="preserve">
     <value>Alt</value>
   </data>
-  <data name="PinSideTop" xml:space="preserve">
+	<data name="PinSideTop" xml:space="preserve">
     <value>Üst</value>
   </data>
-  <data name="MessageNotUsed" xml:space="preserve">
+	<data name="MessageNotUsed" xml:space="preserve">
     <value>Bu lojik devre herhangi bir yerde kullanılmaz.</value>
   </data>
-  <data name="MessageUsageNote" xml:space="preserve">
+	<data name="MessageUsageNote" xml:space="preserve">
     <value>Geçerli olanın kullanıldığı devreyi seçin, navigasyona çift tıklayın ve mevcut olan sembolleri seçin.</value>
   </data>
-  <data name="TitleCircuitUsage" xml:space="preserve">
+	<data name="TitleCircuitUsage" xml:space="preserve">
     <value>Lojik Devre Kullanımı</value>
   </data>
-  <data name="CommandFileOpenRecent" xml:space="preserve">
+	<data name="CommandFileOpenRecent" xml:space="preserve">
     <value>_Son Kullanılanlardan Aç</value>
   </data>
-  <data name="MessageInvalidRecentFile" xml:space="preserve">
+	<data name="MessageInvalidRecentFile" xml:space="preserve">
     <value>"{0}" dosyası açılamıyor.
 Son Dosya listesinden referansı kaldırmak istiyor musunuz?</value>
   </data>
-  <data name="TitleMaxRecentFiles" xml:space="preserve">
+	<data name="TitleMaxRecentFiles" xml:space="preserve">
     <value>_Son dosyaların maksimum sayısı:</value>
   </data>
-  <data name="ErrorFileCorrupted" xml:space="preserve">
+	<data name="ErrorFileCorrupted" xml:space="preserve">
     <value>"{0}" dosyası bozuk ve yüklenemiyor.</value>
   </data>
-  <data name="ProjectSummary" xml:space="preserve">
+	<data name="ProjectSummary" xml:space="preserve">
     <value>{0} mantıksal devreleri, {1} kategorilerinde {2} sembolleri ve {3} tellerini kullanıyor</value>
   </data>
-  <data name="ReportError" xml:space="preserve">
+	<data name="ReportError" xml:space="preserve">
     <value>Hata nedeniyle fonksiyonlar raporlanamıyor: {0}</value>
   </data>
-  <data name="ReportFunctions" xml:space="preserve">
+	<data name="ReportFunctions" xml:space="preserve">
     <value>"{0}" devresinin fonksiyonları.</value>
   </data>
-  <data name="TitleCount" xml:space="preserve">
+	<data name="TitleCount" xml:space="preserve">
     <value>Say</value>
   </data>
-  <data name="TitleFunction" xml:space="preserve">
+	<data name="TitleFunction" xml:space="preserve">
     <value>Fonksiyon</value>
   </data>
-  <data name="TitleProjectDescription" xml:space="preserve">
+	<data name="TitleProjectDescription" xml:space="preserve">
     <value>Açıklama</value>
   </data>
-  <data name="TitleReportErrorDetails" xml:space="preserve">
+	<data name="TitleReportErrorDetails" xml:space="preserve">
     <value>Hata detayları</value>
   </data>
-  <data name="TitleSummary" xml:space="preserve">
+	<data name="TitleSummary" xml:space="preserve">
     <value>Özet:</value>
   </data>
-  <data name="TitleTotal" xml:space="preserve">
+	<data name="TitleTotal" xml:space="preserve">
     <value>Toplam:</value>
   </data>
-  <data name="LogicalCircuitMainNotation" xml:space="preserve">
+	<data name="LogicalCircuitMainNotation" xml:space="preserve">
     <value>Ana</value>
   </data>
-  <data name="PinTypeNameInput" xml:space="preserve">
+	<data name="PinTypeNameInput" xml:space="preserve">
     <value>Giriş</value>
   </data>
-  <data name="PinTypeNameNone" xml:space="preserve">
+	<data name="PinTypeNameNone" xml:space="preserve">
     <value>Yok</value>
   </data>
-  <data name="PinTypeNameOutput" xml:space="preserve">
+	<data name="PinTypeNameOutput" xml:space="preserve">
     <value>Çıkış</value>
   </data>
-  <data name="ErrorUnsupportedUri" xml:space="preserve">
+	<data name="ErrorUnsupportedUri" xml:space="preserve">
     <value>Bu adresin navigasyonu desteklenmiyor</value>
   </data>
-  <data name="NameLedMatrix" xml:space="preserve">
+	<data name="NameLedMatrix" xml:space="preserve">
     <value>LED Matrisi</value>
   </data>
-  <data name="ToolTipColumns" xml:space="preserve">
+	<data name="ToolTipColumns" xml:space="preserve">
     <value>LED matrisinin sütun sayısını seçin</value>
   </data>
-  <data name="ToolTipRows" xml:space="preserve">
+	<data name="ToolTipRows" xml:space="preserve">
     <value>LED matris için satır sayısı seçin.</value>
   </data>
-  <data name="LedMatrixColumnSelector" xml:space="preserve">
+	<data name="LedMatrixColumnSelector" xml:space="preserve">
     <value>#{0} Sütununu seçmek için</value>
   </data>
-  <data name="LedMatrixRowIndividual" xml:space="preserve">
+	<data name="LedMatrixRowIndividual" xml:space="preserve">
     <value>#{0} Satırındaki her LED için</value>
   </data>
-  <data name="LedMatrixRowSelector" xml:space="preserve">
+	<data name="LedMatrixRowSelector" xml:space="preserve">
     <value>#{0} Satırını seçmek için</value>
   </data>
-  <data name="LedMatrixTypeIndividual" xml:space="preserve">
+	<data name="LedMatrixTypeIndividual" xml:space="preserve">
     <value>Bireysel</value>
   </data>
-  <data name="LedMatrixTypeSelector" xml:space="preserve">
+	<data name="LedMatrixTypeSelector" xml:space="preserve">
     <value>Seçici</value>
   </data>
-  <data name="TitleCellShape" xml:space="preserve">
+	<data name="TitleCellShape" xml:space="preserve">
     <value>Hücre _Şekli:</value>
   </data>
-  <data name="TitleColumns" xml:space="preserve">
+	<data name="TitleColumns" xml:space="preserve">
     <value>_Sütunlar:</value>
   </data>
-  <data name="TitleRows" xml:space="preserve">
+	<data name="TitleRows" xml:space="preserve">
     <value>_Satırlar:</value>
   </data>
-  <data name="TitleColors" xml:space="preserve">
+	<data name="TitleColors" xml:space="preserve">
     <value>_Renkler:</value>
   </data>
-  <data name="MessageVersionOutdated" xml:space="preserve">
+	<data name="MessageVersionOutdated" xml:space="preserve">
     <value>Eski versiyona sahipsin. Linke tıklayıp son sürümü indirebilirsin</value>
   </data>
-  <data name="MessageVersionPreview" xml:space="preserve">
+	<data name="MessageVersionPreview" xml:space="preserve">
     <value>Yayınlanmamış geliştiricinin sürümüne sahipsiniz.</value>
   </data>
-  <data name="ErrorHyperlinkText" xml:space="preserve">
+	<data name="ErrorHyperlinkText" xml:space="preserve">
     <value>Bağlantı metni boş.</value>
   </data>
-  <data name="ErrorHyperlinkUrl" xml:space="preserve">
+	<data name="ErrorHyperlinkUrl" xml:space="preserve">
     <value>Bağlantı adresi geçersiz.</value>
   </data>
-  <data name="TitleHyperlink" xml:space="preserve">
+	<data name="TitleHyperlink" xml:space="preserve">
     <value>_Bağlantı:</value>
   </data>
-  <data name="TitleText" xml:space="preserve">
+	<data name="TitleText" xml:space="preserve">
     <value>_Metin:</value>
   </data>
-  <data name="CommandInsertImage" xml:space="preserve">
+	<data name="CommandInsertImage" xml:space="preserve">
     <value>Resim</value>
   </data>
-  <data name="TitleCheckVersionPeriodically" xml:space="preserve">
+	<data name="TitleCheckVersionPeriodically" xml:space="preserve">
     <value>Yeni sürümleri periyodik olarak kontrol edin</value>
   </data>
-  <data name="ErrorClipboardCorrupted" xml:space="preserve">
+	<data name="ErrorClipboardCorrupted" xml:space="preserve">
     <value>Panodaki veriler bozuk ve yapıştırılamıyor.</value>
   </data>
-  <data name="MessageInputOutputPinsMissing" xml:space="preserve">
+	<data name="MessageInputOutputPinsMissing" xml:space="preserve">
     <value>Bu devrede Giriş veya Çıkış Pinleri yoktur. Doğruluk tabloları, tüm veri permütasyonlarını Giriş Pinlerine göndererek ve Çıkış Pinleri'nden sonuçları okuyarak oluşturulmuştur.</value>
   </data>
-  <data name="MessageTruthTableTooBig" xml:space="preserve">
+	<data name="MessageTruthTableTooBig" xml:space="preserve">
     <value>Doğruluk tablosu çok uzun ve kesiliyor. Devrenizin doğruluğunu kontrol etmek için lütfen Filtreyi kullanın.</value>
   </data>
-  <data name="ParserEOS" xml:space="preserve">
+	<data name="ParserEOS" xml:space="preserve">
     <value>İfadenin sonu</value>
   </data>
-  <data name="ParserErrorCloseParenMissing" xml:space="preserve">
+	<data name="ParserErrorCloseParenMissing" xml:space="preserve">
     <value>{0} yerinde: ') eksik</value>
   </data>
-  <data name="ParserErrorExpressionMissing" xml:space="preserve">
+	<data name="ParserErrorExpressionMissing" xml:space="preserve">
     <value>{0} sonra ifade eksik</value>
   </data>
-  <data name="ParserErrorUnclosedQuote" xml:space="preserve">
+	<data name="ParserErrorUnclosedQuote" xml:space="preserve">
     <value>Belirtilen tanımlayıcıda kapanış teklifi yok: {0}</value>
   </data>
-  <data name="ParserErrorUnexpected" xml:space="preserve">
+	<data name="ParserErrorUnexpected" xml:space="preserve">
     <value>{0} beklenmedik</value>
   </data>
-  <data name="ParserErrorUnknownChar" xml:space="preserve">
+	<data name="ParserErrorUnknownChar" xml:space="preserve">
     <value>Bilinmeyen char: {0}</value>
   </data>
-  <data name="ParserErrorUnknownPin" xml:space="preserve">
+	<data name="ParserErrorUnknownPin" xml:space="preserve">
     <value>{0} - giriş veya çıkış pin bulunamadı</value>
   </data>
-  <data name="TitleDisplayedRows" xml:space="preserve">
+	<data name="TitleDisplayedRows" xml:space="preserve">
     <value>Display satırları: {0:N0}</value>
   </data>
-  <data name="TitleFilter" xml:space="preserve">
+	<data name="TitleFilter" xml:space="preserve">
     <value>-Filtre:</value>
   </data>
-  <data name="TitleInvert" xml:space="preserve">
+	<data name="TitleInvert" xml:space="preserve">
     <value>_Evir</value>
   </data>
-  <data name="TitleTotalRows" xml:space="preserve">
+	<data name="TitleTotalRows" xml:space="preserve">
     <value>Toplam satırlar: {0:N0}</value>
   </data>
-  <data name="TitleStop" xml:space="preserve">
+	<data name="TitleStop" xml:space="preserve">
     <value>_Dur</value>
   </data>
-  <data name="ToolTipBackgroundColor" xml:space="preserve">
+	<data name="ToolTipBackgroundColor" xml:space="preserve">
     <value>Renk vurgusu</value>
   </data>
-  <data name="TitleSaveAs" xml:space="preserve">
+	<data name="TitleSaveAs" xml:space="preserve">
     <value>F_arklı Kaydet...</value>
   </data>
-  <data name="ToolTipSaveData" xml:space="preserve">
+	<data name="ToolTipSaveData" xml:space="preserve">
     <value>Veriyi dosyaya kaydedin</value>
   </data>
-  <data name="MemoryOnStartData" xml:space="preserve">
+	<data name="MemoryOnStartData" xml:space="preserve">
     <value>Çalışmalar arasındaki kalıcı hafıza</value>
   </data>
-  <data name="MemoryOnStartOnes" xml:space="preserve">
+	<data name="MemoryOnStartOnes" xml:space="preserve">
     <value>Tüm bitleri 1 yap</value>
   </data>
-  <data name="MemoryOnStartRandom" xml:space="preserve">
+	<data name="MemoryOnStartRandom" xml:space="preserve">
     <value>Rastgele</value>
   </data>
-  <data name="MemoryOnStartZeros" xml:space="preserve">
+	<data name="MemoryOnStartZeros" xml:space="preserve">
     <value>Tüm birleri 0 yap</value>
   </data>
-  <data name="TitleMemoryOnStart" xml:space="preserve">
+	<data name="TitleMemoryOnStart" xml:space="preserve">
     <value>_Başlangıç dolgusunda:</value>
   </data>
-  <data name="ErrorManyMemoryData" xml:space="preserve">
+	<data name="ErrorManyMemoryData" xml:space="preserve">
     <value>{0} devresi, veriler arasında veriyi koruyan {1} içerir.
 Potansiyel olarak farklı veri setleri bir bellek modülünde depolanacağı için bu devre diğer devreler üzerinde bir kereden fazla kullanılamaz.</value>
   </data>
-  <data name="TitleIsDisplay" xml:space="preserve">
+	<data name="TitleIsDisplay" xml:space="preserve">
     <value>Sembolde _görsel öğeleri göster</value>
   </data>
-  <data name="MessageRestartRequared" xml:space="preserve">
+	<data name="MessageRestartRequared" xml:space="preserve">
     <value>Dil tercihiniz değiştirilmiştir. Yeni ayarların uygulanabilmesi için yazılımı yeniden başlatmanız gerekmektedir.</value>
   </data>
-  <data name="TitleCulture" xml:space="preserve">
+	<data name="TitleCulture" xml:space="preserve">
     <value>_Dil</value>
   </data>
-  <data name="CommandFileClose" xml:space="preserve">
+	<data name="CommandFileClose" xml:space="preserve">
     <value>Çıkış</value>
   </data>
-  <data name="CommandFileNew" xml:space="preserve">
+	<data name="CommandFileNew" xml:space="preserve">
     <value>_Yeni</value>
   </data>
-  <data name="CommandFileOpen" xml:space="preserve">
+	<data name="CommandFileOpen" xml:space="preserve">
     <value>_Aç</value>
   </data>
-  <data name="CommandFileSave" xml:space="preserve">
+	<data name="CommandFileSave" xml:space="preserve">
     <value>_Kaydet</value>
   </data>
-  <data name="CommandFileSaveAs" xml:space="preserve">
+	<data name="CommandFileSaveAs" xml:space="preserve">
     <value>Farklı _Kaydet</value>
   </data>
-  <data name="CommandHelpView" xml:space="preserve">
+	<data name="CommandHelpView" xml:space="preserve">
     <value>_Yardım</value>
   </data>
-  <data name="TitleActualFrequency" xml:space="preserve">
+	<data name="TitleActualFrequency" xml:space="preserve">
     <value>Gerçek frekans:</value>
   </data>
-  <data name="WireDisplayValue" xml:space="preserve">
+	<data name="WireDisplayValue" xml:space="preserve">
     <value>Değer: {0}</value>
   </data>
-  <data name="WireDisplayBitWidth" xml:space="preserve">
+	<data name="WireDisplayBitWidth" xml:space="preserve">
     <value>Bit genişliği: {0}</value>
   </data>
-  <data name="WireDisplayDisconnected" xml:space="preserve">
+	<data name="WireDisplayDisconnected" xml:space="preserve">
     <value>Tel bağlı değil.</value>
   </data>
-  <data name="TitlePinSide" xml:space="preserve">
+	<data name="TitlePinSide" xml:space="preserve">
     <value>Pin _yönü:</value>
   </data>
-  <data name="SensorTypeManual" xml:space="preserve">
+	<data name="SensorTypeManual" xml:space="preserve">
     <value>Manuel</value>
   </data>
-  <data name="SensorTypeSeries" xml:space="preserve">
+	<data name="SensorTypeSeries" xml:space="preserve">
     <value>Seriler</value>
   </data>
-  <data name="TitleSensorType" xml:space="preserve">
+	<data name="TitleSensorType" xml:space="preserve">
     <value>Sensör _tipi:</value>
   </data>
-  <data name="ErrorBadInterval" xml:space="preserve">
+	<data name="ErrorBadInterval" xml:space="preserve">
     <value>Minimum, maksimumdan daha az veya eşit olmalıdır.</value>
   </data>
-  <data name="ErrorBadPositiveNumber" xml:space="preserve">
+	<data name="ErrorBadPositiveNumber" xml:space="preserve">
     <value>Beklenen sayı 0'dan büyük olmalıdır.</value>
   </data>
-  <data name="ErrorEmptySeries" xml:space="preserve">
+	<data name="ErrorEmptySeries" xml:space="preserve">
     <value>Seriler boş olmamalı.</value>
   </data>
-  <data name="ErrorSeriesItem" xml:space="preserve">
+	<data name="ErrorSeriesItem" xml:space="preserve">
     <value>{0} hatası. Aşağıdaki şekilde ayrılmış bir onaltılık sayılar çifti olmalıdır:</value>
   </data>
-  <data name="ErrorSeriesItemOrder" xml:space="preserve">
+	<data name="ErrorSeriesItemOrder" xml:space="preserve">
     <value>{0} hatası. Her sonraki döngü, öncekinden daha büyük olmalıdır.</value>
   </data>
-  <data name="TitleLoopSeries" xml:space="preserve">
+	<data name="TitleLoopSeries" xml:space="preserve">
     <value>Seriyi _Tekrarla</value>
   </data>
-  <data name="TitleSensorRandomMax" xml:space="preserve">
+	<data name="TitleSensorRandomMax" xml:space="preserve">
     <value>M_aksimum döngü:</value>
   </data>
-  <data name="TitleSensorRandomMin" xml:space="preserve">
+	<data name="TitleSensorRandomMin" xml:space="preserve">
     <value>_Minimum döngü:</value>
   </data>
-  <data name="TitleSeries" xml:space="preserve">
+	<data name="TitleSeries" xml:space="preserve">
     <value>S_eriler:</value>
   </data>
-  <data name="TitleSearchPattern" xml:space="preserve">
+	<data name="TitleSearchPattern" xml:space="preserve">
     <value>_Ne buldun:</value>
   </data>
-  <data name="ToolTipDescriptorClock" xml:space="preserve">
+	<data name="ToolTipDescriptorClock" xml:space="preserve">
     <value>0 ile 1 arasında salınan sinyal üretir
 ve devreleri eylemlerini koordine etmek için kullanılır.</value>
   </data>
-  <data name="ToolTipDescriptorPin" xml:space="preserve">
+	<data name="ToolTipDescriptorPin" xml:space="preserve">
     <value>Diğer devreler olan bir konnektör oluşturmak için kullanılır
 akım devresine veri sağlamak ve almak için. Devreleri değiştirmek için devredeki pinleri yeniden düzenleyin.</value>
   </data>
-  <data name="ErrorBadHexNumber" xml:space="preserve">
+	<data name="ErrorBadHexNumber" xml:space="preserve">
     <value>Geçersiz onaltılık sayı</value>
   </data>
-  <data name="TitleSensorManualInitialValue" xml:space="preserve">
+	<data name="TitleSensorManualInitialValue" xml:space="preserve">
     <value>Başlangıç _değeri:</value>
   </data>
-  <data name="NameGraphicsArray" xml:space="preserve">
+	<data name="NameGraphicsArray" xml:space="preserve">
     <value>Grafik Dizisi</value>
   </data>
-  <data name="ToolTipDescriptorGraphicsArray" xml:space="preserve">
+	<data name="ToolTipDescriptorGraphicsArray" xml:space="preserve">
     <value>(Nokta matrisli display) dahili bellekte saklanan verileri gösterebilir.
 Bilgisayarlar veya kontrolörler gibi gelişmiş devrelerle kullanılır.
 Boyut ve renk derinliğini / şemasını seçmenizi sağlar:
@@ -1071,331 +1071,355 @@ Boyut ve renk derinliğini / şemasını seçmenizi sağlar:
 4 bit / piksel - 16 renk
 8 bit / piksel - 256 renk</value>
   </data>
-  <data name="ErrorBadIntegerInRange" xml:space="preserve">
+	<data name="ErrorBadIntegerInRange" xml:space="preserve">
     <value>Sayi aralığı bekleniyor {0} - {1}.</value>
   </data>
-  <data name="TitleGraphicsArrayBPP" xml:space="preserve">
+	<data name="TitleGraphicsArrayBPP" xml:space="preserve">
     <value>_Piksel başında bit:</value>
   </data>
-  <data name="TitleHeight" xml:space="preserve">
+	<data name="TitleHeight" xml:space="preserve">
     <value>_Yükseklik:</value>
   </data>
-  <data name="TitleWidth" xml:space="preserve">
+	<data name="TitleWidth" xml:space="preserve">
     <value>Geni_şlik:</value>
   </data>
-  <data name="ErrorWriteNotConnected" xml:space="preserve">
+	<data name="ErrorWriteNotConnected" xml:space="preserve">
     <value>Yazma girişi {0} grafik dizisine bağlı değil.</value>
   </data>
-  <data name="ErrorBadHexInRange" xml:space="preserve">
+	<data name="ErrorBadHexInRange" xml:space="preserve">
     <value>Sayı aralığı bekleniyor {0:X} - {1:X}.</value>
   </data>
-  <data name="CommandToolsIronPython" xml:space="preserve">
+	<data name="CommandToolsIronPython" xml:space="preserve">
     <value>IronPython Konsolu</value>
   </data>
-  <data name="MessageLoadAutoSavedFile" xml:space="preserve">
+	<data name="MessageLoadAutoSavedFile" xml:space="preserve">
     <value>"{0}" dosyası doğru kaydedilemedi.
 Bu dosyanın otomatik kaydedilmiş durumunu yüklemek istiyor musunuz?</value>
   </data>
-  <data name="TitleAutoSave" xml:space="preserve">
+	<data name="TitleAutoSave" xml:space="preserve">
     <value>Değişiklikleri _otomatik olarak kaydet:</value>
   </data>
-  <data name="ToolTipInputPin" xml:space="preserve">
+	<data name="ToolTipInputPin" xml:space="preserve">
     <value>{0} bit (ler) Pini {1} girişi</value>
   </data>
-  <data name="ToolTipNonePin" xml:space="preserve">
+	<data name="ToolTipNonePin" xml:space="preserve">
     <value>{0} bit(ler) {1}</value>
   </data>
-  <data name="ToolTipOutputPin" xml:space="preserve">
+	<data name="ToolTipOutputPin" xml:space="preserve">
     <value>Çıkış {0} bit(ler) Pin {1}</value>
   </data>
-  <data name="ToolTipRAM" xml:space="preserve">
+	<data name="ToolTipRAM" xml:space="preserve">
     <value>RAM {0} bit addresi / {1} bit datası</value>
   </data>
-  <data name="ToolTipROM" xml:space="preserve">
+	<data name="ToolTipROM" xml:space="preserve">
     <value>ROM {0} bit addresi / {1} bit datası</value>
   </data>
-  <data name="ToolTipSplitter" xml:space="preserve">
+	<data name="ToolTipSplitter" xml:space="preserve">
     <value>{0} adet bölücü pini {1}  bit</value>
   </data>
-  <data name="CommandEditSelectFloatingSymbols" xml:space="preserve">
+	<data name="CommandEditSelectFloatingSymbols" xml:space="preserve">
     <value>Değişken semboller Seç</value>
   </data>
-  <data name="ErrorManyResults" xml:space="preserve">
+	<data name="ErrorManyResults" xml:space="preserve">
     <value>Üç durumluk özellikte olmayan birden fazla çıkış pinine bağlı {1} giriş pini {0}.</value>
   </data>
-  <data name="ToolTipFrequency" xml:space="preserve">
+	<data name="ToolTipFrequency" xml:space="preserve">
     <value>Çalışan devrenin saat kapılarının frekansını değiştirin.</value>
   </data>
-  <data name="ToolTipGateInputCount" xml:space="preserve">
+	<data name="ToolTipGateInputCount" xml:space="preserve">
     <value>Kapı için giriş numarası seçin</value>
   </data>
-  <data name="ToolTipIsMaximumSpeed1" xml:space="preserve">
+	<data name="ToolTipIsMaximumSpeed1" xml:space="preserve">
     <value>Yukarıdaki kaydırıcı tarafından ayarlanan maksimum olası hız ihmal frekansında devreyi çalıştırır.</value>
   </data>
-  <data name="ToolTipIsMaximumSpeed2" xml:space="preserve">
+	<data name="ToolTipIsMaximumSpeed2" xml:space="preserve">
     <value>Bu kutunun işaretlenmesi bazı bilgisayarlarda yanıt vermeyen kullanıcı arayüzüne yol açabilir.</value>
   </data>
-  <data name="ToolTipPinBitWidth" xml:space="preserve">
+	<data name="ToolTipPinBitWidth" xml:space="preserve">
     <value>Pinin bit genişliğini seçin</value>
   </data>
-  <data name="ToolTipPinSide" xml:space="preserve">
+	<data name="ToolTipPinSide" xml:space="preserve">
     <value>Devrenin glifinin kenarını seçin, yeni pin üzerinde durur</value>
   </data>
-  <data name="ToolTipSplitterBitWidth" xml:space="preserve">
+	<data name="ToolTipSplitterBitWidth" xml:space="preserve">
     <value>Bölücünün bölünmüş konektörünün bit genişliğini seçin.</value>
   </data>
-  <data name="ToolTipSplitterPinNumber" xml:space="preserve">
+	<data name="ToolTipSplitterPinNumber" xml:space="preserve">
     <value>Bölücünün bölünmüş bağlayıcılarının sayısını seçin.</value>
   </data>
-  <data name="ToolTipSplitterRotation" xml:space="preserve">
+	<data name="ToolTipSplitterRotation" xml:space="preserve">
     <value>Bölücünün kombine konektörünün yönünü seçin.</value>
   </data>
-  <data name="ToolTipPinNotation" xml:space="preserve">
+	<data name="ToolTipPinNotation" xml:space="preserve">
     <value>Pinin yanındaki devrenin sembolü üzerinde görüntülenecek kısa metin girin</value>
   </data>
-  <data name="ToolTipIsToggle" xml:space="preserve">
+	<data name="ToolTipIsToggle" xml:space="preserve">
     <value>toggle ise, her tıklamada; toggle değil ise, sonra basıldığında veya basılmadığında değişecektir.</value>
   </data>
-  <data name="ToolTipLedMatrix" xml:space="preserve">
+	<data name="ToolTipLedMatrix" xml:space="preserve">
     <value>LED Matrix {0} x {1}, LED başına {2} bit (ler) ile ({3} renk)</value>
   </data>
-  <data name="ToolTipLedMatrixType" xml:space="preserve">
+	<data name="ToolTipLedMatrixType" xml:space="preserve">
     <value>Matrisin kontrolünü seçme yolunu seçin</value>
   </data>
-  <data name="DefaultGateShape" xml:space="preserve">
+	<data name="DefaultGateShape" xml:space="preserve">
     <value>Shaped</value>
   </data>
-  <data name="ToolTipFontColor" xml:space="preserve">
+	<data name="ToolTipFontColor" xml:space="preserve">
     <value>metin rengi</value>
   </data>
-  <data name="ToolTipLoadData" xml:space="preserve">
+	<data name="ToolTipLoadData" xml:space="preserve">
     <value>Dosyadan veri yükle</value>
   </data>
-  <data name="ToolTipMemoryOnStart" xml:space="preserve">
+	<data name="ToolTipMemoryOnStart" xml:space="preserve">
     <value>Güç açıkken RAM'ın nasıl başlatılacağını seç</value>
   </data>
-  <data name="ToolTipIsDisplay" xml:space="preserve">
+	<data name="ToolTipIsDisplay" xml:space="preserve">
     <value>Görsel öğeleri görüntülemek için Mantık Devresi'ni işaretlediğinizde
 Bu devre üzerindeki tüm ekran sembolleri üzerinde canlı olarak görünecektir.
 Ekranlar: LED, LED Matrix, Grafik Dizisi, Buton veya diğer
 Görsel elemanlarını gösteren Mantık Devresi.</value>
   </data>
-  <data name="ToolTipDevicePinSide" xml:space="preserve">
+	<data name="ToolTipDevicePinSide" xml:space="preserve">
     <value>Pinin bulunduğu tarafı seçin</value>
   </data>
-  <data name="ToolTipSensorBitWidth" xml:space="preserve">
+	<data name="ToolTipSensorBitWidth" xml:space="preserve">
     <value>Sensör için bit genişliği seçin</value>
   </data>
-  <data name="ToolTipSensorNotation" xml:space="preserve">
+	<data name="ToolTipSensorNotation" xml:space="preserve">
     <value>Sensörün notasyonunu giriniz</value>
   </data>
-  <data name="ToolTipSensorType" xml:space="preserve">
+	<data name="ToolTipSensorType" xml:space="preserve">
     <value>Sensörün verilecek verileri nereden alacağını seçin</value>
   </data>
-  <data name="ToolTipSensorRandomMax" xml:space="preserve">
+	<data name="ToolTipSensorRandomMax" xml:space="preserve">
     <value>Sensör ölçümünü değiştirmeden önce maksimum döngü sayısını girin.</value>
   </data>
-  <data name="ToolTipSensorRandomMin" xml:space="preserve">
+	<data name="ToolTipSensorRandomMin" xml:space="preserve">
     <value>Sensör ölçümünü değiştirmeden önce minimum döngü sayısını girin.</value>
   </data>
-  <data name="ToolTipSeriesData" xml:space="preserve">
+	<data name="ToolTipSeriesData" xml:space="preserve">
     <value>Lütfen &lt;cycle&gt; formunda bir dizi sensör ölçümü sağlayın: &lt;value&gt;
 Burada hem döngü hem de değer onaltılıktır.
 Döngü çift sayı veya 0 olduğunda, değişmeye karşılık gelir.
 0 ile 1 arasında clock, garip olursa clock 1'den 0'a değişir.</value>
   </data>
-  <data name="ToolTipSoundNotation" xml:space="preserve">
+	<data name="ToolTipSoundNotation" xml:space="preserve">
     <value>Buzzer'ın notasyonunu girin</value>
   </data>
-  <data name="ToolTipDescriptorProbe" xml:space="preserve">
+	<data name="ToolTipDescriptorProbe" xml:space="preserve">
     <value>Gözlemek için probları ekleyin ve bağlayın
 yüzeydeki güç açık devresinin mevcut durumu
 sonda, çift tıklattığınızda değerlerin geçmiş verilerini osiloskop üzerinde araştırın veya görüntüleyin.</value>
   </data>
-  <data name="ToolTipDescriptorSensor" xml:space="preserve">
+	<data name="ToolTipDescriptorSensor" xml:space="preserve">
     <value>"Harici kaynak" dan veri sağlar
 önceden tanımlanmış, rastgele seçilmiş bir dizi
 veya elle girilen değerler.</value>
   </data>
-  <data name="ToolTipDescriptorSplitter" xml:space="preserve">
+	<data name="ToolTipDescriptorSplitter" xml:space="preserve">
     <value>Kablo demetinin oluşturulmasına izin verir veya
 onu bireysel tellere ayırır.
 Bölücülerin ve çoklu bit pinlerin kullanımı
 çizimi önemli ölçüde basitleştirir ve
 Devrenin anlaşılmasını kolaylaştırır.</value>
   </data>
-  <data name="ToolTipDescriptorText" xml:space="preserve">
+	<data name="ToolTipDescriptorText" xml:space="preserve">
     <value>Metin notlarını şemanın herhangi bir yerine yerleştirin.
 Devreni yorumla, herhangi birine yararlı bağlantılar sağla
 web siteleri ve resimlerle devre süsleyin.</value>
   </data>
-  <data name="ToolTipDescriptorTriState" xml:space="preserve">
+	<data name="ToolTipDescriptorTriState" xml:space="preserve">
     <value>Üç farklı çıkışa sahip olabilir: 1, 0 ve yüksek empedans (Z).
 Yüksek empedanslı durum, mantıkta, kesinlikle ikili olan hiçbir rol oynamaz.
 Bu cihazlar, birden fazla kaynağın veri göndermesine izin vermek için CPU'nun buslarında kullanılır.
 Uygun kontrol devresi ile bir hattı süren üç durumlu bir grup
 temelde bir çoğullayıcıya eşdeğerdir.</value>
   </data>
-  <data name="ToolTipSensorManualValue" xml:space="preserve">
+	<data name="ToolTipSensorManualValue" xml:space="preserve">
     <value>Onaltılı değer yazın ve Enter tuşuna basın.</value>
   </data>
-  <data name="ToolTipSensorManualInitialValue" xml:space="preserve">
+	<data name="ToolTipSensorManualInitialValue" xml:space="preserve">
     <value>İlk değeri onaltılık sayı olarak girin.</value>
   </data>
-  <data name="ToolTipGraphicsArray" xml:space="preserve">
+	<data name="ToolTipGraphicsArray" xml:space="preserve">
     <value>{0} {1} x {2} piksel başına {3} bit (s) ({4} renk) ile</value>
   </data>
-  <data name="ToolTipGraphicsArrayBPP" xml:space="preserve">
+	<data name="ToolTipGraphicsArrayBPP" xml:space="preserve">
     <value>Piksel başına sayı bitlerini seçin.</value>
   </data>
-  <data name="ToolTipGraphicsArrayHeight" xml:space="preserve">
+	<data name="ToolTipGraphicsArrayHeight" xml:space="preserve">
     <value>Grafik dizisinin yüksekliğini piksel cinsinden girin.</value>
   </data>
-  <data name="ToolTipGraphicsArrayWidth" xml:space="preserve">
+	<data name="ToolTipGraphicsArrayWidth" xml:space="preserve">
     <value>Grafik dizisinin genişliğini piksel cinsinden girin.</value>
   </data>
-  <data name="CircuitMapPathSeparator" xml:space="preserve">
+	<data name="CircuitMapPathSeparator" xml:space="preserve">
     <value>/</value>
   </data>
-  <data name="CategoryDuplicate" xml:space="preserve">
+	<data name="CategoryDuplicate" xml:space="preserve">
     <value>{0} 2</value>
   </data>
-  <data name="CategoryPrimitives" xml:space="preserve">
+	<data name="CategoryPrimitives" xml:space="preserve">
     <value>Primitives</value>
   </data>
-  <data name="Bit0" xml:space="preserve">
+	<data name="Bit0" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="Bit1" xml:space="preserve">
+	<data name="Bit1" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="FileFilter" xml:space="preserve">
+	<data name="FileFilter" xml:space="preserve">
     <value>Circuit Project (*{0})|*{0}|All files (*.*)|*.*</value>
   </data>
-  <data name="GateAndNotation" xml:space="preserve">
+	<data name="GateAndNotation" xml:space="preserve">
     <value>&amp;</value>
   </data>
-  <data name="GateClockNotation" xml:space="preserve">
+	<data name="GateClockNotation" xml:space="preserve">
     <value>ω</value>
   </data>
-  <data name="GateNotNotation" xml:space="preserve">
+	<data name="GateNotNotation" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="GateOrNotation" xml:space="preserve">
+	<data name="GateOrNotation" xml:space="preserve">
     <value>≥1</value>
   </data>
-  <data name="CircuitProbeNotation" xml:space="preserve">
+	<data name="CircuitProbeNotation" xml:space="preserve">
     <value>?</value>
   </data>
-  <data name="GateTriStateNotation" xml:space="preserve">
+	<data name="GateTriStateNotation" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="GateXorNotation" xml:space="preserve">
+	<data name="GateXorNotation" xml:space="preserve">
     <value>=1</value>
   </data>
-  <data name="GateXorNotName" xml:space="preserve">
+	<data name="GateXorNotName" xml:space="preserve">
     <value>XNor</value>
   </data>
-  <data name="Led7Pin1" xml:space="preserve">
+	<data name="Led7Pin1" xml:space="preserve">
     <value>a</value>
   </data>
-  <data name="Led7Pin2" xml:space="preserve">
+	<data name="Led7Pin2" xml:space="preserve">
     <value>b</value>
   </data>
-  <data name="Led7Pin3" xml:space="preserve">
+	<data name="Led7Pin3" xml:space="preserve">
     <value>c</value>
   </data>
-  <data name="Led7Pin4" xml:space="preserve">
+	<data name="Led7Pin4" xml:space="preserve">
     <value>d</value>
   </data>
-  <data name="Led7Pin5" xml:space="preserve">
+	<data name="Led7Pin5" xml:space="preserve">
     <value>e</value>
   </data>
-  <data name="Led7Pin6" xml:space="preserve">
+	<data name="Led7Pin6" xml:space="preserve">
     <value>f</value>
   </data>
-  <data name="Led7Pin7" xml:space="preserve">
+	<data name="Led7Pin7" xml:space="preserve">
     <value>g</value>
   </data>
-  <data name="Led7Pin8" xml:space="preserve">
+	<data name="Led7Pin8" xml:space="preserve">
     <value>dot</value>
   </data>
-  <data name="MemoryAddressPinNotation" xml:space="preserve">
+	<data name="MemoryAddressPinNotation" xml:space="preserve">
     <value>a</value>
   </data>
-  <data name="MemoryDataPinNotation" xml:space="preserve">
+	<data name="MemoryDataPinNotation" xml:space="preserve">
     <value>d</value>
   </data>
-  <data name="MemoryWritePinNotation" xml:space="preserve">
+	<data name="MemoryWritePinNotation" xml:space="preserve">
     <value>w</value>
   </data>
-  <data name="PinEnableName" xml:space="preserve">
+	<data name="PinEnableName" xml:space="preserve">
     <value>E</value>
   </data>
-  <data name="PinInName" xml:space="preserve">
+	<data name="PinInName" xml:space="preserve">
     <value>x</value>
   </data>
-  <data name="PinName" xml:space="preserve">
+	<data name="PinName" xml:space="preserve">
     <value>{0}{1}</value>
   </data>
-  <data name="PinOutName" xml:space="preserve">
+	<data name="PinOutName" xml:space="preserve">
     <value>q</value>
   </data>
-  <data name="ConstantNotation" xml:space="preserve">
+	<data name="ConstantNotation" xml:space="preserve">
     <value>{0:X}</value>
   </data>
-  <data name="RAMNotation" xml:space="preserve">
+	<data name="RAMNotation" xml:space="preserve">
     <value>RAM</value>
   </data>
-  <data name="ROMNotation" xml:space="preserve">
+	<data name="ROMNotation" xml:space="preserve">
     <value>ROM</value>
   </data>
-  <data name="TitleApplication" xml:space="preserve">
+	<data name="TitleApplication" xml:space="preserve">
     <value>Logical Circuit</value>
   </data>
-  <data name="WebSiteUri" xml:space="preserve">
+	<data name="WebSiteUri" xml:space="preserve">
     <value>http://www.logiccircuit.org/</value>
   </data>
-  <data name="TitleDisplayOptions" xml:space="preserve">
+	<data name="TitleDisplayOptions" xml:space="preserve">
     <value>Display</value>
   </data>
-  <data name="HelpContent" xml:space="preserve">
+	<data name="HelpContent" xml:space="preserve">
     <value>http://www.logiccircuit.org/help.html</value>
   </data>
-  <data name="NamePin" xml:space="preserve">
+	<data name="NamePin" xml:space="preserve">
     <value>Pin</value>
   </data>
-  <data name="TitleData" xml:space="preserve">
+	<data name="TitleData" xml:space="preserve">
     <value>Da_ta</value>
   </data>
-  <data name="ImageFileFilter" xml:space="preserve">
-    <value>Image File (*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif)|*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif|All Files (*.*)|*.*</value>
+	<data name="ImageFileFilter" xml:space="preserve">
+    <value>Resim Dosyası (*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif)|*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif|All Files (*.*)|*.*</value>
   </data>
-  <data name="TitleFileOpen" xml:space="preserve">
+	<data name="TitleFileOpen" xml:space="preserve">
     <value>...</value>
   </data>
-  <data name="Gate7SegName" xml:space="preserve">
+	<data name="Gate7SegName" xml:space="preserve">
     <value>7-seg</value>
   </data>
-  <data name="ReportGateName" xml:space="preserve">
+	<data name="ReportGateName" xml:space="preserve">
     <value>{0} ({1})</value>
   </data>
-  <data name="GridPoint" xml:space="preserve">
+	<data name="GridPoint" xml:space="preserve">
     <value>({0}, {1})</value>
   </data>
-  <data name="WebSiteDownloadUri" xml:space="preserve">
+	<data name="WebSiteDownloadUri" xml:space="preserve">
     <value>http://www.logiccircuit.org/download.html</value>
   </data>
-  <data name="CommandHyperlink" xml:space="preserve">
+	<data name="CommandHyperlink" xml:space="preserve">
     <value>Hyperlink</value>
   </data>
-  <data name="CommandEditBullets" xml:space="preserve">
+	<data name="CommandEditBullets" xml:space="preserve">
     <value>Bullets</value>
   </data>
-  <data name="NameSound" xml:space="preserve">
+	<data name="NameSound" xml:space="preserve">
     <value>Buzzer</value>
   </data>
-  <data name="ToolTipSound" xml:space="preserve">
+	<data name="ToolTipSound" xml:space="preserve">
     <value>Buzzer {0}</value>
   </data>
+	<data name="TitlePinIndex" xml:space="preserve">
+		<value>Pin Çağırma</value>
+	</data>
+	<data name="TitlePinIndexReset" xml:space="preserve">
+		<value>_grafiksel yerleştirmeyi sıfırla</value>
+	</data>
+	<data name="TitleStartupCircuit" xml:space="preserve">
+		<value>_Başlangıç:</value>
+	</data>
+	<data name="TitleCurrent" xml:space="preserve">
+		<value>Mevcut lojik devre</value>
+	</data>
+	<data name="TitleBottom" xml:space="preserve">
+		<value>_Alt:</value>
+	</data>
+	<data name="TitleLeft" xml:space="preserve">
+		<value>_Sol:</value>
+	</data>
+	<data name="TitleRight" xml:space="preserve">
+		<value>S_ağ:</value>
+	</data>
+	<data name="TitleTop" xml:space="preserve">
+		<value>_Üst</value>
+	</data>
 </root>

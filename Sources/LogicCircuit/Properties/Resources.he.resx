@@ -1447,4 +1447,28 @@
   <data name="TitleMinutesUnits" xml:space="preserve">
     <value>דקות</value>
   </data>
+  <data name="TitlePinIndex" xml:space="preserve">
+    <value>סדר הפינים</value>
+  </data>
+  <data name="TitlePinIndexReset" xml:space="preserve">
+    <value>חזרה למיקום _גרפי</value>
+  </data>
+  <data name="TitleStartupCircuit" xml:space="preserve">
+    <value>_אתחול:</value>
+  </data>
+  <data name="TitleCurrent" xml:space="preserve">
+    <value>המעגל הנוכחי</value>
+  </data>
+  <data name="TitleBottom" xml:space="preserve">
+    <value>מלמ_טה:</value>
+  </data>
+  <data name="TitleLeft" xml:space="preserve">
+    <value>מ_שמאל:</value>
+  </data>
+  <data name="TitleRight" xml:space="preserve">
+    <value>מ_ימין:</value>
+  </data>
+  <data name="TitleTop" xml:space="preserve">
+    <value>מלמ_עלה:</value>
+  </data>
 </root>
