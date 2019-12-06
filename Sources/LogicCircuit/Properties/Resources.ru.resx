@@ -1406,27 +1406,27 @@
     <value>минут(у/ы)</value>
   </data>
 	<data name="TitlePinIndex" xml:space="preserve">
-		<value>Порядок разъемов</value>
-	</data>
+    <value>Порядок разъемов</value>
+  </data>
 	<data name="TitlePinIndexReset" xml:space="preserve">
-		<value>Сбросить в _графический порядок</value>
-	</data>
+    <value>Сбросить в _графический порядок</value>
+  </data>
 	<data name="TitleStartupCircuit" xml:space="preserve">
-		<value>_Включать на схеме</value>
-	</data>
+    <value>_Включать на схеме:</value>
+  </data>
 	<data name="TitleCurrent" xml:space="preserve">
-		<value>Текущая схема</value>
-	</data>
+    <value>Текущая схема</value>
+  </data>
 	<data name="TitleBottom" xml:space="preserve">
-		<value>В_низу:</value>
-	</data>
+    <value>В_низу:</value>
+  </data>
 	<data name="TitleLeft" xml:space="preserve">
-		<value>С_лева:</value>
-	</data>
+    <value>С_лева:</value>
+  </data>
 	<data name="TitleRight" xml:space="preserve">
-		<value>С_права:</value>
-	</data>
+    <value>С_права:</value>
+  </data>
 	<data name="TitleTop" xml:space="preserve">
-		<value>В_верху:</value>
-	</data>
+    <value>В_верху:</value>
+  </data>
 </root>
