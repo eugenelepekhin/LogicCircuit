@@ -37,6 +37,7 @@ namespace LogicCircuit {
 			ProjectData data;
 			other.CircuitProject.ProjectSet.Table.GetData(other.ProjectRowId, out data);
 			data.Project = null;
+			data.StartupCircuitId = ProjectData.StartupCircuitIdField.Field.DefaultValue;
 			return this.Create(this.Table.Insert(ref data));
 		}
 
