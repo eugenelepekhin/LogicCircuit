@@ -63,6 +63,12 @@
 			ToolTip="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent, FallbackValue={x:Static properties:Resources.ToolTipGraphicsArrayHeight}}"
 		/>
 
+		<Label Content="{x:Static properties:Resources.TitleZoom}"/>
+		<ComboBox Name="zoom"
+			Width="{Binding ElementName=dataBitWidth, Path=ActualWidth}"
+			HorizontalAlignment="Left"
+		/>
+
 		<Label Content="{x:Static properties:Resources.TitleDescription}"/>
 		<TextBox Name="note" AcceptsReturn="True"/>
 

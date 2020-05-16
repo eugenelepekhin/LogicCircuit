@@ -11,6 +11,7 @@ namespace LogicCircuit {
 		public const int MaxBitsPerPixel = 8;
 		public const int MaxWidth = 640;
 		public const int MaxHeight = 480;
+		public const int MaxZoom = 4;
 
 		public static MemoryOnStart CheckOnStart(MemoryOnStart value) {
 			return (MemoryOnStart.Random <= value && value <= MemoryOnStart.Ones) ? value : MemoryOnStart.Zeros;
@@ -41,6 +42,10 @@ namespace LogicCircuit {
 
 		public static int CheckHeight(int value) {
 			return Math.Max(1, Math.Min(value, GraphicsArray.MaxHeight));
+		}
+
+		public static int CheckZoom(int value) {
+			return Math.Max(1, Math.Min(value, GraphicsArray.MaxZoom));
 		}
 
 		public static int NumberCellsFor(int dataBitWidth, int bitsPerPixel, int width, int height) {
@@ -124,11 +129,11 @@ namespace LogicCircuit {
 		}
 
 		protected override int CircuitSymbolWidth(int defaultWidth) {
-			return base.CircuitSymbolWidth(Math.Max(2, GraphicsArray.PixelsToGridSize(this.Width)));
+			return base.CircuitSymbolWidth(Math.Max(2, GraphicsArray.PixelsToGridSize(this.Width * this.Zoom)));
 		}
 
 		protected override int CircuitSymbolHeight(int defaultHeight) {
-			return base.CircuitSymbolHeight(Math.Max(3, GraphicsArray.PixelsToGridSize(this.Height)));
+			return base.CircuitSymbolHeight(Math.Max(3, GraphicsArray.PixelsToGridSize(this.Height * this.Zoom)));
 		}
 
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
@@ -192,6 +197,7 @@ namespace LogicCircuit {
 				bitsPerPixel,
 				width,
 				height,
+				GraphicsArrayData.ZoomField.Field.DefaultValue,
 				GraphicsArrayData.NoteField.Field.DefaultValue
 			);
 			this.CreateDevicePins(graphicsArray);

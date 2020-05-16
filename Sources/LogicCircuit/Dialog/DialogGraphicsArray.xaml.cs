@@ -67,6 +67,7 @@ namespace LogicCircuit {
 
 			this.dataBitWidth.ItemsSource = GraphicsArrayDescriptor.DataBitWidthRange;
 			this.bitsPerPixel.ItemsSource = GraphicsArrayDescriptor.BitsPerPixelRange;
+			this.zoom.ItemsSource = Enumerable.Range(1, GraphicsArray.MaxZoom).ToArray();
 
 			IEnumerable<EnumDescriptor<bool>> writeOnList = MemoryDescriptor.WriteOnList;
 			this.writeOn.ItemsSource = writeOnList;
@@ -83,6 +84,7 @@ namespace LogicCircuit {
 			this.bitsPerPixel.SelectedItem = this.graphicsArray.BitsPerPixel;
 			this.writeOn.SelectedItem = writeOnList.First(d => d.Value == this.graphicsArray.WriteOn1);
 			this.onStart.SelectedItem = onStartList.First(d => d.Value == this.graphicsArray.OnStart);
+			this.zoom.SelectedItem = this.graphicsArray.Zoom;
 			this.note.Text = this.graphicsArray.Note;
 		}
 
@@ -93,6 +95,7 @@ namespace LogicCircuit {
 					MemoryOnStart onStart =((EnumDescriptor<MemoryOnStart>)this.onStart.SelectedItem).Value;
 					int dataBitWidth = (int)this.dataBitWidth.SelectedItem;
 					int bitsPerPixel = (int)this.bitsPerPixel.SelectedItem;
+					int zoom = (int)this.zoom.SelectedItem;
 					string note = this.note.Text.Trim();
 
 					if(	this.graphicsArray.WriteOn1 != writeOn ||
@@ -101,6 +104,7 @@ namespace LogicCircuit {
 						this.graphicsArray.BitsPerPixel != bitsPerPixel ||
 						this.graphicsArray.Width != this.parsedWidth ||
 						this.graphicsArray.Height != this.parsedHeight ||
+						this.graphicsArray.Zoom != zoom ||
 						this.graphicsArray.Note != note
 					) {
 						this.graphicsArray.CircuitProject.InTransaction(() => {
@@ -110,6 +114,7 @@ namespace LogicCircuit {
 							this.graphicsArray.BitsPerPixel = bitsPerPixel;
 							this.graphicsArray.Width = this.parsedWidth;
 							this.graphicsArray.Height = this.parsedHeight;
+							this.graphicsArray.Zoom = zoom;
 							this.graphicsArray.Note = note;
 						});
 					}

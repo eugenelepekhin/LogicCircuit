@@ -39,6 +39,11 @@ namespace LogicCircuit {
 			get { return this.fieldHeight; }
 			set { this.fieldHeight = GraphicsArray.CheckHeight(value); }
 		}
+		private int fieldZoom;
+		public int Zoom {
+			get { return this.fieldZoom; }
+			set { this.fieldZoom = GraphicsArray.CheckZoom(value); }
+		}
 		public string Note;
 		internal GraphicsArray GraphicsArray;
 		// Field accessors
@@ -287,6 +292,41 @@ namespace LogicCircuit {
 			}
 		}
 
+		// Accessor of the Zoom field
+		public sealed class ZoomField : IField<GraphicsArrayData, int>, IFieldSerializer<GraphicsArrayData> {
+			public static readonly ZoomField Field = new ZoomField();
+			private ZoomField() {}
+			public string Name { get { return "Zoom"; } }
+			public int Order { get; set; }
+			public int DefaultValue { get { return 1; } }
+			public int GetValue(ref GraphicsArrayData record) {
+				return record.Zoom;
+			}
+			public void SetValue(ref GraphicsArrayData record, int value) {
+				record.Zoom = value;
+			}
+			public int Compare(ref GraphicsArrayData l, ref GraphicsArrayData r) {
+				return Math.Sign((long)l.Zoom - (long)r.Zoom);
+			}
+			public int Compare(int l, int r) {
+				return Math.Sign((long)l - (long)r);
+			}
+
+			// Implementation of interface IFieldSerializer<GraphicsArrayData>
+			bool IFieldSerializer<GraphicsArrayData>.NeedToSave(ref GraphicsArrayData data) {
+				return this.Compare(data.Zoom, this.DefaultValue) != 0;
+			}
+			string IFieldSerializer<GraphicsArrayData>.GetTextValue(ref GraphicsArrayData data) {
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Zoom);
+			}
+			void IFieldSerializer<GraphicsArrayData>.SetDefault(ref GraphicsArrayData data) {
+				data.Zoom = this.DefaultValue;
+			}
+			void IFieldSerializer<GraphicsArrayData>.SetTextValue(ref GraphicsArrayData data, string text) {
+				data.Zoom = int.Parse(text, CultureInfo.InvariantCulture);
+			}
+		}
+
 		// Accessor of the Note field
 		public sealed class NoteField : IField<GraphicsArrayData, string>, IFieldSerializer<GraphicsArrayData> {
 			public static readonly NoteField Field = new NoteField();
@@ -355,6 +395,7 @@ namespace LogicCircuit {
 			BitsPerPixelField.Field,
 			WidthField.Field,
 			HeightField.Field,
+			ZoomField.Field,
 			NoteField.Field,
 			GraphicsArrayField.Field
 		};
@@ -439,6 +480,12 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.GraphicsArrayRowId, GraphicsArrayData.HeightField.Field, value); }
 		}
 
+		// Gets or sets value of the Zoom field.
+		public int Zoom {
+			get { return this.Table.GetField(this.GraphicsArrayRowId, GraphicsArrayData.ZoomField.Field); }
+			set { this.Table.SetField(this.GraphicsArrayRowId, GraphicsArrayData.ZoomField.Field, value); }
+		}
+
 		// Gets or sets value of the Note field.
 		public override string Note {
 			get { return this.Table.GetField(this.GraphicsArrayRowId, GraphicsArrayData.NoteField.Field); }
@@ -471,6 +518,9 @@ namespace LogicCircuit {
 				}
 				if(GraphicsArrayData.HeightField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("Height");
+				}
+				if(GraphicsArrayData.ZoomField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("Zoom");
 				}
 				if(GraphicsArrayData.NoteField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("Note");
@@ -564,6 +614,7 @@ namespace LogicCircuit {
 			int BitsPerPixel,
 			int Width,
 			int Height,
+			int Zoom,
 			string Note
 			// Fields of Circuit table
 
@@ -582,6 +633,7 @@ namespace LogicCircuit {
 				BitsPerPixel = BitsPerPixel,
 				Width = Width,
 				Height = Height,
+				Zoom = Zoom,
 				Note = Note,
 			};
 			return this.Create(this.Table.Insert(ref dataGraphicsArray), rowIdCircuit);

@@ -284,6 +284,8 @@ namespace LogicCircuit {
 				}
 				if(probeView is TextBlock textBlock) {
 					textBlock.Text = this.Circuit.Notation;
+				} else if(probeView is Image) {
+					RenderOptions.SetBitmapScalingMode(probeView, BitmapScalingMode.NearestNeighbor);
 				}
 			}
 			return canvas;

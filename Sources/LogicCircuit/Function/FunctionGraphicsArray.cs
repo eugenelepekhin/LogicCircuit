@@ -24,6 +24,7 @@ namespace LogicCircuit {
 		private readonly Int32Rect drawingRect;
 		private readonly int memoryStride;
 		private readonly int bitmapStride;
+		private readonly int zoom;
 
 		private readonly byte[] data;
 		private WriteableBitmap bitmap;
@@ -68,6 +69,7 @@ namespace LogicCircuit {
 			int byteStride = w / 8 + (((w % 8) == 0) ? 0 : 1);
 			this.bitmapStride = Math.Max(byteStride * 8, this.memoryStride * this.DataBitWidth) / 8;
 			Tracer.Assert(this.memoryStride * this.DataBitWidth <= this.bitmapStride * 8);
+			this.zoom = graphicsArray.Zoom;
 
 			switch(graphicsArray.OnStart) {
 			case MemoryOnStart.Random:
@@ -213,8 +215,8 @@ namespace LogicCircuit {
 					this.lastImage = this.ProbeView(symbol);
 				}
 				this.lastImage.Source = this.bitmap;
-				this.lastImage.Width = this.bitmap.Width;
-				this.lastImage.Height = this.bitmap.Height;
+				this.lastImage.Width = this.bitmap.Width * this.zoom;
+				this.lastImage.Height = this.bitmap.Height * this.zoom;
 			}
 		}
 
