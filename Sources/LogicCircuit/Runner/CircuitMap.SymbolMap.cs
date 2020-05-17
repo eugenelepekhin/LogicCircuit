@@ -49,9 +49,6 @@ namespace LogicCircuit {
 			}
 
 			public override bool Equals(object obj) {
-				if(object.ReferenceEquals(this, obj)) {
-					return true;
-				}
 				if(obj != null && this.GetType() == obj.GetType()) {
 					SymbolMapKey other = (SymbolMapKey)obj;
 					return this.CircuitMap == other.CircuitMap && this.CircuitSymbol == other.CircuitSymbol;
@@ -83,9 +80,6 @@ namespace LogicCircuit {
 				}
 
 				public override bool Equals(object obj) {
-					if(object.ReferenceEquals(this, obj)) {
-						return true;
-					}
 					if(obj != null && this.GetType() == obj.GetType()) {
 						JamKey other = (JamKey)obj;
 						return this.Jam == other.Jam && this.BitNumber == other.BitNumber;
