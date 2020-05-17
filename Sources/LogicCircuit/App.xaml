@@ -171,6 +171,12 @@
 				<Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Command.Text}"/>
 			</Style>
 
+			<Style x:Key="TinyButton" TargetType="{x:Type Button}">
+				<Setter Property="BorderThickness" Value="0"/>
+				<Setter Property="Background" Value="Transparent"/>
+				<Setter Property="VerticalAlignment" Value="Top"/>
+			</Style>
+
 			<Style TargetType="{x:Type CheckBox}">
 				<Setter Property="Margin" Value="3"/>
 				<Setter Property="HorizontalAlignment" Value="Left"/>

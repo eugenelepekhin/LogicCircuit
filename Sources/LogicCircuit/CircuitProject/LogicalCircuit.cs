@@ -9,6 +9,7 @@ using LogicCircuit.DataPersistent;
 
 namespace LogicCircuit {
 	public partial class LogicalCircuit {
+		public const int MaxTruthTableFilters = 5;
 		public int PinVersion { get; private set; }
 
 		public Point ScrollOffset { get; set; }
@@ -188,7 +189,8 @@ namespace LogicCircuit {
 				name,
 				LogicalCircuitData.NoteField.Field.DefaultValue,
 				LogicalCircuitData.CategoryField.Field.DefaultValue,
-				LogicalCircuitData.IsDisplayField.Field.DefaultValue
+				LogicalCircuitData.IsDisplayField.Field.DefaultValue,
+				LogicalCircuitData.ValidatorsField.Field.DefaultValue
 			);
 			circuit.PropertyChanged += new PropertyChangedEventHandler(this.CircuitPropertyChanged);
 			return circuit;

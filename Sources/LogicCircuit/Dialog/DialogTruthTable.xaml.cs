@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -12,6 +13,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
+using Microsoft.Scripting.Utils;
 
 namespace LogicCircuit {
 	/// <summary>
@@ -45,6 +47,7 @@ namespace LogicCircuit {
 		}
 
 		public bool InvertFilter { get; set; }
+		public ObservableCollection<string> OldFilters { get; } = new ObservableCollection<string>();
 
 		public bool ShowProgress {
 			get { return (bool)this.GetValue(DialogTruthTable.ShowProgressProperty); }
@@ -64,10 +67,14 @@ namespace LogicCircuit {
 		private const int MaxRows = 1 << 12;
 		public BigInteger TotalRows { get; private set; }
 
+		private readonly LogicalCircuit logicalCircuit;
+		public LambdaUICommand CommandDeleteOldFilter { get; }
+
 		[SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		public DialogTruthTable(LogicalCircuit logicalCircuit) {
+			this.logicalCircuit = logicalCircuit;
 			this.InvertFilter = true;
-			this.testSocket  = new CircuitTestSocket(logicalCircuit);
+			this.testSocket  = new CircuitTestSocket(this.logicalCircuit);
 			int inputBits = this.testSocket.Inputs.Sum(p => p.Pin.BitWidth);
 			if(0 < inputBits) {
 				this.TotalRows = BigInteger.One << inputBits;
@@ -77,6 +84,10 @@ namespace LogicCircuit {
 			}
 
 			this.BuildTruthTable();
+
+			this.CommandDeleteOldFilter = new LambdaUICommand("-", o => this.RemoveFilter(o as string)) {
+				IconPath = "Icon/Delete.xaml"
+			};
 
 			this.DataContext = this;
 			this.InitializeComponent();
@@ -110,6 +121,7 @@ namespace LogicCircuit {
 			this.sortComparer = new TruthStateComparer(dataAccessor);
 			this.dataGrid.Sorting += new DataGridSortingEventHandler(this.DataGridSorting);
 			DataObject.AddPastingHandler(this.filter, this.OnFilterPaste);
+			this.OldFilters.AddRange(this.logicalCircuit.Validators.Split('\t').Where(f => !string.IsNullOrWhiteSpace(f)).Select(f => f.Trim()));
 		}
 
 		protected override void OnClosing(CancelEventArgs e) {
@@ -125,6 +137,42 @@ namespace LogicCircuit {
 					if(original != text) {
 						e.DataObject = new DataObject(DataFormats.Text, text);
 					}
+				}
+			}
+		}
+
+		private void UpdateFilter() {
+			string all = this.OldFilters.Aggregate("", (x, y) => string.IsNullOrEmpty(x) ? y : x + "\t" + y);
+			this.logicalCircuit.CircuitProject.InOmitTransaction(() => this.logicalCircuit.Validators = all);
+		}
+
+		private void SaveFilter() {
+			if(this.filter != null) {
+				string text = this.filter.Text.Trim();
+				if(!string.IsNullOrEmpty(text)) {
+					int index = this.OldFilters.IndexOf(text);
+					if(0 < index) {
+						this.OldFilters.RemoveAt(index);
+					}
+					if(0 != index) {
+						this.OldFilters.Insert(0, text);
+						this.filter.Text = text;
+						while(LogicalCircuit.MaxTruthTableFilters < this.OldFilters.Count) {
+							this.OldFilters.RemoveAt(this.OldFilters.Count - 1);
+						}
+						this.UpdateFilter();
+					}
+				}
+			}
+		}
+
+		private void RemoveFilter(string text) {
+			int index = this.OldFilters.IndexOf(text);
+			if(0 <= index) {
+				this.OldFilters.RemoveAt(index);
+				this.UpdateFilter();
+				if(this.filter != null && this.filter.Text == text) {
+					this.filter.Text = "";
 				}
 			}
 		}
@@ -196,6 +244,7 @@ namespace LogicCircuit {
 
 		private void ButtonApplyClick(object sender, RoutedEventArgs e) {
 			try {
+				this.SaveFilter();
 				if(DialogTruthTable.MaxRows < this.TotalRows) {
 					this.BuildTruthTable();
 				} else {

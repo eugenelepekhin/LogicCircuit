@@ -18,6 +18,7 @@ namespace LogicCircuit {
 		public string Note;
 		public string Category;
 		public bool IsDisplay;
+		public string Validators;
 		internal LogicalCircuit LogicalCircuit;
 		// Field accessors
 		// Accessor of the LogicalCircuitId field
@@ -230,6 +231,41 @@ namespace LogicCircuit {
 			}
 		}
 
+		// Accessor of the Validators field
+		public sealed class ValidatorsField : IField<LogicalCircuitData, string>, IFieldSerializer<LogicalCircuitData> {
+			public static readonly ValidatorsField Field = new ValidatorsField();
+			private ValidatorsField() {}
+			public string Name { get { return "Validators"; } }
+			public int Order { get; set; }
+			public string DefaultValue { get { return ""; } }
+			public string GetValue(ref LogicalCircuitData record) {
+				return record.Validators;
+			}
+			public void SetValue(ref LogicalCircuitData record, string value) {
+				record.Validators = value;
+			}
+			public int Compare(ref LogicalCircuitData l, ref LogicalCircuitData r) {
+				return StringComparer.Ordinal.Compare(l.Validators, r.Validators);
+			}
+			public int Compare(string l, string r) {
+				return StringComparer.Ordinal.Compare(l, r);
+			}
+
+			// Implementation of interface IFieldSerializer<LogicalCircuitData>
+			bool IFieldSerializer<LogicalCircuitData>.NeedToSave(ref LogicalCircuitData data) {
+				return this.Compare(data.Validators, this.DefaultValue) != 0;
+			}
+			string IFieldSerializer<LogicalCircuitData>.GetTextValue(ref LogicalCircuitData data) {
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Validators);
+			}
+			void IFieldSerializer<LogicalCircuitData>.SetDefault(ref LogicalCircuitData data) {
+				data.Validators = this.DefaultValue;
+			}
+			void IFieldSerializer<LogicalCircuitData>.SetTextValue(ref LogicalCircuitData data, string text) {
+				data.Validators = text;
+			}
+		}
+
 		// Special field used to access items wrapper of this record from record.
 		// This is used when no other universes is used
 		internal sealed class LogicalCircuitField : IField<LogicalCircuitData, LogicalCircuit> {
@@ -262,6 +298,7 @@ namespace LogicCircuit {
 			NoteField.Field,
 			CategoryField.Field,
 			IsDisplayField.Field,
+			ValidatorsField.Field,
 			LogicalCircuitField.Field
 		};
 
@@ -340,6 +377,12 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.LogicalCircuitRowId, LogicalCircuitData.IsDisplayField.Field, value); }
 		}
 
+		// Gets or sets value of the Validators field.
+		public string Validators {
+			get { return this.Table.GetField(this.LogicalCircuitRowId, LogicalCircuitData.ValidatorsField.Field); }
+			set { this.Table.SetField(this.LogicalCircuitRowId, LogicalCircuitData.ValidatorsField.Field, value); }
+		}
+
 
 		internal void NotifyChanged(TableChange<LogicalCircuitData> change) {
 			if(this.HasListener) {
@@ -363,6 +406,9 @@ namespace LogicCircuit {
 				}
 				if(LogicalCircuitData.IsDisplayField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("IsDisplay");
+				}
+				if(LogicalCircuitData.ValidatorsField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("Validators");
 				}
 			}
 			this.OnLogicalCircuitChanged();
@@ -451,7 +497,8 @@ namespace LogicCircuit {
 			string Notation,
 			string Note,
 			string Category,
-			bool IsDisplay
+			bool IsDisplay,
+			string Validators
 			// Fields of Circuit table
 
 		) {
@@ -468,6 +515,7 @@ namespace LogicCircuit {
 				Note = Note,
 				Category = Category,
 				IsDisplay = IsDisplay,
+				Validators = Validators,
 			};
 			return this.Create(this.Table.Insert(ref dataLogicalCircuit), rowIdCircuit);
 		}

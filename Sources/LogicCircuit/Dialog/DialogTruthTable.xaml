@@ -17,7 +17,20 @@
 	<Grid>
 		<lc:AutoGrid IsEnabled="{Binding Path=ShowProgress, Converter={StaticResource InverseBooleanConverter}}" ColumnWidths="Auto;*;Auto;Auto">
 			<Label Content="{x:Static properties:Resources.TitleFilter}" VerticalAlignment="Center"/>
-			<TextBox Name="filter" SpellCheck.IsEnabled="False"/>
+			<ComboBox Name="filter" IsEditable="True" ItemsSource="{Binding Path=OldFilters}">
+				<ComboBox.ItemTemplate>
+					<DataTemplate>
+						<lc:AutoGrid ColumnWidths="*;Auto" Width="{Binding ElementName=filter, Path=ActualWidth}">
+							<TextBlock Text="{Binding Path=.}" TextWrapping="Wrap"/>
+							<Button Style="{StaticResource TinyButton}"
+								Content="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=CommandDeleteOldFilter.Icon}"
+								Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=CommandDeleteOldFilter}"
+								CommandParameter="{Binding Path=.}"
+							/>
+						</lc:AutoGrid>
+					</DataTemplate>
+				</ComboBox.ItemTemplate>
+			</ComboBox>
 			<CheckBox VerticalAlignment="Center"
 				Content="{x:Static properties:Resources.TitleInvert}"
 				IsChecked="{Binding Path=InvertFilter}"
