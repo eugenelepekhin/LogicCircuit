@@ -127,6 +127,12 @@ namespace LogicCircuit {
 		protected override void OnClosing(CancelEventArgs e) {
 			base.OnClosing(e);
 			e.Cancel = this.ShowProgress;
+			if(!this.ShowProgress) {
+				string text = this.OldFilters.Aggregate("", (x, y) => string.IsNullOrEmpty(x) ? y : x + "\t" + y);
+				if(text != this.logicalCircuit.Validators) {
+					this.logicalCircuit.CircuitProject.InOmitTransaction(() => this.logicalCircuit.Validators = text);
+				}
+			}
 		}
 
 		private void OnFilterPaste(object sender, DataObjectPastingEventArgs e) {
@@ -139,11 +145,6 @@ namespace LogicCircuit {
 					}
 				}
 			}
-		}
-
-		private void UpdateFilter() {
-			string all = this.OldFilters.Aggregate("", (x, y) => string.IsNullOrEmpty(x) ? y : x + "\t" + y);
-			this.logicalCircuit.CircuitProject.InOmitTransaction(() => this.logicalCircuit.Validators = all);
 		}
 
 		private void SaveFilter() {
@@ -160,7 +161,6 @@ namespace LogicCircuit {
 						while(LogicalCircuit.MaxTruthTableFilters < this.OldFilters.Count) {
 							this.OldFilters.RemoveAt(this.OldFilters.Count - 1);
 						}
-						this.UpdateFilter();
 					}
 				}
 			}
@@ -170,7 +170,6 @@ namespace LogicCircuit {
 			int index = this.OldFilters.IndexOf(text);
 			if(0 <= index) {
 				this.OldFilters.RemoveAt(index);
-				this.UpdateFilter();
 				if(this.filter != null && this.filter.Text == text) {
 					this.filter.Text = "";
 				}
