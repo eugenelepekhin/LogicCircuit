@@ -6,7 +6,7 @@
 	FocusManager.FocusedElement="{Binding ElementName=listBox}"
 >
 	<lc:AutoGrid ColumnWidths="*;Auto" DataContext="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}">
-		<ListBox x:Name="listBox" SelectionMode="Single" ItemsSource="{Binding Path=PinList}" IsSynchronizedWithCurrentItem="True">
+		<ListBox x:Name="listBox" Style="{StaticResource PinList}" SelectionMode="Single" ItemsSource="{Binding Path=PinList}" IsSynchronizedWithCurrentItem="True">
 			<ListBox.ItemsPanel>
 				<ItemsPanelTemplate>
 					<StackPanel Orientation="Horizontal"/>

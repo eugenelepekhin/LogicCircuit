@@ -28,7 +28,7 @@
 					</CheckBox>
 
 					<Label Content="{x:Static properties:Resources.TitleDescription}"/>
-					<TextBox Name="description" AcceptsReturn="True"/>
+					<TextBox Name="description" Style="{StaticResource NoteEditor}"/>
 				</lc:AutoGrid>
 			</TabItem>
 

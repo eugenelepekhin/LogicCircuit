@@ -16,7 +16,7 @@
 		<ComboBox Name="startup" IsSynchronizedWithCurrentItem="True" DisplayMemberPath="Name"/>
 
 		<Label Content="{x:Static properties:Resources.TitleDescription}"/>
-		<TextBox Name="description" AcceptsReturn="True"/>
+		<TextBox Name="description" Style="{StaticResource NoteEditor}"/>
 
 		<StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
 			<Button Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" Click="ButtonOkClick"/>

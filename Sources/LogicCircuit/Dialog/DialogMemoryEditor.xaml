@@ -71,7 +71,7 @@
 			<GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="3" Background="Transparent"/>
 
 			<GroupBox Grid.Row="2" Margin="3,0,3,3" Header="{x:Static properties:Resources.CaptionNote}">
-				<TextBox Name="note" BorderThickness="0" AcceptsReturn="True"/>
+				<TextBox Name="note" Style="{StaticResource NoteEditor}" BorderThickness="0"/>
 			</GroupBox>
 		</Grid>
 

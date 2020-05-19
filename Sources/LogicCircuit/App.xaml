@@ -200,6 +200,11 @@
 				</Style.Triggers>
 			</Style>
 
+			<Style x:Key="NoteEditor" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+				<Setter Property="AcceptsReturn" Value="True"/>
+				<Setter Property="FontFamily" Value="Consolas"/>
+			</Style>
+
 			<Style TargetType="ComboBox">
 				<Setter Property="Margin" Value="3"/>
 				<Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -214,6 +219,9 @@
 			<Style TargetType="ListBox">
 				<Setter Property="Margin" Value="3"/>
 				<Setter Property="HorizontalAlignment" Value="Stretch"/>
+			</Style>
+
+			<Style x:Key="PinList" TargetType="ListBox" BasedOn="{StaticResource {x:Type ListBox}}">
 				<Setter Property="VerticalAlignment" Value="Center"/>
 				<Setter Property="MinHeight" Value="45"/>
 			</Style>

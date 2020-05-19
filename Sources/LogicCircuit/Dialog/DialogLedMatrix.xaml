@@ -51,7 +51,7 @@
 		<ComboBox Name="colors" ItemsSource="{Binding Path=ColorRange}" SelectedItem="{Binding Path=Colors}"/>
 
 		<Label Content="{x:Static properties:Resources.TitleDescription}"/>
-		<TextBox Name="note" AcceptsReturn="True" Text="{Binding Path=Note}"/>
+		<TextBox Name="note" Text="{Binding Path=Note}" Style="{StaticResource NoteEditor}"/>
 
 		<StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
 			<Button Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" Click="ButtonOkClick"/>
