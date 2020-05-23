@@ -3068,5 +3068,40 @@ namespace LogicCircuit.Properties {
  		public static string TitleTop {
 			get { return ResourceManager.GetString("TitleTop", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Memory address port 2.
+		/// </summary>
+ 		public static string MemoryAddress2PinName {
+			get { return ResourceManager.GetString("MemoryAddress2PinName", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to a2.
+		/// </summary>
+ 		public static string MemoryAddress2PinNotation {
+			get { return ResourceManager.GetString("MemoryAddress2PinNotation", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Memory data port 2.
+		/// </summary>
+ 		public static string MemoryData2PinName {
+			get { return ResourceManager.GetString("MemoryData2PinName", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to d2.
+		/// </summary>
+ 		public static string MemoryData2PinNotation {
+			get { return ResourceManager.GetString("MemoryData2PinNotation", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Dual port.
+		/// </summary>
+ 		public static string TitleDualPort {
+			get { return ResourceManager.GetString("TitleDualPort", Culture); }
+		}
 	}
 }

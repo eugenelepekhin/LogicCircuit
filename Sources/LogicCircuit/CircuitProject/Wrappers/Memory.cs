@@ -26,6 +26,7 @@ namespace LogicCircuit {
 			get { return this.fieldDataBitWidth; }
 			set { this.fieldDataBitWidth = BasePin.CheckBitWidth(value); }
 		}
+		public bool DualPort;
 		public string Data;
 		public string Note;
 		internal Memory Memory;
@@ -240,6 +241,41 @@ namespace LogicCircuit {
 			}
 		}
 
+		// Accessor of the DualPort field
+		public sealed class DualPortField : IField<MemoryData, bool>, IFieldSerializer<MemoryData> {
+			public static readonly DualPortField Field = new DualPortField();
+			private DualPortField() {}
+			public string Name { get { return "DualPort"; } }
+			public int Order { get; set; }
+			public bool DefaultValue { get { return false; } }
+			public bool GetValue(ref MemoryData record) {
+				return record.DualPort;
+			}
+			public void SetValue(ref MemoryData record, bool value) {
+				record.DualPort = value;
+			}
+			public int Compare(ref MemoryData l, ref MemoryData r) {
+				return l.DualPort.CompareTo(r.DualPort);
+			}
+			public int Compare(bool l, bool r) {
+				return l.CompareTo(r);
+			}
+
+			// Implementation of interface IFieldSerializer<MemoryData>
+			bool IFieldSerializer<MemoryData>.NeedToSave(ref MemoryData data) {
+				return this.Compare(data.DualPort, this.DefaultValue) != 0;
+			}
+			string IFieldSerializer<MemoryData>.GetTextValue(ref MemoryData data) {
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.DualPort);
+			}
+			void IFieldSerializer<MemoryData>.SetDefault(ref MemoryData data) {
+				data.DualPort = this.DefaultValue;
+			}
+			void IFieldSerializer<MemoryData>.SetTextValue(ref MemoryData data, string text) {
+				data.DualPort = bool.Parse(text);
+			}
+		}
+
 		// Accessor of the Data field
 		public sealed class DataField : IField<MemoryData, string>, IFieldSerializer<MemoryData> {
 			public static readonly DataField Field = new DataField();
@@ -342,6 +378,7 @@ namespace LogicCircuit {
 			OnStartField.Field,
 			AddressBitWidthField.Field,
 			DataBitWidthField.Field,
+			DualPortField.Field,
 			DataField.Field,
 			NoteField.Field,
 			MemoryField.Field
@@ -421,6 +458,12 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.MemoryRowId, MemoryData.DataBitWidthField.Field, value); }
 		}
 
+		// Gets or sets value of the DualPort field.
+		public bool DualPort {
+			get { return this.Table.GetField(this.MemoryRowId, MemoryData.DualPortField.Field); }
+			set { this.Table.SetField(this.MemoryRowId, MemoryData.DualPortField.Field, value); }
+		}
+
 		// Gets or sets value of the Data field.
 		private string Data {
 			get { return this.Table.GetField(this.MemoryRowId, MemoryData.DataField.Field); }
@@ -456,6 +499,9 @@ namespace LogicCircuit {
 				}
 				if(MemoryData.DataBitWidthField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("DataBitWidth");
+				}
+				if(MemoryData.DualPortField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("DualPort");
 				}
 				if(MemoryData.DataField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("Data");
@@ -551,6 +597,7 @@ namespace LogicCircuit {
 			MemoryOnStart OnStart,
 			int AddressBitWidth,
 			int DataBitWidth,
+			bool DualPort,
 			string Data,
 			string Note
 			// Fields of Circuit table
@@ -569,6 +616,7 @@ namespace LogicCircuit {
 				OnStart = OnStart,
 				AddressBitWidth = AddressBitWidth,
 				DataBitWidth = DataBitWidth,
+				DualPort = DualPort,
 				Data = Data,
 				Note = Note,
 			};

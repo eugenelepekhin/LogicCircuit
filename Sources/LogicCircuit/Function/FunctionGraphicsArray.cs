@@ -46,7 +46,7 @@ namespace LogicCircuit {
 			int[] outputData,
 			int write,
 			IEnumerable<CircuitSymbol> symbols
-		) : base(circuitState, FunctionMemory.Input(address, inputData, write), outputData) {
+		) : base(circuitState, FunctionMemory.Input(address, null, inputData, write), outputData) {
 
 			this.circuitSymbol = symbols.ToList();
 			Tracer.Assert(0 < this.circuitSymbol.Count);

@@ -1496,4 +1496,19 @@ Do you want to load auto saved state of this file?</value>
   <data name="TitleTop" xml:space="preserve">
     <value>_Top:</value>
   </data>
+  <data name="MemoryAddress2PinName" xml:space="preserve">
+    <value>Memory address port 2</value>
+  </data>
+  <data name="MemoryAddress2PinNotation" xml:space="preserve">
+    <value>a2</value>
+  </data>
+  <data name="MemoryData2PinName" xml:space="preserve">
+    <value>Memory data port 2</value>
+  </data>
+  <data name="MemoryData2PinNotation" xml:space="preserve">
+    <value>d2</value>
+  </data>
+  <data name="TitleDualPort" xml:space="preserve">
+    <value>_Dual port</value>
+  </data>
 </root>

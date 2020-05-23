@@ -23,9 +23,9 @@ namespace LogicCircuit {
 						return constant.BitWidth;
 					}
 					if(circuit is Memory memory) {
-						if(this == memory.AddressPin) {
+						if(this == memory.AddressPin || this == memory.Address2Pin) {
 							return memory.AddressBitWidth;
-						} else if(this == memory.DataInPin || this == memory.DataOutPin) {
+						} else if(this == memory.DataInPin || this == memory.DataOutPin || this == memory.DataOut2Pin) {
 							return memory.DataBitWidth;
 						} else if(this == memory.WritePin) {
 							return 1;

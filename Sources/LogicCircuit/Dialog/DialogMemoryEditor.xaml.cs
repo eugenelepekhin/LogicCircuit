@@ -63,6 +63,7 @@ namespace LogicCircuit {
 			this.dataBitWidth.SelectedItem = this.currentDataBitWidth = this.Memory.DataBitWidth;
 			this.writeOn.SelectedItem = writeOnList.First(d => d.Value == this.Memory.WriteOn1);
 			this.onStart.SelectedItem = onStartList.First(d => d.Value == (this.Memory.Writable ? this.Memory.OnStart : MemoryOnStart.Data));
+			this.checkBoxDualPort.IsChecked = this.Memory.DualPort;
 			this.note.Text = this.Memory.Note;
 
 			this.FunctionMemory = new MemoryEditor(this.data, this.Memory.AddressBitWidth, this.DataBitWidth);
@@ -78,6 +79,7 @@ namespace LogicCircuit {
 				int dataBitWidth = this.DataBitWidth;
 				bool writeOn1 = this.Memory.Writable && ((EnumDescriptor<bool>)this.writeOn.SelectedItem).Value;
 				MemoryOnStart memoryOnStart = ((EnumDescriptor<MemoryOnStart>)this.onStart.SelectedItem).Value;
+				bool dualPort = this.checkBoxDualPort.IsChecked.Value;
 				bool saveData = !this.Memory.Writable || memoryOnStart == MemoryOnStart.Data;
 				if(!this.Memory.Writable) {
 					memoryOnStart = MemoryOnStart.Random; // set to default value for ROM
@@ -97,13 +99,15 @@ namespace LogicCircuit {
 				}
 
 				if(this.Memory.AddressBitWidth != addressBitWidth || this.Memory.DataBitWidth != dataBitWidth || this.Memory.Note != text ||
-					this.Memory.WriteOn1 != writeOn1 || this.Memory.OnStart != memoryOnStart || (saveData && !equal(this.Memory.MemoryValue(), this.data))
+					this.Memory.WriteOn1 != writeOn1 || this.Memory.OnStart != memoryOnStart || this.Memory.DualPort != dualPort ||
+					(saveData && !equal(this.Memory.MemoryValue(), this.data))
 				) {
 					this.Memory.CircuitProject.InTransaction(() => {
 						this.Memory.AddressBitWidth = addressBitWidth;
 						this.Memory.DataBitWidth = dataBitWidth;
 						this.Memory.WriteOn1 = writeOn1;
 						this.Memory.OnStart = memoryOnStart;
+						this.Memory.DualPort = dualPort;
 						this.Memory.SetMemoryValue(saveData ? this.data : null);
 						this.Memory.Note = text;
 						if(this.Memory.Writable) {

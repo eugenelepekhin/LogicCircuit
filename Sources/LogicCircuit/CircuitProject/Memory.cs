@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Windows;
@@ -42,6 +43,10 @@ namespace LogicCircuit {
 		public DevicePin DataOutPin { get; private set; }
 		public DevicePin DataInPin { get; private set; }
 		public DevicePin WritePin { get; private set; }
+		public DevicePin Address2Pin { get; private set; }
+		public DevicePin DataOut2Pin { get; private set; }
+
+		public override IEnumerable<BasePin> Pins => this.DualPort ? base.Pins : base.Pins.Where(p => p != this.Address2Pin && p != this.DataOut2Pin);
 
 		public int BytesPerCell {
 			get { return Memory.BytesPerCellFor(this.DataBitWidth); }
@@ -131,19 +136,23 @@ namespace LogicCircuit {
 			this.Data = (value != null) ? Convert.ToBase64String(value, Base64FormattingOptions.InsertLineBreaks) : string.Empty;
 		}
 
-		internal void SetPins(DevicePin addressPin, DevicePin dataPin) {
+		internal void SetPins(DevicePin addressPin, DevicePin dataPin, DevicePin address2Pin, DevicePin data2Pin) {
 			Tracer.Assert(!this.Writable);
 			Tracer.Assert(this.AddressPin == null);
 			Tracer.Assert(addressPin != null && dataPin != null);
 
 			this.AddressPin = addressPin;
 			this.DataOutPin = dataPin;
+			this.Address2Pin = address2Pin;
+			this.DataOut2Pin = data2Pin;
 
 			Tracer.Assert(addressPin.BitWidth == this.AddressBitWidth);
 			Tracer.Assert(dataPin.BitWidth == this.DataBitWidth);
+			Tracer.Assert(address2Pin.BitWidth == this.AddressBitWidth);
+			Tracer.Assert(data2Pin.BitWidth == this.DataBitWidth);
 		}
 
-		internal void SetPins(DevicePin addressPin, DevicePin dataOutPin, DevicePin dataInPin, DevicePin writePin) {
+		internal void SetPins(DevicePin addressPin, DevicePin dataOutPin, DevicePin dataInPin, DevicePin writePin, DevicePin address2Pin, DevicePin data2Pin) {
 			Tracer.Assert(this.Writable);
 			Tracer.Assert(this.AddressPin == null);
 			Tracer.Assert(addressPin != null && dataOutPin != null && dataInPin != null && writePin != null);
@@ -152,6 +161,8 @@ namespace LogicCircuit {
 			this.DataOutPin = dataOutPin;
 			this.DataInPin = dataInPin;
 			this.WritePin = writePin;
+			this.Address2Pin = address2Pin;
+			this.DataOut2Pin = data2Pin;
 
 			Tracer.Assert(addressPin.BitWidth == this.AddressBitWidth);
 			Tracer.Assert(dataInPin.BitWidth == dataOutPin.BitWidth && dataOutPin.BitWidth == this.DataBitWidth);
@@ -168,7 +179,7 @@ namespace LogicCircuit {
 		}
 
 		protected override int CircuitSymbolHeight(int defaultHeight) {
-			Tracer.Assert(defaultHeight == (this.Writable ? 3 : 2));
+			Tracer.Assert(defaultHeight == ((this.Writable ? 3 : 2) + (this.DualPort ? 1 : 0)));
 			return Math.Max(4, defaultHeight);
 		}
 
@@ -177,6 +188,7 @@ namespace LogicCircuit {
 		}
 
 		partial void OnMemoryChanged() {
+			this.ResetPins();
 			this.InvalidateDistinctSymbol();
 		}
 
@@ -208,19 +220,35 @@ namespace LogicCircuit {
 			data.PinSide = PinSide.Right;
 			data.Name = Properties.Resources.MemoryDataPinName;
 			data.JamNotation = Properties.Resources.MemoryDataPinNotation;
+
+			DevicePin dataIn = null;
+			DevicePin write = null;
 			if(memory.Writable) {
-				DevicePin dataIn = this.CircuitProject.DevicePinSet.Create(memory, PinType.Input, memory.DataBitWidth);
+				dataIn = this.CircuitProject.DevicePinSet.Create(memory, PinType.Input, memory.DataBitWidth);
 				dataIn.PinSide = PinSide.Left;
 				dataIn.Name = Properties.Resources.MemoryDataInPinName;
 				dataIn.JamNotation = Properties.Resources.MemoryDataPinNotation;
-				DevicePin write = this.CircuitProject.DevicePinSet.Create(memory, PinType.Input, 1);
+				write = this.CircuitProject.DevicePinSet.Create(memory, PinType.Input, 1);
 				write.PinSide = PinSide.Bottom;
 				write.Name = Properties.Resources.MemoryWritePinName(memory.WriteOn1 ? Properties.Resources.WriteOn1 : Properties.Resources.WriteOn0);
 				write.JamNotation = Properties.Resources.MemoryWritePinNotation;
-				memory.SetPins(address, data, dataIn, write);
+			}
+
+			DevicePin address2 = this.CircuitProject.DevicePinSet.Create(memory, PinType.Input, memory.AddressBitWidth);
+			address2.PinSide = PinSide.Left;
+			address2.Name = Properties.Resources.MemoryAddress2PinName;
+			address2.JamNotation = Properties.Resources.MemoryAddress2PinNotation;
+
+			DevicePin data2 = this.CircuitProject.DevicePinSet.Create(memory, PinType.Output, memory.DataBitWidth);
+			data2.PinSide = PinSide.Right;
+			data2.Name = Properties.Resources.MemoryData2PinName;
+			data2.JamNotation = Properties.Resources.MemoryData2PinNotation;
+
+			if(memory.Writable) {
+				memory.SetPins(address, data, dataIn, write, address2, data2);
 				MemorySet.UpdateWritePinName(memory);
 			} else {
-				memory.SetPins(address, data);
+				memory.SetPins(address, data, address2, data2);
 			}
 		}
 
@@ -231,7 +259,7 @@ namespace LogicCircuit {
 
 		public Memory Create(bool writable, int addressBitWidth, int dataBitWidth) {
 			Memory memory = this.CreateItem(Guid.NewGuid(), writable, MemoryData.WriteOn1Field.Field.DefaultValue, MemoryData.OnStartField.Field.DefaultValue,
-				addressBitWidth, dataBitWidth, MemoryData.DataField.Field.DefaultValue, MemoryData.NoteField.Field.DefaultValue
+				addressBitWidth, dataBitWidth, MemoryData.DualPortField.Field.DefaultValue, MemoryData.DataField.Field.DefaultValue, MemoryData.NoteField.Field.DefaultValue
 			);
 			this.CreatePins(memory);
 			return memory;

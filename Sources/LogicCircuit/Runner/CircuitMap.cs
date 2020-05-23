@@ -1033,19 +1033,48 @@ namespace LogicCircuit {
 
 		private static CircuitFunction DefineRom(CircuitState circuitState, SymbolMap symbolMap) {
 			Memory memory = (Memory)symbolMap.CircuitSymbol.Circuit;
-			Tracer.Assert(!memory.Writable && symbolMap.CircuitSymbol.Jams().Count() == 2);
-			List<Result> results = new List<Result>(symbolMap.Results);
-			List<Parameter> parameters = new List<Parameter>(symbolMap.Parameters);
+			Tracer.Assert(!memory.Writable && symbolMap.CircuitSymbol.Jams().Count() == (memory.DualPort ? 4 : 2));
+			Jam d = symbolMap.CircuitSymbol.Jam(memory.DataOutPin);
+			Tracer.Assert(d != null);
+			List<Result> results = new List<Result>(symbolMap.Results.Where(r => r.Jam == d));
+			Jam a = symbolMap.CircuitSymbol.Jam(memory.AddressPin);
+			Tracer.Assert(a != null);
+			List<Parameter> parameters = new List<Parameter>(symbolMap.Parameters.Where(p => p.Jam == a));
 			Tracer.Assert(results.Count <= memory.DataOutPin.BitWidth);
 			Tracer.Assert(parameters.Count <= memory.AddressPin.BitWidth);
 			if(parameters.Count < memory.AddressPin.BitWidth) {
 				throw new CircuitException(Cause.UserError, Properties.Resources.ErrorAddressNotConnected(symbolMap.CircuitMap.Path(symbolMap.CircuitSymbol)));
 			}
-			Tracer.Assert(results.TrueForAll(r => r.Jam.Pin == memory.DataOutPin));
-			Tracer.Assert(parameters.TrueForAll(p => p.Jam.Pin == memory.AddressPin));
 			results.Sort(ResultComparer.BitOrderComparer);
 			parameters.Sort(ParameterComparer.BitOrderComparer);
-			FunctionRom rom = new FunctionRom(circuitState, CircuitMap.Parameters(parameters), CircuitMap.Results(results), memory);
+
+			List<Result> results2 = null;
+			List<Parameter> parameters2 = null;
+			if(memory.DualPort) {
+				Jam d2 = symbolMap.CircuitSymbol.Jam(memory.DataOut2Pin);
+				Tracer.Assert(d2 != null);
+				results2 = new List<Result>(symbolMap.Results.Where(r => r.Jam == d2));
+				Jam a2 = symbolMap.CircuitSymbol.Jam(memory.Address2Pin);
+				Tracer.Assert(a2 != null);
+				parameters2 = new List<Parameter>(symbolMap.Parameters.Where(p => p.Jam == a2));
+				Tracer.Assert(results2.Count <= memory.DataOutPin.BitWidth);
+				Tracer.Assert(parameters2.Count <= memory.AddressPin.BitWidth);
+				if(parameters2.Count < memory.AddressPin.BitWidth) {
+					throw new CircuitException(Cause.UserError, Properties.Resources.ErrorAddressNotConnected(symbolMap.CircuitMap.Path(symbolMap.CircuitSymbol)));
+				}
+
+				results2.Sort(ResultComparer.BitOrderComparer);
+				parameters2.Sort(ParameterComparer.BitOrderComparer);
+			}
+
+			FunctionRom rom = new FunctionRom(
+				circuitState,
+				CircuitMap.Parameters(parameters),
+				CircuitMap.Results(results),
+				memory.DualPort ? CircuitMap.Parameters(parameters2) : null,
+				memory.DualPort ? CircuitMap.Results(results2) : null,
+				memory
+			);
 			if(symbolMap.CircuitMap.memories == null) {
 				symbolMap.CircuitMap.memories = new Dictionary<CircuitSymbol, IFunctionMemory>();
 			}
@@ -1055,17 +1084,30 @@ namespace LogicCircuit {
 
 		private static CircuitFunction DefineRam(CircuitState circuitState, SymbolMap symbolMap) {
 			Memory memory = (Memory)symbolMap.CircuitSymbol.Circuit;
-			Tracer.Assert(memory.Writable && symbolMap.CircuitSymbol.Jams().Count() == 4);
-			List<Result> dataOut = new List<Result>(symbolMap.Results);
+			Tracer.Assert(memory.Writable && symbolMap.CircuitSymbol.Jams().Count() == (memory.DualPort ? 6 : 4));
+			Jam d = symbolMap.CircuitSymbol.Jam(memory.DataOutPin);
+			List<Result> dataOut = new List<Result>(symbolMap.Results.Where(r => r.Jam == d));
 			Tracer.Assert(dataOut.TrueForAll(o => o.Jam.Pin == memory.DataOutPin));
+			List<Result> dataOut2 = null;
+			if(memory.DualPort) {
+				Jam d2 = symbolMap.CircuitSymbol.Jam(memory.DataOut2Pin);
+				dataOut2 = new List<Result>(symbolMap.Results.Where(r => r.Jam == d2));
+			}
+
 			List<Parameter> address = new List<Parameter>();
 			List<Parameter> dataIn = new List<Parameter>();
+			List<Parameter> address2 = null;
 			Parameter write = null;
 			foreach(Parameter p in symbolMap.Parameters) {
 				if(p.Jam.Pin == memory.AddressPin) {
 					address.Add(p);
 				} else if(p.Jam.Pin == memory.DataInPin) {
 					dataIn.Add(p);
+				} else if(p.Jam.Pin == memory.Address2Pin) {
+					if(address2 == null) {
+						address2 = new List<Parameter>();
+					}
+					address2.Add(p);
 				} else {
 					Tracer.Assert(p.Jam.Pin == memory.WritePin && write == null);
 					write = p;
@@ -1075,7 +1117,7 @@ namespace LogicCircuit {
 			Tracer.Assert(dataOut.Count <= memory.DataBitWidth);
 			Tracer.Assert(dataIn.Count <= memory.DataBitWidth);
 
-			if(address.Count != memory.AddressBitWidth) {
+			if(address.Count != memory.AddressBitWidth || address2 != null && address2.Count != memory.AddressBitWidth) {
 				throw new CircuitException(Cause.UserError, Properties.Resources.ErrorAddressNotConnected(symbolMap.CircuitMap.Path(symbolMap.CircuitSymbol)));
 			}
 			if(dataIn.Count != memory.DataBitWidth) {
@@ -1084,8 +1126,20 @@ namespace LogicCircuit {
 			dataOut.Sort(ResultComparer.BitOrderComparer);
 			address.Sort(ParameterComparer.BitOrderComparer);
 			dataIn.Sort(ParameterComparer.BitOrderComparer);
+			if(memory.DualPort) {
+				Tracer.Assert(address2 != null && address2.Count <= memory.AddressBitWidth);
+				Tracer.Assert(dataOut2 != null && dataOut2.Count <= memory.DataBitWidth);
+				dataOut2.Sort(ResultComparer.BitOrderComparer);
+				address2.Sort(ParameterComparer.BitOrderComparer);
+			}
 			FunctionRam ram = new FunctionRam(circuitState,
-				CircuitMap.Parameters(address), CircuitMap.Parameters(dataIn), CircuitMap.Results(dataOut), (write != null) ? write.Result.StateIndex : 0, memory
+				CircuitMap.Parameters(address),
+				CircuitMap.Parameters(dataIn),
+				CircuitMap.Results(dataOut),
+				memory.DualPort ? CircuitMap.Parameters(address2) : null,
+				memory.DualPort ? CircuitMap.Results(dataOut2) : null,
+				(write != null) ? write.Result.StateIndex : 0,
+				memory
 			);
 			if(symbolMap.CircuitMap.memories == null) {
 				symbolMap.CircuitMap.memories = new Dictionary<CircuitSymbol, IFunctionMemory>();

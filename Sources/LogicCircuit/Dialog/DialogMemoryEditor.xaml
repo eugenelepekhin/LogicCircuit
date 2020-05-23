@@ -54,6 +54,7 @@
 				ToolTip="{x:Static properties:Resources.ToolTipMemoryOnStart}"
 			/>
 		</StackPanel>
+		<CheckBox Grid.Column="1" Name="checkBoxDualPort" Content="{x:Static properties:Resources.TitleDualPort}"/>
 
 		<Grid Grid.ColumnSpan="2" lc:AutoGrid.RowHeight="*" Name="splitGrid">
 			<Grid.RowDefinitions>

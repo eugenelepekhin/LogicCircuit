@@ -63,15 +63,15 @@ namespace LogicCircuit.UnitTest {
 
 			Memory rom = project.MemorySet.Create(false, 2, 8);
 			Assert.AreEqual(1, project.MemorySet.Count());
-			Assert.AreEqual(6, project.DevicePinSet.Count());
+			Assert.AreEqual(8, project.DevicePinSet.Count());
 
 			Memory ram = project.MemorySet.Create(true, 4, 4);
 			Assert.AreEqual(2, project.MemorySet.Count());
-			Assert.AreEqual(10, project.DevicePinSet.Count());
+			Assert.AreEqual(14, project.DevicePinSet.Count());
 
 			Splitter splitter = project.SplitterSet.Create(8, 4, true);
 			Assert.AreEqual(1, project.SplitterSet.Count());
-			Assert.AreEqual(15, project.DevicePinSet.Count());
+			Assert.AreEqual(19, project.DevicePinSet.Count());
 
 			CircuitSymbol symbol = project.CircuitSymbolSet.Create(constant, logicalCircuit, 10, 15);
 			Assert.AreEqual(1, project.CircuitSymbolSet.Count());

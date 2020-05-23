@@ -2,8 +2,8 @@
 
 namespace LogicCircuit {
 	public class FunctionRam : FunctionMemory {
-		public FunctionRam(CircuitState circuitState, int[] address, int[] inputData, int[] outputData, int write, Memory memory) : base(
-			circuitState, address, inputData, outputData, write, memory
+		public FunctionRam(CircuitState circuitState, int[] address, int[] inputData, int[] outputData, int[] address2, int[] outputData2, int write, Memory memory) : base(
+			circuitState, address, inputData, outputData, address2, outputData2, write, memory
 		) {
 		}
 
