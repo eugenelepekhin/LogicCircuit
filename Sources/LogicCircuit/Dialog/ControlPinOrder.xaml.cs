@@ -44,11 +44,19 @@ namespace LogicCircuit {
 			this.list.ForEach(d => d.Circuit.Index = d.Index);
 		}
 
+		public bool IsOrderFixed() => this.list.Any(d => 0 < d.Index);
+
 		public void Reset() {
 			this.list.ForEach(d => d.Index = 0);
 			this.list.Sort(PinOrderDescriptor.Comparer);
 			this.PinList.Refresh();
 			this.UpdateCommands();
+		}
+
+		public void FixOrder() {
+			for(int i = 0; i < this.list.Count; i++) {
+				this.list[i].Index = i;
+			}
 		}
 
 		private void UpdateCommands() {

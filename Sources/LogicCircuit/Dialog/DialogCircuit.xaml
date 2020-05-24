@@ -10,6 +10,13 @@
 	MinHeight="350"
 	FocusManager.FocusedElement="{Binding ElementName=name}"
 >
+	<Window.Resources>
+		<lc:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+		<Style TargetType="{x:Type lc:ControlPinOrder}">
+			<Setter Property="IsEnabled" Value="{Binding ElementName=checkBoxGraphOrder, Path=IsChecked, Converter={StaticResource InverseBooleanConverter}}"/>
+		</Style>
+	</Window.Resources>
+
 	<lc:AutoGrid Margin="3">
 		<TabControl Grid.ColumnSpan="2" lc:AutoGrid.RowHeight="*">
 			<TabItem Header="{x:Static properties:Resources.TitleCircuitDescriptor}">
@@ -47,7 +54,7 @@
 						<Label Content="{x:Static properties:Resources.TitleBottom}"/>
 						<lc:ControlPinOrder x:Name="bottomPins"/>
 
-						<Button Grid.Column="1" Content="{x:Static properties:Resources.TitlePinIndexReset}" Click="ButtonResetClick" HorizontalAlignment="Left"/>
+						<CheckBox Grid.Column="1" x:Name="checkBoxGraphOrder" Content="{x:Static properties:Resources.TitlePinIndexReset}" Click="CheckBoxGraphOrderClick" HorizontalAlignment="Left"/>
 					</lc:AutoGrid>
 				</ScrollViewer>
 			</TabItem>

@@ -42,6 +42,16 @@ namespace LogicCircuit {
 			this.topPins.SetPins(pins(PinSide.Top));
 			this.bottomPins.SetPins(pins(PinSide.Bottom));
 
+			bool isFixed = this.IsOrderFixed();
+			if(isFixed) {
+				this.leftPins.FixOrder();
+				this.rightPins.FixOrder();
+				this.topPins.FixOrder();
+				this.bottomPins.FixOrder();
+			}
+
+			this.checkBoxGraphOrder.IsChecked = !isFixed;
+
 			this.Loaded += new RoutedEventHandler(this.DialogCircuitLoaded);
 		}
 
@@ -57,16 +67,25 @@ namespace LogicCircuit {
 			}
 		}
 
-		private void ButtonResetClick(object sender, RoutedEventArgs e) {
+		private void CheckBoxGraphOrderClick(object sender, RoutedEventArgs e) {
 			try {
-				this.leftPins.Reset();
-				this.rightPins.Reset();
-				this.topPins.Reset();
-				this.bottomPins.Reset();
+				if(!this.checkBoxGraphOrder.IsChecked.Value) {
+					this.leftPins.FixOrder();
+					this.rightPins.FixOrder();
+					this.topPins.FixOrder();
+					this.bottomPins.FixOrder();
+				} else {
+					this.leftPins.Reset();
+					this.rightPins.Reset();
+					this.topPins.Reset();
+					this.bottomPins.Reset();
+				}
 			} catch(Exception exception) {
 				App.Mainframe.ReportException(exception);
 			}
 		}
+
+		private bool IsOrderFixed() => this.leftPins.IsOrderFixed() || this.rightPins.IsOrderFixed() || this.topPins.IsOrderFixed() || this.bottomPins.IsOrderFixed();
 
 		private void ButtonOkClick(object sender, RoutedEventArgs e) {
 			try {
