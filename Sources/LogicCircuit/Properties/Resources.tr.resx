@@ -1422,4 +1422,19 @@ temelde bir çoğullayıcıya eşdeğerdir.</value>
 	<data name="TitleTop" xml:space="preserve">
 		<value>_Üst</value>
 	</data>
+	<data name="MemoryAddress2PinName" xml:space="preserve">
+		<value>Port 2 Hafıza Adresi</value>
+	</data>
+	<data name="MemoryAddress2PinNotation" xml:space="preserve">
+		<value>a2</value>
+	</data>
+	<data name="MemoryData2PinName" xml:space="preserve">
+		<value>Port 2 Hafıza Verisi</value>
+	</data>
+	<data name="MemoryData2PinNotation" xml:space="preserve">
+		<value>d2</value>
+	</data>
+	<data name="TitleDualPort" xml:space="preserve">
+		<value>Çift Portlu</value>
+	</data>
 </root>
