@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
+	<!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,1244 +59,1244 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <data name="ErrorUnknownVersion" xml:space="preserve">
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="ErrorUnknownVersion" xml:space="preserve">
     <value>Es wurde versucht eine unbekannte Version eines Projekts zu laden.
 Die Datei welche Sie versuchen zu öffnen ist entweder inkonsistent oder sie wurde mit einer neueren Version der Logic Curcuit Software erstellt. Bitte sehen auf der Webseite:  &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt; nach, ob eine neuere Version verfügbar ist.</value>
   </data>
-  <data name="FileSaved" xml:space="preserve">
+	<data name="FileSaved" xml:space="preserve">
     <value>Datei {0} gespeichert.</value>
   </data>
-  <data name="GateClockName" xml:space="preserve">
+	<data name="GateClockName" xml:space="preserve">
     <value>Taktgenerator</value>
   </data>
-  <data name="Led7Pin8" xml:space="preserve">
+	<data name="Led7Pin8" xml:space="preserve">
     <value>Punkt</value>
   </data>
-  <data name="LogicalCircuitName" xml:space="preserve">
+	<data name="LogicalCircuitName" xml:space="preserve">
     <value>Schaltung</value>
   </data>
-  <data name="MainFrameCaption" xml:space="preserve">
+	<data name="MainFrameCaption" xml:space="preserve">
     <value>Schaltungs-Projekt {0}</value>
   </data>
-  <data name="MemoryAddressPinName" xml:space="preserve">
+	<data name="MemoryAddressPinName" xml:space="preserve">
     <value>Adressleitungen</value>
   </data>
-  <data name="MemoryDataPinName" xml:space="preserve">
+	<data name="MemoryDataPinName" xml:space="preserve">
     <value>Datenleitungen</value>
   </data>
-  <data name="MessageSaveFile" xml:space="preserve">
+	<data name="MessageSaveFile" xml:space="preserve">
     <value>Das Projekt: {0} wurde verändert.
 Möchten Sie die Änderungen speichern?</value>
   </data>
-  <data name="OperationCanceled" xml:space="preserve">
+	<data name="OperationCanceled" xml:space="preserve">
     <value>Vorgang wurde abgebrochen.</value>
   </data>
-  <data name="Ready" xml:space="preserve">
+	<data name="Ready" xml:space="preserve">
     <value>Bereit.</value>
   </data>
-  <data name="TitleCancel" xml:space="preserve">
+	<data name="TitleCancel" xml:space="preserve">
     <value>Abbruch</value>
   </data>
-  <data name="TitleNo" xml:space="preserve">
+	<data name="TitleNo" xml:space="preserve">
     <value>_Nein</value>
   </data>
-  <data name="TitleShowDetails" xml:space="preserve">
+	<data name="TitleShowDetails" xml:space="preserve">
     <value>_Zeige Details</value>
   </data>
-  <data name="TitleYes" xml:space="preserve">
+	<data name="TitleYes" xml:space="preserve">
     <value>_Ja</value>
   </data>
-  <data name="WriteOn0" xml:space="preserve">
+	<data name="WriteOn0" xml:space="preserve">
     <value>Fallender Flanke von 1 auf 0</value>
   </data>
-  <data name="WriteOn1" xml:space="preserve">
+	<data name="WriteOn1" xml:space="preserve">
     <value>Steigender Flanke von 0 auf 1</value>
   </data>
-  <data name="ToolTipConstant" xml:space="preserve">
+	<data name="ToolTipConstant" xml:space="preserve">
     <value>{0} Bit(s) konstant {1:X}</value>
   </data>
-  <data name="ToolTipInputPin" xml:space="preserve">
+	<data name="ToolTipInputPin" xml:space="preserve">
     <value>Eingang mit {0} {1}</value>
   </data>
-  <data name="ToolTipNonePin" xml:space="preserve">
+	<data name="ToolTipNonePin" xml:space="preserve">
     <value>{0} Bit(s) {1}</value>
   </data>
-  <data name="ToolTipOutputPin" xml:space="preserve">
+	<data name="ToolTipOutputPin" xml:space="preserve">
     <value>Ausgang mit {0} {1}</value>
   </data>
-  <data name="ToolTipRAM" xml:space="preserve">
+	<data name="ToolTipRAM" xml:space="preserve">
     <value>RAM {0} Adressleitungen / {1} Datenleitungen</value>
   </data>
-  <data name="ToolTipROM" xml:space="preserve">
+	<data name="ToolTipROM" xml:space="preserve">
     <value>ROM {0} Adressleitungen / {1} Datenleitungen</value>
   </data>
-  <data name="ToolTipWire" xml:space="preserve">
+	<data name="ToolTipWire" xml:space="preserve">
     <value>Verbindung</value>
   </data>
-  <data name="CategoryInputOutput" xml:space="preserve">
+	<data name="CategoryInputOutput" xml:space="preserve">
     <value>Eingang - Ausgang</value>
   </data>
-  <data name="CommandHelpAbout" xml:space="preserve">
+	<data name="CommandHelpAbout" xml:space="preserve">
     <value>_Über</value>
   </data>
-  <data name="TitleAbout" xml:space="preserve">
+	<data name="TitleAbout" xml:space="preserve">
     <value>Über</value>
   </data>
-  <data name="CommandToolsOptions" xml:space="preserve">
+	<data name="CommandToolsOptions" xml:space="preserve">
     <value>_Optionen</value>
   </data>
-  <data name="TitleDisplayOptions" xml:space="preserve">
+	<data name="TitleDisplayOptions" xml:space="preserve">
     <value>Anzeige</value>
   </data>
-  <data name="TitleFileOptions" xml:space="preserve">
+	<data name="TitleFileOptions" xml:space="preserve">
     <value>Datei</value>
   </data>
-  <data name="TitleGateShape" xml:space="preserve">
+	<data name="TitleGateShape" xml:space="preserve">
     <value>_Gatter Form:</value>
   </data>
-  <data name="TitleLoadLastFile" xml:space="preserve">
+	<data name="TitleLoadLastFile" xml:space="preserve">
     <value>_Zuletzt geöffnete Datei beim Start laden</value>
   </data>
-  <data name="TitleOptions" xml:space="preserve">
+	<data name="TitleOptions" xml:space="preserve">
     <value>Optionen</value>
   </data>
-  <data name="TitleShowGrid" xml:space="preserve">
+	<data name="TitleShowGrid" xml:space="preserve">
     <value>_Gitternetzpunkte anzeigen</value>
   </data>
-  <data name="MessageFreeWireCount" xml:space="preserve">
+	<data name="MessageFreeWireCount" xml:space="preserve">
     <value>{0} freie Verbindungen wurden gefunden.</value>
   </data>
-  <data name="MessageFloatingSymbolCount" xml:space="preserve">
+	<data name="MessageFloatingSymbolCount" xml:space="preserve">
     <value>{0} nicht verbundene Symbole wurden gefunden.</value>
   </data>
-  <data name="CommandCircuitDelete" xml:space="preserve">
+	<data name="CommandCircuitDelete" xml:space="preserve">
     <value>Aktuellen Schaltplan löschen</value>
   </data>
-  <data name="CommandCircuitNew" xml:space="preserve">
+	<data name="CommandCircuitNew" xml:space="preserve">
     <value>Neuen Schaltplan erstellen</value>
   </data>
-  <data name="CommandCircuitProject" xml:space="preserve">
+	<data name="CommandCircuitProject" xml:space="preserve">
     <value>Projekt</value>
   </data>
-  <data name="CommandEditSelectAllButWires" xml:space="preserve">
+	<data name="CommandEditSelectAllButWires" xml:space="preserve">
     <value>Alles außer Verbindungen auswählen</value>
   </data>
-  <data name="CommandEditSelectAllWires" xml:space="preserve">
+	<data name="CommandEditSelectAllWires" xml:space="preserve">
     <value>Alle Verbindungen auswählen</value>
   </data>
-  <data name="CommandEditSelectFreeWires" xml:space="preserve">
+	<data name="CommandEditSelectFreeWires" xml:space="preserve">
     <value>Offene Verbindungen auswählen</value>
   </data>
-  <data name="CommandEditUnselectAllButWires" xml:space="preserve">
+	<data name="CommandEditUnselectAllButWires" xml:space="preserve">
     <value>Alles außer Verbindungen abwählen</value>
   </data>
-  <data name="CommandEditUnselectAllWires" xml:space="preserve">
+	<data name="CommandEditUnselectAllWires" xml:space="preserve">
     <value>Alle Verbindungen abwählen</value>
   </data>
-  <data name="CommandFileExportImage" xml:space="preserve">
+	<data name="CommandFileExportImage" xml:space="preserve">
     <value>Bild exportieren</value>
   </data>
-  <data name="CommandToolsOscilloscope" xml:space="preserve">
+	<data name="CommandToolsOscilloscope" xml:space="preserve">
     <value>Oszilloskop</value>
   </data>
-  <data name="CommandToolsReport" xml:space="preserve">
+	<data name="CommandToolsReport" xml:space="preserve">
     <value>Projektbericht</value>
   </data>
-  <data name="TitleCategory" xml:space="preserve">
+	<data name="TitleCategory" xml:space="preserve">
     <value>_Kategorie:</value>
   </data>
-  <data name="TitleDescription" xml:space="preserve">
+	<data name="TitleDescription" xml:space="preserve">
     <value>_Beschreibung:</value>
   </data>
-  <data name="TitleBitWidth" xml:space="preserve">
+	<data name="TitleBitWidth" xml:space="preserve">
     <value>_Busbreite:</value>
   </data>
-  <data name="TitleValue" xml:space="preserve">
+	<data name="TitleValue" xml:space="preserve">
     <value>_Wert:</value>
   </data>
-  <data name="TitleAddressBitWidth" xml:space="preserve">
+	<data name="TitleAddressBitWidth" xml:space="preserve">
     <value>_Adressbus-Breite:</value>
   </data>
-  <data name="TitleData" xml:space="preserve">
+	<data name="TitleData" xml:space="preserve">
     <value>Da_ten</value>
   </data>
-  <data name="TitleDataBitWidth" xml:space="preserve">
+	<data name="TitleDataBitWidth" xml:space="preserve">
     <value>_Datenbus-Breite:</value>
   </data>
-  <data name="TitleInverted" xml:space="preserve">
+	<data name="TitleInverted" xml:space="preserve">
     <value>_Invertiert</value>
   </data>
-  <data name="TitleLoad" xml:space="preserve">
+	<data name="TitleLoad" xml:space="preserve">
     <value>_Laden...</value>
   </data>
-  <data name="TitleSide" xml:space="preserve">
+	<data name="TitleSide" xml:space="preserve">
     <value>_Seite:</value>
   </data>
-  <data name="TitleType" xml:space="preserve">
+	<data name="TitleType" xml:space="preserve">
     <value>_Ansteuerung:</value>
   </data>
-  <data name="TitleWriteOn" xml:space="preserve">
+	<data name="TitleWriteOn" xml:space="preserve">
     <value>_Schreiben bei:</value>
   </data>
-  <data name="TipOnStartWire" xml:space="preserve">
+	<data name="TipOnStartWire" xml:space="preserve">
     <value>Ziehen Sie das Ende der Verbindung zur gewünschten Position. Drücken Sie Esc um die Erstellung der Verbindung abzubrechen.</value>
   </data>
-  <data name="Loading" xml:space="preserve">
+	<data name="Loading" xml:space="preserve">
     <value>Laden...</value>
   </data>
-  <data name="TipOnCtrlDown" xml:space="preserve">
+	<data name="TipOnCtrlDown" xml:space="preserve">
     <value>Drücken Sie Strg+{Shift}+Tab um zwischen den Schaltplänen umzuschalten
 oder klicken Sie um einzelne Symbole aus-/abzuwählen, zoomen mit dem Mausrad oder schwenken.</value>
   </data>
-  <data name="TipOnAwaitingArea" xml:space="preserve">
+	<data name="TipOnAwaitingArea" xml:space="preserve">
     <value>{0} {1}. Umfassen Sie mehrere Symbole um sie auszuwählen, halten Sie dabei Shift um die aktuelle Auswahl beizubehalten.</value>
   </data>
-  <data name="FunctionParameter" xml:space="preserve">
+	<data name="FunctionParameter" xml:space="preserve">
     <value>Die Funktion {0} benötigt mindestens {1} Parameter.</value>
   </data>
-  <data name="UnknownState" xml:space="preserve">
+	<data name="UnknownState" xml:space="preserve">
     <value>Zustand {0} ist unbekannt</value>
   </data>
-  <data name="ErrorAddressNotConnected" xml:space="preserve">
+	<data name="ErrorAddressNotConnected" xml:space="preserve">
     <value>Beim Speicher {0} sind nicht alle Adressleitungen angeschlossen.</value>
   </data>
-  <data name="ErrorDataInNotConnected" xml:space="preserve">
+	<data name="ErrorDataInNotConnected" xml:space="preserve">
     <value>Beim Speicher {0} sind nicht alle Eingangs-Datenleitungen angeschlossen.</value>
   </data>
-  <data name="PowerOff" xml:space="preserve">
+	<data name="PowerOff" xml:space="preserve">
     <value>Ausgeschalten</value>
   </data>
-  <data name="PowerOn" xml:space="preserve">
+	<data name="PowerOn" xml:space="preserve">
     <value>Eingeschalten</value>
   </data>
-  <data name="TitleOscillogram" xml:space="preserve">
+	<data name="TitleOscillogram" xml:space="preserve">
     <value>Oszillogramm</value>
   </data>
-  <data name="TitleOscilloscoping" xml:space="preserve">
+	<data name="TitleOscilloscoping" xml:space="preserve">
     <value>_Oszilloskopieren</value>
   </data>
-  <data name="TitleCircuitDescriptor" xml:space="preserve">
+	<data name="TitleCircuitDescriptor" xml:space="preserve">
     <value>Schaltplan</value>
   </data>
-  <data name="TitleFileName" xml:space="preserve">
+	<data name="TitleFileName" xml:space="preserve">
     <value>Datei:</value>
   </data>
-  <data name="TitleCheckAll" xml:space="preserve">
+	<data name="TitleCheckAll" xml:space="preserve">
     <value>Alles _auswählen</value>
   </data>
-  <data name="TitleUncheckAll" xml:space="preserve">
+	<data name="TitleUncheckAll" xml:space="preserve">
     <value>Alles a_bwählen</value>
   </data>
-  <data name="ImageFileFilter" xml:space="preserve">
+	<data name="ImageFileFilter" xml:space="preserve">
     <value>Bild Dateien (*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif)|*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif|Alle Dateien (*.*)|*.*</value>
   </data>
-  <data name="ImagePathInvalid" xml:space="preserve">
+	<data name="ImagePathInvalid" xml:space="preserve">
     <value>Der angegebene Dateiname ist ungültig. Bitte stellen Sie sicher, dass das übergeordnete Verzeichnis existiert und der Dateiname gültig ist.</value>
   </data>
-  <data name="MessageExportImageDialog" xml:space="preserve">
+	<data name="MessageExportImageDialog" xml:space="preserve">
     <value>Bitte wählen Sie das Dateiformat der Bilddatei und den Dateinamen um das aktuelle Diagramm zu exportieren.</value>
   </data>
-  <data name="MessageImageFileExists" xml:space="preserve">
+	<data name="MessageImageFileExists" xml:space="preserve">
     <value>Die Datei "{0}" existiert bereits.
 Soll die Datei ersetzt werden?</value>
   </data>
-  <data name="TitleExportImage" xml:space="preserve">
+	<data name="TitleExportImage" xml:space="preserve">
     <value>Exportiere Bild</value>
   </data>
-  <data name="TitleFile" xml:space="preserve">
+	<data name="TitleFile" xml:space="preserve">
     <value>_Datei:</value>
   </data>
-  <data name="TriStateGroupName" xml:space="preserve">
+	<data name="TriStateGroupName" xml:space="preserve">
     <value>Tri-State Gruppe</value>
   </data>
-  <data name="TextNotation" xml:space="preserve">
+	<data name="TextNotation" xml:space="preserve">
     <value>Beschriftung</value>
   </data>
-  <data name="CaptionAddressBitWidth" xml:space="preserve">
+	<data name="CaptionAddressBitWidth" xml:space="preserve">
     <value>Adressleitungen</value>
   </data>
-  <data name="CaptionBitWidth" xml:space="preserve">
+	<data name="CaptionBitWidth" xml:space="preserve">
     <value>Busbreite</value>
   </data>
-  <data name="CaptionDataBitWidth" xml:space="preserve">
+	<data name="CaptionDataBitWidth" xml:space="preserve">
     <value>Datenleitungen</value>
   </data>
-  <data name="CaptionSide" xml:space="preserve">
+	<data name="CaptionSide" xml:space="preserve">
     <value>Seite</value>
   </data>
-  <data name="CaptionTextNote2" xml:space="preserve">
+	<data name="CaptionTextNote2" xml:space="preserve">
     <value>Notiz</value>
   </data>
-  <data name="CaptionValue" xml:space="preserve">
+	<data name="CaptionValue" xml:space="preserve">
     <value>Wert</value>
   </data>
-  <data name="MenuHeaderCircuit" xml:space="preserve">
+	<data name="MenuHeaderCircuit" xml:space="preserve">
     <value>_Schaltplan</value>
   </data>
-  <data name="MenuHeaderEdit" xml:space="preserve">
+	<data name="MenuHeaderEdit" xml:space="preserve">
     <value>_Bearbeiten</value>
   </data>
-  <data name="MenuHeaderFile" xml:space="preserve">
+	<data name="MenuHeaderFile" xml:space="preserve">
     <value>_Datei</value>
   </data>
-  <data name="MenuHeaderHelp" xml:space="preserve">
+	<data name="MenuHeaderHelp" xml:space="preserve">
     <value>_Hilfe</value>
   </data>
-  <data name="MenuHeaderTools" xml:space="preserve">
+	<data name="MenuHeaderTools" xml:space="preserve">
     <value>_Werkzeuge</value>
   </data>
-  <data name="MessageWarning" xml:space="preserve">
+	<data name="MessageWarning" xml:space="preserve">
     <value>Warnung!</value>
   </data>
-  <data name="TitleFrequency" xml:space="preserve">
+	<data name="TitleFrequency" xml:space="preserve">
     <value>Fre_quenz</value>
   </data>
-  <data name="TitleIsMaximumSpeed1" xml:space="preserve">
+	<data name="TitleIsMaximumSpeed1" xml:space="preserve">
     <value>Mit maximaler Geschwindigkeit ausführen.</value>
   </data>
-  <data name="TitleIsMaximumSpeed2" xml:space="preserve">
+	<data name="TitleIsMaximumSpeed2" xml:space="preserve">
     <value>Hohe CPU Last</value>
   </data>
-  <data name="TitleProject" xml:space="preserve">
+	<data name="TitleProject" xml:space="preserve">
     <value>Projekt</value>
   </data>
-  <data name="TitleRunningCircuit" xml:space="preserve">
+	<data name="TitleRunningCircuit" xml:space="preserve">
     <value>Laufende Schaltung</value>
   </data>
-  <data name="TitleZoom" xml:space="preserve">
+	<data name="TitleZoom" xml:space="preserve">
     <value>_Vergrößerung:</value>
   </data>
-  <data name="ToolTipAddressBitWidth" xml:space="preserve">
+	<data name="ToolTipAddressBitWidth" xml:space="preserve">
     <value>Anzahl der Adressleitungen auswählen</value>
   </data>
-  <data name="ToolTipButtonNotation" xml:space="preserve">
+	<data name="ToolTipButtonNotation" xml:space="preserve">
     <value>Beschriftung des Knopfes eingeben</value>
   </data>
-  <data name="ToolTipConstantBitWidth" xml:space="preserve">
+	<data name="ToolTipConstantBitWidth" xml:space="preserve">
     <value>Busbreite der Signalquelle auswählen.</value>
   </data>
-  <data name="ToolTipConstantValue" xml:space="preserve">
+	<data name="ToolTipConstantValue" xml:space="preserve">
     <value>Initialwert der Signalquelle eingeben.</value>
   </data>
-  <data name="ToolTipCurrentZoom" xml:space="preserve">
+	<data name="ToolTipCurrentZoom" xml:space="preserve">
     <value>Aktuelle Vergrößerung</value>
   </data>
-  <data name="ToolTipDataBitWidth" xml:space="preserve">
+	<data name="ToolTipDataBitWidth" xml:space="preserve">
     <value>Anzahl der Datenleitungen auswählen</value>
   </data>
-  <data name="CommandEditRotateLeft" xml:space="preserve">
+	<data name="CommandEditRotateLeft" xml:space="preserve">
     <value>Nach links rotieren</value>
   </data>
-  <data name="CommandEditRotateRight" xml:space="preserve">
+	<data name="CommandEditRotateRight" xml:space="preserve">
     <value>Nach rechts rotieren</value>
   </data>
-  <data name="SplitterDirectionClockwise" xml:space="preserve">
+	<data name="SplitterDirectionClockwise" xml:space="preserve">
     <value>Links</value>
   </data>
-  <data name="SplitterDirectionCounterclockwise" xml:space="preserve">
+	<data name="SplitterDirectionCounterclockwise" xml:space="preserve">
     <value>Rechts</value>
   </data>
-  <data name="PinSideBottom" xml:space="preserve">
+	<data name="PinSideBottom" xml:space="preserve">
     <value>Unten</value>
   </data>
-  <data name="PinSideLeft" xml:space="preserve">
+	<data name="PinSideLeft" xml:space="preserve">
     <value>Links</value>
   </data>
-  <data name="PinSideRight" xml:space="preserve">
+	<data name="PinSideRight" xml:space="preserve">
     <value>Rechts</value>
   </data>
-  <data name="PinSideTop" xml:space="preserve">
+	<data name="PinSideTop" xml:space="preserve">
     <value>Oben</value>
   </data>
-  <data name="CommandCircuitUsage" xml:space="preserve">
+	<data name="CommandCircuitUsage" xml:space="preserve">
     <value>Verwendet von...</value>
   </data>
-  <data name="CaptionNote" xml:space="preserve">
+	<data name="CaptionNote" xml:space="preserve">
     <value>_Notiz</value>
   </data>
-  <data name="TitleMemory" xml:space="preserve">
+	<data name="TitleMemory" xml:space="preserve">
     <value>Speicher</value>
   </data>
-  <data name="TitleMaxRecentFiles" xml:space="preserve">
+	<data name="TitleMaxRecentFiles" xml:space="preserve">
     <value>_Maximale Anzahl zuletzt verwendeter Dateien:</value>
   </data>
-  <data name="BitOff" xml:space="preserve">
+	<data name="BitOff" xml:space="preserve">
     <value>Aus</value>
   </data>
-  <data name="ErrorFileCorrupted" xml:space="preserve">
+	<data name="ErrorFileCorrupted" xml:space="preserve">
     <value>Die Datei "{0}" ist zerstört und kann nicht geladen werden.</value>
   </data>
-  <data name="ReportFunctions" xml:space="preserve">
+	<data name="ReportFunctions" xml:space="preserve">
     <value>Komponenten der Schaltung: "{0}"</value>
   </data>
-  <data name="TitleCount" xml:space="preserve">
+	<data name="TitleCount" xml:space="preserve">
     <value>Anzahl:</value>
   </data>
-  <data name="TitleFunction" xml:space="preserve">
+	<data name="TitleFunction" xml:space="preserve">
     <value>Funktion:</value>
   </data>
-  <data name="TitleProjectDescription" xml:space="preserve">
+	<data name="TitleProjectDescription" xml:space="preserve">
     <value>Beschreibung:</value>
   </data>
-  <data name="TitleReportErrorDetails" xml:space="preserve">
+	<data name="TitleReportErrorDetails" xml:space="preserve">
     <value>Fehlerdetails</value>
   </data>
-  <data name="TitleSummary" xml:space="preserve">
+	<data name="TitleSummary" xml:space="preserve">
     <value>Zusammenfassung:</value>
   </data>
-  <data name="TitleTotal" xml:space="preserve">
+	<data name="TitleTotal" xml:space="preserve">
     <value>Insgesamt:</value>
   </data>
-  <data name="PinTypeNameNone" xml:space="preserve">
+	<data name="PinTypeNameNone" xml:space="preserve">
     <value>Keiner</value>
   </data>
-  <data name="ErrorUnsupportedUri" xml:space="preserve">
+	<data name="ErrorUnsupportedUri" xml:space="preserve">
     <value>Navigation zu dieser Adresse wird nicht unterstützt.</value>
   </data>
-  <data name="ToolTipLedMatrix" xml:space="preserve">
+	<data name="ToolTipLedMatrix" xml:space="preserve">
     <value>LED Matrix {0}x{1} mit {2} Bit(s) pro LED ({3} Farben)</value>
   </data>
-  <data name="CaptionColumns" xml:space="preserve">
+	<data name="CaptionColumns" xml:space="preserve">
     <value>Spalten</value>
   </data>
-  <data name="CaptionRows" xml:space="preserve">
+	<data name="CaptionRows" xml:space="preserve">
     <value>Zeilen</value>
   </data>
-  <data name="ToolTipColumns" xml:space="preserve">
+	<data name="ToolTipColumns" xml:space="preserve">
     <value>Anzahl der Spalten der LED Matrix auswählen</value>
   </data>
-  <data name="ToolTipRows" xml:space="preserve">
+	<data name="ToolTipRows" xml:space="preserve">
     <value>Anzahl der Zeilen der LED Matrix auswählen</value>
   </data>
-  <data name="CaptionLedMatrixType" xml:space="preserve">
+	<data name="CaptionLedMatrixType" xml:space="preserve">
     <value>Typ</value>
   </data>
-  <data name="LedMatrixRowIndividual" xml:space="preserve">
+	<data name="LedMatrixRowIndividual" xml:space="preserve">
     <value>für jede LED in Zeile #{0}</value>
   </data>
-  <data name="LedMatrixTypeIndividual" xml:space="preserve">
+	<data name="LedMatrixTypeIndividual" xml:space="preserve">
     <value>Zeilenweise</value>
   </data>
-  <data name="LedMatrixTypeSelector" xml:space="preserve">
+	<data name="LedMatrixTypeSelector" xml:space="preserve">
     <value>Auswahl</value>
   </data>
-  <data name="TitleColumns" xml:space="preserve">
+	<data name="TitleColumns" xml:space="preserve">
     <value>_Spalten:</value>
   </data>
-  <data name="TitleRows" xml:space="preserve">
+	<data name="TitleRows" xml:space="preserve">
     <value>_Zeilen:</value>
   </data>
-  <data name="TitleColors" xml:space="preserve">
+	<data name="TitleColors" xml:space="preserve">
     <value>_Farben:</value>
   </data>
-  <data name="MessageVersionLatest" xml:space="preserve">
+	<data name="MessageVersionLatest" xml:space="preserve">
     <value>Sie haben bereits die aktuelle Version.</value>
   </data>
-  <data name="MessageVersionOutdated" xml:space="preserve">
+	<data name="MessageVersionOutdated" xml:space="preserve">
     <value>Sie haben eine ältere Version. Klicken Sie auf den unten stehenden Link um die aktuelle Version herunterzuladen.</value>
   </data>
-  <data name="MessageVersionPreview" xml:space="preserve">
+	<data name="MessageVersionPreview" xml:space="preserve">
     <value>Sie haben eine unveröffentlichte Entwickler-Version.</value>
   </data>
-  <data name="TitleCheckVersion" xml:space="preserve">
+	<data name="TitleCheckVersion" xml:space="preserve">
     <value>Jetzt prüfen</value>
   </data>
-  <data name="ErrorHyperlinkText" xml:space="preserve">
+	<data name="ErrorHyperlinkText" xml:space="preserve">
     <value>Hyperlink Beschriftung ist leer</value>
   </data>
-  <data name="ErrorHyperlinkUrl" xml:space="preserve">
+	<data name="ErrorHyperlinkUrl" xml:space="preserve">
     <value>Hyperlink Adresse ist ungültig</value>
   </data>
-  <data name="TitleHyperlink" xml:space="preserve">
+	<data name="TitleHyperlink" xml:space="preserve">
     <value>_Link zu:</value>
   </data>
-  <data name="CommandInsertImage" xml:space="preserve">
+	<data name="CommandInsertImage" xml:space="preserve">
     <value>Bild</value>
   </data>
-  <data name="TitleCheckVersionPeriodically" xml:space="preserve">
+	<data name="TitleCheckVersionPeriodically" xml:space="preserve">
     <value>Regelmäßig auf neue Versionen prüfen.</value>
   </data>
-  <data name="ErrorClipboardCorrupted" xml:space="preserve">
+	<data name="ErrorClipboardCorrupted" xml:space="preserve">
     <value>Die Daten in der Zwischenablage sind zerstört und können nicht eingefügt werden.</value>
   </data>
-  <data name="CommandTruthTable" xml:space="preserve">
+	<data name="CommandTruthTable" xml:space="preserve">
     <value>Wahrheitstabelle</value>
   </data>
-  <data name="MessageInputOutputPinsMissing" xml:space="preserve">
+	<data name="MessageInputOutputPinsMissing" xml:space="preserve">
     <value>Es gibt in dieser Schaltung keine Eingangs- oder Ausgangs-Pins. Die Wahrheitstabellen werden durch das Senden aller Permutationen der Daten zu den Eingangs-Pins und durch das Lesen der Ergebnisse an den Ausgangs-Pins erstellt.</value>
   </data>
-  <data name="MessageTruthTableTooBig" xml:space="preserve">
+	<data name="MessageTruthTableTooBig" xml:space="preserve">
     <value>Die Wahrheitstabelle ist zu lang und wird abgeschnitten. Bitte verwenden Sie Filter um die Korrektheit Ihrer Schaltung zu prüfen.</value>
   </data>
-  <data name="ParserEOS" xml:space="preserve">
+	<data name="ParserEOS" xml:space="preserve">
     <value>Ende des Ausdrucks</value>
   </data>
-  <data name="ParserErrorExpressionMissing" xml:space="preserve">
+	<data name="ParserErrorExpressionMissing" xml:space="preserve">
     <value>Ausdruck fehlt nach {0}</value>
   </data>
-  <data name="ParserErrorInvalidNumber" xml:space="preserve">
+	<data name="ParserErrorInvalidNumber" xml:space="preserve">
     <value>Ungültige Nummer: {0}</value>
   </data>
-  <data name="ParserErrorUnexpected" xml:space="preserve">
+	<data name="ParserErrorUnexpected" xml:space="preserve">
     <value>{0} unerwartet</value>
   </data>
-  <data name="ParserErrorUnknownChar" xml:space="preserve">
+	<data name="ParserErrorUnknownChar" xml:space="preserve">
     <value>Unbekanntes Zeichen: {0}</value>
   </data>
-  <data name="ParserErrorUnknownPin" xml:space="preserve">
+	<data name="ParserErrorUnknownPin" xml:space="preserve">
     <value>{0} - Eingangs- oder Ausgangs-Pin nicht gefunden</value>
   </data>
-  <data name="TitleApply" xml:space="preserve">
+	<data name="TitleApply" xml:space="preserve">
     <value>_Anwenden</value>
   </data>
-  <data name="TitleDisplayedRows" xml:space="preserve">
+	<data name="TitleDisplayedRows" xml:space="preserve">
     <value>Angezeigte Zeilen: {0:N0}</value>
   </data>
-  <data name="TitleInvert" xml:space="preserve">
+	<data name="TitleInvert" xml:space="preserve">
     <value>_Invertieren</value>
   </data>
-  <data name="TitleTotalRows" xml:space="preserve">
+	<data name="TitleTotalRows" xml:space="preserve">
     <value>Zeilen insgesamt: {0:N0}</value>
   </data>
-  <data name="ColorPickerCaptionAvailable" xml:space="preserve">
+	<data name="ColorPickerCaptionAvailable" xml:space="preserve">
     <value>Verfügbare Farben:</value>
   </data>
-  <data name="ColorPickerCaptionRecent" xml:space="preserve">
+	<data name="ColorPickerCaptionRecent" xml:space="preserve">
     <value>Zuletzt verwendete Farben:</value>
   </data>
-  <data name="ColorPickerCaptionSelectCustom" xml:space="preserve">
+	<data name="ColorPickerCaptionSelectCustom" xml:space="preserve">
     <value>Auswählen</value>
   </data>
-  <data name="ColorPickerCaptionStandard" xml:space="preserve">
+	<data name="ColorPickerCaptionStandard" xml:space="preserve">
     <value>Standardfarben:</value>
   </data>
-  <data name="ColorPickerTabCustom" xml:space="preserve">
+	<data name="ColorPickerTabCustom" xml:space="preserve">
     <value>Benutzerdefiniert</value>
   </data>
-  <data name="ToolTipFontColor" xml:space="preserve">
+	<data name="ToolTipFontColor" xml:space="preserve">
     <value>Schriftfarbe</value>
   </data>
-  <data name="TitleSaveAs" xml:space="preserve">
+	<data name="TitleSaveAs" xml:space="preserve">
     <value>Speichern unter...</value>
   </data>
-  <data name="ToolTipLoadData" xml:space="preserve">
+	<data name="ToolTipLoadData" xml:space="preserve">
     <value>Daten aus Datei laden</value>
   </data>
-  <data name="ToolTipSaveData" xml:space="preserve">
+	<data name="ToolTipSaveData" xml:space="preserve">
     <value>Daten in Datei speichern</value>
   </data>
-  <data name="MemoryOnStartData" xml:space="preserve">
+	<data name="MemoryOnStartData" xml:space="preserve">
     <value>Speicherinhalt zwischen den Läufen erhalten.</value>
   </data>
-  <data name="MemoryOnStartOnes" xml:space="preserve">
+	<data name="MemoryOnStartOnes" xml:space="preserve">
     <value>Alle Bits auf 1 setzen</value>
   </data>
-  <data name="MemoryOnStartRandom" xml:space="preserve">
+	<data name="MemoryOnStartRandom" xml:space="preserve">
     <value>Zufällig</value>
   </data>
-  <data name="MemoryOnStartZeros" xml:space="preserve">
+	<data name="MemoryOnStartZeros" xml:space="preserve">
     <value>Alle Bits auf 0 setzen</value>
   </data>
-  <data name="TitleMemoryOnStart" xml:space="preserve">
+	<data name="TitleMemoryOnStart" xml:space="preserve">
     <value>Beim _Start füllen:</value>
   </data>
-  <data name="ToolTipMemoryOnStart" xml:space="preserve">
+	<data name="ToolTipMemoryOnStart" xml:space="preserve">
     <value>Wählen Sie aus wie RAM beim Einschalten initialisiert wird.</value>
   </data>
-  <data name="MessageRestartRequared" xml:space="preserve">
+	<data name="MessageRestartRequared" xml:space="preserve">
     <value>Ihre Spracheauswahl wurde geändert. Sie müssen die Anwendung neu starten, damit die neuen Einstellungen aktiv werden.</value>
   </data>
-  <data name="TitleCulture" xml:space="preserve">
+	<data name="TitleCulture" xml:space="preserve">
     <value>_Sprache</value>
   </data>
-  <data name="CommandEditAlignCenter" xml:space="preserve">
+	<data name="CommandEditAlignCenter" xml:space="preserve">
     <value>Zentrieren</value>
   </data>
-  <data name="CommandEditAlignJustify" xml:space="preserve">
+	<data name="CommandEditAlignJustify" xml:space="preserve">
     <value>Blocksatz</value>
   </data>
-  <data name="CommandEditAlignLeft" xml:space="preserve">
+	<data name="CommandEditAlignLeft" xml:space="preserve">
     <value>Links ausrichten</value>
   </data>
-  <data name="CommandEditAlignRight" xml:space="preserve">
+	<data name="CommandEditAlignRight" xml:space="preserve">
     <value>Rechts ausrichten</value>
   </data>
-  <data name="CommandEditBold" xml:space="preserve">
+	<data name="CommandEditBold" xml:space="preserve">
     <value>Fett</value>
   </data>
-  <data name="CommandEditCopy" xml:space="preserve">
+	<data name="CommandEditCopy" xml:space="preserve">
     <value>_Kopieren</value>
   </data>
-  <data name="CommandEditCut" xml:space="preserve">
+	<data name="CommandEditCut" xml:space="preserve">
     <value>_Ausschneiden</value>
   </data>
-  <data name="CommandEditDecreaseFontSize" xml:space="preserve">
+	<data name="CommandEditDecreaseFontSize" xml:space="preserve">
     <value>Schrift verkleinern</value>
   </data>
-  <data name="CommandEditDelete" xml:space="preserve">
+	<data name="CommandEditDelete" xml:space="preserve">
     <value>_Löschen</value>
   </data>
-  <data name="CommandEditIncreaseFontSize" xml:space="preserve">
+	<data name="CommandEditIncreaseFontSize" xml:space="preserve">
     <value>Schrift vergrößern</value>
   </data>
-  <data name="CommandEditItalic" xml:space="preserve">
+	<data name="CommandEditItalic" xml:space="preserve">
     <value>Kursiv</value>
   </data>
-  <data name="CommandEditNumbering" xml:space="preserve">
+	<data name="CommandEditNumbering" xml:space="preserve">
     <value>Zählweise</value>
   </data>
-  <data name="CommandEditPaste" xml:space="preserve">
+	<data name="CommandEditPaste" xml:space="preserve">
     <value>_Einfügen</value>
   </data>
-  <data name="CommandEditRedo" xml:space="preserve">
+	<data name="CommandEditRedo" xml:space="preserve">
     <value>_Wiederholen</value>
   </data>
-  <data name="CommandEditSelectAll" xml:space="preserve">
+	<data name="CommandEditSelectAll" xml:space="preserve">
     <value>Alles _auswählen</value>
   </data>
-  <data name="CommandEditUnderline" xml:space="preserve">
+	<data name="CommandEditUnderline" xml:space="preserve">
     <value>Unterstrichen</value>
   </data>
-  <data name="CommandEditUndo" xml:space="preserve">
+	<data name="CommandEditUndo" xml:space="preserve">
     <value>_Rückgängig</value>
   </data>
-  <data name="CommandFileClose" xml:space="preserve">
+	<data name="CommandFileClose" xml:space="preserve">
     <value>_Beenden</value>
   </data>
-  <data name="CommandFileNew" xml:space="preserve">
+	<data name="CommandFileNew" xml:space="preserve">
     <value>_Neu</value>
   </data>
-  <data name="CommandFileOpen" xml:space="preserve">
+	<data name="CommandFileOpen" xml:space="preserve">
     <value>_Öffnen</value>
   </data>
-  <data name="CommandFileSave" xml:space="preserve">
+	<data name="CommandFileSave" xml:space="preserve">
     <value>_Speichern</value>
   </data>
-  <data name="CommandFileSaveAs" xml:space="preserve">
+	<data name="CommandFileSaveAs" xml:space="preserve">
     <value>Speichern _unter...</value>
   </data>
-  <data name="CommandHelpView" xml:space="preserve">
+	<data name="CommandHelpView" xml:space="preserve">
     <value>_Hilfe anzeigen</value>
   </data>
-  <data name="ToolTipFontFamily" xml:space="preserve">
+	<data name="ToolTipFontFamily" xml:space="preserve">
     <value>Schriftart</value>
   </data>
-  <data name="ToolTipFontSize" xml:space="preserve">
+	<data name="ToolTipFontSize" xml:space="preserve">
     <value>Schriftgröße</value>
   </data>
-  <data name="CommandEditIncreaseIndentation" xml:space="preserve">
+	<data name="CommandEditIncreaseIndentation" xml:space="preserve">
     <value>Einrückung vergrößern</value>
   </data>
-  <data name="CommandEditDecreaseIndentation" xml:space="preserve">
+	<data name="CommandEditDecreaseIndentation" xml:space="preserve">
     <value>Einrückung verkleinern</value>
   </data>
-  <data name="ParserErrorUnclosedQuote" xml:space="preserve">
+	<data name="ParserErrorUnclosedQuote" xml:space="preserve">
     <value>Beim Ausdruck: {0} fehlt das abschließende Anführungszeichen.</value>
   </data>
-  <data name="ToolTipBackgroundColor" xml:space="preserve">
+	<data name="ToolTipBackgroundColor" xml:space="preserve">
     <value>Hintergrundfarbe</value>
   </data>
-  <data name="CommandEditBullets" xml:space="preserve">
+	<data name="CommandEditBullets" xml:space="preserve">
     <value>Aufzählungspunkt</value>
   </data>
-  <data name="NameButton" xml:space="preserve">
+	<data name="NameButton" xml:space="preserve">
     <value>Knopf</value>
   </data>
-  <data name="NameConstant" xml:space="preserve">
+	<data name="NameConstant" xml:space="preserve">
     <value>Signalquelle</value>
   </data>
-  <data name="ToolTipGateInputCount" xml:space="preserve">
+	<data name="ToolTipGateInputCount" xml:space="preserve">
     <value>Anzahl der Eingänge des Gatters auswählen</value>
   </data>
-  <data name="ToolTipPinBitWidth" xml:space="preserve">
+	<data name="ToolTipPinBitWidth" xml:space="preserve">
     <value>Anzahl der Leitungen des Pins auswählen</value>
   </data>
-  <data name="ToolTipZoom" xml:space="preserve">
+	<data name="ToolTipZoom" xml:space="preserve">
     <value>Vergrößerung des Diagramms festlegen.</value>
   </data>
-  <data name="CategoryPrimitives" xml:space="preserve">
+	<data name="CategoryPrimitives" xml:space="preserve">
     <value>Grundformen</value>
   </data>
-  <data name="CommandFileOpenRecent" xml:space="preserve">
+	<data name="CommandFileOpenRecent" xml:space="preserve">
     <value>Öffne _zuletzt verwendete Datei</value>
   </data>
-  <data name="MessageInvalidRecentFile" xml:space="preserve">
+	<data name="MessageInvalidRecentFile" xml:space="preserve">
     <value>Die Datei "{0}" kann nicht geöffnet werden.
 Möchten Sie den Verweis von der Liste der zuletzt verwendeten Dateien löschen?</value>
   </data>
-  <data name="ProjectSummary" xml:space="preserve">
+	<data name="ProjectSummary" xml:space="preserve">
     <value>{0} Schaltung(en), in {1} Kategorie(n) verwend(et/en) {2} Symbol(e) und {3} Verbindung(en)</value>
   </data>
-  <data name="ParserErrorCloseParenMissing" xml:space="preserve">
+	<data name="ParserErrorCloseParenMissing" xml:space="preserve">
     <value>Beim Ausdruck: {0} fehlt die schließende ')'.</value>
   </data>
-  <data name="ErrorProjectCount" xml:space="preserve">
+	<data name="ErrorProjectCount" xml:space="preserve">
     <value>Es befindet sich mehr als ein Projekt in der Datei.</value>
   </data>
-  <data name="FileFilter" xml:space="preserve">
+	<data name="FileFilter" xml:space="preserve">
     <value>Circuit Project (*{0})|*{0}|Alle Dateien (*.*)|*.*</value>
   </data>
-  <data name="TitleOK" xml:space="preserve">
+	<data name="TitleOK" xml:space="preserve">
     <value>OK</value>
   </data>
-  <data name="ToolTipButton" xml:space="preserve">
+	<data name="ToolTipButton" xml:space="preserve">
     <value>Knopf {0}</value>
   </data>
-  <data name="CircuitProjectName" xml:space="preserve">
+	<data name="CircuitProjectName" xml:space="preserve">
     <value>Schaltungs-Projekt</value>
   </data>
-  <data name="TitleText" xml:space="preserve">
+	<data name="TitleText" xml:space="preserve">
     <value>_Text:</value>
   </data>
-  <data name="TitleCredits" xml:space="preserve">
+	<data name="TitleCredits" xml:space="preserve">
     <value>Mitwirkende:</value>
   </data>
-  <data name="PinTypeNameInput" xml:space="preserve">
+	<data name="PinTypeNameInput" xml:space="preserve">
     <value>Eingang</value>
   </data>
-  <data name="PinTypeNameOutput" xml:space="preserve">
+	<data name="PinTypeNameOutput" xml:space="preserve">
     <value>Ausgang</value>
   </data>
-  <data name="CircuitProbeName" xml:space="preserve">
+	<data name="CircuitProbeName" xml:space="preserve">
     <value>Prüfspitze</value>
   </data>
-  <data name="MemoryDataInPinName" xml:space="preserve">
+	<data name="MemoryDataInPinName" xml:space="preserve">
     <value>Datenleitungen Eingang</value>
   </data>
-  <data name="MemoryWritePinName" xml:space="preserve">
+	<data name="MemoryWritePinName" xml:space="preserve">
     <value>RAM Write Enable Eingang.
 Speicherwert wird bei {0} aktualisiert.</value>
   </data>
-  <data name="SplitterThin1PinName" xml:space="preserve">
+	<data name="SplitterThin1PinName" xml:space="preserve">
     <value>(Leitung {0}) des Verzweiger Anschlusses</value>
   </data>
-  <data name="SplitterThin2PinName" xml:space="preserve">
+	<data name="SplitterThin2PinName" xml:space="preserve">
     <value>(Leitungen {0}-{1}) des Verzweiger Anschlusses</value>
   </data>
-  <data name="SplitterWidePinName" xml:space="preserve">
+	<data name="SplitterWidePinName" xml:space="preserve">
     <value>Bus-Anschluss des Verzweigers</value>
   </data>
-  <data name="ToolTipSplitter" xml:space="preserve">
+	<data name="ToolTipSplitter" xml:space="preserve">
     <value>Verzweiger mit {0} Busleitungen auf {1} Anschlüsse</value>
   </data>
-  <data name="NameSplitter" xml:space="preserve">
+	<data name="NameSplitter" xml:space="preserve">
     <value>Verzweiger</value>
   </data>
-  <data name="CommandCircuitCurrent" xml:space="preserve">
+	<data name="CommandCircuitCurrent" xml:space="preserve">
     <value>Schaltung</value>
   </data>
-  <data name="CommandEditSelectAllProbes" xml:space="preserve">
+	<data name="CommandEditSelectAllProbes" xml:space="preserve">
     <value>Alle Prüfspitzen auswählen</value>
   </data>
-  <data name="CommandEditSelectAllProbesWithWire" xml:space="preserve">
+	<data name="CommandEditSelectAllProbesWithWire" xml:space="preserve">
     <value>Alle Prüfspitzen und Verbindungen auswählen</value>
   </data>
-  <data name="CommandEditSelectFloatingSymbols" xml:space="preserve">
+	<data name="CommandEditSelectFloatingSymbols" xml:space="preserve">
     <value>Alle freien Symbole auswählen</value>
   </data>
-  <data name="TipOnStartMove" xml:space="preserve">
+	<data name="TipOnStartMove" xml:space="preserve">
     <value>Ziehen Sie die ausgewählten Elemente an die gewünschte Position. Drücken Sie Esc um das Verschieben abzubrechen. Halten Sie Shift beim Absetzen der Elemente um benachbarte Verbindungen abzutrennen.</value>
   </data>
-  <data name="TipOnWireSelect" xml:space="preserve">
+	<data name="TipOnWireSelect" xml:space="preserve">
     <value>Halten Sie Shift+{Strg} beim Klicken auf eine Verbindung um den ganzen Leitungsweg aus-/abzuwählen, halten Sie Alt beim Klicken auf ausgewählte Verbindungen um sie aufzutrennen bzw. zusammenzufassen.</value>
   </data>
-  <data name="ErrorJamBitWidthDifferent" xml:space="preserve">
+	<data name="ErrorJamBitWidthDifferent" xml:space="preserve">
     <value>Der Eingang von {0} ({1}) und der Ausgang von {2} ({3}) in {4} haben verschiedene Busbreiten und können nicht miteinander verbunden werden. Bitte beheben Sie dieses Problem.</value>
   </data>
-  <data name="ErrorLoopInCircuit" xml:space="preserve">
+	<data name="ErrorLoopInCircuit" xml:space="preserve">
     <value>Das Symbol "{0}" in der Schaltung "{1}" erzeugt eine Endlosschleife. Bitte lösen Sie die Schleife auf.</value>
   </data>
-  <data name="ErrorManyResults" xml:space="preserve">
+	<data name="ErrorManyResults" xml:space="preserve">
     <value>Der Eingang {0} von {1} ist mit mehr als einem Ausgang verbunden, welcher nicht Tri-State fähig ist.</value>
   </data>
-  <data name="TitleProbeHistory" xml:space="preserve">
+	<data name="TitleProbeHistory" xml:space="preserve">
     <value>Prüfergebnisse</value>
   </data>
-  <data name="MessageNotRootConstant" xml:space="preserve">
+	<data name="MessageNotRootConstant" xml:space="preserve">
     <value>Nur bei Signalquellen in der Haupt-Schaltung ({0}) kann während der laufenden Simulation der Signalzustand geändert werden.</value>
   </data>
-  <data name="TitleOscilloscope" xml:space="preserve">
+	<data name="TitleOscilloscope" xml:space="preserve">
     <value>Oszilloskop</value>
   </data>
-  <data name="ReportMemoryName" xml:space="preserve">
+	<data name="ReportMemoryName" xml:space="preserve">
     <value>{0}: {1} Adressleitungen, {2} Datenleitungen</value>
   </data>
-  <data name="CaptionSplitterDirection" xml:space="preserve">
+	<data name="CaptionSplitterDirection" xml:space="preserve">
     <value>Bus-Anschluss Richtung</value>
   </data>
-  <data name="ToolTipFrequency" xml:space="preserve">
+	<data name="ToolTipFrequency" xml:space="preserve">
     <value>Ändert die Frequenz der Taktgeneratoren der laufenden Schaltung.</value>
   </data>
-  <data name="ToolTipIsMaximumSpeed1" xml:space="preserve">
+	<data name="ToolTipIsMaximumSpeed1" xml:space="preserve">
     <value>Schaltung mit maximaler Geschwindigkeit laufen lassen.</value>
   </data>
-  <data name="ToolTipIsMaximumSpeed2" xml:space="preserve">
+	<data name="ToolTipIsMaximumSpeed2" xml:space="preserve">
     <value>Die Auswahl dieser Option kann dazu führen, dass der Computer nicht mehr bedient werden kann.</value>
   </data>
-  <data name="ToolTipPinSide" xml:space="preserve">
+	<data name="ToolTipPinSide" xml:space="preserve">
     <value>Wählen Sie die Seite des Schaltsymbols an welcher sich der neue Anschluss befinden  soll.</value>
   </data>
-  <data name="ToolTipSplitterBitWidth" xml:space="preserve">
+	<data name="ToolTipSplitterBitWidth" xml:space="preserve">
     <value>Busbreite des Verzweigers Anschlusses auswählen.</value>
   </data>
-  <data name="ToolTipSplitterPinNumber" xml:space="preserve">
+	<data name="ToolTipSplitterPinNumber" xml:space="preserve">
     <value>Anzahl der Anschlüsse des Verzweigers auswählen.</value>
   </data>
-  <data name="ToolTipSplitterRotation" xml:space="preserve">
+	<data name="ToolTipSplitterRotation" xml:space="preserve">
     <value>Ausrichtung des Bus-Anschlusses des Verzweigers auswählen.</value>
   </data>
-  <data name="ToolTipRamWriteOn" xml:space="preserve">
+	<data name="ToolTipRamWriteOn" xml:space="preserve">
     <value>Auswahl des Zeitpunkts wann in den Speicher geschrieben wird.</value>
   </data>
-  <data name="ToolTipPinNotation" xml:space="preserve">
+	<data name="ToolTipPinNotation" xml:space="preserve">
     <value>Geben Sie eine sehr kurze Beschreibung zur Anzeige auf dem Symbol neben dem Anschluss ein.</value>
   </data>
-  <data name="TitleIsToggle" xml:space="preserve">
+	<data name="TitleIsToggle" xml:space="preserve">
     <value>Taster oder Schalter</value>
   </data>
-  <data name="ToolTipIsToggle" xml:space="preserve">
+	<data name="ToolTipIsToggle" xml:space="preserve">
     <value>Der Knopf kann als Taster oder als Schalter arbeiten.</value>
   </data>
-  <data name="CommandCircuitPower" xml:space="preserve">
+	<data name="CommandCircuitPower" xml:space="preserve">
     <value>Ein- / Ausschalten</value>
   </data>
-  <data name="CaptionSplitterBitWidth" xml:space="preserve">
+	<data name="CaptionSplitterBitWidth" xml:space="preserve">
     <value>Verzweiger Busbreite</value>
   </data>
-  <data name="MessageNotUsed" xml:space="preserve">
+	<data name="MessageNotUsed" xml:space="preserve">
     <value>Diese Schaltung wird nirgendwo verwendet.</value>
   </data>
-  <data name="MessageUsageNote" xml:space="preserve">
+	<data name="MessageUsageNote" xml:space="preserve">
     <value>Wählen Sie die Schaltung in der die aktuelle verwendet wird und klicken Sie diese doppelt an um dorthin zu navigieren und wählen sie die Symbole der aktuellen aus.</value>
   </data>
-  <data name="TitleCircuitUsage" xml:space="preserve">
+	<data name="TitleCircuitUsage" xml:space="preserve">
     <value>Verwendung der Schaltung</value>
   </data>
-  <data name="ReportError" xml:space="preserve">
+	<data name="ReportError" xml:space="preserve">
     <value>Die Komponenten können auf Grund des folgenden Fehlers nicht angezeigt werden: {0}</value>
   </data>
-  <data name="LedMatrixColumnSelector" xml:space="preserve">
+	<data name="LedMatrixColumnSelector" xml:space="preserve">
     <value>zur Auswahl von Spalte #{0}</value>
   </data>
-  <data name="TitleCellShape" xml:space="preserve">
+	<data name="TitleCellShape" xml:space="preserve">
     <value>_Zellenform:</value>
   </data>
-  <data name="ToolTipLedMatrixType" xml:space="preserve">
+	<data name="ToolTipLedMatrixType" xml:space="preserve">
     <value>Wählen Sie aus wie die LED Matrix angesteuert wird.</value>
   </data>
-  <data name="ErrorManyMemoryData" xml:space="preserve">
+	<data name="ErrorManyMemoryData" xml:space="preserve">
     <value>Die Schaltung {0} enthält {1} welche die Daten zwischen den Läufen behält.
 Eine solche Schaltung kann nicht mehr als einmal verwendet werden, da eventuell verschiedene Datensätze in einem Speichermodul gehalten werden würden.</value>
   </data>
-  <data name="TitleMark" xml:space="preserve">
+	<data name="TitleMark" xml:space="preserve">
     <value>Markierung</value>
   </data>
-  <data name="CaptionNotation" xml:space="preserve">
+	<data name="CaptionNotation" xml:space="preserve">
     <value>Beschriftung</value>
   </data>
-  <data name="TitleNotation" xml:space="preserve">
+	<data name="TitleNotation" xml:space="preserve">
     <value>_Beschriftung:</value>
   </data>
-  <data name="GateShapeRectangular" xml:space="preserve">
+	<data name="GateShapeRectangular" xml:space="preserve">
     <value>rechteckig</value>
   </data>
-  <data name="GateShapeShaped" xml:space="preserve">
+	<data name="GateShapeShaped" xml:space="preserve">
     <value>abgerundet</value>
   </data>
-  <data name="ProbeHistoryMark" xml:space="preserve">
+	<data name="ProbeHistoryMark" xml:space="preserve">
     <value>&lt;&lt;&lt;&lt;&lt;&lt; Marke &gt;&gt;&gt;&gt;&gt;&gt;</value>
   </data>
-  <data name="LedMatrixRowSelector" xml:space="preserve">
+	<data name="LedMatrixRowSelector" xml:space="preserve">
     <value>zur Auswahl von Zeile #{0}</value>
   </data>
-  <data name="Oscillation" xml:space="preserve">
+	<data name="Oscillation" xml:space="preserve">
     <value>Signalverlauf</value>
   </data>
-  <data name="CaptionSplitterPinNumber" xml:space="preserve">
+	<data name="CaptionSplitterPinNumber" xml:space="preserve">
     <value>Bus-Verzweiger Anschlüsse</value>
   </data>
-  <data name="DefaultGateShape" xml:space="preserve">
+	<data name="DefaultGateShape" xml:space="preserve">
     <value>Rectangular</value>
   </data>
-  <data name="Gate7SegName" xml:space="preserve">
+	<data name="Gate7SegName" xml:space="preserve">
     <value>7 Segment-Anzeige</value>
   </data>
-  <data name="LogicalCircuitMainName" xml:space="preserve">
+	<data name="LogicalCircuitMainName" xml:space="preserve">
     <value>Haupt-Schaltung</value>
   </data>
-  <data name="LogicalCircuitMainNotation" xml:space="preserve">
+	<data name="LogicalCircuitMainNotation" xml:space="preserve">
     <value>Haupt-Schaltung</value>
   </data>
-  <data name="TitleIsDisplay" xml:space="preserve">
+	<data name="TitleIsDisplay" xml:space="preserve">
     <value>Opti_sche Elemente im Projektbereich anzeigen</value>
   </data>
-  <data name="ToolTipIsDisplay" xml:space="preserve">
+	<data name="ToolTipIsDisplay" xml:space="preserve">
     <value>Wenn Sie diese Funktion aktivieren, werden alle optischen
 Elemente dieses Schaltungs-Projekts im Projektbereich angezeigt.
 Optische Elemente sind: LED, LED Matrix, Grafik-Display,
 Knopf oder andere Logic Circuit Elemente welche optische Anzeigen haben.</value>
   </data>
-  <data name="TitleActualFrequency" xml:space="preserve">
+	<data name="TitleActualFrequency" xml:space="preserve">
     <value>Aktuelle Frequenz:</value>
   </data>
-  <data name="GateAndName" xml:space="preserve">
+	<data name="GateAndName" xml:space="preserve">
     <value>And</value>
   </data>
-  <data name="GateAndNotation" xml:space="preserve">
+	<data name="GateAndNotation" xml:space="preserve">
     <value>&amp;</value>
   </data>
-  <data name="GateAndNotName" xml:space="preserve">
+	<data name="GateAndNotName" xml:space="preserve">
     <value>NAnd</value>
   </data>
-  <data name="GateClockNotation" xml:space="preserve">
+	<data name="GateClockNotation" xml:space="preserve">
     <value>ω</value>
   </data>
-  <data name="GateLedName" xml:space="preserve">
+	<data name="GateLedName" xml:space="preserve">
     <value>LED</value>
   </data>
-  <data name="GateLedNotation" xml:space="preserve">
+	<data name="GateLedNotation" xml:space="preserve">
     <value>LED</value>
   </data>
-  <data name="GateNotName" xml:space="preserve">
+	<data name="GateNotName" xml:space="preserve">
     <value>Not</value>
   </data>
-  <data name="GateNotNotation" xml:space="preserve">
+	<data name="GateNotNotation" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="GateOrName" xml:space="preserve">
+	<data name="GateOrName" xml:space="preserve">
     <value>Or</value>
   </data>
-  <data name="GateOrNotation" xml:space="preserve">
+	<data name="GateOrNotation" xml:space="preserve">
     <value>≥1</value>
   </data>
-  <data name="GateOrNotName" xml:space="preserve">
+	<data name="GateOrNotName" xml:space="preserve">
     <value>NOr</value>
   </data>
-  <data name="CircuitProbeNotation" xml:space="preserve">
+	<data name="CircuitProbeNotation" xml:space="preserve">
     <value>?</value>
   </data>
-  <data name="GateTriStateName" xml:space="preserve">
+	<data name="GateTriStateName" xml:space="preserve">
     <value>Tri-state</value>
   </data>
-  <data name="GateTriStateNotation" xml:space="preserve">
+	<data name="GateTriStateNotation" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="GateXorName" xml:space="preserve">
+	<data name="GateXorName" xml:space="preserve">
     <value>Xor</value>
   </data>
-  <data name="GateXorNotation" xml:space="preserve">
+	<data name="GateXorNotation" xml:space="preserve">
     <value>=1</value>
   </data>
-  <data name="GateXorNotName" xml:space="preserve">
+	<data name="GateXorNotName" xml:space="preserve">
     <value>XNor</value>
   </data>
-  <data name="Led7Pin1" xml:space="preserve">
+	<data name="Led7Pin1" xml:space="preserve">
     <value>a</value>
   </data>
-  <data name="Led7Pin2" xml:space="preserve">
+	<data name="Led7Pin2" xml:space="preserve">
     <value>b</value>
   </data>
-  <data name="Led7Pin3" xml:space="preserve">
+	<data name="Led7Pin3" xml:space="preserve">
     <value>c</value>
   </data>
-  <data name="Led7Pin4" xml:space="preserve">
+	<data name="Led7Pin4" xml:space="preserve">
     <value>d</value>
   </data>
-  <data name="Led7Pin5" xml:space="preserve">
+	<data name="Led7Pin5" xml:space="preserve">
     <value>e</value>
   </data>
-  <data name="Led7Pin6" xml:space="preserve">
+	<data name="Led7Pin6" xml:space="preserve">
     <value>f</value>
   </data>
-  <data name="Led7Pin7" xml:space="preserve">
+	<data name="Led7Pin7" xml:space="preserve">
     <value>g</value>
   </data>
-  <data name="MemoryAddressPinNotation" xml:space="preserve">
+	<data name="MemoryAddressPinNotation" xml:space="preserve">
     <value>a</value>
   </data>
-  <data name="MemoryDataPinNotation" xml:space="preserve">
+	<data name="MemoryDataPinNotation" xml:space="preserve">
     <value>d</value>
   </data>
-  <data name="MemoryWritePinNotation" xml:space="preserve">
+	<data name="MemoryWritePinNotation" xml:space="preserve">
     <value>w</value>
   </data>
-  <data name="PinEnableName" xml:space="preserve">
+	<data name="PinEnableName" xml:space="preserve">
     <value>E</value>
   </data>
-  <data name="PinInName" xml:space="preserve">
+	<data name="PinInName" xml:space="preserve">
     <value>x</value>
   </data>
-  <data name="PinName" xml:space="preserve">
+	<data name="PinName" xml:space="preserve">
     <value>{0}{1}</value>
   </data>
-  <data name="PinOutName" xml:space="preserve">
+	<data name="PinOutName" xml:space="preserve">
     <value>q</value>
   </data>
-  <data name="ConstantNotation" xml:space="preserve">
+	<data name="ConstantNotation" xml:space="preserve">
     <value>{0:X}</value>
   </data>
-  <data name="RAMNotation" xml:space="preserve">
+	<data name="RAMNotation" xml:space="preserve">
     <value>RAM</value>
   </data>
-  <data name="ROMNotation" xml:space="preserve">
+	<data name="ROMNotation" xml:space="preserve">
     <value>ROM</value>
   </data>
-  <data name="TitlePinInput" xml:space="preserve">
+	<data name="TitlePinInput" xml:space="preserve">
     <value>{0}
 In</value>
   </data>
-  <data name="TitlePinOutput" xml:space="preserve">
+	<data name="TitlePinOutput" xml:space="preserve">
     <value>{0}
 Out</value>
   </data>
-  <data name="TitleApplication" xml:space="preserve">
+	<data name="TitleApplication" xml:space="preserve">
     <value>Logical Circuit</value>
   </data>
-  <data name="TitleVersion" xml:space="preserve">
+	<data name="TitleVersion" xml:space="preserve">
     <value>Version:</value>
   </data>
-  <data name="TitleWeb" xml:space="preserve">
+	<data name="TitleWeb" xml:space="preserve">
     <value>Web:</value>
   </data>
-  <data name="WebSiteUri" xml:space="preserve">
+	<data name="WebSiteUri" xml:space="preserve">
     <value>http://www.logiccircuit.org/</value>
   </data>
-  <data name="HelpContent" xml:space="preserve">
+	<data name="HelpContent" xml:space="preserve">
     <value>http://www.logiccircuit.org/help.html</value>
   </data>
-  <data name="TitleName" xml:space="preserve">
+	<data name="TitleName" xml:space="preserve">
     <value>_Name:</value>
   </data>
-  <data name="NamePin" xml:space="preserve">
+	<data name="NamePin" xml:space="preserve">
     <value>Pin</value>
   </data>
-  <data name="CircuitMapPathSeparator" xml:space="preserve">
+	<data name="CircuitMapPathSeparator" xml:space="preserve">
     <value>/</value>
   </data>
-  <data name="CommandFileFileImport" xml:space="preserve">
+	<data name="CommandFileFileImport" xml:space="preserve">
     <value>_Import...</value>
   </data>
-  <data name="ImportTitle" xml:space="preserve">
+	<data name="ImportTitle" xml:space="preserve">
     <value>Import</value>
   </data>
-  <data name="TitleImportCircuit" xml:space="preserve">
+	<data name="TitleImportCircuit" xml:space="preserve">
     <value>Import</value>
   </data>
-  <data name="TitleFileOpen" xml:space="preserve">
+	<data name="TitleFileOpen" xml:space="preserve">
     <value>...</value>
   </data>
-  <data name="ReportGateName" xml:space="preserve">
+	<data name="ReportGateName" xml:space="preserve">
     <value>{0} ({1})</value>
   </data>
-  <data name="CaptionTextNote1" xml:space="preserve">
+	<data name="CaptionTextNote1" xml:space="preserve">
     <value>Text</value>
   </data>
-  <data name="CategoryDuplicate" xml:space="preserve">
+	<data name="CategoryDuplicate" xml:space="preserve">
     <value>{0} 2</value>
   </data>
-  <data name="Bit0" xml:space="preserve">
+	<data name="Bit0" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="Bit1" xml:space="preserve">
+	<data name="Bit1" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="GridPoint" xml:space="preserve">
+	<data name="GridPoint" xml:space="preserve">
     <value>({0}, {1})</value>
   </data>
-  <data name="NameLedMatrix" xml:space="preserve">
+	<data name="NameLedMatrix" xml:space="preserve">
     <value>LED Matrix</value>
   </data>
-  <data name="WebSiteDownloadUri" xml:space="preserve">
+	<data name="WebSiteDownloadUri" xml:space="preserve">
     <value>http://www.logiccircuit.org/download.html</value>
   </data>
-  <data name="CommandHyperlink" xml:space="preserve">
+	<data name="CommandHyperlink" xml:space="preserve">
     <value>Hyperlink</value>
   </data>
-  <data name="TitleFilter" xml:space="preserve">
+	<data name="TitleFilter" xml:space="preserve">
     <value>_Filter:</value>
   </data>
-  <data name="TitleStop" xml:space="preserve">
+	<data name="TitleStop" xml:space="preserve">
     <value>_Stop</value>
   </data>
-  <data name="ColorPickerTabStandard" xml:space="preserve">
+	<data name="ColorPickerTabStandard" xml:space="preserve">
     <value>Standard</value>
   </data>
-  <data name="CircuitProbeToolTip" xml:space="preserve">
+	<data name="CircuitProbeToolTip" xml:space="preserve">
     <value>Prüfspitze {0}</value>
   </data>
-  <data name="CaptionName" xml:space="preserve">
+	<data name="CaptionName" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="WireDisplayBitWidth" xml:space="preserve">
+	<data name="WireDisplayBitWidth" xml:space="preserve">
     <value>Busbreite: {0}</value>
   </data>
-  <data name="WireDisplayValue" xml:space="preserve">
+	<data name="WireDisplayValue" xml:space="preserve">
     <value>Wert: {0}</value>
   </data>
-  <data name="WireDisplayDisconnected" xml:space="preserve">
+	<data name="WireDisplayDisconnected" xml:space="preserve">
     <value>Es besteht keine Verbindung.</value>
   </data>
-  <data name="CaptionPinSide" xml:space="preserve">
+	<data name="CaptionPinSide" xml:space="preserve">
     <value>Pin-Seite</value>
   </data>
-  <data name="CaptionSensorType" xml:space="preserve">
+	<data name="CaptionSensorType" xml:space="preserve">
     <value>Sensor Typ</value>
   </data>
-  <data name="CommandEditFind" xml:space="preserve">
+	<data name="CommandEditFind" xml:space="preserve">
     <value>Suchen</value>
   </data>
-  <data name="ErrorBadHexNumber" xml:space="preserve">
+	<data name="ErrorBadHexNumber" xml:space="preserve">
     <value>Ungültige hexadezimale Zahl</value>
   </data>
-  <data name="ErrorBadInterval" xml:space="preserve">
+	<data name="ErrorBadInterval" xml:space="preserve">
     <value>Das Minimalwert muss kleiner oder gleich dem Maximalwert sein</value>
   </data>
-  <data name="ErrorBadPositiveNumber" xml:space="preserve">
+	<data name="ErrorBadPositiveNumber" xml:space="preserve">
     <value>Zahl größer Null erwartet</value>
   </data>
-  <data name="ErrorEmptySeries" xml:space="preserve">
+	<data name="ErrorEmptySeries" xml:space="preserve">
     <value>Die Serie darf nicht leer sein</value>
   </data>
-  <data name="ErrorSeriesItem" xml:space="preserve">
+	<data name="ErrorSeriesItem" xml:space="preserve">
     <value>Fehler in {0}. Es muss ein Paar aus hexadezimalen Nummern sein, getrennt durch einen :</value>
     <comment>{string item}</comment>
   </data>
-  <data name="ErrorSeriesItemOrder" xml:space="preserve">
+	<data name="ErrorSeriesItemOrder" xml:space="preserve">
     <value>Fehler in {0}. Jeder weitere Schritt muß größer als der vorherige sein.</value>
   </data>
-  <data name="NameSensor" xml:space="preserve">
+	<data name="NameSensor" xml:space="preserve">
     <value>Sensor</value>
   </data>
-  <data name="NameSound" xml:space="preserve">
+	<data name="NameSound" xml:space="preserve">
     <value>Summer</value>
   </data>
-  <data name="SensorTypeManual" xml:space="preserve">
+	<data name="SensorTypeManual" xml:space="preserve">
     <value>Manuell</value>
   </data>
-  <data name="SensorTypeRandom" xml:space="preserve">
+	<data name="SensorTypeRandom" xml:space="preserve">
     <value>Zufällig</value>
   </data>
-  <data name="SensorTypeSeries" xml:space="preserve">
+	<data name="SensorTypeSeries" xml:space="preserve">
     <value>Serie</value>
   </data>
-  <data name="TitleFind" xml:space="preserve">
+	<data name="TitleFind" xml:space="preserve">
     <value>Suche Schaltung</value>
   </data>
-  <data name="TitleLoopSeries" xml:space="preserve">
+	<data name="TitleLoopSeries" xml:space="preserve">
     <value>Serie wiederholen</value>
   </data>
-  <data name="TitlePinSide" xml:space="preserve">
+	<data name="TitlePinSide" xml:space="preserve">
     <value>Pin _Seite:</value>
   </data>
-  <data name="TitleSearch" xml:space="preserve">
+	<data name="TitleSearch" xml:space="preserve">
     <value>Suchen</value>
   </data>
-  <data name="TitleSearchPattern" xml:space="preserve">
+	<data name="TitleSearchPattern" xml:space="preserve">
     <value>Suchen nach:</value>
   </data>
-  <data name="TitleSensorManualInitialValue" xml:space="preserve">
+	<data name="TitleSensorManualInitialValue" xml:space="preserve">
     <value>Initialer _Wert:</value>
   </data>
-  <data name="TitleSensorRandomMax" xml:space="preserve">
+	<data name="TitleSensorRandomMax" xml:space="preserve">
     <value>M_aximale Schritte:</value>
   </data>
-  <data name="TitleSensorRandomMin" xml:space="preserve">
+	<data name="TitleSensorRandomMin" xml:space="preserve">
     <value>_Minimale Schritte:</value>
   </data>
-  <data name="TitleSensorType" xml:space="preserve">
+	<data name="TitleSensorType" xml:space="preserve">
     <value>Sensor _Typ:</value>
   </data>
-  <data name="TitleSeries" xml:space="preserve">
+	<data name="TitleSeries" xml:space="preserve">
     <value>S_erien:</value>
   </data>
-  <data name="ToolTipDescriptorClock" xml:space="preserve">
+	<data name="ToolTipDescriptorClock" xml:space="preserve">
     <value>Generiert ein digitales Taktsignal bestehend aus 0 und 1
 und wird benutzt um Schaltungen zu takten.</value>
   </data>
-  <data name="ToolTipDescriptorPin" xml:space="preserve">
+	<data name="ToolTipDescriptorPin" xml:space="preserve">
     <value>Wird benutzt um einen Anschluß bereitzustellen welcher Daten
 an andere Schaltungen senden oder von dort empfangen kann.</value>
   </data>
-  <data name="ToolTipDescriptorProbe" xml:space="preserve">
+	<data name="ToolTipDescriptorProbe" xml:space="preserve">
     <value>Fügt eine Prüfspitze zur Schaltung hinzu um den aktuellen 
 Zustand der eingeschalteten Schaltung zu untersuchen.
 Klicken Sie doppelt auf die Prüfspitze um die vergangenen Meßwerte
 zu sehen oder diese auf dem Oszilloskop zu betrachten.</value>
   </data>
-  <data name="ToolTipDescriptorSensor" xml:space="preserve">
+	<data name="ToolTipDescriptorSensor" xml:space="preserve">
     <value>Erzeugt Daten aus einer "externen Quelle" als Serie von vordefinierten,
 zufällig erzeugten oder manuell eingegebenen Werten.</value>
   </data>
-  <data name="ToolTipDescriptorSplitter" xml:space="preserve">
+	<data name="ToolTipDescriptorSplitter" xml:space="preserve">
     <value>Ermöglicht die Erstellung eines Leitungsstangs oder
 die Aufteilung in einzelne Verbindungen.
 Die Nutzung von Verzweigern und Multi-Bit-Anschlüssen kann
 Schaltpläne und deren Verständnis signifikant vereinfachen.</value>
   </data>
-  <data name="ToolTipDescriptorText" xml:space="preserve">
+	<data name="ToolTipDescriptorText" xml:space="preserve">
     <value>Plazieren Sie Notizen irgendwo in der Schaltung um Ihre Schaltung zu
 kommentieren, erstellen Sie hilfreiche Links zu beliebigen Webseiten
 und dekorieren Sie Ihre Schaltung mit Bildern.</value>
   </data>
-  <data name="ToolTipDescriptorTriState" xml:space="preserve">
+	<data name="ToolTipDescriptorTriState" xml:space="preserve">
     <value>Kann drei Zustände am Ausgang haben: 1, 0 und hochohmig (Z).
 Der hochohmige Zustand (Z) hat keinen Einfluß auf die Logik
 einer digitalen Schaltung. Diese Bausteine werden für die Bussysteme
@@ -1304,54 +1304,54 @@ eines Prozessors benutzt um das Senden von Daten durch mehrere Quellen
 zu ermöglichen. Eine Gruppe aus Tri-State-Treibern mit einer passenden
 Steuerung gleicht grundsätzlich einem Multiplexer.</value>
   </data>
-  <data name="ToolTipDevicePinSide" xml:space="preserve">
+	<data name="ToolTipDevicePinSide" xml:space="preserve">
     <value>Wählen Sie die Seite an welcher sich der Anschluß befinden soll.</value>
   </data>
-  <data name="ToolTipSensor" xml:space="preserve">
+	<data name="ToolTipSensor" xml:space="preserve">
     <value>Sensor {0}</value>
     <comment>{string notation}</comment>
   </data>
-  <data name="ToolTipSensorBitWidth" xml:space="preserve">
+	<data name="ToolTipSensorBitWidth" xml:space="preserve">
     <value>Wählen Sie die Bitbreite des Sensors.</value>
   </data>
-  <data name="ToolTipSensorManualInitialValue" xml:space="preserve">
+	<data name="ToolTipSensorManualInitialValue" xml:space="preserve">
     <value>Geben Sie den Initialwert als Hexadezimalzahl ein.</value>
   </data>
-  <data name="ToolTipSensorManualValue" xml:space="preserve">
+	<data name="ToolTipSensorManualValue" xml:space="preserve">
     <value>Geben Sie einen Hexadezimalwert ein und drücken Sie Enter.</value>
   </data>
-  <data name="ToolTipSensorNotation" xml:space="preserve">
+	<data name="ToolTipSensorNotation" xml:space="preserve">
     <value>Geben Sie die Bezeichnung des Sensors ein.</value>
   </data>
-  <data name="ToolTipSensorRandomMax" xml:space="preserve">
+	<data name="ToolTipSensorRandomMax" xml:space="preserve">
     <value>Geben Sie die maximale Anzahl der Schritte ein bevor der Sensor seinen Meßwert ändert.</value>
   </data>
-  <data name="ToolTipSensorRandomMin" xml:space="preserve">
+	<data name="ToolTipSensorRandomMin" xml:space="preserve">
     <value>Geben Sie die minimale Anzahl der Schritte ein bevor der Sensor seinen Meßwert ändert.</value>
   </data>
-  <data name="ToolTipSensorType" xml:space="preserve">
+	<data name="ToolTipSensorType" xml:space="preserve">
     <value>Wählen Sie von wo der Sensor seine Meßwert herbekommt.</value>
   </data>
-  <data name="ToolTipSeriesData" xml:space="preserve">
+	<data name="ToolTipSeriesData" xml:space="preserve">
     <value>Bitte geben Sie die Meßwert-Reihe des Sensors in der Form &lt;cycle&gt;:&lt;value&gt; ein,
 wobei beide Daten Hexadezimalwerte sein müssen. Wenn der aktuelle Schritt
 einen geraden Wert oder 0 hat entspricht dies einem Taktwechsel von
 0 auf 1, wenn er ungerade ist entspricht dies einem Taktwechsel von 1 auf 0.</value>
   </data>
-  <data name="ToolTipSound" xml:space="preserve">
+	<data name="ToolTipSound" xml:space="preserve">
     <value>Summer {0}</value>
     <comment>{string notation}</comment>
   </data>
-  <data name="ToolTipSoundNotation" xml:space="preserve">
+	<data name="ToolTipSoundNotation" xml:space="preserve">
     <value>Geben Sie eine Bezeichnung für den Summer ein.</value>
   </data>
-  <data name="NameGraphicsArray" xml:space="preserve">
+	<data name="NameGraphicsArray" xml:space="preserve">
     <value>Grafik-Display</value>
   </data>
-  <data name="CaptionGraphicsArrayBPP" xml:space="preserve">
+	<data name="CaptionGraphicsArrayBPP" xml:space="preserve">
     <value>Bits pro Pixel</value>
   </data>
-  <data name="ToolTipDescriptorGraphicsArray" xml:space="preserve">
+	<data name="ToolTipDescriptorGraphicsArray" xml:space="preserve">
     <value>Ein Grafik-Display kann im internen Speicher abgelegte Daten anzeigen.
 Wird zusammen mit komplexen Schaltungen wie Computern oder Controllern benutzt.
 Es ist möglich die Größe und Farbtiefe/Grafik zu wählen:
@@ -1360,71 +1360,86 @@ Es ist möglich die Größe und Farbtiefe/Grafik zu wählen:
 4 Bits/Pixel - 16 Farben
 8 bits/pixel - 256 colors</value>
   </data>
-  <data name="ToolTipGraphicsArray" xml:space="preserve">
+	<data name="ToolTipGraphicsArray" xml:space="preserve">
     <value>{0} {1}x{2} mit {3} Bit(s) pro Pixel ({4} Farben)</value>
   </data>
-  <data name="ToolTipGraphicsArrayBPP" xml:space="preserve">
+	<data name="ToolTipGraphicsArrayBPP" xml:space="preserve">
     <value>Wählen Sie die Anzahl der Bits pro Pixel</value>
   </data>
-  <data name="ErrorBadIntegerInRange" xml:space="preserve">
+	<data name="ErrorBadIntegerInRange" xml:space="preserve">
     <value>Erwarte Zahl im Bereich {0} - {1}.</value>
   </data>
-  <data name="TitleGraphicsArrayBPP" xml:space="preserve">
+	<data name="TitleGraphicsArrayBPP" xml:space="preserve">
     <value>_Bits pro Pixel:</value>
   </data>
-  <data name="TitleHeight" xml:space="preserve">
+	<data name="TitleHeight" xml:space="preserve">
     <value>_Höhe:</value>
   </data>
-  <data name="TitleWidth" xml:space="preserve">
+	<data name="TitleWidth" xml:space="preserve">
     <value>_Breite:</value>
   </data>
-  <data name="ToolTipGraphicsArrayHeight" xml:space="preserve">
+	<data name="ToolTipGraphicsArrayHeight" xml:space="preserve">
     <value>Geben Sie die Höhe des Grafik-Displays in Pixel ein.</value>
   </data>
-  <data name="ToolTipGraphicsArrayWidth" xml:space="preserve">
+	<data name="ToolTipGraphicsArrayWidth" xml:space="preserve">
     <value>Geben Sie die Breite des Grafik-Displays in Pixel ein.</value>
   </data>
-  <data name="ErrorWriteNotConnected" xml:space="preserve">
+	<data name="ErrorWriteNotConnected" xml:space="preserve">
     <value>Eingang hat keine Verbindung zum Grafik-Display {0}</value>
   </data>
-  <data name="ErrorBadHexInRange" xml:space="preserve">
+	<data name="ErrorBadHexInRange" xml:space="preserve">
     <value>Erwarte Zahl im Bereich {0:X} - {1:X}.</value>
   </data>
-  <data name="CommandToolsIronPython" xml:space="preserve">
+	<data name="CommandToolsIronPython" xml:space="preserve">
     <value>IronPython Konsole</value>
   </data>
-  <data name="MessageLoadAutoSavedFile" xml:space="preserve">
+	<data name="MessageLoadAutoSavedFile" xml:space="preserve">
     <value>Datei "{0}" wurde nicht korrekt gespeichert.
 Möchten Sie den automatisch gespeicherten Stand dieser Datei laden?</value>
   </data>
-  <data name="TitleAutoSave" xml:space="preserve">
+	<data name="TitleAutoSave" xml:space="preserve">
     <value>Änderungen alle:</value>
   </data>
-  <data name="TitleMinutesUnits" xml:space="preserve">
+	<data name="TitleMinutesUnits" xml:space="preserve">
     <value>Minuten automatisch speichern.</value>
   </data>
-  <data name="TitlePinIndex" xml:space="preserve">
+	<data name="TitlePinIndex" xml:space="preserve">
     <value>Pin Reihenfolge</value>
   </data>
-  <data name="TitlePinIndexReset" xml:space="preserve">
+	<data name="TitlePinIndexReset" xml:space="preserve">
     <value>Zurücksetzen auf _grafische Anordnung</value>
   </data>
-  <data name="TitleStartupCircuit" xml:space="preserve">
+	<data name="TitleStartupCircuit" xml:space="preserve">
     <value>_Inbetriebnahme:</value>
   </data>
-  <data name="TitleCurrent" xml:space="preserve">
+	<data name="TitleCurrent" xml:space="preserve">
     <value>Aktueller Schaltplan</value>
   </data>
-  <data name="TitleBottom" xml:space="preserve">
+	<data name="TitleBottom" xml:space="preserve">
     <value>_Unten:</value>
   </data>
-  <data name="TitleLeft" xml:space="preserve">
+	<data name="TitleLeft" xml:space="preserve">
     <value>_Links:</value>
   </data>
-  <data name="TitleRight" xml:space="preserve">
+	<data name="TitleRight" xml:space="preserve">
     <value>_Rechts:</value>
   </data>
-  <data name="TitleTop" xml:space="preserve">
+	<data name="TitleTop" xml:space="preserve">
     <value>_Oben:</value>
   </data>
+	<data name="MemoryAddress2PinName" xml:space="preserve">
+		<value>Speicher-Adressport 2</value>
+	</data>
+	<data name="MemoryAddress2PinNotation" xml:space="preserve">
+		<value>a2</value>
+	</data>
+	<data name="MemoryData2PinName" xml:space="preserve">
+		<value>Speicher-Datenport 2</value>
+	</data>
+	<data name="MemoryData2PinNotation" xml:space="preserve">
+		<value>d2</value>
+	</data>
+	<data name="TitleDualPort" xml:space="preserve">
+		<value>_Dual port</value>
+	</data>
 </root>
