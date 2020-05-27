@@ -1426,4 +1426,19 @@ Voulez-vous charger l'état sauvegardé automatiquement de ce fichier ?</value>
 	<data name="TitleTop" xml:space="preserve">
 		<value>_Haut :</value>
 	</data>
+	<data name="MemoryAddress2PinName" xml:space="preserve">
+		<value>Port d'adresse mémoire 2</value>
+	</data>
+	<data name="MemoryAddress2PinNotation" xml:space="preserve">
+		<value>a2</value>
+	</data>
+	<data name="MemoryData2PinName" xml:space="preserve">
+		<value>Port de donnée d'entrée 2</value>
+	</data>
+	<data name="MemoryData2PinNotation" xml:space="preserve">
+		<value>d2</value>
+	</data>
+	<data name="TitleDualPort" xml:space="preserve">
+		<value>Port _double</value>
+	</data>
 </root>
