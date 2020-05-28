@@ -100,12 +100,12 @@ namespace LogicCircuit.DataPersistent {
 						}
 					}
 					System.Text.StringBuilder text = new System.Text.StringBuilder();
-					text.AppendFormat("{0}<", node.IsLeaf ? "Leaf" : "Node");
+					text.AppendFormat(System.Globalization.CultureInfo.InvariantCulture, "{0}<", node.IsLeaf ? "Leaf" : "Node");
 					for(int i = 0; i < node.Count; i++) {
 						if(0 < i) { text.Append(", "); }
-						text.AppendFormat("C{0}={1}, K{0}={2}", i, c(i).Value, k(i));
+						text.AppendFormat(System.Globalization.CultureInfo.InvariantCulture, "C{0}={1}, K{0}={2}", i, c(i).Value, k(i));
 					}
-					text.AppendFormat(", C{0}={1}>", node.Count, c(node.Count).Value);
+					text.AppendFormat(System.Globalization.CultureInfo.InvariantCulture, ", C{0}={1}>", node.Count, c(node.Count).Value);
 					return text.ToString();
 				}
 			#endif
@@ -808,13 +808,13 @@ namespace LogicCircuit.DataPersistent {
 					return result;
 				} else {
 					Debug.Assert(0 == level);
-					text.AppendFormat(" {0}<{1}>(", rowId.ToString(), node.Count);
+					text.AppendFormat(System.Globalization.CultureInfo.InvariantCulture, " {0}<{1}>(", rowId.ToString(), node.Count);
 					for(int i = 0; i < node.Count; i++) {
 						if(0 < i) {
 							text.Append(", ");
 						}
 						Key key = this.keyFields[i].GetValue(ref node);
-						text.AppendFormat("{{{0}, {1}}}", key.field.ToString(), key.rowId.ToString());
+						text.AppendFormat(System.Globalization.CultureInfo.InvariantCulture, "{{{0}, {1}}}", key.field.ToString(), key.rowId.ToString());
 					}
 					text.Append(")");
 					return !node.IsLeaf;

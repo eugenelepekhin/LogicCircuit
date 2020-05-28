@@ -23,9 +23,9 @@
 		<Property Id="ARPURLUPDATEINFO" Value="http://www.logiccircuit.org/download.html"/>
 		<Property Id="ARPCOMMENTS" Value="LogicCircuit – is educational software for designing and simulating digital logic circuits"/>
 
-		<PropertyRef Id="NETFRAMEWORK45"/>
-		<Condition Message="This application requires Microsoft .NET Framework 4.5. Please install the .NET Framework then run this installer again.">
-			<![CDATA[Installed OR NETFRAMEWORK45]]>
+		<PropertyRef Id="WIXNETFX4RELEASEINSTALLED"/>
+		<Condition Message="This application requires Microsoft .NET Framework 4.7.2. Please install the .NET Framework then run this installer again.">
+			<![CDATA[Installed OR (WIXNETFX4RELEASEINSTALLED >= "#461808")]]>
 		</Condition>
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed."/>
@@ -36,6 +36,7 @@
 				<Directory Id="INSTALLFOLDER" Name="LogicCircuit">
 					<Component Id="ApplicationComponent">
 						<File Id="Application_exe" Source="$(var.LogicCircuit.TargetPath)" KeyPath="yes"/>
+						<File Id="Application_exe_config" Source="$(var.LogicCircuit.TargetPath).config"/>
 						<File Id="License_txt" Source="$(var.LogicCircuit.TargetDir)License.txt"/>
 						<ProgId Id="RegFileExtention" Icon="Application_exe" IconIndex="0" Description="LogicCircuit Project file">
 							<Extension Id="CircuitProject" ContentType="text/XML">

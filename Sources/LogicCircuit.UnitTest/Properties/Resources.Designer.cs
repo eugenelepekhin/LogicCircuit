@@ -19,7 +19,7 @@ namespace LogicCircuit.UnitTest.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -83,7 +83,7 @@ namespace LogicCircuit.UnitTest.Properties {
         ///&lt;lc:CircuitProject xmlns:lc=&quot;http://LogicCircuit.net/2.0.0.7/CircuitProject.xsd&quot;&gt;
         ///	&lt;lc:Project&gt;
         ///		&lt;lc:ProjectId&gt;c799e151-e134-4541-93cf-025b9828f209&lt;/lc:ProjectId&gt;
-        ///		&lt;lc:LogicalCircuitId&gt;1209c505-03bc-4cfd-834a-82856c1f07fe&lt;/lc:LogicalCircuitId&gt;
+        ///		&lt;lc:LogicalCircuitId&gt;acfe3983-f86c-4788-a9e1-8dfdbc5fac00&lt;/lc:LogicalCircuitId&gt;
         ///	&lt;/lc:Project&gt;
         ///	&lt;lc:LogicalCircuit&gt;
         ///		&lt;lc:LogicalCircuitId&gt;1209c505-03bc-4cfd-834a-82856c1f07fe&lt;/lc:LogicalCircuitId&gt;

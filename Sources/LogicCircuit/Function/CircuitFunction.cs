@@ -7,7 +7,7 @@ using System.Text;
 namespace LogicCircuit {
 	public abstract class CircuitFunction {
 		[SuppressMessage("Microsoft.Security", "CA2105:ArrayFieldsShouldNotBeReadOnly")]
-		protected static readonly int[] EmptyList = new int[0];
+		protected static readonly int[] EmptyList = Array.Empty<int>();
 
 		private readonly int[] parameter;
 		private readonly int[] result;
