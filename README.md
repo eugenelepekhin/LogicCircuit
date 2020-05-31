@@ -4,5 +4,5 @@
 
 ### How do I build it ###
 
-* Use Vidual Studio.
+* Use Visual Studio.
 * Install Wix Toolset extension
