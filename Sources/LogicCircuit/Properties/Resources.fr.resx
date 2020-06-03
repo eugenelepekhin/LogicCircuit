@@ -329,7 +329,7 @@ Le fichier que vous essayez d'ouvrir est endommagé ou a été créé par une ve
     <value>Adresse mémoire</value>
   </data>
 	<data name="MemoryDataInPinName" xml:space="preserve">
-    <value>Entrée de données mémoire</value>
+    <value>Donnée d'entrée</value>
   </data>
 	<data name="MemoryDataPinName" xml:space="preserve">
     <value>Mémoire de données</value>
