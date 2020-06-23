@@ -8,10 +8,10 @@
 		Note the minor version part must be 4 digit number as the MSi does not support minor versions.
 		To add new locale add new directory, component and file in it and add component id under Feature node.
 	-->
-	<Product Id="{21CE6ACB-D8B3-464E-A7F7-4FB228F9162E}"
+	<Product Id="{61A9CF3C-4110-4BB4-89A7-3D3D6C0FC1DA}"
 		UpgradeCode="d2d9ab38-631b-471d-b6c1-2c4f4391fe5e"
 		Name="LogicCircuit"
-		Version="2.20.0515"
+		Version="2.20.0623"
 		Manufacturer="LogicCircuit"
 		Language="1033"
 	>
@@ -144,6 +144,11 @@
 							<File Id="ru" Source="$(var.LogicCircuit.TargetDir)ru\$(var.LogicCircuit.TargetName).resources.dll"/>
 						</Component>
 					</Directory>
+					<Directory Id="sv" Name="sv">
+						<Component Id="svComponent">
+							<File Id="sv" Source="$(var.LogicCircuit.TargetDir)sv\$(var.LogicCircuit.TargetName).resources.dll"/>
+						</Component>
+					</Directory>
 					<Directory Id="tr" Name="tr">
 						<Component Id="trComponent">
 							<File Id="tr" Source="$(var.LogicCircuit.TargetDir)tr\$(var.LogicCircuit.TargetName).resources.dll"/>
@@ -200,6 +205,7 @@
 			<ComponentRef Id="pt_BRComponent"/>
 			<ComponentRef Id="pt_PTComponent"/>
 			<ComponentRef Id="ruComponent"/>
+			<ComponentRef Id="svComponent"/>
 			<ComponentRef Id="trComponent"/>
 			<ComponentRef Id="ukComponent"/>
 			<ComponentRef Id="zh_HansComponent"/>
