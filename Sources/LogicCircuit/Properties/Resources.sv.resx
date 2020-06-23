@@ -1043,7 +1043,10 @@ sådan krets kan inte användas mer än en gång per krets för att det kommer s
 		<value>Medvärkan:</value>
 	</data>
 	<data name="ToolTipIsDisplay" xml:space="preserve">
-		<value>När du markerar Logisk Krets till att visa visuela element alla visuella symboler på denna krets kommer bli synliga live på deras symboler. Skärmar är: LED, LED Matrix, Grafisk array, knapp, eller andra logiska kretsar som visar sisuella element</value>
+		<value>När du markerar Logisk Krets till att visa visuela element
+alla visuella symboler på denna krets kommer bli synliga live på deras symboler.
+Skärmar är: LED, LED Matrix, Grafisk array, knapp, eller andra
+logiska kretsar som visar sisuella element</value>
 	</data>
 	<data name="CaptionName" xml:space="preserve">
 		<value>Namn</value>
@@ -1178,17 +1181,25 @@ klocka från 0 till 1, när det är udda så byter klockan från 1 till 0.</valu
 Flytta stift på kretsen för att ändra deras relativa position på symboler av denna krets.</value>
 	</data>
 	<data name="ToolTipDescriptorProbe" xml:space="preserve">
-		<value>Lägg till och kopla sonder till din krets för att observera det aktuella läget av en startad krets på ytan av sonden, sondens historik visas när du dubbel klickar på sonden aller kollar dens data på oscilloskopet.</value>
+		<value>Lägg till och kopla sonder till din krets för att observera
+det aktuella läget av en startad krets på ytan av sonden,
+sondens historik visas när du dubbel klickar på sonden
+aller kollar dens data på oscilloskopet.</value>
 	</data>
 	<data name="ToolTipDescriptorSensor" xml:space="preserve">
-		<value>Ger data från en "extern källa" som en serie av för bestömda slumpmessigt valda, eller manuellr valda värden.</value>
+		<value>Ger data från en "extern källa" som en serie av för
+bestömda slumpmessigt valda, eller manuellr valda värden.</value>
 	</data>
 	<data name="ToolTipDescriptorSplitter" xml:space="preserve">
-		<value>Gör det möjligt att skapa en kabels sele eller separera kabeln till individuelle kablar.
-Användadet av delare och multi-bttift kan göra det mycket simplare och lättare att förstå vad som händer.</value>
+		<value>Gör det möjligt att skapa en kabels sele eller
+separera kabeln till individuelle kablar.
+Användadet av delare och multi-bttift kan
+göra det mycket simplare och lättare att förstå vad som händer.</value>
 	</data>
 	<data name="ToolTipDescriptorText" xml:space="preserve">
-		<value>Placera text var som helst på diagramet för att kommetera din krets, ge hjälpfulla länkar rill vilken hemsida som helst och decorera din krets med bilder</value>
+		<value>Placera text var som helst på diagramet för att kommetera din krets,
+ge hjälpfulla länkar rill vilken hemsida som helst
+och decorera din krets med bilder</value>
 	</data>
 	<data name="TitleCurrent" xml:space="preserve">
 		<value>Nuvarande logisk krets</value>
@@ -1218,7 +1229,8 @@ en grupp av tre-lägen som kör en lina med en lämplig kontroll krets altså si
 	</data>
 	<data name="ToolTipDescriptorGraphicsArray" xml:space="preserve">
 		<value>(punkt matrix skärm) kan visa data sparad i intärn minnet.
-Använd med advancerade kretsar som dattorer eller kontrolerare. gör det möjligt att välja en storlek och förg djup/schema:
+Använd med advancerade kretsar som dattorer eller kontrolerare.
+gör det möjligt att välja en storlek och förg djup/schema:
 1 bit/pixel - svart och vit
 2 bitar/pixel - 4 nyanser av grå
 4 bitar/pixel - 16 färger
@@ -1398,5 +1410,8 @@ Vill du ladda an automatiskt sparad fil istället?</value>
 	</data>
 	<data name="MemoryAddress2PinNotation" xml:space="preserve">
 		<value>a2</value>
+	</data>
+	<data name="MemoryData2PinNotation" xml:space="preserve">
+		<value>d2</value>
 	</data>
 </root>
