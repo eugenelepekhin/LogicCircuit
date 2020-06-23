@@ -257,7 +257,7 @@ Filen du försöker öppna har antingen blivit korrupt eller så var den skapad 
 		<value>Markera Alla Sonder</value>
 	</data>
 	<data name="CommandEditSelectAllProbesWithWire" xml:space="preserve">
-		<value>Markera Alla sonder och Ihopkopplade Kablar </value>
+		<value>Markera Alla sonder och Ihopkopplade Kablar</value>
 	</data>
 	<data name="CommandEditSelectAllWires" xml:space="preserve">
 		<value>Markera Alla Kablar</value>
@@ -621,7 +621,7 @@ VIll du byta ut den?</value>
 		<value>Att kryssa i denna ruta kan leda till att användargränssnittet på visa dattorer inte svarar.</value>
 	</data>
 	<data name="ToolTipPinBitWidth" xml:space="preserve">
-		<value>Välj bit bredd av stiftet </value>
+		<value>Välj bit bredd av stiftet</value>
 	</data>
 	<data name="ToolTipPinSide" xml:space="preserve">
 		<value>Välj vilken sida av kretsens gylf det nya stiftet ska sitta på</value>
@@ -702,7 +702,7 @@ VIll du byta ut den?</value>
 		<value>Minne</value>
 	</data>
 	<data name="CommandFileOpenRecent" xml:space="preserve">
-		<value>Öpna _Senaste </value>
+		<value>Öpna _Senaste</value>
 	</data>
 	<data name="MessageInvalidRecentFile" xml:space="preserve">
 		<value>Filen {0} kan inte öppnas.
@@ -841,7 +841,7 @@ Vill du ta bort den från Senate Filler listan</value>
 		<value>Data i utklipp är korrupt och kan inte klistras in.</value>
 	</data>
 	<data name="DefaultGateShape" xml:space="preserve">
-		<value>Formad</value>
+		<value>Shaped</value>
 	</data>
 	<data name="CommandTruthTable" xml:space="preserve">
 		<value>Sanningstabell</value>
@@ -1043,7 +1043,7 @@ sådan krets kan inte användas mer än en gång per krets för att det kommer s
 		<value>Medvärkan:</value>
 	</data>
 	<data name="ToolTipIsDisplay" xml:space="preserve">
-		<value>När du markerar Logisk Krets till att visa visuela element alla visuella symboler på denna krets kommer bli synliga live på deras symboler. Skärmar är: LED, LED Matrix, Grafisk array, knapp, eller andra logiska kretsar som visar sisuella element </value>
+		<value>När du markerar Logisk Krets till att visa visuela element alla visuella symboler på denna krets kommer bli synliga live på deras symboler. Skärmar är: LED, LED Matrix, Grafisk array, knapp, eller andra logiska kretsar som visar sisuella element</value>
 	</data>
 	<data name="CaptionName" xml:space="preserve">
 		<value>Namn</value>
@@ -1147,7 +1147,7 @@ sådan krets kan inte användas mer än en gång per krets för att det kommer s
 	<data name="ToolTipSeriesData" xml:space="preserve">
 		<value>Ge en serie av sensor mätningar i form &lt;cykel&gt;:&lt;värde&gt; där både cykeln och värdet är hexadecimalt.
 När cykeln är ett jämt numer eller 0 so kommer den byta
-klocka från 0 till 1, när det är udda så byter klockan från 1 till 0. </value>
+klocka från 0 till 1, när det är udda så byter klockan från 1 till 0.</value>
 	</data>
 	<data name="NameSound" xml:space="preserve">
 		<value>Surrare</value>
