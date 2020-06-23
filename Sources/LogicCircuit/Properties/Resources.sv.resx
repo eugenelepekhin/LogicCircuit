@@ -1,0 +1,1276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<!-- 
+		Microsoft ResX Schema
+
+		Version 1.3
+
+		The primary goals of this format is to allow a simple XML format 
+		that is mostly human readable. The generation and parsing of the 
+		various data types are done through the TypeConverter classes 
+		associated with the data types.
+
+		Example:
+
+		... ado.net/XML headers & schema ...
+		<resheader name="resmimetype">text/microsoft-resx</resheader>
+		<resheader name="version">1.3</resheader>
+		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+		<data name="Name1">this is my long string</data>
+		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+			[base64 mime encoded serialized .NET Framework object]
+		</data>
+		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+			[base64 mime encoded string representing a byte array form of the .NET Framework object]
+		</data>
+
+		There are any number of "resheader" rows that contain simple 
+		name/value pairs.
+
+		Each data row contains a name, and value. The row also contains a 
+		type or mimetype. Type corresponds to a .NET class that support 
+		text/value conversion through the TypeConverter architecture. 
+		Classes that don't support this are serialized and stored with the 
+		mimetype set.
+
+		The mimetype is used for serialized objects, and tells the 
+		ResXResourceReader how to depersist the object. This is currently not 
+		extensible. For a given mimetype the value must be set accordingly:
+
+		Note - application/x-microsoft.net.object.binary.base64 is the format 
+		that the ResXResourceWriter will generate, however the reader can 
+		read any of the formats listed below.
+
+		mimetype: application/x-microsoft.net.object.binary.base64
+		value   : The object must be serialized with 
+			: System.Serialization.Formatters.Binary.BinaryFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.soap.base64
+		value   : The object must be serialized with 
+			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.bytearray.base64
+		value   : The object must be serialized into a byte array 
+			: using a System.ComponentModel.TypeConverter
+			: and then encoded with base64 encoding.
+	-->
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>1.3</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="FileFilter" xml:space="preserve">
+		<value>Krets Projekt (*{0})|*{0}|Alla Filer(*.*)|*.*</value>
+	</data>
+	<data name="FileSaved" xml:space="preserve">
+		<value>Fil {0} sparad.</value>
+	</data>
+	<data name="GateAndNotation" xml:space="preserve">
+		<value>&amp;</value>
+	</data>
+	<data name="GateClockName" xml:space="preserve">
+		<value>Klocka</value>
+	</data>
+	<data name="GateLedName" xml:space="preserve">
+		<value>LED</value>
+	</data>
+	<data name="GateLedNotation" xml:space="preserve">
+		<value>LED</value>
+	</data>
+	<data name="CircuitProbeName" xml:space="preserve">
+		<value>Sond</value>
+	</data>
+	<data name="GateShapeRectangular" xml:space="preserve">
+		<value>Rektangulär</value>
+	</data>
+	<data name="GateShapeShaped" xml:space="preserve">
+		<value>Formad</value>
+	</data>
+	<data name="LogicalCircuitName" xml:space="preserve">
+		<value>Krets</value>
+	</data>
+	<data name="MainFrameCaption" xml:space="preserve">
+		<value>Logisk Krets {0}</value>
+	</data>
+	<data name="MemoryAddressPinName" xml:space="preserve">
+		<value>Minnes adress</value>
+	</data>
+	<data name="MemoryDataInPinName" xml:space="preserve">
+		<value>Ingående minnes data</value>
+	</data>
+	<data name="MemoryDataPinName" xml:space="preserve">
+		<value>Minnes data</value>
+	</data>
+	<data name="MemoryWritePinName" xml:space="preserve">
+		<value>RAM skriv ingång.
+Minnes värdet uppdateras på {0}</value>
+	</data>
+	<data name="MessageSaveFile" xml:space="preserve">
+		<value>Projekt {0} har förendrats.
+Vill du spara det?</value>
+	</data>
+	<data name="ErrorProjectCount" xml:space="preserve">
+		<value>Fler än ett projekt i filen</value>
+	</data>
+	<data name="ErrorUnknownVersion" xml:space="preserve">
+		<value>Försök att ladda en okänd version av Krets Projekt.
+Filen du försöker öppna har antingen blivit korrupt eller så var den skapad med en nyare version av Logisk Krets programvaran. se &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt; för nyare versioner</value>
+	</data>
+	<data name="OperationCanceled" xml:space="preserve">
+		<value>Operationen avbryten.</value>
+	</data>
+	<data name="Ready" xml:space="preserve">
+		<value>Redo.</value>
+	</data>
+	<data name="TitleCancel" xml:space="preserve">
+		<value>Avbryt</value>
+	</data>
+	<data name="TitleNo" xml:space="preserve">
+		<value>_Nej</value>
+	</data>
+	<data name="TitleOK" xml:space="preserve">
+		<value>Okej</value>
+	</data>
+	<data name="TitleShowDetails" xml:space="preserve">
+		<value>_Visa detaljer</value>
+	</data>
+	<data name="TitleYes" xml:space="preserve">
+		<value>_Ja</value>
+	</data>
+	<data name="WriteOn0" xml:space="preserve">
+		<value>sjunker från 1 till 0</value>
+	</data>
+	<data name="WriteOn1" xml:space="preserve">
+		<value>stiger från 0 till 1</value>
+	</data>
+	<data name="RAMNotation" xml:space="preserve">
+		<value>RAM</value>
+	</data>
+	<data name="ROMNotation" xml:space="preserve">
+		<value>ROM</value>
+	</data>
+	<data name="ToolTipWire" xml:space="preserve">
+		<value>kabel</value>
+	</data>
+	<data name="CategoryInputOutput" xml:space="preserve">
+		<value>Ingång - Utgång</value>
+	</data>
+	<data name="CommandHelpAbout" xml:space="preserve">
+		<value>_Om</value>
+	</data>
+	<data name="NameButton" xml:space="preserve">
+		<value>Knapp</value>
+	</data>
+	<data name="NameConstant" xml:space="preserve">
+		<value>Konstant</value>
+	</data>
+	<data name="NameSplitter" xml:space="preserve">
+		<value>Delare</value>
+	</data>
+	<data name="TitleAbout" xml:space="preserve">
+		<value>Om</value>
+	</data>
+	<data name="TitleApplication" xml:space="preserve">
+		<value>Logisk Krets</value>
+	</data>
+	<data name="TitleVersion" xml:space="preserve">
+		<value>Version:</value>
+	</data>
+	<data name="TitleWeb" xml:space="preserve">
+		<value>Hemsida</value>
+	</data>
+	<data name="CommandToolsOptions" xml:space="preserve">
+		<value>_Inställningar</value>
+	</data>
+	<data name="TitleDisplayOptions" xml:space="preserve">
+		<value>Visa</value>
+	</data>
+	<data name="TitleFileOptions" xml:space="preserve">
+		<value>Fil</value>
+	</data>
+	<data name="TitleGateShape" xml:space="preserve">
+		<value>_Grind form</value>
+	</data>
+	<data name="TitleLoadLastFile" xml:space="preserve">
+		<value>_Ladda förra fillen vid start</value>
+	</data>
+	<data name="TitleOptions" xml:space="preserve">
+		<value>Inställningar</value>
+	</data>
+	<data name="TitleShowGrid" xml:space="preserve">
+		<value>_Visa rutnär</value>
+	</data>
+	<data name="CommandCircuitCurrent" xml:space="preserve">
+		<value>Logisk Krets</value>
+	</data>
+	<data name="CommandCircuitDelete" xml:space="preserve">
+		<value>Radera Den Aktuella Kretsen</value>
+	</data>
+	<data name="CommandCircuitNew" xml:space="preserve">
+		<value>Ny Logisk Krets</value>
+	</data>
+	<data name="CommandCircuitProject" xml:space="preserve">
+		<value>Projekt</value>
+	</data>
+	<data name="CommandEditSelectAllButWires" xml:space="preserve">
+		<value>Markera Alla Utom Kablar</value>
+	</data>
+	<data name="CommandEditSelectAllProbes" xml:space="preserve">
+		<value>Markera Alla Sonder</value>
+	</data>
+	<data name="CommandEditSelectAllProbesWithWire" xml:space="preserve">
+		<value>Markera Alla sonder och Ihopkopplade Kablar </value>
+	</data>
+	<data name="CommandEditSelectAllWires" xml:space="preserve">
+		<value>Markera Alla Kablar</value>
+	</data>
+	<data name="CommandEditSelectFloatingSymbols" xml:space="preserve">
+		<value>Markera Flytande Symboler</value>
+	</data>
+	<data name="CommandEditSelectFreeWires" xml:space="preserve">
+		<value>Markela Lösa Kablar</value>
+	</data>
+	<data name="CommandEditUnselectAllButWires" xml:space="preserve">
+		<value>Omarkera Alla Utom Kablar</value>
+	</data>
+	<data name="CommandEditUnselectAllWires" xml:space="preserve">
+		<value>Omarkera Alla Kablar</value>
+	</data>
+	<data name="CommandFileExportImage" xml:space="preserve">
+		<value>Exportera bild</value>
+	</data>
+	<data name="CommandToolsOscilloscope" xml:space="preserve">
+		<value>Oscilloskop</value>
+	</data>
+	<data name="CommandToolsReport" xml:space="preserve">
+		<value>Projekt Raport</value>
+	</data>
+	<data name="TitleCategory" xml:space="preserve">
+		<value>_Kategori:</value>
+	</data>
+	<data name="TitleDescription" xml:space="preserve">
+		<value>_Beskrivning:</value>
+	</data>
+	<data name="TitleName" xml:space="preserve">
+		<value>_Namn:</value>
+	</data>
+	<data name="TitleNotation" xml:space="preserve">
+		<value>N_otation:</value>
+	</data>
+	<data name="TitleBitWidth" xml:space="preserve">
+		<value>_Bit bredd:</value>
+	</data>
+	<data name="TitleValue" xml:space="preserve">
+		<value>_Värde:</value>
+	</data>
+	<data name="NamePin" xml:space="preserve">
+		<value>Stift</value>
+	</data>
+	<data name="TitleAddressBitWidth" xml:space="preserve">
+		<value>_Adress bit bredd:</value>
+	</data>
+	<data name="TitleData" xml:space="preserve">
+		<value>Da_ta</value>
+	</data>
+	<data name="TitleDataBitWidth" xml:space="preserve">
+		<value>Data _bit bredd:</value>
+	</data>
+	<data name="TitleInverted" xml:space="preserve">
+		<value>_Inverterad</value>
+	</data>
+	<data name="TitleLoad" xml:space="preserve">
+		<value>_Ladda...</value>
+	</data>
+	<data name="TitleSide" xml:space="preserve">
+		<value>_Sida:</value>
+	</data>
+	<data name="TitleType" xml:space="preserve">
+		<value>_Type:</value>
+	</data>
+	<data name="TitleWriteOn" xml:space="preserve">
+		<value>_Skriv på:</value>
+	</data>
+	<data name="TipOnStartMove" xml:space="preserve">
+		<value>Dra &amp; släpp den markerade till önskad plats. Tryck Esc för att avbryta flyttningen. Håll Shift när du släpper för att förhindra ihopkopplade kablars rörelse</value>
+	</data>
+	<data name="TipOnStartWire" xml:space="preserve">
+		<value>Dra slutet av kabel till önskad plats. Tryck Esc för att avbryta kabel skapning.</value>
+	</data>
+	<data name="Loading" xml:space="preserve">
+		<value>Laddar...</value>
+	</data>
+	<data name="CircuitMapPathSeparator" xml:space="preserve">
+		<value>/</value>
+	</data>
+	<data name="PowerOff" xml:space="preserve">
+		<value>Ström Av</value>
+	</data>
+	<data name="PowerOn" xml:space="preserve">
+		<value>Ström På</value>
+	</data>
+	<data name="ProbeHistoryMark" xml:space="preserve">
+		<value>&lt;&lt;&lt;&lt;&lt;&lt; Märke &gt;&gt;&gt;&gt;&gt;&gt;</value>
+	</data>
+	<data name="TitleMark" xml:space="preserve">
+		<value>_Märke</value>
+	</data>
+	<data name="TitleProbeHistory" xml:space="preserve">
+		<value>Sond Historik</value>
+	</data>
+	<data name="LogicalCircuitMainName" xml:space="preserve">
+		<value>Huvud</value>
+	</data>
+	<data name="CircuitProjectName" xml:space="preserve">
+		<value>Krets Projekt</value>
+	</data>
+	<data name="Oscillation" xml:space="preserve">
+		<value>Svängning</value>
+	</data>
+	<data name="TitleOscilloscope" xml:space="preserve">
+		<value>Logisk Krets Oscilloskop</value>
+	</data>
+	<data name="TitleOscilloscoping" xml:space="preserve">
+		<value>_Oscilloskopar</value>
+	</data>
+	<data name="CommandFileFileImport" xml:space="preserve">
+		<value>_Inport...</value>
+	</data>
+	<data name="ImportTitle" xml:space="preserve">
+		<value>Inport</value>
+	</data>
+	<data name="TitleCircuitDescriptor" xml:space="preserve">
+		<value>Krets</value>
+	</data>
+	<data name="TitleFileName" xml:space="preserve">
+		<value>Fil:</value>
+	</data>
+	<data name="TitleImportCircuit" xml:space="preserve">
+		<value>Inport</value>
+	</data>
+	<data name="TitleCheckAll" xml:space="preserve">
+		<value>_Kolla Alla</value>
+	</data>
+	<data name="TitleUncheckAll" xml:space="preserve">
+		<value>_Sluta Kolla Alla</value>
+	</data>
+	<data name="ImageFileFilter" xml:space="preserve">
+		<value>Bild Fil (*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif)|*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif|All Files (*.*)|*.*</value>
+	</data>
+	<data name="ImagePathInvalid" xml:space="preserve">
+		<value>Det givna fil namnet är inte giltigt. Kolla att mappen du försöker lägga den i existerar och att fil namnet är ett giltigt namn.</value>
+	</data>
+	<data name="MessageExportImageDialog" xml:space="preserve">
+		<value>Välj typ av bild och fil namn att exportera det nuvariga diagramet till.</value>
+	</data>
+	<data name="TitleExportImage" xml:space="preserve">
+		<value>Exportera bild</value>
+	</data>
+	<data name="TitleFile" xml:space="preserve">
+		<value>_Fil:</value>
+	</data>
+	<data name="TitleFileOpen" xml:space="preserve">
+		<value>...</value>
+	</data>
+	<data name="Gate7SegName" xml:space="preserve">
+		<value>7-seg</value>
+	</data>
+	<data name="TriStateGroupName" xml:space="preserve">
+		<value>Tri-state grupp</value>
+	</data>
+	<data name="TextNotation" xml:space="preserve">
+		<value>Text Notering</value>
+	</data>
+	<data name="CaptionAddressBitWidth" xml:space="preserve">
+		<value>Adress bitar</value>
+	</data>
+	<data name="CaptionBitWidth" xml:space="preserve">
+		<value>Bit Bredd</value>
+	</data>
+	<data name="CaptionDataBitWidth" xml:space="preserve">
+		<value>Data Bitar</value>
+	</data>
+	<data name="CaptionSplitterPinNumber" xml:space="preserve">
+		<value>Dela Stift</value>
+	</data>
+	<data name="CaptionSplitterDirection" xml:space="preserve">
+		<value>Kombinerade Stift</value>
+	</data>
+	<data name="CaptionSide" xml:space="preserve">
+		<value>Sida</value>
+	</data>
+	<data name="CaptionTextNote1" xml:space="preserve">
+		<value>Text</value>
+	</data>
+	<data name="CaptionTextNote2" xml:space="preserve">
+		<value>Notera</value>
+	</data>
+	<data name="CaptionValue" xml:space="preserve">
+		<value>Värde</value>
+	</data>
+	<data name="MenuHeaderCircuit" xml:space="preserve">
+		<value>_Krets</value>
+	</data>
+	<data name="MenuHeaderEdit" xml:space="preserve">
+		<value>_Redigera</value>
+	</data>
+	<data name="MenuHeaderFile" xml:space="preserve">
+		<value>_Fil</value>
+	</data>
+	<data name="MenuHeaderHelp" xml:space="preserve">
+		<value>_Hjälp</value>
+	</data>
+	<data name="MenuHeaderTools" xml:space="preserve">
+		<value>_Verktyg</value>
+	</data>
+	<data name="MessageWarning" xml:space="preserve">
+		<value>Varning!</value>
+	</data>
+	<data name="TitleFrequency" xml:space="preserve">
+		<value>Fre_kvens</value>
+	</data>
+	<data name="TitleIsMaximumSpeed1" xml:space="preserve">
+		<value>Kör på maximal hastighet</value>
+	</data>
+	<data name="TitleIsMaximumSpeed2" xml:space="preserve">
+		<value>Hög CPU Ansträngning</value>
+	</data>
+	<data name="TitleProject" xml:space="preserve">
+		<value>Projekt</value>
+	</data>
+	<data name="TitleRunningCircuit" xml:space="preserve">
+		<value>Kör Krets</value>
+	</data>
+	<data name="TitleZoom" xml:space="preserve">
+		<value>_Zoom:</value>
+	</data>
+	<data name="ToolTipAddressBitWidth" xml:space="preserve">
+		<value>Välj bit bredden av adress stiftet</value>
+	</data>
+	<data name="ToolTipButtonNotation" xml:space="preserve">
+		<value>Skriv noteringen på knappen</value>
+	</data>
+	<data name="ToolTipConstantBitWidth" xml:space="preserve">
+		<value>Välj bit bredd av konstanten</value>
+	</data>
+	<data name="ToolTipConstantValue" xml:space="preserve">
+		<value>Skriv in utgångs värdet för konstanten</value>
+	</data>
+	<data name="ToolTipCurrentZoom" xml:space="preserve">
+		<value>Nuvarig Zoom</value>
+	</data>
+	<data name="ToolTipDataBitWidth" xml:space="preserve">
+		<value>Välj bit bredden på data stiftet</value>
+	</data>
+	<data name="ToolTipFrequency" xml:space="preserve">
+		<value>Ändra frekvensen klock grindarna i den körande kretsen.</value>
+	</data>
+	<data name="ToolTipGateInputCount" xml:space="preserve">
+		<value>Välj antalet ingångar pär grind</value>
+	</data>
+	<data name="ToolTipIsMaximumSpeed1" xml:space="preserve">
+		<value>Kör kretsen på maximal hastighet ignorerar rekvensen sat av reglaget ovanför.</value>
+	</data>
+	<data name="TitlePinInput" xml:space="preserve">
+		<value>{0}
+In</value>
+	</data>
+	<data name="MessageFreeWireCount" xml:space="preserve">
+		<value>{0} lösa kablar hittades.</value>
+	</data>
+	<data name="MessageFloatingSymbolCount" xml:space="preserve">
+		<value>{0} oinkopplade symboler har hittats.</value>
+	</data>
+	<data name="TitlePinOutput" xml:space="preserve">
+		<value>{0}
+Ut</value>
+	</data>
+	<data name="SplitterWidePinName" xml:space="preserve">
+		<value>Kombinerad Splitkonntakt</value>
+	</data>
+	<data name="TitleBottom" xml:space="preserve">
+		<value>_Botten:</value>
+	</data>
+	<data name="TitleLeft" xml:space="preserve">
+		<value>_Vänster:</value>
+	</data>
+	<data name="TitleRight" xml:space="preserve">
+		<value>_Höger:</value>
+	</data>
+	<data name="TitleTop" xml:space="preserve">
+		<value>_Top:</value>
+	</data>
+	<data name="MemoryAddress2PinName" xml:space="preserve">
+		<value>Minnes adress port 2</value>
+	</data>
+	<data name="MemoryData2PinName" xml:space="preserve">
+		<value>Minnes data port 2</value>
+	</data>
+	<data name="TitleDualPort" xml:space="preserve">
+		<value>_Dubbel port</value>
+	</data>
+	<data name="SplitterThin1PinName" xml:space="preserve">
+		<value>(bit {0} Av Kombinerad Splitkontakt</value>
+	</data>
+	<data name="SplitterThin2PinName" xml:space="preserve">
+		<value>(Bitar {0}-{1} Av Kombinerad Splitkontakt</value>
+	</data>
+	<data name="ToolTipButton" xml:space="preserve">
+		<value>Knapp {0}</value>
+	</data>
+	<data name="ToolTipConstant" xml:space="preserve">
+		<value>{0} bit(ar) konstant {1:X}</value>
+	</data>
+	<data name="ToolTipInputPin" xml:space="preserve">
+		<value>Ingång {0} bit(ar) Stift {1}</value>
+	</data>
+	<data name="ToolTipNonePin" xml:space="preserve">
+		<value>{0} bit(ar) {1}</value>
+	</data>
+	<data name="ToolTipOutputPin" xml:space="preserve">
+		<value>Utgång {0} bit(ar) Stift {1}</value>
+	</data>
+	<data name="ToolTipRAM" xml:space="preserve">
+		<value>RAM {0} bit adress / {1} bit data</value>
+	</data>
+	<data name="ToolTipROM" xml:space="preserve">
+		<value>ROM {0} bit adress / {1} bit data</value>
+	</data>
+	<data name="ToolTipSplitter" xml:space="preserve">
+		<value>Delare av {0} bitar till {1} stift</value>
+	</data>
+	<data name="TipOnCtrlDown" xml:space="preserve">
+		<value>Tryck Ctrl+{shift}+Tab för att byta mellan logiska kretsar eller klicka för att markera/omarkera individuela symboler, zoom med scroll hjulet. eller panorera.</value>
+	</data>
+	<data name="ReportMemoryName" xml:space="preserve">
+		<value>{0}: {1} bit adress, {2} bit data</value>
+	</data>
+	<data name="TipOnWireSelect" xml:space="preserve">
+		<value>Shift+{Ctrl}+Klick på en kabel för att markera/omarkera hella ledaren, Alt+Klick på markerad kabel för att dela den, på denh gemensamma punkten för att kombinera.</value>
+	</data>
+	<data name="TipOnAwaitingArea" xml:space="preserve">
+		<value>{0} {1}. Omringa flera symboler för att markera dem, håll ner Shift för att behålla nuvarande markeringar.</value>
+	</data>
+	<data name="FunctionParameter" xml:space="preserve">
+		<value>Funktion {0} behöver minst {1} parametrar</value>
+	</data>
+	<data name="UnknownState" xml:space="preserve">
+		<value>Läge {0} är okänt</value>
+	</data>
+	<data name="ErrorAddressNotConnected" xml:space="preserve">
+		<value>Inte alla adress bitar inkoplade på minne {0}</value>
+	</data>
+	<data name="ErrorDataInNotConnected" xml:space="preserve">
+		<value>Inte all ingångs data bitar inkoplade på minne {0}</value>
+	</data>
+	<data name="ErrorJamBitWidthDifferent" xml:space="preserve">
+		<value>Ingångs stiftet på {0} ({1}) och utgångs stiftet på {2} ({3}) på {4} har olika bit bredd och kan inte bli ihop kopplade. Snälla lös problemet.</value>
+	</data>
+	<data name="ErrorLoopInCircuit" xml:space="preserve">
+		<value>Symbol på krets "{0}" på logisk krets "{1}" slapar en oendlig loop.
+Snälla lös problemet</value>
+	</data>
+	<data name="ErrorManyResults" xml:space="preserve">
+		<value>Ingångs stift {0} på {1} kopplad till mer än ett utgångs stift som inte är tri state kapabel.</value>
+	</data>
+	<data name="MessageNotRootConstant" xml:space="preserve">
+		<value>Bara konstanter på rot kretsen ({0}) kan ändras sär strömmen är på.</value>
+	</data>
+	<data name="MessageImageFileExists" xml:space="preserve">
+		<value>Fil "{0} finns redan.
+VIll du byta ut den?</value>
+	</data>
+	<data name="ToolTipIsMaximumSpeed2" xml:space="preserve">
+		<value>Att kryssa i denna ruta kan leda till att användargränssnittet på visa dattorer inte svarar.</value>
+	</data>
+	<data name="ToolTipPinBitWidth" xml:space="preserve">
+		<value>Välj bit bredd av stiftet </value>
+	</data>
+	<data name="ToolTipPinSide" xml:space="preserve">
+		<value>Välj vilken sida av kretsens gylf det nya stiftet ska sitta på</value>
+	</data>
+	<data name="ToolTipSplitterBitWidth" xml:space="preserve">
+		<value>Välj bit bredden av den delade kontakten på delaren.</value>
+	</data>
+	<data name="ToolTipSplitterPinNumber" xml:space="preserve">
+		<value>Välj anttalet delade kontakter på delaren.</value>
+	</data>
+	<data name="ToolTipSplitterRotation" xml:space="preserve">
+		<value>Välj orientering av den kombinerade kontakten på delaren.</value>
+	</data>
+	<data name="ToolTipZoom" xml:space="preserve">
+		<value>Ställ in diagramets zoom.</value>
+	</data>
+	<data name="ToolTipRamWriteOn" xml:space="preserve">
+		<value>Välj skriv minnes tid</value>
+	</data>
+	<data name="ToolTipPinNotation" xml:space="preserve">
+		<value>Skriv in väldigt kort text som kommer visas på symbolen av kretsen bredvid stiftet</value>
+	</data>
+	<data name="TitleIsToggle" xml:space="preserve">
+		<value>Är _Växla</value>
+	</data>
+	<data name="ToolTipIsToggle" xml:space="preserve">
+		<value>Om knappen är i växla kommer den byta läge vid varje klick, om inte växla, vid varje tryck och släpp</value>
+	</data>
+	<data name="CommandCircuitPower" xml:space="preserve">
+		<value>Byt Ström</value>
+	</data>
+	<data name="CommandEditRotateLeft" xml:space="preserve">
+		<value>Vrid Vänster</value>
+	</data>
+	<data name="CommandEditRotateRight" xml:space="preserve">
+		<value>Vrid Höger</value>
+	</data>
+	<data name="SplitterDirectionClockwise" xml:space="preserve">
+		<value>Vänster</value>
+	</data>
+	<data name="SplitterDirectionCounterclockwise" xml:space="preserve">
+		<value>Höger</value>
+	</data>
+	<data name="PinSideBottom" xml:space="preserve">
+		<value>Botten</value>
+	</data>
+	<data name="PinSideLeft" xml:space="preserve">
+		<value>Vänster</value>
+	</data>
+	<data name="PinSideRight" xml:space="preserve">
+		<value>Höger</value>
+	</data>
+	<data name="PinSideTop" xml:space="preserve">
+		<value>Top</value>
+	</data>
+	<data name="CaptionSplitterBitWidth" xml:space="preserve">
+		<value>Dela stift bit bredd</value>
+	</data>
+	<data name="CommandCircuitUsage" xml:space="preserve">
+		<value>Använd Av...</value>
+	</data>
+	<data name="MessageNotUsed" xml:space="preserve">
+		<value>Denna logiska krets används inte längre.</value>
+	</data>
+	<data name="MessageUsageNote" xml:space="preserve">
+		<value>Välj krets där den här är använd och dubbel-klicka den för att navigera där och markera symboler av den här.</value>
+	</data>
+	<data name="TitleCircuitUsage" xml:space="preserve">
+		<value>Logisk Krets Användning</value>
+	</data>
+	<data name="CaptionNote" xml:space="preserve">
+		<value>_Notera</value>
+	</data>
+	<data name="CategoryPrimitives" xml:space="preserve">
+		<value>Primetiva</value>
+	</data>
+	<data name="TitleMemory" xml:space="preserve">
+		<value>Minne</value>
+	</data>
+	<data name="CommandFileOpenRecent" xml:space="preserve">
+		<value>Öpna _Senaste </value>
+	</data>
+	<data name="MessageInvalidRecentFile" xml:space="preserve">
+		<value>Filen {0} kan inte öppnas.
+Vill du ta bort den från Senate Filler listan</value>
+	</data>
+	<data name="TitleMaxRecentFiles" xml:space="preserve">
+		<value>_Maximalt antal senaste filler:</value>
+	</data>
+	<data name="BitOff" xml:space="preserve">
+		<value>Av</value>
+	</data>
+	<data name="ErrorFileCorrupted" xml:space="preserve">
+		<value>Fil "{0}" är korrupt och kan inte laddas.</value>
+	</data>
+	<data name="ProjectSummary" xml:space="preserve">
+		<value>{0} logisk krets, i {1} kategorier använder {2} symboler och {3} kablar</value>
+	</data>
+	<data name="ReportError" xml:space="preserve">
+		<value>Kan inte raportera funktioner tack vare the följande fel medelandet: {0}</value>
+	</data>
+	<data name="ReportFunctions" xml:space="preserve">
+		<value>Funktioner av kretsen "{0}"</value>
+	</data>
+	<data name="TitleCount" xml:space="preserve">
+		<value>Räkning</value>
+	</data>
+	<data name="TitleFunction" xml:space="preserve">
+		<value>Funktion</value>
+	</data>
+	<data name="TitleProjectDescription" xml:space="preserve">
+		<value>Beskrivning</value>
+	</data>
+	<data name="TitleReportErrorDetails" xml:space="preserve">
+		<value>Error detaljer</value>
+	</data>
+	<data name="TitleSummary" xml:space="preserve">
+		<value>Sammanfattning:</value>
+	</data>
+	<data name="TitleTotal" xml:space="preserve">
+		<value>Tatalt:</value>
+	</data>
+	<data name="LogicalCircuitMainNotation" xml:space="preserve">
+		<value>Huvud</value>
+	</data>
+	<data name="PinTypeNameInput" xml:space="preserve">
+		<value>Ingång</value>
+	</data>
+	<data name="PinTypeNameNone" xml:space="preserve">
+		<value>Ingen</value>
+	</data>
+	<data name="PinTypeNameOutput" xml:space="preserve">
+		<value>Utgång</value>
+	</data>
+	<data name="ErrorUnsupportedUri" xml:space="preserve">
+		<value>Navigation till denna adress stöds inte.</value>
+	</data>
+	<data name="ToolTipLedMatrix" xml:space="preserve">
+		<value>LED Matrix {0}x{1} med {2} bit(ar) per LED ({3} färger)</value>
+	</data>
+	<data name="CaptionColumns" xml:space="preserve">
+		<value>Kolumner</value>
+	</data>
+	<data name="CaptionRows" xml:space="preserve">
+		<value>Rader</value>
+	</data>
+	<data name="ToolTipColumns" xml:space="preserve">
+		<value>Välj antalet kolumner på LED matrixen</value>
+	</data>
+	<data name="ToolTipRows" xml:space="preserve">
+		<value>Välj antalet rader på LED matrixen</value>
+	</data>
+	<data name="CaptionLedMatrixType" xml:space="preserve">
+		<value>Typ</value>
+	</data>
+	<data name="LedMatrixColumnSelector" xml:space="preserve">
+		<value>för att markera Kolumn #{0}</value>
+	</data>
+	<data name="LedMatrixRowIndividual" xml:space="preserve">
+		<value>för varje LED i rad #{0}</value>
+	</data>
+	<data name="LedMatrixRowSelector" xml:space="preserve">
+		<value>för markering av Rad #{0}</value>
+	</data>
+	<data name="LedMatrixTypeIndividual" xml:space="preserve">
+		<value>Individuel</value>
+	</data>
+	<data name="LedMatrixTypeSelector" xml:space="preserve">
+		<value>Väljare</value>
+	</data>
+	<data name="TitleCellShape" xml:space="preserve">
+		<value>Cell _Form:</value>
+	</data>
+	<data name="TitleColumns" xml:space="preserve">
+		<value>_Kolumner</value>
+	</data>
+	<data name="TitleRows" xml:space="preserve">
+		<value>_Rader:</value>
+	</data>
+	<data name="ToolTipLedMatrixType" xml:space="preserve">
+		<value>Välj sätt att kontrolera matrixen</value>
+	</data>
+	<data name="TitleColors" xml:space="preserve">
+		<value>F_ärger:</value>
+	</data>
+	<data name="MessageVersionLatest" xml:space="preserve">
+		<value>Du har redan den senaste veritionen.</value>
+	</data>
+	<data name="MessageVersionOutdated" xml:space="preserve">
+		<value>Du har en äldre version. Klicka länken nedan för att ladda ner den senaste.</value>
+	</data>
+	<data name="MessageVersionPreview" xml:space="preserve">
+		<value>Du har osläpt utväcklares version.</value>
+	</data>
+	<data name="TitleCheckVersion" xml:space="preserve">
+		<value>Kolla nu</value>
+	</data>
+	<data name="ErrorHyperlinkText" xml:space="preserve">
+		<value>Hyperlink text är tom</value>
+	</data>
+	<data name="ErrorHyperlinkUrl" xml:space="preserve">
+		<value>Hyperlin adress är inkorrect</value>
+	</data>
+	<data name="TitleHyperlink" xml:space="preserve">
+		<value>_Länk till:</value>
+	</data>
+	<data name="TitleText" xml:space="preserve">
+		<value>_Text:</value>
+	</data>
+	<data name="CommandInsertImage" xml:space="preserve">
+		<value>Bild</value>
+	</data>
+	<data name="TitleCheckVersionPeriodically" xml:space="preserve">
+		<value>Kolla periodiskt äfter nyare versioner</value>
+	</data>
+	<data name="ErrorClipboardCorrupted" xml:space="preserve">
+		<value>Data i utklipp är korrupt och kan inte klistras in.</value>
+	</data>
+	<data name="DefaultGateShape" xml:space="preserve">
+		<value>Formad</value>
+	</data>
+	<data name="CommandTruthTable" xml:space="preserve">
+		<value>Sanningstabell</value>
+	</data>
+	<data name="MessageInputOutputPinsMissing" xml:space="preserve">
+		<value>Det är inga ingång eller utgångs stift på denna krets. Saningstabellerna är byggda på att skicka alla kombinationer av data till ingångs stift och läsa resultat från utgångs stiften.</value>
+	</data>
+	<data name="MessageTruthTableTooBig" xml:space="preserve">
+		<value>Sanningstabellen är för lång och blir trunkerad. Snälla använd filter för att varifiera korrecthet i din krets.</value>
+	</data>
+	<data name="ParserEOS" xml:space="preserve">
+		<value>Slut på uttryck</value>
+	</data>
+	<data name="ParserErrorCloseParenMissing" xml:space="preserve">
+		<value>Saknar ")" istället för: {0}</value>
+	</data>
+	<data name="ParserErrorExpressionMissing" xml:space="preserve">
+		<value>Uttrycket saknaräfter {0}</value>
+	</data>
+	<data name="ParserErrorInvalidNumber" xml:space="preserve">
+		<value>Ogiltigt numer: {0}</value>
+	</data>
+	<data name="ParserErrorUnclosedQuote" xml:space="preserve">
+		<value>Refererad identifierare har inte en stängande citationstecken: {0}</value>
+	</data>
+	<data name="ParserErrorUnexpected" xml:space="preserve">
+		<value>{0} oförväntad</value>
+	</data>
+	<data name="ParserErrorUnknownChar" xml:space="preserve">
+		<value>Okänd karraktär: {0}</value>
+	</data>
+	<data name="ParserErrorUnknownPin" xml:space="preserve">
+		<value>{0} - ingång eller utgångs stift hittades inte</value>
+	</data>
+	<data name="TitleApply" xml:space="preserve">
+		<value>_Ansök</value>
+	</data>
+	<data name="TitleDisplayedRows" xml:space="preserve">
+		<value>Visade rader: {0:N0}</value>
+	</data>
+	<data name="TitleFilter" xml:space="preserve">
+		<value>_Filter:</value>
+	</data>
+	<data name="TitleInvert" xml:space="preserve">
+		<value>_Invertera</value>
+	</data>
+	<data name="TitleTotalRows" xml:space="preserve">
+		<value>Tatala mängden rader: {0:N0}</value>
+	</data>
+	<data name="TitleStop" xml:space="preserve">
+		<value>_Stop</value>
+	</data>
+	<data name="ColorPickerCaptionAvailable" xml:space="preserve">
+		<value>Tillgängliga färger:</value>
+	</data>
+	<data name="ColorPickerCaptionRecent" xml:space="preserve">
+		<value>Senaste färger:</value>
+	</data>
+	<data name="ColorPickerCaptionSelectCustom" xml:space="preserve">
+		<value>Välj</value>
+	</data>
+	<data name="ColorPickerCaptionStandard" xml:space="preserve">
+		<value>Standard färger</value>
+	</data>
+	<data name="ColorPickerTabCustom" xml:space="preserve">
+		<value>Anpassad</value>
+	</data>
+	<data name="ColorPickerTabStandard" xml:space="preserve">
+		<value>Standard</value>
+	</data>
+	<data name="ToolTipBackgroundColor" xml:space="preserve">
+		<value>Markera färg</value>
+	</data>
+	<data name="ToolTipFontColor" xml:space="preserve">
+		<value>Text färg</value>
+	</data>
+	<data name="TitleSaveAs" xml:space="preserve">
+		<value>Sp-ara som...</value>
+	</data>
+	<data name="ToolTipLoadData" xml:space="preserve">
+		<value>Ladda data från fil</value>
+	</data>
+	<data name="ToolTipSaveData" xml:space="preserve">
+		<value>spara data till fil</value>
+	</data>
+	<data name="MemoryOnStartData" xml:space="preserve">
+		<value>Behåll minne mellan gånger</value>
+	</data>
+	<data name="MemoryOnStartOnes" xml:space="preserve">
+		<value>Set alla bitar till 1</value>
+	</data>
+	<data name="MemoryOnStartRandom" xml:space="preserve">
+		<value>Slumpmässig</value>
+	</data>
+	<data name="MemoryOnStartZeros" xml:space="preserve">
+		<value>Set alla bitar till 0</value>
+	</data>
+	<data name="TitleMemoryOnStart" xml:space="preserve">
+		<value>På _start fyll</value>
+	</data>
+	<data name="ToolTipMemoryOnStart" xml:space="preserve">
+		<value>Välj hur RAM kommer Initialiseras vid ström på</value>
+	</data>
+	<data name="ErrorManyMemoryData" xml:space="preserve">
+		<value>Krets {0} innehåller {1} som sparar data mellan gångerna.
+sådan krets kan inte användas mer än en gång per krets för att det kommer sparas mer än ett set av data kan sparas på en minnes module.</value>
+	</data>
+	<data name="TitleIsDisplay" xml:space="preserve">
+		<value>Vi_sa sisuella element på symbol</value>
+	</data>
+	<data name="MessageRestartRequared" xml:space="preserve">
+		<value>Ditt språk har ändrats. du behöver starta om programet so de nya instälningarne tar effect.</value>
+	</data>
+	<data name="TitleCulture" xml:space="preserve">
+		<value>S_pråk</value>
+	</data>
+	<data name="CommandEditAlignCenter" xml:space="preserve">
+		<value>Centrera med miten</value>
+	</data>
+	<data name="CommandEditAlignJustify" xml:space="preserve">
+		<value>Rättfärdiga</value>
+	</data>
+	<data name="CommandEditAlignLeft" xml:space="preserve">
+		<value>Centrera Vänster</value>
+	</data>
+	<data name="CommandEditAlignRight" xml:space="preserve">
+		<value>Centrera Höger</value>
+	</data>
+	<data name="CommandEditBold" xml:space="preserve">
+		<value>Blod</value>
+	</data>
+	<data name="CommandEditBullets" xml:space="preserve">
+		<value>Kulor</value>
+	</data>
+	<data name="CommandEditCopy" xml:space="preserve">
+		<value>_Kopiera</value>
+	</data>
+	<data name="CommandEditCut" xml:space="preserve">
+		<value>Kli_p</value>
+	</data>
+	<data name="CommandEditDecreaseFontSize" xml:space="preserve">
+		<value>Minska Främre storlek</value>
+	</data>
+	<data name="CommandEditDecreaseIndentation" xml:space="preserve">
+		<value>minska avmärke</value>
+	</data>
+	<data name="CommandEditDelete" xml:space="preserve">
+		<value>Ta_bort</value>
+	</data>
+	<data name="CommandEditIncreaseFontSize" xml:space="preserve">
+		<value>öka Främre Storlek</value>
+	</data>
+	<data name="CommandEditIncreaseIndentation" xml:space="preserve">
+		<value>öka avmärke</value>
+	</data>
+	<data name="CommandEditNumbering" xml:space="preserve">
+		<value>Numerering</value>
+	</data>
+	<data name="CommandEditPaste" xml:space="preserve">
+		<value>_Klistra in</value>
+	</data>
+	<data name="CommandEditRedo" xml:space="preserve">
+		<value>_Redo</value>
+	</data>
+	<data name="CommandEditSelectAll" xml:space="preserve">
+		<value>Markera _alla</value>
+	</data>
+	<data name="CommandEditUnderline" xml:space="preserve">
+		<value>understryckning</value>
+	</data>
+	<data name="CommandEditUndo" xml:space="preserve">
+		<value>_Ungra</value>
+	</data>
+	<data name="CommandFileClose" xml:space="preserve">
+		<value>L_ämna</value>
+	</data>
+	<data name="CommandFileNew" xml:space="preserve">
+		<value>_Ny</value>
+	</data>
+	<data name="CommandFileOpen" xml:space="preserve">
+		<value>_Öpna</value>
+	</data>
+	<data name="CommandFileSave" xml:space="preserve">
+		<value>_Spara</value>
+	</data>
+	<data name="CommandFileSaveAs" xml:space="preserve">
+		<value>Spara _Som...</value>
+	</data>
+	<data name="CommandHelpView" xml:space="preserve">
+		<value>Visa _Hjälp</value>
+	</data>
+	<data name="ToolTipFontFamily" xml:space="preserve">
+		<value>Fram Familje</value>
+	</data>
+	<data name="ToolTipFontSize" xml:space="preserve">
+		<value>Fram Storlek</value>
+	</data>
+	<data name="TitleCredits" xml:space="preserve">
+		<value>Medvärkan:</value>
+	</data>
+	<data name="ToolTipIsDisplay" xml:space="preserve">
+		<value>När du markerar Logisk Krets till att visa visuela element alla visuella symboler på denna krets kommer bli synliga live på deras symboler. Skärmar är: LED, LED Matrix, Grafisk array, knapp, eller andra logiska kretsar som visar sisuella element </value>
+	</data>
+	<data name="CaptionName" xml:space="preserve">
+		<value>Namn</value>
+	</data>
+	<data name="CircuitProbeToolTip" xml:space="preserve">
+		<value>sond {0}</value>
+	</data>
+	<data name="TitleActualFrequency" xml:space="preserve">
+		<value>Äkta frekvens</value>
+	</data>
+	<data name="WireDisplayValue" xml:space="preserve">
+		<value>Värde: {0}</value>
+	</data>
+	<data name="WireDisplayBitWidth" xml:space="preserve">
+		<value>Bit bredd: {0}</value>
+	</data>
+	<data name="WireDisplayDisconnected" xml:space="preserve">
+		<value>Kabbeln är inte in kopplad</value>
+	</data>
+	<data name="CaptionPinSide" xml:space="preserve">
+		<value>Stift sida</value>
+	</data>
+	<data name="TitlePinSide" xml:space="preserve">
+		<value>Pin _sida:</value>
+	</data>
+	<data name="GridPoint" xml:space="preserve">
+		<value>({0}, {1})</value>
+	</data>
+	<data name="NameLedMatrix" xml:space="preserve">
+		<value>LED Matrix</value>
+	</data>
+	<data name="TitleStartupCircuit" xml:space="preserve">
+		<value>_Startup:</value>
+	</data>
+	<data name="ToolTipDevicePinSide" xml:space="preserve">
+		<value>Välj vilken sida stiftet ska hamna på</value>
+	</data>
+	<data name="NameSensor" xml:space="preserve">
+		<value>Sensor</value>
+	</data>
+	<data name="ToolTipSensor" xml:space="preserve">
+		<value>Sensor {0}</value>
+	</data>
+	<data name="CaptionSensorType" xml:space="preserve">
+		<value>Sensor typ</value>
+	</data>
+	<data name="SensorTypeManual" xml:space="preserve">
+		<value>Manuell</value>
+	</data>
+	<data name="SensorTypeRandom" xml:space="preserve">
+		<value>Slumpmessig</value>
+	</data>
+	<data name="SensorTypeSeries" xml:space="preserve">
+		<value>Serie</value>
+	</data>
+	<data name="ToolTipSensorBitWidth" xml:space="preserve">
+		<value>Välj bit bredd på sensorn</value>
+	</data>
+	<data name="ToolTipSensorNotation" xml:space="preserve">
+		<value>Skriv in notation på sensorn</value>
+	</data>
+	<data name="ToolTipSensorType" xml:space="preserve">
+		<value>Välj var sensorn kommer få data att läverera</value>
+	</data>
+	<data name="TitleSensorType" xml:space="preserve">
+		<value>Sensor _typ</value>
+	</data>
+	<data name="ErrorBadInterval" xml:space="preserve">
+		<value>Minimum borde vara mindre eller samma som maximum.</value>
+	</data>
+	<data name="ErrorBadPositiveNumber" xml:space="preserve">
+		<value>Förväntar sig numer större än 0.</value>
+	</data>
+	<data name="ErrorEmptySeries" xml:space="preserve">
+		<value>Serien borde inte vara tom</value>
+	</data>
+	<data name="ErrorSeriesItem" xml:space="preserve">
+		<value>Error på {0}, det borde var ett par av hexadecimala numer separarede av :</value>
+	</data>
+	<data name="ErrorSeriesItemOrder" xml:space="preserve">
+		<value>Error på {0}, Varje cykel borde vara söre än den tidigare.</value>
+	</data>
+	<data name="TitleLoopSeries" xml:space="preserve">
+		<value>_Repetera serier</value>
+	</data>
+	<data name="TitleSensorRandomMax" xml:space="preserve">
+		<value>M_ax cyklar:</value>
+	</data>
+	<data name="TitleSensorRandomMin" xml:space="preserve">
+		<value>_Minsta cyklar:</value>
+	</data>
+	<data name="TitleSeries" xml:space="preserve">
+		<value>S_erier:</value>
+	</data>
+	<data name="ToolTipSensorRandomMax" xml:space="preserve">
+		<value>Skriv in maximalt anntal cyklar före sensorn byter sin mätning.</value>
+	</data>
+	<data name="ToolTipSensorRandomMin" xml:space="preserve">
+		<value>Skriv in minsta anntal cyklar före sensorn byter sin mätning.</value>
+	</data>
+	<data name="ToolTipSeriesData" xml:space="preserve">
+		<value>Ge en serie av sensor mätningar i form &lt;cykel&gt;:&lt;värde&gt; där både cykeln och värdet är hexadecimalt.
+När cykeln är ett jämt numer eller 0 so kommer den byta
+klocka från 0 till 1, när det är udda så byter klockan från 1 till 0. </value>
+	</data>
+	<data name="NameSound" xml:space="preserve">
+		<value>Surrare</value>
+	</data>
+	<data name="ToolTipSound" xml:space="preserve">
+		<value>Surrare {0}</value>
+	</data>
+	<data name="ToolTipSoundNotation" xml:space="preserve">
+		<value>Skriv in notation av surrarens enhet</value>
+	</data>
+	<data name="CommandEditFind" xml:space="preserve">
+		<value>Hitta</value>
+	</data>
+	<data name="TitleFind" xml:space="preserve">
+		<value>Hitta krets</value>
+	</data>
+	<data name="TitleSearch" xml:space="preserve">
+		<value>Sök</value>
+	</data>
+	<data name="TitleSearchPattern" xml:space="preserve">
+		<value>_Hitta vad:</value>
+	</data>
+	<data name="ToolTipDescriptorClock" xml:space="preserve">
+		<value>Genererar en signal som går mellan 1 och 0 och används för att kordinera handlingari kretsen.</value>
+	</data>
+	<data name="ToolTipDescriptorPin" xml:space="preserve">
+		<value>Använd för att skapa en kontackt som andra kretsar kan använda till att se eller ta emot data from aktuell krets.
+Flytta stift på kretsen för att ändra deras relativa position på symboler av denna krets.</value>
+	</data>
+	<data name="ToolTipDescriptorProbe" xml:space="preserve">
+		<value>Lägg till och kopla sonder till din krets för att observera det aktuella läget av en startad krets på ytan av sonden, sondens historik visas när du dubbel klickar på sonden aller kollar dens data på oscilloskopet.</value>
+	</data>
+	<data name="ToolTipDescriptorSensor" xml:space="preserve">
+		<value>Ger data från en "extern källa" som en serie av för bestömda slumpmessigt valda, eller manuellr valda värden.</value>
+	</data>
+	<data name="ToolTipDescriptorSplitter" xml:space="preserve">
+		<value>Gör det möjligt att skapa en kabels sele eller separera kabeln till individuelle kablar.
+Användadet av delare och multi-bttift kan göra det mycket simplare och lättare att förstå vad som händer.</value>
+	</data>
+	<data name="ToolTipDescriptorText" xml:space="preserve">
+		<value>Placera text var som helst på diagramet för att kommetera din krets, ge hjälpfulla länkar rill vilken hemsida som helst och decorera din krets med bilder</value>
+	</data>
+	<data name="TitleCurrent" xml:space="preserve">
+		<value>Nuvarande logisk krets</value>
+	</data>
+	<data name="ToolTipDescriptorTriState" xml:space="preserve">
+		<value>Kan ha tre olika utgångar: 1, 0, och hög-självständighet(Z). Hög-självständighets läget spelar inte in i kretsen som strikt är binärt.
+dessa enheter används på bussar på CPUn för att tilllåta fler ursprungs käller för att skicka data.
+en grupp av tre-lägen som kör en lina med en lämplig kontroll krets altså simpelt sätt samma sak som en multiplexor.</value>
+	</data>
+	<data name="ToolTipSensorManualValue" xml:space="preserve">
+		<value>Skriv ett hexadecimal värde och tryvk Enter.</value>
+	</data>
+	<data name="ErrorBadHexNumber" xml:space="preserve">
+		<value>Ogiltigt hexadecimal nummer</value>
+	</data>
+	<data name="TitleSensorManualInitialValue" xml:space="preserve">
+		<value>Orsprungs _värde:</value>
+	</data>
+	<data name="ToolTipSensorManualInitialValue" xml:space="preserve">
+		<value>Skriv in orsprungs vädet som hexadecimalt nummer.</value>
+	</data>
+	<data name="NameGraphicsArray" xml:space="preserve">
+		<value>Grafikuppsättning</value>
+	</data>
+	<data name="CaptionGraphicsArrayBPP" xml:space="preserve">
+		<value>Bitar pär pixel</value>
+	</data>
+	<data name="ToolTipDescriptorGraphicsArray" xml:space="preserve">
+		<value>(punkt matrix skärm) kan visa data sparad i intärn minnet.
+Använd med advancerade kretsar som dattorer eller kontrolerare. gör det möjligt att välja en storlek och förg djup/schema:
+1 bit/pixel - svart och vit
+2 bitar/pixel - 4 nyanser av grå
+4 bitar/pixel - 16 färger
+8 bitar/pixel  - 256 färger</value>
+	</data>
+	<data name="ToolTipGraphicsArray" xml:space="preserve">
+		<value>{0} {1}x{2} med {3} bit(ar) per pixel ({4} färger)</value>
+	</data>
+	<data name="ToolTipGraphicsArrayBPP" xml:space="preserve">
+		<value>Välj antalet bitar per pixel</value>
+	</data>
+	<data name="ErrorBadIntegerInRange" xml:space="preserve">
+		<value>Förväntar sig numer mellan {0} - {1}</value>
+	</data>
+	<data name="TitleGraphicsArrayBPP" xml:space="preserve">
+		<value>bitar per _pixel</value>
+	</data>
+	<data name="TitleHeight" xml:space="preserve">
+		<value>-Höjd:</value>
+	</data>
+	<data name="TitleWidth" xml:space="preserve">
+		<value>Bre_dd:</value>
+	</data>
+	<data name="ToolTipGraphicsArrayHeight" xml:space="preserve">
+		<value>Skriv in höjd av grafikuppsättningen i pixlar.</value>
+	</data>
+	<data name="ToolTipGraphicsArrayWidth" xml:space="preserve">
+		<value>Skriv in bredd av grafikuppsättningen i pixlar.</value>
+	</data>
+	<data name="ErrorWriteNotConnected" xml:space="preserve">
+		<value>Skriv ingången koplar inte till grafikuppsättning {0}</value>
+	</data>
+	<data name="ErrorBadHexInRange" xml:space="preserve">
+		<value>Förväntar sig nummer mellan {0:x} - {1:x}</value>
+	</data>
+	<data name="CommandToolsIronPython" xml:space="preserve">
+		<value>IronPython konsol</value>
+	</data>
+	<data name="MessageLoadAutoSavedFile" xml:space="preserve">
+		<value>Fil "{0}" var inte sparad korrekt.
+Vill du ladda an automatiskt sparad fil istället?</value>
+	</data>
+	<data name="TitleAutoSave" xml:space="preserve">
+		<value>A_utomatiskt sparingar sker varje:</value>
+	</data>
+	<data name="TitleMinutesUnits" xml:space="preserve">
+		<value>minuter</value>
+	</data>
+	<data name="TitlePinIndex" xml:space="preserve">
+		<value>Stift ordning</value>
+	</data>
+	<data name="TitlePinIndexReset" xml:space="preserve">
+		<value>nollställ till _grafisk placering</value>
+	</data>
+</root>
