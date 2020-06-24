@@ -1422,4 +1422,19 @@
 	<data name="TitleBottom" xml:space="preserve">
 		<value>З_низу:</value>
 	</data>
+	<data name="MemoryAddress2PinName" xml:space="preserve">
+		<value>Порт адреси пам'яті 2</value>
+	</data>
+	<data name="MemoryAddress2PinNotation" xml:space="preserve">
+		<value>a2</value>
+	</data>
+	<data name="MemoryData2PinName" xml:space="preserve">
+		<value>Порт даних пам'яті 2</value>
+	</data>
+	<data name="MemoryData2PinNotation" xml:space="preserve">
+		<value>d2</value>
+	</data>
+	<data name="TitleDualPort" xml:space="preserve">
+		<value>_Подвійний порт</value>
+	</data>
 </root>
