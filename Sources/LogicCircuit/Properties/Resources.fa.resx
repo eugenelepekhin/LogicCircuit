@@ -122,7 +122,7 @@
   </data>
   <data name="ErrorUnknownVersion" xml:space="preserve">
     <value>فایل انتخاب شده نامفهوم است.
-فایلی که انتخاب کردید یا آسیب دیده است یا توسط ورژن جدیدتری از برنامه Logic Circuit ایجاد شده. برای دانلود آخرین ورژن برنامه به آدرس  &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt;  مراجعه کنید.</value>
+فایلی که انتخاب کردید یا آسیب دیده است یا توسط ورژن جدیدتری از برنامه Logic Circuit ایجاد شده. برای دانلود آخرین ورژن برنامه به آدرس  &lt;Hyperlink NavigateUri="https://www.logiccircuit.org/"&gt;https://www.logiccircuit.org/&lt;/Hyperlink&gt;  مراجعه کنید.</value>
   </data>
   <data name="FileSaved" xml:space="preserve">
     <value>فایل {0} ذخیره شد.</value>

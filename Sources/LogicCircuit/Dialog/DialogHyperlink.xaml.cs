@@ -185,7 +185,7 @@ namespace LogicCircuit {
 		private static bool IsUrl(string url) {
 			try {
 				if(Uri.TryCreate(url, UriKind.Absolute, out Uri uri)) {
-					return StringComparer.OrdinalIgnoreCase.Equals(uri.Scheme, Uri.UriSchemeHttp);
+					return StringComparer.OrdinalIgnoreCase.Equals(uri.Scheme, Uri.UriSchemeHttp) || StringComparer.OrdinalIgnoreCase.Equals(uri.Scheme, Uri.UriSchemeHttps);
 				}
 			} catch {}
 			return false;

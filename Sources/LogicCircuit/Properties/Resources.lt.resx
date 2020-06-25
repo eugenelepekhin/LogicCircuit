@@ -277,7 +277,7 @@
     <value>Iškelti paveikslėli</value>
   </data>
 	<data name="HelpContent" xml:space="preserve">
-    <value>http://www.logiccircuit.org/help.html</value>
+    <value>https://www.logiccircuit.org/help.html</value>
   </data>
 	<data name="CommandEditRotateLeft" xml:space="preserve">
     <value>Pasukti kairėn</value>
@@ -679,7 +679,7 @@
     <value>Leidžiasi nuo 1 iki 0</value>
   </data>
 	<data name="WebSiteUri" xml:space="preserve">
-    <value>http://www.logiccircuit.org/</value>
+    <value>https://www.logiccircuit.org/</value>
   </data>
 	<data name="UnknownState" xml:space="preserve">
     <value>Būsena {0} yra nežinoma</value>
@@ -688,7 +688,7 @@
     <value>Tri-Būsenų grupė</value>
   </data>
 	<data name="WebSiteDownloadUri" xml:space="preserve">
-    <value>http://www.logiccircuit.org/download.html</value>
+    <value>https://www.logiccircuit.org/download.html</value>
   </data>
 	<data name="WireDisplayValue" xml:space="preserve">
     <value>Reikšmė: {0}</value>
@@ -1209,7 +1209,7 @@ Iš</value>
     <value>Eroras {0}. Tai turėtu būti suporinti šešioliktainiai skaičiai atskirti su :</value>
   </data>
 	<data name="ErrorUnknownVersion" xml:space="preserve">
-    <value>Bandyta įkrauti nežinoma Grandinės Projekto versija.     failas kurį bandote atidaryti yra korumpuotas arba buvo sukurtas naujesnės Logic Circuit programos. Prašome patikrinti &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt; naujesnei versijai.</value>
+    <value>Bandyta įkrauti nežinoma Grandinės Projekto versija.     failas kurį bandote atidaryti yra korumpuotas arba buvo sukurtas naujesnės Logic Circuit programos. Prašome patikrinti &lt;Hyperlink NavigateUri="https://www.logiccircuit.org/"&gt;https://www.logiccircuit.org/&lt;/Hyperlink&gt; naujesnei versijai.</value>
   </data>
 	<data name="FileFilter" xml:space="preserve">
     <value>Grandinės projektas (*{0})|*{0}|Visi failai (*.*)|*.*</value>

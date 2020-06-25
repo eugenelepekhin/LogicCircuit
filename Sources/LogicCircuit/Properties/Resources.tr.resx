@@ -503,7 +503,7 @@
   </data>
 	<data name="ErrorUnknownVersion" xml:space="preserve">
     <value>Devre Projesi'nin bilinmeyen bir sürümünü yüklemeyi deneyin.
-Bozuk veya açmaya çalıştığınız dosya, Logic Circuit yazılımının daha yeni bir sürümü tarafından oluşturuldu. Daha yeni sürümler için lütfen &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt; adresini kontrol edin.</value>
+Bozuk veya açmaya çalıştığınız dosya, Logic Circuit yazılımının daha yeni bir sürümü tarafından oluşturuldu. Daha yeni sürümler için lütfen &lt;Hyperlink NavigateUri="https://www.logiccircuit.org/"&gt;https://www.logiccircuit.org/&lt;/Hyperlink&gt; adresini kontrol edin.</value>
   </data>
 	<data name="FileSaved" xml:space="preserve">
     <value>{0} dosyası kaydedildi.</value>
@@ -1354,13 +1354,13 @@ temelde bir çoğullayıcıya eşdeğerdir.</value>
     <value>Logical Circuit</value>
   </data>
 	<data name="WebSiteUri" xml:space="preserve">
-    <value>http://www.logiccircuit.org/</value>
+    <value>https://www.logiccircuit.org/</value>
   </data>
 	<data name="TitleDisplayOptions" xml:space="preserve">
     <value>Display</value>
   </data>
 	<data name="HelpContent" xml:space="preserve">
-    <value>http://www.logiccircuit.org/help.html</value>
+    <value>https://www.logiccircuit.org/help.html</value>
   </data>
 	<data name="NamePin" xml:space="preserve">
     <value>Pin</value>
@@ -1384,7 +1384,7 @@ temelde bir çoğullayıcıya eşdeğerdir.</value>
     <value>({0}, {1})</value>
   </data>
 	<data name="WebSiteDownloadUri" xml:space="preserve">
-    <value>http://www.logiccircuit.org/download.html</value>
+    <value>https://www.logiccircuit.org/download.html</value>
   </data>
 	<data name="CommandHyperlink" xml:space="preserve">
     <value>Hyperlink</value>

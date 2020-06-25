@@ -119,7 +119,7 @@
 	</resheader>
 	<data name="ErrorUnknownVersion" xml:space="preserve">
     <value>Es wurde versucht eine unbekannte Version eines Projekts zu laden.
-Die Datei welche Sie versuchen zu öffnen ist entweder inkonsistent oder sie wurde mit einer neueren Version der Logic Curcuit Software erstellt. Bitte sehen auf der Webseite:  &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt; nach, ob eine neuere Version verfügbar ist.</value>
+Die Datei welche Sie versuchen zu öffnen ist entweder inkonsistent oder sie wurde mit einer neueren Version der Logic Curcuit Software erstellt. Bitte sehen auf der Webseite:  &lt;Hyperlink NavigateUri="https://www.logiccircuit.org/"&gt;https://www.logiccircuit.org/&lt;/Hyperlink&gt; nach, ob eine neuere Version verfügbar ist.</value>
   </data>
 	<data name="FileSaved" xml:space="preserve">
     <value>Datei {0} gespeichert.</value>
@@ -1117,10 +1117,10 @@ Out</value>
     <value>Web:</value>
   </data>
 	<data name="WebSiteUri" xml:space="preserve">
-    <value>http://www.logiccircuit.org/</value>
+    <value>https://www.logiccircuit.org/</value>
   </data>
 	<data name="HelpContent" xml:space="preserve">
-    <value>http://www.logiccircuit.org/help.html</value>
+    <value>https://www.logiccircuit.org/help.html</value>
   </data>
 	<data name="TitleName" xml:space="preserve">
     <value>_Name:</value>
@@ -1165,7 +1165,7 @@ Out</value>
     <value>LED Matrix</value>
   </data>
 	<data name="WebSiteDownloadUri" xml:space="preserve">
-    <value>http://www.logiccircuit.org/download.html</value>
+    <value>https://www.logiccircuit.org/download.html</value>
   </data>
 	<data name="CommandHyperlink" xml:space="preserve">
     <value>Hyperlink</value>

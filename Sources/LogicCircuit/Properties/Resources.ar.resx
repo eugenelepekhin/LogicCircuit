@@ -124,7 +124,7 @@
     <value>محاولة تحميل نسخة غير معروفة من مشروع Circuit
 الملف الذي تحاول فتحه إما معطوب أو أنه تم إنشاؤه بإصدار Logic Circuit أحدث من الإصدار الموجود لديك 
 الرجاء التحقق  من وجود إصدار جديد
-&lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt;</value>
+&lt;Hyperlink NavigateUri="https://www.logiccircuit.org/"&gt;https://www.logiccircuit.org/&lt;/Hyperlink&gt;</value>
   </data>
   <data name="FileSaved" xml:space="preserve">
     <value>تم حفظ الملف ,{0}.</value>
@@ -1091,7 +1091,7 @@
     <value>XNor</value>
   </data>
   <data name="HelpContent" xml:space="preserve">
-    <value>http://www.logiccircuit.org/help.html</value>
+    <value>https://www.logiccircuit.org/help.html</value>
   </data>
   <data name="GridPoint" xml:space="preserve">
     <value>({0}, {1})</value>
@@ -1157,10 +1157,10 @@
     <value>قم بعرض العناصر على الرمز</value>
   </data>
   <data name="WebSiteUri" xml:space="preserve">
-    <value>http://www.logiccircuit.org/</value>
+    <value>https://www.logiccircuit.org/</value>
   </data>
   <data name="WebSiteDownloadUri" xml:space="preserve">
-    <value>http://www.logiccircuit.org/download.html</value>
+    <value>https://www.logiccircuit.org/download.html</value>
   </data>
   <data name="ToolTipIsDisplay" xml:space="preserve">
     <value>عندما تقوم بتفعيل خيار عرض العناصر كل الرموز في هذه الدارة سوف تظهر على رموزها ,العناصر هي:

@@ -275,7 +275,7 @@
   </data>
 	<data name="ErrorUnknownVersion" xml:space="preserve">
     <value>Tentative de chargement d'une version inconnue d'un projet de circuit.
-Le fichier que vous essayez d'ouvrir est endommagé ou a été créé par une version plus récente du logiciel Logic Circuit. Veuillez vérifier &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt; pour les versions plus récentes.</value>
+Le fichier que vous essayez d'ouvrir est endommagé ou a été créé par une version plus récente du logiciel Logic Circuit. Veuillez vérifier &lt;Hyperlink NavigateUri="https://www.logiccircuit.org/"&gt;https://www.logiccircuit.org/&lt;/Hyperlink&gt; pour les versions plus récentes.</value>
   </data>
 	<data name="FileFilter" xml:space="preserve">
     <value>Projet de circuit (*{0})|*{0}|Tous les fichiers (*.*)|*.*</value>
@@ -1034,7 +1034,7 @@ Les éléments sont : DEL, Matrice de DEL, Bouton, ou autre circuit logique.</va
     <value>Web :</value>
   </data>
 	<data name="WebSiteUri" xml:space="preserve">
-    <value>http://www.logiccircuit.org/</value>
+    <value>https://www.logiccircuit.org/</value>
   </data>
 	<data name="TitleOptions" xml:space="preserve">
     <value>Options</value>
@@ -1058,7 +1058,7 @@ Les éléments sont : DEL, Matrice de DEL, Bouton, ou autre circuit logique.</va
     <value>_Zoom :</value>
   </data>
 	<data name="WebSiteDownloadUri" xml:space="preserve">
-    <value>http://www.logiccircuit.org/download.html</value>
+    <value>https://www.logiccircuit.org/download.html</value>
   </data>
 	<data name="GateAndNotation" xml:space="preserve">
     <value>&amp;</value>
@@ -1127,7 +1127,7 @@ Les éléments sont : DEL, Matrice de DEL, Bouton, ou autre circuit logique.</va
     <value>{0}{1}</value>
   </data>
 	<data name="HelpContent" xml:space="preserve">
-    <value>http://www.logiccircuit.org/help.html</value>
+    <value>https://www.logiccircuit.org/help.html</value>
   </data>
 	<data name="MenuHeaderCircuit" xml:space="preserve">
     <value>_Circuit</value>

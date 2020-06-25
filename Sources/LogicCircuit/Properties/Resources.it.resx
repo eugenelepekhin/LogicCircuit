@@ -122,7 +122,7 @@
   </data>
   <data name="ErrorUnknownVersion" xml:space="preserve">
     <value>Si è tentato di caricare una versione sconosciuta di Circuit Project. 
-Il file che si sta tentando di aprire è danneggiato o è stato creato da una versione più recente del software Logic Circuit. Si prega di verificare &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt; per una versione più recente.</value>
+Il file che si sta tentando di aprire è danneggiato o è stato creato da una versione più recente del software Logic Circuit. Si prega di verificare &lt;Hyperlink NavigateUri="https://www.logiccircuit.org/"&gt;https://www.logiccircuit.org/&lt;/Hyperlink&gt; per una versione più recente.</value>
   </data>
   <data name="FileFilter" xml:space="preserve">
     <value>Circuito del progetto (*{0})|*{0}|Tutti i file (*.*)|*.*</value>
@@ -387,7 +387,7 @@ Out</value>
     <value>Web:</value>
   </data>
   <data name="WebSiteUri" xml:space="preserve">
-    <value>http://www.logiccircuit.org/</value>
+    <value>https://www.logiccircuit.org/</value>
   </data>
   <data name="CommandToolsOptions" xml:space="preserve">
     <value>_Opzioni</value>
@@ -464,7 +464,7 @@ Out</value>
     <value>Report del progetto</value>
   </data>
   <data name="HelpContent" xml:space="preserve">
-    <value>http://www.logiccircuit.org/help.html</value>
+    <value>https://www.logiccircuit.org/help.html</value>
   </data>
   <data name="TitleCategory" xml:space="preserve">
     <value>_Categoria:</value>
@@ -981,7 +981,7 @@ Si desidera di rimuovere il riferimento dall'elenco dei File recenti?</value>
     <value>Controlla ora</value>
   </data>
   <data name="WebSiteDownloadUri" xml:space="preserve">
-    <value>http://www.logiccircuit.org/download.html</value>
+    <value>https://www.logiccircuit.org/download.html</value>
   </data>
   <data name="CommandHyperlink" xml:space="preserve">
     <value>Collegamento ipertestuale</value>

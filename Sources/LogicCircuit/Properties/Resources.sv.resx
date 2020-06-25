@@ -152,7 +152,7 @@ Vill du spara det?</value>
 	</data>
 	<data name="ErrorUnknownVersion" xml:space="preserve">
 		<value>Försök att ladda en okänd version av Krets Projekt.
-Filen du försöker öppna har antingen blivit korrupt eller så var den skapad med en nyare version av Logisk Krets programvaran. se &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt; för nyare versioner</value>
+Filen du försöker öppna har antingen blivit korrupt eller så var den skapad med en nyare version av Logisk Krets programvaran. se &lt;Hyperlink NavigateUri="https://www.logiccircuit.org/"&gt;https://www.logiccircuit.org/&lt;/Hyperlink&gt; för nyare versioner</value>
 	</data>
 	<data name="OperationCanceled" xml:space="preserve">
 		<value>Operationen avbryten.</value>
@@ -1376,10 +1376,10 @@ Vill du ladda an automatiskt sparad fil istället?</value>
 		<value>{0:X}</value>
 	</data>
 	<data name="WebSiteUri" xml:space="preserve">
-		<value>http://www.logiccircuit.org/</value>
+		<value>https://www.logiccircuit.org/</value>
 	</data>
 	<data name="HelpContent" xml:space="preserve">
-		<value>http://www.logiccircuit.org/help.html</value>
+		<value>https://www.logiccircuit.org/help.html</value>
 	</data>
 	<data name="TitleOscillogram" xml:space="preserve">
 		<value>Oscillogram</value>
@@ -1400,7 +1400,7 @@ Vill du ladda an automatiskt sparad fil istället?</value>
 		<value>1</value>
 	</data>
 	<data name="WebSiteDownloadUri" xml:space="preserve">
-		<value>http://www.logiccircuit.org/download.html</value>
+		<value>https://www.logiccircuit.org/download.html</value>
 	</data>
 	<data name="CommandHyperlink" xml:space="preserve">
 		<value>Hyperlink</value>

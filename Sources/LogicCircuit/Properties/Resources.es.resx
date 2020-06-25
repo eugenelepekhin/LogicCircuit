@@ -412,7 +412,7 @@ Tal circuito no puede utilizarse más de una vez en otros circuitos debido a que
   </data>
 	<data name="ErrorUnknownVersion" xml:space="preserve">
     <value>Versión de proyecto no reconocida.
-El archivo que intenta abrir puede estar dañado o fue creado en una versión más reciente de Logic Circuit. Por favor compruebe &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt; para obtener las versión más reciente.</value>
+El archivo que intenta abrir puede estar dañado o fue creado en una versión más reciente de Logic Circuit. Por favor compruebe &lt;Hyperlink NavigateUri="https://www.logiccircuit.org/"&gt;https://www.logiccircuit.org/&lt;/Hyperlink&gt; para obtener las versión más reciente.</value>
   </data>
 	<data name="ErrorUnsupportedUri" xml:space="preserve">
     <value>La navegación hacia esta dirección no esta soportada.</value>
@@ -500,7 +500,7 @@ El archivo que intenta abrir puede estar dañado o fue creado en una versión m�
     <comment>{int x, int y}</comment>
   </data>
 	<data name="HelpContent" xml:space="preserve">
-    <value>http://www.logiccircuit.org/help.html</value>
+    <value>https://www.logiccircuit.org/help.html</value>
   </data>
 	<data name="ImageFileFilter" xml:space="preserve">
     <value>Archivo de imagen (*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif)|*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif|All Files (*.*)|*.*</value>
@@ -1206,10 +1206,10 @@ Out</value>
     <comment>{LogicCircuit.State state}</comment>
   </data>
 	<data name="WebSiteDownloadUri" xml:space="preserve">
-    <value>http://www.logiccircuit.org/download.html</value>
+    <value>https://www.logiccircuit.org/download.html</value>
   </data>
 	<data name="WebSiteUri" xml:space="preserve">
-    <value>http://www.logiccircuit.org/</value>
+    <value>https://www.logiccircuit.org/</value>
   </data>
 	<data name="WriteOn0" xml:space="preserve">
     <value>Disminuir de 1 a 0</value>

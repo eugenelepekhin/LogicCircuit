@@ -436,7 +436,7 @@
   </data>
 	<data name="ErrorUnknownVersion" xml:space="preserve">
     <value>Circuit Project의 알수없는 버전을 로드하려고 합니다.
-열고자 하는 파일이 손상되었거나 상위버전의 Logic Circuit으로 제작되었습니다.&lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt;최신버전을 확인해 주시기 바랍니다.</value>
+열고자 하는 파일이 손상되었거나 상위버전의 Logic Circuit으로 제작되었습니다.&lt;Hyperlink NavigateUri="https://www.logiccircuit.org/"&gt;https://www.logiccircuit.org/&lt;/Hyperlink&gt;최신버전을 확인해 주시기 바랍니다.</value>
   </data>
 	<data name="FileSaved" xml:space="preserve">
     <value>{0}이 저장되었습니다.</value>
@@ -1079,10 +1079,10 @@
     <value>정보</value>
   </data>
 	<data name="WebSiteUri" xml:space="preserve">
-    <value>http://www.logiccircuit.org/</value>
+    <value>https://www.logiccircuit.org/</value>
   </data>
 	<data name="HelpContent" xml:space="preserve">
-    <value>http://www.logiccircuit.org/help.html</value>
+    <value>https://www.logiccircuit.org/help.html</value>
   </data>
 	<data name="CircuitMapPathSeparator" xml:space="preserve">
     <value>/</value>
@@ -1118,7 +1118,7 @@
     <value>({0}, {1})</value>
   </data>
 	<data name="WebSiteDownloadUri" xml:space="preserve">
-    <value>http://www.logiccircuit.org/download.html</value>
+    <value>https://www.logiccircuit.org/download.html</value>
   </data>
 	<data name="TitleIsDisplay" xml:space="preserve">
     <value>회로의 모습을 시각적인 형태로 표시</value>

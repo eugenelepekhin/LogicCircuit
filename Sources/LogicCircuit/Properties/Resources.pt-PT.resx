@@ -122,7 +122,7 @@
   </data>
 	<data name="ErrorUnknownVersion" xml:space="preserve">
     <value>Tentativa de carregar uma versão desconhecida de Projeto de Circuito.
-O ficheiro que você está a tentar abrir pode estar corrompido ou foi criado por uma versão mais recente do programa Logic Circuit. Acesse &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt; para conferir as versões mais recentes.</value>
+O ficheiro que você está a tentar abrir pode estar corrompido ou foi criado por uma versão mais recente do programa Logic Circuit. Acesse &lt;Hyperlink NavigateUri="https://www.logiccircuit.org/"&gt;https://www.logiccircuit.org/&lt;/Hyperlink&gt; para conferir as versões mais recentes.</value>
   </data>
 	<data name="FileFilter" xml:space="preserve">
     <value>Projeto de Circuitos (*{0})|*{0}|Todos os ficheiros (*.*)|*.*</value>
@@ -388,7 +388,7 @@ Saída</value>
     <value>Rede:</value>
   </data>
 	<data name="WebSiteUri" xml:space="preserve">
-    <value>http://www.logiccircuit.org/</value>
+    <value>https://www.logiccircuit.org/</value>
   </data>
 	<data name="CommandToolsOptions" xml:space="preserve">
     <value>_Opções</value>
@@ -465,7 +465,7 @@ Saída</value>
     <value>Relatório do Projeto</value>
   </data>
 	<data name="HelpContent" xml:space="preserve">
-    <value>http://www.logiccircuit.org/help.html</value>
+    <value>https://www.logiccircuit.org/help.html</value>
   </data>
 	<data name="TitleCategory" xml:space="preserve">
     <value>_Categoria:</value>
@@ -984,7 +984,7 @@ Deseja remover a referência dele da lista de Ficheiros Recentes?</value>
     <value>Verificar agora</value>
   </data>
 	<data name="WebSiteDownloadUri" xml:space="preserve">
-    <value>http://www.logiccircuit.org/download.html</value>
+    <value>https://www.logiccircuit.org/download.html</value>
   </data>
 	<data name="CommandHyperlink" xml:space="preserve">
     <value>Hiperligação</value>

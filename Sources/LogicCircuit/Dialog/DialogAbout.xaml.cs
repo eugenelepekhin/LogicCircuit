@@ -92,7 +92,7 @@ namespace LogicCircuit {
 		}
 
 		/// <summary>
-		/// Check if http://www.LogicCircuit.org/TranslationRequests.txt contains name of current culture.
+		/// Check if https://www.LogicCircuit.org/TranslationRequests.txt contains name of current culture.
 		/// If this is the case then show user message dialog asking to help translating this program.
 		/// </summary>
 		/// <param name="dispatcher"></param>
@@ -108,13 +108,13 @@ namespace LogicCircuit {
 						string text = null;
 						using(WebClient client = new WebClient()) {
 							client.UseDefaultCredentials = true;
-							text = client.DownloadString(new Uri("http://www.LogicCircuit.org/TranslationRequests.txt"));
+							text = client.DownloadString(new Uri("https://www.LogicCircuit.org/TranslationRequests.txt"));
 						}
 						if(!string.IsNullOrWhiteSpace(text) && text.Contains(cultureName)) {
 							dispatcher.BeginInvoke(
 								new Action(() => App.Mainframe.InformationMessage(
 									"If you can help translating this program to any language you are fluent in please contact me at:\n" +
-									"<Hyperlink NavigateUri=\"http://www.logiccircuit.org/contact.html\">http://www.logiccircuit.org/contact.html</Hyperlink>"
+									"<Hyperlink NavigateUri=\"https://www.logiccircuit.org/contact.html\">https://www.logiccircuit.org/contact.html</Hyperlink>"
 								)),
 								DispatcherPriority.ApplicationIdle
 							);
@@ -193,7 +193,7 @@ namespace LogicCircuit {
 					this.onComplete = completeAction;
 					this.webClient.UseDefaultCredentials = true;
 					this.webClient.DownloadStringCompleted += this.DownloadCompleted;
-					this.webClient.DownloadStringAsync(new Uri("http://www.LogicCircuit.org/LatestVersion.txt"));
+					this.webClient.DownloadStringAsync(new Uri("https://www.LogicCircuit.org/LatestVersion.txt"));
 					return true;
 				}
 				return false;

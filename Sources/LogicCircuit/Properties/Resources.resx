@@ -122,7 +122,7 @@
   </data>
   <data name="ErrorUnknownVersion" xml:space="preserve">
     <value>Attempt to load an unknown version of Circuit Project.
-The file you are trying to open either corrupted or it was created by newer version of Logic Circuit software. Please check &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt; for newer versions.</value>
+The file you are trying to open either corrupted or it was created by newer version of Logic Circuit software. Please check &lt;Hyperlink NavigateUri="https://www.logiccircuit.org/"&gt;https://www.logiccircuit.org/&lt;/Hyperlink&gt; for newer versions.</value>
   </data>
   <data name="FileFilter" xml:space="preserve">
     <value>Circuit Project (*{0})|*{0}|All files (*.*)|*.*</value>
@@ -388,7 +388,7 @@ Out</value>
     <value>Web:</value>
   </data>
   <data name="WebSiteUri" xml:space="preserve">
-    <value>http://www.logiccircuit.org/</value>
+    <value>https://www.logiccircuit.org/</value>
   </data>
   <data name="CommandToolsOptions" xml:space="preserve">
     <value>_Options</value>
@@ -465,7 +465,7 @@ Out</value>
     <value>Project Report</value>
   </data>
   <data name="HelpContent" xml:space="preserve">
-    <value>http://www.logiccircuit.org/help.html</value>
+    <value>https://www.logiccircuit.org/help.html</value>
   </data>
   <data name="TitleCategory" xml:space="preserve">
     <value>_Category:</value>
@@ -984,7 +984,7 @@ Do you want to remove the reference to it from the Recent Files list?</value>
     <value>Check now</value>
   </data>
   <data name="WebSiteDownloadUri" xml:space="preserve">
-    <value>http://www.logiccircuit.org/download.html</value>
+    <value>https://www.logiccircuit.org/download.html</value>
   </data>
   <data name="CommandHyperlink" xml:space="preserve">
     <value>Hyperlink</value>

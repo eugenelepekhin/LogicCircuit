@@ -426,7 +426,7 @@
   </data>
 	<data name="ErrorUnknownVersion" xml:space="preserve">
     <value>נסיון לטעון גרסה לא ידועה של פרויקט.‏
-הקובץ פגום, או נוצר עם גרסה חדשה יותר של LogicCircuit. נא לבדוק את הכתובת &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt; עבור גרסה חדשה יותר.‏</value>
+הקובץ פגום, או נוצר עם גרסה חדשה יותר של LogicCircuit. נא לבדוק את הכתובת &lt;Hyperlink NavigateUri="https://www.logiccircuit.org/"&gt;https://www.logiccircuit.org/&lt;/Hyperlink&gt; עבור גרסה חדשה יותר.‏</value>
   </data>
 	<data name="ErrorUnsupportedUri" xml:space="preserve">
     <value>ניווט לכתובת הזאת לא נתמך.‏</value>
@@ -508,7 +508,7 @@
     <comment>{int x, int y}</comment>
   </data>
 	<data name="HelpContent" xml:space="preserve">
-    <value>http://www.logiccircuit.org/help.html</value>
+    <value>https://www.logiccircuit.org/help.html</value>
   </data>
 	<data name="ImageFileFilter" xml:space="preserve">
     <value>קובץ תמונה(*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif)|*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif|כל הקבצים‏(*.*)|*.*</value>
@@ -1228,10 +1228,10 @@
     <comment>{LogicCircuit.State state}</comment>
   </data>
 	<data name="WebSiteDownloadUri" xml:space="preserve">
-    <value>http://www.logiccircuit.org/download.html</value>
+    <value>https://www.logiccircuit.org/download.html</value>
   </data>
 	<data name="WebSiteUri" xml:space="preserve">
-    <value>http://www.logiccircuit.org/</value>
+    <value>https://www.logiccircuit.org/</value>
   </data>
 	<data name="WireDisplayBitWidth" xml:space="preserve">
     <value>רוחב סיביות‏: ‏{0}‏</value>

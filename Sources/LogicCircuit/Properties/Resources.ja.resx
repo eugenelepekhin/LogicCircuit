@@ -102,7 +102,7 @@
 	</data>
 	<data name="ErrorUnknownVersion" xml:space="preserve">
 		<value>不明なバージョンの回路プロジェクトが開かれました。
-開こうとしたファイルが壊れているか、新しいバージョンの Logic Circuitで作成されたものです。新しいバージョンについては &lt;Hyperlink NavigateUri="http://www.logiccircuit.org/"&gt;http://www.logiccircuit.org/&lt;/Hyperlink&gt; をクリックしてください。</value>
+開こうとしたファイルが壊れているか、新しいバージョンの Logic Circuitで作成されたものです。新しいバージョンについては &lt;Hyperlink NavigateUri="https://www.logiccircuit.org/"&gt;https://www.logiccircuit.org/&lt;/Hyperlink&gt; をクリックしてください。</value>
 	</data>
 	<data name="FileFilter" xml:space="preserve">
 		<value>回路プロジェクト (*{0})|*{0}|すべてのファイル (*.*)|*.*</value>
