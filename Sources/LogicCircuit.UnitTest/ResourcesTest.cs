@@ -24,7 +24,7 @@ namespace LogicCircuit.UnitTest {
 
 		private bool ValidUrl(string url, Predicate<Uri> isValid = null) {
 			Uri uri;
-			return Uri.TryCreate(url, UriKind.Absolute, out uri) && uri.Scheme == Uri.UriSchemeHttp && uri.Host == "www.logiccircuit.org" && (isValid == null || isValid(uri));
+			return Uri.TryCreate(url, UriKind.Absolute, out uri) && uri.Scheme == Uri.UriSchemeHttps && uri.Host == "www.logiccircuit.org" && (isValid == null || isValid(uri));
 		}
 
 		/// <summary>
@@ -58,7 +58,7 @@ namespace LogicCircuit.UnitTest {
 		[TestMethod()]
 		public void ResourcesErrorUnknownVersionTest() {
 			Regex regex = new Regex(
-				"<Hyperlink NavigateUri=\"http://www.logiccircuit.org/\">http://www.logiccircuit.org/</Hyperlink>",
+				"<Hyperlink NavigateUri=\"https://www.logiccircuit.org/\">https://www.logiccircuit.org/</Hyperlink>",
 				RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.Singleline
 			);
 			foreach(CultureInfo culture in App.AvailableCultures) {
