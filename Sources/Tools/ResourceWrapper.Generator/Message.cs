@@ -3,7 +3,7 @@ using System.Text;
 
 namespace ResourceWrapper.Generator {
 	internal static class Message {
-		private static StringBuilder text = new StringBuilder();
+		private static readonly StringBuilder text = new StringBuilder();
 
 		public static void Error(string text, params object[] args) {
 			Message.Flush();

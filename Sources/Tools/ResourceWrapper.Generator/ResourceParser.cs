@@ -22,7 +22,7 @@ namespace ResourceWrapper.Generator {
 			if(nodeList != null && 0 < nodeList.Count) {
 				ResourceParser parser = new ResourceParser(file, enforceParameterDeclaration, satelites);
 				List<ResourceItem> list = new List<ResourceItem>();
-				Action<ResourceItem> assign = item => { if(item != null) { list.Add(item); } };
+				void assign(ResourceItem item) { if(item != null) { list.Add(item); } }
 				parser.Parse(nodeList,
 					(string name, string value, string comment) => assign(parser.GenerateInclude(name, value, comment)),
 					(string name, string value, string comment) => assign(parser.GenerateString(name, value, comment))
@@ -44,9 +44,7 @@ namespace ResourceWrapper.Generator {
 		}
 
 		public static IEnumerable<ResourceItem> Parse(string file, bool enforceParameterDeclaration, IEnumerable<string> satelites) {
-			int errors;
-			int warnings;
-			return ResourceParser.Parse(file, enforceParameterDeclaration, satelites, out errors, out warnings);
+			return ResourceParser.Parse(file, enforceParameterDeclaration, satelites, out int _, out int _);
 		}
 
 		private static XmlNodeList SelectResources(XmlDocument resource) {
@@ -106,7 +104,7 @@ namespace ResourceWrapper.Generator {
 			Dictionary<string, ResourceItem> items = new Dictionary<string,ResourceItem>(itemList.Count);
 			itemList.ForEach(i => items.Add(i.Name, i));
 			string mainFile = this.fileName;
-			Action<string> unknownResource = name => this.Warning(name, "resource does not exist in the main resource file \"{0}\"", mainFile);
+			void unknownResource(string name) => this.Warning(name, "resource does not exist in the main resource file \"{0}\"", mainFile);
 			foreach(string file in this.satelites) {
 				XmlDocument resource = new XmlDocument();
 				resource.Load(file);
@@ -115,8 +113,7 @@ namespace ResourceWrapper.Generator {
 					this.fileName = file;
 					this.Parse(nodeList,
 						(string name, string value, string comment) => {
-							ResourceItem item;
-							if(items.TryGetValue(name, out item)) {
+							if(items.TryGetValue(name, out ResourceItem item)) {
 								ResourceItem satellite = this.GenerateInclude(name, value, comment);
 								if(item.Type != satellite.Type) {
 									this.Error(name, "type of file resource is different in main resource file \"{0}\" and language resource file \"{1}\"", mainFile, file);
@@ -126,8 +123,7 @@ namespace ResourceWrapper.Generator {
 							}
 						},
 						(string name, string value, string comment) => {
-							ResourceItem item;
-							if(items.TryGetValue(name, out item)) {
+							if(items.TryGetValue(name, out ResourceItem item)) {
 								if(!item.SuppressValidation) {
 									int count = this.ValidateFormatItems(name, value, false);
 									if(count != (item.Parameters == null ? 0 : item.Parameters.Count)) {
@@ -265,10 +261,10 @@ namespace ResourceWrapper.Generator {
 		/// <param name="requareAllParameters"></param>
 		/// <returns></returns>
 		private int ValidateFormatItems(string name, string value, bool requareAllParameters) {
-			Func<int> error = () => {
+			int error() {
 				this.Error(name, "Invalid formating item.");
 				return -1;
-			};
+			}
 			HashSet<int> indexes = new HashSet<int>();
 			for(int i = 0; i < value.Length; i++) {
 				if('}' == value[i]) {

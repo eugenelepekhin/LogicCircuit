@@ -1,10 +1,9 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Text;
 
 namespace ResourceWrapper.Generator {
 	public abstract class Transformation {
-		private ToStringHelper toStringHelper = new ToStringHelper();
+		private readonly ToStringHelper toStringHelper = new ToStringHelper();
 		public ToStringHelper ToStringHelper { get { return this.toStringHelper; } }
 
 		private StringBuilder generationEnvironmentField;

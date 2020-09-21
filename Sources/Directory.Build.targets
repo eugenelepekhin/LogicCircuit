@@ -2,13 +2,14 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<Target Name="GenerateResourceWrappers" BeforeTargets="BeforeBuild" Condition="'@(EmbeddedResource)' != '' and '$(MSBuildProjectName)' != 'LogicCircuit.UnitTest'">
 		<PropertyGroup>
-			<ResourceWrapperGeneratorCommand>"$(MSBuildThisFileDirectory)Tools\ResourceWrapper.Generator.exe" /FlowDirection /p "$(ProjectPath)"</ResourceWrapperGeneratorCommand>
+			<ResourceWrapperGeneratorCommand>"$(MSBuildThisFileDirectory)Tools\ResourceWrapper.Generator.exe" /FlowDirection /f "$(MSBuildProjectDirectory)" /n "$(RootNamespace)" /a "@(EmbeddedResource)"</ResourceWrapperGeneratorCommand>
 			<PseudoBuildDefined>$(DefineConstants.Contains("Pseudo"))</PseudoBuildDefined>
-			<ResourceWrapperGeneratorCommand Condition="$(PseudoBuildDefined)">$(ResourceWrapperGeneratorCommand) Pseudo=$(RootNamespace).Properties.Resources</ResourceWrapperGeneratorCommand>
+			<ResourceWrapperGeneratorCommand Condition="$(PseudoBuildDefined)">$(ResourceWrapperGeneratorCommand) /Pseudo</ResourceWrapperGeneratorCommand>
 		</PropertyGroup>
 
-		<!--<Message Importance="high" Text=">>> Building Resource Wrappers: $(ResourceWrapperGeneratorCommand)"/>-->
-		<Exec Command="$(ResourceWrapperGeneratorCommand)"/>
+		<Exec Condition="'%(EmbeddedResource.Generator)'!='' and '%(EmbeddedResource.LastGenOutput)' != ''"
+			Command="$(ResourceWrapperGeneratorCommand) /r &quot;%(EmbeddedResource.Identity)&quot; /g &quot;%(EmbeddedResource.Generator)&quot; /cs &quot;%(EmbeddedResource.LastGenOutput)&quot; /rn &quot;%(EmbeddedResource.CustomToolNamespace)&quot;"
+		/>
 	</Target>
 
 	<Target Name="GenerateItemWrappers" BeforeTargets="BeforeBuild" Condition="Exists('$(MSBuildProjectDirectory)\Schema\CircuitProject.xml')">

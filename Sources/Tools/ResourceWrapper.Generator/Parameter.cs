@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ResourceWrapper.Generator {
+﻿namespace ResourceWrapper.Generator {
 	public struct Parameter {
 		public string Type;
 		public string Name;

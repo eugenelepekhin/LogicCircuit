@@ -17,7 +17,7 @@ namespace CommandLineParser {
 	/// Inspired by Mono.Options but simpler and easier to use.
 	/// </summary>
 	internal class CommandLine {
-		private ParameterList parameterList = new ParameterList();
+		private readonly ParameterList parameterList = new ParameterList();
 
 		#if HaveFlagParam
 			/// <summary>
@@ -155,8 +155,8 @@ namespace CommandLineParser {
 		/// <returns>Constructed help string</returns>
 		public string Help() {
 			this.parameterList.EnsureDefined();
-			Func<Parameter, string> value = parameter => parameter.Value != null ? " " + parameter.Value : string.Empty;
-			Func<Parameter, string> format = parameter =>
+			string value(Parameter parameter) => parameter.Value != null ? " " + parameter.Value : string.Empty;
+			string format(Parameter parameter) =>
 				(parameter.Alias == null)
 				? string.Format(CultureInfo.InvariantCulture, "/{0}{1}", parameter.Name, value(parameter))
 				: string.Format(CultureInfo.InvariantCulture, "/{0} -{1}{2}", parameter.Alias, parameter.Name, value(parameter))
@@ -255,7 +255,7 @@ namespace CommandLineParser {
 				}
 
 				public override string SetValue(string value) {
-					bool flag = false;
+					bool flag;
 					if(string.IsNullOrWhiteSpace(value)) {
 						flag = true;
 					} else {
