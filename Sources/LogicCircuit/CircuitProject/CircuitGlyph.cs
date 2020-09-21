@@ -26,7 +26,7 @@ namespace LogicCircuit {
 
 		public abstract GridPoint Point { get; set; }
 
-		private FrameworkElement glyph = null;
+		private FrameworkElement glyph;
 
 		public override FrameworkElement Glyph {
 			get { return this.glyph ?? (this.glyph = this.Circuit.CreateGlyph(this)); }

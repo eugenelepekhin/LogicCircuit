@@ -28,12 +28,12 @@ namespace LogicCircuit.DataPersistent {
 
 		private readonly Dictionary<string, ISnapTable> table = new Dictionary<string, ISnapTable>();
 		private readonly ValueList<TransactionType> version = new ValueList<TransactionType>();
-		private int minUndo = 0;
-		private StoreSnapshot editor = null;
-		private Thread editorThread = null;
+		private int minUndo;
+		private StoreSnapshot editor;
+		private Thread editorThread;
 
 		/// <summary>
-		/// true when SnapStore was "frozen" for metadata modifications
+		/// true when SnapStore was "frozen" for meta-data modifications
 		/// </summary>
 		public bool IsFrozen { get; private set; }
 

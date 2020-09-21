@@ -15,14 +15,14 @@ namespace LogicCircuit {
 
 		private SettingsWindowLocationCache windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
-		private SettingsStringCache openFileFolder;
+		private readonly SettingsStringCache openFileFolder;
 		public SettingsGridLengthCache DataHeight { get; private set; }
 		public SettingsGridLengthCache NoteHeight { get; private set; }
 		
 		public Memory Memory { get; private set; }
 
 		private byte[] data;
-		private bool initialized = false;
+		private readonly bool initialized;
 
 		private int AddressBitWidth { get { return (int)this.addressBitWidth.SelectedItem; } }
 		private int DataBitWidth { get { return (int)this.dataBitWidth.SelectedItem; } }

@@ -10,7 +10,7 @@ namespace LogicCircuit {
 		private static AutoResetEvent updateRequest;
 		private static WireValidator wireValidator;
 
-		private bool running = false;
+		private bool running;
 		private bool stopPending;
 
 		private readonly HashSet<Wire> badWires = new HashSet<Wire>();

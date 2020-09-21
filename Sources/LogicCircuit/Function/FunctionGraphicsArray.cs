@@ -28,8 +28,8 @@ namespace LogicCircuit {
 
 		private readonly byte[] data;
 		private WriteableBitmap bitmap;
-		private LogicalCircuit lastLogicalCircuit = null;
-		private Image lastImage = null;
+		private LogicalCircuit lastLogicalCircuit;
+		private Image lastImage;
 
 		public int AddressBitWidth { get { return this.address.Length; } }
 		public int DataBitWidth { get { return this.inputData.Length; } }

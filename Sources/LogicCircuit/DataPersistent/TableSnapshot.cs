@@ -738,7 +738,7 @@ namespace LogicCircuit.DataPersistent {
 			}
 		}
 
-		private static int currentTimestamp = 0;
+		private static int currentTimestamp;
 		private static int Timestamp() {
 			return ++TableSnapshot<TRecord>.currentTimestamp;
 		}

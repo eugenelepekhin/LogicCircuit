@@ -7,11 +7,11 @@ using System.Windows.Shapes;
 namespace LogicCircuit {
 	public class FunctionLed : Probe, IFunctionVisual {
 
-		private static Brush[] stateBrush = null;
+		private static Brush[] stateBrush;
 
 		private readonly List<CircuitSymbol> circuitSymbol;
 		private readonly Project project;
-		private LogicalCircuit lastLogicalCircuit = null;
+		private LogicalCircuit lastLogicalCircuit;
 		private Shape lastShape;
 
 		public FunctionLed(CircuitState circuitState, IEnumerable<CircuitSymbol> symbols, int parameter) : base(circuitState, parameter) {

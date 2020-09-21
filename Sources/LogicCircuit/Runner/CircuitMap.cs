@@ -21,7 +21,7 @@ namespace LogicCircuit {
 		private HashSet<IFunctionVisual> displays;
 		private Dictionary<CircuitSymbol, FunctionConstant> constants;
 		private Dictionary<CircuitSymbol, IFunctionMemory> memories;
-		private bool turnedOn = false;
+		private bool turnedOn;
 
 		private CircuitMap visible;
 		public CircuitMap Visible {
@@ -43,7 +43,7 @@ namespace LogicCircuit {
 		public bool IsCurrent { get { return this == this.Visible; } }
 
 		// This only exists on the root.
-		private Dictionary<SymbolMapKey, SymbolMap> results;
+		private readonly Dictionary<SymbolMapKey, SymbolMap> results;
 
 		// This only exists on the root;
 		private Dictionary<LogicalCircuit, Dictionary<GridPoint, List<Jam>>> jamMaps;

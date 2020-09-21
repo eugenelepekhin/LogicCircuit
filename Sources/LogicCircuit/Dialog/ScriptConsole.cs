@@ -13,7 +13,7 @@ namespace LogicCircuit {
 		internal Func<bool> CommandBreak { get; set; } = () => false;
 		internal Func<string, string> CommandSuggestion { get; set; } = text => string.Empty;
 
-		private int inputStarts = 0;
+		private int inputStarts;
 
 		private readonly SettingsStringCache historySettings = new SettingsStringCache(Settings.User, "ScriptConsole.History", null);
 		private readonly List<string> history;

@@ -12,7 +12,7 @@ using System.Xml;
 
 namespace LogicCircuit {
 	public partial class TextNote : IRotatable {
-		private FlowDocumentScrollViewer glyph = null;
+		private FlowDocumentScrollViewer glyph;
 
 		public FlowDocumentScrollViewer TextNoteGlyph {
 			get { return this.glyph ?? (this.glyph = this.CreateGlyph()); }

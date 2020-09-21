@@ -59,6 +59,7 @@ namespace LogicCircuit {
 			set { Tracer.currentLevel = value; }
 		}
 
+		[SuppressMessage("Performance", "CA1805:Do not initialize unnecessarily")]
 		private static bool writeToLogFile = (
 			#if DEBUG
 				false //true

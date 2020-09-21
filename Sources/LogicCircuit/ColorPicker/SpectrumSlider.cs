@@ -12,7 +12,7 @@ namespace LogicCircuit {
 			set { this.SetValue(SpectrumSlider.HueProperty, value); }
 		}
 
-		private bool changing = false;
+		private bool changing;
 		
 		public SpectrumSlider() {
 			this.SetBackground();

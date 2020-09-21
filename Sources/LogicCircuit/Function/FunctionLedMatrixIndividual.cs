@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace LogicCircuit {
 	public class FunctionLedMatrixIndividual : FunctionLedMatrix {
 		private readonly int[] state;
-		private LogicalCircuit lastLogicalCircuit = null;
+		private LogicalCircuit lastLogicalCircuit;
 
 		public FunctionLedMatrixIndividual(CircuitState circuitState, IEnumerable<CircuitSymbol> symbols, int[] parameter) : base(circuitState, symbols, parameter) {
 			LedMatrix matrix = this.Matrix;

@@ -13,10 +13,10 @@ namespace LogicCircuit {
 		public event EventHandler FunctionUpdated;
 
 		private readonly DirtyList dirty;
-		private State[] state = null;
+		private State[] state;
 		public int Count { get; private set; }
 
-		private List<CircuitFunction>[] dependent = null;
+		private List<CircuitFunction>[] dependent;
 		private readonly List<CircuitFunction> functions = new List<CircuitFunction>();
 		public IEnumerable<CircuitFunction> Functions { get { return this.functions; } }
 
@@ -210,9 +210,9 @@ namespace LogicCircuit {
 			public int Delay { get; set; }
 			private long iteration = 1;
 
-			private int index = 0;
-			private int offset = 0;
-			private int step = 0;
+			private int index;
+			private int offset;
+			private int step;
 
 			public DirtyList(int seed) {
 				this.seed = seed;

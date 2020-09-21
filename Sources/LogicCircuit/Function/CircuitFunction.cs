@@ -251,7 +251,7 @@ namespace LogicCircuit {
 						text.Append('>');
 					}
 				#endif
-				text.Append("(");
+				text.Append('(');
 				bool comma = false;
 				foreach(int p in this.parameter) {
 					if(comma) {
@@ -271,7 +271,7 @@ namespace LogicCircuit {
 					}
 					text.Append(r);
 				}
-				text.Append("]");
+				text.Append(']');
 				return text.ToString();
 			}
 		#endif

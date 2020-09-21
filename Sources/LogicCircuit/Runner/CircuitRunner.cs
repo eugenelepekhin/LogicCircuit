@@ -31,19 +31,19 @@ namespace LogicCircuit {
 		public bool HasProbes { get; private set; }
 
 		public CircuitState CircuitState { get; private set; }
-		private bool isMaxSpeed = false;
-		private int flipCount = 0;
-		private double actualFrequency = 0;
-		private double lastActualFrequency = 0;
+		private bool isMaxSpeed;
+		private int flipCount;
+		private double actualFrequency;
+		private double lastActualFrequency;
 
 		private Thread evaluationThread;
 		private Thread refreshingThread;
 		private AutoResetEvent evaluationGate;
 		private AutoResetEvent refreshingGate;
 
-		private volatile bool running = false;
-		private volatile bool refreshing = false;
-		private volatile bool updatingUI = false;
+		private volatile bool running;
+		private volatile bool refreshing;
+		private volatile bool updatingUI;
 
 		private readonly SettingsBoolCache oscilloscoping;
 		public bool Oscilloscoping {

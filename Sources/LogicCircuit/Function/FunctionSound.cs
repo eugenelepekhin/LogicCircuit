@@ -11,7 +11,7 @@ namespace LogicCircuit {
 		// Note that turning sound on and off will happening only from "Run" thread.
 		// Turning Visual off will happened on main thread but only after Run thread ends.
 		// So overall there is no need for synchronization of incrementing and decrementing this count.
-		private static int playCount = 0;
+		private static int playCount;
 
 		public override string ReportName { get { return Properties.Resources.NameSound; } }
 

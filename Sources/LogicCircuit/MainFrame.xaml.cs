@@ -27,7 +27,7 @@ namespace LogicCircuit {
 		public SettingsGridLengthCache ProjectWidth { get; private set; }
 		public SettingsGridLengthCache DiagramWidth { get; private set; }
 
-		private SettingsBoolCache showGrid = new SettingsBoolCache(Settings.User, "Settings.ShowGrid", true);
+		private readonly SettingsBoolCache showGrid = new SettingsBoolCache(Settings.User, "Settings.ShowGrid", true);
 		public bool ShowGrid {
 			get { return this.showGrid.Value; }
 			set {
@@ -61,7 +61,7 @@ namespace LogicCircuit {
 		private LogicalCircuit LogicalCircuit() { return this.Editor.Project.LogicalCircuit; }
 
 		private string statusText = Properties.Resources.Loading;
-		private volatile bool statusChanged = false;
+		private volatile bool statusChanged;
 		public string Status {
 			get { return this.statusText; }
 			set {

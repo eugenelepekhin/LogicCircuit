@@ -75,7 +75,7 @@ namespace LogicCircuit {
 			StringBuilder text = new StringBuilder();
 			foreach(SensorPoint point in list) {
 				if(0 < text.Length) {
-					text.Append(" ");
+					text.Append(' ');
 				}
 				text.Append(Sensor.SavePoint(point));
 			}

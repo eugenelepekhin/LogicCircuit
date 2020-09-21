@@ -83,7 +83,7 @@ namespace LogicCircuit {
 
 	[SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
 	public partial class DevicePinSet : NamedItemSet  {
-		private int order = 0;
+		private int order;
 
 		protected override bool Exists(string name) {
 			throw new NotSupportedException();

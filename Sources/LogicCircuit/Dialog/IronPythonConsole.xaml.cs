@@ -21,7 +21,7 @@ namespace LogicCircuit {
 	/// </summary>
 	[SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
 	public sealed partial class IronPythonConsole : Window {
-		private static IronPythonConsole currentConsole = null;
+		private static IronPythonConsole currentConsole;
 
 		internal static void Run(Window parent) {
 			if(IronPythonConsole.currentConsole == null) {
@@ -68,9 +68,9 @@ namespace LogicCircuit {
 		private readonly StringBuilder command = new StringBuilder();
 		private Thread thread;
 
-		private string suggestionExpr = null;
-		private List<string> suggestions = null;
-		private int lastSuggestion = 0;
+		private string suggestionExpr;
+		private List<string> suggestions;
+		private int lastSuggestion;
 
 		private IronPythonConsole() {
 			this.DataContext = this;

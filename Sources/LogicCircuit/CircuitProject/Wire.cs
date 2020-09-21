@@ -9,7 +9,7 @@ using LogicCircuit.DataPersistent;
 
 namespace LogicCircuit {
 	public partial class Wire {
-		private Line glyph = null;
+		private Line glyph;
 
 		public GridPoint Point1 {
 			get { return new GridPoint(this.X1, this.Y1); }
@@ -82,7 +82,7 @@ namespace LogicCircuit {
 		public event EventHandler WireSetChanged;
 
 		//Holds logical circuits that holds wires that was changed in latest transaction
-		private HashSet<LogicalCircuit> invalidLogicalCircuit = null;
+		private HashSet<LogicalCircuit> invalidLogicalCircuit;
 
 		public Wire Create(LogicalCircuit logicalCircuit, GridPoint point1, GridPoint point2) {
 			return this.CreateItem(Guid.NewGuid(), logicalCircuit, point1.X, point1.Y, point2.X, point2.Y);

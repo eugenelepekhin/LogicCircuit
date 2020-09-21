@@ -32,7 +32,7 @@ namespace LogicCircuit {
 		public string Error { get { return null; } }
 
 		private int parsedMin = -1, parsedMax = -1;
-		private string dataError = null;
+		private string dataError;
 
 		public string this[string columnName] {
 			get {

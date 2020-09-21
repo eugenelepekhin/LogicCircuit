@@ -7,7 +7,7 @@ using System.Windows.Media;
 namespace LogicCircuit {
 	public class FunctionButton : OneBitConst, IFunctionVisual {
 
-		private static Brush[] stateBrush = null;
+		private static Brush[] stateBrush;
 
 		private readonly List<CircuitSymbol> circuitSymbol;
 		private readonly bool isToggle;

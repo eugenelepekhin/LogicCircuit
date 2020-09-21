@@ -296,7 +296,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private double actualFrequency = 0;
+		private double actualFrequency;
 		public double ActualFrequency {
 			get { return this.actualFrequency; }
 			set {

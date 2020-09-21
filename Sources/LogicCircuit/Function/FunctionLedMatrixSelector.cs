@@ -10,7 +10,7 @@ namespace LogicCircuit {
 		private readonly int[] cellFlip;
 		private readonly int rowParameter;
 		private int flip;
-		private LogicalCircuit lastLogicalCircuit = null;
+		private LogicalCircuit lastLogicalCircuit;
 
 		/// <summary>
 		/// Creates function. Assumes parameter layout: first goes columns states starting from column 0, bit 0 to bit 2. After all columns goes rows they are one bit wide.

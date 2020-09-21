@@ -8,7 +8,7 @@ namespace LogicCircuit {
 		private class Switcher {
 			public Editor Editor { get; private set; }
 			private readonly List<LogicalCircuit> history = new List<LogicalCircuit>();
-			private int tab = 0;
+			private int tab;
 
 			public Switcher(Editor editor) {
 				this.Editor = editor;

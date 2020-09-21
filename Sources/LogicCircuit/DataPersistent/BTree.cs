@@ -816,7 +816,7 @@ namespace LogicCircuit.DataPersistent {
 						Key key = this.keyFields[i].GetValue(ref node);
 						text.AppendFormat(System.Globalization.CultureInfo.InvariantCulture, "{{{0}, {1}}}", key.field.ToString(), key.rowId.ToString());
 					}
-					text.Append(")");
+					text.Append(')');
 					return !node.IsLeaf;
 				}
 			}
