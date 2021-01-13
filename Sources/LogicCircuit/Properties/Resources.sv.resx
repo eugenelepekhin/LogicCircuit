@@ -503,7 +503,7 @@ Filen du försöker öppna har antingen blivit korrupt eller så var den skapad 
 		<value>Ändra frekvensen klock grindarna i den körande kretsen.</value>
 	</data>
 	<data name="ToolTipGateInputCount" xml:space="preserve">
-		<value>Välj antalet ingångar pär grind</value>
+		<value>Välj antalet ingångar per grind</value>
 	</data>
 	<data name="ToolTipIsMaximumSpeed1" xml:space="preserve">
 		<value>Kör kretsen på maximal hastighet ignorerar rekvensen sat av reglaget ovanför.</value>
@@ -630,7 +630,7 @@ VIll du byta ut den?</value>
 		<value>Välj bit bredden av den delade kontakten på delaren.</value>
 	</data>
 	<data name="ToolTipSplitterPinNumber" xml:space="preserve">
-		<value>Välj anttalet delade kontakter på delaren.</value>
+		<value>Välj antalet delade kontakter på delaren.</value>
 	</data>
 	<data name="ToolTipSplitterRotation" xml:space="preserve">
 		<value>Välj orientering av den kombinerade kontakten på delaren.</value>
@@ -1225,7 +1225,7 @@ en grupp av tre-lägen som kör en lina med en lämplig kontroll krets altså si
 		<value>Grafikuppsättning</value>
 	</data>
 	<data name="CaptionGraphicsArrayBPP" xml:space="preserve">
-		<value>Bitar pär pixel</value>
+		<value>Bitar per pixel</value>
 	</data>
 	<data name="ToolTipDescriptorGraphicsArray" xml:space="preserve">
 		<value>(punkt matrix skärm) kan visa data sparad i intärn minnet.
