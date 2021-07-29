@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Documents;
-using System.IO;
+using System.Windows.Input;
 using CommandLineParser;
 
 namespace LogicCircuit {
@@ -17,30 +18,29 @@ namespace LogicCircuit {
 	public partial class App : Application {
 		private const string SettingsCultureName = "Application.CultureInfo.Name";
 
-		private static readonly string[] availableCultureNames = new string[] {
-			"en",
-			"ar",
-			"de",
-			"el",
-			"es",
-			"fa",
-			"fr",
-			"he",
-			"hu",
-			"it",
-			"ja",
-			"ko",
-			"lt",
-			"nl",
-			"pl",
-			"pt-BR",
-			"pt-PT",
-			"ru",
-			"sv",
-			"tr",
-			"uk",
-			"zh-Hans",
-		};
+		private static string[] foundCultureNames;
+		private static string[] availableCultureNames {
+			get {
+				if(App.foundCultureNames == null) {
+					List<string> list = new List<string>();
+					Regex regexCultureName = new Regex("^[a-zA-Z]{2,3}(-[a-zA-Z]{2,4})?$", RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+					foreach(string dir in Directory.GetDirectories(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))) {
+						string file = Path.Combine(dir, "LogicCircuit.resources.dll");
+						if(File.Exists(file)) {
+							string folder = Path.GetFileName(dir);
+							if(regexCultureName.IsMatch(folder)) {
+								// TODO: check version of the assembly match to the version of this assembly.
+								list.Add(folder);
+							}
+						}
+					}
+					list.Sort(StringComparer.OrdinalIgnoreCase);
+					list.Insert(0, "en");
+					App.foundCultureNames = list.ToArray();
+				}
+				return App.foundCultureNames;
+			}
+		}
 		
 		public static IEnumerable<CultureInfo> AvailableCultures {
 			get { return App.availableCultureNames.Select(s => CultureInfo.GetCultureInfo(s)); }
