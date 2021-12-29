@@ -51,6 +51,9 @@
     <Compile Include="Transformation.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="ResourcesWrapper.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ResourcesWrapper.cs</LastGenOutput>
