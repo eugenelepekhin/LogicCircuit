@@ -89,6 +89,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Properties\Digital Clock.CircuitProject" />
     <None Include="Properties\FunctionTest.CircuitProject" />
     <None Include="Properties\IntegerCalculator.CircuitProject" />
