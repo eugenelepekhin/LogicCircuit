@@ -14,6 +14,8 @@ namespace LogicCircuit {
 	internal partial struct CircuitButtonData {
 		public Guid CircuitButtonId;
 		public string Notation;
+		public int Modifiers;
+		public int KeyCode;
 		public bool IsToggle;
 		public PinSide PinSide;
 		public bool Inverted;
@@ -89,6 +91,76 @@ namespace LogicCircuit {
 			}
 			void IFieldSerializer<CircuitButtonData>.SetTextValue(ref CircuitButtonData data, string text) {
 				data.Notation = text;
+			}
+		}
+
+		// Accessor of the Modifiers field
+		public sealed class ModifiersField : IField<CircuitButtonData, int>, IFieldSerializer<CircuitButtonData> {
+			public static readonly ModifiersField Field = new ModifiersField();
+			private ModifiersField() {}
+			public string Name { get { return "Modifiers"; } }
+			public int Order { get; set; }
+			public int DefaultValue { get { return 0; } }
+			public int GetValue(ref CircuitButtonData record) {
+				return record.Modifiers;
+			}
+			public void SetValue(ref CircuitButtonData record, int value) {
+				record.Modifiers = value;
+			}
+			public int Compare(ref CircuitButtonData l, ref CircuitButtonData r) {
+				return Math.Sign((long)l.Modifiers - (long)r.Modifiers);
+			}
+			public int Compare(int l, int r) {
+				return Math.Sign((long)l - (long)r);
+			}
+
+			// Implementation of interface IFieldSerializer<CircuitButtonData>
+			bool IFieldSerializer<CircuitButtonData>.NeedToSave(ref CircuitButtonData data) {
+				return this.Compare(data.Modifiers, this.DefaultValue) != 0;
+			}
+			string IFieldSerializer<CircuitButtonData>.GetTextValue(ref CircuitButtonData data) {
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.Modifiers);
+			}
+			void IFieldSerializer<CircuitButtonData>.SetDefault(ref CircuitButtonData data) {
+				data.Modifiers = this.DefaultValue;
+			}
+			void IFieldSerializer<CircuitButtonData>.SetTextValue(ref CircuitButtonData data, string text) {
+				data.Modifiers = int.Parse(text, CultureInfo.InvariantCulture);
+			}
+		}
+
+		// Accessor of the KeyCode field
+		public sealed class KeyCodeField : IField<CircuitButtonData, int>, IFieldSerializer<CircuitButtonData> {
+			public static readonly KeyCodeField Field = new KeyCodeField();
+			private KeyCodeField() {}
+			public string Name { get { return "KeyCode"; } }
+			public int Order { get; set; }
+			public int DefaultValue { get { return 0; } }
+			public int GetValue(ref CircuitButtonData record) {
+				return record.KeyCode;
+			}
+			public void SetValue(ref CircuitButtonData record, int value) {
+				record.KeyCode = value;
+			}
+			public int Compare(ref CircuitButtonData l, ref CircuitButtonData r) {
+				return Math.Sign((long)l.KeyCode - (long)r.KeyCode);
+			}
+			public int Compare(int l, int r) {
+				return Math.Sign((long)l - (long)r);
+			}
+
+			// Implementation of interface IFieldSerializer<CircuitButtonData>
+			bool IFieldSerializer<CircuitButtonData>.NeedToSave(ref CircuitButtonData data) {
+				return this.Compare(data.KeyCode, this.DefaultValue) != 0;
+			}
+			string IFieldSerializer<CircuitButtonData>.GetTextValue(ref CircuitButtonData data) {
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.KeyCode);
+			}
+			void IFieldSerializer<CircuitButtonData>.SetDefault(ref CircuitButtonData data) {
+				data.KeyCode = this.DefaultValue;
+			}
+			void IFieldSerializer<CircuitButtonData>.SetTextValue(ref CircuitButtonData data, string text) {
+				data.KeyCode = int.Parse(text, CultureInfo.InvariantCulture);
 			}
 		}
 
@@ -330,6 +402,8 @@ namespace LogicCircuit {
 		private static readonly IField<CircuitButtonData>[] fields = {
 			CircuitButtonIdField.Field,
 			NotationField.Field,
+			ModifiersField.Field,
+			KeyCodeField.Field,
 			IsToggleField.Field,
 			PinSideField.Field,
 			InvertedField.Field,
@@ -389,6 +463,18 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.CircuitButtonRowId, CircuitButtonData.NotationField.Field, value); }
 		}
 
+		// Gets or sets value of the Modifiers field.
+		private int Modifiers {
+			get { return this.Table.GetField(this.CircuitButtonRowId, CircuitButtonData.ModifiersField.Field); }
+			set { this.Table.SetField(this.CircuitButtonRowId, CircuitButtonData.ModifiersField.Field, value); }
+		}
+
+		// Gets or sets value of the KeyCode field.
+		private int KeyCode {
+			get { return this.Table.GetField(this.CircuitButtonRowId, CircuitButtonData.KeyCodeField.Field); }
+			set { this.Table.SetField(this.CircuitButtonRowId, CircuitButtonData.KeyCodeField.Field, value); }
+		}
+
 		// Gets or sets value of the IsToggle field.
 		public bool IsToggle {
 			get { return this.Table.GetField(this.CircuitButtonRowId, CircuitButtonData.IsToggleField.Field); }
@@ -436,6 +522,12 @@ namespace LogicCircuit {
 				}
 				if(CircuitButtonData.NotationField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("Notation");
+				}
+				if(CircuitButtonData.ModifiersField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("Modifiers");
+				}
+				if(CircuitButtonData.KeyCodeField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("KeyCode");
 				}
 				if(CircuitButtonData.IsToggleField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("IsToggle");
@@ -539,6 +631,8 @@ namespace LogicCircuit {
 			// Fields of CircuitButton table
 			Guid CircuitButtonId,
 			string Notation,
+			int Modifiers,
+			int KeyCode,
 			bool IsToggle,
 			PinSide PinSide,
 			bool Inverted,
@@ -557,6 +651,8 @@ namespace LogicCircuit {
 			CircuitButtonData dataCircuitButton = new CircuitButtonData() {
 				CircuitButtonId = CircuitButtonId,
 				Notation = Notation,
+				Modifiers = Modifiers,
+				KeyCode = KeyCode,
 				IsToggle = IsToggle,
 				PinSide = PinSide,
 				Inverted = Inverted,

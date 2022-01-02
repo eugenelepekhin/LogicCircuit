@@ -881,28 +881,59 @@ namespace LogicCircuit {
 		}
 
 		public void DiagramKeyDown(KeyEventArgs e) {
+			Key key = e.Key;
+			ModifierKeys modifier = e.KeyboardDevice.Modifiers;
 			if(this.InEditMode) {
-				if(e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl) {
+				if(key == Key.LeftCtrl || key == Key.RightCtrl) {
 					this.switcher.OnControlDown();
 					this.Mainframe.Status = Properties.Resources.TipOnCtrlDown;
 					e.Handled = true;
-				} else if(e.Key == Key.Tab) {
+				} else if(key == Key.Tab) {
 					this.switcher.OnTabDown(
-						(Keyboard.Modifiers & ModifierKeys.Control) != ModifierKeys.None,
-						(Keyboard.Modifiers & ModifierKeys.Shift) != ModifierKeys.None
+						(modifier & ModifierKeys.Control) != ModifierKeys.None,
+						(modifier & ModifierKeys.Shift) != ModifierKeys.None
 					);
 					e.Handled = true;
-				} else if(e.Key == Key.Escape) {
+				} else if(key == Key.Escape) {
 					this.CancelMove();
+				}
+			} else if(!e.IsRepeat && key != Key.None) {
+				if(this.ExecuteKeyGesture(this.Project.LogicalCircuit, key, modifier, true)) {
+					e.Handled = true;
 				}
 			}
 		}
 
 		public void DiagramKeyUp(KeyEventArgs e) {
-			if(this.InEditMode && (e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl)) {
-				this.switcher.OnControlUp();
-				e.Handled = true;
+			Key key = e.Key;
+			if(this.InEditMode) {
+				if(key == Key.LeftCtrl || key == Key.RightCtrl) {
+					this.switcher.OnControlUp();
+					e.Handled = true;
+				}
+			} else if(key != Key.None) {
+				if(this.ExecuteKeyGesture(this.Project.LogicalCircuit, key, e.KeyboardDevice.Modifiers, false)) {
+					e.Handled = true;
+				}
 			}
+		}
+
+		private bool ExecuteKeyGesture(LogicalCircuit logicalCircuit, Key key, ModifierKeys modifier, bool isPressed) {
+			foreach(CircuitSymbol symbol in logicalCircuit.CircuitSymbols()) {
+				if(symbol.Circuit is CircuitButton button) {
+					if(button.Key == key && button.ModifierKeys == modifier) {
+						if(symbol.ProbeView is ButtonControl control) {
+							control.ButtonStateChanged?.Invoke(symbol, isPressed);
+						}
+						return true;
+					}
+				} else if(symbol.Circuit is LogicalCircuit child && child.IsDisplay) {
+					if(this.ExecuteKeyGesture(child, key, modifier, isPressed)) {
+						return true;
+					}
+				}
+			}
+			return false;
 		}
 
 		public void DescriptorMouseDown(FrameworkElement sender, MouseButtonEventArgs e) {

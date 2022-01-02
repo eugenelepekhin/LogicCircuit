@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Store xmlns="clr-namespace:ItemWrapper.Generator;assembly=ItemWrapper.Generator"
 	Namespace="LogicCircuit" Name="CircuitProject"
-	PersistencePrefix="lc" PersistenceNamespace="http://LogicCircuit.net/2.0.0.9/CircuitProject.xsd"
+	PersistencePrefix="lc" PersistenceNamespace="http://LogicCircuit.net/2.0.0.10/CircuitProject.xsd"
 >
 
 	<!--
@@ -21,6 +21,7 @@
 		Version 2.0.0.7 - Adding PinSide to Button and Constant. Adding Sensor, Sound, and GraphicsArray circuits. LogicalCircuit.Description and Project.Description both renamed to Note.
 		Version 2.0.0.8 - Adding Inverted flag to the button, adding index on pin so it can be rearranged on the symbol's side, adding startup circuit to project
 		Version 2.0.0.9 - Adding zoom to graphics array. Adding Validators field to LogicalCircuit. Adding DualPort to memory.
+		Version 2.0.0.10 - Adding shortcuts to buttons.
 	-->
 
 	<Table Name="Project">
@@ -219,6 +220,8 @@
 		<Table.Columns>
 			<Column Name="CircuitButtonId" Type="Guid" ReadOnly="true"/>
 			<Column Name="Notation" Type="string" Default="" PropertyOverrides="true"/>
+			<Column Name="Modifiers" Type="int" Default="0" AccessModifier="Private"/>
+			<Column Name="KeyCode" Type="int" Default="0" AccessModifier="Private"/>
 			<Column Name="IsToggle" Type="bool" Default="false"/>
 			<Column Name="PinSide" Type="PinSide" Default="PinSide.Right"/>
 			<Column Name="Inverted" Type="bool" Default="false"/>

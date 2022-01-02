@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 
 namespace LogicCircuit {
 	/// <summary>
@@ -21,6 +22,9 @@ namespace LogicCircuit {
 			this.isToggle.IsChecked = this.button.IsToggle;
 			this.side.SelectedItem = PinDescriptor.PinSideDescriptor(this.button.PinSide);
 			this.inverted.IsChecked = this.button.Inverted;
+			this.keyGesture.Key = button.Key;
+			this.keyGesture.ModifierKeys = button.ModifierKeys;
+			this.keyGesture.Refresh();
 			this.note.Text = this.button.Note;
 		}
 
@@ -30,10 +34,14 @@ namespace LogicCircuit {
 				string note = this.note.Text.Trim();
 				PinSide pinSide = ((EnumDescriptor<PinSide>)this.side.SelectedItem).Value;
 				bool isInverted = this.inverted.IsChecked.HasValue && this.inverted.IsChecked.Value;
+				Key key = this.keyGesture.Key;
+				ModifierKeys modifier = this.keyGesture.ModifierKeys;
 				if(	this.button.Notation != name ||
 					this.button.IsToggle != this.isToggle.IsChecked ||
 					this.button.PinSide != pinSide ||
 					this.button.Inverted != isInverted ||
+					this.button.Key != key ||
+					this.button.ModifierKeys != modifier ||
 					this.button.Note != note
 				) {
 					this.button.CircuitProject.InTransaction(() => {
@@ -41,6 +49,8 @@ namespace LogicCircuit {
 						this.button.IsToggle = this.isToggle.IsChecked.Value;
 						this.button.PinSide = pinSide;
 						this.button.Inverted = isInverted;
+						this.button.Key = key;
+						this.button.ModifierKeys = modifier;
 						this.button.Note = note;
 						this.button.Pins.First().PinSide = pinSide;
 					});

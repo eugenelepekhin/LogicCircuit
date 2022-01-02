@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows;
+using System.Windows.Input;
 using System.Xml;
 using LogicCircuit.DataPersistent;
 
@@ -24,6 +25,16 @@ namespace LogicCircuit {
 		public override string Category {
 			get { return Properties.Resources.CategoryInputOutput; }
 			set { throw new InvalidOperationException(); }
+		}
+
+		public ModifierKeys ModifierKeys {
+			get => (ModifierKeys)this.Modifiers;
+			set => this.Modifiers = (int)value;
+		}
+
+		public Key Key {
+			get => (Key)this.KeyCode;
+			set => this.KeyCode = (int)value;
 		}
 
 		public override Circuit CopyTo(LogicalCircuit target) {
@@ -71,7 +82,10 @@ namespace LogicCircuit {
 		}
 
 		public CircuitButton Create(string notation, bool isToggle, PinSide pinSide) {
-			CircuitButton button = this.CreateItem(Guid.NewGuid(), notation, isToggle, pinSide,
+			CircuitButton button = this.CreateItem(Guid.NewGuid(), notation,
+				CircuitButtonData.ModifiersField.Field.DefaultValue,
+				CircuitButtonData.KeyCodeField.Field.DefaultValue,
+				isToggle, pinSide,
 				CircuitButtonData.InvertedField.Field.DefaultValue,
 				CircuitButtonData.WidthField.Field.DefaultValue,
 				CircuitButtonData.HeightField.Field.DefaultValue,

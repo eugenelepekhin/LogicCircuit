@@ -6,6 +6,8 @@
 	WindowStartupLocation="CenterOwner"
 	Title="{x:Static properties:Resources.NameButton}"
 	Style="{StaticResource DialogWindow}"
+	MinWidth="350"
+	MinHeight="260"
 	FocusManager.FocusedElement="{Binding ElementName=name}"
 >
 	<lc:AutoGrid Margin="3">
@@ -20,6 +22,9 @@
 
 		<Label Content="{x:Static properties:Resources.TitlePinSide}"/>
 		<lc:AutoWidthComboBox x:Name="side" ItemsSource="{x:Static lc:PinDescriptor.PinSideRange}" ToolTip="{x:Static properties:Resources.ToolTipDevicePinSide}"/>
+
+		<Label Content="{x:Static properties:Resources.TitleShortcut}"/>
+		<lc:ControlKeyGesture x:Name="keyGesture"/>
 
 		<Label Content="{x:Static properties:Resources.TitleDescription}"/>
 		<TextBox Name="note" Style="{StaticResource NoteEditor}"/>

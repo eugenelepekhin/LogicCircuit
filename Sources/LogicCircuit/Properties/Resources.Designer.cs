@@ -3103,5 +3103,12 @@ namespace LogicCircuit.Properties {
  		public static string TitleDualPort {
 			get { return ResourceManager.GetString("TitleDualPort", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to S_hortcut:.
+		/// </summary>
+ 		public static string TitleShortcut {
+			get { return ResourceManager.GetString("TitleShortcut", Culture); }
+		}
 	}
 }
