@@ -1444,4 +1444,7 @@
 	<data name="TitleDualPort" xml:space="preserve">
 		<value>Д_вухпортовая память</value>
 	</data>
+	<data name="TitleShortcut" xml:space="preserve">
+		<value>Сочетание _клавиш:</value>
+	</data>
 </root>

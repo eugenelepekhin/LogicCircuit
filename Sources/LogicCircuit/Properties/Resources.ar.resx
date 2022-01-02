@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
+	<!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,1328 +59,1331 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <data name="ErrorProjectCount" xml:space="preserve">
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="ErrorProjectCount" xml:space="preserve">
     <value>هناك أكثر من مشروع واحد في الملف.</value>
   </data>
-  <data name="ErrorUnknownVersion" xml:space="preserve">
+	<data name="ErrorUnknownVersion" xml:space="preserve">
     <value>محاولة تحميل نسخة غير معروفة من مشروع Circuit
 الملف الذي تحاول فتحه إما معطوب أو أنه تم إنشاؤه بإصدار Logic Circuit أحدث من الإصدار الموجود لديك 
 الرجاء التحقق  من وجود إصدار جديد
 &lt;Hyperlink NavigateUri="https://www.logiccircuit.org/"&gt;https://www.logiccircuit.org/&lt;/Hyperlink&gt;</value>
   </data>
-  <data name="FileSaved" xml:space="preserve">
+	<data name="FileSaved" xml:space="preserve">
     <value>تم حفظ الملف ,{0}.</value>
   </data>
-  <data name="CategoryInputOutput" xml:space="preserve">
+	<data name="CategoryInputOutput" xml:space="preserve">
     <value>دخل - خرج</value>
   </data>
-  <data name="CommandCircuitCurrent" xml:space="preserve">
+	<data name="CommandCircuitCurrent" xml:space="preserve">
     <value>دارة منطقية</value>
   </data>
-  <data name="CommandCircuitDelete" xml:space="preserve">
+	<data name="CommandCircuitDelete" xml:space="preserve">
     <value>حذف الدارة الحالية</value>
   </data>
-  <data name="CommandCircuitNew" xml:space="preserve">
+	<data name="CommandCircuitNew" xml:space="preserve">
     <value>دارة منطقية جديدة</value>
   </data>
-  <data name="CommandCircuitProject" xml:space="preserve">
+	<data name="CommandCircuitProject" xml:space="preserve">
     <value>مشروع</value>
   </data>
-  <data name="CircuitProjectName" xml:space="preserve">
+	<data name="CircuitProjectName" xml:space="preserve">
     <value>مشروع دارة</value>
   </data>
-  <data name="CaptionTextNote1" xml:space="preserve">
+	<data name="CaptionTextNote1" xml:space="preserve">
     <value>نص</value>
   </data>
-  <data name="CaptionTextNote2" xml:space="preserve">
+	<data name="CaptionTextNote2" xml:space="preserve">
     <value>ملاحظة</value>
   </data>
-  <data name="CaptionValue" xml:space="preserve">
+	<data name="CaptionValue" xml:space="preserve">
     <value>قيمة</value>
   </data>
-  <data name="CaptionRows" xml:space="preserve">
+	<data name="CaptionRows" xml:space="preserve">
     <value>أسطر</value>
   </data>
-  <data name="ColorPickerCaptionAvailable" xml:space="preserve">
+	<data name="ColorPickerCaptionAvailable" xml:space="preserve">
     <value>الألوان المتوفرة :</value>
   </data>
-  <data name="ColorPickerCaptionRecent" xml:space="preserve">
+	<data name="ColorPickerCaptionRecent" xml:space="preserve">
     <value>الألوان التي تم استخدامها مؤخراً</value>
   </data>
-  <data name="ColorPickerCaptionSelectCustom" xml:space="preserve">
+	<data name="ColorPickerCaptionSelectCustom" xml:space="preserve">
     <value>تحديد</value>
   </data>
-  <data name="ColorPickerCaptionStandard" xml:space="preserve">
+	<data name="ColorPickerCaptionStandard" xml:space="preserve">
     <value>الألوان القياسية:</value>
   </data>
-  <data name="ColorPickerTabCustom" xml:space="preserve">
+	<data name="ColorPickerTabCustom" xml:space="preserve">
     <value>مخصص</value>
   </data>
-  <data name="ColorPickerTabStandard" xml:space="preserve">
+	<data name="ColorPickerTabStandard" xml:space="preserve">
     <value>قياسي</value>
   </data>
-  <data name="CommandEditAlignCenter" xml:space="preserve">
+	<data name="CommandEditAlignCenter" xml:space="preserve">
     <value>محاذاة وسط</value>
   </data>
-  <data name="CommandEditAlignLeft" xml:space="preserve">
+	<data name="CommandEditAlignLeft" xml:space="preserve">
     <value>محاذاة إلى اليسار</value>
   </data>
-  <data name="CommandEditAlignRight" xml:space="preserve">
+	<data name="CommandEditAlignRight" xml:space="preserve">
     <value>محاذاة إلى اليمين</value>
   </data>
-  <data name="CommandEditBold" xml:space="preserve">
+	<data name="CommandEditBold" xml:space="preserve">
     <value>عريض</value>
   </data>
-  <data name="CommandEditCopy" xml:space="preserve">
+	<data name="CommandEditCopy" xml:space="preserve">
     <value>نسخ</value>
   </data>
-  <data name="CommandEditCut" xml:space="preserve">
+	<data name="CommandEditCut" xml:space="preserve">
     <value>قص</value>
   </data>
-  <data name="CommandEditDecreaseFontSize" xml:space="preserve">
+	<data name="CommandEditDecreaseFontSize" xml:space="preserve">
     <value>تقليص حجم الخط</value>
   </data>
-  <data name="CommandHelpAbout" xml:space="preserve">
+	<data name="CommandHelpAbout" xml:space="preserve">
     <value>حول</value>
   </data>
-  <data name="CommandToolsOptions" xml:space="preserve">
+	<data name="CommandToolsOptions" xml:space="preserve">
     <value>خيارات</value>
   </data>
-  <data name="CommandEditSelectAllButWires" xml:space="preserve">
+	<data name="CommandEditSelectAllButWires" xml:space="preserve">
     <value>تحديد الكل ما عدا الأسلاك</value>
   </data>
-  <data name="CommandEditSelectAllProbes" xml:space="preserve">
+	<data name="CommandEditSelectAllProbes" xml:space="preserve">
     <value>تحديد كل المجسات</value>
   </data>
-  <data name="CommandEditSelectAllProbesWithWire" xml:space="preserve">
+	<data name="CommandEditSelectAllProbesWithWire" xml:space="preserve">
     <value>تحديد كل المجسات و الأسلاك الموصولة</value>
   </data>
-  <data name="CommandEditSelectAllWires" xml:space="preserve">
+	<data name="CommandEditSelectAllWires" xml:space="preserve">
     <value>تحديد كل الأسلاك</value>
   </data>
-  <data name="CommandEditSelectFreeWires" xml:space="preserve">
+	<data name="CommandEditSelectFreeWires" xml:space="preserve">
     <value>تحديد الأسلاك الحرة</value>
   </data>
-  <data name="CommandFileExportImage" xml:space="preserve">
+	<data name="CommandFileExportImage" xml:space="preserve">
     <value>تصدير صورة</value>
   </data>
-  <data name="CommandToolsOscilloscope" xml:space="preserve">
+	<data name="CommandToolsOscilloscope" xml:space="preserve">
     <value>راسم الإشارة</value>
   </data>
-  <data name="CommandToolsReport" xml:space="preserve">
+	<data name="CommandToolsReport" xml:space="preserve">
     <value>تقرير المشروع</value>
   </data>
-  <data name="CommandEditRotateLeft" xml:space="preserve">
+	<data name="CommandEditRotateLeft" xml:space="preserve">
     <value>تدوير نحو اليسار</value>
   </data>
-  <data name="CommandEditRotateRight" xml:space="preserve">
+	<data name="CommandEditRotateRight" xml:space="preserve">
     <value>تدوير نحو اليمين</value>
   </data>
-  <data name="CommandFileOpenRecent" xml:space="preserve">
+	<data name="CommandFileOpenRecent" xml:space="preserve">
     <value>فتح الملفات الأخيرة</value>
   </data>
-  <data name="ErrorFileCorrupted" xml:space="preserve">
+	<data name="ErrorFileCorrupted" xml:space="preserve">
     <value>الملف "{0}" معطوب و لا يمكن تحميله</value>
   </data>
-  <data name="CommandHyperlink" xml:space="preserve">
+	<data name="CommandHyperlink" xml:space="preserve">
     <value>رابط</value>
   </data>
-  <data name="ErrorHyperlinkText" xml:space="preserve">
+	<data name="ErrorHyperlinkText" xml:space="preserve">
     <value>الرابط فارغ</value>
   </data>
-  <data name="ErrorHyperlinkUrl" xml:space="preserve">
+	<data name="ErrorHyperlinkUrl" xml:space="preserve">
     <value>الرابط غير صحيح</value>
   </data>
-  <data name="CommandInsertImage" xml:space="preserve">
+	<data name="CommandInsertImage" xml:space="preserve">
     <value>صورة</value>
   </data>
-  <data name="CommandTruthTable" xml:space="preserve">
+	<data name="CommandTruthTable" xml:space="preserve">
     <value>جدول الحقيقة</value>
   </data>
-  <data name="CommandEditDelete" xml:space="preserve">
+	<data name="CommandEditDelete" xml:space="preserve">
     <value>حذف</value>
   </data>
-  <data name="CommandEditIncreaseFontSize" xml:space="preserve">
+	<data name="CommandEditIncreaseFontSize" xml:space="preserve">
     <value>زيادة حجم الخط</value>
   </data>
-  <data name="CommandEditItalic" xml:space="preserve">
+	<data name="CommandEditItalic" xml:space="preserve">
     <value>مائل</value>
   </data>
-  <data name="CommandEditNumbering" xml:space="preserve">
+	<data name="CommandEditNumbering" xml:space="preserve">
     <value>ترقيم</value>
   </data>
-  <data name="CommandEditPaste" xml:space="preserve">
+	<data name="CommandEditPaste" xml:space="preserve">
     <value>لصق</value>
   </data>
-  <data name="CommandEditRedo" xml:space="preserve">
+	<data name="CommandEditRedo" xml:space="preserve">
     <value>إعادة الأمر</value>
   </data>
-  <data name="CommandEditSelectAll" xml:space="preserve">
+	<data name="CommandEditSelectAll" xml:space="preserve">
     <value>تحديد الكل</value>
   </data>
-  <data name="CommandEditUndo" xml:space="preserve">
+	<data name="CommandEditUndo" xml:space="preserve">
     <value>تراجع</value>
   </data>
-  <data name="CommandFileClose" xml:space="preserve">
+	<data name="CommandFileClose" xml:space="preserve">
     <value>خروج</value>
   </data>
-  <data name="CommandFileNew" xml:space="preserve">
+	<data name="CommandFileNew" xml:space="preserve">
     <value>جديد</value>
   </data>
-  <data name="CommandFileOpen" xml:space="preserve">
+	<data name="CommandFileOpen" xml:space="preserve">
     <value>فتح</value>
   </data>
-  <data name="CommandFileSave" xml:space="preserve">
+	<data name="CommandFileSave" xml:space="preserve">
     <value>حفظ</value>
   </data>
-  <data name="CommandFileSaveAs" xml:space="preserve">
+	<data name="CommandFileSaveAs" xml:space="preserve">
     <value>حفظ بإسم</value>
   </data>
-  <data name="CommandHelpView" xml:space="preserve">
+	<data name="CommandHelpView" xml:space="preserve">
     <value>عرض المساعدة</value>
   </data>
-  <data name="ToolTipWire" xml:space="preserve">
+	<data name="ToolTipWire" xml:space="preserve">
     <value>سلك</value>
   </data>
-  <data name="CaptionNote" xml:space="preserve">
+	<data name="CaptionNote" xml:space="preserve">
     <value>ملاحظة</value>
   </data>
-  <data name="CaptionSide" xml:space="preserve">
+	<data name="CaptionSide" xml:space="preserve">
     <value>طرف</value>
   </data>
-  <data name="CommandCircuitUsage" xml:space="preserve">
+	<data name="CommandCircuitUsage" xml:space="preserve">
     <value>مستخدم من قبل ...</value>
   </data>
-  <data name="CommandEditUnselectAllButWires" xml:space="preserve">
+	<data name="CommandEditUnselectAllButWires" xml:space="preserve">
     <value>إزالة تحديد الكل ما عدا الأسلاك</value>
   </data>
-  <data name="CommandEditUnselectAllWires" xml:space="preserve">
+	<data name="CommandEditUnselectAllWires" xml:space="preserve">
     <value>إزالة تحديد جميع الأسلاك</value>
   </data>
-  <data name="CommandFileFileImport" xml:space="preserve">
+	<data name="CommandFileFileImport" xml:space="preserve">
     <value>إستيراد...</value>
   </data>
-  <data name="CommandEditBullets" xml:space="preserve">
+	<data name="CommandEditBullets" xml:space="preserve">
     <value>نقط</value>
   </data>
-  <data name="CommandEditDecreaseIndentation" xml:space="preserve">
+	<data name="CommandEditDecreaseIndentation" xml:space="preserve">
     <value>تقليص البادئة</value>
   </data>
-  <data name="CommandEditIncreaseIndentation" xml:space="preserve">
+	<data name="CommandEditIncreaseIndentation" xml:space="preserve">
     <value>زيادة البادئة</value>
   </data>
-  <data name="WriteOn0" xml:space="preserve">
+	<data name="WriteOn0" xml:space="preserve">
     <value>هبوط من 1 إلى 0</value>
   </data>
-  <data name="WriteOn1" xml:space="preserve">
+	<data name="WriteOn1" xml:space="preserve">
     <value>صعود من 0 إلى 1</value>
   </data>
-  <data name="UnknownState" xml:space="preserve">
+	<data name="UnknownState" xml:space="preserve">
     <value>الحالة {0} غير معروفة</value>
   </data>
-  <data name="ToolTipZoom" xml:space="preserve">
+	<data name="ToolTipZoom" xml:space="preserve">
     <value>حدد نسبة زيادة حجم المخطط Zoom</value>
   </data>
-  <data name="CaptionColumns" xml:space="preserve">
+	<data name="CaptionColumns" xml:space="preserve">
     <value>أعمدة</value>
   </data>
-  <data name="ToolTipRows" xml:space="preserve">
+	<data name="ToolTipRows" xml:space="preserve">
     <value>إختر عدد أسطر مصفوفة الـ LED</value>
   </data>
-  <data name="ToolTipSaveData" xml:space="preserve">
+	<data name="ToolTipSaveData" xml:space="preserve">
     <value>احفظ البيانات في ملف</value>
   </data>
-  <data name="ToolTipPinNotation" xml:space="preserve">
+	<data name="ToolTipPinNotation" xml:space="preserve">
     <value>ادخل نصاً قصيراً جداً ليظهر على رمز الدارة بجانب التماس</value>
   </data>
-  <data name="ToolTipLedMatrixType" xml:space="preserve">
+	<data name="ToolTipLedMatrixType" xml:space="preserve">
     <value>اختر طريقة التحكم بالمصفوفة</value>
   </data>
-  <data name="ToolTipLoadData" xml:space="preserve">
+	<data name="ToolTipLoadData" xml:space="preserve">
     <value>حمل بيانات من ملف</value>
   </data>
-  <data name="ToolTipCurrentZoom" xml:space="preserve">
+	<data name="ToolTipCurrentZoom" xml:space="preserve">
     <value>نسبة تكبير الحجم الحالية Zoom</value>
   </data>
-  <data name="ToolTipFrequency" xml:space="preserve">
+	<data name="ToolTipFrequency" xml:space="preserve">
     <value>غير تردد ساعة البوابات للدارة الفعالة الحالية</value>
   </data>
-  <data name="ToolTipGateInputCount" xml:space="preserve">
+	<data name="ToolTipGateInputCount" xml:space="preserve">
     <value>اختر عدد المداخل للبوابة</value>
   </data>
-  <data name="ToolTipIsMaximumSpeed1" xml:space="preserve">
+	<data name="ToolTipIsMaximumSpeed1" xml:space="preserve">
     <value>تشغيل الدارة بالسرعة بأعظم سرعة ممكنة و تجاهل التردد المحدد بالمزلاق أعلاه</value>
   </data>
-  <data name="ToolTipIsMaximumSpeed2" xml:space="preserve">
+	<data name="ToolTipIsMaximumSpeed2" xml:space="preserve">
     <value>تحديد هذا الخيار قد يؤدي إلى عدم استجابة البرنامج على بعض أجهزة الحاسب</value>
   </data>
-  <data name="ToolTipFontColor" xml:space="preserve">
+	<data name="ToolTipFontColor" xml:space="preserve">
     <value>لون النص</value>
   </data>
-  <data name="ToolTipFontFamily" xml:space="preserve">
+	<data name="ToolTipFontFamily" xml:space="preserve">
     <value>عائلة النص</value>
   </data>
-  <data name="ToolTipFontSize" xml:space="preserve">
+	<data name="ToolTipFontSize" xml:space="preserve">
     <value>حجم النص</value>
   </data>
-  <data name="CircuitProbeName" xml:space="preserve">
+	<data name="CircuitProbeName" xml:space="preserve">
     <value>مجس</value>
   </data>
-  <data name="Loading" xml:space="preserve">
+	<data name="Loading" xml:space="preserve">
     <value>تحميل...</value>
   </data>
-  <data name="LogicalCircuitMainName" xml:space="preserve">
+	<data name="LogicalCircuitMainName" xml:space="preserve">
     <value>رئيسي</value>
   </data>
-  <data name="ImportTitle" xml:space="preserve">
+	<data name="ImportTitle" xml:space="preserve">
     <value>استيراد</value>
   </data>
-  <data name="ImageFileFilter" xml:space="preserve">
+	<data name="ImageFileFilter" xml:space="preserve">
     <value>ملف صورة
 (*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif)|*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif|All Files (*.*)|*.*</value>
   </data>
-  <data name="LogicalCircuitMainNotation" xml:space="preserve">
+	<data name="LogicalCircuitMainNotation" xml:space="preserve">
     <value>رئيسي</value>
   </data>
-  <data name="ErrorClipboardCorrupted" xml:space="preserve">
+	<data name="ErrorClipboardCorrupted" xml:space="preserve">
     <value>البيانات التي تم نسخها معطوبة و لا يمكن لصقها</value>
   </data>
-  <data name="MemoryOnStartOnes" xml:space="preserve">
+	<data name="MemoryOnStartOnes" xml:space="preserve">
     <value>تحويل كل البتات إلى 1</value>
   </data>
-  <data name="MemoryOnStartRandom" xml:space="preserve">
+	<data name="MemoryOnStartRandom" xml:space="preserve">
     <value>عشوائي</value>
   </data>
-  <data name="MemoryOnStartZeros" xml:space="preserve">
+	<data name="MemoryOnStartZeros" xml:space="preserve">
     <value>تحويل كل البتات إلى 0</value>
   </data>
-  <data name="MessageFreeWireCount" xml:space="preserve">
+	<data name="MessageFreeWireCount" xml:space="preserve">
     <value>تم اكتشف أسلاك غير موصولة {0}</value>
   </data>
-  <data name="MessageFloatingSymbolCount" xml:space="preserve">
+	<data name="MessageFloatingSymbolCount" xml:space="preserve">
     <value>تم اكتشف رمز غير متصل {0}</value>
   </data>
-  <data name="MessageExportImageDialog" xml:space="preserve">
+	<data name="MessageExportImageDialog" xml:space="preserve">
     <value>حدد نوع الصورة و اسم الملف ليتم تصدير المخطط الحالي إليه</value>
   </data>
-  <data name="MessageImageFileExists" xml:space="preserve">
+	<data name="MessageImageFileExists" xml:space="preserve">
     <value>الملف "{0}" موجود مسبقاً , هل تريد استبداله ؟</value>
   </data>
-  <data name="MenuHeaderCircuit" xml:space="preserve">
+	<data name="MenuHeaderCircuit" xml:space="preserve">
     <value>دارة</value>
   </data>
-  <data name="MenuHeaderEdit" xml:space="preserve">
+	<data name="MenuHeaderEdit" xml:space="preserve">
     <value>تحرير</value>
   </data>
-  <data name="MenuHeaderFile" xml:space="preserve">
+	<data name="MenuHeaderFile" xml:space="preserve">
     <value>ملف</value>
   </data>
-  <data name="MenuHeaderHelp" xml:space="preserve">
+	<data name="MenuHeaderHelp" xml:space="preserve">
     <value>مساعدة</value>
   </data>
-  <data name="MenuHeaderTools" xml:space="preserve">
+	<data name="MenuHeaderTools" xml:space="preserve">
     <value>أدوات</value>
   </data>
-  <data name="MessageRestartRequared" xml:space="preserve">
+	<data name="MessageRestartRequared" xml:space="preserve">
     <value>تم تغير اللغة , عليك إعادة تشغيل البرنامج لكي يتم تطبيق التغيرات.</value>
   </data>
-  <data name="MessageSaveFile" xml:space="preserve">
+	<data name="MessageSaveFile" xml:space="preserve">
     <value>المشروع {0} قد تم تعديله هل تريد حفظه ؟</value>
   </data>
-  <data name="OperationCanceled" xml:space="preserve">
+	<data name="OperationCanceled" xml:space="preserve">
     <value>تم الغاء العملية.</value>
   </data>
-  <data name="NameButton" xml:space="preserve">
+	<data name="NameButton" xml:space="preserve">
     <value>زر</value>
   </data>
-  <data name="NameConstant" xml:space="preserve">
+	<data name="NameConstant" xml:space="preserve">
     <value>ثابت</value>
   </data>
-  <data name="NamePin" xml:space="preserve">
+	<data name="NamePin" xml:space="preserve">
     <value>تماس Pin</value>
   </data>
-  <data name="MessageWarning" xml:space="preserve">
+	<data name="MessageWarning" xml:space="preserve">
     <value>تحذير!</value>
   </data>
-  <data name="NameLedMatrix" xml:space="preserve">
+	<data name="NameLedMatrix" xml:space="preserve">
     <value>مصفوفة LED</value>
   </data>
-  <data name="MessageVersionLatest" xml:space="preserve">
+	<data name="MessageVersionLatest" xml:space="preserve">
     <value>انت تستخدم النسخة الأخيرة, ليس هناك تحديثات.</value>
   </data>
-  <data name="MessageVersionOutdated" xml:space="preserve">
+	<data name="MessageVersionOutdated" xml:space="preserve">
     <value>لديك نسخة قديمة. الرجاء الضغط على الرابط أدناه لتحميل أخر نسخة.</value>
   </data>
-  <data name="ParserEOS" xml:space="preserve">
+	<data name="ParserEOS" xml:space="preserve">
     <value>نهاية التعبير</value>
   </data>
-  <data name="ParserErrorCloseParenMissing" xml:space="preserve">
+	<data name="ParserErrorCloseParenMissing" xml:space="preserve">
     <value>هناك '(' مفقود بدلاً من :{0}</value>
   </data>
-  <data name="Ready" xml:space="preserve">
+	<data name="Ready" xml:space="preserve">
     <value>جاهز.</value>
   </data>
-  <data name="TipOnStartWire" xml:space="preserve">
+	<data name="TipOnStartWire" xml:space="preserve">
     <value>اسحب نهاية السلك إلى المكان المطلوب. و اضغط Esc لإلغاء عملية انشاء السلك.</value>
   </data>
-  <data name="TipOnCtrlDown" xml:space="preserve">
+	<data name="TipOnCtrlDown" xml:space="preserve">
     <value>إضغط   Ctrl+{Shift}+Tab للتحويل بين الدارات المنطقية و انقر لتحديد\إزالة تحديد العناصر بشكل منفرد</value>
   </data>
-  <data name="TipOnWireSelect" xml:space="preserve">
+	<data name="TipOnWireSelect" xml:space="preserve">
     <value>Shift+{Ctrl}+Click  على سلك من أجل تحديد\إزالة تحديد بالكامل ,  Alt+Click على سلك محدد من أجل تقسيمه , أو على نقطة مشتركة من أجل الدمج.</value>
   </data>
-  <data name="PowerOff" xml:space="preserve">
+	<data name="PowerOff" xml:space="preserve">
     <value>إطفاء الطاقة</value>
   </data>
-  <data name="PowerOn" xml:space="preserve">
+	<data name="PowerOn" xml:space="preserve">
     <value>تشغيل الطاقة</value>
   </data>
-  <data name="TitleCircuitDescriptor" xml:space="preserve">
+	<data name="TitleCircuitDescriptor" xml:space="preserve">
     <value>دارة</value>
   </data>
-  <data name="TitleFileName" xml:space="preserve">
+	<data name="TitleFileName" xml:space="preserve">
     <value>ملف:</value>
   </data>
-  <data name="TitleImportCircuit" xml:space="preserve">
+	<data name="TitleImportCircuit" xml:space="preserve">
     <value>إستيراد</value>
   </data>
-  <data name="TitleCheckAll" xml:space="preserve">
+	<data name="TitleCheckAll" xml:space="preserve">
     <value>حدد الكل</value>
   </data>
-  <data name="TitleUncheckAll" xml:space="preserve">
+	<data name="TitleUncheckAll" xml:space="preserve">
     <value>الغاء تحديد الكل</value>
   </data>
-  <data name="ImagePathInvalid" xml:space="preserve">
+	<data name="ImagePathInvalid" xml:space="preserve">
     <value>اسم الملف الذي اخترته غير صحيح. الرجاء التحقق من أن المجلد الأب موجود و أن اسم الملف صحيح .</value>
   </data>
-  <data name="TitleExportImage" xml:space="preserve">
+	<data name="TitleExportImage" xml:space="preserve">
     <value>تصدير صورة</value>
   </data>
-  <data name="TitleFile" xml:space="preserve">
+	<data name="TitleFile" xml:space="preserve">
     <value>ملف:</value>
   </data>
-  <data name="TextNotation" xml:space="preserve">
+	<data name="TextNotation" xml:space="preserve">
     <value>ملاحظة نصية</value>
   </data>
-  <data name="SplitterDirectionClockwise" xml:space="preserve">
+	<data name="SplitterDirectionClockwise" xml:space="preserve">
     <value>يسار</value>
   </data>
-  <data name="SplitterDirectionCounterclockwise" xml:space="preserve">
+	<data name="SplitterDirectionCounterclockwise" xml:space="preserve">
     <value>يمين</value>
   </data>
-  <data name="PinSideBottom" xml:space="preserve">
+	<data name="PinSideBottom" xml:space="preserve">
     <value>أسفل</value>
   </data>
-  <data name="PinSideLeft" xml:space="preserve">
+	<data name="PinSideLeft" xml:space="preserve">
     <value>يسار</value>
   </data>
-  <data name="PinSideRight" xml:space="preserve">
+	<data name="PinSideRight" xml:space="preserve">
     <value>يمين</value>
   </data>
-  <data name="PinSideTop" xml:space="preserve">
+	<data name="PinSideTop" xml:space="preserve">
     <value>أعلى</value>
   </data>
-  <data name="PinTypeNameInput" xml:space="preserve">
+	<data name="PinTypeNameInput" xml:space="preserve">
     <value>دخل</value>
   </data>
-  <data name="PinTypeNameOutput" xml:space="preserve">
+	<data name="PinTypeNameOutput" xml:space="preserve">
     <value>خرج</value>
   </data>
-  <data name="ParserErrorExpressionMissing" xml:space="preserve">
+	<data name="ParserErrorExpressionMissing" xml:space="preserve">
     <value>التعبير ناقص بعد {0}</value>
   </data>
-  <data name="ParserErrorInvalidNumber" xml:space="preserve">
+	<data name="ParserErrorInvalidNumber" xml:space="preserve">
     <value>رقم غير صحيح: {0}</value>
   </data>
-  <data name="ParserErrorUnexpected" xml:space="preserve">
+	<data name="ParserErrorUnexpected" xml:space="preserve">
     <value>{0} غير متوقع</value>
   </data>
-  <data name="ParserErrorUnknownChar" xml:space="preserve">
+	<data name="ParserErrorUnknownChar" xml:space="preserve">
     <value>محرف غير معروف :{0}</value>
   </data>
-  <data name="ParserErrorUnknownPin" xml:space="preserve">
+	<data name="ParserErrorUnknownPin" xml:space="preserve">
     <value>{0} تماس الدخل  أو تماس الخرج غير موجود</value>
   </data>
-  <data name="CaptionAddressBitWidth" xml:space="preserve">
+	<data name="CaptionAddressBitWidth" xml:space="preserve">
     <value>بت العنوان</value>
   </data>
-  <data name="CaptionBitWidth" xml:space="preserve">
+	<data name="CaptionBitWidth" xml:space="preserve">
     <value>عرض البت</value>
   </data>
-  <data name="CaptionDataBitWidth" xml:space="preserve">
+	<data name="CaptionDataBitWidth" xml:space="preserve">
     <value>بتات البيانات</value>
   </data>
-  <data name="TitleFrequency" xml:space="preserve">
+	<data name="TitleFrequency" xml:space="preserve">
     <value>التردد:</value>
   </data>
-  <data name="TitleIsMaximumSpeed1" xml:space="preserve">
+	<data name="TitleIsMaximumSpeed1" xml:space="preserve">
     <value>تشغيل بالسرعة القصوى</value>
   </data>
-  <data name="TitleProject" xml:space="preserve">
+	<data name="TitleProject" xml:space="preserve">
     <value>مشروع</value>
   </data>
-  <data name="TitleZoom" xml:space="preserve">
+	<data name="TitleZoom" xml:space="preserve">
     <value>تكبير الحجم Zoom</value>
   </data>
-  <data name="TitleCancel" xml:space="preserve">
+	<data name="TitleCancel" xml:space="preserve">
     <value>إلغاء</value>
   </data>
-  <data name="TitleNo" xml:space="preserve">
+	<data name="TitleNo" xml:space="preserve">
     <value>لا</value>
   </data>
-  <data name="TitleOK" xml:space="preserve">
+	<data name="TitleOK" xml:space="preserve">
     <value>تمام</value>
   </data>
-  <data name="TitleShowDetails" xml:space="preserve">
+	<data name="TitleShowDetails" xml:space="preserve">
     <value>أظهر التفاصيل</value>
   </data>
-  <data name="TitleYes" xml:space="preserve">
+	<data name="TitleYes" xml:space="preserve">
     <value>نعم</value>
   </data>
-  <data name="TitleAbout" xml:space="preserve">
+	<data name="TitleAbout" xml:space="preserve">
     <value>حول</value>
   </data>
-  <data name="TitleApplication" xml:space="preserve">
+	<data name="TitleApplication" xml:space="preserve">
     <value>دارة منطقية</value>
   </data>
-  <data name="TitleVersion" xml:space="preserve">
+	<data name="TitleVersion" xml:space="preserve">
     <value>الإصدار:</value>
   </data>
-  <data name="TitleDisplayOptions" xml:space="preserve">
+	<data name="TitleDisplayOptions" xml:space="preserve">
     <value>عرض</value>
   </data>
-  <data name="TitleFileOptions" xml:space="preserve">
+	<data name="TitleFileOptions" xml:space="preserve">
     <value>ملف</value>
   </data>
-  <data name="TitleOptions" xml:space="preserve">
+	<data name="TitleOptions" xml:space="preserve">
     <value>خيارات</value>
   </data>
-  <data name="TitleDescription" xml:space="preserve">
+	<data name="TitleDescription" xml:space="preserve">
     <value>وصف:</value>
   </data>
-  <data name="TitleName" xml:space="preserve">
+	<data name="TitleName" xml:space="preserve">
     <value>إسم:</value>
   </data>
-  <data name="TitleValue" xml:space="preserve">
+	<data name="TitleValue" xml:space="preserve">
     <value>قيمة:</value>
   </data>
-  <data name="TitleData" xml:space="preserve">
+	<data name="TitleData" xml:space="preserve">
     <value>بيانات</value>
   </data>
-  <data name="TitleLoad" xml:space="preserve">
+	<data name="TitleLoad" xml:space="preserve">
     <value>تحميل...</value>
   </data>
-  <data name="TipOnStartMove" xml:space="preserve">
+	<data name="TipOnStartMove" xml:space="preserve">
     <value>اسحب و أفلت ما هو محدد إلى المكان المطلوب. اضغط  Shift عند الإفلات من أجل منع الأسلاك الموصولة من التحرك.</value>
   </data>
-  <data name="TitleIsMaximumSpeed2" xml:space="preserve">
+	<data name="TitleIsMaximumSpeed2" xml:space="preserve">
     <value>تحميل عالي للمعالج (CPU)</value>
   </data>
-  <data name="TitleMemory" xml:space="preserve">
+	<data name="TitleMemory" xml:space="preserve">
     <value>ذاكرة</value>
   </data>
-  <data name="TitleMaxRecentFiles" xml:space="preserve">
+	<data name="TitleMaxRecentFiles" xml:space="preserve">
     <value>العدد الأعظمي للملفات الأخيرة</value>
   </data>
-  <data name="TitleProjectDescription" xml:space="preserve">
+	<data name="TitleProjectDescription" xml:space="preserve">
     <value>وصف</value>
   </data>
-  <data name="TitleReportErrorDetails" xml:space="preserve">
+	<data name="TitleReportErrorDetails" xml:space="preserve">
     <value>تفاصيل الخطأ</value>
   </data>
-  <data name="TitleSummary" xml:space="preserve">
+	<data name="TitleSummary" xml:space="preserve">
     <value>ملخص:</value>
   </data>
-  <data name="TitleTotal" xml:space="preserve">
+	<data name="TitleTotal" xml:space="preserve">
     <value>الكلي:</value>
   </data>
-  <data name="CaptionLedMatrixType" xml:space="preserve">
+	<data name="CaptionLedMatrixType" xml:space="preserve">
     <value>النوع</value>
   </data>
-  <data name="LedMatrixTypeIndividual" xml:space="preserve">
+	<data name="LedMatrixTypeIndividual" xml:space="preserve">
     <value>منفرد</value>
   </data>
-  <data name="TitleColumns" xml:space="preserve">
+	<data name="TitleColumns" xml:space="preserve">
     <value>الأعمدة:</value>
   </data>
-  <data name="TitleRows" xml:space="preserve">
+	<data name="TitleRows" xml:space="preserve">
     <value>الأسطر:</value>
   </data>
-  <data name="TitleColors" xml:space="preserve">
+	<data name="TitleColors" xml:space="preserve">
     <value>الألوان:</value>
   </data>
-  <data name="TitleCheckVersion" xml:space="preserve">
+	<data name="TitleCheckVersion" xml:space="preserve">
     <value>تحقق الآن</value>
   </data>
-  <data name="TitleHyperlink" xml:space="preserve">
+	<data name="TitleHyperlink" xml:space="preserve">
     <value>رابط لـ :</value>
   </data>
-  <data name="TitleText" xml:space="preserve">
+	<data name="TitleText" xml:space="preserve">
     <value>نص:</value>
   </data>
-  <data name="TitleCheckVersionPeriodically" xml:space="preserve">
+	<data name="TitleCheckVersionPeriodically" xml:space="preserve">
     <value>تفحص بشكل دوري من أجل الإصدارات الجديدة</value>
   </data>
-  <data name="TitleApply" xml:space="preserve">
+	<data name="TitleApply" xml:space="preserve">
     <value>تطبيق</value>
   </data>
-  <data name="TitleFilter" xml:space="preserve">
+	<data name="TitleFilter" xml:space="preserve">
     <value>فلترة:</value>
   </data>
-  <data name="TitleInvert" xml:space="preserve">
+	<data name="TitleInvert" xml:space="preserve">
     <value>عكس:</value>
   </data>
-  <data name="TitleStop" xml:space="preserve">
+	<data name="TitleStop" xml:space="preserve">
     <value>ايقاف</value>
   </data>
-  <data name="TitleSaveAs" xml:space="preserve">
+	<data name="TitleSaveAs" xml:space="preserve">
     <value>حفظ بإسم :</value>
   </data>
-  <data name="ToolTipMemoryOnStart" xml:space="preserve">
+	<data name="ToolTipMemoryOnStart" xml:space="preserve">
     <value>حدد كيفية تهيئة الـ  RAM  عندما يتم تشغيل الطاقة.</value>
   </data>
-  <data name="TitleCulture" xml:space="preserve">
+	<data name="TitleCulture" xml:space="preserve">
     <value>اللغة</value>
   </data>
-  <data name="ToolTipButton" xml:space="preserve">
+	<data name="ToolTipButton" xml:space="preserve">
     <value>زر {0}</value>
   </data>
-  <data name="LedMatrixColumnSelector" xml:space="preserve">
+	<data name="LedMatrixColumnSelector" xml:space="preserve">
     <value>من أجل اختيار العمود رقم {0}</value>
   </data>
-  <data name="LedMatrixRowIndividual" xml:space="preserve">
+	<data name="LedMatrixRowIndividual" xml:space="preserve">
     <value>من أجل كل LED  في السطر رقم {0}</value>
   </data>
-  <data name="LedMatrixRowSelector" xml:space="preserve">
+	<data name="LedMatrixRowSelector" xml:space="preserve">
     <value>من أجل اختيار السطر رقم {0}</value>
   </data>
-  <data name="TitleDisplayedRows" xml:space="preserve">
+	<data name="TitleDisplayedRows" xml:space="preserve">
     <value>الأسطر المعروضة: {0:N0}</value>
   </data>
-  <data name="TitleTotalRows" xml:space="preserve">
+	<data name="TitleTotalRows" xml:space="preserve">
     <value>الأسطر الكلية: {0:N0}</value>
   </data>
-  <data name="FunctionParameter" xml:space="preserve">
+	<data name="FunctionParameter" xml:space="preserve">
     <value>الدالة {0} تطلب على الأقل {1} بارامتر</value>
   </data>
-  <data name="MessageInvalidRecentFile" xml:space="preserve">
+	<data name="MessageInvalidRecentFile" xml:space="preserve">
     <value>الملف "{0}" لا يمكن فتحه.
 هل تريد حذفه من قائمة الملفات الأخيرة؟</value>
   </data>
-  <data name="ErrorManyMemoryData" xml:space="preserve">
+	<data name="ErrorManyMemoryData" xml:space="preserve">
     <value>الدارة {0} تحوي {1} من أجل حفظ البيانات عند كل تشغيل.
 لا يمكن استخدام مثل هذه الدارات أكثر من مرة واحدة في دارة أخرى لأنه قد يتم تخزين بينات مختلفة على الذاكرة .</value>
   </data>
-  <data name="TipOnAwaitingArea" xml:space="preserve">
+	<data name="TipOnAwaitingArea" xml:space="preserve">
     <value>{0} {1}. قم بإحاطة عدة رموز من أجل تحديدها, اضغط   Shift باستمرار من أجل الحفاظ على التحديد الحالي.</value>
   </data>
-  <data name="ErrorAddressNotConnected" xml:space="preserve">
+	<data name="ErrorAddressNotConnected" xml:space="preserve">
     <value>ليست كل بتات العنونة متصلة بالذاكرة {0}</value>
   </data>
-  <data name="TitlePinInput" xml:space="preserve">
+	<data name="TitlePinInput" xml:space="preserve">
     <value>{0}
 دخل</value>
   </data>
-  <data name="TitlePinOutput" xml:space="preserve">
+	<data name="TitlePinOutput" xml:space="preserve">
     <value>{0}
 خرج</value>
   </data>
-  <data name="ErrorDataInNotConnected" xml:space="preserve">
+	<data name="ErrorDataInNotConnected" xml:space="preserve">
     <value>ليست كل بتات البيانات متصلة بالذاكرة {0}</value>
   </data>
-  <data name="ReportError" xml:space="preserve">
+	<data name="ReportError" xml:space="preserve">
     <value>لا يمكن انشاء تقرير عن الدوال بسب الخطأ التالي : {0}</value>
   </data>
-  <data name="ReportFunctions" xml:space="preserve">
+	<data name="ReportFunctions" xml:space="preserve">
     <value>دوال الدارة "{0}"</value>
   </data>
-  <data name="MainFrameCaption" xml:space="preserve">
+	<data name="MainFrameCaption" xml:space="preserve">
     <value>دارة منطقية {0}</value>
   </data>
-  <data name="ErrorLoopInCircuit" xml:space="preserve">
+	<data name="ErrorLoopInCircuit" xml:space="preserve">
     <value>الرمز الخاص بالدارة "{0}" في الدارة المنطقية "{1}" يشكل حلقة لا نهائة. الرجاء حل المشكلة.</value>
   </data>
-  <data name="GateTriStateName" xml:space="preserve">
+	<data name="GateTriStateName" xml:space="preserve">
     <value>ثلاثي الحالة</value>
   </data>
-  <data name="LogicalCircuitName" xml:space="preserve">
+	<data name="LogicalCircuitName" xml:space="preserve">
     <value>دارة</value>
   </data>
-  <data name="MemoryAddressPinName" xml:space="preserve">
+	<data name="MemoryAddressPinName" xml:space="preserve">
     <value>عنوان الذاكرة</value>
   </data>
-  <data name="MemoryDataInPinName" xml:space="preserve">
+	<data name="MemoryDataInPinName" xml:space="preserve">
     <value>بيانات دخل الذاكرة</value>
   </data>
-  <data name="MemoryDataPinName" xml:space="preserve">
+	<data name="MemoryDataPinName" xml:space="preserve">
     <value>بيانات الذاكرة</value>
   </data>
-  <data name="TitleLoadLastFile" xml:space="preserve">
+	<data name="TitleLoadLastFile" xml:space="preserve">
     <value>حمل الملف الأخير عند تشغيل البرنامج</value>
   </data>
-  <data name="TitleShowGrid" xml:space="preserve">
+	<data name="TitleShowGrid" xml:space="preserve">
     <value>أظهر الشبكة</value>
   </data>
-  <data name="CommandEditSelectFloatingSymbols" xml:space="preserve">
+	<data name="CommandEditSelectFloatingSymbols" xml:space="preserve">
     <value>اختر الرمز العائم</value>
   </data>
-  <data name="TitleCategory" xml:space="preserve">
+	<data name="TitleCategory" xml:space="preserve">
     <value>التصنيف:</value>
   </data>
-  <data name="TitleBitWidth" xml:space="preserve">
+	<data name="TitleBitWidth" xml:space="preserve">
     <value>عرض البت:</value>
   </data>
-  <data name="TitleAddressBitWidth" xml:space="preserve">
+	<data name="TitleAddressBitWidth" xml:space="preserve">
     <value>عرض بت العنونة:</value>
   </data>
-  <data name="TitleDataBitWidth" xml:space="preserve">
+	<data name="TitleDataBitWidth" xml:space="preserve">
     <value>عرض بت البيانات:</value>
   </data>
-  <data name="TitleType" xml:space="preserve">
+	<data name="TitleType" xml:space="preserve">
     <value>النمط:</value>
   </data>
-  <data name="TitleWriteOn" xml:space="preserve">
+	<data name="TitleWriteOn" xml:space="preserve">
     <value>كتابة في:</value>
   </data>
-  <data name="Oscillation" xml:space="preserve">
+	<data name="Oscillation" xml:space="preserve">
     <value>الذبذبة</value>
   </data>
-  <data name="TitleOscillogram" xml:space="preserve">
+	<data name="TitleOscillogram" xml:space="preserve">
     <value>راسم الذبذبة</value>
   </data>
-  <data name="TitleOscilloscope" xml:space="preserve">
+	<data name="TitleOscilloscope" xml:space="preserve">
     <value>راسم إشارة الدارة.</value>
   </data>
-  <data name="TitleOscilloscoping" xml:space="preserve">
+	<data name="TitleOscilloscoping" xml:space="preserve">
     <value>رسم الإشارة</value>
   </data>
-  <data name="TriStateGroupName" xml:space="preserve">
+	<data name="TriStateGroupName" xml:space="preserve">
     <value>مجموعة ثلاثي الحالة</value>
   </data>
-  <data name="ToolTipAddressBitWidth" xml:space="preserve">
+	<data name="ToolTipAddressBitWidth" xml:space="preserve">
     <value>اختر عرض بت تماس العنونة</value>
   </data>
-  <data name="ToolTipConstantBitWidth" xml:space="preserve">
+	<data name="ToolTipConstantBitWidth" xml:space="preserve">
     <value>اختر عرض بت الثابت</value>
   </data>
-  <data name="ToolTipConstantValue" xml:space="preserve">
+	<data name="ToolTipConstantValue" xml:space="preserve">
     <value>ادخل قيمة تهيئة للثابت</value>
   </data>
-  <data name="ToolTipDataBitWidth" xml:space="preserve">
+	<data name="ToolTipDataBitWidth" xml:space="preserve">
     <value>اختر عرض بت تماس البيانات</value>
   </data>
-  <data name="ToolTipPinBitWidth" xml:space="preserve">
+	<data name="ToolTipPinBitWidth" xml:space="preserve">
     <value>اختر عرض بت التماس</value>
   </data>
-  <data name="ToolTipRamWriteOn" xml:space="preserve">
+	<data name="ToolTipRamWriteOn" xml:space="preserve">
     <value>اختر زمن الكتابة على الذاكرة</value>
   </data>
-  <data name="MessageNotUsed" xml:space="preserve">
+	<data name="MessageNotUsed" xml:space="preserve">
     <value>الدارة المنطقية ليست مستخدمة في أي مكان.</value>
   </data>
-  <data name="TitleCircuitUsage" xml:space="preserve">
+	<data name="TitleCircuitUsage" xml:space="preserve">
     <value>استخدام الدارة المنطقية</value>
   </data>
-  <data name="CategoryPrimitives" xml:space="preserve">
+	<data name="CategoryPrimitives" xml:space="preserve">
     <value>العناصر الأولية</value>
   </data>
-  <data name="TitleCellShape" xml:space="preserve">
+	<data name="TitleCellShape" xml:space="preserve">
     <value>شكل الخلية:</value>
   </data>
-  <data name="MessageVersionPreview" xml:space="preserve">
+	<data name="MessageVersionPreview" xml:space="preserve">
     <value>انت تستخدم نسخة تجريبية</value>
   </data>
-  <data name="MessageTruthTableTooBig" xml:space="preserve">
+	<data name="MessageTruthTableTooBig" xml:space="preserve">
     <value>جدول الحقيقة طويل جداً و تم تدويره.
 الرجاء استخدم الفلترة للتأكد من صحة الدارة.</value>
   </data>
-  <data name="ToolTipBackgroundColor" xml:space="preserve">
+	<data name="ToolTipBackgroundColor" xml:space="preserve">
     <value>لون الخلفية</value>
   </data>
-  <data name="CommandEditAlignJustify" xml:space="preserve">
+	<data name="CommandEditAlignJustify" xml:space="preserve">
     <value>توسيط</value>
   </data>
-  <data name="CommandEditUnderline" xml:space="preserve">
+	<data name="CommandEditUnderline" xml:space="preserve">
     <value>تحته خط</value>
   </data>
-  <data name="ProjectSummary" xml:space="preserve">
+	<data name="ProjectSummary" xml:space="preserve">
     <value>{0} دارة منطقية, في {1} تصنيف تقوم باستخدام {2} رمز و {3} سلك</value>
   </data>
-  <data name="MemoryWritePinName" xml:space="preserve">
+	<data name="MemoryWritePinName" xml:space="preserve">
     <value>مدخل الكتابة الخاص بالـ RAM . يتم تحديث القيمة المخزنة  في الذاكرة عند {0}</value>
   </data>
-  <data name="ErrorJamBitWidthDifferent" xml:space="preserve">
+	<data name="ErrorJamBitWidthDifferent" xml:space="preserve">
     <value>تماس الدخل الخاص بـ {0} ({1}) و تماس الخرج الخاص بـ  {2} ({3})  في {4} لهما عرض بت مختلف و لا يمكن وصلهما. الرجاء حاول حل المشكلة.</value>
   </data>
-  <data name="ErrorManyResults" xml:space="preserve">
+	<data name="ErrorManyResults" xml:space="preserve">
     <value>تماس الدخل {0} الخاص بـ {1} متصل بأكثر من تماس خرج واحد و التماسات المتصل بها ليست ثلاثية الحالة.</value>
   </data>
-  <data name="MessageNotRootConstant" xml:space="preserve">
+	<data name="MessageNotRootConstant" xml:space="preserve">
     <value>فقط الثوابت الموجودة في الدارة  الرئيسية  ({0}) يمكن تغييرها عند تشغيل الطاقة.</value>
   </data>
-  <data name="CaptionSplitterPinNumber" xml:space="preserve">
+	<data name="CaptionSplitterPinNumber" xml:space="preserve">
     <value>تفريع التماسات.</value>
   </data>
-  <data name="CaptionSplitterDirection" xml:space="preserve">
+	<data name="CaptionSplitterDirection" xml:space="preserve">
     <value>اتجاه التماسات الجديدة</value>
   </data>
-  <data name="TitleRunningCircuit" xml:space="preserve">
+	<data name="TitleRunningCircuit" xml:space="preserve">
     <value>الدارة الفعالة</value>
   </data>
-  <data name="ToolTipPinSide" xml:space="preserve">
+	<data name="ToolTipPinSide" xml:space="preserve">
     <value>اختر طرف الدارة التي سيتم وضع التماس فيه.</value>
   </data>
-  <data name="CommandCircuitPower" xml:space="preserve">
+	<data name="CommandCircuitPower" xml:space="preserve">
     <value>الطاقة</value>
   </data>
-  <data name="ErrorUnsupportedUri" xml:space="preserve">
+	<data name="ErrorUnsupportedUri" xml:space="preserve">
     <value>لا يمكن الوصول إلى هذا العنوان.</value>
   </data>
-  <data name="ToolTipColumns" xml:space="preserve">
+	<data name="ToolTipColumns" xml:space="preserve">
     <value>اختر عدد أعمدة مصفوفة الـ LED</value>
   </data>
-  <data name="MessageInputOutputPinsMissing" xml:space="preserve">
+	<data name="MessageInputOutputPinsMissing" xml:space="preserve">
     <value>لا يوجد تماسات دخل أو خرج لهذه الدارة.
 سيتم بناء جداول الحقيقة بإرسال جميع التبديلات الممكنة للبيانات إلى تماسات الدخل و قراءة النتائج من تماسات الخرج.</value>
   </data>
-  <data name="MemoryOnStartData" xml:space="preserve">
+	<data name="MemoryOnStartData" xml:space="preserve">
     <value>حافظ على بيانات الذاكرة بين مرات التشغيل.</value>
   </data>
-  <data name="ToolTipInputPin" xml:space="preserve">
+	<data name="ToolTipInputPin" xml:space="preserve">
     <value>دخل {0} بتات تماس{1}</value>
   </data>
-  <data name="ToolTipRAM" xml:space="preserve">
+	<data name="ToolTipRAM" xml:space="preserve">
     <value>بت عنوان RAM {0} \ بت بينات {1}</value>
   </data>
-  <data name="ToolTipROM" xml:space="preserve">
+	<data name="ToolTipROM" xml:space="preserve">
     <value>بت العنوان ROM {0} \ {1}  بت بيانات</value>
   </data>
-  <data name="ReportMemoryName" xml:space="preserve">
+	<data name="ReportMemoryName" xml:space="preserve">
     <value>{0}: {1}بت عنوان, {2}بت بينات</value>
   </data>
-  <data name="ToolTipIsToggle" xml:space="preserve">
+	<data name="ToolTipIsToggle" xml:space="preserve">
     <value>اذا تم توضيع الزر ,عندها سيغر حالته عند كل نقرة, اما اذا لم يتم توضيعه, عندها سيغر حالته فقط عندما يكون مضغوطاً أو غير مضغوط.</value>
   </data>
-  <data name="MessageUsageNote" xml:space="preserve">
+	<data name="MessageUsageNote" xml:space="preserve">
     <value>أختر الدارة التي يستخدم فيها العنصر الحالي و انقر نقراً مزدوجاً للذهاب إلى هناك و اختر الرمز للعنصر الحالي.</value>
   </data>
-  <data name="TitleCount" xml:space="preserve">
+	<data name="TitleCount" xml:space="preserve">
     <value>العدد</value>
   </data>
-  <data name="ToolTipSplitter" xml:space="preserve">
+	<data name="ToolTipSplitter" xml:space="preserve">
     <value>مفرع {0} بت إلى {1} تماس</value>
   </data>
-  <data name="NameSplitter" xml:space="preserve">
+	<data name="NameSplitter" xml:space="preserve">
     <value>مفرع</value>
   </data>
-  <data name="TitleFunction" xml:space="preserve">
+	<data name="TitleFunction" xml:space="preserve">
     <value>الدالة</value>
   </data>
-  <data name="FileFilter" xml:space="preserve">
+	<data name="FileFilter" xml:space="preserve">
     <value>مشروع دارة (*{0})|*{0}|All files (*.*)|*.*</value>
   </data>
-  <data name="ToolTipSplitterPinNumber" xml:space="preserve">
+	<data name="ToolTipSplitterPinNumber" xml:space="preserve">
     <value>اختر عدد تماسات التفريع الجديدة المطلوبة.</value>
   </data>
-  <data name="ToolTipSplitterRotation" xml:space="preserve">
+	<data name="ToolTipSplitterRotation" xml:space="preserve">
     <value>اختر اتجاه التماسات الجديدة الناتجة .</value>
   </data>
-  <data name="CaptionSplitterBitWidth" xml:space="preserve">
+	<data name="CaptionSplitterBitWidth" xml:space="preserve">
     <value>عرض بت كل تماس جديد ناتج عن التقسيم</value>
   </data>
-  <data name="ToolTipSplitterBitWidth" xml:space="preserve">
+	<data name="ToolTipSplitterBitWidth" xml:space="preserve">
     <value>اختر عرض بت التماسات الجديدة الناتجة عن التفريع.</value>
   </data>
-  <data name="SplitterThin1PinName" xml:space="preserve">
+	<data name="SplitterThin1PinName" xml:space="preserve">
     <value>(بت {0}) من المفرع</value>
   </data>
-  <data name="SplitterThin2PinName" xml:space="preserve">
+	<data name="SplitterThin2PinName" xml:space="preserve">
     <value>(البتات من {0}إلى{1})  من المفرع</value>
   </data>
-  <data name="SplitterWidePinName" xml:space="preserve">
+	<data name="SplitterWidePinName" xml:space="preserve">
     <value>مفرع</value>
   </data>
-  <data name="TitleInverted" xml:space="preserve">
+	<data name="TitleInverted" xml:space="preserve">
     <value>معكوس:</value>
   </data>
-  <data name="TitleSide" xml:space="preserve">
+	<data name="TitleSide" xml:space="preserve">
     <value>طرف:</value>
   </data>
-  <data name="ToolTipButtonNotation" xml:space="preserve">
+	<data name="ToolTipButtonNotation" xml:space="preserve">
     <value>أدخل وصف الزر</value>
   </data>
-  <data name="TitleIsToggle" xml:space="preserve">
+	<data name="TitleIsToggle" xml:space="preserve">
     <value>وصف</value>
   </data>
-  <data name="ReportGateName" xml:space="preserve">
+	<data name="ReportGateName" xml:space="preserve">
     <value>{0}  عدد المداخل({1})</value>
   </data>
-  <data name="GateShapeRectangular" xml:space="preserve">
+	<data name="GateShapeRectangular" xml:space="preserve">
     <value>شكل مستطيلي</value>
   </data>
-  <data name="GateTriStateNotation" xml:space="preserve">
+	<data name="GateTriStateNotation" xml:space="preserve">
     <value>شكل مميز</value>
   </data>
-  <data name="GateShapeShaped" xml:space="preserve">
+	<data name="GateShapeShaped" xml:space="preserve">
     <value>شكل مميز</value>
   </data>
-  <data name="ToolTipConstant" xml:space="preserve">
+	<data name="ToolTipConstant" xml:space="preserve">
     <value>{0} بت ثابت {1:X}</value>
   </data>
-  <data name="ToolTipNonePin" xml:space="preserve">
+	<data name="ToolTipNonePin" xml:space="preserve">
     <value>{0} بت {1}</value>
   </data>
-  <data name="ToolTipOutputPin" xml:space="preserve">
+	<data name="ToolTipOutputPin" xml:space="preserve">
     <value>خرج {0} بت تماس {1}</value>
   </data>
-  <data name="TitleGateShape" xml:space="preserve">
+	<data name="TitleGateShape" xml:space="preserve">
     <value>شكل البوابة</value>
   </data>
-  <data name="TitleNotation" xml:space="preserve">
+	<data name="TitleNotation" xml:space="preserve">
     <value>الوصف:</value>
   </data>
-  <data name="Gate7SegName" xml:space="preserve">
+	<data name="Gate7SegName" xml:space="preserve">
     <value>7-seg</value>
   </data>
-  <data name="CaptionNotation" xml:space="preserve">
+	<data name="CaptionNotation" xml:space="preserve">
     <value>الوصف</value>
   </data>
-  <data name="ToolTipLedMatrix" xml:space="preserve">
+	<data name="ToolTipLedMatrix" xml:space="preserve">
     <value>مصفوفة ليدات {0}x{1} ذات  {2} بت لكل LED   ( {3}ألوان)</value>
   </data>
-  <data name="BitOff" xml:space="preserve">
+	<data name="BitOff" xml:space="preserve">
     <value>مطفأ Off</value>
   </data>
-  <data name="ParserErrorUnclosedQuote" xml:space="preserve">
+	<data name="ParserErrorUnclosedQuote" xml:space="preserve">
     <value>المعرف المقتبس لا يحوي على رمز انتهاء الاقتباس:  {0}</value>
   </data>
-  <data name="TitleProbeHistory" xml:space="preserve">
+	<data name="TitleProbeHistory" xml:space="preserve">
     <value>تاريخ المجس</value>
   </data>
-  <data name="TitleMemoryOnStart" xml:space="preserve">
+	<data name="TitleMemoryOnStart" xml:space="preserve">
     <value>عند بدء التشغل قم بملئ:</value>
   </data>
-  <data name="CategoryDuplicate" xml:space="preserve">
+	<data name="CategoryDuplicate" xml:space="preserve">
     <value>2 {0}</value>
   </data>
-  <data name="LedMatrixTypeSelector" xml:space="preserve">
+	<data name="LedMatrixTypeSelector" xml:space="preserve">
     <value>منتقى</value>
   </data>
-  <data name="CircuitProbeToolTip" xml:space="preserve">
+	<data name="CircuitProbeToolTip" xml:space="preserve">
     <value>مجس {0}</value>
   </data>
-  <data name="CircuitMapPathSeparator" xml:space="preserve">
+	<data name="CircuitMapPathSeparator" xml:space="preserve">
     <value>/</value>
   </data>
-  <data name="CaptionName" xml:space="preserve">
+	<data name="CaptionName" xml:space="preserve">
     <value>إسم</value>
   </data>
-  <data name="CircuitProbeNotation" xml:space="preserve">
+	<data name="CircuitProbeNotation" xml:space="preserve">
     <value>?</value>
   </data>
-  <data name="Bit0" xml:space="preserve">
+	<data name="Bit0" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="Bit1" xml:space="preserve">
+	<data name="Bit1" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="ConstantNotation" xml:space="preserve">
+	<data name="ConstantNotation" xml:space="preserve">
     <value>{0:X}</value>
   </data>
-  <data name="DefaultGateShape" xml:space="preserve">
+	<data name="DefaultGateShape" xml:space="preserve">
     <value>Shaped</value>
   </data>
-  <data name="GateAndName" xml:space="preserve">
+	<data name="GateAndName" xml:space="preserve">
     <value>And</value>
   </data>
-  <data name="GateAndNotation" xml:space="preserve">
+	<data name="GateAndNotation" xml:space="preserve">
     <value>&amp;</value>
   </data>
-  <data name="GateAndNotName" xml:space="preserve">
+	<data name="GateAndNotName" xml:space="preserve">
     <value>NAnd</value>
   </data>
-  <data name="GateClockNotation" xml:space="preserve">
+	<data name="GateClockNotation" xml:space="preserve">
     <value>ω</value>
   </data>
-  <data name="GateLedName" xml:space="preserve">
+	<data name="GateLedName" xml:space="preserve">
     <value>LED</value>
   </data>
-  <data name="GateLedNotation" xml:space="preserve">
+	<data name="GateLedNotation" xml:space="preserve">
     <value>LED</value>
   </data>
-  <data name="GateNotName" xml:space="preserve">
+	<data name="GateNotName" xml:space="preserve">
     <value>Not</value>
   </data>
-  <data name="GateNotNotation" xml:space="preserve">
+	<data name="GateNotNotation" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="GateOrName" xml:space="preserve">
+	<data name="GateOrName" xml:space="preserve">
     <value>Or</value>
   </data>
-  <data name="GateOrNotation" xml:space="preserve">
+	<data name="GateOrNotation" xml:space="preserve">
     <value>≥1</value>
   </data>
-  <data name="GateOrNotName" xml:space="preserve">
+	<data name="GateOrNotName" xml:space="preserve">
     <value>NOr</value>
   </data>
-  <data name="GateXorName" xml:space="preserve">
+	<data name="GateXorName" xml:space="preserve">
     <value>Xor</value>
   </data>
-  <data name="GateXorNotation" xml:space="preserve">
+	<data name="GateXorNotation" xml:space="preserve">
     <value>=1</value>
   </data>
-  <data name="GateXorNotName" xml:space="preserve">
+	<data name="GateXorNotName" xml:space="preserve">
     <value>XNor</value>
   </data>
-  <data name="HelpContent" xml:space="preserve">
+	<data name="HelpContent" xml:space="preserve">
     <value>https://www.logiccircuit.org/help.html</value>
   </data>
-  <data name="GridPoint" xml:space="preserve">
+	<data name="GridPoint" xml:space="preserve">
     <value>({0}, {1})</value>
   </data>
-  <data name="Led7Pin1" xml:space="preserve">
+	<data name="Led7Pin1" xml:space="preserve">
     <value>a</value>
   </data>
-  <data name="Led7Pin2" xml:space="preserve">
+	<data name="Led7Pin2" xml:space="preserve">
     <value>b</value>
   </data>
-  <data name="Led7Pin3" xml:space="preserve">
+	<data name="Led7Pin3" xml:space="preserve">
     <value>c</value>
   </data>
-  <data name="Led7Pin4" xml:space="preserve">
+	<data name="Led7Pin4" xml:space="preserve">
     <value>d</value>
   </data>
-  <data name="Led7Pin5" xml:space="preserve">
+	<data name="Led7Pin5" xml:space="preserve">
     <value>e</value>
   </data>
-  <data name="Led7Pin6" xml:space="preserve">
+	<data name="Led7Pin6" xml:space="preserve">
     <value>f</value>
   </data>
-  <data name="Led7Pin7" xml:space="preserve">
+	<data name="Led7Pin7" xml:space="preserve">
     <value>g</value>
   </data>
-  <data name="Led7Pin8" xml:space="preserve">
+	<data name="Led7Pin8" xml:space="preserve">
     <value>dot</value>
   </data>
-  <data name="MemoryAddressPinNotation" xml:space="preserve">
+	<data name="MemoryAddressPinNotation" xml:space="preserve">
     <value>a</value>
   </data>
-  <data name="MemoryDataPinNotation" xml:space="preserve">
+	<data name="MemoryDataPinNotation" xml:space="preserve">
     <value>d</value>
   </data>
-  <data name="MemoryWritePinNotation" xml:space="preserve">
+	<data name="MemoryWritePinNotation" xml:space="preserve">
     <value>w</value>
   </data>
-  <data name="PinEnableName" xml:space="preserve">
+	<data name="PinEnableName" xml:space="preserve">
     <value>E</value>
   </data>
-  <data name="PinInName" xml:space="preserve">
+	<data name="PinInName" xml:space="preserve">
     <value>x</value>
   </data>
-  <data name="PinName" xml:space="preserve">
+	<data name="PinName" xml:space="preserve">
     <value>{0}{1}</value>
   </data>
-  <data name="PinOutName" xml:space="preserve">
+	<data name="PinOutName" xml:space="preserve">
     <value>q</value>
   </data>
-  <data name="RAMNotation" xml:space="preserve">
+	<data name="RAMNotation" xml:space="preserve">
     <value>RAM</value>
   </data>
-  <data name="ROMNotation" xml:space="preserve">
+	<data name="ROMNotation" xml:space="preserve">
     <value>ROM</value>
   </data>
-  <data name="TitleActualFrequency" xml:space="preserve">
+	<data name="TitleActualFrequency" xml:space="preserve">
     <value>التردد الفعلي:</value>
   </data>
-  <data name="TitleFileOpen" xml:space="preserve">
+	<data name="TitleFileOpen" xml:space="preserve">
     <value>...</value>
   </data>
-  <data name="TitleIsDisplay" xml:space="preserve">
+	<data name="TitleIsDisplay" xml:space="preserve">
     <value>قم بعرض العناصر على الرمز</value>
   </data>
-  <data name="WebSiteUri" xml:space="preserve">
+	<data name="WebSiteUri" xml:space="preserve">
     <value>https://www.logiccircuit.org/</value>
   </data>
-  <data name="WebSiteDownloadUri" xml:space="preserve">
+	<data name="WebSiteDownloadUri" xml:space="preserve">
     <value>https://www.logiccircuit.org/download.html</value>
   </data>
-  <data name="ToolTipIsDisplay" xml:space="preserve">
+	<data name="ToolTipIsDisplay" xml:space="preserve">
     <value>عندما تقوم بتفعيل خيار عرض العناصر كل الرموز في هذه الدارة سوف تظهر على رموزها ,العناصر هي:
 LED, مصفوفة LED ,زر , أو اية عناصر اخرى</value>
   </data>
-  <data name="WireDisplayBitWidth" xml:space="preserve">
+	<data name="WireDisplayBitWidth" xml:space="preserve">
     <value>عرض البت: {0}</value>
   </data>
-  <data name="WireDisplayValue" xml:space="preserve">
+	<data name="WireDisplayValue" xml:space="preserve">
     <value>قيمة: {0}</value>
   </data>
-  <data name="WireDisplayDisconnected" xml:space="preserve">
+	<data name="WireDisplayDisconnected" xml:space="preserve">
     <value>لم يتم توصيل السلك.</value>
   </data>
-  <data name="CaptionPinSide" xml:space="preserve">
+	<data name="CaptionPinSide" xml:space="preserve">
     <value>طرف الموصل (Pin)</value>
   </data>
-  <data name="TitlePinSide" xml:space="preserve">
+	<data name="TitlePinSide" xml:space="preserve">
     <value>طرف الموصل (Pin):</value>
   </data>
-  <data name="ToolTipDevicePinSide" xml:space="preserve">
+	<data name="ToolTipDevicePinSide" xml:space="preserve">
     <value>اختر الطرف الذي سوف يتوضع الموصل (pin) عليه</value>
   </data>
-  <data name="NameSensor" xml:space="preserve">
+	<data name="NameSensor" xml:space="preserve">
     <value>حساس</value>
   </data>
-  <data name="ToolTipSensor" xml:space="preserve">
+	<data name="ToolTipSensor" xml:space="preserve">
     <value>حساس  {0}</value>
   </data>
-  <data name="CaptionSensorType" xml:space="preserve">
+	<data name="CaptionSensorType" xml:space="preserve">
     <value>نوع الحساس</value>
   </data>
-  <data name="SensorTypeManual" xml:space="preserve">
+	<data name="SensorTypeManual" xml:space="preserve">
     <value>يدوي</value>
   </data>
-  <data name="SensorTypeRandom" xml:space="preserve">
+	<data name="SensorTypeRandom" xml:space="preserve">
     <value>عشوائي</value>
   </data>
-  <data name="SensorTypeSeries" xml:space="preserve">
+	<data name="SensorTypeSeries" xml:space="preserve">
     <value>سلسلة</value>
   </data>
-  <data name="ToolTipSensorBitWidth" xml:space="preserve">
+	<data name="ToolTipSensorBitWidth" xml:space="preserve">
     <value>اختر عرض بتات الحساس</value>
   </data>
-  <data name="ToolTipSensorNotation" xml:space="preserve">
+	<data name="ToolTipSensorNotation" xml:space="preserve">
     <value>أدخل رمز الحساس</value>
   </data>
-  <data name="ToolTipSensorType" xml:space="preserve">
+	<data name="ToolTipSensorType" xml:space="preserve">
     <value>اختر مصدر بيانات الحساس.</value>
   </data>
-  <data name="TitleSensorType" xml:space="preserve">
+	<data name="TitleSensorType" xml:space="preserve">
     <value>نوع الحساس:</value>
   </data>
-  <data name="ErrorBadInterval" xml:space="preserve">
+	<data name="ErrorBadInterval" xml:space="preserve">
     <value>الحد الأدنى يجب أن يكون أقل أو يساوي الحد اﻷعلى.</value>
   </data>
-  <data name="ErrorBadPositiveNumber" xml:space="preserve">
+	<data name="ErrorBadPositiveNumber" xml:space="preserve">
     <value>النتيجة المتوقعة هي رقم أكبر من 0.</value>
   </data>
-  <data name="ErrorEmptySeries" xml:space="preserve">
+	<data name="ErrorEmptySeries" xml:space="preserve">
     <value>لا يجب أن تكون السلسة فارغة</value>
   </data>
-  <data name="ErrorSeriesItem" xml:space="preserve">
+	<data name="ErrorSeriesItem" xml:space="preserve">
     <value>خطأ في {0}. يجب أن يكون زوج من اﻷرقام الست عشرية مفصولة بـ :</value>
   </data>
-  <data name="ErrorSeriesItemOrder" xml:space="preserve">
+	<data name="ErrorSeriesItemOrder" xml:space="preserve">
     <value>خطأ في {0}. يجب أن تكون كل دورة أكبر من سابقتها.</value>
   </data>
-  <data name="TitleLoopSeries" xml:space="preserve">
+	<data name="TitleLoopSeries" xml:space="preserve">
     <value>أعد السلسة</value>
   </data>
-  <data name="TitleSensorRandomMax" xml:space="preserve">
+	<data name="TitleSensorRandomMax" xml:space="preserve">
     <value>عدد الدورات اﻷعظمي:</value>
   </data>
-  <data name="TitleSensorRandomMin" xml:space="preserve">
+	<data name="TitleSensorRandomMin" xml:space="preserve">
     <value>عدد الدورات اﻷدنى:</value>
   </data>
-  <data name="TitleSeries" xml:space="preserve">
+	<data name="TitleSeries" xml:space="preserve">
     <value>سلسلة:</value>
   </data>
-  <data name="ToolTipSensorRandomMax" xml:space="preserve">
+	<data name="ToolTipSensorRandomMax" xml:space="preserve">
     <value>أدخل عدد الدورات اﻷعظمي قبل أن يغير الحساس قراءته.</value>
   </data>
-  <data name="ToolTipSensorRandomMin" xml:space="preserve">
+	<data name="ToolTipSensorRandomMin" xml:space="preserve">
     <value>أدخل عدد الدورات اﻷدنى قبل أن يغير الحساس قراءته</value>
   </data>
-  <data name="ToolTipSeriesData" xml:space="preserve">
+	<data name="ToolTipSeriesData" xml:space="preserve">
     <value>رجاءً قم بإدخال سلسلة من قراءات الحساس بشكل &lt;دورة&gt;:&lt;قيمة&gt; بحيث كلا القيمتين بشكل ست عشري.
 عندما تكون قيمة الدورة قيمة زوجية أو 0 عندها تستجيب لتغير النبضات من 0 إلى 1 , و عندما تكون قيمة فردية عندها تستجب لتغير النبضات من 1 إلى 0.</value>
   </data>
-  <data name="NameSound" xml:space="preserve">
+	<data name="NameSound" xml:space="preserve">
     <value>منبه صوتي</value>
   </data>
-  <data name="ToolTipSound" xml:space="preserve">
+	<data name="ToolTipSound" xml:space="preserve">
     <value>منبه صوتي {0}</value>
   </data>
-  <data name="ToolTipSoundNotation" xml:space="preserve">
+	<data name="ToolTipSoundNotation" xml:space="preserve">
     <value>أدخل رمز جهاز التنبيه الصوتي</value>
   </data>
-  <data name="CommandEditFind" xml:space="preserve">
+	<data name="CommandEditFind" xml:space="preserve">
     <value>بحث</value>
   </data>
-  <data name="TitleFind" xml:space="preserve">
+	<data name="TitleFind" xml:space="preserve">
     <value>إبحث عن دارة</value>
   </data>
-  <data name="TitleSearch" xml:space="preserve">
+	<data name="TitleSearch" xml:space="preserve">
     <value>بحث</value>
   </data>
-  <data name="TitleSearchPattern" xml:space="preserve">
+	<data name="TitleSearchPattern" xml:space="preserve">
     <value>إبحث عن:</value>
   </data>
-  <data name="ToolTipDescriptorClock" xml:space="preserve">
+	<data name="ToolTipDescriptorClock" xml:space="preserve">
     <value>توليد إشارة تهتز بين 0 و 1 و تقوم بتنظيم أحداث الدارات.</value>
   </data>
-  <data name="ToolTipDescriptorPin" xml:space="preserve">
+	<data name="ToolTipDescriptorPin" xml:space="preserve">
     <value>تستخدم من أجل إنشاء موصل تسطيع درات أخرى استخدامه لإرسال و إستقبال البيانات من و إلى الدارة الحالية.
 قم بإعادة ترتيب الموصلات (Pins) من أجل تغيير أماكنها على الرموز في الدارة الحالية.</value>
   </data>
-  <data name="ToolTipDescriptorProbe" xml:space="preserve">
+	<data name="ToolTipDescriptorProbe" xml:space="preserve">
     <value>أضف و أوصل مجسات للدراة من أجل مراقبة وضع الدارة الفعالة الحالي على سطح المجس, يمكن الحصول على القيم السابقة (أرشيف) بالنقر المزدوج على المجس أو يمكن استعراض هذه القيم من قارء الإشارة.</value>
   </data>
-  <data name="ToolTipDescriptorSensor" xml:space="preserve">
+	<data name="ToolTipDescriptorSensor" xml:space="preserve">
     <value>يقوم بتقديم البيانات من "مصدر خارجي" على شكل سلسة قيم معدة مسبقا, و باختيار عشوائي, أو قيم مدخلة يدويا.</value>
   </data>
-  <data name="ToolTipDescriptorSplitter" xml:space="preserve">
+	<data name="ToolTipDescriptorSplitter" xml:space="preserve">
     <value>يسمح بتجميع (حزم) اﻷسلاك أو فصلها كل على حدة.
 فصل الأسلاك  أو استخدام الموصلات متعددة البتات (multi-bit pins) يحسن قراءة الدارة و فهمها.</value>
   </data>
-  <data name="ToolTipDescriptorText" xml:space="preserve">
+	<data name="ToolTipDescriptorText" xml:space="preserve">
     <value>يمكن وضع تعليقات نصية في أي مكان من المخطط من أجل التوضيح, يمكنك إضافة روابط ﻷي موقع مفيد على اﻷنترنت و يمكنك تزيين الدارة بالصور.</value>
   </data>
-  <data name="ToolTipDescriptorTriState" xml:space="preserve">
+	<data name="ToolTipDescriptorTriState" xml:space="preserve">
     <value>مكن أن تملك ثلاث قيم خرج: 1 و 0 , و ممانعة عالية   (Z). 
 حالة الممانعة العالية لا تؤثر على المنطق , الذي هو حصراً ثنائي.
 تستخدم هذه الأجهزة في ممرات نقل المعالج CPU للسماح بأكثر من مصدر لإرسال البيانات.
  مجموعة من الموصلات ثلاثية الحالة و دارة تحكم مناسبة تعتبر مكافئ للناخب multiplexer</value>
   </data>
-  <data name="ToolTipSensorManualValue" xml:space="preserve">
+	<data name="ToolTipSensorManualValue" xml:space="preserve">
     <value>قم بإدخال قيم ست عشرية و اضغط Enter.</value>
   </data>
-  <data name="ErrorBadHexNumber" xml:space="preserve">
+	<data name="ErrorBadHexNumber" xml:space="preserve">
     <value>رقم ست عشري غير صالحرقم ست عشري غير صالح</value>
   </data>
-  <data name="TitleSensorManualInitialValue" xml:space="preserve">
+	<data name="TitleSensorManualInitialValue" xml:space="preserve">
     <value>قيم ابتدائية:</value>
   </data>
-  <data name="ToolTipSensorManualInitialValue" xml:space="preserve">
+	<data name="ToolTipSensorManualInitialValue" xml:space="preserve">
     <value>أدخل القيم الابتدائية بشكل رقم ست عشري</value>
   </data>
-  <data name="NameGraphicsArray" xml:space="preserve">
+	<data name="NameGraphicsArray" xml:space="preserve">
     <value>مصفوفة غرافيك</value>
   </data>
-  <data name="CaptionGraphicsArrayBPP" xml:space="preserve">
+	<data name="CaptionGraphicsArrayBPP" xml:space="preserve">
     <value>بتات في البكسل:</value>
   </data>
-  <data name="ToolTipDescriptorGraphicsArray" xml:space="preserve">
+	<data name="ToolTipDescriptorGraphicsArray" xml:space="preserve">
     <value>(عرض-شاشة مصفوفة نقطية) يمكنها عرض البيانات المخزنة في الذاكرة الداخلية. تستخدم مع الدارات المتقدمة مثل الحواسيب و المتحكمات. يمكن اختيار الحجم و العمق اللوني كما يلي: عمق\مخطط:
 1 بت\بكسل - أبيض و أسود.
 2 بت\بكسل - 4 تدرجات رمادية.
 4 بت\بكسل - 16 لون.
 8 بت\بكسل - 256 لون.</value>
   </data>
-  <data name="ToolTipGraphicsArray" xml:space="preserve">
+	<data name="ToolTipGraphicsArray" xml:space="preserve">
     <value>{0} {1}في{2} مع {3} بتات بالبكسل ({4} ألوان)</value>
   </data>
-  <data name="ToolTipGraphicsArrayBPP" xml:space="preserve">
+	<data name="ToolTipGraphicsArrayBPP" xml:space="preserve">
     <value>اختر عدد البتات في البكسل الواحد</value>
   </data>
-  <data name="ErrorBadIntegerInRange" xml:space="preserve">
+	<data name="ErrorBadIntegerInRange" xml:space="preserve">
     <value>النتيجة المتوقعة هي رقم ضمن المجال {0} - {1} .</value>
   </data>
-  <data name="TitleGraphicsArrayBPP" xml:space="preserve">
+	<data name="TitleGraphicsArrayBPP" xml:space="preserve">
     <value>بتات في البكسل:</value>
   </data>
-  <data name="TitleHeight" xml:space="preserve">
+	<data name="TitleHeight" xml:space="preserve">
     <value>الارتفاع:</value>
   </data>
-  <data name="TitleWidth" xml:space="preserve">
+	<data name="TitleWidth" xml:space="preserve">
     <value>عرض:</value>
   </data>
-  <data name="ToolTipGraphicsArrayHeight" xml:space="preserve">
+	<data name="ToolTipGraphicsArrayHeight" xml:space="preserve">
     <value>أدخل ارتفاع مصفوفة العرض بالبكسل.</value>
   </data>
-  <data name="ToolTipGraphicsArrayWidth" xml:space="preserve">
+	<data name="ToolTipGraphicsArrayWidth" xml:space="preserve">
     <value>أدخل عرض مصفوفة العرض بالبكسل.</value>
   </data>
-  <data name="GateClockName" xml:space="preserve">
+	<data name="GateClockName" xml:space="preserve">
     <value>ساعة (نبضات)</value>
   </data>
-  <data name="ProbeHistoryMark" xml:space="preserve">
+	<data name="ProbeHistoryMark" xml:space="preserve">
     <value>&lt;&lt;&lt;&lt;&lt;&lt; علامة &gt;&gt;&gt;&gt;&gt;&gt;</value>
   </data>
-  <data name="TitleMark" xml:space="preserve">
+	<data name="TitleMark" xml:space="preserve">
     <value>علامة</value>
   </data>
-  <data name="TitleWeb" xml:space="preserve">
+	<data name="TitleWeb" xml:space="preserve">
     <value>شبكة:</value>
   </data>
-  <data name="PinTypeNameNone" xml:space="preserve">
+	<data name="PinTypeNameNone" xml:space="preserve">
     <value>لاشيئ</value>
   </data>
-  <data name="TitleCredits" xml:space="preserve">
+	<data name="TitleCredits" xml:space="preserve">
     <value>المشاركون في العمل :</value>
   </data>
-  <data name="ErrorWriteNotConnected" xml:space="preserve">
+	<data name="ErrorWriteNotConnected" xml:space="preserve">
     <value>مصدر الدخل غير متصل بمصفوفة العرض {0}</value>
   </data>
-  <data name="ErrorBadHexInRange" xml:space="preserve">
+	<data name="ErrorBadHexInRange" xml:space="preserve">
     <value>النتيجة المتوقعة هي رقم ضمن المجال {0:X} - {1:X} .</value>
   </data>
-  <data name="TitleBottom" xml:space="preserve">
+	<data name="TitleBottom" xml:space="preserve">
     <value>أسفل:</value>
   </data>
-  <data name="TitleLeft" xml:space="preserve">
+	<data name="TitleLeft" xml:space="preserve">
     <value>يسار:</value>
   </data>
-  <data name="TitleRight" xml:space="preserve">
+	<data name="TitleRight" xml:space="preserve">
     <value>يمين:</value>
   </data>
-  <data name="TitleTop" xml:space="preserve">
+	<data name="TitleTop" xml:space="preserve">
     <value>أعلى:</value>
   </data>
+	<data name="TitleShortcut" xml:space="preserve">
+		<value>اختصار لوحة المفاتيح:</value>
+	</data>
 </root>

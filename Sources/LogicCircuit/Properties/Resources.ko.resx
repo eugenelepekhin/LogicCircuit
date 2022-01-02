@@ -1420,4 +1420,7 @@ Tri-state와 적절한 제어 회로를 함께 써서 멀티플렉서를 만들 
 	<data name="TitleDualPort" xml:space="preserve">
 		<value>듀얼 포트</value>
 	</data>
+	<data name="TitleShortcut" xml:space="preserve">
+		<value>키보드 단축키:</value>
+	</data>
 </root>

@@ -1437,4 +1437,7 @@ Czy chcesz wczytać automatycznie zapisaną kopię tego pliku?</value>
 	<data name="TitleDualPort" xml:space="preserve">
 		<value>Podwójny port</value>
 	</data>
+	<data name="TitleShortcut" xml:space="preserve">
+		<value>Skrót klawiszowy:</value>
+	</data>
 </root>

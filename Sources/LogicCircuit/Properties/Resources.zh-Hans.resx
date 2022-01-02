@@ -1428,4 +1428,7 @@ Out</value>
 	<data name="MemoryData2PinName" xml:space="preserve">
 		<value>内存端口 2 数据</value>
 	</data>
+	<data name="TitleShortcut" xml:space="preserve">
+		<value>键盘快捷键(_K)</value>
+	</data>
 </root>

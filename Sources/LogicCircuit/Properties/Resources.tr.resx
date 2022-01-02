@@ -1437,4 +1437,7 @@ temelde bir çoğullayıcıya eşdeğerdir.</value>
 	<data name="TitleDualPort" xml:space="preserve">
 		<value>Çift Portlu</value>
 	</data>
+	<data name="TitleShortcut" xml:space="preserve">
+		<value>_Klavye kısayolu:</value>
+	</data>
 </root>

@@ -1437,4 +1437,7 @@
 	<data name="TitleDualPort" xml:space="preserve">
 		<value>_Подвійний порт</value>
 	</data>
+	<data name="TitleShortcut" xml:space="preserve">
+		<value>Комбінація _клавіш:</value>
+	</data>
 </root>

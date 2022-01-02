@@ -1436,4 +1436,7 @@ Ar norite užkrauti automatiškai išsaugota šio failo būseną?</value>
 	<data name="TitleDualPort" xml:space="preserve">
 		<value>Dvigubas prievadas</value>
 	</data>
+	<data name="TitleShortcut" xml:space="preserve">
+		<value>Spartusis klavišas:</value>
+	</data>
 </root>

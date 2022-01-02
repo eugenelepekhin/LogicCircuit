@@ -1496,4 +1496,7 @@ Você deseja carregar a configuração de salvamento automático para este arqui
 	<data name="TitleDualPort" xml:space="preserve">
 		<value>Porta dupla</value>
 	</data>
+	<data name="TitleShortcut" xml:space="preserve">
+		<value>_Atalho de teclado:</value>
+	</data>
 </root>

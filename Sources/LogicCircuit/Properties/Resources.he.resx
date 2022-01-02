@@ -1486,4 +1486,7 @@
 	<data name="TitleDualPort" xml:space="preserve">
 		<value>יציאה כפולה</value>
 	</data>
+	<data name="TitleShortcut" xml:space="preserve">
+		<value>קיצור מקלדת:</value>
+	</data>
 </root>

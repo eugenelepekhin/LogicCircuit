@@ -1501,4 +1501,7 @@ Wil je het, automatisch opgeslagen, bestand laden.</value>
 	<data name="TitleDualPort" xml:space="preserve">
 		<value>_Dubbel poort</value>
 	</data>
+	<data name="TitleShortcut" xml:space="preserve">
+		<value>Toetsenbord _sneltoets:</value>
+	</data>
 </root>

@@ -1493,4 +1493,7 @@ Permite seleccionar el tamaño y profundidad de color / esquema:
 	<data name="TitleDualPort" xml:space="preserve">
 		<value>Puerto _dual</value>
 	</data>
+	<data name="TitleShortcut" xml:space="preserve">
+		<value>Atajo de teclado:</value>
+	</data>
 </root>

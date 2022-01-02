@@ -1414,4 +1414,7 @@ Vill du ladda an automatiskt sparad fil istället?</value>
 	<data name="MemoryData2PinNotation" xml:space="preserve">
 		<value>d2</value>
 	</data>
+	<data name="TitleShortcut" xml:space="preserve">
+		<value>_Tangentbordsgenväg:</value>
+	</data>
 </root>

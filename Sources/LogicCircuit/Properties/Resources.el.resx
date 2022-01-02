@@ -1435,4 +1435,7 @@
 	<data name="TitleDualPort" xml:space="preserve">
 		<value>Διπλή θύρα</value>
 	</data>
+	<data name="TitleShortcut" xml:space="preserve">
+		<value>Συντόμευση πληκτρολογίου:</value>
+	</data>
 </root>
