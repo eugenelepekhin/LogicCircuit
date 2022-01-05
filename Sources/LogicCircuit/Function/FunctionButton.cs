@@ -36,7 +36,16 @@ namespace LogicCircuit {
 
 		public override string ReportName { get { return Properties.Resources.NameButton; } }
 
-		private void StateChangedAction(CircuitSymbol symbol, bool isPressed) {
+		public CircuitSymbol ButtonSymbol() {
+			foreach(CircuitSymbol symbol in this.circuitSymbol) {
+				if(symbol.Circuit is CircuitButton) {
+					return symbol;
+				}
+			}
+			return null;
+		}
+
+		public void StateChangedAction(CircuitSymbol symbol, bool isPressed) {
 			if(isPressed) {
 				if(this.isToggle) {
 					this.SetState(CircuitFunction.Not(this.State));

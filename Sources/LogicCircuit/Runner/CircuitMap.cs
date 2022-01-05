@@ -396,6 +396,16 @@ namespace LogicCircuit {
 			return null;
 		}
 
+		public IEnumerable<FunctionButton> Buttons() {
+			if(this.displays != null) {
+				foreach(IFunctionVisual visual in this.displays) {
+					if(visual is FunctionButton button) {
+						yield return button;
+					}
+				}
+			}
+		}
+
 		public IFunctionMemory FunctionMemory(CircuitSymbol symbol) {
 			if(this.memories != null) {
 				if(this.memories.TryGetValue(symbol, out IFunctionMemory memory)) {

@@ -898,7 +898,7 @@ namespace LogicCircuit {
 					this.CancelMove();
 				}
 			} else if(!e.IsRepeat && key != Key.None) {
-				if(this.ExecuteKeyGesture(this.Project.LogicalCircuit, key, modifier, true)) {
+				if(this.ExecuteKeyGesture(key, modifier, true)) {
 					e.Handled = true;
 				}
 			}
@@ -912,23 +912,19 @@ namespace LogicCircuit {
 					e.Handled = true;
 				}
 			} else if(key != Key.None) {
-				if(this.ExecuteKeyGesture(this.Project.LogicalCircuit, key, e.KeyboardDevice.Modifiers, false)) {
+				if(this.ExecuteKeyGesture(key, e.KeyboardDevice.Modifiers, false)) {
 					e.Handled = true;
 				}
 			}
 		}
 
-		private bool ExecuteKeyGesture(LogicalCircuit logicalCircuit, Key key, ModifierKeys modifier, bool isPressed) {
-			foreach(CircuitSymbol symbol in logicalCircuit.CircuitSymbols()) {
-				if(symbol.Circuit is CircuitButton button) {
+		private bool ExecuteKeyGesture(Key key, ModifierKeys modifier, bool isPressed) {
+			foreach(FunctionButton functionButton in this.CircuitRunner.VisibleMap.Buttons()) {
+				CircuitSymbol symbol = functionButton.ButtonSymbol();
+				if(symbol != null) {
+					CircuitButton button = (CircuitButton)symbol.Circuit;
 					if(button.Key == key && button.ModifierKeys == modifier) {
-						if(symbol.ProbeView is ButtonControl control) {
-							control.ButtonStateChanged?.Invoke(symbol, isPressed);
-						}
-						return true;
-					}
-				} else if(symbol.Circuit is LogicalCircuit child && child.IsDisplay) {
-					if(this.ExecuteKeyGesture(child, key, modifier, isPressed)) {
+						functionButton.StateChangedAction(symbol, isPressed);
 						return true;
 					}
 				}
