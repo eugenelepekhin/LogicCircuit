@@ -59,7 +59,7 @@ namespace LogicCircuit {
 				}
 			}
 			for(int i = 0; i < this.row.Length; i++) {
-				State rowState = this[rowParameter + i];
+				State rowState = this[this.rowParameter + i];
 				if(this.row[i] != rowState) {
 					// state of row was changed
 					this.row[i] = rowState;
