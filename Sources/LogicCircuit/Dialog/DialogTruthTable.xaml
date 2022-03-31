@@ -37,7 +37,7 @@
 			/>
 			<Button Name="buttonApply" Click="ButtonApplyClick" VerticalAlignment="Center"
 				Content="{x:Static properties:Resources.TitleApply}"
-				IsDefault="{Binding ElementName=filter, Path=IsFocused}"
+				IsDefault="{Binding ElementName=filter, Path=IsKeyboardFocusWithin}"
 			/>
 
 			<DataGrid Grid.ColumnSpan="4" Name="dataGrid" AutoGenerateColumns="False" IsReadOnly="True" Margin="3"
@@ -68,7 +68,7 @@
 
 			<Button Name="buttonOk" VerticalAlignment="Bottom"
 				Content="{x:Static properties:Resources.TitleOK}"
-				IsDefault="{Binding ElementName=filter, Path=IsFocused, Converter={StaticResource InverseBooleanConverter}}" IsCancel="True"
+				IsDefault="{Binding ElementName=filter, Path=IsKeyboardFocusWithin, Converter={StaticResource InverseBooleanConverter}}" IsCancel="True"
 			/>
 		</lc:AutoGrid>
 
