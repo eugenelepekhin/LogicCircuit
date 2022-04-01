@@ -24,8 +24,8 @@
 		<Property Id="ARPCOMMENTS" Value="LogicCircuit – is educational software for designing and simulating digital logic circuits"/>
 
 		<PropertyRef Id="WIXNETFX4RELEASEINSTALLED"/>
-		<Condition Message="This application requires Microsoft .NET Framework 4.7.2. Please install the .NET Framework then run this installer again.">
-			<![CDATA[Installed OR (WIXNETFX4RELEASEINSTALLED >= "#461808")]]>
+		<Condition Message="This application requires Microsoft .NET Framework 4.8. Please install the .NET Framework then run this installer again.">
+			<![CDATA[Installed OR (WIXNETFX4RELEASEINSTALLED >= "#528040")]]>
 		</Condition>
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed."/>
