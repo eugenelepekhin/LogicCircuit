@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Store xmlns="clr-namespace:ItemWrapper.Generator;assembly=ItemWrapper.Generator"
 	Namespace="LogicCircuit" Name="CircuitProject"
-	PersistencePrefix="lc" PersistenceNamespace="http://LogicCircuit.net/2.0.0.10/CircuitProject.xsd"
+	PersistencePrefix="lc" PersistenceNamespace="http://LogicCircuit.net/2.0.0.11/CircuitProject.xsd"
 >
 
 	<!--
@@ -22,6 +22,7 @@
 		Version 2.0.0.8 - Adding Inverted flag to the button, adding index on pin so it can be rearranged on the symbol's side, adding startup circuit to project
 		Version 2.0.0.9 - Adding zoom to graphics array. Adding Validators field to LogicalCircuit. Adding DualPort to memory.
 		Version 2.0.0.10 - Adding shortcuts to buttons.
+		Version 2.0.0.11 - LogicalCircuit field IsDisplay replaced with CircuitShape.
 	-->
 
 	<Table Name="Project">
@@ -133,7 +134,7 @@
 			<Column Name="Notation" Type="string" Default="" PropertyOverrides="true"/>
 			<Column Name="Note" Type="string" Default="" PropertyOverrides="true"/>
 			<Column Name="Category" Type="string" Default="" PropertyOverrides="true"/>
-			<Column Name="IsDisplay" Type="bool" Default="false" PropertyOverrides="true"/>
+			<Column Name="CircuitShape" Type="CircuitShape" Default="CircuitShape.Rectangular"/>
 			<!-- List of expression to use in truth table filter -->
 			<Column Name="Validators" Type="string" Default=""/>
 		</Table.Columns>

@@ -34,7 +34,6 @@ namespace LogicCircuit {
 
 		public virtual bool IsDisplay {
 			get { return false; }
-			set { throw new InvalidOperationException(); }
 		}
 
 		public virtual bool IsValidDisplay() {

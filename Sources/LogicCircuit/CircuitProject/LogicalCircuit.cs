@@ -32,6 +32,8 @@ namespace LogicCircuit {
 			base.Delete();
 		}
 
+		public override bool IsDisplay => this.CircuitShape == CircuitShape.Display;
+
 		public IEnumerable<Pin> LogicalPins {
 			get { return this.CircuitProject.PinSet.SelectByCircuit(this); }
 		}
@@ -165,7 +167,7 @@ namespace LogicCircuit {
 		}
 
 		private void CircuitPropertyChanged(object sender, PropertyChangedEventArgs e) {
-			if(e.PropertyName == "IsDisplay") {
+			if(e.PropertyName == "CircuitShape") {
 				this.Invalidate((LogicalCircuit)sender);
 			}
 		}
@@ -189,7 +191,7 @@ namespace LogicCircuit {
 				name,
 				LogicalCircuitData.NoteField.Field.DefaultValue,
 				LogicalCircuitData.CategoryField.Field.DefaultValue,
-				LogicalCircuitData.IsDisplayField.Field.DefaultValue,
+				LogicalCircuitData.CircuitShapeField.Field.DefaultValue,
 				LogicalCircuitData.ValidatorsField.Field.DefaultValue
 			);
 			circuit.PropertyChanged += new PropertyChangedEventHandler(this.CircuitPropertyChanged);

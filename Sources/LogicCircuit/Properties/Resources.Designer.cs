@@ -3110,5 +3110,12 @@ namespace LogicCircuit.Properties {
  		public static string TitleShortcut {
 			get { return ResourceManager.GetString("TitleShortcut", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Symbol shape:.
+		/// </summary>
+ 		public static string TitleSymbolShape {
+			get { return ResourceManager.GetString("TitleSymbolShape", Culture); }
+		}
 	}
 }

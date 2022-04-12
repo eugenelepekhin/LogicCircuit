@@ -90,6 +90,7 @@
     <Compile Include="CircuitProject\Wrappers\Sensor.cs" />
     <Compile Include="CircuitProject\Wrappers\Sound.cs" />
     <Compile Include="CircuitProject\Wrappers\TextNote.cs" />
+    <Compile Include="CircuitShape.cs" />
     <Compile Include="CircuitTester.cs" />
     <Compile Include="CircuitTestSocket.cs" />
     <Compile Include="ColorMethods.cs" />
@@ -611,6 +612,7 @@
     <None Include="Schema\ConvertFrom.2.0.0.7.xslt" />
     <None Include="Schema\ConvertFrom.2.0.0.8.xslt" />
     <None Include="Schema\ConvertFrom.2.0.0.9.xslt" />
+    <None Include="Schema\ConvertFrom.2.0.0.10.xslt" />
     <None Include="Schema\Empty.xml" />
     <None Include="Schema\CircuitProject.xml">
       <SubType>Designer</SubType>

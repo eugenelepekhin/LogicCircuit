@@ -14,7 +14,22 @@ namespace LogicCircuit {
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 		private readonly LogicalCircuit logicalCircuit;
 
+		public IEnumerable<EnumDescriptor<CircuitShape>> CircuitShapes { get; }
+
 		public DialogCircuit(LogicalCircuit logicalCircuit) {
+			List<EnumDescriptor<CircuitShape>> shapes = new List<EnumDescriptor<CircuitShape>>() {
+				new EnumDescriptor<CircuitShape>(CircuitShape.Rectangular, nameof(CircuitShape.Rectangular)),
+				new EnumDescriptor<CircuitShape>(CircuitShape.Display, nameof(CircuitShape.Display)),
+				//new EnumDescriptor<CircuitShape>(CircuitShape.Mux, nameof(CircuitShape.Mux)),
+				//new EnumDescriptor<CircuitShape>(CircuitShape.Demux, nameof(CircuitShape.Demux)),
+				//new EnumDescriptor<CircuitShape>(CircuitShape.Alu, nameof(CircuitShape.Alu)),
+				//new EnumDescriptor<CircuitShape>(CircuitShape.FlipFlop, nameof(CircuitShape.FlipFlop)),
+			};
+			if(!logicalCircuit.ContainsDisplays()) {
+				shapes.RemoveAt(1);
+			}
+			this.CircuitShapes = shapes.AsReadOnly();
+
 			this.DataContext = this;
 			this.InitializeComponent();
 			this.logicalCircuit = logicalCircuit;
@@ -29,11 +44,7 @@ namespace LogicCircuit {
 			}
 
 			this.category.Text = this.logicalCircuit.Category;
-			if(this.logicalCircuit.ContainsDisplays()) {
-				this.isDisplay.IsChecked = this.logicalCircuit.IsDisplay;
-			} else {
-				this.isDisplay.IsEnabled = false;
-			}
+			this.shapes.SelectedItem = this.CircuitShapes.FirstOrDefault(d => d.Value == this.logicalCircuit.CircuitShape) ?? this.CircuitShapes.First();
 			this.description.Text = this.logicalCircuit.Note;
 
 			IEnumerable<Pin> pins(PinSide pinSide) => this.logicalCircuit.Pins.Where(pin => pin.PinSide == pinSide).Select(pin => (Pin)pin);
@@ -93,7 +104,7 @@ namespace LogicCircuit {
 				string notation = this.notation.Text.Trim();
 				string category = this.category.Text.Trim();
 				category = category.Substring(0, Math.Min(category.Length, 64)).Trim();
-				bool isDisplay = this.logicalCircuit.ContainsDisplays() ? this.isDisplay.IsChecked.Value : this.logicalCircuit.IsDisplay;
+				EnumDescriptor<CircuitShape> shape = (EnumDescriptor<CircuitShape>)this.shapes.SelectedItem;
 				string description = this.description.Text.Trim();
 				bool leftChanged = this.leftPins.HasChanges();
 				bool rightChanged = this.rightPins.HasChanges();
@@ -101,14 +112,14 @@ namespace LogicCircuit {
 				bool bottomChanged = this.bottomPins.HasChanges();
 
 				if(this.logicalCircuit.Name != name || this.logicalCircuit.Notation != notation ||
-					this.logicalCircuit.Category != category || this.logicalCircuit.IsDisplay != isDisplay || this.logicalCircuit.Note != description ||
+					this.logicalCircuit.Category != category || this.logicalCircuit.CircuitShape != shape.Value || this.logicalCircuit.Note != description ||
 					leftChanged || rightChanged || topChanged || bottomChanged
 				) {
 					this.logicalCircuit.CircuitProject.InTransaction(() => {
 						this.logicalCircuit.Rename(name);
 						this.logicalCircuit.Notation = notation;
 						this.logicalCircuit.Category = category;
-						this.logicalCircuit.IsDisplay = isDisplay;
+						this.logicalCircuit.CircuitShape = shape.Value;
 						this.logicalCircuit.Note = description;
 						this.logicalCircuit.CircuitProject.CollapsedCategorySet.Purge();
 						if(leftChanged) this.leftPins.Update();

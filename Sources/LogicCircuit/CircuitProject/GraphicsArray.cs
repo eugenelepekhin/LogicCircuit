@@ -120,7 +120,6 @@ namespace LogicCircuit {
 
 		public override bool IsDisplay {
 			get { return true; }
-			set { base.IsDisplay = value; }
 		}
 
 		private static int PixelsToGridSize(int pixels) {

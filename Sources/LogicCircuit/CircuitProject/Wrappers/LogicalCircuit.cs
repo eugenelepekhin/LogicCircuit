@@ -17,7 +17,7 @@ namespace LogicCircuit {
 		public string Notation;
 		public string Note;
 		public string Category;
-		public bool IsDisplay;
+		public CircuitShape CircuitShape;
 		public string Validators;
 		internal LogicalCircuit LogicalCircuit;
 		// Field accessors
@@ -196,38 +196,38 @@ namespace LogicCircuit {
 			}
 		}
 
-		// Accessor of the IsDisplay field
-		public sealed class IsDisplayField : IField<LogicalCircuitData, bool>, IFieldSerializer<LogicalCircuitData> {
-			public static readonly IsDisplayField Field = new IsDisplayField();
-			private IsDisplayField() {}
-			public string Name { get { return "IsDisplay"; } }
+		// Accessor of the CircuitShape field
+		public sealed class CircuitShapeField : IField<LogicalCircuitData, CircuitShape>, IFieldSerializer<LogicalCircuitData> {
+			public static readonly CircuitShapeField Field = new CircuitShapeField();
+			private CircuitShapeField() {}
+			public string Name { get { return "CircuitShape"; } }
 			public int Order { get; set; }
-			public bool DefaultValue { get { return false; } }
-			public bool GetValue(ref LogicalCircuitData record) {
-				return record.IsDisplay;
+			public CircuitShape DefaultValue { get { return CircuitShape.Rectangular; } }
+			public CircuitShape GetValue(ref LogicalCircuitData record) {
+				return record.CircuitShape;
 			}
-			public void SetValue(ref LogicalCircuitData record, bool value) {
-				record.IsDisplay = value;
+			public void SetValue(ref LogicalCircuitData record, CircuitShape value) {
+				record.CircuitShape = value;
 			}
 			public int Compare(ref LogicalCircuitData l, ref LogicalCircuitData r) {
-				return l.IsDisplay.CompareTo(r.IsDisplay);
+				return l.CircuitShape.CompareTo(r.CircuitShape);
 			}
-			public int Compare(bool l, bool r) {
+			public int Compare(CircuitShape l, CircuitShape r) {
 				return l.CompareTo(r);
 			}
 
 			// Implementation of interface IFieldSerializer<LogicalCircuitData>
 			bool IFieldSerializer<LogicalCircuitData>.NeedToSave(ref LogicalCircuitData data) {
-				return this.Compare(data.IsDisplay, this.DefaultValue) != 0;
+				return this.Compare(data.CircuitShape, this.DefaultValue) != 0;
 			}
 			string IFieldSerializer<LogicalCircuitData>.GetTextValue(ref LogicalCircuitData data) {
-				return string.Format(CultureInfo.InvariantCulture, "{0}", data.IsDisplay);
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.CircuitShape);
 			}
 			void IFieldSerializer<LogicalCircuitData>.SetDefault(ref LogicalCircuitData data) {
-				data.IsDisplay = this.DefaultValue;
+				data.CircuitShape = this.DefaultValue;
 			}
 			void IFieldSerializer<LogicalCircuitData>.SetTextValue(ref LogicalCircuitData data, string text) {
-				data.IsDisplay = bool.Parse(text);
+				data.CircuitShape = EnumHelper.Parse<CircuitShape>(text, this.DefaultValue);
 			}
 		}
 
@@ -297,7 +297,7 @@ namespace LogicCircuit {
 			NotationField.Field,
 			NoteField.Field,
 			CategoryField.Field,
-			IsDisplayField.Field,
+			CircuitShapeField.Field,
 			ValidatorsField.Field,
 			LogicalCircuitField.Field
 		};
@@ -371,10 +371,10 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.LogicalCircuitRowId, LogicalCircuitData.CategoryField.Field, value); }
 		}
 
-		// Gets or sets value of the IsDisplay field.
-		public override bool IsDisplay {
-			get { return this.Table.GetField(this.LogicalCircuitRowId, LogicalCircuitData.IsDisplayField.Field); }
-			set { this.Table.SetField(this.LogicalCircuitRowId, LogicalCircuitData.IsDisplayField.Field, value); }
+		// Gets or sets value of the CircuitShape field.
+		public CircuitShape CircuitShape {
+			get { return this.Table.GetField(this.LogicalCircuitRowId, LogicalCircuitData.CircuitShapeField.Field); }
+			set { this.Table.SetField(this.LogicalCircuitRowId, LogicalCircuitData.CircuitShapeField.Field, value); }
 		}
 
 		// Gets or sets value of the Validators field.
@@ -404,8 +404,8 @@ namespace LogicCircuit {
 				if(LogicalCircuitData.CategoryField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("Category");
 				}
-				if(LogicalCircuitData.IsDisplayField.Field.Compare(ref oldData, ref newData) != 0) {
-					this.NotifyPropertyChanged("IsDisplay");
+				if(LogicalCircuitData.CircuitShapeField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("CircuitShape");
 				}
 				if(LogicalCircuitData.ValidatorsField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("Validators");
@@ -497,7 +497,7 @@ namespace LogicCircuit {
 			string Notation,
 			string Note,
 			string Category,
-			bool IsDisplay,
+			CircuitShape CircuitShape,
 			string Validators
 			// Fields of Circuit table
 
@@ -514,7 +514,7 @@ namespace LogicCircuit {
 				Notation = Notation,
 				Note = Note,
 				Category = Category,
-				IsDisplay = IsDisplay,
+				CircuitShape = CircuitShape,
 				Validators = Validators,
 			};
 			return this.Create(this.Table.Insert(ref dataLogicalCircuit), rowIdCircuit);

@@ -30,9 +30,8 @@
 					<Label Content="{x:Static properties:Resources.TitleCategory}"/>
 					<ComboBox Name="category" IsEditable="True" IsTextSearchEnabled="True"/>
 
-					<CheckBox Grid.Column="1" Name="isDisplay" ToolTip="{x:Static properties:Resources.ToolTipIsDisplay}">
-						<AccessText Text="{x:Static properties:Resources.TitleIsDisplay}" TextWrapping="Wrap"/>
-					</CheckBox>
+					<Label Content="{x:Static properties:Resources.TitleSymbolShape}"/>
+					<ComboBox Name="shapes" ItemsSource="{Binding Path=CircuitShapes}"/>
 
 					<Label Content="{x:Static properties:Resources.TitleDescription}"/>
 					<TextBox Name="description" Style="{StaticResource NoteEditor}"/>

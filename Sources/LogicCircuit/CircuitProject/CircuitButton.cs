@@ -43,7 +43,6 @@ namespace LogicCircuit {
 
 		public override bool IsDisplay {
 			get { return true; }
-			set { base.IsDisplay = value; }
 		}
 
 		protected override int CircuitSymbolWidth(int defaultWidth) {
