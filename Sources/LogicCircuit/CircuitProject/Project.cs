@@ -9,7 +9,7 @@ namespace LogicCircuit {
 		public const double MaxZoom = 3;
 
 		public const int MinFrequency = 1;
-		public const int MaxFrequency = 100;
+		public const int MaxFrequency = 50;
 
 		public static double CheckZoom(double value) {
 			return Math.Max(Project.MinZoom, Math.Min(value, Project.MaxZoom));

@@ -212,7 +212,7 @@
 						<StackPanel Orientation="Horizontal">
 							<Label Content="{x:Static properties:Resources.TitleFrequency}" Target="{Binding ElementName=frequency}" Margin="0"/>
 							<Slider Width="100" x:Name="frequency" VerticalAlignment="Center" Background="{StaticResource SliderBackground}"
-								Minimum="1" Maximum="50" Value="{Binding Path=Editor.Frequency, Mode=TwoWay}"
+								Minimum="{Binding Source={x:Static lc:Project.MinFrequency}}" Maximum="{Binding Source={x:Static lc:Project.MaxFrequency}}" Value="{Binding Path=Editor.Frequency, Mode=TwoWay}"
 								Ticks="1,10,20,30,40,50"
 								LargeChange="10"
 								SmallChange="1"
@@ -652,7 +652,7 @@
 				<StackPanel Orientation="Horizontal">
 					<Label Content="{x:Static properties:Resources.TitleZoom}" Target="{Binding ElementName=zoom}" Margin="0"/>
 					<Slider Width="100" x:Name="zoom" VerticalAlignment="Center" Background="{StaticResource SliderBackground}"
-						Minimum="0.1" Maximum="3" Value="{Binding Path=Editor.Zoom, Mode=TwoWay, FallbackValue=1}"
+						Minimum="{x:Static lc:Project.MinZoom}" Maximum="{x:Static lc:Project.MaxZoom}" Value="{Binding Path=Editor.Zoom, Mode=TwoWay, FallbackValue=1}"
 						IsMoveToPointEnabled="True"
 						TickPlacement="TopLeft"
 						Ticks="0, 0.5, 1, 1.5, 2, 2.5, 3"
