@@ -2,9 +2,9 @@
 	public enum CircuitShape {
 		Rectangular,
 		Display,
-		//Mux,
-		//Demux,
-		//Alu,
-		//FlipFlop,
+		Mux,
+		Demux,
+		Alu,
+		FlipFlop,
 	}
 }

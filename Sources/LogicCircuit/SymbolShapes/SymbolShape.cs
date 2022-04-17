@@ -30,5 +30,9 @@ namespace LogicCircuit {
 		public const string Splitter = "SymbolShapes/Splitter.xaml";
 		public const string TextNote = "SymbolShapes/TextNote.xaml";
 		public const string ToggleLed = "SymbolShapes/ToggleLed.xaml";
+		public const string CircuitMux = "SymbolShapes/CircuitMux.xaml";
+		public const string CircuitDemux = "SymbolShapes/CircuitDemux.xaml";
+		public const string CircuitAlu = "SymbolShapes/CircuitAlu.xaml";
+		public const string CircuitFlipFlop = "SymbolShapes/CircuitFlipFlop.xaml";
 	}
 }

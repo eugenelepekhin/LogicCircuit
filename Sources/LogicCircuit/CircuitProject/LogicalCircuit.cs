@@ -118,6 +118,12 @@ namespace LogicCircuit {
 			if(this.IsValidDisplay()) {
 				return symbol.CreateDisplayGlyph(symbol);
 			} else {
+				switch(this.CircuitShape) {
+				case CircuitShape.Mux:		return symbol.CreateMuxGlyph();
+				case CircuitShape.Demux:	return symbol.CreateDemuxGlyph();
+				case CircuitShape.Alu:		return symbol.CreateAluGlyph();
+				case CircuitShape.FlipFlop:	return symbol.CreateFlipFlopGlyph();
+				}
 				return symbol.CreateRectangularGlyph();
 			}
 		}

@@ -1,0 +1,9 @@
+﻿<Border
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	BorderBrush="Black" BorderThickness="1" Background="White"
+>
+	<Grid>
+		<Rectangle Width="1" Fill="Black" VerticalAlignment="Stretch" HorizontalAlignment="Left" Margin="11,0,0,0"/>
+		<TextBlock Name="Notation" IsHyphenationEnabled="True" TextWrapping="Wrap"/>
+	</Grid>
+</Border>

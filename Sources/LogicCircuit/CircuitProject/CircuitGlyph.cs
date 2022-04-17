@@ -328,6 +328,159 @@ namespace LogicCircuit {
 			return canvas;
 		}
 
+		// Creates logical circuit shape for multiplexers.
+		public FrameworkElement CreateMuxGlyph() {
+			Canvas canvas = this.CreateGlyphCanvas(this);
+			double w = this.Circuit.SymbolWidth;
+			double one = Symbol.ScreenPoint(1) - 2 * Symbol.PinRadius;
+			bool ln = CircuitGlyph.AddJam(canvas, this.Left, (j, t) => { Canvas.SetLeft(t, Symbol.PinRadius); Canvas.SetTop(t, Symbol.ScreenPoint(j.Y) - 2 * Symbol.PinRadius); });
+			bool tn = CircuitGlyph.AddJam(canvas, this.Top, (j, t) => { Canvas.SetLeft(t, Symbol.ScreenPoint(j.X) - Symbol.PinRadius); Canvas.SetTop(t, 2 + one * (j.X / w)); });
+			bool rn = CircuitGlyph.AddJam(canvas, this.Right, (j, t) => { Canvas.SetRight(t, Symbol.PinRadius); Canvas.SetTop(t, Symbol.ScreenPoint(j.Y) - 2 * Symbol.PinRadius); });
+			bool bn = CircuitGlyph.AddJam(canvas, this.Bottom, (j, t) => { Canvas.SetLeft(t, Symbol.ScreenPoint(j.X) - Symbol.PinRadius); Canvas.SetBottom(t, 2 + one * (j.X / w)); });
+			foreach(Jam jam in this.Bottom) {
+				Line line = new Line();
+				line.X1 = Symbol.ScreenPoint(jam.X);
+				line.Y1 = Symbol.ScreenPoint(jam.Y - 1);
+				line.X2 = Symbol.ScreenPoint(jam.X);
+				line.Y2 = Symbol.ScreenPoint(jam.Y);
+				line.Stroke = Symbol.JamStroke;
+				line.StrokeThickness = 1;
+				Panel.SetZIndex(line, -1);
+				canvas.Children.Add(line);
+			}
+			foreach(Jam jam in this.Top) {
+				Line line = new Line();
+				line.X1 = Symbol.ScreenPoint(jam.X);
+				line.Y1 = Symbol.ScreenPoint(jam.Y);
+				line.X2 = Symbol.ScreenPoint(jam.X);
+				line.Y2 = Symbol.ScreenPoint(jam.Y + 1);
+				line.Stroke = Symbol.JamStroke;
+				line.StrokeThickness = 1;
+				Panel.SetZIndex(line, -1);
+				canvas.Children.Add(line);
+			}
+			FrameworkElement shape = CircuitGlyph.Skin(canvas, SymbolShape.CircuitMux);
+			Point[] points = {
+				new Point(canvas.Width - 0.5, 12),
+				new Point(canvas.Width - 0.5, canvas.Height - 12),
+				new Point(0.5, canvas.Height - 0.5),
+			};
+			shape.DataContext = points;
+			if(shape.FindName("Notation") is TextBlock text) {
+				text.Margin = new Thickness(ln ? 10 : 5, tn ? 22 : 6, rn ? 10 : 5, bn ? 22 : 6);
+				text.Text = this.Circuit.Notation;
+			}
+			return canvas;
+		}
+
+		// Creates logical circuit shape for demultiplex.
+		public FrameworkElement CreateDemuxGlyph() {
+			Canvas canvas = this.CreateGlyphCanvas(this);
+			double w = this.Circuit.SymbolWidth;
+			double one = Symbol.ScreenPoint(1) - 2 * Symbol.PinRadius;
+			bool ln = CircuitGlyph.AddJam(canvas, this.Left, (j, t) => { Canvas.SetLeft(t, Symbol.PinRadius); Canvas.SetTop(t, Symbol.ScreenPoint(j.Y) - 2 * Symbol.PinRadius); });
+			bool tn = CircuitGlyph.AddJam(canvas, this.Top, (j, t) => { Canvas.SetLeft(t, Symbol.ScreenPoint(j.X) - Symbol.PinRadius); Canvas.SetTop(t, 2 + one * ((w - j.X) / w)); });
+			bool rn = CircuitGlyph.AddJam(canvas, this.Right, (j, t) => { Canvas.SetRight(t, Symbol.PinRadius); Canvas.SetTop(t, Symbol.ScreenPoint(j.Y) - 2 * Symbol.PinRadius); });
+			bool bn = CircuitGlyph.AddJam(canvas, this.Bottom, (j, t) => { Canvas.SetLeft(t, Symbol.ScreenPoint(j.X) - Symbol.PinRadius); Canvas.SetBottom(t, 2 + one * ((w - j.X) / w)); });
+			foreach(Jam jam in this.Bottom) {
+				Line line = new Line();
+				line.X1 = Symbol.ScreenPoint(jam.X);
+				line.Y1 = Symbol.ScreenPoint(jam.Y - 1);
+				line.X2 = Symbol.ScreenPoint(jam.X);
+				line.Y2 = Symbol.ScreenPoint(jam.Y);
+				line.Stroke = Symbol.JamStroke;
+				line.StrokeThickness = 1;
+				Panel.SetZIndex(line, -1);
+				canvas.Children.Add(line);
+			}
+			foreach(Jam jam in this.Top) {
+				Line line = new Line();
+				line.X1 = Symbol.ScreenPoint(jam.X);
+				line.Y1 = Symbol.ScreenPoint(jam.Y);
+				line.X2 = Symbol.ScreenPoint(jam.X);
+				line.Y2 = Symbol.ScreenPoint(jam.Y + 1);
+				line.Stroke = Symbol.JamStroke;
+				line.StrokeThickness = 1;
+				Panel.SetZIndex(line, -1);
+				canvas.Children.Add(line);
+			}
+			FrameworkElement shape = CircuitGlyph.Skin(canvas, SymbolShape.CircuitDemux);
+			Point[] points = {
+				new Point(canvas.Width - 0.5, 0.5),
+				new Point(canvas.Width - 0.5, canvas.Height - 0.5),
+				new Point(0.5, canvas.Height - 12),
+			};
+			shape.DataContext = points;
+			if(shape.FindName("Notation") is TextBlock text) {
+				text.Margin = new Thickness(ln ? 10 : 5, tn ? 22 : 7, rn ? 10 : 5, bn ? 22 : 7);
+				text.Text = this.Circuit.Notation;
+			}
+			return canvas;
+		}
+
+		// Creates logical circuit shape for ALU.
+		public FrameworkElement CreateAluGlyph() {
+			Canvas canvas = this.CreateGlyphCanvas(this);
+			double w = this.Circuit.SymbolWidth;
+			double one = Symbol.ScreenPoint(1) - 2 * Symbol.PinRadius;
+			bool ln = CircuitGlyph.AddJam(canvas, this.Left, (j, t) => { Canvas.SetLeft(t, Symbol.PinRadius); Canvas.SetTop(t, Symbol.ScreenPoint(j.Y) - 2 * Symbol.PinRadius); });
+			bool tn = CircuitGlyph.AddJam(canvas, this.Top, (j, t) => { Canvas.SetLeft(t, Symbol.ScreenPoint(j.X) - Symbol.PinRadius); Canvas.SetTop(t, 2 + one * (j.X / w)); });
+			bool rn = CircuitGlyph.AddJam(canvas, this.Right, (j, t) => { Canvas.SetRight(t, Symbol.PinRadius); Canvas.SetTop(t, Symbol.ScreenPoint(j.Y) - 2 * Symbol.PinRadius); });
+			bool bn = CircuitGlyph.AddJam(canvas, this.Bottom, (j, t) => { Canvas.SetLeft(t, Symbol.ScreenPoint(j.X) - Symbol.PinRadius); Canvas.SetBottom(t, 2 + one * (j.X / w)); });
+			foreach(Jam jam in this.Bottom) {
+				Line line = new Line();
+				line.X1 = Symbol.ScreenPoint(jam.X);
+				line.Y1 = Symbol.ScreenPoint(jam.Y - 1);
+				line.X2 = Symbol.ScreenPoint(jam.X);
+				line.Y2 = Symbol.ScreenPoint(jam.Y);
+				line.Stroke = Symbol.JamStroke;
+				line.StrokeThickness = 1;
+				Panel.SetZIndex(line, -1);
+				canvas.Children.Add(line);
+			}
+			foreach(Jam jam in this.Top) {
+				Line line = new Line();
+				line.X1 = Symbol.ScreenPoint(jam.X);
+				line.Y1 = Symbol.ScreenPoint(jam.Y);
+				line.X2 = Symbol.ScreenPoint(jam.X);
+				line.Y2 = Symbol.ScreenPoint(jam.Y + 1);
+				line.Stroke = Symbol.JamStroke;
+				line.StrokeThickness = 1;
+				Panel.SetZIndex(line, -1);
+				canvas.Children.Add(line);
+			}
+			FrameworkElement shape = CircuitGlyph.Skin(canvas, SymbolShape.CircuitAlu);
+			Point[] points = {
+				new Point(canvas.Width - 0.5, 12),
+				new Point(canvas.Width - 0.5, canvas.Height - 12),
+				new Point(0.5, canvas.Height - 0.5),
+				new Point(0.5, canvas.Height / 2 + 12),
+				new Point(15, canvas.Height / 2),
+				new Point(0.5, canvas.Height / 2 - 12),
+			};
+			shape.DataContext = points;
+			if(shape.FindName("Notation") is TextBlock text) {
+				text.Margin = new Thickness(17, tn ? 22 : 6, rn ? 10 : 5, bn ? 22 : 6);
+				text.Text = this.Circuit.Notation;
+			}
+			return canvas;
+		}
+
+		public FrameworkElement CreateFlipFlopGlyph() {
+			Canvas canvas = this.CreateGlyphCanvas(this);
+			canvas.Background = Symbol.CircuitFill;
+			bool ln = CircuitGlyph.AddJam(canvas, this.Left, (j, t) => { Canvas.SetLeft(t, Symbol.PinRadius); Canvas.SetTop(t, Symbol.ScreenPoint(j.Y) - 2 * Symbol.PinRadius); t.MaxWidth = 9; });
+			bool tn = CircuitGlyph.AddJam(canvas, this.Top, (j, t) => { Canvas.SetLeft(t, Symbol.ScreenPoint(j.X) - Symbol.PinRadius); Canvas.SetTop(t, Symbol.PinRadius); });
+			bool rn = CircuitGlyph.AddJam(canvas, this.Right, (j, t) => { Canvas.SetRight(t, Symbol.PinRadius); Canvas.SetTop(t, Symbol.ScreenPoint(j.Y) - 2 * Symbol.PinRadius); });
+			bool bn = CircuitGlyph.AddJam(canvas, this.Bottom, (j, t) => { Canvas.SetLeft(t, Symbol.ScreenPoint(j.X) - Symbol.PinRadius); Canvas.SetBottom(t, Symbol.PinRadius); });
+			FrameworkElement shape = CircuitGlyph.Skin(canvas, SymbolShape.CircuitFlipFlop);
+			if(shape.FindName("Notation") is TextBlock text) {
+				text.Margin = new Thickness(12, tn ? 10 : 5, rn ? 10 : 5, bn ? 10 : 5);
+				text.Text = this.Circuit.Notation;
+			}
+			return canvas;
+		}
+
 		public FrameworkElement CreateShapedGlyph(string skin) {
 			Gate gate = this.Circuit as Gate;
 			Tracer.Assert(gate != null);

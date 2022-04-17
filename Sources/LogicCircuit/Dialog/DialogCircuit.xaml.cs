@@ -20,10 +20,10 @@ namespace LogicCircuit {
 			List<EnumDescriptor<CircuitShape>> shapes = new List<EnumDescriptor<CircuitShape>>() {
 				new EnumDescriptor<CircuitShape>(CircuitShape.Rectangular, nameof(CircuitShape.Rectangular)),
 				new EnumDescriptor<CircuitShape>(CircuitShape.Display, nameof(CircuitShape.Display)),
-				//new EnumDescriptor<CircuitShape>(CircuitShape.Mux, nameof(CircuitShape.Mux)),
-				//new EnumDescriptor<CircuitShape>(CircuitShape.Demux, nameof(CircuitShape.Demux)),
-				//new EnumDescriptor<CircuitShape>(CircuitShape.Alu, nameof(CircuitShape.Alu)),
-				//new EnumDescriptor<CircuitShape>(CircuitShape.FlipFlop, nameof(CircuitShape.FlipFlop)),
+				new EnumDescriptor<CircuitShape>(CircuitShape.Mux, nameof(CircuitShape.Mux)),
+				new EnumDescriptor<CircuitShape>(CircuitShape.Demux, nameof(CircuitShape.Demux)),
+				new EnumDescriptor<CircuitShape>(CircuitShape.Alu, nameof(CircuitShape.Alu)),
+				new EnumDescriptor<CircuitShape>(CircuitShape.FlipFlop, nameof(CircuitShape.FlipFlop)),
 			};
 			if(!logicalCircuit.ContainsDisplays()) {
 				shapes.RemoveAt(1);

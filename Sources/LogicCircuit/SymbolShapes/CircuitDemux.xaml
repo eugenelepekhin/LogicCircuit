@@ -1,0 +1,17 @@
+﻿<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<Path Stroke="Black" StrokeThickness="1" Fill="White">
+		<Path.Data>
+			<PathGeometry>
+				<PathFigure StartPoint="0.5,12" IsClosed="True">
+					<PathFigure.Segments>
+						<LineSegment Point="{Binding Path=.[0]}"/>
+						<LineSegment Point="{Binding Path=.[1]}"/>
+						<LineSegment Point="{Binding Path=.[2]}"/>
+					</PathFigure.Segments>
+				</PathFigure>
+			</PathGeometry>
+		</Path.Data>
+	</Path>
+
+	<TextBlock Name="Notation" IsHyphenationEnabled="True" TextWrapping="Wrap"/>
+</Grid>
