@@ -15,6 +15,16 @@
 		<Style TargetType="{x:Type lc:ControlPinOrder}">
 			<Setter Property="IsEnabled" Value="{Binding ElementName=checkBoxGraphOrder, Path=IsChecked, Converter={StaticResource InverseBooleanConverter}}"/>
 		</Style>
+
+		<Style TargetType="ContentControl">
+			<Setter Property="Height" Value="{x:Static lc:DialogCircuit.MaxShapeDescriptorHeight}"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+		</Style>
+
+		<Style x:Key="ShapeName" TargetType="TextBlock">
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="Margin" Value="10,3"/>
+		</Style>
 	</Window.Resources>
 
 	<lc:AutoGrid Margin="3">
@@ -31,7 +41,16 @@
 					<ComboBox Name="category" IsEditable="True" IsTextSearchEnabled="True"/>
 
 					<Label Content="{x:Static properties:Resources.TitleSymbolShape}"/>
-					<ComboBox Name="shapes" ItemsSource="{Binding Path=CircuitShapes}"/>
+					<ComboBox Name="shapes" ItemsSource="{Binding Path=CircuitShapes}">
+						<ComboBox.ItemTemplate>
+							<DataTemplate>
+								<lc:AutoGrid>
+									<ContentControl Content="{Binding Path=Gliph}"/>
+									<TextBlock Style="{StaticResource ShapeName}" Text="{Binding Path=Text}"/>
+								</lc:AutoGrid>
+							</DataTemplate>
+						</ComboBox.ItemTemplate>
+					</ComboBox>
 
 					<Label Content="{x:Static properties:Resources.TitleDescription}"/>
 					<TextBox Name="description" Style="{StaticResource NoteEditor}"/>

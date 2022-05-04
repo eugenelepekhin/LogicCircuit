@@ -32,7 +32,9 @@ namespace LogicCircuit {
 			base.Delete();
 		}
 
-		public override bool IsDisplay => this.CircuitShape == CircuitShape.Display;
+		public bool InvertIsDisplay { get; set; }
+
+		public override bool IsDisplay => this.InvertIsDisplay ^ (this.CircuitShape == CircuitShape.Display);
 
 		public IEnumerable<Pin> LogicalPins {
 			get { return this.CircuitProject.PinSet.SelectByCircuit(this); }

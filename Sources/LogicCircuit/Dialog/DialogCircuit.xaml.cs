@@ -3,29 +3,82 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace LogicCircuit {
 	/// <summary>
 	/// Interaction logic for DialogCircuit.xaml
 	/// </summary>
 	public partial class DialogCircuit : Window {
+		public const double MaxShapeDescriptorWidth = 200;
+		public const double MaxShapeDescriptorHeight = 72;
+
+		public class ShapeDescriptor : EnumDescriptor<CircuitShape> {
+
+			private Func<FrameworkElement> createGliph;
+
+			public FrameworkElement Gliph => this.createGliph();
+
+			public ShapeDescriptor(CircuitShape shape, string text, Func<FrameworkElement> createGliph) : base(shape, text) {
+				this.createGliph = createGliph;
+			}
+
+			private static FrameworkElement Resize(FrameworkElement element) {
+				if(DialogCircuit.MaxShapeDescriptorHeight < element.Height || DialogCircuit.MaxShapeDescriptorWidth < element.Width) {
+					double x = DialogCircuit.MaxShapeDescriptorWidth / element.Width;
+					double y = DialogCircuit.MaxShapeDescriptorHeight / element.Height;
+					double zoom = Math.Min(x, y);
+					element.LayoutTransform = new ScaleTransform(zoom, zoom);
+				}
+				return element;
+			}
+
+			private static FrameworkElement CreateGlyph(LogicalCircuit logicalCircuit, bool invertIsDisplay, Func<CircuitGlyph, FrameworkElement> create) {
+				try {
+					logicalCircuit.InvertIsDisplay = invertIsDisplay;
+					logicalCircuit.ResetPins();
+					CircuitGlyph circuitGlyph = new LogicalCircuitDescriptor(logicalCircuit, s => false).CircuitGlyph;
+					return ShapeDescriptor.Resize(create(circuitGlyph));
+				} finally {
+					logicalCircuit.InvertIsDisplay = false;
+					logicalCircuit.ResetPins();
+					logicalCircuit.CircuitProject.CircuitSymbolSet.ValidateAll();
+				}
+			}
+
+			public static FrameworkElement RectangularGlyph(LogicalCircuit logicalCircuit) => ShapeDescriptor.CreateGlyph(logicalCircuit, logicalCircuit.IsDisplay, glyph => glyph.CreateRectangularGlyph());
+			public static FrameworkElement DisplayGlyph(LogicalCircuit logicalCircuit) => ShapeDescriptor.CreateGlyph(logicalCircuit, !logicalCircuit.IsDisplay, glyph => glyph.CreateDisplayGlyph(glyph));
+			public static FrameworkElement MuxGlyph(LogicalCircuit logicalCircuit) => ShapeDescriptor.CreateGlyph(logicalCircuit, logicalCircuit.IsDisplay, glyph => glyph.CreateMuxGlyph());
+			public static FrameworkElement DemuxGlyph(LogicalCircuit logicalCircuit) => ShapeDescriptor.CreateGlyph(logicalCircuit, logicalCircuit.IsDisplay, glyph => glyph.CreateDemuxGlyph());
+			public static FrameworkElement AluGlyph(LogicalCircuit logicalCircuit) => ShapeDescriptor.CreateGlyph(logicalCircuit, logicalCircuit.IsDisplay, glyph => glyph.CreateAluGlyph());
+			public static FrameworkElement FlipFlopGlyph(LogicalCircuit logicalCircuit) => ShapeDescriptor.CreateGlyph(logicalCircuit, logicalCircuit.IsDisplay, glyph => glyph.CreateFlipFlopGlyph());
+		}
 
 		private SettingsWindowLocationCache windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 		private readonly LogicalCircuit logicalCircuit;
 
-		public IEnumerable<EnumDescriptor<CircuitShape>> CircuitShapes { get; }
+		public IEnumerable<ShapeDescriptor> CircuitShapes { get; }
 
 		public DialogCircuit(LogicalCircuit logicalCircuit) {
-			List<EnumDescriptor<CircuitShape>> shapes = new List<EnumDescriptor<CircuitShape>>() {
-				new EnumDescriptor<CircuitShape>(CircuitShape.Rectangular, nameof(CircuitShape.Rectangular)),
-				new EnumDescriptor<CircuitShape>(CircuitShape.Display, nameof(CircuitShape.Display)),
-				new EnumDescriptor<CircuitShape>(CircuitShape.Mux, nameof(CircuitShape.Mux)),
-				new EnumDescriptor<CircuitShape>(CircuitShape.Demux, nameof(CircuitShape.Demux)),
-				new EnumDescriptor<CircuitShape>(CircuitShape.Alu, nameof(CircuitShape.Alu)),
-				new EnumDescriptor<CircuitShape>(CircuitShape.FlipFlop, nameof(CircuitShape.FlipFlop)),
+			List<ShapeDescriptor> shapes = new List<ShapeDescriptor>() {
+				new ShapeDescriptor(CircuitShape.Rectangular, Properties.Resources.GateShapeRectangular, () => ShapeDescriptor.RectangularGlyph(logicalCircuit)),
+				new ShapeDescriptor(CircuitShape.Display, Properties.Resources.SymbolShapeDisplay, () => ShapeDescriptor.DisplayGlyph(logicalCircuit)),
+				new ShapeDescriptor(CircuitShape.Mux, Properties.Resources.SymbolShapeMux, () => ShapeDescriptor.MuxGlyph(logicalCircuit)),
+				new ShapeDescriptor(CircuitShape.Demux, Properties.Resources.SymbolShapeDemux, () => ShapeDescriptor.DemuxGlyph(logicalCircuit)),
+				new ShapeDescriptor(CircuitShape.Alu, Properties.Resources.SymbolShapeAlu, () => ShapeDescriptor.AluGlyph(logicalCircuit)),
+				new ShapeDescriptor(CircuitShape.FlipFlop, Properties.Resources.SymbolShapeFlipFlop, () => ShapeDescriptor.FlipFlopGlyph(logicalCircuit)),
 			};
-			if(!logicalCircuit.ContainsDisplays()) {
+
+			
+			bool canBeDisplay = false;
+			try {
+				logicalCircuit.InvertIsDisplay = !logicalCircuit.IsDisplay;
+				canBeDisplay = logicalCircuit.ContainsDisplays();
+			} finally {
+				logicalCircuit.InvertIsDisplay = false;
+			}
+			if(!canBeDisplay) {
 				shapes.RemoveAt(1);
 			}
 			this.CircuitShapes = shapes.AsReadOnly();
@@ -104,7 +157,7 @@ namespace LogicCircuit {
 				string notation = this.notation.Text.Trim();
 				string category = this.category.Text.Trim();
 				category = category.Substring(0, Math.Min(category.Length, 64)).Trim();
-				EnumDescriptor<CircuitShape> shape = (EnumDescriptor<CircuitShape>)this.shapes.SelectedItem;
+				ShapeDescriptor shape = (ShapeDescriptor)this.shapes.SelectedItem;
 				string description = this.description.Text.Trim();
 				bool leftChanged = this.leftPins.HasChanges();
 				bool rightChanged = this.rightPins.HasChanges();

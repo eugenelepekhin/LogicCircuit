@@ -1517,4 +1517,20 @@ Do you want to load auto saved state of this file?</value>
   <data name="TitleSymbolShape" xml:space="preserve">
     <value>_Symbol shape:</value>
   </data>
+  <data name="SymbolShapeAlu" xml:space="preserve">
+    <value>ALU</value>
+  </data>
+  <data name="SymbolShapeDemux" xml:space="preserve">
+    <value>Demultiplexer</value>
+  </data>
+  <data name="SymbolShapeDisplay" xml:space="preserve">
+    <value>Display</value>
+    <comment>This is same English word as in TitleDisplayOptions, but due to different context might be different in other languages.</comment>
+  </data>
+  <data name="SymbolShapeFlipFlop" xml:space="preserve">
+    <value>Flip-flop</value>
+  </data>
+  <data name="SymbolShapeMux" xml:space="preserve">
+    <value>Multiplexer</value>
+  </data>
 </root>

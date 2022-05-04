@@ -3117,5 +3117,40 @@ namespace LogicCircuit.Properties {
  		public static string TitleSymbolShape {
 			get { return ResourceManager.GetString("TitleSymbolShape", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to ALU.
+		/// </summary>
+ 		public static string SymbolShapeAlu {
+			get { return ResourceManager.GetString("SymbolShapeAlu", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Demultiplexer.
+		/// </summary>
+ 		public static string SymbolShapeDemux {
+			get { return ResourceManager.GetString("SymbolShapeDemux", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Display.
+		/// </summary>
+ 		public static string SymbolShapeDisplay {
+			get { return ResourceManager.GetString("SymbolShapeDisplay", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Flip-flop.
+		/// </summary>
+ 		public static string SymbolShapeFlipFlop {
+			get { return ResourceManager.GetString("SymbolShapeFlipFlop", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Multiplexer.
+		/// </summary>
+ 		public static string SymbolShapeMux {
+			get { return ResourceManager.GetString("SymbolShapeMux", Culture); }
+		}
 	}
 }
