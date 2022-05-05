@@ -18,7 +18,9 @@
 
 		<Style TargetType="ContentControl">
 			<Setter Property="Height" Value="{x:Static lc:DialogCircuit.MaxShapeDescriptorHeight}"/>
+			<Setter Property="MinWidth" Value="{x:Static lc:DialogCircuit.MinShapeDescriptorWidth}"/>
 			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
 		</Style>
 
 		<Style x:Key="ShapeName" TargetType="TextBlock">

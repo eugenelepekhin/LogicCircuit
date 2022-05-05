@@ -10,8 +10,9 @@ namespace LogicCircuit {
 	/// Interaction logic for DialogCircuit.xaml
 	/// </summary>
 	public partial class DialogCircuit : Window {
-		public const double MaxShapeDescriptorWidth = 200;
-		public const double MaxShapeDescriptorHeight = 72;
+		public const double MaxShapeDescriptorHeight = 4 * Symbol.GridSize; // 4 - Height of standard symbol with up to 3 pins on left or right.
+		public const double MaxShapeDescriptorWidth = DialogCircuit.MaxShapeDescriptorHeight * 3;
+		public const double MinShapeDescriptorWidth = 3 * Symbol.GridSize; // 3 - Width of standard symbol with up to 2 pins on top or bottom.
 
 		public class ShapeDescriptor : EnumDescriptor<CircuitShape> {
 
