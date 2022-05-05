@@ -354,10 +354,10 @@
     <value>Пробник</value>
   </data>
 	<data name="GateShapeRectangular" xml:space="preserve">
-    <value>Прямоугольные</value>
+    <value>Прямоугольная</value>
   </data>
 	<data name="GateShapeShaped" xml:space="preserve">
-    <value>Фигурные</value>
+    <value>Фигурная</value>
   </data>
 	<data name="GateTriStateName" xml:space="preserve">
     <value>Схема с тремя состояниями</value>
@@ -1446,5 +1446,23 @@
 	</data>
 	<data name="TitleShortcut" xml:space="preserve">
 		<value>Сочетание _клавиш:</value>
+	</data>
+	<data name="TitleSymbolShape" xml:space="preserve">
+		<value>_Форма символа:</value>
+	</data>
+	<data name="SymbolShapeAlu" xml:space="preserve">
+		<value>АЛУ</value>
+	</data>
+	<data name="SymbolShapeDemux" xml:space="preserve">
+		<value>Демультиплексор</value>
+	</data>
+	<data name="SymbolShapeFlipFlop" xml:space="preserve">
+		<value>Триггер</value>
+	</data>
+	<data name="SymbolShapeMux" xml:space="preserve">
+		<value>Мультиплексор</value>
+	</data>
+	<data name="SymbolShapeDisplay" xml:space="preserve">
+		<value>Дисплей</value>
 	</data>
 </root>

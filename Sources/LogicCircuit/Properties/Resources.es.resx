@@ -1496,4 +1496,22 @@ Permite seleccionar el tamaño y profundidad de color / esquema:
 	<data name="TitleShortcut" xml:space="preserve">
 		<value>Atajo de teclado:</value>
 	</data>
+	<data name="TitleSymbolShape" xml:space="preserve">
+		<value>Forma del símbolo:</value>
+	</data>
+	<data name="SymbolShapeAlu" xml:space="preserve">
+		<value>ALU</value>
+	</data>
+	<data name="SymbolShapeDemux" xml:space="preserve">
+		<value>Demultiplexer</value>
+	</data>
+	<data name="SymbolShapeDisplay" xml:space="preserve">
+		<value>Mostrar</value>
+	</data>
+	<data name="SymbolShapeFlipFlop" xml:space="preserve">
+		<value>Biestable</value>
+	</data>
+	<data name="SymbolShapeMux" xml:space="preserve">
+		<value>Multiplexer</value>
+	</data>
 </root>

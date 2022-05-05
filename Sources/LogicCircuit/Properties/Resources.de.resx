@@ -956,10 +956,10 @@ Eine solche Schaltung kann nicht mehr als einmal verwendet werden, da eventuell 
     <value>_Beschriftung:</value>
   </data>
 	<data name="GateShapeRectangular" xml:space="preserve">
-    <value>rechteckig</value>
+    <value>Rechteckig</value>
   </data>
 	<data name="GateShapeShaped" xml:space="preserve">
-    <value>abgerundet</value>
+    <value>Abgerundet</value>
   </data>
 	<data name="ProbeHistoryMark" xml:space="preserve">
     <value>&lt;&lt;&lt;&lt;&lt;&lt; Marke &gt;&gt;&gt;&gt;&gt;&gt;</value>
@@ -1444,5 +1444,23 @@ Möchten Sie den automatisch gespeicherten Stand dieser Datei laden?</value>
 	</data>
 	<data name="TitleShortcut" xml:space="preserve">
 		<value>Tastatur_kürzel:</value>
+	</data>
+	<data name="TitleSymbolShape" xml:space="preserve">
+		<value>_Symbolform:</value>
+	</data>
+	<data name="SymbolShapeAlu" xml:space="preserve">
+		<value>ALU</value>
+	</data>
+	<data name="SymbolShapeDemux" xml:space="preserve">
+		<value>Demultiplexer</value>
+	</data>
+	<data name="SymbolShapeDisplay" xml:space="preserve">
+		<value>Anzeige</value>
+	</data>
+	<data name="SymbolShapeFlipFlop" xml:space="preserve">
+		<value>Flipflop</value>
+	</data>
+	<data name="SymbolShapeMux" xml:space="preserve">
+		<value>Multiplexer</value>
 	</data>
 </root>

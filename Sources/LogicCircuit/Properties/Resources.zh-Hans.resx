@@ -1431,4 +1431,25 @@ Out</value>
 	<data name="TitleShortcut" xml:space="preserve">
 		<value>键盘快捷键(_K)</value>
 	</data>
+	<data name="TitleSymbolShape" xml:space="preserve">
+		<value>
+符号形状(_S)：</value>
+	</data>
+	<data name="SymbolShapeAlu" xml:space="preserve">
+		<value>ALU</value>
+	</data>
+	<data name="SymbolShapeDemux" xml:space="preserve">
+		<value>
+解复用器</value>
+	</data>
+	<data name="SymbolShapeDisplay" xml:space="preserve">
+		<value>显示</value>
+	</data>
+	<data name="SymbolShapeFlipFlop" xml:space="preserve">
+		<value>
+拖鞋</value>
+	</data>
+	<data name="SymbolShapeMux" xml:space="preserve">
+		<value>复用器</value>
+	</data>
 </root>

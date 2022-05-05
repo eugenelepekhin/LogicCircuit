@@ -1512,4 +1512,22 @@ Você deseja carregar a configuração de salvamento automático para este arqui
 	<data name="TitleShortcut" xml:space="preserve">
 		<value>_Atalho de teclado:</value>
 	</data>
+	<data name="TitleSymbolShape" xml:space="preserve">
+		<value>Forma do símbolo:</value>
+	</data>
+	<data name="SymbolShapeAlu" xml:space="preserve">
+		<value>ULA</value>
+	</data>
+	<data name="SymbolShapeDemux" xml:space="preserve">
+		<value>Desmultiplexador</value>
+	</data>
+	<data name="SymbolShapeDisplay" xml:space="preserve">
+		<value>Mostrar</value>
+	</data>
+	<data name="SymbolShapeFlipFlop" xml:space="preserve">
+		<value>Flip-flop</value>
+	</data>
+	<data name="SymbolShapeMux" xml:space="preserve">
+		<value>Multiplexador</value>
+	</data>
 </root>

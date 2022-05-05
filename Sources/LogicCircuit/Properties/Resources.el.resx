@@ -1438,4 +1438,22 @@
 	<data name="TitleShortcut" xml:space="preserve">
 		<value>Συντόμευση πληκτρολογίου:</value>
 	</data>
+	<data name="TitleSymbolShape" xml:space="preserve">
+		<value>Σχήμα συμβόλου:</value>
+	</data>
+	<data name="SymbolShapeAlu" xml:space="preserve">
+		<value>ALU</value>
+	</data>
+	<data name="SymbolShapeDemux" xml:space="preserve">
+		<value>Αποπολυπλέκτης</value>
+	</data>
+	<data name="SymbolShapeDisplay" xml:space="preserve">
+		<value>Εκθέτω</value>
+	</data>
+	<data name="SymbolShapeFlipFlop" xml:space="preserve">
+		<value>Σαγιονάρα</value>
+	</data>
+	<data name="SymbolShapeMux" xml:space="preserve">
+		<value>Πολυπλέκτης</value>
+	</data>
 </root>
