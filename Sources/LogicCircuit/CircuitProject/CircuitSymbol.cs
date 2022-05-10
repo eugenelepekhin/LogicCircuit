@@ -70,9 +70,9 @@ namespace LogicCircuit {
 		#if DEBUG
 			public override string ToString() {
 				return string.Format(System.Globalization.CultureInfo.InvariantCulture,
-					"{0} of {1}{2} on \"{3}\"",
-					this.GetType().Name,
-					string.IsNullOrEmpty(this.Circuit.Notation) ? this.Circuit.Name : this.Circuit.Notation,
+					"Symbol of {0} {1}{2} on \"{3}\"",
+					this.Circuit.GetType().Name,
+					this.Circuit.Name, /*string.IsNullOrEmpty(this.Circuit.Notation) ? this.Circuit.Name : this.Circuit.Notation*/
 					this.Point,
 					this.LogicalCircuit.Name
 				);

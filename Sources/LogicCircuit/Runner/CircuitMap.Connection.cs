@@ -18,7 +18,7 @@ namespace LogicCircuit {
 			}
 
 			#if DEBUG
-				public override string ToString() => string.Format(System.Globalization.CultureInfo.InvariantCulture, "Connect {0} -> {1}", this.InJam.ToString(), this.OutJam.ToString());
+				public override string ToString() => string.Format(System.Globalization.CultureInfo.InvariantCulture, "Connect {0} -> {1}", this.OutJam.ToString(), this.InJam.ToString());
 			#endif
 		}
 
@@ -68,7 +68,7 @@ namespace LogicCircuit {
 						System.Globalization.CultureInfo culture = System.Globalization.CultureInfo.InvariantCulture;
 						foreach(Dictionary<Jam, Connection> dic in this.outputs.Values) {
 							foreach(Connection con in dic.Values) {
-								text.AppendFormat(culture, "{0} -> {1}", trim(con.InJam), trim(con.OutJam));
+								text.AppendFormat(culture, "{0} -> {1}", trim(con.OutJam), trim(con.InJam));
 								text.AppendLine();
 							}
 						}
