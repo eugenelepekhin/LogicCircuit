@@ -134,13 +134,13 @@ Datoteka koju pokušavate otvoriti je oštećena ili stvorena u novoj verziji so
     <value>Datoteka {0} spremljena.</value>
   </data>
   <data name="GateAndName" xml:space="preserve">
-    <value>And</value>
+    <value>And (I)</value>
   </data>
   <data name="GateAndNotation" xml:space="preserve">
     <value>&amp;</value>
   </data>
   <data name="GateAndNotName" xml:space="preserve">
-    <value>NAnd</value>
+    <value>NAnd (NI sklop)</value>
   </data>
   <data name="GateClockNotation" xml:space="preserve">
     <value>ω</value>
@@ -158,13 +158,13 @@ Datoteka koju pokušavate otvoriti je oštećena ili stvorena u novoj verziji so
     <value>1</value>
   </data>
   <data name="GateOrName" xml:space="preserve">
-    <value>Or</value>
+    <value>Or (ILI)</value>
   </data>
   <data name="GateOrNotation" xml:space="preserve">
     <value>≥1</value>
   </data>
   <data name="GateOrNotName" xml:space="preserve">
-    <value>NOr</value>
+    <value>NOr (NILI sklop)</value>
   </data>
   <data name="CircuitProbeNotation" xml:space="preserve">
     <value>?</value>
@@ -173,13 +173,13 @@ Datoteka koju pokušavate otvoriti je oštećena ili stvorena u novoj verziji so
     <value>Pravokutan</value>
   </data>
   <data name="GateShapeShaped" xml:space="preserve">
-    <value>Obikovan</value>
+    <value>Oblikovan</value>
   </data>
   <data name="GateTriStateNotation" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="GateXorName" xml:space="preserve">
-    <value>Xor</value>
+    <value>Xor (Isključivo ILI sklop)</value>
   </data>
   <data name="GateXorNotation" xml:space="preserve">
     <value>=1</value>
@@ -282,7 +282,7 @@ Datoteka koju pokušavate otvoriti je oštećena ili stvorena u novoj verziji so
     <value>Ulaz - Izlaz</value>
   </data>
   <data name="CommandHelpAbout" xml:space="preserve">
-    <value>_O</value>
+    <value>_O programu</value>
   </data>
   <data name="NameButton" xml:space="preserve">
     <value>Dugme</value>
@@ -291,7 +291,7 @@ Datoteka koju pokušavate otvoriti je oštećena ili stvorena u novoj verziji so
     <value>Konstanta</value>
   </data>
   <data name="TitleAbout" xml:space="preserve">
-    <value>O</value>
+    <value>O programu</value>
   </data>
   <data name="TitleApplication" xml:space="preserve">
     <value>Logical Circuit</value>
@@ -336,7 +336,7 @@ Datoteka koju pokušavate otvoriti je oštećena ili stvorena u novoj verziji so
     <value>Pin</value>
   </data>
   <data name="GateXorNotName" xml:space="preserve">
-    <value>XNor</value>
+    <value>XNor (Isključivo NILI)</value>
   </data>
   <data name="Led7Pin8" xml:space="preserve">
     <value>točka</value>
@@ -428,7 +428,7 @@ Izlaz</value>
     <value>_Strana:</value>
   </data>
   <data name="TitleType" xml:space="preserve">
-    <value>_Tip:</value>
+    <value>_Ekstenzija:</value>
   </data>
   <data name="TipOnStartMove" xml:space="preserve">
     <value>Povucite i ispustite odabir na željeno mjesto. Pritisnite Esc za poništavanje premještanja. Držite Shift pri ispuštanju kako biste spriječili pomicanje spojenih žica.</value>
@@ -467,7 +467,7 @@ Izlaz</value>
     <value>Logic Circuit osciloskop</value>
   </data>
   <data name="CommandFileFileImport" xml:space="preserve">
-    <value>_Uvoz...</value>
+    <value>U_voz...</value>
   </data>
   <data name="ImportTitle" xml:space="preserve">
     <value>Uvoz</value>
@@ -494,7 +494,7 @@ Izlaz</value>
     <value>Navedeni naziv datoteke nije važeći. Provjerite postoji li nadređena mapa i je li naziv datoteke važeći.</value>
   </data>
   <data name="MessageExportImageDialog" xml:space="preserve">
-    <value>Odaberite vrstu slike i naziv datoteke u koju želite izvesti trenutni dijagram.</value>
+    <value>Odaberite ekstenziju i unesite naziv datoteke za izvoz trenutnog dijagrama.</value>
   </data>
   <data name="MessageImageFileExists" xml:space="preserve">
     <value>Datoteka "{0}" već postoji.
@@ -564,7 +564,7 @@ Izlaz</value>
     <value>{0} 2</value>
   </data>
   <data name="PinSideBottom" xml:space="preserve">
-    <value>Dno</value>
+    <value>Dolje</value>
   </data>
   <data name="PinSideLeft" xml:space="preserve">
     <value>Lijevo</value>
@@ -573,7 +573,7 @@ Izlaz</value>
     <value>Desno</value>
   </data>
   <data name="PinSideTop" xml:space="preserve">
-    <value>Vrh</value>
+    <value>Gore</value>
   </data>
   <data name="TitleMemory" xml:space="preserve">
     <value>Memorija</value>
@@ -612,19 +612,19 @@ Izlaz</value>
     <value>Izlaz</value>
   </data>
   <data name="CaptionColumns" xml:space="preserve">
-    <value>Stupci</value>
+    <value>Stupaca</value>
   </data>
   <data name="CaptionRows" xml:space="preserve">
-    <value>Retci</value>
+    <value>Redaka</value>
   </data>
   <data name="CaptionLedMatrixType" xml:space="preserve">
     <value>Tip</value>
   </data>
   <data name="TitleColumns" xml:space="preserve">
-    <value>_Stupci:</value>
+    <value>_Stupaca:</value>
   </data>
   <data name="TitleRows" xml:space="preserve">
-    <value>_Retci:</value>
+    <value>_Redaka:</value>
   </data>
   <data name="TitleColors" xml:space="preserve">
     <value>B_oje:</value>
@@ -706,13 +706,13 @@ Memorijska vrijednost ažurirana na {0}</value>
     <value>N_otacija:</value>
   </data>
   <data name="TitleBitWidth" xml:space="preserve">
-    <value>Širina _bita:</value>
+    <value>Duljina _bita:</value>
   </data>
   <data name="TitleAddressBitWidth" xml:space="preserve">
-    <value>Širina _adrese bita:</value>
+    <value>Duljina _adrese bita:</value>
   </data>
   <data name="TitleDataBitWidth" xml:space="preserve">
-    <value>Širina podatka _bita:</value>
+    <value>Duljina podatkovnog _bita:</value>
   </data>
   <data name="TitleWriteOn" xml:space="preserve">
     <value>_Zapiši na:</value>
@@ -775,7 +775,7 @@ Memorijska vrijednost ažurirana na {0}</value>
     <value>Adresiranje bitova</value>
   </data>
   <data name="CaptionBitWidth" xml:space="preserve">
-    <value>Širina bita</value>
+    <value>Duljina bita</value>
   </data>
   <data name="CaptionDataBitWidth" xml:space="preserve">
     <value>Podatkovni bit</value>
@@ -811,7 +811,7 @@ Memorijska vrijednost ažurirana na {0}</value>
     <value>Promijenite frekvenciju satnih zatvarača u sklopu.</value>
   </data>
   <data name="ToolTipGateInputCount" xml:space="preserve">
-    <value>Odaberite broj ulaza za vrata</value>
+    <value>Odaberite broj ulaza logičkog sklopa</value>
   </data>
   <data name="ToolTipIsMaximumSpeed1" xml:space="preserve">
     <value>Pokreće sklop najvećom mogućom brzinom zanemarujući frekvenciju postavljenu gornjim klizačem.</value>
@@ -823,7 +823,7 @@ Memorijska vrijednost ažurirana na {0}</value>
     <value>Vrijednost: {0}</value>
   </data>
   <data name="WireDisplayBitWidth" xml:space="preserve">
-    <value>Širina bita: {0}</value>
+    <value>Duljina bita: {0}</value>
   </data>
   <data name="NameSensor" xml:space="preserve">
     <value>Senzor</value>
@@ -929,7 +929,7 @@ Memorijska vrijednost ažurirana na {0}</value>
     <value>za odabir retka #{0}</value>
   </data>
   <data name="LedMatrixTypeIndividual" xml:space="preserve">
-    <value>individualan</value>
+    <value>Individualan</value>
   </data>
   <data name="LedMatrixTypeSelector" xml:space="preserve">
     <value>Selektor</value>
@@ -1001,7 +1001,7 @@ Memorijska vrijednost ažurirana na {0}</value>
     <value>Ako je tipka na preklop, stanje će se promijeniti pri svakom kliku, inače tek onda kada se pritisne ili otpusti</value>
   </data>
   <data name="CaptionSplitterBitWidth" xml:space="preserve">
-    <value>Širina bita podijeljenog pina</value>
+    <value>Duljina bita podijeljenog pina</value>
   </data>
   <data name="CategoryPrimitives" xml:space="preserve">
     <value>Primitivni</value>
@@ -1035,7 +1035,7 @@ Memorijska vrijednost ažurirana na {0}</value>
     <value>Trenutni logički sklop</value>
   </data>
   <data name="TitleBottom" xml:space="preserve">
-    <value>D_no:</value>
+    <value>D_olje:</value>
   </data>
   <data name="TitleLeft" xml:space="preserve">
     <value>_Lijevo:</value>
@@ -1044,7 +1044,7 @@ Memorijska vrijednost ažurirana na {0}</value>
     <value>_Desno:</value>
   </data>
   <data name="TitleTop" xml:space="preserve">
-    <value>_Vrh:</value>
+    <value>_Gore:</value>
   </data>
   <data name="MemoryAddress2PinName" xml:space="preserve">
     <value>Memorijska adresa port 2</value>
@@ -1215,7 +1215,7 @@ Omogućuje odabir veličine i dubine boje/šeme:
     <value>_Ponovi seriju</value>
   </data>
   <data name="TitleSensorRandomMin" xml:space="preserve">
-    <value>_Min ciklusi:</value>
+    <value>_Min ciklusa:</value>
   </data>
   <data name="CaptionName" xml:space="preserve">
     <value>Naziv</value>
@@ -1348,10 +1348,10 @@ Takav sklop se ne može koristiti više od jednom na drugim sklopovima jer će s
     <value>Grafičke oznake</value>
   </data>
   <data name="CommandEditCopy" xml:space="preserve">
-    <value>_Kopiraj</value>
+    <value>Kopiraj (_Copy)</value>
   </data>
   <data name="CommandEditCut" xml:space="preserve">
-    <value>_Izreži</value>
+    <value>Izreži (Cu_t)</value>
   </data>
   <data name="CommandEditDecreaseFontSize" xml:space="preserve">
     <value>Smanjenje veličine fonta</value>
@@ -1375,19 +1375,19 @@ Takav sklop se ne može koristiti više od jednom na drugim sklopovima jer će s
     <value>Numeriranje</value>
   </data>
   <data name="CommandEditPaste" xml:space="preserve">
-    <value>_Zalijepi</value>
+    <value>Zalije_pi</value>
   </data>
   <data name="CommandEditRedo" xml:space="preserve">
-    <value>_Ponovi</value>
+    <value>_Ponovi (_Redo)</value>
   </data>
   <data name="CommandEditSelectAll" xml:space="preserve">
-    <value>Odaberi _sve</value>
+    <value>Od_aberi sve</value>
   </data>
   <data name="CommandEditUnderline" xml:space="preserve">
     <value>Podcrtaj</value>
   </data>
   <data name="CommandEditUndo" xml:space="preserve">
-    <value>Po_ništi</value>
+    <value>Po_ništi (_Undo)</value>
   </data>
   <data name="CommandFileClose" xml:space="preserve">
     <value>I_zlaz</value>
@@ -1405,7 +1405,7 @@ Takav sklop se ne može koristiti više od jednom na drugim sklopovima jer će s
     <value>Spremi k_ao...</value>
   </data>
   <data name="CommandHelpView" xml:space="preserve">
-    <value>Pri_kaži pomoć</value>
+    <value>Prikaži pomoć (_Help)</value>
   </data>
   <data name="ToolTipFontFamily" xml:space="preserve">
     <value>Font</value>
@@ -1417,7 +1417,7 @@ Takav sklop se ne može koristiti više od jednom na drugim sklopovima jer će s
     <value>Zasluge:</value>
   </data>
   <data name="TitleGateShape" xml:space="preserve">
-    <value>_Oblik vrata</value>
+    <value>_Oblik log. sklopa</value>
   </data>
   <data name="TitleRunningCircuit" xml:space="preserve">
     <value>Pokrenuti sklop</value>
