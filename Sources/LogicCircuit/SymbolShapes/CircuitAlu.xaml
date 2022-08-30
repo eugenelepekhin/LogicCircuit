@@ -16,5 +16,5 @@
 		</Path.Data>
 	</Path>
 
-	<TextBlock Name="Notation" IsHyphenationEnabled="True" TextWrapping="Wrap" VerticalAlignment="Center"/>
+	<TextBlock Name="Notation" Style="{StaticResource CircuitNotation}"/>
 </Grid>

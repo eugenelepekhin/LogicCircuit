@@ -4,6 +4,6 @@
 >
 	<Grid>
 		<Rectangle Width="1" Fill="Black" VerticalAlignment="Stretch" HorizontalAlignment="Left" Margin="11,0,0,0"/>
-		<TextBlock Name="Notation" IsHyphenationEnabled="True" TextWrapping="Wrap"/>
+		<TextBlock Name="Notation" Style="{StaticResource CircuitNotation}"/>
 	</Grid>
 </Border>

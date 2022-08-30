@@ -5,5 +5,5 @@
 	FlowDirection="{x:Static properties:Resources.FlowDirection}"
 	BorderBrush="Black" BorderThickness="1" Background="White"
 >
-	<TextBlock Name="Notation" IsHyphenationEnabled="True" TextWrapping="Wrap"/>
+	<TextBlock Name="Notation" Style="{StaticResource CircuitNotation}"/>
 </Border>

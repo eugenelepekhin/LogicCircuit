@@ -183,6 +183,12 @@
 				<Setter Property="VerticalAlignment" Value="Center"/>
 			</Style>
 
+			<Style x:Key="CircuitNotation" TargetType="TextBlock">
+				<Setter Property="IsHyphenationEnabled" Value="True"/>
+				<Setter Property="TextWrapping" Value="Wrap"/>
+				<Setter Property="Foreground" Value="Black"/>
+			</Style>
+
 			<Style TargetType="{x:Type TextBox}">
 				<Setter Property="Padding" Value="3,2"/>
 				<Setter Property="Margin" Value="3"/>
