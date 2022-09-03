@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 
 namespace LogicCircuit {
 	public abstract class FunctionMemory : CircuitFunction, IFunctionMemory {
@@ -92,10 +93,12 @@ namespace LogicCircuit {
 			return output;
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		protected void Write() {
 			Memory.SetCellValue(this.data, this.inputData.Length, this.ReadNumericState(this.address), this.ReadNumericState(this.inputData));
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		protected bool Read() {
 			int state = Memory.CellValue(this.data, this.DataBitWidth, this.ReadNumericState(this.address));
 			if(this.address2 == null) {
@@ -113,6 +116,7 @@ namespace LogicCircuit {
 			}
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		protected bool IsWriteAllowed() {
 			State state = this.CircuitState[this.write];
 			bool allowed = (state == this.writeOn && CircuitFunction.Not(state) == this.oldWriteState);
