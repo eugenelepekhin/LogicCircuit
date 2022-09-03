@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace LogicCircuit {
@@ -118,6 +119,7 @@ namespace LogicCircuit {
 			return new string(text, 0, index);
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		protected bool SetResult0(State state) {
 			if(this.CircuitState[this.result0] != state) {
 				this.CircuitState[this.result0] = state;
@@ -125,6 +127,8 @@ namespace LogicCircuit {
 			}
 			return false;
 		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		protected bool SetResult(int index, State state) {
 			if(this.CircuitState[this.result[index]] != state) {
 				this.CircuitState[this.result[index]] = state;
@@ -132,14 +136,18 @@ namespace LogicCircuit {
 			}
 			return false;
 		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		protected bool SetResult(State state) {
 			return this.SetResult(0, state);
 		}
+
 		/// <summary>
 		/// Sets multi-bit result from the 32 bit parameter
 		/// </summary>
 		/// <param name="state"></param>
 		/// <returns></returns>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		protected bool SetResult(int state) {
 			bool changed = false;
 			for(int i = 0; i < this.result.Length; i++) {
@@ -148,11 +156,12 @@ namespace LogicCircuit {
 			return changed;
 		}
 
-		protected static Exception BadState(State state) {
+		private static Exception BadState(State state) {
 			return new AssertException(Properties.Resources.UnknownState(state));
 		}
 
 		[SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "TriState")]
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		protected State TriStateGroup() {
 			State state = State.Off;
 			foreach(int index in this.parameter) {
@@ -171,6 +180,7 @@ namespace LogicCircuit {
 			return state;
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		protected State And() {
 			for(int i = 0; i < this.parameter.Length; i++) {
 				if(this.CircuitState[this.parameter[i]] == State.On0) {
@@ -180,6 +190,7 @@ namespace LogicCircuit {
 			return State.On1;
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		protected State Or() {
 			for(int i = 0; i < this.parameter.Length; i++) {
 				if(this.CircuitState[this.parameter[i]] == State.On1) {
@@ -189,6 +200,7 @@ namespace LogicCircuit {
 			return State.On0;
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		protected static State Not(State state) {
 			switch(state) {
 			case State.Off:
@@ -201,10 +213,12 @@ namespace LogicCircuit {
 			throw CircuitFunction.BadState(state);
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		protected State ControlledState(State enable) {
 			return (this.CircuitState[this.parameter[1]] == enable) ? this.CircuitState[this.parameter[0]] : State.Off;
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		protected int Count(State state) {
 			int count = 0;
 			foreach(int index in this.parameter) {
@@ -215,6 +229,7 @@ namespace LogicCircuit {
 			return count;
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		protected bool GetProbeState(State[] state) {
 			//Tracer.Assert(state.Length == this.parameter.Length);
 			bool changed = false;
@@ -228,6 +243,7 @@ namespace LogicCircuit {
 			return changed;
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		protected int ReadNumericState(int[] parameters) {
 			Tracer.Assert(parameters.Length <= 32);
 			int state = 0;
