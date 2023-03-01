@@ -107,6 +107,7 @@ namespace LogicCircuit {
 				try {
 					using(MemoryStream stream = new MemoryStream(Convert.FromBase64String(text))) {
 						FlowDocument document = new FlowDocument();
+						document.TextAlignment = TextAlignment.Left;
 						TextRange range = new TextRange(document.ContentStart, document.ContentEnd);
 						range.Load(stream, DataFormats.XamlPackage);
 						return document;
@@ -148,6 +149,7 @@ namespace LogicCircuit {
 			if(text.StartsWith("<FlowDocument", StringComparison.OrdinalIgnoreCase)) {
 				FlowDocument document = TextNote.LoadXaml(text);
 				if(document != null) {
+					document.TextAlignment = TextAlignment.Left;
 					return document;
 				}
 			}
