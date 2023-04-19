@@ -32,7 +32,7 @@ namespace LogicCircuit {
 		}
 
 		public static readonly DependencyProperty SelectedValueProperty = DependencyProperty.Register("SelectedValue", typeof(object), typeof(ColorPicker));
-		public object SelectedValue {
+		public object? SelectedValue {
 			get { return this.GetValue(ColorPicker.SelectedValueProperty); }
 			set { this.SetValue(ColorPicker.SelectedValueProperty, value); }
 		}
@@ -159,7 +159,7 @@ namespace LogicCircuit {
 			List<Color> list = new List<Color>(
 				typeof(Colors)
 				.GetProperties(BindingFlags.Public | BindingFlags.Static)
-				.Select(p => (Color)p.GetValue(null, null))
+				.Select(p => (Color)p.GetValue(null, null)!)
 				.Where(c => !this.StandardColors.Contains(c))
 			);
 			list.Sort(ColorComparer.comparer);
@@ -201,21 +201,21 @@ namespace LogicCircuit {
 						this.AddRecent(color);
 						this.Dispatcher.BeginInvoke(new Action(() => this.SelectedValue = null));
 					} else if(e.Property == ColorPicker.CustomColorProperty) {
-						this.SetColor((Color)e.NewValue);
+						this.SetColor((Color)e.NewValue!);
 					} else if(e.Property == ColorPicker.HueProperty) {
-						this.SetColor((double)e.NewValue, this.Saturation, this.Lightness);
+						this.SetColor((double)e.NewValue!, this.Saturation, this.Lightness);
 					} else if(e.Property == ColorPicker.SaturationProperty) {
-						this.SetColor(this.Hue, (double)e.NewValue, this.Lightness);
+						this.SetColor(this.Hue, (double)e.NewValue!, this.Lightness);
 					} else if(e.Property == ColorPicker.LightnessProperty) {
-						this.SetColor(this.Hue, this.Saturation, (double)e.NewValue);
+						this.SetColor(this.Hue, this.Saturation, (double)e.NewValue!);
 					} else if(e.Property == ColorPicker.RProperty) {
-						this.SetColor(this.A, (int)e.NewValue, this.G, this.B);
+						this.SetColor(this.A, (int)e.NewValue!, this.G, this.B);
 					} else if(e.Property == ColorPicker.GProperty) {
-						this.SetColor(this.A, this.R, (int)e.NewValue, this.B);
+						this.SetColor(this.A, this.R, (int)e.NewValue!, this.B);
 					} else if(e.Property == ColorPicker.BProperty) {
-						this.SetColor(this.A, this.R, this.G, (int)e.NewValue);
+						this.SetColor(this.A, this.R, this.G, (int)e.NewValue!);
 					} else if(e.Property == ColorPicker.AProperty) {
-						this.SetColor((int)e.NewValue, this.R, this.G, this.B);
+						this.SetColor((int)e.NewValue!, this.R, this.G, this.B);
 					}
 				} finally {
 					this.editing = false;

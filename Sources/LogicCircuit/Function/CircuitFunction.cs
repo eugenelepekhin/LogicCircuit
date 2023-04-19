@@ -20,9 +20,9 @@ namespace LogicCircuit {
 
 		public long Iteration { get; set; }
 		[SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
-		public CircuitFunction[] Dependent { get; set; }
+		public CircuitFunction[]? Dependent { get; set; }
 
-		protected CircuitFunction(CircuitState circuitState, int[] parameter, int[] result) {
+		protected CircuitFunction(CircuitState circuitState, int[]? parameter, int[]? result) {
 			this.CircuitState = circuitState;
 			this.parameter = parameter ?? CircuitFunction.EmptyList;
 			this.result = result ?? CircuitFunction.EmptyList;

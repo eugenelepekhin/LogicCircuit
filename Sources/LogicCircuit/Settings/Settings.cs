@@ -22,9 +22,9 @@ namespace LogicCircuit {
 
 		private readonly Dictionary<string, string> property = new Dictionary<string, string>();
 
-		public string this[string propertyName] {
+		public string? this[string propertyName] {
 			get {
-				if(this.property.TryGetValue(propertyName, out string value)) {
+				if(this.property.TryGetValue(propertyName, out string? value)) {
 					return value;
 				}
 				return null;
@@ -93,7 +93,7 @@ namespace LogicCircuit {
 
 	public sealed class UserSettings : Settings, IDisposable, INotifyPropertyChanged {
 
-		public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler? PropertyChanged;
 
 		private readonly SettingsIntegerCache maxRecentFileCount;
 		private readonly SettingsBoolCache loadLastFileOnStartup;
@@ -101,7 +101,7 @@ namespace LogicCircuit {
 		private readonly SettingsEnumCache<GateShape> gateShape;
 
 		private readonly Dictionary<string, DateTime> recentFile = new Dictionary<string, DateTime>(StringComparer.OrdinalIgnoreCase);
-		private FileSystemWatcher fileWatcher;
+		private FileSystemWatcher? fileWatcher;
 		public bool IsFirstRun { get; private set; }
 
 		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
@@ -121,7 +121,7 @@ namespace LogicCircuit {
 			}
 			try {
 				this.Load(file);
-				this.fileWatcher.Path = Path.GetDirectoryName(file);
+				this.fileWatcher.Path = Path.GetDirectoryName(file)!;
 				this.fileWatcher.Filter = Path.GetFileName(file);
 				this.fileWatcher.Changed += new FileSystemEventHandler(this.FileChanged);
 				this.fileWatcher.EnableRaisingEvents = true;
@@ -156,7 +156,7 @@ namespace LogicCircuit {
 
 		[SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands")]
 		public void Save() {
-			bool enabled = this.fileWatcher.EnableRaisingEvents;
+			bool enabled = this.fileWatcher!.EnableRaisingEvents;
 			try {
 				this.fileWatcher.EnableRaisingEvents = false;
 				this.Save(UserSettings.FileName());
@@ -169,7 +169,7 @@ namespace LogicCircuit {
 			Assembly assembly = Assembly.GetEntryAssembly() ?? typeof(Settings).Assembly;
 			return Path.Combine(
 				Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-				assembly.GetName().Name,
+				assembly.GetName().Name!,
 				"Settings.xml"
 			);
 		}
@@ -274,7 +274,7 @@ namespace LogicCircuit {
 		///
 		/// </summary>
 		/// <returns></returns>
-		public string RecentFile() {
+		public string? RecentFile() {
 			List<KeyValuePair<string, DateTime>> list = this.AllRecentFiles();
 			if(0 < list.Count) {
 				return list[0].Key;

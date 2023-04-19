@@ -17,7 +17,7 @@ namespace LogicCircuit.DataPersistent {
 	}
 
 	internal interface IPrimaryKeyHolder {
-		IUniqueIndex<TField> PrimaryKey<TField>();
+		IUniqueIndex<TField>? PrimaryKey<TField>();
 		List<IForeignKey> Children { get; }
 	}
 

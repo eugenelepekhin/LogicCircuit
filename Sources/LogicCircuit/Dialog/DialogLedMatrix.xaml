@@ -36,22 +36,22 @@
 		/>
 
 		<Label Content="{x:Static properties:Resources.TitleCellShape}"/>
-		<ComboBox Name="cellShape" SelectedIndex="{Binding Path=CellShape}">
+		<ComboBox SelectedIndex="{Binding Path=CellShape}">
 			<ComboBoxItem Style="{StaticResource ShapeContainerStyle}"><Ellipse   Style="{StaticResource ShapeStyle}"/></ComboBoxItem>
 			<ComboBoxItem Style="{StaticResource ShapeContainerStyle}"><Rectangle Style="{StaticResource ShapeStyle}"/></ComboBoxItem>
 		</ComboBox>
 
 		<Label Content="{x:Static properties:Resources.TitleRows}"/>
-		<ComboBox Name="rows" ItemsSource="{x:Static lc:LedMatrixDescriptor.RowsRange}" SelectedItem="{Binding Path=Rows}"/>
+		<ComboBox ItemsSource="{x:Static lc:LedMatrixDescriptor.RowsRange}" SelectedItem="{Binding Path=Rows}"/>
 
 		<Label Content="{x:Static properties:Resources.TitleColumns}"/>
-		<ComboBox Name="columns" ItemsSource="{x:Static lc:LedMatrixDescriptor.ColumnsRange}" SelectedItem="{Binding Path=Columns}"/>
+		<ComboBox ItemsSource="{x:Static lc:LedMatrixDescriptor.ColumnsRange}" SelectedItem="{Binding Path=Columns}"/>
 
 		<Label Content="{x:Static properties:Resources.TitleColors}"/>
-		<ComboBox Name="colors" ItemsSource="{Binding Path=ColorRange}" SelectedItem="{Binding Path=Colors}"/>
+		<ComboBox ItemsSource="{Binding Path=ColorRange}" SelectedItem="{Binding Path=Colors}"/>
 
 		<Label Content="{x:Static properties:Resources.TitleDescription}"/>
-		<TextBox Name="note" Text="{Binding Path=Note}" Style="{StaticResource NoteEditor}"/>
+		<TextBox Text="{Binding Path=Note}" Style="{StaticResource NoteEditor}"/>
 
 		<StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
 			<Button Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" Click="ButtonOkClick"/>

@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace LogicCircuit {
-	public struct GridPoint {
+	public struct GridPoint : IEquatable<GridPoint> {
 		public int X { get; private set; }
 		public int Y { get; private set; }
 
@@ -18,13 +18,15 @@ namespace LogicCircuit {
 			return point1.X != point2.X || point1.Y != point2.Y;
 		}
 
-		public override bool Equals(object obj) {
+		public override bool Equals(object? obj) {
 			if((obj == null) || !(obj is GridPoint)) {
 				return false;
 			}
 			GridPoint point = (GridPoint)obj;
 			return this == point;
 		}
+
+		public bool Equals(GridPoint other) => this == other;
 
 		public override int GetHashCode() {
 			return this.X ^ this.Y;

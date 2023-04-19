@@ -13,7 +13,7 @@ namespace LogicCircuit {
 	/// </summary>
 	public partial class DialogSensor : Window, IDataErrorInfo {
 
-		private SettingsWindowLocationCache windowLocation;
+		private SettingsWindowLocationCache? windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 
 		private readonly Sensor sensor;
@@ -29,21 +29,21 @@ namespace LogicCircuit {
 		public string RandomMax { get; set; }
 		public string ManualInitialValue { get; set; }
 
-		public string Error { get { return null; } }
+		public string Error { get { return null!; } }
 
 		private int parsedMin = -1, parsedMax = -1;
-		private string dataError;
 
 		public string this[string columnName] {
 			get {
 				int old;
-				string error = null;
+				string? dataError = null;
+				string? error = null;
 				switch(columnName) {
-				case "SeriesData":
-					this.dataError = Sensor.ParseError(this.SeriesData);
-					error = this.dataError;
+				case nameof(this.SeriesData):
+					dataError = Sensor.ParseError(this.SeriesData);
+					error = dataError;
 					break;
-				case "RandomMin":
+				case nameof(RandomMin):
 					old = this.parsedMin;
 					if(!int.TryParse(this.RandomMin.Trim(), NumberStyles.None, Properties.Resources.Culture, out this.parsedMin) || this.parsedMin < 1) {
 						this.parsedMin = -1;
@@ -57,7 +57,7 @@ namespace LogicCircuit {
 						this.maxTicks.GetBindingExpression(TextBox.TextProperty).UpdateSource();
 					}
 					break;
-				case "RandomMax":
+				case nameof(this.RandomMax):
 					old = this.parsedMax;
 					if(!int.TryParse(this.RandomMax.Trim(), NumberStyles.None, Properties.Resources.Culture, out this.parsedMax)) {
 						this.parsedMax = -1;
@@ -71,7 +71,7 @@ namespace LogicCircuit {
 						this.minTicks.GetBindingExpression(TextBox.TextProperty).UpdateSource();
 					}
 					break;
-				case "ManualInitialValue":
+				case nameof(this.ManualInitialValue):
 					if(!int.TryParse(this.ManualInitialValue.Trim(), NumberStyles.HexNumber, CultureInfo.InvariantCulture, out _)) {
 						error = Properties.Resources.ErrorBadHexNumber;
 					}
@@ -80,7 +80,7 @@ namespace LogicCircuit {
 				if(this.buttonOk != null) {
 					switch(this.SelectedSensorType.Value) {
 					case SensorType.Series:
-						this.buttonOk.IsEnabled = string.IsNullOrWhiteSpace(this.dataError);
+						this.buttonOk.IsEnabled = string.IsNullOrWhiteSpace(dataError);
 						break;
 					case SensorType.Random:
 						this.buttonOk.IsEnabled = (0 < this.parsedMin && this.parsedMin <= this.parsedMax);
@@ -93,7 +93,7 @@ namespace LogicCircuit {
 						break;
 					}
 				}
-				return error;
+				return error!;
 			}
 		}
 

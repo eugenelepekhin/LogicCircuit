@@ -31,7 +31,7 @@ namespace LogicCircuit {
 		public bool CategoryTextNoteCollapsed;
 		public bool CategoryInputOutputCollapsed;
 		public bool CategoryPrimitivesCollapsed;
-		internal Project Project;
+		internal Project? Project;
 		// Field accessors
 		// Accessor of the ProjectId field
 		public sealed class ProjectIdField : IField<ProjectData, Guid>, IFieldSerializer<ProjectData> {
@@ -84,7 +84,7 @@ namespace LogicCircuit {
 			public int Compare(ref ProjectData l, ref ProjectData r) {
 				return StringComparer.Ordinal.Compare(l.Name, r.Name);
 			}
-			public int Compare(string l, string r) {
+			public int Compare(string? l, string? r) {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
@@ -119,7 +119,7 @@ namespace LogicCircuit {
 			public int Compare(ref ProjectData l, ref ProjectData r) {
 				return StringComparer.Ordinal.Compare(l.Note, r.Note);
 			}
-			public int Compare(string l, string r) {
+			public int Compare(string? l, string? r) {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
@@ -425,9 +425,9 @@ namespace LogicCircuit {
 			private ProjectField() {}
 			public string Name { get { return "ProjectWrapper"; } }
 			public int Order { get; set; }
-			public Project DefaultValue { get { return null; } }
+			public Project DefaultValue { get { return null!; } }
 			public Project GetValue(ref ProjectData record) {
-				return record.Project;
+				return record.Project!;
 			}
 			public void SetValue(ref ProjectData record, Project value) {
 				record.Project = value;
@@ -435,7 +435,7 @@ namespace LogicCircuit {
 			public int Compare(ref ProjectData l, ref ProjectData r) {
 				return this.Compare(l.Project, r.Project);
 			}
-			public int Compare(Project l, Project r) {
+			public int Compare(Project? l, Project? r) {
 				if(object.ReferenceEquals(l, r)) return 0;
 				if(l == null) return -1;
 				if(r == null) return 1;
@@ -469,7 +469,8 @@ namespace LogicCircuit {
 
 		// Creates all foreign keys of the table
 		public static void CreateForeignKeys(StoreSnapshot store) {
-			TableSnapshot<ProjectData> table = (TableSnapshot<ProjectData>)store.Table("Project");
+			TableSnapshot<ProjectData>? table = (TableSnapshot<ProjectData>?)store.Table("Project");
+			Debug.Assert(table != null);
 			table.CreateForeignKey("FK_LogicalCircuit_Project", store.Table("LogicalCircuit"), ProjectData.LogicalCircuitIdField.Field, ForeignKeyAction.Restrict, false);
 			table.CreateForeignKey("FK_StartupCircuit_Project", store.Table("LogicalCircuit"), ProjectData.StartupCircuitIdField.Field, ForeignKeyAction.SetDefault, true);
 		}
@@ -484,6 +485,7 @@ namespace LogicCircuit {
 		public CircuitProject CircuitProject { get; private set; }
 
 		// Constructor
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public Project(CircuitProject store, RowId rowIdProject) {
 			Debug.Assert(!rowIdProject.IsEmpty);
 			this.CircuitProject = store;
@@ -492,6 +494,7 @@ namespace LogicCircuit {
 			this.Table.SetField(this.ProjectRowId, ProjectData.ProjectField.Field, this);
 			this.InitializeProject();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		partial void InitializeProject();
 
@@ -547,13 +550,13 @@ namespace LogicCircuit {
 
 		// Gets or sets the value referred by the foreign key on field LogicalCircuitId
 		public LogicalCircuit LogicalCircuit {
-			get { return this.CircuitProject.LogicalCircuitSet.FindByLogicalCircuitId(this.Table.GetField(this.ProjectRowId, ProjectData.LogicalCircuitIdField.Field)); }
+			get { return this.CircuitProject.LogicalCircuitSet.FindByLogicalCircuitId(this.Table.GetField(this.ProjectRowId, ProjectData.LogicalCircuitIdField.Field))!; }
 			set { this.Table.SetField(this.ProjectRowId, ProjectData.LogicalCircuitIdField.Field, value.LogicalCircuitId); }
 		}
 
 		// Gets or sets the value referred by the foreign key on field StartupCircuitId
 		public LogicalCircuit StartupCircuit {
-			get { return this.CircuitProject.LogicalCircuitSet.FindByLogicalCircuitId(this.Table.GetField(this.ProjectRowId, ProjectData.StartupCircuitIdField.Field)); }
+			get { return this.CircuitProject.LogicalCircuitSet.FindByLogicalCircuitId(this.Table.GetField(this.ProjectRowId, ProjectData.StartupCircuitIdField.Field))!; }
 			set { this.Table.SetField(this.ProjectRowId, ProjectData.StartupCircuitIdField.Field, value.LogicalCircuitId); }
 		}
 
@@ -575,10 +578,10 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.ProjectRowId, ProjectData.CategoryPrimitivesCollapsedField.Field, value); }
 		}
 
-		public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler? PropertyChanged;
 
 		protected void NotifyPropertyChanged(string name) {
-			PropertyChangedEventHandler handler = this.PropertyChanged;
+			PropertyChangedEventHandler? handler = this.PropertyChanged;
 			if(handler != null) {
 				handler(this, new PropertyChangedEventArgs(name));
 			}
@@ -635,7 +638,7 @@ namespace LogicCircuit {
 	// Wrapper for table Project.
 	partial class ProjectSet : INotifyCollectionChanged, IEnumerable<Project> {
 
-		public event NotifyCollectionChangedEventHandler CollectionChanged;
+		public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
 		internal TableSnapshot<ProjectData> Table { get; private set; }
 
@@ -643,8 +646,9 @@ namespace LogicCircuit {
 		public CircuitProject CircuitProject { get { return (CircuitProject)this.Table.StoreSnapshot; } }
 
 		// Constructor
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public ProjectSet(CircuitProject store) {
-			ITableSnapshot table = store.Table("Project");
+			ITableSnapshot? table = store.Table("Project");
 			if(table != null) {
 				Debug.Assert(store.IsFrozen, "The store should be frozen");
 				this.Table = (TableSnapshot<ProjectData>)table;
@@ -654,6 +658,7 @@ namespace LogicCircuit {
 			}
 			this.InitializeProjectSet();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		partial void InitializeProjectSet();
 
@@ -665,7 +670,7 @@ namespace LogicCircuit {
 
 
 		// gets items wrapper by RowId
-		public Project Find(RowId rowId) {
+		public Project? Find(RowId rowId) {
 			if(!rowId.IsEmpty) {
 				return this.Table.GetField(rowId, ProjectData.ProjectField.Field);
 			}
@@ -676,13 +681,14 @@ namespace LogicCircuit {
 		// gets items wrapper by RowId
 		private IEnumerable<Project> Select(IEnumerable<RowId> rows) {
 			foreach(RowId rowId in rows) {
-				Project item = this.Find(rowId);
+				Project? item = this.Find(rowId);
 				Debug.Assert(item != null, "What is the reason for the item not to be found?");
 				yield return item;
 			}
 		}
 
 		// Create wrapper for the row and register it in the dictionary
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static")]
 		private Project Create(RowId rowId) {
 			Project item = new Project(this.CircuitProject, rowId);
 			return item;
@@ -691,7 +697,7 @@ namespace LogicCircuit {
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		internal Project FindOrCreate(RowId rowId) {
 			Debug.Assert(!rowId.IsEmpty && !this.Table.IsDeleted(rowId), "Bad RowId");
-			Project item;
+			Project? item;
 			if((item = this.Find(rowId)) != null) {
 				Debug.Assert(!item.IsDeleted(), "Deleted item should not be present in the dictionary");
 				return item;
@@ -734,7 +740,7 @@ namespace LogicCircuit {
 		// Search helpers
 
 		// Finds Project by ProjectId
-		public Project Find(Guid projectId) {
+		public Project? Find(Guid projectId) {
 			return this.Find(this.Table.Find(ProjectData.ProjectIdField.Field, projectId));
 		}
 
@@ -757,17 +763,17 @@ namespace LogicCircuit {
 		}
 
 		private void NotifyCollectionChanged(NotifyCollectionChangedEventArgs arg) {
-			NotifyCollectionChangedEventHandler handler = this.CollectionChanged;
+			NotifyCollectionChangedEventHandler? handler = this.CollectionChanged;
 			if(handler != null) {
 				handler(this, arg);
 			}
 		}
 
-		internal List<Project> UpdateSet(int oldVersion, int newVersion) {
-			IEnumerator<TableChange<ProjectData>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
+		internal List<Project>? UpdateSet(int oldVersion, int newVersion) {
+			IEnumerator<TableChange<ProjectData>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
 			if(change != null) {
 				bool handlerAttached = (this.CollectionChanged != null);
-				List<Project> del = (handlerAttached) ? new List<Project>() : null;
+				List<Project>? del = (handlerAttached) ? new List<Project>() : null;
 				while(change.MoveNext()) {
 					switch(change.Current.Action) {
 					case SnapTableAction.Insert:
@@ -778,7 +784,7 @@ namespace LogicCircuit {
 						if(handlerAttached) {
 							Project item = change.Current.GetOldField(ProjectData.ProjectField.Field);
 							Debug.Assert(item.IsDeleted());
-							del.Add(item);
+							del!.Add(item);
 						}
 						break;
 					default:
@@ -793,11 +799,11 @@ namespace LogicCircuit {
 			return null;
 		}
 
-		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<Project> deleted) {
-			IEnumerator<TableChange<ProjectData>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
+		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<Project>? deleted) {
+			IEnumerator<TableChange<ProjectData>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
 			if(change != null) {
 				bool handlerAttached = (this.CollectionChanged != null);
-				List<Project> add = (handlerAttached) ? new List<Project>() : null;
+				List<Project>? add = (handlerAttached) ? new List<Project>() : null;
 				this.StartNotifyProjectSetChanged(oldVersion, newVersion);
 				while(change.MoveNext()) {
 					this.NotifyProjectSetChanged(change.Current);
@@ -805,7 +811,7 @@ namespace LogicCircuit {
 					case SnapTableAction.Insert:
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item was not created?");
 						if(handlerAttached) {
-							add.Add(this.Find(change.Current.RowId));
+							add!.Add(this.Find(change.Current.RowId)!);
 						}
 						break;
 					case SnapTableAction.Delete:
@@ -814,7 +820,7 @@ namespace LogicCircuit {
 					default:
 						Debug.Assert(change.Current.Action == SnapTableAction.Update, "Unknown action");
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item does not exist during update?");
-						this.Find(change.Current.RowId).NotifyChanged(change.Current);
+						this.Find(change.Current.RowId)!.NotifyChanged(change.Current);
 						break;
 					}
 				}
@@ -823,7 +829,7 @@ namespace LogicCircuit {
 					if(deleted != null && 0 < deleted.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, deleted));
 					}
-					if(0 < add.Count) {
+					if(0 < add!.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, add));
 					}
 				}

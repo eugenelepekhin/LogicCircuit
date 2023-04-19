@@ -24,15 +24,15 @@ namespace LogicCircuit {
 		) {
 			this.settings = settings;
 			this.key = key;
-			string text = this.settings[this.key];
+			string? text = this.settings[this.key];
 			if(string.IsNullOrWhiteSpace(text)) {
 				text = defaultValue;
 			}
 			GridLengthConverter converter = new GridLengthConverter();
-			GridLength original = (GridLength)converter.ConvertFromInvariantString(defaultValue);
+			GridLength original = (GridLength)converter.ConvertFromInvariantString(defaultValue)!;
 			bool success = false;
 			try {
-				this.cache = (GridLength)converter.ConvertFromInvariantString(text);
+				this.cache = (GridLength)converter.ConvertFromInvariantString(text)!;
 				if(this.cache.GridUnitType != original.GridUnitType) {
 					this.cache = original;
 				}

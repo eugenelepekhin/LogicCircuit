@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Windows;
@@ -14,7 +15,7 @@ namespace LogicCircuit {
 
 		public Point ScrollOffset { get; set; }
 
-		private ConductorMap conductorMap;
+		private ConductorMap? conductorMap;
 
 		public void UpdateConductorMap() {
 			this.conductorMap = new ConductorMap(this);
@@ -24,7 +25,7 @@ namespace LogicCircuit {
 			if(this.conductorMap == null) {
 				this.UpdateConductorMap();
 			}
-			return this.conductorMap;
+			return this.conductorMap!;
 		}
 
 		public override void Delete() {
@@ -152,7 +153,7 @@ namespace LogicCircuit {
 
 	[SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
 	public sealed partial class LogicalCircuitSet : NamedItemSet {
-		public event EventHandler LogicalCircuitSetChanged;
+		public event EventHandler? LogicalCircuitSetChanged;
 
 		private HashSet<LogicalCircuit> invalid = new HashSet<LogicalCircuit>();
 		public IEnumerable<LogicalCircuit> Invalid { get { return this.invalid; } }
@@ -174,9 +175,9 @@ namespace LogicCircuit {
 			return circuit;
 		}
 
-		private void CircuitPropertyChanged(object sender, PropertyChangedEventArgs e) {
+		private void CircuitPropertyChanged(object? sender, PropertyChangedEventArgs e) {
 			if(e.PropertyName == "CircuitShape") {
-				this.Invalidate((LogicalCircuit)sender);
+				this.Invalidate((LogicalCircuit)sender!);
 			}
 		}
 
@@ -207,7 +208,7 @@ namespace LogicCircuit {
 		}
 
 		public LogicalCircuit Copy(LogicalCircuit other, bool deepCopy) {
-			LogicalCircuit logicalCircuit = this.FindByLogicalCircuitId(other.LogicalCircuitId);
+			LogicalCircuit? logicalCircuit = this.FindByLogicalCircuitId(other.LogicalCircuitId);
 			Tracer.Assert(deepCopy || logicalCircuit == null);
 			if(logicalCircuit == null) {
 				LogicalCircuitData data;

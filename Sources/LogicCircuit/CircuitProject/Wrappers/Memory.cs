@@ -29,7 +29,7 @@ namespace LogicCircuit {
 		public bool DualPort;
 		public string Data;
 		public string Note;
-		internal Memory Memory;
+		internal Memory? Memory;
 		// Field accessors
 		// Accessor of the MemoryId field
 		public sealed class MemoryIdField : IField<MemoryData, Guid>, IFieldSerializer<MemoryData> {
@@ -292,7 +292,7 @@ namespace LogicCircuit {
 			public int Compare(ref MemoryData l, ref MemoryData r) {
 				return StringComparer.Ordinal.Compare(l.Data, r.Data);
 			}
-			public int Compare(string l, string r) {
+			public int Compare(string? l, string? r) {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
@@ -327,7 +327,7 @@ namespace LogicCircuit {
 			public int Compare(ref MemoryData l, ref MemoryData r) {
 				return StringComparer.Ordinal.Compare(l.Note, r.Note);
 			}
-			public int Compare(string l, string r) {
+			public int Compare(string? l, string? r) {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
@@ -353,9 +353,9 @@ namespace LogicCircuit {
 			private MemoryField() {}
 			public string Name { get { return "MemoryWrapper"; } }
 			public int Order { get; set; }
-			public Memory DefaultValue { get { return null; } }
+			public Memory DefaultValue { get { return null!; } }
 			public Memory GetValue(ref MemoryData record) {
-				return record.Memory;
+				return record.Memory!;
 			}
 			public void SetValue(ref MemoryData record, Memory value) {
 				record.Memory = value;
@@ -363,7 +363,7 @@ namespace LogicCircuit {
 			public int Compare(ref MemoryData l, ref MemoryData r) {
 				return this.Compare(l.Memory, r.Memory);
 			}
-			public int Compare(Memory l, Memory r) {
+			public int Compare(Memory? l, Memory? r) {
 				if(object.ReferenceEquals(l, r)) return 0;
 				if(l == null) return -1;
 				if(r == null) return 1;
@@ -395,7 +395,8 @@ namespace LogicCircuit {
 
 		// Creates all foreign keys of the table
 		public static void CreateForeignKeys(StoreSnapshot store) {
-			TableSnapshot<MemoryData> table = (TableSnapshot<MemoryData>)store.Table("Memory");
+			TableSnapshot<MemoryData>? table = (TableSnapshot<MemoryData>?)store.Table("Memory");
+			Debug.Assert(table != null);
 			table.CreateForeignKey("PK_Memory", store.Table("Circuit"), MemoryData.MemoryIdField.Field, ForeignKeyAction.Cascade, false);
 		}
 	}
@@ -407,6 +408,7 @@ namespace LogicCircuit {
 		internal RowId MemoryRowId { get; private set; }
 
 		// Constructor
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public Memory(CircuitProject store, RowId rowIdMemory, RowId rowIdCircuit) : base(store, rowIdCircuit) {
 			Debug.Assert(!rowIdMemory.IsEmpty);
 			this.MemoryRowId = rowIdMemory;
@@ -414,6 +416,7 @@ namespace LogicCircuit {
 			this.Table.SetField(this.MemoryRowId, MemoryData.MemoryField.Field, this);
 			this.InitializeMemory();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		partial void InitializeMemory();
 
@@ -520,7 +523,7 @@ namespace LogicCircuit {
 	// Wrapper for table Memory.
 	partial class MemorySet : INotifyCollectionChanged, IEnumerable<Memory> {
 
-		public event NotifyCollectionChangedEventHandler CollectionChanged;
+		public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
 		internal TableSnapshot<MemoryData> Table { get; private set; }
 
@@ -528,8 +531,9 @@ namespace LogicCircuit {
 		public CircuitProject CircuitProject { get { return (CircuitProject)this.Table.StoreSnapshot; } }
 
 		// Constructor
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public MemorySet(CircuitProject store) {
-			ITableSnapshot table = store.Table("Memory");
+			ITableSnapshot? table = store.Table("Memory");
 			if(table != null) {
 				Debug.Assert(store.IsFrozen, "The store should be frozen");
 				this.Table = (TableSnapshot<MemoryData>)table;
@@ -539,6 +543,7 @@ namespace LogicCircuit {
 			}
 			this.InitializeMemorySet();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		partial void InitializeMemorySet();
 
@@ -550,7 +555,7 @@ namespace LogicCircuit {
 
 
 		// gets items wrapper by RowId
-		public Memory Find(RowId rowId) {
+		public Memory? Find(RowId rowId) {
 			if(!rowId.IsEmpty) {
 				return this.Table.GetField(rowId, MemoryData.MemoryField.Field);
 			}
@@ -561,13 +566,14 @@ namespace LogicCircuit {
 		// gets items wrapper by RowId
 		private IEnumerable<Memory> Select(IEnumerable<RowId> rows) {
 			foreach(RowId rowId in rows) {
-				Memory item = this.Find(rowId);
+				Memory? item = this.Find(rowId);
 				Debug.Assert(item != null, "What is the reason for the item not to be found?");
 				yield return item;
 			}
 		}
 
 		// Create wrapper for the row and register it in the dictionary
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static")]
 		private Memory Create(RowId rowId, RowId CircuitRowId) {
 			Memory item = new Memory(this.CircuitProject, rowId, CircuitRowId);
 			return item;
@@ -576,7 +582,7 @@ namespace LogicCircuit {
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		internal Memory FindOrCreate(RowId rowId) {
 			Debug.Assert(!rowId.IsEmpty && !this.Table.IsDeleted(rowId), "Bad RowId");
-			Memory item;
+			Memory? item;
 			if((item = this.Find(rowId)) != null) {
 				Debug.Assert(!item.IsDeleted(), "Deleted item should not be present in the dictionary");
 				return item;
@@ -584,7 +590,8 @@ namespace LogicCircuit {
 			Guid primaryKeyValue = this.Table.GetField(rowId, MemoryData.MemoryIdField.Field);
 
 
-			TableSnapshot<CircuitData> tableCircuit = (TableSnapshot<CircuitData>)this.CircuitProject.Table("Circuit");
+			TableSnapshot<CircuitData>? tableCircuit = (TableSnapshot<CircuitData>?)this.CircuitProject.Table("Circuit");
+			Debug.Assert(tableCircuit != null);
 			return this.Create(rowId, tableCircuit.Find(CircuitData.CircuitIdField.Field, primaryKeyValue));
 		}
 
@@ -603,7 +610,8 @@ namespace LogicCircuit {
 			// Fields of Circuit table
 
 		) {
-			TableSnapshot<CircuitData> tableCircuit = (TableSnapshot<CircuitData>)this.CircuitProject.Table("Circuit");
+			TableSnapshot<CircuitData>? tableCircuit = (TableSnapshot<CircuitData>?)this.CircuitProject.Table("Circuit");
+			Debug.Assert(tableCircuit != null);
 			CircuitData dataCircuit = new CircuitData() {
 				CircuitId = MemoryId
 			};
@@ -626,7 +634,7 @@ namespace LogicCircuit {
 		// Search helpers
 
 		// Finds Memory by MemoryId
-		public Memory FindByMemoryId(Guid memoryId) {
+		public Memory? FindByMemoryId(Guid memoryId) {
 			return this.Find(this.Table.Find(MemoryData.MemoryIdField.Field, memoryId));
 		}
 
@@ -639,17 +647,17 @@ namespace LogicCircuit {
 		}
 
 		private void NotifyCollectionChanged(NotifyCollectionChangedEventArgs arg) {
-			NotifyCollectionChangedEventHandler handler = this.CollectionChanged;
+			NotifyCollectionChangedEventHandler? handler = this.CollectionChanged;
 			if(handler != null) {
 				handler(this, arg);
 			}
 		}
 
-		internal List<Memory> UpdateSet(int oldVersion, int newVersion) {
-			IEnumerator<TableChange<MemoryData>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
+		internal List<Memory>? UpdateSet(int oldVersion, int newVersion) {
+			IEnumerator<TableChange<MemoryData>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
 			if(change != null) {
 				bool handlerAttached = (this.CollectionChanged != null);
-				List<Memory> del = (handlerAttached) ? new List<Memory>() : null;
+				List<Memory>? del = (handlerAttached) ? new List<Memory>() : null;
 				while(change.MoveNext()) {
 					switch(change.Current.Action) {
 					case SnapTableAction.Insert:
@@ -660,7 +668,7 @@ namespace LogicCircuit {
 						if(handlerAttached) {
 							Memory item = change.Current.GetOldField(MemoryData.MemoryField.Field);
 							Debug.Assert(item.IsDeleted());
-							del.Add(item);
+							del!.Add(item);
 						}
 						break;
 					default:
@@ -675,11 +683,11 @@ namespace LogicCircuit {
 			return null;
 		}
 
-		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<Memory> deleted) {
-			IEnumerator<TableChange<MemoryData>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
+		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<Memory>? deleted) {
+			IEnumerator<TableChange<MemoryData>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
 			if(change != null) {
 				bool handlerAttached = (this.CollectionChanged != null);
-				List<Memory> add = (handlerAttached) ? new List<Memory>() : null;
+				List<Memory>? add = (handlerAttached) ? new List<Memory>() : null;
 				this.StartNotifyMemorySetChanged(oldVersion, newVersion);
 				while(change.MoveNext()) {
 					this.NotifyMemorySetChanged(change.Current);
@@ -687,7 +695,7 @@ namespace LogicCircuit {
 					case SnapTableAction.Insert:
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item was not created?");
 						if(handlerAttached) {
-							add.Add(this.Find(change.Current.RowId));
+							add!.Add(this.Find(change.Current.RowId)!);
 						}
 						break;
 					case SnapTableAction.Delete:
@@ -696,7 +704,7 @@ namespace LogicCircuit {
 					default:
 						Debug.Assert(change.Current.Action == SnapTableAction.Update, "Unknown action");
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item does not exist during update?");
-						this.Find(change.Current.RowId).NotifyChanged(change.Current);
+						this.Find(change.Current.RowId)!.NotifyChanged(change.Current);
 						break;
 					}
 				}
@@ -705,7 +713,7 @@ namespace LogicCircuit {
 					if(deleted != null && 0 < deleted.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, deleted));
 					}
-					if(0 < add.Count) {
+					if(0 < add!.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, add));
 					}
 				}

@@ -8,12 +8,12 @@ using System.Windows.Shapes;
 namespace LogicCircuit {
 	public class Function7Segment : Probe, IFunctionVisual {
 
-		private static Brush[] stateBrush;
+		private static Brush[]? stateBrush;
 
 		private readonly List<CircuitSymbol> circuitSymbol;
 		private readonly Project project;
-		private LogicalCircuit lastLogicalCircuit;
-		private Canvas lastBack;
+		private LogicalCircuit? lastLogicalCircuit;
+		private Canvas? lastBack;
 
 		public Function7Segment(CircuitState circuitState, IEnumerable<CircuitSymbol> symbols, int[] parameter) : base(circuitState, parameter) {
 			if(Function7Segment.stateBrush == null) {
@@ -38,7 +38,7 @@ namespace LogicCircuit {
 			}
 			if(this.lastBack == null) {
 				if(this.circuitSymbol.Count == 1) {
-					this.lastBack = (Canvas)this.circuitSymbol[0].ProbeView;
+					this.lastBack = (Canvas)this.circuitSymbol[0].ProbeView!;
 				} else {
 					CircuitSymbol symbol = this.circuitSymbol.First(s => s.LogicalCircuit == currentCircuit);
 					this.lastBack = this.ProbeView(symbol);
@@ -51,7 +51,7 @@ namespace LogicCircuit {
 		}
 
 		private static void SetVisual(Shape shape, State state) {
-			Brush brush = Function7Segment.stateBrush[(int)state];
+			Brush brush = Function7Segment.stateBrush![(int)state];
 			if(shape is Line line) {
 				line.Stroke = brush;
 			} else {
@@ -82,7 +82,7 @@ namespace LogicCircuit {
 
 		private Canvas ProbeView(CircuitSymbol symbol) {
 			if(symbol == this.circuitSymbol[0]) {
-				return (Canvas)this.circuitSymbol[0].ProbeView;
+				return (Canvas)this.circuitSymbol[0].ProbeView!;
 			} else {
 				DisplayCanvas canvas = (DisplayCanvas)symbol.Glyph;
 				return (Canvas)canvas.DisplayOf(this.circuitSymbol);

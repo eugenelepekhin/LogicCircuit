@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -22,8 +23,8 @@ namespace LogicCircuit {
 
 		public int Value { get { return this.sensorValue.Value; } }
 
-		private Brush defaultBackground;
-		private Brush errorBackground;
+		private Brush? defaultBackground;
+		private Brush? errorBackground;
 
 		public FunctionSensor(CircuitState circuitState, CircuitSymbol symbol, int[] result) : base(circuitState, null, result) {
 			this.CircuitSymbol = symbol;
@@ -41,9 +42,9 @@ namespace LogicCircuit {
 				break;
 			default:
 				Tracer.Fail();
-				this.sensorValue = null;
 				break;
 			}
+			Debug.Assert(this.sensorValue != null);
 		}
 
 		public bool Flip() {
@@ -185,9 +186,12 @@ namespace LogicCircuit {
 			private bool stop;
 
 			public SeriesValue(string data, bool isLoop, int bitWidth) : base(bitWidth) {
-				if(!Sensor.TryParseSeries(data, bitWidth, out this.list)) {
-					this.list = new List<SensorPoint>();
+				IList<SensorPoint>? l;
+				if(!Sensor.TryParseSeries(data, bitWidth, out l)) {
+					l = new List<SensorPoint>();
 				}
+				Debug.Assert(l != null);
+				this.list = l;
 				this.stop = (this.list.Count == 0);
 				this.isLoop = isLoop;
 				this.Reset();

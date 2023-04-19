@@ -3,8 +3,10 @@ using System.Windows.Media;
 
 namespace LogicCircuit {
 	public abstract class Jam {
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public BasePin Pin { get; protected set; }
 		public CircuitGlyph CircuitSymbol { get; protected set; }
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public int X { get { return this.Pin.GridPoint.X; } }
 		public int Y { get { return this.Pin.GridPoint.Y; } }
 
@@ -23,7 +25,6 @@ namespace LogicCircuit {
 					return this.CircuitSymbol.Point.Offset(this.X, this.Y);
 				}
 			}
-
 		}
 
 		public bool IsValid(int bitNumber) {

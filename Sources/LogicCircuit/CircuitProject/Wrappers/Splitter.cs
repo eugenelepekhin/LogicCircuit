@@ -24,7 +24,7 @@ namespace LogicCircuit {
 			set { this.fieldPinCount = BasePin.CheckBitWidth(value); }
 		}
 		public bool Clockwise;
-		internal Splitter Splitter;
+		internal Splitter? Splitter;
 		// Field accessors
 		// Accessor of the SplitterId field
 		public sealed class SplitterIdField : IField<SplitterData, Guid>, IFieldSerializer<SplitterData> {
@@ -173,9 +173,9 @@ namespace LogicCircuit {
 			private SplitterField() {}
 			public string Name { get { return "SplitterWrapper"; } }
 			public int Order { get; set; }
-			public Splitter DefaultValue { get { return null; } }
+			public Splitter DefaultValue { get { return null!; } }
 			public Splitter GetValue(ref SplitterData record) {
-				return record.Splitter;
+				return record.Splitter!;
 			}
 			public void SetValue(ref SplitterData record, Splitter value) {
 				record.Splitter = value;
@@ -183,7 +183,7 @@ namespace LogicCircuit {
 			public int Compare(ref SplitterData l, ref SplitterData r) {
 				return this.Compare(l.Splitter, r.Splitter);
 			}
-			public int Compare(Splitter l, Splitter r) {
+			public int Compare(Splitter? l, Splitter? r) {
 				if(object.ReferenceEquals(l, r)) return 0;
 				if(l == null) return -1;
 				if(r == null) return 1;
@@ -210,7 +210,8 @@ namespace LogicCircuit {
 
 		// Creates all foreign keys of the table
 		public static void CreateForeignKeys(StoreSnapshot store) {
-			TableSnapshot<SplitterData> table = (TableSnapshot<SplitterData>)store.Table("Splitter");
+			TableSnapshot<SplitterData>? table = (TableSnapshot<SplitterData>?)store.Table("Splitter");
+			Debug.Assert(table != null);
 			table.CreateForeignKey("PK_Splitter", store.Table("Circuit"), SplitterData.SplitterIdField.Field, ForeignKeyAction.Cascade, false);
 		}
 	}
@@ -222,6 +223,7 @@ namespace LogicCircuit {
 		internal RowId SplitterRowId { get; private set; }
 
 		// Constructor
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public Splitter(CircuitProject store, RowId rowIdSplitter, RowId rowIdCircuit) : base(store, rowIdCircuit) {
 			Debug.Assert(!rowIdSplitter.IsEmpty);
 			this.SplitterRowId = rowIdSplitter;
@@ -229,6 +231,7 @@ namespace LogicCircuit {
 			this.Table.SetField(this.SplitterRowId, SplitterData.SplitterField.Field, this);
 			this.InitializeSplitter();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		partial void InitializeSplitter();
 
@@ -290,7 +293,7 @@ namespace LogicCircuit {
 	// Wrapper for table Splitter.
 	partial class SplitterSet : INotifyCollectionChanged, IEnumerable<Splitter> {
 
-		public event NotifyCollectionChangedEventHandler CollectionChanged;
+		public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
 		internal TableSnapshot<SplitterData> Table { get; private set; }
 
@@ -298,8 +301,9 @@ namespace LogicCircuit {
 		public CircuitProject CircuitProject { get { return (CircuitProject)this.Table.StoreSnapshot; } }
 
 		// Constructor
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public SplitterSet(CircuitProject store) {
-			ITableSnapshot table = store.Table("Splitter");
+			ITableSnapshot? table = store.Table("Splitter");
 			if(table != null) {
 				Debug.Assert(store.IsFrozen, "The store should be frozen");
 				this.Table = (TableSnapshot<SplitterData>)table;
@@ -309,6 +313,7 @@ namespace LogicCircuit {
 			}
 			this.InitializeSplitterSet();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		partial void InitializeSplitterSet();
 
@@ -320,7 +325,7 @@ namespace LogicCircuit {
 
 
 		// gets items wrapper by RowId
-		public Splitter Find(RowId rowId) {
+		public Splitter? Find(RowId rowId) {
 			if(!rowId.IsEmpty) {
 				return this.Table.GetField(rowId, SplitterData.SplitterField.Field);
 			}
@@ -331,13 +336,14 @@ namespace LogicCircuit {
 		// gets items wrapper by RowId
 		private IEnumerable<Splitter> Select(IEnumerable<RowId> rows) {
 			foreach(RowId rowId in rows) {
-				Splitter item = this.Find(rowId);
+				Splitter? item = this.Find(rowId);
 				Debug.Assert(item != null, "What is the reason for the item not to be found?");
 				yield return item;
 			}
 		}
 
 		// Create wrapper for the row and register it in the dictionary
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static")]
 		private Splitter Create(RowId rowId, RowId CircuitRowId) {
 			Splitter item = new Splitter(this.CircuitProject, rowId, CircuitRowId);
 			return item;
@@ -346,7 +352,7 @@ namespace LogicCircuit {
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		internal Splitter FindOrCreate(RowId rowId) {
 			Debug.Assert(!rowId.IsEmpty && !this.Table.IsDeleted(rowId), "Bad RowId");
-			Splitter item;
+			Splitter? item;
 			if((item = this.Find(rowId)) != null) {
 				Debug.Assert(!item.IsDeleted(), "Deleted item should not be present in the dictionary");
 				return item;
@@ -354,7 +360,8 @@ namespace LogicCircuit {
 			Guid primaryKeyValue = this.Table.GetField(rowId, SplitterData.SplitterIdField.Field);
 
 
-			TableSnapshot<CircuitData> tableCircuit = (TableSnapshot<CircuitData>)this.CircuitProject.Table("Circuit");
+			TableSnapshot<CircuitData>? tableCircuit = (TableSnapshot<CircuitData>?)this.CircuitProject.Table("Circuit");
+			Debug.Assert(tableCircuit != null);
 			return this.Create(rowId, tableCircuit.Find(CircuitData.CircuitIdField.Field, primaryKeyValue));
 		}
 
@@ -368,7 +375,8 @@ namespace LogicCircuit {
 			// Fields of Circuit table
 
 		) {
-			TableSnapshot<CircuitData> tableCircuit = (TableSnapshot<CircuitData>)this.CircuitProject.Table("Circuit");
+			TableSnapshot<CircuitData>? tableCircuit = (TableSnapshot<CircuitData>?)this.CircuitProject.Table("Circuit");
+			Debug.Assert(tableCircuit != null);
 			CircuitData dataCircuit = new CircuitData() {
 				CircuitId = SplitterId
 			};
@@ -386,7 +394,7 @@ namespace LogicCircuit {
 		// Search helpers
 
 		// Finds Splitter by SplitterId
-		public Splitter FindBySplitterId(Guid splitterId) {
+		public Splitter? FindBySplitterId(Guid splitterId) {
 			return this.Find(this.Table.Find(SplitterData.SplitterIdField.Field, splitterId));
 		}
 
@@ -399,17 +407,17 @@ namespace LogicCircuit {
 		}
 
 		private void NotifyCollectionChanged(NotifyCollectionChangedEventArgs arg) {
-			NotifyCollectionChangedEventHandler handler = this.CollectionChanged;
+			NotifyCollectionChangedEventHandler? handler = this.CollectionChanged;
 			if(handler != null) {
 				handler(this, arg);
 			}
 		}
 
-		internal List<Splitter> UpdateSet(int oldVersion, int newVersion) {
-			IEnumerator<TableChange<SplitterData>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
+		internal List<Splitter>? UpdateSet(int oldVersion, int newVersion) {
+			IEnumerator<TableChange<SplitterData>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
 			if(change != null) {
 				bool handlerAttached = (this.CollectionChanged != null);
-				List<Splitter> del = (handlerAttached) ? new List<Splitter>() : null;
+				List<Splitter>? del = (handlerAttached) ? new List<Splitter>() : null;
 				while(change.MoveNext()) {
 					switch(change.Current.Action) {
 					case SnapTableAction.Insert:
@@ -420,7 +428,7 @@ namespace LogicCircuit {
 						if(handlerAttached) {
 							Splitter item = change.Current.GetOldField(SplitterData.SplitterField.Field);
 							Debug.Assert(item.IsDeleted());
-							del.Add(item);
+							del!.Add(item);
 						}
 						break;
 					default:
@@ -435,11 +443,11 @@ namespace LogicCircuit {
 			return null;
 		}
 
-		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<Splitter> deleted) {
-			IEnumerator<TableChange<SplitterData>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
+		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<Splitter>? deleted) {
+			IEnumerator<TableChange<SplitterData>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
 			if(change != null) {
 				bool handlerAttached = (this.CollectionChanged != null);
-				List<Splitter> add = (handlerAttached) ? new List<Splitter>() : null;
+				List<Splitter>? add = (handlerAttached) ? new List<Splitter>() : null;
 				this.StartNotifySplitterSetChanged(oldVersion, newVersion);
 				while(change.MoveNext()) {
 					this.NotifySplitterSetChanged(change.Current);
@@ -447,7 +455,7 @@ namespace LogicCircuit {
 					case SnapTableAction.Insert:
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item was not created?");
 						if(handlerAttached) {
-							add.Add(this.Find(change.Current.RowId));
+							add!.Add(this.Find(change.Current.RowId)!);
 						}
 						break;
 					case SnapTableAction.Delete:
@@ -456,7 +464,7 @@ namespace LogicCircuit {
 					default:
 						Debug.Assert(change.Current.Action == SnapTableAction.Update, "Unknown action");
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item does not exist during update?");
-						this.Find(change.Current.RowId).NotifyChanged(change.Current);
+						this.Find(change.Current.RowId)!.NotifyChanged(change.Current);
 						break;
 					}
 				}
@@ -465,7 +473,7 @@ namespace LogicCircuit {
 					if(deleted != null && 0 < deleted.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, deleted));
 					}
-					if(0 < add.Count) {
+					if(0 < add!.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, add));
 					}
 				}

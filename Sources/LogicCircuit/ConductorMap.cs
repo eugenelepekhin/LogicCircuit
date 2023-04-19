@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace LogicCircuit {
@@ -13,14 +14,17 @@ namespace LogicCircuit {
 				GridPoint p1 = wire.Point1;
 				GridPoint p2 = wire.Point2;
 				Tracer.Assert(p1 != p2);
-				Conductor conductor;
+				Conductor? conductor;
 				if(this.TryGetValue(p1, out conductor)) {
-					if(!this.TryGetValue(p2, out Conductor other)) {
+					Debug.Assert(conductor != null);
+					if(!this.TryGetValue(p2, out Conductor? other)) {
 						this.map.Add(p2, conductor);
 					} else if(conductor != other) {
+						Debug.Assert(other != null);
 						conductor = this.Join(conductor, other);
 					}
 				} else if(this.TryGetValue(p2, out conductor)) {
+					Debug.Assert(conductor != null);
 					this.map.Add(p1, conductor);
 				} else {
 					conductor = new Conductor();
@@ -43,14 +47,15 @@ namespace LogicCircuit {
 			return conductor;
 		}
 
-		public bool TryGetValue(GridPoint point, out Conductor conductor) {
+		public bool TryGetValue(GridPoint point, out Conductor? conductor) {
 			return this.map.TryGetValue(point, out conductor);
 		}
 
 		public IEnumerable<Conductor> Conductors { get { return this.list; } }
 
 		public int JunctionCount(GridPoint point) {
-			if(this.TryGetValue(point, out Conductor conductor)) {
+			if(this.TryGetValue(point, out Conductor? conductor)) {
+				Debug.Assert(conductor != null);
 				return conductor.JunctionCount(point);
 			}
 			return 0;

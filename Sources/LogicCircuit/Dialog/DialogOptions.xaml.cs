@@ -43,10 +43,10 @@ namespace LogicCircuit {
 		}
 
 		private void OkButtonClick(object sender, RoutedEventArgs e) {
-			Settings.User.LoadLastFileOnStartup = this.loadLastFile.IsChecked.Value;
+			Settings.User.LoadLastFileOnStartup = this.loadLastFile.IsChecked!.Value;
 			Settings.User.MaxRecentFileCount = (int)this.maxRecentFiles.SelectedItem;
 			this.mainframe.AutoSaveInterval = (this.autoSave.IsChecked.HasValue && this.autoSave.IsChecked.Value) ? this.AutoSaveInterval * 60 : 0;
-			this.mainframe.ShowGrid = this.showGrid.IsChecked.Value;
+			this.mainframe.ShowGrid = this.showGrid.IsChecked!.Value;
 			Settings.User.GateShape = ((EnumDescriptor<GateShape>)this.gateShape.SelectedItem).Value;
 			App.CurrentCulture = this.CurrentCulture;
 			

@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting.STAExtensions;
 
 namespace LogicCircuit.UnitTest {
 	/// <summary>
@@ -83,7 +80,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test of saving/loading roundtrip
 		/// </summary>
-		[TestMethod()]
+		[STATestMethod]
 		public void CircuitProjectSaveLoadTest() {
 			string dir = Path.Combine(this.TestContext.TestRunDirectory, this.TestContext.TestName + DateTime.UtcNow.Ticks, "Some Test Sub Directory");
 			string file = Path.Combine(dir, "My Test File.CircuitProject");

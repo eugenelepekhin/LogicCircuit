@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Windows.Documents;
 using System.Windows.Markup;
@@ -10,7 +12,7 @@ namespace LogicCircuit {
 		public static FlowDocument Build(LogicalCircuit root) {
 			using(StringReader textReader = new StringReader(new ReportBuilder(root).TransformText())) {
 				using(XmlReader xmlReader = XmlHelper.CreateReader(textReader)) {
-					return XamlReader.Load(xmlReader) as FlowDocument;
+					return (FlowDocument)XamlReader.Load(xmlReader);
 				}
 			}
 		}
@@ -19,11 +21,12 @@ namespace LogicCircuit {
 		private Project Project { get { return this.Root.CircuitProject.ProjectSet.Project; } }
 		private List<string> Functions;
 		private Dictionary<string, int> Usage;
-		private Exception BuildMapException;
+		private Exception? BuildMapException;
 
 		private ReportBuilder(LogicalCircuit root) {
 			this.Root = root;
 			this.ReportFunctions(root);
+			Debug.Assert(this.Functions != null && this.Usage != null);
 		}
 
 		private int CategoryCount {
@@ -38,6 +41,7 @@ namespace LogicCircuit {
 			}
 		}
 
+		[SuppressMessage("Performance", "CA1854:Prefer the 'IDictionary.TryGetValue(TKey, out TValue)' method")]
 		private void ReportFunctions(LogicalCircuit root) {
 			try {
 				CircuitMap map = new CircuitMap(root);

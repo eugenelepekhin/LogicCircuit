@@ -26,11 +26,10 @@ namespace LogicCircuit {
 	}
 
 	[SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors")]
-	[SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable")]
 	public class CircuitException : Exception {
 		public Cause Cause { get; }
 
-		public CircuitException(Cause cause, Exception innerException, string message) : base(message, innerException) {
+		public CircuitException(Cause cause, Exception? innerException, string message) : base(message, innerException) {
 			this.Cause = cause;
 		}
 		//public CircuitException(Cause cause, Exception innerException, string message, params object[] args) : this(
@@ -43,9 +42,9 @@ namespace LogicCircuit {
 		//    cause, null, message, args
 		//) {
 		//}
-		public CircuitException(Cause cause, Exception innerException) : this(cause, innerException, cause.ToString()) {
+		public CircuitException(Cause cause, Exception? innerException) : this(cause, innerException, cause.ToString()) {
 		}
-		public CircuitException(Cause cause) : this(cause, (Exception)null) {}
+		public CircuitException(Cause cause) : this(cause, (Exception?)null) {}
 
 		public virtual string UserMessage() {
 			return this.Message;
@@ -55,7 +54,7 @@ namespace LogicCircuit {
 	//-------------------------------------------------------------------------
 
 	//[Serializable]
-	[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors")]
+	[SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors")]
 	internal class AssertException : CircuitException {
 		public AssertException(string message) : base(Cause.AssertionFailed, message) {}
 		public AssertException() : base(Cause.AssertionFailed) {}
@@ -65,5 +64,10 @@ namespace LogicCircuit {
 			}
 			return this.Message;
 		}
+	}
+
+	[SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors")]
+	internal class AbortException : CircuitException {
+		public AbortException() : base(Cause.OperationCanceled) {}
 	}
 }

@@ -131,7 +131,7 @@ namespace LogicCircuit {
 			return d;
 		}
 
-		public void SetMemoryValue(byte[] value) {
+		public void SetMemoryValue(byte[]? value) {
 			Tracer.Assert(value == null || value.Length == this.BytesPerCell * this.TotalCells);
 			this.Data = (value != null) ? Convert.ToBase64String(value, Base64FormattingOptions.InsertLineBreaks) : string.Empty;
 		}
@@ -141,15 +141,15 @@ namespace LogicCircuit {
 			Tracer.Assert(this.AddressPin == null);
 			Tracer.Assert(addressPin != null && dataPin != null);
 
-			this.AddressPin = addressPin;
-			this.DataOutPin = dataPin;
+			this.AddressPin = addressPin!;
+			this.DataOutPin = dataPin!;
 			this.Address2Pin = address2Pin;
 			this.DataOut2Pin = data2Pin;
 
-			Tracer.Assert(addressPin.BitWidth == this.AddressBitWidth);
-			Tracer.Assert(dataPin.BitWidth == this.DataBitWidth);
-			Tracer.Assert(address2Pin.BitWidth == this.AddressBitWidth);
-			Tracer.Assert(data2Pin.BitWidth == this.DataBitWidth);
+			Tracer.Assert(this.AddressPin.BitWidth == this.AddressBitWidth);
+			Tracer.Assert(this.DataOutPin.BitWidth == this.DataBitWidth);
+			Tracer.Assert(this.Address2Pin.BitWidth == this.AddressBitWidth);
+			Tracer.Assert(this.DataOut2Pin.BitWidth == this.DataBitWidth);
 		}
 
 		internal void SetPins(DevicePin addressPin, DevicePin dataOutPin, DevicePin dataInPin, DevicePin writePin, DevicePin address2Pin, DevicePin data2Pin) {
@@ -157,16 +157,16 @@ namespace LogicCircuit {
 			Tracer.Assert(this.AddressPin == null);
 			Tracer.Assert(addressPin != null && dataOutPin != null && dataInPin != null && writePin != null);
 
-			this.AddressPin = addressPin;
-			this.DataOutPin = dataOutPin;
-			this.DataInPin = dataInPin;
-			this.WritePin = writePin;
+			this.AddressPin = addressPin!;
+			this.DataOutPin = dataOutPin!;
+			this.DataInPin = dataInPin!;
+			this.WritePin = writePin!;
 			this.Address2Pin = address2Pin;
 			this.DataOut2Pin = data2Pin;
 
-			Tracer.Assert(addressPin.BitWidth == this.AddressBitWidth);
-			Tracer.Assert(dataInPin.BitWidth == dataOutPin.BitWidth && dataOutPin.BitWidth == this.DataBitWidth);
-			Tracer.Assert(writePin.BitWidth == 1);
+			Tracer.Assert(this.AddressPin.BitWidth == this.AddressBitWidth);
+			Tracer.Assert(this.DataInPin.BitWidth == this.DataOutPin.BitWidth && this.DataOutPin.BitWidth == this.DataBitWidth);
+			Tracer.Assert(this.WritePin.BitWidth == 1);
 		}
 
 		public override Circuit CopyTo(LogicalCircuit target) {
@@ -221,8 +221,8 @@ namespace LogicCircuit {
 			data.Name = Properties.Resources.MemoryDataPinName;
 			data.JamNotation = Properties.Resources.MemoryDataPinNotation;
 
-			DevicePin dataIn = null;
-			DevicePin write = null;
+			DevicePin dataIn = null!;
+			DevicePin write = null!;
 			if(memory.Writable) {
 				dataIn = this.CircuitProject.DevicePinSet.Create(memory, PinType.Input, memory.DataBitWidth);
 				dataIn.PinSide = PinSide.Left;

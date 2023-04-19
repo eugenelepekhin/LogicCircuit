@@ -13,7 +13,7 @@ namespace LogicCircuit {
 	// Defines the shape of the table CollapsedCategory
 	internal partial struct CollapsedCategoryData {
 		public string Name;
-		internal CollapsedCategory CollapsedCategory;
+		internal CollapsedCategory? CollapsedCategory;
 		// Field accessors
 		// Accessor of the Name field
 		public sealed class NameField : IField<CollapsedCategoryData, string>, IFieldSerializer<CollapsedCategoryData> {
@@ -31,7 +31,7 @@ namespace LogicCircuit {
 			public int Compare(ref CollapsedCategoryData l, ref CollapsedCategoryData r) {
 				return StringComparer.Ordinal.Compare(l.Name, r.Name);
 			}
-			public int Compare(string l, string r) {
+			public int Compare(string? l, string? r) {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
@@ -57,9 +57,9 @@ namespace LogicCircuit {
 			private CollapsedCategoryField() {}
 			public string Name { get { return "CollapsedCategoryWrapper"; } }
 			public int Order { get; set; }
-			public CollapsedCategory DefaultValue { get { return null; } }
+			public CollapsedCategory DefaultValue { get { return null!; } }
 			public CollapsedCategory GetValue(ref CollapsedCategoryData record) {
-				return record.CollapsedCategory;
+				return record.CollapsedCategory!;
 			}
 			public void SetValue(ref CollapsedCategoryData record, CollapsedCategory value) {
 				record.CollapsedCategory = value;
@@ -67,7 +67,7 @@ namespace LogicCircuit {
 			public int Compare(ref CollapsedCategoryData l, ref CollapsedCategoryData r) {
 				return this.Compare(l.CollapsedCategory, r.CollapsedCategory);
 			}
-			public int Compare(CollapsedCategory l, CollapsedCategory r) {
+			public int Compare(CollapsedCategory? l, CollapsedCategory? r) {
 				if(object.ReferenceEquals(l, r)) return 0;
 				if(l == null) return -1;
 				if(r == null) return 1;
@@ -103,6 +103,7 @@ namespace LogicCircuit {
 		public CircuitProject CircuitProject { get; private set; }
 
 		// Constructor
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public CollapsedCategory(CircuitProject store, RowId rowIdCollapsedCategory) {
 			Debug.Assert(!rowIdCollapsedCategory.IsEmpty);
 			this.CircuitProject = store;
@@ -111,6 +112,7 @@ namespace LogicCircuit {
 			this.Table.SetField(this.CollapsedCategoryRowId, CollapsedCategoryData.CollapsedCategoryField.Field, this);
 			this.InitializeCollapsedCategory();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		partial void InitializeCollapsedCategory();
 
@@ -135,10 +137,10 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.CollapsedCategoryRowId, CollapsedCategoryData.NameField.Field, value); }
 		}
 
-		public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler? PropertyChanged;
 
 		protected void NotifyPropertyChanged(string name) {
-			PropertyChangedEventHandler handler = this.PropertyChanged;
+			PropertyChangedEventHandler? handler = this.PropertyChanged;
 			if(handler != null) {
 				handler(this, new PropertyChangedEventArgs(name));
 			}
@@ -165,7 +167,7 @@ namespace LogicCircuit {
 	// Wrapper for table CollapsedCategory.
 	partial class CollapsedCategorySet : INotifyCollectionChanged, IEnumerable<CollapsedCategory> {
 
-		public event NotifyCollectionChangedEventHandler CollectionChanged;
+		public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
 		internal TableSnapshot<CollapsedCategoryData> Table { get; private set; }
 
@@ -173,8 +175,9 @@ namespace LogicCircuit {
 		public CircuitProject CircuitProject { get { return (CircuitProject)this.Table.StoreSnapshot; } }
 
 		// Constructor
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public CollapsedCategorySet(CircuitProject store) {
-			ITableSnapshot table = store.Table("CollapsedCategory");
+			ITableSnapshot? table = store.Table("CollapsedCategory");
 			if(table != null) {
 				Debug.Assert(store.IsFrozen, "The store should be frozen");
 				this.Table = (TableSnapshot<CollapsedCategoryData>)table;
@@ -184,6 +187,7 @@ namespace LogicCircuit {
 			}
 			this.InitializeCollapsedCategorySet();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		partial void InitializeCollapsedCategorySet();
 
@@ -195,7 +199,7 @@ namespace LogicCircuit {
 
 
 		// gets items wrapper by RowId
-		public CollapsedCategory Find(RowId rowId) {
+		public CollapsedCategory? Find(RowId rowId) {
 			if(!rowId.IsEmpty) {
 				return this.Table.GetField(rowId, CollapsedCategoryData.CollapsedCategoryField.Field);
 			}
@@ -206,13 +210,14 @@ namespace LogicCircuit {
 		// gets items wrapper by RowId
 		private IEnumerable<CollapsedCategory> Select(IEnumerable<RowId> rows) {
 			foreach(RowId rowId in rows) {
-				CollapsedCategory item = this.Find(rowId);
+				CollapsedCategory? item = this.Find(rowId);
 				Debug.Assert(item != null, "What is the reason for the item not to be found?");
 				yield return item;
 			}
 		}
 
 		// Create wrapper for the row and register it in the dictionary
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static")]
 		private CollapsedCategory Create(RowId rowId) {
 			CollapsedCategory item = new CollapsedCategory(this.CircuitProject, rowId);
 			return item;
@@ -221,7 +226,7 @@ namespace LogicCircuit {
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		internal CollapsedCategory FindOrCreate(RowId rowId) {
 			Debug.Assert(!rowId.IsEmpty && !this.Table.IsDeleted(rowId), "Bad RowId");
-			CollapsedCategory item;
+			CollapsedCategory? item;
 			if((item = this.Find(rowId)) != null) {
 				Debug.Assert(!item.IsDeleted(), "Deleted item should not be present in the dictionary");
 				return item;
@@ -244,7 +249,7 @@ namespace LogicCircuit {
 		// Search helpers
 
 		// Finds CollapsedCategory by Name
-		public CollapsedCategory Find(string name) {
+		public CollapsedCategory? Find(string name) {
 			return this.Find(this.Table.Find(CollapsedCategoryData.NameField.Field, name));
 		}
 
@@ -257,17 +262,17 @@ namespace LogicCircuit {
 		}
 
 		private void NotifyCollectionChanged(NotifyCollectionChangedEventArgs arg) {
-			NotifyCollectionChangedEventHandler handler = this.CollectionChanged;
+			NotifyCollectionChangedEventHandler? handler = this.CollectionChanged;
 			if(handler != null) {
 				handler(this, arg);
 			}
 		}
 
-		internal List<CollapsedCategory> UpdateSet(int oldVersion, int newVersion) {
-			IEnumerator<TableChange<CollapsedCategoryData>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
+		internal List<CollapsedCategory>? UpdateSet(int oldVersion, int newVersion) {
+			IEnumerator<TableChange<CollapsedCategoryData>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
 			if(change != null) {
 				bool handlerAttached = (this.CollectionChanged != null);
-				List<CollapsedCategory> del = (handlerAttached) ? new List<CollapsedCategory>() : null;
+				List<CollapsedCategory>? del = (handlerAttached) ? new List<CollapsedCategory>() : null;
 				while(change.MoveNext()) {
 					switch(change.Current.Action) {
 					case SnapTableAction.Insert:
@@ -278,7 +283,7 @@ namespace LogicCircuit {
 						if(handlerAttached) {
 							CollapsedCategory item = change.Current.GetOldField(CollapsedCategoryData.CollapsedCategoryField.Field);
 							Debug.Assert(item.IsDeleted());
-							del.Add(item);
+							del!.Add(item);
 						}
 						break;
 					default:
@@ -293,11 +298,11 @@ namespace LogicCircuit {
 			return null;
 		}
 
-		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<CollapsedCategory> deleted) {
-			IEnumerator<TableChange<CollapsedCategoryData>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
+		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<CollapsedCategory>? deleted) {
+			IEnumerator<TableChange<CollapsedCategoryData>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
 			if(change != null) {
 				bool handlerAttached = (this.CollectionChanged != null);
-				List<CollapsedCategory> add = (handlerAttached) ? new List<CollapsedCategory>() : null;
+				List<CollapsedCategory>? add = (handlerAttached) ? new List<CollapsedCategory>() : null;
 				this.StartNotifyCollapsedCategorySetChanged(oldVersion, newVersion);
 				while(change.MoveNext()) {
 					this.NotifyCollapsedCategorySetChanged(change.Current);
@@ -305,7 +310,7 @@ namespace LogicCircuit {
 					case SnapTableAction.Insert:
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item was not created?");
 						if(handlerAttached) {
-							add.Add(this.Find(change.Current.RowId));
+							add!.Add(this.Find(change.Current.RowId)!);
 						}
 						break;
 					case SnapTableAction.Delete:
@@ -314,7 +319,7 @@ namespace LogicCircuit {
 					default:
 						Debug.Assert(change.Current.Action == SnapTableAction.Update, "Unknown action");
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item does not exist during update?");
-						this.Find(change.Current.RowId).NotifyChanged(change.Current);
+						this.Find(change.Current.RowId)!.NotifyChanged(change.Current);
 						break;
 					}
 				}
@@ -323,7 +328,7 @@ namespace LogicCircuit {
 					if(deleted != null && 0 < deleted.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, deleted));
 					}
-					if(0 < add.Count) {
+					if(0 < add!.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, add));
 					}
 				}

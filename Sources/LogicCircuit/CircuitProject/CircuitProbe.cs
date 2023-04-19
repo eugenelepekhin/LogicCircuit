@@ -79,7 +79,7 @@ namespace LogicCircuit {
 			return probe;
 		}
 
-		public CircuitProbe Create(string name) {
+		public CircuitProbe Create(string? name) {
 			Guid id = Guid.NewGuid();
 			CircuitProbe probe = this.CreateItem(id, string.IsNullOrWhiteSpace(name) ? id.ToString() : this.UniqueName(name.Trim()), CircuitProbeData.NoteField.Field.DefaultValue);
 			this.CircuitProject.DevicePinSet.Create(probe, PinType.Input, 1);

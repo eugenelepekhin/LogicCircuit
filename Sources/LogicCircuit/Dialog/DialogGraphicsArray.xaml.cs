@@ -11,7 +11,7 @@ namespace LogicCircuit {
 	/// Interaction logic for DialogGraphicsArray.xaml
 	/// </summary>
 	public partial class DialogGraphicsArray : Window, IDataErrorInfo {
-		private SettingsWindowLocationCache windowLocation;
+		private SettingsWindowLocationCache? windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 
 		private readonly GraphicsArray graphicsArray;
@@ -21,11 +21,11 @@ namespace LogicCircuit {
 
 		private int parsedWidth, parsedHeight;
 
-		public string Error { get { return null; } }
+		public string Error { get { return null!; } }
 
 		public string this[string columnName] {
 			get {
-				string error = null;
+				string? error = null;
 				switch(columnName) {
 				case "GraphicsArrayWidth":
 					error = DialogGraphicsArray.ParseIntRange(this.GraphicsArrayWidth, 1, GraphicsArray.MaxWidth, out this.parsedWidth);
@@ -37,11 +37,11 @@ namespace LogicCircuit {
 				if(this.buttonOk != null) {
 					this.buttonOk.IsEnabled = (0 < this.parsedWidth && 0 < this.parsedHeight);
 				}
-				return error;
+				return error!;
 			}
 		}
 
-		private static string ParseIntRange(string text, int min, int max, out int result) {
+		private static string? ParseIntRange(string text, int min, int max, out int result) {
 			Tracer.Assert(0 <= min && min <= max);
 			int i;
 			if(	string.IsNullOrWhiteSpace(text) ||

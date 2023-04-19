@@ -45,7 +45,7 @@ namespace LogicCircuit {
 			set { this.fieldZoom = GraphicsArray.CheckZoom(value); }
 		}
 		public string Note;
-		internal GraphicsArray GraphicsArray;
+		internal GraphicsArray? GraphicsArray;
 		// Field accessors
 		// Accessor of the GraphicsArrayId field
 		public sealed class GraphicsArrayIdField : IField<GraphicsArrayData, Guid>, IFieldSerializer<GraphicsArrayData> {
@@ -343,7 +343,7 @@ namespace LogicCircuit {
 			public int Compare(ref GraphicsArrayData l, ref GraphicsArrayData r) {
 				return StringComparer.Ordinal.Compare(l.Note, r.Note);
 			}
-			public int Compare(string l, string r) {
+			public int Compare(string? l, string? r) {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
@@ -369,9 +369,9 @@ namespace LogicCircuit {
 			private GraphicsArrayField() {}
 			public string Name { get { return "GraphicsArrayWrapper"; } }
 			public int Order { get; set; }
-			public GraphicsArray DefaultValue { get { return null; } }
+			public GraphicsArray DefaultValue { get { return null!; } }
 			public GraphicsArray GetValue(ref GraphicsArrayData record) {
-				return record.GraphicsArray;
+				return record.GraphicsArray!;
 			}
 			public void SetValue(ref GraphicsArrayData record, GraphicsArray value) {
 				record.GraphicsArray = value;
@@ -379,7 +379,7 @@ namespace LogicCircuit {
 			public int Compare(ref GraphicsArrayData l, ref GraphicsArrayData r) {
 				return this.Compare(l.GraphicsArray, r.GraphicsArray);
 			}
-			public int Compare(GraphicsArray l, GraphicsArray r) {
+			public int Compare(GraphicsArray? l, GraphicsArray? r) {
 				if(object.ReferenceEquals(l, r)) return 0;
 				if(l == null) return -1;
 				if(r == null) return 1;
@@ -411,7 +411,8 @@ namespace LogicCircuit {
 
 		// Creates all foreign keys of the table
 		public static void CreateForeignKeys(StoreSnapshot store) {
-			TableSnapshot<GraphicsArrayData> table = (TableSnapshot<GraphicsArrayData>)store.Table("GraphicsArray");
+			TableSnapshot<GraphicsArrayData>? table = (TableSnapshot<GraphicsArrayData>?)store.Table("GraphicsArray");
+			Debug.Assert(table != null);
 			table.CreateForeignKey("PK_GraphicsArray", store.Table("Circuit"), GraphicsArrayData.GraphicsArrayIdField.Field, ForeignKeyAction.Cascade, false);
 		}
 	}
@@ -423,6 +424,7 @@ namespace LogicCircuit {
 		internal RowId GraphicsArrayRowId { get; private set; }
 
 		// Constructor
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public GraphicsArray(CircuitProject store, RowId rowIdGraphicsArray, RowId rowIdCircuit) : base(store, rowIdCircuit) {
 			Debug.Assert(!rowIdGraphicsArray.IsEmpty);
 			this.GraphicsArrayRowId = rowIdGraphicsArray;
@@ -430,6 +432,7 @@ namespace LogicCircuit {
 			this.Table.SetField(this.GraphicsArrayRowId, GraphicsArrayData.GraphicsArrayField.Field, this);
 			this.InitializeGraphicsArray();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		partial void InitializeGraphicsArray();
 
@@ -536,7 +539,7 @@ namespace LogicCircuit {
 	// Wrapper for table GraphicsArray.
 	partial class GraphicsArraySet : INotifyCollectionChanged, IEnumerable<GraphicsArray> {
 
-		public event NotifyCollectionChangedEventHandler CollectionChanged;
+		public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
 		internal TableSnapshot<GraphicsArrayData> Table { get; private set; }
 
@@ -544,8 +547,9 @@ namespace LogicCircuit {
 		public CircuitProject CircuitProject { get { return (CircuitProject)this.Table.StoreSnapshot; } }
 
 		// Constructor
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public GraphicsArraySet(CircuitProject store) {
-			ITableSnapshot table = store.Table("GraphicsArray");
+			ITableSnapshot? table = store.Table("GraphicsArray");
 			if(table != null) {
 				Debug.Assert(store.IsFrozen, "The store should be frozen");
 				this.Table = (TableSnapshot<GraphicsArrayData>)table;
@@ -555,6 +559,7 @@ namespace LogicCircuit {
 			}
 			this.InitializeGraphicsArraySet();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		partial void InitializeGraphicsArraySet();
 
@@ -566,7 +571,7 @@ namespace LogicCircuit {
 
 
 		// gets items wrapper by RowId
-		public GraphicsArray Find(RowId rowId) {
+		public GraphicsArray? Find(RowId rowId) {
 			if(!rowId.IsEmpty) {
 				return this.Table.GetField(rowId, GraphicsArrayData.GraphicsArrayField.Field);
 			}
@@ -577,13 +582,14 @@ namespace LogicCircuit {
 		// gets items wrapper by RowId
 		private IEnumerable<GraphicsArray> Select(IEnumerable<RowId> rows) {
 			foreach(RowId rowId in rows) {
-				GraphicsArray item = this.Find(rowId);
+				GraphicsArray? item = this.Find(rowId);
 				Debug.Assert(item != null, "What is the reason for the item not to be found?");
 				yield return item;
 			}
 		}
 
 		// Create wrapper for the row and register it in the dictionary
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static")]
 		private GraphicsArray Create(RowId rowId, RowId CircuitRowId) {
 			GraphicsArray item = new GraphicsArray(this.CircuitProject, rowId, CircuitRowId);
 			return item;
@@ -592,7 +598,7 @@ namespace LogicCircuit {
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		internal GraphicsArray FindOrCreate(RowId rowId) {
 			Debug.Assert(!rowId.IsEmpty && !this.Table.IsDeleted(rowId), "Bad RowId");
-			GraphicsArray item;
+			GraphicsArray? item;
 			if((item = this.Find(rowId)) != null) {
 				Debug.Assert(!item.IsDeleted(), "Deleted item should not be present in the dictionary");
 				return item;
@@ -600,7 +606,8 @@ namespace LogicCircuit {
 			Guid primaryKeyValue = this.Table.GetField(rowId, GraphicsArrayData.GraphicsArrayIdField.Field);
 
 
-			TableSnapshot<CircuitData> tableCircuit = (TableSnapshot<CircuitData>)this.CircuitProject.Table("Circuit");
+			TableSnapshot<CircuitData>? tableCircuit = (TableSnapshot<CircuitData>?)this.CircuitProject.Table("Circuit");
+			Debug.Assert(tableCircuit != null);
 			return this.Create(rowId, tableCircuit.Find(CircuitData.CircuitIdField.Field, primaryKeyValue));
 		}
 
@@ -619,7 +626,8 @@ namespace LogicCircuit {
 			// Fields of Circuit table
 
 		) {
-			TableSnapshot<CircuitData> tableCircuit = (TableSnapshot<CircuitData>)this.CircuitProject.Table("Circuit");
+			TableSnapshot<CircuitData>? tableCircuit = (TableSnapshot<CircuitData>?)this.CircuitProject.Table("Circuit");
+			Debug.Assert(tableCircuit != null);
 			CircuitData dataCircuit = new CircuitData() {
 				CircuitId = GraphicsArrayId
 			};
@@ -642,7 +650,7 @@ namespace LogicCircuit {
 		// Search helpers
 
 		// Finds GraphicsArray by GraphicsArrayId
-		public GraphicsArray FindByGraphicsArrayId(Guid graphicsArrayId) {
+		public GraphicsArray? FindByGraphicsArrayId(Guid graphicsArrayId) {
 			return this.Find(this.Table.Find(GraphicsArrayData.GraphicsArrayIdField.Field, graphicsArrayId));
 		}
 
@@ -655,17 +663,17 @@ namespace LogicCircuit {
 		}
 
 		private void NotifyCollectionChanged(NotifyCollectionChangedEventArgs arg) {
-			NotifyCollectionChangedEventHandler handler = this.CollectionChanged;
+			NotifyCollectionChangedEventHandler? handler = this.CollectionChanged;
 			if(handler != null) {
 				handler(this, arg);
 			}
 		}
 
-		internal List<GraphicsArray> UpdateSet(int oldVersion, int newVersion) {
-			IEnumerator<TableChange<GraphicsArrayData>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
+		internal List<GraphicsArray>? UpdateSet(int oldVersion, int newVersion) {
+			IEnumerator<TableChange<GraphicsArrayData>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
 			if(change != null) {
 				bool handlerAttached = (this.CollectionChanged != null);
-				List<GraphicsArray> del = (handlerAttached) ? new List<GraphicsArray>() : null;
+				List<GraphicsArray>? del = (handlerAttached) ? new List<GraphicsArray>() : null;
 				while(change.MoveNext()) {
 					switch(change.Current.Action) {
 					case SnapTableAction.Insert:
@@ -676,7 +684,7 @@ namespace LogicCircuit {
 						if(handlerAttached) {
 							GraphicsArray item = change.Current.GetOldField(GraphicsArrayData.GraphicsArrayField.Field);
 							Debug.Assert(item.IsDeleted());
-							del.Add(item);
+							del!.Add(item);
 						}
 						break;
 					default:
@@ -691,11 +699,11 @@ namespace LogicCircuit {
 			return null;
 		}
 
-		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<GraphicsArray> deleted) {
-			IEnumerator<TableChange<GraphicsArrayData>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
+		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<GraphicsArray>? deleted) {
+			IEnumerator<TableChange<GraphicsArrayData>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
 			if(change != null) {
 				bool handlerAttached = (this.CollectionChanged != null);
-				List<GraphicsArray> add = (handlerAttached) ? new List<GraphicsArray>() : null;
+				List<GraphicsArray>? add = (handlerAttached) ? new List<GraphicsArray>() : null;
 				this.StartNotifyGraphicsArraySetChanged(oldVersion, newVersion);
 				while(change.MoveNext()) {
 					this.NotifyGraphicsArraySetChanged(change.Current);
@@ -703,7 +711,7 @@ namespace LogicCircuit {
 					case SnapTableAction.Insert:
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item was not created?");
 						if(handlerAttached) {
-							add.Add(this.Find(change.Current.RowId));
+							add!.Add(this.Find(change.Current.RowId)!);
 						}
 						break;
 					case SnapTableAction.Delete:
@@ -712,7 +720,7 @@ namespace LogicCircuit {
 					default:
 						Debug.Assert(change.Current.Action == SnapTableAction.Update, "Unknown action");
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item does not exist during update?");
-						this.Find(change.Current.RowId).NotifyChanged(change.Current);
+						this.Find(change.Current.RowId)!.NotifyChanged(change.Current);
 						break;
 					}
 				}
@@ -721,7 +729,7 @@ namespace LogicCircuit {
 					if(deleted != null && 0 < deleted.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, deleted));
 					}
-					if(0 < add.Count) {
+					if(0 < add!.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, add));
 					}
 				}

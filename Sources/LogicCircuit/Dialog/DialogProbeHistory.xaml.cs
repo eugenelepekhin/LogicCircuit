@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows;
 
 namespace LogicCircuit {
@@ -9,9 +10,9 @@ namespace LogicCircuit {
 	/// </summary>
 	public partial class DialogProbeHistory : Window, INotifyPropertyChanged {
 
-		public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler? PropertyChanged;
 
-		private SettingsWindowLocationCache windowLocation;
+		private SettingsWindowLocationCache? windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 
 		private readonly FunctionProbe functionProbe;
@@ -26,6 +27,7 @@ namespace LogicCircuit {
 			this.RefreshHistory();
 			this.DataContext = this;
 			this.InitializeComponent();
+			Debug.Assert(this.reads != null && this.History != null);
 		}
 
 		private void RefreshHistory() {

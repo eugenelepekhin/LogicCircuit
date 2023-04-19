@@ -94,14 +94,14 @@ namespace LogicCircuit {
 				data.PinId = Guid.NewGuid();
 			}
 			data.CircuitId = target.CircuitId;
-			data.Name = this.UniqueName(data.Name, this.CircuitProject.LogicalCircuitSet.FindByLogicalCircuitId(data.CircuitId));
+			data.Name = this.UniqueName(data.Name, this.CircuitProject.LogicalCircuitSet.FindByLogicalCircuitId(data.CircuitId)!);
 			data.Pin = null;
 			return this.Register(this.Table.Insert(ref data));
 		}
 
 		partial void NotifyPinSetChanged(TableChange<PinData> change) {
 			PinData.CircuitIdField field = PinData.CircuitIdField.Field;
-			LogicalCircuit logicalCircuit = this.CircuitProject.LogicalCircuitSet.FindByLogicalCircuitId(
+			LogicalCircuit? logicalCircuit = this.CircuitProject.LogicalCircuitSet.FindByLogicalCircuitId(
 				(change.Action == SnapTableAction.Delete) ? change.GetOldField(field) : change.GetNewField(field)
 			);
 			Tracer.Assert(change.Action == SnapTableAction.Delete || logicalCircuit != null);

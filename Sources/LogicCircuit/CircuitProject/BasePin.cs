@@ -28,7 +28,7 @@ namespace LogicCircuit {
 		public GridPoint GridPoint { get; set; }
 
 		protected abstract Circuit PinCircuit { get; set; }
-		private Circuit circuit;
+		private Circuit? circuit;
 		public Circuit Circuit {
 			get {
 				if(this.circuit == null) {

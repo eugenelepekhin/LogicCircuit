@@ -39,6 +39,7 @@
 <#}#>
 
 		// Constructor
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		<#=itemCtorModifier#> <#=this.Table.Name#>(<#=this.Store.Name#> store<#=itemCtorParamList#>)<#=itemCtorBaseCall#> {
 			Debug.Assert(!rowId<#=this.Table.Name#>.IsEmpty);
 <#if(!isSubclass) {#>
@@ -51,6 +52,7 @@
 <#}#>
 			this.Initialize<#=this.Table.Name#>();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		partial void Initialize<#=this.Table.Name#>();
 
@@ -89,7 +91,7 @@ foreach(Column column in this.Table.Columns) {
 #>
 		// Gets <#=column.ReadOnly ? "" : "or sets "#>the value referred by the foreign key on field <#=column.Name#>
 		<#=access#> <#=returnType#> <#=column.PropertyNamePrefix#><#=key.RoleName()#> {
-			get { return <#=cast#>this.<#=this.Store.Name#>.<#=parent.Name#>Set.Find<#=findSuffix#>(this.Table.GetField(this.<#=this.Table.Name#>RowId, <#=this.Table.Name#>Data.<#=column.Name#>Field.Field)); }
+			get { return <#=cast#>this.<#=this.Store.Name#>.<#=parent.Name#>Set.Find<#=findSuffix#>(this.Table.GetField(this.<#=this.Table.Name#>RowId, <#=this.Table.Name#>Data.<#=column.Name#>Field.Field))!; }
 <#		if(!column.ReadOnly) {#>
 			set { this.Table.SetField(this.<#=this.Table.Name#>RowId, <#=this.Table.Name#>Data.<#=column.Name#>Field.Field, value.<#=parentId#>); }
 <#		}#>
@@ -110,10 +112,10 @@ foreach(Column column in this.Table.Columns) {
 
 <#}#>
 <#if(generateNotifyPropertyChanged) {#>
-		public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler? PropertyChanged;
 
 		protected void NotifyPropertyChanged(string name) {
-			PropertyChangedEventHandler handler = this.PropertyChanged;
+			PropertyChangedEventHandler? handler = this.PropertyChanged;
 			if(handler != null) {
 <#	if(this.UseDispatcher) {#>
 				System.Windows.Threading.Dispatcher dispatcher = this.<#=this.Store.Name#>.Dispatcher;

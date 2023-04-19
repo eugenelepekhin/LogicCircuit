@@ -9,7 +9,7 @@
 		private const string PersistenceNamespace = "http://LogicCircuit.net/2.0.0.11/CircuitProject.xsd";
 		private const string PersistencePrefix = "lc";
 
-		public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler? PropertyChanged;
 
 		public ProjectSet ProjectSet { get; private set; }
 		public CollapsedCategorySet CollapsedCategorySet { get; private set; }
@@ -33,6 +33,7 @@
 
 		public bool UpdateInProgress { get; private set; }
 
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public CircuitProject() : base() {
 			// Create all sets
 			this.CreateSets();
@@ -61,6 +62,7 @@
 			this.FreezeShape();
 			this.Init();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		private void CreateSets() {
 			this.ProjectSet = new ProjectSet(this);
@@ -91,36 +93,36 @@
 		}
 
 		private void NotifyPropertyChanged(string name) {
-			PropertyChangedEventHandler handler = this.PropertyChanged;
+			PropertyChangedEventHandler? handler = this.PropertyChanged;
 			if(handler != null) {
 				handler(this, new PropertyChangedEventArgs(name));
 			}
 		}
 
-		private void StoreVersionChanged(object sender, VersionChangeEventArgs e) {
+		private void StoreVersionChanged(object? sender, VersionChangeEventArgs e) {
 			try {
 				this.UpdateInProgress = true;
 				int oldVersion = e.OldVersion;
 				int newVersion = e.NewVersion;
-				List<Project> deletedProject = this.ProjectSet.UpdateSet(oldVersion, newVersion);
-				List<CollapsedCategory> deletedCollapsedCategory = this.CollapsedCategorySet.UpdateSet(oldVersion, newVersion);
-				List<Circuit> deletedCircuit = this.CircuitSet.UpdateSet(oldVersion, newVersion);
-				List<DevicePin> deletedDevicePin = this.DevicePinSet.UpdateSet(oldVersion, newVersion);
-				List<Gate> deletedGate = this.GateSet.UpdateSet(oldVersion, newVersion);
-				List<LogicalCircuit> deletedLogicalCircuit = this.LogicalCircuitSet.UpdateSet(oldVersion, newVersion);
-				List<Pin> deletedPin = this.PinSet.UpdateSet(oldVersion, newVersion);
-				List<CircuitProbe> deletedCircuitProbe = this.CircuitProbeSet.UpdateSet(oldVersion, newVersion);
-				List<Constant> deletedConstant = this.ConstantSet.UpdateSet(oldVersion, newVersion);
-				List<CircuitButton> deletedCircuitButton = this.CircuitButtonSet.UpdateSet(oldVersion, newVersion);
-				List<Memory> deletedMemory = this.MemorySet.UpdateSet(oldVersion, newVersion);
-				List<LedMatrix> deletedLedMatrix = this.LedMatrixSet.UpdateSet(oldVersion, newVersion);
-				List<Splitter> deletedSplitter = this.SplitterSet.UpdateSet(oldVersion, newVersion);
-				List<Sensor> deletedSensor = this.SensorSet.UpdateSet(oldVersion, newVersion);
-				List<Sound> deletedSound = this.SoundSet.UpdateSet(oldVersion, newVersion);
-				List<GraphicsArray> deletedGraphicsArray = this.GraphicsArraySet.UpdateSet(oldVersion, newVersion);
-				List<CircuitSymbol> deletedCircuitSymbol = this.CircuitSymbolSet.UpdateSet(oldVersion, newVersion);
-				List<Wire> deletedWire = this.WireSet.UpdateSet(oldVersion, newVersion);
-				List<TextNote> deletedTextNote = this.TextNoteSet.UpdateSet(oldVersion, newVersion);
+				List<Project>? deletedProject = this.ProjectSet.UpdateSet(oldVersion, newVersion);
+				List<CollapsedCategory>? deletedCollapsedCategory = this.CollapsedCategorySet.UpdateSet(oldVersion, newVersion);
+				List<Circuit>? deletedCircuit = this.CircuitSet.UpdateSet(oldVersion, newVersion);
+				List<DevicePin>? deletedDevicePin = this.DevicePinSet.UpdateSet(oldVersion, newVersion);
+				List<Gate>? deletedGate = this.GateSet.UpdateSet(oldVersion, newVersion);
+				List<LogicalCircuit>? deletedLogicalCircuit = this.LogicalCircuitSet.UpdateSet(oldVersion, newVersion);
+				List<Pin>? deletedPin = this.PinSet.UpdateSet(oldVersion, newVersion);
+				List<CircuitProbe>? deletedCircuitProbe = this.CircuitProbeSet.UpdateSet(oldVersion, newVersion);
+				List<Constant>? deletedConstant = this.ConstantSet.UpdateSet(oldVersion, newVersion);
+				List<CircuitButton>? deletedCircuitButton = this.CircuitButtonSet.UpdateSet(oldVersion, newVersion);
+				List<Memory>? deletedMemory = this.MemorySet.UpdateSet(oldVersion, newVersion);
+				List<LedMatrix>? deletedLedMatrix = this.LedMatrixSet.UpdateSet(oldVersion, newVersion);
+				List<Splitter>? deletedSplitter = this.SplitterSet.UpdateSet(oldVersion, newVersion);
+				List<Sensor>? deletedSensor = this.SensorSet.UpdateSet(oldVersion, newVersion);
+				List<Sound>? deletedSound = this.SoundSet.UpdateSet(oldVersion, newVersion);
+				List<GraphicsArray>? deletedGraphicsArray = this.GraphicsArraySet.UpdateSet(oldVersion, newVersion);
+				List<CircuitSymbol>? deletedCircuitSymbol = this.CircuitSymbolSet.UpdateSet(oldVersion, newVersion);
+				List<Wire>? deletedWire = this.WireSet.UpdateSet(oldVersion, newVersion);
+				List<TextNote>? deletedTextNote = this.TextNoteSet.UpdateSet(oldVersion, newVersion);
 
 				this.ProjectSet.NotifyVersionChanged(oldVersion, newVersion, deletedProject);
 				this.CollapsedCategorySet.NotifyVersionChanged(oldVersion, newVersion, deletedCollapsedCategory);
@@ -148,11 +150,11 @@
 			}
 		}
 
-		private void StoreLatestVersionChanged(object sender, EventArgs e) {
+		private void StoreLatestVersionChanged(object? sender, EventArgs e) {
 			this.NotifyPropertyChanged("LatestAvailableVersion");
 		}
 
-		private void StoreRolledBack(object sender, RolledBackEventArgs e) {
+		private void StoreRolledBack(object? sender, RolledBackEventArgs e) {
 			int version = e.Version;
 			this.ProjectSet.NotifyRolledBack(version);
 			this.CollapsedCategorySet.NotifyRolledBack(version);

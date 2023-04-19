@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
@@ -13,6 +14,7 @@ namespace LogicCircuit {
 			public Connection(Jam inJam, Jam outJam) {
 				Tracer.Assert(inJam != null && inJam.EffectivePinType != PinType.Output);
 				Tracer.Assert(outJam != null && outJam.EffectivePinType != PinType.Input);
+				Debug.Assert(inJam != null && outJam != null);
 				this.InJam = inJam;
 				this.OutJam = outJam;
 			}
@@ -38,8 +40,8 @@ namespace LogicCircuit {
 			public Connection Connect(Jam inputJam, Jam outputJam) {
 				Connection connection;
 				Dictionary<Jam, Connection> inputs;
-				if(this.outputs.TryGetValue(outputJam, out inputs)) {
-					if(inputs.TryGetValue(inputJam, out connection)) {
+				if(this.outputs.TryGetValue(outputJam, out inputs!)) {
+					if(inputs.TryGetValue(inputJam, out connection!)) {
 						return connection;
 					}
 				} else {
@@ -52,7 +54,8 @@ namespace LogicCircuit {
 			}
 
 			public IEnumerable<Connection> SelectByOutput(Jam outputJam) {
-				if(this.outputs.TryGetValue(outputJam, out Dictionary<Jam, Connection> inputs)) {
+				if(this.outputs.TryGetValue(outputJam, out Dictionary<Jam, Connection>? inputs)) {
+					Debug.Assert(inputs != null);
 					return inputs.Values;
 				}
 				return Enumerable.Empty<Connection>();

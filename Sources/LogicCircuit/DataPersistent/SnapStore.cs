@@ -14,7 +14,7 @@ namespace LogicCircuit.DataPersistent {
 		/// <summary>
 		/// Occurred when transaction is committed
 		/// </summary>
-		public event EventHandler Committed;
+		public event EventHandler? Committed;
 
 		/// <summary>
 		/// Type of transaction
@@ -29,8 +29,8 @@ namespace LogicCircuit.DataPersistent {
 		private readonly Dictionary<string, ISnapTable> table = new Dictionary<string, ISnapTable>();
 		private readonly ValueList<TransactionType> version = new ValueList<TransactionType>();
 		private int minUndo;
-		private StoreSnapshot editor;
-		private Thread editorThread;
+		private StoreSnapshot? editor;
+		private Thread? editorThread;
 
 		/// <summary>
 		/// true when SnapStore was "frozen" for meta-data modifications
@@ -55,7 +55,7 @@ namespace LogicCircuit.DataPersistent {
 		/// <summary>
 		/// If transaction is started then contains the Owner of the transaction, otherwise null.
 		/// </summary>
-		public StoreSnapshot Editor { get { return this.editor; } }
+		public StoreSnapshot? Editor { get { return this.editor; } }
 
 		/// <summary>
 		/// Returns true if undo operation is available.
@@ -72,8 +72,8 @@ namespace LogicCircuit.DataPersistent {
 		/// </summary>
 		/// <param name="name"></param>
 		/// <returns></returns>
-		public ISnapTable Table(string name) {
-			if(this.table.TryGetValue(name, out ISnapTable snapTable)) {
+		public ISnapTable? Table(string name) {
+			if(this.table.TryGetValue(name, out ISnapTable? snapTable)) {
 				return snapTable;
 			} else {
 				return null;
@@ -147,11 +147,9 @@ namespace LogicCircuit.DataPersistent {
 			StoreSnapshot oldEditor = newEditor;
 			bool success = false;
 
-			RuntimeHelpers.PrepareConstrainedRegions();
 			try {
-				RuntimeHelpers.PrepareConstrainedRegions();
 				try {} finally {
-					oldEditor = Interlocked.CompareExchange<StoreSnapshot>(ref this.editor, newEditor, null);
+					oldEditor = Interlocked.CompareExchange<StoreSnapshot>(ref this.editor!, newEditor, null!);
 				}
 				if(oldEditor == null) {
 					Debug.Assert(this.editor == newEditor, "Expecting to be current editor");
@@ -195,7 +193,6 @@ namespace LogicCircuit.DataPersistent {
 		public int Commit(bool withOmit) {
 			this.ValidateModification();
 			int v = this.Version;
-			RuntimeHelpers.PrepareConstrainedRegions();
 			try {} finally {
 				if(withOmit) {
 					ValueList<TransactionType>.Address address = this.version.ItemAddress(this.version.Count - 1);
@@ -216,7 +213,6 @@ namespace LogicCircuit.DataPersistent {
 		/// </summary>
 		public void Rollback() {
 			this.ValidateModification();
-			RuntimeHelpers.PrepareConstrainedRegions();
 			try { } finally {
 				foreach(ISnapTable snapTable in this.Tables) {
 					snapTable.Rollback();

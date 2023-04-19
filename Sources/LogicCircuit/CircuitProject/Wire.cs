@@ -9,7 +9,7 @@ using LogicCircuit.DataPersistent;
 
 namespace LogicCircuit {
 	public partial class Wire {
-		private Line glyph;
+		private Line? glyph;
 
 		public GridPoint Point1 {
 			get { return new GridPoint(this.X1, this.Y1); }
@@ -79,10 +79,10 @@ namespace LogicCircuit {
 
 	[SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
 	public sealed partial class WireSet {
-		public event EventHandler WireSetChanged;
+		public event EventHandler? WireSetChanged;
 
 		//Holds logical circuits that holds wires that was changed in latest transaction
-		private HashSet<LogicalCircuit> invalidLogicalCircuit;
+		private HashSet<LogicalCircuit>? invalidLogicalCircuit;
 
 		public Wire Create(LogicalCircuit logicalCircuit, GridPoint point1, GridPoint point2) {
 			return this.CreateItem(Guid.NewGuid(), logicalCircuit, point1.X, point1.Y, point2.X, point2.Y);
@@ -101,7 +101,7 @@ namespace LogicCircuit {
 
 		partial void NotifyWireSetChanged(TableChange<WireData> change) {
 			if(this.invalidLogicalCircuit != null) {
-				LogicalCircuit circuit = this.CircuitProject.LogicalCircuitSet.FindByLogicalCircuitId(
+				LogicalCircuit? circuit = this.CircuitProject.LogicalCircuitSet.FindByLogicalCircuitId(
 					(change.Action == SnapTableAction.Delete) ? change.GetOldField(WireData.LogicalCircuitIdField.Field) : change.GetNewField(WireData.LogicalCircuitIdField.Field)
 				);
 				if(circuit != null) {

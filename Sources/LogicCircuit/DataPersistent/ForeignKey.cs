@@ -25,7 +25,7 @@ namespace LogicCircuit.DataPersistent {
 			return this.table == other.table && this.rowId == other.rowId;
 		}
 
-		public override bool Equals(object obj) {
+		public override bool Equals(object? obj) {
 			if(obj is ChildRow) {
 				return this.Equals((ChildRow)obj);
 			}

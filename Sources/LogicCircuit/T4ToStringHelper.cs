@@ -29,11 +29,11 @@ namespace LogicCircuit {
 			}
 
 			Type type = value.GetType();
-			MethodInfo method = type.GetMethod("ToString", new Type[] { typeof(IFormatProvider) });
+			MethodInfo? method = type.GetMethod("ToString", new Type[] { typeof(IFormatProvider) });
 			if(method != null) {
-				return this.EscapeXml((string)method.Invoke(value, new object[] { this.FormatProvider }));
+				return this.EscapeXml((string)method.Invoke(value, new object[] { this.FormatProvider })!);
 			} else {
-				return this.EscapeXml(value.ToString());
+				return this.EscapeXml(value.ToString()!);
 			}
 		}
 
@@ -48,11 +48,11 @@ namespace LogicCircuit {
 		private string EscapeXml(string text) {
 			if(this.EscapeXmlText) {
 				return text
-					.Replace("&", "&amp;")
-					.Replace("<", "&lt;")
-					.Replace(">", "&gt;")
-					.Replace("\"", "&quot;")
-					.Replace("'", "&apos;")
+					.Replace("&", "&amp;", StringComparison.Ordinal)
+					.Replace("<", "&lt;", StringComparison.Ordinal)
+					.Replace(">", "&gt;", StringComparison.Ordinal)
+					.Replace("\"", "&quot;", StringComparison.Ordinal)
+					.Replace("'", "&apos;", StringComparison.Ordinal)
 				;
 			}
 			return text;

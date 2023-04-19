@@ -62,7 +62,7 @@ namespace LogicCircuit {
 			if(!string.IsNullOrWhiteSpace(text)) {
 				try {
 					XmlDocument xml = XmlHelper.LoadXml(text);
-					foreach(XmlNode item in xml.SelectNodes("/List/Item")) {
+					foreach(XmlNode item in xml.SelectNodes("/List/Item")!) {
 						list.Add(item.InnerText);
 					}
 				} catch(Exception exception) {
@@ -79,9 +79,9 @@ namespace LogicCircuit {
 
 		private void SaveHistory() {
 			XmlDocument xml = XmlHelper.Create();
-			XmlNode list = xml.AppendChild(xml.CreateElement("List"));
+			XmlNode list = xml.AppendChild(xml.CreateElement("List"))!;
 			foreach(string line in this.history) {
-				XmlNode item = list.AppendChild(xml.CreateElement("Item"));
+				XmlNode item = list.AppendChild(xml.CreateElement("Item"))!;
 				item.InnerText = line;
 			}
 			this.historySettings.Value = xml.InnerXml;
@@ -100,7 +100,7 @@ namespace LogicCircuit {
 		}
 
 		private void SetCommand(string text) {
-			this.Text = this.Text.Substring(0, this.inputStarts) + text;
+			this.Text = string.Concat(this.Text.AsSpan(0, this.inputStarts), text);
 			this.Select(this.inputStarts, text.Length);
 		}
 

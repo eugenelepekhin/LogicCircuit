@@ -18,7 +18,7 @@ namespace LogicCircuit {
 		}
 
 		partial void OnCircuitSymbolChanged() {
-			Pin pin = this.Circuit as Pin;
+			Pin? pin = this.Circuit as Pin;
 			if(pin != null) {
 				pin.LogicalCircuit.ResetPins();
 			}

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace LogicCircuit {
 	public class CircuitSymbolComparer : IComparer<CircuitSymbol> {
@@ -10,7 +11,8 @@ namespace LogicCircuit {
 			this.yPrecedence = yPrecedence;
 		}
 
-		public int Compare(CircuitSymbol x, CircuitSymbol y) {
+		public int Compare(CircuitSymbol? x, CircuitSymbol? y) {
+			Debug.Assert(x != null && y != null);
 			if(this.yPrecedence) {
 				int d = x.Y - y.Y;
 				if(d == 0) {

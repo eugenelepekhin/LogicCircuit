@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Xml;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Xml;
+using Microsoft.VisualStudio.TestTools.UnitTesting.STAExtensions;
 
 namespace LogicCircuit.UnitTest {
 	/// <summary>
 	/// This is a test class for testing of conversion from version 2.0.0.5
 	///</summary>
-	[TestClass()]
+	[STATestClass]
 	public class ProbeConverterTest {
 		/// <summary>
 		///Gets or sets the test context which provides
@@ -16,7 +13,7 @@ namespace LogicCircuit.UnitTest {
 		///</summary>
 		public TestContext TestContext { get; set; }
 
-		[TestMethod()]
+		[STATestMethod]
 		public void ProbeConvertionTest() {
 			string projectText = Properties.Resources.ProbeConvertTest;
 			this.AssertFileVersion(projectText);

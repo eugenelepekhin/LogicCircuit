@@ -1,18 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace LogicCircuit {
 	public class CircuitDescriptorList : INotifyPropertyChanged {
 
-		public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler? PropertyChanged;
 
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		private static List<IDescriptor> primitiveList;
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		private readonly CircuitProject circuitProject;
 		private readonly Dictionary<LogicalCircuit, LogicalCircuitDescriptor> logicalCircuitDescriptors = new Dictionary<LogicalCircuit, LogicalCircuitDescriptor>();
-		private LogicalCircuitDescriptor current;
+		private LogicalCircuitDescriptor? current;
 
 		public CircuitDescriptorList(CircuitProject circuitProject) : base() {
 			this.circuitProject = circuitProject;
@@ -21,6 +25,7 @@ namespace LogicCircuit {
 			if(CircuitDescriptorList.primitiveList == null) {
 				CircuitDescriptorList.InitPrimitive();
 			}
+			Debug.Assert(CircuitDescriptorList.primitiveList != null);
 		}
 
 		public void Refresh() {
@@ -54,16 +59,17 @@ namespace LogicCircuit {
 		}
 
 		public void UpdateGlyph(LogicalCircuit logicalCircuit) {
-			if(this.logicalCircuitDescriptors.TryGetValue(logicalCircuit, out LogicalCircuitDescriptor descriptor)) {
+			if(this.logicalCircuitDescriptors.TryGetValue(logicalCircuit, out LogicalCircuitDescriptor? descriptor)) {
+				Debug.Assert(descriptor != null);
 				descriptor.ResetGlyph();
 			}
 		}
 
-		private void LogicalCircuitSetChanged(object sender, EventArgs e) {
+		private void LogicalCircuitSetChanged(object? sender, EventArgs e) {
 			this.NotifyPropertyChanged();
 		}
 
-		private void ProjectPropertyChanged(object sender, PropertyChangedEventArgs e) {
+		private void ProjectPropertyChanged(object? sender, PropertyChangedEventArgs e) {
 			if(e.PropertyName == "LogicalCircuit") {
 				if(this.current != null) {
 					this.current.NotifyCurrentChanged();
@@ -81,6 +87,7 @@ namespace LogicCircuit {
 			this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(this.CircuitDescriptors)));
 		}
 
+		[MemberNotNull(nameof(CircuitDescriptorList.primitiveList))]
 		private static void InitPrimitive() {
 			CircuitProject project = CircuitProject.Create(null);
 			List<IDescriptor> list = new List<IDescriptor>(32);

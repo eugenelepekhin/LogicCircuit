@@ -28,7 +28,7 @@ namespace LogicCircuit {
 			return true;
 		}
 
-		public static string ParseError(string data) {
+		public static string? ParseError(string data) {
 			if(string.IsNullOrWhiteSpace(data)) {
 				return Properties.Resources.ErrorEmptySeries;
 			}
@@ -51,9 +51,9 @@ namespace LogicCircuit {
 			return null;
 		}
 
-		public static bool TryParseSeries(string data, int bitWidth, out IList<SensorPoint> result) {
+		public static bool TryParseSeries(string data, int bitWidth, out IList<SensorPoint>? result) {
 			result = null;
-			Tracer.Assert(data != null);
+			Tracer.Assert(data);
 			Tracer.Assert(0 < bitWidth && bitWidth <= 32);
 			List<SensorPoint> list = new List<SensorPoint>();
 			int lastTick = -1;
@@ -192,7 +192,7 @@ namespace LogicCircuit {
 				break;
 			default:
 				Tracer.Fail();
-				data = null;
+				data = null!;
 				break;
 			}
 			Sensor sensor = this.CreateItem(Guid.NewGuid(), sensorType, bitWidth, pinSide, notation, data, SensorData.NoteField.Field.DefaultValue);

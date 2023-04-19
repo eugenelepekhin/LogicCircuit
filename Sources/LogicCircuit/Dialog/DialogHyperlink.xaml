@@ -8,16 +8,16 @@
 	Style="{StaticResource DialogWindow}"
 	MinWidth="320"
 	MinHeight="200"
-	FocusManager.FocusedElement="{Binding ElementName=hyperlinkText}"
+	FocusManager.FocusedElement="{Binding ElementName=hyperlinkTextBox}"
 >
 	<lc:AutoGrid>
 		<Label Content="{x:Static properties:Resources.TitleText}"/>
-		<TextBox Name="hyperlinkText"
+		<TextBox Name="hyperlinkTextBox"
 			Text="{Binding Path=HyperlinkText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
 		/>
 
 		<Label Content="{x:Static properties:Resources.TitleHyperlink}"/>
-		<TextBox Name="hyperlinkUrl" SpellCheck.IsEnabled="False"
+		<TextBox SpellCheck.IsEnabled="False"
 			Text="{Binding Path=HyperlinkUrl, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
 		/>
 

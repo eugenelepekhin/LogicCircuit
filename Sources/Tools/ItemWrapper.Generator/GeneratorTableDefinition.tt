@@ -17,21 +17,23 @@ foreach(Column column in this.Table.Columns) {
 	}
 }
 if(this.RealmType == RealmType.Universe) {#>
-		internal <#=this.Table.Name#> <#=this.Table.Name#>;
+		internal <#=this.Table.Name#>? <#=this.Table.Name#>;
 <#}#>
 		// Field accessors
 <#
 foreach(Column column in this.Table.Columns) {
 	string defaultValue = (column.Default != null) ? column.Default : "default";
 	string format;
+	string nullMark = "";
 	switch(column.Type) {
 	case "string":
 		format = column.IgnoreCase ? "StringComparer.OrdinalIgnoreCase.Compare({0}, {1})" : "StringComparer.Ordinal.Compare({0}, {1})";
 		if(column.Default != null) {
 			defaultValue = this.MakeString(defaultValue);
 		} else {
-			defaultValue = "null";
+			defaultValue = "null!";
 		}
+		nullMark = "?";
 		break;
 	case "int":
 		format = "Math.Sign((long){0} - (long){1})";
@@ -76,7 +78,7 @@ foreach(Column column in this.Table.Columns) {
 			public int Compare(ref <#=this.Table.Name#>Data l, ref <#=this.Table.Name#>Data r) {
 				return <#=compare("l." + column.Name, "r." + column.Name)#>;
 			}
-			public int Compare(<#=column.Type#> l, <#=column.Type#> r) {
+			public int Compare(<#=column.Type + nullMark#> l, <#=column.Type + nullMark#> r) {
 				return <#=compare("l", "r")#>;
 			}
 <#
@@ -136,9 +138,9 @@ if(this.RealmType == RealmType.Universe) {#>
 			private <#=this.Table.Name#>Field() {}
 			public string Name { get { return "<#=this.Table.Name#>Wrapper"; } }
 			public int Order { get; set; }
-			public <#=this.Table.Name#> DefaultValue { get { return null; } }
+			public <#=this.Table.Name#> DefaultValue { get { return null!; } }
 			public <#=this.Table.Name#> GetValue(ref <#=this.Table.Name#>Data record) {
-				return record.<#=this.Table.Name#>;
+				return record.<#=this.Table.Name#>!;
 			}
 			public void SetValue(ref <#=this.Table.Name#>Data record, <#=this.Table.Name#> value) {
 				record.<#=this.Table.Name#> = value;
@@ -146,7 +148,7 @@ if(this.RealmType == RealmType.Universe) {#>
 			public int Compare(ref <#=this.Table.Name#>Data l, ref <#=this.Table.Name#>Data r) {
 				return this.Compare(l.<#=this.Table.Name#>, r.<#=this.Table.Name#>);
 			}
-			public int Compare(<#=this.Table.Name#> l, <#=this.Table.Name#> r) {
+			public int Compare(<#=this.Table.Name#>? l, <#=this.Table.Name#>? r) {
 				if(object.ReferenceEquals(l, r)) return 0;
 				if(l == null) return -1;
 				if(r == null) return 1;
@@ -203,7 +205,8 @@ foreach(Key key in this.Table.Keys) {
 		// Creates all foreign keys of the table
 		public static void CreateForeignKeys(StoreSnapshot store) {
 <#if(this.Table.Keys.Any(k => k.IsForeign())) {#>
-			TableSnapshot<<#=this.Table.Name#>Data> table = (TableSnapshot<<#=this.Table.Name#>Data>)store.Table("<#=this.Table.Name#>");
+			TableSnapshot<<#=this.Table.Name#>Data>? table = (TableSnapshot<<#=this.Table.Name#>Data>?)store.Table("<#=this.Table.Name#>");
+			Debug.Assert(table != null);
 <#
 foreach(Key key in this.Table.Keys) {
 	if(key.IsForeign()) {

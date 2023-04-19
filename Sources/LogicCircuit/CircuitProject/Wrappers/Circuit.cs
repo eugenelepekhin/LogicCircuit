@@ -13,7 +13,7 @@ namespace LogicCircuit {
 	// Defines the shape of the table Circuit
 	internal partial struct CircuitData {
 		public Guid CircuitId;
-		internal Circuit Circuit;
+		internal Circuit? Circuit;
 		// Field accessors
 		// Accessor of the CircuitId field
 		public sealed class CircuitIdField : IField<CircuitData, Guid> {
@@ -43,9 +43,9 @@ namespace LogicCircuit {
 			private CircuitField() {}
 			public string Name { get { return "CircuitWrapper"; } }
 			public int Order { get; set; }
-			public Circuit DefaultValue { get { return null; } }
+			public Circuit DefaultValue { get { return null!; } }
 			public Circuit GetValue(ref CircuitData record) {
-				return record.Circuit;
+				return record.Circuit!;
 			}
 			public void SetValue(ref CircuitData record, Circuit value) {
 				record.Circuit = value;
@@ -53,7 +53,7 @@ namespace LogicCircuit {
 			public int Compare(ref CircuitData l, ref CircuitData r) {
 				return this.Compare(l.Circuit, r.Circuit);
 			}
-			public int Compare(Circuit l, Circuit r) {
+			public int Compare(Circuit? l, Circuit? r) {
 				if(object.ReferenceEquals(l, r)) return 0;
 				if(l == null) return -1;
 				if(r == null) return 1;
@@ -89,6 +89,7 @@ namespace LogicCircuit {
 		public CircuitProject CircuitProject { get; private set; }
 
 		// Constructor
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		protected Circuit(CircuitProject store, RowId rowIdCircuit) {
 			Debug.Assert(!rowIdCircuit.IsEmpty);
 			this.CircuitProject = store;
@@ -97,6 +98,7 @@ namespace LogicCircuit {
 			this.Table.SetField(this.CircuitRowId, CircuitData.CircuitField.Field, this);
 			this.InitializeCircuit();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		partial void InitializeCircuit();
 
@@ -120,10 +122,10 @@ namespace LogicCircuit {
 			get { return this.Table.GetField(this.CircuitRowId, CircuitData.CircuitIdField.Field); }
 		}
 
-		public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler? PropertyChanged;
 
 		protected void NotifyPropertyChanged(string name) {
-			PropertyChangedEventHandler handler = this.PropertyChanged;
+			PropertyChangedEventHandler? handler = this.PropertyChanged;
 			if(handler != null) {
 				handler(this, new PropertyChangedEventArgs(name));
 			}
@@ -150,7 +152,7 @@ namespace LogicCircuit {
 	// Wrapper for table Circuit.
 	partial class CircuitSet : INotifyCollectionChanged, IEnumerable<Circuit> {
 
-		public event NotifyCollectionChangedEventHandler CollectionChanged;
+		public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
 		internal TableSnapshot<CircuitData> Table { get; private set; }
 
@@ -158,8 +160,9 @@ namespace LogicCircuit {
 		public CircuitProject CircuitProject { get { return (CircuitProject)this.Table.StoreSnapshot; } }
 
 		// Constructor
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public CircuitSet(CircuitProject store) {
-			ITableSnapshot table = store.Table("Circuit");
+			ITableSnapshot? table = store.Table("Circuit");
 			if(table != null) {
 				Debug.Assert(store.IsFrozen, "The store should be frozen");
 				this.Table = (TableSnapshot<CircuitData>)table;
@@ -169,6 +172,7 @@ namespace LogicCircuit {
 			}
 			this.InitializeCircuitSet();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		partial void InitializeCircuitSet();
 
@@ -180,7 +184,7 @@ namespace LogicCircuit {
 
 
 		// gets items wrapper by RowId
-		public Circuit Find(RowId rowId) {
+		public Circuit? Find(RowId rowId) {
 			if(!rowId.IsEmpty) {
 				return this.Table.GetField(rowId, CircuitData.CircuitField.Field);
 			}
@@ -191,13 +195,14 @@ namespace LogicCircuit {
 		// gets items wrapper by RowId
 		private IEnumerable<Circuit> Select(IEnumerable<RowId> rows) {
 			foreach(RowId rowId in rows) {
-				Circuit item = this.Find(rowId);
+				Circuit? item = this.Find(rowId);
 				Debug.Assert(item != null, "What is the reason for the item not to be found?");
 				yield return item;
 			}
 		}
 
 		// Create wrapper for the row and register it in the dictionary
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static")]
 		private Circuit Create(RowId rowId) {
 			throw new InvalidOperationException();
 		}
@@ -205,7 +210,7 @@ namespace LogicCircuit {
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		internal Circuit FindOrCreate(RowId rowId) {
 			Debug.Assert(!rowId.IsEmpty && !this.Table.IsDeleted(rowId), "Bad RowId");
-			Circuit item;
+			Circuit? item;
 			if((item = this.Find(rowId)) != null) {
 				Debug.Assert(!item.IsDeleted(), "Deleted item should not be present in the dictionary");
 				return item;
@@ -294,7 +299,7 @@ namespace LogicCircuit {
 		// Search helpers
 
 		// Finds Circuit by CircuitId
-		public Circuit Find(Guid circuitId) {
+		public Circuit? Find(Guid circuitId) {
 			return this.Find(this.Table.Find(CircuitData.CircuitIdField.Field, circuitId));
 		}
 
@@ -307,17 +312,17 @@ namespace LogicCircuit {
 		}
 
 		private void NotifyCollectionChanged(NotifyCollectionChangedEventArgs arg) {
-			NotifyCollectionChangedEventHandler handler = this.CollectionChanged;
+			NotifyCollectionChangedEventHandler? handler = this.CollectionChanged;
 			if(handler != null) {
 				handler(this, arg);
 			}
 		}
 
-		internal List<Circuit> UpdateSet(int oldVersion, int newVersion) {
-			IEnumerator<TableChange<CircuitData>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
+		internal List<Circuit>? UpdateSet(int oldVersion, int newVersion) {
+			IEnumerator<TableChange<CircuitData>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
 			if(change != null) {
 				bool handlerAttached = (this.CollectionChanged != null);
-				List<Circuit> del = (handlerAttached) ? new List<Circuit>() : null;
+				List<Circuit>? del = (handlerAttached) ? new List<Circuit>() : null;
 				while(change.MoveNext()) {
 					switch(change.Current.Action) {
 					case SnapTableAction.Insert:
@@ -328,7 +333,7 @@ namespace LogicCircuit {
 						if(handlerAttached) {
 							Circuit item = change.Current.GetOldField(CircuitData.CircuitField.Field);
 							Debug.Assert(item.IsDeleted());
-							del.Add(item);
+							del!.Add(item);
 						}
 						break;
 					default:
@@ -343,11 +348,11 @@ namespace LogicCircuit {
 			return null;
 		}
 
-		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<Circuit> deleted) {
-			IEnumerator<TableChange<CircuitData>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
+		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<Circuit>? deleted) {
+			IEnumerator<TableChange<CircuitData>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
 			if(change != null) {
 				bool handlerAttached = (this.CollectionChanged != null);
-				List<Circuit> add = (handlerAttached) ? new List<Circuit>() : null;
+				List<Circuit>? add = (handlerAttached) ? new List<Circuit>() : null;
 				this.StartNotifyCircuitSetChanged(oldVersion, newVersion);
 				while(change.MoveNext()) {
 					this.NotifyCircuitSetChanged(change.Current);
@@ -355,7 +360,7 @@ namespace LogicCircuit {
 					case SnapTableAction.Insert:
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item was not created?");
 						if(handlerAttached) {
-							add.Add(this.Find(change.Current.RowId));
+							add!.Add(this.Find(change.Current.RowId)!);
 						}
 						break;
 					case SnapTableAction.Delete:
@@ -364,7 +369,7 @@ namespace LogicCircuit {
 					default:
 						Debug.Assert(change.Current.Action == SnapTableAction.Update, "Unknown action");
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item does not exist during update?");
-						this.Find(change.Current.RowId).NotifyChanged(change.Current);
+						this.Find(change.Current.RowId)!.NotifyChanged(change.Current);
 						break;
 					}
 				}
@@ -373,7 +378,7 @@ namespace LogicCircuit {
 					if(deleted != null && 0 < deleted.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, deleted));
 					}
-					if(0 < add.Count) {
+					if(0 < add!.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, add));
 					}
 				}

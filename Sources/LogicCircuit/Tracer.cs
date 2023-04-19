@@ -12,7 +12,7 @@ namespace LogicCircuit {
 	internal static class Tracer {
 		private static readonly string LogPath = Path.Combine(
 			Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-			(Assembly.GetEntryAssembly() ?? typeof(Tracer).Assembly).GetName().Name,
+			(Assembly.GetEntryAssembly() ?? typeof(Tracer).Assembly).GetName().Name!,
 			"TracerLog.txt"
 		);
 
@@ -108,6 +108,10 @@ namespace LogicCircuit {
 				throw new AssertException();
 			}
 		}
+		public static void Assert<T>(T? obj) where T:class {
+			Tracer.Assert(obj != null);
+			Debug.Assert(obj != null);
+		}
 		public static void Fail(string reason) {
 			throw new AssertException(reason);
 		}
@@ -123,14 +127,14 @@ namespace LogicCircuit {
 		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
 		private static void WriteToFile(string description, string category) {
 			if(!File.Exists(Tracer.LogPath)) {
-				string dir = Path.GetDirectoryName(Tracer.LogPath);
-				if(!Directory.Exists(dir)) {
+				string? dir = Path.GetDirectoryName(Tracer.LogPath);
+				if(!string.IsNullOrEmpty(dir) && !Directory.Exists(dir)) {
 					Directory.CreateDirectory(dir);
 				}
 				StreamWriter w = File.CreateText(Tracer.LogPath);
 				w.Close();
 			}
-			StreamWriter writer = null;
+			StreamWriter? writer = null;
 			try {
 				writer = File.AppendText(Tracer.LogPath);
 				writer.Write(category + ": ");
@@ -139,7 +143,7 @@ namespace LogicCircuit {
 				Tracer.writeToLogFile = false;
 				Tracer.Write(exception.ToString(), "Tracer.WriteToFile");
 			} finally {
-				writer.Close();
+				writer?.Close();
 			}
 		}
 

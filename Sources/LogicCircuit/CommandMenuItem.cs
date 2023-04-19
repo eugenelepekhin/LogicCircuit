@@ -20,7 +20,8 @@ namespace LogicCircuit {
 				if(e.Property == MenuItem.CommandProperty) {
 					Window window = Window.GetWindow(this);
 					if(window != null) {
-						if(this.Command is LambdaUICommand command && command.KeyGesture != null) {
+						LambdaUICommand? command = this.Command as LambdaUICommand;
+						if(command != null && command.KeyGesture != null) {
 							CommandMenuItem.RemoveInputBinding(window, command.KeyGesture);
 							window.InputBindings.Add(new InputBinding(command, command.KeyGesture));
 						} else {

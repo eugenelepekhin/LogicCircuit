@@ -15,13 +15,13 @@ namespace LogicCircuit {
 	[SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
 	public partial class DialogOscilloscope : Window {
 
-		private SettingsWindowLocationCache windowLocation;
+		private SettingsWindowLocationCache? windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 
 		public CircuitRunner CircuitRunner { get; private set; }
 		private readonly Oscilloscope oscilloscope;
 		private readonly List<Oscillogram> oscillograms = new List<Oscillogram>();
-		private Timer timer;
+		private Timer? timer;
 		public double GraphWidth { get; private set; }
 		public double GraphHeight { get; private set; }
 		[SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
@@ -46,13 +46,15 @@ namespace LogicCircuit {
 		public IEnumerable<Oscillogram> Oscillograms { get { return this.oscillograms; } }
 
 		protected override void OnClosing(System.ComponentModel.CancelEventArgs e) {
-			this.timer.Dispose();
-			this.timer = null;
+			if(this.timer != null) {
+				this.timer.Dispose();
+				this.timer = null;
+			}
 			this.CircuitRunner.DialogOscilloscope = null;
 			base.OnClosing(e);
 		}
 
-		private void TimerTick(object dummy) {
+		private void TimerTick(object? dummy) {
 			if(this.timer != null && this.CircuitRunner.Oscilloscoping && this.CircuitRunner.IsRunning) {
 				this.CircuitRunner.Oscilloscope = this.oscilloscope;
 				this.Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new Action(this.Refresh));

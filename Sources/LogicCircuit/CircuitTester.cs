@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
@@ -11,8 +12,8 @@ namespace LogicCircuit {
 		private readonly int originalVersion;
 
 		internal CircuitTester(Editor editor, LogicalCircuit circuit) {
-			Tracer.Assert(editor != null);
-			Tracer.Assert(circuit != null);
+			Tracer.Assert(editor);
+			Tracer.Assert(circuit);
 			Tracer.Assert(circuit.CircuitProject == editor.CircuitProject);
 			Tracer.Assert(CircuitTestSocket.IsTestable(circuit));
 
@@ -28,13 +29,14 @@ namespace LogicCircuit {
 			if(string.IsNullOrEmpty(inputName)) {
 				throw new ArgumentNullException(nameof(inputName));
 			}
-			InputPinSocket pin = this.socket.Inputs.FirstOrDefault(i => i.Pin.Name == inputName);
+			InputPinSocket? pin = this.socket.Inputs.FirstOrDefault(i => i.Pin.Name == inputName);
 			if(pin == null) {
 				throw new CircuitException(Cause.UserError,
 					string.Format(CultureInfo.InvariantCulture, "Input pin {0} not found on Logical Circuit {1}", inputName, this.logicalCircuitName)
 				);
 			}
-			pin.Function.Value = value;
+			Tracer.Assert(pin.Function);
+			pin.Function!.Value = value;
 			if(pin.Function.Value != value) {
 				throw new CircuitException(Cause.UserError,
 					string.Format(CultureInfo.InvariantCulture, "Value {0} get truncated by pin {1}. Make sure value can fit to {2} bit(s) of the pin.", value, inputName, pin.Pin.BitWidth)
@@ -53,6 +55,7 @@ namespace LogicCircuit {
 					string.Format(CultureInfo.InvariantCulture, "Output pin {0} not found on Logical Circuit {1}", outputName, this.logicalCircuitName)
 				);
 			}
+			Debug.Assert(pin.Function != null);
 			return pin.Function.Pack();
 		}
 
@@ -62,13 +65,13 @@ namespace LogicCircuit {
 			if(string.IsNullOrEmpty(outputName)) {
 				throw new ArgumentNullException(nameof(outputName));
 			}
-			OutputPinSocket pin = this.socket.Outputs.FirstOrDefault(o => o.Pin.Name == outputName);
+			OutputPinSocket? pin = this.socket.Outputs.FirstOrDefault(o => o.Pin.Name == outputName);
 			if(pin == null) {
 				throw new CircuitException(Cause.UserError,
 					string.Format(CultureInfo.InvariantCulture, "Output pin {0} not found on Logical Circuit {1}", outputName, this.logicalCircuitName)
 				);
 			}
-			if(FunctionProbe.ToInt(pin.Function.Pack(), pin.Pin.BitWidth, out int value)) {
+			if(FunctionProbe.ToInt(pin.Function!.Pack(), pin.Pin.BitWidth, out int value)) {
 				return value;
 			}
 			throw new CircuitException(Cause.UserError,
@@ -85,7 +88,7 @@ namespace LogicCircuit {
 		}
 
 		private void ValidateEditor() {
-			if(!this.originalEditor.TryGetTarget(out Editor editor) || editor != App.Editor || editor.CircuitProject.Version != this.originalVersion) {
+			if(!this.originalEditor.TryGetTarget(out Editor? editor) || editor != App.Editor || editor.CircuitProject.Version != this.originalVersion) {
 				throw new InvalidOperationException("Circuit project was changed since this circuit tester was created.");
 			}
 		}

@@ -21,7 +21,7 @@ namespace LogicCircuit {
 		public int Value;
 		public PinSide PinSide;
 		public string Note;
-		internal Constant Constant;
+		internal Constant? Constant;
 		// Field accessors
 		// Accessor of the ConstantId field
 		public sealed class ConstantIdField : IField<ConstantData, Guid>, IFieldSerializer<ConstantData> {
@@ -179,7 +179,7 @@ namespace LogicCircuit {
 			public int Compare(ref ConstantData l, ref ConstantData r) {
 				return StringComparer.Ordinal.Compare(l.Note, r.Note);
 			}
-			public int Compare(string l, string r) {
+			public int Compare(string? l, string? r) {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
@@ -205,9 +205,9 @@ namespace LogicCircuit {
 			private ConstantField() {}
 			public string Name { get { return "ConstantWrapper"; } }
 			public int Order { get; set; }
-			public Constant DefaultValue { get { return null; } }
+			public Constant DefaultValue { get { return null!; } }
 			public Constant GetValue(ref ConstantData record) {
-				return record.Constant;
+				return record.Constant!;
 			}
 			public void SetValue(ref ConstantData record, Constant value) {
 				record.Constant = value;
@@ -215,7 +215,7 @@ namespace LogicCircuit {
 			public int Compare(ref ConstantData l, ref ConstantData r) {
 				return this.Compare(l.Constant, r.Constant);
 			}
-			public int Compare(Constant l, Constant r) {
+			public int Compare(Constant? l, Constant? r) {
 				if(object.ReferenceEquals(l, r)) return 0;
 				if(l == null) return -1;
 				if(r == null) return 1;
@@ -243,7 +243,8 @@ namespace LogicCircuit {
 
 		// Creates all foreign keys of the table
 		public static void CreateForeignKeys(StoreSnapshot store) {
-			TableSnapshot<ConstantData> table = (TableSnapshot<ConstantData>)store.Table("Constant");
+			TableSnapshot<ConstantData>? table = (TableSnapshot<ConstantData>?)store.Table("Constant");
+			Debug.Assert(table != null);
 			table.CreateForeignKey("PK_Constant", store.Table("Circuit"), ConstantData.ConstantIdField.Field, ForeignKeyAction.Cascade, false);
 		}
 	}
@@ -255,6 +256,7 @@ namespace LogicCircuit {
 		internal RowId ConstantRowId { get; private set; }
 
 		// Constructor
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public Constant(CircuitProject store, RowId rowIdConstant, RowId rowIdCircuit) : base(store, rowIdCircuit) {
 			Debug.Assert(!rowIdConstant.IsEmpty);
 			this.ConstantRowId = rowIdConstant;
@@ -262,6 +264,7 @@ namespace LogicCircuit {
 			this.Table.SetField(this.ConstantRowId, ConstantData.ConstantField.Field, this);
 			this.InitializeConstant();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		partial void InitializeConstant();
 
@@ -332,7 +335,7 @@ namespace LogicCircuit {
 	// Wrapper for table Constant.
 	partial class ConstantSet : INotifyCollectionChanged, IEnumerable<Constant> {
 
-		public event NotifyCollectionChangedEventHandler CollectionChanged;
+		public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
 		internal TableSnapshot<ConstantData> Table { get; private set; }
 
@@ -340,8 +343,9 @@ namespace LogicCircuit {
 		public CircuitProject CircuitProject { get { return (CircuitProject)this.Table.StoreSnapshot; } }
 
 		// Constructor
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public ConstantSet(CircuitProject store) {
-			ITableSnapshot table = store.Table("Constant");
+			ITableSnapshot? table = store.Table("Constant");
 			if(table != null) {
 				Debug.Assert(store.IsFrozen, "The store should be frozen");
 				this.Table = (TableSnapshot<ConstantData>)table;
@@ -351,6 +355,7 @@ namespace LogicCircuit {
 			}
 			this.InitializeConstantSet();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		partial void InitializeConstantSet();
 
@@ -362,7 +367,7 @@ namespace LogicCircuit {
 
 
 		// gets items wrapper by RowId
-		public Constant Find(RowId rowId) {
+		public Constant? Find(RowId rowId) {
 			if(!rowId.IsEmpty) {
 				return this.Table.GetField(rowId, ConstantData.ConstantField.Field);
 			}
@@ -373,13 +378,14 @@ namespace LogicCircuit {
 		// gets items wrapper by RowId
 		private IEnumerable<Constant> Select(IEnumerable<RowId> rows) {
 			foreach(RowId rowId in rows) {
-				Constant item = this.Find(rowId);
+				Constant? item = this.Find(rowId);
 				Debug.Assert(item != null, "What is the reason for the item not to be found?");
 				yield return item;
 			}
 		}
 
 		// Create wrapper for the row and register it in the dictionary
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static")]
 		private Constant Create(RowId rowId, RowId CircuitRowId) {
 			Constant item = new Constant(this.CircuitProject, rowId, CircuitRowId);
 			return item;
@@ -388,7 +394,7 @@ namespace LogicCircuit {
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		internal Constant FindOrCreate(RowId rowId) {
 			Debug.Assert(!rowId.IsEmpty && !this.Table.IsDeleted(rowId), "Bad RowId");
-			Constant item;
+			Constant? item;
 			if((item = this.Find(rowId)) != null) {
 				Debug.Assert(!item.IsDeleted(), "Deleted item should not be present in the dictionary");
 				return item;
@@ -396,7 +402,8 @@ namespace LogicCircuit {
 			Guid primaryKeyValue = this.Table.GetField(rowId, ConstantData.ConstantIdField.Field);
 
 
-			TableSnapshot<CircuitData> tableCircuit = (TableSnapshot<CircuitData>)this.CircuitProject.Table("Circuit");
+			TableSnapshot<CircuitData>? tableCircuit = (TableSnapshot<CircuitData>?)this.CircuitProject.Table("Circuit");
+			Debug.Assert(tableCircuit != null);
 			return this.Create(rowId, tableCircuit.Find(CircuitData.CircuitIdField.Field, primaryKeyValue));
 		}
 
@@ -411,7 +418,8 @@ namespace LogicCircuit {
 			// Fields of Circuit table
 
 		) {
-			TableSnapshot<CircuitData> tableCircuit = (TableSnapshot<CircuitData>)this.CircuitProject.Table("Circuit");
+			TableSnapshot<CircuitData>? tableCircuit = (TableSnapshot<CircuitData>?)this.CircuitProject.Table("Circuit");
+			Debug.Assert(tableCircuit != null);
 			CircuitData dataCircuit = new CircuitData() {
 				CircuitId = ConstantId
 			};
@@ -430,7 +438,7 @@ namespace LogicCircuit {
 		// Search helpers
 
 		// Finds Constant by ConstantId
-		public Constant FindByConstantId(Guid constantId) {
+		public Constant? FindByConstantId(Guid constantId) {
 			return this.Find(this.Table.Find(ConstantData.ConstantIdField.Field, constantId));
 		}
 
@@ -443,17 +451,17 @@ namespace LogicCircuit {
 		}
 
 		private void NotifyCollectionChanged(NotifyCollectionChangedEventArgs arg) {
-			NotifyCollectionChangedEventHandler handler = this.CollectionChanged;
+			NotifyCollectionChangedEventHandler? handler = this.CollectionChanged;
 			if(handler != null) {
 				handler(this, arg);
 			}
 		}
 
-		internal List<Constant> UpdateSet(int oldVersion, int newVersion) {
-			IEnumerator<TableChange<ConstantData>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
+		internal List<Constant>? UpdateSet(int oldVersion, int newVersion) {
+			IEnumerator<TableChange<ConstantData>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
 			if(change != null) {
 				bool handlerAttached = (this.CollectionChanged != null);
-				List<Constant> del = (handlerAttached) ? new List<Constant>() : null;
+				List<Constant>? del = (handlerAttached) ? new List<Constant>() : null;
 				while(change.MoveNext()) {
 					switch(change.Current.Action) {
 					case SnapTableAction.Insert:
@@ -464,7 +472,7 @@ namespace LogicCircuit {
 						if(handlerAttached) {
 							Constant item = change.Current.GetOldField(ConstantData.ConstantField.Field);
 							Debug.Assert(item.IsDeleted());
-							del.Add(item);
+							del!.Add(item);
 						}
 						break;
 					default:
@@ -479,11 +487,11 @@ namespace LogicCircuit {
 			return null;
 		}
 
-		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<Constant> deleted) {
-			IEnumerator<TableChange<ConstantData>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
+		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<Constant>? deleted) {
+			IEnumerator<TableChange<ConstantData>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
 			if(change != null) {
 				bool handlerAttached = (this.CollectionChanged != null);
-				List<Constant> add = (handlerAttached) ? new List<Constant>() : null;
+				List<Constant>? add = (handlerAttached) ? new List<Constant>() : null;
 				this.StartNotifyConstantSetChanged(oldVersion, newVersion);
 				while(change.MoveNext()) {
 					this.NotifyConstantSetChanged(change.Current);
@@ -491,7 +499,7 @@ namespace LogicCircuit {
 					case SnapTableAction.Insert:
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item was not created?");
 						if(handlerAttached) {
-							add.Add(this.Find(change.Current.RowId));
+							add!.Add(this.Find(change.Current.RowId)!);
 						}
 						break;
 					case SnapTableAction.Delete:
@@ -500,7 +508,7 @@ namespace LogicCircuit {
 					default:
 						Debug.Assert(change.Current.Action == SnapTableAction.Update, "Unknown action");
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item does not exist during update?");
-						this.Find(change.Current.RowId).NotifyChanged(change.Current);
+						this.Find(change.Current.RowId)!.NotifyChanged(change.Current);
 						break;
 					}
 				}
@@ -509,7 +517,7 @@ namespace LogicCircuit {
 					if(deleted != null && 0 < deleted.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, deleted));
 					}
-					if(0 < add.Count) {
+					if(0 < add!.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, add));
 					}
 				}

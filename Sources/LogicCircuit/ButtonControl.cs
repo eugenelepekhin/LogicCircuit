@@ -5,7 +5,7 @@ using System.Windows.Input;
 
 namespace LogicCircuit {
 	public class ButtonControl : Button {
-		public Action<CircuitSymbol, bool> ButtonStateChanged { get; set; }
+		public Action<CircuitSymbol, bool>? ButtonStateChanged { get; set; }
 
 		public ButtonControl() : base() {
 			//this.ButtonStateChanged = null;
@@ -32,7 +32,7 @@ namespace LogicCircuit {
 			}
 		}
 		protected override void OnIsPressedChanged(DependencyPropertyChangedEventArgs e) {
-			Action<CircuitSymbol, bool> action = this.ButtonStateChanged;
+			Action<CircuitSymbol, bool>? action = this.ButtonStateChanged;
 			if(action != null) {
 				base.OnIsPressedChanged(e);
 

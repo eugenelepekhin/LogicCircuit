@@ -182,13 +182,13 @@ namespace LogicCircuit {
 
 		//---------------------------------------------------------------------
 
-		public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler? PropertyChanged;
 
 		protected Symbol() {
 		}
 
 		protected abstract LogicalCircuit SymbolLogicalCircuit { get; set; }
-		private LogicalCircuit logicalCircuit;
+		private LogicalCircuit? logicalCircuit;
 		public LogicalCircuit  LogicalCircuit {
 			get {
 				if(this.logicalCircuit == null) {
@@ -202,7 +202,7 @@ namespace LogicCircuit {
 			}
 		}
 		[SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "LogicCircuit")]
-		public LogicalCircuit CachedLogicCircuit { get { return this.logicalCircuit; } }
+		public LogicalCircuit? CachedLogicCircuit { get { return this.logicalCircuit; } }
 
 		public abstract void Shift(int dx, int dy);
 		public abstract int Z { get; }

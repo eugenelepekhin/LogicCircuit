@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 using System.Windows;
 
 namespace LogicCircuit {
 	public partial class Circuit {
-		private List<BasePin>[] pins;
+		private List<BasePin>[]? pins;
 		private bool isUpdated;
 
 		private int symbolWidth;
@@ -105,6 +106,7 @@ namespace LogicCircuit {
 			return Math.Max(2, defaultHeight);
 		}
 
+		[MemberNotNull(nameof(this.pins))]
 		private void Update() {
 			if(!this.isUpdated) {
 				if(this.pins == null) {
@@ -143,6 +145,7 @@ namespace LogicCircuit {
 
 				this.isUpdated = true;
 			}
+			Debug.Assert(this.pins != null);
 		}
 
 		public abstract Circuit CopyTo(LogicalCircuit target);
@@ -158,7 +161,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		protected static string BuildToolTip(string mandatoryPart, string optionalPart) {
+		protected static string BuildToolTip(string mandatoryPart, string? optionalPart) {
 			if(!string.IsNullOrWhiteSpace(optionalPart)) {
 				return mandatoryPart + "\n" + optionalPart;
 			}
@@ -169,7 +172,7 @@ namespace LogicCircuit {
 			return this == other || this.GetType() == other.GetType();
 		}
 
-		private static bool Match(Regex regex, string text) {
+		private static bool Match(Regex regex, string? text) {
 			return !string.IsNullOrEmpty(text) && regex.IsMatch(text);
 		}
 

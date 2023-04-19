@@ -6,7 +6,7 @@ namespace LogicCircuit.DataPersistent {
 	/// Describes change of data
 	/// </summary>
 	/// <typeparam name="TRecord"></typeparam>
-	public struct TableChange<TRecord> where TRecord:struct {
+	public struct TableChange<TRecord> : IEquatable<TableChange<TRecord>> where TRecord:struct {
 		private readonly ITableChange<TRecord> changeData;
 		private readonly RowId rowId;
 
@@ -81,12 +81,14 @@ namespace LogicCircuit.DataPersistent {
 			return this.changeData.GetOldField<TField>(this.rowId, field);
 		}
 
-		public override bool Equals(object obj) {
+		public override bool Equals(object? obj) {
 			if(obj is TableChange<TRecord> other) {
 				return this.changeData == other.changeData && this.rowId == other.rowId;
 			}
 			return false;
 		}
+
+		public bool Equals(TableChange<TRecord> other) => this.changeData == other.changeData && this.rowId == other.rowId;
 
 		public override int GetHashCode() {
 			return this.changeData.GetHashCode() ^ this.rowId.GetHashCode();

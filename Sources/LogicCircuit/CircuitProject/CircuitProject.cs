@@ -13,18 +13,19 @@ using LogicCircuit.DataPersistent;
 namespace LogicCircuit {
 	[SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 	public partial class CircuitProject {
-		private TableSnapshot<CircuitData> circuitTable;
+		private TableSnapshot<CircuitData>? circuitTable;
 		internal TableSnapshot<CircuitData> CircuitTable {
 			get {
 				if(this.circuitTable == null) {
-					this.circuitTable = (TableSnapshot<CircuitData>)this.Table("Circuit");
+					this.circuitTable = (TableSnapshot<CircuitData>?)this.Table("Circuit");
 				}
+				Debug.Assert(this.circuitTable != null);
 				return this.circuitTable;
 			}
 		}
 
 		[SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
-		public static CircuitProject Create(string file) {
+		public static CircuitProject Create(string? file) {
 			try {
 				XmlReader xmlReader = XmlHelper.CreateReader((file != null ?
 					(TextReader)new StreamReader(file) :
@@ -58,9 +59,11 @@ namespace LogicCircuit {
 			}
 		}
 
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		private CircuitProject(CircuitProject other) : base(other) {
 			this.CreateSets();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		public void Save(string file) {
 			using (TextWriter textWriter = XmlHelper.FileWriter(file)) {
@@ -110,6 +113,7 @@ namespace LogicCircuit {
 			this.ResetUndoRedo();
 		}
 
+		[SuppressMessage("Performance", "CA1851:Possible multiple enumerations of 'IEnumerable' collection")]
 		private void DistinctSymbol(IEnumerable<Circuit> set) {
 			set.Where(circuit => !this.CircuitSymbolSet.SelectByCircuit(circuit).Any()).ToList().ForEach(circuit => circuit.Delete());
 			foreach(Circuit circuit in set) {
@@ -138,10 +142,10 @@ namespace LogicCircuit {
 
 		[SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
 		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-		public static bool CanPaste(string text) {
+		public static bool CanPaste(string? text) {
 			// To reduce number of exceptions from XML reader lets check there if some familiar text is in the string.
 			// Lets not use namespace as it will prevent pasting of old versions of the XML.
-			if (!string.IsNullOrEmpty(text) && text.Contains("<lc:CircuitProject")) {
+			if (!string.IsNullOrEmpty(text) && text.Contains("<lc:CircuitProject", StringComparison.Ordinal)) {
 				try {
 					using (XmlReader xmlReader = XmlHelper.CreateReader(new StringReader(text))) {
 						string rootName = xmlReader.NameTable.Add("CircuitProject");
@@ -157,37 +161,39 @@ namespace LogicCircuit {
 		}
 
 		[SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
-		public IEnumerable<Symbol> Paste(string text) {
-			CircuitProject paste = null;
-			try {
-				paste = CircuitProject.CreateAndClose(XmlHelper.CreateReader(new StringReader(text)));
-			} catch(XmlException xmlException) {
-				throw new CircuitException(Cause.CorruptedFile, xmlException, Properties.Resources.ErrorClipboardCorrupted);
-			}
-
+		public IEnumerable<Symbol> Paste(string? text) {
 			List<Symbol> result = new List<Symbol>();
-			this.InTransaction(() => {
-				LogicalCircuit target = this.ProjectSet.Project.LogicalCircuit;
-				foreach(CircuitSymbol symbol in paste.ProjectSet.Project.LogicalCircuit.CircuitSymbols()) {
-					result.Add(symbol.CopyTo(target));
+			if(!string.IsNullOrWhiteSpace(text)) {
+				CircuitProject paste;
+				try {
+					paste = CircuitProject.CreateAndClose(XmlHelper.CreateReader(new StringReader(text)));
+				} catch(XmlException xmlException) {
+					throw new CircuitException(Cause.CorruptedFile, xmlException, Properties.Resources.ErrorClipboardCorrupted);
 				}
-				foreach(Wire wire in paste.ProjectSet.Project.LogicalCircuit.Wires()) {
-					result.Add(wire.CopyTo(target));
-				}
-				foreach(TextNote symbol in paste.ProjectSet.Project.LogicalCircuit.TextNotes()) {
-					if(symbol.IsValid) {
+
+				this.InTransaction(() => {
+					LogicalCircuit target = this.ProjectSet.Project.LogicalCircuit;
+					foreach(CircuitSymbol symbol in paste.ProjectSet.Project.LogicalCircuit.CircuitSymbols()) {
 						result.Add(symbol.CopyTo(target));
 					}
-				}
-
-				if(0 < result.Count) {
-					while(this.NeedToShift(result)) {
-						foreach(Symbol symbol in result) {
-							symbol.Shift(2, 2);
+					foreach(Wire wire in paste.ProjectSet.Project.LogicalCircuit.Wires()) {
+						result.Add(wire.CopyTo(target));
+					}
+					foreach(TextNote symbol in paste.ProjectSet.Project.LogicalCircuit.TextNotes()) {
+						if(symbol.IsValid) {
+							result.Add(symbol.CopyTo(target));
 						}
 					}
-				}
-			});
+
+					if(0 < result.Count) {
+						while(this.NeedToShift(result)) {
+							foreach(Symbol symbol in result) {
+								symbol.Shift(2, 2);
+							}
+						}
+					}
+				});
+			}
 			return result;
 		}
 
@@ -342,7 +348,7 @@ namespace LogicCircuit {
 		/// XSLT string  -- when ns is for known previous version
 		/// null         -- when ns is unknown
 		/// </returns>
-		private static string FindTransformation(string ns) {
+		private static string? FindTransformation(string ns) {
 			StringComparer cmp = StringComparer.OrdinalIgnoreCase;
 
 			if(cmp.Equals(ns, CircuitProject.PersistenceNamespace)) return string.Empty;
@@ -369,7 +375,7 @@ namespace LogicCircuit {
 			for(;;) {
 				while (xmlReader.NodeType != XmlNodeType.Element && xmlReader.Read()); // skip to the first element
 
-				string xslt = CircuitProject.FindTransformation(xmlReader.NamespaceURI);
+				string? xslt = CircuitProject.FindTransformation(xmlReader.NamespaceURI);
 				if (xslt == null) {
 					throw new CircuitException(Cause.UnknownVersion, Properties.Resources.ErrorUnknownVersion);
 				}

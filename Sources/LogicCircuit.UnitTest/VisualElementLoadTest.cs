@@ -1,12 +1,10 @@
-﻿using System;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting.STAExtensions;
 
 namespace LogicCircuit.UnitTest {
 	/// <summary>
 	/// Test of loading of projects with visual elements like 7 segment display.
 	/// </summary>
-	[TestClass()]
+	[STATestClass]
 	public class VisualElementLoadTest {
 		/// <summary>
 		///Gets or sets the test context which provides
@@ -17,7 +15,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test for ProjectTester
 		/// </summary>
-		[TestMethod()]
+		[STATestMethod]
 		public void VisualElementLoadProjectTesterTest() {
 			ProjectTester tester = new ProjectTester(this.TestContext, Properties.Resources.VisualElementLoadTest, null);
 			Assert.AreEqual(1, tester.Input.Length);

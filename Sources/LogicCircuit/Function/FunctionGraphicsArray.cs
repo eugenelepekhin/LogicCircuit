@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,9 +28,9 @@ namespace LogicCircuit {
 		private readonly int zoom;
 
 		private readonly byte[] data;
-		private WriteableBitmap bitmap;
-		private LogicalCircuit lastLogicalCircuit;
-		private Image lastImage;
+		private WriteableBitmap? bitmap;
+		private LogicalCircuit? lastLogicalCircuit;
+		private Image? lastImage;
 
 		public int AddressBitWidth { get { return this.address.Length; } }
 		public int DataBitWidth { get { return this.inputData.Length; } }
@@ -90,6 +91,7 @@ namespace LogicCircuit {
 				Tracer.Fail();
 				break;
 			}
+			Debug.Assert(this.data != null);
 		}
 
 		private byte[] Allocate() {
@@ -164,7 +166,7 @@ namespace LogicCircuit {
 		public void TurnOn() {
 			// Bitmap should be created on UI thread, so this is the right place for it.
 			PixelFormat format = new PixelFormat();
-			BitmapPalette palette = null;
+			BitmapPalette? palette = null;
 			switch(this.bitsPerPixel) {
 			case 1:
 				format = PixelFormats.Indexed1;
@@ -200,6 +202,7 @@ namespace LogicCircuit {
 		}
 
 		public void Redraw() {
+			Debug.Assert(this.bitmap != null);
 			this.bitmap.WritePixels(this.drawingRect, this.data, this.bitmapStride, 0);
 
 			LogicalCircuit currentCircuit = this.project.LogicalCircuit;
@@ -209,7 +212,7 @@ namespace LogicCircuit {
 			}
 			if(this.lastImage == null) {
 				if(this.circuitSymbol.Count == 1) {
-					this.lastImage = (Image)this.circuitSymbol[0].ProbeView;
+					this.lastImage = (Image)this.circuitSymbol[0].ProbeView!;
 				} else {
 					CircuitSymbol symbol = this.circuitSymbol.First(s => s.LogicalCircuit == currentCircuit);
 					this.lastImage = this.ProbeView(symbol);
@@ -222,7 +225,7 @@ namespace LogicCircuit {
 
 		private Image ProbeView(CircuitSymbol symbol) {
 			if(symbol == this.circuitSymbol[0]) {
-				return (Image)this.circuitSymbol[0].ProbeView;
+				return (Image)this.circuitSymbol[0].ProbeView!;
 			} else {
 				DisplayCanvas canvas = (DisplayCanvas)symbol.Glyph;
 				return (Image)canvas.DisplayOf(this.circuitSymbol);

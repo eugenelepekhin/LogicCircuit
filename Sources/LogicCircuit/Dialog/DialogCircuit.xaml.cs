@@ -55,7 +55,7 @@ namespace LogicCircuit {
 			public static FrameworkElement FlipFlopGlyph(LogicalCircuit logicalCircuit) => ShapeDescriptor.CreateGlyph(logicalCircuit, logicalCircuit.IsDisplay, glyph => glyph.CreateFlipFlopGlyph());
 		}
 
-		private SettingsWindowLocationCache windowLocation;
+		private SettingsWindowLocationCache? windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 		private readonly LogicalCircuit logicalCircuit;
 
@@ -134,7 +134,7 @@ namespace LogicCircuit {
 
 		private void CheckBoxGraphOrderClick(object sender, RoutedEventArgs e) {
 			try {
-				if(!this.checkBoxGraphOrder.IsChecked.Value) {
+				if(!this.checkBoxGraphOrder.IsChecked!.Value) {
 					this.leftPins.FixOrder();
 					this.rightPins.FixOrder();
 					this.topPins.FixOrder();

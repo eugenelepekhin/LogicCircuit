@@ -6,7 +6,7 @@ namespace LogicCircuit {
 	/// Interaction logic for DialogProbe.xaml
 	/// </summary>
 	public partial class DialogProbe : Window {
-		private SettingsWindowLocationCache windowLocation;
+		private SettingsWindowLocationCache? windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 
 		private readonly CircuitProbe probe;
@@ -17,7 +17,7 @@ namespace LogicCircuit {
 			this.InitializeComponent();
 
 			this.name.Text = this.probe.DisplayName;
-			this.description.Text = this.probe.Note;
+			this.description.Text = this.probe.Note ?? string.Empty;
 		}
 
 		private void ButtonOkClick(object sender, RoutedEventArgs e) {

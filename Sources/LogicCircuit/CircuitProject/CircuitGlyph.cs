@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,11 +12,11 @@ using System.Windows.Shapes;
 namespace LogicCircuit {
 	public abstract class CircuitGlyph : Symbol {
 
-		private List<Jam>[] jams;
+		private List<Jam>[]? jams;
 		private bool isUpdated;
 
 		protected abstract Circuit SymbolCircuit { get; }
-		private Circuit circuit;
+		private Circuit? circuit;
 		public Circuit Circuit {
 			get {
 				if(this.circuit == null) {
@@ -26,7 +28,7 @@ namespace LogicCircuit {
 
 		public abstract GridPoint Point { get; set; }
 
-		private FrameworkElement glyph;
+		private FrameworkElement? glyph;
 
 		public override FrameworkElement Glyph {
 			get { return this.glyph ?? (this.glyph = this.Circuit.CreateGlyph(this)); }
@@ -46,7 +48,7 @@ namespace LogicCircuit {
 
 		public abstract void Invalidate();
 
-		public FrameworkElement ProbeView { get; set; }
+		public FrameworkElement? ProbeView { get; set; }
 
 		protected CircuitGlyph() : base() {
 		}
@@ -85,7 +87,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		public Jam Jam(BasePin pin) {
+		public Jam? Jam(BasePin pin) {
 			this.Update();
 			foreach(List<Jam> list in this.jams) {
 				foreach(Jam jam in list) {
@@ -102,6 +104,7 @@ namespace LogicCircuit {
 			this.Invalidate();
 		}
 
+		[MemberNotNull(nameof(this.jams))]
 		private void Update() {
 			if(!this.isUpdated) {
 				if(this.jams == null) {
@@ -129,6 +132,7 @@ namespace LogicCircuit {
 				}
 				this.isUpdated = true;
 			}
+			Debug.Assert(this.jams != null);
 		}
 
 		private Jam CreateJam(BasePin pin) {
@@ -152,7 +156,7 @@ namespace LogicCircuit {
 			return shape;
 		}
 
-		private static bool AddJam(Canvas canvas, IEnumerable<Jam> list, Action<Jam, TextBlock> notationPosition) {
+		private static bool AddJam(Canvas canvas, IEnumerable<Jam> list, Action<Jam, TextBlock>? notationPosition) {
 			bool hasNotation = false;
 			foreach(Jam jam in list) {
 				Ellipse ellipse = new Ellipse();
@@ -177,7 +181,7 @@ namespace LogicCircuit {
 				ellipse.ToolTip = toolTip;
 				string jamNotation = jam.Pin.JamNotation;
 				if(!string.IsNullOrEmpty(jamNotation)) {
-					Tracer.Assert(notationPosition != null); // If pin has notation then it should belong to rectangular rendering circuit.
+					Tracer.Assert(notationPosition); // If pin has notation then it should belong to rectangular rendering circuit.
 					TextBlock text = new TextBlock();
 					text.Foreground = Brushes.Black;
 					int len = (jam.Pin.PinSide == PinSide.Top || jam.Pin.PinSide == PinSide.Bottom) ? 4 : 2;
@@ -185,7 +189,7 @@ namespace LogicCircuit {
 					text.ToolTip = toolTip;
 					text.FontSize = 8;
 					Panel.SetZIndex(text, 1);
-					notationPosition(jam, text);
+					notationPosition!(jam, text);
 					canvas.Children.Add(text);
 					hasNotation = true;
 				}
@@ -235,10 +239,10 @@ namespace LogicCircuit {
 		}
 
 		private void UpdateButtonGlyph(Panel panel) {
-			Tracer.Assert(panel != null);
-			CircuitButton button = this.Circuit as CircuitButton;
-			Tracer.Assert(button != null);
-			if(button.IsToggle) {
+			Tracer.Assert(panel);
+			CircuitButton? button = this.Circuit as CircuitButton;
+			Tracer.Assert(button);
+			if(button!.IsToggle) {
 				if(panel.Children.Count < 3) {
 					panel.Children.Add(CircuitGlyph.Skin<Grid>(SymbolShape.ToggleLed));
 				}
@@ -255,20 +259,20 @@ namespace LogicCircuit {
 			Canvas canvas = this.CreateGlyphCanvas(this);
 			CircuitGlyph.AddJam(canvas, this.Jams(), null);
 			FrameworkElement shape = CircuitGlyph.Skin(canvas, skin);
-			FrameworkElement probeView = shape.FindName("ProbeView") as FrameworkElement;
+			FrameworkElement? probeView = shape.FindName("ProbeView") as FrameworkElement;
 			Tracer.Assert(probeView != null);
-			this.ProbeView = probeView;
+			this.ProbeView = probeView!;
 
 			if(probeView is TextBlock textBlock) {
 				textBlock.Text = Sensor.UnknownValue;
 			} else {
-				TextBox textBox = (TextBox)probeView;
+				TextBox textBox = (TextBox)probeView!;
 				textBox.Text = Sensor.UnknownValue;
 			}
 
-			TextBlock notation = shape.FindName("Notation") as TextBlock;
+			TextBlock? notation = shape.FindName("Notation") as TextBlock;
 			Tracer.Assert(notation != null);
-			notation.Text = this.Circuit.Notation;
+			notation!.Text = this.Circuit.Notation;
 			return canvas;
 		}
 
@@ -297,13 +301,13 @@ namespace LogicCircuit {
 				CircuitGlyph.AddJam(canvas, this.Jams(), null);
 			}
 			FrameworkElement shape = CircuitGlyph.Skin(canvas, SymbolShape.LedMatrix);
-			UniformGrid grid = shape.FindName("ProbeView") as UniformGrid;
-			Tracer.Assert(grid != null);
+			UniformGrid? grid = shape.FindName("ProbeView") as UniformGrid;
+			Tracer.Assert(grid);
 			if(this == mainSymbol) {
-				this.ProbeView = grid;
+				this.ProbeView = grid!;
 			}
 			LedMatrix matrix = (LedMatrix)this.Circuit;
-			grid.Columns = matrix.Columns;
+			grid!.Columns = matrix.Columns;
 			grid.Rows = matrix.Rows;
 			string skin = (matrix.CellShape == LedMatrixCellShape.Round) ? SymbolShape.LedMatrixRoundCell : SymbolShape.LedMatrixRectCell;
 			int cellCount = matrix.Rows * matrix.Columns;
@@ -482,12 +486,12 @@ namespace LogicCircuit {
 		}
 
 		public FrameworkElement CreateShapedGlyph(string skin) {
-			Gate gate = this.Circuit as Gate;
-			Tracer.Assert(gate != null);
+			Gate? gate = this.Circuit as Gate;
+			Tracer.Assert(gate);
 			Canvas canvas = this.CreateGlyphCanvas(this);
 			CircuitGlyph.AddJam(canvas, this.Jams(), null);
 			FrameworkElement shape = CircuitGlyph.Skin(canvas, skin);
-			int top = Math.Max(0, gate.InputCount - 3) / 2;
+			int top = Math.Max(0, gate!.InputCount - 3) / 2;
 			int bottom = Math.Max(0, gate.InputCount - 3 - top);
 			if(shape.FindName("topLine") is Rectangle topLine) {
 				topLine.Height = Symbol.ScreenPoint(top);
@@ -499,7 +503,7 @@ namespace LogicCircuit {
 		}
 
 		public FrameworkElement CreateDisplayGlyph(CircuitGlyph mainSymbol) {
-			Tracer.Assert(mainSymbol != null);
+			Tracer.Assert(mainSymbol);
 			List<CircuitSymbol> list = ((LogicalCircuit)this.Circuit).CircuitSymbols().Where(s => s.Circuit.IsValidDisplay()).ToList();
 			GridPoint offset = Symbol.GridPoint(list.Select(s => s.Bounds()).Aggregate((r1, r2) => Rect.Union(r1, r2)).TopLeft);
 			DisplayCanvas canvas = this.CreateDisplayCanvas(mainSymbol);
@@ -549,7 +553,7 @@ namespace LogicCircuit {
 
 			public LogicalJamItem(BasePin pin, CircuitGlyph symbol, Jam innerJam) : base(pin, symbol) {
 				Tracer.Assert(innerJam != null && innerJam.CircuitSymbol.LogicalCircuit == symbol.Circuit);
-				this.innerJam = innerJam;
+				this.innerJam = innerJam!;
 			}
 		}
 	}

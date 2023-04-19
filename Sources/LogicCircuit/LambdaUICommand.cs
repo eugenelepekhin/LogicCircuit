@@ -5,15 +5,15 @@ using System.Windows.Input;
 namespace LogicCircuit {
 	public class LambdaUICommand : ICommand {
 
-		public event EventHandler CanExecuteChanged;
+		public event EventHandler? CanExecuteChanged;
 
 		public string Text { get; private set; }
 
-		private readonly Predicate<object> canExecutePredicate;
-		private readonly Action<object> executeAction;
+		private readonly Predicate<object?>? canExecutePredicate;
+		private readonly Action<object?> executeAction;
 
-		public KeyGesture KeyGesture { get; private set; }
-		public string InputGestureText {
+		public KeyGesture? KeyGesture { get; private set; }
+		public string? InputGestureText {
 			get {
 				if(this.KeyGesture != null) {
 					string text = this.KeyGesture.DisplayString;
@@ -26,10 +26,10 @@ namespace LogicCircuit {
 			}
 		}
 
-		public string IconPath { get; set; }
-		public FrameworkElement Icon => (this.IconPath != null) ? Symbol.Skin(this.IconPath) : null;
+		public string? IconPath { get; set; }
+		public FrameworkElement? Icon => (this.IconPath != null) ? Symbol.Skin(this.IconPath) : null;
 
-		public LambdaUICommand(string text, Predicate<object> canExecute, Action<object> execute, KeyGesture keyGesture) {
+		public LambdaUICommand(string text, Predicate<object?>? canExecute, Action<object?> execute, KeyGesture? keyGesture) {
 			if(string.IsNullOrEmpty(text)) {
 				throw new ArgumentNullException(nameof(text));
 			}
@@ -42,16 +42,16 @@ namespace LogicCircuit {
 			this.KeyGesture = keyGesture;
 		}
 
-		public LambdaUICommand(string text, Predicate<object> canExecute, Action<object> execute) : this(text, canExecute, execute, null) {
+		public LambdaUICommand(string text, Predicate<object?>? canExecute, Action<object?> execute) : this(text, canExecute, execute, null) {
 		}
 
-		public LambdaUICommand(string text, Action<object> execute, KeyGesture keyGesture) : this(text, null, execute, keyGesture) {
+		public LambdaUICommand(string text, Action<object?> execute, KeyGesture keyGesture) : this(text, null, execute, keyGesture) {
 		}
 
-		public LambdaUICommand(string text, Action<object> execute) : this(text, null, execute, null) {
+		public LambdaUICommand(string text, Action<object?> execute) : this(text, null, execute, null) {
 		}
 
-		public bool CanExecute(object parameter) {
+		public bool CanExecute(object? parameter) {
 			if(this.canExecutePredicate != null) {
 				try {
 					return this.canExecutePredicate(parameter);
@@ -63,7 +63,7 @@ namespace LogicCircuit {
 			return true;
 		}
 
-		public void Execute(object parameter) {
+		public void Execute(object? parameter) {
 			try {
 				if(this.CanExecute(parameter)) {
 					this.executeAction(parameter);

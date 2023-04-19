@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,12 +11,12 @@ namespace LogicCircuit {
 	/// Interaction logic for WireDisplayControl.xaml
 	/// </summary>
 	public partial class WireDisplayControl : UserControl {
-		private readonly Editor editor;
-		private DispatcherTimer timer;
+		private readonly Editor? editor;
+		private DispatcherTimer? timer;
 
-		private readonly CircuitState circuitState;
-		private readonly int[] parameter;
-		private readonly State[] state;
+		private readonly CircuitState? circuitState;
+		private readonly int[]? parameter;
+		private readonly State[]? state;
 		private bool initiated;
 		
 		public WireDisplayControl(Canvas canvas, Point point, Wire wire) {
@@ -27,11 +28,11 @@ namespace LogicCircuit {
 			this.UpdateLayout();
 
 			if(this.CaptureMouse() && Mouse.LeftButton == MouseButtonState.Pressed) {
-				this.editor = App.Mainframe.Editor;
-				CircuitMap map = this.editor.CircuitRunner.VisibleMap;
+				this.editor = App.Mainframe.Editor!;
+				CircuitMap map = this.editor.CircuitRunner!.VisibleMap!;
 				Tracer.Assert(wire.LogicalCircuit == map.Circuit);
 				this.parameter = map.StateIndexes(wire).ToArray();
-				this.circuitState = this.editor.CircuitRunner.CircuitState;
+				this.circuitState = this.editor.CircuitRunner.CircuitState!;
 				if(0 < this.parameter.Length && this.circuitState != null) {
 					this.state = new State[this.parameter.Length];
 					this.bitWidth.Text = Properties.Resources.WireDisplayBitWidth(this.parameter.Length);
@@ -49,7 +50,7 @@ namespace LogicCircuit {
 		}
 
 		public void Start() {
-			DispatcherTimer t = this.timer;
+			DispatcherTimer? t = this.timer;
 			if(t != null) {
 				this.TimerTick(null, null);
 				t.Start();
@@ -61,7 +62,7 @@ namespace LogicCircuit {
 			if(this.Parent is Panel parent) {
 				parent.Children.Remove(this);
 			}
-			DispatcherTimer t = this.timer;
+			DispatcherTimer? t = this.timer;
 			this.timer = null;
 			if(t != null) {
 				t.Stop();
@@ -78,8 +79,9 @@ namespace LogicCircuit {
 			this.Cancel();
 		}
 		
-		private void TimerTick(object sender, EventArgs e) {
-			if(!this.editor.InEditMode) {
+		private void TimerTick(object? sender, EventArgs? e) {
+			if(this.editor != null && !this.editor.InEditMode) {
+				Debug.Assert(this.state != null);
 				if(this.WasChanged()) {
 					this.display.Text = Properties.Resources.WireDisplayValue(CircuitFunction.ToText(this.state, true));
 				}
@@ -100,6 +102,7 @@ namespace LogicCircuit {
 		// This is very similar to probe. But for now lets not merge code.
 
 		private bool GetState() {
+			Debug.Assert(this.circuitState != null && this.parameter != null && this.state != null);
 			bool changed = false;
 			for(int i = 0; i < this.parameter.Length; i++) {
 				State s = this.circuitState[this.parameter[i]];

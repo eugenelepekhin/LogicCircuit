@@ -19,7 +19,7 @@ namespace LogicCircuit {
 				(marker, point) => marker.Resize(double.NaN, point.Y, point.X, double.NaN),
 
 				(marker, point) => marker.Resize(point.X, double.NaN, double.NaN, double.NaN),
-				null,
+				null!,
 				(marker, point) => marker.Resize(double.NaN, double.NaN, point.X, double.NaN),
 
 				(marker, point) => marker.Resize(point.X, double.NaN, double.NaN, point.Y),
@@ -30,7 +30,7 @@ namespace LogicCircuit {
 
 			private static readonly Cursor[]  cursors = new Cursor[] {
 				Cursors.SizeNWSE, Cursors.SizeNS, Cursors.SizeNESW,
-				Cursors.SizeWE, null, Cursors.SizeWE,
+				Cursors.SizeWE, null!, Cursors.SizeWE,
 				Cursors.SizeNESW, Cursors.SizeNS, Cursors.SizeNWSE
 			};
 

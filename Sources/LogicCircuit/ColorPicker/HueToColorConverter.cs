@@ -6,7 +6,7 @@ using System.Windows.Media;
 namespace LogicCircuit {
 	[ValueConversion(typeof(double), typeof(Color))]
 	public class HueToColorConverter : IValueConverter {
-		public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
+		public object? Convert(object value, Type targetType, object parameter, CultureInfo culture) {
 			if(value != null && value is double && targetType == typeof(Color)) {
 				return new HsvColor() { Hue = (double)value, Saturation = 1, Value = 1 }.ToRgb(255);
 			}

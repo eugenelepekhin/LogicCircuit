@@ -7,7 +7,7 @@ namespace LogicCircuit {
 	/// </summary>
 	public partial class DialogPin : Window {
 
-		private SettingsWindowLocationCache windowLocation;
+		private SettingsWindowLocationCache? windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 
 		private readonly Pin pin;
@@ -46,7 +46,7 @@ namespace LogicCircuit {
 				string notation = this.notation.Text.Trim();
 				string note = this.note.Text.Trim();
 				PinSide pinSide = ((EnumDescriptor<PinSide>)this.side.SelectedItem).Value;
-				bool inverted = this.inverted.IsChecked.Value;
+				bool inverted = this.inverted.IsChecked!.Value;
 				int bitWidth = (int)this.bitWidth.SelectedItem;
 
 				if(this.pin.Name != name || this.pin.JamNotation != notation || this.pin.Note != note ||

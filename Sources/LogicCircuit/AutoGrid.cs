@@ -99,7 +99,9 @@ namespace LogicCircuit {
 			if(!string.IsNullOrWhiteSpace(widths)) {
 				GridLengthConverter converter = new GridLengthConverter();
 				foreach(string text in widths.Split(';').Where(str => !string.IsNullOrWhiteSpace(str)).Select(str => str.Trim())) {
-					yield return (GridLength)converter.ConvertFromInvariantString(text);
+					object? obj = converter.ConvertFromInvariantString(text);
+					Tracer.Assert(obj);
+					yield return (GridLength)obj!;
 				}
 			} else {
 				yield return GridLength.Auto;
@@ -121,7 +123,7 @@ namespace LogicCircuit {
 				}
 			} else {
 				if(child is FrameworkElement fe && !(fe.MaxHeight < double.MaxValue || 0 < fe.Height)) {
-					TextBox textBox;
+					TextBox? textBox;
 					// Do not replace ListBox, ListView,... with ItemsControl. As too many of controls are ItemsControls.
 					if(fe is GroupBox || fe is RichTextBox || fe is TreeView || fe is ListView || fe is ListBox || fe is DataGrid ||
 						(textBox = fe as TextBox) != null && textBox.AcceptsReturn && !(1 < textBox.MinLines || textBox.MaxLines < int.MaxValue)

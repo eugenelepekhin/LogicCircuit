@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -77,11 +78,11 @@ namespace LogicCircuit {
 			return target.CircuitProject.TextNoteSet.Copy(this, target);
 		}
 
-		public static bool IsValidText(string text) {
-			FlowDocument doc = TextNote.Load(text);
+		public static bool IsValidText(string? text) {
+			FlowDocument? doc = TextNote.Load(text);
 			return doc != null && (
 				!string.IsNullOrWhiteSpace(new TextRange(doc.ContentStart, doc.ContentEnd).Text) ||
-				!text.StartsWith("<FlowDocument", StringComparison.OrdinalIgnoreCase)
+				!text!.StartsWith("<FlowDocument", StringComparison.OrdinalIgnoreCase)
 			);
 		}
 
@@ -102,7 +103,7 @@ namespace LogicCircuit {
 		}
 
 		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-		private static FlowDocument LoadPackage(string text) {
+		private static FlowDocument? LoadPackage(string? text) {
 			if(!string.IsNullOrEmpty(text)) {
 				try {
 					using(MemoryStream stream = new MemoryStream(Convert.FromBase64String(text))) {
@@ -124,7 +125,7 @@ namespace LogicCircuit {
 		}
 
 		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-		private static FlowDocument LoadXaml(string text) {
+		private static FlowDocument? LoadXaml(string text) {
 			try {
 				return XamlReader.Parse(text) as FlowDocument;
 			} catch(Exception exception) {
@@ -145,9 +146,9 @@ namespace LogicCircuit {
 			return TextNote.SavePackage(document);
 		}
 
-		public static FlowDocument Load(string text) {
-			if(text.StartsWith("<FlowDocument", StringComparison.OrdinalIgnoreCase)) {
-				FlowDocument document = TextNote.LoadXaml(text);
+		public static FlowDocument? Load(string? text) {
+			if(!string.IsNullOrWhiteSpace(text) && text.StartsWith("<FlowDocument", StringComparison.OrdinalIgnoreCase)) {
+				FlowDocument? document = TextNote.LoadXaml(text);
 				if(document != null) {
 					document.TextAlignment = TextAlignment.Left;
 					return document;
@@ -158,7 +159,8 @@ namespace LogicCircuit {
 		}
 
 		public bool Match(Regex regex) {
-			FlowDocument doc = TextNote.Load(this.Note);
+			FlowDocument? doc = TextNote.Load(this.Note);
+			Debug.Assert(doc != null);
 			TextRange range = new TextRange(doc.ContentStart, doc.ContentEnd);
 			string text = range.Text;
 			return !string.IsNullOrEmpty(text) && regex.IsMatch(text);

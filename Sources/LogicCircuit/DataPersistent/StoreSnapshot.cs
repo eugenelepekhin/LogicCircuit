@@ -13,17 +13,17 @@ namespace LogicCircuit.DataPersistent {
 		/// <summary>
 		/// Occurs after version of this store was changed
 		/// </summary>
-		public event EventHandler<VersionChangeEventArgs> VersionChanged;
+		public event EventHandler<VersionChangeEventArgs>? VersionChanged;
 
 		/// <summary>
 		/// Occurs when latest available version has changed. This can happed when other store have modified and committed data
 		/// </summary>
-		public event EventHandler LatestVersionChanged;
+		public event EventHandler? LatestVersionChanged;
 
 		/// <summary>
 		/// Occurred when transaction owned by this store rolled back.
 		/// </summary>
-		public event EventHandler<RolledBackEventArgs> RolledBack;
+		public event EventHandler<RolledBackEventArgs>? RolledBack;
 
 		/// <summary>
 		/// Gets the actual store that holds the data
@@ -95,7 +95,7 @@ namespace LogicCircuit.DataPersistent {
 		/// </summary>
 		public void Close() {
 			this.SnapStore.Committed -= new EventHandler(this.StoreDataCommitted);
-			this.SnapStore = null;
+			//this.SnapStore = null;
 			this.snapshotVersion = -1;
 		}
 
@@ -104,8 +104,8 @@ namespace LogicCircuit.DataPersistent {
 		/// </summary>
 		/// <param name="name"></param>
 		/// <returns></returns>
-		public ITableSnapshot Table(string name) {
-			ISnapTable snapTable = this.SnapStore.Table(name);
+		public ITableSnapshot? Table(string name) {
+			ISnapTable? snapTable = this.SnapStore.Table(name);
 			if(snapTable != null && snapTable.IsUserTable) {
 				return this.table[snapTable];
 			}
@@ -297,7 +297,7 @@ namespace LogicCircuit.DataPersistent {
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void StoreDataCommitted(object sender, EventArgs e) {
+		private void StoreDataCommitted(object? sender, EventArgs e) {
 			this.LatestVersionChanged?.Invoke(this, e);
 		}
 

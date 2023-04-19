@@ -2,7 +2,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
@@ -10,6 +9,7 @@ namespace LogicCircuit {
 	/// <summary>
 	/// Parse expressions over input and output pins.
 	/// </summary>
+	[SuppressMessage("Design", "CA1001:Types that own disposable fields should be disposable")]
 	public class ExpressionParser {
 
 		// BNF:
@@ -74,8 +74,8 @@ namespace LogicCircuit {
 		private readonly StringBuilder buffer = new StringBuilder();
 		private Token current;
 
-		private string error;
-		public string Error {
+		private string? error;
+		public string? Error {
 			get { return this.error; }
 			private set {
 				if(value == null || this.error == null) {
@@ -84,12 +84,14 @@ namespace LogicCircuit {
 			}
 		}
 
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public ExpressionParser(CircuitTestSocket socket) {
 			this.socket = socket;
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
-		public Func<TruthState, int> Parse(string text) {
-			Expression body = this.ParseExpression(text);
+		public Func<TruthState, int>? Parse(string text) {
+			Expression? body = this.ParseExpression(text);
 			if(body == null) {
 				return null;
 			}
@@ -100,8 +102,8 @@ namespace LogicCircuit {
 			return lambda.Compile();
 		}
 
-		public Predicate<TruthState> Parse(string text, bool inverted) {
-			Expression body = this.ParseExpression(text);
+		public Predicate<TruthState>? Parse(string text, bool inverted) {
+			Expression? body = this.ParseExpression(text);
 			if(body == null) {
 				return null;
 			}
@@ -112,10 +114,10 @@ namespace LogicCircuit {
 			return lambda.Compile();
 		}
 
-		private Expression ParseExpression(string text) {
+		private Expression? ParseExpression(string text) {
 			this.Error = null;
 			this.current = new Token();
-			Expression body = null;
+			Expression? body = null;
 			using(this.reader = new StringReader(text)) {
 				body = this.CircuitExpression();
 				if(body == null) {
@@ -130,7 +132,7 @@ namespace LogicCircuit {
 			return body;
 		}
 
-		private Expression ErrorUnexpected(Token token) {
+		private Expression? ErrorUnexpected(Token token) {
 			this.Error = Properties.Resources.ParserErrorUnexpected(token.Value);
 			return null;
 		}
@@ -140,7 +142,7 @@ namespace LogicCircuit {
 			return Token.Eos();
 		}
 
-		private Expression ExprMissing(Token after) {
+		private Expression? ExprMissing(Token after) {
 			this.Error = Properties.Resources.ParserErrorExpressionMissing(after.Value);
 			return null;
 		}
@@ -174,7 +176,7 @@ namespace LogicCircuit {
 			if(char.IsDigit(c)) {
 				return this.NextNumber();
 			}
-			if("()+-*/%&|^~!=<>".Contains(c)) {
+			if("()+-*/%&|^~!=<>".Contains(c, StringComparison.Ordinal)) {
 				return this.NextOperator();
 			}
 			this.Error = Properties.Resources.ParserErrorUnknownChar(c);
@@ -328,17 +330,17 @@ namespace LogicCircuit {
 			return new Token() { Value = this.buffer.ToString(), TokenType = tokenType };
 		}
 
-		private Expression CircuitExpression() {
+		private Expression? CircuitExpression() {
 			return this.LogicalOr();
 		}
 
-		private Expression LogicalOr() {
-			Expression left = this.LogicalAnd();
+		private Expression? LogicalOr() {
+			Expression? left = this.LogicalAnd();
 			if(left != null) {
 				Token token = this.Current();
 				while(token.TokenType == TokenType.Binary && token.Is("||")) {
 					this.Next();
-					Expression right = this.LogicalAnd();
+					Expression? right = this.LogicalAnd();
 					if(right == null) {
 						return this.ExprMissing(token);
 					}
@@ -356,13 +358,13 @@ namespace LogicCircuit {
 			return left;
 		}
 
-		private Expression LogicalAnd() {
-			Expression left = this.Comparison();
+		private Expression? LogicalAnd() {
+			Expression? left = this.Comparison();
 			if(left != null) {
 				Token token = this.Current();
 				while(token.TokenType == TokenType.Binary && token.Is("&&")) {
 					this.Next();
-					Expression right = this.Comparison();
+					Expression? right = this.Comparison();
 					if(right == null) {
 						return this.ExprMissing(token);
 					}
@@ -380,12 +382,12 @@ namespace LogicCircuit {
 			return left;
 		}
 
-		private Expression Comparison() {
-			Expression left = this.Addition();
+		private Expression? Comparison() {
+			Expression? left = this.Addition();
 			if(left != null) {
 				Token token = this.Current();
 				if(token.TokenType == TokenType.Binary) {
-					Func<Expression, Expression, Expression> compare = null;
+					Func<Expression, Expression, Expression>? compare = null;
 					switch(token.Value) {
 					case "=":
 					case "==":
@@ -410,7 +412,7 @@ namespace LogicCircuit {
 					}
 					if(compare != null) {
 						this.Next();
-						Expression right = this.Addition();
+						Expression? right = this.Addition();
 						if(right == null) {
 							return this.ExprMissing(token);
 						}
@@ -425,13 +427,13 @@ namespace LogicCircuit {
 			return left;
 		}
 
-		private Expression Addition() {
-			Expression left = this.Multiplication();
+		private Expression? Addition() {
+			Expression? left = this.Multiplication();
 			if(left != null) {
 				Token token = this.Current();
 				while(token.TokenType == TokenType.Binary && token.Is("+", "-")) {
 					this.Next();
-					Expression right = this.Multiplication();
+					Expression? right = this.Multiplication();
 					if(right == null) {
 						return this.ExprMissing(token);
 					}
@@ -449,13 +451,13 @@ namespace LogicCircuit {
 			return left;
 		}
 
-		private Expression Multiplication() {
-			Expression left = this.Conjunction();
+		private Expression? Multiplication() {
+			Expression? left = this.Conjunction();
 			if(left != null) {
 				Token token = this.Current();
 				while(token.TokenType == TokenType.Binary && token.Is("*", "/", "%")) {
 					this.Next();
-					Expression right = this.Conjunction();
+					Expression? right = this.Conjunction();
 					if(right == null) {
 						return this.ExprMissing(token);
 					}
@@ -476,13 +478,13 @@ namespace LogicCircuit {
 			return left;
 		}
 
-		private Expression Conjunction() {
-			Expression left = this.Disjunction();
+		private Expression? Conjunction() {
+			Expression? left = this.Disjunction();
 			if(left != null) {
 				Token token = this.Current();
 				while(token.TokenType == TokenType.Binary && token.Is("|", "^")) {
 					this.Next();
-					Expression right = this.Disjunction();
+					Expression? right = this.Disjunction();
 					if(right == null) {
 						return this.ExprMissing(token);
 					}
@@ -500,13 +502,13 @@ namespace LogicCircuit {
 			return left;
 		}
 
-		private Expression Disjunction() {
-			Expression left = this.Shift();
+		private Expression? Disjunction() {
+			Expression? left = this.Shift();
 			if(left != null) {
 				Token token = this.Current();
 				while(token.TokenType == TokenType.Binary && token.Is("&")) {
 					this.Next();
-					Expression right = this.Shift();
+					Expression? right = this.Shift();
 					if(right == null) {
 						return this.ExprMissing(token);
 					}
@@ -517,13 +519,13 @@ namespace LogicCircuit {
 			return left;
 		}
 
-		private Expression Shift() {
-			Expression left = this.Primary();
+		private Expression? Shift() {
+			Expression? left = this.Primary();
 			if(left != null) {
 				Token token = this.Current();
 				while(token.TokenType == TokenType.Binary && token.Is("<<", ">>")) {
 					this.Next();
-					Expression right = this.Primary();
+					Expression? right = this.Primary();
 					if(right == null) {
 						return this.ExprMissing(token);
 					}
@@ -541,11 +543,11 @@ namespace LogicCircuit {
 			return left;
 		}
 
-		private Expression Primary() {
+		private Expression? Primary() {
 			Token token = this.Current();
 			if(token.TokenType == TokenType.Open) {
 				this.Next();
-				Expression expr = this.CircuitExpression();
+				Expression? expr = this.CircuitExpression();
 				if(expr != null) {
 					token = this.Current();
 					if(token.TokenType != TokenType.Close) {
@@ -560,7 +562,7 @@ namespace LogicCircuit {
 			}
 			if(token.TokenType == TokenType.Binary && token.Is("-")) {
 				this.Next();
-				Expression expr = this.Primary();
+				Expression? expr = this.Primary();
 				if(expr != null) {
 					return Expression.Negate(expr);
 				} else {
@@ -569,7 +571,7 @@ namespace LogicCircuit {
 			}
 			if(token.TokenType == TokenType.Unary && token.Value == "~") {
 				this.Next();
-				Expression expr = this.Primary();
+				Expression? expr = this.Primary();
 				if(expr != null) {
 					return Expression.Not(expr);
 				} else {
@@ -578,7 +580,7 @@ namespace LogicCircuit {
 			}
 			if(token.TokenType == TokenType.Unary && token.Is("!")) {
 				this.Next();
-				Expression expr = this.Primary();
+				Expression? expr = this.Primary();
 				if(expr != null) {
 					return Expression.Condition(
 						Expression.Equal(expr, Expression.Constant(0)),
@@ -604,14 +606,14 @@ namespace LogicCircuit {
 			return this.ErrorUnexpected(token);
 		}
 
-		private Expression Variable(string name) {
+		private Expression? Variable(string name) {
 			int index = 0;
 			foreach(InputPinSocket pin in this.socket.Inputs) {
 				if(StringComparer.Ordinal.Equals(pin.Pin.Name, name)) {
 					return Expression.MakeIndex(
 						Expression.Property(
 							this.stateParameter,
-							typeof(TruthState).GetProperty("Input")
+							typeof(TruthState).GetProperty(nameof(TruthState.Input))!
 						),
 						typeof(int[]).GetProperty("Item"),
 						new Expression[] { Expression.Constant(index) }
@@ -625,7 +627,7 @@ namespace LogicCircuit {
 					return Expression.MakeIndex(
 						Expression.Property(
 							this.stateParameter,
-							typeof(TruthState).GetProperty("Output")
+							typeof(TruthState).GetProperty(nameof(TruthState.Output))!
 						),
 						typeof(int[]).GetProperty("Item"),
 						new Expression[] { Expression.Constant(index) }
@@ -637,7 +639,7 @@ namespace LogicCircuit {
 			return null;
 		}
 
-		private static Expression Literal(Token token) {
+		private static Expression? Literal(Token token) {
 			switch(token.TokenType) {
 			case TokenType.IntBin: return Expression.Constant(ExpressionParser.FromBin(token.Value));
 			case TokenType.IntDec: return Expression.Constant(ExpressionParser.FromDec(token.Value));

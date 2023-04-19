@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -15,13 +14,11 @@ namespace LogicCircuit {
 	/// <summary>
 	/// Interaction logic for Mainframe.xaml
 	/// </summary>
-	[SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
-	[SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
-	public sealed partial class Mainframe : Window, INotifyPropertyChanged {
+	public sealed partial class Mainframe : Window, INotifyPropertyChanged, IDisposable {
 
-		public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler? PropertyChanged;
 
-		private SettingsWindowLocationCache windowLocation;
+		private SettingsWindowLocationCache? windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this, double.NaN, double.NaN)); } }
 
 		public SettingsGridLengthCache ProjectWidth { get; private set; }
@@ -36,8 +33,8 @@ namespace LogicCircuit {
 			}
 		}
 
-		private Editor editor;
-		public Editor Editor {
+		private Editor? editor;
+		public Editor? Editor {
 			get { return this.editor; }
 			set {
 				if(this.editor != value) {
@@ -57,8 +54,8 @@ namespace LogicCircuit {
 			}
 		}
 
-		private Timer autoSaveTimer;
-		private LogicalCircuit LogicalCircuit() { return this.Editor.Project.LogicalCircuit; }
+		private Timer? autoSaveTimer;
+		private LogicalCircuit LogicalCircuit() { return this.Editor!.Project.LogicalCircuit; }
 
 		private string statusText = Properties.Resources.Loading;
 		private volatile bool statusChanged;
@@ -113,7 +110,7 @@ namespace LogicCircuit {
 		};
 		public LambdaUICommand CommandExportImage => new LambdaUICommand(Properties.Resources.CommandFileExportImage,
 			o => this.Editor != null && !this.LogicalCircuit().IsEmpty(),
-			o => this.ShowDialog(new DialogExportImage(this.Editor))
+			o => this.ShowDialog(new DialogExportImage(this.Editor!))
 		) {
 			IconPath = "Icon/FileExportImage.xaml"
 		};
@@ -121,7 +118,11 @@ namespace LogicCircuit {
 			IconPath = "Icon/FileClose.xaml"
 		};
 		[SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-		public LambdaUICommand CommandHelp => new LambdaUICommand(Properties.Resources.CommandHelpView, o => Process.Start(Properties.Resources.HelpContent), new KeyGesture(Key.F1)) {
+		public LambdaUICommand CommandHelp => new LambdaUICommand(
+			Properties.Resources.CommandHelpView,
+			o => Process.Start(new ProcessStartInfo(Properties.Resources.HelpContent) { UseShellExecute = true }),
+			new KeyGesture(Key.F1)
+		) {
 			IconPath = "Icon/F1Help.xaml"
 		};
 		public LambdaUICommand CommandAbout => new LambdaUICommand(Properties.Resources.CommandHelpAbout, o => this.ShowDialog(new DialogAbout()));
@@ -129,7 +130,7 @@ namespace LogicCircuit {
 			bool? result = this.ShowDialog(new DialogOptions(this));
 			if(result.HasValue && result.Value) {
 				this.NotifyPropertyChanged(nameof(this.Editor));
-				this.Editor.FullRefresh();
+				this.Editor!.FullRefresh();
 			}
 		}) {
 			IconPath = "Icon/ToolsOptions.xaml"
@@ -144,7 +145,7 @@ namespace LogicCircuit {
 			this.DiagramWidth = new SettingsGridLengthCache(Settings.User, "Mainframe.DiagramWidth", "0.75*");
 
 			// Create this command here as it used multiple times not like all other commands only onces when menu is created.
-			this.CommandOpenRecent = new LambdaUICommand(Properties.Resources.CommandFileOpenRecent, file => this.OpenRecent(file as string));
+			this.CommandOpenRecent = new LambdaUICommand(Properties.Resources.CommandFileOpenRecent, file => this.OpenRecent((file as string)!));
 
 			this.DataContext = this;
 			this.InitializeComponent();
@@ -153,7 +154,7 @@ namespace LogicCircuit {
 
 			Thread thread = new Thread(new ThreadStart(() => {
 				try {
-					string file = App.CurrentApp.FileToOpen;
+					string? file = App.CurrentApp.FileToOpen;
 					if(string.IsNullOrEmpty(file) || !File.Exists(file)) {
 						if(Settings.User.LoadLastFileOnStartup) {
 							file = Settings.User.RecentFile();
@@ -210,10 +211,15 @@ namespace LogicCircuit {
 			#endif
 		}
 
+		public void Dispose() {
+			this.autoSaveTimer?.Dispose();
+			this.autoSaveTimer = null;
+		}
+
 		internal void ResetAutoSaveTimer() {
 			int interval = this.AutoSaveInterval;
 			interval = (interval == 0) ? Timeout.Infinite : interval * 1000;
-			this.autoSaveTimer.Change(interval, interval);
+			this.autoSaveTimer!.Change(interval, interval);
 		}
 
 		protected override void OnClosing(System.ComponentModel.CancelEventArgs e) {
@@ -233,7 +239,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		internal void NotifyPropertyChanged(PropertyChangedEventHandler handler, object sender, string propertyName) {
+		internal void NotifyPropertyChanged(PropertyChangedEventHandler? handler, object sender, string propertyName) {
 			if(handler != null) {
 				if(this.Dispatcher.Thread != Thread.CurrentThread) {
 					this.Dispatcher.BeginInvoke(new Action<PropertyChangedEventHandler, object, string>(this.NotifyPropertyChanged),
@@ -249,7 +255,7 @@ namespace LogicCircuit {
 			this.NotifyPropertyChanged(this.PropertyChanged, this, propertyName);
 		}
 
-		private void ShowMessage(string message, string details, MessageBoxImage messageBoxImage) {
+		private void ShowMessage(string message, string? details, MessageBoxImage messageBoxImage) {
 			if(!this.Dispatcher.CheckAccess()) {
 				this.Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle,
 					new Action<string, string, MessageBoxImage>(this.ShowMessage), message, details, messageBoxImage
@@ -264,7 +270,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private void ShowErrorMessage(string message, string details) {
+		private void ShowErrorMessage(string message, string? details) {
 			this.ShowMessage(message, details, MessageBoxImage.Error);
 		}
 
@@ -442,7 +448,7 @@ namespace LogicCircuit {
 
 		private void PowerButtonMouseDown(object sender, MouseButtonEventArgs e) {
 			try {
-				Editor current = this.Editor;
+				Editor? current = this.Editor;
 				if(e.ChangedButton == MouseButton.Left && current != null) {
 					current.Power = !current.Power;
 				}
@@ -452,12 +458,12 @@ namespace LogicCircuit {
 			}
 		}
 
-		private TreeViewItem Container(TreeView treeView, CircuitMap map) {
-			Tracer.Assert(map != null);
+		private TreeViewItem? Container(TreeView treeView, CircuitMap map) {
+			Tracer.Assert(map);
 			if(map.Parent == null) {
 				return (TreeViewItem)treeView.ItemContainerGenerator.ContainerFromItem(map);
 			} else {
-				TreeViewItem parent = this.Container(treeView, map.Parent);
+				TreeViewItem? parent = this.Container(treeView, map.Parent);
 				if(parent != null) {
 					parent.IsExpanded = true;
 					return (TreeViewItem)parent.ItemContainerGenerator.ContainerFromItem(map);
@@ -473,7 +479,7 @@ namespace LogicCircuit {
 					if(sender is TreeView treeView && treeView.SelectedItem != null) {
 						if(treeView.SelectedItem is CircuitMap map) {
 							this.Editor.OpenLogicalCircuit(map);
-							TreeViewItem item = this.Container(treeView, map);
+							TreeViewItem? item = this.Container(treeView, map);
 							if(item != null) {
 								item.IsExpanded = true;
 							}
@@ -491,7 +497,7 @@ namespace LogicCircuit {
 			try {
 				if(sender == e.OriginalSource && e.NewValue != null && !object.ReferenceEquals(e.OldValue, e.NewValue)) {
 					if(e.NewValue is CircuitMap map) {
-						TreeViewItem item = this.Container((TreeView)sender, map);
+						TreeViewItem? item = this.Container((TreeView)sender, map);
 						if(item != null) {
 							item.IsExpanded = true;
 							item.BringIntoView();

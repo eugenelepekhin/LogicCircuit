@@ -8,8 +8,8 @@ namespace LogicCircuit {
 		public static IComparer<PinOrderDescriptor> Comparer { get; } = new PinOrderComparer();
 
 		private class PinOrderComparer : IComparer<PinOrderDescriptor>, IComparer {
-			public int Compare(PinOrderDescriptor x, PinOrderDescriptor y) => x.CompareTo(y);
-			public int Compare(object x, object y) => this.Compare((PinOrderDescriptor)x, (PinOrderDescriptor)y);
+			public int Compare(PinOrderDescriptor? x, PinOrderDescriptor? y) => x!.CompareTo(y!);
+			public int Compare(object? x, object? y) => this.Compare((PinOrderDescriptor?)x, (PinOrderDescriptor?)y);
 		}
 
 		private int index;
@@ -31,7 +31,7 @@ namespace LogicCircuit {
 			this.index = pin.Index;
 			this.name = pin.Name;
 			CircuitSymbolSet symbolSet = pin.CircuitProject.CircuitSymbolSet;
-			CircuitSymbol symbol = symbolSet.SelectByCircuit(pin).FirstOrDefault();
+			CircuitSymbol symbol = symbolSet.SelectByCircuit(pin).First();
 			this.x = symbol.X;
 			this.y = symbol.Y;
 		}

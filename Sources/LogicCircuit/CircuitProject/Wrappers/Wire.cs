@@ -18,7 +18,7 @@ namespace LogicCircuit {
 		public int Y1;
 		public int X2;
 		public int Y2;
-		internal Wire Wire;
+		internal Wire? Wire;
 		// Field accessors
 		// Accessor of the WireId field
 		public sealed class WireIdField : IField<WireData, Guid>, IFieldSerializer<WireData> {
@@ -237,9 +237,9 @@ namespace LogicCircuit {
 			private WireField() {}
 			public string Name { get { return "WireWrapper"; } }
 			public int Order { get; set; }
-			public Wire DefaultValue { get { return null; } }
+			public Wire DefaultValue { get { return null!; } }
 			public Wire GetValue(ref WireData record) {
-				return record.Wire;
+				return record.Wire!;
 			}
 			public void SetValue(ref WireData record, Wire value) {
 				record.Wire = value;
@@ -247,7 +247,7 @@ namespace LogicCircuit {
 			public int Compare(ref WireData l, ref WireData r) {
 				return this.Compare(l.Wire, r.Wire);
 			}
-			public int Compare(Wire l, Wire r) {
+			public int Compare(Wire? l, Wire? r) {
 				if(object.ReferenceEquals(l, r)) return 0;
 				if(l == null) return -1;
 				if(r == null) return 1;
@@ -277,7 +277,8 @@ namespace LogicCircuit {
 
 		// Creates all foreign keys of the table
 		public static void CreateForeignKeys(StoreSnapshot store) {
-			TableSnapshot<WireData> table = (TableSnapshot<WireData>)store.Table("Wire");
+			TableSnapshot<WireData>? table = (TableSnapshot<WireData>?)store.Table("Wire");
+			Debug.Assert(table != null);
 			table.CreateForeignKey("FK_LogicalCircuit_Wire", store.Table("LogicalCircuit"), WireData.LogicalCircuitIdField.Field, ForeignKeyAction.Cascade, false);
 		}
 	}
@@ -291,6 +292,7 @@ namespace LogicCircuit {
 		public CircuitProject CircuitProject { get; private set; }
 
 		// Constructor
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public Wire(CircuitProject store, RowId rowIdWire) {
 			Debug.Assert(!rowIdWire.IsEmpty);
 			this.CircuitProject = store;
@@ -299,6 +301,7 @@ namespace LogicCircuit {
 			this.Table.SetField(this.WireRowId, WireData.WireField.Field, this);
 			this.InitializeWire();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		partial void InitializeWire();
 
@@ -324,7 +327,7 @@ namespace LogicCircuit {
 
 		// Gets or sets the value referred by the foreign key on field LogicalCircuitId
 		protected override LogicalCircuit SymbolLogicalCircuit {
-			get { return this.CircuitProject.LogicalCircuitSet.FindByLogicalCircuitId(this.Table.GetField(this.WireRowId, WireData.LogicalCircuitIdField.Field)); }
+			get { return this.CircuitProject.LogicalCircuitSet.FindByLogicalCircuitId(this.Table.GetField(this.WireRowId, WireData.LogicalCircuitIdField.Field))!; }
 			set { this.Table.SetField(this.WireRowId, WireData.LogicalCircuitIdField.Field, value.LogicalCircuitId); }
 		}
 
@@ -387,7 +390,7 @@ namespace LogicCircuit {
 	// Wrapper for table Wire.
 	partial class WireSet : INotifyCollectionChanged, IEnumerable<Wire> {
 
-		public event NotifyCollectionChangedEventHandler CollectionChanged;
+		public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
 		internal TableSnapshot<WireData> Table { get; private set; }
 
@@ -395,8 +398,9 @@ namespace LogicCircuit {
 		public CircuitProject CircuitProject { get { return (CircuitProject)this.Table.StoreSnapshot; } }
 
 		// Constructor
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public WireSet(CircuitProject store) {
-			ITableSnapshot table = store.Table("Wire");
+			ITableSnapshot? table = store.Table("Wire");
 			if(table != null) {
 				Debug.Assert(store.IsFrozen, "The store should be frozen");
 				this.Table = (TableSnapshot<WireData>)table;
@@ -406,6 +410,7 @@ namespace LogicCircuit {
 			}
 			this.InitializeWireSet();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		partial void InitializeWireSet();
 
@@ -417,7 +422,7 @@ namespace LogicCircuit {
 
 
 		// gets items wrapper by RowId
-		public Wire Find(RowId rowId) {
+		public Wire? Find(RowId rowId) {
 			if(!rowId.IsEmpty) {
 				return this.Table.GetField(rowId, WireData.WireField.Field);
 			}
@@ -428,13 +433,14 @@ namespace LogicCircuit {
 		// gets items wrapper by RowId
 		private IEnumerable<Wire> Select(IEnumerable<RowId> rows) {
 			foreach(RowId rowId in rows) {
-				Wire item = this.Find(rowId);
+				Wire? item = this.Find(rowId);
 				Debug.Assert(item != null, "What is the reason for the item not to be found?");
 				yield return item;
 			}
 		}
 
 		// Create wrapper for the row and register it in the dictionary
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static")]
 		private Wire Create(RowId rowId) {
 			Wire item = new Wire(this.CircuitProject, rowId);
 			return item;
@@ -443,7 +449,7 @@ namespace LogicCircuit {
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		internal Wire FindOrCreate(RowId rowId) {
 			Debug.Assert(!rowId.IsEmpty && !this.Table.IsDeleted(rowId), "Bad RowId");
-			Wire item;
+			Wire? item;
 			if((item = this.Find(rowId)) != null) {
 				Debug.Assert(!item.IsDeleted(), "Deleted item should not be present in the dictionary");
 				return item;
@@ -476,7 +482,7 @@ namespace LogicCircuit {
 		// Search helpers
 
 		// Finds Wire by WireId
-		public Wire Find(Guid wireId) {
+		public Wire? Find(Guid wireId) {
 			return this.Find(this.Table.Find(WireData.WireIdField.Field, wireId));
 		}
 
@@ -494,17 +500,17 @@ namespace LogicCircuit {
 		}
 
 		private void NotifyCollectionChanged(NotifyCollectionChangedEventArgs arg) {
-			NotifyCollectionChangedEventHandler handler = this.CollectionChanged;
+			NotifyCollectionChangedEventHandler? handler = this.CollectionChanged;
 			if(handler != null) {
 				handler(this, arg);
 			}
 		}
 
-		internal List<Wire> UpdateSet(int oldVersion, int newVersion) {
-			IEnumerator<TableChange<WireData>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
+		internal List<Wire>? UpdateSet(int oldVersion, int newVersion) {
+			IEnumerator<TableChange<WireData>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
 			if(change != null) {
 				bool handlerAttached = (this.CollectionChanged != null);
-				List<Wire> del = (handlerAttached) ? new List<Wire>() : null;
+				List<Wire>? del = (handlerAttached) ? new List<Wire>() : null;
 				while(change.MoveNext()) {
 					switch(change.Current.Action) {
 					case SnapTableAction.Insert:
@@ -515,7 +521,7 @@ namespace LogicCircuit {
 						if(handlerAttached) {
 							Wire item = change.Current.GetOldField(WireData.WireField.Field);
 							Debug.Assert(item.IsDeleted());
-							del.Add(item);
+							del!.Add(item);
 						}
 						break;
 					default:
@@ -530,11 +536,11 @@ namespace LogicCircuit {
 			return null;
 		}
 
-		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<Wire> deleted) {
-			IEnumerator<TableChange<WireData>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
+		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<Wire>? deleted) {
+			IEnumerator<TableChange<WireData>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
 			if(change != null) {
 				bool handlerAttached = (this.CollectionChanged != null);
-				List<Wire> add = (handlerAttached) ? new List<Wire>() : null;
+				List<Wire>? add = (handlerAttached) ? new List<Wire>() : null;
 				this.StartNotifyWireSetChanged(oldVersion, newVersion);
 				while(change.MoveNext()) {
 					this.NotifyWireSetChanged(change.Current);
@@ -542,7 +548,7 @@ namespace LogicCircuit {
 					case SnapTableAction.Insert:
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item was not created?");
 						if(handlerAttached) {
-							add.Add(this.Find(change.Current.RowId));
+							add!.Add(this.Find(change.Current.RowId)!);
 						}
 						break;
 					case SnapTableAction.Delete:
@@ -551,7 +557,7 @@ namespace LogicCircuit {
 					default:
 						Debug.Assert(change.Current.Action == SnapTableAction.Update, "Unknown action");
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item does not exist during update?");
-						this.Find(change.Current.RowId).NotifyChanged(change.Current);
+						this.Find(change.Current.RowId)!.NotifyChanged(change.Current);
 						break;
 					}
 				}
@@ -560,7 +566,7 @@ namespace LogicCircuit {
 					if(deleted != null && 0 < deleted.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, deleted));
 					}
-					if(0 < add.Count) {
+					if(0 < add!.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, add));
 					}
 				}

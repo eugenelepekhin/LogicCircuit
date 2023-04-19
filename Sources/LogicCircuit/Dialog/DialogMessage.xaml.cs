@@ -14,7 +14,7 @@ namespace LogicCircuit {
 	public partial class DialogMessage : Window {
 
 		public static MessageBoxResult Show(
-			Window parent, string caption, string message, string details, MessageBoxImage image, MessageBoxButton button
+			Window parent, string? caption, string? message, string? details, MessageBoxImage image, MessageBoxButton button
 		) {
 			DialogMessage dialog = new DialogMessage {
 				Caption = caption ?? string.Empty,
@@ -30,9 +30,9 @@ namespace LogicCircuit {
 			return dialog.messageBoxResult;
 		}
 
-		public string Caption { get; private set; }
-		public string Message { get; private set; }
-		public string Details { get; private set; }
+		public string? Caption { get; private set; }
+		public string? Message { get; private set; }
+		public string? Details { get; private set; }
 		private MessageBoxImage image;
 		public MessageBoxButton MessageBoxButton { get; private set; }
 		private MessageBoxResult messageBoxResult = MessageBoxResult.None;
@@ -67,23 +67,23 @@ namespace LogicCircuit {
 						Hyperlink link = new Hyperlink(new Run(txt)) {
 							NavigateUri = new Uri(uri)
 						};
-						this.message.Inlines.Add(link);
+						this.textBlockMessage.Inlines.Add(link);
 					} else {
-						this.message.Inlines.Add(new Run(s));
+						this.textBlockMessage.Inlines.Add(new Run(s));
 					}
 				}
-				this.message.Inlines.AddRange(inlines);
+				this.textBlockMessage.Inlines.AddRange(inlines);
 				return;
 			} catch(Exception exception) {
 				Tracer.Report("DialogMessage.SetMessage", exception);
 			}
-			this.message.Inlines.Clear();
-			this.message.Text = text;
+			this.textBlockMessage.Inlines.Clear();
+			this.textBlockMessage.Text = text;
 		}
 
 		private void DialogMessageLoaded(object sender, RoutedEventArgs e) {
 			try {
-				this.SetMessage(this.Message);
+				this.SetMessage(this.Message!);
 				SystemSound sound;
 				switch(this.image) {
 				case MessageBoxImage.Information:

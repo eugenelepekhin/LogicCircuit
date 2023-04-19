@@ -8,7 +8,7 @@ namespace LogicCircuit {
 	/// </summary>
 	public partial class DialogReport : Window {
 
-		private SettingsWindowLocationCache windowLocation;
+		private SettingsWindowLocationCache? windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 
 		public FlowDocument Document { get; private set; }

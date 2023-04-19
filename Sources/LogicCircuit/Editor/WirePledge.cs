@@ -33,7 +33,7 @@ namespace LogicCircuit {
 
 			public override void Commit(EditorDiagram editor, Point point, bool withWires) {
 				this.Move(editor, point);
-				Wire wire = editor.CreateWire(this.Point1, this.Point2);
+				Wire? wire = editor.CreateWire(this.Point1, this.Point2);
 				if(wire == null) {
 					wire = editor.FindWireNear(point);
 					if(wire != null) {

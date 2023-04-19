@@ -7,7 +7,7 @@ using System.Windows.Media;
 namespace LogicCircuit {
 	public class FunctionButton : OneBitConst, IFunctionVisual {
 
-		private static Brush[] stateBrush;
+		private static Brush[]? stateBrush;
 
 		private readonly List<CircuitSymbol> circuitSymbol;
 		private readonly bool isToggle;
@@ -36,7 +36,7 @@ namespace LogicCircuit {
 
 		public override string ReportName { get { return Properties.Resources.NameButton; } }
 
-		public CircuitSymbol ButtonSymbol() {
+		public CircuitSymbol? ButtonSymbol() {
 			foreach(CircuitSymbol symbol in this.circuitSymbol) {
 				if(symbol.Circuit is CircuitButton) {
 					return symbol;
@@ -85,9 +85,9 @@ namespace LogicCircuit {
 
 		public void Redraw() {
 			if(this.isToggle) {
-				ButtonControl button = null;
+				ButtonControl? button = null;
 				if(this.circuitSymbol.Count == 1) {
-					button = (ButtonControl)this.circuitSymbol[0].ProbeView;
+					button = (ButtonControl)this.circuitSymbol[0].ProbeView!;
 				} else {
 					LogicalCircuit currentCircuit = this.project.LogicalCircuit;
 					CircuitSymbol symbol = this.circuitSymbol.First(s => s.LogicalCircuit == currentCircuit);
@@ -101,13 +101,13 @@ namespace LogicCircuit {
 			Canvas canvas = (Canvas)button.Parent;
 			Panel panel = (Panel)canvas.Children[canvas.Children.Count - 1];
 			Border border = (Border)panel.Children[0];
-			Tracer.Assert(border != null);
-			border.Background = FunctionButton.stateBrush[(int)state];
+			Tracer.Assert(border);
+			border.Background = FunctionButton.stateBrush![(int)state];
 		}
 
 		private ButtonControl ProbeView(CircuitSymbol symbol) {
 			if(symbol == this.circuitSymbol[0]) {
-				return (ButtonControl)this.circuitSymbol[0].ProbeView;
+				return (ButtonControl)this.circuitSymbol[0].ProbeView!;
 			} else {
 				DisplayCanvas canvas = (DisplayCanvas)symbol.Glyph;
 				return (ButtonControl)canvas.DisplayOf(this.circuitSymbol);

@@ -11,7 +11,7 @@ namespace LogicCircuit {
 	/// </summary>
 	public partial class DialogUsage : Window {
 
-		private SettingsWindowLocationCache windowLocation;
+		private SettingsWindowLocationCache? windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 		public LogicalCircuit LogicalCircuit { get; private set; }
 		public IEnumerable<LogicalCircuit> Usage { get; private set; }
@@ -27,9 +27,13 @@ namespace LogicCircuit {
 			if(sender is ListBox listBox) {
 				if(listBox.SelectedItem is LogicalCircuit selected) {
 					Mainframe mainframe = (Mainframe)this.Owner;
-					Editor editor = mainframe.Editor;
-					editor.OpenLogicalCircuit(selected);
-					editor.Select(editor.CircuitProject.CircuitSymbolSet.SelectByCircuit(this.LogicalCircuit).Where(s => s.LogicalCircuit == selected));
+					Editor? editor = mainframe.Editor;
+					if(editor != null) {
+						editor.OpenLogicalCircuit(selected);
+						editor.Select(
+							editor.CircuitProject.CircuitSymbolSet.SelectByCircuit(this.LogicalCircuit).Where(s => s.LogicalCircuit == selected)
+						);
+					}
 				}
 			}
 		}

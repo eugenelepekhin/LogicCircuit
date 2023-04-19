@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
@@ -10,11 +11,11 @@ using System.Windows;
 namespace LogicCircuit {
 	public partial class CircuitMap : INotifyPropertyChanged {
 
-		public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler? PropertyChanged;
 
 		public LogicalCircuit Circuit { get; private set; }
-		public CircuitSymbol CircuitSymbol { get; private set; }
-		public CircuitMap Parent { get; private set; }
+		public CircuitSymbol? CircuitSymbol { get; private set; }
+		public CircuitMap? Parent { get; private set; }
 
 		private List<CircuitSymbol> symbols;
 		private Dictionary<CircuitSymbol, CircuitMap> children;
@@ -23,19 +24,19 @@ namespace LogicCircuit {
 		private Dictionary<CircuitSymbol, IFunctionMemory> memories;
 		private bool turnedOn;
 
-		private CircuitMap visible;
-		public CircuitMap Visible {
+		private CircuitMap? visible;
+		public CircuitMap? Visible {
 			get {
 				CircuitMap root = this.Root;
 				return root.visible ?? root;
 			}
 			set {
-				Tracer.Assert(value != null);
-				CircuitMap old = this.Visible;
+				Tracer.Assert(value);
+				CircuitMap? old = this.Visible;
 				if(old != value) {
 					this.Root.visible = value;
-					old.NotifyIsCurrentChanged();
-					value.NotifyIsCurrentChanged();
+					old?.NotifyIsCurrentChanged();
+					value?.NotifyIsCurrentChanged();
 				}
 			}
 		}
@@ -55,7 +56,7 @@ namespace LogicCircuit {
 					root.jamMaps = new Dictionary<LogicalCircuit, Dictionary<GridPoint, List<Jam>>>();
 				}
 				Dictionary<GridPoint, List<Jam>> map;
-				if(!root.jamMaps.TryGetValue(this.Circuit, out map)) {
+				if(!root.jamMaps.TryGetValue(this.Circuit, out map!)) {
 					map = new Dictionary<GridPoint, List<Jam>>();
 					root.jamMaps.Add(this.Circuit, map);
 
@@ -63,7 +64,7 @@ namespace LogicCircuit {
 						foreach(Jam jam in symbol.Jams()) {
 							GridPoint point = jam.AbsolutePoint;
 							List<Jam> list;
-							if(!map.TryGetValue(point, out list)) {
+							if(!map.TryGetValue(point, out list!)) {
 								list = new List<Jam>(1);
 								map.Add(point, list);
 							}
@@ -75,6 +76,7 @@ namespace LogicCircuit {
 			}
 		}
 
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public CircuitMap(LogicalCircuit circuit) {
 			this.Circuit = circuit;
 			this.CircuitSymbol = null;
@@ -88,6 +90,7 @@ namespace LogicCircuit {
 			this.CircuitSymbol = circuitSymbol;
 			this.Parent = parent;
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		private void NotifyPropertyChanged(string propertyName) {
 			this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -207,10 +210,11 @@ namespace LogicCircuit {
 		private void Connect(ConnectionSet connectionSet) {
 			Tracer.Assert(!connectionSet.IsConnected(this.Circuit));
 			Dictionary<GridPoint, List<Jam>> inJamMap = new Dictionary<GridPoint, List<Jam>>();
+			Debug.Assert(this.symbols != null);
 			foreach(CircuitSymbol symbol in this.symbols) {
 				foreach(Jam jam in symbol.Jams().Where(j => j.EffectivePinType != PinType.Output)) {
 					GridPoint p = jam.AbsolutePoint;
-					if(!inJamMap.TryGetValue(p, out List<Jam> list)) {
+					if(!inJamMap.TryGetValue(p, out List<Jam>? list)) {
 						list = new List<Jam>(1);
 						inJamMap.Add(p, list);
 					}
@@ -220,9 +224,9 @@ namespace LogicCircuit {
 			ConductorMap conductorMap = this.Circuit.ConductorMap();
 			foreach(CircuitSymbol symbol in this.symbols) {
 				foreach(Jam outJam in symbol.Jams().Where(j => j.EffectivePinType != PinType.Input)) {
-					if(conductorMap.TryGetValue(outJam.AbsolutePoint, out Conductor conductor)) {
-						foreach(GridPoint point in conductor.Points) {
-							if(inJamMap.TryGetValue(point, out List<Jam> list)) {
+					if(conductorMap.TryGetValue(outJam.AbsolutePoint, out Conductor? conductor)) {
+						foreach(GridPoint point in conductor!.Points) {
+							if(inJamMap.TryGetValue(point, out List<Jam>? list)) {
 								foreach(Jam inJam in list.Where(j => j != outJam)) {
 									if(inJam.Pin.BitWidth != outJam.Pin.BitWidth) {
 										if(!(inJam.CircuitSymbol.Circuit is CircuitProbe)) {
@@ -284,12 +288,12 @@ namespace LogicCircuit {
 				Tracer.Assert(con.InJam.CircuitSymbol.LogicalCircuit == this.Circuit);
 				Tracer.Assert(con.OutJam.CircuitSymbol.LogicalCircuit == this.Circuit);
 				Circuit circuit = con.InJam.CircuitSymbol.Circuit;
-				Pin pin;
+				Pin? pin;
 				if(CircuitMap.IsPrimitive(circuit)) {
 					list.AddParameter(result, this, con.InJam, bitNumber);
 				} else if((pin = (circuit as Pin)) != null) {
 					if(this.Parent != null) {
-						this.Parent.Connect(connectionSet, list, result, this.CircuitSymbol.Jam(pin), bitNumber, visited);
+						this.Parent.Connect(connectionSet, list, result, this.CircuitSymbol!.Jam(pin)!, bitNumber, visited);
 					}
 				} else if(circuit is LogicalCircuit) {
 					this.children[(CircuitSymbol)con.InJam.CircuitSymbol].Connect(connectionSet, list, result, con.InJam.InnerJam, bitNumber, visited);
@@ -377,15 +381,15 @@ namespace LogicCircuit {
 			}
 		}
 
-		public CircuitMap Child(CircuitSymbol symbol) {
-			if(this.children != null && this.children.TryGetValue(symbol, out CircuitMap map)) {
+		public CircuitMap? Child(CircuitSymbol symbol) {
+			if(this.children != null && this.children.TryGetValue(symbol, out CircuitMap? map)) {
 				return map;
 			}
 			return null;
 		}
 
 		// This is not very effective algorithm
-		public FunctionProbe FunctionProbe(CircuitSymbol symbol) {
+		public FunctionProbe? FunctionProbe(CircuitSymbol symbol) {
 			if(this.displays != null) {
 				foreach(IFunctionVisual visual in this.displays) {
 					if(visual is FunctionProbe probe && probe.CircuitSymbol == symbol) {
@@ -406,9 +410,9 @@ namespace LogicCircuit {
 			}
 		}
 
-		public IFunctionMemory FunctionMemory(CircuitSymbol symbol) {
+		public IFunctionMemory? FunctionMemory(CircuitSymbol symbol) {
 			if(this.memories != null) {
-				if(this.memories.TryGetValue(symbol, out IFunctionMemory memory)) {
+				if(this.memories.TryGetValue(symbol, out IFunctionMemory? memory)) {
 					return memory;
 				}
 			}
@@ -481,9 +485,9 @@ namespace LogicCircuit {
 			}
 		}
 
-		public FunctionConstant FunctionConstant(CircuitSymbol symbol) {
+		public FunctionConstant? FunctionConstant(CircuitSymbol symbol) {
 			if(this.constants != null) {
-				if(this.constants.TryGetValue(symbol, out FunctionConstant function)) {
+				if(this.constants.TryGetValue(symbol, out FunctionConstant? function)) {
 					return function;
 				}
 			}
@@ -494,13 +498,13 @@ namespace LogicCircuit {
 			Tracer.Assert(this.Circuit == wire.LogicalCircuit);
 			ConductorMap conductorMap = this.Circuit.ConductorMap();
 			Conductor conductor;
-			bool gotIt = conductorMap.TryGetValue(wire.Point1, out conductor);
+			bool gotIt = conductorMap.TryGetValue(wire.Point1, out conductor!);
 			Tracer.Assert(gotIt);
 			Dictionary<GridPoint, List<Jam>> map = this.JamMap;
-			List<Jam> jams = conductor.Points.SelectMany(p => map.TryGetValue(p, out List<Jam> l) ? l : Enumerable.Empty<Jam>()).ToList();
+			List<Jam> jams = conductor.Points.SelectMany(p => map.TryGetValue(p, out List<Jam>? l) ? l : Enumerable.Empty<Jam>()).ToList();
 			if(jams.Any()) {
 				foreach(Jam jam in jams.Where(j => CircuitMap.IsPrimitive(j.CircuitSymbol.Circuit))) {
-					if(this.Root.results.TryGetValue(new SymbolMapKey(this, (CircuitSymbol)jam.CircuitSymbol), out SymbolMap symbolMap)) {
+					if(this.Root.results.TryGetValue(new SymbolMapKey(this, (CircuitSymbol)jam.CircuitSymbol), out SymbolMap? symbolMap)) {
 						if(jam.Pin.PinType == PinType.Output) {
 							return symbolMap.Results.Select(r => r.StateIndex);
 						} else {
@@ -508,7 +512,7 @@ namespace LogicCircuit {
 						}
 					}
 				}
-				Jam start = jams.FirstOrDefault(j => !CircuitMap.IsPrimitive(j.CircuitSymbol.Circuit));
+				Jam? start = jams.FirstOrDefault(j => !CircuitMap.IsPrimitive(j.CircuitSymbol.Circuit));
 				if(start != null) {
 					List<int> list = new List<int>();
 					this.StateIndexes(list, start.AbsolutePoint, false, 0, start.Pin.BitWidth, new HashSet<JamBit>());
@@ -522,11 +526,11 @@ namespace LogicCircuit {
 		private bool StateIndexes(List<int> list, GridPoint point, bool ignore, int start, int count, HashSet<JamBit> visited) {
 			Tracer.FullInfo("CircuitMap.StateIndexes", "Point={0}", point);
 
-			if(this.Circuit.ConductorMap().TryGetValue(point, out Conductor conductor)) {
+			if(this.Circuit.ConductorMap().TryGetValue(point, out Conductor? conductor)) {
 				Dictionary<GridPoint, List<Jam>> map = this.JamMap;
-				List<Jam> jams = conductor.Points.SelectMany(p => map.TryGetValue(p, out List<Jam> l) ? l : Enumerable.Empty<Jam>()).ToList();
+				List<Jam> jams = conductor!.Points.SelectMany(p => map.TryGetValue(p, out List<Jam>? l) ? l : Enumerable.Empty<Jam>()).ToList();
 				foreach(Jam jam in jams.Where(j => CircuitMap.IsPrimitive(j.CircuitSymbol.Circuit))) {
-					if(this.Root.results.TryGetValue(new SymbolMapKey(this, (CircuitSymbol)jam.CircuitSymbol), out SymbolMap symbolMap)) {
+					if(this.Root.results.TryGetValue(new SymbolMapKey(this, (CircuitSymbol)jam.CircuitSymbol), out SymbolMap? symbolMap)) {
 						if(jam.Pin.PinType == PinType.Output) {
 							list.AddRange(symbolMap.Results.Skip(start).Take(count).Select(r => r.StateIndex));
 						} else {
@@ -548,7 +552,7 @@ namespace LogicCircuit {
 						}
 					} else if(jam.CircuitSymbol.Circuit is Pin pin) {
 						if(this.Parent != null) {
-							if(this.Parent.StateIndexes(list, this.CircuitSymbol.Jam(pin).AbsolutePoint, true, start, count, visited)) {
+							if(this.Parent.StateIndexes(list, this.CircuitSymbol!.Jam(pin)!.AbsolutePoint, true, start, count, visited)) {
 								return true;
 							}
 						}
@@ -600,7 +604,7 @@ namespace LogicCircuit {
 				if(this.children == null) {
 					return Enumerable.Empty<CircuitMap>();
 				}
-				return this.children.Values.OrderBy(map => map.CircuitSymbol.Y * Symbol.LogicalCircuitGridWidth + map.CircuitSymbol.X);
+				return this.children.Values.OrderBy(map => map.CircuitSymbol!.Y * Symbol.LogicalCircuitGridWidth + map.CircuitSymbol.X);
 			}
 		}
 
@@ -633,7 +637,7 @@ namespace LogicCircuit {
 		}
 
 		private bool HasLoop(LogicalCircuit circuit) {
-			CircuitMap map = this;
+			CircuitMap? map = this;
 			while(map != null) {
 				if(map.Circuit == circuit) {
 					return true;
@@ -738,9 +742,9 @@ namespace LogicCircuit {
 			return new FunctionClock(circuitState, index);
 		}
 
-		private static CircuitFunction DefineGate(Gate gate, CircuitState circuitState, SymbolMap symbolMap) {
+		private static CircuitFunction? DefineGate(Gate gate, CircuitState circuitState, SymbolMap symbolMap) {
 			int result = CircuitMap.SingleResult(symbolMap);
-			int[] parameter = null;
+			int[]? parameter = null;
 			List<int> mapList = new List<int>();
 			foreach(Parameter p in symbolMap.Parameters) {
 				int index = p.Result.StateIndex;
@@ -774,7 +778,7 @@ namespace LogicCircuit {
 
 		private static IEnumerable<CircuitSymbol> DisplayChain(SymbolMap symbolMap) {
 			yield return symbolMap.CircuitSymbol;
-			CircuitMap map = symbolMap.CircuitMap;
+			CircuitMap? map = symbolMap.CircuitMap;
 			while(map != null && map.CircuitSymbol != null && map.Circuit.IsDisplay) {
 				yield return map.CircuitSymbol;
 				map = map.Parent;
@@ -782,7 +786,7 @@ namespace LogicCircuit {
 		}
 
 		private static void UpdateDisplays(SymbolMap symbolMap, IFunctionVisual function) {
-			CircuitMap map = symbolMap.CircuitMap;
+			CircuitMap? map = symbolMap.CircuitMap;
 			while(map != null && map.CircuitSymbol != null && map.Circuit.IsDisplay) {
 				if(map.displays == null) {
 					map.displays = new HashSet<IFunctionVisual>();
@@ -798,15 +802,15 @@ namespace LogicCircuit {
 			}
 		}
 
-		private static CircuitFunction DefineLed(CircuitState circuitState, SymbolMap symbolMap) {
+		private static CircuitFunction? DefineLed(CircuitState circuitState, SymbolMap symbolMap) {
 			//The jams have special meaning here, so lets go from them
 			List<Jam> jam = symbolMap.CircuitSymbol.Jams().ToList();
 			Tracer.Assert(jam != null && (jam.Count == 1 || jam.Count == 8) &&
 				jam.TrueForAll(j => j != null && j.Pin.PinType == PinType.Input)
 			);
-			CircuitFunction function = null;
-			if(jam.Count == 1) {
-				Parameter parameter = symbolMap.Parameter(jam[0], 0);
+			CircuitFunction? function = null;
+			if(jam!.Count == 1) {
+				Parameter? parameter = symbolMap.Parameter(jam[0], 0);
 				if(parameter != null) {
 					function = new FunctionLed(circuitState, CircuitMap.DisplayChain(symbolMap), parameter.Result.StateIndex);
 				} else {
@@ -821,7 +825,7 @@ namespace LogicCircuit {
 				int[] param = new int[8];
 				bool connected = false;
 				for(int i = 0; i < jam.Count; i++) {
-					Parameter parameter = symbolMap.Parameter(jam[i], 0);
+					Parameter? parameter = symbolMap.Parameter(jam[i], 0);
 					if(parameter != null) {
 						param[i] = parameter.Result.StateIndex;
 						connected = true;
@@ -844,8 +848,8 @@ namespace LogicCircuit {
 			return function;
 		}
 
-		private static CircuitFunction DefineLedMatrix(CircuitState circuitState, SymbolMap symbolMap) {
-			CircuitFunction function = null;
+		private static CircuitFunction? DefineLedMatrix(CircuitState circuitState, SymbolMap symbolMap) {
+			CircuitFunction? function = null;
 			List<Jam> jam = symbolMap.CircuitSymbol.Jams().ToList();
 			jam.Sort(JamComparer.Comparer);
 			LedMatrix matrix = (LedMatrix)symbolMap.CircuitSymbol.Circuit;
@@ -859,7 +863,7 @@ namespace LogicCircuit {
 				for(int i = 0; i < jam.Count; i++) {
 					for(int j = 0; j < columns; j++) {
 						for(int k = 0; k < colors; k++) {
-							Parameter parameter = symbolMap.Parameter(jam[i], j * colors + k);
+							Parameter? parameter = symbolMap.Parameter(jam[i], j * colors + k);
 							if(parameter != null) {
 								param[i * columns * colors + j * colors + k] = parameter.Result.StateIndex;
 								connected = true;
@@ -883,7 +887,7 @@ namespace LogicCircuit {
 				int[] param = new int[columns * colors + rows];
 				for(int i = 0; i < columns; i++) {
 					for(int j = 0; j < colors; j++) {
-						Parameter parameter = symbolMap.Parameter(jam[i], j);
+						Parameter? parameter = symbolMap.Parameter(jam[i], j);
 						if(parameter != null) {
 							param[i * colors + j] = parameter.Result.StateIndex;
 							columnConnected = true;
@@ -898,7 +902,7 @@ namespace LogicCircuit {
 				}
 				bool rowConnected = false;
 				for(int i = 0; i < rows; i++) {
-					Parameter parameter = symbolMap.Parameter(jam[columns + i], 0);
+					Parameter? parameter = symbolMap.Parameter(jam[columns + i], 0);
 					if(parameter != null) {
 						param[columns * colors + i] = parameter.Result.StateIndex;
 						rowConnected = true;
@@ -920,17 +924,17 @@ namespace LogicCircuit {
 			return function;
 		}
 
-		private static CircuitFunction DefineProbe(CircuitState circuitState, SymbolMap symbolMap, int capacity) {
+		private static CircuitFunction? DefineProbe(CircuitState circuitState, SymbolMap symbolMap, int capacity) {
 			List<Parameter> list = new List<Parameter>(symbolMap.Parameters);
 			list.Sort(ParameterComparer.BitOrderComparer);
 			int[] parameters = new int[list.Count];
 			for(int i = 0; i < parameters.Length; i++) {
 				parameters[i] = list[i].Result.StateIndex;
 			}
-			if(parameters != null && 0 < parameters.Length) {
-				FunctionProbe probe = new FunctionProbe(symbolMap.CircuitSymbol, circuitState, parameters, capacity) {
-					Label = symbolMap.CircuitMap.Path(symbolMap.CircuitSymbol)
-				};
+			if(0 < parameters.Length) {
+				FunctionProbe probe = new FunctionProbe(
+					symbolMap.CircuitSymbol, circuitState, parameters, capacity, symbolMap.CircuitMap.Path(symbolMap.CircuitSymbol)
+				);
 
 				if(symbolMap.CircuitMap.displays == null) {
 					symbolMap.CircuitMap.displays = new HashSet<IFunctionVisual>();
@@ -941,14 +945,15 @@ namespace LogicCircuit {
 			return null;
 		}
 
-		private static CircuitFunction DefineTriState(CircuitState circuitState, SymbolMap symbolMap) {
+		private static CircuitFunction? DefineTriState(CircuitState circuitState, SymbolMap symbolMap) {
 			//The jams have special meaning here, so lets go from them
 			List<Jam> jam = symbolMap.CircuitSymbol.Jams().ToList();
 			Tracer.Assert(jam != null && jam.Count == 3);
-			jam.Sort(JamComparer.Comparer);
+			jam!.Sort(JamComparer.Comparer);
 			Tracer.Assert(jam[0].Pin.PinType == PinType.Input && jam[1].Pin.PinType == PinType.Input && jam[2].Pin.PinType == PinType.Output);
-			Result result = symbolMap.Result(jam[2], 0);
-			Tracer.Assert(result != null);
+			Result? result = symbolMap.Result(jam[2], 0);
+			Tracer.Assert(result);
+			Debug.Assert(result != null && result.TriStateGroup != null);
 			if(0 < result.TriStateGroup.Count) {
 				int[] group = new int[result.TriStateGroup.Count];
 				int index = 0;
@@ -959,8 +964,8 @@ namespace LogicCircuit {
 				CircuitMap.DefineTriStateGroup(circuitState, group, result.StateIndex);
 				result.TriStateGroup.Clear();
 			}
-			Parameter parameter = symbolMap.Parameter(jam[0], 0);
-			Parameter enable = symbolMap.Parameter(jam[1], 0);
+			Parameter? parameter = symbolMap.Parameter(jam[0], 0);
+			Parameter? enable = symbolMap.Parameter(jam[1], 0);
 			bool build = true;
 			if(enable == null) {
 				#if DEBUG
@@ -1028,7 +1033,7 @@ namespace LogicCircuit {
 			return sensor;
 		}
 
-		private static CircuitFunction DefineSound(CircuitState circuitState, SymbolMap symbolMap) {
+		private static CircuitFunction? DefineSound(CircuitState circuitState, SymbolMap symbolMap) {
 			List<Parameter> list = new List<Parameter>(symbolMap.Parameters);
 			if(list.Count == 1) {
 				FunctionSound sound = new FunctionSound(circuitState, list[0].Result.StateIndex);
@@ -1044,11 +1049,11 @@ namespace LogicCircuit {
 		private static CircuitFunction DefineRom(CircuitState circuitState, SymbolMap symbolMap) {
 			Memory memory = (Memory)symbolMap.CircuitSymbol.Circuit;
 			Tracer.Assert(!memory.Writable && symbolMap.CircuitSymbol.Jams().Count() == (memory.DualPort ? 4 : 2));
-			Jam d = symbolMap.CircuitSymbol.Jam(memory.DataOutPin);
-			Tracer.Assert(d != null);
+			Jam? d = symbolMap.CircuitSymbol.Jam(memory.DataOutPin);
+			Tracer.Assert(d);
 			List<Result> results = new List<Result>(symbolMap.Results.Where(r => r.Jam == d));
-			Jam a = symbolMap.CircuitSymbol.Jam(memory.AddressPin);
-			Tracer.Assert(a != null);
+			Jam? a = symbolMap.CircuitSymbol.Jam(memory.AddressPin);
+			Tracer.Assert(a);
 			List<Parameter> parameters = new List<Parameter>(symbolMap.Parameters.Where(p => p.Jam == a));
 			Tracer.Assert(results.Count <= memory.DataOutPin.BitWidth);
 			Tracer.Assert(parameters.Count <= memory.AddressPin.BitWidth);
@@ -1058,14 +1063,14 @@ namespace LogicCircuit {
 			results.Sort(ResultComparer.BitOrderComparer);
 			parameters.Sort(ParameterComparer.BitOrderComparer);
 
-			List<Result> results2 = null;
-			List<Parameter> parameters2 = null;
+			List<Result>? results2 = null;
+			List<Parameter>? parameters2 = null;
 			if(memory.DualPort) {
-				Jam d2 = symbolMap.CircuitSymbol.Jam(memory.DataOut2Pin);
-				Tracer.Assert(d2 != null);
+				Jam? d2 = symbolMap.CircuitSymbol.Jam(memory.DataOut2Pin);
+				Tracer.Assert(d2);
 				results2 = new List<Result>(symbolMap.Results.Where(r => r.Jam == d2));
-				Jam a2 = symbolMap.CircuitSymbol.Jam(memory.Address2Pin);
-				Tracer.Assert(a2 != null);
+				Jam? a2 = symbolMap.CircuitSymbol.Jam(memory.Address2Pin);
+				Tracer.Assert(a2);
 				parameters2 = new List<Parameter>(symbolMap.Parameters.Where(p => p.Jam == a2));
 				Tracer.Assert(results2.Count <= memory.DataOutPin.BitWidth);
 				Tracer.Assert(parameters2.Count <= memory.AddressPin.BitWidth);
@@ -1081,8 +1086,8 @@ namespace LogicCircuit {
 				circuitState,
 				CircuitMap.Parameters(parameters),
 				CircuitMap.Results(results),
-				memory.DualPort ? CircuitMap.Parameters(parameters2) : null,
-				memory.DualPort ? CircuitMap.Results(results2) : null,
+				memory.DualPort ? CircuitMap.Parameters(parameters2!) : null,
+				memory.DualPort ? CircuitMap.Results(results2!) : null,
 				memory
 			);
 			if(symbolMap.CircuitMap.memories == null) {
@@ -1095,19 +1100,19 @@ namespace LogicCircuit {
 		private static CircuitFunction DefineRam(CircuitState circuitState, SymbolMap symbolMap) {
 			Memory memory = (Memory)symbolMap.CircuitSymbol.Circuit;
 			Tracer.Assert(memory.Writable && symbolMap.CircuitSymbol.Jams().Count() == (memory.DualPort ? 6 : 4));
-			Jam d = symbolMap.CircuitSymbol.Jam(memory.DataOutPin);
+			Jam? d = symbolMap.CircuitSymbol.Jam(memory.DataOutPin);
 			List<Result> dataOut = new List<Result>(symbolMap.Results.Where(r => r.Jam == d));
 			Tracer.Assert(dataOut.TrueForAll(o => o.Jam.Pin == memory.DataOutPin));
-			List<Result> dataOut2 = null;
+			List<Result>? dataOut2 = null;
 			if(memory.DualPort) {
-				Jam d2 = symbolMap.CircuitSymbol.Jam(memory.DataOut2Pin);
+				Jam? d2 = symbolMap.CircuitSymbol.Jam(memory.DataOut2Pin);
 				dataOut2 = new List<Result>(symbolMap.Results.Where(r => r.Jam == d2));
 			}
 
 			List<Parameter> address = new List<Parameter>();
 			List<Parameter> dataIn = new List<Parameter>();
-			List<Parameter> address2 = null;
-			Parameter write = null;
+			List<Parameter>? address2 = null;
+			Parameter? write = null;
 			foreach(Parameter p in symbolMap.Parameters) {
 				if(p.Jam.Pin == memory.AddressPin) {
 					address.Add(p);
@@ -1139,15 +1144,15 @@ namespace LogicCircuit {
 			if(memory.DualPort) {
 				Tracer.Assert(address2 != null && address2.Count <= memory.AddressBitWidth);
 				Tracer.Assert(dataOut2 != null && dataOut2.Count <= memory.DataBitWidth);
-				dataOut2.Sort(ResultComparer.BitOrderComparer);
-				address2.Sort(ParameterComparer.BitOrderComparer);
+				dataOut2!.Sort(ResultComparer.BitOrderComparer);
+				address2!.Sort(ParameterComparer.BitOrderComparer);
 			}
 			FunctionRam ram = new FunctionRam(circuitState,
 				CircuitMap.Parameters(address),
 				CircuitMap.Parameters(dataIn),
 				CircuitMap.Results(dataOut),
-				memory.DualPort ? CircuitMap.Parameters(address2) : null,
-				memory.DualPort ? CircuitMap.Results(dataOut2) : null,
+				memory.DualPort ? CircuitMap.Parameters(address2!) : null,
+				memory.DualPort ? CircuitMap.Results(dataOut2!) : null,
 				(write != null) ? write.Result.StateIndex : 0,
 				memory
 			);
@@ -1165,7 +1170,7 @@ namespace LogicCircuit {
 			Tracer.Assert(dataOut.TrueForAll(o => o.Jam.Pin == graphicsArray.DataOutPin));
 			List<Parameter> address = new List<Parameter>();
 			List<Parameter> dataIn = new List<Parameter>();
-			Parameter write = null;
+			Parameter? write = null;
 			foreach(Parameter p in symbolMap.Parameters) {
 				if(p.Jam.Pin == graphicsArray.AddressPin) {
 					address.Add(p);

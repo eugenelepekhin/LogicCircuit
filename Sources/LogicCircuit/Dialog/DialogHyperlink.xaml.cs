@@ -12,7 +12,7 @@ namespace LogicCircuit {
 	/// Interaction logic for DialogHyperlink.xaml
 	/// </summary>
 	public partial class DialogHyperlink : Window, IDataErrorInfo {
-		private SettingsWindowLocationCache windowLocation;
+		private SettingsWindowLocationCache? windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 
 		public static readonly DependencyProperty IsValidHyperlinkProperty = DependencyProperty.Register(
@@ -37,8 +37,8 @@ namespace LogicCircuit {
 		}
 
 		private readonly RichTextBox textBox;
-		private string text;
-		private string url;
+		private string text = string.Empty;
+		private string url = string.Empty;
 		private readonly Dictionary<string, string> errorInfo = new Dictionary<string, string>(3);
 
 		public string HyperlinkText {
@@ -63,16 +63,16 @@ namespace LogicCircuit {
 
 		public string this[string columnName] {
 			get {
-				if(this.errorInfo.TryGetValue(columnName, out string error)) {
+				if(this.errorInfo.TryGetValue(columnName, out string? error)) {
 					return error;
 				}
-				return null;
+				return null!;
 			}
 		}
 
 		public DialogHyperlink(RichTextBox textBox) {
 			this.textBox = textBox;
-			Hyperlink link = DialogHyperlink.SelectedHyperlink(this.textBox);
+			Hyperlink? link = DialogHyperlink.SelectedHyperlink(this.textBox);
 			if(link != null) {
 				TextRange range = new TextRange(link.ContentStart, link.ContentEnd);
 				this.HyperlinkText = range.Text;
@@ -91,12 +91,12 @@ namespace LogicCircuit {
 			this.InitializeComponent();
 		}
 
-		private static Hyperlink SelectedHyperlink(RichTextBox textBox) {
+		private static Hyperlink? SelectedHyperlink(RichTextBox textBox) {
 			if(textBox.Selection.IsEmpty) {
 				return DialogHyperlink.SelectedHyperlink(textBox.Selection.Start);
 			} else {
-				Hyperlink h1 = DialogHyperlink.SelectedHyperlink(textBox.Selection.Start);
-				Hyperlink h2 = DialogHyperlink.SelectedHyperlink(textBox.Selection.End);
+				Hyperlink? h1 = DialogHyperlink.SelectedHyperlink(textBox.Selection.Start);
+				Hyperlink? h2 = DialogHyperlink.SelectedHyperlink(textBox.Selection.End);
 				if(h1 == h2 && h1 != null) {
 					return h1;
 				}
@@ -116,8 +116,8 @@ namespace LogicCircuit {
 		}
 
 		[SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
-		private static Hyperlink SelectedHyperlink(TextPointer textPointer) {
-			DependencyObject o = textPointer.Parent;
+		private static Hyperlink? SelectedHyperlink(TextPointer textPointer) {
+			DependencyObject? o = textPointer.Parent;
 			while(o != null && !(o is Hyperlink)) {
 				if(o is TextElement textElement) {
 					o = textElement.Parent;
@@ -128,7 +128,7 @@ namespace LogicCircuit {
 			return o as Hyperlink;
 		}
 
-		private static Hyperlink FindHyperlink(TextPointer textPointer, LogicalDirection logicalDirection) {
+		private static Hyperlink? FindHyperlink(TextPointer textPointer, LogicalDirection logicalDirection) {
 			TextPointer tp = textPointer.GetNextInsertionPosition(logicalDirection);
 			if(tp != null) {
 				return DialogHyperlink.SelectedHyperlink(tp);
@@ -184,7 +184,7 @@ namespace LogicCircuit {
 
 		private static bool IsUrl(string url) {
 			try {
-				if(Uri.TryCreate(url, UriKind.Absolute, out Uri uri)) {
+				if(Uri.TryCreate(url, UriKind.Absolute, out Uri? uri)) {
 					return StringComparer.OrdinalIgnoreCase.Equals(uri.Scheme, Uri.UriSchemeHttp) || StringComparer.OrdinalIgnoreCase.Equals(uri.Scheme, Uri.UriSchemeHttps);
 				}
 			} catch {}

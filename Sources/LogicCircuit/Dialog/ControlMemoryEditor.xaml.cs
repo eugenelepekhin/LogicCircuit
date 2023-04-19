@@ -95,15 +95,15 @@ namespace LogicCircuit {
 				"X0", "X1", "X2", "X3", "X4", "X5", "X6", "X7", "X8", "X9", "XA", "XB", "XC", "XD", "XE", "XF"
 			};
 
-			public event PropertyChangedEventHandler PropertyChanged;
+			public event PropertyChangedEventHandler? PropertyChanged;
 
 			private readonly IFunctionMemory memory;
 			private readonly int rowIndex;
 			private readonly string rowIndexFormat;
 			private readonly string cellFormat;
 
-			private string[] text;
-			private string[] error;
+			private string[]? text;
+			private string?[]? error;
 
 			public string RowIndex { get { return string.Format(CultureInfo.InvariantCulture, rowIndexFormat, rowIndex); } }
 
@@ -130,7 +130,7 @@ namespace LogicCircuit {
 					}
 					this.text[index] = value;
 					int i;
-					string parseError = this.Parse(value, out i);
+					string? parseError = this.Parse(value, out i);
 					if(parseError == null) {
 						this.memory[this.rowIndex * 16 + index] = i;
 						if(this.error != null && this.error[index] != null) {
@@ -149,7 +149,7 @@ namespace LogicCircuit {
 				}
 			}
 
-			private string Parse(string number, out int value) {
+			private string? Parse(string number, out int value) {
 				if(!int.TryParse(number, NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture, out value)) {
 					return Properties.Resources.ErrorBadHexNumber;
 				}
@@ -170,9 +170,9 @@ namespace LogicCircuit {
 			public string Error {
 				get {
 					if(this.error != null) {
-						return this.error.FirstOrDefault(e => !string.IsNullOrWhiteSpace(e));
+						return this.error.FirstOrDefault(e => !string.IsNullOrWhiteSpace(e))!;
 					}
-					return null;
+					return null!;
 				}
 			}
 
@@ -184,9 +184,9 @@ namespace LogicCircuit {
 					if(this.error != null) {
 						int index = Array.IndexOf(MemoryEditorRow.ColumnName, columnName);
 						Tracer.Assert(0 <= index && index < 16);
-						return this.error[index];
+						return this.error[index]!;
 					}
-					return null;
+					return null!;
 				}
 			}
 

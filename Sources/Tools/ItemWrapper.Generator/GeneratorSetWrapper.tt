@@ -15,7 +15,7 @@
 	// Wrapper for table <#=this.Table.Name#>.
 	partial class <#=this.Table.Name#>Set : INotifyCollectionChanged, IEnumerable<<#=this.Table.Name#>> {
 
-		public event NotifyCollectionChangedEventHandler CollectionChanged;
+		public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
 		internal TableSnapshot<<#=this.Table.Name#>Data> Table { get; private set; }
 
@@ -28,8 +28,9 @@
 		public <#=this.Store.Name#> <#=this.Store.Name#> { get { return (<#=this.Store.Name#>)this.Table.StoreSnapshot; } }
 
 		// Constructor
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public <#=this.Table.Name#>Set(<#=this.Store.Name#> store) {
-			ITableSnapshot table = store.Table("<#=this.Table.Name#>");
+			ITableSnapshot? table = store.Table("<#=this.Table.Name#>");
 			if(table != null) {
 				Debug.Assert(store.IsFrozen, "The store should be frozen");
 				this.Table = (TableSnapshot<<#=this.Table.Name#>Data>)table;
@@ -39,6 +40,7 @@
 			}
 			this.Initialize<#=this.Table.Name#>Set();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		partial void Initialize<#=this.Table.Name#>Set();
 
@@ -59,7 +61,7 @@
 <#}#>
 
 		// gets items wrapper by RowId
-		public <#=this.Table.Name#> Find(RowId rowId) {
+		public <#=this.Table.Name#>? Find(RowId rowId) {
 <#if(this.RealmType == RealmType.Universe) {#>
 			if(!rowId.IsEmpty) {
 				return this.Table.GetField(rowId, <#=this.Table.Name#>Data.<#=this.Table.Name#>Field.Field);
@@ -84,13 +86,14 @@
 		// gets items wrapper by RowId
 		private IEnumerable<<#=this.Table.Name#>> Select(IEnumerable<RowId> rows) {
 			foreach(RowId rowId in rows) {
-				<#=this.Table.Name#> item = this.Find(rowId);
+				<#=this.Table.Name#>? item = this.Find(rowId);
 				Debug.Assert(item != null, "What is the reason for the item not to be found?");
 				yield return item;
 			}
 		}
 
 		// Create wrapper for the row and register it in the dictionary
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static")]
 		private <#=this.Table.Name#> Create(<#=createParam#>) {
 <#if(this.Table.ItemModifier == ItemModifier.None) {#>
 			<#=this.Table.Name#> item = new <#=this.Table.Name#>(<#=newParam#>);
@@ -106,7 +109,7 @@
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		internal <#=this.Table.Name#> FindOrCreate(RowId rowId) {
 			Debug.Assert(!rowId.IsEmpty && !this.Table.IsDeleted(rowId), "Bad RowId");
-			<#=this.Table.Name#> item;
+			<#=this.Table.Name#>? item;
 <#if(this.RealmType == RealmType.Universe) {#>
 			if((item = this.Find(rowId)) != null) {
 <#} else if(this.RealmType == RealmType.Multiverse) {#>
@@ -159,7 +162,8 @@ if(this.Table.Subclasses().FirstOrDefault() != null) {
 			selectList += ", table" + parent.Name + ".Find(" + parent.Name + "Data." + pk[0].Name + "Field.Field, primaryKeyValue)";
 		}
 #>
-			TableSnapshot<<#=parent.Name#>Data> table<#=parent.Name#> = (TableSnapshot<<#=parent.Name#>Data>)this.<#=this.Store.Name#>.Table("<#=parent.Name#>");
+			TableSnapshot<<#=parent.Name#>Data>? table<#=parent.Name#> = (TableSnapshot<<#=parent.Name#>Data>?)this.<#=this.Store.Name#>.Table("<#=parent.Name#>");
+			Debug.Assert(table<#=parent.Name#> != null);
 <#	}#>
 			return this.Create(<#=selectList#>);
 <#}#>
@@ -214,7 +218,8 @@ if(isSubclass) {
 	foreach(Table parent in this.Table.Ancestors(false).Reverse()) {
 		subclassInsert += ", rowId" + parent.Name;
 #>
-			TableSnapshot<<#=parent.Name#>Data> table<#=parent.Name#> = (TableSnapshot<<#=parent.Name#>Data>)this.<#=this.Store.Name#>.Table("<#=parent.Name#>");
+			TableSnapshot<<#=parent.Name#>Data>? table<#=parent.Name#> = (TableSnapshot<<#=parent.Name#>Data>?)this.<#=this.Store.Name#>.Table("<#=parent.Name#>");
+			Debug.Assert(table<#=parent.Name#> != null);
 			<#=parent.Name#>Data data<#=parent.Name#> = new <#=parent.Name#>Data() {
 <#
 		foreach(Column column in parent.Columns) {
@@ -286,6 +291,8 @@ foreach(Key key in this.Table.Keys) {
 	if(!key.IsUnique()) {
 		returnType = "IEnumerable<" + returnType + ">";
 		function = "Select";
+	} else {
+		returnType += "?";
 	}
 	if(key.Count == 1) {
 		Column column = key[0];
@@ -389,7 +396,7 @@ foreach(Key key in this.Table.Keys) {
 		}
 
 		private void NotifyCollectionChanged(NotifyCollectionChangedEventArgs arg) {
-			NotifyCollectionChangedEventHandler handler = this.CollectionChanged;
+			NotifyCollectionChangedEventHandler? handler = this.CollectionChanged;
 			if(handler != null) {
 <#if(this.UseDispatcher) {#>
 				System.Windows.Threading.Dispatcher dispatcher = this.<#=this.Store.Name#>.Dispatcher;
@@ -402,11 +409,11 @@ foreach(Key key in this.Table.Keys) {
 			}
 		}
 
-		internal List<<#=this.Table.Name#>> UpdateSet(int oldVersion, int newVersion) {
-			IEnumerator<TableChange<<#=this.Table.Name#>Data>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
+		internal List<<#=this.Table.Name#>>? UpdateSet(int oldVersion, int newVersion) {
+			IEnumerator<TableChange<<#=this.Table.Name#>Data>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
 			if(change != null) {
 				bool handlerAttached = (this.CollectionChanged != null);
-				List<<#=this.Table.Name#>> del = (handlerAttached) ? new List<<#=this.Table.Name#>>() : null;
+				List<<#=this.Table.Name#>>? del = (handlerAttached) ? new List<<#=this.Table.Name#>>() : null;
 				while(change.MoveNext()) {
 					switch(change.Current.Action) {
 					case SnapTableAction.Insert:
@@ -417,14 +424,14 @@ foreach(Key key in this.Table.Keys) {
 <#if(this.RealmType != RealmType.Universe) {#>
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item does not exist?");
 						if(handlerAttached) {
-							del.Add(this.Find(change.Current.RowId));
+							del.Add(this.Find(change.Current.RowId)!);
 						}
 						this.Delete(change.Current.RowId);
 <#} else {#>
 						if(handlerAttached) {
 							<#=this.Table.Name#> item = change.Current.GetOldField(<#=this.Table.Name#>Data.<#=this.Table.Name#>Field.Field);
 							Debug.Assert(item.IsDeleted());
-							del.Add(item);
+							del!.Add(item);
 						}
 <#}#>
 						break;
@@ -440,11 +447,11 @@ foreach(Key key in this.Table.Keys) {
 			return null;
 		}
 
-		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<<#=this.Table.Name#>> deleted) {
-			IEnumerator<TableChange<<#=this.Table.Name#>Data>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
+		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<<#=this.Table.Name#>>? deleted) {
+			IEnumerator<TableChange<<#=this.Table.Name#>Data>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
 			if(change != null) {
 				bool handlerAttached = (this.CollectionChanged != null);
-				List<<#=this.Table.Name#>> add = (handlerAttached) ? new List<<#=this.Table.Name#>>() : null;
+				List<<#=this.Table.Name#>>? add = (handlerAttached) ? new List<<#=this.Table.Name#>>() : null;
 				this.StartNotify<#=this.Table.Name#>SetChanged(oldVersion, newVersion);
 				while(change.MoveNext()) {
 					this.Notify<#=this.Table.Name#>SetChanged(change.Current);
@@ -452,7 +459,7 @@ foreach(Key key in this.Table.Keys) {
 					case SnapTableAction.Insert:
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item was not created?");
 						if(handlerAttached) {
-							add.Add(this.Find(change.Current.RowId));
+							add!.Add(this.Find(change.Current.RowId)!);
 						}
 						break;
 					case SnapTableAction.Delete:
@@ -465,7 +472,7 @@ foreach(Key key in this.Table.Keys) {
 					default:
 						Debug.Assert(change.Current.Action == SnapTableAction.Update, "Unknown action");
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item does not exist during update?");
-						this.Find(change.Current.RowId).NotifyChanged(change.Current);
+						this.Find(change.Current.RowId)!.NotifyChanged(change.Current);
 						break;
 					}
 				}
@@ -474,7 +481,7 @@ foreach(Key key in this.Table.Keys) {
 					if(deleted != null && 0 < deleted.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, deleted));
 					}
-					if(0 < add.Count) {
+					if(0 < add!.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, add));
 					}
 				}

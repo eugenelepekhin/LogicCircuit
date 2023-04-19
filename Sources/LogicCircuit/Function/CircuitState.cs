@@ -4,19 +4,20 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
 namespace LogicCircuit {
 	public class CircuitState {
 
-		public event EventHandler FunctionUpdated;
+		public event EventHandler? FunctionUpdated;
 
 		private readonly DirtyList dirty;
-		private State[] state;
+		private State[]? state;
 		public int Count { get; private set; }
 
-		private List<CircuitFunction>[] dependent;
+		private List<CircuitFunction>[]? dependent;
 		private readonly List<CircuitFunction> functions = new List<CircuitFunction>();
 		public IEnumerable<CircuitFunction> Functions { get { return this.functions; } }
 
@@ -37,8 +38,8 @@ namespace LogicCircuit {
 		}
 
 		public State this[int index] {
-			get { return this.state[index]; }
-			set { this.state[index] = value; }
+			get { return this.state![index]; }
+			set { this.state![index] = value; }
 		}
 
 		public int ReserveState() {
@@ -53,6 +54,7 @@ namespace LogicCircuit {
 					this.dependent[i] = new List<CircuitFunction>();
 				}
 			}
+			Debug.Assert(this.dependent != null);
 			this.functions.Add(function);
 			if(function is IFunctionClock) {
 				this.clockList.Add(function);
@@ -81,11 +83,11 @@ namespace LogicCircuit {
 			}
 			foreach(CircuitFunction function in this.functions) {
 				if(function.Result.Any()) {
-					function.Dependent = function.Result.Select(r => (IEnumerable<CircuitFunction>)this.dependent[r]).Aggregate((x, y) => x.Union(y)).ToArray();
+					function.Dependent = function.Result.Select(r => (IEnumerable<CircuitFunction>)this.dependent![r]).Aggregate((x, y) => x.Union(y)).ToArray();
 				}
 			}
 			foreach(FunctionTriStateGroup group in this.triStateGroupList) {
-				this.dirty.Add(group.Dependent);
+				this.dirty.Add(group.Dependent!);
 			}
 		}
 
@@ -111,6 +113,7 @@ namespace LogicCircuit {
 		}
 
 		public bool Evaluate(bool flipClock) {
+			Debug.Assert(this.state != null);
 			if(0 < this.updated.Count) {
 				lock(this.updated) {
 					this.dirty.Add(this.updated);
@@ -128,7 +131,7 @@ namespace LogicCircuit {
 			int attempt = 0;
 			this.dirty.Delay = attempt;
 			long oscillation = (long)this.state.Length * (long)this.state.Length;
-			CircuitFunction function;
+			CircuitFunction? function;
 			while((function = this.dirty.Get()) != null) {
 				if(function.Evaluate()) {
 					if(function.Dependent != null) {
@@ -170,7 +173,7 @@ namespace LogicCircuit {
 		#if DEBUG
 			public override string ToString() {
 				StringBuilder text = new StringBuilder();
-				foreach(State s in this.state) {
+				foreach(State s in this.state!) {
 					text.Append(CircuitFunction.ToChar(s));
 				}
 				return text.ToString();
@@ -243,7 +246,7 @@ namespace LogicCircuit {
 				private HashSet<int> functionIndex = new HashSet<int>();
 			#endif
 
-			public CircuitFunction Get() {
+			public CircuitFunction? Get() {
 				int random;
 				int count = this.current.Count;
 				if(count <= this.index) {
@@ -281,7 +284,7 @@ namespace LogicCircuit {
 					if(0 < this.Delay && 1 < count) {
 						int max = Math.Min(this.Delay, count - 1);
 						for(int i = 0; i < max; i++) {
-							this.Add(this.Get());
+							this.Add(this.Get()!);
 						}
 					}
 					#if REPORT_STAT

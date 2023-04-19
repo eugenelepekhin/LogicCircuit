@@ -8,7 +8,7 @@ namespace LogicCircuit {
 	/// Interaction logic for DialogButton.xaml
 	/// </summary>
 	public partial class DialogButton : Window {
-		private SettingsWindowLocationCache windowLocation;
+		private SettingsWindowLocationCache? windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 
 		private readonly CircuitButton button;
@@ -25,7 +25,7 @@ namespace LogicCircuit {
 			this.keyGesture.Key = button.Key;
 			this.keyGesture.ModifierKeys = button.ModifierKeys;
 			this.keyGesture.Refresh();
-			this.note.Text = this.button.Note;
+			this.note.Text = this.button.Note ?? string.Empty;
 		}
 
 		private void ButtonOkClick(object sender, RoutedEventArgs e) {
@@ -46,7 +46,7 @@ namespace LogicCircuit {
 				) {
 					this.button.CircuitProject.InTransaction(() => {
 						this.button.Notation = name;
-						this.button.IsToggle = this.isToggle.IsChecked.Value;
+						this.button.IsToggle = this.isToggle.IsChecked!.Value;
 						this.button.PinSide = pinSide;
 						this.button.Inverted = isInverted;
 						this.button.Key = key;

@@ -31,7 +31,7 @@ namespace LogicCircuit {
 			set { this.fieldColors = LedMatrix.CheckColors(value); }
 		}
 		public string Note;
-		internal LedMatrix LedMatrix;
+		internal LedMatrix? LedMatrix;
 		// Field accessors
 		// Accessor of the LedMatrixId field
 		public sealed class LedMatrixIdField : IField<LedMatrixData, Guid>, IFieldSerializer<LedMatrixData> {
@@ -259,7 +259,7 @@ namespace LogicCircuit {
 			public int Compare(ref LedMatrixData l, ref LedMatrixData r) {
 				return StringComparer.Ordinal.Compare(l.Note, r.Note);
 			}
-			public int Compare(string l, string r) {
+			public int Compare(string? l, string? r) {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
@@ -285,9 +285,9 @@ namespace LogicCircuit {
 			private LedMatrixField() {}
 			public string Name { get { return "LedMatrixWrapper"; } }
 			public int Order { get; set; }
-			public LedMatrix DefaultValue { get { return null; } }
+			public LedMatrix DefaultValue { get { return null!; } }
 			public LedMatrix GetValue(ref LedMatrixData record) {
-				return record.LedMatrix;
+				return record.LedMatrix!;
 			}
 			public void SetValue(ref LedMatrixData record, LedMatrix value) {
 				record.LedMatrix = value;
@@ -295,7 +295,7 @@ namespace LogicCircuit {
 			public int Compare(ref LedMatrixData l, ref LedMatrixData r) {
 				return this.Compare(l.LedMatrix, r.LedMatrix);
 			}
-			public int Compare(LedMatrix l, LedMatrix r) {
+			public int Compare(LedMatrix? l, LedMatrix? r) {
 				if(object.ReferenceEquals(l, r)) return 0;
 				if(l == null) return -1;
 				if(r == null) return 1;
@@ -325,7 +325,8 @@ namespace LogicCircuit {
 
 		// Creates all foreign keys of the table
 		public static void CreateForeignKeys(StoreSnapshot store) {
-			TableSnapshot<LedMatrixData> table = (TableSnapshot<LedMatrixData>)store.Table("LedMatrix");
+			TableSnapshot<LedMatrixData>? table = (TableSnapshot<LedMatrixData>?)store.Table("LedMatrix");
+			Debug.Assert(table != null);
 			table.CreateForeignKey("PK_LedMatrix", store.Table("Circuit"), LedMatrixData.LedMatrixIdField.Field, ForeignKeyAction.Cascade, false);
 		}
 	}
@@ -337,6 +338,7 @@ namespace LogicCircuit {
 		internal RowId LedMatrixRowId { get; private set; }
 
 		// Constructor
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public LedMatrix(CircuitProject store, RowId rowIdLedMatrix, RowId rowIdCircuit) : base(store, rowIdCircuit) {
 			Debug.Assert(!rowIdLedMatrix.IsEmpty);
 			this.LedMatrixRowId = rowIdLedMatrix;
@@ -344,6 +346,7 @@ namespace LogicCircuit {
 			this.Table.SetField(this.LedMatrixRowId, LedMatrixData.LedMatrixField.Field, this);
 			this.InitializeLedMatrix();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		partial void InitializeLedMatrix();
 
@@ -432,7 +435,7 @@ namespace LogicCircuit {
 	// Wrapper for table LedMatrix.
 	partial class LedMatrixSet : INotifyCollectionChanged, IEnumerable<LedMatrix> {
 
-		public event NotifyCollectionChangedEventHandler CollectionChanged;
+		public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
 		internal TableSnapshot<LedMatrixData> Table { get; private set; }
 
@@ -440,8 +443,9 @@ namespace LogicCircuit {
 		public CircuitProject CircuitProject { get { return (CircuitProject)this.Table.StoreSnapshot; } }
 
 		// Constructor
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public LedMatrixSet(CircuitProject store) {
-			ITableSnapshot table = store.Table("LedMatrix");
+			ITableSnapshot? table = store.Table("LedMatrix");
 			if(table != null) {
 				Debug.Assert(store.IsFrozen, "The store should be frozen");
 				this.Table = (TableSnapshot<LedMatrixData>)table;
@@ -451,6 +455,7 @@ namespace LogicCircuit {
 			}
 			this.InitializeLedMatrixSet();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		partial void InitializeLedMatrixSet();
 
@@ -462,7 +467,7 @@ namespace LogicCircuit {
 
 
 		// gets items wrapper by RowId
-		public LedMatrix Find(RowId rowId) {
+		public LedMatrix? Find(RowId rowId) {
 			if(!rowId.IsEmpty) {
 				return this.Table.GetField(rowId, LedMatrixData.LedMatrixField.Field);
 			}
@@ -473,13 +478,14 @@ namespace LogicCircuit {
 		// gets items wrapper by RowId
 		private IEnumerable<LedMatrix> Select(IEnumerable<RowId> rows) {
 			foreach(RowId rowId in rows) {
-				LedMatrix item = this.Find(rowId);
+				LedMatrix? item = this.Find(rowId);
 				Debug.Assert(item != null, "What is the reason for the item not to be found?");
 				yield return item;
 			}
 		}
 
 		// Create wrapper for the row and register it in the dictionary
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static")]
 		private LedMatrix Create(RowId rowId, RowId CircuitRowId) {
 			LedMatrix item = new LedMatrix(this.CircuitProject, rowId, CircuitRowId);
 			return item;
@@ -488,7 +494,7 @@ namespace LogicCircuit {
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		internal LedMatrix FindOrCreate(RowId rowId) {
 			Debug.Assert(!rowId.IsEmpty && !this.Table.IsDeleted(rowId), "Bad RowId");
-			LedMatrix item;
+			LedMatrix? item;
 			if((item = this.Find(rowId)) != null) {
 				Debug.Assert(!item.IsDeleted(), "Deleted item should not be present in the dictionary");
 				return item;
@@ -496,7 +502,8 @@ namespace LogicCircuit {
 			Guid primaryKeyValue = this.Table.GetField(rowId, LedMatrixData.LedMatrixIdField.Field);
 
 
-			TableSnapshot<CircuitData> tableCircuit = (TableSnapshot<CircuitData>)this.CircuitProject.Table("Circuit");
+			TableSnapshot<CircuitData>? tableCircuit = (TableSnapshot<CircuitData>?)this.CircuitProject.Table("Circuit");
+			Debug.Assert(tableCircuit != null);
 			return this.Create(rowId, tableCircuit.Find(CircuitData.CircuitIdField.Field, primaryKeyValue));
 		}
 
@@ -513,7 +520,8 @@ namespace LogicCircuit {
 			// Fields of Circuit table
 
 		) {
-			TableSnapshot<CircuitData> tableCircuit = (TableSnapshot<CircuitData>)this.CircuitProject.Table("Circuit");
+			TableSnapshot<CircuitData>? tableCircuit = (TableSnapshot<CircuitData>?)this.CircuitProject.Table("Circuit");
+			Debug.Assert(tableCircuit != null);
 			CircuitData dataCircuit = new CircuitData() {
 				CircuitId = LedMatrixId
 			};
@@ -534,7 +542,7 @@ namespace LogicCircuit {
 		// Search helpers
 
 		// Finds LedMatrix by LedMatrixId
-		public LedMatrix FindByLedMatrixId(Guid ledMatrixId) {
+		public LedMatrix? FindByLedMatrixId(Guid ledMatrixId) {
 			return this.Find(this.Table.Find(LedMatrixData.LedMatrixIdField.Field, ledMatrixId));
 		}
 
@@ -547,17 +555,17 @@ namespace LogicCircuit {
 		}
 
 		private void NotifyCollectionChanged(NotifyCollectionChangedEventArgs arg) {
-			NotifyCollectionChangedEventHandler handler = this.CollectionChanged;
+			NotifyCollectionChangedEventHandler? handler = this.CollectionChanged;
 			if(handler != null) {
 				handler(this, arg);
 			}
 		}
 
-		internal List<LedMatrix> UpdateSet(int oldVersion, int newVersion) {
-			IEnumerator<TableChange<LedMatrixData>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
+		internal List<LedMatrix>? UpdateSet(int oldVersion, int newVersion) {
+			IEnumerator<TableChange<LedMatrixData>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
 			if(change != null) {
 				bool handlerAttached = (this.CollectionChanged != null);
-				List<LedMatrix> del = (handlerAttached) ? new List<LedMatrix>() : null;
+				List<LedMatrix>? del = (handlerAttached) ? new List<LedMatrix>() : null;
 				while(change.MoveNext()) {
 					switch(change.Current.Action) {
 					case SnapTableAction.Insert:
@@ -568,7 +576,7 @@ namespace LogicCircuit {
 						if(handlerAttached) {
 							LedMatrix item = change.Current.GetOldField(LedMatrixData.LedMatrixField.Field);
 							Debug.Assert(item.IsDeleted());
-							del.Add(item);
+							del!.Add(item);
 						}
 						break;
 					default:
@@ -583,11 +591,11 @@ namespace LogicCircuit {
 			return null;
 		}
 
-		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<LedMatrix> deleted) {
-			IEnumerator<TableChange<LedMatrixData>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
+		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<LedMatrix>? deleted) {
+			IEnumerator<TableChange<LedMatrixData>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
 			if(change != null) {
 				bool handlerAttached = (this.CollectionChanged != null);
-				List<LedMatrix> add = (handlerAttached) ? new List<LedMatrix>() : null;
+				List<LedMatrix>? add = (handlerAttached) ? new List<LedMatrix>() : null;
 				this.StartNotifyLedMatrixSetChanged(oldVersion, newVersion);
 				while(change.MoveNext()) {
 					this.NotifyLedMatrixSetChanged(change.Current);
@@ -595,7 +603,7 @@ namespace LogicCircuit {
 					case SnapTableAction.Insert:
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item was not created?");
 						if(handlerAttached) {
-							add.Add(this.Find(change.Current.RowId));
+							add!.Add(this.Find(change.Current.RowId)!);
 						}
 						break;
 					case SnapTableAction.Delete:
@@ -604,7 +612,7 @@ namespace LogicCircuit {
 					default:
 						Debug.Assert(change.Current.Action == SnapTableAction.Update, "Unknown action");
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item does not exist during update?");
-						this.Find(change.Current.RowId).NotifyChanged(change.Current);
+						this.Find(change.Current.RowId)!.NotifyChanged(change.Current);
 						break;
 					}
 				}
@@ -613,7 +621,7 @@ namespace LogicCircuit {
 					if(deleted != null && 0 < deleted.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, deleted));
 					}
-					if(0 < add.Count) {
+					if(0 < add!.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, add));
 					}
 				}

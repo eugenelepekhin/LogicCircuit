@@ -55,7 +55,7 @@ namespace LogicCircuit.DataPersistent {
 
 			public Hash(TField value, int size) {
 				Debug.Assert(1 < size && size < int.MaxValue - 1);
-				this.seed = value.GetHashCode() & int.MaxValue;
+				this.seed = value!.GetHashCode() & int.MaxValue;
 				this.factor = 1 + ((this.seed >> 5) + 1) % (size - 1);
 				this.size = size;
 			}
@@ -77,7 +77,7 @@ namespace LogicCircuit.DataPersistent {
 			}
 			public string Name { get { return "Value"; } }
 			public int Order { get; set; }
-			public TField DefaultValue { get { return default; } }
+			public TField DefaultValue { get { return default!; } }
 			public TField GetValue(ref Bucket record) {
 				return record.Value;
 			}
@@ -87,7 +87,7 @@ namespace LogicCircuit.DataPersistent {
 			public int Compare(ref Bucket data1, ref Bucket data2) {
 				return this.comparer.Compare(data1.Value, data2.Value);
 			}
-			public int Compare(TField x, TField y) {
+			public int Compare(TField? x, TField? y) {
 				return this.comparer.Compare(x, y);
 			}
 		}

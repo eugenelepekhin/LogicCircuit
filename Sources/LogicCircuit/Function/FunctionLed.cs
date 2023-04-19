@@ -7,12 +7,12 @@ using System.Windows.Shapes;
 namespace LogicCircuit {
 	public class FunctionLed : Probe, IFunctionVisual {
 
-		private static Brush[] stateBrush;
+		private static Brush[]? stateBrush;
 
 		private readonly List<CircuitSymbol> circuitSymbol;
 		private readonly Project project;
-		private LogicalCircuit lastLogicalCircuit;
-		private Shape lastShape;
+		private LogicalCircuit? lastLogicalCircuit;
+		private Shape? lastShape;
 
 		public FunctionLed(CircuitState circuitState, IEnumerable<CircuitSymbol> symbols, int parameter) : base(circuitState, parameter) {
 			if(FunctionLed.stateBrush == null) {
@@ -37,13 +37,13 @@ namespace LogicCircuit {
 			}
 			if(this.lastShape == null) {
 				if(this.circuitSymbol.Count == 1) {
-					this.lastShape = (Shape)this.circuitSymbol[0].ProbeView;
+					this.lastShape = (Shape)this.circuitSymbol[0].ProbeView!;
 				} else {
 					CircuitSymbol symbol = this.circuitSymbol.First(s => s.LogicalCircuit == currentCircuit);
 					this.lastShape = this.ProbeView(symbol);
 				}
 			}
-			this.lastShape.Fill = FunctionLed.stateBrush[(int)this[0]];
+			this.lastShape.Fill = FunctionLed.stateBrush![(int)this[0]];
 		}
 
 		public override bool Evaluate() {
@@ -60,14 +60,14 @@ namespace LogicCircuit {
 			foreach(CircuitSymbol symbol in this.circuitSymbol) {
 				if(symbol.HasCreatedGlyph) {
 					Shape shape = this.ProbeView(symbol);
-					shape.Fill = FunctionLed.stateBrush[(int)State.Off];
+					shape.Fill = FunctionLed.stateBrush![(int)State.Off];
 				}
 			}
 		}
 
 		private Shape ProbeView(CircuitSymbol symbol) {
 			if(symbol == this.circuitSymbol[0]) {
-				return (Shape)this.circuitSymbol[0].ProbeView;
+				return (Shape)this.circuitSymbol[0].ProbeView!;
 			} else {
 				DisplayCanvas canvas = (DisplayCanvas)symbol.Glyph;
 				return (Shape)canvas.DisplayOf(this.circuitSymbol);

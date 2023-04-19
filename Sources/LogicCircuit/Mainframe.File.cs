@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Windows;
@@ -18,7 +19,7 @@ namespace LogicCircuit {
 			return Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
 		}
 
-		public static bool IsFilePathValid(string path) {
+		public static bool IsFilePathValid(string? path) {
 			if(path != null && path.Length > 0) {
 				try {
 					if(Directory.Exists(Path.GetDirectoryName(Path.GetFullPath(path)))) {
@@ -51,7 +52,7 @@ namespace LogicCircuit {
 		public static string TempFile(string originalFile) {
 			string file;
 			do {
-				file = Path.Combine(Path.GetDirectoryName(originalFile), DateTime.Now.Ticks.ToString("x", CultureInfo.InvariantCulture));
+				file = Path.Combine(Path.GetDirectoryName(originalFile)!, DateTime.Now.Ticks.ToString("x", CultureInfo.InvariantCulture));
 			} while(File.Exists(file));
 			return file;
 		}
@@ -60,11 +61,11 @@ namespace LogicCircuit {
 			return Path.ChangeExtension(originalFile, ".backup");
 		}
 
-		internal static string AutoSaveFile(string file) {
+		internal static string? AutoSaveFile(string? file) {
 			if(Mainframe.IsFilePathValid(file) && Path.HasExtension(file)) {
 				string extension = Path.GetExtension(file);
 				if(!string.IsNullOrEmpty(extension) && 2 < extension.Length) {
-					return file.Substring(0, file.Length - 2) + "~$";
+					return string.Concat(file.AsSpan(0, file.Length - 2), "~$");
 				}
 			}
 			return null;
@@ -90,9 +91,9 @@ namespace LogicCircuit {
 			}
 		}
 
-		internal static void DeleteAutoSaveFile(string file) {
+		internal static void DeleteAutoSaveFile(string? file) {
 			if(!string.IsNullOrEmpty(file)) {
-				Mainframe.DeleteFile(Mainframe.AutoSaveFile(file));
+				Mainframe.DeleteFile(Mainframe.AutoSaveFile(file)!);
 			}
 		}
 
@@ -118,7 +119,7 @@ namespace LogicCircuit {
 			return true;
 		}
 
-		private void Edit(string file) {
+		private void Edit(string? file) {
 			this.ResetAutoSaveTimer();
 			Editor circuitEditor;
 			try {
@@ -147,9 +148,9 @@ namespace LogicCircuit {
 		private void Open() {
 			if(this.Editor == null || this.EnsureSaved()) {
 				OpenFileDialog dialog = new OpenFileDialog();
-				string file = Settings.User.RecentFile();
+				string? file = Settings.User.RecentFile();
 				if(Mainframe.IsFilePathValid(file)) {
-					dialog.InitialDirectory = Path.GetDirectoryName(Path.GetFullPath(file));
+					dialog.InitialDirectory = Path.GetDirectoryName(Path.GetFullPath(file!));
 				} else {
 					dialog.InitialDirectory = Mainframe.DefaultProjectFolder();
 				}
@@ -186,23 +187,24 @@ namespace LogicCircuit {
 		}
 
 		private void Save(string file) {
-			this.Editor.Save(file);
+			this.Editor!.Save(file);
 			Settings.User.AddRecentFile(file);
 			this.Status = Properties.Resources.FileSaved(file);
 		}
 
 		private void SaveAs() {
-			string file = this.Editor.File;
+			string? file = this.Editor!.File;
 			if(!Mainframe.IsFilePathValid(file)) {
 				file = Settings.User.RecentFile();
 				string dir;
 				if(Mainframe.IsFilePathValid(file)) {
-					dir = Path.GetDirectoryName(file);
+					dir = Path.GetDirectoryName(file)!;
 				} else {
 					dir = Mainframe.DefaultProjectFolder();
 				}
 				file = Path.Combine(dir, this.Editor.Project.Name + Mainframe.FileExtention);
 			}
+			Debug.Assert(file != null);
 			SaveFileDialog dialog = new SaveFileDialog {
 				InitialDirectory = Path.GetDirectoryName(Path.GetFullPath(file)),
 				FileName = Path.GetFileName(file),
@@ -216,9 +218,9 @@ namespace LogicCircuit {
 		}
 
 		private void Save() {
-			string file = this.Editor.File;
+			string? file = this.Editor!.File;
 			if(Mainframe.IsFilePathValid(file)) {
-				this.Save(file);
+				this.Save(file!);
 			} else {
 				this.SaveAs();
 			}
@@ -227,9 +229,9 @@ namespace LogicCircuit {
 		private void Import() {
 			if(this.Editor != null && this.Editor.InEditMode) {
 				string dir = Mainframe.DefaultProjectFolder();
-				string recent = Settings.User.RecentFile();
+				string? recent = Settings.User.RecentFile();
 				if(Mainframe.IsFilePathValid(recent)) {
-					dir = Path.GetDirectoryName(recent);
+					dir = Path.GetDirectoryName(recent)!;
 				}
 				SettingsStringCache location = new SettingsStringCache(Settings.User, "ImportFile.Folder", dir);
 				OpenFileDialog dialog = new OpenFileDialog {
@@ -240,7 +242,7 @@ namespace LogicCircuit {
 				bool? result = dialog.ShowDialog(this);
 				if(result.HasValue && result.Value) {
 					string file = dialog.FileName;
-					location.Value = Path.GetDirectoryName(file);
+					location.Value = Path.GetDirectoryName(file)!;
 					this.Editor.Import(file);
 				}
 			}

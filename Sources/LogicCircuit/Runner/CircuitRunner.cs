@@ -7,6 +7,7 @@ using System.Threading;
 using System.Windows.Threading;
 
 namespace LogicCircuit {
+	[SuppressMessage("Design", "CA1001:Types that own disposable fields should be disposable")]
 	public class CircuitRunner {
 
 		public const int HistorySize = 100;
@@ -15,7 +16,7 @@ namespace LogicCircuit {
 		private CircuitMap RootMap { get; set; }
 		public IEnumerable<CircuitMap> Root { get { yield return this.RootMap; } }
 
-		public CircuitMap VisibleMap {
+		public CircuitMap? VisibleMap {
 			get {
 				if(this.RootMap != null) {
 					return this.RootMap.Visible;
@@ -23,24 +24,25 @@ namespace LogicCircuit {
 				return null;
 			}
 			set {
-				Tracer.Assert(this.RootMap != null);
+				Tracer.Assert(this.RootMap);
 				this.RootMap.Visible = value;
 			}
 		}
 
 		public bool HasProbes { get; private set; }
 
-		public CircuitState CircuitState { get; private set; }
+		public CircuitState? CircuitState { get; private set; }
 		private bool isMaxSpeed;
 		private int flipCount;
 		private double actualFrequency;
 		private double lastActualFrequency;
 
-		private Thread evaluationThread;
-		private Thread refreshingThread;
-		private AutoResetEvent evaluationGate;
-		private AutoResetEvent refreshingGate;
+		private Thread? evaluationThread;
+		private Thread? refreshingThread;
+		private AutoResetEvent? evaluationGate;
+		private AutoResetEvent? refreshingGate;
 
+		private volatile bool abortRequested;
 		private volatile bool running;
 		private volatile bool refreshing;
 		private volatile bool updatingUI;
@@ -50,8 +52,8 @@ namespace LogicCircuit {
 			get { return this.oscilloscoping.Value; }
 			set { this.oscilloscoping.Value = value; }
 		}
-		public DialogOscilloscope DialogOscilloscope { get; set; }
-		public Oscilloscope Oscilloscope { get; set; }
+		public DialogOscilloscope? DialogOscilloscope { get; set; }
+		public Oscilloscope? Oscilloscope { get; set; }
 
 		public CircuitRunner(Editor editor) {
 			this.Editor = editor;
@@ -72,7 +74,8 @@ namespace LogicCircuit {
 		}
 
 		public void Stop() {
-			this.evaluationThread.Abort();
+			//this.evaluationThread.Abort();
+			this.abortRequested = true;
 		}
 
 		public bool IsRunning { get { return this.evaluationThread != null && this.evaluationThread.IsAlive && this.running; } }
@@ -92,8 +95,9 @@ namespace LogicCircuit {
 
 		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
 		private void Run() {
-			PropertyChangedEventHandler editorPropertyChanged = null;
+			PropertyChangedEventHandler? editorPropertyChanged = null;
 			try {
+				this.abortRequested = false;
 				this.running = true;
 				this.Editor.Mainframe.Status = Properties.Resources.PowerOn;
 
@@ -143,7 +147,9 @@ namespace LogicCircuit {
 							timer.Start();
 							this.RunCircuit();
 						}
+						this.refreshingGate.Set();
 					}
+					this.evaluationGate.Set();
 				}
 			} catch(ThreadAbortException) {
 				// Do nothing
@@ -151,9 +157,9 @@ namespace LogicCircuit {
 				this.Editor.Mainframe.ReportException(exception);
 			} finally {
 				this.running = false;
-				if(this.refreshingThread != null) {
-					this.refreshingThread.Abort();
-				}
+				//if(this.refreshingThread != null) {
+				//	this.refreshingThread.Abort();
+				//}
 				if(editorPropertyChanged != null) {
 					this.Editor.PropertyChanged -= editorPropertyChanged;
 				}
@@ -174,12 +180,13 @@ namespace LogicCircuit {
 		}
 
 		private void RunCircuit() {
+			Debug.Assert(this.CircuitState != null);
 			bool singleCPU = (Environment.ProcessorCount < 2);
 			bool hasProbes = this.CircuitState.HasProbes;
 			Stopwatch stopwatch = new Stopwatch();
 			stopwatch.Start();
 			long tickCount = 0;
-			for(;;) {
+			while(!this.abortRequested) {
 				bool flipClock = (0 < this.flipCount);
 				bool maxSpeed = this.isMaxSpeed;
 				if(!this.CircuitState.Evaluate(maxSpeed || flipClock)) {
@@ -195,7 +202,7 @@ namespace LogicCircuit {
 					}
 				}
 				if(!this.refreshing) {
-					this.refreshingGate.Set();
+					this.refreshingGate!.Set();
 				}
 				if(this.Oscilloscoping) {
 					if(flipClock && hasProbes) {
@@ -214,18 +221,20 @@ namespace LogicCircuit {
 					if(this.flipCount < 0) {
 						this.flipCount = 0;
 					}
-					this.evaluationGate.WaitOne();
+					this.evaluationGate!.WaitOne();
 				} else if(maxSpeed && singleCPU) {
 					// On single CPU machine when circuit is running on max speed lets yield for UI thread to refresh displays.
 					Thread.Yield();
 				}
 			}
-			this.Editor.Mainframe.ErrorMessage(Properties.Resources.Oscillation);
+			if(!this.abortRequested) {
+				this.Editor.Mainframe.ErrorMessage(Properties.Resources.Oscillation);
+			}
 		}
 
 		private void TimerTick() {
 			if(!this.isMaxSpeed) {
-				AutoResetEvent e = this.evaluationGate;
+				AutoResetEvent? e = this.evaluationGate;
 				if(e != null) {
 					Interlocked.Increment(ref this.flipCount);
 					e.Set();
@@ -234,9 +243,9 @@ namespace LogicCircuit {
 		}
 
 		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-		private void OnFunctionUpdated(object sender, EventArgs e) {
+		private void OnFunctionUpdated(object? sender, EventArgs e) {
 			try {
-				this.evaluationGate.Set();
+				this.evaluationGate!.Set();
 			} catch(ThreadAbortException) {
 			} catch(ObjectDisposedException) {
 			} catch(Exception exception) {
@@ -247,10 +256,11 @@ namespace LogicCircuit {
 		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
 		private void MonitorUI() {
 			try {
+				Debug.Assert(this.refreshingGate != null);
 				Action refresh = new Action(this.RefreshUI);
-				while(this.running && this.refreshingGate != null && this.refreshingThread != null && this.evaluationThread != null) {
+				while(this.running && !this.abortRequested) {
 					this.refreshingGate.WaitOne();
-					if(this.running && this.refreshingThread != null && this.evaluationThread != null && !this.refreshing) {
+					if(this.running && !this.refreshing) {
 						this.refreshing = true;
 						Thread.MemoryBarrier();
 						this.Editor.Mainframe.Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, refresh);
@@ -265,6 +275,7 @@ namespace LogicCircuit {
 
 		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
 		private void RefreshUI() {
+			Debug.Assert(this.VisibleMap != null);
 			try {
 				if(this.running) {
 					this.updatingUI = true;

@@ -23,7 +23,7 @@ namespace LogicCircuit {
 		public int InputCount { get { return this.Pins.Count(p => p.PinType == PinType.Input); } }
 
 		public override Circuit CopyTo(LogicalCircuit target) {
-			return target.CircuitProject.GateSet.Gate(this.GateId);
+			return target.CircuitProject.GateSet.Gate(this.GateId)!;
 		}
 
 		public override bool IsDisplay {
@@ -68,7 +68,7 @@ namespace LogicCircuit {
 			case GateType.Even:
 			case GateType.Probe:
 				Tracer.Fail();
-				return null;
+				return null!;
 			case GateType.Led:
 				if(this.InputCount == 1) {
 					skin = SymbolShape.Led;
@@ -102,7 +102,7 @@ namespace LogicCircuit {
 						break;
 					default:
 						Tracer.Fail();
-						return null;
+						return null!;
 					}
 					return symbol.CreateShapedGlyph(skin);
 				}
@@ -181,15 +181,15 @@ namespace LogicCircuit {
 			if(invertedOutput && !GateSet.HasOutput(gateType)) {
 				throw new ArgumentOutOfRangeException(nameof(invertedOutput));
 			}
-			Gate gate = this.FindByGateId(GateSet.GateGuid(gateType, inputCount, invertedOutput));
+			Gate? gate = this.FindByGateId(GateSet.GateGuid(gateType, inputCount, invertedOutput));
 			if(gate == null) {
 				return this.Create(gateType, inputCount, invertedOutput);
 			}
 			return gate;
 		}
 
-		public Gate Gate(Guid gateId) {
-			Gate gate = this.FindByGateId(gateId);
+		public Gate? Gate(Guid gateId) {
+			Gate? gate = this.FindByGateId(gateId);
 			if(gate != null) {
 				return gate;
 			}
@@ -293,17 +293,17 @@ namespace LogicCircuit {
 			int name = 1;
 			for(int i = 0; i < 4; i++) {
 				DevicePin pin = this.CircuitProject.DevicePinSet.Create(gate, PinType.Input, 1);
-				pin.Name = Properties.Resources.ResourceManager.GetString(prefix + name, Properties.Resources.Culture);
+				pin.Name = Properties.Resources.ResourceManager.GetString(prefix + name, Properties.Resources.Culture)!;
 				name++;
 			}
 			for(int i = 0; i < 3; i++) {
 				DevicePin pin = this.CircuitProject.DevicePinSet.Create(gate, PinType.Input, 1);
-				pin.Name = Properties.Resources.ResourceManager.GetString(prefix + name, Properties.Resources.Culture);
+				pin.Name = Properties.Resources.ResourceManager.GetString(prefix + name, Properties.Resources.Culture)!;
 				pin.PinSide = PinSide.Right;
 				name++;
 			}
 			DevicePin pinDot = this.CircuitProject.DevicePinSet.Create(gate, PinType.Input, 1);
-			pinDot.Name = Properties.Resources.ResourceManager.GetString(prefix + name, Properties.Resources.Culture);
+			pinDot.Name = Properties.Resources.ResourceManager.GetString(prefix + name, Properties.Resources.Culture)!;
 			pinDot.PinSide = PinSide.Right;
 		}
 

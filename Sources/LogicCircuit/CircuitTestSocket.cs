@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 namespace LogicCircuit {
 	public class CircuitTestSocket {
 		private readonly TableChank chank;
-		private readonly TableChank[] chankList;
+		private readonly TableChank[]? chankList;
 		public IEnumerable<InputPinSocket> Inputs { get { return this.chank.Inputs; } }
 		public IEnumerable<OutputPinSocket> Outputs { get { return this.chank.Outputs; } }
 
@@ -38,6 +39,7 @@ namespace LogicCircuit {
 		public CircuitTestSocket(LogicalCircuit circuit) : this(circuit, true) {
 		}
 
+		[SuppressMessage("Performance", "CA1851:Possible multiple enumerations of 'IEnumerable' collection")]
 		public static bool IsTestable(LogicalCircuit circuit) {
 			IEnumerable<Pin> pins = circuit.CircuitProject.PinSet.SelectByCircuit(circuit);
 			return pins.Any(p => p.PinType == PinType.Input) && pins.Any(p => p.PinType == PinType.Output);
@@ -48,7 +50,7 @@ namespace LogicCircuit {
 		}
 
 		[SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters")]
-		public IList<TruthState> BuildTruthTable(Action<double> reportProgress, Func<bool> keepGoing, Predicate<TruthState> include, int maxCount, out bool truncated) {
+		public IList<TruthState>? BuildTruthTable(Action<double> reportProgress, Func<bool> keepGoing, Predicate<TruthState>? include, int maxCount, out bool truncated) {
 			System.Diagnostics.Stopwatch watch = new System.Diagnostics.Stopwatch();
 			watch.Start();
 			if(this.chankList == null) {
@@ -100,7 +102,7 @@ namespace LogicCircuit {
 			public readonly List<InputPinSocket> Inputs = new List<InputPinSocket>();
 			public readonly List<OutputPinSocket> Outputs = new List<OutputPinSocket>();
 			public readonly int InputBitCount;
-			public List<TruthState> Results { get; private set; }
+			public List<TruthState>? Results { get; private set; }
 			public BigInteger Start = 0;
 			public BigInteger Count;
 			public bool Oscillation { get; private set; }
@@ -114,8 +116,8 @@ namespace LogicCircuit {
 				CircuitMap circuitMap = new CircuitMap(this.LogicalCircuit);
 				this.CircuitState = circuitMap.Apply(CircuitRunner.HistorySize);
 
-				this.Inputs.ForEach(s => s.Function = circuitMap.FunctionConstant(s.Symbol));
-				this.Outputs.ForEach(s => s.Function = circuitMap.FunctionProbe(s.Symbol));
+				this.Inputs.ForEach(s => s.Function = circuitMap.FunctionConstant(s.Symbol)!);
+				this.Outputs.ForEach(s => s.Function = circuitMap.FunctionProbe(s.Symbol)!);
 
 				this.Inputs.Where(s => s.Function == null).ToList().ForEach(s => this.Inputs.Remove(s));
 				this.Outputs.Where(s => s.Function == null).ToList().ForEach(s => this.Outputs.Remove(s));
@@ -138,11 +140,11 @@ namespace LogicCircuit {
 				return this.CircuitState.Evaluate(true);
 			}
 
-			public void BuildTruthTable(Action<double> reportProgress, Func<bool> keepGoing, Predicate<TruthState> include, int maxCount) {
+			public void BuildTruthTable(Action<double> reportProgress, Func<bool> keepGoing, Predicate<TruthState>? include, int maxCount) {
 				this.LogicalCircuit.CircuitProject.InOmitTransaction(() => this.Build(reportProgress, keepGoing, include, maxCount));
 			}
 
-			private void Build(Action<double> reportProgress, Func<bool> keepGoing, Predicate<TruthState> include, int maxCount) {
+			private void Build(Action<double> reportProgress, Func<bool> keepGoing, Predicate<TruthState>? include, int maxCount) {
 				this.Results = new List<TruthState>();
 				this.Oscillation = false;
 				this.Trancated = false;
@@ -163,6 +165,7 @@ namespace LogicCircuit {
 						int bit = 0;
 						for(int i = this.Inputs.Count - 1; 0 <= i; i--) {
 							InputPinSocket pin = this.Inputs[i];
+							Debug.Assert(pin.Function != null);
 							int v = (int)((value >> bit) & int.MaxValue) & (pin.Pin.BitWidth < 32 ? (1 << pin.Pin.BitWidth) - 1 : ~0);
 							pin.Function.Value = v;
 							Tracer.Assert(pin.Function.Value == v, "Value get truncated");
@@ -173,12 +176,12 @@ namespace LogicCircuit {
 							break;
 						}
 						for(int i = 0; i < inputCount; i++) {
-							state.Input[i] = this.Inputs[i].Function.Value;
+							state.Input[i] = this.Inputs[i].Function!.Value;
 						}
 						for(int i = 0; i < outputCount; i++) {
-							state.Result[i] = this.Outputs[i].Function.Pack();
+							state.Result[i] = this.Outputs[i].Function!.Pack();
 						}
-						if(!state.Unpack(this.Outputs.Select(o => o.Function.ParameterCount).ToArray()) || include == null || include(state)) {
+						if(!state.Unpack(this.Outputs.Select(o => o.Function!.ParameterCount).ToArray()) || include == null || include(state)) {
 							this.Results.Add(state);
 							state = new TruthState(inputCount, outputCount);
 						}
@@ -199,14 +202,14 @@ namespace LogicCircuit {
 			}
 
 			private static LogicalCircuit Copy(LogicalCircuit circuit) {
-				LogicalCircuit other = null;
+				LogicalCircuit? other = null;
 				CircuitProject copy = new CircuitProject();
 				copy.InTransaction(() => {
 					Project project = copy.ProjectSet.Copy(circuit.CircuitProject.ProjectSet.Project);
 					other = copy.LogicalCircuitSet.Copy(circuit, true);
 					project.LogicalCircuit = other;
 				});
-				foreach(CircuitSymbol symbol in other.CircuitSymbols()) {
+				foreach(CircuitSymbol symbol in other!.CircuitSymbols()) {
 					symbol.GuaranteeGlyph();
 				}
 				return other;
@@ -234,7 +237,7 @@ namespace LogicCircuit {
 		public Pin Pin { get; private set; }
 		public Constant Value { get; private set; }
 		public CircuitSymbol Symbol { get; private set; }
-		public FunctionConstant Function { get; set; }
+		public FunctionConstant? Function { get; set; }
 
 		public InputPinSocket(Pin pin) {
 			Tracer.Assert(pin.PinType == PinType.Input);
@@ -242,9 +245,9 @@ namespace LogicCircuit {
 			this.Pin = pin;
 			this.Value = project.ConstantSet.Create(pin.BitWidth, 0, PinSide.Right);
 			this.Value.IsInputPinSocket = true;
-			CircuitSymbol pinSymbol = project.CircuitSymbolSet.SelectByCircuit(pin).FirstOrDefault();
-			Tracer.Assert(pinSymbol != null);
-			this.Symbol = project.CircuitSymbolSet.Create(this.Value, pin.LogicalCircuit, pinSymbol.X, pinSymbol.Y);
+			CircuitSymbol? pinSymbol = project.CircuitSymbolSet.SelectByCircuit(pin).FirstOrDefault();
+			Tracer.Assert(pinSymbol);
+			this.Symbol = project.CircuitSymbolSet.Create(this.Value, pin.LogicalCircuit, pinSymbol!.X, pinSymbol.Y);
 			this.Symbol.Rotation = pinSymbol.Rotation;
 			pinSymbol.X = pinSymbol.Y = int.MinValue;
 		}
@@ -254,16 +257,16 @@ namespace LogicCircuit {
 		public Pin Pin { get; private set; }
 		public CircuitProbe Value { get; private set; }
 		public CircuitSymbol Symbol { get; private set; }
-		public FunctionProbe Function { get; set; }
+		public FunctionProbe? Function { get; set; }
 
 		public OutputPinSocket(Pin pin) {
 			Tracer.Assert(pin.PinType == PinType.Output);
 			CircuitProject project = pin.CircuitProject;
 			this.Pin = pin;
 			this.Value = project.CircuitProbeSet.Create(null);
-			CircuitSymbol pinSymbol = project.CircuitSymbolSet.SelectByCircuit(pin).FirstOrDefault();
-			Tracer.Assert(pinSymbol != null);
-			this.Symbol = project.CircuitSymbolSet.Create(this.Value, pin.LogicalCircuit, pinSymbol.X, pinSymbol.Y);
+			CircuitSymbol? pinSymbol = project.CircuitSymbolSet.SelectByCircuit(pin).FirstOrDefault();
+			Tracer.Assert(pinSymbol);
+			this.Symbol = project.CircuitSymbolSet.Create(this.Value, pin.LogicalCircuit, pinSymbol!.X, pinSymbol.Y);
 			this.Symbol.Rotation = pinSymbol.Rotation;
 			pinSymbol.X = pinSymbol.Y = int.MinValue;
 		}
@@ -273,15 +276,15 @@ namespace LogicCircuit {
 	public struct TruthState {
 		private readonly int[] input;
 		private readonly long[] result;
-		private int[] output;
-		private int[] bitWidth;
+		private int[]? output;
+		private int[]? bitWidth;
 
 		[SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
 		public int[] Input { get { return this.input; } }
 		[SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
 		public long[] Result { get { return this.result; } }
 		[SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
-		public int[] Output { get { return this.output; } }
+		public int[] Output { get { return this.output!; } }
 
 		public TruthState(int inputCount, int outputCount) {
 			this.input = new int[inputCount];
@@ -310,7 +313,7 @@ namespace LogicCircuit {
 				if(this.output != null) {
 					return this.output[index].ToString("X", CultureInfo.InvariantCulture);
 				}
-				if(FunctionProbe.ToInt(this.result[index], bitWidth[index], out int unpacked)) {
+				if(FunctionProbe.ToInt(this.result[index], this.bitWidth![index], out int unpacked)) {
 					return unpacked.ToString("X", CultureInfo.InvariantCulture);
 				}
 				long res = this.result[index];

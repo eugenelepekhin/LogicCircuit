@@ -16,14 +16,14 @@ namespace LogicCircuit {
 			} else {
 				Tracer.Assert(!(glyph is DisplayCanvas));
 				FrameworkElement probeView = (FrameworkElement)glyph.FindName("ProbeView");
-				Tracer.Assert(probeView != null);
+				Tracer.Assert(probeView);
 				this.symbolMap.Add(symbol, probeView);
 			}
 			this.Children.Add(glyph);
 		}
 
 		public FrameworkElement DisplayOf(IList<CircuitSymbol> symbol) {
-			FrameworkElement glyph = null;
+			FrameworkElement? glyph = null;
 			int index = symbol.Count - 1;
 			while(0 <= index && !this.symbolMap.TryGetValue(symbol[index], out glyph)) {
 				index--;

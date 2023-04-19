@@ -23,7 +23,7 @@ namespace LogicCircuit {
 		public string Notation;
 		public string Data;
 		public string Note;
-		internal Sensor Sensor;
+		internal Sensor? Sensor;
 		// Field accessors
 		// Accessor of the SensorId field
 		public sealed class SensorIdField : IField<SensorData, Guid>, IFieldSerializer<SensorData> {
@@ -181,7 +181,7 @@ namespace LogicCircuit {
 			public int Compare(ref SensorData l, ref SensorData r) {
 				return StringComparer.Ordinal.Compare(l.Notation, r.Notation);
 			}
-			public int Compare(string l, string r) {
+			public int Compare(string? l, string? r) {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
@@ -216,7 +216,7 @@ namespace LogicCircuit {
 			public int Compare(ref SensorData l, ref SensorData r) {
 				return StringComparer.Ordinal.Compare(l.Data, r.Data);
 			}
-			public int Compare(string l, string r) {
+			public int Compare(string? l, string? r) {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
@@ -251,7 +251,7 @@ namespace LogicCircuit {
 			public int Compare(ref SensorData l, ref SensorData r) {
 				return StringComparer.Ordinal.Compare(l.Note, r.Note);
 			}
-			public int Compare(string l, string r) {
+			public int Compare(string? l, string? r) {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
@@ -277,9 +277,9 @@ namespace LogicCircuit {
 			private SensorField() {}
 			public string Name { get { return "SensorWrapper"; } }
 			public int Order { get; set; }
-			public Sensor DefaultValue { get { return null; } }
+			public Sensor DefaultValue { get { return null!; } }
 			public Sensor GetValue(ref SensorData record) {
-				return record.Sensor;
+				return record.Sensor!;
 			}
 			public void SetValue(ref SensorData record, Sensor value) {
 				record.Sensor = value;
@@ -287,7 +287,7 @@ namespace LogicCircuit {
 			public int Compare(ref SensorData l, ref SensorData r) {
 				return this.Compare(l.Sensor, r.Sensor);
 			}
-			public int Compare(Sensor l, Sensor r) {
+			public int Compare(Sensor? l, Sensor? r) {
 				if(object.ReferenceEquals(l, r)) return 0;
 				if(l == null) return -1;
 				if(r == null) return 1;
@@ -317,7 +317,8 @@ namespace LogicCircuit {
 
 		// Creates all foreign keys of the table
 		public static void CreateForeignKeys(StoreSnapshot store) {
-			TableSnapshot<SensorData> table = (TableSnapshot<SensorData>)store.Table("Sensor");
+			TableSnapshot<SensorData>? table = (TableSnapshot<SensorData>?)store.Table("Sensor");
+			Debug.Assert(table != null);
 			table.CreateForeignKey("PK_Sensor", store.Table("Circuit"), SensorData.SensorIdField.Field, ForeignKeyAction.Cascade, false);
 		}
 	}
@@ -329,6 +330,7 @@ namespace LogicCircuit {
 		internal RowId SensorRowId { get; private set; }
 
 		// Constructor
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public Sensor(CircuitProject store, RowId rowIdSensor, RowId rowIdCircuit) : base(store, rowIdCircuit) {
 			Debug.Assert(!rowIdSensor.IsEmpty);
 			this.SensorRowId = rowIdSensor;
@@ -336,6 +338,7 @@ namespace LogicCircuit {
 			this.Table.SetField(this.SensorRowId, SensorData.SensorField.Field, this);
 			this.InitializeSensor();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		partial void InitializeSensor();
 
@@ -424,7 +427,7 @@ namespace LogicCircuit {
 	// Wrapper for table Sensor.
 	partial class SensorSet : INotifyCollectionChanged, IEnumerable<Sensor> {
 
-		public event NotifyCollectionChangedEventHandler CollectionChanged;
+		public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
 		internal TableSnapshot<SensorData> Table { get; private set; }
 
@@ -432,8 +435,9 @@ namespace LogicCircuit {
 		public CircuitProject CircuitProject { get { return (CircuitProject)this.Table.StoreSnapshot; } }
 
 		// Constructor
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public SensorSet(CircuitProject store) {
-			ITableSnapshot table = store.Table("Sensor");
+			ITableSnapshot? table = store.Table("Sensor");
 			if(table != null) {
 				Debug.Assert(store.IsFrozen, "The store should be frozen");
 				this.Table = (TableSnapshot<SensorData>)table;
@@ -443,6 +447,7 @@ namespace LogicCircuit {
 			}
 			this.InitializeSensorSet();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		partial void InitializeSensorSet();
 
@@ -454,7 +459,7 @@ namespace LogicCircuit {
 
 
 		// gets items wrapper by RowId
-		public Sensor Find(RowId rowId) {
+		public Sensor? Find(RowId rowId) {
 			if(!rowId.IsEmpty) {
 				return this.Table.GetField(rowId, SensorData.SensorField.Field);
 			}
@@ -465,13 +470,14 @@ namespace LogicCircuit {
 		// gets items wrapper by RowId
 		private IEnumerable<Sensor> Select(IEnumerable<RowId> rows) {
 			foreach(RowId rowId in rows) {
-				Sensor item = this.Find(rowId);
+				Sensor? item = this.Find(rowId);
 				Debug.Assert(item != null, "What is the reason for the item not to be found?");
 				yield return item;
 			}
 		}
 
 		// Create wrapper for the row and register it in the dictionary
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static")]
 		private Sensor Create(RowId rowId, RowId CircuitRowId) {
 			Sensor item = new Sensor(this.CircuitProject, rowId, CircuitRowId);
 			return item;
@@ -480,7 +486,7 @@ namespace LogicCircuit {
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		internal Sensor FindOrCreate(RowId rowId) {
 			Debug.Assert(!rowId.IsEmpty && !this.Table.IsDeleted(rowId), "Bad RowId");
-			Sensor item;
+			Sensor? item;
 			if((item = this.Find(rowId)) != null) {
 				Debug.Assert(!item.IsDeleted(), "Deleted item should not be present in the dictionary");
 				return item;
@@ -488,7 +494,8 @@ namespace LogicCircuit {
 			Guid primaryKeyValue = this.Table.GetField(rowId, SensorData.SensorIdField.Field);
 
 
-			TableSnapshot<CircuitData> tableCircuit = (TableSnapshot<CircuitData>)this.CircuitProject.Table("Circuit");
+			TableSnapshot<CircuitData>? tableCircuit = (TableSnapshot<CircuitData>?)this.CircuitProject.Table("Circuit");
+			Debug.Assert(tableCircuit != null);
 			return this.Create(rowId, tableCircuit.Find(CircuitData.CircuitIdField.Field, primaryKeyValue));
 		}
 
@@ -505,7 +512,8 @@ namespace LogicCircuit {
 			// Fields of Circuit table
 
 		) {
-			TableSnapshot<CircuitData> tableCircuit = (TableSnapshot<CircuitData>)this.CircuitProject.Table("Circuit");
+			TableSnapshot<CircuitData>? tableCircuit = (TableSnapshot<CircuitData>?)this.CircuitProject.Table("Circuit");
+			Debug.Assert(tableCircuit != null);
 			CircuitData dataCircuit = new CircuitData() {
 				CircuitId = SensorId
 			};
@@ -526,7 +534,7 @@ namespace LogicCircuit {
 		// Search helpers
 
 		// Finds Sensor by SensorId
-		public Sensor FindBySensorId(Guid sensorId) {
+		public Sensor? FindBySensorId(Guid sensorId) {
 			return this.Find(this.Table.Find(SensorData.SensorIdField.Field, sensorId));
 		}
 
@@ -539,17 +547,17 @@ namespace LogicCircuit {
 		}
 
 		private void NotifyCollectionChanged(NotifyCollectionChangedEventArgs arg) {
-			NotifyCollectionChangedEventHandler handler = this.CollectionChanged;
+			NotifyCollectionChangedEventHandler? handler = this.CollectionChanged;
 			if(handler != null) {
 				handler(this, arg);
 			}
 		}
 
-		internal List<Sensor> UpdateSet(int oldVersion, int newVersion) {
-			IEnumerator<TableChange<SensorData>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
+		internal List<Sensor>? UpdateSet(int oldVersion, int newVersion) {
+			IEnumerator<TableChange<SensorData>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
 			if(change != null) {
 				bool handlerAttached = (this.CollectionChanged != null);
-				List<Sensor> del = (handlerAttached) ? new List<Sensor>() : null;
+				List<Sensor>? del = (handlerAttached) ? new List<Sensor>() : null;
 				while(change.MoveNext()) {
 					switch(change.Current.Action) {
 					case SnapTableAction.Insert:
@@ -560,7 +568,7 @@ namespace LogicCircuit {
 						if(handlerAttached) {
 							Sensor item = change.Current.GetOldField(SensorData.SensorField.Field);
 							Debug.Assert(item.IsDeleted());
-							del.Add(item);
+							del!.Add(item);
 						}
 						break;
 					default:
@@ -575,11 +583,11 @@ namespace LogicCircuit {
 			return null;
 		}
 
-		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<Sensor> deleted) {
-			IEnumerator<TableChange<SensorData>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
+		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<Sensor>? deleted) {
+			IEnumerator<TableChange<SensorData>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
 			if(change != null) {
 				bool handlerAttached = (this.CollectionChanged != null);
-				List<Sensor> add = (handlerAttached) ? new List<Sensor>() : null;
+				List<Sensor>? add = (handlerAttached) ? new List<Sensor>() : null;
 				this.StartNotifySensorSetChanged(oldVersion, newVersion);
 				while(change.MoveNext()) {
 					this.NotifySensorSetChanged(change.Current);
@@ -587,7 +595,7 @@ namespace LogicCircuit {
 					case SnapTableAction.Insert:
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item was not created?");
 						if(handlerAttached) {
-							add.Add(this.Find(change.Current.RowId));
+							add!.Add(this.Find(change.Current.RowId)!);
 						}
 						break;
 					case SnapTableAction.Delete:
@@ -596,7 +604,7 @@ namespace LogicCircuit {
 					default:
 						Debug.Assert(change.Current.Action == SnapTableAction.Update, "Unknown action");
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item does not exist during update?");
-						this.Find(change.Current.RowId).NotifyChanged(change.Current);
+						this.Find(change.Current.RowId)!.NotifyChanged(change.Current);
 						break;
 					}
 				}
@@ -605,7 +613,7 @@ namespace LogicCircuit {
 					if(deleted != null && 0 < deleted.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, deleted));
 					}
-					if(0 < add.Count) {
+					if(0 < add!.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, add));
 					}
 				}

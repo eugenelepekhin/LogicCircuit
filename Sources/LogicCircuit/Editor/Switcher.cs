@@ -13,7 +13,7 @@ namespace LogicCircuit {
 			public Switcher(Editor editor) {
 				this.Editor = editor;
 				LogicalCircuit active = this.Editor.Project.LogicalCircuit;
-				Tracer.Assert(active != null);
+				Tracer.Assert(active);
 				foreach(LogicalCircuit logicalCircuit in this.Editor.CircuitProject.LogicalCircuitSet) {
 					if(logicalCircuit != active) {
 						this.history.Add(logicalCircuit);
@@ -50,17 +50,17 @@ namespace LogicCircuit {
 				}
 			}
 
-			public LogicalCircuit SuggestNext() {
+			public LogicalCircuit? SuggestNext() {
 				return (1 < this.history.Count) ? this.history[this.history.Count - 2] : null;
 			}
 
-			private void ProjectPropertyChanged(object sender, PropertyChangedEventArgs e) {
+			private void ProjectPropertyChanged(object? sender, PropertyChangedEventArgs e) {
 				if(this.tab == 0 && e.PropertyName == "LogicalCircuit") {
 					this.OnControlUp();
 				}
 			}
 
-			private void LogicalCircuitSetCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
+			private void LogicalCircuitSetCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) {
 				this.tab = 0;
 				if(e.NewItems != null && 0 < e.NewItems.Count) {
 					foreach(object item in e.NewItems) {

@@ -1,14 +1,12 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Diagnostics;
+using Microsoft.VisualStudio.TestTools.UnitTesting.STAExtensions;
 
 namespace LogicCircuit.UnitTest {
 	/// <summary>
 	///This is a test class for CircuitMapTest and is intended
 	///to contain all CircuitMapTest Unit Tests
 	///</summary>
-	[TestClass()]
+	[STATestClass]
 	public class CircuitMapTest {
 		/// <summary>
 		///Gets or sets the test context which provides
@@ -36,6 +34,7 @@ namespace LogicCircuit.UnitTest {
 		///</summary>
 		[TestMethod()]
 		public void CircuitMapApplyPerfTest1() {
+			Console.WriteLine(Thread.CurrentThread.GetApartmentState());
 			this.CircuitMapPerfTest(Properties.Resources.IntegerCalculator, "Test Computer", 50, 15);
 		}
 

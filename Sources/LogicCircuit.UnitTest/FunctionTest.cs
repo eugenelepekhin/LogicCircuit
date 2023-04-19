@@ -1,11 +1,10 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting.STAExtensions;
 
 namespace LogicCircuit.UnitTest {
 	/// <summary>
 	/// This is a test class for all functions testing.
 	///</summary>
-	[TestClass()]
+	[STATestClass]
 	public class FunctionTest {
 		/// <summary>
 		///Gets or sets the test context which provides
@@ -33,7 +32,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test of Tri-state function
 		/// </summary>
-		[TestMethod()]
+		[STATestMethod]
 		public void FunctionTriStateTest() {
 			FunctionSocket test1 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "TriState1Test"));
 			test1.Execute(() => {
@@ -104,7 +103,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test of Not function
 		/// </summary>
-		[TestMethod()]
+		[STATestMethod]
 		public void FunctionNotTest() {
 			FunctionSocket test = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "NotTest"));
 			test.Execute(() => {
@@ -154,7 +153,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test of NAnd function
 		/// </summary>
-		[TestMethod()]
+		[STATestMethod]
 		public void FunctionNAndTest() {
 			FunctionSocket test2 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "And2NotTest"));
 			test2.Execute(() => {
@@ -189,7 +188,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test of Or function
 		/// </summary>
-		[TestMethod()]
+		[STATestMethod]
 		public void FunctionOrTest() {
 			FunctionSocket test2 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "Or2Test"));
 			test2.Execute(() => {
@@ -224,7 +223,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test of NOr function
 		/// </summary>
-		[TestMethod()]
+		[STATestMethod]
 		public void FunctionNOrTest() {
 			FunctionSocket test2 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "Or2NotTest"));
 			test2.Execute(() => {
@@ -259,7 +258,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test of Xor function
 		/// </summary>
-		[TestMethod()]
+		[STATestMethod]
 		public void FunctionXorTest() {
 			FunctionSocket test2 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "Xor2Test"));
 			test2.Execute(() => {
@@ -294,7 +293,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test of XNor function
 		/// </summary>
-		[TestMethod()]
+		[STATestMethod]
 		public void FunctionXNorTest() {
 			FunctionSocket test2 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "Xor2NotTest"));
 			test2.Execute(() => {
@@ -329,7 +328,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test of Even function
 		/// </summary>
-		[TestMethod()]
+		[STATestMethod]
 		public void FunctionEvenTest() {
 			FunctionSocket test2 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "Even2Test"));
 			test2.Execute(() => {
@@ -364,7 +363,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test of Odd function
 		/// </summary>
-		[TestMethod()]
+		[STATestMethod]
 		public void FunctionOddTest() {
 			FunctionSocket test2 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "Odd2Test"));
 			test2.Execute(() => {
@@ -464,7 +463,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test of And function
 		/// </summary>
-		[TestMethod()]
+		[STATestMethod]
 		public void FunctionAndFullTest() {
 			this.TestFunction(
 				(state, param, result) => FunctionAnd.Create(state, param, result),
@@ -481,7 +480,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test of AndNot function
 		/// </summary>
-		[TestMethod()]
+		[STATestMethod]
 		public void FunctionAndNotFullTest() {
 			this.TestFunction(
 				(state, param, result) => FunctionAndNot.Create(state, param, result),
@@ -498,7 +497,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test of Or function
 		/// </summary>
-		[TestMethod()]
+		[STATestMethod]
 		public void FunctionOrFullTest() {
 			this.TestFunction(
 				(state, param, result) => FunctionOr.Create(state, param, result),
@@ -515,7 +514,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test of OrNot function
 		/// </summary>
-		[TestMethod()]
+		[STATestMethod]
 		public void FunctionOrNotFullTest() {
 			this.TestFunction(
 				(state, param, result) => FunctionOrNot.Create(state, param, result),
@@ -532,7 +531,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test of Xor function
 		/// </summary>
-		[TestMethod()]
+		[STATestMethod]
 		public void FunctionXorFullTest() {
 			this.TestFunction(
 				(state, param, result) => FunctionXor.Create(state, param, result),
@@ -549,7 +548,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test of XorNot function
 		/// </summary>
-		[TestMethod()]
+		[STATestMethod]
 		public void FunctionXorNotFullTest() {
 			this.TestFunction(
 				(state, param, result) => FunctionXorNot.Create(state, param, result),

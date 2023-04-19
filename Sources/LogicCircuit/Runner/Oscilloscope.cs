@@ -9,7 +9,7 @@ namespace LogicCircuit {
 		private readonly Dictionary<string, State[]> history = new Dictionary<string, State[]>();
 
 		public Oscilloscope(CircuitRunner circuitRunner) {
-			foreach(FunctionProbe probe in circuitRunner.CircuitState.Probes) {
+			foreach(FunctionProbe probe in circuitRunner.CircuitState!.Probes) {
 				if(probe.BitWidth == 1) {
 					this.probes.Add(probe.Label);
 					this.history.Add(probe.Label, new State[CircuitRunner.HistorySize]);
@@ -37,11 +37,11 @@ namespace LogicCircuit {
 			if(probe.BitWidth == 1) {
 				probe.Read(0, this.history[probe.Label]);
 			} else {
-				List<string> list;
+				List<string>? list;
 				this.probeLabels.TryGetValue(probe.Label, out list);
 				Tracer.Assert(list != null && list.Count == probe.BitWidth);
 				for(int i = 0; i < probe.BitWidth; i++) {
-					probe.Read(i, this.history[list[i]]);
+					probe.Read(i, this.history[list![i]]);
 				}
 			}
 		}

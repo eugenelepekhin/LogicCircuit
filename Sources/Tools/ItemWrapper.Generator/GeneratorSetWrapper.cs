@@ -17,7 +17,7 @@ namespace ItemWrapper.Generator
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+    #line 1 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
     public partial class GeneratorSetWrapper : Transformation
     {
@@ -28,7 +28,7 @@ namespace ItemWrapper.Generator
         public override string TransformText()
         {
             
-            #line 4 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 4 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 
 	bool isSubclass = this.Table.IsSubclass();
 	string createParam = "RowId rowId";
@@ -45,99 +45,101 @@ namespace ItemWrapper.Generator
             #line hidden
             this.Write("\t// Wrapper for table ");
             
-            #line 15 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 15 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write(".\r\n\tpartial class ");
             
-            #line 16 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 16 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Set : INotifyCollectionChanged, IEnumerable<");
             
-            #line 16 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 16 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
-            this.Write("> {\r\n\r\n\t\tpublic event NotifyCollectionChangedEventHandler CollectionChanged;\r\n\r\n\t" +
-                    "\tinternal TableSnapshot<");
+            this.Write("> {\r\n\r\n\t\tpublic event NotifyCollectionChangedEventHandler? CollectionChanged;\r\n\r\n" +
+                    "\t\tinternal TableSnapshot<");
             
-            #line 20 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 20 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data> Table { get; private set; }\r\n\r\n");
             
-            #line 22 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 22 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 if(this.RealmType != RealmType.Universe) {
             
             #line default
             #line hidden
             this.Write("\t\t// Maps rowId to row wrapper\r\n\t\tprivate Dictionary<RowId, ");
             
-            #line 24 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 24 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("> itemByRowId = new Dictionary<RowId, ");
             
-            #line 24 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 24 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write(">();\r\n\r\n");
             
-            #line 26 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 26 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 }
             
             #line default
             #line hidden
             this.Write("\t\t// Gets StoreSnapshot this set belongs to.\r\n\t\tpublic ");
             
-            #line 28 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 28 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Store.Name));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 28 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 28 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Store.Name));
             
             #line default
             #line hidden
             this.Write(" { get { return (");
             
-            #line 28 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 28 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Store.Name));
             
             #line default
             #line hidden
-            this.Write(")this.Table.StoreSnapshot; } }\r\n\r\n\t\t// Constructor\r\n\t\tpublic ");
+            this.Write(")this.Table.StoreSnapshot; } }\r\n\r\n\t\t// Constructor\r\n\t\t#pragma warning disable CS8" +
+                    "618 // Non-nullable field must contain a non-null value when exiting constructor" +
+                    ". Consider declaring as nullable.\r\n\t\tpublic ");
             
-            #line 31 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 32 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Set(");
             
-            #line 31 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 32 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Store.Name));
             
             #line default
             #line hidden
-            this.Write(" store) {\r\n\t\t\tITableSnapshot table = store.Table(\"");
+            this.Write(" store) {\r\n\t\t\tITableSnapshot? table = store.Table(\"");
             
-            #line 32 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 33 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
@@ -145,7 +147,7 @@ if(this.RealmType != RealmType.Universe) {
             this.Write("\");\r\n\t\t\tif(table != null) {\r\n\t\t\t\tDebug.Assert(store.IsFrozen, \"The store should b" +
                     "e frozen\");\r\n\t\t\t\tthis.Table = (TableSnapshot<");
             
-            #line 35 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 36 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
@@ -153,21 +155,23 @@ if(this.RealmType != RealmType.Universe) {
             this.Write("Data>)table;\r\n\t\t\t} else {\r\n\t\t\t\tDebug.Assert(!store.IsFrozen, \"In order to create " +
                     "table, the store should not be frozen\");\r\n\t\t\t\tthis.Table = ");
             
-            #line 38 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 39 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data.CreateTable(store);\r\n\t\t\t}\r\n\t\t\tthis.Initialize");
             
-            #line 40 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 41 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
-            this.Write("Set();\r\n\t\t}\r\n\r\n\t\tpartial void Initialize");
+            this.Write("Set();\r\n\t\t}\r\n\t\t#pragma warning restore CS8618 // Non-nullable field must contain " +
+                    "a non-null value when exiting constructor. Consider declaring as nullable.\r\n\r\n\t\t" +
+                    "partial void Initialize");
             
-            #line 43 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 45 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
@@ -175,112 +179,112 @@ if(this.RealmType != RealmType.Universe) {
             this.Write("Set();\r\n\r\n\t\t//internal void Register() {\r\n\t\t//\tforeach(RowId rowId in this.Table." +
                     "Rows) {\r\n\t\t//\t\tthis.FindOrCreate(rowId);\r\n\t\t//\t}\r\n\t\t//}\r\n\r\n");
             
-            #line 51 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 53 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 if(this.RealmType == RealmType.Multiverse) {
             
             #line default
             #line hidden
             this.Write("\t\t// Registers wrapper\r\n\t\tinternal void Register");
             
-            #line 53 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 55 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 53 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 55 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write(" item) {\r\n\t\t\tthis.itemByRowId.Add(item.");
             
-            #line 54 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 56 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("RowId, item);\r\n");
             
-            #line 55 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 57 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 	if(isSubclass) {
             
             #line default
             #line hidden
             this.Write("\t\t\tthis.");
             
-            #line 56 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 58 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Store.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 56 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 58 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.BaseName()));
             
             #line default
             #line hidden
             this.Write("Set.Register");
             
-            #line 56 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 58 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.BaseName()));
             
             #line default
             #line hidden
             this.Write("(item);\r\n");
             
-            #line 57 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 59 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 	}
             
             #line default
             #line hidden
             this.Write("\t\t}\r\n");
             
-            #line 59 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 61 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 }
             
             #line default
             #line hidden
             this.Write("\r\n\t\t// gets items wrapper by RowId\r\n\t\tpublic ");
             
-            #line 62 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 64 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
-            this.Write(" Find(RowId rowId) {\r\n");
+            this.Write("? Find(RowId rowId) {\r\n");
             
-            #line 63 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 65 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 if(this.RealmType == RealmType.Universe) {
             
             #line default
             #line hidden
             this.Write("\t\t\tif(!rowId.IsEmpty) {\r\n\t\t\t\treturn this.Table.GetField(rowId, ");
             
-            #line 65 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 67 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data.");
             
-            #line 65 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 67 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Field.Field);\r\n\t\t\t}\r\n");
             
-            #line 67 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 69 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 } else if(this.RealmType == RealmType.Multiverse) {
             
             #line default
             #line hidden
             this.Write("\t\t\t");
             
-            #line 68 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 70 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
@@ -288,14 +292,14 @@ if(this.RealmType == RealmType.Universe) {
             this.Write(" item;\r\n\t\t\tif(this.itemByRowId.TryGetValue(rowId, out item)) {\r\n\t\t\t\treturn item;\r" +
                     "\n\t\t\t}\r\n");
             
-            #line 72 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 74 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 }
             
             #line default
             #line hidden
             this.Write("\t\t\treturn null;\r\n\t\t}\r\n\r\n");
             
-            #line 76 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 78 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 if(this.RealmType == RealmType.Multiverse) {
             
             #line default
@@ -303,100 +307,106 @@ if(this.RealmType == RealmType.Multiverse) {
             this.Write("\t\tprivate void Delete(RowId rowId) {\r\n\t\t\tif(this.itemByRowId.ContainsKey(rowId)) " +
                     "{\r\n\t\t\t\tthis.itemByRowId.Remove(rowId);\r\n\t\t\t}\r\n\t\t}\r\n");
             
-            #line 82 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 84 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 }
             
             #line default
             #line hidden
             this.Write("\r\n\t\t// gets items wrapper by RowId\r\n\t\tprivate IEnumerable<");
             
-            #line 85 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 87 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("> Select(IEnumerable<RowId> rows) {\r\n\t\t\tforeach(RowId rowId in rows) {\r\n\t\t\t\t");
             
-            #line 87 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 89 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
-            this.Write(" item = this.Find(rowId);\r\n\t\t\t\tDebug.Assert(item != null, \"What is the reason for" +
-                    " the item not to be found?\");\r\n\t\t\t\tyield return item;\r\n\t\t\t}\r\n\t\t}\r\n\r\n\t\t// Create " +
-                    "wrapper for the row and register it in the dictionary\r\n\t\tprivate ");
+            this.Write(@"? item = this.Find(rowId);
+				Debug.Assert(item != null, ""What is the reason for the item not to be found?"");
+				yield return item;
+			}
+		}
+
+		// Create wrapper for the row and register it in the dictionary
+		[System.Diagnostics.CodeAnalysis.SuppressMessage(""Performance"", ""CA1822:Mark members as static"")]
+		private ");
             
-            #line 94 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 97 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write(" Create(");
             
-            #line 94 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 97 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(createParam));
             
             #line default
             #line hidden
             this.Write(") {\r\n");
             
-            #line 95 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 98 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 if(this.Table.ItemModifier == ItemModifier.None) {
             
             #line default
             #line hidden
             this.Write("\t\t\t");
             
-            #line 96 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 99 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write(" item = new ");
             
-            #line 96 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 99 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 96 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 99 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(newParam));
             
             #line default
             #line hidden
             this.Write(");\r\n");
             
-            #line 97 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 100 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 	if(this.RealmType == RealmType.Multiverse) {
             
             #line default
             #line hidden
             this.Write("\t\t\tthis.Register");
             
-            #line 98 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 101 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("(item);\r\n");
             
-            #line 99 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 102 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 	}
             
             #line default
             #line hidden
             this.Write("\t\t\treturn item;\r\n");
             
-            #line 101 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 104 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 } else {
             
             #line default
             #line hidden
             this.Write("\t\t\tthrow new InvalidOperationException();\r\n");
             
-            #line 103 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 106 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 }
             
             #line default
@@ -404,7 +414,7 @@ if(this.Table.ItemModifier == ItemModifier.None) {
             this.Write("\t\t}\r\n\r\n\t\t[System.Diagnostics.CodeAnalysis.SuppressMessage(\"Microsoft.Maintainabil" +
                     "ity\", \"CA1506:AvoidExcessiveClassCoupling\")]\r\n\t\tinternal ");
             
-            #line 107 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 110 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
@@ -412,28 +422,28 @@ if(this.Table.ItemModifier == ItemModifier.None) {
             this.Write(" FindOrCreate(RowId rowId) {\r\n\t\t\tDebug.Assert(!rowId.IsEmpty && !this.Table.IsDel" +
                     "eted(rowId), \"Bad RowId\");\r\n\t\t\t");
             
-            #line 109 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 112 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
-            this.Write(" item;\r\n");
+            this.Write("? item;\r\n");
             
-            #line 110 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 113 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 if(this.RealmType == RealmType.Universe) {
             
             #line default
             #line hidden
             this.Write("\t\t\tif((item = this.Find(rowId)) != null) {\r\n");
             
-            #line 112 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 115 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 } else if(this.RealmType == RealmType.Multiverse) {
             
             #line default
             #line hidden
             this.Write("\t\t\tif(this.itemByRowId.TryGetValue(rowId, out item)) {\r\n");
             
-            #line 114 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 117 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 }
             
             #line default
@@ -441,7 +451,7 @@ if(this.RealmType == RealmType.Universe) {
             this.Write("\t\t\t\tDebug.Assert(!item.IsDeleted(), \"Deleted item should not be present in the di" +
                     "ctionary\");\r\n\t\t\t\treturn item;\r\n\t\t\t}\r\n");
             
-            #line 118 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 121 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 
 if(isSubclass || this.Table.Subclasses().FirstOrDefault() != null) {
 	Key primaryKey = this.Table.PrimaryKey();
@@ -457,7 +467,7 @@ if(isSubclass || this.Table.Subclasses().FirstOrDefault() != null) {
             #line default
             #line hidden
             
-            #line 129 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 132 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 
 if(this.Table.Subclasses().FirstOrDefault() != null) {
 	foreach(Table subclass in this.Table.Subclasses()) {
@@ -469,63 +479,63 @@ if(this.Table.Subclasses().FirstOrDefault() != null) {
             #line hidden
             this.Write("\r\n\t\t\tRowId rowId");
             
-            #line 136 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 139 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(subclass.Name));
             
             #line default
             #line hidden
             this.Write(" = this.");
             
-            #line 136 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 139 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Store.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 136 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 139 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(subclass.Name));
             
             #line default
             #line hidden
             this.Write("Set.Table.Find(");
             
-            #line 136 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 139 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(primaryKeyField));
             
             #line default
             #line hidden
             this.Write(", primaryKeyValue);\r\n\t\t\tif(!rowId");
             
-            #line 137 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 140 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(subclass.Name));
             
             #line default
             #line hidden
             this.Write(".IsEmpty) {\r\n\t\t\t\treturn this.");
             
-            #line 138 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 141 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Store.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 138 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 141 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(subclass.Name));
             
             #line default
             #line hidden
             this.Write("Set.FindOrCreate(rowId");
             
-            #line 138 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 141 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(subclass.Name));
             
             #line default
             #line hidden
             this.Write(");\r\n\t\t\t}\r\n");
             
-            #line 140 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 143 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 
 	}
 }
@@ -535,14 +545,14 @@ if(this.Table.Subclasses().FirstOrDefault() != null) {
             #line hidden
             this.Write("\r\n");
             
-            #line 145 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 148 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 if(!isSubclass) {
             
             #line default
             #line hidden
             this.Write("\t\t\treturn this.Create(rowId);\r\n");
             
-            #line 147 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 150 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 } else {
 	Column mainPrimary = this.Table.PrimaryKey()[0];
 	string selectList = "rowId";
@@ -552,7 +562,7 @@ if(!isSubclass) {
             #line hidden
             this.Write("\r\n");
             
-            #line 152 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 155 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 
 	foreach(Table parent in this.Table.Ancestors(false)) {
 		Key pk = parent.PrimaryKey();
@@ -568,84 +578,91 @@ if(!isSubclass) {
             #line hidden
             this.Write("\t\t\tTableSnapshot<");
             
-            #line 162 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 165 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(parent.Name));
             
             #line default
             #line hidden
-            this.Write("Data> table");
+            this.Write("Data>? table");
             
-            #line 162 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 165 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(parent.Name));
             
             #line default
             #line hidden
             this.Write(" = (TableSnapshot<");
             
-            #line 162 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 165 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(parent.Name));
             
             #line default
             #line hidden
-            this.Write("Data>)this.");
+            this.Write("Data>?)this.");
             
-            #line 162 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 165 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Store.Name));
             
             #line default
             #line hidden
             this.Write(".Table(\"");
             
-            #line 162 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 165 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(parent.Name));
             
             #line default
             #line hidden
-            this.Write("\");\r\n");
+            this.Write("\");\r\n\t\t\tDebug.Assert(table");
             
-            #line 163 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 166 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(parent.Name));
+            
+            #line default
+            #line hidden
+            this.Write(" != null);\r\n");
+            
+            #line 167 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 	}
             
             #line default
             #line hidden
             this.Write("\t\t\treturn this.Create(");
             
-            #line 164 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 168 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(selectList));
             
             #line default
             #line hidden
             this.Write(");\r\n");
             
-            #line 165 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 169 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 }
             
             #line default
             #line hidden
             this.Write("\t\t}\r\n\r\n\t\t// Creates ");
             
-            #line 168 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 172 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write(" wrapper\r\n\t\tprivate ");
             
-            #line 169 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 173 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write(" CreateItem(\r\n\t\t\t// Fields of ");
             
-            #line 170 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 174 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write(" table\r\n");
             
-            #line 171 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 175 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 
 foreach(Column column in this.Table.Columns) {
 	Key foreign = this.Table.ForeignKey(column);
@@ -688,7 +705,7 @@ if(isSubclass) {
             #line hidden
             this.Write("\r\n\t\t) {\r\n");
             
-            #line 210 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 214 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 
 string subclassInsert = string.Empty;
 if(isSubclass) {
@@ -701,63 +718,70 @@ if(isSubclass) {
             #line hidden
             this.Write("\t\t\tTableSnapshot<");
             
-            #line 217 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 221 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(parent.Name));
             
             #line default
             #line hidden
-            this.Write("Data> table");
+            this.Write("Data>? table");
             
-            #line 217 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 221 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(parent.Name));
             
             #line default
             #line hidden
             this.Write(" = (TableSnapshot<");
             
-            #line 217 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 221 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(parent.Name));
             
             #line default
             #line hidden
-            this.Write("Data>)this.");
+            this.Write("Data>?)this.");
             
-            #line 217 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 221 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Store.Name));
             
             #line default
             #line hidden
             this.Write(".Table(\"");
             
-            #line 217 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 221 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(parent.Name));
             
             #line default
             #line hidden
-            this.Write("\");\r\n\t\t\t");
+            this.Write("\");\r\n\t\t\tDebug.Assert(table");
             
-            #line 218 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 222 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(parent.Name));
+            
+            #line default
+            #line hidden
+            this.Write(" != null);\r\n\t\t\t");
+            
+            #line 223 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(parent.Name));
             
             #line default
             #line hidden
             this.Write("Data data");
             
-            #line 218 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 223 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(parent.Name));
             
             #line default
             #line hidden
             this.Write(" = new ");
             
-            #line 218 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 223 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(parent.Name));
             
             #line default
             #line hidden
             this.Write("Data() {\r\n");
             
-            #line 219 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 224 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 
 		foreach(Column column in parent.Columns) {
 			this.Write("\t\t\t\t");
@@ -790,28 +814,28 @@ if(isSubclass) {
             #line hidden
             this.Write("\t\t\t};\r\n\t\t\tRowId rowId");
             
-            #line 247 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 252 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(parent.Name));
             
             #line default
             #line hidden
             this.Write(" = table");
             
-            #line 247 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 252 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(parent.Name));
             
             #line default
             #line hidden
             this.Write(".Insert(ref data");
             
-            #line 247 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 252 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(parent.Name));
             
             #line default
             #line hidden
             this.Write(");\r\n\r\n");
             
-            #line 249 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 254 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 
 	}
 }
@@ -821,28 +845,28 @@ if(isSubclass) {
             #line hidden
             this.Write("\t\t\t");
             
-            #line 253 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 258 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data data");
             
-            #line 253 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 258 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write(" = new ");
             
-            #line 253 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 258 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data() {\r\n");
             
-            #line 254 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 259 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 
 foreach(Column column in this.Table.Columns) {
 	Key foreign = this.Table.ForeignKey(column);
@@ -857,21 +881,21 @@ foreach(Column column in this.Table.Columns) {
             #line hidden
             this.Write("\t\t\t\t");
             
-            #line 263 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 268 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Name));
             
             #line default
             #line hidden
             this.Write(" = ");
             
-            #line 263 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 268 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(value));
             
             #line default
             #line hidden
             this.Write(",\r\n");
             
-            #line 264 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 269 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 
 	} else {
 		Table parent = foreign.Parent();
@@ -883,49 +907,49 @@ foreach(Column column in this.Table.Columns) {
             #line hidden
             this.Write("\t\t\t\t");
             
-            #line 270 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 275 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Name));
             
             #line default
             #line hidden
             this.Write(" = (");
             
-            #line 270 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 275 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(foreign.RoleName()));
             
             #line default
             #line hidden
             this.Write(" != null) ? ");
             
-            #line 270 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 275 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(foreign.RoleName()));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 270 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 275 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(parentId));
             
             #line default
             #line hidden
             this.Write(" : ");
             
-            #line 270 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 275 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data.");
             
-            #line 270 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 275 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Name));
             
             #line default
             #line hidden
             this.Write("Field.Field.DefaultValue,\r\n");
             
-            #line 271 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 276 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 
 	}
 }
@@ -935,21 +959,21 @@ foreach(Column column in this.Table.Columns) {
             #line hidden
             this.Write("\t\t\t};\r\n\t\t\treturn this.Create(this.Table.Insert(ref data");
             
-            #line 276 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 281 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write(")");
             
-            #line 276 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 281 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(subclassInsert));
             
             #line default
             #line hidden
             this.Write(");\r\n\t\t}\r\n\r\n\t\t// Search helpers\r\n\r\n");
             
-            #line 281 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 286 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 
 System.Collections.Generic.HashSet<string> searchFunctionName = new System.Collections.Generic.HashSet<string>();
 foreach(Key key in this.Table.Keys) {
@@ -958,6 +982,8 @@ foreach(Key key in this.Table.Keys) {
 	if(!key.IsUnique()) {
 		returnType = "IEnumerable<" + returnType + ">";
 		function = "Select";
+	} else {
+		returnType += "?";
 	}
 	if(key.Count == 1) {
 		Column column = key[0];
@@ -987,97 +1013,97 @@ foreach(Key key in this.Table.Keys) {
             #line hidden
             this.Write("\t\t// ");
             
-            #line 313 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 320 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(function));
             
             #line default
             #line hidden
             this.Write("s ");
             
-            #line 313 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 320 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write(" by ");
             
-            #line 313 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 320 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(columnName));
             
             #line default
             #line hidden
             this.Write("\r\n\t\tpublic ");
             
-            #line 314 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 321 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(returnType));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 314 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 321 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(function));
             
             #line default
             #line hidden
             
-            #line 314 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 321 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(suffix));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 314 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 321 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(columnType));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 314 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 321 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Camelize(columnName)));
             
             #line default
             #line hidden
             this.Write(") {\r\n\t\t\treturn this.");
             
-            #line 315 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 322 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(function));
             
             #line default
             #line hidden
             this.Write("(this.Table.");
             
-            #line 315 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 322 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(function));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 315 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 322 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data.");
             
-            #line 315 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 322 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column.Name));
             
             #line default
             #line hidden
             this.Write("Field.Field, ");
             
-            #line 315 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 322 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(value));
             
             #line default
             #line hidden
             this.Write("));\r\n\t\t}\r\n\r\n");
             
-            #line 318 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 325 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 
 			}
 		}
@@ -1124,139 +1150,139 @@ foreach(Key key in this.Table.Keys) {
             #line hidden
             this.Write("\t\t// ");
             
-            #line 359 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 366 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(function));
             
             #line default
             #line hidden
             this.Write("s ");
             
-            #line 359 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 366 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write(" by ");
             
-            #line 359 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 366 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column0Name));
             
             #line default
             #line hidden
             this.Write(" and ");
             
-            #line 359 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 366 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column1Name));
             
             #line default
             #line hidden
             this.Write("\r\n\t\tpublic ");
             
-            #line 360 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 367 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(returnType));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 360 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 367 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(function));
             
             #line default
             #line hidden
             
-            #line 360 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 367 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(suffix));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 360 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 367 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column0Type));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 360 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 367 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Camelize(column0Name)));
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 360 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 367 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column1Type));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 360 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 367 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Camelize(column1Name)));
             
             #line default
             #line hidden
             this.Write(") {\r\n\t\t\treturn this.");
             
-            #line 361 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 368 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(function));
             
             #line default
             #line hidden
             this.Write("(\r\n\t\t\t\tthis.Table.");
             
-            #line 362 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 369 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(function));
             
             #line default
             #line hidden
             this.Write("(\r\n\t\t\t\t\t");
             
-            #line 363 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 370 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data.");
             
-            #line 363 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 370 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column0.Name));
             
             #line default
             #line hidden
             this.Write("Field.Field, ");
             
-            #line 363 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 370 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data.");
             
-            #line 363 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 370 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(column1.Name));
             
             #line default
             #line hidden
             this.Write("Field.Field,\r\n\t\t\t\t\t");
             
-            #line 364 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 371 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(value0));
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 364 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 371 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(value1));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t\t\t)\r\n\t\t\t);\r\n\t\t}\r\n\r\n");
             
-            #line 369 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 376 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 
 			}
 		}
@@ -1268,28 +1294,28 @@ foreach(Key key in this.Table.Keys) {
             #line hidden
             this.Write("\t\tpublic IEnumerator<");
             
-            #line 375 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 382 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("> GetEnumerator() {\r\n");
             
-            #line 376 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 383 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 if(this.RealmType != RealmType.Universe) {
             
             #line default
             #line hidden
             this.Write("\t\t\tif(this.");
             
-            #line 377 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 384 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Store.Name));
             
             #line default
             #line hidden
             this.Write(".IsEditor || this.");
             
-            #line 377 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 384 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Store.Name));
             
             #line default
@@ -1297,14 +1323,14 @@ if(this.RealmType != RealmType.Universe) {
             this.Write(".UpdateInProgress) {\r\n\t\t\t\treturn new Enumerator(this, this.Table.GetEnumerator())" +
                     ";\r\n\t\t\t} else {\r\n\t\t\t\treturn this.itemByRowId.Values.GetEnumerator();\r\n\t\t\t}\r\n");
             
-            #line 382 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 389 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 } else {
             
             #line default
             #line hidden
             this.Write("\t\t\treturn this.Select(this.Table.Rows).GetEnumerator();\r\n");
             
-            #line 384 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 391 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 }
             
             #line default
@@ -1316,18 +1342,18 @@ if(this.RealmType != RealmType.Universe) {
 		}
 
 		private void NotifyCollectionChanged(NotifyCollectionChangedEventArgs arg) {
-			NotifyCollectionChangedEventHandler handler = this.CollectionChanged;
+			NotifyCollectionChangedEventHandler? handler = this.CollectionChanged;
 			if(handler != null) {
 ");
             
-            #line 394 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 401 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 if(this.UseDispatcher) {
             
             #line default
             #line hidden
             this.Write("\t\t\t\tSystem.Windows.Threading.Dispatcher dispatcher = this.");
             
-            #line 395 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 402 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Store.Name));
             
             #line default
@@ -1336,37 +1362,37 @@ if(this.UseDispatcher) {
                     "Thread.CurrentThread) {\r\n\t\t\t\t\tdispatcher.Invoke(new Action<NotifyCollectionChang" +
                     "edEventArgs>(this.NotifyCollectionChanged), arg);\r\n\t\t\t\t\treturn;\r\n\t\t\t\t}\r\n");
             
-            #line 400 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 407 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 }
             
             #line default
             #line hidden
             this.Write("\t\t\t\thandler(this, arg);\r\n\t\t\t}\r\n\t\t}\r\n\r\n\t\tinternal List<");
             
-            #line 405 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 412 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
-            this.Write("> UpdateSet(int oldVersion, int newVersion) {\r\n\t\t\tIEnumerator<TableChange<");
+            this.Write(">? UpdateSet(int oldVersion, int newVersion) {\r\n\t\t\tIEnumerator<TableChange<");
             
-            #line 406 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 413 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
-            this.Write("Data>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);\r\n\t\t\ti" +
-                    "f(change != null) {\r\n\t\t\t\tbool handlerAttached = (this.CollectionChanged != null)" +
-                    ";\r\n\t\t\t\tList<");
+            this.Write("Data>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);\r\n\t\t\t" +
+                    "if(change != null) {\r\n\t\t\t\tbool handlerAttached = (this.CollectionChanged != null" +
+                    ");\r\n\t\t\t\tList<");
             
-            #line 409 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 416 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
-            this.Write("> del = (handlerAttached) ? new List<");
+            this.Write(">? del = (handlerAttached) ? new List<");
             
-            #line 409 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 416 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
@@ -1381,45 +1407,45 @@ if(this.UseDispatcher) {
 					case SnapTableAction.Delete:
 ");
             
-            #line 417 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 424 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 if(this.RealmType != RealmType.Universe) {
             
             #line default
             #line hidden
             this.Write("\t\t\t\t\t\tDebug.Assert(this.Find(change.Current.RowId) != null, \"Why the item does no" +
                     "t exist?\");\r\n\t\t\t\t\t\tif(handlerAttached) {\r\n\t\t\t\t\t\t\tdel.Add(this.Find(change.Curren" +
-                    "t.RowId));\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t\tthis.Delete(change.Current.RowId);\r\n");
+                    "t.RowId)!);\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t\tthis.Delete(change.Current.RowId);\r\n");
             
-            #line 423 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 430 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 } else {
             
             #line default
             #line hidden
             this.Write("\t\t\t\t\t\tif(handlerAttached) {\r\n\t\t\t\t\t\t\t");
             
-            #line 425 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 432 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write(" item = change.Current.GetOldField(");
             
-            #line 425 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 432 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data.");
             
-            #line 425 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 432 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
-            this.Write("Field.Field);\r\n\t\t\t\t\t\t\tDebug.Assert(item.IsDeleted());\r\n\t\t\t\t\t\t\tdel.Add(item);\r\n\t\t\t" +
-                    "\t\t\t}\r\n");
+            this.Write("Field.Field);\r\n\t\t\t\t\t\t\tDebug.Assert(item.IsDeleted());\r\n\t\t\t\t\t\t\tdel!.Add(item);\r\n\t\t" +
+                    "\t\t\t\t}\r\n");
             
-            #line 429 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 436 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 }
             
             #line default
@@ -1439,37 +1465,37 @@ if(this.RealmType != RealmType.Universe) {
 
 		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<");
             
-            #line 443 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 450 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
-            this.Write("> deleted) {\r\n\t\t\tIEnumerator<TableChange<");
+            this.Write(">? deleted) {\r\n\t\t\tIEnumerator<TableChange<");
             
-            #line 444 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 451 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
-            this.Write("Data>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);\r\n\t\t\ti" +
-                    "f(change != null) {\r\n\t\t\t\tbool handlerAttached = (this.CollectionChanged != null)" +
-                    ";\r\n\t\t\t\tList<");
+            this.Write("Data>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);\r\n\t\t\t" +
+                    "if(change != null) {\r\n\t\t\t\tbool handlerAttached = (this.CollectionChanged != null" +
+                    ");\r\n\t\t\t\tList<");
             
-            #line 447 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 454 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
-            this.Write("> add = (handlerAttached) ? new List<");
+            this.Write(">? add = (handlerAttached) ? new List<");
             
-            #line 447 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 454 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write(">() : null;\r\n\t\t\t\tthis.StartNotify");
             
-            #line 448 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 455 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
@@ -1477,7 +1503,7 @@ if(this.RealmType != RealmType.Universe) {
             this.Write("SetChanged(oldVersion, newVersion);\r\n\t\t\t\twhile(change.MoveNext()) {\r\n\t\t\t\t\tthis.No" +
                     "tify");
             
-            #line 450 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 457 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
@@ -1487,13 +1513,13 @@ if(this.RealmType != RealmType.Universe) {
 					case SnapTableAction.Insert:
 						Debug.Assert(this.Find(change.Current.RowId) != null, ""Why the item was not created?"");
 						if(handlerAttached) {
-							add.Add(this.Find(change.Current.RowId));
+							add!.Add(this.Find(change.Current.RowId)!);
 						}
 						break;
 					case SnapTableAction.Delete:
 ");
             
-            #line 459 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 466 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 if(this.RealmType != RealmType.Universe) {
             
             #line default
@@ -1501,28 +1527,28 @@ if(this.RealmType != RealmType.Universe) {
             this.Write("\t\t\t\t\t\tDebug.Assert(this.Find(change.Current.RowId) == null, \"Why the item still e" +
                     "xists?\");\r\n");
             
-            #line 461 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 468 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 } else {
             
             #line default
             #line hidden
             this.Write("\t\t\t\t\t\tDebug.Assert(change.Current.GetOldField(");
             
-            #line 462 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 469 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Data.");
             
-            #line 462 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 469 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Field.Field).IsDeleted(), \"Why the item still exists?\");\r\n");
             
-            #line 463 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 470 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 }
             
             #line default
@@ -1531,7 +1557,7 @@ if(this.RealmType != RealmType.Universe) {
 					default:
 						Debug.Assert(change.Current.Action == SnapTableAction.Update, ""Unknown action"");
 						Debug.Assert(this.Find(change.Current.RowId) != null, ""Why the item does not exist during update?"");
-						this.Find(change.Current.RowId).NotifyChanged(change.Current);
+						this.Find(change.Current.RowId)!.NotifyChanged(change.Current);
 						break;
 					}
 				}
@@ -1540,41 +1566,41 @@ if(this.RealmType != RealmType.Universe) {
 					if(deleted != null && 0 < deleted.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, deleted));
 					}
-					if(0 < add.Count) {
+					if(0 < add!.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, add));
 					}
 				}
 				this.EndNotify");
             
-            #line 481 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 488 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("SetChanged();\r\n\t\t\t}\r\n\t\t}\r\n\r\n\t\tpartial void StartNotify");
             
-            #line 485 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 492 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("SetChanged(int oldVersion, int newVersion);\r\n\t\tpartial void EndNotify");
             
-            #line 486 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 493 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("SetChanged();\r\n\t\tpartial void Notify");
             
-            #line 487 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 494 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("SetChanged(TableChange<");
             
-            #line 487 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 494 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
@@ -1590,14 +1616,14 @@ if(this.RealmType != RealmType.Universe) {
 						if(this.Table.IsDeleted(rowId)) {
 ");
             
-            #line 496 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 503 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 if(this.RealmType == RealmType.Multiverse) {
             
             #line default
             #line hidden
             this.Write("\t\t\t\t\t\t\tthis.Delete(rowId);\r\n");
             
-            #line 498 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 505 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 }
             
             #line default
@@ -1605,28 +1631,28 @@ if(this.RealmType == RealmType.Multiverse) {
             this.Write("\t\t\t\t\t\t} else {\r\n\t\t\t\t\t\t\tthis.FindOrCreate(rowId);\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t}\r\n\t\t\t\t\tchange.Di" +
                     "spose();\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n");
             
-            #line 507 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 514 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 if(this.RealmType != RealmType.Universe) {
             
             #line default
             #line hidden
             this.Write("\r\n\t\tprivate class Enumerator : IEnumerator<");
             
-            #line 509 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 516 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("> {\r\n\t\t\tprivate ");
             
-            #line 510 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 517 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
             #line hidden
             this.Write("Set set;\r\n\t\t\tprivate IEnumerator<RowId> enumerator;\r\n\t\t\tpublic Enumerator(");
             
-            #line 512 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 519 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
@@ -1635,7 +1661,7 @@ if(this.RealmType != RealmType.Universe) {
                     "or = enumerator;\r\n\t\t\t}\r\n\r\n\t\t\tpublic bool MoveNext() {\r\n\t\t\t\treturn this.enumerato" +
                     "r.MoveNext();\r\n\t\t\t}\r\n\r\n\t\t\tpublic ");
             
-            #line 521 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 528 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Table.Name));
             
             #line default
@@ -1652,7 +1678,7 @@ if(this.RealmType != RealmType.Universe) {
 		}
 ");
             
-            #line 531 "C:\Projects\LogicCircuit\LogicCircuit\master.shape\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
+            #line 538 "C:\Projects\LogicCircuit\LogicCircuit\master.6\Sources\Tools\ItemWrapper.Generator\GeneratorSetWrapper.tt"
 }
             
             #line default

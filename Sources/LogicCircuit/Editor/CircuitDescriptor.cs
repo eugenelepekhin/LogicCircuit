@@ -16,11 +16,11 @@ namespace LogicCircuit {
 	public abstract class Descriptor {
 		public abstract bool CategoryExpanded { get; set; }
 
-		protected static CircuitProject CircuitProject {
+		protected static CircuitProject? CircuitProject {
 			get {
 				Mainframe mainframe = App.Mainframe;
 				if(mainframe != null) {
-					Editor editor = mainframe.Editor;
+					Editor? editor = mainframe.Editor;
 					if(editor != null) {
 						return editor.CircuitProject;
 					}
@@ -31,7 +31,7 @@ namespace LogicCircuit {
 	}
 
 	public abstract class CircuitDescriptor<T> : Descriptor, IDescriptor, INotifyPropertyChanged where T:Circuit {
-		public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler? PropertyChanged;
 
 		public T Circuit { get; private set; }
 		Circuit IDescriptor.Circuit { get { return this.Circuit; } }
@@ -123,14 +123,14 @@ namespace LogicCircuit {
 
 		public override bool CategoryExpanded {
 			get {
-				CircuitProject circuitProject = Descriptor.CircuitProject;
+				CircuitProject? circuitProject = Descriptor.CircuitProject;
 				if(circuitProject != null) {
 					return !circuitProject.ProjectSet.Project.CategoryPrimitivesCollapsed;
 				}
 				return true;
 			}
 			set {
-				CircuitProject circuitProject = Descriptor.CircuitProject;
+				CircuitProject? circuitProject = Descriptor.CircuitProject;
 				if(circuitProject != null) {
 					Project project = circuitProject.ProjectSet.Project;
 					if(value != (!project.CategoryPrimitivesCollapsed)) {
@@ -147,14 +147,14 @@ namespace LogicCircuit {
 
 		public override bool CategoryExpanded {
 			get {
-				CircuitProject circuitProject = Descriptor.CircuitProject;
+				CircuitProject? circuitProject = Descriptor.CircuitProject;
 				if(circuitProject != null) {
 					return !circuitProject.ProjectSet.Project.CategoryInputOutputCollapsed;
 				}
 				return true;
 			}
 			set {
-				CircuitProject circuitProject = Descriptor.CircuitProject;
+				CircuitProject? circuitProject = Descriptor.CircuitProject;
 				if(circuitProject != null) {
 					Project project = circuitProject.ProjectSet.Project;
 					if(value != (!project.CategoryInputOutputCollapsed)) {
@@ -177,14 +177,15 @@ namespace LogicCircuit {
 		public IEnumerable<int> InputCountRange { get; private set; }
 		public int InputCountRangeLength { get; private set; }
 
-		public GateDescriptor(Gate gate, string note) : base(gate) {
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+		public GateDescriptor(Gate gate, string? note) : base(gate) {
 			switch(gate.GateType) {
 			case GateType.Clock:
 			case GateType.Not:
 			case GateType.Led:
 			case GateType.TriState1:
 			case GateType.TriState2:
-				this.InputCountRangeLength = 0;
+				//this.InputCountRangeLength = 0;
 				break;
 			case GateType.Or:
 			case GateType.And:
@@ -197,8 +198,9 @@ namespace LogicCircuit {
 				break;
 			}
 			this.InputCount = gate.InputCount;
-			gate.Note = note;
+			gate.Note = note ?? string.Empty;
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		protected override Gate GetCircuitToDrop(CircuitProject circuitProject) {
 			return circuitProject.GateSet.Gate(this.Circuit.GateType, this.InputCount, this.Circuit.InvertedOutput);
@@ -605,14 +607,14 @@ namespace LogicCircuit {
 		public string Category { get { return this.Circuit.Category; } }
 		public override bool CategoryExpanded {
 			get {
-				CircuitProject circuitProject = Descriptor.CircuitProject;
+				CircuitProject? circuitProject = Descriptor.CircuitProject;
 				if(circuitProject != null) {
 					return !circuitProject.ProjectSet.Project.CategoryTextNoteCollapsed;
 				}
 				return true;
 			}
 			set {
-				CircuitProject circuitProject = Descriptor.CircuitProject;
+				CircuitProject? circuitProject = Descriptor.CircuitProject;
 				if(circuitProject != null) {
 					Project project = circuitProject.ProjectSet.Project;
 					if(value != (!project.CategoryTextNoteCollapsed)) {
@@ -635,7 +637,7 @@ namespace LogicCircuit {
 			DialogText dialog = new DialogText(null);
 			bool? result = editor.Mainframe.ShowDialog(dialog);
 			if(result.HasValue && result.Value && TextNote.IsValidText(dialog.Document)) {
-				project.InTransaction(() => project.TextNoteSet.Create(editor.Project.LogicalCircuit, point, dialog.Document));
+				project.InTransaction(() => project.TextNoteSet.Create(editor.Project.LogicalCircuit, point, dialog.Document!));
 			}
 		}
 	}

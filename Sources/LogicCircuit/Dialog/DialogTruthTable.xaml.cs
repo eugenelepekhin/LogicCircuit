@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
@@ -20,7 +21,7 @@ namespace LogicCircuit {
 	/// Interaction logic for DialogTruthTable.xaml
 	/// </summary>
 	public partial class DialogTruthTable : Window {
-		private SettingsWindowLocationCache windowLocation;
+		private SettingsWindowLocationCache? windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 
 		public static readonly DependencyProperty TruthTableProperty = DependencyProperty.Register(
@@ -85,7 +86,7 @@ namespace LogicCircuit {
 
 			this.BuildTruthTable();
 
-			this.CommandDeleteOldFilter = new LambdaUICommand("-", o => this.RemoveFilter(o as string)) {
+			this.CommandDeleteOldFilter = new LambdaUICommand("-", o => this.RemoveFilter((o as string)!)) {
 				IconPath = "Icon/Delete.xaml"
 			};
 
@@ -95,7 +96,7 @@ namespace LogicCircuit {
 			Dictionary<DataGridTextColumn, Func<TruthState, int>> dataAccessor = new Dictionary<DataGridTextColumn, Func<TruthState, int>>();
 			void addColumn(Pin pin, string path, int i) {
 				DataGridTextColumn column = new DataGridTextColumn();
-				column.Header = pin.Name.Replace("_", "__");
+				column.Header = pin.Name.Replace("_", "__", StringComparison.Ordinal);
 				column.Binding = new Binding(path);
 				if(pin.PinType == PinType.Input) {
 					column.Binding.StringFormat = "{0:X}";
@@ -137,7 +138,7 @@ namespace LogicCircuit {
 
 		private void OnFilterPaste(object sender, DataObjectPastingEventArgs e) {
 			if(sender == this.filter && e.DataObject != null && e.DataObject.GetDataPresent(DataFormats.Text)) {
-				string original = e.DataObject.GetData(DataFormats.Text) as string;
+				string? original = e.DataObject.GetData(DataFormats.Text) as string;
 				if(!string.IsNullOrWhiteSpace(original)) {
 					string text = Regex.Replace(original.Trim(), @"\s+", " ");
 					if(original != text) {
@@ -192,7 +193,7 @@ namespace LogicCircuit {
 
 		private void BuildTruthTable() {
 			if(!this.ShowProgress && 0 < this.TotalRows) {
-				Predicate<TruthState> include = null;
+				Predicate<TruthState>? include = null;
 				if(DialogTruthTable.MaxRows < this.TotalRows) {
 					bool success;
 					include = this.Filter(out success);
@@ -204,11 +205,11 @@ namespace LogicCircuit {
 				this.Progress = 0;
 				this.ShowProgress = true;
 				ThreadPool.QueueUserWorkItem(o => {
-					Exception error = null;
+					Exception? error = null;
 					bool oscillation = false;
 					try {
 						bool truncated = false;
-						IList<TruthState> table = this.testSocket.BuildTruthTable(
+						IList<TruthState>? table = this.testSocket.BuildTruthTable(
 							this.SetProgress, () => !this.abort, include, DialogTruthTable.MaxRows, out truncated
 						);
 						if(table != null) {
@@ -248,7 +249,7 @@ namespace LogicCircuit {
 					this.BuildTruthTable();
 				} else {
 					bool success;
-					Predicate<TruthState> include = this.Filter(out success);
+					Predicate<TruthState>? include = this.Filter(out success);
 					if(include != null) {
 						this.TruthTable.Filter = o => {
 							if(o is TruthState state) {
@@ -270,13 +271,13 @@ namespace LogicCircuit {
 			this.ShowProgress = false;
 		}
 
-		private Predicate<TruthState> Filter(out bool success) {
+		private Predicate<TruthState>? Filter(out bool success) {
 			success = true;
 			if(this.filter != null) {
 				string text = this.filter.Text.Trim();
 				if(!string.IsNullOrEmpty(text)) {
 					ExpressionParser parser = new ExpressionParser(this.testSocket);
-					Predicate<TruthState> func = parser.Parse(text, this.InvertFilter);
+					Predicate<TruthState>? func = parser.Parse(text, this.InvertFilter);
 					if(parser.Error == null) {
 						return func;
 					} else {
@@ -367,7 +368,8 @@ namespace LogicCircuit {
 				return 0;
 			}
 
-			public int Compare(object x, object y) {
+			public int Compare(object? x, object? y) {
+				Debug.Assert(x != null && y != null);
 				if(x is TruthState && y is TruthState) {
 					return this.Compare((TruthState)x, (TruthState)y);
 				}

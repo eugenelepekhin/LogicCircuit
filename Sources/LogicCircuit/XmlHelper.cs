@@ -46,8 +46,8 @@ namespace LogicCircuit {
 
 		public static TextWriter FileWriter(string fileName) {
 			if(!File.Exists(fileName)) {
-				string dir = Path.GetDirectoryName(fileName);
-				if(!Directory.Exists(dir)) {
+				string? dir = Path.GetDirectoryName(fileName);
+				if(!string.IsNullOrEmpty(dir) && !Directory.Exists(dir)) {
 					Directory.CreateDirectory(dir);
 				}
 			}
@@ -81,7 +81,7 @@ namespace LogicCircuit {
 			inputXml = XmlHelper.CreateReader(new StringReader(sb.ToString()));
 		}
 
-		public static bool IsElement(this XmlReader xmlReader, string ns, string localName = null) {
+		public static bool IsElement(this XmlReader xmlReader, string ns, string? localName = null) {
 			return (
 				xmlReader.NodeType == XmlNodeType.Element &&
 				XmlHelper.AreEqualAtoms(xmlReader.NamespaceURI, ns) &&
@@ -117,7 +117,7 @@ namespace LogicCircuit {
 		}
 
 		#if DEBUG
-			public static bool IsEndElement(this XmlReader xmlReader, string ns, string localName = null) {
+			public static bool IsEndElement(this XmlReader xmlReader, string ns, string? localName = null) {
 				return (
 					xmlReader.NodeType == XmlNodeType.EndElement &&
 					XmlHelper.AreEqualAtoms(xmlReader.NamespaceURI, ns) &&
@@ -126,7 +126,7 @@ namespace LogicCircuit {
 			}
 		#endif
 
-		public static bool AreEqualAtoms(string x, string y) {
+		public static bool AreEqualAtoms(string? x, string? y) {
 			Debug.Assert(x != y || object.ReferenceEquals(x, y),
 				"Atomization problem. You forgot to atomize string: '" + x + "'"
 			);
@@ -134,12 +134,12 @@ namespace LogicCircuit {
 		}
 
 		private class AtomEqualityComparer : IEqualityComparer<string> {
-			public bool Equals(string x, string y) {
+			public bool Equals(string? x, string? y) {
 				return XmlHelper.AreEqualAtoms(x, y);
 			}
 
 			public int GetHashCode(string obj) {
-				return obj.GetHashCode();
+				return obj.GetHashCode(StringComparison.Ordinal);
 			}
 		}
 

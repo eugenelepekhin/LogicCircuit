@@ -13,7 +13,7 @@ namespace LogicCircuit {
 	/// </summary>
 	public abstract partial class DialogMemoryEditor : Window {
 
-		private SettingsWindowLocationCache windowLocation;
+		private SettingsWindowLocationCache? windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 		private readonly SettingsStringCache openFileFolder;
 		public SettingsGridLengthCache DataHeight { get; private set; }
@@ -79,7 +79,7 @@ namespace LogicCircuit {
 				int dataBitWidth = this.DataBitWidth;
 				bool writeOn1 = this.Memory.Writable && ((EnumDescriptor<bool>)this.writeOn.SelectedItem).Value;
 				MemoryOnStart memoryOnStart = ((EnumDescriptor<MemoryOnStart>)this.onStart.SelectedItem).Value;
-				bool dualPort = this.checkBoxDualPort.IsChecked.Value;
+				bool dualPort = this.checkBoxDualPort.IsChecked!.Value;
 				bool saveData = !this.Memory.Writable || memoryOnStart == MemoryOnStart.Data;
 				if(!this.Memory.Writable) {
 					memoryOnStart = MemoryOnStart.Random; // set to default value for ROM
@@ -130,7 +130,7 @@ namespace LogicCircuit {
 				};
 				bool? result = dialog.ShowDialog(this);
 				if(result.HasValue && result.Value) {
-					this.openFileFolder.Value = Path.GetDirectoryName(dialog.FileName);
+					this.openFileFolder.Value = Path.GetDirectoryName(dialog.FileName)!;
 					int addressBitWidth = this.AddressBitWidth;
 					int dataBitWidth = this.DataBitWidth;
 					byte[] buffer = new byte[Memory.BytesPerCellFor(dataBitWidth)];
@@ -162,7 +162,7 @@ namespace LogicCircuit {
 				bool? result = dialog.ShowDialog(this);
 				if(result.HasValue && result.Value) {
 					string file = dialog.FileName;
-					this.openFileFolder.Value = Path.GetDirectoryName(file);
+					this.openFileFolder.Value = Path.GetDirectoryName(file)!;
 					using(FileStream stream = File.Open(file, FileMode.Create, FileAccess.Write, FileShare.Write)) {
 						stream.Write(this.data, 0, this.data.Length);
 						stream.Flush();

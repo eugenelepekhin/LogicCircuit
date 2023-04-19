@@ -8,7 +8,7 @@ namespace LogicCircuit {
 	/// </summary>
 	public partial class DialogSound : Window {
 
-		private SettingsWindowLocationCache windowLocation;
+		private SettingsWindowLocationCache? windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 
 		private readonly Sound sound;

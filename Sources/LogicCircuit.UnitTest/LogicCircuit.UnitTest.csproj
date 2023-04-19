@@ -1,117 +1,36 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{4938E321-A7F8-455F-8EFD-4E968949C568}</ProjectGuid>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!--<Nullable>enable</Nullable>-->
+
+    <IsTestProject>true</IsTestProject>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LogicCircuit.UnitTest</RootNamespace>
-    <AssemblyName>LogicCircuit.UnitTest</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-    <TargetFrameworkProfile />
+
+    <Version>1.0.0.0</Version>
+    <Description>www.LogicCircuit.org</Description>
+    <Copyright>© LogicCircuit.org</Copyright>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Xaml" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="WindowsBase" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0-preview-20230223-05" />
+    <PackageReference Include="Moq" Version="4.18.4" />
+    <PackageReference Include="MSTest.TestAdapter" Version="3.0.2" />
+    <PackageReference Include="MSTest.TestFramework" Version="3.0.2" />
+    <PackageReference Include="coverlet.collector" Version="3.2.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
+
   <ItemGroup>
-    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
-      <Visible>False</Visible>
-    </CodeAnalysisDependentAssemblyPaths>
+    <ProjectReference Include="..\LogicCircuit\LogicCircuit.csproj" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="CircuitMapTest.cs" />
-    <Compile Include="CircuitProjectTest.cs" />
-    <Compile Include="CircuitStateTest.cs" />
-    <Compile Include="CircuitTest.cs" />
-    <Compile Include="CircuitTestSocketTest.cs" />
-    <Compile Include="ExpressionParserTest.cs" />
-    <Compile Include="FunctionTest.cs" />
-    <Compile Include="MemoryTest.cs" />
-    <Compile Include="ProbeConverterTest.cs" />
-    <Compile Include="ProjectTester.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="EnumHelperTest.cs" />
-    <Compile Include="ResourcesTest.cs" />
-    <Compile Include="SettingsTest.cs" />
-    <Compile Include="SensorTest.cs" />
-    <Compile Include="ConversionTest.cs" />
-    <Compile Include="GraphicsArrayTest.cs" />
-    <Compile Include="ConductorMapTest.cs" />
-    <Compile Include="XmlLoadTest.cs" />
-    <Compile Include="Socket.cs" />
-    <Compile Include="SplitterConverterTest.cs" />
-    <Compile Include="VisualElementLoadTest.cs" />
+    <Folder Include="STAExtensions.UnitTests\" />
+    <Folder Include="STAExtensions\" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\LogicCircuit\LogicCircuit.csproj">
-      <Project>{45ED9DDA-67B2-4AA9-BB4C-65A9684060AE}</Project>
-      <Name>LogicCircuit</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="Properties\Digital Clock.CircuitProject" />
-    <None Include="Properties\FunctionTest.CircuitProject" />
-    <None Include="Properties\IntegerCalculator.CircuitProject" />
-    <None Include="Properties\VisualElementLoadTest.CircuitProject" />
-    <None Include="Properties\XmlLoadReadElementTextTest.CircuitProject" />
-    <None Include="Properties\ExternalCalculator.CircuitProject" />
-    <None Include="Properties\CircuitMapCleanUpTest.CircuitProject" />
-    <None Include="Properties\CircuitTestSocketTest.CircuitProject" />
-    <None Include="Properties\ProbeConvertTest.CircuitProject" />
-    <None Include="Properties\SensorTests.CircuitProject" />
-    <None Include="Properties\From2.0.0.6Conversion.CircuitProject" />
-    <None Include="Properties\Splitter Conversion.CircuitProject" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Properties\CircuitMapTests.CircuitProject" />
-  </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>

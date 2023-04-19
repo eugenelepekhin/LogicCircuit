@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
@@ -51,7 +52,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler? PropertyChanged;
 
 		private readonly SettingsStringCache imageExportType = new SettingsStringCache(Settings.User, "ImageExport.Type", "Png");
 		private readonly SettingsStringCache imageExportFolder = new SettingsStringCache(Settings.User, "ImageExport.Folder", Mainframe.DefaultPictureFolder());
@@ -76,6 +77,7 @@ namespace LogicCircuit {
 			this.FilePath = this.DefaultFileName();
 			this.DataContext = this;
 			this.InitializeComponent();
+			Debug.Assert(this.Encoder != null);
 		}
 
 		private void NotifyPropertyChanged(string property) {
@@ -100,7 +102,7 @@ namespace LogicCircuit {
 			this.NotifyPropertyChanged("FilePath");
 		}
 
-		private ImageEncoder FindEncoder(string extension) {
+		private ImageEncoder? FindEncoder(string extension) {
 			foreach(ImageEncoder e in this.Encoders) {
 				if(e.IsKnownExtension(extension)) {
 					return e;
@@ -110,13 +112,13 @@ namespace LogicCircuit {
 		}
 
 		private void SetEncoder(string extension) {
-			ImageEncoder encoder = this.FindEncoder(extension);
+			ImageEncoder? encoder = this.FindEncoder(extension);
 			if(encoder == null) {
 				encoder = this.FindEncoder("png");
 			}
-			Tracer.Assert(encoder != null);
+			Tracer.Assert(encoder);
 			if(this.Encoder != encoder) {
-				this.Encoder = encoder;
+				this.Encoder = encoder!;
 				this.NotifyPropertyChanged("Encoder");
 			}
 		}
@@ -179,7 +181,7 @@ namespace LogicCircuit {
 					);
 					return;
 				}
-				RenderTargetBitmap bitmap = this.editor.ExportImage();
+				RenderTargetBitmap? bitmap = this.editor.ExportImage();
 				Tracer.Assert(bitmap != null);
 				using(FileStream stream = new FileStream(this.FilePath, FileMode.Create)) {
 					BitmapEncoder encoder = this.Encoder.BitmapEncoder;
@@ -188,7 +190,7 @@ namespace LogicCircuit {
 					encoder.Save(stream);
 				}
 				this.imageExportType.Value = this.Encoder.Name;
-				this.imageExportFolder.Value = Path.GetDirectoryName(this.FilePath);
+				this.imageExportFolder.Value = Path.GetDirectoryName(this.FilePath)!;
 				e.Handled = true;
 				this.DialogResult = true;
 			} catch(Exception exception) {

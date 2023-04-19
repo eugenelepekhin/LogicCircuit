@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
@@ -12,6 +13,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using IronPython.Hosting;
+using IronPython.Runtime.Exceptions;
 using Microsoft.Scripting;
 using Microsoft.Scripting.Hosting;
 
@@ -21,7 +23,7 @@ namespace LogicCircuit {
 	/// </summary>
 	[SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
 	public sealed partial class IronPythonConsole : Window {
-		private static IronPythonConsole currentConsole;
+		private static IronPythonConsole? currentConsole;
 
 		internal static void Run(Window parent) {
 			if(IronPythonConsole.currentConsole == null) {
@@ -36,7 +38,7 @@ namespace LogicCircuit {
 
 		internal static void Run(Window parent, string script) {
 			IronPythonConsole.Run(parent);
-			IronPythonConsole console = IronPythonConsole.currentConsole;
+			IronPythonConsole? console = IronPythonConsole.currentConsole;
 			if(console != null) {
 				console.writer.WriteLine(script);
 				console.Execute(script);
@@ -50,13 +52,13 @@ namespace LogicCircuit {
 		}
 
 		internal static void Clear() {
-			IronPythonConsole console = IronPythonConsole.currentConsole;
+			IronPythonConsole? console = IronPythonConsole.currentConsole;
 			if(console != null) {
 				console.Dispatcher.Invoke(() => console.console.Clear());
 			}
 		}
 
-		private SettingsWindowLocationCache windowLocation;
+		private SettingsWindowLocationCache? windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 
 		private readonly ScriptEngine scriptEngine;
@@ -66,15 +68,19 @@ namespace LogicCircuit {
 		private readonly LogReader reader;
 		private readonly ScriptScope scope;
 		private readonly StringBuilder command = new StringBuilder();
-		private Thread thread;
+		private readonly TracebackDelegate traceback;
+		private Thread? thread;
+		private bool aborting;
 
-		private string suggestionExpr;
-		private List<string> suggestions;
+		private string? suggestionExpr;
+		private List<string>? suggestions;
 		private int lastSuggestion;
 
 		private IronPythonConsole() {
 			this.DataContext = this;
 			this.InitializeComponent();
+
+			this.traceback = this.Trace;
 
 			this.scriptEngine = Python.CreateEngine();
 			this.stdout = new MemoryStream();
@@ -143,19 +149,24 @@ namespace LogicCircuit {
 
 		private void Start(string text) {
 			void run() {
+				//Stopwatch stopwatch = Stopwatch.StartNew();
 				try {
+					this.aborting = false;
+					this.scriptEngine.SetTrace(this.traceback);
 					dynamic result = this.scriptEngine.Execute(text, this.scope);
 					if(result != null) {
 						this.writer.WriteLine(result.ToString());
 					}
-				} catch(ThreadAbortException) {
+				} catch(AbortException) {
 					this.writer.WriteLine("Script terminated by user");
 				} catch(Exception exception) {
 					this.writer.WriteLine("{0}: {1}", exception.GetType().Name, exception.Message);
 				} finally {
+					//stopwatch.Stop();
 					this.Prompt();
 					this.thread = null;
 				}
+				//App.Mainframe.InformationMessage($"Executed in {stopwatch.Elapsed.TotalSeconds:f1}");
 			}
 			Tracer.Assert(this.thread == null);
 			this.thread = new Thread(new ThreadStart(run));
@@ -166,12 +177,21 @@ namespace LogicCircuit {
 			this.thread.Start();
 		}
 
+		private TracebackDelegate Trace(TraceBackFrame frame, string result, object payload) {
+			if(this.aborting) {
+				this.aborting = false;
+				throw new AbortException();
+			}
+			return this.traceback;
+		}
+
 		private bool Abort() {
 			this.suggestions = null;
 			try {
-				Thread t = this.thread;
+				
+				Thread? t = this.thread;
 				if(t != null) {
-					t.Abort();
+					this.aborting = true;
 					return true;
 				}
 				if(0 < this.command.Length) {
@@ -240,7 +260,7 @@ namespace LogicCircuit {
 			}
 
 			private void Append(string text) {
-				text = text.Replace("\r", "");
+				text = text.Replace("\r", "", StringComparison.Ordinal);
 				if(!string.IsNullOrEmpty(text)) {
 					bool invoke = this.queue.IsEmpty;
 					this.queue.Enqueue(text);
@@ -248,7 +268,7 @@ namespace LogicCircuit {
 						this.textBox.Dispatcher.Invoke(
 							new Action(() => {
 								bool scroll = (this.textBox.SelectionStart == this.textBox.Text.Length);
-								while(this.queue.TryDequeue(out string str)) {
+								while(this.queue.TryDequeue(out string? str)) {
 									this.textBox.AppendText(str);
 								}
 								if(scroll) {
@@ -269,23 +289,25 @@ namespace LogicCircuit {
 				this.Append(new string(buffer, index, count));
 			}
 
-			public override void Write(string value) {
-				this.Append(value);
+			public override void Write(string? value) {
+				if(!string.IsNullOrEmpty(value)) {
+					this.Append(value);
+				}
 			}
 		}
 
 		private class LogReader : TextReader {
 			private readonly ScriptConsole console;
-			private StringReader stringReader;
+			private StringReader? stringReader;
 
 			public LogReader(ScriptConsole console) : base() {
 				this.console = console;
 			}
 
-			public override string ReadLine() {
+			public override string? ReadLine() {
 				Action<string> oldEnter = this.console.CommandEnter;
 				try {
-					string line = null;
+					string? line = null;
 					using(AutoResetEvent waiter = new AutoResetEvent(false)) {
 						this.console.CommandEnter = text => {
 							line = text;
@@ -302,7 +324,7 @@ namespace LogicCircuit {
 
 			public override int Read() {
 				if(this.stringReader == null) {
-					string line = this.ReadLine();
+					string? line = this.ReadLine();
 					if(string.IsNullOrEmpty(line)) {
 						return -1;
 					}

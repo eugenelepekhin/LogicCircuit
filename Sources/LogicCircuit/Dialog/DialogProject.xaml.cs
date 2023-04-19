@@ -10,7 +10,7 @@ namespace LogicCircuit {
 	/// </summary>
 	public partial class DialogProject : Window {
 
-		private SettingsWindowLocationCache windowLocation;
+		private SettingsWindowLocationCache? windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 
 		private readonly Project project;
@@ -47,16 +47,16 @@ namespace LogicCircuit {
 		}
 
 		private List<CurcuitInfo> Circuits() {
-			IEnumerable<CurcuitInfo> one(LogicalCircuit value) { yield return new CurcuitInfo(value); }
+			IEnumerable<CurcuitInfo> one(LogicalCircuit? value) { yield return new CurcuitInfo(value); }
 			return one(null).Union(this.project.CircuitProject.LogicalCircuitSet.OrderBy(c => c.Name).Select(c => new CurcuitInfo(c))).ToList();
 		}
 
 		[SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
 		public class CurcuitInfo {
-			public LogicalCircuit Circuit { get; }
+			public LogicalCircuit? Circuit { get; }
 			public string Name => this.Circuit?.Name ?? Properties.Resources.TitleCurrent;
 
-			public CurcuitInfo(LogicalCircuit circuit) {
+			public CurcuitInfo(LogicalCircuit? circuit) {
 				this.Circuit = circuit;
 			}
 		}

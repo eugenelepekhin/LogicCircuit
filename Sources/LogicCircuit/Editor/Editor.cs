@@ -13,9 +13,9 @@ namespace LogicCircuit {
 	[SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 	public partial class Editor : EditorDiagram, INotifyPropertyChanged {
 
-		public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler? PropertyChanged;
 
-		public string File { get; private set; }
+		public string? File { get; private set; }
 		private int savedVersion;
 		private int autoSavedVersion;
 
@@ -28,10 +28,10 @@ namespace LogicCircuit {
 		// use process specific id in order to prevent dragging and dropping between processes.
 		private const double DragStartProximity = 3;
 		private Point dragStart;
-		private FrameworkElement dragSource;
+		private FrameworkElement? dragSource;
 
-		private CircuitRunner circuitRunner;
-		public CircuitRunner CircuitRunner {
+		private CircuitRunner? circuitRunner;
+		public CircuitRunner? CircuitRunner {
 			get { return this.circuitRunner; }
 			private set {
 				if(this.circuitRunner != value) {
@@ -56,7 +56,7 @@ namespace LogicCircuit {
 							this.CircuitRunner = new CircuitRunner(this);
 							this.CircuitRunner.Start();
 						} else {
-							this.CircuitRunner.Stop();
+							this.CircuitRunner!.Stop();
 							this.CircuitRunner = null;
 						}
 					}
@@ -160,7 +160,7 @@ namespace LogicCircuit {
 		public LambdaUICommand CommandReport => new LambdaUICommand(Properties.Resources.CommandToolsReport, o => {
 			LogicalCircuit root = this.Project.LogicalCircuit;
 			if(this.CircuitRunner != null) {
-				CircuitMap map = this.CircuitRunner.VisibleMap;
+				CircuitMap? map = this.CircuitRunner.VisibleMap;
 				if(map != null && !this.InEditMode) {
 					map = map.Root;
 					root = map.Circuit;
@@ -171,16 +171,16 @@ namespace LogicCircuit {
 			IconPath = "Icon/CircuitReport.xaml"
 		};
 		public LambdaUICommand CommandOscilloscope => new LambdaUICommand(Properties.Resources.CommandToolsOscilloscope,
-			o => this.Power && this.CircuitRunner.HasProbes && this.CircuitRunner.DialogOscilloscope == null,
-			o => this.CircuitRunner.ShowOscilloscope()
+			o => this.Power && this.CircuitRunner!.HasProbes && this.CircuitRunner.DialogOscilloscope == null,
+			o => this.CircuitRunner!.ShowOscilloscope()
 		) {
 			IconPath = "Icon/CircuitPulse.xaml"
 		};
 
-		private static CircuitProject Create(Mainframe mainframe, string file) {
+		private static CircuitProject Create(Mainframe mainframe, string? file) {
 			bool useAutoSaveFile = false;
-			string autoSaveFile = Mainframe.AutoSaveFile(file);
-			if(Mainframe.IsFileExists(autoSaveFile)) {
+			string? autoSaveFile = Mainframe.AutoSaveFile(file);
+			if(!string.IsNullOrWhiteSpace(autoSaveFile) && Mainframe.IsFileExists(autoSaveFile)) {
 				App.Dispatch(() => {
 					MessageBoxResult result = DialogMessage.Show(
 						mainframe,
@@ -208,7 +208,7 @@ namespace LogicCircuit {
 			return project;
 		}
 
-		public Editor(Mainframe mainframe, string file) : base(mainframe, Editor.Create(mainframe, file)) {
+		public Editor(Mainframe mainframe, string? file) : base(mainframe, Editor.Create(mainframe, file)) {
 			this.File = file;
 			// Assume loading taken only one transaction. If auto saved file is loaded a new empty transaction is created, so set this to 1 to mark store dirty.
 			this.savedVersion = 1;
@@ -218,10 +218,10 @@ namespace LogicCircuit {
 
 		public void Save(string file) {
 			this.Mainframe.ResetAutoSaveTimer();
-			string oldFile = this.File;
+			string? oldFile = this.File;
 			if(System.IO.File.Exists(file)) {
 				string temp = Mainframe.TempFile(file);
-				string backup = null;
+				string? backup = null;
 				if(Settings.User.CreateBackupFileOnSave) {
 					backup = Mainframe.BackupFile(file);
 				}
@@ -240,7 +240,7 @@ namespace LogicCircuit {
 		public void AutoSave() {
 			try {
 				if(!string.IsNullOrEmpty(this.File) && this.HasChanges && this.autoSavedVersion != this.CircuitProject.Version) {
-					string file = Mainframe.AutoSaveFile(this.File);
+					string? file = Mainframe.AutoSaveFile(this.File);
 					if(!string.IsNullOrEmpty(file)) {
 						Mainframe.DeleteFile(file);
 						this.CircuitProject.SaveSnapshot(file);
@@ -253,7 +253,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		protected override void OnProjectPropertyChanged(string propertyName) {
+		protected override void OnProjectPropertyChanged(string? propertyName) {
 			switch(propertyName) {
 			case "Zoom":
 			case "Frequency":
@@ -324,7 +324,7 @@ namespace LogicCircuit {
 		public void OpenLogicalCircuit(CircuitMap map) {
 			Tracer.Assert(this.Power);
 			this.OpenLogicalCircuit(map.Circuit);
-			this.CircuitRunner.VisibleMap = map;
+			this.CircuitRunner!.VisibleMap = map;
 			map.TurnOn();
 			map.Redraw(true);
 			this.Mainframe.Status = map.Path();
@@ -362,7 +362,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		public RenderTargetBitmap ExportImage() {
+		public RenderTargetBitmap? ExportImage() {
 			Rect rect = new Rect();
 			bool isEmpty = true;
 			LogicalCircuit logicalCircuit = this.Project.LogicalCircuit;
@@ -407,7 +407,7 @@ namespace LogicCircuit {
 				Transform oldLayoutTransform = diagram.LayoutTransform;
 				double horizontalOffset = 0;
 				double verticalOffset = 0;
-				ScrollViewer scrollViewer = diagram.Parent as ScrollViewer;
+				ScrollViewer? scrollViewer = diagram.Parent as ScrollViewer;
 				try {
 					if(scrollViewer != null) {
 						horizontalOffset = scrollViewer.HorizontalOffset;
@@ -500,10 +500,10 @@ namespace LogicCircuit {
 				this.CancelMove();
 				this.ClearSelection();
 				LogicalCircuit current = this.Project.LogicalCircuit;
-				LogicalCircuit other = this.switcher.SuggestNext();
+				LogicalCircuit? other = this.switcher.SuggestNext();
 				Tracer.Assert(other != null && other != current);
 				this.CircuitProject.InTransaction(() => {
-					this.Project.LogicalCircuit = other;
+					this.Project.LogicalCircuit = other!;
 					current.Delete();
 				});
 			}
@@ -516,8 +516,8 @@ namespace LogicCircuit {
 			}
 		}
 
-		private static string ClipboardText() {
-			string text = null;
+		private static string? ClipboardText() {
+			string? text = null;
 			try {
 				text = Clipboard.GetText();
 			} catch(Exception exception) {
@@ -641,7 +641,7 @@ namespace LogicCircuit {
 			bool? result = this.Mainframe.ShowDialog(dialog);
 			if(result.HasValue && result.Value && !StringComparer.Ordinal.Equals(textNote.Note, dialog.Document)) {
 				if(TextNote.IsValidText(dialog.Document)) {
-					this.CircuitProject.InTransaction(() => { textNote.Note = dialog.Document; });
+					this.CircuitProject.InTransaction(() => { textNote.Note = dialog.Document!; });
 				} else {
 					this.CircuitProject.InTransaction(() => textNote.Delete());
 				}
@@ -693,20 +693,20 @@ namespace LogicCircuit {
 						return;
 					}
 				} else if(this.CircuitRunner != null && this.CircuitRunner.VisibleMap != null) {
-					CircuitMap map = this.CircuitRunner.VisibleMap.Child(circuitSymbol);
+					CircuitMap? map = this.CircuitRunner.VisibleMap.Child(circuitSymbol);
 					if(map != null) {
 						this.OpenLogicalCircuit(map);
 						return;
 					}
 					if(circuitSymbol.Circuit is CircuitProbe) {
-						FunctionProbe functionProbe = this.CircuitRunner.VisibleMap.FunctionProbe(circuitSymbol);
+						FunctionProbe? functionProbe = this.CircuitRunner.VisibleMap.FunctionProbe(circuitSymbol);
 						if(functionProbe != null) {
 							this.Mainframe.ShowDialog(new DialogProbeHistory(functionProbe));
 						}
 						return;
 					}
 					if((circuitSymbol.Circuit is Memory) || (circuitSymbol.Circuit is GraphicsArray)) {
-						IFunctionMemory functionMemory = this.CircuitRunner.VisibleMap.FunctionMemory(circuitSymbol);
+						IFunctionMemory? functionMemory = this.CircuitRunner.VisibleMap.FunctionMemory(circuitSymbol);
 						if(functionMemory != null) {
 							this.Mainframe.ShowDialog(new DialogMemory(functionMemory));
 						}
@@ -714,7 +714,7 @@ namespace LogicCircuit {
 					}
 					if(circuitSymbol.Circuit is Constant) {
 						if(this.CircuitRunner.Root.First() == this.CircuitRunner.VisibleMap) {
-							FunctionConstant functionConstant = this.CircuitRunner.VisibleMap.FunctionConstant(circuitSymbol);
+							FunctionConstant? functionConstant = this.CircuitRunner.VisibleMap.FunctionConstant(circuitSymbol);
 							if(functionConstant != null) {
 								this.CircuitProject.InOmitTransaction(() => functionConstant.Value++);
 							}
@@ -919,8 +919,8 @@ namespace LogicCircuit {
 		}
 
 		private bool ExecuteKeyGesture(Key key, ModifierKeys modifier, bool isPressed) {
-			foreach(FunctionButton functionButton in this.CircuitRunner.VisibleMap.Buttons()) {
-				CircuitSymbol symbol = functionButton.ButtonSymbol();
+			foreach(FunctionButton functionButton in this.CircuitRunner!.VisibleMap!.Buttons()) {
+				CircuitSymbol? symbol = functionButton.ButtonSymbol();
 				if(symbol != null) {
 					CircuitButton button = (CircuitButton)symbol.Circuit;
 					if(button.Key == key && button.ModifierKeys == modifier) {

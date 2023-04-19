@@ -24,7 +24,7 @@ namespace LogicCircuit {
 		) {
 			this.settings = settings;
 			this.key = key;
-			string text = this.settings[this.key];
+			string? text = this.settings[this.key];
 			if(string.IsNullOrEmpty(text) || !bool.TryParse(text, out this.cache)) {
 				this.cache = defaultValue;
 			}

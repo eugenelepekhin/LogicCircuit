@@ -17,9 +17,9 @@ namespace LogicCircuit {
 	/// </summary>
 	public partial class DialogText : Window, INotifyPropertyChanged {
 
-		public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler? PropertyChanged;
 
-		private SettingsWindowLocationCache windowLocation;
+		private SettingsWindowLocationCache? windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 		private readonly SettingsStringCache openImageFolder = new SettingsStringCache(Settings.User, "DialogText.OpenImage.Folder", Mainframe.DefaultPictureFolder());
 
@@ -39,11 +39,11 @@ namespace LogicCircuit {
 
 		public SettingsIntegerCache OtherToolBarBandIndex { get; } = new SettingsIntegerCache(Settings.User, "DialogText.OtherToolBarBandIndex", 0, 10, 1);
 
-		public string Document { get; set; }
+		public string? Document { get; set; }
 
 		[SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
 		public IEnumerable<FontFamily> FontFamilies { get { return Fonts.SystemFontFamilies.OrderBy(f => f.Source); } }
-		public FontFamily CurrentFontFamily {
+		public FontFamily? CurrentFontFamily {
 			get {
 				try {
 					if(this.editor != null && this.editor.Selection != null) {
@@ -138,7 +138,7 @@ namespace LogicCircuit {
 		public LambdaUICommand HyperlinkCommand { get; private set; }
 		public LambdaUICommand InsertImageCommand { get; private set; }
 
-		public DialogText(string document) {
+		public DialogText(string? document) {
 			this.HyperlinkCommand = new LambdaUICommand(Properties.Resources.CommandHyperlink,
 				o => {
 					try {
@@ -157,7 +157,7 @@ namespace LogicCircuit {
 			this.DataContext = this;
 			this.InitializeComponent();
 			if(!string.IsNullOrEmpty(this.Document)) {
-				FlowDocument flowDoc = TextNote.Load(this.Document);
+				FlowDocument? flowDoc = TextNote.Load(this.Document);
 				if(flowDoc != null) {
 					this.editor.Document = flowDoc;
 				}
@@ -247,8 +247,8 @@ namespace LogicCircuit {
 				bool? result = dialog.ShowDialog(this);
 				if(result.HasValue && result.Value) {
 					string path = dialog.FileName;
-					this.openImageFolder.Value = Path.GetDirectoryName(path);
-					if(Uri.TryCreate(path, UriKind.Absolute, out Uri uri)) {
+					this.openImageFolder.Value = Path.GetDirectoryName(path)!;
+					if(Uri.TryCreate(path, UriKind.Absolute, out Uri? uri)) {
 						Image image = new Image();
 						image.BeginInit();
 						image.Source = new BitmapImage(uri);

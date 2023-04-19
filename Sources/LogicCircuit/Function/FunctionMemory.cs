@@ -1,14 +1,15 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
 namespace LogicCircuit {
 	public abstract class FunctionMemory : CircuitFunction, IFunctionMemory {
 		private readonly int[] address;
-		private readonly int[] address2;
-		private readonly int[] inputData;
+		private readonly int[]? address2;
+		private readonly int[]? inputData;
 		private readonly int[] outputData;
-		private readonly int[] outputData2;
+		private readonly int[]? outputData2;
 		private readonly int write;
 		private readonly State writeOn;
 		private State oldWriteState = State.Off;
@@ -16,7 +17,7 @@ namespace LogicCircuit {
 		public Memory Memory { get; private set; }
 
 		protected FunctionMemory(
-			CircuitState circuitState, int[] address, int[] inputData, int[] outputData, int[] address2, int[] outputData2, int write, Memory memory
+			CircuitState circuitState, int[] address, int[]? inputData, int[] outputData, int[]? address2, int[]? outputData2, int write, Memory memory
 		) : base(circuitState, FunctionMemory.Input(address, address2, inputData, write), FunctionMemory.Output(outputData, outputData2)) {
 			this.address = address;
 			this.address2 = address2;
@@ -24,7 +25,7 @@ namespace LogicCircuit {
 			this.outputData = outputData;
 			this.outputData2 = outputData2;
 			this.Memory = memory;
-			if(inputData != null) {
+			if(this.inputData != null) {
 				Tracer.Assert(memory.Writable);
 				Tracer.Assert(this.inputData.Length == this.outputData.Length);
 				this.write = write;
@@ -55,13 +56,15 @@ namespace LogicCircuit {
 				this.write = -1;
 				this.data = memory.MemoryValue();
 			}
+			Debug.Assert(this.data != null);
 		}
 
 		private byte[] Allocate() {
+			Debug.Assert(this.inputData != null);
 			return new byte[Memory.BytesPerCellFor(this.inputData.Length) * Memory.NumberCellsFor(this.address.Length)];
 		}
 
-		internal static int[] Input(int[] address, int[] address2, int[] inputData, int clock) {
+		internal static int[] Input(int[] address, int[]? address2, int[]? inputData, int clock) {
 			if(address2 == null && inputData == null) {
 				return address;
 			}
@@ -80,7 +83,7 @@ namespace LogicCircuit {
 			return input;
 		}
 
-		internal static int[] Output(int[] outputData, int[] outputData2) {
+		internal static int[]? Output(int[] outputData, int[]? outputData2) {
 			if(outputData == null) {
 				return null;
 			}
@@ -95,6 +98,7 @@ namespace LogicCircuit {
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		protected void Write() {
+			Debug.Assert(this.inputData != null);
 			Memory.SetCellValue(this.data, this.inputData.Length, this.ReadNumericState(this.address), this.ReadNumericState(this.inputData));
 		}
 
@@ -104,6 +108,7 @@ namespace LogicCircuit {
 			if(this.address2 == null) {
 				return this.SetResult(state);
 			} else {
+				Debug.Assert(this.outputData2 != null);
 				bool changed = false;
 				for(int i = 0; i < this.outputData.Length; i++) {
 					changed |= this.SetResult(i, CircuitFunction.FromBool((state & (1 << i)) != 0));

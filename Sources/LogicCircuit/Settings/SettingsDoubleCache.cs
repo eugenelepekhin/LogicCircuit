@@ -34,7 +34,7 @@ namespace LogicCircuit {
 			this.key = key;
 			this.minimum = minimum;
 			this.maximum = maximum;
-			string text = this.settings[this.key];
+			string? text = this.settings[this.key];
 			double value;
 			if(string.IsNullOrEmpty(text) || !double.TryParse(text, out value)) {
 				value = defaultValue;

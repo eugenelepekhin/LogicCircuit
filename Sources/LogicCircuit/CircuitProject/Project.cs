@@ -19,7 +19,7 @@ namespace LogicCircuit {
 			return Math.Max(Project.MinFrequency, Math.Min(value, Project.MaxFrequency));
 		}
 
-		public void SetStartup(LogicalCircuit circuit) {
+		public void SetStartup(LogicalCircuit? circuit) {
 			if(circuit != null) {
 				this.StartupCircuit = circuit;
 			} else {

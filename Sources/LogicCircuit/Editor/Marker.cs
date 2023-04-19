@@ -8,8 +8,8 @@ namespace LogicCircuit {
 			public Symbol Symbol { get; private set; }
 			public abstract FrameworkElement Glyph { get; }
 
-			protected Marker(Symbol symbol) {
-				this.Symbol = symbol;
+			protected Marker(Symbol? symbol) {
+				this.Symbol = symbol!;
 			}
 
 			public virtual Rect Bounds() {

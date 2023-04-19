@@ -20,7 +20,7 @@ namespace LogicCircuit {
 		public LambdaUICommand CommandLeft { get; }
 		public LambdaUICommand CommandRight { get; }
 
-		private List<PinOrderDescriptor> list;
+		private List<PinOrderDescriptor>? list;
 
 		public ControlPinOrder() {
 			this.CommandLeft = new LambdaUICommand("_<", o => this.CanLeft(), o => this.Left());
@@ -38,23 +38,23 @@ namespace LogicCircuit {
 			this.LostFocus += (sender, e) => this.UpdateCommands();
 		}
 
-		public bool HasChanges() => this.list.Any(d => d.Index != d.Circuit.Index);
+		public bool HasChanges() => this.list!.Any(d => d.Index != d.Circuit.Index);
 
 		public void Update() {
-			this.list.ForEach(d => d.Circuit.Index = d.Index);
+			this.list!.ForEach(d => d.Circuit.Index = d.Index);
 		}
 
-		public bool IsOrderFixed() => this.list.Any(d => 0 < d.Index);
+		public bool IsOrderFixed() => this.list!.Any(d => 0 < d.Index);
 
 		public void Reset() {
-			this.list.ForEach(d => d.Index = 0);
+			this.list!.ForEach(d => d.Index = 0);
 			this.list.Sort(PinOrderDescriptor.Comparer);
 			this.PinList.Refresh();
 			this.UpdateCommands();
 		}
 
 		public void FixOrder() {
-			for(int i = 0; i < this.list.Count; i++) {
+			for(int i = 0; i < this.list!.Count; i++) {
 				this.list[i].Index = i;
 			}
 		}
@@ -74,7 +74,7 @@ namespace LogicCircuit {
 
 		private void Left() {
 			int current = this.PinList.CurrentPosition;
-			for(int i = 0; i < this.list.Count; i++) {
+			for(int i = 0; i < this.list!.Count; i++) {
 				this.list[i].Index = i;
 			}
 			this.list[current - 1].Index = current;
@@ -88,7 +88,7 @@ namespace LogicCircuit {
 
 		private void Right() {
 			int current = this.PinList.CurrentPosition;
-			for(int i = 0; i < this.list.Count; i++) {
+			for(int i = 0; i < this.list!.Count; i++) {
 				this.list[i].Index = i;
 			}
 			this.list[current].Index = current + 1;

@@ -18,13 +18,13 @@ namespace LogicCircuit {
 	public partial class App : Application {
 		private const string SettingsCultureName = "Application.CultureInfo.Name";
 
-		private static string[] foundCultureNames;
+		private static string[]? foundCultureNames;
 		private static string[] availableCultureNames {
 			get {
 				if(App.foundCultureNames == null) {
 					List<string> list = new List<string>();
 					Regex regexCultureName = new Regex("^[a-zA-Z]{2,3}(-[a-zA-Z]{2,4})?$", RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-					foreach(string dir in Directory.GetDirectories(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))) {
+					foreach(string dir in Directory.GetDirectories(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!)) {
 						string file = Path.Combine(dir, "LogicCircuit.resources.dll");
 						if(File.Exists(file)) {
 							string folder = Path.GetFileName(dir);
@@ -56,11 +56,13 @@ namespace LogicCircuit {
 		}
 
 		internal static App CurrentApp { get { return (App)App.Current; } }
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		internal static Mainframe Mainframe { get; set; }
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
-		internal string FileToOpen { get; private set; }
-		internal string ScriptToRun { get; private set; }
-		internal string CommandLineErrors { get; private set; }
+		internal string? FileToOpen { get; private set; }
+		internal string? ScriptToRun { get; private set; }
+		internal string? CommandLineErrors { get; private set; }
 
 		protected override void OnStartup(StartupEventArgs e) {
 			App.InitLogging();
@@ -78,7 +80,7 @@ namespace LogicCircuit {
 					.AddFlag("help", "?", "Show this message", false, value => showHelp = value)
 					.AddString("run", "r", "<script>", "IronPython script to run on startup", false, file => this.ScriptToRun = file)
 				;
-				string errors = commandLine.Parse(e.Args, files => this.FileToOpen = files.FirstOrDefault());
+				string? errors = commandLine.Parse(e.Args, files => this.FileToOpen = files.FirstOrDefault()!);
 
 				if(!string.IsNullOrEmpty(errors)) {
 					Tracer.FullInfo("App", "Errors parsing command line parameters: {0}", errors);
@@ -90,8 +92,8 @@ namespace LogicCircuit {
 					).Trim();
 				}
 			}
-			Tracer.FullInfo("App", "Application launched with file to open: \"{0}\"", this.FileToOpen);
-			Tracer.FullInfo("App", "Application launched with script to run: \"{0}\"", this.ScriptToRun);
+			Tracer.FullInfo("App", "Application launched with file to open: \"{0}\"", this.FileToOpen ?? string.Empty);
+			Tracer.FullInfo("App", "Application launched with script to run: \"{0}\"", this.ScriptToRun ?? string.Empty);
 			EventManager.RegisterClassHandler(typeof(TextBox), TextBox.GotKeyboardFocusEvent, new RoutedEventHandler(TextBoxGotKeyboardFocus));
 			EventManager.RegisterClassHandler(typeof(TextBox), TextBox.PreviewMouseDownEvent, new RoutedEventHandler(TextBoxPreviewMouseDown));
 
@@ -174,17 +176,17 @@ namespace LogicCircuit {
 
 		// Scripting support
 
-		public static Editor Editor => App.Mainframe?.Editor;
+		public static Editor? Editor => App.Mainframe.Editor;
 
 		public static CircuitTester CreateTester(string circuitName) {
 			if(string.IsNullOrEmpty(circuitName)) {
 				throw new ArgumentNullException(nameof(circuitName));
 			}
-			Editor editor = App.Editor;
+			Editor? editor = App.Editor;
 			if(editor == null) {
 				throw new InvalidOperationException("Editor was not created yet");
 			}
-			LogicalCircuit circuit = editor.CircuitProject.LogicalCircuitSet.FindByName(circuitName);
+			LogicalCircuit? circuit = editor.CircuitProject.LogicalCircuitSet.FindByName(circuitName);
 			if(circuit == null) {
 				throw new CircuitException(Cause.UserError, string.Format(CultureInfo.InvariantCulture, "Logical Circuit {0} not found", circuitName));
 			}
@@ -205,7 +207,7 @@ namespace LogicCircuit {
 		}
 
 		public static void InTransaction(Action action) {
-			App.Editor.CircuitProject.InTransaction(action);
+			App.Editor!.CircuitProject.InTransaction(action);
 		}
 
 		public static void OpenFile(string fileName) {

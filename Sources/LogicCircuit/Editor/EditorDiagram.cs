@@ -19,7 +19,7 @@ namespace LogicCircuit {
 	public abstract partial class EditorDiagram {
 
 		private const int ClickProximity = 2 * Symbol.PinRadius;
-		protected static readonly string CircuitDescriptorDataFormat = "LogicCircuit.CircuitDescriptor." + Process.GetCurrentProcess().Id;
+		protected static readonly string CircuitDescriptorDataFormat = "LogicCircuit.CircuitDescriptor." + Environment.ProcessId;
 
 		public Mainframe Mainframe { get; private set; }
 		private Dispatcher Dispatcher { get { return this.Mainframe.Dispatcher; } }
@@ -33,17 +33,17 @@ namespace LogicCircuit {
 
 		public abstract bool InEditMode { get; }
 
-		private LogicalCircuit currentLogicalCircuit;
+		private LogicalCircuit? currentLogicalCircuit;
 		private readonly Dictionary<GridPoint, Ellipse> wireJunctionPoint = new Dictionary<GridPoint, Ellipse>();
 
 		private readonly Dictionary<Symbol, Marker> selection = new Dictionary<Symbol, Marker>();
-		private Canvas selectionLayer;
+		private Canvas? selectionLayer;
 
-		private Marker movingMarker;
+		private Marker? movingMarker;
 		private Point moveStart;
 		private Point panStart;
 		private bool panning;
-		private TranslateTransform moveVector;
+		private TranslateTransform? moveVector;
 		private Point maxMove;
 
 		protected EditorDiagram(Mainframe mainframe, CircuitProject circuitProject) {
@@ -64,7 +64,7 @@ namespace LogicCircuit {
 
 		protected abstract void UpdateGlyph(LogicalCircuit logicalCircuit);
 
-		private void CircuitProjectVersionChanged(object sender, VersionChangeEventArgs e) {
+		private void CircuitProjectVersionChanged(object? sender, VersionChangeEventArgs e) {
 			this.UpdateAllDisplay();
 			if(this.refreshPending) {
 				this.refreshPending = false;
@@ -75,7 +75,7 @@ namespace LogicCircuit {
 						this.Diagram.Children.Remove(symbol.Glyph);
 						symbol.Reset();
 						this.Add(symbol);
-						Marker marker = this.FindMarker(symbol);
+						Marker? marker = this.FindMarker(symbol);
 						if(marker != null) {
 							marker.Refresh();
 						}
@@ -118,12 +118,12 @@ namespace LogicCircuit {
 			}
 		}
 
-		private void ProjectPropertyChanged(object sender, PropertyChangedEventArgs e) {
+		private void ProjectPropertyChanged(object? sender, PropertyChangedEventArgs e) {
 			this.OnProjectPropertyChanged(e.PropertyName);
 		}
 
-		protected virtual void OnProjectPropertyChanged(string propertyName) {
-			if(propertyName == "LogicalCircuit") {
+		protected virtual void OnProjectPropertyChanged(string? propertyName) {
+			if(propertyName == nameof(this.Project.LogicalCircuit)) {
 				this.CancelMove();
 				this.ClearSelection();
 				if(this.currentLogicalCircuit != this.Project.LogicalCircuit) {
@@ -137,14 +137,14 @@ namespace LogicCircuit {
 			}
 		}
 
-		private void LogicalCircuitSetCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
+		private void LogicalCircuitSetCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) {
 			// As it is not possible to check if deleted was display or not, lets invalidate all displays.
 			foreach(LogicalCircuit circuit in this.CircuitProject.LogicalCircuitSet.Where(c => c.IsDisplay)) {
 				this.CircuitProject.LogicalCircuitSet.Invalidate(circuit);
 			}
 		}
 
-		private void CircuitSymbolSetCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
+		private void CircuitSymbolSetCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) {
 			bool invalidateAllDisplays = false;
 			if(!this.refreshPending) {
 				if(e.OldItems != null && 0 < e.OldItems.Count) {
@@ -157,7 +157,7 @@ namespace LogicCircuit {
 							}
 							Tracer.Assert(glyph.Parent == null);
 						}
-						LogicalCircuit circuit = symbol.CachedLogicCircuit;
+						LogicalCircuit? circuit = symbol.CachedLogicCircuit;
 						if(circuit != null && !circuit.IsDeleted() && circuit.IsDisplay) {
 							invalidateAllDisplays = true;
 						} else if(circuit == null) {
@@ -184,7 +184,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private void WireSetCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
+		private void WireSetCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) {
 			if(!this.refreshPending) {
 				if(e.OldItems != null && 0 < e.OldItems.Count) {
 					foreach(Wire wire in e.OldItems) {
@@ -209,13 +209,13 @@ namespace LogicCircuit {
 			}
 		}
 
-		private void WireSetChanged(object sender, EventArgs e) {
+		private void WireSetChanged(object? sender, EventArgs e) {
 			if(!this.refreshPending) {
 				this.UpdateSolders();
 			}
 		}
 
-		private void TextNoteSetCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
+		private void TextNoteSetCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) {
 			if(!this.refreshPending) {
 				if(e.OldItems != null && 0 < e.OldItems.Count) {
 					foreach(TextNote symbol in e.OldItems) {
@@ -333,7 +333,7 @@ namespace LogicCircuit {
 			);
 		}
 
-		private Wire FindWireNear(Point point) {
+		private Wire? FindWireNear(Point point) {
 			Rect rect = EditorDiagram.ClickArea(point);
 			foreach(Wire wire in this.Project.LogicalCircuit.Wires()) {
 				if(Symbol.Intersected(Symbol.ScreenPoint(wire.Point1), Symbol.ScreenPoint(wire.Point2), rect)) {
@@ -343,7 +343,7 @@ namespace LogicCircuit {
 			return null;
 		}
 
-		private Jam JamAt(GridPoint point) {
+		private Jam? JamAt(GridPoint point) {
 			foreach(CircuitSymbol symbol in this.Project.LogicalCircuit.CircuitSymbols()) {
 				if(symbol.X <= point.X && point.X <= symbol.X + symbol.Circuit.SymbolWidth && symbol.Y <= point.Y && point.Y <= symbol.Y + symbol.Circuit.SymbolHeight) {
 					foreach(Jam jam in symbol.Jams()) {
@@ -356,7 +356,7 @@ namespace LogicCircuit {
 			return null;
 		}
 
-		private Jam JamNear(Point point) {
+		private Jam? JamNear(Point point) {
 			GridPoint gridPoint = Symbol.GridPoint(point);
 			return Editor.IsPinClose(point, Symbol.ScreenPoint(gridPoint)) ? this.JamAt(gridPoint) : null;
 		}
@@ -368,8 +368,8 @@ namespace LogicCircuit {
 			}
 		}
 
-		private Wire CreateWire(GridPoint point1, GridPoint point2) {
-			Wire wire = null;
+		private Wire? CreateWire(GridPoint point1, GridPoint point2) {
+			Wire? wire = null;
 			if(point1 != point2) {
 				this.CircuitProject.InTransaction(() => wire = this.CircuitProject.WireSet.Create(this.Project.LogicalCircuit, point1, point2));
 			}
@@ -380,14 +380,14 @@ namespace LogicCircuit {
 			LogicalCircuit logicalCircuit = this.Project.LogicalCircuit;
 			Tracer.Assert(wire.LogicalCircuit == logicalCircuit);
 			if(wire.Point1 != point && wire.Point2 != point) {
-				Wire wire2 = null;
+				Wire? wire2 = null;
 				this.ClearSelection();
 				this.CircuitProject.InTransaction(() => {
 					wire2 = this.CircuitProject.WireSet.Create(logicalCircuit, point, wire.Point2);
 					wire.Point2 = point;
 				});
 				this.Select(wire);
-				this.Select(wire2);
+				this.Select(wire2!);
 				return true;
 			}
 			return false;
@@ -456,8 +456,8 @@ namespace LogicCircuit {
 			throw new InvalidOperationException();
 		}
 
-		private Marker FindMarker(Symbol symbol) {
-			if(this.selection.TryGetValue(symbol, out Marker marker)) {
+		private Marker? FindMarker(Symbol symbol) {
+			if(this.selection.TryGetValue(symbol, out Marker? marker)) {
 				return marker;
 			}
 			return null;
@@ -478,7 +478,7 @@ namespace LogicCircuit {
 
 		private Marker SelectSymbol(Symbol symbol) {
 			Tracer.Assert(symbol.LogicalCircuit == this.Project.LogicalCircuit);
-			Marker marker = this.FindMarker(symbol);
+			Marker? marker = this.FindMarker(symbol);
 			if(marker == null) {
 				marker = EditorDiagram.CreateMarker(symbol);
 				this.selection.Add(symbol, marker);
@@ -492,10 +492,10 @@ namespace LogicCircuit {
 		}
 
 		public void Unselect(Symbol symbol) {
-			Marker marker = this.FindMarker(symbol);
+			Marker? marker = this.FindMarker(symbol);
 			if(marker != null) {
 				this.selection.Remove(marker.Symbol);
-				this.selectionLayer.Children.Remove(marker.Glyph);
+				this.selectionLayer!.Children.Remove(marker.Glyph);
 			}
 		}
 
@@ -539,16 +539,16 @@ namespace LogicCircuit {
 		private void SelectConductor(Wire wire) {
 			Tracer.Assert(wire.LogicalCircuit == this.Project.LogicalCircuit);
 			ConductorMap map = this.Project.LogicalCircuit.ConductorMap();
-			if(map.TryGetValue(wire.Point1, out Conductor conductor)) {
-				this.Select(conductor.Wires);
+			if(map.TryGetValue(wire.Point1, out Conductor? conductor)) {
+				this.Select(conductor!.Wires);
 			}
 		}
 
 		private void UnselectConductor(Wire wire) {
 			Tracer.Assert(wire.LogicalCircuit == this.Project.LogicalCircuit);
 			ConductorMap map = this.Project.LogicalCircuit.ConductorMap();
-			if(map.TryGetValue(wire.Point1, out Conductor conductor)) {
-				foreach(Wire w in conductor.Wires) {
+			if(map.TryGetValue(wire.Point1, out Conductor? conductor)) {
+				foreach(Wire w in conductor!.Wires) {
 					this.Unselect(w);
 				}
 			}
@@ -558,7 +558,7 @@ namespace LogicCircuit {
 
 		private void StartMove(Marker marker, Point startPoint, string tip) {
 			Tracer.Assert(this.movingMarker == null);
-			Tracer.Assert(marker != null);
+			Tracer.Assert(marker);
 			Mouse.Capture(this.Diagram, CaptureMode.Element);
 			this.movingMarker = marker;
 			this.moveStart = startPoint;
@@ -585,12 +585,14 @@ namespace LogicCircuit {
 		}
 
 		private void MoveSelection(Point point) {
+			Debug.Assert(this.moveVector != null);
 			this.moveVector.X = point.X - this.moveStart.X;
 			this.moveVector.Y = point.Y - this.moveStart.Y;
 		}
 
 		protected void CancelMove() {
 			if(this.movingMarker != null) {
+				Debug.Assert(this.selectionLayer != null && this.moveVector != null);
 				Mouse.Capture(null);
 				this.movingMarker.CancelMove(this.selectionLayer);
 				this.movingMarker = null;
@@ -614,6 +616,7 @@ namespace LogicCircuit {
 		}
 
 		private void FinishMove(Point position, bool withWires) {
+			Debug.Assert(this.movingMarker != null);
 			Marker marker = this.movingMarker;
 			this.CancelMove();
 			marker.Commit(this, new Point(Math.Max(this.maxMove.X, position.X), Math.Max(this.maxMove.Y, position.Y)), withWires);
@@ -623,7 +626,7 @@ namespace LogicCircuit {
 			int dx = Symbol.GridPoint(point.X - this.moveStart.X);
 			int dy = Symbol.GridPoint(point.Y - this.moveStart.Y);
 			if(dx != 0 || dy != 0) {
-				HashSet<GridPoint> movedPoints = null;
+				HashSet<GridPoint>? movedPoints = null;
 				if(withWires) {
 					movedPoints = new HashSet<GridPoint>();
 					foreach(Marker marker in this.selection.Values) {
@@ -646,6 +649,7 @@ namespace LogicCircuit {
 						marker.Refresh();
 					}
 					if(withWires) {
+						Debug.Assert(movedPoints != null);
 						foreach(Wire wire in this.Project.LogicalCircuit.Wires()) {
 							if(!this.selection.ContainsKey(wire)) {
 								if(movedPoints.Contains(wire.Point1)) {
@@ -767,25 +771,25 @@ namespace LogicCircuit {
 		private void Rotate(IRotatable symbol, bool withWires, Action<IRotatable> rotation) {
 			Tracer.Assert(((Symbol)symbol).LogicalCircuit == this.Project.LogicalCircuit);
 			this.ClearSelection();
-			CircuitSymbol circuitSymbol = symbol as CircuitSymbol;
+			CircuitSymbol? circuitSymbol = symbol as CircuitSymbol;
 			if(circuitSymbol == null) {
 				withWires = false;
 			}
-			Dictionary<GridPoint, int> oldPoints = null;
+			Dictionary<GridPoint, int>? oldPoints = null;
 			if(withWires) {
 				oldPoints = new Dictionary<GridPoint, int>();
 				int i = 0;
-				foreach(Jam jam in circuitSymbol.Jams()) {
+				foreach(Jam jam in circuitSymbol!.Jams()) {
 					oldPoints.Add(jam.AbsolutePoint, i++);
 				}
 			}
 			this.CircuitProject.InTransaction(() => {
 				rotation(symbol);
 				if(withWires) {
-					List<GridPoint> newPoints = new List<GridPoint>(circuitSymbol.Jams().Select(j => j.AbsolutePoint));
+					List<GridPoint> newPoints = new List<GridPoint>(circuitSymbol!.Jams().Select(j => j.AbsolutePoint));
 					foreach(Wire wire in this.Project.LogicalCircuit.Wires()) {
 						int index;
-						if(oldPoints.TryGetValue(wire.Point1, out index)) {
+						if(oldPoints!.TryGetValue(wire.Point1, out index)) {
 							wire.Point1 = newPoints[index];
 							wire.PositionGlyph();
 						}
@@ -860,14 +864,14 @@ namespace LogicCircuit {
 			e.Handled = true;
 		}
 
-		private WirePointMarker FindPointMarkerNear(Point point) {
+		private WirePointMarker? FindPointMarkerNear(Point point) {
 			if(0 < this.SelectionCount) {
 				Rect clickArea = EditorDiagram.ClickArea(point);
 				foreach(Symbol other in this.SelectedSymbols) {
 					if(other is Wire otherWire) {
-						WireMarker wireMarker = this.FindMarker(otherWire) as WireMarker;
-						Tracer.Assert(wireMarker != null);
-						if(clickArea.Contains(Symbol.ScreenPoint(wireMarker.Point1.WirePoint()))) {
+						WireMarker? wireMarker = this.FindMarker(otherWire) as WireMarker;
+						Tracer.Assert(wireMarker);
+						if(clickArea.Contains(Symbol.ScreenPoint(wireMarker!.Point1.WirePoint()))) {
 							return wireMarker.Point1;
 						} else if(clickArea.Contains(Symbol.ScreenPoint(wireMarker.Point2.WirePoint()))) {
 							return wireMarker.Point2;
@@ -880,21 +884,21 @@ namespace LogicCircuit {
 
 		[SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
 		public void DiagramMouseDown(MouseButtonEventArgs e) {
-			FrameworkElement element = e.OriginalSource as FrameworkElement;
+			FrameworkElement? element = e.OriginalSource as FrameworkElement;
 			if(element == null) {
-				FrameworkContentElement content = e.OriginalSource as FrameworkContentElement;
+				FrameworkContentElement? content = e.OriginalSource as FrameworkContentElement;
 				Tracer.Assert(content != null);
 				while(element == null && content != null) {
 					element = content.Parent as FrameworkElement;
 					content = content.Parent as FrameworkContentElement;
 				}
 			}
-			Tracer.Assert(element != null);
-			Marker marker = null;
-			Symbol symbol = null;
-			Jam jam = null;
+			Tracer.Assert(element);
+			Marker? marker = null;
+			Symbol? symbol = null;
+			Jam? jam = null;
 			if(element != this.Diagram) { // something on the diagram was clicked
-				marker = element.DataContext as Marker;
+				marker = element!.DataContext as Marker;
 				if(marker == null && this.SelectionCount == 1 && Keyboard.Modifiers == ModifierKeys.Alt) {
 					// Support a special case when user splitting wire and Alt-clicking its marker and missing just a bit pointing to other nearby wire
 					// ignore this click and assume user meant to click to marker
@@ -909,7 +913,7 @@ namespace LogicCircuit {
 					if(jam == null) {
 						symbol = element.DataContext as Symbol;
 						if(symbol == null) {
-							FrameworkElement root = element;
+							FrameworkElement? root = element;
 							while(root != null && !(root.DataContext is Symbol)) {
 								root = (root.Parent ?? root.TemplatedParent) as FrameworkElement;
 							}
@@ -946,7 +950,7 @@ namespace LogicCircuit {
 				}
 			} else { // click on the empty space of the diagram
 				Point point = e.GetPosition(this.Diagram);
-				Wire wire = null;
+				Wire? wire = null;
 				if(this.SelectionCount == 1 && Keyboard.Modifiers == ModifierKeys.Alt) {
 					wire = this.Selection().FirstOrDefault() as Wire;
 					if(wire != null && !Symbol.Intersected(Symbol.ScreenPoint(wire.Point1), Symbol.ScreenPoint(wire.Point2), EditorDiagram.ClickArea(point))) {
@@ -1062,10 +1066,10 @@ namespace LogicCircuit {
 					} else if(Keyboard.Modifiers == ModifierKeys.Shift) {
 						this.ClearSelection();
 						this.SelectConductor(wire);
-						this.StartMove(this.FindMarker(wire), e.GetPosition(this.Diagram));
+						this.StartMove(this.FindMarker(wire)!, e.GetPosition(this.Diagram));
 					} else if(Keyboard.Modifiers == (ModifierKeys.Shift | ModifierKeys.Control)) {
 						this.SelectConductor(wire);
-						this.StartMove(this.FindMarker(wire), e.GetPosition(this.Diagram));
+						this.StartMove(this.FindMarker(wire)!, e.GetPosition(this.Diagram));
 					} else {
 						Point point = e.GetPosition(this.Diagram);
 						if(Editor.IsPinClose(point, Symbol.ScreenPoint(wire.Point1)) || Editor.IsPinClose(point, Symbol.ScreenPoint(wire.Point2))) {
@@ -1113,7 +1117,7 @@ namespace LogicCircuit {
 				if(Keyboard.Modifiers == ModifierKeys.Shift) {
 					this.ClearSelection();
 					this.SelectConductor(wire);
-					this.StartMove(this.FindMarker(wire), e.GetPosition(this.Diagram));
+					this.StartMove(this.FindMarker(wire)!, e.GetPosition(this.Diagram));
 					return;
 				} else if(Keyboard.Modifiers == (ModifierKeys.Shift | ModifierKeys.Control)) {
 					this.UnselectConductor(wire);
@@ -1129,7 +1133,7 @@ namespace LogicCircuit {
 				if(Keyboard.Modifiers == ModifierKeys.Shift) {
 					this.ClearSelection();
 					this.SelectConductor(wire);
-					this.StartMove(this.FindMarker(wire), e.GetPosition(this.Diagram));
+					this.StartMove(this.FindMarker(wire)!, e.GetPosition(this.Diagram));
 					return;
 				} else if(Keyboard.Modifiers == (ModifierKeys.Shift | ModifierKeys.Control)) {
 					this.UnselectConductor(wire);

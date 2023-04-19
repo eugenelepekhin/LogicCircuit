@@ -1,6 +1,5 @@
-﻿using System;
-using System.Diagnostics;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Diagnostics;
+using Microsoft.VisualStudio.TestTools.UnitTesting.STAExtensions;
 
 namespace LogicCircuit.UnitTest {
 	/// <summary>
@@ -18,7 +17,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test of Digital Clock circuit
 		/// </summary>
-		[TestMethod()]
+		[STATestMethod]
 		public void CircuitDigitalClockTest() {
 			ClockSocket clock = new ClockSocket(new ProjectTester(this.TestContext, Properties.Resources.Digital_Clock, "Unit Test"));
 			TimeSpan timeSpan = TimeSpan.Zero;

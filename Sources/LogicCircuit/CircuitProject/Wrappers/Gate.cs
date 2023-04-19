@@ -13,7 +13,7 @@ namespace LogicCircuit {
 	// Defines the shape of the table Gate
 	internal partial struct GateData {
 		public Guid GateId;
-		internal Gate Gate;
+		internal Gate? Gate;
 		// Field accessors
 		// Accessor of the GateId field
 		public sealed class GateIdField : IField<GateData, Guid> {
@@ -43,9 +43,9 @@ namespace LogicCircuit {
 			private GateField() {}
 			public string Name { get { return "GateWrapper"; } }
 			public int Order { get; set; }
-			public Gate DefaultValue { get { return null; } }
+			public Gate DefaultValue { get { return null!; } }
 			public Gate GetValue(ref GateData record) {
-				return record.Gate;
+				return record.Gate!;
 			}
 			public void SetValue(ref GateData record, Gate value) {
 				record.Gate = value;
@@ -53,7 +53,7 @@ namespace LogicCircuit {
 			public int Compare(ref GateData l, ref GateData r) {
 				return this.Compare(l.Gate, r.Gate);
 			}
-			public int Compare(Gate l, Gate r) {
+			public int Compare(Gate? l, Gate? r) {
 				if(object.ReferenceEquals(l, r)) return 0;
 				if(l == null) return -1;
 				if(r == null) return 1;
@@ -77,7 +77,8 @@ namespace LogicCircuit {
 
 		// Creates all foreign keys of the table
 		public static void CreateForeignKeys(StoreSnapshot store) {
-			TableSnapshot<GateData> table = (TableSnapshot<GateData>)store.Table("Gate");
+			TableSnapshot<GateData>? table = (TableSnapshot<GateData>?)store.Table("Gate");
+			Debug.Assert(table != null);
 			table.CreateForeignKey("PK_Gate", store.Table("Circuit"), GateData.GateIdField.Field, ForeignKeyAction.Cascade, false);
 		}
 	}
@@ -89,6 +90,7 @@ namespace LogicCircuit {
 		internal RowId GateRowId { get; private set; }
 
 		// Constructor
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public Gate(CircuitProject store, RowId rowIdGate, RowId rowIdCircuit) : base(store, rowIdCircuit) {
 			Debug.Assert(!rowIdGate.IsEmpty);
 			this.GateRowId = rowIdGate;
@@ -96,6 +98,7 @@ namespace LogicCircuit {
 			this.Table.SetField(this.GateRowId, GateData.GateField.Field, this);
 			this.InitializeGate();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		partial void InitializeGate();
 
@@ -130,7 +133,7 @@ namespace LogicCircuit {
 	// Wrapper for table Gate.
 	partial class GateSet : INotifyCollectionChanged, IEnumerable<Gate> {
 
-		public event NotifyCollectionChangedEventHandler CollectionChanged;
+		public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
 		internal TableSnapshot<GateData> Table { get; private set; }
 
@@ -138,8 +141,9 @@ namespace LogicCircuit {
 		public CircuitProject CircuitProject { get { return (CircuitProject)this.Table.StoreSnapshot; } }
 
 		// Constructor
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public GateSet(CircuitProject store) {
-			ITableSnapshot table = store.Table("Gate");
+			ITableSnapshot? table = store.Table("Gate");
 			if(table != null) {
 				Debug.Assert(store.IsFrozen, "The store should be frozen");
 				this.Table = (TableSnapshot<GateData>)table;
@@ -149,6 +153,7 @@ namespace LogicCircuit {
 			}
 			this.InitializeGateSet();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		partial void InitializeGateSet();
 
@@ -160,7 +165,7 @@ namespace LogicCircuit {
 
 
 		// gets items wrapper by RowId
-		public Gate Find(RowId rowId) {
+		public Gate? Find(RowId rowId) {
 			if(!rowId.IsEmpty) {
 				return this.Table.GetField(rowId, GateData.GateField.Field);
 			}
@@ -171,13 +176,14 @@ namespace LogicCircuit {
 		// gets items wrapper by RowId
 		private IEnumerable<Gate> Select(IEnumerable<RowId> rows) {
 			foreach(RowId rowId in rows) {
-				Gate item = this.Find(rowId);
+				Gate? item = this.Find(rowId);
 				Debug.Assert(item != null, "What is the reason for the item not to be found?");
 				yield return item;
 			}
 		}
 
 		// Create wrapper for the row and register it in the dictionary
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static")]
 		private Gate Create(RowId rowId, RowId CircuitRowId) {
 			Gate item = new Gate(this.CircuitProject, rowId, CircuitRowId);
 			return item;
@@ -186,7 +192,7 @@ namespace LogicCircuit {
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		internal Gate FindOrCreate(RowId rowId) {
 			Debug.Assert(!rowId.IsEmpty && !this.Table.IsDeleted(rowId), "Bad RowId");
-			Gate item;
+			Gate? item;
 			if((item = this.Find(rowId)) != null) {
 				Debug.Assert(!item.IsDeleted(), "Deleted item should not be present in the dictionary");
 				return item;
@@ -194,7 +200,8 @@ namespace LogicCircuit {
 			Guid primaryKeyValue = this.Table.GetField(rowId, GateData.GateIdField.Field);
 
 
-			TableSnapshot<CircuitData> tableCircuit = (TableSnapshot<CircuitData>)this.CircuitProject.Table("Circuit");
+			TableSnapshot<CircuitData>? tableCircuit = (TableSnapshot<CircuitData>?)this.CircuitProject.Table("Circuit");
+			Debug.Assert(tableCircuit != null);
 			return this.Create(rowId, tableCircuit.Find(CircuitData.CircuitIdField.Field, primaryKeyValue));
 		}
 
@@ -205,7 +212,8 @@ namespace LogicCircuit {
 			// Fields of Circuit table
 
 		) {
-			TableSnapshot<CircuitData> tableCircuit = (TableSnapshot<CircuitData>)this.CircuitProject.Table("Circuit");
+			TableSnapshot<CircuitData>? tableCircuit = (TableSnapshot<CircuitData>?)this.CircuitProject.Table("Circuit");
+			Debug.Assert(tableCircuit != null);
 			CircuitData dataCircuit = new CircuitData() {
 				CircuitId = GateId
 			};
@@ -220,7 +228,7 @@ namespace LogicCircuit {
 		// Search helpers
 
 		// Finds Gate by GateId
-		public Gate FindByGateId(Guid gateId) {
+		public Gate? FindByGateId(Guid gateId) {
 			return this.Find(this.Table.Find(GateData.GateIdField.Field, gateId));
 		}
 
@@ -233,17 +241,17 @@ namespace LogicCircuit {
 		}
 
 		private void NotifyCollectionChanged(NotifyCollectionChangedEventArgs arg) {
-			NotifyCollectionChangedEventHandler handler = this.CollectionChanged;
+			NotifyCollectionChangedEventHandler? handler = this.CollectionChanged;
 			if(handler != null) {
 				handler(this, arg);
 			}
 		}
 
-		internal List<Gate> UpdateSet(int oldVersion, int newVersion) {
-			IEnumerator<TableChange<GateData>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
+		internal List<Gate>? UpdateSet(int oldVersion, int newVersion) {
+			IEnumerator<TableChange<GateData>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
 			if(change != null) {
 				bool handlerAttached = (this.CollectionChanged != null);
-				List<Gate> del = (handlerAttached) ? new List<Gate>() : null;
+				List<Gate>? del = (handlerAttached) ? new List<Gate>() : null;
 				while(change.MoveNext()) {
 					switch(change.Current.Action) {
 					case SnapTableAction.Insert:
@@ -254,7 +262,7 @@ namespace LogicCircuit {
 						if(handlerAttached) {
 							Gate item = change.Current.GetOldField(GateData.GateField.Field);
 							Debug.Assert(item.IsDeleted());
-							del.Add(item);
+							del!.Add(item);
 						}
 						break;
 					default:
@@ -269,11 +277,11 @@ namespace LogicCircuit {
 			return null;
 		}
 
-		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<Gate> deleted) {
-			IEnumerator<TableChange<GateData>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
+		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<Gate>? deleted) {
+			IEnumerator<TableChange<GateData>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
 			if(change != null) {
 				bool handlerAttached = (this.CollectionChanged != null);
-				List<Gate> add = (handlerAttached) ? new List<Gate>() : null;
+				List<Gate>? add = (handlerAttached) ? new List<Gate>() : null;
 				this.StartNotifyGateSetChanged(oldVersion, newVersion);
 				while(change.MoveNext()) {
 					this.NotifyGateSetChanged(change.Current);
@@ -281,7 +289,7 @@ namespace LogicCircuit {
 					case SnapTableAction.Insert:
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item was not created?");
 						if(handlerAttached) {
-							add.Add(this.Find(change.Current.RowId));
+							add!.Add(this.Find(change.Current.RowId)!);
 						}
 						break;
 					case SnapTableAction.Delete:
@@ -290,7 +298,7 @@ namespace LogicCircuit {
 					default:
 						Debug.Assert(change.Current.Action == SnapTableAction.Update, "Unknown action");
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item does not exist during update?");
-						this.Find(change.Current.RowId).NotifyChanged(change.Current);
+						this.Find(change.Current.RowId)!.NotifyChanged(change.Current);
 						break;
 					}
 				}
@@ -299,7 +307,7 @@ namespace LogicCircuit {
 					if(deleted != null && 0 < deleted.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, deleted));
 					}
-					if(0 < add.Count) {
+					if(0 < add!.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, add));
 					}
 				}

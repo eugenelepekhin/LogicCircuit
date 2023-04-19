@@ -15,7 +15,7 @@ namespace LogicCircuit {
 		}
 
 		public void SetCollapsed(string name, bool value) {
-			CollapsedCategory collapsed = this.Find(name);
+			CollapsedCategory? collapsed = this.Find(name);
 			if(value && collapsed == null) {
 				this.CircuitProject.InOmitTransaction(() => this.CreateItem(name));
 			} else if(!value && collapsed != null) {

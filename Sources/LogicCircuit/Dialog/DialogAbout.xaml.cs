@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
+using System.Net.Http;
 using System.Reflection;
 using System.Threading;
 using System.Windows;
@@ -12,7 +13,6 @@ namespace LogicCircuit {
 	/// Interaction logic for DialogAbout.xaml
 	/// </summary>
 	public partial class DialogAbout : Window {
-		private VersionChecker versionChecker = new VersionChecker();
 		public Version Version { get; set; }
 
 		[SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
@@ -29,16 +29,15 @@ namespace LogicCircuit {
 
 		private void CheckVersionButtonClick(object sender, RoutedEventArgs e) {
 			try {
-				if(this.versionChecker.Check((version, error) => this.DownloadCompleted(version, error))) {
-					this.Cursor = Cursors.Wait;
-				}
+				this.Cursor = Cursors.Wait;
+				VersionChecker.Check((version, error) => App.Dispatch(() => this.DownloadCompleted(version, error)));
 			} catch(Exception exception) {
 				App.Mainframe.ReportException(exception);
 				this.Cursor = Cursors.Arrow;
 			}
 		}
 
-		private void DownloadCompleted(Version version, Exception error) {
+		private void DownloadCompleted(Version? version, Exception? error) {
 			try {
 				this.Cursor = Cursors.Arrow;
 				if(error != null) {
@@ -52,7 +51,7 @@ namespace LogicCircuit {
 					} else {
 						this.previewVersion.Visibility = Visibility.Visible;
 					}
-					this.checkVersion.Visibility = Visibility.Hidden;
+					this.checkVersionButton.Visibility = Visibility.Hidden;
 				}
 			} catch(Exception exception) {
 				App.Mainframe.ReportException(exception);
@@ -60,7 +59,7 @@ namespace LogicCircuit {
 		}
 
 		private static Version CurrentVersion() {
-			return Assembly.GetExecutingAssembly().GetName().Version;
+			return Assembly.GetExecutingAssembly().GetName().Version!;
 		}
 
 		private static DateTime ReleaseDate(Version version) {
@@ -76,8 +75,7 @@ namespace LogicCircuit {
 		public static void CheckVersion(Dispatcher dispatcher) {
 			try {
 				if(VersionChecker.NeedToCheck()) {
-					VersionChecker checker = new VersionChecker();
-					checker.Check((version, error) => {
+					VersionChecker.Check((version, error) => {
 						if(error == null && version != null && DialogAbout.CurrentVersion() < version) {
 							dispatcher.BeginInvoke(
 								new Action(() => DialogAbout.ShowNewVersionAvailable(version)),
@@ -97,20 +95,19 @@ namespace LogicCircuit {
 		/// </summary>
 		/// <param name="dispatcher"></param>
 		/// <param name="recheck"></param>
-		[SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "LogicCircuit.Mainframe.InformationMessage(System.String)")]
-		[SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "NavigateUri")]
+		//[SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "LogicCircuit.Mainframe.InformationMessage(System.String)")]
+		//[SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "NavigateUri")]
 		public static void CheckTranslationRequests(Dispatcher dispatcher) {
 			try {
 				string cultureName = App.CurrentCulture.Name;
 				if(!cultureName.StartsWith("en", StringComparison.OrdinalIgnoreCase)) {
 					SettingsStringCache checkedVersion = DialogAbout.TranslationRequestVersion();
-					if(!Version.TryParse(checkedVersion.Value, out Version version) || version < DialogAbout.CurrentVersion()) {
-						string text = null;
-						using(WebClient client = new WebClient()) {
-							client.UseDefaultCredentials = true;
-							text = client.DownloadString(new Uri("https://www.LogicCircuit.org/TranslationRequests.txt"));
+					if(!Version.TryParse(checkedVersion.Value, out Version? version) || version < DialogAbout.CurrentVersion()) {
+						string? text = null;
+						using(HttpClient client = new HttpClient()) {
+							text = client.GetStringAsync(new Uri("https://www.LogicCircuit.org/TranslationRequests.txt")).Result;
 						}
-						if(!string.IsNullOrWhiteSpace(text) && text.Contains(cultureName)) {
+						if(!string.IsNullOrWhiteSpace(text) && text.Contains(cultureName, StringComparison.OrdinalIgnoreCase)) {
 							dispatcher.BeginInvoke(
 								new Action(() => App.Mainframe.InformationMessage(
 									"If you can help translating this program to any language you are fluent in please contact me at:\n" +
@@ -130,7 +127,7 @@ namespace LogicCircuit {
 
 		public static void ResetTranslationRequestVersion() {
 			SettingsStringCache checkedVersion = DialogAbout.TranslationRequestVersion();
-			checkedVersion.Value = null;
+			checkedVersion.Value = null!;
 		}
 
 		private static SettingsStringCache TranslationRequestVersion() {
@@ -143,11 +140,9 @@ namespace LogicCircuit {
 			App.Mainframe.ShowDialog(dialog);
 		}
 
-		private class VersionChecker {
-			private static SettingsDateTimeCache lastCheckedCache;
-			private static SettingsBoolCache checkVersionPeriodicallyCache;
-			private WebClient webClient;
-			private Action<Version, Exception> onComplete;
+		private static class VersionChecker {
+			private static SettingsDateTimeCache? lastCheckedCache;
+			private static SettingsBoolCache? checkVersionPeriodicallyCache;
 
 			private static SettingsDateTimeCache LastCheckedCache {
 				get {
@@ -159,7 +154,7 @@ namespace LogicCircuit {
 						Interlocked.CompareExchange(ref VersionChecker.lastCheckedCache, cache, null);
 						Tracer.Assert(VersionChecker.lastCheckedCache != null);
 					}
-					return VersionChecker.lastCheckedCache;
+					return VersionChecker.lastCheckedCache!;
 				}
 			}
 
@@ -170,12 +165,12 @@ namespace LogicCircuit {
 						Interlocked.CompareExchange(ref VersionChecker.checkVersionPeriodicallyCache, cache, null);
 						Tracer.Assert(VersionChecker.checkVersionPeriodicallyCache != null);
 					}
-					return VersionChecker.checkVersionPeriodicallyCache.Value;
+					return VersionChecker.checkVersionPeriodicallyCache!.Value;
 				}
 				set {
 					if(VersionChecker.CheckVersionPeriodically != value) {
 						Tracer.Assert(VersionChecker.checkVersionPeriodicallyCache != null);
-						VersionChecker.checkVersionPeriodicallyCache.Value = value;
+						VersionChecker.checkVersionPeriodicallyCache!.Value = value;
 					}
 				}
 			}
@@ -184,40 +179,24 @@ namespace LogicCircuit {
 				return VersionChecker.CheckVersionPeriodically && VersionChecker.LastCheckedCache.Value.AddMonths(1) < DateTime.UtcNow;
 			}
 
-			[SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
-			public bool Check(Action<Version, Exception> completeAction) {
-				if(completeAction == null) {
-					throw new ArgumentNullException(nameof(completeAction));
-				}
-				if(Interlocked.CompareExchange(ref this.webClient, new WebClient(), null) == null) {
-					this.onComplete = completeAction;
-					this.webClient.UseDefaultCredentials = true;
-					this.webClient.DownloadStringCompleted += this.DownloadCompleted;
-					this.webClient.DownloadStringAsync(new Uri("https://www.LogicCircuit.org/LatestVersion.txt"));
-					return true;
-				}
-				return false;
-			}
-
-			private static Version ParseVersion(string text) {
-				if(!string.IsNullOrWhiteSpace(text)) {
-					if(Version.TryParse(text, out Version version)) {
-						return version;
+			public static void Check(Action<Version?, Exception?> completeAction) {
+				async void run() {
+					Version? version = null;
+					Exception? exception = null;
+					try {
+						using HttpClient client = new HttpClient();
+						string text = await client.GetStringAsync(new Uri("https://www.LogicCircuit.org/LatestVersion.txt")).ConfigureAwait(false);
+						if(!string.IsNullOrWhiteSpace(text)) {
+							if(Version.TryParse(text, out Version? v)) {
+								version = v;
+							}
+						}
+					} catch(Exception ex) {
+						exception = ex;
 					}
+					completeAction(version, exception);
 				}
-				return null;
-			}
-
-			private void DownloadCompleted(object sender, DownloadStringCompletedEventArgs e) {
-				this.webClient.Dispose();
-				this.webClient = null;
-				this.onComplete(
-					(e.Error == null) ? VersionChecker.ParseVersion(e.Result?.Trim()) : null,
-					e.Error
-				);
-				if(e.Error == null && VersionChecker.LastCheckedCache.Value < DateTime.UtcNow) {
-					VersionChecker.LastCheckedCache.Value = DateTime.UtcNow;
-				}
+				run();
 			}
 		}
 	}

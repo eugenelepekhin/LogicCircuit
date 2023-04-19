@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting.STAExtensions;
 
 namespace LogicCircuit.UnitTest {
 	/// <summary>
 	/// This is a test class for CircuitTestSocket and is intended
 	/// to contain all CircuitTestSocket Unit Tests
 	/// </summary>
-	[TestClass()]
+	[STATestClass]
 	public class CircuitTestSocketTest {
 		/// <summary>
 		/// Gets or sets the test context which provides
@@ -75,7 +72,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test for BuildTruthTable in single threaded case.
 		/// </summary>
-		[TestMethod()]
+		[STATestMethod]
 		public void CircuitTestSocketBuildTruthTable1Test() {
 			ProjectTester.SwitchTo(this.CircuitProject, "1 Bit Wire");
 			CircuitTestSocket s1 = new CircuitTestSocket(this.CircuitProject.ProjectSet.Project.LogicalCircuit);
@@ -111,7 +108,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test for BuildTruthTable in single threaded case.
 		/// </summary>
-		[TestMethod()]
+		[STATestMethod]
 		public void CircuitTestSocketBuildTruthTable2Test() {
 			ProjectTester.SwitchTo(this.CircuitProject, "1 bit 2 entry AND");
 			CircuitTestSocket s1 = new CircuitTestSocket(this.CircuitProject.ProjectSet.Project.LogicalCircuit);
@@ -149,7 +146,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test for BuildTruthTable in single threaded case.
 		/// </summary>
-		[TestMethod()]
+		[STATestMethod]
 		public void CircuitTestSocketBuildTruthTable3Test() {
 			ProjectTester.SwitchTo(this.CircuitProject, "1 bit full adder");
 			CircuitTestSocket s1 = new CircuitTestSocket(this.CircuitProject.ProjectSet.Project.LogicalCircuit);
@@ -186,7 +183,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test for BuildTruthTable in multi threaded case.
 		/// </summary>
-		[TestMethod()]
+		[STATestMethod]
 		public void CircuitTestSocketBuildTruthTable4Test() {
 			ProjectTester.SwitchTo(this.CircuitProject, "8 bit adder");
 			CircuitTestSocket s1 = new CircuitTestSocket(this.CircuitProject.ProjectSet.Project.LogicalCircuit);
@@ -223,7 +220,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test for BuildTruthTable in multi threaded case with truncation.
 		/// </summary>
-		[TestMethod()]
+		[STATestMethod]
 		public void CircuitTestSocketBuildTruthTable5Test() {
 			ProjectTester.SwitchTo(this.CircuitProject, "8 bit adder");
 			CircuitTestSocket s1 = new CircuitTestSocket(this.CircuitProject.ProjectSet.Project.LogicalCircuit);

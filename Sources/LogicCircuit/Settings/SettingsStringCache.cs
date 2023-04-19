@@ -4,7 +4,7 @@ namespace LogicCircuit {
 	internal class SettingsStringCache {
 		private readonly Settings settings;
 		private readonly string key;
-		private readonly string[] constraint;
+		private readonly string[]? constraint;
 		private readonly string defaultValue;
 
 		private string cache;
@@ -22,19 +22,19 @@ namespace LogicCircuit {
 		public SettingsStringCache(
 			Settings settings,
 			string key,
-			string defaultValue,
+			string? defaultValue,
 			params string[] constraint
 		) {
 			this.settings = settings;
 			this.key = key;
-			this.constraint = (constraint == null || constraint.Length == 0) ? null : constraint;
+			this.constraint = (constraint.Length == 0) ? null : constraint;
 			this.defaultValue = string.Empty;
 			this.defaultValue = this.Normalize(defaultValue);
 			this.cache = this.Normalize(this.settings[this.key]);
 		}
 
-		private string Normalize(string value) {
-			string text = string.IsNullOrEmpty(value) ? null : value.Trim();
+		private string Normalize(string? value) {
+			string? text = string.IsNullOrEmpty(value) ? null : value.Trim();
 			if(this.constraint != null) {
 				if(Array.IndexOf(this.constraint, text) < 0) {
 					text = null;

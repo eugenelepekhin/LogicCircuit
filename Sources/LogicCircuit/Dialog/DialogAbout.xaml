@@ -36,13 +36,13 @@
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 
-		<Grid Grid.Row="0">
+		<Grid Grid.Row="0" Background="Transparent">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="Auto"/>
 				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
 
-			<Image Grid.Column="0" Name="image" Margin="32,20,16,20" Source="..\Properties\LogicCircuit.png"/>
+			<Image Grid.Column="0" Name="image" Margin="32,20,16,20" Source="..\Properties\LogicCircuit.png" MinHeight="20"/>
 
 			<Grid Grid.Column="1" MaxHeight="{Binding ElementName=image, Path=ActualHeight}" VerticalAlignment="Center">
 				<Grid.RowDefinitions>
@@ -120,7 +120,7 @@
 
 		<CheckBox Grid.Row="3" Content="{x:Static properties:Resources.TitleCheckVersionPeriodically}" IsChecked="{Binding Path=CheckVersionPeriodically}"/>
 
-		<Grid Grid.Row="4">
+		<Grid Grid.Row="4" Background="Transparent">
 			<Grid.Resources>
 				<Style TargetType="TextBlock" BasedOn="{StaticResource BigText}">
 					<Setter Property="HorizontalAlignment" Value="Center"/>
@@ -137,7 +137,7 @@
 				</TextBlock>
 			</StackPanel>
 			<TextBlock Name="previewVersion" Text="{x:Static properties:Resources.MessageVersionPreview}" Visibility="Hidden"/>
-			<Button Name="checkVersion" Content="{x:Static properties:Resources.TitleCheckVersion}" Click="CheckVersionButtonClick" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+			<Button Name="checkVersionButton" Content="{x:Static properties:Resources.TitleCheckVersion}" Click="CheckVersionButtonClick" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 		</Grid>
 
 		<Button Grid.Row="5" Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" IsCancel="True" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>

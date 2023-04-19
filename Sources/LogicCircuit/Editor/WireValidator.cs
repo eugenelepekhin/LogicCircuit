@@ -6,16 +6,16 @@ using System.Threading;
 
 namespace LogicCircuit {
 	internal class WireValidator {
-		private static Thread thread;
-		private static AutoResetEvent updateRequest;
-		private static WireValidator wireValidator;
+		private static Thread? thread;
+		private static AutoResetEvent? updateRequest;
+		private static WireValidator? wireValidator;
 
 		private bool running;
 		private bool stopPending;
 
 		private readonly HashSet<Wire> badWires = new HashSet<Wire>();
 		private readonly EditorDiagram diagram;
-		private LogicalCircuit logicalCircuit;
+		private LogicalCircuit? logicalCircuit;
 		private int version;
 
 		public WireValidator(EditorDiagram diagram) {
@@ -34,12 +34,12 @@ namespace LogicCircuit {
 			WireValidator.wireValidator = this;
 		}
 
-		private HashSet<Wire> Bad(LogicalCircuit current) {
+		private HashSet<Wire>? Bad(LogicalCircuit current) {
 			Dictionary<GridPoint, List<Jam>> jams = new Dictionary<GridPoint, List<Jam>>();
 
 			IEnumerable<Jam> connected(Conductor conductor) {
 				IEnumerable<Jam> at(GridPoint point) {
-					List<Jam> list;
+					List<Jam>? list;
 					if(jams.TryGetValue(point, out list)) {
 						return list;
 					}
@@ -54,7 +54,7 @@ namespace LogicCircuit {
 					foreach(Jam jam in symbol.Jams()) {
 						if(this.stopPending) return null;
 						GridPoint point = jam.AbsolutePoint;
-						List<Jam> list;
+						List<Jam>? list;
 						if(!jams.TryGetValue(point, out list)) {
 							list = new List<Jam>(1);
 							jams.Add(point, list);
@@ -88,7 +88,7 @@ namespace LogicCircuit {
 				LogicalCircuit current = this.diagram.CircuitProject.ProjectSet.Project.LogicalCircuit;
 				int currentVersion = this.diagram.CircuitProject.Version;
 
-				HashSet<Wire> bad = this.Bad(current);
+				HashSet<Wire>? bad = this.Bad(current);
 				void redraw() {
 					List<Wire> list = this.badWires.Except(bad).ToList();
 					foreach(Wire wire in list.Where(w => !w.IsDeleted())) {
@@ -121,6 +121,7 @@ namespace LogicCircuit {
 		}
 
 		private static void Run() {
+			Debug.Assert(WireValidator.updateRequest != null && WireValidator.wireValidator != null);
 			try {
 				for(;;) {
 					WireValidator.updateRequest.WaitOne();
@@ -133,6 +134,7 @@ namespace LogicCircuit {
 
 		public void Update() {
 			if(this.diagram.InEditMode && this.version != this.diagram.CircuitProject.Version) {
+				Debug.Assert(WireValidator.updateRequest != null);
 				if(this.running) {
 					this.stopPending = true;
 				}

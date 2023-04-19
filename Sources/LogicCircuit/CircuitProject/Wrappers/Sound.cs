@@ -16,7 +16,7 @@ namespace LogicCircuit {
 		public PinSide PinSide;
 		public string Notation;
 		public string Note;
-		internal Sound Sound;
+		internal Sound? Sound;
 		// Field accessors
 		// Accessor of the SoundId field
 		public sealed class SoundIdField : IField<SoundData, Guid>, IFieldSerializer<SoundData> {
@@ -104,7 +104,7 @@ namespace LogicCircuit {
 			public int Compare(ref SoundData l, ref SoundData r) {
 				return StringComparer.Ordinal.Compare(l.Notation, r.Notation);
 			}
-			public int Compare(string l, string r) {
+			public int Compare(string? l, string? r) {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
@@ -139,7 +139,7 @@ namespace LogicCircuit {
 			public int Compare(ref SoundData l, ref SoundData r) {
 				return StringComparer.Ordinal.Compare(l.Note, r.Note);
 			}
-			public int Compare(string l, string r) {
+			public int Compare(string? l, string? r) {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
@@ -165,9 +165,9 @@ namespace LogicCircuit {
 			private SoundField() {}
 			public string Name { get { return "SoundWrapper"; } }
 			public int Order { get; set; }
-			public Sound DefaultValue { get { return null; } }
+			public Sound DefaultValue { get { return null!; } }
 			public Sound GetValue(ref SoundData record) {
-				return record.Sound;
+				return record.Sound!;
 			}
 			public void SetValue(ref SoundData record, Sound value) {
 				record.Sound = value;
@@ -175,7 +175,7 @@ namespace LogicCircuit {
 			public int Compare(ref SoundData l, ref SoundData r) {
 				return this.Compare(l.Sound, r.Sound);
 			}
-			public int Compare(Sound l, Sound r) {
+			public int Compare(Sound? l, Sound? r) {
 				if(object.ReferenceEquals(l, r)) return 0;
 				if(l == null) return -1;
 				if(r == null) return 1;
@@ -202,7 +202,8 @@ namespace LogicCircuit {
 
 		// Creates all foreign keys of the table
 		public static void CreateForeignKeys(StoreSnapshot store) {
-			TableSnapshot<SoundData> table = (TableSnapshot<SoundData>)store.Table("Sound");
+			TableSnapshot<SoundData>? table = (TableSnapshot<SoundData>?)store.Table("Sound");
+			Debug.Assert(table != null);
 			table.CreateForeignKey("PK_Sound", store.Table("Circuit"), SoundData.SoundIdField.Field, ForeignKeyAction.Cascade, false);
 		}
 	}
@@ -214,6 +215,7 @@ namespace LogicCircuit {
 		internal RowId SoundRowId { get; private set; }
 
 		// Constructor
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public Sound(CircuitProject store, RowId rowIdSound, RowId rowIdCircuit) : base(store, rowIdCircuit) {
 			Debug.Assert(!rowIdSound.IsEmpty);
 			this.SoundRowId = rowIdSound;
@@ -221,6 +223,7 @@ namespace LogicCircuit {
 			this.Table.SetField(this.SoundRowId, SoundData.SoundField.Field, this);
 			this.InitializeSound();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		partial void InitializeSound();
 
@@ -282,7 +285,7 @@ namespace LogicCircuit {
 	// Wrapper for table Sound.
 	partial class SoundSet : INotifyCollectionChanged, IEnumerable<Sound> {
 
-		public event NotifyCollectionChangedEventHandler CollectionChanged;
+		public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
 		internal TableSnapshot<SoundData> Table { get; private set; }
 
@@ -290,8 +293,9 @@ namespace LogicCircuit {
 		public CircuitProject CircuitProject { get { return (CircuitProject)this.Table.StoreSnapshot; } }
 
 		// Constructor
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public SoundSet(CircuitProject store) {
-			ITableSnapshot table = store.Table("Sound");
+			ITableSnapshot? table = store.Table("Sound");
 			if(table != null) {
 				Debug.Assert(store.IsFrozen, "The store should be frozen");
 				this.Table = (TableSnapshot<SoundData>)table;
@@ -301,6 +305,7 @@ namespace LogicCircuit {
 			}
 			this.InitializeSoundSet();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		partial void InitializeSoundSet();
 
@@ -312,7 +317,7 @@ namespace LogicCircuit {
 
 
 		// gets items wrapper by RowId
-		public Sound Find(RowId rowId) {
+		public Sound? Find(RowId rowId) {
 			if(!rowId.IsEmpty) {
 				return this.Table.GetField(rowId, SoundData.SoundField.Field);
 			}
@@ -323,13 +328,14 @@ namespace LogicCircuit {
 		// gets items wrapper by RowId
 		private IEnumerable<Sound> Select(IEnumerable<RowId> rows) {
 			foreach(RowId rowId in rows) {
-				Sound item = this.Find(rowId);
+				Sound? item = this.Find(rowId);
 				Debug.Assert(item != null, "What is the reason for the item not to be found?");
 				yield return item;
 			}
 		}
 
 		// Create wrapper for the row and register it in the dictionary
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static")]
 		private Sound Create(RowId rowId, RowId CircuitRowId) {
 			Sound item = new Sound(this.CircuitProject, rowId, CircuitRowId);
 			return item;
@@ -338,7 +344,7 @@ namespace LogicCircuit {
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		internal Sound FindOrCreate(RowId rowId) {
 			Debug.Assert(!rowId.IsEmpty && !this.Table.IsDeleted(rowId), "Bad RowId");
-			Sound item;
+			Sound? item;
 			if((item = this.Find(rowId)) != null) {
 				Debug.Assert(!item.IsDeleted(), "Deleted item should not be present in the dictionary");
 				return item;
@@ -346,7 +352,8 @@ namespace LogicCircuit {
 			Guid primaryKeyValue = this.Table.GetField(rowId, SoundData.SoundIdField.Field);
 
 
-			TableSnapshot<CircuitData> tableCircuit = (TableSnapshot<CircuitData>)this.CircuitProject.Table("Circuit");
+			TableSnapshot<CircuitData>? tableCircuit = (TableSnapshot<CircuitData>?)this.CircuitProject.Table("Circuit");
+			Debug.Assert(tableCircuit != null);
 			return this.Create(rowId, tableCircuit.Find(CircuitData.CircuitIdField.Field, primaryKeyValue));
 		}
 
@@ -360,7 +367,8 @@ namespace LogicCircuit {
 			// Fields of Circuit table
 
 		) {
-			TableSnapshot<CircuitData> tableCircuit = (TableSnapshot<CircuitData>)this.CircuitProject.Table("Circuit");
+			TableSnapshot<CircuitData>? tableCircuit = (TableSnapshot<CircuitData>?)this.CircuitProject.Table("Circuit");
+			Debug.Assert(tableCircuit != null);
 			CircuitData dataCircuit = new CircuitData() {
 				CircuitId = SoundId
 			};
@@ -378,7 +386,7 @@ namespace LogicCircuit {
 		// Search helpers
 
 		// Finds Sound by SoundId
-		public Sound FindBySoundId(Guid soundId) {
+		public Sound? FindBySoundId(Guid soundId) {
 			return this.Find(this.Table.Find(SoundData.SoundIdField.Field, soundId));
 		}
 
@@ -391,17 +399,17 @@ namespace LogicCircuit {
 		}
 
 		private void NotifyCollectionChanged(NotifyCollectionChangedEventArgs arg) {
-			NotifyCollectionChangedEventHandler handler = this.CollectionChanged;
+			NotifyCollectionChangedEventHandler? handler = this.CollectionChanged;
 			if(handler != null) {
 				handler(this, arg);
 			}
 		}
 
-		internal List<Sound> UpdateSet(int oldVersion, int newVersion) {
-			IEnumerator<TableChange<SoundData>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
+		internal List<Sound>? UpdateSet(int oldVersion, int newVersion) {
+			IEnumerator<TableChange<SoundData>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
 			if(change != null) {
 				bool handlerAttached = (this.CollectionChanged != null);
-				List<Sound> del = (handlerAttached) ? new List<Sound>() : null;
+				List<Sound>? del = (handlerAttached) ? new List<Sound>() : null;
 				while(change.MoveNext()) {
 					switch(change.Current.Action) {
 					case SnapTableAction.Insert:
@@ -412,7 +420,7 @@ namespace LogicCircuit {
 						if(handlerAttached) {
 							Sound item = change.Current.GetOldField(SoundData.SoundField.Field);
 							Debug.Assert(item.IsDeleted());
-							del.Add(item);
+							del!.Add(item);
 						}
 						break;
 					default:
@@ -427,11 +435,11 @@ namespace LogicCircuit {
 			return null;
 		}
 
-		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<Sound> deleted) {
-			IEnumerator<TableChange<SoundData>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
+		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<Sound>? deleted) {
+			IEnumerator<TableChange<SoundData>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
 			if(change != null) {
 				bool handlerAttached = (this.CollectionChanged != null);
-				List<Sound> add = (handlerAttached) ? new List<Sound>() : null;
+				List<Sound>? add = (handlerAttached) ? new List<Sound>() : null;
 				this.StartNotifySoundSetChanged(oldVersion, newVersion);
 				while(change.MoveNext()) {
 					this.NotifySoundSetChanged(change.Current);
@@ -439,7 +447,7 @@ namespace LogicCircuit {
 					case SnapTableAction.Insert:
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item was not created?");
 						if(handlerAttached) {
-							add.Add(this.Find(change.Current.RowId));
+							add!.Add(this.Find(change.Current.RowId)!);
 						}
 						break;
 					case SnapTableAction.Delete:
@@ -448,7 +456,7 @@ namespace LogicCircuit {
 					default:
 						Debug.Assert(change.Current.Action == SnapTableAction.Update, "Unknown action");
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item does not exist during update?");
-						this.Find(change.Current.RowId).NotifyChanged(change.Current);
+						this.Find(change.Current.RowId)!.NotifyChanged(change.Current);
 						break;
 					}
 				}
@@ -457,7 +465,7 @@ namespace LogicCircuit {
 					if(deleted != null && 0 < deleted.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, deleted));
 					}
-					if(0 < add.Count) {
+					if(0 < add!.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, add));
 					}
 				}

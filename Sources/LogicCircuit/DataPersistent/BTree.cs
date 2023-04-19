@@ -15,7 +15,7 @@ namespace LogicCircuit.DataPersistent {
 
 			#if DEBUG
 				public override string ToString() {
-					return string.Format(System.Globalization.CultureInfo.InvariantCulture, "Key({0}, {1})", this.field.ToString(), this.rowId.ToString());
+					return string.Format(System.Globalization.CultureInfo.InvariantCulture, "Key({0}, {1})", this.field!.ToString(), this.rowId.ToString());
 				}
 			#endif
 		}
@@ -814,7 +814,7 @@ namespace LogicCircuit.DataPersistent {
 							text.Append(", ");
 						}
 						Key key = this.keyFields[i].GetValue(ref node);
-						text.AppendFormat(System.Globalization.CultureInfo.InvariantCulture, "{{{0}, {1}}}", key.field.ToString(), key.rowId.ToString());
+						text.AppendFormat(System.Globalization.CultureInfo.InvariantCulture, "{{{0}, {1}}}", key.field!.ToString(), key.rowId.ToString());
 					}
 					text.Append(')');
 					return !node.IsLeaf;

@@ -37,7 +37,7 @@ namespace LogicCircuit {
 			StringBuilder text = new StringBuilder();
 			if(modifier != ModifierKeys.None) {
 				text.Append(modifier.ToString());
-				text.Append("+");
+				text.Append('+');
 			}
 			text.Append(key.ToString());
 			this.textBox.Text = text.ToString();

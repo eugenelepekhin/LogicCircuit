@@ -19,7 +19,7 @@ namespace LogicCircuit {
 			set { this.fieldName = this.CheckName(value); }
 		}
 		public string Note;
-		internal CircuitProbe CircuitProbe;
+		internal CircuitProbe? CircuitProbe;
 		// Field accessors
 		// Accessor of the CircuitProbeId field
 		public sealed class CircuitProbeIdField : IField<CircuitProbeData, Guid>, IFieldSerializer<CircuitProbeData> {
@@ -72,7 +72,7 @@ namespace LogicCircuit {
 			public int Compare(ref CircuitProbeData l, ref CircuitProbeData r) {
 				return StringComparer.Ordinal.Compare(l.Name, r.Name);
 			}
-			public int Compare(string l, string r) {
+			public int Compare(string? l, string? r) {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
@@ -107,7 +107,7 @@ namespace LogicCircuit {
 			public int Compare(ref CircuitProbeData l, ref CircuitProbeData r) {
 				return StringComparer.Ordinal.Compare(l.Note, r.Note);
 			}
-			public int Compare(string l, string r) {
+			public int Compare(string? l, string? r) {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
@@ -133,9 +133,9 @@ namespace LogicCircuit {
 			private CircuitProbeField() {}
 			public string Name { get { return "CircuitProbeWrapper"; } }
 			public int Order { get; set; }
-			public CircuitProbe DefaultValue { get { return null; } }
+			public CircuitProbe DefaultValue { get { return null!; } }
 			public CircuitProbe GetValue(ref CircuitProbeData record) {
-				return record.CircuitProbe;
+				return record.CircuitProbe!;
 			}
 			public void SetValue(ref CircuitProbeData record, CircuitProbe value) {
 				record.CircuitProbe = value;
@@ -143,7 +143,7 @@ namespace LogicCircuit {
 			public int Compare(ref CircuitProbeData l, ref CircuitProbeData r) {
 				return this.Compare(l.CircuitProbe, r.CircuitProbe);
 			}
-			public int Compare(CircuitProbe l, CircuitProbe r) {
+			public int Compare(CircuitProbe? l, CircuitProbe? r) {
 				if(object.ReferenceEquals(l, r)) return 0;
 				if(l == null) return -1;
 				if(r == null) return 1;
@@ -170,7 +170,8 @@ namespace LogicCircuit {
 
 		// Creates all foreign keys of the table
 		public static void CreateForeignKeys(StoreSnapshot store) {
-			TableSnapshot<CircuitProbeData> table = (TableSnapshot<CircuitProbeData>)store.Table("CircuitProbe");
+			TableSnapshot<CircuitProbeData>? table = (TableSnapshot<CircuitProbeData>?)store.Table("CircuitProbe");
+			Debug.Assert(table != null);
 			table.CreateForeignKey("PK_CircuitProbe", store.Table("Circuit"), CircuitProbeData.CircuitProbeIdField.Field, ForeignKeyAction.Cascade, false);
 		}
 	}
@@ -182,6 +183,7 @@ namespace LogicCircuit {
 		internal RowId CircuitProbeRowId { get; private set; }
 
 		// Constructor
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public CircuitProbe(CircuitProject store, RowId rowIdCircuitProbe, RowId rowIdCircuit) : base(store, rowIdCircuit) {
 			Debug.Assert(!rowIdCircuitProbe.IsEmpty);
 			this.CircuitProbeRowId = rowIdCircuitProbe;
@@ -189,6 +191,7 @@ namespace LogicCircuit {
 			this.Table.SetField(this.CircuitProbeRowId, CircuitProbeData.CircuitProbeField.Field, this);
 			this.InitializeCircuitProbe();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		partial void InitializeCircuitProbe();
 
@@ -241,7 +244,7 @@ namespace LogicCircuit {
 	// Wrapper for table CircuitProbe.
 	partial class CircuitProbeSet : INotifyCollectionChanged, IEnumerable<CircuitProbe> {
 
-		public event NotifyCollectionChangedEventHandler CollectionChanged;
+		public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
 		internal TableSnapshot<CircuitProbeData> Table { get; private set; }
 
@@ -249,8 +252,9 @@ namespace LogicCircuit {
 		public CircuitProject CircuitProject { get { return (CircuitProject)this.Table.StoreSnapshot; } }
 
 		// Constructor
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public CircuitProbeSet(CircuitProject store) {
-			ITableSnapshot table = store.Table("CircuitProbe");
+			ITableSnapshot? table = store.Table("CircuitProbe");
 			if(table != null) {
 				Debug.Assert(store.IsFrozen, "The store should be frozen");
 				this.Table = (TableSnapshot<CircuitProbeData>)table;
@@ -260,6 +264,7 @@ namespace LogicCircuit {
 			}
 			this.InitializeCircuitProbeSet();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		partial void InitializeCircuitProbeSet();
 
@@ -271,7 +276,7 @@ namespace LogicCircuit {
 
 
 		// gets items wrapper by RowId
-		public CircuitProbe Find(RowId rowId) {
+		public CircuitProbe? Find(RowId rowId) {
 			if(!rowId.IsEmpty) {
 				return this.Table.GetField(rowId, CircuitProbeData.CircuitProbeField.Field);
 			}
@@ -282,13 +287,14 @@ namespace LogicCircuit {
 		// gets items wrapper by RowId
 		private IEnumerable<CircuitProbe> Select(IEnumerable<RowId> rows) {
 			foreach(RowId rowId in rows) {
-				CircuitProbe item = this.Find(rowId);
+				CircuitProbe? item = this.Find(rowId);
 				Debug.Assert(item != null, "What is the reason for the item not to be found?");
 				yield return item;
 			}
 		}
 
 		// Create wrapper for the row and register it in the dictionary
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static")]
 		private CircuitProbe Create(RowId rowId, RowId CircuitRowId) {
 			CircuitProbe item = new CircuitProbe(this.CircuitProject, rowId, CircuitRowId);
 			return item;
@@ -297,7 +303,7 @@ namespace LogicCircuit {
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		internal CircuitProbe FindOrCreate(RowId rowId) {
 			Debug.Assert(!rowId.IsEmpty && !this.Table.IsDeleted(rowId), "Bad RowId");
-			CircuitProbe item;
+			CircuitProbe? item;
 			if((item = this.Find(rowId)) != null) {
 				Debug.Assert(!item.IsDeleted(), "Deleted item should not be present in the dictionary");
 				return item;
@@ -305,7 +311,8 @@ namespace LogicCircuit {
 			Guid primaryKeyValue = this.Table.GetField(rowId, CircuitProbeData.CircuitProbeIdField.Field);
 
 
-			TableSnapshot<CircuitData> tableCircuit = (TableSnapshot<CircuitData>)this.CircuitProject.Table("Circuit");
+			TableSnapshot<CircuitData>? tableCircuit = (TableSnapshot<CircuitData>?)this.CircuitProject.Table("Circuit");
+			Debug.Assert(tableCircuit != null);
 			return this.Create(rowId, tableCircuit.Find(CircuitData.CircuitIdField.Field, primaryKeyValue));
 		}
 
@@ -318,7 +325,8 @@ namespace LogicCircuit {
 			// Fields of Circuit table
 
 		) {
-			TableSnapshot<CircuitData> tableCircuit = (TableSnapshot<CircuitData>)this.CircuitProject.Table("Circuit");
+			TableSnapshot<CircuitData>? tableCircuit = (TableSnapshot<CircuitData>?)this.CircuitProject.Table("Circuit");
+			Debug.Assert(tableCircuit != null);
 			CircuitData dataCircuit = new CircuitData() {
 				CircuitId = CircuitProbeId
 			};
@@ -335,12 +343,12 @@ namespace LogicCircuit {
 		// Search helpers
 
 		// Finds CircuitProbe by CircuitProbeId
-		public CircuitProbe FindByCircuitProbeId(Guid circuitProbeId) {
+		public CircuitProbe? FindByCircuitProbeId(Guid circuitProbeId) {
 			return this.Find(this.Table.Find(CircuitProbeData.CircuitProbeIdField.Field, circuitProbeId));
 		}
 
 		// Finds CircuitProbe by Name
-		public CircuitProbe FindByName(string name) {
+		public CircuitProbe? FindByName(string name) {
 			return this.Find(this.Table.Find(CircuitProbeData.NameField.Field, name));
 		}
 
@@ -353,17 +361,17 @@ namespace LogicCircuit {
 		}
 
 		private void NotifyCollectionChanged(NotifyCollectionChangedEventArgs arg) {
-			NotifyCollectionChangedEventHandler handler = this.CollectionChanged;
+			NotifyCollectionChangedEventHandler? handler = this.CollectionChanged;
 			if(handler != null) {
 				handler(this, arg);
 			}
 		}
 
-		internal List<CircuitProbe> UpdateSet(int oldVersion, int newVersion) {
-			IEnumerator<TableChange<CircuitProbeData>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
+		internal List<CircuitProbe>? UpdateSet(int oldVersion, int newVersion) {
+			IEnumerator<TableChange<CircuitProbeData>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
 			if(change != null) {
 				bool handlerAttached = (this.CollectionChanged != null);
-				List<CircuitProbe> del = (handlerAttached) ? new List<CircuitProbe>() : null;
+				List<CircuitProbe>? del = (handlerAttached) ? new List<CircuitProbe>() : null;
 				while(change.MoveNext()) {
 					switch(change.Current.Action) {
 					case SnapTableAction.Insert:
@@ -374,7 +382,7 @@ namespace LogicCircuit {
 						if(handlerAttached) {
 							CircuitProbe item = change.Current.GetOldField(CircuitProbeData.CircuitProbeField.Field);
 							Debug.Assert(item.IsDeleted());
-							del.Add(item);
+							del!.Add(item);
 						}
 						break;
 					default:
@@ -389,11 +397,11 @@ namespace LogicCircuit {
 			return null;
 		}
 
-		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<CircuitProbe> deleted) {
-			IEnumerator<TableChange<CircuitProbeData>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
+		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<CircuitProbe>? deleted) {
+			IEnumerator<TableChange<CircuitProbeData>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
 			if(change != null) {
 				bool handlerAttached = (this.CollectionChanged != null);
-				List<CircuitProbe> add = (handlerAttached) ? new List<CircuitProbe>() : null;
+				List<CircuitProbe>? add = (handlerAttached) ? new List<CircuitProbe>() : null;
 				this.StartNotifyCircuitProbeSetChanged(oldVersion, newVersion);
 				while(change.MoveNext()) {
 					this.NotifyCircuitProbeSetChanged(change.Current);
@@ -401,7 +409,7 @@ namespace LogicCircuit {
 					case SnapTableAction.Insert:
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item was not created?");
 						if(handlerAttached) {
-							add.Add(this.Find(change.Current.RowId));
+							add!.Add(this.Find(change.Current.RowId)!);
 						}
 						break;
 					case SnapTableAction.Delete:
@@ -410,7 +418,7 @@ namespace LogicCircuit {
 					default:
 						Debug.Assert(change.Current.Action == SnapTableAction.Update, "Unknown action");
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item does not exist during update?");
-						this.Find(change.Current.RowId).NotifyChanged(change.Current);
+						this.Find(change.Current.RowId)!.NotifyChanged(change.Current);
 						break;
 					}
 				}
@@ -419,7 +427,7 @@ namespace LogicCircuit {
 					if(deleted != null && 0 < deleted.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, deleted));
 					}
-					if(0 < add.Count) {
+					if(0 < add!.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, add));
 					}
 				}

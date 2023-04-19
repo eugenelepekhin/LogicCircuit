@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 
@@ -10,7 +11,7 @@ namespace LogicCircuit {
 
 			public SymbolMap AddSymbol(CircuitMap circuitMap, CircuitSymbol circuitSymbol) {
 				SymbolMapKey key = new SymbolMapKey(circuitMap, circuitSymbol);
-				SymbolMap map;
+				SymbolMap? map;
 				if(!this.symbols.TryGetValue(key, out map)) {
 					map = new SymbolMap(key);
 					this.symbols.Add(key, map);
@@ -39,7 +40,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private struct SymbolMapKey {
+		private struct SymbolMapKey : IEquatable<SymbolMapKey> {
 			public CircuitMap CircuitMap { get; }
 			public CircuitSymbol CircuitSymbol { get; }
 
@@ -48,13 +49,15 @@ namespace LogicCircuit {
 				this.CircuitSymbol = circuitSymbol;
 			}
 
-			public override bool Equals(object obj) {
+			public override bool Equals(object? obj) {
 				if(obj != null && this.GetType() == obj.GetType()) {
 					SymbolMapKey other = (SymbolMapKey)obj;
 					return this.CircuitMap == other.CircuitMap && this.CircuitSymbol == other.CircuitSymbol;
 				}
 				return false;
 			}
+
+			public bool Equals(SymbolMapKey other) => this.CircuitMap == other.CircuitMap && this.CircuitSymbol == other.CircuitSymbol;
 
 			public override int GetHashCode() {
 				return this.CircuitMap.GetHashCode() ^ this.CircuitSymbol.GetHashCode();
@@ -64,12 +67,12 @@ namespace LogicCircuit {
 				public override string ToString() {
 					return string.Format(CultureInfo.InvariantCulture, "SymbolMapKey of {0}", this.CircuitMap.Path(this.CircuitSymbol));
 				}
-			#endif
+#endif
 		}
 
 		private class SymbolMap {
 
-			private struct JamKey {
+			private readonly struct JamKey : IEquatable<JamKey> {
 				public Jam Jam { get; }
 				public int BitNumber { get; }
 
@@ -79,13 +82,15 @@ namespace LogicCircuit {
 					this.BitNumber = bitNumber;
 				}
 
-				public override bool Equals(object obj) {
+				public override bool Equals(object? obj) {
 					if(obj != null && this.GetType() == obj.GetType()) {
 						JamKey other = (JamKey)obj;
 						return this.Jam == other.Jam && this.BitNumber == other.BitNumber;
 					}
 					return false;
 				}
+
+				public bool Equals(JamKey other) => this.Jam == other.Jam && this.BitNumber == other.BitNumber;
 
 				public override int GetHashCode() {
 					return this.Jam.GetHashCode() ^ this.BitNumber;
@@ -118,7 +123,7 @@ namespace LogicCircuit {
 			public Parameter AddParameter(Result result, CircuitMap circuitMap, Jam jam, int bitNumber) {
 				Tracer.Assert(circuitMap.Circuit == jam.CircuitSymbol.LogicalCircuit && jam.CircuitSymbol == this.key.CircuitSymbol);
 				JamKey jamKey = new JamKey(jam, bitNumber);
-				Parameter parameter;
+				Parameter? parameter;
 				if(this.parameters.TryGetValue(jamKey, out parameter)) {
 					if(!parameter.Result.IsTriState || !result.IsTriState) {
 						if(parameter.Result == result && parameter.CircuitMap == circuitMap && parameter.Jam == jam && parameter.BitNumber == bitNumber) {
@@ -158,15 +163,15 @@ namespace LogicCircuit {
 				get { return this.parameters.Values; }
 			}
 
-			public Result Result(Jam jam, int bitNumber) {
-				if(this.results.TryGetValue(new JamKey(jam, bitNumber), out Result resut)) {
+			public Result? Result(Jam jam, int bitNumber) {
+				if(this.results.TryGetValue(new JamKey(jam, bitNumber), out Result? resut)) {
 					return resut;
 				}
 				return null;
 			}
 
-			public Parameter Parameter(Jam jam, int bitNumber) {
-				if(this.parameters.TryGetValue(new JamKey(jam, bitNumber), out Parameter parameter)) {
+			public Parameter? Parameter(Jam jam, int bitNumber) {
+				if(this.parameters.TryGetValue(new JamKey(jam, bitNumber), out Parameter? parameter)) {
 					return parameter;
 				}
 				return null;
@@ -195,7 +200,7 @@ namespace LogicCircuit {
 				this.BitNumber = bitNumber;
 			}
 
-			public override bool Equals(object obj) {
+			public override bool Equals(object? obj) {
 				if(object.ReferenceEquals(this, obj)) {
 					return true;
 				}
@@ -213,7 +218,7 @@ namespace LogicCircuit {
 
 		private class Result : StateIndex {
 
-			public HashSet<Result> TriStateGroup { get; private set; }
+			public HashSet<Result>? TriStateGroup { get; private set; }
 			public bool IsTriState { get { return this.TriStateGroup != null; } }
 			public List<Parameter> Parameters { get; private set; }
 			public int StateIndex { get; private set; }
@@ -234,6 +239,7 @@ namespace LogicCircuit {
 			public void Link(Result other) {
 				Tracer.Assert(this.IsTriState);
 				if(this.TriStateGroup != other.TriStateGroup) {
+					Debug.Assert(this.TriStateGroup != null && other.TriStateGroup != null);
 					this.Parameters.AddRange(other.Parameters);
 					this.TriStateGroup.UnionWith(other.TriStateGroup);
 					foreach(Result r in other.TriStateGroup) {
@@ -292,7 +298,8 @@ namespace LogicCircuit {
 		private class ResultComparer : IComparer<Result> {
 			public static readonly IComparer<Result> BitOrderComparer = new ResultComparer();
 
-			public int Compare(Result x, Result y) {
+			public int Compare(Result? x, Result? y) {
+				Debug.Assert(x != null && y != null);
 				Tracer.Assert(x.CircuitMap == y.CircuitMap && x.Jam == y.Jam);
 				return x.BitNumber - y.BitNumber;
 			}
@@ -301,12 +308,13 @@ namespace LogicCircuit {
 		private class ParameterComparer : IComparer<Parameter> {
 			public static readonly ParameterComparer BitOrderComparer = new ParameterComparer();
 
-			public int Compare(Parameter x, Parameter y) {
+			public int Compare(Parameter? x, Parameter? y) {
+				Debug.Assert(x != null && y != null);
 				return x.BitNumber - y.BitNumber;
 			}
 		}
 
-		private struct JamBit {
+		private readonly struct JamBit : IEquatable<JamBit> {
 			public CircuitMap Map { get; }
 			public Jam Jam { get; }
 			public int Bit { get; }
@@ -319,7 +327,7 @@ namespace LogicCircuit {
 
 			public bool Equals(JamBit other) => this.Map == other.Map && this.Jam == other.Jam && this.Bit == other.Bit;
 
-			public override bool Equals(object obj) => obj is JamBit other && this.Equals(other);
+			public override bool Equals(object? obj) => obj is JamBit other && this.Equals(other);
 
 			public override int GetHashCode() => this.Map.GetHashCode() ^ this.Jam.GetHashCode() ^ this.Bit;
 		}

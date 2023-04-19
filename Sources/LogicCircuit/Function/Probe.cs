@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 
 namespace LogicCircuit {
@@ -7,13 +8,17 @@ namespace LogicCircuit {
 
 		protected Probe(CircuitState circuitState, int[] parameter) : base(circuitState, parameter, null) {
 			this.Init(parameter != null ? parameter.Length : 0);
+			Debug.Assert(this.state != null);
 		}
 		protected Probe(CircuitState circuitState, int parameter) : base(circuitState, new int[] { parameter }, null) {
 			this.Init(1);
+			Debug.Assert(this.state != null);
 		}
 		private void Init(int count) {
 			if(0 < count) {
 				this.state = new State[count];
+			} else {
+				this.state = Array.Empty<State>();
 			}
 		}
 

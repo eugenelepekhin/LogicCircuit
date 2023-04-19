@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,7 +10,7 @@ namespace LogicCircuit {
 	/// Interaction logic for DialogFind.xaml
 	/// </summary>
 	public partial class DialogFind : Window {
-		private SettingsWindowLocationCache windowLocation;
+		private SettingsWindowLocationCache? windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 
 		private readonly SettingsStringCache searchFilter = new SettingsStringCache(Settings.Session, "DialogFind.filter", string.Empty);
@@ -21,7 +20,7 @@ namespace LogicCircuit {
 		}
 
 		private Editor editor;
-		private Dictionary<LogicalCircuit, List<Symbol>> searchMap = new Dictionary<LogicalCircuit, List<Symbol>>();
+		private Dictionary<LogicalCircuit, List<Symbol>?> searchMap = new Dictionary<LogicalCircuit, List<Symbol>?>();
 		
 		public DialogFind(Editor editor) {
 			this.editor = editor;
@@ -37,12 +36,12 @@ namespace LogicCircuit {
 		}
 
 		private void Add(Symbol symbol) {
-			List<Symbol> list;
+			List<Symbol>? list;
 			if(!this.searchMap.TryGetValue(symbol.LogicalCircuit, out list)) {
 				list = new List<Symbol>();
 				this.searchMap.Add(symbol.LogicalCircuit, list);
 			}
-			list.Add(symbol);
+			list!.Add(symbol);
 		}
 
 		private void ButtonSearchClick(object sender, RoutedEventArgs e) {
@@ -81,12 +80,12 @@ namespace LogicCircuit {
 			}
 		}
 
-		private void resultListMouseDoubleClick(object sender, MouseButtonEventArgs e) {
+		private void resultListMouseDoubleClick(object sender, MouseButtonEventArgs? e) {
 			try {
 				if(sender is ListBox listBox) {
 					if(listBox.SelectedItem is LogicalCircuit selected) {
 						this.editor.OpenLogicalCircuit(selected);
-						if(this.searchMap.TryGetValue(selected, out List<Symbol> list) && list != null && 0 < list.Count) {
+						if(this.searchMap.TryGetValue(selected, out List<Symbol>? list) && list != null && 0 < list.Count) {
 							this.editor.Select(list);
 						}
 					}

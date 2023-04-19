@@ -20,7 +20,7 @@ namespace LogicCircuit {
 		public int Height;
 		public string Note;
 		public Rotation Rotation;
-		internal TextNote TextNote;
+		internal TextNote? TextNote;
 		// Field accessors
 		// Accessor of the TextNoteId field
 		public sealed class TextNoteIdField : IField<TextNoteData, Guid>, IFieldSerializer<TextNoteData> {
@@ -248,7 +248,7 @@ namespace LogicCircuit {
 			public int Compare(ref TextNoteData l, ref TextNoteData r) {
 				return StringComparer.Ordinal.Compare(l.Note, r.Note);
 			}
-			public int Compare(string l, string r) {
+			public int Compare(string? l, string? r) {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
@@ -309,9 +309,9 @@ namespace LogicCircuit {
 			private TextNoteField() {}
 			public string Name { get { return "TextNoteWrapper"; } }
 			public int Order { get; set; }
-			public TextNote DefaultValue { get { return null; } }
+			public TextNote DefaultValue { get { return null!; } }
 			public TextNote GetValue(ref TextNoteData record) {
-				return record.TextNote;
+				return record.TextNote!;
 			}
 			public void SetValue(ref TextNoteData record, TextNote value) {
 				record.TextNote = value;
@@ -319,7 +319,7 @@ namespace LogicCircuit {
 			public int Compare(ref TextNoteData l, ref TextNoteData r) {
 				return this.Compare(l.TextNote, r.TextNote);
 			}
-			public int Compare(TextNote l, TextNote r) {
+			public int Compare(TextNote? l, TextNote? r) {
 				if(object.ReferenceEquals(l, r)) return 0;
 				if(l == null) return -1;
 				if(r == null) return 1;
@@ -351,7 +351,8 @@ namespace LogicCircuit {
 
 		// Creates all foreign keys of the table
 		public static void CreateForeignKeys(StoreSnapshot store) {
-			TableSnapshot<TextNoteData> table = (TableSnapshot<TextNoteData>)store.Table("TextNote");
+			TableSnapshot<TextNoteData>? table = (TableSnapshot<TextNoteData>?)store.Table("TextNote");
+			Debug.Assert(table != null);
 			table.CreateForeignKey("FK_LogicalCircuit_TextNote", store.Table("LogicalCircuit"), TextNoteData.LogicalCircuitIdField.Field, ForeignKeyAction.Cascade, false);
 		}
 	}
@@ -365,6 +366,7 @@ namespace LogicCircuit {
 		public CircuitProject CircuitProject { get; private set; }
 
 		// Constructor
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public TextNote(CircuitProject store, RowId rowIdTextNote) {
 			Debug.Assert(!rowIdTextNote.IsEmpty);
 			this.CircuitProject = store;
@@ -373,6 +375,7 @@ namespace LogicCircuit {
 			this.Table.SetField(this.TextNoteRowId, TextNoteData.TextNoteField.Field, this);
 			this.InitializeTextNote();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		partial void InitializeTextNote();
 
@@ -398,7 +401,7 @@ namespace LogicCircuit {
 
 		// Gets or sets the value referred by the foreign key on field LogicalCircuitId
 		protected override LogicalCircuit SymbolLogicalCircuit {
-			get { return this.CircuitProject.LogicalCircuitSet.FindByLogicalCircuitId(this.Table.GetField(this.TextNoteRowId, TextNoteData.LogicalCircuitIdField.Field)); }
+			get { return this.CircuitProject.LogicalCircuitSet.FindByLogicalCircuitId(this.Table.GetField(this.TextNoteRowId, TextNoteData.LogicalCircuitIdField.Field))!; }
 			set { this.Table.SetField(this.TextNoteRowId, TextNoteData.LogicalCircuitIdField.Field, value.LogicalCircuitId); }
 		}
 
@@ -479,7 +482,7 @@ namespace LogicCircuit {
 	// Wrapper for table TextNote.
 	partial class TextNoteSet : INotifyCollectionChanged, IEnumerable<TextNote> {
 
-		public event NotifyCollectionChangedEventHandler CollectionChanged;
+		public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
 		internal TableSnapshot<TextNoteData> Table { get; private set; }
 
@@ -487,8 +490,9 @@ namespace LogicCircuit {
 		public CircuitProject CircuitProject { get { return (CircuitProject)this.Table.StoreSnapshot; } }
 
 		// Constructor
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public TextNoteSet(CircuitProject store) {
-			ITableSnapshot table = store.Table("TextNote");
+			ITableSnapshot? table = store.Table("TextNote");
 			if(table != null) {
 				Debug.Assert(store.IsFrozen, "The store should be frozen");
 				this.Table = (TableSnapshot<TextNoteData>)table;
@@ -498,6 +502,7 @@ namespace LogicCircuit {
 			}
 			this.InitializeTextNoteSet();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		partial void InitializeTextNoteSet();
 
@@ -509,7 +514,7 @@ namespace LogicCircuit {
 
 
 		// gets items wrapper by RowId
-		public TextNote Find(RowId rowId) {
+		public TextNote? Find(RowId rowId) {
 			if(!rowId.IsEmpty) {
 				return this.Table.GetField(rowId, TextNoteData.TextNoteField.Field);
 			}
@@ -520,13 +525,14 @@ namespace LogicCircuit {
 		// gets items wrapper by RowId
 		private IEnumerable<TextNote> Select(IEnumerable<RowId> rows) {
 			foreach(RowId rowId in rows) {
-				TextNote item = this.Find(rowId);
+				TextNote? item = this.Find(rowId);
 				Debug.Assert(item != null, "What is the reason for the item not to be found?");
 				yield return item;
 			}
 		}
 
 		// Create wrapper for the row and register it in the dictionary
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static")]
 		private TextNote Create(RowId rowId) {
 			TextNote item = new TextNote(this.CircuitProject, rowId);
 			return item;
@@ -535,7 +541,7 @@ namespace LogicCircuit {
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		internal TextNote FindOrCreate(RowId rowId) {
 			Debug.Assert(!rowId.IsEmpty && !this.Table.IsDeleted(rowId), "Bad RowId");
-			TextNote item;
+			TextNote? item;
 			if((item = this.Find(rowId)) != null) {
 				Debug.Assert(!item.IsDeleted(), "Deleted item should not be present in the dictionary");
 				return item;
@@ -572,7 +578,7 @@ namespace LogicCircuit {
 		// Search helpers
 
 		// Finds TextNote by TextNoteId
-		public TextNote Find(Guid textNoteId) {
+		public TextNote? Find(Guid textNoteId) {
 			return this.Find(this.Table.Find(TextNoteData.TextNoteIdField.Field, textNoteId));
 		}
 
@@ -590,17 +596,17 @@ namespace LogicCircuit {
 		}
 
 		private void NotifyCollectionChanged(NotifyCollectionChangedEventArgs arg) {
-			NotifyCollectionChangedEventHandler handler = this.CollectionChanged;
+			NotifyCollectionChangedEventHandler? handler = this.CollectionChanged;
 			if(handler != null) {
 				handler(this, arg);
 			}
 		}
 
-		internal List<TextNote> UpdateSet(int oldVersion, int newVersion) {
-			IEnumerator<TableChange<TextNoteData>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
+		internal List<TextNote>? UpdateSet(int oldVersion, int newVersion) {
+			IEnumerator<TableChange<TextNoteData>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
 			if(change != null) {
 				bool handlerAttached = (this.CollectionChanged != null);
-				List<TextNote> del = (handlerAttached) ? new List<TextNote>() : null;
+				List<TextNote>? del = (handlerAttached) ? new List<TextNote>() : null;
 				while(change.MoveNext()) {
 					switch(change.Current.Action) {
 					case SnapTableAction.Insert:
@@ -611,7 +617,7 @@ namespace LogicCircuit {
 						if(handlerAttached) {
 							TextNote item = change.Current.GetOldField(TextNoteData.TextNoteField.Field);
 							Debug.Assert(item.IsDeleted());
-							del.Add(item);
+							del!.Add(item);
 						}
 						break;
 					default:
@@ -626,11 +632,11 @@ namespace LogicCircuit {
 			return null;
 		}
 
-		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<TextNote> deleted) {
-			IEnumerator<TableChange<TextNoteData>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
+		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<TextNote>? deleted) {
+			IEnumerator<TableChange<TextNoteData>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
 			if(change != null) {
 				bool handlerAttached = (this.CollectionChanged != null);
-				List<TextNote> add = (handlerAttached) ? new List<TextNote>() : null;
+				List<TextNote>? add = (handlerAttached) ? new List<TextNote>() : null;
 				this.StartNotifyTextNoteSetChanged(oldVersion, newVersion);
 				while(change.MoveNext()) {
 					this.NotifyTextNoteSetChanged(change.Current);
@@ -638,7 +644,7 @@ namespace LogicCircuit {
 					case SnapTableAction.Insert:
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item was not created?");
 						if(handlerAttached) {
-							add.Add(this.Find(change.Current.RowId));
+							add!.Add(this.Find(change.Current.RowId)!);
 						}
 						break;
 					case SnapTableAction.Delete:
@@ -647,7 +653,7 @@ namespace LogicCircuit {
 					default:
 						Debug.Assert(change.Current.Action == SnapTableAction.Update, "Unknown action");
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item does not exist during update?");
-						this.Find(change.Current.RowId).NotifyChanged(change.Current);
+						this.Find(change.Current.RowId)!.NotifyChanged(change.Current);
 						break;
 					}
 				}
@@ -656,7 +662,7 @@ namespace LogicCircuit {
 					if(deleted != null && 0 < deleted.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, deleted));
 					}
-					if(0 < add.Count) {
+					if(0 < add!.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, add));
 					}
 				}

@@ -26,7 +26,7 @@ namespace LogicCircuit {
 		public string Note;
 		public string JamNotation;
 		public int Index;
-		internal Pin Pin;
+		internal Pin? Pin;
 		// Field accessors
 		// Accessor of the PinId field
 		public sealed class PinIdField : IField<PinData, Guid>, IFieldSerializer<PinData> {
@@ -244,7 +244,7 @@ namespace LogicCircuit {
 			private NameField() {}
 			public string Name { get { return "Name"; } }
 			public int Order { get; set; }
-			public string DefaultValue { get { return null; } }
+			public string DefaultValue { get { return null!; } }
 			public string GetValue(ref PinData record) {
 				return record.Name;
 			}
@@ -254,7 +254,7 @@ namespace LogicCircuit {
 			public int Compare(ref PinData l, ref PinData r) {
 				return StringComparer.Ordinal.Compare(l.Name, r.Name);
 			}
-			public int Compare(string l, string r) {
+			public int Compare(string? l, string? r) {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
@@ -289,7 +289,7 @@ namespace LogicCircuit {
 			public int Compare(ref PinData l, ref PinData r) {
 				return StringComparer.Ordinal.Compare(l.Note, r.Note);
 			}
-			public int Compare(string l, string r) {
+			public int Compare(string? l, string? r) {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
@@ -324,7 +324,7 @@ namespace LogicCircuit {
 			public int Compare(ref PinData l, ref PinData r) {
 				return StringComparer.Ordinal.Compare(l.JamNotation, r.JamNotation);
 			}
-			public int Compare(string l, string r) {
+			public int Compare(string? l, string? r) {
 				return StringComparer.Ordinal.Compare(l, r);
 			}
 
@@ -385,9 +385,9 @@ namespace LogicCircuit {
 			private PinField() {}
 			public string Name { get { return "PinWrapper"; } }
 			public int Order { get; set; }
-			public Pin DefaultValue { get { return null; } }
+			public Pin DefaultValue { get { return null!; } }
 			public Pin GetValue(ref PinData record) {
-				return record.Pin;
+				return record.Pin!;
 			}
 			public void SetValue(ref PinData record, Pin value) {
 				record.Pin = value;
@@ -395,7 +395,7 @@ namespace LogicCircuit {
 			public int Compare(ref PinData l, ref PinData r) {
 				return this.Compare(l.Pin, r.Pin);
 			}
-			public int Compare(Pin l, Pin r) {
+			public int Compare(Pin? l, Pin? r) {
 				if(object.ReferenceEquals(l, r)) return 0;
 				if(l == null) return -1;
 				if(r == null) return 1;
@@ -430,7 +430,8 @@ namespace LogicCircuit {
 
 		// Creates all foreign keys of the table
 		public static void CreateForeignKeys(StoreSnapshot store) {
-			TableSnapshot<PinData> table = (TableSnapshot<PinData>)store.Table("Pin");
+			TableSnapshot<PinData>? table = (TableSnapshot<PinData>?)store.Table("Pin");
+			Debug.Assert(table != null);
 			table.CreateForeignKey("PK_Pin", store.Table("Circuit"), PinData.PinIdField.Field, ForeignKeyAction.Cascade, false);
 			table.CreateForeignKey("FK_Circuit_Pin", store.Table("Circuit"), PinData.CircuitIdField.Field, ForeignKeyAction.Restrict, false);
 		}
@@ -443,6 +444,7 @@ namespace LogicCircuit {
 		internal RowId PinRowId { get; private set; }
 
 		// Constructor
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public Pin(CircuitProject store, RowId rowIdPin, RowId rowIdCircuit) : base(store, rowIdCircuit) {
 			Debug.Assert(!rowIdPin.IsEmpty);
 			this.PinRowId = rowIdPin;
@@ -450,6 +452,7 @@ namespace LogicCircuit {
 			this.Table.SetField(this.PinRowId, PinData.PinField.Field, this);
 			this.InitializePin();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		partial void InitializePin();
 
@@ -466,7 +469,7 @@ namespace LogicCircuit {
 
 		// Gets or sets the value referred by the foreign key on field CircuitId
 		protected override Circuit PinCircuit {
-			get { return this.CircuitProject.CircuitSet.Find(this.Table.GetField(this.PinRowId, PinData.CircuitIdField.Field)); }
+			get { return this.CircuitProject.CircuitSet.Find(this.Table.GetField(this.PinRowId, PinData.CircuitIdField.Field))!; }
 			set { this.Table.SetField(this.PinRowId, PinData.CircuitIdField.Field, value.CircuitId); }
 		}
 
@@ -564,7 +567,7 @@ namespace LogicCircuit {
 	// Wrapper for table Pin.
 	partial class PinSet : INotifyCollectionChanged, IEnumerable<Pin> {
 
-		public event NotifyCollectionChangedEventHandler CollectionChanged;
+		public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
 		internal TableSnapshot<PinData> Table { get; private set; }
 
@@ -572,8 +575,9 @@ namespace LogicCircuit {
 		public CircuitProject CircuitProject { get { return (CircuitProject)this.Table.StoreSnapshot; } }
 
 		// Constructor
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public PinSet(CircuitProject store) {
-			ITableSnapshot table = store.Table("Pin");
+			ITableSnapshot? table = store.Table("Pin");
 			if(table != null) {
 				Debug.Assert(store.IsFrozen, "The store should be frozen");
 				this.Table = (TableSnapshot<PinData>)table;
@@ -583,6 +587,7 @@ namespace LogicCircuit {
 			}
 			this.InitializePinSet();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 		partial void InitializePinSet();
 
@@ -594,7 +599,7 @@ namespace LogicCircuit {
 
 
 		// gets items wrapper by RowId
-		public Pin Find(RowId rowId) {
+		public Pin? Find(RowId rowId) {
 			if(!rowId.IsEmpty) {
 				return this.Table.GetField(rowId, PinData.PinField.Field);
 			}
@@ -605,13 +610,14 @@ namespace LogicCircuit {
 		// gets items wrapper by RowId
 		private IEnumerable<Pin> Select(IEnumerable<RowId> rows) {
 			foreach(RowId rowId in rows) {
-				Pin item = this.Find(rowId);
+				Pin? item = this.Find(rowId);
 				Debug.Assert(item != null, "What is the reason for the item not to be found?");
 				yield return item;
 			}
 		}
 
 		// Create wrapper for the row and register it in the dictionary
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static")]
 		private Pin Create(RowId rowId, RowId CircuitRowId) {
 			Pin item = new Pin(this.CircuitProject, rowId, CircuitRowId);
 			return item;
@@ -620,7 +626,7 @@ namespace LogicCircuit {
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
 		internal Pin FindOrCreate(RowId rowId) {
 			Debug.Assert(!rowId.IsEmpty && !this.Table.IsDeleted(rowId), "Bad RowId");
-			Pin item;
+			Pin? item;
 			if((item = this.Find(rowId)) != null) {
 				Debug.Assert(!item.IsDeleted(), "Deleted item should not be present in the dictionary");
 				return item;
@@ -628,7 +634,8 @@ namespace LogicCircuit {
 			Guid primaryKeyValue = this.Table.GetField(rowId, PinData.PinIdField.Field);
 
 
-			TableSnapshot<CircuitData> tableCircuit = (TableSnapshot<CircuitData>)this.CircuitProject.Table("Circuit");
+			TableSnapshot<CircuitData>? tableCircuit = (TableSnapshot<CircuitData>?)this.CircuitProject.Table("Circuit");
+			Debug.Assert(tableCircuit != null);
 			return this.Create(rowId, tableCircuit.Find(CircuitData.CircuitIdField.Field, primaryKeyValue));
 		}
 
@@ -648,7 +655,8 @@ namespace LogicCircuit {
 			// Fields of Circuit table
 
 		) {
-			TableSnapshot<CircuitData> tableCircuit = (TableSnapshot<CircuitData>)this.CircuitProject.Table("Circuit");
+			TableSnapshot<CircuitData>? tableCircuit = (TableSnapshot<CircuitData>?)this.CircuitProject.Table("Circuit");
+			Debug.Assert(tableCircuit != null);
 			CircuitData dataCircuit = new CircuitData() {
 				CircuitId = PinId
 			};
@@ -672,12 +680,12 @@ namespace LogicCircuit {
 		// Search helpers
 
 		// Finds Pin by PinId
-		public Pin FindByPinId(Guid pinId) {
+		public Pin? FindByPinId(Guid pinId) {
 			return this.Find(this.Table.Find(PinData.PinIdField.Field, pinId));
 		}
 
 		// Finds Pin by Circuit and Name
-		public Pin FindByCircuitAndName(Circuit circuit, string name) {
+		public Pin? FindByCircuitAndName(Circuit circuit, string name) {
 			return this.Find(
 				this.Table.Find(
 					PinData.CircuitIdField.Field, PinData.NameField.Field,
@@ -700,17 +708,17 @@ namespace LogicCircuit {
 		}
 
 		private void NotifyCollectionChanged(NotifyCollectionChangedEventArgs arg) {
-			NotifyCollectionChangedEventHandler handler = this.CollectionChanged;
+			NotifyCollectionChangedEventHandler? handler = this.CollectionChanged;
 			if(handler != null) {
 				handler(this, arg);
 			}
 		}
 
-		internal List<Pin> UpdateSet(int oldVersion, int newVersion) {
-			IEnumerator<TableChange<PinData>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
+		internal List<Pin>? UpdateSet(int oldVersion, int newVersion) {
+			IEnumerator<TableChange<PinData>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
 			if(change != null) {
 				bool handlerAttached = (this.CollectionChanged != null);
-				List<Pin> del = (handlerAttached) ? new List<Pin>() : null;
+				List<Pin>? del = (handlerAttached) ? new List<Pin>() : null;
 				while(change.MoveNext()) {
 					switch(change.Current.Action) {
 					case SnapTableAction.Insert:
@@ -721,7 +729,7 @@ namespace LogicCircuit {
 						if(handlerAttached) {
 							Pin item = change.Current.GetOldField(PinData.PinField.Field);
 							Debug.Assert(item.IsDeleted());
-							del.Add(item);
+							del!.Add(item);
 						}
 						break;
 					default:
@@ -736,11 +744,11 @@ namespace LogicCircuit {
 			return null;
 		}
 
-		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<Pin> deleted) {
-			IEnumerator<TableChange<PinData>> change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
+		internal void NotifyVersionChanged(int oldVersion, int newVersion, List<Pin>? deleted) {
+			IEnumerator<TableChange<PinData>>? change = this.Table.GetVersionChangeChanges(oldVersion, newVersion);
 			if(change != null) {
 				bool handlerAttached = (this.CollectionChanged != null);
-				List<Pin> add = (handlerAttached) ? new List<Pin>() : null;
+				List<Pin>? add = (handlerAttached) ? new List<Pin>() : null;
 				this.StartNotifyPinSetChanged(oldVersion, newVersion);
 				while(change.MoveNext()) {
 					this.NotifyPinSetChanged(change.Current);
@@ -748,7 +756,7 @@ namespace LogicCircuit {
 					case SnapTableAction.Insert:
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item was not created?");
 						if(handlerAttached) {
-							add.Add(this.Find(change.Current.RowId));
+							add!.Add(this.Find(change.Current.RowId)!);
 						}
 						break;
 					case SnapTableAction.Delete:
@@ -757,7 +765,7 @@ namespace LogicCircuit {
 					default:
 						Debug.Assert(change.Current.Action == SnapTableAction.Update, "Unknown action");
 						Debug.Assert(this.Find(change.Current.RowId) != null, "Why the item does not exist during update?");
-						this.Find(change.Current.RowId).NotifyChanged(change.Current);
+						this.Find(change.Current.RowId)!.NotifyChanged(change.Current);
 						break;
 					}
 				}
@@ -766,7 +774,7 @@ namespace LogicCircuit {
 					if(deleted != null && 0 < deleted.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, deleted));
 					}
-					if(0 < add.Count) {
+					if(0 < add!.Count) {
 						this.NotifyCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, add));
 					}
 				}

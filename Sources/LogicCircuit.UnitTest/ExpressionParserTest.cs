@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting.STAExtensions;
 
 namespace LogicCircuit.UnitTest {
 	/// <summary>
@@ -528,7 +529,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test for Parse of primary expression - name of input or output pin
 		/// </summary>
-		[TestMethod()]
+		[STATestMethod]
 		public void ExpressionParserVariableParseTest() {
 			CircuitProject project = ProjectTester.Load(this.TestContext, Properties.Resources.Digital_Clock, "4 bit adder");
 			CircuitTestSocket socket = new CircuitTestSocket(project.ProjectSet.Project.LogicalCircuit);
@@ -561,7 +562,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test for Parse of primary expression - case sensitivity of name of input or output pin
 		/// </summary>
-		[TestMethod()]
+		[STATestMethod]
 		public void ExpressionParserVariableCaseParseTest() {
 			CircuitProject project = ProjectTester.Load(this.TestContext, Properties.Resources.Digital_Clock, "4 bit adder");
 			Pin x1 = null, x2 = null, s = null, c = null;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Media;
 using System.Reflection;
 
@@ -6,7 +7,7 @@ namespace LogicCircuit {
 	public class FunctionSound : Probe, IFunctionVisual {
 
 		// SoundPlayer does not support multiple WAVs to played, so play only one sound, no matter how many sound function is running.
-		private static SoundPlayer player;
+		private static SoundPlayer? player;
 
 		// Note that turning sound on and off will happening only from "Run" thread.
 		// Turning Visual off will happened on main thread but only after Run thread ends.
@@ -28,6 +29,7 @@ namespace LogicCircuit {
 
 		public override bool Evaluate() {
 			if(this.GetState()) {
+				Debug.Assert(FunctionSound.player != null);
 				if(this[0] == State.On1) {
 					int count = ++FunctionSound.playCount;
 					if(count == 1) {
@@ -50,7 +52,7 @@ namespace LogicCircuit {
 
 		public void TurnOff() {
 			FunctionSound.playCount = 0;
-			SoundPlayer p = FunctionSound.player;
+			SoundPlayer? p = FunctionSound.player;
 			FunctionSound.player = null;
 			if(p != null) {
 				p.Stop();

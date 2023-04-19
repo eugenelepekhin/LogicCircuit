@@ -9,7 +9,7 @@ namespace LogicCircuit {
 		private readonly Action action;
 		private readonly Timer timer;
 
-		private TimerState state;
+		private TimerState? state;
 
 		public PreciseTimer(Action action, int period) {
 			this.action = action;
@@ -19,7 +19,7 @@ namespace LogicCircuit {
 		}
 
 		public int Period {
-			get { return (int)(this.state.period / TimeSpan.TicksPerMillisecond); }
+			get { return (int)(this.state!.period / TimeSpan.TicksPerMillisecond); }
 			set {
 				Tracer.Assert(3 < value && value <= 10000);
 				if(this.state == null || this.state.period != value * TimeSpan.TicksPerMillisecond) {
@@ -36,7 +36,7 @@ namespace LogicCircuit {
 
 		public void Start() {
 			if(!this.timer.Enabled) {
-				TimerState s = this.state;
+				TimerState s = this.state!;
 				s.cicle = 0;
 				s.start = DateTime.UtcNow.Ticks;
 				this.timer.Start();
@@ -49,8 +49,8 @@ namespace LogicCircuit {
 		//    }
 		//}
 
-		private void TimerElapsed(object sender, ElapsedEventArgs e) {
-			TimerState s = this.state;
+		private void TimerElapsed(object? sender, ElapsedEventArgs e) {
+			TimerState s = this.state!;
 			s.cicle++;
 			if((s.cicle % PreciseTimer.CicleCount) == 1) {
 				int i = Math.Max(1,

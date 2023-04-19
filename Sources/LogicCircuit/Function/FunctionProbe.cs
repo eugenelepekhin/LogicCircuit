@@ -8,9 +8,11 @@ namespace LogicCircuit {
 		public CircuitSymbol CircuitSymbol { get; private set; }
 		private readonly History<State>[] tickHistory;
 		private readonly History<long> valueHistory;
-		public string Label { get; set; }
+		public string Label { get; }
 
-		public FunctionProbe(CircuitSymbol symbol, CircuitState circuitState, int[] parameter, int capacity) : base(circuitState, parameter) {
+		public FunctionProbe(CircuitSymbol symbol, CircuitState circuitState, int[] parameter, int capacity, string label) : base(
+			circuitState, parameter
+		) {
 			Tracer.Assert(0 < this.BitWidth && this.BitWidth <= BasePin.MaxBitWidth);
 			this.CircuitSymbol = symbol;
 			this.tickHistory = new History<State>[this.BitWidth];
@@ -19,6 +21,7 @@ namespace LogicCircuit {
 			}
 			this.valueHistory = new History<long>(capacity);
 			this.valueHistory.Add(this.Pack());
+			this.Label = label;
 		}
 
 		public bool Invalid { get; set; }
@@ -104,12 +107,12 @@ namespace LogicCircuit {
 
 		public void TurnOff() {
 			if(this.CircuitSymbol.HasCreatedGlyph) {
-				((TextBlock)this.CircuitSymbol.ProbeView).Text = this.CircuitSymbol.Circuit.Notation;
+				((TextBlock)this.CircuitSymbol.ProbeView!).Text = this.CircuitSymbol.Circuit.Notation;
 			}
 		}
 
 		public void Redraw() {
-			((TextBlock)this.CircuitSymbol.ProbeView).Text = this.ToText();
+			((TextBlock)this.CircuitSymbol.ProbeView!).Text = this.ToText();
 		}
 
 		private class History<T> {

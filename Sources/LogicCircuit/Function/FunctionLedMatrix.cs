@@ -7,7 +7,7 @@ using System.Windows.Shapes;
 
 namespace LogicCircuit {
 	public abstract class FunctionLedMatrix : Probe, IFunctionVisual {
-		private static Brush[] brush;
+		private static Brush[]? brush;
 
 		private readonly List<CircuitSymbol> circuitSymbol;
 		private readonly Project project;
@@ -34,15 +34,15 @@ namespace LogicCircuit {
 		}
 
 		protected void Fill(int index, int value) {
-			UniformGrid grid = null;
+			UniformGrid? grid = null;
 			if(this.circuitSymbol.Count == 1) {
-				grid = (UniformGrid)this.circuitSymbol[0].ProbeView;
+				grid = (UniformGrid)this.circuitSymbol[0].ProbeView!;
 			} else {
 				LogicalCircuit currentCircuit = this.CurrentLogicalCircuit;
 				CircuitSymbol symbol = this.circuitSymbol.First(s => s.LogicalCircuit == currentCircuit);
 				grid = this.ProbeView(symbol);
 			}
-			((Shape)grid.Children[index]).Fill = FunctionLedMatrix.brush[value];
+			((Shape)grid.Children[index]).Fill = FunctionLedMatrix.brush![value];
 		}
 
 		public abstract void Redraw();
@@ -79,7 +79,7 @@ namespace LogicCircuit {
 
 		private UniformGrid ProbeView(CircuitSymbol symbol) {
 			if(symbol == this.circuitSymbol[0]) {
-				return (UniformGrid)this.circuitSymbol[0].ProbeView;
+				return (UniformGrid)this.circuitSymbol[0].ProbeView!;
 			} else {
 				DisplayCanvas canvas = (DisplayCanvas)symbol.Glyph;
 				return (UniformGrid)canvas.DisplayOf(this.circuitSymbol);

@@ -13,16 +13,18 @@ namespace LogicCircuit {
 	/// </summary>
 	public partial class DialogImport : Window, INotifyPropertyChanged {
 
-		public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler? PropertyChanged;
 
-		private SettingsWindowLocationCache windowLocation;
+		private SettingsWindowLocationCache? windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 
-		public string FileName { get; private set; }
-		public IEnumerable<CircuitInfo> List { get; private set; }
-		public IEnumerable<LogicalCircuit> ImportList {
-			get { return (this.DialogResult.HasValue && this.DialogResult.Value) ? this.List.Where(i => i.Import).Select(i => i.Circuit) : Enumerable.Empty<LogicalCircuit>(); }
-		}
+		public string FileName { get; }
+		public IEnumerable<CircuitInfo>? List { get; private set; }
+		public IEnumerable<LogicalCircuit> ImportList =>
+			(this.DialogResult.HasValue && this.DialogResult.Value && this.List != null)
+			? this.List.Where(i => i.Import).Select(i => i.Circuit)
+			: Enumerable.Empty<LogicalCircuit>()
+		;
 
 		public DialogImport(string file, CircuitProject target) {
 			this.FileName = file;
@@ -89,17 +91,18 @@ namespace LogicCircuit {
 
 		private void ButtonOkClick(object sender, RoutedEventArgs e) {
 			try {
-				this.DialogResult = true;
+				if(this.List != null) {
+					this.DialogResult = true;
+				}
 			} catch(Exception exception) {
 				Tracer.Report("DialogImport.ButtonOkClick", exception);
 				App.Mainframe.ReportException(exception);
 			}
 		}
 
-		[SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
 		public sealed class CircuitInfo : LogicalCircuitDescriptor {
 			public bool Import { get; set; }
-			public bool CanImport { get; private set; }
+			public bool CanImport { get; }
 
 			public CircuitInfo(LogicalCircuit circuit, bool canImport) : base(circuit, s => false) {
 				this.CanImport = canImport;

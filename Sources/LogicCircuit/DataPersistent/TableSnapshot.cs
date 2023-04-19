@@ -46,9 +46,6 @@ namespace LogicCircuit.DataPersistent {
 		/// <param name="name"></param>
 		/// <param name="fields"></param>
 		public TableSnapshot(StoreSnapshot store, string name, params IField<TRecord>[] fields) {
-			if(fields == null) {
-				throw new ArgumentNullException(nameof(fields));
-			}
 			this.StoreSnapshot = store ?? throw new ArgumentNullException(nameof(store));
 			this.table = new SnapTable<TRecord>(store.SnapStore, name, 0, fields, true);
 			this.StoreSnapshot.Add(this, this.table);
@@ -187,7 +184,7 @@ namespace LogicCircuit.DataPersistent {
 			this.CreateIndex<TField1, TField2>(name, field1, field2, false);
 		}
 
-		IUniqueIndex<TField> IPrimaryKeyHolder.PrimaryKey<TField>() {
+		IUniqueIndex<TField>? IPrimaryKeyHolder.PrimaryKey<TField>() {
 			return this.table.PrimaryKey as IUniqueIndex<TField>;
 		}
 
@@ -202,7 +199,7 @@ namespace LogicCircuit.DataPersistent {
 		/// <param name="foreignColumn"></param>
 		/// <param name="action"></param>
 		/// <param name="allowsDefault"></param>
-		public void CreateForeignKey<TField>(string name, ITableSnapshot parentTable, IField<TRecord, TField> foreignColumn, ForeignKeyAction action, bool allowsDefault) {
+		public void CreateForeignKey<TField>(string name, ITableSnapshot? parentTable, IField<TRecord, TField> foreignColumn, ForeignKeyAction action, bool allowsDefault) {
 			this.StoreSnapshot.SnapStore.CheckNotFrozen();
 			if(string.IsNullOrEmpty(name)) {
 				throw new ArgumentNullException(nameof(name));
@@ -227,7 +224,7 @@ namespace LogicCircuit.DataPersistent {
 				}
 			}
 
-			ForeignKey<TField> foreignKey = new ForeignKey<TField>(name, parent.PrimaryKey<TField>(), this, foreignColumn, action, allowsDefault);
+			ForeignKey<TField> foreignKey = new ForeignKey<TField>(name, parent.PrimaryKey<TField>()!, this, foreignColumn, action, allowsDefault);
 			this.table.ForeignKeys[foreignColumn.Order] = foreignKey;
 			parent.Children.Add(foreignKey);
 		}
@@ -394,7 +391,7 @@ namespace LogicCircuit.DataPersistent {
 		/// <param name="value"></param>
 		/// <returns></returns>
 		public IEnumerable<RowId> Select<TField>(IField<TRecord, TField> field, TField value) {
-			IIndex<TRecord> index = this.FindIndex(field, false);
+			IIndex<TRecord>? index = this.FindIndex(field, false);
 			if(index != null) {
 				return ((IFieldIndex<TField>)index).Find(value, this.StoreSnapshot.Version);
 			} else {
@@ -436,7 +433,7 @@ namespace LogicCircuit.DataPersistent {
 		/// <param name="value2"></param>
 		/// <returns></returns>
 		public IEnumerable<RowId> Select<TField1, TField2>(IField<TRecord, TField1> field1, IField<TRecord, TField2> field2, TField1 value1, TField2 value2) {
-			IFieldIndex<Composite<TField1, TField2>> index = (IFieldIndex<Composite<TField1, TField2>>)this.FindIndex(field1, field2, false);
+			IFieldIndex<Composite<TField1, TField2>>? index = (IFieldIndex<Composite<TField1, TField2>>?)this.FindIndex(field1, field2, false);
 			if(index != null) {
 				return index.Find(new Composite<TField1, TField2>() { t1 = value1, t2 = value2 }, this.StoreSnapshot.Version);
 			} else {
@@ -452,7 +449,7 @@ namespace LogicCircuit.DataPersistent {
 		/// <param name="value"></param>
 		/// <returns></returns>
 		public RowId Find<TField>(IField<TRecord, TField> field, TField value) {
-			IUniqueIndex<TField> index = (IUniqueIndex<TField>)this.FindIndex(field, true);
+			IUniqueIndex<TField>? index = (IUniqueIndex<TField>?)this.FindIndex(field, true);
 			if(index != null) {
 				return index.FindUnique(value, this.StoreSnapshot.Version);
 			}
@@ -470,7 +467,7 @@ namespace LogicCircuit.DataPersistent {
 		/// <param name="value2"></param>
 		/// <returns></returns>
 		public RowId Find<TField1, TField2>(IField<TRecord, TField1> field1, IField<TRecord, TField2> field2, TField1 value1, TField2 value2) {
-			IFieldIndex<Composite<TField1, TField2>> index = (IFieldIndex<Composite<TField1, TField2>>)this.FindIndex(field1, field2, true);
+			IFieldIndex<Composite<TField1, TField2>>? index = (IFieldIndex<Composite<TField1, TField2>>?)this.FindIndex(field1, field2, true);
 			if(index != null) {
 				return ((IUniqueIndex<Composite<TField1, TField2>>)index).FindUnique(new Composite<TField1,TField2>() { t1 = value1, t2 = value2 }, this.StoreSnapshot.Version);
 			}
@@ -478,7 +475,7 @@ namespace LogicCircuit.DataPersistent {
 		}
 
 		public bool Exists<TField>(IField<TRecord, TField> field, TField value) {
-			IIndex<TRecord> index = this.FindIndex(field, false);
+			IIndex<TRecord>? index = this.FindIndex(field, false);
 			if(index != null) {
 				return ((IFieldIndex<TField>)index).Exists(value, this.StoreSnapshot.Version);
 			} else {
@@ -487,7 +484,7 @@ namespace LogicCircuit.DataPersistent {
 		}
 
 		public bool Exists<TField1, TField2>(IField<TRecord, TField1> field1, IField<TRecord, TField2> field2, TField1 value1, TField2 value2) {
-			IIndex<TRecord> index = this.FindIndex(field1, field2, false);
+			IIndex<TRecord>? index = this.FindIndex(field1, field2, false);
 			if(index != null) {
 				return ((IFieldIndex<Composite<TField1, TField2>>)index).Exists(new Composite<TField1, TField2>() { t1 = value1, t2 = value2 }, this.StoreSnapshot.Version);
 			} else {
@@ -627,7 +624,7 @@ namespace LogicCircuit.DataPersistent {
 		/// <param name="version"></param>
 		/// <returns></returns>
 		[SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
-		public IEnumerator<TableChange<TRecord>> GetChanges(int version) {
+		public IEnumerator<TableChange<TRecord>>? GetChanges(int version) {
 			return this.GetChanges(version, version);
 		}
 
@@ -638,7 +635,7 @@ namespace LogicCircuit.DataPersistent {
 		/// <param name="toVersion"></param>
 		/// <returns></returns>
 		[SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
-		public IEnumerator<TableChange<TRecord>> GetChanges(int fromVersion, int toVersion) {
+		public IEnumerator<TableChange<TRecord>>? GetChanges(int fromVersion, int toVersion) {
 			if(toVersion < fromVersion) {
 				throw new ArgumentOutOfRangeException(nameof(toVersion));
 			}
@@ -661,13 +658,13 @@ namespace LogicCircuit.DataPersistent {
 		/// <param name="toVersion"></param>
 		/// <returns></returns>
 		[SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
-		public IEnumerator<TableChange<TRecord>> GetVersionChangeChanges(int fromVersion, int toVersion) {
+		public IEnumerator<TableChange<TRecord>>? GetVersionChangeChanges(int fromVersion, int toVersion) {
 			if(fromVersion != toVersion) {
 				bool reverse = toVersion < fromVersion;
 				int min = reverse ? toVersion : fromVersion;
 				int max = reverse ? fromVersion : toVersion;
 
-				IEnumerator<TableChange<TRecord>> enumerator = this.GetChanges(min + 1, max);
+				IEnumerator<TableChange<TRecord>>? enumerator = this.GetChanges(min + 1, max);
 				if(enumerator != null && reverse) {
 					enumerator = new ReverseChangeEnumerator((ChangeEnumerator)enumerator);
 				}
@@ -743,7 +740,7 @@ namespace LogicCircuit.DataPersistent {
 			return ++TableSnapshot<TRecord>.currentTimestamp;
 		}
 
-		private IIndex<TRecord> FindIndex(IField<TRecord> field, bool uniqueOnly) {
+		private IIndex<TRecord>? FindIndex(IField<TRecord> field, bool uniqueOnly) {
 			this.table.ValidateField(field);
 			List<IIndex<TRecord>> list = this.table.Indexes[field.Order];
 			if(list != null) {
@@ -758,7 +755,7 @@ namespace LogicCircuit.DataPersistent {
 			return null;
 		}
 
-		private IIndex<TRecord> FindIndex(IField<TRecord> field1, IField<TRecord> field2, bool uniqueOnly) {
+		private IIndex<TRecord>? FindIndex(IField<TRecord> field1, IField<TRecord> field2, bool uniqueOnly) {
 			this.table.ValidateField(field1);
 			this.table.ValidateField(field2);
 			List<IIndex<TRecord>> list = this.table.Indexes[field1.Order];
@@ -845,6 +842,7 @@ namespace LogicCircuit.DataPersistent {
 				this.enumerator = this.action.GetEnumerator();
 			}
 
+			[SuppressMessage("Performance", "CA1854:Prefer the 'IDictionary.TryGetValue(TKey, out TValue)' method")]
 			private void MergeChanges(List<int> version) {
 				for(int i = 0; i < version.Count; i++) {
 					using(IEnumerator<SnapTableChange<TRecord>> e = this.table.GetChanges(version[i])) {

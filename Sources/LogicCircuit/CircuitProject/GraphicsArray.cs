@@ -104,14 +104,14 @@ namespace LogicCircuit {
 			Tracer.Assert(this.AddressPin == null);
 			Tracer.Assert(addressPin != null && dataOutPin != null && dataInPin != null && writePin != null);
 
-			this.AddressPin = addressPin;
-			this.DataOutPin = dataOutPin;
-			this.DataInPin = dataInPin;
-			this.WritePin = writePin;
+			this.AddressPin = addressPin!;
+			this.DataOutPin = dataOutPin!;
+			this.DataInPin = dataInPin!;
+			this.WritePin = writePin!;
 
-			Tracer.Assert(addressPin.BitWidth == this.AddressBitWidth);
-			Tracer.Assert(dataInPin.BitWidth == dataOutPin.BitWidth && dataOutPin.BitWidth == this.DataBitWidth);
-			Tracer.Assert(writePin.BitWidth == 1);
+			Tracer.Assert(this.AddressPin.BitWidth == this.AddressBitWidth);
+			Tracer.Assert(this.DataInPin.BitWidth == this.DataOutPin.BitWidth && this.DataOutPin.BitWidth == this.DataBitWidth);
+			Tracer.Assert(this.WritePin.BitWidth == 1);
 		}
 
 		public override Circuit CopyTo(LogicalCircuit target) {

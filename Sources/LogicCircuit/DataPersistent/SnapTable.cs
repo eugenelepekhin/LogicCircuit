@@ -2,8 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.CompilerServices;
+using System.Windows.Documents;
 
 namespace LogicCircuit.DataPersistent {
 
@@ -169,7 +171,7 @@ namespace LogicCircuit.DataPersistent {
 		/// <summary>
 		/// Gets or sets Primary Key of the table
 		/// </summary>
-		public IIndex<TRecord> PrimaryKey { get; set; }
+		public IIndex<TRecord>? PrimaryKey { get; set; }
 
 		/// <summary>
 		/// List of foreign key for each column.
@@ -228,14 +230,21 @@ namespace LogicCircuit.DataPersistent {
 			this.Fields = list;
 
 			this.IsUserTable = isUserTable;
-			if(this.IsUserTable) {
-				this.Indexes = new List<IIndex<TRecord>>[list.Length];
-				this.ForeignKeys = new IForeignKey[list.Length];
-				this.Children = new List<IForeignKey>();
-			}
+			this.InitFields(list.Length);
 
 			this.SnapStore.Add(this);
 		}
+
+		#pragma warning disable CS8774 // Member must have a non-null value when exiting.
+		[MemberNotNull(nameof(this.Indexes), nameof(this.ForeignKeys), nameof(this.Children))]
+		private void InitFields(int count) {
+			if(this.IsUserTable) {
+				this.Indexes = new List<IIndex<TRecord>>[count];
+				this.ForeignKeys = new IForeignKey[count];
+				this.Children = new List<IForeignKey>();
+			}
+		}
+		#pragma warning restore CS8774 // Member must have a non-null value when exiting.
 
 		/// <summary>
 		/// Create TableSnapshot base on the TRecord.
@@ -267,7 +276,6 @@ namespace LogicCircuit.DataPersistent {
 				this.snap.PrepareAdd();
 			}
 			RowId rowId;
-			RuntimeHelpers.PrepareConstrainedRegions();
 			try {} finally {
 				rowId = new RowId(this.table.FixedAllocate());
 				ValueList<Row>.Address rowAddress = this.table.ItemAddress(rowId.Value);
@@ -744,7 +752,6 @@ namespace LogicCircuit.DataPersistent {
 					TableSize = this.table.Count,
 					LogSize = this.log.Count + 1
 				};
-				RuntimeHelpers.PrepareConstrainedRegions();
 				try {} finally {
 					int index = this.log.FixedAllocate();
 					ValueList<Log>.Address logAddress = this.log.ItemAddress(index);
@@ -765,7 +772,6 @@ namespace LogicCircuit.DataPersistent {
 					// this is the first time the row is updated in this transaction
 					Debug.Assert(snapAddress.Page[snapAddress.Index].LogSize == this.log.Count, "Invalid state: wrong log size");
 					this.log.PrepareAdd();
-					RuntimeHelpers.PrepareConstrainedRegions();
 					try {} finally {
 						int index = this.log.FixedAllocate();
 						ValueList<Log>.Address logAddress = this.log.ItemAddress(index);
@@ -930,7 +936,7 @@ namespace LogicCircuit.DataPersistent {
 					text.AppendLine("_Data___________________________________________________________________________|_LogIndex_|_Deleted_|_Valid_|_RawLogIndex_");
 					for(int i = 0; i < this.table.Count; i++) {
 						ValueList<Row>.Address address = this.table.ItemAddress(i);
-						string data = address.Page[address.Index].Data.ToString().Trim().Replace("\r\n", " ");
+						string data = address.Page[address.Index].Data.ToString()!.Trim().Replace("\r\n", " ", StringComparison.Ordinal);
 						text.AppendFormat(CultureInfo.InvariantCulture,
 							" {0,78} | {1,8:D} |   {2}     |  {3}    | {4:X}",
 							data.Substring(0, Math.Min(data.Length, 78)),
@@ -946,7 +952,7 @@ namespace LogicCircuit.DataPersistent {
 					text.AppendLine("_Data___________________________________________________________________________|_RowId____|_LogIndex_|_Deleted_");
 					for(int i = 0; i < this.log.Count; i++) {
 						ValueList<Log>.Address address = this.log.ItemAddress(i);
-						string data = address.Page[address.Index].Data.ToString().Trim().Replace("\r\n", " ");
+						string data = address.Page[address.Index].Data.ToString()!.Trim().Replace("\r\n", " ", StringComparison.Ordinal);
 						text.AppendFormat(CultureInfo.InvariantCulture,
 							" {0,78} | {1,8:D} | {2,8:D} |   {3}",
 							data.Substring(0, Math.Min(data.Length, 78)),

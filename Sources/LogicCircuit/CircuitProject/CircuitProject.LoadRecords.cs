@@ -50,7 +50,7 @@ namespace LogicCircuit {
 						// The reader is positioned on a field element
 						string fieldName = reader.LocalName;
 						string fieldValue = reader.ReadElementText();  // reads the text and moves the reader beyond this element
-						if(!string.IsNullOrEmpty(fieldValue) && this.serializers.TryGetValue(fieldName, out IFieldSerializer<TRecord> serializer)) {
+						if(!string.IsNullOrEmpty(fieldValue) && this.serializers.TryGetValue(fieldName, out IFieldSerializer<TRecord>? serializer)) {
 							Debug.Assert(serializer != null);
 							serializer.SetTextValue(ref data, fieldValue);
 						}
@@ -109,7 +109,7 @@ namespace LogicCircuit {
 					Debug.Assert(xmlReader.Depth == 1);
 					while (xmlReader.Depth == 1) {
 						if (xmlReader.IsElement(ns)) {
-							if(loaders.TryGetValue(xmlReader.LocalName, out IRecordLoader loader)) {
+							if(loaders.TryGetValue(xmlReader.LocalName, out IRecordLoader? loader)) {
 								Debug.Assert(loader != null);
 								loader.LoadRecord(xmlReader);
 								continue;

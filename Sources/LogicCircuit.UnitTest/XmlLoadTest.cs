@@ -1,14 +1,12 @@
-﻿using System;
-using System.Linq;
-using System.Xml;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Xml;
+using Microsoft.VisualStudio.TestTools.UnitTesting.STAExtensions;
 
 namespace LogicCircuit.UnitTest {
 	/// <summary>
 	/// This is a test class for Load and save xml files and is intended
 	/// to contain all load and save Unit Tests
 	/// </summary>
-	[TestClass()]
+	[STATestClass]
 	public class XmlLoadTest {
 		/// <summary>
 		///Gets or sets the test context which provides
@@ -19,7 +17,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test for LoadRecord
 		/// </summary>
-		[TestMethod()]
+		[STATestMethod]
 		public void XmlLoadReadElementTextTest() {
 			string text = Properties.Resources.XmlLoadReadElementTextTest;
 			XmlDocument xml = new XmlDocument();

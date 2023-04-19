@@ -7,7 +7,7 @@ namespace LogicCircuit {
 		private readonly T4ToStringHelper toStringHelper = new T4ToStringHelper();
 		public T4ToStringHelper ToStringHelper { get { return this.toStringHelper; } }
 
-		private StringBuilder generationEnvironmentField;
+		private StringBuilder? generationEnvironmentField;
 
 		/// <summary>
 		/// The string builder that generation-time code is using to assemble generated output

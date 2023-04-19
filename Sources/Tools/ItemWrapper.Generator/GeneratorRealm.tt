@@ -10,7 +10,7 @@ namespace <#=this.Store.Namespace#> {
 		private const string PersistenceNamespace = "<#=this.Store.PersistenceNamespace ?? string.Empty#>";
 		private const string PersistencePrefix = "<#=this.Store.PersistencePrefix ?? string.Empty#>";
 
-		public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler? PropertyChanged;
 
 <#if(this.UseDispatcher) {#>
 		public System.Windows.Threading.Dispatcher Dispatcher { get; set; }
@@ -22,6 +22,7 @@ namespace <#=this.Store.Namespace#> {
 
 		public bool UpdateInProgress { get; private set; }
 
+		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public <#=this.Store.Name#>() : base() {
 			// Create all sets
 			this.CreateSets();
@@ -34,6 +35,7 @@ namespace <#=this.Store.Namespace#> {
 			this.FreezeShape();
 			this.Init();
 		}
+		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 <#if(this.RealmType == RealmType.Multiverse) {#>
 
 		public <#=this.Store.Name#>(<#=this.Store.Name#> store) : base(store) {
@@ -62,7 +64,7 @@ namespace <#=this.Store.Namespace#> {
 		}
 
 		private void NotifyPropertyChanged(string name) {
-			PropertyChangedEventHandler handler = this.PropertyChanged;
+			PropertyChangedEventHandler? handler = this.PropertyChanged;
 			if(handler != null) {
 <#if(this.UseDispatcher) {#>
 				System.Windows.Threading.Dispatcher dispatcher = this.Dispatcher;
@@ -75,13 +77,13 @@ namespace <#=this.Store.Namespace#> {
 			}
 		}
 
-		private void StoreVersionChanged(object sender, VersionChangeEventArgs e) {
+		private void StoreVersionChanged(object? sender, VersionChangeEventArgs e) {
 			try {
 				this.UpdateInProgress = true;
 				int oldVersion = e.OldVersion;
 				int newVersion = e.NewVersion;
 <#foreach(Table table in this.Store) {#>
-				List<<#=table.Name#>> deleted<#=table.Name#> = this.<#=table.Name#>Set.UpdateSet(oldVersion, newVersion);
+				List<<#=table.Name#>>? deleted<#=table.Name#> = this.<#=table.Name#>Set.UpdateSet(oldVersion, newVersion);
 <#}#>
 
 <#foreach(Table table in this.Store) {#>
@@ -94,11 +96,11 @@ namespace <#=this.Store.Namespace#> {
 			}
 		}
 
-		private void StoreLatestVersionChanged(object sender, EventArgs e) {
+		private void StoreLatestVersionChanged(object? sender, EventArgs e) {
 			this.NotifyPropertyChanged("LatestAvailableVersion");
 		}
 
-		private void StoreRolledBack(object sender, RolledBackEventArgs e) {
+		private void StoreRolledBack(object? sender, RolledBackEventArgs e) {
 			int version = e.Version;
 <#foreach(Table table in this.Store) {#>
 			this.<#=table.Name#>Set.NotifyRolledBack(version);

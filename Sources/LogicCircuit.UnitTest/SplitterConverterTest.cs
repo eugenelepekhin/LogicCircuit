@@ -1,6 +1,5 @@
-﻿using System;
-using System.Xml;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Xml;
+using Microsoft.VisualStudio.TestTools.UnitTesting.STAExtensions;
 
 namespace LogicCircuit.UnitTest {
 	/// <summary>
@@ -17,7 +16,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test of Clock function
 		/// </summary>
-		[TestMethod()]
+		[STATestMethod]
 		public void SplitterConvertionTest() {
 			string projectText = Properties.Resources.SplitterConversion;
 			this.AssertFileVersion(projectText);

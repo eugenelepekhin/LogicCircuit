@@ -24,7 +24,7 @@ namespace LogicCircuit {
 		) {
 			this.settings = settings;
 			this.key = key;
-			string text = this.settings[this.key];
+			string? text = this.settings[this.key];
 			DateTime value;
 			if( string.IsNullOrEmpty(text) ||
 				!DateTime.TryParseExact(text, "s", CultureInfo.InvariantCulture,

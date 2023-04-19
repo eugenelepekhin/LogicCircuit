@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting.STAExtensions;
 
 namespace LogicCircuit.UnitTest {
-	[TestClass]
+	[STATestClass]
 	public class SensorTest {
 		public TestContext TestContext { get; set; }
 
@@ -12,7 +9,7 @@ namespace LogicCircuit.UnitTest {
 			return list1.Zip(list2, (p1, p2) => p1 == p2).All(r => r);
 		}
 
-		[TestMethod]
+		[STATestMethod]
 		public void SensorParseSeriesTest() {
 			IList<SensorPoint> expected = new List<SensorPoint>() {
 				new SensorPoint(0x2, 0x5),
@@ -25,14 +22,14 @@ namespace LogicCircuit.UnitTest {
 			Assert.IsTrue(this.AreEqual(expected, actual));
 		}
 
-		[TestMethod]
+		[STATestMethod]
 		public void SensorParseSeriesEmptyTest() {
 			IList<SensorPoint> actual;
 			Assert.IsTrue(Sensor.TryParseSeries("", 32, out actual));
 			Assert.IsTrue(actual != null && actual.Count == 0);
 		}
 
-		[TestMethod]
+		[STATestMethod]
 		public void SensorSaveSeriesTest() {
 			IList<SensorPoint> expected = new List<SensorPoint>() {
 				new SensorPoint(0x2, 0x5),
@@ -48,7 +45,7 @@ namespace LogicCircuit.UnitTest {
 			Assert.IsTrue(this.AreEqual(expected, actual));
 		}
 
-		[TestMethod]
+		[STATestMethod]
 		public void SensorSaveSeriesEmptyTest() {
 			IList<SensorPoint> expected = new List<SensorPoint>();
 			string text = Sensor.SaveSeries(expected);
@@ -56,7 +53,7 @@ namespace LogicCircuit.UnitTest {
 			Assert.IsTrue(text != null && text.Length == 0);
 		}
 
-		[TestMethod]
+		[STATestMethod]
 		public void SensorLoopTest() {
 			ProjectTester tester = new ProjectTester(this.TestContext, Properties.Resources.SensorTests, "Loop Test");
 			OutputSocket target = new OutputSocket(tester.Output[0]);
@@ -67,7 +64,7 @@ namespace LogicCircuit.UnitTest {
 			}
 		}
 
-		[TestMethod]
+		[STATestMethod]
 		public void SensorSeriesTest() {
 			ProjectTester tester = new ProjectTester(this.TestContext, Properties.Resources.SensorTests, "Series Test");
 			OutputSocket target = new OutputSocket(tester.Output[0]);
@@ -78,7 +75,7 @@ namespace LogicCircuit.UnitTest {
 			}
 		}
 
-		[TestMethod]
+		[STATestMethod]
 		public void SensorRandomTest() {
 			ProjectTester tester = new ProjectTester(this.TestContext, Properties.Resources.SensorTests, "Random Test");
 			OutputSocket target = new OutputSocket(tester.Output[0]);
