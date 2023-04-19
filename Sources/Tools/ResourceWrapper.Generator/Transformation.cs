@@ -6,7 +6,7 @@ namespace ResourceWrapper.Generator {
 		private readonly ToStringHelper toStringHelper = new ToStringHelper();
 		public ToStringHelper ToStringHelper { get { return this.toStringHelper; } }
 
-		private StringBuilder generationEnvironmentField;
+		private StringBuilder? generationEnvironmentField;
 
 		/// <summary>
 		/// The string builder that generation-time code is using to assemble generated output

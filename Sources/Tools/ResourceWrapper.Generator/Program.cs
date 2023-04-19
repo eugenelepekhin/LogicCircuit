@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
+﻿using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using CommandLineParser;
 
 namespace ResourceWrapper.Generator {
 	internal class Program {
 		// parameters for debug:
 		// /v /f "C:\Projects\ResourceWrapper.Generator\master\Sources\TestProject" /n TestProject /a ErrorResource.resx;InternalResource.resx;NoCodeResource.resx;PublicResource.resx;SubFolder\NameSpacedResource.resx;SubFolder\Resource.resx;SubFolder\Resource.ru.resx;SubFolder\Resource.uz-UZ-Cyrl.resx /r SubFolder\Resource.resx /g ResXFileCodeGenerator /cs Resource.Designer.cs /rn ""
+		[SuppressMessage("Design", "CA1031:Do not catch general exception types")]
 		private static int Main(string[] args) {
 			int result = 1;
 			try {
@@ -29,7 +28,7 @@ namespace ResourceWrapper.Generator {
 					.AddFlag("Verbose", "v", "Verbose output", false, v => Parser.Verbose = v)
 					.AddFlag("Help", "?", "Print help", false, h => printHelp = h)
 				;
-				string errors = commandLine.Parse(args, null);
+				string? errors = commandLine.Parse(args, null);
 
 				if(printHelp) {
 					Program.Usage(commandLine.Help());

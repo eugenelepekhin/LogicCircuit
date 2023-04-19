@@ -1,0 +1,10 @@
+<Project>
+	<Import Project="..\$(MSBuildThisFile)"/>
+
+	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
+		<PublishFolder>$(ToolsFolder)</PublishFolder>
+		<SelfContained>false</SelfContained>
+		<PublishReadyToRun>false</PublishReadyToRun>
+	</PropertyGroup>
+
+</Project>

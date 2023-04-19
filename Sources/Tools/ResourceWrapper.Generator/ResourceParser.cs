@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
+﻿using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Xml;
 
@@ -15,14 +12,14 @@ namespace ResourceWrapper.Generator {
 	/// If there are formating parameters comment should declare parameters of formating function: {type1 parameter1, type2 parameter2, ... typeM parameterM}
 	/// </summary>
 	internal class ResourceParser {
-		public static IEnumerable<ResourceItem> Parse(string file, bool enforceParameterDeclaration, IEnumerable<string> satelites, out int errors, out int warnings) {
+		public static IEnumerable<ResourceItem>? Parse(string file, bool enforceParameterDeclaration, IEnumerable<string> satelites, out int errors, out int warnings) {
 			XmlDocument resource = new XmlDocument();
 			resource.Load(file);
-			XmlNodeList nodeList = ResourceParser.SelectResources(resource);
+			XmlNodeList? nodeList = ResourceParser.SelectResources(resource);
 			if(nodeList != null && 0 < nodeList.Count) {
 				ResourceParser parser = new ResourceParser(file, enforceParameterDeclaration, satelites);
 				List<ResourceItem> list = new List<ResourceItem>();
-				void assign(ResourceItem item) { if(item != null) { list.Add(item); } }
+				void assign(ResourceItem? item) { if(item != null) { list.Add(item); } }
 				parser.Parse(nodeList,
 					(string name, string value, string comment) => assign(parser.GenerateInclude(name, value, comment)),
 					(string name, string value, string comment) => assign(parser.GenerateString(name, value, comment))
@@ -43,11 +40,11 @@ namespace ResourceWrapper.Generator {
 			return Enumerable.Empty<ResourceItem>();
 		}
 
-		public static IEnumerable<ResourceItem> Parse(string file, bool enforceParameterDeclaration, IEnumerable<string> satelites) {
+		public static IEnumerable<ResourceItem>? Parse(string file, bool enforceParameterDeclaration, IEnumerable<string> satelites) {
 			return ResourceParser.Parse(file, enforceParameterDeclaration, satelites, out int _, out int _);
 		}
 
-		private static XmlNodeList SelectResources(XmlDocument resource) {
+		private static XmlNodeList? SelectResources(XmlDocument resource) {
 			return resource.SelectNodes("/root/data");
 		}
 
@@ -75,21 +72,21 @@ namespace ResourceWrapper.Generator {
 
 		private void Parse(XmlNodeList nodeList, Action<string, string, string> generateInclude, Action<string, string, string> generateString) {
 			foreach(XmlNode node in nodeList) {
-				XmlAttribute nodeName = node.Attributes["name"];
+				XmlAttribute? nodeName = node.Attributes!["name"];
 				if(nodeName == null) {
 					this.Error("Unknown Node", "Resource name is missing");
 					continue;
 				}
 				string name = nodeName.InnerText.Trim();
 
-				XmlNode nodeValue = node.SelectSingleNode("value");
+				XmlNode? nodeValue = node.SelectSingleNode("value");
 				if(nodeValue == null) {
 					this.Error(name, "Value missing");
 					continue;
 				}
 				string value = nodeValue.InnerText.Trim();
 
-				XmlNode nodeComment = node.SelectSingleNode("comment");
+				XmlNode? nodeComment = node.SelectSingleNode("comment");
 				string comment = (nodeComment != null) ? nodeComment.InnerText.Trim() : string.Empty;
 
 				if(node.Attributes["type"] != null) {
@@ -108,14 +105,15 @@ namespace ResourceWrapper.Generator {
 			foreach(string file in this.satelites) {
 				XmlDocument resource = new XmlDocument();
 				resource.Load(file);
-				XmlNodeList nodeList = ResourceParser.SelectResources(resource);
+				XmlNodeList? nodeList = ResourceParser.SelectResources(resource);
 				if(nodeList != null && 0 < nodeList.Count) {
 					this.fileName = file;
 					this.Parse(nodeList,
 						(string name, string value, string comment) => {
-							if(items.TryGetValue(name, out ResourceItem item)) {
-								ResourceItem satellite = this.GenerateInclude(name, value, comment);
-								if(item.Type != satellite.Type) {
+							if(items.TryGetValue(name, out ResourceItem? item)) {
+								ResourceItem? satellite = this.GenerateInclude(name, value, comment);
+								// satellite == null on errors. So, do not generate yet another one.
+								if(satellite != null && item.Type != satellite.Type) {
 									this.Error(name, "type of file resource is different in main resource file \"{0}\" and language resource file \"{1}\"", mainFile, file);
 								}
 							} else {
@@ -123,7 +121,7 @@ namespace ResourceWrapper.Generator {
 							}
 						},
 						(string name, string value, string comment) => {
-							if(items.TryGetValue(name, out ResourceItem item)) {
+							if(items.TryGetValue(name, out ResourceItem? item)) {
 								if(!item.SuppressValidation) {
 									int count = this.ValidateFormatItems(name, value, false);
 									if(count != (item.Parameters == null ? 0 : item.Parameters.Count)) {
@@ -146,13 +144,13 @@ namespace ResourceWrapper.Generator {
 
 		private bool Error(string nodeName, string errorText, params object[] args) {
 			//"C:\Projects\TestApp\TestApp\Subfolder\TextMessage.resx(10,1): error URW001: nodeName: my error"
-			Message.Error("{0}(1,1): error URW001: {1}: {2}", this.fileName, nodeName, this.Format(errorText, args));
+			Message.Error("{0}(1,1): error URW001: {1}: {2}", this.fileName, nodeName, ResourceParser.Format(errorText, args));
 			this.errorCount++;
 			return false;
 		}
 
 		private void Warning(string nodeName, string errorText, params object[] args) {
-			Message.Warning("{0}(1,1): warning: {1}: {2}", this.fileName, nodeName, this.Format(errorText, args));
+			Message.Warning("{0}(1,1): warning: {1}: {2}", this.fileName, nodeName, ResourceParser.Format(errorText, args));
 			this.warningCount++;
 			Message.Flush();
 		}
@@ -161,11 +159,11 @@ namespace ResourceWrapper.Generator {
 			return this.Error(nodeName, "Structure of the value node is corrupted");
 		}
 
-		private string Format(string format, params object[] args) {
+		private static string Format(string format, params object[] args) {
 			return string.Format(CultureInfo.InvariantCulture, format, args);
 		}
 
-		private ResourceItem GenerateInclude(string name, string value, string comment) {
+		private ResourceItem? GenerateInclude(string name, string value, string comment) {
 			string[] list = value.Split(';');
 			if(list.Length < 2) {
 				this.Corrupted(name);
@@ -180,17 +178,17 @@ namespace ResourceWrapper.Generator {
 			string type = list[0].Trim();
 			if(0 == this.errorCount) {
 				if(type == "System.String") {
-					file = this.Format("content of the file: \"{0}\"", file);
+					file = ResourceParser.Format("content of the file: \"{0}\"", file);
 				}
 				return new ResourceItem(name, file, type);
 			}
 			return null;
 		}
 
-		private ResourceItem GenerateString(string name, string value, string comment) {
+		private ResourceItem? GenerateString(string name, string value, string comment) {
 			ResourceItem item = new ResourceItem(name, value, "string");
 
-			if(!comment.StartsWith("-")) {
+			if(!comment.StartsWith('-')) {
 				if(!this.IsVariantList(item, value, comment)) {
 					this.ParseFormatParameters(item, value, comment);
 				}

@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text;
 
@@ -12,11 +11,13 @@ namespace ResourceWrapper.Generator {
 		/// <summary>
 		/// List of parameters if format placeholders are present, null otherwise.
 		/// </summary>
-		public List<Parameter> Parameters { get; set; }
+		[SuppressMessage("Usage", "CA2227:Collection properties should be read only")]
+		public IList<Parameter>? Parameters { get; set; }
 		/// <summary>
 		/// List of variant acceptable for this resource if it specified like: !(one, two, three) null otherwise.
 		/// </summary>
-		public List<string> LocalizationVariants { get; set; }
+		[SuppressMessage("Usage", "CA2227:Collection properties should be read only")]
+		public IList<string>? LocalizationVariants { get; set; }
 		/// <summary>
 		/// True if minus was in the first character of comment to suppress validation of satellites.
 		/// </summary>
@@ -66,7 +67,7 @@ namespace ResourceWrapper.Generator {
 				if(i > 0) {
 					parameter.Append(", ");
 				}
-				parameter.AppendFormat("{0} {1}", this.Parameters[i].Type, this.Parameters[i].Name);
+				parameter.AppendFormat(CultureInfo.InvariantCulture, "{0} {1}", this.Parameters[i].Type, this.Parameters[i].Name);
 			}
 			return parameter.ToString();
 		}
@@ -93,9 +94,11 @@ namespace ResourceWrapper.Generator {
 				StringBuilder text = new StringBuilder();
 				foreach(string value in this.LocalizationVariants) {
 					if(0 < text.Length) {
-						text.Append(",");
+						text.Append(',');
 					}
-					text.AppendFormat("\"{0}\"", value.Replace("\"", "\\\"").Replace("\\", "\\\\"));
+					text.AppendFormat(CultureInfo.InvariantCulture, "\"{0}\"",
+						value.Replace("\"", "\\\"", StringComparison.Ordinal).Replace("\\", "\\\\", StringComparison.Ordinal)
+					);
 				}
 				return "((PseudoResourceManager)ResourceManager).GetBaseString(new string[]{" + text.ToString() + "}, ";
 			}

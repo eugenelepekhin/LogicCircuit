@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Reflection;
 
@@ -22,20 +22,21 @@ namespace ResourceWrapper.Generator {
 		/// </summary>
 		/// <param name="objectToConvert"></param>
 		/// <returns></returns>
-		public string ToStringWithCulture(object objectToConvert) {
+		public string? ToStringWithCulture(object objectToConvert) {
 			if(objectToConvert == null) {
-				throw new ArgumentNullException("objectToConvert");
+				throw new ArgumentNullException(nameof(objectToConvert));
 			}
 			Type type = objectToConvert.GetType();
-			MethodInfo method = type.GetMethod("ToString", new Type[] { typeof(IFormatProvider) });
+			MethodInfo? method = type.GetMethod("ToString", new Type[] { typeof(IFormatProvider) });
 			if(method != null) {
-				return (string)method.Invoke(objectToConvert, new object[] { this.FormatProvider });
+				return (string?)method.Invoke(objectToConvert, new object[] { this.FormatProvider });
 			} else {
 				return objectToConvert.ToString();
 			}
 		}
 
-		public string ToStringWithCulture(string text) {
+		[SuppressMessage("Performance", "CA1822:Mark members as static")]
+		public string? ToStringWithCulture(string text) {
 			return text;
 		}
 	}

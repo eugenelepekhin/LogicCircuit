@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project>
+	<Target Name="PublishProject" AfterTargets="AfterBuild" Condition="'$(Configuration)' == 'Release' and '$(PublishFolder)' != ''">
+		<PropertyGroup>
+			<Command>dotnet publish $(MSBuildProjectFile) --no-build -o $(PublishFolder) -c Release</Command>
+		</PropertyGroup>
+
+		<!--<Message Importance="high" Text=">>> $(Command)"/>-->
+		<Exec Command="$(Command)"/>
+	</Target>
+
 	<Target Name="GenerateResourceWrappers" BeforeTargets="BeforeBuild" Condition="'@(EmbeddedResource)' != '' and '$(MSBuildProjectName)' != 'LogicCircuit.UnitTest'">
 		<PropertyGroup>
 			<ResourceWrapperGeneratorCommand>"$(MSBuildThisFileDirectory)Tools\ResourceWrapper.Generator.exe" /FlowDirection /f "$(MSBuildProjectDirectory)" /n "$(RootNamespace)" /a "@(EmbeddedResource)"</ResourceWrapperGeneratorCommand>
@@ -21,14 +30,14 @@
 		<Exec Command="$(ItemWrapperGeneratorCommand)"/>
 	</Target>
 
-	<Target Name="CopyTools" AfterTargets="AfterBuild">
+	<!--<Target Name="CopyTools" AfterTargets="AfterBuild">
 		<PropertyGroup>
 			<ToolsFolder>$(MSBuildThisFileDirectory)Tools</ToolsFolder>
 		</PropertyGroup>
 
-		<!--<Message Condition="$(MSBuildProjectDirectory.StartsWith($(ToolsFolder)))" Importance="high" Text=">>> Copy tool $(TargetPath)"/>-->
+		--><!--<Message Condition="$(MSBuildProjectDirectory.StartsWith($(ToolsFolder)))" Importance="high" Text=">>> Copy tool $(TargetPath)"/>--><!--
 		<Copy Condition="$(MSBuildProjectDirectory.StartsWith($(ToolsFolder)))" SourceFiles="$(TargetPath)" DestinationFolder="$(ToolsFolder)" SkipUnchangedFiles="true"/>
-	</Target>
+	</Target>-->
 
 	<Target Name="CopyLicenseFile" AfterTargets="AfterBuild" Condition="Exists('$(MSBuildThisFileDirectory)License.txt') and '$(Configuration)' == 'Release' and '$(MSBuildProjectName)' == 'LogicCircuit'">
 		<!--<Message Importance="high" Text=">>> Copy License.txt to $(TargetPath)"/>-->

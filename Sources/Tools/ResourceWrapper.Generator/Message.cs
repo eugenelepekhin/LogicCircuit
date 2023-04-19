@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Globalization;
 using System.Text;
 
 namespace ResourceWrapper.Generator {
@@ -16,7 +16,7 @@ namespace ResourceWrapper.Generator {
 		}
 
 		public static void Write(string text, params object[] args) {
-			Message.text.AppendFormat(text, args);
+			Message.text.AppendFormat(CultureInfo.InvariantCulture, text, args);
 			Message.text.AppendLine();
 			//Console.Out.WriteLine(text, args);
 		}

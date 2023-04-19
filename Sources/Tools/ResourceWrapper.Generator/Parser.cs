@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Globalization;
-using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace ResourceWrapper.Generator {
 	public class Parser {
-		public string ProjectFolder { get; set; }
-		public string NameSpace { get; set; }
-		public string Generator { get; set; }
-		public string ResxFile { get; set; }
-		public string Output { get; set; }
-		public string WrapperNamespace { get; set; }
-		public string AllItems { get; set; }
+		public string ProjectFolder { get; set; } = string.Empty;
+		public string NameSpace { get; set; } = string.Empty;
+		public string Generator { get; set; } = string.Empty;
+		public string ResxFile { get; set; } = string.Empty;
+		public string Output { get; set; } = string.Empty;
+		public string WrapperNamespace { get; set; } = string.Empty;
+		public string AllItems { get; set; } = string.Empty;
 
 		public bool Pseudo { get; set; }
 		public bool OptionalParameterDeclaration { get; set; }
@@ -24,7 +20,7 @@ namespace ResourceWrapper.Generator {
 		private bool IsPublic => Parser.Equals(this.Generator, "PublicResXFileCodeGenerator");
 		private bool IsInternal => Parser.Equals(this.Generator, "ResXFileCodeGenerator");
 
-		private string ResxFolder => Path.GetDirectoryName(this.ResxFile);
+		private string ResxFolder => Path.GetDirectoryName(this.ResxFile)!;
 		private string ResxName => Path.GetFileNameWithoutExtension(this.ResxFile);
 
 		private void LogInputs() {
@@ -45,7 +41,7 @@ namespace ResourceWrapper.Generator {
 
 		public bool Parse() {
 			this.LogInputs();
-			Parser.LogAll($"Generating resources for {this.ResxFile}");
+			Parser.LogAll($"Generating resource wrappers for {Path.Combine(this.ProjectFolder, this.ResxFile)}");
 
 			if(!this.IsPublic && !this.IsInternal) {
 				LogAll($"Unknown Generator: {this.Generator}. Specify PublicResXFileCodeGenerator or ResXFileCodeGenerator");
@@ -75,21 +71,20 @@ namespace ResourceWrapper.Generator {
 				: Parser.Format("{0}.{1}", this.NameSpace, this.ResxName)
 			);
 
-			ResourcesWrapper resourcesWrapper = new ResourcesWrapper() {
-				File = Path.Combine(this.ProjectFolder, this.ResxFile),
-				Code = Path.Combine(this.ProjectFolder, this.ResxFolder, this.Output),
-				NameSpace = nameSpace,
-				ClassName = this.ResxName.Replace('.', '_'),
-				ResourceName = resourceName,
-				IsPublic = this.IsPublic,
-				Pseudo = this.Pseudo,
-				EnforceParameterDeclaration = !this.OptionalParameterDeclaration,
-				FlowDirection = this.FlowDirection,
-				Satelites = satelites
-			};
+			ResourcesWrapper resourcesWrapper = new ResourcesWrapper(
+				file: Path.Combine(this.ProjectFolder, this.ResxFile),
+				code: Path.Combine(this.ProjectFolder, this.ResxFolder, this.Output),
+				nameSpace: nameSpace,
+				className: this.ResxName.Replace('.', '_'),
+				resourceName: resourceName,
+				isPublic: this.IsPublic,
+				pseudo: this.Pseudo,
+				enforceParameterDeclaration: !this.OptionalParameterDeclaration,
+				flowDirection: this.FlowDirection,
+				satelites: satelites
+			);
 
 			return resourcesWrapper.Generate();
-			//return true;
 		}
 
 		public static bool Equals(string x, string y) => StringComparer.OrdinalIgnoreCase.Equals(x, y);

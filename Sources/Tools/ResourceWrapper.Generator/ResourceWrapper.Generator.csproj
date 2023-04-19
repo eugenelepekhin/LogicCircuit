@@ -1,67 +1,17 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ProjectGuid>{B543E594-A653-4E16-9203-5C833D430A8C}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ResourceWrapper.Generator</RootNamespace>
-    <AssemblyName>ResourceWrapper.Generator</AssemblyName>
-    <FileAlignment>512</FileAlignment>
-    <UseVSHostingProcess>false</UseVSHostingProcess>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <!--<TargetFramework>net6.0</TargetFramework>-->
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+    <AnalysisLevel>latest-all</AnalysisLevel>
+
+    <Version>3.0.0.0</Version>
+    <Description>Utility ResourceWrapper Generator</Description>
+    <Copyright>© LogicCircuit.org</Copyright>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="Microsoft.Build" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="CommandLine.cs" />
-    <Compile Include="Message.cs" />
-    <Compile Include="Parameter.cs" />
-    <Compile Include="Parser.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="ResourceItem.cs" />
-    <Compile Include="ResourceParser.cs" />
-    <Compile Include="ResourcesWrapper.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ResourcesWrapper.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ResourcesWrapper.Properties.cs" />
-    <Compile Include="ToStringHelper.cs" />
-    <Compile Include="Transformation.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\.editorconfig">
-      <Link>.editorconfig</Link>
-    </None>
-    <None Include="ResourcesWrapper.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>ResourcesWrapper.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
 </Project>
