@@ -16,12 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Properties\default.wav" />
-    <None Remove="Properties\LogicCircuit.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Properties\LogicCircuit.ico" />
+    <PackageReference Include="IronPython" Version="2.7.12" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,25 +24,41 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="IronPython" Version="2.7.12" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <Resource Include="Properties\LogicCircuit.ico" />
     <Resource Include="Properties\LogicCircuit.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="DataPersistent\Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Schema\Schema.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Schema.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="DataPersistent\Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Schema\Schema.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Schema.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>LogicCircuit</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
 

@@ -11,8 +11,8 @@ namespace ResourceWrapper.Generator {
 	/// If there is no formating parameters than comment is ignored
 	/// If there are formating parameters comment should declare parameters of formating function: {type1 parameter1, type2 parameter2, ... typeM parameterM}
 	/// </summary>
-	internal class ResourceParser {
-		public static IEnumerable<ResourceItem>? Parse(string file, bool enforceParameterDeclaration, IEnumerable<string> satelites, out int errors, out int warnings) {
+	internal sealed class ResourceParser {
+		public static IEnumerable<ResourceItem> Parse(string file, bool enforceParameterDeclaration, IEnumerable<string> satelites, out int errors, out int warnings) {
 			XmlDocument resource = new XmlDocument();
 			resource.Load(file);
 			XmlNodeList? nodeList = ResourceParser.SelectResources(resource);
@@ -32,16 +32,12 @@ namespace ResourceWrapper.Generator {
 				if(parser.errorCount == 0) {
 					return list;
 				} else {
-					return null;
+					return Enumerable.Empty<ResourceItem>();
 				}
 			}
 			errors = 0;
 			warnings = 0;
 			return Enumerable.Empty<ResourceItem>();
-		}
-
-		public static IEnumerable<ResourceItem>? Parse(string file, bool enforceParameterDeclaration, IEnumerable<string> satelites) {
-			return ResourceParser.Parse(file, enforceParameterDeclaration, satelites, out int _, out int _);
 		}
 
 		private static XmlNodeList? SelectResources(XmlDocument resource) {
@@ -144,15 +140,14 @@ namespace ResourceWrapper.Generator {
 
 		private bool Error(string nodeName, string errorText, params object[] args) {
 			//"C:\Projects\TestApp\TestApp\Subfolder\TextMessage.resx(10,1): error URW001: nodeName: my error"
-			Message.Error("{0}(1,1): error URW001: {1}: {2}", this.fileName, nodeName, ResourceParser.Format(errorText, args));
+			Program.Error($"{this.fileName}(1,1): error URW001: {nodeName}: {ResourceParser.Format(errorText, args)}");
 			this.errorCount++;
 			return false;
 		}
 
 		private void Warning(string nodeName, string errorText, params object[] args) {
-			Message.Warning("{0}(1,1): warning: {1}: {2}", this.fileName, nodeName, ResourceParser.Format(errorText, args));
+			Program.Warning($"{this.fileName}(1,1): warning: {nodeName}: {ResourceParser.Format(errorText, args)}");
 			this.warningCount++;
-			Message.Flush();
 		}
 
 		private bool Corrupted(string nodeName) {

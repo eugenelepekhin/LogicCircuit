@@ -10,8 +10,8 @@ namespace ItemWrapper.Generator {
 		public ItemModifier ItemModifier { get; set; }
 		public string ItemBaseClass { get; set; }
 		public bool Persistent { get; set; }
-		public List<Column> Columns { get; private set; }
-		public List<Key> Keys { get; private set; }
+		public IList<Column> Columns { get; private set; }
+		public IList<Key> Keys { get; private set; }
 
 		public Table() {
 			this.ItemModifier = ItemModifier.None;
@@ -96,10 +96,10 @@ namespace ItemWrapper.Generator {
 		public void Validate(Store store) {
 			this.Store = store;
 			if(this.Name == null) {
-				throw new Error("Name is missing in table definition");
+				throw new GeneratorException("Name is missing in table definition");
 			}
 			if(this.Columns.Count == 0) {
-				throw new Error("Table {0} does not have any columns", this.Name);
+				throw new GeneratorException("Table {0} does not have any columns", this.Name);
 			}
 			foreach(Column column in this.Columns) {
 				column.Validate(this);

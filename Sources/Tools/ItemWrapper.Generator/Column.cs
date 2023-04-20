@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 
 namespace ItemWrapper.Generator {
 	public class Column {
@@ -19,8 +21,9 @@ namespace ItemWrapper.Generator {
 			this.PropertyNamePrefix = string.Empty;
 		}
 
+		[SuppressMessage("Globalization", "CA1308:Normalize strings to uppercase")]
 		public string AccessModifierName() {
-			return this.AccessModifier.ToString().ToLower();
+			return this.AccessModifier.ToString().ToLower(CultureInfo.InvariantCulture);
 		}
 
 		public bool IsFirst() {
@@ -34,10 +37,10 @@ namespace ItemWrapper.Generator {
 		public void Validate(Table table) {
 			this.Table = table;
 			if(string.IsNullOrEmpty(this.Name)) {
-				throw new Error("Column name is missing");
+				throw new GeneratorException("Column name is missing");
 			}
 			if(string.IsNullOrEmpty(this.Type)) {
-				throw new Error("Column {0} is missing its type", this.Name);
+				throw new GeneratorException("Column {0} is missing its type", this.Name);
 			}
 		}
 	}

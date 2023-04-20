@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Reflection;
 
@@ -24,7 +25,7 @@ namespace ItemWrapper.Generator {
 		/// <returns></returns>
 		public string ToStringWithCulture(object objectToConvert) {
 			if(objectToConvert == null) {
-				throw new ArgumentNullException("objectToConvert");
+				throw new ArgumentNullException(nameof(objectToConvert));
 			}
 			Type type = objectToConvert.GetType();
 			MethodInfo method = type.GetMethod("ToString", new Type[] { typeof(IFormatProvider) });
@@ -35,6 +36,7 @@ namespace ItemWrapper.Generator {
 			}
 		}
 
+		[SuppressMessage("Performance", "CA1822:Mark members as static")]
 		public string ToStringWithCulture(string text) {
 			return text;
 		}

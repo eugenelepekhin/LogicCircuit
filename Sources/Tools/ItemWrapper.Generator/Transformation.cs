@@ -1,6 +1,7 @@
 ﻿using System;
 using System.CodeDom;
 using System.CodeDom.Compiler;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Text;
@@ -10,12 +11,13 @@ namespace ItemWrapper.Generator {
 
 		public const string PersistentStoreNameSpace = "LogicCircuit.DataPersistent";
 
+		[SuppressMessage("Performance", "CA1822:Mark members as static")]
 		public string StoreNameSpace { get { return Transformation.PersistentStoreNameSpace; } }
 
 		private ToStringHelper toStringHelperField = new ToStringHelper();
 		public ToStringHelper ToStringHelper { get { return this.toStringHelperField; } }
 
-		public Generator Generator { get; set; }
+		public ItemWrapperGenerator Generator { get; set; }
 		public CompilerErrorCollection Errors { get { return this.Generator.Errors; } }
 		public Store Store { get { return this.Generator.Store; } }
 		public Table Table { get { return this.Generator.Table; } }
@@ -24,14 +26,16 @@ namespace ItemWrapper.Generator {
 
 		private StringBuilder generationEnvironmentField;
 
+		[SuppressMessage("Performance", "CA1822:Mark members as static")]
 		public string MakeString(string text) {
 			StringBuilder stringBuilder = new StringBuilder();
-			using(StringWriter writer = new StringWriter(stringBuilder)) {
-				CodeDomProvider.CreateProvider("CSharp").GenerateCodeFromExpression(new CodePrimitiveExpression(text), writer, new CodeGeneratorOptions());
-			}
+			using StringWriter writer = new StringWriter(stringBuilder);
+			using CodeDomProvider provider = CodeDomProvider.CreateProvider("CSharp");
+			provider.GenerateCodeFromExpression(new CodePrimitiveExpression(text), writer, new CodeGeneratorOptions());
 			return stringBuilder.ToString();
 		}
 
+		[SuppressMessage("Performance", "CA1822:Mark members as static")]
 		public string Camelize(string text) {
 			if(!string.IsNullOrEmpty(text)) {
 				return string.Concat(char.ToLower(text[0], CultureInfo.InvariantCulture), text.Substring(1));

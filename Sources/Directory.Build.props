@@ -1,7 +1,6 @@
 ﻿<Project>
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
 		<ToolsFolder>$(MSBuildThisFileDirectory)Tools</ToolsFolder>
 	</PropertyGroup>
 
@@ -9,7 +8,7 @@
 		<PublishProtocol>FileSystem</PublishProtocol>
 		<_TargetId>Folder</_TargetId>
 		<!--<SelfContained>false</SelfContained>-->
-		<RuntimeIdentifier>win-x86</RuntimeIdentifier>
+		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
 		<PublishSingleFile>true</PublishSingleFile>
 		<!--<PublishReadyToRun>false</PublishReadyToRun>-->
 	</PropertyGroup>

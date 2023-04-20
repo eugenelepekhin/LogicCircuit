@@ -1,129 +1,98 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1F9944A5-5A8C-4298-A2A7-B57FBBE6D6CD}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ItemWrapper.Generator</RootNamespace>
-    <AssemblyName>ItemWrapper.Generator</AssemblyName>
-    <FileAlignment>512</FileAlignment>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFramework>net7.0-windows</TargetFramework>
+	<UseWPF>true</UseWPF>
+
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!--<Nullable>enable</Nullable>-->
+
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+    <AnalysisLevel>latest-all</AnalysisLevel>
+
+    <Version>3.0.0.0</Version>
+    <Description>Utility ItemWrapper Generator</Description>
+    <Copyright>© LogicCircuit.org</Copyright>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xaml" />
-    <Reference Include="System.XML" />
-    <Reference Include="WindowsBase" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AccessModifier.cs" />
-    <Compile Include="Column.cs" />
-    <Compile Include="CommandLine.cs" />
-    <Compile Include="Error.cs" />
-    <Compile Include="Generator.cs" />
-    <Compile Include="GeneratorItemWrapper.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GeneratorItemWrapper.tt</DependentUpon>
-    </Compile>
-    <Compile Include="GeneratorSetWrapper.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GeneratorSetWrapper.tt</DependentUpon>
-    </Compile>
-    <Compile Include="GeneratorRealm.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GeneratorRealm.tt</DependentUpon>
-    </Compile>
-    <Compile Include="GeneratorStore.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GeneratorStore.tt</DependentUpon>
-    </Compile>
-    <Compile Include="GeneratorTableDefinition.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GeneratorTableDefinition.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ItemModifier.cs" />
-    <Compile Include="Key.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="RealmType.cs" />
-    <Compile Include="Store.cs" />
-    <Compile Include="Table.cs" />
-    <Compile Include="TextMessage.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TextMessage.resx</DependentUpon>
-    </Compile>
-    <Compile Include="GeneratorItem.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GeneratorItem.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ToStringHelper.cs" />
-    <Compile Include="Transformation.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="TextMessage.resx">
+    <EmbeddedResource Update="TextMessage.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>TextMessage.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+
   <ItemGroup>
-    <None Include="GeneratorItemWrapper.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>GeneratorItemWrapper.cs</LastGenOutput>
-    </None>
-    <None Include="GeneratorSetWrapper.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>GeneratorSetWrapper.cs</LastGenOutput>
-    </None>
-    <None Include="GeneratorRealm.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>GeneratorRealm.cs</LastGenOutput>
-    </None>
-    <None Include="GeneratorStore.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>GeneratorStore.cs</LastGenOutput>
-    </None>
-    <None Include="GeneratorTableDefinition.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>GeneratorTableDefinition.cs</LastGenOutput>
-    </None>
-    <None Include="GeneratorItem.tt">
+    <Compile Update="TextMessage.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TextMessage.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="GeneratorItem.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GeneratorItem.tt</DependentUpon>
+    </Compile>
+    <Compile Update="GeneratorItemWrapper.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GeneratorItemWrapper.tt</DependentUpon>
+    </Compile>
+    <Compile Update="GeneratorRealm.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GeneratorRealm.tt</DependentUpon>
+    </Compile>
+    <Compile Update="GeneratorSetWrapper.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GeneratorSetWrapper.tt</DependentUpon>
+    </Compile>
+    <Compile Update="GeneratorStore.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GeneratorStore.tt</DependentUpon>
+    </Compile>
+    <Compile Update="GeneratorTableDefinition.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GeneratorTableDefinition.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="GeneratorItem.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>GeneratorItem.cs</LastGenOutput>
     </None>
+    <None Update="GeneratorItemWrapper.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>GeneratorItemWrapper.cs</LastGenOutput>
+    </None>
+    <None Update="GeneratorRealm.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>GeneratorRealm.cs</LastGenOutput>
+    </None>
+    <None Update="GeneratorSetWrapper.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>GeneratorSetWrapper.cs</LastGenOutput>
+    </None>
+    <None Update="GeneratorStore.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>GeneratorStore.cs</LastGenOutput>
+    </None>
+    <None Update="GeneratorTableDefinition.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>GeneratorTableDefinition.cs</LastGenOutput>
+    </None>
   </ItemGroup>
+
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
 </Project>

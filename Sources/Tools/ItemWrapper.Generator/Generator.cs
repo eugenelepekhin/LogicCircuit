@@ -5,7 +5,7 @@ using System.Text;
 using System.Xaml;
 
 namespace ItemWrapper.Generator {
-	public class Generator {
+	public class ItemWrapperGenerator {
 		public string SchemaPath { get; set; }
 		public string TargetFolder { get; set; }
 		public bool UseDispatcher { get; set; }

@@ -72,7 +72,7 @@ namespace ItemWrapper.Generator {
 			foreach(Column column in this) {
 				Column actual = this.Table.Columns.FirstOrDefault(c => c.Name == column.Name);
 				if(actual == null) {
-					throw new Error("Key {0}.{1} referring unknown column {2}", this.Table.Name, this.Name, column.Name);
+					throw new GeneratorException("Key {0}.{1} referring unknown column {2}", this.Table.Name, this.Name, column.Name);
 				}
 				list.Add(actual);
 			}
@@ -80,28 +80,28 @@ namespace ItemWrapper.Generator {
 			this.InsertRange(0, list);
 			if(this.KeyType == KeyType.Auto) {
 				if(0 < this.Count) {
-					throw new Error("Key {0} defined as Auto and cannot contain any columns", this.Name);
+					throw new GeneratorException("Key {0} defined as Auto and cannot contain any columns", this.Name);
 				}
 			} else if(this.Count < 1 || 2 < this.Count) {
-				throw new Error("Key {0}.{1} should have 1 or 2 columns", this.Table.Name, this.Name);
+				throw new GeneratorException("Key {0}.{1} should have 1 or 2 columns", this.Table.Name, this.Name);
 			}
 			if(this.IsForeign() && this.Count != 1) {
-				throw new Error("Foreign key {0}.{1} should have only one column", this.Table.Name, this.Name);
+				throw new GeneratorException("Foreign key {0}.{1} should have only one column", this.Table.Name, this.Name);
 			}
 			if(this.IsPrimary() && this.Table.Keys.Any(k => k != this && k.IsPrimary())) {
-				throw new Error("Table {0} defines more then one primary key", this.Table.Name);
+				throw new GeneratorException("Table {0} defines more then one primary key", this.Table.Name);
 			}
 			if(this.IsForeign()) {
 				if(string.IsNullOrEmpty(this.ParentName)) {
-					throw new Error("Foreign key {0}.{1} expecting ParentName property", this.Table.Name, this.Name);
+					throw new GeneratorException("Foreign key {0}.{1} expecting ParentName property", this.Table.Name, this.Name);
 				}
 				Table parent = this.Table.Store.Find(this.ParentName);
 				if(parent == null) {
-					throw new Error("Foreign key {0}.{1} referencing unknown table {2}", this.Table.Name, this.Name, this.ParentName);
+					throw new GeneratorException("Foreign key {0}.{1} referencing unknown table {2}", this.Table.Name, this.Name, this.ParentName);
 				}
 				Key pk = parent.PrimaryKey();
 				if(pk == null || (pk.KeyType != KeyType.Auto && pk.Count != 1)) {
-					throw new Error("Foreign key {0}.{1} referencing incompatible primary key", this.Table.Name, this.Name);
+					throw new GeneratorException("Foreign key {0}.{1} referencing incompatible primary key", this.Table.Name, this.Name);
 				}
 			}
 		}

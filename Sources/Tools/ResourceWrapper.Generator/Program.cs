@@ -3,60 +3,80 @@ using System.Diagnostics.CodeAnalysis;
 using CommandLineParser;
 
 namespace ResourceWrapper.Generator {
-	internal class Program {
-		// parameters for debug:
-		// /v /f "C:\Projects\ResourceWrapper.Generator\master\Sources\TestProject" /n TestProject /a ErrorResource.resx;InternalResource.resx;NoCodeResource.resx;PublicResource.resx;SubFolder\NameSpacedResource.resx;SubFolder\Resource.resx;SubFolder\Resource.ru.resx;SubFolder\Resource.uz-UZ-Cyrl.resx /r SubFolder\Resource.resx /g ResXFileCodeGenerator /cs Resource.Designer.cs /rn ""
+	internal static class Program {
 		[SuppressMessage("Design", "CA1031:Do not catch general exception types")]
-		private static int Main(string[] args) {
-			int result = 1;
+		static int Main(string[] args) {
+			int result = 0;
 			try {
-				Parser parser = new Parser();
-				bool printHelp = false;
-				
+				string? fileName = null;
+				bool pseudo = false;
+				bool optionalParameters = false;
+				bool flowDirection = false;
+				bool verbose = false;
+				bool help = false;
 				CommandLine commandLine = new CommandLine()
-					.AddString("ProjectFolder", "f", "<project folder>", "The root folder of the project", true, f => parser.ProjectFolder = f)
-					.AddString("NameSpace", "n", "<project namespace>", "The default name space of the project", true, n => parser.NameSpace = n)
-					.AddString("Generator", "g", "<generator>", "Custom tool", true, g => parser.Generator = g)
-					.AddString("Resource", "r", "<.resx file>", "The .resx file", true, r => parser.ResxFile = r)
-					.AddString("Output", "cs", "<output>", "Output file with generated code", false, cs => parser.Output = cs)
-					.AddString("ResSpace", "rn", "<custom namespace>", "Custom Tool Namespace", false, rn => parser.WrapperNamespace = rn)
-					.AddString("AllItems", "a", "<all items>", "All .resx items in the project", true, a => parser.AllItems = a)
-
-					.AddFlag("Pseudo", null, "Generate pseudo localization", false, p => parser.Pseudo = p)
-					.AddFlag("Optional", "o", "Optional parameter declaration. Set this flag during conversion existing project for the time of conversion", false, o => parser.OptionalParameterDeclaration = o)
-					.AddFlag("FlowDirection", null, "Turns on generation of FlowDirection property", false, f => parser.FlowDirection = f)
-					.AddFlag("Verbose", "v", "Verbose output", false, v => Parser.Verbose = v)
-					.AddFlag("Help", "?", "Print help", false, h => printHelp = h)
+					.AddString("ProjectFile", "p", "<project file name>", "Project file to generate resources for", true, p => {
+						if(fileName != null && fileName != p) {
+							Program.Error("Command line parameter ProjectFile been already provided.");
+							result = 1;
+						} else if(!File.Exists(p)) {
+							Program.Error($"Project file {p} not found");
+							result = 1;
+						}
+						fileName = p;
+					})
+					.AddFlag("Pseudo", null, "Generate pseudo localization", false, p => pseudo = p)
+					.AddFlag("Optional", "o", "Optional parameter declaration. Set this flag during conversion existing project for the time of conversion", false, o => optionalParameters = o)
+					.AddFlag("FlowDirection", null, "Turns on generation of FlowDirection property", false, f => flowDirection = f)
+					.AddFlag("Verbose", "v", "Verbose output", false, v => verbose = v)
+					.AddFlag("Help", "?", "Print help", false, h => help = h)
 				;
 				string? errors = commandLine.Parse(args, null);
-
-				if(printHelp) {
+				if(errors != null) {
+					Program.Error(errors);
+					result = 1;
+				}
+				if(result == 1 || help) {
 					Program.Usage(commandLine.Help());
-				} else if(errors != null) {
-					Program.BadArgument(errors, commandLine.Help());
-				} else if(parser.Parse()) {
-					Message.Write("Resource wrappers generation complete without errors");
-					result = 0;
+				} else {
+					ProjectParser parser = new ProjectParser(fileName!, pseudo, optionalParameters, flowDirection, verbose);
+					ProjectParser.InitMsBuild();
+					if(!parser.Parse()) {
+						result = 1;
+					}
+				}
+				if(result == 0) {
+					Program.Message($"Resource wrappers generation complete without errors for project: {fileName}");
 				}
 			} catch(Exception exception) {
-				Message.Error("Error executing ResourceWrapper.Generator: {0}", exception.Message);
+				Program.Error(exception.ToString());
+				result = 1;
 			}
-			Message.Flush();
 			return result;
 		}
 
-		private static void BadArgument(string errors, string help) {
-			Message.Error("{0}: {1}", Process.GetCurrentProcess().ProcessName, errors);
-			Program.Usage(help);
+		public static void Error(string message) {
+			Console.Error.WriteLine(message);
+			Debug.WriteLine(message);
 		}
 
-		private static void Usage(string help) {
+		public static void Warning(string message) {
+			Console.Error.WriteLine(message);
+			Debug.WriteLine(message);
+		}
+
+		public static void Message(string message) {
+			Console.Out.WriteLine(message);
+			Debug.WriteLine(message);
+		}
+
+		private static void Usage(string options) {
 			string name = Process.GetCurrentProcess().ProcessName;
-			Message.Write("{0}: Generates strong typed wrappers for managed resources.", name);
-			Message.Write("Usage: {0} Options", name);
-			Message.Write("");
-			Message.Write("Options:");
-			Message.Write(help);
+			Program.Message($"{name}: Generates strong typed wrappers for managed resources.");
+			Program.Message($"Usage: {name} Options");
+			Program.Message("");
+			Program.Message("Options:");
+			Program.Message(options);
 		}
 	}
 }
