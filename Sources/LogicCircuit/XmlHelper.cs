@@ -30,7 +30,7 @@ namespace LogicCircuit {
 		}
 
 		public static XmlDocument Create() {
-			return new XmlDocument() { XmlResolver = new XmlSecureResolver(new XmlUrlResolver(), string.Empty) };
+			return new XmlDocument() { XmlResolver = XmlResolver.ThrowingResolver };
 		}
 
 		[SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")]

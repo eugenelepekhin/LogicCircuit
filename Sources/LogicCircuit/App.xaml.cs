@@ -18,29 +18,57 @@ namespace LogicCircuit {
 	public partial class App : Application {
 		private const string SettingsCultureName = "Application.CultureInfo.Name";
 
-		private static string[]? foundCultureNames;
-		private static string[] availableCultureNames {
-			get {
-				if(App.foundCultureNames == null) {
-					List<string> list = new List<string>();
-					Regex regexCultureName = new Regex("^[a-zA-Z]{2,3}(-[a-zA-Z]{2,4})?$", RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-					foreach(string dir in Directory.GetDirectories(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!)) {
-						string file = Path.Combine(dir, "LogicCircuit.resources.dll");
-						if(File.Exists(file)) {
-							string folder = Path.GetFileName(dir);
-							if(regexCultureName.IsMatch(folder)) {
-								// TODO: check version of the assembly match to the version of this assembly.
-								list.Add(folder);
+		#if DEBUG
+			private static string[]? foundCultureNames;
+			private static string[] availableCultureNames {
+				get {
+					if(App.foundCultureNames == null) {
+						List<string> list = new List<string>();
+						Regex regexCultureName = new Regex("^[a-zA-Z]{2,3}(-[a-zA-Z]{2,4})?$", RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+						foreach(string dir in Directory.GetDirectories(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!)) {
+							string file = Path.Combine(dir, "LogicCircuit.resources.dll");
+							if(File.Exists(file)) {
+								string folder = Path.GetFileName(dir);
+								if(regexCultureName.IsMatch(folder)) {
+									// TODO: check version of the assembly match to the version of this assembly.
+									list.Add(folder);
+								}
 							}
 						}
+						list.Sort(StringComparer.OrdinalIgnoreCase);
+						list.Insert(0, "en");
+						App.foundCultureNames = list.ToArray();
 					}
-					list.Sort(StringComparer.OrdinalIgnoreCase);
-					list.Insert(0, "en");
-					App.foundCultureNames = list.ToArray();
+					return App.foundCultureNames;
 				}
-				return App.foundCultureNames;
 			}
-		}
+		#else
+			private static string[] availableCultureNames = {
+				"en",
+				"ar",
+				"de",
+				"el",
+				"es",
+				"fa",
+				"fr",
+				"he",
+				"hr",
+				"hu",
+				"it",
+				"ja",
+				"ko",
+				"lt",
+				"nl",
+				"pl",
+				"pt-BR",
+				"pt-PT",
+				"ru",
+				"sv",
+				"tr",
+				"uk",
+				"zh-Hans",
+			};
+		#endif
 		
 		public static IEnumerable<CultureInfo> AvailableCultures {
 			get { return App.availableCultureNames.Select(s => CultureInfo.GetCultureInfo(s)); }

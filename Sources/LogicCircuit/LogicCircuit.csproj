@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net7.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
     <UseWPF>true</UseWPF>
@@ -13,6 +13,12 @@
     <Version>2.23.04.12</Version>
     <Description>www.LogicCircuit.org</Description>
     <Copyright>© LogicCircuit.org</Copyright>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <PublishFolder>$(MSBuildProjectDirectory)\bin\$(Configuration)\publish</PublishFolder>
+	<SelfContained>true</SelfContained>
+    <PublishReadyToRun>false</PublishReadyToRun>
   </PropertyGroup>
 
   <ItemGroup>
