@@ -340,3 +340,4 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/Sources/Tools/ResourceWrapper.Generator.dll.config
