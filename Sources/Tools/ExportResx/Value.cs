@@ -1,7 +1,5 @@
-﻿using System;
-
-namespace ExportResx {
-	internal class Value {
+﻿namespace ExportResx {
+	internal sealed class Value {
 		public string Name { get; }
 		public string Text { get; }
 		public string Note { get; }

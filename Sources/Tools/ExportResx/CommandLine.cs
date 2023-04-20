@@ -16,8 +16,8 @@ namespace CommandLineParser {
 	/// Command line parser
 	/// Inspired by Mono.Options but simpler and easier to use.
 	/// </summary>
-	internal class CommandLine {
-		private ParameterList parameterList = new ParameterList();
+	internal sealed class CommandLine {
+		private readonly ParameterList parameterList = new ParameterList();
 
 		#if HaveFlagParam
 			/// <summary>
@@ -29,7 +29,7 @@ namespace CommandLineParser {
 			/// <param name="required">True if the parameter is mandatory</param>
 			/// <param name="assign">Method to assign flag parameter back to the application variable</param>
 			/// <returns>Returns this reference</returns>
-			public CommandLine AddFlag(string name, string alias, string note, bool required, Action<bool> assign) {
+			public CommandLine AddFlag(string name, string? alias, string note, bool required, Action<bool> assign) {
 				this.parameterList.Add(new ParameterFlag(name, alias, note, required, assign));
 				return this;
 			}
@@ -46,7 +46,7 @@ namespace CommandLineParser {
 			/// <param name="required">True if the parameter is mandatory</param>
 			/// <param name="assign">Method to assign string parameter back to the application variable</param>
 			/// <returns>Returns this reference</returns>
-			public CommandLine AddString(string name, string alias, string value, string note, bool required, Action<string> assign) {
+			public CommandLine AddString(string name, string? alias, string? value, string note, bool required, Action<string> assign) {
 				this.parameterList.Add(new ParameterString(name, alias, value, note, required, assign));
 				return this;
 			}
@@ -65,7 +65,7 @@ namespace CommandLineParser {
 			/// <param name="max">Max value</param>
 			/// <param name="assign">Method to assign int parameter back to the application variable</param>
 			/// <returns>Returns this reference</returns>
-			public CommandLine AddInt(string name, string alias, string value, string note, bool required, int min, int max, Action<int> assign) {
+			public CommandLine AddInt(string name, string? alias, string? value, string note, bool required, int min, int max, Action<int> assign) {
 				this.parameterList.Add(new ParameterInt(name, alias, value, note, required, min, max, assign));
 				return this;
 			}
@@ -80,7 +80,7 @@ namespace CommandLineParser {
 			/// <param name="required">True if the parameter is mandatory</param>
 			/// <param name="assign">Method to assign int parameter back to the application variable</param>
 			/// <returns>Returns this reference</returns>
-			public CommandLine AddInt(string name, string alias, string value, string note, bool required, Action<int> assign) {
+			public CommandLine AddInt(string name, string? alias, string? value, string note, bool required, Action<int> assign) {
 				return this.AddInt(name, alias, value, note, required, int.MinValue, int.MaxValue, assign);
 			}
 		#endif
@@ -91,7 +91,7 @@ namespace CommandLineParser {
 		/// <param name="args">Command line arguments</param>
 		/// <param name="assingUnmatched">Assign all unmatched parameters. If this parameter is null then no unmatched parameters are allowed.</param>
 		/// <returns>null if parsing is successful, error messages if unsuccessful.</returns>
-		public string Parse(string[] args, Action<IEnumerable<string>> assingUnmatched) {
+		public string? Parse(string[] args, Action<IEnumerable<string>>? assingUnmatched) {
 			this.parameterList.Reset();
 			List<string> errors = new List<string>();
 			List<string> unmatched = new List<string>();
@@ -104,7 +104,7 @@ namespace CommandLineParser {
 					string text = Parameter.Trim(args[i]);
 					Match match = regex.Match(text);
 					if(match.Success) {
-						Parameter parameter = this.parameterList.Find(Parameter.Trim(match.Groups["name"].Value));
+						Parameter? parameter = this.parameterList.Find(Parameter.Trim(match.Groups["name"].Value));
 						if(parameter == null) {
 							if(Parameter.Trim(match.Groups["prefix"].Value).Length == 0) {
 								unmatched.Add(text);
@@ -123,7 +123,7 @@ namespace CommandLineParser {
 									break;
 								}
 							}
-							string setError = parameter.SetValue(value);
+							string? setError = parameter.SetValue(value);
 							if(!string.IsNullOrEmpty(setError)) {
 								errors.Add(setError);
 								break;
@@ -146,7 +146,7 @@ namespace CommandLineParser {
 					errors.Add(string.Format(CultureInfo.InvariantCulture, "Unrecognized parameter: {0}", unmatched[0]));
 				}
 			}
-			return errors.Aggregate((string)null, (left, right) => string.IsNullOrEmpty(left) ? right : left + "\n" + right);
+			return errors.Aggregate((string?)null, (left, right) => string.IsNullOrEmpty(left) ? right : left + "\n" + right);
 		}
 
 		/// <summary>
@@ -155,8 +155,8 @@ namespace CommandLineParser {
 		/// <returns>Constructed help string</returns>
 		public string Help() {
 			this.parameterList.EnsureDefined();
-			Func<Parameter, string> value = parameter => parameter.Value != null ? " " + parameter.Value : string.Empty;
-			Func<Parameter, string> format = parameter =>
+			string value(Parameter parameter) => parameter.Value != null ? " " + parameter.Value : string.Empty;
+			string format(Parameter parameter) =>
 				(parameter.Alias == null)
 				? string.Format(CultureInfo.InvariantCulture, "/{0}{1}", parameter.Name, value(parameter))
 				: string.Format(CultureInfo.InvariantCulture, "/{0} -{1}{2}", parameter.Alias, parameter.Name, value(parameter))
@@ -177,14 +177,14 @@ namespace CommandLineParser {
 		}
 
 		private abstract class Parameter {
-			public string Name { get; private set; }
-			public string Alias { get; private set; }
-			public string Value { get; private set; }
-			public string Note { get; private set; }
-			public bool Required { get; private set; }
+			public string Name { get; }
+			public string? Alias { get; }
+			public string? Value { get; }
+			public string Note { get; }
+			public bool Required { get; }
 			public bool HasValue { get; set; }
 
-			protected Parameter(string name, string alias, string value, string note, bool required) {
+			protected Parameter(string name, string? alias, string? value, string note, bool required) {
 				Debug.Assert(!string.IsNullOrWhiteSpace(name) && name == name.Trim(), "Invalid parameter name: " + name);
 				Debug.Assert(alias == null || (alias == alias.Trim() && 0 < alias.Length), "Invalid parameter alias: " + alias);
 				Debug.Assert(alias != name, "alias == name for parameter " + name);
@@ -198,7 +198,7 @@ namespace CommandLineParser {
 				this.Required = required;
 			}
 
-			public abstract string SetValue(string value);
+			public abstract string? SetValue(string value);
 			public virtual bool ExpectValue() {
 				return true;
 			}
@@ -226,7 +226,7 @@ namespace CommandLineParser {
 				base.Add(parameter);
 			}
 
-			public Parameter Find(string name) {
+			public Parameter? Find(string name) {
 				StringComparer comparer = StringComparer.OrdinalIgnoreCase;
 				return this.FirstOrDefault(
 					parameter => comparer.Equals(parameter.Name, name) || comparer.Equals(parameter.Alias, name)
@@ -237,12 +237,12 @@ namespace CommandLineParser {
 		private abstract class Parameter<T> : Parameter {
 			private readonly Action<T> assign;
 
-			protected Parameter(string name, string alias, string value, string note, bool required, Action<T> assign) : base(name, alias, value, note, required) {
+			protected Parameter(string name, string? alias, string? value, string note, bool required, Action<T> assign) : base(name, alias, value, note, required) {
 				Debug.Assert(assign != null, "Assign parameter is missing");
 				this.assign = assign;
 			}
 
-			public string AssignValue(T value) {
+			public string? AssignValue(T value) {
 				this.assign(value);
 				this.HasValue = true;
 				return null;
@@ -251,11 +251,11 @@ namespace CommandLineParser {
 
 		#if HaveFlagParam
 			private sealed class ParameterFlag : Parameter<bool> {
-				public ParameterFlag(string name, string alias, string note, bool required, Action<bool> assign) : base(name, alias, null, note, required, assign) {
+				public ParameterFlag(string name, string? alias, string note, bool required, Action<bool> assign) : base(name, alias, null, note, required, assign) {
 				}
 
-				public override string SetValue(string value) {
-					bool flag = false;
+				public override string? SetValue(string value) {
+					bool flag;
 					if(string.IsNullOrWhiteSpace(value)) {
 						flag = true;
 					} else {
@@ -289,10 +289,10 @@ namespace CommandLineParser {
 
 		#if HaveStringParam
 			private sealed class ParameterString : Parameter<string> {
-				public ParameterString(string name, string alias, string value, string note, bool required, Action<string> assign) : base(name, alias, value, note, required, assign) {
+				public ParameterString(string name, string? alias, string? value, string note, bool required, Action<string> assign) : base(name, alias, value, note, required, assign) {
 				}
 
-				public override string SetValue(string value) {
+				public override string? SetValue(string value) {
 					return this.AssignValue(value);
 				}
 			}
@@ -303,13 +303,13 @@ namespace CommandLineParser {
 				private int min;
 				private int max;
 
-				public ParameterInt(string name, string alias, string value, string note, bool required, int min, int max, Action<int> assign) : base(name, alias, value, note, required, assign) {
+				public ParameterInt(string name, string? alias, string? value, string note, bool required, int min, int max, Action<int> assign) : base(name, alias, value, note, required, assign) {
 					Debug.Assert(min < max, "min should be less than max for integer parameter.");
 					this.min = min;
 					this.max = max;
 				}
 
-				public override string SetValue(string value) {
+				public override string? SetValue(string value) {
 					int parsedValue;
 					if(int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out parsedValue)) {
 						if(this.min <= parsedValue && parsedValue <= this.max) {

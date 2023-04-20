@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Xml;
 
@@ -12,14 +9,15 @@ namespace FindUnusedResources {
 	/// Currently you need to modify hard coded strings to provide path to the project
 	/// Currently algorithm is fairly primitive so it will miss cases like: name versus names.
 	/// </summary>
+	[SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters")]
 	internal static class Program {
 		public static void Main(string[] args) {
-			string projectPath = null;
+			string? projectPath = null;
 			if(args != null && 0 < args.Length && args[0] != null) {
 				projectPath = args[0];
 			} else {
 				//from exe location (Sources\Tools\FindUnusedResources\bin\Debug) get up to solution folder and to main project file (Sources\LogicCircuit\LogicCircuit.csproj)
-				projectPath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"..\..\..\..\LogicCircuit\LogicCircuit.csproj"));
+				projectPath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!, @"..\..\..\..\LogicCircuit\LogicCircuit.csproj"));
 			}
 			Console.WriteLine("Checking project \"{0}\"", projectPath);
 
@@ -31,7 +29,7 @@ namespace FindUnusedResources {
 				LoadResources(unused, resourceFiles);
 				foreach(string file in sourceFiles) {
 					string text = File.ReadAllText(file);
-					HashSet<string> used = new HashSet<string>(unused.Where(r => text.Contains(r)));
+					HashSet<string> used = new HashSet<string>(unused.Where(r => text.Contains(r, StringComparison.Ordinal)));
 					unused.RemoveWhere(r => used.Contains(r));
 					if(unused.Count == 0) break;
 				}
@@ -59,12 +57,12 @@ namespace FindUnusedResources {
 		}
 
 		private static bool LoadProject(string projectFile, List<string> resourceList, List<string> sourceList) {
-			string root = Path.GetDirectoryName(projectFile);
+			string root = Path.GetDirectoryName(projectFile)!;
 
 			XmlDocument project = new XmlDocument();
 			project.Load(projectFile);
 			XmlNamespaceManager nsmgr = new XmlNamespaceManager(project.NameTable);
-			nsmgr.AddNamespace(project.DocumentElement.Prefix, project.DocumentElement.NamespaceURI);
+			nsmgr.AddNamespace(project.DocumentElement!.Prefix, project.DocumentElement.NamespaceURI);
 			nsmgr.AddNamespace("p", project.DocumentElement.NamespaceURI);
 
 			return Include(root, resourceList, project.SelectNodes("/p:Project/p:ItemGroup/p:EmbeddedResource[p:Generator='ResXFileCodeGenerator' or p:Generator='PublicResXFileCodeGenerator']", nsmgr))
@@ -73,10 +71,10 @@ namespace FindUnusedResources {
 			;
 		}
 
-		private static bool Include(string root, List<string> list, XmlNodeList nodeList) {
+		private static bool Include(string root, List<string> list, XmlNodeList? nodeList) {
 			if(nodeList != null && 0 < nodeList.Count) {
 				foreach(XmlNode node in nodeList) {
-					XmlAttribute attribute = node.Attributes["Include"];
+					XmlAttribute attribute = node.Attributes!["Include"]!;
 					if(attribute == null) {
 						Console.WriteLine("Bad project");
 						return false;
@@ -98,13 +96,13 @@ namespace FindUnusedResources {
 				XmlDocument xml = new XmlDocument();
 				xml.Load(resx);
 				XmlNamespaceManager nsmgr = new XmlNamespaceManager(xml.NameTable);
-				nsmgr.AddNamespace(xml.DocumentElement.Prefix, xml.DocumentElement.NamespaceURI);
+				nsmgr.AddNamespace(xml.DocumentElement!.Prefix, xml.DocumentElement.NamespaceURI);
 				nsmgr.AddNamespace("r", xml.DocumentElement.NamespaceURI);
 
-				XmlNodeList list = xml.SelectNodes("/r:root/r:data", nsmgr);
+				XmlNodeList? list = xml.SelectNodes("/r:root/r:data", nsmgr);
 				if(list != null && 0 < list.Count) {
 					foreach(XmlNode node in list) {
-						resources.Add(className + "." + node.Attributes["name"].Value);
+						resources.Add(className + "." + node.Attributes!["name"]!.Value);
 					}
 				}
 			}

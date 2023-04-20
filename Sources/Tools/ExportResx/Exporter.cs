@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.ComponentModel.Design;
-using System.IO;
-using System.Linq;
+using System.Diagnostics;
+using System.Globalization;
 using System.Resources;
 using System.Xml;
 
 namespace ExportResx {
-	internal class Exporter {
+	internal sealed class Exporter {
 		private const string Extension = ".resx";
 		private readonly string resxFolder;
 		private readonly string fileName;
@@ -24,7 +22,7 @@ namespace ExportResx {
 			List<string> files = new List<string>();
 			files.Add(Path.Combine(this.resxFolder, this.fileName + Exporter.Extension));
 			foreach(string code in this.cultures) {
-				files.Add(Path.Combine(this.resxFolder, string.Format("{0}.{1}{2}", this.fileName, code, Exporter.Extension)));
+				files.Add(Path.Combine(this.resxFolder, string.Format(CultureInfo.InvariantCulture, "{0}.{1}{2}", this.fileName, code, Exporter.Extension)));
 			}
 			List<Dictionary<string, Value>> list = new List<Dictionary<string, Value>>();
 			foreach(string file in files) {
@@ -32,7 +30,7 @@ namespace ExportResx {
 					Program.Log("File {0} not found", file);
 					return false;
 				}
-				Dictionary<string, Value> content = this.Read(file);
+				Dictionary<string, Value>? content = Exporter.Read(file);
 				if(content == null) {
 					return false;
 				}
@@ -54,7 +52,7 @@ namespace ExportResx {
 				for(int i = 1; i < list.Count; i++) {
 					XmlElement lang = xml.CreateElement(this.cultures[i - 1]);
 					res.AppendChild(lang);
-					if(list[i].TryGetValue(pair.Key, out Value value)) {
+					if(list[i].TryGetValue(pair.Key, out Value? value)) {
 						lang.InnerText = value.Text;
 					}
 				}
@@ -66,14 +64,15 @@ namespace ExportResx {
 			return true;
 		}
 
-		private Dictionary<string, Value> Read(string file) {
+		private static Dictionary<string, Value>? Read(string file) {
 			Dictionary<string, Value> list = new Dictionary<string, Value>();
 			using(ResXResourceReader reader = new ResXResourceReader(file)) {
 				reader.UseResXDataNodes = true;
 				foreach(DictionaryEntry item in reader) {
-					ResXDataNode node = (ResXDataNode)item.Value;
+					ResXDataNode? node = item.Value as ResXDataNode;
+					Debug.Assert(node != null);
 					string name = node.Name;
-					object obj = node.GetValue((ITypeResolutionService)null);
+					object obj = node.GetValue((ITypeResolutionService)null!);
 					if(obj is string text) {
 						Value value = new Value(name, text, node.Comment);
 						list.Add(value.Name, value);

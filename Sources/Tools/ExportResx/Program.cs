@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
+﻿using System.Diagnostics;
+using System.Globalization;
 using System.Reflection;
 using CommandLineParser;
 
 namespace ExportResx {
-	internal class Program {
+	internal static class Program {
 		private static void Main(string[] args) {
 			// -c fa
 			bool help = false;
@@ -16,7 +13,7 @@ namespace ExportResx {
 				.AddFlag("help", "?", "get help", false, h => help = h)
 				.AddString("culture", "c", "<culture code>", "code of exported culture", true, c => cultures.Add(c))
 			;
-			string errors = commandLine.Parse(args, null);
+			string? errors = commandLine.Parse(args, null);
 			if(!string.IsNullOrEmpty(errors)) {
 				Program.Log(errors);
 			}
@@ -38,9 +35,9 @@ namespace ExportResx {
 			string exe = Assembly.GetExecutingAssembly().Location;
 			string path = exe;
 			while(Path.GetFileName(path) != "Tools") {
-				path = Path.GetDirectoryName(path);
+				path = Path.GetDirectoryName(path)!;
 			}
-			path = Path.GetDirectoryName(path);
+			path = Path.GetDirectoryName(path)!;
 			return Path.Combine(path, "LogicCircuit", "Properties");
 		}
 
@@ -50,7 +47,7 @@ namespace ExportResx {
 		}
 
 		public static void Log(string format, params object[] args) {
-			Program.Log(string.Format(format, args));
+			Program.Log(string.Format(CultureInfo.InvariantCulture, format, args));
 		}
 	}
 }
