@@ -17,8 +17,9 @@
 
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <PublishFolder>$(MSBuildProjectDirectory)\bin\$(Configuration)\publish</PublishFolder>
-	<SelfContained>true</SelfContained>
+    <SelfContained>true</SelfContained>
     <PublishReadyToRun>false</PublishReadyToRun>
+    <!--<RuntimeIdentifier>win-x86</RuntimeIdentifier>-->
   </PropertyGroup>
 
   <ItemGroup>
