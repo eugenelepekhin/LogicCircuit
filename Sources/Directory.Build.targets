@@ -28,9 +28,4 @@
 		<!--<Message Importance="high" Text=">>> Building Snap store Wrappers: $(ItemWrapperGeneratorCommand)"/>-->
 		<Exec Command="$(ItemWrapperGeneratorCommand)"/>
 	</Target>
-
-	<Target Name="CopyLicenseFile" AfterTargets="AfterBuild" Condition="Exists('$(MSBuildThisFileDirectory)License.txt') and '$(Configuration)' == 'Release' and '$(MSBuildProjectName)' == 'LogicCircuit'">
-		<!--<Message Importance="high" Text=">>> Copy License.txt to $(TargetPath)"/>-->
-		<Copy SourceFiles="$(MSBuildThisFileDirectory)License.txt" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true"/>
-	</Target>
 </Project>

@@ -13,13 +13,15 @@
     <Version>2.23.04.12</Version>
     <Description>www.LogicCircuit.org</Description>
     <Copyright>© LogicCircuit.org</Copyright>
+    <Platforms>AnyCPU;x86</Platforms>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-    <PublishFolder>$(MSBuildProjectDirectory)\bin\$(Configuration)\publish</PublishFolder>
     <SelfContained>true</SelfContained>
     <PublishReadyToRun>false</PublishReadyToRun>
-    <!--<RuntimeIdentifier>win-x86</RuntimeIdentifier>-->
+    <PublishFolder>$(MSBuildProjectDirectory)\bin\$(Configuration)_x64\publish</PublishFolder>
+    <PublishFolder Condition="'$(Platform)' == 'x86'">$(MSBuildProjectDirectory)\bin\$(Configuration)_x32\publish</PublishFolder>
+    <RuntimeIdentifier Condition="'$(Platform)' == 'x86'">win-x86</RuntimeIdentifier>
   </PropertyGroup>
 
   <ItemGroup>
