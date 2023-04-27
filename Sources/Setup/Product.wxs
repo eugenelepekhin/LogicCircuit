@@ -26,7 +26,7 @@
 		InstallerVersion="300"
 		ProductCode="$(var.ProductCode)"
 		Compressed="yes"
-		Scope="perUserOrMachine"
+		Scope="perMachine"
 	>
 		<Icon Id="icon" SourceFile="..\LogicCircuit\Properties\LogicCircuit.ico"/>
 		<Property Id="ARPPRODUCTICON" Value="icon"/>
@@ -130,5 +130,6 @@
 		</UI>
 
 		<UIRef Id="WixUI_Common"/>
+		<UIRef Id="WixUI_ErrorProgressText"/>
 	</Package>
 </Wix>
