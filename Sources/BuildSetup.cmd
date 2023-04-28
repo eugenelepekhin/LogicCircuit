@@ -1,3 +1,6 @@
+rem forst build everything, so all the tools are there.
+msbuild -r -p:Configuration=Release LogicCircuit.sln
+
 dotnet publish LogicCircuit\LogicCircuit.csproj --sc -c Release -r win-x64 -o LogicCircuit\bin\Release_64\Publish
 dotnet publish LogicCircuit\LogicCircuit.csproj --sc -c Release -r win-x86 -o LogicCircuit\bin\Release_32\Publish
 
