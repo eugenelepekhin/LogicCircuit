@@ -1,4 +1,4 @@
-<Project Sdk="WixToolset.Sdk/4.0.0">
+﻿<Project Sdk="WixToolset.Sdk/4.0.0">
   <PropertyGroup>
     <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
     <Platform Condition="'$(Platform)' == ''">x64</Platform>
@@ -17,16 +17,6 @@
     <IntermediateOutputPath>obj\$(Configuration)_x86\</IntermediateOutputPath>
     <OutputName>LogicCircuitSetup_32</OutputName>
   </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\LogicCircuit\LogicCircuit.csproj">
-      <Name>LogicCircuit</Name>
-      <Project>{45ed9dda-67b2-4aa9-bb4c-65a9684060ae}</Project>
-      <Private>True</Private>
-      <DoNotHarvest>True</DoNotHarvest>
-      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
-      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="WixToolset.UI.wixext" Version="4.0.0" />
     <PackageReference Include="WixToolset.NetFx.wixext" Version="4.0.0" />

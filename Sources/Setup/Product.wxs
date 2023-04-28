@@ -9,12 +9,12 @@
 		<?define ProductCode={ABBE6252-1D0B-4696-A2E0-B34A29179CBA} ?>
 		<?define ProgramFilesFolder=ProgramFilesFolder?>
 		<?define Bitness=always32?>
-		<?define PublishFolder=..\LogicCircuit\bin\Release_x32\publish?>
+		<?define PublishFolder=..\LogicCircuit\bin\Release_32\Publish?>
 	<?else?>
 		<?define ProductCode={CBB6FEA4-1D85-4F97-83AF-A1A95E2410C8} ?>
 		<?define ProgramFilesFolder=ProgramFiles64Folder?>
 		<?define Bitness=always64?>
-		<?define PublishFolder=..\LogicCircuit\bin\Release_x64\publish?>
+		<?define PublishFolder=..\LogicCircuit\bin\Release_64\Publish?>
 	<?endif?>
 
 	<Package

@@ -23,6 +23,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{AB5DC13F-190F-4CA3-97B1-971E8C1C3F6A}"
 	ProjectSection(SolutionItems) = preProject
 		Tools\Directory.Build.props = Tools\Directory.Build.props
+		Tools\Directory.Build.targets = Tools\Directory.Build.targets
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResourceWrapper.Generator", "Tools\ResourceWrapper.Generator\ResourceWrapper.Generator.csproj", "{B543E594-A653-4E16-9203-5C833D430A8C}"
@@ -47,8 +48,8 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{BEB2A373-887A-412D-87B9-DB105E89597D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BEB2A373-887A-412D-87B9-DB105E89597D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BEB2A373-887A-412D-87B9-DB105E89597D}.Debug|x86.ActiveCfg = Debug|x86
-		{BEB2A373-887A-412D-87B9-DB105E89597D}.Debug|x86.Build.0 = Debug|x86
+		{BEB2A373-887A-412D-87B9-DB105E89597D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BEB2A373-887A-412D-87B9-DB105E89597D}.Debug|x86.Build.0 = Debug|Any CPU
 		{BEB2A373-887A-412D-87B9-DB105E89597D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEB2A373-887A-412D-87B9-DB105E89597D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BEB2A373-887A-412D-87B9-DB105E89597D}.Release|x86.ActiveCfg = Release|x86
@@ -78,7 +79,7 @@ Global
 		{1F9944A5-5A8C-4298-A2A7-B57FBBE6D6CD}.Release|x86.ActiveCfg = Release|Any CPU
 		{1F9944A5-5A8C-4298-A2A7-B57FBBE6D6CD}.Release|x86.Build.0 = Release|Any CPU
 		{7F6164FF-4A14-493D-AD0E-E6DD127FC64E}.Debug|Any CPU.ActiveCfg = Debug|x64
-		{7F6164FF-4A14-493D-AD0E-E6DD127FC64E}.Debug|x86.ActiveCfg = Debug|x86
+		{7F6164FF-4A14-493D-AD0E-E6DD127FC64E}.Debug|x86.ActiveCfg = Debug|x64
 		{7F6164FF-4A14-493D-AD0E-E6DD127FC64E}.Release|Any CPU.ActiveCfg = Release|x64
 		{7F6164FF-4A14-493D-AD0E-E6DD127FC64E}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection
