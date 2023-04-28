@@ -28,4 +28,25 @@
 		<!--<Message Importance="high" Text=">>> Building Snap store Wrappers: $(ItemWrapperGeneratorCommand)"/>-->
 		<Exec Command="$(ItemWrapperGeneratorCommand)"/>
 	</Target>
+
+	<Target Name="ZipSetup">
+		<PropertyGroup>
+			<ZipApp>"$(ProgramW6432)\7-Zip\7z.exe"</ZipApp>
+			<LicenseTxt>$(MSBuildThisFileDirectory)License.txt</LicenseTxt>
+
+			<Setup32Root>$(MSBuildThisFileDirectory)Setup\bin\Release_x86</Setup32Root>
+			<Zip32>$(ZipApp) a $(Setup32Root)\LogicCircuit.Setup32.$(LogicCircuitVersion).zip -mx9 $(Setup32Root)\LogicCircuitSetup_32.msi $(LicenseTxt)</Zip32>
+
+			<Setup64Root>$(MSBuildThisFileDirectory)Setup\bin\Release_x64</Setup64Root>
+			<Zip64>$(ZipApp) a $(Setup64Root)\LogicCircuit.Setup64.$(LogicCircuitVersion).zip -mx9 $(Setup64Root)\LogicCircuitSetup_64.msi $(LicenseTxt)</Zip64>
+		</PropertyGroup>
+
+		<!--<Message Importance="high" Text=">>> ZipSetup"/>-->
+
+		<Exec Command="del $(Setup32Root)\*.zip"/>
+		<Exec Command="del $(Setup64Root)\*.zip"/>
+
+		<Exec Command="$(Zip32)"/>
+		<Exec Command="$(Zip64)"/>
+	</Target>
 </Project>

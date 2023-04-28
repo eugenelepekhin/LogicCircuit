@@ -22,3 +22,6 @@ msbuild -r -p:Configuration=Release;Platform=x64 Setup\Setup.wixproj
 
 msbuild -r -p:Configuration=Release;Platform=x86 Setup\Setup.wixproj
 @if "%ERRORLEVEL%" NEQ "0" (exit /B)
+
+msbuild -t:ZipSetup Setup
+@if "%ERRORLEVEL%" NEQ "0" (exit /B)

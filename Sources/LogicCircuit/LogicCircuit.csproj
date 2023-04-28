@@ -10,7 +10,7 @@
     <AnalysisLevel>latest-all</AnalysisLevel>
     <ApplicationIcon>Properties\LogicCircuit.ico</ApplicationIcon>
 
-    <Version>2.23.04.12</Version>
+    <Version>$(LogicCircuitVersion)</Version>
     <Description>www.LogicCircuit.org</Description>
     <Copyright>© LogicCircuit.org</Copyright>
     <Platforms>AnyCPU;x86</Platforms>

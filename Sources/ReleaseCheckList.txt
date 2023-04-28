@@ -1,13 +1,13 @@
 0. Update year in License.txt and template.html in web site project.
-1. Set version in LogicCircuit\Properties\AssemblyInfo.cs
-2. Set Version in Setup project. Create new GUID for Id.
-3. Build and test Setup project
-4. Prepare website - add what is new in download.html
-5. Upload setup zip to downloads folder on the website.
-6. Fix link on the download .html page to download of the new file.
+1. Set version in LogicCircuitVersion property in Directory.Build.props
+2. Set Version in Setup project. Create new GUIDs for two ProductCode for 32 and 64 bits.
+3. Build Setup by running BuildSetup.cmd from "Developer Command Prompt"
+4. Upload setup zips to downloads folder on the website and download and test them.
+5. Prepare website - add what is new in download.html
+6. Fix links on the download .html page to download of the new files.
 7. Add News item in Project.xml
 8. Change version in LatestVersion.txt.
 9. Review and update TranslationRequests.txt.
 10. Add tags to repos (both logic circuit and web site)
-11. Push repos to bitbucket.org
+11. Push repos to dev.azure and github
 12. Publish web site
