@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
+	<Target Name="PublishProject" AfterTargets="AfterBuild" Condition="'$(Configuration)' == 'Release' and '$(PublishFolder)' != ''">
+		<PropertyGroup>
+			<Command>dotnet publish $(MSBuildProjectFile) --no-build -o $(PublishFolder) -c Release -r $(RuntimeIdentifier)</Command>
+		</PropertyGroup>
+
+		<!--<Message Importance="high" Text=">>> PublishTool: $(Command)"/>-->
+		<Exec Command="$(Command)"/>
+	</Target>
+
 	<Target Name="GenerateResourceWrappers" BeforeTargets="BeforeBuild" Condition="'@(EmbeddedResource)' != '' and '$(MSBuildProjectName)' != 'LogicCircuit.UnitTest'">
 		<PropertyGroup>
 			<ResourceWrapperGeneratorCommand>"$(ToolsFolder)\ResourceWrapper.Generator.exe" /FlowDirection /p "$(MSBuildProjectFullPath)"</ResourceWrapperGeneratorCommand>

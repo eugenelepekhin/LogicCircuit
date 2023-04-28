@@ -16,15 +16,6 @@
     <Platforms>AnyCPU;x86</Platforms>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-    <RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers>
-    <SelfContained>true</SelfContained>
-    <PublishReadyToRun>false</PublishReadyToRun>
-    <PublishFolder>$(MSBuildProjectDirectory)\bin\$(Configuration)_x64\publish</PublishFolder>
-    <PublishFolder Condition="'$(Platform)' == 'x86'">$(MSBuildProjectDirectory)\bin\$(Configuration)_x32\publish</PublishFolder>
-    <RuntimeIdentifier Condition="'$(Platform)' == 'x86'">win-x86</RuntimeIdentifier>
-  </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="IronPython" Version="2.7.12" />
   </ItemGroup>

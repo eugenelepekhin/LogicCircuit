@@ -10,7 +10,7 @@
 		<!--<SelfContained>false</SelfContained>-->
 		<RuntimeIdentifier Condition="'$(RuntimeIdentifier)' == ''">win-x64</RuntimeIdentifier>
 		<PublishSingleFile>true</PublishSingleFile>
-		<!--<PublishReadyToRun>false</PublishReadyToRun>-->
+		<PublishReadyToRun>false</PublishReadyToRun>
 	</PropertyGroup>
 
 </Project>

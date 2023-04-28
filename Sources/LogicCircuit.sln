@@ -14,6 +14,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CA299D44-CDB9-4DC6-A994-1C54069E542E}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		BuildSetup.cmd = BuildSetup.cmd
 		Directory.Build.props = Directory.Build.props
 		Directory.Build.targets = Directory.Build.targets
 		ReleaseCheckList.txt = ReleaseCheckList.txt
@@ -23,7 +24,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{AB5DC13F-190F-4CA3-97B1-971E8C1C3F6A}"
 	ProjectSection(SolutionItems) = preProject
 		Tools\Directory.Build.props = Tools\Directory.Build.props
-		Tools\Directory.Build.targets = Tools\Directory.Build.targets
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResourceWrapper.Generator", "Tools\ResourceWrapper.Generator\ResourceWrapper.Generator.csproj", "{B543E594-A653-4E16-9203-5C833D430A8C}"
