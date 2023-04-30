@@ -78,6 +78,24 @@ namespace LogicCircuit {
 			this.abortRequested = true;
 		}
 
+		public void WaitToStop() {
+			Thread? thread = this.evaluationThread;
+			if (thread != null && thread.IsAlive) {
+				if(this.evaluationGate?.SafeWaitHandle != null) {
+					try {
+						this.evaluationGate?.Set();
+					} catch(ObjectDisposedException e) {
+						Debug.WriteLine(e.ToString());
+					}
+				}
+				thread.Join(TimeSpan.FromSeconds(0.5));
+			}
+			this.Editor.Mainframe.Dispatcher.Invoke(
+				new Action(() => thread = null), // any action here is fine as long as it let to finish all the power down events.
+				DispatcherPriority.ApplicationIdle
+			);
+		}
+
 		public bool IsRunning { get { return this.evaluationThread != null && this.evaluationThread.IsAlive && this.running; } }
 
 		private static int HalfPeriod(int frequency) {

@@ -57,6 +57,7 @@ namespace LogicCircuit {
 							this.CircuitRunner.Start();
 						} else {
 							this.CircuitRunner!.Stop();
+							this.CircuitRunner.WaitToStop();
 							this.CircuitRunner = null;
 						}
 					}

@@ -120,6 +120,9 @@ namespace LogicCircuit {
 		}
 
 		private void Edit(string? file) {
+			if(this.Editor != null) {
+				this.Editor.Power = false;
+			}
 			this.ResetAutoSaveTimer();
 			Editor circuitEditor;
 			try {
@@ -127,9 +130,6 @@ namespace LogicCircuit {
 			} catch(SnapStoreException snapStoreException) {
 				Tracer.Report("Mainframe.Edit", snapStoreException);
 				throw new CircuitException(Cause.CorruptedFile, snapStoreException, Properties.Resources.ErrorFileCorrupted(file));
-			}
-			if(this.Editor != null) {
-				this.Editor.Power = false;
 			}
 			if(circuitEditor.File != null) {
 				Settings.User.AddRecentFile(circuitEditor.File);
