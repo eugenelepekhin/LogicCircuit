@@ -177,7 +177,12 @@ namespace LogicCircuit {
 		}
 
 		public bool Match(Regex regex) {
-			return Circuit.Match(regex, this.Name) || Circuit.Match(regex, this.Notation) || Circuit.Match(regex, this.Note);
+			// TODO: review design of probe name set to it's ID when there is no user provided name.
+			bool skipName = false;
+			if(this is CircuitProbe probe && !probe.HasName) {
+				skipName = true;
+			}
+			return (!skipName && Circuit.Match(regex, this.Name)) || Circuit.Match(regex, this.Notation) || Circuit.Match(regex, this.Note);
 		}
 
 		#if DEBUG
