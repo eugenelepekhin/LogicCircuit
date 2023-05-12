@@ -160,11 +160,19 @@ namespace LogicCircuit {
 			}
 		}
 
-		public CircuitState Apply(int probeCapacity) {
+		public ConnectionSet ConnectionSet() {
 			Tracer.Assert(this.Circuit != null && this.CircuitSymbol == null && this.Parent == null, "This method should be called on root only");
 
 			ConnectionSet connectionSet = new ConnectionSet();
 			this.ConnectMap(connectionSet);
+
+			return connectionSet;
+		}
+
+		public CircuitState Apply(int probeCapacity) {
+			Tracer.Assert(this.Circuit != null && this.CircuitSymbol == null && this.Parent == null, "This method should be called on root only");
+
+			ConnectionSet connectionSet = this.ConnectionSet();
 
 			// Flatten the circuit
 			SymbolMapList list = new SymbolMapList();
