@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Ignore Spelling: Tri
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;

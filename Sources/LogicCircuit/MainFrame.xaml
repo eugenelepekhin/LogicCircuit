@@ -101,6 +101,7 @@
 				<Separator/>
 				<lc:CommandMenuItem Command="{Binding Path=CommandImport}"/>
 				<lc:CommandMenuItem Command="{Binding Path=CommandExportImage}"/>
+				<lc:CommandMenuItem Command="{Binding Path=CommandExportHdl}"/>
 				<Separator/>
 				<lc:CommandMenuItem Command="{Binding Path=CommandClose}"/>
 			</MenuItem>

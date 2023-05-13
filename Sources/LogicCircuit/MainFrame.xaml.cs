@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Ignore Spelling: Hdl
+
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -122,6 +124,10 @@ namespace LogicCircuit {
 		) {
 			IconPath = "Icon/FileExportImage.xaml"
 		};
+		public LambdaUICommand CommandExportHdl => new LambdaUICommand(Properties.Resources.CommandFileExportHdl,
+			o => this.Editor != null && !this.LogicalCircuit().IsEmpty(),
+			o => this.ShowDialog(new DialogExportHdl(this.Editor!))
+		);
 		public LambdaUICommand CommandClose => new LambdaUICommand(Properties.Resources.CommandFileClose, o => this.Close(), new KeyGesture(Key.F4, ModifierKeys.Alt)) {
 			IconPath = "Icon/FileClose.xaml"
 		};

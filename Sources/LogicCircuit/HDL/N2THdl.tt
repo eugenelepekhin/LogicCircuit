@@ -1,0 +1,21 @@
+﻿<#@ template language="C#" debug="True" inherits="T4Transformation" #>
+<#@ import namespace="System.Linq" #>
+CHIP <#=this.Name#> {
+<#if(this.HasInputPins) {#>
+	IN <#=PinsText(this.HdlExport.InputPins)#>;
+<#}#>
+<#if(this.HasOutputPins) {#>
+	OUT <#=PinsText(this.HdlExport.OutputPins)#>;
+<#}#>
+PARTS:
+<#foreach(HdlSymbol symbol in this.HdlExport.Parts) {
+	bool comma = false;
+#>
+	<#=symbol.Name#>(<#foreach(HdlConnection connection in symbol.HdlConnections) {#><#=comma ? ", " : ""#><#=connection.JamName#>=<#=connection.PinName#><#comma = true;#><#}#>);
+<#}#>
+<#foreach(HdlSymbol outPin in this.HdlExport.OutputPins) {
+	foreach(HdlConnection connection in outPin.HdlConnections.Where(c => c.ConnectsInputWithOutput())) {#>
+	Or(a=<#=connection.InputName()#>, b=false, out=<#=connection.OutputName()#>); // I's impossible to connect directly input to the output, so use OR function for this.
+<#	}
+}#>
+}

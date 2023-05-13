@@ -65,8 +65,8 @@ namespace LogicCircuit {
 					string trim(Jam jam) => regex.Replace(jam.ToString(), " ").Trim();
 					System.Text.StringBuilder text = new System.Text.StringBuilder();
 					System.Globalization.CultureInfo culture = System.Globalization.CultureInfo.InvariantCulture;
-					foreach(Dictionary<Jam, Connection> dic in this.outputs.Values) {
-						foreach(Connection con in dic.Values) {
+					foreach(Dictionary<Jam, Connection> dictionary in this.outputs.Values) {
+						foreach(Connection con in dictionary.Values) {
 							text.AppendFormat(culture, "{0} -> {1}", trim(con.OutJam), trim(con.InJam));
 							text.AppendLine();
 						}

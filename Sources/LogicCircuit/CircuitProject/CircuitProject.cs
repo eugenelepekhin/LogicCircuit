@@ -351,22 +351,22 @@ namespace LogicCircuit {
 		/// null         -- when ns is unknown
 		/// </returns>
 		private static string? FindTransformation(string ns) {
-			StringComparer cmp = StringComparer.OrdinalIgnoreCase;
+			StringComparer comparer = StringComparer.OrdinalIgnoreCase;
 
-			if(cmp.Equals(ns, CircuitProject.PersistenceNamespace)) return string.Empty;
+			if(comparer.Equals(ns, CircuitProject.PersistenceNamespace)) return string.Empty;
 
-			if(cmp.Equals(ns, "http://LogicCircuit.net/2.0.0.10/CircuitProject.xsd")) return Schema.ConvertFrom_2_0_0_10;
-			if(cmp.Equals(ns, "http://LogicCircuit.net/2.0.0.9/CircuitProject.xsd")) return Schema.ConvertFrom_2_0_0_9;
-			if(cmp.Equals(ns, "http://LogicCircuit.net/2.0.0.8/CircuitProject.xsd")) return Schema.ConvertFrom_2_0_0_8;
-			if(cmp.Equals(ns, "http://LogicCircuit.net/2.0.0.7/CircuitProject.xsd")) return Schema.ConvertFrom_2_0_0_7;
-			if(cmp.Equals(ns, "http://LogicCircuit.net/2.0.0.6/CircuitProject.xsd")) return Schema.ConvertFrom_2_0_0_6;
-			if(cmp.Equals(ns, "http://LogicCircuit.net/2.0.0.5/CircuitProject.xsd")) return Schema.ConvertFrom_2_0_0_5;
-			if(cmp.Equals(ns, "http://LogicCircuit.net/2.0.0.4/CircuitProject.xsd")) return Schema.ConvertFrom_2_0_0_4;
-			if(cmp.Equals(ns, "http://LogicCircuit.net/2.0.0.3/CircuitProject.xsd")) return Schema.ConvertFrom_2_0_0_3;
-			if(cmp.Equals(ns, "http://LogicCircuit.net/2.0.0.2/CircuitProject.xsd")) return Schema.ConvertFrom_2_0_0_2;
-			if(cmp.Equals(ns, "http://LogicCircuit.net/2.0.0.1/CircuitProject.xsd")) return Schema.ConvertFrom_2_0_0_1;
-			if(cmp.Equals(ns, "http://LogicCircuit.net/1.0.0.3/CircuitProject.xsd")) return Schema.ConvertFrom_1_0_0_3;
-			if(cmp.Equals(ns, "http://LogicCircuit.net/1.0.0.2/CircuitProject.xsd")) return Schema.ConvertFrom_1_0_0_2;
+			if(comparer.Equals(ns, "http://LogicCircuit.net/2.0.0.10/CircuitProject.xsd")) return Schema.ConvertFrom_2_0_0_10;
+			if(comparer.Equals(ns, "http://LogicCircuit.net/2.0.0.9/CircuitProject.xsd")) return Schema.ConvertFrom_2_0_0_9;
+			if(comparer.Equals(ns, "http://LogicCircuit.net/2.0.0.8/CircuitProject.xsd")) return Schema.ConvertFrom_2_0_0_8;
+			if(comparer.Equals(ns, "http://LogicCircuit.net/2.0.0.7/CircuitProject.xsd")) return Schema.ConvertFrom_2_0_0_7;
+			if(comparer.Equals(ns, "http://LogicCircuit.net/2.0.0.6/CircuitProject.xsd")) return Schema.ConvertFrom_2_0_0_6;
+			if(comparer.Equals(ns, "http://LogicCircuit.net/2.0.0.5/CircuitProject.xsd")) return Schema.ConvertFrom_2_0_0_5;
+			if(comparer.Equals(ns, "http://LogicCircuit.net/2.0.0.4/CircuitProject.xsd")) return Schema.ConvertFrom_2_0_0_4;
+			if(comparer.Equals(ns, "http://LogicCircuit.net/2.0.0.3/CircuitProject.xsd")) return Schema.ConvertFrom_2_0_0_3;
+			if(comparer.Equals(ns, "http://LogicCircuit.net/2.0.0.2/CircuitProject.xsd")) return Schema.ConvertFrom_2_0_0_2;
+			if(comparer.Equals(ns, "http://LogicCircuit.net/2.0.0.1/CircuitProject.xsd")) return Schema.ConvertFrom_2_0_0_1;
+			if(comparer.Equals(ns, "http://LogicCircuit.net/1.0.0.3/CircuitProject.xsd")) return Schema.ConvertFrom_1_0_0_3;
+			if(comparer.Equals(ns, "http://LogicCircuit.net/1.0.0.2/CircuitProject.xsd")) return Schema.ConvertFrom_1_0_0_2;
 
 			return null;
 		}
@@ -377,16 +377,16 @@ namespace LogicCircuit {
 			for(;;) {
 				while (xmlReader.NodeType != XmlNodeType.Element && xmlReader.Read()); // skip to the first element
 
-				string? xslt = CircuitProject.FindTransformation(xmlReader.NamespaceURI);
-				if (xslt == null) {
+				string? transformation = CircuitProject.FindTransformation(xmlReader.NamespaceURI);
+				if (transformation == null) {
 					throw new CircuitException(Cause.UnknownVersion, Properties.Resources.ErrorUnknownVersion);
 				}
-				if (xslt.Length == 0) {
+				if (transformation.Length == 0) {
 					// No transform needed. We are at the current version.
 					return;
 				}
 
-				XmlHelper.Transform(xslt, ref xmlReader);
+				XmlHelper.Transform(transformation, ref xmlReader);
 			}
 		}
 	}

@@ -3159,5 +3159,82 @@ namespace LogicCircuit.Properties {
  		public static string TitleIsDiagramBackgroundWhite {
 			get { return ResourceManager.GetString("TitleIsDiagramBackgroundWhite", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to ....
+		/// </summary>
+ 		public static string CommandEllipsis {
+			get { return ResourceManager.GetString("CommandEllipsis", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Export _HDL....
+		/// </summary>
+ 		public static string CommandFileExportHdl {
+			get { return ResourceManager.GetString("CommandFileExportHdl", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Errors exporting file {0}.
+		/// </summary>
+ 		public static string ErrorExportHdlFile(string file) {
+			return string.Format(FormatCulture, ResourceManager.GetString("ErrorExportHdlFile", Culture), file);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Exporting circuit {0} to file {1}.
+		/// </summary>
+ 		public static string MessageExportingHdl(string circuitName, string file) {
+			return string.Format(FormatCulture, ResourceManager.GetString("MessageExportingHdl", Culture), circuitName, file);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Close.
+		/// </summary>
+ 		public static string TitleClose {
+			get { return ResourceManager.GetString("TitleClose", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Export.
+		/// </summary>
+ 		public static string TitleExport {
+			get { return ResourceManager.GetString("TitleExport", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Target _folder:.
+		/// </summary>
+ 		public static string TitleExportFolder {
+			get { return ResourceManager.GetString("TitleExportFolder", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Export HDL.
+		/// </summary>
+ 		public static string TitleExportHdl {
+			get { return ResourceManager.GetString("TitleExportHdl", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Export _only current circuit, not any sub-circuits.
+		/// </summary>
+ 		public static string TitleExportOnlyCurrent {
+			get { return ResourceManager.GetString("TitleExportOnlyCurrent", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Export to:.
+		/// </summary>
+ 		public static string TitleExportType {
+			get { return ResourceManager.GetString("TitleExportType", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Log:.
+		/// </summary>
+ 		public static string TitleLog {
+			get { return ResourceManager.GetString("TitleLog", Culture); }
+		}
 	}
 }

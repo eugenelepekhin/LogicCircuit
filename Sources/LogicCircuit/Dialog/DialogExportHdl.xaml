@@ -1,0 +1,29 @@
+﻿<Window x:Class="LogicCircuit.DialogExportHdl"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:lc="clr-namespace:LogicCircuit"
+	xmlns:properties="clr-namespace:LogicCircuit.Properties"
+	WindowStartupLocation="CenterOwner"
+	Title="{x:Static properties:Resources.TitleExportHdl}"
+	Style="{StaticResource DialogWindow}"
+	MinWidth="400"
+	MinHeight="300"
+>
+	<lc:AutoGrid Margin="3">
+		<Label Content="{x:Static properties:Resources.TitleExportType}"/>
+		<lc:AutoWidthComboBox ItemsSource="{Binding Path=ExportTypes}" SelectedItem="{Binding Path=SelectedExportType, Mode=TwoWay}"/>
+
+		<Label Content="{x:Static properties:Resources.TitleExportFolder}"/>
+		<lc:ControlFolderSelector SelectedFolder="{Binding Path=TargetFolder, Mode=TwoWay}"/>
+
+		<CheckBox Grid.Column="1" Content="{x:Static properties:Resources.TitleExportOnlyCurrent}" IsChecked="{Binding Path=OnlyCurrent}"/>
+
+		<Label Content="{x:Static properties:Resources.TitleLog}"/>
+		<TextBox x:Name="log" Style="{StaticResource NoteEditor}"/>
+
+		<StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+			<Button Content="{x:Static properties:Resources.TitleExport}" IsDefault="True" Click="ButtonExportClick"/>
+			<Button Content="{x:Static properties:Resources.TitleClose}" IsCancel="True"/>
+		</StackPanel>
+	</lc:AutoGrid>
+</Window>
