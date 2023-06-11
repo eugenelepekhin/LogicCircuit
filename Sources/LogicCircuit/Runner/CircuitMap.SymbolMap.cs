@@ -131,7 +131,7 @@ namespace LogicCircuit {
 						}
 						CircuitGlyph symbol = jam.CircuitSymbol;
 						throw new CircuitException(Cause.UserError,
-							Properties.Resources.ErrorManyResults(jam.Pin.Name, symbol.Circuit.Notation + symbol.Point.ToString())
+							Properties.Resources.ErrorManyResults(jam.Pin.Name, symbol.Circuit.Name, symbol.Point.ToString(), symbol.LogicalCircuit.Name)
 						);
 					}
 					parameter.Result.Link(result);

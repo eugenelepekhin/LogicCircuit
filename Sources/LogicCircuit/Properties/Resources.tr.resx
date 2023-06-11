@@ -1121,7 +1121,7 @@ Bu dosyanın otomatik kaydedilmiş durumunu yüklemek istiyor musunuz?</value>
     <value>Değişken semboller Seç</value>
   </data>
 	<data name="ErrorManyResults" xml:space="preserve">
-    <value>Üç durumluk özellikte olmayan birden fazla çıkış pinine bağlı {1} giriş pini {0}.</value>
+    <value>Üç durumluk özellikte olmayan birden fazla çıkış pinine bağlı {1}{2} üzerindeki {3} giriş pini {0}.</value>
   </data>
 	<data name="ToolTipFrequency" xml:space="preserve">
     <value>Çalışan devrenin saat kapılarının frekansını değiştirin.</value>

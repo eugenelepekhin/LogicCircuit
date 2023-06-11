@@ -1200,7 +1200,7 @@ Iš</value>
     <value>grandinės simbolis {0} loginėje grandinėje "{1}" formuoja begalinį kilpa. Prašom išspresti kilpa.</value>
   </data>
 	<data name="ErrorManyResults" xml:space="preserve">
-    <value>Įvesties kaištukas {0} iš {1} sujungtas su daugiau negu su vienu išvesties kaištukus kurie nėra Tri būsenų suderintas</value>
+    <value>Įvesties kaištukas {0} iš {1}{2} ant {3} sujungtas su daugiau negu su vienu išvesties kaištukus kurie nėra Tri būsenų suderintas</value>
   </data>
 	<data name="ErrorManyMemoryData" xml:space="preserve">
     <value>Grandinė {0} turi {1} kuris saugo duomenis tarp paleidimų. Tokios grandinės negali būti naudojamos daugiau negu vieną ant kitos grandinės kaip potencialiai skirtingi rinkiniai duomenys bus saugomi ant vieno atminties modulio</value>

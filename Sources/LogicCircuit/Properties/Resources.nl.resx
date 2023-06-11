@@ -560,7 +560,7 @@ Uit</value>
     <comment>{string symbol, string logicCircuit}</comment>
   </data>
 	<data name="ErrorManyResults" xml:space="preserve">
-    <value>Invoer pin {0} van {1} is aangesloten op meer dan één uitgangspin, die niet 'tri-state' compatible zijn.</value>
+    <value>Invoer pin {0} van {1}{2} op {3} is aangesloten op meer dan één uitgangspin, die niet 'tri-state' compatible zijn.</value>
     <comment>{string pinName, string symbol}</comment>
   </data>
 	<data name="PowerOff" xml:space="preserve">

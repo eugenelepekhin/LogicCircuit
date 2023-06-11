@@ -404,7 +404,7 @@ Tal circuito no puede utilizarse más de una vez en otros circuitos debido a que
     <comment>{string circuitName, string ramNotation}</comment>
   </data>
 	<data name="ErrorManyResults" xml:space="preserve">
-    <value>El Pin de entrada {0} en {1} se encuentra conectado con mas de un Pin de salida, lo cual no es posible en tres estados.</value>
+    <value>El Pin de entrada {0} en {1}{2} en {3} se encuentra conectado con mas de un Pin de salida, lo cual no es posible en tres estados.</value>
     <comment>{string pinName, string symbol}</comment>
   </data>
 	<data name="ErrorProjectCount" xml:space="preserve">

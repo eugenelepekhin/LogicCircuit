@@ -558,7 +558,7 @@ Out</value>
     <comment>{string symbol, string logicCircuit}</comment>
   </data>
 	<data name="ErrorManyResults" xml:space="preserve">
-    <value>Il pin di ingresso {0} di {1} è collegato a più di un pin di uscita che non sono in tri state.</value>
+    <value>Il pin di ingresso {0} di {1}{2} sul {3} è collegato a più di un pin di uscita che non sono in tri state.</value>
     <comment>{string pinName, string symbol}</comment>
   </data>
 	<data name="PowerOff" xml:space="preserve">

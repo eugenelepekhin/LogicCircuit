@@ -608,7 +608,7 @@ Ut</value>
 Snälla lös problemet</value>
 	</data>
 	<data name="ErrorManyResults" xml:space="preserve">
-		<value>Ingångs stift {0} på {1} kopplad till mer än ett utgångs stift som inte är tri state kapabel.</value>
+		<value>Ingångs stift {0} på {1}{2} på {3} kopplad till mer än ett utgångs stift som inte är tri state kapabel.</value>
 	</data>
 	<data name="MessageNotRootConstant" xml:space="preserve">
 		<value>Bara konstanter på rot kretsen ({0}) kan ändras sär strömmen är på.</value>

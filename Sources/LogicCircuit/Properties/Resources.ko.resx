@@ -959,7 +959,7 @@
     <value>기능 {0}은 최소한 {1}개의 요소가 필요하다.</value>
   </data>
 	<data name="ErrorManyResults" xml:space="preserve">
-    <value>{1}의 입력 핀 {0}은 Tri-state를 이용가능하지 않은 하나 이상의 출력 핀에 연결되었다.</value>
+    <value>{3} {1}{2}의 입력 핀 {0}은 Tri-state를 이용가능하지 않은 하나 이상의 출력 핀에 연결되었다.</value>
   </data>
 	<data name="MessageNotRootConstant" xml:space="preserve">
     <value>최상위 회로에 오직 상수만 존재하는 ({0}) 는 작동될 때 변경 될 수 있습니다.</value>

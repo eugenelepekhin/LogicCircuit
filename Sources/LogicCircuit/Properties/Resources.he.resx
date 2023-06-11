@@ -418,7 +418,7 @@
     <comment>{string circuitName, string ramNotation}</comment>
   </data>
 	<data name="ErrorManyResults" xml:space="preserve">
-    <value>פין הקלט ‏{0}‏ של ‏{1}‏ מחובר למספר פיני פלט שאינם תלת-מצביים.‏</value>
+    <value>פין הקלט ‏{0}‏ של ‏{1}{2}‏ ב- {3} מחובר למספר פיני פלט שאינם תלת-מצביים.‏</value>
     <comment>{string pinName, string symbol}</comment>
   </data>
 	<data name="ErrorProjectCount" xml:space="preserve">

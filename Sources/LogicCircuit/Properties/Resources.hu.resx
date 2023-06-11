@@ -559,7 +559,7 @@ Ki</value>
     <comment>{string symbol, string logicCircuit}</comment>
   </data>
 	<data name="ErrorManyResults" xml:space="preserve">
-    <value>Input pin {0} of {1} connected to more than one output pin that are not tri state capable.</value>
+    <value>Input pin {0} of {1}{2} on {3} connected to more than one output pin that are not tri state capable.</value>
     <comment>{string pinName, string symbol}</comment>
   </data>
 	<data name="PowerOff" xml:space="preserve">

@@ -372,7 +372,7 @@ Valeur de la mémoire mis à jour le {0}</value>
     <value>Le symbole du circuit "{0}" dans le circuit logique "{1}" forme une boucle infinie. Veuillez resoudre cette boucle.</value>
   </data>
 	<data name="ErrorManyResults" xml:space="preserve">
-    <value>Broche d'entrée {0} de {1} connecté à plus d'une broche de sortie qui ne sont pas en mesure à trois états.</value>
+    <value>Broche d'entrée {0} de {1}{2} sur {3} connecté à plus d'une broche de sortie qui ne sont pas en mesure à trois états.</value>
   </data>
 	<data name="LogicalCircuitMainName" xml:space="preserve">
     <value>Principal</value>

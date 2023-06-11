@@ -364,7 +364,7 @@
     <value>شئ "{0}" در مدار "{1}" حلقه بینهایت تشکیل می دهد. لطفا این مشکل را حل کنید.</value>
   </data>
 	<data name="ErrorManyResults" xml:space="preserve">
-    <value>پین ورودی {0} در {1} به بیش از یک پین خروجی وصل شده.</value>
+    <value>پین ورودی {0} در {1}{2} در {3} به بیش از یک پین خروجی وصل شده.</value>
   </data>
 	<data name="PowerOff" xml:space="preserve">
     <value>خاموش</value>

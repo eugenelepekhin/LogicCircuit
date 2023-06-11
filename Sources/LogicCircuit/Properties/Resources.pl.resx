@@ -1359,7 +1359,7 @@ danych jest podłączonych do jednego wejścia.</value>
     <value>Symbol obwodu "{0}" na obwodzie "{1}" tworzy nieskończoną pętle. Proszę, rozwiąż pętle.</value>
   </data>
 	<data name="ErrorManyResults" xml:space="preserve">
-    <value>Wejściowy pin {0} z {1} podłaczony do więcej niż jednego pinu wyjściowego, który nie obsługuje trzech stanów.</value>
+    <value>Wejściowy pin {0} z {1}{2} na {3} podłaczony do więcej niż jednego pinu wyjściowego, który nie obsługuje trzech stanów.</value>
   </data>
 	<data name="ParserErrorCloseParenMissing" xml:space="preserve">
     <value>brakujący ')' zamiast: {0}</value>

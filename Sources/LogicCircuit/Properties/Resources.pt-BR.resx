@@ -559,7 +559,7 @@ Saída</value>
     <comment>{string symbol, string logicCircuit}</comment>
   </data>
 	<data name="ErrorManyResults" xml:space="preserve">
-    <value>Pino de entrada {0} de {1} conectado a mais de um pino de saída que não admite tri-state.</value>
+    <value>Pino de entrada {0} de {1}{2} em {3} conectado a mais de um pino de saída que não admite tri-state.</value>
     <comment>{string pinName, string symbol}</comment>
   </data>
 	<data name="PowerOff" xml:space="preserve">

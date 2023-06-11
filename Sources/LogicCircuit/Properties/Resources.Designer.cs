@@ -1031,10 +1031,10 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Input pin {0} of {1} connected to more than one output pin that are not tri state capable..
+		/// Looks up a localized string similar to Input pin {0} of {1}{2} on {3} connected to more than one output pin that are not tri state capable..
 		/// </summary>
- 		public static string ErrorManyResults(string pinName, string symbol) {
-			return string.Format(FormatCulture, ResourceManager.GetString("ErrorManyResults", Culture), pinName, symbol);
+ 		public static string ErrorManyResults(string pinName, string circuitName, string position, string logicCircuitName) {
+			return string.Format(FormatCulture, ResourceManager.GetString("ErrorManyResults", Culture), pinName, circuitName, position, logicCircuitName);
 		}
 
 		/// <summary>

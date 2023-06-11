@@ -241,7 +241,7 @@
 		<value>回路「{0}」にある回路「{1}」が無限ループになっています。修正してください。</value>
 	</data>
 	<data name="ErrorManyResults" xml:space="preserve">
-		<value>{1} の入力端子 {0} が、3ステートでない複数の出力端子に接続されています。</value>
+		<value>{3}上の入力ピン{0}{1}{2} が、3ステートでない複数の出力端子に接続されています。</value>
 	</data>
 	<data name="PowerOff" xml:space="preserve">
 		<value>電源オフ</value>

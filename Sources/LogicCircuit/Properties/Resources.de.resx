@@ -865,7 +865,7 @@ Speicherwert wird bei {0} aktualisiert.</value>
     <value>Das Symbol "{0}" in der Schaltung "{1}" erzeugt eine Endlosschleife. Bitte lösen Sie die Schleife auf.</value>
   </data>
 	<data name="ErrorManyResults" xml:space="preserve">
-    <value>Der Eingang {0} von {1} ist mit mehr als einem Ausgang verbunden, welcher nicht Tri-State fähig ist.</value>
+    <value>Der Eingang {0} von {1}{2} an {3} ist mit mehr als einem Ausgang verbunden, welcher nicht Tri-State fähig ist.</value>
   </data>
 	<data name="TitleProbeHistory" xml:space="preserve">
     <value>Prüfergebnisse</value>
