@@ -7,7 +7,7 @@ if "%VSCMD_VER%" == "" (
 
 @echo on
 
-rem Forse building everything, so all the tools are built there.
+rem Force building everything, so all the tools are built there.
 msbuild -r -p:Configuration=Release LogicCircuit.sln
 @if "%ERRORLEVEL%" NEQ "0" (exit /B)
 
