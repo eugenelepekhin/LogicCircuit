@@ -43,6 +43,7 @@
 			<DataGrid Grid.ColumnSpan="4" Name="dataGrid" AutoGenerateColumns="False" IsReadOnly="True" Margin="3"
 				VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Standard"
 				ItemsSource="{Binding Path=TruthTable}"
+				ClipboardCopyMode="IncludeHeader"
 			>
 				<DataGrid.CellStyle>
 					<Style TargetType="DataGridCell">
