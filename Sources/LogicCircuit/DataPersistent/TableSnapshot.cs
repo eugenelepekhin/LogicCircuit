@@ -204,9 +204,7 @@ namespace LogicCircuit.DataPersistent {
 			if(string.IsNullOrEmpty(name)) {
 				throw new ArgumentNullException(nameof(name));
 			}
-			if(parentTable == null) {
-				throw new ArgumentNullException(nameof(parentTable));
-			}
+			ArgumentNullException.ThrowIfNull(parentTable);
 			IPrimaryKeyHolder parent = (IPrimaryKeyHolder)parentTable;
 			if(parent.PrimaryKey<TField>() == null) {
 				throw new ArgumentException(Properties.Resources.ErrorPrimaryKeyMissing(this.Name), nameof(parentTable));
@@ -636,9 +634,7 @@ namespace LogicCircuit.DataPersistent {
 		/// <returns></returns>
 		[SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
 		public IEnumerator<TableChange<TRecord>>? GetChanges(int fromVersion, int toVersion) {
-			if(toVersion < fromVersion) {
-				throw new ArgumentOutOfRangeException(nameof(toVersion));
-			}
+			ArgumentOutOfRangeException.ThrowIfLessThan(toVersion, fromVersion);
 			List<int> version = new List<int>();
 			for(int i = fromVersion; i <= toVersion; i++) {
 				if(this.table.WasChangedIn(i)) {
@@ -843,6 +839,7 @@ namespace LogicCircuit.DataPersistent {
 			}
 
 			[SuppressMessage("Performance", "CA1854:Prefer the 'IDictionary.TryGetValue(TKey, out TValue)' method")]
+			[SuppressMessage("Performance", "CA1864:Prefer the 'IDictionary.TryAdd(TKey, TValue)' method")]
 			private void MergeChanges(List<int> version) {
 				for(int i = 0; i < version.Count; i++) {
 					using(IEnumerator<SnapTableChange<TRecord>> e = this.table.GetChanges(version[i])) {

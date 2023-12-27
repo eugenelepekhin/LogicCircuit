@@ -42,6 +42,7 @@ namespace LogicCircuit {
 		}
 
 		[SuppressMessage("Performance", "CA1854:Prefer the 'IDictionary.TryGetValue(TKey, out TValue)' method")]
+		[SuppressMessage("Performance", "CA1864:Prefer the 'IDictionary.TryAdd(TKey, TValue)' method")]
 		private void ReportFunctions(LogicalCircuit root) {
 			try {
 				CircuitMap map = new CircuitMap(root);

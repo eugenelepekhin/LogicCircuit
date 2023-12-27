@@ -24,9 +24,7 @@ namespace LogicCircuit {
 		/// <param name="value"></param>
 		/// <returns></returns>
 		public string ToStringWithCulture(object value) {
-			if(value == null) {
-				throw new ArgumentNullException(nameof(value));
-			}
+			ArgumentNullException.ThrowIfNull(value);
 
 			Type type = value.GetType();
 			MethodInfo? method = type.GetMethod("ToString", new Type[] { typeof(IFormatProvider) });

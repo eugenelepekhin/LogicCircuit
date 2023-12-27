@@ -30,9 +30,7 @@ namespace LogicCircuit {
 			this.CircuitState.DefineFunction(this);
 		}
 		protected CircuitFunction(CircuitState circuitState, int[] parameter, int minimumParameterCount, int result) : this(circuitState, parameter, new int[] { result }) {
-			if(parameter == null) {
-				throw new ArgumentNullException(nameof(parameter));
-			}
+			ArgumentNullException.ThrowIfNull(parameter);
 			if(parameter.Length < minimumParameterCount) {
 				throw new ArgumentException(Properties.Resources.FunctionParameter(this.Name, minimumParameterCount));
 			}
@@ -156,7 +154,7 @@ namespace LogicCircuit {
 			return changed;
 		}
 
-		private static Exception BadState(State state) {
+		private static AssertException BadState(State state) {
 			return new AssertException(Properties.Resources.UnknownState(state));
 		}
 

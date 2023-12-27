@@ -606,7 +606,7 @@ namespace LogicCircuit {
 			return this.ErrorUnexpected(token);
 		}
 
-		private Expression? Variable(string name) {
+		private IndexExpression? Variable(string name) {
 			int index = 0;
 			foreach(InputPinSocket pin in this.socket.Inputs) {
 				if(StringComparer.Ordinal.Equals(pin.Pin.Name, name)) {
@@ -639,7 +639,7 @@ namespace LogicCircuit {
 			return null;
 		}
 
-		private static Expression? Literal(Token token) {
+		private static ConstantExpression? Literal(Token token) {
 			switch(token.TokenType) {
 			case TokenType.IntBin: return Expression.Constant(ExpressionParser.FromBin(token.Value));
 			case TokenType.IntDec: return Expression.Constant(ExpressionParser.FromDec(token.Value));

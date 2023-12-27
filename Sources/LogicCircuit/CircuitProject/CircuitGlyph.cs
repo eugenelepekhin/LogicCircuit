@@ -114,7 +114,7 @@ namespace LogicCircuit {
 						j.Clear();
 					}
 				}
-				IList<Jam> list = this.jams[(int)PinSide.Left];
+				List<Jam> list = this.jams[(int)PinSide.Left];
 				foreach(BasePin pin in this.Circuit.Left) {
 					list.Add(this.CreateJam(pin));
 				}

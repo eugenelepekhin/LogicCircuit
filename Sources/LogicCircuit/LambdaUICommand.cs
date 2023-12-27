@@ -33,9 +33,7 @@ namespace LogicCircuit {
 			if(string.IsNullOrEmpty(text)) {
 				throw new ArgumentNullException(nameof(text));
 			}
-			if(execute == null) {
-				throw new ArgumentNullException(nameof(execute));
-			}
+			ArgumentNullException.ThrowIfNull(execute);
 			this.Text = text;
 			this.canExecutePredicate = canExecute;
 			this.executeAction = execute;

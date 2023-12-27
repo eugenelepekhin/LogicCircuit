@@ -692,7 +692,7 @@ namespace LogicCircuit.DataPersistent {
 			return this.GetChanges(version, true);
 		}
 
-		private IEnumerator<SnapTableChange<TRecord>> GetChanges(int version, bool forRollback) {
+		private ChangeEnumerator GetChanges(int version, bool forRollback) {
 			if(version != 0) {
 				this.ValidateVersion(version);
 			}
@@ -804,9 +804,7 @@ namespace LogicCircuit.DataPersistent {
 				while(version < snapAddress.Page[snapAddress.Index].Version) {
 					snapAddress = this.table.snap.ItemAddress(--pointIndex);
 				}
-				if(version != snapAddress.Page[snapAddress.Index].Version) {
-					throw new ArgumentOutOfRangeException(nameof(version));
-				}
+				ArgumentOutOfRangeException.ThrowIfNotEqual(version, snapAddress.Page[snapAddress.Index].Version);
 				this.newVersion = snapAddress.Page[snapAddress.Index];
 				snapAddress = this.table.snap.ItemAddress(pointIndex - 1);
 				this.oldVersion = snapAddress.Page[snapAddress.Index];

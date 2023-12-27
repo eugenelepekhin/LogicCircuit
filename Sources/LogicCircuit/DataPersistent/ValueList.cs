@@ -110,8 +110,8 @@ namespace LogicCircuit.DataPersistent {
 						p[j] = default;
 					}
 				}
-			} else if(oldSize < newSize) {
-				throw new ArgumentOutOfRangeException(nameof(newSize));
+			} else {
+				ArgumentOutOfRangeException.ThrowIfGreaterThan(newSize, oldSize);
 			}
 		}
 

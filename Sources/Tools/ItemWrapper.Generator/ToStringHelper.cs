@@ -24,9 +24,7 @@ namespace ItemWrapper.Generator {
 		/// <param name="objectToConvert"></param>
 		/// <returns></returns>
 		public string ToStringWithCulture(object objectToConvert) {
-			if(objectToConvert == null) {
-				throw new ArgumentNullException(nameof(objectToConvert));
-			}
+			ArgumentNullException.ThrowIfNull(objectToConvert);
 			Type type = objectToConvert.GetType();
 			MethodInfo method = type.GetMethod("ToString", new Type[] { typeof(IFormatProvider) });
 			if(method != null) {

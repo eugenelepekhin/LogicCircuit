@@ -458,12 +458,12 @@ namespace LogicCircuit {
 			}
 		}
 
-		private TreeViewItem? Container(TreeView treeView, CircuitMap map) {
+		private static TreeViewItem? Container(TreeView treeView, CircuitMap map) {
 			Tracer.Assert(map);
 			if(map.Parent == null) {
 				return (TreeViewItem)treeView.ItemContainerGenerator.ContainerFromItem(map);
 			} else {
-				TreeViewItem? parent = this.Container(treeView, map.Parent);
+				TreeViewItem? parent = Mainframe.Container(treeView, map.Parent);
 				if(parent != null) {
 					parent.IsExpanded = true;
 					return (TreeViewItem)parent.ItemContainerGenerator.ContainerFromItem(map);
@@ -479,7 +479,7 @@ namespace LogicCircuit {
 					if(sender is TreeView treeView && treeView.SelectedItem != null) {
 						if(treeView.SelectedItem is CircuitMap map) {
 							this.Editor.OpenLogicalCircuit(map);
-							TreeViewItem? item = this.Container(treeView, map);
+							TreeViewItem? item = Mainframe.Container(treeView, map);
 							if(item != null) {
 								item.IsExpanded = true;
 							}
@@ -497,7 +497,7 @@ namespace LogicCircuit {
 			try {
 				if(sender == e.OriginalSource && e.NewValue != null && !object.ReferenceEquals(e.OldValue, e.NewValue)) {
 					if(e.NewValue is CircuitMap map) {
-						TreeViewItem? item = this.Container((TreeView)sender, map);
+						TreeViewItem? item = Mainframe.Container((TreeView)sender, map);
 						if(item != null) {
 							item.IsExpanded = true;
 							item.BringIntoView();

@@ -27,6 +27,7 @@ namespace LogicCircuit {
 		[SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
 		public static CircuitProject Create(string? file) {
 			try {
+				#pragma warning disable CA1863 // Use 'CompositeFormat'
 				XmlReader xmlReader = XmlHelper.CreateReader((file != null ?
 					(TextReader)new StreamReader(file) :
 					(TextReader)new StringReader(
@@ -39,6 +40,7 @@ namespace LogicCircuit {
 						)
 					)
 				));
+				#pragma warning restore CA1863 // Use 'CompositeFormat'
 				return CircuitProject.CreateAndClose(xmlReader);
 			} catch(XmlException xmlException) {
 				throw new CircuitException(Cause.CorruptedFile, xmlException, Properties.Resources.ErrorFileCorrupted(file));
