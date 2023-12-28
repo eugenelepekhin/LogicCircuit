@@ -1447,4 +1447,7 @@ Takav sklop se ne može koristiti više od jednom na drugim sklopovima jer će s
 	<data name="SymbolShapeMux" xml:space="preserve">
     <value>Multiplekser</value>
   </data>
+	<data name="TitleIsDiagramBackgroundWhite" xml:space="preserve">
+		<value>Pozadina dijagrama je bijela</value>
+	</data>
 </root>

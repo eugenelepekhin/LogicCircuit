@@ -1517,4 +1517,7 @@ Você deseja carregar a configuração de salvamento automático para este arqui
 	<data name="SymbolShapeMux" xml:space="preserve">
 		<value>Multiplexador</value>
 	</data>
+	<data name="TitleIsDiagramBackgroundWhite" xml:space="preserve">
+		<value>O plano de fundo do diagrama é branco</value>
+	</data>
 </root>

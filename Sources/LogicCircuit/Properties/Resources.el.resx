@@ -1456,4 +1456,7 @@
 	<data name="SymbolShapeMux" xml:space="preserve">
 		<value>Πολυπλέκτης</value>
 	</data>
+	<data name="TitleIsDiagramBackgroundWhite" xml:space="preserve">
+		<value>Το φόντο του διαγράμματος είναι λευκό</value>
+	</data>
 </root>

@@ -1386,4 +1386,7 @@ LED, مصفوفة LED ,زر , أو اية عناصر اخرى</value>
 	<data name="TitleShortcut" xml:space="preserve">
 		<value>اختصار لوحة المفاتيح:</value>
 	</data>
+	<data name="TitleIsDiagramBackgroundWhite" xml:space="preserve">
+		<value>خلفية الرسم التخطيطي بيضاء</value>
+	</data>
 </root>

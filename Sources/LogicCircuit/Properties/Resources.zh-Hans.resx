@@ -1449,4 +1449,7 @@ Out</value>
 	<data name="SymbolShapeMux" xml:space="preserve">
     <value>复用器</value>
   </data>
+	<data name="TitleIsDiagramBackgroundWhite" xml:space="preserve">
+		<value>图表背景为白色(_D)</value>
+	</data>
 </root>

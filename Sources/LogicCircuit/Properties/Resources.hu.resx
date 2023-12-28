@@ -1397,4 +1397,7 @@ kapcsolás felfogható egyfajta multiplexerként is.</value>
 	<data name="TitleShortcut" xml:space="preserve">
 		<value>Billentyűparancs:</value>
 	</data>
+	<data name="TitleIsDiagramBackgroundWhite" xml:space="preserve">
+		<value>A diagram háttere fehér</value>
+	</data>
 </root>

@@ -70,6 +70,10 @@
 					Content="{x:Static properties:Resources.TitleShowGrid}"
 				/>
 
+				<CheckBox Grid.ColumnSpan="2" Name="isDiagramBackgroundWhite"
+					Content="{x:Static properties:Resources.TitleIsDiagramBackgroundWhite}"
+				/>
+
 				<Label Content="{x:Static properties:Resources.TitleGateShape}"/>
 				<ComboBox Name="gateShape" ItemsSource="{Binding Path=GateShapeList}"/>
 			</lc:AutoGrid>

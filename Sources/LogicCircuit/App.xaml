@@ -26,6 +26,8 @@
 				<GradientStop Color="{x:Static SystemColors.ControlColor}" Offset="1"/>
 			</LinearGradientBrush>
 
+			<SolidColorBrush x:Key="DiagramBackground" Color="#FFF7F7F7"/>
+
 			<SolidColorBrush x:Key="MarkerStroke" Color="#FFF505F5" PresentationOptions:Freeze="True"/>
 
 			<LinearGradientBrush x:Key="MarkerFill" StartPoint="0,0" EndPoint="1,1" PresentationOptions:Freeze="True">
@@ -237,7 +239,7 @@
 			</Style>
 
 			<Style x:Key="LogicCircuitBackground" TargetType="{x:Type Canvas}">
-				<Setter Property="Background" Value="White"/>
+				<Setter Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DiagramBackground}"/>
 				<Style.Triggers>
 					<DataTrigger Binding="{Binding Path=ShowGrid}" Value="True">
 						<Setter Property="Background">
@@ -245,7 +247,7 @@
 								<DrawingBrush Viewport="{x:Static lc:Symbol.LogicalCircuitBackgroundTile}" ViewportUnits="Absolute" TileMode="Tile">
 									<DrawingBrush.Drawing>
 										<DrawingGroup>
-											<GeometryDrawing Brush="White">
+											<GeometryDrawing Brush="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DiagramBackground}">
 												<GeometryDrawing.Geometry>
 													<RectangleGeometry Rect="0,0,102,102"/>
 												</GeometryDrawing.Geometry>

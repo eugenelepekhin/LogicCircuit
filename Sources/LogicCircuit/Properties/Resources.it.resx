@@ -1251,4 +1251,7 @@ tutti i simboli del display saranno visibili sul suo simbolo.</value>
 	<data name="TitleShortcut" xml:space="preserve">
 		<value>Scorciatoia da tastiera:</value>
 	</data>
+	<data name="TitleIsDiagramBackgroundWhite" xml:space="preserve">
+		<value>Lo sfondo del diagramma è bianco</value>
+	</data>
 </root>

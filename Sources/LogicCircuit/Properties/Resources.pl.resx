@@ -1440,4 +1440,7 @@ Czy chcesz wczytać automatycznie zapisaną kopię tego pliku?</value>
 	<data name="TitleShortcut" xml:space="preserve">
 		<value>Skrót klawiszowy:</value>
 	</data>
+	<data name="TitleIsDiagramBackgroundWhite" xml:space="preserve">
+		<value>Tło diagramu jest białe</value>
+	</data>
 </root>

@@ -3152,5 +3152,12 @@ namespace LogicCircuit.Properties {
  		public static string SymbolShapeMux {
 			get { return ResourceManager.GetString("SymbolShapeMux", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Diagram background is white.
+		/// </summary>
+ 		public static string TitleIsDiagramBackgroundWhite {
+			get { return ResourceManager.GetString("TitleIsDiagramBackgroundWhite", Culture); }
+		}
 	}
 }

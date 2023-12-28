@@ -1440,4 +1440,7 @@ temelde bir çoğullayıcıya eşdeğerdir.</value>
 	<data name="TitleShortcut" xml:space="preserve">
 		<value>_Klavye kısayolu:</value>
 	</data>
+	<data name="TitleIsDiagramBackgroundWhite" xml:space="preserve">
+		<value>Diyagram arka planı beyaz</value>
+	</data>
 </root>

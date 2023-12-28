@@ -37,6 +37,7 @@ namespace LogicCircuit {
 			this.loadLastFile.IsChecked = Settings.User.LoadLastFileOnStartup;
 			this.autoSave.IsChecked = this.mainframe.AutoSaveInterval != 0;
 			this.showGrid.IsChecked = this.mainframe.ShowGrid;
+			this.isDiagramBackgroundWhite.IsChecked = this.mainframe.IsDiagramBackgroundWhite;
 			this.gateShape.SelectedItem = this.GateShapeList.First(d => d.Value == Settings.User.GateShape);
 			this.maxRecentFiles.SelectedItem = Settings.User.MaxRecentFileCount;
 
@@ -47,6 +48,7 @@ namespace LogicCircuit {
 			Settings.User.MaxRecentFileCount = (int)this.maxRecentFiles.SelectedItem;
 			this.mainframe.AutoSaveInterval = (this.autoSave.IsChecked.HasValue && this.autoSave.IsChecked.Value) ? this.AutoSaveInterval * 60 : 0;
 			this.mainframe.ShowGrid = this.showGrid.IsChecked!.Value;
+			this.mainframe.IsDiagramBackgroundWhite = this.isDiagramBackgroundWhite.IsChecked!.Value;
 			Settings.User.GateShape = ((EnumDescriptor<GateShape>)this.gateShape.SelectedItem).Value;
 			App.CurrentCulture = this.CurrentCulture;
 			

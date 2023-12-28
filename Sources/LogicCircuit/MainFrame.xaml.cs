@@ -8,6 +8,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace LogicCircuit {
@@ -32,6 +33,13 @@ namespace LogicCircuit {
 				this.NotifyPropertyChanged(nameof(this.ShowGrid));
 			}
 		}
+
+		private readonly SettingsBoolCache isDiagramBackgroundWhite = new SettingsBoolCache(Settings.User, "Settings.IsDiagramBackgroundWhite", false);
+		public bool IsDiagramBackgroundWhite {
+			get => this.isDiagramBackgroundWhite.Value;
+			set => this.isDiagramBackgroundWhite.Value = value;
+		}
+		public Brush DiagramBackground => this.IsDiagramBackgroundWhite ? Brushes.White : (Brush)Application.Current.Resources["DiagramBackground"];
 
 		private Editor? editor;
 		public Editor? Editor {
@@ -130,6 +138,7 @@ namespace LogicCircuit {
 			bool? result = this.ShowDialog(new DialogOptions(this));
 			if(result.HasValue && result.Value) {
 				this.NotifyPropertyChanged(nameof(this.Editor));
+				this.NotifyPropertyChanged(nameof(this.DiagramBackground));
 				this.Editor!.FullRefresh();
 			}
 		}) {

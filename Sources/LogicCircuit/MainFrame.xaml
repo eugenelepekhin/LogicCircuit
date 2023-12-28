@@ -176,6 +176,7 @@
 							MouseDoubleClick="RunningMapDoubleClick"
 							SelectedItemChanged="RunningMapTreeViewSelectedItemChanged"
 							VirtualizingStackPanel.IsVirtualizing="True"
+							Background="{Binding Path=DiagramBackground}"
 						>
 							<TreeView.ItemContainerStyle>
 								<Style TargetType="TreeViewItem">
@@ -258,6 +259,7 @@
 				<GroupBox Grid.Row="1" Header="{x:Static properties:Resources.TitleProject}">
 					<ListView SelectionMode="Single" BorderThickness="0" HorizontalContentAlignment="Stretch"
 						ItemsSource="{Binding Source={StaticResource circuitDescriptorList}}"
+						Background="{Binding Path=DiagramBackground}"
 					>
 						<ListView.GroupStyle>
 							<GroupStyle ContainerStyle="{StaticResource CircuitDescriptorGroup}"/>

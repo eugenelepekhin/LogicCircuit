@@ -1489,4 +1489,7 @@
 	<data name="TitleShortcut" xml:space="preserve">
 		<value>קיצור מקלדת:</value>
 	</data>
+	<data name="TitleIsDiagramBackgroundWhite" xml:space="preserve">
+		<value>רקע הדיאגרמה לבן</value>
+	</data>
 </root>

@@ -1462,4 +1462,7 @@ Voulez-vous charger l'état sauvegardé automatiquement de ce fichier ?</value>
 	<data name="SymbolShapeMux" xml:space="preserve">
 		<value>Multiplexeur</value>
 	</data>
+	<data name="TitleIsDiagramBackgroundWhite" xml:space="preserve">
+		<value>L’arrière-plan du diagramme est blanc</value>
+	</data>
 </root>

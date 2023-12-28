@@ -1417,4 +1417,7 @@ Vill du ladda an automatiskt sparad fil istället?</value>
 	<data name="TitleShortcut" xml:space="preserve">
 		<value>_Tangentbordsgenväg:</value>
 	</data>
+	<data name="TitleIsDiagramBackgroundWhite" xml:space="preserve">
+		<value>Diagrammets bakgrund är vit</value>
+	</data>
 </root>
