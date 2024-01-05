@@ -156,8 +156,8 @@ foreach(HdlSymbol outPin in this.HdlExport.OutputPins) {
             
             #line default
             #line hidden
-            this.Write("); // I\'s impossible to connect directly input to the output, so use OR function " +
-                    "for this.\r\n");
+            this.Write("); // It\'s impossible to connect directly input to the output, so use OR function" +
+                    " for this.\r\n");
             
             #line 19 "C:\Projects\LogicCircuit\LogicCircuit\master.core.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
 	}

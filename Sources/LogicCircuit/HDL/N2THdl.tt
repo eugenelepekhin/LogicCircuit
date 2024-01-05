@@ -15,7 +15,7 @@ PARTS:
 <#}#>
 <#foreach(HdlSymbol outPin in this.HdlExport.OutputPins) {
 	foreach(HdlConnection connection in outPin.HdlConnections.Where(c => c.ConnectsInputWithOutput())) {#>
-	Or(a=<#=connection.InputName()#>, b=false, out=<#=connection.OutputName()#>); // I's impossible to connect directly input to the output, so use OR function for this.
+	Or(a=<#=connection.InputName()#>, b=false, out=<#=connection.OutputName()#>); // It's impossible to connect directly input to the output, so use OR function for this.
 <#	}
 }#>
 }

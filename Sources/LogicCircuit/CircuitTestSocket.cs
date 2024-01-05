@@ -14,12 +14,12 @@ namespace LogicCircuit {
 		public IEnumerable<InputPinSocket> Inputs { get { return this.chank.Inputs; } }
 		public IEnumerable<OutputPinSocket> Outputs { get { return this.chank.Outputs; } }
 
-		public CircuitTestSocket(LogicalCircuit circuit, bool multithreaded) {
+		public CircuitTestSocket(LogicalCircuit circuit, bool multiThreaded) {
 			Tracer.Assert(CircuitTestSocket.IsTestable(circuit));
 			TableChank.Validate(circuit);
 
 			this.chank = new TableChank(circuit);
-			if(multithreaded && 1 < Environment.ProcessorCount && 15 < this.chank.InputBitCount) {
+			if(multiThreaded && 1 < Environment.ProcessorCount && 15 < this.chank.InputBitCount) {
 				this.chankList = new TableChank[Environment.ProcessorCount];
 				BigInteger total = this.chank.Count;
 				BigInteger count = total / this.chankList.Length;

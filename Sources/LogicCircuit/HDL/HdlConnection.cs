@@ -23,7 +23,9 @@ namespace LogicCircuit {
 
 		public string JamName {
 			get {
-				if(this.HdlSymbol.HdlExport.HdlExportType == HdlExportType.N2T && this.HdlSymbol.CircuitSymbol.Circuit is Gate) {
+				HdlExportType type = this.HdlSymbol.HdlExport.HdlExportType;
+				bool isN2t = (type == HdlExportType.N2T) || (type == HdlExportType.N2TFull);
+				if(isN2t && this.HdlSymbol.CircuitSymbol.Circuit is Gate) {
 					switch(this.SymbolJam.Pin.Name) {
 					case "x": return "in";
 					case "x1" : return "a";

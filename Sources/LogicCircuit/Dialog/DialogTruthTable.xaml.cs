@@ -65,7 +65,7 @@ namespace LogicCircuit {
 		private readonly CircuitTestSocket testSocket;
 		private readonly TruthStateComparer sortComparer;
 
-		private const int MaxRows = 1 << 12;
+		public const int MaxRows = 1 << 12;
 		public BigInteger TotalRows { get; private set; }
 
 		private readonly LogicalCircuit logicalCircuit;
