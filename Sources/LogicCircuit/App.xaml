@@ -26,7 +26,7 @@
 				<GradientStop Color="{x:Static SystemColors.ControlColor}" Offset="1"/>
 			</LinearGradientBrush>
 
-			<SolidColorBrush x:Key="DiagramBackground" Color="#FFF7F7F7"/>
+			<SolidColorBrush x:Key="DiagramBackground" Color="#FFF0F0F0"/>
 
 			<SolidColorBrush x:Key="MarkerStroke" Color="#FFF505F5" PresentationOptions:Freeze="True"/>
 
