@@ -18,8 +18,8 @@
     <OutputName>LogicCircuitSetup_32</OutputName>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="WixToolset.UI.wixext" Version="4.0.3" />
-    <PackageReference Include="WixToolset.NetFx.wixext" Version="4.0.3" />
+    <PackageReference Include="WixToolset.UI.wixext" Version="4.0.4" />
+    <PackageReference Include="WixToolset.NetFx.wixext" Version="4.0.4" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Banner.bmp" />
