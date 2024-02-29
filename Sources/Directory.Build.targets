@@ -29,6 +29,40 @@
 		<Exec Command="$(ItemWrapperGeneratorCommand)"/>
 	</Target>
 
+	<Target Name="FindIronPythonStdLibFiles" AfterTargets="AfterBuild;Publish" Condition="'$(MSBuildProjectName)' == 'LogicCircuit'" Returns="@(IronPythonStdLibFiles)">
+		<PropertyGroup>
+			<IPyLibDir>$(OutDir)lib</IPyLibDir>
+			<IPyLibDir Condition="'$(PublishDir)' != '' and Exists('$(PublishDir)lib')">$(PublishDir)lib</IPyLibDir>
+		</PropertyGroup>
+
+		<CreateItem Include="$(IPyLibDir)\*.*">
+			<Output TaskParameter="Include" ItemName="IronPythonStdLibFiles"/>
+		</CreateItem>
+
+		<CreateProperty Value="$(IPyLibDir)">
+			<Output TaskParameter="Value" PropertyName="IronPythonStdLibDir"/>
+		</CreateProperty>
+
+		<!--<Message Importance="high" Text=">>> FindIronPythonStdLibFiles IronPythonStdLibDir: $(IronPythonStdLibDir)"/>-->
+	</Target>
+
+	<Target Name="ZipIronPythonStdLibFiles" AfterTargets="FindIronPythonStdLibFiles" Inputs="@(IronPythonStdLibFiles)" Outputs="$(IronPythonStdLibDir)\..\IPyLib.zip">
+		<PropertyGroup>
+			<ZipApp>$(ProgramW6432)\7-Zip\7z.exe</ZipApp>
+			<IronPythonStdLibZip>IPyLib.zip</IronPythonStdLibZip>
+			<IronPythonStdLibZipPath>$(IronPythonStdLibDir)\..\$(IronPythonStdLibZip)</IronPythonStdLibZipPath>
+
+			<ZipCommand>"$(ZipApp)" a ..\$(IronPythonStdLibZip) -mx9 -r *.*</ZipCommand>
+		</PropertyGroup>
+
+		<Error Condition="!Exists('$(ZipApp)')" Text="7-zip ('$(ZipApp)') not found on this machine. Please install it before creating zip file."/>
+
+		<!--<Message Importance="high" Text=">>> ZipIronPythonStdLibFiles: dir:$(IronPythonStdLibDir) command:$(ZipCommand)"/>-->
+
+		<Exec Condition="Exists('$(IronPythonStdLibZipPath)')" Command="del $(IronPythonStdLibZipPath)"/>
+		<Exec Command="$(ZipCommand)" WorkingDirectory="$(IronPythonStdLibDir)"/>
+	</Target>
+
 	<Target Name="ZipSetup">
 		<PropertyGroup>
 			<ZipApp>$(ProgramW6432)\7-Zip\7z.exe</ZipApp>

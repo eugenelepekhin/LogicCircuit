@@ -57,6 +57,7 @@
 					<File Id="PresentationNative_cor3_dll" Source="$(var.PublishFolder)\PresentationNative_cor3.dll"/>
 					<File Id="vcruntime140_cor3_dll" Source="$(var.PublishFolder)\vcruntime140_cor3.dll"/>
 					<File Id="wpfgfx_cor3_dll" Source="$(var.PublishFolder)\wpfgfx_cor3.dll"/>
+					<File Id="IPyLib_zip" Source="$(var.PublishFolder)\IPyLib.zip"/>
 
 					<ProgId Id="RegFileExtention" Icon="Application_exe" IconIndex="0" Description="LogicCircuit Project file">
 						<Extension Id="CircuitProject" ContentType="text/XML">

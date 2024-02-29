@@ -2,7 +2,6 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
@@ -62,10 +61,9 @@ namespace LogicCircuit {
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 
 		private readonly ScriptEngine scriptEngine;
-		private readonly MemoryStream stdout;
 		private readonly LogWriter writer;
-		private readonly MemoryStream stdin;
 		private readonly LogReader reader;
+		private readonly LogStream stream;
 		private readonly ScriptScope scope;
 		private readonly StringBuilder command = new StringBuilder();
 		private readonly TracebackDelegate traceback;
@@ -82,17 +80,30 @@ namespace LogicCircuit {
 
 			this.traceback = this.Trace;
 
-			this.scriptEngine = Python.CreateEngine();
-			this.stdout = new MemoryStream();
+			Encoding encoding = Encoding.Default;
+			ScriptRuntime runtime = Python.CreateRuntime();
 			this.writer = new LogWriter(this.console);
-			this.stdin = new MemoryStream();
 			this.reader = new LogReader(this.console);
+			this.stream = new LogStream(this.writer, this.reader, encoding);
+
+			runtime.IO.SetOutput(this.stream, encoding);
+			runtime.IO.SetInput(this.stream, encoding);
+			runtime.IO.SetErrorOutput(this.stream, encoding);
+
+			this.scriptEngine = Python.GetEngine(runtime);
+
+			//ICollection<string> paths = scriptEngine.GetSearchPaths();
+			//paths.Add(Path.Combine(AppContext.BaseDirectory, "IPyLib.zip"));
+			//scriptEngine.SetSearchPaths(paths);
+			scriptEngine.SetSearchPaths(new List<string>() {
+				".",
+				Path.Combine(AppContext.BaseDirectory, "IPyLib.zip")
+			});
+
 			this.console.CommandEnter = this.Execute;
 			this.console.CommandBreak = this.Abort;
 			this.console.CommandSuggestion = this.Suggest;
 
-			this.scriptEngine.Runtime.IO.SetOutput(this.stdout, this.writer);
-			this.scriptEngine.Runtime.IO.SetInput(this.stdin, this.reader, Encoding.UTF8);
 			this.scope = this.scriptEngine.CreateScope();
 
 			this.scope.ImportModule("clr");
@@ -117,9 +128,8 @@ namespace LogicCircuit {
 		protected override void OnClosed(EventArgs e) {
 			base.OnClosed(e);
 			IronPythonConsole.currentConsole = null;
-			this.stdout.Close();
+			this.stream.Close();
 			this.writer.Close();
-			this.stdin.Close();
 			this.reader.Close();
 		}
 
@@ -158,8 +168,10 @@ namespace LogicCircuit {
 						this.writer.WriteLine(result.ToString());
 					}
 				} catch(AbortException) {
+					this.writer.WriteLine();
 					this.writer.WriteLine("Script terminated by user");
 				} catch(Exception exception) {
+					this.writer.WriteLine();
 					this.writer.WriteLine("{0}: {1}", exception.GetType().Name, exception.Message);
 				} finally {
 					//stopwatch.Stop();
@@ -336,6 +348,54 @@ namespace LogicCircuit {
 					this.stringReader = null;
 				}
 				return i;
+			}
+		}
+
+		private class LogStream : Stream {
+			private readonly LogWriter writer;
+			private readonly LogReader reader;
+			private readonly Encoding encoding;
+
+			public override bool CanRead => true;
+
+			public override bool CanSeek => false;
+
+			public override bool CanWrite => true;
+
+			public override long Length => 0;
+
+			public override long Position {
+				get => 0;
+				set => throw new InvalidOperationException();
+			}
+
+			public LogStream(LogWriter writer, LogReader reader, Encoding encoding) {
+				this.writer = writer;
+				this.reader = reader;
+				this.encoding = encoding;
+			}
+
+			public override void Flush() {
+				this.writer.Flush();
+			}
+
+			public override int Read(byte[] buffer, int offset, int count) {
+				char[] chars = new char[this.encoding.GetMaxCharCount(count)];
+				int actual = this.reader.Read(chars, 0, chars.Length);
+				return this.encoding.GetBytes(chars, 0, actual, buffer, offset);
+			}
+
+			public override long Seek(long offset, SeekOrigin origin) {
+				throw new InvalidOperationException();
+			}
+
+			public override void SetLength(long value) {
+				throw new InvalidOperationException();
+			}
+
+			public override void Write(byte[] buffer, int offset, int count) {
+				string text = this.encoding.GetString(buffer, offset, count);
+				this.writer.Write(text);
 			}
 		}
 	}
