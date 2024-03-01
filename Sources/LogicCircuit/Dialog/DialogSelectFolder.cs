@@ -263,9 +263,7 @@ namespace LogicCircuit {
 		public string? FileName { get; set; }
 
 		public bool ShowDialog(Window window) {
-			if(window == null) {
-				throw new ArgumentNullException(nameof(window));
-			}
+			ArgumentNullException.ThrowIfNull(window);
 			return this.ShowDialog(new WindowInteropHelper(window).Handle);
 		}
 
