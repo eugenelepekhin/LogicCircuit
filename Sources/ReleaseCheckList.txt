@@ -1,4 +1,4 @@
-0. Update year in License.txt and template.html in web site project.
+0. Update year in License.txt.
 1. Set version in LogicCircuitVersion property in Directory.Build.props
 2. Set Version in Setup project. Create two new GUIDs for two ProductCode for 32 and 64 bits.
 3. Build Setup by running BuildSetup.cmd from "Developer Command Prompt"
