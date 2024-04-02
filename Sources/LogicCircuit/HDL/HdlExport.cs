@@ -2,13 +2,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
-using System.Windows.Controls;
 
 namespace LogicCircuit {
 	public enum HdlExportType {
@@ -27,7 +26,7 @@ namespace LogicCircuit {
 		public IEnumerable<HdlSymbol> HdlSymbols => this.list;
 		public IEnumerable<HdlSymbol> InputPins => this.list.Where(symbol => symbol.CircuitSymbol.Circuit is Pin pin && pin.PinType == PinType.Input).OrderBy(s => (Pin)s.CircuitSymbol.Circuit, PinComparer.Comparer);
 		public IEnumerable<HdlSymbol> OutputPins => this.list.Where(symbol => symbol.CircuitSymbol.Circuit is Pin pin && pin.PinType == PinType.Output).OrderBy(s => (Pin)s.CircuitSymbol.Circuit, PinComparer.Comparer);
-		public IEnumerable<HdlSymbol> Parts => this.list.Where(symbol => !(symbol.CircuitSymbol.Circuit is Pin));
+		public IEnumerable<HdlSymbol> Parts => this.list.Where(symbol => symbol.CircuitSymbol.Circuit is not Pin);
 
 		public HdlExportType HdlExportType { get; }
 
@@ -48,7 +47,6 @@ namespace LogicCircuit {
 		public bool ExportCircuit(LogicalCircuit circuit, string folder, bool onlyOne) {
 			CircuitMap map = new CircuitMap(circuit);
 			ConnectionSet connectionSet = map.ConnectionSet();
-			Dictionary<string, HdlSymbol> splitters = new Dictionary<string, HdlSymbol>();
 
 			bool export(LogicalCircuit logicalCircuit) {
 				string file = logicalCircuit.Name;
@@ -59,7 +57,7 @@ namespace LogicCircuit {
 					break;
 				}
 				this.Message(Properties.Resources.MessageExportingHdl(logicalCircuit.Name, file));
-				string hdl = this.ExportCircuit(logicalCircuit, connectionSet, splitters);
+				string? hdl = this.ExportCircuit(logicalCircuit, connectionSet);
 				if(!string.IsNullOrEmpty(hdl)) {
 					file = Path.Combine(folder, file);
 					File.WriteAllText(file, hdl);
@@ -92,10 +90,10 @@ namespace LogicCircuit {
 			}
 		}
 
-		private string ExportCircuit(LogicalCircuit circuit, ConnectionSet connectionSet, Dictionary<string, HdlSymbol> splitters) {
+		private string? ExportCircuit(LogicalCircuit circuit, ConnectionSet connectionSet) {
 			this.map.Clear();
 			this.list.Clear();
-			foreach(CircuitSymbol symbol in circuit.CircuitSymbols()) {
+			foreach(CircuitSymbol symbol in circuit.CircuitSymbols().Where(s => (s.Circuit is not Splitter) && (s.Circuit is not CircuitProbe))) {
 				HdlSymbol hdlSymbol = new HdlSymbol(this, symbol);
 				this.map.Add(symbol, hdlSymbol);
 				this.list.Add(hdlSymbol);
@@ -103,19 +101,36 @@ namespace LogicCircuit {
 			foreach(HdlSymbol symbol in this.list) {
 				foreach(Jam output in symbol.CircuitSymbol.Jams().Where(j => j.Pin.PinType == PinType.Output || (j.CircuitSymbol.Circuit is Pin pin && pin.PinType == PinType.Input))) {
 					foreach(Connection connection in connectionSet.SelectByOutput(output)) {
-						symbol.Add(connection);
-						HdlSymbol other = this.map[(CircuitSymbol)connection.InJam.CircuitSymbol];
-						other.Add(connection);
+						Debug.Assert(connection.OutJam == output);
+						if(connection.InJam.CircuitSymbol.Circuit is Splitter) {
+							int width = output.Pin.BitWidth;
+							for(int i = 0; i < width; i++) {
+								void Propagate(Jam enterJam, int enterBit) {
+									Splitter.Pass(enterJam, enterBit, out Jam exitJam, out int exitBit);
+									foreach(Connection splitted in connectionSet.SelectByOutput(exitJam)) {
+										Debug.Assert(splitted.OutJam == exitJam);
+										if(splitted.InJam.CircuitSymbol.Circuit is Splitter) {
+											Propagate(splitted.InJam, exitBit);
+										} else if(splitted.InJam.CircuitSymbol.Circuit is not CircuitProbe) {
+											HdlSymbol other = this.map[(CircuitSymbol)splitted.InJam.CircuitSymbol];
+											HdlConnection.Create(symbol, connection.OutJam, i, other, splitted.InJam, exitBit);
+										}
+									}
+								}
+								Propagate(connection.InJam, i);
+							}
+						} else if(connection.InJam.CircuitSymbol.Circuit is not CircuitProbe) {
+							HdlSymbol other = this.map[(CircuitSymbol)connection.InJam.CircuitSymbol];
+							HdlConnection.Create(symbol, other, connection);
+						}
 					}
 				}
 			}
-			foreach(HdlSymbol symbol in this.list) {
-				symbol.SortConnections();
-				if(symbol.CircuitSymbol.Circuit is Splitter splitter) {
-					splitters.Add(symbol.Name, symbol);
-				}
-			}
+
 			this.SortSymbols();
+			foreach(HdlSymbol symbol in this.list.Where(s => s.CircuitSymbol.Circuit is not Pin)) {
+				symbol.SortConnections();
+			}
 
 			T4Transformation? transformation = null;
 			switch(this.HdlExportType) {
@@ -139,7 +154,7 @@ namespace LogicCircuit {
 
 		private void Sort(HashSet<HdlSymbol> ignore, HdlSymbol symbol, int order) {
 			symbol.Order = Math.Max(symbol.Order, order);
-			foreach(Connection connection in symbol.Connections.Where(con => con.OutJam.CircuitSymbol == symbol.CircuitSymbol)) {
+			foreach(HdlConnection connection in symbol.HdlConnections().Where(con => con.OutJam.CircuitSymbol == symbol.CircuitSymbol)) {
 				HdlSymbol other = this.map[(CircuitSymbol)connection.InJam.CircuitSymbol];
 				if(ignore.Add(other)) {
 					this.Sort(ignore, other, symbol.Order + 1);
@@ -206,7 +221,7 @@ namespace LogicCircuit {
 			script.Append("output-list");
 
 			foreach(string field in inputs.Concat(outputs)) {
-				script.Append(CultureInfo.InvariantCulture, $" {field}");
+				script.Append(CultureInfo.InvariantCulture, $" {field}%X1.1.1");
 				expect.Append(CultureInfo.InvariantCulture, $"|{formatExpect(field)}");
 			}
 			script.AppendLine(";");

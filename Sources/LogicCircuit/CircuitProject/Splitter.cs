@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Windows;
@@ -7,6 +8,36 @@ using LogicCircuit.DataPersistent;
 
 namespace LogicCircuit {
 	public partial class Splitter {
+		public static void Pass(Jam enterJam, int enterBit, out Jam exitJam, out int exitBit) {
+			Tracer.Assert(enterJam.CircuitSymbol.Circuit is Splitter splitter && 0 <= enterBit && enterBit < splitter.BitWidth);
+			List<Jam> list = enterJam.CircuitSymbol.Jams().ToList();
+			// Sort jams in order of their device pins. Assuming first one will be the wide pin and the rest are thin ones,
+			// starting from lower bits to higher. This implies that creating of the pins should happened in that order.
+			list.Sort(JamComparer.Comparer);
+			if(enterJam == list[0]) { //wide jam. so find thin one, this bit will be redirected to
+				int width = 0;
+				for(int i = 1; i < list.Count; i++) {
+					if(enterBit < width + list[i].Pin.BitWidth) {
+						exitJam = list[i];
+						exitBit = enterBit - width;
+						return;
+					}
+					width += list[i].Pin.BitWidth;
+				}
+			} else { // thin jam. find position of this bit in wide pin
+				int width = 0;
+				for(int i = 1; i < list.Count; i++) {
+					if(enterJam == list[i]) {
+						exitJam = list[0];
+						exitBit = enterBit + width;
+						return;
+					}
+					width += list[i].Pin.BitWidth;
+				}
+			}
+			throw new InvalidOperationException();
+		}
+
 		public override void Delete() {
 			this.CircuitProject.DevicePinSet.DeleteAllPins(this);
 			base.Delete();

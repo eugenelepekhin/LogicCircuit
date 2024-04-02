@@ -16,7 +16,7 @@ namespace LogicCircuit
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Projects\LogicCircuit\LogicCircuit\master.core.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
+    #line 1 "C:\Projects\LogicCircuit\LogicCircuit\master.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
     public partial class N2THdl : T4Transformation
     {
@@ -28,55 +28,55 @@ namespace LogicCircuit
         {
             this.Write("CHIP ");
             
-            #line 3 "C:\Projects\LogicCircuit\LogicCircuit\master.core.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
+            #line 3 "C:\Projects\LogicCircuit\LogicCircuit\master.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Name));
             
             #line default
             #line hidden
             this.Write(" {\r\n");
             
-            #line 4 "C:\Projects\LogicCircuit\LogicCircuit\master.core.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
+            #line 4 "C:\Projects\LogicCircuit\LogicCircuit\master.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
 if(this.HasInputPins) {
             
             #line default
             #line hidden
             this.Write("\tIN ");
             
-            #line 5 "C:\Projects\LogicCircuit\LogicCircuit\master.core.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
+            #line 5 "C:\Projects\LogicCircuit\LogicCircuit\master.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(PinsText(this.HdlExport.InputPins)));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 6 "C:\Projects\LogicCircuit\LogicCircuit\master.core.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
+            #line 6 "C:\Projects\LogicCircuit\LogicCircuit\master.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
 }
             
             #line default
             #line hidden
             
-            #line 7 "C:\Projects\LogicCircuit\LogicCircuit\master.core.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
+            #line 7 "C:\Projects\LogicCircuit\LogicCircuit\master.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
 if(this.HasOutputPins) {
             
             #line default
             #line hidden
             this.Write("\tOUT ");
             
-            #line 8 "C:\Projects\LogicCircuit\LogicCircuit\master.core.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
+            #line 8 "C:\Projects\LogicCircuit\LogicCircuit\master.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(PinsText(this.HdlExport.OutputPins)));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 9 "C:\Projects\LogicCircuit\LogicCircuit\master.core.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
+            #line 9 "C:\Projects\LogicCircuit\LogicCircuit\master.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
 }
             
             #line default
             #line hidden
             this.Write("PARTS:\r\n");
             
-            #line 11 "C:\Projects\LogicCircuit\LogicCircuit\master.core.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
+            #line 11 "C:\Projects\LogicCircuit\LogicCircuit\master.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
 foreach(HdlSymbol symbol in this.HdlExport.Parts) {
 	bool comma = false;
 
@@ -85,73 +85,73 @@ foreach(HdlSymbol symbol in this.HdlExport.Parts) {
             #line hidden
             this.Write("\t");
             
-            #line 14 "C:\Projects\LogicCircuit\LogicCircuit\master.core.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
+            #line 14 "C:\Projects\LogicCircuit\LogicCircuit\master.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(symbol.Name));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 14 "C:\Projects\LogicCircuit\LogicCircuit\master.core.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
-foreach(HdlConnection connection in symbol.HdlConnections) {
+            #line 14 "C:\Projects\LogicCircuit\LogicCircuit\master.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
+foreach(HdlConnection connection in symbol.HdlConnections().Where(c => c.GenerateOutput(symbol))) {
             
             #line default
             #line hidden
             
-            #line 14 "C:\Projects\LogicCircuit\LogicCircuit\master.core.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
+            #line 14 "C:\Projects\LogicCircuit\LogicCircuit\master.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(comma ? ", " : ""));
             
             #line default
             #line hidden
             
-            #line 14 "C:\Projects\LogicCircuit\LogicCircuit\master.core.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(connection.JamName));
+            #line 14 "C:\Projects\LogicCircuit\LogicCircuit\master.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(connection.SymbolJamName(symbol)));
             
             #line default
             #line hidden
             this.Write("=");
             
-            #line 14 "C:\Projects\LogicCircuit\LogicCircuit\master.core.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(connection.PinName));
+            #line 14 "C:\Projects\LogicCircuit\LogicCircuit\master.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(connection.PinName(symbol)));
             
             #line default
             #line hidden
             
-            #line 14 "C:\Projects\LogicCircuit\LogicCircuit\master.core.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
+            #line 14 "C:\Projects\LogicCircuit\LogicCircuit\master.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
 comma = true;
             
             #line default
             #line hidden
             
-            #line 14 "C:\Projects\LogicCircuit\LogicCircuit\master.core.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
+            #line 14 "C:\Projects\LogicCircuit\LogicCircuit\master.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
 }
             
             #line default
             #line hidden
             this.Write(");\r\n");
             
-            #line 15 "C:\Projects\LogicCircuit\LogicCircuit\master.core.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
+            #line 15 "C:\Projects\LogicCircuit\LogicCircuit\master.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
 }
             
             #line default
             #line hidden
             
-            #line 16 "C:\Projects\LogicCircuit\LogicCircuit\master.core.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
+            #line 16 "C:\Projects\LogicCircuit\LogicCircuit\master.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
 foreach(HdlSymbol outPin in this.HdlExport.OutputPins) {
-	foreach(HdlConnection connection in outPin.HdlConnections.Where(c => c.ConnectsInputWithOutput())) {
+	foreach(HdlConnection connection in outPin.HdlConnections().Where(c => c.ConnectsInputWithOutput())) {
             
             #line default
             #line hidden
             this.Write("\tOr(a=");
             
-            #line 18 "C:\Projects\LogicCircuit\LogicCircuit\master.core.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
+            #line 18 "C:\Projects\LogicCircuit\LogicCircuit\master.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(connection.InputName()));
             
             #line default
             #line hidden
             this.Write(", b=false, out=");
             
-            #line 18 "C:\Projects\LogicCircuit\LogicCircuit\master.core.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
+            #line 18 "C:\Projects\LogicCircuit\LogicCircuit\master.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(connection.OutputName()));
             
             #line default
@@ -159,7 +159,7 @@ foreach(HdlSymbol outPin in this.HdlExport.OutputPins) {
             this.Write("); // It\'s impossible to connect directly input to the output, so use OR function" +
                     " for this.\r\n");
             
-            #line 19 "C:\Projects\LogicCircuit\LogicCircuit\master.core.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
+            #line 19 "C:\Projects\LogicCircuit\LogicCircuit\master.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
 	}
 }
             

@@ -29,7 +29,7 @@ namespace LogicCircuit {
 					Pin pin = (Pin)symbol.CircuitSymbol.Circuit;
 					text.Append(pin.Name);
 					if(1 < pin.BitWidth) {
-						text.AppendFormat(CultureInfo.InvariantCulture, "[0..{0}]", pin.BitWidth);
+						text.AppendFormat(CultureInfo.InvariantCulture, "[{0}]", pin.BitWidth);
 					}
 				}
 			}

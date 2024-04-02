@@ -2,21 +2,50 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 
 namespace LogicCircuit {
 	public class HdlSymbol {
 		private class ConnectionComparer : IEqualityComparer<Connection> {
 			public bool Equals(Connection? x, Connection? y)  => x!.OutJam == y!.OutJam && x.InJam == y.InJam;
-			public int GetHashCode(Connection obj) => obj.OutJam.GetHashCode() ^ obj.InJam.GetHashCode();
+			public int GetHashCode(Connection obj) =>  HashCode.Combine(obj.OutJam, obj.InJam);
+		}
+
+		private readonly struct JamKey : IEquatable<JamKey> {
+			public readonly Jam OutJam;
+			public readonly Jam InJam;
+
+			public JamKey(Jam outJam, Jam inJam) {
+				this.OutJam = outJam;
+				this.InJam = inJam;
+			}
+
+			public bool Equals(JamKey other) => this.OutJam == other.OutJam && this.InJam != other.InJam;
+			public override bool Equals(object? obj) => obj is JamKey && this.Equals((JamKey)obj);
+			public override int GetHashCode() => HashCode.Combine(this.OutJam, this.InJam);
+		}
+
+		private readonly struct JamRange : IEquatable<JamRange> {
+			public readonly Jam Jam;
+			public readonly HdlConnection.BitRange Range;
+
+			public JamRange(Jam jam, HdlConnection.BitRange range) {
+				this.Jam = jam;
+				this.Range = range;
+			}
+
+			public bool Equals(JamRange other) => this.Jam == other.Jam && this.Range == other.Range;
+			public override bool Equals(object? obj) => obj is JamRange other && this.Equals(other);
+			public override int GetHashCode() => HashCode.Combine(this.Jam, this.Range);
 		}
 
 		public HdlExport HdlExport { get; }
 		public CircuitSymbol CircuitSymbol { get; }
-		public IList<Connection> Connections { get; }
-		private readonly HashSet<Connection> connectionSet = new HashSet<Connection>(new ConnectionComparer());
-		private readonly List<HdlConnection> hdlConnections;
-		public IList<HdlConnection> HdlConnections => this.hdlConnections;
+		
+		private readonly Dictionary<JamKey, List<HdlConnection>> connections = new Dictionary<JamKey, List<HdlConnection>>();
+		private List<HdlConnection>? connectionList;
 
 		public int Order { get; set; }
 
@@ -26,6 +55,9 @@ namespace LogicCircuit {
 				if(circuit is Splitter splitter) {
 					return string.Format(CultureInfo.InvariantCulture, "Splitter{0}x{1}{2}", splitter.BitWidth, splitter.PinCount, splitter.Clockwise);
 				}
+				if(circuit is Gate gate && gate.GateType == GateType.And && gate.InvertedOutput) {
+					return "Nand";
+				}
 				return circuit.Name;
 			}
 		}
@@ -33,31 +65,70 @@ namespace LogicCircuit {
 		public HdlSymbol(HdlExport export, CircuitSymbol symbol) {
 			this.HdlExport = export;
 			this.CircuitSymbol = symbol;
-			this.Connections = new List<Connection>();
-			this.hdlConnections = new List<HdlConnection>();
 		}
 
-		public bool Add(Connection connection) {
-			if(this.connectionSet.Add(connection)) {
-				this.Connections.Add(connection);
-				this.HdlConnections.Add(new HdlConnection(this, connection));
-				return true;
+		public void Add(HdlConnection connection) {
+			Debug.Assert(this.connectionList == null);
+			List<HdlConnection>? list;
+			JamKey jamKey = new JamKey(connection.OutJam, connection.InJam);
+			if(!this.connections.TryGetValue(jamKey, out list)) {
+				list = new List<HdlConnection>();
+				this.connections.Add(jamKey, list);
 			}
-			return false;
+			list.Add(connection);
+		}
+
+		public IEnumerable<HdlConnection> Find(Jam outJam, Jam inJam) {
+			if(this.connections.TryGetValue(new JamKey(outJam, inJam), out List<HdlConnection>? list)) {
+				return list;
+			}
+			return Enumerable.Empty<HdlConnection>();
+		}
+
+		public IEnumerable<HdlConnection> HdlConnections() {
+			if(this.connectionList == null) {
+				return this.connections.Values.SelectMany(connections => connections);
+			}
+			return this.connectionList;
 		}
 
 		public void SortConnections() {
 			int compare(HdlConnection x, HdlConnection y) {
-				if(x.SymbolJam.Pin.PinType == PinType.Input && y.SymbolJam.Pin.PinType != PinType.Input) {
+				
+				if(x.SymbolJam(this).Pin.PinType == PinType.Input && y.SymbolJam(this).Pin.PinType != PinType.Input) {
 					return -1;
 				}
-				if(x.SymbolJam.Pin.PinType != PinType.Input && y.SymbolJam.Pin.PinType == PinType.Input) {
+				if(x.SymbolJam(this).Pin.PinType != PinType.Input && y.SymbolJam(this).Pin.PinType == PinType.Input) {
 					return 1;
 				}
-				return StringComparer.Ordinal.Compare(x.SymbolJam.Pin.Name, y.SymbolJam.Pin.Name);
+				return StringComparer.Ordinal.Compare(x.SymbolJam(this).Pin.Name, y.SymbolJam(this).Pin.Name);
 			}
 
-			this.hdlConnections.Sort(compare);
+			Debug.Assert(this.connectionList == null);
+			this.connectionList = this.HdlConnections().ToList();
+			this.connectionList.Sort(compare);
+
+			Dictionary<JamRange, List<HdlConnection>> byRange = new Dictionary<JamRange, List<HdlConnection>>();
+			foreach(HdlConnection connection in this.connectionList.Where(c => this == c.OutHdlSymbol)) {
+				JamRange range = new JamRange(connection.OutJam, connection.OutBits);
+				List<HdlConnection>? list;
+				if(!byRange.TryGetValue(range, out list)) {
+					list = new List<HdlConnection>();
+					byRange.Add(range, list);
+				}
+				list.Add(connection);
+			}
+			foreach(List<HdlConnection> list in byRange.Values) {
+				if(1 < list.Count) {
+					for(int i = 1; i < list.Count; i++) {
+						list[i].SkipOutput = true;
+					}
+				}
+			}
 		}
+
+		#if DEBUG
+			public override string ToString() => $"HdlSymbol of {this.CircuitSymbol.ToString()}";
+		#endif
 	}
 }
