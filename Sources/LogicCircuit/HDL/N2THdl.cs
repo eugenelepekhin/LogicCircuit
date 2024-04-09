@@ -135,36 +135,6 @@ comma = true;
             
             #line default
             #line hidden
-            
-            #line 16 "C:\Projects\LogicCircuit\LogicCircuit\master.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
-foreach(HdlSymbol outPin in this.HdlExport.OutputPins) {
-	foreach(HdlConnection connection in outPin.HdlConnections().Where(c => c.ConnectsInputWithOutput())) {
-            
-            #line default
-            #line hidden
-            this.Write("\tOr(a=");
-            
-            #line 18 "C:\Projects\LogicCircuit\LogicCircuit\master.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(connection.InputName()));
-            
-            #line default
-            #line hidden
-            this.Write(", b=false, out=");
-            
-            #line 18 "C:\Projects\LogicCircuit\LogicCircuit\master.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(connection.OutputName()));
-            
-            #line default
-            #line hidden
-            this.Write("); // It\'s impossible to connect directly input to the output, so use OR function" +
-                    " for this.\r\n");
-            
-            #line 19 "C:\Projects\LogicCircuit\LogicCircuit\master.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
-	}
-}
-            
-            #line default
-            #line hidden
             this.Write("}\r\n");
             return this.GenerationEnvironment.ToString();
         }
