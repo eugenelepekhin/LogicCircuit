@@ -50,7 +50,7 @@ namespace LogicCircuit {
 				if(this.HdlExport.IsNand2Tetris && circuit is Gate gate && gate.GateType == GateType.And && gate.InvertedOutput) {
 					return "Nand";
 				}
-				return circuit.Name;
+				return circuit.Name.Trim();
 			}
 		}
 

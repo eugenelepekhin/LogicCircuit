@@ -7,6 +7,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace LogicCircuit {
@@ -138,7 +139,7 @@ namespace LogicCircuit {
 
 			parts.ForEach(symbol => symbol.SortConnections());
 
-			T4Transformation? transformation = null;
+			HdlTransformation? transformation = null;
 			switch(this.HdlExportType) {
 			case HdlExportType.N2T:
 			case HdlExportType.N2TFull:
@@ -146,6 +147,9 @@ namespace LogicCircuit {
 				break;
 			default:
 				throw new InvalidOperationException();
+			}
+			if(!this.Validate(transformation) || !transformation.Validate(this)) {
+				return null;
 			}
 			return transformation.TransformText();
 		}
@@ -164,6 +168,39 @@ namespace LogicCircuit {
 			foreach(HdlSymbol symbol in symbolMap.Values.Where(s => s.CircuitSymbol.Circuit is Pin pin && pin.PinType == PinType.Input)) {
 				Order(new HashSet<HdlSymbol>(), symbol, 1);
 			}
+		}
+
+		private bool Validate(HdlTransformation transformation) {
+			bool valid = true;
+			Regex identifier = new Regex(@"^[a-zA-Z_][a-zA-Z_0-9]*$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
+			foreach(HdlSymbol inputPin in transformation.InputPins) {
+				string name = inputPin.Name;
+				if(!identifier.IsMatch(name)) {
+					this.Error($"Invalid name of input pin: {name}");
+					valid = false;
+				}
+				foreach(HdlConnection connection in inputPin.HdlConnections()) {
+					if(connection.ConnectsInputWithOutput()) {
+						this.Error($"Pin {connection.InHdlSymbol.Name} connected directly to pin {connection.OutHdlSymbol.Name}");
+						valid = false;
+					}
+				}
+			}
+			foreach(HdlSymbol outputPin in transformation.OutputPins) {
+				string name = outputPin.Name;
+				if(!identifier.IsMatch(name)) {
+					this.Error($"Invalid name of output pin: {name}");
+					valid = false;
+				}
+			}
+			foreach(HdlSymbol symbol in transformation.Parts) {
+				string name = symbol.Name;
+				if(!identifier.IsMatch(name)) {
+					this.Error($"Invalid name of part: {name}");
+					valid = false;
+				}
+			}
+			return valid;
 		}
 
 		private void ExportN2TTest(LogicalCircuit circuit, string folder) {

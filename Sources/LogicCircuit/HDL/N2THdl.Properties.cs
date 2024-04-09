@@ -6,6 +6,9 @@ using System.Text;
 
 namespace LogicCircuit {
 	partial class N2THdl {
+		public N2THdl(string name, IEnumerable<HdlSymbol> inputPins, IEnumerable<HdlSymbol> outputPins, IEnumerable<HdlSymbol> parts) : base(name, inputPins, outputPins, parts) {
+		}
+
 		private static string PinsText(IEnumerable<HdlSymbol> pins) {
 			StringBuilder text = new StringBuilder();
 			bool comma = false;
@@ -22,9 +25,6 @@ namespace LogicCircuit {
 				}
 			}
 			return text.ToString();
-		}
-
-		public N2THdl(string name, IEnumerable<HdlSymbol> inputPins, IEnumerable<HdlSymbol> outputPins, IEnumerable<HdlSymbol> parts) : base(name, inputPins, outputPins, parts) {
 		}
 	}
 }
