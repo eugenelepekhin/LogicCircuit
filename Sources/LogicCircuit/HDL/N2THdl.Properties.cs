@@ -8,12 +8,7 @@ using System.Text;
 
 namespace LogicCircuit {
 	partial class N2THdl {
-		public HdlExport HdlExport { get; }
-		public Circuit Circuit { get; }
 		public string Name { get; }
-
-		public bool HasInputPins => this.HdlExport.InputPins.Any();
-		public bool HasOutputPins => this.HdlExport.OutputPins.Any();
 
 		[SuppressMessage("Performance", "CA1851:Possible multiple enumerations of 'IEnumerable' collection")]
 		private static string PinsText(IEnumerable<HdlSymbol> pins) {
@@ -36,9 +31,7 @@ namespace LogicCircuit {
 			return text.ToString();
 		}
 
-		public N2THdl(HdlExport export, Circuit circuit, string name) {
-			this.HdlExport = export;
-			this.Circuit = circuit;
+		public N2THdl(string name, IEnumerable<HdlSymbol> inputPins, IEnumerable<HdlSymbol> outputPins, IEnumerable<HdlSymbol> parts) : base(inputPins, outputPins, parts) {
 			this.Name = name;
 		}
 	}

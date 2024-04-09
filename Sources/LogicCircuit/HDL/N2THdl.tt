@@ -1,14 +1,14 @@
-﻿<#@ template language="C#" debug="True" inherits="T4Transformation" #>
+﻿<#@ template language="C#" debug="True" inherits="HdlTransformation" #>
 <#@ import namespace="System.Linq" #>
 CHIP <#=this.Name#> {
 <#if(this.HasInputPins) {#>
-	IN <#=PinsText(this.HdlExport.InputPins)#>;
+	IN <#=PinsText(this.InputPins)#>;
 <#}#>
 <#if(this.HasOutputPins) {#>
-	OUT <#=PinsText(this.HdlExport.OutputPins)#>;
+	OUT <#=PinsText(this.OutputPins)#>;
 <#}#>
 PARTS:
-<#foreach(HdlSymbol symbol in this.HdlExport.Parts) {
+<#foreach(HdlSymbol symbol in this.Parts) {
 	bool comma = false;
 #>
 	<#=symbol.Name#>(<#foreach(HdlConnection connection in symbol.HdlConnections().Where(c => c.GenerateOutput(symbol))) {#><#=comma ? ", " : ""#><#=connection.SymbolJamName(symbol)#>=<#=connection.PinName(symbol)#><#comma = true;#><#}#>);

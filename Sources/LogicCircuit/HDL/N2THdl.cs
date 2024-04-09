@@ -18,7 +18,7 @@ namespace LogicCircuit
     
     #line 1 "C:\Projects\LogicCircuit\LogicCircuit\master.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
-    public partial class N2THdl : T4Transformation
+    public partial class N2THdl : HdlTransformation
     {
 #line hidden
         /// <summary>
@@ -43,7 +43,7 @@ if(this.HasInputPins) {
             this.Write("\tIN ");
             
             #line 5 "C:\Projects\LogicCircuit\LogicCircuit\master.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(PinsText(this.HdlExport.InputPins)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(PinsText(this.InputPins)));
             
             #line default
             #line hidden
@@ -63,7 +63,7 @@ if(this.HasOutputPins) {
             this.Write("\tOUT ");
             
             #line 8 "C:\Projects\LogicCircuit\LogicCircuit\master.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(PinsText(this.HdlExport.OutputPins)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(PinsText(this.OutputPins)));
             
             #line default
             #line hidden
@@ -77,7 +77,7 @@ if(this.HasOutputPins) {
             this.Write("PARTS:\r\n");
             
             #line 11 "C:\Projects\LogicCircuit\LogicCircuit\master.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
-foreach(HdlSymbol symbol in this.HdlExport.Parts) {
+foreach(HdlSymbol symbol in this.Parts) {
 	bool comma = false;
 
             

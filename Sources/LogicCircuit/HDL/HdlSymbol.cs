@@ -3,16 +3,10 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
 
 namespace LogicCircuit {
 	public class HdlSymbol {
-		private class ConnectionComparer : IEqualityComparer<Connection> {
-			public bool Equals(Connection? x, Connection? y)  => x!.OutJam == y!.OutJam && x.InJam == y.InJam;
-			public int GetHashCode(Connection obj) =>  HashCode.Combine(obj.OutJam, obj.InJam);
-		}
-
 		private readonly struct JamKey : IEquatable<JamKey> {
 			public readonly Jam OutJam;
 			public readonly Jam InJam;
@@ -52,10 +46,8 @@ namespace LogicCircuit {
 		public string Name {
 			get {
 				Circuit circuit = this.CircuitSymbol.Circuit;
-				if(circuit is Splitter splitter) {
-					return string.Format(CultureInfo.InvariantCulture, "Splitter{0}x{1}{2}", splitter.BitWidth, splitter.PinCount, splitter.Clockwise);
-				}
-				if(circuit is Gate gate && gate.GateType == GateType.And && gate.InvertedOutput) {
+				Debug.Assert(circuit is not Splitter && circuit is not CircuitProbe);
+				if(this.HdlExport.IsNand2Tetris && circuit is Gate gate && gate.GateType == GateType.And && gate.InvertedOutput) {
 					return "Nand";
 				}
 				return circuit.Name;

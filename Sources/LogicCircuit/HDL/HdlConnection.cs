@@ -77,7 +77,7 @@ namespace LogicCircuit {
 		public bool IsBitRange(HdlSymbol symbol) => this.outBits != null && this.outBits.Count < ((symbol == this.OutHdlSymbol) ? this.OutJam : this.InJam).Pin.BitWidth;
 
 		/// <summary>
-		/// This allow to skip specifying the same output for multiple connections, so only onw will provide output and all other are not.
+		/// This allow to skip specifying the same output for multiple connections, so only one will provide output and all other are not.
 		/// </summary>
 		public bool SkipOutput { get; set; }
 
@@ -121,9 +121,8 @@ namespace LogicCircuit {
 		public string SymbolJamName(HdlSymbol symbol) {
 			Debug.Assert(symbol.CircuitSymbol.Circuit is not Pin);
 			Jam jam = this.SymbolJam(symbol);
-			HdlExportType type = this.OutHdlSymbol.HdlExport.HdlExportType;
 			string? name = null;
-			bool isN2t = (type == HdlExportType.N2T) || (type == HdlExportType.N2TFull);
+			bool isN2t = this.OutHdlSymbol.HdlExport.IsNand2Tetris;
 			if(!isN2t || jam.CircuitSymbol.Circuit is not Gate || !HdlConnection.N2TGateName.TryGetValue(jam.Pin.Name, out name)) {
 				name = jam.Pin.Name;
 			}
@@ -161,26 +160,6 @@ namespace LogicCircuit {
 			(this.InJam.CircuitSymbol.Circuit is Pin) &&
 			(this.OutJam.CircuitSymbol.Circuit is Pin)
 		;
-
-		public string InputName() {
-			Debug.Assert(this.ConnectsInputWithOutput());
-			Pin pin(Jam jam) => (Pin)jam.CircuitSymbol.Circuit;
-			Pin p = pin(this.InJam);
-			if(p.PinType == PinType.Input) {
-				return p.Name;
-			}
-			return pin(this.OutJam).Name;
-		}
-
-		public string OutputName() {
-			Debug.Assert(this.ConnectsInputWithOutput());
-			Pin pin(Jam jam) => (Pin)jam.CircuitSymbol.Circuit;
-			Pin p = pin(this.OutJam);
-			if(p.PinType == PinType.Output) {
-				return p.Name;
-			}
-			return pin(this.InJam).Name;
-		}
 
 		#if DEBUG
 			public override string ToString() => $"HdlConnection ({this.OutJam.ToString()})->({this.InJam.ToString()})";

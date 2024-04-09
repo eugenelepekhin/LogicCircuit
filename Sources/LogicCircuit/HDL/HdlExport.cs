@@ -17,23 +17,17 @@ namespace LogicCircuit {
 	}
 
 	public class HdlExport {
+		public HdlExportType HdlExportType { get; }
+		public bool IsNand2Tetris => this.HdlExportType == HdlExportType.N2T || this.HdlExportType == HdlExportType.N2TFull;
+
 		private readonly Action<string> logMessage;
 		private readonly Action<string> logError;
 		public int ErrorCount { get; private set; }
 
-		private readonly Dictionary<CircuitSymbol, HdlSymbol> map = new Dictionary<CircuitSymbol, HdlSymbol>();
-		private readonly List<HdlSymbol> list = new List<HdlSymbol>();
-		public IEnumerable<HdlSymbol> HdlSymbols => this.list;
-		public IEnumerable<HdlSymbol> InputPins => this.list.Where(symbol => symbol.CircuitSymbol.Circuit is Pin pin && pin.PinType == PinType.Input).OrderBy(s => (Pin)s.CircuitSymbol.Circuit, PinComparer.Comparer);
-		public IEnumerable<HdlSymbol> OutputPins => this.list.Where(symbol => symbol.CircuitSymbol.Circuit is Pin pin && pin.PinType == PinType.Output).OrderBy(s => (Pin)s.CircuitSymbol.Circuit, PinComparer.Comparer);
-		public IEnumerable<HdlSymbol> Parts => this.list.Where(symbol => symbol.CircuitSymbol.Circuit is not Pin);
-
-		public HdlExportType HdlExportType { get; }
-
 		public HdlExport(HdlExportType hdlExportType, Action<string> logMessage, Action<string> logError) {
+			this.HdlExportType = hdlExportType;
 			this.logMessage = logMessage;
 			this.logError = logError;
-			this.HdlExportType = hdlExportType;
 		}
 
 		public void Message(string text) => this.logMessage(text);
@@ -91,14 +85,12 @@ namespace LogicCircuit {
 		}
 
 		private string? ExportCircuit(LogicalCircuit circuit, ConnectionSet connectionSet) {
-			this.map.Clear();
-			this.list.Clear();
+			Dictionary<CircuitSymbol, HdlSymbol> symbolMap = new Dictionary<CircuitSymbol, HdlSymbol>();
 			foreach(CircuitSymbol symbol in circuit.CircuitSymbols().Where(s => (s.Circuit is not Splitter) && (s.Circuit is not CircuitProbe))) {
 				HdlSymbol hdlSymbol = new HdlSymbol(this, symbol);
-				this.map.Add(symbol, hdlSymbol);
-				this.list.Add(hdlSymbol);
+				symbolMap.Add(symbol, hdlSymbol);
 			}
-			foreach(HdlSymbol symbol in this.list) {
+			foreach(HdlSymbol symbol in symbolMap.Values) {
 				foreach(Jam output in symbol.CircuitSymbol.Jams().Where(j => j.Pin.PinType == PinType.Output || (j.CircuitSymbol.Circuit is Pin pin && pin.PinType == PinType.Input))) {
 					foreach(Connection connection in connectionSet.SelectByOutput(output)) {
 						Debug.Assert(connection.OutJam == output);
@@ -112,7 +104,7 @@ namespace LogicCircuit {
 										if(splitted.InJam.CircuitSymbol.Circuit is Splitter) {
 											Propagate(splitted.InJam, exitBit);
 										} else if(splitted.InJam.CircuitSymbol.Circuit is not CircuitProbe) {
-											HdlSymbol other = this.map[(CircuitSymbol)splitted.InJam.CircuitSymbol];
+											HdlSymbol other = symbolMap[(CircuitSymbol)splitted.InJam.CircuitSymbol];
 											HdlConnection.Create(symbol, connection.OutJam, i, other, splitted.InJam, exitBit);
 										}
 									}
@@ -120,23 +112,37 @@ namespace LogicCircuit {
 								Propagate(connection.InJam, i);
 							}
 						} else if(connection.InJam.CircuitSymbol.Circuit is not CircuitProbe) {
-							HdlSymbol other = this.map[(CircuitSymbol)connection.InJam.CircuitSymbol];
+							HdlSymbol other = symbolMap[(CircuitSymbol)connection.InJam.CircuitSymbol];
 							HdlConnection.Create(symbol, other, connection);
 						}
 					}
 				}
 			}
 
-			this.SortSymbols();
-			foreach(HdlSymbol symbol in this.list.Where(s => s.CircuitSymbol.Circuit is not Pin)) {
-				symbol.SortConnections();
-			}
+			HdlExport.OrderSymbols(symbolMap);
+
+			List<HdlSymbol> inputPins = symbolMap.Values.Where(
+				symbol => symbol.CircuitSymbol.Circuit is Pin pin && pin.PinType == PinType.Input
+			).OrderBy(s => (Pin)s.CircuitSymbol.Circuit, PinComparer.Comparer).ToList();
+
+			List<HdlSymbol> outputPins = symbolMap.Values.Where(
+				symbol => symbol.CircuitSymbol.Circuit is Pin pin && pin.PinType == PinType.Output
+			).OrderBy(s => (Pin)s.CircuitSymbol.Circuit, PinComparer.Comparer).ToList();
+
+			List<HdlSymbol> parts = symbolMap.Values.Where(symbol => symbol.CircuitSymbol.Circuit is not Pin).ToList();
+			CircuitSymbolComparer comparer = new CircuitSymbolComparer(true);
+			parts.Sort((x, y) => {
+				int order = x.Order - y.Order;
+				return (order == 0) ? comparer.Compare(x.CircuitSymbol, y.CircuitSymbol) : order;
+			});
+
+			parts.ForEach(symbol => symbol.SortConnections());
 
 			T4Transformation? transformation = null;
 			switch(this.HdlExportType) {
 			case HdlExportType.N2T:
 			case HdlExportType.N2TFull:
-				transformation = new N2THdl(this, circuit, circuit.Name);
+				transformation = new N2THdl(circuit.Name, inputPins, outputPins, parts);
 				break;
 			default:
 				throw new InvalidOperationException();
@@ -144,21 +150,19 @@ namespace LogicCircuit {
 			return transformation.TransformText();
 		}
 
-		private void SortSymbols() {
-			this.list.ForEach(symbol => symbol.Order = 0);
-			foreach(HdlSymbol symbol in this.list.Where(s => s.CircuitSymbol.Circuit is Pin pin && pin.PinType == PinType.Input)) {
-				this.Sort(new HashSet<HdlSymbol>(), symbol, 1);
-			}
-			this.list.Sort((x, y) => x.Order - y.Order);
-		}
-
-		private void Sort(HashSet<HdlSymbol> ignore, HdlSymbol symbol, int order) {
-			symbol.Order = Math.Max(symbol.Order, order);
-			foreach(HdlConnection connection in symbol.HdlConnections().Where(con => con.OutJam.CircuitSymbol == symbol.CircuitSymbol)) {
-				HdlSymbol other = this.map[(CircuitSymbol)connection.InJam.CircuitSymbol];
-				if(ignore.Add(other)) {
-					this.Sort(ignore, other, symbol.Order + 1);
+		private static void OrderSymbols(Dictionary<CircuitSymbol, HdlSymbol> symbolMap) {
+			void Order(HashSet<HdlSymbol> consider, HdlSymbol symbol, int order) {
+				symbol.Order = Math.Max(symbol.Order, order);
+				foreach(HdlConnection connection in symbol.HdlConnections().Where(con => con.OutJam.CircuitSymbol == symbol.CircuitSymbol)) {
+					HdlSymbol other = symbolMap[(CircuitSymbol)connection.InJam.CircuitSymbol];
+					if(consider.Add(other)) {
+						Order(consider, other, symbol.Order + 1);
+					}
 				}
+			}
+
+			foreach(HdlSymbol symbol in symbolMap.Values.Where(s => s.CircuitSymbol.Circuit is Pin pin && pin.PinType == PinType.Input)) {
+				Order(new HashSet<HdlSymbol>(), symbol, 1);
 			}
 		}
 
