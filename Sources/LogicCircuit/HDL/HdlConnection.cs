@@ -76,6 +76,9 @@ namespace LogicCircuit {
 
 		public bool IsBitRange(HdlSymbol symbol) => this.outBits != null && this.outBits.Count < ((symbol == this.OutHdlSymbol) ? this.OutJam : this.InJam).Pin.BitWidth;
 
+		/// <summary>
+		/// This allow to skip specifying the same output for multiple connections, so only onw will provide output and all other are not.
+		/// </summary>
 		public bool SkipOutput { get; set; }
 
 		private HdlConnection(HdlSymbol outSymbol, HdlSymbol inSymbol, Connection connection) {
@@ -116,6 +119,7 @@ namespace LogicCircuit {
 		}
 
 		public string SymbolJamName(HdlSymbol symbol) {
+			Debug.Assert(symbol.CircuitSymbol.Circuit is not Pin);
 			Jam jam = this.SymbolJam(symbol);
 			HdlExportType type = this.OutHdlSymbol.HdlExport.HdlExportType;
 			string? name = null;
@@ -124,8 +128,9 @@ namespace LogicCircuit {
 				name = jam.Pin.Name;
 			}
 			Debug.Assert(name != null);
-			if(this.IsBitRange(this.OutHdlSymbol) && this.OutHdlSymbol == symbol && symbol.CircuitSymbol.Circuit is not Pin) {
-				name += this.OutBits.ToString();
+			if(this.IsBitRange(symbol)) {
+				BitRange bits = (jam == this.OutJam) ? this.OutBits : this.InBits;
+				name += bits.ToString();
 			}
 			return name;
 		}
@@ -149,11 +154,7 @@ namespace LogicCircuit {
 				return name;
 			}
 			GridPoint point = this.OutJam.AbsolutePoint;
-			if(this.IsBitRange(other)) {
-				return string.Format(CultureInfo.InvariantCulture, "Pin{0}x{1}_{2}_{3}", point.X, point.Y, bits.First, bits.Last);
-			} else {
-				return string.Format(CultureInfo.InvariantCulture, "Pin{0}x{1}", point.X, point.Y);
-			}
+			return string.Format(CultureInfo.InvariantCulture, "Pin{0}x{1}", point.X, point.Y);
 		}
 
 		public bool ConnectsInputWithOutput() =>
