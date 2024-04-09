@@ -6,6 +6,7 @@ using System.Linq;
 namespace LogicCircuit {
 	public abstract class HdlTransformation : T4Transformation {
 		public string Name { get; }
+		public bool CommentPoints { get; set; }
 		public IEnumerable<HdlSymbol> InputPins { get; }
 		public IEnumerable<HdlSymbol> OutputPins { get; }
 		public IEnumerable<HdlSymbol> Parts { get; }

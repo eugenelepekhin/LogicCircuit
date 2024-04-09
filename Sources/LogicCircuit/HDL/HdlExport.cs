@@ -19,14 +19,16 @@ namespace LogicCircuit {
 
 	public class HdlExport {
 		public HdlExportType HdlExportType { get; }
+		public bool CommentPoints { get; }
 		public bool IsNand2Tetris => this.HdlExportType == HdlExportType.N2T || this.HdlExportType == HdlExportType.N2TFull;
 
 		private readonly Action<string> logMessage;
 		private readonly Action<string> logError;
 		public int ErrorCount { get; private set; }
 
-		public HdlExport(HdlExportType hdlExportType, Action<string> logMessage, Action<string> logError) {
+		public HdlExport(HdlExportType hdlExportType, bool commentPoints, Action<string> logMessage, Action<string> logError) {
 			this.HdlExportType = hdlExportType;
+			this.CommentPoints = commentPoints;
 			this.logMessage = logMessage;
 			this.logError = logError;
 		}
@@ -151,6 +153,7 @@ namespace LogicCircuit {
 			if(!this.Validate(transformation) || !transformation.Validate(this)) {
 				return null;
 			}
+			transformation.CommentPoints = this.CommentPoints;
 			return transformation.TransformText();
 		}
 

@@ -16,7 +16,10 @@
 		<Label Content="{x:Static properties:Resources.TitleExportFolder}"/>
 		<lc:ControlFolderSelector SelectedFolder="{Binding Path=TargetFolder, Mode=TwoWay}"/>
 
-		<CheckBox Grid.Column="1" Content="{x:Static properties:Resources.TitleExportOnlyCurrent}" IsChecked="{Binding Path=OnlyCurrent}"/>
+		<WrapPanel Grid.Column="1">
+			<CheckBox Content="{x:Static properties:Resources.TitleExportOnlyCurrent}" IsChecked="{Binding Path=OnlyCurrent}"/>
+			<CheckBox Content="Prepend comment with coordinates." IsChecked="{Binding Path=CommentPoints}"/>
+		</WrapPanel>
 
 		<Label Content="{x:Static properties:Resources.TitleLog}"/>
 		<TextBox x:Name="log" Style="{StaticResource NoteEditor}"/>

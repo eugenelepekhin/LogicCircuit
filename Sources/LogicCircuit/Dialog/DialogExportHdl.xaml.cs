@@ -38,6 +38,12 @@ namespace LogicCircuit {
 			set => this.onlyCurrent.Value = value;
 		}
 
+		private readonly SettingsBoolCache commentPoints = new SettingsBoolCache(Settings.User, nameof(DialogExportHdl) + "." + nameof(CommentPoints), true);
+		public bool CommentPoints {
+			get => this.commentPoints.Value;
+			set => this.commentPoints.Value = value;
+		}
+
 		public DialogExportHdl(Editor editor) {
 			this.logicalCircuit = editor.Project.LogicalCircuit; 
 			this.DataContext = this;
@@ -52,7 +58,7 @@ namespace LogicCircuit {
 					this.log.Text += text;
 					this.log.Text += "\n";
 				}
-				HdlExport hdl = new HdlExport(this.SelectedExportType.Value, message, message);
+				HdlExport hdl = new HdlExport(this.SelectedExportType.Value, this.CommentPoints, message, message);
 				hdl.ExportCircuit(this.logicalCircuit, this.TargetFolder, this.OnlyCurrent);
 			} catch(Exception exception) {
 				App.Mainframe.ReportException(exception);
