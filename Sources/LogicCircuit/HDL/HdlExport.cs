@@ -132,7 +132,10 @@ namespace LogicCircuit {
 				symbol => symbol.CircuitSymbol.Circuit is Pin pin && pin.PinType == PinType.Output
 			).OrderBy(s => (Pin)s.CircuitSymbol.Circuit, PinComparer.Comparer).ToList();
 
-			List<HdlSymbol> parts = symbolMap.Values.Where(symbol => symbol.CircuitSymbol.Circuit is not Pin).ToList();
+			List<HdlSymbol> parts = symbolMap.Values.Where(symbol => {
+				Circuit circuit = symbol.CircuitSymbol.Circuit;
+				return (circuit is not Pin) && (circuit is not Constant);
+			}).ToList();
 			CircuitSymbolComparer comparer = new CircuitSymbolComparer(true);
 			parts.Sort((x, y) => {
 				int order = x.Order - y.Order;

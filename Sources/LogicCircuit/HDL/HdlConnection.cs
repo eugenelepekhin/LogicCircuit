@@ -36,13 +36,19 @@ namespace LogicCircuit {
 		}
 
 		public static void Create(HdlSymbol outSymbol, HdlSymbol inSymbol, Connection connection) {
-			HdlConnection hdlConnection = new HdlConnection(outSymbol, inSymbol, connection);
-			outSymbol.Add(hdlConnection);
-			inSymbol.Add(hdlConnection);
+			if(outSymbol.CircuitSymbol.Circuit is Constant constant && 1 < constant.BitWidth) {
+				for(int i = 0; i < constant.BitWidth; i++) {
+					HdlConnection.Create(outSymbol, connection.OutJam, i, inSymbol, connection.InJam, i);
+				}
+			} else {
+				HdlConnection hdlConnection = new HdlConnection(outSymbol, inSymbol, connection);
+				outSymbol.Add(hdlConnection);
+				inSymbol.Add(hdlConnection);
+			}
 		}
 
 		public static void Create(HdlSymbol outSymbol, Jam outJam, int outBit, HdlSymbol inSymbol, Jam inJam, int inBit) {
-			foreach(HdlConnection hdlConnection in outSymbol.Find(outJam, inJam).Where(c => c.outBits != null)) {
+			foreach(HdlConnection hdlConnection in outSymbol.Find(outJam, inJam).Where(c => c.outBits != null && c.OutHdlSymbol.CircuitSymbol.Circuit is not Constant)) {
 				List<int> outBits = hdlConnection.outBits!;
 				List<int> inBits = hdlConnection.inBits!;
 				Debug.Assert(outBits.Count == inBits.Count);
@@ -151,6 +157,11 @@ namespace LogicCircuit {
 					name += bits.ToString();
 				}
 				return name;
+			}
+			if(jam.CircuitSymbol.Circuit is Constant constant) {
+				Debug.Assert(bits.First == bits.Last);
+				int value = (constant.ConstantValue >> bits.First) & 1;
+				return (value == 0) ? "false" : "true";
 			}
 			GridPoint point = this.OutJam.AbsolutePoint;
 			return string.Format(CultureInfo.InvariantCulture, "Pin{0}x{1}", point.X, point.Y);
