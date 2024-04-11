@@ -51,16 +51,7 @@ namespace LogicCircuit {
 
 		public int Order { get; set; }
 
-		public string Name {
-			get {
-				Circuit circuit = this.CircuitSymbol.Circuit;
-				Debug.Assert(circuit is not Splitter && circuit is not CircuitProbe);
-				if(this.HdlExport.IsNand2Tetris && circuit is Gate gate && gate.GateType == GateType.And && gate.InvertedOutput) {
-					return "Nand";
-				}
-				return circuit.Name.Trim();
-			}
-		}
+		public string Name => this.HdlExport.Name(this);
 
 		public HdlSymbol(HdlExport export, CircuitSymbol symbol) {
 			this.HdlExport = export;

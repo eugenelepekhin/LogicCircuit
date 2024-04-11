@@ -63,13 +63,6 @@ namespace LogicCircuit {
 			inSymbol.Add(connection);
 		}
 
-		private static readonly Dictionary<string, string> N2TGateName = new Dictionary<string, string>() {
-			{ "x", "in" },
-			{ "x1", "a" },
-			{ "x2", "b" },
-			{ "q", "out" },
-		};
-
 		public HdlSymbol OutHdlSymbol { get; }
 		public Jam OutJam { get; }
 		private readonly List<int>? outBits;
@@ -127,12 +120,7 @@ namespace LogicCircuit {
 		public string SymbolJamName(HdlSymbol symbol) {
 			Debug.Assert(symbol.CircuitSymbol.Circuit is not Pin);
 			Jam jam = this.SymbolJam(symbol);
-			string? name = null;
-			bool isN2t = this.OutHdlSymbol.HdlExport.IsNand2Tetris;
-			if(!isN2t || jam.CircuitSymbol.Circuit is not Gate || !HdlConnection.N2TGateName.TryGetValue(jam.Pin.Name, out name)) {
-				name = jam.Pin.Name;
-			}
-			Debug.Assert(name != null);
+			string name = this.OutHdlSymbol.HdlExport.Name(jam);
 			if(this.IsBitRange(symbol)) {
 				BitRange bits = (jam == this.OutJam) ? this.OutBits : this.InBits;
 				name += bits.ToString();
@@ -165,7 +153,12 @@ namespace LogicCircuit {
 			}
 			GridPoint point = this.OutJam.AbsolutePoint;
 			if(this.IsBitRange(this.OutHdlSymbol)) {
-				return string.Format(CultureInfo.InvariantCulture, "Pin{0}x{1}_{2}_{3}", point.X, point.Y, this.OutBits.First, this.OutBits.Last);
+				bits = this.OutBits;
+				if(bits.First == bits.Last) {
+					return string.Format(CultureInfo.InvariantCulture, "Pin{0}x{1}_{2}", point.X, point.Y, bits.First);
+				} else {
+					return string.Format(CultureInfo.InvariantCulture, "Pin{0}x{1}_{2}_{3}", point.X, point.Y, bits.First, bits.Last);
+				}
 			} else {
 				return string.Format(CultureInfo.InvariantCulture, "Pin{0}x{1}", point.X, point.Y);
 			}

@@ -10,6 +10,12 @@ namespace LogicCircuit {
 	/// Interaction logic for DialogExportHdl.xaml
 	/// </summary>
 	public partial class DialogExportHdl : Window {
+		public enum HdlExportType {
+			N2T,
+			N2TFull,
+			Other
+		}
+
 		private SettingsWindowLocationCache? windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 
@@ -58,7 +64,15 @@ namespace LogicCircuit {
 					this.log.Text += text;
 					this.log.Text += "\n";
 				}
-				HdlExport hdl = new HdlExport(this.SelectedExportType.Value, this.CommentPoints, message, message);
+				HdlExport? hdl = null;
+				switch(this.SelectedExportType.Value) {
+				case HdlExportType.N2T:
+				case HdlExportType.N2TFull:
+					hdl = new N2TExport(this.SelectedExportType.Value == HdlExportType.N2TFull, this.CommentPoints, message, message);
+					break;
+				default:
+					throw new InvalidOperationException();
+				}
 				hdl.ExportCircuit(this.logicalCircuit, this.TargetFolder, this.OnlyCurrent);
 			} catch(Exception exception) {
 				App.Mainframe.ReportException(exception);
