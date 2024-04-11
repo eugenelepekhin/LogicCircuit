@@ -11,9 +11,9 @@ PARTS:
 <#foreach(HdlSymbol symbol in this.Parts) {
 	bool comma = false;
 #>
-	<#if(this.CommentPoints) {#>
+<#if(this.CommentPoints) {#>
 	// <#=symbol.CircuitSymbol.Circuit.Name#><#=symbol.CircuitSymbol.Point#>
-	<#}#>
+<#}#>
 	<#=symbol.Name#>(<#foreach(HdlConnection connection in symbol.HdlConnections().Where(c => c.GenerateOutput(symbol))) {#><#=comma ? ", " : ""#><#=connection.SymbolJamName(symbol)#>=<#=connection.PinName(symbol)#><#comma = true;#><#}#>);
 <#}#>
 }

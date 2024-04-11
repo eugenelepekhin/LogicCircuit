@@ -80,7 +80,7 @@ namespace LogicCircuit {
 		private readonly List<int>? inBits;
 		public BitRange InBits => (this.inBits != null) ? new BitRange(this.inBits) : new BitRange(this.InJam);
 
-		public bool IsBitRange(HdlSymbol symbol) => this.outBits != null && this.outBits.Count < ((symbol == this.OutHdlSymbol) ? this.OutJam : this.InJam).Pin.BitWidth;
+		private bool IsBitRange(HdlSymbol symbol) => this.outBits != null && this.outBits.Count < ((symbol == this.OutHdlSymbol) ? this.OutJam : this.InJam).Pin.BitWidth;
 
 		/// <summary>
 		/// This allow to skip specifying the same output for multiple connections, so only one will provide output and all other are not.
@@ -164,7 +164,11 @@ namespace LogicCircuit {
 				return (value == 0) ? "false" : "true";
 			}
 			GridPoint point = this.OutJam.AbsolutePoint;
-			return string.Format(CultureInfo.InvariantCulture, "Pin{0}x{1}", point.X, point.Y);
+			if(this.IsBitRange(this.OutHdlSymbol)) {
+				return string.Format(CultureInfo.InvariantCulture, "Pin{0}x{1}_{2}_{3}", point.X, point.Y, this.OutBits.First, this.OutBits.Last);
+			} else {
+				return string.Format(CultureInfo.InvariantCulture, "Pin{0}x{1}", point.X, point.Y);
+			}
 		}
 
 		public bool ConnectsInputWithOutput() =>

@@ -202,6 +202,10 @@ namespace LogicCircuit {
 		private bool Validate(HdlTransformation transformation) {
 			bool valid = true;
 			Regex identifier = new Regex(@"^[a-zA-Z_][a-zA-Z_0-9]*$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
+			if(!identifier.IsMatch(transformation.Name)) {
+				this.Error($"Invalid name of the circuit {transformation.Name}");
+				valid = false;
+			}
 			foreach(HdlSymbol inputPin in transformation.InputPins) {
 				string name = inputPin.Name;
 				if(!identifier.IsMatch(name)) {

@@ -83,7 +83,6 @@ foreach(HdlSymbol symbol in this.Parts) {
             
             #line default
             #line hidden
-            this.Write("\t");
             
             #line 14 "C:\Projects\LogicCircuit\LogicCircuit\master.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
 if(this.CommentPoints) {
@@ -103,7 +102,7 @@ if(this.CommentPoints) {
             
             #line default
             #line hidden
-            this.Write("\r\n\t");
+            this.Write("\r\n");
             
             #line 16 "C:\Projects\LogicCircuit\LogicCircuit\master.hdl\Sources\LogicCircuit\HDL\N2THdl.tt"
 }

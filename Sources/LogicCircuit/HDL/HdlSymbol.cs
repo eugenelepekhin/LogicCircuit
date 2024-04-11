@@ -16,7 +16,7 @@ namespace LogicCircuit {
 				this.InJam = inJam;
 			}
 
-			public bool Equals(JamKey other) => this.OutJam == other.OutJam && this.InJam != other.InJam;
+			public bool Equals(JamKey other) => this.OutJam == other.OutJam && this.InJam == other.InJam;
 			public override bool Equals(object? obj) => obj is JamKey && this.Equals((JamKey)obj);
 			public override int GetHashCode() => HashCode.Combine(this.OutJam, this.InJam);
 		}
