@@ -202,6 +202,7 @@ namespace LogicCircuit {
 		private bool Validate(HdlTransformation transformation) {
 			bool valid = true;
 			Regex identifier = new Regex(@"^[a-zA-Z_][a-zA-Z_0-9]*$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
+			List<Jam> jams = new List<Jam>();
 			if(!identifier.IsMatch(transformation.Name)) {
 				this.Error($"Invalid name of the circuit {transformation.Name}");
 				valid = false;
@@ -212,6 +213,7 @@ namespace LogicCircuit {
 					this.Error($"Invalid name of input pin: {name}");
 					valid = false;
 				}
+				jams.AddRange(inputPin.CircuitSymbol.Jams());
 				foreach(HdlConnection connection in inputPin.HdlConnections()) {
 					if(connection.ConnectsInputWithOutput()) {
 						this.Error($"Pin {connection.InHdlSymbol.Name} connected directly to pin {connection.OutHdlSymbol.Name}");
@@ -225,11 +227,21 @@ namespace LogicCircuit {
 					this.Error($"Invalid name of output pin: {name}");
 					valid = false;
 				}
+				jams.AddRange(outputPin.CircuitSymbol.Jams());
 			}
 			foreach(HdlSymbol symbol in transformation.Parts) {
 				string name = symbol.Name;
 				if(!identifier.IsMatch(name)) {
 					this.Error($"Invalid name of part: {name}");
+					valid = false;
+				}
+				jams.AddRange(symbol.CircuitSymbol.Jams());
+			}
+			Dictionary<GridPoint, Jam> points = new Dictionary<GridPoint, Jam>();
+			foreach(Jam jam in jams) {
+				if(!points.TryAdd(jam.AbsolutePoint, jam)) {
+					Jam other = points[jam.AbsolutePoint];
+					this.Error($"Jam {jam.Pin.Name} on {jam.CircuitSymbol.Circuit.Name}{jam.CircuitSymbol.Point} collocated with jam {other.Pin.Name} on {other.CircuitSymbol.Circuit.Name}{other.CircuitSymbol.Point}");
 					valid = false;
 				}
 			}
