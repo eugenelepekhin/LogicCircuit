@@ -54,7 +54,9 @@ namespace LogicCircuit {
 					break;
 				}
 				this.Message(Properties.Resources.MessageExportingHdl(logicalCircuit.Name, file));
-				string? hdl = this.ExportCircuit(logicalCircuit, connectionSet);
+				Dictionary<CircuitSymbol, HdlSymbol> symbolMap = this.Collect(circuit, connectionSet);
+				if(0 < this.ErrorCount) return false;
+				string? hdl = this.ExportCircuit(logicalCircuit, symbolMap);
 				if(!string.IsNullOrEmpty(hdl)) {
 					file = Path.Combine(folder, file);
 					File.WriteAllText(file, hdl);
@@ -87,9 +89,25 @@ namespace LogicCircuit {
 			}
 		}
 
-		private string? ExportCircuit(LogicalCircuit circuit, ConnectionSet connectionSet) {
+		private Dictionary<CircuitSymbol, HdlSymbol> Collect(LogicalCircuit circuit, ConnectionSet connectionSet) {
+			bool consider(CircuitSymbol symbol, bool showWarning) {
+				Circuit circuit = symbol.Circuit;
+				if(	circuit is CircuitButton ||
+					circuit is Sensor ||
+					circuit is Gate gate && (gate.GateType == GateType.Clock || gate.GateType == GateType.Led || gate.GateType == GateType.TriState1 || gate.GateType == GateType.TriState2) ||
+					circuit is LedMatrix ||
+					circuit is Sound
+
+				) {
+					if(showWarning) {
+						this.Error($"Unsupported circuit {circuit.Name}{symbol.Point}");
+					}
+					return false;
+				}
+				return (circuit is not Splitter) && (circuit is not CircuitProbe);
+			}
 			Dictionary<CircuitSymbol, HdlSymbol> symbolMap = new Dictionary<CircuitSymbol, HdlSymbol>();
-			foreach(CircuitSymbol symbol in circuit.CircuitSymbols().Where(s => (s.Circuit is not Splitter) && (s.Circuit is not CircuitProbe))) {
+			foreach(CircuitSymbol symbol in circuit.CircuitSymbols().Where(s => consider(s, true))) {
 				HdlSymbol hdlSymbol = new HdlSymbol(this, symbol);
 				symbolMap.Add(symbol, hdlSymbol);
 			}
@@ -106,22 +124,27 @@ namespace LogicCircuit {
 										Debug.Assert(splitted.OutJam == exitJam);
 										if(splitted.InJam.CircuitSymbol.Circuit is Splitter) {
 											Propagate(splitted.InJam, exitBit);
-										} else if(splitted.InJam.CircuitSymbol.Circuit is not CircuitProbe) {
-											HdlSymbol other = symbolMap[(CircuitSymbol)splitted.InJam.CircuitSymbol];
-											HdlConnection.Create(symbol, connection.OutJam, i, other, splitted.InJam, exitBit);
+										} else if(consider((CircuitSymbol)splitted.InJam.CircuitSymbol, false)) {
+											if(symbolMap.TryGetValue((CircuitSymbol)splitted.InJam.CircuitSymbol, out HdlSymbol? other)) {
+												HdlConnection.Create(symbol, connection.OutJam, i, other, splitted.InJam, exitBit);
+											}
 										}
 									}
 								}
 								Propagate(connection.InJam, i);
 							}
-						} else if(connection.InJam.CircuitSymbol.Circuit is not CircuitProbe) {
-							HdlSymbol other = symbolMap[(CircuitSymbol)connection.InJam.CircuitSymbol];
-							HdlConnection.Create(symbol, other, connection);
+						} else if(consider((CircuitSymbol)connection.InJam.CircuitSymbol, false)) {
+							if(symbolMap.TryGetValue((CircuitSymbol)connection.InJam.CircuitSymbol, out HdlSymbol? other)) {
+								HdlConnection.Create(symbol, other, connection);
+							}
 						}
 					}
 				}
 			}
+			return symbolMap;
+		}
 
+		private string? ExportCircuit(LogicalCircuit circuit, Dictionary<CircuitSymbol, HdlSymbol> symbolMap) {
 			HdlExport.OrderSymbols(symbolMap);
 
 			List<HdlSymbol> inputPins = symbolMap.Values.Where(
