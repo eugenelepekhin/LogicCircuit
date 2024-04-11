@@ -19,6 +19,10 @@ namespace LogicCircuit {
 			public bool Equals(JamKey other) => this.OutJam == other.OutJam && this.InJam == other.InJam;
 			public override bool Equals(object? obj) => obj is JamKey && this.Equals((JamKey)obj);
 			public override int GetHashCode() => HashCode.Combine(this.OutJam, this.InJam);
+
+			#if DEBUG
+				public override string ToString() => $"{this.OutJam}->{this.InJam}";
+			#endif
 		}
 
 		private readonly struct JamRange : IEquatable<JamRange> {
@@ -33,6 +37,10 @@ namespace LogicCircuit {
 			public bool Equals(JamRange other) => this.Jam == other.Jam && this.Range == other.Range;
 			public override bool Equals(object? obj) => obj is JamRange other && this.Equals(other);
 			public override int GetHashCode() => HashCode.Combine(this.Jam, this.Range);
+
+			#if DEBUG
+				public override string ToString() => $"{this.Jam}{this.Range}";
+			#endif
 		}
 
 		public HdlExport HdlExport { get; }
