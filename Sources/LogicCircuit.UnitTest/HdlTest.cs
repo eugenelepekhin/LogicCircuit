@@ -10,8 +10,13 @@ namespace LogicCircuit.UnitTest {
 			string file = @"C:\Projects\LogicCircuit\LogicCircuit\Temp\hdl\Merge3.hdl";
 			//file = @"C:\Projects\LogicCircuit\LogicCircuit\Temp\hdl\Inverter.hdl";
 			file = @"C:\Projects\LogicCircuit\LogicCircuit\Temp\hdl\MergeSplit1_2.hdl";
-			HdlContext hdl = new HdlContext(file, message => this.TestContext.WriteLine(message));
-			hdl.Parse();
+
+			string folder = Path.GetDirectoryName(file);
+			string name = Path.GetFileNameWithoutExtension(file);
+
+			HdlContext hdl = new HdlContext(folder, message => this.TestContext.WriteLine(message));
+			HdlChip chip = hdl.Chip(name);
+			string text = chip.ToString();
 		}
 	}
 }

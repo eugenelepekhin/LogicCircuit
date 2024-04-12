@@ -2,10 +2,13 @@
 using Antlr4.Runtime.Misc;
 
 namespace LogicCircuit.UnitTest.HDL {
-	internal class HdlErrorListner : BaseErrorListener, IAntlrErrorListener<int> {
+	internal class HdlErrorListener : BaseErrorListener, IAntlrErrorListener<int> {
 		private readonly HdlContext context;
-		public HdlErrorListner(HdlContext context) {
+		private readonly string file;
+
+		public HdlErrorListener(HdlContext context, string file) {
 			this.context = context;
+			this.file = file;
 		}
 
 		public override void SyntaxError([NotNull] IRecognizer recognizer, [Nullable] IToken offendingSymbol, int line, int charPositionInLine, [NotNull] string msg, [Nullable] RecognitionException e) {
@@ -15,6 +18,6 @@ namespace LogicCircuit.UnitTest.HDL {
 			this.context.Error(this.Message(line, charPositionInLine + 1, msg));
 		}
 
-		private string Message(int line, int column, string message) => $"{this.context.File} ({line}, {column}): Syntax error: {message}";
+		private string Message(int line, int column, string message) => $"{this.file} ({line}, {column}): Syntax error: {message}";
 	}
 }

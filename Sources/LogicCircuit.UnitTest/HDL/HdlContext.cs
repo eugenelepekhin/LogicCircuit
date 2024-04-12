@@ -3,13 +3,16 @@ using Antlr4.Runtime;
 
 namespace LogicCircuit.UnitTest.HDL {
 	internal class HdlContext {
+		public string Folder { get; }
 		private readonly Action<string> message;
-		public string File { get; }
 		public int ErrorCount { get; private set; }
 
-		public HdlContext(string file, Action<string> message) {
+		private readonly Dictionary<string, HdlChip> chips = new(StringComparer.OrdinalIgnoreCase);
+
+		public HdlContext(string folder, Action<string> message) {
+			Debug.Assert(folder != null && Directory.Exists(folder));
+			this.Folder = folder;
 			this.message = message;
-			this.File = file;
 		}
 
 		public void Message(string message) {
@@ -22,22 +25,46 @@ namespace LogicCircuit.UnitTest.HDL {
 			this.Message(message);
 		}
 
-		public void Parse() {
-			this.ErrorCount = 0;
-			HdlParser parser = this.Parser(this.File);
-			HdlParser.ChipContext chipContext = parser.chip();
-			if(this.ErrorCount == 0) {
-				//string tree = chipContext.ToStringTree(parser);
-				//this.Message(tree);
-				HdlVisitor visitor = new HdlVisitor(this);
-				HdlChip chip = (HdlChip)visitor.Visit(chipContext);
-				string text = chip.ToString();
-				this.Message(text);
+		public HdlChip Chip(string chipName) {
+			if(this.chips.TryGetValue(chipName, out HdlChip chip)) {
+				return chip;
 			}
+			string file = chipName + ".hdl";
+			if(File.Exists(Path.Combine(this.Folder, file)) && this.Parse(file)) {
+				return this.chips[chipName];
+			}
+			HdlChip gate = HdlGate.CreateGate(this, chipName);
+			if(gate != null) {
+				this.chips.TryAdd(gate.Name, gate);
+			} else {
+				this.Error($"Chip {chipName} not found");
+			}
+			return gate;
+		}
+
+		private bool Parse(string file) {
+			string path = Path.Combine(this.Folder, file);
+			if(File.Exists(path)) {
+				HdlParser parser = this.Parser(path);
+				HdlParser.ChipContext chipContext = parser.chip();
+				if(this.ErrorCount == 0) {
+					//string tree = chipContext.ToStringTree(parser);
+					//this.Message(tree);
+					HdlVisitor visitor = new HdlVisitor(this);
+					HdlChip chip = (HdlChip)visitor.Visit(chipContext);
+					string text = chip.ToString();
+					this.Message(text);
+					this.chips.Add(chip.Name, chip);
+					return true;
+				}
+			} else {
+				this.Error($"File not found: {path}");
+			}
+			return false;
 		}
 
 		private HdlParser Parser(string file) {
-			HdlErrorListner errorListner = new HdlErrorListner(this);
+			HdlErrorListener errorListner = new HdlErrorListener(this, file);
 			using TextReader reader = new StreamReader(file);
 			HdlLexer lexer = new HdlLexer(new AntlrInputStream(reader));
 			lexer.RemoveErrorListeners();
