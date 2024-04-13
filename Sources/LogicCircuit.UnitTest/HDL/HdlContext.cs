@@ -25,47 +25,76 @@ namespace LogicCircuit.UnitTest.HDL {
 			this.Message(message);
 		}
 
+		public HdlState Load(string chipName) {
+			Debug.Assert(0 == this.chips.Count);
+
+			HdlChip chip = this.Chip(chipName);
+			if(chip.Link() && !this.HasLoop(chip, chip)) {
+				return new HdlState(this, chip);
+			}
+			return null;
+		}
+
 		public HdlChip Chip(string chipName) {
-			if(this.chips.TryGetValue(chipName, out HdlChip chip)) {
+			HdlChip chip;
+			if(this.chips.TryGetValue(chipName, out chip)) {
 				return chip;
 			}
-			string file = chipName + ".hdl";
-			if(File.Exists(Path.Combine(this.Folder, file)) && this.Parse(file)) {
-				return this.chips[chipName];
+			string file = Path.Combine(this.Folder, chipName + ".hdl");
+			if(File.Exists(file)) {
+				chip = this.Parse(file);
+				if(chip != null) {
+					if(!StringComparer.OrdinalIgnoreCase.Equals(chip.Name, chipName)) {
+						this.Error($"File name {file} doesn't match contained chip name {chip.Name}.");
+					} else {
+						this.chips.Add(chip.Name, chip);
+						return chip;
+					}
+				}
+				return null;
 			}
 			HdlChip gate = HdlGate.CreateGate(this, chipName);
 			if(gate != null) {
-				this.chips.TryAdd(gate.Name, gate);
+				this.chips.Add(gate.Name, gate);
 			} else {
 				this.Error($"Chip {chipName} not found");
 			}
 			return gate;
 		}
 
-		private bool Parse(string file) {
-			string path = Path.Combine(this.Folder, file);
-			if(File.Exists(path)) {
-				HdlParser parser = this.Parser(path);
-				HdlParser.ChipContext chipContext = parser.chip();
-				if(this.ErrorCount == 0) {
-					//string tree = chipContext.ToStringTree(parser);
-					//this.Message(tree);
-					HdlVisitor visitor = new HdlVisitor(this);
-					HdlChip chip = (HdlChip)visitor.Visit(chipContext);
-					string text = chip.ToString();
-					this.Message(text);
-					this.chips.Add(chip.Name, chip);
+		private bool HasLoop(HdlChip chip, HdlChip root) {
+			foreach(HdlPart part in chip.Parts) {
+				if(part.Chip == root) {
+					this.Error($"Chip {root.Name} is using itself directly or indirectly.");
 					return true;
 				}
-			} else {
-				this.Error($"File not found: {path}");
+				if(this.HasLoop(part.Chip, root) || this.HasLoop(part.Chip, part.Chip)) {
+					return true;
+				}
 			}
 			return false;
+		}
+
+		private HdlChip Parse(string file) {
+			Debug.Assert(File.Exists(file));
+			HdlParser parser = this.Parser(file);
+			HdlParser.ChipContext chipContext = parser.chip();
+			if(this.ErrorCount == 0) {
+				//this.Message(chipContext.ToStringTree(parser));
+				HdlVisitor visitor = new HdlVisitor(this);
+				HdlChip chip = (HdlChip)visitor.Visit(chipContext);
+				if(this.ErrorCount == 0) {
+					//this.Message(chip.ToString());
+					return chip;
+				}
+			}
+			return null;
 		}
 
 		private HdlParser Parser(string file) {
 			HdlErrorListener errorListner = new HdlErrorListener(this, file);
 			using TextReader reader = new StreamReader(file);
+			// AntlrInputStream will read the entire file here, so reader is safe to dispose.
 			HdlLexer lexer = new HdlLexer(new AntlrInputStream(reader));
 			lexer.RemoveErrorListeners();
 			lexer.AddErrorListener(errorListner);

@@ -15,8 +15,11 @@ namespace LogicCircuit.UnitTest {
 			string name = Path.GetFileNameWithoutExtension(file);
 
 			HdlContext hdl = new HdlContext(folder, message => this.TestContext.WriteLine(message));
-			HdlChip chip = hdl.Chip(name);
-			string text = chip.ToString();
+			HdlState state = hdl.Load(name);
+			if(state != null) {
+				string text = state.Chip.ToString();
+				this.TestContext.WriteLine(text);
+			}
 		}
 	}
 }

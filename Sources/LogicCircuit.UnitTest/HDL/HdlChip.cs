@@ -11,23 +11,45 @@
 		private List<HdlPart> parts = new List<HdlPart>();
 		public IEnumerable<HdlPart > Parts => this.parts;
 
+		private bool isLinked;
+
 		public HdlChip(HdlContext context, string name) : base(context) {
 			this.Name = name;
 		}
 
-		public void AddInput(HdlIOPin pin) {
-			this.inputs.Add(pin);
-			pin.Chip = this;
+		public bool AddInput(HdlIOPin pin) {
+			if(this.inputs.Concat(this.outputs).Any(p => p.Name == pin.Name)) {
+				this.HdlContext.Error($"Input/Output pin {pin.Name} redefined on chip {this.Name}");
+				return false;
+			} else {
+				this.inputs.Add(pin);
+				return true;
+			}
 		}
 
-		public void AddOutput(HdlIOPin pin) {
-			this.outputs.Add(pin);
-			pin.Chip = this;
+		public bool AddOutput(HdlIOPin pin) {
+			if(this.inputs.Concat(this.outputs).Any(p => p.Name == pin.Name)) {
+				this.HdlContext.Error($"Input/Output pin {pin.Name} redefined on chip {this.Name}");
+				return false;
+			} else {
+				this.outputs.Add(pin);
+				return true;
+			}
 		}
 
 		public void AddPart(HdlPart part) {
 			this.parts.Add(part);
-			part.Chip = this;
+		}
+
+		public virtual bool Link() {
+			bool success = true;
+			if(!this.isLinked) {
+				this.isLinked = true;
+				foreach(HdlPart part in this.parts) {
+					success &= part.Link(this);
+				}
+			}
+			return success;
 		}
 
 		public override string ToString() {

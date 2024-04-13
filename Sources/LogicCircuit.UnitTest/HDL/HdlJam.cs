@@ -8,9 +8,6 @@ namespace LogicCircuit.UnitTest.HDL {
 		public int Last { get; }
 		public bool IsBitRange { get; }
 
-		public HdlJam Jam { get; set; }
-		public HdlJam Pin { get; set; }
-
 		public HdlJam(HdlContext hdlContext, string name) : base(hdlContext) {
 			this.Name = name;
 		}
