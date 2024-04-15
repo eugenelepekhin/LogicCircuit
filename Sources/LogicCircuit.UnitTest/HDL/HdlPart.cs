@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace LogicCircuit.UnitTest.HDL {
 	internal class HdlPart : HdlItem {
@@ -19,41 +20,33 @@ namespace LogicCircuit.UnitTest.HDL {
 			}
 
 			public bool LinkJam(HdlChip chip) {
-				bool byName(HdlIOPin pin) => pin.Name == this.Jam.Name;
-
-				HdlIOPin pin = chip.Inputs.FirstOrDefault(byName);
+				HdlIOPin pin = chip.Pin(this.Jam.Name);
 				if(pin != null) {
 					this.JamsPin = pin;
-					this.BitWidth = pin.BitWidth;
+					this.BitWidth = (this.Jam.IsBitRange) ? 1 + this.Jam.Last - this.Jam.First : pin.BitWidth;
 					return true;
+				} else {
+					chip.HdlContext.Error($"Pin {this.Jam.Name} not found on chip {chip.Name}");
+					return false;
 				}
-				pin = chip.Outputs.FirstOrDefault(byName);
-				if(pin != null) {
-					this.JamsPin = pin;
-					this.BitWidth = pin.BitWidth;
-					this.JamIsOutput = true;
-					return true;
-				}
-				chip.HdlContext.Error($"Input/Output pin {this.Jam.Name} not found on chip {chip.Name}");
-				return false;
 			}
 
 			public bool LinkPin(HdlChip chip) {
-				bool byName(HdlIOPin pin) => pin.Name == this.Pin.Name;
-
-				HdlIOPin pin = chip.Inputs.FirstOrDefault(byName);
+				HdlIOPin pin = chip.Pin(this.Pin.Name);
 				if(pin != null) {
 					this.PinsPin = pin;
 					return true;
 				}
-
-				pin = chip.Outputs.FirstOrDefault(byName);
+				// Assuming internal pin
+				pin = this.JamsPin.Chip.Pin(this.Pin.Name);
+				if(pin == null) {
+					pin = this.JamsPin.Chip.AddPin(this.Pin.Name, this.BitWidth, HdlIOPin.PinType.Internal);
+				}
 				if(pin != null) {
 					this.PinsPin = pin;
-					this.PinIsOutput = true;
 					return true;
 				}
-				return true;
+				return false;
 			}
 		}
 
@@ -64,22 +57,25 @@ namespace LogicCircuit.UnitTest.HDL {
 		private readonly List<Connection> connections = new List<Connection>();
 		public IEnumerable<Connection> Connections => this.connections;
 
-		public HdlPart(HdlContext hdlContext, HdlChip parent, string name) : base(hdlContext) {
+		public int Index { get; }
+
+		public HdlPart(HdlContext hdlContext, HdlChip parent, string name, int index) : base(hdlContext) {
 			this.Name = name;
 			this.Parent = parent;
+			this.Index = index;
 		}
 
 		public void AddConnection(HdlJam jam, HdlJam pin) {
 			this.connections.Add(new Connection(jam, pin));
 		}
 
-		public bool Link(HdlChip parent) {
+		public bool Link() {
 			HdlChip chip = this.HdlContext.Chip(this.Name);
 			if(chip != null) {
 				bool success = chip.Link();
 				foreach(Connection conn in this.connections) {
 					success &= conn.LinkJam(chip);
-					success &= conn.LinkPin(parent);
+					success &= conn.LinkPin(this.Parent);
 				}
 				this.Chip = chip;
 				return success;

@@ -30,6 +30,14 @@ namespace LogicCircuit.UnitTest.HDL {
 
 			HdlChip chip = this.Chip(chipName);
 			if(chip.Link() && !this.HasLoop(chip, chip)) {
+				//HdlPart part = new HdlPart(this, null, chip.Name, 0);
+				//foreach(HdlIOPin pin in chip.Inputs) {
+				//	part.AddConnection(new HdlJam(this, pin.Name), new HdlJam(this, "Temp" + pin.Name));
+				//}
+				//foreach(HdlIOPin pin in chip.Outputs) {
+				//	part.AddConnection(new HdlJam(this, pin.Name), new HdlJam(this, "Temp" + pin.Name));
+				//}
+				//part.Link(null);
 				return new HdlState(this, chip);
 			}
 			return null;
@@ -62,6 +70,7 @@ namespace LogicCircuit.UnitTest.HDL {
 			return gate;
 		}
 
+		// TODO: this is wrong rewrite it.
 		private bool HasLoop(HdlChip chip, HdlChip root) {
 			foreach(HdlPart part in chip.Parts) {
 				if(part.Chip == root) {
@@ -82,10 +91,9 @@ namespace LogicCircuit.UnitTest.HDL {
 			if(this.ErrorCount == 0) {
 				//this.Message(chipContext.ToStringTree(parser));
 				HdlVisitor visitor = new HdlVisitor(this);
-				HdlChip chip = (HdlChip)visitor.Visit(chipContext);
-				if(this.ErrorCount == 0) {
-					//this.Message(chip.ToString());
-					return chip;
+				if(visitor.Visit(chipContext) && this.ErrorCount == 0) {
+					//this.Message(visitor.Chip.ToString());
+					return visitor.Chip;
 				}
 			}
 			return null;

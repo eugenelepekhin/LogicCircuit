@@ -1,4 +1,6 @@
-﻿namespace LogicCircuit.UnitTest.HDL {
+﻿using System.Diagnostics;
+
+namespace LogicCircuit.UnitTest.HDL {
 	internal static class HdlGate {
 		public static HdlChip CreateGate(HdlContext hdlContext, string gateName) {
 			switch(gateName) {
@@ -20,41 +22,98 @@
 		}
 
 		private class HdlNand : Gate {
+			private readonly HdlIOPin a;
+			private readonly HdlIOPin b;
+			private readonly HdlIOPin o;
 			public HdlNand(HdlContext hdlContext) : base(hdlContext, "Nand") {
-				this.AddInput(new HdlIOPin(hdlContext, this, "a", 1));
-				this.AddInput(new HdlIOPin(hdlContext, this, "b", 1));
-				this.AddOutput(new HdlIOPin(hdlContext, this, "out", 1));
+				this.a = this.AddPin("a", 1, HdlIOPin.PinType.Input);
+				this.b = this.AddPin("b", 1, HdlIOPin.PinType.Input);
+				this.o = this.AddPin("out", 1, HdlIOPin.PinType.Output);
+			}
+
+			public override bool Evaluate(HdlState state) {
+				Debug.Assert(state.Chip == this);
+				int value = ((0 != state.Get(this.a)) && (0 != state.Get(this.b))) ? 0 : 1;
+				state.Set(o, value);
+				return base.Evaluate(state);
 			}
 		}
 
 		private class HdlAnd : Gate {
+			private readonly HdlIOPin a;
+			private readonly HdlIOPin b;
+			private readonly HdlIOPin o;
+
 			public HdlAnd(HdlContext hdlContext) : base(hdlContext, "And") {
-				this.AddInput(new HdlIOPin(hdlContext, this, "a", 1));
-				this.AddInput(new HdlIOPin(hdlContext, this, "b", 1));
-				this.AddOutput(new HdlIOPin(hdlContext, this, "out", 1));
+				this.a = this.AddPin("a", 1, HdlIOPin.PinType.Input);
+				this.b = this.AddPin("b", 1, HdlIOPin.PinType.Input);
+				this.o = this.AddPin("out", 1, HdlIOPin.PinType.Output);
+			}
+
+			public override bool Evaluate(HdlState state) {
+				Debug.Assert(state.Chip == this);
+				int value = ((0 != state.Get(this.a)) && (0 != state.Get(this.b))) ? 1 : 0;
+				state.Set(o, value);
+				return base.Evaluate(state);
 			}
 		}
 
 		private class HdlNot : Gate {
+			private readonly HdlIOPin i;
+			private readonly HdlIOPin o;
+
 			public HdlNot(HdlContext hdlContext) : base(hdlContext, "Not") {
-				this.AddInput(new HdlIOPin(hdlContext, this, "in", 1));
-				this.AddOutput(new HdlIOPin(hdlContext, this, "out", 1));
+				this.i = this.AddPin("in", 1, HdlIOPin.PinType.Input);
+				this.o = this.AddPin("out", 1, HdlIOPin.PinType.Output);
+			}
+
+			public override bool Evaluate(HdlState state) {
+				Debug.Assert(state.Chip == this);
+				int value = (0 != state.Get(this.i)) ? 0 : 1;
+				int old = state.Get(this.o);
+				if(value != old) {
+					state.Set(this.o, value);
+					return true;
+				}
+				return false;
 			}
 		}
 
 		private class HdlOr : Gate {
+			private readonly HdlIOPin a;
+			private readonly HdlIOPin b;
+			private readonly HdlIOPin o;
+
 			public HdlOr(HdlContext hdlContext) : base(hdlContext, "Or") {
-				this.AddInput(new HdlIOPin(hdlContext, this, "a", 1));
-				this.AddInput(new HdlIOPin(hdlContext, this, "b", 1));
-				this.AddOutput(new HdlIOPin(hdlContext, this, "out", 1));
+				this.a = this.AddPin("a", 1, HdlIOPin.PinType.Input);
+				this.b = this.AddPin("b", 1, HdlIOPin.PinType.Input);
+				this.o = this.AddPin("out", 1, HdlIOPin.PinType.Output);
+			}
+
+			public override bool Evaluate(HdlState state) {
+				Debug.Assert(state.Chip == this);
+				int value = ((0 != state.Get(this.a)) || (0 != state.Get(this.b))) ? 1 : 0;
+				state.Set(o, value);
+				return base.Evaluate(state);
 			}
 		}
 
 		private class HdlXor : Gate {
+			private readonly HdlIOPin a;
+			private readonly HdlIOPin b;
+			private readonly HdlIOPin o;
+
 			public HdlXor(HdlContext hdlContext) : base(hdlContext, "Xor") {
-				this.AddInput(new HdlIOPin(hdlContext, this, "a", 1));
-				this.AddInput(new HdlIOPin(hdlContext, this, "b", 1));
-				this.AddOutput(new HdlIOPin(hdlContext, this, "out", 1));
+				this.a = this.AddPin("a", 1, HdlIOPin.PinType.Input);
+				this.b = this.AddPin("b", 1, HdlIOPin.PinType.Input);
+				this.o = this.AddPin("out", 1, HdlIOPin.PinType.Output);
+			}
+
+			public override bool Evaluate(HdlState state) {
+				Debug.Assert(state.Chip == this);
+				int value = ((0 != state.Get(this.a)) ^ (0 != state.Get(this.b))) ? 1 : 0;
+				state.Set(o, value);
+				return base.Evaluate(state);
 			}
 		}
 	}
