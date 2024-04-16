@@ -1,4 +1,6 @@
-﻿using LogicCircuit.UnitTest.HDL;
+﻿using System.Diagnostics;
+using LogicCircuit.UnitTest.HDL;
+using Microsoft.VisualStudio.TestTools.UnitTesting.STAExtensions;
 
 namespace LogicCircuit.UnitTest {
 	[TestClass]
@@ -8,7 +10,8 @@ namespace LogicCircuit.UnitTest {
 		[TestMethod]
 		public void TestParser() {
 			string file = @"C:\Projects\LogicCircuit\LogicCircuit\Temp\hdl\Merge3.hdl";
-			file = @"C:\Projects\LogicCircuit\LogicCircuit\Temp\hdl\Inverter.hdl";
+			//file = @"C:\Projects\LogicCircuit\LogicCircuit\Temp\hdl\Inverter.hdl";
+			file = @"C:\Projects\LogicCircuit\LogicCircuit\Temp\hdl\DInverter.hdl";
 			//file = @"C:\Projects\LogicCircuit\LogicCircuit\Temp\hdl\MergeSplit1_2.hdl";
 
 			string folder = Path.GetDirectoryName(file);
@@ -20,15 +23,51 @@ namespace LogicCircuit.UnitTest {
 				string text = state.Chip.ToString();
 				this.TestContext.WriteLine(text);
 
-				state.Set(state.Chip.Pin("x"), 1);
+				state.Set(null, state.Chip.Pin("x"), 1);
 				state.Chip.Evaluate(state);
-				int q = state.Get(state.Chip.Pin("q"));
+				int q = state.Get(null, state.Chip.Pin("q"));
+				Assert.AreEqual(1, q);
+
+				state.Set(null, state.Chip.Pin("x"), 0);
+				state.Chip.Evaluate(state);
+				q = state.Get(null, state.Chip.Pin("q"));
 				Assert.AreEqual(0, q);
 
-				state.Set(state.Chip.Pin("x"), 0);
-				state.Chip.Evaluate(state);
-				q = state.Get(state.Chip.Pin("q"));
-				Assert.AreEqual(1, q);
+				List<TruthState> list = state.BuildTruthTable();
+				Assert.IsTrue(0 < list.Count);
+			}
+		}
+
+		private void Message(string message) {
+			this.TestContext.WriteLine(message);
+			//Debug.WriteLine(message);
+		}
+
+		[STATestMethod]
+		public void TestOverall() {
+			string lcFile = """C:\Projects\CircuitProjects\HDLTests.CircuitProject""";
+			CircuitProject project = ProjectTester.Load(this.TestContext, File.ReadAllText(lcFile), null);
+			string hdlPath = Path.Combine(this.TestContext.TestRunDirectory, this.TestContext.TestName, "HDL");
+			if(!Directory.Exists(hdlPath)) {
+				Directory.CreateDirectory(hdlPath);
+			}
+			List<LogicalCircuit> circuits = project.LogicalCircuitSet.Where(c => c.Category == "Test").ToList();
+			foreach(LogicalCircuit circuit in circuits) {
+				ProjectTester.SwitchTo(project, circuit.Name);
+				N2TExport export = new N2TExport(false, false, this.Message, this.Message);
+				bool success = export.ExportCircuit(circuit, hdlPath, false);
+				Assert.IsTrue(success);
+				HdlContext context = new HdlContext(hdlPath, this.Message);
+				HdlState hdlState = context.Load(circuit.Name);
+				this.Message($"Circuit {circuit.Name} HDL:");
+				this.Message(hdlState.Chip.ToString());
+				List<TruthState> hdlTable = hdlState.BuildTruthTable();
+
+				CircuitTestSocket socket = new CircuitTestSocket(circuit);
+				IList<TruthState> lcTable = socket.BuildTruthTable(d => {}, () => true, s => true, 1 << circuit.Pins.Where(p => p.PinType == PinType.Input).Sum(p => p.BitWidth), out bool truncated);
+
+				bool same = TruthState.AreEqual(lcTable, hdlTable);
+				Assert.IsTrue(same);
 			}
 		}
 	}

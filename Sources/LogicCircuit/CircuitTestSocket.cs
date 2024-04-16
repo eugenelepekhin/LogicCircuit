@@ -308,6 +308,12 @@ namespace LogicCircuit {
 			return true;
 		}
 
+		public void Shortcut() {
+			if(this.output == null) {
+				this.output = new int[this.result.Length];
+			}
+		}
+
 		public string this[int index] {
 			get {
 				if(this.output != null) {
@@ -319,6 +325,20 @@ namespace LogicCircuit {
 				long res = this.result[index];
 				return CircuitFunction.ToText(Enumerable.Range(0, this.bitWidth[index]).Select(i => (State)((res >> i * 2) & 0x3)), false);
 			}
+		}
+
+		public bool Equals(TruthState other) {
+			return this.output != null && other.output != null && Enumerable.SequenceEqual(this.input, other.input) && Enumerable.SequenceEqual(this.output, other.output);
+		}
+
+		public static bool AreEqual(IList<TruthState> a, IList<TruthState> b) {
+			if(a.Count == b.Count) {
+				for(int i = 0; i < a.Count; i++) {
+					if(!a[i].Equals(b[i])) return false;
+				}
+				return true;
+			}
+			return false;
 		}
 	}
 }

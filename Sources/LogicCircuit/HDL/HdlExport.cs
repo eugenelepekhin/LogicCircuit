@@ -38,7 +38,7 @@ namespace LogicCircuit {
 			this.logError(text);
 		}
 
-        public bool ExportCircuit(LogicalCircuit circuit, string folder, bool onlyOne) {
+		public bool ExportCircuit(LogicalCircuit circuit, string folder, bool onlyOne) {
 			CircuitMap map = new CircuitMap(circuit);
 			ConnectionSet connectionSet = map.ConnectionSet();
 

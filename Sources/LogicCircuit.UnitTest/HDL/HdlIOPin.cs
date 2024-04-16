@@ -23,6 +23,14 @@ namespace LogicCircuit.UnitTest.HDL {
 			this.Type = type;
 		}
 
+		public HdlIOPin(HdlContext hdlContext, int index, string name, int bitWidth, PinType type) : base(hdlContext) {
+			Debug.Assert(0 < bitWidth);
+			this.Name = name;
+			this.BitWidth = bitWidth;
+			this.Index = index;
+			this.Type = type;
+		}
+
 		public override string ToString() {
 			return (1 != this.BitWidth) ? $"{this.Name}[{this.BitWidth}]" : this.Name;
 		}

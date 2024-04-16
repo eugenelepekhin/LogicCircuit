@@ -5,6 +5,7 @@ namespace LogicCircuit.UnitTest.HDL {
 		public static HdlChip CreateGate(HdlContext hdlContext, string gateName) {
 			switch(gateName) {
 			case "Nand":	return new HdlNand(hdlContext);
+			case "And":		return new HdlAnd(hdlContext);
 			case "Not":		return new HdlNot(hdlContext);
 			case "Or":		return new HdlOr(hdlContext);
 			case "Xor":		return new HdlXor(hdlContext);
@@ -33,8 +34,8 @@ namespace LogicCircuit.UnitTest.HDL {
 
 			public override bool Evaluate(HdlState state) {
 				Debug.Assert(state.Chip == this);
-				int value = ((0 != state.Get(this.a)) && (0 != state.Get(this.b))) ? 0 : 1;
-				state.Set(o, value);
+				int value = ((0 != state.Get(null, this.a)) && (0 != state.Get(null, this.b))) ? 0 : 1;
+				state.Set(null, o, value);
 				return base.Evaluate(state);
 			}
 		}
@@ -52,8 +53,8 @@ namespace LogicCircuit.UnitTest.HDL {
 
 			public override bool Evaluate(HdlState state) {
 				Debug.Assert(state.Chip == this);
-				int value = ((0 != state.Get(this.a)) && (0 != state.Get(this.b))) ? 1 : 0;
-				state.Set(o, value);
+				int value = ((0 != state.Get(null, this.a)) && (0 != state.Get(null, this.b))) ? 1 : 0;
+				state.Set(null, o, value);
 				return base.Evaluate(state);
 			}
 		}
@@ -69,10 +70,10 @@ namespace LogicCircuit.UnitTest.HDL {
 
 			public override bool Evaluate(HdlState state) {
 				Debug.Assert(state.Chip == this);
-				int value = (0 != state.Get(this.i)) ? 0 : 1;
-				int old = state.Get(this.o);
+				int value = (0 != state.Get(null, this.i)) ? 0 : 1;
+				int old = state.Get(null, this.o);
 				if(value != old) {
-					state.Set(this.o, value);
+					state.Set(null, this.o, value);
 					return true;
 				}
 				return false;
@@ -92,8 +93,8 @@ namespace LogicCircuit.UnitTest.HDL {
 
 			public override bool Evaluate(HdlState state) {
 				Debug.Assert(state.Chip == this);
-				int value = ((0 != state.Get(this.a)) || (0 != state.Get(this.b))) ? 1 : 0;
-				state.Set(o, value);
+				int value = ((0 != state.Get(null, this.a)) || (0 != state.Get(null, this.b))) ? 1 : 0;
+				state.Set(null, o, value);
 				return base.Evaluate(state);
 			}
 		}
@@ -111,8 +112,8 @@ namespace LogicCircuit.UnitTest.HDL {
 
 			public override bool Evaluate(HdlState state) {
 				Debug.Assert(state.Chip == this);
-				int value = ((0 != state.Get(this.a)) ^ (0 != state.Get(this.b))) ? 1 : 0;
-				state.Set(o, value);
+				int value = ((0 != state.Get(null, this.a)) ^ (0 != state.Get(null, this.b))) ? 1 : 0;
+				state.Set(null, o, value);
 				return base.Evaluate(state);
 			}
 		}

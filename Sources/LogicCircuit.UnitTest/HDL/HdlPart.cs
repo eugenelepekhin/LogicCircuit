@@ -4,17 +4,16 @@ using System.Runtime.CompilerServices;
 namespace LogicCircuit.UnitTest.HDL {
 	internal class HdlPart : HdlItem {
 		public class Connection {
+			public HdlPart Parent { get; }
 			public HdlJam Jam { get; }
 			public HdlIOPin JamsPin { get; private set; }
-			public bool JamIsOutput { get; private set; }
 			public int BitWidth { get; private set; }
 
 			public HdlJam Pin { get; }
 			public HdlIOPin PinsPin { get; private set; }
-			public bool PinIsOutput { get; private set; }
-			public bool PinIsInternal => this.PinsPin == null;
 
-			public Connection(HdlJam jam, HdlJam pin) {
+			public Connection(HdlPart parent, HdlJam jam, HdlJam pin) {
+				this.Parent = parent;
 				this.Jam = jam;
 				this.Pin = pin;
 			}
@@ -37,16 +36,8 @@ namespace LogicCircuit.UnitTest.HDL {
 					this.PinsPin = pin;
 					return true;
 				}
-				// Assuming internal pin
-				pin = this.JamsPin.Chip.Pin(this.Pin.Name);
-				if(pin == null) {
-					pin = this.JamsPin.Chip.AddPin(this.Pin.Name, this.BitWidth, HdlIOPin.PinType.Internal);
-				}
-				if(pin != null) {
-					this.PinsPin = pin;
-					return true;
-				}
-				return false;
+				// Assuming internal pin will be managed in HdlState
+				return true;
 			}
 		}
 
@@ -66,7 +57,7 @@ namespace LogicCircuit.UnitTest.HDL {
 		}
 
 		public void AddConnection(HdlJam jam, HdlJam pin) {
-			this.connections.Add(new Connection(jam, pin));
+			this.connections.Add(new Connection(this, jam, pin));
 		}
 
 		public bool Link() {

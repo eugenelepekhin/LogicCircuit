@@ -9,11 +9,9 @@ namespace LogicCircuit.UnitTest.HDL {
 		public int PinsCount => this.pins.Count;
 		public IEnumerable<HdlIOPin> Inputs => this.pins.Where(p => p.Type == HdlIOPin.PinType.Input);
 		public IEnumerable<HdlIOPin> Outputs => this.pins.Where(p => p.Type == HdlIOPin.PinType.Output);
-		public IEnumerable<HdlIOPin> Internals => this.pins.Where(p => p.Type == HdlIOPin.PinType.Internal);
 		public int InputsCount => this.Inputs.Count();
 		public int OutputsCount => this.Outputs.Count();
-		public int InternalsCount => this.Internals.Count();
-
+		public int InternalsCount { get; private set; }
 
 		private List<HdlPart> parts = new List<HdlPart>();
 		public IEnumerable<HdlPart > Parts => this.parts;
@@ -25,6 +23,7 @@ namespace LogicCircuit.UnitTest.HDL {
 		}
 
 		public HdlIOPin AddPin(string name, int bitWidth, HdlIOPin.PinType pinType) {
+			Debug.Assert(pinType == HdlIOPin.PinType.Input || pinType == HdlIOPin.PinType.Output);
 			if(this.pins.Any(p => p.Name == name)) {
 				this.HdlContext.Error($"Pin {name} redefined on chip {this.Name}");
 				return null;
@@ -48,6 +47,8 @@ namespace LogicCircuit.UnitTest.HDL {
 				foreach(HdlPart part in this.parts) {
 					success &= part.Link();
 				}
+				HashSet<string> internals = new HashSet<string>(this.parts.SelectMany(p => p.Connections.Where(c => c.PinsPin == null)).Select(c => c.Pin.Name));
+				this.InternalsCount = internals.Count;
 			}
 			return success;
 		}

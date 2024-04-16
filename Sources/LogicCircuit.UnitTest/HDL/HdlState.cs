@@ -8,16 +8,28 @@ namespace LogicCircuit.UnitTest.HDL {
 		private readonly int[] values;
 
 		private readonly HdlState[] states;
+		private readonly Dictionary<string, HdlIOPin> internalPins;
 
 		public HdlState(HdlContext context, HdlChip chip) {
 			this.Context = context;
 			this.Chip = chip;
-			this.values = new int[this.Chip.PinsCount];
+			this.values = new int[chip.PinsCount + chip.InternalsCount];
 			this.states = new HdlState[this.Chip.Parts.Count()];
+			if(0 < this.Chip.InternalsCount) {
+				this.internalPins = new Dictionary<string, HdlIOPin>();
+				int pinCount = chip.PinsCount;
+				foreach(HdlPart.Connection connection in chip.Parts.SelectMany(p => p.Connections.Where(c => c.PinsPin == null))) {
+					string name = connection.Pin.Name;
+					if(!this.internalPins.ContainsKey(name)) {
+						HdlIOPin pin = new HdlIOPin(context, pinCount + this.internalPins.Count, connection.Pin.Name, connection.BitWidth, HdlIOPin.PinType.Internal);
+						this.internalPins.Add(pin.Name, pin);
+					}
+				}
+			}
 		}
 
 		public HdlState PartState(HdlPart part) {
-			Debug.Assert(part.Parent == this.Chip);
+			Debug.Assert(part != null && part.Parent == this.Chip);
 			if(states[part.Index] == null) {
 				states[part.Index] = new HdlState(this.Context, part.Chip);
 			}
@@ -38,44 +50,83 @@ namespace LogicCircuit.UnitTest.HDL {
 		}
 		private static int GetBits(int value, int first, int last) => (value & HdlState.Mask(first, last)) >> first;
 
-		public void Set(HdlIOPin pin, int value) {
-			HdlState state = (pin.Chip == this.Chip) ? this : this.states.FirstOrDefault(s => s.Chip == pin.Chip);
-			state.values[pin.Index] = value;
+		public void Set(HdlPart part, HdlIOPin pin, int value) {
+			HdlState state = (pin.Chip == null || pin.Chip == this.Chip) ? this : this.PartState(part);
+			state.values[pin.Index] = ((1 << pin.BitWidth) - 1) & value;
 		}
-		public void Set(HdlIOPin pin, int value, int first, int last) {
-			HdlState state = (pin.Chip == this.Chip) ? this : this.states.FirstOrDefault(s => s.Chip == pin.Chip);
+		public void Set(HdlPart part, HdlIOPin pin, int value, int first, int last) {
+			HdlState state = (pin.Chip == null || pin.Chip == this.Chip) ? this : this.PartState(part);
 			HdlState.SetBits(ref state.values[pin.Index], value, first, last);
 		}
 
-		public int Get(HdlIOPin pin) {
-			HdlState state = (pin.Chip == this.Chip) ? this : this.states.FirstOrDefault(s => s.Chip == pin.Chip);
+		public int Get(HdlPart part, HdlIOPin pin) {
+			HdlState state = (pin.Chip == null || pin.Chip == this.Chip) ? this : this.PartState(part);
 			return state.values[pin.Index];
 		}
-		public int Get(HdlIOPin pin, int first, int last) {
-			HdlState state = (pin.Chip == this.Chip) ? this : this.states.FirstOrDefault(s => s.Chip == pin.Chip);
+		public int Get(HdlPart part, HdlIOPin pin, int first, int last) {
+			HdlState state = (pin.Chip == null || pin.Chip == this.Chip) ? this : this.PartState(part);
 			return HdlState.GetBits(state.values[pin.Index], first, last);
 		}
 
 		public bool Assign(HdlPart.Connection connection) {
-			int pinValue = connection.Pin.IsBitRange ? this.Get(connection.PinsPin, connection.Pin.First, connection.Pin.Last) : this.Get(connection.PinsPin);
-			int jamValue = connection.Jam.IsBitRange ? this.Get(connection.JamsPin, connection.Jam.First, connection.Jam.Last) : this.Get(connection.JamsPin);
+			int jamValue = connection.Jam.IsBitRange ? this.Get(connection.Parent, connection.JamsPin, connection.Jam.First, connection.Jam.Last) : this.Get(connection.Parent, connection.JamsPin);
+			HdlIOPin pin = connection.PinsPin;
+			if(pin == null) {
+				pin = this.internalPins[connection.Pin.Name];
+				Debug.Assert(pin != null);
+			}
+			int pinValue = connection.Pin.IsBitRange ? this.Get(connection.Parent, pin, connection.Pin.First, connection.Pin.Last) : this.Get(connection.Parent, pin);
 			if(pinValue != jamValue) {
 				if(connection.JamsPin.Type == HdlIOPin.PinType.Input) {
 					if(connection.Jam.IsBitRange) {
-						this.Set(connection.JamsPin, pinValue, connection.Jam.First, connection.Jam.Last);
+						this.Set(connection.Parent, connection.JamsPin, pinValue, connection.Jam.First, connection.Jam.Last);
 					} else {
-						this.Set(connection.JamsPin, pinValue);
+						this.Set(connection.Parent, connection.JamsPin, pinValue);
 					}
 				} else {
 					if(connection.Pin.IsBitRange) {
-						this.Set(connection.PinsPin, jamValue, connection.Pin.First, connection.Pin.Last);
+						this.Set(connection.Parent, pin, jamValue, connection.Pin.First, connection.Pin.Last);
 					} else {
-						this.Set(connection.PinsPin, jamValue);
+						this.Set(connection.Parent, pin, jamValue);
 					}
 				}
 				return true;
 			}
 			return false;
 		}
+
+		public List<TruthState> BuildTruthTable() {
+			List<HdlIOPin> inputs = this.Chip.Inputs.ToList();
+			int inputBits = inputs.Sum(i => i.BitWidth);
+			int outputBits = this.Chip.Outputs.Sum(i => i.BitWidth);
+			Debug.Assert(inputBits < 16, "Too many input bits");
+			List<TruthState> list = new List<TruthState>();
+			for(int i = 0; i < 1 << inputBits; i++) {
+				int first = 0;
+				int input = inputs.Count - 1;
+				TruthState truthState = new TruthState(inputBits, outputBits);
+				truthState.Shortcut();
+				foreach(HdlIOPin pin in inputs) {
+					int value = HdlState.GetBits(i, first, first + pin.BitWidth - 1);
+					first += pin.BitWidth;
+					this.Set(null, pin, value);
+					truthState.Input[input] = value;
+					input--;
+				}
+				this.Chip.Evaluate(this);
+				int output = 0;
+				foreach(HdlIOPin pin in this.Chip.Outputs) {
+					int value = this.Get(null, pin);
+					truthState.Output[output] = value;
+					output++;
+				}
+				list.Add(truthState);
+			}
+			return list;
+		}
+
+		#if DEBUG
+			public override string ToString() => $"State of {this.Chip.Name}";
+		#endif
 	}
 }
