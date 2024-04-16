@@ -46,10 +46,10 @@ namespace LogicCircuit.UnitTest {
 
 		[STATestMethod]
 		public void TestOverall() {
-			int Number(string text) {
-				Match match = Regex.Match(text, "[0-9]+");
+			double Number(string text) {
+				Match match = Regex.Match(text, @"[0-9]+(\.[0-9]+)?");
 				if(match.Success) {
-					return int.Parse(match.Value);
+					return double.Parse(match.Value);
 				}
 				return int.MaxValue;
 			}
@@ -60,7 +60,7 @@ namespace LogicCircuit.UnitTest {
 				Directory.CreateDirectory(hdlPath);
 			}
 			List<LogicalCircuit> circuits = project.LogicalCircuitSet.Where(c => c.Category == "Test").ToList();
-			circuits.Sort((a, b) => Number(a.Note) - Number(b.Note));
+			circuits.Sort((a, b) => Math.Sign(Number(a.Note) - Number(b.Note)));
 			foreach(LogicalCircuit circuit in circuits) {
 				ProjectTester.SwitchTo(project, circuit.Name);
 				N2TExport export = new N2TExport(false, false, this.Message, this.Message);
