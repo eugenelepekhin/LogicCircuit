@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Text.RegularExpressions;
 using LogicCircuit.UnitTest.HDL;
 using Microsoft.VisualStudio.TestTools.UnitTesting.STAExtensions;
 
@@ -45,13 +46,21 @@ namespace LogicCircuit.UnitTest {
 
 		[STATestMethod]
 		public void TestOverall() {
+			int Number(string text) {
+				Match match = Regex.Match(text, "[0-9]+");
+				if(match.Success) {
+					return int.Parse(match.Value);
+				}
+				return int.MaxValue;
+			}
 			string lcFile = """C:\Projects\CircuitProjects\HDLTests.CircuitProject""";
 			CircuitProject project = ProjectTester.Load(this.TestContext, File.ReadAllText(lcFile), null);
-			string hdlPath = Path.Combine(this.TestContext.TestRunDirectory, this.TestContext.TestName, "HDL");
+			string hdlPath = Path.Combine(this.TestContext.TestRunDirectory, this.TestContext.TestName);
 			if(!Directory.Exists(hdlPath)) {
 				Directory.CreateDirectory(hdlPath);
 			}
 			List<LogicalCircuit> circuits = project.LogicalCircuitSet.Where(c => c.Category == "Test").ToList();
+			circuits.Sort((a, b) => Number(a.Note) - Number(b.Note));
 			foreach(LogicalCircuit circuit in circuits) {
 				ProjectTester.SwitchTo(project, circuit.Name);
 				N2TExport export = new N2TExport(false, false, this.Message, this.Message);

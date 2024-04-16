@@ -23,6 +23,10 @@ namespace LogicCircuit.UnitTest.HDL {
 					if(!this.internalPins.ContainsKey(name)) {
 						HdlIOPin pin = new HdlIOPin(context, pinCount + this.internalPins.Count, connection.Pin.Name, connection.BitWidth, HdlIOPin.PinType.Internal);
 						this.internalPins.Add(pin.Name, pin);
+						if(name == "true") {
+							this.values[pin.Index] = 1;
+						//} else if(name == "false") { // it's already 0
+						}
 					}
 				}
 			}
@@ -97,14 +101,16 @@ namespace LogicCircuit.UnitTest.HDL {
 
 		public List<TruthState> BuildTruthTable() {
 			List<HdlIOPin> inputs = this.Chip.Inputs.ToList();
+			List<HdlIOPin> outputs = this.Chip.Outputs.ToList();
+			inputs.Reverse();
+			outputs.Reverse();
 			int inputBits = inputs.Sum(i => i.BitWidth);
-			int outputBits = this.Chip.Outputs.Sum(i => i.BitWidth);
 			Debug.Assert(inputBits < 16, "Too many input bits");
 			List<TruthState> list = new List<TruthState>();
 			for(int i = 0; i < 1 << inputBits; i++) {
 				int first = 0;
 				int input = inputs.Count - 1;
-				TruthState truthState = new TruthState(inputBits, outputBits);
+				TruthState truthState = new TruthState(inputs.Count, outputs.Count());
 				truthState.Shortcut();
 				foreach(HdlIOPin pin in inputs) {
 					int value = HdlState.GetBits(i, first, first + pin.BitWidth - 1);
@@ -114,11 +120,11 @@ namespace LogicCircuit.UnitTest.HDL {
 					input--;
 				}
 				this.Chip.Evaluate(this);
-				int output = 0;
-				foreach(HdlIOPin pin in this.Chip.Outputs) {
+				int output = outputs.Count() - 1;
+				foreach(HdlIOPin pin in outputs) {
 					int value = this.Get(null, pin);
 					truthState.Output[output] = value;
-					output++;
+					output--;
 				}
 				list.Add(truthState);
 			}

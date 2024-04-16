@@ -45,7 +45,7 @@ namespace LogicCircuit {
 			bool export(LogicalCircuit logicalCircuit) {
 				string file = this.FileName(logicalCircuit);
 				this.Message(Properties.Resources.MessageExportingHdl(logicalCircuit.Name, file));
-				Dictionary<CircuitSymbol, HdlSymbol> symbolMap = this.Collect(circuit, connectionSet);
+				Dictionary<CircuitSymbol, HdlSymbol> symbolMap = this.Collect(logicalCircuit, connectionSet);
 				if(0 < this.ErrorCount) return false;
 				string? hdl = this.ExportCircuit(logicalCircuit, symbolMap);
 				if(!string.IsNullOrEmpty(hdl)) {
@@ -59,15 +59,18 @@ namespace LogicCircuit {
 			}
 
 			bool walk(CircuitMap circuitMap, HashSet<LogicalCircuit> exported) {
-				if(exported.Add(circuitMap.Circuit) && export(circuitMap.Circuit)) {
-					foreach(CircuitMap child in circuitMap.Children) {
-						if(!walk(child, exported)) {
-							return false;
+				if(exported.Add(circuitMap.Circuit)) {
+					if(export(circuitMap.Circuit)) {
+						foreach(CircuitMap child in circuitMap.Children) {
+							if(!walk(child, exported)) {
+								return false;
+							}
 						}
+						return true;
 					}
-					return true;
+					return false;
 				}
-				return false;
+				return true;
 			}
 
 			if(onlyOne) {
@@ -180,16 +183,21 @@ namespace LogicCircuit {
 		}
 
 		private bool Validate(HdlTransformation transformation) {
-			bool valid = true;
 			Regex identifier = new Regex(@"^[a-zA-Z_][a-zA-Z_0-9]*$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
-			List<Jam> jams = new List<Jam>();
-			if(!identifier.IsMatch(transformation.Name)) {
+			HashSet<string> keywords = new HashSet<string>() { "CHIP", "PARTS", "IN", "OUT", "true", "false", };
+			bool isValid(string name) => identifier.IsMatch(name) && !keywords.Contains(name);
+
+			bool valid = true;
+
+			if(!isValid(transformation.Name)) {
 				this.Error($"Invalid name of the circuit {transformation.Name}");
 				valid = false;
 			}
+
+			List<Jam> jams = new List<Jam>();
 			foreach(HdlSymbol inputPin in transformation.InputPins) {
 				string name = inputPin.Name;
-				if(!identifier.IsMatch(name)) {
+				if(!isValid(name)) {
 					this.Error($"Invalid name of input pin: {name}");
 					valid = false;
 				}
@@ -203,7 +211,7 @@ namespace LogicCircuit {
 			}
 			foreach(HdlSymbol outputPin in transformation.OutputPins) {
 				string name = outputPin.Name;
-				if(!identifier.IsMatch(name)) {
+				if(!isValid(name)) {
 					this.Error($"Invalid name of output pin: {name}");
 					valid = false;
 				}
@@ -211,7 +219,7 @@ namespace LogicCircuit {
 			}
 			foreach(HdlSymbol symbol in transformation.Parts) {
 				string name = symbol.Name;
-				if(!identifier.IsMatch(name)) {
+				if(!isValid(name)) {
 					this.Error($"Invalid name of part: {name}");
 					valid = false;
 				}
