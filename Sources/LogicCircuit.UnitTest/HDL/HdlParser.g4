@@ -8,7 +8,7 @@ options {
 	#pragma warning disable 3021
 }
 
-chip: Chip chipName Begin inputPins? outputPins? Parts parts End;
+chip: Chip chipName Begin inputPins? outputPins? Parts parts End EOF;
 
 chipName: Identifier;
 
