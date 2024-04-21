@@ -63,7 +63,7 @@ namespace LogicCircuit {
 		private void FixBigGates(IList<HdlSymbol> parts) {
 			for(int i = 0; i < parts.Count; i++) {
 				HdlSymbol symbol = parts[i];
-				if(symbol.CircuitSymbol.Circuit is Gate gate && 2 < gate.Pins.Count()) {
+				if(symbol.CircuitSymbol.Circuit is Gate gate && 2 < gate.InputCount) {
 					parts.RemoveAt(i);
 					List<HdlSymbol> replacement = this.Replace(symbol);
 					for(int j = 0; j < replacement.Count; j++) {
