@@ -19,9 +19,5 @@ namespace LogicCircuit {
 			this.OutputPins = outputPins;
 			this.Parts = parts;
 		}
-
-		public virtual bool Validate(HdlExport hdlExport) {
-			return true;
-		}
 	}
 }

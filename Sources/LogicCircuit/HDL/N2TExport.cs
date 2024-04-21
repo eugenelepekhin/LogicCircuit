@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -8,6 +9,27 @@ using System.Text;
 using System.Threading;
 
 namespace LogicCircuit {
+
+	[SuppressMessage("Naming", "CA1710:Identifiers should have correct suffix")]
+	public class OneToMany<TOne, TMany> : Dictionary<TOne, IList<TMany>> where TOne : notnull {
+		public void Add(TOne key, TMany value) {
+			IList<TMany>? list;
+			if(!this.TryGetValue(key, out list)) {
+				list = new List<TMany>();
+				this.Add(key, list);
+			}
+			list.Add(value);
+		}
+
+		public bool Remove(TOne key, TMany value) {
+			IList<TMany>? list;
+			if(this.TryGetValue(key, out list)) {
+				return list.Remove(value);
+			}
+			return false;
+		}
+	}
+
 	/// <summary>
 	/// Nand to Tetris export.
 	/// </summary>
@@ -20,12 +42,14 @@ namespace LogicCircuit {
 		};
 
 		private readonly bool exportTests;
+		private CircuitProject? replacmentProject;
 
 		public N2TExport(bool exportTests, bool commentPoints, Action<string> logMessage, Action<string> logError) : base(commentPoints, logMessage, logError) {
 			this.exportTests = exportTests;
 		}
 
-		protected override HdlTransformation CreateTransformation(string name, IEnumerable<HdlSymbol> inputPins, IEnumerable<HdlSymbol> outputPins, IEnumerable<HdlSymbol> parts) {
+		protected override HdlTransformation? CreateTransformation(string name, IList<HdlSymbol> inputPins, IList<HdlSymbol> outputPins, IList<HdlSymbol> parts) {
+			this.FixBigGates(parts);
 			return new N2THdl(name, inputPins, outputPins, parts);
 		}
 
@@ -34,6 +58,137 @@ namespace LogicCircuit {
 				this.ExportN2TTest(logicalCircuit, folder);
 			}
 			return base.PostExport(logicalCircuit, folder);
+		}
+
+		private void FixBigGates(IList<HdlSymbol> parts) {
+			for(int i = 0; i < parts.Count; i++) {
+				HdlSymbol symbol = parts[i];
+				if(symbol.CircuitSymbol.Circuit is Gate gate && 2 < gate.Pins.Count()) {
+					parts.RemoveAt(i);
+					List<HdlSymbol> replacement = this.Replace(symbol);
+					for(int j = 0; j < replacement.Count; j++) {
+						parts.Insert(i + j, replacement[j]);
+					}
+					i += replacement.Count;
+				}
+			}
+		}
+
+		private List<HdlSymbol> Replace(HdlSymbol symbol) {
+			Jam OutputJam(HdlSymbol hdlSymbol) => hdlSymbol.CircuitSymbol.Jams().First(j => j.Pin.PinType == PinType.Output);
+			HdlSymbol? gate = null;
+			List<Jam> newInputs = new List<Jam>();
+			List<HdlSymbol> replacement = new List<HdlSymbol>();
+			int subindex = 0;
+			void AddGate(bool last) {
+				gate = this.ReplaceSymbol(symbol, last);
+				gate.Subindex = ++subindex;
+				newInputs.Clear();
+				newInputs.AddRange(gate.CircuitSymbol.Jams().Where(j => j.Pin.PinType == PinType.Input));
+				replacement.Add(gate);
+			}
+
+			List<HdlConnection> symbolOutputs = new List<HdlConnection>();
+			OneToMany<Jam, HdlConnection> symbolInputs = new OneToMany<Jam, HdlConnection>();
+			foreach(HdlConnection connection in symbol.HdlConnections()) {
+				if(connection.OutHdlSymbol == symbol) {
+					Debug.Assert(connection.OutJam.CircuitSymbol == symbol.CircuitSymbol && symbolOutputs.All(c => c.OutJam == connection.OutJam));
+					symbolOutputs.Add(connection);
+				} else {
+					Debug.Assert(connection.InJam.CircuitSymbol == symbol.CircuitSymbol);
+					symbolInputs.Add(connection.InJam, connection);
+				}
+			}
+			int inputIndex = 0;
+			foreach(Jam oldInput in symbolInputs.Keys) {
+				if((inputIndex & 1) == 0) {
+					AddGate(false);
+				} else {
+					gate = replacement[replacement.Count - 1];
+				}
+				Debug.Assert(gate != null);
+				foreach(HdlConnection oldConnection in symbolInputs[oldInput]) {
+					HdlConnection newConnection = oldConnection.CreateCopy(oldConnection.OutHdlSymbol, oldConnection.OutJam, gate, newInputs![inputIndex & 1]);
+					oldConnection.OutHdlSymbol.Replace(oldConnection, newConnection);
+					gate.Add(newConnection);
+				}
+				inputIndex++;
+			}
+			Debug.Assert(gate != null);
+			int waveStart = inputIndex & 1;
+			if(0 < waveStart) {
+				Debug.Assert(1 < replacement.Count);
+				HdlConnection.Create(replacement[0], replacement[replacement.Count - 1], new Connection(newInputs[1], OutputJam(replacement[0])));
+			}
+			int waveEnd = replacement.Count;
+			while(1 < waveEnd - waveStart) {
+				for(int i = 0; i < (waveEnd - waveStart) / 2; i++) {
+					AddGate(waveEnd - waveStart == 2);
+					HdlSymbol out1 = replacement[waveStart + i * 2];
+					HdlSymbol out2 = replacement[waveStart + i * 2 + 1];
+					HdlConnection.Create(out1, gate, new Connection(newInputs[0], OutputJam(out1)));
+					HdlConnection.Create(out2, gate, new Connection(newInputs[1], OutputJam(out2)));
+				}
+				if(((waveEnd - waveStart) & 1) != 0) {
+					AddGate(waveEnd - waveStart == 2);
+					HdlSymbol out1 = replacement[waveEnd - 1];
+					HdlSymbol out2 = replacement[waveEnd];
+					waveEnd++;
+					HdlConnection.Create(out1, gate, new Connection(newInputs[0], OutputJam(out1)));
+					HdlConnection.Create(out2, gate, new Connection(newInputs[1], OutputJam(out2)));
+				}
+				waveStart = waveEnd;
+				waveEnd = replacement.Count;
+			}
+			HdlSymbol last = replacement[replacement.Count - 1];
+			if(((Gate)(last.CircuitSymbol.Circuit)).InvertedOutput != ((Gate)symbol.CircuitSymbol.Circuit).InvertedOutput) {
+				Debug.Assert(symbol.CircuitSymbol.Circuit is Gate g && g.InvertedOutput && g.GateType != GateType.And);
+				HdlSymbol not = this.CreateSymbol(GateType.Not, true, symbol);
+				replacement.Add(not);
+				HdlConnection.Create(last, not, new Connection(not.CircuitSymbol.Jams().First(j => j.Pin.PinType == PinType.Input), OutputJam(last)));
+				last = not;
+			}
+			foreach(HdlConnection connection in symbolOutputs) {
+				HdlConnection connectionReplacement = connection.CreateCopy(last, OutputJam(last), connection.InHdlSymbol, connection.InJam);
+				connection.InHdlSymbol.Replace(connection, connectionReplacement);
+				last.Add(connectionReplacement);
+			}
+			last.Subindex = 0;
+
+			return replacement;
+		}
+
+		private HdlSymbol ReplaceSymbol(HdlSymbol symbol, bool final) {
+			Gate? gate = symbol.CircuitSymbol.Circuit as Gate;
+			Debug.Assert(gate != null);
+			switch(gate.GateType) {
+			case GateType.And:
+				break;
+			case GateType.Or:
+			case GateType.Xor:
+				final = false; // Nand to Tetris doesn't have Nor and NXor, so prevent it to be inverted.
+				break;
+			default:
+				throw new InvalidProgramException();
+			}
+			return this.CreateSymbol(gate.GateType, gate.InvertedOutput && final, symbol);
+		}
+
+		private HdlSymbol CreateSymbol(GateType gateType, bool inverted, HdlSymbol hdlSymbol) {
+			if(this.replacmentProject == null) {
+				this.replacmentProject = CircuitProject.Create(null);
+				this.replacmentProject.StartTransaction();
+			}
+
+			Gate gate = this.replacmentProject.GateSet.Gate(gateType, (gateType == GateType.Not) ? 1 : 2, inverted);
+
+			int dy = (((Gate)hdlSymbol.CircuitSymbol.Circuit).InputCount + 1) / 2 - 2;
+
+			CircuitSymbol symbol = this.replacmentProject.CircuitSymbolSet.Create(gate, this.replacmentProject.ProjectSet.Project.LogicalCircuit, hdlSymbol.CircuitSymbol.X, hdlSymbol.CircuitSymbol.Y + dy);
+			symbol.Rotation = hdlSymbol.CircuitSymbol.Rotation;
+			return new HdlSymbol(this, symbol) {
+				AutoGenerated = true
+			};
 		}
 
 		public override string Name(HdlSymbol symbol) {

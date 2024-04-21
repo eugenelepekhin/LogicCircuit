@@ -1,4 +1,6 @@
-﻿using System.Text.RegularExpressions;
+﻿// Ignore Spelling: Hdl
+
+using System.Text.RegularExpressions;
 using System.Xml;
 using LogicCircuit.UnitTest.HDL;
 using Microsoft.VisualStudio.TestTools.UnitTesting.STAExtensions;
@@ -8,6 +10,7 @@ namespace LogicCircuit.UnitTest {
 	[DeploymentItem(@"Properties\HDLTests.CircuitProject")]
 	public class HdlTest {
 		public TestContext TestContext { get; set; }
+		private CircuitProject circuitProject;
 
 		private void Message(string message) {
 			this.TestContext.WriteLine(message);
@@ -15,9 +18,11 @@ namespace LogicCircuit.UnitTest {
 		}
 
 		private CircuitProject LoadCircuitProject() {
-			string file = Path.Combine(this.TestContext.TestRunDirectory, "Out", "HDLTests.CircuitProject");
-			CircuitProject project = ProjectTester.Load(this.TestContext, File.ReadAllText(file), null);
-			return project;
+			if(this.circuitProject == null) {
+				string file = Path.Combine(this.TestContext.TestRunDirectory, "Out", "HDLTests.CircuitProject");
+				this.circuitProject = ProjectTester.Load(this.TestContext, File.ReadAllText(file), null);
+			}
+			return this.circuitProject;
 		}
 
 		private string HdlFolder() {

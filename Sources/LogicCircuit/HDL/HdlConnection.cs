@@ -97,6 +97,20 @@ namespace LogicCircuit {
 			this.inBits = new List<int>() { inBit };
 		}
 
+		private HdlConnection(HdlSymbol outSymbol, Jam outJam, List<int>? outBits, HdlSymbol inSymbol, Jam inJam, List<int>? inBits) {
+			this.OutHdlSymbol = outSymbol;
+			this.OutJam = outJam;
+			this.outBits = outBits;
+
+			this.InHdlSymbol = inSymbol;
+			this.InJam = inJam;
+			this.inBits = inBits;
+		}
+
+		public HdlConnection CreateCopy(HdlSymbol outSymbol, Jam outJam, HdlSymbol inSymbol, Jam inJam) {
+			return new HdlConnection(outSymbol, outJam, this.outBits, inSymbol, inJam, this.inBits);
+		}
+
 		public bool GenerateOutput(HdlSymbol symbol) => symbol != this.OutHdlSymbol || !this.SkipOutput;
 
 		public Jam SymbolJam(HdlSymbol symbol) {
@@ -152,16 +166,19 @@ namespace LogicCircuit {
 				return (value == 0) ? "false" : "true";
 			}
 			GridPoint point = this.OutJam.AbsolutePoint;
+			string pinName = string.Format(CultureInfo.InvariantCulture, "Pin{0}x{1}", point.X, point.Y);
 			if(this.IsBitRange(this.OutHdlSymbol)) {
 				bits = this.OutBits;
 				if(bits.First == bits.Last) {
-					return string.Format(CultureInfo.InvariantCulture, "Pin{0}x{1}_{2}", point.X, point.Y, bits.First);
+					pinName += string.Format(CultureInfo.InvariantCulture, "_{0}", bits.First);
 				} else {
-					return string.Format(CultureInfo.InvariantCulture, "Pin{0}x{1}_{2}_{3}", point.X, point.Y, bits.First, bits.Last);
+					pinName += string.Format(CultureInfo.InvariantCulture, "_{0}_{1}", bits.First, bits.Last);
 				}
-			} else {
-				return string.Format(CultureInfo.InvariantCulture, "Pin{0}x{1}", point.X, point.Y);
 			}
+			if(0 < this.OutHdlSymbol.Subindex) {
+				pinName += string.Format(CultureInfo.InvariantCulture, "v{0}", this.OutHdlSymbol.Subindex);
+			}
+			return pinName;
 		}
 
 		public bool ConnectsInputWithOutput() =>
