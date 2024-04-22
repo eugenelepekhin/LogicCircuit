@@ -108,7 +108,9 @@ namespace LogicCircuit {
 		}
 
 		public HdlConnection CreateCopy(HdlSymbol outSymbol, Jam outJam, HdlSymbol inSymbol, Jam inJam) {
-			return new HdlConnection(outSymbol, outJam, this.outBits, inSymbol, inJam, this.inBits);
+			return new HdlConnection(outSymbol, outJam, this.outBits, inSymbol, inJam, this.inBits) {
+				SkipOutput = this.SkipOutput
+			};
 		}
 
 		public bool GenerateOutput(HdlSymbol symbol) => symbol != this.OutHdlSymbol || !this.SkipOutput;

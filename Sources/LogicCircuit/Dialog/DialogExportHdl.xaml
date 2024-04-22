@@ -6,8 +6,8 @@
 	WindowStartupLocation="CenterOwner"
 	Title="{x:Static properties:Resources.TitleExportHdl}"
 	Style="{StaticResource DialogWindow}"
-	MinWidth="400"
-	MinHeight="300"
+	MinWidth="500"
+	MinHeight="350"
 >
 	<lc:AutoGrid Margin="3">
 		<Label Content="{x:Static properties:Resources.TitleExportType}"/>
@@ -18,7 +18,7 @@
 
 		<WrapPanel Grid.Column="1">
 			<CheckBox Content="{x:Static properties:Resources.TitleExportOnlyCurrent}" IsChecked="{Binding Path=OnlyCurrent}"/>
-			<CheckBox Content="Prepend comment with coordinates." IsChecked="{Binding Path=CommentPoints}"/>
+			<CheckBox Content="{x:Static properties:Resources.TitleAddComments}" IsChecked="{Binding Path=CommentPoints}"/>
 		</WrapPanel>
 
 		<Label Content="{x:Static properties:Resources.TitleLog}"/>

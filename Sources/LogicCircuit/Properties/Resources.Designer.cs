@@ -3236,5 +3236,82 @@ namespace LogicCircuit.Properties {
  		public static string TitleLog {
 			get { return ResourceManager.GetString("TitleLog", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Invalid name of the circuit: {0}..
+		/// </summary>
+ 		public static string ErrorHdlCircuitName(string name) {
+			return string.Format(FormatCulture, ResourceManager.GetString("ErrorHdlCircuitName", Culture), name);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Unsupported circuit {0}{1}..
+		/// </summary>
+ 		public static string ErrorHdlCircuitUnsupported(string circuitName, GridPoint point) {
+			return string.Format(FormatCulture, ResourceManager.GetString("ErrorHdlCircuitUnsupported", Culture), circuitName, point);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Invalid name of input pin: {0}..
+		/// </summary>
+ 		public static string ErrorHdlInputPinName(string name) {
+			return string.Format(FormatCulture, ResourceManager.GetString("ErrorHdlInputPinName", Culture), name);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Jam {0} on {1}{2} collocated with jam {3} on {4}{5}..
+		/// </summary>
+ 		public static string ErrorHdlJamsColocated(string jam1Name, string circuit1Name, GridPoint circuit1Point, string jam2Name, string circuit2Name, GridPoint circuit2Point) {
+			return string.Format(FormatCulture, ResourceManager.GetString("ErrorHdlJamsColocated", Culture), jam1Name, circuit1Name, circuit1Point, jam2Name, circuit2Name, circuit2Point);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Invalid name of output pin: {0}..
+		/// </summary>
+ 		public static string ErrorHdlOutputPinName(string name) {
+			return string.Format(FormatCulture, ResourceManager.GetString("ErrorHdlOutputPinName", Culture), name);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Invalid name of part: {0}..
+		/// </summary>
+ 		public static string ErrorHdlPartName(string name) {
+			return string.Format(FormatCulture, ResourceManager.GetString("ErrorHdlPartName", Culture), name);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Pin {0} connected directly to pin {1}..
+		/// </summary>
+ 		public static string ErrorHdlPinDirectConnect(string name1, string name2) {
+			return string.Format(FormatCulture, ResourceManager.GetString("ErrorHdlPinDirectConnect", Culture), name1, name2);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to From Nand to Tetris HDL.
+		/// </summary>
+ 		public static string HdlExportN2T {
+			get { return ResourceManager.GetString("HdlExportN2T", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to From Nand to Tetris HDL & test files.
+		/// </summary>
+ 		public static string HdlExportN2TandTests {
+			get { return ResourceManager.GetString("HdlExportN2TandTests", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Circuit {0} exported with {1} error(s)..
+		/// </summary>
+ 		public static string MessageHdlExportResut(string circuitName, int errorCount) {
+			return string.Format(FormatCulture, ResourceManager.GetString("MessageHdlExportResut", Culture), circuitName, errorCount);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Prepend comments with symbol coordinates.
+		/// </summary>
+ 		public static string TitleAddComments {
+			get { return ResourceManager.GetString("TitleAddComments", Culture); }
+		}
 	}
 }

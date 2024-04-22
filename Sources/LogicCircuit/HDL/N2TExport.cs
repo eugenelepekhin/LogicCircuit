@@ -61,15 +61,22 @@ namespace LogicCircuit {
 		}
 
 		private void FixBigGates(IList<HdlSymbol> parts) {
+			bool NeedReplacement(HdlSymbol symbol) {
+				if(symbol.CircuitSymbol.Circuit is Gate gate) {
+					return 2 < gate.InputCount || gate.InvertedOutput && (gate.GateType == GateType.Or || gate.GateType == GateType.Xor);
+				}
+				return false;
+			}
+
 			for(int i = 0; i < parts.Count; i++) {
 				HdlSymbol symbol = parts[i];
-				if(symbol.CircuitSymbol.Circuit is Gate gate && 2 < gate.InputCount) {
+				if(NeedReplacement(symbol)) {
 					parts.RemoveAt(i);
 					List<HdlSymbol> replacement = this.Replace(symbol);
 					for(int j = 0; j < replacement.Count; j++) {
 						parts.Insert(i + j, replacement[j]);
 					}
-					i += replacement.Count;
+					i += replacement.Count - 1;
 				}
 			}
 		}
@@ -167,6 +174,9 @@ namespace LogicCircuit {
 			case GateType.Or:
 			case GateType.Xor:
 				final = false; // Nand to Tetris doesn't have Nor and NXor, so prevent it to be inverted.
+				break;
+			case GateType.Not:
+				final = true;
 				break;
 			default:
 				throw new InvalidProgramException();
@@ -280,7 +290,7 @@ namespace LogicCircuit {
 				int index = 0;
 				foreach(string input in inputs) {
 					script.AppendLine(CultureInfo.InvariantCulture, $"set {input} {state.Input[index]},");
-					expect.Append(CultureInfo.InvariantCulture, $"|{formatExpect(state.Input[index].ToString(CultureInfo.InvariantCulture))}");
+					expect.Append(CultureInfo.InvariantCulture, $"|{formatExpect(state.Input[index].ToString("x", CultureInfo.InvariantCulture))}");
 					index++;
 				}
 				script.AppendLine("eval,");

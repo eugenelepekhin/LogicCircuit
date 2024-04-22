@@ -22,11 +22,15 @@ namespace LogicCircuit {
 		private readonly LogicalCircuit logicalCircuit;
 
 		public IEnumerable<EnumDescriptor<HdlExportType>> ExportTypes { get; } = new EnumDescriptor<HdlExportType>[] {
-			new EnumDescriptor<HdlExportType>(HdlExportType.N2T, "From Nand to Tetris HDL"),
-			new EnumDescriptor<HdlExportType>(HdlExportType.N2TFull, "From Nand to Tetris HDL & test files"),
+			new EnumDescriptor<HdlExportType>(HdlExportType.N2T, Properties.Resources.HdlExportN2T),
+			new EnumDescriptor<HdlExportType>(HdlExportType.N2TFull, Properties.Resources.HdlExportN2TandTests),
 		};
 
-		private readonly SettingsEnumCache<HdlExportType> selectedExportType = new SettingsEnumCache<HdlExportType>(Settings.User, nameof(DialogExportHdl) + "." + nameof(SelectedExportType), HdlExportType.N2T);
+		private readonly SettingsEnumCache<HdlExportType> selectedExportType = new SettingsEnumCache<HdlExportType>(
+			Settings.User,
+			nameof(DialogExportHdl) + "." + nameof(SelectedExportType),
+			HdlExportType.N2T
+		);
 		public EnumDescriptor<HdlExportType> SelectedExportType {
 			get => this.ExportTypes.First(item => item.Value == this.selectedExportType.Value);
 			set => this.selectedExportType.Value = value.Value;
