@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿// Ignore Spelling: Hdl
+
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
 namespace LogicCircuit.UnitTest.HDL {
@@ -23,6 +25,9 @@ namespace LogicCircuit.UnitTest.HDL {
 				if(pin != null) {
 					this.JamsPin = pin;
 					this.BitWidth = (this.Jam.IsBitRange) ? 1 + this.Jam.Last - this.Jam.First : pin.BitWidth;
+					if(pin.BitWidth < this.BitWidth) {
+						chip.HdlContext.Error($"Specified range [{this.Jam.First}..{this.Jam.Last}] is bigger than pin's {pin.Name} bit width [{pin.BitWidth}] on part {this.Parent.Name}");
+					}
 					return true;
 				} else {
 					chip.HdlContext.Error($"Pin {this.Jam.Name} not found on chip {chip.Name}");

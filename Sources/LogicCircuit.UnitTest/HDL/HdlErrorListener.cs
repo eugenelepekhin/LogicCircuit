@@ -1,4 +1,6 @@
-﻿using Antlr4.Runtime;
+﻿// Ignore Spelling: Hdl
+
+using Antlr4.Runtime;
 using Antlr4.Runtime.Misc;
 
 namespace LogicCircuit.UnitTest.HDL {

@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿// Ignore Spelling: Hdl
+
+using System.Diagnostics;
 using Antlr4.Runtime;
 
 namespace LogicCircuit.UnitTest.HDL {
@@ -30,14 +32,6 @@ namespace LogicCircuit.UnitTest.HDL {
 
 			HdlChip chip = this.Chip(chipName);
 			if(chip.Link() && !this.HasLoop(chip, chip)) {
-				//HdlPart part = new HdlPart(this, null, chip.Name, 0);
-				//foreach(HdlIOPin pin in chip.Inputs) {
-				//	part.AddConnection(new HdlJam(this, pin.Name), new HdlJam(this, "Temp" + pin.Name));
-				//}
-				//foreach(HdlIOPin pin in chip.Outputs) {
-				//	part.AddConnection(new HdlJam(this, pin.Name), new HdlJam(this, "Temp" + pin.Name));
-				//}
-				//part.Link(null);
 				return new HdlState(this, chip);
 			}
 			return null;

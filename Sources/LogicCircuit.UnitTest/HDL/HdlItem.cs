@@ -1,4 +1,6 @@
-﻿namespace LogicCircuit.UnitTest.HDL {
+﻿// Ignore Spelling: Hdl
+
+namespace LogicCircuit.UnitTest.HDL {
 	internal class HdlItem {
 		public HdlContext HdlContext { get; }
 

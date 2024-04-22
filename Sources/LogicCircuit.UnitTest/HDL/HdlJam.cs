@@ -1,4 +1,4 @@
-﻿using System.Runtime.CompilerServices;
+﻿// Ignore Spelling: Hdl
 
 namespace LogicCircuit.UnitTest.HDL {
 	internal class HdlJam : HdlItem {

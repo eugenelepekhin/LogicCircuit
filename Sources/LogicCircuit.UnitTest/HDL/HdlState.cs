@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿// Ignore Spelling: Hdl
+
+using System.Diagnostics;
 
 namespace LogicCircuit.UnitTest.HDL {
 	internal class HdlState {
@@ -107,7 +109,7 @@ namespace LogicCircuit.UnitTest.HDL {
 			int inputBits = inputs.Sum(i => i.BitWidth);
 			Debug.Assert(inputBits < 16, "Too many input bits");
 			List<TruthState> list = new List<TruthState>();
-			for(int i = 0; i < 1 << inputBits; i++) {
+			for(int i = 0; i < (1 << inputBits); i++) {
 				int first = 0;
 				int input = inputs.Count - 1;
 				TruthState truthState = new TruthState(inputs.Count, outputs.Count());

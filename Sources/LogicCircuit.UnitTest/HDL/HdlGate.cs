@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿// Ignore Spelling: Hdl Nand Xor
+
+using System.Diagnostics;
 
 namespace LogicCircuit.UnitTest.HDL {
 	internal static class HdlGate {

@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿// Ignore Spelling: HDL
+
+using System.Diagnostics;
 
 namespace LogicCircuit.UnitTest.HDL {
 	internal class HdlChip : HdlItem {
