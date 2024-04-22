@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -10,7 +9,6 @@ using System.Threading;
 
 namespace LogicCircuit {
 
-	[SuppressMessage("Naming", "CA1710:Identifiers should have correct suffix")]
 	public class OneToMany<TOne, TMany> : Dictionary<TOne, IList<TMany>> where TOne : notnull {
 		public void Add(TOne key, TMany value) {
 			IList<TMany>? list;
@@ -149,7 +147,7 @@ namespace LogicCircuit {
 			}
 			HdlSymbol last = replacement[replacement.Count - 1];
 			if(((Gate)(last.CircuitSymbol.Circuit)).InvertedOutput != ((Gate)symbol.CircuitSymbol.Circuit).InvertedOutput) {
-				Debug.Assert(symbol.CircuitSymbol.Circuit is Gate g && g.InvertedOutput && g.GateType != GateType.And);
+				Debug.Assert(symbol.CircuitSymbol.Circuit is Gate g && g.InvertedOutput && g.GateType != GateType.And && g.GateType != GateType.Not);
 				HdlSymbol not = this.CreateSymbol(GateType.Not, true, symbol);
 				replacement.Add(not);
 				HdlConnection.Create(last, not, new Connection(not.CircuitSymbol.Jams().First(j => j.Pin.PinType == PinType.Input), OutputJam(last)));
@@ -174,9 +172,6 @@ namespace LogicCircuit {
 			case GateType.Or:
 			case GateType.Xor:
 				final = false; // Nand to Tetris doesn't have Nor and NXor, so prevent it to be inverted.
-				break;
-			case GateType.Not:
-				final = true;
 				break;
 			default:
 				throw new InvalidProgramException();

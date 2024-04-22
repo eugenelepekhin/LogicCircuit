@@ -124,16 +124,8 @@ namespace LogicCircuit {
 			}
 		}
 
-		public Jam OtherJam(HdlSymbol symbol) {
-			Debug.Assert(symbol == this.OutHdlSymbol || symbol == this.InHdlSymbol);
-			if(symbol == this.OutHdlSymbol) {
-				return this.InJam;
-			} else {
-				return this.OutJam;
-			}
-		}
-
 		public string SymbolJamName(HdlSymbol symbol) {
+			Debug.Assert(symbol == this.OutHdlSymbol || symbol == this.InHdlSymbol);
 			Debug.Assert(symbol.CircuitSymbol.Circuit is not Pin);
 			Jam jam = this.SymbolJam(symbol);
 			string name = this.OutHdlSymbol.HdlExport.Name(jam);
@@ -145,14 +137,17 @@ namespace LogicCircuit {
 		}
 
 		public string PinName(HdlSymbol symbol) {
-			Jam jam = this.OtherJam(symbol);
+			Debug.Assert(symbol == this.OutHdlSymbol || symbol == this.InHdlSymbol);
 			HdlSymbol other;
+			Jam jam;
 			BitRange bits;
 			if(symbol == this.OutHdlSymbol) {
 				other = this.InHdlSymbol;
+				jam = this.InJam;
 				bits = this.InBits;
 			} else {
 				other = this.OutHdlSymbol;
+				jam = this.OutJam;
 				bits = this.OutBits;
 			}
 			if(jam.CircuitSymbol.Circuit is Pin pin) {
@@ -170,11 +165,11 @@ namespace LogicCircuit {
 			GridPoint point = this.OutJam.AbsolutePoint;
 			string pinName = string.Format(CultureInfo.InvariantCulture, "Pin{0}x{1}", point.X, point.Y);
 			if(this.IsBitRange(this.OutHdlSymbol)) {
-				bits = this.OutBits;
-				if(bits.First == bits.Last) {
-					pinName += string.Format(CultureInfo.InvariantCulture, "_{0}", bits.First);
+				BitRange outBits = this.OutBits;
+				if(outBits.First == outBits.Last) {
+					pinName += string.Format(CultureInfo.InvariantCulture, "_{0}", outBits.First);
 				} else {
-					pinName += string.Format(CultureInfo.InvariantCulture, "_{0}_{1}", bits.First, bits.Last);
+					pinName += string.Format(CultureInfo.InvariantCulture, "_{0}_{1}", outBits.First, outBits.Last);
 				}
 			}
 			if(0 < this.OutHdlSymbol.Subindex) {

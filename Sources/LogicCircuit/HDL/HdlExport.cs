@@ -13,7 +13,7 @@ namespace LogicCircuit {
 
 		private readonly Action<string> logMessage;
 		private readonly Action<string> logError;
-		public int ErrorCount { get; private set; }
+		private int ErrorCount { get; set; }
 
 		protected HdlExport(bool commentPoints, Action<string> logMessage, Action<string> logError) {
 			this.CommentPoints = commentPoints;
@@ -30,10 +30,10 @@ namespace LogicCircuit {
 		public virtual string Name(HdlSymbol symbol) => symbol.CircuitSymbol.Circuit.Name.Trim();
 		public virtual string Name(Jam jam) => jam.Pin.Name.Trim();
 
-		public void Message(string text) => this.logMessage(text);
+		private void Message(string text) => this.logMessage(text);
 		protected void DispatchMessage(string message) => App.Dispatch(() => this.Message(message));
 
-		public void Error(string text) {
+		private void Error(string text) {
 			this.ErrorCount++;
 			this.logError(text);
 		}
