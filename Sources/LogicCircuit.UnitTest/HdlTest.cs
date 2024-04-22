@@ -44,11 +44,10 @@ namespace LogicCircuit.UnitTest {
 			circuits.Sort((a, b) => Math.Sign(Number(a.Note) - Number(b.Note)));
 		}
 
-		[STATestMethod]
-		public void HdlTestTruthTables() {
+		private void RunTruthTableComparisonForCategory(string category) {
 			CircuitProject project = this.LoadCircuitProject();
 			string hdlPath = this.HdlFolder();
-			List<LogicalCircuit> circuits = project.LogicalCircuitSet.Where(c => c.Category == "Test").ToList();
+			List<LogicalCircuit> circuits = project.LogicalCircuitSet.Where(c => c.Category == category).ToList();
 			this.SortByNote(circuits);
 			foreach(LogicalCircuit circuit in circuits) {
 				ProjectTester.SwitchTo(project, circuit.Name);
@@ -67,6 +66,11 @@ namespace LogicCircuit.UnitTest {
 				bool same = TruthState.AreEqual(lcTable, hdlTable);
 				Assert.IsTrue(same);
 			}
+		}
+
+		[STATestMethod]
+		public void HdlTestTruthTables() {
+			this.RunTruthTableComparisonForCategory("Test");
 		}
 
 		[STATestMethod]
@@ -102,27 +106,7 @@ namespace LogicCircuit.UnitTest {
 
 		[STATestMethod]
 		public void HdlTestMultiInputGates() {
-			CircuitProject project = this.LoadCircuitProject();
-			string hdlPath = this.HdlFolder();
-			List<LogicalCircuit> circuits = project.LogicalCircuitSet.Where(c => c.Category == "BigGates").ToList();
-			this.SortByNote(circuits);
-			foreach(LogicalCircuit circuit in circuits) {
-				ProjectTester.SwitchTo(project, circuit.Name);
-				N2TExport export = new N2TExport(false, false, this.Message, this.Message);
-				bool success = export.ExportCircuit(circuit, hdlPath, false);
-				Assert.IsTrue(success);
-				HdlContext context = new HdlContext(hdlPath, this.Message);
-				HdlState hdlState = context.Load(circuit.Name);
-				this.Message($"Circuit {circuit.Name} HDL:");
-				this.Message(hdlState.Chip.ToString());
-				List<TruthState> hdlTable = hdlState.BuildTruthTable();
-
-				CircuitTestSocket socket = new CircuitTestSocket(circuit);
-				IList<TruthState> lcTable = socket.BuildTruthTable(d => {}, () => true, s => true, 1 << circuit.Pins.Where(p => p.PinType == PinType.Input).Sum(p => p.BitWidth), out bool truncated);
-
-				bool same = TruthState.AreEqual(lcTable, hdlTable);
-				Assert.IsTrue(same);
-			}
+			this.RunTruthTableComparisonForCategory("BigGates");
 		}
 	}
 }

@@ -64,10 +64,10 @@ namespace LogicCircuit {
 			try {
 				e.Handled = true;
 				this.log.Clear();
-				void message(string text) {
+				void message(string text) => App.Dispatch(() => {
 					this.log.Text += text;
 					this.log.Text += "\n";
-				}
+				});
 				HdlExport? hdl = null;
 				switch(this.SelectedExportType.Value) {
 				case HdlExportType.N2T:

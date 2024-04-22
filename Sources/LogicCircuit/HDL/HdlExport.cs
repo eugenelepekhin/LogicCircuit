@@ -30,8 +30,7 @@ namespace LogicCircuit {
 		public virtual string Name(HdlSymbol symbol) => symbol.CircuitSymbol.Circuit.Name.Trim();
 		public virtual string Name(Jam jam) => jam.Pin.Name.Trim();
 
-		private void Message(string text) => this.logMessage(text);
-		protected void DispatchMessage(string message) => App.Dispatch(() => this.Message(message));
+		protected void Message(string text) => this.logMessage(text);
 
 		private void Error(string text) {
 			this.ErrorCount++;
