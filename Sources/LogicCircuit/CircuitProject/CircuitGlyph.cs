@@ -176,7 +176,7 @@ namespace LogicCircuit {
 				}
 				string toolTip = jam.Pin.ToolTip;
 				#if DEBUG
-					toolTip += "\n" + jam.AbsolutePoint.ToString();
+					toolTip += "\nDebug only: " + jam.AbsolutePoint.ToString();
 				#endif
 				ellipse.ToolTip = toolTip;
 				string jamNotation = jam.Pin.JamNotation;
