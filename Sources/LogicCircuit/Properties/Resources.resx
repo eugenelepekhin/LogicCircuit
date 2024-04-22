@@ -1612,4 +1612,19 @@ Do you want to load auto saved state of this file?</value>
   <data name="TitleAddComments" xml:space="preserve">
     <value>Prepend comments with symbol coordinates</value>
   </data>
+  <data name="ErrorHdlTruthTableFailed" xml:space="preserve">
+    <value>Failed to build truth table.</value>
+  </data>
+  <data name="MessageHdlBuildingTruthTable" xml:space="preserve">
+    <value>Building truth table for {0} {1:f1}% done</value>
+    <comment>{string circuitName, double progress}</comment>
+  </data>
+  <data name="MessageHdlSavingCmpFile" xml:space="preserve">
+    <value>Saving .cmp file {0}</value>
+    <comment>{string cmpFileName}</comment>
+  </data>
+  <data name="MessageHdlSavingTestFile" xml:space="preserve">
+    <value>Saving test file {0}</value>
+    <comment>{string testFileName}</comment>
+  </data>
 </root>

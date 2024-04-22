@@ -3313,5 +3313,33 @@ namespace LogicCircuit.Properties {
  		public static string TitleAddComments {
 			get { return ResourceManager.GetString("TitleAddComments", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Failed to build truth table..
+		/// </summary>
+ 		public static string ErrorHdlTruthTableFailed {
+			get { return ResourceManager.GetString("ErrorHdlTruthTableFailed", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Building truth table for {0} {1:f1}% done.
+		/// </summary>
+ 		public static string MessageHdlBuildingTruthTable(string circuitName, double progress) {
+			return string.Format(FormatCulture, ResourceManager.GetString("MessageHdlBuildingTruthTable", Culture), circuitName, progress);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Saving .cmp file {0}.
+		/// </summary>
+ 		public static string MessageHdlSavingCmpFile(string cmpFileName) {
+			return string.Format(FormatCulture, ResourceManager.GetString("MessageHdlSavingCmpFile", Culture), cmpFileName);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Saving test file {0}.
+		/// </summary>
+ 		public static string MessageHdlSavingTestFile(string testFileName) {
+			return string.Format(FormatCulture, ResourceManager.GetString("MessageHdlSavingTestFile", Culture), testFileName);
+		}
 	}
 }

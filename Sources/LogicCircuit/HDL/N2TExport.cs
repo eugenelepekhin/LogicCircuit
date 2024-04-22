@@ -217,14 +217,14 @@ namespace LogicCircuit {
 		private void ExportN2TTest(LogicalCircuit circuit, string folder) {
 			CircuitTestSocket socket = new CircuitTestSocket(circuit);
 			
-			void reportProgress(double progress) => this.DispatchMessage($"Building truth table for {circuit.Name} {progress:f1}% done");
+			void reportProgress(double progress) => this.DispatchMessage(Properties.Resources.MessageHdlBuildingTruthTable(circuit.Name, progress));
 
 			ThreadPool.QueueUserWorkItem(o => {
 				try {
 					bool isTrancated = false;
 					IList<TruthState>? table = socket.BuildTruthTable(reportProgress, () => true, null, DialogTruthTable.MaxRows, out isTrancated);
 					if (table == null || isTrancated) {
-						this.DispatchMessage("Failed to build truth table.");
+						this.DispatchMessage(Properties.Resources.ErrorHdlTruthTableFailed);
 					} else {
 						this.ExportN2TTest(
 							circuit.Name,
@@ -301,11 +301,11 @@ namespace LogicCircuit {
 
 			string testFile = Path.Combine(folder, circuitName + ".tst");
 			File.WriteAllText(testFile, script.ToString());
-			this.DispatchMessage($"Saving test file {testFile}");
+			this.DispatchMessage(Properties.Resources.MessageHdlSavingTestFile(testFile));
 
 			string cmpFile = Path.Combine(folder, circuitName + ".cmp");
 			File.WriteAllText(cmpFile, expect.ToString());
-			this.DispatchMessage($"Saving .cmp file {cmpFile}");
+			this.DispatchMessage(Properties.Resources.MessageHdlSavingCmpFile(cmpFile));
 		}
 	}
 }
