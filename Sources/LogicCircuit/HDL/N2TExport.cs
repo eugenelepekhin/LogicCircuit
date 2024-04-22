@@ -293,7 +293,7 @@ namespace LogicCircuit {
 				script.AppendLine();
 				index = 0;
 				foreach(string output in outputs) {
-					expect.Append(CultureInfo.InvariantCulture, $"|{formatExpect(state[index].ToString(CultureInfo.InvariantCulture))}");
+					expect.Append(CultureInfo.InvariantCulture, $"|{formatExpect(state.Output[index].ToString("x", CultureInfo.InvariantCulture))}");
 					index++;
 				}
 				expect.AppendLine("|");

@@ -167,9 +167,9 @@ namespace LogicCircuit {
 			if(this.IsBitRange(this.OutHdlSymbol)) {
 				BitRange outBits = this.OutBits;
 				if(outBits.First == outBits.Last) {
-					pinName += string.Format(CultureInfo.InvariantCulture, "_{0}", outBits.First);
+					pinName += string.Format(CultureInfo.InvariantCulture, "b{0}", outBits.First);
 				} else {
-					pinName += string.Format(CultureInfo.InvariantCulture, "_{0}_{1}", outBits.First, outBits.Last);
+					pinName += string.Format(CultureInfo.InvariantCulture, "s{0}e{1}", outBits.First, outBits.Last);
 				}
 			}
 			if(0 < this.OutHdlSymbol.Subindex) {

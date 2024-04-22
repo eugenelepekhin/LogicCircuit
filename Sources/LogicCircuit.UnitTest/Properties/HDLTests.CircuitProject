@@ -2,13 +2,16 @@
 <lc:CircuitProject xmlns:lc="http://LogicCircuit.net/2.0.0.11/CircuitProject.xsd">
 	<lc:Project>
 		<lc:ProjectId>3c9ea24f-ae0e-4025-a3e3-4d45dfffa44f</lc:ProjectId>
-		<lc:LogicalCircuitId>e73421c8-c720-4b86-baa3-67877c512e79</lc:LogicalCircuitId>
+		<lc:LogicalCircuitId>e92b45f9-d293-4e70-9b22-9f0195962ad9</lc:LogicalCircuitId>
 	</lc:Project>
 	<lc:CollapsedCategory>
 		<lc:Name>Test</lc:Name>
 	</lc:CollapsedCategory>
 	<lc:CollapsedCategory>
 		<lc:Name>Error</lc:Name>
+	</lc:CollapsedCategory>
+	<lc:CollapsedCategory>
+		<lc:Name>BigGates</lc:Name>
 	</lc:CollapsedCategory>
 	<lc:LogicalCircuit>
 		<lc:LogicalCircuitId>d8a958a8-3441-44aa-8466-d966ba1362bd</lc:LogicalCircuitId>
@@ -96,8 +99,8 @@
 	</lc:LogicalCircuit>
 	<lc:LogicalCircuit>
 		<lc:LogicalCircuitId>e92b45f9-d293-4e70-9b22-9f0195962ad9</lc:LogicalCircuitId>
-		<lc:Name>Split4_2</lc:Name>
-		<lc:Notation>s4_2</lc:Notation>
+		<lc:Name>Split4v2</lc:Name>
+		<lc:Notation>s4v2</lc:Notation>
 		<lc:Note>13</lc:Note>
 		<lc:Category>Test</lc:Category>
 	</lc:LogicalCircuit>

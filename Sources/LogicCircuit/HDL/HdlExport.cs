@@ -182,7 +182,7 @@ namespace LogicCircuit {
 		}
 
 		private bool Validate(HdlTransformation transformation) {
-			Regex identifier = new Regex(@"^[a-zA-Z_][a-zA-Z_0-9]*$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
+			Regex identifier = new Regex(@"^[a-zA-Z][a-zA-Z0-9]*$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
 			HashSet<string> keywords = new HashSet<string>() { "CHIP", "PARTS", "IN", "OUT", "true", "false", };
 			bool isValid(string name) => identifier.IsMatch(name) && !keywords.Contains(name);
 

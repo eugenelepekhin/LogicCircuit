@@ -24,7 +24,7 @@ Identifier: Letter (Letter | DecDigit)*;
 DecNumber: '0' | (NonzeroDigit DecDigit*);
 
 fragment
-Letter: [_a-zA-Z];
+Letter: [a-zA-Z];
 
 fragment
 DecDigit: [0-9];
