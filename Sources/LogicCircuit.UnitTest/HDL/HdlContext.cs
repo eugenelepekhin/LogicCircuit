@@ -31,7 +31,7 @@ namespace LogicCircuit.UnitTest.HDL {
 			Debug.Assert(0 == this.chips.Count);
 
 			HdlChip chip = this.Chip(chipName);
-			if(chip.Link() && !this.HasLoop(chip, chip)) {
+			if(chip.Link() && !this.HasLoop(chip)) {
 				return new HdlState(this, chip);
 			}
 			return null;
@@ -64,18 +64,22 @@ namespace LogicCircuit.UnitTest.HDL {
 			return gate;
 		}
 
-		// TODO: this is wrong rewrite it.
-		private bool HasLoop(HdlChip chip, HdlChip root) {
-			foreach(HdlPart part in chip.Parts) {
-				if(part.Chip == root) {
-					this.Error($"Chip {root.Name} is using itself directly or indirectly.");
+		private bool HasLoop(HdlChip chip) {
+			HashSet<string> loop = new HashSet<string>();
+			bool visit(HdlChip chip) {
+				if(loop.Add(chip.Name)) {
+					foreach(HdlPart part in chip.Parts) {
+						if(!visit(part.Chip)) {
+							return false;
+						}
+					}
+					loop.Remove(chip.Name);
 					return true;
 				}
-				if(this.HasLoop(part.Chip, root) || this.HasLoop(part.Chip, part.Chip)) {
-					return true;
-				}
+				this.Error($"Chip {chip.Name} is using itself as a part directly or indirectly.");
+				return false;
 			}
-			return false;
+			return !visit(chip);
 		}
 
 		private HdlChip Parse(string file) {
