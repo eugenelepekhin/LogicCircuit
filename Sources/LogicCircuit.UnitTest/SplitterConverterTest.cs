@@ -17,17 +17,19 @@ namespace LogicCircuit.UnitTest {
 		/// A test of Clock function
 		/// </summary>
 		[STATestMethod]
+		[DeploymentItem("Properties\\Splitter Conversion.CircuitProject")]
 		public void SplitterConvertionTest() {
-			string projectText = Properties.Resources.SplitterConversion;
+			string file = "Splitter Conversion.CircuitProject";
+			string projectText = File.ReadAllText(Path.Combine(this.TestContext.DeploymentDirectory, file));
 			this.AssertFileVersion(projectText);
-			this.AssertConversion(projectText, "Test1");
-			this.AssertConversion(projectText, "Test2");
-			this.AssertConversion(projectText, "Test3");
-			this.AssertConversion(projectText, "Test4");
+			this.AssertConversion(file, "Test1");
+			this.AssertConversion(file, "Test2");
+			this.AssertConversion(file, "Test3");
+			this.AssertConversion(file, "Test4");
 		}
 
-		private void AssertConversion(string projectText, string initialCircuit) {
-			TestSocket test = new TestSocket(new ProjectTester(this.TestContext, projectText, initialCircuit));
+		private void AssertConversion(string file, string initialCircuit) {
+			TestSocket test = new TestSocket(new ProjectTester(ProjectTester.LoadDeployedFile(this.TestContext, file, initialCircuit)));
 			test.Tester.CircuitProject.InTransaction(() => {
 				for(int i = 0; i < test.Tester.Input.Length; i++) {
 					int bitWidth = test.Tester.Input[i].BitWidth;

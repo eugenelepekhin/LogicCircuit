@@ -18,13 +18,15 @@ namespace LogicCircuit.UnitTest {
 		/// A test for LoadRecord
 		/// </summary>
 		[STATestMethod]
+		[DeploymentItem("Properties\\XmlLoadReadElementTextTest.CircuitProject")]
 		public void XmlLoadReadElementTextTest() {
-			string text = Properties.Resources.XmlLoadReadElementTextTest;
+			string file = "XmlLoadReadElementTextTest.CircuitProject";
+			string text = File.ReadAllText(Path.Combine(this.TestContext.DeploymentDirectory, file));
 			XmlDocument xml = new XmlDocument();
 			xml.LoadXml(text);
 			Assert.AreEqual(@"http://LogicCircuit.net/1.0.0.2/CircuitProject.xsd", xml.DocumentElement.NamespaceURI);
 
-			CircuitProject circuitProject = ProjectTester.Load(this.TestContext, text, null);
+			CircuitProject circuitProject = ProjectTester.LoadDeployedFile(this.TestContext, file, null);
 			Assert.IsNotNull(circuitProject);
 
 			Assert.AreEqual(1, circuitProject.CircuitButtonSet.Count());

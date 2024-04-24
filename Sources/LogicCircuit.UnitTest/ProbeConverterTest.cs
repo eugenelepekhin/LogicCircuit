@@ -14,10 +14,12 @@ namespace LogicCircuit.UnitTest {
 		public TestContext TestContext { get; set; }
 
 		[STATestMethod]
+		[DeploymentItem("Properties\\ProbeConvertTest.CircuitProject")]
 		public void ProbeConvertionTest() {
-			string projectText = Properties.Resources.ProbeConvertTest;
+			string file = "ProbeConvertTest.CircuitProject";
+			string projectText = File.ReadAllText(Path.Combine(this.TestContext.DeploymentDirectory, file));
 			this.AssertFileVersion(projectText);
-			ProjectTester tester = new ProjectTester(this.TestContext, projectText, null);
+			ProjectTester tester = new ProjectTester(ProjectTester.LoadDeployedFile(this.TestContext, file, null));
 			Assert.AreEqual<int>(3, tester.CircuitProject.CircuitProbeSet.Count(), "Expecting 3 probes");
 			Assert.AreEqual(3, tester.CircuitProject.CircuitSymbolSet.Where(symbol => symbol.Circuit is CircuitProbe).Count(), "Expecting 3 probe symbols");
 			List<CircuitSymbol> symbols = tester.CircuitProject.CircuitProbeSet.Select(probe => tester.CircuitProject.CircuitSymbolSet.SelectByCircuit(probe).First()).ToList();

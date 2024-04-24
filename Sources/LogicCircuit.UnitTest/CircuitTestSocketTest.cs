@@ -6,6 +6,7 @@ namespace LogicCircuit.UnitTest {
 	/// to contain all CircuitTestSocket Unit Tests
 	/// </summary>
 	[STATestClass]
+	[DeploymentItem("Properties\\CircuitTestSocketTest.CircuitProject")]
 	public class CircuitTestSocketTest {
 		/// <summary>
 		/// Gets or sets the test context which provides
@@ -17,7 +18,7 @@ namespace LogicCircuit.UnitTest {
 		private CircuitProject CircuitProject {
 			get {
 				if(CircuitTestSocketTest.project == null) {
-					CircuitTestSocketTest.project = ProjectTester.Load(this.TestContext, Properties.Resources.CircuitTestSocketTest, null);
+					CircuitTestSocketTest.project = ProjectTester.LoadDeployedFile(this.TestContext, "CircuitTestSocketTest.CircuitProject", null);
 				}
 				return CircuitTestSocketTest.project;
 			}

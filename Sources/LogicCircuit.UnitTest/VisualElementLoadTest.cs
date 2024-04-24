@@ -16,8 +16,9 @@ namespace LogicCircuit.UnitTest {
 		/// A test for ProjectTester
 		/// </summary>
 		[STATestMethod]
+		[DeploymentItem("Properties\\VisualElementLoadTest.CircuitProject")]
 		public void VisualElementLoadProjectTesterTest() {
-			ProjectTester tester = new ProjectTester(this.TestContext, Properties.Resources.VisualElementLoadTest, null);
+			ProjectTester tester = new ProjectTester(ProjectTester.LoadDeployedFile(this.TestContext, "VisualElementLoadTest.CircuitProject", null));
 			Assert.AreEqual(1, tester.Input.Length);
 			Assert.AreEqual(1, tester.Output.Length);
 			Assert.IsTrue(tester.Input.All(f => f != null));

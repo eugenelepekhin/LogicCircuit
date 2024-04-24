@@ -81,6 +81,7 @@ namespace LogicCircuit.UnitTest {
 		/// A test of saving/loading roundtrip
 		/// </summary>
 		[STATestMethod]
+		[DeploymentItem("Properties\\Digital Clock.CircuitProject")]
 		public void CircuitProjectSaveLoadTest() {
 			string dir = Path.Combine(this.TestContext.TestRunDirectory, this.TestContext.TestName + DateTime.UtcNow.Ticks, "Some Test Sub Directory");
 			string file = Path.Combine(dir, "My Test File.CircuitProject");
@@ -102,7 +103,7 @@ namespace LogicCircuit.UnitTest {
 			Assert.IsTrue(ProjectTester.Equal(project1, project2));
 
 			// save in existing folder and existing file.
-			CircuitProject project3 = ProjectTester.Load(this.TestContext, Properties.Resources.Digital_Clock, null);
+			CircuitProject project3 = ProjectTester.LoadDeployedFile(this.TestContext, "Digital Clock.CircuitProject", null);
 			Assert.IsTrue(File.Exists(file));
 			project3.Save(file);
 			CircuitProject project4 = CircuitProject.Create(file);

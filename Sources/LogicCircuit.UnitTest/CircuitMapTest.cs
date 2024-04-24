@@ -15,7 +15,7 @@ namespace LogicCircuit.UnitTest {
 		public TestContext TestContext { get; set; }
 
 		private void CircuitMapPerfTest(string project, string initialCircuit, int maxCount, int maxSeconds) {
-			CircuitProject circuitProject = ProjectTester.Load(this.TestContext, project, initialCircuit);
+			CircuitProject circuitProject = ProjectTester.LoadDeployedFile(this.TestContext, project, initialCircuit);
 			Stopwatch stopwatch = new Stopwatch();
 			stopwatch.Start();
 			for(int i = 0; i < maxCount; i++) {
@@ -33,17 +33,19 @@ namespace LogicCircuit.UnitTest {
 		///A test for Apply
 		///</summary>
 		[TestMethod()]
+		[DeploymentItem("Properties\\IntegerCalculator.CircuitProject")]
 		public void CircuitMapApplyPerfTest1() {
 			Console.WriteLine(Thread.CurrentThread.GetApartmentState());
-			this.CircuitMapPerfTest(Properties.Resources.IntegerCalculator, "Test Computer", 50, 15);
+			this.CircuitMapPerfTest("IntegerCalculator.CircuitProject", "Test Computer", 50, 15);
 		}
 
 		/// <summary>
 		///A test for Apply
 		///</summary>
 		[TestMethod()]
+		[DeploymentItem("Properties\\ExternalCalculator.CircuitProject")]
 		public void CircuitMapApplyPerfTest2() {
-			this.CircuitMapPerfTest(Properties.Resources.ExternalCalculator, "Main", 50, 20);
+			this.CircuitMapPerfTest("ExternalCalculator.CircuitProject", "Main", 50, 20);
 		}
 
 		private void CircuitMapCleanUpTest(CircuitProject circuitProject, string logicalCircuitName, int expectedFunctions) {
@@ -59,8 +61,9 @@ namespace LogicCircuit.UnitTest {
 		///A test for Correctness of clean up of gates with all output disconnected.
 		///</summary>
 		[TestMethod()]
+		[DeploymentItem("Properties\\CircuitMapCleanUpTest.CircuitProject")]
 		public void CircuitMapCleanUpTest() {
-			CircuitProject circuitProject = ProjectTester.Load(this.TestContext, Properties.Resources.CircuitMapCleanUpTest, null);
+			CircuitProject circuitProject = ProjectTester.LoadDeployedFile(this.TestContext, "CircuitMapCleanUpTest.CircuitProject", null);
 
 			this.CircuitMapCleanUpTest(circuitProject, "1. Empty 1", 0);
 			Assert.AreEqual(0, circuitProject.ProjectSet.Project.LogicalCircuit.CircuitSymbols().Count());
@@ -76,8 +79,9 @@ namespace LogicCircuit.UnitTest {
 		}
 
 		[TestMethod()]
+		[DeploymentItem("Properties\\CircuitMapTests.CircuitProject")]
 		public void CircuitMapDeepWireLoopTest() {
-			ProjectTester tester = new ProjectTester(this.TestContext, Properties.Resources.CircuitMapTests, "DeepWireLoopTest");
+			ProjectTester tester = new ProjectTester(ProjectTester.LoadDeployedFile(this.TestContext, "CircuitMapTests.CircuitProject", "DeepWireLoopTest"));
 			InputSocket input = new InputSocket(tester.Input[0]);
 			OutputSocket target = new OutputSocket(tester.Output[0]);
 			Action<int> test = value => {

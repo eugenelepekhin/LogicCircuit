@@ -19,8 +19,7 @@ namespace LogicCircuit.UnitTest {
 
 		private CircuitProject LoadCircuitProject() {
 			if(this.circuitProject == null) {
-				string file = Path.Combine(this.TestContext.TestRunDirectory, "Out", "HDLTests.CircuitProject");
-				this.circuitProject = ProjectTester.Load(this.TestContext, File.ReadAllText(file), null);
+				this.circuitProject = ProjectTester.LoadDeployedFile(this.TestContext, "HDLTests.CircuitProject", null);
 			}
 			return this.circuitProject;
 		}

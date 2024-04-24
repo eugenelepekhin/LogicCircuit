@@ -530,8 +530,9 @@ namespace LogicCircuit.UnitTest {
 		/// A test for Parse of primary expression - name of input or output pin
 		/// </summary>
 		[STATestMethod]
+		[DeploymentItem("Properties\\Digital Clock.CircuitProject")]
 		public void ExpressionParserVariableParseTest() {
-			CircuitProject project = ProjectTester.Load(this.TestContext, Properties.Resources.Digital_Clock, "4 bit adder");
+			CircuitProject project = ProjectTester.LoadDeployedFile(this.TestContext, "Digital Clock.CircuitProject", "4 bit adder");
 			CircuitTestSocket socket = new CircuitTestSocket(project.ProjectSet.Project.LogicalCircuit);
 			ExpressionParser parser = new ExpressionParser(socket);
 			TruthState state = new TruthState(socket.Inputs.Count(), socket.Outputs.Count());
@@ -563,8 +564,9 @@ namespace LogicCircuit.UnitTest {
 		/// A test for Parse of primary expression - case sensitivity of name of input or output pin
 		/// </summary>
 		[STATestMethod]
+		[DeploymentItem("Properties\\Digital Clock.CircuitProject")]
 		public void ExpressionParserVariableCaseParseTest() {
-			CircuitProject project = ProjectTester.Load(this.TestContext, Properties.Resources.Digital_Clock, "4 bit adder");
+			CircuitProject project = ProjectTester.LoadDeployedFile(this.TestContext, "Digital Clock.CircuitProject", "4 bit adder");
 			Pin x1 = null, x2 = null, s = null, c = null;
 
 			foreach(Pin pin in project.PinSet.SelectByCircuit(project.ProjectSet.Project.LogicalCircuit)) {

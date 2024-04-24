@@ -18,8 +18,9 @@ namespace LogicCircuit.UnitTest {
 		/// A test of Digital Clock circuit
 		/// </summary>
 		[STATestMethod]
+		[DeploymentItem("Properties\\Digital Clock.CircuitProject")]
 		public void CircuitDigitalClockTest() {
-			ClockSocket clock = new ClockSocket(new ProjectTester(this.TestContext, Properties.Resources.Digital_Clock, "Unit Test"));
+			ClockSocket clock = new ClockSocket(new ProjectTester(ProjectTester.LoadDeployedFile(this.TestContext, "Digital Clock.CircuitProject", "Unit Test")));
 			TimeSpan timeSpan = TimeSpan.Zero;
 			int days = 2;
 			clock.Tester.CircuitProject.InTransaction(() => {

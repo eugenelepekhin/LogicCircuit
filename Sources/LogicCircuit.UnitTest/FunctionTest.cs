@@ -5,6 +5,7 @@ namespace LogicCircuit.UnitTest {
 	/// This is a test class for all functions testing.
 	///</summary>
 	[STATestClass]
+	[DeploymentItem("Properties\\FunctionTest.CircuitProject")]
 	public class FunctionTest {
 		/// <summary>
 		///Gets or sets the test context which provides
@@ -12,12 +13,16 @@ namespace LogicCircuit.UnitTest {
 		///</summary>
 		public TestContext TestContext { get; set; }
 
+		private FunctionSocket Socket(string initialCircuit) {
+			return new FunctionSocket(new ProjectTester(ProjectTester.LoadDeployedFile(this.TestContext, "FunctionTest.CircuitProject", initialCircuit)));
+		}
+
 		/// <summary>
 		/// A test of Clock function
 		/// </summary>
 		[TestMethod()]
 		public void FunctionClockTest() {
-			FunctionSocket test = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "ClockTest"));
+			FunctionSocket test = this.Socket("ClockTest");
 			test.Execute(() => {
 				// Clock always starting from 1
 				test.Verify(State.On1);
@@ -34,7 +39,7 @@ namespace LogicCircuit.UnitTest {
 		/// </summary>
 		[STATestMethod]
 		public void FunctionTriStateTest() {
-			FunctionSocket test1 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "TriState1Test"));
+			FunctionSocket test1 = this.Socket("TriState1Test");
 			test1.Execute(() => {
 				test1.Verify(State.On0, 0, 1);
 				test1.Verify(State.On1, 1, 1);
@@ -43,7 +48,7 @@ namespace LogicCircuit.UnitTest {
 				test1.Verify(State.Off, 1, 0);
 			});
 
-			FunctionSocket test2 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "TriState2Test"));
+			FunctionSocket test2 = this.Socket("TriState2Test");
 			test2.Execute(() => {
 				test2.Verify(State.On0, 1, 0);
 				test2.Verify(State.On1, 1, 1);
@@ -52,7 +57,7 @@ namespace LogicCircuit.UnitTest {
 				test2.Verify(State.Off, 0, 1);
 			});
 
-			FunctionSocket test3 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "TriState1MultyTest"));
+			FunctionSocket test3 = this.Socket("TriState1MultyTest");
 			test3.Execute(() => {
 				test3.Verify(State.On0, 0, 1, 0, 1, 0, 1);
 				test3.Verify(State.On0, 1, 1, 0, 1, 0, 1);
@@ -69,7 +74,7 @@ namespace LogicCircuit.UnitTest {
 				test3.Verify(State.Off, 0, 0, 0, 0, 0, 0);
 			});
 
-			FunctionSocket test4 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "TriState2MultyTest"));
+			FunctionSocket test4 = this.Socket("TriState2MultyTest");
 			test4.Execute(() => {
 				test4.Verify(State.On0, 1, 0, 1, 0, 1, 0);
 				test4.Verify(State.On0, 1, 1, 1, 0, 1, 0);
@@ -86,7 +91,7 @@ namespace LogicCircuit.UnitTest {
 				test4.Verify(State.Off, 0, 0, 0, 0, 0, 0);
 			});
 
-			FunctionSocket test5 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "TriState12MultyTest"));
+			FunctionSocket test5 = this.Socket("TriState12MultyTest");
 			test5.Execute(() => {
 				test5.Verify(State.Off, 0, 0, 0, 0);
 				test5.Verify(State.Off, 0, 1, 1, 0);
@@ -105,7 +110,7 @@ namespace LogicCircuit.UnitTest {
 		/// </summary>
 		[STATestMethod]
 		public void FunctionNotTest() {
-			FunctionSocket test = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "NotTest"));
+			FunctionSocket test = this.Socket("NotTest");
 			test.Execute(() => {
 				test.Verify(State.On1, 0, 1);
 				test.Verify(State.On0, 1, 1);
@@ -120,7 +125,7 @@ namespace LogicCircuit.UnitTest {
 		/// </summary>
 		[TestMethod()]
 		public void FunctionAndTest() {
-			FunctionSocket test2 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "And2Test"));
+			FunctionSocket test2 = this.Socket("And2Test");
 			test2.Execute(() => {
 				test2.Verify(State.On0, 0, 1, 0, 1);
 				test2.Verify(State.On0, 1, 1, 0, 1);
@@ -132,7 +137,7 @@ namespace LogicCircuit.UnitTest {
 				test2.Verify(State.On1, 0, 0, 0, 0);
 			});
 
-			FunctionSocket test3 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "And3Test"));
+			FunctionSocket test3 = this.Socket("And3Test");
 			test3.Execute(() => {
 				test3.Verify(State.On0, 0, 1, 0, 1, 0, 1);
 				test3.Verify(State.On0, 1, 1, 0, 1, 0, 1);
@@ -155,7 +160,7 @@ namespace LogicCircuit.UnitTest {
 		/// </summary>
 		[STATestMethod]
 		public void FunctionNAndTest() {
-			FunctionSocket test2 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "And2NotTest"));
+			FunctionSocket test2 = this.Socket("And2NotTest");
 			test2.Execute(() => {
 				test2.Verify(State.On1, 0, 1, 0, 1);
 				test2.Verify(State.On1, 1, 1, 0, 1);
@@ -167,7 +172,7 @@ namespace LogicCircuit.UnitTest {
 				test2.Verify(State.On0, 0, 0, 0, 0);
 			});
 
-			FunctionSocket test3 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "And3NotTest"));
+			FunctionSocket test3 = this.Socket("And3NotTest");
 			test3.Execute(() => {
 				test3.Verify(State.On1, 0, 1, 0, 1, 0, 1);
 				test3.Verify(State.On1, 1, 1, 0, 1, 0, 1);
@@ -190,7 +195,7 @@ namespace LogicCircuit.UnitTest {
 		/// </summary>
 		[STATestMethod]
 		public void FunctionOrTest() {
-			FunctionSocket test2 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "Or2Test"));
+			FunctionSocket test2 = this.Socket("Or2Test");
 			test2.Execute(() => {
 				test2.Verify(State.On0, 0, 1, 0, 1);
 				test2.Verify(State.On1, 1, 1, 0, 1);
@@ -202,7 +207,7 @@ namespace LogicCircuit.UnitTest {
 				test2.Verify(State.On0, 0, 0, 0, 0);
 			});
 
-			FunctionSocket test3 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "Or3Test"));
+			FunctionSocket test3 = this.Socket("Or3Test");
 			test3.Execute(() => {
 				test3.Verify(State.On0, 0, 1, 0, 1, 0, 1);
 				test3.Verify(State.On1, 1, 1, 0, 1, 0, 1);
@@ -225,7 +230,7 @@ namespace LogicCircuit.UnitTest {
 		/// </summary>
 		[STATestMethod]
 		public void FunctionNOrTest() {
-			FunctionSocket test2 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "Or2NotTest"));
+			FunctionSocket test2 = this.Socket("Or2NotTest");
 			test2.Execute(() => {
 				test2.Verify(State.On1, 0, 1, 0, 1);
 				test2.Verify(State.On0, 1, 1, 0, 1);
@@ -237,7 +242,7 @@ namespace LogicCircuit.UnitTest {
 				test2.Verify(State.On1, 0, 0, 0, 0);
 			});
 
-			FunctionSocket test3 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "Or3NotTest"));
+			FunctionSocket test3 = this.Socket("Or3NotTest");
 			test3.Execute(() => {
 				test3.Verify(State.On1, 0, 1, 0, 1, 0, 1);
 				test3.Verify(State.On0, 1, 1, 0, 1, 0, 1);
@@ -260,7 +265,7 @@ namespace LogicCircuit.UnitTest {
 		/// </summary>
 		[STATestMethod]
 		public void FunctionXorTest() {
-			FunctionSocket test2 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "Xor2Test"));
+			FunctionSocket test2 = this.Socket("Xor2Test");
 			test2.Execute(() => {
 				test2.Verify(State.On0, 0, 1, 0, 1);
 				test2.Verify(State.On1, 1, 1, 0, 1);
@@ -272,7 +277,7 @@ namespace LogicCircuit.UnitTest {
 				test2.Verify(State.On0, 0, 0, 0, 0);
 			});
 
-			FunctionSocket test3 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "Xor3Test"));
+			FunctionSocket test3 = this.Socket("Xor3Test");
 			test3.Execute(() => {
 				test3.Verify(State.On0, 0, 1, 0, 1, 0, 1);
 				test3.Verify(State.On1, 1, 1, 0, 1, 0, 1);
@@ -295,7 +300,7 @@ namespace LogicCircuit.UnitTest {
 		/// </summary>
 		[STATestMethod]
 		public void FunctionXNorTest() {
-			FunctionSocket test2 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "Xor2NotTest"));
+			FunctionSocket test2 = this.Socket("Xor2NotTest");
 			test2.Execute(() => {
 				test2.Verify(State.On1, 0, 1, 0, 1);
 				test2.Verify(State.On0, 1, 1, 0, 1);
@@ -307,7 +312,7 @@ namespace LogicCircuit.UnitTest {
 				test2.Verify(State.On1, 0, 0, 0, 0);
 			});
 
-			FunctionSocket test3 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "Xor3NotTest"));
+			FunctionSocket test3 = this.Socket("Xor3NotTest");
 			test3.Execute(() => {
 				test3.Verify(State.On1, 0, 1, 0, 1, 0, 1);
 				test3.Verify(State.On0, 1, 1, 0, 1, 0, 1);
@@ -330,7 +335,7 @@ namespace LogicCircuit.UnitTest {
 		/// </summary>
 		[STATestMethod]
 		public void FunctionEvenTest() {
-			FunctionSocket test2 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "Even2Test"));
+			FunctionSocket test2 = this.Socket("Even2Test");
 			test2.Execute(() => {
 				test2.Verify(State.On1, 0, 1, 0, 1);
 				test2.Verify(State.On0, 1, 1, 0, 1);
@@ -342,7 +347,7 @@ namespace LogicCircuit.UnitTest {
 				test2.Verify(State.On1, 0, 0, 0, 0);
 			});
 
-			FunctionSocket test3 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "Even3Test"));
+			FunctionSocket test3 = this.Socket("Even3Test");
 			test3.Execute(() => {
 				test3.Verify(State.On1, 0, 1, 0, 1, 0, 1);
 				test3.Verify(State.On0, 1, 1, 0, 1, 0, 1);
@@ -365,7 +370,7 @@ namespace LogicCircuit.UnitTest {
 		/// </summary>
 		[STATestMethod]
 		public void FunctionOddTest() {
-			FunctionSocket test2 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "Odd2Test"));
+			FunctionSocket test2 = this.Socket("Odd2Test");
 			test2.Execute(() => {
 				test2.Verify(State.On0, 0, 1, 0, 1);
 				test2.Verify(State.On1, 1, 1, 0, 1);
@@ -377,7 +382,7 @@ namespace LogicCircuit.UnitTest {
 				test2.Verify(State.On0, 0, 0, 0, 0);
 			});
 
-			FunctionSocket test3 = new FunctionSocket(new ProjectTester(this.TestContext, Properties.Resources.FunctionTest, "Odd3Test"));
+			FunctionSocket test3 = this.Socket("Odd3Test");
 			test3.Execute(() => {
 				test3.Verify(State.On0, 0, 1, 0, 1, 0, 1);
 				test3.Verify(State.On1, 1, 1, 0, 1, 0, 1);

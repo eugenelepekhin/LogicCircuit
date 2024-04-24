@@ -2,8 +2,13 @@
 
 namespace LogicCircuit.UnitTest {
 	[STATestClass]
+	[DeploymentItem("Properties\\SensorTests.CircuitProject")]
 	public class SensorTest {
 		public TestContext TestContext { get; set; }
+
+		private ProjectTester Tester(string initialCircuit) {
+			return new ProjectTester(ProjectTester.LoadDeployedFile(this.TestContext, "SensorTests.CircuitProject", initialCircuit));
+		}
 
 		private bool AreEqual(IList<SensorPoint> list1, IList<SensorPoint> list2) {
 			return list1.Zip(list2, (p1, p2) => p1 == p2).All(r => r);
@@ -55,7 +60,7 @@ namespace LogicCircuit.UnitTest {
 
 		[STATestMethod]
 		public void SensorLoopTest() {
-			ProjectTester tester = new ProjectTester(this.TestContext, Properties.Resources.SensorTests, "Loop Test");
+			ProjectTester tester = this.Tester("Loop Test");
 			OutputSocket target = new OutputSocket(tester.Output[0]);
 			for(int i = 0; i < 1000; i++) {
 				Assert.IsTrue(tester.CircuitState.Evaluate(true));
@@ -66,7 +71,7 @@ namespace LogicCircuit.UnitTest {
 
 		[STATestMethod]
 		public void SensorSeriesTest() {
-			ProjectTester tester = new ProjectTester(this.TestContext, Properties.Resources.SensorTests, "Series Test");
+			ProjectTester tester = this.Tester("Series Test");
 			OutputSocket target = new OutputSocket(tester.Output[0]);
 			for(int i = 0; i < 2000; i++) {
 				Assert.IsTrue(tester.CircuitState.Evaluate(true));
@@ -77,7 +82,7 @@ namespace LogicCircuit.UnitTest {
 
 		[STATestMethod]
 		public void SensorRandomTest() {
-			ProjectTester tester = new ProjectTester(this.TestContext, Properties.Resources.SensorTests, "Random Test");
+			ProjectTester tester = this.Tester("Random Test");
 			OutputSocket target = new OutputSocket(tester.Output[0]);
 			HashSet<int> values = new HashSet<int>();
 			for(int i = 0; i < 5000; i++) {

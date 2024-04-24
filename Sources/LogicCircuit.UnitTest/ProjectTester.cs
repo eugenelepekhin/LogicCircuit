@@ -19,8 +19,8 @@ namespace LogicCircuit.UnitTest {
 		public FunctionConstant[] Input { get; private set; }
 		public FunctionProbe[] Output { get; private set; }
 
-		public ProjectTester(TestContext testContext, string projectText, string initialCircuit) {
-			this.CircuitProject = ProjectTester.Load(testContext, projectText, initialCircuit);
+		public ProjectTester(CircuitProject circuitProject) {
+			this.CircuitProject = circuitProject;
 
 			// Create map and state
 			this.CircuitMap = new CircuitMap(this.CircuitProject.ProjectSet.Project.LogicalCircuit);
@@ -49,13 +49,9 @@ namespace LogicCircuit.UnitTest {
 			this.CircuitMap.TurnOn();
 		}
 
-		public static CircuitProject Load(TestContext testContext, string projectText, string initialCircuit) {
-			// First save project text to test directory
-			string path = Path.Combine(testContext.TestRunDirectory, string.Format("{0}.{1}.{2}.xml", testContext.FullyQualifiedTestClassName, testContext.TestName, DateTime.UtcNow.Ticks));
-			File.WriteAllText(path, projectText, Encoding.UTF8);
-			// Load it from test directory
+		public static CircuitProject LoadDeployedFile(TestContext testContext, string projectFile, string initialCircuit) {
+			string path = Path.Combine(testContext.DeploymentDirectory, projectFile);
 			CircuitProject circuitProject = CircuitProject.Create(path);
-			File.Delete(path);
 			ProjectTester.InitResources();
 			if(initialCircuit != null) {
 				ProjectTester.SwitchTo(circuitProject, initialCircuit);
