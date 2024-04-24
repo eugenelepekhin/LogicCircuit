@@ -9,11 +9,12 @@ using LogicCircuit.DataPersistent;
 namespace LogicCircuit {
 	public partial class Splitter {
 		public static void Pass(Jam enterJam, int enterBit, out Jam exitJam, out int exitBit) {
-			Tracer.Assert(enterJam.CircuitSymbol.Circuit is Splitter splitter && 0 <= enterBit && enterBit < splitter.BitWidth);
+			Tracer.Assert(enterJam.CircuitSymbol.Circuit is Splitter splitter && 0 <= enterBit && enterBit < enterJam.Pin.BitWidth);
 			List<Jam> list = enterJam.CircuitSymbol.Jams().ToList();
 			// Sort jams in order of their device pins. Assuming first one will be the wide pin and the rest are thin ones,
 			// starting from lower bits to higher. This implies that creating of the pins should happened in that order.
 			list.Sort(JamComparer.Comparer);
+			Tracer.Assert(2 < list.Count && list[0].Pin.BitWidth == list.Skip(1).Sum(j => j.Pin.BitWidth));
 			if(enterJam == list[0]) { //wide jam. so find thin one, this bit will be redirected to
 				int width = 0;
 				for(int i = 1; i < list.Count; i++) {

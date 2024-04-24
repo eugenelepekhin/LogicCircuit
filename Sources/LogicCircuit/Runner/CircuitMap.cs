@@ -309,42 +309,8 @@ namespace LogicCircuit {
 					this.children[(CircuitSymbol)con.InJam.CircuitSymbol].Connect(connectionSet, list, result, con.InJam.InnerJam, bitNumber, visited);
 				} else {
 					if(circuit is Splitter splitter) {
-						int splitterPinCount = splitter.PinCount;
-						int splitterBitWidth = splitter.BitWidth;
-						List<Jam> jams = con.InJam.CircuitSymbol.Jams().ToList();
-						// Sort jams in order of their device pins. Assuming first one will be the wide pin and the rest are thin ones,
-						// starting from lower bits to higher. This implies that creating of the pins should happened in that order.
-						jams.Sort(JamComparer.Comparer);
-
-						Tracer.Assert(1 < splitterPinCount && splitterPinCount <= splitterBitWidth);
-						Tracer.Assert(jams.Count == splitterPinCount + 1 && jams[0].Pin.BitWidth == splitterBitWidth);
-						{	int sum = 0;
-							for(int i = 1; i < jams.Count; sum += jams[i++].Pin.BitWidth);
-							Tracer.Assert(jams[0].Pin.BitWidth == sum);
-						}
-
-						if(con.InJam == jams[0]) { //wide jam. so find thin one, this bit will be redirected to
-							Tracer.Assert(0 <= bitNumber && bitNumber < splitterBitWidth);
-							int width = 0;
-							for(int i = 1; i < jams.Count; i++) {
-								if(bitNumber < width + jams[i].Pin.BitWidth) {
-									this.Connect(connectionSet, list, result, jams[i], bitNumber - width, visited);
-									break;
-								}
-								width += jams[i].Pin.BitWidth;
-							}
-							Tracer.Assert(width < splitterBitWidth); // check if the thin pin was found
-						} else { // thin jam. find position of this bit in wide pin
-							int width = 0;
-							for(int i = 1; i < jams.Count; i++) {
-								if(jams[i] == con.InJam) {
-									this.Connect(connectionSet, list, result, jams[0], width + bitNumber, visited);
-									break;
-								}
-								width += jams[i].Pin.BitWidth;
-							}
-							Tracer.Assert(width < splitterBitWidth); // check if the thin pin was found
-						}
+						Splitter.Pass(con.InJam, bitNumber, out Jam outJam, out int outBit);
+						this.Connect(connectionSet, list, result, outJam, outBit, visited);
 					} else {
 						Tracer.Fail();
 					}
