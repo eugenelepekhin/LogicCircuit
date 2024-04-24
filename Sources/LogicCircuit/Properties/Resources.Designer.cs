@@ -2827,7 +2827,8 @@ namespace LogicCircuit.Properties {
 		/// <summary>
 		/// Looks up a localized string similar to Provides data from "external source" as
 		/// a series of predefined, randomly chosen,
-		/// or manually entered values..
+		/// or manually entered values.
+		/// Also serves as source of keyboard or.
 		/// </summary>
  		public static string ToolTipDescriptorSensor {
 			get { return ResourceManager.GetString("ToolTipDescriptorSensor", Culture); }
@@ -3340,6 +3341,27 @@ namespace LogicCircuit.Properties {
 		/// </summary>
  		public static string MessageHdlSavingTestFile(string testFileName) {
 			return string.Format(FormatCulture, ResourceManager.GetString("MessageHdlSavingTestFile", Culture), testFileName);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to ASCII code.
+		/// </summary>
+ 		public static string SensorTypeASCII {
+			get { return ResourceManager.GetString("SensorTypeASCII", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Key code.
+		/// </summary>
+ 		public static string SensorTypeKeyCode {
+			get { return ResourceManager.GetString("SensorTypeKeyCode", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Set focus here and press buttons on keyboard..
+		/// </summary>
+ 		public static string ToolTipSensorKeyboard {
+			get { return ResourceManager.GetString("ToolTipSensorKeyboard", Culture); }
 		}
 	}
 }

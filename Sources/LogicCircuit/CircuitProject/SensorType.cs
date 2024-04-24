@@ -1,10 +1,10 @@
-﻿using System;
-
-namespace LogicCircuit {
+﻿namespace LogicCircuit {
 	public enum SensorType {
 		Series,
 		Loop,
 		Random,
-		Manual
+		Manual,
+		KeyCode,
+		ASCII,
 	}
 }

@@ -1375,7 +1375,9 @@ probe or view this data on oscilloscope.</value>
   <data name="ToolTipDescriptorSensor" xml:space="preserve">
     <value>Provides data from "external source" as
 a series of predefined, randomly chosen,
-or manually entered values.</value>
+or manually entered values.
+Also serves as source of keyboard or
+character codes.</value>
   </data>
   <data name="ToolTipDescriptorSplitter" xml:space="preserve">
     <value>Allows to create wire harness or
@@ -1626,5 +1628,14 @@ Do you want to load auto saved state of this file?</value>
   <data name="MessageHdlSavingTestFile" xml:space="preserve">
     <value>Saving test file {0}</value>
     <comment>{string testFileName}</comment>
+  </data>
+  <data name="SensorTypeASCII" xml:space="preserve">
+    <value>ASCII code</value>
+  </data>
+  <data name="SensorTypeKeyCode" xml:space="preserve">
+    <value>Key code</value>
+  </data>
+  <data name="ToolTipSensorKeyboard" xml:space="preserve">
+    <value>Set focus here and press buttons on keyboard.</value>
   </data>
 </root>

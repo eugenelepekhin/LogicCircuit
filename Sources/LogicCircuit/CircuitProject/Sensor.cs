@@ -103,6 +103,8 @@ namespace LogicCircuit {
 			set { throw new InvalidOperationException(); }
 		}
 
+		public override bool IsDisplay => this.SensorType == SensorType.ASCII || this.SensorType == SensorType.KeyCode;
+
 		public static string UnknownValue { get { return Properties.Resources.CircuitProbeNotation; } } // Show ? on power off.
 
 		public override Circuit CopyTo(LogicalCircuit target) {
@@ -117,8 +119,7 @@ namespace LogicCircuit {
 			return base.CircuitSymbolHeight(3);
 		}
 
-		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
-			Tracer.Assert(this == symbol.Circuit);
+		private string Skin() {
 			string skin = SymbolShape.SensorAuto;
 			switch(this.SensorType) {
 			case LogicCircuit.SensorType.Series:
@@ -126,18 +127,35 @@ namespace LogicCircuit {
 			case LogicCircuit.SensorType.Random:
 				break;
 			case LogicCircuit.SensorType.Manual:
+			case LogicCircuit.SensorType.KeyCode:
+			case LogicCircuit.SensorType.ASCII:
 				skin = SymbolShape.SensorManual;
 				break;
 			default:
 				Tracer.Fail();
 				break;
 			}
-			return symbol.CreateSensorGlyph(skin);
+			return skin;
+		}
+
+		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
+			Tracer.Assert(this == symbol.Circuit);
+			string skin = this.Skin();
+			return symbol.CreateSensorGlyph(skin, symbol);
+		}
+
+		public override FrameworkElement CreateDisplay(CircuitGlyph symbol, CircuitGlyph mainSymbol) {
+			Tracer.Assert(this == symbol.Circuit);
+			string skin = this.Skin();
+			return symbol.CreateSensorGlyph(skin, mainSymbol);
 		}
 
 		partial void OnSensorChanged() {
 			this.ResetPins();
 			this.InvalidateDistinctSymbol();
+			foreach(CircuitSymbol symbol in this.CircuitProject.CircuitSymbolSet) {
+				symbol.CircuitProject.LogicalCircuitSet.Invalidate(symbol.LogicalCircuit);
+			}
 		}
 	}
 
@@ -163,6 +181,8 @@ namespace LogicCircuit {
 				}
 				break;
 			case SensorType.Manual:
+			case SensorType.KeyCode:
+			case SensorType.ASCII:
 				break;
 			default:
 				Tracer.Fail();
@@ -188,6 +208,8 @@ namespace LogicCircuit {
 				data = Sensor.DefaultRandomData;
 				break;
 			case SensorType.Manual:
+			case SensorType.KeyCode:
+			case SensorType.ASCII:
 				data = string.Empty;
 				break;
 			default:

@@ -1033,14 +1033,18 @@ namespace LogicCircuit {
 			List<Result> results = new List<Result>(symbolMap.Results);
 			results.Sort(ResultComparer.BitOrderComparer);
 			int[] map = CircuitMap.Results(results);
-			Sensor s = (Sensor)symbolMap.CircuitSymbol.Circuit;
-			Tracer.Assert(map.Length == s.BitWidth);
-			FunctionSensor sensor = new FunctionSensor(circuitState, symbolMap.CircuitSymbol, map);
-			if(symbolMap.CircuitMap.displays == null) {
-				symbolMap.CircuitMap.displays = new HashSet<IFunctionVisual>();
+			Sensor sensorCircuit = (Sensor)symbolMap.CircuitSymbol.Circuit;
+			Tracer.Assert(map.Length == sensorCircuit.BitWidth);
+			FunctionSensor sensorFunction = new FunctionSensor(circuitState, CircuitMap.DisplayChain(symbolMap), map);
+			if(sensorCircuit.IsDisplay) {
+				CircuitMap.UpdateDisplays(symbolMap, sensorFunction);
+			} else {
+				if(symbolMap.CircuitMap.displays == null) {
+					symbolMap.CircuitMap.displays = new HashSet<IFunctionVisual>();
+				}
+				symbolMap.CircuitMap.displays.Add(sensorFunction);
 			}
-			symbolMap.CircuitMap.displays.Add(sensor);
-			return sensor;
+			return sensorFunction;
 		}
 
 		private static FunctionSound? DefineSound(CircuitState circuitState, SymbolMap symbolMap) {

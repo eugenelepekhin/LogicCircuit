@@ -304,9 +304,10 @@ namespace LogicCircuit {
 			new EnumDescriptor<SensorType>(LogicCircuit.SensorType.Series, Properties.Resources.SensorTypeSeries),
 			new EnumDescriptor<SensorType>(LogicCircuit.SensorType.Random, Properties.Resources.SensorTypeRandom),
 			new EnumDescriptor<SensorType>(LogicCircuit.SensorType.Manual, Properties.Resources.SensorTypeManual),
+			new EnumDescriptor<SensorType>(LogicCircuit.SensorType.KeyCode, Properties.Resources.SensorTypeKeyCode),
+			new EnumDescriptor<SensorType>(LogicCircuit.SensorType.ASCII, Properties.Resources.SensorTypeASCII),
 		};
 
-		[SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
 		public static IEnumerable<EnumDescriptor<SensorType>> SensorTypes { get { return sensorTypes; } }
 
 		private EnumDescriptor<SensorType> sensorType;

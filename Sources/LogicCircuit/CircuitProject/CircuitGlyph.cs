@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -255,19 +256,29 @@ namespace LogicCircuit {
 			}
 		}
 
-		public FrameworkElement CreateSensorGlyph(string skin) {
-			Canvas canvas = this.CreateGlyphCanvas(this);
-			CircuitGlyph.AddJam(canvas, this.Jams(), null);
+		public FrameworkElement CreateSensorGlyph(string skin, CircuitGlyph mainSymbol) {
+			Canvas canvas = this.CreateGlyphCanvas(mainSymbol);
+			if(this == mainSymbol) {
+				CircuitGlyph.AddJam(canvas, this.Jams(), null);
+			}
 			FrameworkElement shape = CircuitGlyph.Skin(canvas, skin);
 			FrameworkElement? probeView = shape.FindName("ProbeView") as FrameworkElement;
 			Tracer.Assert(probeView != null);
-			this.ProbeView = probeView!;
+			if(this == mainSymbol) {
+				this.ProbeView = probeView!;
+			}
 
 			if(probeView is TextBlock textBlock) {
 				textBlock.Text = Sensor.UnknownValue;
 			} else {
 				TextBox textBox = (TextBox)probeView!;
-				textBox.Text = Sensor.UnknownValue;
+				Sensor sensor = (Sensor)this.Circuit;
+				if(sensor.SensorType == SensorType.KeyCode || sensor.SensorType == SensorType.ASCII) {
+					textBox.ToolTip = Properties.Resources.ToolTipSensorKeyboard;
+					textBox.Text = Key.None.ToString();
+				} else {
+					textBox.Text = Sensor.UnknownValue;
+				}
 			}
 
 			TextBlock? notation = shape.FindName("Notation") as TextBlock;

@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -13,11 +16,11 @@ namespace LogicCircuit {
 
 		public bool Invalid { get; set; }
 
-		public CircuitSymbol CircuitSymbol { get; private set; }
+		private readonly List<CircuitSymbol> circuitSymbol;
 
-		public Sensor Sensor { get { return (Sensor)this.CircuitSymbol.Circuit; } }
+		private Sensor Sensor => (Sensor)this.circuitSymbol[0].Circuit;
 
-		public int BitWidth { get { return this.Sensor.BitWidth; } }
+		private int BitWidth => this.Sensor.BitWidth;
 
 		private readonly SensorValue sensorValue;
 
@@ -26,8 +29,8 @@ namespace LogicCircuit {
 		private Brush? defaultBackground;
 		private Brush? errorBackground;
 
-		public FunctionSensor(CircuitState circuitState, CircuitSymbol symbol, int[] result) : base(circuitState, null, result) {
-			this.CircuitSymbol = symbol;
+		public FunctionSensor(CircuitState circuitState, IEnumerable<CircuitSymbol> symbols, int[] result) : base(circuitState, null, result) {
+			this.circuitSymbol = symbols.ToList();
 			Tracer.Assert(this.BitWidth == result.Length);
 			switch(this.Sensor.SensorType) {
 			case SensorType.Series:
@@ -39,6 +42,10 @@ namespace LogicCircuit {
 				break;
 			case SensorType.Manual:
 				this.sensorValue = new ManualValue(this.Sensor.Data, this.Sensor.BitWidth);
+				break;
+			case SensorType.KeyCode:
+			case SensorType.ASCII:
+				this.sensorValue = new KeyboardValue(this, this.Sensor.BitWidth);
 				break;
 			default:
 				Tracer.Fail();
@@ -60,42 +67,83 @@ namespace LogicCircuit {
 		}
 
 		public void TurnOn() {
-			if(this.CircuitSymbol.ProbeView is TextBox textBox) {
-				textBox.IsEnabled = true;
-				textBox.Text = this.Value.ToString("X", CultureInfo.InvariantCulture);
-				this.HookupEvents(textBox);
-				this.defaultBackground = textBox.Background;
-				this.errorBackground = new SolidColorBrush(Color.FromRgb(0xFF, 0x56, 0x16));
+			foreach(CircuitSymbol symbol in this.circuitSymbol.Where(s => s.HasCreatedGlyph)) {
+				FrameworkElement? element = this.ProbeView(symbol);
+				if(element is TextBox textBox) {
+					textBox.IsEnabled = true;
+					if(this.Sensor.SensorType == SensorType.KeyCode || this.Sensor.SensorType == SensorType.ASCII) {
+						textBox.Text = Key.None.ToString();
+					} else {
+						textBox.Text = this.Value.ToString("X", CultureInfo.InvariantCulture);
+					}
+					this.HookupEvents(textBox);
+					this.defaultBackground = textBox.Background;
+				}
 			}
+			this.errorBackground = new SolidColorBrush(Color.FromRgb(0xFF, 0x56, 0x16));
 		}
 
 		public void TurnOff() {
-			if(this.CircuitSymbol.ProbeView is TextBlock textBlock) {
-				textBlock.Text = Sensor.UnknownValue;
-				return;
-			}
-			if(this.CircuitSymbol.ProbeView is TextBox textBox) {
-				textBox.IsEnabled = false;
-				textBox.Text = Sensor.UnknownValue;
-				textBox.Background = this.defaultBackground;
-				this.UnhookEvents(textBox);
+			foreach(CircuitSymbol symbol in this.circuitSymbol.Where(s => s.HasCreatedGlyph)) {
+				FrameworkElement? element = this.ProbeView(symbol);
+				if(element is TextBlock textBlock) {
+					textBlock.Text = Sensor.UnknownValue;
+				} else if(element is TextBox textBox) {
+					textBox.IsEnabled = false;
+					textBox.Text = Sensor.UnknownValue;
+					textBox.Background = this.defaultBackground;
+					this.UnhookEvents(textBox);
+				}
 			}
 		}
 
 		public void Redraw() {
-			if(this.CircuitSymbol.ProbeView is TextBlock textBlock) {
+			if(this.circuitSymbol[0].ProbeView is TextBlock textBlock) {
 				textBlock.Text = this.Value.ToString("X", CultureInfo.InvariantCulture);
 			}
 		}
 
+		private FrameworkElement? ProbeView(CircuitSymbol symbol) {
+			if(symbol == this.circuitSymbol[0]) {
+				return this.circuitSymbol[0].ProbeView!;
+			} else {
+				DisplayCanvas canvas = (DisplayCanvas)symbol.Glyph;
+				return canvas.DisplayOf(this.circuitSymbol);
+			}
+		}
+
 		private void HookupEvents(TextBox textBox) {
-			textBox.PreviewKeyUp += textBox_PreviewKeyUp;
-			textBox.PreviewLostKeyboardFocus += textBox_PreviewLostKeyboardFocus;
+			switch(this.Sensor.SensorType) {
+			case SensorType.Manual:
+				textBox.PreviewKeyUp += textBox_PreviewKeyUp;
+				textBox.PreviewLostKeyboardFocus += textBox_PreviewLostKeyboardFocus;
+				break;
+			case SensorType.KeyCode:
+				textBox.PreviewKeyDown += this.textBox_PreviewKeyDown;
+				textBox.KeyUp += this.textBox_KeyUp;
+				break;
+			case SensorType.ASCII:
+				textBox.KeyUp += this.textBox_KeyUp;
+				textBox.TextChanged += this.textBox_TextChanged;
+				break;
+			}
 		}
 
 		private void UnhookEvents(TextBox textBox) {
-			textBox.PreviewKeyUp -= textBox_PreviewKeyUp;
-			textBox.PreviewLostKeyboardFocus += textBox_PreviewLostKeyboardFocus;
+			switch(this.Sensor.SensorType) {
+			case SensorType.Manual:
+				textBox.PreviewKeyUp -= textBox_PreviewKeyUp;
+				textBox.PreviewLostKeyboardFocus -= textBox_PreviewLostKeyboardFocus;
+				break;
+			case SensorType.KeyCode:
+				textBox.PreviewKeyDown -= this.textBox_PreviewKeyDown;
+				textBox.KeyUp -= this.textBox_KeyUp;
+				break;
+			case SensorType.ASCII:
+				textBox.KeyUp -= this.textBox_KeyUp;
+				textBox.TextChanged -= this.textBox_TextChanged;
+				break;
+			}
 		}
 
 		private void textBox_PreviewKeyUp(object sender, KeyEventArgs e) {
@@ -107,6 +155,26 @@ namespace LogicCircuit {
 		private void textBox_PreviewLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e) {
 			if(sender is TextBox textBox) {
 				this.SetManualValue(textBox);
+			}
+		}
+
+		private void textBox_PreviewKeyDown(object sender, KeyEventArgs e) {
+			if(sender is TextBox textBox && this.sensorValue is KeyboardValue keyboardValue) {
+				keyboardValue.SetKey(textBox, e.Key, e.KeyboardDevice.Modifiers);
+				e.Handled = true;
+			}
+		}
+
+		private void textBox_KeyUp(object sender, KeyEventArgs e) {
+			if(sender is TextBox textBox && this.sensorValue is KeyboardValue keyboardValue) {
+				keyboardValue.SetKey(textBox, Key.None, ModifierKeys.None);
+				e.Handled = true;
+			}
+		}
+
+		private void textBox_TextChanged(object sender, TextChangedEventArgs e) {
+			if(sender is TextBox textBox && this.sensorValue is KeyboardValue keyboardValue) {
+				keyboardValue.SetText(textBox);
 			}
 		}
 
@@ -235,6 +303,56 @@ namespace LogicCircuit {
 					this.lastValue = this.Value;
 					return true;
 				}
+				return false;
+			}
+		}
+
+		private class KeyboardValue : SensorValue {
+			private readonly FunctionSensor functionSensor;
+			private string? lastText;
+			private bool ignoreText;
+
+			public KeyboardValue(FunctionSensor functionSensor, int bitWidth) : base(bitWidth) {
+				this.functionSensor = functionSensor;
+			}
+
+			public void SetKey(TextBox textBox, Key key, ModifierKeys modifierKeys) {
+				int value = (int)key;
+				try {
+					this.ignoreText = true;
+					textBox.Text = key.ToString();
+				} finally {
+					this.ignoreText = false;
+				}
+				if(this.Value != value) {
+					this.Value = value;
+					this.functionSensor.CircuitState.MarkUpdated(this.functionSensor);
+				}
+			}
+
+			public void SetText(TextBox textBox) {
+				if(!this.ignoreText) {
+					string text = textBox.Text;
+					if(!string.IsNullOrEmpty(this.lastText)) {
+						Match match = Regex.Match(text, Regex.Escape(this.lastText));
+						if(match.Success && match.Index != 0 && match.Length != text.Length) {
+							text = text.Remove(match.Index, match.Length);
+						}
+					}
+					if(1 < text.Length) {
+						text = text.Substring(0, 1);
+					}
+					this.lastText = text;
+					textBox.Text = text;
+					int value = text[0];
+					if(this.Value != value) {
+						this.Value = value;
+						this.functionSensor.CircuitState.MarkUpdated(this.functionSensor);
+					}
+				}
+			}
+
+			public override bool Flip() {
 				return false;
 			}
 		}
