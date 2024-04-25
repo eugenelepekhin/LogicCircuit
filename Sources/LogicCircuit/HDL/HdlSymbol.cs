@@ -49,7 +49,7 @@ namespace LogicCircuit {
 		public HdlExport HdlExport { get; }
 		public CircuitSymbol CircuitSymbol { get; }
 		
-		private readonly Dictionary<JamKey, List<HdlConnection>> connections = new Dictionary<JamKey, List<HdlConnection>>();
+		private readonly OneToMany<JamKey, HdlConnection> connections = new OneToMany<JamKey, HdlConnection>();
 		private List<HdlConnection>? connectionList;
 
 		public int Order { get; set; }
@@ -71,13 +71,7 @@ namespace LogicCircuit {
 
 		public void Add(HdlConnection connection) {
 			Debug.Assert(this.connectionList == null);
-			List<HdlConnection>? list;
-			JamKey jamKey = new JamKey(connection.OutJam, connection.InJam);
-			if(!this.connections.TryGetValue(jamKey, out list)) {
-				list = new List<HdlConnection>();
-				this.connections.Add(jamKey, list);
-			}
-			list.Add(connection);
+			this.connections.Add(new JamKey(connection.OutJam, connection.InJam), connection);
 		}
 
 		public void Replace(HdlConnection connection, HdlConnection replacement) {
@@ -91,7 +85,8 @@ namespace LogicCircuit {
 		}
 
 		public IEnumerable<HdlConnection> Find(Jam outJam, Jam inJam) {
-			if(this.connections.TryGetValue(new JamKey(outJam, inJam), out List<HdlConnection>? list)) {
+			Debug.Assert(this.connectionList == null);
+			if(this.connections.TryGetValue(new JamKey(outJam, inJam), out IList<HdlConnection>? list)) {
 				return list;
 			}
 			return Enumerable.Empty<HdlConnection>();

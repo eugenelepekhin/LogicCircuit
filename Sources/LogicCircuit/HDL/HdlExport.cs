@@ -80,7 +80,7 @@ namespace LogicCircuit {
 		}
 
 		private Dictionary<CircuitSymbol, HdlSymbol> Collect(LogicalCircuit circuit, ConnectionSet connectionSet) {
-			bool consider(CircuitSymbol symbol, bool showWarning) {
+			bool consider(CircuitSymbol symbol, bool showError) {
 				Circuit circuit = symbol.Circuit;
 				if(	circuit is CircuitButton ||
 					circuit is Sensor ||
@@ -89,7 +89,7 @@ namespace LogicCircuit {
 					circuit is Sound
 
 				) {
-					if(showWarning) {
+					if(showError) {
 						this.Error(Properties.Resources.ErrorHdlCircuitUnsupported(circuit.Name, symbol.Point));
 					}
 					return false;

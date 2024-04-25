@@ -8,26 +8,6 @@ using System.Text;
 using System.Threading;
 
 namespace LogicCircuit {
-
-	public class OneToMany<TOne, TMany> : Dictionary<TOne, IList<TMany>> where TOne : notnull {
-		public void Add(TOne key, TMany value) {
-			IList<TMany>? list;
-			if(!this.TryGetValue(key, out list)) {
-				list = new List<TMany>();
-				this.Add(key, list);
-			}
-			list.Add(value);
-		}
-
-		public bool Remove(TOne key, TMany value) {
-			IList<TMany>? list;
-			if(this.TryGetValue(key, out list)) {
-				return list.Remove(value);
-			}
-			return false;
-		}
-	}
-
 	/// <summary>
 	/// Nand to Tetris export.
 	/// </summary>
@@ -68,6 +48,7 @@ namespace LogicCircuit {
 					if(inputs.Count <= 1 && 1 < gate.InputCount) {
 						success = false;
 						this.Error(Properties.Resources.ErrorHdlUnconnectedGate(gate.Name, symbol.CircuitSymbol.LogicalCircuit.Name));
+						return false;
 					}
 					return 2 < gate.InputCount || gate.InvertedOutput && (gate.GateType == GateType.Or || gate.GateType == GateType.Xor);
 				}
@@ -89,6 +70,7 @@ namespace LogicCircuit {
 		}
 
 		private List<HdlSymbol> Replace(HdlSymbol symbol) {
+			Debug.Assert(symbol.CircuitSymbol.Circuit is Gate);
 			Jam OutputJam(HdlSymbol hdlSymbol) => hdlSymbol.CircuitSymbol.Jams().First(j => j.Pin.PinType == PinType.Output);
 			HdlSymbol? gate = null;
 			List<Jam> newInputs = new List<Jam>();
@@ -172,8 +154,7 @@ namespace LogicCircuit {
 		}
 
 		private HdlSymbol ReplaceSymbol(HdlSymbol symbol, bool final) {
-			Gate? gate = symbol.CircuitSymbol.Circuit as Gate;
-			Debug.Assert(gate != null);
+			Gate gate = (Gate)symbol.CircuitSymbol.Circuit;
 			switch(gate.GateType) {
 			case GateType.And:
 				break;

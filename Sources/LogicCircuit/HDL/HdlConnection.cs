@@ -100,11 +100,11 @@ namespace LogicCircuit {
 		private HdlConnection(HdlSymbol outSymbol, Jam outJam, List<int>? outBits, HdlSymbol inSymbol, Jam inJam, List<int>? inBits) {
 			this.OutHdlSymbol = outSymbol;
 			this.OutJam = outJam;
-			this.outBits = outBits;
+			this.outBits = (outBits == null) ? outBits : new List<int>(outBits);
 
 			this.InHdlSymbol = inSymbol;
 			this.InJam = inJam;
-			this.inBits = inBits;
+			this.inBits = (inBits == null) ? inBits : new List<int>(inBits);
 		}
 
 		public HdlConnection CreateCopy(HdlSymbol outSymbol, Jam outJam, HdlSymbol inSymbol, Jam inJam) {
@@ -138,28 +138,28 @@ namespace LogicCircuit {
 
 		public string PinName(HdlSymbol symbol) {
 			Debug.Assert(symbol == this.OutHdlSymbol || symbol == this.InHdlSymbol);
-			HdlSymbol other;
-			Jam jam;
-			BitRange bits;
+			HdlSymbol otherSymbol;
+			Jam otherJam;
+			BitRange otherBits;
 			if(symbol == this.OutHdlSymbol) {
-				other = this.InHdlSymbol;
-				jam = this.InJam;
-				bits = this.InBits;
+				otherSymbol = this.InHdlSymbol;
+				otherJam = this.InJam;
+				otherBits = this.InBits;
 			} else {
-				other = this.OutHdlSymbol;
-				jam = this.OutJam;
-				bits = this.OutBits;
+				otherSymbol = this.OutHdlSymbol;
+				otherJam = this.OutJam;
+				otherBits = this.OutBits;
 			}
-			if(jam.CircuitSymbol.Circuit is Pin pin) {
+			if(otherJam.CircuitSymbol.Circuit is Pin pin) {
 				string name = pin.Name;
-				if(this.IsBitRange(other)) {
-					name += bits.ToString();
+				if(this.IsBitRange(otherSymbol)) {
+					name += otherBits.ToString();
 				}
 				return name;
 			}
-			if(jam.CircuitSymbol.Circuit is Constant constant) {
-				Debug.Assert(bits.First == bits.Last);
-				int value = (constant.ConstantValue >> bits.First) & 1;
+			if(otherJam.CircuitSymbol.Circuit is Constant constant) {
+				Debug.Assert(otherBits.First == otherBits.Last);
+				int value = (constant.ConstantValue >> otherBits.First) & 1;
 				return (value == 0) ? "false" : "true";
 			}
 			GridPoint point = this.OutJam.AbsolutePoint;
