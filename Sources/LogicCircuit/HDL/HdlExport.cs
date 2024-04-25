@@ -32,7 +32,7 @@ namespace LogicCircuit {
 
 		protected void Message(string text) => this.logMessage(text);
 
-		private void Error(string text) {
+		protected void Error(string text) {
 			this.ErrorCount++;
 			this.logError(text);
 		}

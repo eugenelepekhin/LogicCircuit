@@ -47,8 +47,10 @@ namespace LogicCircuit {
 		}
 
 		protected override HdlTransformation? CreateTransformation(string name, IList<HdlSymbol> inputPins, IList<HdlSymbol> outputPins, IList<HdlSymbol> parts) {
-			this.FixBigGates(parts);
-			return new N2THdl(name, inputPins, outputPins, parts);
+			if(this.FixBigGates(parts)) {
+				return new N2THdl(name, inputPins, outputPins, parts);
+			}
+			return null;
 		}
 
 		protected override bool PostExport(LogicalCircuit logicalCircuit, string folder) {
@@ -58,9 +60,15 @@ namespace LogicCircuit {
 			return base.PostExport(logicalCircuit, folder);
 		}
 
-		private void FixBigGates(IList<HdlSymbol> parts) {
+		private bool FixBigGates(IList<HdlSymbol> parts) {
+			bool success = true;
 			bool NeedReplacement(HdlSymbol symbol) {
 				if(symbol.CircuitSymbol.Circuit is Gate gate) {
+					HashSet<Jam> inputs = new HashSet<Jam>(symbol.HdlConnections().Where(c => c.InHdlSymbol == symbol).Select(c => c.InJam));
+					if(inputs.Count <= 1 && 1 < gate.InputCount) {
+						success = false;
+						this.Error(Properties.Resources.ErrorHdlUnconnectedGate(gate.Name, symbol.CircuitSymbol.LogicalCircuit.Name));
+					}
 					return 2 < gate.InputCount || gate.InvertedOutput && (gate.GateType == GateType.Or || gate.GateType == GateType.Xor);
 				}
 				return false;
@@ -77,6 +85,7 @@ namespace LogicCircuit {
 					i += replacement.Count - 1;
 				}
 			}
+			return success;
 		}
 
 		private List<HdlSymbol> Replace(HdlSymbol symbol) {
@@ -107,7 +116,7 @@ namespace LogicCircuit {
 			int inputIndex = 0;
 			foreach(Jam oldInput in symbolInputs.Keys) {
 				if((inputIndex & 1) == 0) {
-					AddGate(false);
+					AddGate(symbolInputs.Count <= 2);
 				} else {
 					gate = replacement[replacement.Count - 1];
 				}

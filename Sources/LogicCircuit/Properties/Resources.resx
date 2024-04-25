@@ -1638,4 +1638,8 @@ Do you want to load auto saved state of this file?</value>
   <data name="ToolTipSensorKeyboard" xml:space="preserve">
     <value>Set focus here and press buttons on keyboard.</value>
   </data>
+  <data name="ErrorHdlUnconnectedGate" xml:space="preserve">
+    <value>Gate {0} has only one input pin connected on {1}</value>
+    <comment>{string gateName, string logicalCircuitName}</comment>
+  </data>
 </root>

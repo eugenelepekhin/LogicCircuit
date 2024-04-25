@@ -55,6 +55,7 @@ namespace LogicCircuit.UnitTest {
 				Assert.IsTrue(success);
 				HdlContext context = new HdlContext(hdlPath, this.Message);
 				HdlState hdlState = context.Load(circuit.Name);
+				Assert.IsNotNull(hdlState);
 				this.Message($"Circuit {circuit.Name} HDL:");
 				this.Message(hdlState.Chip.ToString());
 				List<TruthState> hdlTable = hdlState.BuildTruthTable();
@@ -106,6 +107,28 @@ namespace LogicCircuit.UnitTest {
 		[STATestMethod]
 		public void HdlTestMultiInputGates() {
 			this.RunTruthTableComparisonForCategory("BigGates");
+		}
+
+		//[STATestMethod]
+		public void HdlTestSingleTest() {
+			CircuitProject project = this.LoadCircuitProject();
+			string hdlPath = this.HdlFolder();
+			LogicalCircuit circuit = ProjectTester.SwitchTo(project, "MissingJam1");
+			N2TExport export = new N2TExport(false, false, this.Message, this.Message);
+			bool success = export.ExportCircuit(circuit, hdlPath, false);
+			Assert.IsTrue(success);
+			HdlContext context = new HdlContext(hdlPath, this.Message);
+			HdlState hdlState = context.Load(circuit.Name);
+			Assert.IsNotNull(hdlState);
+			this.Message($"Circuit {circuit.Name} HDL:");
+			this.Message(hdlState.Chip.ToString());
+			List<TruthState> hdlTable = hdlState.BuildTruthTable();
+
+			CircuitTestSocket socket = new CircuitTestSocket(circuit);
+			IList<TruthState> lcTable = socket.BuildTruthTable(d => {}, () => true, s => true, 1 << circuit.Pins.Where(p => p.PinType == PinType.Input).Sum(p => p.BitWidth), out bool truncated);
+
+			bool same = TruthState.AreEqual(lcTable, hdlTable);
+			Assert.IsTrue(same);
 		}
 	}
 }

@@ -3363,5 +3363,12 @@ namespace LogicCircuit.Properties {
  		public static string ToolTipSensorKeyboard {
 			get { return ResourceManager.GetString("ToolTipSensorKeyboard", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Gate {0} has only one input pin connected on {1}.
+		/// </summary>
+ 		public static string ErrorHdlUnconnectedGate(string gateName, string logicalCircuitName) {
+			return string.Format(FormatCulture, ResourceManager.GetString("ErrorHdlUnconnectedGate", Culture), gateName, logicalCircuitName);
+		}
 	}
 }
