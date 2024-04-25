@@ -8,7 +8,7 @@ namespace LogicCircuit.UnitTest.HDL {
 		private readonly HdlContext hdlContext;
 		public HdlChip Chip { get; private set; }
 
-		private bool isInput;
+		private HdlIOPin.PinType pinType;
 		private JamVisitor jamVisitor;
 
 		public HdlVisitor(HdlContext hdlContext) {
@@ -20,12 +20,12 @@ namespace LogicCircuit.UnitTest.HDL {
 			HdlChip chip = new HdlChip(this.hdlContext, context.chipName().GetText());
 			this.Chip = chip;
 
+			this.pinType = HdlIOPin.PinType.Input;
 			foreach(HdlParser.IoPinContext pinContext in context.inputPins().pins().ioPin()) {
-				this.isInput = true;
 				this.Visit(pinContext);
 			}
+			this.pinType = HdlIOPin.PinType.Output;
 			foreach(HdlParser.IoPinContext pinContext in context.outputPins().pins().ioPin()) {
-				this.isInput = false;
 				this.Visit(pinContext);
 			}
 			foreach(HdlParser.PartContext partContext in context.parts().part()) {
@@ -41,7 +41,7 @@ namespace LogicCircuit.UnitTest.HDL {
 			if(decNumber != null) {
 				bitWidth = int.Parse(decNumber);
 			}
-			this.Chip.AddPin(name, bitWidth, this.isInput ? HdlIOPin.PinType.Input : HdlIOPin.PinType.Output);
+			this.Chip.AddPin(name, bitWidth, this.pinType);
 			return true;
 		}
 

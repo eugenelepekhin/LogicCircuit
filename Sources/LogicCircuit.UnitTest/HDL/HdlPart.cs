@@ -27,6 +27,7 @@ namespace LogicCircuit.UnitTest.HDL {
 					this.BitWidth = (this.Jam.IsBitRange) ? 1 + this.Jam.Last - this.Jam.First : pin.BitWidth;
 					if(pin.BitWidth < this.BitWidth) {
 						chip.HdlContext.Error($"Specified range [{this.Jam.First}..{this.Jam.Last}] is bigger than pin's {pin.Name} bit width [{pin.BitWidth}] on part {this.Parent.Name}");
+						return false;
 					}
 					return true;
 				} else {
@@ -76,6 +77,7 @@ namespace LogicCircuit.UnitTest.HDL {
 				this.Chip = chip;
 				return success;
 			}
+			this.HdlContext.Error($"Chip {this.Name} is not found.");
 			return false;
 		}
 
