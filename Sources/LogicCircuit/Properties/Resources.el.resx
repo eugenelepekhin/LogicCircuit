@@ -1309,7 +1309,8 @@
   </data>
 	<data name="ToolTipDescriptorSensor" xml:space="preserve">
     <value>Παρέχει δεδομένα από «εξωτερική πηγή», όπως μια σειρά
-προκαθορισμένων τιμών, τυχαίων τιμών, ή να εισακτέων τιμών.</value>
+προκαθορισμένων τιμών, τυχαίων τιμών, ή να εισακτέων τιμών.
+Χρησιμεύει επίσης ως πηγή κωδικών πληκτρολογίου ή συμβόλων.</value>
   </data>
 	<data name="ToolTipDescriptorSplitter" xml:space="preserve">
     <value>Επιτρέπει την καλωδίωση ή διαχωρισμό του σε επιμέρους καλώδια.
@@ -1458,5 +1459,89 @@
 	</data>
 	<data name="TitleIsDiagramBackgroundWhite" xml:space="preserve">
 		<value>Το φόντο του διαγράμματος είναι λευκό</value>
+	</data>
+	<data name="CommandFileExportHdl" xml:space="preserve">
+		<value>Εξαγωγή HDL...</value>
+	</data>
+	<data name="ErrorExportHdlFile" xml:space="preserve">
+		<value>Σφάλματα κατά την εξαγωγή αρχείων {0}</value>
+	</data>
+	<data name="MessageExportingHdl" xml:space="preserve">
+		<value>Εξαγωγή κυκλώματος {0} σε αρχείο {1}</value>
+	</data>
+	<data name="TitleClose" xml:space="preserve">
+		<value>Κλείνω</value>
+	</data>
+	<data name="TitleExport" xml:space="preserve">
+		<value>Εξαγωγή</value>
+	</data>
+	<data name="TitleExportFolder" xml:space="preserve">
+		<value>Φάκελος προορισμού:</value>
+	</data>
+	<data name="TitleExportHdl" xml:space="preserve">
+		<value>Εξαγωγή HDL</value>
+	</data>
+	<data name="TitleExportOnlyCurrent" xml:space="preserve">
+		<value>Εξαγωγή μόνο κυκλώματος ρεύματος, όχι υποκυκλωμάτων</value>
+	</data>
+	<data name="TitleExportType" xml:space="preserve">
+		<value>Εξαγωγή σε:</value>
+	</data>
+	<data name="TitleLog" xml:space="preserve">
+		<value>Κούτσουρο:</value>
+	</data>
+	<data name="ErrorHdlCircuitName" xml:space="preserve">
+		<value>Μη έγκυρο όνομα κυκλώματος: {0}.</value>
+	</data>
+	<data name="ErrorHdlCircuitUnsupported" xml:space="preserve">
+		<value>Μη υποστηριζόμενο κύκλωμα {0}{1}.</value>
+	</data>
+	<data name="ErrorHdlInputPinName" xml:space="preserve">
+		<value>Μη έγκυρο όνομα καρφίτσας εισαγωγής: {0}.</value>
+	</data>
+	<data name="ErrorHdlJamsColocated" xml:space="preserve">
+		<value>Καρφιτσώστε {0} στο {1}{2} που βρίσκεται με {3} καρφιτσών στο {4}{5}.</value>
+	</data>
+	<data name="ErrorHdlOutputPinName" xml:space="preserve">
+		<value>Μη έγκυρο όνομα καρφίτσας εξόδου: {0}.</value>
+	</data>
+	<data name="ErrorHdlPartName" xml:space="preserve">
+		<value>Μη έγκυρο όνομα τμήματος: {0}.</value>
+	</data>
+	<data name="ErrorHdlPinDirectConnect" xml:space="preserve">
+		<value>Το pin {0} συνδεθεί απευθείας στο pin {1}.</value>
+	</data>
+	<data name="MessageHdlExportResut" xml:space="preserve">
+		<value>Εξαγωγή κυκλώματος {0} με {1} σφάλματα.</value>
+	</data>
+	<data name="TitleAddComments" xml:space="preserve">
+		<value>Προετοιμασία σχολίων με συντεταγμένες συμβόλων</value>
+	</data>
+	<data name="ErrorHdlTruthTableFailed" xml:space="preserve">
+		<value>Απέτυχε να δημιουργήσει πίνακα αλήθειας.</value>
+	</data>
+	<data name="MessageHdlBuildingTruthTable" xml:space="preserve">
+		<value>Δημιουργία πίνακα αλήθειας για {0} {1:f1}% έτοιμο</value>
+	</data>
+	<data name="MessageHdlSavingCmpFile" xml:space="preserve">
+		<value>Αποθήκευση αρχείου .cmp {0}</value>
+	</data>
+	<data name="MessageHdlSavingTestFile" xml:space="preserve">
+		<value>Αποθήκευση δοκιμαστικού αρχείου {0}</value>
+	</data>
+	<data name="SensorTypeASCII" xml:space="preserve">
+		<value>Κωδικός ASCII</value>
+	</data>
+	<data name="SensorTypeKeyCode" xml:space="preserve">
+		<value>Κωδικός κλειδιού</value>
+	</data>
+	<data name="ToolTipSensorKeyboard" xml:space="preserve">
+		<value>Ορίστε την εστίαση εδώ και πατήστε κουμπιά στο πληκτρολόγιο.</value>
+	</data>
+	<data name="ErrorHdlUnconnectedGate" xml:space="preserve">
+		<value>Το Gate {0} έχει μόνο έναν ακροδέκτη εισόδου συνδεδεμένο στο {1}</value>
+	</data>
+	<data name="ErrorHdlInputTooBig" xml:space="preserve">
+		<value>Κύκλωμα {0} έχει πάρα πολλά bit εισόδου και δεν είναι δυνατή η δημιουργία δοκιμαστικών αρχείων.</value>
 	</data>
 </root>

@@ -12,6 +12,8 @@ namespace LogicCircuit {
 	/// Nand to Tetris export.
 	/// </summary>
 	public class N2TExport : HdlExport {
+		private const int MaxTestableInputBits = 16;
+
 		private static readonly Dictionary<string, string> N2TGateName = new Dictionary<string, string>() {
 			{ "x", "in" },
 			{ "x1", "a" },
@@ -205,29 +207,36 @@ namespace LogicCircuit {
 		}
 
 		private void ExportN2TTest(LogicalCircuit circuit, string folder) {
-			CircuitTestSocket socket = new CircuitTestSocket(circuit);
-			
-			void reportProgress(double progress) => this.Message(Properties.Resources.MessageHdlBuildingTruthTable(circuit.Name, progress));
+			if(CircuitTestSocket.IsTestable(circuit)) {
+				CircuitTestSocket socket = new CircuitTestSocket(circuit);
+				if(socket.Inputs.Sum(i => i.Pin.BitWidth) <= N2TExport.MaxTestableInputBits) {
+					void reportProgress(double progress) => this.Message(Properties.Resources.MessageHdlBuildingTruthTable(circuit.Name, progress));
 
-			ThreadPool.QueueUserWorkItem(o => {
-				try {
-					bool isTrancated = false;
-					IList<TruthState>? table = socket.BuildTruthTable(reportProgress, () => true, null, DialogTruthTable.MaxRows, out isTrancated);
-					if (table == null || isTrancated) {
-						this.Message(Properties.Resources.ErrorHdlTruthTableFailed);
-					} else {
-						this.ExportN2TTest(
-							circuit.Name,
-							socket.Inputs.Select(i => i.Pin.Name).ToList(),
-							socket.Outputs.Select(o => o.Pin.Name).ToList(),
-							folder,
-							table
-						);
-					}
-				} catch(Exception exception) {
-					App.Mainframe.ReportException(exception);
+					ThreadPool.QueueUserWorkItem(o => {
+						try {
+							bool isTrancated = false;
+							IList<TruthState>? table = socket.BuildTruthTable(reportProgress, () => true, null, DialogTruthTable.MaxRows, out isTrancated);
+							if (table == null || isTrancated) {
+								this.Message(Properties.Resources.ErrorHdlTruthTableFailed);
+							} else {
+								this.ExportN2TTest(
+									circuit.Name,
+									socket.Inputs.Select(i => i.Pin.Name).ToList(),
+									socket.Outputs.Select(o => o.Pin.Name).ToList(),
+									folder,
+									table
+								);
+							}
+						} catch(Exception exception) {
+							App.Mainframe.ReportException(exception);
+						}
+					});
+				} else {
+					this.Message(Properties.Resources.ErrorHdlInputTooBig(circuit.Name));
 				}
-			});
+			} else {
+				this.Message(Properties.Resources.MessageInputOutputPinsMissing);
+			}
 		}
 
 		private void ExportN2TTest(

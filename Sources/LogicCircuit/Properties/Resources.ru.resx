@@ -1313,7 +1313,9 @@
 	<data name="ToolTipDescriptorSensor" xml:space="preserve">
     <value>Предоставляет данные из "внешнего источника",
 как серию предопределенных, случайно
-выбранных, или введенных вручную значений.</value>
+выбранных, или введенных вручную значений.
+Также служит источником кодов
+клавиатуры или символов.</value>
   </data>
 	<data name="ToolTipDescriptorSplitter" xml:space="preserve">
     <value>Позволяет создавать или разделять жгуты проводов.
@@ -1467,5 +1469,89 @@
 	</data>
 	<data name="TitleIsDiagramBackgroundWhite" xml:space="preserve">
 		<value>Фон схемы белый</value>
+	</data>
+	<data name="CommandFileExportHdl" xml:space="preserve">
+		<value>Экспорт _HDL...</value>
+	</data>
+	<data name="ErrorExportHdlFile" xml:space="preserve">
+		<value>Ошибки при экспорте файла {0}</value>
+	</data>
+	<data name="MessageExportingHdl" xml:space="preserve">
+		<value>Экспорт схемы {0} в файл {1}</value>
+	</data>
+	<data name="TitleClose" xml:space="preserve">
+		<value>Закрыть</value>
+	</data>
+	<data name="TitleExport" xml:space="preserve">
+		<value>Экспорт</value>
+	</data>
+	<data name="TitleExportFolder" xml:space="preserve">
+		<value>Целевая папка:</value>
+	</data>
+	<data name="TitleExportHdl" xml:space="preserve">
+		<value>Экспорт _HDL</value>
+	</data>
+	<data name="TitleExportOnlyCurrent" xml:space="preserve">
+		<value>Экспортировать только текущую схему, без подсхем</value>
+	</data>
+	<data name="TitleExportType" xml:space="preserve">
+		<value>Экспорт в:</value>
+	</data>
+	<data name="TitleLog" xml:space="preserve">
+		<value>Журнал:</value>
+	</data>
+	<data name="ErrorHdlCircuitName" xml:space="preserve">
+		<value>Неверное имя схемы: {0}.</value>
+	</data>
+	<data name="ErrorHdlCircuitUnsupported" xml:space="preserve">
+		<value>Неподдерживаемый элемент {0}{1}.</value>
+	</data>
+	<data name="ErrorHdlInputPinName" xml:space="preserve">
+		<value>Неверное имя входного разъема: {0}.</value>
+	</data>
+	<data name="ErrorHdlJamsColocated" xml:space="preserve">
+		<value>Контакт {0} на {1}{2} совмещен с контактом {3} на {4}{5}.</value>
+	</data>
+	<data name="ErrorHdlOutputPinName" xml:space="preserve">
+		<value>Неверное имя выходного разъема: {0}.</value>
+	</data>
+	<data name="ErrorHdlPartName" xml:space="preserve">
+		<value>Неверное наименование элемента: {0}.</value>
+	</data>
+	<data name="ErrorHdlPinDirectConnect" xml:space="preserve">
+		<value>Разъем {0} подключен непосредственно к разъему {1}.</value>
+	</data>
+	<data name="MessageHdlExportResut" xml:space="preserve">
+		<value>Схема {0} экспортирована, ошибок: {1}.</value>
+	</data>
+	<data name="TitleAddComments" xml:space="preserve">
+		<value>Добавлять комментарии с координатами символов</value>
+	</data>
+	<data name="ErrorHdlTruthTableFailed" xml:space="preserve">
+		<value>Не удалось построить таблицу истинности.</value>
+	</data>
+	<data name="MessageHdlBuildingTruthTable" xml:space="preserve">
+		<value>Построение таблицы истинности для {0} {1:f1}% готово</value>
+	</data>
+	<data name="MessageHdlSavingCmpFile" xml:space="preserve">
+		<value>Сохранение файла .cmp {0}</value>
+	</data>
+	<data name="MessageHdlSavingTestFile" xml:space="preserve">
+		<value>Сохранение тестового файла {0}</value>
+	</data>
+	<data name="SensorTypeASCII" xml:space="preserve">
+		<value>Код ASCII</value>
+	</data>
+	<data name="SensorTypeKeyCode" xml:space="preserve">
+		<value>Код клавиши</value>
+	</data>
+	<data name="ToolTipSensorKeyboard" xml:space="preserve">
+		<value>Поставьте фокус сюда и нажимайте кнопки на клавиатуре.</value>
+	</data>
+	<data name="ErrorHdlUnconnectedGate" xml:space="preserve">
+		<value>Вентиль {0} имеет только один подключенный входной контакт на {1}</value>
+	</data>
+	<data name="ErrorHdlInputTooBig" xml:space="preserve">
+		<value>Схема {0} имеет слишком много входных битов, и тестовые файлы не могут быть построены.</value>
 	</data>
 </root>

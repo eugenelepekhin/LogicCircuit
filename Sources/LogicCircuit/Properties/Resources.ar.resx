@@ -1283,7 +1283,10 @@ LED, مصفوفة LED ,زر , أو اية عناصر اخرى</value>
     <value>أضف و أوصل مجسات للدراة من أجل مراقبة وضع الدارة الفعالة الحالي على سطح المجس, يمكن الحصول على القيم السابقة (أرشيف) بالنقر المزدوج على المجس أو يمكن استعراض هذه القيم من قارء الإشارة.</value>
   </data>
 	<data name="ToolTipDescriptorSensor" xml:space="preserve">
-    <value>يقوم بتقديم البيانات من "مصدر خارجي" على شكل سلسة قيم معدة مسبقا, و باختيار عشوائي, أو قيم مدخلة يدويا.</value>
+    <value>يقوم بتقديم البيانات من "مصدر خارجي" على
+شكل سلسة قيم معدة مسبقا, و باختيار عشوائي, 
+أو قيم مدخلة يدويا. كما أنه بمثابة 
+مصدر لرموز لوحة المفاتيح أو الرموز.</value>
   </data>
 	<data name="ToolTipDescriptorSplitter" xml:space="preserve">
     <value>يسمح بتجميع (حزم) اﻷسلاك أو فصلها كل على حدة.
@@ -1388,5 +1391,89 @@ LED, مصفوفة LED ,زر , أو اية عناصر اخرى</value>
 	</data>
 	<data name="TitleIsDiagramBackgroundWhite" xml:space="preserve">
 		<value>خلفية الرسم التخطيطي بيضاء</value>
+	</data>
+	<data name="CommandFileExportHdl" xml:space="preserve">
+		<value>تصدير HDL ...</value>
+	</data>
+	<data name="ErrorExportHdlFile" xml:space="preserve">
+		<value>أخطاء تصدير الملف {0}</value>
+	</data>
+	<data name="MessageExportingHdl" xml:space="preserve">
+		<value>تصدير {0} الدائرة إلى ملف {1}</value>
+	</data>
+	<data name="TitleClose" xml:space="preserve">
+		<value>غلق</value>
+	</data>
+	<data name="TitleExport" xml:space="preserve">
+		<value>تصدير</value>
+	</data>
+	<data name="TitleExportFolder" xml:space="preserve">
+		<value>المجلد الهدف:</value>
+	</data>
+	<data name="TitleExportHdl" xml:space="preserve">
+		<value>تصدير HDL</value>
+	</data>
+	<data name="TitleExportOnlyCurrent" xml:space="preserve">
+		<value>تصدير الدائرة الحالية فقط ، وليس أي دوائر فرعية</value>
+	</data>
+	<data name="TitleExportType" xml:space="preserve">
+		<value>تصدير إلى:</value>
+	</data>
+	<data name="TitleLog" xml:space="preserve">
+		<value>سجل:</value>
+	</data>
+	<data name="ErrorHdlCircuitName" xml:space="preserve">
+		<value>اسم الدائرة غير صالح: {0}.</value>
+	</data>
+	<data name="ErrorHdlCircuitUnsupported" xml:space="preserve">
+		<value>{0}{1} الدائرة غير المدعومة.</value>
+	</data>
+	<data name="ErrorHdlInputPinName" xml:space="preserve">
+		<value>اسم غير صالح لدبوس الإدخال: {0}.</value>
+	</data>
+	<data name="ErrorHdlJamsColocated" xml:space="preserve">
+		<value>قم بتثبيت {0} على {1}{2} مع وضع دبوس {3} على {4}{5}.</value>
+	</data>
+	<data name="ErrorHdlOutputPinName" xml:space="preserve">
+		<value>اسم غير صالح لدبوس الإخراج: {0}.</value>
+	</data>
+	<data name="ErrorHdlPartName" xml:space="preserve">
+		<value>اسم الجزء غير صالح: {0}.</value>
+	</data>
+	<data name="ErrorHdlPinDirectConnect" xml:space="preserve">
+		<value>{0} توصيل الدبوس مباشرة بالدبوس {1}.</value>
+	</data>
+	<data name="MessageHdlExportResut" xml:space="preserve">
+		<value>{0} تصدير الدائرة مع {1} خطأ.</value>
+	</data>
+	<data name="TitleAddComments" xml:space="preserve">
+		<value>التعليقات المسبقة مع إحداثيات الرمز</value>
+	</data>
+	<data name="ErrorHdlTruthTableFailed" xml:space="preserve">
+		<value>فشل في بناء جدول الحقيقة.</value>
+	</data>
+	<data name="MessageHdlBuildingTruthTable" xml:space="preserve">
+		<value>بناء جدول الحقيقة ل {0} {1:f1}٪ تم</value>
+	</data>
+	<data name="MessageHdlSavingCmpFile" xml:space="preserve">
+		<value>حفظ ملف .cmp {0}</value>
+	</data>
+	<data name="MessageHdlSavingTestFile" xml:space="preserve">
+		<value>حفظ ملف الاختبار {0}</value>
+	</data>
+	<data name="SensorTypeASCII" xml:space="preserve">
+		<value>رمز ASCII</value>
+	</data>
+	<data name="SensorTypeKeyCode" xml:space="preserve">
+		<value>رمز المفتاح</value>
+	</data>
+	<data name="ToolTipSensorKeyboard" xml:space="preserve">
+		<value>اضبط التركيز هنا واضغط على الأزرار الموجودة على لوحة المفاتيح.</value>
+	</data>
+	<data name="ErrorHdlUnconnectedGate" xml:space="preserve">
+		<value>يحتوي Gate {0} على دبوس إدخال واحد فقط متصل على {1}</value>
+	</data>
+	<data name="ErrorHdlInputTooBig" xml:space="preserve">
+		<value>يحتوي {0} الدائرة على عدد كبير جدا من بتات الإدخال ولا يمكن إنشاء ملفات الاختبار.</value>
 	</data>
 </root>

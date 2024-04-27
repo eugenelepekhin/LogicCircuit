@@ -1303,7 +1303,9 @@ et quand il est impair, l'horloge passe de 1 vers 0.</value>
 	<data name="ToolTipDescriptorSensor" xml:space="preserve">
     <value>Fourni des données d'une "source externe"
 sous la forme d'une liste prédéfinie,
-choisie aléatoirement, ou entrée manuellement.</value>
+choisie aléatoirement, ou entrée manuellement.
+Il sert également de source de codes
+ou de symboles de clavier.</value>
   </data>
 	<data name="SensorTypeRandom" xml:space="preserve">
     <value>Aléatoire</value>
@@ -1464,5 +1466,89 @@ Voulez-vous charger l'état sauvegardé automatiquement de ce fichier ?</value>
 	</data>
 	<data name="TitleIsDiagramBackgroundWhite" xml:space="preserve">
 		<value>L’arrière-plan du diagramme est blanc</value>
+	</data>
+	<data name="CommandFileExportHdl" xml:space="preserve">
+		<value>Exporter HDL...</value>
+	</data>
+	<data name="ErrorExportHdlFile" xml:space="preserve">
+		<value>Erreurs lors de l’exportation du fichier {0}</value>
+	</data>
+	<data name="MessageExportingHdl" xml:space="preserve">
+		<value>Exportation de {0} de circuit vers un fichier {1}</value>
+	</data>
+	<data name="TitleClose" xml:space="preserve">
+		<value>Fermer</value>
+	</data>
+	<data name="TitleExport" xml:space="preserve">
+		<value>Exportation</value>
+	</data>
+	<data name="TitleExportFolder" xml:space="preserve">
+		<value>Dossier cible :</value>
+	</data>
+	<data name="TitleExportHdl" xml:space="preserve">
+		<value>Exporter HDL</value>
+	</data>
+	<data name="TitleExportOnlyCurrent" xml:space="preserve">
+		<value>Exporter uniquement le circuit de courant, pas les sous-circuits</value>
+	</data>
+	<data name="TitleExportType" xml:space="preserve">
+		<value>Exporter vers :</value>
+	</data>
+	<data name="TitleLog" xml:space="preserve">
+		<value>Rapport:</value>
+	</data>
+	<data name="ErrorHdlCircuitName" xml:space="preserve">
+		<value>Nom du circuit non valide : {0}.</value>
+	</data>
+	<data name="ErrorHdlCircuitUnsupported" xml:space="preserve">
+		<value>Circuit non pris en charge {0}{1}.</value>
+	</data>
+	<data name="ErrorHdlInputPinName" xml:space="preserve">
+		<value>Nom de la broche d’entrée non valide : {0}.</value>
+	</data>
+	<data name="ErrorHdlJamsColocated" xml:space="preserve">
+		<value>Épinglez {0} sur {1}{2} colocalisé avec la broche {3} sur {4}{5}.</value>
+	</data>
+	<data name="ErrorHdlOutputPinName" xml:space="preserve">
+		<value>Nom de la broche de sortie non valide : {0}.</value>
+	</data>
+	<data name="ErrorHdlPartName" xml:space="preserve">
+		<value>Nom de la pièce non valide : {0}.</value>
+	</data>
+	<data name="ErrorHdlPinDirectConnect" xml:space="preserve">
+		<value>La broche {0} connectée directement à la broche {1}.</value>
+	</data>
+	<data name="MessageHdlExportResut" xml:space="preserve">
+		<value>Le circuit {0} exporté avec {1} erreur(s).</value>
+	</data>
+	<data name="TitleAddComments" xml:space="preserve">
+		<value>Ajouter les commentaires avec les coordonnées du symbole</value>
+	</data>
+	<data name="ErrorHdlTruthTableFailed" xml:space="preserve">
+		<value>Impossible de construire une table de vérité.</value>
+	</data>
+	<data name="MessageHdlBuildingTruthTable" xml:space="preserve">
+		<value>Création d’une table de vérité pour {0} {1:f1}% done</value>
+	</data>
+	<data name="MessageHdlSavingCmpFile" xml:space="preserve">
+		<value>Enregistrement du fichier .cmp {0}</value>
+	</data>
+	<data name="MessageHdlSavingTestFile" xml:space="preserve">
+		<value>Enregistrement du fichier de test {0}</value>
+	</data>
+	<data name="SensorTypeASCII" xml:space="preserve">
+		<value>Code ASCII</value>
+	</data>
+	<data name="SensorTypeKeyCode" xml:space="preserve">
+		<value>Code clé</value>
+	</data>
+	<data name="ToolTipSensorKeyboard" xml:space="preserve">
+		<value>Réglez la mise au point ici et appuyez sur les boutons du clavier.</value>
+	</data>
+	<data name="ErrorHdlUnconnectedGate" xml:space="preserve">
+		<value>Le {0} de la porte n’a qu’une seule broche d’entrée connectée sur {1}</value>
+	</data>
+	<data name="ErrorHdlInputTooBig" xml:space="preserve">
+		<value>Le circuit {0} a trop de bits d’entrée et les fichiers de test ne peuvent pas être compilés.</value>
 	</data>
 </root>

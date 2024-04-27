@@ -1,5 +1,6 @@
 ﻿// Ignore Spelling: Hdl
 
+using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Xml;
 using LogicCircuit.UnitTest.HDL;
@@ -50,7 +51,7 @@ namespace LogicCircuit.UnitTest {
 			this.SortByNote(circuits);
 			foreach(LogicalCircuit circuit in circuits) {
 				ProjectTester.SwitchTo(project, circuit.Name);
-				N2TExport export = new N2TExport(false, false, this.Message, this.Message);
+				N2TExport export = new N2TExport(false, true, this.Message, this.Message);
 				bool success = export.ExportCircuit(circuit, hdlPath, false);
 				Assert.IsTrue(success);
 				HdlContext context = new HdlContext(hdlPath, this.Message);
@@ -107,6 +108,19 @@ namespace LogicCircuit.UnitTest {
 		[STATestMethod]
 		public void HdlTestMultiInputGates() {
 			this.RunTruthTableComparisonForCategory("BigGates");
+		}
+
+		[STATestMethod]
+		public void HdlTestLocale() {
+			ProjectTester.InitResources();
+			CultureInfo cultureInfo = Properties.Resources.Culture;
+			try {
+				Properties.Resources.Culture = CultureInfo.GetCultureInfo("ru");
+				this.RunTruthTableComparisonForCategory("Test");
+				this.RunTruthTableComparisonForCategory("BigGates");
+			} finally {
+				Properties.Resources.Culture = cultureInfo;
+			}
 		}
 
 		//[STATestMethod]

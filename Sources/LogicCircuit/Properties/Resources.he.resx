@@ -1361,7 +1361,10 @@
 להצגת הסטוריית ערכים עבור הגשוש ניתן ללחוץ עליו לחיצה כפולה‏‏‏,‏ או לראות את הנתונים במרשם התנודות‏.‏</value>
   </data>
 	<data name="ToolTipDescriptorSensor" xml:space="preserve">
-    <value>מדמה מידע מתוך מקור חיצוני על ידי רשימת ערכים מוגדרת מראש‏,‏ רשימה אקראית‏,‏ או ערכים שמוזנים ידנית‏.‏</value>
+    <value>מדמה מידע מתוך מקור חיצוני על ידי רשימת 
+ערכים מוגדרת מראש‏,‏ רשימה אקראית‏,‏ או 
+ערכים שמוזנים ידנית‏.‏ הוא משמש גם 
+כמקור של קודי מקלדת או סמלים.</value>
   </data>
 	<data name="ToolTipDescriptorSplitter" xml:space="preserve">
     <value>מאפשר לאגד או להפריד מספר חוטים‏.‏
@@ -1491,5 +1494,89 @@
 	</data>
 	<data name="TitleIsDiagramBackgroundWhite" xml:space="preserve">
 		<value>רקע הדיאגרמה לבן</value>
+	</data>
+	<data name="CommandFileExportHdl" xml:space="preserve">
+		<value>ייצא HDL...</value>
+	</data>
+	<data name="ErrorExportHdlFile" xml:space="preserve">
+		<value>שגיאות בייצוא קובץ {0}</value>
+	</data>
+	<data name="MessageExportingHdl" xml:space="preserve">
+		<value>{0} מעגל ייצוא לקובץ {1}</value>
+	</data>
+	<data name="TitleClose" xml:space="preserve">
+		<value>קרוב</value>
+	</data>
+	<data name="TitleExport" xml:space="preserve">
+		<value>ייצא</value>
+	</data>
+	<data name="TitleExportFolder" xml:space="preserve">
+		<value>תיקיית יעד:</value>
+	</data>
+	<data name="TitleExportHdl" xml:space="preserve">
+		<value>ייצא HDL</value>
+	</data>
+	<data name="TitleExportOnlyCurrent" xml:space="preserve">
+		<value>ייצא רק מעגל זרם, לא כל מעגלי משנה</value>
+	</data>
+	<data name="TitleExportType" xml:space="preserve">
+		<value>ייצוא אל:</value>
+	</data>
+	<data name="TitleLog" xml:space="preserve">
+		<value>יומן רישום:</value>
+	</data>
+	<data name="ErrorHdlCircuitName" xml:space="preserve">
+		<value>שם לא חוקי של המעגל: {0}.</value>
+	</data>
+	<data name="ErrorHdlCircuitUnsupported" xml:space="preserve">
+		<value>מעגל חשמלי {0}{1} לא נתמך.</value>
+	</data>
+	<data name="ErrorHdlInputPinName" xml:space="preserve">
+		<value>שם לא חוקי של פין הקלט: {0}.</value>
+	</data>
+	<data name="ErrorHdlJamsColocated" xml:space="preserve">
+		<value>הצמד {0} על {1}{2} collocated עם סיכה {3} על {4}{5}.</value>
+	</data>
+	<data name="ErrorHdlOutputPinName" xml:space="preserve">
+		<value>שם לא חוקי של פין הפלט: {0}.</value>
+	</data>
+	<data name="ErrorHdlPartName" xml:space="preserve">
+		<value>שם לא חוקי של חלק: {0}.</value>
+	</data>
+	<data name="ErrorHdlPinDirectConnect" xml:space="preserve">
+		<value>הצמד {0} מחובר ישירות להצמדת {1}.</value>
+	</data>
+	<data name="MessageHdlExportResut" xml:space="preserve">
+		<value>{0} לייצוא מעגלים חשמליים עם שגיאות {1}.</value>
+	</data>
+	<data name="TitleAddComments" xml:space="preserve">
+		<value>הכנת הערות עם קואורדינטות סמלים</value>
+	</data>
+	<data name="ErrorHdlTruthTableFailed" xml:space="preserve">
+		<value>נכשל בבניית טבלת האמת.</value>
+	</data>
+	<data name="MessageHdlBuildingTruthTable" xml:space="preserve">
+		<value>בניית טבלת אמת עבור {0} {1:f1}% בוצע</value>
+	</data>
+	<data name="MessageHdlSavingCmpFile" xml:space="preserve">
+		<value>שמירת קובץ .cmp {0}</value>
+	</data>
+	<data name="MessageHdlSavingTestFile" xml:space="preserve">
+		<value>שמירת קובץ בדיקה {0}</value>
+	</data>
+	<data name="SensorTypeASCII" xml:space="preserve">
+		<value>קוד ASCII</value>
+	</data>
+	<data name="SensorTypeKeyCode" xml:space="preserve">
+		<value>קוד מפתח</value>
+	</data>
+	<data name="ToolTipSensorKeyboard" xml:space="preserve">
+		<value>הגדר את המוקד כאן ולחץ על לחצנים בלוח המקשים.</value>
+	</data>
+	<data name="ErrorHdlUnconnectedGate" xml:space="preserve">
+		<value>שער {0} כולל פין קלט אחד בלבד המחובר {1}</value>
+	</data>
+	<data name="ErrorHdlInputTooBig" xml:space="preserve">
+		<value>Circuit {0} מכיל יותר מדי סיביות קלט ולא ניתן לבנות קבצי בדיקה.</value>
 	</data>
 </root>

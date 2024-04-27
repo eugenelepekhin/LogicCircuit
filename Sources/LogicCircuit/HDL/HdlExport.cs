@@ -27,7 +27,24 @@ namespace LogicCircuit {
 			this.Message(Properties.Resources.MessageHdlExportResut(logicalCircuit.Name, this.ErrorCount));
 			return this.ErrorCount == 0;
 		}
-		public virtual string Name(HdlSymbol symbol) => symbol.CircuitSymbol.Circuit.Name.Trim();
+		public virtual string Name(HdlSymbol symbol) {
+			Circuit circuit = symbol.CircuitSymbol.Circuit;
+			if(circuit is Gate gate) {
+				// Gate names are translated so, use their English names.
+				switch(gate.GateType) {
+				case GateType.Clock:return "Clock";
+				case GateType.Not:	return "Not";
+				case GateType.Or:	return gate.InvertedOutput ? "NOr" : "Or";
+				case GateType.And:	return gate.InvertedOutput ? "NAnd" : "And";
+				case GateType.Xor:	return gate.InvertedOutput ? "XNor" : "Xor";
+				case GateType.Led:	return "LED";
+				case GateType.Probe:return "Probe";
+				case GateType.TriState1:
+				case GateType.TriState2: return "Tri-state";
+				}
+			}
+			return circuit.Name.Trim();
+		}
 		public virtual string Name(Jam jam) => jam.Pin.Name.Trim();
 
 		protected void Message(string text) => this.logMessage(text);

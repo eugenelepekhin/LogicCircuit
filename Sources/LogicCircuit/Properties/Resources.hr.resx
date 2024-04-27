@@ -1104,7 +1104,10 @@ sat od 0 do 1, kada je neparan tada se sat mijenja s 1 na 0.</value>
     <value>Dodajte i povežite sonde na svoje krugove kako biste promatrali trenutno stanje uključenog kruga na površini sonde, povijest vrijednosti kada dvaput kliknete na sondu ili pregledate ove podatke na osciloskopu.</value>
   </data>
 	<data name="ToolTipDescriptorSensor" xml:space="preserve">
-    <value>Pruža podatke iz "vanjskog izvora" kao niz unaprijed definiranih, nasumično odabranih ili ručno unesenih vrijednosti.</value>
+    <value>Pruža podatke iz "vanjskog izvora" kao 
+niz unaprijed definiranih, nasumično 
+odabranih ili ručno unesenih vrijednosti. 
+Također služi kao izvor kodova tipkovnice ili simbola.</value>
   </data>
 	<data name="ToolTipDescriptorSplitter" xml:space="preserve">
     <value>Omogućuje stvaranje kabelskog svežnja ili odvajanje na pojedinačne žice. Korištenje razdjelnika i višebitnih pinova može značajno pojednostaviti crtanje i razumijevanje sklopa.</value>
@@ -1449,5 +1452,89 @@ Takav sklop se ne može koristiti više od jednom na drugim sklopovima jer će s
   </data>
 	<data name="TitleIsDiagramBackgroundWhite" xml:space="preserve">
 		<value>Pozadina dijagrama je bijela</value>
+	</data>
+	<data name="CommandFileExportHdl" xml:space="preserve">
+		<value>Izvoz HDL-a...</value>
+	</data>
+	<data name="ErrorExportHdlFile" xml:space="preserve">
+		<value>Pogreške prilikom izvoza datoteke {0}</value>
+	</data>
+	<data name="MessageExportingHdl" xml:space="preserve">
+		<value>Izvoz {0} kruga u datoteku {1}</value>
+	</data>
+	<data name="TitleClose" xml:space="preserve">
+		<value>Blizak</value>
+	</data>
+	<data name="TitleExport" xml:space="preserve">
+		<value>Izvoz</value>
+	</data>
+	<data name="TitleExportFolder" xml:space="preserve">
+		<value>Ciljna mapa:</value>
+	</data>
+	<data name="TitleExportHdl" xml:space="preserve">
+		<value>Izvoz HDL</value>
+	</data>
+	<data name="TitleExportOnlyCurrent" xml:space="preserve">
+		<value>Izvoz samo strujnog kruga, a ne pod-krugova</value>
+	</data>
+	<data name="TitleExportType" xml:space="preserve">
+		<value>Izvezi u:</value>
+	</data>
+	<data name="TitleLog" xml:space="preserve">
+		<value>Klada:</value>
+	</data>
+	<data name="ErrorHdlCircuitName" xml:space="preserve">
+		<value>Naziv kruga nije valjan: {0}.</value>
+	</data>
+	<data name="ErrorHdlCircuitUnsupported" xml:space="preserve">
+		<value>Nepodržani krug {0}{1}.</value>
+	</data>
+	<data name="ErrorHdlInputPinName" xml:space="preserve">
+		<value>Naziv ulaznog pina nije valjan: {0}.</value>
+	</data>
+	<data name="ErrorHdlJamsColocated" xml:space="preserve">
+		<value>Pin {0} na {1}{2} kolociran s iglom {3} na {4}{5}.</value>
+	</data>
+	<data name="ErrorHdlOutputPinName" xml:space="preserve">
+		<value>Naziv izlaznog pina nije valjan: {0}.</value>
+	</data>
+	<data name="ErrorHdlPartName" xml:space="preserve">
+		<value>Naziv dijela nije valjan: {0}.</value>
+	</data>
+	<data name="ErrorHdlPinDirectConnect" xml:space="preserve">
+		<value>Pin {0} spojen izravno na pin {1}.</value>
+	</data>
+	<data name="MessageHdlExportResut" xml:space="preserve">
+		<value>Krug {0} izvezen s {1} pogreškama.</value>
+	</data>
+	<data name="TitleAddComments" xml:space="preserve">
+		<value>Prethodni komentari s koordinatama simbola</value>
+	</data>
+	<data name="ErrorHdlTruthTableFailed" xml:space="preserve">
+		<value>Izrada tablice istine nije uspjela.</value>
+	</data>
+	<data name="MessageHdlBuildingTruthTable" xml:space="preserve">
+		<value>Izrada tablice istine za {0} {1:f1}% dovršeno</value>
+	</data>
+	<data name="MessageHdlSavingCmpFile" xml:space="preserve">
+		<value>Spremanje .cmp datoteke {0}</value>
+	</data>
+	<data name="MessageHdlSavingTestFile" xml:space="preserve">
+		<value>Spremanje probne datoteke {0}</value>
+	</data>
+	<data name="SensorTypeASCII" xml:space="preserve">
+		<value>ASCII kod</value>
+	</data>
+	<data name="SensorTypeKeyCode" xml:space="preserve">
+		<value>Kod ključa</value>
+	</data>
+	<data name="ToolTipSensorKeyboard" xml:space="preserve">
+		<value>Ovdje postavite fokus i pritisnite tipke na tipkovnici.</value>
+	</data>
+	<data name="ErrorHdlUnconnectedGate" xml:space="preserve">
+		<value>Gate {0} ima samo jedan ulazni pin spojen na {1}</value>
+	</data>
+	<data name="ErrorHdlInputTooBig" xml:space="preserve">
+		<value>Circuit {0} ima previše ulaznih bitova i testne datoteke se ne mogu izraditi.</value>
 	</data>
 </root>

@@ -1254,4 +1254,88 @@ tutti i simboli del display saranno visibili sul suo simbolo.</value>
 	<data name="TitleIsDiagramBackgroundWhite" xml:space="preserve">
 		<value>Lo sfondo del diagramma è bianco</value>
 	</data>
+	<data name="CommandFileExportHdl" xml:space="preserve">
+		<value>Esporta HDL...</value>
+	</data>
+	<data name="ErrorExportHdlFile" xml:space="preserve">
+		<value>Errori durante l'esportazione dei file {0}</value>
+	</data>
+	<data name="MessageExportingHdl" xml:space="preserve">
+		<value>Esportazione dei {0} del circuito in un file {1}</value>
+	</data>
+	<data name="TitleClose" xml:space="preserve">
+		<value>Chiudere</value>
+	</data>
+	<data name="TitleExport" xml:space="preserve">
+		<value>Esportazione</value>
+	</data>
+	<data name="TitleExportFolder" xml:space="preserve">
+		<value>Cartella di destinazione:</value>
+	</data>
+	<data name="TitleExportHdl" xml:space="preserve">
+		<value>Esporta HDL</value>
+	</data>
+	<data name="TitleExportOnlyCurrent" xml:space="preserve">
+		<value>Esporta solo il circuito corrente, non i sottocircuiti</value>
+	</data>
+	<data name="TitleExportType" xml:space="preserve">
+		<value>Esporta in:</value>
+	</data>
+	<data name="TitleLog" xml:space="preserve">
+		<value>Registro:</value>
+	</data>
+	<data name="ErrorHdlCircuitName" xml:space="preserve">
+		<value>Nome del circuito non valido: {0}.</value>
+	</data>
+	<data name="ErrorHdlCircuitUnsupported" xml:space="preserve">
+		<value>Circuito non supportato {0}{1}.</value>
+	</data>
+	<data name="ErrorHdlInputPinName" xml:space="preserve">
+		<value>Nome del pin di ingresso non valido: {0}.</value>
+	</data>
+	<data name="ErrorHdlJamsColocated" xml:space="preserve">
+		<value>Pin {0} su {1}{2} collocato con pin {3} su {4}{5}.</value>
+	</data>
+	<data name="ErrorHdlOutputPinName" xml:space="preserve">
+		<value>Nome del pin di uscita non valido: {0}.</value>
+	</data>
+	<data name="ErrorHdlPartName" xml:space="preserve">
+		<value>Nome della parte non valido: {0}.</value>
+	</data>
+	<data name="ErrorHdlPinDirectConnect" xml:space="preserve">
+		<value>Il pin {0} collegato direttamente al pin {1}.</value>
+	</data>
+	<data name="MessageHdlExportResut" xml:space="preserve">
+		<value>Il circuito {0} esportato con {1} errori.</value>
+	</data>
+	<data name="TitleAddComments" xml:space="preserve">
+		<value>Anteponi ai commenti le coordinate dei simboli</value>
+	</data>
+	<data name="ErrorHdlTruthTableFailed" xml:space="preserve">
+		<value>Impossibile creare la tabella della verità.</value>
+	</data>
+	<data name="MessageHdlBuildingTruthTable" xml:space="preserve">
+		<value>Creazione di una tabella di verità per {0} {1:f1}% done</value>
+	</data>
+	<data name="MessageHdlSavingCmpFile" xml:space="preserve">
+		<value>Salvataggio {0} file .cmp</value>
+	</data>
+	<data name="MessageHdlSavingTestFile" xml:space="preserve">
+		<value>Salvataggio del file di prova {0}</value>
+	</data>
+	<data name="SensorTypeASCII" xml:space="preserve">
+		<value>Codice ASCII</value>
+	</data>
+	<data name="SensorTypeKeyCode" xml:space="preserve">
+		<value>Codice chiave</value>
+	</data>
+	<data name="ToolTipSensorKeyboard" xml:space="preserve">
+		<value>Imposta qui la messa a fuoco e premi i pulsanti sulla tastiera.</value>
+	</data>
+	<data name="ErrorHdlUnconnectedGate" xml:space="preserve">
+		<value>Gate {0} ha un solo pin di ingresso collegato su {1}</value>
+	</data>
+	<data name="ErrorHdlInputTooBig" xml:space="preserve">
+		<value>Il circuito {0} ha troppi bit di input e non è possibile creare file di test.</value>
+	</data>
 </root>

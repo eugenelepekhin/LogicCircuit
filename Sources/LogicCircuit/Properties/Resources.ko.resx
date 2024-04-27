@@ -1296,7 +1296,9 @@
 프로브를 더블클릭하거나 오실로스코프에서 보면 상태값의 히스토리를 볼 수 있다.</value>
   </data>
 	<data name="ToolTipDescriptorSensor" xml:space="preserve">
-    <value>미리 정한 연속값 또는 랜덤값, 직접 입력한 값 형태로 "외부 소스"에서 데이터를 받는다.</value>
+    <value>미리 정한 연속값 또는 랜덤값, 직접 입력한 값 형태로 
+"외부 소스"에서 데이터를 받는다. 
+또한 키보드 코드 또는 기호의 소스 역할도 합니다.</value>
   </data>
 	<data name="ToolTipDescriptorSplitter" xml:space="preserve">
     <value>와이어 묶음을 만들거나 묶음을 개별 와이어로 분리한다.
@@ -1425,5 +1427,89 @@ Tri-state와 적절한 제어 회로를 함께 써서 멀티플렉서를 만들 
 	</data>
 	<data name="TitleIsDiagramBackgroundWhite" xml:space="preserve">
 		<value>다이어그램 배경은 흰색입니다.</value>
+	</data>
+	<data name="CommandFileExportHdl" xml:space="preserve">
+		<value>HDL 내보내기...</value>
+	</data>
+	<data name="ErrorExportHdlFile" xml:space="preserve">
+		<value>파일 {0} 내보내기 오류</value>
+	</data>
+	<data name="MessageExportingHdl" xml:space="preserve">
+		<value>회로 {0} 파일 {1}로 내보내기</value>
+	</data>
+	<data name="TitleClose" xml:space="preserve">
+		<value>닫다</value>
+	</data>
+	<data name="TitleExport" xml:space="preserve">
+		<value>수출</value>
+	</data>
+	<data name="TitleExportFolder" xml:space="preserve">
+		<value>대상 폴더:</value>
+	</data>
+	<data name="TitleExportHdl" xml:space="preserve">
+		<value>HDL 내보내기</value>
+	</data>
+	<data name="TitleExportOnlyCurrent" xml:space="preserve">
+		<value>하위 회로가 아닌 현재 회로만 내보내기</value>
+	</data>
+	<data name="TitleExportType" xml:space="preserve">
+		<value>내보내기 대상:</value>
+	</data>
+	<data name="TitleLog" xml:space="preserve">
+		<value>로그:</value>
+	</data>
+	<data name="ErrorHdlCircuitName" xml:space="preserve">
+		<value>잘못된 회로 이름: {0}.</value>
+	</data>
+	<data name="ErrorHdlCircuitUnsupported" xml:space="preserve">
+		<value>지원되지 않는 회로 {0}{1}.</value>
+	</data>
+	<data name="ErrorHdlInputPinName" xml:space="preserve">
+		<value>입력 핀의 이름이 잘못되었습니다: {0}.</value>
+	</data>
+	<data name="ErrorHdlJamsColocated" xml:space="preserve">
+		<value>핀 {0} {1}{2} {4}{5}의 핀 {3}와 함께 배치됩니다.</value>
+	</data>
+	<data name="ErrorHdlOutputPinName" xml:space="preserve">
+		<value>출력 핀의 이름이 잘못되었습니다: {0}.</value>
+	</data>
+	<data name="ErrorHdlPartName" xml:space="preserve">
+		<value>잘못된 부품 이름: {0}.</value>
+	</data>
+	<data name="ErrorHdlPinDirectConnect" xml:space="preserve">
+		<value>핀 {0} 핀 {1}에 직접 연결됩니다.</value>
+	</data>
+	<data name="MessageHdlExportResut" xml:space="preserve">
+		<value>회로{0} {1} 오류와 함께 내보내졌습니다.</value>
+	</data>
+	<data name="TitleAddComments" xml:space="preserve">
+		<value>주석 앞에 기호 좌표 추가</value>
+	</data>
+	<data name="ErrorHdlTruthTableFailed" xml:space="preserve">
+		<value>진리표를 작성하지 못했습니다.</value>
+	</data>
+	<data name="MessageHdlBuildingTruthTable" xml:space="preserve">
+		<value>{0} {1:f1}% 완료에 대한 진리표 작성</value>
+	</data>
+	<data name="MessageHdlSavingCmpFile" xml:space="preserve">
+		<value>.cmp 파일 저장 {0}</value>
+	</data>
+	<data name="MessageHdlSavingTestFile" xml:space="preserve">
+		<value>테스트 파일 {0} 저장</value>
+	</data>
+	<data name="SensorTypeASCII" xml:space="preserve">
+		<value>ASCII 코드</value>
+	</data>
+	<data name="SensorTypeKeyCode" xml:space="preserve">
+		<value>키 코드</value>
+	</data>
+	<data name="ToolTipSensorKeyboard" xml:space="preserve">
+		<value>여기에서 초점을 설정하고 키보드의 버튼을 누릅니다.</value>
+	</data>
+	<data name="ErrorHdlUnconnectedGate" xml:space="preserve">
+		<value>게이트 {0}에는 하나의 입력 핀만 연결되어 {1}</value>
+	</data>
+	<data name="ErrorHdlInputTooBig" xml:space="preserve">
+		<value>회로 {0}에 입력 비트가 너무 많아 테스트 파일을 빌드할 수 없습니다.</value>
 	</data>
 </root>

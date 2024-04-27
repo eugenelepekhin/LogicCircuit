@@ -1283,7 +1283,8 @@ zu sehen oder diese auf dem Oszilloskop zu betrachten.</value>
   </data>
 	<data name="ToolTipDescriptorSensor" xml:space="preserve">
     <value>Erzeugt Daten aus einer "externen Quelle" als Serie von vordefinierten,
-zufällig erzeugten oder manuell eingegebenen Werten.</value>
+zufällig erzeugten oder manuell eingegebenen Werten.
+Es dient auch als Quelle für Tastaturcodes oder Symbole.</value>
   </data>
 	<data name="ToolTipDescriptorSplitter" xml:space="preserve">
     <value>Ermöglicht die Erstellung eines Leitungsstangs oder
@@ -1465,5 +1466,89 @@ Möchten Sie den automatisch gespeicherten Stand dieser Datei laden?</value>
 	</data>
 	<data name="TitleIsDiagramBackgroundWhite" xml:space="preserve">
 		<value>_Der Hintergrund des Diagramms ist weiß</value>
+	</data>
+	<data name="CommandFileExportHdl" xml:space="preserve">
+		<value>HDL exportieren...</value>
+	</data>
+	<data name="ErrorExportHdlFile" xml:space="preserve">
+		<value>Fehler beim Exportieren von Dateien {0}</value>
+	</data>
+	<data name="MessageExportingHdl" xml:space="preserve">
+		<value>Exportieren von Schaltungs{0} in eine Datei {1}</value>
+	</data>
+	<data name="TitleClose" xml:space="preserve">
+		<value>Schließen</value>
+	</data>
+	<data name="TitleExport" xml:space="preserve">
+		<value>Exportieren</value>
+	</data>
+	<data name="TitleExportFolder" xml:space="preserve">
+		<value>Zielordner:</value>
+	</data>
+	<data name="TitleExportHdl" xml:space="preserve">
+		<value>HDL exportieren</value>
+	</data>
+	<data name="TitleExportOnlyCurrent" xml:space="preserve">
+		<value>Exportieren Sie nur Stromkreise, keine Unterkreise</value>
+	</data>
+	<data name="TitleExportType" xml:space="preserve">
+		<value>Exportieren nach:</value>
+	</data>
+	<data name="TitleLog" xml:space="preserve">
+		<value>Log:</value>
+	</data>
+	<data name="ErrorHdlCircuitName" xml:space="preserve">
+		<value>Ungültiger Name der Schaltung: {0}.</value>
+	</data>
+	<data name="ErrorHdlCircuitUnsupported" xml:space="preserve">
+		<value>Nicht unterstützte Schaltkreis{0}{1}.</value>
+	</data>
+	<data name="ErrorHdlInputPinName" xml:space="preserve">
+		<value>Ungültiger Name des Eingangspins: {0}.</value>
+	</data>
+	<data name="ErrorHdlJamsColocated" xml:space="preserve">
+		<value>Pin {0} auf {1}{2} mit Pin {3} auf {4}{5} verbunden.</value>
+	</data>
+	<data name="ErrorHdlOutputPinName" xml:space="preserve">
+		<value>Ungültiger Name des Ausgangspins: {0}.</value>
+	</data>
+	<data name="ErrorHdlPartName" xml:space="preserve">
+		<value>Ungültiger Name des Teils: {0}.</value>
+	</data>
+	<data name="ErrorHdlPinDirectConnect" xml:space="preserve">
+		<value>Pin {0} direkt mit Pin {1} verbunden.</value>
+	</data>
+	<data name="MessageHdlExportResut" xml:space="preserve">
+		<value>Schaltkreis {0} mit {1} Fehlern exportiert.</value>
+	</data>
+	<data name="TitleAddComments" xml:space="preserve">
+		<value>Voranstellen von Kommentaren mit Symbolkoordinaten</value>
+	</data>
+	<data name="ErrorHdlTruthTableFailed" xml:space="preserve">
+		<value>Fehler beim Erstellen der Wahrheitstabelle.</value>
+	</data>
+	<data name="MessageHdlBuildingTruthTable" xml:space="preserve">
+		<value>Erstellen der Wahrheitstabelle für {0} {1:f1}% erledigt</value>
+	</data>
+	<data name="MessageHdlSavingCmpFile" xml:space="preserve">
+		<value>Speichern der CMP-Datei {0}</value>
+	</data>
+	<data name="MessageHdlSavingTestFile" xml:space="preserve">
+		<value>Speichern der Testdatei {0}</value>
+	</data>
+	<data name="SensorTypeASCII" xml:space="preserve">
+		<value>ASCII-Code</value>
+	</data>
+	<data name="SensorTypeKeyCode" xml:space="preserve">
+		<value>Schlüsselcode</value>
+	</data>
+	<data name="ToolTipSensorKeyboard" xml:space="preserve">
+		<value>Setzen Sie hier den Fokus und drücken Sie Tasten auf der Tastatur.</value>
+	</data>
+	<data name="ErrorHdlUnconnectedGate" xml:space="preserve">
+		<value>Gate {0} hat nur einen Eingangspin, der an {1} angeschlossen ist</value>
+	</data>
+	<data name="ErrorHdlInputTooBig" xml:space="preserve">
+		<value>Die {0} der Schaltung hat zu viele Eingangsbits und es können keine Testdateien erstellt werden.</value>
 	</data>
 </root>

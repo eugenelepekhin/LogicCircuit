@@ -1078,7 +1078,10 @@
     <value>برای مشاهده وضعیت فعلی پاور در مدار استفاده می شود. برای مشاهده مقادیر گذشته اش روی آن دابل-کلیک کنید.</value>
   </data>
 	<data name="ToolTipDescriptorSensor" xml:space="preserve">
-    <value>دیتا را با استناد به منبعی خارجی برای مدار تهیه می کند. مقادیر می تواند به صورت سری یا تصادفی یا دستی وارد شود.</value>
+    <value>دیتا را با استناد به منبعی خارجی برای مدار تهیه می 
+کند. مقادیر می تواند به صورت سری یا تصادفی یا 
+دستی وارد شود. همچنین به عنوان منبع کدهای 
+صفحه کلید یا نمادها عمل می کند.</value>
   </data>
 	<data name="ToolTipDescriptorSplitter" xml:space="preserve">
     <value>برای ایجاد انشعاب در سیم ها بکار می رود.</value>
@@ -1200,5 +1203,89 @@
 	</data>
 	<data name="TitleIsDiagramBackgroundWhite" xml:space="preserve">
 		<value>زمینه نمودار سفید است</value>
+	</data>
+	<data name="CommandFileExportHdl" xml:space="preserve">
+		<value>صادرات HDL...</value>
+	</data>
+	<data name="ErrorExportHdlFile" xml:space="preserve">
+		<value>خطا در صدور {0} پرونده</value>
+	</data>
+	<data name="MessageExportingHdl" xml:space="preserve">
+		<value>{0} مدار صادراتی به {1} پرونده</value>
+	</data>
+	<data name="TitleClose" xml:space="preserve">
+		<value>نزدیک</value>
+	</data>
+	<data name="TitleExport" xml:space="preserve">
+		<value>صادرات</value>
+	</data>
+	<data name="TitleExportFolder" xml:space="preserve">
+		<value>پوشهی هدف:</value>
+	</data>
+	<data name="TitleExportHdl" xml:space="preserve">
+		<value>صادرات HDL</value>
+	</data>
+	<data name="TitleExportOnlyCurrent" xml:space="preserve">
+		<value>صادرات فقط مدار فعلی، نه هر زیر مدار</value>
+	</data>
+	<data name="TitleExportType" xml:space="preserve">
+		<value>صادرات به:</value>
+	</data>
+	<data name="TitleLog" xml:space="preserve">
+		<value>ورود:</value>
+	</data>
+	<data name="ErrorHdlCircuitName" xml:space="preserve">
+		<value>نام نامعتبر مدار: {0}.</value>
+	</data>
+	<data name="ErrorHdlCircuitUnsupported" xml:space="preserve">
+		<value>{0}{1} مدار پشتیبانی نشده.</value>
+	</data>
+	<data name="ErrorHdlInputPinName" xml:space="preserve">
+		<value>نام نامعتبر پین ورودی: {0}.</value>
+	</data>
+	<data name="ErrorHdlJamsColocated" xml:space="preserve">
+		<value>پین {0} در {1}{2} با {3} پین در {4}{5} ترکیب شده است.</value>
+	</data>
+	<data name="ErrorHdlOutputPinName" xml:space="preserve">
+		<value>نام نامعتبر پین خروجی: {0}.</value>
+	</data>
+	<data name="ErrorHdlPartName" xml:space="preserve">
+		<value>نام نامعتبر بخش: {0}.</value>
+	</data>
+	<data name="ErrorHdlPinDirectConnect" xml:space="preserve">
+		<value>پین {0} به طور مستقیم به {1} پین متصل می شود.</value>
+	</data>
+	<data name="MessageHdlExportResut" xml:space="preserve">
+		<value>مدار {0} با خطای {1} صادر می شود.</value>
+	</data>
+	<data name="TitleAddComments" xml:space="preserve">
+		<value>اماده کردن نظرات با مختصات نماد</value>
+	</data>
+	<data name="ErrorHdlTruthTableFailed" xml:space="preserve">
+		<value>در ساختن جدول حقیقت شکست خورد.</value>
+	</data>
+	<data name="MessageHdlBuildingTruthTable" xml:space="preserve">
+		<value>ساخت جدول حقیقت برای {0} {1:f1}٪ انجام شده</value>
+	</data>
+	<data name="MessageHdlSavingCmpFile" xml:space="preserve">
+		<value>ذخیره فایل .cmp {0}</value>
+	</data>
+	<data name="MessageHdlSavingTestFile" xml:space="preserve">
+		<value>ذخیره فایل ازمایشی {0}</value>
+	</data>
+	<data name="SensorTypeASCII" xml:space="preserve">
+		<value>کد ASCII</value>
+	</data>
+	<data name="SensorTypeKeyCode" xml:space="preserve">
+		<value>کد کلید</value>
+	</data>
+	<data name="ToolTipSensorKeyboard" xml:space="preserve">
+		<value>تمرکز را در اینجا تنظیم کنید و دکمه های صفحه کلید را فشار دهید.</value>
+	</data>
+	<data name="ErrorHdlUnconnectedGate" xml:space="preserve">
+		<value>گیت {0} تنها یک پین ورودی دارد که روی {1} متصل شده است</value>
+	</data>
+	<data name="ErrorHdlInputTooBig" xml:space="preserve">
+		<value>مدار {0} بیت های ورودی زیادی دارد و فایل های تست نمی توانند ساخته شوند.</value>
 	</data>
 </root>

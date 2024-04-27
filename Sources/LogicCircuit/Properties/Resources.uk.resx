@@ -1310,7 +1310,9 @@
 	<data name="ToolTipDescriptorSensor" xml:space="preserve">
     <value>Надає дані з "зовнішнього джерела", 
 як серію зумовлених, випадково 
-обраних, або введених вручну значень.</value>
+обраних, або введених вручну значень.
+Він також служить джерелом 
+кодів або символів клавіатури.</value>
   </data>
 	<data name="ToolTipDescriptorSplitter" xml:space="preserve">
     <value>Дозволяє створювати або розділяти джгути проводів. 
@@ -1442,5 +1444,89 @@
 	</data>
 	<data name="TitleIsDiagramBackgroundWhite" xml:space="preserve">
 		<value>Фон діаграми білий</value>
+	</data>
+	<data name="CommandFileExportHdl" xml:space="preserve">
+		<value>Експорт HDL...</value>
+	</data>
+	<data name="ErrorExportHdlFile" xml:space="preserve">
+		<value>Помилки експорту файлу {0}</value>
+	</data>
+	<data name="MessageExportingHdl" xml:space="preserve">
+		<value>Експорт схеми {0} у файл {1}</value>
+	</data>
+	<data name="TitleClose" xml:space="preserve">
+		<value>Закрити</value>
+	</data>
+	<data name="TitleExport" xml:space="preserve">
+		<value>Експорт</value>
+	</data>
+	<data name="TitleExportFolder" xml:space="preserve">
+		<value>Цільова папка:</value>
+	</data>
+	<data name="TitleExportHdl" xml:space="preserve">
+		<value>Експорт HDL</value>
+	</data>
+	<data name="TitleExportOnlyCurrent" xml:space="preserve">
+		<value>Експортуйте лише струмове коло, а не будь-які підсхеми</value>
+	</data>
+	<data name="TitleExportType" xml:space="preserve">
+		<value>Експорт до:</value>
+	</data>
+	<data name="TitleLog" xml:space="preserve">
+		<value>Лог:</value>
+	</data>
+	<data name="ErrorHdlCircuitName" xml:space="preserve">
+		<value>Неприпустима назва схеми: {0}.</value>
+	</data>
+	<data name="ErrorHdlCircuitUnsupported" xml:space="preserve">
+		<value>Непідтримувана схема {0}{1}.</value>
+	</data>
+	<data name="ErrorHdlInputPinName" xml:space="preserve">
+		<value>Неприпустиме ім'я вхідного контакту: {0}.</value>
+	</data>
+	<data name="ErrorHdlJamsColocated" xml:space="preserve">
+		<value>Шпилька {0} на {1}{2} розташована за допомогою штифтового {3} на {4}{5}.</value>
+	</data>
+	<data name="ErrorHdlOutputPinName" xml:space="preserve">
+		<value>Неприпустиме ім'я вихідного контакту: {0}.</value>
+	</data>
+	<data name="ErrorHdlPartName" xml:space="preserve">
+		<value>Неприпустима назва деталі: {0}.</value>
+	</data>
+	<data name="ErrorHdlPinDirectConnect" xml:space="preserve">
+		<value>Штифт {0} підключений безпосередньо до {1} контакту.</value>
+	</data>
+	<data name="MessageHdlExportResut" xml:space="preserve">
+		<value>Схема {0} експортована з {1} помилками.</value>
+	</data>
+	<data name="TitleAddComments" xml:space="preserve">
+		<value>Додавання до коментарів координат символів</value>
+	</data>
+	<data name="ErrorHdlTruthTableFailed" xml:space="preserve">
+		<value>Не вдалося побудувати таблицю істинності.</value>
+	</data>
+	<data name="MessageHdlBuildingTruthTable" xml:space="preserve">
+		<value>Побудова таблиці істинності для {0} {1:f1}% виконано</value>
+	</data>
+	<data name="MessageHdlSavingCmpFile" xml:space="preserve">
+		<value>Збереження файлу .cmp {0}</value>
+	</data>
+	<data name="MessageHdlSavingTestFile" xml:space="preserve">
+		<value>Збереження тестового файлу {0}</value>
+	</data>
+	<data name="SensorTypeASCII" xml:space="preserve">
+		<value>ASCII-код</value>
+	</data>
+	<data name="SensorTypeKeyCode" xml:space="preserve">
+		<value>Код ключа</value>
+	</data>
+	<data name="ToolTipSensorKeyboard" xml:space="preserve">
+		<value>Встановіть фокус тут і натисніть кнопки на клавіатурі.</value>
+	</data>
+	<data name="ErrorHdlUnconnectedGate" xml:space="preserve">
+		<value>Gate {0} має лише один вхідний контакт, підключений до {1}</value>
+	</data>
+	<data name="ErrorHdlInputTooBig" xml:space="preserve">
+		<value>Схема {0} має занадто багато вхідних бітів, і тестові файли не можуть бути зібрані.</value>
 	</data>
 </root>

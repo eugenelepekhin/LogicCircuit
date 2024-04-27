@@ -1335,7 +1335,9 @@ visualiza od dados no ociloscópio.</value>
 	<data name="ToolTipDescriptorSensor" xml:space="preserve">
     <value>Fornece dados de fontes extenas como
 sequencias predefinidas, escolha
-aleatória ou entrada manual de valores.</value>
+aleatória ou entrada manual de valores.
+Ele também serve como uma fonte de 
+códigos de teclado ou símbolos.</value>
   </data>
 	<data name="ToolTipDescriptorSplitter" xml:space="preserve">
     <value>Permite para criar conjuntos de fios
@@ -1519,5 +1521,89 @@ Você deseja carregar a configuração de salvamento automático para este arqui
 	</data>
 	<data name="TitleIsDiagramBackgroundWhite" xml:space="preserve">
 		<value>O plano de fundo do diagrama é branco</value>
+	</data>
+	<data name="CommandFileExportHdl" xml:space="preserve">
+		<value>Exportar HDL...</value>
+	</data>
+	<data name="ErrorExportHdlFile" xml:space="preserve">
+		<value>Erros ao exportar {0} de arquivos</value>
+	</data>
+	<data name="MessageExportingHdl" xml:space="preserve">
+		<value>Exportando {0} de circuito para {1} de arquivo</value>
+	</data>
+	<data name="TitleClose" xml:space="preserve">
+		<value>Fechar</value>
+	</data>
+	<data name="TitleExport" xml:space="preserve">
+		<value>Exportação</value>
+	</data>
+	<data name="TitleExportFolder" xml:space="preserve">
+		<value>Pasta de destino:</value>
+	</data>
+	<data name="TitleExportHdl" xml:space="preserve">
+		<value>Exportar HDL</value>
+	</data>
+	<data name="TitleExportOnlyCurrent" xml:space="preserve">
+		<value>Exportar apenas circuito de corrente, não quaisquer subcircuitos</value>
+	</data>
+	<data name="TitleExportType" xml:space="preserve">
+		<value>Exportar para:</value>
+	</data>
+	<data name="TitleLog" xml:space="preserve">
+		<value>Tora:</value>
+	</data>
+	<data name="ErrorHdlCircuitName" xml:space="preserve">
+		<value>Nome inválido do circuito: {0}.</value>
+	</data>
+	<data name="ErrorHdlCircuitUnsupported" xml:space="preserve">
+		<value>Circuito não suportado {0}{1}.</value>
+	</data>
+	<data name="ErrorHdlInputPinName" xml:space="preserve">
+		<value>Nome inválido do pino de entrada: {0}.</value>
+	</data>
+	<data name="ErrorHdlJamsColocated" xml:space="preserve">
+		<value>Fixar {0} em {1}{2} colocado com pino {3} em {4}{5}.</value>
+	</data>
+	<data name="ErrorHdlOutputPinName" xml:space="preserve">
+		<value>Nome inválido do pino de saída: {0}.</value>
+	</data>
+	<data name="ErrorHdlPartName" xml:space="preserve">
+		<value>Nome inválido da peça: {0}.</value>
+	</data>
+	<data name="ErrorHdlPinDirectConnect" xml:space="preserve">
+		<value>O pino {0} conectado diretamente ao pino {1}.</value>
+	</data>
+	<data name="MessageHdlExportResut" xml:space="preserve">
+		<value>O circuito {0} exportado com {1} erro(s).</value>
+	</data>
+	<data name="TitleAddComments" xml:space="preserve">
+		<value>Preceder comentários com coordenadas de símbolo</value>
+	</data>
+	<data name="ErrorHdlTruthTableFailed" xml:space="preserve">
+		<value>Falha ao construir a tabela da verdade.</value>
+	</data>
+	<data name="MessageHdlBuildingTruthTable" xml:space="preserve">
+		<value>Construindo tabela verdade para {0} {1:f1}% concluído</value>
+	</data>
+	<data name="MessageHdlSavingCmpFile" xml:space="preserve">
+		<value>Salvando o arquivo .cmp {0}</value>
+	</data>
+	<data name="MessageHdlSavingTestFile" xml:space="preserve">
+		<value>Salvando {0} do arquivo de teste</value>
+	</data>
+	<data name="SensorTypeASCII" xml:space="preserve">
+		<value>Código ASCII</value>
+	</data>
+	<data name="SensorTypeKeyCode" xml:space="preserve">
+		<value>Código da chave</value>
+	</data>
+	<data name="ToolTipSensorKeyboard" xml:space="preserve">
+		<value>Defina o foco aqui e pressione os botões no teclado.</value>
+	</data>
+	<data name="ErrorHdlUnconnectedGate" xml:space="preserve">
+		<value>O {0} do portão tem apenas um pino de entrada conectado no {1}</value>
+	</data>
+	<data name="ErrorHdlInputTooBig" xml:space="preserve">
+		<value>O circuito {0} tem muitos bits de entrada e os arquivos de teste não podem ser construídos.</value>
 	</data>
 </root>

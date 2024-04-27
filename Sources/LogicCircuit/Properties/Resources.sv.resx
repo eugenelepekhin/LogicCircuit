@@ -1188,7 +1188,8 @@ aller kollar dens data på oscilloskopet.</value>
 	</data>
 	<data name="ToolTipDescriptorSensor" xml:space="preserve">
 		<value>Ger data från en "extern källa" som en serie av för
-bestömda slumpmessigt valda, eller manuellr valda värden.</value>
+bestömda slumpmessigt valda, eller manuellr valda värden.
+Det fungerar också som en källa till tangentbordskoder eller symboler.</value>
 	</data>
 	<data name="ToolTipDescriptorSplitter" xml:space="preserve">
 		<value>Gör det möjligt att skapa en kabels sele eller
@@ -1419,5 +1420,89 @@ Vill du ladda an automatiskt sparad fil istället?</value>
 	</data>
 	<data name="TitleIsDiagramBackgroundWhite" xml:space="preserve">
 		<value>Diagrammets bakgrund är vit</value>
+	</data>
+	<data name="CommandFileExportHdl" xml:space="preserve">
+		<value>Exportera HDL...</value>
+	</data>
+	<data name="ErrorExportHdlFile" xml:space="preserve">
+		<value>Fel vid export av {0} fil</value>
+	</data>
+	<data name="MessageExportingHdl" xml:space="preserve">
+		<value>Exportera krets {0} till fil {1}</value>
+	</data>
+	<data name="TitleClose" xml:space="preserve">
+		<value>Stänga</value>
+	</data>
+	<data name="TitleExport" xml:space="preserve">
+		<value>Export</value>
+	</data>
+	<data name="TitleExportFolder" xml:space="preserve">
+		<value>Målmapp:</value>
+	</data>
+	<data name="TitleExportHdl" xml:space="preserve">
+		<value>Exportera HDL</value>
+	</data>
+	<data name="TitleExportOnlyCurrent" xml:space="preserve">
+		<value>Exportera endast strömkrets, inte några underkretsar</value>
+	</data>
+	<data name="TitleExportType" xml:space="preserve">
+		<value>Exportera till:</value>
+	</data>
+	<data name="TitleLog" xml:space="preserve">
+		<value>Logg:</value>
+	</data>
+	<data name="ErrorHdlCircuitName" xml:space="preserve">
+		<value>Ogiltigt namn på kretsen: {0}.</value>
+	</data>
+	<data name="ErrorHdlCircuitUnsupported" xml:space="preserve">
+		<value>Krets som inte stöds {0}{1}.</value>
+	</data>
+	<data name="ErrorHdlInputPinName" xml:space="preserve">
+		<value>Ogiltigt namn på indata-pin: {0}.</value>
+	</data>
+	<data name="ErrorHdlJamsColocated" xml:space="preserve">
+		<value>Fäst {0} på {1}{2} som är samlokaliserad med stift {3} på {4}{5}.</value>
+	</data>
+	<data name="ErrorHdlOutputPinName" xml:space="preserve">
+		<value>Ogiltigt namn på utgångs-pin: {0}.</value>
+	</data>
+	<data name="ErrorHdlPartName" xml:space="preserve">
+		<value>Ogiltigt namn på delen: {0}.</value>
+	</data>
+	<data name="ErrorHdlPinDirectConnect" xml:space="preserve">
+		<value>Stift {0} ansluts direkt till stift {1}.</value>
+	</data>
+	<data name="MessageHdlExportResut" xml:space="preserve">
+		<value>Kretsen {0} exporteras med {1} fel.</value>
+	</data>
+	<data name="TitleAddComments" xml:space="preserve">
+		<value>Infoga kommentarer i början av symbolkoordinater</value>
+	</data>
+	<data name="ErrorHdlTruthTableFailed" xml:space="preserve">
+		<value>Misslyckades med att bygga sanningstabell.</value>
+	</data>
+	<data name="MessageHdlBuildingTruthTable" xml:space="preserve">
+		<value>Skapa sanningstabell för {0} {1:f1}% klar</value>
+	</data>
+	<data name="MessageHdlSavingCmpFile" xml:space="preserve">
+		<value>Spara .cmp-fil {0}</value>
+	</data>
+	<data name="MessageHdlSavingTestFile" xml:space="preserve">
+		<value>Spara testfil {0}</value>
+	</data>
+	<data name="SensorTypeASCII" xml:space="preserve">
+		<value>ASCII-kod</value>
+	</data>
+	<data name="SensorTypeKeyCode" xml:space="preserve">
+		<value>Nyckeltal</value>
+	</data>
+	<data name="ToolTipSensorKeyboard" xml:space="preserve">
+		<value>Ställ in fokus här och tryck på knapparna på tangentbordet.</value>
+	</data>
+	<data name="ErrorHdlUnconnectedGate" xml:space="preserve">
+		<value>Gate {0} har bara ett ingångsstift anslutet på {1}</value>
+	</data>
+	<data name="ErrorHdlInputTooBig" xml:space="preserve">
+		<value>Krets {0} har för många indatabitar och det går inte att skapa testfiler.</value>
 	</data>
 </root>

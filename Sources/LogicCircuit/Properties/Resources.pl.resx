@@ -1324,7 +1324,8 @@ Próbniki są widoczne w oscyloskopie.</value>
 	<data name="ToolTipDescriptorSensor" xml:space="preserve">
     <value>Dostarcza danych z "zewnętrznego źródła" w
 postaci serii predefiniowanych, losowych lub
-manualnie wprowadzonych wartości.</value>
+manualnie wprowadzonych wartości.
+Służy również jako źródło kodów lub symboli klawiatury.</value>
   </data>
 	<data name="ToolTipDescriptorSplitter" xml:space="preserve">
     <value>Pozwala połączyć kilka portów w jeden port
@@ -1442,5 +1443,89 @@ Czy chcesz wczytać automatycznie zapisaną kopię tego pliku?</value>
 	</data>
 	<data name="TitleIsDiagramBackgroundWhite" xml:space="preserve">
 		<value>Tło diagramu jest białe</value>
+	</data>
+	<data name="CommandFileExportHdl" xml:space="preserve">
+		<value>Eksportuj HDL...</value>
+	</data>
+	<data name="ErrorExportHdlFile" xml:space="preserve">
+		<value>Błędy podczas eksportowania pliku {0}</value>
+	</data>
+	<data name="MessageExportingHdl" xml:space="preserve">
+		<value>Eksportowanie {0} obwodu do pliku {1}</value>
+	</data>
+	<data name="TitleClose" xml:space="preserve">
+		<value>Zamykać</value>
+	</data>
+	<data name="TitleExport" xml:space="preserve">
+		<value>Eksport</value>
+	</data>
+	<data name="TitleExportFolder" xml:space="preserve">
+		<value>Folder docelowy:</value>
+	</data>
+	<data name="TitleExportHdl" xml:space="preserve">
+		<value>Eksportuj HDL</value>
+	</data>
+	<data name="TitleExportOnlyCurrent" xml:space="preserve">
+		<value>Eksportuj tylko obwód prądowy, a nie podobwody</value>
+	</data>
+	<data name="TitleExportType" xml:space="preserve">
+		<value>Eksportuj do:</value>
+	</data>
+	<data name="TitleLog" xml:space="preserve">
+		<value>Dziennik:</value>
+	</data>
+	<data name="ErrorHdlCircuitName" xml:space="preserve">
+		<value>Nieprawidłowa nazwa obwodu: {0}.</value>
+	</data>
+	<data name="ErrorHdlCircuitUnsupported" xml:space="preserve">
+		<value>Nieobsługiwany obwód {0}{1}.</value>
+	</data>
+	<data name="ErrorHdlInputPinName" xml:space="preserve">
+		<value>Nieprawidłowa nazwa pinu wejściowego: {0}.</value>
+	</data>
+	<data name="ErrorHdlJamsColocated" xml:space="preserve">
+		<value>Przypnij {0} na {1}{2} skolokowany z pinem {3} na {4}{5}.</value>
+	</data>
+	<data name="ErrorHdlOutputPinName" xml:space="preserve">
+		<value>Nieprawidłowa nazwa pinu wyjściowego: {0}.</value>
+	</data>
+	<data name="ErrorHdlPartName" xml:space="preserve">
+		<value>Nieprawidłowa nazwa części: {0}.</value>
+	</data>
+	<data name="ErrorHdlPinDirectConnect" xml:space="preserve">
+		<value>Pin {0} podłączony bezpośrednio do pinu {1}.</value>
+	</data>
+	<data name="MessageHdlExportResut" xml:space="preserve">
+		<value>Obwód {0} eksportowany z {1} błędami.</value>
+	</data>
+	<data name="TitleAddComments" xml:space="preserve">
+		<value>Dołączanie komentarzy współrzędnymi symbolu</value>
+	</data>
+	<data name="ErrorHdlTruthTableFailed" xml:space="preserve">
+		<value>Nie udało się zbudować tabeli prawdy.</value>
+	</data>
+	<data name="MessageHdlBuildingTruthTable" xml:space="preserve">
+		<value>Budowanie tabeli prawdy dla {0} {1:f1}% done</value>
+	</data>
+	<data name="MessageHdlSavingCmpFile" xml:space="preserve">
+		<value>Zapisywanie pliku .cmp {0}</value>
+	</data>
+	<data name="MessageHdlSavingTestFile" xml:space="preserve">
+		<value>Zapisywanie pliku testowego {0}</value>
+	</data>
+	<data name="SensorTypeASCII" xml:space="preserve">
+		<value>Kod ASCII</value>
+	</data>
+	<data name="SensorTypeKeyCode" xml:space="preserve">
+		<value>Kod klucza</value>
+	</data>
+	<data name="ToolTipSensorKeyboard" xml:space="preserve">
+		<value>Ustaw tutaj ostrość i naciśnij przyciski na klawiaturze.</value>
+	</data>
+	<data name="ErrorHdlUnconnectedGate" xml:space="preserve">
+		<value>Bramka {0} ma tylko jeden pin wejściowy podłączony na {1}</value>
+	</data>
+	<data name="ErrorHdlInputTooBig" xml:space="preserve">
+		<value>Obwód {0} ma zbyt wiele bitów wejściowych i nie można skompilować plików testowych.</value>
 	</data>
 </root>

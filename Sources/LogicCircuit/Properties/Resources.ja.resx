@@ -992,7 +992,9 @@
 		<value>回路上にプローブを追加して接続すると、動作中の回路の状態がプローブ上に表示されるようになります。また、オシロスコープで値を見たり、プローブをダブルクリックすることで過去の値の変化を確認することもできます。</value>
 	</data>
 	<data name="ToolTipDescriptorSensor" xml:space="preserve">
-		<value>事前に設定したデータ列、ランダム値、手動で入力した値を、あたかも外部から取り込まれたデータとして入力することができます。</value>
+		<value>事前に設定したデータ列、ランダム値、手動で入力した値を、
+あたかも外部から取り込まれたデータとして入力することができます。
+また、キーボードコードや記号のソースとしても機能します。</value>
 	</data>
 	<data name="CategoryPrimitives" xml:space="preserve">
 		<value>論理回路の要素</value>
@@ -1254,5 +1256,89 @@
 	</data>
 	<data name="TitleIsDiagramBackgroundWhite" xml:space="preserve">
 		<value>図の背景が白である</value>
+	</data>
+	<data name="CommandFileExportHdl" xml:space="preserve">
+		<value>HDL をエクスポート...</value>
+	</data>
+	<data name="ErrorExportHdlFile" xml:space="preserve">
+		<value>ファイル{0}のエクスポート中にエラーが発生しました</value>
+	</data>
+	<data name="MessageExportingHdl" xml:space="preserve">
+		<value>ファイル{1}への回路{0}のエクスポート</value>
+	</data>
+	<data name="TitleClose" xml:space="preserve">
+		<value>閉める</value>
+	</data>
+	<data name="TitleExport" xml:space="preserve">
+		<value>輸出</value>
+	</data>
+	<data name="TitleExportFolder" xml:space="preserve">
+		<value>ターゲットフォルダ:</value>
+	</data>
+	<data name="TitleExportHdl" xml:space="preserve">
+		<value>HDL をエクスポート</value>
+	</data>
+	<data name="TitleExportOnlyCurrent" xml:space="preserve">
+		<value>現在の回路のみをエクスポートし、サブ回路はエクスポートしません</value>
+	</data>
+	<data name="TitleExportType" xml:space="preserve">
+		<value>エクスポート先:</value>
+	</data>
+	<data name="TitleLog" xml:space="preserve">
+		<value>丸太：</value>
+	</data>
+	<data name="ErrorHdlCircuitName" xml:space="preserve">
+		<value>回線の名前が無効です: {0}。</value>
+	</data>
+	<data name="ErrorHdlCircuitUnsupported" xml:space="preserve">
+		<value>サポートされていない回線{0}{1}。</value>
+	</data>
+	<data name="ErrorHdlInputPinName" xml:space="preserve">
+		<value>入力ピンの名前が無効です: {0}。</value>
+	</data>
+	<data name="ErrorHdlJamsColocated" xml:space="preserve">
+		<value>{4}{5}のピン{3}と併置された{1}{2}のピン{0}。</value>
+	</data>
+	<data name="ErrorHdlOutputPinName" xml:space="preserve">
+		<value>出力ピンの名前が無効です: {0}。</value>
+	</data>
+	<data name="ErrorHdlPartName" xml:space="preserve">
+		<value>部品の名前が無効です: {0}。</value>
+	</data>
+	<data name="ErrorHdlPinDirectConnect" xml:space="preserve">
+		<value>ピン{0}ピン{1}に直接接続されています。</value>
+	</data>
+	<data name="MessageHdlExportResut" xml:space="preserve">
+		<value>回路{0}{1}エラーでエクスポートされます。</value>
+	</data>
+	<data name="TitleAddComments" xml:space="preserve">
+		<value>コメントの先頭にシンボル座標を付加する</value>
+	</data>
+	<data name="ErrorHdlTruthTableFailed" xml:space="preserve">
+		<value>真理値表の作成に失敗しました。</value>
+	</data>
+	<data name="MessageHdlBuildingTruthTable" xml:space="preserve">
+		<value>{0} {1:f1}% 完了の真理値表の構築</value>
+	</data>
+	<data name="MessageHdlSavingCmpFile" xml:space="preserve">
+		<value>.cmp ファイルの保存{0}</value>
+	</data>
+	<data name="MessageHdlSavingTestFile" xml:space="preserve">
+		<value>テストファイル{0}の保存</value>
+	</data>
+	<data name="SensorTypeASCII" xml:space="preserve">
+		<value>ASCIIコード</value>
+	</data>
+	<data name="SensorTypeKeyCode" xml:space="preserve">
+		<value>キーコード</value>
+	</data>
+	<data name="ToolTipSensorKeyboard" xml:space="preserve">
+		<value>ここにフォーカスを設定し、キーボードのボタンを押します。</value>
+	</data>
+	<data name="ErrorHdlUnconnectedGate" xml:space="preserve">
+		<value>ゲート{0}には、{1}に接続された入力ピンが1つだけあります</value>
+	</data>
+	<data name="ErrorHdlInputTooBig" xml:space="preserve">
+		<value>回路 {0} の入力ビットが多すぎるため、テスト ファイルを構築できません。</value>
 	</data>
 </root>

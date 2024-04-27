@@ -1302,7 +1302,8 @@ Out</value>
 当你双击这个探针或者查看示波器数据时可以看到历史值。</value>
   </data>
 	<data name="ToolTipDescriptorSensor" xml:space="preserve">
-    <value>提供将“外部源”当作预定义序列，随机序列或者人工输入序列值的数据。</value>
+    <value>提供将“外部源”当作预定义序列，随机序列或者人工输入序列值的数据。
+它还可以用作键盘代码或符号的来源。</value>
   </data>
 	<data name="ToolTipDescriptorSplitter" xml:space="preserve">
     <value>允许创建线束或将其分开为单独导线。
@@ -1451,5 +1452,89 @@ Out</value>
   </data>
 	<data name="TitleIsDiagramBackgroundWhite" xml:space="preserve">
 		<value>图表背景为白色(_D)</value>
+	</data>
+	<data name="CommandFileExportHdl" xml:space="preserve">
+		<value>导出 _HDL...</value>
+	</data>
+	<data name="ErrorExportHdlFile" xml:space="preserve">
+		<value>导出文件{0}时出错</value>
+	</data>
+	<data name="MessageExportingHdl" xml:space="preserve">
+		<value>将电路{0}导出到文件{1}</value>
+	</data>
+	<data name="TitleClose" xml:space="preserve">
+		<value>关闭</value>
+	</data>
+	<data name="TitleExport" xml:space="preserve">
+		<value>出口</value>
+	</data>
+	<data name="TitleExportFolder" xml:space="preserve">
+		<value>目标文件夹(_f)：</value>
+	</data>
+	<data name="TitleExportHdl" xml:space="preserve">
+		<value>导出 _HDL</value>
+	</data>
+	<data name="TitleExportOnlyCurrent" xml:space="preserve">
+		<value>仅导出电流电路，不导出任何子电路(_o)</value>
+	</data>
+	<data name="TitleExportType" xml:space="preserve">
+		<value>导出到(_E)：</value>
+	</data>
+	<data name="TitleLog" xml:space="preserve">
+		<value>日志(_L)：</value>
+	</data>
+	<data name="ErrorHdlCircuitName" xml:space="preserve">
+		<value>线路名称无效：{0}。</value>
+	</data>
+	<data name="ErrorHdlCircuitUnsupported" xml:space="preserve">
+		<value>不支持的电路{0}{1}。</value>
+	</data>
+	<data name="ErrorHdlInputPinName" xml:space="preserve">
+		<value>输入引脚名称无效：{0}。</value>
+	</data>
+	<data name="ErrorHdlJamsColocated" xml:space="preserve">
+		<value>{1}{2}上的引脚{0}与{4}{5}上的引脚{3}并置。</value>
+	</data>
+	<data name="ErrorHdlOutputPinName" xml:space="preserve">
+		<value>输出引脚名称无效：{0}。</value>
+	</data>
+	<data name="ErrorHdlPartName" xml:space="preserve">
+		<value>部件名称无效：{0}。</value>
+	</data>
+	<data name="ErrorHdlPinDirectConnect" xml:space="preserve">
+		<value>引脚{0}直接连接到引脚 {1}。</value>
+	</data>
+	<data name="MessageHdlExportResut" xml:space="preserve">
+		<value>电路导出{0}{1}错误。</value>
+	</data>
+	<data name="TitleAddComments" xml:space="preserve">
+		<value>在注释前面加上符号坐标</value>
+	</data>
+	<data name="ErrorHdlTruthTableFailed" xml:space="preserve">
+		<value>无法构建真值表。</value>
+	</data>
+	<data name="MessageHdlBuildingTruthTable" xml:space="preserve">
+		<value>为 {1:f1}% 完成{0}构建真值表</value>
+	</data>
+	<data name="MessageHdlSavingCmpFile" xml:space="preserve">
+		<value>保存 .cmp 文件{0}</value>
+	</data>
+	<data name="MessageHdlSavingTestFile" xml:space="preserve">
+		<value>保存测试文件{0}</value>
+	</data>
+	<data name="SensorTypeASCII" xml:space="preserve">
+		<value>ASCII 代码</value>
+	</data>
+	<data name="SensorTypeKeyCode" xml:space="preserve">
+		<value>密钥代码</value>
+	</data>
+	<data name="ToolTipSensorKeyboard" xml:space="preserve">
+		<value>在此处设置焦点并按下键盘上的按钮。</value>
+	</data>
+	<data name="ErrorHdlUnconnectedGate" xml:space="preserve">
+		<value>栅极 {0} 上只有一个输入引脚连接{1}</value>
+	</data>
+	<data name="ErrorHdlInputTooBig" xml:space="preserve">
+		<value>电路{0}输入位过多，无法构建测试文件。</value>
 	</data>
 </root>

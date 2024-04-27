@@ -1215,7 +1215,9 @@ sonda, çift tıklattığınızda değerlerin geçmiş verilerini osiloskop üze
 	<data name="ToolTipDescriptorSensor" xml:space="preserve">
     <value>"Harici kaynak" dan veri sağlar
 önceden tanımlanmış, rastgele seçilmiş bir dizi
-veya elle girilen değerler.</value>
+veya elle girilen değerler.
+Aynı zamanda klavye kodları veya 
+sembolleri kaynağı olarak da hizmet eder.</value>
   </data>
 	<data name="ToolTipDescriptorSplitter" xml:space="preserve">
     <value>Kablo demetinin oluşturulmasına izin verir veya
@@ -1442,5 +1444,89 @@ temelde bir çoğullayıcıya eşdeğerdir.</value>
 	</data>
 	<data name="TitleIsDiagramBackgroundWhite" xml:space="preserve">
 		<value>Diyagram arka planı beyaz</value>
+	</data>
+	<data name="CommandFileExportHdl" xml:space="preserve">
+		<value>HDL'yi dışa aktar...</value>
+	</data>
+	<data name="ErrorExportHdlFile" xml:space="preserve">
+		<value>Dosya {0} dışa aktarılırken hata oluştu</value>
+	</data>
+	<data name="MessageExportingHdl" xml:space="preserve">
+		<value>Devre {0} dosya {1} dışa aktarma</value>
+	</data>
+	<data name="TitleClose" xml:space="preserve">
+		<value>Kapatmak</value>
+	</data>
+	<data name="TitleExport" xml:space="preserve">
+		<value>Ihracat</value>
+	</data>
+	<data name="TitleExportFolder" xml:space="preserve">
+		<value>Hedef klasör:</value>
+	</data>
+	<data name="TitleExportHdl" xml:space="preserve">
+		<value>HDL'yi dışa aktar</value>
+	</data>
+	<data name="TitleExportOnlyCurrent" xml:space="preserve">
+		<value>Herhangi bir alt devreyi değil, yalnızca akım devresini dışa aktarın</value>
+	</data>
+	<data name="TitleExportType" xml:space="preserve">
+		<value>İhracat:</value>
+	</data>
+	<data name="TitleLog" xml:space="preserve">
+		<value>Kütük:</value>
+	</data>
+	<data name="ErrorHdlCircuitName" xml:space="preserve">
+		<value>Devrenin geçersiz adı: {0}.</value>
+	</data>
+	<data name="ErrorHdlCircuitUnsupported" xml:space="preserve">
+		<value>Desteklenmeyen devre {0}{1}.</value>
+	</data>
+	<data name="ErrorHdlInputPinName" xml:space="preserve">
+		<value>Giriş pininin geçersiz adı: {0}.</value>
+	</data>
+	<data name="ErrorHdlJamsColocated" xml:space="preserve">
+		<value>{0}'yi {4}{5}'{3} sabitleme ile yan yana yerleştirilmiş {1}{2} sabitleyin.</value>
+	</data>
+	<data name="ErrorHdlOutputPinName" xml:space="preserve">
+		<value>Çıkış pininin geçersiz adı: {0}.</value>
+	</data>
+	<data name="ErrorHdlPartName" xml:space="preserve">
+		<value>Geçersiz parça adı: {0}.</value>
+	</data>
+	<data name="ErrorHdlPinDirectConnect" xml:space="preserve">
+		<value>Pin {0} doğrudan pin {1}'e bağlanır.</value>
+	</data>
+	<data name="MessageHdlExportResut" xml:space="preserve">
+		<value>Devre {0} {1} hata(lar)ı ile dışa aktarılır.</value>
+	</data>
+	<data name="TitleAddComments" xml:space="preserve">
+		<value>Yorumların başına sembol koordinatları ekleme</value>
+	</data>
+	<data name="ErrorHdlTruthTableFailed" xml:space="preserve">
+		<value>Doğruluk tablosu oluşturulamadı.</value>
+	</data>
+	<data name="MessageHdlBuildingTruthTable" xml:space="preserve">
+		<value>{0} için doğruluk tablosu oluşturma {1:f1}% tamamlandı</value>
+	</data>
+	<data name="MessageHdlSavingCmpFile" xml:space="preserve">
+		<value>.cmp dosyasını {0} kaydetme</value>
+	</data>
+	<data name="MessageHdlSavingTestFile" xml:space="preserve">
+		<value>Test dosyasını kaydetme {0}</value>
+	</data>
+	<data name="SensorTypeASCII" xml:space="preserve">
+		<value>ASCII kodu</value>
+	</data>
+	<data name="SensorTypeKeyCode" xml:space="preserve">
+		<value>Anahtar kodu</value>
+	</data>
+	<data name="ToolTipSensorKeyboard" xml:space="preserve">
+		<value>Odağı buraya ayarlayın ve klavyedeki düğmelere basın.</value>
+	</data>
+	<data name="ErrorHdlUnconnectedGate" xml:space="preserve">
+		<value>Kapı {0} {1} bağlı yalnızca bir giriş pini vardır</value>
+	</data>
+	<data name="ErrorHdlInputTooBig" xml:space="preserve">
+		<value>Devre {0} çok fazla giriş biti var ve test dosyaları oluşturulamıyor.</value>
 	</data>
 </root>

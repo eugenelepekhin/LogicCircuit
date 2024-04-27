@@ -2,16 +2,13 @@
 <lc:CircuitProject xmlns:lc="http://LogicCircuit.net/2.0.0.12/CircuitProject.xsd">
 	<lc:Project>
 		<lc:ProjectId>3c9ea24f-ae0e-4025-a3e3-4d45dfffa44f</lc:ProjectId>
-		<lc:LogicalCircuitId>8ef412c8-97f8-4aae-9690-740d18c1ad01</lc:LogicalCircuitId>
+		<lc:LogicalCircuitId>9b4526ff-7c8b-4ca6-94fb-4a10538f63ad</lc:LogicalCircuitId>
 	</lc:Project>
-	<lc:CollapsedCategory>
-		<lc:Name>Error</lc:Name>
-	</lc:CollapsedCategory>
 	<lc:CollapsedCategory>
 		<lc:Name>BigGates</lc:Name>
 	</lc:CollapsedCategory>
 	<lc:CollapsedCategory>
-		<lc:Name>Test</lc:Name>
+		<lc:Name>Error</lc:Name>
 	</lc:CollapsedCategory>
 	<lc:LogicalCircuit>
 		<lc:LogicalCircuitId>d8a958a8-3441-44aa-8466-d966ba1362bd</lc:LogicalCircuitId>
@@ -9235,8 +9232,9 @@
 		<lc:LogicalCircuitId>1db671a4-93ce-4f50-9463-46be4b315810</lc:LogicalCircuitId>
 		<lc:X>3</lc:X>
 		<lc:Y>11</lc:Y>
-		<lc:Width>25</lc:Width>
-		<lc:Note>&lt;FlowDocument TextAlignment="Left" PagePadding="5,0,5,0" AllowDrop="True" NumberSubstitution.CultureSource="User" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;&lt;Paragraph&gt;collocated with jam&lt;/Paragraph&gt;&lt;/FlowDocument&gt;</lc:Note>
+		<lc:Width>8</lc:Width>
+		<lc:Height>2</lc:Height>
+		<lc:Note>&lt;FlowDocument TextAlignment="Left" PagePadding="5,0,5,0" AllowDrop="True" NumberSubstitution.CultureSource="User" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&gt;&lt;Paragraph&gt;collocated with pin&lt;/Paragraph&gt;&lt;/FlowDocument&gt;</lc:Note>
 	</lc:TextNote>
 	<lc:TextNote>
 		<lc:TextNoteId>8673907e-c194-44a0-8456-4f2caf23fc47</lc:TextNoteId>
