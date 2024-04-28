@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -12,12 +12,27 @@ namespace LogicCircuit {
 	/// Interaction logic for DialogMemoryEditor.xaml
 	/// </summary>
 	public abstract partial class DialogMemoryEditor : Window {
+		public enum TextFileFormat {
+			Dec,
+			Hex,
+			Bin,
+		}
 
 		private SettingsWindowLocationCache? windowLocation;
 		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
 		private readonly SettingsStringCache openFileFolder;
+		private readonly SettingsStringCache openTextFileFolder;
+		private readonly SettingsEnumCache<TextFileFormat> textFileFormat;
 		public SettingsGridLengthCache DataHeight { get; private set; }
 		public SettingsGridLengthCache NoteHeight { get; private set; }
+
+		public IEnumerable<EnumDescriptor<TextFileFormat>> TextFileFormats { get; } = [
+			new EnumDescriptor<TextFileFormat>(TextFileFormat.Dec,	Properties.Resources.TextFileFormatDec),
+			new EnumDescriptor<TextFileFormat>(TextFileFormat.Hex,	Properties.Resources.TextFileFormatHex),
+			new	EnumDescriptor<TextFileFormat>(TextFileFormat.Bin,	Properties.Resources.TextFileFormatBin),
+		];
+
+		public EnumDescriptor<TextFileFormat> CurrentTextFileFormat { get; set; }
 		
 		public Memory Memory { get; private set; }
 
@@ -38,6 +53,10 @@ namespace LogicCircuit {
 		protected DialogMemoryEditor(Memory memory) {
 			string typeName = this.GetType().Name;
 			this.openFileFolder = new SettingsStringCache(Settings.User, typeName + ".OpenFile.Folder", Mainframe.DefaultProjectFolder());
+			this.openTextFileFolder = new SettingsStringCache(Settings.User, typeName + ".OpenTextFile.Folder", Mainframe.DefaultProjectFolder());
+			this.textFileFormat = new SettingsEnumCache<TextFileFormat>(Settings.User, typeName + "." + nameof(TextFileFormat), TextFileFormat.Dec);
+			this.CurrentTextFileFormat = this.TextFileFormats.First(d => d.Value == this.textFileFormat.Value);
+
 			this.DataHeight = new SettingsGridLengthCache(Settings.User, typeName + ".Data.Height", memory.Writable ? "0.25*" : "0.75*");
 			this.NoteHeight = new SettingsGridLengthCache(Settings.User, typeName + ".Note.Height", memory.Writable ? "0.75*" : "0.25*");
 
@@ -71,8 +90,6 @@ namespace LogicCircuit {
 			this.initialized = true;
 		}
 
-		[SuppressMessage("Microsoft.Maintainability", "CA1500:VariableNamesShouldNotMatchFieldNames", MessageId = "addressBitWidth")]
-		[SuppressMessage("Microsoft.Maintainability", "CA1500:VariableNamesShouldNotMatchFieldNames", MessageId = "dataBitWidth")]
 		private void ButtonOkClick(object sender, RoutedEventArgs e) {
 			try {
 				int addressBitWidth = this.AddressBitWidth;
@@ -121,8 +138,6 @@ namespace LogicCircuit {
 			}
 		}
 
-		[SuppressMessage("Microsoft.Maintainability", "CA1500:VariableNamesShouldNotMatchFieldNames", MessageId = "addressBitWidth")]
-		[SuppressMessage("Microsoft.Maintainability", "CA1500:VariableNamesShouldNotMatchFieldNames", MessageId = "dataBitWidth")]
 		private void ButtonLoadClick(object sender, RoutedEventArgs e) {
 			try {
 				OpenFileDialog dialog = new OpenFileDialog {
@@ -149,6 +164,34 @@ namespace LogicCircuit {
 					}
 					this.FunctionMemory = new MemoryEditor(this.data, addressBitWidth, dataBitWidth);
 				}
+			} catch(Exception exception) {
+				App.Mainframe.ReportException(exception);
+			}
+		}
+
+		private void ButtonLoadTextClick(object sender, RoutedEventArgs e) {
+			try {
+				OpenFileDialog dialog = new OpenFileDialog {
+					InitialDirectory = Mainframe.IsDirectoryPathValid(this.openTextFileFolder.Value) ? this.openTextFileFolder.Value : Mainframe.DefaultProjectFolder()
+				};
+				bool? result = dialog.ShowDialog(this);
+				if(result.HasValue && result.Value) {
+					this.openTextFileFolder.Value = Path.GetDirectoryName(dialog.FileName)!;
+					int addressBitWidth = this.AddressBitWidth;
+					int dataBitWidth = this.DataBitWidth;
+					int cellCount = Memory.NumberCellsFor(addressBitWidth);
+					using(FileStream stream = File.Open(dialog.FileName, FileMode.Open, FileAccess.Read, FileShare.Read)) {
+						using StreamReader streamReader = new StreamReader(stream);
+						TextNumberReader reader = new TextNumberReader(streamReader, this.CurrentTextFileFormat.Value);
+						for(int i = 0; i < cellCount; i++) {
+							long value = reader.Next();
+							if(value == -1L) break;
+							Memory.SetCellValue(this.data, dataBitWidth, i, (int)value);
+						}
+					}
+					this.FunctionMemory = new MemoryEditor(this.data, addressBitWidth, dataBitWidth);
+				}
+				this.textFileFormat.Value = CurrentTextFileFormat.Value;
 			} catch(Exception exception) {
 				App.Mainframe.ReportException(exception);
 			}
@@ -207,6 +250,156 @@ namespace LogicCircuit {
 				this.AddressBitWidth = addressBitWidth;
 				this.DataBitWidth = dataBitWidth;
 				this.data = data;
+			}
+		}
+
+		internal class TextNumberReader {
+			private readonly TextReader reader;
+			private readonly Func<long> next;
+
+			private int line;
+			private int pos;
+			private int back;
+
+			public TextNumberReader(TextReader reader, TextFileFormat textFileFormat) {
+				this.reader = reader;
+				this.next = textFileFormat switch {
+					TextFileFormat.Dec => this.NextDec,
+					TextFileFormat.Hex => this.NextHex,
+					TextFileFormat.Bin => this.NextBin,
+					_ => throw new InvalidOperationException()
+				};
+				this.line = 1;
+				this.back = -1;
+			}
+
+			public long Next() => this.next();
+
+			private string ErrorTooBig() => Properties.Resources.ErrorTextFileBigNumber(this.line, this.pos);
+			private string ErrorChar() => Properties.Resources.ErrorTextFileChar(this.line, this.pos);
+
+			private int Read() {
+				int c = this.back;
+				if(c != -1) {
+					this.back = -1;
+				} else {
+					c = this.reader.Read();
+					if(c == '\n') {
+						this.line++;
+						this.pos = 0;
+						return c;
+					} else if(c != '\r') {
+						this.pos++;
+					}
+				}
+				return c;
+			}
+
+			private int Skip() {
+				int c = this.Read();
+				while(char.IsWhiteSpace((char)c) || ",;".Contains((char)c, StringComparison.Ordinal)) {
+					c = this.Read();
+				}
+				return c;
+			}
+
+			private long NextDec() {
+				int c = this.Skip();
+				int sign = 1;
+				if(c == '-') {
+					sign = -1;
+					c = this.Read();
+				} else if(c == '+') {
+					// do nothing
+				}
+				int value = 0;
+				bool anyDigits = false;
+				while('0' <= c && c <= '9') {
+					anyDigits = true;
+					long temp = value * 10L + c - '0';
+					if(int.MaxValue < temp) {
+						throw new CircuitException(Cause.UserError, this.ErrorTooBig());
+					}
+					value = (int)temp;
+					c = this.Read();
+				}
+				this.back = c;
+				if(anyDigits) {
+					return ((long)(value * sign)) & ((1L << 32) - 1);
+				}
+				if(c == -1) {
+					return -1L;
+				}
+				throw new CircuitException(Cause.CorruptedFile, this.ErrorChar());
+			}
+
+			private long NextHex() {
+				int c = this.Skip();
+				int sign = 1;
+				if(c == '-') {
+					sign = -1;
+					c = this.Read();
+				} else if(c == '+') {
+					// do nothing
+				}
+				int value = 0;
+				bool anyDigits = false;
+				while('0' <= c && c <= '9' || 'a' <= c && c <= 'f' || 'A' <= c && c <= 'F') {
+					anyDigits = true;
+					int delta = 0;
+					if('0' <= c && c <= '9') {
+						delta = '0';
+					} else if('a' <= c && c <= 'f') {
+						delta = 'a' - 10;
+					} else {
+						Debug.Assert('A' <= c && c <= 'F');
+						delta = 'A' - 10;
+					}
+					long temp = value * 16L + c - delta;
+					if(int.MaxValue < temp) {
+						throw new CircuitException(Cause.UserError, this.ErrorTooBig());
+					}
+					value = (int)temp;
+					c = this.Read();
+				}
+				this.back = c;
+				if(anyDigits) {
+					return ((long)(value * sign)) & ((1L << 32) - 1);
+				}
+				if(c == -1) {
+					return -1L;
+				}
+				throw new CircuitException(Cause.CorruptedFile, this.ErrorChar());
+			}
+
+			private long NextBin() {
+				int c = this.Skip();
+				int sign = 1;
+				if(c == '-') {
+					sign = -1;
+					c = this.Read();
+				} else if(c == '+') {
+					// do nothing
+				}
+				int value = 0;
+				bool anyDigits = false;
+				while('0' <= c && c <= '1') {
+					anyDigits = true;
+					long temp = value * 2L + c - '0';
+					if(int.MaxValue < temp) {
+						throw new CircuitException(Cause.UserError, this.ErrorTooBig());
+					}
+					value = (int)temp;
+					c = this.Read();
+				}
+				this.back = c;
+				if(anyDigits) {
+					return ((long)(value * sign)) & ((1L << 32) - 1);
+				}
+				if(c == -1) {
+					return -1L;
+				}
+				throw new CircuitException(Cause.CorruptedFile, this.ErrorChar());
 			}
 		}
 	}

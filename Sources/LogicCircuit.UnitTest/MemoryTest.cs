@@ -121,5 +121,45 @@ namespace LogicCircuit.UnitTest {
 			Assert.AreEqual<byte>(0x34, data[14]);
 			Assert.AreEqual<byte>(0x12, data[15]);
 		}
+
+		[TestMethod()]
+		public void LoadTextFileTest() {
+			DialogMemoryEditor.TextNumberReader Reader(string text, DialogMemoryEditor.TextFileFormat format) => new DialogMemoryEditor.TextNumberReader(new StringReader(text), format);
+			void Check(DialogMemoryEditor.TextNumberReader reader, params int[] toExpect) {
+				foreach(int expected in toExpect) {
+					long value = reader.Next();
+					Assert.AreNotEqual(-1, value);
+					int actual = (int)value;
+					Assert.AreEqual(expected, actual);
+				}
+				Assert.AreEqual(-1, reader.Next());
+			}
+
+			var reader = Reader("", DialogMemoryEditor.TextFileFormat.Dec);
+			long value = reader.Next();
+			Assert.AreEqual(-1, value);
+			value = reader.Next();
+			Assert.AreEqual(-1, value);
+
+			Check(Reader("1 2 3", DialogMemoryEditor.TextFileFormat.Dec), 1, 2, 3);
+			Check(Reader(" 1,2; 3  ", DialogMemoryEditor.TextFileFormat.Dec), 1, 2, 3);
+			Check(Reader(" \n\r123	456	789  \r\n", DialogMemoryEditor.TextFileFormat.Dec), 123, 456, 789);
+			Check(Reader(" \n\r123	-456	789  \r\n", DialogMemoryEditor.TextFileFormat.Dec), 123, -456, 789);
+
+			Check(Reader(" \nabc	456	f01 eef \r\n", DialogMemoryEditor.TextFileFormat.Hex), 0xabc, 0x456, 0xf01, 0xeef);
+			Check(Reader(" \n101	1101	1000100010001 \r\n", DialogMemoryEditor.TextFileFormat.Bin), 0b101, 0b1101, 0b1000100010001);
+			Check(Reader(" \n101	-1101	1000100010001 \r\n", DialogMemoryEditor.TextFileFormat.Bin), 0b101, -0b1101, 0b1000100010001);
+
+			Check(Reader(int.MaxValue.ToString(), DialogMemoryEditor.TextFileFormat.Dec), int.MaxValue);
+			Check(Reader("7fffffff", DialogMemoryEditor.TextFileFormat.Hex), int.MaxValue);
+			Check(Reader("1111111111111111111111111111111", DialogMemoryEditor.TextFileFormat.Bin), int.MaxValue);
+
+			Assert.ThrowsException<CircuitException>(() => Check(Reader("2147483648", DialogMemoryEditor.TextFileFormat.Dec), 1, 2, 3));
+			Assert.ThrowsException<CircuitException>(() => Check(Reader("80000000", DialogMemoryEditor.TextFileFormat.Hex), int.MaxValue));
+
+			Assert.ThrowsException<CircuitException>(() => Check(Reader("1=0", DialogMemoryEditor.TextFileFormat.Dec), 1, int.MaxValue));
+			Assert.ThrowsException<CircuitException>(() => Check(Reader("1=0", DialogMemoryEditor.TextFileFormat.Hex), 1, int.MaxValue));
+			Assert.ThrowsException<CircuitException>(() => Check(Reader("1=0", DialogMemoryEditor.TextFileFormat.Bin), 1, int.MaxValue));
+		}
 	}
 }

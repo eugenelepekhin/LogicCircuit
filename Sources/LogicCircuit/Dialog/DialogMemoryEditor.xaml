@@ -77,10 +77,16 @@
 		</Grid>
 
 		<Grid Grid.ColumnSpan="2">
-			<StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Style="{StaticResource dataAllowed}">
-				<Button Content="{x:Static properties:Resources.TitleLoad}" Click="ButtonLoadClick" ToolTip="{x:Static properties:Resources.ToolTipLoadData}"/>
-				<Button Content="{x:Static properties:Resources.TitleSaveAs}" Click="ButtonSaveClick" ToolTip="{x:Static properties:Resources.ToolTipSaveData}"/>
-			</StackPanel>
+			<WrapPanel Orientation="Horizontal" VerticalAlignment="Bottom" Style="{StaticResource dataAllowed}">
+				<StackPanel Orientation="Horizontal">
+					<Button Content="{x:Static properties:Resources.TitleLoad}" Click="ButtonLoadClick" ToolTip="{x:Static properties:Resources.ToolTipLoadData}"/>
+					<Button Content="{x:Static properties:Resources.TitleSaveAs}" Click="ButtonSaveClick" ToolTip="{x:Static properties:Resources.ToolTipSaveData}"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal">
+					<Button Content="{x:Static properties:Resources.TitleLoadText}" Click="ButtonLoadTextClick" ToolTip="{x:Static properties:Resources.ToolTipLoadTextData}"/>
+					<lc:AutoWidthComboBox ItemsSource="{Binding Path=TextFileFormats}" SelectedItem="{Binding Path=CurrentTextFileFormat}" ToolTip="{x:Static properties:Resources.ToolTipLoadTextFormats}"/>
+				</StackPanel>
+			</WrapPanel>
 
 			<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
 				<Button Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" Click="ButtonOkClick"/>

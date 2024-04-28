@@ -3377,5 +3377,61 @@ namespace LogicCircuit.Properties {
  		public static string ErrorHdlInputTooBig(string circuitName) {
 			return string.Format(FormatCulture, ResourceManager.GetString("ErrorHdlInputTooBig", Culture), circuitName);
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Load Text....
+		/// </summary>
+ 		public static string TitleLoadText {
+			get { return ResourceManager.GetString("TitleLoadText", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Load data from text file with sequence of numbers.
+		/// </summary>
+ 		public static string ToolTipLoadTextData {
+			get { return ResourceManager.GetString("ToolTipLoadTextData", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Binary.
+		/// </summary>
+ 		public static string TextFileFormatBin {
+			get { return ResourceManager.GetString("TextFileFormatBin", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Decimal.
+		/// </summary>
+ 		public static string TextFileFormatDec {
+			get { return ResourceManager.GetString("TextFileFormatDec", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Hexadecimal.
+		/// </summary>
+ 		public static string TextFileFormatHex {
+			get { return ResourceManager.GetString("TextFileFormatHex", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Select format of text files to load.
+		/// </summary>
+ 		public static string ToolTipLoadTextFormats {
+			get { return ResourceManager.GetString("ToolTipLoadTextFormats", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Number too big in line: {0}, position: {1}.
+		/// </summary>
+ 		public static string ErrorTextFileBigNumber(int line, int pos) {
+			return string.Format(FormatCulture, ResourceManager.GetString("ErrorTextFileBigNumber", Culture), line, pos);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Unrecognized character in line: {0}, position: {1}.
+		/// </summary>
+ 		public static string ErrorTextFileChar(int line, int pos) {
+			return string.Format(FormatCulture, ResourceManager.GetString("ErrorTextFileChar", Culture), line, pos);
+		}
 	}
 }
