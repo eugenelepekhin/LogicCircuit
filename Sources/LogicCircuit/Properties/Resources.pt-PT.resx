@@ -1619,4 +1619,28 @@ Você deseja carregar a configuração de salvamento automático para este arqui
 	<data name="ErrorHdlInputTooBig" xml:space="preserve">
 		<value>O {0} de circuito tem muitos bits de entrada e os arquivos de teste não podem ser construídos.</value>
 	</data>
+	<data name="TitleLoadText" xml:space="preserve">
+		<value>Carregar texto...</value>
+	</data>
+	<data name="ToolTipLoadTextData" xml:space="preserve">
+		<value>Carregar dados do arquivo de texto com sequência de números</value>
+	</data>
+	<data name="TextFileFormatBin" xml:space="preserve">
+		<value>Binário</value>
+	</data>
+	<data name="TextFileFormatDec" xml:space="preserve">
+		<value>Decimal</value>
+	</data>
+	<data name="TextFileFormatHex" xml:space="preserve">
+		<value>Hexadecimal</value>
+	</data>
+	<data name="ToolTipLoadTextFormats" xml:space="preserve">
+		<value>Selecione o formato dos arquivos de texto para carregar</value>
+	</data>
+	<data name="ErrorTextFileBigNumber" xml:space="preserve">
+		<value>Número muito grande na linha: {0}, posição: {1}</value>
+	</data>
+	<data name="ErrorTextFileChar" xml:space="preserve">
+		<value>Caractere não reconhecido na linha: {0}, posição: {1}</value>
+	</data>
 </root>

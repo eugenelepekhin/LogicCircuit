@@ -1476,4 +1476,28 @@ LED, مصفوفة LED ,زر , أو اية عناصر اخرى</value>
 	<data name="ErrorHdlInputTooBig" xml:space="preserve">
 		<value>يحتوي {0} الدائرة على عدد كبير جدا من بتات الإدخال ولا يمكن إنشاء ملفات الاختبار.</value>
 	</data>
+	<data name="TitleLoadText" xml:space="preserve">
+		<value>تحميل النص...</value>
+	</data>
+	<data name="ToolTipLoadTextData" xml:space="preserve">
+		<value>تحميل البيانات من ملف نصي مع تسلسل الأرقام</value>
+	</data>
+	<data name="TextFileFormatBin" xml:space="preserve">
+		<value>ثنائي</value>
+	</data>
+	<data name="TextFileFormatDec" xml:space="preserve">
+		<value>عشري</value>
+	</data>
+	<data name="TextFileFormatHex" xml:space="preserve">
+		<value>سداسي عشري</value>
+	</data>
+	<data name="ToolTipLoadTextFormats" xml:space="preserve">
+		<value>حدد تنسيق الملفات النصية المراد تحميلها</value>
+	</data>
+	<data name="ErrorTextFileBigNumber" xml:space="preserve">
+		<value>رقم كبير جدا في الخط: {0} ، الموضع: {1}</value>
+	</data>
+	<data name="ErrorTextFileChar" xml:space="preserve">
+		<value>حرف غير معروف في السطر: {0} ، الموضع: {1}</value>
+	</data>
 </root>

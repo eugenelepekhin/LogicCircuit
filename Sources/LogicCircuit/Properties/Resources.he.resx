@@ -1579,4 +1579,28 @@
 	<data name="ErrorHdlInputTooBig" xml:space="preserve">
 		<value>Circuit {0} מכיל יותר מדי סיביות קלט ולא ניתן לבנות קבצי בדיקה.</value>
 	</data>
+	<data name="TitleLoadText" xml:space="preserve">
+		<value>טען טקסט...</value>
+	</data>
+	<data name="ToolTipLoadTextData" xml:space="preserve">
+		<value>טען נתונים מקובץ טקסט עם רצף מספרים</value>
+	</data>
+	<data name="TextFileFormatBin" xml:space="preserve">
+		<value>בינארי</value>
+	</data>
+	<data name="TextFileFormatDec" xml:space="preserve">
+		<value>עשרוני</value>
+	</data>
+	<data name="TextFileFormatHex" xml:space="preserve">
+		<value>הקסדצימלי</value>
+	</data>
+	<data name="ToolTipLoadTextFormats" xml:space="preserve">
+		<value>בחירת תבנית של קבצי טקסט לטעינה</value>
+	</data>
+	<data name="ErrorTextFileBigNumber" xml:space="preserve">
+		<value>מספר גדול מדי בשורה: {0}, עמדה: {1}</value>
+	</data>
+	<data name="ErrorTextFileChar" xml:space="preserve">
+		<value>תו לא מזוהה בשורה: {0}, תפקיד: {1}</value>
+	</data>
 </root>

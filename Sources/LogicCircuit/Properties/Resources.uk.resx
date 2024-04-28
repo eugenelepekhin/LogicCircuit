@@ -1529,4 +1529,28 @@
 	<data name="ErrorHdlInputTooBig" xml:space="preserve">
 		<value>Схема {0} має занадто багато вхідних бітів, і тестові файли не можуть бути зібрані.</value>
 	</data>
+	<data name="TitleLoadText" xml:space="preserve">
+		<value>Завантажити текст...</value>
+	</data>
+	<data name="ToolTipLoadTextData" xml:space="preserve">
+		<value>Завантаження даних з текстового файлу з послідовністю чисел</value>
+	</data>
+	<data name="TextFileFormatBin" xml:space="preserve">
+		<value>Двійковий</value>
+	</data>
+	<data name="TextFileFormatDec" xml:space="preserve">
+		<value>Десятковий</value>
+	</data>
+	<data name="TextFileFormatHex" xml:space="preserve">
+		<value>Шістнадцяткове</value>
+	</data>
+	<data name="ToolTipLoadTextFormats" xml:space="preserve">
+		<value>Вибір формату текстових файлів для завантаження</value>
+	</data>
+	<data name="ErrorTextFileBigNumber" xml:space="preserve">
+		<value>Занадто велика кількість у черзі: {0}, позиція: {1}</value>
+	</data>
+	<data name="ErrorTextFileChar" xml:space="preserve">
+		<value>Нерозпізнаний символ у рядку: {0}, позиція: {1}</value>
+	</data>
 </root>

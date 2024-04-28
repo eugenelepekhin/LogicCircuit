@@ -1551,4 +1551,28 @@ Voulez-vous charger l'état sauvegardé automatiquement de ce fichier ?</value>
 	<data name="ErrorHdlInputTooBig" xml:space="preserve">
 		<value>Le circuit {0} a trop de bits d’entrée et les fichiers de test ne peuvent pas être compilés.</value>
 	</data>
+	<data name="TitleLoadText" xml:space="preserve">
+		<value>Charger le texte...</value>
+	</data>
+	<data name="ToolTipLoadTextData" xml:space="preserve">
+		<value>Charger des données à partir d’un fichier texte avec une séquence de nombres</value>
+	</data>
+	<data name="TextFileFormatBin" xml:space="preserve">
+		<value>Binaire</value>
+	</data>
+	<data name="TextFileFormatDec" xml:space="preserve">
+		<value>Décimal</value>
+	</data>
+	<data name="TextFileFormatHex" xml:space="preserve">
+		<value>Hexadécimal</value>
+	</data>
+	<data name="ToolTipLoadTextFormats" xml:space="preserve">
+		<value>Sélectionnez le format des fichiers texte à charger</value>
+	</data>
+	<data name="ErrorTextFileBigNumber" xml:space="preserve">
+		<value>Nombre trop grand dans la ligne : {0}, position : {1}</value>
+	</data>
+	<data name="ErrorTextFileChar" xml:space="preserve">
+		<value>Caractère non reconnu dans la ligne : {0}, position : {1}</value>
+	</data>
 </root>

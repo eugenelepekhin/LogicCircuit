@@ -1537,4 +1537,28 @@ Takav sklop se ne može koristiti više od jednom na drugim sklopovima jer će s
 	<data name="ErrorHdlInputTooBig" xml:space="preserve">
 		<value>Circuit {0} ima previše ulaznih bitova i testne datoteke se ne mogu izraditi.</value>
 	</data>
+	<data name="TitleLoadText" xml:space="preserve">
+		<value>Učitavanje teksta...</value>
+	</data>
+	<data name="ToolTipLoadTextData" xml:space="preserve">
+		<value>Učitavanje podataka iz tekstualne datoteke s slijedom brojeva</value>
+	</data>
+	<data name="TextFileFormatBin" xml:space="preserve">
+		<value>Binarni</value>
+	</data>
+	<data name="TextFileFormatDec" xml:space="preserve">
+		<value>Decimala</value>
+	</data>
+	<data name="TextFileFormatHex" xml:space="preserve">
+		<value>Heksadecimalni</value>
+	</data>
+	<data name="ToolTipLoadTextFormats" xml:space="preserve">
+		<value>Odaberite oblik tekstualnih datoteka za učitavanje</value>
+	</data>
+	<data name="ErrorTextFileBigNumber" xml:space="preserve">
+		<value>Broj prevelik u redu: {0}, položaj: {1}</value>
+	</data>
+	<data name="ErrorTextFileChar" xml:space="preserve">
+		<value>Neprepoznati znak u retku: {0}, položaj: {1}</value>
+	</data>
 </root>

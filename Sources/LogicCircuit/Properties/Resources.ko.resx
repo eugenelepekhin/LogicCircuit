@@ -1512,4 +1512,28 @@ Tri-state와 적절한 제어 회로를 함께 써서 멀티플렉서를 만들 
 	<data name="ErrorHdlInputTooBig" xml:space="preserve">
 		<value>회로 {0}에 입력 비트가 너무 많아 테스트 파일을 빌드할 수 없습니다.</value>
 	</data>
+	<data name="TitleLoadText" xml:space="preserve">
+		<value>텍스트 불러오기...</value>
+	</data>
+	<data name="ToolTipLoadTextData" xml:space="preserve">
+		<value>일련의 숫자가 있는 텍스트 파일에서 데이터 로드</value>
+	</data>
+	<data name="TextFileFormatBin" xml:space="preserve">
+		<value>바이너리</value>
+	</data>
+	<data name="TextFileFormatDec" xml:space="preserve">
+		<value>십진법</value>
+	</data>
+	<data name="TextFileFormatHex" xml:space="preserve">
+		<value>16 진수</value>
+	</data>
+	<data name="ToolTipLoadTextFormats" xml:space="preserve">
+		<value>로드할 텍스트 파일 형식 선택</value>
+	</data>
+	<data name="ErrorTextFileBigNumber" xml:space="preserve">
+		<value>줄에 너무 큰 숫자: {0}, 위치: {1}</value>
+	</data>
+	<data name="ErrorTextFileChar" xml:space="preserve">
+		<value>줄 안의 인식할 수 없는 문자: {0}, 위치: {1}</value>
+	</data>
 </root>

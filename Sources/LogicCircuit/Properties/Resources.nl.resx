@@ -1592,4 +1592,28 @@ Wil je het, automatisch opgeslagen, bestand laden.</value>
 	<data name="ErrorHdlInputTooBig" xml:space="preserve">
 		<value>Circuit {0} heeft te veel invoerbits en testbestanden kunnen niet worden gebouwd.</value>
 	</data>
+	<data name="TitleLoadText" xml:space="preserve">
+		<value>Tekst laden...</value>
+	</data>
+	<data name="ToolTipLoadTextData" xml:space="preserve">
+		<value>Laad gegevens uit tekstbestand met getallenreeks</value>
+	</data>
+	<data name="TextFileFormatBin" xml:space="preserve">
+		<value>Binair</value>
+	</data>
+	<data name="TextFileFormatDec" xml:space="preserve">
+		<value>Decimaal</value>
+	</data>
+	<data name="TextFileFormatHex" xml:space="preserve">
+		<value>Hexadecimaal</value>
+	</data>
+	<data name="ToolTipLoadTextFormats" xml:space="preserve">
+		<value>Selecteer het formaat van de tekstbestanden die u wilt laden</value>
+	</data>
+	<data name="ErrorTextFileBigNumber" xml:space="preserve">
+		<value>Nummer te groot in de rij: {0}, positie: {1}</value>
+	</data>
+	<data name="ErrorTextFileChar" xml:space="preserve">
+		<value>Niet-herkend teken in lijn: {0}, positie: {1}</value>
+	</data>
 </root>

@@ -1528,4 +1528,28 @@ Czy chcesz wczytać automatycznie zapisaną kopię tego pliku?</value>
 	<data name="ErrorHdlInputTooBig" xml:space="preserve">
 		<value>Obwód {0} ma zbyt wiele bitów wejściowych i nie można skompilować plików testowych.</value>
 	</data>
+	<data name="TitleLoadText" xml:space="preserve">
+		<value>Załaduj tekst...</value>
+	</data>
+	<data name="ToolTipLoadTextData" xml:space="preserve">
+		<value>Załaduj dane z pliku tekstowego z sekwencją liczb</value>
+	</data>
+	<data name="TextFileFormatBin" xml:space="preserve">
+		<value>Dwójkowy</value>
+	</data>
+	<data name="TextFileFormatDec" xml:space="preserve">
+		<value>Dziesiętny</value>
+	</data>
+	<data name="TextFileFormatHex" xml:space="preserve">
+		<value>Szesnastkowych</value>
+	</data>
+	<data name="ToolTipLoadTextFormats" xml:space="preserve">
+		<value>Wybierz format plików tekstowych do załadowania</value>
+	</data>
+	<data name="ErrorTextFileBigNumber" xml:space="preserve">
+		<value>Zbyt duża liczba w kolejce: {0}, pozycja: {1}</value>
+	</data>
+	<data name="ErrorTextFileChar" xml:space="preserve">
+		<value>Nierozpoznany znak w wierszu: {0}, pozycja: {1}</value>
+	</data>
 </root>

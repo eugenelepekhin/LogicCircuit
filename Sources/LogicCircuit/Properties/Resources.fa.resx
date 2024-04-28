@@ -1288,4 +1288,28 @@
 	<data name="ErrorHdlInputTooBig" xml:space="preserve">
 		<value>مدار {0} بیت های ورودی زیادی دارد و فایل های تست نمی توانند ساخته شوند.</value>
 	</data>
+	<data name="TitleLoadText" xml:space="preserve">
+		<value>بارگذاری متن...</value>
+	</data>
+	<data name="ToolTipLoadTextData" xml:space="preserve">
+		<value>بارگذاری داده ها از پرونده متنی با دنباله ای از اعداد</value>
+	</data>
+	<data name="TextFileFormatBin" xml:space="preserve">
+		<value>دودویی</value>
+	</data>
+	<data name="TextFileFormatDec" xml:space="preserve">
+		<value>اعشاری</value>
+	</data>
+	<data name="TextFileFormatHex" xml:space="preserve">
+		<value>هگزادسیمال</value>
+	</data>
+	<data name="ToolTipLoadTextFormats" xml:space="preserve">
+		<value>قالب پروندههای متنی را برای بارگذاری انتخاب کنید</value>
+	</data>
+	<data name="ErrorTextFileChar" xml:space="preserve">
+		<value>شخصیت ناشناخته در خط: {0}، موقعیت: {1}</value>
+	</data>
+	<data name="ErrorTextFileBigNumber" xml:space="preserve">
+		<value>تعداد بیش از حد در هر خط: {0}، موقعیت: {1}</value>
+	</data>
 </root>

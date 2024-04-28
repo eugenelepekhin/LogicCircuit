@@ -1341,4 +1341,28 @@
 	<data name="ErrorHdlInputTooBig" xml:space="preserve">
 		<value>回路 {0} の入力ビットが多すぎるため、テスト ファイルを構築できません。</value>
 	</data>
+	<data name="TitleLoadText" xml:space="preserve">
+		<value>テキストを読み込めば...</value>
+	</data>
+	<data name="ToolTipLoadTextData" xml:space="preserve">
+		<value>数字のシーケンスを含むテキストファイルからデータをロードする</value>
+	</data>
+	<data name="TextFileFormatBin" xml:space="preserve">
+		<value>バイナリ</value>
+	</data>
+	<data name="TextFileFormatDec" xml:space="preserve">
+		<value>小数</value>
+	</data>
+	<data name="TextFileFormatHex" xml:space="preserve">
+		<value>16 進 数</value>
+	</data>
+	<data name="ToolTipLoadTextFormats" xml:space="preserve">
+		<value>ロードするテキストファイルの形式を選択</value>
+	</data>
+	<data name="ErrorTextFileBigNumber" xml:space="preserve">
+		<value>列の番号が大きすぎます:{0}、位置:{1}</value>
+	</data>
+	<data name="ErrorTextFileChar" xml:space="preserve">
+		<value>行内の認識できない文字: {0}、位置: {1}</value>
+	</data>
 </root>

@@ -1338,4 +1338,28 @@ tutti i simboli del display saranno visibili sul suo simbolo.</value>
 	<data name="ErrorHdlInputTooBig" xml:space="preserve">
 		<value>Il circuito {0} ha troppi bit di input e non è possibile creare file di test.</value>
 	</data>
+	<data name="TitleLoadText" xml:space="preserve">
+		<value>Carica testo...</value>
+	</data>
+	<data name="ToolTipLoadTextData" xml:space="preserve">
+		<value>Carica i dati da un file di testo con sequenza di numeri</value>
+	</data>
+	<data name="TextFileFormatBin" xml:space="preserve">
+		<value>Binario</value>
+	</data>
+	<data name="TextFileFormatDec" xml:space="preserve">
+		<value>Decimale</value>
+	</data>
+	<data name="TextFileFormatHex" xml:space="preserve">
+		<value>Esadecimale</value>
+	</data>
+	<data name="ToolTipLoadTextFormats" xml:space="preserve">
+		<value>Selezionare il formato dei file di testo da caricare</value>
+	</data>
+	<data name="ErrorTextFileBigNumber" xml:space="preserve">
+		<value>Numero troppo grande in linea: {0}, posizione: {1}</value>
+	</data>
+	<data name="ErrorTextFileChar" xml:space="preserve">
+		<value>Carattere non riconosciuto in riga: {0}, posizione: {1}</value>
+	</data>
 </root>

@@ -1603,4 +1603,28 @@ Permite seleccionar el tamaño y profundidad de color / esquema:
 	<data name="ErrorHdlInputTooBig" xml:space="preserve">
 		<value>El circuito {0} tiene demasiados bits de entrada y no se pueden compilar archivos de prueba.</value>
 	</data>
+	<data name="TitleLoadText" xml:space="preserve">
+		<value>Cargar texto...</value>
+	</data>
+	<data name="ToolTipLoadTextData" xml:space="preserve">
+		<value>Cargar datos desde un archivo de texto con secuencia de números</value>
+	</data>
+	<data name="TextFileFormatBin" xml:space="preserve">
+		<value>Binario</value>
+	</data>
+	<data name="TextFileFormatDec" xml:space="preserve">
+		<value>Decimal</value>
+	</data>
+	<data name="TextFileFormatHex" xml:space="preserve">
+		<value>Hexadecimal</value>
+	</data>
+	<data name="ToolTipLoadTextFormats" xml:space="preserve">
+		<value>Seleccione el formato de los archivos de texto que desea cargar</value>
+	</data>
+	<data name="ErrorTextFileBigNumber" xml:space="preserve">
+		<value>Número demasiado grande en la línea: {0}, posición: {1}</value>
+	</data>
+	<data name="ErrorTextFileChar" xml:space="preserve">
+		<value>Carácter no reconocido en línea: {0}, posición: {1}</value>
+	</data>
 </root>

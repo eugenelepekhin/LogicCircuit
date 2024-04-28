@@ -1537,4 +1537,28 @@ Out</value>
 	<data name="ErrorHdlInputTooBig" xml:space="preserve">
 		<value>电路{0}输入位过多，无法构建测试文件。</value>
 	</data>
+	<data name="TitleLoadText" xml:space="preserve">
+		<value>加载文本...</value>
+	</data>
+	<data name="ToolTipLoadTextData" xml:space="preserve">
+		<value>从带有数字序列的文本文件中加载数据</value>
+	</data>
+	<data name="TextFileFormatBin" xml:space="preserve">
+		<value>二元的</value>
+	</data>
+	<data name="TextFileFormatDec" xml:space="preserve">
+		<value>十进制</value>
+	</data>
+	<data name="TextFileFormatHex" xml:space="preserve">
+		<value>十六进制</value>
+	</data>
+	<data name="ToolTipLoadTextFormats" xml:space="preserve">
+		<value>选择要加载的文本文件的格式</value>
+	</data>
+	<data name="ErrorTextFileBigNumber" xml:space="preserve">
+		<value>排队人数过大：{0}，位置：{1}</value>
+	</data>
+	<data name="ErrorTextFileChar" xml:space="preserve">
+		<value>行中无法识别的字符：{0}，位置：{1}</value>
+	</data>
 </root>

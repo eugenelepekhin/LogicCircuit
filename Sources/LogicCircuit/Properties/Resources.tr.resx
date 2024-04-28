@@ -1529,4 +1529,28 @@ temelde bir çoğullayıcıya eşdeğerdir.</value>
 	<data name="ErrorHdlInputTooBig" xml:space="preserve">
 		<value>Devre {0} çok fazla giriş biti var ve test dosyaları oluşturulamıyor.</value>
 	</data>
+	<data name="TitleLoadText" xml:space="preserve">
+		<value>Metin Yükle...</value>
+	</data>
+	<data name="ToolTipLoadTextData" xml:space="preserve">
+		<value>Sayı dizisi ile metin dosyasından veri yükleyin</value>
+	</data>
+	<data name="TextFileFormatBin" xml:space="preserve">
+		<value>İkili</value>
+	</data>
+	<data name="TextFileFormatDec" xml:space="preserve">
+		<value>On -da -lık</value>
+	</data>
+	<data name="TextFileFormatHex" xml:space="preserve">
+		<value>Onaltı -lık</value>
+	</data>
+	<data name="ToolTipLoadTextFormats" xml:space="preserve">
+		<value>Yüklenecek metin dosyalarının biçimini seçin</value>
+	</data>
+	<data name="ErrorTextFileBigNumber" xml:space="preserve">
+		<value>Satırdaki sayı çok büyük: {0}, konum: {1}</value>
+	</data>
+	<data name="ErrorTextFileChar" xml:space="preserve">
+		<value>Satırdaki tanınmayan karakter: {0}, konum: {1}</value>
+	</data>
 </root>

@@ -1551,4 +1551,28 @@ Möchten Sie den automatisch gespeicherten Stand dieser Datei laden?</value>
 	<data name="ErrorHdlInputTooBig" xml:space="preserve">
 		<value>Die {0} der Schaltung hat zu viele Eingangsbits und es können keine Testdateien erstellt werden.</value>
 	</data>
+	<data name="TitleLoadText" xml:space="preserve">
+		<value>Text laden...</value>
+	</data>
+	<data name="ToolTipLoadTextData" xml:space="preserve">
+		<value>Laden von Daten aus einer Textdatei mit Zahlenfolge</value>
+	</data>
+	<data name="TextFileFormatBin" xml:space="preserve">
+		<value>Binär</value>
+	</data>
+	<data name="TextFileFormatDec" xml:space="preserve">
+		<value>Dezimal</value>
+	</data>
+	<data name="TextFileFormatHex" xml:space="preserve">
+		<value>Hexadezimal</value>
+	</data>
+	<data name="ToolTipLoadTextFormats" xml:space="preserve">
+		<value>Wählen Sie das Format der zu ladenden Textdateien aus</value>
+	</data>
+	<data name="ErrorTextFileBigNumber" xml:space="preserve">
+		<value>Anzahl zu groß in der Reihe: {0}, Position: {1}</value>
+	</data>
+	<data name="ErrorTextFileChar" xml:space="preserve">
+		<value>Unbekanntes Zeichen in der Zeile: {0}, Position: {1}</value>
+	</data>
 </root>
