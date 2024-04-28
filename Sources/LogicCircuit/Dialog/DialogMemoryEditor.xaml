@@ -5,7 +5,7 @@
 	xmlns:properties="clr-namespace:LogicCircuit.Properties"
 	WindowStartupLocation="CenterOwner"
 	Style="{StaticResource DialogWindow}"
-	MinWidth="590" MinHeight="350"
+	MinWidth="600" MinHeight="420"
 	FocusManager.FocusedElement="{Binding ElementName=addressBitWidth}"
 >
 	<Window.Resources>
@@ -76,7 +76,7 @@
 			</GroupBox>
 		</Grid>
 
-		<Grid Grid.ColumnSpan="2">
+		<lc:AutoGrid ColumnWidths="*;Auto" Grid.ColumnSpan="2">
 			<WrapPanel Orientation="Horizontal" VerticalAlignment="Bottom" Style="{StaticResource dataAllowed}">
 				<StackPanel Orientation="Horizontal">
 					<Button Content="{x:Static properties:Resources.TitleLoad}" Click="ButtonLoadClick" ToolTip="{x:Static properties:Resources.ToolTipLoadData}"/>
@@ -92,6 +92,6 @@
 				<Button Content="{x:Static properties:Resources.TitleOK}" IsDefault="True" Click="ButtonOkClick"/>
 				<Button Content="{x:Static properties:Resources.TitleCancel}" IsCancel="True"/>
 			</StackPanel>
-		</Grid>
+		</lc:AutoGrid>
 	</lc:AutoGrid>
 </Window>
