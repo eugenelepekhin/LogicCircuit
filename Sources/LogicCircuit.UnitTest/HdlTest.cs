@@ -74,6 +74,12 @@ namespace LogicCircuit.UnitTest {
 			this.RunTruthTableComparisonForCategory("Test");
 		}
 
+
+		[STATestMethod]
+		public void HdlTestTruthTables2() {
+			this.RunTruthTableComparisonForCategory("Test2");
+		}
+
 		[STATestMethod]
 		public void HdlTestErrors() {
 			string text = null;
@@ -127,7 +133,7 @@ namespace LogicCircuit.UnitTest {
 		public void HdlTestSingleTest() {
 			CircuitProject project = this.LoadCircuitProject();
 			string hdlPath = this.HdlFolder();
-			LogicalCircuit circuit = ProjectTester.SwitchTo(project, "MissingJam1");
+			LogicalCircuit circuit = ProjectTester.SwitchTo(project, "MissingXNorJam");
 			N2TExport export = new N2TExport(false, false, this.Message, this.Message);
 			bool success = export.ExportCircuit(circuit, hdlPath, false);
 			Assert.IsTrue(success);

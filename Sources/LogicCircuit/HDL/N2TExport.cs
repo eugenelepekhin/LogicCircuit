@@ -99,7 +99,7 @@ namespace LogicCircuit {
 			int inputIndex = 0;
 			foreach(Jam oldInput in symbolInputs.Keys) {
 				if((inputIndex & 1) == 0) {
-					AddGate(symbolInputs.Count <= 2);
+					AddGate(symbolInputs.Count <= 3 && (0 < inputIndex || symbolInputs.Count <= 2));
 				} else {
 					gate = replacement[replacement.Count - 1];
 				}
@@ -151,6 +151,7 @@ namespace LogicCircuit {
 				last.Add(connectionReplacement);
 			}
 			last.Subindex = 0;
+			replacement.ForEach(s => s.SortConnections());
 
 			return replacement;
 		}

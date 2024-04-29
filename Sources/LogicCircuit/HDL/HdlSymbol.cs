@@ -115,20 +115,19 @@ namespace LogicCircuit {
 			this.connectionList = this.HdlConnections().ToList();
 			this.connectionList.Sort(compare);
 
-			Dictionary<JamRange, List<HdlConnection>> byRange = new Dictionary<JamRange, List<HdlConnection>>();
+			OneToMany<JamRange, HdlConnection> byRange = new OneToMany<JamRange, HdlConnection>();
 			foreach(HdlConnection connection in this.connectionList.Where(c => this == c.OutHdlSymbol)) {
 				JamRange range = new JamRange(connection.OutJam, connection.OutBits);
-				List<HdlConnection>? list;
-				if(!byRange.TryGetValue(range, out list)) {
-					list = new List<HdlConnection>();
-					byRange.Add(range, list);
-				}
-				list.Add(connection);
+				byRange.Add(range, connection);
 			}
 			foreach(List<HdlConnection> list in byRange.Values) {
 				if(1 < list.Count) {
-					for(int i = 1; i < list.Count; i++) {
-						list[i].SkipOutput = true;
+					bool skip = false;
+					for(int i = 0; i < list.Count; i++) {
+						if(list[i].InHdlSymbol.CircuitSymbol.Circuit is not Pin) {
+							list[i].SkipOutput = skip;
+							skip = true;
+						}
 					}
 				}
 			}
