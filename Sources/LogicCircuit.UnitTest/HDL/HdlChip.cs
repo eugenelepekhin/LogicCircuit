@@ -57,6 +57,8 @@ namespace LogicCircuit.UnitTest.HDL {
 
 		public virtual bool Evaluate(HdlState state) {
 			bool changed;
+			int count = 0;
+			int maxLoops = this.parts.Count * this.parts.Count;
 			do {
 				changed = false;
 				foreach(HdlPart part in this.parts) {
@@ -69,8 +71,8 @@ namespace LogicCircuit.UnitTest.HDL {
 						changed |= state.Assign(connection);
 					}
 				}
-			} while(changed);
-			return changed;
+			} while(changed && ++count < maxLoops);
+			return !changed;
 		}
 
 		public override string ToString() {

@@ -133,6 +133,26 @@ namespace LogicCircuit.UnitTest.HDL {
 			return list;
 		}
 
+		public void SetInput(string pinName, int value) {
+			HdlIOPin pin = this.Chip.Inputs.FirstOrDefault(p => p.Name == pinName);
+			if(pin == null) {
+				throw new ArgumentOutOfRangeException(nameof(pinName), "Input pin not found");
+			}
+			this.Set(null, pin, value);
+		}
+		public int GetOutput(string pinName) {
+			HdlIOPin pin = this.Chip.Outputs.FirstOrDefault(p => p.Name == pinName);
+			if(pin == null) {
+				throw new ArgumentOutOfRangeException(nameof(pinName), "Output pin not found");
+			}
+			return this.Get(null, pin);
+		}
+		public int this[string pinName] {
+			get => this.GetOutput(pinName);
+			set => this.SetInput(pinName, value);
+		}
+		public bool Evaluate() => this.Chip.Evaluate(this);
+
 		#if DEBUG
 			public override string ToString() => $"State of {this.Chip.Name}";
 		#endif
