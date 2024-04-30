@@ -55,10 +55,17 @@ namespace LogicCircuit.UnitTest.HDL {
 			return success;
 		}
 
+		/// <summary>
+		/// Evaluates the state and returns true if it is a oscillation occurred
+		/// </summary>
+		/// <param name="state"></param>
+		/// <returns>true if there is an oscillation, false if evaluation is successful.</returns>
 		public virtual bool Evaluate(HdlState state) {
 			bool changed;
 			int count = 0;
-			int maxLoops = this.parts.Count * this.parts.Count;
+			int maxLoops = this.parts.Count;
+			maxLoops *= maxLoops;
+			maxLoops = Math.Max(maxLoops, 16);
 			do {
 				changed = false;
 				foreach(HdlPart part in this.parts) {
@@ -72,7 +79,7 @@ namespace LogicCircuit.UnitTest.HDL {
 					}
 				}
 			} while(changed && ++count < maxLoops);
-			return !changed;
+			return changed;
 		}
 
 		public override string ToString() {

@@ -69,6 +69,21 @@ namespace LogicCircuit.UnitTest {
 			}
 		}
 
+		private HdlState LoadState(string circuitName) {
+			CircuitProject project = this.LoadCircuitProject();
+			string hdlPath = this.HdlFolder();
+			LogicalCircuit circuit = ProjectTester.SwitchTo(project, circuitName);
+			N2TExport export = new N2TExport(false, false, this.Message, this.Message);
+			bool success = export.ExportCircuit(circuit, hdlPath, false);
+			Assert.IsTrue(success);
+			HdlContext context = new HdlContext(hdlPath, this.Message);
+			HdlState state = context.Load(circuit.Name);
+			Assert.IsNotNull(state);
+			this.Message($"Circuit {circuit.Name} HDL:");
+			this.Message(state.Chip.ToString());
+			return state;
+		}
+
 		[STATestMethod]
 		public void HdlTestTruthTables() {
 			this.RunTruthTableComparisonForCategory("Test");
@@ -129,21 +144,97 @@ namespace LogicCircuit.UnitTest {
 			}
 		}
 
+		[STATestMethod]
+		public void HdlTestRSFlipFlop1() {
+			HdlState state = this.LoadState("RSFlipFlop1");
+
+			void check(int s, int r, int q, int nq) {
+				state["S"] = s;
+				state["R"] = r;
+				Assert.IsTrue(state.Evaluate());
+				Assert.AreEqual(q, state["q"]);
+				Assert.AreEqual(nq, state["Nq"]);
+			}
+
+			check(0, 1, 1, 0);
+			check(1, 1, 1, 0);
+
+			check(1, 0, 0, 1);
+			check(1, 1, 0, 1);
+
+			check(0, 1, 1, 0);
+			check(1, 1, 1, 0);
+
+			check(1, 0, 0, 1);
+			check(1, 1, 0, 1);
+		}
+
+		[STATestMethod]
+		public void HdlTestJKFlipFlop() {
+			HdlState state = this.LoadState("JKFlipFlop");
+
+			state["r"] = 0;
+			Assert.IsTrue(state.Evaluate());
+			Assert.AreEqual(0, state["q"]);
+			state["r"] = 1;
+
+			void check(int j, int k, int q, int nq) {
+				state["j"] = j;
+				state["k"] = k;
+				state["clk"] = 0;
+				Assert.IsTrue(state.Evaluate());
+				state["clk"] = 1;
+				Assert.IsTrue(state.Evaluate());
+				state["clk"] = 0;
+				Assert.IsTrue(state.Evaluate());
+				Assert.AreEqual(q, state["q"]);
+				Assert.AreEqual(nq, state["nq"]);
+			}
+
+			check(0, 1, 0, 1);
+			check(0, 0, 0, 1);
+
+			check(1, 0, 1, 0);
+			check(0, 0, 1, 0);
+
+			check(1, 1, 0, 1);
+			check(1, 1, 1, 0);
+			check(1, 1, 0, 1);
+			check(1, 1, 1, 0);
+		}
+
+		[STATestMethod]
+		public void HdlTestCount6() {
+			HdlState state = this.LoadState("Count6");
+
+			state["clk"] = 0;
+			state["r"] = 0;
+			Assert.IsTrue(state.Evaluate());
+			Assert.AreEqual(0, state["q"]);
+			state["r"] = 1;
+			Assert.IsTrue(state.Evaluate());
+			Assert.AreEqual(0, state["q"]);
+
+			void check(int q) {
+				state["clk"] = 1;
+				Assert.IsTrue(state.Evaluate());
+				state["clk"] = 0;
+				Assert.IsTrue(state.Evaluate());
+				Assert.AreEqual(q, state["q"]);
+			}
+
+			int max = 1 << 6;
+			for(int i = 0; i < max + 10; i++) {
+				check((i + 1) % max);
+			}
+		}
+
 		//[STATestMethod]
 		public void HdlTestSingleTest() {
-			CircuitProject project = this.LoadCircuitProject();
-			string hdlPath = this.HdlFolder();
-			LogicalCircuit circuit = ProjectTester.SwitchTo(project, "MissingXNorJam");
-			N2TExport export = new N2TExport(false, false, this.Message, this.Message);
-			bool success = export.ExportCircuit(circuit, hdlPath, false);
-			Assert.IsTrue(success);
-			HdlContext context = new HdlContext(hdlPath, this.Message);
-			HdlState hdlState = context.Load(circuit.Name);
-			Assert.IsNotNull(hdlState);
-			this.Message($"Circuit {circuit.Name} HDL:");
-			this.Message(hdlState.Chip.ToString());
-			List<TruthState> hdlTable = hdlState.BuildTruthTable();
+			HdlState state = this.LoadState("MissingXNorJam");
+			List<TruthState> hdlTable = state.BuildTruthTable();
 
+			LogicalCircuit circuit = this.LoadCircuitProject().LogicalCircuitSet.FindByName(state.Chip.Name);
 			CircuitTestSocket socket = new CircuitTestSocket(circuit);
 			IList<TruthState> lcTable = socket.BuildTruthTable(d => {}, () => true, s => true, 1 << circuit.Pins.Where(p => p.PinType == PinType.Input).Sum(p => p.BitWidth), out bool truncated);
 

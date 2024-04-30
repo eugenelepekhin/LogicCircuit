@@ -121,7 +121,7 @@ namespace LogicCircuit.UnitTest.HDL {
 					truthState.Input[input] = value;
 					input--;
 				}
-				this.Chip.Evaluate(this);
+				this.Evaluate();
 				int output = outputs.Count() - 1;
 				foreach(HdlIOPin pin in outputs) {
 					int value = this.Get(null, pin);
@@ -151,7 +151,12 @@ namespace LogicCircuit.UnitTest.HDL {
 			get => this.GetOutput(pinName);
 			set => this.SetInput(pinName, value);
 		}
-		public bool Evaluate() => this.Chip.Evaluate(this);
+
+		/// <summary>
+		/// Returns true if successful, false if it's oscillates
+		/// </summary>
+		/// <returns></returns>
+		public bool Evaluate() => !this.Chip.Evaluate(this);
 
 		#if DEBUG
 			public override string ToString() => $"State of {this.Chip.Name}";
