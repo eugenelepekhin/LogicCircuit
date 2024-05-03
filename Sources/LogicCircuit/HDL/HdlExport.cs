@@ -9,6 +9,19 @@ using System.Text.RegularExpressions;
 
 namespace LogicCircuit {
 	public abstract class HdlExport {
+		private readonly struct JamBit : IEquatable<JamBit> {
+			public Jam Jam { get; }
+			public int Bit { get; }
+			public JamBit(Jam jam, int bit) {
+				this.Jam = jam;
+				this.Bit = bit;
+			}
+
+			public bool Equals(JamBit other) => this.Jam == other.Jam && this.Bit == other.Bit;
+			public override bool Equals(object? obj) => obj is JamBit && this.Equals((JamBit)obj);
+			public override int GetHashCode() => HashCode.Combine(this.Jam, this.Bit);
+		}
+
 		public bool CommentPoints { get; }
 
 		private readonly Action<string> logMessage;
@@ -125,15 +138,18 @@ namespace LogicCircuit {
 						if(connection.InJam.CircuitSymbol.Circuit is Splitter) {
 							int width = output.Pin.BitWidth;
 							for(int i = 0; i < width; i++) {
+								HashSet<JamBit> visited = new HashSet<JamBit>();
 								void Propagate(Jam enterJam, int enterBit) {
-									Splitter.Pass(enterJam, enterBit, out Jam exitJam, out int exitBit);
-									foreach(Connection splitted in connectionSet.SelectByOutput(exitJam)) {
-										Debug.Assert(splitted.OutJam == exitJam);
-										if(splitted.InJam.CircuitSymbol.Circuit is Splitter) {
-											Propagate(splitted.InJam, exitBit);
-										} else if(consider((CircuitSymbol)splitted.InJam.CircuitSymbol, false)) {
-											if(symbolMap.TryGetValue((CircuitSymbol)splitted.InJam.CircuitSymbol, out HdlSymbol? other)) {
-												HdlConnection.Create(symbol, connection.OutJam, i, other, splitted.InJam, exitBit);
+									if(visited.Add(new JamBit(enterJam, enterBit))) {
+										Splitter.Pass(enterJam, enterBit, out Jam exitJam, out int exitBit);
+										foreach(Connection splitted in connectionSet.SelectByOutput(exitJam)) {
+											Debug.Assert(splitted.OutJam == exitJam);
+											if(splitted.InJam.CircuitSymbol.Circuit is Splitter) {
+												Propagate(splitted.InJam, exitBit);
+											} else if(consider((CircuitSymbol)splitted.InJam.CircuitSymbol, false)) {
+												if(symbolMap.TryGetValue((CircuitSymbol)splitted.InJam.CircuitSymbol, out HdlSymbol? other)) {
+													HdlConnection.Create(symbol, connection.OutJam, i, other, splitted.InJam, exitBit);
+												}
 											}
 										}
 									}
