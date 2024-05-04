@@ -22,7 +22,7 @@
 		</WrapPanel>
 
 		<Label Content="{x:Static properties:Resources.TitleLog}"/>
-		<TextBox x:Name="log" Style="{StaticResource NoteEditor}"/>
+		<TextBox x:Name="log" Style="{StaticResource NoteEditor}" IsReadOnly="True"/>
 
 		<StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
 			<Button Content="{x:Static properties:Resources.TitleExport}" IsDefault="True" Click="ButtonExportClick"/>
