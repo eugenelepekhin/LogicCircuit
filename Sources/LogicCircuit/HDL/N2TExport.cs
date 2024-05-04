@@ -5,6 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace LogicCircuit {
@@ -14,12 +15,15 @@ namespace LogicCircuit {
 	public class N2TExport : HdlExport {
 		private const int MaxTestableInputBits = 16;
 
-		private static readonly Dictionary<string, string> N2TGateName = new Dictionary<string, string>() {
+		private readonly Dictionary<string, string> N2TGateName = new Dictionary<string, string>() {
 			{ "x", "in" },
 			{ "x1", "a" },
 			{ "x2", "b" },
 			{ "q", "out" },
 		};
+
+		private readonly Regex identifier = new Regex(@"^[a-zA-Z][a-zA-Z0-9]*$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
+		private readonly HashSet<string> keywords = new HashSet<string>() { "CHIP", "PARTS", "IN", "OUT", "true", "false", };
 
 		private readonly bool exportTests;
 		private CircuitProject? replacmentProject;
@@ -34,6 +38,8 @@ namespace LogicCircuit {
 			}
 			return null;
 		}
+
+		public override bool IsValid(string name) => this.identifier.IsMatch(name) && !this.keywords.Contains(name);
 
 		protected override bool PostExport(LogicalCircuit logicalCircuit, string folder) {
 			if(this.exportTests) {
@@ -200,11 +206,21 @@ namespace LogicCircuit {
 
 		public override string Name(Jam jam) {
 			string name = base.Name(jam);
-			if(jam.CircuitSymbol.Circuit is Gate && N2TExport.N2TGateName.TryGetValue(name, out string? other)) {
+			if(jam.CircuitSymbol.Circuit is Gate && this.N2TGateName.TryGetValue(name, out string? other)) {
 				name = other;
 			}
 
 			return name;
+		}
+
+		public override bool CanExport(Circuit circuit) {
+			return !(
+				circuit is CircuitButton ||
+				circuit is Sensor ||
+				circuit is Gate gate && (gate.GateType == GateType.Clock || gate.GateType == GateType.Led || gate.GateType == GateType.TriState1 || gate.GateType == GateType.TriState2) ||
+				circuit is LedMatrix ||
+				circuit is Sound
+			);
 		}
 
 		private void ExportN2TTest(LogicalCircuit circuit, string folder) {
