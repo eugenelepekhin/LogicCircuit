@@ -1,4 +1,4 @@
-﻿<#@ template language="C#" debug="True" inherits="HdlTransformation" #>
+﻿<#@ template language="C#" debug="True" inherits="HdlTransformation" visibility="internal" #>
 <#@ import namespace="System.Linq" #>
 CHIP <#=this.Name#> {
 <#if(this.HasInputPins) {#>

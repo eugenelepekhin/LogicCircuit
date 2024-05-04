@@ -7,8 +7,8 @@ using System.Globalization;
 using System.Linq;
 
 namespace LogicCircuit {
-	public class HdlConnection {
-		public readonly struct BitRange : IEquatable<BitRange> {
+	internal class HdlConnection {
+		internal readonly struct BitRange : IEquatable<BitRange> {
 			public int First { get; }
 			public int Last { get; }
 

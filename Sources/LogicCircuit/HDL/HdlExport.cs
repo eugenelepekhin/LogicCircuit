@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 
 namespace LogicCircuit {
-	public abstract class HdlExport {
+	internal abstract class HdlExport {
 		private readonly struct JamBit : IEquatable<JamBit> {
 			public Jam Jam { get; }
 			public int Bit { get; }

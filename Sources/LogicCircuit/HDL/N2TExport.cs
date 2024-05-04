@@ -12,7 +12,7 @@ namespace LogicCircuit {
 	/// <summary>
 	/// Nand to Tetris export.
 	/// </summary>
-	public class N2TExport : HdlExport {
+	internal class N2TExport : HdlExport {
 		private const int MaxTestableInputBits = 16;
 
 		private readonly Dictionary<string, string> N2TGateName = new Dictionary<string, string>() {

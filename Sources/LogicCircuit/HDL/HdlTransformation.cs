@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace LogicCircuit {
-	public abstract class HdlTransformation : T4Transformation {
+	internal abstract class HdlTransformation : T4Transformation {
 		public string Name { get; }
 		public bool CommentPoints { get; set; }
 		public IEnumerable<HdlSymbol> InputPins { get; }

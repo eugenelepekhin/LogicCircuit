@@ -18,7 +18,7 @@ namespace LogicCircuit
     
     #line 1 "C:\Projects\LogicCircuit\LogicCircuit\master\Sources\LogicCircuit\HDL\N2THdl.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
-    public partial class N2THdl : HdlTransformation
+    internal partial class N2THdl : HdlTransformation
     {
 #line hidden
         /// <summary>
