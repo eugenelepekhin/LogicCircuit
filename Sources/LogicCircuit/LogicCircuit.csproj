@@ -41,11 +41,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ReportBuilder.tt</DependentUpon>
     </Compile>
-    <Compile Update="HDL\N2THdl.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>N2THdl.tt</DependentUpon>
-    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -78,11 +73,6 @@
     <None Update="Dialog\ReportBuilder.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ReportBuilder.cs</LastGenOutput>
-      <CustomToolNamespace>LogicCircuit</CustomToolNamespace>
-    </None>
-    <None Update="HDL\N2THdl.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>N2THdl.cs</LastGenOutput>
       <CustomToolNamespace>LogicCircuit</CustomToolNamespace>
     </None>
   </ItemGroup>
