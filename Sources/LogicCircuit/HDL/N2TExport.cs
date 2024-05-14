@@ -13,8 +13,6 @@ namespace LogicCircuit {
 	/// Nand to Tetris export.
 	/// </summary>
 	internal class N2TExport : HdlExport {
-		private const int MaxTestableInputBits = 16;
-
 		private readonly Dictionary<string, string> N2TGateName = new Dictionary<string, string>() {
 			{ "x", "in" },
 			{ "x1", "a" },
@@ -43,7 +41,7 @@ namespace LogicCircuit {
 
 		protected override bool PostExport(LogicalCircuit logicalCircuit, string folder) {
 			if(this.exportTests) {
-				this.ExportN2TTest(logicalCircuit, folder);
+				this.ExportTest(logicalCircuit, folder);
 			}
 			return base.PostExport(logicalCircuit, folder);
 		}
@@ -223,10 +221,10 @@ namespace LogicCircuit {
 			);
 		}
 
-		private void ExportN2TTest(LogicalCircuit circuit, string folder) {
+		private void ExportTest(LogicalCircuit circuit, string folder) {
 			if(CircuitTestSocket.IsTestable(circuit)) {
 				CircuitTestSocket socket = new CircuitTestSocket(circuit);
-				if(socket.Inputs.Sum(i => i.Pin.BitWidth) <= N2TExport.MaxTestableInputBits) {
+				if(socket.Inputs.Sum(i => i.Pin.BitWidth) <= HdlExport.MaxTestableInputBits) {
 					void reportProgress(double progress) => this.Message(Properties.Resources.MessageHdlBuildingTruthTable(circuit.Name, progress));
 
 					ThreadPool.QueueUserWorkItem(o => {
@@ -236,7 +234,7 @@ namespace LogicCircuit {
 							if (table == null || isTrancated) {
 								this.Message(Properties.Resources.ErrorHdlTruthTableFailed);
 							} else {
-								this.ExportN2TTest(
+								this.ExportTest(
 									circuit.Name,
 									socket.Inputs.Select(i => i.Pin.Name).ToList(),
 									socket.Outputs.Select(o => o.Pin.Name).ToList(),
@@ -256,7 +254,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private void ExportN2TTest(
+		private void ExportTest(
 			string circuitName, List<string> inputs, List<string> outputs, string folder, IList<TruthState> table
 		) {
 			string formatExpect(string text) {

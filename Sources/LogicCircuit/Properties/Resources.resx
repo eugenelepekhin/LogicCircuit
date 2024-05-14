@@ -1672,4 +1672,10 @@ Do you want to load auto saved state of this file?</value>
     <value>Unrecognized character in line: {0}, position: {1}</value>
     <comment>{int line, int pos}</comment>
   </data>
+  <data name="HdlExportVerilog" xml:space="preserve">
+    <value>SystemVerilog</value>
+  </data>
+  <data name="HdlExportVerilogFull" xml:space="preserve">
+    <value>SystemVerilog &amp; test bed</value>
+  </data>
 </root>

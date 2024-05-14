@@ -32,6 +32,16 @@ namespace LogicCircuit {
 			public static bool operator ==(BitRange left, BitRange right) => left.Equals(right);
 			public static bool operator !=(BitRange left, BitRange right) =>  !(left == right);
 
+
+			public int Extract(int value) => BitRange.Extract(value, this.First, this.Last);
+			public static int Extract(int value, int first, int last) {
+				long f = (1L << first) - 1;
+				long l = (1L << (last + 1)) - 1;
+				int mask = (int)(f ^ l);
+				return (mask & value) >> first;
+			}
+
+			// TODO: make sure it's not used anywhere
 			public override string ToString() => string.Format(CultureInfo.InvariantCulture, (this.First == this.Last) ? "[{0}]" : "[{0}..{1}]", this.First, this.Last);
 		}
 
@@ -73,7 +83,7 @@ namespace LogicCircuit {
 		private readonly List<int>? inBits;
 		public BitRange InBits => (this.inBits != null) ? new BitRange(this.inBits) : new BitRange(this.InJam);
 
-		private bool IsBitRange(HdlSymbol symbol) => this.outBits != null && this.outBits.Count < ((symbol == this.OutHdlSymbol) ? this.OutJam : this.InJam).Pin.BitWidth;
+		public bool IsBitRange(HdlSymbol symbol) => this.outBits != null && this.outBits.Count < ((symbol == this.OutHdlSymbol) ? this.OutJam : this.InJam).Pin.BitWidth;
 
 		/// <summary>
 		/// This allow to skip specifying the same output for multiple connections, so only one will provide output and all other are not.
@@ -182,6 +192,11 @@ namespace LogicCircuit {
 			(this.InJam.CircuitSymbol.Circuit is Pin) &&
 			(this.OutJam.CircuitSymbol.Circuit is Pin)
 		;
+
+		public HdlSymbol OtherSymbol(HdlSymbol symbol) {
+			Debug.Assert(symbol == this.OutHdlSymbol || symbol == this.InHdlSymbol);
+			return (symbol == this.OutHdlSymbol) ? this.InHdlSymbol : this.OutHdlSymbol;
+		}
 
 		#if DEBUG
 			public override string ToString() => $"HdlConnection ({this.OutJam.ToString()})->({this.InJam.ToString()})";

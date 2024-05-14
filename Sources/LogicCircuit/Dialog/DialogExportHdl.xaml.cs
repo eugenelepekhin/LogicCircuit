@@ -13,6 +13,8 @@ namespace LogicCircuit {
 		public enum HdlExportType {
 			N2T,
 			N2TFull,
+			Verilog,
+			VerilogFull,
 			Other
 		}
 
@@ -24,6 +26,8 @@ namespace LogicCircuit {
 		public IEnumerable<EnumDescriptor<HdlExportType>> ExportTypes { get; } = new EnumDescriptor<HdlExportType>[] {
 			new EnumDescriptor<HdlExportType>(HdlExportType.N2T, Properties.Resources.HdlExportN2T),
 			new EnumDescriptor<HdlExportType>(HdlExportType.N2TFull, Properties.Resources.HdlExportN2TandTests),
+			new EnumDescriptor<HdlExportType>(HdlExportType.Verilog, Properties.Resources.HdlExportVerilog),
+			new EnumDescriptor<HdlExportType>(HdlExportType.VerilogFull, Properties.Resources.HdlExportVerilogFull),
 		};
 
 		private readonly SettingsEnumCache<HdlExportType> selectedExportType = new SettingsEnumCache<HdlExportType>(
@@ -73,6 +77,10 @@ namespace LogicCircuit {
 				case HdlExportType.N2T:
 				case HdlExportType.N2TFull:
 					hdl = new N2TExport(this.SelectedExportType.Value == HdlExportType.N2TFull, this.CommentPoints, message, message);
+					break;
+				case HdlExportType.Verilog:
+				case HdlExportType.VerilogFull:
+					hdl = new VerilogExport(this.SelectedExportType.Value == HdlExportType.VerilogFull, this.CommentPoints, message, message);
 					break;
 				default:
 					throw new InvalidOperationException();

@@ -1,6 +1,7 @@
 ﻿// Ignore Spelling: Hdl
 
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace LogicCircuit {
@@ -18,6 +19,7 @@ namespace LogicCircuit {
 			this.InputPins = inputPins;
 			this.OutputPins = outputPins;
 			this.Parts = parts;
+			this.ToStringHelper.FormatProvider = CultureInfo.InvariantCulture;
 		}
 	}
 }

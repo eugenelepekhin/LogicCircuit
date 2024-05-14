@@ -8,6 +8,8 @@ using System.Linq;
 
 namespace LogicCircuit {
 	internal abstract class HdlExport {
+		internal const int MaxTestableInputBits = 16;
+
 		private readonly struct JamBit : IEquatable<JamBit> {
 			public Jam Jam { get; }
 			public int Bit { get; }

@@ -3433,5 +3433,19 @@ namespace LogicCircuit.Properties {
  		public static string ErrorTextFileChar(int line, int pos) {
 			return string.Format(FormatCulture, ResourceManager.GetString("ErrorTextFileChar", Culture), line, pos);
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to SystemVerilog.
+		/// </summary>
+ 		public static string HdlExportVerilog {
+			get { return ResourceManager.GetString("HdlExportVerilog", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to SystemVerilog & test bed.
+		/// </summary>
+ 		public static string HdlExportVerilogFull {
+			get { return ResourceManager.GetString("HdlExportVerilogFull", Culture); }
+		}
 	}
 }

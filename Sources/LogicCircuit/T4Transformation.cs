@@ -44,6 +44,13 @@ namespace LogicCircuit {
 		}
 
 		/// <summary>
+		/// Writes new line
+		/// </summary>
+		public void WriteLine() {
+			this.GenerationEnvironment.AppendLine();
+		}
+
+		/// <summary>
 		/// Write formatted text directly into the generated output
 		/// </summary>
 		public void Write(string format, params object[] args) {
