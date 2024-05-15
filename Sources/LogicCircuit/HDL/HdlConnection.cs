@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
 
 namespace LogicCircuit {
@@ -11,6 +10,7 @@ namespace LogicCircuit {
 		internal readonly struct BitRange : IEquatable<BitRange> {
 			public int First { get; }
 			public int Last { get; }
+			public int BitWidth => this.Last - this.First + 1;
 
 			public BitRange(IList<int> bits) {
 				Debug.Assert(bits != null && 0 < bits.Count);
@@ -40,25 +40,16 @@ namespace LogicCircuit {
 				int mask = (int)(f ^ l);
 				return (mask & value) >> first;
 			}
-
-			// TODO: make sure it's not used anywhere
-			public override string ToString() => string.Format(CultureInfo.InvariantCulture, (this.First == this.Last) ? "[{0}]" : "[{0}..{1}]", this.First, this.Last);
 		}
 
 		public static void Create(HdlSymbol outSymbol, HdlSymbol inSymbol, Connection connection) {
-			if(outSymbol.CircuitSymbol.Circuit is Constant constant && 1 < constant.BitWidth) {
-				for(int i = 0; i < constant.BitWidth; i++) {
-					HdlConnection.Create(outSymbol, connection.OutJam, i, inSymbol, connection.InJam, i);
-				}
-			} else {
-				HdlConnection hdlConnection = new HdlConnection(outSymbol, inSymbol, connection);
-				outSymbol.Add(hdlConnection);
-				inSymbol.Add(hdlConnection);
-			}
+			HdlConnection hdlConnection = new HdlConnection(outSymbol, inSymbol, connection);
+			outSymbol.Add(hdlConnection);
+			inSymbol.Add(hdlConnection);
 		}
 
 		public static void Create(HdlSymbol outSymbol, Jam outJam, int outBit, HdlSymbol inSymbol, Jam inJam, int inBit) {
-			foreach(HdlConnection hdlConnection in outSymbol.Find(outJam, inJam).Where(c => c.outBits != null && c.OutHdlSymbol.CircuitSymbol.Circuit is not Constant)) {
+			foreach(HdlConnection hdlConnection in outSymbol.Find(outJam, inJam).Where(c => c.outBits != null)) {
 				List<int> outBits = hdlConnection.outBits!;
 				List<int> inBits = hdlConnection.inBits!;
 				Debug.Assert(outBits.Count == inBits.Count);

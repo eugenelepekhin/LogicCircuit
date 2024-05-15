@@ -64,7 +64,6 @@ namespace LogicCircuit {
 			Circuit circuit = symbol.CircuitSymbol.Circuit;
 			Debug.Assert(circuit is not Splitter && circuit is not CircuitProbe);
 			if(circuit is Gate gate) {
-				// Gate names are translated so, use their English names.
 				switch(gate.GateType) {
 				case GateType.And:	return gate.InvertedOutput ? "Nand" : "And";
 				case GateType.Not:	return "Not";

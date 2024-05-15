@@ -30,20 +30,24 @@ namespace LogicCircuit {
 			return text.ToString();
 		}
 
+		private static string RangeText(BitRange range) => string.Format(CultureInfo.InvariantCulture, (range.First == range.Last) ? "[{0}]" : "[{0}..{1}]", range.First, range.Last);
+
 		private static string SymbolJamName(HdlSymbol symbol, HdlConnection connection) {
 			Debug.Assert(symbol == connection.OutHdlSymbol || symbol == connection.InHdlSymbol);
 			Debug.Assert(symbol.CircuitSymbol.Circuit is not Pin);
+			Debug.Assert(connection.OutHdlSymbol.CircuitSymbol.Circuit is not Constant);
 			Jam jam = connection.SymbolJam(symbol);
 			string name = symbol.HdlExport.HdlName(jam);
 			if(connection.IsBitRange(symbol)) {
 				BitRange bits = (jam == connection.OutJam) ? connection.OutBits : connection.InBits;
-				name += bits.ToString();
+				name += N2THdl.RangeText(bits);
 			}
 			return name;
 		}
 
-		public static string PinName(HdlSymbol symbol, HdlConnection connection) {
+		private static string PinName(HdlSymbol symbol, HdlConnection connection) {
 			Debug.Assert(symbol == connection.OutHdlSymbol || symbol == connection.InHdlSymbol);
+			Debug.Assert(symbol.CircuitSymbol.Circuit is not Constant);
 			HdlSymbol otherSymbol;
 			Jam otherJam;
 			BitRange otherBits;
@@ -59,14 +63,9 @@ namespace LogicCircuit {
 			if(otherJam.CircuitSymbol.Circuit is Pin pin) {
 				string name = pin.Name;
 				if(connection.IsBitRange(otherSymbol)) {
-					name += otherBits.ToString();
+					name += N2THdl.RangeText(otherBits);
 				}
 				return name;
-			}
-			if(otherJam.CircuitSymbol.Circuit is Constant constant) {
-				Debug.Assert(otherBits.First == otherBits.Last);
-				int value = (constant.ConstantValue >> otherBits.First) & 1;
-				return (value == 0) ? "false" : "true";
 			}
 			GridPoint point = connection.OutJam.AbsolutePoint;
 			string pinName = string.Format(CultureInfo.InvariantCulture, "Pin{0}x{1}", point.X, point.Y);
@@ -104,7 +103,23 @@ namespace LogicCircuit {
 						this.Write(", ");
 					}
 					comma = true;
-					this.Write("{0}={1}", N2THdl.SymbolJamName(symbol, connection), N2THdl.PinName(symbol, connection));
+					if(connection.OutHdlSymbol.CircuitSymbol.Circuit is Constant constant) {
+						int value = connection.OutBits.Extract(constant.ConstantValue);
+						int width = connection.InBits.BitWidth;
+						Debug.Assert(connection.OutBits.BitWidth == width);
+						for(int i = 0; i < width; i++) {
+							if(0 < i) {
+								this.Write(", ");
+							}
+							this.Write(symbol.HdlExport.HdlName(connection.InJam));
+							if(1 < connection.InJam.Pin.BitWidth) {
+								this.Write("[{0}]", i + connection.InBits.First);
+							}
+							this.Write("={0}", ((value >> i) & 1) != 0 ? "true" : "false");
+						}
+					} else {
+						this.Write("{0}={1}", N2THdl.SymbolJamName(symbol, connection), N2THdl.PinName(symbol, connection));
+					}
 				}
 				this.WriteLine(");");
 			}

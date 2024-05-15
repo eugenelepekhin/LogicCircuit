@@ -48,6 +48,11 @@ namespace LogicCircuit {
 			return this.ErrorCount == 0;
 		}
 
+		/// <summary>
+		/// Circuit names may differ from LogicCircuit ones. For example gate names are translated locale language and also different in different HDLs.
+		/// </summary>
+		/// <param name="symbol"></param>
+		/// <returns></returns>
 		public abstract string HdlName(HdlSymbol symbol);
 		public virtual string HdlName(Jam jam) => jam.Pin.Name.Trim();
 
