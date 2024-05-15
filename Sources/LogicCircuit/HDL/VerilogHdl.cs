@@ -70,23 +70,6 @@ namespace LogicCircuit {
 			return jam.Pin.Name.Trim();
 		}
 
-		private static string PartName(HdlSymbol part) {
-			if(part.CircuitSymbol.Circuit is Gate gate) {
-				switch(gate.GateType) {
-				case GateType.Clock:return "Clock";
-				case GateType.Not:	return "not";
-				case GateType.Or:	return gate.InvertedOutput ? "nor" : "or";
-				case GateType.And:	return gate.InvertedOutput ? "nand" : "and";
-				case GateType.Xor:	return gate.InvertedOutput ? "xnor" : "xor";
-				case GateType.Led:	return "LED";
-				case GateType.Probe:return "Probe";
-				case GateType.TriState1:
-				case GateType.TriState2: return "bufif1";
-				}
-			}
-			return part.Name;
-		}
-
 		private string WireName(HdlSymbol symbol, Jam jam) {
 			string range(HdlConnection.BitRange bitRange) {
 				if(bitRange.First != bitRange.Last) {
@@ -157,7 +140,7 @@ namespace LogicCircuit {
 			this.WriteLine();
 
 			foreach(HdlSymbol part in this.Parts) {
-				this.WriteLine("\t{0} {0}_{1}x{2}(", VerilogHdl.PartName(part), part.CircuitSymbol.X, part.CircuitSymbol.Y);
+				this.WriteLine("\t{0} {0}_{1}x{2}(", part.HdlExport.HdlName(part), part.CircuitSymbol.X, part.CircuitSymbol.Y);
 				if(part.CircuitSymbol.Circuit is Gate gate && GateType.Not <= gate.GateType && gate.GateType <= GateType.Xor) {
 					List<Jam> inputs = part.CircuitSymbol.Jams().Where(j => j.Pin.PinType == PinType.Input).ToList();
 					Jam output = part.CircuitSymbol.Jams().First(j => j.Pin.PinType == PinType.Output);

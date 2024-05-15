@@ -134,60 +134,6 @@ namespace LogicCircuit {
 			}
 		}
 
-		public string SymbolJamName(HdlSymbol symbol) {
-			Debug.Assert(symbol == this.OutHdlSymbol || symbol == this.InHdlSymbol);
-			Debug.Assert(symbol.CircuitSymbol.Circuit is not Pin);
-			Jam jam = this.SymbolJam(symbol);
-			string name = this.OutHdlSymbol.HdlExport.Name(jam);
-			if(this.IsBitRange(symbol)) {
-				BitRange bits = (jam == this.OutJam) ? this.OutBits : this.InBits;
-				name += bits.ToString();
-			}
-			return name;
-		}
-
-		public string PinName(HdlSymbol symbol) {
-			Debug.Assert(symbol == this.OutHdlSymbol || symbol == this.InHdlSymbol);
-			HdlSymbol otherSymbol;
-			Jam otherJam;
-			BitRange otherBits;
-			if(symbol == this.OutHdlSymbol) {
-				otherSymbol = this.InHdlSymbol;
-				otherJam = this.InJam;
-				otherBits = this.InBits;
-			} else {
-				otherSymbol = this.OutHdlSymbol;
-				otherJam = this.OutJam;
-				otherBits = this.OutBits;
-			}
-			if(otherJam.CircuitSymbol.Circuit is Pin pin) {
-				string name = pin.Name;
-				if(this.IsBitRange(otherSymbol)) {
-					name += otherBits.ToString();
-				}
-				return name;
-			}
-			if(otherJam.CircuitSymbol.Circuit is Constant constant) {
-				Debug.Assert(otherBits.First == otherBits.Last);
-				int value = (constant.ConstantValue >> otherBits.First) & 1;
-				return (value == 0) ? "false" : "true";
-			}
-			GridPoint point = this.OutJam.AbsolutePoint;
-			string pinName = string.Format(CultureInfo.InvariantCulture, "Pin{0}x{1}", point.X, point.Y);
-			if(this.IsBitRange(this.OutHdlSymbol)) {
-				BitRange outBits = this.OutBits;
-				if(outBits.First == outBits.Last) {
-					pinName += string.Format(CultureInfo.InvariantCulture, "b{0}", outBits.First);
-				} else {
-					pinName += string.Format(CultureInfo.InvariantCulture, "s{0}e{1}", outBits.First, outBits.Last);
-				}
-			}
-			if(0 < this.OutHdlSymbol.Subindex) {
-				pinName += string.Format(CultureInfo.InvariantCulture, "v{0}", this.OutHdlSymbol.Subindex);
-			}
-			return pinName;
-		}
-
 		public bool ConnectsInputWithOutput() =>
 			(this.InJam.CircuitSymbol.Circuit is Pin) &&
 			(this.OutJam.CircuitSymbol.Circuit is Pin)

@@ -1,12 +1,11 @@
-﻿// Ignore Spelling: Verilog
+﻿// Ignore Spelling: Verilog Hdl
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading;
-using Microsoft.Scripting.Hosting;
 
 namespace LogicCircuit {
 	internal class VerilogExport : HdlExport {
@@ -18,10 +17,7 @@ namespace LogicCircuit {
 			"repeat", "while", "for", "fork", "join", "specify", "endspecify", 
 		};
 
-		private readonly bool exportTests;
-
-		public VerilogExport(bool exportTests, bool commentPoints, Action<string> logMessage, Action<string> logError) : base(commentPoints, logMessage, logError) {
-			this.exportTests = exportTests;
+		public VerilogExport(bool exportTests, bool commentPoints, Action<string> logMessage, Action<string> logError) : base(exportTests, commentPoints, logMessage, logError) {
 		}
 
 		protected override string FileName(LogicalCircuit circuit) => circuit.Name + ".sv";
@@ -42,48 +38,34 @@ namespace LogicCircuit {
 			return new VerilogHdl(name, inputPins, outputPins, parts);
 		}
 
-		protected override bool PostExport(LogicalCircuit logicalCircuit, string folder) {
-			if(this.exportTests) {
-				this.ExportTest(logicalCircuit, folder);
+		public override string HdlName(HdlSymbol symbol) {
+			Circuit circuit = symbol.CircuitSymbol.Circuit;
+			Debug.Assert(circuit is not Splitter && circuit is not CircuitProbe);
+			if(circuit is Gate gate) {
+				switch(gate.GateType) {
+				case GateType.Not:	return "not";
+				case GateType.Or:	return gate.InvertedOutput ? "nor" : "or";
+				case GateType.And:	return gate.InvertedOutput ? "nand" : "and";
+				case GateType.Xor:	return gate.InvertedOutput ? "xnor" : "xor";
+				case GateType.TriState1:
+				case GateType.TriState2: return "bufif1";
+				}
 			}
-			return base.PostExport(logicalCircuit, folder);
+			return circuit.Name.Trim();
 		}
 
-		private void ExportTest(LogicalCircuit circuit, string folder) {
-			if(CircuitTestSocket.IsTestable(circuit)) {
-				CircuitTestSocket socket = new CircuitTestSocket(circuit);
-				if(socket.Inputs.Sum(i => i.Pin.BitWidth) <= HdlExport.MaxTestableInputBits) {
-					void reportProgress(double progress) => this.Message(Properties.Resources.MessageHdlBuildingTruthTable(circuit.Name, progress));
-
-					ThreadPool.QueueUserWorkItem(o => {
-						try {
-							bool isTrancated = false;
-							IList<TruthState>? table = socket.BuildTruthTable(reportProgress, () => true, null, DialogTruthTable.MaxRows, out isTrancated);
-							if (table == null || isTrancated) {
-								this.Message(Properties.Resources.ErrorHdlTruthTableFailed);
-							} else {
-								VerilogTestBench verilogTest = new VerilogTestBench(
-									circuit.Name,
-									socket.Inputs.ToList(),
-									socket.Outputs.ToList(),
-									table
-								);
-								string text = verilogTest.TransformText();
-								if(!string.IsNullOrWhiteSpace(text)) {
-									string testFile = Path.Combine(folder, circuit.Name + "_TestBench.sv");
-									File.WriteAllText(testFile, text);
-									this.Message(Properties.Resources.MessageHdlSavingTestFile(testFile));
-								}
-							}
-						} catch(Exception exception) {
-							App.Mainframe.ReportException(exception);
-						}
-					});
-				} else {
-					this.Message(Properties.Resources.ErrorHdlInputTooBig(circuit.Name));
-				}
-			} else {
-				this.Message(Properties.Resources.MessageInputOutputPinsMissing);
+		protected override void ExportTest(string circuitName, List<InputPinSocket> inputs, List<OutputPinSocket> outputs, IList<TruthState> table, string folder) {
+			VerilogTestBench verilogTest = new VerilogTestBench(
+				circuitName,
+				inputs,
+				outputs,
+				table
+			);
+			string text = verilogTest.TransformText();
+			if(!string.IsNullOrWhiteSpace(text)) {
+				string testFile = Path.Combine(folder, circuitName + "_TestBench.sv");
+				File.WriteAllText(testFile, text);
+				this.Message(Properties.Resources.MessageHdlSavingTestFile(testFile));
 			}
 		}
 	}
