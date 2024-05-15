@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using static LogicCircuit.HdlConnection;
 
 namespace LogicCircuit {
 	internal class N2THdl : HdlTransformation {
@@ -30,7 +29,7 @@ namespace LogicCircuit {
 			return text.ToString();
 		}
 
-		private static string RangeText(BitRange range) => string.Format(CultureInfo.InvariantCulture, (range.First == range.Last) ? "[{0}]" : "[{0}..{1}]", range.First, range.Last);
+		private static string RangeText(HdlConnection.BitRange range) => string.Format(CultureInfo.InvariantCulture, (range.First == range.Last) ? "[{0}]" : "[{0}..{1}]", range.First, range.Last);
 
 		private static string SymbolJamName(HdlSymbol symbol, HdlConnection connection) {
 			Debug.Assert(symbol == connection.OutHdlSymbol || symbol == connection.InHdlSymbol);
@@ -39,8 +38,7 @@ namespace LogicCircuit {
 			Jam jam = connection.SymbolJam(symbol);
 			string name = symbol.HdlExport.HdlName(jam);
 			if(connection.IsBitRange(symbol)) {
-				BitRange bits = (jam == connection.OutJam) ? connection.OutBits : connection.InBits;
-				name += N2THdl.RangeText(bits);
+				name += N2THdl.RangeText((jam == connection.OutJam) ? connection.OutBits : connection.InBits);
 			}
 			return name;
 		}
@@ -50,7 +48,7 @@ namespace LogicCircuit {
 			Debug.Assert(symbol.CircuitSymbol.Circuit is not Constant);
 			HdlSymbol otherSymbol;
 			Jam otherJam;
-			BitRange otherBits;
+			HdlConnection.BitRange otherBits;
 			if(symbol == connection.OutHdlSymbol) {
 				otherSymbol = connection.InHdlSymbol;
 				otherJam = connection.InJam;
@@ -70,7 +68,7 @@ namespace LogicCircuit {
 			GridPoint point = connection.OutJam.AbsolutePoint;
 			string pinName = string.Format(CultureInfo.InvariantCulture, "Pin{0}x{1}", point.X, point.Y);
 			if(connection.IsBitRange(connection.OutHdlSymbol)) {
-				BitRange outBits = connection.OutBits;
+				HdlConnection.BitRange outBits = connection.OutBits;
 				if(outBits.First == outBits.Last) {
 					pinName += string.Format(CultureInfo.InvariantCulture, "b{0}", outBits.First);
 				} else {

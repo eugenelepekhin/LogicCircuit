@@ -49,7 +49,7 @@ namespace LogicCircuit {
 		}
 
 		/// <summary>
-		/// Circuit names may differ from LogicCircuit ones. For example gate names are translated locale language and also different in different HDLs.
+		/// Circuit names may differ from LogicCircuit ones. For example gate names are translated to locale language and also different in different HDLs.
 		/// </summary>
 		/// <param name="symbol"></param>
 		/// <returns></returns>

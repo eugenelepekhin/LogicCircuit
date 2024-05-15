@@ -37,39 +37,6 @@ namespace LogicCircuit {
 			return string.Format(CultureInfo.InvariantCulture, "Pin_{0}x{1}", point.X, point.Y);
 		}
 
-		private static string DefineWireName(Jam jam) {
-			string text = VerilogHdl.WireName(jam);
-			BasePin pin = jam.Pin;
-			if(1 < pin.BitWidth) {
-				text = string.Format(CultureInfo.InvariantCulture, "{0}\t{1}", VerilogHdl.Range(pin), text);
-			}
-			return text;
-		}
-
-		private IEnumerable<string> WireDefinitions() => this.wires.Keys.Select(j => VerilogHdl.DefineWireName(j)).Order();
-
-		private static string JamName(Jam jam) {
-			if(jam.CircuitSymbol.Circuit is Gate gate) {
-				if(jam.Pin.PinType == PinType.Output) {
-					return "out";
-				}
-				switch(gate.GateType) {
-				case GateType.Not:
-				case GateType.TriState1:
-				case GateType.TriState2:
-					Debug.Assert(jam.Pin.PinType == PinType.Input);
-					if(jam.Pin.PinSide != PinSide.Left) {
-						return "control";
-					}
-					return "in";
-				}
-				int min = gate.Pins.Min(p => ((DevicePin)p).Order);
-				DevicePin pin = (DevicePin)jam.Pin;
-				return string.Format(CultureInfo.InvariantCulture, "i{0}", pin.Order - min + 1);
-			}
-			return jam.Pin.Name.Trim();
-		}
-
 		private string WireName(HdlSymbol symbol, Jam jam) {
 			string range(HdlConnection.BitRange bitRange) {
 				if(bitRange.First != bitRange.Last) {
@@ -105,11 +72,8 @@ namespace LogicCircuit {
 					}
 					Circuit circuit = connection.OutHdlSymbol.CircuitSymbol.Circuit;
 					if(circuit is Constant constant) {
-						int value = constant.ConstantValue;
-						if(connection.IsBitRange(connection.InHdlSymbol)) {
-							value = connection.InBits.Extract(value);
-						}
-						return value.ToString(CultureInfo.InvariantCulture);
+						int value = connection.OutBits.Extract(constant.ConstantValue);
+						return string.Format(CultureInfo.InvariantCulture, "{0}'h{1:x}", connection.OutBits.BitWidth, value);
 					}
 					Debug.Assert(circuit is Pin);
 					return circuit.Name + bitRange(connection.OutHdlSymbol, connection);
@@ -134,24 +98,32 @@ namespace LogicCircuit {
 			this.WriteLine();
 			this.WriteLine(");");
 
-			foreach(string wireName in this.WireDefinitions()) {
-				this.WriteLine("\twire {0};", wireName);
+			foreach(Jam jam in this.wires.Keys) {
+				this.Write("\twire");
+				if(1 < jam.Pin.BitWidth) {
+					this.Write(" {0}", VerilogHdl.Range(jam.Pin));
+				}
+				this.WriteLine(" {0};", VerilogHdl.WireName(jam));
 			}
 			this.WriteLine();
 
 			foreach(HdlSymbol part in this.Parts) {
 				this.WriteLine("\t{0} {0}_{1}x{2}(", part.HdlExport.HdlName(part), part.CircuitSymbol.X, part.CircuitSymbol.Y);
-				if(part.CircuitSymbol.Circuit is Gate gate && GateType.Not <= gate.GateType && gate.GateType <= GateType.Xor) {
-					List<Jam> inputs = part.CircuitSymbol.Jams().Where(j => j.Pin.PinType == PinType.Input).ToList();
-					Jam output = part.CircuitSymbol.Jams().First(j => j.Pin.PinType == PinType.Output);
-					this.Write("\t\t{0}", this.WireName(part, output));
-					foreach(Jam input in inputs) {
-						this.Write(",\n\t\t{0}", this.WireName(part, input));
+				if(part.CircuitSymbol.Circuit is Gate gate) {
+					if(GateType.Not <= gate.GateType && gate.GateType <= GateType.Xor) {
+						List<Jam> inputs = part.CircuitSymbol.Jams().Where(j => j.Pin.PinType == PinType.Input).ToList();
+						Jam output = part.CircuitSymbol.Jams().First(j => j.Pin.PinType == PinType.Output);
+						this.Write("\t\t{0}", this.WireName(part, output));
+						foreach(Jam input in inputs) {
+							this.Write(",\n\t\t{0}", this.WireName(part, input));
+						}
+					} else {
+						Debug.Fail("Not implemented yet.");
 					}
 				} else {
 					comma = "";
 					foreach(Jam jam in part.CircuitSymbol.Jams()) {
-						this.Write("{0}\t\t.{1}({2})", comma, VerilogHdl.JamName(jam), this.WireName(part, jam));
+						this.Write("{0}\t\t.{1}({2})", comma, part.HdlExport.HdlName(jam), this.WireName(part, jam));
 						comma = ",\n";
 					}
 				}
