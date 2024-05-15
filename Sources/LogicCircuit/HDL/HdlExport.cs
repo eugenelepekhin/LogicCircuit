@@ -24,8 +24,8 @@ namespace LogicCircuit {
 			public override int GetHashCode() => HashCode.Combine(this.Jam, this.Bit);
 		}
 
-		private bool exportTests;
-		private bool commentPoints;
+		private readonly bool exportTests;
+		private readonly bool commentPoints;
 
 		private readonly Action<string> logMessage;
 		private readonly Action<string> logError;
@@ -42,11 +42,6 @@ namespace LogicCircuit {
 		protected abstract string FileName(LogicalCircuit circuit);
 		public abstract bool CanExport(Circuit circuit);
 		public abstract bool IsValid(string name);
-
-		protected virtual bool PostExport(LogicalCircuit logicalCircuit, string folder) {
-			this.Message(Properties.Resources.MessageHdlExportResut(logicalCircuit.Name, this.ErrorCount));
-			return this.ErrorCount == 0;
-		}
 
 		/// <summary>
 		/// Circuit names may differ from LogicCircuit ones. For example gate names are translated to locale language and also different in different HDLs.
@@ -76,10 +71,11 @@ namespace LogicCircuit {
 				if(!string.IsNullOrEmpty(hdl)) {
 					string path = Path.Combine(folder, file);
 					File.WriteAllText(path, hdl);
+					this.Message(Properties.Resources.MessageHdlExportResut(logicalCircuit.Name, this.ErrorCount));
 					if(this.exportTests) {
 						this.ExportTest(logicalCircuit, folder);
 					}
-					return this.PostExport(logicalCircuit, folder);
+					return this.ErrorCount == 0;
 				} else {
 					this.Message(Properties.Resources.ErrorExportHdlFile(file));
 				}
@@ -181,6 +177,8 @@ namespace LogicCircuit {
 				return (order == 0) ? comparer.Compare(x.CircuitSymbol, y.CircuitSymbol) : order;
 			});
 
+			inputPins.ForEach(symbol => symbol.SortConnections());
+			outputPins.ForEach(symbol => symbol.SortConnections());
 			parts.ForEach(symbol => symbol.SortConnections());
 
 			HdlTransformation? transformation = this.CreateTransformation(circuit.Name, inputPins, outputPins, parts);
@@ -257,6 +255,7 @@ namespace LogicCircuit {
 
 		private void ExportTest(LogicalCircuit circuit, string folder) {
 			if(CircuitTestSocket.IsTestable(circuit)) {
+				this.Message(Properties.Resources.MessageBuildingTruthTable(circuit.Name));
 				CircuitTestSocket socket = new CircuitTestSocket(circuit);
 				if(socket.Inputs.Sum(i => i.Pin.BitWidth) <= HdlExport.MaxTestableInputBits) {
 					void reportProgress(double progress) => this.Message(Properties.Resources.MessageHdlBuildingTruthTable(circuit.Name, progress));

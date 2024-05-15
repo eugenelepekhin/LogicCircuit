@@ -71,13 +71,11 @@ namespace LogicCircuit {
 		}
 
 		public void Replace(HdlConnection connection, HdlConnection replacement) {
-			if(this.CircuitSymbol.Circuit is not Pin) {
-				Debug.Assert(this.connectionList != null);
-				int index = this.connectionList.IndexOf(connection);
-				Debug.Assert(0 <= index);
-				this.connectionList.RemoveAt(index);
-				this.connectionList.Insert(index, replacement);
-			}
+			Debug.Assert(this.connectionList != null);
+			int index = this.connectionList.IndexOf(connection);
+			Debug.Assert(0 <= index);
+			this.connectionList.RemoveAt(index);
+			this.connectionList.Insert(index, replacement);
 		}
 
 		public IEnumerable<HdlConnection> Find(Jam outJam, Jam inJam) {
@@ -113,10 +111,10 @@ namespace LogicCircuit {
 
 			OneToMany<JamRange, HdlConnection> byRange = new OneToMany<JamRange, HdlConnection>();
 			foreach(HdlConnection connection in this.connectionList.Where(c => this == c.OutHdlSymbol)) {
-				JamRange range = new JamRange(connection.OutJam, connection.OutBits);
-				byRange.Add(range, connection);
+				JamRange jamRange = new JamRange(connection.OutJam, connection.OutBits);
+				byRange.Add(jamRange, connection);
 			}
-			foreach(List<HdlConnection> list in byRange.Values) {
+			foreach(IList<HdlConnection> list in byRange.Values) {
 				if(1 < list.Count) {
 					bool skip = false;
 					for(int i = 0; i < list.Count; i++) {

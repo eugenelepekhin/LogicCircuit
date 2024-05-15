@@ -1678,4 +1678,8 @@ Do you want to load auto saved state of this file?</value>
   <data name="HdlExportVerilogFull" xml:space="preserve">
     <value>SystemVerilog &amp; test bed</value>
   </data>
+  <data name="MessageBuildingTruthTable" xml:space="preserve">
+    <value>Building truth table for circuit {0}.</value>
+    <comment>{string circuitName}</comment>
+  </data>
 </root>

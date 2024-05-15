@@ -28,16 +28,19 @@ namespace LogicCircuit {
 			this.WriteLine();
 
 			this.WriteLine("\t{0} u0(", this.circuitName);
-			string comma = "";
+			bool comma = false;
 			foreach(InputPinSocket input in this.inputs) {
-				this.Write("{0}\t\t.{1}({1})", comma, input.Pin.Name);
-				comma = ",\n";
+				if(comma) this.WriteLine(",");
+				this.Write("\t\t.{0}({0})", input.Pin.Name);
+				comma = true;
 			}
             foreach(OutputPinSocket output in this.outputs) {
-				this.Write("{0}\t\t.{1}({1})", comma, output.Pin.Name);
-				comma = ",\n";
+				if(comma) this.WriteLine(",");
+				this.Write("\t\t.{0}({0})", output.Pin.Name);
+				comma = true;
             }
-			this.WriteLine("\n\t);");
+			this.WriteLine();
+			this.WriteLine("\t);");
 
 			this.WriteLine();
 			this.WriteLine("\tinitial begin");

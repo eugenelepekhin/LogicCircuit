@@ -148,7 +148,7 @@ namespace LogicCircuit {
 				}
 				Debug.Assert(gate != null);
 				foreach(HdlConnection oldConnection in symbolInputs[oldInput]) {
-					HdlConnection newConnection = oldConnection.CreateCopy(oldConnection.OutHdlSymbol, oldConnection.OutJam, gate, newInputs![inputIndex & 1]);
+					HdlConnection newConnection = oldConnection.CreateCopy(oldConnection.OutHdlSymbol, oldConnection.OutJam, gate, newInputs[inputIndex & 1]);
 					oldConnection.OutHdlSymbol.Replace(oldConnection, newConnection);
 					gate.Add(newConnection);
 				}

@@ -43,6 +43,8 @@ namespace LogicCircuit {
 		}
 
 		public static void Create(HdlSymbol outSymbol, HdlSymbol inSymbol, Connection connection) {
+			Debug.Assert(outSymbol.CircuitSymbol == connection.OutJam.CircuitSymbol);
+			Debug.Assert(inSymbol.CircuitSymbol == connection.InJam.CircuitSymbol);
 			HdlConnection hdlConnection = new HdlConnection(outSymbol, inSymbol, connection);
 			outSymbol.Add(hdlConnection);
 			inSymbol.Add(hdlConnection);

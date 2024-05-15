@@ -85,15 +85,16 @@ namespace LogicCircuit {
 		public override string TransformText() {
 			this.WriteLine("module {0}(", this.Name);
 
-			string comma = "";
+			bool comma = false;
 			foreach(HdlSymbol symbol in this.InputPins.Concat(this.OutputPins)) {
 				Pin pin = (Pin)symbol.CircuitSymbol.Circuit;
-				this.Write("{0}\t{1}", comma, pin.PinType == PinType.Input ? "input" : "output");
+				if(comma) this.WriteLine(",");
+				this.Write("\t{0}", pin.PinType == PinType.Input ? "input" : "output");
 				if(1 < pin.BitWidth) {
 					this.Write(VerilogHdl.Range(pin));
 				}
 				this.Write("\t{0}", pin.Name);
-				comma = ",\n";
+				comma = true;
 			}
 			this.WriteLine();
 			this.WriteLine(");");
@@ -115,16 +116,18 @@ namespace LogicCircuit {
 						Jam output = part.CircuitSymbol.Jams().First(j => j.Pin.PinType == PinType.Output);
 						this.Write("\t\t{0}", this.WireName(part, output));
 						foreach(Jam input in inputs) {
-							this.Write(",\n\t\t{0}", this.WireName(part, input));
+							this.WriteLine(",");
+							this.Write("\t\t{0}", this.WireName(part, input));
 						}
 					} else {
 						Debug.Fail("Not implemented yet.");
 					}
 				} else {
-					comma = "";
+					comma = false;
 					foreach(Jam jam in part.CircuitSymbol.Jams()) {
-						this.Write("{0}\t\t.{1}({2})", comma, part.HdlExport.HdlName(jam), this.WireName(part, jam));
-						comma = ",\n";
+						if(comma) this.WriteLine(",");
+						this.Write("\t\t.{0}({1})", part.HdlExport.HdlName(jam), this.WireName(part, jam));
+						comma = true;
 					}
 				}
 				this.WriteLine();

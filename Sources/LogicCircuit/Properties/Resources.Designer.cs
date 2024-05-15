@@ -3447,5 +3447,12 @@ namespace LogicCircuit.Properties {
  		public static string HdlExportVerilogFull {
 			get { return ResourceManager.GetString("HdlExportVerilogFull", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Building truth table for circuit {0}..
+		/// </summary>
+ 		public static string MessageBuildingTruthTable(string circuitName) {
+			return string.Format(FormatCulture, ResourceManager.GetString("MessageBuildingTruthTable", Culture), circuitName);
+		}
 	}
 }
