@@ -95,14 +95,13 @@ namespace LogicCircuit {
 
 		public void SortConnections() {
 			int compare(HdlConnection x, HdlConnection y) {
-				
 				if(x.SymbolJam(this).Pin.PinType == PinType.Input && y.SymbolJam(this).Pin.PinType != PinType.Input) {
 					return -1;
 				}
 				if(x.SymbolJam(this).Pin.PinType != PinType.Input && y.SymbolJam(this).Pin.PinType == PinType.Input) {
 					return 1;
 				}
-				return StringComparer.Ordinal.Compare(x.SymbolJam(this).Pin.Name, y.SymbolJam(this).Pin.Name);
+				return PinComparer.Comparer.Compare(x.SymbolJam(this).Pin, y.SymbolJam(this).Pin);
 			}
 
 			Debug.Assert(this.connectionList == null);

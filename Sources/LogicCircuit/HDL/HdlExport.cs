@@ -255,10 +255,15 @@ namespace LogicCircuit {
 
 		private void ExportTest(LogicalCircuit circuit, string folder) {
 			if(CircuitTestSocket.IsTestable(circuit)) {
-				this.Message(Properties.Resources.MessageBuildingTruthTable(circuit.Name));
 				CircuitTestSocket socket = new CircuitTestSocket(circuit);
 				if(socket.Inputs.Sum(i => i.Pin.BitWidth) <= HdlExport.MaxTestableInputBits) {
-					void reportProgress(double progress) => this.Message(Properties.Resources.MessageHdlBuildingTruthTable(circuit.Name, progress));
+					double oldProgress = 0;
+					void reportProgress(double progress) {
+						if(oldProgress + 24 < progress) {
+							oldProgress = progress;
+							this.Message(Properties.Resources.MessageHdlBuildingTruthTable(circuit.Name, progress));
+						}
+					}
 
 					ThreadPool.QueueUserWorkItem(o => {
 						try {
