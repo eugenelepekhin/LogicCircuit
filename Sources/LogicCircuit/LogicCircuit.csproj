@@ -13,7 +13,6 @@
     <Version>$(LogicCircuitVersion)</Version>
     <Description>www.LogicCircuit.org</Description>
     <Copyright>© LogicCircuit.org</Copyright>
-    <Platforms>AnyCPU;x86</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
