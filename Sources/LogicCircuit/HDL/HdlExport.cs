@@ -53,7 +53,7 @@ namespace LogicCircuit {
 
 		protected void Message(string text) => this.logMessage(text);
 
-		protected void Error(string text) {
+		public void Error(string text) {
 			this.ErrorCount++;
 			this.logError(text);
 		}
@@ -141,6 +141,13 @@ namespace LogicCircuit {
 												}
 											}
 										}
+									} else {
+										this.Error(
+											Properties.Resources.ErrorLoopInCircuit(
+												enterJam.CircuitSymbol.Circuit.Name + enterJam.CircuitSymbol.Point.ToString(),
+												enterJam.CircuitSymbol.LogicalCircuit.Name
+											)
+										);
 									}
 								}
 								Propagate(connection.InJam, i);

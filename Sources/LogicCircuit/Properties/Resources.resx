@@ -1678,4 +1678,8 @@ Do you want to load auto saved state of this file?</value>
   <data name="HdlExportVerilogFull" xml:space="preserve">
     <value>SystemVerilog &amp; test bed</value>
   </data>
+  <data name="WarningVerilogFloatingJam" xml:space="preserve">
+    <value>Warning: dangling port {0} floating on symbol {1}{2} on {3}. Behavior of unconnected ports are different on LogicCircuit and Verilog.</value>
+    <comment>{string jamName, string circuitName, GridPoint point, string logicCircuitName}</comment>
+  </data>
 </root>

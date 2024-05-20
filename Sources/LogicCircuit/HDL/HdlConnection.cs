@@ -3,10 +3,11 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 
 namespace LogicCircuit {
-	internal class HdlConnection {
+	internal class HdlConnection : IEquatable<HdlConnection> {
 		internal readonly struct BitRange : IEquatable<BitRange> {
 			public int First { get; }
 			public int Last { get; }
@@ -40,6 +41,8 @@ namespace LogicCircuit {
 				int mask = (int)(f ^ l);
 				return (mask & value) >> first;
 			}
+
+			public string Text => string.Format(CultureInfo.InvariantCulture, (this.First == this.Last) ? "[{0}]" : "[{0}:{1}]", this.Last, this.First);
 		}
 
 		public static void Create(HdlSymbol outSymbol, HdlSymbol inSymbol, Connection connection) {
@@ -116,7 +119,25 @@ namespace LogicCircuit {
 			};
 		}
 
+		public bool Equals(HdlConnection? other) => other != null && 
+			this.OutHdlSymbol == other.OutHdlSymbol &&
+			this.InHdlSymbol == other.InHdlSymbol &&
+			this.OutJam == other.OutJam &&
+			this.InJam == other.InJam &&
+			this.InBits == other.InBits &&
+			this.OutBits == other.OutBits
+		;
+
+		public override bool Equals(object? obj) => this.Equals(obj as HdlConnection);
+
+		public override int GetHashCode() => base.GetHashCode();
+
 		public bool GenerateOutput(HdlSymbol symbol) => symbol != this.OutHdlSymbol || !this.SkipOutput;
+
+		public bool ConnectsInputWithOutput() =>
+			(this.InJam.CircuitSymbol.Circuit is Pin) &&
+			(this.OutJam.CircuitSymbol.Circuit is Pin)
+		;
 
 		public Jam SymbolJam(HdlSymbol symbol) {
 			Debug.Assert(symbol == this.OutHdlSymbol || symbol == this.InHdlSymbol);
@@ -127,14 +148,23 @@ namespace LogicCircuit {
 			}
 		}
 
-		public bool ConnectsInputWithOutput() =>
-			(this.InJam.CircuitSymbol.Circuit is Pin) &&
-			(this.OutJam.CircuitSymbol.Circuit is Pin)
-		;
-
 		public HdlSymbol OtherSymbol(HdlSymbol symbol) {
 			Debug.Assert(symbol == this.OutHdlSymbol || symbol == this.InHdlSymbol);
 			return (symbol == this.OutHdlSymbol) ? this.InHdlSymbol : this.OutHdlSymbol;
+		}
+		public Jam OtherJam(Jam jam) {
+			Debug.Assert(jam == this.OutJam || jam == this.InJam);
+			return (jam == this.OutJam) ? this.InJam : this.OutJam;
+		}
+
+		public HdlSymbol Symbol(Jam jam) {
+			Debug.Assert(jam == this.OutJam || jam == this.InJam);
+			return (jam == this.OutJam) ? this.OutHdlSymbol : this.InHdlSymbol;
+		}
+
+		public BitRange JamRange(Jam jam) {
+			Debug.Assert(jam == this.OutJam || jam == this.InJam);
+			return (jam == this.OutJam) ? this.OutBits : this.InBits;
 		}
 
 		#if DEBUG

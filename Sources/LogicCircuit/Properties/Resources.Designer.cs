@@ -3447,5 +3447,12 @@ namespace LogicCircuit.Properties {
  		public static string HdlExportVerilogFull {
 			get { return ResourceManager.GetString("HdlExportVerilogFull", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Warning: dangling port {0} floating on symbol {1}{2} on {3}. Behavior of unconnected ports are different on LogicCircuit and Verilog..
+		/// </summary>
+ 		public static string WarningVerilogFloatingJam(string jamName, string circuitName, GridPoint point, string logicCircuitName) {
+			return string.Format(FormatCulture, ResourceManager.GetString("WarningVerilogFloatingJam", Culture), jamName, circuitName, point, logicCircuitName);
+		}
 	}
 }

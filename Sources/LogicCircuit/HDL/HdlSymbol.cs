@@ -80,7 +80,7 @@ namespace LogicCircuit {
 
 		public IEnumerable<HdlConnection> Find(Jam outJam, Jam inJam) {
 			Debug.Assert(this.connectionList == null);
-			if(this.connections.TryGetValue(new JamKey(outJam, inJam), out IList<HdlConnection>? list)) {
+			if(this.connections.TryGetValue(new JamKey(outJam, inJam), out ICollection<HdlConnection>? list)) {
 				return list;
 			}
 			return Enumerable.Empty<HdlConnection>();

@@ -66,7 +66,7 @@ namespace LogicCircuit {
 
 			this.WriteLine("\tend");
 
-            this.WriteLine("endmodule // {0}_TestBench", this.circuitName);
+            this.WriteLine("endmodule : {0}_TestBench", this.circuitName);
 
 			return this.GenerationEnvironment.ToString();
 		}

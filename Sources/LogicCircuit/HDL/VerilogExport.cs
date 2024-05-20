@@ -4,23 +4,27 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace LogicCircuit {
 	internal class VerilogExport : HdlExport {
 		private readonly Regex identifier = new Regex(@"^[a-zA-Z_][a-zA-Z0-9_$]*$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
 		private readonly HashSet<string> keywords = new HashSet<string>() {
-			"always", "and", "assign", "attribute", "begin", "buf", "bufif0", "bufif1", "case", "casex", "casez",
+			"always", "assign", "attribute", "begin", "buf", "bufif0", "case", "casex", "casez",
 			"cmos", "deassign", "default", "defparam", "disable", "edge", "else", "end", "endattribute", "endcase",
 			"endfunction", "endmodule", "endprimitive", "endspecify", "endtable", "endtask", "event", "for", "force",
 			"forever", "fork", "function", "highz0", "highz1", "if", "ifnone", "initial", "inout", "input", "integer",
-			"join", "medium", "module", "large", "macromodule", "nand", "negedge", "nmos", "nor", "not", "notif0",
-			"notif1", "or", "output", "parameter", "pmos", "posedge", "primitive", "pull0", "pull1", "pulldown",
+			"join", "medium", "module", "large", "macromodule", "negedge", "nmos", "notif0",
+			"notif1", "output", "parameter", "pmos", "posedge", "primitive", "pull0", "pull1", "pulldown",
 			"pullup", "rcmos", "real", "realtime", "reg", "release", "repeat", "rnmos", "rpmos", "rtran", "rtranif0",
 			"rtranif1", "scalared", "signed", "small", "specify", "specparam", "strength", "strong0", "strong1",
 			"supply0", "supply1", "table", "task", "time", "tran", "tranif0", "tranif1", "tri", "tri0", "tri1",
 			"triand", "trior", "trireg", "unsigned", "vectored", "wait", "wand", "weak0", "weak1", "while", "wire",
-			"wor", "xnor", "xor",
+			"wor",
+
+			//"and", "bufif1", "nand", "nor", "not", "or", 
+			//"xnor", "xor",
 		};
 
 		public VerilogExport(bool exportTests, bool commentPoints, Action<string> logMessage, Action<string> logError) : base(exportTests, commentPoints, logMessage, logError) {
@@ -39,6 +43,26 @@ namespace LogicCircuit {
 		}
 
 		public override bool IsValid(string name) => this.identifier.IsMatch(name) && !this.keywords.Contains(name);
+
+		protected override bool Validate(HdlTransformation transformation) {
+			bool valid = base.Validate(transformation);
+			HashSet<Jam> jams = new HashSet<Jam>();
+            foreach (HdlSymbol symbol in transformation.Parts.Where(s => s.CircuitSymbol.Circuit is not Gate)) {
+                jams.Clear();
+				foreach(HdlConnection connection in symbol.HdlConnections()) {
+					jams.Add(connection.OutJam);
+					jams.Add(connection.InJam);
+				}
+				foreach(Jam jam in symbol.CircuitSymbol.Jams()) {
+					if(!jams.Contains(jam)) {
+						this.Message(
+							Properties.Resources.WarningVerilogFloatingJam(jam.Pin.Name, jam.CircuitSymbol.Circuit.Name, jam.CircuitSymbol.Point, transformation.Name)
+						);
+					}
+				}
+            }
+            return valid;
+		}
 
 		protected override HdlTransformation? CreateTransformation(string name, IList<HdlSymbol> inputPins, IList<HdlSymbol> outputPins, IList<HdlSymbol> parts) {
 			return new VerilogHdl(name, inputPins, outputPins, parts);
