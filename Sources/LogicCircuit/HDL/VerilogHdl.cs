@@ -216,7 +216,7 @@ namespace LogicCircuit {
 				this.WriteLine();
 			}
 
-			this.WriteLine("endmodule : {0}", this.Name);
+			this.WriteLine("endmodule // {0}", this.Name);
 
 			return this.GenerationEnvironment.ToString();
 		}

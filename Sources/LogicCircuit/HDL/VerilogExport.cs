@@ -53,7 +53,7 @@ namespace LogicCircuit {
 					jams.Add(connection.InJam);
 				}
 				foreach(Jam jam in symbol.CircuitSymbol.Jams()) {
-					if(!jams.Contains(jam)) {
+					if(!jams.Contains(jam) && jam.Pin.PinType != PinType.Output) {
 						this.Message(
 							Properties.Resources.WarningVerilogFloatingJam(jam.Pin.Name, jam.CircuitSymbol.Circuit.Name, jam.CircuitSymbol.Point, transformation.Name)
 						);
