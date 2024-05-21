@@ -23,8 +23,7 @@ namespace LogicCircuit {
 			"triand", "trior", "trireg", "unsigned", "vectored", "wait", "wand", "weak0", "weak1", "while", "wire",
 			"wor",
 
-			//"and", "bufif1", "nand", "nor", "not", "or", 
-			//"xnor", "xor",
+			//"and", "bufif1", "nand", "nor", "not", "or", "xnor", "xor",
 		};
 
 		public VerilogExport(bool exportTests, bool commentPoints, Action<string> logMessage, Action<string> logError) : base(exportTests, commentPoints, logMessage, logError) {

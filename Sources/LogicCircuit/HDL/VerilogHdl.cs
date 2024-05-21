@@ -142,7 +142,7 @@ namespace LogicCircuit {
 				this.WriteLine("\t{0} {0}_{1}x{2}(", part.HdlExport.HdlName(part), part.CircuitSymbol.X, part.CircuitSymbol.Y);
 
 				if(part.CircuitSymbol.Circuit is Gate gate) {
-					if(GateType.Not <= gate.GateType && gate.GateType <= GateType.Xor) {
+					if(GateType.Not <= gate.GateType && gate.GateType <= GateType.Xor || GateType.TriState1 <= gate.GateType) {
 						Jam output = part.CircuitSymbol.Jams().First(j => j.Pin.PinType == PinType.Output);
 						if(this.connections.TryGetValue(output, out ICollection<HdlConnection>? outputs)) {
 							if(1 < outputs.Count) {
@@ -152,6 +152,7 @@ namespace LogicCircuit {
 								this.Write("\t\t{0}", this.WirePlug(outputs.First(), output));
 							}
 							List<Jam> inputs = part.CircuitSymbol.Jams().Where(j => j.Pin.PinType == PinType.Input).ToList();
+							inputs.Sort(JamComparer.Comparer); // this will place tri-state enable pin at the end - this is how Verilog expects it.
 							foreach(Jam input in inputs) {
 								if(this.connections.TryGetValue(input, out ICollection<HdlConnection>? list)) {
 									if(1 < list.Count) {

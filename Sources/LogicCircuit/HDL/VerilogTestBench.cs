@@ -1,6 +1,8 @@
 ﻿// Ignore Spelling: Verilog
 
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace LogicCircuit {
 	internal class VerilogTestBench : T4Transformation {
@@ -56,7 +58,15 @@ namespace LogicCircuit {
 
 				index = 0;
 				foreach(OutputPinSocket output in this.outputs) {
-					int value = state.Output[index];
+					string value = state[index];
+					string format;
+					if(value.Contains('-', StringComparison.Ordinal)) {
+						value = value.Replace('-', 'z');
+						format = "{0}'b{1}";
+					} else {
+						format = "{0}'h{1}";
+					}
+					value = string.Format(CultureInfo.InvariantCulture, format, output.Pin.BitWidth, value);
 					this.WriteLine("\t\tif({0} !== {1}) $error(\"Output {0} expected value {1} actual value is \", {0});", output.Pin.Name, value);
 					index++;
 				}
