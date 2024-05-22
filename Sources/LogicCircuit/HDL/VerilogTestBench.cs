@@ -24,9 +24,9 @@ namespace LogicCircuit {
 			foreach(InputPinSocket input in this.inputs) {
 				this.WriteLine("\treg {0}{1};", VerilogHdl.Range(input.Pin), input.Pin.Name);
 			}
-            foreach(OutputPinSocket output in this.outputs) {
-                this.WriteLine("\twire {0}{1};", VerilogHdl.Range(output.Pin), output.Pin.Name);
-            }
+			foreach(OutputPinSocket output in this.outputs) {
+				this.WriteLine("\twire {0}{1};", VerilogHdl.Range(output.Pin), output.Pin.Name);
+			}
 			this.WriteLine();
 
 			this.WriteLine("\t{0} u0(", this.circuitName);
@@ -36,11 +36,11 @@ namespace LogicCircuit {
 				this.Write("\t\t.{0}({0})", input.Pin.Name);
 				comma = true;
 			}
-            foreach(OutputPinSocket output in this.outputs) {
+			foreach(OutputPinSocket output in this.outputs) {
 				if(comma) this.WriteLine(",");
 				this.Write("\t\t.{0}({0})", output.Pin.Name);
 				comma = true;
-            }
+			}
 			this.WriteLine();
 			this.WriteLine("\t);");
 
@@ -76,7 +76,7 @@ namespace LogicCircuit {
 
 			this.WriteLine("\tend");
 
-            this.WriteLine("endmodule // {0}_TestBench", this.circuitName);
+			this.WriteLine("endmodule // {0}_TestBench", this.circuitName);
 
 			return this.GenerationEnvironment.ToString();
 		}

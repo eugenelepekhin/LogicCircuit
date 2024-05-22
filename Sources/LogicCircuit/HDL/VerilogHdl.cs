@@ -56,6 +56,7 @@ namespace LogicCircuit {
 			Debug.Assert(0 < pin.BitWidth);
 			return (pin.BitWidth == 1) ? "" : string.Format(CultureInfo.InvariantCulture, "[{0}:0]", pin.BitWidth - 1);
 		}
+		public static string Range(HdlConnection.BitRange range) => string.Format(CultureInfo.InvariantCulture, (range.First == range.Last) ? "[{0}]" : "[{0}:{1}]", range.Last, range.First);
 
 		private void WriteRange(BasePin pin) {
 			if(1 < pin.BitWidth) {
@@ -89,7 +90,7 @@ namespace LogicCircuit {
 				}
 				string text = this.Wire(otherJam);
 				if(connection.IsBitRange(connection.Symbol(otherJam))) {
-					text += connection.JamRange(otherJam).Text;
+					text += VerilogHdl.Range(connection.JamRange(otherJam));
 				}
 				return text;
 			}

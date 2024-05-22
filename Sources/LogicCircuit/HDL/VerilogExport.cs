@@ -45,22 +45,41 @@ namespace LogicCircuit {
 
 		protected override bool Validate(HdlTransformation transformation) {
 			bool valid = base.Validate(transformation);
-			HashSet<Jam> jams = new HashSet<Jam>();
-            foreach (HdlSymbol symbol in transformation.Parts.Where(s => s.CircuitSymbol.Circuit is not Gate)) {
-                jams.Clear();
+			OneToMany<Jam, HdlConnection> jams = new OneToMany<Jam, HdlConnection>(true);
+			foreach(HdlSymbol symbol in transformation.Parts.Where(s => s.CircuitSymbol.Circuit is not Gate).Concat(transformation.OutputPins)) {
+				jams.Clear();
 				foreach(HdlConnection connection in symbol.HdlConnections()) {
-					jams.Add(connection.OutJam);
-					jams.Add(connection.InJam);
+					jams.Add(connection.OutJam, connection);
+					jams.Add(connection.InJam, connection);
 				}
-				foreach(Jam jam in symbol.CircuitSymbol.Jams()) {
-					if(!jams.Contains(jam) && jam.Pin.PinType != PinType.Output) {
+				foreach(Jam jam in symbol.CircuitSymbol.Jams().Where(j => j.Pin.PinType != PinType.Output)) {
+					bool cover = true;
+					if(jams.TryGetValue(jam, out ICollection<HdlConnection>? connections)) {
+						List<HdlConnection> list = connections.ToList();
+						Debug.Assert(0 < list.Count);
+						list.Sort((x, y) => x.InBits.First - y.InBits.First);
+						HdlConnection.BitRange range = list[0].InBits;
+						foreach(HdlConnection.BitRange inRange in list.Select(c => c.InBits)) {
+							if(range.CanAdd(inRange)) {
+								range = range.Add(inRange);
+							} else {
+								cover = false;
+							}
+						}
+						if(0 < range.First || range.Last < jam.Pin.BitWidth - 1) {
+							cover = false;
+						}
+					} else {
+						cover = false;
+					}
+					if(!cover) {
 						this.Message(
 							Properties.Resources.WarningVerilogFloatingJam(jam.Pin.Name, jam.CircuitSymbol.Circuit.Name, jam.CircuitSymbol.Point, transformation.Name)
 						);
 					}
 				}
-            }
-            return valid;
+			}
+			return valid;
 		}
 
 		protected override HdlTransformation? CreateTransformation(string name, IList<HdlSymbol> inputPins, IList<HdlSymbol> outputPins, IList<HdlSymbol> parts) {

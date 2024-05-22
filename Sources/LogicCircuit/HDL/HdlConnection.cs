@@ -27,6 +27,12 @@ namespace LogicCircuit {
 				this.Last = jam.Pin.BitWidth - 1;
 			}
 
+			private BitRange(int first, int last) {
+				Tracer.Assert(0 <= first && first <= last && last <= 32);
+				this.First = first;
+				this.Last = last;
+			}
+
 			public bool Equals(BitRange other) => this.First == other.First && this.Last == other.Last;
 			public override bool Equals(object? obj) => obj is BitRange other && Equals(other);
 			public override int GetHashCode() => HashCode.Combine(this.First, this.Last);
@@ -42,7 +48,15 @@ namespace LogicCircuit {
 				return (mask & value) >> first;
 			}
 
-			public string Text => string.Format(CultureInfo.InvariantCulture, (this.First == this.Last) ? "[{0}]" : "[{0}:{1}]", this.Last, this.First);
+			public bool CanAdd(BitRange other) => other.First <= this.First && this.First <= other.Last + 1 || other.First <= this.Last + 1 && this.Last <= other.Last;
+			public BitRange Add(BitRange other) {
+				Tracer.Assert(this.CanAdd(other));
+				return new BitRange(Math.Min(this.First, other.First), Math.Max(this.Last, other.Last));
+			}
+
+			#if DEBUG
+				public override string ToString() => $"[{this.Last}:{this.First}]";
+			#endif
 		}
 
 		public static void Create(HdlSymbol outSymbol, HdlSymbol inSymbol, Connection connection) {
