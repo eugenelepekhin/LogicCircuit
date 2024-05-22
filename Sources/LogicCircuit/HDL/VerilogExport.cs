@@ -46,36 +46,43 @@ namespace LogicCircuit {
 		protected override bool Validate(HdlTransformation transformation) {
 			bool valid = base.Validate(transformation);
 			OneToMany<Jam, HdlConnection> jams = new OneToMany<Jam, HdlConnection>(true);
-			foreach(HdlSymbol symbol in transformation.Parts.Where(s => s.CircuitSymbol.Circuit is not Gate).Concat(transformation.OutputPins)) {
-				jams.Clear();
-				foreach(HdlConnection connection in symbol.HdlConnections()) {
-					jams.Add(connection.OutJam, connection);
-					jams.Add(connection.InJam, connection);
-				}
-				foreach(Jam jam in symbol.CircuitSymbol.Jams().Where(j => j.Pin.PinType != PinType.Output)) {
-					bool cover = true;
-					if(jams.TryGetValue(jam, out ICollection<HdlConnection>? connections)) {
-						List<HdlConnection> list = connections.ToList();
-						Debug.Assert(0 < list.Count);
-						list.Sort((x, y) => x.InBits.First - y.InBits.First);
-						HdlConnection.BitRange range = list[0].InBits;
-						foreach(HdlConnection.BitRange inRange in list.Select(c => c.InBits)) {
-							if(range.CanAdd(inRange)) {
-								range = range.Add(inRange);
-							} else {
+			foreach(HdlSymbol symbol in transformation.Parts.Concat(transformation.OutputPins)) {
+				Gate? gate = symbol.CircuitSymbol.Circuit as Gate;
+				if(gate == null || gate.GateType == GateType.TriState1 || gate.GateType == GateType.TriState2) {
+					jams.Clear();
+					foreach(HdlConnection connection in symbol.HdlConnections()) {
+						jams.Add(connection.OutJam, connection);
+						jams.Add(connection.InJam, connection);
+					}
+					foreach(Jam jam in symbol.CircuitSymbol.Jams().Where(j => j.Pin.PinType != PinType.Output)) {
+						bool cover = true;
+						if(jams.TryGetValue(jam, out ICollection<HdlConnection>? connections)) {
+							List<HdlConnection> list = connections.ToList();
+							Debug.Assert(0 < list.Count);
+							list.Sort((x, y) => x.InBits.First - y.InBits.First);
+							HdlConnection.BitRange range = list[0].InBits;
+							foreach(HdlConnection.BitRange inRange in list.Select(c => c.InBits)) {
+								if(range.CanAdd(inRange)) {
+									range = range.Add(inRange);
+								} else {
+									cover = false;
+								}
+							}
+							if(0 < range.First || range.Last < jam.Pin.BitWidth - 1) {
 								cover = false;
 							}
-						}
-						if(0 < range.First || range.Last < jam.Pin.BitWidth - 1) {
+						} else {
 							cover = false;
 						}
-					} else {
-						cover = false;
-					}
-					if(!cover) {
-						this.Message(
-							Properties.Resources.WarningVerilogFloatingJam(jam.Pin.Name, jam.CircuitSymbol.Circuit.Name, jam.CircuitSymbol.Point, transformation.Name)
-						);
+						if(!cover) {
+							string text = Properties.Resources.WarningVerilogFloatingJam(jam.Pin.Name, jam.CircuitSymbol.Circuit.Name, jam.CircuitSymbol.Point, transformation.Name);
+							if(gate != null) {
+								this.Error(text);
+								valid = false;
+							} else {
+								this.Message(text);
+							}
+						}
 					}
 				}
 			}
