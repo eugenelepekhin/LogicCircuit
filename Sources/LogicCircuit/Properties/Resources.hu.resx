@@ -1509,4 +1509,7 @@ kapcsolás felfogható egyfajta multiplexerként is.</value>
 	<data name="ErrorTextFileChar" xml:space="preserve">
 		<value>Ismeretlen karakter a sorban: {0}, pozíció: {1}</value>
 	</data>
+	<data name="WarningVerilogFloatingJam" xml:space="preserve">
+		<value>Figyelem: a lógó port {0} lebeg a szimbólumon {1}{2} {3}. A nem csatlakoztatott portok viselkedése eltérő a LogicCircuit és a Verilog esetében.</value>
+	</data>
 </root>

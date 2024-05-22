@@ -1603,4 +1603,7 @@
 	<data name="ErrorTextFileChar" xml:space="preserve">
 		<value>תו לא מזוהה בשורה: {0}, תפקיד: {1}</value>
 	</data>
+	<data name="WarningVerilogFloatingJam" xml:space="preserve">
+		<value>אזהרה: יציאה משתלשלת {0} צפה על סמל {1}{2} על {3}. אופן הפעולה של יציאות לא מחוברות שונה ב- LogicCircuit וב- Verilog.</value>
+	</data>
 </root>

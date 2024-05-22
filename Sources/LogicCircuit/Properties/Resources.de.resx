@@ -1575,4 +1575,7 @@ Möchten Sie den automatisch gespeicherten Stand dieser Datei laden?</value>
 	<data name="ErrorTextFileChar" xml:space="preserve">
 		<value>Unbekanntes Zeichen in der Zeile: {0}, Position: {1}</value>
 	</data>
+	<data name="WarningVerilogFloatingJam" xml:space="preserve">
+		<value>Warnung: Der baumelnde Port {0} auf dem Symbol {1}{2} auf {3} schwimmen. Das Verhalten von nicht verbundenen Ports unterscheidet sich bei LogicCircuit und Verilog.</value>
+	</data>
 </root>

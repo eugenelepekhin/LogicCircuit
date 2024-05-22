@@ -1365,4 +1365,7 @@
 	<data name="ErrorTextFileChar" xml:space="preserve">
 		<value>行内の認識できない文字: {0}、位置: {1}</value>
 	</data>
+	<data name="WarningVerilogFloatingJam" xml:space="preserve">
+		<value>警告:ぶら下がっているポート{0}{3}のシンボル{1}{2}に浮いています。未接続のポートの動作は、LogicCircuit と Verilog で異なります。</value>
+	</data>
 </root>

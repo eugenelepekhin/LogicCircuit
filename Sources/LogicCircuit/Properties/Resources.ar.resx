@@ -1500,4 +1500,7 @@ LED, مصفوفة LED ,زر , أو اية عناصر اخرى</value>
 	<data name="ErrorTextFileChar" xml:space="preserve">
 		<value>حرف غير معروف في السطر: {0} ، الموضع: {1}</value>
 	</data>
+	<data name="WarningVerilogFloatingJam" xml:space="preserve">
+		<value>تحذير: {0} المنفذ المتدلي عائما على الرمز {1}{2} على {3}. يختلف سلوك المنافذ غير المتصلة على LogicCircuit و Verilog.</value>
+	</data>
 </root>

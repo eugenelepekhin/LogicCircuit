@@ -1561,4 +1561,7 @@ Takav sklop se ne može koristiti više od jednom na drugim sklopovima jer će s
 	<data name="ErrorTextFileChar" xml:space="preserve">
 		<value>Neprepoznati znak u retku: {0}, položaj: {1}</value>
 	</data>
+	<data name="WarningVerilogFloatingJam" xml:space="preserve">
+		<value>Upozorenje: viseći priključak {0} pluta na simbolu {1}{2} na {3}. Ponašanje nepovezanih priključaka razlikuje se na LogicCircuit i Verilog.</value>
+	</data>
 </root>

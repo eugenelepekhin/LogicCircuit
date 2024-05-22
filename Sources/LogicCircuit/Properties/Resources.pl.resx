@@ -1552,4 +1552,7 @@ Czy chcesz wczytać automatycznie zapisaną kopię tego pliku?</value>
 	<data name="ErrorTextFileChar" xml:space="preserve">
 		<value>Nierozpoznany znak w wierszu: {0}, pozycja: {1}</value>
 	</data>
+	<data name="WarningVerilogFloatingJam" xml:space="preserve">
+		<value>Ostrzeżenie: zwisający port {0} pływający na symbolu {1}{2} na {3}. Zachowanie niepodłączonych portów jest inne w LogicCircuit i Verilog.</value>
+	</data>
 </root>

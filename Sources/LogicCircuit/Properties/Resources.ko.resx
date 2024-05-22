@@ -1536,4 +1536,7 @@ Tri-state와 적절한 제어 회로를 함께 써서 멀티플렉서를 만들 
 	<data name="ErrorTextFileChar" xml:space="preserve">
 		<value>줄 안의 인식할 수 없는 문자: {0}, 위치: {1}</value>
 	</data>
+	<data name="WarningVerilogFloatingJam" xml:space="preserve">
+		<value>경고: 매달려 있는 포트{0} {3}의 기호 {1}{2}에 떠 있습니다. 연결되지 않은 포트의 동작은 LogicCircuit과 Verilog에서 다릅니다.</value>
+	</data>
 </root>

@@ -1362,4 +1362,7 @@ tutti i simboli del display saranno visibili sul suo simbolo.</value>
 	<data name="ErrorTextFileChar" xml:space="preserve">
 		<value>Carattere non riconosciuto in riga: {0}, posizione: {1}</value>
 	</data>
+	<data name="WarningVerilogFloatingJam" xml:space="preserve">
+		<value>Attenzione: la porta penzolante {0} fluttuante sul simbolo {1}{2} sul {3}. Il comportamento delle porte non connesse è diverso su LogicCircuit e Verilog.</value>
+	</data>
 </root>

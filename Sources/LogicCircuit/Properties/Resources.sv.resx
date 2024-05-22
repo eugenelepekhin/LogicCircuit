@@ -1529,4 +1529,7 @@ Vill du ladda an automatiskt sparad fil istället?</value>
 	<data name="ErrorTextFileChar" xml:space="preserve">
 		<value>Okänt tecken i raden: {0}, position: {1}</value>
 	</data>
+	<data name="WarningVerilogFloatingJam" xml:space="preserve">
+		<value>Varning: dinglande port {0} flyter på symbolen {1}{2} på {3}. Beteendet för icke-anslutna portar skiljer sig åt på LogicCircuit och Verilog.</value>
+	</data>
 </root>

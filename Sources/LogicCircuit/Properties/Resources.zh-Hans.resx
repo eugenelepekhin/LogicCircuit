@@ -1561,4 +1561,7 @@ Out</value>
 	<data name="ErrorTextFileChar" xml:space="preserve">
 		<value>行中无法识别的字符：{0}，位置：{1}</value>
 	</data>
+	<data name="WarningVerilogFloatingJam" xml:space="preserve">
+		<value>警告：悬空的端口{0}漂浮在符号{1}{2}上{3}上。未连接端口的行为在 LogicCircuit 和 Verilog 上是不同的。</value>
+	</data>
 </root>

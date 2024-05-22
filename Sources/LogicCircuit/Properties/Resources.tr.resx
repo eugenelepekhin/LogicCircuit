@@ -1553,4 +1553,7 @@ temelde bir çoğullayıcıya eşdeğerdir.</value>
 	<data name="ErrorTextFileChar" xml:space="preserve">
 		<value>Satırdaki tanınmayan karakter: {0}, konum: {1}</value>
 	</data>
+	<data name="WarningVerilogFloatingJam" xml:space="preserve">
+		<value>Uyarı: sarkan bağlantı noktası {0} {3}'de {1}{2} sembolü üzerinde yüzer. Bağlı olmayan bağlantı noktalarının davranışı LogicCircuit ve Verilog'da farklıdır.</value>
+	</data>
 </root>

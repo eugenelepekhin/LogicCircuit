@@ -1553,4 +1553,7 @@
 	<data name="ErrorTextFileChar" xml:space="preserve">
 		<value>Нерозпізнаний символ у рядку: {0}, позиція: {1}</value>
 	</data>
+	<data name="WarningVerilogFloatingJam" xml:space="preserve">
+		<value>Попередження: порт, що бовтається, {0} плаваючий на символі {1}{2} на {3}. Поведінка непідключених портів відрізняється в LogicCircuit і Verilog.</value>
+	</data>
 </root>

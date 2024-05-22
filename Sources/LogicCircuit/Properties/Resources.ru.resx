@@ -1578,4 +1578,7 @@
 	<data name="ErrorTextFileChar" xml:space="preserve">
 		<value>Нераспознанный символ в строке: {0}, позиция: {1}</value>
 	</data>
+	<data name="WarningVerilogFloatingJam" xml:space="preserve">
+		<value>Внимание: разъем {0} не подключен на символе {1}{2} на диаграмме {3}. Поведение не подключенных разъемов отличается в LogicCircuit и Verilog.</value>
+	</data>
 </root>

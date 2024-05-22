@@ -1616,4 +1616,7 @@ Wil je het, automatisch opgeslagen, bestand laden.</value>
 	<data name="ErrorTextFileChar" xml:space="preserve">
 		<value>Niet-herkend teken in lijn: {0}, positie: {1}</value>
 	</data>
+	<data name="WarningVerilogFloatingJam" xml:space="preserve">
+		<value>Waarschuwing: bungelende poort {0} drijven op symbool {1}{2} op {3}. Het gedrag van niet-verbonden poorten is verschillend op LogicCircuit en Verilog.</value>
+	</data>
 </root>

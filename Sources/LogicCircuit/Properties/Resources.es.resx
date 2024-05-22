@@ -1627,4 +1627,7 @@ Permite seleccionar el tamaño y profundidad de color / esquema:
 	<data name="ErrorTextFileChar" xml:space="preserve">
 		<value>Carácter no reconocido en línea: {0}, posición: {1}</value>
 	</data>
+	<data name="WarningVerilogFloatingJam" xml:space="preserve">
+		<value>Advertencia: el puerto colgante {0} flotando en el símbolo {1}{2} en {3}. El comportamiento de los puertos no conectados es diferente en LogicCircuit y Verilog.</value>
+	</data>
 </root>

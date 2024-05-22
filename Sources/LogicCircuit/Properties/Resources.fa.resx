@@ -1312,4 +1312,7 @@
 	<data name="ErrorTextFileBigNumber" xml:space="preserve">
 		<value>تعداد بیش از حد در هر خط: {0}، موقعیت: {1}</value>
 	</data>
+	<data name="WarningVerilogFloatingJam" xml:space="preserve">
+		<value>هشدار: {0} پورت اویزان شناور بر روی {1}{2} نماد در {3}. رفتار پورت های غیر مرتبط در LogicCircuit و Verilog متفاوت است.</value>
+	</data>
 </root>

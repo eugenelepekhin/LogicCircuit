@@ -1630,4 +1630,7 @@ Você deseja carregar a configuração de salvamento automático para este arqui
 	<data name="ErrorTextFileChar" xml:space="preserve">
 		<value>Caractere não reconhecido na linha: {0}, posição: {1}</value>
 	</data>
+	<data name="WarningVerilogFloatingJam" xml:space="preserve">
+		<value>Aviso: porta pendurada {0} flutuando no símbolo {1}{2} no {3}. O comportamento das portas desconectadas é diferente no LogicCircuit e no Verilog.</value>
+	</data>
 </root>

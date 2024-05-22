@@ -1575,4 +1575,7 @@ Voulez-vous charger l'état sauvegardé automatiquement de ce fichier ?</value>
 	<data name="ErrorTextFileChar" xml:space="preserve">
 		<value>Caractère non reconnu dans la ligne : {0}, position : {1}</value>
 	</data>
+	<data name="WarningVerilogFloatingJam" xml:space="preserve">
+		<value>Attention : le port suspendu {0} flottant sur le symbole {1}{2} sur {3}. Le comportement des ports non connectés est différent sur LogicCircuit et Verilog.</value>
+	</data>
 </root>

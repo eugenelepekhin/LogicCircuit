@@ -1552,4 +1552,7 @@ Ar norite užkrauti automatiškai išsaugota šio failo būseną?</value>
 	<data name="ErrorTextFileChar" xml:space="preserve">
 		<value>Neatpažintas simbolis eilutėje: {0}, padėtis: {1}</value>
 	</data>
+	<data name="WarningVerilogFloatingJam" xml:space="preserve">
+		<value>Įspėjimas: kabantis uosto {0}, plūduriuojantis ant simbolio {1}{2} ant {3}. Neprijungtų prievadų veikimas skiriasi "LogicCircuit" ir "Verilog".</value>
+	</data>
 </root>

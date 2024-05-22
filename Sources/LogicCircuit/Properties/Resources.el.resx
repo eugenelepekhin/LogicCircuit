@@ -1568,4 +1568,7 @@
 	<data name="ErrorTextFileChar" xml:space="preserve">
 		<value>Μη αναγνωρισμένος χαρακτήρας στη σειρά: {0}, θέση: {1}</value>
 	</data>
+	<data name="WarningVerilogFloatingJam" xml:space="preserve">
+		<value>Προειδοποίηση: αιωρούμενο λιμάνι {0} επιπλέει στο σύμβολο {1}{2} στο {3}. Η συμπεριφορά των μη συνδεδεμένων θυρών είναι διαφορετική στο LogicCircuit και στο Verilog.</value>
+	</data>
 </root>
