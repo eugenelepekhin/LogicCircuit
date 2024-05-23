@@ -144,11 +144,13 @@ namespace LogicCircuit.UnitTest {
 			Check(Reader("1 2 3", DialogMemoryEditor.TextFileFormat.Dec), 1, 2, 3);
 			Check(Reader(" 1,2; 3  ", DialogMemoryEditor.TextFileFormat.Dec), 1, 2, 3);
 			Check(Reader(" \n\r123	456	789  \r\n", DialogMemoryEditor.TextFileFormat.Dec), 123, 456, 789);
-			Check(Reader(" \n\r123	-456	789  \r\n", DialogMemoryEditor.TextFileFormat.Dec), 123, -456, 789);
+			Check(Reader(" \n\r123	-456;	789  \r\n", DialogMemoryEditor.TextFileFormat.Dec), 123, -456, 789);
+			Check(Reader(" \n\r123	,-  456	+ 789  \r\n", DialogMemoryEditor.TextFileFormat.Dec), 123, -456, 789);
+			Check(Reader(" \n\r123	+456,;,;-789  \r\n", DialogMemoryEditor.TextFileFormat.Dec), 123, 456, - 789);
 
-			Check(Reader(" \nabc	456	f01 eEF \r\n", DialogMemoryEditor.TextFileFormat.Hex), 0xabc, 0x456, 0xf01, 0xeef);
-			Check(Reader(" \n101	1101	1000100010001 \r\n", DialogMemoryEditor.TextFileFormat.Bin), 0b101, 0b1101, 0b1000100010001);
-			Check(Reader(" \n101	-1101	1000100010001 \r\n", DialogMemoryEditor.TextFileFormat.Bin), 0b101, -0b1101, 0b1000100010001);
+			Check(Reader(" \nabc	+456	;,f01 - eEF \r\n", DialogMemoryEditor.TextFileFormat.Hex), 0xabc, 0x456, 0xf01, -0xeef);
+			Check(Reader(" \n101;;;,	1101	,1000100010001 \r\n", DialogMemoryEditor.TextFileFormat.Bin), 0b101, 0b1101, 0b1000100010001);
+			Check(Reader(" \n+101	-1101	+1000100010001 \r\n", DialogMemoryEditor.TextFileFormat.Bin), 0b101, -0b1101, 0b1000100010001);
 
 			Check(Reader(int.MaxValue.ToString(), DialogMemoryEditor.TextFileFormat.Dec), int.MaxValue);
 			Check(Reader("7fFFFfff", DialogMemoryEditor.TextFileFormat.Hex), int.MaxValue);

@@ -295,22 +295,22 @@ namespace LogicCircuit {
 				return c;
 			}
 
-			private int Skip() {
+			private int Skip(bool skipSeparators) {
 				int c = this.Read();
-				while(char.IsWhiteSpace((char)c) || ",;".Contains((char)c, StringComparison.Ordinal)) {
+				while(char.IsWhiteSpace((char)c) || skipSeparators && ",;".Contains((char)c, StringComparison.Ordinal)) {
 					c = this.Read();
 				}
 				return c;
 			}
 
 			private long NextDec() {
-				int c = this.Skip();
+				int c = this.Skip(true);
 				int sign = 1;
 				if(c == '-') {
 					sign = -1;
-					c = this.Read();
+					c = this.Skip(false);
 				} else if(c == '+') {
-					// do nothing
+					c = this.Skip(false);
 				}
 				int value = 0;
 				bool anyDigits = false;
@@ -325,7 +325,7 @@ namespace LogicCircuit {
 				}
 				this.back = c;
 				if(anyDigits) {
-					return ((long)(value * sign)) & ((1L << 32) - 1);
+					return ((long)value * sign) & ((1L << 32) - 1);
 				}
 				if(c == -1) {
 					return -1L;
@@ -334,13 +334,13 @@ namespace LogicCircuit {
 			}
 
 			private long NextHex() {
-				int c = this.Skip();
+				int c = this.Skip(true);
 				int sign = 1;
 				if(c == '-') {
 					sign = -1;
-					c = this.Read();
+					c = this.Skip(false);
 				} else if(c == '+') {
-					// do nothing
+					c = this.Skip(false);
 				}
 				int value = 0;
 				bool anyDigits = false;
@@ -348,14 +348,14 @@ namespace LogicCircuit {
 					anyDigits = true;
 					int delta = 0;
 					if('0' <= c && c <= '9') {
-						delta = '0';
+						delta = c - '0';
 					} else if('a' <= c && c <= 'f') {
-						delta = 'a' - 10;
+						delta = c - 'a' + 10;
 					} else {
 						Debug.Assert('A' <= c && c <= 'F');
-						delta = 'A' - 10;
+						delta = c - 'A' + 10;
 					}
-					long temp = value * 16L + c - delta;
+					long temp = value * 16L + delta;
 					if(int.MaxValue < temp) {
 						throw new CircuitException(Cause.UserError, this.ErrorTooBig());
 					}
@@ -364,7 +364,7 @@ namespace LogicCircuit {
 				}
 				this.back = c;
 				if(anyDigits) {
-					return ((long)(value * sign)) & ((1L << 32) - 1);
+					return ((long)value * sign) & ((1L << 32) - 1);
 				}
 				if(c == -1) {
 					return -1L;
@@ -373,13 +373,13 @@ namespace LogicCircuit {
 			}
 
 			private long NextBin() {
-				int c = this.Skip();
+				int c = this.Skip(true);
 				int sign = 1;
 				if(c == '-') {
 					sign = -1;
-					c = this.Read();
+					c = this.Skip(false);
 				} else if(c == '+') {
-					// do nothing
+					c = this.Skip(false);
 				}
 				int value = 0;
 				bool anyDigits = false;
@@ -394,7 +394,7 @@ namespace LogicCircuit {
 				}
 				this.back = c;
 				if(anyDigits) {
-					return ((long)(value * sign)) & ((1L << 32) - 1);
+					return ((long)value * sign) & ((1L << 32) - 1);
 				}
 				if(c == -1) {
 					return -1L;
