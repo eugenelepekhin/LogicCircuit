@@ -26,7 +26,7 @@ namespace LogicCircuit {
 			//"and", "bufif1", "nand", "nor", "not", "or", "xnor", "xor",
 		};
 
-		public VerilogExport(bool exportTests, bool commentPoints, Action<string> logMessage, Action<string> logError) : base(exportTests, commentPoints, logMessage, logError) {
+		public VerilogExport(bool exportTests, bool commentPoints, Action<string> logMessage, Action<string> logError, Action<string> logWarning) : base(exportTests, commentPoints, logMessage, logError, logWarning) {
 		}
 
 		protected override string FileName(LogicalCircuit circuit) => circuit.Name + ".sv";
@@ -80,7 +80,7 @@ namespace LogicCircuit {
 								this.Error(text);
 								valid = false;
 							} else {
-								this.Message(text);
+								this.Warning(text);
 							}
 						}
 					}

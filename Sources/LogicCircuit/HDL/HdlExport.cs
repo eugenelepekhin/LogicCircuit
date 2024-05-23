@@ -29,13 +29,15 @@ namespace LogicCircuit {
 
 		private readonly Action<string> logMessage;
 		private readonly Action<string> logError;
+		private readonly Action<string> logWarning;
 		private int ErrorCount { get; set; }
 
-		protected HdlExport(bool exportTests, bool commentPoints, Action<string> logMessage, Action<string> logError) {
+		protected HdlExport(bool exportTests, bool commentPoints, Action<string> logMessage, Action<string> logError, Action<string> logWarning) {
 			this.exportTests = exportTests;
 			this.commentPoints = commentPoints;
 			this.logMessage = logMessage;
 			this.logError = logError;
+			this.logWarning = logWarning;
 		}
 
 		protected abstract HdlTransformation? CreateTransformation(string name, IList<HdlSymbol> inputPins, IList<HdlSymbol> outputPins, IList<HdlSymbol> parts);
@@ -57,6 +59,8 @@ namespace LogicCircuit {
 			this.ErrorCount++;
 			this.logError(text);
 		}
+
+		public void Warning(string text) => this.logWarning(text);
 
 		public bool ExportCircuit(LogicalCircuit circuit, string folder, bool onlyOne) {
 			CircuitMap map = new CircuitMap(circuit);

@@ -51,7 +51,7 @@ namespace LogicCircuit.UnitTest {
 			this.SortByNote(circuits);
 			foreach(LogicalCircuit circuit in circuits) {
 				ProjectTester.SwitchTo(project, circuit.Name);
-				N2TExport export = new N2TExport(false, true, this.Message, this.Message);
+				N2TExport export = new N2TExport(false, true, this.Message, this.Message, this.Message);
 				bool success = export.ExportCircuit(circuit, hdlPath, false);
 				Assert.IsTrue(success);
 				HdlContext context = new HdlContext(hdlPath, this.Message);
@@ -73,7 +73,7 @@ namespace LogicCircuit.UnitTest {
 			CircuitProject project = this.LoadCircuitProject();
 			string hdlPath = this.HdlFolder();
 			LogicalCircuit circuit = ProjectTester.SwitchTo(project, circuitName);
-			N2TExport export = new N2TExport(false, false, this.Message, this.Message);
+			N2TExport export = new N2TExport(false, false, this.Message, this.Message, this.Message);
 			bool success = export.ExportCircuit(circuit, hdlPath, false);
 			Assert.IsTrue(success);
 			HdlContext context = new HdlContext(hdlPath, this.Message);
@@ -108,7 +108,7 @@ namespace LogicCircuit.UnitTest {
 			this.SortByNote(circuits);
 			foreach(LogicalCircuit circuit in circuits) {
 				ProjectTester.SwitchTo(project, circuit.Name);
-				N2TExport export = new N2TExport(false, false, this.Message, error);
+				N2TExport export = new N2TExport(false, false, this.Message, error, this.Message);
 				bool success = export.ExportCircuit(circuit, hdlPath, false);
 				Assert.IsFalse(success);
 

@@ -26,7 +26,7 @@ namespace LogicCircuit {
 
 		private CircuitProject? replacmentProject;
 
-		public N2TExport(bool exportTests, bool commentPoints, Action<string> logMessage, Action<string> logError) : base(exportTests, commentPoints, logMessage, logError) {
+		public N2TExport(bool exportTests, bool commentPoints, Action<string> logMessage, Action<string> logError, Action<string> logWarning) : base(exportTests, commentPoints, logMessage, logError, logWarning) {
 		}
 
 		protected override HdlTransformation? CreateTransformation(string name, IList<HdlSymbol> inputPins, IList<HdlSymbol> outputPins, IList<HdlSymbol> parts) {

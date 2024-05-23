@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Documents;
+using System.Windows.Media;
 
 namespace LogicCircuit {
 	/// <summary>
@@ -67,20 +69,34 @@ namespace LogicCircuit {
 		private void ButtonExportClick(object sender, RoutedEventArgs e) {
 			try {
 				e.Handled = true;
-				this.log.Clear();
-				void message(string text) => App.Dispatch(() => {
-					this.log.Text += text;
-					this.log.Text += "\n";
-				});
+				this.log.Document = new System.Windows.Documents.FlowDocument();
+
+				void logText(Brush? decorator, string text) {
+					App.Dispatch(() => {
+						Paragraph paragraph = new Paragraph();
+						if(decorator != null) {
+							Run run = new Run("\u25C9 ") {
+								Foreground = decorator
+							};
+							paragraph.Inlines.Add(run);
+						}
+						paragraph.Inlines.Add(text);
+						this.log.Document.Blocks.Add(paragraph);
+					});
+				}
+				void message(string text) => logText(null, text);
+				void error(string text) => logText(Brushes.Red, text);
+				void warning(string text) => logText(Brushes.Orange, text);
+
 				HdlExport? hdl = null;
 				switch(this.SelectedExportType.Value) {
 				case HdlExportType.N2T:
 				case HdlExportType.N2TFull:
-					hdl = new N2TExport(this.SelectedExportType.Value == HdlExportType.N2TFull, this.CommentPoints, message, message);
+					hdl = new N2TExport(this.SelectedExportType.Value == HdlExportType.N2TFull, this.CommentPoints, message, error, warning);
 					break;
 				case HdlExportType.Verilog:
 				case HdlExportType.VerilogFull:
-					hdl = new VerilogExport(this.SelectedExportType.Value == HdlExportType.VerilogFull, this.CommentPoints, message, message);
+					hdl = new VerilogExport(this.SelectedExportType.Value == HdlExportType.VerilogFull, this.CommentPoints, message, error, warning);
 					break;
 				default:
 					throw new InvalidOperationException();

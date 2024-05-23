@@ -22,7 +22,13 @@
 		</WrapPanel>
 
 		<Label Content="{x:Static properties:Resources.TitleLog}"/>
-		<TextBox x:Name="log" Style="{StaticResource NoteEditor}" IsReadOnly="True"/>
+		<RichTextBox x:Name="log" Style="{StaticResource LogViewer}" IsReadOnly="True">
+			<RichTextBox.Resources>
+				<Style TargetType="Paragraph">
+					<Setter Property="Margin" Value="1"/>
+				</Style>
+			</RichTextBox.Resources>
+		</RichTextBox>
 
 		<StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
 			<Button Content="{x:Static properties:Resources.TitleExport}" IsDefault="True" Click="ButtonExportClick"/>
