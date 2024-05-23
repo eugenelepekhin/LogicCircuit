@@ -45,7 +45,7 @@ namespace LogicCircuit {
 				break;
 			case SensorType.KeyCode:
 			case SensorType.ASCII:
-				this.sensorValue = new KeyboardValue(this, this.Sensor.BitWidth);
+				this.sensorValue = new KeyboardValue(this);
 				break;
 			default:
 				Tracer.Fail();
@@ -312,7 +312,7 @@ namespace LogicCircuit {
 			private string? lastText;
 			private bool ignoreText;
 
-			public KeyboardValue(FunctionSensor functionSensor, int bitWidth) : base(bitWidth) {
+			public KeyboardValue(FunctionSensor functionSensor) : base(functionSensor.BitWidth) {
 				this.functionSensor = functionSensor;
 			}
 
