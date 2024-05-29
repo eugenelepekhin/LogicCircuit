@@ -4,10 +4,11 @@
 3. Build Setup by running BuildSetup.cmd from "Developer Command Prompt"
 4. Upload setup zips to downloads folder on the website and download and test them.
 5. Prepare website - add what is new in download.html
-6. Fix links on the download .html page to download of the new files.
-7. Add News item in Project.xml
-8. Change version in LatestVersion.txt.
-9. Review and update TranslationRequests.txt.
-10. Add tags to repos (both logic circuit and web site)
-11. Push repos to dev.azure and github
-12. Publish web site
+6. Change version attribute in the root of Project.xml.
+7. Fix links on the download .html page to download of the new sample files.
+8. Add News item in Project.xml
+9. Change version in LatestVersion.txt.
+10. Review and update TranslationRequests.txt.
+11. Add tags to repos (both logic circuit and web site)
+12. Push repos to dev.azure and github
+13. Publish web site
