@@ -39,6 +39,8 @@ Project("{B7DD6F7E-DEF8-4E67-B5B7-07EF123DB6F0}") = "Setup", "Setup\Setup.wixpro
 		{BEB2A373-887A-412D-87B9-DB105E89597D} = {BEB2A373-887A-412D-87B9-DB105E89597D}
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FindUnusedResources", "Tools\FindUnusedResources\FindUnusedResources.csproj", "{CE3F8989-5EAF-4665-BB33-BC8C7DD37E23}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,14 @@ Global
 		{7F6164FF-4A14-493D-AD0E-E6DD127FC64E}.Debug|x86.ActiveCfg = Debug|x64
 		{7F6164FF-4A14-493D-AD0E-E6DD127FC64E}.Release|Any CPU.ActiveCfg = Release|x64
 		{7F6164FF-4A14-493D-AD0E-E6DD127FC64E}.Release|x86.ActiveCfg = Release|x86
+		{CE3F8989-5EAF-4665-BB33-BC8C7DD37E23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE3F8989-5EAF-4665-BB33-BC8C7DD37E23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE3F8989-5EAF-4665-BB33-BC8C7DD37E23}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CE3F8989-5EAF-4665-BB33-BC8C7DD37E23}.Debug|x86.Build.0 = Debug|Any CPU
+		{CE3F8989-5EAF-4665-BB33-BC8C7DD37E23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE3F8989-5EAF-4665-BB33-BC8C7DD37E23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE3F8989-5EAF-4665-BB33-BC8C7DD37E23}.Release|x86.ActiveCfg = Release|Any CPU
+		{CE3F8989-5EAF-4665-BB33-BC8C7DD37E23}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -90,6 +100,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B543E594-A653-4E16-9203-5C833D430A8C} = {AB5DC13F-190F-4CA3-97B1-971E8C1C3F6A}
 		{1F9944A5-5A8C-4298-A2A7-B57FBBE6D6CD} = {AB5DC13F-190F-4CA3-97B1-971E8C1C3F6A}
+		{CE3F8989-5EAF-4665-BB33-BC8C7DD37E23} = {AB5DC13F-190F-4CA3-97B1-971E8C1C3F6A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1B22E9CC-7870-4A97-9957-F137E6442DB6}

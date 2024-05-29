@@ -1,6 +1,10 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Xml;
+using Microsoft.Build.Definition;
+using Microsoft.Build.Evaluation;
+using Microsoft.Build.Locator;
 
 namespace FindUnusedResources {
 	/// <summary>
@@ -17,12 +21,15 @@ namespace FindUnusedResources {
 				projectPath = args[0];
 			} else {
 				//from exe location (Sources\Tools\FindUnusedResources\bin\Debug) get up to solution folder and to main project file (Sources\LogicCircuit\LogicCircuit.csproj)
-				projectPath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!, @"..\..\..\..\LogicCircuit\LogicCircuit.csproj"));
+				projectPath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!, @"..\..\..\..\..\LogicCircuit\LogicCircuit.csproj"));
 			}
 			Console.WriteLine("Checking project \"{0}\"", projectPath);
 
 			List<string> resourceFiles = new List<string>();
 			List<string> sourceFiles = new List<string>();
+
+			// Register the most recent version of MSBuild
+			MSBuildLocator.RegisterInstance(MSBuildLocator.QueryVisualStudioInstances().OrderByDescending(instance => instance.Version).First());
 
 			if(LoadProject(projectPath, resourceFiles, sourceFiles)) {
 				HashSet<string> unused = new HashSet<string>();
@@ -58,31 +65,20 @@ namespace FindUnusedResources {
 
 		private static bool LoadProject(string projectFile, List<string> resourceList, List<string> sourceList) {
 			string root = Path.GetDirectoryName(projectFile)!;
+			Project project = Project.FromFile(projectFile, new ProjectOptions());
 
-			XmlDocument project = new XmlDocument();
-			project.Load(projectFile);
-			XmlNamespaceManager nsmgr = new XmlNamespaceManager(project.NameTable);
-			nsmgr.AddNamespace(project.DocumentElement!.Prefix, project.DocumentElement.NamespaceURI);
-			nsmgr.AddNamespace("p", project.DocumentElement.NamespaceURI);
+			List<ProjectItem> resxList = project.GetItems("EmbeddedResource").Where(item =>
+				item.EvaluatedInclude.EndsWith(".resx", StringComparison.OrdinalIgnoreCase) &&
+				!string.IsNullOrWhiteSpace(item.GetMetadataValue("Generator"))
+			).ToList();
+			resourceList.AddRange(resxList.Select(item => Path.Combine(root, item.EvaluatedInclude)));
 
-			return Include(root, resourceList, project.SelectNodes("/p:Project/p:ItemGroup/p:EmbeddedResource[p:Generator='ResXFileCodeGenerator' or p:Generator='PublicResXFileCodeGenerator']", nsmgr))
-				&& Include(root, sourceList, project.SelectNodes("/p:Project/p:ItemGroup/p:Compile", nsmgr))
-				&& Include(root, sourceList, project.SelectNodes("/p:Project/p:ItemGroup/p:Page", nsmgr))
-			;
-		}
+			List<ProjectItem> csList = project.GetItems("Compile").ToList();
+			sourceList.AddRange(csList.Select(item => Path.Combine(root, item.EvaluatedInclude)));
 
-		private static bool Include(string root, List<string> list, XmlNodeList? nodeList) {
-			if(nodeList != null && 0 < nodeList.Count) {
-				foreach(XmlNode node in nodeList) {
-					XmlAttribute attribute = node.Attributes!["Include"]!;
-					if(attribute == null) {
-						Console.WriteLine("Bad project");
-						return false;
-					}
-					string value = attribute.Value.Trim();
-					list.Add(Path.Combine(root, value));
-				}
-			}
+			List<ProjectItem> xamlList = project.GetItems("Page").ToList();
+			sourceList.AddRange(xamlList.Select(item => Path.Combine(root, item.EvaluatedInclude)));
+
 			return true;
 		}
 
