@@ -12,6 +12,8 @@
 		<RuntimeIdentifier Condition="'$(RuntimeIdentifier)' == ''">win-x64</RuntimeIdentifier>
 		<PublishSingleFile>true</PublishSingleFile>
 		<PublishReadyToRun>false</PublishReadyToRun>
+
+		<BuildOutputFolder>$(MSBuildThisFileDirectory)BuildResults</BuildOutputFolder>
 	</PropertyGroup>
 
 </Project>

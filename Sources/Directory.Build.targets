@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
+	<PropertyGroup>
+		<ZipApp>$(ProgramW6432)\7-Zip\7z.exe</ZipApp>
+	</PropertyGroup>
+
 	<Target Name="PublishProject" AfterTargets="AfterBuild" Condition="'$(Configuration)' == 'Release' and '$(PublishFolder)' != ''">
 		<PropertyGroup>
 			<Command>dotnet publish $(MSBuildProjectFile) --no-build -o $(PublishFolder) -c Release -r $(RuntimeIdentifier)</Command>
@@ -46,9 +50,8 @@
 		<!--<Message Importance="high" Text=">>> FindIronPythonStdLibFiles IronPythonStdLibDir: $(IronPythonStdLibDir)"/>-->
 	</Target>
 
-	<Target Name="ZipIronPythonStdLibFiles" AfterTargets="FindIronPythonStdLibFiles" Inputs="@(IronPythonStdLibFiles)" Outputs="$(IronPythonStdLibDir)\..\IPyLib.zip">
+	<Target Name="ZipIronPythonStdLibFiles" AfterTargets="FindIronPythonStdLibFiles" Inputs="@(IronPythonStdLibFiles)" Outputs="$(IronPythonStdLibDir)\..\IPyLib.zip" Condition="'$(MSBuildProjectName)' == 'LogicCircuit'">
 		<PropertyGroup>
-			<ZipApp>$(ProgramW6432)\7-Zip\7z.exe</ZipApp>
 			<IronPythonStdLibZip>IPyLib.zip</IronPythonStdLibZip>
 			<IronPythonStdLibZipPath>$(IronPythonStdLibDir)\..\$(IronPythonStdLibZip)</IronPythonStdLibZipPath>
 
@@ -65,24 +68,56 @@
 
 	<Target Name="ZipSetup">
 		<PropertyGroup>
-			<ZipApp>$(ProgramW6432)\7-Zip\7z.exe</ZipApp>
+			<BuildOutputFolder Condition="'$(BuildOutputFolder)' == ''">$(MSBuildThisFileDirectory)BuildResults</BuildOutputFolder>
+
 			<LicenseTxt>$(MSBuildThisFileDirectory)License.txt</LicenseTxt>
 
-			<Setup32Root>$(MSBuildThisFileDirectory)Setup\bin\Release_x86</Setup32Root>
-			<Zip32>"$(ZipApp)" a $(Setup32Root)\LogicCircuit.Setup32.$(LogicCircuitVersion).zip -mx9 $(Setup32Root)\LogicCircuitSetup_32.msi $(LicenseTxt)</Zip32>
+			<Platform Condition="'$(Platform)' == ''">x64</Platform>
+			<Bitness>32</Bitness>
+			<Bitness Condition="'$(Platform)' == 'x64'">64</Bitness>
 
-			<Setup64Root>$(MSBuildThisFileDirectory)Setup\bin\Release_x64</Setup64Root>
-			<Zip64>"$(ZipApp)" a $(Setup64Root)\LogicCircuit.Setup64.$(LogicCircuitVersion).zip -mx9 $(Setup64Root)\LogicCircuitSetup_64.msi $(LicenseTxt)</Zip64>
+			<SetupRoot>$(MSBuildThisFileDirectory)Setup\bin\Release_$(Platform)</SetupRoot>
+			<ZipFileName>$(BuildOutputFolder)\LogicCircuit.Setup$(Bitness)bit.$(LogicCircuitVersion).zip</ZipFileName>
+
+			<ZipCmd>"$(ZipApp)" a "$(ZipFileName)" -mx9 "$(SetupRoot)\LogicCircuitSetup_$(Bitness).msi" "$(LicenseTxt)"</ZipCmd>
 		</PropertyGroup>
 
 		<!--<Message Importance="high" Text=">>> ZipSetup"/>-->
 
 		<Error Condition="!Exists($(ZipApp))" Text="7-zip ('$(ZipApp)') not found on this machine. Please install it before creating zip file."/>
 
-		<Exec Command="del $(Setup32Root)\*.zip"/>
-		<Exec Command="del $(Setup64Root)\*.zip"/>
+		<Delete Condition="Exists($(ZipFileName))" Files="$(ZipFileName)"/>
 
-		<Exec Command="$(Zip32)"/>
-		<Exec Command="$(Zip64)"/>
+		<Exec Command="$(ZipCmd)"/>
+	</Target>
+
+	<Target Name="ZipBinaries" AfterTargets="Publish" Condition="'$(Configuration)' == 'Release' and '$(MSBuildProjectName)' == 'LogicCircuit' and '$(PublishDir)' != ''">
+		<ItemGroup>
+			<ZipItem Include="$(MSBuildThisFileDirectory)License.txt"/>
+			<ZipItem Include="$(PublishDir)*.exe"/>
+			<ZipItem Include="$(PublishDir)*.dll"/>
+			<ZipItem Include="$(PublishDir)*.pdb"/>
+			<ZipItem Include="$(PublishDir)IPyLib.zip"/>
+		</ItemGroup>
+
+		<PropertyGroup>
+			<Bitness Condition="'$(RuntimeIdentifier)' == 'win-x64'">64</Bitness>
+			<Bitness Condition="'$(RuntimeIdentifier)' == 'win-x86'">32</Bitness>
+			<ZipFileName>$(BuildOutputFolder)\LogicCircuit_$(Bitness)bit.$(LogicCircuitVersion).zip</ZipFileName>
+
+			<ItemList>@(ZipItem)</ItemList>
+			<Quotes>" "</Quotes>
+			<QuotedList>"$(ItemList.Replace(";", $(Quotes)))"</QuotedList>
+
+			<ZipCmd>"$(ZipApp)" a "$(ZipFileName)" -mx9 $(QuotedList)</ZipCmd>
+		</PropertyGroup>
+
+		<Error Condition="'$(Bitness)' == ''" Text="Can't determine bitness 32 or 64. RuntimeIdentifier property was not set."/>
+		<Error Condition="!Exists($(ZipApp))" Text="7-zip ('$(ZipApp)') not found on this machine. Please install it before creating zip file."/>
+
+		<Delete Condition="Exists($(ZipFileName))" Files="$(ZipFileName)"/>
+
+		<!--<Message Importance="high" Text="ZipBinaries command: $(ZipCmd)"/>-->
+		<Exec Command="$(ZipCmd)"/>
 	</Target>
 </Project>
