@@ -1,7 +1,7 @@
 ﻿<Project>
 
 	<PropertyGroup>
-		<LogicCircuitVersion>2.24.05.25</LogicCircuitVersion>
+		<LogicCircuitVersion>2.24.05.26</LogicCircuitVersion>
 		<ToolsFolder>$(MSBuildThisFileDirectory)Tools</ToolsFolder>
 	</PropertyGroup>
 
