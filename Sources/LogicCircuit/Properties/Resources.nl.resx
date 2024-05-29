@@ -1231,15 +1231,6 @@ Zo'n circuit kan meerdere keren gebruikt worden bij andere circuits omdat potent
 	<data name="TitleActualFrequency" xml:space="preserve">
     <value>Actuele frequentie:</value>
   </data>
-	<data name="ToolTipIsDisplay" xml:space="preserve">
-    <value>Als je in Logic Circuit aangeeft dat je visuele elementen wilt weergeven
-dan zullen alle display-symbolen van het circuit zichtbaar zijn.
-Dispay's zijn: LED, LED Matrix, Button of ander elementen,
-die visuele weergave mogelijkheden hebben.</value>
-  </data>
-	<data name="TitleIsDisplay" xml:space="preserve">
-    <value>Geef visuele elementen weer op het symbool</value>
-  </data>
 	<data name="WireDisplayBitWidth" xml:space="preserve">
     <value>Woord breedte: {0}</value>
   </data>

@@ -1217,13 +1217,6 @@ Circuiti di questo tipo non possono essere utilizzati più di una volta su altri
 	<data name="ToolTipFontSize" xml:space="preserve">
     <value>Dimensione del carattere</value>
   </data>
-	<data name="TitleIsDisplay" xml:space="preserve">
-    <value>_Simbolo visualizzato</value>
-  </data>
-	<data name="ToolTipIsDisplay" xml:space="preserve">
-    <value>Quando si contrassegna circuito logico come display 
-tutti i simboli del display saranno visibili sul suo simbolo.</value>
-  </data>
 	<data name="TitleCredits" xml:space="preserve">
     <value>Crediti:</value>
   </data>

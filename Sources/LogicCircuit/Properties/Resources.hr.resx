@@ -1229,12 +1229,6 @@ Omogućuje odabir veličine i dubine boje/šeme:
 	<data name="ToolTipDevicePinSide" xml:space="preserve">
     <value>Odaberite stranu na kojoj će se pin nalaziti</value>
   </data>
-	<data name="ToolTipIsDisplay" xml:space="preserve">
-    <value>Kada označite Logic Circuit za prikaz vizualnih elemenata
-svi prikazni simboli na ovom krugu bit će vidljivi uživo na njegovim simbolima.
-Zasloni su: LED, LED Matrix, Graphics Array, Button, ili drugi
-Logički sklop koji prikazuje svoje vizualne elemente.</value>
-  </data>
 	<data name="TitleIsToggle" xml:space="preserve">
     <value>Pre_baci</value>
   </data>
@@ -1322,9 +1316,6 @@ Logički sklop koji prikazuje svoje vizualne elemente.</value>
 	<data name="ErrorManyMemoryData" xml:space="preserve">
     <value>Krug {0} sadrži {1} koji čuva podatke između pokretanja.
 Takav sklop se ne može koristiti više od jednom na drugim sklopovima jer će se na jednom memorijskom modulu pohraniti potencijalno različiti skupovi podataka.</value>
-  </data>
-	<data name="TitleIsDisplay" xml:space="preserve">
-    <value>Prikaz vizualnih elemenata na _simbolu</value>
   </data>
 	<data name="MessageRestartRequared" xml:space="preserve">
     <value>Vaš odabir jezika je promijenjen. Morate ponovo pokrenuti aplikaciju kako bi se izvršile nove postavke.</value>

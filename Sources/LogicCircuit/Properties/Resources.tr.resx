@@ -964,9 +964,6 @@ Son Dosya listesinden referansı kaldırmak istiyor musunuz?</value>
     <value>{0} devresi, veriler arasında veriyi koruyan {1} içerir.
 Potansiyel olarak farklı veri setleri bir bellek modülünde depolanacağı için bu devre diğer devreler üzerinde bir kereden fazla kullanılamaz.</value>
   </data>
-	<data name="TitleIsDisplay" xml:space="preserve">
-    <value>Sembolde _görsel öğeleri göster</value>
-  </data>
 	<data name="MessageRestartRequared" xml:space="preserve">
     <value>Dil tercihiniz değiştirilmiştir. Yeni ayarların uygulanabilmesi için yazılımı yeniden başlatmanız gerekmektedir.</value>
   </data>
@@ -1173,12 +1170,6 @@ Bu dosyanın otomatik kaydedilmiş durumunu yüklemek istiyor musunuz?</value>
   </data>
 	<data name="ToolTipMemoryOnStart" xml:space="preserve">
     <value>Güç açıkken RAM'ın nasıl başlatılacağını seç</value>
-  </data>
-	<data name="ToolTipIsDisplay" xml:space="preserve">
-    <value>Görsel öğeleri görüntülemek için Mantık Devresi'ni işaretlediğinizde
-Bu devre üzerindeki tüm ekran sembolleri üzerinde canlı olarak görünecektir.
-Ekranlar: LED, LED Matrix, Grafik Dizisi, Buton veya diğer
-Görsel elemanlarını gösteren Mantık Devresi.</value>
   </data>
 	<data name="ToolTipDevicePinSide" xml:space="preserve">
     <value>Pinin bulunduğu tarafı seçin</value>

@@ -2294,13 +2294,6 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Di_splay visual elements on symbol.
-		/// </summary>
- 		public static string TitleIsDisplay {
-			get { return ResourceManager.GetString("TitleIsDisplay", Culture); }
-		}
-
-		/// <summary>
 		/// Looks up a localized string similar to Your language selection has been changed. You need to restart the application so the new settings will take place..
 		/// </summary>
  		public static string MessageRestartRequared {
@@ -2515,16 +2508,6 @@ namespace LogicCircuit.Properties {
 		/// </summary>
  		public static string TitleCredits {
 			get { return ResourceManager.GetString("TitleCredits", Culture); }
-		}
-
-		/// <summary>
-		/// Looks up a localized string similar to When you mark Logic Circuit to display visual elements
-		/// all display symbols on this circuit will be visible live on its symbols.
-		/// Displays are: LED, LED Matrix, Graphics Array, Button, or other
-		/// Logic Circuit that displaying its visual elements..
-		/// </summary>
- 		public static string ToolTipIsDisplay {
-			get { return ResourceManager.GetString("ToolTipIsDisplay", Culture); }
 		}
 
 		/// <summary>

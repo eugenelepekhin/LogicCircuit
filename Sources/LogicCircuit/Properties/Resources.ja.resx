@@ -974,13 +974,6 @@
 	<data name="MessageRestartRequared" xml:space="preserve">
 		<value>言語選択が変更されました。新しい設定を有効にするためにはアプリケーションを再起動する必要があります。</value>
 	</data>
-	<data name="TitleIsDisplay" xml:space="preserve">
-		<value>回路のシンボルにビジュアル要素を表示する</value>
-	</data>
-	<data name="ToolTipIsDisplay" xml:space="preserve">
-		<value>ビジュアル要素を表示するように回路を設定すると、この回路上にあるすべての表示要素がこの回路のシンボルとしても見えるようになります。
-表示要素とは、LED、LEDマトリクス、グラフィックディスプレイ、ボタン、そしてビジュアル要素を表示するように設定された他の回路のことです。</value>
-	</data>
 	<data name="ToolTipDescriptorClock" xml:space="preserve">
 		<value>0と1を繰り返し出力する発振器です。回路を協調動作させるために使われます。</value>
 	</data>

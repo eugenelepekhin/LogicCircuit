@@ -1120,12 +1120,6 @@
 	<data name="WebSiteDownloadUri" xml:space="preserve">
     <value>https://www.logiccircuit.org/download.html</value>
   </data>
-	<data name="TitleIsDisplay" xml:space="preserve">
-    <value>회로의 모습을 시각적인 형태로 표시</value>
-  </data>
-	<data name="ToolTipIsDisplay" xml:space="preserve">
-    <value>선택 시 화면의 모든 회로의 모습(LED, LED 행렬, 버튼, 다른 회로 등)이 시각적인 형태로 표시됩니다.</value>
-  </data>
 	<data name="CaptionName" xml:space="preserve">
     <value>이름</value>
   </data>

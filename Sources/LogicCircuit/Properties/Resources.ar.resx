@@ -1153,18 +1153,11 @@
 	<data name="TitleFileOpen" xml:space="preserve">
     <value>...</value>
   </data>
-	<data name="TitleIsDisplay" xml:space="preserve">
-    <value>قم بعرض العناصر على الرمز</value>
-  </data>
 	<data name="WebSiteUri" xml:space="preserve">
     <value>https://www.logiccircuit.org/</value>
   </data>
 	<data name="WebSiteDownloadUri" xml:space="preserve">
     <value>https://www.logiccircuit.org/download.html</value>
-  </data>
-	<data name="ToolTipIsDisplay" xml:space="preserve">
-    <value>عندما تقوم بتفعيل خيار عرض العناصر كل الرموز في هذه الدارة سوف تظهر على رموزها ,العناصر هي:
-LED, مصفوفة LED ,زر , أو اية عناصر اخرى</value>
   </data>
 	<data name="WireDisplayBitWidth" xml:space="preserve">
     <value>عرض البت: {0}</value>

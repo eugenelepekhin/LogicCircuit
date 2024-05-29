@@ -1088,9 +1088,6 @@ Iš</value>
 	<data name="TitleMemoryOnStart" xml:space="preserve">
     <value>Pradžioje ušpildyti:</value>
   </data>
-	<data name="TitleIsDisplay" xml:space="preserve">
-    <value>Paroditi vaisdinių elementus ant simbolio</value>
-  </data>
 	<data name="TitlePinSide" xml:space="preserve">
     <value>Kaiščio pusė:</value>
   </data>
@@ -1309,13 +1306,6 @@ Iš</value>
   </data>
 	<data name="MessageRestartRequared" xml:space="preserve">
     <value>Jūsų kalbos pasirinkimas buvo pakeistas. Jum reikia programą paleisti iš naujo ,kad pakeitimai būtų matomi.</value>
-  </data>
-	<data name="ToolTipIsDisplay" xml:space="preserve">
-    <value>Kai yra pažymima rodyti vizualinius elementus
-visi simboliai grandinėje bus matomi.
-Rodomi yra: LED, LED Matrica, Grafinis masyvas,
-myktukas, ar kitos Loginės Grandinės kurios
-rodo savo vizualinius elementus.</value>
   </data>
 	<data name="ToolTipDescriptorClock" xml:space="preserve">
     <value>Generuoti signalą kuris svyruoja nuo 0 iki 1 ir yra

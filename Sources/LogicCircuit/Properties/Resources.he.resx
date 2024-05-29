@@ -956,9 +956,6 @@
 	<data name="TitleInverted" xml:space="preserve">
     <value>‏_הפוך</value>
   </data>
-	<data name="TitleIsDisplay" xml:space="preserve">
-    <value>ה_צג רכיבי תצוגה על הסימן</value>
-  </data>
 	<data name="TitleIsMaximumSpeed1" xml:space="preserve">
     <value>הרצה במהירות המקסימלית</value>
   </data>
@@ -1140,10 +1137,6 @@
 	<data name="ToolTipInputPin" xml:space="preserve">
     <value>קלט ברוחב‏ {0}‏ סיביות - ‏{1}‏</value>
     <comment>{int bitWidth, string pinName}</comment>
-  </data>
-	<data name="ToolTipIsDisplay" xml:space="preserve">
-    <value>כאשר נבחרה תצוגת רכיבי תצוגה עבור רכיב, כל רכיבי התצוגה שלו יוצגו על הסימונים שלו.‏
-רכיבת התצוגה הם: ‏LED‏, מטריצת ‏LED‏, כפתור, או מעגל לוגי אחר שמציג את רכיבי התצוגה שלו.‏</value>
   </data>
 	<data name="ToolTipIsMaximumSpeed1" xml:space="preserve">
     <value>גורם למעגל לרוץ בתדירות הגבוהה ביותר הניתנת בהתעלם מהבחירה במחוון שמעל.‏</value>

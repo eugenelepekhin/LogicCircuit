@@ -1227,15 +1227,6 @@ Out</value>
 	<data name="TitleActualFrequency" xml:space="preserve">
     <value>Frecuencia Actual:</value>
   </data>
-	<data name="TitleIsDisplay" xml:space="preserve">
-    <value>Mostrar elementos visuales</value>
-  </data>
-	<data name="ToolTipIsDisplay" xml:space="preserve">
-    <value>Cuando usted selecciona un circuito para mostrar sus elementos visuales
-todos los símbolos de pantalla en este circuito será visibles.
-Las elementos a mostrar son: LED, LED de matriz, botón u otro circuito lógico 
-(elementos visuales).</value>
-  </data>
 	<data name="WireDisplayBitWidth" xml:space="preserve">
     <value>Tamaño de Bit: {0}</value>
   </data>

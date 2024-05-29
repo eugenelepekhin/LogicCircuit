@@ -1128,9 +1128,6 @@ El kívánod távolítani a nemrég használt fájlok listájáról?</value>
 Such circuit cannot be used more than once on other circuits as potentially different sets of data will be stored on one memory module.</value>
     <comment>{string circuitName, string ramNotation}</comment>
   </data>
-	<data name="TitleIsDisplay" xml:space="preserve">
-    <value>Di_splay visual elements on symbol</value>
-  </data>
 	<data name="MessageRestartRequared" xml:space="preserve">
     <value>A program nyelve megváltozott. A változások a program újraindítása után lépnek életbe.</value>
   </data>
@@ -1223,12 +1220,6 @@ Such circuit cannot be used more than once on other circuits as potentially diff
   </data>
 	<data name="TitleCredits" xml:space="preserve">
     <value>Fejlesztők:</value>
-  </data>
-	<data name="ToolTipIsDisplay" xml:space="preserve">
-    <value>When you mark Logic Circuit to display visual elements 
-all display symbols on this circuit will be visible live on its symbols.
-Displays are: LED, LED Matrix, Button, or other Logic Circuit 
-that displaying its visual elements.</value>
   </data>
 	<data name="CaptionName" xml:space="preserve">
     <value>Név</value>

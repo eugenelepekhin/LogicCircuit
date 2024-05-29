@@ -1227,17 +1227,8 @@ Tal circuito não pode ser usado mais de uma vez em outros circuitos potencialme
 	<data name="CaptionName" xml:space="preserve">
     <value>Nome</value>
   </data>
-	<data name="ToolTipIsDisplay" xml:space="preserve">
-    <value>Quando o Logic Circuit realizar a indicação de elementos visuais
-para você, todos os símbolos ligados neste circuito serão acesos.
-Os dispositivos displays são: LED, Matriz de LED, Botão
-ou outro circuito lógico que indique elementos visuais.</value>
-  </data>
 	<data name="TitleActualFrequency" xml:space="preserve">
     <value>Frequência Atual:</value>
-  </data>
-	<data name="TitleIsDisplay" xml:space="preserve">
-    <value>Amostrar elementos visuais no símbolo</value>
   </data>
 	<data name="WireDisplayBitWidth" xml:space="preserve">
     <value>Nº de Bits: {0}</value>

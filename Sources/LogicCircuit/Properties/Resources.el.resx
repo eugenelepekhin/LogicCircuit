@@ -1172,15 +1172,6 @@
 	<data name="TitleActualFrequency" xml:space="preserve">
     <value>Πραγματική συχνότητα:</value>
   </data>
-	<data name="TitleIsDisplay" xml:space="preserve">
-    <value>Εμφάνιση οπτικών στοιχείων σχετικά με το σύμβολο</value>
-  </data>
-	<data name="ToolTipIsDisplay" xml:space="preserve">
-    <value>Όταν επιλέγετε λογικό κύκλωμα για να εμφανίσετε τα οπτικά
-στοιχεία, όλα τα σύμβολα σε αυτό το κύκλωμα θα είναι ορατά.
-Θα εμφανίζονται: Δίοδος εκπομπής φωτός, πίνακας δίοδου
-εκπομπής φωτός, Κουμπί, ή άλλο λογικό κύκλωμα.</value>
-  </data>
 	<data name="WireDisplayBitWidth" xml:space="preserve">
     <value>Πλάτος του bit: {0}</value>
   </data>

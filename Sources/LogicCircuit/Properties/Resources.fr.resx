@@ -1001,14 +1001,6 @@ Sortie</value>
 	<data name="TitleActualFrequency" xml:space="preserve">
     <value>Fréquence actuelle :</value>
   </data>
-	<data name="TitleIsDisplay" xml:space="preserve">
-    <value>Affic_her les éléments visuels dans la liste des symboles</value>
-  </data>
-	<data name="ToolTipIsDisplay" xml:space="preserve">
-    <value>Quand vous sélectionner cette option, tous les symboles du circuit
-seront visibles à la place du symbole de base du circuit en cours.
-Les éléments sont : DEL, Matrice de DEL, Bouton, ou autre circuit logique.</value>
-  </data>
 	<data name="PinOutName" xml:space="preserve">
     <value>q</value>
   </data>

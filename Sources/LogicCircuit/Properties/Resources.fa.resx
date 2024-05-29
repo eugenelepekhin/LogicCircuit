@@ -858,9 +858,6 @@
     <value>مدار {0} شامل {1} می باشد که دیتا را بین اجرا ها حفظ می کند.
 چنین مداری نمی تواند در مدار های دیگر بیش از یکبار اجرا شود.</value>
   </data>
-	<data name="TitleIsDisplay" xml:space="preserve">
-    <value>عناصر بصری روی شئ نشان داده شود</value>
-  </data>
 	<data name="MessageRestartRequared" xml:space="preserve">
     <value>شما زبان برنامه را تغییر دادید. برای اعمال تغییرات برنامه باید یک بار بسته و سپس باز شود.</value>
   </data>
@@ -953,9 +950,6 @@
   </data>
 	<data name="TitleCredits" xml:space="preserve">
     <value>سازندگان:</value>
-  </data>
-	<data name="ToolTipIsDisplay" xml:space="preserve">
-    <value>زمانی که این گزینه انتخاب شده باشد تمام شئ های نمایشگر (مانند LED) در این مدار به طور زنده قابل مشاهده خواهند بود.</value>
   </data>
 	<data name="CaptionName" xml:space="preserve">
     <value>نام</value>

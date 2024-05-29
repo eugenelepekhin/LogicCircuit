@@ -1156,14 +1156,6 @@
 	<data name="CommandTruthTable" xml:space="preserve">
     <value>Таблиця істинності</value>
   </data>
-	<data name="ToolTipIsDisplay" xml:space="preserve">
-    <value>Якщо ви виберете відобразити дане поле, всі візуальні 
-елементи вводу-виводу будуть відображатися в розділі 
-"Проект" у вигляді компонованого елемента.</value>
-  </data>
-	<data name="TitleIsDisplay" xml:space="preserve">
-    <value>Відображати візуальні елементи</value>
-  </data>
 	<data name="CommandEditAlignJustify" xml:space="preserve">
     <value>Виключення</value>
   </data>

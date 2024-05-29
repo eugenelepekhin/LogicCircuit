@@ -949,9 +949,6 @@ Vill du ta bort den från Senate Filler listan</value>
 		<value>Krets {0} innehåller {1} som sparar data mellan gångerna.
 sådan krets kan inte användas mer än en gång per krets för att det kommer sparas mer än ett set av data kan sparas på en minnes module.</value>
 	</data>
-	<data name="TitleIsDisplay" xml:space="preserve">
-		<value>Vi_sa sisuella element på symbol</value>
-	</data>
 	<data name="MessageRestartRequared" xml:space="preserve">
 		<value>Ditt språk har ändrats. du behöver starta om programet so de nya instälningarne tar effect.</value>
 	</data>
@@ -1041,12 +1038,6 @@ sådan krets kan inte användas mer än en gång per krets för att det kommer s
 	</data>
 	<data name="TitleCredits" xml:space="preserve">
 		<value>Medvärkan:</value>
-	</data>
-	<data name="ToolTipIsDisplay" xml:space="preserve">
-		<value>När du markerar Logisk Krets till att visa visuela element
-alla visuella symboler på denna krets kommer bli synliga live på deras symboler.
-Skärmar är: LED, LED Matrix, Grafisk array, knapp, eller andra
-logiska kretsar som visar sisuella element</value>
 	</data>
 	<data name="CaptionName" xml:space="preserve">
 		<value>Namn</value>

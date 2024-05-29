@@ -1194,9 +1194,6 @@ Do zapisu dochodzi przy zboczu {0}</value>
 	<data name="ErrorManyMemoryData" xml:space="preserve">
     <value>Obwód {0} zawiera {1} który zachowuje dane między uruchomieniami. Taki obwód nie moze być użyty w innych obwodów ponieważ przechowywane dane mogą się różnić.</value>
   </data>
-	<data name="TitleIsDisplay" xml:space="preserve">
-    <value>Wyświetlaj elementy graficzne na symbolu</value>
-  </data>
 	<data name="MessageRestartRequared" xml:space="preserve">
     <value>Język uległ zmianie. Aby zastosować zmianę uruchom ponownie aplikację.</value>
   </data>
@@ -1217,12 +1214,6 @@ Do zapisu dochodzi przy zboczu {0}</value>
   </data>
 	<data name="TitleCredits" xml:space="preserve">
     <value>Autorzy:</value>
-  </data>
-	<data name="ToolTipIsDisplay" xml:space="preserve">
-    <value>Gdy zaznaczysz aby wyświetlały się elementy graficzne
-na symbolach ich stan będzie widoczny na żywo.
-Dotyczy to Diod LED, matryc diod LED,
-wyświetlaczy graficznych i przycisków.</value>
   </data>
 	<data name="CaptionPinSide" xml:space="preserve">
     <value>Strona portu</value>

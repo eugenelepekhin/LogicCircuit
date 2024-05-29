@@ -568,9 +568,6 @@
 	<data name="ToolTipMemoryOnStart" xml:space="preserve">
     <value>选择加电时 RAM 的初始化方式</value>
   </data>
-	<data name="TitleIsDisplay" xml:space="preserve">
-    <value>使用符号显示视觉元素(_S)</value>
-  </data>
 	<data name="MessageRestartRequared" xml:space="preserve">
     <value>您需要重启应用程序使选择的语言生效</value>
   </data>
@@ -1051,11 +1048,6 @@
   </data>
 	<data name="ToolTipPinSide" xml:space="preserve">
     <value>选择新引脚在电路示意图中的倚靠的边</value>
-  </data>
-	<data name="ToolTipIsDisplay" xml:space="preserve">
-    <value>当你标注逻辑电路显示视觉元素时，
-所有的视觉符号都会显示在电路示意图上，包括：
-LED，LED矩阵，图形序列，按钮和其他逻辑电路。</value>
   </data>
 	<data name="GateAndNotation" xml:space="preserve">
     <value>&amp;</value>
