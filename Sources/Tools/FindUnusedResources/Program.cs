@@ -20,7 +20,7 @@ namespace FindUnusedResources {
 				projectPath = args[0];
 			} else {
 				//from exe location (Sources\Tools\FindUnusedResources\bin\Debug) get up to solution folder and to main project file (Sources\LogicCircuit\LogicCircuit.csproj)
-				projectPath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(AppContext.BaseDirectory)!, @"..\..\..\..\..\..\LogicCircuit\LogicCircuit.csproj"));
+				projectPath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(AppContext.BaseDirectory)!, @"..\..\..\..\..\LogicCircuit\LogicCircuit.csproj"));
 			}
 			Console.WriteLine("Checking project \"{0}\"", projectPath);
 
