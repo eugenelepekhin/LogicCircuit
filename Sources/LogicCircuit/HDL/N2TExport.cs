@@ -12,6 +12,11 @@ using System.Text.RegularExpressions;
 namespace LogicCircuit {
 	/// <summary>
 	/// Nand to Tetris export.
+	/// Some useful links.
+	/// Actual homepage of N2T: https://www.nand2tetris.org/
+	/// N2T HDL documentation: https://drive.google.com/file/d/1dPj4XNby9iuAs-47U9k3xtYy9hJ-ET0T/view
+	/// Same but in Verilog:
+	/// https://github.com/jopdorp/nand2tetris-verilog
 	/// </summary>
 	internal class N2TExport : HdlExport {
 		private readonly Dictionary<string, string> PinName = new Dictionary<string, string>() {

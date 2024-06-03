@@ -8,6 +8,14 @@ using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace LogicCircuit {
+	/// <summary>
+	/// Export to Verilog language.
+	/// Some useful links.
+	/// Good tutorial: https://www.chipverify.com/
+	/// Another one: https://www.asic-world.com/
+	/// And enother one: http://www.emmelmann.org/Pages/Library_TutorialsWS.html
+	/// On line test bench. Run generated code there: https://www.edaplayground.com/
+	/// </summary>
 	internal class VerilogExport : HdlExport {
 		private readonly Regex identifier = new Regex(@"^[a-zA-Z_][a-zA-Z0-9_$]*$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
 		private readonly HashSet<string> keywords = new HashSet<string>() {
