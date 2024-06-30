@@ -3439,7 +3439,7 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to User terminated HDL export.
+		/// Looks up a localized string similar to User has terminated HDL export.
 		/// </summary>
  		public static string ErrorHdlExportAborted {
 			get { return ResourceManager.GetString("ErrorHdlExportAborted", Culture); }

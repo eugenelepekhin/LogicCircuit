@@ -1496,4 +1496,22 @@
 	<data name="WarningVerilogFloatingJam" xml:space="preserve">
 		<value>تحذير: {0} المنفذ المتدلي عائما على الرمز {1}{2} على {3}. يختلف سلوك المنافذ غير المتصلة على LogicCircuit و Verilog.</value>
 	</data>
+	<data name="ErrorHdlExportAborted" xml:space="preserve">
+		<value>أنهى المستخدم تصدير HDL</value>
+	</data>
+	<data name="ErrorHdlMemoryDialPort" xml:space="preserve">
+		<value>ذاكرة المنفذ المزدوج غير مدعومة {0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMBitWidth" xml:space="preserve">
+		<value>يدعم {0} فقط 3 أو 6 أو 9 أو 12 أو 14 بت من العنوان و 16 بت من البيانات في {0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMWriteOn1" xml:space="preserve">
+		<value>يدعم {0} الكتابة فقط عندما تتغير إشارة الكتابة من 1 إلى 0 في {0}{1}</value>
+	</data>
+	<data name="ErrorHdlROMBitWidth" xml:space="preserve">
+		<value>يدعم {0} عنوان 15 بت فقط وبيانات 16 بت في {0}{1}</value>
+	</data>
+	<data name="MessageHdlExportDone" xml:space="preserve">
+		<value>تم الانتهاء من تصدير HDL مع {0} أخطاء</value>
+	</data>
 </root>

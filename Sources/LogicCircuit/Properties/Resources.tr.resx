@@ -1547,4 +1547,22 @@ temelde bir çoğullayıcıya eşdeğerdir.</value>
 	<data name="WarningVerilogFloatingJam" xml:space="preserve">
 		<value>Uyarı: sarkan bağlantı noktası {0} {3}'de {1}{2} sembolü üzerinde yüzer. Bağlı olmayan bağlantı noktalarının davranışı LogicCircuit ve Verilog'da farklıdır.</value>
 	</data>
+	<data name="ErrorHdlExportAborted" xml:space="preserve">
+		<value>Kullanıcı HDL dışa aktarımını sonlandırdı</value>
+	</data>
+	<data name="ErrorHdlMemoryDialPort" xml:space="preserve">
+		<value>Çift bağlantı noktalı bellek {0}{1} desteklenmez</value>
+	</data>
+	<data name="ErrorHdlRAMBitWidth" xml:space="preserve">
+		<value>{0} yalnızca 3, 6, 9, 12 veya 14 bit adresi ve 16 bit veriyi destekler{0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMWriteOn1" xml:space="preserve">
+		<value>{0} yalnızca yazma sinyali 1'den 0'a değiştiğinde yazmayı destekler{0}{1}</value>
+	</data>
+	<data name="ErrorHdlROMBitWidth" xml:space="preserve">
+		<value>{0} yalnızca 15 bit adresi ve 16 bit veriyi destekler{0}{1}</value>
+	</data>
+	<data name="MessageHdlExportDone" xml:space="preserve">
+		<value>HDL dışa aktarma işlemi {0} hatalarla tamamlandı</value>
+	</data>
 </root>

@@ -1556,4 +1556,22 @@ Out</value>
 	<data name="WarningVerilogFloatingJam" xml:space="preserve">
 		<value>警告：悬空的端口{0}漂浮在符号{1}{2}上{3}上。未连接端口的行为在 LogicCircuit 和 Verilog 上是不同的。</value>
 	</data>
+	<data name="ErrorHdlExportAborted" xml:space="preserve">
+		<value>用户已终止 HDL 导出</value>
+	</data>
+	<data name="ErrorHdlMemoryDialPort" xml:space="preserve">
+		<value>不支持双端口内存{0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMBitWidth" xml:space="preserve">
+		<value>{0}仅支持 3、6、9、12 或 14 位地址和 16 位数据{0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMWriteOn1" xml:space="preserve">
+		<value>{0}仅支持在{0}{1}中写入信号从 1 变为 0 时写入</value>
+	</data>
+	<data name="ErrorHdlROMBitWidth" xml:space="preserve">
+		<value>{0}仅支持 15 位地址和 16 位数据{0}{1}</value>
+	</data>
+	<data name="MessageHdlExportDone" xml:space="preserve">
+		<value>HDL 导出完成时出现{0}错误</value>
+	</data>
 </root>

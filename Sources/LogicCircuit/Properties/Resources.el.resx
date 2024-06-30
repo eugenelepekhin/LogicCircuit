@@ -1562,4 +1562,22 @@
 	<data name="WarningVerilogFloatingJam" xml:space="preserve">
 		<value>Προειδοποίηση: αιωρούμενο λιμάνι {0} επιπλέει στο σύμβολο {1}{2} στο {3}. Η συμπεριφορά των μη συνδεδεμένων θυρών είναι διαφορετική στο LogicCircuit και στο Verilog.</value>
 	</data>
+	<data name="ErrorHdlExportAborted" xml:space="preserve">
+		<value>Ο χρήστης τερμάτισε την εξαγωγή HDL</value>
+	</data>
+	<data name="ErrorHdlMemoryDialPort" xml:space="preserve">
+		<value>Η μνήμη δύο θυρών δεν υποστηρίζεται {0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMBitWidth" xml:space="preserve">
+		<value>{0} υποστηρίζει μόνο 3, 6, 9, 12 ή 14 bit διεύθυνσης και 16 bit δεδομένων σε {0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMWriteOn1" xml:space="preserve">
+		<value>{0} υποστηρίζει γραφή μόνο όταν το σήμα εγγραφής αλλάζει από 1 σε 0 το {0}{1}</value>
+	</data>
+	<data name="ErrorHdlROMBitWidth" xml:space="preserve">
+		<value>{0} υποστηρίζει μόνο διεύθυνση 15 bit και δεδομένα 16 bit σε {0}{1}</value>
+	</data>
+	<data name="MessageHdlExportDone" xml:space="preserve">
+		<value>Η εξαγωγή HDL ολοκληρώθηκε με σφάλματα {0}</value>
+	</data>
 </root>

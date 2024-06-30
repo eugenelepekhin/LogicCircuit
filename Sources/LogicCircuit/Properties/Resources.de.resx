@@ -1569,4 +1569,22 @@ Möchten Sie den automatisch gespeicherten Stand dieser Datei laden?</value>
 	<data name="WarningVerilogFloatingJam" xml:space="preserve">
 		<value>Warnung: Der baumelnde Port {0} auf dem Symbol {1}{2} auf {3} schwimmen. Das Verhalten von nicht verbundenen Ports unterscheidet sich bei LogicCircuit und Verilog.</value>
 	</data>
+	<data name="ErrorHdlExportAborted" xml:space="preserve">
+		<value>Der Benutzer hat den HDL-Export abgebrochen</value>
+	</data>
+	<data name="ErrorHdlMemoryDialPort" xml:space="preserve">
+		<value>Dual-Port-Speicher wird {0}{1} nicht unterstützt</value>
+	</data>
+	<data name="ErrorHdlRAMBitWidth" xml:space="preserve">
+		<value>{0} unterstützt nur 3, 6, 9, 12 oder 14 Bit Adresse und 16 Bit Daten in {0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMWriteOn1" xml:space="preserve">
+		<value>{0} unterstützt das Schreiben nur, wenn sich das Schreibsignal in {0}{1} von 1 auf 0 ändert</value>
+	</data>
+	<data name="ErrorHdlROMBitWidth" xml:space="preserve">
+		<value>{0} unterstützt nur 15-Bit-Adress- und 16-Bit-Daten in {0}{1}</value>
+	</data>
+	<data name="MessageHdlExportDone" xml:space="preserve">
+		<value>Der HDL-Export wird mit {0} Fehlern abgeschlossen</value>
+	</data>
 </root>

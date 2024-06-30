@@ -1361,4 +1361,22 @@
 	<data name="WarningVerilogFloatingJam" xml:space="preserve">
 		<value>警告:ぶら下がっているポート{0}{3}のシンボル{1}{2}に浮いています。未接続のポートの動作は、LogicCircuit と Verilog で異なります。</value>
 	</data>
+	<data name="ErrorHdlExportAborted" xml:space="preserve">
+		<value>ユーザーが HDL エクスポートを終了しました</value>
+	</data>
+	<data name="ErrorHdlMemoryDialPort" xml:space="preserve">
+		<value>デュアルポートメモリはサポートされていません{0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMBitWidth" xml:space="preserve">
+		<value>{0} は、3、6、9、12、または 14 ビットのアドレスと 16 ビットのデータのみをサポートします{0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMWriteOn1" xml:space="preserve">
+		<value>{0} は、書き込み信号が {0}{1} で 1 から 0 に変化した場合にのみ書き込みをサポートします</value>
+	</data>
+	<data name="ErrorHdlROMBitWidth" xml:space="preserve">
+		<value>{0} {0}{1} では 15 ビットのアドレスと 16 ビットのデータのみをサポートします</value>
+	</data>
+	<data name="MessageHdlExportDone" xml:space="preserve">
+		<value>HDL エクスポートが {0} エラーで終了する</value>
+	</data>
 </root>

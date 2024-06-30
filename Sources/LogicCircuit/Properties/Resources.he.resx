@@ -1599,4 +1599,22 @@
 	<data name="WarningVerilogFloatingJam" xml:space="preserve">
 		<value>אזהרה: יציאה משתלשלת {0} צפה על סמל {1}{2} על {3}. אופן הפעולה של יציאות לא מחוברות שונה ב- LogicCircuit וב- Verilog.</value>
 	</data>
+	<data name="ErrorHdlExportAborted" xml:space="preserve">
+		<value>המשתמש סיים את ייצוא HDL</value>
+	</data>
+	<data name="ErrorHdlMemoryDialPort" xml:space="preserve">
+		<value>זיכרון עם שתי יציאות אינו נתמך {0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMBitWidth" xml:space="preserve">
+		<value>{0} תומך רק ב- 3, 6, 9, 12 או 14 סיביות כתובת ו- 16 סיביות נתונים ב- {0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMWriteOn1" xml:space="preserve">
+		<value>{0} תומך בכתיבה רק כאשר אות הכתיבה משתנה מ- 1 ל- 0 ב- {0}{1}</value>
+	</data>
+	<data name="ErrorHdlROMBitWidth" xml:space="preserve">
+		<value>{0} תומך רק בכתובת של 15 סיביות ובנתוני 16 סיביות {0}{1}</value>
+	</data>
+	<data name="MessageHdlExportDone" xml:space="preserve">
+		<value>ייצוא HDL הסתיים עם שגיאות {0}</value>
+	</data>
 </root>

@@ -1309,4 +1309,22 @@
 	<data name="WarningVerilogFloatingJam" xml:space="preserve">
 		<value>هشدار: {0} پورت اویزان شناور بر روی {1}{2} نماد در {3}. رفتار پورت های غیر مرتبط در LogicCircuit و Verilog متفاوت است.</value>
 	</data>
+	<data name="ErrorHdlExportAborted" xml:space="preserve">
+		<value>کاربر صادرات HDL را خاتمه داده است</value>
+	</data>
+	<data name="ErrorHdlMemoryDialPort" xml:space="preserve">
+		<value>حافظه دو پورت {0}{1} پشتیبانی نمی شود</value>
+	</data>
+	<data name="ErrorHdlRAMBitWidth" xml:space="preserve">
+		<value>{0} تنها از 3، 6، 9، 12 یا 14 بیت ادرس و 16 بیت داده در {0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMWriteOn1" xml:space="preserve">
+		<value>{0} تنها زمانی از نوشتن پشتیبانی می کند که سیگنال نوشتن از 1 به 0 در {0}{1}</value>
+	</data>
+	<data name="ErrorHdlROMBitWidth" xml:space="preserve">
+		<value>{0} تنها از ادرس 15 بیت و داده های 16 بیتی در {0}{1} پشتیبانی می کند</value>
+	</data>
+	<data name="MessageHdlExportDone" xml:space="preserve">
+		<value>صادرات HDL با خطاهای {0} به پایان رسید</value>
+	</data>
 </root>

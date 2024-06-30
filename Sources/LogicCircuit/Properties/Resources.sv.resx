@@ -1523,4 +1523,22 @@ Vill du ladda an automatiskt sparad fil istället?</value>
 	<data name="WarningVerilogFloatingJam" xml:space="preserve">
 		<value>Varning: dinglande port {0} flyter på symbolen {1}{2} på {3}. Beteendet för icke-anslutna portar skiljer sig åt på LogicCircuit och Verilog.</value>
 	</data>
+	<data name="ErrorHdlExportAborted" xml:space="preserve">
+		<value>Användaren har avslutat HDL-exporten</value>
+	</data>
+	<data name="ErrorHdlMemoryDialPort" xml:space="preserve">
+		<value>Minne med dubbla portar stöds inte {0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMBitWidth" xml:space="preserve">
+		<value>{0} stöder endast 3, 6, 9, 12 eller 14 bitar adress och 16 bitar data i {0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMWriteOn1" xml:space="preserve">
+		<value>{0} stöder bara skrivning när skrivsignalen ändras från 1 till 0 i {0}{1}</value>
+	</data>
+	<data name="ErrorHdlROMBitWidth" xml:space="preserve">
+		<value>{0} har endast stöd för 15 bitars adress och 16 bitars data i {0}{1}</value>
+	</data>
+	<data name="MessageHdlExportDone" xml:space="preserve">
+		<value>HDL-exporten är klar med {0} fel</value>
+	</data>
 </root>

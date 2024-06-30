@@ -66,18 +66,22 @@ namespace LogicCircuit {
 				if(symbol.CircuitSymbol.Circuit is Memory memory) {
 					if(memory.DualPort) {
 						this.Error(Properties.Resources.ErrorHdlMemoryDialPort(memory.Name, symbol.CircuitSymbol.Point));
+						valid = false;
 					}
 					if(memory.Writable) {
 						int[] address = [3, 6, 9, 12, 14];
 						if(!address.Contains(memory.AddressBitWidth) || memory.DataBitWidth != 16) {
 							this.Error(Properties.Resources.ErrorHdlRAMBitWidth(memory.Name, symbol.CircuitSymbol.Point));
+							valid = false;
 						}
 						if(memory.WriteOn1 != false) {
 							this.Error(Properties.Resources.ErrorHdlRAMWriteOn1(memory.Name, symbol.CircuitSymbol.Point));
+							valid = false;
 						}
 					} else {
 						if(memory.AddressBitWidth != 15 || memory.DataBitWidth != 16) {
 							this.Error(Properties.Resources.ErrorHdlROMBitWidth(memory.Name, symbol.CircuitSymbol.Point));
+							valid = false;
 						}
 					}
 				}
@@ -106,8 +110,7 @@ namespace LogicCircuit {
 					case 9:		return "RAM512";
 					case 12:	return "RAM4K";
 					case 14:	return "RAM16K";
-					default:
-						throw new InvalidOperationException();
+					default:	return "RAM";
 					}
 				} else {
 					return "ROM32K";

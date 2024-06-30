@@ -1503,4 +1503,22 @@ kapcsolás felfogható egyfajta multiplexerként is.</value>
 	<data name="WarningVerilogFloatingJam" xml:space="preserve">
 		<value>Figyelem: a lógó port {0} lebeg a szimbólumon {1}{2} {3}. A nem csatlakoztatott portok viselkedése eltérő a LogicCircuit és a Verilog esetében.</value>
 	</data>
+	<data name="ErrorHdlExportAborted" xml:space="preserve">
+		<value>A felhasználó befejezte a HDL-exportálást</value>
+	</data>
+	<data name="ErrorHdlMemoryDialPort" xml:space="preserve">
+		<value>A kétportos memória nem támogatott {0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMBitWidth" xml:space="preserve">
+		<value>{0} csak 3, 6, 9, 12 vagy 14 bites címet és 16 bites adatot támogat {0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMWriteOn1" xml:space="preserve">
+		<value>{0} csak akkor támogatja az írást, ha az írási jel 1-ről 0-ra változik {0}{1}</value>
+	</data>
+	<data name="ErrorHdlROMBitWidth" xml:space="preserve">
+		<value>{0} csak 15 bites címet és 16 bites adatot támogat {0}{1}</value>
+	</data>
+	<data name="MessageHdlExportDone" xml:space="preserve">
+		<value>A HDL-exportálás {0} hibákkal fejeződött be</value>
+	</data>
 </root>

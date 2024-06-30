@@ -1545,4 +1545,22 @@ Ar norite užkrauti automatiškai išsaugota šio failo būseną?</value>
 	<data name="WarningVerilogFloatingJam" xml:space="preserve">
 		<value>Įspėjimas: kabantis uosto {0}, plūduriuojantis ant simbolio {1}{2} ant {3}. Neprijungtų prievadų veikimas skiriasi "LogicCircuit" ir "Verilog".</value>
 	</data>
+	<data name="ErrorHdlExportAborted" xml:space="preserve">
+		<value>Vartotojas nutraukė HDL eksportą</value>
+	</data>
+	<data name="ErrorHdlMemoryDialPort" xml:space="preserve">
+		<value>Dviejų prievadų atmintis nepalaikoma {0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMBitWidth" xml:space="preserve">
+		<value>{0} palaiko tik 3, 6, 9, 12 arba 14 bitų adreso ir 16 bitų duomenų {0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMWriteOn1" xml:space="preserve">
+		<value>{0} palaiko rašymą tik tada, kai rašymo signalas pasikeičia nuo 1 iki 0 {0}{1}</value>
+	</data>
+	<data name="ErrorHdlROMBitWidth" xml:space="preserve">
+		<value>{0} palaiko tik 15 bitų adresą ir 16 bitų duomenis {0}{1}</value>
+	</data>
+	<data name="MessageHdlExportDone" xml:space="preserve">
+		<value>HDL eksportavimas baigtas su {0} klaidomis</value>
+	</data>
 </root>

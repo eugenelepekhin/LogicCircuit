@@ -1548,4 +1548,22 @@
 	<data name="WarningVerilogFloatingJam" xml:space="preserve">
 		<value>Попередження: порт, що бовтається, {0} плаваючий на символі {1}{2} на {3}. Поведінка непідключених портів відрізняється в LogicCircuit і Verilog.</value>
 	</data>
+	<data name="ErrorHdlExportAborted" xml:space="preserve">
+		<value>Користувач припинив експорт HDL</value>
+	</data>
+	<data name="ErrorHdlMemoryDialPort" xml:space="preserve">
+		<value>Двопортова пам'ять не підтримується {0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMBitWidth" xml:space="preserve">
+		<value>{0} підтримує лише 3, 6, 9, 12 або 14 біт адреси та 16 біт даних у {0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMWriteOn1" xml:space="preserve">
+		<value>{0} підтримує запис лише тоді, коли сигнал запису змінюється від 1 до 0 через {0}{1}</value>
+	</data>
+	<data name="ErrorHdlROMBitWidth" xml:space="preserve">
+		<value>{0} підтримує лише 15-бітну адресу та 16-бітну адресу в {0}{1}</value>
+	</data>
+	<data name="MessageHdlExportDone" xml:space="preserve">
+		<value>Експорт HDL завершено з помилками {0}</value>
+	</data>
 </root>

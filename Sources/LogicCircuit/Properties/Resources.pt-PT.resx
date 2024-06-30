@@ -1637,4 +1637,22 @@ Você deseja carregar a configuração de salvamento automático para este arqui
 	<data name="WarningVerilogFloatingJam" xml:space="preserve">
 		<value>Aviso: a porta pendurada {0} flutuando no símbolo {1}{2} na {3}. O comportamento das portas desconectadas é diferente no LogicCircuit e no Verilog.</value>
 	</data>
+	<data name="ErrorHdlExportAborted" xml:space="preserve">
+		<value>O usuário encerrou a exportação de HDL</value>
+	</data>
+	<data name="ErrorHdlMemoryDialPort" xml:space="preserve">
+		<value>Não há suporte para memória de porta dupla {0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMBitWidth" xml:space="preserve">
+		<value>{0} suporta apenas 3, 6, 9, 12 ou 14 bits de endereço e 16 bits de dados em {0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMWriteOn1" xml:space="preserve">
+		<value>{0} só suporta escrita quando o sinal de escrita muda de 1 para 0 em {0}{1}</value>
+	</data>
+	<data name="ErrorHdlROMBitWidth" xml:space="preserve">
+		<value>{0} suporta apenas endereços de 15 bits e dados de 16 bits em {0}{1}</value>
+	</data>
+	<data name="MessageHdlExportDone" xml:space="preserve">
+		<value>A exportação de HDL foi concluída com erros de {0}</value>
+	</data>
 </root>

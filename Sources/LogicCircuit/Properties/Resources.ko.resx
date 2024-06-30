@@ -1533,4 +1533,22 @@ Tri-state와 적절한 제어 회로를 함께 써서 멀티플렉서를 만들 
 	<data name="WarningVerilogFloatingJam" xml:space="preserve">
 		<value>경고: 매달려 있는 포트{0} {3}의 기호 {1}{2}에 떠 있습니다. 연결되지 않은 포트의 동작은 LogicCircuit과 Verilog에서 다릅니다.</value>
 	</data>
+	<data name="ErrorHdlExportAborted" xml:space="preserve">
+		<value>사용자가 HDL 내보내기를 종료했습니다.</value>
+	</data>
+	<data name="ErrorHdlMemoryDialPort" xml:space="preserve">
+		<value>듀얼 포트 메모리는 지원되지 않습니다{0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMBitWidth" xml:space="preserve">
+		<value>{0}는 {0}{1}에서 3, 6, 9, 12 또는 14비트 주소와 16비트 데이터만 지원합니다</value>
+	</data>
+	<data name="ErrorHdlRAMWriteOn1" xml:space="preserve">
+		<value>{0}는 {0}{1}에서 쓰기 신호가 1에서 0으로 변경될 때만 쓰기를 지원합니다.</value>
+	</data>
+	<data name="ErrorHdlROMBitWidth" xml:space="preserve">
+		<value>{0}는 {0}{1}에서 15비트 주소 및 16비트 데이터만 지원합니다.</value>
+	</data>
+	<data name="MessageHdlExportDone" xml:space="preserve">
+		<value>HDL 내보내기가 {0} 오류와 함께 완료됨</value>
+	</data>
 </root>

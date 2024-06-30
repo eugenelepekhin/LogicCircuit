@@ -1358,4 +1358,22 @@ Circuiti di questo tipo non possono essere utilizzati più di una volta su altri
 	<data name="WarningVerilogFloatingJam" xml:space="preserve">
 		<value>Attenzione: la porta penzolante {0} fluttuante sul simbolo {1}{2} sul {3}. Il comportamento delle porte non connesse è diverso su LogicCircuit e Verilog.</value>
 	</data>
+	<data name="ErrorHdlExportAborted" xml:space="preserve">
+		<value>L'utente ha terminato l'esportazione HDL</value>
+	</data>
+	<data name="ErrorHdlMemoryDialPort" xml:space="preserve">
+		<value>La memoria a doppia porta non è supportata {0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMBitWidth" xml:space="preserve">
+		<value>{0} supporta solo 3, 6, 9, 12 o 14 bit di indirizzo e 16 bit di dati in {0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMWriteOn1" xml:space="preserve">
+		<value>{0} supporta la scrittura solo quando il segnale di scrittura cambia da 1 a 0 in {0}{1}</value>
+	</data>
+	<data name="ErrorHdlROMBitWidth" xml:space="preserve">
+		<value>{0} supporta solo indirizzi a 15 bit e dati a 16 bit in {0}{1}</value>
+	</data>
+	<data name="MessageHdlExportDone" xml:space="preserve">
+		<value>L'esportazione HDL è terminata con errori di {0}</value>
+	</data>
 </root>

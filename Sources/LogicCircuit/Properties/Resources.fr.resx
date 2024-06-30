@@ -1570,4 +1570,22 @@ Voulez-vous charger l'état sauvegardé automatiquement de ce fichier ?</value>
 	<data name="WarningVerilogFloatingJam" xml:space="preserve">
 		<value>Attention : le port suspendu {0} flottant sur le symbole {1}{2} sur {3}. Le comportement des ports non connectés est différent sur LogicCircuit et Verilog.</value>
 	</data>
+	<data name="ErrorHdlExportAborted" xml:space="preserve">
+		<value>L’utilisateur a mis fin à l’exportation HDL</value>
+	</data>
+	<data name="ErrorHdlMemoryDialPort" xml:space="preserve">
+		<value>La mémoire à deux ports n’est pas prise en charge {0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMBitWidth" xml:space="preserve">
+		<value>{0} ne prend en charge que 3, 6, 9, 12 ou 14 bits d’adresse et 16 bits de données dans {0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMWriteOn1" xml:space="preserve">
+		<value>{0} ne prend en charge l’écriture que lorsque le signal d’écriture passe de 1 à 0 dans {0}{1}</value>
+	</data>
+	<data name="ErrorHdlROMBitWidth" xml:space="preserve">
+		<value>{0} ne prend en charge que les adresses 15 bits et les données 16 bits dans {0}{1}</value>
+	</data>
+	<data name="MessageHdlExportDone" xml:space="preserve">
+		<value>L’exportation HDL est terminée avec {0} erreurs</value>
+	</data>
 </root>

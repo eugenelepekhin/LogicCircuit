@@ -1555,4 +1555,22 @@ Takav sklop se ne može koristiti više od jednom na drugim sklopovima jer će s
 	<data name="WarningVerilogFloatingJam" xml:space="preserve">
 		<value>Upozorenje: viseći priključak {0} pluta na simbolu {1}{2} na {3}. Ponašanje nepovezanih priključaka razlikuje se na LogicCircuit i Verilog.</value>
 	</data>
+	<data name="ErrorHdlExportAborted" xml:space="preserve">
+		<value>Korisnik je prekinuo izvoz HDL-a</value>
+	</data>
+	<data name="ErrorHdlMemoryDialPort" xml:space="preserve">
+		<value>Memorija s dvostrukim priključkom nije podržana {0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMBitWidth" xml:space="preserve">
+		<value>{0} podržava samo 3, 6, 9, 12 ili 14 bitova adrese i 16 bitova podataka u {0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMWriteOn1" xml:space="preserve">
+		<value>{0} podržava pisanje samo kada se signal za pisanje promijeni od 1 do 0 u {0}{1}</value>
+	</data>
+	<data name="ErrorHdlROMBitWidth" xml:space="preserve">
+		<value>{0} podržava samo 15 bitnih adresa i 16 bitnih podataka u {0}{1}</value>
+	</data>
+	<data name="MessageHdlExportDone" xml:space="preserve">
+		<value>Izvoz HDL-a završen je s {0} pogreškama</value>
+	</data>
 </root>

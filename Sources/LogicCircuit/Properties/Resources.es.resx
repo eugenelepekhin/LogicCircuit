@@ -1621,4 +1621,22 @@ Permite seleccionar el tamaño y profundidad de color / esquema:
 	<data name="WarningVerilogFloatingJam" xml:space="preserve">
 		<value>Advertencia: el puerto colgante {0} flotando en el símbolo {1}{2} en {3}. El comportamiento de los puertos no conectados es diferente en LogicCircuit y Verilog.</value>
 	</data>
+	<data name="ErrorHdlExportAborted" xml:space="preserve">
+		<value>El usuario ha finalizado la exportación HDL</value>
+	</data>
+	<data name="ErrorHdlMemoryDialPort" xml:space="preserve">
+		<value>La memoria de doble puerto no es compatible {0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMBitWidth" xml:space="preserve">
+		<value>{0} admite solo 3, 6, 9, 12 o 14 bits de dirección y 16 bits de datos en {0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMWriteOn1" xml:space="preserve">
+		<value>{0} solo admite la escritura cuando la señal de escritura cambia de 1 a 0 en {0}{1}</value>
+	</data>
+	<data name="ErrorHdlROMBitWidth" xml:space="preserve">
+		<value>{0} admite solo direcciones de 15 bits y datos de 16 bits en {0}{1}</value>
+	</data>
+	<data name="MessageHdlExportDone" xml:space="preserve">
+		<value>La exportación HDL ha finalizado con {0} errores</value>
+	</data>
 </root>

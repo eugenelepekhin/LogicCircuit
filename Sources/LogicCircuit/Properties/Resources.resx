@@ -1674,7 +1674,7 @@ Do you want to load auto saved state of this file?</value>
     <comment>{string jamName, string circuitName, GridPoint point, string logicCircuitName}</comment>
   </data>
   <data name="ErrorHdlExportAborted" xml:space="preserve">
-    <value>User terminated HDL export</value>
+    <value>User has terminated HDL export</value>
   </data>
   <data name="ErrorHdlMemoryDialPort" xml:space="preserve">
     <value>Dual port memory is not supported {0}{1}</value>

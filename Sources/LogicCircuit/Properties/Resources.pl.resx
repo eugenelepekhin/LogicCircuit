@@ -1546,4 +1546,22 @@ Czy chcesz wczytać automatycznie zapisaną kopię tego pliku?</value>
 	<data name="WarningVerilogFloatingJam" xml:space="preserve">
 		<value>Ostrzeżenie: zwisający port {0} pływający na symbolu {1}{2} na {3}. Zachowanie niepodłączonych portów jest inne w LogicCircuit i Verilog.</value>
 	</data>
+	<data name="ErrorHdlExportAborted" xml:space="preserve">
+		<value>Użytkownik zakończył eksport HDL</value>
+	</data>
+	<data name="ErrorHdlMemoryDialPort" xml:space="preserve">
+		<value>Pamięć dwuportowa nie jest obsługiwana {0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMBitWidth" xml:space="preserve">
+		<value>{0} obsługuje tylko 3, 6, 9, 12 lub 14 bitów adresu i 16 bitów danych w {0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMWriteOn1" xml:space="preserve">
+		<value>{0} obsługuje zapis tylko wtedy, gdy sygnał zapisu zmienia się z 1 na 0 w {0}{1}</value>
+	</data>
+	<data name="ErrorHdlROMBitWidth" xml:space="preserve">
+		<value>{0} obsługuje tylko 15-bitowy adres i 16-bitowe dane w {0}{1}</value>
+	</data>
+	<data name="MessageHdlExportDone" xml:space="preserve">
+		<value>Eksport HDL zakończył się {0} błędami</value>
+	</data>
 </root>

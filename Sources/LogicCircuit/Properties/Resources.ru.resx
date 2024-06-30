@@ -1572,4 +1572,22 @@
 	<data name="WarningVerilogFloatingJam" xml:space="preserve">
 		<value>Внимание: разъем {0} не подключен на символе {1}{2} на диаграмме {3}. Поведение не подключенных разъемов отличается в LogicCircuit и Verilog.</value>
 	</data>
+	<data name="ErrorHdlExportAborted" xml:space="preserve">
+		<value>Пользователь прекратил экспорт HDL</value>
+	</data>
+	<data name="ErrorHdlMemoryDialPort" xml:space="preserve">
+		<value>Двухпортовая память не поддерживается {0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMBitWidth" xml:space="preserve">
+		<value>{0} поддерживает только 3, 6, 9, 12 или 14 бит адреса и 16 бит данных в {0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMWriteOn1" xml:space="preserve">
+		<value>{0} поддерживает запись только при изменении сигнала записи с 1 на 0 в {0}{1}</value>
+	</data>
+	<data name="ErrorHdlROMBitWidth" xml:space="preserve">
+		<value>{0} поддерживает только 15-битный адрес и 16-битные данные в {0}{1}</value>
+	</data>
+	<data name="MessageHdlExportDone" xml:space="preserve">
+		<value>Экспорт HDL завершен с {0} ошибками</value>
+	</data>
 </root>

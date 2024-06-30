@@ -1610,4 +1610,22 @@ Wil je het, automatisch opgeslagen, bestand laden.</value>
 	<data name="WarningVerilogFloatingJam" xml:space="preserve">
 		<value>Waarschuwing: bungelende poort {0} drijven op symbool {1}{2} op {3}. Het gedrag van niet-verbonden poorten is verschillend op LogicCircuit en Verilog.</value>
 	</data>
+	<data name="ErrorHdlExportAborted" xml:space="preserve">
+		<value>Gebruiker heeft HDL-export beëindigd</value>
+	</data>
+	<data name="ErrorHdlMemoryDialPort" xml:space="preserve">
+		<value>Geheugen met twee poorten wordt niet ondersteund {0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMBitWidth" xml:space="preserve">
+		<value>{0} ondersteunt slechts 3, 6, 9, 12 of 14 bits adres en 16 bits gegevens in {0}{1}</value>
+	</data>
+	<data name="ErrorHdlRAMWriteOn1" xml:space="preserve">
+		<value>{0} ondersteunt alleen schrijven wanneer het schrijfsignaal verandert van 1 naar 0 in {0}{1}</value>
+	</data>
+	<data name="ErrorHdlROMBitWidth" xml:space="preserve">
+		<value>{0} ondersteunt alleen 15 bits adres en 16 bits gegevens in {0}{1}</value>
+	</data>
+	<data name="MessageHdlExportDone" xml:space="preserve">
+		<value>HDL-export is voltooid met {0} fouten</value>
+	</data>
 </root>
