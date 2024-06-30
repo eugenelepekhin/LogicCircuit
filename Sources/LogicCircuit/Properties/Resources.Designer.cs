@@ -3437,5 +3437,47 @@ namespace LogicCircuit.Properties {
  		public static string WarningVerilogFloatingJam(string jamName, string circuitName, GridPoint point, string logicCircuitName) {
 			return string.Format(FormatCulture, ResourceManager.GetString("WarningVerilogFloatingJam", Culture), jamName, circuitName, point, logicCircuitName);
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to User terminated HDL export.
+		/// </summary>
+ 		public static string ErrorHdlExportAborted {
+			get { return ResourceManager.GetString("ErrorHdlExportAborted", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Dual port memory is not supported {0}{1}.
+		/// </summary>
+ 		public static string ErrorHdlMemoryDialPort(string circuitName, GridPoint point) {
+			return string.Format(FormatCulture, ResourceManager.GetString("ErrorHdlMemoryDialPort", Culture), circuitName, point);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to {0} supports only 3, 6, 9, 12, or 14 bits of address and 16 bits of data in {0}{1}.
+		/// </summary>
+ 		public static string ErrorHdlRAMBitWidth(string circuitName, GridPoint point) {
+			return string.Format(FormatCulture, ResourceManager.GetString("ErrorHdlRAMBitWidth", Culture), circuitName, point);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to {0} only supports writing when write signal changes from 1 to 0 in {0}{1}.
+		/// </summary>
+ 		public static string ErrorHdlRAMWriteOn1(string circuitName, GridPoint point) {
+			return string.Format(FormatCulture, ResourceManager.GetString("ErrorHdlRAMWriteOn1", Culture), circuitName, point);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to {0} supports only 15 bits address and 16 bits data in {0}{1}.
+		/// </summary>
+ 		public static string ErrorHdlROMBitWidth(string circuitName, GridPoint point) {
+			return string.Format(FormatCulture, ResourceManager.GetString("ErrorHdlROMBitWidth", Culture), circuitName, point);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to HDL export is finished with {0} errors.
+		/// </summary>
+ 		public static string MessageHdlExportDone(int errorCount) {
+			return string.Format(FormatCulture, ResourceManager.GetString("MessageHdlExportDone", Culture), errorCount);
+		}
 	}
 }

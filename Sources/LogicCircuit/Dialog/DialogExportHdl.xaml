@@ -9,30 +9,74 @@
 	MinWidth="500"
 	MinHeight="350"
 >
-	<lc:AutoGrid Margin="3">
-		<Label Content="{x:Static properties:Resources.TitleExportType}"/>
-		<lc:AutoWidthComboBox ItemsSource="{Binding Path=ExportTypes}" SelectedItem="{Binding Path=SelectedExportType, Mode=TwoWay}"/>
+	<Window.Resources>
+		<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+		<lc:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+	</Window.Resources>
 
-		<Label Content="{x:Static properties:Resources.TitleExportFolder}"/>
-		<lc:ControlFolderSelector SelectedFolder="{Binding Path=TargetFolder, Mode=TwoWay}"/>
+	<Grid>
+		<lc:AutoGrid Margin="3">
+			<Label Content="{x:Static properties:Resources.TitleExportType}"/>
+			<lc:AutoWidthComboBox ItemsSource="{Binding Path=ExportTypes}" SelectedItem="{Binding Path=SelectedExportType, Mode=TwoWay}"/>
 
-		<WrapPanel Grid.Column="1">
-			<CheckBox Content="{x:Static properties:Resources.TitleExportOnlyCurrent}" IsChecked="{Binding Path=OnlyCurrent}"/>
-			<CheckBox Content="{x:Static properties:Resources.TitleAddComments}" IsChecked="{Binding Path=CommentPoints}"/>
-		</WrapPanel>
+			<Label Content="{x:Static properties:Resources.TitleExportFolder}"/>
+			<lc:ControlFolderSelector SelectedFolder="{Binding Path=TargetFolder, Mode=TwoWay}"/>
 
-		<Label Content="{x:Static properties:Resources.TitleLog}"/>
-		<RichTextBox x:Name="log" Style="{StaticResource LogViewer}" IsReadOnly="True">
-			<RichTextBox.Resources>
-				<Style TargetType="Paragraph">
-					<Setter Property="Margin" Value="1"/>
+			<WrapPanel Grid.Column="1">
+				<CheckBox Content="{x:Static properties:Resources.TitleExportOnlyCurrent}" IsChecked="{Binding Path=OnlyCurrent}"/>
+				<CheckBox Content="{x:Static properties:Resources.TitleAddComments}" IsChecked="{Binding Path=CommentPoints}"/>
+			</WrapPanel>
+
+			<Label Content="{x:Static properties:Resources.TitleLog}"/>
+			<RichTextBox x:Name="log" Style="{StaticResource LogViewer}" IsReadOnly="True">
+				<RichTextBox.Resources>
+					<Style TargetType="Paragraph">
+						<Setter Property="Margin" Value="1"/>
+					</Style>
+				</RichTextBox.Resources>
+			</RichTextBox>
+
+			<StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+				IsEnabled="{Binding Path=Running, Converter={StaticResource InverseBooleanConverter}}"
+			>
+				<Button Content="{x:Static properties:Resources.TitleExport}" IsDefault="True" Click="ButtonExportClick"/>
+				<Button Content="{x:Static properties:Resources.TitleClose}" IsCancel="True"/>
+			</StackPanel>
+		</lc:AutoGrid>
+
+		<Grid Background="#80000000" Visibility="{Binding Path=Running, Converter={StaticResource BooleanToVisibilityConverter}}" Opacity="0">
+			<Grid.Style>
+				<Style TargetType="Grid">
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding Path=Running}" Value="True">
+							<DataTrigger.EnterActions>
+								<BeginStoryboard>
+									<Storyboard>
+										<DoubleAnimation
+											Storyboard.TargetProperty="(Grid.Opacity)"
+											Duration="0:0:0.75"
+											From="0"
+											To="1"
+										>
+											<DoubleAnimation.EasingFunction>
+												<QuinticEase EasingMode="EaseIn"/>
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+									</Storyboard>
+								</BeginStoryboard>
+							</DataTrigger.EnterActions>
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Path=Running}" Value="False">
+							<Setter Property="Opacity" Value="0"/>
+						</DataTrigger>
+					</Style.Triggers>
 				</Style>
-			</RichTextBox.Resources>
-		</RichTextBox>
-
-		<StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-			<Button Content="{x:Static properties:Resources.TitleExport}" IsDefault="True" Click="ButtonExportClick"/>
-			<Button Content="{x:Static properties:Resources.TitleClose}" IsCancel="True"/>
-		</StackPanel>
-	</lc:AutoGrid>
+			</Grid.Style>
+			
+			<StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+				<ProgressBar IsIndeterminate="True" Width="200" Height="15" HorizontalAlignment="Center"/>
+				<Button Content="{x:Static properties:Resources.TitleStop}" Click="ButtonStopClick" HorizontalAlignment="Center" IsCancel="{Binding Path=Running}"/>
+			</StackPanel>
+		</Grid>
+	</Grid>
 </Window>

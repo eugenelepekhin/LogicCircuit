@@ -1673,4 +1673,27 @@ Do you want to load auto saved state of this file?</value>
     <value>Warning: dangling port {0} floating on symbol {1}{2} on {3}. Behavior of unconnected ports are different on LogicCircuit and Verilog.</value>
     <comment>{string jamName, string circuitName, GridPoint point, string logicCircuitName}</comment>
   </data>
+  <data name="ErrorHdlExportAborted" xml:space="preserve">
+    <value>User terminated HDL export</value>
+  </data>
+  <data name="ErrorHdlMemoryDialPort" xml:space="preserve">
+    <value>Dual port memory is not supported {0}{1}</value>
+    <comment>{string circuitName, GridPoint point}</comment>
+  </data>
+  <data name="ErrorHdlRAMBitWidth" xml:space="preserve">
+    <value>{0} supports only 3, 6, 9, 12, or 14 bits of address and 16 bits of data in {0}{1}</value>
+    <comment>{string circuitName, GridPoint point}</comment>
+  </data>
+  <data name="ErrorHdlRAMWriteOn1" xml:space="preserve">
+    <value>{0} only supports writing when write signal changes from 1 to 0 in {0}{1}</value>
+    <comment>{string circuitName, GridPoint point}</comment>
+  </data>
+  <data name="ErrorHdlROMBitWidth" xml:space="preserve">
+    <value>{0} supports only 15 bits address and 16 bits data in {0}{1}</value>
+    <comment>{string circuitName, GridPoint point}</comment>
+  </data>
+  <data name="MessageHdlExportDone" xml:space="preserve">
+    <value>HDL export is finished with {0} errors</value>
+    <comment>{int errorCount}</comment>
+  </data>
 </root>

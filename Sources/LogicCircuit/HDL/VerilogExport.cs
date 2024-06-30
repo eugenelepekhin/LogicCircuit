@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -55,6 +56,7 @@ namespace LogicCircuit {
 			bool valid = base.Validate(transformation);
 			OneToMany<Jam, HdlConnection> jams = new OneToMany<Jam, HdlConnection>(true);
 			foreach(HdlSymbol symbol in transformation.Parts.Concat(transformation.OutputPins)) {
+				// check for floating IO ports. Most of the gates can be excluded as floating port will be generated.
 				Gate? gate = symbol.CircuitSymbol.Circuit as Gate;
 				if(gate == null || gate.GateType == GateType.TriState1 || gate.GateType == GateType.TriState2) {
 					jams.Clear();
@@ -114,7 +116,27 @@ namespace LogicCircuit {
 				case GateType.TriState2: return "bufif1";
 				}
 			}
+			if(circuit is Memory memory) {
+				if(memory.Writable) {
+					return string.Format(CultureInfo.InvariantCulture, "{0}_RAM_{1}x{2}", symbol.CircuitSymbol.LogicalCircuit.Name, symbol.CircuitSymbol.X, symbol.CircuitSymbol.Y);
+				} else {
+					return string.Format(CultureInfo.InvariantCulture, "{0}_ROM_{1}x{2}", symbol.CircuitSymbol.LogicalCircuit.Name, symbol.CircuitSymbol.X, symbol.CircuitSymbol.Y);
+				}
+			}
 			return circuit.Name.Trim();
+		}
+
+		public override string HdlName(Jam jam) {
+			if(jam.CircuitSymbol.Circuit is Memory memory) {
+				BasePin pin = jam.Pin;
+				if(pin == memory.AddressPin) return "address";
+				if(pin == memory.DataInPin) return "dataIn";
+				if(pin == memory.DataOutPin) return "dataOut";
+				if(pin == memory.WritePin) return "write";
+				if(pin == memory.Address2Pin) return "address2";
+				if(pin == memory.DataOut2Pin) return "dataOut2";
+			}
+			return base.HdlName(jam);
 		}
 
 		protected override void ExportTest(string circuitName, List<InputPinSocket> inputs, List<OutputPinSocket> outputs, IList<TruthState> table, string folder) {

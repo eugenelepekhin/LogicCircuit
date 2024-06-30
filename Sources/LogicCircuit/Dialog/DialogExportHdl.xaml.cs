@@ -1,8 +1,11 @@
 ﻿// Ignore Spelling: Hdl
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
@@ -18,6 +21,11 @@ namespace LogicCircuit {
 			Verilog,
 			VerilogFull,
 			Other
+		}
+
+		private struct MessageData {
+			public Brush? brush;
+			public string text;
 		}
 
 		private SettingsWindowLocationCache? windowLocation;
@@ -60,51 +68,98 @@ namespace LogicCircuit {
 			set => this.commentPoints.Value = value;
 		}
 
+		public static readonly DependencyProperty RunningProperty = DependencyProperty.Register(nameof(Running), typeof(bool), typeof(DialogExportHdl));
+		public bool Running {
+			get => (bool)this.GetValue(DialogExportHdl.RunningProperty);
+			set => this.SetValue(DialogExportHdl.RunningProperty, value);
+		}
+
+		private readonly ConcurrentQueue<MessageData> messages = new ConcurrentQueue<MessageData>();
+		private int pumping;
+		private bool continueExport;
+
 		public DialogExportHdl(Editor editor) {
 			this.logicalCircuit = editor.Project.LogicalCircuit; 
 			this.DataContext = this;
 			this.InitializeComponent();
 		}
 
-		private void ButtonExportClick(object sender, RoutedEventArgs e) {
-			try {
-				e.Handled = true;
-				this.log.Document = new System.Windows.Documents.FlowDocument();
+		protected override void OnClosing(CancelEventArgs e) {
+			base.OnClosing(e);
+			e.Cancel = this.Running;
+		}
 
-				void logText(Brush? decorator, string text) {
-					App.Dispatch(() => {
+		private void OnFinished() {
+			if(!this.continueExport) {
+				this.Error(Properties.Resources.ErrorHdlExportAborted);
+			}
+			this.ShowMessages();
+			App.Dispatch(() => this.Running = false);
+		}
+
+		private void LogText(Brush? decorator, string text) {
+			this.messages.Enqueue(new MessageData() { brush = decorator, text = text });
+			this.ShowMessages();
+		}
+
+		private void ShowMessages() {
+			App.Dispatch(() => {
+				if(0 == Interlocked.CompareExchange(ref this.pumping, 1, 0)) {
+					while(this.messages.TryDequeue(out MessageData messageData)) {
 						Paragraph paragraph = new Paragraph();
-						if(decorator != null) {
+						if(messageData.brush != null) {
 							Run run = new Run("\u25C9 ") {
-								Foreground = decorator
+								Foreground = messageData.brush
 							};
 							paragraph.Inlines.Add(run);
 						}
-						paragraph.Inlines.Add(text);
+						paragraph.Inlines.Add(messageData.text);
 						this.log.Document.Blocks.Add(paragraph);
-					});
+						this.log.ScrollToEnd();
+					}
+					this.pumping = 0;
 				}
-				void message(string text) => logText(null, text);
-				void error(string text) => logText(Brushes.Red, text);
-				void warning(string text) => logText(Brushes.Orange, text);
+			});
+		}
 
+		private void Message(string text) => this.LogText(null, text);
+		private void Error(string text) => this.LogText(Brushes.Red, text);
+		private void Warning(string text) => this.LogText(Brushes.Orange, text);
+
+		private void ButtonExportClick(object sender, RoutedEventArgs e) {
+			try {
+				this.Running = true;
+				e.Handled = true;
+				this.log.Document = new System.Windows.Documents.FlowDocument();
+
+				bool exportTests = false;
 				HdlExport? hdl = null;
 				switch(this.SelectedExportType.Value) {
-				case HdlExportType.N2T:
 				case HdlExportType.N2TFull:
-					hdl = new N2TExport(this.SelectedExportType.Value == HdlExportType.N2TFull, this.CommentPoints, message, error, warning);
+					exportTests = true;
+					goto case HdlExportType.N2T;
+				case HdlExportType.N2T:
+					hdl = new N2TExport(exportTests, this.CommentPoints, this.Message, this.Error, this.Warning);
 					break;
-				case HdlExportType.Verilog:
 				case HdlExportType.VerilogFull:
-					hdl = new VerilogExport(this.SelectedExportType.Value == HdlExportType.VerilogFull, this.CommentPoints, message, error, warning);
+					exportTests = true;
+					goto case HdlExportType.Verilog;
+				case HdlExportType.Verilog:
+					hdl = new VerilogExport(exportTests, this.CommentPoints, this.Message, this.Error, this.Warning);
 					break;
 				default:
 					throw new InvalidOperationException();
 				}
-				hdl.ExportCircuit(this.logicalCircuit, this.TargetFolder, this.OnlyCurrent);
+				this.continueExport = true;
+				hdl.ExportCircuit(this.logicalCircuit, this.TargetFolder, this.OnlyCurrent, true, i => this.continueExport,  this.OnFinished);
 			} catch(Exception exception) {
 				App.Mainframe.ReportException(exception);
+				this.Running = false;
 			}
+		}
+
+		private void ButtonStopClick(object sender, RoutedEventArgs e) {
+			this.continueExport = false;
 		}
 	}
 }

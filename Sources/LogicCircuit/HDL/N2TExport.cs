@@ -62,6 +62,26 @@ namespace LogicCircuit {
 					valid = false;
 				}
 			}
+			foreach(HdlSymbol symbol in transformation.Parts) {
+				if(symbol.CircuitSymbol.Circuit is Memory memory) {
+					if(memory.DualPort) {
+						this.Error(Properties.Resources.ErrorHdlMemoryDialPort(memory.Name, symbol.CircuitSymbol.Point));
+					}
+					if(memory.Writable) {
+						int[] address = [3, 6, 9, 12, 14];
+						if(!address.Contains(memory.AddressBitWidth) || memory.DataBitWidth != 16) {
+							this.Error(Properties.Resources.ErrorHdlRAMBitWidth(memory.Name, symbol.CircuitSymbol.Point));
+						}
+						if(memory.WriteOn1 != false) {
+							this.Error(Properties.Resources.ErrorHdlRAMWriteOn1(memory.Name, symbol.CircuitSymbol.Point));
+						}
+					} else {
+						if(memory.AddressBitWidth != 15 || memory.DataBitWidth != 16) {
+							this.Error(Properties.Resources.ErrorHdlROMBitWidth(memory.Name, symbol.CircuitSymbol.Point));
+						}
+					}
+				}
+			}
 			return valid;
 		}
 
@@ -78,13 +98,34 @@ namespace LogicCircuit {
 					throw new InvalidOperationException();
 				}
 			}
+			if(circuit is Memory memory) {
+				if(memory.Writable) {
+					switch(memory.AddressBitWidth) {
+					case 3:		return "RAM8";
+					case 6:		return "RAM64";
+					case 9:		return "RAM512";
+					case 12:	return "RAM4K";
+					case 14:	return "RAM16K";
+					default:
+						throw new InvalidOperationException();
+					}
+				} else {
+					return "ROM32K";
+				}
+			}
 			return circuit.Name.Trim();
 		}
 
 		public override string HdlName(Jam jam) {
 			string name = base.HdlName(jam);
 			if(jam.CircuitSymbol.Circuit is Gate && this.PinName.TryGetValue(name, out string? other)) {
-				name = other;
+				return other;
+			} else if(jam.CircuitSymbol.Circuit is Memory memory) {
+				BasePin pin = jam.Pin;
+				if(pin == memory.AddressPin) return "address";
+				if(pin == memory.DataOutPin) return "out";
+				if(pin == memory.DataInPin)  return "in";
+				if(pin == memory.WritePin)   return "load";
 			}
 
 			return name;

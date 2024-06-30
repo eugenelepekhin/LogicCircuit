@@ -1,5 +1,6 @@
 ﻿// Ignore Spelling: Verilog Hdl
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -112,8 +113,73 @@ namespace LogicCircuit {
 			return -delta;
 		}
 
+		private void WriteMemory(HdlSymbol symbol) {
+			Memory memory = (Memory)symbol.CircuitSymbol.Circuit;
+
+			this.Write("module {0}(input{1} address, output{2} dataOut", symbol.HdlExport.HdlName(symbol), VerilogHdl.Range(memory.AddressPin), VerilogHdl.Range(memory.DataOutPin));
+			if(memory.Writable) {
+				this.Write(", input{0} dataIn, input write", VerilogHdl.Range(memory.DataOutPin));
+			}
+			if(memory.DualPort) {
+				this.Write(", input{0} address2, output{1} dataOut2", VerilogHdl.Range(memory.Address2Pin), VerilogHdl.Range(memory.DataOut2Pin));
+			}
+			this.WriteLine(");");
+
+			// allocate memory array
+			this.WriteLine("\treg{0} memory[0:{1}];", VerilogHdl.Range(memory.DataOutPin), 1 << memory.AddressBitWidth);
+			if(memory.Writable && memory.OnStart != MemoryOnStart.Data) {
+				this.WriteLine("\tinteger i;");
+			}
+
+			// Memory initialization
+			this.WriteLine("\tinitial begin");
+			if(!memory.Writable || memory.OnStart == MemoryOnStart.Data) {
+				byte[] data = memory.MemoryValue();
+				int addressWidth = memory.AddressBitWidth;
+				int dataWidth = memory.DataBitWidth;
+				int max = 1 << addressWidth;
+				for(int i = 0; i < max; i++) {
+					this.WriteLine("\t\tmemory[{0}] = {1};", i, Memory.CellValue(data, dataWidth, i).ToString(CultureInfo.InvariantCulture));
+				}
+			} else {
+				string value = memory.OnStart switch {
+					MemoryOnStart.Random => "$random",
+					MemoryOnStart.Ones => "-1",
+					MemoryOnStart.Zeros => "0",
+					_ => throw new InvalidOperationException()
+				};
+				this.WriteLine("\t\tfor(i = 0; i < {0}; i = i + 1) begin", 1 << memory.AddressBitWidth);
+				this.WriteLine("\t\t\tmemory[i] = {0};", value);
+				this.WriteLine("\t\tend");
+			}
+			this.WriteLine("\tend // initial");
+			this.WriteLine();
+
+			// Memory logic itself
+			if(memory.Writable) {
+				this.WriteLine("\talways @({0} write) begin", memory.WriteOn1 ? "posedge" : "negedge");
+				this.WriteLine("\t\tmemory[address] <= dataIn;");
+				this.WriteLine("\tend");
+			}
+
+			this.WriteLine("\tassign dataOut = memory[address];");
+
+			if(memory.DualPort) {
+				this.WriteLine("\tassign dataOut2 = memory[address2];");
+			}
+
+			this.WriteLine("endmodule // {0}", symbol.HdlExport.HdlName(symbol));
+			this.WriteLine();
+		}
+
 		public override string TransformText() {
 			this.Prepare();
+
+			foreach(HdlSymbol symbol in this.Parts) {
+				if(symbol.CircuitSymbol.Circuit is Memory) {
+					this.WriteMemory(symbol);
+				}
+			}
 
 			this.WriteLine("module {0}(", this.Name);
 

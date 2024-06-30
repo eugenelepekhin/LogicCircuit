@@ -62,7 +62,7 @@ namespace LogicCircuit {
 
 		public void Warning(string text) => this.logWarning(text);
 
-		public bool ExportCircuit(LogicalCircuit circuit, string folder, bool onlyOne) {
+		public bool ExportCircuit(LogicalCircuit circuit, string folder, bool onlyOne, bool runAsync, Predicate<int>? continueExport, Action onFinished) {
 			CircuitMap map = new CircuitMap(circuit);
 			ConnectionSet connectionSet = map.ConnectionSet();
 
@@ -90,7 +90,7 @@ namespace LogicCircuit {
 				if(exported.Add(circuitMap.Circuit)) {
 					if(export(circuitMap.Circuit)) {
 						foreach(CircuitMap child in circuitMap.Children) {
-							if(!walk(child, exported)) {
+							if(continueExport != null && !continueExport(0) || !walk(child, exported)) {
 								return false;
 							}
 						}
@@ -101,11 +101,27 @@ namespace LogicCircuit {
 				return true;
 			}
 
-			if(onlyOne) {
-				return export(circuit);
-			} else {
-				return walk(map, new HashSet<LogicalCircuit>());
+			bool result = false;
+			void run() {
+				if(onlyOne) {
+					result = export(circuit);
+				} else {
+					result = walk(map, new HashSet<LogicalCircuit>());
+				}
+				this.Message(Properties.Resources.MessageHdlExportDone(this.ErrorCount));
+				onFinished();
 			}
+
+			if(runAsync) {
+				Thread thread = new Thread(run);
+				thread.SetApartmentState(ApartmentState.STA);
+				thread.Name = "ExportHDL";
+				thread.Start();
+			} else {
+				run();
+			}
+
+			return result;
 		}
 
 		private Dictionary<CircuitSymbol, HdlSymbol> Collect(LogicalCircuit circuit, ConnectionSet connectionSet) {
@@ -276,30 +292,28 @@ namespace LogicCircuit {
 						}
 					}
 
-					ThreadPool.QueueUserWorkItem(o => {
-						try {
-							bool isTrancated = false;
-							IList<TruthState>? table = socket.BuildTruthTable(reportProgress, () => true, null, DialogTruthTable.MaxRows, out isTrancated);
-							if (table == null || isTrancated) {
-								this.Message(Properties.Resources.ErrorHdlTruthTableFailed);
-							} else {
-								this.ExportTest(
-									circuit.Name,
-									socket.Inputs.ToList(),
-									socket.Outputs.ToList(),
-									table,
-									folder
-								);
-							}
-						} catch(Exception exception) {
-							App.Mainframe.ReportException(exception);
+					try {
+						bool isTrancated = false;
+						IList<TruthState>? table = socket.BuildTruthTable(reportProgress, () => true, null, DialogTruthTable.MaxRows, out isTrancated);
+						if (table == null || isTrancated) {
+							this.Warning(Properties.Resources.ErrorHdlTruthTableFailed);
+						} else {
+							this.ExportTest(
+								circuit.Name,
+								socket.Inputs.ToList(),
+								socket.Outputs.ToList(),
+								table,
+								folder
+							);
 						}
-					});
+					} catch(Exception exception) {
+						App.Mainframe.ReportException(exception);
+					}
 				} else {
-					this.Message(Properties.Resources.ErrorHdlInputTooBig(circuit.Name));
+					this.Warning(Properties.Resources.ErrorHdlInputTooBig(circuit.Name));
 				}
 			} else {
-				this.Message(Properties.Resources.MessageInputOutputPinsMissing);
+				this.Warning(Properties.Resources.MessageInputOutputPinsMissing);
 			}
 		}
 	}
