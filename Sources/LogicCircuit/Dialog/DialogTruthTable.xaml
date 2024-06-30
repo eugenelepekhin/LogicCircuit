@@ -73,38 +73,10 @@
 			/>
 		</lc:AutoGrid>
 
-		<Grid Background="#80000000" Visibility="{Binding Path=ShowProgress, Converter={StaticResource BooleanToVisibilityConverter}}" Opacity="0">
-			<Grid.Style>
-				<Style TargetType="Grid">
-					<Style.Triggers>
-						<DataTrigger Binding="{Binding Path=ShowProgress}" Value="True">
-							<DataTrigger.EnterActions>
-								<BeginStoryboard>
-									<Storyboard>
-										<DoubleAnimation
-											Storyboard.TargetProperty="(Grid.Opacity)"
-											Duration="0:0:0.75"
-											From="0"
-											To="1"
-										>
-											<DoubleAnimation.EasingFunction>
-												<QuinticEase EasingMode="EaseIn"/>
-											</DoubleAnimation.EasingFunction>
-										</DoubleAnimation>
-									</Storyboard>
-								</BeginStoryboard>
-							</DataTrigger.EnterActions>
-						</DataTrigger>
-						<DataTrigger Binding="{Binding Path=ShowProgress}" Value="False">
-							<Setter Property="Opacity" Value="0"/>
-						</DataTrigger>
-					</Style.Triggers>
-				</Style>
-			</Grid.Style>
-			
+		<Grid Style="{StaticResource ShowProgressAdorner}">
 			<StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
 				<ProgressBar Minimum="0" Maximum="100" Value="{Binding Path=Progress}" Width="200" Height="15" HorizontalAlignment="Center"/>
-				<Button Content="{x:Static properties:Resources.TitleStop}" Click="ButtonStopClick" HorizontalAlignment="Center"/>
+				<Button Content="{x:Static properties:Resources.TitleStop}" Click="ButtonStopClick" HorizontalAlignment="Center" IsCancel="{Binding Path=ShowProgress}"/>
 			</StackPanel>
 		</Grid>
 	</Grid>

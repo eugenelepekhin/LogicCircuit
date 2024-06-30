@@ -10,7 +10,6 @@
 	MinHeight="350"
 >
 	<Window.Resources>
-		<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 		<lc:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
 	</Window.Resources>
 
@@ -37,45 +36,17 @@
 			</RichTextBox>
 
 			<StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-				IsEnabled="{Binding Path=Running, Converter={StaticResource InverseBooleanConverter}}"
+				IsEnabled="{Binding Path=ShowProgress, Converter={StaticResource InverseBooleanConverter}}"
 			>
 				<Button Content="{x:Static properties:Resources.TitleExport}" IsDefault="True" Click="ButtonExportClick"/>
 				<Button Content="{x:Static properties:Resources.TitleClose}" IsCancel="True"/>
 			</StackPanel>
 		</lc:AutoGrid>
 
-		<Grid Background="#80000000" Visibility="{Binding Path=Running, Converter={StaticResource BooleanToVisibilityConverter}}" Opacity="0">
-			<Grid.Style>
-				<Style TargetType="Grid">
-					<Style.Triggers>
-						<DataTrigger Binding="{Binding Path=Running}" Value="True">
-							<DataTrigger.EnterActions>
-								<BeginStoryboard>
-									<Storyboard>
-										<DoubleAnimation
-											Storyboard.TargetProperty="(Grid.Opacity)"
-											Duration="0:0:0.75"
-											From="0"
-											To="1"
-										>
-											<DoubleAnimation.EasingFunction>
-												<QuinticEase EasingMode="EaseIn"/>
-											</DoubleAnimation.EasingFunction>
-										</DoubleAnimation>
-									</Storyboard>
-								</BeginStoryboard>
-							</DataTrigger.EnterActions>
-						</DataTrigger>
-						<DataTrigger Binding="{Binding Path=Running}" Value="False">
-							<Setter Property="Opacity" Value="0"/>
-						</DataTrigger>
-					</Style.Triggers>
-				</Style>
-			</Grid.Style>
-			
+		<Grid Style="{StaticResource ShowProgressAdorner}">
 			<StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
 				<ProgressBar IsIndeterminate="True" Width="200" Height="15" HorizontalAlignment="Center"/>
-				<Button Content="{x:Static properties:Resources.TitleStop}" Click="ButtonStopClick" HorizontalAlignment="Center" IsCancel="{Binding Path=Running}"/>
+				<Button Content="{x:Static properties:Resources.TitleStop}" Click="ButtonStopClick" HorizontalAlignment="Center" IsCancel="{Binding Path=ShowProgress}"/>
 			</StackPanel>
 		</Grid>
 	</Grid>

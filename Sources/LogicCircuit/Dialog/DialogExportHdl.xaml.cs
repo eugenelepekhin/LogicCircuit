@@ -68,8 +68,8 @@ namespace LogicCircuit {
 			set => this.commentPoints.Value = value;
 		}
 
-		public static readonly DependencyProperty RunningProperty = DependencyProperty.Register(nameof(Running), typeof(bool), typeof(DialogExportHdl));
-		public bool Running {
+		public static readonly DependencyProperty RunningProperty = DependencyProperty.Register(nameof(ShowProgress), typeof(bool), typeof(DialogExportHdl));
+		public bool ShowProgress {
 			get => (bool)this.GetValue(DialogExportHdl.RunningProperty);
 			set => this.SetValue(DialogExportHdl.RunningProperty, value);
 		}
@@ -86,7 +86,7 @@ namespace LogicCircuit {
 
 		protected override void OnClosing(CancelEventArgs e) {
 			base.OnClosing(e);
-			e.Cancel = this.Running;
+			e.Cancel = this.ShowProgress;
 		}
 
 		private void OnFinished() {
@@ -94,7 +94,7 @@ namespace LogicCircuit {
 				this.Error(Properties.Resources.ErrorHdlExportAborted);
 			}
 			this.ShowMessages();
-			App.Dispatch(() => this.Running = false);
+			App.Dispatch(() => this.ShowProgress = false);
 		}
 
 		private void LogText(Brush? decorator, string text) {
@@ -128,7 +128,7 @@ namespace LogicCircuit {
 
 		private void ButtonExportClick(object sender, RoutedEventArgs e) {
 			try {
-				this.Running = true;
+				this.ShowProgress = true;
 				e.Handled = true;
 				this.log.Document = new System.Windows.Documents.FlowDocument();
 
@@ -154,7 +154,7 @@ namespace LogicCircuit {
 				hdl.ExportCircuit(this.logicalCircuit, this.TargetFolder, this.OnlyCurrent, true, i => this.continueExport,  this.OnFinished);
 			} catch(Exception exception) {
 				App.Mainframe.ReportException(exception);
-				this.Running = false;
+				this.ShowProgress = false;
 			}
 		}
 

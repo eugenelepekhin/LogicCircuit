@@ -12,6 +12,7 @@
 				<ResourceDictionary Source="ColorPicker/ColorPicker.xaml"/>
 			</ResourceDictionary.MergedDictionaries>
 
+			<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 			<lc:DoubleAdderConverter x:Key="DoubleAdderConverter"/>
 			<lc:HyperlinkNavigationCommand x:Key="HyperlinkNavigationCommand"/>
 
@@ -324,6 +325,35 @@
 						</ControlTemplate>
 					</Setter.Value>
 				</Setter>
+			</Style>
+
+			<Style x:Key="ShowProgressAdorner" TargetType="Grid">
+				<Setter Property="Background" Value="#50000000"/>
+				<Setter Property="Visibility" Value="{Binding Path=ShowProgress, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+				<Style.Triggers>
+					<DataTrigger Binding="{Binding Path=ShowProgress}" Value="True">
+						<DataTrigger.EnterActions>
+							<BeginStoryboard>
+								<Storyboard>
+									<DoubleAnimation
+										Storyboard.TargetProperty="(Grid.Opacity)"
+										Duration="0:0:0.75"
+										From="0"
+										To="1"
+									>
+										<DoubleAnimation.EasingFunction>
+											<QuinticEase EasingMode="EaseIn"/>
+										</DoubleAnimation.EasingFunction>
+									</DoubleAnimation>
+								</Storyboard>
+							</BeginStoryboard>
+						</DataTrigger.EnterActions>
+					</DataTrigger>
+					<DataTrigger Binding="{Binding Path=ShowProgress}" Value="False">
+						<Setter Property="Opacity" Value="0"/>
+					</DataTrigger>
+				</Style.Triggers>
 			</Style>
 
 			<!-- Used as header template in controls that support accelerator keys and get content from user input to show underscore rather then use it as a hot key -->
