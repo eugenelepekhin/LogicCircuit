@@ -1574,4 +1574,7 @@ Out</value>
 	<data name="MessageHdlExportDone" xml:space="preserve">
 		<value>HDL 导出完成时出现{0}错误</value>
 	</data>
+	<data name="WarningN2TRamTest" xml:space="preserve">
+		<value>运行包含{0}的测试将在 Nand 上产生不正确的结果，以俄罗斯方块硬件模拟器{0}{1}。</value>
+	</data>
 </root>

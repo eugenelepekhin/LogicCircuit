@@ -1617,4 +1617,7 @@
 	<data name="MessageHdlExportDone" xml:space="preserve">
 		<value>ייצוא HDL הסתיים עם שגיאות {0}</value>
 	</data>
+	<data name="WarningN2TRamTest" xml:space="preserve">
+		<value>בדיקת הפעלה המכילה {0} תפיק תוצאה שגויה בסימולטור החומרה Nand to Tetris {0}{1}.</value>
+	</data>
 </root>

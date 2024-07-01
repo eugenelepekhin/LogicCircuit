@@ -1376,4 +1376,7 @@ Circuiti di questo tipo non possono essere utilizzati più di una volta su altri
 	<data name="MessageHdlExportDone" xml:space="preserve">
 		<value>L'esportazione HDL è terminata con errori di {0}</value>
 	</data>
+	<data name="WarningN2TRamTest" xml:space="preserve">
+		<value>L'esecuzione di un test contenente {0} produrrà un risultato errato sul simulatore hardware da Nand a Tetris {0}{1}.</value>
+	</data>
 </root>

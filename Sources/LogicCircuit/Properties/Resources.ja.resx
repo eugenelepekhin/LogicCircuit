@@ -1379,4 +1379,7 @@
 	<data name="MessageHdlExportDone" xml:space="preserve">
 		<value>HDL エクスポートが {0} エラーで終了する</value>
 	</data>
+	<data name="WarningN2TRamTest" xml:space="preserve">
+		<value>{0}を含むテストを実行すると、Nand to Tetris ハードウェア シミュレータ {0}{1}で正しくない結果が生成されます。</value>
+	</data>
 </root>

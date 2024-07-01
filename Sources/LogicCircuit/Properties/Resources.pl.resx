@@ -1564,4 +1564,7 @@ Czy chcesz wczytać automatycznie zapisaną kopię tego pliku?</value>
 	<data name="MessageHdlExportDone" xml:space="preserve">
 		<value>Eksport HDL zakończył się {0} błędami</value>
 	</data>
+	<data name="WarningN2TRamTest" xml:space="preserve">
+		<value>Uruchomienie testu zawierającego {0} da nieprawidłowy wynik na Nand do {0}{1} symulatora sprzętowego Tetris.</value>
+	</data>
 </root>

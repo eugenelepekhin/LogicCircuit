@@ -1588,4 +1588,7 @@ Voulez-vous charger l'état sauvegardé automatiquement de ce fichier ?</value>
 	<data name="MessageHdlExportDone" xml:space="preserve">
 		<value>L’exportation HDL est terminée avec {0} erreurs</value>
 	</data>
+	<data name="WarningN2TRamTest" xml:space="preserve">
+		<value>L’exécution d’un test contenant {0} produira un résultat incorrect sur le simulateur de matériel Nand vers Tetris {0}{1}.</value>
+	</data>
 </root>

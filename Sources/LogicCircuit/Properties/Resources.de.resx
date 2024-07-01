@@ -1587,4 +1587,7 @@ Möchten Sie den automatisch gespeicherten Stand dieser Datei laden?</value>
 	<data name="MessageHdlExportDone" xml:space="preserve">
 		<value>Der HDL-Export wird mit {0} Fehlern abgeschlossen</value>
 	</data>
+	<data name="WarningN2TRamTest" xml:space="preserve">
+		<value>Das Ausführen eines Tests, der {0} enthält, führt zu einem falschen Ergebnis auf dem Nand-zu-Tetris-Hardwaresimulator-{0}{1}.</value>
+	</data>
 </root>

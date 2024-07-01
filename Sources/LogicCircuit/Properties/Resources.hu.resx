@@ -1521,4 +1521,7 @@ kapcsolás felfogható egyfajta multiplexerként is.</value>
 	<data name="MessageHdlExportDone" xml:space="preserve">
 		<value>A HDL-exportálás {0} hibákkal fejeződött be</value>
 	</data>
+	<data name="WarningN2TRamTest" xml:space="preserve">
+		<value>Az {0} tartalmazó teszt futtatása helytelen eredményt ad a Nand to Tetris hardverszimulátor {0}{1}.</value>
+	</data>
 </root>

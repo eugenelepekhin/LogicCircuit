@@ -1327,4 +1327,7 @@
 	<data name="MessageHdlExportDone" xml:space="preserve">
 		<value>صادرات HDL با خطاهای {0} به پایان رسید</value>
 	</data>
+	<data name="WarningN2TRamTest" xml:space="preserve">
+		<value>تست در حال اجرا حاوی {0} نتیجه نادرست در شبیه ساز سخت افزار Nand به تتریس {0}{1} تولید خواهد کرد.</value>
+	</data>
 </root>

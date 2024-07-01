@@ -1580,4 +1580,7 @@
 	<data name="MessageHdlExportDone" xml:space="preserve">
 		<value>Η εξαγωγή HDL ολοκληρώθηκε με σφάλματα {0}</value>
 	</data>
+	<data name="WarningN2TRamTest" xml:space="preserve">
+		<value>Η εκτέλεση δοκιμής που περιέχει {0} θα παράγει εσφαλμένο αποτέλεσμα στο {0}{1} προσομοιωτή υλικού Nand σε Tetris.</value>
+	</data>
 </root>

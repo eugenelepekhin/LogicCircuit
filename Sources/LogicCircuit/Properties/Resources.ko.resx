@@ -1551,4 +1551,7 @@ Tri-state와 적절한 제어 회로를 함께 써서 멀티플렉서를 만들 
 	<data name="MessageHdlExportDone" xml:space="preserve">
 		<value>HDL 내보내기가 {0} 오류와 함께 완료됨</value>
 	</data>
+	<data name="WarningN2TRamTest" xml:space="preserve">
+		<value>{0} 포함된 테스트를 실행하면 Nand to Tetris 하드웨어 시뮬레이터 {0}{1}에서 잘못된 결과가 생성됩니다.</value>
+	</data>
 </root>

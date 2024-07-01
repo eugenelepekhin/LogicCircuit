@@ -1563,4 +1563,7 @@ Ar norite užkrauti automatiškai išsaugota šio failo būseną?</value>
 	<data name="MessageHdlExportDone" xml:space="preserve">
 		<value>HDL eksportavimas baigtas su {0} klaidomis</value>
 	</data>
+	<data name="WarningN2TRamTest" xml:space="preserve">
+		<value>Atliekant bandymą, kuriame yra {0}, bus gautas neteisingas "Nand to Tetris" aparatinės įrangos simuliatoriaus {0}{1} rezultatas.</value>
+	</data>
 </root>

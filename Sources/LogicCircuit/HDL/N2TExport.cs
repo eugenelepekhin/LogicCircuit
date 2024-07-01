@@ -78,6 +78,9 @@ namespace LogicCircuit {
 							this.Error(Properties.Resources.ErrorHdlRAMWriteOn1(memory.Name, symbol.CircuitSymbol.Point));
 							valid = false;
 						}
+						if(this.ExportTests) {
+							this.Warning(Properties.Resources.WarningN2TRamTest(memory.Name, symbol.CircuitSymbol.Point));
+						}
 					} else {
 						if(memory.AddressBitWidth != 15 || memory.DataBitWidth != 16) {
 							this.Error(Properties.Resources.ErrorHdlROMBitWidth(memory.Name, symbol.CircuitSymbol.Point));

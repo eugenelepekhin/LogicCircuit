@@ -24,7 +24,7 @@ namespace LogicCircuit {
 			public override int GetHashCode() => HashCode.Combine(this.Jam, this.Bit);
 		}
 
-		private readonly bool exportTests;
+		protected bool ExportTests { get; }
 		private readonly bool commentPoints;
 
 		private readonly Action<string> logMessage;
@@ -33,7 +33,7 @@ namespace LogicCircuit {
 		private int ErrorCount { get; set; }
 
 		protected HdlExport(bool exportTests, bool commentPoints, Action<string> logMessage, Action<string> logError, Action<string> logWarning) {
-			this.exportTests = exportTests;
+			this.ExportTests = exportTests;
 			this.commentPoints = commentPoints;
 			this.logMessage = logMessage;
 			this.logError = logError;
@@ -76,7 +76,7 @@ namespace LogicCircuit {
 					string path = Path.Combine(folder, file);
 					File.WriteAllText(path, hdl);
 					this.Message(Properties.Resources.MessageHdlExportResut(logicalCircuit.Name, this.ErrorCount));
-					if(this.exportTests) {
+					if(this.ExportTests) {
 						this.ExportTest(logicalCircuit, folder);
 					}
 					return this.ErrorCount == 0;

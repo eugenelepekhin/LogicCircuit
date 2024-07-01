@@ -1639,4 +1639,7 @@ Permite seleccionar el tamaño y profundidad de color / esquema:
 	<data name="MessageHdlExportDone" xml:space="preserve">
 		<value>La exportación HDL ha finalizado con {0} errores</value>
 	</data>
+	<data name="WarningN2TRamTest" xml:space="preserve">
+		<value>La ejecución de la prueba que contiene {0} producirá un resultado incorrecto en el simulador de hardware de Nand a Tetris {0}{1}.</value>
+	</data>
 </root>

@@ -3479,5 +3479,12 @@ namespace LogicCircuit.Properties {
  		public static string MessageHdlExportDone(int errorCount) {
 			return string.Format(FormatCulture, ResourceManager.GetString("MessageHdlExportDone", Culture), errorCount);
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Running test containing {0} will produce incorrect result on Nand to Tetris hardware simulator {0}{1}..
+		/// </summary>
+ 		public static string WarningN2TRamTest(string cirsuitName, GridPoint point) {
+			return string.Format(FormatCulture, ResourceManager.GetString("WarningN2TRamTest", Culture), cirsuitName, point);
+		}
 	}
 }

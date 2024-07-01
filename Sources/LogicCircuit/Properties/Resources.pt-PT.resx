@@ -1655,4 +1655,7 @@ Você deseja carregar a configuração de salvamento automático para este arqui
 	<data name="MessageHdlExportDone" xml:space="preserve">
 		<value>A exportação de HDL foi concluída com erros de {0}</value>
 	</data>
+	<data name="WarningN2TRamTest" xml:space="preserve">
+		<value>Executar o teste contendo {0} produzirá resultado incorreto no simulador de hardware Nand para Tetris {0}{1}.</value>
+	</data>
 </root>

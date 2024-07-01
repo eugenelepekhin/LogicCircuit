@@ -1696,4 +1696,8 @@ Do you want to load auto saved state of this file?</value>
     <value>HDL export is finished with {0} errors</value>
     <comment>{int errorCount}</comment>
   </data>
+  <data name="WarningN2TRamTest" xml:space="preserve">
+    <value>Running test containing {0} will produce incorrect result on Nand to Tetris hardware simulator {0}{1}.</value>
+    <comment>{string cirsuitName, GridPoint point}</comment>
+  </data>
 </root>

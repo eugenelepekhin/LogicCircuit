@@ -1514,4 +1514,7 @@
 	<data name="MessageHdlExportDone" xml:space="preserve">
 		<value>تم الانتهاء من تصدير HDL مع {0} أخطاء</value>
 	</data>
+	<data name="WarningN2TRamTest" xml:space="preserve">
+		<value>سيؤدي تشغيل الاختبار الذي يحتوي على {0} إلى نتيجة غير صحيحة على {0}{1} محاكي أجهزة Nand to Tetris.</value>
+	</data>
 </root>

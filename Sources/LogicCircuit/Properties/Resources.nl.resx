@@ -1628,4 +1628,7 @@ Wil je het, automatisch opgeslagen, bestand laden.</value>
 	<data name="MessageHdlExportDone" xml:space="preserve">
 		<value>HDL-export is voltooid met {0} fouten</value>
 	</data>
+	<data name="WarningN2TRamTest" xml:space="preserve">
+		<value>Het uitvoeren van een test met {0} zal een onjuist resultaat opleveren op de Nand to Tetris-hardwaresimulator {0}{1}.</value>
+	</data>
 </root>

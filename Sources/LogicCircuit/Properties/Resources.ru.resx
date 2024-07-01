@@ -1590,4 +1590,7 @@
 	<data name="MessageHdlExportDone" xml:space="preserve">
 		<value>Экспорт HDL завершен с {0} ошибками</value>
 	</data>
+	<data name="WarningN2TRamTest" xml:space="preserve">
+		<value>Запуск теста, содержащего {0}, даст неверный результат на Nand to Tetris hardware simulator: {0}{1}.</value>
+	</data>
 </root>

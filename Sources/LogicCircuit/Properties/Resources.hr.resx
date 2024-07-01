@@ -1573,4 +1573,7 @@ Takav sklop se ne može koristiti više od jednom na drugim sklopovima jer će s
 	<data name="MessageHdlExportDone" xml:space="preserve">
 		<value>Izvoz HDL-a završen je s {0} pogreškama</value>
 	</data>
+	<data name="WarningN2TRamTest" xml:space="preserve">
+		<value>Trčanje test koji sadrži {0} će dati netočan rezultat na Nand to Tetris hardverskom simulatoru {0}{1}.</value>
+	</data>
 </root>
