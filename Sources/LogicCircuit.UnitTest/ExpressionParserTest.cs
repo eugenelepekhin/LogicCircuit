@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.VisualStudio.TestTools.UnitTesting.STAExtensions;
+﻿using System.Text;
 
 namespace LogicCircuit.UnitTest {
 	/// <summary>

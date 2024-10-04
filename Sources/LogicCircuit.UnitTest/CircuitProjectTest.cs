@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting.STAExtensions;
-
-namespace LogicCircuit.UnitTest {
+﻿namespace LogicCircuit.UnitTest {
 	/// <summary>
 	///This is a test class for CircuitProjectTest and is intended
 	///to contain all CircuitProjectTest Unit Tests

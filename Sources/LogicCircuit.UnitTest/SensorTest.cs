@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting.STAExtensions;
-
-namespace LogicCircuit.UnitTest {
+﻿namespace LogicCircuit.UnitTest {
 	[STATestClass]
 	[DeploymentItem("Properties\\SensorTests.CircuitProject")]
 	public class SensorTest {

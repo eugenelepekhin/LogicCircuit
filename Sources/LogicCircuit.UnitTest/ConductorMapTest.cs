@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace LogicCircuit.UnitTest {
+﻿namespace LogicCircuit.UnitTest {
 	/// <summary>
 	/// This is a test class for ConductorMap and is intended
 	/// to contain all ConductorMap and Conductor Unit Tests

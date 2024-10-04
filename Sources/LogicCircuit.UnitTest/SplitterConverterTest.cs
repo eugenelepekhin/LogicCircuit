@@ -1,5 +1,4 @@
 ﻿using System.Xml;
-using Microsoft.VisualStudio.TestTools.UnitTesting.STAExtensions;
 
 namespace LogicCircuit.UnitTest {
 	/// <summary>

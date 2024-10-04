@@ -1,8 +1,5 @@
 ﻿// Ignore Spelling: Hdl
 
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-
 namespace LogicCircuit.UnitTest.HDL {
 	internal class HdlPart : HdlItem {
 		public class Connection {

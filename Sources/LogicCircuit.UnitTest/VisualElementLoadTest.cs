@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting.STAExtensions;
-
-namespace LogicCircuit.UnitTest {
+﻿namespace LogicCircuit.UnitTest {
 	/// <summary>
 	/// Test of loading of projects with visual elements like 7 segment display.
 	/// </summary>

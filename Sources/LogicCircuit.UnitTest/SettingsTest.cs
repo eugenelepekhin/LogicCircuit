@@ -1,8 +1,4 @@
-﻿using System;
-using System.IO;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace LogicCircuit.UnitTest {
+﻿namespace LogicCircuit.UnitTest {
 	/// <summary>
 	///This is a test class for Settings and is intended
 	///to contain all Settings Unit Tests

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Globalization;
-using System.Linq;
 using System.Resources;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using LogicCircuit.Properties;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace LogicCircuit.UnitTest {
 	/// <summary>

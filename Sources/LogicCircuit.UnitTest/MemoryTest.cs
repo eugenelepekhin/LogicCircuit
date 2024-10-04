@@ -1,7 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace LogicCircuit.UnitTest {
+﻿namespace LogicCircuit.UnitTest {
 	/// <summary>
 	/// This is a test class for Memory and is intended
 	/// to contain all MemoryTest Unit Tests
