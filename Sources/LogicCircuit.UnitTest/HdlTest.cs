@@ -101,6 +101,7 @@ namespace LogicCircuit.UnitTest {
 				this.Message(message);
 				text = message;
 			}
+			Properties.Resources.Culture = CultureInfo.GetCultureInfo("en-US");
 			CircuitProject project = this.LoadCircuitProject();
 			string hdlPath = this.HdlFolder();
 			List<LogicalCircuit> circuits = project.LogicalCircuitSet.Where(c => c.Category == "Error").ToList();
@@ -119,7 +120,7 @@ namespace LogicCircuit.UnitTest {
 					Assert.IsNotNull(node);
 					if(node != null) {
 						string pattern = node.InnerText;
-						Assert.IsTrue(Regex.IsMatch(text, pattern));
+						Assert.IsTrue(Regex.IsMatch(text, pattern), $"Circuit: {circuit.Name} has unmatched pattern: \"{pattern}\" and text: \"{text}\"");
 					}
 				}
 			}
