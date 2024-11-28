@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 
 namespace LogicCircuit {
@@ -17,17 +18,24 @@ namespace LogicCircuit {
 			this.InitializeComponent();
 
 			this.name.Text = this.probe.DisplayName;
+			this.side.SelectedItem = PinDescriptor.PinSideDescriptor(this.probe.PinSide);
 			this.description.Text = this.probe.Note ?? string.Empty;
 		}
 
 		private void ButtonOkClick(object sender, RoutedEventArgs e) {
 			try {
 				string name = this.name.Text.Trim();
+				PinSide pinSide = ((EnumDescriptor<PinSide>)this.side.SelectedItem).Value;
 				string note = this.description.Text.Trim();
-				if(this.probe.DisplayName != name || this.probe.Note != note) {
+				if(this.probe.DisplayName != name ||
+					this.probe.PinSide != pinSide ||
+					this.probe.Note != note
+				) {
 					this.probe.CircuitProject.InTransaction(() => {
 						this.probe.Rename(name);
+						this.probe.PinSide = pinSide;
 						this.probe.Note = note;
+						this.probe.Pins.First().PinSide = pinSide;
 					});
 				}
 				this.Close();

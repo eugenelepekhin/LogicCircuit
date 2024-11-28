@@ -208,9 +208,25 @@ namespace LogicCircuit {
 	}
 
 	public class ProbeDescriptor : IOCircuitDescriptor<CircuitProbe> {
+
+		private EnumDescriptor<PinSide> pinSide;
+		public EnumDescriptor<PinSide> PinSide {
+			get => this.pinSide;
+			set {
+				if(this.pinSide != value) {
+					this.InTransaction(() => {
+						this.Circuit.Pins.First().PinSide = value.Value;
+					});
+					this.pinSide = value;
+					this.RefreshGlyph();
+				}
+			}
+		}
+
 		public string Name { get; set; }
 
-		public ProbeDescriptor(CircuitProject circuitProject) : base(circuitProject.CircuitProbeSet.Create(null)) {
+		public ProbeDescriptor(CircuitProject circuitProject) : base(circuitProject.CircuitProbeSet.Create(null, LogicCircuit.PinSide.Left)) {
+			this.pinSide = PinDescriptor.PinSideDescriptor(LogicCircuit.PinSide.Left);
 			this.Name = string.Empty;
 			this.Circuit.Note = Properties.Resources.ToolTipDescriptorProbe;
 		}
@@ -219,7 +235,7 @@ namespace LogicCircuit {
 			string name = this.Name;
 			this.Name = string.Empty;
 			this.NotifyPropertyChanged(nameof(this.Name));
-			return circuitProject.CircuitProbeSet.Create(name);
+			return circuitProject.CircuitProbeSet.Create(name, this.PinSide.Value);
 		}
 	}
 

@@ -355,6 +355,7 @@ namespace LogicCircuit {
 
 			if(comparer.Equals(ns, CircuitProject.PersistenceNamespace)) return string.Empty;
 
+			if(comparer.Equals(ns, "http://LogicCircuit.net/2.0.0.12/CircuitProject.xsd")) return Schema.ConvertFrom_2_0_0_12;
 			if(comparer.Equals(ns, "http://LogicCircuit.net/2.0.0.11/CircuitProject.xsd")) return Schema.ConvertFrom_2_0_0_11;
 			if(comparer.Equals(ns, "http://LogicCircuit.net/2.0.0.10/CircuitProject.xsd")) return Schema.ConvertFrom_2_0_0_10;
 			if(comparer.Equals(ns, "http://LogicCircuit.net/2.0.0.9/CircuitProject.xsd")) return Schema.ConvertFrom_2_0_0_9;

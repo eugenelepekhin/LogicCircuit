@@ -18,6 +18,7 @@ namespace LogicCircuit {
 			get { return this.fieldName; }
 			set { this.fieldName = this.CheckName(value); }
 		}
+		public PinSide PinSide;
 		public string Note;
 		internal CircuitProbe? CircuitProbe;
 		// Field accessors
@@ -91,6 +92,41 @@ namespace LogicCircuit {
 			}
 		}
 
+		// Accessor of the PinSide field
+		public sealed class PinSideField : IField<CircuitProbeData, PinSide>, IFieldSerializer<CircuitProbeData> {
+			public static readonly PinSideField Field = new PinSideField();
+			private PinSideField() {}
+			public string Name { get { return "PinSide"; } }
+			public int Order { get; set; }
+			public PinSide DefaultValue { get { return PinSide.Left; } }
+			public PinSide GetValue(ref CircuitProbeData record) {
+				return record.PinSide;
+			}
+			public void SetValue(ref CircuitProbeData record, PinSide value) {
+				record.PinSide = value;
+			}
+			public int Compare(ref CircuitProbeData l, ref CircuitProbeData r) {
+				return l.PinSide.CompareTo(r.PinSide);
+			}
+			public int Compare(PinSide l, PinSide r) {
+				return l.CompareTo(r);
+			}
+
+			// Implementation of interface IFieldSerializer<CircuitProbeData>
+			bool IFieldSerializer<CircuitProbeData>.NeedToSave(ref CircuitProbeData data) {
+				return this.Compare(data.PinSide, this.DefaultValue) != 0;
+			}
+			string IFieldSerializer<CircuitProbeData>.GetTextValue(ref CircuitProbeData data) {
+				return string.Format(CultureInfo.InvariantCulture, "{0}", data.PinSide);
+			}
+			void IFieldSerializer<CircuitProbeData>.SetDefault(ref CircuitProbeData data) {
+				data.PinSide = this.DefaultValue;
+			}
+			void IFieldSerializer<CircuitProbeData>.SetTextValue(ref CircuitProbeData data, string text) {
+				data.PinSide = EnumHelper.Parse<PinSide>(text, this.DefaultValue);
+			}
+		}
+
 		// Accessor of the Note field
 		public sealed class NoteField : IField<CircuitProbeData, string>, IFieldSerializer<CircuitProbeData> {
 			public static readonly NoteField Field = new NoteField();
@@ -154,6 +190,7 @@ namespace LogicCircuit {
 		private static readonly IField<CircuitProbeData>[] fields = {
 			CircuitProbeIdField.Field,
 			NameField.Field,
+			PinSideField.Field,
 			NoteField.Field,
 			CircuitProbeField.Field
 		};
@@ -212,6 +249,12 @@ namespace LogicCircuit {
 			set { this.Table.SetField(this.CircuitProbeRowId, CircuitProbeData.NameField.Field, value); }
 		}
 
+		// Gets or sets value of the PinSide field.
+		public PinSide PinSide {
+			get { return this.Table.GetField(this.CircuitProbeRowId, CircuitProbeData.PinSideField.Field); }
+			set { this.Table.SetField(this.CircuitProbeRowId, CircuitProbeData.PinSideField.Field, value); }
+		}
+
 		// Gets or sets value of the Note field.
 		public override string Note {
 			get { return this.Table.GetField(this.CircuitProbeRowId, CircuitProbeData.NoteField.Field); }
@@ -229,6 +272,9 @@ namespace LogicCircuit {
 				}
 				if(CircuitProbeData.NameField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("Name");
+				}
+				if(CircuitProbeData.PinSideField.Field.Compare(ref oldData, ref newData) != 0) {
+					this.NotifyPropertyChanged("PinSide");
 				}
 				if(CircuitProbeData.NoteField.Field.Compare(ref oldData, ref newData) != 0) {
 					this.NotifyPropertyChanged("Note");
@@ -321,6 +367,7 @@ namespace LogicCircuit {
 			// Fields of CircuitProbe table
 			Guid CircuitProbeId,
 			string Name,
+			PinSide PinSide,
 			string Note
 			// Fields of Circuit table
 
@@ -335,6 +382,7 @@ namespace LogicCircuit {
 			CircuitProbeData dataCircuitProbe = new CircuitProbeData() {
 				CircuitProbeId = CircuitProbeId,
 				Name = Name,
+				PinSide = PinSide,
 				Note = Note,
 			};
 			return this.Create(this.Table.Insert(ref dataCircuitProbe), rowIdCircuit);

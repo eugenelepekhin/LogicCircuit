@@ -263,7 +263,7 @@ namespace LogicCircuit {
 			Tracer.Assert(pin.PinType == PinType.Output);
 			CircuitProject project = pin.CircuitProject;
 			this.Pin = pin;
-			this.Value = project.CircuitProbeSet.Create(null);
+			this.Value = project.CircuitProbeSet.Create(null, PinSide.Left);
 			CircuitSymbol? pinSymbol = project.CircuitSymbolSet.SelectByCircuit(pin).FirstOrDefault();
 			Tracer.Assert(pinSymbol);
 			this.Symbol = project.CircuitSymbolSet.Create(this.Value, pin.LogicalCircuit, pinSymbol!.X, pinSymbol.Y);

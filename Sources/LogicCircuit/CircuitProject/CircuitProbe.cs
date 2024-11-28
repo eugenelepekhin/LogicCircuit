@@ -23,30 +23,28 @@ namespace LogicCircuit {
 				}
 				return text;
 			}
-			set { throw new InvalidOperationException(); }
+			set => throw new InvalidOperationException();
 		}
 
-		public override string ToolTip {
-			get { return Circuit.BuildToolTip(Properties.Resources.CircuitProbeToolTip(this.DisplayName).Trim(), this.Note); }
-		}
+		public override string ToolTip => Circuit.BuildToolTip(Properties.Resources.CircuitProbeToolTip(this.DisplayName).Trim(), this.Note);
 
 		public override string Category {
-			get { return Properties.Resources.CategoryInputOutput; }
-			set { throw new InvalidOperationException(); }
+			get => Properties.Resources.CategoryInputOutput;
+			set => throw new InvalidOperationException();
 		}
 
-		public bool HasName {
-			get { return !StringComparer.OrdinalIgnoreCase.Equals(this.CircuitProbeId.ToString(), this.Name); }
-		}
+		public bool HasName => !StringComparer.OrdinalIgnoreCase.Equals(this.CircuitProbeId.ToString(), this.Name);
 
-		public string DisplayName {
-			get { return this.HasName ? this.Name : string.Empty; }
-		}
+		public string DisplayName => this.HasName ? this.Name : string.Empty;
 
 		public void Rename(string name) {
-			name = string.IsNullOrWhiteSpace(name) ? this.CircuitProbeId.ToString() : name.Trim();
-			if(CircuitProbeData.NameField.Field.Compare(this.DisplayName, name) != 0) {
-				this.Name = this.CircuitProject.CircuitProbeSet.UniqueName(name);
+			if(string.IsNullOrWhiteSpace(name)) {
+				this.Name = this.CircuitProbeId.ToString();
+			} else {
+				name = name.Trim();
+				if(CircuitProbeData.NameField.Field.Compare(this.DisplayName, name) != 0) {
+					this.Name = this.CircuitProject.CircuitProbeSet.UniqueName(name);
+				}
 			}
 		}
 
@@ -64,25 +62,35 @@ namespace LogicCircuit {
 		}
 
 		partial void OnCircuitProbeChanged() {
+			this.ResetPins();
 			this.InvalidateDistinctSymbol();
 		}
 	}
 
 	[SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
 	public partial class CircuitProbeSet : NamedItemSet {
+		private void CreateDevicePin(CircuitProbe probe) {
+			DevicePin pin = this.CircuitProject.DevicePinSet.Create(probe, PinType.Input, 1);
+			pin.PinSide = probe.PinSide;
+		}
+
 		private CircuitProbe Register(RowId rowId) {
 			CircuitData data = new CircuitData() {
 				CircuitId = this.Table.GetField(rowId, CircuitProbeData.CircuitProbeIdField.Field)
 			};
 			CircuitProbe probe = this.Create(rowId, this.CircuitProject.CircuitTable.Insert(ref data));
-			this.CircuitProject.DevicePinSet.Create(probe, PinType.Input, 1);
+			this.CreateDevicePin(probe);
 			return probe;
 		}
 
-		public CircuitProbe Create(string? name) {
+		public CircuitProbe Create(string? name, PinSide pinSide) {
 			Guid id = Guid.NewGuid();
-			CircuitProbe probe = this.CreateItem(id, string.IsNullOrWhiteSpace(name) ? id.ToString() : this.UniqueName(name.Trim()), CircuitProbeData.NoteField.Field.DefaultValue);
-			this.CircuitProject.DevicePinSet.Create(probe, PinType.Input, 1);
+			CircuitProbe probe = this.CreateItem(id,
+				string.IsNullOrWhiteSpace(name) ? id.ToString() : this.UniqueName(name.Trim()),
+				pinSide,
+				CircuitProbeData.NoteField.Field.DefaultValue
+			);
+			this.CreateDevicePin(probe);
 			return probe;
 		}
 

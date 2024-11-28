@@ -12,6 +12,9 @@
 		<Label Content="{x:Static properties:Resources.TitleName}"/>
 		<TextBox Name="name" MaxLength="4"/>
 
+		<Label Content="{x:Static properties:Resources.TitlePinSide}"/>
+		<lc:AutoWidthComboBox x:Name="side" ItemsSource="{x:Static lc:PinDescriptor.PinSideRange}" ToolTip="{x:Static properties:Resources.ToolTipDevicePinSide}"/>
+
 		<Label Content="{x:Static properties:Resources.TitleDescription}"/>
 		<TextBox Name="description" Style="{StaticResource NoteEditor}"/>
 

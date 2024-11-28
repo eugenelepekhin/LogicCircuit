@@ -346,8 +346,16 @@
 							<DataTemplate DataType="{x:Type lc:ProbeDescriptor}">
 								<StackPanel Style="{StaticResource DescriptorPanel}">
 									<ContentControl/>
-									<TextBox MaxLength="4" Text="{Binding Path=Name}"/>
-									<TextBlock Style="{StaticResource PropertyLabel}" Text="{x:Static properties:Resources.CaptionName}"/>
+									<lc:AutoGrid Style="{StaticResource PropertyGrid}">
+										<TextBox MaxLength="4" Text="{Binding Path=Name}"/>
+										<TextBlock Style="{StaticResource PropertyLabel}" Text="{x:Static properties:Resources.CaptionName}"/>
+										<lc:AutoWidthComboBox
+											ItemsSource="{x:Static lc:PinDescriptor.PinSideRange}"
+											SelectedItem="{Binding Path=PinSide, Mode=TwoWay}"
+											ToolTip="{x:Static properties:Resources.ToolTipDevicePinSide}"
+										/>
+										<TextBlock Style="{StaticResource PropertyLabel}" Text="{x:Static properties:Resources.CaptionPinSide}"/>
+									</lc:AutoGrid>
 									<TextBlock Style="{StaticResource CircuitName}" Text="{x:Static properties:Resources.CircuitProbeName}"/>
 								</StackPanel>
 							</DataTemplate>

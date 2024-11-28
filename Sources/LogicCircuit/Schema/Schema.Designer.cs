@@ -109,6 +109,13 @@ namespace LogicCircuit {
 		}
 
 		/// <summary>
+		/// Looks up a localized string similar to content of the file: "ConvertFrom.2.0.0.12.xslt".
+		/// </summary>
+ 		public static System.String ConvertFrom_2_0_0_12 {
+			get { return (System.String)ResourceManager.GetObject("ConvertFrom_2_0_0_12", Culture); }
+		}
+
+		/// <summary>
 		/// Looks up a localized string similar to content of the file: "convertfrom.2.0.0.2.xslt".
 		/// </summary>
  		public static System.String ConvertFrom_2_0_0_2 {
