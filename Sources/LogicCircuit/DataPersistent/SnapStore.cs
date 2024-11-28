@@ -265,7 +265,7 @@ namespace LogicCircuit.DataPersistent {
 			int threshold = (transactionType == TransactionType.Undo) ? 1 : -1;
 			for(int i = max; min <= i; i--) {
 				ValueList<TransactionType>.Address address = this.version.ItemAddress(i);
-				Debug.Assert(Enum.IsDefined(typeof(TransactionType), address.Page[address.Index]), "Unexpected value");
+				Debug.Assert(Enum.IsDefined(address.Page[address.Index]), "Unexpected value");
 				switch(address.Page[address.Index]) {
 				case TransactionType.Edit:
 					if(transactionType == TransactionType.Redo) {

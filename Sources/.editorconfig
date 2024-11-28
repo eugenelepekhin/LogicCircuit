@@ -11,3 +11,6 @@ dotnet_diagnostic.CA1034.severity = none
 
 # CA5394: Do not use insecure randomness
 dotnet_diagnostic.CA5394.severity = none
+
+# CA1515: Because an application's API isn't typically referenced from outside the assembly, types can be made internal
+dotnet_diagnostic.CA1515.severity = none

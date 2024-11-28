@@ -55,7 +55,6 @@ namespace LogicCircuit {
 			return pack;
 		}
 
-		[SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "2#")]
 		public static bool ToInt(long packed, int bitWidth, out int result) {
 			Tracer.Assert(0 < bitWidth && bitWidth <= 32);
 			int unpacked = 0;
@@ -81,7 +80,7 @@ namespace LogicCircuit {
 		public State Unpack(long pack, int bitNumber) {
 			Tracer.Assert(0 <= bitNumber && bitNumber < this.BitWidth);
 			State state = (State)(((int)(pack >> (2 * bitNumber))) & 0x03);
-			Tracer.Assert(Enum.IsDefined(typeof(State), state));
+			Tracer.Assert(Enum.IsDefined(state));
 			return state;
 		}
 

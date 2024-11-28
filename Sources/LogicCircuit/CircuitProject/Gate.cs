@@ -8,7 +8,7 @@ namespace LogicCircuit {
 		public const int MaxInputCount = 18;
 
 		public override string Name { get; set; }
-		public override string ToolTip { get { return Circuit.BuildToolTip(this.Name, this.Note); } }
+		public override string ToolTip => Circuit.BuildToolTip(this.Name, this.Note);
 		public override string Notation { get; set; }
 		public override string Note { get; set; }
 		public override string Category { get; set; }
@@ -20,15 +20,13 @@ namespace LogicCircuit {
 
 		public bool InvertedOutput { get; internal set; }
 
-		public int InputCount { get { return this.Pins.Count(p => p.PinType == PinType.Input); } }
+		public int InputCount => this.Pins.Count(p => p.PinType == PinType.Input);
 
 		public override Circuit CopyTo(LogicalCircuit target) {
 			return target.CircuitProject.GateSet.Gate(this.GateId)!;
 		}
 
-		public override bool IsDisplay {
-			get { return this.GateType == LogicCircuit.GateType.Led; }
-		}
+		public override bool IsDisplay => this.GateType == LogicCircuit.GateType.Led;
 
 		protected override int CircuitSymbolWidth(int defaultWidth) {
 			Tracer.Assert(defaultWidth == (this.GateType == LogicCircuit.GateType.TriState1 || this.GateType == LogicCircuit.GateType.TriState2 ? 2 : 1));
@@ -136,7 +134,7 @@ namespace LogicCircuit {
 	[SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
 	public partial class GateSet {
 		private static bool IsValid(GateType gateType) {
-			return Enum.IsDefined(typeof(GateType), gateType) && gateType != GateType.Odd && gateType != GateType.Even && gateType != GateType.Probe;
+			return Enum.IsDefined(gateType) && gateType != GateType.Odd && gateType != GateType.Even && gateType != GateType.Probe;
 		}
 
 		private static bool IsValid(GateType gateType, int inputCount) {

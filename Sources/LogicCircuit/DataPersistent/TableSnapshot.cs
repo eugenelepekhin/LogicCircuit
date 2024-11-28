@@ -31,7 +31,6 @@ namespace LogicCircuit.DataPersistent {
 		/// <summary>
 		/// Gets fields of the table
 		/// </summary>
-		[SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
 		public IEnumerable<IField<TRecord>> Fields { get { return new ReadOnlyCollection<IField<TRecord>>(this.table.Fields); } }
 
 		/// <summary>
@@ -210,7 +209,7 @@ namespace LogicCircuit.DataPersistent {
 				throw new ArgumentException(Properties.Resources.ErrorPrimaryKeyMissing(this.Name), nameof(parentTable));
 			}
 			this.table.ValidateField(foreignColumn);
-			if(!Enum.IsDefined(typeof(ForeignKeyAction), action)) {
+			if(!Enum.IsDefined(action)) {
 				throw new ArgumentOutOfRangeException(nameof(action));
 			}
 			if(this.table.ForeignKeys[foreignColumn.Order] != null) {
@@ -244,7 +243,6 @@ namespace LogicCircuit.DataPersistent {
 		/// </summary>
 		/// <param name="data"></param>
 		/// <returns></returns>
-		[SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
 		public RowId Insert(ref TRecord data) {
 			this.ValidateModification();
 			RowId rowId = this.table.Insert(ref data);
@@ -368,7 +366,6 @@ namespace LogicCircuit.DataPersistent {
 		/// </summary>
 		/// <param name="rowId"></param>
 		/// <param name="data"></param>
-		[SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
 		public void GetData(RowId rowId, out TRecord data) {
 			this.table.GetData(rowId, this.StoreSnapshot.Version, out data);
 		}
@@ -621,7 +618,6 @@ namespace LogicCircuit.DataPersistent {
 		/// </summary>
 		/// <param name="version"></param>
 		/// <returns></returns>
-		[SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
 		public IEnumerator<TableChange<TRecord>>? GetChanges(int version) {
 			return this.GetChanges(version, version);
 		}
@@ -632,7 +628,6 @@ namespace LogicCircuit.DataPersistent {
 		/// <param name="fromVersion"></param>
 		/// <param name="toVersion"></param>
 		/// <returns></returns>
-		[SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
 		public IEnumerator<TableChange<TRecord>>? GetChanges(int fromVersion, int toVersion) {
 			ArgumentOutOfRangeException.ThrowIfLessThan(toVersion, fromVersion);
 			List<int> version = new List<int>();
@@ -653,7 +648,6 @@ namespace LogicCircuit.DataPersistent {
 		/// <param name="fromVersion"></param>
 		/// <param name="toVersion"></param>
 		/// <returns></returns>
-		[SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
 		public IEnumerator<TableChange<TRecord>>? GetVersionChangeChanges(int fromVersion, int toVersion) {
 			if(fromVersion != toVersion) {
 				bool reverse = toVersion < fromVersion;
@@ -838,16 +832,14 @@ namespace LogicCircuit.DataPersistent {
 				this.enumerator = this.action.GetEnumerator();
 			}
 
-			[SuppressMessage("Performance", "CA1854:Prefer the 'IDictionary.TryGetValue(TKey, out TValue)' method")]
-			[SuppressMessage("Performance", "CA1864:Prefer the 'IDictionary.TryAdd(TKey, TValue)' method")]
 			private void MergeChanges(List<int> version) {
 				for(int i = 0; i < version.Count; i++) {
 					using(IEnumerator<SnapTableChange<TRecord>> e = this.table.GetChanges(version[i])) {
 						while(e.MoveNext()) {
 							switch(e.Current.Action) {
 							case SnapTableAction.Insert:
-								if(this.action.ContainsKey(e.Current.RowId)) {
-									Debug.Assert(this.action[e.Current.RowId] == SnapTableAction.Delete);
+								if(this.action.TryGetValue(e.Current.RowId, out SnapTableAction value)) {
+									Debug.Assert(value == SnapTableAction.Delete);
 									this.action.Remove(e.Current.RowId);
 								} else {
 									this.action.Add(e.Current.RowId, SnapTableAction.Insert);
@@ -862,9 +854,10 @@ namespace LogicCircuit.DataPersistent {
 								}
 								break;
 							case SnapTableAction.Update:
-								if(!this.action.ContainsKey(e.Current.RowId)) {
-									this.action.Add(e.Current.RowId, SnapTableAction.Update);
-								}
+								this.action.TryAdd(e.Current.RowId, SnapTableAction.Update);
+								//if(!this.action.ContainsKey(e.Current.RowId)) {
+								//	this.action.Add(e.Current.RowId, SnapTableAction.Update);
+								//}
 								Debug.Assert(this.action[e.Current.RowId] != SnapTableAction.Delete);
 								break;
 							default:
@@ -876,11 +869,9 @@ namespace LogicCircuit.DataPersistent {
 				}
 			}
 
-			public TableChange<TRecord> Current {
-				get { return new TableChange<TRecord>(this, this.enumerator.Current.Key); }
-			}
+			public TableChange<TRecord> Current => new TableChange<TRecord>(this, this.enumerator.Current.Key);
 
-			object System.Collections.IEnumerator.Current { get { return this.Current; } }
+			object System.Collections.IEnumerator.Current => this.Current;
 
 			public void Dispose() {
 				this.enumerator.Dispose();
