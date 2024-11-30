@@ -224,6 +224,10 @@
 				<Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>
 			</Style>
 
+			<Style TargetType="{x:Type Paragraph}">
+				<Setter Property="Margin" Value="2,6"/>
+			</Style>
+
 			<Style TargetType="ComboBox">
 				<Setter Property="Margin" Value="3"/>
 				<Setter Property="HorizontalAlignment" Value="Stretch"/>
