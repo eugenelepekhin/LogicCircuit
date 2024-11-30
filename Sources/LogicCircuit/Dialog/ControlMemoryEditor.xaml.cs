@@ -15,21 +15,23 @@ namespace LogicCircuit {
 	public partial class ControlMemoryEditor : UserControl {
 		public static readonly DependencyProperty FunctionMemoryProperty = DependencyProperty.Register("FunctionMemory", typeof(IFunctionMemory), typeof(ControlMemoryEditor));
 		public IFunctionMemory FunctionMemory {
-			get { return (IFunctionMemory)this.GetValue(ControlMemoryEditor.FunctionMemoryProperty); }
-			set { this.SetValue(ControlMemoryEditor.FunctionMemoryProperty, value); }
+			get => (IFunctionMemory)this.GetValue(ControlMemoryEditor.FunctionMemoryProperty);
+			set => this.SetValue(ControlMemoryEditor.FunctionMemoryProperty, value);
 		}
 
 		public static readonly DependencyProperty IsReadOnlyProperty = DataGrid.IsReadOnlyProperty.AddOwner(typeof(ControlMemoryEditor));
 		public bool IsReadOnly {
-			get { return (bool)this.GetValue(ControlMemoryEditor.IsReadOnlyProperty); }
-			set { this.SetValue(ControlMemoryEditor.IsReadOnlyProperty, value); }
+			get => (bool)this.GetValue(ControlMemoryEditor.IsReadOnlyProperty);
+			set => this.SetValue(ControlMemoryEditor.IsReadOnlyProperty, value);
 		}
 
 		public static readonly DependencyProperty DataDigitsProperty = DependencyProperty.Register("DataDigits", typeof(int), typeof(ControlMemoryEditor));
 		public int DataDigits {
-			get { return (int)this.GetValue(ControlMemoryEditor.DataDigitsProperty); }
-			set { this.SetValue(ControlMemoryEditor.DataDigitsProperty, value); }
+			get => (int)this.GetValue(ControlMemoryEditor.DataDigitsProperty);
+			set => this.SetValue(ControlMemoryEditor.DataDigitsProperty, value);
 		}
+
+		private static readonly Dictionary<Guid, int> scrollToIndex = [];
 
 		public ControlMemoryEditor() {
 			this.InitializeComponent();
@@ -47,7 +49,7 @@ namespace LogicCircuit {
 					Style styleViewer = (Style)this.FindResource("cellViewer");
 					Style styleEditor = (Style)this.FindResource("cellEditor");
 					for(int i = 0; i < count; i++) {
-						DataGridTextColumn column = new DataGridTextColumn() {
+						DataGridTextColumn column = new() {
 							Header = string.Format(CultureInfo.InvariantCulture, "{0:X}", i),
 							Binding = new Binding(MemoryEditorRow.ColumnName[i]) {
 								UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
@@ -58,10 +60,29 @@ namespace LogicCircuit {
 						};
 						this.dataGrid.Columns.Add(column);
 					}
-					this.dataGrid.ItemsSource = this.RowList();
+					List<MemoryEditorRow> rowList = this.RowList();
+					this.dataGrid.ItemsSource = rowList;
+					DialogMemoryEditor? dialog = this.Dialog();
+					if(dialog != null && ControlMemoryEditor.scrollToIndex.TryGetValue(dialog.Memory.CircuitId, out int index) && 0 <= index && index < rowList.Count) {
+						this.dataGrid.ScrollIntoView(rowList[index]);
+					}
 				}
 			} catch(Exception exception) {
 				App.Mainframe.ReportException(exception);
+			}
+		}
+
+		private DialogMemoryEditor? Dialog() {
+			DialogMemoryEditor? dialog = Window.GetWindow(this) as DialogMemoryEditor;
+			return dialog;
+		}
+
+		private void DataGridSelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e) {
+			if(this.FunctionMemory != null && 0 < e.AddedCells.Count && e.AddedCells[0].Item is MemoryEditorRow row) {
+				DialogMemoryEditor? dialog = this.Dialog();
+				if(dialog != null) {
+					ControlMemoryEditor.scrollToIndex[dialog.Memory.CircuitId] = row.RowIndexRaw;
+				}
 			}
 		}
 
@@ -75,7 +96,7 @@ namespace LogicCircuit {
 			);
 			string cellFormat = string.Format(CultureInfo.InvariantCulture, format, ControlMemoryEditor.HexDigits(functionMemory.DataBitWidth));
 
-			List<MemoryEditorRow> list = new List<MemoryEditorRow>(rows);
+			List<MemoryEditorRow> list = new(rows);
 
 			for(int i = 0; i < rows; i++) {
 				list.Add(new MemoryEditorRow(functionMemory, i, rowIndexFormat, cellFormat));
@@ -105,7 +126,8 @@ namespace LogicCircuit {
 			private string[]? text;
 			private string?[]? error;
 
-			public string RowIndex { get { return string.Format(CultureInfo.InvariantCulture, rowIndexFormat, rowIndex); } }
+			public string RowIndex => string.Format(CultureInfo.InvariantCulture, rowIndexFormat, rowIndex);
+			public int RowIndexRaw => this.rowIndex;
 
 			public MemoryEditorRow(IFunctionMemory memory, int rowIndex, string rowIndexFormat, string cellFormat) {
 				this.memory = memory;
@@ -190,22 +212,22 @@ namespace LogicCircuit {
 				}
 			}
 
-			public string X0 { get { return this[0x0]; } set { this[0x0] = value; } }
-			public string X1 { get { return this[0x1]; } set { this[0x1] = value; } }
-			public string X2 { get { return this[0x2]; } set { this[0x2] = value; } }
-			public string X3 { get { return this[0x3]; } set { this[0x3] = value; } }
-			public string X4 { get { return this[0x4]; } set { this[0x4] = value; } }
-			public string X5 { get { return this[0x5]; } set { this[0x5] = value; } }
-			public string X6 { get { return this[0x6]; } set { this[0x6] = value; } }
-			public string X7 { get { return this[0x7]; } set { this[0x7] = value; } }
-			public string X8 { get { return this[0x8]; } set { this[0x8] = value; } }
-			public string X9 { get { return this[0x9]; } set { this[0x9] = value; } }
-			public string XA { get { return this[0xA]; } set { this[0xA] = value; } }
-			public string XB { get { return this[0xB]; } set { this[0xB] = value; } }
-			public string XC { get { return this[0xC]; } set { this[0xC] = value; } }
-			public string XD { get { return this[0xD]; } set { this[0xD] = value; } }
-			public string XE { get { return this[0xE]; } set { this[0xE] = value; } }
-			public string XF { get { return this[0xF]; } set { this[0xF] = value; } }
+			public string X0 { get => this[0x0]; set => this[0x0] = value; }
+			public string X1 { get => this[0x1]; set => this[0x1] = value; }
+			public string X2 { get => this[0x2]; set => this[0x2] = value; }
+			public string X3 { get => this[0x3]; set => this[0x3] = value; }
+			public string X4 { get => this[0x4]; set => this[0x4] = value; }
+			public string X5 { get => this[0x5]; set => this[0x5] = value; }
+			public string X6 { get => this[0x6]; set => this[0x6] = value; }
+			public string X7 { get => this[0x7]; set => this[0x7] = value; }
+			public string X8 { get => this[0x8]; set => this[0x8] = value; }
+			public string X9 { get => this[0x9]; set => this[0x9] = value; }
+			public string XA { get => this[0xA]; set => this[0xA] = value; }
+			public string XB { get => this[0xB]; set => this[0xB] = value; }
+			public string XC { get => this[0xC]; set => this[0xC] = value; }
+			public string XD { get => this[0xD]; set => this[0xD] = value; }
+			public string XE { get => this[0xE]; set => this[0xE] = value; }
+			public string XF { get => this[0xF]; set => this[0xF] = value; }
 
 			public void BeginEdit() {
 			}

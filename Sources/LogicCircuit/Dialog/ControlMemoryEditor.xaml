@@ -37,6 +37,7 @@
 		CanUserResizeRows="False"
 		CanUserSortColumns="False"
 		IsReadOnly="{Binding RelativeSource={RelativeSource AncestorType=lc:ControlMemoryEditor}, Path=IsReadOnly}"
+		SelectedCellsChanged="DataGridSelectedCellsChanged"
 	>
 		<DataGrid.RowStyle>
 			<Style TargetType="DataGridRow">

@@ -19,7 +19,7 @@ namespace LogicCircuit {
 		}
 
 		private SettingsWindowLocationCache? windowLocation;
-		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
+		public SettingsWindowLocationCache WindowLocation => this.windowLocation ??= new SettingsWindowLocationCache(Settings.User, this);
 		private readonly SettingsStringCache openFileFolder;
 		private readonly SettingsStringCache openTextFileFolder;
 		private readonly SettingsEnumCache<TextFileFormat> textFileFormat;
@@ -39,15 +39,15 @@ namespace LogicCircuit {
 		private byte[] data;
 		private readonly bool initialized;
 
-		private int AddressBitWidth { get { return (int)this.addressBitWidth.SelectedItem; } }
-		private int DataBitWidth { get { return (int)this.dataBitWidth.SelectedItem; } }
+		private int AddressBitWidth => (int)this.addressBitWidth.SelectedItem;
+		private int DataBitWidth => (int)this.dataBitWidth.SelectedItem;
 		private int currentAddressBitWidth;
 		private int currentDataBitWidth;
 
 		public static readonly DependencyProperty FunctionMemoryProperty = DependencyProperty.Register("FunctionMemory", typeof(IFunctionMemory), typeof(DialogMemoryEditor));
 		public IFunctionMemory FunctionMemory {
-			get { return (IFunctionMemory)this.GetValue(DialogMemoryEditor.FunctionMemoryProperty); }
-			set { this.SetValue(DialogMemoryEditor.FunctionMemoryProperty, value); }
+			get => (IFunctionMemory)this.GetValue(DialogMemoryEditor.FunctionMemoryProperty);
+			set => this.SetValue(DialogMemoryEditor.FunctionMemoryProperty, value);
 		}
 
 		protected DialogMemoryEditor(Memory memory) {
@@ -70,12 +70,12 @@ namespace LogicCircuit {
 			this.dataBitWidth.ItemsSource = PinDescriptor.BitWidthRange;
 			IEnumerable<EnumDescriptor<bool>> writeOnList = MemoryDescriptor.WriteOnList;
 			this.writeOn.ItemsSource = writeOnList;
-			EnumDescriptor<MemoryOnStart>[] onStartList = new EnumDescriptor<MemoryOnStart>[] {
+			EnumDescriptor<MemoryOnStart>[] onStartList = [
 				new EnumDescriptor<MemoryOnStart>(MemoryOnStart.Random, Properties.Resources.MemoryOnStartRandom),
 				new EnumDescriptor<MemoryOnStart>(MemoryOnStart.Zeros, Properties.Resources.MemoryOnStartZeros),
 				new EnumDescriptor<MemoryOnStart>(MemoryOnStart.Ones, Properties.Resources.MemoryOnStartOnes),
 				new EnumDescriptor<MemoryOnStart>(MemoryOnStart.Data, Properties.Resources.MemoryOnStartData)
-			};
+			];
 			this.onStart.ItemsSource = onStartList;
 
 			this.addressBitWidth.SelectedItem = this.currentAddressBitWidth = this.Memory.AddressBitWidth;
@@ -140,7 +140,7 @@ namespace LogicCircuit {
 
 		private void ButtonLoadClick(object sender, RoutedEventArgs e) {
 			try {
-				OpenFileDialog dialog = new OpenFileDialog {
+				OpenFileDialog dialog = new() {
 					InitialDirectory = Mainframe.IsDirectoryPathValid(this.openFileFolder.Value) ? this.openFileFolder.Value : Mainframe.DefaultProjectFolder()
 				};
 				bool? result = dialog.ShowDialog(this);
@@ -171,7 +171,7 @@ namespace LogicCircuit {
 
 		private void ButtonLoadTextClick(object sender, RoutedEventArgs e) {
 			try {
-				OpenFileDialog dialog = new OpenFileDialog {
+				OpenFileDialog dialog = new() {
 					InitialDirectory = Mainframe.IsDirectoryPathValid(this.openTextFileFolder.Value) ? this.openTextFileFolder.Value : Mainframe.DefaultProjectFolder()
 				};
 				bool? result = dialog.ShowDialog(this);
@@ -181,8 +181,8 @@ namespace LogicCircuit {
 					int dataBitWidth = this.DataBitWidth;
 					int cellCount = Memory.NumberCellsFor(addressBitWidth);
 					using(FileStream stream = File.Open(dialog.FileName, FileMode.Open, FileAccess.Read, FileShare.Read)) {
-						using StreamReader streamReader = new StreamReader(stream);
-						TextNumberReader reader = new TextNumberReader(streamReader, this.CurrentTextFileFormat.Value);
+						using StreamReader streamReader = new(stream);
+						TextNumberReader reader = new(streamReader, this.CurrentTextFileFormat.Value);
 						for(int i = 0; i < cellCount; i++) {
 							long value = reader.Next();
 							if(value == -1L) break;
@@ -199,7 +199,7 @@ namespace LogicCircuit {
 
 		private void ButtonSaveClick(object sender, RoutedEventArgs e) {
 			try {
-				SaveFileDialog dialog = new SaveFileDialog {
+				SaveFileDialog dialog = new() {
 					InitialDirectory = Mainframe.IsDirectoryPathValid(this.openFileFolder.Value) ? this.openFileFolder.Value : Mainframe.DefaultProjectFolder()
 				};
 				bool? result = dialog.ShowDialog(this);
@@ -242,8 +242,8 @@ namespace LogicCircuit {
 			private readonly byte[] data;
 
 			public int this[int index] {
-				get { return Memory.CellValue(this.data, this.DataBitWidth, index); }
-				set { Memory.SetCellValue(this.data, this.DataBitWidth, index, value); }
+				get => Memory.CellValue(this.data, this.DataBitWidth, index);
+				set => Memory.SetCellValue(this.data, this.DataBitWidth, index, value);
 			}
 
 			public MemoryEditor(byte[] data, int addressBitWidth, int dataBitWidth) {
