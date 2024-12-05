@@ -1379,4 +1379,10 @@ Circuiti di questo tipo non possono essere utilizzati più di una volta su altri
 	<data name="WarningN2TRamTest" xml:space="preserve">
 		<value>L'esecuzione di un test contenente {0} produrrà un risultato errato sul simulatore hardware da Nand a Tetris {0}{1}.</value>
 	</data>
+	<data name="SensorTypeSequence" xml:space="preserve">
+		<value>Sequenza</value>
+	</data>
+	<data name="SensorTypeClock" xml:space="preserve">
+		<value>Orologio</value>
+	</data>
 </root>

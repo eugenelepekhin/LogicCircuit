@@ -1554,4 +1554,10 @@ Tri-state와 적절한 제어 회로를 함께 써서 멀티플렉서를 만들 
 	<data name="WarningN2TRamTest" xml:space="preserve">
 		<value>{0} 포함된 테스트를 실행하면 Nand to Tetris 하드웨어 시뮬레이터 {0}{1}에서 잘못된 결과가 생성됩니다.</value>
 	</data>
+	<data name="SensorTypeSequence" xml:space="preserve">
+		<value>순서</value>
+	</data>
+	<data name="SensorTypeClock" xml:space="preserve">
+		<value>시계</value>
+	</data>
 </root>

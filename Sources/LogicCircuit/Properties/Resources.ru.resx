@@ -1593,4 +1593,10 @@
 	<data name="WarningN2TRamTest" xml:space="preserve">
 		<value>Запуск теста, содержащего {0}, даст неверный результат на Nand to Tetris hardware simulator: {0}{1}.</value>
 	</data>
+	<data name="SensorTypeSequence" xml:space="preserve">
+		<value>Последовательность</value>
+	</data>
+	<data name="SensorTypeClock" xml:space="preserve">
+		<value>Часы</value>
+	</data>
 </root>

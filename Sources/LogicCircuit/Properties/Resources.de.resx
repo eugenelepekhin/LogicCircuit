@@ -1590,4 +1590,10 @@ Möchten Sie den automatisch gespeicherten Stand dieser Datei laden?</value>
 	<data name="WarningN2TRamTest" xml:space="preserve">
 		<value>Das Ausführen eines Tests, der {0} enthält, führt zu einem falschen Ergebnis auf dem Nand-zu-Tetris-Hardwaresimulator-{0}{1}.</value>
 	</data>
+	<data name="SensorTypeSequence" xml:space="preserve">
+		<value>Reihenfolge</value>
+	</data>
+	<data name="SensorTypeClock" xml:space="preserve">
+		<value>Uhr</value>
+	</data>
 </root>

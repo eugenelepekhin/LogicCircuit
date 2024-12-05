@@ -6,5 +6,7 @@
 		Manual,
 		KeyCode,
 		ASCII,
+		Sequence,
+		Clock,
 	}
 }

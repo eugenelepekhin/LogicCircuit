@@ -1544,4 +1544,10 @@ Vill du ladda an automatiskt sparad fil istället?</value>
 	<data name="WarningN2TRamTest" xml:space="preserve">
 		<value>Att köra test som innehåller {0} kommer att ge felaktiga resultat på Nand till Tetris hårdvarusimulator {0}{1}.</value>
 	</data>
+	<data name="SensorTypeSequence" xml:space="preserve">
+		<value>Sekvens</value>
+	</data>
+	<data name="SensorTypeClock" xml:space="preserve">
+		<value>Klocka</value>
+	</data>
 </root>

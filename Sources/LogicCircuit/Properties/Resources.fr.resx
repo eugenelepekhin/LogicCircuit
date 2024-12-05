@@ -1591,4 +1591,10 @@ Voulez-vous charger l'état sauvegardé automatiquement de ce fichier ?</value>
 	<data name="WarningN2TRamTest" xml:space="preserve">
 		<value>L’exécution d’un test contenant {0} produira un résultat incorrect sur le simulateur de matériel Nand vers Tetris {0}{1}.</value>
 	</data>
+	<data name="SensorTypeSequence" xml:space="preserve">
+		<value>Séquence</value>
+	</data>
+	<data name="SensorTypeClock" xml:space="preserve">
+		<value>Horloge</value>
+	</data>
 </root>

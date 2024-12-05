@@ -1568,4 +1568,10 @@ temelde bir çoğullayıcıya eşdeğerdir.</value>
 	<data name="WarningN2TRamTest" xml:space="preserve">
 		<value>{0} içeren testin çalıştırılması, Nand to Tetris donanım simülatörü {0}{1} yanlış sonuç verecektir.</value>
 	</data>
+	<data name="SensorTypeSequence" xml:space="preserve">
+		<value>Sıra</value>
+	</data>
+	<data name="SensorTypeClock" xml:space="preserve">
+		<value>Saat</value>
+	</data>
 </root>

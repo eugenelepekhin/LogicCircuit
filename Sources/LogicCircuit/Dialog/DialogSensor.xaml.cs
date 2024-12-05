@@ -14,7 +14,7 @@ namespace LogicCircuit {
 	public partial class DialogSensor : Window, IDataErrorInfo {
 
 		private SettingsWindowLocationCache? windowLocation;
-		public SettingsWindowLocationCache WindowLocation { get { return this.windowLocation ?? (this.windowLocation = new SettingsWindowLocationCache(Settings.User, this)); } }
+		public SettingsWindowLocationCache WindowLocation => this.windowLocation ??= new SettingsWindowLocationCache(Settings.User, this);
 
 		private readonly Sensor sensor;
 
@@ -29,7 +29,7 @@ namespace LogicCircuit {
 		public string RandomMax { get; set; }
 		public string ManualInitialValue { get; set; }
 
-		public string Error { get { return null!; } }
+		public string Error => null!;
 
 		private int parsedMin = -1, parsedMax = -1;
 
@@ -102,7 +102,7 @@ namespace LogicCircuit {
 
 			this.SensorTypes = SensorDescriptor.SensorTypes;
 			SensorType type = this.sensor.SensorType;
-			this.IsLoop = (type != SensorType.Series);
+			this.IsLoop = type != SensorType.Series;
 			if(type == SensorType.Loop) {
 				type = SensorType.Series;
 			}

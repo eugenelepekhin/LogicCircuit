@@ -47,6 +47,12 @@ namespace LogicCircuit {
 			case SensorType.ASCII:
 				this.sensorValue = new KeyboardValue(this);
 				break;
+			case SensorType.Sequence:
+				this.sensorValue = new SequenceValue(this.Sensor.BitWidth);
+				break;
+			case SensorType.Clock:
+				this.sensorValue = new ClockValue(this.Sensor.BitWidth);
+				break;
 			default:
 				Tracer.Fail();
 				break;
@@ -192,8 +198,8 @@ namespace LogicCircuit {
 
 			private int sensorValue;
 			public int Value {
-				get { return this.sensorValue; }
-				set { this.sensorValue = Constant.Normalize(value, this.BitWidth); }
+				get => this.sensorValue;
+				set => this.sensorValue = Constant.Normalize(value, this.BitWidth);
 			}
 
 			protected SensorValue(int bitWidth) {
@@ -354,6 +360,45 @@ namespace LogicCircuit {
 
 			public override bool Flip() {
 				return false;
+			}
+		}
+
+		private class SequenceValue : SensorValue {
+			private readonly int maxValue;
+
+			public SequenceValue(int bitWidth) : base(bitWidth) {
+				this.maxValue = (bitWidth < 32) ? 1 << bitWidth : int.MaxValue;
+			}
+
+			public override bool Flip() {
+				this.Value = Math.Min(this.Value + 1, this.maxValue);
+				return true;
+			}
+		}
+
+		private class ClockValue : SensorValue {
+			public ClockValue(int bitWidth) : base(bitWidth) {}
+
+			public override bool Flip() {
+				DateTime now = DateTime.Now;
+				int value = Constant.Normalize(
+					(ToDecimalBinary(now.Hour) << 24) +
+					(ToDecimalBinary(now.Minute) << 16) +
+					(ToDecimalBinary(now.Second) << 8) +
+					ToDecimalBinary(now.Millisecond / 10),
+					this.BitWidth
+				);
+				if(this.Value != value) {
+					this.Value = value;
+					return true;
+				}
+				return false;
+			}
+
+			private static int ToDecimalBinary(int value) {
+				Debug.Assert(0 <= value && value < 100);
+				int dec = (((value / 10) % 10) << 4) + (value % 10);
+				return dec;
 			}
 		}
 	}

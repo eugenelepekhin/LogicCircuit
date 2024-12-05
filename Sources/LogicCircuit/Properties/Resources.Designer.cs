@@ -3486,5 +3486,19 @@ namespace LogicCircuit.Properties {
  		public static string WarningN2TRamTest(string cirsuitName, GridPoint point) {
 			return string.Format(FormatCulture, ResourceManager.GetString("WarningN2TRamTest", Culture), cirsuitName, point);
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Sequence.
+		/// </summary>
+ 		public static string SensorTypeSequence {
+			get { return ResourceManager.GetString("SensorTypeSequence", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Clock.
+		/// </summary>
+ 		public static string SensorTypeClock {
+			get { return ResourceManager.GetString("SensorTypeClock", Culture); }
+		}
 	}
 }

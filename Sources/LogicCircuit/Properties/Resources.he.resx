@@ -1620,4 +1620,10 @@
 	<data name="WarningN2TRamTest" xml:space="preserve">
 		<value>בדיקת הפעלה המכילה {0} תפיק תוצאה שגויה בסימולטור החומרה Nand to Tetris {0}{1}.</value>
 	</data>
+	<data name="SensorTypeSequence" xml:space="preserve">
+		<value>רצף</value>
+	</data>
+	<data name="SensorTypeClock" xml:space="preserve">
+		<value>שעון</value>
+	</data>
 </root>

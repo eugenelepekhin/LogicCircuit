@@ -1567,4 +1567,10 @@ Czy chcesz wczytać automatycznie zapisaną kopię tego pliku?</value>
 	<data name="WarningN2TRamTest" xml:space="preserve">
 		<value>Uruchomienie testu zawierającego {0} da nieprawidłowy wynik na Nand do {0}{1} symulatora sprzętowego Tetris.</value>
 	</data>
+	<data name="SensorTypeSequence" xml:space="preserve">
+		<value>Kolejność</value>
+	</data>
+	<data name="SensorTypeClock" xml:space="preserve">
+		<value>Zegar</value>
+	</data>
 </root>

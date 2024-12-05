@@ -1631,4 +1631,10 @@ Wil je het, automatisch opgeslagen, bestand laden.</value>
 	<data name="WarningN2TRamTest" xml:space="preserve">
 		<value>Het uitvoeren van een test met {0} zal een onjuist resultaat opleveren op de Nand to Tetris-hardwaresimulator {0}{1}.</value>
 	</data>
+	<data name="SensorTypeSequence" xml:space="preserve">
+		<value>Volgorde</value>
+	</data>
+	<data name="SensorTypeClock" xml:space="preserve">
+		<value>Klok</value>
+	</data>
 </root>

@@ -92,20 +92,20 @@ namespace LogicCircuit {
 		}
 
 		public override string Name {
-			get { return Properties.Resources.NameSensor; }
-			set { throw new NotSupportedException(); }
+			get => Properties.Resources.NameSensor;
+			set => throw new NotSupportedException();
 		}
 
-		public override string ToolTip { get { return Circuit.BuildToolTip(Properties.Resources.ToolTipSensor(this.Notation), this.Note); } }
+		public override string ToolTip => Circuit.BuildToolTip(Properties.Resources.ToolTipSensor(this.Notation), this.Note);
 
 		public override string Category {
-			get { return Properties.Resources.CategoryInputOutput; }
-			set { throw new InvalidOperationException(); }
+			get => Properties.Resources.CategoryInputOutput;
+			set => throw new InvalidOperationException();
 		}
 
-		public override bool IsDisplay => this.SensorType == SensorType.ASCII || this.SensorType == SensorType.KeyCode;
+		public override bool IsDisplay => this.SensorType is SensorType.ASCII or SensorType.KeyCode;
 
-		public static string UnknownValue { get { return Properties.Resources.CircuitProbeNotation; } } // Show ? on power off.
+		public static string UnknownValue => Properties.Resources.CircuitProbeNotation;  // Show ? on power off.
 
 		public override Circuit CopyTo(LogicalCircuit target) {
 			return target.CircuitProject.SensorSet.Copy(this);
@@ -125,6 +125,8 @@ namespace LogicCircuit {
 			case LogicCircuit.SensorType.Series:
 			case LogicCircuit.SensorType.Loop:
 			case LogicCircuit.SensorType.Random:
+			case LogicCircuit.SensorType.Sequence:
+			case LogicCircuit.SensorType.Clock:
 				break;
 			case LogicCircuit.SensorType.Manual:
 			case LogicCircuit.SensorType.KeyCode:
@@ -183,6 +185,8 @@ namespace LogicCircuit {
 			case SensorType.Manual:
 			case SensorType.KeyCode:
 			case SensorType.ASCII:
+			case SensorType.Sequence:
+			case SensorType.Clock:
 				break;
 			default:
 				Tracer.Fail();
@@ -210,6 +214,8 @@ namespace LogicCircuit {
 			case SensorType.Manual:
 			case SensorType.KeyCode:
 			case SensorType.ASCII:
+			case SensorType.Sequence:
+			case SensorType.Clock:
 				data = string.Empty;
 				break;
 			default:

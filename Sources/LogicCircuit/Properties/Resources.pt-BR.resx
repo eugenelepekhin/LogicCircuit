@@ -1645,4 +1645,10 @@ Você deseja carregar a configuração de salvamento automático para este arqui
 	<data name="WarningN2TRamTest" xml:space="preserve">
 		<value>Executar teste contendo {0} produzirá resultado incorreto no simulador de hardware Nand para Tetris {0}{1}.</value>
 	</data>
+	<data name="SensorTypeSequence" xml:space="preserve">
+		<value>Seqüenciar</value>
+	</data>
+	<data name="SensorTypeClock" xml:space="preserve">
+		<value>Relógio</value>
+	</data>
 </root>

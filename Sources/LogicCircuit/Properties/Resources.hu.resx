@@ -1524,4 +1524,10 @@ kapcsolás felfogható egyfajta multiplexerként is.</value>
 	<data name="WarningN2TRamTest" xml:space="preserve">
 		<value>Az {0} tartalmazó teszt futtatása helytelen eredményt ad a Nand to Tetris hardverszimulátor {0}{1}.</value>
 	</data>
+	<data name="SensorTypeSequence" xml:space="preserve">
+		<value>Következés</value>
+	</data>
+	<data name="SensorTypeClock" xml:space="preserve">
+		<value>Óra</value>
+	</data>
 </root>

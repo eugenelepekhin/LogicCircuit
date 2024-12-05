@@ -1583,4 +1583,10 @@
 	<data name="WarningN2TRamTest" xml:space="preserve">
 		<value>Η εκτέλεση δοκιμής που περιέχει {0} θα παράγει εσφαλμένο αποτέλεσμα στο {0}{1} προσομοιωτή υλικού Nand σε Tetris.</value>
 	</data>
+	<data name="SensorTypeSequence" xml:space="preserve">
+		<value>Ακολουθία</value>
+	</data>
+	<data name="SensorTypeClock" xml:space="preserve">
+		<value>Ρολόι</value>
+	</data>
 </root>

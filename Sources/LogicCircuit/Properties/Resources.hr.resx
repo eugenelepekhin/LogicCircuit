@@ -1576,4 +1576,10 @@ Takav sklop se ne može koristiti više od jednom na drugim sklopovima jer će s
 	<data name="WarningN2TRamTest" xml:space="preserve">
 		<value>Trčanje test koji sadrži {0} će dati netočan rezultat na Nand to Tetris hardverskom simulatoru {0}{1}.</value>
 	</data>
+	<data name="SensorTypeSequence" xml:space="preserve">
+		<value>Niz</value>
+	</data>
+	<data name="SensorTypeClock" xml:space="preserve">
+		<value>Sat</value>
+	</data>
 </root>

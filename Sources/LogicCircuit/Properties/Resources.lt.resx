@@ -1566,4 +1566,10 @@ Ar norite užkrauti automatiškai išsaugota šio failo būseną?</value>
 	<data name="WarningN2TRamTest" xml:space="preserve">
 		<value>Atliekant bandymą, kuriame yra {0}, bus gautas neteisingas "Nand to Tetris" aparatinės įrangos simuliatoriaus {0}{1} rezultatas.</value>
 	</data>
+	<data name="SensorTypeSequence" xml:space="preserve">
+		<value>Seka</value>
+	</data>
+	<data name="SensorTypeClock" xml:space="preserve">
+		<value>Laikrodis</value>
+	</data>
 </root>

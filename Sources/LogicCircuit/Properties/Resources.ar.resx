@@ -1517,4 +1517,10 @@
 	<data name="WarningN2TRamTest" xml:space="preserve">
 		<value>سيؤدي تشغيل الاختبار الذي يحتوي على {0} إلى نتيجة غير صحيحة على {0}{1} محاكي أجهزة Nand to Tetris.</value>
 	</data>
+	<data name="SensorTypeSequence" xml:space="preserve">
+		<value>تسلسل</value>
+	</data>
+	<data name="SensorTypeClock" xml:space="preserve">
+		<value>ساعة</value>
+	</data>
 </root>

@@ -1642,4 +1642,10 @@ Permite seleccionar el tamaño y profundidad de color / esquema:
 	<data name="WarningN2TRamTest" xml:space="preserve">
 		<value>La ejecución de la prueba que contiene {0} producirá un resultado incorrecto en el simulador de hardware de Nand a Tetris {0}{1}.</value>
 	</data>
+	<data name="SensorTypeSequence" xml:space="preserve">
+		<value>Secuencia</value>
+	</data>
+	<data name="SensorTypeClock" xml:space="preserve">
+		<value>Reloj</value>
+	</data>
 </root>

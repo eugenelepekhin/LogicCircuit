@@ -1382,4 +1382,10 @@
 	<data name="WarningN2TRamTest" xml:space="preserve">
 		<value>{0}を含むテストを実行すると、Nand to Tetris ハードウェア シミュレータ {0}{1}で正しくない結果が生成されます。</value>
 	</data>
+	<data name="SensorTypeSequence" xml:space="preserve">
+		<value>順序</value>
+	</data>
+	<data name="SensorTypeClock" xml:space="preserve">
+		<value>時計</value>
+	</data>
 </root>

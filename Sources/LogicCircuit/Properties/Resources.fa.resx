@@ -1330,4 +1330,10 @@
 	<data name="WarningN2TRamTest" xml:space="preserve">
 		<value>تست در حال اجرا حاوی {0} نتیجه نادرست در شبیه ساز سخت افزار Nand به تتریس {0}{1} تولید خواهد کرد.</value>
 	</data>
+	<data name="SensorTypeSequence" xml:space="preserve">
+		<value>دنباله</value>
+	</data>
+	<data name="SensorTypeClock" xml:space="preserve">
+		<value>ساعت</value>
+	</data>
 </root>

@@ -322,6 +322,8 @@ namespace LogicCircuit {
 			new EnumDescriptor<SensorType>(LogicCircuit.SensorType.Manual, Properties.Resources.SensorTypeManual),
 			new EnumDescriptor<SensorType>(LogicCircuit.SensorType.KeyCode, Properties.Resources.SensorTypeKeyCode),
 			new EnumDescriptor<SensorType>(LogicCircuit.SensorType.ASCII, Properties.Resources.SensorTypeASCII),
+			new EnumDescriptor<SensorType>(LogicCircuit.SensorType.Sequence, Properties.Resources.SensorTypeSequence),
+			new EnumDescriptor<SensorType>(LogicCircuit.SensorType.Clock, Properties.Resources.SensorTypeClock),
 		};
 
 		public static IEnumerable<EnumDescriptor<SensorType>> SensorTypes { get { return sensorTypes; } }

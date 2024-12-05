@@ -1577,4 +1577,10 @@ Out</value>
 	<data name="WarningN2TRamTest" xml:space="preserve">
 		<value>运行包含{0}的测试将在 Nand 上产生不正确的结果，以俄罗斯方块硬件模拟器{0}{1}。</value>
 	</data>
+	<data name="SensorTypeSequence" xml:space="preserve">
+		<value>序列</value>
+	</data>
+	<data name="SensorTypeClock" xml:space="preserve">
+		<value>时钟</value>
+	</data>
 </root>
