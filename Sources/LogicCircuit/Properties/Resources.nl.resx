@@ -1637,4 +1637,28 @@ Wil je het, automatisch opgeslagen, bestand laden.</value>
 	<data name="SensorTypeClock" xml:space="preserve">
 		<value>Klok</value>
 	</data>
+	<data name="CommandAlignBottom" xml:space="preserve">
+		<value>Bodem uitlijnen</value>
+	</data>
+	<data name="MenuHeaderAlign" xml:space="preserve">
+		<value>Afstemmen</value>
+	</data>
+	<data name="MenuHeaderRotate" xml:space="preserve">
+		<value>Draaien</value>
+	</data>
+	<data name="CommandAlignTop" xml:space="preserve">
+		<value>Boven uitlijnen</value>
+	</data>
+	<data name="CommandAlignMiddle" xml:space="preserve">
+		<value>Midden horizontaal uitlijnen</value>
+	</data>
+	<data name="CommandAlignLeft" xml:space="preserve">
+		<value>Links uitlijnen</value>
+	</data>
+	<data name="CommandAlignCenter" xml:space="preserve">
+		<value>Centreren verticaal uitlijnen</value>
+	</data>
+	<data name="CommandAlignRight" xml:space="preserve">
+		<value>Rechts uitlijnen</value>
+	</data>
 </root>

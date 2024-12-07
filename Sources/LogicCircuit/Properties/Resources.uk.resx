@@ -1575,4 +1575,28 @@
 	<data name="SensorTypeClock" xml:space="preserve">
 		<value>Годинник</value>
 	</data>
+	<data name="CommandAlignBottom" xml:space="preserve">
+		<value>Поставте вниз</value>
+	</data>
+	<data name="MenuHeaderAlign" xml:space="preserve">
+		<value>Вирівняй</value>
+	</data>
+	<data name="MenuHeaderRotate" xml:space="preserve">
+		<value>Повернути</value>
+	</data>
+	<data name="CommandAlignTop" xml:space="preserve">
+		<value>Вирівняти верх</value>
+	</data>
+	<data name="CommandAlignMiddle" xml:space="preserve">
+		<value>Вирівняйте середину по горизонталі</value>
+	</data>
+	<data name="CommandAlignLeft" xml:space="preserve">
+		<value>Вирівняти по лівому краю</value>
+	</data>
+	<data name="CommandAlignCenter" xml:space="preserve">
+		<value>Вирівняти центр по вертикалі</value>
+	</data>
+	<data name="CommandAlignRight" xml:space="preserve">
+		<value>Вирівняти по правому краю</value>
+	</data>
 </root>

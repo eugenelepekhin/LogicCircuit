@@ -1385,4 +1385,28 @@ Circuiti di questo tipo non possono essere utilizzati più di una volta su altri
 	<data name="SensorTypeClock" xml:space="preserve">
 		<value>Orologio</value>
 	</data>
+	<data name="CommandAlignBottom" xml:space="preserve">
+		<value>Allinea in basso</value>
+	</data>
+	<data name="MenuHeaderAlign" xml:space="preserve">
+		<value>Allineare</value>
+	</data>
+	<data name="MenuHeaderRotate" xml:space="preserve">
+		<value>Ruotare</value>
+	</data>
+	<data name="CommandAlignTop" xml:space="preserve">
+		<value>Allinea in alto</value>
+	</data>
+	<data name="CommandAlignMiddle" xml:space="preserve">
+		<value>Allinea al centro orizzontalmente</value>
+	</data>
+	<data name="CommandAlignLeft" xml:space="preserve">
+		<value>Allinea a sinistra</value>
+	</data>
+	<data name="CommandAlignCenter" xml:space="preserve">
+		<value>Allinea centro verticalmente</value>
+	</data>
+	<data name="CommandAlignRight" xml:space="preserve">
+		<value>Allinea a destra</value>
+	</data>
 </root>

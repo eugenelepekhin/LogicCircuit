@@ -1550,4 +1550,28 @@ Vill du ladda an automatiskt sparad fil istället?</value>
 	<data name="SensorTypeClock" xml:space="preserve">
 		<value>Klocka</value>
 	</data>
+	<data name="CommandAlignBottom" xml:space="preserve">
+		<value>Justera nederkant</value>
+	</data>
+	<data name="MenuHeaderAlign" xml:space="preserve">
+		<value>Jämna</value>
+	</data>
+	<data name="MenuHeaderRotate" xml:space="preserve">
+		<value>Rotera</value>
+	</data>
+	<data name="CommandAlignTop" xml:space="preserve">
+		<value>Justera överkant</value>
+	</data>
+	<data name="CommandAlignMiddle" xml:space="preserve">
+		<value>Justera mitten horisontellt</value>
+	</data>
+	<data name="CommandAlignLeft" xml:space="preserve">
+		<value>Justera åt vänster</value>
+	</data>
+	<data name="CommandAlignCenter" xml:space="preserve">
+		<value>Justera centrera vertikalt</value>
+	</data>
+	<data name="CommandAlignRight" xml:space="preserve">
+		<value>Justera åt höger</value>
+	</data>
 </root>

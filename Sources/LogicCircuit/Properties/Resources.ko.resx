@@ -1560,4 +1560,28 @@ Tri-state와 적절한 제어 회로를 함께 써서 멀티플렉서를 만들 
 	<data name="SensorTypeClock" xml:space="preserve">
 		<value>시계</value>
 	</data>
+	<data name="CommandAlignBottom" xml:space="preserve">
+		<value>아래쪽 정렬</value>
+	</data>
+	<data name="MenuHeaderAlign" xml:space="preserve">
+		<value>정렬해주세요.</value>
+	</data>
+	<data name="MenuHeaderRotate" xml:space="preserve">
+		<value>돌다</value>
+	</data>
+	<data name="CommandAlignTop" xml:space="preserve">
+		<value>위쪽 정렬</value>
+	</data>
+	<data name="CommandAlignMiddle" xml:space="preserve">
+		<value>가운데 정렬하기</value>
+	</data>
+	<data name="CommandAlignLeft" xml:space="preserve">
+		<value>왼쪽 정렬</value>
+	</data>
+	<data name="CommandAlignCenter" xml:space="preserve">
+		<value>가운데 정렬</value>
+	</data>
+	<data name="CommandAlignRight" xml:space="preserve">
+		<value>우측 정렬</value>
+	</data>
 </root>

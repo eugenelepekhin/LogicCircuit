@@ -1599,4 +1599,28 @@
 	<data name="SensorTypeClock" xml:space="preserve">
 		<value>Часы</value>
 	</data>
+	<data name="CommandAlignBottom" xml:space="preserve">
+		<value>Выровнять вниз</value>
+	</data>
+	<data name="MenuHeaderAlign" xml:space="preserve">
+		<value>Выровнять</value>
+	</data>
+	<data name="MenuHeaderRotate" xml:space="preserve">
+		<value>Вращать</value>
+	</data>
+	<data name="CommandAlignTop" xml:space="preserve">
+		<value>Выровнять вверх</value>
+	</data>
+	<data name="CommandAlignMiddle" xml:space="preserve">
+		<value>Выровнять середину по горизонтали</value>
+	</data>
+	<data name="CommandAlignLeft" xml:space="preserve">
+		<value>Выровнять влево</value>
+	</data>
+	<data name="CommandAlignCenter" xml:space="preserve">
+		<value>Выровнять по центру по вертикали</value>
+	</data>
+	<data name="CommandAlignRight" xml:space="preserve">
+		<value>Выровнять вправо</value>
+	</data>
 </root>

@@ -1664,4 +1664,28 @@ Você deseja carregar a configuração de salvamento automático para este arqui
 	<data name="SensorTypeClock" xml:space="preserve">
 		<value>Relógio</value>
 	</data>
+	<data name="CommandAlignBottom" xml:space="preserve">
+		<value>Alinhar parte inferior</value>
+	</data>
+	<data name="MenuHeaderAlign" xml:space="preserve">
+		<value>Ajustar.</value>
+	</data>
+	<data name="MenuHeaderRotate" xml:space="preserve">
+		<value>Girar</value>
+	</data>
+	<data name="CommandAlignTop" xml:space="preserve">
+		<value>Alinhar superior</value>
+	</data>
+	<data name="CommandAlignMiddle" xml:space="preserve">
+		<value>Alinhar o meio horizontalmente</value>
+	</data>
+	<data name="CommandAlignLeft" xml:space="preserve">
+		<value>Alinhar à esquerda</value>
+	</data>
+	<data name="CommandAlignCenter" xml:space="preserve">
+		<value>Alinhar o centro verticalmente</value>
+	</data>
+	<data name="CommandAlignRight" xml:space="preserve">
+		<value>Alinhar à direita</value>
+	</data>
 </root>

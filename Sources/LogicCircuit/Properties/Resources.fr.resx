@@ -1597,4 +1597,28 @@ Voulez-vous charger l'état sauvegardé automatiquement de ce fichier ?</value>
 	<data name="SensorTypeClock" xml:space="preserve">
 		<value>Horloge</value>
 	</data>
+	<data name="CommandAlignBottom" xml:space="preserve">
+		<value>Aligner le bas</value>
+	</data>
+	<data name="MenuHeaderAlign" xml:space="preserve">
+		<value>Aligner</value>
+	</data>
+	<data name="MenuHeaderRotate" xml:space="preserve">
+		<value>Tourner</value>
+	</data>
+	<data name="CommandAlignTop" xml:space="preserve">
+		<value>Aligner en haut</value>
+	</data>
+	<data name="CommandAlignMiddle" xml:space="preserve">
+		<value>Aligner le milieu horizontalement</value>
+	</data>
+	<data name="CommandAlignLeft" xml:space="preserve">
+		<value>Aligner à gauche</value>
+	</data>
+	<data name="CommandAlignCenter" xml:space="preserve">
+		<value>Aligner le centre verticalement</value>
+	</data>
+	<data name="CommandAlignRight" xml:space="preserve">
+		<value>Aligner à droite</value>
+	</data>
 </root>

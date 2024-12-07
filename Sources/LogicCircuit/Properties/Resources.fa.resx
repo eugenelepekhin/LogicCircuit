@@ -1336,4 +1336,28 @@
 	<data name="SensorTypeClock" xml:space="preserve">
 		<value>ساعت</value>
 	</data>
+	<data name="CommandAlignBottom" xml:space="preserve">
+		<value>تراز کردن پایین</value>
+	</data>
+	<data name="MenuHeaderAlign" xml:space="preserve">
+		<value>تراز</value>
+	</data>
+	<data name="MenuHeaderRotate" xml:space="preserve">
+		<value>چرخش</value>
+	</data>
+	<data name="CommandAlignTop" xml:space="preserve">
+		<value>تراز کردن بالا</value>
+	</data>
+	<data name="CommandAlignMiddle" xml:space="preserve">
+		<value>تراز کردن میانه به صورت افقی</value>
+	</data>
+	<data name="CommandAlignLeft" xml:space="preserve">
+		<value>تراز کردن به چپ</value>
+	</data>
+	<data name="CommandAlignCenter" xml:space="preserve">
+		<value>تراز کردن عمودی مرکز</value>
+	</data>
+	<data name="CommandAlignRight" xml:space="preserve">
+		<value>تراز کردن به راست</value>
+	</data>
 </root>

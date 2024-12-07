@@ -1572,4 +1572,28 @@ Ar norite užkrauti automatiškai išsaugota šio failo būseną?</value>
 	<data name="SensorTypeClock" xml:space="preserve">
 		<value>Laikrodis</value>
 	</data>
+	<data name="CommandAlignBottom" xml:space="preserve">
+		<value>Lygiuoti apačioje</value>
+	</data>
+	<data name="MenuHeaderAlign" xml:space="preserve">
+		<value>Lygiuok</value>
+	</data>
+	<data name="MenuHeaderRotate" xml:space="preserve">
+		<value>Pasukti</value>
+	</data>
+	<data name="CommandAlignTop" xml:space="preserve">
+		<value>Lygiuoti viršuje</value>
+	</data>
+	<data name="CommandAlignMiddle" xml:space="preserve">
+		<value>Lygiuoti vidurį horizontaliai</value>
+	</data>
+	<data name="CommandAlignLeft" xml:space="preserve">
+		<value>Lygiuoti kairėje</value>
+	</data>
+	<data name="CommandAlignCenter" xml:space="preserve">
+		<value>Lygiuoti centrą vertikaliai</value>
+	</data>
+	<data name="CommandAlignRight" xml:space="preserve">
+		<value>Lygiuoti dešinėje</value>
+	</data>
 </root>

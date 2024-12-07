@@ -1530,4 +1530,28 @@ kapcsolás felfogható egyfajta multiplexerként is.</value>
 	<data name="SensorTypeClock" xml:space="preserve">
 		<value>Óra</value>
 	</data>
+	<data name="CommandAlignBottom" xml:space="preserve">
+		<value>Alsó igazítás</value>
+	</data>
+	<data name="MenuHeaderAlign" xml:space="preserve">
+		<value>Izgazítsd.</value>
+	</data>
+	<data name="MenuHeaderRotate" xml:space="preserve">
+		<value>Forog</value>
+	</data>
+	<data name="CommandAlignTop" xml:space="preserve">
+		<value>Felülre igazítás</value>
+	</data>
+	<data name="CommandAlignMiddle" xml:space="preserve">
+		<value>Közép vízszintes igazítása</value>
+	</data>
+	<data name="CommandAlignLeft" xml:space="preserve">
+		<value>Balra igazítás</value>
+	</data>
+	<data name="CommandAlignCenter" xml:space="preserve">
+		<value>Középre igazítás függőlegesen</value>
+	</data>
+	<data name="CommandAlignRight" xml:space="preserve">
+		<value>Jobbra igazítás</value>
+	</data>
 </root>

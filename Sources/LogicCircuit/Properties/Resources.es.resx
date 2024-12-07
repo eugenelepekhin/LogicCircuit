@@ -1648,4 +1648,28 @@ Permite seleccionar el tamaño y profundidad de color / esquema:
 	<data name="SensorTypeClock" xml:space="preserve">
 		<value>Reloj</value>
 	</data>
+	<data name="CommandAlignBottom" xml:space="preserve">
+		<value>Alinear la parte inferior</value>
+	</data>
+	<data name="MenuHeaderAlign" xml:space="preserve">
+		<value>Alinear</value>
+	</data>
+	<data name="MenuHeaderRotate" xml:space="preserve">
+		<value>Rotar</value>
+	</data>
+	<data name="CommandAlignTop" xml:space="preserve">
+		<value>Alinear arriba</value>
+	</data>
+	<data name="CommandAlignMiddle" xml:space="preserve">
+		<value>Alinear el centro horizontalmente</value>
+	</data>
+	<data name="CommandAlignLeft" xml:space="preserve">
+		<value>Alinear a la izquierda</value>
+	</data>
+	<data name="CommandAlignCenter" xml:space="preserve">
+		<value>Alinear el centro verticalmente</value>
+	</data>
+	<data name="CommandAlignRight" xml:space="preserve">
+		<value>Alinear a la derecha</value>
+	</data>
 </root>
