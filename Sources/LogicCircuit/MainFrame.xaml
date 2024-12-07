@@ -125,8 +125,20 @@
 				<lc:CommandMenuItem Command="{Binding Path=Editor.CommandSelectAllProbes}"/>
 				<lc:CommandMenuItem Command="{Binding Path=Editor.CommandSelectAllProbesWithWire}"/>
 				<Separator />
-				<lc:CommandMenuItem Command="{Binding Path=Editor.CommandRotateLeft}"/>
-				<lc:CommandMenuItem Command="{Binding Path=Editor.CommandRotateRight}"/>
+				<MenuItem Header="{x:Static properties:Resources.MenuHeaderRotate}">
+					<lc:CommandMenuItem Command="{Binding Path=Editor.CommandRotateLeft}"/>
+					<lc:CommandMenuItem Command="{Binding Path=Editor.CommandRotateRight}"/>
+				</MenuItem>
+
+				<MenuItem Header="{x:Static properties:Resources.MenuHeaderAlign}">
+					<lc:CommandMenuItem Command="{Binding Path=Editor.CommandAlignTop}"/>
+					<lc:CommandMenuItem Command="{Binding Path=Editor.CommandAlignMiddle}"/>
+					<lc:CommandMenuItem Command="{Binding Path=Editor.CommandAlignBottom}"/>
+					<Separator />
+					<lc:CommandMenuItem Command="{Binding Path=Editor.CommandAlignLeft}"/>
+					<lc:CommandMenuItem Command="{Binding Path=Editor.CommandAlignCenter}"/>
+					<lc:CommandMenuItem Command="{Binding Path=Editor.CommandAlignRight}"/>
+				</MenuItem>
 			</MenuItem>
 			<MenuItem Header="{x:Static properties:Resources.MenuHeaderCircuit}">
 				<lc:CommandMenuItem Command="{Binding Path=Editor.CommandCircuitProject}"/>

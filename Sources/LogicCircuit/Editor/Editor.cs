@@ -125,6 +125,27 @@ namespace LogicCircuit {
 			IconPath = "Icon/EditRotateRight.xaml"
 		};
 
+		public LambdaUICommand CommandAlignTop => new LambdaUICommand(Properties.Resources.CommandAlignTop, o => this.CanAlignHorizontally(), o => this.AlignTop()) {
+			IconPath = "Icon/AlignTop.xaml"
+		};
+		// align center horizontally
+		public LambdaUICommand CommandAlignMiddle => new LambdaUICommand(Properties.Resources.CommandAlignMiddle, o => this.CanAlignHorizontally(), o => this.AlignMiddle()) {
+			IconPath = "Icon/AlignMiddle.xaml"
+		};
+		public LambdaUICommand CommandAlignBottom => new LambdaUICommand(Properties.Resources.CommandAlignBottom, o => this.CanAlignHorizontally(), o => this.AlignBottom()) {
+			IconPath = "Icon/AlignBottom.xaml"
+		};
+		public LambdaUICommand CommandAlignLeft => new LambdaUICommand(Properties.Resources.CommandAlignLeft, o => this.CanAlignVertically(), o => this.AlignLeft()) {
+			IconPath = "Icon/AlignLeft.xaml"
+		};
+		// align center vertically
+		public LambdaUICommand CommandAlignCenter => new LambdaUICommand(Properties.Resources.CommandAlignCenter, o => this.CanAlignVertically(), o => this.AlignCenter()) {
+			IconPath = "Icon/AlignCenter.xaml"
+		};
+		public LambdaUICommand CommandAlignRight => new LambdaUICommand(Properties.Resources.CommandAlignRight, o => this.CanAlignVertically(), o => this.AlignRight()) {
+			IconPath = "Icon/AlignRight.xaml"
+		};
+
 		public LambdaUICommand CommandCircuitProject => new LambdaUICommand(Properties.Resources.CommandCircuitProject, o => this.InEditMode, o => this.Edit(this.CircuitProject.ProjectSet.Project)) {
 			IconPath = "Icon/CircuitProjectProperty.xaml"
 		};

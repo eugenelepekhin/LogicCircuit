@@ -844,6 +844,149 @@ namespace LogicCircuit {
 			}
 		}
 
+		private bool CanAlign(Func<Rect, GridPoint> interval) {
+			if(this.InEditMode && 1 < this.SelectionCount) {
+				// Here the GridPoint is used as interval: X - start, Y - end
+				List<GridPoint> intervals = new List<GridPoint>();
+				foreach(Symbol symbol in this.SelectedSymbols.Where(s => s is not Wire)) {
+					Rect rect = symbol.Bounds();
+					intervals.Add(interval(rect));
+				}
+				if(1 < intervals.Count) {
+					intervals.Sort((a, b) => {
+						int delta = a.X - b.X;
+						if(delta == 0) {
+							delta = a.Y - b.Y;
+						}
+						return delta;
+					});
+					for(int i = 1; i < intervals.Count; i++) {
+						if(intervals[i - 1].Y > intervals[i].X) {
+							return false;
+						}
+					}
+					return true;
+				}
+			}
+			return false;
+		}
+
+		public bool CanAlignHorizontally() => this.CanAlign(r => new GridPoint((int)r.X, (int)r.Right));
+		public bool CanAlignVertically() => this.CanAlign(r => new GridPoint((int)r.Y, (int)r.Bottom));
+
+		private void Align(Func<List<Symbol>, int> findBase, Func<int, Symbol, int> findDelta, Action<Symbol, int> shiftSymbol, Action<Wire, int, int> shiftWire) {
+			List<Symbol> symbols = this.SelectedSymbols.Where(s => s is not Wire).ToList();
+			if(1 < symbols.Count) {
+				int baseOn = findBase(symbols);
+				this.CircuitProject.InTransaction(() => {
+					Dictionary<GridPoint, int> movedPoints = new();
+					foreach(Symbol symbol in symbols) {
+						int delta = 0;
+						if(symbol is CircuitSymbol circuitSymbol) {
+							delta = findDelta(baseOn, circuitSymbol);
+							if(delta != 0) {
+								foreach(Jam jam in circuitSymbol.Jams()) {
+									movedPoints.Add(jam.AbsolutePoint, delta);
+								}
+							}
+						} else if(symbol is TextNote noteSymbol) {
+							delta = findDelta(baseOn, noteSymbol);
+						}
+						if(delta != 0) {
+							shiftSymbol(symbol, delta);
+							symbol.PositionGlyph();
+							if(this.selection.TryGetValue(symbol, out Marker? marker)) {
+								marker.Refresh();
+							}
+						}
+					}
+					foreach(Wire wire in this.Project.LogicalCircuit.Wires()) {
+						int delta;
+						bool moved = false;
+						if(movedPoints.TryGetValue(wire.Point1, out delta)) {
+							shiftWire(wire, 1, delta);
+							wire.PositionGlyph();
+							moved = true;
+						}
+						if(movedPoints.TryGetValue(wire.Point2, out delta)) {
+							shiftWire(wire, 2, delta);
+							wire.PositionGlyph();
+							moved = true;
+						}
+						if(moved && this.selection.TryGetValue(wire, out Marker? marker)) {
+							marker.Refresh();
+						}
+					}
+				});
+			}
+		}
+
+		private void AlignHorizontally(Func<List<Symbol>, int> findBase, Func<int, Symbol, int> findDelta) {
+			if(this.CanAlignHorizontally()) {
+				this.Align(
+					findBase,
+					findDelta,
+					(Symbol symbol, int dy) => symbol.Shift(0, dy),
+					(Wire wire, int point, int dy) => wire.ShiftPoint(point, 0, dy)
+				);
+			}
+		}
+
+		private void AlignVertically(Func<List<Symbol>, int> findBase, Func<int, Symbol, int> findDelta) {
+			if(this.CanAlignVertically()) {
+				this.Align(
+					findBase,
+					findDelta,
+					(Symbol symbol, int dx) => symbol.Shift(dx, 0),
+					(Wire wire, int point, int dx) => wire.ShiftPoint(point, dx, 0)
+				);
+			}
+		}
+
+		public void AlignTop() {
+			this.AlignHorizontally(
+				(List<Symbol> symbols) => Symbol.GridPoint(symbols.Min(s => s.Bounds().Top)),
+				(int baseOn, Symbol symbol) => baseOn - Symbol.GridPoint(symbol.Bounds().Y)
+			);
+		}
+
+		public void AlignMiddle() {
+			double middle(Rect rect) => rect.Top + Symbol.ScreenPoint(Symbol.GridPoint(rect.Height) / 2);
+			this.AlignHorizontally(
+				(List<Symbol> symbols) => Symbol.GridPoint(symbols.Average(s => middle(s.Bounds()))),
+				(int baseOn, Symbol symbol) => baseOn - Symbol.GridPoint(middle(symbol.Bounds()))
+			);
+		}
+
+		public void AlignBottom() {
+			this.AlignHorizontally(
+				(List<Symbol> symbols) => Symbol.GridPoint(symbols.Max(s => s.Bounds().Bottom)),
+				(int baseOn, Symbol symbol) => baseOn - Symbol.GridPoint(symbol.Bounds().Bottom)
+			);
+		}
+
+		public void AlignLeft() {
+			this.AlignVertically(
+				(List<Symbol> symbols) => Symbol.GridPoint(symbols.Min(s => s.Bounds().Left)),
+				(int baseOn, Symbol symbol) => baseOn - Symbol.GridPoint(symbol.Bounds().Left)
+			);
+		}
+
+		public void AlignCenter() {
+			double center(Rect rect) => rect.Left + Symbol.ScreenPoint(Symbol.GridPoint(rect.Width) / 2);
+			this.AlignVertically(
+				(List<Symbol> symbols) => Symbol.GridPoint(symbols.Average(s => center(s.Bounds()))),
+				(int baseOn, Symbol symbol) => baseOn - Symbol.GridPoint(center(symbol.Bounds()))
+			);
+		}
+
+		public void AlignRight() {
+			this.AlignVertically(
+				(List<Symbol> symbols) => Symbol.GridPoint(symbols.Max(s => s.Bounds().Right)),
+				(int baseOn, Symbol symbol) => baseOn - Symbol.GridPoint(symbol.Bounds().Right)
+			);
+		}
+
 		//--- User Input Event Handling ---
 
 		public void DiagramDragOver(DragEventArgs e) {

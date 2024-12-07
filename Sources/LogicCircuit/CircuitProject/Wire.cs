@@ -64,6 +64,21 @@ namespace LogicCircuit {
 			this.Y2 += dy;
 		}
 
+		public void ShiftPoint(int point, int dx, int dy) {
+			switch(point) {
+			case 1:
+				this.X1 += dx;
+				this.Y1 += dy;
+				break;
+			case 2:
+				this.X2 += dx;
+				this.Y2 += dy;
+				break;
+			default:
+				throw new ArgumentOutOfRangeException(nameof(point));
+			}
+		}
+
 		public override void DeleteSymbol() {
 			this.Delete();
 		}

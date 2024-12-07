@@ -3500,5 +3500,61 @@ namespace LogicCircuit.Properties {
  		public static string SensorTypeClock {
 			get { return ResourceManager.GetString("SensorTypeClock", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Align _Bottom.
+		/// </summary>
+ 		public static string CommandAlignBottom {
+			get { return ResourceManager.GetString("CommandAlignBottom", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Ali_gn.
+		/// </summary>
+ 		public static string MenuHeaderAlign {
+			get { return ResourceManager.GetString("MenuHeaderAlign", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Align _Top.
+		/// </summary>
+ 		public static string CommandAlignTop {
+			get { return ResourceManager.GetString("CommandAlignTop", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to R_otate.
+		/// </summary>
+ 		public static string MenuHeaderRotate {
+			get { return ResourceManager.GetString("MenuHeaderRotate", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Align _Middle Horizontally.
+		/// </summary>
+ 		public static string CommandAlignMiddle {
+			get { return ResourceManager.GetString("CommandAlignMiddle", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Align _Left.
+		/// </summary>
+ 		public static string CommandAlignLeft {
+			get { return ResourceManager.GetString("CommandAlignLeft", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Align _Center Vertically.
+		/// </summary>
+ 		public static string CommandAlignCenter {
+			get { return ResourceManager.GetString("CommandAlignCenter", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Align _Right.
+		/// </summary>
+ 		public static string CommandAlignRight {
+			get { return ResourceManager.GetString("CommandAlignRight", Culture); }
+		}
 	}
 }
