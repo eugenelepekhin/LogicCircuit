@@ -3,6 +3,8 @@
 	<PropertyGroup>
 		<LogicCircuitVersion>2.24.07.01</LogicCircuitVersion>
 		<ToolsFolder>$(MSBuildThisFileDirectory)Tools</ToolsFolder>
+		<DotNetBaseVersion>net9.0</DotNetBaseVersion>
+		<DotNetWpfVersion>$(DotNetBaseVersion)-windows</DotNetWpfVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
