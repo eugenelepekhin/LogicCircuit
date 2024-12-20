@@ -23,6 +23,8 @@
 		Version 2.0.0.9 - Adding zoom to graphics array. Adding Validators field to LogicalCircuit. Adding DualPort to memory.
 		Version 2.0.0.10 - Adding shortcuts to buttons.
 		Version 2.0.0.11 - LogicalCircuit field IsDisplay replaced with CircuitShape.
+		Version 2.0.0.12 - Adding two keyboard variants to sensor
+		Version 2.0.0.13 - Adding pin side to probes, adding two sensor types - sequential and clock
 	-->
 
 	<Table Name="Project">
