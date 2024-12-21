@@ -116,7 +116,7 @@ namespace LogicCircuit {
 					int count = this.DataBitWidth / 8;
 					firstByte += count - 1;
 					for(int i = 0; i < count; i++) {
-						data[firstByte - i] = (byte)(value >> (i * 8));
+						this.data[firstByte - i] = (byte)(value >> (i * 8));
 					}
 				}
 			}
@@ -136,7 +136,7 @@ namespace LogicCircuit {
 					int count = this.DataBitWidth / 8;
 					firstByte += count - 1;
 					for(int i = 0; i < count; i++) {
-						value |= ((int)data[firstByte - i]) << (i * 8);
+						value |= ((int)this.data[firstByte - i]) << (i * 8);
 					}
 				}
 			}
@@ -201,7 +201,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		public void Redraw() {
+		public void Redraw(bool force) {
 			Debug.Assert(this.bitmap != null);
 			this.bitmap.WritePixels(this.drawingRect, this.data, this.bitmapStride, 0);
 

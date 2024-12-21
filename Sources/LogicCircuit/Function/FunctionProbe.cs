@@ -100,7 +100,7 @@ namespace LogicCircuit {
 
 		public void TurnOn() {
 			if(this.CircuitSymbol.HasCreatedGlyph) {
-				this.Redraw();
+				this.Redraw(true);
 			}
 		}
 
@@ -110,7 +110,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		public void Redraw() {
+		public void Redraw(bool force) {
 			((TextBlock)this.CircuitSymbol.ProbeView!).Text = this.ToText();
 		}
 

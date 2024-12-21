@@ -103,7 +103,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		public void Redraw() {
+		public void Redraw(bool force) {
 			if(this.circuitSymbol[0].ProbeView is TextBlock textBlock) {
 				textBlock.Text = this.Value.ToString("X", CultureInfo.InvariantCulture);
 			}

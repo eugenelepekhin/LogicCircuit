@@ -6,7 +6,7 @@ namespace LogicCircuit {
 		void TurnOn();
 		[SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "TurnOff")]
 		void TurnOff();
-		void Redraw();
+		void Redraw(bool force);
 		bool Invalid { get; set; }
 	}
 }

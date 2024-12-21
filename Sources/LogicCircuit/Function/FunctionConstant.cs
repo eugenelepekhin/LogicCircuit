@@ -39,11 +39,11 @@ namespace LogicCircuit {
 
 		public void TurnOff() {
 			if(this.CircuitSymbol.HasCreatedGlyph) {
-				this.Redraw();
+				this.Redraw(true);
 			}
 		}
 
-		public void Redraw() {
+		public void Redraw(bool force) {
 			if(this.CircuitSymbol.ProbeView != null) {
 				((TextBlock)this.CircuitSymbol.ProbeView).Text =  this.Constant.Notation;
 				this.CircuitSymbol.Glyph.ToolTip = this.Constant.ToolTip;

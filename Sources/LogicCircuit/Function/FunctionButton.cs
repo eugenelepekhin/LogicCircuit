@@ -83,7 +83,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		public void Redraw() {
+		public void Redraw(bool force) {
 			if(this.isToggle) {
 				ButtonControl? button = null;
 				if(this.circuitSymbol.Count == 1) {

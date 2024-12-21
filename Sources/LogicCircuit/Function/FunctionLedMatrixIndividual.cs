@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace LogicCircuit {
 	public class FunctionLedMatrixIndividual : FunctionLedMatrix {
 		private readonly int[] state;
-		private LogicalCircuit? lastLogicalCircuit;
 
 		public FunctionLedMatrixIndividual(CircuitState circuitState, IEnumerable<CircuitSymbol> symbols, int[] parameter) : base(circuitState, symbols, parameter) {
 			LedMatrix matrix = this.Matrix;
 			this.state = new int[matrix.Rows * matrix.Columns];
 		}
 
-		public override void Redraw() {
-			LogicalCircuit current = this.CurrentLogicalCircuit;
-			if(current != this.lastLogicalCircuit) {
-				this.lastLogicalCircuit = current;
+		public override void Redraw(bool force) {
+			if(force) {
 				for(int i = 0; i < this.state.Length; i++) {
 					this.state[i] = -1;
 				}

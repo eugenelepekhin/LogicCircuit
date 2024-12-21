@@ -45,7 +45,7 @@ namespace LogicCircuit {
 			((Shape)grid.Children[index]).Fill = FunctionLedMatrix.brush![value];
 		}
 
-		public abstract void Redraw();
+		public abstract void Redraw(bool force);
 
 		public void TurnOn() {
 			if(FunctionLedMatrix.brush == null) {

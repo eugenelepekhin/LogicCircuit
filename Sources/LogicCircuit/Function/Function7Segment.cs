@@ -30,7 +30,7 @@ namespace LogicCircuit {
 
 		public override string ReportName { get { return Properties.Resources.Gate7SegName; } }
 
-		public void Redraw() {
+		public void Redraw(bool force) {
 			LogicalCircuit currentCircuit = this.project.LogicalCircuit;
 			if(this.lastLogicalCircuit != currentCircuit) {
 				this.lastLogicalCircuit = currentCircuit;

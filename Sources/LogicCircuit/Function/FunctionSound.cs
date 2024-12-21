@@ -60,7 +60,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		public void Redraw() {
+		public void Redraw(bool force) {
 			// nothing to do
 		}
 	}

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace LogicCircuit {
 	public class FunctionLedMatrixSelector : FunctionLedMatrix, IFunctionClock {
@@ -10,7 +9,6 @@ namespace LogicCircuit {
 		private readonly int[] cellFlip;
 		private readonly int rowParameter;
 		private int flip;
-		private LogicalCircuit? lastLogicalCircuit;
 
 		/// <summary>
 		/// Creates function. Assumes parameter layout: first goes columns states starting from column 0, bit 0 to bit 2. After all columns goes rows they are one bit wide.
@@ -35,10 +33,8 @@ namespace LogicCircuit {
 			return false;
 		}
 
-		public override void Redraw() {
-			LogicalCircuit current = this.CurrentLogicalCircuit;
-			if(current != this.lastLogicalCircuit) {
-				this.lastLogicalCircuit = current;
+		public override void Redraw(bool force) {
+			if(force) {
 				for(int i = 0; i < this.row.Length; i++) {
 					this.row[i] = (State)(0xFF);
 				}

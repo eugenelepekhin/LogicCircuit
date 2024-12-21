@@ -455,7 +455,7 @@ namespace LogicCircuit {
 					if(force || func.Invalid) {
 						func.Invalid = false;
 						Thread.MemoryBarrier();
-						func.Redraw();
+						func.Redraw(force);
 					}
 				}
 			}
