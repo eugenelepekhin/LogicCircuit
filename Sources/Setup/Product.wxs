@@ -4,15 +4,20 @@
 		Do not use "*" in Id attribute as it will produce GUID automatically and MSI will install a new instance of the app for each build.
 		Note the minor version part must be 4 digit number as the MSi does not support minor versions.
 	-->
-	<?define LogicCircuitVersion=2.24.1219?>
-	<?define ProductCode32={8023FCD7-3B5F-4DE3-9A46-5E79F87B4E3A}?>
-	<?define ProductCode64={A11BB2A3-8D32-4798-9906-274B04A65AA8}?>
+	<?define LogicCircuitVersion=2.25.0101?>
+	<?define ProductCode32={52C2B2F3-3BBA-4FDD-A64D-5AF1DF2DE920}?>
+	<?define ProductCode64={BF6749FC-26F4-4520-A1B2-6BBBC66B7614}?>
 
 	<?if $(var.Platform)=x86?>
 		<?define ProductCode=$(var.ProductCode32)?>
 		<?define ProgramFilesFolder=ProgramFilesFolder?>
 		<?define Bitness=always32?>
 		<?define PublishFolder=..\LogicCircuit\bin\Release_32\Publish?>
+	<?elseif $(var.Platform)=arm64?>
+		<?define ProductCode=$(var.ProductCode64) ?>
+		<?define ProgramFilesFolder=ProgramFiles64Folder?>
+		<?define Bitness=always64?>
+		<?define PublishFolder=..\LogicCircuit\bin\Release_arm64\Publish?>
 	<?else?>
 		<?define ProductCode=$(var.ProductCode64) ?>
 		<?define ProgramFilesFolder=ProgramFiles64Folder?>
@@ -26,7 +31,7 @@
 		Version="$(var.LogicCircuitVersion)"
 		Manufacturer="LogicCircuit.org"
 		Language="1033"
-		InstallerVersion="300"
+		InstallerVersion="500"
 		ProductCode="$(var.ProductCode)"
 		Compressed="yes"
 		Scope="perMachine"
@@ -52,7 +57,9 @@
 					<File Id="Application_exe" Source="$(var.PublishFolder)\LogicCircuit.exe" KeyPath="yes"/>
 					<File Id="Application_pdb" Source="$(var.PublishFolder)\LogicCircuit.pdb"/>
 					<File Id="License_txt" Source="..\License.txt"/>
-					<File Id="D3DCompiler_47_cor3_dll" Source="$(var.PublishFolder)\D3DCompiler_47_cor3.dll"/>
+					<?if $(var.Platform)!=arm64?>
+						<File Id="D3DCompiler_47_cor3_dll" Source="$(var.PublishFolder)\D3DCompiler_47_cor3.dll"/>
+					<?endif?>
 					<File Id="PenImc_cor3_dll" Source="$(var.PublishFolder)\PenImc_cor3.dll"/>
 					<File Id="PresentationNative_cor3_dll" Source="$(var.PublishFolder)\PresentationNative_cor3.dll"/>
 					<File Id="vcruntime140_cor3_dll" Source="$(var.PublishFolder)\vcruntime140_cor3.dll"/>

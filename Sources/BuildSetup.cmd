@@ -7,8 +7,11 @@ if "%VSCMD_VER%" == "" (
 
 @echo on
 
-rem Force building everything, so all the tools are built there.
-msbuild -r -p:Configuration=Release LogicCircuit.sln
+rem Build tools
+msbuild -r -p:Configuration=Release Tools\ResourceWrapper.Generator\ResourceWrapper.Generator.csproj
+@if "%ERRORLEVEL%" NEQ "0" (exit /B)
+
+msbuild -r -p:Configuration=Release Tools\ItemWrapper.Generator\ItemWrapper.Generator.csproj
 @if "%ERRORLEVEL%" NEQ "0" (exit /B)
 
 rem Publish for 64 bits
@@ -19,6 +22,10 @@ rem Publish for 32 bits
 dotnet publish LogicCircuit\LogicCircuit.csproj --sc -c Release -r win-x86 -o LogicCircuit\bin\Release_32\Publish
 @if "%ERRORLEVEL%" NEQ "0" (exit /B)
 
+rem Publish for arm 64
+dotnet publish LogicCircuit\LogicCircuit.csproj --sc -c Release -r win-arm64 -o LogicCircuit\bin\Release_arm64\Publish
+@if "%ERRORLEVEL%" NEQ "0" (exit /B)
+
 rem Buiding Setup
 
 msbuild -r -p:Configuration=Release;Platform=x64 Setup\Setup.wixproj
@@ -27,10 +34,16 @@ msbuild -r -p:Configuration=Release;Platform=x64 Setup\Setup.wixproj
 msbuild -r -p:Configuration=Release;Platform=x86 Setup\Setup.wixproj
 @if "%ERRORLEVEL%" NEQ "0" (exit /B)
 
+msbuild -r -p:Configuration=Release;Platform=arm64 Setup\Setup.wixproj
+@if "%ERRORLEVEL%" NEQ "0" (exit /B)
+
 rem Buiding Setup Zip files
 
 msbuild -t:ZipSetup Setup -p:Platform=x64
 @if "%ERRORLEVEL%" NEQ "0" (exit /B)
 
 msbuild -t:ZipSetup Setup -p:Platform=x86
+@if "%ERRORLEVEL%" NEQ "0" (exit /B)
+
+msbuild -t:ZipSetup Setup -p:Platform=Arm64
 @if "%ERRORLEVEL%" NEQ "0" (exit /B)

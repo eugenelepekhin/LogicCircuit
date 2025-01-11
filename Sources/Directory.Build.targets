@@ -75,6 +75,7 @@
 			<Platform Condition="'$(Platform)' == ''">x64</Platform>
 			<Bitness>32</Bitness>
 			<Bitness Condition="'$(Platform)' == 'x64'">64</Bitness>
+			<Bitness Condition="'$(Platform)' == 'arm64'">Arm64</Bitness>
 
 			<SetupRoot>$(MSBuildThisFileDirectory)Setup\bin\Release_$(Platform)</SetupRoot>
 			<ZipFileName>$(BuildOutputFolder)\LogicCircuit.Setup$(Bitness)bit.$(LogicCircuitVersion).zip</ZipFileName>
@@ -102,6 +103,7 @@
 
 		<PropertyGroup>
 			<Bitness Condition="'$(RuntimeIdentifier)' == 'win-x64'">64</Bitness>
+			<Bitness Condition="'$(RuntimeIdentifier)' == 'win-arm64'">arm64</Bitness>
 			<Bitness Condition="'$(RuntimeIdentifier)' == 'win-x86'">32</Bitness>
 			<ZipFileName>$(BuildOutputFolder)\LogicCircuit_$(Bitness)bit.$(LogicCircuitVersion).zip</ZipFileName>
 

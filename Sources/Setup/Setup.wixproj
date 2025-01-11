@@ -3,7 +3,7 @@
     <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
     <Platform Condition="'$(Platform)' == ''">x64</Platform>
     <ProductVersion>3.7</ProductVersion>
-    <Platforms>x64;x86</Platforms>
+    <Platforms>x64;x86;arm64</Platforms>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Platform)' == 'x64'">
     <InstallerPlatform>x64</InstallerPlatform>
@@ -16,6 +16,12 @@
     <OutputPath>bin\$(Configuration)_x86\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)_x86\</IntermediateOutputPath>
     <OutputName>LogicCircuitSetup_32</OutputName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Platform)' == 'arm64'">
+    <InstallerPlatform>arm64</InstallerPlatform>
+    <OutputPath>bin\$(Configuration)_arm64\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)_arm64\</IntermediateOutputPath>
+    <OutputName>LogicCircuitSetup_arm64</OutputName>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="WixToolset.UI.wixext" Version="5.0.2" />
