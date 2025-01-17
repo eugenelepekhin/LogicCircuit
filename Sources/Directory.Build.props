@@ -1,7 +1,7 @@
 ﻿<Project>
 
 	<PropertyGroup>
-		<LogicCircuitVersion>2.25.01.10</LogicCircuitVersion>
+		<LogicCircuitVersion>2.25.01.15</LogicCircuitVersion>
 		<ToolsFolder>$(MSBuildThisFileDirectory)Tools</ToolsFolder>
 		<DotNetBaseVersion>net9.0</DotNetBaseVersion>
 		<DotNetWpfVersion>$(DotNetBaseVersion)-windows</DotNetWpfVersion>
