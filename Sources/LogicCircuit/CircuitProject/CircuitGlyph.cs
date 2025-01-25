@@ -537,11 +537,13 @@ namespace LogicCircuit {
 				Panel.SetZIndex(border, int.MaxValue - 1);
 				canvas.Children.Add(border);
 			}
+			double dx = (canvas.Width - rect.Width) / 2;
+			double dy = (canvas.Height - rect.Height) / 2;
 
 			foreach(CircuitSymbol symbol in list) {
 				FrameworkElement display = symbol.Circuit.CreateDisplay(symbol, mainSymbol);
-				Canvas.SetLeft(display, Symbol.ScreenPoint(symbol.X - offset.X) + (canvas.Width - rect.Width) / 2);
-				Canvas.SetTop(display, Symbol.ScreenPoint(symbol.Y - offset.Y) + (canvas.Height - rect.Height) / 2);
+				Canvas.SetLeft(display, Symbol.ScreenPoint(symbol.X - offset.X) + dx);
+				Canvas.SetTop(display, Symbol.ScreenPoint(symbol.Y - offset.Y) + dy);
 				display.RenderTransformOrigin = Symbol.RotationCenter(symbol.Circuit.SymbolWidth, symbol.Circuit.SymbolHeight);
 				RotateTransform rotation = (RotateTransform)display.RenderTransform;
 				rotation.Angle = Symbol.Angle(symbol.Rotation);
