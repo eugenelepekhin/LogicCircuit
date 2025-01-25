@@ -516,7 +516,8 @@ namespace LogicCircuit {
 		public FrameworkElement CreateDisplayGlyph(CircuitGlyph mainSymbol) {
 			Tracer.Assert(mainSymbol);
 			List<CircuitSymbol> list = ((LogicalCircuit)this.Circuit).CircuitSymbols().Where(s => s.Circuit.IsValidDisplay()).ToList();
-			GridPoint offset = Symbol.GridPoint(list.Select(s => s.Bounds()).Aggregate((r1, r2) => Rect.Union(r1, r2)).TopLeft);
+			Rect rect = list.Select(s => s.Bounds()).Aggregate((r1, r2) => Rect.Union(r1, r2));
+			GridPoint offset = Symbol.GridPoint(rect.TopLeft);
 			DisplayCanvas canvas = this.CreateDisplayCanvas(mainSymbol);
 
 			if(this == mainSymbol) {
@@ -539,8 +540,8 @@ namespace LogicCircuit {
 
 			foreach(CircuitSymbol symbol in list) {
 				FrameworkElement display = symbol.Circuit.CreateDisplay(symbol, mainSymbol);
-				Canvas.SetLeft(display, Symbol.ScreenPoint(symbol.X - offset.X));
-				Canvas.SetTop(display, Symbol.ScreenPoint(symbol.Y - offset.Y));
+				Canvas.SetLeft(display, Symbol.ScreenPoint(symbol.X - offset.X) + (canvas.Width - rect.Width) / 2);
+				Canvas.SetTop(display, Symbol.ScreenPoint(symbol.Y - offset.Y) + (canvas.Height - rect.Height) / 2);
 				display.RenderTransformOrigin = Symbol.RotationCenter(symbol.Circuit.SymbolWidth, symbol.Circuit.SymbolHeight);
 				RotateTransform rotation = (RotateTransform)display.RenderTransform;
 				rotation.Angle = Symbol.Angle(symbol.Rotation);
