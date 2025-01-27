@@ -1,7 +1,6 @@
 ﻿// Ignore Spelling: Hdl
 
 using Antlr4.Runtime;
-using Antlr4.Runtime.Misc;
 
 namespace LogicCircuit.UnitTest.HDL {
 	internal class HdlErrorListener : BaseErrorListener, IAntlrErrorListener<int> {
@@ -13,10 +12,11 @@ namespace LogicCircuit.UnitTest.HDL {
 			this.file = file;
 		}
 
-		public override void SyntaxError([NotNull] IRecognizer recognizer, [Nullable] IToken offendingSymbol, int line, int charPositionInLine, [NotNull] string msg, [Nullable] RecognitionException e) {
+		public override void SyntaxError(TextWriter output, IRecognizer recognizer, IToken offendingSymbol, int line, int charPositionInLine, string msg, RecognitionException e) {
 			this.context.Error(this.Message(line, charPositionInLine + 1, msg));
 		}
-		public void SyntaxError([NotNull] IRecognizer recognizer, [Nullable] int offendingSymbol, int line, int charPositionInLine, [NotNull] string msg, [Nullable] RecognitionException e) {
+
+		public void SyntaxError(TextWriter output, IRecognizer recognizer, int offendingSymbol, int line, int charPositionInLine, string msg, RecognitionException e) {
 			this.context.Error(this.Message(line, charPositionInLine + 1, msg));
 		}
 

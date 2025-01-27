@@ -14,13 +14,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Antlr4" Version="4.6.6">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Antlr4.Runtime" Version="4.6.6" />
+    <PackageReference Include="Antlr4.Runtime.Standard" Version="4.13.1" />
+    <PackageReference Include="Antlr4BuildTasks" Version="12.8.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
-    <PackageReference Include="MSTest" Version="3.7.2" />
+    <PackageReference Include="MSTest" Version="3.7.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,10 +25,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Antlr4 Update="HDL\HdlLexer.g4">
+    <Antlr4 Include="HDL\HdlLexer.g4">
+      <Package>LogicCircuit.UnitTest.HDL</Package>
       <Listener>False</Listener>
     </Antlr4>
-    <Antlr4 Update="HDL\HdlParser.g4">
+    <Antlr4 Include="HDL\HdlParser.g4">
+      <Package>LogicCircuit.UnitTest.HDL</Package>
       <Listener>False</Listener>
     </Antlr4>
   </ItemGroup>
