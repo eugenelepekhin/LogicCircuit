@@ -19,6 +19,8 @@ namespace LogicCircuit {
 	/// https://github.com/jopdorp/nand2tetris-verilog
 	/// </summary>
 	internal class N2TExport : HdlExport {
+		public const string NotSupportedChars = @"\s|[,.?/!@#$%^&*()\-_+={}[\]|\\<>~`]";
+
 		private readonly Dictionary<string, string> PinName = new Dictionary<string, string>() {
 			{ "x", "in" },
 			{ "x1", "a" },
@@ -27,20 +29,24 @@ namespace LogicCircuit {
 		};
 
 		private readonly Regex identifier = new Regex(@"^[a-zA-Z][a-zA-Z0-9]*$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
+		private readonly Regex notSupportedChars = new Regex(N2TExport.NotSupportedChars, RegexOptions.Compiled);
+
 		private readonly HashSet<string> keywords = new HashSet<string>() { "CHIP", "PARTS", "IN", "OUT", "true", "false", };
 
 		private CircuitProject? replacmentProject;
 
-		public N2TExport(bool exportTests, bool commentPoints, Action<string> logMessage, Action<string> logError, Action<string> logWarning) : base(exportTests, commentPoints, logMessage, logError, logWarning) {
+		public N2TExport(bool exportTests, bool commentPoints, bool fixNames, Action<string> logMessage, Action<string> logError, Action<string> logWarning) : base(
+			exportTests, commentPoints, fixNames, logMessage, logError, logWarning
+		) {
 		}
 
 		protected override HdlTransformation? CreateTransformation(string name, IList<HdlSymbol> inputPins, IList<HdlSymbol> outputPins, IList<HdlSymbol> parts) {
 			if(this.FixBigGates(parts)) {
-				return new N2THdl(name, inputPins, outputPins, parts);
+				return new N2THdl(this.FixName(name), inputPins, outputPins, parts, this.FixName);
 			}
 			return null;
 		}
-		protected override string FileName(LogicalCircuit circuit) => circuit.Name + ".hdl";
+		protected override string FileName(LogicalCircuit circuit) => this.FixName(circuit.Name) + ".hdl";
 
 		public override bool CanExport(Circuit circuit) {
 			return !(
@@ -53,6 +59,8 @@ namespace LogicCircuit {
 		}
 
 		public override bool IsValid(string name) => this.identifier.IsMatch(name) && !this.keywords.Contains(name);
+
+		private string FixName(string name) => this.FixNames ? this.notSupportedChars.Replace(name, "") : name;
 
 		protected override bool Validate(HdlTransformation transformation) {
 			bool valid = base.Validate(transformation);
@@ -119,7 +127,7 @@ namespace LogicCircuit {
 					return "ROM32K";
 				}
 			}
-			return circuit.Name.Trim();
+			return this.FixName(circuit.Name.Trim());
 		}
 
 		public override string HdlName(Jam jam) {
@@ -134,7 +142,7 @@ namespace LogicCircuit {
 				if(pin == memory.WritePin)   return "load";
 			}
 
-			return name;
+			return this.FixName(name);
 		}
 
 		private bool FixBigGates(IList<HdlSymbol> parts) {
@@ -311,13 +319,15 @@ namespace LogicCircuit {
 			StringBuilder expect = new StringBuilder();
 			StringBuilder script = new StringBuilder();
 
+			circuitName = this.FixName(circuitName);
+
 			script.AppendLine(CultureInfo.InvariantCulture, $"load {circuitName + ".hdl"},");
 			script.AppendLine(CultureInfo.InvariantCulture, $"output-file {circuitName + ".out"},");
 			script.AppendLine(CultureInfo.InvariantCulture, $"compare-to {circuitName + ".cmp"},");
 			script.Append("output-list");
 
-			List<string> inputNames = inputs.Select(i => i.Pin.Name).ToList();
-			List<string> outputNames = outputs.Select(o => o.Pin.Name).ToList();
+			List<string> inputNames = inputs.Select(i => this.FixName(i.Pin.Name)).ToList();
+			List<string> outputNames = outputs.Select(o => this.FixName(o.Pin.Name)).ToList();
 
 			foreach(string field in inputNames.Concat(outputNames)) {
 				script.Append(CultureInfo.InvariantCulture, $" {field}%X1.1.1");

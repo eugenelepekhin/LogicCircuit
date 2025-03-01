@@ -19,6 +19,8 @@ namespace LogicCircuit {
 	/// </summary>
 	internal class VerilogExport : HdlExport {
 		private readonly Regex identifier = new Regex(@"^[a-zA-Z_][a-zA-Z0-9_$]*$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
+		private readonly Regex notSupportedChars = new Regex(@"\s|[,.?/!@#$%^&*()\-+={}[\]|\\<>~`]", RegexOptions.Compiled);
+
 		private readonly HashSet<string> keywords = new HashSet<string>() {
 			"always", "assign", "attribute", "begin", "buf", "bufif0", "case", "casex", "casez",
 			"cmos", "deassign", "default", "defparam", "disable", "edge", "else", "end", "endattribute", "endcase",
@@ -35,10 +37,12 @@ namespace LogicCircuit {
 			//"and", "bufif1", "nand", "nor", "not", "or", "xnor", "xor",
 		};
 
-		public VerilogExport(bool exportTests, bool commentPoints, Action<string> logMessage, Action<string> logError, Action<string> logWarning) : base(exportTests, commentPoints, logMessage, logError, logWarning) {
+		public VerilogExport(bool exportTests, bool commentPoints, bool fixNames, Action<string> logMessage, Action<string> logError, Action<string> logWarning) : base(
+			exportTests, commentPoints, fixNames, logMessage, logError, logWarning
+		) {
 		}
 
-		protected override string FileName(LogicalCircuit circuit) => circuit.Name + ".sv";
+		protected override string FileName(LogicalCircuit circuit) => this.FixName(circuit.Name) + ".sv";
 
 		public override bool CanExport(Circuit circuit) {
 			return !(
@@ -50,7 +54,12 @@ namespace LogicCircuit {
 			);
 		}
 
-		public override bool IsValid(string name) => this.identifier.IsMatch(name) && !this.keywords.Contains(name);
+		public override bool IsValid(string name) {
+			name = this.FixName(name);
+			return this.identifier.IsMatch(name) && !this.keywords.Contains(name);
+		}
+
+		private string FixName(string name) => this.FixNames ? this.notSupportedChars.Replace(name, "_") : name;
 
 		protected override bool Validate(HdlTransformation transformation) {
 			bool valid = base.Validate(transformation);
@@ -100,7 +109,7 @@ namespace LogicCircuit {
 		}
 
 		protected override HdlTransformation? CreateTransformation(string name, IList<HdlSymbol> inputPins, IList<HdlSymbol> outputPins, IList<HdlSymbol> parts) {
-			return new VerilogHdl(name, inputPins, outputPins, parts);
+			return new VerilogHdl(this.FixName(name), inputPins, outputPins, parts, this.FixName);
 		}
 
 		public override string HdlName(HdlSymbol symbol) {
@@ -123,7 +132,7 @@ namespace LogicCircuit {
 					return string.Format(CultureInfo.InvariantCulture, "{0}_ROM_{1}x{2}", symbol.CircuitSymbol.LogicalCircuit.Name, symbol.CircuitSymbol.X, symbol.CircuitSymbol.Y);
 				}
 			}
-			return circuit.Name.Trim();
+			return this.FixName(circuit.Name.Trim());
 		}
 
 		public override string HdlName(Jam jam) {
@@ -136,19 +145,20 @@ namespace LogicCircuit {
 				if(pin == memory.Address2Pin) return "address2";
 				if(pin == memory.DataOut2Pin) return "dataOut2";
 			}
-			return base.HdlName(jam);
+			return this.FixName(base.HdlName(jam));
 		}
 
 		protected override void ExportTest(string circuitName, List<InputPinSocket> inputs, List<OutputPinSocket> outputs, IList<TruthState> table, string folder) {
 			VerilogTestBench verilogTest = new VerilogTestBench(
-				circuitName,
+				this.FixName(circuitName),
 				inputs,
 				outputs,
-				table
+				table,
+				this.FixName
 			);
 			string text = verilogTest.TransformText();
 			if(!string.IsNullOrWhiteSpace(text)) {
-				string testFile = Path.Combine(folder, circuitName + "_TestBench.sv");
+				string testFile = Path.Combine(folder, this.FixName(circuitName) + "_TestBench.sv");
 				File.WriteAllText(testFile, text);
 				this.Message(Properties.Resources.MessageHdlSavingTestFile(testFile));
 			}

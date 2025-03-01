@@ -3556,5 +3556,12 @@ namespace LogicCircuit.Properties {
  		public static string CommandAlignRight {
 			get { return ResourceManager.GetString("CommandAlignRight", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Automatically _fix names.
+		/// </summary>
+ 		public static string TitleFixNames {
+			get { return ResourceManager.GetString("TitleFixNames", Culture); }
+		}
 	}
 }

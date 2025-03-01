@@ -6,26 +6,28 @@ using System.Globalization;
 
 namespace LogicCircuit {
 	internal class VerilogTestBench : T4Transformation {
-		private string circuitName;
-		private List<InputPinSocket> inputs;
-		private List<OutputPinSocket> outputs;
-		private IList<TruthState> table;
+		private readonly string circuitName;
+		private readonly List<InputPinSocket> inputs;
+		private readonly List<OutputPinSocket> outputs;
+		private readonly IList<TruthState> table;
+		private readonly Func<string, string> fixName;
 
-		public VerilogTestBench(string circuitName, List<InputPinSocket> inputs, List<OutputPinSocket> outputs, IList<TruthState> table) {
-			this.circuitName = circuitName;
+		public VerilogTestBench(string circuitName, List<InputPinSocket> inputs, List<OutputPinSocket> outputs, IList<TruthState> table, Func<string, string> fixName) {
+			this.circuitName = fixName(circuitName);
 			this.inputs = inputs;
 			this.outputs = outputs;
 			this.table = table;
+			this.fixName = fixName;
 		}
 
 		public override string TransformText() {
 			this.WriteLine("module {0}_TestBench;", this.circuitName);
 
 			foreach(InputPinSocket input in this.inputs) {
-				this.WriteLine("\treg {0}{1};", VerilogHdl.Range(input.Pin), input.Pin.Name);
+				this.WriteLine("\treg {0}{1};", VerilogHdl.Range(input.Pin), this.fixName(input.Pin.Name));
 			}
 			foreach(OutputPinSocket output in this.outputs) {
-				this.WriteLine("\twire {0}{1};", VerilogHdl.Range(output.Pin), output.Pin.Name);
+				this.WriteLine("\twire {0}{1};", VerilogHdl.Range(output.Pin), this.fixName(output.Pin.Name));
 			}
 			this.WriteLine();
 
@@ -33,12 +35,12 @@ namespace LogicCircuit {
 			bool comma = false;
 			foreach(InputPinSocket input in this.inputs) {
 				if(comma) this.WriteLine(",");
-				this.Write("\t\t.{0}({0})", input.Pin.Name);
+				this.Write("\t\t.{0}({0})", this.fixName(input.Pin.Name));
 				comma = true;
 			}
 			foreach(OutputPinSocket output in this.outputs) {
 				if(comma) this.WriteLine(",");
-				this.Write("\t\t.{0}({0})", output.Pin.Name);
+				this.Write("\t\t.{0}({0})", this.fixName(output.Pin.Name));
 				comma = true;
 			}
 			this.WriteLine();
@@ -50,7 +52,7 @@ namespace LogicCircuit {
 			foreach(TruthState state in this.table) {
 				int index = 0;
 				foreach(InputPinSocket input in this.inputs) {
-					this.WriteLine("\t\t{0} = {1};", input.Pin.Name, state.Input[index]);
+					this.WriteLine("\t\t{0} = {1};", this.fixName(input.Pin.Name), state.Input[index]);
 					index++;
 				}
 
@@ -67,7 +69,7 @@ namespace LogicCircuit {
 						format = "{0}'h{1}";
 					}
 					value = string.Format(CultureInfo.InvariantCulture, format, output.Pin.BitWidth, value);
-					this.WriteLine("\t\tif({0} !== {1}) $error(\"Output {0} expected value {1} actual value is \", {0});", output.Pin.Name, value);
+					this.WriteLine("\t\tif({0} !== {1}) $error(\"Output {0} expected value {1} actual value is \", {0});", this.fixName(output.Pin.Name), value);
 					index++;
 				}
 

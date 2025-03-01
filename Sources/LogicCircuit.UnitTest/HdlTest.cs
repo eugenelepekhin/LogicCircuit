@@ -43,18 +43,18 @@ namespace LogicCircuit.UnitTest {
 			circuits.Sort((a, b) => Math.Sign(Number(a.Note) - Number(b.Note)));
 		}
 
-		private void RunTruthTableComparisonForCategory(string category) {
+		private void RunTruthTableComparisonForCategory(string category, bool fixNames, Func<string, string> fixName) {
 			CircuitProject project = this.LoadCircuitProject();
 			string hdlPath = this.HdlFolder();
 			List<LogicalCircuit> circuits = project.LogicalCircuitSet.Where(c => c.Category == category).ToList();
 			this.SortByNote(circuits);
 			foreach(LogicalCircuit circuit in circuits) {
 				ProjectTester.SwitchTo(project, circuit.Name);
-				N2TExport export = new N2TExport(false, true, this.Message, this.Message, this.Message);
+				N2TExport export = new N2TExport(false, true, fixNames, this.Message, this.Message, this.Message);
 				bool success = export.ExportCircuit(circuit, hdlPath, false, false, null, () => {});
 				Assert.IsTrue(success);
 				HdlContext context = new HdlContext(hdlPath, this.Message);
-				HdlState hdlState = context.Load(circuit.Name);
+				HdlState hdlState = context.Load(fixName(circuit.Name));
 				Assert.IsNotNull(hdlState);
 				this.Message($"Circuit {circuit.Name} HDL:");
 				this.Message(hdlState.Chip.ToString());
@@ -68,11 +68,15 @@ namespace LogicCircuit.UnitTest {
 			}
 		}
 
+		private void RunTruthTableComparisonForCategory(string category) {
+			this.RunTruthTableComparisonForCategory(category, false, s => s);
+		}
+
 		private HdlState LoadState(string circuitName) {
 			CircuitProject project = this.LoadCircuitProject();
 			string hdlPath = this.HdlFolder();
 			LogicalCircuit circuit = ProjectTester.SwitchTo(project, circuitName);
-			N2TExport export = new N2TExport(false, false, this.Message, this.Message, this.Message);
+			N2TExport export = new N2TExport(false, false, false, this.Message, this.Message, this.Message);
 			bool success = export.ExportCircuit(circuit, hdlPath, false, false, null, () => {});
 			Assert.IsTrue(success);
 			HdlContext context = new HdlContext(hdlPath, this.Message);
@@ -108,7 +112,7 @@ namespace LogicCircuit.UnitTest {
 			this.SortByNote(circuits);
 			foreach(LogicalCircuit circuit in circuits) {
 				ProjectTester.SwitchTo(project, circuit.Name);
-				N2TExport export = new N2TExport(false, false, this.Message, error, this.Message);
+				N2TExport export = new N2TExport(false, false, false, this.Message, error, this.Message);
 				bool success = export.ExportCircuit(circuit, hdlPath, false, false, null, () => {});
 				Assert.IsFalse(success);
 
@@ -227,6 +231,12 @@ namespace LogicCircuit.UnitTest {
 			for(int i = 0; i < max + 10; i++) {
 				check((i + 1) % max);
 			}
+		}
+
+		[STATestMethod]
+		public void HdlTestFixNames() {
+			string fixName(string name) => Regex.Replace(name, N2TExport.NotSupportedChars, "");
+			this.RunTruthTableComparisonForCategory("FixNames", true, fixName);
 		}
 
 		//[STATestMethod]

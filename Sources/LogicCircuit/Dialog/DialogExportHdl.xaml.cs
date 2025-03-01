@@ -68,6 +68,12 @@ namespace LogicCircuit {
 			set => this.commentPoints.Value = value;
 		}
 
+		private readonly SettingsBoolCache fixNames = new SettingsBoolCache(Settings.User, nameof(DialogExportHdl) + "." + nameof(fixNames), false);
+		public bool FixNames {
+			get => this.fixNames.Value;
+			set => this.fixNames.Value = value;
+		}
+
 		public static readonly DependencyProperty RunningProperty = DependencyProperty.Register(nameof(ShowProgress), typeof(bool), typeof(DialogExportHdl));
 		public bool ShowProgress {
 			get => (bool)this.GetValue(DialogExportHdl.RunningProperty);
@@ -139,13 +145,13 @@ namespace LogicCircuit {
 					exportTests = true;
 					goto case HdlExportType.N2T;
 				case HdlExportType.N2T:
-					hdl = new N2TExport(exportTests, this.CommentPoints, this.Message, this.Error, this.Warning);
+					hdl = new N2TExport(exportTests, this.CommentPoints, this.FixNames, this.Message, this.Error, this.Warning);
 					break;
 				case HdlExportType.VerilogFull:
 					exportTests = true;
 					goto case HdlExportType.Verilog;
 				case HdlExportType.Verilog:
-					hdl = new VerilogExport(exportTests, this.CommentPoints, this.Message, this.Error, this.Warning);
+					hdl = new VerilogExport(exportTests, this.CommentPoints, this.FixNames, this.Message, this.Error, this.Warning);
 					break;
 				default:
 					throw new InvalidOperationException();

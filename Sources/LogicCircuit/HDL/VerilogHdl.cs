@@ -11,8 +11,10 @@ namespace LogicCircuit {
 		private readonly Dictionary<Jam, Jam> wires = new();
 		private readonly OneToMany<Jam, HdlConnection> connections = new OneToMany<Jam, HdlConnection>(true);
 		private readonly OneToMany<Jam, HdlConnection> assignments = new OneToMany<Jam, HdlConnection>(true);
+		private readonly Func<string, string> fixName;
 
-		public VerilogHdl(string name, IEnumerable<HdlSymbol> inputPins, IEnumerable<HdlSymbol> outputPins, IEnumerable<HdlSymbol> parts) : base(name, inputPins, outputPins, parts) {
+		public VerilogHdl(string name, IEnumerable<HdlSymbol> inputPins, IEnumerable<HdlSymbol> outputPins, IEnumerable<HdlSymbol> parts, Func<string, string> fixName) : base(name, inputPins, outputPins, parts) {
+			this.fixName = fixName;
 		}
 
 		private void Prepare() {
@@ -65,10 +67,10 @@ namespace LogicCircuit {
 			}
 		}
 
-		private static string WireName(Jam jam) {
+		private string WireName(Jam jam) {
 			Debug.Assert(jam.Pin.PinType != PinType.Input);
 			if(jam.CircuitSymbol.Circuit is Pin pin) {
-				return pin.Name;
+				return this.fixName(pin.Name);
 			} else {
 				GridPoint point = jam.AbsolutePoint;
 				return string.Format(CultureInfo.InvariantCulture, "Pin{0}x{1}", point.X, point.Y);
@@ -77,7 +79,7 @@ namespace LogicCircuit {
 
 		private string Wire(Jam jam) {
 			Debug.Assert(jam.Pin.PinType != PinType.Input);
-			return VerilogHdl.WireName(this.wires[jam]);
+			return this.WireName(this.wires[jam]);
 		}
 
 		private string WirePlug(HdlConnection connection, Jam jam) {
@@ -189,7 +191,7 @@ namespace LogicCircuit {
 				if(comma) this.WriteLine(",");
 				this.Write("\t{0}", pin.PinType == PinType.Input ? "input" : "output");
 				this.WriteRange(pin);
-				this.Write("\t{0}", pin.Name);
+				this.Write("\t{0}", this.fixName(pin.Name));
 				comma = true;
 			}
 			this.WriteLine();
@@ -198,7 +200,7 @@ namespace LogicCircuit {
 			foreach(Jam jam in this.wires.Values.Where(j => j.CircuitSymbol.Circuit is not Pin).OrderBy(j => j.AbsolutePoint, Comparer<GridPoint>.Create(VerilogHdl.CompareGridPoint))) {
 				this.Write("\twire");
 				this.WriteRange(jam.Pin);
-				this.WriteLine(" {0};", VerilogHdl.WireName(jam));
+				this.WriteLine(" {0};", this.WireName(jam));
 			}
 			this.WriteLine();
 

@@ -1730,4 +1730,7 @@ Do you want to load auto saved state of this file?</value>
   <data name="CommandAlignRight" xml:space="preserve">
     <value>Align _Right</value>
   </data>
+  <data name="TitleFixNames" xml:space="preserve">
+    <value>Automatically _fix names</value>
+  </data>
 </root>

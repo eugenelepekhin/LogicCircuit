@@ -24,6 +24,7 @@
 			<WrapPanel Grid.Column="1">
 				<CheckBox Content="{x:Static properties:Resources.TitleExportOnlyCurrent}" IsChecked="{Binding Path=OnlyCurrent}"/>
 				<CheckBox Content="{x:Static properties:Resources.TitleAddComments}" IsChecked="{Binding Path=CommentPoints}"/>
+				<CheckBox Content="{x:Static properties:Resources.TitleFixNames}" IsChecked="{Binding Path=FixNames}"/>
 			</WrapPanel>
 
 			<Label Content="{x:Static properties:Resources.TitleLog}"/>

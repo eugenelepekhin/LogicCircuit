@@ -1,5 +1,6 @@
 ﻿// Ignore Spelling: Hdl
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -8,10 +9,12 @@ using System.Text;
 
 namespace LogicCircuit {
 	internal class N2THdl : HdlTransformation {
-		public N2THdl(string name, IEnumerable<HdlSymbol> inputPins, IEnumerable<HdlSymbol> outputPins, IEnumerable<HdlSymbol> parts) : base(name, inputPins, outputPins, parts) {
+		private readonly Func<string, string> fixName;
+		public N2THdl(string name, IEnumerable<HdlSymbol> inputPins, IEnumerable<HdlSymbol> outputPins, IEnumerable<HdlSymbol> parts, Func<string, string> fixName) : base(name, inputPins, outputPins, parts) {
+			this.fixName = fixName;
 		}
 
-		private static string PinsText(IEnumerable<HdlSymbol> pins) {
+		private string PinsText(IEnumerable<HdlSymbol> pins) {
 			StringBuilder text = new StringBuilder();
 			bool comma = false;
 			foreach(HdlSymbol symbol in pins) {
@@ -21,7 +24,7 @@ namespace LogicCircuit {
 					comma = true;
 				}
 				Pin pin = (Pin)symbol.CircuitSymbol.Circuit;
-				text.Append(pin.Name);
+				text.Append(this.fixName(pin.Name));
 				if(1 < pin.BitWidth) {
 					text.AppendFormat(CultureInfo.InvariantCulture, "[{0}]", pin.BitWidth);
 				}
@@ -43,7 +46,7 @@ namespace LogicCircuit {
 			return name;
 		}
 
-		private static string PinName(HdlSymbol symbol, HdlConnection connection) {
+		private string PinName(HdlSymbol symbol, HdlConnection connection) {
 			Debug.Assert(symbol == connection.OutHdlSymbol || symbol == connection.InHdlSymbol);
 			Debug.Assert(symbol.CircuitSymbol.Circuit is not Constant);
 			HdlSymbol otherSymbol;
@@ -59,7 +62,7 @@ namespace LogicCircuit {
 				otherBits = connection.OutBits;
 			}
 			if(otherJam.CircuitSymbol.Circuit is Pin pin) {
-				string name = pin.Name;
+				string name = this.fixName(pin.Name);
 				if(connection.IsBitRange(otherSymbol)) {
 					name += N2THdl.RangeText(otherBits);
 				}
@@ -84,10 +87,10 @@ namespace LogicCircuit {
 		public override string TransformText() {
 			this.WriteLine("CHIP {0} {{", this.Name);
 			if(this.HasInputPins) {
-				this.WriteLine("IN {0};", N2THdl.PinsText(this.InputPins));
+				this.WriteLine("IN {0};", this.PinsText(this.InputPins));
 			}
 			if(this.HasOutputPins) {
-				this.WriteLine("OUT {0};", N2THdl.PinsText(this.OutputPins));
+				this.WriteLine("OUT {0};", this.PinsText(this.OutputPins));
 			}
 			this.WriteLine("PARTS:");
 			foreach(HdlSymbol symbol in this.Parts) {
@@ -116,7 +119,7 @@ namespace LogicCircuit {
 							this.Write("={0}", ((value >> i) & 1) != 0 ? "true" : "false");
 						}
 					} else {
-						this.Write("{0}={1}", N2THdl.SymbolJamName(symbol, connection), N2THdl.PinName(symbol, connection));
+						this.Write("{0}={1}", N2THdl.SymbolJamName(symbol, connection), this.PinName(symbol, connection));
 					}
 				}
 				this.WriteLine(");");

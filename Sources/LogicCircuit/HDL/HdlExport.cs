@@ -26,15 +26,17 @@ namespace LogicCircuit {
 
 		protected bool ExportTests { get; }
 		private readonly bool commentPoints;
+		protected bool FixNames { get; }
 
 		private readonly Action<string> logMessage;
 		private readonly Action<string> logError;
 		private readonly Action<string> logWarning;
 		private int ErrorCount { get; set; }
 
-		protected HdlExport(bool exportTests, bool commentPoints, Action<string> logMessage, Action<string> logError, Action<string> logWarning) {
+		protected HdlExport(bool exportTests, bool commentPoints, bool fixNames, Action<string> logMessage, Action<string> logError, Action<string> logWarning) {
 			this.ExportTests = exportTests;
 			this.commentPoints = commentPoints;
+			this.FixNames = fixNames;
 			this.logMessage = logMessage;
 			this.logError = logError;
 			this.logWarning = logWarning;
