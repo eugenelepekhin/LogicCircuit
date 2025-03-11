@@ -27,11 +27,14 @@ namespace LogicCircuit {
 		public override bool HasCreatedGlyph { get { return this.glyph != null; } }
 
 		public Line WireGlyph {
-			get { return this.glyph ?? (this.glyph = this.CreateGlyph()); }
+			get { return this.glyph ??= this.CreateGlyph(); }
 		}
+
+		public bool MarkedBad { get; set; }
 
 		public void Reset() {
 			this.glyph = null;
+			this.MarkedBad = false;
 		}
 
 		public override void PositionGlyph() {

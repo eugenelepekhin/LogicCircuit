@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Ignore Spelling: Validator
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -13,9 +15,7 @@ namespace LogicCircuit {
 		private bool running;
 		private bool stopPending;
 
-		private readonly HashSet<Wire> badWires = new HashSet<Wire>();
 		private readonly EditorDiagram diagram;
-		private LogicalCircuit? logicalCircuit;
 		private int version;
 
 		public WireValidator(EditorDiagram diagram) {
@@ -90,24 +90,16 @@ namespace LogicCircuit {
 
 				HashSet<Wire>? bad = this.Bad(current);
 				void redraw() {
-					List<Wire> list = this.badWires.Except(bad).ToList();
-					foreach(Wire wire in list.Where(w => !w.IsDeleted())) {
-						if(this.stopPending) return;
-						wire.WireGlyph.Stroke = Symbol.WireStroke;
+					foreach(Wire wire in current.Wires()) {
+						bool isBad = bad.Contains(wire);
+						if(isBad != wire.MarkedBad) {
+							wire.MarkedBad = isBad;
+							wire.WireGlyph.Stroke = isBad ? Symbol.BadWireStroke : Symbol.WireStroke;
+						}
 					}
-					this.badWires.ExceptWith(list);
-					foreach(Wire wire in bad.Where(w => !this.badWires.Contains(w))) {
-						if(this.stopPending) return;
-						this.badWires.Add(wire);
-						wire.WireGlyph.Stroke = Symbol.BadWireStroke;
-					}
-				}
-				if(this.logicalCircuit != current) {
-					this.badWires.Clear();
 				}
 				if(!this.stopPending && bad != null) {
 					App.Dispatch(redraw);
-					this.logicalCircuit = current;
 				}
 				if(!this.stopPending) {
 					this.version = currentVersion;
@@ -149,7 +141,6 @@ namespace LogicCircuit {
 		public void Reset() {
 			this.stopPending = true;
 			this.version = 0;
-			this.badWires.Clear();
 		}
 	}
 }
