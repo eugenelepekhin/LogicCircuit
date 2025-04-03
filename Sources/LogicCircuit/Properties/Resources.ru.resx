@@ -1633,6 +1633,6 @@
 		<value>Выделить скрытые провода</value>
 	</data>
 	<data name="MessageHiddenWireCount" xml:space="preserve">
-		<value>Выделено {0} скрытых проводов.</value>
+		<value>Выделено скрытых проводов: {0}.</value>
 	</data>
 </root>
