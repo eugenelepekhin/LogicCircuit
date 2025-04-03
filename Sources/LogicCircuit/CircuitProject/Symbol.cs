@@ -64,6 +64,9 @@ namespace LogicCircuit {
 		public static int CrossProductSign(Point point0, Point point1, Point point2) {
 			return Math.Sign((point1.X - point0.X) * (point2.Y - point0.Y) - (point2.X - point0.X) * (point1.Y - point0.Y));
 		}
+		public static int CrossProductSign(GridPoint point0, GridPoint point1, GridPoint point2) {
+			return Math.Sign((point1.X - point0.X) * (point2.Y - point0.Y) - (point2.X - point0.X) * (point1.Y - point0.Y));
+		}
 
 		/// <summary>
 		/// Checks if two line segments are intersected

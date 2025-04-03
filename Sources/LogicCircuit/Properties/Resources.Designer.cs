@@ -3563,5 +3563,26 @@ namespace LogicCircuit.Properties {
  		public static string TitleFixNames {
 			get { return ResourceManager.GetString("TitleFixNames", Culture); }
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to _Select.
+		/// </summary>
+ 		public static string MenuHeaderSelect {
+			get { return ResourceManager.GetString("MenuHeaderSelect", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Select Hidden Wires.
+		/// </summary>
+ 		public static string CommandEditSelectHiddenWires {
+			get { return ResourceManager.GetString("CommandEditSelectHiddenWires", Culture); }
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to {0} hidden wires have been found..
+		/// </summary>
+ 		public static string MessageHiddenWireCount(int wireCount) {
+			return string.Format(FormatCulture, ResourceManager.GetString("MessageHiddenWireCount", Culture), wireCount);
+		}
 	}
 }

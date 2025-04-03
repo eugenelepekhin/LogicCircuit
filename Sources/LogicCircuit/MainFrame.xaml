@@ -114,16 +114,19 @@
 				<lc:CommandMenuItem Command="{Binding Path=Editor.CommandPaste}"/>
 				<lc:CommandMenuItem Command="{Binding Path=Editor.CommandDelete}"/>
 				<Separator />
-				<lc:CommandMenuItem Command="{Binding Path=Editor.CommandSelectAll}"/>
-				<lc:CommandMenuItem Command="{Binding Path=Editor.CommandSelectAllWires}"/>
-				<lc:CommandMenuItem Command="{Binding Path=Editor.CommandSelectFreeWires}"/>
-				<lc:CommandMenuItem Command="{Binding Path=Editor.CommandSelectFloatingSymbols}"/>
-				<lc:CommandMenuItem Command="{Binding Path=Editor.CommandSelectAllButWires}"/>
-				<lc:CommandMenuItem Command="{Binding Path=Editor.CommandUnselectAllWires}"/>
-				<lc:CommandMenuItem Command="{Binding Path=Editor.CommandUnselectAllButWires}"/>
-				<Separator />
-				<lc:CommandMenuItem Command="{Binding Path=Editor.CommandSelectAllProbes}"/>
-				<lc:CommandMenuItem Command="{Binding Path=Editor.CommandSelectAllProbesWithWire}"/>
+				<MenuItem Header="{x:Static properties:Resources.MenuHeaderSelect}">
+					<lc:CommandMenuItem Command="{Binding Path=Editor.CommandSelectAll}"/>
+					<lc:CommandMenuItem Command="{Binding Path=Editor.CommandSelectAllWires}"/>
+					<lc:CommandMenuItem Command="{Binding Path=Editor.CommandSelectFreeWires}"/>
+					<lc:CommandMenuItem Command="{Binding Path=Editor.CommandSelectHiddenWires}"/>
+					<lc:CommandMenuItem Command="{Binding Path=Editor.CommandSelectFloatingSymbols}"/>
+					<lc:CommandMenuItem Command="{Binding Path=Editor.CommandSelectAllButWires}"/>
+					<lc:CommandMenuItem Command="{Binding Path=Editor.CommandUnselectAllWires}"/>
+					<lc:CommandMenuItem Command="{Binding Path=Editor.CommandUnselectAllButWires}"/>
+					<Separator />
+					<lc:CommandMenuItem Command="{Binding Path=Editor.CommandSelectAllProbes}"/>
+					<lc:CommandMenuItem Command="{Binding Path=Editor.CommandSelectAllProbesWithWire}"/>
+				</MenuItem>
 				<Separator />
 				<MenuItem Header="{x:Static properties:Resources.MenuHeaderRotate}">
 					<lc:CommandMenuItem Command="{Binding Path=Editor.CommandRotateLeft}"/>

@@ -93,6 +93,10 @@ namespace LogicCircuit {
 		partial void OnWireChanged() {
 			this.PositionGlyph();
 		}
+
+		#if DEBUG
+			public override string ToString() => $"Wire({this.Point1}, {this.Point2})";
+		#endif
 	}
 
 	[SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]

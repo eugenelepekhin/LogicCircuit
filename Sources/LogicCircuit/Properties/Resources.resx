@@ -1733,4 +1733,14 @@ Do you want to load auto saved state of this file?</value>
   <data name="TitleFixNames" xml:space="preserve">
     <value>Automatically _fix names</value>
   </data>
+  <data name="MenuHeaderSelect" xml:space="preserve">
+    <value>_Select</value>
+  </data>
+  <data name="CommandEditSelectHiddenWires" xml:space="preserve">
+    <value>Select Hidden Wires</value>
+  </data>
+  <data name="MessageHiddenWireCount" xml:space="preserve">
+    <value>{0} hidden wires have been found.</value>
+    <comment>{int wireCount}</comment>
+  </data>
 </root>

@@ -98,6 +98,10 @@ namespace LogicCircuit {
 				this.Mainframe.Status = Properties.Resources.MessageFreeWireCount(count);
 			}
 		});
+		public LambdaUICommand CommandSelectHiddenWires => new LambdaUICommand(Properties.Resources.CommandEditSelectHiddenWires, o => this.InEditMode, o => {
+			int count = this.SelectHiddenWires();
+			this.Mainframe.Status = Properties.Resources.MessageHiddenWireCount(count);
+		});
 		public LambdaUICommand CommandSelectFloatingSymbols => new LambdaUICommand(Properties.Resources.CommandEditSelectFloatingSymbols, o => this.InEditMode,
 		o => {
 			int count = this.SelectFloatingSymbols();
@@ -815,6 +819,86 @@ namespace LogicCircuit {
 					}
 				}
 				return freeWireCount;
+			}
+			return 0;
+		}
+
+		public int SelectHiddenWires() {
+			// Checks if point is inside rectangle including boundaries defined by two diagonal points: point1 and point2
+			bool insideRect(GridPoint point1, GridPoint point2, GridPoint point) =>
+				Math.Min(point1.X, point2.X) <= point.X && point.X <= Math.Max(point1.X, point2.X) &&
+				Math.Min(point1.Y, point2.Y) <= point.Y && point.Y <= Math.Max(point1.Y, point2.Y)
+			;
+			bool inside(Wire wire, GridPoint point) => insideRect(wire.Point1, wire.Point2, point);
+			int square(int x) => x * x;
+			int length(Wire wire) => square(wire.X1 - wire.X2) + square(wire.Y1 - wire.Y2); //skip sqrt for speed
+			// Checks if point is inside rectangle excluding boundaries defined by two diagonal points: point1 and point2
+			bool covered(GridPoint point1, GridPoint point2, GridPoint point) =>
+				Math.Min(point1.X, point2.X) < point.X && point.X < Math.Max(point1.X, point2.X) &&
+				Math.Min(point1.Y, point2.Y) < point.Y && point.Y < Math.Max(point1.Y, point2.Y)
+			;
+
+			if(this.InEditMode) {
+				HashSet<Wire> hidden = new HashSet<Wire>();
+				LogicalCircuit logicalCircuit = this.Project.LogicalCircuit;
+				List<Wire> wires = logicalCircuit.Wires().ToList();
+				List<CircuitSymbol> symbols = logicalCircuit.CircuitSymbols().ToList();
+				for(int i = 0; i < wires.Count; i++) {
+					Wire wire = wires[i];
+					if(!hidden.Contains(wire)) {
+						Tracer.Assert(wire.Point1 != wire.Point2);
+						for(int j = i + 1; j < wires.Count; j++) {
+							Wire other = wires[j];
+							if(!hidden.Contains(other)) {
+								Tracer.Assert(other.Point1 != other.Point2);
+								if(	Symbol.CrossProductSign(wire.Point1, wire.Point2, other.Point1) == 0 &&		// These two CrossProductSign calls are checking if two wires are on the same strait line
+									Symbol.CrossProductSign(wire.Point1, wire.Point2, other.Point2) == 0 && (
+										inside(wire, other.Point1) || inside(wire, other.Point2) ||
+										inside(other, wire.Point1) || inside(wire, other.Point2)
+									)
+								) {
+									bool onlyAtPoint1 = (
+										wire.Point1 == other.Point1 && !inside(wire, other.Point2) && !inside(other, wire.Point2) ||
+										wire.Point1 == other.Point2 && !inside(wire, other.Point1) && !inside(other, wire.Point2)
+									);
+									bool onlyAtPoint2 = !onlyAtPoint1 && (
+										wire.Point2 == other.Point1 && !inside(wire, other.Point2) && !inside(other, wire.Point1) ||
+										wire.Point2 == other.Point2 && !inside(wire, other.Point1) && !inside(other, wire.Point1)
+									);
+									bool skip = (
+										onlyAtPoint1 && 2 < logicalCircuit.ConductorMap().JunctionCount(wire.Point1) ||
+										onlyAtPoint2 && 2 < logicalCircuit.ConductorMap().JunctionCount(wire.Point2)
+									);
+									if(!skip) {
+										if(!onlyAtPoint1 && !onlyAtPoint2 && length(wire) < length(other)) {
+											hidden.Add(wire);
+											break;
+										} else {
+											hidden.Add(other);
+										}
+									}
+								}
+							}
+						}
+					}
+					if(!hidden.Contains(wire)) {
+						foreach(CircuitSymbol symbol in symbols) {
+							Rect rect = symbol.Bounds();
+							GridPoint point1 = Symbol.GridPoint(rect.TopLeft);
+							GridPoint point2 = Symbol.GridPoint(rect.BottomRight);
+							if(	covered(point1, point2, wire.Point1) || covered(point1, point2, wire.Point2) ||
+								insideRect(point1, point2, wire.Point1) && insideRect(point1, point2, wire.Point2)
+							) {
+								hidden.Add(wire);
+								break;
+							}
+						}
+					}
+				}
+				foreach(Wire wire in hidden) {
+					this.Select(wire);
+				}
+				return hidden.Count;
 			}
 			return 0;
 		}
