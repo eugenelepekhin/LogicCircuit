@@ -1409,4 +1409,16 @@ Circuiti di questo tipo non possono essere utilizzati più di una volta su altri
 	<data name="CommandAlignRight" xml:space="preserve">
 		<value>Allinea a destra</value>
 	</data>
+	<data name="TitleFixNames" xml:space="preserve">
+		<value>Correggi automaticamente i nomi</value>
+	</data>
+	<data name="MenuHeaderSelect" xml:space="preserve">
+		<value>Selezionare</value>
+	</data>
+	<data name="CommandEditSelectHiddenWires" xml:space="preserve">
+		<value>Seleziona i cavi nascosti</value>
+	</data>
+	<data name="MessageHiddenWireCount" xml:space="preserve">
+		<value>{0} fili nascosti sono stati trovati.</value>
+	</data>
 </root>

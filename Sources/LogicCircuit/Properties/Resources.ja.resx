@@ -1412,4 +1412,16 @@
 	<data name="CommandAlignRight" xml:space="preserve">
 		<value>右揃え</value>
 	</data>
+	<data name="TitleFixNames" xml:space="preserve">
+		<value>名前を自動的に修正する</value>
+	</data>
+	<data name="MenuHeaderSelect" xml:space="preserve">
+		<value>選択</value>
+	</data>
+	<data name="CommandEditSelectHiddenWires" xml:space="preserve">
+		<value>隠れたワイヤーを選択してください</value>
+	</data>
+	<data name="MessageHiddenWireCount" xml:space="preserve">
+		<value>{0}本の隠されたワイヤーが見つかりました。</value>
+	</data>
 </root>

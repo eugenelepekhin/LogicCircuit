@@ -1547,4 +1547,16 @@
 	<data name="CommandAlignRight" xml:space="preserve">
 		<value>محاذاة اليمين</value>
 	</data>
+	<data name="TitleFixNames" xml:space="preserve">
+		<value>إصلاح الأسماء تلقائيا</value>
+	</data>
+	<data name="MenuHeaderSelect" xml:space="preserve">
+		<value>اختار</value>
+	</data>
+	<data name="CommandEditSelectHiddenWires" xml:space="preserve">
+		<value>اختر الأسلاك المخفية</value>
+	</data>
+	<data name="MessageHiddenWireCount" xml:space="preserve">
+		<value>تم العثور على {0} الأسلاك المخفية.</value>
+	</data>
 </root>

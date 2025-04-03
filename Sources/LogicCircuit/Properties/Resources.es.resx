@@ -1672,4 +1672,16 @@ Permite seleccionar el tamaño y profundidad de color / esquema:
 	<data name="CommandAlignRight" xml:space="preserve">
 		<value>Alinear a la derecha</value>
 	</data>
+	<data name="TitleFixNames" xml:space="preserve">
+		<value>Corregir nombres automáticamente</value>
+	</data>
+	<data name="MenuHeaderSelect" xml:space="preserve">
+		<value>Seleccione</value>
+	</data>
+	<data name="CommandEditSelectHiddenWires" xml:space="preserve">
+		<value>Seleccione Cables Ocultos</value>
+	</data>
+	<data name="MessageHiddenWireCount" xml:space="preserve">
+		<value>{0} se han encontrado cables ocultos.</value>
+	</data>
 </root>

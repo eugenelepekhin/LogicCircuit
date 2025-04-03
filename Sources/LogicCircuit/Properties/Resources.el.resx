@@ -1613,4 +1613,16 @@
 	<data name="CommandAlignRight" xml:space="preserve">
 		<value>Στοίχιση δεξιά</value>
 	</data>
+	<data name="TitleFixNames" xml:space="preserve">
+		<value>Automatisches Korrigieren von Namen</value>
+	</data>
+	<data name="MenuHeaderSelect" xml:space="preserve">
+		<value>Επιλέγω</value>
+	</data>
+	<data name="CommandEditSelectHiddenWires" xml:space="preserve">
+		<value>Επιλέξτε κρυφά καλώδια</value>
+	</data>
+	<data name="MessageHiddenWireCount" xml:space="preserve">
+		<value>{0} έχουν βρεθεί κρυμμένα καλώδια.</value>
+	</data>
 </root>

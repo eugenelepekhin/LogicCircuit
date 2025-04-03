@@ -1360,4 +1360,16 @@
 	<data name="CommandAlignRight" xml:space="preserve">
 		<value>تراز کردن به راست</value>
 	</data>
+	<data name="TitleFixNames" xml:space="preserve">
+		<value>اصلاح خودکار نام ها</value>
+	</data>
+	<data name="MenuHeaderSelect" xml:space="preserve">
+		<value>انتخاب</value>
+	</data>
+	<data name="CommandEditSelectHiddenWires" xml:space="preserve">
+		<value>انتخاب سیم‌های پنهان</value>
+	</data>
+	<data name="MessageHiddenWireCount" xml:space="preserve">
+		<value>{0} سیم های مخفی پیدا شده است.</value>
+	</data>
 </root>

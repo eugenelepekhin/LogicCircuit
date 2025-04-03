@@ -1688,4 +1688,16 @@ Você deseja carregar a configuração de salvamento automático para este arqui
 	<data name="CommandAlignRight" xml:space="preserve">
 		<value>Alinhar à direita</value>
 	</data>
+	<data name="TitleFixNames" xml:space="preserve">
+		<value>Corrigir nomes automaticamente</value>
+	</data>
+	<data name="MenuHeaderSelect" xml:space="preserve">
+		<value>Selecionar</value>
+	</data>
+	<data name="CommandEditSelectHiddenWires" xml:space="preserve">
+		<value>Selecione os fios ocultos</value>
+	</data>
+	<data name="MessageHiddenWireCount" xml:space="preserve">
+		<value>{0} fios ocultos foram encontrados.</value>
+	</data>
 </root>

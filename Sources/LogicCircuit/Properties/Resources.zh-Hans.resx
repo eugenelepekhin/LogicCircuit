@@ -1607,4 +1607,16 @@ Out</value>
 	<data name="CommandAlignRight" xml:space="preserve">
 		<value>右对齐</value>
 	</data>
+	<data name="TitleFixNames" xml:space="preserve">
+		<value>自动修复名称</value>
+	</data>
+	<data name="MenuHeaderSelect" xml:space="preserve">
+		<value>选择</value>
+	</data>
+	<data name="CommandEditSelectHiddenWires" xml:space="preserve">
+		<value>选择隐藏的电线</value>
+	</data>
+	<data name="MessageHiddenWireCount" xml:space="preserve">
+		<value>{0} 已找到隐藏的电线。</value>
+	</data>
 </root>

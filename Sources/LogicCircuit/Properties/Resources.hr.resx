@@ -1606,4 +1606,16 @@ Takav sklop se ne može koristiti više od jednom na drugim sklopovima jer će s
 	<data name="CommandAlignRight" xml:space="preserve">
 		<value>Poravnaj desno</value>
 	</data>
+	<data name="TitleFixNames" xml:space="preserve">
+		<value>Automatski popravljajte imena</value>
+	</data>
+	<data name="MenuHeaderSelect" xml:space="preserve">
+		<value>Odabirati</value>
+	</data>
+	<data name="CommandEditSelectHiddenWires" xml:space="preserve">
+		<value>Odaberite skrivene žice.</value>
+	</data>
+	<data name="MessageHiddenWireCount" xml:space="preserve">
+		<value>Pronađene su {0} skrivene žice.</value>
+	</data>
 </root>

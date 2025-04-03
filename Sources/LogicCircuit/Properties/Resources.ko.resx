@@ -1584,4 +1584,16 @@ Tri-state와 적절한 제어 회로를 함께 써서 멀티플렉서를 만들 
 	<data name="CommandAlignRight" xml:space="preserve">
 		<value>우측 정렬</value>
 	</data>
+	<data name="TitleFixNames" xml:space="preserve">
+		<value>자동으로 이름 수정</value>
+	</data>
+	<data name="MenuHeaderSelect" xml:space="preserve">
+		<value>고르다</value>
+	</data>
+	<data name="CommandEditSelectHiddenWires" xml:space="preserve">
+		<value>숨겨진 전선 선택</value>
+	</data>
+	<data name="MessageHiddenWireCount" xml:space="preserve">
+		<value>{0} 숨겨진 전선이 발견되었습니다.</value>
+	</data>
 </root>

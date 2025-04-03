@@ -1596,4 +1596,16 @@ Ar norite užkrauti automatiškai išsaugota šio failo būseną?</value>
 	<data name="CommandAlignRight" xml:space="preserve">
 		<value>Lygiuoti dešinėje</value>
 	</data>
+	<data name="TitleFixNames" xml:space="preserve">
+		<value>Automatinis vardų taisymas</value>
+	</data>
+	<data name="MenuHeaderSelect" xml:space="preserve">
+		<value>Žymėti</value>
+	</data>
+	<data name="CommandEditSelectHiddenWires" xml:space="preserve">
+		<value>Pasirinkite paslėptus laidus.</value>
+	</data>
+	<data name="MessageHiddenWireCount" xml:space="preserve">
+		<value>Rasta {0} paslėptų laidų.</value>
+	</data>
 </root>

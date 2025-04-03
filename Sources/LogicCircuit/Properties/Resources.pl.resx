@@ -1597,4 +1597,16 @@ Czy chcesz wczytać automatycznie zapisaną kopię tego pliku?</value>
 	<data name="CommandAlignRight" xml:space="preserve">
 		<value>Wyrównaj do prawej</value>
 	</data>
+	<data name="TitleFixNames" xml:space="preserve">
+		<value>Automatyczne poprawianie nazw</value>
+	</data>
+	<data name="MenuHeaderSelect" xml:space="preserve">
+		<value>Wybrać</value>
+	</data>
+	<data name="CommandEditSelectHiddenWires" xml:space="preserve">
+		<value>Wybierz ukryte przewody</value>
+	</data>
+	<data name="MessageHiddenWireCount" xml:space="preserve">
+		<value>Znaleziono {0} ukryte przewody.</value>
+	</data>
 </root>

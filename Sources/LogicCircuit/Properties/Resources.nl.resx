@@ -1661,4 +1661,16 @@ Wil je het, automatisch opgeslagen, bestand laden.</value>
 	<data name="CommandAlignRight" xml:space="preserve">
 		<value>Rechts uitlijnen</value>
 	</data>
+	<data name="TitleFixNames" xml:space="preserve">
+		<value>Namen automatisch corrigeren</value>
+	</data>
+	<data name="MenuHeaderSelect" xml:space="preserve">
+		<value>Selecteren</value>
+	</data>
+	<data name="CommandEditSelectHiddenWires" xml:space="preserve">
+		<value>Selecteer Verborgen Draden</value>
+	</data>
+	<data name="MessageHiddenWireCount" xml:space="preserve">
+		<value>{0} verborgen draden zijn gevonden.</value>
+	</data>
 </root>

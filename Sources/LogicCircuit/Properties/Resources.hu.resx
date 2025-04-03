@@ -1554,4 +1554,16 @@ kapcsolás felfogható egyfajta multiplexerként is.</value>
 	<data name="CommandAlignRight" xml:space="preserve">
 		<value>Jobbra igazítás</value>
 	</data>
+	<data name="TitleFixNames" xml:space="preserve">
+		<value>Nevek automatikus javítása</value>
+	</data>
+	<data name="MenuHeaderSelect" xml:space="preserve">
+		<value>Kiválaszt</value>
+	</data>
+	<data name="CommandEditSelectHiddenWires" xml:space="preserve">
+		<value>Válassza a rejtett vezetékeket</value>
+	</data>
+	<data name="MessageHiddenWireCount" xml:space="preserve">
+		<value>Pronađene su {0} skrivene žice.</value>
+	</data>
 </root>

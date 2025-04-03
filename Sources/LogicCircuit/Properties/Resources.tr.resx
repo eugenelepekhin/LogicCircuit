@@ -1598,4 +1598,16 @@ temelde bir çoğullayıcıya eşdeğerdir.</value>
 	<data name="CommandAlignRight" xml:space="preserve">
 		<value>Sağa hizala</value>
 	</data>
+	<data name="TitleFixNames" xml:space="preserve">
+		<value>Adları otomatik olarak düzeltme</value>
+	</data>
+	<data name="MenuHeaderSelect" xml:space="preserve">
+		<value>Seçmek</value>
+	</data>
+	<data name="CommandEditSelectHiddenWires" xml:space="preserve">
+		<value>Saklanan Kabloları Seçin</value>
+	</data>
+	<data name="MessageHiddenWireCount" xml:space="preserve">
+		<value>{0} gizli kablo bulundu.</value>
+	</data>
 </root>

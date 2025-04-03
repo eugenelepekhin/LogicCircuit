@@ -1620,4 +1620,16 @@ Möchten Sie den automatisch gespeicherten Stand dieser Datei laden?</value>
 	<data name="CommandAlignRight" xml:space="preserve">
 		<value>Rechtsbündig</value>
 	</data>
+	<data name="TitleFixNames" xml:space="preserve">
+		<value>Automatisches Korrigieren von Namen</value>
+	</data>
+	<data name="MenuHeaderSelect" xml:space="preserve">
+		<value>Auswählen</value>
+	</data>
+	<data name="CommandEditSelectHiddenWires" xml:space="preserve">
+		<value>Verborgene Drähte auswählen</value>
+	</data>
+	<data name="MessageHiddenWireCount" xml:space="preserve">
+		<value>{0} versteckte Drähte wurden gefunden.</value>
+	</data>
 </root>

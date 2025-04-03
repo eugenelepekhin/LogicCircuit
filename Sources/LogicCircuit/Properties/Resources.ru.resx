@@ -1623,4 +1623,16 @@
 	<data name="CommandAlignRight" xml:space="preserve">
 		<value>Выровнять вправо</value>
 	</data>
+	<data name="TitleFixNames" xml:space="preserve">
+		<value>Автоматическое исправление имен</value>
+	</data>
+	<data name="MenuHeaderSelect" xml:space="preserve">
+		<value>Выделить</value>
+	</data>
+	<data name="CommandEditSelectHiddenWires" xml:space="preserve">
+		<value>Выделить скрытые провода</value>
+	</data>
+	<data name="MessageHiddenWireCount" xml:space="preserve">
+		<value>Выделено {0} скрытых проводов.</value>
+	</data>
 </root>

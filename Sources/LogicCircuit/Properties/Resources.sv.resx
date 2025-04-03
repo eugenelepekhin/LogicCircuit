@@ -1574,4 +1574,16 @@ Vill du ladda an automatiskt sparad fil istället?</value>
 	<data name="CommandAlignRight" xml:space="preserve">
 		<value>Justera åt höger</value>
 	</data>
+	<data name="TitleFixNames" xml:space="preserve">
+		<value>Korrigera namn automatiskt</value>
+	</data>
+	<data name="MenuHeaderSelect" xml:space="preserve">
+		<value>Utvald</value>
+	</data>
+	<data name="CommandEditSelectHiddenWires" xml:space="preserve">
+		<value>Välj dolda ledningar</value>
+	</data>
+	<data name="MessageHiddenWireCount" xml:space="preserve">
+		<value>{0} dolda ledningar har hittats.</value>
+	</data>
 </root>

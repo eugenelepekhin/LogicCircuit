@@ -1650,4 +1650,16 @@
 	<data name="CommandAlignRight" xml:space="preserve">
 		<value>יישור לימין</value>
 	</data>
+	<data name="TitleFixNames" xml:space="preserve">
+		<value>תיקון אוטומטי של שמות</value>
+	</data>
+	<data name="MenuHeaderSelect" xml:space="preserve">
+		<value>בחר</value>
+	</data>
+	<data name="CommandEditSelectHiddenWires" xml:space="preserve">
+		<value>בחר חוטים מוסתרים</value>
+	</data>
+	<data name="MessageHiddenWireCount" xml:space="preserve">
+		<value>{0} נמצאו חוטים נסתרים.</value>
+	</data>
 </root>

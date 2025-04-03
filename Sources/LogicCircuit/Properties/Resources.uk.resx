@@ -1599,4 +1599,16 @@
 	<data name="CommandAlignRight" xml:space="preserve">
 		<value>Вирівняти по правому краю</value>
 	</data>
+	<data name="TitleFixNames" xml:space="preserve">
+		<value>Автоматичне виправлення імен</value>
+	</data>
+	<data name="MenuHeaderSelect" xml:space="preserve">
+		<value>Виділіть</value>
+	</data>
+	<data name="CommandEditSelectHiddenWires" xml:space="preserve">
+		<value>Вибрати приховані дроти</value>
+	</data>
+	<data name="MessageHiddenWireCount" xml:space="preserve">
+		<value>знайдено {0} приховані дроти.</value>
+	</data>
 </root>

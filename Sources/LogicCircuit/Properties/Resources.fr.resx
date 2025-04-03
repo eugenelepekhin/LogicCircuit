@@ -1621,4 +1621,16 @@ Voulez-vous charger l'état sauvegardé automatiquement de ce fichier ?</value>
 	<data name="CommandAlignRight" xml:space="preserve">
 		<value>Aligner à droite</value>
 	</data>
+	<data name="TitleFixNames" xml:space="preserve">
+		<value>Correction automatique des noms</value>
+	</data>
+	<data name="MenuHeaderSelect" xml:space="preserve">
+		<value>Sélectionner</value>
+	</data>
+	<data name="CommandEditSelectHiddenWires" xml:space="preserve">
+		<value>Sélectionner les fils cachés</value>
+	</data>
+	<data name="MessageHiddenWireCount" xml:space="preserve">
+		<value>{0} سیم های مخفی پیدا شده است.</value>
+	</data>
 </root>
