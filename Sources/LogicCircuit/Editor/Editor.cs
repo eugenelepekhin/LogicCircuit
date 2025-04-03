@@ -824,7 +824,7 @@ namespace LogicCircuit {
 		}
 
 		public int SelectHiddenWires() {
-			// Checks if point is inside rectangle including boundaries defined by two diagonal points: point1 and point2
+			// Checks if point is inside rectangle defined by two diagonal points including boundaries: point1 and point2
 			bool insideRect(GridPoint point1, GridPoint point2, GridPoint point) =>
 				Math.Min(point1.X, point2.X) <= point.X && point.X <= Math.Max(point1.X, point2.X) &&
 				Math.Min(point1.Y, point2.Y) <= point.Y && point.Y <= Math.Max(point1.Y, point2.Y)
@@ -832,7 +832,7 @@ namespace LogicCircuit {
 			bool inside(Wire wire, GridPoint point) => insideRect(wire.Point1, wire.Point2, point);
 			int square(int x) => x * x;
 			int length(Wire wire) => square(wire.X1 - wire.X2) + square(wire.Y1 - wire.Y2); //skip sqrt for speed
-			// Checks if point is inside rectangle excluding boundaries defined by two diagonal points: point1 and point2
+			// Checks if point is inside rectangle defined by two diagonal points excluding boundaries: point1 and point2
 			bool covered(GridPoint point1, GridPoint point2, GridPoint point) =>
 				Math.Min(point1.X, point2.X) < point.X && point.X < Math.Max(point1.X, point2.X) &&
 				Math.Min(point1.Y, point2.Y) < point.Y && point.Y < Math.Max(point1.Y, point2.Y)
