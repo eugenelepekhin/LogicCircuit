@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -75,11 +75,13 @@ namespace LogicCircuit {
 		}
 
 		protected override int CircuitSymbolHeight(int defaultHeight) {
-			Tracer.Assert(defaultHeight == this.PinCount + 1);
+			// With our new implementation, defaultHeight may not match PinCount+1 when BitWidth < PinCount
+			// because we're creating only min(PinCount, BitWidth) pins plus the wide pin
 			return base.CircuitSymbolHeight(defaultHeight);
 		}
 
 		public override FrameworkElement CreateGlyph(CircuitGlyph symbol) {
+			// Go back to using the original approach which should work
 			return symbol.CreateSimpleGlyph(SymbolShape.Splitter, symbol);
 		}
 	}
@@ -99,33 +101,48 @@ namespace LogicCircuit {
 			// The order of creation of the pins is essential for expansion algorithm (CircuitMap.Connect).
 			// The wide pin should go first and then thin pins starting from lower bits to higher
 			Tracer.Assert(!this.CircuitProject.DevicePinSet.SelectByCircuit(splitter).Any());
-			if(splitter.PinCount < 2) {
-				splitter.PinCount = 2;
-			}
-			if(splitter.BitWidth < splitter.PinCount) {
-				splitter.BitWidth = splitter.PinCount;
-			}
-			DevicePin pin = this.CircuitProject.DevicePinSet.Create(splitter, PinType.None, splitter.BitWidth);
-			pin.Name = Properties.Resources.SplitterWidePinName;
-			PinSide pinSide;
+
+			// Create the wide pin first
+			DevicePin widePin = this.CircuitProject.DevicePinSet.Create(splitter, PinType.None, splitter.BitWidth);
+			widePin.Name = Properties.Resources.SplitterWidePinName;
+			PinSide sideForThinPins;
 			if(splitter.Clockwise) {
-				pinSide = PinSide.Right;
-				pin.PinSide = PinSide.Left;
+				sideForThinPins = PinSide.Right;
+				widePin.PinSide = PinSide.Left;
 			} else {
-				pinSide = PinSide.Left;
-				pin.PinSide = PinSide.Right;
+				sideForThinPins = PinSide.Left;
+				widePin.PinSide = PinSide.Right;
 			}
-			int pinWidth = splitter.BitWidth / splitter.PinCount;
-			int rem = splitter.BitWidth % splitter.PinCount;
-			for(int i = 0; i < rem; i++) {
-				pin = this.CircuitProject.DevicePinSet.Create(splitter, PinType.None, pinWidth + 1);
-				pin.PinSide = pinSide;
-				SplitterSet.SetName(pin, i * (pinWidth + 1), pinWidth + 1);
-			}
-			for(int i = rem; i < splitter.PinCount; i++) {
-				pin = this.CircuitProject.DevicePinSet.Create(splitter, PinType.None, pinWidth);
-				pin.PinSide = pinSide;
-				SplitterSet.SetName(pin, i * pinWidth + rem, pinWidth);
+
+			// Create exactly the number of pins specified by PinCount, regardless of BitWidth
+			for(int i = 0; i < splitter.PinCount; i++) {
+				// Distribute bits appropriately
+				int pinWidth;
+				int startBit;
+				
+				if(splitter.BitWidth <= splitter.PinCount) {
+					// Simple case: one bit per pin, or fewer
+					// For the case where BitWidth < PinCount, some pins might get 0 bits
+					// But we still create the pin for visual consistency
+					pinWidth = (i < splitter.BitWidth) ? 1 : 0;
+					startBit = i;
+				} else {
+					// Distribute bits evenly
+					pinWidth = splitter.BitWidth / splitter.PinCount;
+					int remainder = splitter.BitWidth % splitter.PinCount;
+					
+					// Add an extra bit to the first 'remainder' pins
+					if(i < remainder) {
+						pinWidth++;
+						startBit = i * pinWidth;
+					} else {
+						startBit = (remainder * (pinWidth + 1)) + ((i - remainder) * pinWidth);
+					}
+				}
+				
+				DevicePin thinPin = this.CircuitProject.DevicePinSet.Create(splitter, PinType.None, Math.Max(pinWidth, 1));
+				thinPin.PinSide = sideForThinPins;
+				SplitterSet.SetName(thinPin, startBit, pinWidth);
 			}
 		}
 

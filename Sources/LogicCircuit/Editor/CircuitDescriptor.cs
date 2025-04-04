@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
@@ -30,7 +30,7 @@ namespace LogicCircuit {
 		}
 	}
 
-	public abstract class CircuitDescriptor<T> : Descriptor, IDescriptor, INotifyPropertyChanged where T:Circuit {
+	public abstract class CircuitDescriptor<T> : Descriptor, IDescriptor, INotifyPropertyChanged where T:Circuit{
 		public event PropertyChangedEventHandler? PropertyChanged;
 
 		public T Circuit { get; private set; }
@@ -558,7 +558,7 @@ namespace LogicCircuit {
 		public IEnumerable<int> PinCountRange { get; private set; }
 		public IEnumerable<DirectionDescriptor> DirectionRange { get; private set; }
 
-		public SplitterDescriptor(CircuitProject circuitProject) : base(circuitProject.SplitterSet.Create(3, 3, true)) {
+		public SplitterDescriptor(CircuitProject circuitProject) : base(circuitProject.SplitterSet.Create(1, 3, true)) {
 			this.PinCountRange = PinDescriptor.NumberRange(2, BasePin.MaxBitWidth);
 			this.BitWidthRange = PinDescriptor.NumberRange(1, BasePin.MaxBitWidth / 2);
 			this.DirectionRange = new DirectionDescriptor[] {
@@ -566,14 +566,17 @@ namespace LogicCircuit {
 				new DirectionDescriptor(false, Properties.Resources.SplitterDirectionCounterclockwise, -1)
 			};
 
-			this.PinCount = 3;
-			this.BitWidth = 1;
+			// Initialize with PinCount of 3 (default value) and BitWidth of 1 (minimum value)
+			this.BitWidth = 1;  // Set BitWidth first
+			this.PinCount = 3;  // Then set PinCount to the default value of 3
 			this.Direction = this.DirectionRange.First();
 			this.Circuit.Note = Properties.Resources.ToolTipDescriptorSplitter;
 		}
 
 		protected override Splitter GetCircuitToDrop(CircuitProject circuitProject) {
-			return circuitProject.SplitterSet.Create(this.BitWidth * this.PinCount, this.PinCount, this.Direction.Value);
+			// Create the splitter with the correct parameters
+			Splitter splitter = circuitProject.SplitterSet.Create(this.BitWidth, this.PinCount, this.Direction.Value);
+			return splitter;
 		}
 
 		[SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
