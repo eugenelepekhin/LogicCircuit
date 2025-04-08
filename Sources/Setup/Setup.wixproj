@@ -1,4 +1,4 @@
-﻿<Project Sdk="WixToolset.Sdk/5.0.0">
+﻿<Project Sdk="WixToolset.Sdk/6.0.0">
   <PropertyGroup>
     <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
     <Platform Condition="'$(Platform)' == ''">x64</Platform>
@@ -24,8 +24,8 @@
     <OutputName>LogicCircuitSetup_arm64</OutputName>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="WixToolset.UI.wixext" Version="5.0.2" />
-    <PackageReference Include="WixToolset.NetFx.wixext" Version="5.0.2" />
+    <PackageReference Include="WixToolset.UI.wixext" Version="6.0.0" />
+    <PackageReference Include="WixToolset.NetFx.wixext" Version="6.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Banner.bmp" />
