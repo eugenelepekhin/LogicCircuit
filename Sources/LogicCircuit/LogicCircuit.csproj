@@ -16,6 +16,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Antlr4.Runtime.Standard" Version="4.13.1" />
+    <PackageReference Include="Antlr4BuildTasks" Version="12.10.0" />
     <PackageReference Include="IronPython" Version="3.4.2" />
     <PackageReference Include="IronPython.StdLib" Version="3.4.2" />
   </ItemGroup>
@@ -27,6 +29,15 @@
   <ItemGroup>
     <Resource Include="Properties\LogicCircuit.ico" />
     <Resource Include="Properties\LogicCircuit.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Antlr4 Include="TruthTableFilterParser.g4">
+      <Listener>False</Listener>
+    </Antlr4>
+    <Antlr4 Include="TruthTableFilterLexer.g4">
+      <Listener>False</Listener>
+    </Antlr4>
   </ItemGroup>
 
   <ItemGroup>

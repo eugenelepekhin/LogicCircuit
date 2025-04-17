@@ -903,20 +903,8 @@ Son Dosya listesinden referansı kaldırmak istiyor musunuz?</value>
 	<data name="ParserEOS" xml:space="preserve">
     <value>İfadenin sonu</value>
   </data>
-	<data name="ParserErrorCloseParenMissing" xml:space="preserve">
-    <value>{0} yerinde: ') eksik</value>
-  </data>
-	<data name="ParserErrorExpressionMissing" xml:space="preserve">
-    <value>{0} sonra ifade eksik</value>
-  </data>
-	<data name="ParserErrorUnclosedQuote" xml:space="preserve">
-    <value>Belirtilen tanımlayıcıda kapanış teklifi yok: {0}</value>
-  </data>
 	<data name="ParserErrorUnexpected" xml:space="preserve">
     <value>{0} beklenmedik</value>
-  </data>
-	<data name="ParserErrorUnknownChar" xml:space="preserve">
-    <value>Bilinmeyen char: {0}</value>
   </data>
 	<data name="ParserErrorUnknownPin" xml:space="preserve">
     <value>{0} - giriş veya çıkış pin bulunamadı</value>

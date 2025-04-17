@@ -15,23 +15,23 @@ namespace LogicCircuit.UnitTest {
 
 		private void Valid(ExpressionParser parser, TruthState state, int expected, string text) {
 			Func<TruthState, int> expr = parser.Parse(text);
-			Assert.IsNotNull(expr, "Parse failed: " + parser.Error + ">> " + text);
-			Assert.IsNull(parser.Error, "Unexpected parsing error");
+			Assert.IsNotNull(expr, "Parse failed: " + parser.ErrorText + ">> " + text);
+			Assert.AreEqual(0, parser.ErrorCount, "Unexpected parsing error");
 			Assert.AreEqual(expected, expr(state), "Expression evaluated to unexpected value");
 		}
 
 		private void Valid(ExpressionParser parser, TruthState state, bool expected, string text, bool inverted) {
 			Predicate<TruthState> expr = parser.Parse(text, inverted);
-			Assert.IsNotNull(expr, "Parse failed: " + parser.Error + ">> " + text);
-			Assert.IsNull(parser.Error, "Unexpected parsing error");
+			Assert.IsNotNull(expr, "Parse failed: " + parser.ErrorText + ">> " + text);
+			Assert.AreEqual(0, parser.ErrorCount, "Unexpected parsing error");
 			Assert.AreEqual(expected, expr(state), "Expression evaluated to unexpected value");
 		}
 
 		private void Invalid(ExpressionParser parser, TruthState state, string text) {
 			Func<TruthState, int> expr = parser.Parse(text);
 			Assert.IsNull(expr, "Expecting parse to fail: " + text);
-			Assert.IsNotNull(parser.Error, "Expecting parsing error");
-			this.TestContext.WriteLine("Expression: [{0}] Expected parsing error: {1}", text, parser.Error);
+			Assert.IsNotNull(parser.ErrorText, "Expecting parsing error");
+			this.TestContext.WriteLine("Expression: [{0}] Expected parsing error: {1}", text, parser.ErrorText);
 		}
 
 		private void Revert(StringBuilder text) {

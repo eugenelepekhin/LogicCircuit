@@ -900,23 +900,11 @@
 	<data name="ParserEOS" xml:space="preserve">
     <value>Кінець виразу</value>
   </data>
-	<data name="ParserErrorCloseParenMissing" xml:space="preserve">
-    <value>Відсутній ')' замість: {0}</value>
-  </data>
-	<data name="ParserErrorExpressionMissing" xml:space="preserve">
-    <value>Пропущено вираз після {0}</value>
-  </data>
 	<data name="ParserErrorInvalidNumber" xml:space="preserve">
     <value>Невірне число: {0}</value>
   </data>
-	<data name="ParserErrorUnclosedQuote" xml:space="preserve">
-    <value>Порушено баланс лапок у ідентифікаторі: {0}</value>
-  </data>
 	<data name="ParserErrorUnexpected" xml:space="preserve">
     <value>Не очікувалось {0}</value>
-  </data>
-	<data name="ParserErrorUnknownChar" xml:space="preserve">
-    <value>Невідомий символ: {0}</value>
   </data>
 	<data name="ParserErrorUnknownPin" xml:space="preserve">
     <value>{0} - вхідного або вихідного роз'єму не знайдено</value>

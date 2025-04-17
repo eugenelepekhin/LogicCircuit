@@ -1025,29 +1025,13 @@ Wil je de referentie naar dit bestand uit de lijst met recente bestanden wissen?
 	<data name="ParserEOS" xml:space="preserve">
     <value>Einde van de expressie</value>
   </data>
-	<data name="ParserErrorCloseParenMissing" xml:space="preserve">
-    <value>Er mist een ')' in plaats van: {0}</value>
-    <comment>{string token}</comment>
-  </data>
-	<data name="ParserErrorExpressionMissing" xml:space="preserve">
-    <value>Expressie mist na {0}</value>
-    <comment>{string token}</comment>
-  </data>
 	<data name="ParserErrorInvalidNumber" xml:space="preserve">
     <value>Incorrect nummer: {0}</value>
     <comment>{string number}</comment>
   </data>
-	<data name="ParserErrorUnclosedQuote" xml:space="preserve">
-    <value>Identifier heeft geen sluitingsquote: {0}</value>
-    <comment>{string text}</comment>
-  </data>
 	<data name="ParserErrorUnexpected" xml:space="preserve">
     <value>{0} onverwacht</value>
     <comment>{string token}</comment>
-  </data>
-	<data name="ParserErrorUnknownChar" xml:space="preserve">
-    <value>Onbekend character: {0}</value>
-    <comment>{char c}</comment>
   </data>
 	<data name="ParserErrorUnknownPin" xml:space="preserve">
     <value>{0} - input- of output-pin niet gevonden</value>

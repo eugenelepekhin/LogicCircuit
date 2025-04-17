@@ -1024,29 +1024,13 @@ El kívánod távolítani a nemrég használt fájlok listájáról?</value>
 	<data name="ParserEOS" xml:space="preserve">
     <value>Kifejezés vége</value>
   </data>
-	<data name="ParserErrorCloseParenMissing" xml:space="preserve">
-    <value>Hiányzó ')' helyette: {0}</value>
-    <comment>{string token}</comment>
-  </data>
-	<data name="ParserErrorExpressionMissing" xml:space="preserve">
-    <value>Kifejezés hiányzik a következő után: {0}</value>
-    <comment>{string token}</comment>
-  </data>
 	<data name="ParserErrorInvalidNumber" xml:space="preserve">
     <value>Érvénytelen szám: {0}</value>
     <comment>{string number}</comment>
   </data>
-	<data name="ParserErrorUnclosedQuote" xml:space="preserve">
-    <value>Idézett azonosító nem rendelkezik lezáró idézőjellel: {0}</value>
-    <comment>{string text}</comment>
-  </data>
 	<data name="ParserErrorUnexpected" xml:space="preserve">
     <value>{0} váratlan</value>
     <comment>{string token}</comment>
-  </data>
-	<data name="ParserErrorUnknownChar" xml:space="preserve">
-    <value>Ismeretlen karakter: {0}</value>
-    <comment>{char c}</comment>
   </data>
 	<data name="ParserErrorUnknownPin" xml:space="preserve">
     <value>{0} - bemeneti vagy kimeneti láb nem található</value>

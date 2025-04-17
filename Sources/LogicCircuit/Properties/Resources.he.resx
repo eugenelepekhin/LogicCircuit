@@ -708,29 +708,13 @@
 	<data name="ParserEOS" xml:space="preserve">
     <value>סוף ביטוי</value>
   </data>
-	<data name="ParserErrorCloseParenMissing" xml:space="preserve">
-    <value>חסר סימן ‏')'‏ במקום‏: {0}‏</value>
-    <comment>{string token}</comment>
-  </data>
-	<data name="ParserErrorExpressionMissing" xml:space="preserve">
-    <value>חסר ביטוי אחרי‏ {0}‏</value>
-    <comment>{string token}</comment>
-  </data>
 	<data name="ParserErrorInvalidNumber" xml:space="preserve">
     <value>מספר לא תקין‏: {0}‏</value>
     <comment>{string number}</comment>
   </data>
-	<data name="ParserErrorUnclosedQuote" xml:space="preserve">
-    <value>חסרים גרשיים סוגרים עבור המזהה‏: {0}‏</value>
-    <comment>{string text}</comment>
-  </data>
 	<data name="ParserErrorUnexpected" xml:space="preserve">
     <value>‏{0} ‏לא צפוי</value>
     <comment>{string token}</comment>
-  </data>
-	<data name="ParserErrorUnknownChar" xml:space="preserve">
-    <value>תו לא ידוע‏: {0}‏</value>
-    <comment>{char c}</comment>
   </data>
 	<data name="ParserErrorUnknownPin" xml:space="preserve">
     <value>‏{0} - ‏לא נמצא פין קלט או פלט</value>

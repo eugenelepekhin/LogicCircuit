@@ -472,9 +472,6 @@
 	<data name="ParserEOS" xml:space="preserve">
     <value>نهاية التعبير</value>
   </data>
-	<data name="ParserErrorCloseParenMissing" xml:space="preserve">
-    <value>هناك '(' مفقود بدلاً من :{0}</value>
-  </data>
 	<data name="Ready" xml:space="preserve">
     <value>جاهز.</value>
   </data>
@@ -544,17 +541,11 @@
 	<data name="PinTypeNameOutput" xml:space="preserve">
     <value>خرج</value>
   </data>
-	<data name="ParserErrorExpressionMissing" xml:space="preserve">
-    <value>التعبير ناقص بعد {0}</value>
-  </data>
 	<data name="ParserErrorInvalidNumber" xml:space="preserve">
     <value>رقم غير صحيح: {0}</value>
   </data>
 	<data name="ParserErrorUnexpected" xml:space="preserve">
     <value>{0} غير متوقع</value>
-  </data>
-	<data name="ParserErrorUnknownChar" xml:space="preserve">
-    <value>محرف غير معروف :{0}</value>
   </data>
 	<data name="ParserErrorUnknownPin" xml:space="preserve">
     <value>{0} تماس الدخل  أو تماس الخرج غير موجود</value>
@@ -1008,9 +999,6 @@
   </data>
 	<data name="BitOff" xml:space="preserve">
     <value>مطفأ Off</value>
-  </data>
-	<data name="ParserErrorUnclosedQuote" xml:space="preserve">
-    <value>المعرف المقتبس لا يحوي على رمز انتهاء الاقتباس:  {0}</value>
   </data>
 	<data name="TitleProbeHistory" xml:space="preserve">
     <value>تاريخ المجس</value>

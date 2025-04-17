@@ -976,23 +976,11 @@
 	<data name="ParserEOS" xml:space="preserve">
     <value>Τέλος της έκφρασης</value>
   </data>
-	<data name="ParserErrorCloseParenMissing" xml:space="preserve">
-    <value>Δεν υπάρχει ')' αντι του: {0}</value>
-  </data>
-	<data name="ParserErrorExpressionMissing" xml:space="preserve">
-    <value>Δεν υπάρχει έκφραση μετά από {0}</value>
-  </data>
 	<data name="ParserErrorInvalidNumber" xml:space="preserve">
     <value>Άκυρος αριθμός: {0}</value>
   </data>
-	<data name="ParserErrorUnclosedQuote" xml:space="preserve">
-    <value>Δεν κλείνουν τα εισαγωγικά: {0}</value>
-  </data>
 	<data name="ParserErrorUnexpected" xml:space="preserve">
     <value>{0} απρόσμενο</value>
-  </data>
-	<data name="ParserErrorUnknownChar" xml:space="preserve">
-    <value>Άγνωστος χαρακτήρας: {0}</value>
   </data>
 	<data name="ParserErrorUnknownPin" xml:space="preserve">
     <value>{0} - δεν βρέθηκε pin εισόδου η εξόδου</value>

@@ -589,17 +589,11 @@ Soll die Datei ersetzt werden?</value>
 	<data name="ParserEOS" xml:space="preserve">
     <value>Ende des Ausdrucks</value>
   </data>
-	<data name="ParserErrorExpressionMissing" xml:space="preserve">
-    <value>Ausdruck fehlt nach {0}</value>
-  </data>
 	<data name="ParserErrorInvalidNumber" xml:space="preserve">
     <value>Ungültige Nummer: {0}</value>
   </data>
 	<data name="ParserErrorUnexpected" xml:space="preserve">
     <value>{0} unerwartet</value>
-  </data>
-	<data name="ParserErrorUnknownChar" xml:space="preserve">
-    <value>Unbekanntes Zeichen: {0}</value>
   </data>
 	<data name="ParserErrorUnknownPin" xml:space="preserve">
     <value>{0} - Eingangs- oder Ausgangs-Pin nicht gefunden</value>
@@ -748,9 +742,6 @@ Soll die Datei ersetzt werden?</value>
 	<data name="CommandEditDecreaseIndentation" xml:space="preserve">
     <value>Einrückung verkleinern</value>
   </data>
-	<data name="ParserErrorUnclosedQuote" xml:space="preserve">
-    <value>Beim Ausdruck: {0} fehlt das abschließende Anführungszeichen.</value>
-  </data>
 	<data name="ToolTipBackgroundColor" xml:space="preserve">
     <value>Hintergrundfarbe</value>
   </data>
@@ -784,9 +775,6 @@ Möchten Sie den Verweis von der Liste der zuletzt verwendeten Dateien löschen?
   </data>
 	<data name="ProjectSummary" xml:space="preserve">
     <value>{0} Schaltung(en), in {1} Kategorie(n) verwend(et/en) {2} Symbol(e) und {3} Verbindung(en)</value>
-  </data>
-	<data name="ParserErrorCloseParenMissing" xml:space="preserve">
-    <value>Beim Ausdruck: {0} fehlt die schließende ')'.</value>
   </data>
 	<data name="ErrorProjectCount" xml:space="preserve">
     <value>Es befindet sich mehr als ein Projekt in der Datei.</value>

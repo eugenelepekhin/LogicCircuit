@@ -883,9 +883,6 @@
 	<data name="MessageTruthTableTooBig" xml:space="preserve">
     <value>진리표가 너무 길어서 잘렸습니다. 당신의 회로의 정확성을 확인하기 위해 필터를 사용하십시오.</value>
   </data>
-	<data name="ParserErrorUnknownChar" xml:space="preserve">
-    <value>미확인 문자: {0}</value>
-  </data>
 	<data name="ColorPickerTabCustom" xml:space="preserve">
     <value>사용자 지정</value>
   </data>
@@ -975,12 +972,6 @@
   </data>
 	<data name="ParserEOS" xml:space="preserve">
     <value>표현의 끝</value>
-  </data>
-	<data name="ParserErrorCloseParenMissing" xml:space="preserve">
-    <value>')'가 빠졌습니다. 다음으로 대체하십시오: {0}</value>
-  </data>
-	<data name="ParserErrorExpressionMissing" xml:space="preserve">
-    <value>{0} 뒤에 표현이 빠졌습니다.</value>
   </data>
 	<data name="ParserErrorUnexpected" xml:space="preserve">
     <value>{0} 예상치 못한 에러</value>
@@ -1167,9 +1158,6 @@
   </data>
 	<data name="PinTypeNameNone" xml:space="preserve">
     <value>None</value>
-  </data>
-	<data name="ParserErrorUnclosedQuote" xml:space="preserve">
-    <value>인용식별자에 닫힘이 없습니다. {0}</value>
   </data>
 	<data name="WireDisplayBitWidth" xml:space="preserve">
     <value>비트 크기:{0}</value>

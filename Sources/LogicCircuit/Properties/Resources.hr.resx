@@ -653,9 +653,6 @@ Izlaz</value>
 	<data name="ParserEOS" xml:space="preserve">
     <value>Kraj izraza</value>
   </data>
-	<data name="ParserErrorCloseParenMissing" xml:space="preserve">
-    <value>Nedostaje ')' umjesto: {0}</value>
-  </data>
 	<data name="CircuitProbeName" xml:space="preserve">
     <value>Sonda</value>
   </data>
@@ -970,9 +967,6 @@ Memorijska vrijednost ažurirana na {0}</value>
 	<data name="MessageTruthTableTooBig" xml:space="preserve">
     <value>Tablica istinitosti je predugačka i stoga je skraćena. Molimo koristite Filter da biste provjerili ispravnost vašeg kruga.</value>
   </data>
-	<data name="ParserErrorExpressionMissing" xml:space="preserve">
-    <value>Nedostaje izraz nakon {0}</value>
-  </data>
 	<data name="ParserErrorInvalidNumber" xml:space="preserve">
     <value>Nevažeći broj: {0}</value>
   </data>
@@ -1232,14 +1226,8 @@ Omogućuje odabir veličine i dubine boje/šeme:
 	<data name="TitleIsToggle" xml:space="preserve">
     <value>Pre_baci</value>
   </data>
-	<data name="ParserErrorUnclosedQuote" xml:space="preserve">
-    <value>Navedeni identifikator nema završni navodnik: {0}</value>
-  </data>
 	<data name="ParserErrorUnexpected" xml:space="preserve">
     <value>{0} neočekivanih</value>
-  </data>
-	<data name="ParserErrorUnknownChar" xml:space="preserve">
-    <value>Nepoznati znak: {0}</value>
   </data>
 	<data name="ParserErrorUnknownPin" xml:space="preserve">
     <value>{0} - ulazni ili izlazni pin nije pronađen</value>

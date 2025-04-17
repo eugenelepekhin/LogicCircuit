@@ -876,23 +876,11 @@ kada tai yra nelyginis tada laikordis keičiasi nuo 1 iki 0.</value>
 	<data name="LedMatrixRowSelector" xml:space="preserve">
     <value>Eilutės pasirinkimui #{0}</value>
   </data>
-	<data name="ParserErrorCloseParenMissing" xml:space="preserve">
-    <value>Truksta ')' vietoj : {0}</value>
-  </data>
-	<data name="ParserErrorExpressionMissing" xml:space="preserve">
-    <value>Truksta išsireiškimo po {0}</value>
-  </data>
 	<data name="ParserErrorInvalidNumber" xml:space="preserve">
     <value>Netinkamas numeris: {0}</value>
   </data>
-	<data name="ParserErrorUnclosedQuote" xml:space="preserve">
-    <value>Cituojamas identifikatorius neturi uždarymo ženklo :{0}</value>
-  </data>
 	<data name="ParserErrorUnexpected" xml:space="preserve">
     <value>{0} netikėtas</value>
-  </data>
-	<data name="ParserErrorUnknownChar" xml:space="preserve">
-    <value>Nežinomas char: {0}</value>
   </data>
 	<data name="ParserErrorUnknownPin" xml:space="preserve">
     <value>{0} - Įvestis arba Išvestis kaištis nerastas</value>

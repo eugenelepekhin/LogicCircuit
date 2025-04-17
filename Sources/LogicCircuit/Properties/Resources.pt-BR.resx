@@ -1024,29 +1024,13 @@ Você deseja remover a referência dele da lista de Arquivos Rescentes?</value>
 	<data name="ParserEOS" xml:space="preserve">
     <value>Fim da expressão</value>
   </data>
-	<data name="ParserErrorCloseParenMissing" xml:space="preserve">
-    <value>Faltando ')' em vez de: {0}</value>
-    <comment>{string token}</comment>
-  </data>
-	<data name="ParserErrorExpressionMissing" xml:space="preserve">
-    <value>Expressão está faltando após {0}</value>
-    <comment>{string token}</comment>
-  </data>
 	<data name="ParserErrorInvalidNumber" xml:space="preserve">
     <value>Número inválido: {0}</value>
     <comment>{string number}</comment>
   </data>
-	<data name="ParserErrorUnclosedQuote" xml:space="preserve">
-    <value>Identificador entre aspas não tem cotação de fechamento: {0}</value>
-    <comment>{string text}</comment>
-  </data>
 	<data name="ParserErrorUnexpected" xml:space="preserve">
     <value>{0} inesperado</value>
     <comment>{string token}</comment>
-  </data>
-	<data name="ParserErrorUnknownChar" xml:space="preserve">
-    <value>Caractere desconhecido: {0}</value>
-    <comment>{char c}</comment>
   </data>
 	<data name="ParserErrorUnknownPin" xml:space="preserve">
     <value>{0} - pino de entrada ou saída não encontrado</value>

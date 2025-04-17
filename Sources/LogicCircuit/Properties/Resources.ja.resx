@@ -1186,23 +1186,11 @@
 	<data name="ParserEOS" xml:space="preserve">
 		<value>式の終わり</value>
 	</data>
-	<data name="ParserErrorCloseParenMissing" xml:space="preserve">
-		<value>{0}までに ')' がありません。</value>
-	</data>
-	<data name="ParserErrorExpressionMissing" xml:space="preserve">
-		<value>{0}のあとに式がありません。</value>
-	</data>
 	<data name="ParserErrorInvalidNumber" xml:space="preserve">
 		<value>不正な数値: {0}</value>
 	</data>
-	<data name="ParserErrorUnclosedQuote" xml:space="preserve">
-		<value>引用されたID({0})の引用符が閉じていません。</value>
-	</data>
 	<data name="ParserErrorUnexpected" xml:space="preserve">
 		<value>{0}が不正に現れました。</value>
-	</data>
-	<data name="ParserErrorUnknownChar" xml:space="preserve">
-		<value>不正な文字: {0}</value>
 	</data>
 	<data name="GateAndName" xml:space="preserve">
 		<value>AND</value>

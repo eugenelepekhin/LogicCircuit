@@ -764,23 +764,11 @@
 	<data name="ParserEOS" xml:space="preserve">
     <value>پایان عبارت</value>
   </data>
-	<data name="ParserErrorCloseParenMissing" xml:space="preserve">
-    <value>'(' جا افتاده بجای: {0}</value>
-  </data>
-	<data name="ParserErrorExpressionMissing" xml:space="preserve">
-    <value>عبارت بعد از {0} جا افتاده</value>
-  </data>
 	<data name="ParserErrorInvalidNumber" xml:space="preserve">
     <value>شماره نامعتبر: {0}</value>
   </data>
-	<data name="ParserErrorUnclosedQuote" xml:space="preserve">
-    <value>متن شناسه گیومه بسته ندارد: {0}</value>
-  </data>
 	<data name="ParserErrorUnexpected" xml:space="preserve">
     <value>{0} انتظار نمی رفت</value>
-  </data>
-	<data name="ParserErrorUnknownChar" xml:space="preserve">
-    <value>کاراکتر ناشناخته: {0}</value>
   </data>
 	<data name="ParserErrorUnknownPin" xml:space="preserve">
     <value>{0} - پین ورودی یا خروجی پیدا نشد</value>

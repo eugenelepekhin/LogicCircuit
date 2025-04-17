@@ -278,10 +278,10 @@ namespace LogicCircuit {
 				if(!string.IsNullOrEmpty(text)) {
 					ExpressionParser parser = new ExpressionParser(this.testSocket);
 					Predicate<TruthState>? func = parser.Parse(text, this.InvertFilter);
-					if(parser.Error == null) {
+					if(parser.ErrorCount == 0) {
 						return func;
 					} else {
-						App.Mainframe.ErrorMessage(parser.Error);
+						App.Mainframe.ErrorMessage(parser.ErrorText);
 						success = false;
 					}
 				}

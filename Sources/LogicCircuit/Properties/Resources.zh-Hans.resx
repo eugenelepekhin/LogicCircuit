@@ -716,23 +716,11 @@
 	<data name="ParserEOS" xml:space="preserve">
     <value>表达式尾部</value>
   </data>
-	<data name="ParserErrorCloseParenMissing" xml:space="preserve">
-    <value>在 {0} 之后缺失 ')'</value>
-  </data>
-	<data name="ParserErrorExpressionMissing" xml:space="preserve">
-    <value>在 {0} 之后表达式缺失</value>
-  </data>
 	<data name="ParserErrorInvalidNumber" xml:space="preserve">
     <value>无效的数字：{0}</value>
   </data>
-	<data name="ParserErrorUnclosedQuote" xml:space="preserve">
-    <value>引用的识别符号不包含闭合的引用：{0}</value>
-  </data>
 	<data name="ParserErrorUnexpected" xml:space="preserve">
     <value>{0} 出现错误</value>
-  </data>
-	<data name="ParserErrorUnknownChar" xml:space="preserve">
-    <value>未知的字符：{0}</value>
   </data>
 	<data name="ParserErrorUnknownPin" xml:space="preserve">
     <value>{0} - 输入或输出针脚未找到</value>

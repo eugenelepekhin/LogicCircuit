@@ -2076,20 +2076,6 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Missing ')' instead of: {0}.
-		/// </summary>
- 		public static string ParserErrorCloseParenMissing(string token) {
-			return string.Format(FormatCulture, ResourceManager.GetString("ParserErrorCloseParenMissing", Culture), token);
-		}
-
-		/// <summary>
-		/// Looks up a localized string similar to Expression is missing after {0}.
-		/// </summary>
- 		public static string ParserErrorExpressionMissing(string token) {
-			return string.Format(FormatCulture, ResourceManager.GetString("ParserErrorExpressionMissing", Culture), token);
-		}
-
-		/// <summary>
 		/// Looks up a localized string similar to Invalid number: {0}.
 		/// </summary>
  		public static string ParserErrorInvalidNumber(string number) {
@@ -2097,24 +2083,10 @@ namespace LogicCircuit.Properties {
 		}
 
 		/// <summary>
-		/// Looks up a localized string similar to Quoted identifier does not have closing quote: {0}.
-		/// </summary>
- 		public static string ParserErrorUnclosedQuote(string text) {
-			return string.Format(FormatCulture, ResourceManager.GetString("ParserErrorUnclosedQuote", Culture), text);
-		}
-
-		/// <summary>
 		/// Looks up a localized string similar to {0} unexpected.
 		/// </summary>
  		public static string ParserErrorUnexpected(string token) {
 			return string.Format(FormatCulture, ResourceManager.GetString("ParserErrorUnexpected", Culture), token);
-		}
-
-		/// <summary>
-		/// Looks up a localized string similar to Unknown char: {0}.
-		/// </summary>
- 		public static string ParserErrorUnknownChar(char c) {
-			return string.Format(FormatCulture, ResourceManager.GetString("ParserErrorUnknownChar", Culture), c);
 		}
 
 		/// <summary>
@@ -3583,6 +3555,13 @@ namespace LogicCircuit.Properties {
 		/// </summary>
  		public static string MessageHiddenWireCount(int wireCount) {
 			return string.Format(FormatCulture, ResourceManager.GetString("MessageHiddenWireCount", Culture), wireCount);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Missing {0} at {1}.
+		/// </summary>
+ 		public static string ParserErrorMissing(string missingList, string token) {
+			return string.Format(FormatCulture, ResourceManager.GetString("ParserErrorMissing", Culture), missingList, token);
 		}
 	}
 }

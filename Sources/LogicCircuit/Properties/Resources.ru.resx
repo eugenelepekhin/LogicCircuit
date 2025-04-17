@@ -522,23 +522,11 @@
 	<data name="ParserEOS" xml:space="preserve">
     <value>Конец выражения</value>
   </data>
-	<data name="ParserErrorCloseParenMissing" xml:space="preserve">
-    <value>Отсутствует ')' вместо: {0}</value>
-  </data>
-	<data name="ParserErrorExpressionMissing" xml:space="preserve">
-    <value>После {0} ожидается выражение</value>
-  </data>
 	<data name="ParserErrorInvalidNumber" xml:space="preserve">
     <value>Неверное число: {0}</value>
   </data>
-	<data name="ParserErrorUnclosedQuote" xml:space="preserve">
-    <value>Идентификатор начавшийся с кавычки не имеет закрывающей кавычки: {0}</value>
-  </data>
 	<data name="ParserErrorUnexpected" xml:space="preserve">
     <value>Не ожидалось {0}</value>
-  </data>
-	<data name="ParserErrorUnknownChar" xml:space="preserve">
-    <value>Неизвестный символ: {0}</value>
   </data>
 	<data name="PowerOff" xml:space="preserve">
     <value>Выключить</value>

@@ -855,23 +855,11 @@ Vill du ta bort den från Senate Filler listan</value>
 	<data name="ParserEOS" xml:space="preserve">
 		<value>Slut på uttryck</value>
 	</data>
-	<data name="ParserErrorCloseParenMissing" xml:space="preserve">
-		<value>Saknar ")" istället för: {0}</value>
-	</data>
-	<data name="ParserErrorExpressionMissing" xml:space="preserve">
-		<value>Uttrycket saknaräfter {0}</value>
-	</data>
 	<data name="ParserErrorInvalidNumber" xml:space="preserve">
 		<value>Ogiltigt numer: {0}</value>
 	</data>
-	<data name="ParserErrorUnclosedQuote" xml:space="preserve">
-		<value>Refererad identifierare har inte en stängande citationstecken: {0}</value>
-	</data>
 	<data name="ParserErrorUnexpected" xml:space="preserve">
 		<value>{0} oförväntad</value>
-	</data>
-	<data name="ParserErrorUnknownChar" xml:space="preserve">
-		<value>Okänd karraktär: {0}</value>
 	</data>
 	<data name="ParserErrorUnknownPin" xml:space="preserve">
 		<value>{0} - ingång eller utgångs stift hittades inte</value>

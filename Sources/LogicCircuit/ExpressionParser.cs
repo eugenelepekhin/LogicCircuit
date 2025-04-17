@@ -1,680 +1,303 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+﻿// Ignore Spelling: Paren lexer
+
+using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq.Expressions;
 using System.Text;
+using Antlr4.Runtime;
+using Antlr4.Runtime.Misc;
 
 namespace LogicCircuit {
-	/// <summary>
-	/// Parse expressions over input and output pins.
-	/// </summary>
-	[SuppressMessage("Design", "CA1001:Types that own disposable fields should be disposable")]
 	public class ExpressionParser {
-
-		// BNF:
-		// Expression ::= LogicalOr
-		// LogicalOr ::= LogicalAnd || LogicalAnd
-		// LogicalAnd ::= Comparison && Comparison
-		// Comparison ::= Addition CMP Addition
-		// CMP ::= = | == | != | <> | < | <= | >= | >
-		// Addition ::= Multiplication ADD Multiplication
-		// ADD ::= + | -
-		// Multiplication ::= Conjunction MUL Conjunction
-		// MUL ::= * | / | %
-		// Conjunction ::= Disjunction CON Disjunction
-		// CON ::= ^ | '|'
-		// Disjunction ::= Shift DIS Shift
-		// DIS ::= &
-		// Shift ::= Primary SHT Primary
-		// SHT ::= << | >>
-		// Primary ::= ( Expression ) | - Primary | ~ Primary | ! Primary | ID | Literal
-		// ID ::= SimpleId | QuotedId
-		// SimpleId ::= Letter | Letter LettersOrDigids
-		// LettersOrDigids ::= LettersOrDigids | Letter | Digit
-		// QuotedId ::= " (ESC | [~"\])* "
-		// ESC ::= \\ | \" | \.
-
-		private enum TokenType {
-			IntBin,
-			IntOct,
-			IntDec,
-			IntHex,
-			Id,
-			Open,
-			Close,
-			Binary,
-			Unary,
-			EOS,
-		}
-
-		private struct Token {
-			public string Value;
-			public TokenType TokenType;
-
-			public static Token Eos() {
-				return new Token() { Value = Properties.Resources.ParserEOS, TokenType = TokenType.EOS };
+		private class ErrorStrategy : DefaultErrorStrategy {
+			protected override void ReportInputMismatch(Parser recognizer, InputMismatchException e) {
+				//string message = "mismatched input " + this.GetTokenErrorDisplay(e.OffendingToken) + " expecting " + e.GetExpectedTokens().ToString(recognizer.Vocabulary);
+				string tokenErrorDisplay = this.GetTokenErrorDisplay(e.OffendingToken);
+				string message = Properties.Resources.ParserErrorUnexpected(tokenErrorDisplay);
+				this.NotifyErrorListeners(recognizer, message, e);
 			}
 
-			public bool Is(string value) {
-				return this.Value == value;
-			}
-			public bool Is(string value1, string value2) {
-				return this.Value == value1 || this.Value == value2;
-			}
-			public bool Is(string value1, string value2, string value3) {
-				return this.Value == value1 || this.Value == value2 || this.Value == value3;
-			}
-		}
-
-		private readonly ParameterExpression stateParameter = Expression.Parameter(typeof(TruthState), "state");
-
-		private readonly CircuitTestSocket socket;
-		private StringReader reader;
-		private readonly StringBuilder buffer = new StringBuilder();
-		private Token current;
-
-		private string? error;
-		public string? Error {
-			get { return this.error; }
-			private set {
-				if(value == null || this.error == null) {
-					this.error = value;
+			protected override void ReportMissingToken(Parser recognizer) {
+				if(!this.InErrorRecoveryMode(recognizer)) {
+					this.BeginErrorCondition(recognizer);
+					IToken currentToken = recognizer.CurrentToken;
+					IntervalSet expectedTokens = this.GetExpectedTokens(recognizer);
+					//string message = "missing " + expectedTokens.ToString(recognizer.Vocabulary) + " at " + this.GetTokenErrorDisplay(currentToken);
+					string message = Properties.Resources.ParserErrorMissing(expectedTokens.ToString(recognizer.Vocabulary), this.GetTokenErrorDisplay(currentToken));
+					recognizer.NotifyErrorListeners(currentToken, message, null);
 				}
 			}
+
+			protected override void ReportNoViableAlternative(Parser recognizer, NoViableAltException e) {
+				ITokenStream tokenStream = (ITokenStream)recognizer.InputStream;
+				//string s = ((tokenStream == null) ? "<unknown input>" : ((e.StartToken.Type != -1) ? tokenStream.GetText(e.StartToken, e.OffendingToken) : "<EOF>"));
+				//string message = "no viable alternative at input " + this.EscapeWSAndQuote(s);
+				string tokenErrorDisplay = this.GetTokenErrorDisplay(e.OffendingToken);
+				string message = Properties.Resources.ParserErrorUnexpected(tokenErrorDisplay);
+				this.NotifyErrorListeners(recognizer, message, e);
+			}
+
+			protected override void ReportUnwantedToken(Parser recognizer) {
+				if(!this.InErrorRecoveryMode(recognizer)) {
+					this.BeginErrorCondition(recognizer);
+					IToken currentToken = recognizer.CurrentToken;
+					string tokenErrorDisplay = this.GetTokenErrorDisplay(currentToken);
+					IntervalSet expectedTokens = this.GetExpectedTokens(recognizer);
+					//string message = "extraneous input " + tokenErrorDisplay + " expecting " + expectedTokens.ToString(recognizer.Vocabulary);
+					string message = Properties.Resources.ParserErrorUnexpected(tokenErrorDisplay);
+					recognizer.NotifyErrorListeners(currentToken, message, null);
+				}
+			}
+
+			protected override void ReportFailedPredicate(Parser recognizer, FailedPredicateException e) {
+				string text = recognizer.RuleNames[recognizer.RuleContext.RuleIndex];
+				string message = "rule " + text + " " + e.Message;
+				NotifyErrorListeners(recognizer, message, e);
+			}
 		}
 
-		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+		private sealed class ErrorListener : BaseErrorListener, IAntlrErrorListener<int> {
+			public int ErrorCount { get; private set; }
+
+			private readonly StringBuilder buffer = new StringBuilder();
+			public string Errors => this.buffer.ToString();
+
+			private void AddError(string message) {
+				Debug.WriteLine(message);
+				this.buffer.AppendLine(message);
+				this.ErrorCount++;
+			}
+
+			private void AddSyntaxError(string message) {
+				this.AddError($"Syntax error: {message}");
+			}
+
+			// parser error
+			public override void SyntaxError(TextWriter output, IRecognizer recognizer, IToken offendingSymbol, int line, int charPositionInLine, string msg, RecognitionException e) {
+				this.AddSyntaxError(msg);
+			}
+
+			// lexer error
+			public void SyntaxError(TextWriter output, IRecognizer recognizer, int offendingSymbol, int line, int charPositionInLine, string msg, RecognitionException e) {
+				this.AddSyntaxError(msg);
+			}
+
+			public void Error(string msg) {
+				this.AddError($"Error: {msg}");
+			}
+		}
+
+		private sealed class ExprVisitor : TruthTableFilterParserBaseVisitor<Expression?> {
+			private readonly CircuitTestSocket socket;
+			private readonly ErrorListener errorListener;
+			private readonly ParameterExpression stateParameter;
+
+			public ExprVisitor(CircuitTestSocket socket, ErrorListener errorListener, ParameterExpression stateParameter) {
+				this.socket = socket;
+				this.errorListener = errorListener;
+				this.stateParameter = stateParameter;
+			}
+
+			public override Expression? VisitFilter(TruthTableFilterParser.FilterContext context) {
+				return this.Visit(context.expr());
+			}
+
+			public override Expression? VisitParenExpr(TruthTableFilterParser.ParenExprContext context) {
+				return this.Visit(context.expr());
+			}
+
+			public override Expression? VisitUnary(TruthTableFilterParser.UnaryContext context) {
+				string op = context.Start.Text;
+				Expression? expression = this.Visit(context.expr());
+				if(expression != null) {
+					switch(op) {
+					case "+": return expression;
+					case "-": return Expression.Negate(expression);
+					case "!": return Expression.Condition(Expression.Equal(expression, Expression.Constant(0)), Expression.Constant(1), Expression.Constant(0));
+					case "~": return Expression.Not(expression);
+					}
+					throw new InvalidOperationException();
+				}
+				return expression;
+			}
+
+			public override Expression? VisitBin(TruthTableFilterParser.BinContext context) {
+				Expression fromBool(Expression expression) => Expression.Condition(expression, Expression.Constant(1), Expression.Constant(0));
+				Expression? left = this.Visit(context.left);
+				string op = context.op.Text;
+				Expression? right = this.Visit(context.right);
+				if((left != null && right != null)) {
+					switch(op) {
+					case "*":	return Expression.Multiply(left, right);
+					case "/":	return Expression.Divide(left, right);
+					case "%":	return Expression.Modulo(left, right);
+					case "+":	return Expression.Add(left, right);
+					case "-":	return Expression.Subtract(left, right);
+					case "<<":	return Expression.LeftShift(left, right);
+					case ">>":	return Expression.RightShift(left, right);
+					case "<":	return fromBool(Expression.LessThan(left, right));
+					case "<=":	return fromBool(Expression.LessThanOrEqual(left, right));
+					case ">=":	return fromBool(Expression.GreaterThanOrEqual(left, right));
+					case ">":	return fromBool(Expression.GreaterThan(left, right));
+					case "=":
+					case "==":	return fromBool(Expression.Equal(left, right));
+					case "<>":
+					case "!=":	return fromBool(Expression.NotEqual(left, right));
+					case "&":	return Expression.And(left, right);
+					case "^":	return Expression.ExclusiveOr(left, right);
+					case "|":	return Expression.Or(left, right);
+					case "&&":	return fromBool(Expression.And(Expression.NotEqual(left, Expression.Constant(0)), Expression.NotEqual(right, Expression.Constant(0))));
+					case "||":	return fromBool(Expression.Or(Expression.NotEqual(left, Expression.Constant(0)), Expression.NotEqual(right, Expression.Constant(0))));
+					}
+					throw new InvalidOperationException();
+				}
+				return null;
+			}
+
+			public override Expression? VisitLiteral(TruthTableFilterParser.LiteralContext context) {
+				string token = context.GetText().Replace("_", "", StringComparison.Ordinal).Replace("'", "", StringComparison.Ordinal);
+				string text = token.Replace("_", "", StringComparison.Ordinal).Replace("'", "", StringComparison.Ordinal);
+				int value = 0;
+				if(text.StartsWith("0x", StringComparison.OrdinalIgnoreCase)) {
+					if(!int.TryParse(text.AsSpan(2), NumberStyles.HexNumber, CultureInfo.InvariantCulture, out value)) {
+						this.errorListener.Error(Properties.Resources.ParserErrorInvalidNumber(token));
+					}
+				} else if(text.StartsWith("0b", StringComparison.OrdinalIgnoreCase)) {
+					if(!int.TryParse(text.AsSpan(2), NumberStyles.BinaryNumber, CultureInfo.InvariantCulture, out value)) {
+						this.errorListener.Error(Properties.Resources.ParserErrorInvalidNumber(token));
+					}
+				} else if(text.StartsWith('0')) {
+					if(!ExprVisitor.TryParseOctal(text, out value)) {
+						this.errorListener.Error(Properties.Resources.ParserErrorInvalidNumber(token));
+					}
+				} else {
+					if(!int.TryParse(text, out value)) {
+						this.errorListener.Error(Properties.Resources.ParserErrorInvalidNumber(token));
+					}
+				}
+				return Expression.Constant(value);
+			}
+
+			public override Expression? VisitVariable(TruthTableFilterParser.VariableContext context) {
+				string token = context.GetText();
+				string name = token.StartsWith('"') ? token.Substring(1, token.Length - 2).Replace("\\\"", "\"", StringComparison.Ordinal) : token;
+				int index = 0;
+				foreach(InputPinSocket pin in this.socket.Inputs) {
+					if(StringComparer.Ordinal.Equals(pin.Pin.Name, name)) {
+						return Expression.MakeIndex(
+							Expression.Property(
+								this.stateParameter,
+								typeof(TruthState).GetProperty(nameof(TruthState.Input))!
+							),
+							typeof(int[]).GetProperty("Item"),
+							[Expression.Constant(index)]
+						);
+					}
+					index++;
+				}
+				index = 0;
+				foreach(OutputPinSocket pin in this.socket.Outputs) {
+					if(StringComparer.Ordinal.Equals(pin.Pin.Name, name)) {
+						return Expression.MakeIndex(
+							Expression.Property(
+								this.stateParameter,
+								typeof(TruthState).GetProperty(nameof(TruthState.Output))!
+							),
+							typeof(int[]).GetProperty("Item"),
+							[Expression.Constant(index)]
+						);
+					}
+					index++;
+				}
+				this.errorListener.Error(Properties.Resources.ParserErrorUnknownPin(name));
+				return null;
+			}
+
+			private static bool TryParseOctal(string text, out int result) {
+				long value = 0;
+				foreach(char c in text) {
+					value <<= 3;
+					Debug.Assert('0' <= c && c <= '7');
+					value |= (ushort)(c - '0');
+					if(int.MaxValue < value) {
+						result = 0;
+						return false;
+					}
+				}
+				Debug.Assert(0 <= value && value <= int.MaxValue);
+				result = (int)value;
+				return true;
+			}
+		}
+
+		private readonly CircuitTestSocket socket;
+		public int ErrorCount { get; private set; }
+		public string ErrorText { get; private set; } = string.Empty;
+
 		public ExpressionParser(CircuitTestSocket socket) {
 			this.socket = socket;
 		}
-		#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+
+		private Expression? ParseExpression(string text, ParameterExpression stateParameter) {
+			ErrorListener errorListener = new ErrorListener();
+			TruthTableFilterLexer lexer = new TruthTableFilterLexer(new AntlrInputStream(text));
+			lexer.RemoveErrorListeners();
+			lexer.AddErrorListener(errorListener);
+			CommonTokenStream tokens = new CommonTokenStream(lexer);
+			TruthTableFilterParser parser = new TruthTableFilterParser(tokens);
+			parser.ErrorHandler = new ErrorStrategy();
+			parser.RemoveErrorListeners();
+			parser.AddErrorListener(errorListener);
+
+			TruthTableFilterParser.FilterContext? filter = parser.filter();
+			this.ErrorCount = errorListener.ErrorCount;
+			this.ErrorText = errorListener.Errors;
+			if(this.ErrorCount == 0 && filter != null) {
+				#if DEBUG && !true
+					Debug.WriteLine("Expression:");
+					Debug.WriteLine(text);
+					Debug.WriteLine("Parse tree:");
+					Debug.WriteLine(filter.ToStringTree(parser));
+				#endif
+
+				ExprVisitor visitor = new ExprVisitor(this.socket, errorListener, stateParameter);
+				Expression? expr = visitor.VisitFilter(filter);
+				this.ErrorCount = errorListener.ErrorCount;
+				this.ErrorText = errorListener.Errors;
+				if(this.ErrorCount == 0) {
+					return expr;
+				}
+			}
+			return null;
+		}
 
 		public Func<TruthState, int>? Parse(string text) {
-			Expression? body = this.ParseExpression(text);
-			if(body == null) {
-				return null;
+			ParameterExpression stateParameter = Expression.Parameter(typeof(TruthState), "state");
+			Expression? body = this.ParseExpression(text, stateParameter);
+			if(body != null) {
+				Expression<Func<TruthState, int>> lambda = Expression.Lambda<Func<TruthState, int>>(
+					body,
+					stateParameter
+				);
+				return lambda.Compile();
 			}
-			Expression<Func<TruthState, int>> lambda = Expression.Lambda<Func<TruthState, int>>(
-				body,
-				this.stateParameter
-			);
-			return lambda.Compile();
+			return null;
 		}
 
 		public Predicate<TruthState>? Parse(string text, bool inverted) {
-			Expression? body = this.ParseExpression(text);
-			if(body == null) {
-				return null;
-			}
-			Expression<Predicate<TruthState>> lambda = Expression.Lambda<Predicate<TruthState>>(
-				inverted ? Expression.Equal(body, Expression.Constant(0)) : Expression.NotEqual(body, Expression.Constant(0)),
-				this.stateParameter
-			);
-			return lambda.Compile();
-		}
-
-		private Expression? ParseExpression(string text) {
-			this.Error = null;
-			this.current = new Token();
-			Expression? body = null;
-			using(this.reader = new StringReader(text)) {
-				body = this.CircuitExpression();
-				if(body == null) {
-					Tracer.Assert(this.Error != null);
-					return null;
-				}
-				if(this.Current().TokenType != TokenType.EOS) {
-					this.ErrorUnexpected(this.Current());
-					return null;
-				}
-			}
-			return body;
-		}
-
-		private Expression? ErrorUnexpected(Token token) {
-			this.Error = Properties.Resources.ParserErrorUnexpected(token.Value);
-			return null;
-		}
-
-		private Token UnclosedQuote(string text) {
-			this.Error = Properties.Resources.ParserErrorUnclosedQuote(text);
-			return Token.Eos();
-		}
-
-		private Expression? ExprMissing(Token after) {
-			this.Error = Properties.Resources.ParserErrorExpressionMissing(after.Value);
-			return null;
-		}
-
-		private Token Next() {
-			this.current = this.NextToken();
-			return this.current;
-		}
-
-		private Token Current() {
-			if(this.current.Value == null) {
-				return this.Next();
-			}
-			return this.current;
-		}
-
-		private Token NextToken() {
-			while(char.IsWhiteSpace((char)this.reader.Peek())) {
-				this.reader.Read();
-			}
-			if(this.reader.Peek() == -1) {
-				return Token.Eos();
-			}
-			char c = (char)this.reader.Peek();
-			if(char.IsLetter(c)) {
-				return this.NextId();
-			}
-			if(c == '"') {
-				return this.NextQuote();
-			}
-			if(char.IsDigit(c)) {
-				return this.NextNumber();
-			}
-			if("()+-*/%&|^~!=<>".Contains(c, StringComparison.Ordinal)) {
-				return this.NextOperator();
-			}
-			this.Error = Properties.Resources.ParserErrorUnknownChar(c);
-			return Token.Eos();
-		}
-
-		private Token NextId() {
-			this.buffer.Length = 0;
-			do {
-				this.buffer.Append((char)this.reader.Read());
-			} while(this.reader.Peek() != -1 && char.IsLetterOrDigit((char)this.reader.Peek()));
-			return new Token() { Value = this.buffer.ToString(), TokenType = TokenType.Id };
-		}
-
-		private Token NextQuote() {
-			this.buffer.Length = 0;
-			int quote = this.reader.Read();
-			int next = this.reader.Read();
-			while(next != quote) {
-				if(next == -1) {
-					return this.UnclosedQuote(this.buffer.ToString().Trim());
-				}
-				char c = (char)next;
-				if(c == '\\') {
-					next = this.reader.Read();
-					if(next == -1) {
-						return this.UnclosedQuote(this.buffer.ToString().Trim());
-					}
-					c = (char)next;
-				}
-				this.buffer.Append(c);
-				next = this.reader.Read();
-			}
-			return new Token() { Value = this.buffer.ToString().Trim(), TokenType = TokenType.Id };
-		}
-
-		[SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-		private Token NextNumber() {
-			this.buffer.Length = 0;
-			int maxLength = 10;
-			Predicate<char> isValid = c => char.IsDigit(c);
-			TokenType tokenType = TokenType.IntDec;
-			int next = this.reader.Peek();
-			if(next == '0') {
-				this.reader.Read();
-				switch(this.reader.Peek()) {
-				case 'x':
-				case 'X':
-					maxLength = 8;
-					isValid = c => char.IsDigit(c) || ('a' <= c && c <= 'f') || ('A' <= c && c <= 'F');
-					this.reader.Read();
-					next = this.reader.Peek();
-					tokenType = TokenType.IntHex;
-					break;
-				case 'b':
-				case 'B':
-					maxLength = 32;
-					isValid = c => '0' == c || '1' == c;
-					this.reader.Read();
-					next = this.reader.Peek();
-					tokenType = TokenType.IntBin;
-					break;
-				case -1:
-					this.buffer.Append('0');
-					break;
-				default:
-					maxLength = 11;
-					isValid = c => '0' <= c && c <= '7';
-					next = reader.Peek();
-					if(!isValid((char)next)) {
-						this.buffer.Append('0');
-						tokenType = TokenType.IntDec;
-					} else {
-						tokenType = TokenType.IntOct;
-					}
-					break;
-				}
-			}
-			while(next != -1 && isValid((char)next)) {
-				this.buffer.Append((char)next);
-				this.reader.Read();
-				next = this.reader.Peek();
-			}
-			if(maxLength < this.buffer.Length || this.buffer.Length < 1) {
-				this.Error = Properties.Resources.ParserErrorInvalidNumber(this.buffer.ToString());
-				return Token.Eos();
-			}
-			return new Token() { Value = this.buffer.ToString(), TokenType = tokenType };
-		}
-
-		private Token NextOperator() {
-			this.buffer.Length = 0;
-			TokenType tokenType = TokenType.Binary;
-			int c = this.reader.Peek();
-			switch(c) {
-			case '(': return new Token() { Value = new string((char)this.reader.Read(), 1), TokenType = TokenType.Open };
-			case ')': return new Token() { Value = new string((char)this.reader.Read(), 1), TokenType = TokenType.Close };
-			case '+':
-			case '-':
-			case '*':
-			case '/':
-			case '%':
-				this.buffer.Append((char)this.reader.Read());
-				break;
-			case '~':
-				this.buffer.Append((char)this.reader.Read());
-				tokenType = TokenType.Unary;
-				break;
-			case '&':
-			case '|':
-			case '^':
-				this.buffer.Append((char)this.reader.Read());
-				if(this.reader.Peek() == c) {
-					this.buffer.Append((char)this.reader.Read());
-				}
-				break;
-			case '!':
-				this.buffer.Append((char)this.reader.Read());
-				if(this.reader.Peek() == '=') {
-					this.buffer.Append((char)this.reader.Read());
+			Func<TruthState, int>? body = this.Parse(text);
+			if(body != null) {
+				if(inverted) {
+					//return truthState => { int result = body(truthState); Debug.WriteLine($"Expression evaluated to !{result}"); return 0 == result;};
+					return truthState => 0 == body(truthState);
 				} else {
-					tokenType = TokenType.Unary;
+					//return truthState => { int result = body(truthState); Debug.WriteLine($"Expression evaluated to {result}"); return 0 != result;};
+					return truthState => 0 != body(truthState);
 				}
-				break;
-			case '=':
-				this.buffer.Append((char)this.reader.Read());
-				if(this.reader.Peek() == '=') {
-					this.reader.Read();
-				}
-				break;
-			case '<':
-				this.buffer.Append((char)this.reader.Read());
-				switch(this.reader.Peek()) {
-				case '=':
-				case '>':
-				case '<':
-					this.buffer.Append((char)this.reader.Read());
-					break;
-				}
-				break;
-			case '>':
-				this.buffer.Append((char)this.reader.Read());
-				switch(this.reader.Peek()) {
-				case '=':
-				case '>':
-					this.buffer.Append((char)this.reader.Read());
-					break;
-				}
-				break;
-			}
-			return new Token() { Value = this.buffer.ToString(), TokenType = tokenType };
-		}
-
-		private Expression? CircuitExpression() {
-			return this.LogicalOr();
-		}
-
-		private Expression? LogicalOr() {
-			Expression? left = this.LogicalAnd();
-			if(left != null) {
-				Token token = this.Current();
-				while(token.TokenType == TokenType.Binary && token.Is("||")) {
-					this.Next();
-					Expression? right = this.LogicalAnd();
-					if(right == null) {
-						return this.ExprMissing(token);
-					}
-					left = Expression.Condition(
-						Expression.Or(
-							Expression.NotEqual(left, Expression.Constant(0)),
-							Expression.NotEqual(right, Expression.Constant(0))
-						),
-						Expression.Constant(1),
-						Expression.Constant(0)
-					);
-					token = this.Current();
-				}
-			}
-			return left;
-		}
-
-		private Expression? LogicalAnd() {
-			Expression? left = this.Comparison();
-			if(left != null) {
-				Token token = this.Current();
-				while(token.TokenType == TokenType.Binary && token.Is("&&")) {
-					this.Next();
-					Expression? right = this.Comparison();
-					if(right == null) {
-						return this.ExprMissing(token);
-					}
-					left = Expression.Condition(
-						Expression.And(
-							Expression.NotEqual(left, Expression.Constant(0)),
-							Expression.NotEqual(right, Expression.Constant(0))
-						),
-						Expression.Constant(1),
-						Expression.Constant(0)
-					);
-					token = this.Current();
-				}
-			}
-			return left;
-		}
-
-		private Expression? Comparison() {
-			Expression? left = this.Addition();
-			if(left != null) {
-				Token token = this.Current();
-				if(token.TokenType == TokenType.Binary) {
-					Func<Expression, Expression, Expression>? compare = null;
-					switch(token.Value) {
-					case "=":
-					case "==":
-						compare = Expression.Equal;
-						break;
-					case "!=":
-					case "<>":
-						compare = Expression.NotEqual;
-						break;
-					case "<":
-						compare = Expression.LessThan;
-						break;
-					case "<=":
-						compare = Expression.LessThanOrEqual;
-						break;
-					case ">=":
-						compare = Expression.GreaterThanOrEqual;
-						break;
-					case ">":
-						compare = Expression.GreaterThan;
-						break;
-					}
-					if(compare != null) {
-						this.Next();
-						Expression? right = this.Addition();
-						if(right == null) {
-							return this.ExprMissing(token);
-						}
-						return Expression.Condition(
-							compare(left, right),
-							Expression.Constant(1),
-							Expression.Constant(0)
-						);
-					}
-				}
-			}
-			return left;
-		}
-
-		private Expression? Addition() {
-			Expression? left = this.Multiplication();
-			if(left != null) {
-				Token token = this.Current();
-				while(token.TokenType == TokenType.Binary && token.Is("+", "-")) {
-					this.Next();
-					Expression? right = this.Multiplication();
-					if(right == null) {
-						return this.ExprMissing(token);
-					}
-					switch(token.Value) {
-					case "+":
-						left = Expression.Add(left, right);
-						break;
-					case "-":
-						left = Expression.Subtract(left, right);
-						break;
-					}
-					token = this.Current();
-				}
-			}
-			return left;
-		}
-
-		private Expression? Multiplication() {
-			Expression? left = this.Conjunction();
-			if(left != null) {
-				Token token = this.Current();
-				while(token.TokenType == TokenType.Binary && token.Is("*", "/", "%")) {
-					this.Next();
-					Expression? right = this.Conjunction();
-					if(right == null) {
-						return this.ExprMissing(token);
-					}
-					switch(token.Value) {
-					case "*":
-						left = Expression.Multiply(left, right);
-						break;
-					case "/":
-						left = Expression.Divide(left, right);
-						break;
-					case "%":
-						left = Expression.Modulo(left, right);
-						break;
-					}
-					token = this.Current();
-				}
-			}
-			return left;
-		}
-
-		private Expression? Conjunction() {
-			Expression? left = this.Disjunction();
-			if(left != null) {
-				Token token = this.Current();
-				while(token.TokenType == TokenType.Binary && token.Is("|", "^")) {
-					this.Next();
-					Expression? right = this.Disjunction();
-					if(right == null) {
-						return this.ExprMissing(token);
-					}
-					switch(token.Value) {
-					case "|":
-						left = Expression.Or(left, right);
-						break;
-					case "^":
-						left = Expression.ExclusiveOr(left, right);
-						break;
-					}
-					token = this.Current();
-				}
-			}
-			return left;
-		}
-
-		private Expression? Disjunction() {
-			Expression? left = this.Shift();
-			if(left != null) {
-				Token token = this.Current();
-				while(token.TokenType == TokenType.Binary && token.Is("&")) {
-					this.Next();
-					Expression? right = this.Shift();
-					if(right == null) {
-						return this.ExprMissing(token);
-					}
-					left = Expression.And(left, right);
-					token = this.Current();
-				}
-			}
-			return left;
-		}
-
-		private Expression? Shift() {
-			Expression? left = this.Primary();
-			if(left != null) {
-				Token token = this.Current();
-				while(token.TokenType == TokenType.Binary && token.Is("<<", ">>")) {
-					this.Next();
-					Expression? right = this.Primary();
-					if(right == null) {
-						return this.ExprMissing(token);
-					}
-					switch(token.Value) {
-					case "<<":
-						left = Expression.LeftShift(left, right);
-						break;
-					case ">>":
-						left = Expression.RightShift(left, right);
-						break;
-					}
-					token = this.Current();
-				}
-			}
-			return left;
-		}
-
-		private Expression? Primary() {
-			Token token = this.Current();
-			if(token.TokenType == TokenType.Open) {
-				this.Next();
-				Expression? expr = this.CircuitExpression();
-				if(expr != null) {
-					token = this.Current();
-					if(token.TokenType != TokenType.Close) {
-						this.Error = Properties.Resources.ParserErrorCloseParenMissing(token.Value);
-						return null;
-					}
-					this.Next();
-				} else {
-					return this.ExprMissing(token);
-				}
-				return expr;
-			}
-			if(token.TokenType == TokenType.Binary && token.Is("-")) {
-				this.Next();
-				Expression? expr = this.Primary();
-				if(expr != null) {
-					return Expression.Negate(expr);
-				} else {
-					return this.ExprMissing(token);
-				}
-			}
-			if(token.TokenType == TokenType.Unary && token.Value == "~") {
-				this.Next();
-				Expression? expr = this.Primary();
-				if(expr != null) {
-					return Expression.Not(expr);
-				} else {
-					return this.ExprMissing(token);
-				}
-			}
-			if(token.TokenType == TokenType.Unary && token.Is("!")) {
-				this.Next();
-				Expression? expr = this.Primary();
-				if(expr != null) {
-					return Expression.Condition(
-						Expression.Equal(expr, Expression.Constant(0)),
-						Expression.Constant(1),
-						Expression.Constant(0)
-					);
-				} else {
-					return this.ExprMissing(token);
-				}
-			}
-			if(token.TokenType == TokenType.Id) {
-				this.Next();
-				return this.Variable(token.Value);
-			}
-			switch(token.TokenType) {
-			case TokenType.IntBin:
-			case TokenType.IntDec:
-			case TokenType.IntHex:
-			case TokenType.IntOct:
-				this.Next();
-				return ExpressionParser.Literal(token);
-			}
-			return this.ErrorUnexpected(token);
-		}
-
-		private IndexExpression? Variable(string name) {
-			int index = 0;
-			foreach(InputPinSocket pin in this.socket.Inputs) {
-				if(StringComparer.Ordinal.Equals(pin.Pin.Name, name)) {
-					return Expression.MakeIndex(
-						Expression.Property(
-							this.stateParameter,
-							typeof(TruthState).GetProperty(nameof(TruthState.Input))!
-						),
-						typeof(int[]).GetProperty("Item"),
-						new Expression[] { Expression.Constant(index) }
-					);
-				}
-				index++;
-			}
-			index = 0;
-			foreach(OutputPinSocket pin in this.socket.Outputs) {
-				if(StringComparer.Ordinal.Equals(pin.Pin.Name, name)) {
-					return Expression.MakeIndex(
-						Expression.Property(
-							this.stateParameter,
-							typeof(TruthState).GetProperty(nameof(TruthState.Output))!
-						),
-						typeof(int[]).GetProperty("Item"),
-						new Expression[] { Expression.Constant(index) }
-					);
-				}
-				index++;
-			}
-			this.Error = Properties.Resources.ParserErrorUnknownPin(name);
-			return null;
-		}
-
-		private static ConstantExpression? Literal(Token token) {
-			switch(token.TokenType) {
-			case TokenType.IntBin: return Expression.Constant(ExpressionParser.FromBin(token.Value));
-			case TokenType.IntDec: return Expression.Constant(ExpressionParser.FromDec(token.Value));
-			case TokenType.IntHex: return Expression.Constant(ExpressionParser.FromHex(token.Value));
-			case TokenType.IntOct: return Expression.Constant(ExpressionParser.FromOct(token.Value));
 			}
 			return null;
-		}
-
-		private static int FromBin(string text) {
-			int value = 0;
-			foreach(char c in text) {
-				value <<= 1;
-				if(c == '1') {
-					value |= 1;
-				}
-			}
-			return value;
-		}
-
-		private static int FromDec(string text) {
-			return int.Parse(text, CultureInfo.InvariantCulture);
-		}
-
-		private static int FromHex(string text) {
-			return int.Parse(text, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
-		}
-
-		private static int FromOct(string text) {
-			int value = 0;
-			foreach(char c in text) {
-				value <<= 3;
-				value |= c - '0';
-			}
-			return value;
 		}
 	}
 }

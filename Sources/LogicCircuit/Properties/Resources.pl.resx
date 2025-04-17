@@ -626,9 +626,6 @@ Czy chcesz go usunąć z listy ostatnich plików?</value>
 	<data name="ParserEOS" xml:space="preserve">
     <value>Koniec wyrażenia</value>
   </data>
-	<data name="ParserErrorUnknownChar" xml:space="preserve">
-    <value>Nieznany znak: {0}</value>
-  </data>
 	<data name="TitleApply" xml:space="preserve">
     <value>Zastosuj</value>
   </data>
@@ -1352,15 +1349,6 @@ danych jest podłączonych do jednego wejścia.</value>
   </data>
 	<data name="ErrorManyResults" xml:space="preserve">
     <value>Wejściowy pin {0} z {1}{2} na {3} podłaczony do więcej niż jednego pinu wyjściowego, który nie obsługuje trzech stanów.</value>
-  </data>
-	<data name="ParserErrorCloseParenMissing" xml:space="preserve">
-    <value>brakujący ')' zamiast: {0}</value>
-  </data>
-	<data name="ParserErrorExpressionMissing" xml:space="preserve">
-    <value>Brakujace wyrażenie po {0}</value>
-  </data>
-	<data name="ParserErrorUnclosedQuote" xml:space="preserve">
-    <value>Quoted identifier does not have closing quote: {0}</value>
   </data>
 	<data name="ParserErrorUnexpected" xml:space="preserve">
     <value>{0} nieoczekiwany</value>

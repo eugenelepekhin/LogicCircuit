@@ -1023,29 +1023,13 @@ Si desidera di rimuovere il riferimento dall'elenco dei File recenti?</value>
 	<data name="ParserEOS" xml:space="preserve">
     <value>Fine espressione</value>
   </data>
-	<data name="ParserErrorCloseParenMissing" xml:space="preserve">
-    <value>Manca ')' invece di: {0}</value>
-    <comment>{string token}</comment>
-  </data>
-	<data name="ParserErrorExpressionMissing" xml:space="preserve">
-    <value>Mancata espressione dopo {0}</value>
-    <comment>{string token}</comment>
-  </data>
 	<data name="ParserErrorInvalidNumber" xml:space="preserve">
     <value>Numero non valido: {0}</value>
     <comment>{string number}</comment>
   </data>
-	<data name="ParserErrorUnclosedQuote" xml:space="preserve">
-    <value>L'dentificatore citato non possiede le virgolette di chiusura: {0}</value>
-    <comment>{string text}</comment>
-  </data>
 	<data name="ParserErrorUnexpected" xml:space="preserve">
     <value>{0} inaspettato</value>
     <comment>{string token}</comment>
-  </data>
-	<data name="ParserErrorUnknownChar" xml:space="preserve">
-    <value>Carattere sconosciuto: {0}</value>
-    <comment>{char c}</comment>
   </data>
 	<data name="ParserErrorUnknownPin" xml:space="preserve">
     <value>{0} - pin di ingresso o di uscita non trovati</value>

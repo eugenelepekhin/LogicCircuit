@@ -609,23 +609,11 @@ Voulez vous le sauvegarder ?</value>
 	<data name="ParserEOS" xml:space="preserve">
     <value>Fin de l'expression.</value>
   </data>
-	<data name="ParserErrorCloseParenMissing" xml:space="preserve">
-    <value>')' Manquante au lieu de : {0}</value>
-  </data>
-	<data name="ParserErrorExpressionMissing" xml:space="preserve">
-    <value>Expression manquante après {0}</value>
-  </data>
 	<data name="ParserErrorInvalidNumber" xml:space="preserve">
     <value>Nombre invalide : {0}</value>
   </data>
-	<data name="ParserErrorUnclosedQuote" xml:space="preserve">
-    <value>l'identifiant entre guillemets n'a pas de guillemet de fin : {0}</value>
-  </data>
 	<data name="ParserErrorUnexpected" xml:space="preserve">
     <value>{0} inattendue</value>
-  </data>
-	<data name="ParserErrorUnknownChar" xml:space="preserve">
-    <value>Charactère inconnu : {0}</value>
   </data>
 	<data name="ParserErrorUnknownPin" xml:space="preserve">
     <value>{0} - Broche d'entrée ou de sortie non trouvée.</value>
