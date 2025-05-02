@@ -1613,4 +1613,37 @@
 	<data name="MessageHiddenWireCount" xml:space="preserve">
 		<value>{0} έχουν βρεθεί κρυμμένα καλώδια.</value>
 	</data>
+	<data name="ParserErrorParameterConfilitsWithPin" xml:space="preserve">
+		<value>Η παράμετρος '{0}' έρχεται σε σύγκρουση με το όνομα ακίδας στον ορισμό της συνάρτησης '{1}'</value>
+	</data>
+	<data name="ParserErrorParameterDuplicated" xml:space="preserve">
+		<value>Η παράμετρος '{0}' εμφανίζεται διπλά στον ορισμό της συνάρτησης '{1}'.</value>
+	</data>
+	<data name="ParserErrorParameterConflictsWithFunction" xml:space="preserve">
+		<value>Η παράμετρος '{0}' έρχεται σε σύγκρουση με το όνομα της συνάρτησης στον ορισμό της συνάρτησης '{1}'.</value>
+	</data>
+	<data name="ParserErrorFunctionRedefined" xml:space="preserve">
+		<value>Η συνάρτηση '{0}' επαναπροσδιορίστηκε.</value>
+	</data>
+	<data name="ParserErrorFunctionConflictsWithPin" xml:space="preserve">
+		<value>Το όνομα της συνάρτησης '{0}' έρχεται σε σύγκρουση με το όνομα ακίδας.</value>
+	</data>
+	<data name="ParserErrorRecusion" xml:space="preserve">
+		<value>Οι αναδρομικές κλήσεις δεν υποστηρίζονται στη συνάρτηση '{0}'.</value>
+	</data>
+	<data name="ParserErrorFunctionUndefined" xml:space="preserve">
+		<value>Η συνάρτηση '{0}' δεν είναι ορισμένη.</value>
+	</data>
+	<data name="ParserErrorMissing" xml:space="preserve">
+		<value>Λείπει το {0} στο {1}.</value>
+	</data>
+	<data name="ParserErrorFunctionNumberParameters" xml:space="preserve">
+		<value>Η συνάρτηση '{0}' κλήθηκε με λανθασμένο αριθμό παραμέτρων.</value>
+	</data>
+	<data name="ParserErrorSyntax" xml:space="preserve">
+		<value>Σφάλμα σύνταξης: {0}</value>
+	</data>
+	<data name="ParserErrorMessage" xml:space="preserve">
+		<value>Σφάλμα: {0}</value>
+	</data>
 </root>

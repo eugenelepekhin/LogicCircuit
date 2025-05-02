@@ -1599,4 +1599,37 @@
 	<data name="MessageHiddenWireCount" xml:space="preserve">
 		<value>знайдено {0} приховані дроти.</value>
 	</data>
+	<data name="ParserErrorParameterConfilitsWithPin" xml:space="preserve">
+		<value>Параметр '{0}' конфліктує з назвою піна у визначенні функції '{1}'</value>
+	</data>
+	<data name="ParserErrorParameterDuplicated" xml:space="preserve">
+		<value>Параметр '{0}' дублюється у визначенні функції '{1}'.</value>
+	</data>
+	<data name="ParserErrorParameterConflictsWithFunction" xml:space="preserve">
+		<value>Параметр '{0}' конфліктує з назвою функції у визначенні функції '{1}'.</value>
+	</data>
+	<data name="ParserErrorFunctionRedefined" xml:space="preserve">
+		<value>Функція '{0}' була переозначена.</value>
+	</data>
+	<data name="ParserErrorFunctionConflictsWithPin" xml:space="preserve">
+		<value>Ім'я функції '{0}' конфліктує з назвою піна.</value>
+	</data>
+	<data name="ParserErrorRecusion" xml:space="preserve">
+		<value>Рекурсивні виклики не підтримуються у функції '{0}'.</value>
+	</data>
+	<data name="ParserErrorFunctionUndefined" xml:space="preserve">
+		<value>Функція '{0}' не визначена.</value>
+	</data>
+	<data name="ParserErrorMissing" xml:space="preserve">
+		<value>Відсутній {0} у {1}.</value>
+	</data>
+	<data name="ParserErrorFunctionNumberParameters" xml:space="preserve">
+		<value>Функцію '{0}' було викликано з неправильною кількістю параметрів.</value>
+	</data>
+	<data name="ParserErrorSyntax" xml:space="preserve">
+		<value>Синтаксична помилка: {0}</value>
+	</data>
+	<data name="ParserErrorMessage" xml:space="preserve">
+		<value>Помилка: {0}</value>
+	</data>
 </root>

@@ -1574,4 +1574,37 @@ Vill du ladda an automatiskt sparad fil istället?</value>
 	<data name="MessageHiddenWireCount" xml:space="preserve">
 		<value>{0} dolda ledningar har hittats.</value>
 	</data>
+	<data name="ParserErrorParameterConfilitsWithPin" xml:space="preserve">
+		<value>Parametern '{0}' står i konflikt med pinnamnet i definitionen av funktionen '{1}'</value>
+	</data>
+	<data name="ParserErrorParameterDuplicated" xml:space="preserve">
+		<value>Parametern '{0}' är duplicerad i definitionen av funktionen '{1}'.</value>
+	</data>
+	<data name="ParserErrorParameterConflictsWithFunction" xml:space="preserve">
+		<value>Parametern '{0}' står i konflikt med funktionsnamnet i definitionen av funktionen '{1}'.</value>
+	</data>
+	<data name="ParserErrorFunctionRedefined" xml:space="preserve">
+		<value>Funktionen '{0}' har omdefinierats.</value>
+	</data>
+	<data name="ParserErrorFunctionConflictsWithPin" xml:space="preserve">
+		<value>Funktionsnamnet '{0}' står i konflikt med pinnamnet.</value>
+	</data>
+	<data name="ParserErrorRecusion" xml:space="preserve">
+		<value>Rekursiva anrop stöds inte i funktionen '{0}'.</value>
+	</data>
+	<data name="ParserErrorFunctionUndefined" xml:space="preserve">
+		<value>Funktionen '{0}' är inte definierad.</value>
+	</data>
+	<data name="ParserErrorMissing" xml:space="preserve">
+		<value>Saknar {0} vid {1}.</value>
+	</data>
+	<data name="ParserErrorFunctionNumberParameters" xml:space="preserve">
+		<value>Funktionen '{0}' anropades med fel antal parametrar.</value>
+	</data>
+	<data name="ParserErrorSyntax" xml:space="preserve">
+		<value>Syntaxfel: {0}</value>
+	</data>
+	<data name="ParserErrorMessage" xml:space="preserve">
+		<value>Fel: {0}</value>
+	</data>
 </root>

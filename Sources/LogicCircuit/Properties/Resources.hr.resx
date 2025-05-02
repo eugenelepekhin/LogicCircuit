@@ -1606,4 +1606,37 @@ Takav sklop se ne može koristiti više od jednom na drugim sklopovima jer će s
 	<data name="MessageHiddenWireCount" xml:space="preserve">
 		<value>Pronađene su {0} skrivene žice.</value>
 	</data>
+	<data name="ParserErrorParameterConfilitsWithPin" xml:space="preserve">
+		<value>Parametar '{0}' je u sukobu s nazivom pina u definiciji funkcije '{1}'</value>
+	</data>
+	<data name="ParserErrorParameterDuplicated" xml:space="preserve">
+		<value>Parametar '{0}' je dupliciran u definiciji funkcije '{1}'.</value>
+	</data>
+	<data name="ParserErrorParameterConflictsWithFunction" xml:space="preserve">
+		<value>Parametar '{0}' je u sukobu s nazivom funkcije u definiciji funkcije '{1}'.</value>
+	</data>
+	<data name="ParserErrorFunctionRedefined" xml:space="preserve">
+		<value>Funkcija '{0}' je redefinirana.</value>
+	</data>
+	<data name="ParserErrorFunctionConflictsWithPin" xml:space="preserve">
+		<value>Naziv funkcije '{0}' je u sukobu s nazivom pina.</value>
+	</data>
+	<data name="ParserErrorRecusion" xml:space="preserve">
+		<value>Rekurzivni pozivi nisu podržani u funkciji '{0}'.</value>
+	</data>
+	<data name="ParserErrorFunctionUndefined" xml:space="preserve">
+		<value>Funkcija '{0}' nije definirana.</value>
+	</data>
+	<data name="ParserErrorMissing" xml:space="preserve">
+		<value>Nedostaje {0} na {1}.</value>
+	</data>
+	<data name="ParserErrorFunctionNumberParameters" xml:space="preserve">
+		<value>Funkcija '{0}' pozvana je s pogrešnim brojem parametara.</value>
+	</data>
+	<data name="ParserErrorSyntax" xml:space="preserve">
+		<value>Sintaktička pogreška: {0}</value>
+	</data>
+	<data name="ParserErrorMessage" xml:space="preserve">
+		<value>Pogreška: {0}</value>
+	</data>
 </root>

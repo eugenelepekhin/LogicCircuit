@@ -1621,4 +1621,39 @@ Voulez-vous charger l'état sauvegardé automatiquement de ce fichier ?</value>
 	<data name="MessageHiddenWireCount" xml:space="preserve">
 		<value>{0} سیم های مخفی پیدا شده است.</value>
 	</data>
+	<data name="ParserErrorParameterConfilitsWithPin" xml:space="preserve">
+		<value>Le paramètre '{0}' est en conflit avec le nom du broche dans la définition de la fonction '{1}'</value>
+	</data>
+	<data name="ParserErrorParameterDuplicated" xml:space="preserve">
+		<value>Le paramètre '{0}' est dupliqué dans la définition de la fonction '{1}'.</value>
+	</data>
+	<data name="ParserErrorParameterConflictsWithFunction" xml:space="preserve">
+		<value>Le paramètre '{0}' est en conflit avec le nom de la fonction dans la définition de la fonction '{1}'.</value>
+	</data>
+	<data name="ParserErrorFunctionRedefined" xml:space="preserve">
+		<value>La fonction '{0}' a été redéfinie.</value>
+	</data>
+	<data name="ParserErrorFunctionConflictsWithPin" xml:space="preserve">
+		<value>Le nom de la fonction '{0}' est en conflit avec le nom du broche.
+
+</value>
+	</data>
+	<data name="ParserErrorRecusion" xml:space="preserve">
+		<value>Les appels récursifs ne sont pas pris en charge dans la fonction '{0}'.</value>
+	</data>
+	<data name="ParserErrorFunctionUndefined" xml:space="preserve">
+		<value>La fonction '{0}' n'est pas définie.</value>
+	</data>
+	<data name="ParserErrorMissing" xml:space="preserve">
+		<value>{0} manquant à {1}.</value>
+	</data>
+	<data name="ParserErrorFunctionNumberParameters" xml:space="preserve">
+		<value>La fonction '{0}' a été appelée avec un nombre incorrect de paramètres.</value>
+	</data>
+	<data name="ParserErrorSyntax" xml:space="preserve">
+		<value>Erreur de syntaxe : {0}</value>
+	</data>
+	<data name="ParserErrorMessage" xml:space="preserve">
+		<value>Erreur : {0}</value>
+	</data>
 </root>

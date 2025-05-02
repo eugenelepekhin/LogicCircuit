@@ -1412,4 +1412,39 @@
 	<data name="MessageHiddenWireCount" xml:space="preserve">
 		<value>{0}本の隠されたワイヤーが見つかりました。</value>
 	</data>
+	<data name="ParserErrorParameterConfilitsWithPin" xml:space="preserve">
+		<value>パラメーター「{0}」は、関数「{1}」の定義内のピン名と競合しています。</value>
+	</data>
+	<data name="ParserErrorParameterDuplicated" xml:space="preserve">
+		<value>パラメーター '{0}' は、関数 '{1}' の定義内で重複しています。</value>
+	</data>
+	<data name="ParserErrorParameterConflictsWithFunction" xml:space="preserve">
+		<value>パラメーター '{0}' は、関数 '{1}' の定義内の関数名と競合しています。</value>
+	</data>
+	<data name="ParserErrorFunctionRedefined" xml:space="preserve">
+		<value>関数 '{0}' が再定義されました。</value>
+	</data>
+	<data name="ParserErrorFunctionConflictsWithPin" xml:space="preserve">
+		<value>関数名 '{0}' はピン名と競合しています。</value>
+	</data>
+	<data name="ParserErrorRecusion" xml:space="preserve">
+		<value>関数 '{0}' では再帰呼び出しはサポートされていません。</value>
+	</data>
+	<data name="ParserErrorFunctionUndefined" xml:space="preserve">
+		<value>関数 '{0}' は未定義です。</value>
+	</data>
+	<data name="ParserErrorMissing" xml:space="preserve">
+		<value>{1} に {0} が不足しています。</value>
+	</data>
+	<data name="ParserErrorFunctionNumberParameters" xml:space="preserve">
+		<value>関数 '{0}' は誤った数のパラメーターで呼び出されました。
+
+</value>
+	</data>
+	<data name="ParserErrorSyntax" xml:space="preserve">
+		<value>構文エラー: {0}</value>
+	</data>
+	<data name="ParserErrorMessage" xml:space="preserve">
+		<value>エラー: {0}</value>
+	</data>
 </root>

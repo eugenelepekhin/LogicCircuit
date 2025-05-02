@@ -1657,4 +1657,39 @@ Wil je het, automatisch opgeslagen, bestand laden.</value>
 	<data name="MessageHiddenWireCount" xml:space="preserve">
 		<value>{0} verborgen draden zijn gevonden.</value>
 	</data>
+	<data name="ParserErrorParameterConfilitsWithPin" xml:space="preserve">
+		<value>Parameter '{0}' conflicteert met de pinaam in de definitie van functie '{1}'</value>
+	</data>
+	<data name="ParserErrorParameterDuplicated" xml:space="preserve">
+		<value>Parameter '{0}' is dubbel in de definitie van functie '{1}'.</value>
+	</data>
+	<data name="ParserErrorParameterConflictsWithFunction" xml:space="preserve">
+		<value>Parameter '{0}' conflicteert met de functienaam in de definitie van functie '{1}'.</value>
+	</data>
+	<data name="ParserErrorFunctionRedefined" xml:space="preserve">
+		<value>Functie '{0}' is opnieuw gedefinieerd.</value>
+	</data>
+	<data name="ParserErrorFunctionConflictsWithPin" xml:space="preserve">
+		<value>Functienaam '{0}' conflicteert met de pinaam.</value>
+	</data>
+	<data name="ParserErrorRecusion" xml:space="preserve">
+		<value>Recursieve aanroepen worden niet ondersteund in functie '{0}'.</value>
+	</data>
+	<data name="ParserErrorFunctionUndefined" xml:space="preserve">
+		<value>Functie '{0}' is niet gedefinieerd.</value>
+	</data>
+	<data name="ParserErrorMissing" xml:space="preserve">
+		<value>{0} ontbreekt op {1}.</value>
+	</data>
+	<data name="ParserErrorFunctionNumberParameters" xml:space="preserve">
+		<value>Functie '{0}' is aangeroepen met een onjuist aantal parameters.
+
+</value>
+	</data>
+	<data name="ParserErrorSyntax" xml:space="preserve">
+		<value>Syntaxisfout: {0}</value>
+	</data>
+	<data name="ParserErrorMessage" xml:space="preserve">
+		<value>out: {0}</value>
+	</data>
 </root>

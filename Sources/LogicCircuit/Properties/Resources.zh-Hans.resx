@@ -1607,4 +1607,37 @@ Out</value>
 	<data name="MessageHiddenWireCount" xml:space="preserve">
 		<value>{0} 已找到隐藏的电线。</value>
 	</data>
+	<data name="ParserErrorParameterConfilitsWithPin" xml:space="preserve">
+		<value>参数 '{0}' 与函数 '{1}' 定义中的引脚名称冲突</value>
+	</data>
+	<data name="ParserErrorParameterDuplicated" xml:space="preserve">
+		<value>参数 '{0}' 在函数 '{1}' 定义中重复</value>
+	</data>
+	<data name="ParserErrorParameterConflictsWithFunction" xml:space="preserve">
+		<value>参数 '{0}' 与函数 '{1}' 的定义中的函数名冲突。</value>
+	</data>
+	<data name="ParserErrorFunctionRedefined" xml:space="preserve">
+		<value>函数 '{0}' 被重新定义。</value>
+	</data>
+	<data name="ParserErrorFunctionConflictsWithPin" xml:space="preserve">
+		<value>函数名 '{0}' 与引脚名冲突。</value>
+	</data>
+	<data name="ParserErrorRecusion" xml:space="preserve">
+		<value>函数 '{0}' 不支持递归调用。</value>
+	</data>
+	<data name="ParserErrorFunctionUndefined" xml:space="preserve">
+		<value>函数 '{0}' 未定义。</value>
+	</data>
+	<data name="ParserErrorMissing" xml:space="preserve">
+		<value>在 {1} 缺少 {0}。</value>
+	</data>
+	<data name="ParserErrorFunctionNumberParameters" xml:space="preserve">
+		<value>函数 '{0}' 被调用时参数数量不正确。</value>
+	</data>
+	<data name="ParserErrorSyntax" xml:space="preserve">
+		<value>语法错误：{0}</value>
+	</data>
+	<data name="ParserErrorMessage" xml:space="preserve">
+		<value>错误：{0}</value>
+	</data>
 </root>

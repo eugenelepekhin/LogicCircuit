@@ -1668,4 +1668,37 @@ Permite seleccionar el tamaño y profundidad de color / esquema:
 	<data name="MessageHiddenWireCount" xml:space="preserve">
 		<value>{0} se han encontrado cables ocultos.</value>
 	</data>
+	<data name="ParserErrorParameterConfilitsWithPin" xml:space="preserve">
+		<value>El parámetro '{0}' entra en conflicto con el nombre del pin en la definición de la función '{1}'</value>
+	</data>
+	<data name="ParserErrorParameterDuplicated" xml:space="preserve">
+		<value>El parámetro '{0}' está duplicado en la definición de la función '{1}'.</value>
+	</data>
+	<data name="ParserErrorParameterConflictsWithFunction" xml:space="preserve">
+		<value>El parámetro '{0}' entra en conflicto con el nombre de la función en la definición de la función '{1}'.</value>
+	</data>
+	<data name="ParserErrorFunctionRedefined" xml:space="preserve">
+		<value>La función '{0}' ha sido redefinida.</value>
+	</data>
+	<data name="ParserErrorFunctionConflictsWithPin" xml:space="preserve">
+		<value>El nombre de la función '{0}' entra en conflicto con el nombre del pin.</value>
+	</data>
+	<data name="ParserErrorRecusion" xml:space="preserve">
+		<value>Las llamadas recursivas no están soportadas en la función '{0}'.</value>
+	</data>
+	<data name="ParserErrorFunctionUndefined" xml:space="preserve">
+		<value>La función '{0}' no está definida.</value>
+	</data>
+	<data name="ParserErrorMissing" xml:space="preserve">
+		<value>Falta {0} en {1}.</value>
+	</data>
+	<data name="ParserErrorFunctionNumberParameters" xml:space="preserve">
+		<value>La función '{0}' fue llamada con un número incorrecto de parámetros.</value>
+	</data>
+	<data name="ParserErrorSyntax" xml:space="preserve">
+		<value>Error de sintaxis: {0}</value>
+	</data>
+	<data name="ParserErrorMessage" xml:space="preserve">
+		<value>Error: {0}</value>
+	</data>
 </root>

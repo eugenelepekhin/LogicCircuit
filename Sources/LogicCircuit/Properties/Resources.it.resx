@@ -1405,4 +1405,39 @@ Circuiti di questo tipo non possono essere utilizzati più di una volta su altri
 	<data name="MessageHiddenWireCount" xml:space="preserve">
 		<value>{0} fili nascosti sono stati trovati.</value>
 	</data>
+	<data name="ParserErrorParameterConfilitsWithPin" xml:space="preserve">
+		<value>Il parametro '{0}' è in conflitto con il nome del pin nella definizione della funzione '{1}'</value>
+	</data>
+	<data name="ParserErrorParameterDuplicated" xml:space="preserve">
+		<value>Il parametro '{0}' è duplicato nella definizione della funzione '{1}'.</value>
+	</data>
+	<data name="ParserErrorParameterConflictsWithFunction" xml:space="preserve">
+		<value>Il parametro '{0}' è in conflitto con il nome della funzione nella definizione della funzione '{1}'.</value>
+	</data>
+	<data name="ParserErrorFunctionRedefined" xml:space="preserve">
+		<value>La funzione '{0}' è stata ridefinita.</value>
+	</data>
+	<data name="ParserErrorFunctionConflictsWithPin" xml:space="preserve">
+		<value>Il nome della funzione '{0}' è in conflitto con il nome del pin.</value>
+	</data>
+	<data name="ParserErrorRecusion" xml:space="preserve">
+		<value>Le chiamate ricorsive non sono supportate nella funzione '{0}'.
+
+</value>
+	</data>
+	<data name="ParserErrorFunctionUndefined" xml:space="preserve">
+		<value>La funzione '{0}' non è definita.</value>
+	</data>
+	<data name="ParserErrorMissing" xml:space="preserve">
+		<value>{0} mancante in {1}.</value>
+	</data>
+	<data name="ParserErrorFunctionNumberParameters" xml:space="preserve">
+		<value>La funzione '{0}' è stata chiamata con un numero errato di parametri.</value>
+	</data>
+	<data name="ParserErrorSyntax" xml:space="preserve">
+		<value>Errore di sintassi: {0}</value>
+	</data>
+	<data name="ParserErrorMessage" xml:space="preserve">
+		<value>Errore: {0}</value>
+	</data>
 </root>

@@ -1360,4 +1360,37 @@
 	<data name="MessageHiddenWireCount" xml:space="preserve">
 		<value>{0} سیم های مخفی پیدا شده است.</value>
 	</data>
+	<data name="ParserErrorParameterConfilitsWithPin" xml:space="preserve">
+		<value>پارامتر '{0}' با نام پین در تعریف تابع '{1}' در تضاد است</value>
+	</data>
+	<data name="ParserErrorParameterDuplicated" xml:space="preserve">
+		<value>پارامتر '{0}' در تعریف تابع '{1}' کپی می شود</value>
+	</data>
+	<data name="ParserErrorParameterConflictsWithFunction" xml:space="preserve">
+		<value>پارامتر '{0}' با نام تابع در تعریف تابع '{1}' در تضاد است</value>
+	</data>
+	<data name="ParserErrorFunctionRedefined" xml:space="preserve">
+		<value>تابع '{0}' دوباره تعریف شده است</value>
+	</data>
+	<data name="ParserErrorFunctionConflictsWithPin" xml:space="preserve">
+		<value>نام تابع '{0}' با نام پین در تضاد است</value>
+	</data>
+	<data name="ParserErrorRecusion" xml:space="preserve">
+		<value>فراخوانی های بازگشتی در تابع '{0}' پشتیبانی نمی شوند</value>
+	</data>
+	<data name="ParserErrorFunctionUndefined" xml:space="preserve">
+		<value>تابع '{0}' تعریف نشده است</value>
+	</data>
+	<data name="ParserErrorMissing" xml:space="preserve">
+		<value>گم {0} در {1}</value>
+	</data>
+	<data name="ParserErrorFunctionNumberParameters" xml:space="preserve">
+		<value>تابع "{0}" با تعداد اشتباه پارامترها فراخوانی می شود</value>
+	</data>
+	<data name="ParserErrorSyntax" xml:space="preserve">
+		<value>خطای نحو: {0}</value>
+	</data>
+	<data name="ParserErrorMessage" xml:space="preserve">
+		<value>خطا: {0}</value>
+	</data>
 </root>

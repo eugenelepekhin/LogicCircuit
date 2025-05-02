@@ -1596,4 +1596,39 @@ Ar norite užkrauti automatiškai išsaugota šio failo būseną?</value>
 	<data name="MessageHiddenWireCount" xml:space="preserve">
 		<value>Rasta {0} paslėptų laidų.</value>
 	</data>
+	<data name="ParserErrorParameterConfilitsWithPin" xml:space="preserve">
+		<value>Parametras „{0}“ prieštarauja kaiščio pavadinimui funkcijos „{1}“ apibrėžtyje.</value>
+	</data>
+	<data name="ParserErrorParameterDuplicated" xml:space="preserve">
+		<value>Parametras '{0}' yra dubliuojamas funkcijos '{1}' apibrėžtyje.</value>
+	</data>
+	<data name="ParserErrorParameterConflictsWithFunction" xml:space="preserve">
+		<value>Parametras '{0}' prieštarauja funkcijos pavadinimui funkcijos '{1}' apibrėžtyje.</value>
+	</data>
+	<data name="ParserErrorFunctionRedefined" xml:space="preserve">
+		<value>Funkcija '{0}' buvo perrašyta.</value>
+	</data>
+	<data name="ParserErrorFunctionConflictsWithPin" xml:space="preserve">
+		<value>Funkcijos pavadinimas '{0}' prieštarauja kaiščio pavadinimui.</value>
+	</data>
+	<data name="ParserErrorRecusion" xml:space="preserve">
+		<value>Rekursyvūs iškvietimai funkcijoje '{0}' nepalaikomi.</value>
+	</data>
+	<data name="ParserErrorFunctionUndefined" xml:space="preserve">
+		<value>Funkcija '{0}' nėra apibrėžta.</value>
+	</data>
+	<data name="ParserErrorMissing" xml:space="preserve">
+		<value>Trūksta {0} ties {1}.</value>
+	</data>
+	<data name="ParserErrorFunctionNumberParameters" xml:space="preserve">
+		<value>Funkcija '{0}' buvo iškviesta su neteisingu parametrų skaičiumi.</value>
+	</data>
+	<data name="ParserErrorSyntax" xml:space="preserve">
+		<value>Sintaksės klaida: {0}</value>
+	</data>
+	<data name="ParserErrorMessage" xml:space="preserve">
+		<value>Klaida: {0}
+
+</value>
+	</data>
 </root>

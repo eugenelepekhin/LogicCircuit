@@ -1597,4 +1597,39 @@ Czy chcesz wczytać automatycznie zapisaną kopię tego pliku?</value>
 	<data name="MessageHiddenWireCount" xml:space="preserve">
 		<value>Znaleziono {0} ukryte przewody.</value>
 	</data>
+	<data name="ParserErrorParameterConfilitsWithPin" xml:space="preserve">
+		<value>Parametr '{0}' koliduje z nazwą pinu w definicji funkcji '{1}'</value>
+	</data>
+	<data name="ParserErrorParameterDuplicated" xml:space="preserve">
+		<value>Parametr '{0}' jest zduplikowany w definicji funkcji '{1}'.</value>
+	</data>
+	<data name="ParserErrorParameterConflictsWithFunction" xml:space="preserve">
+		<value>Parametr '{0}' koliduje z nazwą funkcji w definicji funkcji '{1}'.</value>
+	</data>
+	<data name="ParserErrorFunctionRedefined" xml:space="preserve">
+		<value>Funkcja '{0}' została ponownie zdefiniowana.</value>
+	</data>
+	<data name="ParserErrorFunctionConflictsWithPin" xml:space="preserve">
+		<value>Nazwa funkcji '{0}' koliduje z nazwą pinu.</value>
+	</data>
+	<data name="ParserErrorRecusion" xml:space="preserve">
+		<value>Wywołania rekurencyjne nie są obsługiwane w funkcji '{0}'.</value>
+	</data>
+	<data name="ParserErrorFunctionUndefined" xml:space="preserve">
+		<value>Funkcja '{0}' nie została zdefiniowana.
+
+</value>
+	</data>
+	<data name="ParserErrorMissing" xml:space="preserve">
+		<value>Brakuje {0} w {1}.</value>
+	</data>
+	<data name="ParserErrorFunctionNumberParameters" xml:space="preserve">
+		<value>Funkcja '{0}' została wywołana z niewłaściwą liczbą parametrów.</value>
+	</data>
+	<data name="ParserErrorSyntax" xml:space="preserve">
+		<value>Błąd składni: {0}</value>
+	</data>
+	<data name="ParserErrorMessage" xml:space="preserve">
+		<value>Błąd: {0}</value>
+	</data>
 </root>

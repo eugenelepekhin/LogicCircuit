@@ -1623,4 +1623,40 @@
 	<data name="MessageHiddenWireCount" xml:space="preserve">
 		<value>Выделено скрытых проводов: {0}.</value>
 	</data>
+	<data name="ParserErrorParameterConfilitsWithPin" xml:space="preserve">
+		<value>Параметр '{0}' конфликтует с именем разъёма в определении функции '{1}'</value>
+	</data>
+	<data name="ParserErrorParameterDuplicated" xml:space="preserve">
+		<value>Параметр '{0}' дублируется в определении функции '{1}'.</value>
+	</data>
+	<data name="ParserErrorParameterConflictsWithFunction" xml:space="preserve">
+		<value>Параметр '{0}' конфликтует с именем функции в определении функции '{1}'.
+
+</value>
+	</data>
+	<data name="ParserErrorFunctionRedefined" xml:space="preserve">
+		<value>Функция '{0}' была переопределена.</value>
+	</data>
+	<data name="ParserErrorFunctionConflictsWithPin" xml:space="preserve">
+		<value>Имя функции '{0}' конфликтует с именем разъёма .</value>
+	</data>
+	<data name="ParserErrorRecusion" xml:space="preserve">
+		<value>Рекурсивные вызовы не поддерживаются в функции '{0}'.</value>
+	</data>
+	<data name="ParserErrorFunctionUndefined" xml:space="preserve">
+		<value>Функция '{0}' не определена.</value>
+	</data>
+	<data name="ParserErrorMissing" xml:space="preserve">
+		<value>Отсутствует {0} в {1}.
+</value>
+	</data>
+	<data name="ParserErrorFunctionNumberParameters" xml:space="preserve">
+		<value>Функция '{0}' была вызвана с неверным количеством параметров.</value>
+	</data>
+	<data name="ParserErrorSyntax" xml:space="preserve">
+		<value>Синтаксическая ошибка: {0}</value>
+	</data>
+	<data name="ParserErrorMessage" xml:space="preserve">
+		<value>Ошибка: {0}</value>
+	</data>
 </root>

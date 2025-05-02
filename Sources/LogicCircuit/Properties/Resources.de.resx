@@ -1620,4 +1620,37 @@ Möchten Sie den automatisch gespeicherten Stand dieser Datei laden?</value>
 	<data name="MessageHiddenWireCount" xml:space="preserve">
 		<value>{0} versteckte Drähte wurden gefunden.</value>
 	</data>
+	<data name="ParserErrorParameterConfilitsWithPin" xml:space="preserve">
+		<value>Parameter '{0}' steht in Konflikt mit dem Pinnamen in der Definition der Funktion '{1}'</value>
+	</data>
+	<data name="ParserErrorParameterDuplicated" xml:space="preserve">
+		<value>Parameter '{0}' ist in der Definition der Funktion '{1}' doppelt vorhanden</value>
+	</data>
+	<data name="ParserErrorParameterConflictsWithFunction" xml:space="preserve">
+		<value>Parameter '{0}' steht in Konflikt mit dem Funktionsnamen in der Definition der Funktion '{1}'.</value>
+	</data>
+	<data name="ParserErrorFunctionRedefined" xml:space="preserve">
+		<value>Funktion '{0}' wurde neu definiert.</value>
+	</data>
+	<data name="ParserErrorFunctionConflictsWithPin" xml:space="preserve">
+		<value>Funktionsname '{0}' steht in Konflikt mit dem Pinnamen.</value>
+	</data>
+	<data name="ParserErrorRecusion" xml:space="preserve">
+		<value>Rekursive Aufrufe werden in der Funktion '{0}' nicht unterstützt.</value>
+	</data>
+	<data name="ParserErrorFunctionUndefined" xml:space="preserve">
+		<value>Funktion '{0}' ist nicht definiert.</value>
+	</data>
+	<data name="ParserErrorMissing" xml:space="preserve">
+		<value>Fehlendes {0} bei {1}.</value>
+	</data>
+	<data name="ParserErrorFunctionNumberParameters" xml:space="preserve">
+		<value>Funktion '{0}' wurde mit einer falschen Anzahl von Parametern aufgerufen.</value>
+	</data>
+	<data name="ParserErrorSyntax" xml:space="preserve">
+		<value>Syntaxfehler: {0}</value>
+	</data>
+	<data name="ParserErrorMessage" xml:space="preserve">
+		<value>Fehler: {0}</value>
+	</data>
 </root>

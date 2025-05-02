@@ -1547,4 +1547,37 @@
 	<data name="MessageHiddenWireCount" xml:space="preserve">
 		<value>تم العثور على {0} الأسلاك المخفية.</value>
 	</data>
+	<data name="ParserErrorParameterConfilitsWithPin" xml:space="preserve">
+		<value>تتعارض المعلمة "{0}" مع اسم الدبوس في تعريف الدالة "{1}"</value>
+	</data>
+	<data name="ParserErrorParameterDuplicated" xml:space="preserve">
+		<value>يتم تكرار المعلمة "{0}" في تعريف الدالة "{1}"</value>
+	</data>
+	<data name="ParserErrorParameterConflictsWithFunction" xml:space="preserve">
+		<value>تتعارض المعلمة "{0}" مع اسم الوظيفة في تعريف الدالة "{1}"</value>
+	</data>
+	<data name="ParserErrorFunctionRedefined" xml:space="preserve">
+		<value>إعادة تعريف الدالة "{0}"</value>
+	</data>
+	<data name="ParserErrorFunctionConflictsWithPin" xml:space="preserve">
+		<value>يتعارض اسم الوظيفة "{0}" مع اسم الدبوس</value>
+	</data>
+	<data name="ParserErrorRecusion" xml:space="preserve">
+		<value>الاستدعاءات المتكررة غير مدعومة في الدالة "{0}"</value>
+	</data>
+	<data name="ParserErrorFunctionUndefined" xml:space="preserve">
+		<value>الدالة "{0}" غير محددة</value>
+	</data>
+	<data name="ParserErrorMissing" xml:space="preserve">
+		<value>مفقود {0} في {1}</value>
+	</data>
+	<data name="ParserErrorFunctionNumberParameters" xml:space="preserve">
+		<value>تم استدعاء الوظيفة "{0}" بعدد خاطئ من المعلمات</value>
+	</data>
+	<data name="ParserErrorSyntax" xml:space="preserve">
+		<value>خطأ في بناء الجملة: {0}</value>
+	</data>
+	<data name="ParserErrorMessage" xml:space="preserve">
+		<value>خطأ: {0}</value>
+	</data>
 </root>

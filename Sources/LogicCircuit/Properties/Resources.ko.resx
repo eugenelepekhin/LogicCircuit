@@ -1584,4 +1584,37 @@ Tri-state와 적절한 제어 회로를 함께 써서 멀티플렉서를 만들 
 	<data name="MessageHiddenWireCount" xml:space="preserve">
 		<value>{0} 숨겨진 전선이 발견되었습니다.</value>
 	</data>
+	<data name="ParserErrorParameterConfilitsWithPin" xml:space="preserve">
+		<value>매개변수 '{0}'가 함수 '{1}' 정의의 핀 이름과 충돌합니다.</value>
+	</data>
+	<data name="ParserErrorParameterDuplicated" xml:space="preserve">
+		<value>매개변수 '{0}'가 함수 '{1}' 정의에서 중복되었습니다.</value>
+	</data>
+	<data name="ParserErrorParameterConflictsWithFunction" xml:space="preserve">
+		<value>매개변수 '{0}'가 함수 '{1}' 정의의 함수 이름과 충돌합니다.</value>
+	</data>
+	<data name="ParserErrorFunctionRedefined" xml:space="preserve">
+		<value>함수 '{0}'가 재정의되었습니다.</value>
+	</data>
+	<data name="ParserErrorFunctionConflictsWithPin" xml:space="preserve">
+		<value>함수 이름 '{0}'이(가) 핀 이름과 충돌합니다.</value>
+	</data>
+	<data name="ParserErrorRecusion" xml:space="preserve">
+		<value>함수 '{0}'에서는 재귀 호출이 지원되지 않습니다.</value>
+	</data>
+	<data name="ParserErrorFunctionUndefined" xml:space="preserve">
+		<value>함수 '{0}'는 정의되어 있지 않습니다.</value>
+	</data>
+	<data name="ParserErrorMissing" xml:space="preserve">
+		<value>{1}에서 {0}이(가) 누락되었습니다.</value>
+	</data>
+	<data name="ParserErrorFunctionNumberParameters" xml:space="preserve">
+		<value>함수 '{0}'가 잘못된 수의 매개변수로 호출되었습니다.</value>
+	</data>
+	<data name="ParserErrorSyntax" xml:space="preserve">
+		<value>구문 오류: {0}</value>
+	</data>
+	<data name="ParserErrorMessage" xml:space="preserve">
+		<value>오류: {0}</value>
+	</data>
 </root>

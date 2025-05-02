@@ -1550,4 +1550,37 @@ kapcsolás felfogható egyfajta multiplexerként is.</value>
 	<data name="MessageHiddenWireCount" xml:space="preserve">
 		<value>Pronađene su {0} skrivene žice.</value>
 	</data>
+	<data name="ParserErrorParameterConfilitsWithPin" xml:space="preserve">
+		<value>A(z) '{0}' paraméter ütközik a(z) '{1}' függvény definíciójában szereplő tű nevével</value>
+	</data>
+	<data name="ParserErrorParameterDuplicated" xml:space="preserve">
+		<value>A(z) '{0}' paraméter duplán szerepel a(z) '{1}' függvény definíciójában.</value>
+	</data>
+	<data name="ParserErrorParameterConflictsWithFunction" xml:space="preserve">
+		<value>A(z) '{0}' paraméter ütközik a(z) '{1}' függvény definíciójában szereplő függvénynévvel.</value>
+	</data>
+	<data name="ParserErrorFunctionRedefined" xml:space="preserve">
+		<value>A(z) '{0}' függvény újra lett definiálva.</value>
+	</data>
+	<data name="ParserErrorFunctionConflictsWithPin" xml:space="preserve">
+		<value>A(z) '{0}' függvénynév ütközik a tű nevével.</value>
+	</data>
+	<data name="ParserErrorRecusion" xml:space="preserve">
+		<value>A(z) '{0}' függvény nem támogatja a rekurzív hívásokat.</value>
+	</data>
+	<data name="ParserErrorFunctionUndefined" xml:space="preserve">
+		<value>A(z) '{0}' függvény nincs definiálva.</value>
+	</data>
+	<data name="ParserErrorMissing" xml:space="preserve">
+		<value>Hiányzó {0} a következő helyen: {1}.</value>
+	</data>
+	<data name="ParserErrorFunctionNumberParameters" xml:space="preserve">
+		<value>A(z) '{0}' függvény hibás számú paraméterrel lett meghívva.</value>
+	</data>
+	<data name="ParserErrorSyntax" xml:space="preserve">
+		<value>Szintaktikai hiba: {0}</value>
+	</data>
+	<data name="ParserErrorMessage" xml:space="preserve">
+		<value>Hiba: {0}</value>
+	</data>
 </root>

@@ -1646,4 +1646,37 @@
 	<data name="MessageHiddenWireCount" xml:space="preserve">
 		<value>{0} נמצאו חוטים נסתרים.</value>
 	</data>
+	<data name="ParserErrorParameterConfilitsWithPin" xml:space="preserve">
+		<value>הפרמטר '{0}' מתנגש עם שם הסיכה בהגדרת הפונקציה '{1}'</value>
+	</data>
+	<data name="ParserErrorParameterDuplicated" xml:space="preserve">
+		<value>הפרמטר '{0}' משוכפל בהגדרת הפונקציה '{1}'</value>
+	</data>
+	<data name="ParserErrorParameterConflictsWithFunction" xml:space="preserve">
+		<value>הפרמטר '{0}' מתנגש עם שם הפונקציה בהגדרת הפונקציה '{1}'</value>
+	</data>
+	<data name="ParserErrorFunctionRedefined" xml:space="preserve">
+		<value>הפונקציה '{0}' מוגדרת מחדש</value>
+	</data>
+	<data name="ParserErrorFunctionConflictsWithPin" xml:space="preserve">
+		<value>שם הפונקציה '{0}' מתנגש עם שם הסיכה</value>
+	</data>
+	<data name="ParserErrorRecusion" xml:space="preserve">
+		<value>הקריאות הרקורסיביות אינן נתמכות בפונקציה '{0}'</value>
+	</data>
+	<data name="ParserErrorFunctionUndefined" xml:space="preserve">
+		<value>הפונקציה '{0}' אינה מוגדרת</value>
+	</data>
+	<data name="ParserErrorMissing" xml:space="preserve">
+		<value>חסר {0} ב-{1}</value>
+	</data>
+	<data name="ParserErrorFunctionNumberParameters" xml:space="preserve">
+		<value>הפונקציה '{0}' נקראת עם מספר שגוי של פרמטרים</value>
+	</data>
+	<data name="ParserErrorSyntax" xml:space="preserve">
+		<value>שגיאת תחביר: {0}</value>
+	</data>
+	<data name="ParserErrorMessage" xml:space="preserve">
+		<value>שגיאה: {0}</value>
+	</data>
 </root>
