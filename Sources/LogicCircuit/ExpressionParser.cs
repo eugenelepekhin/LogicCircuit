@@ -56,6 +56,7 @@ namespace LogicCircuit {
 
 			protected override void ReportFailedPredicate(Parser recognizer, FailedPredicateException e) {
 				string text = recognizer.RuleNames[recognizer.RuleContext.RuleIndex];
+				// TODO: add resource the the message or delete it.
 				string message = "rule " + text + " " + e.Message;
 				NotifyErrorListeners(recognizer, message, e);
 			}
@@ -74,21 +75,21 @@ namespace LogicCircuit {
 			}
 
 			private void AddSyntaxError(string message) {
-				this.AddError($"Syntax error: {message}");
+				this.AddError(Properties.Resources.ParserErrorSyntax(message));
 			}
 
 			// parser error
-			public override void SyntaxError(TextWriter output, IRecognizer recognizer, IToken offendingSymbol, int line, int charPositionInLine, string msg, RecognitionException e) {
-				this.AddSyntaxError(msg);
+			public override void SyntaxError(TextWriter output, IRecognizer recognizer, IToken offendingSymbol, int line, int charPositionInLine, string message, RecognitionException e) {
+				this.AddSyntaxError(message);
 			}
 
 			// lexer error
-			public void SyntaxError(TextWriter output, IRecognizer recognizer, int offendingSymbol, int line, int charPositionInLine, string msg, RecognitionException e) {
-				this.AddSyntaxError(msg);
+			public void SyntaxError(TextWriter output, IRecognizer recognizer, int offendingSymbol, int line, int charPositionInLine, string message, RecognitionException e) {
+				this.AddSyntaxError(message);
 			}
 
-			public void Error(string msg) {
-				this.AddError($"Error: {msg}");
+			public void Error(string message) {
+				this.AddError(Properties.Resources.ParserErrorMessage(message));
 			}
 		}
 
@@ -141,11 +142,11 @@ namespace LogicCircuit {
 							foreach(ITerminalNode parameter in context.parameters().Identifier()) {
 								string parameterName = parameter.GetText();
 								if(hasPin(parameterName)) {
-									this.errorListener.Error($"Parameter '{parameterName}' is conflicting with pin name in function '{functionName}' definition");
+									this.errorListener.Error(Properties.Resources.ParserErrorParameterConfilitsWithPin(parameterName, functionName));
 								} else if(function.HasParameter(parameterName)) {
-									this.errorListener.Error($"Parameter '{parameterName}' is duplicated in function '{functionName}' definition");
+									this.errorListener.Error(Properties.Resources.ParserErrorParameterDuplicated(parameterName, functionName));
 								} else if(functionName == parameterName) {
-									this.errorListener.Error($"Parameter '{parameterName}' is conflicting with function name in function '{functionName}' definition");
+									this.errorListener.Error(Properties.Resources.ParserErrorParameterConflictsWithFunction(parameterName, functionName));
 								} else {
 									ParameterExpression expression = Expression.Parameter(typeof(int), parameterName);
 									function.Parameters.Add(expression);
@@ -163,10 +164,10 @@ namespace LogicCircuit {
 							this.currentFunction = null;
 						}
 					} else {
-						this.errorListener.Error($"Function '{functionName}' redefined");
+						this.errorListener.Error(Properties.Resources.ParserErrorFunctionRedefined(functionName));
 					}
 				} else {
-					this.errorListener.Error($"Function '{functionName}' is conflicting with pin name");
+					this.errorListener.Error(Properties.Resources.ParserErrorFunctionConflictsWithPin(functionName));
 				}
 				return null;
 			}
@@ -285,10 +286,10 @@ namespace LogicCircuit {
 						if(function.Body != null) {
 							return Expression.Invoke(function.Body);
 						} else {
-							this.errorListener.Error(name == this.currentFunction?.Name ? $"The recursive calls are not supported in function '{name}'." : $"Function '{name}' is undefined.");
+							this.errorListener.Error(name == this.currentFunction?.Name ? Properties.Resources.ParserErrorRecusion(name) : Properties.Resources.ParserErrorFunctionUndefined(name));
 						}
 					} else {
-						this.errorListener.Error($"Function '{name}' called without parameters");
+						this.errorListener.Error(Properties.Resources.ParserErrorFunctionNumberParameters(name));
 					}
 				} else {
 					this.errorListener.Error(Properties.Resources.ParserErrorUnknownPin(name));
@@ -305,13 +306,13 @@ namespace LogicCircuit {
 						if(this.errorListener.ErrorCount == 0 && list.All(e => e != null) && list.Count == function.Parameters.Count) {
 							return Expression.Invoke(function.Body!, list!);
 						} else {
-							this.errorListener.Error($"Function '{name}' called with wrong number of parameters");
+							this.errorListener.Error(Properties.Resources.ParserErrorFunctionNumberParameters(name));
 						}
 					} else {
-						this.errorListener.Error(name == this.currentFunction?.Name ? $"The recursive calls are not supported in function '{name}'." : $"Function '{name}' is undefined.");
+						this.errorListener.Error(name == this.currentFunction?.Name ? Properties.Resources.ParserErrorRecusion(name) : Properties.Resources.ParserErrorFunctionUndefined(name));
 					}
 				} else {
-					this.errorListener.Error($"Function '{name}' not found");
+					this.errorListener.Error(Properties.Resources.ParserErrorFunctionUndefined(name));
 				}
 				return null;
 			}

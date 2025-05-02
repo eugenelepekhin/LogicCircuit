@@ -3563,5 +3563,75 @@ namespace LogicCircuit.Properties {
  		public static string ParserErrorMissing(string missingList, string token) {
 			return string.Format(FormatCulture, ResourceManager.GetString("ParserErrorMissing", Culture), missingList, token);
 		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Parameter '{0}' is conflicting with pin name in function '{1}' definition.
+		/// </summary>
+ 		public static string ParserErrorParameterConfilitsWithPin(string parameterName, string functionName) {
+			return string.Format(FormatCulture, ResourceManager.GetString("ParserErrorParameterConfilitsWithPin", Culture), parameterName, functionName);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Parameter '{0}' is duplicated in function '{1}' definition.
+		/// </summary>
+ 		public static string ParserErrorParameterDuplicated(string parameterName, string functionName) {
+			return string.Format(FormatCulture, ResourceManager.GetString("ParserErrorParameterDuplicated", Culture), parameterName, functionName);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Parameter '{0}' is conflicting with function name in function '{1}' definition.
+		/// </summary>
+ 		public static string ParserErrorParameterConflictsWithFunction(string parameterName, string functionName) {
+			return string.Format(FormatCulture, ResourceManager.GetString("ParserErrorParameterConflictsWithFunction", Culture), parameterName, functionName);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Function '{0}' redefined.
+		/// </summary>
+ 		public static string ParserErrorFunctionRedefined(string functionName) {
+			return string.Format(FormatCulture, ResourceManager.GetString("ParserErrorFunctionRedefined", Culture), functionName);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Function name '{0}' is conflicting with pin name.
+		/// </summary>
+ 		public static string ParserErrorFunctionConflictsWithPin(string functionName) {
+			return string.Format(FormatCulture, ResourceManager.GetString("ParserErrorFunctionConflictsWithPin", Culture), functionName);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to The recursive calls are not supported in function '{0}'.
+		/// </summary>
+ 		public static string ParserErrorRecusion(string name) {
+			return string.Format(FormatCulture, ResourceManager.GetString("ParserErrorRecusion", Culture), name);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Function '{0}' is undefined.
+		/// </summary>
+ 		public static string ParserErrorFunctionUndefined(string name) {
+			return string.Format(FormatCulture, ResourceManager.GetString("ParserErrorFunctionUndefined", Culture), name);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Function '{0}' called with wrong number of parameters.
+		/// </summary>
+ 		public static string ParserErrorFunctionNumberParameters(string name) {
+			return string.Format(FormatCulture, ResourceManager.GetString("ParserErrorFunctionNumberParameters", Culture), name);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Syntax error: {0}.
+		/// </summary>
+ 		public static string ParserErrorSyntax(string message) {
+			return string.Format(FormatCulture, ResourceManager.GetString("ParserErrorSyntax", Culture), message);
+		}
+
+		/// <summary>
+		/// Looks up a localized string similar to Error: {0}.
+		/// </summary>
+ 		public static string ParserErrorMessage(string message) {
+			return string.Format(FormatCulture, ResourceManager.GetString("ParserErrorMessage", Culture), message);
+		}
 	}
 }

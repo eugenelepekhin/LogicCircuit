@@ -686,7 +686,7 @@ namespace LogicCircuit.UnitTest {
 			this.Valid(parser, state, 26, "C:c+1 d:x2+s C*d");
 			this.Valid(parser, state, -3, "a:c+1 b:a*2 a+b-s");
 
-			this.Invalid(parser, state, "c:x1+1 c", "Function 'c' is conflicting with pin name");
+			this.Invalid(parser, state, "c:x1+1 c", "Function name 'c' is conflicting with pin name");
 			this.Invalid(parser, state, "C:x1+1 C:x2+1 C+2", "Function 'C' redefined");
 
 			// Functions with parameters
@@ -703,12 +703,12 @@ namespace LogicCircuit.UnitTest {
 			this.Invalid(parser, state, "C(x1):c+x1 C(2)", "Parameter 'x1' is conflicting with pin name in function 'C' definition");
 			this.Invalid(parser, state, "C(x,x):c+x C(2,3)", "Parameter 'x' is duplicated in function 'C' definition");
 			this.Invalid(parser, state, "C(C):c+C C(2)", "Parameter 'C' is conflicting with function name in function 'C' definition");
-			this.Invalid(parser, state, "C(x):c+x C", "Function 'C' called without parameters");
+			this.Invalid(parser, state, "C(x):c+x C", "Function 'C' called with wrong number of parameters");
 			this.Invalid(parser, state, "C(x):c+x U", "U - input or output pin not found");
 			this.Invalid(parser, state, "C(x):x+C(x-1) C(3)", "The recursive calls are not supported in function 'C'");
 			this.Invalid(parser, state, "C(x):x+4 C(3,1)", "Function 'C' called with wrong number of parameters");
 			this.Invalid(parser, state, "C(x,y):x+y C(3)", "Function 'C' called with wrong number of parameters");
-			this.Invalid(parser, state, "C(x,y):x+y D(3,4)", "Function 'D' not found");
+			this.Invalid(parser, state, "C(x,y):x+y D(3,4)", "Function 'D' is undefined");
 		}
 	}
 }
