@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Text.RegularExpressions;
 
 namespace LogicCircuit.UnitTest {
 	/// <summary>
@@ -27,11 +28,17 @@ namespace LogicCircuit.UnitTest {
 			Assert.AreEqual(expected, expr(state), "Expression evaluated to unexpected value");
 		}
 
-		private void Invalid(ExpressionParser parser, TruthState state, string text) {
+		private string Invalid(ExpressionParser parser, TruthState state, string text) {
 			Func<TruthState, int> expr = parser.Parse(text);
 			Assert.IsNull(expr, "Expecting parse to fail: " + text);
 			Assert.IsNotNull(parser.ErrorText, "Expecting parsing error");
 			this.TestContext.WriteLine("Expression: [{0}] Expected parsing error: {1}", text, parser.ErrorText);
+			return parser.ErrorText;
+		}
+
+		private void Invalid(ExpressionParser parser, TruthState state, string text, string errorPatter) {
+			string error = this.Invalid(parser, state, text);
+			StringAssert.Matches(error, new Regex(errorPatter, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant), "Unexpected parsing error: " + text);
 		}
 
 		private void Revert(StringBuilder text) {
@@ -649,6 +656,59 @@ namespace LogicCircuit.UnitTest {
 				int n = rand.Next(1) * Math.Abs(rand.Next());
 				this.Valid(parser, state, n != 0, n.ToString(), false);
 			}
+		}
+
+		/// <summary>
+		/// Tests expression functions
+		/// </summary>
+		[STATestMethod]
+		[DeploymentItem("Properties\\Digital Clock.CircuitProject")]
+		public void FunctionTest() {
+			CircuitProject project = ProjectTester.LoadDeployedFile(this.TestContext, "Digital Clock.CircuitProject", "4 bit adder");
+			CircuitTestSocket socket = new CircuitTestSocket(project.ProjectSet.Project.LogicalCircuit);
+			ExpressionParser parser = new ExpressionParser(socket);
+			TruthState state = new TruthState(socket.Inputs.Count(), socket.Outputs.Count());
+			for(int i = 0; i < state.Result.Length; i++) {
+				state.Result[i] = 0x5555555555555555L;
+			}
+			bool success = state.Unpack(socket.Outputs.Select(o => o.Function.ParameterCount).ToArray());
+			Assert.IsTrue(success);
+
+			state.Input[this.InputIndex(socket, "c")]  = 1;
+			state.Input[this.InputIndex(socket, "x1")] = 5;
+			state.Input[this.InputIndex(socket, "x2")] = 4;
+			state.Output[this.OutputIndex(socket, "s")] = 9;
+			state.Output[this.OutputIndex(socket, "c'")] = 1;
+
+			// Functions without parameters
+			this.Valid(parser, state, 2, "C:c+1 C");
+			this.Valid(parser, state, 10, "C:c+x1 C+x2");
+			this.Valid(parser, state, 26, "C:c+1 d:x2+s C*d");
+			this.Valid(parser, state, -3, "a:c+1 b:a*2 a+b-s");
+
+			this.Invalid(parser, state, "c:x1+1 c", "Function 'c' is conflicting with pin name");
+			this.Invalid(parser, state, "C:x1+1 C:x2+1 C+2", "Function 'C' redefined");
+
+			// Functions with parameters
+			this.Valid(parser, state, 4, "C(a):c+a C(3)");
+			this.Valid(parser, state, 8, "C(a,b):c+a+b C(3,4)");
+			this.Valid(parser, state, 9, "C(a,b):(c==0)*a+(c=1)*b C(3,s)");
+			this.Valid(parser, state, 17, "a(b):c+b b(d):a(x2)*d a(x1)+b(x2)-s");
+
+			// Parameter shadowing function
+			this.Valid(parser, state, 12, "d:c+1 f(d):d*4 f(3)");
+			this.Valid(parser, state, 12, "f(d):d*4 d:c+1 f(3)");
+
+			// function errors
+			this.Invalid(parser, state, "C(x1):c+x1 C(2)", "Parameter 'x1' is conflicting with pin name in function 'C' definition");
+			this.Invalid(parser, state, "C(x,x):c+x C(2,3)", "Parameter 'x' is duplicated in function 'C' definition");
+			this.Invalid(parser, state, "C(C):c+C C(2)", "Parameter 'C' is conflicting with function name in function 'C' definition");
+			this.Invalid(parser, state, "C(x):c+x C", "Function 'C' called without parameters");
+			this.Invalid(parser, state, "C(x):c+x U", "U - input or output pin not found");
+			this.Invalid(parser, state, "C(x):x+C(x-1) C(3)", "The recursive calls are not supported in function 'C'");
+			this.Invalid(parser, state, "C(x):x+4 C(3,1)", "Function 'C' called with wrong number of parameters");
+			this.Invalid(parser, state, "C(x,y):x+y C(3)", "Function 'C' called with wrong number of parameters");
+			this.Invalid(parser, state, "C(x,y):x+y D(3,4)", "Function 'D' not found");
 		}
 	}
 }

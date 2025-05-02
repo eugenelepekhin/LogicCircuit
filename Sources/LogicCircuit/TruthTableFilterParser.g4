@@ -4,7 +4,11 @@ options {
 	tokenVocab = TruthTableFilterLexer;
 }
 
-filter: expr EOF;
+filter: function* expr EOF;
+
+function: Identifier parameters? Colon expr;
+
+parameters: Open Identifier (Comma Identifier)* Close;
 
 expr: Open expr Close					#ParenExpr
 	| (Add | Not) expr					#Unary
@@ -19,6 +23,11 @@ expr: Open expr Close					#ParenExpr
 	| left=expr op=BoolAnd right=expr	#Bin
 	| left=expr op=BoolOr right=expr	#Bin
 	| NumberLiteral						#Literal
-	| Identifier						#Variable
+	| Identifier						#Variable	// this case is variable or function call without parameters
 	| String							#Variable
+	| functionCall						#Call
 ;
+
+// This is syntax of function calls with parameters.
+// Functions calls without parameters are taken care in variable visitor
+functionCall: Identifier Open expr (Comma expr)* Close;

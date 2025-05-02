@@ -1,13 +1,16 @@
 ﻿// Ignore Spelling: Paren lexer
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using Antlr4.Runtime;
 using Antlr4.Runtime.Misc;
+using Antlr4.Runtime.Tree;
 
 namespace LogicCircuit {
 	public class ExpressionParser {
@@ -89,10 +92,25 @@ namespace LogicCircuit {
 			}
 		}
 
+		private sealed class Function {
+			public string Name { get; }
+			public List<ParameterExpression> Parameters { get; } = new();
+			public LambdaExpression? Body { get; set; }
+
+			public Function(string name) {
+				this.Name = name;
+			}
+
+			public bool HasParameter(string name) => this.Parameters.Any(p => p.Name == name);
+			public ParameterExpression? Parameter(string name) => this.Parameters.FirstOrDefault(p => p.Name == name);
+		}
+
 		private sealed class ExprVisitor : TruthTableFilterParserBaseVisitor<Expression?> {
 			private readonly CircuitTestSocket socket;
 			private readonly ErrorListener errorListener;
 			private readonly ParameterExpression stateParameter;
+			private readonly Dictionary<string, Function> Functions	= new();
+			private Function? currentFunction;
 
 			public ExprVisitor(CircuitTestSocket socket, ErrorListener errorListener, ParameterExpression stateParameter) {
 				this.socket = socket;
@@ -101,7 +119,56 @@ namespace LogicCircuit {
 			}
 
 			public override Expression? VisitFilter(TruthTableFilterParser.FilterContext context) {
-				return this.Visit(context.expr());
+				TruthTableFilterParser.FunctionContext[]? functionContexts = context.function();
+				if(functionContexts != null && 0 < functionContexts.Length) {
+					foreach(TruthTableFilterParser.FunctionContext functionContext in functionContexts) {
+						this.VisitFunction(functionContext);
+					}
+				}
+				if(this.errorListener.ErrorCount == 0) {
+					return this.Visit(context.expr());
+				}
+				return null;
+			}
+
+			public override Expression? VisitFunction(TruthTableFilterParser.FunctionContext context) {
+				bool hasPin(string name) => this.socket.Inputs.Any(pin => pin.Pin.Name == name) || this.socket.Outputs.Any(pin => pin.Pin.Name == name);
+				string functionName = context.Identifier().GetText();
+				if(!hasPin(functionName)) {
+					Function function = new Function(functionName);
+					if(this.Functions.TryAdd(functionName, function)) {
+						if(context.parameters() != null) {
+							foreach(ITerminalNode parameter in context.parameters().Identifier()) {
+								string parameterName = parameter.GetText();
+								if(hasPin(parameterName)) {
+									this.errorListener.Error($"Parameter '{parameterName}' is conflicting with pin name in function '{functionName}' definition");
+								} else if(function.HasParameter(parameterName)) {
+									this.errorListener.Error($"Parameter '{parameterName}' is duplicated in function '{functionName}' definition");
+								} else if(functionName == parameterName) {
+									this.errorListener.Error($"Parameter '{parameterName}' is conflicting with function name in function '{functionName}' definition");
+								} else {
+									ParameterExpression expression = Expression.Parameter(typeof(int), parameterName);
+									function.Parameters.Add(expression);
+								}
+							}
+						}
+						try {
+							Debug.Assert(this.currentFunction == null, "currentFunction is not null");
+							this.currentFunction = function;
+							Expression? body = this.Visit(context.expr());
+							if(body != null) {
+								function.Body = Expression.Lambda(body, function.Parameters);
+							}
+						} finally {
+							this.currentFunction = null;
+						}
+					} else {
+						this.errorListener.Error($"Function '{functionName}' redefined");
+					}
+				} else {
+					this.errorListener.Error($"Function '{functionName}' is conflicting with pin name");
+				}
+				return null;
 			}
 
 			public override Expression? VisitParenExpr(TruthTableFilterParser.ParenExprContext context) {
@@ -211,7 +278,41 @@ namespace LogicCircuit {
 					}
 					index++;
 				}
-				this.errorListener.Error(Properties.Resources.ParserErrorUnknownPin(name));
+				if(this.currentFunction != null && this.currentFunction.HasParameter(name)) {
+					return this.currentFunction.Parameter(name)!;
+				} else if(this.Functions.TryGetValue(name, out Function? function)) {
+					if(function.Parameters.Count == 0) {
+						if(function.Body != null) {
+							return Expression.Invoke(function.Body);
+						} else {
+							this.errorListener.Error(name == this.currentFunction?.Name ? $"The recursive calls are not supported in function '{name}'." : $"Function '{name}' is undefined.");
+						}
+					} else {
+						this.errorListener.Error($"Function '{name}' called without parameters");
+					}
+				} else {
+					this.errorListener.Error(Properties.Resources.ParserErrorUnknownPin(name));
+				}
+				return null;
+			}
+
+			public override Expression? VisitFunctionCall(TruthTableFilterParser.FunctionCallContext context) {
+				string name = context.Identifier().GetText();
+				if(this.Functions.TryGetValue(name, out Function? function)) {
+					Debug.Assert(0 < function.Parameters.Count);
+					if(function.Body != null) {
+						List<Expression?> list = context.expr().Select(e => this.Visit(e)).ToList();
+						if(this.errorListener.ErrorCount == 0 && list.All(e => e != null) && list.Count == function.Parameters.Count) {
+							return Expression.Invoke(function.Body!, list!);
+						} else {
+							this.errorListener.Error($"Function '{name}' called with wrong number of parameters");
+						}
+					} else {
+						this.errorListener.Error(name == this.currentFunction?.Name ? $"The recursive calls are not supported in function '{name}'." : $"Function '{name}' is undefined.");
+					}
+				} else {
+					this.errorListener.Error($"Function '{name}' not found");
+				}
 				return null;
 			}
 

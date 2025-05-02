@@ -2,6 +2,8 @@
 
 Open: '(';
 Close: ')';
+Colon: ':';
+Comma: ',';
 
 Add: [+-];
 Mul: [*/%];
@@ -15,7 +17,7 @@ BitOr: '|';
 BitXor: '^';
 BitShift: '<<' | '>>';
 
-Equality: '=' | '==' | '!=' | '<>';
+Equality: '==' | '=' | '!=' | '<>';
 Compare: '<' | '<=' | '>=' | '>';
 
 NumberLiteral: BinNumber | HexNumber | OctaNumber | DecNumber;
