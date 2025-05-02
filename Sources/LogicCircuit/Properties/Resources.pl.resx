@@ -1616,9 +1616,7 @@ Czy chcesz wczytać automatycznie zapisaną kopię tego pliku?</value>
 		<value>Wywołania rekurencyjne nie są obsługiwane w funkcji '{0}'.</value>
 	</data>
 	<data name="ParserErrorFunctionUndefined" xml:space="preserve">
-		<value>Funkcja '{0}' nie została zdefiniowana.
-
-</value>
+		<value>Funkcja '{0}' nie została zdefiniowana.</value>
 	</data>
 	<data name="ParserErrorMissing" xml:space="preserve">
 		<value>Brakuje {0} w {1}.</value>

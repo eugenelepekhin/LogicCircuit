@@ -1599,9 +1599,7 @@ temelde bir çoğullayıcıya eşdeğerdir.</value>
 		<value>{0} gizli kablo bulundu.</value>
 	</data>
 	<data name="ParserErrorParameterConfilitsWithPin" xml:space="preserve">
-		<value>'{0}' parametresi, '{1}' fonksiyon tanımındaki pin adıyla çakışıyor.
-
-</value>
+		<value>'{0}' parametresi, '{1}' fonksiyon tanımındaki pin adıyla çakışıyor.</value>
 	</data>
 	<data name="ParserErrorParameterDuplicated" xml:space="preserve">
 		<value>'{0}' parametresi, '{1}' fonksiyon tanımında yinelenmiş.</value>
@@ -1613,9 +1611,7 @@ temelde bir çoğullayıcıya eşdeğerdir.</value>
 		<value>'{0}' fonksiyonu yeniden tanımlandı.</value>
 	</data>
 	<data name="ParserErrorFunctionConflictsWithPin" xml:space="preserve">
-		<value>'{0}' fonksiyon adı, pin adıyla çakışıyor.
-
-</value>
+		<value>'{0}' fonksiyon adı, pin adıyla çakışıyor.</value>
 	</data>
 	<data name="ParserErrorRecusion" xml:space="preserve">
 		<value>'{0}' fonksiyonunda özyinelemeli çağrılar desteklenmez.</value>

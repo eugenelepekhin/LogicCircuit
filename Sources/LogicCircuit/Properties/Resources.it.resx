@@ -1421,9 +1421,7 @@ Circuiti di questo tipo non possono essere utilizzati più di una volta su altri
 		<value>Il nome della funzione '{0}' è in conflitto con il nome del pin.</value>
 	</data>
 	<data name="ParserErrorRecusion" xml:space="preserve">
-		<value>Le chiamate ricorsive non sono supportate nella funzione '{0}'.
-
-</value>
+		<value>Le chiamate ricorsive non sono supportate nella funzione '{0}'.</value>
 	</data>
 	<data name="ParserErrorFunctionUndefined" xml:space="preserve">
 		<value>La funzione '{0}' non è definita.</value>

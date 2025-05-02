@@ -1634,9 +1634,7 @@ Voulez-vous charger l'état sauvegardé automatiquement de ce fichier ?</value>
 		<value>La fonction '{0}' a été redéfinie.</value>
 	</data>
 	<data name="ParserErrorFunctionConflictsWithPin" xml:space="preserve">
-		<value>Le nom de la fonction '{0}' est en conflit avec le nom du broche.
-
-</value>
+		<value>Le nom de la fonction '{0}' est en conflit avec le nom du broche.</value>
 	</data>
 	<data name="ParserErrorRecusion" xml:space="preserve">
 		<value>Les appels récursifs ne sont pas pris en charge dans la fonction '{0}'.</value>

@@ -1682,9 +1682,7 @@ Wil je het, automatisch opgeslagen, bestand laden.</value>
 		<value>{0} ontbreekt op {1}.</value>
 	</data>
 	<data name="ParserErrorFunctionNumberParameters" xml:space="preserve">
-		<value>Functie '{0}' is aangeroepen met een onjuist aantal parameters.
-
-</value>
+		<value>Functie '{0}' is aangeroepen met een onjuist aantal parameters.</value>
 	</data>
 	<data name="ParserErrorSyntax" xml:space="preserve">
 		<value>Syntaxisfout: {0}</value>

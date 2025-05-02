@@ -1630,9 +1630,7 @@
 		<value>Параметр '{0}' дублируется в определении функции '{1}'.</value>
 	</data>
 	<data name="ParserErrorParameterConflictsWithFunction" xml:space="preserve">
-		<value>Параметр '{0}' конфликтует с именем функции в определении функции '{1}'.
-
-</value>
+		<value>Параметр '{0}' конфликтует с именем функции в определении функции '{1}'.</value>
 	</data>
 	<data name="ParserErrorFunctionRedefined" xml:space="preserve">
 		<value>Функция '{0}' была переопределена.</value>
@@ -1647,8 +1645,7 @@
 		<value>Функция '{0}' не определена.</value>
 	</data>
 	<data name="ParserErrorMissing" xml:space="preserve">
-		<value>Отсутствует {0} в {1}.
-</value>
+		<value>Отсутствует {0} в {1}.</value>
 	</data>
 	<data name="ParserErrorFunctionNumberParameters" xml:space="preserve">
 		<value>Функция '{0}' была вызвана с неверным количеством параметров.</value>

@@ -1627,8 +1627,6 @@ Ar norite užkrauti automatiškai išsaugota šio failo būseną?</value>
 		<value>Sintaksės klaida: {0}</value>
 	</data>
 	<data name="ParserErrorMessage" xml:space="preserve">
-		<value>Klaida: {0}
-
-</value>
+		<value>Klaida: {0}</value>
 	</data>
 </root>

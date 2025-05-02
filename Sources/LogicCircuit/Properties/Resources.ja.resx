@@ -1437,9 +1437,7 @@
 		<value>{1} に {0} が不足しています。</value>
 	</data>
 	<data name="ParserErrorFunctionNumberParameters" xml:space="preserve">
-		<value>関数 '{0}' は誤った数のパラメーターで呼び出されました。
-
-</value>
+		<value>関数 '{0}' は誤った数のパラメーターで呼び出されました。</value>
 	</data>
 	<data name="ParserErrorSyntax" xml:space="preserve">
 		<value>構文エラー: {0}</value>
