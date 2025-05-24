@@ -9,25 +9,24 @@ using System.Threading.Tasks;
 
 namespace LogicCircuit {
 	public class CircuitTestSocket {
-		private readonly TableChank chank;
-		private readonly TableChank[]? chankList;
-		public IEnumerable<InputPinSocket> Inputs { get { return this.chank.Inputs; } }
-		public IEnumerable<OutputPinSocket> Outputs { get { return this.chank.Outputs; } }
+		private readonly TableChunk chunk;
+		private readonly TableChunk[]? chankList;
+		public IEnumerable<InputPinSocket> Inputs { get { return this.chunk.Inputs; } }
+		public IEnumerable<OutputPinSocket> Outputs { get { return this.chunk.Outputs; } }
 
 		public CircuitTestSocket(LogicalCircuit circuit, bool multiThreaded) {
 			Tracer.Assert(CircuitTestSocket.IsTestable(circuit));
-			TableChank.Validate(circuit);
 
-			this.chank = new TableChank(circuit);
-			if(multiThreaded && 1 < Environment.ProcessorCount && 15 < this.chank.InputBitCount) {
-				this.chankList = new TableChank[Environment.ProcessorCount];
-				BigInteger total = this.chank.Count;
+			this.chunk = new TableChunk(circuit);
+			if(multiThreaded && 1 < Environment.ProcessorCount && 15 < this.chunk.InputBitCount) {
+				this.chankList = new TableChunk[Environment.ProcessorCount];
+				BigInteger total = this.chunk.Count;
 				BigInteger count = total / this.chankList.Length;
 				for(int i = 0; i < this.chankList.Length; i++) {
 					if(i == 0) {
-						this.chankList[i] = this.chank;
+						this.chankList[i] = this.chunk;
 					} else {
-						this.chankList[i] = new TableChank(circuit);
+						this.chankList[i] = new TableChunk(circuit);
 					}
 					this.chankList[i].Count = count;
 					this.chankList[i].Start = count * i;
@@ -46,7 +45,7 @@ namespace LogicCircuit {
 		}
 
 		public bool Evaluate() {
-			return this.chank.Evaluate();
+			return this.chunk.Evaluate();
 		}
 
 		[SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters")]
@@ -54,14 +53,14 @@ namespace LogicCircuit {
 			System.Diagnostics.Stopwatch watch = new System.Diagnostics.Stopwatch();
 			watch.Start();
 			if(this.chankList == null) {
-				this.chank.BuildTruthTable(reportProgress, keepGoing, include, maxCount);
-				truncated = this.chank.Trancated;
-				if(this.chank.Oscillation) {
+				this.chunk.BuildTruthTable(reportProgress, keepGoing, include, maxCount);
+				truncated = this.chunk.Truncated;
+				if(this.chunk.Oscillation) {
 					return null;
 				}
 				watch.Stop();
 				Tracer.FullInfo("CircuitTestSocket.BuildTruthTable", "Single threaded time: {0}", watch.Elapsed);
-				return this.chank.Results;
+				return this.chunk.Results;
 			}
 			double[] progress = new double[this.chankList.Length];
 			Parallel.For(0, this.chankList.Length, i =>
@@ -70,17 +69,17 @@ namespace LogicCircuit {
 						progress[i] = d;
 						reportProgress(progress.Sum() / progress.Length);
 					},
-					() => keepGoing() && !this.chankList.Take(i).Any(c => c.Trancated) && !this.chankList.Any(c => c.Oscillation),
+					() => keepGoing() && !this.chankList.Take(i).Any(c => c.Truncated) && !this.chankList.Any(c => c.Oscillation),
 					include,
 					maxCount
 				)
 			);
-			truncated = this.chankList.Any(c => c.Trancated);
+			truncated = this.chankList.Any(c => c.Truncated);
 			if(this.chankList.Any(c => c.Oscillation)) {
 				return null;
 			}
 			List<TruthState> list = new List<TruthState>();
-			foreach(TableChank table in this.chankList) {
+			foreach(TableChunk table in this.chankList) {
 				if(table.Results != null) {
 					list.AddRange(table.Results);
 				}
@@ -96,7 +95,7 @@ namespace LogicCircuit {
 			return list;
 		}
 
-		private class TableChank {
+		private class TableChunk {
 			private readonly LogicalCircuit LogicalCircuit;
 			private readonly CircuitState CircuitState;
 			public readonly List<InputPinSocket> Inputs = new List<InputPinSocket>();
@@ -106,10 +105,10 @@ namespace LogicCircuit {
 			public BigInteger Start = 0;
 			public BigInteger Count;
 			public bool Oscillation { get; private set; }
-			public bool Trancated { get; private set; }
+			public bool Truncated { get; private set; }
 			
-			public TableChank(LogicalCircuit logicalCircuit) {
-				this.LogicalCircuit = TableChank.Copy(logicalCircuit);
+			public TableChunk(LogicalCircuit logicalCircuit) {
+				this.LogicalCircuit = TableChunk.Copy(logicalCircuit);
 				this.Plug();
 
 				// Create map and state
@@ -130,12 +129,6 @@ namespace LogicCircuit {
 				circuitMap.TurnOn();
 			}
 
-			public static void Validate(LogicalCircuit logicalCircuit) {
-				CircuitMap map = new CircuitMap(TableChank.Copy(logicalCircuit));
-				// this will throw if bit width error occurred.
-				map.Apply(1);
-			}
-
 			public bool Evaluate() {
 				return this.CircuitState.Evaluate(true);
 			}
@@ -147,7 +140,7 @@ namespace LogicCircuit {
 			private void Build(Action<double> reportProgress, Func<bool> keepGoing, Predicate<TruthState>? include, int maxCount) {
 				this.Results = new List<TruthState>();
 				this.Oscillation = false;
-				this.Trancated = false;
+				this.Truncated = false;
 				int inputCount = this.Inputs.Count;
 				int outputCount = this.Outputs.Count;
 				if(0 < inputCount && 0 < outputCount) {
@@ -159,7 +152,7 @@ namespace LogicCircuit {
 					TruthState state = new TruthState(inputCount, outputCount);
 					for(BigInteger value = this.Start; value < end; value++) {
 						if(maxCount <= this.Results.Count || !keepGoing()) {
-							this.Trancated = true;
+							this.Truncated = true;
 							break;
 						}
 						int bit = 0;
