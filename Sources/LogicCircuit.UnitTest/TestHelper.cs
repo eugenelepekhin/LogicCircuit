@@ -8,8 +8,13 @@ namespace LogicCircuit.UnitTest {
 		public static Assembly LogicCircuitAssembly { get; private set; }
 		public static App App { get; private set; }
 
+		public static Random Random { get; private set; }
+
 		[AssemblyInitialize]
 		public static void InitTests(TestContext context) {
+			int seed = Environment.TickCount & 0x7FFFFFFF; // Ensure a positive seed value
+			context.WriteLine($"seed={seed}");
+			TestHelper.Random = new Random(seed);
 			if(TestHelper.App == null) {
 				lock(TestHelper.syncRoot) {
 					if(TestHelper.App == null) {
