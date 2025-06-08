@@ -140,7 +140,7 @@ namespace LogicCircuit.UnitTest.DataPersistent {
 		/// Tests IsEmpty.
 		/// </summary>
 		[TestMethod]
-		public void TableSnapshotIsEmptyTest() {
+		public void IsEmptyTest() {
 			StoreSnapshot store = new StoreSnapshot();
 			TableSnapshot<int> table1 = new TableSnapshot<int>(store, "table1", IntField.Field);
 			TableSnapshot<int> table2 = new TableSnapshot<int>(store, "table2", IntField.Field);

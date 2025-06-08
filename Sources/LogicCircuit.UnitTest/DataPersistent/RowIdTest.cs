@@ -4,7 +4,7 @@ namespace LogicCircuit.UnitTest.DataPersistent {
 	[TestClass]
 	public class RowIdTest {
 		[TestMethod]
-		public void RowIdConstructorTest() {
+		public void ConstructorTest() {
 			RowId id1 = new RowId();
 			Assert.AreEqual<int>(0, id1.Value);
 
@@ -22,7 +22,7 @@ namespace LogicCircuit.UnitTest.DataPersistent {
 		}
 
 		[TestMethod()]
-		public void RowIdEqualsTest() {
+		public void EqualsTest() {
 			RowId id1 = new RowId(12);
 			RowId id2 = new RowId(12);
 			RowId id3 = new RowId(11);

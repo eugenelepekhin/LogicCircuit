@@ -6,7 +6,7 @@ namespace LogicCircuit.UnitTest.DataPersistent {
 		public TestContext TestContext { get; set; }
 
 		[TestMethod]
-		public void ValueListConstructorTest() {
+		public void ConstructorTest() {
 			ValueList<int> list = new ValueList<int>();
 			Assert.AreEqual<int>(0, list.Count);
 		}
@@ -15,7 +15,7 @@ namespace LogicCircuit.UnitTest.DataPersistent {
 		/// A test of ValueList.Add
 		/// </summary>
 		[TestMethod]
-		public void ValueListAddTest() {
+		public void AddTest() {
 			int count = 1000 * (1 << 10);
 			ValueList<int> list = new ValueList<int>();
 			int seed = (int)DateTime.UtcNow.Ticks;
@@ -41,7 +41,7 @@ namespace LogicCircuit.UnitTest.DataPersistent {
 		/// A test of ValueList.Shrink
 		/// </summary>
 		[TestMethod]
-		public void ValueListShrinkTest() {
+		public void ShrinkTest() {
 			int count = 5 * (1 << 10);
 			ValueList<int> list = new ValueList<int>();
 
@@ -78,7 +78,7 @@ namespace LogicCircuit.UnitTest.DataPersistent {
 		/// A test of ValueList.ItemAddress
 		/// </summary>
 		[TestMethod]
-		public void ValueListAddressTest() {
+		public void AddressTest() {
 			ValueList<int> list = new ValueList<int>();
 			Assert.AreEqual<int>(0, list.Count);
 

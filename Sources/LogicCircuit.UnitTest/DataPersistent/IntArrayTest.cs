@@ -4,7 +4,7 @@ namespace LogicCircuit.UnitTest.DataPersistent {
 	[TestClass]
 	public class IntArrayTest {
 		[TestMethod]
-		public void IntArrayConstructorTest() {
+		public void ConstructorTest() {
 			StoreSnapshot store = new StoreSnapshot();
 			IntArray array = new IntArray(store.SnapStore, "test", 3);
 			store.FreezeShape();
@@ -16,7 +16,7 @@ namespace LogicCircuit.UnitTest.DataPersistent {
 		}
 
 		[TestMethod]
-		public void IntArrayIndexerTest() {
+		public void IndexerTest() {
 			StoreSnapshot store = new StoreSnapshot();
 			IntArray array = new IntArray(store.SnapStore, "test", 3);
 			store.FreezeShape();

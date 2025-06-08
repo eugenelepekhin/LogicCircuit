@@ -52,7 +52,7 @@ namespace LogicCircuit.UnitTest.DataPersistent {
 		/// Check of self referring table delete. The root is a record with itself as a parent.
 		/// </summary>
 		[TestMethod]
-		public void TableSnapshotCyclicDeleteTreeTest() {
+		public void CyclicDeleteTreeTest() {
 			StoreSnapshot store = new StoreSnapshot();
 			TableSnapshot<NodeData> tree = new TableSnapshot<NodeData>(store, "Tree", NodeData.Fields);
 			tree.MakeAutoUnique();
@@ -87,7 +87,7 @@ namespace LogicCircuit.UnitTest.DataPersistent {
 		/// Check of deletion from chain of 3 tables forming a loop.
 		/// </summary>
 		[TestMethod]
-		public void TableSnapshotCyclicDeleteChainTest() {
+		public void CyclicDeleteChainTest() {
 			StoreSnapshot store = new StoreSnapshot();
 			TableSnapshot<NodeData> node1 = new TableSnapshot<NodeData>(store, "nod1", NodeData.Fields);
 			TableSnapshot<NodeData> node2 = new TableSnapshot<NodeData>(store, "nod2", NodeData.Fields);

@@ -41,7 +41,7 @@ namespace LogicCircuit.UnitTest.DataPersistent {
 		/// Check foreign key throws when child is default and no parent with default primary key is exist.
 		/// </summary>
 		[TestMethod]
-		public void ForeignKeyWithoutDefaultTest() {
+		public void WithoutDefaultTest() {
 			StoreSnapshot store = new StoreSnapshot();
 			TableSnapshot<NodeData> table = NodeData.CreateTable(store, "t1");
 			table.MakeAutoUnique();
@@ -59,7 +59,7 @@ namespace LogicCircuit.UnitTest.DataPersistent {
 		/// Check foreign key allow child to be default when no parent with default primary key is exist.
 		/// </summary>
 		[TestMethod]
-		public void ForeignKeyWithDefaultTest() {
+		public void WithDefaultTest() {
 			StoreSnapshot store = new StoreSnapshot();
 			TableSnapshot<NodeData> table = NodeData.CreateTable(store, "t1");
 			table.MakeAutoUnique();
