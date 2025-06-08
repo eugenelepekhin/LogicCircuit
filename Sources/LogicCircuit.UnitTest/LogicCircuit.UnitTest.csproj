@@ -16,8 +16,8 @@
   <ItemGroup>
     <PackageReference Include="Antlr4.Runtime.Standard" Version="4.13.1" />
     <PackageReference Include="Antlr4BuildTasks" Version="12.10.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.0" />
-    <PackageReference Include="MSTest" Version="3.9.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Include="MSTest" Version="3.9.1" />
   </ItemGroup>
 
   <ItemGroup>

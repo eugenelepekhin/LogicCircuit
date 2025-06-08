@@ -24,8 +24,8 @@
     <OutputName>LogicCircuitSetup_arm64</OutputName>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="WixToolset.UI.wixext" Version="6.0.0" />
-    <PackageReference Include="WixToolset.NetFx.wixext" Version="6.0.0" />
+    <PackageReference Include="WixToolset.UI.wixext" Version="6.0.1" />
+    <PackageReference Include="WixToolset.NetFx.wixext" Version="6.0.1" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Banner.bmp" />
