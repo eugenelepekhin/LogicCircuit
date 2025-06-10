@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace LogicCircuit.DataPersistent {
+﻿namespace LogicCircuit.DataPersistent {
 	internal interface ISnapTableChange<TRecord> where TRecord:struct {
 		RowId RowId(int changeIndex);
 		SnapTableAction Action(int changeIndex);

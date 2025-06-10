@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace LogicCircuit.DataPersistent {
@@ -26,17 +25,17 @@ namespace LogicCircuit.DataPersistent {
 		/// <summary>
 		/// Gets name of this table
 		/// </summary>
-		public string Name { get { return this.table.Name; } }
+		public string Name => this.table.Name;
 
 		/// <summary>
 		/// Gets fields of the table
 		/// </summary>
-		public IEnumerable<IField<TRecord>> Fields { get { return new ReadOnlyCollection<IField<TRecord>>(this.table.Fields); } }
+		public IEnumerable<IField<TRecord>> Fields => new ReadOnlyCollection<IField<TRecord>>(this.table.Fields);
 
 		/// <summary>
 		/// Gets enumerator of row id
 		/// </summary>
-		public IEnumerable<RowId> Rows { get { return this; } }
+		public IEnumerable<RowId> Rows => this;
 
 		/// <summary>
 		/// Constructs the table
@@ -183,11 +182,9 @@ namespace LogicCircuit.DataPersistent {
 			this.CreateIndex<TField1, TField2>(name, field1, field2, false);
 		}
 
-		IUniqueIndex<TField>? IPrimaryKeyHolder.PrimaryKey<TField>() {
-			return this.table.PrimaryKey as IUniqueIndex<TField>;
-		}
+		IUniqueIndex<TField>? IPrimaryKeyHolder.PrimaryKey<TField>() => this.table.PrimaryKey as IUniqueIndex<TField>;
 
-		List<IForeignKey> IPrimaryKeyHolder.Children { get { return this.table.Children; } }
+		List<IForeignKey> IPrimaryKeyHolder.Children => this.table.Children;
 
 		/// <summary>
 		/// Creates foreign key
@@ -370,13 +367,9 @@ namespace LogicCircuit.DataPersistent {
 			this.table.GetData(rowId, this.StoreSnapshot.Version, out data);
 		}
 
-		public IEnumerator<RowId> GetEnumerator() {
-			return new RowEnumerator(this);
-		}
+		public IEnumerator<RowId> GetEnumerator() => new RowEnumerator(this);
 
-		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() {
-			return this.GetEnumerator();
-		}
+		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => this.GetEnumerator();
 
 		/// <summary>
 		/// Selects rows by the provided criteria
@@ -609,18 +602,14 @@ namespace LogicCircuit.DataPersistent {
 		/// </summary>
 		/// <param name="version"></param>
 		/// <returns></returns>
-		public bool WasAffected(int version) {
-			return this.table.WasChangedIn(version);
-		}
+		public bool WasAffected(int version) => this.table.WasChangedIn(version);
 
 		/// <summary>
 		/// Gets changes made in the provided version
 		/// </summary>
 		/// <param name="version"></param>
 		/// <returns></returns>
-		public IEnumerator<TableChange<TRecord>>? GetChanges(int version) {
-			return this.GetChanges(version, version);
-		}
+		public IEnumerator<TableChange<TRecord>>? GetChanges(int version) => this.GetChanges(version, version);
 
 		/// <summary>
 		/// Gets changes made in the interval of versions inclusively
@@ -668,9 +657,7 @@ namespace LogicCircuit.DataPersistent {
 		/// </summary>
 		/// <param name="version"></param>
 		/// <returns></returns>
-		public IEnumerator<RowId> GetRolledBackChanges(int version) {
-			return new RolledBackChangesEnumerator(this, version);
-		}
+		public IEnumerator<RowId> GetRolledBackChanges(int version) => new RolledBackChangesEnumerator(this, version);
 
 		/// <summary>
 		/// Not for public consumption
@@ -802,7 +789,7 @@ namespace LogicCircuit.DataPersistent {
 				}
 			}
 
-			object System.Collections.IEnumerator.Current { get { return this.Current; } }
+			object System.Collections.IEnumerator.Current => this.Current;
 
 			public void Dispose() {
 			}
@@ -920,13 +907,9 @@ namespace LogicCircuit.DataPersistent {
 				return this.enumerator.MoveNext();
 			}
 
-			public TableChange<TRecord> Current {
-				get { return new TableChange<TRecord>(this, this.enumerator.Current.RowId); }
-			}
+			public TableChange<TRecord> Current => new TableChange<TRecord>(this, this.enumerator.Current.RowId);
 
-			object System.Collections.IEnumerator.Current {
-				get { return this.Current; }
-			}
+			object System.Collections.IEnumerator.Current => this.Current;
 
 			public void Dispose() {
 				this.enumerator.Dispose();

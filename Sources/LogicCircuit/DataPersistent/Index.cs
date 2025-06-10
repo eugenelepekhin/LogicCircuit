@@ -122,13 +122,11 @@ namespace LogicCircuit.DataPersistent {
 			public void Delete(RowId rowId) {
 			}
 
-			public bool IsUnique { get { return true; } }
+			public bool IsUnique => true;
 			public int Timestamp { get; set; }
-			public IField<TRecord> Field { get { return SnapTable<TRecord>.RowIdPseudoField.Field; } }
+			public IField<TRecord> Field => SnapTable<TRecord>.RowIdPseudoField.Field;
 
-			public bool IsEmpty(int version) {
-				return TableSnapshot<TRecord>.IsEmpty(this.table, version);
-			}
+			public bool IsEmpty(int version) => TableSnapshot<TRecord>.IsEmpty(this.table, version);
 		}
 
 		internal class RangeIndex<TField> : IFieldIndex<TField>, IFieldHolder {
@@ -142,41 +140,25 @@ namespace LogicCircuit.DataPersistent {
 				this.tree = new BTree<TField>(table.SnapStore, name, field);
 			}
 
-			public IEnumerable<RowId> Find(TField value, int version) {
-				return this.tree.Select(value, version);
-			}
+			public IEnumerable<RowId> Find(TField value, int version) => this.tree.Select(value, version);
 
-			public IEnumerable<RowId> Find(TField min, TField max, int version) {
-				return this.tree.Select(min, max, version);
-			}
+			public IEnumerable<RowId> Find(TField min, TField max, int version) => this.tree.Select(min, max, version);
 
-			public bool Exists(TField value, int version) {
-				return this.tree.Exists(value, version);
-			}
+			public bool Exists(TField value, int version) => this.tree.Exists(value, version);
 
-			public TField MinimumValue(int version) {
-				return this.tree.MinimumValue(version);
-			}
+			public TField MinimumValue(int version) => this.tree.MinimumValue(version);
 
-			public TField MaximumValue(int version) {
-				return this.tree.MaximumValue(version);
-			}
+			public TField MaximumValue(int version) => this.tree.MaximumValue(version);
 
-			public void Insert(RowId rowId) {
-				this.tree.Insert(this.table.GetLatestField<TField>(rowId, this.field), rowId);
-			}
+			public void Insert(RowId rowId) => this.tree.Insert(this.table.GetLatestField<TField>(rowId, this.field), rowId);
 
-			public void Delete(RowId rowId) {
-				this.tree.Remove(this.table.GetLatestField<TField>(rowId, this.field), rowId);
-			}
+			public void Delete(RowId rowId) => this.tree.Remove(this.table.GetLatestField<TField>(rowId, this.field), rowId);
 
-			public bool IsUnique { get { return false; } }
+			public bool IsUnique => false;
 			public int Timestamp { get; set; }
-			public IField<TRecord> Field { get { return this.field; } }
+			public IField<TRecord> Field => this.field;
 
-			public bool IsEmpty(int version) {
-				return this.tree.IsEmpty(version);
-			}
+			public bool IsEmpty(int version) => this.tree.IsEmpty(version);
 		}
 	}
 }

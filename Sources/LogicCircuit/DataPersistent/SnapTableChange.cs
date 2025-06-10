@@ -10,13 +10,9 @@ namespace LogicCircuit.DataPersistent {
 			this.changeIndex = changeIndex;
 		}
 
-		public RowId RowId {
-			get { return this.changeData.RowId(this.changeIndex); }
-		}
+		public RowId RowId => this.changeData.RowId(this.changeIndex);
 
-		public SnapTableAction Action {
-			get { return this.changeData.Action(this.changeIndex); }
-		}
+		public SnapTableAction Action => this.changeData.Action(this.changeIndex);
 
 		public void GetNewData(out TRecord data) {
 			if(this.Action == SnapTableAction.Delete) {

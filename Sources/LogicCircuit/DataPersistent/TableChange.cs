@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 
 namespace LogicCircuit.DataPersistent {
 	/// <summary>
@@ -18,22 +17,17 @@ namespace LogicCircuit.DataPersistent {
 		/// <summary>
 		/// Gets row id of the change
 		/// </summary>
-		public RowId RowId {
-			get { return this.rowId; }
-		}
+		public RowId RowId => this.rowId;
 
 		/// <summary>
 		/// Gets change action
 		/// </summary>
-		public SnapTableAction Action {
-			get { return this.changeData.Action(this.rowId); }
-		}
+		public SnapTableAction Action => this.changeData.Action(this.rowId);
 
 		/// <summary>
 		/// Gets new version of the data
 		/// </summary>
 		/// <param name="data"></param>
-		[SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "0#")]
 		public void GetNewData(out TRecord data) {
 			if(this.Action == SnapTableAction.Delete) {
 				throw new InvalidOperationException(Properties.Resources.ErrorWrongNewData);
@@ -45,7 +39,6 @@ namespace LogicCircuit.DataPersistent {
 		/// Gets old version of the data
 		/// </summary>
 		/// <param name="data"></param>
-		[SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "0#")]
 		public void GetOldData(out TRecord data) {
 			if(this.Action == SnapTableAction.Insert) {
 				throw new InvalidOperationException(Properties.Resources.ErrorWrongOldRow);
@@ -59,7 +52,6 @@ namespace LogicCircuit.DataPersistent {
 		/// <typeparam name="TField"></typeparam>
 		/// <param name="field"></param>
 		/// <returns></returns>
-		[SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "NewField")]
 		public TField GetNewField<TField>(IField<TRecord, TField> field) {
 			if(this.Action == SnapTableAction.Delete) {
 				throw new InvalidOperationException(Properties.Resources.ErrorWrongNewData);
@@ -73,7 +65,6 @@ namespace LogicCircuit.DataPersistent {
 		/// <typeparam name="TField"></typeparam>
 		/// <param name="field"></param>
 		/// <returns></returns>
-		[SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "OldField")]
 		public TField GetOldField<TField>(IField<TRecord, TField> field) {
 			if(this.Action == SnapTableAction.Insert) {
 				throw new InvalidOperationException(Properties.Resources.ErrorWrongOldRow);
@@ -90,16 +81,10 @@ namespace LogicCircuit.DataPersistent {
 
 		public bool Equals(TableChange<TRecord> other) => this.changeData == other.changeData && this.rowId == other.rowId;
 
-		public override int GetHashCode() {
-			return this.changeData.GetHashCode() ^ this.rowId.GetHashCode();
-		}
+		public override int GetHashCode() => this.changeData.GetHashCode() ^ this.rowId.GetHashCode();
 
-		public static bool operator ==(TableChange<TRecord> left, TableChange<TRecord> right) {
-			return left.changeData == right.changeData && left.rowId == right.rowId;
-		}
+		public static bool operator ==(TableChange<TRecord> left, TableChange<TRecord> right) => left.changeData == right.changeData && left.rowId == right.rowId;
 
-		public static bool operator !=(TableChange<TRecord> left, TableChange<TRecord> right) {
-			return left.changeData != right.changeData || left.rowId != right.rowId;
-		}
+		public static bool operator !=(TableChange<TRecord> left, TableChange<TRecord> right) => left.changeData != right.changeData || left.rowId != right.rowId;
 	}
 }

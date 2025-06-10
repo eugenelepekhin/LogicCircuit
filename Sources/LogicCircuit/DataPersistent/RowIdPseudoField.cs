@@ -8,7 +8,7 @@ namespace LogicCircuit.DataPersistent {
 		internal sealed class RowIdPseudoField : IField<TRecord, RowId> {
 			public static readonly RowIdPseudoField Field = new RowIdPseudoField();
 
-			public RowId DefaultValue { get { return RowId.Empty; } }
+			public RowId DefaultValue => RowId.Empty;
 
 			public RowId GetValue(ref TRecord record) {
 				throw new InvalidOperationException();
@@ -18,20 +18,18 @@ namespace LogicCircuit.DataPersistent {
 				throw new InvalidOperationException();
 			}
 
-			public string Name { get { return "RowIdPseudoField"; } }
+			public string Name => "RowIdPseudoField";
 
 			public int Order {
-				get { return -1; }
-				set { throw new InvalidOperationException(); }
+				get => -1;
+				set => throw new InvalidOperationException();
 			}
 
 			public int Compare(ref TRecord data1, ref TRecord data2) {
 				throw new InvalidOperationException();
 			}
 
-			public int Compare(RowId x, RowId y) {
-				return x.CompareTo(y);
-			}
+			public int Compare(RowId x, RowId y) => x.CompareTo(y);
 		}
 	}
 }

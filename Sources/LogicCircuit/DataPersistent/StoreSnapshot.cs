@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 
 namespace LogicCircuit.DataPersistent {
 	/// <summary>
@@ -36,7 +35,7 @@ namespace LogicCircuit.DataPersistent {
 		/// Gets or sets version of the snapshot.
 		/// </summary>
 		public int Version {
-			get { return this.snapshotVersion; }
+			get => this.snapshotVersion;
 			set {
 				if(this.SnapStore.Editor == this) {
 					throw new InvalidOperationException(Properties.Resources.ErrorInvalidUpgrade);
@@ -54,7 +53,7 @@ namespace LogicCircuit.DataPersistent {
 		/// <summary>
 		/// Gets latest available version this store can be upgraded to
 		/// </summary>
-		public int LatestAvailableVersion { get { return this.SnapStore.CompletedVersion; } }
+		public int LatestAvailableVersion => this.SnapStore.CompletedVersion;
 
 		/// <summary>
 		/// True if PrepareCommit is successful
@@ -81,7 +80,6 @@ namespace LogicCircuit.DataPersistent {
 		/// Builds new snapshot looking the same data as a provided one
 		/// </summary>
 		/// <param name="store"></param>
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0")]
 		public StoreSnapshot(StoreSnapshot store) : this(store.SnapStore.CheckFrozen()) {
 			foreach(ISnapTable snapTable in this.SnapStore.Tables) {
 				if(snapTable.IsUserTable) {
@@ -115,9 +113,7 @@ namespace LogicCircuit.DataPersistent {
 		/// <summary>
 		/// Gets snapshot of list of table
 		/// </summary>
-		public IEnumerable<ITableSnapshot> Tables {
-			get { return this.table.Values; }
-		}
+		public IEnumerable<ITableSnapshot> Tables => this.table.Values;
 
 		internal void Add(ITableSnapshot tableSnapshot, ISnapTable snapTable) {
 			Debug.Assert(tableSnapshot.StoreSnapshot == this);
@@ -129,15 +125,13 @@ namespace LogicCircuit.DataPersistent {
 		/// <summary>
 		/// Freezes shape of the store.
 		/// </summary>
-		public void FreezeShape() {
-			this.SnapStore.FreezeShape();
-		}
+		public void FreezeShape() => this.SnapStore.FreezeShape();
 
 		/// <summary>
 		/// Gets true if store is frozen for adding new tables and indexes.
 		/// Transaction can be started only on frozen store.
 		/// </summary>
-		public bool IsFrozen { get { return this.SnapStore.IsFrozen; } }
+		public bool IsFrozen => this.SnapStore.IsFrozen;
 
 		/// <summary>
 		/// Upgrades this snapshot to latest available version
@@ -166,7 +160,7 @@ namespace LogicCircuit.DataPersistent {
 		/// <summary>
 		/// Gets true if the store is currently owning a transaction
 		/// </summary>
-		public bool IsEditor { get { return this.SnapStore.Editor == this; } }
+		public bool IsEditor => this.SnapStore.Editor == this;
 
 		/// <summary>
 		/// Tries to starts transaction.
@@ -224,17 +218,13 @@ namespace LogicCircuit.DataPersistent {
 		/// Commits transaction
 		/// </summary>
 		/// <returns>Committed version</returns>
-		public int Commit() {
-			return this.Commit(withOmit: false);
-		}
+		public int Commit() => this.Commit(withOmit: false);
 
 		/// <summary>
 		/// Commits transaction but erases it from undo history
 		/// </summary>
 		/// <returns></returns>
-		public int Omit() {
-			return this.Commit(withOmit: true);
-		}
+		public int Omit() => this.Commit(withOmit: true);
 
 		/// <summary>
 		/// Rolls current transaction back
@@ -251,12 +241,12 @@ namespace LogicCircuit.DataPersistent {
 		/// <summary>
 		/// Returns true if undo can be applied to the data
 		/// </summary>
-		public bool CanUndo { get { return this.SnapStore.CanUndo; } }
+		public bool CanUndo => this.SnapStore.CanUndo;
 
 		/// <summary>
 		/// Returns true if previous undo can be redone
 		/// </summary>
-		public bool CanRedo { get { return this.SnapStore.CanRedo; } }
+		public bool CanRedo => this.SnapStore.CanRedo;
 
 		/// <summary>
 		/// Undoes one transaction
@@ -328,7 +318,6 @@ namespace LogicCircuit.DataPersistent {
 			}
 		}
 
-		[SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed")]
 		private class ChangeEnumerator : IEnumerator<string> {
 			private readonly IEnumerator<ITableSnapshot> enumerator;
 			private readonly int oldVersion;
@@ -350,17 +339,13 @@ namespace LogicCircuit.DataPersistent {
 				return false;
 			}
 
-			public string Current { get { return this.enumerator.Current.Name; } }
+			public string Current => this.enumerator.Current.Name;
 
-			object System.Collections.IEnumerator.Current { get { return this.Current; } }
+			object System.Collections.IEnumerator.Current => this.Current;
 
-			public void Dispose() {
-				this.enumerator.Dispose();
-			}
+			public void Dispose() => this.enumerator.Dispose();
 
-			public void Reset() {
-				throw new NotSupportedException();
-			}
+			public void Reset() => throw new NotSupportedException();
 		}
 	}
 }

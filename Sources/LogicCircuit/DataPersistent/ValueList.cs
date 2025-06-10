@@ -130,10 +130,10 @@ namespace LogicCircuit.DataPersistent {
 
 		public struct Address {
 			private readonly TRow[] page;
-			public TRow[] Page { get { return this.page; } }
+			public TRow[] Page => this.page;
 
 			private readonly int index;
-			public int Index { get { return this.index; } }
+			public int Index => this.index;
 
 			public Address(TRow[] page, int index) {
 				Debug.Assert(page != null && 0 <= index && index < page.Length);

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace LogicCircuit.DataPersistent {
+﻿namespace LogicCircuit.DataPersistent {
 	/// <summary>
 	/// Implements lock-free synchronization primitives.
 	/// </summary>
@@ -20,7 +18,6 @@ namespace LogicCircuit.DataPersistent {
 	/// </remarks>
 	internal static class LockFreeSync {
 		private static volatile int volatileDummy;
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
 		private static int dummy;
 
 		/// <summary>

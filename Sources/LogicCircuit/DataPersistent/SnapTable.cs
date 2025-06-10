@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.Runtime.CompilerServices;
-using System.Windows.Documents;
 
 namespace LogicCircuit.DataPersistent {
 
@@ -49,7 +47,7 @@ namespace LogicCircuit.DataPersistent {
 			/// True if the record is deleted
 			/// </summary>
 			public bool IsDeleted {
-				get { return this.index < 0; }
+				get => this.index < 0;
 				set {
 					// no threading problems here as only one thread can change index
 					if((this.index < 0) != value) {
@@ -61,12 +59,12 @@ namespace LogicCircuit.DataPersistent {
 			/// <summary>
 			/// Row is invalid when it was deleted in the same transaction it was created in which case ~index == -1
 			/// </summary>
-			public bool IsValid { get { return this.index != -1; } }
+			public bool IsValid => this.index != -1;
 
 			/// <summary>
 			/// Combination of log index and IsDeleted flag. Used for passing to the log. to avoid separate setting of index is IsDeleted flag
 			/// </summary>
-			public int RawLogIndex { get { return this.index; } }
+			public int RawLogIndex => this.index;
 		}
 
 		/// <summary>
@@ -92,9 +90,9 @@ namespace LogicCircuit.DataPersistent {
 			/// Combination of log index and IsDeleted flag. Used for getting from Row to avoid separate setting of index is IsDeleted flag
 			/// </summary>
 			public int RawLogIndex {
-				set { this.index = value; }
+				set => this.index = value;
 				#if UnitTestInternal
-					get { return this.index; }
+					get => this.index;
 				#endif
 			}
 
@@ -112,9 +110,7 @@ namespace LogicCircuit.DataPersistent {
 			/// <summary>
 			/// True if the record is deleted
 			/// </summary>
-			public bool IsDeleted {
-				get { return this.index < 0; }
-			}
+			public bool IsDeleted => this.index < 0;
 		}
 
 		/// <summary>
@@ -275,23 +271,20 @@ namespace LogicCircuit.DataPersistent {
 			if(firstChange) {
 				this.snap.PrepareAdd();
 			}
-			RowId rowId;
-			try {} finally {
-				rowId = new RowId(this.table.FixedAllocate());
-				ValueList<Row>.Address rowAddress = this.table.ItemAddress(rowId.Value);
-				rowAddress.Page[rowAddress.Index].Data = data;
-				if(firstChange) {
-					// this is the first change in this transaction
-					Snap point = new Snap() {
-						Version = this.SnapStore.Version,
-						TableSize = this.table.Count,
-						LogSize = this.log.Count
-					};
-					this.snap.FixedAdd(ref point);
-				} else {
-					// this transaction already altered this table
-					snapAddress.Page[snapAddress.Index].TableSize = this.table.Count;
-				}
+			RowId rowId = new RowId(this.table.FixedAllocate());
+			ValueList<Row>.Address rowAddress = this.table.ItemAddress(rowId.Value);
+			rowAddress.Page[rowAddress.Index].Data = data;
+			if(firstChange) {
+				// this is the first change in this transaction
+				Snap point = new Snap() {
+					Version = this.SnapStore.Version,
+					TableSize = this.table.Count,
+					LogSize = this.log.Count
+				};
+				this.snap.FixedAdd(ref point);
+			} else {
+				// this transaction already altered this table
+				snapAddress.Page[snapAddress.Index].TableSize = this.table.Count;
 			}
 			return rowId;
 		}
@@ -401,9 +394,7 @@ namespace LogicCircuit.DataPersistent {
 		/// Returns number of records in the table in the latest version. This version can be not committed yet.
 		/// </summary>
 		/// <returns></returns>
-		public int LatestCount() {
-			return this.table.Count;
-		}
+		public int LatestCount() => this.table.Count;
 
 		/// <summary>
 		/// Updates field of the row
@@ -702,9 +693,7 @@ namespace LogicCircuit.DataPersistent {
 		/// <summary>
 		/// Checks if modifications are allowed i.e. transaction is open
 		/// </summary>
-		private void ValidateModification() {
-			this.SnapStore.ValidateModification();
-		}
+		private void ValidateModification() => this.SnapStore.ValidateModification();
 
 		/// <summary>
 		/// Checks if row at the provided address was not deleted
@@ -752,15 +741,13 @@ namespace LogicCircuit.DataPersistent {
 					TableSize = this.table.Count,
 					LogSize = this.log.Count + 1
 				};
-				try {} finally {
-					int index = this.log.FixedAllocate();
-					ValueList<Log>.Address logAddress = this.log.ItemAddress(index);
-					logAddress.Page[logAddress.Index].Data = row.Data;
-					logAddress.Page[logAddress.Index].RowId = rowId;
-					logAddress.Page[logAddress.Index].RawLogIndex = row.RawLogIndex;
-					row.LogIndex = index;
-					this.snap.FixedAdd(ref point);
-				}
+				int index = this.log.FixedAllocate();
+				ValueList<Log>.Address logAddress = this.log.ItemAddress(index);
+				logAddress.Page[logAddress.Index].Data = row.Data;
+				logAddress.Page[logAddress.Index].RowId = rowId;
+				logAddress.Page[logAddress.Index].RawLogIndex = row.RawLogIndex;
+				row.LogIndex = index;
+				this.snap.FixedAdd(ref point);
 			} else {
 				Debug.Assert(snapAddress.Page[snapAddress.Index].Version == this.SnapStore.Version, "Impossible state: this should be the current transaction");
 				Debug.Assert(snapAddress.Page[snapAddress.Index].TableSize == this.table.Count, "Impossible state: wrong table size");
@@ -772,15 +759,13 @@ namespace LogicCircuit.DataPersistent {
 					// this is the first time the row is updated in this transaction
 					Debug.Assert(snapAddress.Page[snapAddress.Index].LogSize == this.log.Count, "Invalid state: wrong log size");
 					this.log.PrepareAdd();
-					try {} finally {
-						int index = this.log.FixedAllocate();
-						ValueList<Log>.Address logAddress = this.log.ItemAddress(index);
-						logAddress.Page[logAddress.Index].Data = row.Data;
-						logAddress.Page[logAddress.Index].RowId = rowId;
-						logAddress.Page[logAddress.Index].RawLogIndex = row.RawLogIndex;
-						row.LogIndex = index;
-						snapAddress.Page[snapAddress.Index].LogSize = this.log.Count;
-					}
+					int index = this.log.FixedAllocate();
+					ValueList<Log>.Address logAddress = this.log.ItemAddress(index);
+					logAddress.Page[logAddress.Index].Data = row.Data;
+					logAddress.Page[logAddress.Index].RowId = rowId;
+					logAddress.Page[logAddress.Index].RawLogIndex = row.RawLogIndex;
+					row.LogIndex = index;
+					snapAddress.Page[snapAddress.Index].LogSize = this.log.Count;
 				}
 			}
 		}
@@ -821,7 +806,7 @@ namespace LogicCircuit.DataPersistent {
 				}
 			}
 
-			object IEnumerator.Current { get { return this.Current; } }
+			object IEnumerator.Current => this.Current;
 
 			public bool MoveNext() {
 				this.changeIndex = Math.Min(this.changeIndex + 1, this.ChangeCount());

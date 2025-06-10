@@ -20,44 +20,26 @@ namespace LogicCircuit.DataPersistent {
 
 		public bool Equals(RowId other) => this.rowId == other.rowId;
 
-		public override int GetHashCode() {
-			return this.rowId;
-		}
+		public override int GetHashCode() => this.rowId;
 
-		public static bool operator ==(RowId left, RowId right) {
-			return left.rowId == right.rowId;
-		}
+		public static bool operator ==(RowId left, RowId right) => left.rowId == right.rowId;
 
-		public static bool operator !=(RowId left, RowId right) {
-			return left.rowId != right.rowId;
-		}
+		public static bool operator !=(RowId left, RowId right) => left.rowId != right.rowId;
 
-		public bool IsEmpty { get { return this.rowId == -1; } }
+		public bool IsEmpty => this.rowId == -1;
 
-		public int CompareTo(RowId other) {
-			return this.rowId - other.rowId;
-		}
+		public int CompareTo(RowId other) => this.rowId - other.rowId;
 
-		public static bool operator <(RowId left, RowId right) {
-			return left.rowId < right.rowId;
-		}
+		public static bool operator <(RowId left, RowId right) => left.rowId < right.rowId;
 
-		public static bool operator >(RowId left, RowId right) {
-			return left.rowId > right.rowId;
-		}
+		public static bool operator >(RowId left, RowId right) => left.rowId > right.rowId;
 
-		public static bool operator <=(RowId left, RowId right) {
-			return left.rowId <= right.rowId;
-		}
+		public static bool operator <=(RowId left, RowId right) => left.rowId <= right.rowId;
 
-		public static bool operator >=(RowId left, RowId right) {
-			return left.rowId >= right.rowId;
-		}
+		public static bool operator >=(RowId left, RowId right) => left.rowId >= right.rowId;
 
-		internal int Value { get { return this.rowId; } }
+		internal int Value => this.rowId;
 
-		public override string ToString() {
-			return string.Format(System.Globalization.CultureInfo.InvariantCulture, "Row[{0}]", this.rowId);
-		}
+		public override string ToString() => string.Format(System.Globalization.CultureInfo.InvariantCulture, "Row[{0}]", this.rowId);
 	}
 }

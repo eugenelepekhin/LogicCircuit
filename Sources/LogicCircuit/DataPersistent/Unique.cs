@@ -12,11 +12,11 @@ namespace LogicCircuit.DataPersistent {
 
 			private int hash;
 			public int Hash {
-				get { return this.hash & int.MaxValue; }
-				set { this.hash = (value | (this.hash & ~int.MaxValue)); }
+				get => this.hash & int.MaxValue;
+				set => this.hash = value | (this.hash & ~int.MaxValue);
 			}
 			public bool HasCollision {
-				get { return (this.hash & ~int.MaxValue) != 0; }
+				get => (this.hash & ~int.MaxValue) != 0;
 				set {
 					if(value) {
 						this.hash |= ~int.MaxValue;
@@ -29,15 +29,15 @@ namespace LogicCircuit.DataPersistent {
 			private int index;
 
 			public RowId RowId {
-				get { return new RowId(this.index - 1); }
-				set { this.index = value.Value + 1; }
+				get => new RowId(this.index - 1);
+				set => this.index = value.Value + 1;
 			}
 
-			public bool IsEmpty { get { return this.index == 0; } }
-			public bool IsDeleted { get { return this.index < 0; } }
-			public bool IsFree { get { return this.index <= 0; } }
+			public bool IsEmpty => this.index == 0;
+			public bool IsDeleted => this.index < 0;
+			public bool IsFree => this.index <= 0;
 
-			public bool IsDirty { get { return this.hash != 0 || this.index != 0; } }
+			public bool IsDirty => this.hash != 0 || this.index != 0;
 
 			#if DEBUG
 				public override string ToString() {
@@ -60,14 +60,14 @@ namespace LogicCircuit.DataPersistent {
 				this.size = size;
 			}
 
-			public int Code { get { return this.seed; } }
+			public int Code => this.seed;
 
 			public RowId Bucket(int iteration) {
 				Debug.Assert(iteration < this.size);
 				return new RowId((int)(((long)this.seed + (long)iteration * (long)this.factor) % (long)this.size));
 			}
 
-			public int Size { get { return this.size; } }
+			public int Size => this.size;
 		}
 
 		private class ValueField : IField<Bucket, TField> {
@@ -75,78 +75,46 @@ namespace LogicCircuit.DataPersistent {
 			public ValueField(IComparer<TField> comparer) {
 				this.comparer = comparer;
 			}
-			public string Name { get { return "Value"; } }
+			public string Name => "Value";
 			public int Order { get; set; }
-			public TField DefaultValue { get { return default!; } }
-			public TField GetValue(ref Bucket record) {
-				return record.Value;
-			}
-			public void SetValue(ref Bucket record, TField value) {
-				record.Value = value;
-			}
-			public int Compare(ref Bucket data1, ref Bucket data2) {
-				return this.comparer.Compare(data1.Value, data2.Value);
-			}
-			public int Compare(TField? x, TField? y) {
-				return this.comparer.Compare(x, y);
-			}
+			public TField DefaultValue => default!;
+			public TField GetValue(ref Bucket record) => record.Value;
+			public void SetValue(ref Bucket record, TField value) => record.Value = value;
+			public int Compare(ref Bucket data1, ref Bucket data2) => this.comparer.Compare(data1.Value, data2.Value);
+			public int Compare(TField? x, TField? y) => this.comparer.Compare(x, y);
 		}
 
 		private class RowIdField : IField<Bucket, RowId> {
 			public static readonly RowIdField Field = new RowIdField();
-			public string Name { get { return "RowId"; } }
+			public string Name => "RowId";
 			public int Order { get; set; }
-			public RowId DefaultValue { get { return RowId.Empty; } }
-			public RowId GetValue(ref Bucket record) {
-				return record.RowId;
-			}
-			public void SetValue(ref Bucket record, RowId value) {
-				record.RowId = value;
-			}
-			public int Compare(ref Bucket data1, ref Bucket data2) {
-				return data1.RowId.Value - data2.RowId.Value;
-			}
-			public int Compare(RowId x, RowId y) {
-				return x.Value - y.Value;
-			}
+			public RowId DefaultValue => RowId.Empty;
+			public RowId GetValue(ref Bucket record) => record.RowId;
+			public void SetValue(ref Bucket record, RowId value) => record.RowId = value;
+			public int Compare(ref Bucket data1, ref Bucket data2) => data1.RowId.Value - data2.RowId.Value;
+			public int Compare(RowId x, RowId y) => x.Value - y.Value;
 		}
 
 		private class HashField : IField<Bucket, int> {
 			public static readonly HashField Field = new HashField();
-			public string Name { get { return "Hash"; } }
+			public string Name => "Hash";
 			public int Order { get; set; }
-			public int DefaultValue { get { return 0; } }
-			public int GetValue(ref Bucket record) {
-				return record.Hash;
-			}
-			public void SetValue(ref Bucket record, int value) {
-				record.Hash = value;
-			}
-			public int Compare(ref Bucket data1, ref Bucket data2) {
-				return data1.Hash - data2.Hash;
-			}
-			public int Compare(int x, int y) {
-				return x - y;
-			}
+			public int DefaultValue => 0;
+			public int GetValue(ref Bucket record) => record.Hash;
+			public void SetValue(ref Bucket record, int value) => record.Hash = value;
+			public int Compare(ref Bucket data1, ref Bucket data2) => data1.Hash - data2.Hash;
+			public int Compare(int x, int y) => x - y;
 		}
 
 		private class CollisionField : IField<Bucket, bool> {
 			public static readonly CollisionField Field = new CollisionField();
-			public bool DefaultValue { get { return false; } }
-			public bool GetValue(ref Bucket record) {
-				return record.HasCollision;
-			}
-			public void SetValue(ref Bucket record, bool value) {
-				record.HasCollision = value;
-			}
-			public string Name { get { return "HasCollision"; } }
+			public bool DefaultValue => false;
+			public bool GetValue(ref Bucket record) => record.HasCollision;
+			public void SetValue(ref Bucket record, bool value) => record.HasCollision = value;
+			public string Name => "HasCollision";
 			public int Order { get; set; }
-			public int Compare(ref Bucket data1, ref Bucket data2) {
-				return data1.HasCollision.CompareTo(data2.HasCollision);
-			}
-			public int Compare(bool x, bool y) {
-				return x.CompareTo(y);
-			}
+			public int Compare(ref Bucket data1, ref Bucket data2) => data1.HasCollision.CompareTo(data2.HasCollision);
+			public int Compare(bool x, bool y) => x.CompareTo(y);
 		}
 
 		private const int MinSize = 7;
@@ -154,7 +122,7 @@ namespace LogicCircuit.DataPersistent {
 		private readonly ValueField valueField;
 		private readonly IntArray variables;
 		private readonly float loadFactor;
-		public SnapStore SnapStore { get { return this.table.SnapStore; } }
+		public SnapStore SnapStore => this.table.SnapStore;
 
 		public Unique(SnapStore store, string name, IComparer<TField> comparer, float loadFactor) {
 			if(!(loadFactor >= 0.1f && loadFactor <= 1.0f)) {
@@ -282,7 +250,7 @@ namespace LogicCircuit.DataPersistent {
 			return false;
 		}
 
-		private int MaxLoadSize { get { return (int)(this.loadFactor * this.Size(this.SnapStore.Version)); } }
+		private int MaxLoadSize => (int)(this.loadFactor * this.Size(this.SnapStore.Version));
 
 		private void Expand() {
 			int newSize = this.Size(this.SnapStore.Version) * 2;

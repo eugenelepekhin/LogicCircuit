@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 
 namespace LogicCircuit.DataPersistent {
 
-	[SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
 	partial class TableSnapshot<TRecord> {
 		private struct Composite<T1, T2> {
 			public T1 t1;
@@ -25,9 +23,7 @@ namespace LogicCircuit.DataPersistent {
 				this.Name = f1.Name + "." + f2.Name;
 			}
 
-			public Composite<T1, T2> DefaultValue {
-				get { return new Composite<T1, T2>() { t1 = this.f1.DefaultValue, t2 = this.f2.DefaultValue }; }
-			}
+			public Composite<T1, T2> DefaultValue => new Composite<T1, T2>() { t1 = this.f1.DefaultValue, t2 = this.f2.DefaultValue };
 
 			public Composite<T1, T2> GetValue(ref TRecord record) {
 				return new Composite<T1, T2>() {
@@ -36,15 +32,13 @@ namespace LogicCircuit.DataPersistent {
 				};
 			}
 
-			public void SetValue(ref TRecord record, Composite<T1, T2> value) {
-				throw new InvalidOperationException();
-			}
+			public void SetValue(ref TRecord record, Composite<T1, T2> value) => throw new InvalidOperationException();
 
 			public string Name { get; private set; }
 
 			public int Order {
-				get { return -1; }
-				set { throw new InvalidOperationException(); }
+				get => -1;
+				set => throw new InvalidOperationException();
 			}
 
 			public int Compare(ref TRecord data1, ref TRecord data2) {
@@ -63,13 +57,9 @@ namespace LogicCircuit.DataPersistent {
 				return result;
 			}
 
-			public bool ConsistOf(IField<TRecord> field1, IField<TRecord> field2) {
-				return this.f1 == field1 && this.f2 == field2;
-			}
+			public bool ConsistOf(IField<TRecord> field1, IField<TRecord> field2) => this.f1 == field1 && this.f2 == field2;
 
-			public bool ConsistOf(IField<TRecord> field1, IField<TRecord> field2, IField<TRecord> field3) {
-				return false;
-			}
+			public bool ConsistOf(IField<TRecord> field1, IField<TRecord> field2, IField<TRecord> field3) => false;
 		}
 	}
 }

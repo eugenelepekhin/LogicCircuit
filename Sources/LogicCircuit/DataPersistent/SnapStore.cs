@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Threading;
 
 namespace LogicCircuit.DataPersistent {
@@ -45,27 +44,27 @@ namespace LogicCircuit.DataPersistent {
 		/// <summary>
 		/// Gets current latest version of the store.
 		/// </summary>
-		public int Version { get { return this.version.Count; } }
+		public int Version => this.version.Count;
 
 		/// <summary>
 		/// Gets collection of all tables
 		/// </summary>
-		public IEnumerable<ISnapTable> Tables { get { return this.table.Values; } }
+		public IEnumerable<ISnapTable> Tables => this.table.Values;
 
 		/// <summary>
 		/// If transaction is started then contains the Owner of the transaction, otherwise null.
 		/// </summary>
-		public StoreSnapshot? Editor { get { return this.editor; } }
+		public StoreSnapshot? Editor => this.editor;
 
 		/// <summary>
 		/// Returns true if undo operation is available.
 		/// </summary>
-		public bool CanUndo { get { return this.editor == null && 0 < this.RevertVersion(TransactionType.Undo); } }
+		public bool CanUndo => this.editor == null && 0 < this.RevertVersion(TransactionType.Undo);
 
 		/// <summary>
 		/// Returns true if redo operation is available
 		/// </summary>
-		public bool CanRedo { get { return this.editor == null && 0 < this.RevertVersion(TransactionType.Redo); } }
+		public bool CanRedo => this.editor == null && 0 < this.RevertVersion(TransactionType.Redo);
 
 		/// <summary>
 		/// Searches for table by name.
@@ -142,13 +141,12 @@ namespace LogicCircuit.DataPersistent {
 			int transaction = 0;
 			// any value of oldEditor other then null means this thread does not own the transaction
 			// null means this thread is exclusive owner of transaction
-			StoreSnapshot oldEditor = newEditor;
+			StoreSnapshot? oldEditor = newEditor;
 			bool success = false;
 
 			try {
-				try {} finally {
-					oldEditor = Interlocked.CompareExchange<StoreSnapshot>(ref this.editor!, newEditor, null!);
-				}
+				oldEditor = Interlocked.CompareExchange(ref this.editor, newEditor, null);
+
 				if(oldEditor == null) {
 					Debug.Assert(this.editor == newEditor, "Expecting to be current editor");
 					Debug.Assert(this.editorThread == null, "Editor thread should be null here");
@@ -179,9 +177,7 @@ namespace LogicCircuit.DataPersistent {
 		/// </summary>
 		/// <param name="storeSnapshot">Owner of the transaction</param>
 		/// <returns>true if the transaction started, false if other transaction is in progress</returns>
-		public bool StartTransaction(StoreSnapshot storeSnapshot) {
-			return 0 < this.StartTransaction(storeSnapshot, TransactionType.Edit);
-		}
+		public bool StartTransaction(StoreSnapshot storeSnapshot) => 0 < this.StartTransaction(storeSnapshot, TransactionType.Edit);
 
 		/// <summary>
 		///Commits current transaction. Optionally if <paramref name="withOmit"/> set to true erases transaction from undo history
@@ -191,17 +187,17 @@ namespace LogicCircuit.DataPersistent {
 		public int Commit(bool withOmit) {
 			this.ValidateModification();
 			int v = this.Version;
-			try {} finally {
-				if(withOmit) {
-					ValueList<TransactionType>.Address address = this.version.ItemAddress(this.version.Count - 1);
-					Debug.Assert(address.Page[address.Index] == TransactionType.Edit, "Only edit transactions can be omitted");
-					address.Page[address.Index] = TransactionType.Omit;
-				}
-				this.CompletedVersion = v;
-				this.editorThread = null;
-				this.editor = null;
-				LockFreeSync.WriteBarrier();
+
+			if(withOmit) {
+				ValueList<TransactionType>.Address address = this.version.ItemAddress(this.version.Count - 1);
+				Debug.Assert(address.Page[address.Index] == TransactionType.Edit, "Only edit transactions can be omitted");
+				address.Page[address.Index] = TransactionType.Omit;
 			}
+			this.CompletedVersion = v;
+			this.editorThread = null;
+			this.editor = null;
+			LockFreeSync.WriteBarrier();
+
 			this.Committed?.Invoke(this, EventArgs.Empty);
 			return v;
 		}
@@ -211,17 +207,15 @@ namespace LogicCircuit.DataPersistent {
 		/// </summary>
 		public void Rollback() {
 			this.ValidateModification();
-			try { } finally {
-				foreach(ISnapTable snapTable in this.Tables) {
-					snapTable.Rollback();
-				}
-				ValueList<TransactionType>.Address address = this.version.ItemAddress(this.version.Count - 1);
-				address.Page[address.Index] = TransactionType.Omit;
-				this.CompletedVersion = this.Version;
-				this.editorThread = null;
-				this.editor = null;
-				LockFreeSync.WriteBarrier();
+			foreach(ISnapTable snapTable in this.Tables) {
+				snapTable.Rollback();
 			}
+			ValueList<TransactionType>.Address address = this.version.ItemAddress(this.version.Count - 1);
+			address.Page[address.Index] = TransactionType.Omit;
+			this.CompletedVersion = this.Version;
+			this.editorThread = null;
+			this.editor = null;
+			LockFreeSync.WriteBarrier();
 		}
 
 		/// <summary>

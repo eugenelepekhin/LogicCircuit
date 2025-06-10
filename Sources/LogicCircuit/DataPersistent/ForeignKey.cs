@@ -18,12 +18,10 @@ namespace LogicCircuit.DataPersistent {
 			this.rowId = rowId;
 		}
 
-		public IChildTable Table { get { return this.table; } }
-		public RowId RowId { get { return this.rowId; } }
+		public IChildTable Table => this.table;
+		public RowId RowId => this.rowId;
 
-		public bool Equals(ChildRow other) {
-			return this.table == other.table && this.rowId == other.rowId;
-		}
+		public bool Equals(ChildRow other) => this.table == other.table && this.rowId == other.rowId;
 
 		public override bool Equals(object? obj) {
 			if(obj is ChildRow) {
@@ -32,14 +30,10 @@ namespace LogicCircuit.DataPersistent {
 			return false;
 		}
 
-		public override int GetHashCode() {
-			return this.table.GetHashCode() ^ this.rowId.Value;
-		}
+		public override int GetHashCode() => this.table.GetHashCode() ^ this.rowId.Value;
 
 		#if DEBUG
-			public override string ToString() {
-				return string.Format(System.Globalization.CultureInfo.InvariantCulture, "<Table={0}, {1}>", ((ITableSnapshot)this.table).Name, this.rowId.ToString());
-			}
+			public override string ToString() => string.Format(System.Globalization.CultureInfo.InvariantCulture, "<Table={0}, {1}>", ((ITableSnapshot)this.table).Name, this.rowId.ToString());
 		#endif
 	}
 
