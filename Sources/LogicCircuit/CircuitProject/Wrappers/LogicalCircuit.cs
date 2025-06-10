@@ -54,6 +54,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<LogicalCircuitData>.SetTextValue(ref LogicalCircuitData data, string text) {
 				data.LogicalCircuitId = new Guid(text);
 			}
+			bool IFieldSerializer<LogicalCircuitData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Name field
@@ -89,6 +91,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<LogicalCircuitData>.SetTextValue(ref LogicalCircuitData data, string text) {
 				data.Name = text;
 			}
+			bool IFieldSerializer<LogicalCircuitData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Notation field
@@ -124,6 +128,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<LogicalCircuitData>.SetTextValue(ref LogicalCircuitData data, string text) {
 				data.Notation = text;
 			}
+			bool IFieldSerializer<LogicalCircuitData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Note field
@@ -159,6 +165,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<LogicalCircuitData>.SetTextValue(ref LogicalCircuitData data, string text) {
 				data.Note = text;
 			}
+			bool IFieldSerializer<LogicalCircuitData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Category field
@@ -194,6 +202,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<LogicalCircuitData>.SetTextValue(ref LogicalCircuitData data, string text) {
 				data.Category = text;
 			}
+			bool IFieldSerializer<LogicalCircuitData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the CircuitShape field
@@ -229,6 +239,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<LogicalCircuitData>.SetTextValue(ref LogicalCircuitData data, string text) {
 				data.CircuitShape = EnumHelper.Parse<CircuitShape>(text, this.DefaultValue);
 			}
+			bool IFieldSerializer<LogicalCircuitData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Validators field
@@ -264,6 +276,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<LogicalCircuitData>.SetTextValue(ref LogicalCircuitData data, string text) {
 				data.Validators = text;
 			}
+			bool IFieldSerializer<LogicalCircuitData>.WasWritten { get; set; }
+
 		}
 
 		// Special field used to access items wrapper of this record from record.

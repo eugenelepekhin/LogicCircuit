@@ -1,13 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<lc:CircuitProject xmlns:lc="http://LogicCircuit.net/2.0.0.12/CircuitProject.xsd">
-	<lc:Project>
-		<lc:ProjectId>{0}</lc:ProjectId>
-		<lc:Name>{1}</lc:Name>
-		<lc:LogicalCircuitId>{2}</lc:LogicalCircuitId>
-	</lc:Project>
-	<lc:LogicalCircuit>
-		<lc:LogicalCircuitId>{2}</lc:LogicalCircuitId>
-		<lc:Name>{3}</lc:Name>
-		<lc:Notation>{4}</lc:Notation>
-	</lc:LogicalCircuit>
-</lc:CircuitProject>
+<CircuitProject xmlns="http://LogicCircuit.net/2.0.0.14/CircuitProject.xsd">
+	<Project ProjectId="{0}" Name="{1}" LogicalCircuitId="{2}"/>
+	<LogicalCircuit LogicalCircuitId="{2}" Name="{3}" Notation="{4}"/>
+</CircuitProject>

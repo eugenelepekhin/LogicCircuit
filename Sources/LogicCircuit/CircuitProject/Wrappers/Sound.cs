@@ -51,6 +51,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<SoundData>.SetTextValue(ref SoundData data, string text) {
 				data.SoundId = new Guid(text);
 			}
+			bool IFieldSerializer<SoundData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the PinSide field
@@ -86,6 +88,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<SoundData>.SetTextValue(ref SoundData data, string text) {
 				data.PinSide = EnumHelper.Parse<PinSide>(text, this.DefaultValue);
 			}
+			bool IFieldSerializer<SoundData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Notation field
@@ -121,6 +125,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<SoundData>.SetTextValue(ref SoundData data, string text) {
 				data.Notation = text;
 			}
+			bool IFieldSerializer<SoundData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Note field
@@ -156,6 +162,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<SoundData>.SetTextValue(ref SoundData data, string text) {
 				data.Note = text;
 			}
+			bool IFieldSerializer<SoundData>.WasWritten { get; set; }
+
 		}
 
 		// Special field used to access items wrapper of this record from record.

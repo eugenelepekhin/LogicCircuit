@@ -55,6 +55,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<TextNoteData>.SetTextValue(ref TextNoteData data, string text) {
 				data.TextNoteId = new Guid(text);
 			}
+			bool IFieldSerializer<TextNoteData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the LogicalCircuitId field
@@ -90,6 +92,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<TextNoteData>.SetTextValue(ref TextNoteData data, string text) {
 				data.LogicalCircuitId = new Guid(text);
 			}
+			bool IFieldSerializer<TextNoteData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the X field
@@ -125,6 +129,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<TextNoteData>.SetTextValue(ref TextNoteData data, string text) {
 				data.X = int.Parse(text, CultureInfo.InvariantCulture);
 			}
+			bool IFieldSerializer<TextNoteData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Y field
@@ -160,6 +166,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<TextNoteData>.SetTextValue(ref TextNoteData data, string text) {
 				data.Y = int.Parse(text, CultureInfo.InvariantCulture);
 			}
+			bool IFieldSerializer<TextNoteData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Width field
@@ -195,6 +203,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<TextNoteData>.SetTextValue(ref TextNoteData data, string text) {
 				data.Width = int.Parse(text, CultureInfo.InvariantCulture);
 			}
+			bool IFieldSerializer<TextNoteData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Height field
@@ -230,6 +240,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<TextNoteData>.SetTextValue(ref TextNoteData data, string text) {
 				data.Height = int.Parse(text, CultureInfo.InvariantCulture);
 			}
+			bool IFieldSerializer<TextNoteData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Note field
@@ -265,6 +277,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<TextNoteData>.SetTextValue(ref TextNoteData data, string text) {
 				data.Note = text;
 			}
+			bool IFieldSerializer<TextNoteData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Rotation field
@@ -300,6 +314,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<TextNoteData>.SetTextValue(ref TextNoteData data, string text) {
 				data.Rotation = EnumHelper.Parse<Rotation>(text, this.DefaultValue);
 			}
+			bool IFieldSerializer<TextNoteData>.WasWritten { get; set; }
+
 		}
 
 		// Special field used to access items wrapper of this record from record.

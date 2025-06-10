@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Store xmlns="clr-namespace:ItemWrapper.Generator;assembly=ItemWrapper.Generator"
 	Namespace="LogicCircuit" Name="CircuitProject"
-	PersistencePrefix="lc" PersistenceNamespace="http://LogicCircuit.net/2.0.0.13/CircuitProject.xsd"
+	PersistenceNamespace="http://LogicCircuit.net/2.0.0.14/CircuitProject.xsd"
 >
 
 	<!--
@@ -25,6 +25,7 @@
 		Version 2.0.0.11 - LogicalCircuit field IsDisplay replaced with CircuitShape.
 		Version 2.0.0.12 - Adding two keyboard variants to sensor
 		Version 2.0.0.13 - Adding pin side to probes, adding two sensor types - sequential and clock
+		Version 2.0.0.14 - Making use of XML attributes and default name space prefix to reduce size of the file.
 	-->
 
 	<Table Name="Project">

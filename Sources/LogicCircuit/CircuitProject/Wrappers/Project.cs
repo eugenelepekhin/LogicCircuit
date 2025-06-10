@@ -66,6 +66,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<ProjectData>.SetTextValue(ref ProjectData data, string text) {
 				data.ProjectId = new Guid(text);
 			}
+			bool IFieldSerializer<ProjectData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Name field
@@ -101,6 +103,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<ProjectData>.SetTextValue(ref ProjectData data, string text) {
 				data.Name = text;
 			}
+			bool IFieldSerializer<ProjectData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Note field
@@ -136,6 +140,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<ProjectData>.SetTextValue(ref ProjectData data, string text) {
 				data.Note = text;
 			}
+			bool IFieldSerializer<ProjectData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Zoom field
@@ -171,6 +177,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<ProjectData>.SetTextValue(ref ProjectData data, string text) {
 				data.Zoom = double.Parse(text, CultureInfo.InvariantCulture);
 			}
+			bool IFieldSerializer<ProjectData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Frequency field
@@ -206,6 +214,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<ProjectData>.SetTextValue(ref ProjectData data, string text) {
 				data.Frequency = int.Parse(text, CultureInfo.InvariantCulture);
 			}
+			bool IFieldSerializer<ProjectData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the IsMaximumSpeed field
@@ -241,6 +251,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<ProjectData>.SetTextValue(ref ProjectData data, string text) {
 				data.IsMaximumSpeed = bool.Parse(text);
 			}
+			bool IFieldSerializer<ProjectData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the LogicalCircuitId field
@@ -276,6 +288,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<ProjectData>.SetTextValue(ref ProjectData data, string text) {
 				data.LogicalCircuitId = new Guid(text);
 			}
+			bool IFieldSerializer<ProjectData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the StartupCircuitId field
@@ -311,6 +325,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<ProjectData>.SetTextValue(ref ProjectData data, string text) {
 				data.StartupCircuitId = new Guid(text);
 			}
+			bool IFieldSerializer<ProjectData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the CategoryTextNoteCollapsed field
@@ -346,6 +362,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<ProjectData>.SetTextValue(ref ProjectData data, string text) {
 				data.CategoryTextNoteCollapsed = bool.Parse(text);
 			}
+			bool IFieldSerializer<ProjectData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the CategoryInputOutputCollapsed field
@@ -381,6 +399,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<ProjectData>.SetTextValue(ref ProjectData data, string text) {
 				data.CategoryInputOutputCollapsed = bool.Parse(text);
 			}
+			bool IFieldSerializer<ProjectData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the CategoryPrimitivesCollapsed field
@@ -416,6 +436,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<ProjectData>.SetTextValue(ref ProjectData data, string text) {
 				data.CategoryPrimitivesCollapsed = bool.Parse(text);
 			}
+			bool IFieldSerializer<ProjectData>.WasWritten { get; set; }
+
 		}
 
 		// Special field used to access items wrapper of this record from record.

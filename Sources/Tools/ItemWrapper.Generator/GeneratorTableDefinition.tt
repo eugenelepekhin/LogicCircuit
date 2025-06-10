@@ -124,6 +124,8 @@ foreach(Column column in this.Table.Columns) {
 			void IFieldSerializer<<#=this.Table.Name#>Data>.SetTextValue(ref <#=this.Table.Name#>Data data, string text) {
 				data.<#=column.Name#> = <#=parse#>;
 			}
+			bool IFieldSerializer<<#=this.Table.Name#>Data>.WasWritten { get; set; }
+
 <#	}#>
 		}
 <#}#>

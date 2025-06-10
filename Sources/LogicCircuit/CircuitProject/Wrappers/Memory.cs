@@ -64,6 +64,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<MemoryData>.SetTextValue(ref MemoryData data, string text) {
 				data.MemoryId = new Guid(text);
 			}
+			bool IFieldSerializer<MemoryData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Writable field
@@ -99,6 +101,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<MemoryData>.SetTextValue(ref MemoryData data, string text) {
 				data.Writable = bool.Parse(text);
 			}
+			bool IFieldSerializer<MemoryData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the WriteOn1 field
@@ -134,6 +138,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<MemoryData>.SetTextValue(ref MemoryData data, string text) {
 				data.WriteOn1 = bool.Parse(text);
 			}
+			bool IFieldSerializer<MemoryData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the OnStart field
@@ -169,6 +175,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<MemoryData>.SetTextValue(ref MemoryData data, string text) {
 				data.OnStart = EnumHelper.Parse<MemoryOnStart>(text, this.DefaultValue);
 			}
+			bool IFieldSerializer<MemoryData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the AddressBitWidth field
@@ -204,6 +212,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<MemoryData>.SetTextValue(ref MemoryData data, string text) {
 				data.AddressBitWidth = int.Parse(text, CultureInfo.InvariantCulture);
 			}
+			bool IFieldSerializer<MemoryData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the DataBitWidth field
@@ -239,6 +249,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<MemoryData>.SetTextValue(ref MemoryData data, string text) {
 				data.DataBitWidth = int.Parse(text, CultureInfo.InvariantCulture);
 			}
+			bool IFieldSerializer<MemoryData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the DualPort field
@@ -274,6 +286,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<MemoryData>.SetTextValue(ref MemoryData data, string text) {
 				data.DualPort = bool.Parse(text);
 			}
+			bool IFieldSerializer<MemoryData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Data field
@@ -309,6 +323,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<MemoryData>.SetTextValue(ref MemoryData data, string text) {
 				data.Data = text;
 			}
+			bool IFieldSerializer<MemoryData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Note field
@@ -344,6 +360,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<MemoryData>.SetTextValue(ref MemoryData data, string text) {
 				data.Note = text;
 			}
+			bool IFieldSerializer<MemoryData>.WasWritten { get; set; }
+
 		}
 
 		// Special field used to access items wrapper of this record from record.

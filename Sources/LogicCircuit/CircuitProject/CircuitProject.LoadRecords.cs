@@ -40,6 +40,19 @@ namespace LogicCircuit {
 				serializer.SetDefault(ref data);
 			}
 
+			if(reader.HasAttributes) {
+				if(reader.MoveToFirstAttribute()) {
+					do {
+						string name = reader.Name;
+						string value = reader.Value;
+						if (this.serializers.TryGetValue(name, out IFieldSerializer<TRecord>? serializer)) {
+							Debug.Assert(serializer != null);
+							serializer.SetTextValue(ref data, value);
+						}
+					} while(reader.MoveToNextAttribute());
+					reader.MoveToElement();
+				}
+			}
 			if(!reader.IsEmptyElement) {
 				reader.Read();
 				int fieldDepth = reader.Depth;
@@ -58,9 +71,9 @@ namespace LogicCircuit {
 						reader.Skip();  // skip everything else
 					}
 				}
-#if DEBUG
-				Debug.Assert(reader.IsEndElement(ns, this.table.Name));
-#endif
+				#if DEBUG
+					Debug.Assert(reader.IsEndElement(ns, this.table.Name));
+				#endif
 				Debug.Assert(reader.Depth == fieldDepth - 1);
 			} else {
 				reader.Skip();  // skip empty element
@@ -150,14 +163,31 @@ namespace LogicCircuit {
 
 		// Saves the table
 		private static void SaveRecords<TRecord>(XmlWriter writer, TableSnapshot<TRecord> table) where TRecord:struct {
+			bool saveAsAttribute(string data) => data.Length < 4096;
+
 			foreach(RowId rowId in table.Rows) {
 				TRecord data;
 				table.GetData(rowId, out data);
 				writer.WriteStartElement(table.Name, CircuitProject.PersistenceNamespace);
 				foreach(IField<TRecord> field in table.Fields) {
 					if(field is IFieldSerializer<TRecord> serializer && serializer.NeedToSave(ref data)) {
-						writer.WriteStartElement(field.Name, CircuitProject.PersistenceNamespace);
-						writer.WriteString(serializer.GetTextValue(ref data));
+						string name = field.Name;
+						string value = serializer.GetTextValue(ref data);
+						if(saveAsAttribute(value)) {
+							writer.WriteAttributeString(name, value);
+							serializer.WasWritten = true; // Mark as written to avoid writing it as element later
+						} else {
+							serializer.WasWritten = false;
+						}
+					}
+				}
+				foreach(IField<TRecord> field in table.Fields) {
+					if(field is IFieldSerializer<TRecord> serializer && !serializer.WasWritten && serializer.NeedToSave(ref data)) {
+						string name = field.Name;
+						string value = serializer.GetTextValue(ref data);
+						Debug.Assert(!saveAsAttribute(value), "Field should not be saved as attribute: " + name);
+						writer.WriteStartElement(name, CircuitProject.PersistenceNamespace);
+						writer.WriteString(value);
 						writer.WriteEndElement();
 					}
 				}

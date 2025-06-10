@@ -48,6 +48,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<CollapsedCategoryData>.SetTextValue(ref CollapsedCategoryData data, string text) {
 				data.Name = text;
 			}
+			bool IFieldSerializer<CollapsedCategoryData>.WasWritten { get; set; }
+
 		}
 
 		// Special field used to access items wrapper of this record from record.

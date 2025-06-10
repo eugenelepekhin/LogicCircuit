@@ -58,6 +58,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<SensorData>.SetTextValue(ref SensorData data, string text) {
 				data.SensorId = new Guid(text);
 			}
+			bool IFieldSerializer<SensorData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the SensorType field
@@ -93,6 +95,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<SensorData>.SetTextValue(ref SensorData data, string text) {
 				data.SensorType = EnumHelper.Parse<SensorType>(text, this.DefaultValue);
 			}
+			bool IFieldSerializer<SensorData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the BitWidth field
@@ -128,6 +132,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<SensorData>.SetTextValue(ref SensorData data, string text) {
 				data.BitWidth = int.Parse(text, CultureInfo.InvariantCulture);
 			}
+			bool IFieldSerializer<SensorData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the PinSide field
@@ -163,6 +169,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<SensorData>.SetTextValue(ref SensorData data, string text) {
 				data.PinSide = EnumHelper.Parse<PinSide>(text, this.DefaultValue);
 			}
+			bool IFieldSerializer<SensorData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Notation field
@@ -198,6 +206,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<SensorData>.SetTextValue(ref SensorData data, string text) {
 				data.Notation = text;
 			}
+			bool IFieldSerializer<SensorData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Data field
@@ -233,6 +243,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<SensorData>.SetTextValue(ref SensorData data, string text) {
 				data.Data = text;
 			}
+			bool IFieldSerializer<SensorData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Note field
@@ -268,6 +280,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<SensorData>.SetTextValue(ref SensorData data, string text) {
 				data.Note = text;
 			}
+			bool IFieldSerializer<SensorData>.WasWritten { get; set; }
+
 		}
 
 		// Special field used to access items wrapper of this record from record.

@@ -61,6 +61,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<PinData>.SetTextValue(ref PinData data, string text) {
 				data.PinId = new Guid(text);
 			}
+			bool IFieldSerializer<PinData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the CircuitId field
@@ -96,6 +98,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<PinData>.SetTextValue(ref PinData data, string text) {
 				data.CircuitId = new Guid(text);
 			}
+			bool IFieldSerializer<PinData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the BitWidth field
@@ -131,6 +135,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<PinData>.SetTextValue(ref PinData data, string text) {
 				data.BitWidth = int.Parse(text, CultureInfo.InvariantCulture);
 			}
+			bool IFieldSerializer<PinData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the PinType field
@@ -166,6 +172,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<PinData>.SetTextValue(ref PinData data, string text) {
 				data.PinType = EnumHelper.Parse<PinType>(text, this.DefaultValue);
 			}
+			bool IFieldSerializer<PinData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the PinSide field
@@ -201,6 +209,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<PinData>.SetTextValue(ref PinData data, string text) {
 				data.PinSide = EnumHelper.Parse<PinSide>(text, this.DefaultValue);
 			}
+			bool IFieldSerializer<PinData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Inverted field
@@ -236,6 +246,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<PinData>.SetTextValue(ref PinData data, string text) {
 				data.Inverted = bool.Parse(text);
 			}
+			bool IFieldSerializer<PinData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Name field
@@ -271,6 +283,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<PinData>.SetTextValue(ref PinData data, string text) {
 				data.Name = text;
 			}
+			bool IFieldSerializer<PinData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Note field
@@ -306,6 +320,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<PinData>.SetTextValue(ref PinData data, string text) {
 				data.Note = text;
 			}
+			bool IFieldSerializer<PinData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the JamNotation field
@@ -341,6 +357,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<PinData>.SetTextValue(ref PinData data, string text) {
 				data.JamNotation = text;
 			}
+			bool IFieldSerializer<PinData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Index field
@@ -376,6 +394,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<PinData>.SetTextValue(ref PinData data, string text) {
 				data.Index = int.Parse(text, CultureInfo.InvariantCulture);
 			}
+			bool IFieldSerializer<PinData>.WasWritten { get; set; }
+
 		}
 
 		// Special field used to access items wrapper of this record from record.

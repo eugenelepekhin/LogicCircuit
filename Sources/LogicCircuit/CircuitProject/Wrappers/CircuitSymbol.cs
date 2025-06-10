@@ -53,6 +53,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<CircuitSymbolData>.SetTextValue(ref CircuitSymbolData data, string text) {
 				data.CircuitSymbolId = new Guid(text);
 			}
+			bool IFieldSerializer<CircuitSymbolData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the CircuitId field
@@ -88,6 +90,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<CircuitSymbolData>.SetTextValue(ref CircuitSymbolData data, string text) {
 				data.CircuitId = new Guid(text);
 			}
+			bool IFieldSerializer<CircuitSymbolData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the LogicalCircuitId field
@@ -123,6 +127,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<CircuitSymbolData>.SetTextValue(ref CircuitSymbolData data, string text) {
 				data.LogicalCircuitId = new Guid(text);
 			}
+			bool IFieldSerializer<CircuitSymbolData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the X field
@@ -158,6 +164,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<CircuitSymbolData>.SetTextValue(ref CircuitSymbolData data, string text) {
 				data.X = int.Parse(text, CultureInfo.InvariantCulture);
 			}
+			bool IFieldSerializer<CircuitSymbolData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Y field
@@ -193,6 +201,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<CircuitSymbolData>.SetTextValue(ref CircuitSymbolData data, string text) {
 				data.Y = int.Parse(text, CultureInfo.InvariantCulture);
 			}
+			bool IFieldSerializer<CircuitSymbolData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Rotation field
@@ -228,6 +238,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<CircuitSymbolData>.SetTextValue(ref CircuitSymbolData data, string text) {
 				data.Rotation = EnumHelper.Parse<Rotation>(text, this.DefaultValue);
 			}
+			bool IFieldSerializer<CircuitSymbolData>.WasWritten { get; set; }
+
 		}
 
 		// Special field used to access items wrapper of this record from record.

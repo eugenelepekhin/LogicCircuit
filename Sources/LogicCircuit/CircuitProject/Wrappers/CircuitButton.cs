@@ -57,6 +57,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<CircuitButtonData>.SetTextValue(ref CircuitButtonData data, string text) {
 				data.CircuitButtonId = new Guid(text);
 			}
+			bool IFieldSerializer<CircuitButtonData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Notation field
@@ -92,6 +94,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<CircuitButtonData>.SetTextValue(ref CircuitButtonData data, string text) {
 				data.Notation = text;
 			}
+			bool IFieldSerializer<CircuitButtonData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Modifiers field
@@ -127,6 +131,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<CircuitButtonData>.SetTextValue(ref CircuitButtonData data, string text) {
 				data.Modifiers = int.Parse(text, CultureInfo.InvariantCulture);
 			}
+			bool IFieldSerializer<CircuitButtonData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the KeyCode field
@@ -162,6 +168,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<CircuitButtonData>.SetTextValue(ref CircuitButtonData data, string text) {
 				data.KeyCode = int.Parse(text, CultureInfo.InvariantCulture);
 			}
+			bool IFieldSerializer<CircuitButtonData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the IsToggle field
@@ -197,6 +205,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<CircuitButtonData>.SetTextValue(ref CircuitButtonData data, string text) {
 				data.IsToggle = bool.Parse(text);
 			}
+			bool IFieldSerializer<CircuitButtonData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the PinSide field
@@ -232,6 +242,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<CircuitButtonData>.SetTextValue(ref CircuitButtonData data, string text) {
 				data.PinSide = EnumHelper.Parse<PinSide>(text, this.DefaultValue);
 			}
+			bool IFieldSerializer<CircuitButtonData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Inverted field
@@ -267,6 +279,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<CircuitButtonData>.SetTextValue(ref CircuitButtonData data, string text) {
 				data.Inverted = bool.Parse(text);
 			}
+			bool IFieldSerializer<CircuitButtonData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Width field
@@ -302,6 +316,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<CircuitButtonData>.SetTextValue(ref CircuitButtonData data, string text) {
 				data.Width = int.Parse(text, CultureInfo.InvariantCulture);
 			}
+			bool IFieldSerializer<CircuitButtonData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Height field
@@ -337,6 +353,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<CircuitButtonData>.SetTextValue(ref CircuitButtonData data, string text) {
 				data.Height = int.Parse(text, CultureInfo.InvariantCulture);
 			}
+			bool IFieldSerializer<CircuitButtonData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Note field
@@ -372,6 +390,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<CircuitButtonData>.SetTextValue(ref CircuitButtonData data, string text) {
 				data.Note = text;
 			}
+			bool IFieldSerializer<CircuitButtonData>.WasWritten { get; set; }
+
 		}
 
 		// Special field used to access items wrapper of this record from record.

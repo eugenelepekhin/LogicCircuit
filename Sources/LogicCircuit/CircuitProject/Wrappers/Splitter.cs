@@ -59,6 +59,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<SplitterData>.SetTextValue(ref SplitterData data, string text) {
 				data.SplitterId = new Guid(text);
 			}
+			bool IFieldSerializer<SplitterData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the BitWidth field
@@ -94,6 +96,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<SplitterData>.SetTextValue(ref SplitterData data, string text) {
 				data.BitWidth = int.Parse(text, CultureInfo.InvariantCulture);
 			}
+			bool IFieldSerializer<SplitterData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the PinCount field
@@ -129,6 +133,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<SplitterData>.SetTextValue(ref SplitterData data, string text) {
 				data.PinCount = int.Parse(text, CultureInfo.InvariantCulture);
 			}
+			bool IFieldSerializer<SplitterData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Clockwise field
@@ -164,6 +170,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<SplitterData>.SetTextValue(ref SplitterData data, string text) {
 				data.Clockwise = bool.Parse(text);
 			}
+			bool IFieldSerializer<SplitterData>.WasWritten { get; set; }
+
 		}
 
 		// Special field used to access items wrapper of this record from record.

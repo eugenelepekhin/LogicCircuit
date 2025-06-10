@@ -29,6 +29,9 @@ namespace LogicCircuit.DataPersistent {
 		string GetTextValue(ref TRecord data);
 		void SetDefault(ref TRecord data);
 		void SetTextValue(ref TRecord data, string text);
+
+		// Helper property for optimal serialization. Assume all writing happening on one thread
+		bool WasWritten { get; set; }
 	}
 
 	/// <summary>

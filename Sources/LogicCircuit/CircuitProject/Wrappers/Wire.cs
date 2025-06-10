@@ -53,6 +53,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<WireData>.SetTextValue(ref WireData data, string text) {
 				data.WireId = new Guid(text);
 			}
+			bool IFieldSerializer<WireData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the LogicalCircuitId field
@@ -88,6 +90,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<WireData>.SetTextValue(ref WireData data, string text) {
 				data.LogicalCircuitId = new Guid(text);
 			}
+			bool IFieldSerializer<WireData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the X1 field
@@ -123,6 +127,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<WireData>.SetTextValue(ref WireData data, string text) {
 				data.X1 = int.Parse(text, CultureInfo.InvariantCulture);
 			}
+			bool IFieldSerializer<WireData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Y1 field
@@ -158,6 +164,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<WireData>.SetTextValue(ref WireData data, string text) {
 				data.Y1 = int.Parse(text, CultureInfo.InvariantCulture);
 			}
+			bool IFieldSerializer<WireData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the X2 field
@@ -193,6 +201,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<WireData>.SetTextValue(ref WireData data, string text) {
 				data.X2 = int.Parse(text, CultureInfo.InvariantCulture);
 			}
+			bool IFieldSerializer<WireData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Y2 field
@@ -228,6 +238,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<WireData>.SetTextValue(ref WireData data, string text) {
 				data.Y2 = int.Parse(text, CultureInfo.InvariantCulture);
 			}
+			bool IFieldSerializer<WireData>.WasWritten { get; set; }
+
 		}
 
 		// Special field used to access items wrapper of this record from record.

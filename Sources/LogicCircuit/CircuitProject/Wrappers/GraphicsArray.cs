@@ -80,6 +80,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<GraphicsArrayData>.SetTextValue(ref GraphicsArrayData data, string text) {
 				data.GraphicsArrayId = new Guid(text);
 			}
+			bool IFieldSerializer<GraphicsArrayData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the WriteOn1 field
@@ -115,6 +117,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<GraphicsArrayData>.SetTextValue(ref GraphicsArrayData data, string text) {
 				data.WriteOn1 = bool.Parse(text);
 			}
+			bool IFieldSerializer<GraphicsArrayData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the OnStart field
@@ -150,6 +154,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<GraphicsArrayData>.SetTextValue(ref GraphicsArrayData data, string text) {
 				data.OnStart = EnumHelper.Parse<MemoryOnStart>(text, this.DefaultValue);
 			}
+			bool IFieldSerializer<GraphicsArrayData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the DataBitWidth field
@@ -185,6 +191,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<GraphicsArrayData>.SetTextValue(ref GraphicsArrayData data, string text) {
 				data.DataBitWidth = int.Parse(text, CultureInfo.InvariantCulture);
 			}
+			bool IFieldSerializer<GraphicsArrayData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the BitsPerPixel field
@@ -220,6 +228,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<GraphicsArrayData>.SetTextValue(ref GraphicsArrayData data, string text) {
 				data.BitsPerPixel = int.Parse(text, CultureInfo.InvariantCulture);
 			}
+			bool IFieldSerializer<GraphicsArrayData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Width field
@@ -255,6 +265,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<GraphicsArrayData>.SetTextValue(ref GraphicsArrayData data, string text) {
 				data.Width = int.Parse(text, CultureInfo.InvariantCulture);
 			}
+			bool IFieldSerializer<GraphicsArrayData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Height field
@@ -290,6 +302,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<GraphicsArrayData>.SetTextValue(ref GraphicsArrayData data, string text) {
 				data.Height = int.Parse(text, CultureInfo.InvariantCulture);
 			}
+			bool IFieldSerializer<GraphicsArrayData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Zoom field
@@ -325,6 +339,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<GraphicsArrayData>.SetTextValue(ref GraphicsArrayData data, string text) {
 				data.Zoom = int.Parse(text, CultureInfo.InvariantCulture);
 			}
+			bool IFieldSerializer<GraphicsArrayData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Note field
@@ -360,6 +376,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<GraphicsArrayData>.SetTextValue(ref GraphicsArrayData data, string text) {
 				data.Note = text;
 			}
+			bool IFieldSerializer<GraphicsArrayData>.WasWritten { get; set; }
+
 		}
 
 		// Special field used to access items wrapper of this record from record.

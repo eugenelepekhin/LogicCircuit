@@ -66,6 +66,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<LedMatrixData>.SetTextValue(ref LedMatrixData data, string text) {
 				data.LedMatrixId = new Guid(text);
 			}
+			bool IFieldSerializer<LedMatrixData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the MatrixType field
@@ -101,6 +103,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<LedMatrixData>.SetTextValue(ref LedMatrixData data, string text) {
 				data.MatrixType = EnumHelper.Parse<LedMatrixType>(text, this.DefaultValue);
 			}
+			bool IFieldSerializer<LedMatrixData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the CellShape field
@@ -136,6 +140,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<LedMatrixData>.SetTextValue(ref LedMatrixData data, string text) {
 				data.CellShape = EnumHelper.Parse<LedMatrixCellShape>(text, this.DefaultValue);
 			}
+			bool IFieldSerializer<LedMatrixData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Rows field
@@ -171,6 +177,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<LedMatrixData>.SetTextValue(ref LedMatrixData data, string text) {
 				data.Rows = int.Parse(text, CultureInfo.InvariantCulture);
 			}
+			bool IFieldSerializer<LedMatrixData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Columns field
@@ -206,6 +214,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<LedMatrixData>.SetTextValue(ref LedMatrixData data, string text) {
 				data.Columns = int.Parse(text, CultureInfo.InvariantCulture);
 			}
+			bool IFieldSerializer<LedMatrixData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Colors field
@@ -241,6 +251,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<LedMatrixData>.SetTextValue(ref LedMatrixData data, string text) {
 				data.Colors = int.Parse(text, CultureInfo.InvariantCulture);
 			}
+			bool IFieldSerializer<LedMatrixData>.WasWritten { get; set; }
+
 		}
 
 		// Accessor of the Note field
@@ -276,6 +288,8 @@ namespace LogicCircuit {
 			void IFieldSerializer<LedMatrixData>.SetTextValue(ref LedMatrixData data, string text) {
 				data.Note = text;
 			}
+			bool IFieldSerializer<LedMatrixData>.WasWritten { get; set; }
+
 		}
 
 		// Special field used to access items wrapper of this record from record.
