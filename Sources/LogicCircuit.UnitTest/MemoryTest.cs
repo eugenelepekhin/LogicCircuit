@@ -160,5 +160,44 @@
 			Assert.ThrowsException<CircuitException>(() => Check(Reader("1=0", DialogMemoryEditor.TextFileFormat.Hex), 1, int.MaxValue));
 			Assert.ThrowsException<CircuitException>(() => Check(Reader("1=0", DialogMemoryEditor.TextFileFormat.Bin), 1, int.MaxValue));
 		}
+
+		[TestMethod]
+		public void SetGetMemoryValueTest() {
+			CircuitProject project = CircuitProject.Create(null);
+			Memory memory = null;
+			project.InTransaction(() => {
+				memory = project.MemorySet.Create(true, 4, 8);
+				memory.OnStart = MemoryOnStart.Data;
+				project.CircuitSymbolSet.Create(memory, project.ProjectSet.Project.LogicalCircuit, 1, 1);
+			});
+			Assert.IsNotNull(memory);
+
+			byte[] data = memory.MemoryValue();
+			Assert.IsNotNull(data);
+			Assert.AreEqual(16, data.Length);
+			for(int i = 0; i < data.Length; i++) {
+				data[i] = (byte)i;
+			}
+
+			project.InTransaction(() => {
+				memory.SetMemoryValue(data);
+			});
+			data = memory.MemoryValue();
+
+			for(int i = 0; i < data.Length; i++) {
+				Assert.AreEqual(i, data[i]);
+			}
+
+			for(int i = 8; i < data.Length; i++) {
+				data[i] = 0;
+			}
+			project.InTransaction(() => {
+				memory.SetMemoryValue(data);
+			});
+			data = memory.MemoryValue();
+			for(int i = 0; i < data.Length; i++) {
+				Assert.AreEqual(i < 8 ? i : 0, data[i]);
+			}
+		}
 	}
 }

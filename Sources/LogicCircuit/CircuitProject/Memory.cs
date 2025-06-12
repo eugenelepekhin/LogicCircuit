@@ -133,7 +133,11 @@ namespace LogicCircuit {
 
 		public void SetMemoryValue(byte[]? value) {
 			Tracer.Assert(value == null || value.Length == this.BytesPerCell * this.TotalCells);
-			this.Data = (value != null) ? Convert.ToBase64String(value, Base64FormattingOptions.InsertLineBreaks) : string.Empty;
+			int index = ((value != null) ? value.Length : 0) - 1;
+			while(0 <= index && value![index] == 0) {
+				index--;
+			}
+			this.Data = (0 <= index) ? Convert.ToBase64String(value!, 0, index + 1, (index < 3 * 1024) ? Base64FormattingOptions.None : Base64FormattingOptions.InsertLineBreaks) : string.Empty;
 		}
 
 		internal void SetPins(DevicePin addressPin, DevicePin dataPin, DevicePin address2Pin, DevicePin data2Pin) {
