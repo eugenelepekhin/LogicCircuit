@@ -4,9 +4,9 @@
 		Do not use "*" in Id attribute as it will produce GUID automatically and MSI will install a new instance of the app for each build.
 		Note the minor version part must be 4 digit number as the MSi does not support minor versions.
 	-->
-	<?define LogicCircuitVersion=2.25.0330?>
-	<?define ProductCode32={A2BF8258-F673-4217-B40B-05D12AF8BBCE}?>
-	<?define ProductCode64={21E027E9-8ECD-4504-8AFB-1A4D51B98E20}?>
+	<?define LogicCircuitVersion=2.25.0610?>
+	<?define ProductCode32={73C97227-42B4-4915-8680-01DA5BA952A8}?>
+	<?define ProductCode64={C2924DF9-33FC-450A-8A4C-518DBE278ED1}?>
 
 	<?if $(var.Platform)=x86?>
 		<?define ProductCode=$(var.ProductCode32)?>
