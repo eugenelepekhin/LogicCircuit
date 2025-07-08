@@ -43,7 +43,7 @@ namespace LogicCircuit {
 				#pragma warning restore CA1863 // Use 'CompositeFormat'
 				return CircuitProject.CreateAndClose(xmlReader);
 			} catch(XmlException xmlException) {
-				throw new CircuitException(Cause.CorruptedFile, xmlException, Properties.Resources.ErrorFileCorrupted(file));
+				throw new CircuitException(Cause.CorruptedFile, xmlException, Properties.Resources.ErrorFileCorrupted(file ?? string.Empty));
 			}
 		}
 

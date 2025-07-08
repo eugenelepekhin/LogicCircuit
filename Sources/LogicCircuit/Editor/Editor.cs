@@ -23,7 +23,7 @@ namespace LogicCircuit {
 		private readonly Switcher switcher;
 
 		public bool HasChanges { get { return this.savedVersion != this.CircuitProject.Version; } }
-		public string Caption { get { return Properties.Resources.MainFrameCaption(this.File); } }
+		public string Caption { get { return Properties.Resources.MainFrameCaption(this.File ?? string.Empty); } }
 
 		// use process specific id in order to prevent dragging and dropping between processes.
 		private const double DragStartProximity = 3;
@@ -211,7 +211,7 @@ namespace LogicCircuit {
 					MessageBoxResult result = DialogMessage.Show(
 						mainframe,
 						Properties.Resources.TitleApplication,
-						Properties.Resources.MessageLoadAutoSavedFile(file),
+						Properties.Resources.MessageLoadAutoSavedFile(file ?? string.Empty),
 						null,
 						MessageBoxImage.Question,
 						MessageBoxButton.YesNo

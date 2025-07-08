@@ -6,7 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogicCircuit", "LogicCircuit\LogicCircuit.csproj", "{BEB2A373-887A-412D-87B9-DB105E89597D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{1F9944A5-5A8C-4298-A2A7-B57FBBE6D6CD} = {1F9944A5-5A8C-4298-A2A7-B57FBBE6D6CD}
-		{B543E594-A653-4E16-9203-5C833D430A8C} = {B543E594-A653-4E16-9203-5C833D430A8C}
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogicCircuit.UnitTest", "LogicCircuit.UnitTest\LogicCircuit.UnitTest.csproj", "{23EA94C3-FD37-445C-98FA-2355ACC31B5E}"
@@ -27,12 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{AB5DC13F
 		Tools\Directory.Build.props = Tools\Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResourceWrapper.Generator", "Tools\ResourceWrapper.Generator\ResourceWrapper.Generator.csproj", "{B543E594-A653-4E16-9203-5C833D430A8C}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ItemWrapper.Generator", "Tools\ItemWrapper.Generator\ItemWrapper.Generator.csproj", "{1F9944A5-5A8C-4298-A2A7-B57FBBE6D6CD}"
-	ProjectSection(ProjectDependencies) = postProject
-		{B543E594-A653-4E16-9203-5C833D430A8C} = {B543E594-A653-4E16-9203-5C833D430A8C}
-	EndProjectSection
 EndProject
 Project("{B7DD6F7E-DEF8-4E67-B5B7-07EF123DB6F0}") = "Setup", "Setup\Setup.wixproj", "{7F6164FF-4A14-493D-AD0E-E6DD127FC64E}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -55,10 +49,6 @@ Global
 		{23EA94C3-FD37-445C-98FA-2355ACC31B5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23EA94C3-FD37-445C-98FA-2355ACC31B5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23EA94C3-FD37-445C-98FA-2355ACC31B5E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B543E594-A653-4E16-9203-5C833D430A8C}.Debug|Any CPU.ActiveCfg = Release|Any CPU
-		{B543E594-A653-4E16-9203-5C833D430A8C}.Debug|Any CPU.Build.0 = Release|Any CPU
-		{B543E594-A653-4E16-9203-5C833D430A8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B543E594-A653-4E16-9203-5C833D430A8C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1F9944A5-5A8C-4298-A2A7-B57FBBE6D6CD}.Debug|Any CPU.ActiveCfg = Release|Any CPU
 		{1F9944A5-5A8C-4298-A2A7-B57FBBE6D6CD}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{1F9944A5-5A8C-4298-A2A7-B57FBBE6D6CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -74,7 +64,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{B543E594-A653-4E16-9203-5C833D430A8C} = {AB5DC13F-190F-4CA3-97B1-971E8C1C3F6A}
 		{1F9944A5-5A8C-4298-A2A7-B57FBBE6D6CD} = {AB5DC13F-190F-4CA3-97B1-971E8C1C3F6A}
 		{CE3F8989-5EAF-4665-BB33-BC8C7DD37E23} = {AB5DC13F-190F-4CA3-97B1-971E8C1C3F6A}
 	EndGlobalSection

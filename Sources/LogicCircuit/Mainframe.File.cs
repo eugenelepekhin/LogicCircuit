@@ -129,7 +129,7 @@ namespace LogicCircuit {
 				circuitEditor = new Editor(this, file);
 			} catch(SnapStoreException snapStoreException) {
 				Tracer.Report("Mainframe.Edit", snapStoreException);
-				throw new CircuitException(Cause.CorruptedFile, snapStoreException, Properties.Resources.ErrorFileCorrupted(file));
+				throw new CircuitException(Cause.CorruptedFile, snapStoreException, Properties.Resources.ErrorFileCorrupted(file ?? string.Empty));
 			}
 			if(circuitEditor.File != null) {
 				Settings.User.AddRecentFile(circuitEditor.File);

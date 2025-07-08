@@ -14,3 +14,6 @@ dotnet_diagnostic.CA5394.severity = none
 
 # CA1515: Because an application's API isn't typically referenced from outside the assembly, types can be made internal
 dotnet_diagnostic.CA1515.severity = none
+
+# CA1056: URI properties should not be strings
+dotnet_diagnostic.CA1056.severity = none

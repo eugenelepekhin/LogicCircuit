@@ -54,7 +54,7 @@ namespace LogicCircuit {
 			
 			if(Properties.Resources.Culture != this.CurrentCulture) {
 				// Show message in both languages old and new.
-				CultureInfo old = Properties.Resources.Culture;
+				CultureInfo? old = Properties.Resources.Culture;
 				string oldMessage = Properties.Resources.MessageRestartRequared;
 				Properties.Resources.Culture = this.CurrentCulture;
 				string newMessage = Properties.Resources.MessageRestartRequared;

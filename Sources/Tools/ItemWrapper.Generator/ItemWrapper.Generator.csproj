@@ -17,18 +17,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="TextMessage.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>TextMessage.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <PackageReference Include="EugeneLepekhin.StrongTypeResource" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="TextMessage.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>TextMessage.resx</DependentUpon>
-    </Compile>
+    <EmbeddedResource Update="TextMessage.resx">
+      <Generator>StrongTypeResource.internal</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>

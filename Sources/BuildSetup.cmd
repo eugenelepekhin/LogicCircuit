@@ -8,8 +8,8 @@ if "%VSCMD_VER%" == "" (
 @echo on
 
 rem Build tools
-msbuild -r -p:Configuration=Release Tools\ResourceWrapper.Generator\ResourceWrapper.Generator.csproj
-@if "%ERRORLEVEL%" NEQ "0" (exit /B)
+rem msbuild -r -p:Configuration=Release Tools\ResourceWrapper.Generator\ResourceWrapper.Generator.csproj
+rem @if "%ERRORLEVEL%" NEQ "0" (exit /B)
 
 msbuild -r -p:Configuration=Release Tools\ItemWrapper.Generator\ItemWrapper.Generator.csproj
 @if "%ERRORLEVEL%" NEQ "0" (exit /B)

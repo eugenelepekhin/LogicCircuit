@@ -13,17 +13,6 @@
 		<Exec Command="$(Command)"/>
 	</Target>
 
-	<Target Name="GenerateResourceWrappers" BeforeTargets="BeforeBuild" Condition="'@(EmbeddedResource)' != '' and '$(MSBuildProjectName)' != 'LogicCircuit.UnitTest'">
-		<PropertyGroup>
-			<ResourceWrapperGeneratorCommand>"$(ToolsFolder)\ResourceWrapper.Generator.exe" /FlowDirection /p "$(MSBuildProjectFullPath)"</ResourceWrapperGeneratorCommand>
-			<PseudoBuildDefined>$(DefineConstants.Contains("Pseudo"))</PseudoBuildDefined>
-			<ResourceWrapperGeneratorCommand Condition="$(PseudoBuildDefined)">$(ResourceWrapperGeneratorCommand) /Pseudo</ResourceWrapperGeneratorCommand>
-		</PropertyGroup>
-
-		<!--<Message Importance="high" Text="$(ResourceWrapperGeneratorCommand)"/>-->
-		<Exec Command="$(ResourceWrapperGeneratorCommand)"/>
-	</Target>
-
 	<Target Name="GenerateItemWrappers" BeforeTargets="BeforeBuild" Condition="Exists('$(MSBuildProjectDirectory)\Schema\CircuitProject.xml')">
 		<PropertyGroup>
 			<ItemWrapperGeneratorCommand>"$(ToolsFolder)\ItemWrapper.Generator.exe" /Schema "$(MSBuildProjectDirectory)\Schema\CircuitProject.xml" /Target "$(MSBuildProjectDirectory)\CircuitProject\Wrappers"</ItemWrapperGeneratorCommand>

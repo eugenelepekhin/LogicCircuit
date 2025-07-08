@@ -277,7 +277,7 @@ namespace LogicCircuit {
 				);
 			} else {
 				DialogMessage.Show(this,
-					Properties.Resources.MainFrameCaption(null), message, details, messageBoxImage, MessageBoxButton.OK
+					Properties.Resources.MainFrameCaption(string.Empty), message, details, messageBoxImage, MessageBoxButton.OK
 				);
 				if(this.Editor != null && this.Editor.Power && messageBoxImage == MessageBoxImage.Error) {
 					this.Editor.Power = false;

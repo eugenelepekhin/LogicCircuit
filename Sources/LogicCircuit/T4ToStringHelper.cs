@@ -6,12 +6,12 @@ namespace LogicCircuit {
 	/// Utility class to produce culture-oriented representation of an object as a string.
 	/// </summary>
 	public class T4ToStringHelper {
-		private IFormatProvider formatProvider = Properties.Resources.Culture;
+		private IFormatProvider? formatProvider = Properties.Resources.Culture;
 
 		/// <summary>
 		/// Gets or sets format provider to be used by ToStringWithCulture method.
 		/// </summary>
-		public IFormatProvider FormatProvider {
+		public IFormatProvider? FormatProvider {
 			get { return this.formatProvider; }
 			set { this.formatProvider = value ?? Properties.Resources.Culture; }
 		}
@@ -29,7 +29,7 @@ namespace LogicCircuit {
 			Type type = value.GetType();
 			MethodInfo? method = type.GetMethod("ToString", new Type[] { typeof(IFormatProvider) });
 			if(method != null) {
-				return this.EscapeXml((string)method.Invoke(value, new object[] { this.FormatProvider })!);
+				return this.EscapeXml((string)method.Invoke(value, new object?[] { this.FormatProvider })!);
 			} else {
 				return this.EscapeXml(value.ToString()!);
 			}
