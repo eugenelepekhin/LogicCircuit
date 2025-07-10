@@ -13,13 +13,22 @@
 		<Exec Command="$(Command)"/>
 	</Target>
 
-	<Target Name="GenerateItemWrappers" BeforeTargets="BeforeBuild" Condition="Exists('$(MSBuildProjectDirectory)\Schema\CircuitProject.xml')">
+	<Target Name="GenerateItemWrappers" BeforeTargets="BeforeCompile;BeforeBuild" Condition="('$(DesignTimeBuild)' == 'true' OR '$(BuildingProject)' == 'true') AND Exists('$(MSBuildProjectDirectory)\Schema\CircuitProject.xml')">
 		<PropertyGroup>
-			<ItemWrapperGeneratorCommand>"$(ToolsFolder)\ItemWrapper.Generator.exe" /Schema "$(MSBuildProjectDirectory)\Schema\CircuitProject.xml" /Target "$(MSBuildProjectDirectory)\CircuitProject\Wrappers"</ItemWrapperGeneratorCommand>
+			<TargetFolder>$(IntermediateOutputPath)Wrappers</TargetFolder>
+			<FullTargetFolder>$(MSBuildProjectDirectory)\$(TargetFolder)</FullTargetFolder>
+			<ItemWrapperGeneratorCommand>"$(ToolsFolder)\ItemWrapper.Generator.exe" /Schema "$(MSBuildProjectDirectory)\Schema\CircuitProject.xml" /Target "$(FullTargetFolder)"</ItemWrapperGeneratorCommand>
 		</PropertyGroup>
 
 		<!--<Message Importance="high" Text=">>> Building Snap store Wrappers: $(ItemWrapperGeneratorCommand)"/>-->
 		<Exec Command="$(ItemWrapperGeneratorCommand)"/>
+
+		<ItemGroup>
+			<Compile Include="$(TargetFolder)\*.cs" Visible="true"/>
+		</ItemGroup>
+
+		<!--<Message Importance="high" Text=">>> Wrappers generated:"/>
+		<Message Importance="high" Text="@(Compile)"/>-->
 	</Target>
 
 	<Target Name="FindIronPythonStdLibFiles" AfterTargets="AfterBuild;Publish" Condition="'$(MSBuildProjectName)' == 'LogicCircuit'" Returns="@(IronPythonStdLibFiles)">

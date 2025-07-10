@@ -72,6 +72,10 @@ namespace ItemWrapper.Generator {
 		private void Save(string text, string item) {
 			string path = Path.Combine(this.TargetFolder, item + ".cs");
 			if(!File.Exists(path) || File.ReadAllText(path, Encoding.UTF8) != text) {
+				string directory = Path.GetDirectoryName(path);
+				if(!Directory.Exists(directory)) {
+					Directory.CreateDirectory(directory);
+				}
 				File.WriteAllText(path, text, Encoding.UTF8);
 			}
 		}
