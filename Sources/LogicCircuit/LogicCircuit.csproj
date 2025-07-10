@@ -18,7 +18,7 @@
   <ItemGroup>
     <PackageReference Include="Antlr4.Runtime.Standard" Version="4.13.1" />
     <PackageReference Include="Antlr4BuildTasks" Version="12.10.0" />
-    <PackageReference Include="EugeneLepekhin.StrongTypeResource" Version="1.0.1" />
+    <PackageReference Include="EugeneLepekhin.StrongTypeResource" Version="1.0.2" />
     <PackageReference Include="IronPython" Version="3.4.2" />
     <PackageReference Include="IronPython.StdLib" Version="3.4.2" />
   </ItemGroup>
