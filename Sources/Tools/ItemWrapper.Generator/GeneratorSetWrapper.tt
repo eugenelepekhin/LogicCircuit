@@ -303,13 +303,13 @@ foreach(Key key in this.Table.Keys) {
 			}
 			string columnType = column.Type;
 			string columnName = column.Name;
-			string value = this.Camelize(columnName);
+			string value = Transformation.Camelize(columnName);
 			if(foreign != null) {
 				columnType = foreign.ParentName;
 				columnName = foreign.RoleName();
 				Table parent = foreign.Parent();
 				Key primaryKey = parent.PrimaryKey();
-				value = this.Camelize(columnName) + "." + ((primaryKey.KeyType == KeyType.Auto) ? parent.Name + "RowId" : primaryKey[0].Name);
+				value = Transformation.Camelize(columnName) + "." + ((primaryKey.KeyType == KeyType.Auto) ? parent.Name + "RowId" : primaryKey[0].Name);
 			}
 			string suffix = "";
 			if(!key.IsPrimary() || isSubclass) {
@@ -318,7 +318,7 @@ foreach(Key key in this.Table.Keys) {
 			if(searchFunctionName.Add(function + suffix)) {
 #>
 		// <#=function#>s <#=this.Table.Name#> by <#=columnName#>
-		public <#=returnType#> <#=function#><#=suffix#>(<#=columnType#> <#=this.Camelize(columnName)#>) {
+		public <#=returnType#> <#=function#><#=suffix#>(<#=columnType#> <#=Transformation.Camelize(columnName)#>) {
 			return this.<#=function#>(this.Table.<#=function#>(<#=this.Table.Name#>Data.<#=column.Name#>Field.Field, <#=value#>));
 		}
 
@@ -335,13 +335,13 @@ foreach(Key key in this.Table.Keys) {
 			}
 			string column0Type = column0.Type;
 			string column0Name = column0.Name;
-			string value0 = this.Camelize(column0Name);
+			string value0 = Transformation.Camelize(column0Name);
 			if(foreign0 != null) {
 				column0Type = foreign0.ParentName;
 				column0Name = foreign0.RoleName();
 				Table parent = foreign0.Parent();
 				Key primaryKey = parent.PrimaryKey();
-				value0 = this.Camelize(column0Name) + "." + ((primaryKey.KeyType == KeyType.Auto) ? parent.Name + "RowId" : primaryKey[0].Name);
+				value0 = Transformation.Camelize(column0Name) + "." + ((primaryKey.KeyType == KeyType.Auto) ? parent.Name + "RowId" : primaryKey[0].Name);
 			}
 			Key foreign1 = this.Table.ForeignKey(column1);
 			if(foreign1 != null && foreign1.KeyType == KeyType.Subclass) {
@@ -349,13 +349,13 @@ foreach(Key key in this.Table.Keys) {
 			}
 			string column1Type = column1.Type;
 			string column1Name = column1.Name;
-			string value1 = this.Camelize(column1Name);
+			string value1 = Transformation.Camelize(column1Name);
 			if(foreign1 != null) {
 				column1Type = foreign1.ParentName;
 				column1Name = foreign1.RoleName();
 				Table parent = foreign1.Parent();
 				Key primaryKey = parent.PrimaryKey();
-				value1 = this.Camelize(column1Name) + "." + ((primaryKey.KeyType == KeyType.Auto) ? parent.Name + "RowId" : primaryKey[0].Name);
+				value1 = Transformation.Camelize(column1Name) + "." + ((primaryKey.KeyType == KeyType.Auto) ? parent.Name + "RowId" : primaryKey[0].Name);
 			}
 			string suffix = "";
 			if(!key.IsPrimary()) {
@@ -364,7 +364,7 @@ foreach(Key key in this.Table.Keys) {
 			if(searchFunctionName.Add(function + suffix)) {
 #>
 		// <#=function#>s <#=this.Table.Name#> by <#=column0Name#> and <#=column1Name#>
-		public <#=returnType#> <#=function#><#=suffix#>(<#=column0Type#> <#=this.Camelize(column0Name)#>, <#=column1Type#> <#=this.Camelize(column1Name)#>) {
+		public <#=returnType#> <#=function#><#=suffix#>(<#=column0Type#> <#=Transformation.Camelize(column0Name)#>, <#=column1Type#> <#=Transformation.Camelize(column1Name)#>) {
 			return this.<#=function#>(
 				this.Table.<#=function#>(
 					<#=this.Table.Name#>Data.<#=column0.Name#>Field.Field, <#=this.Table.Name#>Data.<#=column1.Name#>Field.Field,

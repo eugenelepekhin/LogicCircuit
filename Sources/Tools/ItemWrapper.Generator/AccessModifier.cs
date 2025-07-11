@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ItemWrapper.Generator {
+﻿namespace ItemWrapper.Generator {
 	public enum AccessModifier {
 		Public,
 		Internal,

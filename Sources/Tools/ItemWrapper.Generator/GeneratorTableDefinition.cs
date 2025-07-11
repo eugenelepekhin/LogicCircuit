@@ -163,7 +163,7 @@ foreach(Column column in this.Table.Columns) {
 	case "string":
 		format = column.IgnoreCase ? "StringComparer.OrdinalIgnoreCase.Compare({0}, {1})" : "StringComparer.Ordinal.Compare({0}, {1})";
 		if(column.Default != null) {
-			defaultValue = this.MakeString(defaultValue);
+			defaultValue = Transformation.MakeString(defaultValue);
 		} else {
 			defaultValue = "null!";
 		}

@@ -1,7 +1,7 @@
-﻿using System;
+﻿// Ignore Spelling: Camelize
+
 using System.CodeDom;
 using System.CodeDom.Compiler;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Text;
@@ -11,39 +11,22 @@ namespace ItemWrapper.Generator {
 
 		public const string PersistentStoreNameSpace = "LogicCircuit.DataPersistent";
 
-		[SuppressMessage("Performance", "CA1822:Mark members as static")]
-		public string StoreNameSpace { get { return Transformation.PersistentStoreNameSpace; } }
+		public string StoreNameSpace { get; } = Transformation.PersistentStoreNameSpace;
 
-		private ToStringHelper toStringHelperField = new ToStringHelper();
-		public ToStringHelper ToStringHelper { get { return this.toStringHelperField; } }
+		public ToStringHelper ToStringHelper { get; } = new ToStringHelper();
 
-		public ItemWrapperGenerator Generator { get; set; }
-		public CompilerErrorCollection Errors { get { return this.Generator.Errors; } }
-		public Store Store { get { return this.Generator.Store; } }
-		public Table Table { get { return this.Generator.Table; } }
-		public bool UseDispatcher { get { return this.Generator.UseDispatcher; } }
-		public RealmType RealmType { get { return this.Generator.RealmType; } }
-
-		private StringBuilder generationEnvironmentField;
-
-		[SuppressMessage("Performance", "CA1822:Mark members as static")]
-		public string MakeString(string text) {
-			StringBuilder stringBuilder = new StringBuilder();
-			using StringWriter writer = new StringWriter(stringBuilder);
-			using CodeDomProvider provider = CodeDomProvider.CreateProvider("CSharp");
-			provider.GenerateCodeFromExpression(new CodePrimitiveExpression(text), writer, new CodeGeneratorOptions());
-			return stringBuilder.ToString();
+		private ItemWrapperGenerator? generator;
+		public ItemWrapperGenerator Generator {
+			get => this.generator!;
+			set => this.generator = value;
 		}
+		public CompilerErrorCollection Errors => this.Generator.Errors;
+		public Store Store => this.Generator.Store;
+		public Table Table => this.Generator.Table;
+		public bool UseDispatcher => this.Generator.UseDispatcher;
+		public RealmType RealmType => this.Generator.RealmType;
 
-		[SuppressMessage("Performance", "CA1822:Mark members as static")]
-		public string Camelize(string text) {
-			if(!string.IsNullOrEmpty(text)) {
-				return string.Concat(char.ToLower(text[0], CultureInfo.InvariantCulture), text.Substring(1));
-			}
-			return text;
-		}
-
-		public abstract string TransformText();
+		private StringBuilder? generationEnvironmentField;
 
 		/// <summary>
 		/// The string builder that generation-time code is using to assemble generated output
@@ -59,6 +42,23 @@ namespace ItemWrapper.Generator {
 				this.generationEnvironmentField = value;
 			}
 		}
+
+		public static string MakeString(string text) {
+			StringBuilder stringBuilder = new StringBuilder();
+			using StringWriter writer = new StringWriter(stringBuilder);
+			using CodeDomProvider provider = CodeDomProvider.CreateProvider("CSharp");
+			provider.GenerateCodeFromExpression(new CodePrimitiveExpression(text), writer, new CodeGeneratorOptions());
+			return stringBuilder.ToString();
+		}
+
+		public static string Camelize(string text) {
+			if(!string.IsNullOrEmpty(text)) {
+				return string.Concat(char.ToLower(text[0], CultureInfo.InvariantCulture), text.Substring(1));
+			}
+			return text;
+		}
+
+		public abstract string TransformText();
 
 		/// <summary>
 		/// Write text directly into the generated output

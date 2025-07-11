@@ -2,6 +2,7 @@
 #define HaveFlagParam
 #define HaveStringParam
 //#define HaveIntParam
+//#define HaveEnumParam
 
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace CommandLineParser {
 	/// Inspired by Mono.Options but simpler and easier to use.
 	/// </summary>
 	internal sealed class CommandLine {
-		private ParameterList parameterList = new ParameterList();
+		private readonly ParameterList parameterList = new ParameterList();
 
 		#if HaveFlagParam
 			/// <summary>
@@ -29,7 +30,7 @@ namespace CommandLineParser {
 			/// <param name="required">True if the parameter is mandatory</param>
 			/// <param name="assign">Method to assign flag parameter back to the application variable</param>
 			/// <returns>Returns this reference</returns>
-			public CommandLine AddFlag(string name, string alias, string note, bool required, Action<bool> assign) {
+			public CommandLine AddFlag(string name, string? alias, string note, bool required, Action<bool> assign) {
 				this.parameterList.Add(new ParameterFlag(name, alias, note, required, assign));
 				return this;
 			}
@@ -46,7 +47,7 @@ namespace CommandLineParser {
 			/// <param name="required">True if the parameter is mandatory</param>
 			/// <param name="assign">Method to assign string parameter back to the application variable</param>
 			/// <returns>Returns this reference</returns>
-			public CommandLine AddString(string name, string alias, string value, string note, bool required, Action<string> assign) {
+			public CommandLine AddString(string name, string? alias, string? value, string note, bool required, Action<string> assign) {
 				this.parameterList.Add(new ParameterString(name, alias, value, note, required, assign));
 				return this;
 			}
@@ -65,7 +66,7 @@ namespace CommandLineParser {
 			/// <param name="max">Max value</param>
 			/// <param name="assign">Method to assign int parameter back to the application variable</param>
 			/// <returns>Returns this reference</returns>
-			public CommandLine AddInt(string name, string alias, string value, string note, bool required, int min, int max, Action<int> assign) {
+			public CommandLine AddInt(string name, string? alias, string? value, string note, bool required, int min, int max, Action<int> assign) {
 				this.parameterList.Add(new ParameterInt(name, alias, value, note, required, min, max, assign));
 				return this;
 			}
@@ -80,8 +81,58 @@ namespace CommandLineParser {
 			/// <param name="required">True if the parameter is mandatory</param>
 			/// <param name="assign">Method to assign int parameter back to the application variable</param>
 			/// <returns>Returns this reference</returns>
-			public CommandLine AddInt(string name, string alias, string value, string note, bool required, Action<int> assign) {
+			public CommandLine AddInt(string name, string? alias, string? value, string note, bool required, Action<int> assign) {
 				return this.AddInt(name, alias, value, note, required, int.MinValue, int.MaxValue, assign);
+			}
+		#endif
+
+		#if HaveEnumParam
+			/// <summary>
+			/// Provides information about each enum value.
+			/// </summary>
+			/// <typeparam name="T"></typeparam>
+			public readonly struct EnumDescriptor<T> where T:struct {
+				/// <summary>
+				/// Enum value
+				/// </summary>
+				public readonly T Value;
+				/// <summary>
+				/// Full name of the enum value
+				/// </summary>
+				public readonly string Name;
+				/// <summary>
+				/// Short name of the enum value
+				/// </summary>
+				public readonly string? Alias;
+				/// <summary>
+				/// Help text describing the value.
+				/// </summary>
+				public readonly string? Help;
+
+				public EnumDescriptor(T value, string name, string? alias, string? help) {
+					this.Value = value;
+					this.Name = name;
+					this.Alias = alias;
+					this.Help = help;
+				}
+			}
+
+			/// <summary>
+			/// Defines enum parameter allowing parameter of any c# enum
+			/// </summary>
+			/// <typeparam name="T">Enum type</typeparam>
+			/// <param name="name">Full name of the parameter</param>
+			/// <param name="alias">Short name of the parameter</param>
+			/// <param name="value">Help text that will represent the value passed to the parameter</param>
+			/// <param name="note">Help text of the parameter</param>
+			/// <param name="required">True if the parameter is mandatory</param>
+			/// <param name="values">Array of <see cref="EnumDescriptor"/></param>
+			/// <param name="extraHelpTitle">Help text the will precede list of possible values.</param>
+			/// <param name="assign">Method to assign int parameter back to the application variable</param>
+			/// <returns>Returns this reference</returns>
+			public CommandLine AddEnum<T>(string name, string? alias, string? value, string note, bool required, EnumDescriptor<T>[] values, string? extraHelpTitle, Action<T> assign) where T:struct {
+				this.parameterList.Add(new ParameterEnum<T>(name, alias, value, note, required, values, extraHelpTitle, assign));
+				return this;
 			}
 		#endif
 
@@ -89,9 +140,9 @@ namespace CommandLineParser {
 		/// Parses the array of command line parameters and calling all the assign methods to set values of parsed parameters.
 		/// </summary>
 		/// <param name="args">Command line arguments</param>
-		/// <param name="assingUnmatched">Assign all unmatched parameters. If this parameter is null then no unmatched parameters are allowed.</param>
+		/// <param name="assignUnmatched">Assign all unmatched parameters. If this parameter is null then no unmatched parameters are allowed.</param>
 		/// <returns>null if parsing is successful, error messages if unsuccessful.</returns>
-		public string Parse(string[] args, Action<IEnumerable<string>> assingUnmatched) {
+		public string? Parse(string[] args, Action<IEnumerable<string>>? assignUnmatched) {
 			this.parameterList.Reset();
 			List<string> errors = new List<string>();
 			List<string> unmatched = new List<string>();
@@ -104,7 +155,7 @@ namespace CommandLineParser {
 					string text = Parameter.Trim(args[i]);
 					Match match = regex.Match(text);
 					if(match.Success) {
-						Parameter parameter = this.parameterList.Find(Parameter.Trim(match.Groups["name"].Value));
+						Parameter? parameter = this.parameterList.Find(Parameter.Trim(match.Groups["name"].Value));
 						if(parameter == null) {
 							if(Parameter.Trim(match.Groups["prefix"].Value).Length == 0) {
 								unmatched.Add(text);
@@ -117,13 +168,13 @@ namespace CommandLineParser {
 							string value = Parameter.Trim(match.Groups["value"].Value);
 							if(separatorIsEmpty && value.Length == 0 && parameter.ExpectValue()) {
 								if(i + 1 < args.Length) {
-									value = Parameter.Trim(args[++i]); // assume next argument is the value. Note! the index of the loop is advanced here.
+									value = args[++i]; // assume next argument is the value. Note! the index of the loop is advanced here. Also if it's in the next argument do not trim as it maybe important spaces.
 								} else {
 									errors.Add(string.Format(CultureInfo.InvariantCulture, "Parameter \"{0}\" is missing its value", text));
 									break;
 								}
 							}
-							string setError = parameter.SetValue(value);
+							string? setError = parameter.SetValue(value);
 							if(!string.IsNullOrEmpty(setError)) {
 								errors.Add(setError);
 								break;
@@ -140,13 +191,13 @@ namespace CommandLineParser {
 				}
 			}
 			if(errors.Count == 0) {
-				if(assingUnmatched != null) {
-					assingUnmatched(unmatched);
+				if(assignUnmatched != null) {
+					assignUnmatched(unmatched);
 				} else if(0 < unmatched.Count) {
 					errors.Add(string.Format(CultureInfo.InvariantCulture, "Unrecognized parameter: {0}", unmatched[0]));
 				}
 			}
-			return errors.Aggregate((string)null, (left, right) => string.IsNullOrEmpty(left) ? right : left + "\n" + right);
+			return errors.Aggregate((string?)null, (left, right) => string.IsNullOrEmpty(left) ? right : left + "\n" + right);
 		}
 
 		/// <summary>
@@ -155,8 +206,8 @@ namespace CommandLineParser {
 		/// <returns>Constructed help string</returns>
 		public string Help() {
 			this.parameterList.EnsureDefined();
-			Func<Parameter, string> value = parameter => parameter.Value != null ? " " + parameter.Value : string.Empty;
-			Func<Parameter, string> format = parameter =>
+			string value(Parameter parameter) => parameter.Value != null ? " " + parameter.Value : string.Empty;
+			string format(Parameter parameter) =>
 				(parameter.Alias == null)
 				? string.Format(CultureInfo.InvariantCulture, "/{0}{1}", parameter.Name, value(parameter))
 				: string.Format(CultureInfo.InvariantCulture, "/{0} -{1}{2}", parameter.Alias, parameter.Name, value(parameter))
@@ -166,25 +217,29 @@ namespace CommandLineParser {
 			this.parameterList.ForEach(parameter => {
 				string help = format(parameter);
 				text.Append(help);
-				text.Append(' ', width - help.Length);
+				text.Append(' ', Math.Max(0, width - help.Length));
 				text.Append(" - ");
 				if(parameter.Required) {
 					text.Append("required: ");
 				}
 				text.AppendLine(parameter.Note);
+				string extraHelp = parameter.ExtraHelpInfo();
+				if(!string.IsNullOrEmpty(extraHelp)) {
+					text.AppendLine(extraHelp);
+				}
 			});
 			return text.ToString();
 		}
 
 		private abstract class Parameter {
-			public string Name { get; private set; }
-			public string Alias { get; private set; }
-			public string Value { get; private set; }
-			public string Note { get; private set; }
-			public bool Required { get; private set; }
+			public string Name { get; }
+			public string? Alias { get; }
+			public string? Value { get; }
+			public string Note { get; }
+			public bool Required { get; }
 			public bool HasValue { get; set; }
 
-			protected Parameter(string name, string alias, string value, string note, bool required) {
+			protected Parameter(string name, string? alias, string? value, string note, bool required) {
 				Debug.Assert(!string.IsNullOrWhiteSpace(name) && name == name.Trim(), "Invalid parameter name: " + name);
 				Debug.Assert(alias == null || (alias == alias.Trim() && 0 < alias.Length), "Invalid parameter alias: " + alias);
 				Debug.Assert(alias != name, "alias == name for parameter " + name);
@@ -198,10 +253,12 @@ namespace CommandLineParser {
 				this.Required = required;
 			}
 
-			public abstract string SetValue(string value);
+			public abstract string? SetValue(string value);
 			public virtual bool ExpectValue() {
 				return true;
 			}
+			public virtual string ExtraHelpInfo() => string.Empty;
+
 			public static string Trim(string text) {
 				return string.IsNullOrWhiteSpace(text) ? string.Empty : text.Trim();
 			}
@@ -226,7 +283,7 @@ namespace CommandLineParser {
 				base.Add(parameter);
 			}
 
-			public Parameter Find(string name) {
+			public Parameter? Find(string name) {
 				StringComparer comparer = StringComparer.OrdinalIgnoreCase;
 				return this.FirstOrDefault(
 					parameter => comparer.Equals(parameter.Name, name) || comparer.Equals(parameter.Alias, name)
@@ -237,12 +294,12 @@ namespace CommandLineParser {
 		private abstract class Parameter<T> : Parameter {
 			private readonly Action<T> assign;
 
-			protected Parameter(string name, string alias, string value, string note, bool required, Action<T> assign) : base(name, alias, value, note, required) {
+			protected Parameter(string name, string? alias, string? value, string note, bool required, Action<T> assign) : base(name, alias, value, note, required) {
 				Debug.Assert(assign != null, "Assign parameter is missing");
 				this.assign = assign;
 			}
 
-			public string AssignValue(T value) {
+			public string? AssignValue(T value) {
 				this.assign(value);
 				this.HasValue = true;
 				return null;
@@ -251,11 +308,11 @@ namespace CommandLineParser {
 
 		#if HaveFlagParam
 			private sealed class ParameterFlag : Parameter<bool> {
-				public ParameterFlag(string name, string alias, string note, bool required, Action<bool> assign) : base(name, alias, null, note, required, assign) {
+				public ParameterFlag(string name, string? alias, string note, bool required, Action<bool> assign) : base(name, alias, null, note, required, assign) {
 				}
 
-				public override string SetValue(string value) {
-					bool flag = false;
+				public override string? SetValue(string value) {
+					bool flag;
 					if(string.IsNullOrWhiteSpace(value)) {
 						flag = true;
 					} else {
@@ -289,10 +346,10 @@ namespace CommandLineParser {
 
 		#if HaveStringParam
 			private sealed class ParameterString : Parameter<string> {
-				public ParameterString(string name, string alias, string value, string note, bool required, Action<string> assign) : base(name, alias, value, note, required, assign) {
+				public ParameterString(string name, string? alias, string? value, string note, bool required, Action<string> assign) : base(name, alias, value, note, required, assign) {
 				}
 
-				public override string SetValue(string value) {
+				public override string? SetValue(string value) {
 					return this.AssignValue(value);
 				}
 			}
@@ -303,13 +360,13 @@ namespace CommandLineParser {
 				private int min;
 				private int max;
 
-				public ParameterInt(string name, string alias, string value, string note, bool required, int min, int max, Action<int> assign) : base(name, alias, value, note, required, assign) {
+				public ParameterInt(string name, string? alias, string? value, string note, bool required, int min, int max, Action<int> assign) : base(name, alias, value, note, required, assign) {
 					Debug.Assert(min < max, "min should be less than max for integer parameter.");
 					this.min = min;
 					this.max = max;
 				}
 
-				public override string SetValue(string value) {
+				public override string? SetValue(string value) {
 					int parsedValue;
 					if(int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out parsedValue)) {
 						if(this.min <= parsedValue && parsedValue <= this.max) {
@@ -320,6 +377,84 @@ namespace CommandLineParser {
 					return string.Format(CultureInfo.InvariantCulture, "Parameter {0} has invalid value {1}. This parameter is expecting numerical value.", this.Name, value);
 				}
 			}
+		#endif
+
+		#if HaveEnumParam
+			private sealed class ParameterEnum<T> : Parameter<T> where T:struct {
+				private readonly EnumDescriptor<T>[] values;
+				private readonly string? extraHelpTitle;
+
+				public ParameterEnum(string name, string? alias, string? value, string note, bool required, EnumDescriptor<T>[] values, string? extraHelpTitle, Action<T> assign) : base(name, alias, value, note, required, assign) {
+					this.values = values;
+					this.extraHelpTitle = extraHelpTitle;
+					// Validate the enum values
+					HashSet<T> valueSet = new HashSet<T>();
+					HashSet<string> nameSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+					foreach(EnumDescriptor<T> enumValue in values) {
+						if(!valueSet.Add(enumValue.Value)) {
+							throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "Enum value {0} already defined.", enumValue.Value));
+						}
+						if(!nameSet.Add(enumValue.Name) || !string.IsNullOrEmpty(enumValue.Alias) && !nameSet.Add(enumValue.Alias)) {
+							throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "Enum name of alias already defined for value {0}", enumValue.Value));
+						}
+					}
+				}
+
+				private string Names() {
+					StringBuilder text = new StringBuilder();
+					foreach(EnumDescriptor<T> value in this.values) {
+						if(0 < text.Length) {
+							text.Append(", ");
+						}
+						text.Append('"');
+						text.Append(value.Name);
+						text.Append('"');
+						if(!string.IsNullOrWhiteSpace(value.Alias)) {
+							text.Append(", \"");
+							text.Append(value.Alias);
+							text.Append('"');
+						}
+					}
+					return text.ToString();
+				}
+
+				public override string? SetValue(string value) {
+					bool eq(string? s) => StringComparer.OrdinalIgnoreCase.Equals(s, value);
+					foreach(EnumDescriptor<T> enumValue in this.values) {
+						if(eq(enumValue.Name) || eq(enumValue.Alias)) {
+							return this.AssignValue(enumValue.Value);
+						}
+					}
+
+					return string.Format(CultureInfo.InvariantCulture,
+						"Provided value {0} of parameter {1} expected to be one of: {2}",
+						value,
+						this.Name,
+						this.Names()
+					);
+				}
+
+			public override string ExtraHelpInfo() {
+				StringBuilder text = new StringBuilder();
+				if(!string.IsNullOrWhiteSpace(this.extraHelpTitle)) {
+					text.Append('\t');
+					text.AppendLine(this.extraHelpTitle);
+				}
+				bool newLine = false;
+				foreach(EnumDescriptor<T> value in this.values) {
+					if(newLine) {
+						text.AppendLine();
+					}
+					newLine = true;
+					if(!string.IsNullOrWhiteSpace(value.Alias)) {
+						text.AppendFormat(CultureInfo.InvariantCulture, "\t\t{0} ({1}){2}", value.Name, value.Alias, value.Help ?? string.Empty);
+					} else {
+						text.AppendFormat(CultureInfo.InvariantCulture, "\t\t{0}{1}", value.Name, value.Help ?? string.Empty);
+					}
+				}
+				return text.ToString();
+			}
+		}
 		#endif
 	}
 }

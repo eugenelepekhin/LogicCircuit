@@ -6,7 +6,7 @@
 	<UseWPF>true</UseWPF>
 
     <ImplicitUsings>enable</ImplicitUsings>
-    <!--<Nullable>enable</Nullable>-->
+    <Nullable>enable</Nullable>
 
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
     <AnalysisLevel>latest-all</AnalysisLevel>

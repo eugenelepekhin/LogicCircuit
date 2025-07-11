@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using CommandLineParser;
+﻿using CommandLineParser;
 
 namespace ItemWrapper.Generator {
 	public static class Program {
@@ -29,7 +27,7 @@ namespace ItemWrapper.Generator {
 					.AddFlag("Multiverse", "m", "Set this flag to generate Multiverse realm", false, value => generator.RealmType = value ? RealmType.Multiverse : RealmType.Universe)
 					.AddFlag("Help", "?", "Print help", false, value => printHelp = true)
 				;
-				string errors = commandLine.Parse(args, null);
+				string? errors = commandLine.Parse(args, null);
 				if(printHelp) {
 					Console.Out.WriteLine(TextMessage.Usage);
 					Console.Out.WriteLine(commandLine.Help());

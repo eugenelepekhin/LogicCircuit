@@ -16,8 +16,7 @@
 	<Target Name="GenerateItemWrappers" BeforeTargets="BeforeCompile;BeforeBuild" Condition="('$(DesignTimeBuild)' == 'true' OR '$(BuildingProject)' == 'true') AND Exists('$(MSBuildProjectDirectory)\Schema\CircuitProject.xml')">
 		<PropertyGroup>
 			<TargetFolder>$(IntermediateOutputPath)Wrappers</TargetFolder>
-			<FullTargetFolder>$(MSBuildProjectDirectory)\$(TargetFolder)</FullTargetFolder>
-			<ItemWrapperGeneratorCommand>"$(ToolsFolder)\ItemWrapper.Generator.exe" /Schema "$(MSBuildProjectDirectory)\Schema\CircuitProject.xml" /Target "$(FullTargetFolder)"</ItemWrapperGeneratorCommand>
+			<ItemWrapperGeneratorCommand>"$(ToolsFolder)\ItemWrapper.Generator.exe" /Schema "$(MSBuildProjectDirectory)\Schema\CircuitProject.xml" /Target "$(MSBuildProjectDirectory)\$(TargetFolder)"</ItemWrapperGeneratorCommand>
 		</PropertyGroup>
 
 		<!--<Message Importance="high" Text=">>> Building Snap store Wrappers: $(ItemWrapperGeneratorCommand)"/>-->

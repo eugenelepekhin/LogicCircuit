@@ -1,20 +1,22 @@
-﻿using System;
-using System.CodeDom.Compiler;
+﻿using System.CodeDom.Compiler;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Xaml;
 
 namespace ItemWrapper.Generator {
 	public class ItemWrapperGenerator {
-		public string SchemaPath { get; set; }
-		public string TargetFolder { get; set; }
+		public string? SchemaPath { get; set; }
+		public string? TargetFolder { get; set; }
 		public bool UseDispatcher { get; set; }
 		public RealmType RealmType { get; set; }
 
-		public Store Store { get; private set; }
-		public Table Table { get; private set; }
+		private Store? store;
+		public Store Store => this.store!;
+		private Table? table;
+		public Table Table => this.table!;
 
-        private CompilerErrorCollection errorsField;
+		private CompilerErrorCollection? errorsField;
 
 		/// <summary>
 		/// The error collection for the generation process
@@ -29,11 +31,12 @@ namespace ItemWrapper.Generator {
 		}
 
 		public int Generate() {
-			this.Store = XamlServices.Load(this.SchemaPath) as Store;
+			Debug.Assert(this.SchemaPath != null, "SchemaPath must be set before calling Generate");
+			this.store = (Store)XamlServices.Load(this.SchemaPath);
 			this.Store.Validate();
 
 			foreach(Table table in this.Store) {
-				this.Table = table;
+				this.table = table;
 				GeneratorItem generatorItem = new GeneratorItem() {
 					Generator = this
 				};
@@ -44,7 +47,7 @@ namespace ItemWrapper.Generator {
 					}
 					return 1;
 				}
-				this.Save(text, table.Name);
+				this.Save(text, this.table.Name);
 			}
 
 			string storeText;
@@ -70,9 +73,10 @@ namespace ItemWrapper.Generator {
 		}
 
 		private void Save(string text, string item) {
+			Debug.Assert(this.TargetFolder != null, "TargetFolder must be set before calling Save");
 			string path = Path.Combine(this.TargetFolder, item + ".cs");
 			if(!File.Exists(path) || File.ReadAllText(path, Encoding.UTF8) != text) {
-				string directory = Path.GetDirectoryName(path);
+				string directory = Path.GetDirectoryName(path)!;
 				if(!Directory.Exists(directory)) {
 					Directory.CreateDirectory(directory);
 				}

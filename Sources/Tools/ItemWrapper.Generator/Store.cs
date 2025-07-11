@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace ItemWrapper.Generator {
+﻿namespace ItemWrapper.Generator {
 	public class Store : List<Table> {
-		public string Namespace { get; set; }
-		public string Name { get; set; }
-		public string PersistenceNamespace { get; set; }
-		public string PersistencePrefix { get; set; }
+		public string Namespace { get; set; } = string.Empty;
+		public string Name { get; set; } = string.Empty;
+		public string PersistenceNamespace { get; set; } = string.Empty;
+		public string PersistencePrefix { get; set; } = string.Empty;
 
 		public Store() {
 		}
@@ -18,7 +14,7 @@ namespace ItemWrapper.Generator {
 			}
 		}
 
-		public Table Find(string tableName) {
+		public Table? Find(string tableName) {
 			return this.FirstOrDefault(t => t.Name == tableName);
 		}
 	}

@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 
 namespace ItemWrapper.Generator {
 	public class Table {
-		public Store Store { get; private set; }
-		public string Name { get; set; }
+		private Store? store;
+		public Store Store => this.store!;
+		public string Name { get; set; } = string.Empty;
 		public ItemModifier ItemModifier { get; set; }
-		public string ItemBaseClass { get; set; }
+		public string? ItemBaseClass { get; set; }
 		public bool Persistent { get; set; }
 		public IList<Column> Columns { get; private set; }
 		public IList<Key> Keys { get; private set; }
@@ -20,12 +18,12 @@ namespace ItemWrapper.Generator {
 			this.Keys = new List<Key>();
 		}
 
-		public Key PrimaryKey() {
+		public Key? PrimaryKey() {
 			return this.Keys.FirstOrDefault(k => k.IsPrimary());
 		}
 
 		public bool IsPrimary(Column column) {
-			Key primary = this.PrimaryKey();
+			Key? primary = this.PrimaryKey();
 			if(primary != null) {
 				return primary.Contains(column);
 			}
@@ -33,12 +31,12 @@ namespace ItemWrapper.Generator {
 		}
 
 		public bool IsSubclass() {
-			Key key = this.PrimaryKey();
+			Key? key = this.PrimaryKey();
 			return key != null && key.KeyType == KeyType.Subclass;
 		}
 
-		public string BaseName() {
-			Key key = this.PrimaryKey();
+		public string? BaseName() {
+			Key? key = this.PrimaryKey();
 			if(key != null && key.KeyType == KeyType.Subclass) {
 				return key.ParentName;
 			}
@@ -49,9 +47,9 @@ namespace ItemWrapper.Generator {
 			if(withSelf) {
 				yield return this;
 			}
-			string baseName = this.BaseName();
+			string? baseName = this.BaseName();
 			while(baseName != null) {
-				Table parent = this.Store.Find(baseName);
+				Table? parent = this.Store.Find(baseName);
 				Debug.Assert(parent != null);
 				yield return parent;
 				baseName = parent.BaseName();
@@ -66,7 +64,7 @@ namespace ItemWrapper.Generator {
 			}
 		}
 
-		public Key ForeignKey(Column column) {
+		public Key? ForeignKey(Column column) {
 			foreach(Key key in this.Keys) {
 				if(key.IsForeign() && key.Contains(column)) {
 					return key;
@@ -75,7 +73,7 @@ namespace ItemWrapper.Generator {
 			return null;
 		}
 
-		public Key UniqueKey(Column column) {
+		public Key? UniqueKey(Column column) {
 			foreach(Key key in this.Keys) {
 				if(key.IsUnique() && key.Count == 1 && key[0] == column) {
 					return key;
@@ -84,7 +82,7 @@ namespace ItemWrapper.Generator {
 			return null;
 		}
 
-		public Key UniqueKey(Column column0, Column column1) {
+		public Key? UniqueKey(Column column0, Column column1) {
 			foreach(Key key in this.Keys) {
 				if(key.IsUnique() && key.Count == 2  && key[0] == column0  && key[1] == column1) {
 					return key;
@@ -94,7 +92,7 @@ namespace ItemWrapper.Generator {
 		}
 
 		public void Validate(Store store) {
-			this.Store = store;
+			this.store = store;
 			if(this.Name == null) {
 				throw new GeneratorException("Name is missing in table definition");
 			}

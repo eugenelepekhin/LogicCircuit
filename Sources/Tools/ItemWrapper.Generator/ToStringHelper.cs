@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Reflection;
 
@@ -26,11 +25,11 @@ namespace ItemWrapper.Generator {
 		public string ToStringWithCulture(object objectToConvert) {
 			ArgumentNullException.ThrowIfNull(objectToConvert);
 			Type type = objectToConvert.GetType();
-			MethodInfo method = type.GetMethod("ToString", new Type[] { typeof(IFormatProvider) });
+			MethodInfo? method = type.GetMethod("ToString", new Type[] { typeof(IFormatProvider) });
 			if(method != null) {
-				return (string)method.Invoke(objectToConvert, new object[] { this.FormatProvider });
+				return (string)method.Invoke(objectToConvert, new object[] { this.FormatProvider })!;
 			} else {
-				return objectToConvert.ToString();
+				return objectToConvert.ToString()!;
 			}
 		}
 

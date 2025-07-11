@@ -1,24 +1,23 @@
-﻿using System;
+﻿using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
 namespace ItemWrapper.Generator {
 	public class Column {
-		public Table Table { get; private set; }
-		public string Name { get; set; }
-		public string Type { get; set; }
-		public string Default { get; set; }
+		public Table? Table { get; private set; }
+		public string Name { get; set; } = string.Empty;
+		public string Type { get; set; } = string.Empty;
+		public string? Default { get; set; }
 		public bool IgnoreCase { get; set; }
 
-		public string Check { get; set; }
+		public string? Check { get; set; }
 		public bool ReadOnly { get; set; }
 		public AccessModifier AccessModifier { get; set; }
 		public bool PropertyOverrides { get; set; }
-		public string PropertyNamePrefix { get; set; }
+		public string PropertyNamePrefix { get; set; } = string.Empty;
 
 		public Column() {
 			this.AccessModifier = AccessModifier.Public;
-			this.PropertyNamePrefix = string.Empty;
 		}
 
 		[SuppressMessage("Globalization", "CA1308:Normalize strings to uppercase")]
@@ -27,10 +26,12 @@ namespace ItemWrapper.Generator {
 		}
 
 		public bool IsFirst() {
+			Debug.Assert(this.Table != null, "Table should be set before calling IsFirst()");
 			return this == this.Table.Columns[0];
 		}
 
 		public bool IsLast() {
+			Debug.Assert(this.Table != null, "Table should be set before calling IsLast()");
 			return this == this.Table.Columns[this.Table.Columns.Count - 1];
 		}
 
