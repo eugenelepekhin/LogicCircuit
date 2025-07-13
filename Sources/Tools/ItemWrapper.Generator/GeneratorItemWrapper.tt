@@ -32,10 +32,10 @@
 	<#=itemClassModifier#>partial class <#=this.Table.Name#> : <#=inheritFrom#> {
 
 		// RowId of the wrapped record
-		internal RowId <#=this.Table.Name#>RowId { get; private set; }
+		internal RowId <#=this.Table.Name#>RowId { get; }
 <#if(!isSubclass) {#>
 		// Store this wrapper belongs to
-		public <#=this.Store.Name#> <#=this.Store.Name#> { get; private set; }
+		public <#=this.Store.Name#> <#=this.Store.Name#> { get; }
 <#}#>
 
 		// Constructor

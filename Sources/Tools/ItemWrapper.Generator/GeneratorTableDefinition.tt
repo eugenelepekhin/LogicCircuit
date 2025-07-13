@@ -17,6 +17,7 @@ foreach(Column column in this.Table.Columns) {
 	}
 }
 if(this.RealmType == RealmType.Universe) {#>
+		// Reference to the item wrapper of this record for the universe realm.
 		internal <#=this.Table.Name#>? <#=this.Table.Name#>;
 <#}#>
 		// Field accessors
@@ -133,7 +134,7 @@ foreach(Column column in this.Table.Columns) {
 <#
 }
 if(this.RealmType == RealmType.Universe) {#>
-		// Special field used to access items wrapper of this record from record.
+		// Special field used to access item wrapper of this record.
 		// This is used when no other universes is used
 		internal sealed class <#=this.Table.Name#>Field : IField<<#=this.Table.Name#>Data, <#=this.Table.Name#>> {
 			public static readonly <#=this.Table.Name#>Field Field = new <#=this.Table.Name#>Field();

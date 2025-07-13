@@ -1,6 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 
 namespace ItemWrapper.Generator {
 	public class Column {
@@ -20,9 +18,15 @@ namespace ItemWrapper.Generator {
 			this.AccessModifier = AccessModifier.Public;
 		}
 
-		[SuppressMessage("Globalization", "CA1308:Normalize strings to uppercase")]
 		public string AccessModifierName() {
-			return this.AccessModifier.ToString().ToLower(CultureInfo.InvariantCulture);
+			switch(this.AccessModifier) {
+			case AccessModifier.Public:		return "public";
+			case AccessModifier.Internal:	return "internal";
+			case AccessModifier.Protected:	return "protected";
+			case AccessModifier.Private:	return "private";
+			default:
+				throw new GeneratorException("Unknown access modifier: {0}", this.AccessModifier);
+			}
 		}
 
 		public bool IsFirst() {
