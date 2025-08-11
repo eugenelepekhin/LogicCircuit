@@ -18,7 +18,7 @@
   <ItemGroup>
     <PackageReference Include="Antlr4.Runtime.Standard" Version="4.13.1" />
     <PackageReference Include="Antlr4BuildTasks" Version="12.10.0" />
-    <PackageReference Include="EugeneLepekhin.StrongTypeResource" Version="1.0.3" />
+    <PackageReference Include="EugeneLepekhin.StrongTypeResource" Version="1.1.0" />
     <PackageReference Include="IronPython" Version="3.4.2" />
     <PackageReference Include="IronPython.StdLib" Version="3.4.2" />
   </ItemGroup>
@@ -56,10 +56,10 @@
 
   <ItemGroup>
     <EmbeddedResource Update="DataPersistent\Properties\Resources.resx">
-      <Generator>StrongTypeResource.internal</Generator>
+      <Generator>MSBuild:StrongTypeResourceInternal</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>StrongTypeResource.public</Generator>
+      <Generator>MSBuild:StrongTypeResourcePublic</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Schema\Schema.resx">
       <Generator>ResXFileCodeGenerator</Generator>

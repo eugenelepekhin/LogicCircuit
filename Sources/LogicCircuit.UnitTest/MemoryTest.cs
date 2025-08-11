@@ -153,12 +153,12 @@
 			Check(Reader("7fFFFfff", DialogMemoryEditor.TextFileFormat.Hex), int.MaxValue);
 			Check(Reader("1111111111111111111111111111111", DialogMemoryEditor.TextFileFormat.Bin), int.MaxValue);
 
-			Assert.ThrowsException<CircuitException>(() => Check(Reader("2147483648", DialogMemoryEditor.TextFileFormat.Dec), 1, 2, 3));
-			Assert.ThrowsException<CircuitException>(() => Check(Reader("80000000", DialogMemoryEditor.TextFileFormat.Hex), int.MaxValue));
+			Assert.ThrowsExactly<CircuitException>(() => Check(Reader("2147483648", DialogMemoryEditor.TextFileFormat.Dec), 1, 2, 3));
+			Assert.ThrowsExactly<CircuitException>(() => Check(Reader("80000000", DialogMemoryEditor.TextFileFormat.Hex), int.MaxValue));
 
-			Assert.ThrowsException<CircuitException>(() => Check(Reader("1=0", DialogMemoryEditor.TextFileFormat.Dec), 1, int.MaxValue));
-			Assert.ThrowsException<CircuitException>(() => Check(Reader("1=0", DialogMemoryEditor.TextFileFormat.Hex), 1, int.MaxValue));
-			Assert.ThrowsException<CircuitException>(() => Check(Reader("1=0", DialogMemoryEditor.TextFileFormat.Bin), 1, int.MaxValue));
+			Assert.ThrowsExactly<CircuitException>(() => Check(Reader("1=0", DialogMemoryEditor.TextFileFormat.Dec), 1, int.MaxValue));
+			Assert.ThrowsExactly<CircuitException>(() => Check(Reader("1=0", DialogMemoryEditor.TextFileFormat.Hex), 1, int.MaxValue));
+			Assert.ThrowsExactly<CircuitException>(() => Check(Reader("1=0", DialogMemoryEditor.TextFileFormat.Bin), 1, int.MaxValue));
 		}
 
 		[TestMethod]

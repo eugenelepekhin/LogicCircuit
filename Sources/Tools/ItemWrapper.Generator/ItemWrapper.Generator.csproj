@@ -17,12 +17,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EugeneLepekhin.StrongTypeResource" Version="1.0.3" />
+    <PackageReference Include="EugeneLepekhin.StrongTypeResource" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="TextMessage.resx">
-      <Generator>StrongTypeResource.internal</Generator>
+      <Generator>MSBuild:StrongTypeResourceInternal</Generator>
     </EmbeddedResource>
   </ItemGroup>
 
