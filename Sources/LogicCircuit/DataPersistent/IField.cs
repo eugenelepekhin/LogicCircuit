@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace LogicCircuit.DataPersistent {
+namespace DataPersistent {
 	/// <summary>
 	/// Describes Field of the table
 	/// </summary>

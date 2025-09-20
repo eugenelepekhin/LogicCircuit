@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 using System.Windows;
-using LogicCircuit.DataPersistent;
+using DataPersistent;
 
 namespace LogicCircuit {
 	/// <summary>

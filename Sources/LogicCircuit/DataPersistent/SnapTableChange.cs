@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LogicCircuit.DataPersistent {
+namespace DataPersistent {
 	internal readonly struct SnapTableChange<TRecord> where TRecord:struct  {
 		private readonly ISnapTableChange<TRecord> changeData;
 		private readonly int changeIndex;

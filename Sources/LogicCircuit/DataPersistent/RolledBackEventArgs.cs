@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LogicCircuit.DataPersistent {
+namespace DataPersistent {
 	public class RolledBackEventArgs : EventArgs {
 
 		public int Version { get; private set; }

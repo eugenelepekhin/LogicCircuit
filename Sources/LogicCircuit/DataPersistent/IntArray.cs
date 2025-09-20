@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LogicCircuit.DataPersistent {
+namespace DataPersistent {
 	internal class IntArray {
 		public static readonly IField<int, int> Field = new IntField();
 

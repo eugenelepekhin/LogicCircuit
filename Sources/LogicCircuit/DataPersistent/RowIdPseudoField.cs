@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LogicCircuit.DataPersistent {
+namespace DataPersistent {
 	partial class SnapTable<TRecord> {
 		/// <summary>
 		/// Pseudo field to use in <seealso cref="UniquePseudoIndex"/>.

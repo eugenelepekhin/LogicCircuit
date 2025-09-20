@@ -1,4 +1,4 @@
-﻿using LogicCircuit.DataPersistent;
+﻿using DataPersistent;
 
 namespace LogicCircuit.UnitTest.DataPersistent {
 	[TestClass]

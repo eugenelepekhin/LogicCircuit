@@ -1,4 +1,4 @@
-﻿namespace LogicCircuit.DataPersistent {
+﻿namespace DataPersistent {
 	internal interface ISnapTableChange<TRecord> where TRecord:struct {
 		RowId RowId(int changeIndex);
 		SnapTableAction Action(int changeIndex);

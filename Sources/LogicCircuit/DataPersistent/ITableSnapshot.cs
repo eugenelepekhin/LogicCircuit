@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace LogicCircuit.DataPersistent {
+namespace DataPersistent {
 	public interface ITableSnapshot : IEnumerable<RowId> {
 		StoreSnapshot StoreSnapshot { get; }
 		string Name { get; }

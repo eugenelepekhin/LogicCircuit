@@ -17,7 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EugeneLepekhin.StrongTypeResource" Version="1.1.4" />
+    <PackageReference Include="EugeneLepekhin.StrongTypeResource" Version="1.1.6" />
   </ItemGroup>
 
   <ItemGroup>

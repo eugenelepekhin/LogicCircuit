@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LogicCircuit.DataPersistent {
+namespace DataPersistent {
 	public readonly struct RowId : IComparable<RowId>, IEquatable<RowId> {
 
 		internal static readonly RowId Empty = new RowId(-1);

@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace LogicCircuit.DataPersistent {
+namespace DataPersistent {
 	internal partial class BTree<TField> {
 
 		private struct Key {

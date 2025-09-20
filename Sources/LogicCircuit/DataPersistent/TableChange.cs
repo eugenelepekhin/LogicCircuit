@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LogicCircuit.DataPersistent {
+namespace DataPersistent {
 	/// <summary>
 	/// Describes change of data
 	/// </summary>

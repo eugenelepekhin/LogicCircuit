@@ -9,7 +9,7 @@ using System.Text;
 namespace ItemWrapper.Generator {
 	public abstract class Transformation {
 
-		public const string PersistentStoreNameSpace = "LogicCircuit.DataPersistent";
+		public const string PersistentStoreNameSpace = "DataPersistent";
 
 		public string StoreNameSpace { get; } = Transformation.PersistentStoreNameSpace;
 

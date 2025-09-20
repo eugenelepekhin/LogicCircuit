@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace LogicCircuit.DataPersistent {
+namespace DataPersistent {
 	/// <summary>
 	/// Snapshot of relational database.
 	/// The store can be set to edit mode by opening transaction after this tables that belongs to the store will accept modifications.

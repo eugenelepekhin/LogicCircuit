@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 
-namespace LogicCircuit.DataPersistent {
+namespace DataPersistent {
 	/// <summary>
 	/// Represents snapshot of the table.
 	/// If StoreSnapshot this table is belongs to is owning transaction then modification of this table is allowed.

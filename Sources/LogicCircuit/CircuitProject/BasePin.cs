@@ -1,5 +1,5 @@
 ﻿using System;
-using LogicCircuit.DataPersistent;
+using DataPersistent;
 
 namespace LogicCircuit {
 	public abstract class BasePin : Circuit {

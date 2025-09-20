@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace LogicCircuit.DataPersistent {
+namespace DataPersistent {
 
 	public enum ForeignKeyAction {
 		Restrict,

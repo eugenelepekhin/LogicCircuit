@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Text;
 using System.Windows;
 using System.Xml;
-using LogicCircuit.DataPersistent;
+using DataPersistent;
 
 namespace LogicCircuit {
 	public partial class Sensor {

@@ -1,10 +1,11 @@
 ﻿<#@ template language="C#" inherits="Transformation" #>
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using <#=this.StoreNameSpace#>;
+
 namespace <#=this.Store.Namespace#> {
-	using System;
-	using System.Collections.Generic;
-	using System.ComponentModel;
-	using System.Diagnostics;
-	using <#=this.StoreNameSpace#>;
 
 	partial class <#=this.Store.Name#> : StoreSnapshot {
 

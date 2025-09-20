@@ -1,4 +1,4 @@
-﻿using LogicCircuit.DataPersistent;
+﻿using DataPersistent;
 using LogicCircuit.UnitTest.DataPersistent.UnitTestSnapStore;
 
 namespace LogicCircuit.UnitTest.DataPersistent {

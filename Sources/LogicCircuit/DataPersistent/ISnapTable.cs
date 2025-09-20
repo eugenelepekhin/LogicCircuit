@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace LogicCircuit.DataPersistent {
+namespace DataPersistent {
 	internal interface ISnapTable {
 		SnapStore SnapStore { get; }
 		string Name { get; }

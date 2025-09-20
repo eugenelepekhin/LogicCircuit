@@ -1,11 +1,11 @@
 ﻿<#@ template language="C#" inherits="Transformation" #>
-namespace <#=this.Store.Namespace#> {
-	using System;
-	using System.Collections.Generic;
-	using System.ComponentModel;
-	using System.Diagnostics;
-	using <#=this.StoreNameSpace#>;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using <#=this.StoreNameSpace#>;
 
+namespace <#=this.Store.Namespace#> {
 	partial class <#=this.Store.Name#> : StoreSnapshot, INotifyPropertyChanged {
 		private const string PersistenceNamespace = "<#=this.Store.PersistenceNamespace ?? string.Empty#>";
 		private const string PersistencePrefix = "<#=this.Store.PersistencePrefix ?? string.Empty#>";

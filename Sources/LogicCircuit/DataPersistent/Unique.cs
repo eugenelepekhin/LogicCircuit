@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace LogicCircuit.DataPersistent {
+namespace DataPersistent {
 	internal partial class Unique<TField> {
 		private struct Bucket {
 			public static readonly RowId Empty = new RowId(-1);

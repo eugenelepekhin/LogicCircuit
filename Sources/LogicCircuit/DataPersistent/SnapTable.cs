@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
-namespace LogicCircuit.DataPersistent {
+namespace DataPersistent {
 
 	/// <summary>
 	/// Internal class not for public consumption.

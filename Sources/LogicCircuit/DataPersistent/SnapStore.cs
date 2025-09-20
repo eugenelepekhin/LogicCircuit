@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 
-namespace LogicCircuit.DataPersistent {
+namespace DataPersistent {
 	/// <summary>
 	/// Internal class not for public consumption.
 	/// Store is a set of SnapTable tables. It supports one StoreSnapshot editor, that can commit and rollback transactions, and undo/redo previously committed one.

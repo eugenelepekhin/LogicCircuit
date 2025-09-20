@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Xml;
-using LogicCircuit.DataPersistent;
+using DataPersistent;
 
 namespace LogicCircuit {
 	[SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]

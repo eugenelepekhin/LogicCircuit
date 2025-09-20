@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LogicCircuit.DataPersistent {
+namespace DataPersistent {
 	public class VersionChangeEventArgs : EventArgs {
 		public int OldVersion { get; }
 		public int NewVersion { get; }

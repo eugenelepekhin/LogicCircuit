@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using LogicCircuit.DataPersistent;
+using DataPersistent;
 
 namespace LogicCircuit.UnitTest {
 	/// <summary>

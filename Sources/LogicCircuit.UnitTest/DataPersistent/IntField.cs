@@ -1,4 +1,4 @@
-﻿using LogicCircuit.DataPersistent;
+﻿using DataPersistent;
 
 namespace LogicCircuit.UnitTest.DataPersistent {
 	public class IntField : IField<int, int> {

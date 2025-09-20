@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LogicCircuit.DataPersistent {
+namespace DataPersistent {
 
 	partial class TableSnapshot<TRecord> {
 		private struct Composite<T1, T2> {

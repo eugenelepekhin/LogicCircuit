@@ -1,4 +1,4 @@
-﻿namespace LogicCircuit.DataPersistent {
+﻿namespace DataPersistent {
 	/// <summary>
 	/// Base class for fields of type RowId to be used as foreign keys to parents tables where pseudo primary key was created with MakeAutoUnique().
 	/// </summary>

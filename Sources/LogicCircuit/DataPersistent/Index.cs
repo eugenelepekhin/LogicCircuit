@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace LogicCircuit.DataPersistent {
+namespace DataPersistent {
 
 	internal interface IIndex<TRecord> where TRecord:struct {
 		void Insert(RowId rowId);

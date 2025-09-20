@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace LogicCircuit.DataPersistent {
+namespace DataPersistent {
 	internal class ValueList<TRow> where TRow:struct {
 		/// <summary>
 		/// Logarithm of page size on base of 2

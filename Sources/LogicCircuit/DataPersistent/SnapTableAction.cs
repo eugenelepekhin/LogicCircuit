@@ -1,4 +1,4 @@
-﻿namespace LogicCircuit.DataPersistent {
+﻿namespace DataPersistent {
 	public enum SnapTableAction {
 		Insert,
 		Delete,

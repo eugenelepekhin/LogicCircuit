@@ -25,22 +25,22 @@ namespace ItemWrapper.Generator
         /// </summary>
         public override string TransformText()
         {
-            this.Write("namespace ");
+            this.Write("using System;\r\nusing System.Collections.Generic;\r\nusing System.ComponentModel;\r\nu" +
+                    "sing System.Diagnostics;\r\nusing ");
             
-            #line 2 "C:\Projects\LogicCircuit\LogicCircuit\master\Sources\Tools\ItemWrapper.Generator\GeneratorRealm.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.Store.Namespace));
-            
-            #line default
-            #line hidden
-            this.Write(" {\r\n\tusing System;\r\n\tusing System.Collections.Generic;\r\n\tusing System.ComponentMo" +
-                    "del;\r\n\tusing System.Diagnostics;\r\n\tusing ");
-            
-            #line 7 "C:\Projects\LogicCircuit\LogicCircuit\master\Sources\Tools\ItemWrapper.Generator\GeneratorRealm.tt"
+            #line 6 "C:\Projects\LogicCircuit\LogicCircuit\master\Sources\Tools\ItemWrapper.Generator\GeneratorRealm.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.StoreNameSpace));
             
             #line default
             #line hidden
-            this.Write(";\r\n\r\n\tpartial class ");
+            this.Write(";\r\n\r\nnamespace ");
+            
+            #line 8 "C:\Projects\LogicCircuit\LogicCircuit\master\Sources\Tools\ItemWrapper.Generator\GeneratorRealm.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Store.Namespace));
+            
+            #line default
+            #line hidden
+            this.Write(" {\r\n\tpartial class ");
             
             #line 9 "C:\Projects\LogicCircuit\LogicCircuit\master\Sources\Tools\ItemWrapper.Generator\GeneratorRealm.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Store.Name));

@@ -1,4 +1,4 @@
-﻿namespace LogicCircuit.DataPersistent {
+﻿namespace DataPersistent {
 	/// <summary>
 	/// Implements lock-free synchronization primitives.
 	/// </summary>
