@@ -100,6 +100,7 @@ namespace LogicCircuit {
 			}
 		}
 
+		[SuppressMessage("Design", "CA1034:Nested types should not be visible")]
 		public sealed class CircuitInfo : LogicalCircuitDescriptor {
 			public bool Import { get; set; }
 			public bool CanImport { get; }

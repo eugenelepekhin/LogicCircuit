@@ -47,7 +47,7 @@
 						<ComboBox.ItemTemplate>
 							<DataTemplate>
 								<lc:AutoGrid>
-									<ContentControl Content="{Binding Path=Gliph}"/>
+									<ContentControl Content="{Binding Path=Glyph}"/>
 									<TextBlock Style="{StaticResource ShapeName}" Text="{Binding Path=Text}"/>
 								</lc:AutoGrid>
 							</DataTemplate>

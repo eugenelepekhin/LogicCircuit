@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,14 +15,15 @@ namespace LogicCircuit {
 		public const double MaxShapeDescriptorWidth = DialogCircuit.MaxShapeDescriptorHeight * 3;
 		public const double MinShapeDescriptorWidth = 3 * Symbol.GridSize; // 3 - Width of standard symbol with up to 2 pins on top or bottom.
 
+		[SuppressMessage("Design", "CA1034:Nested types should not be visible")]
 		public class ShapeDescriptor : EnumDescriptor<CircuitShape> {
 
-			private Func<FrameworkElement> createGliph;
+			private Func<FrameworkElement> createGlyph;
 
-			public FrameworkElement Gliph => this.createGliph();
+			public FrameworkElement Glyph => this.createGlyph();
 
-			public ShapeDescriptor(CircuitShape shape, string text, Func<FrameworkElement> createGliph) : base(shape, text) {
-				this.createGliph = createGliph;
+			public ShapeDescriptor(CircuitShape shape, string text, Func<FrameworkElement> createGlyph) : base(shape, text) {
+				this.createGlyph = createGlyph;
 			}
 
 			private static FrameworkElement Resize(FrameworkElement element) {
