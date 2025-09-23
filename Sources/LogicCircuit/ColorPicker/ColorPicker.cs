@@ -284,7 +284,7 @@ namespace LogicCircuit {
 			this.RecentColors.Insert(0, item);
 		}
 
-		private class ColorComparer : IComparer<Color>, IEqualityComparer<Color> {
+		private sealed class ColorComparer : IComparer<Color>, IEqualityComparer<Color> {
 			public static readonly ColorComparer comparer = new ColorComparer();
 
 			public int Compare(Color x, Color y) {

@@ -7,7 +7,7 @@ namespace LogicCircuit {
 	public class PinOrderDescriptor : CircuitDescriptor<Pin> {
 		public static IComparer<PinOrderDescriptor> Comparer { get; } = new PinOrderComparer();
 
-		private class PinOrderComparer : IComparer<PinOrderDescriptor>, IComparer {
+		private sealed class PinOrderComparer : IComparer<PinOrderDescriptor>, IComparer {
 			public int Compare(PinOrderDescriptor? x, PinOrderDescriptor? y) => x!.CompareTo(y!);
 			public int Compare(object? x, object? y) => this.Compare((PinOrderDescriptor?)x, (PinOrderDescriptor?)y);
 		}

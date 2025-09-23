@@ -210,7 +210,7 @@ namespace LogicCircuit {
 			public abstract bool Flip();
 		}
 
-		private class RandomValue : SensorValue {
+		private sealed class RandomValue : SensorValue {
 			private readonly Random random;
 			private readonly int maxValue;
 			private readonly int minTick;
@@ -252,7 +252,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private class SeriesValue : SensorValue {
+		private sealed class SeriesValue : SensorValue {
 			private readonly IList<SensorPoint> list;
 			private readonly bool isLoop;
 			private int index;
@@ -292,7 +292,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private class ManualValue : SensorValue {
+		private sealed class ManualValue : SensorValue {
 			private int lastValue;
 
 			public ManualValue(string data, int bitWidth) : base(bitWidth) {
@@ -313,7 +313,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private class KeyboardValue : SensorValue {
+		private sealed class KeyboardValue : SensorValue {
 			private readonly FunctionSensor functionSensor;
 			private string? lastText;
 			private bool ignoreText;
@@ -363,7 +363,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private class SequenceValue : SensorValue {
+		private sealed class SequenceValue : SensorValue {
 			private readonly int maxValue;
 
 			public SequenceValue(int bitWidth) : base(bitWidth) {
@@ -376,7 +376,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private class ClockValue : SensorValue {
+		private sealed class ClockValue : SensorValue {
 			public ClockValue(int bitWidth) : base(bitWidth) {}
 
 			public override bool Flip() {

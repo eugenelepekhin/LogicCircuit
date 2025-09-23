@@ -235,7 +235,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private class MemoryEditor : IFunctionMemory {
+		private sealed class MemoryEditor : IFunctionMemory {
 			public int AddressBitWidth { get; private set; }
 			public int DataBitWidth { get; private set; }
 
@@ -253,7 +253,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		internal class TextNumberReader {
+		internal sealed class TextNumberReader {
 			private readonly TextReader reader;
 			private readonly Func<long> next;
 

@@ -1,10 +1,10 @@
 ﻿using System;
 
 namespace DataPersistent {
-	internal class IntArray {
+	internal sealed class IntArray {
 		public static readonly IField<int, int> Field = new IntField();
 
-		private class IntField : IField<int, int> {
+		private sealed class IntField : IField<int, int> {
 			public string Name => "Int";
 
 			public int Order { get; set; }

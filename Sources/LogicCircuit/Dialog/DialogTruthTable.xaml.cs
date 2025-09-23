@@ -289,7 +289,7 @@ namespace LogicCircuit {
 			return null;
 		}
 
-		private class TruthStateComparer : IComparer<TruthState>, IComparer {
+		private sealed class TruthStateComparer : IComparer<TruthState>, IComparer {
 			private struct Sort {
 				public Func<TruthState, int> Data;
 				public int Direction;

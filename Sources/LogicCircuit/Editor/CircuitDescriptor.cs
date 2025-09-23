@@ -79,7 +79,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private class CircuitDescriptorGlyph : CircuitGlyph {
+		private sealed class CircuitDescriptorGlyph : CircuitGlyph {
 			private readonly CircuitDescriptor<T> circuitDescriptor;
 
 			public CircuitDescriptorGlyph(CircuitDescriptor<T> circuitDescriptor) {

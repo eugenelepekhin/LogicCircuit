@@ -261,7 +261,7 @@ namespace LogicCircuit {
 			return string.Empty;
 		}
 
-		private class LogWriter : TextWriter {
+		private sealed class LogWriter : TextWriter {
 			private readonly TextBox textBox;
 			private readonly ConcurrentQueue<string> queue = new ConcurrentQueue<string>();
 
@@ -308,7 +308,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private class LogReader : TextReader {
+		private sealed class LogReader : TextReader {
 			private readonly ScriptConsole console;
 			private StringReader? stringReader;
 
@@ -351,7 +351,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private class LogStream : Stream {
+		private sealed class LogStream : Stream {
 			private readonly LogWriter writer;
 			private readonly LogReader reader;
 			private readonly Encoding encoding;

@@ -95,7 +95,7 @@ namespace LogicCircuit {
 			return list;
 		}
 
-		private class TableChunk {
+		private sealed class TableChunk {
 			private readonly LogicalCircuit LogicalCircuit;
 			private readonly CircuitState CircuitState;
 			public readonly List<InputPinSocket> Inputs = new List<InputPinSocket>();

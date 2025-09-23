@@ -17,7 +17,7 @@ namespace LogicCircuit {
 	/// And enother one: http://www.emmelmann.org/Pages/Library_TutorialsWS.html
 	/// On line test bench. Run generated code there: https://www.edaplayground.com/
 	/// </summary>
-	internal class VerilogExport : HdlExport {
+	internal sealed class VerilogExport : HdlExport {
 		private readonly Regex identifier = new Regex(@"^[a-zA-Z_][a-zA-Z0-9_$]*$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
 		private readonly Regex notSupportedChars = new Regex(@"\s|[,.?/!@#$%^&*()\-+={}[\]|\\<>~`]", RegexOptions.Compiled);
 

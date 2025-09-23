@@ -12,7 +12,7 @@ namespace LogicCircuit {
 			void CommitResize(EditorDiagram editor, bool withWires);
 		}
 
-		private class ResizeMarker<TParent> : Marker where TParent: Marker, ISizableMarker {
+		private sealed class ResizeMarker<TParent> : Marker where TParent: Marker, ISizableMarker {
 			private static readonly Action<TParent, Point>[] move = new Action<TParent, Point>[] {
 				(marker, point) => marker.Resize(point.X, point.Y, double.NaN, double.NaN),
 				(marker, point) => marker.Resize(double.NaN, point.Y, double.NaN, double.NaN),

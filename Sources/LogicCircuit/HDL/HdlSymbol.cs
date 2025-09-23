@@ -7,7 +7,7 @@ using System.Globalization;
 using System.Linq;
 
 namespace LogicCircuit {
-	internal class HdlSymbol {
+	internal sealed class HdlSymbol {
 		private readonly struct JamKey : IEquatable<JamKey> {
 			public readonly Jam OutJam;
 			public readonly Jam InJam;

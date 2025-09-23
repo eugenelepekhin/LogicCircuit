@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace LogicCircuit {
-	internal class SettingsStringCache {
+	internal sealed class SettingsStringCache {
 		private readonly Settings settings;
 		private readonly string key;
 		private readonly string[]? constraint;

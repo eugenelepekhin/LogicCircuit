@@ -52,7 +52,7 @@ namespace LogicCircuit {
 			set { this.state.Value = value; }
 		}
 
-		private class SettingsWindowStateCache : SettingsEnumCache<WindowState> {
+		private sealed class SettingsWindowStateCache : SettingsEnumCache<WindowState> {
 			public SettingsWindowStateCache(Settings settings, string key) : base(settings, key, WindowState.Normal) {
 				if(this.Value == WindowState.Minimized) {
 					this.Value = WindowState.Normal;

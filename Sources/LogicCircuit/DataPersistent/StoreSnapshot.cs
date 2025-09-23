@@ -318,7 +318,7 @@ namespace DataPersistent {
 			}
 		}
 
-		private class ChangeEnumerator : IEnumerator<string> {
+		private sealed class ChangeEnumerator : IEnumerator<string> {
 			private readonly IEnumerator<ITableSnapshot> enumerator;
 			private readonly int oldVersion;
 			private readonly int newVersion;

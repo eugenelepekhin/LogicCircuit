@@ -561,7 +561,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private class LogicalJamItem : JamItem {
+		private sealed class LogicalJamItem : JamItem {
 			private readonly Jam innerJam;
 			public override Jam InnerJam { get { return this.innerJam; } }
 

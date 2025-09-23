@@ -184,7 +184,7 @@ namespace LogicCircuit {
 			public string ReportStat { get { return this.dirty.ReportStat(); } }
 		#endif
 
-		private class DirtyList {
+		private sealed class DirtyList {
 			#if REPORT_STAT
 				private int minCount = int.MaxValue;
 				private int maxCount = int.MinValue;

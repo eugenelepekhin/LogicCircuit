@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 
 namespace LogicCircuit {
-	internal class N2THdl : HdlTransformation {
+	internal sealed class N2THdl : HdlTransformation {
 		private readonly Func<string, string> fixName;
 		public N2THdl(string name, IEnumerable<HdlSymbol> inputPins, IEnumerable<HdlSymbol> outputPins, IEnumerable<HdlSymbol> parts, Func<string, string> fixName) : base(name, inputPins, outputPins, parts) {
 			this.fixName = fixName;

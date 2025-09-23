@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Globalization;
 
 namespace LogicCircuit {
-	internal class VerilogTestBench : T4Transformation {
+	internal sealed class VerilogTestBench : T4Transformation {
 		private readonly string circuitName;
 		private readonly List<InputPinSocket> inputs;
 		private readonly List<OutputPinSocket> outputs;

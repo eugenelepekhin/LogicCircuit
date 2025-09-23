@@ -55,7 +55,7 @@ namespace LogicCircuit {
 
 	//[Serializable]
 	[SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors")]
-	internal class AssertException : CircuitException {
+	internal sealed class AssertException : CircuitException {
 		public AssertException(string message) : base(Cause.AssertionFailed, message) {}
 		public AssertException() : base(Cause.AssertionFailed) {}
 		public override string UserMessage() {
@@ -67,7 +67,7 @@ namespace LogicCircuit {
 	}
 
 	[SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors")]
-	internal class AbortException : CircuitException {
+	internal sealed class AbortException : CircuitException {
 		public AbortException() : base(Cause.OperationCanceled) {}
 	}
 }

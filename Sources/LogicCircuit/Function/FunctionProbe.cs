@@ -114,7 +114,7 @@ namespace LogicCircuit {
 			((TextBlock)this.CircuitSymbol.ProbeView!).Text = this.ToText();
 		}
 
-		private class History<T> {
+		private sealed class History<T> {
 			private volatile bool adding;
 			private readonly T[] list;
 			private volatile int head;

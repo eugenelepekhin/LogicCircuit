@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace LogicCircuit {
 	partial class CircuitMap {
-		private class SymbolMapList {
+		private sealed class SymbolMapList {
 			private readonly Dictionary<SymbolMapKey, SymbolMap> symbols = new Dictionary<SymbolMapKey, SymbolMap>();
 
 			public SymbolMap AddSymbol(CircuitMap circuitMap, CircuitSymbol circuitSymbol) {
@@ -70,7 +70,7 @@ namespace LogicCircuit {
 #endif
 		}
 
-		private class SymbolMap {
+		private sealed class SymbolMap {
 
 			private readonly struct JamKey : IEquatable<JamKey> {
 				public Jam Jam { get; }
@@ -216,7 +216,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private class Result : StateIndex {
+		private sealed class Result : StateIndex {
 
 			public HashSet<Result>? TriStateGroup { get; private set; }
 			public bool IsTriState { get { return this.TriStateGroup != null; } }
@@ -277,7 +277,7 @@ namespace LogicCircuit {
 			#endif
 		}
 
-		private class Parameter : StateIndex {
+		private sealed class Parameter : StateIndex {
 
 			public Result Result { get; private set; }
 
@@ -295,7 +295,7 @@ namespace LogicCircuit {
 			#endif
 		}
 
-		private class ResultComparer : IComparer<Result> {
+		private sealed class ResultComparer : IComparer<Result> {
 			public static readonly IComparer<Result> BitOrderComparer = new ResultComparer();
 
 			public int Compare(Result? x, Result? y) {
@@ -305,7 +305,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private class ParameterComparer : IComparer<Parameter> {
+		private sealed class ParameterComparer : IComparer<Parameter> {
 			public static readonly ParameterComparer BitOrderComparer = new ParameterComparer();
 
 			public int Compare(Parameter? x, Parameter? y) {

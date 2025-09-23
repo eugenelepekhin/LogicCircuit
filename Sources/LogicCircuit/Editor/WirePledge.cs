@@ -5,7 +5,7 @@ using System.Windows.Shapes;
 
 namespace LogicCircuit {
 	partial class EditorDiagram {
-		private class WirePledge : Marker {
+		private sealed class WirePledge : Marker {
 			private readonly Line markerLine;
 			public override FrameworkElement Glyph { get { return this.markerLine; } }
 

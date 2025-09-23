@@ -14,7 +14,7 @@ using Antlr4.Runtime.Tree;
 
 namespace LogicCircuit {
 	public class ExpressionParser {
-		private class ErrorStrategy : DefaultErrorStrategy {
+		private sealed class ErrorStrategy : DefaultErrorStrategy {
 			protected override void ReportInputMismatch(Parser recognizer, InputMismatchException e) {
 				//string message = "mismatched input " + this.GetTokenErrorDisplay(e.OffendingToken) + " expecting " + e.GetExpectedTokens().ToString(recognizer.Vocabulary);
 				string tokenErrorDisplay = this.GetTokenErrorDisplay(e.OffendingToken);

@@ -2,7 +2,7 @@
 using System.Globalization;
 
 namespace LogicCircuit {
-	internal class SettingsDoubleCache {
+	internal sealed class SettingsDoubleCache {
 		private readonly Settings settings;
 		private readonly string key;
 		private readonly double minimum;

@@ -18,7 +18,7 @@ namespace LogicCircuit {
 	/// Same but in Verilog:
 	/// https://github.com/jopdorp/nand2tetris-verilog
 	/// </summary>
-	internal class N2TExport : HdlExport {
+	internal sealed class N2TExport : HdlExport {
 		public const string NotSupportedChars = @"\s|[,.?/!@#$%^&*()\-_+={}[\]|\\<>~`]";
 
 		private readonly Dictionary<string, string> PinName = new Dictionary<string, string>() {

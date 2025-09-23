@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace DataPersistent {
-	internal partial class BTree<TField> {
+	internal sealed class BTree<TField> {
 
 		private struct Key {
 			public TField field;
@@ -110,7 +110,7 @@ namespace DataPersistent {
 				}
 			#endif
 
-			private class CountField : IField<Node, int> {
+			private sealed class CountField : IField<Node, int> {
 				public int DefaultValue { get { return 0; } }
 				public int GetValue(ref Node record) { return record.Count; }
 				public void SetValue(ref Node record, int value) {
@@ -121,7 +121,7 @@ namespace DataPersistent {
 				public int Compare(ref Node data1, ref Node data2) { return data1.Count - data2.Count; }
 				public int Compare(int x, int y) { return x - y; }
 			}
-			private class IsLeafField : IField<Node, bool> {
+			private sealed class IsLeafField : IField<Node, bool> {
 				public bool DefaultValue { get { return true; } }
 				public bool GetValue(ref Node record) { return record.IsLeaf; }
 				public void SetValue(ref Node record, bool value) { record.IsLeaf = value; }
@@ -130,7 +130,7 @@ namespace DataPersistent {
 				public int Compare(ref Node data1, ref Node data2) { return (!data1.IsLeaf).CompareTo(!data2.IsLeaf); }
 				public int Compare(bool x, bool y) { return x.CompareTo(y); }
 			}
-			private class K0Field : IKeyField {
+			private sealed class K0Field : IKeyField {
 				private readonly IComparer<TField> comparer;
 				public K0Field(IComparer<TField> comparer) { this.comparer = comparer; }
 				public Key DefaultValue { get { return default; } }
@@ -156,7 +156,7 @@ namespace DataPersistent {
 					return this.comparer.Compare(data.K0.field, value);
 				}
 			}
-			private class K1Field : IKeyField {
+			private sealed class K1Field : IKeyField {
 				private readonly IComparer<TField> comparer;
 				public K1Field(IComparer<TField> comparer) { this.comparer = comparer; }
 				public Key DefaultValue { get { return default; } }
@@ -182,7 +182,7 @@ namespace DataPersistent {
 					return this.comparer.Compare(data.K1.field, value);
 				}
 			}
-			private class K2Field : IKeyField {
+			private sealed class K2Field : IKeyField {
 				private readonly IComparer<TField> comparer;
 				public K2Field(IComparer<TField> comparer) { this.comparer = comparer; }
 				public Key DefaultValue { get { return default; } }
@@ -208,7 +208,7 @@ namespace DataPersistent {
 					return this.comparer.Compare(data.K2.field, value);
 				}
 			}
-			private class K3Field : IKeyField {
+			private sealed class K3Field : IKeyField {
 				private readonly IComparer<TField> comparer;
 				public K3Field(IComparer<TField> comparer) { this.comparer = comparer; }
 				public Key DefaultValue { get { return default; } }
@@ -234,7 +234,7 @@ namespace DataPersistent {
 					return this.comparer.Compare(data.K3.field, value);
 				}
 			}
-			private class K4Field : IKeyField {
+			private sealed class K4Field : IKeyField {
 				private readonly IComparer<TField> comparer;
 				public K4Field(IComparer<TField> comparer) { this.comparer = comparer; }
 				public Key DefaultValue { get { return default; } }
@@ -260,7 +260,7 @@ namespace DataPersistent {
 					return this.comparer.Compare(data.K4.field, value);
 				}
 			}
-			private class C0Field : IField<Node, RowId> {
+			private sealed class C0Field : IField<Node, RowId> {
 				public RowId DefaultValue { get { return new RowId(); } }
 				public RowId GetValue(ref Node record) { return record.C0; }
 				public void SetValue(ref Node record, RowId value) { record.C0 = value; }
@@ -269,7 +269,7 @@ namespace DataPersistent {
 				public int Compare(ref Node data1, ref Node data2) { return data1.C0.CompareTo(data2.C0); }
 				public int Compare(RowId x, RowId y) { return x.CompareTo(y); }
 			}
-			private class C1Field : IField<Node, RowId> {
+			private sealed class C1Field : IField<Node, RowId> {
 				public RowId DefaultValue { get { return new RowId(); } }
 				public RowId GetValue(ref Node record) { return record.C1; }
 				public void SetValue(ref Node record, RowId value) { record.C1 = value; }
@@ -278,7 +278,7 @@ namespace DataPersistent {
 				public int Compare(ref Node data1, ref Node data2) { return data1.C1.CompareTo(data2.C1); }
 				public int Compare(RowId x, RowId y) { return x.CompareTo(y); }
 			}
-			private class C2Field : IField<Node, RowId> {
+			private sealed class C2Field : IField<Node, RowId> {
 				public RowId DefaultValue { get { return new RowId(); } }
 				public RowId GetValue(ref Node record) { return record.C2; }
 				public void SetValue(ref Node record, RowId value) { record.C2 = value; }
@@ -287,7 +287,7 @@ namespace DataPersistent {
 				public int Compare(ref Node data1, ref Node data2) { return data1.C2.CompareTo(data2.C2); }
 				public int Compare(RowId x, RowId y) { return x.CompareTo(y); }
 			}
-			private class C3Field : IField<Node, RowId> {
+			private sealed class C3Field : IField<Node, RowId> {
 				public RowId DefaultValue { get { return new RowId(); } }
 				public RowId GetValue(ref Node record) { return record.C3; }
 				public void SetValue(ref Node record, RowId value) { record.C3 = value; }
@@ -296,7 +296,7 @@ namespace DataPersistent {
 				public int Compare(ref Node data1, ref Node data2) { return data1.C3.CompareTo(data2.C3); }
 				public int Compare(RowId x, RowId y) { return x.CompareTo(y); }
 			}
-			private class C4Field : IField<Node, RowId> {
+			private sealed class C4Field : IField<Node, RowId> {
 				public RowId DefaultValue { get { return new RowId(); } }
 				public RowId GetValue(ref Node record) { return record.C4; }
 				public void SetValue(ref Node record, RowId value) { record.C4 = value; }
@@ -305,7 +305,7 @@ namespace DataPersistent {
 				public int Compare(ref Node data1, ref Node data2) { return data1.C4.CompareTo(data2.C4); }
 				public int Compare(RowId x, RowId y) { return x.CompareTo(y); }
 			}
-			private class C5Field : IField<Node, RowId> {
+			private sealed class C5Field : IField<Node, RowId> {
 				public RowId DefaultValue { get { return new RowId(); } }
 				public RowId GetValue(ref Node record) { return record.C5; }
 				public void SetValue(ref Node record, RowId value) { record.C5 = value; }

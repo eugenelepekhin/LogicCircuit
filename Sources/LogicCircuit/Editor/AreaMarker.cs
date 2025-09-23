@@ -5,7 +5,7 @@ using System.Windows.Shapes;
 
 namespace LogicCircuit {
 	partial class EditorDiagram {
-		private class AreaMarker : Marker {
+		private sealed class AreaMarker : Marker {
 			private readonly Point point0;
 			private readonly Rectangle markerGlyph;
 

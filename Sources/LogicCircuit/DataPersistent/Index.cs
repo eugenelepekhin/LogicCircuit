@@ -32,7 +32,7 @@ namespace DataPersistent {
 			IField<TRecord> Field { get; }
 		}
 
-		internal class UniqueIndex<TField> : IFieldIndex<TField>, IFieldHolder, IUniqueIndex<TField> {
+		internal sealed class UniqueIndex<TField> : IFieldIndex<TField>, IFieldHolder, IUniqueIndex<TField> {
 			private readonly SnapTable<TRecord> table;
 			private readonly Unique<TField> unique;
 			private readonly IField<TRecord, TField> field;
@@ -83,7 +83,7 @@ namespace DataPersistent {
 		/// <summary>
 		/// Unique pseudo index used as primary key in the tables where primary key was defined with MakeAutoUnique().
 		/// </summary>
-		internal class UniquePseudoIndex : IFieldIndex<RowId>, IFieldHolder, IUniqueIndex<RowId> {
+		internal sealed class UniquePseudoIndex : IFieldIndex<RowId>, IFieldHolder, IUniqueIndex<RowId> {
 			private readonly SnapTable<TRecord> table;
 
 			public UniquePseudoIndex(SnapTable<TRecord> table) {
@@ -129,7 +129,7 @@ namespace DataPersistent {
 			public bool IsEmpty(int version) => TableSnapshot<TRecord>.IsEmpty(this.table, version);
 		}
 
-		internal class RangeIndex<TField> : IFieldIndex<TField>, IFieldHolder {
+		internal sealed class RangeIndex<TField> : IFieldIndex<TField>, IFieldHolder {
 			private readonly SnapTable<TRecord> table;
 			private readonly BTree<TField> tree;
 			private readonly IField<TRecord, TField>  field;

@@ -2,7 +2,7 @@
 using System.Globalization;
 
 namespace LogicCircuit {
-	internal class SettingsDateTimeCache {
+	internal sealed class SettingsDateTimeCache {
 		private readonly Settings settings;
 		private readonly string key;
 

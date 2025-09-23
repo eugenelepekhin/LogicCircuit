@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading;
 
 namespace LogicCircuit {
-	internal class WireValidator {
+	internal sealed class WireValidator {
 		private static Thread? thread;
 		private static AutoResetEvent? updateRequest;
 		private static WireValidator? wireValidator;

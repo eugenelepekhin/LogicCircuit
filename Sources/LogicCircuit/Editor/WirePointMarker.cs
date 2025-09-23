@@ -5,7 +5,7 @@ using System.Windows.Shapes;
 
 namespace LogicCircuit {
 	partial class EditorDiagram {
-		private class WirePointMarker : Marker {
+		private sealed class WirePointMarker : Marker {
 			public WireMarker Parent { get; private set; }
 			private readonly Func<Point> getPoint;
 			private readonly Action<Point> setPoint;

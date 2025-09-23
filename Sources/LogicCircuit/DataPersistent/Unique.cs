@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace DataPersistent {
-	internal partial class Unique<TField> {
+	internal sealed class Unique<TField> {
 		private struct Bucket {
 			public static readonly RowId Empty = new RowId(-1);
 			public static readonly RowId Deleted = new RowId(-2);
@@ -70,7 +70,7 @@ namespace DataPersistent {
 			public int Size => this.size;
 		}
 
-		private class ValueField : IField<Bucket, TField> {
+		private sealed class ValueField : IField<Bucket, TField> {
 			private readonly IComparer<TField> comparer;
 			public ValueField(IComparer<TField> comparer) {
 				this.comparer = comparer;
@@ -84,7 +84,7 @@ namespace DataPersistent {
 			public int Compare(TField? x, TField? y) => this.comparer.Compare(x, y);
 		}
 
-		private class RowIdField : IField<Bucket, RowId> {
+		private sealed class RowIdField : IField<Bucket, RowId> {
 			public static readonly RowIdField Field = new RowIdField();
 			public string Name => "RowId";
 			public int Order { get; set; }
@@ -95,7 +95,7 @@ namespace DataPersistent {
 			public int Compare(RowId x, RowId y) => x.Value - y.Value;
 		}
 
-		private class HashField : IField<Bucket, int> {
+		private sealed class HashField : IField<Bucket, int> {
 			public static readonly HashField Field = new HashField();
 			public string Name => "Hash";
 			public int Order { get; set; }
@@ -106,7 +106,7 @@ namespace DataPersistent {
 			public int Compare(int x, int y) => x - y;
 		}
 
-		private class CollisionField : IField<Bucket, bool> {
+		private sealed class CollisionField : IField<Bucket, bool> {
 			public static readonly CollisionField Field = new CollisionField();
 			public bool DefaultValue => false;
 			public bool GetValue(ref Bucket record) => record.HasCollision;

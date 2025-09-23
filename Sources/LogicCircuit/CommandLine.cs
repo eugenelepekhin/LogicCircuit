@@ -16,7 +16,7 @@ namespace CommandLineParser {
 	/// Command line parser
 	/// Inspired by Mono.Options but simpler and easier to use.
 	/// </summary>
-	internal class CommandLine {
+	internal sealed class CommandLine {
 		private readonly ParameterList parameterList = new ParameterList();
 
 		#if HaveFlagParam

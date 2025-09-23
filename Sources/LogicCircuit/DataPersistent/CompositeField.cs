@@ -13,7 +13,7 @@ namespace DataPersistent {
 			bool ConsistOf(IField<TRecord> field1, IField<TRecord> field2, IField<TRecord> field3);
 		}
 
-		private class CompositeField<T1, T2> : IField<TRecord, Composite<T1, T2>>, ICompositeField {
+		private sealed class CompositeField<T1, T2> : IField<TRecord, Composite<T1, T2>>, ICompositeField {
 			private readonly IField<TRecord, T1> f1;
 			private readonly IField<TRecord, T2> f2;
 

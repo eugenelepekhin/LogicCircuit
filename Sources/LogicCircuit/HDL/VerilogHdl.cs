@@ -7,7 +7,7 @@ using System.Globalization;
 using System.Linq;
 
 namespace LogicCircuit {
-	internal class VerilogHdl : HdlTransformation {
+	internal sealed class VerilogHdl : HdlTransformation {
 		private readonly Dictionary<Jam, Jam> wires = new();
 		private readonly OneToMany<Jam, HdlConnection> connections = new OneToMany<Jam, HdlConnection>(true);
 		private readonly OneToMany<Jam, HdlConnection> assignments = new OneToMany<Jam, HdlConnection>(true);

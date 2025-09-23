@@ -2,7 +2,7 @@
 using System.Globalization;
 
 namespace LogicCircuit {
-	internal class SettingsBoolCache {
+	internal sealed class SettingsBoolCache {
 		private readonly Settings settings;
 		private readonly string key;
 

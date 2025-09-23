@@ -133,7 +133,7 @@ namespace LogicCircuit {
 			return object.ReferenceEquals(x, y);
 		}
 
-		private class AtomEqualityComparer : IEqualityComparer<string> {
+		private sealed class AtomEqualityComparer : IEqualityComparer<string> {
 			public bool Equals(string? x, string? y) {
 				return XmlHelper.AreEqualAtoms(x, y);
 			}

@@ -48,7 +48,7 @@ namespace DataPersistent {
 	}
 
 	partial class TableSnapshot<TRecord> {
-		private class ForeignKey<TField> : IForeignKey {
+		private sealed class ForeignKey<TField> : IForeignKey {
 			public string Name { get; private set; }
 			private readonly IUniqueIndex<TField> primaryKey;
 			private readonly TableSnapshot<TRecord> childTable;

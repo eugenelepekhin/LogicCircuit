@@ -2,7 +2,7 @@
 using System.Timers;
 
 namespace LogicCircuit {
-	internal class PreciseTimer : IDisposable {
+	internal sealed class PreciseTimer : IDisposable {
 
 		private const int CicleCount = 32;
 
@@ -63,7 +63,7 @@ namespace LogicCircuit {
 			this.action();
 		}
 
-		private class TimerState {
+		private sealed class TimerState {
 			public long period;
 			public long start;
 			public long cicle;

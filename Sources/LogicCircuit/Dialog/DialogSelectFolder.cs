@@ -8,7 +8,7 @@ using System.Windows.Interop;
 namespace LogicCircuit {
 #pragma warning disable VSSpell001 // Spell Check
 	// This is striped off version of folder select dialog from Windows API Code Pack.
-	internal class DialogSelectFolder {
+	internal sealed class DialogSelectFolder {
 		private enum FileOpenOptions {
 			OverwritePrompt = 0x00000002,
 			StrictFileTypes = 0x00000004,

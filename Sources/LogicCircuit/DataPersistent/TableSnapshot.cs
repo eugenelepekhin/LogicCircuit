@@ -751,9 +751,9 @@ namespace DataPersistent {
 		/// <summary>
 		/// Enumerates rows of the table
 		/// </summary>
-		private class RowEnumerator : IEnumerator<RowId> {
+		private sealed class RowEnumerator : IEnumerator<RowId> {
 
-			protected readonly TableSnapshot<TRecord> table;
+			private readonly TableSnapshot<TRecord> table;
 			private readonly int version;
 			private readonly int count;
 			private int index;
@@ -765,7 +765,7 @@ namespace DataPersistent {
 				this.index = -1;
 			}
 
-			public virtual bool MoveNext() {
+			public bool MoveNext() {
 				if(this.version == this.table.StoreSnapshot.Version) {
 					this.index = Math.Min(this.index + 1, this.count);
 					while(this.index < this.count) {
@@ -802,7 +802,7 @@ namespace DataPersistent {
 		/// <summary>
 		/// Enumerates changes made over multiple transactions
 		/// </summary>
-		private class ChangeEnumerator : IEnumerator<TableChange<TRecord>>, ITableChange<TRecord> {
+		private sealed class ChangeEnumerator : IEnumerator<TableChange<TRecord>>, ITableChange<TRecord> {
 			private readonly SnapTable<TRecord> table;
 			private readonly int newVersion;
 			private readonly int oldVersion;
@@ -896,7 +896,7 @@ namespace DataPersistent {
 		/// <summary>
 		/// Enumerate changes made over multiple transaction when version changed back from later to older.
 		/// </summary>
-		private class ReverseChangeEnumerator : IEnumerator<TableChange<TRecord>>, ITableChange<TRecord> {
+		private sealed class ReverseChangeEnumerator : IEnumerator<TableChange<TRecord>>, ITableChange<TRecord> {
 			private readonly ChangeEnumerator enumerator;
 
 			public ReverseChangeEnumerator(ChangeEnumerator enumerator) {
@@ -948,7 +948,7 @@ namespace DataPersistent {
 			}
 		}
 
-		private class RolledBackChangesEnumerator : IEnumerator<RowId> {
+		private sealed class RolledBackChangesEnumerator : IEnumerator<RowId> {
 
 			private readonly IEnumerator<SnapTableChange<TRecord>> enumerator;
 

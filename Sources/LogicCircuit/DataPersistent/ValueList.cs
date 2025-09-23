@@ -2,7 +2,7 @@
 using System.Diagnostics;
 
 namespace DataPersistent {
-	internal class ValueList<TRow> where TRow:struct {
+	internal sealed class ValueList<TRow> where TRow:struct {
 		/// <summary>
 		/// Logarithm of page size on base of 2
 		/// </summary>

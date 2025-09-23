@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace LogicCircuit {
 	partial class Editor {
-		private class Switcher {
+		private sealed class Switcher {
 			public Editor Editor { get; private set; }
 			private readonly List<LogicalCircuit> history = new List<LogicalCircuit>();
 			private int tab;

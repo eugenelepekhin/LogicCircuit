@@ -773,7 +773,7 @@ namespace DataPersistent {
 		/// <summary>
 		/// Enumerator of changes made in specified transaction
 		/// </summary>
-		private class ChangeEnumerator : IEnumerator<SnapTableChange<TRecord>>, ISnapTableChange<TRecord> {
+		private sealed class ChangeEnumerator : IEnumerator<SnapTableChange<TRecord>>, ISnapTableChange<TRecord> {
 
 			private readonly SnapTable<TRecord> table;
 			private readonly Snap newVersion;
