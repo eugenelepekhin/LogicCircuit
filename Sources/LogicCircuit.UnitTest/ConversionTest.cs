@@ -55,7 +55,7 @@ namespace LogicCircuit.UnitTest {
 						if(res != 0) {
 							this.TestContext.WriteLine("Field {0} mismatch for row {1} in table {2}: expected={3}, actual={4}", field.Name, i, expected.Name, expectedDataItem, actualDataItem);
 						}
-						Assert.AreEqual(0, res, "Field {0} mismatch for row {1} in table {2}", field.Name, i, expected.Name);
+						Assert.AreEqual(0, res, $"Field {field.Name} mismatch for row {i} in table {expected.Name}");
 					}
 				}
 			}
@@ -86,7 +86,7 @@ namespace LogicCircuit.UnitTest {
 			tableCount++; this.AssertEqual(expected.DevicePinSet.Table, actual.DevicePinSet.Table);
 			tableCount++; this.AssertEqual(expected.GateSet.Table, actual.GateSet.Table);
 
-			Assert.AreEqual(expected.Tables.Count(), tableCount, "Table count mismatch. Expected {0}, actual {1}", expected.Tables.Count(), tableCount);
+			Assert.AreEqual(expected.Tables.Count(), tableCount, $"Table count mismatch. Expected {expected.Tables.Count()}, actual {tableCount}");
 		}
 
 		/// <summary>
