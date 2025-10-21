@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Xml;
 
 namespace LogicCircuit.UnitTest {
 	/// <summary>
@@ -17,7 +18,7 @@ namespace LogicCircuit.UnitTest {
 		/// </summary>
 		[STATestMethod]
 		[DeploymentItem("Properties\\Splitter Conversion.CircuitProject")]
-		public void SplitterConvertionTest() {
+		public void SplitterConversionTest() {
 			string file = "Splitter Conversion.CircuitProject";
 			string projectText = File.ReadAllText(Path.Combine(this.TestContext.DeploymentDirectory, file));
 			this.AssertFileVersion(projectText);
@@ -53,9 +54,10 @@ namespace LogicCircuit.UnitTest {
 		private class TestSocket {
 			public ProjectTester Tester { get; private set; }
 
+			[SuppressMessage("Usage", "MSTEST0037:Use proper 'Assert' methods", Justification = "<Pending>")]
 			public TestSocket(ProjectTester tester) {
 				this.Tester = tester;
-				Assert.IsTrue(this.Tester.Input.Length == this.Tester.Output.Length);
+				Assert.AreEqual(this.Tester.Input.Length, this.Tester.Output.Length);
 			}
 
 			public int Value(int outputIndex, int bitWidth) {

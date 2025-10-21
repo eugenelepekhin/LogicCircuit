@@ -87,10 +87,10 @@
 				Assert.IsTrue(tester.CircuitState.Evaluate(true));
 				values.Add(target.BinaryInt());
 			}
-			Assert.IsTrue(1 < values.Count);
+			Assert.IsGreaterThan(1, values.Count);
 			int max = 1 << target.BitWidth;
 			// If this fail, it is possible to ignore.
-			Assert.AreEqual(max, values.Count);
+			Assert.HasCount(max, values);
 		}
 	}
 }

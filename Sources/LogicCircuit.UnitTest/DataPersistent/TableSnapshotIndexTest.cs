@@ -315,7 +315,7 @@ namespace LogicCircuit.UnitTest.DataPersistent {
 					int index = map.IndexOf(rowId);
 					Assert.IsTrue(min <= index && index <= max, "Wrong value selected");
 				}
-				Assert.AreEqual(Math.Max(Math.Min(max, count - 1) - Math.Max(min, 0) + 1, 0), distinct.Count, "Wrong number of rows selected");
+				Assert.HasCount(Math.Max(Math.Min(max, count - 1) - Math.Max(min, 0) + 1, 0), distinct, "Wrong number of rows selected");
 			};
 
 			for(int i = -count; i < 2 * count; i++) {

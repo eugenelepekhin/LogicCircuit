@@ -32,7 +32,7 @@
 			string value = "world !";
 
 			TestSettings s1 = new TestSettings();
-			Assert.IsTrue(!Directory.Exists(dir));
+			Assert.IsFalse(Directory.Exists(dir));
 			s1.LoadSettings(file);
 			s1[key] = value;
 			s1.SaveSettings(file);

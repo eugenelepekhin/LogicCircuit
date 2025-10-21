@@ -17,8 +17,8 @@
 		[DeploymentItem("Properties\\VisualElementLoadTest.CircuitProject")]
 		public void VisualElementLoadProjectTesterTest() {
 			ProjectTester tester = new ProjectTester(ProjectTester.LoadDeployedFile(this.TestContext, "VisualElementLoadTest.CircuitProject", null));
-			Assert.AreEqual(1, tester.Input.Length);
-			Assert.AreEqual(1, tester.Output.Length);
+			Assert.HasCount(1, tester.Input);
+			Assert.HasCount(1, tester.Output);
 			Assert.IsTrue(tester.Input.All(f => f != null));
 			Assert.IsTrue(tester.Output.All(f => f != null));
 

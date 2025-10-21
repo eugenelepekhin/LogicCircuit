@@ -6,7 +6,7 @@
 	public class GraphicsArrayTest {
 
 		private void TestRange(Func<int, int> check, int min, int max) {
-			Assert.IsTrue(min <= max);
+			Assert.IsLessThanOrEqualTo(max, min);
 			for(int i = min - 20; i < max + 30; i++) {
 				int value = check(i);
 				Assert.IsTrue(min <= value && value <= max);

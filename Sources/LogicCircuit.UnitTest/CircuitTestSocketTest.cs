@@ -86,8 +86,8 @@
 				2,
 				out truncated
 			);
-			Assert.IsTrue(Math.Abs(progress - 100) < 2);
-			Assert.IsTrue(!truncated);
+			Assert.IsLessThan(2, Math.Abs(progress - 100));
+			Assert.IsFalse(truncated);
 			Assert.IsTrue(table1 != null && table1.Count == 2);
 			Assert.IsTrue(table1[0].Input[0] == 0 && table1[0].Output[0] == 0);
 			Assert.IsTrue(table1[1].Input[0] == 1 && table1[1].Output[0] == 1);
@@ -99,8 +99,8 @@
 				2,
 				out truncated
 			);
-			Assert.IsTrue(Math.Abs(progress - 100) < 2);
-			Assert.IsTrue(!truncated);
+			Assert.IsLessThan(2, Math.Abs(progress - 100));
+			Assert.IsFalse(truncated);
 			Assert.IsTrue(table2 != null && table2.Count == 0);
 		}
 
@@ -122,8 +122,8 @@
 				4,
 				out truncated
 			);
-			Assert.IsTrue(Math.Abs(progress - 100) < 2);
-			Assert.IsTrue(!truncated);
+			Assert.IsLessThan(2, Math.Abs(progress - 100));
+			Assert.IsFalse(truncated);
 			Assert.IsTrue(table1 != null && table1.Count == 4);
 			Assert.IsTrue(table1[0].Input[0] == 0 && table1[0].Input[1] == 0 && table1[0].Output[0] == 0);
 			Assert.IsTrue(table1[1].Input[0] == 0 && table1[1].Input[1] == 1 && table1[1].Output[0] == 0);
@@ -137,8 +137,8 @@
 				1,
 				out truncated
 			);
-			Assert.IsTrue(Math.Abs(progress - 100) < 2);
-			Assert.IsTrue(!truncated);
+			Assert.IsLessThan(2, Math.Abs(progress - 100));
+			Assert.IsFalse(truncated);
 			Assert.IsTrue(table2 != null && table2.Count == 0);
 		}
 
@@ -160,8 +160,8 @@
 				8,
 				out truncated
 			);
-			Assert.IsTrue(Math.Abs(progress - 100) < 2);
-			Assert.IsTrue(!truncated);
+			Assert.IsLessThan(2, Math.Abs(progress - 100));
+			Assert.IsFalse(truncated);
 			Assert.IsTrue(table1 != null && table1.Count == 8);
 			foreach(TruthState state in table1) {
 				Assert.IsFalse(predicate(state));
@@ -174,8 +174,8 @@
 				1,
 				out truncated
 			);
-			Assert.IsTrue(Math.Abs(progress - 100) < 2);
-			Assert.IsTrue(!truncated);
+			Assert.IsLessThan(2, Math.Abs(progress - 100));
+			Assert.IsFalse(truncated);
 			Assert.IsTrue(table2 != null && table2.Count == 0);
 		}
 
@@ -197,8 +197,8 @@
 				1 << 17,
 				out truncated
 			);
-			Assert.IsTrue(Math.Abs(progress - 100) < 2);
-			Assert.IsTrue(!truncated);
+			Assert.IsLessThan(2, Math.Abs(progress - 100));
+			Assert.IsFalse(truncated);
 			Assert.IsTrue(table1 != null && table1.Count == (1 << 17));
 			foreach(TruthState state in table1) {
 				Assert.IsFalse(predicate(state));
@@ -211,8 +211,8 @@
 				1,
 				out truncated
 			);
-			Assert.IsTrue(Math.Abs(progress - 100) < 2);
-			Assert.IsTrue(!truncated);
+			Assert.IsLessThan(2, Math.Abs(progress - 100));
+			Assert.IsFalse(truncated);
 			Assert.IsTrue(table2 != null && table2.Count == 0);
 		}
 
@@ -248,8 +248,8 @@
 				1,
 				out truncated
 			);
-			Assert.IsTrue(Math.Abs(progress - 100) < 2);
-			Assert.IsTrue(!truncated);
+			Assert.IsLessThan(2, Math.Abs(progress - 100));
+			Assert.IsFalse(truncated);
 			Assert.IsTrue(table2 != null && table2.Count == 0);
 		}
 	}

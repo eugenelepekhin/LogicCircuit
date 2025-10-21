@@ -403,7 +403,7 @@
 
 			public FunctionSocket(ProjectTester tester) {
 				this.Tester = tester;
-				Assert.IsTrue(this.Tester.Input.Length <= 32);
+				Assert.IsLessThanOrEqualTo(32, this.Tester.Input.Length);
 			}
 
 			private int this[int index] {

@@ -42,8 +42,8 @@ namespace LogicCircuit.UnitTest {
 
 			public ClockSocket(ProjectTester tester) {
 				this.Tester = tester;
-				Assert.AreEqual(5, this.Tester.Input.Length);
-				Assert.AreEqual(3, this.Tester.Output.Length);
+				Assert.HasCount(5, this.Tester.Input);
+				Assert.HasCount(3, this.Tester.Output);
 
 				this.clock = new InputSocket(tester.Input[0]);
 				this.mPlus = new InputSocket(tester.Input[1]);

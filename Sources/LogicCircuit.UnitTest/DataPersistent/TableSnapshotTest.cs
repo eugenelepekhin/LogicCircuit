@@ -598,10 +598,10 @@ namespace LogicCircuit.UnitTest.DataPersistent {
 			while(changes.MoveNext()) {
 				Assert.IsTrue(rows.Add(changes.Current));
 			}
-			Assert.AreEqual(3, rows.Count);
-			Assert.IsTrue(rows.Contains(p1));
-			Assert.IsTrue(rows.Contains(p2));
-			Assert.IsTrue(rows.Contains(p3));
+			Assert.HasCount(3, rows);
+			Assert.Contains(p1, rows);
+			Assert.Contains(p2, rows);
+			Assert.Contains(p3, rows);
 		}
 
 		[TestMethod]
@@ -788,13 +788,13 @@ namespace LogicCircuit.UnitTest.DataPersistent {
 			// check selection by value with index
 			List<RowId> found = table.Select(LogicalCircuitData.NameField.Field, toFind.Name).ToList();
 			Assert.IsNotNull(found);
-			Assert.AreEqual(1, found.Count);
+			Assert.HasCount(1, found);
 			Assert.AreEqual(toFind.LogicalCircuitRowId, found[0]);
 
 			// check selection by value without index
 			found = table.Select(LogicalCircuitData.NoteField.Field, toFind.Note).ToList();
 			Assert.IsNotNull(found);
-			Assert.AreEqual(1, found.Count);
+			Assert.HasCount(1, found);
 			Assert.AreEqual(list[3].LogicalCircuitRowId, found[0]);
 		}
 
@@ -817,17 +817,17 @@ namespace LogicCircuit.UnitTest.DataPersistent {
 			// check selection by range without index
 			List<RowId> range = table.Select(PinData.NoteField.Field, pinName(1), pinName(3)).ToList();
 			Assert.IsNotNull(range);
-			Assert.AreEqual(3, range.Count);
+			Assert.HasCount(3, range);
 			for(int i = 1; i <= 3; i++) {
-				Assert.IsTrue(range.Contains(pins[i].PinRowId), $"Pin {i} not found in range selection.");
+				Assert.Contains(pins[i].PinRowId, range, $"Pin {i} not found in range selection.");
 			}
 
 			// check selection by range with index without range support, so essentially same as above
 			range = table.Select(PinData.NameField.Field, pinName(1), pinName(3)).ToList();
 			Assert.IsNotNull(range);
-			Assert.AreEqual(3, range.Count);
+			Assert.HasCount(3, range);
 			for(int i = 1; i <= 3; i++) {
-				Assert.IsTrue(range.Contains(pins[i].PinRowId), $"Pin {i} not found in range selection.");
+				Assert.Contains(pins[i].PinRowId, range, $"Pin {i} not found in range selection.");
 			}
 		}
 
@@ -845,9 +845,9 @@ namespace LogicCircuit.UnitTest.DataPersistent {
 			store.Commit();
 			List<RowId> range = table.Select(IntArray.Field, 3, 7).ToList();
 			Assert.IsNotNull(range);
-			Assert.AreEqual(5, range.Count);
+			Assert.HasCount(5, range);
 			for(int i = 3; i <= 7; i++) {
-				Assert.IsTrue(range.Contains(new RowId(i)), $"Value {i} not found in range selection.");
+				Assert.Contains(new RowId(i), range, $"Value {i} not found in range selection.");
 			}
 		}
 

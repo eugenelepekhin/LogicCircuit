@@ -219,7 +219,7 @@ namespace LogicCircuit.UnitTest.DataPersistent {
 					break;
 				}
 			}
-			Assert.AreEqual<int>(4, changedRows.Count, "all changes should be enumerated");
+			Assert.HasCount(4, changedRows, "all changes should be enumerated");
 
 			// undo previous transaction
 			store.Undo();
@@ -246,7 +246,7 @@ namespace LogicCircuit.UnitTest.DataPersistent {
 					break;
 				}
 			}
-			Assert.AreEqual<int>(4, changedRows.Count, "all changes should be enumerated");
+			Assert.HasCount(4, changedRows, "all changes should be enumerated");
 
 			//redo previous changes
 			store.Redo();
@@ -273,7 +273,7 @@ namespace LogicCircuit.UnitTest.DataPersistent {
 					break;
 				}
 			}
-			Assert.AreEqual<int>(4, changedRows.Count, "all changes should be enumerated");
+			Assert.HasCount(4, changedRows, "all changes should be enumerated");
 		}
 	}
 }

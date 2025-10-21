@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿// Ignore Spelling: Uri
+
+using System.Collections;
 using System.Globalization;
 using System.Resources;
 using System.Text;
@@ -138,7 +140,7 @@ namespace LogicCircuit.UnitTest {
 		/// A test for leading and trailing whitespaces in resources.
 		/// </summary>
 		[TestMethod()]
-		public void ResourcesTrimedTest() {
+		public void ResourcesTrimmedTest() {
 			StringBuilder errors = new StringBuilder();
 			foreach(CultureInfo culture in App.AvailableCultures) {
 				ResourceSet set = Resources.ResourceManager.GetResourceSet(culture, true, false);
@@ -163,7 +165,7 @@ namespace LogicCircuit.UnitTest {
 						errors.AppendLine();
 					}
 				}
-				Assert.IsTrue(errors.Length == 0, "\r\n" + errors.ToString());
+				Assert.AreEqual(0, errors.Length, "\r\n" + errors.ToString());
 			}
 		}
 
@@ -175,9 +177,9 @@ namespace LogicCircuit.UnitTest {
 			foreach(CultureInfo culture in App.AvailableCultures) {
 				Resources.Culture = culture;
 				string input = Resources.TitlePinInput("In");
-				Assert.IsTrue(input.Split('\n').Length == 2, "TitlePinInput expected to contain two lines in {0} culture", culture.Name);
+				Assert.HasCount(2, input.Split('\n'), "TitlePinInput expected to contain two lines in {0} culture", culture.Name);
 				string output = Resources.TitlePinOutput("Out");
-				Assert.IsTrue(output.Split('\n').Length == 2, "TitlePinOutput expected to contain two lines in {0} culture", culture.Name);
+				Assert.HasCount(2, output.Split('\n'), "TitlePinOutput expected to contain two lines in {0} culture", culture.Name);
 			}
 		}
 	}

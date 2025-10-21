@@ -60,7 +60,7 @@
 		public int FromBinaryDecimal() {
 			Assert.AreEqual(8, this.BitWidth, "Only 8 bit values can be interpreted as Binary Decimal");
 			int value = this.BinaryInt();
-			Assert.IsTrue((value & ~0xFF) == 0);
+			Assert.AreEqual(0, value & ~0xFF);
 			return (value >> 4) * 10 + (value & 0xF);
 		}
 	}

@@ -94,7 +94,7 @@
 				project1.CircuitSymbolSet.Create(led, main, 6, 2);
 				Wire wire = project1.WireSet.Create(main, new GridPoint(3, 3), new GridPoint(6, 3));
 			});
-			Assert.IsTrue(!Directory.Exists(dir));
+			Assert.IsFalse(Directory.Exists(dir));
 			project1.Save(file);
 			Assert.IsTrue(File.Exists(file));
 			CircuitProject project2 = CircuitProject.Create(file);

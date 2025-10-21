@@ -49,7 +49,7 @@
 			target.EndDefinition();
 
 			Assert.IsTrue(functionButton.Dependent != null && functionButton.Dependent.Length == 1 && functionButton.Dependent[0] == functionLed);
-			Assert.IsTrue(functionLed.Dependent == null);
+			Assert.IsNull(functionLed.Dependent);
 		}
 
 		/// <summary>

@@ -174,7 +174,7 @@
 
 			byte[] data = memory.MemoryValue();
 			Assert.IsNotNull(data);
-			Assert.AreEqual(16, data.Length);
+			Assert.HasCount(16, data);
 			for(int i = 0; i < data.Length; i++) {
 				data[i] = (byte)i;
 			}
