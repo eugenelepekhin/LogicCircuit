@@ -1,0 +1,27 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="BuildSetup.cmd" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Build.targets" />
+    <File Path="License.txt" />
+    <File Path="ReleaseCheckList.txt" />
+    <File Path="ToDoList.txt" />
+  </Folder>
+  <Folder Name="/Tools/">
+    <File Path="Tools/Directory.Build.props" />
+    <Project Path="Tools/FindUnusedResources/FindUnusedResources.csproj" />
+    <Project Path="Tools/ItemWrapper.Generator/ItemWrapper.Generator.csproj">
+      <BuildType Project="Release" />
+    </Project>
+  </Folder>
+  <Project Path="LogicCircuit.UnitTest/LogicCircuit.UnitTest.csproj" />
+  <Project Path="LogicCircuit/LogicCircuit.csproj">
+    <BuildDependency Project="Tools/ItemWrapper.Generator/ItemWrapper.Generator.csproj" />
+  </Project>
+  <Project Path="Setup/Setup.wixproj" Type="b7dd6f7e-def8-4e67-b5b7-07ef123db6f0">
+    <BuildDependency Project="LogicCircuit/LogicCircuit.csproj" />
+    <Platform Project="x64" />
+    <Build Project="false" />
+  </Project>
+</Solution>

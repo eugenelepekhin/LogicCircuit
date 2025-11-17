@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<LogicCircuitVersion>2.25.07.10</LogicCircuitVersion>
 		<ToolsFolder>$(MSBuildThisFileDirectory)Tools</ToolsFolder>
-		<DotNetBaseVersion>net9.0</DotNetBaseVersion>
+		<DotNetBaseVersion>net10.0</DotNetBaseVersion>
 		<DotNetWpfVersion>$(DotNetBaseVersion)-windows</DotNetWpfVersion>
 	</PropertyGroup>
 

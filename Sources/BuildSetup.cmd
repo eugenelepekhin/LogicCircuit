@@ -1,7 +1,7 @@
 @echo off
 
 if "%VSCMD_VER%" == "" (
-	echo This .CMD file must be run from "Developer Command Prompt for VS 2022" or later
+	echo This .CMD file must be run from "Developer Command Prompt for VS" or later
 	exit /B
 )
 
