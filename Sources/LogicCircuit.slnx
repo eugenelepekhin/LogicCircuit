@@ -16,7 +16,7 @@
     </Project>
   </Folder>
   <Project Path="LogicCircuit.UnitTest/LogicCircuit.UnitTest.csproj" />
-  <Project Path="LogicCircuit/LogicCircuit.csproj">
+  <Project Path="LogicCircuit/LogicCircuit.csproj" DefaultStartup="true">
     <BuildDependency Project="Tools/ItemWrapper.Generator/ItemWrapper.Generator.csproj" />
   </Project>
   <Project Path="Setup/Setup.wixproj" Type="b7dd6f7e-def8-4e67-b5b7-07ef123db6f0">
