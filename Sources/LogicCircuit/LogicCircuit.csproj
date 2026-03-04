@@ -17,8 +17,8 @@
 
   <ItemGroup>
     <PackageReference Include="Antlr4.Runtime.Standard" Version="4.13.1" />
-    <PackageReference Include="Antlr4BuildTasks" Version="12.11.0" />
-    <PackageReference Include="EugeneLepekhin.StrongTypeResource" Version="1.1.10" />
+    <PackageReference Include="Antlr4BuildTasks" Version="12.14.0" />
+    <PackageReference Include="EugeneLepekhin.StrongTypeResource" Version="1.1.12" />
     <PackageReference Include="IronPython" Version="3.4.2" />
     <PackageReference Include="IronPython.StdLib" Version="3.4.2" />
   </ItemGroup>
@@ -33,10 +33,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Antlr4 Include="TruthTableFilterParser.g4">
+    <Antlr4 Include="TruthTableFilterLexer.g4">
       <Listener>False</Listener>
     </Antlr4>
-    <Antlr4 Include="TruthTableFilterLexer.g4">
+    <Antlr4 Include="TruthTableFilterParser.g4">
       <Listener>False</Listener>
     </Antlr4>
   </ItemGroup>
