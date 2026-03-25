@@ -106,7 +106,7 @@ namespace LogicCircuit {
 			return Math.Max(2, defaultHeight);
 		}
 
-		[MemberNotNull(nameof(this.pins))]
+		[MemberNotNull(nameof(pins))]
 		private void Update() {
 			if(!this.isUpdated) {
 				if(this.pins == null) {

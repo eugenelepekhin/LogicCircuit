@@ -105,7 +105,7 @@ namespace LogicCircuit {
 			this.Invalidate();
 		}
 
-		[MemberNotNull(nameof(this.jams))]
+		[MemberNotNull(nameof(jams))]
 		private void Update() {
 			if(!this.isUpdated) {
 				if(this.jams == null) {

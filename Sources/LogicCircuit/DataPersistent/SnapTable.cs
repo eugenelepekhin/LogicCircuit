@@ -232,7 +232,7 @@ namespace DataPersistent {
 		}
 
 		#pragma warning disable CS8774 // Member must have a non-null value when exiting.
-		[MemberNotNull(nameof(this.Indexes), nameof(this.ForeignKeys), nameof(this.Children))]
+		[MemberNotNull(nameof(Indexes), nameof(ForeignKeys), nameof(Children))]
 		private void InitFields(int count) {
 			if(this.IsUserTable) {
 				this.Indexes = new List<IIndex<TRecord>>[count];
