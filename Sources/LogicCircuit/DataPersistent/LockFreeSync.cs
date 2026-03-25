@@ -1,4 +1,6 @@
-﻿namespace DataPersistent {
+﻿using System.Threading;
+
+namespace DataPersistent {
 	/// <summary>
 	/// Implements lock-free synchronization primitives.
 	/// </summary>
@@ -17,8 +19,8 @@
 	/// 	http://msdn.microsoft.com/en-us/library/ms254271.aspx
 	/// </remarks>
 	internal static class LockFreeSync {
-		private static volatile int volatileDummy;
-		private static int dummy;
+		//private static volatile int volatileDummy;
+		//private static int dummy;
 
 		/// <summary>
 		/// Forces all previous reads to complete before any subsequent read is started.
@@ -49,35 +51,40 @@
 		/// Similar to MFENCE Pentium instruction and _ReadWriteBarrier in Visual C++.
 		/// </remarks>
 		public static void ReadWriteBarrier() {
-			// Note: The order of the following two operations is important and cannot be reversed.
-			// The operations are guaranteed to be executed in this order, because they reference
-			// the same volatile field.
-			// C# level:  [1, §10.10, Execution order]
-			// CLI level: [2, §12.6.4, Optimization]
-			// CPU level:
-			//   Reads may be reordered with older writes to different locations but not with older
-			//   writes to the same location [4].
+			// this is the obsolete implementation of a full memory barrier, which is based on the fact that volatile reads and writes
 
-			// A volatile write is guaranteed to happen AFTER all previous reads and writes.
-			// C# level: [1, §17.4.3, Volatile fields]
-			// CLI level: [2, §12.6.7, Volatile reads and writes][3].
-			// CPU level:
-			//   This is translated to a normal write on x86, because:
-			//   1) Writes are not reordered with other writes (with some exceptions) [4].
-			//   2) Writes are not reordered with older reads [4].
-			volatileDummy = 0;
+			//// Note: The order of the following two operations is important and cannot be reversed.
+			//// The operations are guaranteed to be executed in this order, because they reference
+			//// the same volatile field.
+			//// C# level:  [1, §10.10, Execution order]
+			//// CLI level: [2, §12.6.4, Optimization]
+			//// CPU level:
+			////   Reads may be reordered with older writes to different locations but not with older
+			////   writes to the same location [4].
 
-			// A volatile read is guaranteed to happen BEFORE all following reads and writes.
-			// [1, §17.4.3, Volatile fields][2, §12.6.7, Volatile reads and writes][3].
-			// This is translated to a normal read on x86, because:
-			//   1) Reads are not reordered with other reads [4].
-			//   2) Writes are not reordered with older reads [4].
-			//
-			// Note: If you read into a local variable, the operation will be optimized away
-			// by the JITter. This is a bug, because "an optimizing compiler that converts CIL
-			// to native code shall not remove any volatile operation" [2, §12.6.7, Volatile
-			// reads and writes].
-			dummy = volatileDummy;
+			//// A volatile write is guaranteed to happen AFTER all previous reads and writes.
+			//// C# level: [1, §17.4.3, Volatile fields]
+			//// CLI level: [2, §12.6.7, Volatile reads and writes][3].
+			//// CPU level:
+			////   This is translated to a normal write on x86, because:
+			////   1) Writes are not reordered with other writes (with some exceptions) [4].
+			////   2) Writes are not reordered with older reads [4].
+			//volatileDummy = 0;
+
+			//// A volatile read is guaranteed to happen BEFORE all following reads and writes.
+			//// [1, §17.4.3, Volatile fields][2, §12.6.7, Volatile reads and writes][3].
+			//// This is translated to a normal read on x86, because:
+			////   1) Reads are not reordered with other reads [4].
+			////   2) Writes are not reordered with older reads [4].
+			////
+			//// Note: If you read into a local variable, the operation will be optimized away
+			//// by the JITter. This is a bug, because "an optimizing compiler that converts CIL
+			//// to native code shall not remove any volatile operation" [2, §12.6.7, Volatile
+			//// reads and writes].
+			//dummy = volatileDummy;
+
+			// the modern way to implement a full memory barrier is to use Interlocked.MemoryBarrier method, which is available in .NET Framework 4.5 and later versions [3].
+			Interlocked.MemoryBarrier();
 		}
 	}
 }

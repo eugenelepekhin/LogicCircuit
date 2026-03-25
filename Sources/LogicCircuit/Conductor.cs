@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace LogicCircuit {
 	public class Conductor {
@@ -41,6 +39,12 @@ namespace LogicCircuit {
 			return 0;
 		}
 
-		public IEnumerable<GridPoint> JunctionPoints(int minCount) => this.pointMap.Where(pair => minCount <= pair.Value).Select(pair => pair.Key);
+		public IEnumerable<GridPoint> JunctionPoints(int minCount) {
+			foreach(var pair in this.pointMap) {
+				if(minCount <= pair.Value) {
+					yield return pair.Key;
+				}
+			}
+		}
 	}
 }
