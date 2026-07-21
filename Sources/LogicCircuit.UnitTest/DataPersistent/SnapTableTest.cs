@@ -17,7 +17,7 @@ namespace LogicCircuit.UnitTest.DataPersistent {
 
 			Assert.AreEqual(store.SnapStore, table.StoreSnapshot.SnapStore);
 			Assert.AreEqual<string>("test", table.Name);
-			Assert.AreEqual(table, store.Table("test"));
+			Assert.AreSame(table, store.Table("test"));
 
 			// we can't create table with the same name
 			store = new StoreSnapshot();
@@ -31,7 +31,7 @@ namespace LogicCircuit.UnitTest.DataPersistent {
 			store.FreezeShape();
 			Assert.AreEqual(store.SnapStore, table3.StoreSnapshot.SnapStore);
 			Assert.AreEqual<string>("other", table3.Name);
-			Assert.AreEqual(table3, store.Table("other"));
+			Assert.AreSame(table3, store.Table("other"));
 		}
 
 		[TestMethod]
