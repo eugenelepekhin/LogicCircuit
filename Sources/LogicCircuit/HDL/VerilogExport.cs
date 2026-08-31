@@ -127,9 +127,9 @@ namespace LogicCircuit {
 			}
 			if(circuit is Memory memory) {
 				if(memory.Writable) {
-					return string.Format(CultureInfo.InvariantCulture, "{0}_RAM_{1}x{2}", symbol.CircuitSymbol.LogicalCircuit.Name, symbol.CircuitSymbol.X, symbol.CircuitSymbol.Y);
+					return string.Format(CultureInfo.InvariantCulture, "{0}_RAM_{1}x{2}", this.FixName(symbol.CircuitSymbol.LogicalCircuit.Name), symbol.CircuitSymbol.X, symbol.CircuitSymbol.Y);
 				} else {
-					return string.Format(CultureInfo.InvariantCulture, "{0}_ROM_{1}x{2}", symbol.CircuitSymbol.LogicalCircuit.Name, symbol.CircuitSymbol.X, symbol.CircuitSymbol.Y);
+					return string.Format(CultureInfo.InvariantCulture, "{0}_ROM_{1}x{2}", this.FixName(symbol.CircuitSymbol.LogicalCircuit.Name), symbol.CircuitSymbol.X, symbol.CircuitSymbol.Y);
 				}
 			}
 			return this.FixName(circuit.Name.Trim());
