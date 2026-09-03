@@ -58,7 +58,7 @@ namespace LogicCircuit {
 			}
 		}
 
-		private static Version CurrentVersion() {
+		public static Version CurrentVersion() {
 			return Assembly.GetExecutingAssembly().GetName().Version!;
 		}
 
