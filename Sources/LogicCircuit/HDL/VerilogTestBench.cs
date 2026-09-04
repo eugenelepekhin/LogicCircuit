@@ -70,7 +70,7 @@ namespace LogicCircuit {
 						value = value.Replace('-', 'z');
 						this.Write("'b{0}", value);
 					} else {
-						this.Write("{0}", value);
+						this.Write("'h{0}", value);
 					}
 					outputIndex++;
 				}
