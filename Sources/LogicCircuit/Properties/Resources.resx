@@ -826,7 +826,7 @@ Do you want to replace it?</value>
     <value>Used By...</value>
   </data>
   <data name="MessageNotUsed" xml:space="preserve">
-    <value>This logical circuit does not used anywhere.</value>
+    <value>This logical circuit is not used anywhere.</value>
   </data>
   <data name="MessageUsageNote" xml:space="preserve">
     <value>Select circuit where the current one is used and double-click it to navigate there and select symbols of current one.</value>
