@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Store xmlns="clr-namespace:ItemWrapper.Generator;assembly=ItemWrapper.Generator"
 	Namespace="LogicCircuit" Name="CircuitProject"
-	PersistenceNamespace="http://LogicCircuit.net/2.0.0.14/CircuitProject.xsd"
+	PersistenceNamespace="http://LogicCircuit.net/2.0.0.15/CircuitProject.xsd"
 >
 
 	<!--
@@ -26,6 +26,7 @@
 		Version 2.0.0.12 - Adding two keyboard variants to sensor
 		Version 2.0.0.13 - Adding pin side to probes, adding two sensor types - sequential and clock
 		Version 2.0.0.14 - Making use of XML attributes and default name space prefix to reduce size of the file.
+		Version 2.0.0.15 - Adding flag ExportToHDL to LogicalCircuit
 	-->
 
 	<Table Name="Project">
@@ -140,6 +141,7 @@
 			<Column Name="CircuitShape" Type="CircuitShape" Default="CircuitShape.Rectangular"/>
 			<!-- List of expression to use in truth table filter -->
 			<Column Name="Validators" Type="string" Default=""/>
+			<Column Name="ExportToHDL" Type="bool" Default="true"/>
 		</Table.Columns>
 
 		<Table.Keys>

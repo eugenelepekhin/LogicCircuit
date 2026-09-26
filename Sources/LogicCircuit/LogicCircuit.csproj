@@ -47,11 +47,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ReportBuilder.tt</DependentUpon>
     </Compile>
-    <Compile Update="Schema\Schema.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Schema.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -63,7 +58,7 @@
       <Generator>MSBuild:StrongTypeResourcePublic</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Schema\Schema.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>MSBuild:StrongTypeResourceInternal</Generator>
       <LastGenOutput>Schema.Designer.cs</LastGenOutput>
       <CustomToolNamespace>LogicCircuit</CustomToolNamespace>
     </EmbeddedResource>

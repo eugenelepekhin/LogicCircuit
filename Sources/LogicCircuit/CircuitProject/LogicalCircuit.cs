@@ -201,7 +201,8 @@ namespace LogicCircuit {
 				LogicalCircuitData.NoteField.Field.DefaultValue,
 				LogicalCircuitData.CategoryField.Field.DefaultValue,
 				LogicalCircuitData.CircuitShapeField.Field.DefaultValue,
-				LogicalCircuitData.ValidatorsField.Field.DefaultValue
+				LogicalCircuitData.ValidatorsField.Field.DefaultValue,
+				LogicalCircuitData.ExportToHDLField.Field.DefaultValue
 			);
 			circuit.PropertyChanged += new PropertyChangedEventHandler(this.CircuitPropertyChanged);
 			return circuit;

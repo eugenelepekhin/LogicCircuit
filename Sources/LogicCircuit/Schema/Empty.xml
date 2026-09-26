@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<CircuitProject xmlns="http://LogicCircuit.net/2.0.0.14/CircuitProject.xsd">
+<CircuitProject xmlns="http://LogicCircuit.net/2.0.0.15/CircuitProject.xsd">
 	<Project ProjectId="{0}" Name="{1}" LogicalCircuitId="{2}"/>
 	<LogicalCircuit LogicalCircuitId="{2}" Name="{3}" Notation="{4}"/>
 </CircuitProject>
