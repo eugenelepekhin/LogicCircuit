@@ -36,6 +36,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Properties\AttributeConversion.CircuitProject">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Properties\CircuitMapCleanUpTest.CircuitProject">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

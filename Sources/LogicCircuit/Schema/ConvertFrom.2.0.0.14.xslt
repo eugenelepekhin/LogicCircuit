@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <xsl:stylesheet
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns ="http://LogicCircuit.net/2.0.0.15/CircuitProject.xsd"
+	xmlns    ="http://LogicCircuit.net/2.0.0.15/CircuitProject.xsd"
+	xmlns:lc ="http://LogicCircuit.net/2.0.0.15/CircuitProject.xsd"
 	version="1.0"
 >
 	<xsl:output method="xml" version="1.0" standalone="yes" indent="yes"/>

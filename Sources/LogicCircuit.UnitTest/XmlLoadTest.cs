@@ -51,5 +51,21 @@ namespace LogicCircuit.UnitTest {
 			Assert.AreEqual(9, wire.X2);
 			Assert.AreEqual(9, wire.Y1);
 		}
+
+		[STATestMethod]
+		[DeploymentItem("Properties\\AttributeConversion.CircuitProject")]
+		public void XmlConvertFromV14Test() {
+			string file = "AttributeConversion.CircuitProject";
+			string text = File.ReadAllText(Path.Combine(this.TestContext.DeploymentDirectory, file));
+			XmlDocument xml = new XmlDocument();
+			xml.LoadXml(text);
+			Assert.AreEqual(@"http://LogicCircuit.net/2.0.0.14/CircuitProject.xsd", xml.DocumentElement.NamespaceURI);
+
+			CircuitProject circuitProject = ProjectTester.LoadDeployedFile(this.TestContext, file, null);
+			Assert.IsNotNull(circuitProject);
+
+			Assert.AreEqual(2, circuitProject.TextNoteSet.Count());
+			Assert.AreEqual(2, circuitProject.MemorySet.Count());
+		}
 	}
 }
