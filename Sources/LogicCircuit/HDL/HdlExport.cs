@@ -90,13 +90,13 @@ namespace LogicCircuit {
 
 			bool needExport(LogicalCircuit circuit) {
 				if(!circuit.ExportToHDL) {
-					this.Message($"Circuit {circuit.Name} is excluded from HDL export.");
+					this.Message(Properties.Resources.MessageExcludedFromHdlExport(circuit.Name));
 				}
 				return circuit.ExportToHDL;
 			}
 
 			bool walk(CircuitMap circuitMap, HashSet<LogicalCircuit> exported) {
-				if(needExport(circuitMap.Circuit) && exported.Add(circuitMap.Circuit)) {
+				if(exported.Add(circuitMap.Circuit) && needExport(circuitMap.Circuit)) {
 					if(export(circuitMap.Circuit)) {
 						foreach(CircuitMap child in circuitMap.Children) {
 							if(continueExport != null && !continueExport(0) || !walk(child, exported)) {
