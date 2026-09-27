@@ -1772,7 +1772,7 @@ Do you want to load auto saved state of this file?</value>
     <comment>{string message}</comment>
   </data>
   <data name="TitleIncludeInHdlExport" xml:space="preserve">
-    <value>Export to HDL</value>
+    <value>_Export to HDL</value>
   </data>
   <data name="MessageExcludedFromHdlExport" xml:space="preserve">
     <value>Circuit {0} is excluded from HDL export.</value>

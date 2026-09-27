@@ -10,7 +10,6 @@
   </Folder>
   <Folder Name="/Tools/">
     <File Path="Tools/Directory.Build.props" />
-    <Project Path="Tools/FindUnusedResources/FindUnusedResources.csproj" />
     <Project Path="Tools/ItemWrapper.Generator/ItemWrapper.Generator.csproj">
       <BuildType Project="Release" />
     </Project>
