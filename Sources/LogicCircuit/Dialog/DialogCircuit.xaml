@@ -54,6 +54,8 @@
 						</ComboBox.ItemTemplate>
 					</ComboBox>
 
+					<CheckBox Grid.Column="1"  Name="exportToHDL" Content="Export to HDL"/>
+
 					<Label Content="{x:Static properties:Resources.TitleDescription}"/>
 					<TextBox Name="description" Style="{StaticResource NoteEditor}"/>
 				</lc:AutoGrid>

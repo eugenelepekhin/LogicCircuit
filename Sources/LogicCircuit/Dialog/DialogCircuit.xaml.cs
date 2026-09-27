@@ -101,6 +101,7 @@ namespace LogicCircuit {
 
 			this.category.Text = this.logicalCircuit.Category;
 			this.shapes.SelectedItem = this.CircuitShapes.FirstOrDefault(d => d.Value == this.logicalCircuit.CircuitShape) ?? this.CircuitShapes.First();
+			this.exportToHDL.IsChecked = this.logicalCircuit.ExportToHDL;
 			this.description.Text = this.logicalCircuit.Note;
 
 			IEnumerable<Pin> pins(PinSide pinSide) => this.logicalCircuit.Pins.Where(pin => pin.PinSide == pinSide).Select(pin => (Pin)pin);
@@ -161,6 +162,7 @@ namespace LogicCircuit {
 				string category = this.category.Text.Trim();
 				category = category.Substring(0, Math.Min(category.Length, 64)).Trim();
 				ShapeDescriptor shape = (ShapeDescriptor)this.shapes.SelectedItem;
+				bool exportToHDL = this.exportToHDL.IsChecked == true;
 				string description = this.description.Text.Trim();
 				bool leftChanged = this.leftPins.HasChanges();
 				bool rightChanged = this.rightPins.HasChanges();
@@ -168,7 +170,7 @@ namespace LogicCircuit {
 				bool bottomChanged = this.bottomPins.HasChanges();
 
 				if(this.logicalCircuit.Name != name || this.logicalCircuit.Notation != notation ||
-					this.logicalCircuit.Category != category || this.logicalCircuit.CircuitShape != shape.Value || this.logicalCircuit.Note != description ||
+					this.logicalCircuit.Category != category || this.logicalCircuit.CircuitShape != shape.Value || this.logicalCircuit.ExportToHDL != exportToHDL || this.logicalCircuit.Note != description ||
 					leftChanged || rightChanged || topChanged || bottomChanged
 				) {
 					this.logicalCircuit.CircuitProject.InTransaction(() => {
@@ -176,6 +178,7 @@ namespace LogicCircuit {
 						this.logicalCircuit.Notation = notation;
 						this.logicalCircuit.Category = category;
 						this.logicalCircuit.CircuitShape = shape.Value;
+						this.logicalCircuit.ExportToHDL = exportToHDL;
 						this.logicalCircuit.Note = description;
 						this.logicalCircuit.CircuitProject.CollapsedCategorySet.Purge();
 						if(leftChanged) this.leftPins.Update();

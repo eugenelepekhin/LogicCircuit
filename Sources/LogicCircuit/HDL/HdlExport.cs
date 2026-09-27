@@ -88,8 +88,15 @@ namespace LogicCircuit {
 				return false;
 			}
 
+			bool needExport(LogicalCircuit circuit) {
+				if(!circuit.ExportToHDL) {
+					this.Message($"Circuit {circuit.Name} is excluded from HDL export.");
+				}
+				return circuit.ExportToHDL;
+			}
+
 			bool walk(CircuitMap circuitMap, HashSet<LogicalCircuit> exported) {
-				if(exported.Add(circuitMap.Circuit)) {
+				if(needExport(circuitMap.Circuit) && exported.Add(circuitMap.Circuit)) {
 					if(export(circuitMap.Circuit)) {
 						foreach(CircuitMap child in circuitMap.Children) {
 							if(continueExport != null && !continueExport(0) || !walk(child, exported)) {
@@ -106,7 +113,7 @@ namespace LogicCircuit {
 			bool result = false;
 			void run() {
 				if(onlyOne) {
-					result = export(circuit);
+					result = !needExport(circuit) || export(circuit);
 				} else {
 					result = walk(map, new HashSet<LogicalCircuit>());
 				}

@@ -239,6 +239,36 @@ namespace LogicCircuit.UnitTest {
 			this.RunTruthTableComparisonForCategory("FixNames", true, fixName);
 		}
 
+		[STATestMethod]
+		public void HdlTestIncludeInExport() {
+			CircuitProject project = this.LoadCircuitProject();
+			string hdlPath = this.HdlFolder();
+			LogicalCircuit level2 = project.LogicalCircuitSet.FindByName("Level2");
+			LogicalCircuit level3 = project.LogicalCircuitSet.FindByName("Level3");
+			LogicalCircuit level32 = project.LogicalCircuitSet.FindByName("Level32");
+
+			N2TExport export = new N2TExport(false, false, false, this.Message, this.Message, this.Message);
+			bool success = export.ExportCircuit(level3, hdlPath, false, false, null, () => {});
+			Assert.IsTrue(success);
+			List<string> files = Directory.EnumerateFiles(hdlPath).ToList();
+			Assert.AreEqual(1, files.Count);
+			files.ForEach(f => File.Delete(f));
+
+			success = export.ExportCircuit(level32, hdlPath, false, false, null, () => {});
+			Assert.IsTrue(success);
+			files = Directory.EnumerateFiles(hdlPath).ToList();
+			Assert.AreEqual(2, files.Count);
+			files.ForEach(f => File.Delete(f));
+
+
+			project.InTransaction(() => level2.ExportToHDL = true);
+			success = export.ExportCircuit(level3, hdlPath, false, false, null, () => {});
+			Assert.IsTrue(success);
+			files = Directory.EnumerateFiles(hdlPath).ToList();
+			Assert.AreEqual(3, files.Count);
+			files.ForEach(f => File.Delete(f));
+		}
+
 		//[STATestMethod]
 		public void HdlTestSingleTest() {
 			HdlState state = this.LoadState("MissingXNorJam");
