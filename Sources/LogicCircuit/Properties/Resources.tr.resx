@@ -1631,4 +1631,43 @@ temelde bir çoğullayıcıya eşdeğerdir.</value>
 	<data name="ParserErrorMessage" xml:space="preserve">
 		<value>Hata: {0}</value>
 	</data>
+	<data name="TitleSymbolShape" xml:space="preserve">
+		<value>_Sembol şekli:</value>
+	</data>
+	<data name="SymbolShapeAlu" xml:space="preserve">
+		<value>ALU</value>
+	</data>
+	<data name="SymbolShapeDemux" xml:space="preserve">
+		<value>Demultiplexer</value>
+	</data>
+	<data name="SymbolShapeDisplay" xml:space="preserve">
+		<value>Ekran</value>
+	</data>
+	<data name="SymbolShapeFlipFlop" xml:space="preserve">
+		<value>Flip-flop</value>
+	</data>
+	<data name="SymbolShapeMux" xml:space="preserve">
+		<value>Multiplexer</value>
+	</data>
+	<data name="CommandEllipsis" xml:space="preserve">
+		<value>...</value>
+	</data>
+	<data name="HdlExportN2T" xml:space="preserve">
+		<value>From Nand to Tetris HDL</value>
+	</data>
+	<data name="HdlExportN2TandTests" xml:space="preserve">
+		<value>From Nand to Tetris HDL ve test dosyaları</value>
+	</data>
+	<data name="HdlExportVerilog" xml:space="preserve">
+		<value>SystemVerilog</value>
+	</data>
+	<data name="HdlExportVerilogFull" xml:space="preserve">
+		<value>SystemVerilog ve test ortamı</value>
+	</data>
+	<data name="TitleIncludeInHdlExport" xml:space="preserve">
+		<value>_HDL olarak dışa aktar</value>
+	</data>
+	<data name="MessageExcludedFromHdlExport" xml:space="preserve">
+		<value>{0} devresi HDL dışa aktarımının dışında bırakıldı.</value>
+	</data>
 </root>

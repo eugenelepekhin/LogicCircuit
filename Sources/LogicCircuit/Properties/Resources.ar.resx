@@ -1580,4 +1580,83 @@
 	<data name="ParserErrorMessage" xml:space="preserve">
 		<value>خطأ: {0}</value>
 	</data>
+	<data name="CommandToolsIronPython" xml:space="preserve">
+		<value>IronPython Console</value>
+	</data>
+	<data name="MessageLoadAutoSavedFile" xml:space="preserve">
+		<value>لم يتم حفظ الملف "{0}" بشكل صحيح.
+هل تريد تحميل الحالة المحفوظة تلقائيًا لهذا الملف؟</value>
+	</data>
+	<data name="TitleAutoSave" xml:space="preserve">
+		<value>حفظ التغييرات تلقائيًا كل:</value>
+	</data>
+	<data name="TitleMinutesUnits" xml:space="preserve">
+		<value>دقيقة</value>
+	</data>
+	<data name="TitlePinIndex" xml:space="preserve">
+		<value>ترتيب Pin</value>
+	</data>
+	<data name="TitlePinIndexReset" xml:space="preserve">
+		<value>إعادة الضبط إلى الوضع الرسومي</value>
+	</data>
+	<data name="TitleStartupCircuit" xml:space="preserve">
+		<value>بدء التشغيل:</value>
+	</data>
+	<data name="TitleCurrent" xml:space="preserve">
+		<value>الدارة المنطقية الحالية</value>
+	</data>
+	<data name="MemoryAddress2PinName" xml:space="preserve">
+		<value>منفذ عنوان الذاكرة 2</value>
+	</data>
+	<data name="MemoryAddress2PinNotation" xml:space="preserve">
+		<value>a2</value>
+	</data>
+	<data name="MemoryData2PinName" xml:space="preserve">
+		<value>منفذ بيانات الذاكرة 2</value>
+	</data>
+	<data name="MemoryData2PinNotation" xml:space="preserve">
+		<value>d2</value>
+	</data>
+	<data name="TitleDualPort" xml:space="preserve">
+		<value>منفذ مزدوج</value>
+	</data>
+	<data name="TitleSymbolShape" xml:space="preserve">
+		<value>شكل الرمز:</value>
+	</data>
+	<data name="SymbolShapeAlu" xml:space="preserve">
+		<value>وحدة الحساب والمنطق</value>
+	</data>
+	<data name="SymbolShapeDemux" xml:space="preserve">
+		<value>موزّع</value>
+	</data>
+	<data name="SymbolShapeDisplay" xml:space="preserve">
+		<value>شاشة</value>
+	</data>
+	<data name="SymbolShapeFlipFlop" xml:space="preserve">
+		<value>قلاب (Flip-flop)</value>
+	</data>
+	<data name="SymbolShapeMux" xml:space="preserve">
+		<value>مجمّع</value>
+	</data>
+	<data name="CommandEllipsis" xml:space="preserve">
+		<value>...</value>
+	</data>
+	<data name="HdlExportN2T" xml:space="preserve">
+		<value>From Nand to Tetris HDL</value>
+	</data>
+	<data name="HdlExportN2TandTests" xml:space="preserve">
+		<value>From Nand to Tetris HDL وملفات الاختبار</value>
+	</data>
+	<data name="HdlExportVerilog" xml:space="preserve">
+		<value>SystemVerilog</value>
+	</data>
+	<data name="HdlExportVerilogFull" xml:space="preserve">
+		<value>SystemVerilog وبيئة الاختبار</value>
+	</data>
+	<data name="TitleIncludeInHdlExport" xml:space="preserve">
+		<value>تصدير إلى HDL</value>
+	</data>
+	<data name="MessageExcludedFromHdlExport" xml:space="preserve">
+		<value>تم استبعاد الدارة {0} من تصدير HDL.</value>
+	</data>
 </root>

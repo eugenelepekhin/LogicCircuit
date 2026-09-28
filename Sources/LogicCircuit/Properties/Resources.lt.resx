@@ -1629,4 +1629,43 @@ Ar norite užkrauti automatiškai išsaugota šio failo būseną?</value>
 	<data name="ParserErrorMessage" xml:space="preserve">
 		<value>Klaida: {0}</value>
 	</data>
+	<data name="TitleSymbolShape" xml:space="preserve">
+		<value>Simbolio forma:</value>
+	</data>
+	<data name="SymbolShapeAlu" xml:space="preserve">
+		<value>ALU</value>
+	</data>
+	<data name="SymbolShapeDemux" xml:space="preserve">
+		<value>Demultiplekseris</value>
+	</data>
+	<data name="SymbolShapeDisplay" xml:space="preserve">
+		<value>Ekranas</value>
+	</data>
+	<data name="SymbolShapeFlipFlop" xml:space="preserve">
+		<value>Trigeris</value>
+	</data>
+	<data name="SymbolShapeMux" xml:space="preserve">
+		<value>Multiplekseris</value>
+	</data>
+	<data name="CommandEllipsis" xml:space="preserve">
+		<value>...</value>
+	</data>
+	<data name="HdlExportN2T" xml:space="preserve">
+		<value>From Nand to Tetris HDL</value>
+	</data>
+	<data name="HdlExportN2TandTests" xml:space="preserve">
+		<value>From Nand to Tetris HDL ir bandymų failai</value>
+	</data>
+	<data name="HdlExportVerilog" xml:space="preserve">
+		<value>SystemVerilog</value>
+	</data>
+	<data name="HdlExportVerilogFull" xml:space="preserve">
+		<value>SystemVerilog ir bandymų stendas</value>
+	</data>
+	<data name="TitleIncludeInHdlExport" xml:space="preserve">
+		<value>Eksportuoti į HDL</value>
+	</data>
+	<data name="MessageExcludedFromHdlExport" xml:space="preserve">
+		<value>Grandinė {0} neįtraukta į HDL eksportą.</value>
+	</data>
 </root>

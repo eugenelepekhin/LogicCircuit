@@ -1701,4 +1701,25 @@ Permite seleccionar el tamaño y profundidad de color / esquema:
 	<data name="ParserErrorMessage" xml:space="preserve">
 		<value>Error: {0}</value>
 	</data>
+	<data name="CommandEllipsis" xml:space="preserve">
+		<value>...</value>
+	</data>
+	<data name="HdlExportN2T" xml:space="preserve">
+		<value>From Nand to Tetris HDL</value>
+	</data>
+	<data name="HdlExportN2TandTests" xml:space="preserve">
+		<value>From Nand to Tetris HDL y archivos de prueba</value>
+	</data>
+	<data name="HdlExportVerilog" xml:space="preserve">
+		<value>SystemVerilog</value>
+	</data>
+	<data name="HdlExportVerilogFull" xml:space="preserve">
+		<value>SystemVerilog y banco de pruebas</value>
+	</data>
+	<data name="TitleIncludeInHdlExport" xml:space="preserve">
+		<value>Exportar a HDL</value>
+	</data>
+	<data name="MessageExcludedFromHdlExport" xml:space="preserve">
+		<value>El circuito {0} está excluido de la exportación a HDL.</value>
+	</data>
 </root>

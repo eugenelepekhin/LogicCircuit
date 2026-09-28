@@ -1438,4 +1438,290 @@ Circuiti di questo tipo non possono essere utilizzati più di una volta su altri
 	<data name="ParserErrorMessage" xml:space="preserve">
 		<value>Errore: {0}</value>
 	</data>
+	<data name="CaptionPinSide" xml:space="preserve">
+		<value>Lato del pin</value>
+	</data>
+	<data name="TitlePinSide" xml:space="preserve">
+		<value>_Lato del pin:</value>
+	</data>
+	<data name="ToolTipDevicePinSide" xml:space="preserve">
+		<value>Scegli il lato su cui si troverà il pin</value>
+	</data>
+	<data name="NameSensor" xml:space="preserve">
+		<value>Sensore</value>
+	</data>
+	<data name="ToolTipSensor" xml:space="preserve">
+		<value>Sensore {0}</value>
+	</data>
+	<data name="CaptionSensorType" xml:space="preserve">
+		<value>Tipo di sensore</value>
+	</data>
+	<data name="SensorTypeManual" xml:space="preserve">
+		<value>Manuale</value>
+	</data>
+	<data name="SensorTypeRandom" xml:space="preserve">
+		<value>Casuale</value>
+	</data>
+	<data name="SensorTypeSeries" xml:space="preserve">
+		<value>Serie</value>
+	</data>
+	<data name="ToolTipSensorBitWidth" xml:space="preserve">
+		<value>Scegli la larghezza in bit del sensore</value>
+	</data>
+	<data name="ToolTipSensorNotation" xml:space="preserve">
+		<value>Inserisci la notazione del sensore</value>
+	</data>
+	<data name="ToolTipSensorType" xml:space="preserve">
+		<value>Scegli da dove il sensore otterrà i dati da fornire</value>
+	</data>
+	<data name="TitleSensorType" xml:space="preserve">
+		<value>_Tipo di sensore:</value>
+	</data>
+	<data name="ErrorBadInterval" xml:space="preserve">
+		<value>Il minimo deve essere minore o uguale al massimo.</value>
+	</data>
+	<data name="ErrorBadPositiveNumber" xml:space="preserve">
+		<value>È previsto un numero maggiore di 0.</value>
+	</data>
+	<data name="ErrorEmptySeries" xml:space="preserve">
+		<value>La serie non deve essere vuota</value>
+	</data>
+	<data name="ErrorSeriesItem" xml:space="preserve">
+		<value>Errore in {0}. Deve essere una coppia di numeri esadecimali separati da :</value>
+	</data>
+	<data name="ErrorSeriesItemOrder" xml:space="preserve">
+		<value>Errore in {0}. Ogni ciclo successivo deve essere maggiore del precedente.</value>
+	</data>
+	<data name="TitleLoopSeries" xml:space="preserve">
+		<value>_Ripeti la serie</value>
+	</data>
+	<data name="TitleSensorRandomMax" xml:space="preserve">
+		<value>Cicli m_assimi:</value>
+	</data>
+	<data name="TitleSensorRandomMin" xml:space="preserve">
+		<value>Cicli _minimi:</value>
+	</data>
+	<data name="TitleSeries" xml:space="preserve">
+		<value>_Serie:</value>
+	</data>
+	<data name="ToolTipSensorRandomMax" xml:space="preserve">
+		<value>Inserisci il numero massimo di cicli prima che il sensore cambi la sua misura.</value>
+	</data>
+	<data name="ToolTipSensorRandomMin" xml:space="preserve">
+		<value>Inserisci il numero minimo di cicli prima che il sensore cambi la sua misura.</value>
+	</data>
+	<data name="ToolTipSeriesData" xml:space="preserve">
+		<value>Fornisci la serie di misure del sensore nella forma &lt;ciclo&gt;:&lt;valore&gt;
+dove sia il ciclo sia il valore sono esadecimali.
+Quando il ciclo è un numero pari o 0 corrisponde al passaggio
+del clock da 0 a 1, quando è dispari il clock passa da 1 a 0.</value>
+	</data>
+	<data name="NameSound" xml:space="preserve">
+		<value>Buzzer</value>
+	</data>
+	<data name="ToolTipSound" xml:space="preserve">
+		<value>Buzzer {0}</value>
+	</data>
+	<data name="ToolTipSoundNotation" xml:space="preserve">
+		<value>Inserisci la notazione del buzzer</value>
+	</data>
+	<data name="CommandEditFind" xml:space="preserve">
+		<value>Trova</value>
+	</data>
+	<data name="TitleFind" xml:space="preserve">
+		<value>Trova circuito</value>
+	</data>
+	<data name="TitleSearch" xml:space="preserve">
+		<value>Cerca</value>
+	</data>
+	<data name="TitleSearchPattern" xml:space="preserve">
+		<value>_Trova:</value>
+	</data>
+	<data name="ToolTipDescriptorClock" xml:space="preserve">
+		<value>Genera un segnale che oscilla tra 0 e 1
+ed è usato per coordinare le azioni dei circuiti.</value>
+	</data>
+	<data name="ToolTipDescriptorPin" xml:space="preserve">
+		<value>Serve a creare un connettore che altri circuiti possono usare
+per fornire o ricevere dati da e verso il circuito corrente.
+Riordina i pin sul circuito per cambiarne la
+posizione relativa sui simboli di questo circuito.</value>
+	</data>
+	<data name="ToolTipDescriptorProbe" xml:space="preserve">
+		<value>Aggiungi e collega sonde ai tuoi circuiti per osservare
+lo stato attuale del circuito alimentato sulla superficie della
+sonda, la cronologia dei valori con un doppio clic sulla
+sonda, oppure per vedere questi dati sull'oscilloscopio.</value>
+	</data>
+	<data name="ToolTipDescriptorSensor" xml:space="preserve">
+		<value>Fornisce dati da una "sorgente esterna" come
+serie di valori predefiniti, scelti a caso
+o inseriti manualmente.
+Serve anche come sorgente di codici di tastiera o
+di caratteri.</value>
+	</data>
+	<data name="ToolTipDescriptorSplitter" xml:space="preserve">
+		<value>Permette di creare un fascio di fili o
+di separarlo in fili singoli.
+L'uso di divisori e pin a più bit può
+semplificare notevolmente il disegno e
+la comprensione del circuito.</value>
+	</data>
+	<data name="ToolTipDescriptorText" xml:space="preserve">
+		<value>Inserisci note di testo ovunque nel diagramma per
+commentare il circuito, fornire collegamenti utili a siti
+web e decorare il circuito con immagini.</value>
+	</data>
+	<data name="ToolTipDescriptorTriState" xml:space="preserve">
+		<value>Può avere tre uscite diverse: 1, 0 e alta impedenza (Z).
+Lo stato di alta impedenza non ha ruolo nella logica, che è strettamente binaria.
+Questi dispositivi sono usati sui bus della CPU per permettere a più sorgenti di inviare dati.
+Un gruppo di tri-state che pilota una linea con un opportuno circuito di controllo
+è sostanzialmente equivalente a un multiplexer.</value>
+	</data>
+	<data name="ToolTipSensorManualValue" xml:space="preserve">
+		<value>Digita un valore esadecimale e premi Invio.</value>
+	</data>
+	<data name="ErrorBadHexNumber" xml:space="preserve">
+		<value>Numero esadecimale non valido</value>
+	</data>
+	<data name="TitleSensorManualInitialValue" xml:space="preserve">
+		<value>_Valore iniziale:</value>
+	</data>
+	<data name="ToolTipSensorManualInitialValue" xml:space="preserve">
+		<value>Inserisci il valore iniziale come numero esadecimale.</value>
+	</data>
+	<data name="NameGraphicsArray" xml:space="preserve">
+		<value>Matrice grafica</value>
+	</data>
+	<data name="CaptionGraphicsArrayBPP" xml:space="preserve">
+		<value>Bit per pixel</value>
+	</data>
+	<data name="ToolTipDescriptorGraphicsArray" xml:space="preserve">
+		<value>(Display a matrice di punti) può mostrare i dati memorizzati nella memoria interna.
+Usato con circuiti avanzati come computer o controller.
+Permette di scegliere dimensioni e profondità/schema di colore:
+1 bit/pixel - bianco e nero
+2 bit/pixel - 4 sfumature di grigio
+4 bit/pixel - 16 colori
+8 bit/pixel - 256 colori</value>
+	</data>
+	<data name="ToolTipGraphicsArray" xml:space="preserve">
+		<value>{0} {1}x{2} con {3} bit per pixel ({4} colori)</value>
+	</data>
+	<data name="ToolTipGraphicsArrayBPP" xml:space="preserve">
+		<value>Scegli il numero di bit per pixel</value>
+	</data>
+	<data name="ErrorBadIntegerInRange" xml:space="preserve">
+		<value>È previsto un numero nell'intervallo {0} - {1}.</value>
+	</data>
+	<data name="TitleGraphicsArrayBPP" xml:space="preserve">
+		<value>Bit per _pixel:</value>
+	</data>
+	<data name="TitleHeight" xml:space="preserve">
+		<value>_Altezza:</value>
+	</data>
+	<data name="TitleWidth" xml:space="preserve">
+		<value>_Larghezza:</value>
+	</data>
+	<data name="ToolTipGraphicsArrayHeight" xml:space="preserve">
+		<value>Inserisci l'altezza della matrice grafica in pixel.</value>
+	</data>
+	<data name="ToolTipGraphicsArrayWidth" xml:space="preserve">
+		<value>Inserisci la larghezza della matrice grafica in pixel.</value>
+	</data>
+	<data name="ErrorWriteNotConnected" xml:space="preserve">
+		<value>L'ingresso di scrittura non è collegato sulla matrice grafica {0}</value>
+	</data>
+	<data name="ErrorBadHexInRange" xml:space="preserve">
+		<value>È previsto un numero nell'intervallo {0:X} - {1:X}.</value>
+	</data>
+	<data name="MessageLoadAutoSavedFile" xml:space="preserve">
+		<value>Il file "{0}" non è stato salvato correttamente.
+Vuoi caricare lo stato salvato automaticamente di questo file?</value>
+	</data>
+	<data name="TitleAutoSave" xml:space="preserve">
+		<value>Salva automaticamente le modifiche o_gni:</value>
+	</data>
+	<data name="TitleMinutesUnits" xml:space="preserve">
+		<value>minuti</value>
+	</data>
+	<data name="TitlePinIndex" xml:space="preserve">
+		<value>Ordine dei pin</value>
+	</data>
+	<data name="TitlePinIndexReset" xml:space="preserve">
+		<value>Ripristina la disposizione _grafica</value>
+	</data>
+	<data name="TitleStartupCircuit" xml:space="preserve">
+		<value>_Avvio:</value>
+	</data>
+	<data name="TitleCurrent" xml:space="preserve">
+		<value>Circuito logico corrente</value>
+	</data>
+	<data name="TitleBottom" xml:space="preserve">
+		<value>_Inferiore:</value>
+	</data>
+	<data name="TitleLeft" xml:space="preserve">
+		<value>_Sinistro:</value>
+	</data>
+	<data name="TitleRight" xml:space="preserve">
+		<value>_Destro:</value>
+	</data>
+	<data name="TitleTop" xml:space="preserve">
+		<value>_Superiore:</value>
+	</data>
+	<data name="MemoryAddress2PinName" xml:space="preserve">
+		<value>Porta indirizzo memoria 2</value>
+	</data>
+	<data name="MemoryAddress2PinNotation" xml:space="preserve">
+		<value>a2</value>
+	</data>
+	<data name="MemoryData2PinName" xml:space="preserve">
+		<value>Porta dati memoria 2</value>
+	</data>
+	<data name="MemoryData2PinNotation" xml:space="preserve">
+		<value>d2</value>
+	</data>
+	<data name="TitleDualPort" xml:space="preserve">
+		<value>_Doppia porta</value>
+	</data>
+	<data name="TitleSymbolShape" xml:space="preserve">
+		<value>_Forma del simbolo:</value>
+	</data>
+	<data name="SymbolShapeAlu" xml:space="preserve">
+		<value>ALU</value>
+	</data>
+	<data name="SymbolShapeDemux" xml:space="preserve">
+		<value>Demultiplexer</value>
+	</data>
+	<data name="SymbolShapeDisplay" xml:space="preserve">
+		<value>Display</value>
+	</data>
+	<data name="SymbolShapeFlipFlop" xml:space="preserve">
+		<value>Flip-flop</value>
+	</data>
+	<data name="SymbolShapeMux" xml:space="preserve">
+		<value>Multiplexer</value>
+	</data>
+	<data name="CommandEllipsis" xml:space="preserve">
+		<value>...</value>
+	</data>
+	<data name="HdlExportN2T" xml:space="preserve">
+		<value>From Nand to Tetris HDL</value>
+	</data>
+	<data name="HdlExportN2TandTests" xml:space="preserve">
+		<value>From Nand to Tetris HDL e file di test</value>
+	</data>
+	<data name="HdlExportVerilog" xml:space="preserve">
+		<value>SystemVerilog</value>
+	</data>
+	<data name="HdlExportVerilogFull" xml:space="preserve">
+		<value>SystemVerilog e test bench</value>
+	</data>
+	<data name="TitleIncludeInHdlExport" xml:space="preserve">
+		<value>_Esporta in HDL</value>
+	</data>
+	<data name="MessageExcludedFromHdlExport" xml:space="preserve">
+		<value>Il circuito {0} è escluso dall'esportazione HDL.</value>
+	</data>
 </root>

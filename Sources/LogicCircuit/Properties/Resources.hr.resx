@@ -1639,4 +1639,25 @@ Takav sklop se ne može koristiti više od jednom na drugim sklopovima jer će s
 	<data name="ParserErrorMessage" xml:space="preserve">
 		<value>Pogreška: {0}</value>
 	</data>
+	<data name="CommandEllipsis" xml:space="preserve">
+		<value>...</value>
+	</data>
+	<data name="HdlExportN2T" xml:space="preserve">
+		<value>From Nand to Tetris HDL</value>
+	</data>
+	<data name="HdlExportN2TandTests" xml:space="preserve">
+		<value>From Nand to Tetris HDL i datoteke za testiranje</value>
+	</data>
+	<data name="HdlExportVerilog" xml:space="preserve">
+		<value>SystemVerilog</value>
+	</data>
+	<data name="HdlExportVerilogFull" xml:space="preserve">
+		<value>SystemVerilog i testno okruženje</value>
+	</data>
+	<data name="TitleIncludeInHdlExport" xml:space="preserve">
+		<value>_Izvezi u HDL</value>
+	</data>
+	<data name="MessageExcludedFromHdlExport" xml:space="preserve">
+		<value>Sklop {0} isključen je iz HDL izvoza.</value>
+	</data>
 </root>

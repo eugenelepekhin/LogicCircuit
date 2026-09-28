@@ -1653,4 +1653,25 @@ Möchten Sie den automatisch gespeicherten Stand dieser Datei laden?</value>
 	<data name="ParserErrorMessage" xml:space="preserve">
 		<value>Fehler: {0}</value>
 	</data>
+	<data name="CommandEllipsis" xml:space="preserve">
+		<value>...</value>
+	</data>
+	<data name="HdlExportN2T" xml:space="preserve">
+		<value>From Nand to Tetris HDL</value>
+	</data>
+	<data name="HdlExportN2TandTests" xml:space="preserve">
+		<value>From Nand to Tetris HDL &amp; Testdateien</value>
+	</data>
+	<data name="HdlExportVerilog" xml:space="preserve">
+		<value>SystemVerilog</value>
+	</data>
+	<data name="HdlExportVerilogFull" xml:space="preserve">
+		<value>SystemVerilog &amp; Testbench</value>
+	</data>
+	<data name="TitleIncludeInHdlExport" xml:space="preserve">
+		<value>_Export nach HDL</value>
+	</data>
+	<data name="MessageExcludedFromHdlExport" xml:space="preserve">
+		<value>Schaltung {0} wird vom HDL-Export ausgeschlossen.</value>
+	</data>
 </root>

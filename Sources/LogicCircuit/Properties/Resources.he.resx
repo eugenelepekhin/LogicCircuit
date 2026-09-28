@@ -1679,4 +1679,43 @@
 	<data name="ParserErrorMessage" xml:space="preserve">
 		<value>שגיאה: {0}</value>
 	</data>
+	<data name="TitleSymbolShape" xml:space="preserve">
+		<value>‏_צורת סמל:‏</value>
+	</data>
+	<data name="SymbolShapeAlu" xml:space="preserve">
+		<value>ALU</value>
+	</data>
+	<data name="SymbolShapeDemux" xml:space="preserve">
+		<value>דמולטיפלקסר</value>
+	</data>
+	<data name="SymbolShapeDisplay" xml:space="preserve">
+		<value>תצוגה</value>
+	</data>
+	<data name="SymbolShapeFlipFlop" xml:space="preserve">
+		<value>פליפ-פלופ</value>
+	</data>
+	<data name="SymbolShapeMux" xml:space="preserve">
+		<value>מולטיפלקסר</value>
+	</data>
+	<data name="CommandEllipsis" xml:space="preserve">
+		<value>...</value>
+	</data>
+	<data name="HdlExportN2T" xml:space="preserve">
+		<value>From Nand to Tetris HDL</value>
+	</data>
+	<data name="HdlExportN2TandTests" xml:space="preserve">
+		<value>From Nand to Tetris HDL וקובצי בדיקה</value>
+	</data>
+	<data name="HdlExportVerilog" xml:space="preserve">
+		<value>SystemVerilog</value>
+	</data>
+	<data name="HdlExportVerilogFull" xml:space="preserve">
+		<value>SystemVerilog וסביבת בדיקה</value>
+	</data>
+	<data name="TitleIncludeInHdlExport" xml:space="preserve">
+		<value>‏_ייצוא ל-HDL‏</value>
+	</data>
+	<data name="MessageExcludedFromHdlExport" xml:space="preserve">
+		<value>המעגל {0} אינו נכלל בייצוא HDL.</value>
+	</data>
 </root>

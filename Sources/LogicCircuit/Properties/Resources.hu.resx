@@ -1583,4 +1583,140 @@ kapcsolás felfogható egyfajta multiplexerként is.</value>
 	<data name="ParserErrorMessage" xml:space="preserve">
 		<value>Hiba: {0}</value>
 	</data>
+	<data name="NameGraphicsArray" xml:space="preserve">
+		<value>Grafikus tömb</value>
+	</data>
+	<data name="CaptionGraphicsArrayBPP" xml:space="preserve">
+		<value>Bit/képpont</value>
+	</data>
+	<data name="ToolTipDescriptorGraphicsArray" xml:space="preserve">
+		<value>(Pontmátrix kijelző) a belső memóriában tárolt adatokat képes megjeleníteni.
+Összetett kapcsolásokban használatos, például számítógépekben vagy vezérlőkben.
+Lehetővé teszi a méret és a színmélység/színséma kiválasztását:
+1 bit/képpont - fekete-fehér
+2 bit/képpont - 4 szürkeárnyalat
+4 bit/képpont - 16 szín
+8 bit/képpont - 256 szín</value>
+	</data>
+	<data name="ToolTipGraphicsArray" xml:space="preserve">
+		<value>{0} {1}x{2}, {3} bit/képpont ({4} szín)</value>
+	</data>
+	<data name="ToolTipGraphicsArrayBPP" xml:space="preserve">
+		<value>Válassza ki a képpontonkénti bitek számát</value>
+	</data>
+	<data name="ErrorBadIntegerInRange" xml:space="preserve">
+		<value>A számnak {0} és {1} között kell lennie.</value>
+	</data>
+	<data name="TitleGraphicsArrayBPP" xml:space="preserve">
+		<value>_Bit/képpont:</value>
+	</data>
+	<data name="TitleHeight" xml:space="preserve">
+		<value>_Magasság:</value>
+	</data>
+	<data name="TitleWidth" xml:space="preserve">
+		<value>_Szélesség:</value>
+	</data>
+	<data name="ToolTipGraphicsArrayHeight" xml:space="preserve">
+		<value>Adja meg a grafikus tömb magasságát képpontokban.</value>
+	</data>
+	<data name="ToolTipGraphicsArrayWidth" xml:space="preserve">
+		<value>Adja meg a grafikus tömb szélességét képpontokban.</value>
+	</data>
+	<data name="ErrorWriteNotConnected" xml:space="preserve">
+		<value>Az írás bemenet nincs csatlakoztatva a(z) {0} grafikus tömbön</value>
+	</data>
+	<data name="ErrorBadHexInRange" xml:space="preserve">
+		<value>A számnak {0:X} és {1:X} között kell lennie.</value>
+	</data>
+	<data name="CommandToolsIronPython" xml:space="preserve">
+		<value>IronPython Console</value>
+	</data>
+	<data name="MessageLoadAutoSavedFile" xml:space="preserve">
+		<value>A(z) "{0}" fájl mentése nem sikerült megfelelően.
+Be szeretné tölteni a fájl automatikusan mentett állapotát?</value>
+	</data>
+	<data name="TitleAutoSave" xml:space="preserve">
+		<value>Változtatások a_utomatikus mentése ennyi időnként:</value>
+	</data>
+	<data name="TitleMinutesUnits" xml:space="preserve">
+		<value>perc</value>
+	</data>
+	<data name="TitlePinIndex" xml:space="preserve">
+		<value>Pin sorrend</value>
+	</data>
+	<data name="TitlePinIndexReset" xml:space="preserve">
+		<value>Visszaállítás _grafikus elrendezésre</value>
+	</data>
+	<data name="TitleStartupCircuit" xml:space="preserve">
+		<value>_Indításkor:</value>
+	</data>
+	<data name="TitleCurrent" xml:space="preserve">
+		<value>Jelenlegi logikai kapcsolás</value>
+	</data>
+	<data name="TitleBottom" xml:space="preserve">
+		<value>_Alul:</value>
+	</data>
+	<data name="TitleLeft" xml:space="preserve">
+		<value>_Balra:</value>
+	</data>
+	<data name="TitleRight" xml:space="preserve">
+		<value>_Jobbra:</value>
+	</data>
+	<data name="TitleTop" xml:space="preserve">
+		<value>_Felül:</value>
+	</data>
+	<data name="MemoryAddress2PinName" xml:space="preserve">
+		<value>Memória cím port 2</value>
+	</data>
+	<data name="MemoryAddress2PinNotation" xml:space="preserve">
+		<value>a2</value>
+	</data>
+	<data name="MemoryData2PinName" xml:space="preserve">
+		<value>Memória adat port 2</value>
+	</data>
+	<data name="MemoryData2PinNotation" xml:space="preserve">
+		<value>d2</value>
+	</data>
+	<data name="TitleDualPort" xml:space="preserve">
+		<value>_Kétportos</value>
+	</data>
+	<data name="TitleSymbolShape" xml:space="preserve">
+		<value>_Szimbólum alakja:</value>
+	</data>
+	<data name="SymbolShapeAlu" xml:space="preserve">
+		<value>ALU</value>
+	</data>
+	<data name="SymbolShapeDemux" xml:space="preserve">
+		<value>Demultiplexer</value>
+	</data>
+	<data name="SymbolShapeDisplay" xml:space="preserve">
+		<value>Kijelző</value>
+	</data>
+	<data name="SymbolShapeFlipFlop" xml:space="preserve">
+		<value>Flip-flop</value>
+	</data>
+	<data name="SymbolShapeMux" xml:space="preserve">
+		<value>Multiplexer</value>
+	</data>
+	<data name="CommandEllipsis" xml:space="preserve">
+		<value>...</value>
+	</data>
+	<data name="HdlExportN2T" xml:space="preserve">
+		<value>From Nand to Tetris HDL</value>
+	</data>
+	<data name="HdlExportN2TandTests" xml:space="preserve">
+		<value>From Nand to Tetris HDL és tesztfájlok</value>
+	</data>
+	<data name="HdlExportVerilog" xml:space="preserve">
+		<value>SystemVerilog</value>
+	</data>
+	<data name="HdlExportVerilogFull" xml:space="preserve">
+		<value>SystemVerilog és tesztkörnyezet</value>
+	</data>
+	<data name="TitleIncludeInHdlExport" xml:space="preserve">
+		<value>_Exportálás HDL-be</value>
+	</data>
+	<data name="MessageExcludedFromHdlExport" xml:space="preserve">
+		<value>A(z) {0} kapcsolás ki van zárva a HDL exportálásból.</value>
+	</data>
 </root>

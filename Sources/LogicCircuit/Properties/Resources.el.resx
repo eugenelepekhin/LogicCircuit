@@ -1646,4 +1646,25 @@
 	<data name="ParserErrorMessage" xml:space="preserve">
 		<value>Σφάλμα: {0}</value>
 	</data>
+	<data name="CommandEllipsis" xml:space="preserve">
+		<value>...</value>
+	</data>
+	<data name="HdlExportN2T" xml:space="preserve">
+		<value>From Nand to Tetris HDL</value>
+	</data>
+	<data name="HdlExportN2TandTests" xml:space="preserve">
+		<value>From Nand to Tetris HDL &amp; αρχεία δοκιμών</value>
+	</data>
+	<data name="HdlExportVerilog" xml:space="preserve">
+		<value>SystemVerilog</value>
+	</data>
+	<data name="HdlExportVerilogFull" xml:space="preserve">
+		<value>SystemVerilog &amp; περιβάλλον δοκιμών</value>
+	</data>
+	<data name="TitleIncludeInHdlExport" xml:space="preserve">
+		<value>_Εξαγωγή σε HDL</value>
+	</data>
+	<data name="MessageExcludedFromHdlExport" xml:space="preserve">
+		<value>Το κύκλωμα {0} εξαιρείται από την εξαγωγή HDL.</value>
+	</data>
 </root>

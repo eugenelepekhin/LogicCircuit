@@ -1617,4 +1617,43 @@ Tri-state와 적절한 제어 회로를 함께 써서 멀티플렉서를 만들 
 	<data name="ParserErrorMessage" xml:space="preserve">
 		<value>오류: {0}</value>
 	</data>
+	<data name="TitleSymbolShape" xml:space="preserve">
+		<value>기호 모양:</value>
+	</data>
+	<data name="SymbolShapeAlu" xml:space="preserve">
+		<value>ALU</value>
+	</data>
+	<data name="SymbolShapeDemux" xml:space="preserve">
+		<value>디멀티플렉서</value>
+	</data>
+	<data name="SymbolShapeDisplay" xml:space="preserve">
+		<value>디스플레이</value>
+	</data>
+	<data name="SymbolShapeFlipFlop" xml:space="preserve">
+		<value>플립플롭</value>
+	</data>
+	<data name="SymbolShapeMux" xml:space="preserve">
+		<value>멀티플렉서</value>
+	</data>
+	<data name="CommandEllipsis" xml:space="preserve">
+		<value>...</value>
+	</data>
+	<data name="HdlExportN2T" xml:space="preserve">
+		<value>From Nand to Tetris HDL</value>
+	</data>
+	<data name="HdlExportN2TandTests" xml:space="preserve">
+		<value>From Nand to Tetris HDL 및 테스트 파일</value>
+	</data>
+	<data name="HdlExportVerilog" xml:space="preserve">
+		<value>SystemVerilog</value>
+	</data>
+	<data name="HdlExportVerilogFull" xml:space="preserve">
+		<value>SystemVerilog 및 테스트벤치</value>
+	</data>
+	<data name="TitleIncludeInHdlExport" xml:space="preserve">
+		<value>HDL로 내보내기</value>
+	</data>
+	<data name="MessageExcludedFromHdlExport" xml:space="preserve">
+		<value>회로 {0}은(는) HDL 내보내기에서 제외됩니다.</value>
+	</data>
 </root>

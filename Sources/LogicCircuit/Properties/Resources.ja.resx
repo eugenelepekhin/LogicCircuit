@@ -1445,4 +1445,196 @@
 	<data name="ParserErrorMessage" xml:space="preserve">
 		<value>エラー: {0}</value>
 	</data>
+	<data name="GateAndNotation" xml:space="preserve">
+		<value>&amp;</value>
+	</data>
+	<data name="GateClockNotation" xml:space="preserve">
+		<value>ω</value>
+	</data>
+	<data name="GateLedName" xml:space="preserve">
+		<value>LED</value>
+	</data>
+	<data name="GateLedNotation" xml:space="preserve">
+		<value>LED</value>
+	</data>
+	<data name="GateNotNotation" xml:space="preserve">
+		<value>1</value>
+	</data>
+	<data name="GateOrNotation" xml:space="preserve">
+		<value>≥1</value>
+	</data>
+	<data name="CircuitProbeNotation" xml:space="preserve">
+		<value>?</value>
+	</data>
+	<data name="GateTriStateNotation" xml:space="preserve">
+		<value>1</value>
+	</data>
+	<data name="GateXorNotation" xml:space="preserve">
+		<value>=1</value>
+	</data>
+	<data name="Led7Pin1" xml:space="preserve">
+		<value>a</value>
+	</data>
+	<data name="Led7Pin2" xml:space="preserve">
+		<value>b</value>
+	</data>
+	<data name="Led7Pin3" xml:space="preserve">
+		<value>c</value>
+	</data>
+	<data name="Led7Pin4" xml:space="preserve">
+		<value>d</value>
+	</data>
+	<data name="Led7Pin5" xml:space="preserve">
+		<value>e</value>
+	</data>
+	<data name="Led7Pin6" xml:space="preserve">
+		<value>f</value>
+	</data>
+	<data name="Led7Pin7" xml:space="preserve">
+		<value>g</value>
+	</data>
+	<data name="Led7Pin8" xml:space="preserve">
+		<value>ドット</value>
+	</data>
+	<data name="MemoryAddressPinNotation" xml:space="preserve">
+		<value>a</value>
+	</data>
+	<data name="MemoryDataPinNotation" xml:space="preserve">
+		<value>d</value>
+	</data>
+	<data name="MemoryWritePinNotation" xml:space="preserve">
+		<value>w</value>
+	</data>
+	<data name="PinEnableName" xml:space="preserve">
+		<value>E</value>
+	</data>
+	<data name="PinInName" xml:space="preserve">
+		<value>x</value>
+	</data>
+	<data name="PinName" xml:space="preserve">
+		<value>{0}{1}</value>
+	</data>
+	<data name="PinOutName" xml:space="preserve">
+		<value>q</value>
+	</data>
+	<data name="ConstantNotation" xml:space="preserve">
+		<value>{0:X}</value>
+	</data>
+	<data name="TitleApplication" xml:space="preserve">
+		<value>論理回路</value>
+	</data>
+	<data name="WebSiteUri" xml:space="preserve">
+		<value>https://www.logiccircuit.org/</value>
+	</data>
+	<data name="HelpContent" xml:space="preserve">
+		<value>https://www.logiccircuit.org/help.html</value>
+	</data>
+	<data name="CircuitMapPathSeparator" xml:space="preserve">
+		<value>/</value>
+	</data>
+	<data name="ProbeHistoryMark" xml:space="preserve">
+		<value>&lt;&lt;&lt;&lt;&lt;&lt; Mark &gt;&gt;&gt;&gt;&gt;&gt;</value>
+	</data>
+	<data name="TitleFileOpen" xml:space="preserve">
+		<value>...</value>
+	</data>
+	<data name="ReportGateName" xml:space="preserve">
+		<value>{0} ({1})</value>
+	</data>
+	<data name="CategoryDuplicate" xml:space="preserve">
+		<value>{0} 2</value>
+	</data>
+	<data name="Bit0" xml:space="preserve">
+		<value>0</value>
+	</data>
+	<data name="Bit1" xml:space="preserve">
+		<value>1</value>
+	</data>
+	<data name="BitOff" xml:space="preserve">
+		<value>オフ</value>
+	</data>
+	<data name="GridPoint" xml:space="preserve">
+		<value>({0}, {1})</value>
+	</data>
+	<data name="WebSiteDownloadUri" xml:space="preserve">
+		<value>https://www.logiccircuit.org/download.html</value>
+	</data>
+	<data name="TitlePinIndex" xml:space="preserve">
+		<value>端子の順序</value>
+	</data>
+	<data name="TitlePinIndexReset" xml:space="preserve">
+		<value>グラフィカルな配置に戻す</value>
+	</data>
+	<data name="TitleStartupCircuit" xml:space="preserve">
+		<value>起動時:</value>
+	</data>
+	<data name="TitleCurrent" xml:space="preserve">
+		<value>現在の論理回路</value>
+	</data>
+	<data name="TitleBottom" xml:space="preserve">
+		<value>下:</value>
+	</data>
+	<data name="TitleLeft" xml:space="preserve">
+		<value>左:</value>
+	</data>
+	<data name="TitleRight" xml:space="preserve">
+		<value>右:</value>
+	</data>
+	<data name="TitleTop" xml:space="preserve">
+		<value>上:</value>
+	</data>
+	<data name="MemoryAddress2PinName" xml:space="preserve">
+		<value>メモリアドレスポート 2</value>
+	</data>
+	<data name="MemoryAddress2PinNotation" xml:space="preserve">
+		<value>a2</value>
+	</data>
+	<data name="MemoryData2PinName" xml:space="preserve">
+		<value>メモリデータポート 2</value>
+	</data>
+	<data name="MemoryData2PinNotation" xml:space="preserve">
+		<value>d2</value>
+	</data>
+	<data name="TitleDualPort" xml:space="preserve">
+		<value>デュアルポート</value>
+	</data>
+	<data name="TitleSymbolShape" xml:space="preserve">
+		<value>シンボルの形状:</value>
+	</data>
+	<data name="SymbolShapeAlu" xml:space="preserve">
+		<value>ALU</value>
+	</data>
+	<data name="SymbolShapeDemux" xml:space="preserve">
+		<value>デマルチプレクサ</value>
+	</data>
+	<data name="SymbolShapeDisplay" xml:space="preserve">
+		<value>ディスプレイ</value>
+	</data>
+	<data name="SymbolShapeFlipFlop" xml:space="preserve">
+		<value>フリップフロップ</value>
+	</data>
+	<data name="SymbolShapeMux" xml:space="preserve">
+		<value>マルチプレクサ</value>
+	</data>
+	<data name="CommandEllipsis" xml:space="preserve">
+		<value>...</value>
+	</data>
+	<data name="HdlExportN2T" xml:space="preserve">
+		<value>From Nand to Tetris HDL</value>
+	</data>
+	<data name="HdlExportN2TandTests" xml:space="preserve">
+		<value>From Nand to Tetris HDL とテストファイル</value>
+	</data>
+	<data name="HdlExportVerilog" xml:space="preserve">
+		<value>SystemVerilog</value>
+	</data>
+	<data name="HdlExportVerilogFull" xml:space="preserve">
+		<value>SystemVerilog とテストベンチ</value>
+	</data>
+	<data name="TitleIncludeInHdlExport" xml:space="preserve">
+		<value>HDL にエクスポート</value>
+	</data>
+	<data name="MessageExcludedFromHdlExport" xml:space="preserve">
+		<value>回路 {0} は HDL エクスポートから除外されています。</value>
+	</data>
 </root>

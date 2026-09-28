@@ -1393,4 +1393,258 @@
 	<data name="ParserErrorMessage" xml:space="preserve">
 		<value>خطا: {0}</value>
 	</data>
+	<data name="FileFilter" xml:space="preserve">
+		<value>پروژه مدار (*{0})|*{0}|همه فایل‌ها (*.*)|*.*</value>
+	</data>
+	<data name="GateAndName" xml:space="preserve">
+		<value>And</value>
+	</data>
+	<data name="GateAndNotation" xml:space="preserve">
+		<value>&amp;</value>
+	</data>
+	<data name="GateAndNotName" xml:space="preserve">
+		<value>NAnd</value>
+	</data>
+	<data name="GateClockName" xml:space="preserve">
+		<value>ساعت</value>
+	</data>
+	<data name="GateClockNotation" xml:space="preserve">
+		<value>ω</value>
+	</data>
+	<data name="GateLedName" xml:space="preserve">
+		<value>LED</value>
+	</data>
+	<data name="GateLedNotation" xml:space="preserve">
+		<value>LED</value>
+	</data>
+	<data name="GateNotName" xml:space="preserve">
+		<value>Not</value>
+	</data>
+	<data name="GateNotNotation" xml:space="preserve">
+		<value>1</value>
+	</data>
+	<data name="GateOrName" xml:space="preserve">
+		<value>Or</value>
+	</data>
+	<data name="GateOrNotation" xml:space="preserve">
+		<value>≥1</value>
+	</data>
+	<data name="GateOrNotName" xml:space="preserve">
+		<value>NOr</value>
+	</data>
+	<data name="CircuitProbeName" xml:space="preserve">
+		<value>Probe</value>
+	</data>
+	<data name="CircuitProbeNotation" xml:space="preserve">
+		<value>?</value>
+	</data>
+	<data name="GateTriStateName" xml:space="preserve">
+		<value>سه‌حالته</value>
+	</data>
+	<data name="GateTriStateNotation" xml:space="preserve">
+		<value>1</value>
+	</data>
+	<data name="GateXorName" xml:space="preserve">
+		<value>Xor</value>
+	</data>
+	<data name="GateXorNotation" xml:space="preserve">
+		<value>=1</value>
+	</data>
+	<data name="GateXorNotName" xml:space="preserve">
+		<value>XNor</value>
+	</data>
+	<data name="Led7Pin1" xml:space="preserve">
+		<value>a</value>
+	</data>
+	<data name="Led7Pin2" xml:space="preserve">
+		<value>b</value>
+	</data>
+	<data name="Led7Pin3" xml:space="preserve">
+		<value>c</value>
+	</data>
+	<data name="Led7Pin4" xml:space="preserve">
+		<value>d</value>
+	</data>
+	<data name="Led7Pin5" xml:space="preserve">
+		<value>e</value>
+	</data>
+	<data name="Led7Pin6" xml:space="preserve">
+		<value>f</value>
+	</data>
+	<data name="Led7Pin7" xml:space="preserve">
+		<value>g</value>
+	</data>
+	<data name="Led7Pin8" xml:space="preserve">
+		<value>نقطه</value>
+	</data>
+	<data name="MemoryAddressPinNotation" xml:space="preserve">
+		<value>a</value>
+	</data>
+	<data name="MemoryDataPinNotation" xml:space="preserve">
+		<value>d</value>
+	</data>
+	<data name="MemoryWritePinNotation" xml:space="preserve">
+		<value>w</value>
+	</data>
+	<data name="PinEnableName" xml:space="preserve">
+		<value>E</value>
+	</data>
+	<data name="PinInName" xml:space="preserve">
+		<value>x</value>
+	</data>
+	<data name="PinName" xml:space="preserve">
+		<value>{0}{1}</value>
+	</data>
+	<data name="PinOutName" xml:space="preserve">
+		<value>q</value>
+	</data>
+	<data name="ConstantNotation" xml:space="preserve">
+		<value>{0:X}</value>
+	</data>
+	<data name="RAMNotation" xml:space="preserve">
+		<value>RAM</value>
+	</data>
+	<data name="ROMNotation" xml:space="preserve">
+		<value>ROM</value>
+	</data>
+	<data name="TitlePinInput" xml:space="preserve">
+		<value>{0}
+ورودی</value>
+	</data>
+	<data name="TitlePinOutput" xml:space="preserve">
+		<value>{0}
+خروجی</value>
+	</data>
+	<data name="TitleApplication" xml:space="preserve">
+		<value>مدار منطقی</value>
+	</data>
+	<data name="WebSiteUri" xml:space="preserve">
+		<value>https://www.logiccircuit.org/</value>
+	</data>
+	<data name="HelpContent" xml:space="preserve">
+		<value>https://www.logiccircuit.org/help.html</value>
+	</data>
+	<data name="CircuitMapPathSeparator" xml:space="preserve">
+		<value>/</value>
+	</data>
+	<data name="ImageFileFilter" xml:space="preserve">
+		<value>فایل تصویر (*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif)|*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif|همه فایل‌ها (*.*)|*.*</value>
+	</data>
+	<data name="TitleFileOpen" xml:space="preserve">
+		<value>...</value>
+	</data>
+	<data name="Gate7SegName" xml:space="preserve">
+		<value>7-seg</value>
+	</data>
+	<data name="ReportGateName" xml:space="preserve">
+		<value>{0} ({1})</value>
+	</data>
+	<data name="CategoryDuplicate" xml:space="preserve">
+		<value>{0} 2</value>
+	</data>
+	<data name="Bit0" xml:space="preserve">
+		<value>0</value>
+	</data>
+	<data name="Bit1" xml:space="preserve">
+		<value>1</value>
+	</data>
+	<data name="BitOff" xml:space="preserve">
+		<value>خاموش</value>
+	</data>
+	<data name="GridPoint" xml:space="preserve">
+		<value>({0}, {1})</value>
+	</data>
+	<data name="NameLedMatrix" xml:space="preserve">
+		<value>ماتریس LED</value>
+	</data>
+	<data name="MessageVersionPreview" xml:space="preserve">
+		<value>شما نسخه منتشرنشدهٔ توسعه‌دهنده را دارید.</value>
+	</data>
+	<data name="WebSiteDownloadUri" xml:space="preserve">
+		<value>https://www.logiccircuit.org/download.html</value>
+	</data>
+	<data name="CircuitProbeToolTip" xml:space="preserve">
+		<value>Probe {0}</value>
+	</data>
+	<data name="NameGraphicsArray" xml:space="preserve">
+		<value>آرایه گرافیکی</value>
+	</data>
+	<data name="TitlePinIndex" xml:space="preserve">
+		<value>ترتیب پین</value>
+	</data>
+	<data name="TitlePinIndexReset" xml:space="preserve">
+		<value>بازنشانی به چیدمان گرافیکی</value>
+	</data>
+	<data name="TitleStartupCircuit" xml:space="preserve">
+		<value>راه‌اندازی:</value>
+	</data>
+	<data name="TitleCurrent" xml:space="preserve">
+		<value>مدار منطقی فعلی</value>
+	</data>
+	<data name="TitleBottom" xml:space="preserve">
+		<value>پایین:</value>
+	</data>
+	<data name="TitleLeft" xml:space="preserve">
+		<value>چپ:</value>
+	</data>
+	<data name="TitleRight" xml:space="preserve">
+		<value>راست:</value>
+	</data>
+	<data name="TitleTop" xml:space="preserve">
+		<value>بالا:</value>
+	</data>
+	<data name="MemoryAddress2PinName" xml:space="preserve">
+		<value>پورت آدرس حافظه 2</value>
+	</data>
+	<data name="MemoryAddress2PinNotation" xml:space="preserve">
+		<value>a2</value>
+	</data>
+	<data name="MemoryData2PinName" xml:space="preserve">
+		<value>پورت داده حافظه 2</value>
+	</data>
+	<data name="MemoryData2PinNotation" xml:space="preserve">
+		<value>d2</value>
+	</data>
+	<data name="TitleDualPort" xml:space="preserve">
+		<value>دو پورتی</value>
+	</data>
+	<data name="TitleSymbolShape" xml:space="preserve">
+		<value>شکل نماد:</value>
+	</data>
+	<data name="SymbolShapeAlu" xml:space="preserve">
+		<value>واحد محاسبه و منطق (ALU)</value>
+	</data>
+	<data name="SymbolShapeDemux" xml:space="preserve">
+		<value>دی‌مولتی‌پلکسر</value>
+	</data>
+	<data name="SymbolShapeDisplay" xml:space="preserve">
+		<value>نمایشگر</value>
+	</data>
+	<data name="SymbolShapeFlipFlop" xml:space="preserve">
+		<value>فلیپ‌فلاپ</value>
+	</data>
+	<data name="SymbolShapeMux" xml:space="preserve">
+		<value>مولتی‌پلکسر</value>
+	</data>
+	<data name="CommandEllipsis" xml:space="preserve">
+		<value>...</value>
+	</data>
+	<data name="HdlExportN2T" xml:space="preserve">
+		<value>From Nand to Tetris HDL</value>
+	</data>
+	<data name="HdlExportN2TandTests" xml:space="preserve">
+		<value>From Nand to Tetris HDL و فایل‌های آزمون</value>
+	</data>
+	<data name="HdlExportVerilog" xml:space="preserve">
+		<value>SystemVerilog</value>
+	</data>
+	<data name="HdlExportVerilogFull" xml:space="preserve">
+		<value>SystemVerilog و بستر آزمون</value>
+	</data>
+	<data name="TitleIncludeInHdlExport" xml:space="preserve">
+		<value>صدور به HDL</value>
+	</data>
+	<data name="MessageExcludedFromHdlExport" xml:space="preserve">
+		<value>مدار {0} از خروجی HDL مستثنی شده است.</value>
+	</data>
 </root>

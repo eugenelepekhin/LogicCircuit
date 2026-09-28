@@ -1632,4 +1632,43 @@
 	<data name="ParserErrorMessage" xml:space="preserve">
 		<value>Помилка: {0}</value>
 	</data>
+	<data name="TitleSymbolShape" xml:space="preserve">
+		<value>_Форма символу:</value>
+	</data>
+	<data name="SymbolShapeAlu" xml:space="preserve">
+		<value>АЛП</value>
+	</data>
+	<data name="SymbolShapeDemux" xml:space="preserve">
+		<value>Демультиплексор</value>
+	</data>
+	<data name="SymbolShapeDisplay" xml:space="preserve">
+		<value>Дисплей</value>
+	</data>
+	<data name="SymbolShapeFlipFlop" xml:space="preserve">
+		<value>Тригер</value>
+	</data>
+	<data name="SymbolShapeMux" xml:space="preserve">
+		<value>Мультиплексор</value>
+	</data>
+	<data name="CommandEllipsis" xml:space="preserve">
+		<value>...</value>
+	</data>
+	<data name="HdlExportN2T" xml:space="preserve">
+		<value>From Nand to Tetris HDL</value>
+	</data>
+	<data name="HdlExportN2TandTests" xml:space="preserve">
+		<value>From Nand to Tetris HDL та файли тестів</value>
+	</data>
+	<data name="HdlExportVerilog" xml:space="preserve">
+		<value>SystemVerilog</value>
+	</data>
+	<data name="HdlExportVerilogFull" xml:space="preserve">
+		<value>SystemVerilog та тестове середовище</value>
+	</data>
+	<data name="TitleIncludeInHdlExport" xml:space="preserve">
+		<value>_Експорт у HDL</value>
+	</data>
+	<data name="MessageExcludedFromHdlExport" xml:space="preserve">
+		<value>Схему {0} виключено з експорту HDL.</value>
+	</data>
 </root>
