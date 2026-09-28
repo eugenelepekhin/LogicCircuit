@@ -10,7 +10,7 @@
 	<!-- This will just change namespace of the file, so no new files will be opened by old CircuitProject -->
 
 	<xsl:template match="*">
-		<xsl:element name="{name(.)}">
+		<xsl:element name="{local-name(.)}">
 			<xsl:apply-templates select="@*|node()"/>
 		</xsl:element>
 	</xsl:template>
