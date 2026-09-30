@@ -5,7 +5,6 @@ using System.Globalization;
 using System.Resources;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Windows;
 using LogicCircuit.Properties;
 
 namespace LogicCircuit.UnitTest {
@@ -13,7 +12,7 @@ namespace LogicCircuit.UnitTest {
 	/// This is a test class for Resources and is intended
 	/// to contain all Resources Unit Tests
 	/// </summary>
-	[TestClass()]
+	[TestClass]
 	public class ResourcesTest {
 		/// <summary>
 		/// Gets or sets the test context which provides
@@ -29,7 +28,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test for DefaultGateShape
 		/// </summary>
-		[TestMethod()]
+		[TestMethod]
 		public void ResourcesDefaultGateShapeTest() {
 			string[] names = Enum.GetNames(typeof(GateShape));
 			foreach(CultureInfo culture in App.AvailableCultures) {
@@ -42,9 +41,8 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test for FlowDirection
 		/// </summary>
-		[TestMethod()]
+		[TestMethod]
 		public void ResourcesFlowDirectionTest() {
-			string[] names = Enum.GetNames(typeof(FlowDirection));
 			foreach(CultureInfo culture in App.AvailableCultures) {
 				Resources.Culture = culture;
 				Assert.IsTrue(EnumHelper.IsValid(Resources.FlowDirection), "FlowDirection for \"{0}\" is invalid", culture.Name);
@@ -54,7 +52,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test for ErrorUnknownVersion
 		/// </summary>
-		[TestMethod()]
+		[TestMethod]
 		public void ResourcesErrorUnknownVersionTest() {
 			Regex regex = new Regex(
 				"<Hyperlink NavigateUri=\"https://www.logiccircuit.org/\">https://www.logiccircuit.org/</Hyperlink>",
@@ -70,7 +68,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test for FileFilter
 		/// </summary>
-		[TestMethod()]
+		[TestMethod]
 		public void ResourcesFileFilterTest() {
 			string extension = "ABCDEF";
 			Regex regex = new Regex(
@@ -87,7 +85,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test for ImageFileFilter
 		/// </summary>
-		[TestMethod()]
+		[TestMethod]
 		public void ResourcesImageFileFilterTest() {
 			Regex regex = new Regex(
 				Regex.Escape("(*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif)|*.bmp;*.dib;*.gif;*.jpeg;*.jpg;*.jpe;*.png;*.tiff;*.tif|ABCDEF(*.*)|*.*").Replace("ABCDEF", ".*"),
@@ -103,7 +101,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test for HelpContent
 		/// </summary>
-		[TestMethod()]
+		[TestMethod]
 		public void ResourcesHelpContentTest() {
 			foreach(CultureInfo culture in App.AvailableCultures) {
 				Resources.Culture = culture;
@@ -115,7 +113,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test for WebSiteDownloadUri
 		/// </summary>
-		[TestMethod()]
+		[TestMethod]
 		public void ResourcesWebSiteDownloadUriTest() {
 			foreach(CultureInfo culture in App.AvailableCultures) {
 				Resources.Culture = culture;
@@ -127,7 +125,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test for WebSiteUri
 		/// </summary>
-		[TestMethod()]
+		[TestMethod]
 		public void ResourcesWebSiteUriTest() {
 			foreach(CultureInfo culture in App.AvailableCultures) {
 				Resources.Culture = culture;
@@ -139,7 +137,7 @@ namespace LogicCircuit.UnitTest {
 		/// <summary>
 		/// A test for leading and trailing whitespaces in resources.
 		/// </summary>
-		[TestMethod()]
+		[TestMethod]
 		public void ResourcesTrimmedTest() {
 			StringBuilder errors = new StringBuilder();
 			foreach(CultureInfo culture in App.AvailableCultures) {
@@ -181,6 +179,37 @@ namespace LogicCircuit.UnitTest {
 				string output = Resources.TitlePinOutput("Out");
 				Assert.HasCount(2, output.Split('\n'), "TitlePinOutput expected to contain two lines in {0} culture", culture.Name);
 			}
+		}
+
+		[TestMethod]
+		public void FormatPlaceholdersAreTheSameTest() {
+			Regex itemRegex = new Regex(@"\{[0-9][^}]*?\}", RegexOptions.Compiled | RegexOptions.CultureInvariant);
+			StringBuilder errors = new StringBuilder();
+			Dictionary<string, List<string>> formats = new();
+			foreach(CultureInfo culture in App.AvailableCultures) {
+				Assert.IsTrue(culture.Name != "en" || formats.Count == 0);
+				ResourceSet set = Resources.ResourceManager.GetResourceSet(culture, true, false);
+				foreach(DictionaryEntry item in set) {
+					string name = item.Key.ToString();
+					string text = item.Value.ToString();
+					Assert.IsFalse(string.IsNullOrWhiteSpace(name));
+					if(!string.IsNullOrWhiteSpace(text)) {
+						MatchCollection matches = itemRegex.Matches(text);
+						List<string> placeholders = matches.Select(m => m.Value).ToList();
+						placeholders.Sort();
+						if(formats.TryGetValue(name, out List<string> values)) {
+							Assert.AreNotEqual("en", culture.Name);
+							if(!Enumerable.SequenceEqual(values, placeholders)) {
+								errors.AppendLine($"Format placeholders in '{culture.Name}' culture doesn't match with 'en' for resource {name}");
+							}
+						} else {
+							Assert.AreEqual("en", culture.Name);
+							formats.Add(name, placeholders);
+						}
+					}
+				}
+			}
+			Assert.AreEqual(0, errors.Length, "\r\n" + errors.ToString());
 		}
 	}
 }

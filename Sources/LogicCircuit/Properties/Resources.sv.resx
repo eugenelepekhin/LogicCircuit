@@ -1244,7 +1244,7 @@ gör det möjligt att välja en storlek och förg djup/schema:
 		<value>Skriv ingången koplar inte till grafikuppsättning {0}</value>
 	</data>
 	<data name="ErrorBadHexInRange" xml:space="preserve">
-		<value>Förväntar sig nummer mellan {0:x} - {1:x}</value>
+		<value>Förväntar sig nummer mellan {0:X} - {1:X}</value>
 	</data>
 	<data name="CommandToolsIronPython" xml:space="preserve">
 		<value>IronPython konsol</value>

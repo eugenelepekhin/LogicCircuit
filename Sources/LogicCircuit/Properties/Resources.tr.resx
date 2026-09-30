@@ -552,7 +552,7 @@ Bellek değeri {0} tarihinde güncellenir</value>
     <value>0'dan 1'e yükseliyor</value>
   </data>
 	<data name="ToolTipConstant" xml:space="preserve">
-    <value>{0} bit (s) sabiti {1: X}</value>
+    <value>{0} bit(s) sabiti {1:X}</value>
   </data>
 	<data name="ToolTipWire" xml:space="preserve">
     <value>Tel</value>

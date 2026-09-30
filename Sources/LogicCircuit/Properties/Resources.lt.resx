@@ -211,7 +211,7 @@
     <value>Pasirinkimas</value>
   </data>
 	<data name="TitleTotalRows" xml:space="preserve">
-    <value>Eilučių kiekis:{0:Ne}</value>
+    <value>Eilučių kiekis:{0:N0}</value>
   </data>
 	<data name="ColorPickerCaptionAvailable" xml:space="preserve">
     <value>Galimos spalvos</value>
@@ -1000,7 +1000,7 @@ kada tai yra nelyginis tada laikordis keičiasi nuo 1 iki 0.</value>
     <value>Parinkti dabar</value>
   </data>
 	<data name="TitleDisplayedRows" xml:space="preserve">
-    <value>Parodytos eilutės: {0:Ne}</value>
+    <value>Parodytos eilutės: {0:N0}</value>
   </data>
 	<data name="TitleCulture" xml:space="preserve">
     <value>Kalba</value>
