@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -20,7 +21,7 @@ namespace LogicCircuit {
 			}
 
 			public bool Equals(JamBit other) => this.Jam == other.Jam && this.Bit == other.Bit;
-			public override bool Equals(object? obj) => obj is JamBit && this.Equals((JamBit)obj);
+			public override bool Equals(object? obj) => obj is JamBit other && this.Equals(other);
 			public override int GetHashCode() => HashCode.Combine(this.Jam, this.Bit);
 		}
 

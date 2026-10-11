@@ -2,6 +2,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
 
 namespace LogicCircuit {
 	internal sealed class VerilogTestBench : T4Transformation {
@@ -17,6 +19,13 @@ namespace LogicCircuit {
 			this.outputs = outputs;
 			this.table = table;
 			this.fixName = fixName;
+			this.ToStringHelper.FormatProvider = CultureInfo.InvariantCulture;
+		}
+
+		// TODO: merge with VerilogHdl.Range
+		public string Range(BasePin pin) {
+			Debug.Assert(0 < pin.BitWidth);
+			return (pin.BitWidth == 1) ? "" : this.Format("[{0}:0]", pin.BitWidth - 1);
 		}
 
 		public override string TransformText() {
@@ -28,14 +37,14 @@ namespace LogicCircuit {
 				if(input.Pin.BitWidth == 1) {
 					this.WriteLine("\t\tbit {0};", this.fixName(input.Pin.Name));
 				} else {
-					this.WriteLine("\t\tbit{0} {1};", VerilogHdl.Range(input.Pin), this.fixName(input.Pin.Name));
+					this.WriteLine("\t\tbit{0} {1};", this.Range(input.Pin), this.fixName(input.Pin.Name));
 				}
 			}
 			foreach(OutputPinSocket output in this.outputs) {
 				if(output.Pin.BitWidth == 1) {
 					this.WriteLine("\t\tlogic {0};", this.fixName(output.Pin.Name));
 				} else {
-					this.WriteLine("\t\tlogic{0} {1};", VerilogHdl.Range(output.Pin), this.fixName(output.Pin.Name));
+					this.WriteLine("\t\tlogic{0} {1};", this.Range(output.Pin), this.fixName(output.Pin.Name));
 				}
 			}
 
@@ -82,10 +91,10 @@ namespace LogicCircuit {
 			this.WriteLine();
 
 			foreach(InputPinSocket input in this.inputs) {
-				this.WriteLine("\treg {0}{1};", VerilogHdl.Range(input.Pin), this.fixName(input.Pin.Name));
+				this.WriteLine("\treg {0}{1};", this.Range(input.Pin), this.fixName(input.Pin.Name));
 			}
 			foreach(OutputPinSocket output in this.outputs) {
-				this.WriteLine("\twire {0}{1};", VerilogHdl.Range(output.Pin), this.fixName(output.Pin.Name));
+				this.WriteLine("\twire {0}{1};", this.Range(output.Pin), this.fixName(output.Pin.Name));
 			}
 			this.WriteLine();
 
