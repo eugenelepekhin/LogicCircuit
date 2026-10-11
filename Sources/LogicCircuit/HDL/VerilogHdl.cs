@@ -96,7 +96,7 @@ namespace LogicCircuit {
 					otherJam = jam;
 				}
 				string text = this.Wire(otherJam);
-				if(connection.IsBitRange(connection.Symbol(otherJam)) && jam.Pin.BitWidth != otherJam.Pin.BitWidth) {
+				if(connection.IsBitRange(connection.Symbol(otherJam))) {
 					text += VerilogHdl.Range(connection.JamRange(otherJam));
 				}
 				return text;

@@ -78,6 +78,7 @@ namespace LogicCircuit {
 			}
 		}
 
+		// TODO: try to remove the pragma
 		#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 		public CircuitMap(LogicalCircuit circuit) {
 			this.Circuit = circuit;
@@ -219,6 +220,7 @@ namespace LogicCircuit {
 
 		private void Connect(ConnectionSet connectionSet) {
 			Tracer.Assert(!connectionSet.IsConnected(this.Circuit));
+			// TODO: should it be OneToMany?
 			Dictionary<GridPoint, List<Jam>> inJamMap = new Dictionary<GridPoint, List<Jam>>();
 			Debug.Assert(this.symbols != null);
 			foreach(CircuitSymbol symbol in this.symbols) {
