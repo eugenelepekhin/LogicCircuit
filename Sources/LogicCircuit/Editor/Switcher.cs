@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Linq;
 
 namespace LogicCircuit {
 	partial class Editor {
 		private sealed class Switcher {
-			public Editor Editor { get; private set; }
+			public Editor Editor { get; }
 			private readonly List<LogicalCircuit> history = new List<LogicalCircuit>();
 			private int tab;
 
@@ -20,7 +21,7 @@ namespace LogicCircuit {
 					}
 				}
 				this.history.Add(active);
-				this.Editor.Project.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(this.ProjectPropertyChanged);
+				this.Editor.Project.PropertyChanged += new PropertyChangedEventHandler(this.ProjectPropertyChanged);
 				this.Editor.CircuitProject.LogicalCircuitSet.CollectionChanged += new NotifyCollectionChangedEventHandler(this.LogicalCircuitSetCollectionChanged);
 			}
 
@@ -65,6 +66,8 @@ namespace LogicCircuit {
 				if(e.NewItems != null && 0 < e.NewItems.Count) {
 					foreach(object item in e.NewItems) {
 						if(item is LogicalCircuit logicalCircuit) {
+							// In case of undo of circuit removal, the circuit will already be in the history after call to ProjectPropertyChanged. So, remove it first.
+							this.history.Remove(logicalCircuit);
 							this.history.Insert(0, logicalCircuit);
 						}
 					}
@@ -76,6 +79,9 @@ namespace LogicCircuit {
 						}
 					}
 				}
+				Tracer.Assert(this.history.Count == this.Editor.CircuitProject.LogicalCircuitSet.Count(),
+					$"History count={this.history.Count} does not match circuit set count={this.Editor.CircuitProject.LogicalCircuitSet.Count()}"
+				);
 			}
 		}
 	}
