@@ -116,7 +116,7 @@ namespace LogicCircuit {
 			this.WriteLine();
 			this.WriteLine("\tinitial begin");
 
-			this.WriteLine("\t\t$display(\"Starting testbench for {0}_TestBench\");", this.circuitName);
+			this.WriteLine("\t\t$display(\"Starting test bench for {0}_TestBench\");", this.circuitName);
 			this.WriteLine("\t\tforeach(TestBenchTruthState[i]) begin");
 
 			foreach(InputPinSocket input in this.inputs) {
@@ -131,7 +131,8 @@ namespace LogicCircuit {
 			}
 
 			this.WriteLine("\t\tend");
-			this.WriteLine("\t\t$display(\"Testbench completed for {0}_TestBench\");", this.circuitName);
+			this.WriteLine("\t\t$display(\"Test bench completed for {0}_TestBench\");", this.circuitName);
+			this.WriteLine("\t\t$finish;");
 			this.WriteLine("\tend");
 			this.WriteLine("endmodule // {0}_TestBench", this.circuitName);
 
