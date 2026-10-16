@@ -130,6 +130,8 @@ namespace LogicCircuit.VerilogTest {
 			string arguments = string.IsNullOrEmpty(this.CompilerInitPath) ? compileArgs : $"/c \"\"{this.CompilerInitPath}\" && cl.exe {compileArgs}\"";
 			string command = string.IsNullOrEmpty(this.CompilerInitPath) ? "cl.exe" : "cmd.exe";
 
+			Program.LogMessage($"cl.exe {compileArgs}");
+
 			ProcessStartInfo startInfo = new ProcessStartInfo(command, arguments) {
 				WorkingDirectory = targetFolder,
 				RedirectStandardOutput = true,
