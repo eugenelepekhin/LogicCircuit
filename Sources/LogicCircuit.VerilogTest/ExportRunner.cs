@@ -25,16 +25,24 @@ namespace LogicCircuit.VerilogTest {
 		}
 
 		public bool TestExport(string circuitName) {
+			Program.LogMessage($"=== Starting test of export of circuit {circuitName} ===");
+			Program.LogMessage($"1). Exporting circuit {circuitName} with all sub circuits");
 			bool success = this.ExportCircuit(circuitName, out string targetFolder, out string testBenchFileName);
 			if(success) {
+				Program.LogMessage($"2). Veriating test bench {testBenchFileName}");
 				success = this.Verilate(targetFolder, circuitName, Path.Combine(targetFolder, testBenchFileName));
 				if(success) {
+					Program.LogMessage($"3). Compiling C++ code for test bench {testBenchFileName}");
 					success = this.Compile(targetFolder, circuitName, out string textExe);
 					if(success) {
+						Program.LogMessage("");
+						Program.LogMessage($">>> 4). Running {circuitName} <<<<");
 						success = this.RunCircuit(textExe);
 					}
 				}
 			}
+			string result = success ? "passed" : "failed";
+			Program.LogMessage($"Test of export of circuit {circuitName} have {result}");
 			return success;
 		}
 
@@ -116,13 +124,7 @@ namespace LogicCircuit.VerilogTest {
 			File.WriteAllText(Path.Combine(targetFolder, responseFile), response.TransformText());
 
 			string exeFile = "test.exe";
-			string compileArgs = (
-				$"@{responseFile}" +
-				//$" /Fo\"{Path.Combine(targetFolder, ExportRunner.TestBenchModuleName(circuitName))}\"" +
-				$" /Fe{exeFile}" +
-				$" *.cpp" +
-				$" /link /STACK:{16 * 1024 * 1024}"
-			);
+			string compileArgs = $"@{responseFile} *.cpp /Fe{exeFile} /link /STACK:{16 * 1024 * 1024}";
 
 			string arguments = string.IsNullOrEmpty(this.CompilerInitPath) ? compileArgs : $"/c \"\"{this.CompilerInitPath}\" && cl.exe {compileArgs}\"";
 			string command = string.IsNullOrEmpty(this.CompilerInitPath) ? "cl.exe" : "cmd.exe";

@@ -10,18 +10,19 @@ namespace LogicCircuit.VerilogTest {
 			public string ProjectFile;
 			public string VerilatorPath;
 			public string? CompilerInitPath;
-			public string? Circuit;
-			public string? Category;
+			public List<string>? Circuit;
+			public List<string>? Category;
 
 			public bool Parse(string[] args) {
+				bool empty(string? text) => string.IsNullOrEmpty(text);
 				string? targetFolder = null;
 				string? projectFile = null;
 				string? verilator = null;
 				string? vcvars = null;
 				bool showHelp = false;
 				List<string> arguments = new List<string>();
-				string? circuit = null;
-				string? category = null;
+				List<string> circuit = new();
+				List<string> category = new();
 
 				CommandLine commandLine = new CommandLine()
 					.AddString("root", "r", "Root folder", "Folder where sub folders for each export will reside", true, v => targetFolder = v.Trim())
@@ -29,13 +30,13 @@ namespace LogicCircuit.VerilogTest {
 					.AddString("verilator", "v", "Verilator Root", "Verilator folder", true, v => verilator = v.Trim())
 					.AddString("vcvars", null, "vcvars64.bat", "Path to vcvars64.bat", false, b => vcvars = b.Trim())
 
-					.AddString("circuit", "c", "circuit", "Export single circuit to test", false, c => circuit = c.Trim())
-					.AddString("category", "cat", "category", "Export all circuits in category to test", false, c => category = c.Trim())
+					.AddString("circuit", "c", "circuit", "Export single circuit to test", false, c => circuit.Add(c.Trim()))
+					.AddString("category", "cat", "category", "Export all circuits in category to test", false, c => category.Add(c.Trim()))
 
 					.AddFlag("help", "?", "Show this help", false, h => showHelp = h)
 				;
 				string? errors = commandLine.Parse(args, a => arguments.AddRange(a));
-				if(showHelp || !string.IsNullOrEmpty(errors)) {
+				if(showHelp || !empty(errors)) {
 					Program.Usage(errors, commandLine.Help());
 					return false;
 				}
@@ -60,7 +61,7 @@ namespace LogicCircuit.VerilogTest {
 					Program.Usage(null, commandLine.Help());
 					return false;
 				}
-				if(!string.IsNullOrEmpty(vcvars)) {
+				if(!empty(vcvars)) {
 					if(!File.Exists(vcvars)) {
 						Program.LogError($"File \"{vcvars}\" not found.");
 						Program.Usage(null, commandLine.Help());
@@ -68,14 +69,14 @@ namespace LogicCircuit.VerilogTest {
 					}
 				} else {
 					string? vscmdVer = Environment.GetEnvironmentVariable("VSCMD_VER");
-					if(string.IsNullOrEmpty(vscmdVer) || !Version.TryParse(vscmdVer, out Version? version) || version < new Version(18, 11)) {
+					if(empty(vscmdVer) || !Version.TryParse(vscmdVer, out Version? version) || version < new Version(18, 11)) {
 						Program.LogError($"This program must be run from Developer Command Prompt for VS or parameter 'vcvars' must be provided.");
 						Program.Usage(null, commandLine.Help());
 						return false;
 					}
 				}
-				if(circuit != null && category != null || circuit == null && category == null) {
-					Program.LogError($"Specify either /circuit <circuit name> of /category <category name>, but not both.");
+				if(circuit.Count == 0 && category.Count == 0) {
+					Program.LogError($"Specify either /circuit <circuit name> of /category <category name> or both.");
 					Program.Usage(null, commandLine.Help());
 					return false;
 				}
@@ -83,7 +84,7 @@ namespace LogicCircuit.VerilogTest {
 				this.TargetFolder = targetFolder;
 				this.ProjectFile = projectFile;
 				this.VerilatorPath = verilator;
-				this.CompilerInitPath = string.IsNullOrEmpty(vcvars) ? null : vcvars;
+				this.CompilerInitPath = empty(vcvars) ? null : vcvars;
 
 				this.Circuit = circuit;
 				this.Category = category;
@@ -94,7 +95,7 @@ namespace LogicCircuit.VerilogTest {
 
 		[STAThread]
 		static int Main(string[] args) {
-			#if DEBUG && true
+			#if DEBUG && !true
 				if(args == null || args.Length == 0) {
 					string targetFolder = @"C:\Projects\LogicCircuit\LogicCircuit\Temp\hdl";
 					string project = @"C:\Projects\CircuitProjects\hdlTest.CircuitProject";
@@ -116,24 +117,31 @@ namespace LogicCircuit.VerilogTest {
 			if(arguments.Parse(args)) {
 				ExportRunner runner = new ExportRunner(arguments.ProjectFile!, arguments.TargetFolder!, arguments.VerilatorPath!, arguments.CompilerInitPath);
 				bool success = false;
-				if(arguments.Circuit != null) {
-					success = runner.TestExport(arguments.Circuit);
-				} else {
-					Debug.Assert(!string.IsNullOrEmpty(arguments.Category));
-					StringComparer comparer = StringComparer.OrdinalIgnoreCase;
-					List<string> names = runner.CircuitProject.LogicalCircuitSet.Where(c => comparer.Equals(c.Category, arguments.Category)).Select(c => c.Name).ToList();
-					if(0 < names.Count) {
-						foreach(string name in names) {
-							success = runner.TestExport(name);
-							if(!success) {
-								break;
-							}
-						}
-					} else {
-						Program.LogError($"No circuit of '{arguments.Category}' category found in file \"{arguments.ProjectFile}\"");
-						success = false;
+				int count = 0;
+				if(0 < arguments.Circuit!.Count) {
+					foreach(string circuit in arguments.Circuit) {
+						success = runner.TestExport(circuit);
+						if(!success) break;
+						count++;
 					}
 				}
+				if(0 < arguments.Category!.Count) {
+					StringComparer comparer = StringComparer.OrdinalIgnoreCase;
+					foreach(string category in arguments.Category) {
+						List<string> names = runner.CircuitProject.LogicalCircuitSet.Where(c => comparer.Equals(c.Category, category)).Select(c => c.Name).ToList();
+						if(0 < names.Count) {
+							foreach(string name in names) {
+								success = runner.TestExport(name);
+								if(!success)  break;
+								count++;
+							}
+						} else {
+							Program.LogError($"No circuit of '{arguments.Category}' category found in file \"{arguments.ProjectFile}\"");
+							success = false;
+						}
+					}
+				}
+				Program.LogMessage($"Tested {count} circuits.");
 				return success ? 0 : 1;
 			}
 			return 2;
