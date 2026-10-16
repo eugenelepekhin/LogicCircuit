@@ -2,6 +2,7 @@
 #define HaveFlagParam
 #define HaveStringParam
 //#define HaveIntParam
+//#define HaveEnumParam
 
 using System;
 using System.Collections.Generic;
@@ -85,13 +86,63 @@ namespace CommandLineParser {
 			}
 		#endif
 
+		#if HaveEnumParam
+			/// <summary>
+			/// Provides information about each enum value.
+			/// </summary>
+			/// <typeparam name="T"></typeparam>
+			public readonly struct EnumDescriptor<T> where T:struct {
+				/// <summary>
+				/// Enum value
+				/// </summary>
+				public readonly T Value;
+				/// <summary>
+				/// Full name of the enum value
+				/// </summary>
+				public readonly string Name;
+				/// <summary>
+				/// Short name of the enum value
+				/// </summary>
+				public readonly string? Alias;
+				/// <summary>
+				/// Help text describing the value.
+				/// </summary>
+				public readonly string? Help;
+
+				public EnumDescriptor(T value, string name, string? alias, string? help) {
+					this.Value = value;
+					this.Name = name;
+					this.Alias = alias;
+					this.Help = help;
+				}
+			}
+
+			/// <summary>
+			/// Defines enum parameter allowing parameter of any c# enum
+			/// </summary>
+			/// <typeparam name="T">Enum type</typeparam>
+			/// <param name="name">Full name of the parameter</param>
+			/// <param name="alias">Short name of the parameter</param>
+			/// <param name="value">Help text that will represent the value passed to the parameter</param>
+			/// <param name="note">Help text of the parameter</param>
+			/// <param name="required">True if the parameter is mandatory</param>
+			/// <param name="values">Array of <see cref="EnumDescriptor"/></param>
+			/// <param name="extraHelpTitle">Help text the will precede list of possible values.</param>
+			/// <param name="assign">Method to assign int parameter back to the application variable</param>
+			/// <returns>Returns this reference</returns>
+			public CommandLine AddEnum<T>(string name, string? alias, string? value, string note, bool required, EnumDescriptor<T>[] values, string? extraHelpTitle, Action<T> assign) where T:struct {
+				this.parameterList.Add(new ParameterEnum<T>(name, alias, value, note, required, values, extraHelpTitle, assign));
+				return this;
+			}
+		#endif
+
 		/// <summary>
 		/// Parses the array of command line parameters and calling all the assign methods to set values of parsed parameters.
 		/// </summary>
 		/// <param name="args">Command line arguments</param>
-		/// <param name="assingUnmatched">Assign all unmatched parameters. If this parameter is null then no unmatched parameters are allowed.</param>
+		/// <param name="assignUnmatched">Assign all unmatched parameters. If this parameter is null then no unmatched parameters are allowed.</param>
 		/// <returns>null if parsing is successful, error messages if unsuccessful.</returns>
-		public string? Parse(string[] args, Action<IEnumerable<string>> assingUnmatched) {
+		public string? Parse(string[] args, Action<IEnumerable<string>>? assignUnmatched) {
 			this.parameterList.Reset();
 			List<string> errors = new List<string>();
 			List<string> unmatched = new List<string>();
@@ -117,7 +168,7 @@ namespace CommandLineParser {
 							string value = Parameter.Trim(match.Groups["value"].Value);
 							if(separatorIsEmpty && value.Length == 0 && parameter.ExpectValue()) {
 								if(i + 1 < args.Length) {
-									value = Parameter.Trim(args[++i]); // assume next argument is the value. Note! the index of the loop is advanced here.
+									value = args[++i]; // assume next argument is the value. Note! the index of the loop is advanced here. Also if it's in the next argument do not trim as it maybe important spaces.
 								} else {
 									errors.Add(string.Format(CultureInfo.InvariantCulture, "Parameter \"{0}\" is missing its value", text));
 									break;
@@ -140,8 +191,8 @@ namespace CommandLineParser {
 				}
 			}
 			if(errors.Count == 0) {
-				if(assingUnmatched != null) {
-					assingUnmatched(unmatched);
+				if(assignUnmatched != null) {
+					assignUnmatched(unmatched);
 				} else if(0 < unmatched.Count) {
 					errors.Add(string.Format(CultureInfo.InvariantCulture, "Unrecognized parameter: {0}", unmatched[0]));
 				}
@@ -166,12 +217,16 @@ namespace CommandLineParser {
 			this.parameterList.ForEach(parameter => {
 				string help = format(parameter);
 				text.Append(help);
-				text.Append(' ', width - help.Length);
+				text.Append(' ', Math.Max(0, width - help.Length));
 				text.Append(" - ");
 				if(parameter.Required) {
 					text.Append("required: ");
 				}
 				text.AppendLine(parameter.Note);
+				string extraHelp = parameter.ExtraHelpInfo();
+				if(!string.IsNullOrEmpty(extraHelp)) {
+					text.AppendLine(extraHelp);
+				}
 			});
 			return text.ToString();
 		}
@@ -202,6 +257,8 @@ namespace CommandLineParser {
 			public virtual bool ExpectValue() {
 				return true;
 			}
+			public virtual string ExtraHelpInfo() => string.Empty;
+
 			public static string Trim(string text) {
 				return string.IsNullOrWhiteSpace(text) ? string.Empty : text.Trim();
 			}
@@ -320,6 +377,84 @@ namespace CommandLineParser {
 					return string.Format(CultureInfo.InvariantCulture, "Parameter {0} has invalid value {1}. This parameter is expecting numerical value.", this.Name, value);
 				}
 			}
+		#endif
+
+		#if HaveEnumParam
+			private sealed class ParameterEnum<T> : Parameter<T> where T:struct {
+				private readonly EnumDescriptor<T>[] values;
+				private readonly string? extraHelpTitle;
+
+				public ParameterEnum(string name, string? alias, string? value, string note, bool required, EnumDescriptor<T>[] values, string? extraHelpTitle, Action<T> assign) : base(name, alias, value, note, required, assign) {
+					this.values = values;
+					this.extraHelpTitle = extraHelpTitle;
+					// Validate the enum values
+					HashSet<T> valueSet = new HashSet<T>();
+					HashSet<string> nameSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+					foreach(EnumDescriptor<T> enumValue in values) {
+						if(!valueSet.Add(enumValue.Value)) {
+							throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "Enum value {0} already defined.", enumValue.Value));
+						}
+						if(!nameSet.Add(enumValue.Name) || !string.IsNullOrEmpty(enumValue.Alias) && !nameSet.Add(enumValue.Alias)) {
+							throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "Enum name of alias already defined for value {0}", enumValue.Value));
+						}
+					}
+				}
+
+				private string Names() {
+					StringBuilder text = new StringBuilder();
+					foreach(EnumDescriptor<T> value in this.values) {
+						if(0 < text.Length) {
+							text.Append(", ");
+						}
+						text.Append('"');
+						text.Append(value.Name);
+						text.Append('"');
+						if(!string.IsNullOrWhiteSpace(value.Alias)) {
+							text.Append(", \"");
+							text.Append(value.Alias);
+							text.Append('"');
+						}
+					}
+					return text.ToString();
+				}
+
+				public override string? SetValue(string value) {
+					bool eq(string? s) => StringComparer.OrdinalIgnoreCase.Equals(s, value);
+					foreach(EnumDescriptor<T> enumValue in this.values) {
+						if(eq(enumValue.Name) || eq(enumValue.Alias)) {
+							return this.AssignValue(enumValue.Value);
+						}
+					}
+
+					return string.Format(CultureInfo.InvariantCulture,
+						"Provided value {0} of parameter {1} expected to be one of: {2}",
+						value,
+						this.Name,
+						this.Names()
+					);
+				}
+
+			public override string ExtraHelpInfo() {
+				StringBuilder text = new StringBuilder();
+				if(!string.IsNullOrWhiteSpace(this.extraHelpTitle)) {
+					text.Append('\t');
+					text.AppendLine(this.extraHelpTitle);
+				}
+				bool newLine = false;
+				foreach(EnumDescriptor<T> value in this.values) {
+					if(newLine) {
+						text.AppendLine();
+					}
+					newLine = true;
+					if(!string.IsNullOrWhiteSpace(value.Alias)) {
+						text.AppendFormat(CultureInfo.InvariantCulture, "\t\t{0} ({1}){2}", value.Name, value.Alias, value.Help ?? string.Empty);
+					} else {
+						text.AppendFormat(CultureInfo.InvariantCulture, "\t\t{0}{1}", value.Name, value.Help ?? string.Empty);
+					}
+				}
+				return text.ToString();
+			}
+		}
 		#endif
 	}
 }

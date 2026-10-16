@@ -158,10 +158,14 @@ namespace LogicCircuit {
 			);
 			string text = verilogTest.TransformText();
 			if(!string.IsNullOrWhiteSpace(text)) {
-				string testFile = Path.Combine(folder, this.FixName(circuitName) + "_TestBench.sv");
+				string testFile = Path.Combine(folder, this.TestBenchFileName(circuitName));
 				File.WriteAllText(testFile, text);
 				this.Message(Properties.Resources.MessageHdlSavingTestFile(testFile));
 			}
+		}
+
+		public string TestBenchFileName(string circuitName) {
+			return this.FixName(circuitName) + "_TestBench.sv";
 		}
 	}
 }

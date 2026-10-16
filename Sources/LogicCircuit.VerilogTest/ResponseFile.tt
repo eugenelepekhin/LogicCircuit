@@ -1,0 +1,18 @@
+﻿<#@ template language="C#" #>
+<#
+	string root = (string)this.Session["VerilatorRoot"] + "\\include";
+#>
+/std:c++20
+/favor:blend
+/DVL_TIME_CONTEXT
+/EHsc
+/MT
+/O2
+/bigobj
+/I<#=root#>
+/I<#=root#>\vltstd
+<#=root#>\verilated.cpp
+<#=root#>\verilated_threads.cpp
+<#=root#>\verilated_timing.cpp
+<#=root#>\verilated_random.cpp
+<#=root#>\verilated_vcd_c.cpp

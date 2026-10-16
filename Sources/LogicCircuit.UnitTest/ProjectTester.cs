@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Reflection;
+using System.Windows;
 using DataPersistent;
 
 namespace LogicCircuit.UnitTest {
@@ -43,15 +44,19 @@ namespace LogicCircuit.UnitTest {
 			this.CircuitMap.TurnOn();
 		}
 
-		public static CircuitProject LoadDeployedFile(TestContext testContext, string projectFile, string initialCircuit) {
-			string path = Path.Combine(testContext.DeploymentDirectory, projectFile);
-			CircuitProject circuitProject = CircuitProject.Create(path);
+		public static CircuitProject LoadCircuitProject(string projectFile, string initialCircuit) {
+			CircuitProject circuitProject = CircuitProject.Create(projectFile);
 			ProjectTester.InitResources();
 			if(initialCircuit != null) {
 				ProjectTester.SwitchTo(circuitProject, initialCircuit);
 			}
 			ProjectTester.GuaranteeGlyph(circuitProject);
 			return circuitProject;
+		}
+
+		public static CircuitProject LoadDeployedFile(TestContext testContext, string projectFile, string initialCircuit) {
+			string path = Path.Combine(testContext.DeploymentDirectory, projectFile);
+			return ProjectTester.LoadCircuitProject(path, initialCircuit);
 		}
 
 		public static LogicalCircuit SwitchTo(CircuitProject circuitProject, string logicalCircuitName) {
@@ -73,12 +78,25 @@ namespace LogicCircuit.UnitTest {
 
 		public static void InitResources() {
 			// Init App resources so all the visual elements will be able to find them
+			bool initConponent = false;
+			if(Application.ResourceAssembly == null) {
+				Application.ResourceAssembly = typeof(App).Assembly;
+				initConponent = true;
+			}
+			if(Application.ResourceAssembly != typeof(App).Assembly) {
+				FieldInfo field = typeof(Application).GetField("_resourceAssembly", BindingFlags.Static | BindingFlags.NonPublic);
+				field?.SetValue(null, typeof(App).Assembly);
+				initConponent = true;
+			}
 			if(App.CurrentApp == null) {
 				App app = new App();
 				if(Application.ResourceAssembly == null) {
 					Application.ResourceAssembly = typeof(App).Assembly;
-					app.InitializeComponent();
+					initConponent = true;
 				}
+			}
+			if(initConponent) {
+				App.CurrentApp.InitializeComponent();
 			}
 		}
 

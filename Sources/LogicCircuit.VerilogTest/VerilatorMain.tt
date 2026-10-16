@@ -1,0 +1,27 @@
+﻿<#@ template language="C#" #>
+<#
+	string module = (string)this.Session["ModuleName"];
+#>
+
+#include "V<#=module#>.h"
+#include "verilated.h"
+
+int main(int argc, char** argv) {
+    VerilatedContext* contextp = new VerilatedContext;
+    contextp->commandArgs(argc, argv);
+    V<#=module#>* top = new V<#=module#>{ contextp };
+
+    while (!contextp->gotFinish()) {
+        top->eval();
+        if (!top->eventsPending()) break;           // nothing left to simulate
+        contextp->time(top->nextTimeSlot());        // jump to next event time
+    }
+
+    top->final();
+
+    int result = contextp->gotError() ? 1 : (contextp->gotFinish() ? 0 : 2);
+
+    delete top;
+    delete contextp;
+    return result;
+}

@@ -2,6 +2,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 
 [assembly: InternalsVisibleTo("LogicCircuit.UnitTest")]
+[assembly: InternalsVisibleTo("LogicCircuit.VerilogTest")]
 
 [assembly: ThemeInfo(
 	// where theme specific resource dictionaries are located

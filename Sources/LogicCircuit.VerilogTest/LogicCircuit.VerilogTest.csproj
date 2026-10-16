@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>$(DotNetWpfVersion)</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Version>1.0.0.0</Version>
+    <Description>www.LogicCircuit.org</Description>
+    <Copyright>© LogicCircuit.org</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <ProjectReference Include="..\LogicCircuit\LogicCircuit.csproj" />
+	  <ProjectReference Include="..\LogicCircuit.UnitTest\LogicCircuit.UnitTest.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="ResponseFile.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ResponseFile.tt</DependentUpon>
+    </Compile>
+    <Compile Update="VerilatorMain.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VerilatorMain.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ResponseFile.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ResponseFile.cs</LastGenOutput>
+    </None>
+    <None Update="VerilatorMain.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>VerilatorMain.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>
