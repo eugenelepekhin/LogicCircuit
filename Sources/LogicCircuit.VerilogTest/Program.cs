@@ -15,14 +15,15 @@ namespace LogicCircuit.VerilogTest {
 
 			public bool Parse(string[] args) {
 				bool empty(string? text) => string.IsNullOrEmpty(text);
+				IEnumerable<string> split(string text) =>text.Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+
 				string? targetFolder = null;
 				string? projectFile = null;
 				string? verilator = null;
 				string? vcvars = null;
 				bool showHelp = false;
-				List<string> arguments = new List<string>();
-				List<string> circuit = new();
-				List<string> category = new();
+				HashSet<string> circuit = new(StringComparer.OrdinalIgnoreCase);
+				HashSet<string> category = new(StringComparer.OrdinalIgnoreCase);
 
 				CommandLine commandLine = new CommandLine()
 					.AddString("root", "r", "Root folder", "Folder where sub folders for each export will reside", true, v => targetFolder = v.Trim())
@@ -30,12 +31,12 @@ namespace LogicCircuit.VerilogTest {
 					.AddString("verilator", "v", "Verilator Root", "Verilator folder", true, v => verilator = v.Trim())
 					.AddString("vcvars", null, "vcvars64.bat", "Path to vcvars64.bat", false, b => vcvars = b.Trim())
 
-					.AddString("circuit", "c", "circuit", "Export single circuit to test", false, c => circuit.Add(c.Trim()))
-					.AddString("category", "cat", "category", "Export all circuits in category to test", false, c => category.Add(c.Trim()))
+					.AddString("circuit", "c", "circuit", "Semicolon separated list of individual circuits to test", false, c => circuit.UnionWith(split(c.Trim())))
+					.AddString("category", "cat", "category", "Semicolon separated list of categories to test", false, c => category.UnionWith(split(c.Trim())))
 
 					.AddFlag("help", "?", "Show this help", false, h => showHelp = h)
 				;
-				string? errors = commandLine.Parse(args, a => arguments.AddRange(a));
+				string? errors = commandLine.Parse(args, null);
 				if(showHelp || !empty(errors)) {
 					Program.Usage(errors, commandLine.Help());
 					return false;
@@ -86,8 +87,8 @@ namespace LogicCircuit.VerilogTest {
 				this.VerilatorPath = verilator;
 				this.CompilerInitPath = empty(vcvars) ? null : vcvars;
 
-				this.Circuit = circuit;
-				this.Category = category;
+				this.Circuit = circuit.ToList();
+				this.Category = category.ToList();
 
 				return true;
 			}
@@ -95,19 +96,14 @@ namespace LogicCircuit.VerilogTest {
 
 		[STAThread]
 		static int Main(string[] args) {
-			#if DEBUG && !true
+			#if DEBUG && true
 				if(args == null || args.Length == 0) {
-					string targetFolder = @"C:\Projects\LogicCircuit\LogicCircuit\Temp\hdl";
-					string project = @"C:\Projects\CircuitProjects\hdlTest.CircuitProject";
-					string verilatorPath = @"C:\Tools\verilator-5.052";
-					string compilerInitPath = @"C:\Program Files\Microsoft Visual Studio\18\Community\VC\Auxiliary\Build\vcvars64.bat";
-
 					args = [
-						"/r",		targetFolder,
-						"/p",		project,
-						"/v",		verilatorPath,
-						"/vcvars",	compilerInitPath,
-						"/circuit",	"BigAnd5",
+						"/r",		@"C:\Projects\LogicCircuit\LogicCircuit\Temp\hdl",
+						"/p",		@"C:\Projects\LogicCircuit\LogicCircuit\master\Sources\LogicCircuit.UnitTest\Properties\VerilogTests.CircuitProject",
+						"/v",		@"C:\Tools\verilator-5.052",
+						"/vcvars",	@"C:\Program Files\Microsoft Visual Studio\18\Community\VC\Auxiliary\Build\vcvars64.bat",
+						"/circuit",	"Wire Plug 1;Wire Plug 2",
 						//"/category", "Switches"
 					];
 				}
@@ -125,7 +121,7 @@ namespace LogicCircuit.VerilogTest {
 						count++;
 					}
 				}
-				if(0 < arguments.Category!.Count) {
+				if(count == 0 && 0 < arguments.Category!.Count) {
 					StringComparer comparer = StringComparer.OrdinalIgnoreCase;
 					foreach(string category in arguments.Category) {
 						List<string> names = runner.CircuitProject.LogicalCircuitSet.Where(c => comparer.Equals(c.Category, category)).Select(c => c.Name).ToList();
@@ -136,11 +132,12 @@ namespace LogicCircuit.VerilogTest {
 								count++;
 							}
 						} else {
-							Program.LogError($"No circuit of '{arguments.Category}' category found in file \"{arguments.ProjectFile}\"");
+							Program.LogError($"No circuit of '{string.Join(", ", arguments.Category)}' category found in file \"{arguments.ProjectFile}\"");
 							success = false;
 						}
 					}
 				}
+				Program.LogMessage("");
 				Program.LogMessage($"Tested {count} circuits.");
 				return success ? 0 : 1;
 			}

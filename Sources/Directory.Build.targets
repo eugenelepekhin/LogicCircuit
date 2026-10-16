@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
 	<PropertyGroup>
-		<ZipApp>$(ProgramW6432)\7-Zip\7z.exe</ZipApp>
+		<ZipApp Condition="'$(ZipApp)' == ''">$(ProgramW6432)\7-Zip\7z.exe</ZipApp>
 	</PropertyGroup>
 
 	<Target Name="PublishProject" AfterTargets="AfterBuild" Condition="'$(Configuration)' == 'Release' and '$(PublishFolder)' != ''">
@@ -122,27 +122,27 @@
 
 	<Target Name="RunVerilogTests" Condition="'$(MSBuildProjectName)' == 'LogicCircuit.VerilogTest'">
 		<PropertyGroup>
-			<Root Condition="'$(Root)' == ''">C:\Projects\LogicCircuit\LogicCircuit\Temp\hdl</Root>
+			<Root Condition="'$(Root)' == ''">$(MSBuildThisFileDirectory)..\..\Temp\hdl</Root>
 			<CircuitProject Condition="'$(CircuitProject)' == ''">$(MSBuildThisFileDirectory)LogicCircuit.UnitTest\Properties\VerilogTests.CircuitProject</CircuitProject>
 			<Verilator Condition="'$(Verilator)' == ''">C:\Tools\verilator-5.052</Verilator>
 			<Circuit Condition="'$(Circuit)' == ''"></Circuit>
 			<Category Condition="'$(Circuit)' == '' and '$(Category)' == ''">Simple</Category>
 
-			<TestTarget Condition="'$(Circuit)' == ''">/cat "$(Category)</TestTarget>
-			<TestTarget Condition="'$(TestTarget)' == ''">/c "$(Circuit)</TestTarget>
+			<TestTarget Condition="'$(Circuit)' == ''">/cat "$(Category)"</TestTarget>
+			<TestTarget Condition="'$(TestTarget)' == ''">/c "$(Circuit)"</TestTarget>
 
 			<VerilogTesterPath>$(OutputPath)LogicCircuit.VerilogTest.exe</VerilogTesterPath>
 
-			<CommandText>$(VerilogTesterPath) /r "$(Root)" /p "$(CircuitProject)" /v "$(Verilator)" $(TestTarget)"</CommandText>
+			<CommandText>$(VerilogTesterPath) /r "$(Root)" /p "$(CircuitProject)" /v "$(Verilator)" $(TestTarget)</CommandText>
 		</PropertyGroup>
 
-		<Message Importance="high" Text="Executing target: RunVerilogTests hooray!"/>
+		<!--<Message Importance="high" Text="Executing target: RunVerilogTests hooray!"/>
 		<Message Importance="high" Text="Root=$(Root)"/>
 		<Message Importance="high" Text="CircuitProject=$(CircuitProject)"/>
 		<Message Importance="high" Text="Verilator=$(Verilator)"/>
 		<Message Importance="high" Text="Circuit=$(Circuit)"/>
 		<Message Importance="high" Text="Category=$(Category)"/>
-		<Message Importance="high" Text="VerilogTester=$(VerilogTester)"/>
+		<Message Importance="high" Text="VerilogTester=$(VerilogTester)"/>-->
 
 		<Exec Command="$(CommandText)"/>
 	</Target>

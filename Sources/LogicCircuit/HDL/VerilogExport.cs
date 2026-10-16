@@ -164,8 +164,8 @@ namespace LogicCircuit {
 			}
 		}
 
-		public string TestBenchFileName(string circuitName) {
-			return this.FixName(circuitName) + "_TestBench.sv";
-		}
+		// TODO: merge with test bench generation
+		public string TestBenchModuleName(string circuitName) => this.FixName(circuitName) + "_TestBench";
+		public string TestBenchFileName(string circuitName) => this.TestBenchModuleName(circuitName) + ".sv";
 	}
 }

@@ -1,4 +1,6 @@
 ﻿<Project>
+	<!-- To override some machine or user specific properties create Directory.Build.props.user file in two folders above. -->
+	<Import Project="..\..\$(MSBuildThisFile).user" Condition="Exists('..\..\$(MSBuildThisFile).user')"/>
 
 	<PropertyGroup>
 		<LogicCircuitVersion>2.26.09.10</LogicCircuitVersion>

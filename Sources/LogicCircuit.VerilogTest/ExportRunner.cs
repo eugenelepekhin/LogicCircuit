@@ -3,7 +3,6 @@
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using LogicCircuit.UnitTest;
-using static IronPython.Modules._ast;
 
 namespace LogicCircuit.VerilogTest {
 	internal class ExportRunner {
@@ -25,12 +24,13 @@ namespace LogicCircuit.VerilogTest {
 		}
 
 		public bool TestExport(string circuitName) {
+			Program.LogMessage("");
 			Program.LogMessage($"=== Starting test of export of circuit {circuitName} ===");
 			Program.LogMessage($"1). Exporting circuit {circuitName} with all sub circuits");
-			bool success = this.ExportCircuit(circuitName, out string targetFolder, out string testBenchFileName);
+			bool success = this.ExportCircuit(circuitName, out string targetFolder, out string testBenchModuleName, out string testBenchFileName);
 			if(success) {
 				Program.LogMessage($"2). Veriating test bench {testBenchFileName}");
-				success = this.Verilate(targetFolder, circuitName, Path.Combine(targetFolder, testBenchFileName));
+				success = this.Verilate(targetFolder, testBenchModuleName, Path.Combine(targetFolder, testBenchFileName));
 				if(success) {
 					Program.LogMessage($"3). Compiling C++ code for test bench {testBenchFileName}");
 					success = this.Compile(targetFolder, circuitName, out string textExe);
@@ -46,7 +46,7 @@ namespace LogicCircuit.VerilogTest {
 			return success;
 		}
 
-		private bool ExportCircuit(string circuitName, out string targetFolder, out string testBenchFileName) {
+		private bool ExportCircuit(string circuitName, out string targetFolder, out string testBenchModuleName, out string testBenchFileName) {
 			VerilogExport export = new VerilogExport(exportTests: true, commentPoints: true, fixNames: true, logMessage: Program.LogMessage, logError: Program.LogError, logWarning: Program.LogWarning);
 			if(!export.IsValid(circuitName)) {
 				throw new ArgumentException($"Invalid circuit name: {circuitName}");
@@ -59,14 +59,15 @@ namespace LogicCircuit.VerilogTest {
 			ExportRunner.EnsureFolder(folder);
 			bool success = export.ExportCircuit(logicalCircuit, folder, false, false, i => true, () => {});
 			targetFolder = folder;
+			testBenchModuleName = export.TestBenchModuleName(circuitName);
 			testBenchFileName = export.TestBenchFileName(circuitName);
 			return success;
 		}
 
-		private bool Verilate(string targetFolder, string circuitName, string testBenchFileName) {
-			string testBenchModuleName = ExportRunner.TestBenchModuleName(circuitName);
+		private bool Verilate(string targetFolder, string testBenchModuleName, string testBenchFileName) {
 			string verilatorExe = Path.Combine(this.VerilatorRoot, "bin", "verilator.exe");
 			string arguments = $"--cc --timing --trace -Mdir \"{targetFolder}\" --top {testBenchModuleName} \"{testBenchFileName}\"";
+			Program.LogMessage($"{verilatorExe} {arguments}");
 			ProcessStartInfo startInfo = new ProcessStartInfo(verilatorExe, arguments) {
 				RedirectStandardOutput = true,
 				RedirectStandardError = true,
@@ -94,10 +95,10 @@ namespace LogicCircuit.VerilogTest {
 			process.BeginOutputReadLine();
 			process.WaitForExit();
 			if(process.ExitCode == 0 && errorCount == 0) {
-				Program.LogMessage($"Verilator succeeded for circuit {circuitName}");
+				Program.LogMessage($"Verilator succeeded for circuit {testBenchModuleName}");
 				return this.GenerateMain(targetFolder, testBenchModuleName);
 			} else {
-				Program.LogError($"Verilator failed for circuit {circuitName} with exit code {process.ExitCode} and {errorCount} errors");
+				Program.LogError($"Verilator failed for circuit {testBenchModuleName} with exit code {process.ExitCode} and {errorCount} errors");
 				return false;
 			}
 		}
@@ -212,10 +213,6 @@ namespace LogicCircuit.VerilogTest {
 			if(!Directory.Exists(folder)) {
 				Directory.CreateDirectory(folder);
 			}
-		}
-
-		private static string TestBenchModuleName(string circuitName) {
-			return $"{circuitName}_TestBench";
 		}
 	}
 }
