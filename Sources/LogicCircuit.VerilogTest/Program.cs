@@ -13,6 +13,23 @@ namespace LogicCircuit.VerilogTest {
 			public List<string>? Circuit;
 			public List<string>? Category;
 
+			private class UniqueList {
+				private List<string> list = new();
+				private HashSet<string> set = new(StringComparer.OrdinalIgnoreCase);
+				public int Count => this.list.Count;
+				public void Add(string value) {
+					if(set.Add(value)) {
+						list.Add(value);
+					}
+				}
+				public void Add(IEnumerable<string> values) {
+					foreach(string s in values) {
+						this.Add(s);
+					}
+				}
+				public List<string> ToList() => this.list;
+			}
+
 			public bool Parse(string[] args) {
 				bool empty(string? text) => string.IsNullOrEmpty(text);
 				IEnumerable<string> split(string text) =>text.Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
@@ -22,8 +39,8 @@ namespace LogicCircuit.VerilogTest {
 				string? verilator = null;
 				string? vcvars = null;
 				bool showHelp = false;
-				HashSet<string> circuit = new(StringComparer.OrdinalIgnoreCase);
-				HashSet<string> category = new(StringComparer.OrdinalIgnoreCase);
+				UniqueList circuit = new();
+				UniqueList category = new();
 
 				CommandLine commandLine = new CommandLine()
 					.AddString("root", "r", "Root folder", "Folder where sub folders for each export will reside", true, v => targetFolder = v.Trim())
@@ -31,8 +48,8 @@ namespace LogicCircuit.VerilogTest {
 					.AddString("verilator", "v", "Verilator Root", "Verilator folder", true, v => verilator = v.Trim())
 					.AddString("vcvars", null, "vcvars64.bat", "Path to vcvars64.bat", false, b => vcvars = b.Trim())
 
-					.AddString("circuit", "c", "circuit", "Semicolon separated list of individual circuits to test", false, c => circuit.UnionWith(split(c.Trim())))
-					.AddString("category", "cat", "category", "Semicolon separated list of categories to test", false, c => category.UnionWith(split(c.Trim())))
+					.AddString("circuit", "c", "circuit", "Semicolon separated list of individual circuits to test", false, c => circuit.Add(split(c.Trim())))
+					.AddString("category", "cat", "category", "Semicolon separated list of categories to test", false, c => category.Add(split(c.Trim())))
 
 					.AddFlag("help", "?", "Show this help", false, h => showHelp = h)
 				;
