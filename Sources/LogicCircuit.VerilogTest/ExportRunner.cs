@@ -23,12 +23,16 @@ namespace LogicCircuit.VerilogTest {
 			ExportRunner.EnsureFolder(exportRootFolder);
 		}
 
-		public bool TestExport(string circuitName) {
+		public bool TestExport(LogicalCircuit logicalCircuit) {
+			string circuitName = logicalCircuit.Name;
 			Program.LogMessage("");
 			Program.LogMessage($"=== Starting test of export of circuit {circuitName} ===");
 			Program.LogMessage($"1). Exporting circuit {circuitName} with all sub circuits");
-			bool success = this.ExportCircuit(circuitName, out string targetFolder, out string testBenchModuleName, out string testBenchFileName);
+			bool success = this.ExportCircuit(logicalCircuit, out string? targetFolder, out string? testBenchModuleName, out string? testBenchFileName);
 			if(success) {
+				Debug.Assert(targetFolder != null);
+				Debug.Assert(testBenchModuleName != null);
+				Debug.Assert(testBenchFileName != null);
 				Program.LogMessage($"2). Veriating test bench {testBenchFileName}");
 				success = this.Verilate(targetFolder, testBenchModuleName, Path.Combine(targetFolder, testBenchFileName));
 				if(success) {
@@ -46,21 +50,29 @@ namespace LogicCircuit.VerilogTest {
 			return success;
 		}
 
-		private bool ExportCircuit(string circuitName, out string targetFolder, out string testBenchModuleName, out string testBenchFileName) {
+		private bool ExportCircuit(LogicalCircuit logicalCircuit, out string? targetFolder, out string? testBenchModuleName, out string? testBenchFileName) {
+			targetFolder = null;
+			testBenchModuleName = null;
+			testBenchFileName = null;
+			string circuitName = logicalCircuit.Name;
+
 			VerilogExport export = new VerilogExport(exportTests: true, commentPoints: true, fixNames: true, logMessage: Program.LogMessage, logError: Program.LogError, logWarning: Program.LogWarning);
 			if(!export.IsValid(circuitName)) {
-				throw new ArgumentException($"Invalid circuit name: {circuitName}");
+				Program.LogError($"Invalid circuit name: {circuitName}");
+				return false;
 			}
-			LogicalCircuit logicalCircuit = ProjectTester.SwitchTo(this.CircuitProject, circuitName);
 			if(!CircuitTestSocket.IsTestable(logicalCircuit)) {
-				throw new InvalidOperationException($"Circuit is not testable: {circuitName}");
+				Program.LogError($"Circuit is not testable: {circuitName}");
+				return false;
 			}
 			string folder = Path.Combine(this.ExportRootFolder, circuitName);
 			ExportRunner.EnsureFolder(folder);
 			bool success = export.ExportCircuit(logicalCircuit, folder, false, false, i => true, () => {});
-			targetFolder = folder;
-			testBenchModuleName = export.TestBenchModuleName(circuitName);
-			testBenchFileName = export.TestBenchFileName(circuitName);
+			if(success) {
+				targetFolder = folder;
+				testBenchModuleName = export.TestBenchModuleName(circuitName);
+				testBenchFileName = export.TestBenchFileName(circuitName);
+			}
 			return success;
 		}
 

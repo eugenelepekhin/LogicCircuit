@@ -1,6 +1,7 @@
 ﻿// Ignore Spelling: Verilog Verilator
 
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 using CommandLineParser;
 
 namespace LogicCircuit.VerilogTest {
@@ -10,8 +11,8 @@ namespace LogicCircuit.VerilogTest {
 			public string ProjectFile;
 			public string VerilatorPath;
 			public string? CompilerInitPath;
-			public List<string>? Circuit;
-			public List<string>? Category;
+			public List<Regex>? Circuit;
+			public List<Regex>? Category;
 
 			private class UniqueList {
 				private List<string> list = new();
@@ -48,8 +49,8 @@ namespace LogicCircuit.VerilogTest {
 					.AddString("verilator", "v", "Verilator Root", "Verilator folder", true, v => verilator = v.Trim())
 					.AddString("vcvars", null, "vcvars64.bat", "Path to vcvars64.bat", false, b => vcvars = b.Trim())
 
-					.AddString("circuit", "c", "circuit", "Semicolon separated list of individual circuits to test", false, c => circuit.Add(split(c.Trim())))
-					.AddString("category", "cat", "category", "Semicolon separated list of categories to test", false, c => category.Add(split(c.Trim())))
+					.AddString("circuit", "c", "circuit", "Semicolon separated list of individual circuit names patterns", false, c => circuit.Add(split(c.Trim())))
+					.AddString("category", "cat", "category", "Semicolon separated list of patterns for names of categories", false, c => category.Add(split(c.Trim())))
 
 					.AddFlag("help", "?", "Show this help", false, h => showHelp = h)
 				;
@@ -104,8 +105,9 @@ namespace LogicCircuit.VerilogTest {
 				this.VerilatorPath = verilator;
 				this.CompilerInitPath = empty(vcvars) ? null : vcvars;
 
-				this.Circuit = circuit.ToList();
-				this.Category = category.ToList();
+				RegexOptions options = RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.IgnoreCase | RegexOptions.Singleline;
+				this.Circuit = circuit.ToList().Select(p => new Regex(p, options)).ToList();
+				this.Category = category.ToList().Select(p => new Regex(p, options)).ToList();
 
 				return true;
 			}
@@ -131,28 +133,19 @@ namespace LogicCircuit.VerilogTest {
 				ExportRunner runner = new ExportRunner(arguments.ProjectFile!, arguments.TargetFolder!, arguments.VerilatorPath!, arguments.CompilerInitPath);
 				bool success = false;
 				int count = 0;
-				if(0 < arguments.Circuit!.Count) {
-					foreach(string circuit in arguments.Circuit) {
-						success = runner.TestExport(circuit);
-						if(!success) break;
-						count++;
+				HashSet<LogicalCircuit> list = new();
+				foreach(LogicalCircuit logicalCircuit in runner.CircuitProject.LogicalCircuitSet) {
+					string name = logicalCircuit.Name;
+					string category = logicalCircuit.Category;
+					if(arguments.Circuit!.Any(r => r.IsMatch(name)) ||arguments.Category!.Any(r => r.IsMatch(category))) {
+						list.Add(logicalCircuit);
 					}
 				}
-				if(count == 0 && 0 < arguments.Category!.Count) {
-					StringComparer comparer = StringComparer.OrdinalIgnoreCase;
-					foreach(string category in arguments.Category) {
-						List<string> names = runner.CircuitProject.LogicalCircuitSet.Where(c => comparer.Equals(c.Category, category)).Select(c => c.Name).ToList();
-						if(0 < names.Count) {
-							foreach(string name in names) {
-								success = runner.TestExport(name);
-								if(!success)  break;
-								count++;
-							}
-						} else {
-							Program.LogError($"No circuit of '{string.Join(", ", arguments.Category)}' category found in file \"{arguments.ProjectFile}\"");
-							success = false;
-						}
-					}
+				Program.LogMessage($"Found {list.Count} circuits to test");
+				foreach(LogicalCircuit logicalCircuit in list) {
+					success = runner.TestExport(logicalCircuit);
+					if(!success) break;
+					count++;
 				}
 				Program.LogMessage("");
 				Program.LogMessage($"Tested {count} circuits.");
