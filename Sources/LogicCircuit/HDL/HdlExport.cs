@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -70,21 +69,27 @@ namespace LogicCircuit {
 			ConnectionSet connectionSet = map.ConnectionSet();
 
 			bool export(LogicalCircuit logicalCircuit) {
-				string file = this.FileName(logicalCircuit);
-				this.Message(Properties.Resources.MessageExportingHdl(logicalCircuit.Name, file));
-				Dictionary<CircuitSymbol, HdlSymbol> symbolMap = this.Collect(logicalCircuit, connectionSet);
-				if(0 < this.ErrorCount) return false;
-				string? hdl = this.ExportCircuit(logicalCircuit, symbolMap);
-				if(!string.IsNullOrEmpty(hdl)) {
-					string path = Path.Combine(folder, file);
-					File.WriteAllText(path, hdl);
-					this.Message(Properties.Resources.MessageHdlExportResut(logicalCircuit.Name, this.ErrorCount));
-					if(this.ExportTests) {
-						this.ExportTest(logicalCircuit, folder);
+				try {
+					string file = this.FileName(logicalCircuit);
+					this.Message(Properties.Resources.MessageExportingHdl(logicalCircuit.Name, file));
+					Dictionary<CircuitSymbol, HdlSymbol> symbolMap = this.Collect(logicalCircuit, connectionSet);
+					if(0 < this.ErrorCount) return false;
+					string? hdl = this.ExportCircuit(logicalCircuit, symbolMap);
+					if(!string.IsNullOrEmpty(hdl)) {
+						string path = Path.Combine(folder, file);
+						File.WriteAllText(path, hdl);
+						this.Message(Properties.Resources.MessageHdlExportResut(logicalCircuit.Name, this.ErrorCount));
+						if(this.ExportTests) {
+							this.Message(Properties.Resources.MessageExportingHdlTest(logicalCircuit.Name, file));
+							this.ExportTest(logicalCircuit, folder);
+						}
+						return this.ErrorCount == 0;
+					} else {
+						this.Message(Properties.Resources.ErrorExportHdlFile(file));
 					}
-					return this.ErrorCount == 0;
-				} else {
-					this.Message(Properties.Resources.ErrorExportHdlFile(file));
+				} catch(CircuitException circuitException) {
+					this.Error(circuitException.Message);
+					Debug.WriteLine(circuitException.ToString());
 				}
 				return false;
 			}

@@ -161,10 +161,10 @@ namespace LogicCircuit {
 			}
 		}
 
-		public HdlSymbol OtherSymbol(HdlSymbol symbol) {
-			Debug.Assert(symbol == this.OutHdlSymbol || symbol == this.InHdlSymbol);
-			return (symbol == this.OutHdlSymbol) ? this.InHdlSymbol : this.OutHdlSymbol;
-		}
+		//public HdlSymbol OtherSymbol(HdlSymbol symbol) {
+		//	Debug.Assert(symbol == this.OutHdlSymbol || symbol == this.InHdlSymbol);
+		//	return (symbol == this.OutHdlSymbol) ? this.InHdlSymbol : this.OutHdlSymbol;
+		//}
 		public Jam OtherJam(Jam jam) {
 			Debug.Assert(jam == this.OutJam || jam == this.InJam);
 			return (jam == this.OutJam) ? this.InJam : this.OutJam;

@@ -1778,4 +1778,8 @@ Do you want to load auto saved state of this file?</value>
     <value>Circuit {0} is excluded from HDL export.</value>
     <comment>{string circuitName}</comment>
   </data>
+  <data name="MessageExportingHdlTest" xml:space="preserve">
+    <value>Exporting test bench for circuit {0} to folder {1}</value>
+    <comment>{string circuitName, string folder}</comment>
+  </data>
 </root>

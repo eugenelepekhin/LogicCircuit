@@ -65,7 +65,7 @@ namespace LogicCircuit {
 			bool valid = base.Validate(transformation);
 			OneToMany<Jam, HdlConnection> jams = new OneToMany<Jam, HdlConnection>(true);
 			foreach(HdlSymbol symbol in transformation.Parts.Concat(transformation.OutputPins)) {
-				// check for floating IO ports. Most of the gates can be excluded as floating port will be generated.
+				// check for floating IO ports. Most of the gates can be excluded as floating port will not be generated.
 				Gate? gate = symbol.CircuitSymbol.Circuit as Gate;
 				if(gate == null || gate.GateType == GateType.TriState1 || gate.GateType == GateType.TriState2) {
 					jams.Clear();
