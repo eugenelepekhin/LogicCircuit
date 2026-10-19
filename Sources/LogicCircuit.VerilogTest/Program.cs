@@ -19,8 +19,8 @@ namespace LogicCircuit.VerilogTest {
 				private HashSet<string> set = new(StringComparer.OrdinalIgnoreCase);
 				public int Count => this.list.Count;
 				public void Add(string value) {
-					if(set.Add(value)) {
-						list.Add(value);
+					if(this.set.Add(value)) {
+						this.list.Add(value);
 					}
 				}
 				public void Add(IEnumerable<string> values) {
@@ -39,9 +39,9 @@ namespace LogicCircuit.VerilogTest {
 				string? projectFile = null;
 				string? verilator = null;
 				string? vcvars = null;
-				bool showHelp = false;
 				UniqueList circuit = new();
 				UniqueList category = new();
+				bool showHelp = false;
 
 				CommandLine commandLine = new CommandLine()
 					.AddString("root", "r", "Root folder", "Folder where sub folders for each export will reside", true, v => targetFolder = v.Trim())
@@ -76,7 +76,7 @@ namespace LogicCircuit.VerilogTest {
 					return false;
 				}
 				if(!File.Exists(Path.Combine(verilator, "bin", "verilator.exe"))) {
-					Program.LogError($"Verilator executable not found in folder \"{projectFile}\".");
+					Program.LogError($"Verilator executable not found in folder \"{verilator}\".");
 					Program.Usage(null, commandLine.Help());
 					return false;
 				}

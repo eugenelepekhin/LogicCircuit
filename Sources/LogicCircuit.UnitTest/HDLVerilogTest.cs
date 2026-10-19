@@ -105,7 +105,7 @@ namespace LogicCircuit.UnitTest {
 				Assert.IsTrue(success, $"Export of circuit {circuit.Name} expected to pass");
 				Assert.IsNotNull(warningText, $"Export of circuit {circuit.Name} expected to produce warning text");
 				string pattern = circuit.Note;
-				Assert.IsFalse(string.IsNullOrWhiteSpace(pattern), $"Circuit {circuit.Name} missing error pattern in Description");
+				Assert.IsFalse(string.IsNullOrWhiteSpace(pattern), $"Circuit {circuit.Name} missing warning pattern in Description");
 				Regex regex = new Regex(pattern, RegexOptions.CultureInvariant | RegexOptions.Singleline);
 				Assert.IsTrue(regex.IsMatch(warningText), $"Export of circuit {circuit.Name} is missing expected warning {pattern}");
 			}
@@ -133,6 +133,31 @@ namespace LogicCircuit.UnitTest {
 				Assert.IsFalse(string.IsNullOrWhiteSpace(pattern), $"Circuit {circuit.Name} missing error pattern in Description");
 				Regex regex = new Regex(pattern, RegexOptions.CultureInvariant | RegexOptions.Singleline);
 				Assert.IsTrue(regex.IsMatch(errorText), $"Export of circuit {circuit.Name} is missing expected error: {pattern}");
+			}
+		}
+
+		[STATestMethod]
+		public void ExportTestBenchWarnings() {
+			string warningText = null;
+			void warning(string text) {
+				this.Message(text);
+				warningText = text;
+			}
+
+			Properties.Resources.Culture = CultureInfo.GetCultureInfo("en-US");
+			CircuitProject project = this.LoadCircuitProject();
+			string folder = this.HdlFolder();
+			List<LogicalCircuit> list = project.LogicalCircuitSet.Where(c => c.Category == "TestBenchWarnings").ToList();
+			foreach(LogicalCircuit circuit in list) {
+				warningText = null;
+				VerilogExport export = new VerilogExport(true, true, true, this.Message, this.Message, warning);
+				bool success = export.ExportCircuit(circuit, folder, false, false, i => true, () => {});
+				Assert.IsTrue(success, $"Export of circuit {circuit.Name} expected to pass");
+				Assert.IsNotNull(warningText, $"Export of circuit {circuit.Name} expected to produce warning text");
+				string pattern = circuit.Note;
+				Assert.IsFalse(string.IsNullOrWhiteSpace(pattern), $"Circuit {circuit.Name} missing warning pattern in Description");
+				Regex regex = new Regex(pattern, RegexOptions.CultureInvariant | RegexOptions.Singleline);
+				Assert.IsTrue(regex.IsMatch(warningText), $"Export of circuit {circuit.Name} is missing expected warning {pattern}");
 			}
 		}
 

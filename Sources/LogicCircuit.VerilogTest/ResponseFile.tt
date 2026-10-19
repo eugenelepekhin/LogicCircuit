@@ -1,4 +1,4 @@
-﻿<#@ template language="C#" #>
+﻿<#@ template language="C#" inherits="T4Transformation" #>
 <#
 	string root = (string)this.Session["VerilatorRoot"] + "\\include";
 #>

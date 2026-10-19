@@ -22,6 +22,17 @@ All the available options to run it from msbuild:
 - Root - Folder where all the exports go.
 - CircuitProject - file to run tests against.
 - Verilator - path to root folder of the Verilator installation.
-- Circuit - name of circuit to test.
-- Category - name of category. All circuits of the category will be tested.
+- Circuit - Semicolon separated list of individual circuit names patterns.
+- Category - Semicolon separated list of patterns for names of categories.
 
+Useful links:
+Verilator Windows:
+https://github.com/withlimon/verilator-windows
+
+Good tutorial: https://www.chipverify.com/
+
+Another one: https://www.asic-world.com/
+
+And another one: http://www.emmelmann.org/Pages/Library_TutorialsWS.html
+
+Online test bench. Run generated code there: https://www.edaplayground.com/

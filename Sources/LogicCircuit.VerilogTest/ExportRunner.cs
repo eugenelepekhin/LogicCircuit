@@ -118,7 +118,7 @@ namespace LogicCircuit.VerilogTest {
 		private bool GenerateMain(string targetFolder, string testBenchModuleName) {
 			string mainFileName = Path.Combine(targetFolder, "main.cpp");
 			VerilatorMain mainGenerator = new VerilatorMain() {
-				Session = new Dictionary<string, object>() {
+				Session = new Dictionary<string, string>() {
 					{ "ModuleName", testBenchModuleName }
 				}
 			};
@@ -129,7 +129,7 @@ namespace LogicCircuit.VerilogTest {
 
 		private bool Compile(string targetFolder, string circuitName, out string textExe) {
 			ResponseFile response = new ResponseFile() {
-				Session = new Dictionary<string, object>() {
+				Session = new Dictionary<string, string>() {
 					{ "VerilatorRoot", this.VerilatorRoot }
 				}
 			};
