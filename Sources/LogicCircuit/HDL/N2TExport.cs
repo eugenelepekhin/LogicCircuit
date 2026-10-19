@@ -312,8 +312,8 @@ namespace LogicCircuit {
 					trail = 1;
 					break;
 				}
-				string format = string.Format(CultureInfo.InvariantCulture, "{{0,{0}}}", lead);
-				string result = string.Format(CultureInfo.InvariantCulture, format, text) + new string(' ', trail);
+				string format = this.Format("{{0,{0}}}", lead);
+				string result = this.Format(format, text) + new string(' ', trail);
 				return result;
 			}
 			StringBuilder expect = new StringBuilder();

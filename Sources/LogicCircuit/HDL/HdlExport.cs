@@ -3,6 +3,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -63,6 +65,9 @@ namespace LogicCircuit {
 		}
 
 		public void Warning(string text) => this.logWarning(text);
+
+		[SuppressMessage("Performance", "CA1822:Mark members as static")]
+		protected string Format(string format, params object[] args) => string.Format(CultureInfo.InvariantCulture, format, args);
 
 		public bool ExportCircuit(LogicalCircuit circuit, string folder, bool onlyOne, bool runAsync, Predicate<int>? continueExport, Action onFinished) {
 			CircuitMap map = new CircuitMap(circuit);
@@ -309,7 +314,7 @@ namespace LogicCircuit {
 
 					try {
 						bool isTrancated = false;
-						IList<TruthState>? table = socket.BuildTruthTable(reportProgress, () => true, null, DialogTruthTable.MaxRows, out isTrancated);
+						IList<TruthState>? table = socket.BuildTruthTable(reportProgress, () => true, null, 1 << HdlExport.MaxTestableInputBits, out isTrancated);
 						if (table == null || isTrancated) {
 							this.Warning(Properties.Resources.ErrorHdlTruthTableFailed);
 						} else {

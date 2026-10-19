@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
 
 namespace LogicCircuit {
@@ -58,16 +57,15 @@ namespace LogicCircuit {
 			}
 		}
 
-		// TODO: merge with test bench and use this.Format instead of string.Format
-		public static string Range(BasePin pin) {
+		public string Range(BasePin pin) {
 			Debug.Assert(0 < pin.BitWidth);
-			return (pin.BitWidth == 1) ? "" : string.Format(CultureInfo.InvariantCulture, "[{0}:0]", pin.BitWidth - 1);
+			return (pin.BitWidth == 1) ? "" : this.Format("[{0}:0]", pin.BitWidth - 1);
 		}
-		public static string Range(HdlConnection.BitRange range) => string.Format(CultureInfo.InvariantCulture, (range.First == range.Last) ? "[{0}]" : "[{0}:{1}]", range.Last, range.First);
+		public string Range(HdlConnection.BitRange range) => this.Format((range.First == range.Last) ? "[{0}]" : "[{0}:{1}]", range.Last, range.First);
 
 		private void WriteRange(BasePin pin) {
 			if(1 < pin.BitWidth) {
-				this.Write(VerilogHdl.Range(pin));
+				this.Write(this.Range(pin));
 			}
 		}
 
@@ -97,7 +95,7 @@ namespace LogicCircuit {
 				}
 				string text = this.Wire(otherJam);
 				if(connection.IsBitRange(connection.Symbol(otherJam))) {
-					text += VerilogHdl.Range(connection.JamRange(otherJam));
+					text += this.Range(connection.JamRange(otherJam));
 				}
 				return text;
 			}
@@ -122,17 +120,17 @@ namespace LogicCircuit {
 		private void WriteMemory(HdlSymbol symbol) {
 			Memory memory = (Memory)symbol.CircuitSymbol.Circuit;
 
-			this.Write("module {0}(input{1} address, output{2} dataOut", symbol.HdlExport.HdlName(symbol), VerilogHdl.Range(memory.AddressPin), VerilogHdl.Range(memory.DataOutPin));
+			this.Write("module {0}(input{1} address, output{2} dataOut", symbol.HdlExport.HdlName(symbol), this.Range(memory.AddressPin), this.Range(memory.DataOutPin));
 			if(memory.Writable) {
-				this.Write(", input{0} dataIn, input write", VerilogHdl.Range(memory.DataOutPin));
+				this.Write(", input{0} dataIn, input write", this.Range(memory.DataOutPin));
 			}
 			if(memory.DualPort) {
-				this.Write(", input{0} address2, output{1} dataOut2", VerilogHdl.Range(memory.Address2Pin), VerilogHdl.Range(memory.DataOut2Pin));
+				this.Write(", input{0} address2, output{1} dataOut2", this.Range(memory.Address2Pin), this.Range(memory.DataOut2Pin));
 			}
 			this.WriteLine(");");
 
 			// allocate memory array
-			this.WriteLine("\treg{0} memory[0:{1}];", VerilogHdl.Range(memory.DataOutPin), (1 << memory.AddressBitWidth) - 1);
+			this.WriteLine("\treg{0} memory[0:{1}];", this.Range(memory.DataOutPin), (1 << memory.AddressBitWidth) - 1);
 			if(memory.Writable && memory.OnStart != MemoryOnStart.Data) {
 				this.WriteLine("\tinteger i;");
 			}

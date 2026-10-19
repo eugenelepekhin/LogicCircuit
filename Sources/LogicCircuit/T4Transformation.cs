@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Text;
 
 namespace LogicCircuit {
 	public abstract class T4Transformation {
@@ -8,6 +9,7 @@ namespace LogicCircuit {
 		/// The string builder that generation-time code is using to assemble generated output
 		/// </summary>
 		protected StringBuilder GenerationEnvironment { get; }
+		public IDictionary<string, string>? Session { get; init; }
 
 		protected T4Transformation() {
 			this.ToStringHelper = new T4ToStringHelper();

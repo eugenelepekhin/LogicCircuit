@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -18,6 +17,7 @@ namespace LogicCircuit {
 	/// Online test bench. Run generated code there: https://www.edaplayground.com/
 	/// </summary>
 	internal sealed class VerilogExport : HdlExport {
+		private VerilogHdl? lastVerilogHdl;
 		private readonly Regex identifier = new Regex(@"^[a-zA-Z_][a-zA-Z0-9_$]*$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
 		private readonly Regex notSupportedChars = new Regex(@"\s|[,.?/!@#$%^&*()\-+={}[\]|\\<>~`]", RegexOptions.Compiled);
 
@@ -109,7 +109,9 @@ namespace LogicCircuit {
 		}
 
 		protected override HdlTransformation? CreateTransformation(string name, IList<HdlSymbol> inputPins, IList<HdlSymbol> outputPins, IList<HdlSymbol> parts) {
-			return new VerilogHdl(this.FixName(name), inputPins, outputPins, parts, this.FixName);
+			VerilogHdl verilogHdl = new VerilogHdl(this.FixName(name), inputPins, outputPins, parts, this.FixName);
+			this.lastVerilogHdl = verilogHdl;
+			return verilogHdl;
 		}
 
 		public override string HdlName(HdlSymbol symbol) {
@@ -127,9 +129,9 @@ namespace LogicCircuit {
 			}
 			if(circuit is Memory memory) {
 				if(memory.Writable) {
-					return string.Format(CultureInfo.InvariantCulture, "{0}_RAM_{1}x{2}", this.FixName(symbol.CircuitSymbol.LogicalCircuit.Name), symbol.CircuitSymbol.X, symbol.CircuitSymbol.Y);
+					return this.Format("{0}_RAM_{1}x{2}", this.FixName(symbol.CircuitSymbol.LogicalCircuit.Name), symbol.CircuitSymbol.X, symbol.CircuitSymbol.Y);
 				} else {
-					return string.Format(CultureInfo.InvariantCulture, "{0}_ROM_{1}x{2}", this.FixName(symbol.CircuitSymbol.LogicalCircuit.Name), symbol.CircuitSymbol.X, symbol.CircuitSymbol.Y);
+					return this.Format("{0}_ROM_{1}x{2}", this.FixName(symbol.CircuitSymbol.LogicalCircuit.Name), symbol.CircuitSymbol.X, symbol.CircuitSymbol.Y);
 				}
 			}
 			return this.FixName(circuit.Name.Trim());
@@ -149,7 +151,9 @@ namespace LogicCircuit {
 		}
 
 		protected override void ExportTest(string circuitName, List<InputPinSocket> inputs, List<OutputPinSocket> outputs, IList<TruthState> table, string folder) {
+			Debug.Assert(this.lastVerilogHdl is not null);
 			VerilogTestBench verilogTest = new VerilogTestBench(
+				this.lastVerilogHdl,
 				this.FixName(circuitName),
 				inputs,
 				outputs,
