@@ -51,11 +51,14 @@ namespace LogicCircuit.UnitTest {
 			VerilogExport export = new VerilogExport(true, true, true, this.Message, this.Message, this.Message);
 			string folder = this.HdlFolder();
 			int count = 0;
+			string[] categories = [ "Simple", "BigTest", "CPU", "Const", "Split", "Switches", "VerilatorBugs" ];
 			foreach(LogicalCircuit circuit in project.LogicalCircuitSet) {
-				if(circuit.Category == "Simple") {
+				if(categories.Contains(circuit.Category, StringComparer.OrdinalIgnoreCase)) {
 					Assert.IsTrue(export.CanExport(circuit));
 					Assert.IsTrue(export.ExportCircuit(circuit, folder, false, false, i => true, () => {}));
-					count++;
+					if(circuit.Pins.Where(p => p.PinType == PinType.Input).Sum(p => p.BitWidth) <= 16) {
+						count++;
+					}
 				}
 			}
 			Assert.AreEqual(count, Directory.EnumerateFiles(folder, "*_TestBench.*").Count());

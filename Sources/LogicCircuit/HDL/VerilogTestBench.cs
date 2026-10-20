@@ -72,8 +72,7 @@ namespace LogicCircuit {
 						pinComa = true;
 					}
 					string value = state[outputIndex];
-					if(value.Contains('-', StringComparison.Ordinal)) {
-						value = value.Replace('-', 'z');
+					if(value.Contains('z', StringComparison.OrdinalIgnoreCase)) {
 						this.Write("{0}'b{1}", output.Pin.BitWidth, value);
 					} else {
 						this.Write("'h{0}", value);

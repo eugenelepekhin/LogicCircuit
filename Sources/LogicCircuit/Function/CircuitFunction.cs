@@ -53,10 +53,10 @@ namespace LogicCircuit {
 		}
 
 		public static char ToChar(State state) {
-			// The chars are hardcoded if needed must be localized.
+			// The chars are hard coded if needed must be localized.
 			switch(state) {
 			case State.Off:
-				return '-';
+				return 'z';
 			case State.On0:
 				return '0';
 			case State.On1:
@@ -69,7 +69,7 @@ namespace LogicCircuit {
 		#if false
 			public static State FromChar(char c) {
 				switch(c) {
-				case '-':
+				case 'z':
 					return State.Off;
 				case '0':
 					return State.On0;

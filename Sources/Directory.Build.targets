@@ -122,13 +122,16 @@
 
 	<Target Name="RunVerilogTests" Condition="'$(MSBuildProjectName)' == 'LogicCircuit.VerilogTest'">
 		<PropertyGroup>
+			<AllCategories>Simple;BigTest;CPU;Const;Split;Switches</AllCategories>
+			<AllCategories>Simple;BigTest;CPU;Const;Switches</AllCategories>
+
 			<UnitTestVerilogFile>$(MSBuildThisFileDirectory)LogicCircuit.UnitTest\Properties\VerilogTests.CircuitProject</UnitTestVerilogFile>
 
 			<Root Condition="'$(Root)' == ''">$(MSBuildThisFileDirectory)..\..\Temp\hdl</Root>
 			<CircuitProject Condition="'$(CircuitProject)' == ''">$(UnitTestVerilogFile)</CircuitProject>
 			<Verilator Condition="'$(Verilator)' == ''">C:\Tools\verilator-5.052</Verilator>
 			<Circuit Condition="'$(Circuit)' == ''"></Circuit>
-			<Category Condition="'$(Circuit)' == '' and '$(Category)' == '' and '$(CircuitProject)' == '$(UnitTestVerilogFile)'">Simple</Category>
+			<Category Condition="'$(Circuit)' == '' and '$(Category)' == '' and '$(CircuitProject)' == '$(UnitTestVerilogFile)'">$(AllCategories)</Category>
 
 			<TestTarget Condition="'$(Circuit)' != ''">/circuit "$(Circuit)"</TestTarget>
 			<TestTarget Condition="'$(Category)' != ''">$(TestTarget) /category "$(Category)"</TestTarget>

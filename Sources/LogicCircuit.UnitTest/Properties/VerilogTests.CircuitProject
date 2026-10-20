@@ -1,16 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CircuitProject xmlns="http://LogicCircuit.net/2.0.0.15/CircuitProject.xsd">
-	<Project ProjectId="eebde737-75e4-4164-b4dd-c336693a0601" Name="VerilogTest" Note="Test of exporting to Verilog." LogicalCircuitId="a5e9f8c8-721c-415b-ae21-f52d701b0569" CategoryTextNoteCollapsed="True" />
+	<Project ProjectId="eebde737-75e4-4164-b4dd-c336693a0601" Name="VerilogTest" Note="Test of exporting to Verilog." LogicalCircuitId="d129b65b-0867-4233-a5c5-1f0080d2f2ff" CategoryTextNoteCollapsed="True" CategoryInputOutputCollapsed="True" CategoryPrimitivesCollapsed="True" />
 	<CollapsedCategory Name="Warnings" />
 	<CollapsedCategory Name="TestBenchErrors" />
-	<CollapsedCategory Name="Split" />
-	<CollapsedCategory Name="Const" />
 	<CollapsedCategory Name="Errors" />
-	<CollapsedCategory Name="FlagExportToHDL" />
 	<CollapsedCategory Name="TestBenchWarnings" />
-	<CollapsedCategory Name="Switches" />
-	<CollapsedCategory Name="CPU" />
 	<CollapsedCategory Name="VerilatorBugs" />
+	<CollapsedCategory Name="FlagExportToHDL" />
+	<CollapsedCategory Name="CPU" />
+	<CollapsedCategory Name="Const" />
+	<CollapsedCategory Name="Simple" />
+	<CollapsedCategory Name="Split" />
+	<CollapsedCategory Name="Multiplexsers" />
+	<CollapsedCategory Name="Switches" />
 	<LogicalCircuit LogicalCircuitId="764d58d3-4a3d-4e1e-99b3-79881ec37ee6" Name="MyAnd" Notation="MyAnd" Category="Simple" />
 	<LogicalCircuit LogicalCircuitId="f5ba849b-755a-4c5f-91e3-24c6bc3b5578" Name="MyOr" Notation="MyOr" Category="Simple" />
 	<LogicalCircuit LogicalCircuitId="cd66758e-d637-4fab-af4c-b9d99c810e8a" Name="MyXor" Notation="MyXor" Category="Simple" />
@@ -38,9 +40,9 @@
 	<LogicalCircuit LogicalCircuitId="cc2439a6-205a-41cc-a6b5-e0069be7046a" Name="Not Testable 2" Notation="Not Testable 2" Note="There is no Input or Output Pins on this circuit" Category="TestBenchWarnings" />
 	<LogicalCircuit LogicalCircuitId="c9b7f8a4-f7a5-4bb2-8753-97c916712d9a" Name="Many Results" Notation="Many Results" Note="Input pin .+ connected to more than one output pin that are not tri state capable" Category="Errors" />
 	<LogicalCircuit LogicalCircuitId="b47875ec-a66a-4de5-bf72-e8c0f6ee64f4" Name="Bit Operation Unit" Notation="BOU" Note="Circuit .+ has too many input bits and test files can't be built" Category="TestBenchWarnings" Validators="op(o, e): (cop = o) * e op(0, x &lt;&lt; 1 | iC = r | oC &lt;&lt; 16) + op(1, (x &gt;&gt; 1 | iC &lt;&lt; 15 = r) &amp;&amp; (x &amp; 1 = oC)) + op(2, x &gt;&gt; 15 * 0xFFFF = r &amp;&amp; oC = 0) + op(3, (x &lt;&lt; 4) &amp; 0xFFFF = r &amp;&amp; oC = 0)" />
-	<LogicalCircuit LogicalCircuitId="37e52e68-e576-41da-8c49-42ace0288ca1" Name="Multiplexer 16 bit 4 inputs" Notation="mux 16-8" Category="Switches" CircuitShape="Mux" Validators="(n=0)*x0 + (n=1)*x1 + (n=2)*x2 + (n=3)*x3 = q" />
-	<LogicalCircuit LogicalCircuitId="01be3144-b8f0-45e8-a7cf-a3e4deb2432c" Name="Multiplexer 8 bit 4 inputs" Notation="mux 8-4" Category="Switches" CircuitShape="Mux" Validators="(n=0)*x0 + (n=1)*x1 + (n=2)*x2 + (n=3)*x3 = q" />
-	<LogicalCircuit LogicalCircuitId="5e313bac-ed15-4695-b47d-08be5b25c3ac" Name="Multiplexer 4 bit 4 inputs" Notation="mux 4-4" Category="Switches" CircuitShape="Mux" Validators="(n=0)*x0 + (n=1)*x1 + (n=2)*x2 + (n=3)*x3 = q" />
+	<LogicalCircuit LogicalCircuitId="37e52e68-e576-41da-8c49-42ace0288ca1" Name="Multiplexer 16 bit 4 inputs" Notation="mux 16-8" Category="Multiplexsers" CircuitShape="Mux" Validators="(n=0)*x0 + (n=1)*x1 + (n=2)*x2 + (n=3)*x3 = q" />
+	<LogicalCircuit LogicalCircuitId="01be3144-b8f0-45e8-a7cf-a3e4deb2432c" Name="Multiplexer 8 bit 4 inputs" Notation="mux 8-4" Category="Multiplexsers" CircuitShape="Mux" Validators="(n=0)*x0 + (n=1)*x1 + (n=2)*x2 + (n=3)*x3 = q" />
+	<LogicalCircuit LogicalCircuitId="5e313bac-ed15-4695-b47d-08be5b25c3ac" Name="Multiplexer 4 bit 4 inputs" Notation="mux 4-4" Category="Multiplexsers" CircuitShape="Mux" Validators="(n=0)*x0 + (n=1)*x1 + (n=2)*x2 + (n=3)*x3 = q" />
 	<LogicalCircuit LogicalCircuitId="d24e68ca-2dc1-42e3-bc0b-1f98e8fe8d8f" Name="Multiplexer 2 bit 4 inputs" Notation="mux 2-4" Category="Switches" CircuitShape="Mux" Validators="(n=0)*x0 + (n=1)*x1 + (n=2)*x2 + (n=3)*x3 = q" />
 	<LogicalCircuit LogicalCircuitId="6592e639-dac9-4a74-abf8-1a2a713a1e1a" Name="Multiplexer 1 bit 4 inputs" Notation="mux 1-4" Category="Switches" CircuitShape="Mux" Validators="(n=0)*x0 + (n=1)*x1 + (n=2)*x2 + (n=3)*x3 = q" />
 	<LogicalCircuit LogicalCircuitId="5f8fdbf7-8dd1-49ec-aeee-040e0224c22c" Name="Decoder 2-4" Notation="dec 2-4" Category="Switches" CircuitShape="Demux" />
