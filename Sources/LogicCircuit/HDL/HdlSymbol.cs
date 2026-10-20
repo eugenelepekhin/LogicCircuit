@@ -67,10 +67,13 @@ namespace LogicCircuit {
 
 		public void Add(HdlConnection connection) {
 			Debug.Assert(this.connectionList == null);
+			Debug.Assert(connection.OutJam.CircuitSymbol == this.CircuitSymbol || connection.InJam.CircuitSymbol == this.CircuitSymbol);
 			this.connections.Add(new JamKey(connection.OutJam, connection.InJam), connection);
 		}
 
 		public void Replace(HdlConnection connection, HdlConnection replacement) {
+			Debug.Assert(connection.OutJam.CircuitSymbol == this.CircuitSymbol || connection.InJam.CircuitSymbol == this.CircuitSymbol);
+			Debug.Assert(replacement.OutJam.CircuitSymbol == this.CircuitSymbol || replacement.InJam.CircuitSymbol == this.CircuitSymbol);
 			Debug.Assert(this.connectionList != null);
 			int index = this.connectionList.IndexOf(connection);
 			Debug.Assert(0 <= index);

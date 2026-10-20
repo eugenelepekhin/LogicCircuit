@@ -12,7 +12,9 @@ namespace LogicCircuit {
 		private readonly OneToMany<Jam, HdlConnection> assignments = new OneToMany<Jam, HdlConnection>(true);
 		private readonly Func<string, string> fixName;
 
-		public VerilogHdl(string name, IEnumerable<HdlSymbol> inputPins, IEnumerable<HdlSymbol> outputPins, IEnumerable<HdlSymbol> parts, Func<string, string> fixName) : base(name, inputPins, outputPins, parts) {
+		public VerilogHdl(string name, IEnumerable<HdlSymbol> inputPins, IEnumerable<HdlSymbol> outputPins, IEnumerable<HdlSymbol> parts, Func<string, string> fixName) : base(
+			name, inputPins, outputPins, parts
+		) {
 			this.fixName = fixName;
 		}
 

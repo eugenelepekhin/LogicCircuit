@@ -155,6 +155,7 @@ namespace LogicCircuit {
 			VerilogTestBench verilogTest = new VerilogTestBench(
 				this.lastVerilogHdl,
 				this.FixName(circuitName),
+				this.TestBenchModuleName(circuitName),
 				inputs,
 				outputs,
 				table,
@@ -168,7 +169,6 @@ namespace LogicCircuit {
 			}
 		}
 
-		// TODO: merge with test bench generation
 		public string TestBenchModuleName(string circuitName) => this.FixName(circuitName) + "_TestBench";
 		public string TestBenchFileName(string circuitName) => this.TestBenchModuleName(circuitName) + ".sv";
 	}
