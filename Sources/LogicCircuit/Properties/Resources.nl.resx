@@ -1022,9 +1022,6 @@ Wil je de referentie naar dit bestand uit de lijst met recente bestanden wissen?
 	<data name="MessageTruthTableTooBig" xml:space="preserve">
     <value>De waarheidstabel is te lang en zal ingekort worden. Gebruik a.u.b. Filter om de juistheid van de schakeling te controleren.</value>
   </data>
-	<data name="ParserEOS" xml:space="preserve">
-    <value>Einde van de expressie</value>
-  </data>
 	<data name="ParserErrorInvalidNumber" xml:space="preserve">
     <value>Incorrect nummer: {0}</value>
     <comment>{string number}</comment>

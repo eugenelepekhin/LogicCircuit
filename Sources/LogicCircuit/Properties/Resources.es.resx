@@ -693,9 +693,6 @@ Desea guardado?</value>
 	<data name="Oscillation" xml:space="preserve">
     <value>Oscilación</value>
   </data>
-	<data name="ParserEOS" xml:space="preserve">
-    <value>Fin de la expresión</value>
-  </data>
 	<data name="ParserErrorInvalidNumber" xml:space="preserve">
     <value>Numero invalido: {0}</value>
     <comment>{string number}</comment>

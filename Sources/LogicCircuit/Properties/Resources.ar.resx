@@ -469,9 +469,6 @@
 	<data name="MessageVersionOutdated" xml:space="preserve">
     <value>لديك نسخة قديمة. الرجاء الضغط على الرابط أدناه لتحميل أخر نسخة.</value>
   </data>
-	<data name="ParserEOS" xml:space="preserve">
-    <value>نهاية التعبير</value>
-  </data>
 	<data name="Ready" xml:space="preserve">
     <value>جاهز.</value>
   </data>

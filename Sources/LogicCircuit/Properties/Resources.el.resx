@@ -973,9 +973,6 @@
 	<data name="MessageTruthTableTooBig" xml:space="preserve">
     <value>Ο πίνακας αληθείας είναι πολύ μεγάλος και θα περικοπεί. Παρακαλούμε να χρησιμοποιήσετε το φίλτρο για επαλήθευση της ορθότητας του κυκλώματός σας.</value>
   </data>
-	<data name="ParserEOS" xml:space="preserve">
-    <value>Τέλος της έκφρασης</value>
-  </data>
 	<data name="ParserErrorInvalidNumber" xml:space="preserve">
     <value>Άκυρος αριθμός: {0}</value>
   </data>

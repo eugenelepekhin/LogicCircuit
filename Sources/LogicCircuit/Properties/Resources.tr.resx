@@ -900,9 +900,6 @@ Son Dosya listesinden referansı kaldırmak istiyor musunuz?</value>
 	<data name="MessageTruthTableTooBig" xml:space="preserve">
     <value>Doğruluk tablosu çok uzun ve kesiliyor. Devrenizin doğruluğunu kontrol etmek için lütfen Filtreyi kullanın.</value>
   </data>
-	<data name="ParserEOS" xml:space="preserve">
-    <value>İfadenin sonu</value>
-  </data>
 	<data name="ParserErrorUnexpected" xml:space="preserve">
     <value>{0} beklenmedik</value>
   </data>

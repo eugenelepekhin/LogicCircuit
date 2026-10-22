@@ -623,9 +623,6 @@ Czy chcesz go usunąć z listy ostatnich plików?</value>
 	<data name="ErrorClipboardCorrupted" xml:space="preserve">
     <value>Dane w schowku są uszkodzone i nie mogą być wklejone.</value>
   </data>
-	<data name="ParserEOS" xml:space="preserve">
-    <value>Koniec wyrażenia</value>
-  </data>
 	<data name="TitleApply" xml:space="preserve">
     <value>Zastosuj</value>
   </data>

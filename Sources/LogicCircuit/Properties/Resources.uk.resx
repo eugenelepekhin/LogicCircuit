@@ -897,9 +897,6 @@
 	<data name="MessageVersionPreview" xml:space="preserve">
     <value>Ваша версія ще не видана розробником і призначена для тестування.</value>
   </data>
-	<data name="ParserEOS" xml:space="preserve">
-    <value>Кінець виразу</value>
-  </data>
 	<data name="ParserErrorInvalidNumber" xml:space="preserve">
     <value>Невірне число: {0}</value>
   </data>

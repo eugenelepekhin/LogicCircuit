@@ -650,9 +650,6 @@ Izlaz</value>
 	<data name="TitleCheckVersionPeriodically" xml:space="preserve">
     <value>Povremeno provjeravaj postoji li nova verzija</value>
   </data>
-	<data name="ParserEOS" xml:space="preserve">
-    <value>Kraj izraza</value>
-  </data>
 	<data name="CircuitProbeName" xml:space="preserve">
     <value>Sonda</value>
   </data>

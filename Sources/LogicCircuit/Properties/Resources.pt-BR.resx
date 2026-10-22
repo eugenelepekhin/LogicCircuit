@@ -1021,9 +1021,6 @@ Você deseja remover a referência dele da lista de Arquivos Rescentes?</value>
 	<data name="MessageTruthTableTooBig" xml:space="preserve">
     <value>A tabela-verdade é muito longa e foi truncada. Utilize um filtro para verificar a correção de seu circuito.</value>
   </data>
-	<data name="ParserEOS" xml:space="preserve">
-    <value>Fim da expressão</value>
-  </data>
 	<data name="ParserErrorInvalidNumber" xml:space="preserve">
     <value>Número inválido: {0}</value>
     <comment>{string number}</comment>

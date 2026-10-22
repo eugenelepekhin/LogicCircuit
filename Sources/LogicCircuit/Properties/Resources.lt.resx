@@ -477,9 +477,6 @@
 	<data name="Oscillation" xml:space="preserve">
     <value>Virpesys</value>
   </data>
-	<data name="ParserEOS" xml:space="preserve">
-    <value>Išraiškos pabaiga</value>
-  </data>
 	<data name="OperationCanceled" xml:space="preserve">
     <value>Operacija nutraukta.</value>
   </data>

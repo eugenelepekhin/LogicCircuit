@@ -852,9 +852,6 @@ Vill du ta bort den från Senate Filler listan</value>
 	<data name="MessageTruthTableTooBig" xml:space="preserve">
 		<value>Sanningstabellen är för lång och blir trunkerad. Snälla använd filter för att varifiera korrecthet i din krets.</value>
 	</data>
-	<data name="ParserEOS" xml:space="preserve">
-		<value>Slut på uttryck</value>
-	</data>
 	<data name="ParserErrorInvalidNumber" xml:space="preserve">
 		<value>Ogiltigt numer: {0}</value>
 	</data>

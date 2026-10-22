@@ -713,9 +713,6 @@
 	<data name="ErrorClipboardCorrupted" xml:space="preserve">
     <value>剪贴板中的数据不正确或者不能够被粘贴</value>
   </data>
-	<data name="ParserEOS" xml:space="preserve">
-    <value>表达式尾部</value>
-  </data>
 	<data name="ParserErrorInvalidNumber" xml:space="preserve">
     <value>无效的数字：{0}</value>
   </data>

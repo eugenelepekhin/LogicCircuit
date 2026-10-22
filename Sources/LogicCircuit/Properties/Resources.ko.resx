@@ -970,9 +970,6 @@
 	<data name="ErrorUnsupportedUri" xml:space="preserve">
     <value>이 주소로 이동이 불가능합니다.</value>
   </data>
-	<data name="ParserEOS" xml:space="preserve">
-    <value>표현의 끝</value>
-  </data>
 	<data name="ParserErrorUnexpected" xml:space="preserve">
     <value>{0} 예상치 못한 에러</value>
   </data>

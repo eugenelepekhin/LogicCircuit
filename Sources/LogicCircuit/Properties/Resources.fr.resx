@@ -606,9 +606,6 @@ Voulez vous le sauvegarder ?</value>
 	<data name="MessageTruthTableTooBig" xml:space="preserve">
     <value>La table de vérité est trop longue et à été tronquée. Veuillez utiliser le filtre pour vérifier l'exactitude de votre circuit.</value>
   </data>
-	<data name="ParserEOS" xml:space="preserve">
-    <value>Fin de l'expression.</value>
-  </data>
 	<data name="ParserErrorInvalidNumber" xml:space="preserve">
     <value>Nombre invalide : {0}</value>
   </data>

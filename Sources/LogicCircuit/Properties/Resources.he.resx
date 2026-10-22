@@ -705,9 +705,6 @@
 	<data name="Oscillation" xml:space="preserve">
     <value>תנודה</value>
   </data>
-	<data name="ParserEOS" xml:space="preserve">
-    <value>סוף ביטוי</value>
-  </data>
 	<data name="ParserErrorInvalidNumber" xml:space="preserve">
     <value>מספר לא תקין‏: {0}‏</value>
     <comment>{string number}</comment>

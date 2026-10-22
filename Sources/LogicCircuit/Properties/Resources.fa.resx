@@ -761,9 +761,6 @@
 	<data name="MessageTruthTableTooBig" xml:space="preserve">
     <value>جدول درستی بسیار طولانی می باشد و خلاصه شده. لطفا برای اطمینان از صحت مدار خود از قیلتر استفاده کنید.</value>
   </data>
-	<data name="ParserEOS" xml:space="preserve">
-    <value>پایان عبارت</value>
-  </data>
 	<data name="ParserErrorInvalidNumber" xml:space="preserve">
     <value>شماره نامعتبر: {0}</value>
   </data>

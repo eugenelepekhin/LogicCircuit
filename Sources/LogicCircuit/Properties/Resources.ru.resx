@@ -519,9 +519,6 @@
 	<data name="NameLedMatrix" xml:space="preserve">
     <value>Светодиодная матрица</value>
   </data>
-	<data name="ParserEOS" xml:space="preserve">
-    <value>Конец выражения</value>
-  </data>
 	<data name="ParserErrorInvalidNumber" xml:space="preserve">
     <value>Неверное число: {0}</value>
   </data>

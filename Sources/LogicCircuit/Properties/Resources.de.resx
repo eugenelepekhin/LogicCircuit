@@ -586,9 +586,6 @@ Soll die Datei ersetzt werden?</value>
 	<data name="MessageTruthTableTooBig" xml:space="preserve">
     <value>Die Wahrheitstabelle ist zu lang und wird abgeschnitten. Bitte verwenden Sie Filter um die Korrektheit Ihrer Schaltung zu prüfen.</value>
   </data>
-	<data name="ParserEOS" xml:space="preserve">
-    <value>Ende des Ausdrucks</value>
-  </data>
 	<data name="ParserErrorInvalidNumber" xml:space="preserve">
     <value>Ungültige Nummer: {0}</value>
   </data>

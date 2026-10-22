@@ -1020,9 +1020,6 @@ Si desidera di rimuovere il riferimento dall'elenco dei File recenti?</value>
 	<data name="MessageTruthTableTooBig" xml:space="preserve">
     <value>La tabella di verità è troppo lunga e viene troncata. Si prega di utilizzare il filtro per verificare la correttezza del vostro circuito.</value>
   </data>
-	<data name="ParserEOS" xml:space="preserve">
-    <value>Fine espressione</value>
-  </data>
 	<data name="ParserErrorInvalidNumber" xml:space="preserve">
     <value>Numero non valido: {0}</value>
     <comment>{string number}</comment>

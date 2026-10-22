@@ -1183,9 +1183,6 @@
 	<data name="ToolTipRamWriteOn" xml:space="preserve">
 		<value>メモリの書き込みタイミングを選択してください。</value>
 	</data>
-	<data name="ParserEOS" xml:space="preserve">
-		<value>式の終わり</value>
-	</data>
 	<data name="ParserErrorInvalidNumber" xml:space="preserve">
 		<value>不正な数値: {0}</value>
 	</data>

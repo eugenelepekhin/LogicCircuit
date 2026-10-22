@@ -1021,9 +1021,6 @@ El kívánod távolítani a nemrég használt fájlok listájáról?</value>
 	<data name="MessageTruthTableTooBig" xml:space="preserve">
     <value>Az igazság táblázat túl hosszú. Kérlek alkalmazz egy szűrőt, hogy ellenőrizd a kapcsolásod helyességét.</value>
   </data>
-	<data name="ParserEOS" xml:space="preserve">
-    <value>Kifejezés vége</value>
-  </data>
 	<data name="ParserErrorInvalidNumber" xml:space="preserve">
     <value>Érvénytelen szám: {0}</value>
     <comment>{string number}</comment>
