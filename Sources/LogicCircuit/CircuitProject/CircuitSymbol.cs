@@ -72,7 +72,7 @@ namespace LogicCircuit {
 				return string.Format(System.Globalization.CultureInfo.InvariantCulture,
 					"Symbol of {0} {1}{2} on \"{3}\"",
 					this.Circuit.GetType().Name,
-					this.Circuit.Name, /*string.IsNullOrEmpty(this.Circuit.Notation) ? this.Circuit.Name : this.Circuit.Notation*/
+					(this.Circuit is CircuitProbe probe) ? probe.DisplayName : this.Circuit.Name, /*string.IsNullOrEmpty(this.Circuit.Notation) ? this.Circuit.Name : this.Circuit.Notation*/
 					this.Point,
 					this.LogicalCircuit.Name
 				);

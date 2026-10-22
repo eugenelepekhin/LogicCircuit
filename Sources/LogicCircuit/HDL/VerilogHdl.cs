@@ -72,7 +72,7 @@ namespace LogicCircuit {
 		}
 
 		private string WireName(Jam jam) {
-			Debug.Assert(jam.Pin.PinType != PinType.Input);
+			Tracer.Assert(jam.Pin.PinType != PinType.Input);
 			if(jam.CircuitSymbol.Circuit is Pin pin) {
 				return this.fixName(pin.Name);
 			} else {
@@ -218,26 +218,33 @@ namespace LogicCircuit {
 
 				if(part.CircuitSymbol.Circuit is Gate gate) {
 					if(GateType.Not <= gate.GateType && gate.GateType <= GateType.Xor || GateType.TriState1 <= gate.GateType) {
+						// In gate level model put output pin first, and other pins later
 						Jam output = part.CircuitSymbol.Jams().First(j => j.Pin.PinType == PinType.Output);
-						if(this.connections.TryGetValue(output, out ICollection<HdlConnection>? outputs)) {
-							if(1 < outputs.Count) {
+						if(this.connections.TryGetValue(output, out ICollection<HdlConnection>? recipients)) {
+							if(1 < recipients.Count) {
 								this.Write("\t\t{0}", this.Wire(output));
 							} else {
-								Debug.Assert(1 == outputs.Count);
-								this.Write("\t\t{0}", this.WirePlug(outputs.First(), output));
+								Debug.Assert(1 == recipients.Count);
+								this.Write("\t\t{0}", this.WirePlug(recipients.First(), output));
 							}
+							// All the other gate connections are inputs.
 							List<Jam> inputs = part.CircuitSymbol.Jams().Where(j => j.Pin.PinType == PinType.Input).ToList();
 							inputs.Sort(JamComparer.Comparer); // this will place tri-state enable pin at the end - this is how Verilog expects it.
 							foreach(Jam input in inputs) {
 								if(this.connections.TryGetValue(input, out ICollection<HdlConnection>? list)) {
-									if(1 < list.Count) {
-										part.HdlExport.Error(
-											Properties.Resources.ErrorManyResults(input.Pin.Name, part.CircuitSymbol.Circuit.Name, part.CircuitSymbol.Point.ToString(), part.CircuitSymbol.LogicalCircuit.Name)
-										);
-										return string.Empty;
+									if(0 < list.Count) {
+										// Here it is possible to have more than one connection sending data to the input.
+										// If these connections are note tri state capable it should be an error.
+										// However it is not possible to check it here as there is no full information on what exactly connected here.
+										// So, ignore it here, made all the connections, and hope the user was checking the circuit before exporting it to Verilog.
+										// If user is exporting test bench for this circuit the error will pop up during truth table building.
+										// Otherwise is user's mistake.
+										// TODO: Here it's must generate AND connecting all the inputs as the LogicCircuit doing exactly that.
+										foreach(HdlConnection connection in list) {
+											this.WriteLine(",");
+											this.Write("\t\t{0}", this.WirePlug(connection, input));
+										}
 									}
-									this.WriteLine(",");
-									this.Write("\t\t{0}", this.WirePlug(list.First(), input));
 								}
 							}
 						}

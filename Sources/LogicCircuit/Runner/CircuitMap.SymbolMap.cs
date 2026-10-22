@@ -130,9 +130,17 @@ namespace LogicCircuit {
 							return parameter;
 						}
 						CircuitGlyph symbol = jam.CircuitSymbol;
-						throw new CircuitException(Cause.UserError,
-							Properties.Resources.ErrorManyResults(jam.Pin.Name, symbol.Circuit.Name, symbol.Point.ToString(), symbol.LogicalCircuit.Name)
-						);
+						string? error = null;
+						if(symbol.Circuit is Pin pin) {
+							error = Properties.Resources.ErrorManyResultsOnOutputPin(pin.Name, symbol.LogicalCircuit.Name);
+						} else if(symbol.Circuit is CircuitProbe probe && probe.IsPinSubstitute) {
+							// The CircuitTestSocket will replace output pins with probes.
+							error = Properties.Resources.ErrorManyResultsOnOutputPin(probe.DisplayName, symbol.LogicalCircuit.Name);
+						} else {
+							error = Properties.Resources.ErrorManyResults(jam.Pin.Name, symbol.Circuit.Name, symbol.Point.ToString(), symbol.LogicalCircuit.Name);
+						}
+
+						throw new CircuitException(Cause.UserError, error);
 					}
 					parameter.Result.Link(result);
 				} else {

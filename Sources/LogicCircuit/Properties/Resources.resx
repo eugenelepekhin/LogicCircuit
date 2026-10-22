@@ -561,7 +561,7 @@ Out</value>
     <comment>{string symbol, string logicCircuit}</comment>
   </data>
   <data name="ErrorManyResults" xml:space="preserve">
-    <value>Input pin {0} of {1}{2} on {3} connected to more than one output pin that are not tri state capable.</value>
+    <value>Input pin {0} of {1}{2} on {3} connected to more than one output pins that are not tri state capable.</value>
     <comment>{string pinName, string circuitName, string position, string logicCircuitName}</comment>
   </data>
   <data name="PowerOff" xml:space="preserve">
@@ -1781,5 +1781,9 @@ Do you want to load auto saved state of this file?</value>
   <data name="MessageExportingHdlTest" xml:space="preserve">
     <value>Exporting test bench for circuit {0} to folder {1}</value>
     <comment>{string circuitName, string folder}</comment>
+  </data>
+  <data name="ErrorManyResultsOnOutputPin" xml:space="preserve">
+    <value>Output pin {0} on {1} connected to more than one output pins that are not tri state capable.</value>
+    <comment>{string pinName, string logicCircuitName}</comment>
   </data>
 </root>

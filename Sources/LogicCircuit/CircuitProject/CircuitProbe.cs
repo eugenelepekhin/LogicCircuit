@@ -35,7 +35,10 @@ namespace LogicCircuit {
 
 		public bool HasName => !StringComparer.OrdinalIgnoreCase.Equals(this.CircuitProbeId.ToString(), this.Name);
 
-		public string DisplayName => this.HasName ? this.Name : string.Empty;
+		public string DisplayName => this.HasName ? this.Name : Properties.Resources.CircuitProbeNotation;
+
+		// When truth table is built the CircuitTestSocket.OutputPinSocket is setting this to true.
+		public bool IsPinSubstitute { get; set; }
 
 		public void Rename(string name) {
 			if(string.IsNullOrWhiteSpace(name)) {
@@ -65,6 +68,12 @@ namespace LogicCircuit {
 			this.ResetPins();
 			this.InvalidateDistinctSymbol();
 		}
+
+		#if DEBUG
+			public override string ToString() {
+				return string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}: \"{1}\"", this.GetType().Name, this.DisplayName);
+			}
+		#endif
 	}
 
 	[SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]

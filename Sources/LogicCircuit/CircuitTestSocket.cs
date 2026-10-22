@@ -201,6 +201,11 @@ namespace LogicCircuit {
 					Project project = copy.ProjectSet.Copy(circuit.CircuitProject.ProjectSet.Project);
 					other = copy.LogicalCircuitSet.Copy(circuit, true);
 					project.LogicalCircuit = other;
+					// Delete all probes as they are not going to affect truth table but may conflict with names of pins that will be substituted with probes.
+					List<CircuitProbe> probes = copy.CircuitProbeSet.ToList();
+					foreach(CircuitProbe probe in probes) {
+						probe.Delete();
+					}
 				});
 				foreach(CircuitSymbol symbol in other!.CircuitSymbols()) {
 					symbol.GuaranteeGlyph();
@@ -256,7 +261,8 @@ namespace LogicCircuit {
 			Tracer.Assert(pin.PinType == PinType.Output);
 			CircuitProject project = pin.CircuitProject;
 			this.Pin = pin;
-			this.Value = project.CircuitProbeSet.Create(null, PinSide.Left);
+			this.Value = project.CircuitProbeSet.Create(pin.Name, PinSide.Left);
+			this.Value.IsPinSubstitute = true;
 			CircuitSymbol? pinSymbol = project.CircuitSymbolSet.SelectByCircuit(pin).FirstOrDefault();
 			Tracer.Assert(pinSymbol);
 			this.Symbol = project.CircuitSymbolSet.Create(this.Value, pin.LogicalCircuit, pinSymbol!.X, pinSymbol.Y);
