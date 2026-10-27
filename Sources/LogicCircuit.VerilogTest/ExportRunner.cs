@@ -6,18 +6,16 @@ using LogicCircuit.UnitTest;
 
 namespace LogicCircuit.VerilogTest {
 	internal class ExportRunner {
-		public string CircuitProjectFile { get; }
-		public string ExportRootFolder { get; }
-		public string VerilatorRoot { get; }
-		public string? CompilerInitPath { get; }
+		private readonly string exportRootFolder;
+		private readonly string verilatorRoot;
+		private readonly string? compilerInitPath;
 
 		public CircuitProject CircuitProject;
 
 		public ExportRunner(string circuitProjectFile, string exportRootFolder, string verilatorRoot, string? compilerInitPath) {
-			this.CircuitProjectFile = circuitProjectFile;
-			this.ExportRootFolder = exportRootFolder;
-			this.VerilatorRoot = verilatorRoot;
-			this.CompilerInitPath = compilerInitPath;
+			this.exportRootFolder = exportRootFolder;
+			this.verilatorRoot = verilatorRoot;
+			this.compilerInitPath = compilerInitPath;
 			ProjectTester.InitResources();
 			this.CircuitProject = ProjectTester.LoadCircuitProject(circuitProjectFile, null);
 			ExportRunner.EnsureFolder(exportRootFolder);
@@ -65,7 +63,7 @@ namespace LogicCircuit.VerilogTest {
 				Program.LogError($"Circuit is not testable: {circuitName}");
 				return false;
 			}
-			string folder = Path.Combine(this.ExportRootFolder, circuitName);
+			string folder = Path.Combine(this.exportRootFolder, circuitName);
 			ExportRunner.EnsureFolder(folder);
 			bool success = export.ExportCircuit(logicalCircuit, folder, false, false, i => true, () => {});
 			if(success) {
@@ -77,7 +75,7 @@ namespace LogicCircuit.VerilogTest {
 		}
 
 		private bool Verilate(string targetFolder, string testBenchModuleName, string testBenchFileName) {
-			string verilatorExe = Path.Combine(this.VerilatorRoot, "bin", "verilator.exe");
+			string verilatorExe = Path.Combine(this.verilatorRoot, "bin", "verilator.exe");
 			string arguments = $"--cc --timing --trace -Mdir \"{targetFolder}\" --top {testBenchModuleName} \"{testBenchFileName}\"";
 			Program.LogMessage($"{verilatorExe} {arguments}");
 			ProcessStartInfo startInfo = new ProcessStartInfo(verilatorExe, arguments) {
@@ -86,7 +84,7 @@ namespace LogicCircuit.VerilogTest {
 				UseShellExecute = false,
 				CreateNoWindow = true
 			};
-			startInfo.EnvironmentVariables["VERILATOR_ROOT"] = this.VerilatorRoot;
+			startInfo.EnvironmentVariables["VERILATOR_ROOT"] = this.verilatorRoot;
 			Process process = new Process {
 				StartInfo = startInfo
 			};
@@ -130,7 +128,7 @@ namespace LogicCircuit.VerilogTest {
 		private bool Compile(string targetFolder, string circuitName, out string textExe) {
 			ResponseFile response = new ResponseFile() {
 				Session = new Dictionary<string, string>() {
-					{ "VerilatorRoot", this.VerilatorRoot }
+					{ "VerilatorRoot", this.verilatorRoot }
 				}
 			};
 			string responseFile = "build.rsp";
@@ -139,8 +137,8 @@ namespace LogicCircuit.VerilogTest {
 			string exeFile = "test.exe";
 			string compileArgs = $"@{responseFile} *.cpp /Fe{exeFile} /link /STACK:{16 * 1024 * 1024}";
 
-			string arguments = string.IsNullOrEmpty(this.CompilerInitPath) ? compileArgs : $"/c \"\"{this.CompilerInitPath}\" && cl.exe {compileArgs}\"";
-			string command = string.IsNullOrEmpty(this.CompilerInitPath) ? "cl.exe" : "cmd.exe";
+			string arguments = string.IsNullOrEmpty(this.compilerInitPath) ? compileArgs : $"/c \"\"{this.compilerInitPath}\" && cl.exe {compileArgs}\"";
+			string command = string.IsNullOrEmpty(this.compilerInitPath) ? "cl.exe" : "cmd.exe";
 
 			Program.LogMessage($"cl.exe {compileArgs}");
 

@@ -115,7 +115,7 @@ namespace LogicCircuit.VerilogTest {
 
 		[STAThread]
 		static int Main(string[] args) {
-			#if DEBUG && true
+			#if DEBUG && !true
 				if(args == null || args.Length == 0) {
 					args = [
 						"/r",		@"C:\Projects\LogicCircuit\LogicCircuit\Temp\hdl",
@@ -137,7 +137,7 @@ namespace LogicCircuit.VerilogTest {
 				foreach(LogicalCircuit logicalCircuit in runner.CircuitProject.LogicalCircuitSet) {
 					string name = logicalCircuit.Name;
 					string category = logicalCircuit.Category;
-					if(arguments.Circuit!.Any(r => r.IsMatch(name)) ||arguments.Category!.Any(r => r.IsMatch(category))) {
+					if(arguments.Circuit!.Any(r => r.IsMatch(name)) || arguments.Category!.Any(r => r.IsMatch(category))) {
 						list.Add(logicalCircuit);
 					}
 				}
