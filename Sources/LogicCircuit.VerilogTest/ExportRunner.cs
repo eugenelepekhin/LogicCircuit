@@ -9,13 +9,15 @@ namespace LogicCircuit.VerilogTest {
 		private readonly string exportRootFolder;
 		private readonly string verilatorRoot;
 		private readonly string? compilerInitPath;
+		private readonly string? testBenchFile;
 
 		public CircuitProject CircuitProject;
 
-		public ExportRunner(string circuitProjectFile, string exportRootFolder, string verilatorRoot, string? compilerInitPath) {
+		public ExportRunner(string circuitProjectFile, string exportRootFolder, string verilatorRoot, string? compilerInitPath, string? testBenchFile) {
 			this.exportRootFolder = exportRootFolder;
 			this.verilatorRoot = verilatorRoot;
 			this.compilerInitPath = compilerInitPath;
+			this.testBenchFile = testBenchFile;
 			ProjectTester.InitResources();
 			this.CircuitProject = ProjectTester.LoadCircuitProject(circuitProjectFile, null);
 			ExportRunner.EnsureFolder(exportRootFolder);
@@ -53,8 +55,10 @@ namespace LogicCircuit.VerilogTest {
 			testBenchModuleName = null;
 			testBenchFileName = null;
 			string circuitName = logicalCircuit.Name;
+			
+			bool exportGeneratedTests = this.testBenchFile is null;
 
-			VerilogExport export = new VerilogExport(exportTests: true, commentPoints: true, fixNames: true, logMessage: Program.LogMessage, logError: Program.LogError, logWarning: Program.LogWarning);
+			VerilogExport export = new VerilogExport(exportTests: exportGeneratedTests, commentPoints: true, fixNames: true, logMessage: Program.LogMessage, logError: Program.LogError, logWarning: Program.LogWarning);
 			if(!export.IsValid(circuitName)) {
 				Program.LogError($"Invalid circuit name: {circuitName}");
 				return false;
@@ -70,6 +74,21 @@ namespace LogicCircuit.VerilogTest {
 				targetFolder = folder;
 				testBenchModuleName = export.TestBenchModuleName(circuitName);
 				testBenchFileName = export.TestBenchFileName(circuitName);
+				if(!exportGeneratedTests) {
+					Debug.Assert(!string.IsNullOrEmpty(this.testBenchFile));
+					testBenchFileName = Path.GetFileName(this.testBenchFile);
+					File.Copy(this.testBenchFile, Path.Combine(folder, testBenchFileName), true);
+
+					string testCode = File.ReadAllText(this.testBenchFile);
+					Match match = Regex.Match(testCode, @"module\s+(?<name>[a-zA-Z_][a-zA-Z_0-9]*)\s*;", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
+					if(match.Success) {
+						string name = match.Groups["name"].Value;
+						testBenchModuleName = name;
+					} else {
+						Program.LogError($"Test bench module not found in file {this.testBenchFile}");
+						return false;
+					}
+				}
 			}
 			return success;
 		}

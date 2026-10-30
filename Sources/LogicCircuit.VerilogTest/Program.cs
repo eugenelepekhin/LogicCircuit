@@ -1,6 +1,7 @@
 ﻿// Ignore Spelling: Verilog Verilator
 
 using System.Diagnostics;
+using System.Text;
 using System.Text.RegularExpressions;
 using CommandLineParser;
 
@@ -13,6 +14,7 @@ namespace LogicCircuit.VerilogTest {
 			public string? CompilerInitPath;
 			public List<Regex>? Circuit;
 			public List<Regex>? Category;
+			public string? TestBench;
 
 			private class UniqueList {
 				private List<string> list = new();
@@ -41,6 +43,7 @@ namespace LogicCircuit.VerilogTest {
 				string? vcvars = null;
 				UniqueList circuit = new();
 				UniqueList category = new();
+				string? test = null;
 				bool showHelp = false;
 
 				CommandLine commandLine = new CommandLine()
@@ -51,6 +54,7 @@ namespace LogicCircuit.VerilogTest {
 
 					.AddString("circuit", "c", "circuit", "Semicolon separated list of individual circuit names patterns", false, c => circuit.Add(split(c.Trim())))
 					.AddString("category", "cat", "category", "Semicolon separated list of patterns for names of categories", false, c => category.Add(split(c.Trim())))
+					.AddString("test", null, "Manually written test bench path", "File with manually written test bench. Only one circuit must be specified for this option", false, t => test = t)
 
 					.AddFlag("help", "?", "Show this help", false, h => showHelp = h)
 				;
@@ -109,36 +113,65 @@ namespace LogicCircuit.VerilogTest {
 				this.Circuit = circuit.ToList().Select(p => new Regex(p, options)).ToList();
 				this.Category = category.ToList().Select(p => new Regex(p, options)).ToList();
 
+				if(!empty(test) && (0 < this.Category.Count || 1 != this.Circuit.Count)) {
+					Program.LogError($"When manual test bench is provided, only one circuit name must be provided in Circuit parameter.");
+					Program.Usage(null, commandLine.Help());
+					return false;
+				}
+				if(!empty(test) && !File.Exists(test)) {
+					Program.LogError($"Test bench file \"{test}\" not found.");
+					Program.Usage(null, commandLine.Help());
+					return false;
+				}
+				this.TestBench = empty(test) ? null : test;
+
 				return true;
 			}
 		}
 
+		private static readonly StringBuilder errors = new();
+		private static int errorCount = 0;
+		private static int warningCount = 0;
+
 		[STAThread]
 		static int Main(string[] args) {
-			#if DEBUG && !true
+			#if DEBUG && true
 				if(args == null || args.Length == 0) {
 					args = [
 						"/r",		@"C:\Projects\LogicCircuit\LogicCircuit\Temp\hdl",
 						"/p",		@"C:\Projects\LogicCircuit\LogicCircuit\master\Sources\LogicCircuit.UnitTest\Properties\VerilogTests.CircuitProject",
 						"/v",		@"C:\Tools\verilator-5.052",
 						"/vcvars",	@"C:\Program Files\Microsoft Visual Studio\18\Community\VC\Auxiliary\Build\vcvars64.bat",
-						"/circuit",	"Wire Plug 1;Wire Plug 2",
-						//"/category", "Switches"
+						"/circuit",	"Wire Plug 2",
+						//"/category", "Switches",
+						"/test",	@"C:\Projects\LogicCircuit\LogicCircuit\Temp\hdl\Wire_Plug_2_TestBench.sv",
 					];
 				}
 			#endif
 
 			Arguments arguments = new Arguments();
 			if(arguments.Parse(args)) {
-				ExportRunner runner = new ExportRunner(arguments.ProjectFile!, arguments.TargetFolder!, arguments.VerilatorPath!, arguments.CompilerInitPath);
+				ExportRunner runner = new ExportRunner(arguments.ProjectFile!, arguments.TargetFolder!, arguments.VerilatorPath!, arguments.CompilerInitPath, arguments.TestBench);
 				bool success = false;
 				int count = 0;
 				HashSet<LogicalCircuit> list = new();
-				foreach(LogicalCircuit logicalCircuit in runner.CircuitProject.LogicalCircuitSet) {
-					string name = logicalCircuit.Name;
-					string category = logicalCircuit.Category;
-					if(arguments.Circuit!.Any(r => r.IsMatch(name)) || arguments.Category!.Any(r => r.IsMatch(category))) {
-						list.Add(logicalCircuit);
+				if(arguments.TestBench == null) {
+					foreach(LogicalCircuit logicalCircuit in runner.CircuitProject.LogicalCircuitSet) {
+						string name = logicalCircuit.Name;
+						string category = logicalCircuit.Category;
+						if(arguments.Circuit!.Any(r => r.IsMatch(name)) || arguments.Category!.Any(r => r.IsMatch(category))) {
+							list.Add(logicalCircuit);
+						}
+					}
+				} else {
+					Regex regexName = arguments.Circuit![0];
+					foreach(LogicalCircuit logicalCircuit in runner.CircuitProject.LogicalCircuitSet) {
+						string name = logicalCircuit.Name;
+						Match match = regexName.Match(name);
+						if(match.Success && match.Index == 0 && match.Length == name.Length) {
+							list.Add(logicalCircuit);
+							break;
+						}
 					}
 				}
 				Program.LogMessage($"Found {list.Count} circuits to test");
@@ -149,6 +182,10 @@ namespace LogicCircuit.VerilogTest {
 				}
 				Program.LogMessage("");
 				Program.LogMessage($"Tested {count} circuits.");
+				Program.LogMessage($"Found {Program.errorCount} errors and {Program.warningCount} warnings.");
+				if(0 < Program.errorCount || 0 < Program.warningCount) {
+					Program.LogMessage(Program.errors.ToString());
+				}
 				return success ? 0 : 1;
 			}
 			return 2;
@@ -169,13 +206,19 @@ namespace LogicCircuit.VerilogTest {
 		}
 
 		public static void LogError(string message) {
-			Console.Error.WriteLine($"Error: {message}");
-			Debug.WriteLine($"Error: {message}");
+			string error = $"Error: {message}";
+			Console.Error.WriteLine(error);
+			Debug.WriteLine(error);
+			Program.errors.AppendLine(error);
+			Program.errorCount++;
 		}
 
 		public static void LogWarning(string message) {
-			Console.Out.WriteLine($"Warning: {message}");
-			Debug.WriteLine($"Warning: {message}");
+			string warning = $"Warning: {message}";
+			Console.Out.WriteLine(warning);
+			Debug.WriteLine(warning);
+			Program.errors.AppendLine(warning);
+			Program.warningCount++;
 		}
 	}
 }
