@@ -183,7 +183,7 @@ namespace LogicCircuit.VerilogTest {
 				Program.LogMessage("");
 				Program.LogMessage($"Tested {count} circuits.");
 				Program.LogMessage($"Found {Program.errorCount} errors and {Program.warningCount} warnings.");
-				if(0 < Program.errorCount || 0 < Program.warningCount) {
+				if((0 < Program.errorCount || 0 < Program.warningCount) && 1 < list.Count) {
 					Program.LogMessage(Program.errors.ToString());
 				}
 				return success ? 0 : 1;
