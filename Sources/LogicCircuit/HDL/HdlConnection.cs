@@ -95,7 +95,22 @@ namespace LogicCircuit {
 		public bool IsBitRange(HdlSymbol symbol) {
 			Tracer.Assert(this.OutHdlSymbol == symbol || this.InHdlSymbol == symbol);
 			Tracer.Assert(this.outBits == null || this.outBits.Count == this.inBits!.Count);
-			return this.outBits != null && this.outBits.Count != ((symbol == this.OutHdlSymbol) ? this.OutJam : this.InJam).Pin.BitWidth;
+			if(this.outBits != null) {
+				Debug.Assert(this.inBits != null);
+				List<int> bits = (symbol == this.OutHdlSymbol) ? this.outBits : this.inBits;
+				Jam jam = this.SymbolJam(symbol);
+				int bitWidth = jam.Pin.BitWidth;
+				if(bits.Count == bitWidth) {
+					for(int i = 0; i < bits.Count; i++) {
+						if(bits[i] != i) {
+							return true;
+						}
+					}
+					return false;
+				}
+				return true;
+			}
+			return false;
 		}
 
 		public bool IsBitRange(Jam jam) {
