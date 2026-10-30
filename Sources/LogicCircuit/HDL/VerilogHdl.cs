@@ -8,8 +8,8 @@ using System.Linq;
 namespace LogicCircuit {
 	internal sealed class VerilogHdl : HdlTransformation {
 		private readonly Dictionary<Jam, Jam> wires = new();
-		private readonly OneToMany<Jam, HdlConnection> connections = new OneToMany<Jam, HdlConnection>(true);
-		private readonly OneToMany<Jam, HdlConnection> assignments = new OneToMany<Jam, HdlConnection>(true);
+		private readonly OneToMany<Jam, HdlConnection> connections = new(true);
+		private readonly OneToMany<Jam, HdlConnection> assignments = new(true);
 		private readonly Func<string, string> fixName;
 
 		public VerilogHdl(string name, IEnumerable<HdlSymbol> inputPins, IEnumerable<HdlSymbol> outputPins, IEnumerable<HdlSymbol> parts, Func<string, string> fixName) : base(
@@ -39,17 +39,17 @@ namespace LogicCircuit {
 			}
 			foreach(KeyValuePair<Jam, ICollection<HdlConnection>> pair in this.connections) {
 				Jam jam = pair.Key;
-				ICollection<HdlConnection> connections = pair.Value;
-				Debug.Assert(0 < connections.Count);
+				ICollection<HdlConnection> list = pair.Value;
+				Debug.Assert(0 < list.Count);
 				if(jam.Pin.PinType == PinType.Output && jam.CircuitSymbol.Circuit is not Constant) {
 					// Find first Pin of the same bit width as the jam, but on the other side of connection. This pin will serve as wire. With exception if it's the only pin is connected to the jam.
-					Jam? other = connections.Select(c => c.OtherJam(jam)).FirstOrDefault(j => j.CircuitSymbol.Circuit is Pin pin && (pin.BitWidth == jam.Pin.BitWidth || 1 == connections.Count));
+					Jam? other = list.Select(c => c.OtherJam(jam)).FirstOrDefault(j => j.CircuitSymbol.Circuit is Pin pin && pin.BitWidth == jam.Pin.BitWidth);
 					if(other != null) {
 						this.wires.Add(jam, other);
 					} else {
 						this.wires.Add(jam, jam);
 					}
-					foreach(HdlConnection connection in connections) {
+					foreach(HdlConnection connection in list) {
 						Jam j = connection.OtherJam(jam);
 						if(j != other && j.CircuitSymbol.Circuit is Pin) {
 							this.assignments.Add(jam, connection);
@@ -64,12 +64,6 @@ namespace LogicCircuit {
 			return (pin.BitWidth == 1) ? "" : this.Format("[{0}:0]", pin.BitWidth - 1);
 		}
 		public string Range(HdlConnection.BitRange range) => this.Format((range.First == range.Last) ? "[{0}]" : "[{0}:{1}]", range.Last, range.First);
-
-		private void WriteRange(BasePin pin) {
-			if(1 < pin.BitWidth) {
-				this.Write(this.Range(pin));
-			}
-		}
 
 		private string WireName(Jam jam) {
 			Tracer.Assert(jam.Pin.PinType != PinType.Input);
@@ -196,7 +190,7 @@ namespace LogicCircuit {
 				Pin pin = (Pin)symbol.CircuitSymbol.Circuit;
 				if(comma) this.WriteLine(",");
 				this.Write("\t{0}", pin.PinType == PinType.Input ? "input" : "output");
-				this.WriteRange(pin);
+				this.Write(this.Range(pin));
 				this.Write("\t{0}", this.fixName(pin.Name));
 				comma = true;
 			}
@@ -205,7 +199,7 @@ namespace LogicCircuit {
 
 			foreach(Jam jam in this.wires.Values.Where(j => j.CircuitSymbol.Circuit is not Pin).OrderBy(j => j.AbsolutePoint, Comparer<GridPoint>.Create(VerilogHdl.CompareGridPoint))) {
 				this.Write("\twire");
-				this.WriteRange(jam.Pin);
+				this.Write(this.Range(jam.Pin));
 				this.WriteLine(" {0};", this.WireName(jam));
 			}
 			this.WriteLine();
@@ -221,7 +215,7 @@ namespace LogicCircuit {
 						// In gate level model put output pin first, and other pins later
 						Jam output = part.CircuitSymbol.Jams().First(j => j.Pin.PinType == PinType.Output);
 						if(this.connections.TryGetValue(output, out ICollection<HdlConnection>? recipients)) {
-							if(1 < recipients.Count) {
+							if(1 < recipients.Count || recipients.First().IsOtherBitRange(output)) {
 								this.Write("\t\t{0}", this.Wire(output));
 							} else {
 								Debug.Assert(1 == recipients.Count);
@@ -232,18 +226,16 @@ namespace LogicCircuit {
 							inputs.Sort(JamComparer.Comparer); // this will place tri-state enable pin at the end - this is how Verilog expects it.
 							foreach(Jam input in inputs) {
 								if(this.connections.TryGetValue(input, out ICollection<HdlConnection>? list)) {
-									if(0 < list.Count) {
-										// Here it is possible to have more than one connection sending data to the input.
-										// If these connections are note tri state capable it should be an error.
-										// However it is not possible to check it here as there is no full information on what exactly connected here.
-										// So, ignore it here, made all the connections, and hope the user was checking the circuit before exporting it to Verilog.
-										// If user is exporting test bench for this circuit the error will pop up during truth table building.
-										// Otherwise is user's mistake.
-										// TODO: Here it's must generate AND connecting all the inputs as the LogicCircuit doing exactly that.
-										foreach(HdlConnection connection in list) {
-											this.WriteLine(",");
-											this.Write("\t\t{0}", this.WirePlug(connection, input));
-										}
+									// Here it is possible to have more than one connection sending data to the input.
+									// If these connections are note tri state capable it should be an error.
+									// However it is not possible to check it here as there is no full information on what exactly connected here.
+									// So, ignore it here, made all the connections, and hope the user was checking the circuit before exporting it to Verilog.
+									// If user is exporting test bench for this circuit the error will pop up during truth table building.
+									// Otherwise is user's mistake.
+									// TODO: Here it's must generate AND connecting all the inputs as the LogicCircuit doing exactly that.
+									foreach(HdlConnection connection in list) {
+										this.WriteLine(",");
+										this.Write("\t\t{0}", this.WirePlug(connection, input));
 									}
 								}
 							}
@@ -259,7 +251,7 @@ namespace LogicCircuit {
 							comma = true;
 							this.Write("\t\t.{0}(", part.HdlExport.HdlName(jam));
 							if(jam.Pin.PinType == PinType.Output) {
-								if(1 < list.Count) {
+								if(1 < list.Count || list.First().IsOtherBitRange(jam)) {
 									this.Write(this.Wire(jam));
 								} else {
 									this.Write(this.WirePlug(list.First(), jam));
