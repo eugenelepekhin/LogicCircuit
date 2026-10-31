@@ -135,6 +135,7 @@
 
 			<TestTarget Condition="'$(Circuit)' != ''">/circuit "$(Circuit)"</TestTarget>
 			<TestTarget Condition="'$(Category)' != ''">$(TestTarget) /category "$(Category)"</TestTarget>
+			<TestTarget Condition="'$(TestBench)' != ''">$(TestTarget) /test "$(TestBench)"</TestTarget>
 
 			<VerilogTesterPath>$(OutputPath)LogicCircuit.VerilogTest.exe</VerilogTesterPath>
 
