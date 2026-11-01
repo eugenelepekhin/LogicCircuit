@@ -33,7 +33,7 @@ namespace LogicCircuit.VerilogTest
             
             #line default
             #line hidden
-            this.Write("/std:c++20\r\n/favor:blend\r\n/DVL_TIME_CONTEXT\r\n/EHsc\r\n/MT\r\n/O2\r\n/bigobj\r\n/I");
+            this.Write("/std:c++20\r\n/favor:blend\r\n/DVL_TIME_CONTEXT\r\n/EHsc\r\n/MT\r\n/Od\r\n/bigobj\r\n/I");
             
             #line 12 "C:\Projects\LogicCircuit\LogicCircuit\master\Sources\LogicCircuit.VerilogTest\ResponseFile.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(root));

@@ -7,7 +7,7 @@
 /DVL_TIME_CONTEXT
 /EHsc
 /MT
-/O2
+/Od
 /bigobj
 /I<#=root#>
 /I<#=root#>\vltstd

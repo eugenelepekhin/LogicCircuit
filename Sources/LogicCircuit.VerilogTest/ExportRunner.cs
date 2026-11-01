@@ -10,12 +10,14 @@ namespace LogicCircuit.VerilogTest {
 		private readonly string verilatorRoot;
 		private readonly string? compilerInitPath;
 		private readonly string? testBenchFile;
+		private readonly List<string>? verilatorWarnings;
 
 		public CircuitProject CircuitProject;
 
-		public ExportRunner(string circuitProjectFile, string exportRootFolder, string verilatorRoot, string? compilerInitPath, string? testBenchFile) {
+		public ExportRunner(string circuitProjectFile, string exportRootFolder, string verilatorRoot, List<string>? verilatorWarnings, string? compilerInitPath, string? testBenchFile) {
 			this.exportRootFolder = exportRootFolder;
 			this.verilatorRoot = verilatorRoot;
+			this.verilatorWarnings = verilatorWarnings;
 			this.compilerInitPath = compilerInitPath;
 			this.testBenchFile = testBenchFile;
 			ProjectTester.InitResources();
@@ -95,7 +97,8 @@ namespace LogicCircuit.VerilogTest {
 
 		private bool Verilate(string targetFolder, string testBenchModuleName, string testBenchFileName) {
 			string verilatorExe = Path.Combine(this.verilatorRoot, "bin", "verilator.exe");
-			string arguments = $"--cc --timing --trace -Mdir \"{targetFolder}\" --top {testBenchModuleName} \"{testBenchFileName}\"";
+			string warnings = this.verilatorWarnings != null ? string.Join(null, this.verilatorWarnings.Select(w => $" -Wno-{w}")) : string.Empty;
+			string arguments = $"--cc --timing --trace -Mdir \"{targetFolder}\"{warnings} --top {testBenchModuleName} \"{testBenchFileName}\"";
 			Program.LogMessage($"{verilatorExe} {arguments}");
 			ProcessStartInfo startInfo = new ProcessStartInfo(verilatorExe, arguments) {
 				RedirectStandardOutput = true,

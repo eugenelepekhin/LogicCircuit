@@ -11,6 +11,7 @@ namespace LogicCircuit.VerilogTest {
 			public string TargetFolder;
 			public string ProjectFile;
 			public string VerilatorPath;
+			public List<string>? VerilatorWarnings;
 			public string? CompilerInitPath;
 			public List<Regex>? Circuit;
 			public List<Regex>? Category;
@@ -40,6 +41,7 @@ namespace LogicCircuit.VerilogTest {
 				string? targetFolder = null;
 				string? projectFile = null;
 				string? verilator = null;
+				UniqueList warnings = new();
 				string? vcvars = null;
 				UniqueList circuit = new();
 				UniqueList category = new();
@@ -50,6 +52,7 @@ namespace LogicCircuit.VerilogTest {
 					.AddString("root", "r", "Root folder", "Folder where sub folders for each export will reside", true, v => targetFolder = v.Trim())
 					.AddString("project", "p", "Circuit Project", "Circuit project file", true, f => projectFile = f.Trim())
 					.AddString("verilator", "v", "Verilator Root", "Verilator folder", true, v => verilator = v.Trim())
+					.AddString("noWarnings", "nw", "Warnings to turn off", "Semicolon separated list of Verilator warnings to turn off", false, w => warnings.Add(split(w.Trim())))
 					.AddString("vcvars", null, "vcvars64.bat", "Path to vcvars64.bat", false, b => vcvars = b.Trim())
 
 					.AddString("circuit", "c", "circuit", "Semicolon separated list of individual circuit names patterns", false, c => circuit.Add(split(c.Trim())))
@@ -107,6 +110,9 @@ namespace LogicCircuit.VerilogTest {
 				this.TargetFolder = targetFolder;
 				this.ProjectFile = projectFile;
 				this.VerilatorPath = verilator;
+				if(0 < warnings.Count) {
+					this.VerilatorWarnings = warnings.ToList();
+				}
 				this.CompilerInitPath = empty(vcvars) ? null : vcvars;
 
 				RegexOptions options = RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.IgnoreCase | RegexOptions.Singleline;
@@ -151,7 +157,7 @@ namespace LogicCircuit.VerilogTest {
 
 			Arguments arguments = new Arguments();
 			if(arguments.Parse(args)) {
-				ExportRunner runner = new ExportRunner(arguments.ProjectFile!, arguments.TargetFolder!, arguments.VerilatorPath!, arguments.CompilerInitPath, arguments.TestBench);
+				ExportRunner runner = new ExportRunner(arguments.ProjectFile!, arguments.TargetFolder!, arguments.VerilatorPath!, arguments.VerilatorWarnings, arguments.CompilerInitPath, arguments.TestBench);
 				bool success = false;
 				int count = 0;
 				HashSet<LogicalCircuit> list = new();
@@ -183,9 +189,9 @@ namespace LogicCircuit.VerilogTest {
 				Program.LogMessage("");
 				Program.LogMessage($"Tested {count} circuits.");
 				Program.LogMessage($"Found {Program.errorCount} errors and {Program.warningCount} warnings.");
-				if((0 < Program.errorCount || 0 < Program.warningCount) && 1 < list.Count) {
-					Program.LogMessage(Program.errors.ToString());
-				}
+				//if((0 < Program.errorCount || 0 < Program.warningCount) && 1 < list.Count) {
+				//	Program.LogMessage(Program.errors.ToString());
+				//}
 				return success ? 0 : 1;
 			}
 			return 2;
