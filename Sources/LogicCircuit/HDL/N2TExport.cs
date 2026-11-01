@@ -40,9 +40,9 @@ namespace LogicCircuit {
 		) {
 		}
 
-		protected override HdlTransformation? CreateTransformation(string name, IList<HdlSymbol> inputPins, IList<HdlSymbol> outputPins, IList<HdlSymbol> parts) {
+		protected override HdlTransformation? CreateTransformation(string name, string note, IList<HdlSymbol> inputPins, IList<HdlSymbol> outputPins, IList<HdlSymbol> parts) {
 			if(this.FixBigGates(parts)) {
-				return new N2THdl(this.FixName(name), inputPins, outputPins, parts, this.FixName);
+				return new N2THdl(this.FixName(name), note, inputPins, outputPins, parts, this.FixName);
 			}
 			return null;
 		}

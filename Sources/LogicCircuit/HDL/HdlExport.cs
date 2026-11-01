@@ -44,7 +44,7 @@ namespace LogicCircuit {
 			this.logWarning = logWarning;
 		}
 
-		protected abstract HdlTransformation? CreateTransformation(string name, IList<HdlSymbol> inputPins, IList<HdlSymbol> outputPins, IList<HdlSymbol> parts);
+		protected abstract HdlTransformation? CreateTransformation(string name, string note, IList<HdlSymbol> inputPins, IList<HdlSymbol> outputPins, IList<HdlSymbol> parts);
 		protected abstract string FileName(LogicalCircuit circuit);
 		public abstract bool CanExport(Circuit circuit);
 		public abstract bool IsValid(string name);
@@ -228,7 +228,7 @@ namespace LogicCircuit {
 			outputPins.ForEach(symbol => symbol.SortConnections());
 			parts.ForEach(symbol => symbol.SortConnections());
 
-			HdlTransformation? transformation = this.CreateTransformation(circuit.Name, inputPins, outputPins, parts);
+			HdlTransformation? transformation = this.CreateTransformation(circuit.Name, circuit.Note, inputPins, outputPins, parts);
 			if(transformation == null || !this.Validate(transformation)) {
 				return null;
 			}

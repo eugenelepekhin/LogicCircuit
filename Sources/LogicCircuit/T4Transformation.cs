@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace LogicCircuit {
@@ -58,6 +59,17 @@ namespace LogicCircuit {
 		/// </summary>
 		public void WriteLine(string format, params object[] args) {
 			this.WriteLine(this.Format(format, args));
+		}
+
+		public void Write(ReadOnlySpan<char> textToAppend) {
+			if(!textToAppend.IsEmpty) {
+				this.GenerationEnvironment.Append(textToAppend);
+			}
+		}
+
+		public void WriteLine(ReadOnlySpan<char> textToAppend) {
+			this.Write(textToAppend);
+			this.WriteLine();
 		}
 	}
 }

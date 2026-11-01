@@ -7,6 +7,7 @@ using System.Linq;
 namespace LogicCircuit {
 	internal abstract class HdlTransformation : T4Transformation {
 		public string Name { get; }
+		public string Note { get; }
 		public bool CommentPoints { get; set; }
 		public IEnumerable<HdlSymbol> InputPins { get; }
 		public IEnumerable<HdlSymbol> OutputPins { get; }
@@ -14,8 +15,9 @@ namespace LogicCircuit {
 		public bool HasInputPins => this.InputPins.Any();
 		public bool HasOutputPins => this.OutputPins.Any();
 
-		protected HdlTransformation(string name, IEnumerable<HdlSymbol> inputPins, IEnumerable<HdlSymbol> outputPins, IEnumerable<HdlSymbol> parts) {
+		protected HdlTransformation(string name, string note, IEnumerable<HdlSymbol> inputPins, IEnumerable<HdlSymbol> outputPins, IEnumerable<HdlSymbol> parts) {
 			this.Name = name;
+			this.Note = note;
 			this.InputPins = inputPins;
 			this.OutputPins = outputPins;
 			this.Parts = parts;

@@ -108,8 +108,8 @@ namespace LogicCircuit {
 			return valid;
 		}
 
-		protected override HdlTransformation? CreateTransformation(string name, IList<HdlSymbol> inputPins, IList<HdlSymbol> outputPins, IList<HdlSymbol> parts) {
-			VerilogHdl verilogHdl = new VerilogHdl(this.FixName(name), inputPins, outputPins, parts, this.FixName);
+		protected override HdlTransformation? CreateTransformation(string name, string note, IList<HdlSymbol> inputPins, IList<HdlSymbol> outputPins, IList<HdlSymbol> parts) {
+			VerilogHdl verilogHdl = new VerilogHdl(this.FixName(name), note, inputPins, outputPins, parts, this.FixName);
 			this.lastVerilogHdl = verilogHdl;
 			return verilogHdl;
 		}

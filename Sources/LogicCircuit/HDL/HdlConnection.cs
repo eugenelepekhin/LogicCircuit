@@ -92,6 +92,8 @@ namespace LogicCircuit {
 		private readonly List<int>? inBits;
 		public BitRange InBits => (this.inBits != null) ? new BitRange(this.inBits) : new BitRange(this.InJam);
 
+		public bool IsBitRange() => this.outBits != null;
+
 		public bool IsBitRange(HdlSymbol symbol) {
 			Tracer.Assert(this.OutHdlSymbol == symbol || this.InHdlSymbol == symbol);
 			Tracer.Assert(this.outBits == null || this.outBits.Count == this.inBits!.Count);
@@ -112,13 +114,6 @@ namespace LogicCircuit {
 			}
 			return false;
 		}
-
-		public bool IsBitRange(Jam jam) {
-			Tracer.Assert(this.OutJam == jam || this.InJam == jam);
-			return this.IsBitRange(this.Symbol(jam));
-		}
-
-		public bool IsOtherBitRange(Jam jam) => this.IsBitRange(this.OtherJam(jam));
 
 		/// <summary>
 		/// This allow to skip specifying the same output for multiple connections, so only one will provide output and all other are not.
