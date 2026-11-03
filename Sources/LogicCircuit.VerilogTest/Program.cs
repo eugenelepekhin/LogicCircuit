@@ -57,7 +57,16 @@ namespace LogicCircuit.VerilogTest {
 
 					.AddString("circuit", "c", "circuit", "Semicolon separated list of individual circuit names patterns", false, c => circuit.Add(split(c.Trim())))
 					.AddString("category", "cat", "category", "Semicolon separated list of patterns for names of categories", false, c => category.Add(split(c.Trim())))
-					.AddString("test", null, "Manually written test bench path", "File with manually written test bench. Only one circuit must be specified for this option", false, t => test = t)
+					.AddString("test", null, "Manually written test bench",
+						$"File with manually written test bench. Only one circuit must be specified for this option. Or {ExportRunner.TextNoteSource} for test bench coming from TextNote.",
+						false,
+						t => {
+							if(test is not null) {
+								Program.LogError($"Test bench \"{t}\" specified multiple times.");
+							}
+							test = t;
+						}
+					)
 
 					.AddFlag("help", "?", "Show this help", false, h => showHelp = h)
 				;
@@ -119,12 +128,12 @@ namespace LogicCircuit.VerilogTest {
 				this.Circuit = circuit.ToList().Select(p => new Regex(p, options)).ToList();
 				this.Category = category.ToList().Select(p => new Regex(p, options)).ToList();
 
-				if(!empty(test) && (0 < this.Category.Count || 1 != this.Circuit.Count)) {
-					Program.LogError($"When manual test bench is provided, only one circuit name must be provided in Circuit parameter.");
+				if(!empty(test) && test != ExportRunner.TextNoteSource && (0 < this.Category.Count || 1 != this.Circuit.Count)) {
+					Program.LogError($"When test bench file is provided, only one circuit name must be provided in Circuit parameter.");
 					Program.Usage(null, commandLine.Help());
 					return false;
 				}
-				if(!empty(test) && !File.Exists(test)) {
+				if(!empty(test) && test != ExportRunner.TextNoteSource && !File.Exists(test)) {
 					Program.LogError($"Test bench file \"{test}\" not found.");
 					Program.Usage(null, commandLine.Help());
 					return false;
@@ -150,7 +159,8 @@ namespace LogicCircuit.VerilogTest {
 						"/vcvars",	@"C:\Program Files\Microsoft Visual Studio\18\Community\VC\Auxiliary\Build\vcvars64.bat",
 						"/circuit",	"Wire Plug 2",
 						//"/category", "Switches",
-						"/test",	@"C:\Projects\LogicCircuit\LogicCircuit\Temp\hdl\Wire_Plug_2_TestBench.sv",
+						//"/test",	@"C:\Projects\LogicCircuit\LogicCircuit\Temp\hdl\Wire_Plug_2_TestBench.sv",
+						"/test",	@"@TextNote",
 					];
 				}
 			#endif
@@ -161,12 +171,16 @@ namespace LogicCircuit.VerilogTest {
 				bool success = false;
 				int count = 0;
 				HashSet<LogicalCircuit> list = new();
-				if(arguments.TestBench == null) {
+				if(arguments.TestBench == null || arguments.TestBench == ExportRunner.TextNoteSource) {
 					foreach(LogicalCircuit logicalCircuit in runner.CircuitProject.LogicalCircuitSet) {
 						string name = logicalCircuit.Name;
 						string category = logicalCircuit.Category;
 						if(arguments.Circuit!.Any(r => r.IsMatch(name)) || arguments.Category!.Any(r => r.IsMatch(category))) {
-							list.Add(logicalCircuit);
+							if(arguments.TestBench == ExportRunner.TextNoteSource && !runner.ContainsTextNoteTestBench(logicalCircuit)) {
+								Program.LogError($"Circuit \"{name}\" does not have a TextNote with test bench.");
+							} else {
+								list.Add(logicalCircuit);
+							}
 						}
 					}
 				} else {

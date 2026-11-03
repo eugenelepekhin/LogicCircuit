@@ -6,6 +6,8 @@ using LogicCircuit.UnitTest;
 
 namespace LogicCircuit.VerilogTest {
 	internal class ExportRunner {
+		public const string TextNoteSource = "@TextNote";
+		public const string TextNoteTestBenchHeader = "// Verilog Test Bench";
 		private readonly string exportRootFolder;
 		private readonly string verilatorRoot;
 		private readonly string? compilerInitPath;
@@ -24,6 +26,8 @@ namespace LogicCircuit.VerilogTest {
 			this.CircuitProject = ProjectTester.LoadCircuitProject(circuitProjectFile, null);
 			ExportRunner.EnsureFolder(exportRootFolder);
 		}
+
+		public bool ContainsTextNoteTestBench(LogicalCircuit logicalCircuit) => logicalCircuit.TextNotes().Any(textNote => ExportRunner.GetTestBench(textNote) != null);
 
 		public bool TestExport(LogicalCircuit logicalCircuit) {
 			string circuitName = logicalCircuit.Name;
@@ -78,10 +82,18 @@ namespace LogicCircuit.VerilogTest {
 				testBenchFileName = export.TestBenchFileName(circuitName);
 				if(!exportGeneratedTests) {
 					Debug.Assert(!string.IsNullOrEmpty(this.testBenchFile));
-					testBenchFileName = Path.GetFileName(this.testBenchFile);
-					File.Copy(this.testBenchFile, Path.Combine(folder, testBenchFileName), true);
+					string? testBenchPath = this.testBenchFile;
+					if(this.testBenchFile == ExportRunner.TextNoteSource) {
+						testBenchPath = Path.Combine(folder, testBenchFileName);
+						string? testBench = logicalCircuit.TextNotes().Select(ExportRunner.GetTestBench).FirstOrDefault(t => t != null);
+						Debug.Assert(testBench != null);
+						File.WriteAllText(testBenchPath, testBench);
+					} else {
+						testBenchFileName = Path.GetFileName(this.testBenchFile);
+						File.Copy(this.testBenchFile, Path.Combine(folder, testBenchFileName), true);
+					}
 
-					string testCode = File.ReadAllText(this.testBenchFile);
+					string testCode = File.ReadAllText(testBenchPath);
 					Match match = Regex.Match(testCode, @"module\s+(?<name>[a-zA-Z_][a-zA-Z_0-9]*)\s*;", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
 					if(match.Success) {
 						string name = match.Groups["name"].Value;
@@ -247,6 +259,14 @@ namespace LogicCircuit.VerilogTest {
 			if(!Directory.Exists(folder)) {
 				Directory.CreateDirectory(folder);
 			}
+		}
+
+		private static string? GetTestBench(TextNote textNote) {
+			string text = textNote.GetText();
+			if(Regex.IsMatch(text, ExportRunner.TextNoteTestBenchHeader, RegexOptions.CultureInvariant | RegexOptions.IgnoreCase | RegexOptions.Multiline)) {
+				return text;
+			}
+			return null;
 		}
 	}
 }
