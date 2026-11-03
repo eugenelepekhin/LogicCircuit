@@ -158,11 +158,15 @@ namespace LogicCircuit {
 			return TextNote.LoadPackage(text);
 		}
 
-		public bool Match(Regex regex) {
+		public string GetText() {
 			FlowDocument? doc = TextNote.Load(this.Note);
 			Debug.Assert(doc != null);
 			TextRange range = new TextRange(doc.ContentStart, doc.ContentEnd);
-			string text = range.Text;
+			return range.Text;
+		}
+
+		public bool Match(Regex regex) {
+			string text = this.GetText();
 			return !string.IsNullOrEmpty(text) && regex.IsMatch(text);
 		}
 	}
