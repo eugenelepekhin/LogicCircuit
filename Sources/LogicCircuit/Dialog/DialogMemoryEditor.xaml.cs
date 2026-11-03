@@ -180,6 +180,7 @@ namespace LogicCircuit {
 					int addressBitWidth = this.AddressBitWidth;
 					int dataBitWidth = this.DataBitWidth;
 					int cellCount = Memory.NumberCellsFor(addressBitWidth);
+					Array.Clear(this.data);
 					using(FileStream stream = File.Open(dialog.FileName, FileMode.Open, FileAccess.Read, FileShare.Read)) {
 						using StreamReader streamReader = new(stream);
 						TextNumberReader reader = new(streamReader, this.CurrentTextFileFormat.Value);
