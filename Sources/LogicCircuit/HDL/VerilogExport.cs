@@ -37,18 +37,22 @@ namespace LogicCircuit {
 			//"and", "bufif1", "nand", "nor", "not", "or", "xnor", "xor",
 		};
 
+		// Hardware Interface aggregated collections.
+		//
+		private Dictionary<LogicalCircuit, string> HWIfInterfaceMap;
+		private Dictionary<string, (List<(string, string)>, List<(string, bool)>)> HWIfMemberMap;
+
 		public VerilogExport(bool exportTests, bool commentPoints, bool fixNames, Action<string> logMessage, Action<string> logError, Action<string> logWarning) : base(
 			exportTests, commentPoints, fixNames, logMessage, logError, logWarning
 		) {
+			HWIfInterfaceMap = new Dictionary<LogicalCircuit, string>();
+			HWIfMemberMap = new Dictionary<string, (List<(string, string)>, List<(string, bool)>)>();
 		}
 
 		protected override string FileName(LogicalCircuit circuit) => this.FixName(circuit.Name) + ".sv";
 
 		public override bool CanExport(Circuit circuit) {
 			return !(
-				circuit is CircuitButton ||
-				circuit is Sensor ||
-				circuit is Gate gate && (gate.GateType == GateType.Clock || gate.GateType == GateType.Led) ||
 				circuit is LedMatrix ||
 				circuit is Sound
 			);
@@ -119,13 +123,18 @@ namespace LogicCircuit {
 			Debug.Assert(circuit is not Splitter && circuit is not CircuitProbe);
 			if(circuit is Gate gate) {
 				switch(gate.GateType) {
-				case GateType.Not:	return "not";
-				case GateType.Or:	return gate.InvertedOutput ? "nor" : "or";
-				case GateType.And:	return gate.InvertedOutput ? "nand" : "and";
-				case GateType.Xor:	return gate.InvertedOutput ? "xnor" : "xor";
-				case GateType.TriState1:
-				case GateType.TriState2: return "bufif1";
+					case GateType.Not: return "not";
+					case GateType.Or: return gate.InvertedOutput ? "nor" : "or";
+					case GateType.And: return gate.InvertedOutput ? "nand" : "and";
+					case GateType.Xor: return gate.InvertedOutput ? "xnor" : "xor";
+					case GateType.Clock: return gate.InvertedOutput ? throw new InvalidOperationException() : "clock";
+					case GateType.Led: return gate.InvertedOutput ? throw new InvalidOperationException() : "led";
+					case GateType.TriState1:
+					case GateType.TriState2: return "bufif1";
 				}
+			}
+			if(circuit is CircuitButton) {
+				return "button";
 			}
 			if(circuit is Memory memory) {
 				if(memory.Writable) {
@@ -171,5 +180,145 @@ namespace LogicCircuit {
 
 		public string TestBenchModuleName(string circuitName) => this.FixName(circuitName) + "_TestBench";
 		public string TestBenchFileName(string circuitName) => this.TestBenchModuleName(circuitName) + ".sv";
+
+		protected override void FinalizeTransformation(HdlTransformation transformation, LogicalCircuit circuit) {
+			VerilogHdl? verilogTransform = transformation as VerilogHdl;
+			Trace.Assert(verilogTransform != null);
+
+			this.HWIfInterfaceMap[circuit] = verilogTransform.HWIfTypeName;
+			this.HWIfMemberMap[verilogTransform.HWIfTypeName] = (verilogTransform.HWIfInstances, verilogTransform.HWIfWires);
+		}
+
+		protected override void FinalizeExport(CircuitMap circuitMap, ConnectionSet connectionSet, string folder) {
+			List<(string, bool)> ports = new List<(string, bool)>();
+
+			void extract(string hwifPath, CircuitMap circuitMap) {
+				string? hwifTypeName;
+				this.HWIfInterfaceMap.TryGetValue(circuitMap.Circuit, out hwifTypeName);
+				if(hwifTypeName != null) {
+					var (interfaces, wires) = this.HWIfMemberMap[hwifTypeName];
+					foreach(var (portName, isOutput) in wires) {
+						ports.Add((String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}.{1}", hwifPath, portName), isOutput));
+					}
+				}
+			}
+
+			void walk(string hwifPath, CircuitMap circuitMap) {
+				extract(hwifPath, circuitMap);
+				foreach(CircuitMap child in circuitMap.Children) {
+					if(child.CircuitSymbol != null) {
+						Dictionary<CircuitSymbol, HdlSymbol> symbolMap = this.Collect(circuitMap.Circuit, connectionSet);
+						HdlSymbol hdlChildSymbol = symbolMap[child.CircuitSymbol];
+						string hwifChildPath = String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}.{1}", hwifPath, VerilogHdl.HWIfPartInstanceFieldName(hdlChildSymbol));
+						walk(hwifChildPath, child);
+					}
+				}
+			}
+
+			// Extract all external ports from the hierarchy including their hierarchical hwif paths.
+			//
+			string hwifPath = String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}.{1}", VerilogHdl.HWIfParamName, this.FixName(circuitMap.Circuit.Name));
+			walk(hwifPath, circuitMap);
+
+			using(StreamWriter writer = new StreamWriter(Path.Combine(folder, "hwif.sv"))) {
+				GenerateHWInterfaces(writer, this.FixName(circuitMap.Circuit.Name));
+			}
+
+			using(StreamWriter writer = new StreamWriter(Path.Combine(folder, "top.sv.example"))) {
+				GenerateTopModule(writer, this.FixName(circuitMap.Circuit.Name), ports);
+			}
+		}
+
+		private void GenerateHWInterfaces(StreamWriter writer, string circuitName) {
+
+			foreach(var (hwifTypeName, children) in this.HWIfMemberMap.Reverse()) {
+				writer.WriteLine("interface {0};", hwifTypeName);
+				var (interfaces, wires) = this.HWIfMemberMap[hwifTypeName];
+				foreach(var (hwifChildTypeName, hwifChildFieldName) in interfaces) {
+					writer.WriteLine("\t{0}\t{1}();", hwifChildTypeName, hwifChildFieldName);
+				}
+				foreach(var (portName, isOutput) in wires) {
+					writer.WriteLine("\tlogic\t{0};", portName);
+				}
+				writer.WriteLine("endinterface");
+				writer.WriteLine();
+			}
+
+			writer.WriteLine(String.Format(System.Globalization.CultureInfo.InvariantCulture, "interface {0};", VerilogHdl.HWIfTypeNamePrefix));
+			writer.WriteLine(String.Format(System.Globalization.CultureInfo.InvariantCulture, "\t{0}_{1}\t{1}();", VerilogHdl.HWIfTypeNamePrefix, circuitName));
+			writer.WriteLine("endinterface");
+		}
+
+#pragma warning disable CA1822 // Mark members as static
+		private void GenerateTopModule(StreamWriter writer, string circuitName, List<(string, bool)> ports) {
+#pragma warning restore CA1822 // Mark members as static
+
+			writer.WriteLine("module top(");
+
+			// Generate external input ports.
+			//
+			bool comma = false;
+			foreach(var (port, isOutput) in ports) {
+				if(!isOutput) {
+					if(comma) {
+						writer.WriteLine(",");
+					}
+					writer.Write(String.Format(System.Globalization.CultureInfo.InvariantCulture, "\tinput logic {0}", port.Replace('.', '_')));
+					comma = true;
+				}
+			}
+
+			if(comma) {
+				writer.WriteLine(",");
+				comma = false;
+			}
+
+			// Generate external output ports.
+			//
+			foreach(var (port, isOutput) in ports) {
+				if(isOutput) {
+					if(comma) {
+						writer.WriteLine(",");
+					}
+					writer.Write(String.Format(System.Globalization.CultureInfo.InvariantCulture, "\toutput logic {0}", port.Replace('.', '_')));
+					comma = true;
+				}
+			}
+			if(comma) {
+				writer.WriteLine("");
+			}
+
+			writer.WriteLine(");");
+
+			// Instantiate the top-level HWIf.
+			//
+			writer.WriteLine("");
+			writer.WriteLine(String.Format(System.Globalization.CultureInfo.InvariantCulture, "\t{0}\t{1}();", VerilogHdl.HWIfTypeNamePrefix, VerilogHdl.HWIfParamName));
+
+			// Connect external input ports to corresponding HWIf's.
+			//
+			writer.WriteLine("");
+			foreach(var (port, isOutput) in ports) {
+				if(!isOutput) {
+					writer.WriteLine(String.Format(System.Globalization.CultureInfo.InvariantCulture, "\tassign {0} = {1};", port, port.Replace('.', '_')));
+				}
+			}
+
+			// Connect external output ports to corresponding HWIf's.
+			//
+			writer.WriteLine("");
+			foreach(var (port, isOutput) in ports) {
+				if(isOutput) {
+					writer.WriteLine(String.Format(System.Globalization.CultureInfo.InvariantCulture, "\tassign {0} = {1};", port.Replace('.', '_'), port));
+				}
+			}
+
+			// Instantiate the top-level circuit.
+			//
+			writer.WriteLine("");
+			writer.WriteLine(String.Format(System.Globalization.CultureInfo.InvariantCulture, "\t{0} m_{0}(.{1}({1}.{0}));", circuitName, VerilogHdl.HWIfParamName));
+
+			writer.WriteLine("endmodule");
+		}
 	}
 }
