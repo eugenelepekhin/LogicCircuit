@@ -99,7 +99,7 @@ namespace LogicCircuit.VerilogTest {
 						string name = match.Groups["name"].Value;
 						testBenchModuleName = name;
 					} else {
-						Program.LogError($"Test bench module not found in file {this.testBenchFile}");
+						Program.LogError($"Test bench module not found in file {this.testBenchFile} Expecting first module in the file to be declared like: module <name>;");
 						return false;
 					}
 				}
