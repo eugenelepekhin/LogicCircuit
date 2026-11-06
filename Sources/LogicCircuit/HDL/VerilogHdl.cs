@@ -139,7 +139,7 @@ namespace LogicCircuit {
 				int dataWidth = memory.DataBitWidth;
 				int max = 1 << addressWidth;
 				for(int i = 0; i < max; i++) {
-					this.WriteLine("\t\tmemory[{0}] = {1};", i, Memory.CellValue(data, dataWidth, i));
+					this.WriteLine("\t\tmemory[{0}] = 'h{1:x};", i, Memory.CellValue(data, dataWidth, i));
 				}
 			} else {
 				string value = memory.OnStart switch {
