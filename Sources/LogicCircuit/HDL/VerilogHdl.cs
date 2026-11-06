@@ -213,6 +213,7 @@ namespace LogicCircuit {
 			this.WriteLine(");");
 
 			foreach(Jam jam in this.wires.Values.Where(j => j.CircuitSymbol.Circuit is not Pin).OrderBy(j => j.AbsolutePoint, Comparer<GridPoint>.Create(VerilogHdl.CompareGridPoint))) {
+				this.WriteComment(1, $"Pin {jam.Pin.Name} of {jam.CircuitSymbol.Circuit.Name} ({((CircuitSymbol)jam.CircuitSymbol).X}, {((CircuitSymbol)jam.CircuitSymbol).Y}).");
 				this.Write("\twire");
 				this.Write(this.Range(jam.Pin));
 				this.WriteLine(" {0};", this.WireName(jam));
