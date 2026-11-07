@@ -73,7 +73,7 @@ namespace LogicCircuit {
 			CircuitMap map = new CircuitMap(circuit);
 			ConnectionSet connectionSet = map.ConnectionSet();
 
-			bool export(LogicalCircuit logicalCircuit) {
+			bool export(LogicalCircuit logicalCircuit, bool exportTests) {
 				try {
 					string file = this.FileName(logicalCircuit);
 					this.Message(Properties.Resources.MessageExportingHdl(logicalCircuit.Name, file));
@@ -84,7 +84,7 @@ namespace LogicCircuit {
 						string path = Path.Combine(folder, file);
 						File.WriteAllText(path, hdl);
 						this.Message(Properties.Resources.MessageHdlExportResut(logicalCircuit.Name, this.ErrorCount));
-						if(this.ExportTests) {
+						if(exportTests) {
 							this.Message(Properties.Resources.MessageExportingHdlTest(logicalCircuit.Name, file));
 							this.ExportTest(logicalCircuit, folder);
 						}
@@ -108,7 +108,7 @@ namespace LogicCircuit {
 
 			bool walk(CircuitMap circuitMap, HashSet<LogicalCircuit> exported) {
 				if(exported.Add(circuitMap.Circuit) && needExport(circuitMap.Circuit)) {
-					if(export(circuitMap.Circuit)) {
+					if(export(circuitMap.Circuit, this.ExportTests && 1 == exported.Count)) { // only top circuit will export tests.
 						foreach(CircuitMap child in circuitMap.Children) {
 							if(continueExport != null && !continueExport(0) || !walk(child, exported)) {
 								return false;
@@ -124,7 +124,7 @@ namespace LogicCircuit {
 			bool result = false;
 			void run() {
 				if(onlyOne) {
-					result = !needExport(circuit) || export(circuit);
+					result = !needExport(circuit) || export(circuit, this.ExportTests);
 				} else {
 					result = walk(map, new HashSet<LogicalCircuit>());
 				}
