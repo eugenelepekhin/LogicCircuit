@@ -6,7 +6,6 @@ using LogicCircuit.UnitTest;
 
 namespace LogicCircuit.VerilogTest {
 	internal class ExportRunner {
-		public const string TextNoteSource = "@TextNote";
 		public const string TextNoteTestBenchHeader = "// Verilog Test Bench";
 		private readonly string exportRootFolder;
 		private readonly string verilatorRoot;
@@ -39,7 +38,7 @@ namespace LogicCircuit.VerilogTest {
 				Debug.Assert(targetFolder != null);
 				Debug.Assert(testBenchModuleName != null);
 				Debug.Assert(testBenchFileName != null);
-				Program.LogMessage($"2). Veriating test bench {testBenchFileName}");
+				Program.LogMessage($"2). Verilating test bench {testBenchFileName}");
 				success = this.Verilate(targetFolder, testBenchModuleName, Path.Combine(targetFolder, testBenchFileName));
 				if(success) {
 					Program.LogMessage($"3). Compiling C++ code for test bench {testBenchFileName}");
@@ -57,6 +56,14 @@ namespace LogicCircuit.VerilogTest {
 		}
 
 		private bool ExportCircuit(LogicalCircuit logicalCircuit, out string? targetFolder, out string? testBenchModuleName, out string? testBenchFileName) {
+			string? testBenchName(string code) {
+				Match match = Regex.Match(code, @"module\s+(?<name>[a-zA-Z_][a-zA-Z_0-9]*)\s*;", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
+				if(match.Success) {
+					return match.Groups["name"].Value;
+				}
+				return null;
+			}
+
 			targetFolder = null;
 			testBenchModuleName = null;
 			testBenchFileName = null;
@@ -69,10 +76,6 @@ namespace LogicCircuit.VerilogTest {
 				Program.LogError($"Invalid circuit name: {circuitName}");
 				return false;
 			}
-			if(!CircuitTestSocket.IsTestable(logicalCircuit)) {
-				Program.LogError($"Circuit is not testable: {circuitName}");
-				return false;
-			}
 			string folder = Path.Combine(this.exportRootFolder, circuitName);
 			ExportRunner.EnsureFolder(folder);
 			bool success = export.ExportCircuit(logicalCircuit, folder, false, false, i => true, () => {});
@@ -80,23 +83,21 @@ namespace LogicCircuit.VerilogTest {
 				targetFolder = folder;
 				testBenchModuleName = export.TestBenchModuleName(circuitName);
 				testBenchFileName = export.TestBenchFileName(circuitName);
-				if(!exportGeneratedTests) {
-					Debug.Assert(!string.IsNullOrEmpty(this.testBenchFile));
-					string? testBenchPath = this.testBenchFile;
-					if(this.testBenchFile == ExportRunner.TextNoteSource) {
-						testBenchPath = Path.Combine(folder, testBenchFileName);
-						string? testBench = logicalCircuit.TextNotes().Select(ExportRunner.GetTestBench).FirstOrDefault(t => t != null);
-						Debug.Assert(testBench != null);
-						File.WriteAllText(testBenchPath, testBench);
-					} else {
-						testBenchFileName = Path.GetFileName(this.testBenchFile);
-						File.Copy(this.testBenchFile, Path.Combine(folder, testBenchFileName), true);
+				if(exportGeneratedTests) {
+					string? testBenchCode = logicalCircuit.TextNotes().Select(ExportRunner.GetTestBench).FirstOrDefault(t => t != null);
+					if(testBenchCode != null) {
+						string testBenchPath = Path.Combine(folder, testBenchFileName);
+						File.WriteAllText(testBenchPath, testBenchCode);
+						testBenchModuleName = testBenchName(testBenchCode);
 					}
+				} else {
+					Debug.Assert(!string.IsNullOrEmpty(this.testBenchFile) && File.Exists(this.testBenchFile));
+					testBenchFileName = Path.GetFileName(this.testBenchFile);
+					File.Copy(this.testBenchFile, Path.Combine(folder, testBenchFileName), true);
 
-					string testCode = File.ReadAllText(testBenchPath);
-					Match match = Regex.Match(testCode, @"module\s+(?<name>[a-zA-Z_][a-zA-Z_0-9]*)\s*;", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
-					if(match.Success) {
-						string name = match.Groups["name"].Value;
+					string testBenchCode = File.ReadAllText(this.testBenchFile);
+					string? name = testBenchName(testBenchCode);
+					if(name != null) {
 						testBenchModuleName = name;
 					} else {
 						Program.LogError($"Test bench module not found in file {this.testBenchFile} Expecting first module in the file to be declared like: module <name>;");

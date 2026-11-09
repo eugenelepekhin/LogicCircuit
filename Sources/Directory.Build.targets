@@ -120,10 +120,10 @@
 		<Exec Command="$(ZipCmd)"/>
 	</Target>
 
+	<!-- Runs all Verilog export tests. To launch them, run: msbuild LogicCircuit.VerilogTest -t:RunVerilogTests -->
 	<Target Name="RunVerilogTests" Condition="'$(MSBuildProjectName)' == 'LogicCircuit.VerilogTest'">
 		<PropertyGroup>
-			<AllCategories>Simple;BigTest;CPU;Const;Split;Switches</AllCategories>
-			<!--<AllCategories>Simple;BigTest;CPU;Const;Switches</AllCategories>-->
+			<AllCategories>Simple;BigTest;^CPU$;CPUautoTest;Const;Split;Switches</AllCategories>
 
 			<UnitTestVerilogFile>$(MSBuildThisFileDirectory)LogicCircuit.UnitTest\Properties\VerilogTests.CircuitProject</UnitTestVerilogFile>
 
@@ -132,6 +132,7 @@
 			<Verilator Condition="'$(Verilator)' == ''">C:\Tools\verilator-5.052</Verilator>
 			<Circuit Condition="'$(Circuit)' == ''"></Circuit>
 			<Category Condition="'$(Circuit)' == '' and '$(Category)' == '' and '$(CircuitProject)' == '$(UnitTestVerilogFile)'">$(AllCategories)</Category>
+			<VerilatorWarnings Condition="'$(VerilatorWarnings)' == ''">UNOPTFLAT</VerilatorWarnings>
 
 			<TestTarget></TestTarget>
 			<TestTarget Condition="'$(VerilatorWarnings)' != ''">$(TestTarget) /noWarnings $(VerilatorWarnings)</TestTarget>
