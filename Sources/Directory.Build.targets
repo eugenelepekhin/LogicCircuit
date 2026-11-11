@@ -120,31 +120,31 @@
 		<Exec Command="$(ZipCmd)"/>
 	</Target>
 
-	<!-- To build Verilator run: msbuild -t:BuildVerilator -->
-	<Target Name="BuildVerilator">
+	<!-- To build Verilator run: msbuild LogicCircuit.VerilogTest -t:BuildVerilator -->
+	<Target Name="BuildVerilator" Condition="'$(MSBuildProjectName)' == 'LogicCircuit.VerilogTest'">
 		<PropertyGroup>
-			<VerilatorSourceCodeRoot Condition="'$(VerilatorSourceCodeRoot)' == ''">$(MSBuildThisFileDirectory)..\..\..\..\Verilator</VerilatorSourceCodeRoot>
+			<VerilatorSource Condition="'$(VerilatorSource)' == ''">$(MSBuildThisFileDirectory)..\..\..\..\Verilator</VerilatorSource>
 			<WIN_FLEX_BISON Condition="'$(WIN_FLEX_BISON)' == ''">C:\Tools\win_flex_bison-2.5.25</WIN_FLEX_BISON>
 
-			<!--<BuildVerilatorCommand>echo Building Verilator...</BuildVerilatorCommand>-->
-			<BuildVerilatorCommand>rmdir /S /Q $(Verilator)</BuildVerilatorCommand>
-			<BuildVerilatorCommand>$(BuildVerilatorCommand) &amp;&amp; git clean -f -d -x</BuildVerilatorCommand>
+			<BuildVerilatorCommand>git clean -f -d -x</BuildVerilatorCommand>
+			<BuildVerilatorCommand>$(BuildVerilatorCommand) &amp;&amp; git checkout stable</BuildVerilatorCommand>
 			<BuildVerilatorCommand>$(BuildVerilatorCommand) &amp;&amp; git pull</BuildVerilatorCommand>
-			<BuildVerilatorCommand>$(BuildVerilatorCommand) &amp;&amp; cmake -S . -B build -DCMAKE_INSTALL_PREFIX=$(Verilator)</BuildVerilatorCommand>
+			<BuildVerilatorCommand>$(BuildVerilatorCommand) &amp;&amp; cmake -S . -B build -DCMAKE_INSTALL_PREFIX=$(VerilatorRoot)</BuildVerilatorCommand>
 			<BuildVerilatorCommand>$(BuildVerilatorCommand) &amp;&amp; cmake --build build --config Release -j</BuildVerilatorCommand>
 			<BuildVerilatorCommand>$(BuildVerilatorCommand) &amp;&amp; cmake --install build --config Release</BuildVerilatorCommand>
 		</PropertyGroup>
 
-		<Message Importance="high" Text=">>> BuildVerilator: VerilatorSourceCodeRoot: $(VerilatorSourceCodeRoot)"/>
-		<Message Importance="high" Text=">>> BuildVerilator: VerilatorTarget: $(Verilator)"/>
+		<Message Importance="high" Text=">>> BuildVerilator: VerilatorSource: $(VerilatorSource)"/>
+		<Message Importance="high" Text=">>> BuildVerilator: VerilatorRoot: $(VerilatorRoot)"/>
 
-		<Error Condition="!Exists('$(VerilatorSourceCodeRoot)\src')"
-			Text="Verilator source code root folder not found: $(VerilatorSourceCodeRoot)\src. Please clone Verilator repository from https://github.com/verilator/verilator to this folder and git checkout stable before building it."
+		<Error Condition="!Exists('$(VerilatorSource)\src')"
+			Text="Verilator source code folder not found: $(VerilatorSource)\src. Please clone Verilator repository from https://github.com/verilator/verilator to this folder before building it."
 		/>
 
-		<Exec WorkingDirectory="$(VerilatorSourceCodeRoot)" EnvironmentVariables="WIN_FLEX_BISON=$(WIN_FLEX_BISON)" Command="$(BuildVerilatorCommand)"/>
+		<Exec Condition="Exists('$(VerilatorRoot)')" Command="rmdir /S /Q $(VerilatorRoot)"/>
+		<Exec WorkingDirectory="$(VerilatorSource)" EnvironmentVariables="WIN_FLEX_BISON=$(WIN_FLEX_BISON)" Command="$(BuildVerilatorCommand)"/>
 
-		<Message Importance="high" Text=">>> BuildVerilator: Verilator build completed. Verilator installed to $(Verilator)"/>
+		<Message Importance="high" Text=">>> BuildVerilator: Verilator build completed. Verilator installed to $(VerilatorRoot)"/>
 	</Target>
 
 	<!-- Runs all Verilog export tests. To launch them, run: msbuild LogicCircuit.VerilogTest -t:RunVerilogTests -->
@@ -168,7 +168,7 @@
 
 			<VerilogTesterPath>$(OutputPath)LogicCircuit.VerilogTest.exe</VerilogTesterPath>
 
-			<RunVerilogTestsCommand>$(VerilogTesterPath) /root "$(Root)" /project "$(CircuitProject)" /verilator "$(Verilator)" $(TestTarget)</RunVerilogTestsCommand>
+			<RunVerilogTestsCommand>$(VerilogTesterPath) /root "$(Root)" /project "$(CircuitProject)" /verilator "$(VerilatorRoot)" $(TestTarget)</RunVerilogTestsCommand>
 		</PropertyGroup>
 
 		<!--<Message Importance="high" Text="$(RunVerilogTestsCommand)"/>-->

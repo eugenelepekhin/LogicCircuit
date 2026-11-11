@@ -33,7 +33,7 @@ To build verilator on Windows, follow these steps:
 - Download Flex and Bison from https://github.com/lexxmark/winflexbison/releases to a folder, e.g. C:\Tools\win_flex_bison-2.5.25
 - git clone https://github.com/verilator/verilator
 - git checkout stable
-- to build run: msbuild -t:BuildVerilator
+- to build run: msbuild LogicCircuit.VerilogTest -t:BuildVerilator
 
 
 Useful links:

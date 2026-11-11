@@ -26,8 +26,8 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<!-- Path to the Verilator installation -->
-		<Verilator Condition="'$(Verilator)' == ''">\Tools\Verilator</Verilator>
+		<!-- Path to the Verilator installation. This is what VERILATOR_ROOT should be set to. -->
+		<VerilatorRoot Condition="'$(VerilatorRoot)' == ''">\Tools\Verilator</VerilatorRoot>
 	</PropertyGroup>
 
 </Project>
