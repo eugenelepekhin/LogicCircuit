@@ -91,7 +91,7 @@ namespace LogicCircuit.VerilogTest {
 					Program.Usage(null, commandLine.Help());
 					return false;
 				}
-				if(!File.Exists(Path.Combine(verilator, "bin", "verilator.exe"))) {
+				if(!File.Exists(ExportRunner.VerilatorExecutable(verilator))) {
 					Program.LogError($"Verilator executable not found in folder \"{verilator}\".");
 					Program.Usage(null, commandLine.Help());
 					return false;

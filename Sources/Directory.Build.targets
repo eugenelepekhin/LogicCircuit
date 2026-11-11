@@ -120,6 +120,33 @@
 		<Exec Command="$(ZipCmd)"/>
 	</Target>
 
+	<!-- To build Verilator run: msbuild -t:BuildVerilator -->
+	<Target Name="BuildVerilator">
+		<PropertyGroup>
+			<VerilatorSourceCodeRoot Condition="'$(VerilatorSourceCodeRoot)' == ''">$(MSBuildThisFileDirectory)..\..\..\..\Verilator</VerilatorSourceCodeRoot>
+			<WIN_FLEX_BISON Condition="'$(WIN_FLEX_BISON)' == ''">C:\Tools\win_flex_bison-2.5.25</WIN_FLEX_BISON>
+
+			<!--<BuildVerilatorCommand>echo Building Verilator...</BuildVerilatorCommand>-->
+			<BuildVerilatorCommand>rmdir /S /Q $(Verilator)</BuildVerilatorCommand>
+			<BuildVerilatorCommand>$(BuildVerilatorCommand) &amp;&amp; git clean -f -d -x</BuildVerilatorCommand>
+			<BuildVerilatorCommand>$(BuildVerilatorCommand) &amp;&amp; git pull</BuildVerilatorCommand>
+			<BuildVerilatorCommand>$(BuildVerilatorCommand) &amp;&amp; cmake -S . -B build -DCMAKE_INSTALL_PREFIX=$(Verilator)</BuildVerilatorCommand>
+			<BuildVerilatorCommand>$(BuildVerilatorCommand) &amp;&amp; cmake --build build --config Release -j</BuildVerilatorCommand>
+			<BuildVerilatorCommand>$(BuildVerilatorCommand) &amp;&amp; cmake --install build --config Release</BuildVerilatorCommand>
+		</PropertyGroup>
+
+		<Message Importance="high" Text=">>> BuildVerilator: VerilatorSourceCodeRoot: $(VerilatorSourceCodeRoot)"/>
+		<Message Importance="high" Text=">>> BuildVerilator: VerilatorTarget: $(Verilator)"/>
+
+		<Error Condition="!Exists('$(VerilatorSourceCodeRoot)\src')"
+			Text="Verilator source code root folder not found: $(VerilatorSourceCodeRoot)\src. Please clone Verilator repository from https://github.com/verilator/verilator to this folder and git checkout stable before building it."
+		/>
+
+		<Exec WorkingDirectory="$(VerilatorSourceCodeRoot)" EnvironmentVariables="WIN_FLEX_BISON=$(WIN_FLEX_BISON)" Command="$(BuildVerilatorCommand)"/>
+
+		<Message Importance="high" Text=">>> BuildVerilator: Verilator build completed. Verilator installed to $(Verilator)"/>
+	</Target>
+
 	<!-- Runs all Verilog export tests. To launch them, run: msbuild LogicCircuit.VerilogTest -t:RunVerilogTests -->
 	<Target Name="RunVerilogTests" Condition="'$(MSBuildProjectName)' == 'LogicCircuit.VerilogTest'">
 		<PropertyGroup>
@@ -129,7 +156,6 @@
 
 			<Root Condition="'$(Root)' == ''">$(MSBuildThisFileDirectory)..\..\Temp\hdl</Root>
 			<CircuitProject Condition="'$(CircuitProject)' == ''">$(UnitTestVerilogFile)</CircuitProject>
-			<Verilator Condition="'$(Verilator)' == ''">C:\Tools\verilator-5.052</Verilator>
 			<Circuit Condition="'$(Circuit)' == ''"></Circuit>
 			<Category Condition="'$(Circuit)' == '' and '$(Category)' == '' and '$(CircuitProject)' == '$(UnitTestVerilogFile)'">$(AllCategories)</Category>
 			<VerilatorWarnings Condition="'$(VerilatorWarnings)' == ''">UNOPTFLAT</VerilatorWarnings>

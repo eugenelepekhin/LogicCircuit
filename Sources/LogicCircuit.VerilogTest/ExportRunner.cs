@@ -26,6 +26,8 @@ namespace LogicCircuit.VerilogTest {
 			ExportRunner.EnsureFolder(exportRootFolder);
 		}
 
+		public static string VerilatorExecutable(string verilatorRoot) => Path.Combine(verilatorRoot, "bin", "verilator_bin.exe");
+
 		public bool ContainsTextNoteTestBench(LogicalCircuit logicalCircuit) => logicalCircuit.TextNotes().Any(textNote => ExportRunner.GetTestBench(textNote) != null);
 
 		public bool TestExport(LogicalCircuit logicalCircuit) {
@@ -109,7 +111,7 @@ namespace LogicCircuit.VerilogTest {
 		}
 
 		private bool Verilate(string targetFolder, string testBenchModuleName, string testBenchFileName) {
-			string verilatorExe = Path.Combine(this.verilatorRoot, "bin", "verilator.exe");
+			string verilatorExe = ExportRunner.VerilatorExecutable(this.verilatorRoot);
 			string warnings = this.verilatorWarnings != null ? string.Join(null, this.verilatorWarnings.Select(w => $" -Wno-{w}")) : string.Empty;
 			string arguments = $"--cc --timing --trace -Mdir \"{targetFolder}\"{warnings} --top {testBenchModuleName} \"{testBenchFileName}\"";
 			Program.LogMessage($"{verilatorExe} {arguments}");

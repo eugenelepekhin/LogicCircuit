@@ -25,4 +25,9 @@
 		<BuildOutputFolder>$(MSBuildThisFileDirectory)BuildResults</BuildOutputFolder>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<!-- Path to the Verilator installation -->
+		<Verilator Condition="'$(Verilator)' == ''">\Tools\Verilator</Verilator>
+	</PropertyGroup>
+
 </Project>
